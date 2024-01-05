@@ -24,37 +24,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS WAF Regional.
-//    func myFunc(svc wafregionaliface.WAFRegionalAPI) bool {
-//        // Make svc.AssociateWebACL request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS WAF Regional.
+//	func myFunc(svc wafregionaliface.WAFRegionalAPI) bool {
+//	    // Make svc.AssociateWebACL request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := wafregional.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := wafregional.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockWAFRegionalClient struct {
-//        wafregionaliface.WAFRegionalAPI
-//    }
-//    func (m *mockWAFRegionalClient) AssociateWebACL(input *wafregional.AssociateWebACLInput) (*wafregional.AssociateWebACLOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockWAFRegionalClient struct {
+//	    wafregionaliface.WAFRegionalAPI
+//	}
+//	func (m *mockWAFRegionalClient) AssociateWebACL(input *wafregional.AssociateWebACLInput) (*wafregional.AssociateWebACLOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockWAFRegionalClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockWAFRegionalClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -108,6 +108,10 @@ type WAFRegionalAPI interface {
 	CreateWebACL(*waf.CreateWebACLInput) (*waf.CreateWebACLOutput, error)
 	CreateWebACLWithContext(aws.Context, *waf.CreateWebACLInput, ...request.Option) (*waf.CreateWebACLOutput, error)
 	CreateWebACLRequest(*waf.CreateWebACLInput) (*request.Request, *waf.CreateWebACLOutput)
+
+	CreateWebACLMigrationStack(*waf.CreateWebACLMigrationStackInput) (*waf.CreateWebACLMigrationStackOutput, error)
+	CreateWebACLMigrationStackWithContext(aws.Context, *waf.CreateWebACLMigrationStackInput, ...request.Option) (*waf.CreateWebACLMigrationStackOutput, error)
+	CreateWebACLMigrationStackRequest(*waf.CreateWebACLMigrationStackInput) (*request.Request, *waf.CreateWebACLMigrationStackOutput)
 
 	CreateXssMatchSet(*waf.CreateXssMatchSetInput) (*waf.CreateXssMatchSetOutput, error)
 	CreateXssMatchSetWithContext(aws.Context, *waf.CreateXssMatchSetInput, ...request.Option) (*waf.CreateXssMatchSetOutput, error)
@@ -305,6 +309,10 @@ type WAFRegionalAPI interface {
 	ListSubscribedRuleGroupsWithContext(aws.Context, *waf.ListSubscribedRuleGroupsInput, ...request.Option) (*waf.ListSubscribedRuleGroupsOutput, error)
 	ListSubscribedRuleGroupsRequest(*waf.ListSubscribedRuleGroupsInput) (*request.Request, *waf.ListSubscribedRuleGroupsOutput)
 
+	ListTagsForResource(*waf.ListTagsForResourceInput) (*waf.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *waf.ListTagsForResourceInput, ...request.Option) (*waf.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*waf.ListTagsForResourceInput) (*request.Request, *waf.ListTagsForResourceOutput)
+
 	ListWebACLs(*waf.ListWebACLsInput) (*waf.ListWebACLsOutput, error)
 	ListWebACLsWithContext(aws.Context, *waf.ListWebACLsInput, ...request.Option) (*waf.ListWebACLsOutput, error)
 	ListWebACLsRequest(*waf.ListWebACLsInput) (*request.Request, *waf.ListWebACLsOutput)
@@ -320,6 +328,14 @@ type WAFRegionalAPI interface {
 	PutPermissionPolicy(*waf.PutPermissionPolicyInput) (*waf.PutPermissionPolicyOutput, error)
 	PutPermissionPolicyWithContext(aws.Context, *waf.PutPermissionPolicyInput, ...request.Option) (*waf.PutPermissionPolicyOutput, error)
 	PutPermissionPolicyRequest(*waf.PutPermissionPolicyInput) (*request.Request, *waf.PutPermissionPolicyOutput)
+
+	TagResource(*waf.TagResourceInput) (*waf.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *waf.TagResourceInput, ...request.Option) (*waf.TagResourceOutput, error)
+	TagResourceRequest(*waf.TagResourceInput) (*request.Request, *waf.TagResourceOutput)
+
+	UntagResource(*waf.UntagResourceInput) (*waf.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *waf.UntagResourceInput, ...request.Option) (*waf.UntagResourceOutput, error)
+	UntagResourceRequest(*waf.UntagResourceInput) (*request.Request, *waf.UntagResourceOutput)
 
 	UpdateByteMatchSet(*waf.UpdateByteMatchSetInput) (*waf.UpdateByteMatchSetOutput, error)
 	UpdateByteMatchSetWithContext(aws.Context, *waf.UpdateByteMatchSetInput, ...request.Option) (*waf.UpdateByteMatchSetOutput, error)

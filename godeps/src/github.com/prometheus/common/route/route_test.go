@@ -93,6 +93,23 @@ func TestContextWithValue(t *testing.T) {
 	router.ServeHTTP(nil, r)
 }
 
+func TestContextWithoutValue(t *testing.T) {
+	router := New()
+	router.Get("/test", func(w http.ResponseWriter, r *http.Request) {
+		want := ""
+		got := Param(r.Context(), "foo")
+		if want != got {
+			t.Fatalf("Unexpected context value: want %q, got %q", want, got)
+		}
+	})
+
+	r, err := http.NewRequest("GET", "http://localhost:9090/test", nil)
+	if err != nil {
+		t.Fatalf("Error building test request: %s", err)
+	}
+	router.ServeHTTP(nil, r)
+}
+
 func TestInstrumentation(t *testing.T) {
 	var got string
 	cases := []struct {
@@ -121,6 +138,55 @@ func TestInstrumentation(t *testing.T) {
 		c.router.ServeHTTP(nil, r)
 		if c.want != got {
 			t.Fatalf("Unexpected value: want %q, got %q", c.want, got)
+		}
+	}
+}
+
+func TestInstrumentations(t *testing.T) {
+	got := make([]string, 0)
+	cases := []struct {
+		router *Router
+		want   []string
+	}{
+		{
+			router: New(),
+			want:   []string{},
+		}, {
+			router: New().
+				WithInstrumentation(
+					func(handlerName string, handler http.HandlerFunc) http.HandlerFunc {
+						got = append(got, "1"+handlerName)
+						return handler
+					}).
+				WithInstrumentation(
+					func(handlerName string, handler http.HandlerFunc) http.HandlerFunc {
+						got = append(got, "2"+handlerName)
+						return handler
+					}).
+				WithInstrumentation(
+					func(handlerName string, handler http.HandlerFunc) http.HandlerFunc {
+						got = append(got, "3"+handlerName)
+						return handler
+					}),
+			want: []string{"1/foo", "2/foo", "3/foo"},
+		},
+	}
+
+	for _, c := range cases {
+		c.router.Get("/foo", func(w http.ResponseWriter, r *http.Request) {})
+
+		r, err := http.NewRequest("GET", "http://localhost:9090/foo", nil)
+		if err != nil {
+			t.Fatalf("Error building test request: %s", err)
+		}
+		c.router.ServeHTTP(nil, r)
+		if len(c.want) != len(got) {
+			t.Fatalf("Unexpected value: want %q, got %q", c.want, got)
+		}
+		for i, v := range c.want {
+			if v != got[i] {
+				t.Fatalf("Unexpected value: want %q, got %q", c.want, got)
+			}
 		}
 	}
 }

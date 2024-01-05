@@ -2,31 +2,77 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package curve25519
+package curve25519_test
 
 import (
 	"bytes"
 	"crypto/rand"
-	"fmt"
+	"encoding/hex"
 	"testing"
+
+	"golang.org/x/crypto/curve25519"
 )
 
 const expectedHex = "89161fde887b2b53de549af483940106ecc114d6982daa98256de23bdf77661a"
 
-func TestBaseScalarMult(t *testing.T) {
-	var a, b [32]byte
-	in := &a
-	out := &b
-	a[0] = 1
+func TestX25519Basepoint(t *testing.T) {
+	x := make([]byte, 32)
+	x[0] = 1
 
 	for i := 0; i < 200; i++ {
-		ScalarBaseMult(out, in)
-		in, out = out, in
+		var err error
+		x, err = curve25519.X25519(x, curve25519.Basepoint)
+		if err != nil {
+			t.Fatal(err)
+		}
 	}
 
-	result := fmt.Sprintf("%x", in[:])
+	result := hex.EncodeToString(x)
 	if result != expectedHex {
 		t.Errorf("incorrect result: got %s, want %s", result, expectedHex)
+	}
+}
+
+func TestLowOrderPoints(t *testing.T) {
+	scalar := make([]byte, curve25519.ScalarSize)
+	if _, err := rand.Read(scalar); err != nil {
+		t.Fatal(err)
+	}
+	for i, p := range lowOrderPoints {
+		out, err := curve25519.X25519(scalar, p)
+		if err == nil {
+			t.Errorf("%d: expected error, got nil", i)
+		}
+		if out != nil {
+			t.Errorf("%d: expected nil output, got %x", i, out)
+		}
+	}
+}
+
+func TestTestVectors(t *testing.T) {
+	t.Run("Legacy", func(t *testing.T) { testTestVectors(t, curve25519.ScalarMult) })
+	t.Run("X25519", func(t *testing.T) {
+		testTestVectors(t, func(dst, scalar, point *[32]byte) {
+			out, err := curve25519.X25519(scalar[:], point[:])
+			if err != nil {
+				t.Fatal(err)
+			}
+			copy(dst[:], out)
+		})
+	})
+}
+
+func testTestVectors(t *testing.T, scalarMult func(dst, scalar, point *[32]byte)) {
+	for _, tv := range testVectors {
+		var got [32]byte
+		scalarMult(&got, &tv.In, &tv.Base)
+		if !bytes.Equal(got[:], tv.Expect[:]) {
+			t.Logf("    in = %x", tv.In)
+			t.Logf("  base = %x", tv.Base)
+			t.Logf("   got = %x", got)
+			t.Logf("expect = %x", tv.Expect)
+			t.Fail()
+		}
 	}
 }
 
@@ -44,22 +90,53 @@ func TestHighBitIgnored(t *testing.T) {
 	var hi0, hi1 [32]byte
 
 	u[31] &= 0x7f
-	ScalarMult(&hi0, &s, &u)
+	curve25519.ScalarMult(&hi0, &s, &u)
 
 	u[31] |= 0x80
-	ScalarMult(&hi1, &s, &u)
+	curve25519.ScalarMult(&hi1, &s, &u)
 
 	if !bytes.Equal(hi0[:], hi1[:]) {
 		t.Errorf("high bit of group point should not affect result")
 	}
 }
 
-func BenchmarkScalarBaseMult(b *testing.B) {
-	var in, out [32]byte
-	in[0] = 1
+var benchmarkSink byte
 
-	b.SetBytes(32)
+func BenchmarkX25519Basepoint(b *testing.B) {
+	scalar := make([]byte, curve25519.ScalarSize)
+	if _, err := rand.Read(scalar); err != nil {
+		b.Fatal(err)
+	}
+
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		ScalarBaseMult(&out, &in)
+		out, err := curve25519.X25519(scalar, curve25519.Basepoint)
+		if err != nil {
+			b.Fatal(err)
+		}
+		benchmarkSink ^= out[0]
+	}
+}
+
+func BenchmarkX25519(b *testing.B) {
+	scalar := make([]byte, curve25519.ScalarSize)
+	if _, err := rand.Read(scalar); err != nil {
+		b.Fatal(err)
+	}
+	point, err := curve25519.X25519(scalar, curve25519.Basepoint)
+	if err != nil {
+		b.Fatal(err)
+	}
+	if _, err := rand.Read(scalar); err != nil {
+		b.Fatal(err)
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		out, err := curve25519.X25519(scalar, point)
+		if err != nil {
+			b.Fatal(err)
+		}
+		benchmarkSink ^= out[0]
 	}
 }

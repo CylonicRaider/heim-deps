@@ -18,6 +18,52 @@ import (
 	"testing"
 )
 
+func TestFSBcacheStats(t *testing.T) {
+	bcache, err := NewFS("testdata/fixtures/sys")
+	if err != nil {
+		t.Fatalf("failed to access bcache fs: %v", err)
+	}
+	stats, err := bcache.Stats()
+	if err != nil {
+		t.Fatalf("failed to parse bcache stats: %v", err)
+	}
+
+	tests := []struct {
+		name   string
+		bdevs  int
+		caches int
+	}{
+		{
+			name:   "deaddd54-c735-46d5-868e-f331c5fd7c74",
+			bdevs:  1,
+			caches: 1,
+		},
+	}
+
+	const expect = 1
+
+	if l := len(stats); l != expect {
+		t.Fatalf("unexpected number of bcache stats: %d", l)
+	}
+	if l := len(tests); l != expect {
+		t.Fatalf("unexpected number of tests: %d", l)
+	}
+
+	for i, tt := range tests {
+		if want, got := tt.name, stats[i].Name; want != got {
+			t.Errorf("unexpected stats name:\nwant: %q\nhave: %q", want, got)
+		}
+
+		if want, got := tt.bdevs, len(stats[i].Bdevs); want != got {
+			t.Errorf("unexpected value allocated:\nwant: %d\nhave: %d", want, got)
+		}
+
+		if want, got := tt.caches, len(stats[i].Caches); want != got {
+			t.Errorf("unexpected value allocated:\nwant: %d\nhave: %d", want, got)
+		}
+	}
+}
+
 func TestDehumanizeTests(t *testing.T) {
 	dehumanizeTests := []struct {
 		in      []byte
@@ -110,5 +156,63 @@ func TestPriorityStats(t *testing.T) {
 	gotErr = parsePriorityStats(in, &got)
 	if gotErr != nil || got.UnusedPercent != want.UnusedPercent {
 		t.Errorf("parsePriorityStats: '%s', want %d, got %d", in, want.UnusedPercent, got.UnusedPercent)
+	}
+}
+
+func TestWritebackRateDebug(t *testing.T) {
+	var want = WritebackRateDebugStats{
+		Rate:         1765376,
+		Dirty:        21789409280,
+		Target:       21894266880,
+		Proportional: -1124,
+		Integral:     -257624,
+		Change:       2648,
+		NextIO:       -150773,
+	}
+	var (
+		in     string
+		gotErr error
+		got    WritebackRateDebugStats
+	)
+	in = "rate:           1.7M/sec"
+	gotErr = parseWritebackRateDebug(in, &got)
+	if gotErr != nil || got.Rate != want.Rate {
+		t.Errorf("parsePriorityStats: '%s', want %d, got %d", in, want.Rate, got.Rate)
+	}
+
+	in = "dirty:           20.3G"
+	gotErr = parseWritebackRateDebug(in, &got)
+	if gotErr != nil || got.Dirty != want.Dirty {
+		t.Errorf("parsePriorityStats: '%s', want %d, got %d", in, want.Dirty, got.Dirty)
+	}
+
+	in = "target:           20.4G"
+	gotErr = parseWritebackRateDebug(in, &got)
+	if gotErr != nil || got.Target != want.Target {
+		t.Errorf("parsePriorityStats: '%s', want %d, got %d", in, want.Target, got.Target)
+	}
+
+	in = "proportional:           -1.1k"
+	gotErr = parseWritebackRateDebug(in, &got)
+	if gotErr != nil || got.Proportional != want.Proportional {
+		t.Errorf("parsePriorityStats: '%s', want %d, got %d", in, want.Proportional, got.Proportional)
+	}
+
+	in = "integral:           -251.6k"
+	gotErr = parseWritebackRateDebug(in, &got)
+	if gotErr != nil || got.Integral != want.Integral {
+		t.Errorf("parsePriorityStats: '%s', want %d, got %d", in, want.Integral, got.Integral)
+	}
+
+	in = "change:           2.6k/sec"
+	gotErr = parseWritebackRateDebug(in, &got)
+	if gotErr != nil || got.Change != want.Change {
+		t.Errorf("parsePriorityStats: '%s', want %d, got %d", in, want.Change, got.Change)
+	}
+
+	in = "next io:           -150773ms"
+	gotErr = parseWritebackRateDebug(in, &got)
+	if gotErr != nil || got.NextIO != want.NextIO {
+		t.Errorf("parsePriorityStats: '%s', want %d, got %d", in, want.NextIO, got.NextIO)
 	}
 }

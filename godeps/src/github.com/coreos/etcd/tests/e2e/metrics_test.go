@@ -16,23 +16,24 @@ package e2e
 
 import (
 	"fmt"
-	"strings"
 	"testing"
 
-	"go.etcd.io/etcd/version"
+	"go.etcd.io/etcd/api/v3/version"
+	"go.etcd.io/etcd/pkg/v3/expect"
+	"go.etcd.io/etcd/tests/v3/framework/e2e"
 )
 
 func TestV3MetricsSecure(t *testing.T) {
-	cfg := configTLS
-	cfg.clusterSize = 1
-	cfg.metricsURLScheme = "https"
+	cfg := e2e.NewConfigTLS()
+	cfg.ClusterSize = 1
+	cfg.MetricsURLScheme = "https"
 	testCtl(t, metricsTest)
 }
 
 func TestV3MetricsInsecure(t *testing.T) {
-	cfg := configTLS
-	cfg.clusterSize = 1
-	cfg.metricsURLScheme = "http"
+	cfg := e2e.NewConfigTLS()
+	cfg.ClusterSize = 1
+	cfg.MetricsURLScheme = "http"
 	testCtl(t, metricsTest)
 }
 
@@ -40,20 +41,31 @@ func metricsTest(cx ctlCtx) {
 	if err := ctlV3Put(cx, "k", "v", ""); err != nil {
 		cx.t.Fatal(err)
 	}
-	if err := cURLGet(cx.epc, cURLReq{endpoint: "/metrics", expected: `etcd_debugging_mvcc_keys_total 1`, metricsURLScheme: cx.cfg.metricsURLScheme}); err != nil {
-		cx.t.Fatalf("failed get with curl (%v)", err)
-	}
-	if err := cURLGet(cx.epc, cURLReq{endpoint: "/metrics", expected: fmt.Sprintf(`etcd_server_version{server_version="%s"} 1`, version.Version), metricsURLScheme: cx.cfg.metricsURLScheme}); err != nil {
-		cx.t.Fatalf("failed get with curl (%v)", err)
-	}
-	ver := version.Version
-	if strings.HasSuffix(ver, "+git") {
-		ver = strings.Replace(ver, "+git", "", 1)
-	}
-	if err := cURLGet(cx.epc, cURLReq{endpoint: "/metrics", expected: fmt.Sprintf(`etcd_cluster_version{cluster_version="%s"} 1`, ver), metricsURLScheme: cx.cfg.metricsURLScheme}); err != nil {
-		cx.t.Fatalf("failed get with curl (%v)", err)
-	}
-	if err := cURLGet(cx.epc, cURLReq{endpoint: "/health", expected: `{"health":"true"}`, metricsURLScheme: cx.cfg.metricsURLScheme}); err != nil {
-		cx.t.Fatalf("failed get with curl (%v)", err)
+
+	i := 0
+	for _, test := range []struct {
+		endpoint, expected string
+	}{
+		{"/metrics", "etcd_mvcc_put_total 2"},
+		{"/metrics", "etcd_debugging_mvcc_keys_total 1"},
+		{"/metrics", "etcd_mvcc_delete_total 3"},
+		{"/metrics", fmt.Sprintf(`etcd_server_version{server_version="%s"} 1`, version.Version)},
+		{"/metrics", fmt.Sprintf(`etcd_cluster_version{cluster_version="%s"} 1`, version.Cluster(version.Version))},
+		{"/metrics", `grpc_server_handled_total{grpc_code="Canceled",grpc_method="Watch",grpc_service="etcdserverpb.Watch",grpc_type="bidi_stream"} 6`},
+		{"/health", `{"health":"true","reason":""}`},
+	} {
+		i++
+		if err := ctlV3Put(cx, fmt.Sprintf("%d", i), "v", ""); err != nil {
+			cx.t.Fatal(err)
+		}
+		if err := ctlV3Del(cx, []string{fmt.Sprintf("%d", i)}, 1); err != nil {
+			cx.t.Fatal(err)
+		}
+		if err := ctlV3Watch(cx, []string{"k", "--rev", "1"}, []kvExec{{key: "k", val: "v"}}...); err != nil {
+			cx.t.Fatal(err)
+		}
+		if err := e2e.CURLGet(cx.epc, e2e.CURLReq{Endpoint: test.endpoint, Expected: expect.ExpectedResponse{Value: test.expected}}); err != nil {
+			cx.t.Fatalf("failed get with curl (%v)", err)
+		}
 	}
 }

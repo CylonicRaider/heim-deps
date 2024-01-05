@@ -6,7 +6,6 @@ package autocert
 
 import (
 	"context"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -17,7 +16,7 @@ import (
 var _ Cache = DirCache("/")
 
 func TestDirCache(t *testing.T) {
-	dir, err := ioutil.TempDir("", "autocert")
+	dir, err := os.MkdirTemp("", "autocert")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -46,6 +45,15 @@ func TestDirCache(t *testing.T) {
 	name := filepath.Join(dir, "dummy")
 	if _, err := os.Stat(name); err != nil {
 		t.Error(err)
+	}
+
+	// test put deletes temp file
+	tmp, err := filepath.Glob(name + "?*")
+	if err != nil {
+		t.Error(err)
+	}
+	if tmp != nil {
+		t.Errorf("temp file exists: %s", tmp)
 	}
 
 	// test delete

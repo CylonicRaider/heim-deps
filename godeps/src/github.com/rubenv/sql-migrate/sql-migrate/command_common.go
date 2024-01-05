@@ -3,37 +3,52 @@ package main
 import (
 	"fmt"
 
-	"github.com/rubenv/sql-migrate"
+	migrate "github.com/rubenv/sql-migrate"
 )
 
-func ApplyMigrations(dir migrate.MigrationDirection, dryrun bool, limit int) error {
+func ApplyMigrations(dir migrate.MigrationDirection, dryrun bool, limit int, version int64) error {
 	env, err := GetEnvironment()
 	if err != nil {
-		return fmt.Errorf("Could not parse config: %s", err)
+		return fmt.Errorf("Could not parse config: %w", err)
 	}
 
 	db, dialect, err := GetConnection(env)
 	if err != nil {
 		return err
 	}
+	defer db.Close()
 
 	source := migrate.FileMigrationSource{
 		Dir: env.Dir,
 	}
 
 	if dryrun {
-		migrations, _, err := migrate.PlanMigration(db, dialect, source, dir, limit)
+		var migrations []*migrate.PlannedMigration
+
+		if version >= 0 {
+			migrations, _, err = migrate.PlanMigrationToVersion(db, dialect, source, dir, version)
+		} else {
+			migrations, _, err = migrate.PlanMigration(db, dialect, source, dir, limit)
+		}
+
 		if err != nil {
-			return fmt.Errorf("Cannot plan migration: %s", err)
+			return fmt.Errorf("Cannot plan migration: %w", err)
 		}
 
 		for _, m := range migrations {
 			PrintMigration(m, dir)
 		}
 	} else {
-		n, err := migrate.ExecMax(db, dialect, source, dir, limit)
+		var n int
+
+		if version >= 0 {
+			n, err = migrate.ExecVersion(db, dialect, source, dir, version)
+		} else {
+			n, err = migrate.ExecMax(db, dialect, source, dir, limit)
+		}
+
 		if err != nil {
-			return fmt.Errorf("Migration failed: %s", err)
+			return fmt.Errorf("Migration failed: %w", err)
 		}
 
 		if n == 1 {

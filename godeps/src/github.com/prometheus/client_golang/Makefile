@@ -11,22 +11,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+include .bingo/Variables.mk
 include Makefile.common
 
-# http.CloseNotifier is deprecated but we don't want to remove support
-# from client_golang to not break anybody still using it.
-STATICCHECK_IGNORE = \
-  github.com/prometheus/client_golang/prometheus/promhttp/delegator*.go:SA1019 \
-  github.com/prometheus/client_golang/prometheus/promhttp/instrument_server_test.go:SA1019 \
-  github.com/prometheus/client_golang/prometheus/http.go:SA1019
-
-.PHONY: get_dep
-get_dep:
-	@echo ">> getting dependencies" 
-	$(GO) get -t ./...
-
 .PHONY: test
-test: get_dep common-test
+test: deps common-test
 
 .PHONY: test-short
-test-short: get_dep common-test-short
+test-short: deps common-test-short
+
+.PHONY: generate-go-collector-test-files
+VERSIONS := 1.19 1.20 1.21
+generate-go-collector-test-files:
+	for GO_VERSION in $(VERSIONS); do \
+		docker run --rm -v $(PWD):/workspace -w /workspace golang:$$GO_VERSION go run prometheus/gen_go_collector_metrics_set.go; \
+		mv -f go_collector_metrics* prometheus; \
+		done
+
+.PHONY: fmt
+fmt: common-format
+	$(GOIMPORTS) -local github.com/prometheus/client_golang -w .

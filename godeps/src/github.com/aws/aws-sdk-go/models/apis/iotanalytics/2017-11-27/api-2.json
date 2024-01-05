@@ -631,6 +631,18 @@
         "batchPutMessageErrorEntries":{"shape":"BatchPutMessageErrorEntries"}
       }
     },
+    "BucketKeyExpression":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9!_.*'()/{}:-]*$"
+    },
+    "BucketName":{
+      "type":"string",
+      "max":255,
+      "min":3,
+      "pattern":"^[a-zA-Z0-9.\\-_]*$"
+    },
     "CancelPipelineReprocessingRequest":{
       "type":"structure",
       "required":[
@@ -659,11 +671,13 @@
       "type":"structure",
       "members":{
         "name":{"shape":"ChannelName"},
+        "storage":{"shape":"ChannelStorage"},
         "arn":{"shape":"ChannelArn"},
         "status":{"shape":"ChannelStatus"},
         "retentionPeriod":{"shape":"RetentionPeriod"},
         "creationTime":{"shape":"Timestamp"},
-        "lastUpdateTime":{"shape":"Timestamp"}
+        "lastUpdateTime":{"shape":"Timestamp"},
+        "lastMessageArrivalTime":{"shape":"Timestamp"}
       }
     },
     "ChannelActivity":{
@@ -679,11 +693,17 @@
       }
     },
     "ChannelArn":{"type":"string"},
+    "ChannelMessages":{
+      "type":"structure",
+      "members":{
+        "s3Paths":{"shape":"S3PathChannelMessages"}
+      }
+    },
     "ChannelName":{
       "type":"string",
       "max":128,
       "min":1,
-      "pattern":"^[a-zA-Z0-9_]+$"
+      "pattern":"(^(?!_{2}))(^[a-zA-Z0-9_]+$)"
     },
     "ChannelStatistics":{
       "type":"structure",
@@ -699,6 +719,20 @@
         "DELETING"
       ]
     },
+    "ChannelStorage":{
+      "type":"structure",
+      "members":{
+        "serviceManagedS3":{"shape":"ServiceManagedChannelS3Storage"},
+        "customerManagedS3":{"shape":"CustomerManagedChannelS3Storage"}
+      }
+    },
+    "ChannelStorageSummary":{
+      "type":"structure",
+      "members":{
+        "serviceManagedS3":{"shape":"ServiceManagedChannelS3StorageSummary"},
+        "customerManagedS3":{"shape":"CustomerManagedChannelS3StorageSummary"}
+      }
+    },
     "ChannelSummaries":{
       "type":"list",
       "member":{"shape":"ChannelSummary"}
@@ -707,10 +741,39 @@
       "type":"structure",
       "members":{
         "channelName":{"shape":"ChannelName"},
+        "channelStorage":{"shape":"ChannelStorageSummary"},
         "status":{"shape":"ChannelStatus"},
         "creationTime":{"shape":"Timestamp"},
-        "lastUpdateTime":{"shape":"Timestamp"}
+        "lastUpdateTime":{"shape":"Timestamp"},
+        "lastMessageArrivalTime":{"shape":"Timestamp"}
       }
+    },
+    "Column":{
+      "type":"structure",
+      "required":[
+        "name",
+        "type"
+      ],
+      "members":{
+        "name":{"shape":"ColumnName"},
+        "type":{"shape":"ColumnDataType"}
+      }
+    },
+    "ColumnDataType":{
+      "type":"string",
+      "max":131072,
+      "min":1,
+      "pattern":"^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+    },
+    "ColumnName":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$"
+    },
+    "Columns":{
+      "type":"list",
+      "member":{"shape":"Column"}
     },
     "ComputeType":{
       "type":"string",
@@ -738,6 +801,7 @@
       "required":["channelName"],
       "members":{
         "channelName":{"shape":"ChannelName"},
+        "channelStorage":{"shape":"ChannelStorage"},
         "retentionPeriod":{"shape":"RetentionPeriod"},
         "tags":{"shape":"TagList"}
       }
@@ -758,7 +822,8 @@
           "shape":"DatasetName",
           "location":"uri",
           "locationName":"datasetName"
-        }
+        },
+        "versionId":{"shape":"DatasetContentVersion"}
       }
     },
     "CreateDatasetContentResponse":{
@@ -779,7 +844,9 @@
         "triggers":{"shape":"DatasetTriggers"},
         "contentDeliveryRules":{"shape":"DatasetContentDeliveryRules"},
         "retentionPeriod":{"shape":"RetentionPeriod"},
-        "tags":{"shape":"TagList"}
+        "versioningConfiguration":{"shape":"VersioningConfiguration"},
+        "tags":{"shape":"TagList"},
+        "lateDataRules":{"shape":"LateDataRules"}
       }
     },
     "CreateDatasetResponse":{
@@ -795,8 +862,11 @@
       "required":["datastoreName"],
       "members":{
         "datastoreName":{"shape":"DatastoreName"},
+        "datastoreStorage":{"shape":"DatastoreStorage"},
         "retentionPeriod":{"shape":"RetentionPeriod"},
-        "tags":{"shape":"TagList"}
+        "tags":{"shape":"TagList"},
+        "fileFormatConfiguration":{"shape":"FileFormatConfiguration"},
+        "datastorePartitions":{"shape":"DatastorePartitions"}
       }
     },
     "CreateDatastoreResponse":{
@@ -826,6 +896,46 @@
         "pipelineArn":{"shape":"PipelineArn"}
       }
     },
+    "CustomerManagedChannelS3Storage":{
+      "type":"structure",
+      "required":[
+        "bucket",
+        "roleArn"
+      ],
+      "members":{
+        "bucket":{"shape":"BucketName"},
+        "keyPrefix":{"shape":"S3KeyPrefix"},
+        "roleArn":{"shape":"RoleArn"}
+      }
+    },
+    "CustomerManagedChannelS3StorageSummary":{
+      "type":"structure",
+      "members":{
+        "bucket":{"shape":"BucketName"},
+        "keyPrefix":{"shape":"S3KeyPrefix"},
+        "roleArn":{"shape":"RoleArn"}
+      }
+    },
+    "CustomerManagedDatastoreS3Storage":{
+      "type":"structure",
+      "required":[
+        "bucket",
+        "roleArn"
+      ],
+      "members":{
+        "bucket":{"shape":"BucketName"},
+        "keyPrefix":{"shape":"S3KeyPrefix"},
+        "roleArn":{"shape":"RoleArn"}
+      }
+    },
+    "CustomerManagedDatastoreS3StorageSummary":{
+      "type":"structure",
+      "members":{
+        "bucket":{"shape":"BucketName"},
+        "keyPrefix":{"shape":"S3KeyPrefix"},
+        "roleArn":{"shape":"RoleArn"}
+      }
+    },
     "Dataset":{
       "type":"structure",
       "members":{
@@ -837,7 +947,9 @@
         "status":{"shape":"DatasetStatus"},
         "creationTime":{"shape":"Timestamp"},
         "lastUpdateTime":{"shape":"Timestamp"},
-        "retentionPeriod":{"shape":"RetentionPeriod"}
+        "retentionPeriod":{"shape":"RetentionPeriod"},
+        "versioningConfiguration":{"shape":"VersioningConfiguration"},
+        "lateDataRules":{"shape":"LateDataRules"}
       }
     },
     "DatasetAction":{
@@ -884,7 +996,8 @@
     "DatasetContentDeliveryDestination":{
       "type":"structure",
       "members":{
-        "iotEventsDestinationConfiguration":{"shape":"IotEventsDestinationConfiguration"}
+        "iotEventsDestinationConfiguration":{"shape":"IotEventsDestinationConfiguration"},
+        "s3DestinationConfiguration":{"shape":"S3DestinationConfiguration"}
       }
     },
     "DatasetContentDeliveryRule":{
@@ -926,7 +1039,8 @@
         "version":{"shape":"DatasetContentVersion"},
         "status":{"shape":"DatasetContentStatus"},
         "creationTime":{"shape":"Timestamp"},
-        "scheduleTime":{"shape":"Timestamp"}
+        "scheduleTime":{"shape":"Timestamp"},
+        "completionTime":{"shape":"Timestamp"}
       }
     },
     "DatasetContentVersion":{
@@ -956,7 +1070,7 @@
       "type":"string",
       "max":128,
       "min":1,
-      "pattern":"^[a-zA-Z0-9_]+$"
+      "pattern":"(^(?!_{2}))(^[a-zA-Z0-9_]+$)"
     },
     "DatasetStatus":{
       "type":"string",
@@ -998,11 +1112,15 @@
       "type":"structure",
       "members":{
         "name":{"shape":"DatastoreName"},
+        "storage":{"shape":"DatastoreStorage"},
         "arn":{"shape":"DatastoreArn"},
         "status":{"shape":"DatastoreStatus"},
         "retentionPeriod":{"shape":"RetentionPeriod"},
         "creationTime":{"shape":"Timestamp"},
-        "lastUpdateTime":{"shape":"Timestamp"}
+        "lastUpdateTime":{"shape":"Timestamp"},
+        "lastMessageArrivalTime":{"shape":"Timestamp"},
+        "fileFormatConfiguration":{"shape":"FileFormatConfiguration"},
+        "datastorePartitions":{"shape":"DatastorePartitions"}
       }
     },
     "DatastoreActivity":{
@@ -1017,11 +1135,37 @@
       }
     },
     "DatastoreArn":{"type":"string"},
+    "DatastoreIotSiteWiseMultiLayerStorage":{
+      "type":"structure",
+      "required":["customerManagedS3Storage"],
+      "members":{
+        "customerManagedS3Storage":{"shape":"IotSiteWiseCustomerManagedDatastoreS3Storage"}
+      }
+    },
+    "DatastoreIotSiteWiseMultiLayerStorageSummary":{
+      "type":"structure",
+      "members":{
+        "customerManagedS3Storage":{"shape":"IotSiteWiseCustomerManagedDatastoreS3StorageSummary"}
+      }
+    },
     "DatastoreName":{
       "type":"string",
       "max":128,
       "min":1,
-      "pattern":"^[a-zA-Z0-9_]+$"
+      "pattern":"(^(?!_{2}))(^[a-zA-Z0-9_]+$)"
+    },
+    "DatastorePartition":{
+      "type":"structure",
+      "members":{
+        "attributePartition":{"shape":"Partition"},
+        "timestampPartition":{"shape":"TimestampPartition"}
+      }
+    },
+    "DatastorePartitions":{
+      "type":"structure",
+      "members":{
+        "partitions":{"shape":"Partitions"}
+      }
     },
     "DatastoreStatistics":{
       "type":"structure",
@@ -1037,6 +1181,22 @@
         "DELETING"
       ]
     },
+    "DatastoreStorage":{
+      "type":"structure",
+      "members":{
+        "serviceManagedS3":{"shape":"ServiceManagedDatastoreS3Storage"},
+        "customerManagedS3":{"shape":"CustomerManagedDatastoreS3Storage"},
+        "iotSiteWiseMultiLayerStorage":{"shape":"DatastoreIotSiteWiseMultiLayerStorage"}
+      }
+    },
+    "DatastoreStorageSummary":{
+      "type":"structure",
+      "members":{
+        "serviceManagedS3":{"shape":"ServiceManagedDatastoreS3StorageSummary"},
+        "customerManagedS3":{"shape":"CustomerManagedDatastoreS3StorageSummary"},
+        "iotSiteWiseMultiLayerStorage":{"shape":"DatastoreIotSiteWiseMultiLayerStorageSummary"}
+      }
+    },
     "DatastoreSummaries":{
       "type":"list",
       "member":{"shape":"DatastoreSummary"}
@@ -1045,9 +1205,13 @@
       "type":"structure",
       "members":{
         "datastoreName":{"shape":"DatastoreName"},
+        "datastoreStorage":{"shape":"DatastoreStorageSummary"},
         "status":{"shape":"DatastoreStatus"},
         "creationTime":{"shape":"Timestamp"},
-        "lastUpdateTime":{"shape":"Timestamp"}
+        "lastUpdateTime":{"shape":"Timestamp"},
+        "lastMessageArrivalTime":{"shape":"Timestamp"},
+        "fileFormatType":{"shape":"FileFormatType"},
+        "datastorePartitions":{"shape":"DatastorePartitions"}
       }
     },
     "DeleteChannelRequest":{
@@ -1119,6 +1283,13 @@
       "members":{
         "offsetSeconds":{"shape":"OffsetSeconds"},
         "timeExpression":{"shape":"TimeExpression"}
+      }
+    },
+    "DeltaTimeSessionWindowConfiguration":{
+      "type":"structure",
+      "required":["timeoutInMinutes"],
+      "members":{
+        "timeoutInMinutes":{"shape":"SessionTimeoutInMinutes"}
       }
     },
     "DescribeChannelRequest":{
@@ -1256,6 +1427,20 @@
         "estimatedOn":{"shape":"Timestamp"}
       }
     },
+    "FileFormatConfiguration":{
+      "type":"structure",
+      "members":{
+        "jsonConfiguration":{"shape":"JsonConfiguration"},
+        "parquetConfiguration":{"shape":"ParquetConfiguration"}
+      }
+    },
+    "FileFormatType":{
+      "type":"string",
+      "enum":[
+        "JSON",
+        "PARQUET"
+      ]
+    },
     "FilterActivity":{
       "type":"structure",
       "required":[
@@ -1297,6 +1482,29 @@
         "status":{"shape":"DatasetContentStatus"}
       }
     },
+    "GlueConfiguration":{
+      "type":"structure",
+      "required":[
+        "tableName",
+        "databaseName"
+      ],
+      "members":{
+        "tableName":{"shape":"GlueTableName"},
+        "databaseName":{"shape":"GlueDatabaseName"}
+      }
+    },
+    "GlueDatabaseName":{
+      "type":"string",
+      "max":150,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "GlueTableName":{
+      "type":"string",
+      "max":150,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
     "Image":{
       "type":"string",
       "max":255
@@ -1336,6 +1544,26 @@
       "min":1,
       "pattern":"^[a-zA-Z][a-zA-Z0-9_]*$"
     },
+    "IotSiteWiseCustomerManagedDatastoreS3Storage":{
+      "type":"structure",
+      "required":["bucket"],
+      "members":{
+        "bucket":{"shape":"BucketName"},
+        "keyPrefix":{"shape":"S3KeyPrefix"}
+      }
+    },
+    "IotSiteWiseCustomerManagedDatastoreS3StorageSummary":{
+      "type":"structure",
+      "members":{
+        "bucket":{"shape":"BucketName"},
+        "keyPrefix":{"shape":"S3KeyPrefix"}
+      }
+    },
+    "JsonConfiguration":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "LambdaActivity":{
       "type":"structure",
       "required":[
@@ -1355,6 +1583,32 @@
       "max":64,
       "min":1,
       "pattern":"^[a-zA-Z0-9_-]+$"
+    },
+    "LateDataRule":{
+      "type":"structure",
+      "required":["ruleConfiguration"],
+      "members":{
+        "ruleName":{"shape":"LateDataRuleName"},
+        "ruleConfiguration":{"shape":"LateDataRuleConfiguration"}
+      }
+    },
+    "LateDataRuleConfiguration":{
+      "type":"structure",
+      "members":{
+        "deltaTimeSessionWindowConfiguration":{"shape":"DeltaTimeSessionWindowConfiguration"}
+      }
+    },
+    "LateDataRuleName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_]+$"
+    },
+    "LateDataRules":{
+      "type":"list",
+      "member":{"shape":"LateDataRule"},
+      "max":1,
+      "min":1
     },
     "LimitExceededException":{
       "type":"structure",
@@ -1555,6 +1809,11 @@
       "max":250,
       "min":1
     },
+    "MaxVersions":{
+      "type":"integer",
+      "max":1000,
+      "min":1
+    },
     "Message":{
       "type":"structure",
       "required":[
@@ -1569,7 +1828,8 @@
     "MessageId":{
       "type":"string",
       "max":128,
-      "min":1
+      "min":1,
+      "pattern":"\\p{ASCII}*"
     },
     "MessagePayload":{"type":"blob"},
     "MessagePayloads":{
@@ -1594,6 +1854,31 @@
       "members":{
         "fileName":{"shape":"OutputFileName"}
       }
+    },
+    "ParquetConfiguration":{
+      "type":"structure",
+      "members":{
+        "schemaDefinition":{"shape":"SchemaDefinition"}
+      }
+    },
+    "Partition":{
+      "type":"structure",
+      "required":["attributeName"],
+      "members":{
+        "attributeName":{"shape":"PartitionAttributeName"}
+      }
+    },
+    "PartitionAttributeName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_]+$"
+    },
+    "Partitions":{
+      "type":"list",
+      "member":{"shape":"DatastorePartition"},
+      "max":25,
+      "min":0
     },
     "Pipeline":{
       "type":"structure",
@@ -1632,7 +1917,7 @@
       "type":"string",
       "max":128,
       "min":1,
-      "pattern":"^[a-zA-Z0-9_]+$"
+      "pattern":"(^(?!_{2}))(^[a-zA-Z0-9_]+$)"
     },
     "PipelineSummaries":{
       "type":"list",
@@ -1770,6 +2055,38 @@
         "logResult":{"shape":"LogResult"}
       }
     },
+    "S3DestinationConfiguration":{
+      "type":"structure",
+      "required":[
+        "bucket",
+        "key",
+        "roleArn"
+      ],
+      "members":{
+        "bucket":{"shape":"BucketName"},
+        "key":{"shape":"BucketKeyExpression"},
+        "glueConfiguration":{"shape":"GlueConfiguration"},
+        "roleArn":{"shape":"RoleArn"}
+      }
+    },
+    "S3KeyPrefix":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9!_.*'()/{}:-]*/$"
+    },
+    "S3PathChannelMessage":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9/_!'(){}\\*\\s\\.\\-\\=\\:]+$"
+    },
+    "S3PathChannelMessages":{
+      "type":"list",
+      "member":{"shape":"S3PathChannelMessage"},
+      "max":100,
+      "min":1
+    },
     "SampleChannelDataRequest":{
       "type":"structure",
       "required":["channelName"],
@@ -1809,6 +2126,12 @@
       }
     },
     "ScheduleExpression":{"type":"string"},
+    "SchemaDefinition":{
+      "type":"structure",
+      "members":{
+        "columns":{"shape":"Columns"}
+      }
+    },
     "SelectAttributesActivity":{
       "type":"structure",
       "required":[
@@ -1821,6 +2144,26 @@
         "next":{"shape":"ActivityName"}
       }
     },
+    "ServiceManagedChannelS3Storage":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "ServiceManagedChannelS3StorageSummary":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "ServiceManagedDatastoreS3Storage":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "ServiceManagedDatastoreS3StorageSummary":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "ServiceUnavailableException":{
       "type":"structure",
       "members":{
@@ -1829,6 +2172,11 @@
       "error":{"httpStatusCode":503},
       "exception":true,
       "fault":true
+    },
+    "SessionTimeoutInMinutes":{
+      "type":"integer",
+      "max":60,
+      "min":1
     },
     "SizeInBytes":{"type":"double"},
     "SqlQuery":{"type":"string"},
@@ -1850,7 +2198,8 @@
           "locationName":"pipelineName"
         },
         "startTime":{"shape":"StartTime"},
-        "endTime":{"shape":"EndTime"}
+        "endTime":{"shape":"EndTime"},
+        "channelMessages":{"shape":"ChannelMessages"}
       }
     },
     "StartPipelineReprocessingResponse":{
@@ -1928,6 +2277,20 @@
     },
     "TimeExpression":{"type":"string"},
     "Timestamp":{"type":"timestamp"},
+    "TimestampFormat":{
+      "type":"string",
+      "max":50,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9\\s\\[\\]_,.'/:-]*$"
+    },
+    "TimestampPartition":{
+      "type":"structure",
+      "required":["attributeName"],
+      "members":{
+        "attributeName":{"shape":"PartitionAttributeName"},
+        "timestampFormat":{"shape":"TimestampFormat"}
+      }
+    },
     "TriggeringDataset":{
       "type":"structure",
       "required":["name"],
@@ -1936,6 +2299,7 @@
       }
     },
     "UnlimitedRetentionPeriod":{"type":"boolean"},
+    "UnlimitedVersioning":{"type":"boolean"},
     "UntagResourceRequest":{
       "type":"structure",
       "required":[
@@ -1969,6 +2333,7 @@
           "location":"uri",
           "locationName":"channelName"
         },
+        "channelStorage":{"shape":"ChannelStorage"},
         "retentionPeriod":{"shape":"RetentionPeriod"}
       }
     },
@@ -1987,7 +2352,9 @@
         "actions":{"shape":"DatasetActions"},
         "triggers":{"shape":"DatasetTriggers"},
         "contentDeliveryRules":{"shape":"DatasetContentDeliveryRules"},
-        "retentionPeriod":{"shape":"RetentionPeriod"}
+        "retentionPeriod":{"shape":"RetentionPeriod"},
+        "versioningConfiguration":{"shape":"VersioningConfiguration"},
+        "lateDataRules":{"shape":"LateDataRules"}
       }
     },
     "UpdateDatastoreRequest":{
@@ -1999,7 +2366,9 @@
           "location":"uri",
           "locationName":"datastoreName"
         },
-        "retentionPeriod":{"shape":"RetentionPeriod"}
+        "retentionPeriod":{"shape":"RetentionPeriod"},
+        "datastoreStorage":{"shape":"DatastoreStorage"},
+        "fileFormatConfiguration":{"shape":"FileFormatConfiguration"}
       }
     },
     "UpdatePipelineRequest":{
@@ -2041,6 +2410,13 @@
       "member":{"shape":"Variable"},
       "max":50,
       "min":0
+    },
+    "VersioningConfiguration":{
+      "type":"structure",
+      "members":{
+        "unlimited":{"shape":"UnlimitedVersioning"},
+        "maxVersions":{"shape":"MaxVersions"}
+      }
     },
     "VolumeSizeInGB":{
       "type":"integer",

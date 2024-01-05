@@ -1,21 +1,20 @@
 # sql-migrate
 
-> SQL Schema migration tool for [Go](http://golang.org/). Based on [gorp](https://github.com/go-gorp/gorp) and [goose](https://bitbucket.org/liamstask/goose).
+> SQL Schema migration tool for [Go](https://golang.org/). Based on [gorp](https://github.com/go-gorp/gorp) and [goose](https://bitbucket.org/liamstask/goose).
 
-[![Build Status](https://travis-ci.org/rubenv/sql-migrate.svg?branch=master)](https://travis-ci.org/rubenv/sql-migrate) [![GoDoc](https://godoc.org/github.com/rubenv/sql-migrate?status.png)](https://godoc.org/github.com/rubenv/sql-migrate)
-
-Using [modl](https://github.com/jmoiron/modl)? Check out [modl-migrate](https://github.com/rubenv/modl-migrate).
+[![Test](https://github.com/rubenv/sql-migrate/actions/workflows/test.yml/badge.svg)](https://github.com/rubenv/sql-migrate/actions/workflows/test.yml) [![Go Reference](https://pkg.go.dev/badge/github.com/rubenv/sql-migrate.svg)](https://pkg.go.dev/github.com/rubenv/sql-migrate)
 
 ## Features
 
-* Usable as a CLI tool or as a library
-* Supports SQLite, PostgreSQL, MySQL, MSSQL and Oracle databases (through [gorp](https://github.com/go-gorp/gorp))
-* Can embed migrations into your application
-* Migrations are defined with SQL for full flexibility
-* Atomic migrations
-* Up/down migrations to allow rollback
-* Supports multiple database types in one project
-* Works great with other libraries such as [sqlx](http://jmoiron.github.io/sqlx/)
+- Usable as a CLI tool or as a library
+- Supports SQLite, PostgreSQL, MySQL, MSSQL and Oracle databases (through [gorp](https://github.com/go-gorp/gorp))
+- Can embed migrations into your application
+- Migrations are defined with SQL for full flexibility
+- Atomic migrations
+- Up/down migrations to allow rollback
+- Supports multiple database types in one project
+- Works great with other libraries such as [sqlx](https://jmoiron.github.io/sqlx/)
+- Supported on go1.13+
 
 ## Installation
 
@@ -23,6 +22,12 @@ To install the library and command line program, use the following:
 
 ```bash
 go get -v github.com/rubenv/sql-migrate/...
+```
+
+For Go version from 1.18, use:
+
+```bash
+go install github.com/rubenv/sql-migrate/...@latest
 ```
 
 ## Usage
@@ -45,15 +50,28 @@ Each command requires a configuration file (which defaults to `dbconfig.yml`, bu
 
 ```yml
 development:
-    dialect: sqlite3
-    datasource: test.db
-    dir: migrations/sqlite3
+  dialect: sqlite3
+  datasource: test.db
+  dir: migrations/sqlite3
 
 production:
-    dialect: postgres
-    datasource: dbname=myapp sslmode=disable
-    dir: migrations/postgres
-    table: migrations
+  dialect: postgres
+  datasource: dbname=myapp sslmode=disable
+  dir: migrations/postgres
+  table: migrations
+```
+
+(See more examples for different set ups [here](test-integration/dbconfig.yml))
+
+Also one can obtain env variables in datasource field via `os.ExpandEnv` embedded call for the field.
+This may be useful if one doesn't want to store credentials in file:
+
+```yml
+production:
+  dialect: postgres
+  datasource: host=prodhost dbname=proddb user=${DB_USER} password=${DB_PASSWORD} sslmode=require
+  dir: migrations
+  table: migrations
 ```
 
 The `table` setting is optional and will default to `gorp_migrations`.
@@ -70,15 +88,16 @@ Usage: sql-migrate up [options] ...
 
 Options:
 
-  -config=config.yml   Configuration file to use.
-  -env="development"   Environment.
-  -limit=0             Limit the number of migrations (0 = unlimited).
-  -dryrun              Don't apply migrations, just print them.
+  -config=dbconfig.yml   Configuration file to use.
+  -env="development"     Environment.
+  -limit=0               Limit the number of migrations (0 = unlimited).
+  -version               Run migrate up to a specific version, eg: the version number of migration 1_initial.sql is 1.
+  -dryrun                Don't apply migrations, just print them.
 ```
 
 The `new` command creates a new empty migration template using the following pattern `<current time>-<name>.sql`.
 
-The `up` command applies all available migrations. By contrast, `down` will only apply one migration by default. This behavior can be changed for both by using the `-limit` parameter.
+The `up` command applies all available migrations. By contrast, `down` will only apply one migration by default. This behavior can be changed for both by using the `-limit` parameter, and the `-version` parameter. Note `-version` has higher priority than `-limit` if you try to use them both.
 
 The `redo` command will unapply the last migration and reapply it. This is useful during development, when you're writing migrations.
 
@@ -94,19 +113,83 @@ $ sql-migrate status
 +---------------+-----------------------------------------+
 ```
 
+#### Running Test Integrations
+
+You can see how to run setups for different setups by executing the `.sh` files in [test-integration](test-integration/)
+
+```bash
+# Run mysql-env.sh example (you need to be in the project root directory)
+
+./test-integration/mysql-env.sh
+```
+
 ### MySQL Caveat
 
 If you are using MySQL, you must append `?parseTime=true` to the `datasource` configuration. For example:
 
 ```yml
 production:
-    dialect: mysql
-    datasource: root@/dbname?parseTime=true
-    dir: migrations/mysql
-    table: migrations
+  dialect: mysql
+  datasource: root@/dbname?parseTime=true
+  dir: migrations/mysql
+  table: migrations
 ```
 
 See [here](https://github.com/go-sql-driver/mysql#parsetime) for more information.
+
+### Oracle (oci8)
+
+Oracle Driver is [oci8](https://github.com/mattn/go-oci8), it is not pure Go code and relies on Oracle Office Client ([Instant Client](https://www.oracle.com/database/technologies/instant-client/downloads.html)), more detailed information is in the [oci8 repo](https://github.com/mattn/go-oci8).
+
+#### Install with Oracle support
+
+To install the library and command line program, use the following:
+
+```bash
+go get -tags oracle -v github.com/rubenv/sql-migrate/...
+```
+
+```yml
+development:
+  dialect: oci8
+  datasource: user/password@localhost:1521/sid
+  dir: migrations/oracle
+  table: migrations
+```
+
+### Oracle (godror)
+
+Oracle Driver is [godror](https://github.com/godror/godror), it is not pure Go code and relies on Oracle Office Client ([Instant Client](https://www.oracle.com/database/technologies/instant-client/downloads.html)), more detailed information is in the [godror repository](https://github.com/godror/godror).
+
+#### Install with Oracle support
+
+To install the library and command line program, use the following:
+
+1. Install sql-migrate
+
+```bash
+go get -tags godror -v github.com/rubenv/sql-migrate/...
+```
+
+2. Download Oracle Office Client(e.g. macos, click [Instant Client](https://www.oracle.com/database/technologies/instant-client/downloads.html) if you are other system)
+
+```bash
+wget https://download.oracle.com/otn_software/mac/instantclient/193000/instantclient-basic-macos.x64-19.3.0.0.0dbru.zip
+```
+
+3. Configure environment variables `LD_LIBRARY_PATH`
+
+```
+export LD_LIBRARY_PATH=your_oracle_office_path/instantclient_19_3
+```
+
+```yml
+development:
+  dialect: godror
+  datasource: user/password@localhost:1521/sid
+  dir: migrations/oracle
+  table: migrations
+```
 
 ### As a library
 
@@ -116,7 +199,7 @@ Import sql-migrate into your application:
 import "github.com/rubenv/sql-migrate"
 ```
 
-Set up a source of migrations, this can be from memory, from a set of files or from bindata (more on that later):
+Set up a source of migrations, this can be from memory, from a set of files, from bindata (more on that later), or from any library that implements [`http.FileSystem`](https://godoc.org/net/http#FileSystem):
 
 ```go
 // Hardcoded strings in memory:
@@ -136,8 +219,14 @@ migrations := &migrate.FileMigrationSource{
 }
 
 // OR: Use migrations from a packr box
+// Note: Packr is no longer supported, your best option these days is [embed](https://pkg.go.dev/embed)
 migrations := &migrate.PackrMigrationSource{
-    Box: packr.NewBox("./migrations"),
+    Box: packr.New("migrations", "./migrations"),
+}
+
+// OR: Use pkger which implements `http.FileSystem`
+migrationSource := &migrate.HttpFileSystemMigrationSource{
+    FileSystem: pkger.Dir("/db/migrations"),
 }
 
 // OR: Use migrations from bindata:
@@ -145,6 +234,11 @@ migrations := &migrate.AssetMigrationSource{
     Asset:    Asset,
     AssetDir: AssetDir,
     Dir:      "migrations",
+}
+
+// OR: Read migrations from a `http.FileSystem`
+migrationSource := &migrate.HttpFileSystemMigrationSource{
+    FileSystem: httpFS,
 }
 ```
 
@@ -168,6 +262,7 @@ Note that `n` can be greater than `0` even if there is an error: any migration t
 Check [the GoDoc reference](https://godoc.org/github.com/rubenv/sql-migrate) for the full documentation.
 
 ## Writing migrations
+
 Migrations are defined in SQL files, which contain a set of SQL statements. Special comments are used to distinguish up and down migrations.
 
 ```sql
@@ -216,62 +311,47 @@ Normally each migration is run within a transaction in order to guarantee that i
 
 ```sql
 -- +migrate Up notransaction
-CREATE UNIQUE INDEX people_unique_id_idx CONCURRENTLY ON people (id);
+CREATE UNIQUE INDEX CONCURRENTLY people_unique_id_idx ON people (id);
 
 -- +migrate Down
 DROP INDEX people_unique_id_idx;
 ```
 
-## Embedding migrations with [packr](https://github.com/gobuffalo/packr)
+## Embedding migrations with [embed](https://pkg.go.dev/embed)
 
-If you like your Go applications self-contained (that is: a single binary): use [packr](https://github.com/gobuffalo/packr) to embed the migration files.
-
-Just write your migration files as usual, as a set of SQL files in a folder.
-
-Use the `PackrMigrationSource` in your application to find the migrations:
-
-```go
-migrations := &migrate.PackrMigrationSource{
-    Box: packr.NewBox("./migrations"),
-}
-```
-
-If you already have a box and would like to use a subdirectory:
-
-```go
-migrations := &migrate.PackrMigrationSource{
-    Box: myBox,
-    Dir: "./migrations",
-}
-```
-
-## Embedding migrations with [bindata](https://github.com/shuLhan/go-bindata)
-
-As an alternative, but slightly less maintained, you can use [bindata](https://github.com/shuLhan/go-bindata) to embed the migration files.
+If you like your Go applications self-contained (that is: a single binary): use [embed](https://pkg.go.dev/embed) to embed the migration files.
 
 Just write your migration files as usual, as a set of SQL files in a folder.
 
-Then use bindata to generate a `.go` file with the migrations embedded:
-
-```bash
-go-bindata -pkg myapp -o bindata.go db/migrations/
-```
-
-The resulting `bindata.go` file will contain your migrations. Remember to regenerate your `bindata.go` file whenever you add/modify a migration (`go generate` will help here, once it arrives).
-
-Use the `AssetMigrationSource` in your application to find the migrations:
+Import the embed package into your application and point it to your migrations:
 
 ```go
-migrations := &migrate.AssetMigrationSource{
-    Asset:    Asset,
-    AssetDir: AssetDir,
-    Dir:      "db/migrations",
+import "embed"
+
+//go:embed migrations/*
+var dbMigrations embed.FS
+```
+
+Use the `EmbedFileSystemMigrationSource` in your application to find the migrations:
+
+```go
+migrations := migrate.EmbedFileSystemMigrationSource{
+	FileSystem: dbMigrations,
+	Root:       "migrations",
 }
 ```
 
-Both `Asset` and `AssetDir` are functions provided by bindata.
+Other options such as [packr](https://github.com/gobuffalo/packr) or [go-bindata](https://github.com/shuLhan/go-bindata) are no longer recommended.
 
-Then proceed as usual.
+## Embedding migrations with libraries that implement `http.FileSystem`
+
+You can also embed migrations with any library that implements `http.FileSystem`, like [`vfsgen`](https://github.com/shurcooL/vfsgen), [`parcello`](https://github.com/phogolabs/parcello), or [`go-resources`](https://github.com/omeid/go-resources).
+
+```go
+migrationSource := &migrate.HttpFileSystemMigrationSource{
+    FileSystem: httpFS,
+}
+```
 
 ## Extending
 
@@ -285,7 +365,7 @@ type MigrationSource interface {
 
 The resulting slice of migrations will be executed in the given order, so it should usually be sorted by the `Id` field.
 
-## Usage with [sqlx](http://jmoiron.github.io/sqlx/)
+## Usage with [sqlx](https://jmoiron.github.io/sqlx/)
 
 This library is compatible with sqlx. When calling migrate just dereference the DB from your `*sqlx.DB`:
 
@@ -296,6 +376,10 @@ if err != nil {
     // Handle errors!
 }
 ```
+
+## Questions or Feedback?
+
+You can use Github Issues for feedback or questions.
 
 ## License
 

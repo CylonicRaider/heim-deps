@@ -3,28 +3,28 @@
 // Package sms provides the client and types for making API
 // requests to AWS Server Migration Service.
 //
-// This is the AWS Sever Migration Service API Reference. It provides descriptions,
-// syntax, and usage examples for each of the actions and data types for the
-// AWS Sever Migration Service (AWS SMS). The topic for each action shows the
-// Query API request parameters and the XML response. You can also view the
-// XML request elements in the WSDL.
+// # Product update
 //
-// Alternatively, you can use one of the AWS SDKs to access an API that's tailored
-// to the programming language or platform that you're using. For more information,
-// see AWS SDKs (http://aws.amazon.com/tools/#SDKs).
+// We recommend Amazon Web Services Application Migration Service (http://aws.amazon.com/application-migration-service)
+// (Amazon Web Services MGN) as the primary migration service for lift-and-shift
+// migrations. If Amazon Web Services MGN is unavailable in a specific Amazon
+// Web Services Region, you can use the Server Migration Service APIs through
+// March 2023.
 //
-// To learn more about the Server Migration Service, see the following resources:
+// Server Migration Service (Server Migration Service) makes it easier and faster
+// for you to migrate your on-premises workloads to Amazon Web Services. To
+// learn more about Server Migration Service, see the following resources:
 //
-//    * AWS Sever Migration Service product page (https://aws.amazon.com/server-migration-service/)
+//   - Server Migration Service product page (http://aws.amazon.com/server-migration-service/)
 //
-//    * AWS Sever Migration Service User Guide (https://docs.aws.amazon.com/server-migration-service/latest/userguide/server-migration.html)
+//   - Server Migration Service User Guide (https://docs.aws.amazon.com/server-migration-service/latest/userguide/)
 //
 // See https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24 for more information on this service.
 //
 // See sms package documentation for more information.
 // https://docs.aws.amazon.com/sdk-for-go/api/service/sms/
 //
-// Using the Client
+// # Using the Client
 //
 // To contact AWS Server Migration Service with the SDK use the New function to create
 // a new service client. With that client you can make API requests to the service.

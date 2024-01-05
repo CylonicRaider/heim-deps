@@ -16,7 +16,7 @@ package procfs
 import "testing"
 
 func TestStat(t *testing.T) {
-	s, err := FS("fixtures").NewStat()
+	s, err := getProcFixtures(t).Stat()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -30,7 +30,7 @@ func TestStat(t *testing.T) {
 	}
 
 	// intr
-	if want, have := uint64(8885917), s.IRQTotal; want != have {
+	if want, have := uint64(73777505), s.IRQTotal; want != have {
 		t.Errorf("want irq/total %d, have %d", want, have)
 	}
 	if want, have := uint64(1), s.IRQ[8]; want != have {

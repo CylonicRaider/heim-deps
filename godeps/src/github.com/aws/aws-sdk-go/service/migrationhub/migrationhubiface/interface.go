@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Migration Hub.
-//    func myFunc(svc migrationhubiface.MigrationHubAPI) bool {
-//        // Make svc.AssociateCreatedArtifact request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Migration Hub.
+//	func myFunc(svc migrationhubiface.MigrationHubAPI) bool {
+//	    // Make svc.AssociateCreatedArtifact request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := migrationhub.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := migrationhub.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMigrationHubClient struct {
-//        migrationhubiface.MigrationHubAPI
-//    }
-//    func (m *mockMigrationHubClient) AssociateCreatedArtifact(input *migrationhub.AssociateCreatedArtifactInput) (*migrationhub.AssociateCreatedArtifactOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockMigrationHubClient struct {
+//	    migrationhubiface.MigrationHubAPI
+//	}
+//	func (m *mockMigrationHubClient) AssociateCreatedArtifact(input *migrationhub.AssociateCreatedArtifactInput) (*migrationhub.AssociateCreatedArtifactOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockMigrationHubClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockMigrationHubClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -96,21 +96,40 @@ type MigrationHubAPI interface {
 	ImportMigrationTaskWithContext(aws.Context, *migrationhub.ImportMigrationTaskInput, ...request.Option) (*migrationhub.ImportMigrationTaskOutput, error)
 	ImportMigrationTaskRequest(*migrationhub.ImportMigrationTaskInput) (*request.Request, *migrationhub.ImportMigrationTaskOutput)
 
+	ListApplicationStates(*migrationhub.ListApplicationStatesInput) (*migrationhub.ListApplicationStatesOutput, error)
+	ListApplicationStatesWithContext(aws.Context, *migrationhub.ListApplicationStatesInput, ...request.Option) (*migrationhub.ListApplicationStatesOutput, error)
+	ListApplicationStatesRequest(*migrationhub.ListApplicationStatesInput) (*request.Request, *migrationhub.ListApplicationStatesOutput)
+
+	ListApplicationStatesPages(*migrationhub.ListApplicationStatesInput, func(*migrationhub.ListApplicationStatesOutput, bool) bool) error
+	ListApplicationStatesPagesWithContext(aws.Context, *migrationhub.ListApplicationStatesInput, func(*migrationhub.ListApplicationStatesOutput, bool) bool, ...request.Option) error
+
 	ListCreatedArtifacts(*migrationhub.ListCreatedArtifactsInput) (*migrationhub.ListCreatedArtifactsOutput, error)
 	ListCreatedArtifactsWithContext(aws.Context, *migrationhub.ListCreatedArtifactsInput, ...request.Option) (*migrationhub.ListCreatedArtifactsOutput, error)
 	ListCreatedArtifactsRequest(*migrationhub.ListCreatedArtifactsInput) (*request.Request, *migrationhub.ListCreatedArtifactsOutput)
+
+	ListCreatedArtifactsPages(*migrationhub.ListCreatedArtifactsInput, func(*migrationhub.ListCreatedArtifactsOutput, bool) bool) error
+	ListCreatedArtifactsPagesWithContext(aws.Context, *migrationhub.ListCreatedArtifactsInput, func(*migrationhub.ListCreatedArtifactsOutput, bool) bool, ...request.Option) error
 
 	ListDiscoveredResources(*migrationhub.ListDiscoveredResourcesInput) (*migrationhub.ListDiscoveredResourcesOutput, error)
 	ListDiscoveredResourcesWithContext(aws.Context, *migrationhub.ListDiscoveredResourcesInput, ...request.Option) (*migrationhub.ListDiscoveredResourcesOutput, error)
 	ListDiscoveredResourcesRequest(*migrationhub.ListDiscoveredResourcesInput) (*request.Request, *migrationhub.ListDiscoveredResourcesOutput)
 
+	ListDiscoveredResourcesPages(*migrationhub.ListDiscoveredResourcesInput, func(*migrationhub.ListDiscoveredResourcesOutput, bool) bool) error
+	ListDiscoveredResourcesPagesWithContext(aws.Context, *migrationhub.ListDiscoveredResourcesInput, func(*migrationhub.ListDiscoveredResourcesOutput, bool) bool, ...request.Option) error
+
 	ListMigrationTasks(*migrationhub.ListMigrationTasksInput) (*migrationhub.ListMigrationTasksOutput, error)
 	ListMigrationTasksWithContext(aws.Context, *migrationhub.ListMigrationTasksInput, ...request.Option) (*migrationhub.ListMigrationTasksOutput, error)
 	ListMigrationTasksRequest(*migrationhub.ListMigrationTasksInput) (*request.Request, *migrationhub.ListMigrationTasksOutput)
 
+	ListMigrationTasksPages(*migrationhub.ListMigrationTasksInput, func(*migrationhub.ListMigrationTasksOutput, bool) bool) error
+	ListMigrationTasksPagesWithContext(aws.Context, *migrationhub.ListMigrationTasksInput, func(*migrationhub.ListMigrationTasksOutput, bool) bool, ...request.Option) error
+
 	ListProgressUpdateStreams(*migrationhub.ListProgressUpdateStreamsInput) (*migrationhub.ListProgressUpdateStreamsOutput, error)
 	ListProgressUpdateStreamsWithContext(aws.Context, *migrationhub.ListProgressUpdateStreamsInput, ...request.Option) (*migrationhub.ListProgressUpdateStreamsOutput, error)
 	ListProgressUpdateStreamsRequest(*migrationhub.ListProgressUpdateStreamsInput) (*request.Request, *migrationhub.ListProgressUpdateStreamsOutput)
+
+	ListProgressUpdateStreamsPages(*migrationhub.ListProgressUpdateStreamsInput, func(*migrationhub.ListProgressUpdateStreamsOutput, bool) bool) error
+	ListProgressUpdateStreamsPagesWithContext(aws.Context, *migrationhub.ListProgressUpdateStreamsInput, func(*migrationhub.ListProgressUpdateStreamsOutput, bool) bool, ...request.Option) error
 
 	NotifyApplicationState(*migrationhub.NotifyApplicationStateInput) (*migrationhub.NotifyApplicationStateOutput, error)
 	NotifyApplicationStateWithContext(aws.Context, *migrationhub.NotifyApplicationStateInput, ...request.Option) (*migrationhub.NotifyApplicationStateOutput, error)

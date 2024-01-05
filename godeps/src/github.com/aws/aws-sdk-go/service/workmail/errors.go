@@ -2,19 +2,29 @@
 
 package workmail
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
+
+	// ErrCodeDirectoryInUseException for service response error code
+	// "DirectoryInUseException".
+	//
+	// The directory is already in use by another WorkMail organization in the same
+	// account and Region.
+	ErrCodeDirectoryInUseException = "DirectoryInUseException"
 
 	// ErrCodeDirectoryServiceAuthenticationFailedException for service response error code
 	// "DirectoryServiceAuthenticationFailedException".
 	//
-	// The Directory Service doesn't recognize the credentials supplied by the Amazon
-	// WorkMail service.
+	// The directory service doesn't recognize the credentials supplied by WorkMail.
 	ErrCodeDirectoryServiceAuthenticationFailedException = "DirectoryServiceAuthenticationFailedException"
 
 	// ErrCodeDirectoryUnavailableException for service response error code
 	// "DirectoryUnavailableException".
 	//
-	// The directory that you are trying to perform operations on isn't available.
+	// The directory is unavailable. It might be located in another Region or deleted.
 	ErrCodeDirectoryUnavailableException = "DirectoryUnavailableException"
 
 	// ErrCodeEmailAddressInUseException for service response error code
@@ -33,15 +43,15 @@ const (
 	// ErrCodeEntityNotFoundException for service response error code
 	// "EntityNotFoundException".
 	//
-	// The identifier supplied for the entity is valid, but it does not exist in
+	// The identifier supplied for the user, group, or resource does not exist in
 	// your organization.
 	ErrCodeEntityNotFoundException = "EntityNotFoundException"
 
 	// ErrCodeEntityStateException for service response error code
 	// "EntityStateException".
 	//
-	// You are performing an operation on an entity that isn't in the expected state,
-	// such as trying to update a deleted user.
+	// You are performing an operation on a user, group, or resource that isn't
+	// in the expected state, such as trying to delete an active user.
 	ErrCodeEntityStateException = "EntityStateException"
 
 	// ErrCodeInvalidConfigurationException for service response error code
@@ -49,8 +59,16 @@ const (
 	//
 	// The configuration for a resource isn't valid. A resource must either be able
 	// to auto-respond to requests or have at least one delegate associated that
-	// can do it on its behalf.
+	// can do so on its behalf.
 	ErrCodeInvalidConfigurationException = "InvalidConfigurationException"
+
+	// ErrCodeInvalidCustomSesConfigurationException for service response error code
+	// "InvalidCustomSesConfigurationException".
+	//
+	// You SES configuration has customizations that WorkMail cannot save. The error
+	// message lists the invalid setting. For examples of invalid settings, refer
+	// to CreateReceiptRule (https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html).
+	ErrCodeInvalidCustomSesConfigurationException = "InvalidCustomSesConfigurationException"
 
 	// ErrCodeInvalidParameterException for service response error code
 	// "InvalidParameterException".
@@ -65,11 +83,23 @@ const (
 	// as length or use of special characters.
 	ErrCodeInvalidPasswordException = "InvalidPasswordException"
 
+	// ErrCodeLimitExceededException for service response error code
+	// "LimitExceededException".
+	//
+	// The request exceeds the limit of the resource.
+	ErrCodeLimitExceededException = "LimitExceededException"
+
+	// ErrCodeMailDomainInUseException for service response error code
+	// "MailDomainInUseException".
+	//
+	// The domain you're trying to change is in use by another user or organization
+	// in your account. See the error message for details.
+	ErrCodeMailDomainInUseException = "MailDomainInUseException"
+
 	// ErrCodeMailDomainNotFoundException for service response error code
 	// "MailDomainNotFoundException".
 	//
-	// For an email or alias to be created in Amazon WorkMail, the included domain
-	// must be defined in the organization.
+	// The domain specified is not found in your organization.
 	ErrCodeMailDomainNotFoundException = "MailDomainNotFoundException"
 
 	// ErrCodeMailDomainStateException for service response error code
@@ -82,7 +112,7 @@ const (
 	// ErrCodeNameAvailabilityException for service response error code
 	// "NameAvailabilityException".
 	//
-	// The entity (user, group, or user) name isn't unique in Amazon WorkMail.
+	// The user, group, or resource name isn't unique in WorkMail.
 	ErrCodeNameAvailabilityException = "NameAvailabilityException"
 
 	// ErrCodeOrganizationNotFoundException for service response error code
@@ -95,15 +125,27 @@ const (
 	// ErrCodeOrganizationStateException for service response error code
 	// "OrganizationStateException".
 	//
-	// The organization must have a valid state (Active or Synchronizing) to perform
-	// certain operations on the organization or its entities.
+	// The organization must have a valid state to perform certain operations on
+	// the organization or its members.
 	ErrCodeOrganizationStateException = "OrganizationStateException"
 
 	// ErrCodeReservedNameException for service response error code
 	// "ReservedNameException".
 	//
-	// This entity name is not allowed in Amazon WorkMail.
+	// This user, group, or resource name is not allowed in WorkMail.
 	ErrCodeReservedNameException = "ReservedNameException"
+
+	// ErrCodeResourceNotFoundException for service response error code
+	// "ResourceNotFoundException".
+	//
+	// The resource cannot be found.
+	ErrCodeResourceNotFoundException = "ResourceNotFoundException"
+
+	// ErrCodeTooManyTagsException for service response error code
+	// "TooManyTagsException".
+	//
+	// The resource can have up to 50 user-applied tags.
+	ErrCodeTooManyTagsException = "TooManyTagsException"
 
 	// ErrCodeUnsupportedOperationException for service response error code
 	// "UnsupportedOperationException".
@@ -111,3 +153,28 @@ const (
 	// You can't perform a write operation against a read-only directory.
 	ErrCodeUnsupportedOperationException = "UnsupportedOperationException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"DirectoryInUseException":                       newErrorDirectoryInUseException,
+	"DirectoryServiceAuthenticationFailedException": newErrorDirectoryServiceAuthenticationFailedException,
+	"DirectoryUnavailableException":                 newErrorDirectoryUnavailableException,
+	"EmailAddressInUseException":                    newErrorEmailAddressInUseException,
+	"EntityAlreadyRegisteredException":              newErrorEntityAlreadyRegisteredException,
+	"EntityNotFoundException":                       newErrorEntityNotFoundException,
+	"EntityStateException":                          newErrorEntityStateException,
+	"InvalidConfigurationException":                 newErrorInvalidConfigurationException,
+	"InvalidCustomSesConfigurationException":        newErrorInvalidCustomSesConfigurationException,
+	"InvalidParameterException":                     newErrorInvalidParameterException,
+	"InvalidPasswordException":                      newErrorInvalidPasswordException,
+	"LimitExceededException":                        newErrorLimitExceededException,
+	"MailDomainInUseException":                      newErrorMailDomainInUseException,
+	"MailDomainNotFoundException":                   newErrorMailDomainNotFoundException,
+	"MailDomainStateException":                      newErrorMailDomainStateException,
+	"NameAvailabilityException":                     newErrorNameAvailabilityException,
+	"OrganizationNotFoundException":                 newErrorOrganizationNotFoundException,
+	"OrganizationStateException":                    newErrorOrganizationStateException,
+	"ReservedNameException":                         newErrorReservedNameException,
+	"ResourceNotFoundException":                     newErrorResourceNotFoundException,
+	"TooManyTagsException":                          newErrorTooManyTagsException,
+	"UnsupportedOperationException":                 newErrorUnsupportedOperationException,
+}

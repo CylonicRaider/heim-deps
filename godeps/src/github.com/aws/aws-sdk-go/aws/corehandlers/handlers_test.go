@@ -6,24 +6,27 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"os"
+	"net/url"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
+	"github.com/aws/aws-sdk-go/aws/client"
+	"github.com/aws/aws-sdk-go/aws/client/metadata"
 	"github.com/aws/aws-sdk-go/aws/corehandlers"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/awstesting"
 	"github.com/aws/aws-sdk-go/awstesting/unit"
+	"github.com/aws/aws-sdk-go/internal/sdktesting"
 	"github.com/aws/aws-sdk-go/service/s3"
 )
 
 func TestValidateEndpointHandler(t *testing.T) {
-	os.Clearenv()
-
+	restoreEnvFn := sdktesting.StashEnv()
+	defer restoreEnvFn()
 	svc := awstesting.NewClient(aws.NewConfig().WithRegion("us-west-2"))
 	svc.Handlers.Clear()
 	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
@@ -37,8 +40,8 @@ func TestValidateEndpointHandler(t *testing.T) {
 }
 
 func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
-	os.Clearenv()
-
+	restoreEnvFn := sdktesting.StashEnv()
+	defer restoreEnvFn()
 	svc := awstesting.NewClient()
 	svc.Handlers.Clear()
 	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
@@ -61,7 +64,11 @@ type mockCredsProvider struct {
 
 func (m *mockCredsProvider) Retrieve() (credentials.Value, error) {
 	m.retrieveCalled = true
-	return credentials.Value{ProviderName: "mockCredsProvider"}, nil
+	return credentials.Value{
+		AccessKeyID:     "AKID",
+		SecretAccessKey: "SECRET",
+		ProviderName:    "mockCredsProvider",
+	}, nil
 }
 
 func (m *mockCredsProvider) IsExpired() bool {
@@ -69,47 +76,88 @@ func (m *mockCredsProvider) IsExpired() bool {
 }
 
 func TestAfterRetryRefreshCreds(t *testing.T) {
-	os.Clearenv()
+	restoreEnvFn := sdktesting.StashEnv()
+	defer restoreEnvFn()
+
 	credProvider := &mockCredsProvider{}
 
-	svc := awstesting.NewClient(&aws.Config{
+	sess := unit.Session.Copy(&aws.Config{
 		Credentials: credentials.NewCredentials(credProvider),
-		MaxRetries:  aws.Int(1),
+		MaxRetries:  aws.Int(2),
+	})
+	clientInfo := metadata.ClientInfo{
+		Endpoint:    "http://endpoint",
+		SigningName: "",
+	}
+	svc := client.New(*sess.Config, clientInfo, sess.Handlers)
+
+	svc.Handlers.Sign.PushBack(func(r *request.Request) {
+		if !svc.Config.Credentials.IsExpired() {
+			t.Errorf("expect credentials of of been expired before request attempt")
+		}
+		_, err := svc.Config.Credentials.Get()
+		r.Error = err
 	})
 
-	svc.Handlers.Clear()
-	svc.Handlers.ValidateResponse.PushBack(func(r *request.Request) {
-		r.Error = awserr.New("UnknownError", "", nil)
-		r.HTTPResponse = &http.Response{StatusCode: 400, Body: ioutil.NopCloser(bytes.NewBuffer([]byte{}))}
+	var respID int
+	resps := []struct {
+		Resp *http.Response
+		Err  error
+	}{
+		{
+			Resp: &http.Response{
+				StatusCode: 403,
+				Header:     http.Header{},
+				Body:       ioutil.NopCloser(bytes.NewBuffer([]byte{})),
+			},
+			Err: awserr.New("ExpiredToken", "", nil),
+		},
+		{
+			Resp: &http.Response{
+				StatusCode: 403,
+				Header:     http.Header{},
+				Body:       ioutil.NopCloser(bytes.NewBuffer([]byte{})),
+			},
+			Err: awserr.New("ExpiredToken", "", nil),
+		},
+		{
+			Resp: &http.Response{
+				StatusCode: 200,
+				Header:     http.Header{},
+				Body:       ioutil.NopCloser(bytes.NewBuffer([]byte{})),
+			},
+		},
+	}
+	svc.Handlers.Send.Clear()
+	svc.Handlers.Send.PushBack(func(r *request.Request) {
+		r.HTTPResponse = resps[respID].Resp
 	})
 	svc.Handlers.UnmarshalError.PushBack(func(r *request.Request) {
-		r.Error = awserr.New("ExpiredTokenException", "", nil)
+		r.Error = resps[respID].Err
 	})
-	svc.Handlers.AfterRetry.PushBackNamed(corehandlers.AfterRetryHandler)
+	svc.Handlers.CompleteAttempt.PushBack(func(r *request.Request) {
+		respID++
+	})
 
 	if !svc.Config.Credentials.IsExpired() {
-		t.Errorf("Expect to start out expired")
+		t.Fatalf("expect to start out expired")
 	}
 	if credProvider.retrieveCalled {
-		t.Errorf("expect not called")
+		t.Fatalf("expect retrieve not yet called")
 	}
 
 	req := svc.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
-	req.Send()
-
-	if !svc.Config.Credentials.IsExpired() {
-		t.Errorf("Expect to start out expired")
+	if err := req.Send(); err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
-	if credProvider.retrieveCalled {
-		t.Errorf("expect not called")
+	if e, a := len(resps)-1, req.RetryCount; e != a {
+		t.Errorf("expect %v retries, got %v", e, a)
 	}
-
-	_, err := svc.Config.Credentials.Get()
-	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+	if svc.Config.Credentials.IsExpired() {
+		t.Errorf("expect credentials not to be expired")
 	}
 	if !credProvider.retrieveCalled {
-		t.Errorf("expect not called")
+		t.Errorf("expect retrieve to be called")
 	}
 }
 
@@ -118,7 +166,7 @@ func TestAfterRetryWithContextCanceled(t *testing.T) {
 
 	req := c.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
 
-	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	req.SetContext(ctx)
 
 	req.Error = fmt.Errorf("some error")
@@ -148,7 +196,7 @@ func TestAfterRetryWithContext(t *testing.T) {
 
 	req := c.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
 
-	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	req.SetContext(ctx)
 
 	req.Error = fmt.Errorf("some error")
@@ -176,7 +224,7 @@ func TestSendWithContextCanceled(t *testing.T) {
 
 	req := c.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
 
-	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	req.SetContext(ctx)
 
 	req.Error = fmt.Errorf("some error")
@@ -237,6 +285,7 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 			t.Fatalf("expect not to redirect, but was")
 		}
 	}))
+	defer server.Close()
 
 	svc := awstesting.NewClient(&aws.Config{
 		DisableSSL: aws.Bool(true),
@@ -287,6 +336,8 @@ func TestValidateReqSigHandler(t *testing.T) {
 	}
 
 	for i, c := range cases {
+		c.Req.HTTPRequest = &http.Request{URL: &url.URL{}}
+
 		resigned := false
 		c.Req.Handlers.Sign.PushBack(func(r *request.Request) {
 			resigned = true
@@ -342,6 +393,7 @@ func setupContentLengthTestServer(t *testing.T, hasContentLength bool, contentLe
 
 func TestBuildContentLength_ZeroBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, false, 0)
+	defer server.Close()
 
 	svc := s3.New(unit.Session, &aws.Config{
 		Endpoint:         aws.String(server.URL),
@@ -360,6 +412,7 @@ func TestBuildContentLength_ZeroBody(t *testing.T) {
 
 func TestBuildContentLength_NegativeBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, false, 0)
+	defer server.Close()
 
 	svc := s3.New(unit.Session, &aws.Config{
 		Endpoint:         aws.String(server.URL),
@@ -380,6 +433,7 @@ func TestBuildContentLength_NegativeBody(t *testing.T) {
 
 func TestBuildContentLength_WithBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, true, 1024)
+	defer server.Close()
 
 	svc := s3.New(unit.Session, &aws.Config{
 		Endpoint:         aws.String(server.URL),

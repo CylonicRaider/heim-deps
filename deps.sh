@@ -48,7 +48,7 @@ update_go_deps() {
 
   GOPATH=`pwd`/godeps go get -d -t -x ./godeps/src/euphoria.leet.nu/heim/... github.com/coreos/etcd
 
-  # pin go-etcd to v0.4.6 (because the newest version gives compile errors)
+  # pin go-etcd to v0.4.6 (TODO: migrate to go.etcd.io/etcd/client/v3)
   git --git-dir=godeps/src/github.com/coreos/go-etcd/.git \
       --work-tree=godeps/src/github.com/coreos/go-etcd \
       checkout 6aa2da5

@@ -14,8 +14,8 @@ import (
 
 	"golang.org/x/net/icmp"
 	"golang.org/x/net/internal/iana"
-	"golang.org/x/net/internal/nettest"
 	"golang.org/x/net/ipv6"
+	"golang.org/x/net/nettest"
 )
 
 var packetConnReadWriteMulticastUDPTests = []struct {
@@ -29,17 +29,17 @@ var packetConnReadWriteMulticastUDPTests = []struct {
 
 func TestPacketConnReadWriteMulticastUDP(t *testing.T) {
 	switch runtime.GOOS {
-	case "js", "nacl", "plan9", "windows":
+	case "fuchsia", "hurd", "js", "nacl", "plan9", "wasip1", "windows":
 		t.Skipf("not supported on %s", runtime.GOOS)
 	}
-	if !supportsIPv6 {
+	if !nettest.SupportsIPv6() {
 		t.Skip("ipv6 is not supported")
 	}
-	if !nettest.SupportsIPv6MulticastDeliveryOnLoopback() {
-		t.Skipf("multicast delivery doesn't work correctly on %s", runtime.GOOS)
+	if m, ok := supportsIPv6MulticastDeliveryOnLoopback(); !ok {
+		t.Skip(m)
 	}
-	ifi := nettest.RoutedInterface("ip6", net.FlagUp|net.FlagMulticast|net.FlagLoopback)
-	if ifi == nil {
+	ifi, err := nettest.RoutedInterface("ip6", net.FlagUp|net.FlagMulticast|net.FlagLoopback)
+	if err != nil {
 		t.Skipf("not available on %s", runtime.GOOS)
 	}
 
@@ -94,21 +94,31 @@ func TestPacketConnReadWriteMulticastUDP(t *testing.T) {
 
 		for i, toggle := range []bool{true, false, true} {
 			if err := p.SetControlMessage(cf, toggle); err != nil {
-				if nettest.ProtocolNotSupported(err) {
+				if protocolNotSupported(err) {
 					t.Logf("not supported on %s", runtime.GOOS)
 					continue
 				}
 				t.Fatal(err)
 			}
-			if err := p.SetDeadline(time.Now().Add(200 * time.Millisecond)); err != nil {
-				t.Fatal(err)
-			}
 			cm.HopLimit = i + 1
-			if n, err := p.WriteTo(wb, &cm, &grp); err != nil {
-				t.Fatal(err)
-			} else if n != len(wb) {
-				t.Fatal(err)
+
+			backoff := time.Millisecond
+			for {
+				n, err := p.WriteTo(wb, &cm, &grp)
+				if err != nil {
+					if n == 0 && isENOBUFS(err) {
+						time.Sleep(backoff)
+						backoff *= 2
+						continue
+					}
+					t.Fatal(err)
+				}
+				if n != len(wb) {
+					t.Fatalf("wrote %v bytes; want %v", n, len(wb))
+				}
+				break
 			}
+
 			rb := make([]byte, 128)
 			if n, _, _, err := p.ReadFrom(rb); err != nil {
 				t.Fatal(err)
@@ -128,21 +138,26 @@ var packetConnReadWriteMulticastICMPTests = []struct {
 }
 
 func TestPacketConnReadWriteMulticastICMP(t *testing.T) {
+	if os.Getenv("GO_BUILDER_NAME") == "openbsd-amd64-68" ||
+		os.Getenv("GO_BUILDER_NAME") == "openbsd-386-68" {
+		t.Skip(`this test is currently failing on OpenBSD 6.8 builders with "raw-read ip6: i/o timeout" ` +
+			`and needs investigation, see golang.org/issue/42064`)
+	}
 	switch runtime.GOOS {
-	case "js", "nacl", "plan9", "windows":
+	case "fuchsia", "hurd", "js", "nacl", "plan9", "wasip1", "windows":
 		t.Skipf("not supported on %s", runtime.GOOS)
 	}
-	if !supportsIPv6 {
+	if !nettest.SupportsIPv6() {
 		t.Skip("ipv6 is not supported")
 	}
-	if !nettest.SupportsIPv6MulticastDeliveryOnLoopback() {
-		t.Skipf("multicast delivery doesn't work correctly on %s", runtime.GOOS)
-	}
-	if m, ok := nettest.SupportsRawIPSocket(); !ok {
+	if m, ok := supportsIPv6MulticastDeliveryOnLoopback(); !ok {
 		t.Skip(m)
 	}
-	ifi := nettest.RoutedInterface("ip6", net.FlagUp|net.FlagMulticast|net.FlagLoopback)
-	if ifi == nil {
+	if !nettest.SupportsRawSocket() {
+		t.Skipf("not supported on %s/%s", runtime.GOOS, runtime.GOARCH)
+	}
+	ifi, err := nettest.RoutedInterface("ip6", net.FlagUp|net.FlagMulticast|net.FlagLoopback)
+	if err != nil {
 		t.Skipf("not available on %s", runtime.GOOS)
 	}
 
@@ -205,9 +220,9 @@ func TestPacketConnReadWriteMulticastICMP(t *testing.T) {
 			if toggle {
 				psh = nil
 				if err := p.SetChecksum(true, 2); err != nil {
-					// Solaris never allows to
-					// modify ICMP properties.
-					if runtime.GOOS != "solaris" {
+					// Illumos and Solaris never allow
+					// modification of ICMP properties.
+					if runtime.GOOS != "illumos" && runtime.GOOS != "solaris" {
 						t.Fatal(err)
 					}
 				}
@@ -229,13 +244,10 @@ func TestPacketConnReadWriteMulticastICMP(t *testing.T) {
 				t.Fatal(err)
 			}
 			if err := p.SetControlMessage(cf, toggle); err != nil {
-				if nettest.ProtocolNotSupported(err) {
+				if protocolNotSupported(err) {
 					t.Logf("not supported on %s", runtime.GOOS)
 					continue
 				}
-				t.Fatal(err)
-			}
-			if err := p.SetDeadline(time.Now().Add(200 * time.Millisecond)); err != nil {
 				t.Fatal(err)
 			}
 			cm.HopLimit = i + 1
@@ -247,7 +259,7 @@ func TestPacketConnReadWriteMulticastICMP(t *testing.T) {
 			rb := make([]byte, 128)
 			if n, _, _, err := p.ReadFrom(rb); err != nil {
 				switch runtime.GOOS {
-				case "darwin": // older darwin kernels have some limitation on receiving icmp packet through raw socket
+				case "darwin", "ios": // older darwin kernels have some limitation on receiving icmp packet through raw socket
 					t.Logf("not supported on %s", runtime.GOOS)
 					continue
 				}

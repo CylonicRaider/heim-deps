@@ -3,6 +3,7 @@
 package mediastoredata
 
 import (
+	"fmt"
 	"io"
 	"time"
 
@@ -30,14 +31,13 @@ const opDeleteObject = "DeleteObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteObjectRequest method.
+//	req, resp := client.DeleteObjectRequest(params)
 //
-//    // Example sending a request using the DeleteObjectRequest method.
-//    req, resp := client.DeleteObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DeleteObject
 func (c *MediaStoreData) DeleteObjectRequest(input *DeleteObjectInput) (req *request.Request, output *DeleteObjectOutput) {
@@ -68,15 +68,16 @@ func (c *MediaStoreData) DeleteObjectRequest(input *DeleteObjectInput) (req *req
 // See the AWS API reference guide for AWS Elemental MediaStore Data Plane's
 // API operation DeleteObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeContainerNotFoundException "ContainerNotFoundException"
-//   The specified container was not found for the specified account.
+// Returned Error Types:
 //
-//   * ErrCodeObjectNotFoundException "ObjectNotFoundException"
-//   Could not perform an operation on an object that does not exist.
+//   - ContainerNotFoundException
+//     The specified container was not found for the specified account.
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   The service is temporarily unavailable.
+//   - ObjectNotFoundException
+//     Could not perform an operation on an object that does not exist.
+//
+//   - InternalServerError
+//     The service is temporarily unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DeleteObject
 func (c *MediaStoreData) DeleteObject(input *DeleteObjectInput) (*DeleteObjectOutput, error) {
@@ -116,14 +117,13 @@ const opDescribeObject = "DescribeObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeObjectRequest method.
+//	req, resp := client.DescribeObjectRequest(params)
 //
-//    // Example sending a request using the DescribeObjectRequest method.
-//    req, resp := client.DescribeObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DescribeObject
 func (c *MediaStoreData) DescribeObjectRequest(input *DescribeObjectInput) (req *request.Request, output *DescribeObjectOutput) {
@@ -153,15 +153,16 @@ func (c *MediaStoreData) DescribeObjectRequest(input *DescribeObjectInput) (req 
 // See the AWS API reference guide for AWS Elemental MediaStore Data Plane's
 // API operation DescribeObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeContainerNotFoundException "ContainerNotFoundException"
-//   The specified container was not found for the specified account.
+// Returned Error Types:
 //
-//   * ErrCodeObjectNotFoundException "ObjectNotFoundException"
-//   Could not perform an operation on an object that does not exist.
+//   - ContainerNotFoundException
+//     The specified container was not found for the specified account.
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   The service is temporarily unavailable.
+//   - ObjectNotFoundException
+//     Could not perform an operation on an object that does not exist.
+//
+//   - InternalServerError
+//     The service is temporarily unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DescribeObject
 func (c *MediaStoreData) DescribeObject(input *DescribeObjectInput) (*DescribeObjectOutput, error) {
@@ -201,14 +202,13 @@ const opGetObject = "GetObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetObjectRequest method.
+//	req, resp := client.GetObjectRequest(params)
 //
-//    // Example sending a request using the GetObjectRequest method.
-//    req, resp := client.GetObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/GetObject
 func (c *MediaStoreData) GetObjectRequest(input *GetObjectInput) (req *request.Request, output *GetObjectOutput) {
@@ -229,7 +229,9 @@ func (c *MediaStoreData) GetObjectRequest(input *GetObjectInput) (req *request.R
 
 // GetObject API operation for AWS Elemental MediaStore Data Plane.
 //
-// Downloads the object at the specified path.
+// Downloads the object at the specified path. If the object’s upload availability
+// is set to streaming, AWS Elemental MediaStore downloads the object even if
+// it’s still uploading the object.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -238,18 +240,19 @@ func (c *MediaStoreData) GetObjectRequest(input *GetObjectInput) (req *request.R
 // See the AWS API reference guide for AWS Elemental MediaStore Data Plane's
 // API operation GetObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeContainerNotFoundException "ContainerNotFoundException"
-//   The specified container was not found for the specified account.
+// Returned Error Types:
 //
-//   * ErrCodeObjectNotFoundException "ObjectNotFoundException"
-//   Could not perform an operation on an object that does not exist.
+//   - ContainerNotFoundException
+//     The specified container was not found for the specified account.
 //
-//   * ErrCodeRequestedRangeNotSatisfiableException "RequestedRangeNotSatisfiableException"
-//   The requested content range is not valid.
+//   - ObjectNotFoundException
+//     Could not perform an operation on an object that does not exist.
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   The service is temporarily unavailable.
+//   - RequestedRangeNotSatisfiableException
+//     The requested content range is not valid.
+//
+//   - InternalServerError
+//     The service is temporarily unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/GetObject
 func (c *MediaStoreData) GetObject(input *GetObjectInput) (*GetObjectOutput, error) {
@@ -289,14 +292,13 @@ const opListItems = "ListItems"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListItemsRequest method.
+//	req, resp := client.ListItemsRequest(params)
 //
-//    // Example sending a request using the ListItemsRequest method.
-//    req, resp := client.ListItemsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItems
 func (c *MediaStoreData) ListItemsRequest(input *ListItemsInput) (req *request.Request, output *ListItemsOutput) {
@@ -304,6 +306,12 @@ func (c *MediaStoreData) ListItemsRequest(input *ListItemsInput) (req *request.R
 		Name:       opListItems,
 		HTTPMethod: "GET",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -327,12 +335,13 @@ func (c *MediaStoreData) ListItemsRequest(input *ListItemsInput) (req *request.R
 // See the AWS API reference guide for AWS Elemental MediaStore Data Plane's
 // API operation ListItems for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeContainerNotFoundException "ContainerNotFoundException"
-//   The specified container was not found for the specified account.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   The service is temporarily unavailable.
+//   - ContainerNotFoundException
+//     The specified container was not found for the specified account.
+//
+//   - InternalServerError
+//     The service is temporarily unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItems
 func (c *MediaStoreData) ListItems(input *ListItemsInput) (*ListItemsOutput, error) {
@@ -356,6 +365,57 @@ func (c *MediaStoreData) ListItemsWithContext(ctx aws.Context, input *ListItemsI
 	return out, req.Send()
 }
 
+// ListItemsPages iterates over the pages of a ListItems operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListItems method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListItems operation.
+//	pageNum := 0
+//	err := client.ListItemsPages(params,
+//	    func(page *mediastoredata.ListItemsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *MediaStoreData) ListItemsPages(input *ListItemsInput, fn func(*ListItemsOutput, bool) bool) error {
+	return c.ListItemsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListItemsPagesWithContext same as ListItemsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *MediaStoreData) ListItemsPagesWithContext(ctx aws.Context, input *ListItemsInput, fn func(*ListItemsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListItemsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListItemsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListItemsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opPutObject = "PutObject"
 
 // PutObjectRequest generates a "aws/request.Request" representing the
@@ -372,14 +432,13 @@ const opPutObject = "PutObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutObjectRequest method.
+//	req, resp := client.PutObjectRequest(params)
 //
-//    // Example sending a request using the PutObjectRequest method.
-//    req, resp := client.PutObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObject
 func (c *MediaStoreData) PutObjectRequest(input *PutObjectInput) (req *request.Request, output *PutObjectOutput) {
@@ -403,7 +462,8 @@ func (c *MediaStoreData) PutObjectRequest(input *PutObjectInput) (req *request.R
 
 // PutObject API operation for AWS Elemental MediaStore Data Plane.
 //
-// Uploads an object to the specified path. Object sizes are limited to 25 MB.
+// Uploads an object to the specified path. Object sizes are limited to 25 MB
+// for standard upload availability and 10 MB for streaming upload availability.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -412,12 +472,13 @@ func (c *MediaStoreData) PutObjectRequest(input *PutObjectInput) (req *request.R
 // See the AWS API reference guide for AWS Elemental MediaStore Data Plane's
 // API operation PutObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeContainerNotFoundException "ContainerNotFoundException"
-//   The specified container was not found for the specified account.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   The service is temporarily unavailable.
+//   - ContainerNotFoundException
+//     The specified container was not found for the specified account.
+//
+//   - InternalServerError
+//     The service is temporarily unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObject
 func (c *MediaStoreData) PutObject(input *PutObjectInput) (*PutObjectOutput, error) {
@@ -441,8 +502,72 @@ func (c *MediaStoreData) PutObjectWithContext(ctx aws.Context, input *PutObjectI
 	return out, req.Send()
 }
 
+// The specified container was not found for the specified account.
+type ContainerNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ContainerNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ContainerNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorContainerNotFoundException(v protocol.ResponseMetadata) error {
+	return &ContainerNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ContainerNotFoundException) Code() string {
+	return "ContainerNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ContainerNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ContainerNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ContainerNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ContainerNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ContainerNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type DeleteObjectInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The path (including the file name) where the object is stored in the container.
 	// Format: <folder name>/<folder name>/<file name>
@@ -451,12 +576,20 @@ type DeleteObjectInput struct {
 	Path *string `location:"uri" locationName:"Path" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteObjectInput) GoString() string {
 	return s.String()
 }
@@ -487,18 +620,26 @@ type DeleteObjectOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteObjectOutput) GoString() string {
 	return s.String()
 }
 
 type DescribeObjectInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The path (including the file name) where the object is stored in the container.
 	// Format: <folder name>/<folder name>/<file name>
@@ -507,12 +648,20 @@ type DescribeObjectInput struct {
 	Path *string `location:"uri" locationName:"Path" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeObjectInput) GoString() string {
 	return s.String()
 }
@@ -562,12 +711,20 @@ type DescribeObjectOutput struct {
 	LastModified *time.Time `location:"header" locationName:"Last-Modified" type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeObjectOutput) GoString() string {
 	return s.String()
 }
@@ -603,7 +760,7 @@ func (s *DescribeObjectOutput) SetLastModified(v time.Time) *DescribeObjectOutpu
 }
 
 type GetObjectInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The path (including the file name) where the object is stored in the container.
 	// Format: <folder name>/<folder name>/<file name>
@@ -633,17 +790,27 @@ type GetObjectInput struct {
 	Path *string `location:"uri" locationName:"Path" min:"1" type:"string" required:"true"`
 
 	// The range bytes of an object to retrieve. For more information about the
-	// Range header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35).
+	// Range header, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35). AWS Elemental
+	// MediaStore ignores this header for partially uploaded objects that have streaming
+	// upload availability.
 	Range *string `location:"header" locationName:"Range" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectInput) GoString() string {
 	return s.String()
 }
@@ -712,12 +879,20 @@ type GetObjectOutput struct {
 	StatusCode *int64 `location:"statusCode" type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectOutput) GoString() string {
 	return s.String()
 }
@@ -770,6 +945,70 @@ func (s *GetObjectOutput) SetStatusCode(v int64) *GetObjectOutput {
 	return s
 }
 
+// The service is temporarily unavailable.
+type InternalServerError struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerError) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServerError(v protocol.ResponseMetadata) error {
+	return &InternalServerError{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServerError) Code() string {
+	return "InternalServerError"
+}
+
+// Message returns the exception's message.
+func (s *InternalServerError) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServerError) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServerError) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServerError) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServerError) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A metadata entry for a folder or object.
 type Item struct {
 	_ struct{} `type:"structure"`
@@ -793,12 +1032,20 @@ type Item struct {
 	Type *string `type:"string" enum:"ItemType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Item) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Item) GoString() string {
 	return s.String()
 }
@@ -840,7 +1087,7 @@ func (s *Item) SetType(v string) *Item {
 }
 
 type ListItemsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The maximum number of results to return per API request. For example, you
 	// submit a ListItems request with MaxResults set at 500. Although 2,000 items
@@ -867,12 +1114,20 @@ type ListItemsInput struct {
 	Path *string `location:"querystring" locationName:"Path" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListItemsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListItemsInput) GoString() string {
 	return s.String()
 }
@@ -922,12 +1177,20 @@ type ListItemsOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListItemsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListItemsOutput) GoString() string {
 	return s.String()
 }
@@ -944,10 +1207,79 @@ func (s *ListItemsOutput) SetNextToken(v string) *ListItemsOutput {
 	return s
 }
 
+// Could not perform an operation on an object that does not exist.
+type ObjectNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ObjectNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ObjectNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorObjectNotFoundException(v protocol.ResponseMetadata) error {
+	return &ObjectNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ObjectNotFoundException) Code() string {
+	return "ObjectNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ObjectNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ObjectNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ObjectNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ObjectNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ObjectNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type PutObjectInput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
 	// The bytes to be stored.
+	//
+	// To use an non-seekable io.Reader for this request wrap the io.Reader with
+	// "aws.ReadSeekCloser". The SDK will not retry request errors for non-seekable
+	// readers. This will allow the SDK to send the reader's payload as chunked
+	// transfer encoding.
 	//
 	// Body is a required field
 	Body io.ReadSeeker `type:"blob" required:"true"`
@@ -993,14 +1325,32 @@ type PutObjectInput struct {
 	// temporal storage class, and objects are persisted into durable storage shortly
 	// after being received.
 	StorageClass *string `location:"header" locationName:"x-amz-storage-class" min:"1" type:"string" enum:"StorageClass"`
+
+	// Indicates the availability of an object while it is still uploading. If the
+	// value is set to streaming, the object is available for downloading after
+	// some initial buffering but before the object is uploaded completely. If the
+	// value is set to standard, the object is available for downloading only when
+	// it is uploaded completely. The default value for this header is standard.
+	//
+	// To use this header, you must also set the HTTP Transfer-Encoding header to
+	// chunked.
+	UploadAvailability *string `location:"header" locationName:"x-amz-upload-availability" min:"1" type:"string" enum:"UploadAvailability"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutObjectInput) GoString() string {
 	return s.String()
 }
@@ -1019,6 +1369,9 @@ func (s *PutObjectInput) Validate() error {
 	}
 	if s.StorageClass != nil && len(*s.StorageClass) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("StorageClass", 1))
+	}
+	if s.UploadAvailability != nil && len(*s.UploadAvailability) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("UploadAvailability", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1057,6 +1410,12 @@ func (s *PutObjectInput) SetStorageClass(v string) *PutObjectInput {
 	return s
 }
 
+// SetUploadAvailability sets the UploadAvailability field's value.
+func (s *PutObjectInput) SetUploadAvailability(v string) *PutObjectInput {
+	s.UploadAvailability = &v
+	return s
+}
+
 type PutObjectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1070,12 +1429,20 @@ type PutObjectOutput struct {
 	StorageClass *string `min:"1" type:"string" enum:"StorageClass"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutObjectOutput) GoString() string {
 	return s.String()
 }
@@ -1098,6 +1465,70 @@ func (s *PutObjectOutput) SetStorageClass(v string) *PutObjectOutput {
 	return s
 }
 
+// The requested content range is not valid.
+type RequestedRangeNotSatisfiableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestedRangeNotSatisfiableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestedRangeNotSatisfiableException) GoString() string {
+	return s.String()
+}
+
+func newErrorRequestedRangeNotSatisfiableException(v protocol.ResponseMetadata) error {
+	return &RequestedRangeNotSatisfiableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RequestedRangeNotSatisfiableException) Code() string {
+	return "RequestedRangeNotSatisfiableException"
+}
+
+// Message returns the exception's message.
+func (s *RequestedRangeNotSatisfiableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RequestedRangeNotSatisfiableException) OrigErr() error {
+	return nil
+}
+
+func (s *RequestedRangeNotSatisfiableException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RequestedRangeNotSatisfiableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RequestedRangeNotSatisfiableException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 const (
 	// ItemTypeObject is a ItemType enum value
 	ItemTypeObject = "OBJECT"
@@ -1106,7 +1537,38 @@ const (
 	ItemTypeFolder = "FOLDER"
 )
 
+// ItemType_Values returns all elements of the ItemType enum
+func ItemType_Values() []string {
+	return []string{
+		ItemTypeObject,
+		ItemTypeFolder,
+	}
+}
+
 const (
 	// StorageClassTemporal is a StorageClass enum value
 	StorageClassTemporal = "TEMPORAL"
 )
+
+// StorageClass_Values returns all elements of the StorageClass enum
+func StorageClass_Values() []string {
+	return []string{
+		StorageClassTemporal,
+	}
+}
+
+const (
+	// UploadAvailabilityStandard is a UploadAvailability enum value
+	UploadAvailabilityStandard = "STANDARD"
+
+	// UploadAvailabilityStreaming is a UploadAvailability enum value
+	UploadAvailabilityStreaming = "STREAMING"
+)
+
+// UploadAvailability_Values returns all elements of the UploadAvailability enum
+func UploadAvailability_Values() []string {
+	return []string{
+		UploadAvailabilityStandard,
+		UploadAvailabilityStreaming,
+	}
+}

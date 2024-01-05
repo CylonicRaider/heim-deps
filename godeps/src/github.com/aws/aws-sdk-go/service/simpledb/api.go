@@ -28,14 +28,13 @@ const opBatchDeleteAttributes = "BatchDeleteAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchDeleteAttributesRequest method.
+//	req, resp := client.BatchDeleteAttributesRequest(params)
 //
-//    // Example sending a request using the BatchDeleteAttributesRequest method.
-//    req, resp := client.BatchDeleteAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInput) (req *request.Request, output *BatchDeleteAttributesOutput) {
 	op := &request.Operation{
 		Name:       opBatchDeleteAttributes,
@@ -62,23 +61,25 @@ func (c *SimpleDB) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInpu
 // If you specify BatchDeleteAttributes without attributes or values, all the
 // attributes for the item are deleted.
 //
-//  BatchDeleteAttributes is an idempotent operation; running it multiple times
+// BatchDeleteAttributes is an idempotent operation; running it multiple times
 // on the same item or attribute doesn't result in an error.
 //
-//  The BatchDeleteAttributes operation succeeds or fails in its entirety. There
+// The BatchDeleteAttributes operation succeeds or fails in its entirety. There
 // are no partial deletes. You can execute multiple BatchDeleteAttributes operations
 // and other operations in parallel. However, large numbers of concurrent BatchDeleteAttributes
 // calls can result in Service Unavailable (503) responses.
 //
-//  This operation is vulnerable to exceeding the maximum URL size when making
+// This operation is vulnerable to exceeding the maximum URL size when making
 // a REST request using the HTTP GET method.
 //
-//  This operation does not support conditions using Expected.X.Name, Expected.X.Value,
+// This operation does not support conditions using Expected.X.Name, Expected.X.Value,
 // or Expected.X.Exists.
 //
-// The following limitations are enforced for this operation: 1 MB request size
+// The following limitations are enforced for this operation:
 //
-// 25 item limit per BatchDeleteAttributes operation
+//   - 1 MB request size
+//
+//   - 25 item limit per BatchDeleteAttributes operation
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -123,14 +124,13 @@ const opBatchPutAttributes = "BatchPutAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchPutAttributesRequest method.
+//	req, resp := client.BatchPutAttributesRequest(params)
 //
-//    // Example sending a request using the BatchPutAttributesRequest method.
-//    req, resp := client.BatchPutAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) (req *request.Request, output *BatchPutAttributesOutput) {
 	op := &request.Operation{
 		Name:       opBatchPutAttributes,
@@ -178,21 +178,39 @@ func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) (re
 // true, the final attributes of the item will be { 'a', '1' } and { 'b', '4'
 // }, replacing the previous values of the 'b' attribute with the new value.
 //
-// You cannot specify an empty string as an item or as an attribute name. The
-// BatchPutAttributes operation succeeds or fails in its entirety. There are
-// no partial puts. This operation is vulnerable to exceeding the maximum URL size when making
-// a REST request using the HTTP GET method. This operation does not support
-// conditions using Expected.X.Name, Expected.X.Value, or Expected.X.Exists.
+//	 You cannot specify an empty string as an item or as an attribute name.
+//	 The
+//	  BatchPutAttributes
+//	operation succeeds or fails in its entirety. There are no partial puts.
+//	This operation is vulnerable to exceeding the maximum URL size when making
+//	a REST request using the HTTP GET method. This operation does not support
+//	conditions using
+//	  Expected.X.Name
+//
+// ,
+//
+//	Expected.X.Value
+//
+// , or
+//
+//	Expected.X.Exists
+//
+// .
 // You can execute multiple BatchPutAttributes operations and other operations
 // in parallel. However, large numbers of concurrent BatchPutAttributes calls
 // can result in Service Unavailable (503) responses.
 //
-// The following limitations are enforced for this operation: 256 attribute
-// name-value pairs per item
-// 1 MB request size
-// 1 billion attributes per domain
-// 10 GB of total user data storage per domain
-// 25 item limit per BatchPutAttributes operation
+// The following limitations are enforced for this operation:
+//
+//   - 256 attribute name-value pairs per item
+//
+//   - 1 MB request size
+//
+//   - 1 billion attributes per domain
+//
+//   - 10 GB of total user data storage per domain
+//
+//   - 25 item limit per BatchPutAttributes operation
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -202,33 +220,33 @@ func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) (re
 // API operation BatchPutAttributes for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDuplicateItemName "DuplicateItemName"
-//   The item name was specified more than once.
 //
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
+//   - ErrCodeDuplicateItemName "DuplicateItemName"
+//     The item name was specified more than once.
 //
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
+//   - ErrCodeInvalidParameterValue "InvalidParameterValue"
+//     The value for a parameter is invalid.
 //
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
+//   - ErrCodeMissingParameter "MissingParameter"
+//     The request must contain the specified missing parameter.
 //
-//   * ErrCodeNumberItemAttributesExceeded "NumberItemAttributesExceeded"
-//   Too many attributes in this item.
+//   - ErrCodeNoSuchDomain "NoSuchDomain"
+//     The specified domain does not exist.
 //
-//   * ErrCodeNumberDomainAttributesExceeded "NumberDomainAttributesExceeded"
-//   Too many attributes in this domain.
+//   - ErrCodeNumberItemAttributesExceeded "NumberItemAttributesExceeded"
+//     Too many attributes in this item.
 //
-//   * ErrCodeNumberDomainBytesExceeded "NumberDomainBytesExceeded"
-//   Too many bytes in this domain.
+//   - ErrCodeNumberDomainAttributesExceeded "NumberDomainAttributesExceeded"
+//     Too many attributes in this domain.
 //
-//   * ErrCodeNumberSubmittedItemsExceeded "NumberSubmittedItemsExceeded"
-//   Too many items exist in a single call.
+//   - ErrCodeNumberDomainBytesExceeded "NumberDomainBytesExceeded"
+//     Too many bytes in this domain.
 //
-//   * ErrCodeNumberSubmittedAttributesExceeded "NumberSubmittedAttributesExceeded"
-//   Too many attributes exist in a single call.
+//   - ErrCodeNumberSubmittedItemsExceeded "NumberSubmittedItemsExceeded"
+//     Too many items exist in a single call.
 //
+//   - ErrCodeNumberSubmittedAttributesExceeded "NumberSubmittedAttributesExceeded"
+//     Too many attributes exist in a single call.
 func (c *SimpleDB) BatchPutAttributes(input *BatchPutAttributesInput) (*BatchPutAttributesOutput, error) {
 	req, out := c.BatchPutAttributesRequest(input)
 	return out, req.Send()
@@ -266,14 +284,13 @@ const opCreateDomain = "CreateDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDomainRequest method.
+//	req, resp := client.CreateDomainRequest(params)
 //
-//    // Example sending a request using the CreateDomainRequest method.
-//    req, resp := client.CreateDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) (req *request.Request, output *CreateDomainOutput) {
 	op := &request.Operation{
 		Name:       opCreateDomain,
@@ -297,10 +314,12 @@ func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) (req *request.R
 // unique among the domains associated with the Access Key ID provided in the
 // request. The CreateDomain operation may take 10 or more seconds to complete.
 //
-// CreateDomain is an idempotent operation; running it multiple times using
-// the same domain name will not result in an error response. The client can create up to 100 domains per account.
+//	CreateDomain is an idempotent operation; running it multiple times using
+//	the same domain name will not result in an error response.
 //
-// If the client requires additional domains, go to  http://aws.amazon.com/contact-us/simpledb-limit-request/
+// The client can create up to 100 domains per account.
+//
+// If the client requires additional domains, go to http://aws.amazon.com/contact-us/simpledb-limit-request/
 // (http://aws.amazon.com/contact-us/simpledb-limit-request/).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -311,15 +330,15 @@ func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) (req *request.R
 // API operation CreateDomain for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
 //
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
+//   - ErrCodeInvalidParameterValue "InvalidParameterValue"
+//     The value for a parameter is invalid.
 //
-//   * ErrCodeNumberDomainsExceeded "NumberDomainsExceeded"
-//   Too many domains exist per this account.
+//   - ErrCodeMissingParameter "MissingParameter"
+//     The request must contain the specified missing parameter.
 //
+//   - ErrCodeNumberDomainsExceeded "NumberDomainsExceeded"
+//     Too many domains exist per this account.
 func (c *SimpleDB) CreateDomain(input *CreateDomainInput) (*CreateDomainOutput, error) {
 	req, out := c.CreateDomainRequest(input)
 	return out, req.Send()
@@ -357,14 +376,13 @@ const opDeleteAttributes = "DeleteAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteAttributesRequest method.
+//	req, resp := client.DeleteAttributesRequest(params)
 //
-//    // Example sending a request using the DeleteAttributesRequest method.
-//    req, resp := client.DeleteAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) (req *request.Request, output *DeleteAttributesOutput) {
 	op := &request.Operation{
 		Name:       opDeleteAttributes,
@@ -387,8 +405,12 @@ func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) (req *r
 // Deletes one or more attributes associated with an item. If all attributes
 // of the item are deleted, the item is deleted.
 //
-// If DeleteAttributes is called without being passed any attributes or values
-// specified, all the attributes for the item are deleted. DeleteAttributes is an idempotent operation; running it multiple times on
+//	 If
+//	  DeleteAttributes
+//	is called without being passed any attributes or values specified, all the
+//	attributes for the item are deleted.
+//
+// DeleteAttributes is an idempotent operation; running it multiple times on
 // the same item or attribute does not result in an error response.
 //
 // Because Amazon SimpleDB makes multiple copies of item data and uses an eventual
@@ -404,18 +426,18 @@ func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) (req *r
 // API operation DeleteAttributes for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
 //
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
+//   - ErrCodeInvalidParameterValue "InvalidParameterValue"
+//     The value for a parameter is invalid.
 //
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
+//   - ErrCodeMissingParameter "MissingParameter"
+//     The request must contain the specified missing parameter.
 //
-//   * ErrCodeAttributeDoesNotExist "AttributeDoesNotExist"
-//   The specified attribute does not exist.
+//   - ErrCodeNoSuchDomain "NoSuchDomain"
+//     The specified domain does not exist.
 //
+//   - ErrCodeAttributeDoesNotExist "AttributeDoesNotExist"
+//     The specified attribute does not exist.
 func (c *SimpleDB) DeleteAttributes(input *DeleteAttributesInput) (*DeleteAttributesOutput, error) {
 	req, out := c.DeleteAttributesRequest(input)
 	return out, req.Send()
@@ -453,14 +475,13 @@ const opDeleteDomain = "DeleteDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDomainRequest method.
+//	req, resp := client.DeleteDomainRequest(params)
 //
-//    // Example sending a request using the DeleteDomainRequest method.
-//    req, resp := client.DeleteDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) (req *request.Request, output *DeleteDomainOutput) {
 	op := &request.Operation{
 		Name:       opDeleteDomain,
@@ -484,8 +505,10 @@ func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) (req *request.R
 // in the domain are deleted as well. The DeleteDomain operation might take
 // 10 or more seconds to complete.
 //
-// Running DeleteDomain on a domain that does not exist or running the function
-// multiple times using the same domain name will not result in an error response.
+//	 Running
+//	  DeleteDomain
+//	on a domain that does not exist or running the function multiple times using
+//	the same domain name will not result in an error response.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -495,9 +518,8 @@ func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) (req *request.R
 // API operation DeleteDomain for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
-//
+//   - ErrCodeMissingParameter "MissingParameter"
+//     The request must contain the specified missing parameter.
 func (c *SimpleDB) DeleteDomain(input *DeleteDomainInput) (*DeleteDomainOutput, error) {
 	req, out := c.DeleteDomainRequest(input)
 	return out, req.Send()
@@ -535,14 +557,13 @@ const opDomainMetadata = "DomainMetadata"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DomainMetadataRequest method.
+//	req, resp := client.DomainMetadataRequest(params)
 //
-//    // Example sending a request using the DomainMetadataRequest method.
-//    req, resp := client.DomainMetadataRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) DomainMetadataRequest(input *DomainMetadataInput) (req *request.Request, output *DomainMetadataOutput) {
 	op := &request.Operation{
 		Name:       opDomainMetadata,
@@ -573,12 +594,12 @@ func (c *SimpleDB) DomainMetadataRequest(input *DomainMetadataInput) (req *reque
 // API operation DomainMetadata for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
 //
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
+//   - ErrCodeMissingParameter "MissingParameter"
+//     The request must contain the specified missing parameter.
 //
+//   - ErrCodeNoSuchDomain "NoSuchDomain"
+//     The specified domain does not exist.
 func (c *SimpleDB) DomainMetadata(input *DomainMetadataInput) (*DomainMetadataOutput, error) {
 	req, out := c.DomainMetadataRequest(input)
 	return out, req.Send()
@@ -616,14 +637,13 @@ const opGetAttributes = "GetAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetAttributesRequest method.
+//	req, resp := client.GetAttributesRequest(params)
 //
-//    // Example sending a request using the GetAttributesRequest method.
-//    req, resp := client.GetAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) (req *request.Request, output *GetAttributesOutput) {
 	op := &request.Operation{
 		Name:       opGetAttributes,
@@ -650,8 +670,8 @@ func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) (req *request
 // an empty set is returned. The system does not return an error as it cannot
 // guarantee the item does not exist on other replicas.
 //
-// If GetAttributes is called without being passed any attribute names, all
-// the attributes for the item are returned.
+//	If GetAttributes is called without being passed any attribute names, all
+//	the attributes for the item are returned.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -661,15 +681,15 @@ func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) (req *request
 // API operation GetAttributes for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
 //
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
+//   - ErrCodeInvalidParameterValue "InvalidParameterValue"
+//     The value for a parameter is invalid.
 //
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
+//   - ErrCodeMissingParameter "MissingParameter"
+//     The request must contain the specified missing parameter.
 //
+//   - ErrCodeNoSuchDomain "NoSuchDomain"
+//     The specified domain does not exist.
 func (c *SimpleDB) GetAttributes(input *GetAttributesInput) (*GetAttributesOutput, error) {
 	req, out := c.GetAttributesRequest(input)
 	return out, req.Send()
@@ -707,14 +727,13 @@ const opListDomains = "ListDomains"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDomainsRequest method.
+//	req, resp := client.ListDomainsRequest(params)
 //
-//    // Example sending a request using the ListDomainsRequest method.
-//    req, resp := client.ListDomainsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) (req *request.Request, output *ListDomainsOutput) {
 	op := &request.Operation{
 		Name:       opListDomains,
@@ -754,12 +773,12 @@ func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) (req *request.Req
 // API operation ListDomains for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
 //
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified NextToken is not valid.
+//   - ErrCodeInvalidParameterValue "InvalidParameterValue"
+//     The value for a parameter is invalid.
 //
+//   - ErrCodeInvalidNextToken "InvalidNextToken"
+//     The specified NextToken is not valid.
 func (c *SimpleDB) ListDomains(input *ListDomainsInput) (*ListDomainsOutput, error) {
 	req, out := c.ListDomainsRequest(input)
 	return out, req.Send()
@@ -789,15 +808,14 @@ func (c *SimpleDB) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInp
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDomains operation.
-//    pageNum := 0
-//    err := client.ListDomainsPages(params,
-//        func(page *ListDomainsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDomains operation.
+//	pageNum := 0
+//	err := client.ListDomainsPages(params,
+//	    func(page *simpledb.ListDomainsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *SimpleDB) ListDomainsPages(input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool) error {
 	return c.ListDomainsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -824,10 +842,12 @@ func (c *SimpleDB) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomai
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDomainsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDomainsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -847,14 +867,13 @@ const opPutAttributes = "PutAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutAttributesRequest method.
+//	req, resp := client.PutAttributesRequest(params)
 //
-//    // Example sending a request using the PutAttributesRequest method.
-//    req, resp := client.PutAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) (req *request.Request, output *PutAttributesOutput) {
 	op := &request.Operation{
 		Name:       opPutAttributes,
@@ -893,18 +912,25 @@ func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) (req *request
 // the final attributes of the item are changed to { 'a', '1' } and { 'b', '4'
 // }, which replaces the previous values of the 'b' attribute with the new value.
 //
-// Using PutAttributes to replace attribute values that do not exist will not
-// result in an error response. You cannot specify an empty string as an attribute name.
+//	 Using
+//	  PutAttributes
+//	to replace attribute values that do not exist will not result in an error
+//	response.
+//
+// You cannot specify an empty string as an attribute name.
 //
 // Because Amazon SimpleDB makes multiple copies of client data and uses an
 // eventual consistency update model, an immediate GetAttributes or Select operation
 // (read) immediately after a PutAttributes or DeleteAttributes operation (write)
 // might not return the updated data.
 //
-// The following limitations are enforced for this operation: 256 total attribute
-// name-value pairs per item
-// One billion attributes per domain
-// 10 GB of total user data storage per domain
+// The following limitations are enforced for this operation:
+//
+//   - 256 total attribute name-value pairs per item
+//
+//   - One billion attributes per domain
+//
+//   - 10 GB of total user data storage per domain
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -914,27 +940,27 @@ func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) (req *request
 // API operation PutAttributes for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
 //
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
+//   - ErrCodeInvalidParameterValue "InvalidParameterValue"
+//     The value for a parameter is invalid.
 //
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
+//   - ErrCodeMissingParameter "MissingParameter"
+//     The request must contain the specified missing parameter.
 //
-//   * ErrCodeNumberDomainAttributesExceeded "NumberDomainAttributesExceeded"
-//   Too many attributes in this domain.
+//   - ErrCodeNoSuchDomain "NoSuchDomain"
+//     The specified domain does not exist.
 //
-//   * ErrCodeNumberDomainBytesExceeded "NumberDomainBytesExceeded"
-//   Too many bytes in this domain.
+//   - ErrCodeNumberDomainAttributesExceeded "NumberDomainAttributesExceeded"
+//     Too many attributes in this domain.
 //
-//   * ErrCodeNumberItemAttributesExceeded "NumberItemAttributesExceeded"
-//   Too many attributes in this item.
+//   - ErrCodeNumberDomainBytesExceeded "NumberDomainBytesExceeded"
+//     Too many bytes in this domain.
 //
-//   * ErrCodeAttributeDoesNotExist "AttributeDoesNotExist"
-//   The specified attribute does not exist.
+//   - ErrCodeNumberItemAttributesExceeded "NumberItemAttributesExceeded"
+//     Too many attributes in this item.
 //
+//   - ErrCodeAttributeDoesNotExist "AttributeDoesNotExist"
+//     The specified attribute does not exist.
 func (c *SimpleDB) PutAttributes(input *PutAttributesInput) (*PutAttributesOutput, error) {
 	req, out := c.PutAttributesRequest(input)
 	return out, req.Send()
@@ -972,14 +998,13 @@ const opSelect = "Select"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SelectRequest method.
+//	req, resp := client.SelectRequest(params)
 //
-//    // Example sending a request using the SelectRequest method.
-//    req, resp := client.SelectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SimpleDB) SelectRequest(input *SelectInput) (req *request.Request, output *SelectOutput) {
 	op := &request.Operation{
 		Name:       opSelect,
@@ -1024,34 +1049,34 @@ func (c *SimpleDB) SelectRequest(input *SelectInput) (req *request.Request, outp
 // API operation Select for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
 //
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified NextToken is not valid.
+//   - ErrCodeInvalidParameterValue "InvalidParameterValue"
+//     The value for a parameter is invalid.
 //
-//   * ErrCodeInvalidNumberPredicates "InvalidNumberPredicates"
-//   Too many predicates exist in the query expression.
+//   - ErrCodeInvalidNextToken "InvalidNextToken"
+//     The specified NextToken is not valid.
 //
-//   * ErrCodeInvalidNumberValueTests "InvalidNumberValueTests"
-//   Too many predicates exist in the query expression.
+//   - ErrCodeInvalidNumberPredicates "InvalidNumberPredicates"
+//     Too many predicates exist in the query expression.
 //
-//   * ErrCodeInvalidQueryExpression "InvalidQueryExpression"
-//   The specified query expression syntax is not valid.
+//   - ErrCodeInvalidNumberValueTests "InvalidNumberValueTests"
+//     Too many predicates exist in the query expression.
 //
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
+//   - ErrCodeInvalidQueryExpression "InvalidQueryExpression"
+//     The specified query expression syntax is not valid.
 //
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
+//   - ErrCodeMissingParameter "MissingParameter"
+//     The request must contain the specified missing parameter.
 //
-//   * ErrCodeRequestTimeout "RequestTimeout"
-//   A timeout occurred when attempting to query the specified domain with specified
-//   query expression.
+//   - ErrCodeNoSuchDomain "NoSuchDomain"
+//     The specified domain does not exist.
 //
-//   * ErrCodeTooManyRequestedAttributes "TooManyRequestedAttributes"
-//   Too many attributes requested.
+//   - ErrCodeRequestTimeout "RequestTimeout"
+//     A timeout occurred when attempting to query the specified domain with specified
+//     query expression.
 //
+//   - ErrCodeTooManyRequestedAttributes "TooManyRequestedAttributes"
+//     Too many attributes requested.
 func (c *SimpleDB) Select(input *SelectInput) (*SelectOutput, error) {
 	req, out := c.SelectRequest(input)
 	return out, req.Send()
@@ -1081,15 +1106,14 @@ func (c *SimpleDB) SelectWithContext(ctx aws.Context, input *SelectInput, opts .
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a Select operation.
-//    pageNum := 0
-//    err := client.SelectPages(params,
-//        func(page *SelectOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a Select operation.
+//	pageNum := 0
+//	err := client.SelectPages(params,
+//	    func(page *simpledb.SelectOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *SimpleDB) SelectPages(input *SelectInput, fn func(*SelectOutput, bool) bool) error {
 	return c.SelectPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1116,10 +1140,12 @@ func (c *SimpleDB) SelectPagesWithContext(ctx aws.Context, input *SelectInput, f
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SelectOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*SelectOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1141,12 +1167,20 @@ type Attribute struct {
 	Value *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Attribute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Attribute) GoString() string {
 	return s.String()
 }
@@ -1189,12 +1223,20 @@ type BatchDeleteAttributesInput struct {
 	Items []*DeletableItem `locationNameList:"Item" type:"list" flattened:"true" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteAttributesInput) GoString() string {
 	return s.String()
 }
@@ -1241,12 +1283,20 @@ type BatchDeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -1265,12 +1315,20 @@ type BatchPutAttributesInput struct {
 	Items []*ReplaceableItem `locationNameList:"Item" type:"list" flattened:"true" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchPutAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchPutAttributesInput) GoString() string {
 	return s.String()
 }
@@ -1317,12 +1375,20 @@ type BatchPutAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchPutAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchPutAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -1337,12 +1403,20 @@ type CreateDomainInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDomainInput) GoString() string {
 	return s.String()
 }
@@ -1370,12 +1444,20 @@ type CreateDomainOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDomainOutput) GoString() string {
 	return s.String()
 }
@@ -1392,12 +1474,20 @@ type DeletableAttribute struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletableAttribute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletableAttribute) GoString() string {
 	return s.String()
 }
@@ -1436,12 +1526,20 @@ type DeletableItem struct {
 	Name *string `locationName:"ItemName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletableItem) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletableItem) GoString() string {
 	return s.String()
 }
@@ -1505,12 +1603,20 @@ type DeleteAttributesInput struct {
 	ItemName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAttributesInput) GoString() string {
 	return s.String()
 }
@@ -1569,12 +1675,20 @@ type DeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -1588,12 +1702,20 @@ type DeleteDomainInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDomainInput) GoString() string {
 	return s.String()
 }
@@ -1621,12 +1743,20 @@ type DeleteDomainOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDomainOutput) GoString() string {
 	return s.String()
 }
@@ -1640,12 +1770,20 @@ type DomainMetadataInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainMetadataInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainMetadataInput) GoString() string {
 	return s.String()
 }
@@ -1694,12 +1832,20 @@ type DomainMetadataOutput struct {
 	Timestamp *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainMetadataOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainMetadataOutput) GoString() string {
 	return s.String()
 }
@@ -1753,7 +1899,11 @@ type GetAttributesInput struct {
 	AttributeNames []*string `locationNameList:"AttributeName" type:"list" flattened:"true"`
 
 	// Determines whether or not strong consistency should be enforced when data
-	// is read from SimpleDB. If true
+	// is read from SimpleDB. If
+	//    true
+	// , any data previously written to SimpleDB will be returned. Otherwise, results
+	// will be consistent eventually, and the client may not see data that was written
+	// immediately before your read.
 	ConsistentRead *bool `type:"boolean"`
 
 	// The name of the domain in which to perform the operation.
@@ -1767,12 +1917,20 @@ type GetAttributesInput struct {
 	ItemName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAttributesInput) GoString() string {
 	return s.String()
 }
@@ -1824,12 +1982,20 @@ type GetAttributesOutput struct {
 	Attributes []*Attribute `locationNameList:"Attribute" type:"list" flattened:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -1856,12 +2022,20 @@ type Item struct {
 	Name *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Item) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Item) GoString() string {
 	return s.String()
 }
@@ -1896,12 +2070,20 @@ type ListDomainsInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsInput) GoString() string {
 	return s.String()
 }
@@ -1925,16 +2107,25 @@ type ListDomainsOutput struct {
 	DomainNames []*string `locationNameList:"DomainName" type:"list" flattened:"true"`
 
 	// An opaque token indicating that there are more domains than the specified
-	// MaxNumberOfDomains
+	//    MaxNumberOfDomains
+	//  still available.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsOutput) GoString() string {
 	return s.String()
 }
@@ -1975,12 +2166,20 @@ type PutAttributesInput struct {
 	ItemName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutAttributesInput) GoString() string {
 	return s.String()
 }
@@ -2042,12 +2241,20 @@ type PutAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -2061,7 +2268,9 @@ type ReplaceableAttribute struct {
 	Name *string `type:"string" required:"true"`
 
 	// A flag specifying whether or not to replace the attribute/value pair or to
-	// add a new attribute/value pair. The default setting is false
+	// add a new attribute/value pair. The default setting is
+	//    false
+	// .
 	Replace *bool `type:"boolean"`
 
 	// The value of the replaceable attribute.
@@ -2070,12 +2279,20 @@ type ReplaceableAttribute struct {
 	Value *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReplaceableAttribute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReplaceableAttribute) GoString() string {
 	return s.String()
 }
@@ -2128,12 +2345,20 @@ type ReplaceableItem struct {
 	Name *string `locationName:"ItemName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReplaceableItem) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReplaceableItem) GoString() string {
 	return s.String()
 }
@@ -2180,10 +2405,16 @@ type SelectInput struct {
 	_ struct{} `type:"structure"`
 
 	// Determines whether or not strong consistency should be enforced when data
-	// is read from SimpleDB. If true
+	// is read from SimpleDB. If
+	//    true
+	// , any data previously written to SimpleDB will be returned. Otherwise, results
+	// will be consistent eventually, and the client may not see data that was written
+	// immediately before your read.
 	ConsistentRead *bool `type:"boolean"`
 
-	// A string informing Amazon SimpleDB where to start the next list of ItemNames
+	// A string informing Amazon SimpleDB where to start the next list of
+	//    ItemNames
+	// .
 	NextToken *string `type:"string"`
 
 	// The expression used to query the domain.
@@ -2192,12 +2423,20 @@ type SelectInput struct {
 	SelectExpression *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SelectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SelectInput) GoString() string {
 	return s.String()
 }
@@ -2239,16 +2478,27 @@ type SelectOutput struct {
 	// A list of items that match the select expression.
 	Items []*Item `locationNameList:"Item" type:"list" flattened:"true"`
 
-	// An opaque token indicating that more items than MaxNumberOfItems
+	// An opaque token indicating that more items than
+	//    MaxNumberOfItems
+	//  were matched, the response size exceeded 1 megabyte, or the execution time
+	//  exceeded 5 seconds.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SelectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SelectOutput) GoString() string {
 	return s.String()
 }
@@ -2287,12 +2537,20 @@ type UpdateCondition struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateCondition) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateCondition) GoString() string {
 	return s.String()
 }

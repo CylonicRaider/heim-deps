@@ -29,14 +29,13 @@ const opCreateHttpNamespace = "CreateHttpNamespace"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateHttpNamespaceRequest method.
+//	req, resp := client.CreateHttpNamespaceRequest(params)
 //
-//    // Example sending a request using the CreateHttpNamespaceRequest method.
-//    req, resp := client.CreateHttpNamespaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateHttpNamespace
 func (c *ServiceDiscovery) CreateHttpNamespaceRequest(input *CreateHttpNamespaceInput) (req *request.Request, output *CreateHttpNamespaceOutput) {
@@ -57,13 +56,13 @@ func (c *ServiceDiscovery) CreateHttpNamespaceRequest(input *CreateHttpNamespace
 
 // CreateHttpNamespace API operation for AWS Cloud Map.
 //
-// Creates an HTTP namespace. Service instances that you register using an HTTP
-// namespace can be discovered using a DiscoverInstances request but can't be
-// discovered using DNS.
+// Creates an HTTP namespace. Service instances registered using an HTTP namespace
+// can be discovered using a DiscoverInstances request but can't be discovered
+// using DNS.
 //
-// For the current limit on the number of namespaces that you can create using
-// the same AWS account, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the AWS Cloud Map Developer Guide.
+// For the current quota on the number of namespaces that you can create using
+// the same Amazon Web Services account, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the Cloud Map Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -72,21 +71,26 @@ func (c *ServiceDiscovery) CreateHttpNamespaceRequest(input *CreateHttpNamespace
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation CreateHttpNamespace for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
 //
-//   * ErrCodeNamespaceAlreadyExists "NamespaceAlreadyExists"
-//   The namespace that you're trying to create already exists.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
-//   * ErrCodeResourceLimitExceeded "ResourceLimitExceeded"
-//   The resource can't be created because you've reached the limit on the number
-//   of resources.
+//   - NamespaceAlreadyExists
+//     The namespace that you're trying to create already exists.
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The operation is already in progress.
+//   - ResourceLimitExceeded
+//     The resource can't be created because you've reached the quota on the number
+//     of resources.
+//
+//   - DuplicateRequest
+//     The operation is already in progress.
+//
+//   - TooManyTagsException
+//     The list of tags on the resource is over the quota. The maximum number of
+//     tags that can be applied to a resource is 50.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateHttpNamespace
 func (c *ServiceDiscovery) CreateHttpNamespace(input *CreateHttpNamespaceInput) (*CreateHttpNamespaceOutput, error) {
@@ -126,14 +130,13 @@ const opCreatePrivateDnsNamespace = "CreatePrivateDnsNamespace"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreatePrivateDnsNamespaceRequest method.
+//	req, resp := client.CreatePrivateDnsNamespaceRequest(params)
 //
-//    // Example sending a request using the CreatePrivateDnsNamespaceRequest method.
-//    req, resp := client.CreatePrivateDnsNamespaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePrivateDnsNamespace
 func (c *ServiceDiscovery) CreatePrivateDnsNamespaceRequest(input *CreatePrivateDnsNamespaceInput) (req *request.Request, output *CreatePrivateDnsNamespaceOutput) {
@@ -154,13 +157,15 @@ func (c *ServiceDiscovery) CreatePrivateDnsNamespaceRequest(input *CreatePrivate
 
 // CreatePrivateDnsNamespace API operation for AWS Cloud Map.
 //
-// Creates a private namespace based on DNS, which will be visible only inside
-// a specified Amazon VPC. The namespace defines your service naming scheme.
-// For example, if you name your namespace example.com and name your service
-// backend, the resulting DNS name for the service will be backend.example.com.
-// For the current limit on the number of namespaces that you can create using
-// the same AWS account, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the AWS Cloud Map Developer Guide.
+// Creates a private namespace based on DNS, which is visible only inside a
+// specified Amazon VPC. The namespace defines your service naming scheme. For
+// example, if you name your namespace example.com and name your service backend,
+// the resulting DNS name for the service is backend.example.com. Service instances
+// that are registered using a private DNS namespace can be discovered using
+// either a DiscoverInstances request or using DNS. For the current quota on
+// the number of namespaces that you can create using the same Amazon Web Services
+// account, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the Cloud Map Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -169,21 +174,26 @@ func (c *ServiceDiscovery) CreatePrivateDnsNamespaceRequest(input *CreatePrivate
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation CreatePrivateDnsNamespace for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
 //
-//   * ErrCodeNamespaceAlreadyExists "NamespaceAlreadyExists"
-//   The namespace that you're trying to create already exists.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
-//   * ErrCodeResourceLimitExceeded "ResourceLimitExceeded"
-//   The resource can't be created because you've reached the limit on the number
-//   of resources.
+//   - NamespaceAlreadyExists
+//     The namespace that you're trying to create already exists.
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The operation is already in progress.
+//   - ResourceLimitExceeded
+//     The resource can't be created because you've reached the quota on the number
+//     of resources.
+//
+//   - DuplicateRequest
+//     The operation is already in progress.
+//
+//   - TooManyTagsException
+//     The list of tags on the resource is over the quota. The maximum number of
+//     tags that can be applied to a resource is 50.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePrivateDnsNamespace
 func (c *ServiceDiscovery) CreatePrivateDnsNamespace(input *CreatePrivateDnsNamespaceInput) (*CreatePrivateDnsNamespaceOutput, error) {
@@ -223,14 +233,13 @@ const opCreatePublicDnsNamespace = "CreatePublicDnsNamespace"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreatePublicDnsNamespaceRequest method.
+//	req, resp := client.CreatePublicDnsNamespaceRequest(params)
 //
-//    // Example sending a request using the CreatePublicDnsNamespaceRequest method.
-//    req, resp := client.CreatePublicDnsNamespaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePublicDnsNamespace
 func (c *ServiceDiscovery) CreatePublicDnsNamespaceRequest(input *CreatePublicDnsNamespaceInput) (req *request.Request, output *CreatePublicDnsNamespaceOutput) {
@@ -251,13 +260,18 @@ func (c *ServiceDiscovery) CreatePublicDnsNamespaceRequest(input *CreatePublicDn
 
 // CreatePublicDnsNamespace API operation for AWS Cloud Map.
 //
-// Creates a public namespace based on DNS, which will be visible on the internet.
+// Creates a public namespace based on DNS, which is visible on the internet.
 // The namespace defines your service naming scheme. For example, if you name
 // your namespace example.com and name your service backend, the resulting DNS
-// name for the service will be backend.example.com. For the current limit on
-// the number of namespaces that you can create using the same AWS account,
-// see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the AWS Cloud Map Developer Guide.
+// name for the service is backend.example.com. You can discover instances that
+// were registered with a public DNS namespace by using either a DiscoverInstances
+// request or using DNS. For the current quota on the number of namespaces that
+// you can create using the same Amazon Web Services account, see Cloud Map
+// quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the Cloud Map Developer Guide.
+//
+// The CreatePublicDnsNamespace API operation is not supported in the Amazon
+// Web Services GovCloud (US) Regions.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -266,21 +280,26 @@ func (c *ServiceDiscovery) CreatePublicDnsNamespaceRequest(input *CreatePublicDn
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation CreatePublicDnsNamespace for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
 //
-//   * ErrCodeNamespaceAlreadyExists "NamespaceAlreadyExists"
-//   The namespace that you're trying to create already exists.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
-//   * ErrCodeResourceLimitExceeded "ResourceLimitExceeded"
-//   The resource can't be created because you've reached the limit on the number
-//   of resources.
+//   - NamespaceAlreadyExists
+//     The namespace that you're trying to create already exists.
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The operation is already in progress.
+//   - ResourceLimitExceeded
+//     The resource can't be created because you've reached the quota on the number
+//     of resources.
+//
+//   - DuplicateRequest
+//     The operation is already in progress.
+//
+//   - TooManyTagsException
+//     The list of tags on the resource is over the quota. The maximum number of
+//     tags that can be applied to a resource is 50.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePublicDnsNamespace
 func (c *ServiceDiscovery) CreatePublicDnsNamespace(input *CreatePublicDnsNamespaceInput) (*CreatePublicDnsNamespaceOutput, error) {
@@ -320,14 +339,13 @@ const opCreateService = "CreateService"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateServiceRequest method.
+//	req, resp := client.CreateServiceRequest(params)
 //
-//    // Example sending a request using the CreateServiceRequest method.
-//    req, resp := client.CreateServiceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateService
 func (c *ServiceDiscovery) CreateServiceRequest(input *CreateServiceInput) (req *request.Request, output *CreateServiceOutput) {
@@ -348,30 +366,21 @@ func (c *ServiceDiscovery) CreateServiceRequest(input *CreateServiceInput) (req 
 
 // CreateService API operation for AWS Cloud Map.
 //
-// Creates a service, which defines the configuration for the following entities:
+// Creates a service. This action defines the configuration for the following
+// entities:
 //
-//    * For public and private DNS namespaces, one of the following combinations
-//    of DNS records in Amazon Route 53:
+//   - For public and private DNS namespaces, one of the following combinations
+//     of DNS records in Amazon Route 53: A AAAA A and AAAA SRV CNAME
 //
-// A
+//   - Optionally, a health check
 //
-// AAAA
+// After you create the service, you can submit a RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+// request, and Cloud Map uses the values in the configuration to create the
+// specified entities.
 //
-// A and AAAA
-//
-// SRV
-//
-// CNAME
-//
-//    * Optionally, a health check
-//
-// After you create the service, you can submit a RegisterInstance request,
-// and AWS Cloud Map uses the values in the configuration to create the specified
-// entities.
-//
-// For the current limit on the number of instances that you can register using
-// the same namespace and using the same service, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the AWS Cloud Map Developer Guide.
+// For the current quota on the number of instances that you can register using
+// the same namespace and using the same service, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the Cloud Map Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -380,22 +389,27 @@ func (c *ServiceDiscovery) CreateServiceRequest(input *CreateServiceInput) (req 
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation CreateService for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
 //
-//   * ErrCodeResourceLimitExceeded "ResourceLimitExceeded"
-//   The resource can't be created because you've reached the limit on the number
-//   of resources.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
-//   * ErrCodeNamespaceNotFound "NamespaceNotFound"
-//   No namespace exists with the specified ID.
+//   - ResourceLimitExceeded
+//     The resource can't be created because you've reached the quota on the number
+//     of resources.
 //
-//   * ErrCodeServiceAlreadyExists "ServiceAlreadyExists"
-//   The service can't be created because a service with the same name already
-//   exists.
+//   - NamespaceNotFound
+//     No namespace exists with the specified ID.
+//
+//   - ServiceAlreadyExists
+//     The service can't be created because a service with the same name already
+//     exists.
+//
+//   - TooManyTagsException
+//     The list of tags on the resource is over the quota. The maximum number of
+//     tags that can be applied to a resource is 50.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateService
 func (c *ServiceDiscovery) CreateService(input *CreateServiceInput) (*CreateServiceOutput, error) {
@@ -435,14 +449,13 @@ const opDeleteNamespace = "DeleteNamespace"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteNamespaceRequest method.
+//	req, resp := client.DeleteNamespaceRequest(params)
 //
-//    // Example sending a request using the DeleteNamespaceRequest method.
-//    req, resp := client.DeleteNamespaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteNamespace
 func (c *ServiceDiscovery) DeleteNamespaceRequest(input *DeleteNamespaceInput) (req *request.Request, output *DeleteNamespaceOutput) {
@@ -473,21 +486,22 @@ func (c *ServiceDiscovery) DeleteNamespaceRequest(input *DeleteNamespaceInput) (
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation DeleteNamespace for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
 //
-//   * ErrCodeNamespaceNotFound "NamespaceNotFound"
-//   No namespace exists with the specified ID.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
-//   * ErrCodeResourceInUse "ResourceInUse"
-//   The specified resource can't be deleted because it contains other resources.
-//   For example, you can't delete a service that contains any instances.
+//   - NamespaceNotFound
+//     No namespace exists with the specified ID.
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The operation is already in progress.
+//   - ResourceInUse
+//     The specified resource can't be deleted because it contains other resources.
+//     For example, you can't delete a service that contains any instances.
+//
+//   - DuplicateRequest
+//     The operation is already in progress.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteNamespace
 func (c *ServiceDiscovery) DeleteNamespace(input *DeleteNamespaceInput) (*DeleteNamespaceOutput, error) {
@@ -527,14 +541,13 @@ const opDeleteService = "DeleteService"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteServiceRequest method.
+//	req, resp := client.DeleteServiceRequest(params)
 //
-//    // Example sending a request using the DeleteServiceRequest method.
-//    req, resp := client.DeleteServiceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteService
 func (c *ServiceDiscovery) DeleteServiceRequest(input *DeleteServiceInput) (req *request.Request, output *DeleteServiceOutput) {
@@ -566,18 +579,19 @@ func (c *ServiceDiscovery) DeleteServiceRequest(input *DeleteServiceInput) (req 
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation DeleteService for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
 //
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
-//   * ErrCodeResourceInUse "ResourceInUse"
-//   The specified resource can't be deleted because it contains other resources.
-//   For example, you can't delete a service that contains any instances.
+//   - ServiceNotFound
+//     No service exists with the specified ID.
+//
+//   - ResourceInUse
+//     The specified resource can't be deleted because it contains other resources.
+//     For example, you can't delete a service that contains any instances.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteService
 func (c *ServiceDiscovery) DeleteService(input *DeleteServiceInput) (*DeleteServiceOutput, error) {
@@ -617,14 +631,13 @@ const opDeregisterInstance = "DeregisterInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeregisterInstanceRequest method.
+//	req, resp := client.DeregisterInstanceRequest(params)
 //
-//    // Example sending a request using the DeregisterInstanceRequest method.
-//    req, resp := client.DeregisterInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeregisterInstance
 func (c *ServiceDiscovery) DeregisterInstanceRequest(input *DeregisterInstanceInput) (req *request.Request, output *DeregisterInstanceOutput) {
@@ -645,8 +658,8 @@ func (c *ServiceDiscovery) DeregisterInstanceRequest(input *DeregisterInstanceIn
 
 // DeregisterInstance API operation for AWS Cloud Map.
 //
-// Deletes the Amazon Route 53 DNS records and health check, if any, that AWS
-// Cloud Map created for the specified instance.
+// Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud
+// Map created for the specified instance.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -655,25 +668,26 @@ func (c *ServiceDiscovery) DeregisterInstanceRequest(input *DeregisterInstanceIn
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation DeregisterInstance for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The operation is already in progress.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+//   - DuplicateRequest
+//     The operation is already in progress.
 //
-//   * ErrCodeInstanceNotFound "InstanceNotFound"
-//   No instance exists with the specified ID, or the instance was recently registered,
-//   and information about the instance hasn't propagated yet.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
-//   * ErrCodeResourceInUse "ResourceInUse"
-//   The specified resource can't be deleted because it contains other resources.
-//   For example, you can't delete a service that contains any instances.
+//   - InstanceNotFound
+//     No instance exists with the specified ID, or the instance was recently registered,
+//     and information about the instance hasn't propagated yet.
 //
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+//   - ResourceInUse
+//     The specified resource can't be deleted because it contains other resources.
+//     For example, you can't delete a service that contains any instances.
+//
+//   - ServiceNotFound
+//     No service exists with the specified ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeregisterInstance
 func (c *ServiceDiscovery) DeregisterInstance(input *DeregisterInstanceInput) (*DeregisterInstanceOutput, error) {
@@ -713,14 +727,13 @@ const opDiscoverInstances = "DiscoverInstances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DiscoverInstancesRequest method.
+//	req, resp := client.DiscoverInstancesRequest(params)
 //
-//    // Example sending a request using the DiscoverInstancesRequest method.
-//    req, resp := client.DiscoverInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstances
 func (c *ServiceDiscovery) DiscoverInstancesRequest(input *DiscoverInstancesInput) (req *request.Request, output *DiscoverInstancesOutput) {
@@ -743,7 +756,11 @@ func (c *ServiceDiscovery) DiscoverInstancesRequest(input *DiscoverInstancesInpu
 
 // DiscoverInstances API operation for AWS Cloud Map.
 //
-// Discovers registered instances for a specified namespace and service.
+// Discovers registered instances for a specified namespace and service. You
+// can use DiscoverInstances to discover instances for any type of namespace.
+// DiscoverInstances returns a randomized list of instances allowing customers
+// to distribute traffic evenly across instances. For public and private DNS
+// namespaces, you can also use DNS queries to discover instances.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -752,17 +769,24 @@ func (c *ServiceDiscovery) DiscoverInstancesRequest(input *DiscoverInstancesInpu
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation DiscoverInstances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+// Returned Error Types:
 //
-//   * ErrCodeNamespaceNotFound "NamespaceNotFound"
-//   No namespace exists with the specified ID.
+//   - ServiceNotFound
+//     No service exists with the specified ID.
 //
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+//   - NamespaceNotFound
+//     No namespace exists with the specified ID.
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - RequestLimitExceeded
+//     The operation can't be completed because you've reached the quota for the
+//     number of requests. For more information, see Cloud Map API request throttling
+//     quota (https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html) in
+//     the Cloud Map Developer Guide.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstances
 func (c *ServiceDiscovery) DiscoverInstances(input *DiscoverInstancesInput) (*DiscoverInstancesOutput, error) {
@@ -786,6 +810,101 @@ func (c *ServiceDiscovery) DiscoverInstancesWithContext(ctx aws.Context, input *
 	return out, req.Send()
 }
 
+const opDiscoverInstancesRevision = "DiscoverInstancesRevision"
+
+// DiscoverInstancesRevisionRequest generates a "aws/request.Request" representing the
+// client's request for the DiscoverInstancesRevision operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DiscoverInstancesRevision for more information on using the DiscoverInstancesRevision
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DiscoverInstancesRevisionRequest method.
+//	req, resp := client.DiscoverInstancesRevisionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesRevision
+func (c *ServiceDiscovery) DiscoverInstancesRevisionRequest(input *DiscoverInstancesRevisionInput) (req *request.Request, output *DiscoverInstancesRevisionOutput) {
+	op := &request.Operation{
+		Name:       opDiscoverInstancesRevision,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DiscoverInstancesRevisionInput{}
+	}
+
+	output = &DiscoverInstancesRevisionOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
+	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+	return
+}
+
+// DiscoverInstancesRevision API operation for AWS Cloud Map.
+//
+// Discovers the increasing revision associated with an instance.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Cloud Map's
+// API operation DiscoverInstancesRevision for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ServiceNotFound
+//     No service exists with the specified ID.
+//
+//   - NamespaceNotFound
+//     No namespace exists with the specified ID.
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - RequestLimitExceeded
+//     The operation can't be completed because you've reached the quota for the
+//     number of requests. For more information, see Cloud Map API request throttling
+//     quota (https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html) in
+//     the Cloud Map Developer Guide.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesRevision
+func (c *ServiceDiscovery) DiscoverInstancesRevision(input *DiscoverInstancesRevisionInput) (*DiscoverInstancesRevisionOutput, error) {
+	req, out := c.DiscoverInstancesRevisionRequest(input)
+	return out, req.Send()
+}
+
+// DiscoverInstancesRevisionWithContext is the same as DiscoverInstancesRevision with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DiscoverInstancesRevision for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ServiceDiscovery) DiscoverInstancesRevisionWithContext(ctx aws.Context, input *DiscoverInstancesRevisionInput, opts ...request.Option) (*DiscoverInstancesRevisionOutput, error) {
+	req, out := c.DiscoverInstancesRevisionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opGetInstance = "GetInstance"
 
 // GetInstanceRequest generates a "aws/request.Request" representing the
@@ -802,14 +921,13 @@ const opGetInstance = "GetInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetInstanceRequest method.
+//	req, resp := client.GetInstanceRequest(params)
 //
-//    // Example sending a request using the GetInstanceRequest method.
-//    req, resp := client.GetInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstance
 func (c *ServiceDiscovery) GetInstanceRequest(input *GetInstanceInput) (req *request.Request, output *GetInstanceOutput) {
@@ -839,18 +957,19 @@ func (c *ServiceDiscovery) GetInstanceRequest(input *GetInstanceInput) (req *req
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation GetInstance for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInstanceNotFound "InstanceNotFound"
-//   No instance exists with the specified ID, or the instance was recently registered,
-//   and information about the instance hasn't propagated yet.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+//   - InstanceNotFound
+//     No instance exists with the specified ID, or the instance was recently registered,
+//     and information about the instance hasn't propagated yet.
 //
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - ServiceNotFound
+//     No service exists with the specified ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstance
 func (c *ServiceDiscovery) GetInstance(input *GetInstanceInput) (*GetInstanceOutput, error) {
@@ -890,14 +1009,13 @@ const opGetInstancesHealthStatus = "GetInstancesHealthStatus"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetInstancesHealthStatusRequest method.
+//	req, resp := client.GetInstancesHealthStatusRequest(params)
 //
-//    // Example sending a request using the GetInstancesHealthStatusRequest method.
-//    req, resp := client.GetInstancesHealthStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstancesHealthStatus
 func (c *ServiceDiscovery) GetInstancesHealthStatusRequest(input *GetInstancesHealthStatusInput) (req *request.Request, output *GetInstancesHealthStatusOutput) {
@@ -927,7 +1045,7 @@ func (c *ServiceDiscovery) GetInstancesHealthStatusRequest(input *GetInstancesHe
 // Gets the current health status (Healthy, Unhealthy, or Unknown) of one or
 // more instances that are associated with a specified service.
 //
-// There is a brief delay between when you register an instance and when the
+// There's a brief delay between when you register an instance and when the
 // health status for the instance is available.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -937,18 +1055,19 @@ func (c *ServiceDiscovery) GetInstancesHealthStatusRequest(input *GetInstancesHe
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation GetInstancesHealthStatus for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInstanceNotFound "InstanceNotFound"
-//   No instance exists with the specified ID, or the instance was recently registered,
-//   and information about the instance hasn't propagated yet.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+//   - InstanceNotFound
+//     No instance exists with the specified ID, or the instance was recently registered,
+//     and information about the instance hasn't propagated yet.
 //
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - ServiceNotFound
+//     No service exists with the specified ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstancesHealthStatus
 func (c *ServiceDiscovery) GetInstancesHealthStatus(input *GetInstancesHealthStatusInput) (*GetInstancesHealthStatusOutput, error) {
@@ -980,15 +1099,14 @@ func (c *ServiceDiscovery) GetInstancesHealthStatusWithContext(ctx aws.Context, 
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a GetInstancesHealthStatus operation.
-//    pageNum := 0
-//    err := client.GetInstancesHealthStatusPages(params,
-//        func(page *GetInstancesHealthStatusOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a GetInstancesHealthStatus operation.
+//	pageNum := 0
+//	err := client.GetInstancesHealthStatusPages(params,
+//	    func(page *servicediscovery.GetInstancesHealthStatusOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ServiceDiscovery) GetInstancesHealthStatusPages(input *GetInstancesHealthStatusInput, fn func(*GetInstancesHealthStatusOutput, bool) bool) error {
 	return c.GetInstancesHealthStatusPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1015,10 +1133,12 @@ func (c *ServiceDiscovery) GetInstancesHealthStatusPagesWithContext(ctx aws.Cont
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetInstancesHealthStatusOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*GetInstancesHealthStatusOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1038,14 +1158,13 @@ const opGetNamespace = "GetNamespace"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetNamespaceRequest method.
+//	req, resp := client.GetNamespaceRequest(params)
 //
-//    // Example sending a request using the GetNamespaceRequest method.
-//    req, resp := client.GetNamespaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetNamespace
 func (c *ServiceDiscovery) GetNamespaceRequest(input *GetNamespaceInput) (req *request.Request, output *GetNamespaceOutput) {
@@ -1075,14 +1194,15 @@ func (c *ServiceDiscovery) GetNamespaceRequest(input *GetNamespaceInput) (req *r
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation GetNamespace for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
 //
-//   * ErrCodeNamespaceNotFound "NamespaceNotFound"
-//   No namespace exists with the specified ID.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - NamespaceNotFound
+//     No namespace exists with the specified ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetNamespace
 func (c *ServiceDiscovery) GetNamespace(input *GetNamespaceInput) (*GetNamespaceOutput, error) {
@@ -1122,14 +1242,13 @@ const opGetOperation = "GetOperation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetOperationRequest method.
+//	req, resp := client.GetOperationRequest(params)
 //
-//    // Example sending a request using the GetOperationRequest method.
-//    req, resp := client.GetOperationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetOperation
 func (c *ServiceDiscovery) GetOperationRequest(input *GetOperationInput) (req *request.Request, output *GetOperationOutput) {
@@ -1151,9 +1270,10 @@ func (c *ServiceDiscovery) GetOperationRequest(input *GetOperationInput) (req *r
 // GetOperation API operation for AWS Cloud Map.
 //
 // Gets information about any operation that returns an operation ID in the
-// response, such as a CreateService request.
+// response, such as a CreateHttpNamespace request.
 //
-// To get a list of operations that match specified criteria, see ListOperations.
+// To get a list of operations that match specified criteria, see ListOperations
+// (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1162,14 +1282,15 @@ func (c *ServiceDiscovery) GetOperationRequest(input *GetOperationInput) (req *r
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation GetOperation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotFound "OperationNotFound"
-//   No operation exists with the specified ID.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - OperationNotFound
+//     No operation exists with the specified ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetOperation
 func (c *ServiceDiscovery) GetOperation(input *GetOperationInput) (*GetOperationOutput, error) {
@@ -1209,14 +1330,13 @@ const opGetService = "GetService"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetServiceRequest method.
+//	req, resp := client.GetServiceRequest(params)
 //
-//    // Example sending a request using the GetServiceRequest method.
-//    req, resp := client.GetServiceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetService
 func (c *ServiceDiscovery) GetServiceRequest(input *GetServiceInput) (req *request.Request, output *GetServiceOutput) {
@@ -1246,14 +1366,15 @@ func (c *ServiceDiscovery) GetServiceRequest(input *GetServiceInput) (req *reque
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation GetService for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
 //
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - ServiceNotFound
+//     No service exists with the specified ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetService
 func (c *ServiceDiscovery) GetService(input *GetServiceInput) (*GetServiceOutput, error) {
@@ -1293,14 +1414,13 @@ const opListInstances = "ListInstances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListInstancesRequest method.
+//	req, resp := client.ListInstancesRequest(params)
 //
-//    // Example sending a request using the ListInstancesRequest method.
-//    req, resp := client.ListInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListInstances
 func (c *ServiceDiscovery) ListInstancesRequest(input *ListInstancesInput) (req *request.Request, output *ListInstancesOutput) {
@@ -1337,14 +1457,15 @@ func (c *ServiceDiscovery) ListInstancesRequest(input *ListInstancesInput) (req 
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation ListInstances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+//   - ServiceNotFound
+//     No service exists with the specified ID.
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListInstances
 func (c *ServiceDiscovery) ListInstances(input *ListInstancesInput) (*ListInstancesOutput, error) {
@@ -1376,15 +1497,14 @@ func (c *ServiceDiscovery) ListInstancesWithContext(ctx aws.Context, input *List
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListInstances operation.
-//    pageNum := 0
-//    err := client.ListInstancesPages(params,
-//        func(page *ListInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListInstances operation.
+//	pageNum := 0
+//	err := client.ListInstancesPages(params,
+//	    func(page *servicediscovery.ListInstancesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ServiceDiscovery) ListInstancesPages(input *ListInstancesInput, fn func(*ListInstancesOutput, bool) bool) error {
 	return c.ListInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1411,10 +1531,12 @@ func (c *ServiceDiscovery) ListInstancesPagesWithContext(ctx aws.Context, input 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInstancesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListInstancesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1434,14 +1556,13 @@ const opListNamespaces = "ListNamespaces"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListNamespacesRequest method.
+//	req, resp := client.ListNamespacesRequest(params)
 //
-//    // Example sending a request using the ListNamespacesRequest method.
-//    req, resp := client.ListNamespacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListNamespaces
 func (c *ServiceDiscovery) ListNamespacesRequest(input *ListNamespacesInput) (req *request.Request, output *ListNamespacesOutput) {
@@ -1469,7 +1590,7 @@ func (c *ServiceDiscovery) ListNamespacesRequest(input *ListNamespacesInput) (re
 // ListNamespaces API operation for AWS Cloud Map.
 //
 // Lists summary information about the namespaces that were created by the current
-// AWS account.
+// Amazon Web Services account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1478,11 +1599,11 @@ func (c *ServiceDiscovery) ListNamespacesRequest(input *ListNamespacesInput) (re
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation ListNamespaces for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListNamespaces
 func (c *ServiceDiscovery) ListNamespaces(input *ListNamespacesInput) (*ListNamespacesOutput, error) {
@@ -1514,15 +1635,14 @@ func (c *ServiceDiscovery) ListNamespacesWithContext(ctx aws.Context, input *Lis
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListNamespaces operation.
-//    pageNum := 0
-//    err := client.ListNamespacesPages(params,
-//        func(page *ListNamespacesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListNamespaces operation.
+//	pageNum := 0
+//	err := client.ListNamespacesPages(params,
+//	    func(page *servicediscovery.ListNamespacesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ServiceDiscovery) ListNamespacesPages(input *ListNamespacesInput, fn func(*ListNamespacesOutput, bool) bool) error {
 	return c.ListNamespacesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1549,10 +1669,12 @@ func (c *ServiceDiscovery) ListNamespacesPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListNamespacesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListNamespacesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1572,14 +1694,13 @@ const opListOperations = "ListOperations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListOperationsRequest method.
+//	req, resp := client.ListOperationsRequest(params)
 //
-//    // Example sending a request using the ListOperationsRequest method.
-//    req, resp := client.ListOperationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListOperations
 func (c *ServiceDiscovery) ListOperationsRequest(input *ListOperationsInput) (req *request.Request, output *ListOperationsOutput) {
@@ -1615,11 +1736,11 @@ func (c *ServiceDiscovery) ListOperationsRequest(input *ListOperationsInput) (re
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation ListOperations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListOperations
 func (c *ServiceDiscovery) ListOperations(input *ListOperationsInput) (*ListOperationsOutput, error) {
@@ -1651,15 +1772,14 @@ func (c *ServiceDiscovery) ListOperationsWithContext(ctx aws.Context, input *Lis
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListOperations operation.
-//    pageNum := 0
-//    err := client.ListOperationsPages(params,
-//        func(page *ListOperationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListOperations operation.
+//	pageNum := 0
+//	err := client.ListOperationsPages(params,
+//	    func(page *servicediscovery.ListOperationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ServiceDiscovery) ListOperationsPages(input *ListOperationsInput, fn func(*ListOperationsOutput, bool) bool) error {
 	return c.ListOperationsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1686,10 +1806,12 @@ func (c *ServiceDiscovery) ListOperationsPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListOperationsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListOperationsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1709,14 +1831,13 @@ const opListServices = "ListServices"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListServicesRequest method.
+//	req, resp := client.ListServicesRequest(params)
 //
-//    // Example sending a request using the ListServicesRequest method.
-//    req, resp := client.ListServicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListServices
 func (c *ServiceDiscovery) ListServicesRequest(input *ListServicesInput) (req *request.Request, output *ListServicesOutput) {
@@ -1753,11 +1874,11 @@ func (c *ServiceDiscovery) ListServicesRequest(input *ListServicesInput) (req *r
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation ListServices for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+// Returned Error Types:
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListServices
 func (c *ServiceDiscovery) ListServices(input *ListServicesInput) (*ListServicesOutput, error) {
@@ -1789,15 +1910,14 @@ func (c *ServiceDiscovery) ListServicesWithContext(ctx aws.Context, input *ListS
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListServices operation.
-//    pageNum := 0
-//    err := client.ListServicesPages(params,
-//        func(page *ListServicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListServices operation.
+//	pageNum := 0
+//	err := client.ListServicesPages(params,
+//	    func(page *servicediscovery.ListServicesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ServiceDiscovery) ListServicesPages(input *ListServicesInput, fn func(*ListServicesOutput, bool) bool) error {
 	return c.ListServicesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1824,11 +1944,97 @@ func (c *ServiceDiscovery) ListServicesPagesWithContext(ctx aws.Context, input *
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListServicesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListServicesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
+}
+
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// client's request for the ListTagsForResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListTagsForResource for more information on using the ListTagsForResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListTagsForResource
+func (c *ServiceDiscovery) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
+	op := &request.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output = &ListTagsForResourceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListTagsForResource API operation for AWS Cloud Map.
+//
+// Lists tags for the specified resource.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Cloud Map's
+// API operation ListTagsForResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     The operation can't be completed because the resource was not found.
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListTagsForResource
+func (c *ServiceDiscovery) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	return out, req.Send()
+}
+
+// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListTagsForResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ServiceDiscovery) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
 }
 
 const opRegisterInstance = "RegisterInstance"
@@ -1847,14 +2053,13 @@ const opRegisterInstance = "RegisterInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterInstanceRequest method.
+//	req, resp := client.RegisterInstanceRequest(params)
 //
-//    // Example sending a request using the RegisterInstanceRequest method.
-//    req, resp := client.RegisterInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/RegisterInstance
 func (c *ServiceDiscovery) RegisterInstanceRequest(input *RegisterInstanceInput) (req *request.Request, output *RegisterInstanceOutput) {
@@ -1879,35 +2084,35 @@ func (c *ServiceDiscovery) RegisterInstanceRequest(input *RegisterInstanceInput)
 // check based on the settings in a specified service. When you submit a RegisterInstance
 // request, the following occurs:
 //
-//    * For each DNS record that you define in the service that is specified
-//    by ServiceId, a record is created or updated in the hosted zone that is
-//    associated with the corresponding namespace.
+//   - For each DNS record that you define in the service that's specified
+//     by ServiceId, a record is created or updated in the hosted zone that's
+//     associated with the corresponding namespace.
 //
-//    * If the service includes HealthCheckConfig, a health check is created
-//    based on the settings in the health check configuration.
+//   - If the service includes HealthCheckConfig, a health check is created
+//     based on the settings in the health check configuration.
 //
-//    * The health check, if any, is associated with each of the new or updated
-//    records.
+//   - The health check, if any, is associated with each of the new or updated
+//     records.
 //
 // One RegisterInstance request must complete before you can submit another
 // request and specify the same service ID and instance ID.
 //
-// For more information, see CreateService.
+// For more information, see CreateService (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html).
 //
-// When AWS Cloud Map receives a DNS query for the specified DNS name, it returns
+// When Cloud Map receives a DNS query for the specified DNS name, it returns
 // the applicable value:
 //
-//    * If the health check is healthy: returns all the records
+//   - If the health check is healthy: returns all the records
 //
-//    * If the health check is unhealthy: returns the applicable value for the
-//    last healthy instance
+//   - If the health check is unhealthy: returns the applicable value for the
+//     last healthy instance
 //
-//    * If you didn't specify a health check configuration: returns all the
-//    records
+//   - If you didn't specify a health check configuration: returns all the
+//     records
 //
-// For the current limit on the number of instances that you can register using
-// the same namespace and using the same service, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the AWS Cloud Map Developer Guide.
+// For the current quota on the number of instances that you can register using
+// the same namespace and using the same service, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the Cloud Map Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1916,25 +2121,26 @@ func (c *ServiceDiscovery) RegisterInstanceRequest(input *RegisterInstanceInput)
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation RegisterInstance for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The operation is already in progress.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+//   - DuplicateRequest
+//     The operation is already in progress.
 //
-//   * ErrCodeResourceInUse "ResourceInUse"
-//   The specified resource can't be deleted because it contains other resources.
-//   For example, you can't delete a service that contains any instances.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
-//   * ErrCodeResourceLimitExceeded "ResourceLimitExceeded"
-//   The resource can't be created because you've reached the limit on the number
-//   of resources.
+//   - ResourceInUse
+//     The specified resource can't be deleted because it contains other resources.
+//     For example, you can't delete a service that contains any instances.
 //
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+//   - ResourceLimitExceeded
+//     The resource can't be created because you've reached the quota on the number
+//     of resources.
+//
+//   - ServiceNotFound
+//     No service exists with the specified ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/RegisterInstance
 func (c *ServiceDiscovery) RegisterInstance(input *RegisterInstanceInput) (*RegisterInstanceOutput, error) {
@@ -1958,6 +2164,271 @@ func (c *ServiceDiscovery) RegisterInstanceWithContext(ctx aws.Context, input *R
 	return out, req.Send()
 }
 
+const opTagResource = "TagResource"
+
+// TagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the TagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See TagResource for more information on using the TagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the TagResourceRequest method.
+//	req, resp := client.TagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/TagResource
+func (c *ServiceDiscovery) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
+	op := &request.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output = &TagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// TagResource API operation for AWS Cloud Map.
+//
+// Adds one or more tags to the specified resource.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Cloud Map's
+// API operation TagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     The operation can't be completed because the resource was not found.
+//
+//   - TooManyTagsException
+//     The list of tags on the resource is over the quota. The maximum number of
+//     tags that can be applied to a resource is 50.
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/TagResource
+func (c *ServiceDiscovery) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	return out, req.Send()
+}
+
+// TagResourceWithContext is the same as TagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See TagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ServiceDiscovery) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the UntagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UntagResource for more information on using the UntagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UntagResourceRequest method.
+//	req, resp := client.UntagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UntagResource
+func (c *ServiceDiscovery) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
+	op := &request.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output = &UntagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UntagResource API operation for AWS Cloud Map.
+//
+// Removes one or more tags from the specified resource.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Cloud Map's
+// API operation UntagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     The operation can't be completed because the resource was not found.
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UntagResource
+func (c *ServiceDiscovery) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	return out, req.Send()
+}
+
+// UntagResourceWithContext is the same as UntagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UntagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ServiceDiscovery) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateHttpNamespace = "UpdateHttpNamespace"
+
+// UpdateHttpNamespaceRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateHttpNamespace operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateHttpNamespace for more information on using the UpdateHttpNamespace
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateHttpNamespaceRequest method.
+//	req, resp := client.UpdateHttpNamespaceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateHttpNamespace
+func (c *ServiceDiscovery) UpdateHttpNamespaceRequest(input *UpdateHttpNamespaceInput) (req *request.Request, output *UpdateHttpNamespaceOutput) {
+	op := &request.Operation{
+		Name:       opUpdateHttpNamespace,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateHttpNamespaceInput{}
+	}
+
+	output = &UpdateHttpNamespaceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdateHttpNamespace API operation for AWS Cloud Map.
+//
+// Updates an HTTP namespace.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Cloud Map's
+// API operation UpdateHttpNamespace for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - NamespaceNotFound
+//     No namespace exists with the specified ID.
+//
+//   - ResourceInUse
+//     The specified resource can't be deleted because it contains other resources.
+//     For example, you can't delete a service that contains any instances.
+//
+//   - DuplicateRequest
+//     The operation is already in progress.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateHttpNamespace
+func (c *ServiceDiscovery) UpdateHttpNamespace(input *UpdateHttpNamespaceInput) (*UpdateHttpNamespaceOutput, error) {
+	req, out := c.UpdateHttpNamespaceRequest(input)
+	return out, req.Send()
+}
+
+// UpdateHttpNamespaceWithContext is the same as UpdateHttpNamespace with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateHttpNamespace for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ServiceDiscovery) UpdateHttpNamespaceWithContext(ctx aws.Context, input *UpdateHttpNamespaceInput, opts ...request.Option) (*UpdateHttpNamespaceOutput, error) {
+	req, out := c.UpdateHttpNamespaceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateInstanceCustomHealthStatus = "UpdateInstanceCustomHealthStatus"
 
 // UpdateInstanceCustomHealthStatusRequest generates a "aws/request.Request" representing the
@@ -1974,14 +2445,13 @@ const opUpdateInstanceCustomHealthStatus = "UpdateInstanceCustomHealthStatus"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateInstanceCustomHealthStatusRequest method.
+//	req, resp := client.UpdateInstanceCustomHealthStatusRequest(params)
 //
-//    // Example sending a request using the UpdateInstanceCustomHealthStatusRequest method.
-//    req, resp := client.UpdateInstanceCustomHealthStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateInstanceCustomHealthStatus
 func (c *ServiceDiscovery) UpdateInstanceCustomHealthStatusRequest(input *UpdateInstanceCustomHealthStatusInput) (req *request.Request, output *UpdateInstanceCustomHealthStatusOutput) {
@@ -2011,7 +2481,7 @@ func (c *ServiceDiscovery) UpdateInstanceCustomHealthStatusRequest(input *Update
 // you create a service. You can't use it to change the status for Route 53
 // health checks, which you define using HealthCheckConfig.
 //
-// For more information, see HealthCheckCustomConfig.
+// For more information, see HealthCheckCustomConfig (https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2020,22 +2490,23 @@ func (c *ServiceDiscovery) UpdateInstanceCustomHealthStatusRequest(input *Update
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation UpdateInstanceCustomHealthStatus for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInstanceNotFound "InstanceNotFound"
-//   No instance exists with the specified ID, or the instance was recently registered,
-//   and information about the instance hasn't propagated yet.
+// Returned Error Types:
 //
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+//   - InstanceNotFound
+//     No instance exists with the specified ID, or the instance was recently registered,
+//     and information about the instance hasn't propagated yet.
 //
-//   * ErrCodeCustomHealthNotFound "CustomHealthNotFound"
-//   The health check for the instance that is specified by ServiceId and InstanceId
-//   is not a custom health check.
+//   - ServiceNotFound
+//     No service exists with the specified ID.
 //
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+//   - CustomHealthNotFound
+//     The health check for the instance that's specified by ServiceId and InstanceId
+//     isn't a custom health check.
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateInstanceCustomHealthStatus
 func (c *ServiceDiscovery) UpdateInstanceCustomHealthStatus(input *UpdateInstanceCustomHealthStatusInput) (*UpdateInstanceCustomHealthStatusOutput, error) {
@@ -2059,6 +2530,188 @@ func (c *ServiceDiscovery) UpdateInstanceCustomHealthStatusWithContext(ctx aws.C
 	return out, req.Send()
 }
 
+const opUpdatePrivateDnsNamespace = "UpdatePrivateDnsNamespace"
+
+// UpdatePrivateDnsNamespaceRequest generates a "aws/request.Request" representing the
+// client's request for the UpdatePrivateDnsNamespace operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdatePrivateDnsNamespace for more information on using the UpdatePrivateDnsNamespace
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdatePrivateDnsNamespaceRequest method.
+//	req, resp := client.UpdatePrivateDnsNamespaceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdatePrivateDnsNamespace
+func (c *ServiceDiscovery) UpdatePrivateDnsNamespaceRequest(input *UpdatePrivateDnsNamespaceInput) (req *request.Request, output *UpdatePrivateDnsNamespaceOutput) {
+	op := &request.Operation{
+		Name:       opUpdatePrivateDnsNamespace,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdatePrivateDnsNamespaceInput{}
+	}
+
+	output = &UpdatePrivateDnsNamespaceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdatePrivateDnsNamespace API operation for AWS Cloud Map.
+//
+// Updates a private DNS namespace.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Cloud Map's
+// API operation UpdatePrivateDnsNamespace for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - NamespaceNotFound
+//     No namespace exists with the specified ID.
+//
+//   - ResourceInUse
+//     The specified resource can't be deleted because it contains other resources.
+//     For example, you can't delete a service that contains any instances.
+//
+//   - DuplicateRequest
+//     The operation is already in progress.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdatePrivateDnsNamespace
+func (c *ServiceDiscovery) UpdatePrivateDnsNamespace(input *UpdatePrivateDnsNamespaceInput) (*UpdatePrivateDnsNamespaceOutput, error) {
+	req, out := c.UpdatePrivateDnsNamespaceRequest(input)
+	return out, req.Send()
+}
+
+// UpdatePrivateDnsNamespaceWithContext is the same as UpdatePrivateDnsNamespace with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdatePrivateDnsNamespace for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ServiceDiscovery) UpdatePrivateDnsNamespaceWithContext(ctx aws.Context, input *UpdatePrivateDnsNamespaceInput, opts ...request.Option) (*UpdatePrivateDnsNamespaceOutput, error) {
+	req, out := c.UpdatePrivateDnsNamespaceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdatePublicDnsNamespace = "UpdatePublicDnsNamespace"
+
+// UpdatePublicDnsNamespaceRequest generates a "aws/request.Request" representing the
+// client's request for the UpdatePublicDnsNamespace operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdatePublicDnsNamespace for more information on using the UpdatePublicDnsNamespace
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdatePublicDnsNamespaceRequest method.
+//	req, resp := client.UpdatePublicDnsNamespaceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdatePublicDnsNamespace
+func (c *ServiceDiscovery) UpdatePublicDnsNamespaceRequest(input *UpdatePublicDnsNamespaceInput) (req *request.Request, output *UpdatePublicDnsNamespaceOutput) {
+	op := &request.Operation{
+		Name:       opUpdatePublicDnsNamespace,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdatePublicDnsNamespaceInput{}
+	}
+
+	output = &UpdatePublicDnsNamespaceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdatePublicDnsNamespace API operation for AWS Cloud Map.
+//
+// Updates a public DNS namespace.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Cloud Map's
+// API operation UpdatePublicDnsNamespace for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - NamespaceNotFound
+//     No namespace exists with the specified ID.
+//
+//   - ResourceInUse
+//     The specified resource can't be deleted because it contains other resources.
+//     For example, you can't delete a service that contains any instances.
+//
+//   - DuplicateRequest
+//     The operation is already in progress.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdatePublicDnsNamespace
+func (c *ServiceDiscovery) UpdatePublicDnsNamespace(input *UpdatePublicDnsNamespaceInput) (*UpdatePublicDnsNamespaceOutput, error) {
+	req, out := c.UpdatePublicDnsNamespaceRequest(input)
+	return out, req.Send()
+}
+
+// UpdatePublicDnsNamespaceWithContext is the same as UpdatePublicDnsNamespace with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdatePublicDnsNamespace for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ServiceDiscovery) UpdatePublicDnsNamespaceWithContext(ctx aws.Context, input *UpdatePublicDnsNamespaceInput, opts ...request.Option) (*UpdatePublicDnsNamespaceOutput, error) {
+	req, out := c.UpdatePublicDnsNamespaceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateService = "UpdateService"
 
 // UpdateServiceRequest generates a "aws/request.Request" representing the
@@ -2075,14 +2728,13 @@ const opUpdateService = "UpdateService"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateServiceRequest method.
+//	req, resp := client.UpdateServiceRequest(params)
 //
-//    // Example sending a request using the UpdateServiceRequest method.
-//    req, resp := client.UpdateServiceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateService
 func (c *ServiceDiscovery) UpdateServiceRequest(input *UpdateServiceInput) (req *request.Request, output *UpdateServiceOutput) {
@@ -2105,20 +2757,23 @@ func (c *ServiceDiscovery) UpdateServiceRequest(input *UpdateServiceInput) (req 
 //
 // Submits a request to perform the following operations:
 //
-//    * Add or delete DnsRecords configurations
+//   - Update the TTL setting for existing DnsRecords configurations
 //
-//    * Update the TTL setting for existing DnsRecords configurations
+//   - Add, update, or delete HealthCheckConfig for a specified service You
+//     can't add, update, or delete a HealthCheckCustomConfig configuration.
 //
-//    * Add, update, or delete HealthCheckConfig for a specified service
+// For public and private DNS namespaces, note the following:
 //
-// For public and private DNS namespaces, you must specify all DnsRecords configurations
-// (and, optionally, HealthCheckConfig) that you want to appear in the updated
-// service. Any current configurations that don't appear in an UpdateService
-// request are deleted.
+//   - If you omit any existing DnsRecords or HealthCheckConfig configurations
+//     from an UpdateService request, the configurations are deleted from the
+//     service.
 //
-// When you update the TTL setting for a service, AWS Cloud Map also updates
-// the corresponding settings in all the records and health checks that were
-// created by using the specified service.
+//   - If you omit an existing HealthCheckCustomConfig configuration from an
+//     UpdateService request, the configuration isn't deleted from the service.
+//
+// When you update settings for a service, Cloud Map also updates the corresponding
+// settings in all the records and health checks that were created by using
+// the specified service.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2127,17 +2782,18 @@ func (c *ServiceDiscovery) UpdateServiceRequest(input *UpdateServiceInput) (req 
 // See the AWS API reference guide for AWS Cloud Map's
 // API operation UpdateService for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The operation is already in progress.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInput "InvalidInput"
-//   One or more specified values aren't valid. For example, a required value
-//   might be missing, a numeric value might be outside the allowed range, or
-//   a string value might exceed length constraints.
+//   - DuplicateRequest
+//     The operation is already in progress.
 //
-//   * ErrCodeServiceNotFound "ServiceNotFound"
-//   No service exists with the specified ID.
+//   - InvalidInput
+//     One or more specified values aren't valid. For example, a required value
+//     might be missing, a numeric value might be outside the allowed range, or
+//     a string value might exceed length constraints.
+//
+//   - ServiceNotFound
+//     No service exists with the specified ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateService
 func (c *ServiceDiscovery) UpdateService(input *UpdateServiceInput) (*UpdateServiceOutput, error) {
@@ -2165,8 +2821,8 @@ type CreateHttpNamespaceInput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique string that identifies the request and that allows failed CreateHttpNamespace
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
+	// requests to be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string (for example, a date/time stamp).
 	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
 
 	// A description for the namespace.
@@ -2176,14 +2832,27 @@ type CreateHttpNamespaceInput struct {
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// The tags to add to the namespace. Each tag consists of a key and an optional
+	// value that you define. Tags keys can be up to 128 characters in length, and
+	// tag values can be up to 256 characters in length.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHttpNamespaceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHttpNamespaceInput) GoString() string {
 	return s.String()
 }
@@ -2193,6 +2862,16 @@ func (s *CreateHttpNamespaceInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CreateHttpNamespaceInput"}
 	if s.Name == nil {
 		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2219,20 +2898,34 @@ func (s *CreateHttpNamespaceInput) SetName(v string) *CreateHttpNamespaceInput {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateHttpNamespaceInput) SetTags(v []*Tag) *CreateHttpNamespaceInput {
+	s.Tags = v
+	return s
+}
+
 type CreateHttpNamespaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHttpNamespaceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHttpNamespaceOutput) GoString() string {
 	return s.String()
 }
@@ -2247,19 +2940,27 @@ type CreatePrivateDnsNamespaceInput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique string that identifies the request and that allows failed CreatePrivateDnsNamespace
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
+	// requests to be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string (for example, a date/timestamp).
 	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
 
 	// A description for the namespace.
 	Description *string `type:"string"`
 
 	// The name that you want to assign to this namespace. When you create a private
-	// DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private
+	// DNS namespace, Cloud Map automatically creates an Amazon Route 53 private
 	// hosted zone that has the same name as the namespace.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// Properties for the private DNS namespace.
+	Properties *PrivateDnsNamespaceProperties `type:"structure"`
+
+	// The tags to add to the namespace. Each tag consists of a key and an optional
+	// value that you define. Tags keys can be up to 128 characters in length, and
+	// tag values can be up to 256 characters in length.
+	Tags []*Tag `type:"list"`
 
 	// The ID of the Amazon VPC that you want to associate the namespace with.
 	//
@@ -2267,12 +2968,20 @@ type CreatePrivateDnsNamespaceInput struct {
 	Vpc *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePrivateDnsNamespaceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePrivateDnsNamespaceInput) GoString() string {
 	return s.String()
 }
@@ -2285,6 +2994,21 @@ func (s *CreatePrivateDnsNamespaceInput) Validate() error {
 	}
 	if s.Vpc == nil {
 		invalidParams.Add(request.NewErrParamRequired("Vpc"))
+	}
+	if s.Properties != nil {
+		if err := s.Properties.Validate(); err != nil {
+			invalidParams.AddNested("Properties", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2311,6 +3035,18 @@ func (s *CreatePrivateDnsNamespaceInput) SetName(v string) *CreatePrivateDnsName
 	return s
 }
 
+// SetProperties sets the Properties field's value.
+func (s *CreatePrivateDnsNamespaceInput) SetProperties(v *PrivateDnsNamespaceProperties) *CreatePrivateDnsNamespaceInput {
+	s.Properties = v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreatePrivateDnsNamespaceInput) SetTags(v []*Tag) *CreatePrivateDnsNamespaceInput {
+	s.Tags = v
+	return s
+}
+
 // SetVpc sets the Vpc field's value.
 func (s *CreatePrivateDnsNamespaceInput) SetVpc(v string) *CreatePrivateDnsNamespaceInput {
 	s.Vpc = &v
@@ -2321,16 +3057,24 @@ type CreatePrivateDnsNamespaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePrivateDnsNamespaceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePrivateDnsNamespaceOutput) GoString() string {
 	return s.String()
 }
@@ -2345,8 +3089,8 @@ type CreatePublicDnsNamespaceInput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique string that identifies the request and that allows failed CreatePublicDnsNamespace
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
+	// requests to be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string (for example, a date/timestamp).
 	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
 
 	// A description for the namespace.
@@ -2354,16 +3098,35 @@ type CreatePublicDnsNamespaceInput struct {
 
 	// The name that you want to assign to this namespace.
 	//
+	// Do not include sensitive information in the name. The name is publicly available
+	// using DNS queries.
+	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// Properties for the public DNS namespace.
+	Properties *PublicDnsNamespaceProperties `type:"structure"`
+
+	// The tags to add to the namespace. Each tag consists of a key and an optional
+	// value that you define. Tags keys can be up to 128 characters in length, and
+	// tag values can be up to 256 characters in length.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePublicDnsNamespaceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePublicDnsNamespaceInput) GoString() string {
 	return s.String()
 }
@@ -2373,6 +3136,21 @@ func (s *CreatePublicDnsNamespaceInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CreatePublicDnsNamespaceInput"}
 	if s.Name == nil {
 		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Properties != nil {
+		if err := s.Properties.Validate(); err != nil {
+			invalidParams.AddNested("Properties", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2399,20 +3177,40 @@ func (s *CreatePublicDnsNamespaceInput) SetName(v string) *CreatePublicDnsNamesp
 	return s
 }
 
+// SetProperties sets the Properties field's value.
+func (s *CreatePublicDnsNamespaceInput) SetProperties(v *PublicDnsNamespaceProperties) *CreatePublicDnsNamespaceInput {
+	s.Properties = v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreatePublicDnsNamespaceInput) SetTags(v []*Tag) *CreatePublicDnsNamespaceInput {
+	s.Tags = v
+	return s
+}
+
 type CreatePublicDnsNamespaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePublicDnsNamespaceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePublicDnsNamespaceOutput) GoString() string {
 	return s.String()
 }
@@ -2427,26 +3225,26 @@ type CreateServiceInput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique string that identifies the request and that allows failed CreateService
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
+	// requests to be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string (for example, a date/timestamp).
 	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
 
 	// A description for the service.
 	Description *string `type:"string"`
 
 	// A complex type that contains information about the Amazon Route 53 records
-	// that you want AWS Cloud Map to create when you register an instance.
+	// that you want Cloud Map to create when you register an instance.
 	DnsConfig *DnsConfig `type:"structure"`
 
-	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional Route 53 health check. If you specify settings for a health check,
-	// AWS Cloud Map associates the health check with all the Route 53 DNS records
+	// Public DNS and HTTP namespaces only. A complex type that contains settings
+	// for an optional Route 53 health check. If you specify settings for a health
+	// check, Cloud Map associates the health check with all the Route 53 DNS records
 	// that you specify in DnsConfig.
 	//
 	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 	// or HealthCheckConfig but not both.
 	//
-	// For information about the charges for health checks, see AWS Cloud Map Pricing
+	// For information about the charges for health checks, see Cloud Map Pricing
 	// (http://aws.amazon.com/cloud-map/pricing/).
 	HealthCheckConfig *HealthCheckConfig `type:"structure"`
 
@@ -2455,23 +3253,69 @@ type CreateServiceInput struct {
 	//
 	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 	// or HealthCheckConfig but not both.
+	//
+	// You can't add, update, or delete a HealthCheckCustomConfig configuration
+	// from an existing service.
 	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
 
 	// The name that you want to assign to the service.
 	//
+	// Do not include sensitive information in the name if the namespace is discoverable
+	// by public DNS queries.
+	//
+	// If you want Cloud Map to create an SRV record when you register an instance
+	// and you're using a system that requires a specific SRV format, such as HAProxy
+	// (http://www.haproxy.org/), specify the following for Name:
+	//
+	//    * Start the name with an underscore (_), such as _exampleservice.
+	//
+	//    * End the name with ._protocol, such as ._tcp.
+	//
+	// When you register an instance, Cloud Map creates an SRV record and assigns
+	// a name to the record by concatenating the service name and the namespace
+	// name (for example,
+	//
+	// _exampleservice._tcp.example.com).
+	//
+	// For services that are accessible by DNS queries, you can't create multiple
+	// services with names that differ only by case (such as EXAMPLE and example).
+	// Otherwise, these services have the same DNS name and can't be distinguished.
+	// However, if you use a namespace that's only accessible by API calls, then
+	// you can create services that with names that differ only by case.
+	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// The ID of the namespace that you want to use to create the service.
+	// The ID of the namespace that you want to use to create the service. The namespace
+	// ID must be specified, but it can be specified either here or in the DnsConfig
+	// object.
 	NamespaceId *string `type:"string"`
+
+	// The tags to add to the service. Each tag consists of a key and an optional
+	// value that you define. Tags keys can be up to 128 characters in length, and
+	// tag values can be up to 256 characters in length.
+	Tags []*Tag `type:"list"`
+
+	// If present, specifies that the service instances are only discoverable using
+	// the DiscoverInstances API operation. No DNS records is registered for the
+	// service instances. The only valid value is HTTP.
+	Type *string `type:"string" enum:"ServiceTypeOption"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateServiceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateServiceInput) GoString() string {
 	return s.String()
 }
@@ -2495,6 +3339,16 @@ func (s *CreateServiceInput) Validate() error {
 	if s.HealthCheckCustomConfig != nil {
 		if err := s.HealthCheckCustomConfig.Validate(); err != nil {
 			invalidParams.AddNested("HealthCheckCustomConfig", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -2546,6 +3400,18 @@ func (s *CreateServiceInput) SetNamespaceId(v string) *CreateServiceInput {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateServiceInput) SetTags(v []*Tag) *CreateServiceInput {
+	s.Tags = v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *CreateServiceInput) SetType(v string) *CreateServiceInput {
+	s.Type = &v
+	return s
+}
+
 type CreateServiceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2553,12 +3419,20 @@ type CreateServiceOutput struct {
 	Service *Service `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateServiceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateServiceOutput) GoString() string {
 	return s.String()
 }
@@ -2567,6 +3441,71 @@ func (s CreateServiceOutput) GoString() string {
 func (s *CreateServiceOutput) SetService(v *Service) *CreateServiceOutput {
 	s.Service = v
 	return s
+}
+
+// The health check for the instance that's specified by ServiceId and InstanceId
+// isn't a custom health check.
+type CustomHealthNotFound struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomHealthNotFound) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomHealthNotFound) GoString() string {
+	return s.String()
+}
+
+func newErrorCustomHealthNotFound(v protocol.ResponseMetadata) error {
+	return &CustomHealthNotFound{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CustomHealthNotFound) Code() string {
+	return "CustomHealthNotFound"
+}
+
+// Message returns the exception's message.
+func (s *CustomHealthNotFound) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CustomHealthNotFound) OrigErr() error {
+	return nil
+}
+
+func (s *CustomHealthNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CustomHealthNotFound) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CustomHealthNotFound) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type DeleteNamespaceInput struct {
@@ -2578,12 +3517,20 @@ type DeleteNamespaceInput struct {
 	Id *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNamespaceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNamespaceInput) GoString() string {
 	return s.String()
 }
@@ -2611,16 +3558,24 @@ type DeleteNamespaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNamespaceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNamespaceOutput) GoString() string {
 	return s.String()
 }
@@ -2640,12 +3595,20 @@ type DeleteServiceInput struct {
 	Id *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteServiceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteServiceInput) GoString() string {
 	return s.String()
 }
@@ -2673,12 +3636,20 @@ type DeleteServiceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteServiceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteServiceOutput) GoString() string {
 	return s.String()
 }
@@ -2686,7 +3657,8 @@ func (s DeleteServiceOutput) GoString() string {
 type DeregisterInstanceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The value that you specified for Id in the RegisterInstance request.
+	// The value that you specified for Id in the RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+	// request.
 	//
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`
@@ -2697,12 +3669,20 @@ type DeregisterInstanceInput struct {
 	ServiceId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterInstanceInput) GoString() string {
 	return s.String()
 }
@@ -2739,16 +3719,24 @@ type DeregisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// For more information, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterInstanceOutput) GoString() string {
 	return s.String()
 }
@@ -2762,7 +3750,26 @@ func (s *DeregisterInstanceOutput) SetOperationId(v string) *DeregisterInstanceO
 type DiscoverInstancesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The health status of the instances that you want to discover.
+	// The health status of the instances that you want to discover. This parameter
+	// is ignored for services that don't have a health check configured, and all
+	// instances are returned.
+	//
+	// HEALTHY
+	//
+	// Returns healthy instances.
+	//
+	// UNHEALTHY
+	//
+	// Returns unhealthy instances.
+	//
+	// ALL
+	//
+	// Returns all instances.
+	//
+	// HEALTHY_OR_ELSE_ALL
+	//
+	// Returns healthy instances, unless none are reporting a healthy state. In
+	// that case, return all instances. This is also called failing open.
 	HealthStatus *string `type:"string" enum:"HealthStatusFilter"`
 
 	// The maximum number of instances that you want Cloud Map to return in the
@@ -2770,15 +3777,22 @@ type DiscoverInstancesInput struct {
 	// MaxResults, Cloud Map returns up to 100 instances.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// The name of the namespace that you specified when you registered the instance.
+	// The HttpName name of the namespace. It's found in the HttpProperties member
+	// of the Properties member of the namespace.
 	//
 	// NamespaceName is a required field
 	NamespaceName *string `type:"string" required:"true"`
 
-	// A string map that contains attributes with values that you can use to filter
-	// instances by any custom attribute that you specified when you registered
-	// the instance. Only instances that match all the specified key/value pairs
-	// will be returned.
+	// Opportunistic filters to scope the results based on custom attributes. If
+	// there are instances that match both the filters specified in both the QueryParameters
+	// parameter and this parameter, all of these instances are returned. Otherwise,
+	// the filters are ignored, and only instances that match the filters that are
+	// specified in the QueryParameters parameter are returned.
+	OptionalParameters map[string]*string `type:"map"`
+
+	// Filters to scope the results based on custom attributes for the instance
+	// (for example, {version=v1, az=1a}). Only instances that match all the specified
+	// key-value pairs are returned.
 	QueryParameters map[string]*string `type:"map"`
 
 	// The name of the service that you specified when you registered the instance.
@@ -2787,12 +3801,20 @@ type DiscoverInstancesInput struct {
 	ServiceName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoverInstancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoverInstancesInput) GoString() string {
 	return s.String()
 }
@@ -2834,6 +3856,12 @@ func (s *DiscoverInstancesInput) SetNamespaceName(v string) *DiscoverInstancesIn
 	return s
 }
 
+// SetOptionalParameters sets the OptionalParameters field's value.
+func (s *DiscoverInstancesInput) SetOptionalParameters(v map[string]*string) *DiscoverInstancesInput {
+	s.OptionalParameters = v
+	return s
+}
+
 // SetQueryParameters sets the QueryParameters field's value.
 func (s *DiscoverInstancesInput) SetQueryParameters(v map[string]*string) *DiscoverInstancesInput {
 	s.QueryParameters = v
@@ -2852,14 +3880,27 @@ type DiscoverInstancesOutput struct {
 	// A complex type that contains one HttpInstanceSummary for each registered
 	// instance.
 	Instances []*HttpInstanceSummary `type:"list"`
+
+	// The increasing revision associated to the response Instances list. If a new
+	// instance is registered or deregistered, the InstancesRevision updates. The
+	// health status updates don't update InstancesRevision.
+	InstancesRevision *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoverInstancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoverInstancesOutput) GoString() string {
 	return s.String()
 }
@@ -2870,24 +3911,130 @@ func (s *DiscoverInstancesOutput) SetInstances(v []*HttpInstanceSummary) *Discov
 	return s
 }
 
+// SetInstancesRevision sets the InstancesRevision field's value.
+func (s *DiscoverInstancesOutput) SetInstancesRevision(v int64) *DiscoverInstancesOutput {
+	s.InstancesRevision = &v
+	return s
+}
+
+type DiscoverInstancesRevisionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The HttpName name of the namespace. It's found in the HttpProperties member
+	// of the Properties member of the namespace.
+	//
+	// NamespaceName is a required field
+	NamespaceName *string `type:"string" required:"true"`
+
+	// The name of the service that you specified when you registered the instance.
+	//
+	// ServiceName is a required field
+	ServiceName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DiscoverInstancesRevisionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DiscoverInstancesRevisionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DiscoverInstancesRevisionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DiscoverInstancesRevisionInput"}
+	if s.NamespaceName == nil {
+		invalidParams.Add(request.NewErrParamRequired("NamespaceName"))
+	}
+	if s.ServiceName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ServiceName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetNamespaceName sets the NamespaceName field's value.
+func (s *DiscoverInstancesRevisionInput) SetNamespaceName(v string) *DiscoverInstancesRevisionInput {
+	s.NamespaceName = &v
+	return s
+}
+
+// SetServiceName sets the ServiceName field's value.
+func (s *DiscoverInstancesRevisionInput) SetServiceName(v string) *DiscoverInstancesRevisionInput {
+	s.ServiceName = &v
+	return s
+}
+
+type DiscoverInstancesRevisionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The increasing revision associated to the response Instances list. If a new
+	// instance is registered or deregistered, the InstancesRevision updates. The
+	// health status updates don't update InstancesRevision.
+	InstancesRevision *int64 `type:"long"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DiscoverInstancesRevisionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DiscoverInstancesRevisionOutput) GoString() string {
+	return s.String()
+}
+
+// SetInstancesRevision sets the InstancesRevision field's value.
+func (s *DiscoverInstancesRevisionOutput) SetInstancesRevision(v int64) *DiscoverInstancesRevisionOutput {
+	s.InstancesRevision = &v
+	return s
+}
+
 // A complex type that contains information about the Amazon Route 53 DNS records
-// that you want AWS Cloud Map to create when you register an instance.
+// that you want Cloud Map to create when you register an instance.
+//
+// The record types of a service can only be changed by deleting the service
+// and recreating it with a new Dnsconfig.
 type DnsConfig struct {
 	_ struct{} `type:"structure"`
 
 	// An array that contains one DnsRecord object for each Route 53 DNS record
-	// that you want AWS Cloud Map to create when you register an instance.
+	// that you want Cloud Map to create when you register an instance.
 	//
 	// DnsRecords is a required field
 	DnsRecords []*DnsRecord `type:"list" required:"true"`
 
+	// Use NamespaceId in Service (https://docs.aws.amazon.com/cloud-map/latest/api/API_Service.html)
+	// instead.
+	//
 	// The ID of the namespace to use for DNS configuration.
 	//
 	// Deprecated: Top level attribute in request should be used to reference namespace-id
 	NamespaceId *string `deprecated:"true" type:"string"`
 
 	// The routing policy that you want to apply to all Route 53 DNS records that
-	// AWS Cloud Map creates when you register an instance and specify this service.
+	// Cloud Map creates when you register an instance and specify this service.
 	//
 	// If you want to use this service to register instances that create alias records,
 	// specify WEIGHTED for the routing policy.
@@ -2899,9 +4046,9 @@ type DnsConfig struct {
 	// If you define a health check for the service and the health check is healthy,
 	// Route 53 returns the applicable value for up to eight instances.
 	//
-	// For example, suppose the service includes configurations for one A record
-	// and a health check, and you use the service to register 10 instances. Route
-	// 53 responds to DNS queries with IP addresses for up to eight healthy instances.
+	// For example, suppose that the service includes configurations for one A record
+	// and a health check. You use the service to register 10 instances. Route 53
+	// responds to DNS queries with IP addresses for up to eight healthy instances.
 	// If fewer than eight instances are healthy, Route 53 responds to every DNS
 	// query with the IP addresses for all of the healthy instances.
 	//
@@ -2909,7 +4056,7 @@ type DnsConfig struct {
 	// all instances are healthy and returns the values for up to eight instances.
 	//
 	// For more information about the multivalue routing policy, see Multivalue
-	// Answer Routing (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-multivalue)
+	// Answer Routing (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-multivalue)
 	// in the Route 53 Developer Guide.
 	//
 	// WEIGHTED
@@ -2919,28 +4066,36 @@ type DnsConfig struct {
 	// all records have the same weight, so you can't route more or less traffic
 	// to any instances.
 	//
-	// For example, suppose the service includes configurations for one A record
-	// and a health check, and you use the service to register 10 instances. Route
-	// 53 responds to DNS queries with the IP address for one randomly selected
-	// instance from among the healthy instances. If no instances are healthy, Route
-	// 53 responds to DNS queries as if all of the instances were healthy.
+	// For example, suppose that the service includes configurations for one A record
+	// and a health check. You use the service to register 10 instances. Route 53
+	// responds to DNS queries with the IP address for one randomly selected instance
+	// from among the healthy instances. If no instances are healthy, Route 53 responds
+	// to DNS queries as if all of the instances were healthy.
 	//
 	// If you don't define a health check for the service, Route 53 assumes that
 	// all instances are healthy and returns the applicable value for one randomly
 	// selected instance.
 	//
 	// For more information about the weighted routing policy, see Weighted Routing
-	// (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted)
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted)
 	// in the Route 53 Developer Guide.
 	RoutingPolicy *string `type:"string" enum:"RoutingPolicy"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsConfig) GoString() string {
 	return s.String()
 }
@@ -2987,23 +4142,31 @@ func (s *DnsConfig) SetRoutingPolicy(v string) *DnsConfig {
 }
 
 // A complex type that contains information about changes to the Route 53 DNS
-// records that AWS Cloud Map creates when you register an instance.
+// records that Cloud Map creates when you register an instance.
 type DnsConfigChange struct {
 	_ struct{} `type:"structure"`
 
 	// An array that contains one DnsRecord object for each Route 53 record that
-	// you want AWS Cloud Map to create when you register an instance.
+	// you want Cloud Map to create when you register an instance.
 	//
 	// DnsRecords is a required field
 	DnsRecords []*DnsRecord `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsConfigChange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsConfigChange) GoString() string {
 	return s.String()
 }
@@ -3037,22 +4200,33 @@ func (s *DnsConfigChange) SetDnsRecords(v []*DnsRecord) *DnsConfigChange {
 	return s
 }
 
-// A complex type that contains the ID for the Route 53 hosted zone that AWS
-// Cloud Map creates when you create a namespace.
+// A complex type that contains the ID for the Route 53 hosted zone that Cloud
+// Map creates when you create a namespace.
 type DnsProperties struct {
 	_ struct{} `type:"structure"`
 
-	// The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create
+	// The ID for the Route 53 hosted zone that Cloud Map creates when you create
 	// a namespace.
 	HostedZoneId *string `type:"string"`
+
+	// Start of Authority (SOA) record for the hosted zone.
+	SOA *SOA `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsProperties) GoString() string {
 	return s.String()
 }
@@ -3063,40 +4237,50 @@ func (s *DnsProperties) SetHostedZoneId(v string) *DnsProperties {
 	return s
 }
 
+// SetSOA sets the SOA field's value.
+func (s *DnsProperties) SetSOA(v *SOA) *DnsProperties {
+	s.SOA = v
+	return s
+}
+
 // A complex type that contains information about the Route 53 DNS records that
-// you want AWS Cloud Map to create when you register an instance.
+// you want Cloud Map to create when you register an instance.
 type DnsRecord struct {
 	_ struct{} `type:"structure"`
 
 	// The amount of time, in seconds, that you want DNS resolvers to cache the
 	// settings for this record.
 	//
-	// Alias records don't include a TTL because Route 53 uses the TTL for the AWS
-	// resource that an alias record routes traffic to. If you include the AWS_ALIAS_DNS_NAME
-	// attribute when you submit a RegisterInstance request, the TTL value is ignored.
-	// Always specify a TTL for the service; you can use a service to register instances
-	// that create either alias or non-alias records.
+	// Alias records don't include a TTL because Route 53 uses the TTL for the Amazon
+	// Web Services resource that an alias record routes traffic to. If you include
+	// the AWS_ALIAS_DNS_NAME attribute when you submit a RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+	// request, the TTL value is ignored. Always specify a TTL for the service;
+	// you can use a service to register instances that create either alias or non-alias
+	// records.
 	//
 	// TTL is a required field
 	TTL *int64 `type:"long" required:"true"`
 
 	// The type of the resource, which indicates the type of value that Route 53
-	// returns in response to DNS queries.
+	// returns in response to DNS queries. You can specify values for Type in the
+	// following combinations:
 	//
-	// Note the following:
+	//    * A
 	//
-	//    * A, AAAA, and SRV records: You can specify settings for a maximum of
-	//    one A, one AAAA, and one SRV record. You can specify them in any combination.
+	//    * AAAA
 	//
-	//    * CNAME records: If you specify CNAME for Type, you can't define any other
-	//    records. This is a limitation of DNS: you can't create a CNAME record
-	//    and any other type of record that has the same name as a CNAME record.
+	//    * A and AAAA
 	//
-	//    * Alias records: If you want AWS Cloud Map to create a Route 53 alias
-	//    record when you register an instance, specify A or AAAA for Type.
+	//    * SRV
 	//
-	//    * All records: You specify settings other than TTL and Type when you register
-	//    an instance.
+	//    * CNAME
+	//
+	// If you want Cloud Map to create a Route 53 alias record when you register
+	// an instance, specify A or AAAA for Type.
+	//
+	// You specify other settings, such as the IP address for A and AAAA records,
+	// when you register an instance. For more information, see RegisterInstance
+	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html).
 	//
 	// The following values are supported:
 	//
@@ -3114,7 +4298,8 @@ type DnsRecord struct {
 	// Note the following:
 	//
 	//    * You specify the domain name that you want to route traffic to when you
-	//    register an instance. For more information, see RegisterInstanceRequest$Attributes.
+	//    register an instance. For more information, see Attributes (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html#cloudmap-RegisterInstance-request-Attributes)
+	//    in the topic RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html).
 	//
 	//    * You must specify WEIGHTED for the value of RoutingPolicy.
 	//
@@ -3132,39 +4317,47 @@ type DnsRecord struct {
 	//
 	//    * The values of priority and weight are both set to 1 and can't be changed.
 	//
-	//
 	//    * The value of port comes from the value that you specify for the AWS_INSTANCE_PORT
-	//    attribute when you submit a RegisterInstance request.
+	//    attribute when you submit a RegisterInstance (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
+	//    request.
 	//
 	//    * The value of service-hostname is a concatenation of the following values:
+	//    The value that you specify for InstanceId when you register an instance.
+	//    The name of the service. The name of the namespace. For example, if the
+	//    value of InstanceId is test, the name of the service is backend, and the
+	//    name of the namespace is example.com, the value of service-hostname is
+	//    the following: test.backend.example.com
 	//
-	// The value that you specify for InstanceId when you register an instance.
+	// If you specify settings for an SRV record, note the following:
 	//
-	// The name of the service.
+	//    * If you specify values for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both
+	//    in the RegisterInstance request, Cloud Map automatically creates A and/or
+	//    AAAA records that have the same name as the value of service-hostname
+	//    in the SRV record. You can ignore these records.
 	//
-	// The name of the namespace.
-	//
-	// For example, if the value of InstanceId is test, the name of the service
-	//    is backend, and the name of the namespace is example.com, the value of
-	//    service-hostname is:
-	//
-	// test.backend.example.com
-	//
-	// If you specify settings for an SRV record and if you specify values for AWS_INSTANCE_IPV4,
-	// AWS_INSTANCE_IPV6, or both in the RegisterInstance request, AWS Cloud Map
-	// automatically creates A and/or AAAA records that have the same name as the
-	// value of service-hostname in the SRV record. You can ignore these records.
+	//    * If you're using a system that requires a specific SRV format, such as
+	//    HAProxy, see the Name (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html#cloudmap-CreateService-request-Name)
+	//    element in the documentation about CreateService for information about
+	//    how to specify the correct name format.
 	//
 	// Type is a required field
 	Type *string `type:"string" required:"true" enum:"RecordType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsRecord) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsRecord) GoString() string {
 	return s.String()
 }
@@ -3197,6 +4390,73 @@ func (s *DnsRecord) SetType(v string) *DnsRecord {
 	return s
 }
 
+// The operation is already in progress.
+type DuplicateRequest struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The ID of the operation that's already in progress.
+	DuplicateOperationId *string `type:"string"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRequest) GoString() string {
+	return s.String()
+}
+
+func newErrorDuplicateRequest(v protocol.ResponseMetadata) error {
+	return &DuplicateRequest{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DuplicateRequest) Code() string {
+	return "DuplicateRequest"
+}
+
+// Message returns the exception's message.
+func (s *DuplicateRequest) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DuplicateRequest) OrigErr() error {
+	return nil
+}
+
+func (s *DuplicateRequest) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DuplicateRequest) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DuplicateRequest) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type GetInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3211,12 +4471,20 @@ type GetInstanceInput struct {
 	ServiceId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInstanceInput) GoString() string {
 	return s.String()
 }
@@ -3256,12 +4524,20 @@ type GetInstanceOutput struct {
 	Instance *Instance `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInstanceOutput) GoString() string {
 	return s.String()
 }
@@ -3278,16 +4554,17 @@ type GetInstancesHealthStatusInput struct {
 	// An array that contains the IDs of all the instances that you want to get
 	// the health status for.
 	//
-	// If you omit Instances, AWS Cloud Map returns the health status for all the
-	// instances that are associated with the specified service.
+	// If you omit Instances, Cloud Map returns the health status for all the instances
+	// that are associated with the specified service.
 	//
 	// To get the IDs for the instances that you've registered by using a specified
-	// service, submit a ListInstances request.
+	// service, submit a ListInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html)
+	// request.
 	Instances []*string `min:"1" type:"list"`
 
-	// The maximum number of instances that you want AWS Cloud Map to return in
-	// the response to a GetInstancesHealthStatus request. If you don't specify
-	// a value for MaxResults, AWS Cloud Map returns up to 100 instances.
+	// The maximum number of instances that you want Cloud Map to return in the
+	// response to a GetInstancesHealthStatus request. If you don't specify a value
+	// for MaxResults, Cloud Map returns up to 100 instances.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first GetInstancesHealthStatus request, omit this value.
@@ -3303,12 +4580,20 @@ type GetInstancesHealthStatusInput struct {
 	ServiceId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInstancesHealthStatusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInstancesHealthStatusInput) GoString() string {
 	return s.String()
 }
@@ -3369,12 +4654,20 @@ type GetInstancesHealthStatusOutput struct {
 	Status map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInstancesHealthStatusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInstancesHealthStatusOutput) GoString() string {
 	return s.String()
 }
@@ -3400,12 +4693,20 @@ type GetNamespaceInput struct {
 	Id *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetNamespaceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetNamespaceInput) GoString() string {
 	return s.String()
 }
@@ -3436,12 +4737,20 @@ type GetNamespaceOutput struct {
 	Namespace *Namespace `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetNamespaceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetNamespaceOutput) GoString() string {
 	return s.String()
 }
@@ -3461,12 +4770,20 @@ type GetOperationInput struct {
 	OperationId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOperationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOperationInput) GoString() string {
 	return s.String()
 }
@@ -3497,12 +4814,20 @@ type GetOperationOutput struct {
 	Operation *Operation `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOperationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOperationOutput) GoString() string {
 	return s.String()
 }
@@ -3522,12 +4847,20 @@ type GetServiceInput struct {
 	Id *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetServiceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetServiceInput) GoString() string {
 	return s.String()
 }
@@ -3558,12 +4891,20 @@ type GetServiceOutput struct {
 	Service *Service `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetServiceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetServiceOutput) GoString() string {
 	return s.String()
 }
@@ -3574,79 +4915,82 @@ func (s *GetServiceOutput) SetService(v *Service) *GetServiceOutput {
 	return s
 }
 
-// Public DNS namespaces only. A complex type that contains settings for an
-// optional health check. If you specify settings for a health check, AWS Cloud
-// Map associates the health check with the records that you specify in DnsConfig.
+// Public DNS and HTTP namespaces only. A complex type that contains settings
+// for an optional health check. If you specify settings for a health check,
+// Cloud Map associates the health check with the records that you specify in
+// DnsConfig.
 //
 // If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 // or HealthCheckConfig but not both.
 //
-// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
-// For information about pricing for health checks, see Amazon Route 53 Pricing
-// (http://aws.amazon.com/route53/pricing/).
+// Health checks are basic Route 53 health checks that monitor an Amazon Web
+// Services endpoint. For information about pricing for health checks, see Amazon
+// Route 53 Pricing (http://aws.amazon.com/route53/pricing/).
 //
 // Note the following about configuring health checks.
 //
-// A and AAAA records
+// # A and AAAA records
 //
-// If DnsConfig includes configurations for both A and AAAA records, AWS Cloud
-// Map creates a health check that uses the IPv4 address to check the health
-// of the resource. If the endpoint that is specified by the IPv4 address is
-// unhealthy, Route 53 considers both the A and AAAA records to be unhealthy.
+// If DnsConfig includes configurations for both A and AAAA records, Cloud Map
+// creates a health check that uses the IPv4 address to check the health of
+// the resource. If the endpoint tthat's specified by the IPv4 address is unhealthy,
+// Route 53 considers both the A and AAAA records to be unhealthy.
 //
-// CNAME records
+// # CNAME records
 //
 // You can't specify settings for HealthCheckConfig when the DNSConfig includes
 // CNAME for the value of Type. If you do, the CreateService request will fail
 // with an InvalidInput error.
 //
-// Request interval
+// # Request interval
 //
-// A Route 53 health checker in each health-checking region sends a health check
-// request to an endpoint every 30 seconds. On average, your endpoint receives
-// a health check request about every two seconds. However, health checkers
-// don't coordinate with one another, so you'll sometimes see several requests
-// per second followed by a few seconds with no health checks at all.
+// A Route 53 health checker in each health-checking Amazon Web Services Region
+// sends a health check request to an endpoint every 30 seconds. On average,
+// your endpoint receives a health check request about every two seconds. However,
+// health checkers don't coordinate with one another. Therefore, you might sometimes
+// see several requests in one second that's followed by a few seconds with
+// no health checks at all.
 //
-// Health checking regions
+// # Health checking regions
 //
-// Health checkers perform checks from all Route 53 health-checking regions.
-// For a list of the current regions, see Regions (http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
+// Health checkers perform checks from all Route 53 health-checking Regions.
+// For a list of the current Regions, see Regions (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
 //
-// Alias records
+// # Alias records
 //
 // When you register an instance, if you include the AWS_ALIAS_DNS_NAME attribute,
-// AWS Cloud Map creates a Route 53 alias record. Note the following:
+// Cloud Map creates a Route 53 alias record. Note the following:
 //
-//    * Route 53 automatically sets EvaluateTargetHealth to true for alias records.
-//    When EvaluateTargetHealth is true, the alias record inherits the health
-//    of the referenced AWS resource. such as an ELB load balancer. For more
-//    information, see EvaluateTargetHealth (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
+//   - Route 53 automatically sets EvaluateTargetHealth to true for alias records.
+//     When EvaluateTargetHealth is true, the alias record inherits the health
+//     of the referenced Amazon Web Services resource. such as an ELB load balancer.
+//     For more information, see EvaluateTargetHealth (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
 //
-//    * If you include HealthCheckConfig and then use the service to register
-//    an instance that creates an alias record, Route 53 doesn't create the
-//    health check.
+//   - If you include HealthCheckConfig and then use the service to register
+//     an instance that creates an alias record, Route 53 doesn't create the
+//     health check.
 //
-// Charges for health checks
+// # Charges for health checks
 //
-// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
-// For information about pricing for health checks, see Amazon Route 53 Pricing
-// (http://aws.amazon.com/route53/pricing/).
+// Health checks are basic Route 53 health checks that monitor an Amazon Web
+// Services endpoint. For information about pricing for health checks, see Amazon
+// Route 53 Pricing (http://aws.amazon.com/route53/pricing/).
 type HealthCheckConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The number of consecutive health checks that an endpoint must pass or fail
 	// for Route 53 to change the current status of the endpoint from unhealthy
-	// to healthy or vice versa. For more information, see How Route 53 Determines
-	// Whether an Endpoint Is Healthy (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
+	// to healthy or the other way around. For more information, see How Route 53
+	// Determines Whether an Endpoint Is Healthy (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
 	// in the Route 53 Developer Guide.
 	FailureThreshold *int64 `min:"1" type:"integer"`
 
 	// The path that you want Route 53 to request when performing health checks.
-	// The path can be any value for which your endpoint will return an HTTP status
-	// code of 2xx or 3xx when the endpoint is healthy, such as the file /docs/route53-health-check.html.
-	// Route 53 automatically adds the DNS name for the service. If you don't specify
-	// a value for ResourcePath, the default value is /.
+	// The path can be any value that your endpoint returns an HTTP status code
+	// of a 2xx or 3xx format for when the endpoint is healthy. An example file
+	// is /docs/route53-health-check.html. Route 53 automatically adds the DNS name
+	// for the service. If you don't specify a value for ResourcePath, the default
+	// value is /.
 	//
 	// If you specify TCP for Type, you must not specify a value for ResourcePath.
 	ResourcePath *string `type:"string"`
@@ -3664,29 +5008,34 @@ type HealthCheckConfig struct {
 	//
 	//    * HTTPS: Route 53 tries to establish a TCP connection. If successful,
 	//    Route 53 submits an HTTPS request and waits for an HTTP status code of
-	//    200 or greater and less than 400.
+	//    200 or greater and less than 400. If you specify HTTPS for the value of
+	//    Type, the endpoint must support TLS v1.0 or later.
 	//
-	// If you specify HTTPS for the value of Type, the endpoint must support TLS
-	//    v1.0 or later.
-	//
-	//    * TCP: Route 53 tries to establish a TCP connection.
-	//
-	// If you specify TCP for Type, don't specify a value for ResourcePath.
+	//    * TCP: Route 53 tries to establish a TCP connection. If you specify TCP
+	//    for Type, don't specify a value for ResourcePath.
 	//
 	// For more information, see How Route 53 Determines Whether an Endpoint Is
-	// Healthy (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
+	// Healthy (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
 	// in the Route 53 Developer Guide.
 	//
 	// Type is a required field
 	Type *string `type:"string" required:"true" enum:"HealthCheckType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HealthCheckConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HealthCheckConfig) GoString() string {
 	return s.String()
 }
@@ -3730,14 +5079,14 @@ func (s *HealthCheckConfig) SetType(v string) *HealthCheckConfig {
 // checker to evaluate the health of your resources, is useful in the following
 // circumstances:
 //
-//    * You can't use a health check that is defined by HealthCheckConfig because
-//    the resource isn't available over the internet. For example, you can use
-//    a custom health check when the instance is in an Amazon VPC. (To check
-//    the health of resources in a VPC, the health checker must also be in the
-//    VPC.)
+//   - You can't use a health check that's defined by HealthCheckConfig because
+//     the resource isn't available over the internet. For example, you can use
+//     a custom health check when the instance is in an Amazon VPC. (To check
+//     the health of resources in a VPC, the health checker must also be in the
+//     VPC.)
 //
-//    * You want to use a third-party health checker regardless of where your
-//    resources are.
+//   - You want to use a third-party health checker regardless of where your
+//     resources are located.
 //
 // If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 // or HealthCheckConfig but not both.
@@ -3749,55 +5098,59 @@ func (s *HealthCheckConfig) SetType(v string) *HealthCheckConfig {
 //
 // Here's how custom health checks work:
 //
-// You create a service and specify a value for FailureThreshold.
-//
-// The failure threshold indicates the number of 30-second intervals you want
-// AWS Cloud Map to wait between the time that your application sends an UpdateInstanceCustomHealthStatus
-// request and the time that AWS Cloud Map stops routing internet traffic to
-// the corresponding resource.
+// You create a service.
 //
 // You register an instance.
 //
-// You configure a third-party health checker to monitor the resource that is
+// You configure a third-party health checker to monitor the resource that's
 // associated with the new instance.
 //
-// AWS Cloud Map doesn't check the health of the resource directly.
+// Cloud Map doesn't check the health of the resource directly.
 //
 // The third-party health-checker determines that the resource is unhealthy
 // and notifies your application.
 //
 // Your application submits an UpdateInstanceCustomHealthStatus request.
 //
-// AWS Cloud Map waits for (FailureThreshold x 30) seconds.
+// Cloud Map waits for 30 seconds.
 //
 // If another UpdateInstanceCustomHealthStatus request doesn't arrive during
-// that time to change the status back to healthy, AWS Cloud Map stops routing
-// traffic to the resource.
-//
-// Note the following about configuring custom health checks.
+// that time to change the status back to healthy, Cloud Map stops routing traffic
+// to the resource.
 type HealthCheckCustomConfig struct {
 	_ struct{} `type:"structure"`
 
+	//
+	// This parameter is no longer supported and is always set to 1. Cloud Map waits
+	// for approximately 30 seconds after receiving an UpdateInstanceCustomHealthStatus
+	// request before changing the status of the service instance.
+	//
 	// The number of 30-second intervals that you want Cloud Map to wait after receiving
 	// an UpdateInstanceCustomHealthStatus request before it changes the health
-	// status of a service instance. For example, suppose you specify a value of
-	// 2 for FailureTheshold, and then your application sends an UpdateInstanceCustomHealthStatus
-	// request. Cloud Map waits for approximately 60 seconds (2 x 30) before changing
-	// the status of the service instance based on that request.
+	// status of a service instance.
 	//
 	// Sending a second or subsequent UpdateInstanceCustomHealthStatus request with
-	// the same value before FailureThreshold x 30 seconds has passed doesn't accelerate
-	// the change. Cloud Map still waits FailureThreshold x 30 seconds after the
-	// first request to make the change.
-	FailureThreshold *int64 `min:"1" type:"integer"`
+	// the same value before 30 seconds has passed doesn't accelerate the change.
+	// Cloud Map still waits 30 seconds after the first request to make the change.
+	//
+	// Deprecated: Configurable FailureThreshold of HealthCheckCustomConfig is deprecated.  It will always have value 1.
+	FailureThreshold *int64 `min:"1" deprecated:"true" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HealthCheckCustomConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HealthCheckCustomConfig) GoString() string {
 	return s.String()
 }
@@ -3821,9 +5174,9 @@ func (s *HealthCheckCustomConfig) SetFailureThreshold(v int64) *HealthCheckCusto
 	return s
 }
 
-// In a response to a DiscoverInstance request, HttpInstanceSummary contains
-// information about one instance that matches the values that you specified
-// in the request.
+// In a response to a DiscoverInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html)
+// request, HttpInstanceSummary contains information about one instance that
+// matches the values that you specified in the request.
 type HttpInstanceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3838,19 +5191,29 @@ type HttpInstanceSummary struct {
 	// The ID of an instance that matches the values that you specified in the request.
 	InstanceId *string `type:"string"`
 
-	// The name of the namespace that you specified when you registered the instance.
+	//
+	// The HttpName name of the namespace. It's found in the HttpProperties member
+	// of the Properties member of the namespace.
 	NamespaceName *string `type:"string"`
 
 	// The name of the service that you specified when you registered the instance.
 	ServiceName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HttpInstanceSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HttpInstanceSummary) GoString() string {
 	return s.String()
 }
@@ -3885,6 +5248,53 @@ func (s *HttpInstanceSummary) SetServiceName(v string) *HttpInstanceSummary {
 	return s
 }
 
+// Updated properties for the HTTP namespace.
+type HttpNamespaceChange struct {
+	_ struct{} `type:"structure"`
+
+	// An updated description for the HTTP namespace.
+	//
+	// Description is a required field
+	Description *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpNamespaceChange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpNamespaceChange) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpNamespaceChange) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "HttpNamespaceChange"}
+	if s.Description == nil {
+		invalidParams.Add(request.NewErrParamRequired("Description"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDescription sets the Description field's value.
+func (s *HttpNamespaceChange) SetDescription(v string) *HttpNamespaceChange {
+	s.Description = &v
+	return s
+}
+
 // A complex type that contains the name of an HTTP namespace.
 type HttpProperties struct {
 	_ struct{} `type:"structure"`
@@ -3893,12 +5303,20 @@ type HttpProperties struct {
 	HttpName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HttpProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HttpProperties) GoString() string {
 	return s.String()
 }
@@ -3909,8 +5327,8 @@ func (s *HttpProperties) SetHttpName(v string) *HttpProperties {
 	return s
 }
 
-// A complex type that contains information about an instance that AWS Cloud
-// Map creates when you submit a RegisterInstance request.
+// A complex type that contains information about an instance that Cloud Map
+// creates when you submit a RegisterInstance request.
 type Instance struct {
 	_ struct{} `type:"structure"`
 
@@ -3919,103 +5337,133 @@ type Instance struct {
 	//
 	//    * The attributes that apply to the records that are defined in the service.
 	//
-	//
 	//    * For each attribute, the applicable value.
+	//
+	// Do not include sensitive information in the attributes if the namespace is
+	// discoverable by public DNS queries.
 	//
 	// Supported attribute keys include the following:
 	//
 	// AWS_ALIAS_DNS_NAME
 	//
-	// If you want AWS Cloud Map to create a Route 53 alias record that routes traffic
-	// to an Elastic Load Balancing load balancer, specify the DNS name that is
-	// associated with the load balancer. For information about how to get the DNS
-	// name, see "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html).
+	// If you want Cloud Map to create a Route 53 alias record that routes traffic
+	// to an Elastic Load Balancing load balancer, specify the DNS name that's associated
+	// with the load balancer. For information about how to get the DNS name, see
+	// AliasTarget->DNSName (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-DNSName)
+	// in the Route 53 API Reference.
 	//
 	// Note the following:
 	//
-	// The configuration for the service that is specified by ServiceId must include
-	// settings for an A record, an AAAA record, or both.
+	//    * The configuration for the service that's specified by ServiceId must
+	//    include settings for an A record, an AAAA record, or both.
 	//
-	//    * In the service that is specified by ServiceId, the value of RoutingPolicy
+	//    * In the service that's specified by ServiceId, the value of RoutingPolicy
 	//    must be WEIGHTED.
 	//
-	//    * If the service that is specified by ServiceId includes HealthCheckConfig
-	//    settings, AWS Cloud Map will create the health check, but it won't associate
-	//    the health check with the alias record.
+	//    * If the service that's specified by ServiceId includes HealthCheckConfig
+	//    settings, Cloud Map creates the health check, but it won't associate the
+	//    health check with the alias record.
 	//
 	//    * Auto naming currently doesn't support creating alias records that route
-	//    traffic to AWS resources other than ELB load balancers.
+	//    traffic to Amazon Web Services resources other than ELB load balancers.
 	//
 	//    * If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values
 	//    for any of the AWS_INSTANCE attributes.
 	//
+	// AWS_EC2_INSTANCE_ID
+	//
+	// HTTP namespaces only. The Amazon EC2 instance ID for the instance. The AWS_INSTANCE_IPV4
+	// attribute contains the primary private IPv4 address.
+	//
+	// AWS_INIT_HEALTH_STATUS
+	//
+	// If the service configuration includes HealthCheckCustomConfig, you can optionally
+	// use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health
+	// check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS,
+	// the initial status is HEALTHY.
+	//
 	// AWS_INSTANCE_CNAME
 	//
 	// If the service configuration includes a CNAME record, the domain name that
-	// you want Route 53 to return in response to DNS queries, for example, example.com.
+	// you want Route 53 to return in response to DNS queries (for example, example.com).
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an CNAME record.
+	// This value is required if the service specified by ServiceId includes settings
+	// for an CNAME record.
 	//
 	// AWS_INSTANCE_IPV4
 	//
 	// If the service configuration includes an A record, the IPv4 address that
-	// you want Route 53 to return in response to DNS queries, for example, 192.0.2.44.
+	// you want Route 53 to return in response to DNS queries (for example, 192.0.2.44).
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an A record. If the service includes settings for an
-	// SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
+	// This value is required if the service specified by ServiceId includes settings
+	// for an A record. If the service includes settings for an SRV record, you
+	// must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
 	//
 	// AWS_INSTANCE_IPV6
 	//
 	// If the service configuration includes an AAAA record, the IPv6 address that
-	// you want Route 53 to return in response to DNS queries, for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345.
+	// you want Route 53 to return in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345).
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an AAAA record. If the service includes settings for
-	// an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
+	// This value is required if the service specified by ServiceId includes settings
+	// for an AAAA record. If the service includes settings for an SRV record, you
+	// must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
 	//
 	// AWS_INSTANCE_PORT
 	//
 	// If the service includes an SRV record, the value that you want Route 53 to
 	// return for the port.
 	//
-	// If the service includes HealthCheckConfig
+	// If the service includes HealthCheckConfig, the port on the endpoint that
+	// you want Route 53 to send requests to.
+	//
+	// This value is required if you specified settings for an SRV record or a Route
+	// 53 health check when you created the service.
 	Attributes map[string]*string `type:"map"`
 
 	// A unique string that identifies the request and that allows failed RegisterInstance
 	// requests to be retried without the risk of executing the operation twice.
 	// You must use a unique CreatorRequestId string every time you submit a RegisterInstance
 	// request if you're registering additional instances for the same namespace
-	// and service. CreatorRequestId can be any unique string, for example, a date/time
-	// stamp.
+	// and service. CreatorRequestId can be any unique string (for example, a date/time
+	// stamp).
 	CreatorRequestId *string `type:"string"`
 
 	// An identifier that you want to associate with the instance. Note the following:
 	//
-	//    * If the service that is specified by ServiceId includes settings for
-	//    an SRV record, the value of InstanceId is automatically included as part
-	//    of the value for the SRV record. For more information, see DnsRecord$Type.
+	//    * If the service that's specified by ServiceId includes settings for an
+	//    SRV record, the value of InstanceId is automatically included as part
+	//    of the value for the SRV record. For more information, see DnsRecord >
+	//    Type (https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type).
 	//
 	//    * You can use this value to update an existing instance.
 	//
-	//    * To register a new instance, you must specify a value that is unique
-	//    among instances that you register by using the same service.
+	//    * To register a new instance, you must specify a value that's unique among
+	//    instances that you register by using the same service.
 	//
-	//    * If you specify an existing InstanceId and ServiceId, AWS Cloud Map updates
-	//    the existing DNS records. If there's also an existing health check, AWS
-	//    Cloud Map deletes the old health check and creates a new one.
-	//
-	// The health check isn't deleted immediately, so it will still appear for a
-	//    while if you submit a ListHealthChecks request, for example.
+	//    * If you specify an existing InstanceId and ServiceId, Cloud Map updates
+	//    the existing DNS records. If there's also an existing health check, Cloud
+	//    Map deletes the old health check and creates a new one. The health check
+	//    isn't deleted immediately, so it will still appear for a while if you
+	//    submit a ListHealthChecks request, for example.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Instance) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Instance) GoString() string {
 	return s.String()
 }
@@ -4038,6 +5486,71 @@ func (s *Instance) SetId(v string) *Instance {
 	return s
 }
 
+// No instance exists with the specified ID, or the instance was recently registered,
+// and information about the instance hasn't propagated yet.
+type InstanceNotFound struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceNotFound) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceNotFound) GoString() string {
+	return s.String()
+}
+
+func newErrorInstanceNotFound(v protocol.ResponseMetadata) error {
+	return &InstanceNotFound{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InstanceNotFound) Code() string {
+	return "InstanceNotFound"
+}
+
+// Message returns the exception's message.
+func (s *InstanceNotFound) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InstanceNotFound) OrigErr() error {
+	return nil
+}
+
+func (s *InstanceNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InstanceNotFound) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InstanceNotFound) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A complex type that contains information about the instances that you registered
 // by using a specified service.
 type InstanceSummary struct {
@@ -4045,40 +5558,70 @@ type InstanceSummary struct {
 
 	// A string map that contains the following information:
 	//
-	//    * The attributes that are associate with the instance.
+	//    * The attributes that are associated with the instance.
 	//
 	//    * For each attribute, the applicable value.
 	//
 	// Supported attribute keys include the following:
 	//
-	//    * AWS_ALIAS_DNS_NAME: For an alias record that routes traffic to an Elastic
-	//    Load Balancing load balancer, the DNS name that is associated with the
-	//    load balancer.
+	// AWS_ALIAS_DNS_NAME
 	//
-	//    * AWS_INSTANCE_CNAME: For a CNAME record, the domain name that Route 53
-	//    returns in response to DNS queries, for example, example.com.
+	// For an alias record that routes traffic to an Elastic Load Balancing load
+	// balancer, the DNS name that's associated with the load balancer.
 	//
-	//    * AWS_INSTANCE_IPV4: For an A record, the IPv4 address that Route 53 returns
-	//    in response to DNS queries, for example, 192.0.2.44.
+	// AWS_EC2_INSTANCE_ID (HTTP namespaces only)
 	//
-	//    * AWS_INSTANCE_IPV6: For an AAAA record, the IPv6 address that Route 53
-	//    returns in response to DNS queries, for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345.
+	// The Amazon EC2 instance ID for the instance. When the AWS_EC2_INSTANCE_ID
+	// attribute is specified, then the AWS_INSTANCE_IPV4 attribute contains the
+	// primary private IPv4 address.
 	//
-	//    * AWS_INSTANCE_PORT: For an SRV record, the value that Route 53 returns
-	//    for the port. In addition, if the service includes HealthCheckConfig,
-	//    the port on the endpoint that Route 53 sends requests to.
+	// AWS_INIT_HEALTH_STATUS
+	//
+	// If the service configuration includes HealthCheckCustomConfig, you can optionally
+	// use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health
+	// check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS,
+	// the initial status is HEALTHY.
+	//
+	// AWS_INSTANCE_CNAME
+	//
+	// For a CNAME record, the domain name that Route 53 returns in response to
+	// DNS queries (for example, example.com).
+	//
+	// AWS_INSTANCE_IPV4
+	//
+	// For an A record, the IPv4 address that Route 53 returns in response to DNS
+	// queries (for example, 192.0.2.44).
+	//
+	// AWS_INSTANCE_IPV6
+	//
+	// For an AAAA record, the IPv6 address that Route 53 returns in response to
+	// DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345).
+	//
+	// AWS_INSTANCE_PORT
+	//
+	// For an SRV record, the value that Route 53 returns for the port. In addition,
+	// if the service includes HealthCheckConfig, the port on the endpoint that
+	// Route 53 sends requests to.
 	Attributes map[string]*string `type:"map"`
 
 	// The ID for an instance that you created by using a specified service.
 	Id *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceSummary) GoString() string {
 	return s.String()
 }
@@ -4095,12 +5638,78 @@ func (s *InstanceSummary) SetId(v string) *InstanceSummary {
 	return s
 }
 
+// One or more specified values aren't valid. For example, a required value
+// might be missing, a numeric value might be outside the allowed range, or
+// a string value might exceed length constraints.
+type InvalidInput struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInput) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInput(v protocol.ResponseMetadata) error {
+	return &InvalidInput{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInput) Code() string {
+	return "InvalidInput"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInput) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInput) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInput) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInput) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInput) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListInstancesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of instances that you want AWS Cloud Map to return in
-	// the response to a ListInstances request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 instances.
+	// The maximum number of instances that you want Cloud Map to return in the
+	// response to a ListInstances request. If you don't specify a value for MaxResults,
+	// Cloud Map returns up to 100 instances.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first ListInstances request, omit this value.
@@ -4116,12 +5725,20 @@ type ListInstancesInput struct {
 	ServiceId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListInstancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListInstancesInput) GoString() string {
 	return s.String()
 }
@@ -4173,12 +5790,20 @@ type ListInstancesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListInstancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListInstancesOutput) GoString() string {
 	return s.String()
 }
@@ -4205,9 +5830,9 @@ type ListNamespacesInput struct {
 	// be returned by ListNamespaces.
 	Filters []*NamespaceFilter `type:"list"`
 
-	// The maximum number of namespaces that you want AWS Cloud Map to return in
-	// the response to a ListNamespaces request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 namespaces.
+	// The maximum number of namespaces that you want Cloud Map to return in the
+	// response to a ListNamespaces request. If you don't specify a value for MaxResults,
+	// Cloud Map returns up to 100 namespaces.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first ListNamespaces request, omit this value.
@@ -4216,19 +5841,27 @@ type ListNamespacesInput struct {
 	// to get the next group of results. Specify the value of NextToken from the
 	// previous response in the next request.
 	//
-	// AWS Cloud Map gets MaxResults namespaces and then filters them based on the
-	// specified criteria. It's possible that no namespaces in the first MaxResults
-	// namespaces matched the specified criteria but that subsequent groups of MaxResults
-	// namespaces do contain namespaces that match the criteria.
+	// Cloud Map gets MaxResults namespaces and then filters them based on the specified
+	// criteria. It's possible that no namespaces in the first MaxResults namespaces
+	// matched the specified criteria but that subsequent groups of MaxResults namespaces
+	// do contain namespaces that match the criteria.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListNamespacesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListNamespacesInput) GoString() string {
 	return s.String()
 }
@@ -4285,19 +5918,27 @@ type ListNamespacesOutput struct {
 	// to get the next group of results. Specify the value of NextToken from the
 	// previous response in the next request.
 	//
-	// AWS Cloud Map gets MaxResults namespaces and then filters them based on the
-	// specified criteria. It's possible that no namespaces in the first MaxResults
-	// namespaces matched the specified criteria but that subsequent groups of MaxResults
-	// namespaces do contain namespaces that match the criteria.
+	// Cloud Map gets MaxResults namespaces and then filters them based on the specified
+	// criteria. It's possible that no namespaces in the first MaxResults namespaces
+	// matched the specified criteria but that subsequent groups of MaxResults namespaces
+	// do contain namespaces that match the criteria.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListNamespacesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListNamespacesOutput) GoString() string {
 	return s.String()
 }
@@ -4325,9 +5966,9 @@ type ListOperationsInput struct {
 	// to be returned by ListOperations.
 	Filters []*OperationFilter `type:"list"`
 
-	// The maximum number of items that you want AWS Cloud Map to return in the
-	// response to a ListOperations request. If you don't specify a value for MaxResults,
-	// AWS Cloud Map returns up to 100 operations.
+	// The maximum number of items that you want Cloud Map to return in the response
+	// to a ListOperations request. If you don't specify a value for MaxResults,
+	// Cloud Map returns up to 100 operations.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first ListOperations request, omit this value.
@@ -4336,19 +5977,27 @@ type ListOperationsInput struct {
 	// to get the next group of results. Specify the value of NextToken from the
 	// previous response in the next request.
 	//
-	// AWS Cloud Map gets MaxResults operations and then filters them based on the
-	// specified criteria. It's possible that no operations in the first MaxResults
-	// operations matched the specified criteria but that subsequent groups of MaxResults
-	// operations do contain operations that match the criteria.
+	// Cloud Map gets MaxResults operations and then filters them based on the specified
+	// criteria. It's possible that no operations in the first MaxResults operations
+	// matched the specified criteria but that subsequent groups of MaxResults operations
+	// do contain operations that match the criteria.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOperationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOperationsInput) GoString() string {
 	return s.String()
 }
@@ -4401,22 +6050,30 @@ type ListOperationsOutput struct {
 	// to get the next group of results. Specify the value of NextToken from the
 	// previous response in the next request.
 	//
-	// AWS Cloud Map gets MaxResults operations and then filters them based on the
-	// specified criteria. It's possible that no operations in the first MaxResults
-	// operations matched the specified criteria but that subsequent groups of MaxResults
-	// operations do contain operations that match the criteria.
+	// Cloud Map gets MaxResults operations and then filters them based on the specified
+	// criteria. It's possible that no operations in the first MaxResults operations
+	// matched the specified criteria but that subsequent groups of MaxResults operations
+	// do contain operations that match the criteria.
 	NextToken *string `type:"string"`
 
 	// Summary information about the operations that match the specified criteria.
 	Operations []*OperationSummary `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOperationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOperationsOutput) GoString() string {
 	return s.String()
 }
@@ -4443,9 +6100,9 @@ type ListServicesInput struct {
 	// to be returned by ListServices.
 	Filters []*ServiceFilter `type:"list"`
 
-	// The maximum number of services that you want AWS Cloud Map to return in the
-	// response to a ListServices request. If you don't specify a value for MaxResults,
-	// AWS Cloud Map returns up to 100 services.
+	// The maximum number of services that you want Cloud Map to return in the response
+	// to a ListServices request. If you don't specify a value for MaxResults, Cloud
+	// Map returns up to 100 services.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first ListServices request, omit this value.
@@ -4454,19 +6111,27 @@ type ListServicesInput struct {
 	// get the next group of results. Specify the value of NextToken from the previous
 	// response in the next request.
 	//
-	// AWS Cloud Map gets MaxResults services and then filters them based on the
-	// specified criteria. It's possible that no services in the first MaxResults
-	// services matched the specified criteria but that subsequent groups of MaxResults
-	// services do contain services that match the criteria.
+	// Cloud Map gets MaxResults services and then filters them based on the specified
+	// criteria. It's possible that no services in the first MaxResults services
+	// matched the specified criteria but that subsequent groups of MaxResults services
+	// do contain services that match the criteria.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListServicesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListServicesInput) GoString() string {
 	return s.String()
 }
@@ -4519,10 +6184,10 @@ type ListServicesOutput struct {
 	// get the next group of results. Specify the value of NextToken from the previous
 	// response in the next request.
 	//
-	// AWS Cloud Map gets MaxResults services and then filters them based on the
-	// specified criteria. It's possible that no services in the first MaxResults
-	// services matched the specified criteria but that subsequent groups of MaxResults
-	// services do contain services that match the criteria.
+	// Cloud Map gets MaxResults services and then filters them based on the specified
+	// criteria. It's possible that no services in the first MaxResults services
+	// matched the specified criteria but that subsequent groups of MaxResults services
+	// do contain services that match the criteria.
 	NextToken *string `type:"string"`
 
 	// An array that contains one ServiceSummary object for each service that matches
@@ -4530,12 +6195,20 @@ type ListServicesOutput struct {
 	Services []*ServiceSummary `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListServicesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListServicesOutput) GoString() string {
 	return s.String()
 }
@@ -4552,12 +6225,93 @@ func (s *ListServicesOutput) SetServices(v []*ServiceSummary) *ListServicesOutpu
 	return s
 }
 
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource that you want to retrieve
+	// tags for.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *ListTagsForResourceInput) SetResourceARN(v string) *ListTagsForResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The tags that are assigned to the resource.
+	Tags []*Tag `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SetTags sets the Tags field's value.
+func (s *ListTagsForResourceOutput) SetTags(v []*Tag) *ListTagsForResourceOutput {
+	s.Tags = v
+	return s
+}
+
 // A complex type that contains information about a specified namespace.
 type Namespace struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace
-	// when you create it.
+	// The Amazon Resource Name (ARN) that Cloud Map assigns to the namespace when
+	// you create it.
 	Arn *string `type:"string"`
 
 	// The date that the namespace was created, in Unix date/time format and Coordinated
@@ -4567,7 +6321,7 @@ type Namespace struct {
 	CreateDate *time.Time `type:"timestamp"`
 
 	// A unique string that identifies the request and that allows failed requests
-	// to be retried without the risk of executing an operation twice.
+	// to be retried without the risk of running an operation twice.
 	CreatorRequestId *string `type:"string"`
 
 	// The description that you specify for the namespace when you create it.
@@ -4586,16 +6340,40 @@ type Namespace struct {
 	// The number of services that are associated with the namespace.
 	ServiceCount *int64 `type:"integer"`
 
-	// The type of the namespace. Valid values are DNS_PUBLIC and DNS_PRIVATE.
+	// The type of the namespace. The methods for discovering instances depends
+	// on the value that you specify:
+	//
+	// HTTP
+	//
+	// Instances can be discovered only programmatically, using the Cloud Map DiscoverInstances
+	// API.
+	//
+	// DNS_PUBLIC
+	//
+	// Instances can be discovered using public DNS queries and using the DiscoverInstances
+	// API.
+	//
+	// DNS_PRIVATE
+	//
+	// Instances can be discovered using DNS queries in VPCs and using the DiscoverInstances
+	// API.
 	Type *string `type:"string" enum:"NamespaceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Namespace) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Namespace) GoString() string {
 	return s.String()
 }
@@ -4654,44 +6432,131 @@ func (s *Namespace) SetType(v string) *Namespace {
 	return s
 }
 
+// The namespace that you're trying to create already exists.
+type NamespaceAlreadyExists struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The CreatorRequestId that was used to create the namespace.
+	CreatorRequestId *string `type:"string"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The ID of the existing namespace.
+	NamespaceId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NamespaceAlreadyExists) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NamespaceAlreadyExists) GoString() string {
+	return s.String()
+}
+
+func newErrorNamespaceAlreadyExists(v protocol.ResponseMetadata) error {
+	return &NamespaceAlreadyExists{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NamespaceAlreadyExists) Code() string {
+	return "NamespaceAlreadyExists"
+}
+
+// Message returns the exception's message.
+func (s *NamespaceAlreadyExists) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NamespaceAlreadyExists) OrigErr() error {
+	return nil
+}
+
+func (s *NamespaceAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NamespaceAlreadyExists) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NamespaceAlreadyExists) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A complex type that identifies the namespaces that you want to list. You
 // can choose to list public or private namespaces.
 type NamespaceFilter struct {
 	_ struct{} `type:"structure"`
 
-	// The operator that you want to use to determine whether ListNamespaces returns
-	// a namespace. Valid values for condition include:
+	// Specify the operator that you want to use to determine whether a namespace
+	// matches the specified value. Valid values for Condition are one of the following.
 	//
-	//    * EQ: When you specify EQ for the condition, you can choose to list only
-	//    public namespaces or private namespaces, but not both. EQ is the default
-	//    condition and can be omitted.
+	//    * EQ: When you specify EQ for Condition, you can specify only one value.
+	//    EQ is supported for TYPE, NAME, and HTTP_NAME. EQ is the default condition
+	//    and can be omitted.
 	//
-	//    * IN: When you specify IN for the condition, you can choose to list public
-	//    namespaces, private namespaces, or both.
-	//
-	//    * BETWEEN: Not applicable
+	//    * BEGINS_WITH: When you specify BEGINS_WITH for Condition, you can specify
+	//    only one value. BEGINS_WITH is supported for TYPE, NAME, and HTTP_NAME.
 	Condition *string `type:"string" enum:"FilterCondition"`
 
-	// Specify TYPE.
+	// Specify the namespaces that you want to get using one of the following.
+	//
+	//    * TYPE: Gets the namespaces of the specified type.
+	//
+	//    * NAME: Gets the namespaces with the specified name.
+	//
+	//    * HTTP_NAME: Gets the namespaces with the specified HTTP name.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true" enum:"NamespaceFilterName"`
 
-	// If you specify EQ for Condition, specify either DNS_PUBLIC or DNS_PRIVATE.
+	// Specify the values that are applicable to the value that you specify for
+	// Name.
 	//
-	// If you specify IN for Condition, you can specify DNS_PUBLIC, DNS_PRIVATE,
-	// or both.
+	//    * TYPE: Specify HTTP, DNS_PUBLIC, or DNS_PRIVATE.
+	//
+	//    * NAME: Specify the name of the namespace, which is found in Namespace.Name.
+	//
+	//    * HTTP_NAME: Specify the HTTP name of the namespace, which is found in
+	//    Namespace.Properties.HttpProperties.HttpName.
 	//
 	// Values is a required field
 	Values []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NamespaceFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NamespaceFilter) GoString() string {
 	return s.String()
 }
@@ -4730,25 +6595,97 @@ func (s *NamespaceFilter) SetValues(v []*string) *NamespaceFilter {
 	return s
 }
 
-// A complex type that contains information that is specific to the namespace
+// No namespace exists with the specified ID.
+type NamespaceNotFound struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NamespaceNotFound) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NamespaceNotFound) GoString() string {
+	return s.String()
+}
+
+func newErrorNamespaceNotFound(v protocol.ResponseMetadata) error {
+	return &NamespaceNotFound{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NamespaceNotFound) Code() string {
+	return "NamespaceNotFound"
+}
+
+// Message returns the exception's message.
+func (s *NamespaceNotFound) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NamespaceNotFound) OrigErr() error {
+	return nil
+}
+
+func (s *NamespaceNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NamespaceNotFound) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NamespaceNotFound) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A complex type that contains information that's specific to the namespace
 // type.
 type NamespaceProperties struct {
 	_ struct{} `type:"structure"`
 
-	// A complex type that contains the ID for the Route 53 hosted zone that AWS
-	// Cloud Map creates when you create a namespace.
+	// A complex type that contains the ID for the Route 53 hosted zone that Cloud
+	// Map creates when you create a namespace.
 	DnsProperties *DnsProperties `type:"structure"`
 
 	// A complex type that contains the name of an HTTP namespace.
 	HttpProperties *HttpProperties `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NamespaceProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NamespaceProperties) GoString() string {
 	return s.String()
 }
@@ -4769,8 +6706,8 @@ func (s *NamespaceProperties) SetHttpProperties(v *HttpProperties) *NamespacePro
 type NamespaceSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace
-	// when you create it.
+	// The Amazon Resource Name (ARN) that Cloud Map assigns to the namespace when
+	// you create it.
 	Arn *string `type:"string"`
 
 	// The date and time that the namespace was created.
@@ -4782,12 +6719,11 @@ type NamespaceSummary struct {
 	// The ID of the namespace.
 	Id *string `type:"string"`
 
-	// The name of the namespace. When you create a namespace, AWS Cloud Map automatically
+	// The name of the namespace. When you create a namespace, Cloud Map automatically
 	// creates a Route 53 hosted zone that has the same name as the namespace.
 	Name *string `type:"string"`
 
-	// A complex type that contains information that is specific to the namespace
-	// type.
+	// The properties of the namespace.
 	Properties *NamespaceProperties `type:"structure"`
 
 	// The number of services that were created using the namespace.
@@ -4797,12 +6733,20 @@ type NamespaceSummary struct {
 	Type *string `type:"string" enum:"NamespaceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NamespaceSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NamespaceSummary) GoString() string {
 	return s.String()
 }
@@ -4890,26 +6834,39 @@ type Operation struct {
 
 	// The status of the operation. Values include the following:
 	//
-	//    * SUBMITTED: This is the initial state immediately after you submit a
-	//    request.
+	// SUBMITTED
 	//
-	//    * PENDING: AWS Cloud Map is performing the operation.
+	// This is the initial state that occurs immediately after you submit a request.
 	//
-	//    * SUCCESS: The operation succeeded.
+	// PENDING
 	//
-	//    * FAIL: The operation failed. For the failure reason, see ErrorMessage.
+	// Cloud Map is performing the operation.
+	//
+	// SUCCESS
+	//
+	// The operation succeeded.
+	//
+	// FAIL
+	//
+	// The operation failed. For the failure reason, see ErrorMessage.
 	Status *string `type:"string" enum:"OperationStatus"`
 
-	// The name of the target entity that is associated with the operation:
+	// The name of the target entity that's associated with the operation:
 	//
-	//    * NAMESPACE: The namespace ID is returned in the ResourceId property.
+	// NAMESPACE
 	//
-	//    * SERVICE: The service ID is returned in the ResourceId property.
+	// The namespace ID is returned in the ResourceId property.
 	//
-	//    * INSTANCE: The instance ID is returned in the ResourceId property.
+	// SERVICE
+	//
+	// The service ID is returned in the ResourceId property.
+	//
+	// INSTANCE
+	//
+	// The instance ID is returned in the ResourceId property.
 	Targets map[string]*string `type:"map"`
 
-	// The name of the operation that is associated with the specified ID.
+	// The name of the operation that's associated with the specified ID.
 	Type *string `type:"string" enum:"OperationType"`
 
 	// The date and time that the value of Status changed to the current value,
@@ -4919,12 +6876,20 @@ type Operation struct {
 	UpdateDate *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Operation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Operation) GoString() string {
 	return s.String()
 }
@@ -5034,12 +6999,20 @@ type OperationFilter struct {
 	Values []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OperationFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OperationFilter) GoString() string {
 	return s.String()
 }
@@ -5078,8 +7051,73 @@ func (s *OperationFilter) SetValues(v []*string) *OperationFilter {
 	return s
 }
 
+// No operation exists with the specified ID.
+type OperationNotFound struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotFound) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotFound) GoString() string {
+	return s.String()
+}
+
+func newErrorOperationNotFound(v protocol.ResponseMetadata) error {
+	return &OperationNotFound{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OperationNotFound) Code() string {
+	return "OperationNotFound"
+}
+
+// Message returns the exception's message.
+func (s *OperationNotFound) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OperationNotFound) OrigErr() error {
+	return nil
+}
+
+func (s *OperationNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OperationNotFound) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OperationNotFound) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A complex type that contains information about an operation that matches
-// the criteria that you specified in a ListOperations request.
+// the criteria that you specified in a ListOperations (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html)
+// request.
 type OperationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5091,7 +7129,7 @@ type OperationSummary struct {
 	//    * SUBMITTED: This is the initial state immediately after you submit a
 	//    request.
 	//
-	//    * PENDING: AWS Cloud Map is performing the operation.
+	//    * PENDING: Cloud Map is performing the operation.
 	//
 	//    * SUCCESS: The operation succeeded.
 	//
@@ -5099,12 +7137,20 @@ type OperationSummary struct {
 	Status *string `type:"string" enum:"OperationStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OperationSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OperationSummary) GoString() string {
 	return s.String()
 }
@@ -5121,6 +7167,537 @@ func (s *OperationSummary) SetStatus(v string) *OperationSummary {
 	return s
 }
 
+// Updated properties for the private DNS namespace.
+type PrivateDnsNamespaceChange struct {
+	_ struct{} `type:"structure"`
+
+	// An updated description for the private DNS namespace.
+	Description *string `type:"string"`
+
+	// Properties to be updated in the private DNS namespace.
+	Properties *PrivateDnsNamespacePropertiesChange `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsNamespaceChange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsNamespaceChange) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PrivateDnsNamespaceChange) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PrivateDnsNamespaceChange"}
+	if s.Properties != nil {
+		if err := s.Properties.Validate(); err != nil {
+			invalidParams.AddNested("Properties", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDescription sets the Description field's value.
+func (s *PrivateDnsNamespaceChange) SetDescription(v string) *PrivateDnsNamespaceChange {
+	s.Description = &v
+	return s
+}
+
+// SetProperties sets the Properties field's value.
+func (s *PrivateDnsNamespaceChange) SetProperties(v *PrivateDnsNamespacePropertiesChange) *PrivateDnsNamespaceChange {
+	s.Properties = v
+	return s
+}
+
+// DNS properties for the private DNS namespace.
+type PrivateDnsNamespaceProperties struct {
+	_ struct{} `type:"structure"`
+
+	// DNS properties for the private DNS namespace.
+	//
+	// DnsProperties is a required field
+	DnsProperties *PrivateDnsPropertiesMutable `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsNamespaceProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsNamespaceProperties) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PrivateDnsNamespaceProperties) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PrivateDnsNamespaceProperties"}
+	if s.DnsProperties == nil {
+		invalidParams.Add(request.NewErrParamRequired("DnsProperties"))
+	}
+	if s.DnsProperties != nil {
+		if err := s.DnsProperties.Validate(); err != nil {
+			invalidParams.AddNested("DnsProperties", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDnsProperties sets the DnsProperties field's value.
+func (s *PrivateDnsNamespaceProperties) SetDnsProperties(v *PrivateDnsPropertiesMutable) *PrivateDnsNamespaceProperties {
+	s.DnsProperties = v
+	return s
+}
+
+// Updated properties for the private DNS namespace.
+type PrivateDnsNamespacePropertiesChange struct {
+	_ struct{} `type:"structure"`
+
+	// Updated DNS properties for the private DNS namespace.
+	//
+	// DnsProperties is a required field
+	DnsProperties *PrivateDnsPropertiesMutableChange `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsNamespacePropertiesChange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsNamespacePropertiesChange) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PrivateDnsNamespacePropertiesChange) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PrivateDnsNamespacePropertiesChange"}
+	if s.DnsProperties == nil {
+		invalidParams.Add(request.NewErrParamRequired("DnsProperties"))
+	}
+	if s.DnsProperties != nil {
+		if err := s.DnsProperties.Validate(); err != nil {
+			invalidParams.AddNested("DnsProperties", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDnsProperties sets the DnsProperties field's value.
+func (s *PrivateDnsNamespacePropertiesChange) SetDnsProperties(v *PrivateDnsPropertiesMutableChange) *PrivateDnsNamespacePropertiesChange {
+	s.DnsProperties = v
+	return s
+}
+
+// DNS properties for the private DNS namespace.
+type PrivateDnsPropertiesMutable struct {
+	_ struct{} `type:"structure"`
+
+	// Fields for the Start of Authority (SOA) record for the hosted zone for the
+	// private DNS namespace.
+	//
+	// SOA is a required field
+	SOA *SOA `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsPropertiesMutable) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsPropertiesMutable) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PrivateDnsPropertiesMutable) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PrivateDnsPropertiesMutable"}
+	if s.SOA == nil {
+		invalidParams.Add(request.NewErrParamRequired("SOA"))
+	}
+	if s.SOA != nil {
+		if err := s.SOA.Validate(); err != nil {
+			invalidParams.AddNested("SOA", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSOA sets the SOA field's value.
+func (s *PrivateDnsPropertiesMutable) SetSOA(v *SOA) *PrivateDnsPropertiesMutable {
+	s.SOA = v
+	return s
+}
+
+// Updated DNS properties for the private DNS namespace.
+type PrivateDnsPropertiesMutableChange struct {
+	_ struct{} `type:"structure"`
+
+	// Updated fields for the Start of Authority (SOA) record for the hosted zone
+	// for the private DNS namespace.
+	//
+	// SOA is a required field
+	SOA *SOAChange `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsPropertiesMutableChange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PrivateDnsPropertiesMutableChange) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PrivateDnsPropertiesMutableChange) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PrivateDnsPropertiesMutableChange"}
+	if s.SOA == nil {
+		invalidParams.Add(request.NewErrParamRequired("SOA"))
+	}
+	if s.SOA != nil {
+		if err := s.SOA.Validate(); err != nil {
+			invalidParams.AddNested("SOA", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSOA sets the SOA field's value.
+func (s *PrivateDnsPropertiesMutableChange) SetSOA(v *SOAChange) *PrivateDnsPropertiesMutableChange {
+	s.SOA = v
+	return s
+}
+
+// Updated properties for the public DNS namespace.
+type PublicDnsNamespaceChange struct {
+	_ struct{} `type:"structure"`
+
+	// An updated description for the public DNS namespace.
+	Description *string `type:"string"`
+
+	// Properties to be updated in the public DNS namespace.
+	Properties *PublicDnsNamespacePropertiesChange `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsNamespaceChange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsNamespaceChange) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PublicDnsNamespaceChange) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PublicDnsNamespaceChange"}
+	if s.Properties != nil {
+		if err := s.Properties.Validate(); err != nil {
+			invalidParams.AddNested("Properties", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDescription sets the Description field's value.
+func (s *PublicDnsNamespaceChange) SetDescription(v string) *PublicDnsNamespaceChange {
+	s.Description = &v
+	return s
+}
+
+// SetProperties sets the Properties field's value.
+func (s *PublicDnsNamespaceChange) SetProperties(v *PublicDnsNamespacePropertiesChange) *PublicDnsNamespaceChange {
+	s.Properties = v
+	return s
+}
+
+// DNS properties for the public DNS namespace.
+type PublicDnsNamespaceProperties struct {
+	_ struct{} `type:"structure"`
+
+	// DNS properties for the public DNS namespace.
+	//
+	// DnsProperties is a required field
+	DnsProperties *PublicDnsPropertiesMutable `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsNamespaceProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsNamespaceProperties) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PublicDnsNamespaceProperties) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PublicDnsNamespaceProperties"}
+	if s.DnsProperties == nil {
+		invalidParams.Add(request.NewErrParamRequired("DnsProperties"))
+	}
+	if s.DnsProperties != nil {
+		if err := s.DnsProperties.Validate(); err != nil {
+			invalidParams.AddNested("DnsProperties", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDnsProperties sets the DnsProperties field's value.
+func (s *PublicDnsNamespaceProperties) SetDnsProperties(v *PublicDnsPropertiesMutable) *PublicDnsNamespaceProperties {
+	s.DnsProperties = v
+	return s
+}
+
+// Updated properties for the public DNS namespace.
+type PublicDnsNamespacePropertiesChange struct {
+	_ struct{} `type:"structure"`
+
+	// Updated DNS properties for the hosted zone for the public DNS namespace.
+	//
+	// DnsProperties is a required field
+	DnsProperties *PublicDnsPropertiesMutableChange `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsNamespacePropertiesChange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsNamespacePropertiesChange) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PublicDnsNamespacePropertiesChange) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PublicDnsNamespacePropertiesChange"}
+	if s.DnsProperties == nil {
+		invalidParams.Add(request.NewErrParamRequired("DnsProperties"))
+	}
+	if s.DnsProperties != nil {
+		if err := s.DnsProperties.Validate(); err != nil {
+			invalidParams.AddNested("DnsProperties", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDnsProperties sets the DnsProperties field's value.
+func (s *PublicDnsNamespacePropertiesChange) SetDnsProperties(v *PublicDnsPropertiesMutableChange) *PublicDnsNamespacePropertiesChange {
+	s.DnsProperties = v
+	return s
+}
+
+// DNS properties for the public DNS namespace.
+type PublicDnsPropertiesMutable struct {
+	_ struct{} `type:"structure"`
+
+	// Start of Authority (SOA) record for the hosted zone for the public DNS namespace.
+	//
+	// SOA is a required field
+	SOA *SOA `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsPropertiesMutable) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsPropertiesMutable) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PublicDnsPropertiesMutable) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PublicDnsPropertiesMutable"}
+	if s.SOA == nil {
+		invalidParams.Add(request.NewErrParamRequired("SOA"))
+	}
+	if s.SOA != nil {
+		if err := s.SOA.Validate(); err != nil {
+			invalidParams.AddNested("SOA", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSOA sets the SOA field's value.
+func (s *PublicDnsPropertiesMutable) SetSOA(v *SOA) *PublicDnsPropertiesMutable {
+	s.SOA = v
+	return s
+}
+
+// Updated DNS properties for the public DNS namespace.
+type PublicDnsPropertiesMutableChange struct {
+	_ struct{} `type:"structure"`
+
+	// Updated fields for the Start of Authority (SOA) record for the hosted zone
+	// for the public DNS namespace.
+	//
+	// SOA is a required field
+	SOA *SOAChange `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsPropertiesMutableChange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicDnsPropertiesMutableChange) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PublicDnsPropertiesMutableChange) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PublicDnsPropertiesMutableChange"}
+	if s.SOA == nil {
+		invalidParams.Add(request.NewErrParamRequired("SOA"))
+	}
+	if s.SOA != nil {
+		if err := s.SOA.Validate(); err != nil {
+			invalidParams.AddNested("SOA", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSOA sets the SOA field's value.
+func (s *PublicDnsPropertiesMutableChange) SetSOA(v *SOAChange) *PublicDnsPropertiesMutableChange {
+	s.SOA = v
+	return s
+}
+
 type RegisterInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5129,74 +7706,98 @@ type RegisterInstanceInput struct {
 	//
 	//    * The attributes that apply to the records that are defined in the service.
 	//
-	//
 	//    * For each attribute, the applicable value.
+	//
+	// Do not include sensitive information in the attributes if the namespace is
+	// discoverable by public DNS queries.
 	//
 	// Supported attribute keys include the following:
 	//
 	// AWS_ALIAS_DNS_NAME
 	//
-	// If you want AWS Cloud Map to create an Amazon Route 53 alias record that
-	// routes traffic to an Elastic Load Balancing load balancer, specify the DNS
-	// name that is associated with the load balancer. For information about how
-	// to get the DNS name, see "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html)in the Route 53 API Reference.
+	// If you want Cloud Map to create an Amazon Route 53 alias record that routes
+	// traffic to an Elastic Load Balancing load balancer, specify the DNS name
+	// that's associated with the load balancer. For information about how to get
+	// the DNS name, see "DNSName" in the topic AliasTarget (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html)
+	// in the Route 53 API Reference.
 	//
 	// Note the following:
 	//
-	// The configuration for the service that is specified by ServiceId must include
-	// settings for an A record, an AAAA record, or both.
+	//    * The configuration for the service that's specified by ServiceId must
+	//    include settings for an A record, an AAAA record, or both.
 	//
-	//    * In the service that is specified by ServiceId, the value of RoutingPolicy
+	//    * In the service that's specified by ServiceId, the value of RoutingPolicy
 	//    must be WEIGHTED.
 	//
-	//    * If the service that is specified by ServiceId includes HealthCheckConfig
-	//    settings, AWS Cloud Map will create the Route 53 health check, but it
-	//    won't associate the health check with the alias record.
+	//    * If the service that's specified by ServiceId includes HealthCheckConfig
+	//    settings, Cloud Map will create the Route 53 health check, but it doesn't
+	//    associate the health check with the alias record.
 	//
-	//    * Auto naming currently doesn't support creating alias records that route
-	//    traffic to AWS resources other than ELB load balancers.
+	//    * Cloud Map currently doesn't support creating alias records that route
+	//    traffic to Amazon Web Services resources other than Elastic Load Balancing
+	//    load balancers.
 	//
 	//    * If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values
 	//    for any of the AWS_INSTANCE attributes.
 	//
+	// AWS_EC2_INSTANCE_ID
+	//
+	// HTTP namespaces only. The Amazon EC2 instance ID for the instance. If the
+	// AWS_EC2_INSTANCE_ID attribute is specified, then the only other attribute
+	// that can be specified is AWS_INIT_HEALTH_STATUS. When the AWS_EC2_INSTANCE_ID
+	// attribute is specified, then the AWS_INSTANCE_IPV4 attribute will be filled
+	// out with the primary private IPv4 address.
+	//
 	// AWS_INIT_HEALTH_STATUS
 	//
-	// If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUSto specify the initial status of the custom health check, HEALTHYor UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.
+	// If the service configuration includes HealthCheckCustomConfig, you can optionally
+	// use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health
+	// check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS,
+	// the initial status is HEALTHY.
 	//
 	// AWS_INSTANCE_CNAME
 	//
 	// If the service configuration includes a CNAME record, the domain name that
-	// you want Route 53 to return in response to DNS queries, for example, example.com.
+	// you want Route 53 to return in response to DNS queries (for example, example.com).
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an CNAME record.
+	// This value is required if the service specified by ServiceId includes settings
+	// for an CNAME record.
 	//
 	// AWS_INSTANCE_IPV4
 	//
 	// If the service configuration includes an A record, the IPv4 address that
-	// you want Route 53 to return in response to DNS queries, for example, 192.0.2.44.
+	// you want Route 53 to return in response to DNS queries (for example, 192.0.2.44).
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an A record. If the service includes settings for an
-	// SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
+	// This value is required if the service specified by ServiceId includes settings
+	// for an A record. If the service includes settings for an SRV record, you
+	// must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
 	//
 	// AWS_INSTANCE_IPV6
 	//
 	// If the service configuration includes an AAAA record, the IPv6 address that
-	// you want Route 53 to return in response to DNS queries, for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345.
+	// you want Route 53 to return in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345).
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an AAAA record. If the service includes settings for
-	// an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
+	// This value is required if the service specified by ServiceId includes settings
+	// for an AAAA record. If the service includes settings for an SRV record, you
+	// must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
 	//
 	// AWS_INSTANCE_PORT
 	//
 	// If the service includes an SRV record, the value that you want Route 53 to
 	// return for the port.
 	//
-	// If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.
+	// If the service includes HealthCheckConfig, the port on the endpoint that
+	// you want Route 53 to send requests to.
 	//
-	// This value is required if you specified settings for an SRV record when you
-	// created the service.
+	// This value is required if you specified settings for an SRV record or a Route
+	// 53 health check when you created the service.
 	//
 	// Custom attributes
+	//
+	// You can add up to 30 custom attributes. For each key-value pair, the maximum
+	// length of the attribute name is 255 characters, and the maximum length of
+	// the attribute value is 1,024 characters. The total size of all provided attributes
+	// (sum of all keys and values) must not exceed 5,000 characters.
 	//
 	// Attributes is a required field
 	Attributes map[string]*string `type:"map" required:"true"`
@@ -5205,27 +7806,31 @@ type RegisterInstanceInput struct {
 	// requests to be retried without the risk of executing the operation twice.
 	// You must use a unique CreatorRequestId string every time you submit a RegisterInstance
 	// request if you're registering additional instances for the same namespace
-	// and service. CreatorRequestId can be any unique string, for example, a date/time
-	// stamp.
+	// and service. CreatorRequestId can be any unique string (for example, a date/time
+	// stamp).
 	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
 
 	// An identifier that you want to associate with the instance. Note the following:
 	//
-	//    * If the service that is specified by ServiceId includes settings for
-	//    an SRV record, the value of InstanceId is automatically included as part
-	//    of the value for the SRV record. For more information, see DnsRecord$Type.
+	//    * If the service that's specified by ServiceId includes settings for an
+	//    SRV record, the value of InstanceId is automatically included as part
+	//    of the value for the SRV record. For more information, see DnsRecord >
+	//    Type (https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type).
 	//
 	//    * You can use this value to update an existing instance.
 	//
-	//    * To register a new instance, you must specify a value that is unique
-	//    among instances that you register by using the same service.
+	//    * To register a new instance, you must specify a value that's unique among
+	//    instances that you register by using the same service.
 	//
-	//    * If you specify an existing InstanceId and ServiceId, AWS Cloud Map updates
+	//    * If you specify an existing InstanceId and ServiceId, Cloud Map updates
 	//    the existing DNS records, if any. If there's also an existing health check,
-	//    AWS Cloud Map deletes the old health check and creates a new one.
+	//    Cloud Map deletes the old health check and creates a new one. The health
+	//    check isn't deleted immediately, so it will still appear for a while if
+	//    you submit a ListHealthChecks request, for example.
 	//
-	// The health check isn't deleted immediately, so it will still appear for a
-	//    while if you submit a ListHealthChecks request, for example.
+	// Do not include sensitive information in InstanceId if the namespace is discoverable
+	// by public DNS queries and any Type member of DnsRecord for the service contains
+	// SRV because the InstanceId is discoverable by public DNS queries.
 	//
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`
@@ -5236,12 +7841,20 @@ type RegisterInstanceInput struct {
 	ServiceId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterInstanceInput) GoString() string {
 	return s.String()
 }
@@ -5293,16 +7906,24 @@ type RegisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterInstanceOutput) GoString() string {
 	return s.String()
 }
@@ -5313,12 +7934,367 @@ func (s *RegisterInstanceOutput) SetOperationId(v string) *RegisterInstanceOutpu
 	return s
 }
 
+// The operation can't be completed because you've reached the quota for the
+// number of requests. For more information, see Cloud Map API request throttling
+// quota (https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html) in
+// the Cloud Map Developer Guide.
+type RequestLimitExceeded struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestLimitExceeded) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestLimitExceeded) GoString() string {
+	return s.String()
+}
+
+func newErrorRequestLimitExceeded(v protocol.ResponseMetadata) error {
+	return &RequestLimitExceeded{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RequestLimitExceeded) Code() string {
+	return "RequestLimitExceeded"
+}
+
+// Message returns the exception's message.
+func (s *RequestLimitExceeded) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RequestLimitExceeded) OrigErr() error {
+	return nil
+}
+
+func (s *RequestLimitExceeded) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RequestLimitExceeded) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RequestLimitExceeded) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified resource can't be deleted because it contains other resources.
+// For example, you can't delete a service that contains any instances.
+type ResourceInUse struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUse) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceInUse(v protocol.ResponseMetadata) error {
+	return &ResourceInUse{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceInUse) Code() string {
+	return "ResourceInUse"
+}
+
+// Message returns the exception's message.
+func (s *ResourceInUse) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceInUse) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceInUse) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceInUse) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceInUse) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The resource can't be created because you've reached the quota on the number
+// of resources.
+type ResourceLimitExceeded struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceLimitExceeded) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceLimitExceeded) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceLimitExceeded(v protocol.ResponseMetadata) error {
+	return &ResourceLimitExceeded{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceLimitExceeded) Code() string {
+	return "ResourceLimitExceeded"
+}
+
+// Message returns the exception's message.
+func (s *ResourceLimitExceeded) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceLimitExceeded) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceLimitExceeded) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceLimitExceeded) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceLimitExceeded) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The operation can't be completed because the resource was not found.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Start of Authority (SOA) properties for a public or private DNS namespace.
+type SOA struct {
+	_ struct{} `type:"structure"`
+
+	// The time to live (TTL) for purposes of negative caching.
+	//
+	// TTL is a required field
+	TTL *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SOA) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SOA) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SOA) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SOA"}
+	if s.TTL == nil {
+		invalidParams.Add(request.NewErrParamRequired("TTL"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetTTL sets the TTL field's value.
+func (s *SOA) SetTTL(v int64) *SOA {
+	s.TTL = &v
+	return s
+}
+
+// Updated Start of Authority (SOA) properties for a public or private DNS namespace.
+type SOAChange struct {
+	_ struct{} `type:"structure"`
+
+	// The updated time to live (TTL) for purposes of negative caching.
+	//
+	// TTL is a required field
+	TTL *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SOAChange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SOAChange) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SOAChange) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SOAChange"}
+	if s.TTL == nil {
+		invalidParams.Add(request.NewErrParamRequired("TTL"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetTTL sets the TTL field's value.
+func (s *SOAChange) SetTTL(v int64) *SOAChange {
+	s.TTL = &v
+	return s
+}
+
 // A complex type that contains information about the specified service.
 type Service struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service
-	// when you create it.
+	// The Amazon Resource Name (ARN) that Cloud Map assigns to the service when
+	// you create it.
 	Arn *string `type:"string"`
 
 	// The date and time that the service was created, in Unix format and Coordinated
@@ -5328,20 +8304,24 @@ type Service struct {
 	CreateDate *time.Time `type:"timestamp"`
 
 	// A unique string that identifies the request and that allows failed requests
-	// to be retried without the risk of executing the operation twice. CreatorRequestId
-	// can be any unique string, for example, a date/time stamp.
+	// to be retried without the risk of running the operation twice. CreatorRequestId
+	// can be any unique string (for example, a date/timestamp).
 	CreatorRequestId *string `type:"string"`
 
 	// The description of the service.
 	Description *string `type:"string"`
 
 	// A complex type that contains information about the Route 53 DNS records that
-	// you want AWS Cloud Map to create when you register an instance.
+	// you want Cloud Map to create when you register an instance.
+	//
+	// The record types of a service can only be changed by deleting the service
+	// and recreating it with a new Dnsconfig.
 	DnsConfig *DnsConfig `type:"structure"`
 
-	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional health check. If you specify settings for a health check, AWS Cloud
-	// Map associates the health check with the records that you specify in DnsConfig.
+	// Public DNS and HTTP namespaces only. A complex type that contains settings
+	// for an optional health check. If you specify settings for a health check,
+	// Cloud Map associates the health check with the records that you specify in
+	// DnsConfig.
 	//
 	// For information about the charges for health checks, see Amazon Route 53
 	// Pricing (http://aws.amazon.com/route53/pricing/).
@@ -5354,12 +8334,13 @@ type Service struct {
 	// or HealthCheckConfig but not both.
 	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
 
-	// The ID that AWS Cloud Map assigned to the service when you created it.
+	// The ID that Cloud Map assigned to the service when you created it.
 	Id *string `type:"string"`
 
 	// The number of instances that are currently associated with the service. Instances
-	// that were previously associated with the service but that have been deleted
-	// are not included in the count.
+	// that were previously associated with the service but that are deleted aren't
+	// included in the count. The count might not reflect pending registrations
+	// and deregistrations.
 	InstanceCount *int64 `type:"integer"`
 
 	// The name of the service.
@@ -5367,14 +8348,39 @@ type Service struct {
 
 	// The ID of the namespace that was used to create the service.
 	NamespaceId *string `type:"string"`
+
+	// Describes the systems that can be used to discover the service instances.
+	//
+	// DNS_HTTP
+	//
+	// The service instances can be discovered using either DNS queries or the DiscoverInstances
+	// API operation.
+	//
+	// HTTP
+	//
+	// The service instances can only be discovered using the DiscoverInstances
+	// API operation.
+	//
+	// DNS
+	//
+	// Reserved.
+	Type *string `type:"string" enum:"ServiceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Service) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Service) GoString() string {
 	return s.String()
 }
@@ -5445,6 +8451,83 @@ func (s *Service) SetNamespaceId(v string) *Service {
 	return s
 }
 
+// SetType sets the Type field's value.
+func (s *Service) SetType(v string) *Service {
+	s.Type = &v
+	return s
+}
+
+// The service can't be created because a service with the same name already
+// exists.
+type ServiceAlreadyExists struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The CreatorRequestId that was used to create the service.
+	CreatorRequestId *string `type:"string"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The ID of the existing service.
+	ServiceId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceAlreadyExists) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceAlreadyExists) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceAlreadyExists(v protocol.ResponseMetadata) error {
+	return &ServiceAlreadyExists{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceAlreadyExists) Code() string {
+	return "ServiceAlreadyExists"
+}
+
+// Message returns the exception's message.
+func (s *ServiceAlreadyExists) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceAlreadyExists) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceAlreadyExists) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceAlreadyExists) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A complex type that contains changes to an existing service.
 type ServiceChange struct {
 	_ struct{} `type:"structure"`
@@ -5452,79 +8535,30 @@ type ServiceChange struct {
 	// A description for the service.
 	Description *string `type:"string"`
 
-	// A complex type that contains information about the Route 53 DNS records that
-	// you want AWS Cloud Map to create when you register an instance.
-	//
-	// DnsConfig is a required field
-	DnsConfig *DnsConfigChange `type:"structure" required:"true"`
+	// Information about the Route 53 DNS records that you want Cloud Map to create
+	// when you register an instance.
+	DnsConfig *DnsConfigChange `type:"structure"`
 
-	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional health check. If you specify settings for a health check, AWS Cloud
-	// Map associates the health check with the records that you specify in DnsConfig.
-	//
-	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
-	// or HealthCheckConfig but not both.
-	//
-	// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
-	// For information about pricing for health checks, see Amazon Route 53 Pricing
-	// (http://aws.amazon.com/route53/pricing/).
-	//
-	// Note the following about configuring health checks.
-	//
-	// A and AAAA records
-	//
-	// If DnsConfig includes configurations for both A and AAAA records, AWS Cloud
-	// Map creates a health check that uses the IPv4 address to check the health
-	// of the resource. If the endpoint that is specified by the IPv4 address is
-	// unhealthy, Route 53 considers both the A and AAAA records to be unhealthy.
-	//
-	// CNAME records
-	//
-	// You can't specify settings for HealthCheckConfig when the DNSConfig includes
-	// CNAME for the value of Type. If you do, the CreateService request will fail
-	// with an InvalidInput error.
-	//
-	// Request interval
-	//
-	// A Route 53 health checker in each health-checking region sends a health check
-	// request to an endpoint every 30 seconds. On average, your endpoint receives
-	// a health check request about every two seconds. However, health checkers
-	// don't coordinate with one another, so you'll sometimes see several requests
-	// per second followed by a few seconds with no health checks at all.
-	//
-	// Health checking regions
-	//
-	// Health checkers perform checks from all Route 53 health-checking regions.
-	// For a list of the current regions, see Regions (http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
-	//
-	// Alias records
-	//
-	// When you register an instance, if you include the AWS_ALIAS_DNS_NAME attribute,
-	// AWS Cloud Map creates a Route 53 alias record. Note the following:
-	//
-	//    * Route 53 automatically sets EvaluateTargetHealth to true for alias records.
-	//    When EvaluateTargetHealth is true, the alias record inherits the health
-	//    of the referenced AWS resource. such as an ELB load balancer. For more
-	//    information, see EvaluateTargetHealth (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
-	//
-	//    * If you include HealthCheckConfig and then use the service to register
-	//    an instance that creates an alias record, Route 53 doesn't create the
-	//    health check.
-	//
-	// Charges for health checks
-	//
-	// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
-	// For information about pricing for health checks, see Amazon Route 53 Pricing
-	// (http://aws.amazon.com/route53/pricing/).
+	// Public DNS and HTTP namespaces only. Settings for an optional health check.
+	// If you specify settings for a health check, Cloud Map associates the health
+	// check with the records that you specify in DnsConfig.
 	HealthCheckConfig *HealthCheckConfig `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceChange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceChange) GoString() string {
 	return s.String()
 }
@@ -5532,9 +8566,6 @@ func (s ServiceChange) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ServiceChange) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "ServiceChange"}
-	if s.DnsConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("DnsConfig"))
-	}
 	if s.DnsConfig != nil {
 		if err := s.DnsConfig.Validate(); err != nil {
 			invalidParams.AddNested("DnsConfig", err.(request.ErrInvalidParams))
@@ -5580,11 +8611,6 @@ type ServiceFilter struct {
 	//
 	//    * EQ: When you specify EQ, specify one namespace ID for Values. EQ is
 	//    the default condition and can be omitted.
-	//
-	//    * IN: When you specify IN, specify a list of the IDs for the namespaces
-	//    that you want ListServices to return a list of services for.
-	//
-	//    * BETWEEN: Not applicable.
 	Condition *string `type:"string" enum:"FilterCondition"`
 
 	// Specify NAMESPACE_ID.
@@ -5599,12 +8625,20 @@ type ServiceFilter struct {
 	Values []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceFilter) GoString() string {
 	return s.String()
 }
@@ -5643,12 +8677,76 @@ func (s *ServiceFilter) SetValues(v []*string) *ServiceFilter {
 	return s
 }
 
+// No service exists with the specified ID.
+type ServiceNotFound struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceNotFound) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceNotFound) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceNotFound(v protocol.ResponseMetadata) error {
+	return &ServiceNotFound{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceNotFound) Code() string {
+	return "ServiceNotFound"
+}
+
+// Message returns the exception's message.
+func (s *ServiceNotFound) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceNotFound) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceNotFound) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceNotFound) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A complex type that contains information about a specified service.
 type ServiceSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service
-	// when you create it.
+	// The Amazon Resource Name (ARN) that Cloud Map assigns to the service when
+	// you create it.
 	Arn *string `type:"string"`
 
 	// The date and time that the service was created.
@@ -5657,140 +8755,76 @@ type ServiceSummary struct {
 	// The description that you specify when you create the service.
 	Description *string `type:"string"`
 
-	// A complex type that contains information about the Amazon Route 53 DNS records
-	// that you want AWS Cloud Map to create when you register an instance.
+	// Information about the Route 53 DNS records that you want Cloud Map to create
+	// when you register an instance.
 	DnsConfig *DnsConfig `type:"structure"`
 
-	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional health check. If you specify settings for a health check, AWS Cloud
-	// Map associates the health check with the records that you specify in DnsConfig.
-	//
-	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
-	// or HealthCheckConfig but not both.
-	//
-	// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
-	// For information about pricing for health checks, see Amazon Route 53 Pricing
-	// (http://aws.amazon.com/route53/pricing/).
-	//
-	// Note the following about configuring health checks.
-	//
-	// A and AAAA records
-	//
-	// If DnsConfig includes configurations for both A and AAAA records, AWS Cloud
-	// Map creates a health check that uses the IPv4 address to check the health
-	// of the resource. If the endpoint that is specified by the IPv4 address is
-	// unhealthy, Route 53 considers both the A and AAAA records to be unhealthy.
-	//
-	// CNAME records
-	//
-	// You can't specify settings for HealthCheckConfig when the DNSConfig includes
-	// CNAME for the value of Type. If you do, the CreateService request will fail
-	// with an InvalidInput error.
-	//
-	// Request interval
-	//
-	// A Route 53 health checker in each health-checking region sends a health check
-	// request to an endpoint every 30 seconds. On average, your endpoint receives
-	// a health check request about every two seconds. However, health checkers
-	// don't coordinate with one another, so you'll sometimes see several requests
-	// per second followed by a few seconds with no health checks at all.
-	//
-	// Health checking regions
-	//
-	// Health checkers perform checks from all Route 53 health-checking regions.
-	// For a list of the current regions, see Regions (http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
-	//
-	// Alias records
-	//
-	// When you register an instance, if you include the AWS_ALIAS_DNS_NAME attribute,
-	// AWS Cloud Map creates a Route 53 alias record. Note the following:
-	//
-	//    * Route 53 automatically sets EvaluateTargetHealth to true for alias records.
-	//    When EvaluateTargetHealth is true, the alias record inherits the health
-	//    of the referenced AWS resource. such as an ELB load balancer. For more
-	//    information, see EvaluateTargetHealth (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
-	//
-	//    * If you include HealthCheckConfig and then use the service to register
-	//    an instance that creates an alias record, Route 53 doesn't create the
-	//    health check.
-	//
-	// Charges for health checks
-	//
-	// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
-	// For information about pricing for health checks, see Amazon Route 53 Pricing
-	// (http://aws.amazon.com/route53/pricing/).
+	// Public DNS and HTTP namespaces only. Settings for an optional health check.
+	// If you specify settings for a health check, Cloud Map associates the health
+	// check with the records that you specify in DnsConfig.
 	HealthCheckConfig *HealthCheckConfig `type:"structure"`
 
-	// A complex type that contains information about an optional custom health
-	// check. A custom health check, which requires that you use a third-party health
-	// checker to evaluate the health of your resources, is useful in the following
-	// circumstances:
+	// Information about an optional custom health check. A custom health check,
+	// which requires that you use a third-party health checker to evaluate the
+	// health of your resources, is useful in the following circumstances:
 	//
-	//    * You can't use a health check that is defined by HealthCheckConfig because
+	//    * You can't use a health check that's defined by HealthCheckConfig because
 	//    the resource isn't available over the internet. For example, you can use
 	//    a custom health check when the instance is in an Amazon VPC. (To check
 	//    the health of resources in a VPC, the health checker must also be in the
 	//    VPC.)
 	//
 	//    * You want to use a third-party health checker regardless of where your
-	//    resources are.
+	//    resources are located.
 	//
 	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
 	// or HealthCheckConfig but not both.
-	//
-	// To change the status of a custom health check, submit an UpdateInstanceCustomHealthStatus
-	// request. Cloud Map doesn't monitor the status of the resource, it just keeps
-	// a record of the status specified in the most recent UpdateInstanceCustomHealthStatus
-	// request.
-	//
-	// Here's how custom health checks work:
-	//
-	// You create a service and specify a value for FailureThreshold.
-	//
-	// The failure threshold indicates the number of 30-second intervals you want
-	// AWS Cloud Map to wait between the time that your application sends an UpdateInstanceCustomHealthStatus
-	// request and the time that AWS Cloud Map stops routing internet traffic to
-	// the corresponding resource.
-	//
-	// You register an instance.
-	//
-	// You configure a third-party health checker to monitor the resource that is
-	// associated with the new instance.
-	//
-	// AWS Cloud Map doesn't check the health of the resource directly.
-	//
-	// The third-party health-checker determines that the resource is unhealthy
-	// and notifies your application.
-	//
-	// Your application submits an UpdateInstanceCustomHealthStatus request.
-	//
-	// AWS Cloud Map waits for (FailureThreshold x 30) seconds.
-	//
-	// If another UpdateInstanceCustomHealthStatus request doesn't arrive during
-	// that time to change the status back to healthy, AWS Cloud Map stops routing
-	// traffic to the resource.
-	//
-	// Note the following about configuring custom health checks.
 	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
 
-	// The ID that AWS Cloud Map assigned to the service when you created it.
+	// The ID that Cloud Map assigned to the service when you created it.
 	Id *string `type:"string"`
 
 	// The number of instances that are currently associated with the service. Instances
-	// that were previously associated with the service but that have been deleted
-	// are not included in the count.
+	// that were previously associated with the service but that are deleted aren't
+	// included in the count. The count might not reflect pending registrations
+	// and deregistrations.
 	InstanceCount *int64 `type:"integer"`
 
 	// The name of the service.
 	Name *string `type:"string"`
+
+	// Describes the systems that can be used to discover the service instances.
+	//
+	// DNS_HTTP
+	//
+	// The service instances can be discovered using either DNS queries or the DiscoverInstances
+	// API operation.
+	//
+	// HTTP
+	//
+	// The service instances can only be discovered using the DiscoverInstances
+	// API operation.
+	//
+	// DNS
+	//
+	// Reserved.
+	Type *string `type:"string" enum:"ServiceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceSummary) GoString() string {
 	return s.String()
 }
@@ -5849,6 +8883,438 @@ func (s *ServiceSummary) SetName(v string) *ServiceSummary {
 	return s
 }
 
+// SetType sets the Type field's value.
+func (s *ServiceSummary) SetType(v string) *ServiceSummary {
+	s.Type = &v
+	return s
+}
+
+// A custom key-value pair that's associated with a resource.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key identifier, or name, of the tag.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The string value that's associated with the key of the tag. You can set the
+	// value of a tag to an empty string, but you can't set the value of a tag to
+	// null.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	if s.Key == nil {
+		invalidParams.Add(request.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+	}
+	if s.Value == nil {
+		invalidParams.Add(request.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKey sets the Key field's value.
+func (s *Tag) SetKey(v string) *Tag {
+	s.Key = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *Tag) SetValue(v string) *Tag {
+	s.Value = &v
+	return s
+}
+
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource that you want to retrieve
+	// tags for.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+
+	// The tags to add to the specified resource. Specifying the tag key is required.
+	// You can set the value of a tag to an empty string, but you can't set the
+	// value of a tag to null.
+	//
+	// Tags is a required field
+	Tags []*Tag `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+	if s.Tags == nil {
+		invalidParams.Add(request.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *TagResourceInput) SetResourceARN(v string) *TagResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *TagResourceInput) SetTags(v []*Tag) *TagResourceInput {
+	s.Tags = v
+	return s
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// The list of tags on the resource is over the quota. The maximum number of
+// tags that can be applied to a resource is 50.
+type TooManyTagsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The name of the resource.
+	ResourceName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyTagsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyTagsException) GoString() string {
+	return s.String()
+}
+
+func newErrorTooManyTagsException(v protocol.ResponseMetadata) error {
+	return &TooManyTagsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TooManyTagsException) Code() string {
+	return "TooManyTagsException"
+}
+
+// Message returns the exception's message.
+func (s *TooManyTagsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TooManyTagsException) OrigErr() error {
+	return nil
+}
+
+func (s *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TooManyTagsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TooManyTagsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource that you want to retrieve
+	// tags for.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+
+	// The tag keys to remove from the specified resource.
+	//
+	// TagKeys is a required field
+	TagKeys []*string `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+	if s.TagKeys == nil {
+		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *UntagResourceInput) SetResourceARN(v string) *UntagResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+// SetTagKeys sets the TagKeys field's value.
+func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+	s.TagKeys = v
+	return s
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateHttpNamespaceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the namespace that you want to update.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// Updated properties for the the HTTP namespace.
+	//
+	// Namespace is a required field
+	Namespace *HttpNamespaceChange `type:"structure" required:"true"`
+
+	// A unique string that identifies the request and that allows failed UpdateHttpNamespace
+	// requests to be retried without the risk of running the operation twice. UpdaterRequestId
+	// can be any unique string (for example, a date/timestamp).
+	UpdaterRequestId *string `type:"string" idempotencyToken:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateHttpNamespaceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateHttpNamespaceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateHttpNamespaceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateHttpNamespaceInput"}
+	if s.Id == nil {
+		invalidParams.Add(request.NewErrParamRequired("Id"))
+	}
+	if s.Namespace == nil {
+		invalidParams.Add(request.NewErrParamRequired("Namespace"))
+	}
+	if s.Namespace != nil {
+		if err := s.Namespace.Validate(); err != nil {
+			invalidParams.AddNested("Namespace", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetId sets the Id field's value.
+func (s *UpdateHttpNamespaceInput) SetId(v string) *UpdateHttpNamespaceInput {
+	s.Id = &v
+	return s
+}
+
+// SetNamespace sets the Namespace field's value.
+func (s *UpdateHttpNamespaceInput) SetNamespace(v *HttpNamespaceChange) *UpdateHttpNamespaceInput {
+	s.Namespace = v
+	return s
+}
+
+// SetUpdaterRequestId sets the UpdaterRequestId field's value.
+func (s *UpdateHttpNamespaceInput) SetUpdaterRequestId(v string) *UpdateHttpNamespaceInput {
+	s.UpdaterRequestId = &v
+	return s
+}
+
+type UpdateHttpNamespaceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A value that you can use to determine whether the request completed successfully.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateHttpNamespaceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateHttpNamespaceOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *UpdateHttpNamespaceOutput) SetOperationId(v string) *UpdateHttpNamespaceOutput {
+	s.OperationId = &v
+	return s
+}
+
 type UpdateInstanceCustomHealthStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5869,12 +9335,20 @@ type UpdateInstanceCustomHealthStatusInput struct {
 	Status *string `type:"string" required:"true" enum:"CustomHealthStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateInstanceCustomHealthStatusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateInstanceCustomHealthStatusInput) GoString() string {
 	return s.String()
 }
@@ -5920,14 +9394,238 @@ type UpdateInstanceCustomHealthStatusOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateInstanceCustomHealthStatusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateInstanceCustomHealthStatusOutput) GoString() string {
 	return s.String()
+}
+
+type UpdatePrivateDnsNamespaceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the namespace that you want to update.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// Updated properties for the private DNS namespace.
+	//
+	// Namespace is a required field
+	Namespace *PrivateDnsNamespaceChange `type:"structure" required:"true"`
+
+	// A unique string that identifies the request and that allows failed UpdatePrivateDnsNamespace
+	// requests to be retried without the risk of running the operation twice. UpdaterRequestId
+	// can be any unique string (for example, a date/timestamp).
+	UpdaterRequestId *string `type:"string" idempotencyToken:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePrivateDnsNamespaceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePrivateDnsNamespaceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdatePrivateDnsNamespaceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdatePrivateDnsNamespaceInput"}
+	if s.Id == nil {
+		invalidParams.Add(request.NewErrParamRequired("Id"))
+	}
+	if s.Namespace == nil {
+		invalidParams.Add(request.NewErrParamRequired("Namespace"))
+	}
+	if s.Namespace != nil {
+		if err := s.Namespace.Validate(); err != nil {
+			invalidParams.AddNested("Namespace", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetId sets the Id field's value.
+func (s *UpdatePrivateDnsNamespaceInput) SetId(v string) *UpdatePrivateDnsNamespaceInput {
+	s.Id = &v
+	return s
+}
+
+// SetNamespace sets the Namespace field's value.
+func (s *UpdatePrivateDnsNamespaceInput) SetNamespace(v *PrivateDnsNamespaceChange) *UpdatePrivateDnsNamespaceInput {
+	s.Namespace = v
+	return s
+}
+
+// SetUpdaterRequestId sets the UpdaterRequestId field's value.
+func (s *UpdatePrivateDnsNamespaceInput) SetUpdaterRequestId(v string) *UpdatePrivateDnsNamespaceInput {
+	s.UpdaterRequestId = &v
+	return s
+}
+
+type UpdatePrivateDnsNamespaceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A value that you can use to determine whether the request completed successfully.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePrivateDnsNamespaceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePrivateDnsNamespaceOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *UpdatePrivateDnsNamespaceOutput) SetOperationId(v string) *UpdatePrivateDnsNamespaceOutput {
+	s.OperationId = &v
+	return s
+}
+
+type UpdatePublicDnsNamespaceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the namespace being updated.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// Updated properties for the public DNS namespace.
+	//
+	// Namespace is a required field
+	Namespace *PublicDnsNamespaceChange `type:"structure" required:"true"`
+
+	// A unique string that identifies the request and that allows failed UpdatePublicDnsNamespace
+	// requests to be retried without the risk of running the operation twice. UpdaterRequestId
+	// can be any unique string (for example, a date/timestamp).
+	UpdaterRequestId *string `type:"string" idempotencyToken:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePublicDnsNamespaceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePublicDnsNamespaceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdatePublicDnsNamespaceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdatePublicDnsNamespaceInput"}
+	if s.Id == nil {
+		invalidParams.Add(request.NewErrParamRequired("Id"))
+	}
+	if s.Namespace == nil {
+		invalidParams.Add(request.NewErrParamRequired("Namespace"))
+	}
+	if s.Namespace != nil {
+		if err := s.Namespace.Validate(); err != nil {
+			invalidParams.AddNested("Namespace", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetId sets the Id field's value.
+func (s *UpdatePublicDnsNamespaceInput) SetId(v string) *UpdatePublicDnsNamespaceInput {
+	s.Id = &v
+	return s
+}
+
+// SetNamespace sets the Namespace field's value.
+func (s *UpdatePublicDnsNamespaceInput) SetNamespace(v *PublicDnsNamespaceChange) *UpdatePublicDnsNamespaceInput {
+	s.Namespace = v
+	return s
+}
+
+// SetUpdaterRequestId sets the UpdaterRequestId field's value.
+func (s *UpdatePublicDnsNamespaceInput) SetUpdaterRequestId(v string) *UpdatePublicDnsNamespaceInput {
+	s.UpdaterRequestId = &v
+	return s
+}
+
+type UpdatePublicDnsNamespaceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A value that you can use to determine whether the request completed successfully.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePublicDnsNamespaceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePublicDnsNamespaceOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *UpdatePublicDnsNamespaceOutput) SetOperationId(v string) *UpdatePublicDnsNamespaceOutput {
+	s.OperationId = &v
+	return s
 }
 
 type UpdateServiceInput struct {
@@ -5944,12 +9642,20 @@ type UpdateServiceInput struct {
 	Service *ServiceChange `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateServiceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateServiceInput) GoString() string {
 	return s.String()
 }
@@ -5991,16 +9697,24 @@ type UpdateServiceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
+	// To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateServiceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateServiceOutput) GoString() string {
 	return s.String()
 }
@@ -6019,6 +9733,14 @@ const (
 	CustomHealthStatusUnhealthy = "UNHEALTHY"
 )
 
+// CustomHealthStatus_Values returns all elements of the CustomHealthStatus enum
+func CustomHealthStatus_Values() []string {
+	return []string{
+		CustomHealthStatusHealthy,
+		CustomHealthStatusUnhealthy,
+	}
+}
+
 const (
 	// FilterConditionEq is a FilterCondition enum value
 	FilterConditionEq = "EQ"
@@ -6028,7 +9750,20 @@ const (
 
 	// FilterConditionBetween is a FilterCondition enum value
 	FilterConditionBetween = "BETWEEN"
+
+	// FilterConditionBeginsWith is a FilterCondition enum value
+	FilterConditionBeginsWith = "BEGINS_WITH"
 )
+
+// FilterCondition_Values returns all elements of the FilterCondition enum
+func FilterCondition_Values() []string {
+	return []string{
+		FilterConditionEq,
+		FilterConditionIn,
+		FilterConditionBetween,
+		FilterConditionBeginsWith,
+	}
+}
 
 const (
 	// HealthCheckTypeHttp is a HealthCheckType enum value
@@ -6041,6 +9776,15 @@ const (
 	HealthCheckTypeTcp = "TCP"
 )
 
+// HealthCheckType_Values returns all elements of the HealthCheckType enum
+func HealthCheckType_Values() []string {
+	return []string{
+		HealthCheckTypeHttp,
+		HealthCheckTypeHttps,
+		HealthCheckTypeTcp,
+	}
+}
+
 const (
 	// HealthStatusHealthy is a HealthStatus enum value
 	HealthStatusHealthy = "HEALTHY"
@@ -6052,6 +9796,15 @@ const (
 	HealthStatusUnknown = "UNKNOWN"
 )
 
+// HealthStatus_Values returns all elements of the HealthStatus enum
+func HealthStatus_Values() []string {
+	return []string{
+		HealthStatusHealthy,
+		HealthStatusUnhealthy,
+		HealthStatusUnknown,
+	}
+}
+
 const (
 	// HealthStatusFilterHealthy is a HealthStatusFilter enum value
 	HealthStatusFilterHealthy = "HEALTHY"
@@ -6061,12 +9814,40 @@ const (
 
 	// HealthStatusFilterAll is a HealthStatusFilter enum value
 	HealthStatusFilterAll = "ALL"
+
+	// HealthStatusFilterHealthyOrElseAll is a HealthStatusFilter enum value
+	HealthStatusFilterHealthyOrElseAll = "HEALTHY_OR_ELSE_ALL"
 )
+
+// HealthStatusFilter_Values returns all elements of the HealthStatusFilter enum
+func HealthStatusFilter_Values() []string {
+	return []string{
+		HealthStatusFilterHealthy,
+		HealthStatusFilterUnhealthy,
+		HealthStatusFilterAll,
+		HealthStatusFilterHealthyOrElseAll,
+	}
+}
 
 const (
 	// NamespaceFilterNameType is a NamespaceFilterName enum value
 	NamespaceFilterNameType = "TYPE"
+
+	// NamespaceFilterNameName is a NamespaceFilterName enum value
+	NamespaceFilterNameName = "NAME"
+
+	// NamespaceFilterNameHttpName is a NamespaceFilterName enum value
+	NamespaceFilterNameHttpName = "HTTP_NAME"
 )
+
+// NamespaceFilterName_Values returns all elements of the NamespaceFilterName enum
+func NamespaceFilterName_Values() []string {
+	return []string{
+		NamespaceFilterNameType,
+		NamespaceFilterNameName,
+		NamespaceFilterNameHttpName,
+	}
+}
 
 const (
 	// NamespaceTypeDnsPublic is a NamespaceType enum value
@@ -6078,6 +9859,15 @@ const (
 	// NamespaceTypeHttp is a NamespaceType enum value
 	NamespaceTypeHttp = "HTTP"
 )
+
+// NamespaceType_Values returns all elements of the NamespaceType enum
+func NamespaceType_Values() []string {
+	return []string{
+		NamespaceTypeDnsPublic,
+		NamespaceTypeDnsPrivate,
+		NamespaceTypeHttp,
+	}
+}
 
 const (
 	// OperationFilterNameNamespaceId is a OperationFilterName enum value
@@ -6096,6 +9886,17 @@ const (
 	OperationFilterNameUpdateDate = "UPDATE_DATE"
 )
 
+// OperationFilterName_Values returns all elements of the OperationFilterName enum
+func OperationFilterName_Values() []string {
+	return []string{
+		OperationFilterNameNamespaceId,
+		OperationFilterNameServiceId,
+		OperationFilterNameStatus,
+		OperationFilterNameType,
+		OperationFilterNameUpdateDate,
+	}
+}
+
 const (
 	// OperationStatusSubmitted is a OperationStatus enum value
 	OperationStatusSubmitted = "SUBMITTED"
@@ -6110,6 +9911,16 @@ const (
 	OperationStatusFail = "FAIL"
 )
 
+// OperationStatus_Values returns all elements of the OperationStatus enum
+func OperationStatus_Values() []string {
+	return []string{
+		OperationStatusSubmitted,
+		OperationStatusPending,
+		OperationStatusSuccess,
+		OperationStatusFail,
+	}
+}
+
 const (
 	// OperationTargetTypeNamespace is a OperationTargetType enum value
 	OperationTargetTypeNamespace = "NAMESPACE"
@@ -6121,12 +9932,24 @@ const (
 	OperationTargetTypeInstance = "INSTANCE"
 )
 
+// OperationTargetType_Values returns all elements of the OperationTargetType enum
+func OperationTargetType_Values() []string {
+	return []string{
+		OperationTargetTypeNamespace,
+		OperationTargetTypeService,
+		OperationTargetTypeInstance,
+	}
+}
+
 const (
 	// OperationTypeCreateNamespace is a OperationType enum value
 	OperationTypeCreateNamespace = "CREATE_NAMESPACE"
 
 	// OperationTypeDeleteNamespace is a OperationType enum value
 	OperationTypeDeleteNamespace = "DELETE_NAMESPACE"
+
+	// OperationTypeUpdateNamespace is a OperationType enum value
+	OperationTypeUpdateNamespace = "UPDATE_NAMESPACE"
 
 	// OperationTypeUpdateService is a OperationType enum value
 	OperationTypeUpdateService = "UPDATE_SERVICE"
@@ -6137,6 +9960,18 @@ const (
 	// OperationTypeDeregisterInstance is a OperationType enum value
 	OperationTypeDeregisterInstance = "DEREGISTER_INSTANCE"
 )
+
+// OperationType_Values returns all elements of the OperationType enum
+func OperationType_Values() []string {
+	return []string{
+		OperationTypeCreateNamespace,
+		OperationTypeDeleteNamespace,
+		OperationTypeUpdateNamespace,
+		OperationTypeUpdateService,
+		OperationTypeRegisterInstance,
+		OperationTypeDeregisterInstance,
+	}
+}
 
 const (
 	// RecordTypeSrv is a RecordType enum value
@@ -6152,6 +9987,16 @@ const (
 	RecordTypeCname = "CNAME"
 )
 
+// RecordType_Values returns all elements of the RecordType enum
+func RecordType_Values() []string {
+	return []string{
+		RecordTypeSrv,
+		RecordTypeA,
+		RecordTypeAaaa,
+		RecordTypeCname,
+	}
+}
+
 const (
 	// RoutingPolicyMultivalue is a RoutingPolicy enum value
 	RoutingPolicyMultivalue = "MULTIVALUE"
@@ -6160,7 +10005,54 @@ const (
 	RoutingPolicyWeighted = "WEIGHTED"
 )
 
+// RoutingPolicy_Values returns all elements of the RoutingPolicy enum
+func RoutingPolicy_Values() []string {
+	return []string{
+		RoutingPolicyMultivalue,
+		RoutingPolicyWeighted,
+	}
+}
+
 const (
 	// ServiceFilterNameNamespaceId is a ServiceFilterName enum value
 	ServiceFilterNameNamespaceId = "NAMESPACE_ID"
 )
+
+// ServiceFilterName_Values returns all elements of the ServiceFilterName enum
+func ServiceFilterName_Values() []string {
+	return []string{
+		ServiceFilterNameNamespaceId,
+	}
+}
+
+const (
+	// ServiceTypeHttp is a ServiceType enum value
+	ServiceTypeHttp = "HTTP"
+
+	// ServiceTypeDnsHttp is a ServiceType enum value
+	ServiceTypeDnsHttp = "DNS_HTTP"
+
+	// ServiceTypeDns is a ServiceType enum value
+	ServiceTypeDns = "DNS"
+)
+
+// ServiceType_Values returns all elements of the ServiceType enum
+func ServiceType_Values() []string {
+	return []string{
+		ServiceTypeHttp,
+		ServiceTypeDnsHttp,
+		ServiceTypeDns,
+	}
+}
+
+const (
+	// ServiceTypeOptionHttp is a ServiceTypeOption enum value
+	ServiceTypeOptionHttp = "HTTP"
+)
+
+// ServiceTypeOption_Values returns all elements of the ServiceTypeOption enum
+func ServiceTypeOption_Values() []string {
+	return []string{
+		ServiceTypeOptionHttp,
+	}
+}

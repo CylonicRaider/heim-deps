@@ -29,17 +29,21 @@ const opApproveSkill = "ApproveSkill"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ApproveSkillRequest method.
+//	req, resp := client.ApproveSkillRequest(params)
 //
-//    // Example sending a request using the ApproveSkillRequest method.
-//    req, resp := client.ApproveSkillRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ApproveSkill
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ApproveSkillRequest(input *ApproveSkillInput) (req *request.Request, output *ApproveSkillOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ApproveSkill, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opApproveSkill,
 		HTTPMethod: "POST",
@@ -69,17 +73,20 @@ func (c *AlexaForBusiness) ApproveSkillRequest(input *ApproveSkillInput) (req *r
 // See the AWS API reference guide for Alexa For Business's
 // API operation ApproveSkill for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+// Returned Error Types:
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ApproveSkill
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ApproveSkill(input *ApproveSkillInput) (*ApproveSkillOutput, error) {
 	req, out := c.ApproveSkillRequest(input)
 	return out, req.Send()
@@ -94,6 +101,8 @@ func (c *AlexaForBusiness) ApproveSkill(input *ApproveSkillInput) (*ApproveSkill
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ApproveSkillWithContext(ctx aws.Context, input *ApproveSkillInput, opts ...request.Option) (*ApproveSkillOutput, error) {
 	req, out := c.ApproveSkillRequest(input)
 	req.SetContext(ctx)
@@ -117,17 +126,21 @@ const opAssociateContactWithAddressBook = "AssociateContactWithAddressBook"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateContactWithAddressBookRequest method.
+//	req, resp := client.AssociateContactWithAddressBookRequest(params)
 //
-//    // Example sending a request using the AssociateContactWithAddressBookRequest method.
-//    req, resp := client.AssociateContactWithAddressBookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateContactWithAddressBookRequest(input *AssociateContactWithAddressBookInput) (req *request.Request, output *AssociateContactWithAddressBookOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, AssociateContactWithAddressBook, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opAssociateContactWithAddressBook,
 		HTTPMethod: "POST",
@@ -155,11 +168,13 @@ func (c *AlexaForBusiness) AssociateContactWithAddressBookRequest(input *Associa
 // See the AWS API reference guide for Alexa For Business's
 // API operation AssociateContactWithAddressBook for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+// Returned Error Types:
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateContactWithAddressBook(input *AssociateContactWithAddressBookInput) (*AssociateContactWithAddressBookOutput, error) {
 	req, out := c.AssociateContactWithAddressBookRequest(input)
 	return out, req.Send()
@@ -174,8 +189,106 @@ func (c *AlexaForBusiness) AssociateContactWithAddressBook(input *AssociateConta
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateContactWithAddressBookWithContext(ctx aws.Context, input *AssociateContactWithAddressBookInput, opts ...request.Option) (*AssociateContactWithAddressBookOutput, error) {
 	req, out := c.AssociateContactWithAddressBookRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opAssociateDeviceWithNetworkProfile = "AssociateDeviceWithNetworkProfile"
+
+// AssociateDeviceWithNetworkProfileRequest generates a "aws/request.Request" representing the
+// client's request for the AssociateDeviceWithNetworkProfile operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AssociateDeviceWithNetworkProfile for more information on using the AssociateDeviceWithNetworkProfile
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AssociateDeviceWithNetworkProfileRequest method.
+//	req, resp := client.AssociateDeviceWithNetworkProfileRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) AssociateDeviceWithNetworkProfileRequest(input *AssociateDeviceWithNetworkProfileInput) (req *request.Request, output *AssociateDeviceWithNetworkProfileOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, AssociateDeviceWithNetworkProfile, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opAssociateDeviceWithNetworkProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateDeviceWithNetworkProfileInput{}
+	}
+
+	output = &AssociateDeviceWithNetworkProfileOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// AssociateDeviceWithNetworkProfile API operation for Alexa For Business.
+//
+// Associates a device with the specified network profile.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation AssociateDeviceWithNetworkProfile for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - DeviceNotRegisteredException
+//     The request failed because this device is no longer registered and therefore
+//     no longer managed by this account.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) AssociateDeviceWithNetworkProfile(input *AssociateDeviceWithNetworkProfileInput) (*AssociateDeviceWithNetworkProfileOutput, error) {
+	req, out := c.AssociateDeviceWithNetworkProfileRequest(input)
+	return out, req.Send()
+}
+
+// AssociateDeviceWithNetworkProfileWithContext is the same as AssociateDeviceWithNetworkProfile with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AssociateDeviceWithNetworkProfile for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) AssociateDeviceWithNetworkProfileWithContext(ctx aws.Context, input *AssociateDeviceWithNetworkProfileInput, opts ...request.Option) (*AssociateDeviceWithNetworkProfileOutput, error) {
+	req, out := c.AssociateDeviceWithNetworkProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
@@ -197,17 +310,21 @@ const opAssociateDeviceWithRoom = "AssociateDeviceWithRoom"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateDeviceWithRoomRequest method.
+//	req, resp := client.AssociateDeviceWithRoomRequest(params)
 //
-//    // Example sending a request using the AssociateDeviceWithRoomRequest method.
-//    req, resp := client.AssociateDeviceWithRoomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateDeviceWithRoomRequest(input *AssociateDeviceWithRoomInput) (req *request.Request, output *AssociateDeviceWithRoomOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, AssociateDeviceWithRoom, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opAssociateDeviceWithRoom,
 		HTTPMethod: "POST",
@@ -238,18 +355,21 @@ func (c *AlexaForBusiness) AssociateDeviceWithRoomRequest(input *AssociateDevice
 // See the AWS API reference guide for Alexa For Business's
 // API operation AssociateDeviceWithRoom for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
 //
-//   * ErrCodeDeviceNotRegisteredException "DeviceNotRegisteredException"
-//   The request failed because this device is no longer registered and therefore
-//   no longer managed by this account.
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - DeviceNotRegisteredException
+//     The request failed because this device is no longer registered and therefore
+//     no longer managed by this account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateDeviceWithRoom(input *AssociateDeviceWithRoomInput) (*AssociateDeviceWithRoomOutput, error) {
 	req, out := c.AssociateDeviceWithRoomRequest(input)
 	return out, req.Send()
@@ -264,6 +384,8 @@ func (c *AlexaForBusiness) AssociateDeviceWithRoom(input *AssociateDeviceWithRoo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateDeviceWithRoomWithContext(ctx aws.Context, input *AssociateDeviceWithRoomInput, opts ...request.Option) (*AssociateDeviceWithRoomOutput, error) {
 	req, out := c.AssociateDeviceWithRoomRequest(input)
 	req.SetContext(ctx)
@@ -287,17 +409,21 @@ const opAssociateSkillGroupWithRoom = "AssociateSkillGroupWithRoom"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateSkillGroupWithRoomRequest method.
+//	req, resp := client.AssociateSkillGroupWithRoomRequest(params)
 //
-//    // Example sending a request using the AssociateSkillGroupWithRoomRequest method.
-//    req, resp := client.AssociateSkillGroupWithRoomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillGroupWithRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateSkillGroupWithRoomRequest(input *AssociateSkillGroupWithRoomInput) (req *request.Request, output *AssociateSkillGroupWithRoomOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, AssociateSkillGroupWithRoom, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opAssociateSkillGroupWithRoom,
 		HTTPMethod: "POST",
@@ -326,11 +452,13 @@ func (c *AlexaForBusiness) AssociateSkillGroupWithRoomRequest(input *AssociateSk
 // See the AWS API reference guide for Alexa For Business's
 // API operation AssociateSkillGroupWithRoom for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillGroupWithRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateSkillGroupWithRoom(input *AssociateSkillGroupWithRoomInput) (*AssociateSkillGroupWithRoomOutput, error) {
 	req, out := c.AssociateSkillGroupWithRoomRequest(input)
 	return out, req.Send()
@@ -345,6 +473,8 @@ func (c *AlexaForBusiness) AssociateSkillGroupWithRoom(input *AssociateSkillGrou
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateSkillGroupWithRoomWithContext(ctx aws.Context, input *AssociateSkillGroupWithRoomInput, opts ...request.Option) (*AssociateSkillGroupWithRoomOutput, error) {
 	req, out := c.AssociateSkillGroupWithRoomRequest(input)
 	req.SetContext(ctx)
@@ -368,17 +498,21 @@ const opAssociateSkillWithSkillGroup = "AssociateSkillWithSkillGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateSkillWithSkillGroupRequest method.
+//	req, resp := client.AssociateSkillWithSkillGroupRequest(params)
 //
-//    // Example sending a request using the AssociateSkillWithSkillGroupRequest method.
-//    req, resp := client.AssociateSkillWithSkillGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateSkillWithSkillGroupRequest(input *AssociateSkillWithSkillGroupInput) (req *request.Request, output *AssociateSkillWithSkillGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, AssociateSkillWithSkillGroup, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opAssociateSkillWithSkillGroup,
 		HTTPMethod: "POST",
@@ -406,17 +540,20 @@ func (c *AlexaForBusiness) AssociateSkillWithSkillGroupRequest(input *AssociateS
 // See the AWS API reference guide for Alexa For Business's
 // API operation AssociateSkillWithSkillGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
-//   * ErrCodeSkillNotLinkedException "SkillNotLinkedException"
-//   The skill must be linked to a third-party account.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - SkillNotLinkedException
+//     The skill must be linked to a third-party account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateSkillWithSkillGroup(input *AssociateSkillWithSkillGroupInput) (*AssociateSkillWithSkillGroupOutput, error) {
 	req, out := c.AssociateSkillWithSkillGroupRequest(input)
 	return out, req.Send()
@@ -431,6 +568,8 @@ func (c *AlexaForBusiness) AssociateSkillWithSkillGroup(input *AssociateSkillWit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateSkillWithSkillGroupWithContext(ctx aws.Context, input *AssociateSkillWithSkillGroupInput, opts ...request.Option) (*AssociateSkillWithSkillGroupOutput, error) {
 	req, out := c.AssociateSkillWithSkillGroupRequest(input)
 	req.SetContext(ctx)
@@ -454,17 +593,21 @@ const opAssociateSkillWithUsers = "AssociateSkillWithUsers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateSkillWithUsersRequest method.
+//	req, resp := client.AssociateSkillWithUsersRequest(params)
 //
-//    // Example sending a request using the AssociateSkillWithUsersRequest method.
-//    req, resp := client.AssociateSkillWithUsersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsers
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateSkillWithUsersRequest(input *AssociateSkillWithUsersInput) (req *request.Request, output *AssociateSkillWithUsersOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, AssociateSkillWithUsers, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opAssociateSkillWithUsers,
 		HTTPMethod: "POST",
@@ -492,11 +635,17 @@ func (c *AlexaForBusiness) AssociateSkillWithUsersRequest(input *AssociateSkillW
 // See the AWS API reference guide for Alexa For Business's
 // API operation AssociateSkillWithUsers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsers
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateSkillWithUsers(input *AssociateSkillWithUsersInput) (*AssociateSkillWithUsersOutput, error) {
 	req, out := c.AssociateSkillWithUsersRequest(input)
 	return out, req.Send()
@@ -511,6 +660,8 @@ func (c *AlexaForBusiness) AssociateSkillWithUsers(input *AssociateSkillWithUser
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) AssociateSkillWithUsersWithContext(ctx aws.Context, input *AssociateSkillWithUsersInput, opts ...request.Option) (*AssociateSkillWithUsersOutput, error) {
 	req, out := c.AssociateSkillWithUsersRequest(input)
 	req.SetContext(ctx)
@@ -534,17 +685,21 @@ const opCreateAddressBook = "CreateAddressBook"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateAddressBookRequest method.
+//	req, resp := client.CreateAddressBookRequest(params)
 //
-//    // Example sending a request using the CreateAddressBookRequest method.
-//    req, resp := client.CreateAddressBookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateAddressBookRequest(input *CreateAddressBookInput) (req *request.Request, output *CreateAddressBookOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateAddressBook, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateAddressBook,
 		HTTPMethod: "POST",
@@ -571,14 +726,17 @@ func (c *AlexaForBusiness) CreateAddressBookRequest(input *CreateAddressBookInpu
 // See the AWS API reference guide for Alexa For Business's
 // API operation CreateAddressBook for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource being created already exists.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+//   - AlreadyExistsException
+//     The resource being created already exists.
+//
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateAddressBook(input *CreateAddressBookInput) (*CreateAddressBookOutput, error) {
 	req, out := c.CreateAddressBookRequest(input)
 	return out, req.Send()
@@ -593,6 +751,8 @@ func (c *AlexaForBusiness) CreateAddressBook(input *CreateAddressBookInput) (*Cr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateAddressBookWithContext(ctx aws.Context, input *CreateAddressBookInput, opts ...request.Option) (*CreateAddressBookOutput, error) {
 	req, out := c.CreateAddressBookRequest(input)
 	req.SetContext(ctx)
@@ -616,17 +776,21 @@ const opCreateBusinessReportSchedule = "CreateBusinessReportSchedule"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateBusinessReportScheduleRequest method.
+//	req, resp := client.CreateBusinessReportScheduleRequest(params)
 //
-//    // Example sending a request using the CreateBusinessReportScheduleRequest method.
-//    req, resp := client.CreateBusinessReportScheduleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportSchedule
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateBusinessReportScheduleRequest(input *CreateBusinessReportScheduleInput) (req *request.Request, output *CreateBusinessReportScheduleOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateBusinessReportSchedule, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateBusinessReportSchedule,
 		HTTPMethod: "POST",
@@ -654,11 +818,13 @@ func (c *AlexaForBusiness) CreateBusinessReportScheduleRequest(input *CreateBusi
 // See the AWS API reference guide for Alexa For Business's
 // API operation CreateBusinessReportSchedule for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource being created already exists.
+// Returned Error Types:
+//   - AlreadyExistsException
+//     The resource being created already exists.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportSchedule
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateBusinessReportSchedule(input *CreateBusinessReportScheduleInput) (*CreateBusinessReportScheduleOutput, error) {
 	req, out := c.CreateBusinessReportScheduleRequest(input)
 	return out, req.Send()
@@ -673,6 +839,8 @@ func (c *AlexaForBusiness) CreateBusinessReportSchedule(input *CreateBusinessRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateBusinessReportScheduleWithContext(ctx aws.Context, input *CreateBusinessReportScheduleInput, opts ...request.Option) (*CreateBusinessReportScheduleOutput, error) {
 	req, out := c.CreateBusinessReportScheduleRequest(input)
 	req.SetContext(ctx)
@@ -696,17 +864,21 @@ const opCreateConferenceProvider = "CreateConferenceProvider"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateConferenceProviderRequest method.
+//	req, resp := client.CreateConferenceProviderRequest(params)
 //
-//    // Example sending a request using the CreateConferenceProviderRequest method.
-//    req, resp := client.CreateConferenceProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProvider
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateConferenceProviderRequest(input *CreateConferenceProviderInput) (req *request.Request, output *CreateConferenceProviderOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateConferenceProvider, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateConferenceProvider,
 		HTTPMethod: "POST",
@@ -733,11 +905,13 @@ func (c *AlexaForBusiness) CreateConferenceProviderRequest(input *CreateConferen
 // See the AWS API reference guide for Alexa For Business's
 // API operation CreateConferenceProvider for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource being created already exists.
+// Returned Error Types:
+//   - AlreadyExistsException
+//     The resource being created already exists.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProvider
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateConferenceProvider(input *CreateConferenceProviderInput) (*CreateConferenceProviderOutput, error) {
 	req, out := c.CreateConferenceProviderRequest(input)
 	return out, req.Send()
@@ -752,6 +926,8 @@ func (c *AlexaForBusiness) CreateConferenceProvider(input *CreateConferenceProvi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateConferenceProviderWithContext(ctx aws.Context, input *CreateConferenceProviderInput, opts ...request.Option) (*CreateConferenceProviderOutput, error) {
 	req, out := c.CreateConferenceProviderRequest(input)
 	req.SetContext(ctx)
@@ -775,17 +951,21 @@ const opCreateContact = "CreateContact"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateContactRequest method.
+//	req, resp := client.CreateContactRequest(params)
 //
-//    // Example sending a request using the CreateContactRequest method.
-//    req, resp := client.CreateContactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContact
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateContactRequest(input *CreateContactInput) (req *request.Request, output *CreateContactOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateContact, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateContact,
 		HTTPMethod: "POST",
@@ -812,14 +992,17 @@ func (c *AlexaForBusiness) CreateContactRequest(input *CreateContactInput) (req 
 // See the AWS API reference guide for Alexa For Business's
 // API operation CreateContact for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource being created already exists.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+//   - AlreadyExistsException
+//     The resource being created already exists.
+//
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContact
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateContact(input *CreateContactInput) (*CreateContactOutput, error) {
 	req, out := c.CreateContactRequest(input)
 	return out, req.Send()
@@ -834,8 +1017,201 @@ func (c *AlexaForBusiness) CreateContact(input *CreateContactInput) (*CreateCont
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateContactWithContext(ctx aws.Context, input *CreateContactInput, opts ...request.Option) (*CreateContactOutput, error) {
 	req, out := c.CreateContactRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opCreateGatewayGroup = "CreateGatewayGroup"
+
+// CreateGatewayGroupRequest generates a "aws/request.Request" representing the
+// client's request for the CreateGatewayGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateGatewayGroup for more information on using the CreateGatewayGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateGatewayGroupRequest method.
+//	req, resp := client.CreateGatewayGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroup
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) CreateGatewayGroupRequest(input *CreateGatewayGroupInput) (req *request.Request, output *CreateGatewayGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateGatewayGroup, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opCreateGatewayGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateGatewayGroupInput{}
+	}
+
+	output = &CreateGatewayGroupOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateGatewayGroup API operation for Alexa For Business.
+//
+// Creates a gateway group with the specified details.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation CreateGatewayGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AlreadyExistsException
+//     The resource being created already exists.
+//
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroup
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) CreateGatewayGroup(input *CreateGatewayGroupInput) (*CreateGatewayGroupOutput, error) {
+	req, out := c.CreateGatewayGroupRequest(input)
+	return out, req.Send()
+}
+
+// CreateGatewayGroupWithContext is the same as CreateGatewayGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateGatewayGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) CreateGatewayGroupWithContext(ctx aws.Context, input *CreateGatewayGroupInput, opts ...request.Option) (*CreateGatewayGroupOutput, error) {
+	req, out := c.CreateGatewayGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opCreateNetworkProfile = "CreateNetworkProfile"
+
+// CreateNetworkProfileRequest generates a "aws/request.Request" representing the
+// client's request for the CreateNetworkProfile operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateNetworkProfile for more information on using the CreateNetworkProfile
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateNetworkProfileRequest method.
+//	req, resp := client.CreateNetworkProfileRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) CreateNetworkProfileRequest(input *CreateNetworkProfileInput) (req *request.Request, output *CreateNetworkProfileOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateNetworkProfile, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opCreateNetworkProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateNetworkProfileInput{}
+	}
+
+	output = &CreateNetworkProfileOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateNetworkProfile API operation for Alexa For Business.
+//
+// Creates a network profile with the specified details.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation CreateNetworkProfile for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AlreadyExistsException
+//     The resource being created already exists.
+//
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - InvalidCertificateAuthorityException
+//     The Certificate Authority can't issue or revoke a certificate.
+//
+//   - InvalidServiceLinkedRoleStateException
+//     The service linked role is locked for deletion.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) CreateNetworkProfile(input *CreateNetworkProfileInput) (*CreateNetworkProfileOutput, error) {
+	req, out := c.CreateNetworkProfileRequest(input)
+	return out, req.Send()
+}
+
+// CreateNetworkProfileWithContext is the same as CreateNetworkProfile with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateNetworkProfile for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) CreateNetworkProfileWithContext(ctx aws.Context, input *CreateNetworkProfileInput, opts ...request.Option) (*CreateNetworkProfileOutput, error) {
+	req, out := c.CreateNetworkProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
@@ -857,17 +1233,21 @@ const opCreateProfile = "CreateProfile"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateProfileRequest method.
+//	req, resp := client.CreateProfileRequest(params)
 //
-//    // Example sending a request using the CreateProfileRequest method.
-//    req, resp := client.CreateProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateProfile
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateProfileRequest(input *CreateProfileInput) (req *request.Request, output *CreateProfileOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateProfile, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateProfile,
 		HTTPMethod: "POST",
@@ -894,17 +1274,20 @@ func (c *AlexaForBusiness) CreateProfileRequest(input *CreateProfileInput) (req 
 // See the AWS API reference guide for Alexa For Business's
 // API operation CreateProfile for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+// Returned Error Types:
 //
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource being created already exists.
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - AlreadyExistsException
+//     The resource being created already exists.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateProfile
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateProfile(input *CreateProfileInput) (*CreateProfileOutput, error) {
 	req, out := c.CreateProfileRequest(input)
 	return out, req.Send()
@@ -919,6 +1302,8 @@ func (c *AlexaForBusiness) CreateProfile(input *CreateProfileInput) (*CreateProf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateProfileWithContext(ctx aws.Context, input *CreateProfileInput, opts ...request.Option) (*CreateProfileOutput, error) {
 	req, out := c.CreateProfileRequest(input)
 	req.SetContext(ctx)
@@ -942,17 +1327,21 @@ const opCreateRoom = "CreateRoom"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateRoomRequest method.
+//	req, resp := client.CreateRoomRequest(params)
 //
-//    // Example sending a request using the CreateRoomRequest method.
-//    req, resp := client.CreateRoomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateRoomRequest(input *CreateRoomInput) (req *request.Request, output *CreateRoomOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateRoom, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateRoom,
 		HTTPMethod: "POST",
@@ -979,14 +1368,17 @@ func (c *AlexaForBusiness) CreateRoomRequest(input *CreateRoomInput) (req *reque
 // See the AWS API reference guide for Alexa For Business's
 // API operation CreateRoom for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource being created already exists.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+//   - AlreadyExistsException
+//     The resource being created already exists.
+//
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateRoom(input *CreateRoomInput) (*CreateRoomOutput, error) {
 	req, out := c.CreateRoomRequest(input)
 	return out, req.Send()
@@ -1001,6 +1393,8 @@ func (c *AlexaForBusiness) CreateRoom(input *CreateRoomInput) (*CreateRoomOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateRoomWithContext(ctx aws.Context, input *CreateRoomInput, opts ...request.Option) (*CreateRoomOutput, error) {
 	req, out := c.CreateRoomRequest(input)
 	req.SetContext(ctx)
@@ -1024,17 +1418,21 @@ const opCreateSkillGroup = "CreateSkillGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateSkillGroupRequest method.
+//	req, resp := client.CreateSkillGroupRequest(params)
 //
-//    // Example sending a request using the CreateSkillGroupRequest method.
-//    req, resp := client.CreateSkillGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateSkillGroupRequest(input *CreateSkillGroupInput) (req *request.Request, output *CreateSkillGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateSkillGroup, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateSkillGroup,
 		HTTPMethod: "POST",
@@ -1061,17 +1459,20 @@ func (c *AlexaForBusiness) CreateSkillGroupRequest(input *CreateSkillGroupInput)
 // See the AWS API reference guide for Alexa For Business's
 // API operation CreateSkillGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource being created already exists.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+//   - AlreadyExistsException
+//     The resource being created already exists.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateSkillGroup(input *CreateSkillGroupInput) (*CreateSkillGroupOutput, error) {
 	req, out := c.CreateSkillGroupRequest(input)
 	return out, req.Send()
@@ -1086,6 +1487,8 @@ func (c *AlexaForBusiness) CreateSkillGroup(input *CreateSkillGroupInput) (*Crea
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateSkillGroupWithContext(ctx aws.Context, input *CreateSkillGroupInput, opts ...request.Option) (*CreateSkillGroupOutput, error) {
 	req, out := c.CreateSkillGroupRequest(input)
 	req.SetContext(ctx)
@@ -1109,17 +1512,21 @@ const opCreateUser = "CreateUser"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateUserRequest method.
+//	req, resp := client.CreateUserRequest(params)
 //
-//    // Example sending a request using the CreateUserRequest method.
-//    req, resp := client.CreateUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateUser
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateUserRequest(input *CreateUserInput) (req *request.Request, output *CreateUserOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateUser, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateUser,
 		HTTPMethod: "POST",
@@ -1146,17 +1553,20 @@ func (c *AlexaForBusiness) CreateUserRequest(input *CreateUserInput) (req *reque
 // See the AWS API reference guide for Alexa For Business's
 // API operation CreateUser for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource in the request is already in use.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+//   - ResourceInUseException
+//     The resource in the request is already in use.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateUser
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateUser(input *CreateUserInput) (*CreateUserOutput, error) {
 	req, out := c.CreateUserRequest(input)
 	return out, req.Send()
@@ -1171,6 +1581,8 @@ func (c *AlexaForBusiness) CreateUser(input *CreateUserInput) (*CreateUserOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) CreateUserWithContext(ctx aws.Context, input *CreateUserInput, opts ...request.Option) (*CreateUserOutput, error) {
 	req, out := c.CreateUserRequest(input)
 	req.SetContext(ctx)
@@ -1194,17 +1606,21 @@ const opDeleteAddressBook = "DeleteAddressBook"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteAddressBookRequest method.
+//	req, resp := client.DeleteAddressBookRequest(params)
 //
-//    // Example sending a request using the DeleteAddressBookRequest method.
-//    req, resp := client.DeleteAddressBookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteAddressBookRequest(input *DeleteAddressBookInput) (req *request.Request, output *DeleteAddressBookOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteAddressBook, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteAddressBook,
 		HTTPMethod: "POST",
@@ -1232,14 +1648,17 @@ func (c *AlexaForBusiness) DeleteAddressBookRequest(input *DeleteAddressBookInpu
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteAddressBook for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteAddressBook(input *DeleteAddressBookInput) (*DeleteAddressBookOutput, error) {
 	req, out := c.DeleteAddressBookRequest(input)
 	return out, req.Send()
@@ -1254,6 +1673,8 @@ func (c *AlexaForBusiness) DeleteAddressBook(input *DeleteAddressBookInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteAddressBookWithContext(ctx aws.Context, input *DeleteAddressBookInput, opts ...request.Option) (*DeleteAddressBookOutput, error) {
 	req, out := c.DeleteAddressBookRequest(input)
 	req.SetContext(ctx)
@@ -1277,17 +1698,21 @@ const opDeleteBusinessReportSchedule = "DeleteBusinessReportSchedule"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteBusinessReportScheduleRequest method.
+//	req, resp := client.DeleteBusinessReportScheduleRequest(params)
 //
-//    // Example sending a request using the DeleteBusinessReportScheduleRequest method.
-//    req, resp := client.DeleteBusinessReportScheduleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportSchedule
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteBusinessReportScheduleRequest(input *DeleteBusinessReportScheduleInput) (req *request.Request, output *DeleteBusinessReportScheduleOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteBusinessReportSchedule, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteBusinessReportSchedule,
 		HTTPMethod: "POST",
@@ -1316,14 +1741,17 @@ func (c *AlexaForBusiness) DeleteBusinessReportScheduleRequest(input *DeleteBusi
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteBusinessReportSchedule for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportSchedule
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteBusinessReportSchedule(input *DeleteBusinessReportScheduleInput) (*DeleteBusinessReportScheduleOutput, error) {
 	req, out := c.DeleteBusinessReportScheduleRequest(input)
 	return out, req.Send()
@@ -1338,6 +1766,8 @@ func (c *AlexaForBusiness) DeleteBusinessReportSchedule(input *DeleteBusinessRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteBusinessReportScheduleWithContext(ctx aws.Context, input *DeleteBusinessReportScheduleInput, opts ...request.Option) (*DeleteBusinessReportScheduleOutput, error) {
 	req, out := c.DeleteBusinessReportScheduleRequest(input)
 	req.SetContext(ctx)
@@ -1361,17 +1791,21 @@ const opDeleteConferenceProvider = "DeleteConferenceProvider"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteConferenceProviderRequest method.
+//	req, resp := client.DeleteConferenceProviderRequest(params)
 //
-//    // Example sending a request using the DeleteConferenceProviderRequest method.
-//    req, resp := client.DeleteConferenceProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteConferenceProvider
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteConferenceProviderRequest(input *DeleteConferenceProviderInput) (req *request.Request, output *DeleteConferenceProviderOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteConferenceProvider, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteConferenceProvider,
 		HTTPMethod: "POST",
@@ -1399,11 +1833,13 @@ func (c *AlexaForBusiness) DeleteConferenceProviderRequest(input *DeleteConferen
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteConferenceProvider for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteConferenceProvider
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteConferenceProvider(input *DeleteConferenceProviderInput) (*DeleteConferenceProviderOutput, error) {
 	req, out := c.DeleteConferenceProviderRequest(input)
 	return out, req.Send()
@@ -1418,6 +1854,8 @@ func (c *AlexaForBusiness) DeleteConferenceProvider(input *DeleteConferenceProvi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteConferenceProviderWithContext(ctx aws.Context, input *DeleteConferenceProviderInput, opts ...request.Option) (*DeleteConferenceProviderOutput, error) {
 	req, out := c.DeleteConferenceProviderRequest(input)
 	req.SetContext(ctx)
@@ -1441,17 +1879,21 @@ const opDeleteContact = "DeleteContact"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteContactRequest method.
+//	req, resp := client.DeleteContactRequest(params)
 //
-//    // Example sending a request using the DeleteContactRequest method.
-//    req, resp := client.DeleteContactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContact
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteContactRequest(input *DeleteContactInput) (req *request.Request, output *DeleteContactOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteContact, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteContact,
 		HTTPMethod: "POST",
@@ -1479,14 +1921,17 @@ func (c *AlexaForBusiness) DeleteContactRequest(input *DeleteContactInput) (req 
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteContact for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContact
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteContact(input *DeleteContactInput) (*DeleteContactOutput, error) {
 	req, out := c.DeleteContactRequest(input)
 	return out, req.Send()
@@ -1501,6 +1946,8 @@ func (c *AlexaForBusiness) DeleteContact(input *DeleteContactInput) (*DeleteCont
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteContactWithContext(ctx aws.Context, input *DeleteContactInput, opts ...request.Option) (*DeleteContactOutput, error) {
 	req, out := c.DeleteContactRequest(input)
 	req.SetContext(ctx)
@@ -1524,17 +1971,21 @@ const opDeleteDevice = "DeleteDevice"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDeviceRequest method.
+//	req, resp := client.DeleteDeviceRequest(params)
 //
-//    // Example sending a request using the DeleteDeviceRequest method.
-//    req, resp := client.DeleteDeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDevice
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteDeviceRequest(input *DeleteDeviceInput) (req *request.Request, output *DeleteDeviceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteDevice, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteDevice,
 		HTTPMethod: "POST",
@@ -1562,17 +2013,20 @@ func (c *AlexaForBusiness) DeleteDeviceRequest(input *DeleteDeviceInput) (req *r
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteDevice for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
 //
-//   * ErrCodeInvalidCertificateAuthorityException "InvalidCertificateAuthorityException"
-//   The Certificate Authority can't issue or revoke a certificate.
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - InvalidCertificateAuthorityException
+//     The Certificate Authority can't issue or revoke a certificate.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDevice
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteDevice(input *DeleteDeviceInput) (*DeleteDeviceOutput, error) {
 	req, out := c.DeleteDeviceRequest(input)
 	return out, req.Send()
@@ -1587,8 +2041,292 @@ func (c *AlexaForBusiness) DeleteDevice(input *DeleteDeviceInput) (*DeleteDevice
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteDeviceWithContext(ctx aws.Context, input *DeleteDeviceInput, opts ...request.Option) (*DeleteDeviceOutput, error) {
 	req, out := c.DeleteDeviceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDeleteDeviceUsageData = "DeleteDeviceUsageData"
+
+// DeleteDeviceUsageDataRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteDeviceUsageData operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteDeviceUsageData for more information on using the DeleteDeviceUsageData
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteDeviceUsageDataRequest method.
+//	req, resp := client.DeleteDeviceUsageDataRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageData
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) DeleteDeviceUsageDataRequest(input *DeleteDeviceUsageDataInput) (req *request.Request, output *DeleteDeviceUsageDataOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteDeviceUsageData, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opDeleteDeviceUsageData,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteDeviceUsageDataInput{}
+	}
+
+	output = &DeleteDeviceUsageDataOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteDeviceUsageData API operation for Alexa For Business.
+//
+// When this action is called for a specified shared device, it allows authorized
+// users to delete the device's entire previous history of voice input data
+// and associated response data. This action can be called once every 24 hours
+// for a specific shared device.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation DeleteDeviceUsageData for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - DeviceNotRegisteredException
+//     The request failed because this device is no longer registered and therefore
+//     no longer managed by this account.
+//
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageData
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) DeleteDeviceUsageData(input *DeleteDeviceUsageDataInput) (*DeleteDeviceUsageDataOutput, error) {
+	req, out := c.DeleteDeviceUsageDataRequest(input)
+	return out, req.Send()
+}
+
+// DeleteDeviceUsageDataWithContext is the same as DeleteDeviceUsageData with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteDeviceUsageData for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) DeleteDeviceUsageDataWithContext(ctx aws.Context, input *DeleteDeviceUsageDataInput, opts ...request.Option) (*DeleteDeviceUsageDataOutput, error) {
+	req, out := c.DeleteDeviceUsageDataRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDeleteGatewayGroup = "DeleteGatewayGroup"
+
+// DeleteGatewayGroupRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteGatewayGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteGatewayGroup for more information on using the DeleteGatewayGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteGatewayGroupRequest method.
+//	req, resp := client.DeleteGatewayGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroup
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) DeleteGatewayGroupRequest(input *DeleteGatewayGroupInput) (req *request.Request, output *DeleteGatewayGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteGatewayGroup, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opDeleteGatewayGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteGatewayGroupInput{}
+	}
+
+	output = &DeleteGatewayGroupOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteGatewayGroup API operation for Alexa For Business.
+//
+// Deletes a gateway group.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation DeleteGatewayGroup for usage and error information.
+//
+// Returned Error Types:
+//   - ResourceAssociatedException
+//     Another resource is associated with the resource in the request.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroup
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) DeleteGatewayGroup(input *DeleteGatewayGroupInput) (*DeleteGatewayGroupOutput, error) {
+	req, out := c.DeleteGatewayGroupRequest(input)
+	return out, req.Send()
+}
+
+// DeleteGatewayGroupWithContext is the same as DeleteGatewayGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteGatewayGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) DeleteGatewayGroupWithContext(ctx aws.Context, input *DeleteGatewayGroupInput, opts ...request.Option) (*DeleteGatewayGroupOutput, error) {
+	req, out := c.DeleteGatewayGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDeleteNetworkProfile = "DeleteNetworkProfile"
+
+// DeleteNetworkProfileRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteNetworkProfile operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteNetworkProfile for more information on using the DeleteNetworkProfile
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteNetworkProfileRequest method.
+//	req, resp := client.DeleteNetworkProfileRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInput) (req *request.Request, output *DeleteNetworkProfileOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteNetworkProfile, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opDeleteNetworkProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteNetworkProfileInput{}
+	}
+
+	output = &DeleteNetworkProfileOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteNetworkProfile API operation for Alexa For Business.
+//
+// Deletes a network profile by the network profile ARN.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation DeleteNetworkProfile for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceInUseException
+//     The resource in the request is already in use.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - NotFoundException
+//     The resource is not found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) DeleteNetworkProfile(input *DeleteNetworkProfileInput) (*DeleteNetworkProfileOutput, error) {
+	req, out := c.DeleteNetworkProfileRequest(input)
+	return out, req.Send()
+}
+
+// DeleteNetworkProfileWithContext is the same as DeleteNetworkProfile with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteNetworkProfile for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) DeleteNetworkProfileWithContext(ctx aws.Context, input *DeleteNetworkProfileInput, opts ...request.Option) (*DeleteNetworkProfileOutput, error) {
+	req, out := c.DeleteNetworkProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
@@ -1610,17 +2348,21 @@ const opDeleteProfile = "DeleteProfile"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteProfileRequest method.
+//	req, resp := client.DeleteProfileRequest(params)
 //
-//    // Example sending a request using the DeleteProfileRequest method.
-//    req, resp := client.DeleteProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteProfile
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteProfileRequest(input *DeleteProfileInput) (req *request.Request, output *DeleteProfileOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteProfile, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteProfile,
 		HTTPMethod: "POST",
@@ -1648,14 +2390,17 @@ func (c *AlexaForBusiness) DeleteProfileRequest(input *DeleteProfileInput) (req 
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteProfile for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteProfile
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteProfile(input *DeleteProfileInput) (*DeleteProfileOutput, error) {
 	req, out := c.DeleteProfileRequest(input)
 	return out, req.Send()
@@ -1670,6 +2415,8 @@ func (c *AlexaForBusiness) DeleteProfile(input *DeleteProfileInput) (*DeleteProf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteProfileWithContext(ctx aws.Context, input *DeleteProfileInput, opts ...request.Option) (*DeleteProfileOutput, error) {
 	req, out := c.DeleteProfileRequest(input)
 	req.SetContext(ctx)
@@ -1693,17 +2440,21 @@ const opDeleteRoom = "DeleteRoom"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteRoomRequest method.
+//	req, resp := client.DeleteRoomRequest(params)
 //
-//    // Example sending a request using the DeleteRoomRequest method.
-//    req, resp := client.DeleteRoomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteRoomRequest(input *DeleteRoomInput) (req *request.Request, output *DeleteRoomOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteRoom, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteRoom,
 		HTTPMethod: "POST",
@@ -1731,14 +2482,17 @@ func (c *AlexaForBusiness) DeleteRoomRequest(input *DeleteRoomInput) (req *reque
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteRoom for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteRoom(input *DeleteRoomInput) (*DeleteRoomOutput, error) {
 	req, out := c.DeleteRoomRequest(input)
 	return out, req.Send()
@@ -1753,6 +2507,8 @@ func (c *AlexaForBusiness) DeleteRoom(input *DeleteRoomInput) (*DeleteRoomOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteRoomWithContext(ctx aws.Context, input *DeleteRoomInput, opts ...request.Option) (*DeleteRoomOutput, error) {
 	req, out := c.DeleteRoomRequest(input)
 	req.SetContext(ctx)
@@ -1776,17 +2532,21 @@ const opDeleteRoomSkillParameter = "DeleteRoomSkillParameter"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteRoomSkillParameterRequest method.
+//	req, resp := client.DeleteRoomSkillParameterRequest(params)
 //
-//    // Example sending a request using the DeleteRoomSkillParameterRequest method.
-//    req, resp := client.DeleteRoomSkillParameterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteRoomSkillParameter
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteRoomSkillParameterRequest(input *DeleteRoomSkillParameterInput) (req *request.Request, output *DeleteRoomSkillParameterOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteRoomSkillParameter, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteRoomSkillParameter,
 		HTTPMethod: "POST",
@@ -1814,11 +2574,13 @@ func (c *AlexaForBusiness) DeleteRoomSkillParameterRequest(input *DeleteRoomSkil
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteRoomSkillParameter for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteRoomSkillParameter
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteRoomSkillParameter(input *DeleteRoomSkillParameterInput) (*DeleteRoomSkillParameterOutput, error) {
 	req, out := c.DeleteRoomSkillParameterRequest(input)
 	return out, req.Send()
@@ -1833,6 +2595,8 @@ func (c *AlexaForBusiness) DeleteRoomSkillParameter(input *DeleteRoomSkillParame
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteRoomSkillParameterWithContext(ctx aws.Context, input *DeleteRoomSkillParameterInput, opts ...request.Option) (*DeleteRoomSkillParameterOutput, error) {
 	req, out := c.DeleteRoomSkillParameterRequest(input)
 	req.SetContext(ctx)
@@ -1856,17 +2620,21 @@ const opDeleteSkillAuthorization = "DeleteSkillAuthorization"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteSkillAuthorizationRequest method.
+//	req, resp := client.DeleteSkillAuthorizationRequest(params)
 //
-//    // Example sending a request using the DeleteSkillAuthorizationRequest method.
-//    req, resp := client.DeleteSkillAuthorizationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillAuthorization
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteSkillAuthorizationRequest(input *DeleteSkillAuthorizationInput) (req *request.Request, output *DeleteSkillAuthorizationOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteSkillAuthorization, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteSkillAuthorization,
 		HTTPMethod: "POST",
@@ -1894,14 +2662,17 @@ func (c *AlexaForBusiness) DeleteSkillAuthorizationRequest(input *DeleteSkillAut
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteSkillAuthorization for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillAuthorization
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteSkillAuthorization(input *DeleteSkillAuthorizationInput) (*DeleteSkillAuthorizationOutput, error) {
 	req, out := c.DeleteSkillAuthorizationRequest(input)
 	return out, req.Send()
@@ -1916,6 +2687,8 @@ func (c *AlexaForBusiness) DeleteSkillAuthorization(input *DeleteSkillAuthorizat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteSkillAuthorizationWithContext(ctx aws.Context, input *DeleteSkillAuthorizationInput, opts ...request.Option) (*DeleteSkillAuthorizationOutput, error) {
 	req, out := c.DeleteSkillAuthorizationRequest(input)
 	req.SetContext(ctx)
@@ -1939,17 +2712,21 @@ const opDeleteSkillGroup = "DeleteSkillGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteSkillGroupRequest method.
+//	req, resp := client.DeleteSkillGroupRequest(params)
 //
-//    // Example sending a request using the DeleteSkillGroupRequest method.
-//    req, resp := client.DeleteSkillGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteSkillGroupRequest(input *DeleteSkillGroupInput) (req *request.Request, output *DeleteSkillGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteSkillGroup, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteSkillGroup,
 		HTTPMethod: "POST",
@@ -1977,14 +2754,17 @@ func (c *AlexaForBusiness) DeleteSkillGroupRequest(input *DeleteSkillGroupInput)
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteSkillGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteSkillGroup(input *DeleteSkillGroupInput) (*DeleteSkillGroupOutput, error) {
 	req, out := c.DeleteSkillGroupRequest(input)
 	return out, req.Send()
@@ -1999,6 +2779,8 @@ func (c *AlexaForBusiness) DeleteSkillGroup(input *DeleteSkillGroupInput) (*Dele
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteSkillGroupWithContext(ctx aws.Context, input *DeleteSkillGroupInput, opts ...request.Option) (*DeleteSkillGroupOutput, error) {
 	req, out := c.DeleteSkillGroupRequest(input)
 	req.SetContext(ctx)
@@ -2022,17 +2804,21 @@ const opDeleteUser = "DeleteUser"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteUserRequest method.
+//	req, resp := client.DeleteUserRequest(params)
 //
-//    // Example sending a request using the DeleteUserRequest method.
-//    req, resp := client.DeleteUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteUser
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteUserRequest(input *DeleteUserInput) (req *request.Request, output *DeleteUserOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteUser, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteUser,
 		HTTPMethod: "POST",
@@ -2060,14 +2846,17 @@ func (c *AlexaForBusiness) DeleteUserRequest(input *DeleteUserInput) (req *reque
 // See the AWS API reference guide for Alexa For Business's
 // API operation DeleteUser for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteUser
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteUser(input *DeleteUserInput) (*DeleteUserOutput, error) {
 	req, out := c.DeleteUserRequest(input)
 	return out, req.Send()
@@ -2082,6 +2871,8 @@ func (c *AlexaForBusiness) DeleteUser(input *DeleteUserInput) (*DeleteUserOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DeleteUserWithContext(ctx aws.Context, input *DeleteUserInput, opts ...request.Option) (*DeleteUserOutput, error) {
 	req, out := c.DeleteUserRequest(input)
 	req.SetContext(ctx)
@@ -2105,17 +2896,21 @@ const opDisassociateContactFromAddressBook = "DisassociateContactFromAddressBook
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateContactFromAddressBookRequest method.
+//	req, resp := client.DisassociateContactFromAddressBookRequest(params)
 //
-//    // Example sending a request using the DisassociateContactFromAddressBookRequest method.
-//    req, resp := client.DisassociateContactFromAddressBookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateContactFromAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateContactFromAddressBookRequest(input *DisassociateContactFromAddressBookInput) (req *request.Request, output *DisassociateContactFromAddressBookOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DisassociateContactFromAddressBook, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDisassociateContactFromAddressBook,
 		HTTPMethod: "POST",
@@ -2143,6 +2938,8 @@ func (c *AlexaForBusiness) DisassociateContactFromAddressBookRequest(input *Disa
 // See the AWS API reference guide for Alexa For Business's
 // API operation DisassociateContactFromAddressBook for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateContactFromAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateContactFromAddressBook(input *DisassociateContactFromAddressBookInput) (*DisassociateContactFromAddressBookOutput, error) {
 	req, out := c.DisassociateContactFromAddressBookRequest(input)
 	return out, req.Send()
@@ -2157,6 +2954,8 @@ func (c *AlexaForBusiness) DisassociateContactFromAddressBook(input *Disassociat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateContactFromAddressBookWithContext(ctx aws.Context, input *DisassociateContactFromAddressBookInput, opts ...request.Option) (*DisassociateContactFromAddressBookOutput, error) {
 	req, out := c.DisassociateContactFromAddressBookRequest(input)
 	req.SetContext(ctx)
@@ -2180,17 +2979,21 @@ const opDisassociateDeviceFromRoom = "DisassociateDeviceFromRoom"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateDeviceFromRoomRequest method.
+//	req, resp := client.DisassociateDeviceFromRoomRequest(params)
 //
-//    // Example sending a request using the DisassociateDeviceFromRoomRequest method.
-//    req, resp := client.DisassociateDeviceFromRoomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateDeviceFromRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateDeviceFromRoomRequest(input *DisassociateDeviceFromRoomInput) (req *request.Request, output *DisassociateDeviceFromRoomOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DisassociateDeviceFromRoom, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDisassociateDeviceFromRoom,
 		HTTPMethod: "POST",
@@ -2220,15 +3023,18 @@ func (c *AlexaForBusiness) DisassociateDeviceFromRoomRequest(input *Disassociate
 // See the AWS API reference guide for Alexa For Business's
 // API operation DisassociateDeviceFromRoom for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
 //
-//   * ErrCodeDeviceNotRegisteredException "DeviceNotRegisteredException"
-//   The request failed because this device is no longer registered and therefore
-//   no longer managed by this account.
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - DeviceNotRegisteredException
+//     The request failed because this device is no longer registered and therefore
+//     no longer managed by this account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateDeviceFromRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateDeviceFromRoom(input *DisassociateDeviceFromRoomInput) (*DisassociateDeviceFromRoomOutput, error) {
 	req, out := c.DisassociateDeviceFromRoomRequest(input)
 	return out, req.Send()
@@ -2243,6 +3049,8 @@ func (c *AlexaForBusiness) DisassociateDeviceFromRoom(input *DisassociateDeviceF
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateDeviceFromRoomWithContext(ctx aws.Context, input *DisassociateDeviceFromRoomInput, opts ...request.Option) (*DisassociateDeviceFromRoomOutput, error) {
 	req, out := c.DisassociateDeviceFromRoomRequest(input)
 	req.SetContext(ctx)
@@ -2266,17 +3074,21 @@ const opDisassociateSkillFromSkillGroup = "DisassociateSkillFromSkillGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateSkillFromSkillGroupRequest method.
+//	req, resp := client.DisassociateSkillFromSkillGroupRequest(params)
 //
-//    // Example sending a request using the DisassociateSkillFromSkillGroupRequest method.
-//    req, resp := client.DisassociateSkillFromSkillGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateSkillFromSkillGroupRequest(input *DisassociateSkillFromSkillGroupInput) (req *request.Request, output *DisassociateSkillFromSkillGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DisassociateSkillFromSkillGroup, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDisassociateSkillFromSkillGroup,
 		HTTPMethod: "POST",
@@ -2304,14 +3116,17 @@ func (c *AlexaForBusiness) DisassociateSkillFromSkillGroupRequest(input *Disasso
 // See the AWS API reference guide for Alexa For Business's
 // API operation DisassociateSkillFromSkillGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateSkillFromSkillGroup(input *DisassociateSkillFromSkillGroupInput) (*DisassociateSkillFromSkillGroupOutput, error) {
 	req, out := c.DisassociateSkillFromSkillGroupRequest(input)
 	return out, req.Send()
@@ -2326,6 +3141,8 @@ func (c *AlexaForBusiness) DisassociateSkillFromSkillGroup(input *DisassociateSk
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateSkillFromSkillGroupWithContext(ctx aws.Context, input *DisassociateSkillFromSkillGroupInput, opts ...request.Option) (*DisassociateSkillFromSkillGroupOutput, error) {
 	req, out := c.DisassociateSkillFromSkillGroupRequest(input)
 	req.SetContext(ctx)
@@ -2349,17 +3166,21 @@ const opDisassociateSkillFromUsers = "DisassociateSkillFromUsers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateSkillFromUsersRequest method.
+//	req, resp := client.DisassociateSkillFromUsersRequest(params)
 //
-//    // Example sending a request using the DisassociateSkillFromUsersRequest method.
-//    req, resp := client.DisassociateSkillFromUsersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsers
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateSkillFromUsersRequest(input *DisassociateSkillFromUsersInput) (req *request.Request, output *DisassociateSkillFromUsersOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DisassociateSkillFromUsers, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDisassociateSkillFromUsers,
 		HTTPMethod: "POST",
@@ -2388,11 +3209,17 @@ func (c *AlexaForBusiness) DisassociateSkillFromUsersRequest(input *Disassociate
 // See the AWS API reference guide for Alexa For Business's
 // API operation DisassociateSkillFromUsers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsers
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateSkillFromUsers(input *DisassociateSkillFromUsersInput) (*DisassociateSkillFromUsersOutput, error) {
 	req, out := c.DisassociateSkillFromUsersRequest(input)
 	return out, req.Send()
@@ -2407,6 +3234,8 @@ func (c *AlexaForBusiness) DisassociateSkillFromUsers(input *DisassociateSkillFr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateSkillFromUsersWithContext(ctx aws.Context, input *DisassociateSkillFromUsersInput, opts ...request.Option) (*DisassociateSkillFromUsersOutput, error) {
 	req, out := c.DisassociateSkillFromUsersRequest(input)
 	req.SetContext(ctx)
@@ -2430,17 +3259,21 @@ const opDisassociateSkillGroupFromRoom = "DisassociateSkillGroupFromRoom"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateSkillGroupFromRoomRequest method.
+//	req, resp := client.DisassociateSkillGroupFromRoomRequest(params)
 //
-//    // Example sending a request using the DisassociateSkillGroupFromRoomRequest method.
-//    req, resp := client.DisassociateSkillGroupFromRoomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillGroupFromRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateSkillGroupFromRoomRequest(input *DisassociateSkillGroupFromRoomInput) (req *request.Request, output *DisassociateSkillGroupFromRoomOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DisassociateSkillGroupFromRoom, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDisassociateSkillGroupFromRoom,
 		HTTPMethod: "POST",
@@ -2469,11 +3302,13 @@ func (c *AlexaForBusiness) DisassociateSkillGroupFromRoomRequest(input *Disassoc
 // See the AWS API reference guide for Alexa For Business's
 // API operation DisassociateSkillGroupFromRoom for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillGroupFromRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateSkillGroupFromRoom(input *DisassociateSkillGroupFromRoomInput) (*DisassociateSkillGroupFromRoomOutput, error) {
 	req, out := c.DisassociateSkillGroupFromRoomRequest(input)
 	return out, req.Send()
@@ -2488,6 +3323,8 @@ func (c *AlexaForBusiness) DisassociateSkillGroupFromRoom(input *DisassociateSki
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) DisassociateSkillGroupFromRoomWithContext(ctx aws.Context, input *DisassociateSkillGroupFromRoomInput, opts ...request.Option) (*DisassociateSkillGroupFromRoomOutput, error) {
 	req, out := c.DisassociateSkillGroupFromRoomRequest(input)
 	req.SetContext(ctx)
@@ -2511,17 +3348,21 @@ const opForgetSmartHomeAppliances = "ForgetSmartHomeAppliances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ForgetSmartHomeAppliancesRequest method.
+//	req, resp := client.ForgetSmartHomeAppliancesRequest(params)
 //
-//    // Example sending a request using the ForgetSmartHomeAppliancesRequest method.
-//    req, resp := client.ForgetSmartHomeAppliancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ForgetSmartHomeAppliances
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ForgetSmartHomeAppliancesRequest(input *ForgetSmartHomeAppliancesInput) (req *request.Request, output *ForgetSmartHomeAppliancesOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ForgetSmartHomeAppliances, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opForgetSmartHomeAppliances,
 		HTTPMethod: "POST",
@@ -2549,11 +3390,13 @@ func (c *AlexaForBusiness) ForgetSmartHomeAppliancesRequest(input *ForgetSmartHo
 // See the AWS API reference guide for Alexa For Business's
 // API operation ForgetSmartHomeAppliances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ForgetSmartHomeAppliances
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ForgetSmartHomeAppliances(input *ForgetSmartHomeAppliancesInput) (*ForgetSmartHomeAppliancesOutput, error) {
 	req, out := c.ForgetSmartHomeAppliancesRequest(input)
 	return out, req.Send()
@@ -2568,6 +3411,8 @@ func (c *AlexaForBusiness) ForgetSmartHomeAppliances(input *ForgetSmartHomeAppli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ForgetSmartHomeAppliancesWithContext(ctx aws.Context, input *ForgetSmartHomeAppliancesInput, opts ...request.Option) (*ForgetSmartHomeAppliancesOutput, error) {
 	req, out := c.ForgetSmartHomeAppliancesRequest(input)
 	req.SetContext(ctx)
@@ -2591,17 +3436,21 @@ const opGetAddressBook = "GetAddressBook"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetAddressBookRequest method.
+//	req, resp := client.GetAddressBookRequest(params)
 //
-//    // Example sending a request using the GetAddressBookRequest method.
-//    req, resp := client.GetAddressBookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetAddressBookRequest(input *GetAddressBookInput) (req *request.Request, output *GetAddressBookOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetAddressBook, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetAddressBook,
 		HTTPMethod: "POST",
@@ -2628,11 +3477,13 @@ func (c *AlexaForBusiness) GetAddressBookRequest(input *GetAddressBookInput) (re
 // See the AWS API reference guide for Alexa For Business's
 // API operation GetAddressBook for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetAddressBook(input *GetAddressBookInput) (*GetAddressBookOutput, error) {
 	req, out := c.GetAddressBookRequest(input)
 	return out, req.Send()
@@ -2647,6 +3498,8 @@ func (c *AlexaForBusiness) GetAddressBook(input *GetAddressBookInput) (*GetAddre
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetAddressBookWithContext(ctx aws.Context, input *GetAddressBookInput, opts ...request.Option) (*GetAddressBookOutput, error) {
 	req, out := c.GetAddressBookRequest(input)
 	req.SetContext(ctx)
@@ -2670,17 +3523,21 @@ const opGetConferencePreference = "GetConferencePreference"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetConferencePreferenceRequest method.
+//	req, resp := client.GetConferencePreferenceRequest(params)
 //
-//    // Example sending a request using the GetConferencePreferenceRequest method.
-//    req, resp := client.GetConferencePreferenceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreference
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetConferencePreferenceRequest(input *GetConferencePreferenceInput) (req *request.Request, output *GetConferencePreferenceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetConferencePreference, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetConferencePreference,
 		HTTPMethod: "POST",
@@ -2707,11 +3564,13 @@ func (c *AlexaForBusiness) GetConferencePreferenceRequest(input *GetConferencePr
 // See the AWS API reference guide for Alexa For Business's
 // API operation GetConferencePreference for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreference
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetConferencePreference(input *GetConferencePreferenceInput) (*GetConferencePreferenceOutput, error) {
 	req, out := c.GetConferencePreferenceRequest(input)
 	return out, req.Send()
@@ -2726,6 +3585,8 @@ func (c *AlexaForBusiness) GetConferencePreference(input *GetConferencePreferenc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetConferencePreferenceWithContext(ctx aws.Context, input *GetConferencePreferenceInput, opts ...request.Option) (*GetConferencePreferenceOutput, error) {
 	req, out := c.GetConferencePreferenceRequest(input)
 	req.SetContext(ctx)
@@ -2749,17 +3610,21 @@ const opGetConferenceProvider = "GetConferenceProvider"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetConferenceProviderRequest method.
+//	req, resp := client.GetConferenceProviderRequest(params)
 //
-//    // Example sending a request using the GetConferenceProviderRequest method.
-//    req, resp := client.GetConferenceProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferenceProvider
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetConferenceProviderRequest(input *GetConferenceProviderInput) (req *request.Request, output *GetConferenceProviderOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetConferenceProvider, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetConferenceProvider,
 		HTTPMethod: "POST",
@@ -2786,11 +3651,13 @@ func (c *AlexaForBusiness) GetConferenceProviderRequest(input *GetConferenceProv
 // See the AWS API reference guide for Alexa For Business's
 // API operation GetConferenceProvider for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferenceProvider
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetConferenceProvider(input *GetConferenceProviderInput) (*GetConferenceProviderOutput, error) {
 	req, out := c.GetConferenceProviderRequest(input)
 	return out, req.Send()
@@ -2805,6 +3672,8 @@ func (c *AlexaForBusiness) GetConferenceProvider(input *GetConferenceProviderInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetConferenceProviderWithContext(ctx aws.Context, input *GetConferenceProviderInput, opts ...request.Option) (*GetConferenceProviderOutput, error) {
 	req, out := c.GetConferenceProviderRequest(input)
 	req.SetContext(ctx)
@@ -2828,17 +3697,21 @@ const opGetContact = "GetContact"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetContactRequest method.
+//	req, resp := client.GetContactRequest(params)
 //
-//    // Example sending a request using the GetContactRequest method.
-//    req, resp := client.GetContactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContact
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetContactRequest(input *GetContactInput) (req *request.Request, output *GetContactOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetContact, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetContact,
 		HTTPMethod: "POST",
@@ -2865,11 +3738,13 @@ func (c *AlexaForBusiness) GetContactRequest(input *GetContactInput) (req *reque
 // See the AWS API reference guide for Alexa For Business's
 // API operation GetContact for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContact
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetContact(input *GetContactInput) (*GetContactOutput, error) {
 	req, out := c.GetContactRequest(input)
 	return out, req.Send()
@@ -2884,6 +3759,8 @@ func (c *AlexaForBusiness) GetContact(input *GetContactInput) (*GetContactOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetContactWithContext(ctx aws.Context, input *GetContactInput, opts ...request.Option) (*GetContactOutput, error) {
 	req, out := c.GetContactRequest(input)
 	req.SetContext(ctx)
@@ -2907,17 +3784,21 @@ const opGetDevice = "GetDevice"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDeviceRequest method.
+//	req, resp := client.GetDeviceRequest(params)
 //
-//    // Example sending a request using the GetDeviceRequest method.
-//    req, resp := client.GetDeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDevice
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetDeviceRequest(input *GetDeviceInput) (req *request.Request, output *GetDeviceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetDevice, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetDevice,
 		HTTPMethod: "POST",
@@ -2944,11 +3825,13 @@ func (c *AlexaForBusiness) GetDeviceRequest(input *GetDeviceInput) (req *request
 // See the AWS API reference guide for Alexa For Business's
 // API operation GetDevice for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDevice
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetDevice(input *GetDeviceInput) (*GetDeviceOutput, error) {
 	req, out := c.GetDeviceRequest(input)
 	return out, req.Send()
@@ -2963,8 +3846,363 @@ func (c *AlexaForBusiness) GetDevice(input *GetDeviceInput) (*GetDeviceOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetDeviceWithContext(ctx aws.Context, input *GetDeviceInput, opts ...request.Option) (*GetDeviceOutput, error) {
 	req, out := c.GetDeviceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetGateway = "GetGateway"
+
+// GetGatewayRequest generates a "aws/request.Request" representing the
+// client's request for the GetGateway operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetGateway for more information on using the GetGateway
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetGatewayRequest method.
+//	req, resp := client.GetGatewayRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGateway
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetGatewayRequest(input *GetGatewayInput) (req *request.Request, output *GetGatewayOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetGateway, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opGetGateway,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetGatewayInput{}
+	}
+
+	output = &GetGatewayOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetGateway API operation for Alexa For Business.
+//
+// Retrieves the details of a gateway.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation GetGateway for usage and error information.
+//
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGateway
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetGateway(input *GetGatewayInput) (*GetGatewayOutput, error) {
+	req, out := c.GetGatewayRequest(input)
+	return out, req.Send()
+}
+
+// GetGatewayWithContext is the same as GetGateway with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetGateway for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetGatewayWithContext(ctx aws.Context, input *GetGatewayInput, opts ...request.Option) (*GetGatewayOutput, error) {
+	req, out := c.GetGatewayRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetGatewayGroup = "GetGatewayGroup"
+
+// GetGatewayGroupRequest generates a "aws/request.Request" representing the
+// client's request for the GetGatewayGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetGatewayGroup for more information on using the GetGatewayGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetGatewayGroupRequest method.
+//	req, resp := client.GetGatewayGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroup
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetGatewayGroupRequest(input *GetGatewayGroupInput) (req *request.Request, output *GetGatewayGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetGatewayGroup, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opGetGatewayGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetGatewayGroupInput{}
+	}
+
+	output = &GetGatewayGroupOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetGatewayGroup API operation for Alexa For Business.
+//
+// Retrieves the details of a gateway group.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation GetGatewayGroup for usage and error information.
+//
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroup
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetGatewayGroup(input *GetGatewayGroupInput) (*GetGatewayGroupOutput, error) {
+	req, out := c.GetGatewayGroupRequest(input)
+	return out, req.Send()
+}
+
+// GetGatewayGroupWithContext is the same as GetGatewayGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetGatewayGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetGatewayGroupWithContext(ctx aws.Context, input *GetGatewayGroupInput, opts ...request.Option) (*GetGatewayGroupOutput, error) {
+	req, out := c.GetGatewayGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetInvitationConfiguration = "GetInvitationConfiguration"
+
+// GetInvitationConfigurationRequest generates a "aws/request.Request" representing the
+// client's request for the GetInvitationConfiguration operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetInvitationConfiguration for more information on using the GetInvitationConfiguration
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetInvitationConfigurationRequest method.
+//	req, resp := client.GetInvitationConfigurationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfiguration
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetInvitationConfigurationRequest(input *GetInvitationConfigurationInput) (req *request.Request, output *GetInvitationConfigurationOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetInvitationConfiguration, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opGetInvitationConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetInvitationConfigurationInput{}
+	}
+
+	output = &GetInvitationConfigurationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetInvitationConfiguration API operation for Alexa For Business.
+//
+// Retrieves the configured values for the user enrollment invitation email
+// template.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation GetInvitationConfiguration for usage and error information.
+//
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfiguration
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetInvitationConfiguration(input *GetInvitationConfigurationInput) (*GetInvitationConfigurationOutput, error) {
+	req, out := c.GetInvitationConfigurationRequest(input)
+	return out, req.Send()
+}
+
+// GetInvitationConfigurationWithContext is the same as GetInvitationConfiguration with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetInvitationConfiguration for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetInvitationConfigurationWithContext(ctx aws.Context, input *GetInvitationConfigurationInput, opts ...request.Option) (*GetInvitationConfigurationOutput, error) {
+	req, out := c.GetInvitationConfigurationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetNetworkProfile = "GetNetworkProfile"
+
+// GetNetworkProfileRequest generates a "aws/request.Request" representing the
+// client's request for the GetNetworkProfile operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetNetworkProfile for more information on using the GetNetworkProfile
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetNetworkProfileRequest method.
+//	req, resp := client.GetNetworkProfileRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetNetworkProfileRequest(input *GetNetworkProfileInput) (req *request.Request, output *GetNetworkProfileOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetNetworkProfile, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opGetNetworkProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetNetworkProfileInput{}
+	}
+
+	output = &GetNetworkProfileOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetNetworkProfile API operation for Alexa For Business.
+//
+// Gets the network profile details by the network profile ARN.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation GetNetworkProfile for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - InvalidSecretsManagerResourceException
+//     A password in SecretsManager is in an invalid state.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetNetworkProfile(input *GetNetworkProfileInput) (*GetNetworkProfileOutput, error) {
+	req, out := c.GetNetworkProfileRequest(input)
+	return out, req.Send()
+}
+
+// GetNetworkProfileWithContext is the same as GetNetworkProfile with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetNetworkProfile for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) GetNetworkProfileWithContext(ctx aws.Context, input *GetNetworkProfileInput, opts ...request.Option) (*GetNetworkProfileOutput, error) {
+	req, out := c.GetNetworkProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
@@ -2986,17 +4224,21 @@ const opGetProfile = "GetProfile"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetProfileRequest method.
+//	req, resp := client.GetProfileRequest(params)
 //
-//    // Example sending a request using the GetProfileRequest method.
-//    req, resp := client.GetProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetProfile
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetProfileRequest(input *GetProfileInput) (req *request.Request, output *GetProfileOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetProfile, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetProfile,
 		HTTPMethod: "POST",
@@ -3023,11 +4265,13 @@ func (c *AlexaForBusiness) GetProfileRequest(input *GetProfileInput) (req *reque
 // See the AWS API reference guide for Alexa For Business's
 // API operation GetProfile for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetProfile
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetProfile(input *GetProfileInput) (*GetProfileOutput, error) {
 	req, out := c.GetProfileRequest(input)
 	return out, req.Send()
@@ -3042,6 +4286,8 @@ func (c *AlexaForBusiness) GetProfile(input *GetProfileInput) (*GetProfileOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetProfileWithContext(ctx aws.Context, input *GetProfileInput, opts ...request.Option) (*GetProfileOutput, error) {
 	req, out := c.GetProfileRequest(input)
 	req.SetContext(ctx)
@@ -3065,17 +4311,21 @@ const opGetRoom = "GetRoom"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetRoomRequest method.
+//	req, resp := client.GetRoomRequest(params)
 //
-//    // Example sending a request using the GetRoomRequest method.
-//    req, resp := client.GetRoomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetRoomRequest(input *GetRoomInput) (req *request.Request, output *GetRoomOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetRoom, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetRoom,
 		HTTPMethod: "POST",
@@ -3102,11 +4352,13 @@ func (c *AlexaForBusiness) GetRoomRequest(input *GetRoomInput) (req *request.Req
 // See the AWS API reference guide for Alexa For Business's
 // API operation GetRoom for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetRoom(input *GetRoomInput) (*GetRoomOutput, error) {
 	req, out := c.GetRoomRequest(input)
 	return out, req.Send()
@@ -3121,6 +4373,8 @@ func (c *AlexaForBusiness) GetRoom(input *GetRoomInput) (*GetRoomOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetRoomWithContext(ctx aws.Context, input *GetRoomInput, opts ...request.Option) (*GetRoomOutput, error) {
 	req, out := c.GetRoomRequest(input)
 	req.SetContext(ctx)
@@ -3144,17 +4398,21 @@ const opGetRoomSkillParameter = "GetRoomSkillParameter"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetRoomSkillParameterRequest method.
+//	req, resp := client.GetRoomSkillParameterRequest(params)
 //
-//    // Example sending a request using the GetRoomSkillParameterRequest method.
-//    req, resp := client.GetRoomSkillParameterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoomSkillParameter
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetRoomSkillParameterRequest(input *GetRoomSkillParameterInput) (req *request.Request, output *GetRoomSkillParameterOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetRoomSkillParameter, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetRoomSkillParameter,
 		HTTPMethod: "POST",
@@ -3181,11 +4439,13 @@ func (c *AlexaForBusiness) GetRoomSkillParameterRequest(input *GetRoomSkillParam
 // See the AWS API reference guide for Alexa For Business's
 // API operation GetRoomSkillParameter for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoomSkillParameter
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetRoomSkillParameter(input *GetRoomSkillParameterInput) (*GetRoomSkillParameterOutput, error) {
 	req, out := c.GetRoomSkillParameterRequest(input)
 	return out, req.Send()
@@ -3200,6 +4460,8 @@ func (c *AlexaForBusiness) GetRoomSkillParameter(input *GetRoomSkillParameterInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetRoomSkillParameterWithContext(ctx aws.Context, input *GetRoomSkillParameterInput, opts ...request.Option) (*GetRoomSkillParameterOutput, error) {
 	req, out := c.GetRoomSkillParameterRequest(input)
 	req.SetContext(ctx)
@@ -3223,17 +4485,21 @@ const opGetSkillGroup = "GetSkillGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetSkillGroupRequest method.
+//	req, resp := client.GetSkillGroupRequest(params)
 //
-//    // Example sending a request using the GetSkillGroupRequest method.
-//    req, resp := client.GetSkillGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetSkillGroupRequest(input *GetSkillGroupInput) (req *request.Request, output *GetSkillGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetSkillGroup, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetSkillGroup,
 		HTTPMethod: "POST",
@@ -3260,11 +4526,13 @@ func (c *AlexaForBusiness) GetSkillGroupRequest(input *GetSkillGroupInput) (req 
 // See the AWS API reference guide for Alexa For Business's
 // API operation GetSkillGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetSkillGroup(input *GetSkillGroupInput) (*GetSkillGroupOutput, error) {
 	req, out := c.GetSkillGroupRequest(input)
 	return out, req.Send()
@@ -3279,6 +4547,8 @@ func (c *AlexaForBusiness) GetSkillGroup(input *GetSkillGroupInput) (*GetSkillGr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) GetSkillGroupWithContext(ctx aws.Context, input *GetSkillGroupInput, opts ...request.Option) (*GetSkillGroupOutput, error) {
 	req, out := c.GetSkillGroupRequest(input)
 	req.SetContext(ctx)
@@ -3302,17 +4572,21 @@ const opListBusinessReportSchedules = "ListBusinessReportSchedules"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListBusinessReportSchedulesRequest method.
+//	req, resp := client.ListBusinessReportSchedulesRequest(params)
 //
-//    // Example sending a request using the ListBusinessReportSchedulesRequest method.
-//    req, resp := client.ListBusinessReportSchedulesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedules
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListBusinessReportSchedulesRequest(input *ListBusinessReportSchedulesInput) (req *request.Request, output *ListBusinessReportSchedulesOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListBusinessReportSchedules, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListBusinessReportSchedules,
 		HTTPMethod: "POST",
@@ -3336,7 +4610,10 @@ func (c *AlexaForBusiness) ListBusinessReportSchedulesRequest(input *ListBusines
 
 // ListBusinessReportSchedules API operation for Alexa For Business.
 //
-// Lists the details of the schedules that a user configured.
+// Lists the details of the schedules that a user configured. A download URL
+// of the report associated with each schedule is returned every time this action
+// is called. A new download URL is returned each time, and is valid for 24
+// hours.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3345,6 +4622,8 @@ func (c *AlexaForBusiness) ListBusinessReportSchedulesRequest(input *ListBusines
 // See the AWS API reference guide for Alexa For Business's
 // API operation ListBusinessReportSchedules for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedules
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListBusinessReportSchedules(input *ListBusinessReportSchedulesInput) (*ListBusinessReportSchedulesOutput, error) {
 	req, out := c.ListBusinessReportSchedulesRequest(input)
 	return out, req.Send()
@@ -3359,6 +4638,8 @@ func (c *AlexaForBusiness) ListBusinessReportSchedules(input *ListBusinessReport
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListBusinessReportSchedulesWithContext(ctx aws.Context, input *ListBusinessReportSchedulesInput, opts ...request.Option) (*ListBusinessReportSchedulesOutput, error) {
 	req, out := c.ListBusinessReportSchedulesRequest(input)
 	req.SetContext(ctx)
@@ -3374,15 +4655,16 @@ func (c *AlexaForBusiness) ListBusinessReportSchedulesWithContext(ctx aws.Contex
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListBusinessReportSchedules operation.
-//    pageNum := 0
-//    err := client.ListBusinessReportSchedulesPages(params,
-//        func(page *ListBusinessReportSchedulesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a ListBusinessReportSchedules operation.
+//	pageNum := 0
+//	err := client.ListBusinessReportSchedulesPages(params,
+//	    func(page *alexaforbusiness.ListBusinessReportSchedulesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListBusinessReportSchedulesPages(input *ListBusinessReportSchedulesInput, fn func(*ListBusinessReportSchedulesOutput, bool) bool) error {
 	return c.ListBusinessReportSchedulesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3394,6 +4676,8 @@ func (c *AlexaForBusiness) ListBusinessReportSchedulesPages(input *ListBusinessR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListBusinessReportSchedulesPagesWithContext(ctx aws.Context, input *ListBusinessReportSchedulesInput, fn func(*ListBusinessReportSchedulesOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -3409,10 +4693,12 @@ func (c *AlexaForBusiness) ListBusinessReportSchedulesPagesWithContext(ctx aws.C
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListBusinessReportSchedulesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListBusinessReportSchedulesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3432,17 +4718,21 @@ const opListConferenceProviders = "ListConferenceProviders"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListConferenceProvidersRequest method.
+//	req, resp := client.ListConferenceProvidersRequest(params)
 //
-//    // Example sending a request using the ListConferenceProvidersRequest method.
-//    req, resp := client.ListConferenceProvidersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProviders
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListConferenceProvidersRequest(input *ListConferenceProvidersInput) (req *request.Request, output *ListConferenceProvidersOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListConferenceProviders, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListConferenceProviders,
 		HTTPMethod: "POST",
@@ -3475,6 +4765,8 @@ func (c *AlexaForBusiness) ListConferenceProvidersRequest(input *ListConferenceP
 // See the AWS API reference guide for Alexa For Business's
 // API operation ListConferenceProviders for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProviders
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListConferenceProviders(input *ListConferenceProvidersInput) (*ListConferenceProvidersOutput, error) {
 	req, out := c.ListConferenceProvidersRequest(input)
 	return out, req.Send()
@@ -3489,6 +4781,8 @@ func (c *AlexaForBusiness) ListConferenceProviders(input *ListConferenceProvider
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListConferenceProvidersWithContext(ctx aws.Context, input *ListConferenceProvidersInput, opts ...request.Option) (*ListConferenceProvidersOutput, error) {
 	req, out := c.ListConferenceProvidersRequest(input)
 	req.SetContext(ctx)
@@ -3504,15 +4798,16 @@ func (c *AlexaForBusiness) ListConferenceProvidersWithContext(ctx aws.Context, i
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListConferenceProviders operation.
-//    pageNum := 0
-//    err := client.ListConferenceProvidersPages(params,
-//        func(page *ListConferenceProvidersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a ListConferenceProviders operation.
+//	pageNum := 0
+//	err := client.ListConferenceProvidersPages(params,
+//	    func(page *alexaforbusiness.ListConferenceProvidersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListConferenceProvidersPages(input *ListConferenceProvidersInput, fn func(*ListConferenceProvidersOutput, bool) bool) error {
 	return c.ListConferenceProvidersPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3524,6 +4819,8 @@ func (c *AlexaForBusiness) ListConferenceProvidersPages(input *ListConferencePro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListConferenceProvidersPagesWithContext(ctx aws.Context, input *ListConferenceProvidersInput, fn func(*ListConferenceProvidersOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -3539,10 +4836,12 @@ func (c *AlexaForBusiness) ListConferenceProvidersPagesWithContext(ctx aws.Conte
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListConferenceProvidersOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListConferenceProvidersOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3562,17 +4861,21 @@ const opListDeviceEvents = "ListDeviceEvents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDeviceEventsRequest method.
+//	req, resp := client.ListDeviceEventsRequest(params)
 //
-//    // Example sending a request using the ListDeviceEventsRequest method.
-//    req, resp := client.ListDeviceEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEvents
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListDeviceEventsRequest(input *ListDeviceEventsInput) (req *request.Request, output *ListDeviceEventsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListDeviceEvents, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListDeviceEvents,
 		HTTPMethod: "POST",
@@ -3606,11 +4909,13 @@ func (c *AlexaForBusiness) ListDeviceEventsRequest(input *ListDeviceEventsInput)
 // See the AWS API reference guide for Alexa For Business's
 // API operation ListDeviceEvents for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEvents
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListDeviceEvents(input *ListDeviceEventsInput) (*ListDeviceEventsOutput, error) {
 	req, out := c.ListDeviceEventsRequest(input)
 	return out, req.Send()
@@ -3625,6 +4930,8 @@ func (c *AlexaForBusiness) ListDeviceEvents(input *ListDeviceEventsInput) (*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListDeviceEventsWithContext(ctx aws.Context, input *ListDeviceEventsInput, opts ...request.Option) (*ListDeviceEventsOutput, error) {
 	req, out := c.ListDeviceEventsRequest(input)
 	req.SetContext(ctx)
@@ -3640,15 +4947,16 @@ func (c *AlexaForBusiness) ListDeviceEventsWithContext(ctx aws.Context, input *L
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDeviceEvents operation.
-//    pageNum := 0
-//    err := client.ListDeviceEventsPages(params,
-//        func(page *ListDeviceEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a ListDeviceEvents operation.
+//	pageNum := 0
+//	err := client.ListDeviceEventsPages(params,
+//	    func(page *alexaforbusiness.ListDeviceEventsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListDeviceEventsPages(input *ListDeviceEventsInput, fn func(*ListDeviceEventsOutput, bool) bool) error {
 	return c.ListDeviceEventsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3660,6 +4968,8 @@ func (c *AlexaForBusiness) ListDeviceEventsPages(input *ListDeviceEventsInput, f
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListDeviceEventsPagesWithContext(ctx aws.Context, input *ListDeviceEventsInput, fn func(*ListDeviceEventsOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -3675,10 +4985,302 @@ func (c *AlexaForBusiness) ListDeviceEventsPagesWithContext(ctx aws.Context, inp
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDeviceEventsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDeviceEventsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
+	return p.Err()
+}
+
+const opListGatewayGroups = "ListGatewayGroups"
+
+// ListGatewayGroupsRequest generates a "aws/request.Request" representing the
+// client's request for the ListGatewayGroups operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListGatewayGroups for more information on using the ListGatewayGroups
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListGatewayGroupsRequest method.
+//	req, resp := client.ListGatewayGroupsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroups
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGatewayGroupsRequest(input *ListGatewayGroupsInput) (req *request.Request, output *ListGatewayGroupsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListGatewayGroups, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opListGatewayGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListGatewayGroupsInput{}
+	}
+
+	output = &ListGatewayGroupsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListGatewayGroups API operation for Alexa For Business.
+//
+// Retrieves a list of gateway group summaries. Use GetGatewayGroup to retrieve
+// details of a specific gateway group.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation ListGatewayGroups for usage and error information.
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroups
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGatewayGroups(input *ListGatewayGroupsInput) (*ListGatewayGroupsOutput, error) {
+	req, out := c.ListGatewayGroupsRequest(input)
+	return out, req.Send()
+}
+
+// ListGatewayGroupsWithContext is the same as ListGatewayGroups with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListGatewayGroups for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGatewayGroupsWithContext(ctx aws.Context, input *ListGatewayGroupsInput, opts ...request.Option) (*ListGatewayGroupsOutput, error) {
+	req, out := c.ListGatewayGroupsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListGatewayGroupsPages iterates over the pages of a ListGatewayGroups operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListGatewayGroups method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListGatewayGroups operation.
+//	pageNum := 0
+//	err := client.ListGatewayGroupsPages(params,
+//	    func(page *alexaforbusiness.ListGatewayGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGatewayGroupsPages(input *ListGatewayGroupsInput, fn func(*ListGatewayGroupsOutput, bool) bool) error {
+	return c.ListGatewayGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListGatewayGroupsPagesWithContext same as ListGatewayGroupsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGatewayGroupsPagesWithContext(ctx aws.Context, input *ListGatewayGroupsInput, fn func(*ListGatewayGroupsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListGatewayGroupsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListGatewayGroupsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListGatewayGroupsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListGateways = "ListGateways"
+
+// ListGatewaysRequest generates a "aws/request.Request" representing the
+// client's request for the ListGateways operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListGateways for more information on using the ListGateways
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListGatewaysRequest method.
+//	req, resp := client.ListGatewaysRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGateways
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGatewaysRequest(input *ListGatewaysInput) (req *request.Request, output *ListGatewaysOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListGateways, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opListGateways,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListGatewaysInput{}
+	}
+
+	output = &ListGatewaysOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListGateways API operation for Alexa For Business.
+//
+// Retrieves a list of gateway summaries. Use GetGateway to retrieve details
+// of a specific gateway. An optional gateway group ARN can be provided to only
+// retrieve gateway summaries of gateways that are associated with that gateway
+// group ARN.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation ListGateways for usage and error information.
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGateways
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGateways(input *ListGatewaysInput) (*ListGatewaysOutput, error) {
+	req, out := c.ListGatewaysRequest(input)
+	return out, req.Send()
+}
+
+// ListGatewaysWithContext is the same as ListGateways with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListGateways for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGatewaysWithContext(ctx aws.Context, input *ListGatewaysInput, opts ...request.Option) (*ListGatewaysOutput, error) {
+	req, out := c.ListGatewaysRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListGatewaysPages iterates over the pages of a ListGateways operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListGateways method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListGateways operation.
+//	pageNum := 0
+//	err := client.ListGatewaysPages(params,
+//	    func(page *alexaforbusiness.ListGatewaysOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGatewaysPages(input *ListGatewaysInput, fn func(*ListGatewaysOutput, bool) bool) error {
+	return c.ListGatewaysPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListGatewaysPagesWithContext same as ListGatewaysPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) ListGatewaysPagesWithContext(ctx aws.Context, input *ListGatewaysInput, fn func(*ListGatewaysOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListGatewaysInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListGatewaysRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListGatewaysOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
 	return p.Err()
 }
 
@@ -3698,17 +5300,21 @@ const opListSkills = "ListSkills"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListSkillsRequest method.
+//	req, resp := client.ListSkillsRequest(params)
 //
-//    // Example sending a request using the ListSkillsRequest method.
-//    req, resp := client.ListSkillsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkills
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsRequest(input *ListSkillsInput) (req *request.Request, output *ListSkillsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListSkills, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListSkills,
 		HTTPMethod: "POST",
@@ -3741,6 +5347,8 @@ func (c *AlexaForBusiness) ListSkillsRequest(input *ListSkillsInput) (req *reque
 // See the AWS API reference guide for Alexa For Business's
 // API operation ListSkills for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkills
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkills(input *ListSkillsInput) (*ListSkillsOutput, error) {
 	req, out := c.ListSkillsRequest(input)
 	return out, req.Send()
@@ -3755,6 +5363,8 @@ func (c *AlexaForBusiness) ListSkills(input *ListSkillsInput) (*ListSkillsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsWithContext(ctx aws.Context, input *ListSkillsInput, opts ...request.Option) (*ListSkillsOutput, error) {
 	req, out := c.ListSkillsRequest(input)
 	req.SetContext(ctx)
@@ -3770,15 +5380,16 @@ func (c *AlexaForBusiness) ListSkillsWithContext(ctx aws.Context, input *ListSki
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListSkills operation.
-//    pageNum := 0
-//    err := client.ListSkillsPages(params,
-//        func(page *ListSkillsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a ListSkills operation.
+//	pageNum := 0
+//	err := client.ListSkillsPages(params,
+//	    func(page *alexaforbusiness.ListSkillsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsPages(input *ListSkillsInput, fn func(*ListSkillsOutput, bool) bool) error {
 	return c.ListSkillsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3790,6 +5401,8 @@ func (c *AlexaForBusiness) ListSkillsPages(input *ListSkillsInput, fn func(*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsPagesWithContext(ctx aws.Context, input *ListSkillsInput, fn func(*ListSkillsOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -3805,10 +5418,12 @@ func (c *AlexaForBusiness) ListSkillsPagesWithContext(ctx aws.Context, input *Li
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListSkillsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListSkillsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3828,17 +5443,21 @@ const opListSkillsStoreCategories = "ListSkillsStoreCategories"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListSkillsStoreCategoriesRequest method.
+//	req, resp := client.ListSkillsStoreCategoriesRequest(params)
 //
-//    // Example sending a request using the ListSkillsStoreCategoriesRequest method.
-//    req, resp := client.ListSkillsStoreCategoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreCategories
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreCategoriesRequest(input *ListSkillsStoreCategoriesInput) (req *request.Request, output *ListSkillsStoreCategoriesOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListSkillsStoreCategories, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListSkillsStoreCategories,
 		HTTPMethod: "POST",
@@ -3871,6 +5490,8 @@ func (c *AlexaForBusiness) ListSkillsStoreCategoriesRequest(input *ListSkillsSto
 // See the AWS API reference guide for Alexa For Business's
 // API operation ListSkillsStoreCategories for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreCategories
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreCategories(input *ListSkillsStoreCategoriesInput) (*ListSkillsStoreCategoriesOutput, error) {
 	req, out := c.ListSkillsStoreCategoriesRequest(input)
 	return out, req.Send()
@@ -3885,6 +5506,8 @@ func (c *AlexaForBusiness) ListSkillsStoreCategories(input *ListSkillsStoreCateg
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreCategoriesWithContext(ctx aws.Context, input *ListSkillsStoreCategoriesInput, opts ...request.Option) (*ListSkillsStoreCategoriesOutput, error) {
 	req, out := c.ListSkillsStoreCategoriesRequest(input)
 	req.SetContext(ctx)
@@ -3900,15 +5523,16 @@ func (c *AlexaForBusiness) ListSkillsStoreCategoriesWithContext(ctx aws.Context,
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListSkillsStoreCategories operation.
-//    pageNum := 0
-//    err := client.ListSkillsStoreCategoriesPages(params,
-//        func(page *ListSkillsStoreCategoriesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a ListSkillsStoreCategories operation.
+//	pageNum := 0
+//	err := client.ListSkillsStoreCategoriesPages(params,
+//	    func(page *alexaforbusiness.ListSkillsStoreCategoriesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreCategoriesPages(input *ListSkillsStoreCategoriesInput, fn func(*ListSkillsStoreCategoriesOutput, bool) bool) error {
 	return c.ListSkillsStoreCategoriesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3920,6 +5544,8 @@ func (c *AlexaForBusiness) ListSkillsStoreCategoriesPages(input *ListSkillsStore
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreCategoriesPagesWithContext(ctx aws.Context, input *ListSkillsStoreCategoriesInput, fn func(*ListSkillsStoreCategoriesOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -3935,10 +5561,12 @@ func (c *AlexaForBusiness) ListSkillsStoreCategoriesPagesWithContext(ctx aws.Con
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListSkillsStoreCategoriesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListSkillsStoreCategoriesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3958,17 +5586,21 @@ const opListSkillsStoreSkillsByCategory = "ListSkillsStoreSkillsByCategory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListSkillsStoreSkillsByCategoryRequest method.
+//	req, resp := client.ListSkillsStoreSkillsByCategoryRequest(params)
 //
-//    // Example sending a request using the ListSkillsStoreSkillsByCategoryRequest method.
-//    req, resp := client.ListSkillsStoreSkillsByCategoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreSkillsByCategory
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryRequest(input *ListSkillsStoreSkillsByCategoryInput) (req *request.Request, output *ListSkillsStoreSkillsByCategoryOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListSkillsStoreSkillsByCategory, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListSkillsStoreSkillsByCategory,
 		HTTPMethod: "POST",
@@ -4001,6 +5633,8 @@ func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryRequest(input *ListSki
 // See the AWS API reference guide for Alexa For Business's
 // API operation ListSkillsStoreSkillsByCategory for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreSkillsByCategory
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategory(input *ListSkillsStoreSkillsByCategoryInput) (*ListSkillsStoreSkillsByCategoryOutput, error) {
 	req, out := c.ListSkillsStoreSkillsByCategoryRequest(input)
 	return out, req.Send()
@@ -4015,6 +5649,8 @@ func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategory(input *ListSkillsStor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryWithContext(ctx aws.Context, input *ListSkillsStoreSkillsByCategoryInput, opts ...request.Option) (*ListSkillsStoreSkillsByCategoryOutput, error) {
 	req, out := c.ListSkillsStoreSkillsByCategoryRequest(input)
 	req.SetContext(ctx)
@@ -4030,15 +5666,16 @@ func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryWithContext(ctx aws.Co
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListSkillsStoreSkillsByCategory operation.
-//    pageNum := 0
-//    err := client.ListSkillsStoreSkillsByCategoryPages(params,
-//        func(page *ListSkillsStoreSkillsByCategoryOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a ListSkillsStoreSkillsByCategory operation.
+//	pageNum := 0
+//	err := client.ListSkillsStoreSkillsByCategoryPages(params,
+//	    func(page *alexaforbusiness.ListSkillsStoreSkillsByCategoryOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryPages(input *ListSkillsStoreSkillsByCategoryInput, fn func(*ListSkillsStoreSkillsByCategoryOutput, bool) bool) error {
 	return c.ListSkillsStoreSkillsByCategoryPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -4050,6 +5687,8 @@ func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryPages(input *ListSkill
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryPagesWithContext(ctx aws.Context, input *ListSkillsStoreSkillsByCategoryInput, fn func(*ListSkillsStoreSkillsByCategoryOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -4065,10 +5704,12 @@ func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryPagesWithContext(ctx a
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListSkillsStoreSkillsByCategoryOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListSkillsStoreSkillsByCategoryOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -4088,17 +5729,21 @@ const opListSmartHomeAppliances = "ListSmartHomeAppliances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListSmartHomeAppliancesRequest method.
+//	req, resp := client.ListSmartHomeAppliancesRequest(params)
 //
-//    // Example sending a request using the ListSmartHomeAppliancesRequest method.
-//    req, resp := client.ListSmartHomeAppliancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSmartHomeAppliances
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSmartHomeAppliancesRequest(input *ListSmartHomeAppliancesInput) (req *request.Request, output *ListSmartHomeAppliancesOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListSmartHomeAppliances, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListSmartHomeAppliances,
 		HTTPMethod: "POST",
@@ -4131,11 +5776,13 @@ func (c *AlexaForBusiness) ListSmartHomeAppliancesRequest(input *ListSmartHomeAp
 // See the AWS API reference guide for Alexa For Business's
 // API operation ListSmartHomeAppliances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSmartHomeAppliances
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSmartHomeAppliances(input *ListSmartHomeAppliancesInput) (*ListSmartHomeAppliancesOutput, error) {
 	req, out := c.ListSmartHomeAppliancesRequest(input)
 	return out, req.Send()
@@ -4150,6 +5797,8 @@ func (c *AlexaForBusiness) ListSmartHomeAppliances(input *ListSmartHomeAppliance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSmartHomeAppliancesWithContext(ctx aws.Context, input *ListSmartHomeAppliancesInput, opts ...request.Option) (*ListSmartHomeAppliancesOutput, error) {
 	req, out := c.ListSmartHomeAppliancesRequest(input)
 	req.SetContext(ctx)
@@ -4165,15 +5814,16 @@ func (c *AlexaForBusiness) ListSmartHomeAppliancesWithContext(ctx aws.Context, i
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListSmartHomeAppliances operation.
-//    pageNum := 0
-//    err := client.ListSmartHomeAppliancesPages(params,
-//        func(page *ListSmartHomeAppliancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a ListSmartHomeAppliances operation.
+//	pageNum := 0
+//	err := client.ListSmartHomeAppliancesPages(params,
+//	    func(page *alexaforbusiness.ListSmartHomeAppliancesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSmartHomeAppliancesPages(input *ListSmartHomeAppliancesInput, fn func(*ListSmartHomeAppliancesOutput, bool) bool) error {
 	return c.ListSmartHomeAppliancesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -4185,6 +5835,8 @@ func (c *AlexaForBusiness) ListSmartHomeAppliancesPages(input *ListSmartHomeAppl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListSmartHomeAppliancesPagesWithContext(ctx aws.Context, input *ListSmartHomeAppliancesInput, fn func(*ListSmartHomeAppliancesOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -4200,10 +5852,12 @@ func (c *AlexaForBusiness) ListSmartHomeAppliancesPagesWithContext(ctx aws.Conte
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListSmartHomeAppliancesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListSmartHomeAppliancesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -4223,17 +5877,21 @@ const opListTags = "ListTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTagsRequest method.
+//	req, resp := client.ListTagsRequest(params)
 //
-//    // Example sending a request using the ListTagsRequest method.
-//    req, resp := client.ListTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListTags
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListTagsRequest(input *ListTagsInput) (req *request.Request, output *ListTagsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListTags, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
@@ -4266,11 +5924,13 @@ func (c *AlexaForBusiness) ListTagsRequest(input *ListTagsInput) (req *request.R
 // See the AWS API reference guide for Alexa For Business's
 // API operation ListTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListTags
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	return out, req.Send()
@@ -4285,6 +5945,8 @@ func (c *AlexaForBusiness) ListTags(input *ListTagsInput) (*ListTagsOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...request.Option) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	req.SetContext(ctx)
@@ -4300,15 +5962,16 @@ func (c *AlexaForBusiness) ListTagsWithContext(ctx aws.Context, input *ListTagsI
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListTags operation.
-//    pageNum := 0
-//    err := client.ListTagsPages(params,
-//        func(page *ListTagsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a ListTags operation.
+//	pageNum := 0
+//	err := client.ListTagsPages(params,
+//	    func(page *alexaforbusiness.ListTagsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListTagsPages(input *ListTagsInput, fn func(*ListTagsOutput, bool) bool) error {
 	return c.ListTagsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -4320,6 +5983,8 @@ func (c *AlexaForBusiness) ListTagsPages(input *ListTagsInput, fn func(*ListTags
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsInput, fn func(*ListTagsOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -4335,10 +6000,12 @@ func (c *AlexaForBusiness) ListTagsPagesWithContext(ctx aws.Context, input *List
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListTagsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -4358,17 +6025,21 @@ const opPutConferencePreference = "PutConferencePreference"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutConferencePreferenceRequest method.
+//	req, resp := client.PutConferencePreferenceRequest(params)
 //
-//    // Example sending a request using the PutConferencePreferenceRequest method.
-//    req, resp := client.PutConferencePreferenceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreference
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) PutConferencePreferenceRequest(input *PutConferencePreferenceInput) (req *request.Request, output *PutConferencePreferenceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, PutConferencePreference, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opPutConferencePreference,
 		HTTPMethod: "POST",
@@ -4397,11 +6068,13 @@ func (c *AlexaForBusiness) PutConferencePreferenceRequest(input *PutConferencePr
 // See the AWS API reference guide for Alexa For Business's
 // API operation PutConferencePreference for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreference
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) PutConferencePreference(input *PutConferencePreferenceInput) (*PutConferencePreferenceOutput, error) {
 	req, out := c.PutConferencePreferenceRequest(input)
 	return out, req.Send()
@@ -4416,8 +6089,103 @@ func (c *AlexaForBusiness) PutConferencePreference(input *PutConferencePreferenc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) PutConferencePreferenceWithContext(ctx aws.Context, input *PutConferencePreferenceInput, opts ...request.Option) (*PutConferencePreferenceOutput, error) {
 	req, out := c.PutConferencePreferenceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opPutInvitationConfiguration = "PutInvitationConfiguration"
+
+// PutInvitationConfigurationRequest generates a "aws/request.Request" representing the
+// client's request for the PutInvitationConfiguration operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See PutInvitationConfiguration for more information on using the PutInvitationConfiguration
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the PutInvitationConfigurationRequest method.
+//	req, resp := client.PutInvitationConfigurationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfiguration
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) PutInvitationConfigurationRequest(input *PutInvitationConfigurationInput) (req *request.Request, output *PutInvitationConfigurationOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, PutInvitationConfiguration, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opPutInvitationConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutInvitationConfigurationInput{}
+	}
+
+	output = &PutInvitationConfigurationOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// PutInvitationConfiguration API operation for Alexa For Business.
+//
+// Configures the email template for the user enrollment invitation with the
+// specified attributes.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation PutInvitationConfiguration for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfiguration
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) PutInvitationConfiguration(input *PutInvitationConfigurationInput) (*PutInvitationConfigurationOutput, error) {
+	req, out := c.PutInvitationConfigurationRequest(input)
+	return out, req.Send()
+}
+
+// PutInvitationConfigurationWithContext is the same as PutInvitationConfiguration with the addition of
+// the ability to pass a context and additional request options.
+//
+// See PutInvitationConfiguration for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) PutInvitationConfigurationWithContext(ctx aws.Context, input *PutInvitationConfigurationInput, opts ...request.Option) (*PutInvitationConfigurationOutput, error) {
+	req, out := c.PutInvitationConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
@@ -4439,17 +6207,21 @@ const opPutRoomSkillParameter = "PutRoomSkillParameter"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutRoomSkillParameterRequest method.
+//	req, resp := client.PutRoomSkillParameterRequest(params)
 //
-//    // Example sending a request using the PutRoomSkillParameterRequest method.
-//    req, resp := client.PutRoomSkillParameterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutRoomSkillParameter
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) PutRoomSkillParameterRequest(input *PutRoomSkillParameterInput) (req *request.Request, output *PutRoomSkillParameterOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, PutRoomSkillParameter, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opPutRoomSkillParameter,
 		HTTPMethod: "POST",
@@ -4478,11 +6250,13 @@ func (c *AlexaForBusiness) PutRoomSkillParameterRequest(input *PutRoomSkillParam
 // See the AWS API reference guide for Alexa For Business's
 // API operation PutRoomSkillParameter for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutRoomSkillParameter
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) PutRoomSkillParameter(input *PutRoomSkillParameterInput) (*PutRoomSkillParameterOutput, error) {
 	req, out := c.PutRoomSkillParameterRequest(input)
 	return out, req.Send()
@@ -4497,6 +6271,8 @@ func (c *AlexaForBusiness) PutRoomSkillParameter(input *PutRoomSkillParameterInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) PutRoomSkillParameterWithContext(ctx aws.Context, input *PutRoomSkillParameterInput, opts ...request.Option) (*PutRoomSkillParameterOutput, error) {
 	req, out := c.PutRoomSkillParameterRequest(input)
 	req.SetContext(ctx)
@@ -4520,17 +6296,21 @@ const opPutSkillAuthorization = "PutSkillAuthorization"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutSkillAuthorizationRequest method.
+//	req, resp := client.PutSkillAuthorizationRequest(params)
 //
-//    // Example sending a request using the PutSkillAuthorizationRequest method.
-//    req, resp := client.PutSkillAuthorizationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorization
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) PutSkillAuthorizationRequest(input *PutSkillAuthorizationInput) (req *request.Request, output *PutSkillAuthorizationOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, PutSkillAuthorization, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opPutSkillAuthorization,
 		HTTPMethod: "POST",
@@ -4561,15 +6341,18 @@ func (c *AlexaForBusiness) PutSkillAuthorizationRequest(input *PutSkillAuthoriza
 // See the AWS API reference guide for Alexa For Business's
 // API operation PutSkillAuthorization for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   The caller has no permissions to operate on the resource involved in the
-//   API call.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - UnauthorizedException
+//     The caller has no permissions to operate on the resource involved in the
+//     API call.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorization
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) PutSkillAuthorization(input *PutSkillAuthorizationInput) (*PutSkillAuthorizationOutput, error) {
 	req, out := c.PutSkillAuthorizationRequest(input)
 	return out, req.Send()
@@ -4584,6 +6367,8 @@ func (c *AlexaForBusiness) PutSkillAuthorization(input *PutSkillAuthorizationInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) PutSkillAuthorizationWithContext(ctx aws.Context, input *PutSkillAuthorizationInput, opts ...request.Option) (*PutSkillAuthorizationOutput, error) {
 	req, out := c.PutSkillAuthorizationRequest(input)
 	req.SetContext(ctx)
@@ -4607,17 +6392,21 @@ const opRegisterAVSDevice = "RegisterAVSDevice"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterAVSDeviceRequest method.
+//	req, resp := client.RegisterAVSDeviceRequest(params)
 //
-//    // Example sending a request using the RegisterAVSDeviceRequest method.
-//    req, resp := client.RegisterAVSDeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDevice
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) RegisterAVSDeviceRequest(input *RegisterAVSDeviceInput) (req *request.Request, output *RegisterAVSDeviceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, RegisterAVSDevice, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opRegisterAVSDevice,
 		HTTPMethod: "POST",
@@ -4645,17 +6434,23 @@ func (c *AlexaForBusiness) RegisterAVSDeviceRequest(input *RegisterAVSDeviceInpu
 // See the AWS API reference guide for Alexa For Business's
 // API operation RegisterAVSDevice for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You are performing an action that would put you beyond your account's limits.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
 //
-//   * ErrCodeInvalidDeviceException "InvalidDeviceException"
-//   The device is in an invalid state.
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - InvalidDeviceException
+//     The device is in an invalid state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDevice
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) RegisterAVSDevice(input *RegisterAVSDeviceInput) (*RegisterAVSDeviceOutput, error) {
 	req, out := c.RegisterAVSDeviceRequest(input)
 	return out, req.Send()
@@ -4670,6 +6465,8 @@ func (c *AlexaForBusiness) RegisterAVSDevice(input *RegisterAVSDeviceInput) (*Re
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) RegisterAVSDeviceWithContext(ctx aws.Context, input *RegisterAVSDeviceInput, opts ...request.Option) (*RegisterAVSDeviceOutput, error) {
 	req, out := c.RegisterAVSDeviceRequest(input)
 	req.SetContext(ctx)
@@ -4693,17 +6490,21 @@ const opRejectSkill = "RejectSkill"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RejectSkillRequest method.
+//	req, resp := client.RejectSkillRequest(params)
 //
-//    // Example sending a request using the RejectSkillRequest method.
-//    req, resp := client.RejectSkillRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkill
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) RejectSkillRequest(input *RejectSkillInput) (req *request.Request, output *RejectSkillOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, RejectSkill, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opRejectSkill,
 		HTTPMethod: "POST",
@@ -4734,14 +6535,17 @@ func (c *AlexaForBusiness) RejectSkillRequest(input *RejectSkillInput) (req *req
 // See the AWS API reference guide for Alexa For Business's
 // API operation RejectSkill for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+// Returned Error Types:
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkill
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) RejectSkill(input *RejectSkillInput) (*RejectSkillOutput, error) {
 	req, out := c.RejectSkillRequest(input)
 	return out, req.Send()
@@ -4756,6 +6560,8 @@ func (c *AlexaForBusiness) RejectSkill(input *RejectSkillInput) (*RejectSkillOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) RejectSkillWithContext(ctx aws.Context, input *RejectSkillInput, opts ...request.Option) (*RejectSkillOutput, error) {
 	req, out := c.RejectSkillRequest(input)
 	req.SetContext(ctx)
@@ -4779,17 +6585,21 @@ const opResolveRoom = "ResolveRoom"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ResolveRoomRequest method.
+//	req, resp := client.ResolveRoomRequest(params)
 //
-//    // Example sending a request using the ResolveRoomRequest method.
-//    req, resp := client.ResolveRoomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ResolveRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ResolveRoomRequest(input *ResolveRoomInput) (req *request.Request, output *ResolveRoomOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ResolveRoom, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opResolveRoom,
 		HTTPMethod: "POST",
@@ -4810,6 +6620,13 @@ func (c *AlexaForBusiness) ResolveRoomRequest(input *ResolveRoomInput) (req *req
 // Determines the details for the room from which a skill request was invoked.
 // This operation is used by skill developers.
 //
+// To query ResolveRoom from an Alexa skill, the skill ID needs to be authorized.
+// When the skill is using an AWS Lambda function, the skill is automatically
+// authorized when you publish your skill as a private skill to your AWS account.
+// Skills that are hosted using a custom web service must be manually authorized.
+// To get your skill authorized, contact AWS Support with your AWS account ID
+// that queries the ResolveRoom API and skill ID.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -4817,11 +6634,13 @@ func (c *AlexaForBusiness) ResolveRoomRequest(input *ResolveRoomInput) (req *req
 // See the AWS API reference guide for Alexa For Business's
 // API operation ResolveRoom for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ResolveRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ResolveRoom(input *ResolveRoomInput) (*ResolveRoomOutput, error) {
 	req, out := c.ResolveRoomRequest(input)
 	return out, req.Send()
@@ -4836,6 +6655,8 @@ func (c *AlexaForBusiness) ResolveRoom(input *ResolveRoomInput) (*ResolveRoomOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) ResolveRoomWithContext(ctx aws.Context, input *ResolveRoomInput, opts ...request.Option) (*ResolveRoomOutput, error) {
 	req, out := c.ResolveRoomRequest(input)
 	req.SetContext(ctx)
@@ -4859,17 +6680,21 @@ const opRevokeInvitation = "RevokeInvitation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RevokeInvitationRequest method.
+//	req, resp := client.RevokeInvitationRequest(params)
 //
-//    // Example sending a request using the RevokeInvitationRequest method.
-//    req, resp := client.RevokeInvitationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RevokeInvitation
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) RevokeInvitationRequest(input *RevokeInvitationInput) (req *request.Request, output *RevokeInvitationOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, RevokeInvitation, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opRevokeInvitation,
 		HTTPMethod: "POST",
@@ -4897,14 +6722,17 @@ func (c *AlexaForBusiness) RevokeInvitationRequest(input *RevokeInvitationInput)
 // See the AWS API reference guide for Alexa For Business's
 // API operation RevokeInvitation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RevokeInvitation
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) RevokeInvitation(input *RevokeInvitationInput) (*RevokeInvitationOutput, error) {
 	req, out := c.RevokeInvitationRequest(input)
 	return out, req.Send()
@@ -4919,6 +6747,8 @@ func (c *AlexaForBusiness) RevokeInvitation(input *RevokeInvitationInput) (*Revo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) RevokeInvitationWithContext(ctx aws.Context, input *RevokeInvitationInput, opts ...request.Option) (*RevokeInvitationOutput, error) {
 	req, out := c.RevokeInvitationRequest(input)
 	req.SetContext(ctx)
@@ -4942,17 +6772,21 @@ const opSearchAddressBooks = "SearchAddressBooks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SearchAddressBooksRequest method.
+//	req, resp := client.SearchAddressBooksRequest(params)
 //
-//    // Example sending a request using the SearchAddressBooksRequest method.
-//    req, resp := client.SearchAddressBooksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchAddressBooks
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchAddressBooksRequest(input *SearchAddressBooksInput) (req *request.Request, output *SearchAddressBooksOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SearchAddressBooks, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opSearchAddressBooks,
 		HTTPMethod: "POST",
@@ -4986,6 +6820,8 @@ func (c *AlexaForBusiness) SearchAddressBooksRequest(input *SearchAddressBooksIn
 // See the AWS API reference guide for Alexa For Business's
 // API operation SearchAddressBooks for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchAddressBooks
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchAddressBooks(input *SearchAddressBooksInput) (*SearchAddressBooksOutput, error) {
 	req, out := c.SearchAddressBooksRequest(input)
 	return out, req.Send()
@@ -5000,6 +6836,8 @@ func (c *AlexaForBusiness) SearchAddressBooks(input *SearchAddressBooksInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchAddressBooksWithContext(ctx aws.Context, input *SearchAddressBooksInput, opts ...request.Option) (*SearchAddressBooksOutput, error) {
 	req, out := c.SearchAddressBooksRequest(input)
 	req.SetContext(ctx)
@@ -5015,15 +6853,16 @@ func (c *AlexaForBusiness) SearchAddressBooksWithContext(ctx aws.Context, input 
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a SearchAddressBooks operation.
-//    pageNum := 0
-//    err := client.SearchAddressBooksPages(params,
-//        func(page *SearchAddressBooksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a SearchAddressBooks operation.
+//	pageNum := 0
+//	err := client.SearchAddressBooksPages(params,
+//	    func(page *alexaforbusiness.SearchAddressBooksOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchAddressBooksPages(input *SearchAddressBooksInput, fn func(*SearchAddressBooksOutput, bool) bool) error {
 	return c.SearchAddressBooksPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5035,6 +6874,8 @@ func (c *AlexaForBusiness) SearchAddressBooksPages(input *SearchAddressBooksInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchAddressBooksPagesWithContext(ctx aws.Context, input *SearchAddressBooksInput, fn func(*SearchAddressBooksOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -5050,10 +6891,12 @@ func (c *AlexaForBusiness) SearchAddressBooksPagesWithContext(ctx aws.Context, i
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchAddressBooksOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*SearchAddressBooksOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5073,17 +6916,21 @@ const opSearchContacts = "SearchContacts"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SearchContactsRequest method.
+//	req, resp := client.SearchContactsRequest(params)
 //
-//    // Example sending a request using the SearchContactsRequest method.
-//    req, resp := client.SearchContactsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchContacts
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchContactsRequest(input *SearchContactsInput) (req *request.Request, output *SearchContactsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SearchContacts, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opSearchContacts,
 		HTTPMethod: "POST",
@@ -5116,6 +6963,8 @@ func (c *AlexaForBusiness) SearchContactsRequest(input *SearchContactsInput) (re
 // See the AWS API reference guide for Alexa For Business's
 // API operation SearchContacts for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchContacts
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchContacts(input *SearchContactsInput) (*SearchContactsOutput, error) {
 	req, out := c.SearchContactsRequest(input)
 	return out, req.Send()
@@ -5130,6 +6979,8 @@ func (c *AlexaForBusiness) SearchContacts(input *SearchContactsInput) (*SearchCo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchContactsWithContext(ctx aws.Context, input *SearchContactsInput, opts ...request.Option) (*SearchContactsOutput, error) {
 	req, out := c.SearchContactsRequest(input)
 	req.SetContext(ctx)
@@ -5145,15 +6996,16 @@ func (c *AlexaForBusiness) SearchContactsWithContext(ctx aws.Context, input *Sea
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a SearchContacts operation.
-//    pageNum := 0
-//    err := client.SearchContactsPages(params,
-//        func(page *SearchContactsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a SearchContacts operation.
+//	pageNum := 0
+//	err := client.SearchContactsPages(params,
+//	    func(page *alexaforbusiness.SearchContactsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchContactsPages(input *SearchContactsInput, fn func(*SearchContactsOutput, bool) bool) error {
 	return c.SearchContactsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5165,6 +7017,8 @@ func (c *AlexaForBusiness) SearchContactsPages(input *SearchContactsInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchContactsPagesWithContext(ctx aws.Context, input *SearchContactsInput, fn func(*SearchContactsOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -5180,10 +7034,12 @@ func (c *AlexaForBusiness) SearchContactsPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchContactsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*SearchContactsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5203,17 +7059,21 @@ const opSearchDevices = "SearchDevices"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SearchDevicesRequest method.
+//	req, resp := client.SearchDevicesRequest(params)
 //
-//    // Example sending a request using the SearchDevicesRequest method.
-//    req, resp := client.SearchDevicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchDevices
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchDevicesRequest(input *SearchDevicesInput) (req *request.Request, output *SearchDevicesOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SearchDevices, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opSearchDevices,
 		HTTPMethod: "POST",
@@ -5246,6 +7106,8 @@ func (c *AlexaForBusiness) SearchDevicesRequest(input *SearchDevicesInput) (req 
 // See the AWS API reference guide for Alexa For Business's
 // API operation SearchDevices for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchDevices
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchDevices(input *SearchDevicesInput) (*SearchDevicesOutput, error) {
 	req, out := c.SearchDevicesRequest(input)
 	return out, req.Send()
@@ -5260,6 +7122,8 @@ func (c *AlexaForBusiness) SearchDevices(input *SearchDevicesInput) (*SearchDevi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchDevicesWithContext(ctx aws.Context, input *SearchDevicesInput, opts ...request.Option) (*SearchDevicesOutput, error) {
 	req, out := c.SearchDevicesRequest(input)
 	req.SetContext(ctx)
@@ -5275,15 +7139,16 @@ func (c *AlexaForBusiness) SearchDevicesWithContext(ctx aws.Context, input *Sear
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a SearchDevices operation.
-//    pageNum := 0
-//    err := client.SearchDevicesPages(params,
-//        func(page *SearchDevicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a SearchDevices operation.
+//	pageNum := 0
+//	err := client.SearchDevicesPages(params,
+//	    func(page *alexaforbusiness.SearchDevicesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchDevicesPages(input *SearchDevicesInput, fn func(*SearchDevicesOutput, bool) bool) error {
 	return c.SearchDevicesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5295,6 +7160,8 @@ func (c *AlexaForBusiness) SearchDevicesPages(input *SearchDevicesInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchDevicesPagesWithContext(ctx aws.Context, input *SearchDevicesInput, fn func(*SearchDevicesOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -5310,10 +7177,156 @@ func (c *AlexaForBusiness) SearchDevicesPagesWithContext(ctx aws.Context, input 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchDevicesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*SearchDevicesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
+	return p.Err()
+}
+
+const opSearchNetworkProfiles = "SearchNetworkProfiles"
+
+// SearchNetworkProfilesRequest generates a "aws/request.Request" representing the
+// client's request for the SearchNetworkProfiles operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See SearchNetworkProfiles for more information on using the SearchNetworkProfiles
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the SearchNetworkProfilesRequest method.
+//	req, resp := client.SearchNetworkProfilesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchNetworkProfiles
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) SearchNetworkProfilesRequest(input *SearchNetworkProfilesInput) (req *request.Request, output *SearchNetworkProfilesOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SearchNetworkProfiles, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opSearchNetworkProfiles,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &SearchNetworkProfilesInput{}
+	}
+
+	output = &SearchNetworkProfilesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// SearchNetworkProfiles API operation for Alexa For Business.
+//
+// Searches network profiles and lists the ones that meet a set of filter and
+// sort criteria.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation SearchNetworkProfiles for usage and error information.
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchNetworkProfiles
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) SearchNetworkProfiles(input *SearchNetworkProfilesInput) (*SearchNetworkProfilesOutput, error) {
+	req, out := c.SearchNetworkProfilesRequest(input)
+	return out, req.Send()
+}
+
+// SearchNetworkProfilesWithContext is the same as SearchNetworkProfiles with the addition of
+// the ability to pass a context and additional request options.
+//
+// See SearchNetworkProfiles for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) SearchNetworkProfilesWithContext(ctx aws.Context, input *SearchNetworkProfilesInput, opts ...request.Option) (*SearchNetworkProfilesOutput, error) {
+	req, out := c.SearchNetworkProfilesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// SearchNetworkProfilesPages iterates over the pages of a SearchNetworkProfiles operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See SearchNetworkProfiles method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a SearchNetworkProfiles operation.
+//	pageNum := 0
+//	err := client.SearchNetworkProfilesPages(params,
+//	    func(page *alexaforbusiness.SearchNetworkProfilesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) SearchNetworkProfilesPages(input *SearchNetworkProfilesInput, fn func(*SearchNetworkProfilesOutput, bool) bool) error {
+	return c.SearchNetworkProfilesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// SearchNetworkProfilesPagesWithContext same as SearchNetworkProfilesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) SearchNetworkProfilesPagesWithContext(ctx aws.Context, input *SearchNetworkProfilesInput, fn func(*SearchNetworkProfilesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *SearchNetworkProfilesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.SearchNetworkProfilesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*SearchNetworkProfilesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
 	return p.Err()
 }
 
@@ -5333,17 +7346,21 @@ const opSearchProfiles = "SearchProfiles"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SearchProfilesRequest method.
+//	req, resp := client.SearchProfilesRequest(params)
 //
-//    // Example sending a request using the SearchProfilesRequest method.
-//    req, resp := client.SearchProfilesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchProfiles
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchProfilesRequest(input *SearchProfilesInput) (req *request.Request, output *SearchProfilesOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SearchProfiles, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opSearchProfiles,
 		HTTPMethod: "POST",
@@ -5376,6 +7393,8 @@ func (c *AlexaForBusiness) SearchProfilesRequest(input *SearchProfilesInput) (re
 // See the AWS API reference guide for Alexa For Business's
 // API operation SearchProfiles for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchProfiles
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchProfiles(input *SearchProfilesInput) (*SearchProfilesOutput, error) {
 	req, out := c.SearchProfilesRequest(input)
 	return out, req.Send()
@@ -5390,6 +7409,8 @@ func (c *AlexaForBusiness) SearchProfiles(input *SearchProfilesInput) (*SearchPr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchProfilesWithContext(ctx aws.Context, input *SearchProfilesInput, opts ...request.Option) (*SearchProfilesOutput, error) {
 	req, out := c.SearchProfilesRequest(input)
 	req.SetContext(ctx)
@@ -5405,15 +7426,16 @@ func (c *AlexaForBusiness) SearchProfilesWithContext(ctx aws.Context, input *Sea
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a SearchProfiles operation.
-//    pageNum := 0
-//    err := client.SearchProfilesPages(params,
-//        func(page *SearchProfilesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a SearchProfiles operation.
+//	pageNum := 0
+//	err := client.SearchProfilesPages(params,
+//	    func(page *alexaforbusiness.SearchProfilesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchProfilesPages(input *SearchProfilesInput, fn func(*SearchProfilesOutput, bool) bool) error {
 	return c.SearchProfilesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5425,6 +7447,8 @@ func (c *AlexaForBusiness) SearchProfilesPages(input *SearchProfilesInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchProfilesPagesWithContext(ctx aws.Context, input *SearchProfilesInput, fn func(*SearchProfilesOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -5440,10 +7464,12 @@ func (c *AlexaForBusiness) SearchProfilesPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchProfilesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*SearchProfilesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5463,17 +7489,21 @@ const opSearchRooms = "SearchRooms"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SearchRoomsRequest method.
+//	req, resp := client.SearchRoomsRequest(params)
 //
-//    // Example sending a request using the SearchRoomsRequest method.
-//    req, resp := client.SearchRoomsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchRooms
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchRoomsRequest(input *SearchRoomsInput) (req *request.Request, output *SearchRoomsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SearchRooms, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opSearchRooms,
 		HTTPMethod: "POST",
@@ -5506,6 +7536,8 @@ func (c *AlexaForBusiness) SearchRoomsRequest(input *SearchRoomsInput) (req *req
 // See the AWS API reference guide for Alexa For Business's
 // API operation SearchRooms for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchRooms
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchRooms(input *SearchRoomsInput) (*SearchRoomsOutput, error) {
 	req, out := c.SearchRoomsRequest(input)
 	return out, req.Send()
@@ -5520,6 +7552,8 @@ func (c *AlexaForBusiness) SearchRooms(input *SearchRoomsInput) (*SearchRoomsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchRoomsWithContext(ctx aws.Context, input *SearchRoomsInput, opts ...request.Option) (*SearchRoomsOutput, error) {
 	req, out := c.SearchRoomsRequest(input)
 	req.SetContext(ctx)
@@ -5535,15 +7569,16 @@ func (c *AlexaForBusiness) SearchRoomsWithContext(ctx aws.Context, input *Search
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a SearchRooms operation.
-//    pageNum := 0
-//    err := client.SearchRoomsPages(params,
-//        func(page *SearchRoomsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a SearchRooms operation.
+//	pageNum := 0
+//	err := client.SearchRoomsPages(params,
+//	    func(page *alexaforbusiness.SearchRoomsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchRoomsPages(input *SearchRoomsInput, fn func(*SearchRoomsOutput, bool) bool) error {
 	return c.SearchRoomsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5555,6 +7590,8 @@ func (c *AlexaForBusiness) SearchRoomsPages(input *SearchRoomsInput, fn func(*Se
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchRoomsPagesWithContext(ctx aws.Context, input *SearchRoomsInput, fn func(*SearchRoomsOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -5570,10 +7607,12 @@ func (c *AlexaForBusiness) SearchRoomsPagesWithContext(ctx aws.Context, input *S
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchRoomsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*SearchRoomsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5593,17 +7632,21 @@ const opSearchSkillGroups = "SearchSkillGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SearchSkillGroupsRequest method.
+//	req, resp := client.SearchSkillGroupsRequest(params)
 //
-//    // Example sending a request using the SearchSkillGroupsRequest method.
-//    req, resp := client.SearchSkillGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchSkillGroups
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchSkillGroupsRequest(input *SearchSkillGroupsInput) (req *request.Request, output *SearchSkillGroupsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SearchSkillGroups, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opSearchSkillGroups,
 		HTTPMethod: "POST",
@@ -5637,6 +7680,8 @@ func (c *AlexaForBusiness) SearchSkillGroupsRequest(input *SearchSkillGroupsInpu
 // See the AWS API reference guide for Alexa For Business's
 // API operation SearchSkillGroups for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchSkillGroups
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchSkillGroups(input *SearchSkillGroupsInput) (*SearchSkillGroupsOutput, error) {
 	req, out := c.SearchSkillGroupsRequest(input)
 	return out, req.Send()
@@ -5651,6 +7696,8 @@ func (c *AlexaForBusiness) SearchSkillGroups(input *SearchSkillGroupsInput) (*Se
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchSkillGroupsWithContext(ctx aws.Context, input *SearchSkillGroupsInput, opts ...request.Option) (*SearchSkillGroupsOutput, error) {
 	req, out := c.SearchSkillGroupsRequest(input)
 	req.SetContext(ctx)
@@ -5666,15 +7713,16 @@ func (c *AlexaForBusiness) SearchSkillGroupsWithContext(ctx aws.Context, input *
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a SearchSkillGroups operation.
-//    pageNum := 0
-//    err := client.SearchSkillGroupsPages(params,
-//        func(page *SearchSkillGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a SearchSkillGroups operation.
+//	pageNum := 0
+//	err := client.SearchSkillGroupsPages(params,
+//	    func(page *alexaforbusiness.SearchSkillGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchSkillGroupsPages(input *SearchSkillGroupsInput, fn func(*SearchSkillGroupsOutput, bool) bool) error {
 	return c.SearchSkillGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5686,6 +7734,8 @@ func (c *AlexaForBusiness) SearchSkillGroupsPages(input *SearchSkillGroupsInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchSkillGroupsPagesWithContext(ctx aws.Context, input *SearchSkillGroupsInput, fn func(*SearchSkillGroupsOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -5701,10 +7751,12 @@ func (c *AlexaForBusiness) SearchSkillGroupsPagesWithContext(ctx aws.Context, in
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchSkillGroupsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*SearchSkillGroupsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5724,17 +7776,21 @@ const opSearchUsers = "SearchUsers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SearchUsersRequest method.
+//	req, resp := client.SearchUsersRequest(params)
 //
-//    // Example sending a request using the SearchUsersRequest method.
-//    req, resp := client.SearchUsersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchUsers
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchUsersRequest(input *SearchUsersInput) (req *request.Request, output *SearchUsersOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SearchUsers, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opSearchUsers,
 		HTTPMethod: "POST",
@@ -5767,6 +7823,8 @@ func (c *AlexaForBusiness) SearchUsersRequest(input *SearchUsersInput) (req *req
 // See the AWS API reference guide for Alexa For Business's
 // API operation SearchUsers for usage and error information.
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchUsers
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchUsers(input *SearchUsersInput) (*SearchUsersOutput, error) {
 	req, out := c.SearchUsersRequest(input)
 	return out, req.Send()
@@ -5781,6 +7839,8 @@ func (c *AlexaForBusiness) SearchUsers(input *SearchUsersInput) (*SearchUsersOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchUsersWithContext(ctx aws.Context, input *SearchUsersInput, opts ...request.Option) (*SearchUsersOutput, error) {
 	req, out := c.SearchUsersRequest(input)
 	req.SetContext(ctx)
@@ -5796,15 +7856,16 @@ func (c *AlexaForBusiness) SearchUsersWithContext(ctx aws.Context, input *Search
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a SearchUsers operation.
-//    pageNum := 0
-//    err := client.SearchUsersPages(params,
-//        func(page *SearchUsersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//	// Example iterating over at most 3 pages of a SearchUsers operation.
+//	pageNum := 0
+//	err := client.SearchUsersPages(params,
+//	    func(page *alexaforbusiness.SearchUsersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchUsersPages(input *SearchUsersInput, fn func(*SearchUsersOutput, bool) bool) error {
 	return c.SearchUsersPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5816,6 +7877,8 @@ func (c *AlexaForBusiness) SearchUsersPages(input *SearchUsersInput, fn func(*Se
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SearchUsersPagesWithContext(ctx aws.Context, input *SearchUsersInput, fn func(*SearchUsersOutput, bool) bool, opts ...request.Option) error {
 	p := request.Pagination{
 		NewRequest: func() (*request.Request, error) {
@@ -5831,11 +7894,96 @@ func (c *AlexaForBusiness) SearchUsersPagesWithContext(ctx aws.Context, input *S
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchUsersOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*SearchUsersOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
+}
+
+const opSendAnnouncement = "SendAnnouncement"
+
+// SendAnnouncementRequest generates a "aws/request.Request" representing the
+// client's request for the SendAnnouncement operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See SendAnnouncement for more information on using the SendAnnouncement
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the SendAnnouncementRequest method.
+//	req, resp := client.SendAnnouncementRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncement
+func (c *AlexaForBusiness) SendAnnouncementRequest(input *SendAnnouncementInput) (req *request.Request, output *SendAnnouncementOutput) {
+	op := &request.Operation{
+		Name:       opSendAnnouncement,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &SendAnnouncementInput{}
+	}
+
+	output = &SendAnnouncementOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// SendAnnouncement API operation for Alexa For Business.
+//
+// Triggers an asynchronous flow to send text, SSML, or audio announcements
+// to rooms that are identified by a search or filter.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation SendAnnouncement for usage and error information.
+//
+// Returned Error Types:
+//
+//   - LimitExceededException
+//     You are performing an action that would put you beyond your account's limits.
+//
+//   - AlreadyExistsException
+//     The resource being created already exists.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncement
+func (c *AlexaForBusiness) SendAnnouncement(input *SendAnnouncementInput) (*SendAnnouncementOutput, error) {
+	req, out := c.SendAnnouncementRequest(input)
+	return out, req.Send()
+}
+
+// SendAnnouncementWithContext is the same as SendAnnouncement with the addition of
+// the ability to pass a context and additional request options.
+//
+// See SendAnnouncement for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *AlexaForBusiness) SendAnnouncementWithContext(ctx aws.Context, input *SendAnnouncementInput, opts ...request.Option) (*SendAnnouncementOutput, error) {
+	req, out := c.SendAnnouncementRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
 }
 
 const opSendInvitation = "SendInvitation"
@@ -5854,17 +8002,21 @@ const opSendInvitation = "SendInvitation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SendInvitationRequest method.
+//	req, resp := client.SendInvitationRequest(params)
 //
-//    // Example sending a request using the SendInvitationRequest method.
-//    req, resp := client.SendInvitationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendInvitation
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SendInvitationRequest(input *SendInvitationInput) (req *request.Request, output *SendInvitationOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SendInvitation, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opSendInvitation,
 		HTTPMethod: "POST",
@@ -5884,7 +8036,7 @@ func (c *AlexaForBusiness) SendInvitationRequest(input *SendInvitationInput) (re
 // SendInvitation API operation for Alexa For Business.
 //
 // Sends an enrollment invitation email with a URL to a user. The URL is valid
-// for 72 hours or until you call this operation again, whichever comes first.
+// for 30 days or until you call this operation again, whichever comes first.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -5893,17 +8045,20 @@ func (c *AlexaForBusiness) SendInvitationRequest(input *SendInvitationInput) (re
 // See the AWS API reference guide for Alexa For Business's
 // API operation SendInvitation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidUserStatusException "InvalidUserStatusException"
-//   The attempt to update a user is invalid due to the user's current status.
+//   - NotFoundException
+//     The resource is not found.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - InvalidUserStatusException
+//     The attempt to update a user is invalid due to the user's current status.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendInvitation
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SendInvitation(input *SendInvitationInput) (*SendInvitationOutput, error) {
 	req, out := c.SendInvitationRequest(input)
 	return out, req.Send()
@@ -5918,6 +8073,8 @@ func (c *AlexaForBusiness) SendInvitation(input *SendInvitationInput) (*SendInvi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) SendInvitationWithContext(ctx aws.Context, input *SendInvitationInput, opts ...request.Option) (*SendInvitationOutput, error) {
 	req, out := c.SendInvitationRequest(input)
 	req.SetContext(ctx)
@@ -5941,17 +8098,21 @@ const opStartDeviceSync = "StartDeviceSync"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartDeviceSyncRequest method.
+//	req, resp := client.StartDeviceSyncRequest(params)
 //
-//    // Example sending a request using the StartDeviceSyncRequest method.
-//    req, resp := client.StartDeviceSyncRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartDeviceSync
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) StartDeviceSyncRequest(input *StartDeviceSyncInput) (req *request.Request, output *StartDeviceSyncOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, StartDeviceSync, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opStartDeviceSync,
 		HTTPMethod: "POST",
@@ -5970,8 +8131,21 @@ func (c *AlexaForBusiness) StartDeviceSyncRequest(input *StartDeviceSyncInput) (
 
 // StartDeviceSync API operation for Alexa For Business.
 //
-// Resets a device and its account to the known default settings, by clearing
-// all information and settings set by previous users.
+// Resets a device and its account to the known default settings. This clears
+// all information and settings set by previous users in the following ways:
+//
+//   - Bluetooth - This unpairs all bluetooth devices paired with your echo
+//     device.
+//
+//   - Volume - This resets the echo device's volume to the default value.
+//
+//   - Notifications - This clears all notifications from your echo device.
+//
+//   - Lists - This clears all to-do items from your echo device.
+//
+//   - Settings - This internally syncs the room's profile (if the device is
+//     assigned to a room), contacts, address books, delegation access for account
+//     linking, and communications (if enabled on the room profile).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -5980,12 +8154,14 @@ func (c *AlexaForBusiness) StartDeviceSyncRequest(input *StartDeviceSyncInput) (
 // See the AWS API reference guide for Alexa For Business's
 // API operation StartDeviceSync for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeviceNotRegisteredException "DeviceNotRegisteredException"
-//   The request failed because this device is no longer registered and therefore
-//   no longer managed by this account.
+// Returned Error Types:
+//   - DeviceNotRegisteredException
+//     The request failed because this device is no longer registered and therefore
+//     no longer managed by this account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartDeviceSync
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) StartDeviceSync(input *StartDeviceSyncInput) (*StartDeviceSyncOutput, error) {
 	req, out := c.StartDeviceSyncRequest(input)
 	return out, req.Send()
@@ -6000,6 +8176,8 @@ func (c *AlexaForBusiness) StartDeviceSync(input *StartDeviceSyncInput) (*StartD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) StartDeviceSyncWithContext(ctx aws.Context, input *StartDeviceSyncInput, opts ...request.Option) (*StartDeviceSyncOutput, error) {
 	req, out := c.StartDeviceSyncRequest(input)
 	req.SetContext(ctx)
@@ -6023,17 +8201,21 @@ const opStartSmartHomeApplianceDiscovery = "StartSmartHomeApplianceDiscovery"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartSmartHomeApplianceDiscoveryRequest method.
+//	req, resp := client.StartSmartHomeApplianceDiscoveryRequest(params)
 //
-//    // Example sending a request using the StartSmartHomeApplianceDiscoveryRequest method.
-//    req, resp := client.StartSmartHomeApplianceDiscoveryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartSmartHomeApplianceDiscovery
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) StartSmartHomeApplianceDiscoveryRequest(input *StartSmartHomeApplianceDiscoveryInput) (req *request.Request, output *StartSmartHomeApplianceDiscoveryOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, StartSmartHomeApplianceDiscovery, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opStartSmartHomeApplianceDiscovery,
 		HTTPMethod: "POST",
@@ -6062,11 +8244,13 @@ func (c *AlexaForBusiness) StartSmartHomeApplianceDiscoveryRequest(input *StartS
 // See the AWS API reference guide for Alexa For Business's
 // API operation StartSmartHomeApplianceDiscovery for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartSmartHomeApplianceDiscovery
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) StartSmartHomeApplianceDiscovery(input *StartSmartHomeApplianceDiscoveryInput) (*StartSmartHomeApplianceDiscoveryOutput, error) {
 	req, out := c.StartSmartHomeApplianceDiscoveryRequest(input)
 	return out, req.Send()
@@ -6081,6 +8265,8 @@ func (c *AlexaForBusiness) StartSmartHomeApplianceDiscovery(input *StartSmartHom
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) StartSmartHomeApplianceDiscoveryWithContext(ctx aws.Context, input *StartSmartHomeApplianceDiscoveryInput, opts ...request.Option) (*StartSmartHomeApplianceDiscoveryOutput, error) {
 	req, out := c.StartSmartHomeApplianceDiscoveryRequest(input)
 	req.SetContext(ctx)
@@ -6104,17 +8290,21 @@ const opTagResource = "TagResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the TagResourceRequest method.
+//	req, resp := client.TagResourceRequest(params)
 //
-//    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/TagResource
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, TagResource, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -6142,11 +8332,13 @@ func (c *AlexaForBusiness) TagResourceRequest(input *TagResourceInput) (req *req
 // See the AWS API reference guide for Alexa For Business's
 // API operation TagResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/TagResource
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	return out, req.Send()
@@ -6161,6 +8353,8 @@ func (c *AlexaForBusiness) TagResource(input *TagResourceInput) (*TagResourceOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
@@ -6184,17 +8378,21 @@ const opUntagResource = "UntagResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UntagResourceRequest method.
+//	req, resp := client.UntagResourceRequest(params)
 //
-//    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UntagResource
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UntagResource, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -6222,11 +8420,13 @@ func (c *AlexaForBusiness) UntagResourceRequest(input *UntagResourceInput) (req 
 // See the AWS API reference guide for Alexa For Business's
 // API operation UntagResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UntagResource
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	return out, req.Send()
@@ -6241,6 +8441,8 @@ func (c *AlexaForBusiness) UntagResource(input *UntagResourceInput) (*UntagResou
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
@@ -6264,17 +8466,21 @@ const opUpdateAddressBook = "UpdateAddressBook"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateAddressBookRequest method.
+//	req, resp := client.UpdateAddressBookRequest(params)
 //
-//    // Example sending a request using the UpdateAddressBookRequest method.
-//    req, resp := client.UpdateAddressBookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateAddressBookRequest(input *UpdateAddressBookInput) (req *request.Request, output *UpdateAddressBookOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateAddressBook, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opUpdateAddressBook,
 		HTTPMethod: "POST",
@@ -6302,17 +8508,20 @@ func (c *AlexaForBusiness) UpdateAddressBookRequest(input *UpdateAddressBookInpu
 // See the AWS API reference guide for Alexa For Business's
 // API operation UpdateAddressBook for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeNameInUseException "NameInUseException"
-//   The name sent in the request is already in use.
+//   - NotFoundException
+//     The resource is not found.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NameInUseException
+//     The name sent in the request is already in use.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateAddressBook
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateAddressBook(input *UpdateAddressBookInput) (*UpdateAddressBookOutput, error) {
 	req, out := c.UpdateAddressBookRequest(input)
 	return out, req.Send()
@@ -6327,6 +8536,8 @@ func (c *AlexaForBusiness) UpdateAddressBook(input *UpdateAddressBookInput) (*Up
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateAddressBookWithContext(ctx aws.Context, input *UpdateAddressBookInput, opts ...request.Option) (*UpdateAddressBookOutput, error) {
 	req, out := c.UpdateAddressBookRequest(input)
 	req.SetContext(ctx)
@@ -6350,17 +8561,21 @@ const opUpdateBusinessReportSchedule = "UpdateBusinessReportSchedule"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateBusinessReportScheduleRequest method.
+//	req, resp := client.UpdateBusinessReportScheduleRequest(params)
 //
-//    // Example sending a request using the UpdateBusinessReportScheduleRequest method.
-//    req, resp := client.UpdateBusinessReportScheduleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportSchedule
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateBusinessReportScheduleRequest(input *UpdateBusinessReportScheduleInput) (req *request.Request, output *UpdateBusinessReportScheduleOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateBusinessReportSchedule, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opUpdateBusinessReportSchedule,
 		HTTPMethod: "POST",
@@ -6389,14 +8604,17 @@ func (c *AlexaForBusiness) UpdateBusinessReportScheduleRequest(input *UpdateBusi
 // See the AWS API reference guide for Alexa For Business's
 // API operation UpdateBusinessReportSchedule for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportSchedule
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateBusinessReportSchedule(input *UpdateBusinessReportScheduleInput) (*UpdateBusinessReportScheduleOutput, error) {
 	req, out := c.UpdateBusinessReportScheduleRequest(input)
 	return out, req.Send()
@@ -6411,6 +8629,8 @@ func (c *AlexaForBusiness) UpdateBusinessReportSchedule(input *UpdateBusinessRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateBusinessReportScheduleWithContext(ctx aws.Context, input *UpdateBusinessReportScheduleInput, opts ...request.Option) (*UpdateBusinessReportScheduleOutput, error) {
 	req, out := c.UpdateBusinessReportScheduleRequest(input)
 	req.SetContext(ctx)
@@ -6434,17 +8654,21 @@ const opUpdateConferenceProvider = "UpdateConferenceProvider"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateConferenceProviderRequest method.
+//	req, resp := client.UpdateConferenceProviderRequest(params)
 //
-//    // Example sending a request using the UpdateConferenceProviderRequest method.
-//    req, resp := client.UpdateConferenceProviderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateConferenceProvider
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateConferenceProviderRequest(input *UpdateConferenceProviderInput) (req *request.Request, output *UpdateConferenceProviderOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateConferenceProvider, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opUpdateConferenceProvider,
 		HTTPMethod: "POST",
@@ -6472,11 +8696,13 @@ func (c *AlexaForBusiness) UpdateConferenceProviderRequest(input *UpdateConferen
 // See the AWS API reference guide for Alexa For Business's
 // API operation UpdateConferenceProvider for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
+//   - NotFoundException
+//     The resource is not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateConferenceProvider
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateConferenceProvider(input *UpdateConferenceProviderInput) (*UpdateConferenceProviderOutput, error) {
 	req, out := c.UpdateConferenceProviderRequest(input)
 	return out, req.Send()
@@ -6491,6 +8717,8 @@ func (c *AlexaForBusiness) UpdateConferenceProvider(input *UpdateConferenceProvi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateConferenceProviderWithContext(ctx aws.Context, input *UpdateConferenceProviderInput, opts ...request.Option) (*UpdateConferenceProviderOutput, error) {
 	req, out := c.UpdateConferenceProviderRequest(input)
 	req.SetContext(ctx)
@@ -6514,17 +8742,21 @@ const opUpdateContact = "UpdateContact"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateContactRequest method.
+//	req, resp := client.UpdateContactRequest(params)
 //
-//    // Example sending a request using the UpdateContactRequest method.
-//    req, resp := client.UpdateContactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContact
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateContactRequest(input *UpdateContactInput) (req *request.Request, output *UpdateContactOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateContact, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opUpdateContact,
 		HTTPMethod: "POST",
@@ -6552,14 +8784,17 @@ func (c *AlexaForBusiness) UpdateContactRequest(input *UpdateContactInput) (req 
 // See the AWS API reference guide for Alexa For Business's
 // API operation UpdateContact for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContact
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateContact(input *UpdateContactInput) (*UpdateContactOutput, error) {
 	req, out := c.UpdateContactRequest(input)
 	return out, req.Send()
@@ -6574,6 +8809,8 @@ func (c *AlexaForBusiness) UpdateContact(input *UpdateContactInput) (*UpdateCont
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateContactWithContext(ctx aws.Context, input *UpdateContactInput, opts ...request.Option) (*UpdateContactOutput, error) {
 	req, out := c.UpdateContactRequest(input)
 	req.SetContext(ctx)
@@ -6597,17 +8834,21 @@ const opUpdateDevice = "UpdateDevice"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDeviceRequest method.
+//	req, resp := client.UpdateDeviceRequest(params)
 //
-//    // Example sending a request using the UpdateDeviceRequest method.
-//    req, resp := client.UpdateDeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateDevice
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateDeviceRequest(input *UpdateDeviceInput) (req *request.Request, output *UpdateDeviceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateDevice, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opUpdateDevice,
 		HTTPMethod: "POST",
@@ -6635,18 +8876,21 @@ func (c *AlexaForBusiness) UpdateDeviceRequest(input *UpdateDeviceInput) (req *r
 // See the AWS API reference guide for Alexa For Business's
 // API operation UpdateDevice for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NotFoundException
+//     The resource is not found.
 //
-//   * ErrCodeDeviceNotRegisteredException "DeviceNotRegisteredException"
-//   The request failed because this device is no longer registered and therefore
-//   no longer managed by this account.
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - DeviceNotRegisteredException
+//     The request failed because this device is no longer registered and therefore
+//     no longer managed by this account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateDevice
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateDevice(input *UpdateDeviceInput) (*UpdateDeviceOutput, error) {
 	req, out := c.UpdateDeviceRequest(input)
 	return out, req.Send()
@@ -6661,8 +8905,297 @@ func (c *AlexaForBusiness) UpdateDevice(input *UpdateDeviceInput) (*UpdateDevice
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateDeviceWithContext(ctx aws.Context, input *UpdateDeviceInput, opts ...request.Option) (*UpdateDeviceOutput, error) {
 	req, out := c.UpdateDeviceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateGateway = "UpdateGateway"
+
+// UpdateGatewayRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateGateway operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateGateway for more information on using the UpdateGateway
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateGatewayRequest method.
+//	req, resp := client.UpdateGatewayRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGateway
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) UpdateGatewayRequest(input *UpdateGatewayInput) (req *request.Request, output *UpdateGatewayOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateGateway, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opUpdateGateway,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateGatewayInput{}
+	}
+
+	output = &UpdateGatewayOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateGateway API operation for Alexa For Business.
+//
+// Updates the details of a gateway. If any optional field is not provided,
+// the existing corresponding value is left unmodified.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation UpdateGateway for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - NameInUseException
+//     The name sent in the request is already in use.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGateway
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) UpdateGateway(input *UpdateGatewayInput) (*UpdateGatewayOutput, error) {
+	req, out := c.UpdateGatewayRequest(input)
+	return out, req.Send()
+}
+
+// UpdateGatewayWithContext is the same as UpdateGateway with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateGateway for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) UpdateGatewayWithContext(ctx aws.Context, input *UpdateGatewayInput, opts ...request.Option) (*UpdateGatewayOutput, error) {
+	req, out := c.UpdateGatewayRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateGatewayGroup = "UpdateGatewayGroup"
+
+// UpdateGatewayGroupRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateGatewayGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateGatewayGroup for more information on using the UpdateGatewayGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateGatewayGroupRequest method.
+//	req, resp := client.UpdateGatewayGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroup
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) UpdateGatewayGroupRequest(input *UpdateGatewayGroupInput) (req *request.Request, output *UpdateGatewayGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateGatewayGroup, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opUpdateGatewayGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateGatewayGroupInput{}
+	}
+
+	output = &UpdateGatewayGroupOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateGatewayGroup API operation for Alexa For Business.
+//
+// Updates the details of a gateway group. If any optional field is not provided,
+// the existing corresponding value is left unmodified.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation UpdateGatewayGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - NameInUseException
+//     The name sent in the request is already in use.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroup
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) UpdateGatewayGroup(input *UpdateGatewayGroupInput) (*UpdateGatewayGroupOutput, error) {
+	req, out := c.UpdateGatewayGroupRequest(input)
+	return out, req.Send()
+}
+
+// UpdateGatewayGroupWithContext is the same as UpdateGatewayGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateGatewayGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) UpdateGatewayGroupWithContext(ctx aws.Context, input *UpdateGatewayGroupInput, opts ...request.Option) (*UpdateGatewayGroupOutput, error) {
+	req, out := c.UpdateGatewayGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateNetworkProfile = "UpdateNetworkProfile"
+
+// UpdateNetworkProfileRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateNetworkProfile operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateNetworkProfile for more information on using the UpdateNetworkProfile
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateNetworkProfileRequest method.
+//	req, resp := client.UpdateNetworkProfileRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) UpdateNetworkProfileRequest(input *UpdateNetworkProfileInput) (req *request.Request, output *UpdateNetworkProfileOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateNetworkProfile, has been deprecated")
+	}
+	op := &request.Operation{
+		Name:       opUpdateNetworkProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateNetworkProfileInput{}
+	}
+
+	output = &UpdateNetworkProfileOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateNetworkProfile API operation for Alexa For Business.
+//
+// Updates a network profile by the network profile ARN.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Alexa For Business's
+// API operation UpdateNetworkProfile for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - NameInUseException
+//     The name sent in the request is already in use.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
+//
+//   - InvalidCertificateAuthorityException
+//     The Certificate Authority can't issue or revoke a certificate.
+//
+//   - InvalidSecretsManagerResourceException
+//     A password in SecretsManager is in an invalid state.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateNetworkProfile
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) UpdateNetworkProfile(input *UpdateNetworkProfileInput) (*UpdateNetworkProfileOutput, error) {
+	req, out := c.UpdateNetworkProfileRequest(input)
+	return out, req.Send()
+}
+
+// UpdateNetworkProfileWithContext is the same as UpdateNetworkProfile with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateNetworkProfile for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
+func (c *AlexaForBusiness) UpdateNetworkProfileWithContext(ctx aws.Context, input *UpdateNetworkProfileInput, opts ...request.Option) (*UpdateNetworkProfileOutput, error) {
+	req, out := c.UpdateNetworkProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
@@ -6684,17 +9217,21 @@ const opUpdateProfile = "UpdateProfile"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateProfileRequest method.
+//	req, resp := client.UpdateProfileRequest(params)
 //
-//    // Example sending a request using the UpdateProfileRequest method.
-//    req, resp := client.UpdateProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateProfile
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateProfileRequest(input *UpdateProfileInput) (req *request.Request, output *UpdateProfileOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateProfile, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opUpdateProfile,
 		HTTPMethod: "POST",
@@ -6722,17 +9259,20 @@ func (c *AlexaForBusiness) UpdateProfileRequest(input *UpdateProfileInput) (req 
 // See the AWS API reference guide for Alexa For Business's
 // API operation UpdateProfile for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeNameInUseException "NameInUseException"
-//   The name sent in the request is already in use.
+//   - NotFoundException
+//     The resource is not found.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NameInUseException
+//     The name sent in the request is already in use.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateProfile
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateProfile(input *UpdateProfileInput) (*UpdateProfileOutput, error) {
 	req, out := c.UpdateProfileRequest(input)
 	return out, req.Send()
@@ -6747,6 +9287,8 @@ func (c *AlexaForBusiness) UpdateProfile(input *UpdateProfileInput) (*UpdateProf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateProfileWithContext(ctx aws.Context, input *UpdateProfileInput, opts ...request.Option) (*UpdateProfileOutput, error) {
 	req, out := c.UpdateProfileRequest(input)
 	req.SetContext(ctx)
@@ -6770,17 +9312,21 @@ const opUpdateRoom = "UpdateRoom"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateRoomRequest method.
+//	req, resp := client.UpdateRoomRequest(params)
 //
-//    // Example sending a request using the UpdateRoomRequest method.
-//    req, resp := client.UpdateRoomRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateRoomRequest(input *UpdateRoomInput) (req *request.Request, output *UpdateRoomOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateRoom, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opUpdateRoom,
 		HTTPMethod: "POST",
@@ -6808,14 +9354,17 @@ func (c *AlexaForBusiness) UpdateRoomRequest(input *UpdateRoomInput) (req *reque
 // See the AWS API reference guide for Alexa For Business's
 // API operation UpdateRoom for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeNameInUseException "NameInUseException"
-//   The name sent in the request is already in use.
+//   - NotFoundException
+//     The resource is not found.
+//
+//   - NameInUseException
+//     The name sent in the request is already in use.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateRoom
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateRoom(input *UpdateRoomInput) (*UpdateRoomOutput, error) {
 	req, out := c.UpdateRoomRequest(input)
 	return out, req.Send()
@@ -6830,6 +9379,8 @@ func (c *AlexaForBusiness) UpdateRoom(input *UpdateRoomInput) (*UpdateRoomOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateRoomWithContext(ctx aws.Context, input *UpdateRoomInput, opts ...request.Option) (*UpdateRoomOutput, error) {
 	req, out := c.UpdateRoomRequest(input)
 	req.SetContext(ctx)
@@ -6853,17 +9404,21 @@ const opUpdateSkillGroup = "UpdateSkillGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateSkillGroupRequest method.
+//	req, resp := client.UpdateSkillGroupRequest(params)
 //
-//    // Example sending a request using the UpdateSkillGroupRequest method.
-//    req, resp := client.UpdateSkillGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateSkillGroupRequest(input *UpdateSkillGroupInput) (req *request.Request, output *UpdateSkillGroupOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, UpdateSkillGroup, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opUpdateSkillGroup,
 		HTTPMethod: "POST",
@@ -6891,17 +9446,20 @@ func (c *AlexaForBusiness) UpdateSkillGroupRequest(input *UpdateSkillGroupInput)
 // See the AWS API reference guide for Alexa For Business's
 // API operation UpdateSkillGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource is not found.
+// Returned Error Types:
 //
-//   * ErrCodeNameInUseException "NameInUseException"
-//   The name sent in the request is already in use.
+//   - NotFoundException
+//     The resource is not found.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Concurrent modification of resources. HTTP Status Code: 400.
+//   - NameInUseException
+//     The name sent in the request is already in use.
+//
+//   - ConcurrentModificationException
+//     There is a concurrent modification of resources.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateSkillGroup
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateSkillGroup(input *UpdateSkillGroupInput) (*UpdateSkillGroupOutput, error) {
 	req, out := c.UpdateSkillGroupRequest(input)
 	return out, req.Send()
@@ -6916,6 +9474,8 @@ func (c *AlexaForBusiness) UpdateSkillGroup(input *UpdateSkillGroupInput) (*Upda
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *AlexaForBusiness) UpdateSkillGroupWithContext(ctx aws.Context, input *UpdateSkillGroupInput, opts ...request.Option) (*UpdateSkillGroupOutput, error) {
 	req, out := c.UpdateSkillGroupRequest(input)
 	req.SetContext(ctx)
@@ -6937,12 +9497,20 @@ type AddressBook struct {
 	Name *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddressBook) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddressBook) GoString() string {
 	return s.String()
 }
@@ -6979,12 +9547,20 @@ type AddressBookData struct {
 	Name *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddressBookData) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddressBookData) GoString() string {
 	return s.String()
 }
@@ -7007,6 +9583,70 @@ func (s *AddressBookData) SetName(v string) *AddressBookData {
 	return s
 }
 
+// The resource being created already exists.
+type AlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &AlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AlreadyExistsException) Code() string {
+	return "AlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *AlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *AlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ApproveSkillInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7016,12 +9656,20 @@ type ApproveSkillInput struct {
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApproveSkillInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApproveSkillInput) GoString() string {
 	return s.String()
 }
@@ -7049,12 +9697,20 @@ type ApproveSkillOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApproveSkillOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApproveSkillOutput) GoString() string {
 	return s.String()
 }
@@ -7073,12 +9729,20 @@ type AssociateContactWithAddressBookInput struct {
 	ContactArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateContactWithAddressBookInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateContactWithAddressBookInput) GoString() string {
 	return s.String()
 }
@@ -7115,13 +9779,103 @@ type AssociateContactWithAddressBookOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateContactWithAddressBookOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateContactWithAddressBookOutput) GoString() string {
+	return s.String()
+}
+
+type AssociateDeviceWithNetworkProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The device ARN.
+	//
+	// DeviceArn is a required field
+	DeviceArn *string `type:"string" required:"true"`
+
+	// The ARN of the network profile to associate with a device.
+	//
+	// NetworkProfileArn is a required field
+	NetworkProfileArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateDeviceWithNetworkProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateDeviceWithNetworkProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateDeviceWithNetworkProfileInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AssociateDeviceWithNetworkProfileInput"}
+	if s.DeviceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("DeviceArn"))
+	}
+	if s.NetworkProfileArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("NetworkProfileArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDeviceArn sets the DeviceArn field's value.
+func (s *AssociateDeviceWithNetworkProfileInput) SetDeviceArn(v string) *AssociateDeviceWithNetworkProfileInput {
+	s.DeviceArn = &v
+	return s
+}
+
+// SetNetworkProfileArn sets the NetworkProfileArn field's value.
+func (s *AssociateDeviceWithNetworkProfileInput) SetNetworkProfileArn(v string) *AssociateDeviceWithNetworkProfileInput {
+	s.NetworkProfileArn = &v
+	return s
+}
+
+type AssociateDeviceWithNetworkProfileOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateDeviceWithNetworkProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateDeviceWithNetworkProfileOutput) GoString() string {
 	return s.String()
 }
 
@@ -7135,12 +9889,20 @@ type AssociateDeviceWithRoomInput struct {
 	RoomArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDeviceWithRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDeviceWithRoomInput) GoString() string {
 	return s.String()
 }
@@ -7161,12 +9923,20 @@ type AssociateDeviceWithRoomOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDeviceWithRoomOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDeviceWithRoomOutput) GoString() string {
 	return s.String()
 }
@@ -7181,12 +9951,20 @@ type AssociateSkillGroupWithRoomInput struct {
 	SkillGroupArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillGroupWithRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillGroupWithRoomInput) GoString() string {
 	return s.String()
 }
@@ -7207,12 +9985,20 @@ type AssociateSkillGroupWithRoomOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillGroupWithRoomOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillGroupWithRoomOutput) GoString() string {
 	return s.String()
 }
@@ -7229,12 +10015,20 @@ type AssociateSkillWithSkillGroupInput struct {
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillWithSkillGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillWithSkillGroupInput) GoString() string {
 	return s.String()
 }
@@ -7268,12 +10062,20 @@ type AssociateSkillWithSkillGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillWithSkillGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillWithSkillGroupOutput) GoString() string {
 	return s.String()
 }
@@ -7281,21 +10083,26 @@ func (s AssociateSkillWithSkillGroupOutput) GoString() string {
 type AssociateSkillWithUsersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the organization.
-	OrganizationArn *string `type:"string"`
-
-	// The private skill ID you want to make available to enrolled users.>
+	// The private skill ID you want to make available to enrolled users.
 	//
 	// SkillId is a required field
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillWithUsersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillWithUsersInput) GoString() string {
 	return s.String()
 }
@@ -7313,12 +10120,6 @@ func (s *AssociateSkillWithUsersInput) Validate() error {
 	return nil
 }
 
-// SetOrganizationArn sets the OrganizationArn field's value.
-func (s *AssociateSkillWithUsersInput) SetOrganizationArn(v string) *AssociateSkillWithUsersInput {
-	s.OrganizationArn = &v
-	return s
-}
-
 // SetSkillId sets the SkillId field's value.
 func (s *AssociateSkillWithUsersInput) SetSkillId(v string) *AssociateSkillWithUsersInput {
 	s.SkillId = &v
@@ -7329,14 +10130,94 @@ type AssociateSkillWithUsersOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillWithUsersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateSkillWithUsersOutput) GoString() string {
 	return s.String()
+}
+
+// The audio message. There is a 1 MB limit on the audio file input and the
+// only supported format is MP3. To convert your MP3 audio files to an Alexa-friendly,
+//
+// required codec version (MPEG version 2) and bit rate (48 kbps), you might
+// use converter software. One option for this is a command-line tool, FFmpeg.
+// For more information, see FFmpeg (https://www.ffmpeg.org/). The following
+// command converts the provided <input-file> to an MP3 file that is played
+// in the announcement:
+//
+// ffmpeg -i <input-file> -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000 <output-file.mp3>
+type Audio struct {
+	_ struct{} `type:"structure"`
+
+	// The locale of the audio message. Currently, en-US is supported.
+	//
+	// Locale is a required field
+	Locale *string `type:"string" required:"true" enum:"Locale"`
+
+	// The location of the audio file. Currently, S3 URLs are supported. Only S3
+	// locations comprised of safe characters are valid. For more information, see
+	// Safe Characters (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters).
+	//
+	// Location is a required field
+	Location *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Audio) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Audio) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Audio) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Audio"}
+	if s.Locale == nil {
+		invalidParams.Add(request.NewErrParamRequired("Locale"))
+	}
+	if s.Location == nil {
+		invalidParams.Add(request.NewErrParamRequired("Location"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLocale sets the Locale field's value.
+func (s *Audio) SetLocale(v string) *Audio {
+	s.Locale = &v
+	return s
+}
+
+// SetLocation sets the Location field's value.
+func (s *Audio) SetLocation(v string) *Audio {
+	s.Location = &v
+	return s
 }
 
 // Usage report with specified parameters.
@@ -7359,12 +10240,20 @@ type BusinessReport struct {
 	Status *string `type:"string" enum:"BusinessReportStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReport) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReport) GoString() string {
 	return s.String()
 }
@@ -7404,17 +10293,40 @@ type BusinessReportContentRange struct {
 	_ struct{} `type:"structure"`
 
 	// The interval of the content range.
-	Interval *string `type:"string" enum:"BusinessReportInterval"`
+	//
+	// Interval is a required field
+	Interval *string `type:"string" required:"true" enum:"BusinessReportInterval"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReportContentRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReportContentRange) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BusinessReportContentRange) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "BusinessReportContentRange"}
+	if s.Interval == nil {
+		invalidParams.Add(request.NewErrParamRequired("Interval"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetInterval sets the Interval field's value.
@@ -7431,12 +10343,20 @@ type BusinessReportRecurrence struct {
 	StartDate *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReportRecurrence) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReportRecurrence) GoString() string {
 	return s.String()
 }
@@ -7458,12 +10378,20 @@ type BusinessReportS3Location struct {
 	Path *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReportS3Location) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReportS3Location) GoString() string {
 	return s.String()
 }
@@ -7510,12 +10438,20 @@ type BusinessReportSchedule struct {
 	ScheduleName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReportSchedule) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BusinessReportSchedule) GoString() string {
 	return s.String()
 }
@@ -7580,12 +10516,20 @@ type Category struct {
 	CategoryName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Category) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Category) GoString() string {
 	return s.String()
 }
@@ -7602,6 +10546,70 @@ func (s *Category) SetCategoryName(v string) *Category {
 	return s
 }
 
+// There is a concurrent modification of resources.
+type ConcurrentModificationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) GoString() string {
+	return s.String()
+}
+
+func newErrorConcurrentModificationException(v protocol.ResponseMetadata) error {
+	return &ConcurrentModificationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConcurrentModificationException) Code() string {
+	return "ConcurrentModificationException"
+}
+
+// Message returns the exception's message.
+func (s *ConcurrentModificationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConcurrentModificationException) OrigErr() error {
+	return nil
+}
+
+func (s *ConcurrentModificationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConcurrentModificationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConcurrentModificationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The default conference provider that is used if no other scheduled meetings
 // are detected.
 type ConferencePreference struct {
@@ -7611,12 +10619,20 @@ type ConferencePreference struct {
 	DefaultConferenceProviderArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConferencePreference) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConferencePreference) GoString() string {
 	return s.String()
 }
@@ -7653,12 +10669,20 @@ type ConferenceProvider struct {
 	Type *string `type:"string" enum:"ConferenceProviderType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConferenceProvider) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConferenceProvider) GoString() string {
 	return s.String()
 }
@@ -7715,16 +10739,37 @@ type Contact struct {
 	// The last name of the contact, used to call the contact on the device.
 	LastName *string `min:"1" type:"string"`
 
-	// The phone number of the contact.
+	// The phone number of the contact. The phone number type defaults to WORK.
+	// You can either specify PhoneNumber or PhoneNumbers. We recommend that you
+	// use PhoneNumbers, which lets you specify the phone number type and multiple
+	// numbers.
+	//
+	// PhoneNumber is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by Contact's
+	// String and GoString methods.
 	PhoneNumber *string `type:"string" sensitive:"true"`
+
+	// The list of phone numbers for the contact.
+	PhoneNumbers []*PhoneNumber `type:"list"`
+
+	// The list of SIP addresses for the contact.
+	SipAddresses []*SipAddress `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Contact) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Contact) GoString() string {
 	return s.String()
 }
@@ -7759,6 +10804,18 @@ func (s *Contact) SetPhoneNumber(v string) *Contact {
 	return s
 }
 
+// SetPhoneNumbers sets the PhoneNumbers field's value.
+func (s *Contact) SetPhoneNumbers(v []*PhoneNumber) *Contact {
+	s.PhoneNumbers = v
+	return s
+}
+
+// SetSipAddresses sets the SipAddresses field's value.
+func (s *Contact) SetSipAddresses(v []*SipAddress) *Contact {
+	s.SipAddresses = v
+	return s
+}
+
 // Information related to a contact.
 type ContactData struct {
 	_ struct{} `type:"structure"`
@@ -7775,16 +10832,36 @@ type ContactData struct {
 	// The last name of the contact, used to call the contact on the device.
 	LastName *string `min:"1" type:"string"`
 
-	// The phone number of the contact.
+	// The phone number of the contact. The phone number type defaults to WORK.
+	// You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers,
+	// which lets you specify the phone number type and multiple numbers.
+	//
+	// PhoneNumber is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactData's
+	// String and GoString methods.
 	PhoneNumber *string `type:"string" sensitive:"true"`
+
+	// The list of phone numbers for the contact.
+	PhoneNumbers []*PhoneNumber `type:"list"`
+
+	// The list of SIP addresses for the contact.
+	SipAddresses []*SipAddress `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContactData) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContactData) GoString() string {
 	return s.String()
 }
@@ -7819,6 +10896,109 @@ func (s *ContactData) SetPhoneNumber(v string) *ContactData {
 	return s
 }
 
+// SetPhoneNumbers sets the PhoneNumbers field's value.
+func (s *ContactData) SetPhoneNumbers(v []*PhoneNumber) *ContactData {
+	s.PhoneNumbers = v
+	return s
+}
+
+// SetSipAddresses sets the SipAddresses field's value.
+func (s *ContactData) SetSipAddresses(v []*SipAddress) *ContactData {
+	s.SipAddresses = v
+	return s
+}
+
+// The content definition. This can contain only one text, SSML, or audio list
+// object.
+type Content struct {
+	_ struct{} `type:"structure"`
+
+	// The list of audio messages.
+	AudioList []*Audio `type:"list"`
+
+	// The list of SSML messages.
+	SsmlList []*Ssml `type:"list"`
+
+	// The list of text messages.
+	TextList []*Text `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Content) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Content) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Content) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Content"}
+	if s.AudioList != nil {
+		for i, v := range s.AudioList {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AudioList", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SsmlList != nil {
+		for i, v := range s.SsmlList {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SsmlList", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.TextList != nil {
+		for i, v := range s.TextList {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TextList", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAudioList sets the AudioList field's value.
+func (s *Content) SetAudioList(v []*Audio) *Content {
+	s.AudioList = v
+	return s
+}
+
+// SetSsmlList sets the SsmlList field's value.
+func (s *Content) SetSsmlList(v []*Ssml) *Content {
+	s.SsmlList = v
+	return s
+}
+
+// SetTextList sets the TextList field's value.
+func (s *Content) SetTextList(v []*Text) *Content {
+	s.TextList = v
+	return s
+}
+
 type CreateAddressBookInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7832,14 +11012,25 @@ type CreateAddressBookInput struct {
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
+
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAddressBookInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAddressBookInput) GoString() string {
 	return s.String()
 }
@@ -7858,6 +11049,16 @@ func (s *CreateAddressBookInput) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7884,6 +11085,12 @@ func (s *CreateAddressBookInput) SetName(v string) *CreateAddressBookInput {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateAddressBookInput) SetTags(v []*Tag) *CreateAddressBookInput {
+	s.Tags = v
+	return s
+}
+
 type CreateAddressBookOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7891,12 +11098,20 @@ type CreateAddressBookOutput struct {
 	AddressBookArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAddressBookOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAddressBookOutput) GoString() string {
 	return s.String()
 }
@@ -7924,10 +11139,12 @@ type CreateBusinessReportScheduleInput struct {
 	// Format is a required field
 	Format *string `type:"string" required:"true" enum:"BusinessReportFormat"`
 
-	// The recurrence of the reports.
+	// The recurrence of the reports. If this isn't specified, the report will only
+	// be delivered one time when the API is called.
 	Recurrence *BusinessReportRecurrence `type:"structure"`
 
-	// The S3 bucket name of the output reports.
+	// The S3 bucket name of the output reports. If this isn't specified, the report
+	// can be retrieved from a download link by calling ListBusinessReportSchedule.
 	S3BucketName *string `type:"string"`
 
 	// The S3 key where the report is delivered.
@@ -7935,14 +11152,25 @@ type CreateBusinessReportScheduleInput struct {
 
 	// The name identifier of the schedule.
 	ScheduleName *string `type:"string"`
+
+	// The tags for the business report schedule.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBusinessReportScheduleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBusinessReportScheduleInput) GoString() string {
 	return s.String()
 }
@@ -7958,6 +11186,21 @@ func (s *CreateBusinessReportScheduleInput) Validate() error {
 	}
 	if s.Format == nil {
 		invalidParams.Add(request.NewErrParamRequired("Format"))
+	}
+	if s.ContentRange != nil {
+		if err := s.ContentRange.Validate(); err != nil {
+			invalidParams.AddNested("ContentRange", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8008,6 +11251,12 @@ func (s *CreateBusinessReportScheduleInput) SetScheduleName(v string) *CreateBus
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateBusinessReportScheduleInput) SetTags(v []*Tag) *CreateBusinessReportScheduleInput {
+	s.Tags = v
+	return s
+}
+
 type CreateBusinessReportScheduleOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8015,12 +11264,20 @@ type CreateBusinessReportScheduleOutput struct {
 	ScheduleArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBusinessReportScheduleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBusinessReportScheduleOutput) GoString() string {
 	return s.String()
 }
@@ -8057,14 +11314,25 @@ type CreateConferenceProviderInput struct {
 
 	// The information for PSTN conferencing.
 	PSTNDialIn *PSTNDialIn `type:"structure"`
+
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConferenceProviderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConferenceProviderInput) GoString() string {
 	return s.String()
 }
@@ -8100,6 +11368,16 @@ func (s *CreateConferenceProviderInput) Validate() error {
 	if s.PSTNDialIn != nil {
 		if err := s.PSTNDialIn.Validate(); err != nil {
 			invalidParams.AddNested("PSTNDialIn", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -8145,6 +11423,12 @@ func (s *CreateConferenceProviderInput) SetPSTNDialIn(v *PSTNDialIn) *CreateConf
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateConferenceProviderInput) SetTags(v []*Tag) *CreateConferenceProviderInput {
+	s.Tags = v
+	return s
+}
+
 type CreateConferenceProviderOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8152,12 +11436,20 @@ type CreateConferenceProviderOutput struct {
 	ConferenceProviderArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConferenceProviderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConferenceProviderOutput) GoString() string {
 	return s.String()
 }
@@ -8185,16 +11477,40 @@ type CreateContactInput struct {
 	// The last name of the contact that is used to call the contact on the device.
 	LastName *string `min:"1" type:"string"`
 
-	// The phone number of the contact in E.164 format.
+	// The phone number of the contact in E.164 format. The phone number type defaults
+	// to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you
+	// use PhoneNumbers, which lets you specify the phone number type and multiple
+	// numbers.
+	//
+	// PhoneNumber is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateContactInput's
+	// String and GoString methods.
 	PhoneNumber *string `type:"string" sensitive:"true"`
+
+	// The list of phone numbers for the contact.
+	PhoneNumbers []*PhoneNumber `type:"list"`
+
+	// The list of SIP addresses for the contact.
+	SipAddresses []*SipAddress `type:"list"`
+
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateContactInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateContactInput) GoString() string {
 	return s.String()
 }
@@ -8216,6 +11532,36 @@ func (s *CreateContactInput) Validate() error {
 	}
 	if s.LastName != nil && len(*s.LastName) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("LastName", 1))
+	}
+	if s.PhoneNumbers != nil {
+		for i, v := range s.PhoneNumbers {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PhoneNumbers", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SipAddresses != nil {
+		for i, v := range s.SipAddresses {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SipAddresses", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8254,6 +11600,24 @@ func (s *CreateContactInput) SetPhoneNumber(v string) *CreateContactInput {
 	return s
 }
 
+// SetPhoneNumbers sets the PhoneNumbers field's value.
+func (s *CreateContactInput) SetPhoneNumbers(v []*PhoneNumber) *CreateContactInput {
+	s.PhoneNumbers = v
+	return s
+}
+
+// SetSipAddresses sets the SipAddresses field's value.
+func (s *CreateContactInput) SetSipAddresses(v []*SipAddress) *CreateContactInput {
+	s.SipAddresses = v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateContactInput) SetTags(v []*Tag) *CreateContactInput {
+	s.Tags = v
+	return s
+}
+
 type CreateContactOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8261,12 +11625,20 @@ type CreateContactOutput struct {
 	ContactArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateContactOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateContactOutput) GoString() string {
 	return s.String()
 }
@@ -8274,6 +11646,633 @@ func (s CreateContactOutput) GoString() string {
 // SetContactArn sets the ContactArn field's value.
 func (s *CreateContactOutput) SetContactArn(v string) *CreateContactOutput {
 	s.ContactArn = &v
+	return s
+}
+
+// Creates settings for the end of meeting reminder feature that are applied
+// to a room profile. The end of meeting reminder enables Alexa to remind users
+// when a meeting is ending.
+type CreateEndOfMeetingReminder struct {
+	_ struct{} `type:"structure"`
+
+	// Whether an end of meeting reminder is enabled or not.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+
+	// A range of 3 to 15 minutes that determines when the reminder begins.
+	//
+	// ReminderAtMinutes is a required field
+	ReminderAtMinutes []*int64 `min:"1" type:"list" required:"true"`
+
+	// The type of sound that users hear during the end of meeting reminder.
+	//
+	// ReminderType is a required field
+	ReminderType *string `type:"string" required:"true" enum:"EndOfMeetingReminderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateEndOfMeetingReminder) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateEndOfMeetingReminder) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateEndOfMeetingReminder) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateEndOfMeetingReminder"}
+	if s.Enabled == nil {
+		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+	}
+	if s.ReminderAtMinutes == nil {
+		invalidParams.Add(request.NewErrParamRequired("ReminderAtMinutes"))
+	}
+	if s.ReminderAtMinutes != nil && len(s.ReminderAtMinutes) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ReminderAtMinutes", 1))
+	}
+	if s.ReminderType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ReminderType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *CreateEndOfMeetingReminder) SetEnabled(v bool) *CreateEndOfMeetingReminder {
+	s.Enabled = &v
+	return s
+}
+
+// SetReminderAtMinutes sets the ReminderAtMinutes field's value.
+func (s *CreateEndOfMeetingReminder) SetReminderAtMinutes(v []*int64) *CreateEndOfMeetingReminder {
+	s.ReminderAtMinutes = v
+	return s
+}
+
+// SetReminderType sets the ReminderType field's value.
+func (s *CreateEndOfMeetingReminder) SetReminderType(v string) *CreateEndOfMeetingReminder {
+	s.ReminderType = &v
+	return s
+}
+
+type CreateGatewayGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique, user-specified identifier for the request that ensures idempotency.
+	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
+
+	// The description of the gateway group.
+	Description *string `type:"string"`
+
+	// The name of the gateway group.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []*Tag `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateGatewayGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateGatewayGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateGatewayGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateGatewayGroupInput"}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 10))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetClientRequestToken sets the ClientRequestToken field's value.
+func (s *CreateGatewayGroupInput) SetClientRequestToken(v string) *CreateGatewayGroupInput {
+	s.ClientRequestToken = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *CreateGatewayGroupInput) SetDescription(v string) *CreateGatewayGroupInput {
+	s.Description = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateGatewayGroupInput) SetName(v string) *CreateGatewayGroupInput {
+	s.Name = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateGatewayGroupInput) SetTags(v []*Tag) *CreateGatewayGroupInput {
+	s.Tags = v
+	return s
+}
+
+type CreateGatewayGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the created gateway group.
+	GatewayGroupArn *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateGatewayGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateGatewayGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetGatewayGroupArn sets the GatewayGroupArn field's value.
+func (s *CreateGatewayGroupOutput) SetGatewayGroupArn(v string) *CreateGatewayGroupOutput {
+	s.GatewayGroupArn = &v
+	return s
+}
+
+// Creates settings for the instant booking feature that are applied to a room
+// profile. When users start their meeting with Alexa, Alexa automatically books
+// the room for the configured duration if the room is available.
+type CreateInstantBooking struct {
+	_ struct{} `type:"structure"`
+
+	// Duration between 15 and 240 minutes at increments of 15 that determines how
+	// long to book an available room when a meeting is started with Alexa.
+	//
+	// DurationInMinutes is a required field
+	DurationInMinutes *int64 `type:"integer" required:"true"`
+
+	// Whether instant booking is enabled or not.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateInstantBooking) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateInstantBooking) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateInstantBooking) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateInstantBooking"}
+	if s.DurationInMinutes == nil {
+		invalidParams.Add(request.NewErrParamRequired("DurationInMinutes"))
+	}
+	if s.Enabled == nil {
+		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDurationInMinutes sets the DurationInMinutes field's value.
+func (s *CreateInstantBooking) SetDurationInMinutes(v int64) *CreateInstantBooking {
+	s.DurationInMinutes = &v
+	return s
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *CreateInstantBooking) SetEnabled(v bool) *CreateInstantBooking {
+	s.Enabled = &v
+	return s
+}
+
+// Creates meeting room settings of a room profile.
+type CreateMeetingRoomConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Creates settings for the end of meeting reminder feature that are applied
+	// to a room profile. The end of meeting reminder enables Alexa to remind users
+	// when a meeting is ending.
+	EndOfMeetingReminder *CreateEndOfMeetingReminder `type:"structure"`
+
+	// Settings to automatically book a room for a configured duration if it's free
+	// when joining a meeting with Alexa.
+	InstantBooking *CreateInstantBooking `type:"structure"`
+
+	ProactiveJoin *CreateProactiveJoin `type:"structure"`
+
+	// Settings for requiring a check in when a room is reserved. Alexa can cancel
+	// a room reservation if it's not checked into to make the room available for
+	// others. Users can check in by joining the meeting with Alexa or an AVS device,
+	// or by saying “Alexa, check in.”
+	RequireCheckIn *CreateRequireCheckIn `type:"structure"`
+
+	// Whether room utilization metrics are enabled or not.
+	RoomUtilizationMetricsEnabled *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateMeetingRoomConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateMeetingRoomConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateMeetingRoomConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateMeetingRoomConfiguration"}
+	if s.EndOfMeetingReminder != nil {
+		if err := s.EndOfMeetingReminder.Validate(); err != nil {
+			invalidParams.AddNested("EndOfMeetingReminder", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.InstantBooking != nil {
+		if err := s.InstantBooking.Validate(); err != nil {
+			invalidParams.AddNested("InstantBooking", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ProactiveJoin != nil {
+		if err := s.ProactiveJoin.Validate(); err != nil {
+			invalidParams.AddNested("ProactiveJoin", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.RequireCheckIn != nil {
+		if err := s.RequireCheckIn.Validate(); err != nil {
+			invalidParams.AddNested("RequireCheckIn", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEndOfMeetingReminder sets the EndOfMeetingReminder field's value.
+func (s *CreateMeetingRoomConfiguration) SetEndOfMeetingReminder(v *CreateEndOfMeetingReminder) *CreateMeetingRoomConfiguration {
+	s.EndOfMeetingReminder = v
+	return s
+}
+
+// SetInstantBooking sets the InstantBooking field's value.
+func (s *CreateMeetingRoomConfiguration) SetInstantBooking(v *CreateInstantBooking) *CreateMeetingRoomConfiguration {
+	s.InstantBooking = v
+	return s
+}
+
+// SetProactiveJoin sets the ProactiveJoin field's value.
+func (s *CreateMeetingRoomConfiguration) SetProactiveJoin(v *CreateProactiveJoin) *CreateMeetingRoomConfiguration {
+	s.ProactiveJoin = v
+	return s
+}
+
+// SetRequireCheckIn sets the RequireCheckIn field's value.
+func (s *CreateMeetingRoomConfiguration) SetRequireCheckIn(v *CreateRequireCheckIn) *CreateMeetingRoomConfiguration {
+	s.RequireCheckIn = v
+	return s
+}
+
+// SetRoomUtilizationMetricsEnabled sets the RoomUtilizationMetricsEnabled field's value.
+func (s *CreateMeetingRoomConfiguration) SetRoomUtilizationMetricsEnabled(v bool) *CreateMeetingRoomConfiguration {
+	s.RoomUtilizationMetricsEnabled = &v
+	return s
+}
+
+type CreateNetworkProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the Private Certificate Authority (PCA) created in AWS Certificate
+	// Manager (ACM). This is used to issue certificates to the devices.
+	CertificateAuthorityArn *string `type:"string"`
+
+	// A unique, user-specified identifier for the request that ensures idempotency.
+	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
+
+	// The current password of the Wi-Fi network.
+	//
+	// CurrentPassword is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateNetworkProfileInput's
+	// String and GoString methods.
+	CurrentPassword *string `min:"5" type:"string" sensitive:"true"`
+
+	// Detailed information about a device's network profile.
+	Description *string `type:"string"`
+
+	// The authentication standard that is used in the EAP framework. Currently,
+	// EAP_TLS is supported.
+	EapMethod *string `type:"string" enum:"NetworkEapMethod"`
+
+	// The name of the network profile associated with a device.
+	//
+	// NetworkProfileName is a required field
+	NetworkProfileName *string `min:"1" type:"string" required:"true"`
+
+	// The next, or subsequent, password of the Wi-Fi network. This password is
+	// asynchronously transmitted to the device and is used when the password of
+	// the network changes to NextPassword.
+	//
+	// NextPassword is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateNetworkProfileInput's
+	// String and GoString methods.
+	NextPassword *string `type:"string" sensitive:"true"`
+
+	// The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK,
+	// WPA_PSK, WEP, or OPEN.
+	//
+	// SecurityType is a required field
+	SecurityType *string `type:"string" required:"true" enum:"NetworkSecurityType"`
+
+	// The SSID of the Wi-Fi network.
+	//
+	// Ssid is a required field
+	Ssid *string `min:"1" type:"string" required:"true"`
+
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []*Tag `type:"list"`
+
+	// The root certificates of your authentication server that is installed on
+	// your devices and used to trust your authentication server during EAP negotiation.
+	TrustAnchors []*string `min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateNetworkProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateNetworkProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateNetworkProfileInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateNetworkProfileInput"}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 10))
+	}
+	if s.CurrentPassword != nil && len(*s.CurrentPassword) < 5 {
+		invalidParams.Add(request.NewErrParamMinLen("CurrentPassword", 5))
+	}
+	if s.NetworkProfileName == nil {
+		invalidParams.Add(request.NewErrParamRequired("NetworkProfileName"))
+	}
+	if s.NetworkProfileName != nil && len(*s.NetworkProfileName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NetworkProfileName", 1))
+	}
+	if s.SecurityType == nil {
+		invalidParams.Add(request.NewErrParamRequired("SecurityType"))
+	}
+	if s.Ssid == nil {
+		invalidParams.Add(request.NewErrParamRequired("Ssid"))
+	}
+	if s.Ssid != nil && len(*s.Ssid) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Ssid", 1))
+	}
+	if s.TrustAnchors != nil && len(s.TrustAnchors) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("TrustAnchors", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCertificateAuthorityArn sets the CertificateAuthorityArn field's value.
+func (s *CreateNetworkProfileInput) SetCertificateAuthorityArn(v string) *CreateNetworkProfileInput {
+	s.CertificateAuthorityArn = &v
+	return s
+}
+
+// SetClientRequestToken sets the ClientRequestToken field's value.
+func (s *CreateNetworkProfileInput) SetClientRequestToken(v string) *CreateNetworkProfileInput {
+	s.ClientRequestToken = &v
+	return s
+}
+
+// SetCurrentPassword sets the CurrentPassword field's value.
+func (s *CreateNetworkProfileInput) SetCurrentPassword(v string) *CreateNetworkProfileInput {
+	s.CurrentPassword = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *CreateNetworkProfileInput) SetDescription(v string) *CreateNetworkProfileInput {
+	s.Description = &v
+	return s
+}
+
+// SetEapMethod sets the EapMethod field's value.
+func (s *CreateNetworkProfileInput) SetEapMethod(v string) *CreateNetworkProfileInput {
+	s.EapMethod = &v
+	return s
+}
+
+// SetNetworkProfileName sets the NetworkProfileName field's value.
+func (s *CreateNetworkProfileInput) SetNetworkProfileName(v string) *CreateNetworkProfileInput {
+	s.NetworkProfileName = &v
+	return s
+}
+
+// SetNextPassword sets the NextPassword field's value.
+func (s *CreateNetworkProfileInput) SetNextPassword(v string) *CreateNetworkProfileInput {
+	s.NextPassword = &v
+	return s
+}
+
+// SetSecurityType sets the SecurityType field's value.
+func (s *CreateNetworkProfileInput) SetSecurityType(v string) *CreateNetworkProfileInput {
+	s.SecurityType = &v
+	return s
+}
+
+// SetSsid sets the Ssid field's value.
+func (s *CreateNetworkProfileInput) SetSsid(v string) *CreateNetworkProfileInput {
+	s.Ssid = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateNetworkProfileInput) SetTags(v []*Tag) *CreateNetworkProfileInput {
+	s.Tags = v
+	return s
+}
+
+// SetTrustAnchors sets the TrustAnchors field's value.
+func (s *CreateNetworkProfileInput) SetTrustAnchors(v []*string) *CreateNetworkProfileInput {
+	s.TrustAnchors = v
+	return s
+}
+
+type CreateNetworkProfileOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the network profile associated with a device.
+	NetworkProfileArn *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateNetworkProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateNetworkProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SetNetworkProfileArn sets the NetworkProfileArn field's value.
+func (s *CreateNetworkProfileOutput) SetNetworkProfileArn(v string) *CreateNetworkProfileOutput {
+	s.NetworkProfileArn = &v
+	return s
+}
+
+type CreateProactiveJoin struct {
+	_ struct{} `type:"structure"`
+
+	// EnabledByMotion is a required field
+	EnabledByMotion *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateProactiveJoin) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateProactiveJoin) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateProactiveJoin) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateProactiveJoin"}
+	if s.EnabledByMotion == nil {
+		invalidParams.Add(request.NewErrParamRequired("EnabledByMotion"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnabledByMotion sets the EnabledByMotion field's value.
+func (s *CreateProactiveJoin) SetEnabledByMotion(v bool) *CreateProactiveJoin {
+	s.EnabledByMotion = &v
 	return s
 }
 
@@ -8288,13 +12287,23 @@ type CreateProfileInput struct {
 	// The user-specified token that is used during the creation of a profile.
 	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
 
+	// Whether data retention of the profile is enabled.
+	DataRetentionOptIn *bool `type:"boolean"`
+
 	// The distance unit to be used by devices in the profile.
 	//
 	// DistanceUnit is a required field
 	DistanceUnit *string `type:"string" required:"true" enum:"DistanceUnit"`
 
+	// The locale of the room profile. (This is currently only available to a limited
+	// preview audience.)
+	Locale *string `min:"1" type:"string"`
+
 	// The maximum volume limit for a room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
+
+	// The meeting room settings of a room profile.
+	MeetingRoomConfiguration *CreateMeetingRoomConfiguration `type:"structure"`
 
 	// Whether PSTN calling is enabled.
 	PSTNEnabled *bool `type:"boolean"`
@@ -8306,6 +12315,9 @@ type CreateProfileInput struct {
 
 	// Whether room profile setup is enabled.
 	SetupModeDisabled *bool `type:"boolean"`
+
+	// The tags for the profile.
+	Tags []*Tag `type:"list"`
 
 	// The temperature unit to be used by devices in the profile.
 	//
@@ -8323,12 +12335,20 @@ type CreateProfileInput struct {
 	WakeWord *string `type:"string" required:"true" enum:"WakeWord"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProfileInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProfileInput) GoString() string {
 	return s.String()
 }
@@ -8348,6 +12368,9 @@ func (s *CreateProfileInput) Validate() error {
 	if s.DistanceUnit == nil {
 		invalidParams.Add(request.NewErrParamRequired("DistanceUnit"))
 	}
+	if s.Locale != nil && len(*s.Locale) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Locale", 1))
+	}
 	if s.ProfileName == nil {
 		invalidParams.Add(request.NewErrParamRequired("ProfileName"))
 	}
@@ -8365,6 +12388,21 @@ func (s *CreateProfileInput) Validate() error {
 	}
 	if s.WakeWord == nil {
 		invalidParams.Add(request.NewErrParamRequired("WakeWord"))
+	}
+	if s.MeetingRoomConfiguration != nil {
+		if err := s.MeetingRoomConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("MeetingRoomConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8385,15 +12423,33 @@ func (s *CreateProfileInput) SetClientRequestToken(v string) *CreateProfileInput
 	return s
 }
 
+// SetDataRetentionOptIn sets the DataRetentionOptIn field's value.
+func (s *CreateProfileInput) SetDataRetentionOptIn(v bool) *CreateProfileInput {
+	s.DataRetentionOptIn = &v
+	return s
+}
+
 // SetDistanceUnit sets the DistanceUnit field's value.
 func (s *CreateProfileInput) SetDistanceUnit(v string) *CreateProfileInput {
 	s.DistanceUnit = &v
 	return s
 }
 
+// SetLocale sets the Locale field's value.
+func (s *CreateProfileInput) SetLocale(v string) *CreateProfileInput {
+	s.Locale = &v
+	return s
+}
+
 // SetMaxVolumeLimit sets the MaxVolumeLimit field's value.
 func (s *CreateProfileInput) SetMaxVolumeLimit(v int64) *CreateProfileInput {
 	s.MaxVolumeLimit = &v
+	return s
+}
+
+// SetMeetingRoomConfiguration sets the MeetingRoomConfiguration field's value.
+func (s *CreateProfileInput) SetMeetingRoomConfiguration(v *CreateMeetingRoomConfiguration) *CreateProfileInput {
+	s.MeetingRoomConfiguration = v
 	return s
 }
 
@@ -8412,6 +12468,12 @@ func (s *CreateProfileInput) SetProfileName(v string) *CreateProfileInput {
 // SetSetupModeDisabled sets the SetupModeDisabled field's value.
 func (s *CreateProfileInput) SetSetupModeDisabled(v bool) *CreateProfileInput {
 	s.SetupModeDisabled = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateProfileInput) SetTags(v []*Tag) *CreateProfileInput {
+	s.Tags = v
 	return s
 }
 
@@ -8440,12 +12502,20 @@ type CreateProfileOutput struct {
 	ProfileArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProfileOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProfileOutput) GoString() string {
 	return s.String()
 }
@@ -8453,6 +12523,70 @@ func (s CreateProfileOutput) GoString() string {
 // SetProfileArn sets the ProfileArn field's value.
 func (s *CreateProfileOutput) SetProfileArn(v string) *CreateProfileOutput {
 	s.ProfileArn = &v
+	return s
+}
+
+// Creates settings for the require check in feature that are applied to a room
+// profile. Require check in allows a meeting room’s Alexa or AVS device to
+// prompt the user to check in; otherwise, the room will be released.
+type CreateRequireCheckIn struct {
+	_ struct{} `type:"structure"`
+
+	// Whether require check in is enabled or not.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+
+	// Duration between 5 and 20 minutes to determine when to release the room if
+	// it's not checked into.
+	//
+	// ReleaseAfterMinutes is a required field
+	ReleaseAfterMinutes *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateRequireCheckIn) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateRequireCheckIn) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRequireCheckIn) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateRequireCheckIn"}
+	if s.Enabled == nil {
+		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+	}
+	if s.ReleaseAfterMinutes == nil {
+		invalidParams.Add(request.NewErrParamRequired("ReleaseAfterMinutes"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *CreateRequireCheckIn) SetEnabled(v bool) *CreateRequireCheckIn {
+	s.Enabled = &v
+	return s
+}
+
+// SetReleaseAfterMinutes sets the ReleaseAfterMinutes field's value.
+func (s *CreateRequireCheckIn) SetReleaseAfterMinutes(v int64) *CreateRequireCheckIn {
+	s.ReleaseAfterMinutes = &v
 	return s
 }
 
@@ -8465,7 +12599,7 @@ type CreateRoomInput struct {
 	// The description for the room.
 	Description *string `min:"1" type:"string"`
 
-	// The profile ARN for the room.
+	// The profile ARN for the room. This is required.
 	ProfileArn *string `type:"string"`
 
 	// The calendar ARN for the room.
@@ -8480,12 +12614,20 @@ type CreateRoomInput struct {
 	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateRoomInput) GoString() string {
 	return s.String()
 }
@@ -8565,12 +12707,20 @@ type CreateRoomOutput struct {
 	RoomArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateRoomOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateRoomOutput) GoString() string {
 	return s.String()
 }
@@ -8594,14 +12744,25 @@ type CreateSkillGroupInput struct {
 	//
 	// SkillGroupName is a required field
 	SkillGroupName *string `min:"1" type:"string" required:"true"`
+
+	// The tags for the skill group.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSkillGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSkillGroupInput) GoString() string {
 	return s.String()
 }
@@ -8620,6 +12781,16 @@ func (s *CreateSkillGroupInput) Validate() error {
 	}
 	if s.SkillGroupName != nil && len(*s.SkillGroupName) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("SkillGroupName", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8646,6 +12817,12 @@ func (s *CreateSkillGroupInput) SetSkillGroupName(v string) *CreateSkillGroupInp
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateSkillGroupInput) SetTags(v []*Tag) *CreateSkillGroupInput {
+	s.Tags = v
+	return s
+}
+
 type CreateSkillGroupOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8653,12 +12830,20 @@ type CreateSkillGroupOutput struct {
 	SkillGroupArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSkillGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSkillGroupOutput) GoString() string {
 	return s.String()
 }
@@ -8693,12 +12878,20 @@ type CreateUserInput struct {
 	UserId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserInput) GoString() string {
 	return s.String()
 }
@@ -8778,12 +12971,20 @@ type CreateUserOutput struct {
 	UserArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserOutput) GoString() string {
 	return s.String()
 }
@@ -8803,12 +13004,20 @@ type DeleteAddressBookInput struct {
 	AddressBookArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAddressBookInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAddressBookInput) GoString() string {
 	return s.String()
 }
@@ -8836,12 +13045,20 @@ type DeleteAddressBookOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAddressBookOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAddressBookOutput) GoString() string {
 	return s.String()
 }
@@ -8855,12 +13072,20 @@ type DeleteBusinessReportScheduleInput struct {
 	ScheduleArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBusinessReportScheduleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBusinessReportScheduleInput) GoString() string {
 	return s.String()
 }
@@ -8888,12 +13113,20 @@ type DeleteBusinessReportScheduleOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBusinessReportScheduleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBusinessReportScheduleOutput) GoString() string {
 	return s.String()
 }
@@ -8907,12 +13140,20 @@ type DeleteConferenceProviderInput struct {
 	ConferenceProviderArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConferenceProviderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConferenceProviderInput) GoString() string {
 	return s.String()
 }
@@ -8940,12 +13181,20 @@ type DeleteConferenceProviderOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConferenceProviderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConferenceProviderOutput) GoString() string {
 	return s.String()
 }
@@ -8959,12 +13208,20 @@ type DeleteContactInput struct {
 	ContactArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteContactInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteContactInput) GoString() string {
 	return s.String()
 }
@@ -8992,12 +13249,20 @@ type DeleteContactOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteContactOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteContactOutput) GoString() string {
 	return s.String()
 }
@@ -9011,12 +13276,20 @@ type DeleteDeviceInput struct {
 	DeviceArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeviceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeviceInput) GoString() string {
 	return s.String()
 }
@@ -9044,13 +13317,239 @@ type DeleteDeviceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeviceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeviceOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteDeviceUsageDataInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the device.
+	//
+	// DeviceArn is a required field
+	DeviceArn *string `type:"string" required:"true"`
+
+	// The type of usage data to delete.
+	//
+	// DeviceUsageType is a required field
+	DeviceUsageType *string `type:"string" required:"true" enum:"DeviceUsageType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDeviceUsageDataInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDeviceUsageDataInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteDeviceUsageDataInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteDeviceUsageDataInput"}
+	if s.DeviceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("DeviceArn"))
+	}
+	if s.DeviceUsageType == nil {
+		invalidParams.Add(request.NewErrParamRequired("DeviceUsageType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDeviceArn sets the DeviceArn field's value.
+func (s *DeleteDeviceUsageDataInput) SetDeviceArn(v string) *DeleteDeviceUsageDataInput {
+	s.DeviceArn = &v
+	return s
+}
+
+// SetDeviceUsageType sets the DeviceUsageType field's value.
+func (s *DeleteDeviceUsageDataInput) SetDeviceUsageType(v string) *DeleteDeviceUsageDataInput {
+	s.DeviceUsageType = &v
+	return s
+}
+
+type DeleteDeviceUsageDataOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDeviceUsageDataOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDeviceUsageDataOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteGatewayGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway group to delete.
+	//
+	// GatewayGroupArn is a required field
+	GatewayGroupArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteGatewayGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteGatewayGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteGatewayGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteGatewayGroupInput"}
+	if s.GatewayGroupArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("GatewayGroupArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetGatewayGroupArn sets the GatewayGroupArn field's value.
+func (s *DeleteGatewayGroupInput) SetGatewayGroupArn(v string) *DeleteGatewayGroupInput {
+	s.GatewayGroupArn = &v
+	return s
+}
+
+type DeleteGatewayGroupOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteGatewayGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteGatewayGroupOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteNetworkProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the network profile associated with a device.
+	//
+	// NetworkProfileArn is a required field
+	NetworkProfileArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteNetworkProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteNetworkProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteNetworkProfileInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteNetworkProfileInput"}
+	if s.NetworkProfileArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("NetworkProfileArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetNetworkProfileArn sets the NetworkProfileArn field's value.
+func (s *DeleteNetworkProfileInput) SetNetworkProfileArn(v string) *DeleteNetworkProfileInput {
+	s.NetworkProfileArn = &v
+	return s
+}
+
+type DeleteNetworkProfileOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteNetworkProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteNetworkProfileOutput) GoString() string {
 	return s.String()
 }
 
@@ -9061,12 +13560,20 @@ type DeleteProfileInput struct {
 	ProfileArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProfileInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProfileInput) GoString() string {
 	return s.String()
 }
@@ -9081,12 +13588,20 @@ type DeleteProfileOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProfileOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProfileOutput) GoString() string {
 	return s.String()
 }
@@ -9098,12 +13613,20 @@ type DeleteRoomInput struct {
 	RoomArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRoomInput) GoString() string {
 	return s.String()
 }
@@ -9118,12 +13641,20 @@ type DeleteRoomOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRoomOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRoomOutput) GoString() string {
 	return s.String()
 }
@@ -9145,12 +13676,20 @@ type DeleteRoomSkillParameterInput struct {
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRoomSkillParameterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRoomSkillParameterInput) GoString() string {
 	return s.String()
 }
@@ -9196,12 +13735,20 @@ type DeleteRoomSkillParameterOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRoomSkillParameterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRoomSkillParameterOutput) GoString() string {
 	return s.String()
 }
@@ -9218,12 +13765,20 @@ type DeleteSkillAuthorizationInput struct {
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSkillAuthorizationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSkillAuthorizationInput) GoString() string {
 	return s.String()
 }
@@ -9257,12 +13812,20 @@ type DeleteSkillAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSkillAuthorizationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSkillAuthorizationOutput) GoString() string {
 	return s.String()
 }
@@ -9274,12 +13837,20 @@ type DeleteSkillGroupInput struct {
 	SkillGroupArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSkillGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSkillGroupInput) GoString() string {
 	return s.String()
 }
@@ -9294,12 +13865,20 @@ type DeleteSkillGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSkillGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSkillGroupOutput) GoString() string {
 	return s.String()
 }
@@ -9316,12 +13895,20 @@ type DeleteUserInput struct {
 	UserArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserInput) GoString() string {
 	return s.String()
 }
@@ -9355,12 +13942,20 @@ type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserOutput) GoString() string {
 	return s.String()
 }
@@ -9382,12 +13977,20 @@ type DeveloperInfo struct {
 	Url *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeveloperInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeveloperInfo) GoString() string {
 	return s.String()
 }
@@ -9442,6 +14045,9 @@ type Device struct {
 	// The MAC address of a device.
 	MacAddress *string `type:"string"`
 
+	// Detailed information about a device's network profile.
+	NetworkProfileInfo *DeviceNetworkProfileInfo `type:"structure"`
+
 	// The room ARN of a device.
 	RoomArn *string `type:"string"`
 
@@ -9449,12 +14055,20 @@ type Device struct {
 	SoftwareVersion *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Device) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Device) GoString() string {
 	return s.String()
 }
@@ -9501,6 +14115,12 @@ func (s *Device) SetMacAddress(v string) *Device {
 	return s
 }
 
+// SetNetworkProfileInfo sets the NetworkProfileInfo field's value.
+func (s *Device) SetNetworkProfileInfo(v *DeviceNetworkProfileInfo) *Device {
+	s.NetworkProfileInfo = v
+	return s
+}
+
 // SetRoomArn sets the RoomArn field's value.
 func (s *Device) SetRoomArn(v string) *Device {
 	s.RoomArn = &v
@@ -9516,6 +14136,9 @@ func (s *Device) SetSoftwareVersion(v string) *Device {
 // Device attributes.
 type DeviceData struct {
 	_ struct{} `type:"structure"`
+
+	// The time (in epoch) when the device data was created.
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The ARN of a device.
 	DeviceArn *string `type:"string"`
@@ -9538,6 +14161,12 @@ type DeviceData struct {
 	// The MAC address of a device.
 	MacAddress *string `type:"string"`
 
+	// The ARN of the network profile associated with a device.
+	NetworkProfileArn *string `type:"string"`
+
+	// The name of the network profile associated with a device.
+	NetworkProfileName *string `min:"1" type:"string"`
+
 	// The room ARN associated with a device.
 	RoomArn *string `type:"string"`
 
@@ -9548,14 +14177,28 @@ type DeviceData struct {
 	SoftwareVersion *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeviceData) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeviceData) GoString() string {
 	return s.String()
+}
+
+// SetCreatedTime sets the CreatedTime field's value.
+func (s *DeviceData) SetCreatedTime(v time.Time) *DeviceData {
+	s.CreatedTime = &v
+	return s
 }
 
 // SetDeviceArn sets the DeviceArn field's value.
@@ -9600,6 +14243,18 @@ func (s *DeviceData) SetMacAddress(v string) *DeviceData {
 	return s
 }
 
+// SetNetworkProfileArn sets the NetworkProfileArn field's value.
+func (s *DeviceData) SetNetworkProfileArn(v string) *DeviceData {
+	s.NetworkProfileArn = &v
+	return s
+}
+
+// SetNetworkProfileName sets the NetworkProfileName field's value.
+func (s *DeviceData) SetNetworkProfileName(v string) *DeviceData {
+	s.NetworkProfileName = &v
+	return s
+}
+
 // SetRoomArn sets the RoomArn field's value.
 func (s *DeviceData) SetRoomArn(v string) *DeviceData {
 	s.RoomArn = &v
@@ -9632,12 +14287,20 @@ type DeviceEvent struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeviceEvent) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeviceEvent) GoString() string {
 	return s.String()
 }
@@ -9660,20 +14323,146 @@ func (s *DeviceEvent) SetValue(v string) *DeviceEvent {
 	return s
 }
 
+// Detailed information about a device's network profile.
+type DeviceNetworkProfileInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the certificate associated with a device.
+	CertificateArn *string `type:"string"`
+
+	// The time (in epoch) when the certificate expires.
+	CertificateExpirationTime *time.Time `type:"timestamp"`
+
+	// The ARN of the network profile associated with a device.
+	NetworkProfileArn *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeviceNetworkProfileInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeviceNetworkProfileInfo) GoString() string {
+	return s.String()
+}
+
+// SetCertificateArn sets the CertificateArn field's value.
+func (s *DeviceNetworkProfileInfo) SetCertificateArn(v string) *DeviceNetworkProfileInfo {
+	s.CertificateArn = &v
+	return s
+}
+
+// SetCertificateExpirationTime sets the CertificateExpirationTime field's value.
+func (s *DeviceNetworkProfileInfo) SetCertificateExpirationTime(v time.Time) *DeviceNetworkProfileInfo {
+	s.CertificateExpirationTime = &v
+	return s
+}
+
+// SetNetworkProfileArn sets the NetworkProfileArn field's value.
+func (s *DeviceNetworkProfileInfo) SetNetworkProfileArn(v string) *DeviceNetworkProfileInfo {
+	s.NetworkProfileArn = &v
+	return s
+}
+
+// The request failed because this device is no longer registered and therefore
+// no longer managed by this account.
+type DeviceNotRegisteredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeviceNotRegisteredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeviceNotRegisteredException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeviceNotRegisteredException(v protocol.ResponseMetadata) error {
+	return &DeviceNotRegisteredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeviceNotRegisteredException) Code() string {
+	return "DeviceNotRegisteredException"
+}
+
+// Message returns the exception's message.
+func (s *DeviceNotRegisteredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeviceNotRegisteredException) OrigErr() error {
+	return nil
+}
+
+func (s *DeviceNotRegisteredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeviceNotRegisteredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeviceNotRegisteredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Details of a device’s status.
 type DeviceStatusDetail struct {
 	_ struct{} `type:"structure"`
 
 	// The device status detail code.
 	Code *string `type:"string" enum:"DeviceStatusDetailCode"`
+
+	// The list of available features on the device.
+	Feature *string `type:"string" enum:"Feature"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeviceStatusDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeviceStatusDetail) GoString() string {
 	return s.String()
 }
@@ -9684,6 +14473,12 @@ func (s *DeviceStatusDetail) SetCode(v string) *DeviceStatusDetail {
 	return s
 }
 
+// SetFeature sets the Feature field's value.
+func (s *DeviceStatusDetail) SetFeature(v string) *DeviceStatusDetail {
+	s.Feature = &v
+	return s
+}
+
 // Detailed information about a device's status.
 type DeviceStatusInfo struct {
 	_ struct{} `type:"structure"`
@@ -9691,16 +14486,27 @@ type DeviceStatusInfo struct {
 	// The latest available information about the connection status of a device.
 	ConnectionStatus *string `type:"string" enum:"ConnectionStatus"`
 
+	// The time (in epoch) when the device connection status changed.
+	ConnectionStatusUpdatedTime *time.Time `type:"timestamp"`
+
 	// One or more device status detail descriptions.
 	DeviceStatusDetails []*DeviceStatusDetail `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeviceStatusInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeviceStatusInfo) GoString() string {
 	return s.String()
 }
@@ -9708,6 +14514,12 @@ func (s DeviceStatusInfo) GoString() string {
 // SetConnectionStatus sets the ConnectionStatus field's value.
 func (s *DeviceStatusInfo) SetConnectionStatus(v string) *DeviceStatusInfo {
 	s.ConnectionStatus = &v
+	return s
+}
+
+// SetConnectionStatusUpdatedTime sets the ConnectionStatusUpdatedTime field's value.
+func (s *DeviceStatusInfo) SetConnectionStatusUpdatedTime(v time.Time) *DeviceStatusInfo {
+	s.ConnectionStatusUpdatedTime = &v
 	return s
 }
 
@@ -9731,12 +14543,20 @@ type DisassociateContactFromAddressBookInput struct {
 	ContactArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateContactFromAddressBookInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateContactFromAddressBookInput) GoString() string {
 	return s.String()
 }
@@ -9773,12 +14593,20 @@ type DisassociateContactFromAddressBookOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateContactFromAddressBookOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateContactFromAddressBookOutput) GoString() string {
 	return s.String()
 }
@@ -9790,12 +14618,20 @@ type DisassociateDeviceFromRoomInput struct {
 	DeviceArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDeviceFromRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDeviceFromRoomInput) GoString() string {
 	return s.String()
 }
@@ -9810,12 +14646,20 @@ type DisassociateDeviceFromRoomOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDeviceFromRoomOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDeviceFromRoomOutput) GoString() string {
 	return s.String()
 }
@@ -9832,12 +14676,20 @@ type DisassociateSkillFromSkillGroupInput struct {
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillFromSkillGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillFromSkillGroupInput) GoString() string {
 	return s.String()
 }
@@ -9871,12 +14723,20 @@ type DisassociateSkillFromSkillGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillFromSkillGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillFromSkillGroupOutput) GoString() string {
 	return s.String()
 }
@@ -9884,21 +14744,26 @@ func (s DisassociateSkillFromSkillGroupOutput) GoString() string {
 type DisassociateSkillFromUsersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the organization.
-	OrganizationArn *string `type:"string"`
-
 	// The private skill ID you want to make unavailable for enrolled users.
 	//
 	// SkillId is a required field
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillFromUsersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillFromUsersInput) GoString() string {
 	return s.String()
 }
@@ -9916,12 +14781,6 @@ func (s *DisassociateSkillFromUsersInput) Validate() error {
 	return nil
 }
 
-// SetOrganizationArn sets the OrganizationArn field's value.
-func (s *DisassociateSkillFromUsersInput) SetOrganizationArn(v string) *DisassociateSkillFromUsersInput {
-	s.OrganizationArn = &v
-	return s
-}
-
 // SetSkillId sets the SkillId field's value.
 func (s *DisassociateSkillFromUsersInput) SetSkillId(v string) *DisassociateSkillFromUsersInput {
 	s.SkillId = &v
@@ -9932,12 +14791,20 @@ type DisassociateSkillFromUsersOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillFromUsersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillFromUsersOutput) GoString() string {
 	return s.String()
 }
@@ -9952,12 +14819,20 @@ type DisassociateSkillGroupFromRoomInput struct {
 	SkillGroupArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillGroupFromRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillGroupFromRoomInput) GoString() string {
 	return s.String()
 }
@@ -9978,14 +14853,74 @@ type DisassociateSkillGroupFromRoomOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillGroupFromRoomOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateSkillGroupFromRoomOutput) GoString() string {
 	return s.String()
+}
+
+// Settings for the end of meeting reminder feature that are applied to a room
+// profile. The end of meeting reminder enables Alexa to remind users when a
+// meeting is ending.
+type EndOfMeetingReminder struct {
+	_ struct{} `type:"structure"`
+
+	// Whether an end of meeting reminder is enabled or not.
+	Enabled *bool `type:"boolean"`
+
+	// A range of 3 to 15 minutes that determines when the reminder begins.
+	ReminderAtMinutes []*int64 `min:"1" type:"list"`
+
+	// The type of sound that users hear during the end of meeting reminder.
+	ReminderType *string `type:"string" enum:"EndOfMeetingReminderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EndOfMeetingReminder) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EndOfMeetingReminder) GoString() string {
+	return s.String()
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *EndOfMeetingReminder) SetEnabled(v bool) *EndOfMeetingReminder {
+	s.Enabled = &v
+	return s
+}
+
+// SetReminderAtMinutes sets the ReminderAtMinutes field's value.
+func (s *EndOfMeetingReminder) SetReminderAtMinutes(v []*int64) *EndOfMeetingReminder {
+	s.ReminderAtMinutes = v
+	return s
+}
+
+// SetReminderType sets the ReminderType field's value.
+func (s *EndOfMeetingReminder) SetReminderType(v string) *EndOfMeetingReminder {
+	s.ReminderType = &v
+	return s
 }
 
 // A filter name and value pair that is used to return a more specific list
@@ -10004,12 +14939,20 @@ type Filter struct {
 	Values []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Filter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Filter) GoString() string {
 	return s.String()
 }
@@ -10054,12 +14997,20 @@ type ForgetSmartHomeAppliancesInput struct {
 	RoomArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ForgetSmartHomeAppliancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ForgetSmartHomeAppliancesInput) GoString() string {
 	return s.String()
 }
@@ -10087,14 +15038,260 @@ type ForgetSmartHomeAppliancesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ForgetSmartHomeAppliancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ForgetSmartHomeAppliancesOutput) GoString() string {
 	return s.String()
+}
+
+// The details of the gateway.
+type Gateway struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway.
+	Arn *string `type:"string"`
+
+	// The description of the gateway.
+	Description *string `type:"string"`
+
+	// The ARN of the gateway group that the gateway is associated to.
+	GatewayGroupArn *string `type:"string"`
+
+	// The name of the gateway.
+	Name *string `min:"1" type:"string"`
+
+	// The software version of the gateway. The gateway automatically updates its
+	// software version during normal operation.
+	SoftwareVersion *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Gateway) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Gateway) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *Gateway) SetArn(v string) *Gateway {
+	s.Arn = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *Gateway) SetDescription(v string) *Gateway {
+	s.Description = &v
+	return s
+}
+
+// SetGatewayGroupArn sets the GatewayGroupArn field's value.
+func (s *Gateway) SetGatewayGroupArn(v string) *Gateway {
+	s.GatewayGroupArn = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *Gateway) SetName(v string) *Gateway {
+	s.Name = &v
+	return s
+}
+
+// SetSoftwareVersion sets the SoftwareVersion field's value.
+func (s *Gateway) SetSoftwareVersion(v string) *Gateway {
+	s.SoftwareVersion = &v
+	return s
+}
+
+// The details of the gateway group.
+type GatewayGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway group.
+	Arn *string `type:"string"`
+
+	// The description of the gateway group.
+	Description *string `type:"string"`
+
+	// The name of the gateway group.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GatewayGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GatewayGroup) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *GatewayGroup) SetArn(v string) *GatewayGroup {
+	s.Arn = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *GatewayGroup) SetDescription(v string) *GatewayGroup {
+	s.Description = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *GatewayGroup) SetName(v string) *GatewayGroup {
+	s.Name = &v
+	return s
+}
+
+// The summary of a gateway group.
+type GatewayGroupSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway group.
+	Arn *string `type:"string"`
+
+	// The description of the gateway group.
+	Description *string `type:"string"`
+
+	// The name of the gateway group.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GatewayGroupSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GatewayGroupSummary) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *GatewayGroupSummary) SetArn(v string) *GatewayGroupSummary {
+	s.Arn = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *GatewayGroupSummary) SetDescription(v string) *GatewayGroupSummary {
+	s.Description = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *GatewayGroupSummary) SetName(v string) *GatewayGroupSummary {
+	s.Name = &v
+	return s
+}
+
+// The summary of a gateway.
+type GatewaySummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway.
+	Arn *string `type:"string"`
+
+	// The description of the gateway.
+	Description *string `type:"string"`
+
+	// The ARN of the gateway group that the gateway is associated to.
+	GatewayGroupArn *string `type:"string"`
+
+	// The name of the gateway.
+	Name *string `min:"1" type:"string"`
+
+	// The software version of the gateway. The gateway automatically updates its
+	// software version during normal operation.
+	SoftwareVersion *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GatewaySummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GatewaySummary) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *GatewaySummary) SetArn(v string) *GatewaySummary {
+	s.Arn = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *GatewaySummary) SetDescription(v string) *GatewaySummary {
+	s.Description = &v
+	return s
+}
+
+// SetGatewayGroupArn sets the GatewayGroupArn field's value.
+func (s *GatewaySummary) SetGatewayGroupArn(v string) *GatewaySummary {
+	s.GatewayGroupArn = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *GatewaySummary) SetName(v string) *GatewaySummary {
+	s.Name = &v
+	return s
+}
+
+// SetSoftwareVersion sets the SoftwareVersion field's value.
+func (s *GatewaySummary) SetSoftwareVersion(v string) *GatewaySummary {
+	s.SoftwareVersion = &v
+	return s
 }
 
 type GetAddressBookInput struct {
@@ -10106,12 +15303,20 @@ type GetAddressBookInput struct {
 	AddressBookArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAddressBookInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAddressBookInput) GoString() string {
 	return s.String()
 }
@@ -10142,12 +15347,20 @@ type GetAddressBookOutput struct {
 	AddressBook *AddressBook `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAddressBookOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAddressBookOutput) GoString() string {
 	return s.String()
 }
@@ -10162,12 +15375,20 @@ type GetConferencePreferenceInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConferencePreferenceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConferencePreferenceInput) GoString() string {
 	return s.String()
 }
@@ -10179,12 +15400,20 @@ type GetConferencePreferenceOutput struct {
 	Preference *ConferencePreference `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConferencePreferenceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConferencePreferenceOutput) GoString() string {
 	return s.String()
 }
@@ -10204,12 +15433,20 @@ type GetConferenceProviderInput struct {
 	ConferenceProviderArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConferenceProviderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConferenceProviderInput) GoString() string {
 	return s.String()
 }
@@ -10240,12 +15477,20 @@ type GetConferenceProviderOutput struct {
 	ConferenceProvider *ConferenceProvider `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConferenceProviderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConferenceProviderOutput) GoString() string {
 	return s.String()
 }
@@ -10265,12 +15510,20 @@ type GetContactInput struct {
 	ContactArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetContactInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetContactInput) GoString() string {
 	return s.String()
 }
@@ -10301,12 +15554,20 @@ type GetContactOutput struct {
 	Contact *Contact `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetContactOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetContactOutput) GoString() string {
 	return s.String()
 }
@@ -10324,12 +15585,20 @@ type GetDeviceInput struct {
 	DeviceArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeviceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeviceInput) GoString() string {
 	return s.String()
 }
@@ -10347,12 +15616,20 @@ type GetDeviceOutput struct {
 	Device *Device `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeviceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeviceOutput) GoString() string {
 	return s.String()
 }
@@ -10363,6 +15640,310 @@ func (s *GetDeviceOutput) SetDevice(v *Device) *GetDeviceOutput {
 	return s
 }
 
+type GetGatewayGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway group to get.
+	//
+	// GatewayGroupArn is a required field
+	GatewayGroupArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetGatewayGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetGatewayGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetGatewayGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetGatewayGroupInput"}
+	if s.GatewayGroupArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("GatewayGroupArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetGatewayGroupArn sets the GatewayGroupArn field's value.
+func (s *GetGatewayGroupInput) SetGatewayGroupArn(v string) *GetGatewayGroupInput {
+	s.GatewayGroupArn = &v
+	return s
+}
+
+type GetGatewayGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The details of the gateway group.
+	GatewayGroup *GatewayGroup `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetGatewayGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetGatewayGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetGatewayGroup sets the GatewayGroup field's value.
+func (s *GetGatewayGroupOutput) SetGatewayGroup(v *GatewayGroup) *GetGatewayGroupOutput {
+	s.GatewayGroup = v
+	return s
+}
+
+type GetGatewayInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway to get.
+	//
+	// GatewayArn is a required field
+	GatewayArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetGatewayInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetGatewayInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetGatewayInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetGatewayInput"}
+	if s.GatewayArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("GatewayArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetGatewayArn sets the GatewayArn field's value.
+func (s *GetGatewayInput) SetGatewayArn(v string) *GetGatewayInput {
+	s.GatewayArn = &v
+	return s
+}
+
+type GetGatewayOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The details of the gateway.
+	Gateway *Gateway `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetGatewayOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetGatewayOutput) GoString() string {
+	return s.String()
+}
+
+// SetGateway sets the Gateway field's value.
+func (s *GetGatewayOutput) SetGateway(v *Gateway) *GetGatewayOutput {
+	s.Gateway = v
+	return s
+}
+
+type GetInvitationConfigurationInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInvitationConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInvitationConfigurationInput) GoString() string {
+	return s.String()
+}
+
+type GetInvitationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The email ID of the organization or individual contact that the enrolled
+	// user can use.
+	ContactEmail *string `min:"1" type:"string"`
+
+	// The name of the organization sending the enrollment invite to a user.
+	OrganizationName *string `min:"1" type:"string"`
+
+	// The list of private skill IDs that you want to recommend to the user to enable
+	// in the invitation.
+	PrivateSkillIds []*string `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInvitationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInvitationConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SetContactEmail sets the ContactEmail field's value.
+func (s *GetInvitationConfigurationOutput) SetContactEmail(v string) *GetInvitationConfigurationOutput {
+	s.ContactEmail = &v
+	return s
+}
+
+// SetOrganizationName sets the OrganizationName field's value.
+func (s *GetInvitationConfigurationOutput) SetOrganizationName(v string) *GetInvitationConfigurationOutput {
+	s.OrganizationName = &v
+	return s
+}
+
+// SetPrivateSkillIds sets the PrivateSkillIds field's value.
+func (s *GetInvitationConfigurationOutput) SetPrivateSkillIds(v []*string) *GetInvitationConfigurationOutput {
+	s.PrivateSkillIds = v
+	return s
+}
+
+type GetNetworkProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the network profile associated with a device.
+	//
+	// NetworkProfileArn is a required field
+	NetworkProfileArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetNetworkProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetNetworkProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetNetworkProfileInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetNetworkProfileInput"}
+	if s.NetworkProfileArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("NetworkProfileArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetNetworkProfileArn sets the NetworkProfileArn field's value.
+func (s *GetNetworkProfileInput) SetNetworkProfileArn(v string) *GetNetworkProfileInput {
+	s.NetworkProfileArn = &v
+	return s
+}
+
+type GetNetworkProfileOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The network profile associated with a device.
+	NetworkProfile *NetworkProfile `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetNetworkProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetNetworkProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SetNetworkProfile sets the NetworkProfile field's value.
+func (s *GetNetworkProfileOutput) SetNetworkProfile(v *NetworkProfile) *GetNetworkProfileOutput {
+	s.NetworkProfile = v
+	return s
+}
+
 type GetProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10370,12 +15951,20 @@ type GetProfileInput struct {
 	ProfileArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetProfileInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetProfileInput) GoString() string {
 	return s.String()
 }
@@ -10393,12 +15982,20 @@ type GetProfileOutput struct {
 	Profile *Profile `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetProfileOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetProfileOutput) GoString() string {
 	return s.String()
 }
@@ -10416,12 +16013,20 @@ type GetRoomInput struct {
 	RoomArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRoomInput) GoString() string {
 	return s.String()
 }
@@ -10439,12 +16044,20 @@ type GetRoomOutput struct {
 	Room *Room `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRoomOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRoomOutput) GoString() string {
 	return s.String()
 }
@@ -10473,12 +16086,20 @@ type GetRoomSkillParameterInput struct {
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRoomSkillParameterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRoomSkillParameterInput) GoString() string {
 	return s.String()
 }
@@ -10527,12 +16148,20 @@ type GetRoomSkillParameterOutput struct {
 	RoomSkillParameter *RoomSkillParameter `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRoomSkillParameterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRoomSkillParameterOutput) GoString() string {
 	return s.String()
 }
@@ -10550,12 +16179,20 @@ type GetSkillGroupInput struct {
 	SkillGroupArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSkillGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSkillGroupInput) GoString() string {
 	return s.String()
 }
@@ -10573,12 +16210,20 @@ type GetSkillGroupOutput struct {
 	SkillGroup *SkillGroup `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSkillGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSkillGroupOutput) GoString() string {
 	return s.String()
 }
@@ -10604,12 +16249,20 @@ type IPDialIn struct {
 	Endpoint *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IPDialIn) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IPDialIn) GoString() string {
 	return s.String()
 }
@@ -10645,6 +16298,434 @@ func (s *IPDialIn) SetEndpoint(v string) *IPDialIn {
 	return s
 }
 
+// Settings for the instant booking feature that are applied to a room profile.
+// When users start their meeting with Alexa, Alexa automatically books the
+// room for the configured duration if the room is available.
+type InstantBooking struct {
+	_ struct{} `type:"structure"`
+
+	// Duration between 15 and 240 minutes at increments of 15 that determines how
+	// long to book an available room when a meeting is started with Alexa.
+	DurationInMinutes *int64 `type:"integer"`
+
+	// Whether instant booking is enabled or not.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstantBooking) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstantBooking) GoString() string {
+	return s.String()
+}
+
+// SetDurationInMinutes sets the DurationInMinutes field's value.
+func (s *InstantBooking) SetDurationInMinutes(v int64) *InstantBooking {
+	s.DurationInMinutes = &v
+	return s
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *InstantBooking) SetEnabled(v bool) *InstantBooking {
+	s.Enabled = &v
+	return s
+}
+
+// The Certificate Authority can't issue or revoke a certificate.
+type InvalidCertificateAuthorityException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCertificateAuthorityException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCertificateAuthorityException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidCertificateAuthorityException(v protocol.ResponseMetadata) error {
+	return &InvalidCertificateAuthorityException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidCertificateAuthorityException) Code() string {
+	return "InvalidCertificateAuthorityException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidCertificateAuthorityException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidCertificateAuthorityException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidCertificateAuthorityException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidCertificateAuthorityException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidCertificateAuthorityException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The device is in an invalid state.
+type InvalidDeviceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeviceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeviceException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeviceException(v protocol.ResponseMetadata) error {
+	return &InvalidDeviceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeviceException) Code() string {
+	return "InvalidDeviceException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeviceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeviceException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeviceException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeviceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeviceException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A password in SecretsManager is in an invalid state.
+type InvalidSecretsManagerResourceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSecretsManagerResourceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSecretsManagerResourceException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidSecretsManagerResourceException(v protocol.ResponseMetadata) error {
+	return &InvalidSecretsManagerResourceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidSecretsManagerResourceException) Code() string {
+	return "InvalidSecretsManagerResourceException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidSecretsManagerResourceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidSecretsManagerResourceException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidSecretsManagerResourceException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidSecretsManagerResourceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidSecretsManagerResourceException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The service linked role is locked for deletion.
+type InvalidServiceLinkedRoleStateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidServiceLinkedRoleStateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidServiceLinkedRoleStateException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidServiceLinkedRoleStateException(v protocol.ResponseMetadata) error {
+	return &InvalidServiceLinkedRoleStateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidServiceLinkedRoleStateException) Code() string {
+	return "InvalidServiceLinkedRoleStateException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidServiceLinkedRoleStateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidServiceLinkedRoleStateException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidServiceLinkedRoleStateException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidServiceLinkedRoleStateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidServiceLinkedRoleStateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The attempt to update a user is invalid due to the user's current status.
+type InvalidUserStatusException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidUserStatusException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidUserStatusException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidUserStatusException(v protocol.ResponseMetadata) error {
+	return &InvalidUserStatusException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidUserStatusException) Code() string {
+	return "InvalidUserStatusException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidUserStatusException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidUserStatusException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidUserStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidUserStatusException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidUserStatusException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// You are performing an action that would put you beyond your account's limits.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListBusinessReportSchedulesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10655,12 +16736,20 @@ type ListBusinessReportSchedulesInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBusinessReportSchedulesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBusinessReportSchedulesInput) GoString() string {
 	return s.String()
 }
@@ -10703,12 +16792,20 @@ type ListBusinessReportSchedulesOutput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBusinessReportSchedulesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBusinessReportSchedulesOutput) GoString() string {
 	return s.String()
 }
@@ -10736,12 +16833,20 @@ type ListConferenceProvidersInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConferenceProvidersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConferenceProvidersInput) GoString() string {
 	return s.String()
 }
@@ -10784,12 +16889,20 @@ type ListConferenceProvidersOutput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConferenceProvidersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConferenceProvidersOutput) GoString() string {
 	return s.String()
 }
@@ -10832,12 +16945,20 @@ type ListDeviceEventsInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeviceEventsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeviceEventsInput) GoString() string {
 	return s.String()
 }
@@ -10895,12 +17016,20 @@ type ListDeviceEventsOutput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeviceEventsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeviceEventsOutput) GoString() string {
 	return s.String()
 }
@@ -10917,11 +17046,211 @@ func (s *ListDeviceEventsOutput) SetNextToken(v string) *ListDeviceEventsOutput 
 	return s
 }
 
+type ListGatewayGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of gateway group summaries to return. The default is 50.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token used to paginate though multiple pages of gateway group summaries.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListGatewayGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListGatewayGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListGatewayGroupsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListGatewayGroupsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListGatewayGroupsInput) SetMaxResults(v int64) *ListGatewayGroupsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListGatewayGroupsInput) SetNextToken(v string) *ListGatewayGroupsInput {
+	s.NextToken = &v
+	return s
+}
+
+type ListGatewayGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The gateway groups in the list.
+	GatewayGroups []*GatewayGroupSummary `type:"list"`
+
+	// The token used to paginate though multiple pages of gateway group summaries.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListGatewayGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListGatewayGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SetGatewayGroups sets the GatewayGroups field's value.
+func (s *ListGatewayGroupsOutput) SetGatewayGroups(v []*GatewayGroupSummary) *ListGatewayGroupsOutput {
+	s.GatewayGroups = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListGatewayGroupsOutput) SetNextToken(v string) *ListGatewayGroupsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type ListGatewaysInput struct {
+	_ struct{} `type:"structure"`
+
+	// The gateway group ARN for which to list gateways.
+	GatewayGroupArn *string `type:"string"`
+
+	// The maximum number of gateway summaries to return. The default is 50.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token used to paginate though multiple pages of gateway summaries.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListGatewaysInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListGatewaysInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListGatewaysInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListGatewaysInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetGatewayGroupArn sets the GatewayGroupArn field's value.
+func (s *ListGatewaysInput) SetGatewayGroupArn(v string) *ListGatewaysInput {
+	s.GatewayGroupArn = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListGatewaysInput) SetMaxResults(v int64) *ListGatewaysInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListGatewaysInput) SetNextToken(v string) *ListGatewaysInput {
+	s.NextToken = &v
+	return s
+}
+
+type ListGatewaysOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The gateways in the list.
+	Gateways []*GatewaySummary `type:"list"`
+
+	// The token used to paginate though multiple pages of gateway summaries.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListGatewaysOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListGatewaysOutput) GoString() string {
+	return s.String()
+}
+
+// SetGateways sets the Gateways field's value.
+func (s *ListGatewaysOutput) SetGateways(v []*GatewaySummary) *ListGatewaysOutput {
+	s.Gateways = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListGatewaysOutput) SetNextToken(v string) *ListGatewaysOutput {
+	s.NextToken = &v
+	return s
+}
+
 type ListSkillsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Whether the skill is enabled under the user's account, or if it requires
-	// linking to be used.
+	// Whether the skill is enabled under the user's account.
 	EnablementType *string `type:"string" enum:"EnablementTypeFilter"`
 
 	// The maximum number of results to include in the response. If more results
@@ -10941,12 +17270,20 @@ type ListSkillsInput struct {
 	SkillType *string `type:"string" enum:"SkillTypeFilter"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsInput) GoString() string {
 	return s.String()
 }
@@ -11007,12 +17344,20 @@ type ListSkillsOutput struct {
 	SkillSummaries []*SkillSummary `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsOutput) GoString() string {
 	return s.String()
 }
@@ -11039,12 +17384,20 @@ type ListSkillsStoreCategoriesInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsStoreCategoriesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsStoreCategoriesInput) GoString() string {
 	return s.String()
 }
@@ -11087,12 +17440,20 @@ type ListSkillsStoreCategoriesOutput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsStoreCategoriesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsStoreCategoriesOutput) GoString() string {
 	return s.String()
 }
@@ -11124,12 +17485,20 @@ type ListSkillsStoreSkillsByCategoryInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsStoreSkillsByCategoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsStoreSkillsByCategoryInput) GoString() string {
 	return s.String()
 }
@@ -11184,12 +17553,20 @@ type ListSkillsStoreSkillsByCategoryOutput struct {
 	SkillsStoreSkills []*SkillsStoreSkill `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsStoreSkillsByCategoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSkillsStoreSkillsByCategoryOutput) GoString() string {
 	return s.String()
 }
@@ -11221,12 +17598,20 @@ type ListSmartHomeAppliancesInput struct {
 	RoomArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSmartHomeAppliancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSmartHomeAppliancesInput) GoString() string {
 	return s.String()
 }
@@ -11278,12 +17663,20 @@ type ListSmartHomeAppliancesOutput struct {
 	SmartHomeAppliances []*SmartHomeAppliance `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSmartHomeAppliancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSmartHomeAppliancesOutput) GoString() string {
 	return s.String()
 }
@@ -11319,12 +17712,20 @@ type ListTagsInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsInput) GoString() string {
 	return s.String()
 }
@@ -11376,12 +17777,20 @@ type ListTagsOutput struct {
 	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsOutput) GoString() string {
 	return s.String()
 }
@@ -11398,15 +17807,88 @@ func (s *ListTagsOutput) SetTags(v []*Tag) *ListTagsOutput {
 	return s
 }
 
+// Meeting room settings of a room profile.
+type MeetingRoomConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Settings for the end of meeting reminder feature that are applied to a room
+	// profile. The end of meeting reminder enables Alexa to remind users when a
+	// meeting is ending.
+	EndOfMeetingReminder *EndOfMeetingReminder `type:"structure"`
+
+	// Settings to automatically book the room if available for a configured duration
+	// when joining a meeting with Alexa.
+	InstantBooking *InstantBooking `type:"structure"`
+
+	ProactiveJoin *ProactiveJoin `type:"structure"`
+
+	// Settings for requiring a check in when a room is reserved. Alexa can cancel
+	// a room reservation if it's not checked into. This makes the room available
+	// for others. Users can check in by joining the meeting with Alexa or an AVS
+	// device, or by saying “Alexa, check in.”
+	RequireCheckIn *RequireCheckIn `type:"structure"`
+
+	// Whether room utilization metrics are enabled or not.
+	RoomUtilizationMetricsEnabled *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MeetingRoomConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MeetingRoomConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetEndOfMeetingReminder sets the EndOfMeetingReminder field's value.
+func (s *MeetingRoomConfiguration) SetEndOfMeetingReminder(v *EndOfMeetingReminder) *MeetingRoomConfiguration {
+	s.EndOfMeetingReminder = v
+	return s
+}
+
+// SetInstantBooking sets the InstantBooking field's value.
+func (s *MeetingRoomConfiguration) SetInstantBooking(v *InstantBooking) *MeetingRoomConfiguration {
+	s.InstantBooking = v
+	return s
+}
+
+// SetProactiveJoin sets the ProactiveJoin field's value.
+func (s *MeetingRoomConfiguration) SetProactiveJoin(v *ProactiveJoin) *MeetingRoomConfiguration {
+	s.ProactiveJoin = v
+	return s
+}
+
+// SetRequireCheckIn sets the RequireCheckIn field's value.
+func (s *MeetingRoomConfiguration) SetRequireCheckIn(v *RequireCheckIn) *MeetingRoomConfiguration {
+	s.RequireCheckIn = v
+	return s
+}
+
+// SetRoomUtilizationMetricsEnabled sets the RoomUtilizationMetricsEnabled field's value.
+func (s *MeetingRoomConfiguration) SetRoomUtilizationMetricsEnabled(v bool) *MeetingRoomConfiguration {
+	s.RoomUtilizationMetricsEnabled = &v
+	return s
+}
+
 // The values that indicate whether a pin is always required (YES), never required
 // (NO), or OPTIONAL.
 //
-//    * If YES, Alexa will always ask for a meeting pin.
+//   - If YES, Alexa will always ask for a meeting pin.
 //
-//    * If NO, Alexa will never ask for a meeting pin.
+//   - If NO, Alexa will never ask for a meeting pin.
 //
-//    * If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer
-//    responds with yes, it will ask for the meeting pin.
+//   - If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer
+//     responds with yes, it will ask for the meeting pin.
 type MeetingSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -11416,12 +17898,20 @@ type MeetingSetting struct {
 	RequirePin *string `type:"string" required:"true" enum:"RequirePin"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MeetingSetting) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MeetingSetting) GoString() string {
 	return s.String()
 }
@@ -11443,6 +17933,350 @@ func (s *MeetingSetting) Validate() error {
 func (s *MeetingSetting) SetRequirePin(v string) *MeetingSetting {
 	s.RequirePin = &v
 	return s
+}
+
+// The name sent in the request is already in use.
+type NameInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NameInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NameInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorNameInUseException(v protocol.ResponseMetadata) error {
+	return &NameInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NameInUseException) Code() string {
+	return "NameInUseException"
+}
+
+// Message returns the exception's message.
+func (s *NameInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NameInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *NameInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NameInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NameInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The network profile associated with a device.
+type NetworkProfile struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the Private Certificate Authority (PCA) created in AWS Certificate
+	// Manager (ACM). This is used to issue certificates to the devices.
+	CertificateAuthorityArn *string `type:"string"`
+
+	// The current password of the Wi-Fi network.
+	//
+	// CurrentPassword is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by NetworkProfile's
+	// String and GoString methods.
+	CurrentPassword *string `min:"5" type:"string" sensitive:"true"`
+
+	// Detailed information about a device's network profile.
+	Description *string `type:"string"`
+
+	// The authentication standard that is used in the EAP framework. Currently,
+	// EAP_TLS is supported.
+	EapMethod *string `type:"string" enum:"NetworkEapMethod"`
+
+	// The ARN of the network profile associated with a device.
+	NetworkProfileArn *string `type:"string"`
+
+	// The name of the network profile associated with a device.
+	NetworkProfileName *string `min:"1" type:"string"`
+
+	// The next, or subsequent, password of the Wi-Fi network. This password is
+	// asynchronously transmitted to the device and is used when the password of
+	// the network changes to NextPassword.
+	//
+	// NextPassword is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by NetworkProfile's
+	// String and GoString methods.
+	NextPassword *string `type:"string" sensitive:"true"`
+
+	// The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK,
+	// WPA_PSK, WEP, or OPEN.
+	SecurityType *string `type:"string" enum:"NetworkSecurityType"`
+
+	// The SSID of the Wi-Fi network.
+	Ssid *string `min:"1" type:"string"`
+
+	// The root certificates of your authentication server, which is installed on
+	// your devices and used to trust your authentication server during EAP negotiation.
+	TrustAnchors []*string `min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NetworkProfile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NetworkProfile) GoString() string {
+	return s.String()
+}
+
+// SetCertificateAuthorityArn sets the CertificateAuthorityArn field's value.
+func (s *NetworkProfile) SetCertificateAuthorityArn(v string) *NetworkProfile {
+	s.CertificateAuthorityArn = &v
+	return s
+}
+
+// SetCurrentPassword sets the CurrentPassword field's value.
+func (s *NetworkProfile) SetCurrentPassword(v string) *NetworkProfile {
+	s.CurrentPassword = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *NetworkProfile) SetDescription(v string) *NetworkProfile {
+	s.Description = &v
+	return s
+}
+
+// SetEapMethod sets the EapMethod field's value.
+func (s *NetworkProfile) SetEapMethod(v string) *NetworkProfile {
+	s.EapMethod = &v
+	return s
+}
+
+// SetNetworkProfileArn sets the NetworkProfileArn field's value.
+func (s *NetworkProfile) SetNetworkProfileArn(v string) *NetworkProfile {
+	s.NetworkProfileArn = &v
+	return s
+}
+
+// SetNetworkProfileName sets the NetworkProfileName field's value.
+func (s *NetworkProfile) SetNetworkProfileName(v string) *NetworkProfile {
+	s.NetworkProfileName = &v
+	return s
+}
+
+// SetNextPassword sets the NextPassword field's value.
+func (s *NetworkProfile) SetNextPassword(v string) *NetworkProfile {
+	s.NextPassword = &v
+	return s
+}
+
+// SetSecurityType sets the SecurityType field's value.
+func (s *NetworkProfile) SetSecurityType(v string) *NetworkProfile {
+	s.SecurityType = &v
+	return s
+}
+
+// SetSsid sets the Ssid field's value.
+func (s *NetworkProfile) SetSsid(v string) *NetworkProfile {
+	s.Ssid = &v
+	return s
+}
+
+// SetTrustAnchors sets the TrustAnchors field's value.
+func (s *NetworkProfile) SetTrustAnchors(v []*string) *NetworkProfile {
+	s.TrustAnchors = v
+	return s
+}
+
+// The data associated with a network profile.
+type NetworkProfileData struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the Private Certificate Authority (PCA) created in AWS Certificate
+	// Manager (ACM). This is used to issue certificates to the devices.
+	CertificateAuthorityArn *string `type:"string"`
+
+	// Detailed information about a device's network profile.
+	Description *string `type:"string"`
+
+	// The authentication standard that is used in the EAP framework. Currently,
+	// EAP_TLS is supported.
+	EapMethod *string `type:"string" enum:"NetworkEapMethod"`
+
+	// The ARN of the network profile associated with a device.
+	NetworkProfileArn *string `type:"string"`
+
+	// The name of the network profile associated with a device.
+	NetworkProfileName *string `min:"1" type:"string"`
+
+	// The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK,
+	// WPA_PSK, WEP, or OPEN.
+	SecurityType *string `type:"string" enum:"NetworkSecurityType"`
+
+	// The SSID of the Wi-Fi network.
+	Ssid *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NetworkProfileData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NetworkProfileData) GoString() string {
+	return s.String()
+}
+
+// SetCertificateAuthorityArn sets the CertificateAuthorityArn field's value.
+func (s *NetworkProfileData) SetCertificateAuthorityArn(v string) *NetworkProfileData {
+	s.CertificateAuthorityArn = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *NetworkProfileData) SetDescription(v string) *NetworkProfileData {
+	s.Description = &v
+	return s
+}
+
+// SetEapMethod sets the EapMethod field's value.
+func (s *NetworkProfileData) SetEapMethod(v string) *NetworkProfileData {
+	s.EapMethod = &v
+	return s
+}
+
+// SetNetworkProfileArn sets the NetworkProfileArn field's value.
+func (s *NetworkProfileData) SetNetworkProfileArn(v string) *NetworkProfileData {
+	s.NetworkProfileArn = &v
+	return s
+}
+
+// SetNetworkProfileName sets the NetworkProfileName field's value.
+func (s *NetworkProfileData) SetNetworkProfileName(v string) *NetworkProfileData {
+	s.NetworkProfileName = &v
+	return s
+}
+
+// SetSecurityType sets the SecurityType field's value.
+func (s *NetworkProfileData) SetSecurityType(v string) *NetworkProfileData {
+	s.SecurityType = &v
+	return s
+}
+
+// SetSsid sets the Ssid field's value.
+func (s *NetworkProfileData) SetSsid(v string) *NetworkProfileData {
+	s.Ssid = &v
+	return s
+}
+
+// The resource is not found.
+type NotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorNotFoundException(v protocol.ResponseMetadata) error {
+	return &NotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NotFoundException) Code() string {
+	return "NotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *NotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *NotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // The information for public switched telephone network (PSTN) conferencing.
@@ -11474,12 +18308,20 @@ type PSTNDialIn struct {
 	PhoneNumber *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PSTNDialIn) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PSTNDialIn) GoString() string {
 	return s.String()
 }
@@ -11536,6 +18378,106 @@ func (s *PSTNDialIn) SetPhoneNumber(v string) *PSTNDialIn {
 	return s
 }
 
+// The phone number for the contact containing the raw number and phone number
+// type.
+type PhoneNumber struct {
+	_ struct{} `type:"structure"`
+
+	// The raw value of the phone number.
+	//
+	// Number is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PhoneNumber's
+	// String and GoString methods.
+	//
+	// Number is a required field
+	Number *string `type:"string" required:"true" sensitive:"true"`
+
+	// The type of the phone number.
+	//
+	// Type is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PhoneNumber's
+	// String and GoString methods.
+	//
+	// Type is a required field
+	Type *string `type:"string" required:"true" enum:"PhoneNumberType" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PhoneNumber) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PhoneNumber) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PhoneNumber) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PhoneNumber"}
+	if s.Number == nil {
+		invalidParams.Add(request.NewErrParamRequired("Number"))
+	}
+	if s.Type == nil {
+		invalidParams.Add(request.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetNumber sets the Number field's value.
+func (s *PhoneNumber) SetNumber(v string) *PhoneNumber {
+	s.Number = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *PhoneNumber) SetType(v string) *PhoneNumber {
+	s.Type = &v
+	return s
+}
+
+type ProactiveJoin struct {
+	_ struct{} `type:"structure"`
+
+	EnabledByMotion *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProactiveJoin) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProactiveJoin) GoString() string {
+	return s.String()
+}
+
+// SetEnabledByMotion sets the EnabledByMotion field's value.
+func (s *ProactiveJoin) SetEnabledByMotion(v bool) *ProactiveJoin {
+	s.EnabledByMotion = &v
+	return s
+}
+
 // A room profile with attributes.
 type Profile struct {
 	_ struct{} `type:"structure"`
@@ -11546,14 +18488,24 @@ type Profile struct {
 	// The ARN of the address book.
 	AddressBookArn *string `type:"string"`
 
+	// Whether data retention of the profile is enabled.
+	DataRetentionOptIn *bool `type:"boolean"`
+
 	// The distance unit of a room profile.
 	DistanceUnit *string `type:"string" enum:"DistanceUnit"`
 
 	// Retrieves if the profile is default or not.
 	IsDefault *bool `type:"boolean"`
 
+	// The locale of a room profile. (This is currently available only to a limited
+	// preview audience.)
+	Locale *string `min:"1" type:"string"`
+
 	// The max volume limit of a room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
+
+	// Meeting room settings of a room profile.
+	MeetingRoomConfiguration *MeetingRoomConfiguration `type:"structure"`
 
 	// The PSTN setting of a room profile.
 	PSTNEnabled *bool `type:"boolean"`
@@ -11577,12 +18529,20 @@ type Profile struct {
 	WakeWord *string `type:"string" enum:"WakeWord"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Profile) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Profile) GoString() string {
 	return s.String()
 }
@@ -11599,6 +18559,12 @@ func (s *Profile) SetAddressBookArn(v string) *Profile {
 	return s
 }
 
+// SetDataRetentionOptIn sets the DataRetentionOptIn field's value.
+func (s *Profile) SetDataRetentionOptIn(v bool) *Profile {
+	s.DataRetentionOptIn = &v
+	return s
+}
+
 // SetDistanceUnit sets the DistanceUnit field's value.
 func (s *Profile) SetDistanceUnit(v string) *Profile {
 	s.DistanceUnit = &v
@@ -11611,9 +18577,21 @@ func (s *Profile) SetIsDefault(v bool) *Profile {
 	return s
 }
 
+// SetLocale sets the Locale field's value.
+func (s *Profile) SetLocale(v string) *Profile {
+	s.Locale = &v
+	return s
+}
+
 // SetMaxVolumeLimit sets the MaxVolumeLimit field's value.
 func (s *Profile) SetMaxVolumeLimit(v int64) *Profile {
 	s.MaxVolumeLimit = &v
+	return s
+}
+
+// SetMeetingRoomConfiguration sets the MeetingRoomConfiguration field's value.
+func (s *Profile) SetMeetingRoomConfiguration(v *MeetingRoomConfiguration) *Profile {
+	s.MeetingRoomConfiguration = v
 	return s
 }
 
@@ -11672,6 +18650,10 @@ type ProfileData struct {
 	// Retrieves if the profile data is default or not.
 	IsDefault *bool `type:"boolean"`
 
+	// The locale of a room profile. (This is currently available only to a limited
+	// preview audience.)
+	Locale *string `min:"1" type:"string"`
+
 	// The ARN of a room profile.
 	ProfileArn *string `type:"string"`
 
@@ -11681,19 +18663,27 @@ type ProfileData struct {
 	// The temperature unit of a room profile.
 	TemperatureUnit *string `type:"string" enum:"TemperatureUnit"`
 
-	// The timezone of a room profile.
+	// The time zone of a room profile.
 	Timezone *string `min:"1" type:"string"`
 
 	// The wake word of a room profile.
 	WakeWord *string `type:"string" enum:"WakeWord"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProfileData) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProfileData) GoString() string {
 	return s.String()
 }
@@ -11713,6 +18703,12 @@ func (s *ProfileData) SetDistanceUnit(v string) *ProfileData {
 // SetIsDefault sets the IsDefault field's value.
 func (s *ProfileData) SetIsDefault(v bool) *ProfileData {
 	s.IsDefault = &v
+	return s
+}
+
+// SetLocale sets the Locale field's value.
+func (s *ProfileData) SetLocale(v string) *ProfileData {
+	s.Locale = &v
 	return s
 }
 
@@ -11755,12 +18751,20 @@ type PutConferencePreferenceInput struct {
 	ConferencePreference *ConferencePreference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutConferencePreferenceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutConferencePreferenceInput) GoString() string {
 	return s.String()
 }
@@ -11788,13 +18792,115 @@ type PutConferencePreferenceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutConferencePreferenceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutConferencePreferenceOutput) GoString() string {
+	return s.String()
+}
+
+type PutInvitationConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The email ID of the organization or individual contact that the enrolled
+	// user can use.
+	ContactEmail *string `min:"1" type:"string"`
+
+	// The name of the organization sending the enrollment invite to a user.
+	//
+	// OrganizationName is a required field
+	OrganizationName *string `min:"1" type:"string" required:"true"`
+
+	// The list of private skill IDs that you want to recommend to the user to enable
+	// in the invitation.
+	PrivateSkillIds []*string `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutInvitationConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutInvitationConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutInvitationConfigurationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PutInvitationConfigurationInput"}
+	if s.ContactEmail != nil && len(*s.ContactEmail) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ContactEmail", 1))
+	}
+	if s.OrganizationName == nil {
+		invalidParams.Add(request.NewErrParamRequired("OrganizationName"))
+	}
+	if s.OrganizationName != nil && len(*s.OrganizationName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("OrganizationName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetContactEmail sets the ContactEmail field's value.
+func (s *PutInvitationConfigurationInput) SetContactEmail(v string) *PutInvitationConfigurationInput {
+	s.ContactEmail = &v
+	return s
+}
+
+// SetOrganizationName sets the OrganizationName field's value.
+func (s *PutInvitationConfigurationInput) SetOrganizationName(v string) *PutInvitationConfigurationInput {
+	s.OrganizationName = &v
+	return s
+}
+
+// SetPrivateSkillIds sets the PrivateSkillIds field's value.
+func (s *PutInvitationConfigurationInput) SetPrivateSkillIds(v []*string) *PutInvitationConfigurationInput {
+	s.PrivateSkillIds = v
+	return s
+}
+
+type PutInvitationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutInvitationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutInvitationConfigurationOutput) GoString() string {
 	return s.String()
 }
 
@@ -11815,12 +18921,20 @@ type PutRoomSkillParameterInput struct {
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRoomSkillParameterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRoomSkillParameterInput) GoString() string {
 	return s.String()
 }
@@ -11868,12 +18982,20 @@ type PutRoomSkillParameterOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRoomSkillParameterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRoomSkillParameterOutput) GoString() string {
 	return s.String()
 }
@@ -11883,6 +19005,10 @@ type PutSkillAuthorizationInput struct {
 
 	// The authorization result specific to OAUTH code grant output. "Code” must
 	// be populated in the AuthorizationResult map to establish the authorization.
+	//
+	// AuthorizationResult is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PutSkillAuthorizationInput's
+	// String and GoString methods.
 	//
 	// AuthorizationResult is a required field
 	AuthorizationResult map[string]*string `type:"map" required:"true" sensitive:"true"`
@@ -11896,12 +19022,20 @@ type PutSkillAuthorizationInput struct {
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutSkillAuthorizationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutSkillAuthorizationInput) GoString() string {
 	return s.String()
 }
@@ -11944,12 +19078,20 @@ type PutSkillAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutSkillAuthorizationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutSkillAuthorizationOutput) GoString() string {
 	return s.String()
 }
@@ -11971,14 +19113,19 @@ type RegisterAVSDeviceInput struct {
 
 	// The key generated by the OEM that uniquely identifies a specified instance
 	// of your AVS device.
-	//
-	// DeviceSerialNumber is a required field
-	DeviceSerialNumber *string `type:"string" required:"true"`
+	DeviceSerialNumber *string `type:"string"`
 
 	// The product ID used to identify your AVS device during authorization.
 	//
 	// ProductId is a required field
 	ProductId *string `type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the room with which to associate your AVS
+	// device.
+	RoomArn *string `type:"string"`
+
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []*Tag `type:"list"`
 
 	// The code that is obtained after your AVS device has made a POST request to
 	// LWA as a part of the Device Authorization Request component of the OAuth
@@ -11988,12 +19135,20 @@ type RegisterAVSDeviceInput struct {
 	UserCode *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterAVSDeviceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterAVSDeviceInput) GoString() string {
 	return s.String()
 }
@@ -12007,9 +19162,6 @@ func (s *RegisterAVSDeviceInput) Validate() error {
 	if s.ClientId == nil {
 		invalidParams.Add(request.NewErrParamRequired("ClientId"))
 	}
-	if s.DeviceSerialNumber == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceSerialNumber"))
-	}
 	if s.ProductId == nil {
 		invalidParams.Add(request.NewErrParamRequired("ProductId"))
 	}
@@ -12018,6 +19170,16 @@ func (s *RegisterAVSDeviceInput) Validate() error {
 	}
 	if s.UserCode != nil && len(*s.UserCode) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("UserCode", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12050,6 +19212,18 @@ func (s *RegisterAVSDeviceInput) SetProductId(v string) *RegisterAVSDeviceInput 
 	return s
 }
 
+// SetRoomArn sets the RoomArn field's value.
+func (s *RegisterAVSDeviceInput) SetRoomArn(v string) *RegisterAVSDeviceInput {
+	s.RoomArn = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *RegisterAVSDeviceInput) SetTags(v []*Tag) *RegisterAVSDeviceInput {
+	s.Tags = v
+	return s
+}
+
 // SetUserCode sets the UserCode field's value.
 func (s *RegisterAVSDeviceInput) SetUserCode(v string) *RegisterAVSDeviceInput {
 	s.UserCode = &v
@@ -12063,12 +19237,20 @@ type RegisterAVSDeviceOutput struct {
 	DeviceArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterAVSDeviceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterAVSDeviceOutput) GoString() string {
 	return s.String()
 }
@@ -12088,12 +19270,20 @@ type RejectSkillInput struct {
 	SkillId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectSkillInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectSkillInput) GoString() string {
 	return s.String()
 }
@@ -12121,14 +19311,66 @@ type RejectSkillOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectSkillOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectSkillOutput) GoString() string {
 	return s.String()
+}
+
+// Settings for the require check in feature that are applied to a room profile.
+// Require check in allows a meeting room’s Alexa or AVS device to prompt
+// the user to check in; otherwise, the room will be released.
+type RequireCheckIn struct {
+	_ struct{} `type:"structure"`
+
+	// Whether require check in is enabled or not.
+	Enabled *bool `type:"boolean"`
+
+	// Duration between 5 and 20 minutes to determine when to release the room if
+	// it's not checked into.
+	ReleaseAfterMinutes *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequireCheckIn) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequireCheckIn) GoString() string {
+	return s.String()
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *RequireCheckIn) SetEnabled(v bool) *RequireCheckIn {
+	s.Enabled = &v
+	return s
+}
+
+// SetReleaseAfterMinutes sets the ReleaseAfterMinutes field's value.
+func (s *RequireCheckIn) SetReleaseAfterMinutes(v int64) *RequireCheckIn {
+	s.ReleaseAfterMinutes = &v
+	return s
 }
 
 type ResolveRoomInput struct {
@@ -12145,12 +19387,20 @@ type ResolveRoomInput struct {
 	UserId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResolveRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResolveRoomInput) GoString() string {
 	return s.String()
 }
@@ -12196,12 +19446,20 @@ type ResolveRoomOutput struct {
 	RoomSkillParameters []*RoomSkillParameter `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResolveRoomOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResolveRoomOutput) GoString() string {
 	return s.String()
 }
@@ -12224,6 +19482,137 @@ func (s *ResolveRoomOutput) SetRoomSkillParameters(v []*RoomSkillParameter) *Res
 	return s
 }
 
+// Another resource is associated with the resource in the request.
+type ResourceAssociatedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAssociatedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAssociatedException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceAssociatedException(v protocol.ResponseMetadata) error {
+	return &ResourceAssociatedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceAssociatedException) Code() string {
+	return "ResourceAssociatedException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceAssociatedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceAssociatedException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceAssociatedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceAssociatedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceAssociatedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The resource in the request is already in use.
+type ResourceInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A unique, user-specified identifier for the request that ensures idempotency.
+	ClientRequestToken *string `min:"10" type:"string"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceInUseException(v protocol.ResponseMetadata) error {
+	return &ResourceInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceInUseException) Code() string {
+	return "ResourceInUseException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceInUseException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type RevokeInvitationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12234,12 +19623,20 @@ type RevokeInvitationInput struct {
 	UserArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevokeInvitationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevokeInvitationInput) GoString() string {
 	return s.String()
 }
@@ -12260,12 +19657,20 @@ type RevokeInvitationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevokeInvitationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevokeInvitationOutput) GoString() string {
 	return s.String()
 }
@@ -12290,12 +19695,20 @@ type Room struct {
 	RoomName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Room) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Room) GoString() string {
 	return s.String()
 }
@@ -12353,12 +19766,20 @@ type RoomData struct {
 	RoomName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RoomData) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RoomData) GoString() string {
 	return s.String()
 }
@@ -12415,12 +19836,20 @@ type RoomSkillParameter struct {
 	ParameterValue *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RoomSkillParameter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RoomSkillParameter) GoString() string {
 	return s.String()
 }
@@ -12481,12 +19910,20 @@ type SearchAddressBooksInput struct {
 	SortCriteria []*Sort `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchAddressBooksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchAddressBooksInput) GoString() string {
 	return s.String()
 }
@@ -12565,12 +20002,20 @@ type SearchAddressBooksOutput struct {
 	TotalCount *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchAddressBooksOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchAddressBooksOutput) GoString() string {
 	return s.String()
 }
@@ -12615,12 +20060,20 @@ type SearchContactsInput struct {
 	SortCriteria []*Sort `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchContactsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchContactsInput) GoString() string {
 	return s.String()
 }
@@ -12698,12 +20151,20 @@ type SearchContactsOutput struct {
 	TotalCount *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchContactsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchContactsOutput) GoString() string {
 	return s.String()
 }
@@ -12731,7 +20192,8 @@ type SearchDevicesInput struct {
 
 	// The filters to use to list a specified set of devices. Supported filter keys
 	// are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType,
-	// DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).
+	// DeviceSerialNumber, UnassociatedOnly, ConnectionStatus (ONLINE and OFFLINE),
+	// NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.
 	Filters []*Filter `type:"list"`
 
 	// The maximum number of results to include in the response. If more results
@@ -12746,16 +20208,24 @@ type SearchDevicesInput struct {
 
 	// The sort order to use in listing the specified set of devices. Supported
 	// sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber,
-	// and ConnectionStatus.
+	// ConnectionStatus, NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.
 	SortCriteria []*Sort `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchDevicesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchDevicesInput) GoString() string {
 	return s.String()
 }
@@ -12833,12 +20303,20 @@ type SearchDevicesOutput struct {
 	TotalCount *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchDevicesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchDevicesOutput) GoString() string {
 	return s.String()
 }
@@ -12857,6 +20335,158 @@ func (s *SearchDevicesOutput) SetNextToken(v string) *SearchDevicesOutput {
 
 // SetTotalCount sets the TotalCount field's value.
 func (s *SearchDevicesOutput) SetTotalCount(v int64) *SearchDevicesOutput {
+	s.TotalCount = &v
+	return s
+}
+
+type SearchNetworkProfilesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The filters to use to list a specified set of network profiles. Valid filters
+	// are NetworkProfileName, Ssid, and SecurityType.
+	Filters []*Filter `type:"list"`
+
+	// The maximum number of results to include in the response. If more results
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// An optional token returned from a prior request. Use this token for pagination
+	// of results from this action. If this parameter is specified, the response
+	// includes only results beyond the token, up to the value specified by MaxResults.
+	NextToken *string `min:"1" type:"string"`
+
+	// The sort order to use to list the specified set of network profiles. Valid
+	// sort criteria includes NetworkProfileName, Ssid, and SecurityType.
+	SortCriteria []*Sort `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchNetworkProfilesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchNetworkProfilesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SearchNetworkProfilesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SearchNetworkProfilesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SortCriteria != nil {
+		for i, v := range s.SortCriteria {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortCriteria", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilters sets the Filters field's value.
+func (s *SearchNetworkProfilesInput) SetFilters(v []*Filter) *SearchNetworkProfilesInput {
+	s.Filters = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *SearchNetworkProfilesInput) SetMaxResults(v int64) *SearchNetworkProfilesInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *SearchNetworkProfilesInput) SetNextToken(v string) *SearchNetworkProfilesInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetSortCriteria sets the SortCriteria field's value.
+func (s *SearchNetworkProfilesInput) SetSortCriteria(v []*Sort) *SearchNetworkProfilesInput {
+	s.SortCriteria = v
+	return s
+}
+
+type SearchNetworkProfilesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The network profiles that meet the specified set of filter criteria, in sort
+	// order. It is a list of NetworkProfileData objects.
+	NetworkProfiles []*NetworkProfileData `type:"list"`
+
+	// An optional token returned from a prior request. Use this token for pagination
+	// of results from this action. If this parameter is specified, the response
+	// includes only results beyond the token, up to the value specified by MaxResults.
+	NextToken *string `min:"1" type:"string"`
+
+	// The total number of network profiles returned.
+	TotalCount *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchNetworkProfilesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchNetworkProfilesOutput) GoString() string {
+	return s.String()
+}
+
+// SetNetworkProfiles sets the NetworkProfiles field's value.
+func (s *SearchNetworkProfilesOutput) SetNetworkProfiles(v []*NetworkProfileData) *SearchNetworkProfilesOutput {
+	s.NetworkProfiles = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *SearchNetworkProfilesOutput) SetNextToken(v string) *SearchNetworkProfilesOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetTotalCount sets the TotalCount field's value.
+func (s *SearchNetworkProfilesOutput) SetTotalCount(v int64) *SearchNetworkProfilesOutput {
 	s.TotalCount = &v
 	return s
 }
@@ -12883,12 +20513,20 @@ type SearchProfilesInput struct {
 	SortCriteria []*Sort `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchProfilesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchProfilesInput) GoString() string {
 	return s.String()
 }
@@ -12966,12 +20604,20 @@ type SearchProfilesOutput struct {
 	TotalCount *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchProfilesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchProfilesOutput) GoString() string {
 	return s.String()
 }
@@ -13016,12 +20662,20 @@ type SearchRoomsInput struct {
 	SortCriteria []*Sort `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchRoomsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchRoomsInput) GoString() string {
 	return s.String()
 }
@@ -13099,12 +20753,20 @@ type SearchRoomsOutput struct {
 	TotalCount *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchRoomsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchRoomsOutput) GoString() string {
 	return s.String()
 }
@@ -13150,12 +20812,20 @@ type SearchSkillGroupsInput struct {
 	SortCriteria []*Sort `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchSkillGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchSkillGroupsInput) GoString() string {
 	return s.String()
 }
@@ -13233,12 +20903,20 @@ type SearchSkillGroupsOutput struct {
 	TotalCount *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchSkillGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchSkillGroupsOutput) GoString() string {
 	return s.String()
 }
@@ -13284,12 +20962,20 @@ type SearchUsersInput struct {
 	SortCriteria []*Sort `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchUsersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchUsersInput) GoString() string {
 	return s.String()
 }
@@ -13367,12 +21053,20 @@ type SearchUsersOutput struct {
 	Users []*UserData `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchUsersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SearchUsersOutput) GoString() string {
 	return s.String()
 }
@@ -13395,6 +21089,140 @@ func (s *SearchUsersOutput) SetUsers(v []*UserData) *SearchUsersOutput {
 	return s
 }
 
+type SendAnnouncementInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique, user-specified identifier for the request that ensures idempotency.
+	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
+
+	// The announcement content. This can contain only one of the three possible
+	// announcement types (text, SSML or audio).
+	//
+	// Content is a required field
+	Content *Content `type:"structure" required:"true"`
+
+	// The filters to use to send an announcement to a specified list of rooms.
+	// The supported filter keys are RoomName, ProfileName, RoomArn, and ProfileArn.
+	// To send to all rooms, specify an empty RoomFilters list.
+	//
+	// RoomFilters is a required field
+	RoomFilters []*Filter `type:"list" required:"true"`
+
+	// The time to live for an announcement. Default is 300. If delivery doesn't
+	// occur within this time, the announcement is not delivered.
+	TimeToLiveInSeconds *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SendAnnouncementInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SendAnnouncementInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SendAnnouncementInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SendAnnouncementInput"}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 10))
+	}
+	if s.Content == nil {
+		invalidParams.Add(request.NewErrParamRequired("Content"))
+	}
+	if s.RoomFilters == nil {
+		invalidParams.Add(request.NewErrParamRequired("RoomFilters"))
+	}
+	if s.TimeToLiveInSeconds != nil && *s.TimeToLiveInSeconds < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("TimeToLiveInSeconds", 1))
+	}
+	if s.Content != nil {
+		if err := s.Content.Validate(); err != nil {
+			invalidParams.AddNested("Content", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.RoomFilters != nil {
+		for i, v := range s.RoomFilters {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RoomFilters", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetClientRequestToken sets the ClientRequestToken field's value.
+func (s *SendAnnouncementInput) SetClientRequestToken(v string) *SendAnnouncementInput {
+	s.ClientRequestToken = &v
+	return s
+}
+
+// SetContent sets the Content field's value.
+func (s *SendAnnouncementInput) SetContent(v *Content) *SendAnnouncementInput {
+	s.Content = v
+	return s
+}
+
+// SetRoomFilters sets the RoomFilters field's value.
+func (s *SendAnnouncementInput) SetRoomFilters(v []*Filter) *SendAnnouncementInput {
+	s.RoomFilters = v
+	return s
+}
+
+// SetTimeToLiveInSeconds sets the TimeToLiveInSeconds field's value.
+func (s *SendAnnouncementInput) SetTimeToLiveInSeconds(v int64) *SendAnnouncementInput {
+	s.TimeToLiveInSeconds = &v
+	return s
+}
+
+type SendAnnouncementOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the announcement.
+	AnnouncementArn *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SendAnnouncementOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SendAnnouncementOutput) GoString() string {
+	return s.String()
+}
+
+// SetAnnouncementArn sets the AnnouncementArn field's value.
+func (s *SendAnnouncementOutput) SetAnnouncementArn(v string) *SendAnnouncementOutput {
+	s.AnnouncementArn = &v
+	return s
+}
+
 type SendInvitationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13402,12 +21230,20 @@ type SendInvitationInput struct {
 	UserArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendInvitationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendInvitationInput) GoString() string {
 	return s.String()
 }
@@ -13422,14 +21258,94 @@ type SendInvitationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendInvitationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendInvitationOutput) GoString() string {
 	return s.String()
+}
+
+// The SIP address for the contact containing the URI and SIP address type.
+type SipAddress struct {
+	_ struct{} `type:"structure"`
+
+	// The type of the SIP address.
+	//
+	// Type is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by SipAddress's
+	// String and GoString methods.
+	//
+	// Type is a required field
+	Type *string `type:"string" required:"true" enum:"SipType" sensitive:"true"`
+
+	// The URI for the SIP address.
+	//
+	// Uri is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by SipAddress's
+	// String and GoString methods.
+	//
+	// Uri is a required field
+	Uri *string `min:"1" type:"string" required:"true" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SipAddress) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SipAddress) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SipAddress) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SipAddress"}
+	if s.Type == nil {
+		invalidParams.Add(request.NewErrParamRequired("Type"))
+	}
+	if s.Uri == nil {
+		invalidParams.Add(request.NewErrParamRequired("Uri"))
+	}
+	if s.Uri != nil && len(*s.Uri) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Uri", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetType sets the Type field's value.
+func (s *SipAddress) SetType(v string) *SipAddress {
+	s.Type = &v
+	return s
+}
+
+// SetUri sets the Uri field's value.
+func (s *SipAddress) SetUri(v string) *SipAddress {
+	s.Uri = &v
+	return s
 }
 
 // Granular information about the skill.
@@ -13461,6 +21377,8 @@ type SkillDetails struct {
 	// The date when the skill was released.
 	ReleaseDate *string `type:"string"`
 
+	// This member has been deprecated.
+	//
 	// The list of reviews for the skill, including Key and Value pair.
 	Reviews map[string]*string `type:"map"`
 
@@ -13468,12 +21386,20 @@ type SkillDetails struct {
 	SkillTypes []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillDetails) GoString() string {
 	return s.String()
 }
@@ -13552,12 +21478,20 @@ type SkillGroup struct {
 	SkillGroupName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillGroup) GoString() string {
 	return s.String()
 }
@@ -13594,12 +21528,20 @@ type SkillGroupData struct {
 	SkillGroupName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillGroupData) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillGroupData) GoString() string {
 	return s.String()
 }
@@ -13620,6 +21562,70 @@ func (s *SkillGroupData) SetSkillGroupArn(v string) *SkillGroupData {
 func (s *SkillGroupData) SetSkillGroupName(v string) *SkillGroupData {
 	s.SkillGroupName = &v
 	return s
+}
+
+// The skill must be linked to a third-party account.
+type SkillNotLinkedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SkillNotLinkedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SkillNotLinkedException) GoString() string {
+	return s.String()
+}
+
+func newErrorSkillNotLinkedException(v protocol.ResponseMetadata) error {
+	return &SkillNotLinkedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *SkillNotLinkedException) Code() string {
+	return "SkillNotLinkedException"
+}
+
+// Message returns the exception's message.
+func (s *SkillNotLinkedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *SkillNotLinkedException) OrigErr() error {
+	return nil
+}
+
+func (s *SkillNotLinkedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *SkillNotLinkedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *SkillNotLinkedException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // The summary of skills.
@@ -13643,12 +21649,20 @@ type SkillSummary struct {
 	SupportsLinking *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillSummary) GoString() string {
 	return s.String()
 }
@@ -13709,12 +21723,20 @@ type SkillsStoreSkill struct {
 	SupportsLinking *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillsStoreSkill) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkillsStoreSkill) GoString() string {
 	return s.String()
 }
@@ -13776,12 +21798,20 @@ type SmartHomeAppliance struct {
 	ManufacturerName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SmartHomeAppliance) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SmartHomeAppliance) GoString() string {
 	return s.String()
 }
@@ -13819,12 +21849,20 @@ type Sort struct {
 	Value *string `type:"string" required:"true" enum:"SortValue"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Sort) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Sort) GoString() string {
 	return s.String()
 }
@@ -13860,6 +21898,68 @@ func (s *Sort) SetValue(v string) *Sort {
 	return s
 }
 
+// The SSML message. For more information, see SSML Reference (https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html).
+type Ssml struct {
+	_ struct{} `type:"structure"`
+
+	// The locale of the SSML message. Currently, en-US is supported.
+	//
+	// Locale is a required field
+	Locale *string `type:"string" required:"true" enum:"Locale"`
+
+	// The value of the SSML message in the correct SSML format. The audio tag is
+	// not supported.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Ssml) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Ssml) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Ssml) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Ssml"}
+	if s.Locale == nil {
+		invalidParams.Add(request.NewErrParamRequired("Locale"))
+	}
+	if s.Value == nil {
+		invalidParams.Add(request.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLocale sets the Locale field's value.
+func (s *Ssml) SetLocale(v string) *Ssml {
+	s.Locale = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *Ssml) SetValue(v string) *Ssml {
+	s.Value = &v
+	return s
+}
+
 type StartDeviceSyncInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13869,18 +21969,26 @@ type StartDeviceSyncInput struct {
 	// Request structure to start the device sync. Required.
 	//
 	// Features is a required field
-	Features []*string `type:"list" required:"true"`
+	Features []*string `type:"list" required:"true" enum:"Feature"`
 
 	// The ARN of the room with which the device to sync is associated. Required.
 	RoomArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDeviceSyncInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDeviceSyncInput) GoString() string {
 	return s.String()
 }
@@ -13920,12 +22028,20 @@ type StartDeviceSyncOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDeviceSyncOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDeviceSyncOutput) GoString() string {
 	return s.String()
 }
@@ -13939,12 +22055,20 @@ type StartSmartHomeApplianceDiscoveryInput struct {
 	RoomArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartSmartHomeApplianceDiscoveryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartSmartHomeApplianceDiscoveryInput) GoString() string {
 	return s.String()
 }
@@ -13972,12 +22096,20 @@ type StartSmartHomeApplianceDiscoveryOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartSmartHomeApplianceDiscoveryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartSmartHomeApplianceDiscoveryOutput) GoString() string {
 	return s.String()
 }
@@ -13991,18 +22123,26 @@ type Tag struct {
 	// Key is a required field
 	Key *string `min:"1" type:"string" required:"true"`
 
-	// The value of a tag. Tag values are case-sensitive and can be null.
+	// The value of a tag. Tag values are case sensitive and can be null.
 	//
 	// Value is a required field
 	Value *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -14053,12 +22193,20 @@ type TagResourceInput struct {
 	Tags []*Tag `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagResourceInput) GoString() string {
 	return s.String()
 }
@@ -14105,14 +22253,148 @@ type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagResourceOutput) GoString() string {
 	return s.String()
+}
+
+// The text message.
+type Text struct {
+	_ struct{} `type:"structure"`
+
+	// The locale of the text message. Currently, en-US is supported.
+	//
+	// Locale is a required field
+	Locale *string `type:"string" required:"true" enum:"Locale"`
+
+	// The value of the text message.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Text) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Text) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Text) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Text"}
+	if s.Locale == nil {
+		invalidParams.Add(request.NewErrParamRequired("Locale"))
+	}
+	if s.Value == nil {
+		invalidParams.Add(request.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLocale sets the Locale field's value.
+func (s *Text) SetLocale(v string) *Text {
+	s.Locale = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *Text) SetValue(v string) *Text {
+	s.Value = &v
+	return s
+}
+
+// The caller has no permissions to operate on the resource involved in the
+// API call.
+type UnauthorizedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnauthorizedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnauthorizedException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnauthorizedException(v protocol.ResponseMetadata) error {
+	return &UnauthorizedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnauthorizedException) Code() string {
+	return "UnauthorizedException"
+}
+
+// Message returns the exception's message.
+func (s *UnauthorizedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnauthorizedException) OrigErr() error {
+	return nil
+}
+
+func (s *UnauthorizedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnauthorizedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnauthorizedException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type UntagResourceInput struct {
@@ -14130,12 +22412,20 @@ type UntagResourceInput struct {
 	TagKeys []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagResourceInput) GoString() string {
 	return s.String()
 }
@@ -14172,12 +22462,20 @@ type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
 }
@@ -14197,12 +22495,20 @@ type UpdateAddressBookInput struct {
 	Name *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAddressBookInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAddressBookInput) GoString() string {
 	return s.String()
 }
@@ -14248,12 +22554,20 @@ type UpdateAddressBookOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAddressBookOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAddressBookOutput) GoString() string {
 	return s.String()
 }
@@ -14283,12 +22597,20 @@ type UpdateBusinessReportScheduleInput struct {
 	ScheduleName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBusinessReportScheduleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBusinessReportScheduleInput) GoString() string {
 	return s.String()
 }
@@ -14346,12 +22668,20 @@ type UpdateBusinessReportScheduleOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBusinessReportScheduleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBusinessReportScheduleOutput) GoString() string {
 	return s.String()
 }
@@ -14381,12 +22711,20 @@ type UpdateConferenceProviderInput struct {
 	PSTNDialIn *PSTNDialIn `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConferenceProviderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConferenceProviderInput) GoString() string {
 	return s.String()
 }
@@ -14459,12 +22797,20 @@ type UpdateConferenceProviderOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConferenceProviderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConferenceProviderOutput) GoString() string {
 	return s.String()
 }
@@ -14486,16 +22832,37 @@ type UpdateContactInput struct {
 	// The updated last name of the contact.
 	LastName *string `min:"1" type:"string"`
 
-	// The updated phone number of the contact.
+	// The updated phone number of the contact. The phone number type defaults to
+	// WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that
+	// you use PhoneNumbers, which lets you specify the phone number type and multiple
+	// numbers.
+	//
+	// PhoneNumber is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateContactInput's
+	// String and GoString methods.
 	PhoneNumber *string `type:"string" sensitive:"true"`
+
+	// The list of phone numbers for the contact.
+	PhoneNumbers []*PhoneNumber `type:"list"`
+
+	// The list of SIP addresses for the contact.
+	SipAddresses []*SipAddress `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateContactInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateContactInput) GoString() string {
 	return s.String()
 }
@@ -14514,6 +22881,26 @@ func (s *UpdateContactInput) Validate() error {
 	}
 	if s.LastName != nil && len(*s.LastName) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("LastName", 1))
+	}
+	if s.PhoneNumbers != nil {
+		for i, v := range s.PhoneNumbers {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PhoneNumbers", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SipAddresses != nil {
+		for i, v := range s.SipAddresses {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SipAddresses", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14552,16 +22939,36 @@ func (s *UpdateContactInput) SetPhoneNumber(v string) *UpdateContactInput {
 	return s
 }
 
+// SetPhoneNumbers sets the PhoneNumbers field's value.
+func (s *UpdateContactInput) SetPhoneNumbers(v []*PhoneNumber) *UpdateContactInput {
+	s.PhoneNumbers = v
+	return s
+}
+
+// SetSipAddresses sets the SipAddresses field's value.
+func (s *UpdateContactInput) SetSipAddresses(v []*SipAddress) *UpdateContactInput {
+	s.SipAddresses = v
+	return s
+}
+
 type UpdateContactOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateContactOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateContactOutput) GoString() string {
 	return s.String()
 }
@@ -14576,12 +22983,20 @@ type UpdateDeviceInput struct {
 	DeviceName *string `min:"2" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDeviceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDeviceInput) GoString() string {
 	return s.String()
 }
@@ -14615,14 +23030,604 @@ type UpdateDeviceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDeviceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDeviceOutput) GoString() string {
 	return s.String()
+}
+
+// Settings for the end of meeting reminder feature that are applied to a room
+// profile. The end of meeting reminder enables Alexa to remind users when a
+// meeting is ending.
+type UpdateEndOfMeetingReminder struct {
+	_ struct{} `type:"structure"`
+
+	// Whether an end of meeting reminder is enabled or not.
+	Enabled *bool `type:"boolean"`
+
+	// Updates settings for the end of meeting reminder feature that are applied
+	// to a room profile. The end of meeting reminder enables Alexa to remind users
+	// when a meeting is ending.
+	ReminderAtMinutes []*int64 `min:"1" type:"list"`
+
+	// The type of sound that users hear during the end of meeting reminder.
+	ReminderType *string `type:"string" enum:"EndOfMeetingReminderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateEndOfMeetingReminder) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateEndOfMeetingReminder) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateEndOfMeetingReminder) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateEndOfMeetingReminder"}
+	if s.ReminderAtMinutes != nil && len(s.ReminderAtMinutes) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ReminderAtMinutes", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *UpdateEndOfMeetingReminder) SetEnabled(v bool) *UpdateEndOfMeetingReminder {
+	s.Enabled = &v
+	return s
+}
+
+// SetReminderAtMinutes sets the ReminderAtMinutes field's value.
+func (s *UpdateEndOfMeetingReminder) SetReminderAtMinutes(v []*int64) *UpdateEndOfMeetingReminder {
+	s.ReminderAtMinutes = v
+	return s
+}
+
+// SetReminderType sets the ReminderType field's value.
+func (s *UpdateEndOfMeetingReminder) SetReminderType(v string) *UpdateEndOfMeetingReminder {
+	s.ReminderType = &v
+	return s
+}
+
+type UpdateGatewayGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The updated description of the gateway group.
+	Description *string `type:"string"`
+
+	// The ARN of the gateway group to update.
+	//
+	// GatewayGroupArn is a required field
+	GatewayGroupArn *string `type:"string" required:"true"`
+
+	// The updated name of the gateway group.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateGatewayGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateGatewayGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateGatewayGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateGatewayGroupInput"}
+	if s.GatewayGroupArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("GatewayGroupArn"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDescription sets the Description field's value.
+func (s *UpdateGatewayGroupInput) SetDescription(v string) *UpdateGatewayGroupInput {
+	s.Description = &v
+	return s
+}
+
+// SetGatewayGroupArn sets the GatewayGroupArn field's value.
+func (s *UpdateGatewayGroupInput) SetGatewayGroupArn(v string) *UpdateGatewayGroupInput {
+	s.GatewayGroupArn = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *UpdateGatewayGroupInput) SetName(v string) *UpdateGatewayGroupInput {
+	s.Name = &v
+	return s
+}
+
+type UpdateGatewayGroupOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateGatewayGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateGatewayGroupOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateGatewayInput struct {
+	_ struct{} `type:"structure"`
+
+	// The updated description of the gateway.
+	Description *string `type:"string"`
+
+	// The ARN of the gateway to update.
+	//
+	// GatewayArn is a required field
+	GatewayArn *string `type:"string" required:"true"`
+
+	// The updated name of the gateway.
+	Name *string `min:"1" type:"string"`
+
+	// The updated software version of the gateway. The gateway automatically updates
+	// its software version during normal operation.
+	SoftwareVersion *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateGatewayInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateGatewayInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateGatewayInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateGatewayInput"}
+	if s.GatewayArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("GatewayArn"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.SoftwareVersion != nil && len(*s.SoftwareVersion) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SoftwareVersion", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDescription sets the Description field's value.
+func (s *UpdateGatewayInput) SetDescription(v string) *UpdateGatewayInput {
+	s.Description = &v
+	return s
+}
+
+// SetGatewayArn sets the GatewayArn field's value.
+func (s *UpdateGatewayInput) SetGatewayArn(v string) *UpdateGatewayInput {
+	s.GatewayArn = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *UpdateGatewayInput) SetName(v string) *UpdateGatewayInput {
+	s.Name = &v
+	return s
+}
+
+// SetSoftwareVersion sets the SoftwareVersion field's value.
+func (s *UpdateGatewayInput) SetSoftwareVersion(v string) *UpdateGatewayInput {
+	s.SoftwareVersion = &v
+	return s
+}
+
+type UpdateGatewayOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateGatewayOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateGatewayOutput) GoString() string {
+	return s.String()
+}
+
+// Updates settings for the instant booking feature that are applied to a room
+// profile. If instant booking is enabled, Alexa automatically reserves a room
+// if it is free when a user joins a meeting with Alexa.
+type UpdateInstantBooking struct {
+	_ struct{} `type:"structure"`
+
+	// Duration between 15 and 240 minutes at increments of 15 that determines how
+	// long to book an available room when a meeting is started with Alexa.
+	DurationInMinutes *int64 `type:"integer"`
+
+	// Whether instant booking is enabled or not.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateInstantBooking) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateInstantBooking) GoString() string {
+	return s.String()
+}
+
+// SetDurationInMinutes sets the DurationInMinutes field's value.
+func (s *UpdateInstantBooking) SetDurationInMinutes(v int64) *UpdateInstantBooking {
+	s.DurationInMinutes = &v
+	return s
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *UpdateInstantBooking) SetEnabled(v bool) *UpdateInstantBooking {
+	s.Enabled = &v
+	return s
+}
+
+// Updates meeting room settings of a room profile.
+type UpdateMeetingRoomConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Settings for the end of meeting reminder feature that are applied to a room
+	// profile. The end of meeting reminder enables Alexa to remind users when a
+	// meeting is ending.
+	EndOfMeetingReminder *UpdateEndOfMeetingReminder `type:"structure"`
+
+	// Settings to automatically book an available room available for a configured
+	// duration when joining a meeting with Alexa.
+	InstantBooking *UpdateInstantBooking `type:"structure"`
+
+	ProactiveJoin *UpdateProactiveJoin `type:"structure"`
+
+	// Settings for requiring a check in when a room is reserved. Alexa can cancel
+	// a room reservation if it's not checked into to make the room available for
+	// others. Users can check in by joining the meeting with Alexa or an AVS device,
+	// or by saying “Alexa, check in.”
+	RequireCheckIn *UpdateRequireCheckIn `type:"structure"`
+
+	// Whether room utilization metrics are enabled or not.
+	RoomUtilizationMetricsEnabled *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMeetingRoomConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMeetingRoomConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateMeetingRoomConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateMeetingRoomConfiguration"}
+	if s.EndOfMeetingReminder != nil {
+		if err := s.EndOfMeetingReminder.Validate(); err != nil {
+			invalidParams.AddNested("EndOfMeetingReminder", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ProactiveJoin != nil {
+		if err := s.ProactiveJoin.Validate(); err != nil {
+			invalidParams.AddNested("ProactiveJoin", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEndOfMeetingReminder sets the EndOfMeetingReminder field's value.
+func (s *UpdateMeetingRoomConfiguration) SetEndOfMeetingReminder(v *UpdateEndOfMeetingReminder) *UpdateMeetingRoomConfiguration {
+	s.EndOfMeetingReminder = v
+	return s
+}
+
+// SetInstantBooking sets the InstantBooking field's value.
+func (s *UpdateMeetingRoomConfiguration) SetInstantBooking(v *UpdateInstantBooking) *UpdateMeetingRoomConfiguration {
+	s.InstantBooking = v
+	return s
+}
+
+// SetProactiveJoin sets the ProactiveJoin field's value.
+func (s *UpdateMeetingRoomConfiguration) SetProactiveJoin(v *UpdateProactiveJoin) *UpdateMeetingRoomConfiguration {
+	s.ProactiveJoin = v
+	return s
+}
+
+// SetRequireCheckIn sets the RequireCheckIn field's value.
+func (s *UpdateMeetingRoomConfiguration) SetRequireCheckIn(v *UpdateRequireCheckIn) *UpdateMeetingRoomConfiguration {
+	s.RequireCheckIn = v
+	return s
+}
+
+// SetRoomUtilizationMetricsEnabled sets the RoomUtilizationMetricsEnabled field's value.
+func (s *UpdateMeetingRoomConfiguration) SetRoomUtilizationMetricsEnabled(v bool) *UpdateMeetingRoomConfiguration {
+	s.RoomUtilizationMetricsEnabled = &v
+	return s
+}
+
+type UpdateNetworkProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the Private Certificate Authority (PCA) created in AWS Certificate
+	// Manager (ACM). This is used to issue certificates to the devices.
+	CertificateAuthorityArn *string `type:"string"`
+
+	// The current password of the Wi-Fi network.
+	//
+	// CurrentPassword is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateNetworkProfileInput's
+	// String and GoString methods.
+	CurrentPassword *string `min:"5" type:"string" sensitive:"true"`
+
+	// Detailed information about a device's network profile.
+	Description *string `type:"string"`
+
+	// The ARN of the network profile associated with a device.
+	//
+	// NetworkProfileArn is a required field
+	NetworkProfileArn *string `type:"string" required:"true"`
+
+	// The name of the network profile associated with a device.
+	NetworkProfileName *string `min:"1" type:"string"`
+
+	// The next, or subsequent, password of the Wi-Fi network. This password is
+	// asynchronously transmitted to the device and is used when the password of
+	// the network changes to NextPassword.
+	//
+	// NextPassword is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateNetworkProfileInput's
+	// String and GoString methods.
+	NextPassword *string `type:"string" sensitive:"true"`
+
+	// The root certificate(s) of your authentication server that will be installed
+	// on your devices and used to trust your authentication server during EAP negotiation.
+	TrustAnchors []*string `min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateNetworkProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateNetworkProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateNetworkProfileInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateNetworkProfileInput"}
+	if s.CurrentPassword != nil && len(*s.CurrentPassword) < 5 {
+		invalidParams.Add(request.NewErrParamMinLen("CurrentPassword", 5))
+	}
+	if s.NetworkProfileArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("NetworkProfileArn"))
+	}
+	if s.NetworkProfileName != nil && len(*s.NetworkProfileName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NetworkProfileName", 1))
+	}
+	if s.TrustAnchors != nil && len(s.TrustAnchors) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("TrustAnchors", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCertificateAuthorityArn sets the CertificateAuthorityArn field's value.
+func (s *UpdateNetworkProfileInput) SetCertificateAuthorityArn(v string) *UpdateNetworkProfileInput {
+	s.CertificateAuthorityArn = &v
+	return s
+}
+
+// SetCurrentPassword sets the CurrentPassword field's value.
+func (s *UpdateNetworkProfileInput) SetCurrentPassword(v string) *UpdateNetworkProfileInput {
+	s.CurrentPassword = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *UpdateNetworkProfileInput) SetDescription(v string) *UpdateNetworkProfileInput {
+	s.Description = &v
+	return s
+}
+
+// SetNetworkProfileArn sets the NetworkProfileArn field's value.
+func (s *UpdateNetworkProfileInput) SetNetworkProfileArn(v string) *UpdateNetworkProfileInput {
+	s.NetworkProfileArn = &v
+	return s
+}
+
+// SetNetworkProfileName sets the NetworkProfileName field's value.
+func (s *UpdateNetworkProfileInput) SetNetworkProfileName(v string) *UpdateNetworkProfileInput {
+	s.NetworkProfileName = &v
+	return s
+}
+
+// SetNextPassword sets the NextPassword field's value.
+func (s *UpdateNetworkProfileInput) SetNextPassword(v string) *UpdateNetworkProfileInput {
+	s.NextPassword = &v
+	return s
+}
+
+// SetTrustAnchors sets the TrustAnchors field's value.
+func (s *UpdateNetworkProfileInput) SetTrustAnchors(v []*string) *UpdateNetworkProfileInput {
+	s.TrustAnchors = v
+	return s
+}
+
+type UpdateNetworkProfileOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateNetworkProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateNetworkProfileOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateProactiveJoin struct {
+	_ struct{} `type:"structure"`
+
+	// EnabledByMotion is a required field
+	EnabledByMotion *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProactiveJoin) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProactiveJoin) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateProactiveJoin) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateProactiveJoin"}
+	if s.EnabledByMotion == nil {
+		invalidParams.Add(request.NewErrParamRequired("EnabledByMotion"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnabledByMotion sets the EnabledByMotion field's value.
+func (s *UpdateProactiveJoin) SetEnabledByMotion(v bool) *UpdateProactiveJoin {
+	s.EnabledByMotion = &v
+	return s
 }
 
 type UpdateProfileInput struct {
@@ -14631,6 +23636,9 @@ type UpdateProfileInput struct {
 	// The updated address for the room profile.
 	Address *string `min:"1" type:"string"`
 
+	// Whether data retention of the profile is enabled.
+	DataRetentionOptIn *bool `type:"boolean"`
+
 	// The updated distance unit for the room profile.
 	DistanceUnit *string `type:"string" enum:"DistanceUnit"`
 
@@ -14638,8 +23646,15 @@ type UpdateProfileInput struct {
 	// done to the default status.
 	IsDefault *bool `type:"boolean"`
 
+	// The updated locale for the room profile. (This is currently only available
+	// to a limited preview audience.)
+	Locale *string `min:"1" type:"string"`
+
 	// The updated maximum volume limit for the room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
+
+	// The updated meeting room settings of a room profile.
+	MeetingRoomConfiguration *UpdateMeetingRoomConfiguration `type:"structure"`
 
 	// Whether the PSTN setting of the room profile is enabled.
 	PSTNEnabled *bool `type:"boolean"`
@@ -14663,12 +23678,20 @@ type UpdateProfileInput struct {
 	WakeWord *string `type:"string" enum:"WakeWord"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProfileInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProfileInput) GoString() string {
 	return s.String()
 }
@@ -14679,11 +23702,19 @@ func (s *UpdateProfileInput) Validate() error {
 	if s.Address != nil && len(*s.Address) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Address", 1))
 	}
+	if s.Locale != nil && len(*s.Locale) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Locale", 1))
+	}
 	if s.ProfileName != nil && len(*s.ProfileName) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("ProfileName", 1))
 	}
 	if s.Timezone != nil && len(*s.Timezone) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Timezone", 1))
+	}
+	if s.MeetingRoomConfiguration != nil {
+		if err := s.MeetingRoomConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("MeetingRoomConfiguration", err.(request.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14695,6 +23726,12 @@ func (s *UpdateProfileInput) Validate() error {
 // SetAddress sets the Address field's value.
 func (s *UpdateProfileInput) SetAddress(v string) *UpdateProfileInput {
 	s.Address = &v
+	return s
+}
+
+// SetDataRetentionOptIn sets the DataRetentionOptIn field's value.
+func (s *UpdateProfileInput) SetDataRetentionOptIn(v bool) *UpdateProfileInput {
+	s.DataRetentionOptIn = &v
 	return s
 }
 
@@ -14710,9 +23747,21 @@ func (s *UpdateProfileInput) SetIsDefault(v bool) *UpdateProfileInput {
 	return s
 }
 
+// SetLocale sets the Locale field's value.
+func (s *UpdateProfileInput) SetLocale(v string) *UpdateProfileInput {
+	s.Locale = &v
+	return s
+}
+
 // SetMaxVolumeLimit sets the MaxVolumeLimit field's value.
 func (s *UpdateProfileInput) SetMaxVolumeLimit(v int64) *UpdateProfileInput {
 	s.MaxVolumeLimit = &v
+	return s
+}
+
+// SetMeetingRoomConfiguration sets the MeetingRoomConfiguration field's value.
+func (s *UpdateProfileInput) SetMeetingRoomConfiguration(v *UpdateMeetingRoomConfiguration) *UpdateProfileInput {
+	s.MeetingRoomConfiguration = v
 	return s
 }
 
@@ -14762,14 +23811,66 @@ type UpdateProfileOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProfileOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProfileOutput) GoString() string {
 	return s.String()
+}
+
+// Updates settings for the require check in feature that are applied to a room
+// profile. Require check in allows a meeting room’s Alexa or AVS device to
+// prompt the user to check in; otherwise, the room will be released.
+type UpdateRequireCheckIn struct {
+	_ struct{} `type:"structure"`
+
+	// Whether require check in is enabled or not.
+	Enabled *bool `type:"boolean"`
+
+	// Duration between 5 and 20 minutes to determine when to release the room if
+	// it's not checked into.
+	ReleaseAfterMinutes *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateRequireCheckIn) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateRequireCheckIn) GoString() string {
+	return s.String()
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *UpdateRequireCheckIn) SetEnabled(v bool) *UpdateRequireCheckIn {
+	s.Enabled = &v
+	return s
+}
+
+// SetReleaseAfterMinutes sets the ReleaseAfterMinutes field's value.
+func (s *UpdateRequireCheckIn) SetReleaseAfterMinutes(v int64) *UpdateRequireCheckIn {
+	s.ReleaseAfterMinutes = &v
+	return s
 }
 
 type UpdateRoomInput struct {
@@ -14791,12 +23892,20 @@ type UpdateRoomInput struct {
 	RoomName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRoomInput) GoString() string {
 	return s.String()
 }
@@ -14851,12 +23960,20 @@ type UpdateRoomOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRoomOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRoomOutput) GoString() string {
 	return s.String()
 }
@@ -14874,12 +23991,20 @@ type UpdateSkillGroupInput struct {
 	SkillGroupName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSkillGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSkillGroupInput) GoString() string {
 	return s.String()
 }
@@ -14922,12 +24047,20 @@ type UpdateSkillGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSkillGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSkillGroupOutput) GoString() string {
 	return s.String()
 }
@@ -14955,12 +24088,20 @@ type UserData struct {
 	UserArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserData) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserData) GoString() string {
 	return s.String()
 }
@@ -15012,6 +24153,15 @@ const (
 	BusinessReportFailureCodeInternalFailure = "INTERNAL_FAILURE"
 )
 
+// BusinessReportFailureCode_Values returns all elements of the BusinessReportFailureCode enum
+func BusinessReportFailureCode_Values() []string {
+	return []string{
+		BusinessReportFailureCodeAccessDenied,
+		BusinessReportFailureCodeNoSuchBucket,
+		BusinessReportFailureCodeInternalFailure,
+	}
+}
+
 const (
 	// BusinessReportFormatCsv is a BusinessReportFormat enum value
 	BusinessReportFormatCsv = "CSV"
@@ -15020,13 +24170,33 @@ const (
 	BusinessReportFormatCsvZip = "CSV_ZIP"
 )
 
+// BusinessReportFormat_Values returns all elements of the BusinessReportFormat enum
+func BusinessReportFormat_Values() []string {
+	return []string{
+		BusinessReportFormatCsv,
+		BusinessReportFormatCsvZip,
+	}
+}
+
 const (
 	// BusinessReportIntervalOneDay is a BusinessReportInterval enum value
 	BusinessReportIntervalOneDay = "ONE_DAY"
 
 	// BusinessReportIntervalOneWeek is a BusinessReportInterval enum value
 	BusinessReportIntervalOneWeek = "ONE_WEEK"
+
+	// BusinessReportIntervalThirtyDays is a BusinessReportInterval enum value
+	BusinessReportIntervalThirtyDays = "THIRTY_DAYS"
 )
+
+// BusinessReportInterval_Values returns all elements of the BusinessReportInterval enum
+func BusinessReportInterval_Values() []string {
+	return []string{
+		BusinessReportIntervalOneDay,
+		BusinessReportIntervalOneWeek,
+		BusinessReportIntervalThirtyDays,
+	}
+}
 
 const (
 	// BusinessReportStatusRunning is a BusinessReportStatus enum value
@@ -15039,6 +24209,15 @@ const (
 	BusinessReportStatusFailed = "FAILED"
 )
 
+// BusinessReportStatus_Values returns all elements of the BusinessReportStatus enum
+func BusinessReportStatus_Values() []string {
+	return []string{
+		BusinessReportStatusRunning,
+		BusinessReportStatusSucceeded,
+		BusinessReportStatusFailed,
+	}
+}
+
 const (
 	// CommsProtocolSip is a CommsProtocol enum value
 	CommsProtocolSip = "SIP"
@@ -15049,6 +24228,15 @@ const (
 	// CommsProtocolH323 is a CommsProtocol enum value
 	CommsProtocolH323 = "H323"
 )
+
+// CommsProtocol_Values returns all elements of the CommsProtocol enum
+func CommsProtocol_Values() []string {
+	return []string{
+		CommsProtocolSip,
+		CommsProtocolSips,
+		CommsProtocolH323,
+	}
+}
 
 const (
 	// ConferenceProviderTypeChime is a ConferenceProviderType enum value
@@ -15082,6 +24270,22 @@ const (
 	ConferenceProviderTypeCustom = "CUSTOM"
 )
 
+// ConferenceProviderType_Values returns all elements of the ConferenceProviderType enum
+func ConferenceProviderType_Values() []string {
+	return []string{
+		ConferenceProviderTypeChime,
+		ConferenceProviderTypeBluejeans,
+		ConferenceProviderTypeFuze,
+		ConferenceProviderTypeGoogleHangouts,
+		ConferenceProviderTypePolycom,
+		ConferenceProviderTypeRingcentral,
+		ConferenceProviderTypeSkypeForBusiness,
+		ConferenceProviderTypeWebex,
+		ConferenceProviderTypeZoom,
+		ConferenceProviderTypeCustom,
+	}
+}
+
 const (
 	// ConnectionStatusOnline is a ConnectionStatus enum value
 	ConnectionStatusOnline = "ONLINE"
@@ -15090,6 +24294,14 @@ const (
 	ConnectionStatusOffline = "OFFLINE"
 )
 
+// ConnectionStatus_Values returns all elements of the ConnectionStatus enum
+func ConnectionStatus_Values() []string {
+	return []string{
+		ConnectionStatusOnline,
+		ConnectionStatusOffline,
+	}
+}
+
 const (
 	// DeviceEventTypeConnectionStatus is a DeviceEventType enum value
 	DeviceEventTypeConnectionStatus = "CONNECTION_STATUS"
@@ -15097,6 +24309,14 @@ const (
 	// DeviceEventTypeDeviceStatus is a DeviceEventType enum value
 	DeviceEventTypeDeviceStatus = "DEVICE_STATUS"
 )
+
+// DeviceEventType_Values returns all elements of the DeviceEventType enum
+func DeviceEventType_Values() []string {
+	return []string{
+		DeviceEventTypeConnectionStatus,
+		DeviceEventTypeDeviceStatus,
+	}
+}
 
 const (
 	// DeviceStatusReady is a DeviceStatus enum value
@@ -15110,7 +24330,21 @@ const (
 
 	// DeviceStatusDeregistered is a DeviceStatus enum value
 	DeviceStatusDeregistered = "DEREGISTERED"
+
+	// DeviceStatusFailed is a DeviceStatus enum value
+	DeviceStatusFailed = "FAILED"
 )
+
+// DeviceStatus_Values returns all elements of the DeviceStatus enum
+func DeviceStatus_Values() []string {
+	return []string{
+		DeviceStatusReady,
+		DeviceStatusPending,
+		DeviceStatusWasOffline,
+		DeviceStatusDeregistered,
+		DeviceStatusFailed,
+	}
+}
 
 const (
 	// DeviceStatusDetailCodeDeviceSoftwareUpdateNeeded is a DeviceStatusDetailCode enum value
@@ -15118,7 +24352,87 @@ const (
 
 	// DeviceStatusDetailCodeDeviceWasOffline is a DeviceStatusDetailCode enum value
 	DeviceStatusDetailCodeDeviceWasOffline = "DEVICE_WAS_OFFLINE"
+
+	// DeviceStatusDetailCodeCredentialsAccessFailure is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeCredentialsAccessFailure = "CREDENTIALS_ACCESS_FAILURE"
+
+	// DeviceStatusDetailCodeTlsVersionMismatch is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeTlsVersionMismatch = "TLS_VERSION_MISMATCH"
+
+	// DeviceStatusDetailCodeAssociationRejection is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeAssociationRejection = "ASSOCIATION_REJECTION"
+
+	// DeviceStatusDetailCodeAuthenticationFailure is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeAuthenticationFailure = "AUTHENTICATION_FAILURE"
+
+	// DeviceStatusDetailCodeDhcpFailure is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeDhcpFailure = "DHCP_FAILURE"
+
+	// DeviceStatusDetailCodeInternetUnavailable is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeInternetUnavailable = "INTERNET_UNAVAILABLE"
+
+	// DeviceStatusDetailCodeDnsFailure is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeDnsFailure = "DNS_FAILURE"
+
+	// DeviceStatusDetailCodeUnknownFailure is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeUnknownFailure = "UNKNOWN_FAILURE"
+
+	// DeviceStatusDetailCodeCertificateIssuingLimitExceeded is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeCertificateIssuingLimitExceeded = "CERTIFICATE_ISSUING_LIMIT_EXCEEDED"
+
+	// DeviceStatusDetailCodeInvalidCertificateAuthority is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeInvalidCertificateAuthority = "INVALID_CERTIFICATE_AUTHORITY"
+
+	// DeviceStatusDetailCodeNetworkProfileNotFound is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeNetworkProfileNotFound = "NETWORK_PROFILE_NOT_FOUND"
+
+	// DeviceStatusDetailCodeInvalidPasswordState is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeInvalidPasswordState = "INVALID_PASSWORD_STATE"
+
+	// DeviceStatusDetailCodePasswordNotFound is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodePasswordNotFound = "PASSWORD_NOT_FOUND"
+
+	// DeviceStatusDetailCodePasswordManagerAccessDenied is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodePasswordManagerAccessDenied = "PASSWORD_MANAGER_ACCESS_DENIED"
+
+	// DeviceStatusDetailCodeCertificateAuthorityAccessDenied is a DeviceStatusDetailCode enum value
+	DeviceStatusDetailCodeCertificateAuthorityAccessDenied = "CERTIFICATE_AUTHORITY_ACCESS_DENIED"
 )
+
+// DeviceStatusDetailCode_Values returns all elements of the DeviceStatusDetailCode enum
+func DeviceStatusDetailCode_Values() []string {
+	return []string{
+		DeviceStatusDetailCodeDeviceSoftwareUpdateNeeded,
+		DeviceStatusDetailCodeDeviceWasOffline,
+		DeviceStatusDetailCodeCredentialsAccessFailure,
+		DeviceStatusDetailCodeTlsVersionMismatch,
+		DeviceStatusDetailCodeAssociationRejection,
+		DeviceStatusDetailCodeAuthenticationFailure,
+		DeviceStatusDetailCodeDhcpFailure,
+		DeviceStatusDetailCodeInternetUnavailable,
+		DeviceStatusDetailCodeDnsFailure,
+		DeviceStatusDetailCodeUnknownFailure,
+		DeviceStatusDetailCodeCertificateIssuingLimitExceeded,
+		DeviceStatusDetailCodeInvalidCertificateAuthority,
+		DeviceStatusDetailCodeNetworkProfileNotFound,
+		DeviceStatusDetailCodeInvalidPasswordState,
+		DeviceStatusDetailCodePasswordNotFound,
+		DeviceStatusDetailCodePasswordManagerAccessDenied,
+		DeviceStatusDetailCodeCertificateAuthorityAccessDenied,
+	}
+}
+
+const (
+	// DeviceUsageTypeVoice is a DeviceUsageType enum value
+	DeviceUsageTypeVoice = "VOICE"
+)
+
+// DeviceUsageType_Values returns all elements of the DeviceUsageType enum
+func DeviceUsageType_Values() []string {
+	return []string{
+		DeviceUsageTypeVoice,
+	}
+}
 
 const (
 	// DistanceUnitMetric is a DistanceUnit enum value
@@ -15128,6 +24442,14 @@ const (
 	DistanceUnitImperial = "IMPERIAL"
 )
 
+// DistanceUnit_Values returns all elements of the DistanceUnit enum
+func DistanceUnit_Values() []string {
+	return []string{
+		DistanceUnitMetric,
+		DistanceUnitImperial,
+	}
+}
+
 const (
 	// EnablementTypeEnabled is a EnablementType enum value
 	EnablementTypeEnabled = "ENABLED"
@@ -15136,6 +24458,14 @@ const (
 	EnablementTypePending = "PENDING"
 )
 
+// EnablementType_Values returns all elements of the EnablementType enum
+func EnablementType_Values() []string {
+	return []string{
+		EnablementTypeEnabled,
+		EnablementTypePending,
+	}
+}
+
 const (
 	// EnablementTypeFilterEnabled is a EnablementTypeFilter enum value
 	EnablementTypeFilterEnabled = "ENABLED"
@@ -15143,6 +24473,38 @@ const (
 	// EnablementTypeFilterPending is a EnablementTypeFilter enum value
 	EnablementTypeFilterPending = "PENDING"
 )
+
+// EnablementTypeFilter_Values returns all elements of the EnablementTypeFilter enum
+func EnablementTypeFilter_Values() []string {
+	return []string{
+		EnablementTypeFilterEnabled,
+		EnablementTypeFilterPending,
+	}
+}
+
+const (
+	// EndOfMeetingReminderTypeAnnouncementTimeCheck is a EndOfMeetingReminderType enum value
+	EndOfMeetingReminderTypeAnnouncementTimeCheck = "ANNOUNCEMENT_TIME_CHECK"
+
+	// EndOfMeetingReminderTypeAnnouncementVariableTimeLeft is a EndOfMeetingReminderType enum value
+	EndOfMeetingReminderTypeAnnouncementVariableTimeLeft = "ANNOUNCEMENT_VARIABLE_TIME_LEFT"
+
+	// EndOfMeetingReminderTypeChime is a EndOfMeetingReminderType enum value
+	EndOfMeetingReminderTypeChime = "CHIME"
+
+	// EndOfMeetingReminderTypeKnock is a EndOfMeetingReminderType enum value
+	EndOfMeetingReminderTypeKnock = "KNOCK"
+)
+
+// EndOfMeetingReminderType_Values returns all elements of the EndOfMeetingReminderType enum
+func EndOfMeetingReminderType_Values() []string {
+	return []string{
+		EndOfMeetingReminderTypeAnnouncementTimeCheck,
+		EndOfMeetingReminderTypeAnnouncementVariableTimeLeft,
+		EndOfMeetingReminderTypeChime,
+		EndOfMeetingReminderTypeKnock,
+	}
+}
 
 const (
 	// EnrollmentStatusInitialized is a EnrollmentStatus enum value
@@ -15161,6 +24523,17 @@ const (
 	EnrollmentStatusDeregistering = "DEREGISTERING"
 )
 
+// EnrollmentStatus_Values returns all elements of the EnrollmentStatus enum
+func EnrollmentStatus_Values() []string {
+	return []string{
+		EnrollmentStatusInitialized,
+		EnrollmentStatusPending,
+		EnrollmentStatusRegistered,
+		EnrollmentStatusDisassociating,
+		EnrollmentStatusDeregistering,
+	}
+}
+
 const (
 	// FeatureBluetooth is a Feature enum value
 	FeatureBluetooth = "BLUETOOTH"
@@ -15177,9 +24550,101 @@ const (
 	// FeatureSkills is a Feature enum value
 	FeatureSkills = "SKILLS"
 
+	// FeatureNetworkProfile is a Feature enum value
+	FeatureNetworkProfile = "NETWORK_PROFILE"
+
+	// FeatureSettings is a Feature enum value
+	FeatureSettings = "SETTINGS"
+
 	// FeatureAll is a Feature enum value
 	FeatureAll = "ALL"
 )
+
+// Feature_Values returns all elements of the Feature enum
+func Feature_Values() []string {
+	return []string{
+		FeatureBluetooth,
+		FeatureVolume,
+		FeatureNotifications,
+		FeatureLists,
+		FeatureSkills,
+		FeatureNetworkProfile,
+		FeatureSettings,
+		FeatureAll,
+	}
+}
+
+const (
+	// LocaleEnUs is a Locale enum value
+	LocaleEnUs = "en-US"
+)
+
+// Locale_Values returns all elements of the Locale enum
+func Locale_Values() []string {
+	return []string{
+		LocaleEnUs,
+	}
+}
+
+const (
+	// NetworkEapMethodEapTls is a NetworkEapMethod enum value
+	NetworkEapMethodEapTls = "EAP_TLS"
+)
+
+// NetworkEapMethod_Values returns all elements of the NetworkEapMethod enum
+func NetworkEapMethod_Values() []string {
+	return []string{
+		NetworkEapMethodEapTls,
+	}
+}
+
+const (
+	// NetworkSecurityTypeOpen is a NetworkSecurityType enum value
+	NetworkSecurityTypeOpen = "OPEN"
+
+	// NetworkSecurityTypeWep is a NetworkSecurityType enum value
+	NetworkSecurityTypeWep = "WEP"
+
+	// NetworkSecurityTypeWpaPsk is a NetworkSecurityType enum value
+	NetworkSecurityTypeWpaPsk = "WPA_PSK"
+
+	// NetworkSecurityTypeWpa2Psk is a NetworkSecurityType enum value
+	NetworkSecurityTypeWpa2Psk = "WPA2_PSK"
+
+	// NetworkSecurityTypeWpa2Enterprise is a NetworkSecurityType enum value
+	NetworkSecurityTypeWpa2Enterprise = "WPA2_ENTERPRISE"
+)
+
+// NetworkSecurityType_Values returns all elements of the NetworkSecurityType enum
+func NetworkSecurityType_Values() []string {
+	return []string{
+		NetworkSecurityTypeOpen,
+		NetworkSecurityTypeWep,
+		NetworkSecurityTypeWpaPsk,
+		NetworkSecurityTypeWpa2Psk,
+		NetworkSecurityTypeWpa2Enterprise,
+	}
+}
+
+const (
+	// PhoneNumberTypeMobile is a PhoneNumberType enum value
+	PhoneNumberTypeMobile = "MOBILE"
+
+	// PhoneNumberTypeWork is a PhoneNumberType enum value
+	PhoneNumberTypeWork = "WORK"
+
+	// PhoneNumberTypeHome is a PhoneNumberType enum value
+	PhoneNumberTypeHome = "HOME"
+)
+
+// PhoneNumberType_Values returns all elements of the PhoneNumberType enum
+func PhoneNumberType_Values() []string {
+	return []string{
+		PhoneNumberTypeMobile,
+		PhoneNumberTypeWork,
+		PhoneNumberTypeHome,
+	}
+}
 
 const (
 	// RequirePinYes is a RequirePin enum value
@@ -15192,6 +24657,27 @@ const (
 	RequirePinOptional = "OPTIONAL"
 )
 
+// RequirePin_Values returns all elements of the RequirePin enum
+func RequirePin_Values() []string {
+	return []string{
+		RequirePinYes,
+		RequirePinNo,
+		RequirePinOptional,
+	}
+}
+
+const (
+	// SipTypeWork is a SipType enum value
+	SipTypeWork = "WORK"
+)
+
+// SipType_Values returns all elements of the SipType enum
+func SipType_Values() []string {
+	return []string{
+		SipTypeWork,
+	}
+}
+
 const (
 	// SkillTypePublic is a SkillType enum value
 	SkillTypePublic = "PUBLIC"
@@ -15199,6 +24685,14 @@ const (
 	// SkillTypePrivate is a SkillType enum value
 	SkillTypePrivate = "PRIVATE"
 )
+
+// SkillType_Values returns all elements of the SkillType enum
+func SkillType_Values() []string {
+	return []string{
+		SkillTypePublic,
+		SkillTypePrivate,
+	}
+}
 
 const (
 	// SkillTypeFilterPublic is a SkillTypeFilter enum value
@@ -15211,6 +24705,15 @@ const (
 	SkillTypeFilterAll = "ALL"
 )
 
+// SkillTypeFilter_Values returns all elements of the SkillTypeFilter enum
+func SkillTypeFilter_Values() []string {
+	return []string{
+		SkillTypeFilterPublic,
+		SkillTypeFilterPrivate,
+		SkillTypeFilterAll,
+	}
+}
+
 const (
 	// SortValueAsc is a SortValue enum value
 	SortValueAsc = "ASC"
@@ -15219,6 +24722,14 @@ const (
 	SortValueDesc = "DESC"
 )
 
+// SortValue_Values returns all elements of the SortValue enum
+func SortValue_Values() []string {
+	return []string{
+		SortValueAsc,
+		SortValueDesc,
+	}
+}
+
 const (
 	// TemperatureUnitFahrenheit is a TemperatureUnit enum value
 	TemperatureUnitFahrenheit = "FAHRENHEIT"
@@ -15226,6 +24737,14 @@ const (
 	// TemperatureUnitCelsius is a TemperatureUnit enum value
 	TemperatureUnitCelsius = "CELSIUS"
 )
+
+// TemperatureUnit_Values returns all elements of the TemperatureUnit enum
+func TemperatureUnit_Values() []string {
+	return []string{
+		TemperatureUnitFahrenheit,
+		TemperatureUnitCelsius,
+	}
+}
 
 const (
 	// WakeWordAlexa is a WakeWord enum value
@@ -15240,3 +24759,13 @@ const (
 	// WakeWordComputer is a WakeWord enum value
 	WakeWordComputer = "COMPUTER"
 )
+
+// WakeWord_Values returns all elements of the WakeWord enum
+func WakeWord_Values() []string {
+	return []string{
+		WakeWordAlexa,
+		WakeWordAmazon,
+		WakeWordEcho,
+		WakeWordComputer,
+	}
+}

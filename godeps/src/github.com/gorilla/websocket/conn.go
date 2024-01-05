@@ -6,13 +6,13 @@ package websocket
 
 import (
 	"bufio"
+	"crypto/rand"
 	"encoding/binary"
 	"errors"
 	"io"
-	"io/ioutil"
-	"math/rand"
 	"net"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 	"unicode/utf8"
@@ -180,13 +180,20 @@ var (
 	errInvalidControlFrame = errors.New("websocket: invalid control frame")
 )
 
+// maskRand is an io.Reader for generating mask bytes. The reader is initialized
+// to crypto/rand Reader. Tests swap the reader to a math/rand reader for
+// reproducible results.
+var maskRand = rand.Reader
+
+// newMaskKey returns a new 32 bit value for masking client frames.
 func newMaskKey() [4]byte {
-	n := rand.Uint32()
-	return [4]byte{byte(n), byte(n >> 8), byte(n >> 16), byte(n >> 24)}
+	var k [4]byte
+	_, _ = io.ReadFull(maskRand, k[:])
+	return k
 }
 
 func hideTempErr(err error) error {
-	if e, ok := err.(net.Error); ok && e.Temporary() {
+	if e, ok := err.(net.Error); ok {
 		err = &netError{msg: e.Error(), timeout: e.Timeout()}
 	}
 	return err
@@ -244,8 +251,8 @@ type Conn struct {
 	subprotocol string
 
 	// Write fields
-	mu            chan bool // used as mutex to protect write to conn
-	writeBuf      []byte    // frame is constructed in this buffer.
+	mu            chan struct{} // used as mutex to protect write to conn
+	writeBuf      []byte        // frame is constructed in this buffer.
 	writePool     BufferPool
 	writeBufSize  int
 	writeDeadline time.Time
@@ -260,10 +267,12 @@ type Conn struct {
 	newCompressionWriter   func(io.WriteCloser, int) io.WriteCloser
 
 	// Read fields
-	reader        io.ReadCloser // the current reader returned to the application
-	readErr       error
-	br            *bufio.Reader
-	readRemaining int64 // bytes remaining in current frame.
+	reader  io.ReadCloser // the current reader returned to the application
+	readErr error
+	br      *bufio.Reader
+	// bytes remaining in current frame.
+	// set setReadRemaining to safely update this value and prevent overflow
+	readRemaining int64
 	readFinal     bool  // true the current message has more frames.
 	readLength    int64 // Message size.
 	readLimit     int64 // Maximum message size.
@@ -300,8 +309,8 @@ func newConn(conn net.Conn, isServer bool, readBufferSize, writeBufferSize int, 
 		writeBuf = make([]byte, writeBufferSize)
 	}
 
-	mu := make(chan bool, 1)
-	mu <- true
+	mu := make(chan struct{}, 1)
+	mu <- struct{}{}
 	c := &Conn{
 		isServer:               isServer,
 		br:                     br,
@@ -318,6 +327,17 @@ func newConn(conn net.Conn, isServer bool, readBufferSize, writeBufferSize int, 
 	c.SetPingHandler(nil)
 	c.SetPongHandler(nil)
 	return c
+}
+
+// setReadRemaining tracks the number of bytes remaining on the connection. If n
+// overflows, an ErrReadLimit is returned.
+func (c *Conn) setReadRemaining(n int64) error {
+	if n < 0 {
+		return ErrReadLimit
+	}
+
+	c.readRemaining = n
+	return nil
 }
 
 // Subprotocol returns the negotiated protocol for the connection.
@@ -358,13 +378,15 @@ func (c *Conn) read(n int) ([]byte, error) {
 	if err == io.EOF {
 		err = errUnexpectedEOF
 	}
-	c.br.Discard(len(p))
+	if _, err := c.br.Discard(len(p)); err != nil {
+		return p, err
+	}
 	return p, err
 }
 
 func (c *Conn) write(frameType int, deadline time.Time, buf0, buf1 []byte) error {
 	<-c.mu
-	defer func() { c.mu <- true }()
+	defer func() { c.mu <- struct{}{} }()
 
 	c.writeErrMu.Lock()
 	err := c.writeErr
@@ -373,7 +395,9 @@ func (c *Conn) write(frameType int, deadline time.Time, buf0, buf1 []byte) error
 		return err
 	}
 
-	c.conn.SetWriteDeadline(deadline)
+	if err := c.conn.SetWriteDeadline(deadline); err != nil {
+		return c.writeFatal(err)
+	}
 	if len(buf1) == 0 {
 		_, err = c.conn.Write(buf0)
 	} else {
@@ -383,9 +407,15 @@ func (c *Conn) write(frameType int, deadline time.Time, buf0, buf1 []byte) error
 		return c.writeFatal(err)
 	}
 	if frameType == CloseMessage {
-		c.writeFatal(ErrCloseSent)
+		_ = c.writeFatal(ErrCloseSent)
 	}
 	return nil
+}
+
+func (c *Conn) writeBufs(bufs ...[]byte) error {
+	b := net.Buffers(bufs)
+	_, err := b.WriteTo(c.conn)
+	return err
 }
 
 // WriteControl writes a control message with the given deadline. The allowed
@@ -416,9 +446,9 @@ func (c *Conn) WriteControl(messageType int, data []byte, deadline time.Time) er
 		maskBytes(key, 0, buf[6:])
 	}
 
-	d := time.Hour * 1000
+	d := 1000 * time.Hour
 	if !deadline.IsZero() {
-		d = deadline.Sub(time.Now())
+		d = time.Until(deadline)
 		if d < 0 {
 			return errWriteTimeout
 		}
@@ -431,7 +461,7 @@ func (c *Conn) WriteControl(messageType int, data []byte, deadline time.Time) er
 	case <-timer.C:
 		return errWriteTimeout
 	}
-	defer func() { c.mu <- true }()
+	defer func() { c.mu <- struct{}{} }()
 
 	c.writeErrMu.Lock()
 	err := c.writeErr
@@ -440,13 +470,15 @@ func (c *Conn) WriteControl(messageType int, data []byte, deadline time.Time) er
 		return err
 	}
 
-	c.conn.SetWriteDeadline(deadline)
+	if err := c.conn.SetWriteDeadline(deadline); err != nil {
+		return c.writeFatal(err)
+	}
 	_, err = c.conn.Write(buf)
 	if err != nil {
 		return c.writeFatal(err)
 	}
 	if messageType == CloseMessage {
-		c.writeFatal(ErrCloseSent)
+		_ = c.writeFatal(ErrCloseSent)
 	}
 	return err
 }
@@ -457,7 +489,7 @@ func (c *Conn) beginMessage(mw *messageWriter, messageType int) error {
 	// probably better to return an error in this situation, but we cannot
 	// change this without breaking existing applications.
 	if c.writer != nil {
-		c.writer.Close()
+		_ = c.writer.Close()
 		c.writer = nil
 	}
 
@@ -610,7 +642,7 @@ func (w *messageWriter) flushFrame(final bool, extra []byte) error {
 	}
 
 	if final {
-		w.endMessage(errWriteClosed)
+		_ = w.endMessage(errWriteClosed)
 		return nil
 	}
 
@@ -708,10 +740,7 @@ func (w *messageWriter) Close() error {
 	if w.err != nil {
 		return w.err
 	}
-	if err := w.flushFrame(true, nil); err != nil {
-		return err
-	}
-	return nil
+	return w.flushFrame(true, nil)
 }
 
 // WritePreparedMessage writes prepared message into connection.
@@ -778,56 +807,90 @@ func (c *Conn) advanceFrame() (int, error) {
 	// 1. Skip remainder of previous frame.
 
 	if c.readRemaining > 0 {
-		if _, err := io.CopyN(ioutil.Discard, c.br, c.readRemaining); err != nil {
+		if _, err := io.CopyN(io.Discard, c.br, c.readRemaining); err != nil {
 			return noFrame, err
 		}
 	}
 
 	// 2. Read and parse first two bytes of frame header.
+	// To aid debugging, collect and report all errors in the first two bytes
+	// of the header.
+
+	var errors []string
 
 	p, err := c.read(2)
 	if err != nil {
 		return noFrame, err
 	}
 
-	final := p[0]&finalBit != 0
 	frameType := int(p[0] & 0xf)
+	final := p[0]&finalBit != 0
+	rsv1 := p[0]&rsv1Bit != 0
+	rsv2 := p[0]&rsv2Bit != 0
+	rsv3 := p[0]&rsv3Bit != 0
 	mask := p[1]&maskBit != 0
-	c.readRemaining = int64(p[1] & 0x7f)
-
-	c.readDecompress = false
-	if c.newDecompressionReader != nil && (p[0]&rsv1Bit) != 0 {
-		c.readDecompress = true
-		p[0] &^= rsv1Bit
+	if err := c.setReadRemaining(int64(p[1] & 0x7f)); err != nil {
+		return noFrame, err
 	}
 
-	if rsv := p[0] & (rsv1Bit | rsv2Bit | rsv3Bit); rsv != 0 {
-		return noFrame, c.handleProtocolError("unexpected reserved bits 0x" + strconv.FormatInt(int64(rsv), 16))
+	c.readDecompress = false
+	if rsv1 {
+		if c.newDecompressionReader != nil {
+			c.readDecompress = true
+		} else {
+			errors = append(errors, "RSV1 set")
+		}
+	}
+
+	if rsv2 {
+		errors = append(errors, "RSV2 set")
+	}
+
+	if rsv3 {
+		errors = append(errors, "RSV3 set")
 	}
 
 	switch frameType {
 	case CloseMessage, PingMessage, PongMessage:
 		if c.readRemaining > maxControlFramePayloadSize {
-			return noFrame, c.handleProtocolError("control frame length > 125")
+			errors = append(errors, "len > 125 for control")
 		}
 		if !final {
-			return noFrame, c.handleProtocolError("control frame not final")
+			errors = append(errors, "FIN not set on control")
 		}
 	case TextMessage, BinaryMessage:
 		if !c.readFinal {
-			return noFrame, c.handleProtocolError("message start before final message frame")
+			errors = append(errors, "data before FIN")
 		}
 		c.readFinal = final
 	case continuationFrame:
 		if c.readFinal {
-			return noFrame, c.handleProtocolError("continuation after final message frame")
+			errors = append(errors, "continuation after FIN")
 		}
 		c.readFinal = final
 	default:
-		return noFrame, c.handleProtocolError("unknown opcode " + strconv.Itoa(frameType))
+		errors = append(errors, "bad opcode "+strconv.Itoa(frameType))
 	}
 
-	// 3. Read and parse frame length.
+	if mask != c.isServer {
+		errors = append(errors, "bad MASK")
+	}
+
+	if len(errors) > 0 {
+		return noFrame, c.handleProtocolError(strings.Join(errors, ", "))
+	}
+
+	// 3. Read and parse frame length as per
+	// https://tools.ietf.org/html/rfc6455#section-5.2
+	//
+	// The length of the "Payload data", in bytes: if 0-125, that is the payload
+	// length.
+	// - If 126, the following 2 bytes interpreted as a 16-bit unsigned
+	// integer are the payload length.
+	// - If 127, the following 8 bytes interpreted as
+	// a 64-bit unsigned integer (the most significant bit MUST be 0) are the
+	// payload length. Multibyte length quantities are expressed in network byte
+	// order.
 
 	switch c.readRemaining {
 	case 126:
@@ -835,20 +898,22 @@ func (c *Conn) advanceFrame() (int, error) {
 		if err != nil {
 			return noFrame, err
 		}
-		c.readRemaining = int64(binary.BigEndian.Uint16(p))
+
+		if err := c.setReadRemaining(int64(binary.BigEndian.Uint16(p))); err != nil {
+			return noFrame, err
+		}
 	case 127:
 		p, err := c.read(8)
 		if err != nil {
 			return noFrame, err
 		}
-		c.readRemaining = int64(binary.BigEndian.Uint64(p))
+
+		if err := c.setReadRemaining(int64(binary.BigEndian.Uint64(p))); err != nil {
+			return noFrame, err
+		}
 	}
 
 	// 4. Handle frame masking.
-
-	if mask != c.isServer {
-		return noFrame, c.handleProtocolError("incorrect mask flag")
-	}
 
 	if mask {
 		c.readMaskPos = 0
@@ -864,8 +929,16 @@ func (c *Conn) advanceFrame() (int, error) {
 	if frameType == continuationFrame || frameType == TextMessage || frameType == BinaryMessage {
 
 		c.readLength += c.readRemaining
+		// Don't allow readLength to overflow in the presence of a large readRemaining
+		// counter.
+		if c.readLength < 0 {
+			return noFrame, ErrReadLimit
+		}
+
 		if c.readLimit > 0 && c.readLength > c.readLimit {
-			c.WriteControl(CloseMessage, FormatCloseMessage(CloseMessageTooBig, ""), time.Now().Add(writeWait))
+			if err := c.WriteControl(CloseMessage, FormatCloseMessage(CloseMessageTooBig, ""), time.Now().Add(writeWait)); err != nil {
+				return noFrame, err
+			}
 			return noFrame, ErrReadLimit
 		}
 
@@ -877,7 +950,9 @@ func (c *Conn) advanceFrame() (int, error) {
 	var payload []byte
 	if c.readRemaining > 0 {
 		payload, err = c.read(int(c.readRemaining))
-		c.readRemaining = 0
+		if err := c.setReadRemaining(0); err != nil {
+			return noFrame, err
+		}
 		if err != nil {
 			return noFrame, err
 		}
@@ -903,7 +978,7 @@ func (c *Conn) advanceFrame() (int, error) {
 		if len(payload) >= 2 {
 			closeCode = int(binary.BigEndian.Uint16(payload))
 			if !isValidReceivedCloseCode(closeCode) {
-				return noFrame, c.handleProtocolError("invalid close code")
+				return noFrame, c.handleProtocolError("bad close code " + strconv.Itoa(closeCode))
 			}
 			closeText = string(payload[2:])
 			if !utf8.ValidString(closeText) {
@@ -920,7 +995,13 @@ func (c *Conn) advanceFrame() (int, error) {
 }
 
 func (c *Conn) handleProtocolError(message string) error {
-	c.WriteControl(CloseMessage, FormatCloseMessage(CloseProtocolError, message), time.Now().Add(writeWait))
+	data := FormatCloseMessage(CloseProtocolError, message)
+	if len(data) > maxControlFramePayloadSize {
+		data = data[:maxControlFramePayloadSize]
+	}
+	if err := c.WriteControl(CloseMessage, data, time.Now().Add(writeWait)); err != nil {
+		return err
+	}
 	return errors.New("websocket: " + message)
 }
 
@@ -937,7 +1018,7 @@ func (c *Conn) handleProtocolError(message string) error {
 func (c *Conn) NextReader() (messageType int, r io.Reader, err error) {
 	// Close previous reader, only relevant for decompression.
 	if c.reader != nil {
-		c.reader.Close()
+		_ = c.reader.Close()
 		c.reader = nil
 	}
 
@@ -950,6 +1031,7 @@ func (c *Conn) NextReader() (messageType int, r io.Reader, err error) {
 			c.readErr = hideTempErr(err)
 			break
 		}
+
 		if frameType == TextMessage || frameType == BinaryMessage {
 			c.messageReader = &messageReader{c}
 			c.reader = c.messageReader
@@ -990,7 +1072,11 @@ func (r *messageReader) Read(b []byte) (int, error) {
 			if c.isServer {
 				c.readMaskPos = maskBytes(c.readMaskKey, c.readMaskPos, b[:n])
 			}
-			c.readRemaining -= int64(n)
+			rem := c.readRemaining
+			rem -= int64(n)
+			if err := c.setReadRemaining(rem); err != nil {
+				return 0, err
+			}
 			if c.readRemaining > 0 && c.readErr == io.EOF {
 				c.readErr = errUnexpectedEOF
 			}
@@ -1030,7 +1116,7 @@ func (c *Conn) ReadMessage() (messageType int, p []byte, err error) {
 	if err != nil {
 		return messageType, nil, err
 	}
-	p, err = ioutil.ReadAll(r)
+	p, err = io.ReadAll(r)
 	return messageType, p, err
 }
 
@@ -1072,7 +1158,10 @@ func (c *Conn) SetCloseHandler(h func(code int, text string) error) {
 	if h == nil {
 		h = func(code int, text string) error {
 			message := FormatCloseMessage(code, "")
-			c.WriteControl(CloseMessage, message, time.Now().Add(writeWait))
+			err := c.WriteControl(CloseMessage, message, time.Now().Add(writeWait))
+			if err != nil && err != ErrCloseSent {
+				return err
+			}
 			return nil
 		}
 	}
@@ -1097,7 +1186,7 @@ func (c *Conn) SetPingHandler(h func(appData string) error) {
 			err := c.WriteControl(PongMessage, []byte(message), time.Now().Add(writeWait))
 			if err == ErrCloseSent {
 				return nil
-			} else if e, ok := err.(net.Error); ok && e.Temporary() {
+			} else if _, ok := err.(net.Error); ok {
 				return nil
 			}
 			return err
@@ -1125,8 +1214,16 @@ func (c *Conn) SetPongHandler(h func(appData string) error) {
 	c.handlePong = h
 }
 
+// NetConn returns the underlying connection that is wrapped by c.
+// Note that writing to or reading from this connection directly will corrupt the
+// WebSocket connection.
+func (c *Conn) NetConn() net.Conn {
+	return c.conn
+}
+
 // UnderlyingConn returns the internal net.Conn. This can be used to further
 // modifications to connection specific flags.
+// Deprecated: Use the NetConn method.
 func (c *Conn) UnderlyingConn() net.Conn {
 	return c.conn
 }

@@ -1,27 +1,39 @@
-[![Sourcegraph](https://sourcegraph.com/github.com/ugorji/go/codec/-/badge.svg?v=3)](https://sourcegraph.com/github.com/ugorji/go/-/tree/codec?badge)
-[![Build Status](https://travis-ci.org/ugorji/go.svg?branch=master)](https://travis-ci.org/ugorji/go)
-[![codecov](https://codecov.io/gh/ugorji/go/branch/master/graph/badge.svg?v=2)](https://codecov.io/gh/ugorji/go)
-[![GoDoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](http://godoc.org/github.com/ugorji/go/codec)
-[![rcard](https://goreportcard.com/badge/github.com/ugorji/go/codec?v=2)](https://goreportcard.com/report/github.com/ugorji/go/codec)
+[![Sourcegraph](https://sourcegraph.com/github.com/ugorji/go/-/badge.svg?v=4)](https://sourcegraph.com/github.com/ugorji/go/-/tree/codec?badge)
+[![Build and Test go-codec](https://github.com/ugorji/go/actions/workflows/test.yml/badge.svg)](https://github.com/ugorji/go/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/ugorji/go/branch/master/graph/badge.svg?v=4)](https://codecov.io/gh/ugorji/go)
+[![Go Reference](https://pkg.go.dev/badge/github.com/ugorji/go/codec.svg)](https://pkg.go.dev/github.com/ugorji/go/codec)
+[![rcard](https://goreportcard.com/badge/github.com/ugorji/go/codec?v=4)](https://goreportcard.com/report/github.com/ugorji/go/codec)
 [![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/ugorji/go/master/LICENSE)
 
-# go/codec
+# go-codec
 
-This repository contains the `go-codec` library,
-a High Performance and Feature-Rich Idiomatic encode/decode and rpc library for
+This repository contains the `go-codec` library, the `codecgen` tool and
+benchmarks for comparing against other libraries.
 
-  - msgpack: https://github.com/msgpack/msgpack
-  - binc:    http://github.com/ugorji/binc
-  - cbor:    http://cbor.io http://tools.ietf.org/html/rfc7049
-  - json:    http://json.org http://tools.ietf.org/html/rfc7159 
+This is a High Performance, Feature-Rich Idiomatic Go 1.4+ codec/encoding library
+for binary and text formats: binc, msgpack, cbor, json and simple.
 
-For more information:
+It fully supports the legacy `GOPATH` and the new `go modules` modes.
 
-  - [see the codec/Readme for quick usage information](https://github.com/ugorji/go/tree/master/codec#readme)
-  - [view the API on godoc](http://godoc.org/github.com/ugorji/go/codec)
-  - [read the detailed usage/how-to primer](http://ugorji.net/blog/go-codec-primer)
+## Code Organization and Module Support
 
-Install using:
+This repository consists of 4 modules:
 
-    go get github.com/ugorji/go/codec
+- `github.com/ugorji/go/codec` [README](codec/README.md)
+- `github.com/ugorji/go/codec/codecgen` (requires `github.com/ugorji/go/codec`) [README](codec/codecgen/README.md)
+- `github.com/ugorji/go/codec/bench` (requires `github.com/ugorji/go/codec`) [README](codec/bench/README.md)
+- `github.com/ugorji/go` (requires `github.com/ugorji/go/codec`)
 
+For encoding and decoding, the `github.com/ugorji/go/codec` module is sufficient.
+
+To install:
+
+```
+go get github.com/ugorji/go/codec
+```
+
+The other modules exist for specific uses, and all require `github.com/ugorji/go/codec`
+
+- `github.com/ugorji/go/codec/codecgen` generates high performance static encoders/decoders for given types
+- `github.com/ugorji/go/codec/bench` benchmarks codec against other popular go libraries
+- `github.com/ugorji/go` is here for [historical compatibility reasons, as modules was initially introduced only at repo root](https://github.com/ugorji/go/issues/299)

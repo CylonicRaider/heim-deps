@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Kinesis Analytics.
-//    func myFunc(svc kinesisanalyticsiface.KinesisAnalyticsAPI) bool {
-//        // Make svc.AddApplicationCloudWatchLoggingOption request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// Amazon Kinesis Analytics.
+//	func myFunc(svc kinesisanalyticsiface.KinesisAnalyticsAPI) bool {
+//	    // Make svc.AddApplicationCloudWatchLoggingOption request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := kinesisanalytics.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := kinesisanalytics.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockKinesisAnalyticsClient struct {
-//        kinesisanalyticsiface.KinesisAnalyticsAPI
-//    }
-//    func (m *mockKinesisAnalyticsClient) AddApplicationCloudWatchLoggingOption(input *kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput) (*kinesisanalytics.AddApplicationCloudWatchLoggingOptionOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockKinesisAnalyticsClient struct {
+//	    kinesisanalyticsiface.KinesisAnalyticsAPI
+//	}
+//	func (m *mockKinesisAnalyticsClient) AddApplicationCloudWatchLoggingOption(input *kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput) (*kinesisanalytics.AddApplicationCloudWatchLoggingOptionOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockKinesisAnalyticsClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockKinesisAnalyticsClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -116,6 +116,10 @@ type KinesisAnalyticsAPI interface {
 	ListApplicationsWithContext(aws.Context, *kinesisanalytics.ListApplicationsInput, ...request.Option) (*kinesisanalytics.ListApplicationsOutput, error)
 	ListApplicationsRequest(*kinesisanalytics.ListApplicationsInput) (*request.Request, *kinesisanalytics.ListApplicationsOutput)
 
+	ListTagsForResource(*kinesisanalytics.ListTagsForResourceInput) (*kinesisanalytics.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *kinesisanalytics.ListTagsForResourceInput, ...request.Option) (*kinesisanalytics.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*kinesisanalytics.ListTagsForResourceInput) (*request.Request, *kinesisanalytics.ListTagsForResourceOutput)
+
 	StartApplication(*kinesisanalytics.StartApplicationInput) (*kinesisanalytics.StartApplicationOutput, error)
 	StartApplicationWithContext(aws.Context, *kinesisanalytics.StartApplicationInput, ...request.Option) (*kinesisanalytics.StartApplicationOutput, error)
 	StartApplicationRequest(*kinesisanalytics.StartApplicationInput) (*request.Request, *kinesisanalytics.StartApplicationOutput)
@@ -123,6 +127,14 @@ type KinesisAnalyticsAPI interface {
 	StopApplication(*kinesisanalytics.StopApplicationInput) (*kinesisanalytics.StopApplicationOutput, error)
 	StopApplicationWithContext(aws.Context, *kinesisanalytics.StopApplicationInput, ...request.Option) (*kinesisanalytics.StopApplicationOutput, error)
 	StopApplicationRequest(*kinesisanalytics.StopApplicationInput) (*request.Request, *kinesisanalytics.StopApplicationOutput)
+
+	TagResource(*kinesisanalytics.TagResourceInput) (*kinesisanalytics.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *kinesisanalytics.TagResourceInput, ...request.Option) (*kinesisanalytics.TagResourceOutput, error)
+	TagResourceRequest(*kinesisanalytics.TagResourceInput) (*request.Request, *kinesisanalytics.TagResourceOutput)
+
+	UntagResource(*kinesisanalytics.UntagResourceInput) (*kinesisanalytics.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *kinesisanalytics.UntagResourceInput, ...request.Option) (*kinesisanalytics.UntagResourceOutput, error)
+	UntagResourceRequest(*kinesisanalytics.UntagResourceInput) (*request.Request, *kinesisanalytics.UntagResourceOutput)
 
 	UpdateApplication(*kinesisanalytics.UpdateApplicationInput) (*kinesisanalytics.UpdateApplicationOutput, error)
 	UpdateApplicationWithContext(aws.Context, *kinesisanalytics.UpdateApplicationInput, ...request.Option) (*kinesisanalytics.UpdateApplicationOutput, error)

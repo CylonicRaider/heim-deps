@@ -29,14 +29,13 @@ const opAddApplicationCloudWatchLoggingOption = "AddApplicationCloudWatchLogging
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddApplicationCloudWatchLoggingOptionRequest method.
+//	req, resp := client.AddApplicationCloudWatchLoggingOptionRequest(params)
 //
-//    // Example sending a request using the AddApplicationCloudWatchLoggingOptionRequest method.
-//    req, resp := client.AddApplicationCloudWatchLoggingOptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationCloudWatchLoggingOption
 func (c *KinesisAnalyticsV2) AddApplicationCloudWatchLoggingOptionRequest(input *AddApplicationCloudWatchLoggingOptionInput) (req *request.Request, output *AddApplicationCloudWatchLoggingOptionOutput) {
@@ -67,23 +66,27 @@ func (c *KinesisAnalyticsV2) AddApplicationCloudWatchLoggingOptionRequest(input 
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation AddApplicationCloudWatchLoggingOption for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - InvalidApplicationConfigurationException
+//     The user-provided application configuration is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationCloudWatchLoggingOption
 func (c *KinesisAnalyticsV2) AddApplicationCloudWatchLoggingOption(input *AddApplicationCloudWatchLoggingOptionInput) (*AddApplicationCloudWatchLoggingOptionOutput, error) {
@@ -123,14 +126,13 @@ const opAddApplicationInput = "AddApplicationInput"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddApplicationInputRequest method.
+//	req, resp := client.AddApplicationInputRequest(params)
 //
-//    // Example sending a request using the AddApplicationInputRequest method.
-//    req, resp := client.AddApplicationInputRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationInput
 func (c *KinesisAnalyticsV2) AddApplicationInputRequest(input *AddApplicationInputInput) (req *request.Request, output *AddApplicationInputOutput) {
@@ -151,7 +153,7 @@ func (c *KinesisAnalyticsV2) AddApplicationInputRequest(input *AddApplicationInp
 
 // AddApplicationInput API operation for Amazon Kinesis Analytics.
 //
-// Adds a streaming source to your SQL-based Amazon Kinesis Data Analytics application.
+// Adds a streaming source to your SQL-based Kinesis Data Analytics application.
 //
 // You can add a streaming source when you create an application, or you can
 // use this operation to add a streaming source after you create an application.
@@ -168,27 +170,28 @@ func (c *KinesisAnalyticsV2) AddApplicationInputRequest(input *AddApplicationInp
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation AddApplicationInput for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeCodeValidationException "CodeValidationException"
-//   The user-provided application code (query) is not valid. This can be a simple
-//   syntax error.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - CodeValidationException
+//     The user-provided application code (query) is not valid. This can be a simple
+//     syntax error.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationInput
 func (c *KinesisAnalyticsV2) AddApplicationInput(input *AddApplicationInputInput) (*AddApplicationInputOutput, error) {
@@ -228,14 +231,13 @@ const opAddApplicationInputProcessingConfiguration = "AddApplicationInputProcess
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddApplicationInputProcessingConfigurationRequest method.
+//	req, resp := client.AddApplicationInputProcessingConfigurationRequest(params)
 //
-//    // Example sending a request using the AddApplicationInputProcessingConfigurationRequest method.
-//    req, resp := client.AddApplicationInputProcessingConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationInputProcessingConfiguration
 func (c *KinesisAnalyticsV2) AddApplicationInputProcessingConfigurationRequest(input *AddApplicationInputProcessingConfigurationInput) (req *request.Request, output *AddApplicationInputProcessingConfigurationOutput) {
@@ -256,10 +258,10 @@ func (c *KinesisAnalyticsV2) AddApplicationInputProcessingConfigurationRequest(i
 
 // AddApplicationInputProcessingConfiguration API operation for Amazon Kinesis Analytics.
 //
-// Adds an InputProcessingConfiguration to an SQL-based Kinesis Data Analytics
+// Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics
 // application. An input processor pre-processes records on the input stream
 // before the application's SQL code executes. Currently, the only input processor
-// available is AWS Lambda (https://aws.amazon.com/documentation/lambda/).
+// available is Amazon Lambda (https://docs.aws.amazon.com/lambda/).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -268,23 +270,24 @@ func (c *KinesisAnalyticsV2) AddApplicationInputProcessingConfigurationRequest(i
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation AddApplicationInputProcessingConfiguration for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationInputProcessingConfiguration
 func (c *KinesisAnalyticsV2) AddApplicationInputProcessingConfiguration(input *AddApplicationInputProcessingConfigurationInput) (*AddApplicationInputProcessingConfigurationOutput, error) {
@@ -324,14 +327,13 @@ const opAddApplicationOutput = "AddApplicationOutput"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddApplicationOutputRequest method.
+//	req, resp := client.AddApplicationOutputRequest(params)
 //
-//    // Example sending a request using the AddApplicationOutputRequest method.
-//    req, resp := client.AddApplicationOutputRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationOutput
 func (c *KinesisAnalyticsV2) AddApplicationOutputRequest(input *AddApplicationOutputInput) (req *request.Request, output *AddApplicationOutputOutput) {
@@ -352,15 +354,14 @@ func (c *KinesisAnalyticsV2) AddApplicationOutputRequest(input *AddApplicationOu
 
 // AddApplicationOutput API operation for Amazon Kinesis Analytics.
 //
-// Adds an external destination to your SQL-based Amazon Kinesis Data Analytics
-// application.
+// Adds an external destination to your SQL-based Kinesis Data Analytics application.
 //
 // If you want Kinesis Data Analytics to deliver data from an in-application
 // stream within your application to an external destination (such as an Kinesis
-// data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function),
-// you add the relevant configuration to your application using this operation.
-// You can configure one or more outputs for your application. Each output configuration
-// maps an in-application stream and an external destination.
+// data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda
+// function), you add the relevant configuration to your application using this
+// operation. You can configure one or more outputs for your application. Each
+// output configuration maps an in-application stream and an external destination.
 //
 // You can use one of the output configurations to deliver data from your in-application
 // error stream to an external destination so that you can analyze the errors.
@@ -376,23 +377,24 @@ func (c *KinesisAnalyticsV2) AddApplicationOutputRequest(input *AddApplicationOu
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation AddApplicationOutput for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationOutput
 func (c *KinesisAnalyticsV2) AddApplicationOutput(input *AddApplicationOutputInput) (*AddApplicationOutputOutput, error) {
@@ -432,14 +434,13 @@ const opAddApplicationReferenceDataSource = "AddApplicationReferenceDataSource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddApplicationReferenceDataSourceRequest method.
+//	req, resp := client.AddApplicationReferenceDataSourceRequest(params)
 //
-//    // Example sending a request using the AddApplicationReferenceDataSourceRequest method.
-//    req, resp := client.AddApplicationReferenceDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationReferenceDataSource
 func (c *KinesisAnalyticsV2) AddApplicationReferenceDataSourceRequest(input *AddApplicationReferenceDataSourceInput) (req *request.Request, output *AddApplicationReferenceDataSourceOutput) {
@@ -460,8 +461,8 @@ func (c *KinesisAnalyticsV2) AddApplicationReferenceDataSourceRequest(input *Add
 
 // AddApplicationReferenceDataSource API operation for Amazon Kinesis Analytics.
 //
-// Adds a reference data source to an existing SQL-based Amazon Kinesis Data
-// Analytics application.
+// Adds a reference data source to an existing SQL-based Kinesis Data Analytics
+// application.
 //
 // Kinesis Data Analytics reads reference data (that is, an Amazon S3 object)
 // and creates an in-application table within your application. In the request,
@@ -477,23 +478,24 @@ func (c *KinesisAnalyticsV2) AddApplicationReferenceDataSourceRequest(input *Add
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation AddApplicationReferenceDataSource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationReferenceDataSource
 func (c *KinesisAnalyticsV2) AddApplicationReferenceDataSource(input *AddApplicationReferenceDataSourceInput) (*AddApplicationReferenceDataSourceOutput, error) {
@@ -517,6 +519,108 @@ func (c *KinesisAnalyticsV2) AddApplicationReferenceDataSourceWithContext(ctx aw
 	return out, req.Send()
 }
 
+const opAddApplicationVpcConfiguration = "AddApplicationVpcConfiguration"
+
+// AddApplicationVpcConfigurationRequest generates a "aws/request.Request" representing the
+// client's request for the AddApplicationVpcConfiguration operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AddApplicationVpcConfiguration for more information on using the AddApplicationVpcConfiguration
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AddApplicationVpcConfigurationRequest method.
+//	req, resp := client.AddApplicationVpcConfigurationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationVpcConfiguration
+func (c *KinesisAnalyticsV2) AddApplicationVpcConfigurationRequest(input *AddApplicationVpcConfigurationInput) (req *request.Request, output *AddApplicationVpcConfigurationOutput) {
+	op := &request.Operation{
+		Name:       opAddApplicationVpcConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AddApplicationVpcConfigurationInput{}
+	}
+
+	output = &AddApplicationVpcConfigurationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// AddApplicationVpcConfiguration API operation for Amazon Kinesis Analytics.
+//
+// Adds a Virtual Private Cloud (VPC) configuration to the application. Applications
+// can use VPCs to store and access resources securely.
+//
+// Note the following about VPC configurations for Kinesis Data Analytics applications:
+//
+//   - VPC configurations are not supported for SQL applications.
+//
+//   - When a VPC is added to a Kinesis Data Analytics application, the application
+//     can no longer be accessed from the Internet directly. To enable Internet
+//     access to the application, add an Internet gateway to your VPC.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation AddApplicationVpcConfiguration for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - ResourceInUseException
+//     The application is not available for this operation.
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidApplicationConfigurationException
+//     The user-provided application configuration is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationVpcConfiguration
+func (c *KinesisAnalyticsV2) AddApplicationVpcConfiguration(input *AddApplicationVpcConfigurationInput) (*AddApplicationVpcConfigurationOutput, error) {
+	req, out := c.AddApplicationVpcConfigurationRequest(input)
+	return out, req.Send()
+}
+
+// AddApplicationVpcConfigurationWithContext is the same as AddApplicationVpcConfiguration with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AddApplicationVpcConfiguration for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) AddApplicationVpcConfigurationWithContext(ctx aws.Context, input *AddApplicationVpcConfigurationInput, opts ...request.Option) (*AddApplicationVpcConfigurationOutput, error) {
+	req, out := c.AddApplicationVpcConfigurationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateApplication = "CreateApplication"
 
 // CreateApplicationRequest generates a "aws/request.Request" representing the
@@ -533,14 +637,13 @@ const opCreateApplication = "CreateApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateApplicationRequest method.
+//	req, resp := client.CreateApplicationRequest(params)
 //
-//    // Example sending a request using the CreateApplicationRequest method.
-//    req, resp := client.CreateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplication
 func (c *KinesisAnalyticsV2) CreateApplicationRequest(input *CreateApplicationInput) (req *request.Request, output *CreateApplicationOutput) {
@@ -561,12 +664,8 @@ func (c *KinesisAnalyticsV2) CreateApplicationRequest(input *CreateApplicationIn
 
 // CreateApplication API operation for Amazon Kinesis Analytics.
 //
-// Creates an Amazon Kinesis Data Analytics application. For information about
-// creating a Kinesis Data Analytics application, see Creating an Application
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/Java/creating-app.html).
-//
-// SQL is not enabled for this private beta release. Using SQL parameters (such
-// as SqlApplicationConfiguration) will result in an error.
+// Creates a Kinesis Data Analytics application. For information about creating
+// a Kinesis Data Analytics application, see Creating an Application (https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -575,22 +674,37 @@ func (c *KinesisAnalyticsV2) CreateApplicationRequest(input *CreateApplicationIn
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation CreateApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCodeValidationException "CodeValidationException"
-//   The user-provided application code (query) is not valid. This can be a simple
-//   syntax error.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - CodeValidationException
+//     The user-provided application code (query) is not valid. This can be a simple
+//     syntax error.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of allowed resources has been exceeded.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - LimitExceededException
+//     The number of allowed resources has been exceeded.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - TooManyTagsException
+//     Application created with too many tags, or too many tags added to an application.
+//     Note that the maximum number of application tags includes system tags. The
+//     maximum number of user-defined application tags is 50.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplication
 func (c *KinesisAnalyticsV2) CreateApplication(input *CreateApplicationInput) (*CreateApplicationOutput, error) {
@@ -614,6 +728,105 @@ func (c *KinesisAnalyticsV2) CreateApplicationWithContext(ctx aws.Context, input
 	return out, req.Send()
 }
 
+const opCreateApplicationPresignedUrl = "CreateApplicationPresignedUrl"
+
+// CreateApplicationPresignedUrlRequest generates a "aws/request.Request" representing the
+// client's request for the CreateApplicationPresignedUrl operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateApplicationPresignedUrl for more information on using the CreateApplicationPresignedUrl
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateApplicationPresignedUrlRequest method.
+//	req, resp := client.CreateApplicationPresignedUrlRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationPresignedUrl
+func (c *KinesisAnalyticsV2) CreateApplicationPresignedUrlRequest(input *CreateApplicationPresignedUrlInput) (req *request.Request, output *CreateApplicationPresignedUrlOutput) {
+	op := &request.Operation{
+		Name:       opCreateApplicationPresignedUrl,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateApplicationPresignedUrlInput{}
+	}
+
+	output = &CreateApplicationPresignedUrlOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateApplicationPresignedUrl API operation for Amazon Kinesis Analytics.
+//
+// Creates and returns a URL that you can use to connect to an application's
+// extension.
+//
+// The IAM role or user used to call this API defines the permissions to access
+// the extension. After the presigned URL is created, no additional permission
+// is required to access this URL. IAM authorization policies for this API are
+// also enforced for every HTTP request that attempts to connect to the extension.
+//
+// You control the amount of time that the URL will be valid using the SessionExpirationDurationInSeconds
+// parameter. If you do not provide this parameter, the returned URL is valid
+// for twelve hours.
+//
+// The URL that you get from a call to CreateApplicationPresignedUrl must be
+// used within 3 minutes to be valid. If you first try to use the URL after
+// the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation CreateApplicationPresignedUrl for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - ResourceInUseException
+//     The application is not available for this operation.
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationPresignedUrl
+func (c *KinesisAnalyticsV2) CreateApplicationPresignedUrl(input *CreateApplicationPresignedUrlInput) (*CreateApplicationPresignedUrlOutput, error) {
+	req, out := c.CreateApplicationPresignedUrlRequest(input)
+	return out, req.Send()
+}
+
+// CreateApplicationPresignedUrlWithContext is the same as CreateApplicationPresignedUrl with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateApplicationPresignedUrl for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) CreateApplicationPresignedUrlWithContext(ctx aws.Context, input *CreateApplicationPresignedUrlInput, opts ...request.Option) (*CreateApplicationPresignedUrlOutput, error) {
+	req, out := c.CreateApplicationPresignedUrlRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateApplicationSnapshot = "CreateApplicationSnapshot"
 
 // CreateApplicationSnapshotRequest generates a "aws/request.Request" representing the
@@ -630,14 +843,13 @@ const opCreateApplicationSnapshot = "CreateApplicationSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateApplicationSnapshotRequest method.
+//	req, resp := client.CreateApplicationSnapshotRequest(params)
 //
-//    // Example sending a request using the CreateApplicationSnapshotRequest method.
-//    req, resp := client.CreateApplicationSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationSnapshot
 func (c *KinesisAnalyticsV2) CreateApplicationSnapshotRequest(input *CreateApplicationSnapshotInput) (req *request.Request, output *CreateApplicationSnapshotOutput) {
@@ -668,25 +880,29 @@ func (c *KinesisAnalyticsV2) CreateApplicationSnapshotRequest(input *CreateAppli
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation CreateApplicationSnapshot for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of allowed resources has been exceeded.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - LimitExceededException
+//     The number of allowed resources has been exceeded.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - InvalidApplicationConfigurationException
+//     The user-provided application configuration is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationSnapshot
 func (c *KinesisAnalyticsV2) CreateApplicationSnapshot(input *CreateApplicationSnapshotInput) (*CreateApplicationSnapshotOutput, error) {
@@ -726,14 +942,13 @@ const opDeleteApplication = "DeleteApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteApplicationRequest method.
+//	req, resp := client.DeleteApplicationRequest(params)
 //
-//    // Example sending a request using the DeleteApplicationRequest method.
-//    req, resp := client.DeleteApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplication
 func (c *KinesisAnalyticsV2) DeleteApplicationRequest(input *DeleteApplicationInput) (req *request.Request, output *DeleteApplicationOutput) {
@@ -765,23 +980,27 @@ func (c *KinesisAnalyticsV2) DeleteApplicationRequest(input *DeleteApplicationIn
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation DeleteApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - InvalidApplicationConfigurationException
+//     The user-provided application configuration is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplication
 func (c *KinesisAnalyticsV2) DeleteApplication(input *DeleteApplicationInput) (*DeleteApplicationOutput, error) {
@@ -821,14 +1040,13 @@ const opDeleteApplicationCloudWatchLoggingOption = "DeleteApplicationCloudWatchL
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteApplicationCloudWatchLoggingOptionRequest method.
+//	req, resp := client.DeleteApplicationCloudWatchLoggingOptionRequest(params)
 //
-//    // Example sending a request using the DeleteApplicationCloudWatchLoggingOptionRequest method.
-//    req, resp := client.DeleteApplicationCloudWatchLoggingOptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationCloudWatchLoggingOption
 func (c *KinesisAnalyticsV2) DeleteApplicationCloudWatchLoggingOptionRequest(input *DeleteApplicationCloudWatchLoggingOptionInput) (req *request.Request, output *DeleteApplicationCloudWatchLoggingOptionOutput) {
@@ -849,8 +1067,7 @@ func (c *KinesisAnalyticsV2) DeleteApplicationCloudWatchLoggingOptionRequest(inp
 
 // DeleteApplicationCloudWatchLoggingOption API operation for Amazon Kinesis Analytics.
 //
-// Deletes an Amazon CloudWatch log stream from an Amazon Kinesis Data Analytics
-// application.
+// Deletes an Amazon CloudWatch log stream from an Kinesis Data Analytics application.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -859,23 +1076,27 @@ func (c *KinesisAnalyticsV2) DeleteApplicationCloudWatchLoggingOptionRequest(inp
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation DeleteApplicationCloudWatchLoggingOption for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - InvalidApplicationConfigurationException
+//     The user-provided application configuration is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationCloudWatchLoggingOption
 func (c *KinesisAnalyticsV2) DeleteApplicationCloudWatchLoggingOption(input *DeleteApplicationCloudWatchLoggingOptionInput) (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
@@ -915,14 +1136,13 @@ const opDeleteApplicationInputProcessingConfiguration = "DeleteApplicationInputP
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteApplicationInputProcessingConfigurationRequest method.
+//	req, resp := client.DeleteApplicationInputProcessingConfigurationRequest(params)
 //
-//    // Example sending a request using the DeleteApplicationInputProcessingConfigurationRequest method.
-//    req, resp := client.DeleteApplicationInputProcessingConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationInputProcessingConfiguration
 func (c *KinesisAnalyticsV2) DeleteApplicationInputProcessingConfigurationRequest(input *DeleteApplicationInputProcessingConfigurationInput) (req *request.Request, output *DeleteApplicationInputProcessingConfigurationOutput) {
@@ -952,23 +1172,24 @@ func (c *KinesisAnalyticsV2) DeleteApplicationInputProcessingConfigurationReques
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation DeleteApplicationInputProcessingConfiguration for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationInputProcessingConfiguration
 func (c *KinesisAnalyticsV2) DeleteApplicationInputProcessingConfiguration(input *DeleteApplicationInputProcessingConfigurationInput) (*DeleteApplicationInputProcessingConfigurationOutput, error) {
@@ -1008,14 +1229,13 @@ const opDeleteApplicationOutput = "DeleteApplicationOutput"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteApplicationOutputRequest method.
+//	req, resp := client.DeleteApplicationOutputRequest(params)
 //
-//    // Example sending a request using the DeleteApplicationOutputRequest method.
-//    req, resp := client.DeleteApplicationOutputRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationOutput
 func (c *KinesisAnalyticsV2) DeleteApplicationOutputRequest(input *DeleteApplicationOutputInput) (req *request.Request, output *DeleteApplicationOutputOutput) {
@@ -1036,7 +1256,7 @@ func (c *KinesisAnalyticsV2) DeleteApplicationOutputRequest(input *DeleteApplica
 
 // DeleteApplicationOutput API operation for Amazon Kinesis Analytics.
 //
-// Deletes the output destination configuration from your SQL-based Amazon Kinesis
+// Deletes the output destination configuration from your SQL-based Kinesis
 // Data Analytics application's configuration. Kinesis Data Analytics will no
 // longer write data from the corresponding in-application stream to the external
 // output destination.
@@ -1048,23 +1268,24 @@ func (c *KinesisAnalyticsV2) DeleteApplicationOutputRequest(input *DeleteApplica
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation DeleteApplicationOutput for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationOutput
 func (c *KinesisAnalyticsV2) DeleteApplicationOutput(input *DeleteApplicationOutputInput) (*DeleteApplicationOutputOutput, error) {
@@ -1104,14 +1325,13 @@ const opDeleteApplicationReferenceDataSource = "DeleteApplicationReferenceDataSo
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteApplicationReferenceDataSourceRequest method.
+//	req, resp := client.DeleteApplicationReferenceDataSourceRequest(params)
 //
-//    // Example sending a request using the DeleteApplicationReferenceDataSourceRequest method.
-//    req, resp := client.DeleteApplicationReferenceDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationReferenceDataSource
 func (c *KinesisAnalyticsV2) DeleteApplicationReferenceDataSourceRequest(input *DeleteApplicationReferenceDataSourceInput) (req *request.Request, output *DeleteApplicationReferenceDataSourceOutput) {
@@ -1133,7 +1353,7 @@ func (c *KinesisAnalyticsV2) DeleteApplicationReferenceDataSourceRequest(input *
 // DeleteApplicationReferenceDataSource API operation for Amazon Kinesis Analytics.
 //
 // Deletes a reference data source configuration from the specified SQL-based
-// Amazon Kinesis Data Analytics application's configuration.
+// Kinesis Data Analytics application's configuration.
 //
 // If the application is running, Kinesis Data Analytics immediately removes
 // the in-application table that you created using the AddApplicationReferenceDataSource
@@ -1146,23 +1366,24 @@ func (c *KinesisAnalyticsV2) DeleteApplicationReferenceDataSourceRequest(input *
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation DeleteApplicationReferenceDataSource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationReferenceDataSource
 func (c *KinesisAnalyticsV2) DeleteApplicationReferenceDataSource(input *DeleteApplicationReferenceDataSourceInput) (*DeleteApplicationReferenceDataSourceOutput, error) {
@@ -1202,14 +1423,13 @@ const opDeleteApplicationSnapshot = "DeleteApplicationSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteApplicationSnapshotRequest method.
+//	req, resp := client.DeleteApplicationSnapshotRequest(params)
 //
-//    // Example sending a request using the DeleteApplicationSnapshotRequest method.
-//    req, resp := client.DeleteApplicationSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationSnapshot
 func (c *KinesisAnalyticsV2) DeleteApplicationSnapshotRequest(input *DeleteApplicationSnapshotInput) (req *request.Request, output *DeleteApplicationSnapshotOutput) {
@@ -1240,22 +1460,28 @@ func (c *KinesisAnalyticsV2) DeleteApplicationSnapshotRequest(input *DeleteAppli
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation DeleteApplicationSnapshot for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationSnapshot
 func (c *KinesisAnalyticsV2) DeleteApplicationSnapshot(input *DeleteApplicationSnapshotInput) (*DeleteApplicationSnapshotOutput, error) {
@@ -1279,6 +1505,99 @@ func (c *KinesisAnalyticsV2) DeleteApplicationSnapshotWithContext(ctx aws.Contex
 	return out, req.Send()
 }
 
+const opDeleteApplicationVpcConfiguration = "DeleteApplicationVpcConfiguration"
+
+// DeleteApplicationVpcConfigurationRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteApplicationVpcConfiguration operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteApplicationVpcConfiguration for more information on using the DeleteApplicationVpcConfiguration
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteApplicationVpcConfigurationRequest method.
+//	req, resp := client.DeleteApplicationVpcConfigurationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationVpcConfiguration
+func (c *KinesisAnalyticsV2) DeleteApplicationVpcConfigurationRequest(input *DeleteApplicationVpcConfigurationInput) (req *request.Request, output *DeleteApplicationVpcConfigurationOutput) {
+	op := &request.Operation{
+		Name:       opDeleteApplicationVpcConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteApplicationVpcConfigurationInput{}
+	}
+
+	output = &DeleteApplicationVpcConfigurationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DeleteApplicationVpcConfiguration API operation for Amazon Kinesis Analytics.
+//
+// Removes a VPC configuration from a Kinesis Data Analytics application.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation DeleteApplicationVpcConfiguration for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - ResourceInUseException
+//     The application is not available for this operation.
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidApplicationConfigurationException
+//     The user-provided application configuration is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationVpcConfiguration
+func (c *KinesisAnalyticsV2) DeleteApplicationVpcConfiguration(input *DeleteApplicationVpcConfigurationInput) (*DeleteApplicationVpcConfigurationOutput, error) {
+	req, out := c.DeleteApplicationVpcConfigurationRequest(input)
+	return out, req.Send()
+}
+
+// DeleteApplicationVpcConfigurationWithContext is the same as DeleteApplicationVpcConfiguration with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteApplicationVpcConfiguration for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) DeleteApplicationVpcConfigurationWithContext(ctx aws.Context, input *DeleteApplicationVpcConfigurationInput, opts ...request.Option) (*DeleteApplicationVpcConfigurationOutput, error) {
+	req, out := c.DeleteApplicationVpcConfigurationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeApplication = "DescribeApplication"
 
 // DescribeApplicationRequest generates a "aws/request.Request" representing the
@@ -1295,14 +1614,13 @@ const opDescribeApplication = "DescribeApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeApplicationRequest method.
+//	req, resp := client.DescribeApplicationRequest(params)
 //
-//    // Example sending a request using the DescribeApplicationRequest method.
-//    req, resp := client.DescribeApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplication
 func (c *KinesisAnalyticsV2) DescribeApplicationRequest(input *DescribeApplicationInput) (req *request.Request, output *DescribeApplicationOutput) {
@@ -1323,7 +1641,7 @@ func (c *KinesisAnalyticsV2) DescribeApplicationRequest(input *DescribeApplicati
 
 // DescribeApplication API operation for Amazon Kinesis Analytics.
 //
-// Returns information about a specific Amazon Kinesis Data Analytics application.
+// Returns information about a specific Kinesis Data Analytics application.
 //
 // If you want to retrieve a list of all applications in your account, use the
 // ListApplications operation.
@@ -1335,15 +1653,16 @@ func (c *KinesisAnalyticsV2) DescribeApplicationRequest(input *DescribeApplicati
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation DescribeApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplication
 func (c *KinesisAnalyticsV2) DescribeApplication(input *DescribeApplicationInput) (*DescribeApplicationOutput, error) {
@@ -1383,14 +1702,13 @@ const opDescribeApplicationSnapshot = "DescribeApplicationSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeApplicationSnapshotRequest method.
+//	req, resp := client.DescribeApplicationSnapshotRequest(params)
 //
-//    // Example sending a request using the DescribeApplicationSnapshotRequest method.
-//    req, resp := client.DescribeApplicationSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationSnapshot
 func (c *KinesisAnalyticsV2) DescribeApplicationSnapshotRequest(input *DescribeApplicationSnapshotInput) (req *request.Request, output *DescribeApplicationSnapshotOutput) {
@@ -1420,16 +1738,17 @@ func (c *KinesisAnalyticsV2) DescribeApplicationSnapshotRequest(input *DescribeA
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation DescribeApplicationSnapshot for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationSnapshot
 func (c *KinesisAnalyticsV2) DescribeApplicationSnapshot(input *DescribeApplicationSnapshotInput) (*DescribeApplicationSnapshotOutput, error) {
@@ -1453,6 +1772,97 @@ func (c *KinesisAnalyticsV2) DescribeApplicationSnapshotWithContext(ctx aws.Cont
 	return out, req.Send()
 }
 
+const opDescribeApplicationVersion = "DescribeApplicationVersion"
+
+// DescribeApplicationVersionRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeApplicationVersion operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeApplicationVersion for more information on using the DescribeApplicationVersion
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeApplicationVersionRequest method.
+//	req, resp := client.DescribeApplicationVersionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationVersion
+func (c *KinesisAnalyticsV2) DescribeApplicationVersionRequest(input *DescribeApplicationVersionInput) (req *request.Request, output *DescribeApplicationVersionOutput) {
+	op := &request.Operation{
+		Name:       opDescribeApplicationVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeApplicationVersionInput{}
+	}
+
+	output = &DescribeApplicationVersionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeApplicationVersion API operation for Amazon Kinesis Analytics.
+//
+// Provides a detailed description of a specified version of the application.
+// To see a list of all the versions of an application, invoke the ListApplicationVersions
+// operation.
+//
+// This operation is supported only for Amazon Kinesis Data Analytics for Apache
+// Flink.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation DescribeApplicationVersion for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationVersion
+func (c *KinesisAnalyticsV2) DescribeApplicationVersion(input *DescribeApplicationVersionInput) (*DescribeApplicationVersionOutput, error) {
+	req, out := c.DescribeApplicationVersionRequest(input)
+	return out, req.Send()
+}
+
+// DescribeApplicationVersionWithContext is the same as DescribeApplicationVersion with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeApplicationVersion for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) DescribeApplicationVersionWithContext(ctx aws.Context, input *DescribeApplicationVersionInput, opts ...request.Option) (*DescribeApplicationVersionOutput, error) {
+	req, out := c.DescribeApplicationVersionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDiscoverInputSchema = "DiscoverInputSchema"
 
 // DiscoverInputSchemaRequest generates a "aws/request.Request" representing the
@@ -1469,14 +1879,13 @@ const opDiscoverInputSchema = "DiscoverInputSchema"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DiscoverInputSchemaRequest method.
+//	req, resp := client.DiscoverInputSchemaRequest(params)
 //
-//    // Example sending a request using the DiscoverInputSchemaRequest method.
-//    req, resp := client.DiscoverInputSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DiscoverInputSchema
 func (c *KinesisAnalyticsV2) DiscoverInputSchemaRequest(input *DiscoverInputSchemaInput) (req *request.Request, output *DiscoverInputSchemaOutput) {
@@ -1497,11 +1906,11 @@ func (c *KinesisAnalyticsV2) DiscoverInputSchemaRequest(input *DiscoverInputSche
 
 // DiscoverInputSchema API operation for Amazon Kinesis Analytics.
 //
-// Infers a schema for an SQL-based Amazon Kinesis Data Analytics application
-// by evaluating sample records on the specified streaming source (Kinesis data
-// stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In
-// the response, the operation returns the inferred schema and also the sample
-// records that the operation used to infer the schema.
+// Infers a schema for a SQL-based Kinesis Data Analytics application by evaluating
+// sample records on the specified streaming source (Kinesis data stream or
+// Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response,
+// the operation returns the inferred schema and also the sample records that
+// the operation used to infer the schema.
 //
 // You can use the inferred schema when configuring a streaming source for your
 // application. When you create an application using the Kinesis Data Analytics
@@ -1515,25 +1924,30 @@ func (c *KinesisAnalyticsV2) DiscoverInputSchemaRequest(input *DiscoverInputSche
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation DiscoverInputSchema for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeUnableToDetectSchemaException "UnableToDetectSchemaException"
-//   The data format is not valid. Amazon Kinesis Data Analytics cannot detect
-//   the schema for the given streaming source.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeResourceProvisionedThroughputExceededException "ResourceProvisionedThroughputExceededException"
-//   Discovery failed to get a record from the streaming source because of the
-//   Amazon Kinesis Streams ProvisionedThroughputExceededException. For more information,
-//   see GetRecords (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html)
-//   in the Amazon Kinesis Streams API Reference.
+//   - UnableToDetectSchemaException
+//     The data format is not valid. Kinesis Data Analytics cannot detect the schema
+//     for the given streaming source.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service cannot complete the request.
+//   - ResourceProvisionedThroughputExceededException
+//     Discovery failed to get a record from the streaming source because of the
+//     Kinesis Streams ProvisionedThroughputExceededException. For more information,
+//     see GetRecords (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html)
+//     in the Amazon Kinesis Streams API Reference.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ServiceUnavailableException
+//     The service cannot complete the request.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DiscoverInputSchema
 func (c *KinesisAnalyticsV2) DiscoverInputSchema(input *DiscoverInputSchemaInput) (*DiscoverInputSchemaOutput, error) {
@@ -1573,14 +1987,13 @@ const opListApplicationSnapshots = "ListApplicationSnapshots"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListApplicationSnapshotsRequest method.
+//	req, resp := client.ListApplicationSnapshotsRequest(params)
 //
-//    // Example sending a request using the ListApplicationSnapshotsRequest method.
-//    req, resp := client.ListApplicationSnapshotsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationSnapshots
 func (c *KinesisAnalyticsV2) ListApplicationSnapshotsRequest(input *ListApplicationSnapshotsInput) (req *request.Request, output *ListApplicationSnapshotsOutput) {
@@ -1610,13 +2023,14 @@ func (c *KinesisAnalyticsV2) ListApplicationSnapshotsRequest(input *ListApplicat
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation ListApplicationSnapshots for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The request was rejected because a specified parameter is not supported or
-//   a specified resource is not valid for this operation.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationSnapshots
 func (c *KinesisAnalyticsV2) ListApplicationSnapshots(input *ListApplicationSnapshotsInput) (*ListApplicationSnapshotsOutput, error) {
@@ -1640,6 +2054,100 @@ func (c *KinesisAnalyticsV2) ListApplicationSnapshotsWithContext(ctx aws.Context
 	return out, req.Send()
 }
 
+const opListApplicationVersions = "ListApplicationVersions"
+
+// ListApplicationVersionsRequest generates a "aws/request.Request" representing the
+// client's request for the ListApplicationVersions operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListApplicationVersions for more information on using the ListApplicationVersions
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListApplicationVersionsRequest method.
+//	req, resp := client.ListApplicationVersionsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationVersions
+func (c *KinesisAnalyticsV2) ListApplicationVersionsRequest(input *ListApplicationVersionsInput) (req *request.Request, output *ListApplicationVersionsOutput) {
+	op := &request.Operation{
+		Name:       opListApplicationVersions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListApplicationVersionsInput{}
+	}
+
+	output = &ListApplicationVersionsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListApplicationVersions API operation for Amazon Kinesis Analytics.
+//
+// Lists all the versions for the specified application, including versions
+// that were rolled back. The response also includes a summary of the configuration
+// associated with each version.
+//
+// To get the complete description of a specific application version, invoke
+// the DescribeApplicationVersion operation.
+//
+// This operation is supported only for Amazon Kinesis Data Analytics for Apache
+// Flink.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation ListApplicationVersions for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationVersions
+func (c *KinesisAnalyticsV2) ListApplicationVersions(input *ListApplicationVersionsInput) (*ListApplicationVersionsOutput, error) {
+	req, out := c.ListApplicationVersionsRequest(input)
+	return out, req.Send()
+}
+
+// ListApplicationVersionsWithContext is the same as ListApplicationVersions with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListApplicationVersions for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) ListApplicationVersionsWithContext(ctx aws.Context, input *ListApplicationVersionsInput, opts ...request.Option) (*ListApplicationVersionsOutput, error) {
+	req, out := c.ListApplicationVersionsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opListApplications = "ListApplications"
 
 // ListApplicationsRequest generates a "aws/request.Request" representing the
@@ -1656,14 +2164,13 @@ const opListApplications = "ListApplications"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListApplicationsRequest method.
+//	req, resp := client.ListApplicationsRequest(params)
 //
-//    // Example sending a request using the ListApplicationsRequest method.
-//    req, resp := client.ListApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplications
 func (c *KinesisAnalyticsV2) ListApplicationsRequest(input *ListApplicationsInput) (req *request.Request, output *ListApplicationsOutput) {
@@ -1684,9 +2191,9 @@ func (c *KinesisAnalyticsV2) ListApplicationsRequest(input *ListApplicationsInpu
 
 // ListApplications API operation for Amazon Kinesis Analytics.
 //
-// Returns a list of Amazon Kinesis Data Analytics applications in your account.
-// For each application, the response includes the application name, Amazon
-// Resource Name (ARN), and status.
+// Returns a list of Kinesis Data Analytics applications in your account. For
+// each application, the response includes the application name, Amazon Resource
+// Name (ARN), and status.
 //
 // If you want detailed information about a specific application, use DescribeApplication.
 //
@@ -1697,9 +2204,9 @@ func (c *KinesisAnalyticsV2) ListApplicationsRequest(input *ListApplicationsInpu
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation ListApplications for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+// Returned Error Types:
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplications
 func (c *KinesisAnalyticsV2) ListApplications(input *ListApplicationsInput) (*ListApplicationsOutput, error) {
@@ -1723,6 +2230,201 @@ func (c *KinesisAnalyticsV2) ListApplicationsWithContext(ctx aws.Context, input 
 	return out, req.Send()
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// client's request for the ListTagsForResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListTagsForResource for more information on using the ListTagsForResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListTagsForResource
+func (c *KinesisAnalyticsV2) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
+	op := &request.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output = &ListTagsForResourceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListTagsForResource API operation for Amazon Kinesis Analytics.
+//
+// Retrieves the list of key-value tags assigned to the application. For more
+// information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation ListTagsForResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListTagsForResource
+func (c *KinesisAnalyticsV2) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	return out, req.Send()
+}
+
+// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListTagsForResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opRollbackApplication = "RollbackApplication"
+
+// RollbackApplicationRequest generates a "aws/request.Request" representing the
+// client's request for the RollbackApplication operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RollbackApplication for more information on using the RollbackApplication
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RollbackApplicationRequest method.
+//	req, resp := client.RollbackApplicationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RollbackApplication
+func (c *KinesisAnalyticsV2) RollbackApplicationRequest(input *RollbackApplicationInput) (req *request.Request, output *RollbackApplicationOutput) {
+	op := &request.Operation{
+		Name:       opRollbackApplication,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RollbackApplicationInput{}
+	}
+
+	output = &RollbackApplicationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// RollbackApplication API operation for Amazon Kinesis Analytics.
+//
+// Reverts the application to the previous running version. You can roll back
+// an application if you suspect it is stuck in a transient status.
+//
+// You can roll back an application only if it is in the UPDATING or AUTOSCALING
+// status.
+//
+// When you rollback an application, it loads state data from the last successful
+// snapshot. If the application has no snapshots, Kinesis Data Analytics rejects
+// the rollback request.
+//
+// This action is not supported for Kinesis Data Analytics for SQL applications.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation RollbackApplication for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - ResourceInUseException
+//     The application is not available for this operation.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RollbackApplication
+func (c *KinesisAnalyticsV2) RollbackApplication(input *RollbackApplicationInput) (*RollbackApplicationOutput, error) {
+	req, out := c.RollbackApplicationRequest(input)
+	return out, req.Send()
+}
+
+// RollbackApplicationWithContext is the same as RollbackApplication with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RollbackApplication for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) RollbackApplicationWithContext(ctx aws.Context, input *RollbackApplicationInput, opts ...request.Option) (*RollbackApplicationOutput, error) {
+	req, out := c.RollbackApplicationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opStartApplication = "StartApplication"
 
 // StartApplicationRequest generates a "aws/request.Request" representing the
@@ -1739,14 +2441,13 @@ const opStartApplication = "StartApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartApplicationRequest method.
+//	req, resp := client.StartApplicationRequest(params)
 //
-//    // Example sending a request using the StartApplicationRequest method.
-//    req, resp := client.StartApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StartApplication
 func (c *KinesisAnalyticsV2) StartApplicationRequest(input *StartApplicationInput) (req *request.Request, output *StartApplicationOutput) {
@@ -1768,11 +2469,8 @@ func (c *KinesisAnalyticsV2) StartApplicationRequest(input *StartApplicationInpu
 
 // StartApplication API operation for Amazon Kinesis Analytics.
 //
-// Starts the specified Amazon Kinesis Data Analytics application. After creating
-// an application, you must exclusively call this operation to start your application.
-//
-// SQL is not enabled for this private beta. Using SQL parameters (such as RunConfiguration$SqlRunConfigurations)
-// will result in an error.
+// Starts the specified Kinesis Data Analytics application. After creating an
+// application, you must exclusively call this operation to start your application.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1781,21 +2479,22 @@ func (c *KinesisAnalyticsV2) StartApplicationRequest(input *StartApplicationInpu
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation StartApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeInvalidApplicationConfigurationException "InvalidApplicationConfigurationException"
-//   The user-provided application configuration is not valid.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - InvalidApplicationConfigurationException
+//     The user-provided application configuration is not valid.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StartApplication
 func (c *KinesisAnalyticsV2) StartApplication(input *StartApplicationInput) (*StartApplicationOutput, error) {
@@ -1835,14 +2534,13 @@ const opStopApplication = "StopApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StopApplicationRequest method.
+//	req, resp := client.StopApplicationRequest(params)
 //
-//    // Example sending a request using the StopApplicationRequest method.
-//    req, resp := client.StopApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StopApplication
 func (c *KinesisAnalyticsV2) StopApplicationRequest(input *StopApplicationInput) (req *request.Request, output *StopApplicationOutput) {
@@ -1865,8 +2563,12 @@ func (c *KinesisAnalyticsV2) StopApplicationRequest(input *StopApplicationInput)
 // StopApplication API operation for Amazon Kinesis Analytics.
 //
 // Stops the application from processing data. You can stop an application only
-// if it is in the running state. You can use the DescribeApplication operation
-// to find the application state.
+// if it is in the running status, unless you set the Force parameter to true.
+//
+// You can use the DescribeApplication operation to find the application status.
+//
+// Kinesis Data Analytics takes a snapshot when the application is stopped,
+// unless Force is set to true.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1875,18 +2577,27 @@ func (c *KinesisAnalyticsV2) StopApplicationRequest(input *StopApplicationInput)
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation StopApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - InvalidApplicationConfigurationException
+//     The user-provided application configuration is not valid.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StopApplication
 func (c *KinesisAnalyticsV2) StopApplication(input *StopApplicationInput) (*StopApplicationOutput, error) {
@@ -1910,6 +2621,202 @@ func (c *KinesisAnalyticsV2) StopApplicationWithContext(ctx aws.Context, input *
 	return out, req.Send()
 }
 
+const opTagResource = "TagResource"
+
+// TagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the TagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See TagResource for more information on using the TagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the TagResourceRequest method.
+//	req, resp := client.TagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/TagResource
+func (c *KinesisAnalyticsV2) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
+	op := &request.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output = &TagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// TagResource API operation for Amazon Kinesis Analytics.
+//
+// Adds one or more key-value tags to a Kinesis Data Analytics application.
+// Note that the maximum number of application tags includes system tags. The
+// maximum number of user-defined application tags is 50. For more information,
+// see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation TagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - ResourceInUseException
+//     The application is not available for this operation.
+//
+//   - TooManyTagsException
+//     Application created with too many tags, or too many tags added to an application.
+//     Note that the maximum number of application tags includes system tags. The
+//     maximum number of user-defined application tags is 50.
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/TagResource
+func (c *KinesisAnalyticsV2) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	return out, req.Send()
+}
+
+// TagResourceWithContext is the same as TagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See TagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the UntagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UntagResource for more information on using the UntagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UntagResourceRequest method.
+//	req, resp := client.UntagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UntagResource
+func (c *KinesisAnalyticsV2) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
+	op := &request.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output = &UntagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UntagResource API operation for Amazon Kinesis Analytics.
+//
+// Removes one or more tags from a Kinesis Data Analytics application. For more
+// information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation UntagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - ResourceInUseException
+//     The application is not available for this operation.
+//
+//   - TooManyTagsException
+//     Application created with too many tags, or too many tags added to an application.
+//     Note that the maximum number of application tags includes system tags. The
+//     maximum number of user-defined application tags is 50.
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UntagResource
+func (c *KinesisAnalyticsV2) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	return out, req.Send()
+}
+
+// UntagResourceWithContext is the same as UntagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UntagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateApplication = "UpdateApplication"
 
 // UpdateApplicationRequest generates a "aws/request.Request" representing the
@@ -1926,14 +2833,13 @@ const opUpdateApplication = "UpdateApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateApplicationRequest method.
+//	req, resp := client.UpdateApplicationRequest(params)
 //
-//    // Example sending a request using the UpdateApplicationRequest method.
-//    req, resp := client.UpdateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplication
 func (c *KinesisAnalyticsV2) UpdateApplicationRequest(input *UpdateApplicationInput) (req *request.Request, output *UpdateApplicationOutput) {
@@ -1954,15 +2860,15 @@ func (c *KinesisAnalyticsV2) UpdateApplicationRequest(input *UpdateApplicationIn
 
 // UpdateApplication API operation for Amazon Kinesis Analytics.
 //
-// Updates an existing Amazon Kinesis Data Analytics application. Using this
-// operation, you can update application code, input configuration, and output
-// configuration.
+// Updates an existing Kinesis Data Analytics application. Using this operation,
+// you can update application code, input configuration, and output configuration.
 //
 // Kinesis Data Analytics updates the ApplicationVersionId each time you update
 // your application.
 //
-// SQL is not enabled for this private beta. Using SQL parameters (such as SqlApplicationConfigurationUpdate)
-// will result in an error.
+// You cannot update the RuntimeEnvironment of an existing application. If you
+// need to update an application's RuntimeEnvironment, you must delete the application
+// and create it again.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1971,27 +2877,34 @@ func (c *KinesisAnalyticsV2) UpdateApplicationRequest(input *UpdateApplicationIn
 // See the AWS API reference guide for Amazon Kinesis Analytics's
 // API operation UpdateApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCodeValidationException "CodeValidationException"
-//   The user-provided application code (query) is not valid. This can be a simple
-//   syntax error.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Specified application can't be found.
+//   - CodeValidationException
+//     The user-provided application code (query) is not valid. This can be a simple
+//     syntax error.
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The application is not available for this operation.
+//   - ResourceNotFoundException
+//     Specified application can't be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter value is not valid.
+//   - ResourceInUseException
+//     The application is not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Exception thrown as a result of concurrent modifications to an application.
-//   This error can be the result of attempting to modify an application without
-//   using the current application ID.
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request JSON is not valid for the operation.
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - InvalidRequestException
+//     The request JSON is not valid for the operation.
+//
+//   - InvalidApplicationConfigurationException
+//     The user-provided application configuration is not valid.
+//
+//   - LimitExceededException
+//     The number of allowed resources has been exceeded.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplication
 func (c *KinesisAnalyticsV2) UpdateApplication(input *UpdateApplicationInput) (*UpdateApplicationOutput, error) {
@@ -2015,6 +2928,120 @@ func (c *KinesisAnalyticsV2) UpdateApplicationWithContext(ctx aws.Context, input
 	return out, req.Send()
 }
 
+const opUpdateApplicationMaintenanceConfiguration = "UpdateApplicationMaintenanceConfiguration"
+
+// UpdateApplicationMaintenanceConfigurationRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateApplicationMaintenanceConfiguration operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateApplicationMaintenanceConfiguration for more information on using the UpdateApplicationMaintenanceConfiguration
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateApplicationMaintenanceConfigurationRequest method.
+//	req, resp := client.UpdateApplicationMaintenanceConfigurationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplicationMaintenanceConfiguration
+func (c *KinesisAnalyticsV2) UpdateApplicationMaintenanceConfigurationRequest(input *UpdateApplicationMaintenanceConfigurationInput) (req *request.Request, output *UpdateApplicationMaintenanceConfigurationOutput) {
+	op := &request.Operation{
+		Name:       opUpdateApplicationMaintenanceConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateApplicationMaintenanceConfigurationInput{}
+	}
+
+	output = &UpdateApplicationMaintenanceConfigurationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdateApplicationMaintenanceConfiguration API operation for Amazon Kinesis Analytics.
+//
+// Updates the maintenance configuration of the Kinesis Data Analytics application.
+//
+// You can invoke this operation on an application that is in one of the two
+// following states: READY or RUNNING. If you invoke it when the application
+// is in a state other than these two states, it throws a ResourceInUseException.
+// The service makes use of the updated configuration the next time it schedules
+// maintenance for the application. If you invoke this operation after the service
+// schedules maintenance, the service will apply the configuration update the
+// next time it schedules maintenance for the application. This means that you
+// might not see the maintenance configuration update applied to the maintenance
+// process that follows a successful invocation of this operation, but to the
+// following maintenance process instead.
+//
+// To see the current maintenance configuration of your application, invoke
+// the DescribeApplication operation.
+//
+// For information about application maintenance, see Kinesis Data Analytics
+// for Apache Flink Maintenance (https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html).
+//
+// This operation is supported only for Amazon Kinesis Data Analytics for Apache
+// Flink.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Kinesis Analytics's
+// API operation UpdateApplicationMaintenanceConfiguration for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     Specified application can't be found.
+//
+//   - ResourceInUseException
+//     The application is not available for this operation.
+//
+//   - InvalidArgumentException
+//     The specified input parameter value is not valid.
+//
+//   - ConcurrentModificationException
+//     Exception thrown as a result of concurrent modifications to an application.
+//     This error can be the result of attempting to modify an application without
+//     using the current application ID.
+//
+//   - UnsupportedOperationException
+//     The request was rejected because a specified parameter is not supported or
+//     a specified resource is not valid for this operation.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplicationMaintenanceConfiguration
+func (c *KinesisAnalyticsV2) UpdateApplicationMaintenanceConfiguration(input *UpdateApplicationMaintenanceConfigurationInput) (*UpdateApplicationMaintenanceConfigurationOutput, error) {
+	req, out := c.UpdateApplicationMaintenanceConfigurationRequest(input)
+	return out, req.Send()
+}
+
+// UpdateApplicationMaintenanceConfigurationWithContext is the same as UpdateApplicationMaintenanceConfiguration with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateApplicationMaintenanceConfiguration for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *KinesisAnalyticsV2) UpdateApplicationMaintenanceConfigurationWithContext(ctx aws.Context, input *UpdateApplicationMaintenanceConfigurationInput, opts ...request.Option) (*UpdateApplicationMaintenanceConfigurationOutput, error) {
+	req, out := c.UpdateApplicationMaintenanceConfigurationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 type AddApplicationCloudWatchLoggingOptionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2028,19 +3055,34 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 	// CloudWatchLoggingOption is a required field
 	CloudWatchLoggingOption *CloudWatchLoggingOption `type:"structure" required:"true"`
 
-	// The version ID of the Kinesis Data Analytics application. You can retrieve
-	// the application version ID using DescribeApplication.
-	//
-	// CurrentApplicationVersionId is a required field
-	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
+	// A value you use to implement strong concurrency for application updates.
+	// You must provide the CurrentApplicationVersionId or the ConditionalToken.
+	// You get the application's current ConditionalToken using DescribeApplication.
+	// For better concurrency support, use the ConditionalToken parameter instead
+	// of CurrentApplicationVersionId.
+	ConditionalToken *string `min:"1" type:"string"`
+
+	// The version ID of the Kinesis Data Analytics application. You must provide
+	// the CurrentApplicationVersionId or the ConditionalToken.You can retrieve
+	// the application version ID using DescribeApplication. For better concurrency
+	// support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
+	CurrentApplicationVersionId *int64 `min:"1" type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationCloudWatchLoggingOptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationCloudWatchLoggingOptionInput) GoString() string {
 	return s.String()
 }
@@ -2057,8 +3099,8 @@ func (s *AddApplicationCloudWatchLoggingOptionInput) Validate() error {
 	if s.CloudWatchLoggingOption == nil {
 		invalidParams.Add(request.NewErrParamRequired("CloudWatchLoggingOption"))
 	}
-	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+	if s.ConditionalToken != nil && len(*s.ConditionalToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ConditionalToken", 1))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
@@ -2087,6 +3129,12 @@ func (s *AddApplicationCloudWatchLoggingOptionInput) SetCloudWatchLoggingOption(
 	return s
 }
 
+// SetConditionalToken sets the ConditionalToken field's value.
+func (s *AddApplicationCloudWatchLoggingOptionInput) SetConditionalToken(v string) *AddApplicationCloudWatchLoggingOptionInput {
+	s.ConditionalToken = &v
+	return s
+}
+
 // SetCurrentApplicationVersionId sets the CurrentApplicationVersionId field's value.
 func (s *AddApplicationCloudWatchLoggingOptionInput) SetCurrentApplicationVersionId(v int64) *AddApplicationCloudWatchLoggingOptionInput {
 	s.CurrentApplicationVersionId = &v
@@ -2109,12 +3157,20 @@ type AddApplicationCloudWatchLoggingOptionOutput struct {
 	CloudWatchLoggingOptionDescriptions []*CloudWatchLoggingOptionDescription `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationCloudWatchLoggingOptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationCloudWatchLoggingOptionOutput) GoString() string {
 	return s.String()
 }
@@ -2146,8 +3202,9 @@ type AddApplicationInputInput struct {
 	// ApplicationName is a required field
 	ApplicationName *string `min:"1" type:"string" required:"true"`
 
-	// The current version of your application. You can use the DescribeApplication
-	// operation to find the current application version.
+	// The current version of your application. You must provide the ApplicationVersionID
+	// or the ConditionalToken.You can use the DescribeApplication operation to
+	// find the current application version.
 	//
 	// CurrentApplicationVersionId is a required field
 	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
@@ -2158,12 +3215,20 @@ type AddApplicationInputInput struct {
 	Input *Input `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationInputInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationInputInput) GoString() string {
 	return s.String()
 }
@@ -2229,12 +3294,20 @@ type AddApplicationInputOutput struct {
 	InputDescriptions []*InputDescription `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationInputOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationInputOutput) GoString() string {
 	return s.String()
 }
@@ -2287,12 +3360,20 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	InputProcessingConfiguration *InputProcessingConfiguration `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationInputProcessingConfigurationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationInputProcessingConfigurationInput) GoString() string {
 	return s.String()
 }
@@ -2367,8 +3448,8 @@ type AddApplicationInputProcessingConfigurationOutput struct {
 	ApplicationVersionId *int64 `min:"1" type:"long"`
 
 	// The input ID that is associated with the application input. This is the ID
-	// that Amazon Kinesis Data Analytics assigns to each input configuration that
-	// you add to your application.
+	// that Kinesis Data Analytics assigns to each input configuration that you
+	// add to your application.
 	InputId *string `min:"1" type:"string"`
 
 	// The description of the preprocessor that executes on records in this input
@@ -2376,12 +3457,20 @@ type AddApplicationInputProcessingConfigurationOutput struct {
 	InputProcessingConfigurationDescription *InputProcessingConfigurationDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationInputProcessingConfigurationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationInputProcessingConfigurationOutput) GoString() string {
 	return s.String()
 }
@@ -2429,19 +3518,27 @@ type AddApplicationOutputInput struct {
 	// An array of objects, each describing one output configuration. In the output
 	// configuration, you specify the name of an in-application stream, a destination
 	// (that is, a Kinesis data stream, a Kinesis Data Firehose delivery stream,
-	// or an AWS Lambda function), and record the formation to use when writing
+	// or an Amazon Lambda function), and record the formation to use when writing
 	// to the destination.
 	//
 	// Output is a required field
 	Output *Output `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationOutputInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationOutputInput) GoString() string {
 	return s.String()
 }
@@ -2505,16 +3602,24 @@ type AddApplicationOutputOutput struct {
 	ApplicationVersionId *int64 `min:"1" type:"long"`
 
 	// Describes the application output configuration. For more information, see
-	// Configuring Application Output (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
+	// Configuring Application Output (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
 	OutputDescriptions []*OutputDescription `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationOutputOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationOutputOutput) GoString() string {
 	return s.String()
 }
@@ -2562,12 +3667,20 @@ type AddApplicationReferenceDataSourceInput struct {
 	ReferenceDataSource *ReferenceDataSource `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationReferenceDataSourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationReferenceDataSourceInput) GoString() string {
 	return s.String()
 }
@@ -2626,20 +3739,28 @@ type AddApplicationReferenceDataSourceOutput struct {
 	// The application Amazon Resource Name (ARN).
 	ApplicationARN *string `min:"1" type:"string"`
 
-	// The updated application version ID. Amazon Kinesis Data Analytics increments
-	// this ID when the application is updated.
+	// The updated application version ID. Kinesis Data Analytics increments this
+	// ID when the application is updated.
 	ApplicationVersionId *int64 `min:"1" type:"long"`
 
 	// Describes reference data sources configured for the application.
 	ReferenceDataSourceDescriptions []*ReferenceDataSourceDescription `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationReferenceDataSourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddApplicationReferenceDataSourceOutput) GoString() string {
 	return s.String()
 }
@@ -2662,7 +3783,158 @@ func (s *AddApplicationReferenceDataSourceOutput) SetReferenceDataSourceDescript
 	return s
 }
 
-// Describes code configuration for a Java-based Kinesis Data Analytics application.
+type AddApplicationVpcConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an existing application.
+	//
+	// ApplicationName is a required field
+	ApplicationName *string `min:"1" type:"string" required:"true"`
+
+	// A value you use to implement strong concurrency for application updates.
+	// You must provide the ApplicationVersionID or the ConditionalToken. You get
+	// the application's current ConditionalToken using DescribeApplication. For
+	// better concurrency support, use the ConditionalToken parameter instead of
+	// CurrentApplicationVersionId.
+	ConditionalToken *string `min:"1" type:"string"`
+
+	// The version of the application to which you want to add the VPC configuration.
+	// You must provide the CurrentApplicationVersionId or the ConditionalToken.
+	// You can use the DescribeApplication operation to get the current application
+	// version. If the version specified is not the current version, the ConcurrentModificationException
+	// is returned. For better concurrency support, use the ConditionalToken parameter
+	// instead of CurrentApplicationVersionId.
+	CurrentApplicationVersionId *int64 `min:"1" type:"long"`
+
+	// Description of the VPC to add to the application.
+	//
+	// VpcConfiguration is a required field
+	VpcConfiguration *VpcConfiguration `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddApplicationVpcConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddApplicationVpcConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AddApplicationVpcConfigurationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AddApplicationVpcConfigurationInput"}
+	if s.ApplicationName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+	}
+	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+	}
+	if s.ConditionalToken != nil && len(*s.ConditionalToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ConditionalToken", 1))
+	}
+	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+	}
+	if s.VpcConfiguration == nil {
+		invalidParams.Add(request.NewErrParamRequired("VpcConfiguration"))
+	}
+	if s.VpcConfiguration != nil {
+		if err := s.VpcConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationName sets the ApplicationName field's value.
+func (s *AddApplicationVpcConfigurationInput) SetApplicationName(v string) *AddApplicationVpcConfigurationInput {
+	s.ApplicationName = &v
+	return s
+}
+
+// SetConditionalToken sets the ConditionalToken field's value.
+func (s *AddApplicationVpcConfigurationInput) SetConditionalToken(v string) *AddApplicationVpcConfigurationInput {
+	s.ConditionalToken = &v
+	return s
+}
+
+// SetCurrentApplicationVersionId sets the CurrentApplicationVersionId field's value.
+func (s *AddApplicationVpcConfigurationInput) SetCurrentApplicationVersionId(v int64) *AddApplicationVpcConfigurationInput {
+	s.CurrentApplicationVersionId = &v
+	return s
+}
+
+// SetVpcConfiguration sets the VpcConfiguration field's value.
+func (s *AddApplicationVpcConfigurationInput) SetVpcConfiguration(v *VpcConfiguration) *AddApplicationVpcConfigurationInput {
+	s.VpcConfiguration = v
+	return s
+}
+
+type AddApplicationVpcConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the application.
+	ApplicationARN *string `min:"1" type:"string"`
+
+	// Provides the current application version. Kinesis Data Analytics updates
+	// the ApplicationVersionId each time you update the application.
+	ApplicationVersionId *int64 `min:"1" type:"long"`
+
+	// The parameters of the new VPC configuration.
+	VpcConfigurationDescription *VpcConfigurationDescription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddApplicationVpcConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddApplicationVpcConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplicationARN sets the ApplicationARN field's value.
+func (s *AddApplicationVpcConfigurationOutput) SetApplicationARN(v string) *AddApplicationVpcConfigurationOutput {
+	s.ApplicationARN = &v
+	return s
+}
+
+// SetApplicationVersionId sets the ApplicationVersionId field's value.
+func (s *AddApplicationVpcConfigurationOutput) SetApplicationVersionId(v int64) *AddApplicationVpcConfigurationOutput {
+	s.ApplicationVersionId = &v
+	return s
+}
+
+// SetVpcConfigurationDescription sets the VpcConfigurationDescription field's value.
+func (s *AddApplicationVpcConfigurationOutput) SetVpcConfigurationDescription(v *VpcConfigurationDescription) *AddApplicationVpcConfigurationOutput {
+	s.VpcConfigurationDescription = v
+	return s
+}
+
+// Describes code configuration for an application.
 type ApplicationCodeConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2675,12 +3947,20 @@ type ApplicationCodeConfiguration struct {
 	CodeContentType *string `type:"string" required:"true" enum:"CodeContentType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationCodeConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationCodeConfiguration) GoString() string {
 	return s.String()
 }
@@ -2715,7 +3995,7 @@ func (s *ApplicationCodeConfiguration) SetCodeContentType(v string) *Application
 	return s
 }
 
-// Describes code configuration for a Java-based Kinesis Data Analytics application.
+// Describes code configuration for an application.
 type ApplicationCodeConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2728,12 +4008,20 @@ type ApplicationCodeConfigurationDescription struct {
 	CodeContentType *string `type:"string" required:"true" enum:"CodeContentType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationCodeConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationCodeConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -2750,7 +4038,9 @@ func (s *ApplicationCodeConfigurationDescription) SetCodeContentType(v string) *
 	return s
 }
 
-// Describes updates to a Java-based Amazon Kinesis Data Analytics application.
+// Describes code configuration updates for an application. This is supported
+// for a Flink-based Kinesis Data Analytics application or a SQL-based Kinesis
+// Data Analytics application.
 type ApplicationCodeConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2761,12 +4051,20 @@ type ApplicationCodeConfigurationUpdate struct {
 	CodeContentUpdate *CodeContentUpdate `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationCodeConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationCodeConfigurationUpdate) GoString() string {
 	return s.String()
 }
@@ -2798,38 +4096,50 @@ func (s *ApplicationCodeConfigurationUpdate) SetCodeContentUpdate(v *CodeContent
 	return s
 }
 
-// Specifies the creation parameters for an Amazon Kinesis Data Analytics application.
+// Specifies the creation parameters for a Kinesis Data Analytics application.
 type ApplicationConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The code location and type parameters for a Java-based Kinesis Data Analytics
+	// The code location and type parameters for a Flink-based Kinesis Data Analytics
 	// application.
-	//
-	// ApplicationCodeConfiguration is a required field
-	ApplicationCodeConfiguration *ApplicationCodeConfiguration `type:"structure" required:"true"`
+	ApplicationCodeConfiguration *ApplicationCodeConfiguration `type:"structure"`
 
-	// Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics
+	// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics
 	// application.
 	ApplicationSnapshotConfiguration *ApplicationSnapshotConfiguration `type:"structure"`
 
-	// Describes execution properties for a Java-based Kinesis Data Analytics application.
+	// Describes execution properties for a Flink-based Kinesis Data Analytics application.
 	EnvironmentProperties *EnvironmentProperties `type:"structure"`
 
-	// The creation and update parameters for a Java-based Kinesis Data Analytics
+	// The creation and update parameters for a Flink-based Kinesis Data Analytics
 	// application.
 	FlinkApplicationConfiguration *FlinkApplicationConfiguration `type:"structure"`
 
-	// The creation and update parameters for an SQL-based Kinesis Data Analytics
+	// The creation and update parameters for a SQL-based Kinesis Data Analytics
 	// application.
 	SqlApplicationConfiguration *SqlApplicationConfiguration `type:"structure"`
+
+	// The array of descriptions of VPC configurations available to the application.
+	VpcConfigurations []*VpcConfiguration `type:"list"`
+
+	// The configuration parameters for a Kinesis Data Analytics Studio notebook.
+	ZeppelinApplicationConfiguration *ZeppelinApplicationConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationConfiguration) GoString() string {
 	return s.String()
 }
@@ -2837,9 +4147,6 @@ func (s ApplicationConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplicationConfiguration) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "ApplicationConfiguration"}
-	if s.ApplicationCodeConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationCodeConfiguration"))
-	}
 	if s.ApplicationCodeConfiguration != nil {
 		if err := s.ApplicationCodeConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("ApplicationCodeConfiguration", err.(request.ErrInvalidParams))
@@ -2863,6 +4170,21 @@ func (s *ApplicationConfiguration) Validate() error {
 	if s.SqlApplicationConfiguration != nil {
 		if err := s.SqlApplicationConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("SqlApplicationConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.VpcConfigurations != nil {
+		for i, v := range s.VpcConfigurations {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VpcConfigurations", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.ZeppelinApplicationConfiguration != nil {
+		if err := s.ZeppelinApplicationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ZeppelinApplicationConfiguration", err.(request.ErrInvalidParams))
 		}
 	}
 
@@ -2902,39 +4224,65 @@ func (s *ApplicationConfiguration) SetSqlApplicationConfiguration(v *SqlApplicat
 	return s
 }
 
+// SetVpcConfigurations sets the VpcConfigurations field's value.
+func (s *ApplicationConfiguration) SetVpcConfigurations(v []*VpcConfiguration) *ApplicationConfiguration {
+	s.VpcConfigurations = v
+	return s
+}
+
+// SetZeppelinApplicationConfiguration sets the ZeppelinApplicationConfiguration field's value.
+func (s *ApplicationConfiguration) SetZeppelinApplicationConfiguration(v *ZeppelinApplicationConfiguration) *ApplicationConfiguration {
+	s.ZeppelinApplicationConfiguration = v
+	return s
+}
+
 // Describes details about the application code and starting parameters for
-// an Amazon Kinesis Data Analytics application.
+// a Kinesis Data Analytics application.
 type ApplicationConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The details about the application code for a Java-based Kinesis Data Analytics
+	// The details about the application code for a Flink-based Kinesis Data Analytics
 	// application.
 	ApplicationCodeConfigurationDescription *ApplicationCodeConfigurationDescription `type:"structure"`
 
-	// Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics
+	// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics
 	// application.
 	ApplicationSnapshotConfigurationDescription *ApplicationSnapshotConfigurationDescription `type:"structure"`
 
-	// Describes execution properties for a Java-based Kinesis Data Analytics application.
+	// Describes execution properties for a Flink-based Kinesis Data Analytics application.
 	EnvironmentPropertyDescriptions *EnvironmentPropertyDescriptions `type:"structure"`
 
-	// The details about a Java-based Kinesis Data Analytics application.
+	// The details about a Flink-based Kinesis Data Analytics application.
 	FlinkApplicationConfigurationDescription *FlinkApplicationConfigurationDescription `type:"structure"`
 
 	// The details about the starting properties for a Kinesis Data Analytics application.
 	RunConfigurationDescription *RunConfigurationDescription `type:"structure"`
 
-	// The details about inputs, outputs, and reference data sources for an SQL-based
+	// The details about inputs, outputs, and reference data sources for a SQL-based
 	// Kinesis Data Analytics application.
 	SqlApplicationConfigurationDescription *SqlApplicationConfigurationDescription `type:"structure"`
+
+	// The array of descriptions of VPC configurations available to the application.
+	VpcConfigurationDescriptions []*VpcConfigurationDescription `type:"list"`
+
+	// The configuration parameters for a Kinesis Data Analytics Studio notebook.
+	ZeppelinApplicationConfigurationDescription *ZeppelinApplicationConfigurationDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -2975,35 +4323,61 @@ func (s *ApplicationConfigurationDescription) SetSqlApplicationConfigurationDesc
 	return s
 }
 
+// SetVpcConfigurationDescriptions sets the VpcConfigurationDescriptions field's value.
+func (s *ApplicationConfigurationDescription) SetVpcConfigurationDescriptions(v []*VpcConfigurationDescription) *ApplicationConfigurationDescription {
+	s.VpcConfigurationDescriptions = v
+	return s
+}
+
+// SetZeppelinApplicationConfigurationDescription sets the ZeppelinApplicationConfigurationDescription field's value.
+func (s *ApplicationConfigurationDescription) SetZeppelinApplicationConfigurationDescription(v *ZeppelinApplicationConfigurationDescription) *ApplicationConfigurationDescription {
+	s.ZeppelinApplicationConfigurationDescription = v
+	return s
+}
+
 // Describes updates to an application's configuration.
 type ApplicationConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// Describes updates to a Java-based Kinesis Data Analytics application's code
-	// configuration.
+	// Describes updates to an application's code configuration.
 	ApplicationCodeConfigurationUpdate *ApplicationCodeConfigurationUpdate `type:"structure"`
 
-	// Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics
+	// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics
 	// application.
 	ApplicationSnapshotConfigurationUpdate *ApplicationSnapshotConfigurationUpdate `type:"structure"`
 
-	// Describes updates to the environment properties for a Java-based Kinesis
+	// Describes updates to the environment properties for a Flink-based Kinesis
 	// Data Analytics application.
 	EnvironmentPropertyUpdates *EnvironmentPropertyUpdates `type:"structure"`
 
-	// Describes updates to a Java-based Kinesis Data Analytics application's configuration.
+	// Describes updates to a Flink-based Kinesis Data Analytics application's configuration.
 	FlinkApplicationConfigurationUpdate *FlinkApplicationConfigurationUpdate `type:"structure"`
 
-	// Describes updates to an SQL-based Kinesis Data Analytics application's configuration.
+	// Describes updates to a SQL-based Kinesis Data Analytics application's configuration.
 	SqlApplicationConfigurationUpdate *SqlApplicationConfigurationUpdate `type:"structure"`
+
+	// Updates to the array of descriptions of VPC configurations available to the
+	// application.
+	VpcConfigurationUpdates []*VpcConfigurationUpdate `type:"list"`
+
+	// Updates to the configuration of a Kinesis Data Analytics Studio notebook.
+	ZeppelinApplicationConfigurationUpdate *ZeppelinApplicationConfigurationUpdate `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationConfigurationUpdate) GoString() string {
 	return s.String()
 }
@@ -3034,6 +4408,21 @@ func (s *ApplicationConfigurationUpdate) Validate() error {
 	if s.SqlApplicationConfigurationUpdate != nil {
 		if err := s.SqlApplicationConfigurationUpdate.Validate(); err != nil {
 			invalidParams.AddNested("SqlApplicationConfigurationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.VpcConfigurationUpdates != nil {
+		for i, v := range s.VpcConfigurationUpdates {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VpcConfigurationUpdates", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.ZeppelinApplicationConfigurationUpdate != nil {
+		if err := s.ZeppelinApplicationConfigurationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("ZeppelinApplicationConfigurationUpdate", err.(request.ErrInvalidParams))
 		}
 	}
 
@@ -3073,6 +4462,18 @@ func (s *ApplicationConfigurationUpdate) SetSqlApplicationConfigurationUpdate(v 
 	return s
 }
 
+// SetVpcConfigurationUpdates sets the VpcConfigurationUpdates field's value.
+func (s *ApplicationConfigurationUpdate) SetVpcConfigurationUpdates(v []*VpcConfigurationUpdate) *ApplicationConfigurationUpdate {
+	s.VpcConfigurationUpdates = v
+	return s
+}
+
+// SetZeppelinApplicationConfigurationUpdate sets the ZeppelinApplicationConfigurationUpdate field's value.
+func (s *ApplicationConfigurationUpdate) SetZeppelinApplicationConfigurationUpdate(v *ZeppelinApplicationConfigurationUpdate) *ApplicationConfigurationUpdate {
+	s.ZeppelinApplicationConfigurationUpdate = v
+	return s
+}
+
 // Describes the application, including the application Amazon Resource Name
 // (ARN), status, latest version, and input and output configurations.
 type ApplicationDetail struct {
@@ -3083,11 +4484,20 @@ type ApplicationDetail struct {
 	// ApplicationARN is a required field
 	ApplicationARN *string `min:"1" type:"string" required:"true"`
 
-	// Provides details about the application's SQL or Java code and starting parameters.
+	// Describes details about the application code and starting parameters for
+	// a Kinesis Data Analytics application.
 	ApplicationConfigurationDescription *ApplicationConfigurationDescription `type:"structure"`
 
 	// The description of the application.
 	ApplicationDescription *string `type:"string"`
+
+	// The details of the maintenance configuration for the application.
+	ApplicationMaintenanceConfigurationDescription *ApplicationMaintenanceConfigurationDescription `type:"structure"`
+
+	// To create a Kinesis Data Analytics Studio notebook, you must set the mode
+	// to INTERACTIVE. However, for a Kinesis Data Analytics for Apache Flink application,
+	// the mode is optional.
+	ApplicationMode *string `type:"string" enum:"ApplicationMode"`
 
 	// The name of the application.
 	//
@@ -3105,8 +4515,22 @@ type ApplicationDetail struct {
 	// ApplicationVersionId is a required field
 	ApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
 
+	// If you reverted the application using RollbackApplication, the application
+	// version when RollbackApplication was called.
+	ApplicationVersionRolledBackFrom *int64 `min:"1" type:"long"`
+
+	// The version to which you want to roll back the application.
+	ApplicationVersionRolledBackTo *int64 `min:"1" type:"long"`
+
+	// The previous application version before the latest application update. RollbackApplication
+	// reverts the application to this version.
+	ApplicationVersionUpdatedFrom *int64 `min:"1" type:"long"`
+
 	// Describes the application Amazon CloudWatch logging options.
 	CloudWatchLoggingOptionDescriptions []*CloudWatchLoggingOptionDescription `type:"list"`
+
+	// A value you use to implement strong concurrency for application updates.
+	ConditionalToken *string `min:"1" type:"string"`
 
 	// The current timestamp when the application was created.
 	CreateTimestamp *time.Time `type:"timestamp"`
@@ -3114,7 +4538,7 @@ type ApplicationDetail struct {
 	// The current timestamp when the application was last updated.
 	LastUpdateTimestamp *time.Time `type:"timestamp"`
 
-	// The runtime environment for the application (SQL-1.0 or JAVA-8-FLINK-1.5).
+	// The runtime environment for the application.
 	//
 	// RuntimeEnvironment is a required field
 	RuntimeEnvironment *string `type:"string" required:"true" enum:"RuntimeEnvironment"`
@@ -3123,12 +4547,20 @@ type ApplicationDetail struct {
 	ServiceExecutionRole *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationDetail) GoString() string {
 	return s.String()
 }
@@ -3151,6 +4583,18 @@ func (s *ApplicationDetail) SetApplicationDescription(v string) *ApplicationDeta
 	return s
 }
 
+// SetApplicationMaintenanceConfigurationDescription sets the ApplicationMaintenanceConfigurationDescription field's value.
+func (s *ApplicationDetail) SetApplicationMaintenanceConfigurationDescription(v *ApplicationMaintenanceConfigurationDescription) *ApplicationDetail {
+	s.ApplicationMaintenanceConfigurationDescription = v
+	return s
+}
+
+// SetApplicationMode sets the ApplicationMode field's value.
+func (s *ApplicationDetail) SetApplicationMode(v string) *ApplicationDetail {
+	s.ApplicationMode = &v
+	return s
+}
+
 // SetApplicationName sets the ApplicationName field's value.
 func (s *ApplicationDetail) SetApplicationName(v string) *ApplicationDetail {
 	s.ApplicationName = &v
@@ -3169,9 +4613,33 @@ func (s *ApplicationDetail) SetApplicationVersionId(v int64) *ApplicationDetail 
 	return s
 }
 
+// SetApplicationVersionRolledBackFrom sets the ApplicationVersionRolledBackFrom field's value.
+func (s *ApplicationDetail) SetApplicationVersionRolledBackFrom(v int64) *ApplicationDetail {
+	s.ApplicationVersionRolledBackFrom = &v
+	return s
+}
+
+// SetApplicationVersionRolledBackTo sets the ApplicationVersionRolledBackTo field's value.
+func (s *ApplicationDetail) SetApplicationVersionRolledBackTo(v int64) *ApplicationDetail {
+	s.ApplicationVersionRolledBackTo = &v
+	return s
+}
+
+// SetApplicationVersionUpdatedFrom sets the ApplicationVersionUpdatedFrom field's value.
+func (s *ApplicationDetail) SetApplicationVersionUpdatedFrom(v int64) *ApplicationDetail {
+	s.ApplicationVersionUpdatedFrom = &v
+	return s
+}
+
 // SetCloudWatchLoggingOptionDescriptions sets the CloudWatchLoggingOptionDescriptions field's value.
 func (s *ApplicationDetail) SetCloudWatchLoggingOptionDescriptions(v []*CloudWatchLoggingOptionDescription) *ApplicationDetail {
 	s.CloudWatchLoggingOptionDescriptions = v
+	return s
+}
+
+// SetConditionalToken sets the ConditionalToken field's value.
+func (s *ApplicationDetail) SetConditionalToken(v string) *ApplicationDetail {
+	s.ConditionalToken = &v
 	return s
 }
 
@@ -3199,6 +4667,101 @@ func (s *ApplicationDetail) SetServiceExecutionRole(v string) *ApplicationDetail
 	return s
 }
 
+// The details of the maintenance configuration for the application.
+type ApplicationMaintenanceConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The end time for the maintenance window.
+	//
+	// ApplicationMaintenanceWindowEndTime is a required field
+	ApplicationMaintenanceWindowEndTime *string `min:"5" type:"string" required:"true"`
+
+	// The start time for the maintenance window.
+	//
+	// ApplicationMaintenanceWindowStartTime is a required field
+	ApplicationMaintenanceWindowStartTime *string `min:"5" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationMaintenanceConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationMaintenanceConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// SetApplicationMaintenanceWindowEndTime sets the ApplicationMaintenanceWindowEndTime field's value.
+func (s *ApplicationMaintenanceConfigurationDescription) SetApplicationMaintenanceWindowEndTime(v string) *ApplicationMaintenanceConfigurationDescription {
+	s.ApplicationMaintenanceWindowEndTime = &v
+	return s
+}
+
+// SetApplicationMaintenanceWindowStartTime sets the ApplicationMaintenanceWindowStartTime field's value.
+func (s *ApplicationMaintenanceConfigurationDescription) SetApplicationMaintenanceWindowStartTime(v string) *ApplicationMaintenanceConfigurationDescription {
+	s.ApplicationMaintenanceWindowStartTime = &v
+	return s
+}
+
+// Describes the updated maintenance configuration for the application.
+type ApplicationMaintenanceConfigurationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The updated start time for the maintenance window.
+	//
+	// ApplicationMaintenanceWindowStartTimeUpdate is a required field
+	ApplicationMaintenanceWindowStartTimeUpdate *string `min:"5" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationMaintenanceConfigurationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationMaintenanceConfigurationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ApplicationMaintenanceConfigurationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ApplicationMaintenanceConfigurationUpdate"}
+	if s.ApplicationMaintenanceWindowStartTimeUpdate == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationMaintenanceWindowStartTimeUpdate"))
+	}
+	if s.ApplicationMaintenanceWindowStartTimeUpdate != nil && len(*s.ApplicationMaintenanceWindowStartTimeUpdate) < 5 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationMaintenanceWindowStartTimeUpdate", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationMaintenanceWindowStartTimeUpdate sets the ApplicationMaintenanceWindowStartTimeUpdate field's value.
+func (s *ApplicationMaintenanceConfigurationUpdate) SetApplicationMaintenanceWindowStartTimeUpdate(v string) *ApplicationMaintenanceConfigurationUpdate {
+	s.ApplicationMaintenanceWindowStartTimeUpdate = &v
+	return s
+}
+
 // Specifies the method and snapshot to use when restarting an application using
 // previously saved application state.
 type ApplicationRestoreConfiguration struct {
@@ -3215,12 +4778,20 @@ type ApplicationRestoreConfiguration struct {
 	SnapshotName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationRestoreConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationRestoreConfiguration) GoString() string {
 	return s.String()
 }
@@ -3253,24 +4824,32 @@ func (s *ApplicationRestoreConfiguration) SetSnapshotName(v string) *Application
 	return s
 }
 
-// Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics
+// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics
 // application.
 type ApplicationSnapshotConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics
+	// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics
 	// application.
 	//
 	// SnapshotsEnabled is a required field
 	SnapshotsEnabled *bool `type:"boolean" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSnapshotConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSnapshotConfiguration) GoString() string {
 	return s.String()
 }
@@ -3294,24 +4873,32 @@ func (s *ApplicationSnapshotConfiguration) SetSnapshotsEnabled(v bool) *Applicat
 	return s
 }
 
-// Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics
+// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics
 // application.
 type ApplicationSnapshotConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
-	// Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics
+	// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics
 	// application.
 	//
 	// SnapshotsEnabled is a required field
 	SnapshotsEnabled *bool `type:"boolean" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSnapshotConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSnapshotConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -3322,24 +4909,31 @@ func (s *ApplicationSnapshotConfigurationDescription) SetSnapshotsEnabled(v bool
 	return s
 }
 
-// Describes updates to whether snapshots are enabled for a Java-based Kinesis
+// Describes updates to whether snapshots are enabled for a Flink-based Kinesis
 // Data Analytics application.
 type ApplicationSnapshotConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// Describes updates to whether snapshots are enabled for a Java-based Kinesis
-	// Data Analytics application.
+	// Describes updates to whether snapshots are enabled for an application.
 	//
 	// SnapshotsEnabledUpdate is a required field
 	SnapshotsEnabledUpdate *bool `type:"boolean" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSnapshotConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSnapshotConfigurationUpdate) GoString() string {
 	return s.String()
 }
@@ -3373,6 +4967,10 @@ type ApplicationSummary struct {
 	// ApplicationARN is a required field
 	ApplicationARN *string `min:"1" type:"string" required:"true"`
 
+	// For a Kinesis Data Analytics for Apache Flink application, the mode is STREAMING.
+	// For a Kinesis Data Analytics Studio notebook, it is INTERACTIVE.
+	ApplicationMode *string `type:"string" enum:"ApplicationMode"`
+
 	// The name of the application.
 	//
 	// ApplicationName is a required field
@@ -3388,18 +4986,26 @@ type ApplicationSummary struct {
 	// ApplicationVersionId is a required field
 	ApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
 
-	// The runtime environment for the application (SQL-1.0 or JAVA-8-FLINK-1.5).
+	// The runtime environment for the application.
 	//
 	// RuntimeEnvironment is a required field
 	RuntimeEnvironment *string `type:"string" required:"true" enum:"RuntimeEnvironment"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSummary) GoString() string {
 	return s.String()
 }
@@ -3407,6 +5013,12 @@ func (s ApplicationSummary) GoString() string {
 // SetApplicationARN sets the ApplicationARN field's value.
 func (s *ApplicationSummary) SetApplicationARN(v string) *ApplicationSummary {
 	s.ApplicationARN = &v
+	return s
+}
+
+// SetApplicationMode sets the ApplicationMode field's value.
+func (s *ApplicationSummary) SetApplicationMode(v string) *ApplicationSummary {
+	s.ApplicationMode = &v
 	return s
 }
 
@@ -3434,10 +5046,56 @@ func (s *ApplicationSummary) SetRuntimeEnvironment(v string) *ApplicationSummary
 	return s
 }
 
-// For an SQL-based application, provides additional mapping information when
-// the record format uses delimiters, such as CSV. For example, the following
-// sample records use CSV format, where the records use the '\n' as the row
-// delimiter and a comma (",") as the column delimiter:
+// The summary of the application version.
+type ApplicationVersionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the application.
+	//
+	// ApplicationStatus is a required field
+	ApplicationStatus *string `type:"string" required:"true" enum:"ApplicationStatus"`
+
+	// The ID of the application version. Kinesis Data Analytics updates the ApplicationVersionId
+	// each time you update the application.
+	//
+	// ApplicationVersionId is a required field
+	ApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationVersionSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationVersionSummary) GoString() string {
+	return s.String()
+}
+
+// SetApplicationStatus sets the ApplicationStatus field's value.
+func (s *ApplicationVersionSummary) SetApplicationStatus(v string) *ApplicationVersionSummary {
+	s.ApplicationStatus = &v
+	return s
+}
+
+// SetApplicationVersionId sets the ApplicationVersionId field's value.
+func (s *ApplicationVersionSummary) SetApplicationVersionId(v int64) *ApplicationVersionSummary {
+	s.ApplicationVersionId = &v
+	return s
+}
+
+// For a SQL-based Kinesis Data Analytics application, provides additional mapping
+// information when the record format uses delimiters, such as CSV. For example,
+// the following sample records use CSV format, where the records use the '\n'
+// as the row delimiter and a comma (",") as the column delimiter:
 //
 // "name1", "address1"
 //
@@ -3458,12 +5116,20 @@ type CSVMappingParameters struct {
 	RecordRowDelimiter *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CSVMappingParameters) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CSVMappingParameters) GoString() string {
 	return s.String()
 }
@@ -3502,22 +5168,190 @@ func (s *CSVMappingParameters) SetRecordRowDelimiter(v string) *CSVMappingParame
 	return s
 }
 
+// The configuration parameters for the default Amazon Glue database. You use
+// this database for SQL queries that you write in a Kinesis Data Analytics
+// Studio notebook.
+type CatalogConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration parameters for the default Amazon Glue database. You use
+	// this database for Apache Flink SQL queries and table API transforms that
+	// you write in a Kinesis Data Analytics Studio notebook.
+	//
+	// GlueDataCatalogConfiguration is a required field
+	GlueDataCatalogConfiguration *GlueDataCatalogConfiguration `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CatalogConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CatalogConfiguration"}
+	if s.GlueDataCatalogConfiguration == nil {
+		invalidParams.Add(request.NewErrParamRequired("GlueDataCatalogConfiguration"))
+	}
+	if s.GlueDataCatalogConfiguration != nil {
+		if err := s.GlueDataCatalogConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("GlueDataCatalogConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetGlueDataCatalogConfiguration sets the GlueDataCatalogConfiguration field's value.
+func (s *CatalogConfiguration) SetGlueDataCatalogConfiguration(v *GlueDataCatalogConfiguration) *CatalogConfiguration {
+	s.GlueDataCatalogConfiguration = v
+	return s
+}
+
+// The configuration parameters for the default Amazon Glue database. You use
+// this database for Apache Flink SQL queries and table API transforms that
+// you write in a Kinesis Data Analytics Studio notebook.
+type CatalogConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration parameters for the default Amazon Glue database. You use
+	// this database for SQL queries that you write in a Kinesis Data Analytics
+	// Studio notebook.
+	//
+	// GlueDataCatalogConfigurationDescription is a required field
+	GlueDataCatalogConfigurationDescription *GlueDataCatalogConfigurationDescription `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// SetGlueDataCatalogConfigurationDescription sets the GlueDataCatalogConfigurationDescription field's value.
+func (s *CatalogConfigurationDescription) SetGlueDataCatalogConfigurationDescription(v *GlueDataCatalogConfigurationDescription) *CatalogConfigurationDescription {
+	s.GlueDataCatalogConfigurationDescription = v
+	return s
+}
+
+// Updates to the configuration parameters for the default Amazon Glue database.
+// You use this database for SQL queries that you write in a Kinesis Data Analytics
+// Studio notebook.
+type CatalogConfigurationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Updates to the configuration parameters for the default Amazon Glue database.
+	// You use this database for SQL queries that you write in a Kinesis Data Analytics
+	// Studio notebook.
+	//
+	// GlueDataCatalogConfigurationUpdate is a required field
+	GlueDataCatalogConfigurationUpdate *GlueDataCatalogConfigurationUpdate `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogConfigurationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CatalogConfigurationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CatalogConfigurationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CatalogConfigurationUpdate"}
+	if s.GlueDataCatalogConfigurationUpdate == nil {
+		invalidParams.Add(request.NewErrParamRequired("GlueDataCatalogConfigurationUpdate"))
+	}
+	if s.GlueDataCatalogConfigurationUpdate != nil {
+		if err := s.GlueDataCatalogConfigurationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("GlueDataCatalogConfigurationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetGlueDataCatalogConfigurationUpdate sets the GlueDataCatalogConfigurationUpdate field's value.
+func (s *CatalogConfigurationUpdate) SetGlueDataCatalogConfigurationUpdate(v *GlueDataCatalogConfigurationUpdate) *CatalogConfigurationUpdate {
+	s.GlueDataCatalogConfigurationUpdate = v
+	return s
+}
+
 // Describes an application's checkpointing configuration. Checkpointing is
 // the process of persisting application state for fault tolerance. For more
-// information, see  Checkpoints for Fault Tolerance (https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance)
-// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.6/).
+// information, see Checkpoints for Fault Tolerance (https://ci.apache.org/projects/flink/flink-docs-release-1.8/concepts/programming-model.html#checkpoints-for-fault-tolerance)
+// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/).
 type CheckpointConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Describes the interval in milliseconds between checkpoint operations.
-	CheckpointInterval *int64 `type:"long"`
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointInterval value of 60000, even if this value is set to
+	// another value using this API or in application code.
+	CheckpointInterval *int64 `min:"1" type:"long"`
 
-	// Describes whether checkpointing is enabled for a Java-based Kinesis Data
+	// Describes whether checkpointing is enabled for a Flink-based Kinesis Data
 	// Analytics application.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointingEnabled value of true, even if this value is set
+	// to another value using this API or in application code.
 	CheckpointingEnabled *bool `type:"boolean"`
 
-	// Describes whether the application uses Amazon Kinesis Data Analytics' default
-	// checkpointing behavior.
+	// Describes whether the application uses Kinesis Data Analytics' default checkpointing
+	// behavior. You must set this property to CUSTOM in order to set the CheckpointingEnabled,
+	// CheckpointInterval, or MinPauseBetweenCheckpoints parameters.
+	//
+	// If this value is set to DEFAULT, the application will use the following values,
+	// even if they are set to other values using APIs or application code:
+	//
+	//    * CheckpointingEnabled: true
+	//
+	//    * CheckpointInterval: 60000
+	//
+	//    * MinPauseBetweenCheckpoints: 5000
 	//
 	// ConfigurationType is a required field
 	ConfigurationType *string `type:"string" required:"true" enum:"ConfigurationType"`
@@ -3525,17 +5359,29 @@ type CheckpointConfiguration struct {
 	// Describes the minimum time in milliseconds after a checkpoint operation completes
 	// that a new checkpoint operation can start. If a checkpoint operation takes
 	// longer than the CheckpointInterval, the application otherwise performs continual
-	// checkpoint operations. For more information, see  Tuning Checkpointing (https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/large_state_tuning.html#tuning-checkpointing)
-	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.6/).
+	// checkpoint operations. For more information, see Tuning Checkpointing (https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/large_state_tuning.html#tuning-checkpointing)
+	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/).
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a MinPauseBetweenCheckpoints value of 5000, even if this value is
+	// set using this API or in application code.
 	MinPauseBetweenCheckpoints *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckpointConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckpointConfiguration) GoString() string {
 	return s.String()
 }
@@ -3543,6 +5389,9 @@ func (s CheckpointConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckpointConfiguration) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CheckpointConfiguration"}
+	if s.CheckpointInterval != nil && *s.CheckpointInterval < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("CheckpointInterval", 1))
+	}
 	if s.ConfigurationType == nil {
 		invalidParams.Add(request.NewErrParamRequired("ConfigurationType"))
 	}
@@ -3577,33 +5426,62 @@ func (s *CheckpointConfiguration) SetMinPauseBetweenCheckpoints(v int64) *Checkp
 	return s
 }
 
-// Describes checkpointing parameters for a Java-based Amazon Kinesis Data Analytics
+// Describes checkpointing parameters for a Flink-based Kinesis Data Analytics
 // application.
 type CheckpointConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
 	// Describes the interval in milliseconds between checkpoint operations.
-	CheckpointInterval *int64 `type:"long"`
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointInterval value of 60000, even if this value is set to
+	// another value using this API or in application code.
+	CheckpointInterval *int64 `min:"1" type:"long"`
 
-	// Describes whether checkpointing is enabled for a Java-based Kinesis Data
+	// Describes whether checkpointing is enabled for a Flink-based Kinesis Data
 	// Analytics application.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointingEnabled value of true, even if this value is set
+	// to another value using this API or in application code.
 	CheckpointingEnabled *bool `type:"boolean"`
 
 	// Describes whether the application uses the default checkpointing behavior
 	// in Kinesis Data Analytics.
+	//
+	// If this value is set to DEFAULT, the application will use the following values,
+	// even if they are set to other values using APIs or application code:
+	//
+	//    * CheckpointingEnabled: true
+	//
+	//    * CheckpointInterval: 60000
+	//
+	//    * MinPauseBetweenCheckpoints: 5000
 	ConfigurationType *string `type:"string" enum:"ConfigurationType"`
 
 	// Describes the minimum time in milliseconds after a checkpoint operation completes
 	// that a new checkpoint operation can start.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a MinPauseBetweenCheckpoints value of 5000, even if this value is
+	// set using this API or in application code.
 	MinPauseBetweenCheckpoints *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckpointConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckpointConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -3632,34 +5510,78 @@ func (s *CheckpointConfigurationDescription) SetMinPauseBetweenCheckpoints(v int
 	return s
 }
 
-// Describes updates to the checkpointing parameters for a Java-based Amazon
-// Kinesis Data Analytics application.
+// Describes updates to the checkpointing parameters for a Flink-based Kinesis
+// Data Analytics application.
 type CheckpointConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// Describes updates to the interval in milliseconds between checkpoint operations.
-	CheckpointIntervalUpdate *int64 `type:"long"`
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointInterval value of 60000, even if this value is set to
+	// another value using this API or in application code.
+	CheckpointIntervalUpdate *int64 `min:"1" type:"long"`
 
 	// Describes updates to whether checkpointing is enabled for an application.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a CheckpointingEnabled value of true, even if this value is set
+	// to another value using this API or in application code.
 	CheckpointingEnabledUpdate *bool `type:"boolean"`
 
 	// Describes updates to whether the application uses the default checkpointing
-	// behavior of Kinesis Data Analytics.
+	// behavior of Kinesis Data Analytics. You must set this property to CUSTOM
+	// in order to set the CheckpointingEnabled, CheckpointInterval, or MinPauseBetweenCheckpoints
+	// parameters.
+	//
+	// If this value is set to DEFAULT, the application will use the following values,
+	// even if they are set to other values using APIs or application code:
+	//
+	//    * CheckpointingEnabled: true
+	//
+	//    * CheckpointInterval: 60000
+	//
+	//    * MinPauseBetweenCheckpoints: 5000
 	ConfigurationTypeUpdate *string `type:"string" enum:"ConfigurationType"`
 
 	// Describes updates to the minimum time in milliseconds after a checkpoint
 	// operation completes that a new checkpoint operation can start.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application
+	// will use a MinPauseBetweenCheckpoints value of 5000, even if this value is
+	// set using this API or in application code.
 	MinPauseBetweenCheckpointsUpdate *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckpointConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckpointConfigurationUpdate) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CheckpointConfigurationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CheckpointConfigurationUpdate"}
+	if s.CheckpointIntervalUpdate != nil && *s.CheckpointIntervalUpdate < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("CheckpointIntervalUpdate", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetCheckpointIntervalUpdate sets the CheckpointIntervalUpdate field's value.
@@ -3697,12 +5619,20 @@ type CloudWatchLoggingOption struct {
 	LogStreamARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLoggingOption) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLoggingOption) GoString() string {
 	return s.String()
 }
@@ -3750,12 +5680,20 @@ type CloudWatchLoggingOptionDescription struct {
 	RoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLoggingOptionDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLoggingOptionDescription) GoString() string {
 	return s.String()
 }
@@ -3792,12 +5730,20 @@ type CloudWatchLoggingOptionUpdate struct {
 	LogStreamARNUpdate *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLoggingOptionUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLoggingOptionUpdate) GoString() string {
 	return s.String()
 }
@@ -3834,28 +5780,35 @@ func (s *CloudWatchLoggingOptionUpdate) SetLogStreamARNUpdate(v string) *CloudWa
 }
 
 // Specifies either the application code, or the location of the application
-// code, for a Java-based Amazon Kinesis Data Analytics application.
+// code, for a Flink-based Kinesis Data Analytics application.
 type CodeContent struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the Amazon S3 bucket containing the application code.
+	// Information about the Amazon S3 bucket that contains the application code.
 	S3ContentLocation *S3ContentLocation `type:"structure"`
 
-	// The text-format code for a Java-based Kinesis Data Analytics application.
+	// The text-format code for a Flink-based Kinesis Data Analytics application.
 	TextContent *string `type:"string"`
 
-	// The zip-format code for a Java-based Kinesis Data Analytics application.
-	//
+	// The zip-format code for a Flink-based Kinesis Data Analytics application.
 	// ZipFileContent is automatically base64 encoded/decoded by the SDK.
 	ZipFileContent []byte `type:"blob"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeContent) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeContent) GoString() string {
 	return s.String()
 }
@@ -3893,8 +5846,7 @@ func (s *CodeContent) SetZipFileContent(v []byte) *CodeContent {
 	return s
 }
 
-// Describes details about the application code for a Java-based Kinesis Data
-// Analytics application.
+// Describes details about the code of a Kinesis Data Analytics application.
 type CodeContentDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -3913,12 +5865,20 @@ type CodeContentDescription struct {
 	TextContent *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeContentDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeContentDescription) GoString() string {
 	return s.String()
 }
@@ -3947,7 +5907,8 @@ func (s *CodeContentDescription) SetTextContent(v string) *CodeContentDescriptio
 	return s
 }
 
-// Describes an update to the code of a Java-based Kinesis Data Analytics application.
+// Describes an update to the code of an application. Not supported for Apache
+// Zeppelin.
 type CodeContentUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -3958,17 +5919,24 @@ type CodeContentUpdate struct {
 	TextContentUpdate *string `type:"string"`
 
 	// Describes an update to the zipped code for an application.
-	//
 	// ZipFileContentUpdate is automatically base64 encoded/decoded by the SDK.
 	ZipFileContentUpdate []byte `type:"blob"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeContentUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeContentUpdate) GoString() string {
 	return s.String()
 }
@@ -4006,6 +5974,137 @@ func (s *CodeContentUpdate) SetZipFileContentUpdate(v []byte) *CodeContentUpdate
 	return s
 }
 
+// The user-provided application code (query) is not valid. This can be a simple
+// syntax error.
+type CodeValidationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CodeValidationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CodeValidationException) GoString() string {
+	return s.String()
+}
+
+func newErrorCodeValidationException(v protocol.ResponseMetadata) error {
+	return &CodeValidationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CodeValidationException) Code() string {
+	return "CodeValidationException"
+}
+
+// Message returns the exception's message.
+func (s *CodeValidationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CodeValidationException) OrigErr() error {
+	return nil
+}
+
+func (s *CodeValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CodeValidationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CodeValidationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception thrown as a result of concurrent modifications to an application.
+// This error can be the result of attempting to modify an application without
+// using the current application ID.
+type ConcurrentModificationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) GoString() string {
+	return s.String()
+}
+
+func newErrorConcurrentModificationException(v protocol.ResponseMetadata) error {
+	return &ConcurrentModificationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConcurrentModificationException) Code() string {
+	return "ConcurrentModificationException"
+}
+
+// Message returns the exception's message.
+func (s *ConcurrentModificationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConcurrentModificationException) OrigErr() error {
+	return nil
+}
+
+func (s *ConcurrentModificationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConcurrentModificationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConcurrentModificationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type CreateApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4014,6 +6113,10 @@ type CreateApplicationInput struct {
 
 	// A summary description of the application.
 	ApplicationDescription *string `type:"string"`
+
+	// Use the STREAMING mode to create a Kinesis Data Analytics For Flink application.
+	// To create a Kinesis Data Analytics Studio notebook, use the INTERACTIVE mode.
+	ApplicationMode *string `type:"string" enum:"ApplicationMode"`
 
 	// The name of your application (for example, sample-app).
 	//
@@ -4024,7 +6127,7 @@ type CreateApplicationInput struct {
 	// application configuration errors.
 	CloudWatchLoggingOptions []*CloudWatchLoggingOption `type:"list"`
 
-	// The runtime environment for the application (SQL-1.0 or JAVA-8-FLINK-1.5).
+	// The runtime environment for the application.
 	//
 	// RuntimeEnvironment is a required field
 	RuntimeEnvironment *string `type:"string" required:"true" enum:"RuntimeEnvironment"`
@@ -4034,14 +6137,28 @@ type CreateApplicationInput struct {
 	//
 	// ServiceExecutionRole is a required field
 	ServiceExecutionRole *string `min:"1" type:"string" required:"true"`
+
+	// A list of one or more tags to assign to the application. A tag is a key-value
+	// pair that identifies an application. Note that the maximum number of application
+	// tags includes system tags. The maximum number of user-defined application
+	// tags is 50. For more information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
+	Tags []*Tag `min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationInput) GoString() string {
 	return s.String()
 }
@@ -4064,6 +6181,9 @@ func (s *CreateApplicationInput) Validate() error {
 	if s.ServiceExecutionRole != nil && len(*s.ServiceExecutionRole) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("ServiceExecutionRole", 1))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+	}
 	if s.ApplicationConfiguration != nil {
 		if err := s.ApplicationConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("ApplicationConfiguration", err.(request.ErrInvalidParams))
@@ -4076,6 +6196,16 @@ func (s *CreateApplicationInput) Validate() error {
 			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CloudWatchLoggingOptions", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
 			}
 		}
 	}
@@ -4095,6 +6225,12 @@ func (s *CreateApplicationInput) SetApplicationConfiguration(v *ApplicationConfi
 // SetApplicationDescription sets the ApplicationDescription field's value.
 func (s *CreateApplicationInput) SetApplicationDescription(v string) *CreateApplicationInput {
 	s.ApplicationDescription = &v
+	return s
+}
+
+// SetApplicationMode sets the ApplicationMode field's value.
+func (s *CreateApplicationInput) SetApplicationMode(v string) *CreateApplicationInput {
+	s.ApplicationMode = &v
 	return s
 }
 
@@ -4122,6 +6258,12 @@ func (s *CreateApplicationInput) SetServiceExecutionRole(v string) *CreateApplic
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateApplicationInput) SetTags(v []*Tag) *CreateApplicationInput {
+	s.Tags = v
+	return s
+}
+
 type CreateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4132,12 +6274,20 @@ type CreateApplicationOutput struct {
 	ApplicationDetail *ApplicationDetail `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -4145,6 +6295,113 @@ func (s CreateApplicationOutput) GoString() string {
 // SetApplicationDetail sets the ApplicationDetail field's value.
 func (s *CreateApplicationOutput) SetApplicationDetail(v *ApplicationDetail) *CreateApplicationOutput {
 	s.ApplicationDetail = v
+	return s
+}
+
+type CreateApplicationPresignedUrlInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the application.
+	//
+	// ApplicationName is a required field
+	ApplicationName *string `min:"1" type:"string" required:"true"`
+
+	// The duration in seconds for which the returned URL will be valid.
+	SessionExpirationDurationInSeconds *int64 `min:"1800" type:"long"`
+
+	// The type of the extension for which to create and return a URL. Currently,
+	// the only valid extension URL type is FLINK_DASHBOARD_URL.
+	//
+	// UrlType is a required field
+	UrlType *string `type:"string" required:"true" enum:"UrlType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateApplicationPresignedUrlInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateApplicationPresignedUrlInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateApplicationPresignedUrlInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateApplicationPresignedUrlInput"}
+	if s.ApplicationName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+	}
+	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+	}
+	if s.SessionExpirationDurationInSeconds != nil && *s.SessionExpirationDurationInSeconds < 1800 {
+		invalidParams.Add(request.NewErrParamMinValue("SessionExpirationDurationInSeconds", 1800))
+	}
+	if s.UrlType == nil {
+		invalidParams.Add(request.NewErrParamRequired("UrlType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationName sets the ApplicationName field's value.
+func (s *CreateApplicationPresignedUrlInput) SetApplicationName(v string) *CreateApplicationPresignedUrlInput {
+	s.ApplicationName = &v
+	return s
+}
+
+// SetSessionExpirationDurationInSeconds sets the SessionExpirationDurationInSeconds field's value.
+func (s *CreateApplicationPresignedUrlInput) SetSessionExpirationDurationInSeconds(v int64) *CreateApplicationPresignedUrlInput {
+	s.SessionExpirationDurationInSeconds = &v
+	return s
+}
+
+// SetUrlType sets the UrlType field's value.
+func (s *CreateApplicationPresignedUrlInput) SetUrlType(v string) *CreateApplicationPresignedUrlInput {
+	s.UrlType = &v
+	return s
+}
+
+type CreateApplicationPresignedUrlOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The URL of the extension.
+	AuthorizedUrl *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateApplicationPresignedUrlOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateApplicationPresignedUrlOutput) GoString() string {
+	return s.String()
+}
+
+// SetAuthorizedUrl sets the AuthorizedUrl field's value.
+func (s *CreateApplicationPresignedUrlOutput) SetAuthorizedUrl(v string) *CreateApplicationPresignedUrlOutput {
+	s.AuthorizedUrl = &v
 	return s
 }
 
@@ -4162,12 +6419,20 @@ type CreateApplicationSnapshotInput struct {
 	SnapshotName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -4210,14 +6475,156 @@ type CreateApplicationSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+// Specifies dependency JARs, as well as JAR files that contain user-defined
+// functions (UDF).
+type CustomArtifactConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// UDF stands for user-defined functions. This type of artifact must be in an
+	// S3 bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
+	//
+	// ArtifactType is a required field
+	ArtifactType *string `type:"string" required:"true" enum:"ArtifactType"`
+
+	// The parameters required to fully specify a Maven reference.
+	MavenReference *MavenReference `type:"structure"`
+
+	// For a Kinesis Data Analytics application provides a description of an Amazon
+	// S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the
+	// name of the Amazon S3 object that contains the data, and the version number
+	// of the Amazon S3 object that contains the data.
+	S3ContentLocation *S3ContentLocation `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomArtifactConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomArtifactConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CustomArtifactConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CustomArtifactConfiguration"}
+	if s.ArtifactType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ArtifactType"))
+	}
+	if s.MavenReference != nil {
+		if err := s.MavenReference.Validate(); err != nil {
+			invalidParams.AddNested("MavenReference", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3ContentLocation != nil {
+		if err := s.S3ContentLocation.Validate(); err != nil {
+			invalidParams.AddNested("S3ContentLocation", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetArtifactType sets the ArtifactType field's value.
+func (s *CustomArtifactConfiguration) SetArtifactType(v string) *CustomArtifactConfiguration {
+	s.ArtifactType = &v
+	return s
+}
+
+// SetMavenReference sets the MavenReference field's value.
+func (s *CustomArtifactConfiguration) SetMavenReference(v *MavenReference) *CustomArtifactConfiguration {
+	s.MavenReference = v
+	return s
+}
+
+// SetS3ContentLocation sets the S3ContentLocation field's value.
+func (s *CustomArtifactConfiguration) SetS3ContentLocation(v *S3ContentLocation) *CustomArtifactConfiguration {
+	s.S3ContentLocation = v
+	return s
+}
+
+// Specifies a dependency JAR or a JAR of user-defined functions.
+type CustomArtifactConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// UDF stands for user-defined functions. This type of artifact must be in an
+	// S3 bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
+	ArtifactType *string `type:"string" enum:"ArtifactType"`
+
+	// The parameters that are required to specify a Maven dependency.
+	MavenReferenceDescription *MavenReference `type:"structure"`
+
+	// For a Kinesis Data Analytics application provides a description of an Amazon
+	// S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the
+	// name of the Amazon S3 object that contains the data, and the version number
+	// of the Amazon S3 object that contains the data.
+	S3ContentLocationDescription *S3ContentLocation `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomArtifactConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomArtifactConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// SetArtifactType sets the ArtifactType field's value.
+func (s *CustomArtifactConfigurationDescription) SetArtifactType(v string) *CustomArtifactConfigurationDescription {
+	s.ArtifactType = &v
+	return s
+}
+
+// SetMavenReferenceDescription sets the MavenReferenceDescription field's value.
+func (s *CustomArtifactConfigurationDescription) SetMavenReferenceDescription(v *MavenReference) *CustomArtifactConfigurationDescription {
+	s.MavenReferenceDescription = v
+	return s
+}
+
+// SetS3ContentLocationDescription sets the S3ContentLocationDescription field's value.
+func (s *CustomArtifactConfigurationDescription) SetS3ContentLocationDescription(v *S3ContentLocation) *CustomArtifactConfigurationDescription {
+	s.S3ContentLocationDescription = v
+	return s
 }
 
 type DeleteApplicationCloudWatchLoggingOptionInput struct {
@@ -4235,19 +6642,34 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	// CloudWatchLoggingOptionId is a required field
 	CloudWatchLoggingOptionId *string `min:"1" type:"string" required:"true"`
 
-	// The version ID of the application. You can retrieve the application version
-	// ID using DescribeApplication.
-	//
-	// CurrentApplicationVersionId is a required field
-	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
+	// A value you use to implement strong concurrency for application updates.
+	// You must provide the CurrentApplicationVersionId or the ConditionalToken.
+	// You get the application's current ConditionalToken using DescribeApplication.
+	// For better concurrency support, use the ConditionalToken parameter instead
+	// of CurrentApplicationVersionId.
+	ConditionalToken *string `min:"1" type:"string"`
+
+	// The version ID of the application. You must provide the CurrentApplicationVersionId
+	// or the ConditionalToken. You can retrieve the application version ID using
+	// DescribeApplication. For better concurrency support, use the ConditionalToken
+	// parameter instead of CurrentApplicationVersionId.
+	CurrentApplicationVersionId *int64 `min:"1" type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationCloudWatchLoggingOptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationCloudWatchLoggingOptionInput) GoString() string {
 	return s.String()
 }
@@ -4267,8 +6689,8 @@ func (s *DeleteApplicationCloudWatchLoggingOptionInput) Validate() error {
 	if s.CloudWatchLoggingOptionId != nil && len(*s.CloudWatchLoggingOptionId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("CloudWatchLoggingOptionId", 1))
 	}
-	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+	if s.ConditionalToken != nil && len(*s.ConditionalToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ConditionalToken", 1))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
@@ -4292,6 +6714,12 @@ func (s *DeleteApplicationCloudWatchLoggingOptionInput) SetCloudWatchLoggingOpti
 	return s
 }
 
+// SetConditionalToken sets the ConditionalToken field's value.
+func (s *DeleteApplicationCloudWatchLoggingOptionInput) SetConditionalToken(v string) *DeleteApplicationCloudWatchLoggingOptionInput {
+	s.ConditionalToken = &v
+	return s
+}
+
 // SetCurrentApplicationVersionId sets the CurrentApplicationVersionId field's value.
 func (s *DeleteApplicationCloudWatchLoggingOptionInput) SetCurrentApplicationVersionId(v int64) *DeleteApplicationCloudWatchLoggingOptionInput {
 	s.CurrentApplicationVersionId = &v
@@ -4312,12 +6740,20 @@ type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 	CloudWatchLoggingOptionDescriptions []*CloudWatchLoggingOptionDescription `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationCloudWatchLoggingOptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationCloudWatchLoggingOptionOutput) GoString() string {
 	return s.String()
 }
@@ -4354,12 +6790,20 @@ type DeleteApplicationInput struct {
 	CreateTimestamp *time.Time `type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationInput) GoString() string {
 	return s.String()
 }
@@ -4418,12 +6862,20 @@ type DeleteApplicationInputProcessingConfigurationInput struct {
 	InputId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationInputProcessingConfigurationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationInputProcessingConfigurationInput) GoString() string {
 	return s.String()
 }
@@ -4484,12 +6936,20 @@ type DeleteApplicationInputProcessingConfigurationOutput struct {
 	ApplicationVersionId *int64 `min:"1" type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationInputProcessingConfigurationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationInputProcessingConfigurationOutput) GoString() string {
 	return s.String()
 }
@@ -4510,12 +6970,20 @@ type DeleteApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -4546,12 +7014,20 @@ type DeleteApplicationOutputInput struct {
 	OutputId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationOutputInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationOutputInput) GoString() string {
 	return s.String()
 }
@@ -4612,12 +7088,20 @@ type DeleteApplicationOutputOutput struct {
 	ApplicationVersionId *int64 `min:"1" type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationOutputOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationOutputOutput) GoString() string {
 	return s.String()
 }
@@ -4658,12 +7142,20 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	ReferenceId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationReferenceDataSourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationReferenceDataSourceInput) GoString() string {
 	return s.String()
 }
@@ -4724,12 +7216,20 @@ type DeleteApplicationReferenceDataSourceOutput struct {
 	ApplicationVersionId *int64 `min:"1" type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationReferenceDataSourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationReferenceDataSourceOutput) GoString() string {
 	return s.String()
 }
@@ -4766,12 +7266,20 @@ type DeleteApplicationSnapshotInput struct {
 	SnapshotName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -4823,14 +7331,300 @@ type DeleteApplicationSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationSnapshotOutput) GoString() string {
 	return s.String()
+}
+
+type DeleteApplicationVpcConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an existing application.
+	//
+	// ApplicationName is a required field
+	ApplicationName *string `min:"1" type:"string" required:"true"`
+
+	// A value you use to implement strong concurrency for application updates.
+	// You must provide the CurrentApplicationVersionId or the ConditionalToken.
+	// You get the application's current ConditionalToken using DescribeApplication.
+	// For better concurrency support, use the ConditionalToken parameter instead
+	// of CurrentApplicationVersionId.
+	ConditionalToken *string `min:"1" type:"string"`
+
+	// The current application version ID. You must provide the CurrentApplicationVersionId
+	// or the ConditionalToken. You can retrieve the application version ID using
+	// DescribeApplication. For better concurrency support, use the ConditionalToken
+	// parameter instead of CurrentApplicationVersionId.
+	CurrentApplicationVersionId *int64 `min:"1" type:"long"`
+
+	// The ID of the VPC configuration to delete.
+	//
+	// VpcConfigurationId is a required field
+	VpcConfigurationId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteApplicationVpcConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteApplicationVpcConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteApplicationVpcConfigurationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationVpcConfigurationInput"}
+	if s.ApplicationName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+	}
+	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+	}
+	if s.ConditionalToken != nil && len(*s.ConditionalToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ConditionalToken", 1))
+	}
+	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+	}
+	if s.VpcConfigurationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("VpcConfigurationId"))
+	}
+	if s.VpcConfigurationId != nil && len(*s.VpcConfigurationId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("VpcConfigurationId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationName sets the ApplicationName field's value.
+func (s *DeleteApplicationVpcConfigurationInput) SetApplicationName(v string) *DeleteApplicationVpcConfigurationInput {
+	s.ApplicationName = &v
+	return s
+}
+
+// SetConditionalToken sets the ConditionalToken field's value.
+func (s *DeleteApplicationVpcConfigurationInput) SetConditionalToken(v string) *DeleteApplicationVpcConfigurationInput {
+	s.ConditionalToken = &v
+	return s
+}
+
+// SetCurrentApplicationVersionId sets the CurrentApplicationVersionId field's value.
+func (s *DeleteApplicationVpcConfigurationInput) SetCurrentApplicationVersionId(v int64) *DeleteApplicationVpcConfigurationInput {
+	s.CurrentApplicationVersionId = &v
+	return s
+}
+
+// SetVpcConfigurationId sets the VpcConfigurationId field's value.
+func (s *DeleteApplicationVpcConfigurationInput) SetVpcConfigurationId(v string) *DeleteApplicationVpcConfigurationInput {
+	s.VpcConfigurationId = &v
+	return s
+}
+
+type DeleteApplicationVpcConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the Kinesis Data Analytics application.
+	ApplicationARN *string `min:"1" type:"string"`
+
+	// The updated version ID of the application.
+	ApplicationVersionId *int64 `min:"1" type:"long"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteApplicationVpcConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteApplicationVpcConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplicationARN sets the ApplicationARN field's value.
+func (s *DeleteApplicationVpcConfigurationOutput) SetApplicationARN(v string) *DeleteApplicationVpcConfigurationOutput {
+	s.ApplicationARN = &v
+	return s
+}
+
+// SetApplicationVersionId sets the ApplicationVersionId field's value.
+func (s *DeleteApplicationVpcConfigurationOutput) SetApplicationVersionId(v int64) *DeleteApplicationVpcConfigurationOutput {
+	s.ApplicationVersionId = &v
+	return s
+}
+
+// The information required to deploy a Kinesis Data Analytics Studio notebook
+// as an application with durable state.
+type DeployAsApplicationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The description of an Amazon S3 object that contains the Amazon Data Analytics
+	// application, including the Amazon Resource Name (ARN) of the S3 bucket, the
+	// name of the Amazon S3 object that contains the data, and the version number
+	// of the Amazon S3 object that contains the data.
+	//
+	// S3ContentLocation is a required field
+	S3ContentLocation *S3ContentBaseLocation `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployAsApplicationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployAsApplicationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeployAsApplicationConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeployAsApplicationConfiguration"}
+	if s.S3ContentLocation == nil {
+		invalidParams.Add(request.NewErrParamRequired("S3ContentLocation"))
+	}
+	if s.S3ContentLocation != nil {
+		if err := s.S3ContentLocation.Validate(); err != nil {
+			invalidParams.AddNested("S3ContentLocation", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetS3ContentLocation sets the S3ContentLocation field's value.
+func (s *DeployAsApplicationConfiguration) SetS3ContentLocation(v *S3ContentBaseLocation) *DeployAsApplicationConfiguration {
+	s.S3ContentLocation = v
+	return s
+}
+
+// The configuration information required to deploy an Amazon Data Analytics
+// Studio notebook as an application with durable state.
+type DeployAsApplicationConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The location that holds the data required to specify an Amazon Data Analytics
+	// application.
+	//
+	// S3ContentLocationDescription is a required field
+	S3ContentLocationDescription *S3ContentBaseLocationDescription `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployAsApplicationConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployAsApplicationConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// SetS3ContentLocationDescription sets the S3ContentLocationDescription field's value.
+func (s *DeployAsApplicationConfigurationDescription) SetS3ContentLocationDescription(v *S3ContentBaseLocationDescription) *DeployAsApplicationConfigurationDescription {
+	s.S3ContentLocationDescription = v
+	return s
+}
+
+// Updates to the configuration information required to deploy an Amazon Data
+// Analytics Studio notebook as an application with durable state.
+type DeployAsApplicationConfigurationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Updates to the location that holds the data required to specify an Amazon
+	// Data Analytics application.
+	S3ContentLocationUpdate *S3ContentBaseLocationUpdate `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployAsApplicationConfigurationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployAsApplicationConfigurationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeployAsApplicationConfigurationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeployAsApplicationConfigurationUpdate"}
+	if s.S3ContentLocationUpdate != nil {
+		if err := s.S3ContentLocationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("S3ContentLocationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetS3ContentLocationUpdate sets the S3ContentLocationUpdate field's value.
+func (s *DeployAsApplicationConfigurationUpdate) SetS3ContentLocationUpdate(v *S3ContentBaseLocationUpdate) *DeployAsApplicationConfigurationUpdate {
+	s.S3ContentLocationUpdate = v
+	return s
 }
 
 type DescribeApplicationInput struct {
@@ -4846,12 +7640,20 @@ type DescribeApplicationInput struct {
 	IncludeAdditionalDetails *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationInput) GoString() string {
 	return s.String()
 }
@@ -4894,12 +7696,20 @@ type DescribeApplicationOutput struct {
 	ApplicationDetail *ApplicationDetail `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -4918,19 +7728,26 @@ type DescribeApplicationSnapshotInput struct {
 	// ApplicationName is a required field
 	ApplicationName *string `min:"1" type:"string" required:"true"`
 
-	// The identifier of an application snapshot. You can retrieve this value using
-	// .
+	// The identifier of an application snapshot. You can retrieve this value using .
 	//
 	// SnapshotName is a required field
 	SnapshotName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -4978,12 +7795,20 @@ type DescribeApplicationSnapshotOutput struct {
 	SnapshotDetails *SnapshotDetails `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationSnapshotOutput) GoString() string {
 	return s.String()
 }
@@ -4994,8 +7819,106 @@ func (s *DescribeApplicationSnapshotOutput) SetSnapshotDetails(v *SnapshotDetail
 	return s
 }
 
+type DescribeApplicationVersionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the application for which you want to get the version description.
+	//
+	// ApplicationName is a required field
+	ApplicationName *string `min:"1" type:"string" required:"true"`
+
+	// The ID of the application version for which you want to get the description.
+	//
+	// ApplicationVersionId is a required field
+	ApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationVersionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationVersionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeApplicationVersionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeApplicationVersionInput"}
+	if s.ApplicationName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+	}
+	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+	}
+	if s.ApplicationVersionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationVersionId"))
+	}
+	if s.ApplicationVersionId != nil && *s.ApplicationVersionId < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("ApplicationVersionId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationName sets the ApplicationName field's value.
+func (s *DescribeApplicationVersionInput) SetApplicationName(v string) *DescribeApplicationVersionInput {
+	s.ApplicationName = &v
+	return s
+}
+
+// SetApplicationVersionId sets the ApplicationVersionId field's value.
+func (s *DescribeApplicationVersionInput) SetApplicationVersionId(v int64) *DescribeApplicationVersionInput {
+	s.ApplicationVersionId = &v
+	return s
+}
+
+type DescribeApplicationVersionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the application, including the application Amazon Resource Name
+	// (ARN), status, latest version, and input and output configurations.
+	ApplicationVersionDetail *ApplicationDetail `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationVersionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationVersionOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplicationVersionDetail sets the ApplicationVersionDetail field's value.
+func (s *DescribeApplicationVersionOutput) SetApplicationVersionDetail(v *ApplicationDetail) *DescribeApplicationVersionOutput {
+	s.ApplicationVersionDetail = v
+	return s
+}
+
 // Describes the data format when records are written to the destination in
-// an SQL-based Amazon Kinesis Data Analytics application.
+// a SQL-based Kinesis Data Analytics application.
 type DestinationSchema struct {
 	_ struct{} `type:"structure"`
 
@@ -5005,12 +7928,20 @@ type DestinationSchema struct {
 	RecordFormatType *string `type:"string" required:"true" enum:"RecordFormatType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DestinationSchema) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DestinationSchema) GoString() string {
 	return s.String()
 }
@@ -5057,12 +7988,20 @@ type DiscoverInputSchemaInput struct {
 	ServiceExecutionRole *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoverInputSchemaInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoverInputSchemaInput) GoString() string {
 	return s.String()
 }
@@ -5146,12 +8085,20 @@ type DiscoverInputSchemaOutput struct {
 	RawInputRecords []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoverInputSchemaOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoverInputSchemaOutput) GoString() string {
 	return s.String()
 }
@@ -5180,7 +8127,7 @@ func (s *DiscoverInputSchemaOutput) SetRawInputRecords(v []*string) *DiscoverInp
 	return s
 }
 
-// Describes execution properties for a Java-based Kinesis Data Analytics application.
+// Describes execution properties for a Flink-based Kinesis Data Analytics application.
 type EnvironmentProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -5190,12 +8137,20 @@ type EnvironmentProperties struct {
 	PropertyGroups []*PropertyGroup `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentProperties) GoString() string {
 	return s.String()
 }
@@ -5229,8 +8184,7 @@ func (s *EnvironmentProperties) SetPropertyGroups(v []*PropertyGroup) *Environme
 	return s
 }
 
-// Describes the execution properties for a Java-based Amazon Kinesis Data Analytics
-// application.
+// Describes the execution properties for an Apache Flink runtime.
 type EnvironmentPropertyDescriptions struct {
 	_ struct{} `type:"structure"`
 
@@ -5238,12 +8192,20 @@ type EnvironmentPropertyDescriptions struct {
 	PropertyGroupDescriptions []*PropertyGroup `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentPropertyDescriptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentPropertyDescriptions) GoString() string {
 	return s.String()
 }
@@ -5254,8 +8216,8 @@ func (s *EnvironmentPropertyDescriptions) SetPropertyGroupDescriptions(v []*Prop
 	return s
 }
 
-// Describes updates to the execution property groups for a Java-based Amazon
-// Kinesis Data Analytics application.
+// Describes updates to the execution property groups for a Flink-based Kinesis
+// Data Analytics application or a Studio notebook.
 type EnvironmentPropertyUpdates struct {
 	_ struct{} `type:"structure"`
 
@@ -5265,12 +8227,20 @@ type EnvironmentPropertyUpdates struct {
 	PropertyGroups []*PropertyGroup `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentPropertyUpdates) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentPropertyUpdates) GoString() string {
 	return s.String()
 }
@@ -5304,15 +8274,15 @@ func (s *EnvironmentPropertyUpdates) SetPropertyGroups(v []*PropertyGroup) *Envi
 	return s
 }
 
-// Describes configuration parameters for a Java-based Amazon Kinesis Data Analytics
-// application.
+// Describes configuration parameters for a Flink-based Kinesis Data Analytics
+// application or a Studio notebook.
 type FlinkApplicationConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Describes an application's checkpointing configuration. Checkpointing is
 	// the process of persisting application state for fault tolerance. For more
-	// information, see  Checkpoints for Fault Tolerance (https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance)
-	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.6/).
+	// information, see Checkpoints for Fault Tolerance (https://ci.apache.org/projects/flink/flink-docs-release-1.8/concepts/programming-model.html#checkpoints-for-fault-tolerance)
+	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/).
 	CheckpointConfiguration *CheckpointConfiguration `type:"structure"`
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an application.
@@ -5322,12 +8292,20 @@ type FlinkApplicationConfiguration struct {
 	ParallelismConfiguration *ParallelismConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FlinkApplicationConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FlinkApplicationConfiguration) GoString() string {
 	return s.String()
 }
@@ -5375,7 +8353,7 @@ func (s *FlinkApplicationConfiguration) SetParallelismConfiguration(v *Paralleli
 	return s
 }
 
-// Describes configuration parameters for a Java-based Amazon Kinesis Data Analytics
+// Describes configuration parameters for a Flink-based Kinesis Data Analytics
 // application.
 type FlinkApplicationConfigurationDescription struct {
 	_ struct{} `type:"structure"`
@@ -5385,8 +8363,8 @@ type FlinkApplicationConfigurationDescription struct {
 	CheckpointConfigurationDescription *CheckpointConfigurationDescription `type:"structure"`
 
 	// The job plan for an application. For more information about the job plan,
-	// see Jobs and Scheduling (https://ci.apache.org/projects/flink/flink-docs-stable/internals/job_scheduling.html)
-	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.6/).
+	// see Jobs and Scheduling (https://ci.apache.org/projects/flink/flink-docs-release-1.8/internals/job_scheduling.html)
+	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/).
 	// To retrieve the job plan for the application, use the DescribeApplicationRequest$IncludeAdditionalDetails
 	// parameter of the DescribeApplication operation.
 	JobPlanDescription *string `type:"string"`
@@ -5398,12 +8376,20 @@ type FlinkApplicationConfigurationDescription struct {
 	ParallelismConfigurationDescription *ParallelismConfigurationDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FlinkApplicationConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FlinkApplicationConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -5432,8 +8418,8 @@ func (s *FlinkApplicationConfigurationDescription) SetParallelismConfigurationDe
 	return s
 }
 
-// Describes updates to the configuration parameters for a Java-based Amazon
-// Kinesis Data Analytics application.
+// Describes updates to the configuration parameters for a Flink-based Kinesis
+// Data Analytics application.
 type FlinkApplicationConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -5450,12 +8436,20 @@ type FlinkApplicationConfigurationUpdate struct {
 	ParallelismConfigurationUpdate *ParallelismConfigurationUpdate `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FlinkApplicationConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FlinkApplicationConfigurationUpdate) GoString() string {
 	return s.String()
 }
@@ -5463,6 +8457,11 @@ func (s FlinkApplicationConfigurationUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FlinkApplicationConfigurationUpdate) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "FlinkApplicationConfigurationUpdate"}
+	if s.CheckpointConfigurationUpdate != nil {
+		if err := s.CheckpointConfigurationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("CheckpointConfigurationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.ParallelismConfigurationUpdate != nil {
 		if err := s.ParallelismConfigurationUpdate.Validate(); err != nil {
 			invalidParams.AddNested("ParallelismConfigurationUpdate", err.(request.ErrInvalidParams))
@@ -5493,9 +8492,188 @@ func (s *FlinkApplicationConfigurationUpdate) SetParallelismConfigurationUpdate(
 	return s
 }
 
-// When you configure the application input for an SQL-based Amazon Kinesis
-// Data Analytics application, you specify the streaming source, the in-application
-// stream name that is created, and the mapping between the two.
+// Describes the starting parameters for a Flink-based Kinesis Data Analytics
+// application.
+type FlinkRunConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// When restoring from a snapshot, specifies whether the runtime is allowed
+	// to skip a state that cannot be mapped to the new program. This will happen
+	// if the program is updated between snapshots to remove stateful parameters,
+	// and state data in the snapshot no longer corresponds to valid application
+	// data. For more information, see Allowing Non-Restored State (https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/savepoints.html#allowing-non-restored-state)
+	// in the Apache Flink documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/).
+	//
+	// This value defaults to false. If you update your application without specifying
+	// this parameter, AllowNonRestoredState will be set to false, even if it was
+	// previously set to true.
+	AllowNonRestoredState *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FlinkRunConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FlinkRunConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetAllowNonRestoredState sets the AllowNonRestoredState field's value.
+func (s *FlinkRunConfiguration) SetAllowNonRestoredState(v bool) *FlinkRunConfiguration {
+	s.AllowNonRestoredState = &v
+	return s
+}
+
+// The configuration of the Glue Data Catalog that you use for Apache Flink
+// SQL queries and table API transforms that you write in an application.
+type GlueDataCatalogConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the database.
+	//
+	// DatabaseARN is a required field
+	DatabaseARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlueDataCatalogConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlueDataCatalogConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GlueDataCatalogConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GlueDataCatalogConfiguration"}
+	if s.DatabaseARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("DatabaseARN"))
+	}
+	if s.DatabaseARN != nil && len(*s.DatabaseARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DatabaseARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDatabaseARN sets the DatabaseARN field's value.
+func (s *GlueDataCatalogConfiguration) SetDatabaseARN(v string) *GlueDataCatalogConfiguration {
+	s.DatabaseARN = &v
+	return s
+}
+
+// The configuration of the Glue Data Catalog that you use for Apache Flink
+// SQL queries and table API transforms that you write in an application.
+type GlueDataCatalogConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the database.
+	//
+	// DatabaseARN is a required field
+	DatabaseARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlueDataCatalogConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlueDataCatalogConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// SetDatabaseARN sets the DatabaseARN field's value.
+func (s *GlueDataCatalogConfigurationDescription) SetDatabaseARN(v string) *GlueDataCatalogConfigurationDescription {
+	s.DatabaseARN = &v
+	return s
+}
+
+// Updates to the configuration of the Glue Data Catalog that you use for SQL
+// queries that you write in a Kinesis Data Analytics Studio notebook.
+type GlueDataCatalogConfigurationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The updated Amazon Resource Name (ARN) of the database.
+	//
+	// DatabaseARNUpdate is a required field
+	DatabaseARNUpdate *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlueDataCatalogConfigurationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlueDataCatalogConfigurationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GlueDataCatalogConfigurationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GlueDataCatalogConfigurationUpdate"}
+	if s.DatabaseARNUpdate == nil {
+		invalidParams.Add(request.NewErrParamRequired("DatabaseARNUpdate"))
+	}
+	if s.DatabaseARNUpdate != nil && len(*s.DatabaseARNUpdate) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DatabaseARNUpdate", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDatabaseARNUpdate sets the DatabaseARNUpdate field's value.
+func (s *GlueDataCatalogConfigurationUpdate) SetDatabaseARNUpdate(v string) *GlueDataCatalogConfigurationUpdate {
+	s.DatabaseARNUpdate = &v
+	return s
+}
+
+// When you configure the application input for a SQL-based Kinesis Data Analytics
+// application, you specify the streaming source, the in-application stream
+// name that is created, and the mapping between the two.
 type Input struct {
 	_ struct{} `type:"structure"`
 
@@ -5535,12 +8713,20 @@ type Input struct {
 	NamePrefix *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Input) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Input) GoString() string {
 	return s.String()
 }
@@ -5625,8 +8811,8 @@ func (s *Input) SetNamePrefix(v string) *Input {
 	return s
 }
 
-// Describes the application input configuration for an SQL-based Amazon Kinesis
-// Data Analytics application.
+// Describes the application input configuration for a SQL-based Kinesis Data
+// Analytics application.
 type InputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -5666,12 +8852,20 @@ type InputDescription struct {
 	NamePrefix *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputDescription) GoString() string {
 	return s.String()
 }
@@ -5730,24 +8924,36 @@ func (s *InputDescription) SetNamePrefix(v string) *InputDescription {
 	return s
 }
 
-// An object that contains the Amazon Resource Name (ARN) of the AWS Lambda
-// function that is used to preprocess records in the stream in an SQL-based
-// Amazon Kinesis Data Analytics application.
+// An object that contains the Amazon Resource Name (ARN) of the Amazon Lambda
+// function that is used to preprocess records in the stream in a SQL-based
+// Kinesis Data Analytics application.
 type InputLambdaProcessor struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the AWS Lambda function that operates on records in the stream.
+	// The ARN of the Amazon Lambda function that operates on records in the stream.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputLambdaProcessor) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputLambdaProcessor) GoString() string {
 	return s.String()
 }
@@ -5774,19 +8980,23 @@ func (s *InputLambdaProcessor) SetResourceARN(v string) *InputLambdaProcessor {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, an object that
-// contains the Amazon Resource Name (ARN) of the AWS Lambda function that is
-// used to preprocess records in the stream.
+// For a SQL-based Kinesis Data Analytics application, an object that contains
+// the Amazon Resource Name (ARN) of the Amazon Lambda function that is used
+// to preprocess records in the stream.
 type InputLambdaProcessorDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the AWS Lambda function that is used to preprocess the records
+	// The ARN of the Amazon Lambda function that is used to preprocess the records
 	// in the stream.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 
-	// The ARN of the IAM role that is used to access the AWS Lambda function.
+	// The ARN of the IAM role that is used to access the Amazon Lambda function.
 	//
 	// Provided for backward compatibility. Applications that are created with the
 	// current API version have an application-level service execution role rather
@@ -5794,12 +9004,20 @@ type InputLambdaProcessorDescription struct {
 	RoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputLambdaProcessorDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputLambdaProcessorDescription) GoString() string {
 	return s.String()
 }
@@ -5816,25 +9034,37 @@ func (s *InputLambdaProcessorDescription) SetRoleARN(v string) *InputLambdaProce
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, represents an
-// update to the InputLambdaProcessor that is used to preprocess the records
-// in the stream.
+// For a SQL-based Kinesis Data Analytics application, represents an update
+// to the InputLambdaProcessor that is used to preprocess the records in the
+// stream.
 type InputLambdaProcessorUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the new AWS Lambda function that is used
-	// to preprocess the records in the stream.
+	// The Amazon Resource Name (ARN) of the new Amazon Lambda function that is
+	// used to preprocess the records in the stream.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// ResourceARNUpdate is a required field
 	ResourceARNUpdate *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputLambdaProcessorUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputLambdaProcessorUpdate) GoString() string {
 	return s.String()
 }
@@ -5861,8 +9091,8 @@ func (s *InputLambdaProcessorUpdate) SetResourceARNUpdate(v string) *InputLambda
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes the
-// number of in-application streams to create for a given streaming source.
+// For a SQL-based Kinesis Data Analytics application, describes the number
+// of in-application streams to create for a given streaming source.
 type InputParallelism struct {
 	_ struct{} `type:"structure"`
 
@@ -5870,12 +9100,20 @@ type InputParallelism struct {
 	Count *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputParallelism) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputParallelism) GoString() string {
 	return s.String()
 }
@@ -5899,8 +9137,8 @@ func (s *InputParallelism) SetCount(v int64) *InputParallelism {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, provides updates
-// to the parallelism count.
+// For a SQL-based Kinesis Data Analytics application, provides updates to the
+// parallelism count.
 type InputParallelismUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -5911,12 +9149,20 @@ type InputParallelismUpdate struct {
 	CountUpdate *int64 `min:"1" type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputParallelismUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputParallelismUpdate) GoString() string {
 	return s.String()
 }
@@ -5943,10 +9189,10 @@ func (s *InputParallelismUpdate) SetCountUpdate(v int64) *InputParallelismUpdate
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes a processor
+// For a SQL-based Kinesis Data Analytics application, describes a processor
 // that is used to preprocess the records in the stream before being processed
 // by your application code. Currently, the only input processor available is
-// AWS Lambda (https://aws.amazon.com/documentation/lambda/).
+// Amazon Lambda (https://docs.aws.amazon.com/lambda/).
 type InputProcessingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -5957,12 +9203,20 @@ type InputProcessingConfiguration struct {
 	InputLambdaProcessor *InputLambdaProcessor `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputProcessingConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputProcessingConfiguration) GoString() string {
 	return s.String()
 }
@@ -5991,9 +9245,9 @@ func (s *InputProcessingConfiguration) SetInputLambdaProcessor(v *InputLambdaPro
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, provides the
-// configuration information about an input processor. Currently, the only input
-// processor available is AWS Lambda (https://aws.amazon.com/documentation/lambda/).
+// For a SQL-based Kinesis Data Analytics application, provides the configuration
+// information about an input processor. Currently, the only input processor
+// available is Amazon Lambda (https://docs.aws.amazon.com/lambda/).
 type InputProcessingConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -6001,12 +9255,20 @@ type InputProcessingConfigurationDescription struct {
 	InputLambdaProcessorDescription *InputLambdaProcessorDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputProcessingConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputProcessingConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -6017,8 +9279,8 @@ func (s *InputProcessingConfigurationDescription) SetInputLambdaProcessorDescrip
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes updates
-// to an InputProcessingConfiguration.
+// For a SQL-based Kinesis Data Analytics application, describes updates to
+// an InputProcessingConfiguration.
 type InputProcessingConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -6028,12 +9290,20 @@ type InputProcessingConfigurationUpdate struct {
 	InputLambdaProcessorUpdate *InputLambdaProcessorUpdate `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputProcessingConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputProcessingConfigurationUpdate) GoString() string {
 	return s.String()
 }
@@ -6062,8 +9332,8 @@ func (s *InputProcessingConfigurationUpdate) SetInputLambdaProcessorUpdate(v *In
 	return s
 }
 
-// Describes updates for an SQL-based Amazon Kinesis Data Analytics application's
-// input schema.
+// Describes updates for an SQL-based Kinesis Data Analytics application's input
+// schema.
 type InputSchemaUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -6074,18 +9344,26 @@ type InputSchemaUpdate struct {
 
 	// Specifies the encoding of the records in the streaming source; for example,
 	// UTF-8.
-	RecordEncodingUpdate *string `type:"string"`
+	RecordEncodingUpdate *string `min:"5" type:"string"`
 
 	// Specifies the format of the records on the streaming source.
 	RecordFormatUpdate *RecordFormat `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputSchemaUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputSchemaUpdate) GoString() string {
 	return s.String()
 }
@@ -6095,6 +9373,9 @@ func (s *InputSchemaUpdate) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "InputSchemaUpdate"}
 	if s.RecordColumnUpdates != nil && len(s.RecordColumnUpdates) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("RecordColumnUpdates", 1))
+	}
+	if s.RecordEncodingUpdate != nil && len(*s.RecordEncodingUpdate) < 5 {
+		invalidParams.Add(request.NewErrParamMinLen("RecordEncodingUpdate", 5))
 	}
 	if s.RecordColumnUpdates != nil {
 		for i, v := range s.RecordColumnUpdates {
@@ -6154,12 +9435,20 @@ type InputStartingPositionConfiguration struct {
 	InputStartingPosition *string `type:"string" enum:"InputStartingPosition"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputStartingPositionConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputStartingPositionConfiguration) GoString() string {
 	return s.String()
 }
@@ -6170,8 +9459,8 @@ func (s *InputStartingPositionConfiguration) SetInputStartingPosition(v string) 
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes updates
-// to a specific input configuration (identified by the InputId of an application).
+// For a SQL-based Kinesis Data Analytics application, describes updates to
+// a specific input configuration (identified by the InputId of an application).
 type InputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -6205,12 +9494,20 @@ type InputUpdate struct {
 	NamePrefixUpdate *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputUpdate) GoString() string {
 	return s.String()
 }
@@ -6301,8 +9598,200 @@ func (s *InputUpdate) SetNamePrefixUpdate(v string) *InputUpdate {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, provides additional
-// mapping information when JSON is the record format on the streaming source.
+// The user-provided application configuration is not valid.
+type InvalidApplicationConfigurationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidApplicationConfigurationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidApplicationConfigurationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidApplicationConfigurationException(v protocol.ResponseMetadata) error {
+	return &InvalidApplicationConfigurationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidApplicationConfigurationException) Code() string {
+	return "InvalidApplicationConfigurationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidApplicationConfigurationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidApplicationConfigurationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidApplicationConfigurationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidApplicationConfigurationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidApplicationConfigurationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified input parameter value is not valid.
+type InvalidArgumentException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArgumentException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArgumentException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidArgumentException(v protocol.ResponseMetadata) error {
+	return &InvalidArgumentException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidArgumentException) Code() string {
+	return "InvalidArgumentException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidArgumentException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidArgumentException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidArgumentException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidArgumentException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidArgumentException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The request JSON is not valid for the operation.
+type InvalidRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidRequestException(v protocol.ResponseMetadata) error {
+	return &InvalidRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidRequestException) Code() string {
+	return "InvalidRequestException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// For a SQL-based Kinesis Data Analytics application, provides additional mapping
+// information when JSON is the record format on the streaming source.
 type JSONMappingParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -6312,12 +9801,20 @@ type JSONMappingParameters struct {
 	RecordRowPath *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JSONMappingParameters) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JSONMappingParameters) GoString() string {
 	return s.String()
 }
@@ -6344,9 +9841,9 @@ func (s *JSONMappingParameters) SetRecordRowPath(v string) *JSONMappingParameter
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, identifies a
-// Kinesis Data Firehose delivery stream as the streaming source. You provide
-// the delivery stream's Amazon Resource Name (ARN).
+// For a SQL-based Kinesis Data Analytics application, identifies a Kinesis
+// Data Firehose delivery stream as the streaming source. You provide the delivery
+// stream's Amazon Resource Name (ARN).
 type KinesisFirehoseInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6356,12 +9853,20 @@ type KinesisFirehoseInput struct {
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseInput) GoString() string {
 	return s.String()
 }
@@ -6407,12 +9912,20 @@ type KinesisFirehoseInputDescription struct {
 	RoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseInputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseInputDescription) GoString() string {
 	return s.String()
 }
@@ -6429,9 +9942,9 @@ func (s *KinesisFirehoseInputDescription) SetRoleARN(v string) *KinesisFirehoseI
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, when updating
-// application input configuration, provides information about a Kinesis Data
-// Firehose delivery stream as the streaming source.
+// For a SQL-based Kinesis Data Analytics application, when updating application
+// input configuration, provides information about a Kinesis Data Firehose delivery
+// stream as the streaming source.
 type KinesisFirehoseInputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -6441,12 +9954,20 @@ type KinesisFirehoseInputUpdate struct {
 	ResourceARNUpdate *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseInputUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseInputUpdate) GoString() string {
 	return s.String()
 }
@@ -6473,10 +9994,9 @@ func (s *KinesisFirehoseInputUpdate) SetResourceARNUpdate(v string) *KinesisFire
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, when configuring
-// application output, identifies a Kinesis Data Firehose delivery stream as
-// the destination. You provide the stream Amazon Resource Name (ARN) of the
-// delivery stream.
+// For a SQL-based Kinesis Data Analytics application, when configuring application
+// output, identifies a Kinesis Data Firehose delivery stream as the destination.
+// You provide the stream Amazon Resource Name (ARN) of the delivery stream.
 type KinesisFirehoseOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6486,12 +10006,20 @@ type KinesisFirehoseOutput struct {
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseOutput) GoString() string {
 	return s.String()
 }
@@ -6518,8 +10046,8 @@ func (s *KinesisFirehoseOutput) SetResourceARN(v string) *KinesisFirehoseOutput 
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application's output, describes
-// the Kinesis Data Firehose delivery stream that is configured as its destination.
+// For a SQL-based Kinesis Data Analytics application's output, describes the
+// Kinesis Data Firehose delivery stream that is configured as its destination.
 type KinesisFirehoseOutputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -6537,12 +10065,20 @@ type KinesisFirehoseOutputDescription struct {
 	RoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseOutputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseOutputDescription) GoString() string {
 	return s.String()
 }
@@ -6559,8 +10095,8 @@ func (s *KinesisFirehoseOutputDescription) SetRoleARN(v string) *KinesisFirehose
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, when updating
-// an output configuration using the UpdateApplication operation, provides information
+// For a SQL-based Kinesis Data Analytics application, when updating an output
+// configuration using the UpdateApplication operation, provides information
 // about a Kinesis Data Firehose delivery stream that is configured as the destination.
 type KinesisFirehoseOutputUpdate struct {
 	_ struct{} `type:"structure"`
@@ -6571,12 +10107,20 @@ type KinesisFirehoseOutputUpdate struct {
 	ResourceARNUpdate *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseOutputUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseOutputUpdate) GoString() string {
 	return s.String()
 }
@@ -6603,8 +10147,8 @@ func (s *KinesisFirehoseOutputUpdate) SetResourceARNUpdate(v string) *KinesisFir
 	return s
 }
 
-// Identifies an Amazon Kinesis data stream as the streaming source. You provide
-// the stream's Amazon Resource Name (ARN).
+// Identifies a Kinesis data stream as the streaming source. You provide the
+// stream's Amazon Resource Name (ARN).
 type KinesisStreamsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6614,12 +10158,20 @@ type KinesisStreamsInput struct {
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsInput) GoString() string {
 	return s.String()
 }
@@ -6646,8 +10198,8 @@ func (s *KinesisStreamsInput) SetResourceARN(v string) *KinesisStreamsInput {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes the
-// Kinesis data stream that is configured as the streaming source in the application
+// For a SQL-based Kinesis Data Analytics application, describes the Kinesis
+// data stream that is configured as the streaming source in the application
 // input configuration.
 type KinesisStreamsInputDescription struct {
 	_ struct{} `type:"structure"`
@@ -6666,12 +10218,20 @@ type KinesisStreamsInputDescription struct {
 	RoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsInputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsInputDescription) GoString() string {
 	return s.String()
 }
@@ -6688,9 +10248,9 @@ func (s *KinesisStreamsInputDescription) SetRoleARN(v string) *KinesisStreamsInp
 	return s
 }
 
-// When you update the input configuration for an SQL-based Amazon Kinesis Data
-// Analytics application, provides information about an Amazon Kinesis stream
-// as the streaming source.
+// When you update the input configuration for a SQL-based Kinesis Data Analytics
+// application, provides information about a Kinesis stream as the streaming
+// source.
 type KinesisStreamsInputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -6700,12 +10260,20 @@ type KinesisStreamsInputUpdate struct {
 	ResourceARNUpdate *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsInputUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsInputUpdate) GoString() string {
 	return s.String()
 }
@@ -6732,9 +10300,9 @@ func (s *KinesisStreamsInputUpdate) SetResourceARNUpdate(v string) *KinesisStrea
 	return s
 }
 
-// When you configure an SQL-based Amazon Kinesis Data Analytics application's
-// output, identifies a Kinesis data stream as the destination. You provide
-// the stream Amazon Resource Name (ARN).
+// When you configure a SQL-based Kinesis Data Analytics application's output,
+// identifies a Kinesis data stream as the destination. You provide the stream
+// Amazon Resource Name (ARN).
 type KinesisStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6744,12 +10312,20 @@ type KinesisStreamsOutput struct {
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsOutput) GoString() string {
 	return s.String()
 }
@@ -6776,8 +10352,8 @@ func (s *KinesisStreamsOutput) SetResourceARN(v string) *KinesisStreamsOutput {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application's output, describes
-// the Kinesis data stream that is configured as its destination.
+// For an SQL-based Kinesis Data Analytics application's output, describes the
+// Kinesis data stream that is configured as its destination.
 type KinesisStreamsOutputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -6795,12 +10371,20 @@ type KinesisStreamsOutputDescription struct {
 	RoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsOutputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsOutputDescription) GoString() string {
 	return s.String()
 }
@@ -6817,9 +10401,9 @@ func (s *KinesisStreamsOutputDescription) SetRoleARN(v string) *KinesisStreamsOu
 	return s
 }
 
-// When you update an SQL-based Amazon Kinesis Data Analytics application's
-// output configuration using the UpdateApplication operation, provides information
-// about a Kinesis data stream that is configured as the destination.
+// When you update a SQL-based Kinesis Data Analytics application's output configuration
+// using the UpdateApplication operation, provides information about a Kinesis
+// data stream that is configured as the destination.
 type KinesisStreamsOutputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -6830,12 +10414,20 @@ type KinesisStreamsOutputUpdate struct {
 	ResourceARNUpdate *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsOutputUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamsOutputUpdate) GoString() string {
 	return s.String()
 }
@@ -6862,25 +10454,37 @@ func (s *KinesisStreamsOutputUpdate) SetResourceARNUpdate(v string) *KinesisStre
 	return s
 }
 
-// When you configure an SQL-based Amazon Kinesis Data Analytics application's
-// output, identifies an AWS Lambda function as the destination. You provide
-// the function Amazon Resource Name (ARN) of the Lambda function.
+// When you configure a SQL-based Kinesis Data Analytics application's output,
+// identifies an Amazon Lambda function as the destination. You provide the
+// function Amazon Resource Name (ARN) of the Lambda function.
 type LambdaOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the destination Lambda function to write
 	// to.
 	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaOutput) GoString() string {
 	return s.String()
 }
@@ -6907,8 +10511,8 @@ func (s *LambdaOutput) SetResourceARN(v string) *LambdaOutput {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application output, describes
-// the AWS Lambda function that is configured as its destination.
+// For a SQL-based Kinesis Data Analytics application's output, describes the
+// Amazon Lambda function that is configured as its destination.
 type LambdaOutputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -6926,12 +10530,20 @@ type LambdaOutputDescription struct {
 	RoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaOutputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaOutputDescription) GoString() string {
 	return s.String()
 }
@@ -6948,24 +10560,36 @@ func (s *LambdaOutputDescription) SetRoleARN(v string) *LambdaOutputDescription 
 	return s
 }
 
-// When you update an SQL-based Amazon Kinesis Data Analytics application's
-// output configuration using the UpdateApplication operation, provides information
-// about an AWS Lambda function that is configured as the destination.
+// When you update an SQL-based Kinesis Data Analytics application's output
+// configuration using the UpdateApplication operation, provides information
+// about an Amazon Lambda function that is configured as the destination.
 type LambdaOutputUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the destination AWS Lambda function.
+	// The Amazon Resource Name (ARN) of the destination Amazon Lambda function.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// ResourceARNUpdate is a required field
 	ResourceARNUpdate *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaOutputUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaOutputUpdate) GoString() string {
 	return s.String()
 }
@@ -6992,6 +10616,70 @@ func (s *LambdaOutputUpdate) SetResourceARNUpdate(v string) *LambdaOutputUpdate 
 	return s
 }
 
+// The number of allowed resources has been exceeded.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListApplicationSnapshotsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7010,12 +10698,20 @@ type ListApplicationSnapshotsInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationSnapshotsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationSnapshotsInput) GoString() string {
 	return s.String()
 }
@@ -7071,12 +10767,20 @@ type ListApplicationSnapshotsOutput struct {
 	SnapshotSummaries []*SnapshotDetails `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationSnapshotsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationSnapshotsOutput) GoString() string {
 	return s.String()
 }
@@ -7093,6 +10797,129 @@ func (s *ListApplicationSnapshotsOutput) SetSnapshotSummaries(v []*SnapshotDetai
 	return s
 }
 
+type ListApplicationVersionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the application for which you want to list all versions.
+	//
+	// ApplicationName is a required field
+	ApplicationName *string `min:"1" type:"string" required:"true"`
+
+	// The maximum number of versions to list in this invocation of the operation.
+	Limit *int64 `min:"1" type:"integer"`
+
+	// If a previous invocation of this operation returned a pagination token, pass
+	// it into this value to retrieve the next set of results. For more information
+	// about pagination, see Using the Amazon Command Line Interface's Pagination
+	// Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListApplicationVersionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListApplicationVersionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListApplicationVersionsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListApplicationVersionsInput"}
+	if s.ApplicationName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+	}
+	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationName sets the ApplicationName field's value.
+func (s *ListApplicationVersionsInput) SetApplicationName(v string) *ListApplicationVersionsInput {
+	s.ApplicationName = &v
+	return s
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListApplicationVersionsInput) SetLimit(v int64) *ListApplicationVersionsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListApplicationVersionsInput) SetNextToken(v string) *ListApplicationVersionsInput {
+	s.NextToken = &v
+	return s
+}
+
+type ListApplicationVersionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of the application versions and the associated configuration summaries.
+	// The list includes application versions that were rolled back.
+	//
+	// To get the complete description of a specific application version, invoke
+	// the DescribeApplicationVersion operation.
+	ApplicationVersionSummaries []*ApplicationVersionSummary `type:"list"`
+
+	// The pagination token for the next set of results, or null if there are no
+	// additional results. To retrieve the next set of items, pass this token into
+	// a subsequent invocation of this operation. For more information about pagination,
+	// see Using the Amazon Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListApplicationVersionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListApplicationVersionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplicationVersionSummaries sets the ApplicationVersionSummaries field's value.
+func (s *ListApplicationVersionsOutput) SetApplicationVersionSummaries(v []*ApplicationVersionSummary) *ListApplicationVersionsOutput {
+	s.ApplicationVersionSummaries = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListApplicationVersionsOutput) SetNextToken(v string) *ListApplicationVersionsOutput {
+	s.NextToken = &v
+	return s
+}
+
 type ListApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7101,16 +10928,24 @@ type ListApplicationsInput struct {
 
 	// If a previous command returned a pagination token, pass it into this value
 	// to retrieve the next set of results. For more information about pagination,
-	// see Using the AWS Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
+	// see Using the Amazon Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationsInput) GoString() string {
 	return s.String()
 }
@@ -7154,16 +10989,24 @@ type ListApplicationsOutput struct {
 	// The pagination token for the next set of results, or null if there are no
 	// additional results. Pass this token into a subsequent command to retrieve
 	// the next set of items For more information about pagination, see Using the
-	// AWS Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
+	// Amazon Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationsOutput) GoString() string {
 	return s.String()
 }
@@ -7180,10 +11023,90 @@ func (s *ListApplicationsOutput) SetNextToken(v string) *ListApplicationsOutput 
 	return s
 }
 
-// When you configure an SQL-based Amazon Kinesis Data Analytics application's
-// input at the time of creating or updating an application, provides additional
-// mapping information specific to the record format (such as JSON, CSV, or
-// record fields delimited by some delimiter) on the streaming source.
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the application for which to retrieve tags.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *ListTagsForResourceInput) SetResourceARN(v string) *ListTagsForResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The key-value tags assigned to the application.
+	Tags []*Tag `min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SetTags sets the Tags field's value.
+func (s *ListTagsForResourceOutput) SetTags(v []*Tag) *ListTagsForResourceOutput {
+	s.Tags = v
+	return s
+}
+
+// When you configure a SQL-based Kinesis Data Analytics application's input
+// at the time of creating or updating an application, provides additional mapping
+// information specific to the record format (such as JSON, CSV, or record fields
+// delimited by some delimiter) on the streaming source.
 type MappingParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -7196,12 +11119,20 @@ type MappingParameters struct {
 	JSONMappingParameters *JSONMappingParameters `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MappingParameters) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MappingParameters) GoString() string {
 	return s.String()
 }
@@ -7238,14 +11169,99 @@ func (s *MappingParameters) SetJSONMappingParameters(v *JSONMappingParameters) *
 	return s
 }
 
-// Describes configuration parameters for Amazon CloudWatch logging for a Java-based
-// Kinesis Data Analytics application. For more information about CloudWatch
-// logging, see Monitoring (https://docs.aws.amazon.com/kinesisanalytics/latest/Java/monitoring-overview.html).
+// The information required to specify a Maven reference. You can use Maven
+// references to specify dependency JAR files.
+type MavenReference struct {
+	_ struct{} `type:"structure"`
+
+	// The artifact ID of the Maven reference.
+	//
+	// ArtifactId is a required field
+	ArtifactId *string `min:"1" type:"string" required:"true"`
+
+	// The group ID of the Maven reference.
+	//
+	// GroupId is a required field
+	GroupId *string `min:"1" type:"string" required:"true"`
+
+	// The version of the Maven reference.
+	//
+	// Version is a required field
+	Version *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MavenReference) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MavenReference) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MavenReference) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "MavenReference"}
+	if s.ArtifactId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ArtifactId"))
+	}
+	if s.ArtifactId != nil && len(*s.ArtifactId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ArtifactId", 1))
+	}
+	if s.GroupId == nil {
+		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+	}
+	if s.GroupId != nil && len(*s.GroupId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GroupId", 1))
+	}
+	if s.Version == nil {
+		invalidParams.Add(request.NewErrParamRequired("Version"))
+	}
+	if s.Version != nil && len(*s.Version) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetArtifactId sets the ArtifactId field's value.
+func (s *MavenReference) SetArtifactId(v string) *MavenReference {
+	s.ArtifactId = &v
+	return s
+}
+
+// SetGroupId sets the GroupId field's value.
+func (s *MavenReference) SetGroupId(v string) *MavenReference {
+	s.GroupId = &v
+	return s
+}
+
+// SetVersion sets the Version field's value.
+func (s *MavenReference) SetVersion(v string) *MavenReference {
+	s.Version = &v
+	return s
+}
+
+// Describes configuration parameters for Amazon CloudWatch logging for an application.
+// For more information about CloudWatch logging, see Monitoring (https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html).
 type MonitoringConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Describes whether to use the default CloudWatch logging configuration for
-	// an application.
+	// an application. You must set this property to CUSTOM in order to set the
+	// LogLevel or MetricsLevel parameters.
 	//
 	// ConfigurationType is a required field
 	ConfigurationType *string `type:"string" required:"true" enum:"ConfigurationType"`
@@ -7253,16 +11269,26 @@ type MonitoringConfiguration struct {
 	// Describes the verbosity of the CloudWatch Logs for an application.
 	LogLevel *string `type:"string" enum:"LogLevel"`
 
-	// Describes the granularity of the CloudWatch Logs for an application.
+	// Describes the granularity of the CloudWatch Logs for an application. The
+	// Parallelism level is not recommended for applications with a Parallelism
+	// over 64 due to excessive costs.
 	MetricsLevel *string `type:"string" enum:"MetricsLevel"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MonitoringConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MonitoringConfiguration) GoString() string {
 	return s.String()
 }
@@ -7298,8 +11324,7 @@ func (s *MonitoringConfiguration) SetMetricsLevel(v string) *MonitoringConfigura
 	return s
 }
 
-// Describes configuration parameters for CloudWatch logging for a Java-based
-// Kinesis Data Analytics application.
+// Describes configuration parameters for CloudWatch logging for an application.
 type MonitoringConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -7314,12 +11339,20 @@ type MonitoringConfigurationDescription struct {
 	MetricsLevel *string `type:"string" enum:"MetricsLevel"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MonitoringConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MonitoringConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -7343,27 +11376,38 @@ func (s *MonitoringConfigurationDescription) SetMetricsLevel(v string) *Monitori
 }
 
 // Describes updates to configuration parameters for Amazon CloudWatch logging
-// for a Java-based Kinesis Data Analytics application.
+// for an application.
 type MonitoringConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// Describes updates to whether to use the default CloudWatch logging configuration
-	// for an application.
+	// for an application. You must set this property to CUSTOM in order to set
+	// the LogLevel or MetricsLevel parameters.
 	ConfigurationTypeUpdate *string `type:"string" enum:"ConfigurationType"`
 
 	// Describes updates to the verbosity of the CloudWatch Logs for an application.
 	LogLevelUpdate *string `type:"string" enum:"LogLevel"`
 
 	// Describes updates to the granularity of the CloudWatch Logs for an application.
+	// The Parallelism level is not recommended for applications with a Parallelism
+	// over 64 due to excessive costs.
 	MetricsLevelUpdate *string `type:"string" enum:"MetricsLevel"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MonitoringConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MonitoringConfigurationUpdate) GoString() string {
 	return s.String()
 }
@@ -7386,10 +11430,10 @@ func (s *MonitoringConfigurationUpdate) SetMetricsLevelUpdate(v string) *Monitor
 	return s
 }
 
-// Describes an SQL-based Amazon Kinesis Data Analytics application's output
-// configuration, in which you identify an in-application stream and a destination
-// where you want the in-application stream data to be written. The destination
-// can be a Kinesis data stream or a Kinesis Data Firehose delivery stream.
+// Describes a SQL-based Kinesis Data Analytics application's output configuration,
+// in which you identify an in-application stream and a destination where you
+// want the in-application stream data to be written. The destination can be
+// a Kinesis data stream or a Kinesis Data Firehose delivery stream.
 type Output struct {
 	_ struct{} `type:"structure"`
 
@@ -7398,13 +11442,13 @@ type Output struct {
 	// DestinationSchema is a required field
 	DestinationSchema *DestinationSchema `type:"structure" required:"true"`
 
-	// Identifies an Amazon Kinesis Data Firehose delivery stream as the destination.
+	// Identifies a Kinesis Data Firehose delivery stream as the destination.
 	KinesisFirehoseOutput *KinesisFirehoseOutput `type:"structure"`
 
-	// Identifies an Amazon Kinesis data stream as the destination.
+	// Identifies a Kinesis data stream as the destination.
 	KinesisStreamsOutput *KinesisStreamsOutput `type:"structure"`
 
-	// Identifies an AWS Lambda function as the destination.
+	// Identifies an Amazon Lambda function as the destination.
 	LambdaOutput *LambdaOutput `type:"structure"`
 
 	// The name of the in-application stream.
@@ -7413,12 +11457,20 @@ type Output struct {
 	Name *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Output) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Output) GoString() string {
 	return s.String()
 }
@@ -7492,10 +11544,10 @@ func (s *Output) SetName(v string) *Output {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes the
-// application output configuration, which includes the in-application stream
-// name and the destination where the stream data is written. The destination
-// can be a Kinesis data stream or a Kinesis Data Firehose delivery stream.
+// For a SQL-based Kinesis Data Analytics application, describes the application
+// output configuration, which includes the in-application stream name and the
+// destination where the stream data is written. The destination can be a Kinesis
+// data stream or a Kinesis Data Firehose delivery stream.
 type OutputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -7521,12 +11573,20 @@ type OutputDescription struct {
 	OutputId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OutputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OutputDescription) GoString() string {
 	return s.String()
 }
@@ -7567,8 +11627,8 @@ func (s *OutputDescription) SetOutputId(v string) *OutputDescription {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes updates
-// to the output configuration identified by the OutputId.
+// For a SQL-based Kinesis Data Analytics application, describes updates to
+// the output configuration identified by the OutputId.
 type OutputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -7582,7 +11642,7 @@ type OutputUpdate struct {
 	// Describes a Kinesis data stream as the destination for the output.
 	KinesisStreamsOutputUpdate *KinesisStreamsOutputUpdate `type:"structure"`
 
-	// Describes an AWS Lambda function as the destination for the output.
+	// Describes an Amazon Lambda function as the destination for the output.
 	LambdaOutputUpdate *LambdaOutputUpdate `type:"structure"`
 
 	// If you want to specify a different in-application stream for this output
@@ -7595,12 +11655,20 @@ type OutputUpdate struct {
 	OutputId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OutputUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OutputUpdate) GoString() string {
 	return s.String()
 }
@@ -7680,10 +11748,10 @@ func (s *OutputUpdate) SetOutputId(v string) *OutputUpdate {
 	return s
 }
 
-// Describes parameters for how a Java-based Amazon Kinesis Data Analytics application
+// Describes parameters for how a Flink-based Kinesis Data Analytics application
 // executes multiple tasks simultaneously. For more information about parallelism,
-// see Parallel Execution (https://ci.apache.org/projects/flink/flink-docs-stable/dev/parallel.html)
-// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.6/).
+// see Parallel Execution (https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/parallel.html)
+// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/).
 type ParallelismConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -7692,30 +11760,45 @@ type ParallelismConfiguration struct {
 	AutoScalingEnabled *bool `type:"boolean"`
 
 	// Describes whether the application uses the default parallelism for the Kinesis
-	// Data Analytics service.
+	// Data Analytics service. You must set this property to CUSTOM in order to
+	// change your application's AutoScalingEnabled, Parallelism, or ParallelismPerKPU
+	// properties.
 	//
 	// ConfigurationType is a required field
 	ConfigurationType *string `type:"string" required:"true" enum:"ConfigurationType"`
 
-	// Describes the initial number of parallel tasks that a Java-based Kinesis
-	// Data Analytics application can perform. The Kinesis Data Analytics service
-	// can increase this number automatically if ParallelismConfiguration$AutoScalingEnabled
-	// is set to true.
+	// Describes the initial number of parallel tasks that a Flink-based Kinesis
+	// Data Analytics application can perform. If AutoScalingEnabled is set to True,
+	// Kinesis Data Analytics increases the CurrentParallelism value in response
+	// to application load. The service can increase the CurrentParallelism value
+	// up to the maximum parallelism, which is ParalellismPerKPU times the maximum
+	// KPUs for the application. The maximum KPUs for an application is 32 by default,
+	// and can be increased by requesting a limit increase. If application load
+	// is reduced, the service can reduce the CurrentParallelism value down to the
+	// Parallelism setting.
 	Parallelism *int64 `min:"1" type:"integer"`
 
-	// Describes the number of parallel tasks that a Java-based Kinesis Data Analytics
+	// Describes the number of parallel tasks that a Flink-based Kinesis Data Analytics
 	// application can perform per Kinesis Processing Unit (KPU) used by the application.
 	// For more information about KPUs, see Amazon Kinesis Data Analytics Pricing
 	// (http://aws.amazon.com/kinesis/data-analytics/pricing/).
 	ParallelismPerKPU *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParallelismConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParallelismConfiguration) GoString() string {
 	return s.String()
 }
@@ -7763,7 +11846,7 @@ func (s *ParallelismConfiguration) SetParallelismPerKPU(v int64) *ParallelismCon
 	return s
 }
 
-// Describes parameters for how a Java-based Kinesis Data Analytics application
+// Describes parameters for how a Flink-based Kinesis Data Analytics application
 // executes multiple tasks simultaneously.
 type ParallelismConfigurationDescription struct {
 	_ struct{} `type:"structure"`
@@ -7776,25 +11859,46 @@ type ParallelismConfigurationDescription struct {
 	// Data Analytics service.
 	ConfigurationType *string `type:"string" enum:"ConfigurationType"`
 
-	// Describes the current number of parallel tasks that a Java-based Kinesis
-	// Data Analytics application can perform.
+	// Describes the current number of parallel tasks that a Flink-based Kinesis
+	// Data Analytics application can perform. If AutoScalingEnabled is set to True,
+	// Kinesis Data Analytics can increase this value in response to application
+	// load. The service can increase this value up to the maximum parallelism,
+	// which is ParalellismPerKPU times the maximum KPUs for the application. The
+	// maximum KPUs for an application is 32 by default, and can be increased by
+	// requesting a limit increase. If application load is reduced, the service
+	// can reduce the CurrentParallelism value down to the Parallelism setting.
 	CurrentParallelism *int64 `min:"1" type:"integer"`
 
-	// Describes the initial number of parallel tasks that a Java-based Kinesis
-	// Data Analytics application can perform.
+	// Describes the initial number of parallel tasks that a Flink-based Kinesis
+	// Data Analytics application can perform. If AutoScalingEnabled is set to True,
+	// then Kinesis Data Analytics can increase the CurrentParallelism value in
+	// response to application load. The service can increase CurrentParallelism
+	// up to the maximum parallelism, which is ParalellismPerKPU times the maximum
+	// KPUs for the application. The maximum KPUs for an application is 32 by default,
+	// and can be increased by requesting a limit increase. If application load
+	// is reduced, the service can reduce the CurrentParallelism value down to the
+	// Parallelism setting.
 	Parallelism *int64 `min:"1" type:"integer"`
 
-	// Describes the number of parallel tasks that a Java-based Kinesis Data Analytics
+	// Describes the number of parallel tasks that a Flink-based Kinesis Data Analytics
 	// application can perform per Kinesis Processing Unit (KPU) used by the application.
 	ParallelismPerKPU *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParallelismConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParallelismConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -7829,17 +11933,20 @@ func (s *ParallelismConfigurationDescription) SetParallelismPerKPU(v int64) *Par
 	return s
 }
 
-// Describes updates to parameters for how a Java-based Kinesis Data Analytics
-// application executes multiple tasks simultaneously.
+// Describes updates to parameters for how an application executes multiple
+// tasks simultaneously.
 type ParallelismConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// Describes updates to whether the Kinesis Data Analytics service can increase
-	// the parallelism of the application in response to increased throughput.
+	// the parallelism of a Flink-based Kinesis Data Analytics application in response
+	// to increased throughput.
 	AutoScalingEnabledUpdate *bool `type:"boolean"`
 
 	// Describes updates to whether the application uses the default parallelism
 	// for the Kinesis Data Analytics service, or if a custom parallelism is used.
+	// You must set this property to CUSTOM in order to change your application's
+	// AutoScalingEnabled, Parallelism, or ParallelismPerKPU properties.
 	ConfigurationTypeUpdate *string `type:"string" enum:"ConfigurationType"`
 
 	// Describes updates to the number of parallel tasks an application can perform
@@ -7847,16 +11954,30 @@ type ParallelismConfigurationUpdate struct {
 	ParallelismPerKPUUpdate *int64 `min:"1" type:"integer"`
 
 	// Describes updates to the initial number of parallel tasks an application
-	// can perform.
+	// can perform. If AutoScalingEnabled is set to True, then Kinesis Data Analytics
+	// can increase the CurrentParallelism value in response to application load.
+	// The service can increase CurrentParallelism up to the maximum parallelism,
+	// which is ParalellismPerKPU times the maximum KPUs for the application. The
+	// maximum KPUs for an application is 32 by default, and can be increased by
+	// requesting a limit increase. If application load is reduced, the service
+	// will reduce CurrentParallelism down to the Parallelism setting.
 	ParallelismUpdate *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParallelismConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParallelismConfigurationUpdate) GoString() string {
 	return s.String()
 }
@@ -7901,8 +12022,7 @@ func (s *ParallelismConfigurationUpdate) SetParallelismUpdate(v int64) *Parallel
 	return s
 }
 
-// Property key-value pairs passed into a Java-based Kinesis Data Analytics
-// application.
+// Property key-value pairs passed into an application.
 type PropertyGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -7917,12 +12037,20 @@ type PropertyGroup struct {
 	PropertyMap map[string]*string `min:"1" type:"map" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PropertyGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PropertyGroup) GoString() string {
 	return s.String()
 }
@@ -7961,15 +12089,15 @@ func (s *PropertyGroup) SetPropertyMap(v map[string]*string) *PropertyGroup {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes the
-// mapping of each data element in the streaming source to the corresponding
-// column in the in-application stream.
+// For a SQL-based Kinesis Data Analytics application, describes the mapping
+// of each data element in the streaming source to the corresponding column
+// in the in-application stream.
 //
 // Also used to describe the format of the reference data source.
 type RecordColumn struct {
 	_ struct{} `type:"structure"`
 
-	// A reference to the data element in the streaming input of the reference data
+	// A reference to the data element in the streaming input or the reference data
 	// source.
 	Mapping *string `type:"string"`
 
@@ -7977,7 +12105,7 @@ type RecordColumn struct {
 	// or reference table.
 	//
 	// Name is a required field
-	Name *string `type:"string" required:"true"`
+	Name *string `min:"1" type:"string" required:"true"`
 
 	// The type of column created in the in-application input stream or reference
 	// table.
@@ -7986,12 +12114,20 @@ type RecordColumn struct {
 	SqlType *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordColumn) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordColumn) GoString() string {
 	return s.String()
 }
@@ -8001,6 +12137,9 @@ func (s *RecordColumn) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "RecordColumn"}
 	if s.Name == nil {
 		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
 	}
 	if s.SqlType == nil {
 		invalidParams.Add(request.NewErrParamRequired("SqlType"))
@@ -8033,9 +12172,9 @@ func (s *RecordColumn) SetSqlType(v string) *RecordColumn {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes the
-// record format and relevant mapping information that should be applied to
-// schematize the records on the stream.
+// For a SQL-based Kinesis Data Analytics application, describes the record
+// format and relevant mapping information that should be applied to schematize
+// the records on the stream.
 type RecordFormat struct {
 	_ struct{} `type:"structure"`
 
@@ -8051,12 +12190,20 @@ type RecordFormat struct {
 	RecordFormatType *string `type:"string" required:"true" enum:"RecordFormatType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordFormat) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordFormat) GoString() string {
 	return s.String()
 }
@@ -8091,11 +12238,11 @@ func (s *RecordFormat) SetRecordFormatType(v string) *RecordFormat {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes the
-// reference data source by providing the source information (Amazon S3 bucket
-// name and object key name), the resulting in-application table name that is
-// created, and the necessary schema to map the data elements in the Amazon
-// S3 object to the in-application table.
+// For a SQL-based Kinesis Data Analytics application, describes the reference
+// data source by providing the source information (Amazon S3 bucket name and
+// object key name), the resulting in-application table name that is created,
+// and the necessary schema to map the data elements in the Amazon S3 object
+// to the in-application table.
 type ReferenceDataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -8117,12 +12264,20 @@ type ReferenceDataSource struct {
 	TableName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReferenceDataSource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReferenceDataSource) GoString() string {
 	return s.String()
 }
@@ -8174,8 +12329,8 @@ func (s *ReferenceDataSource) SetTableName(v string) *ReferenceDataSource {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes the
-// reference data source configured for an application.
+// For a SQL-based Kinesis Data Analytics application, describes the reference
+// data source configured for an application.
 type ReferenceDataSourceDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -8203,12 +12358,20 @@ type ReferenceDataSourceDescription struct {
 	TableName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReferenceDataSourceDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReferenceDataSourceDescription) GoString() string {
 	return s.String()
 }
@@ -8237,12 +12400,11 @@ func (s *ReferenceDataSourceDescription) SetTableName(v string) *ReferenceDataSo
 	return s
 }
 
-// When you update a reference data source configuration for a SQL-based Amazon
-// Kinesis Data Analytics application, this object provides all the updated
-// values (such as the source bucket name and object key name), the in-application
-// table name that is created, and updated mapping information that maps the
-// data in the Amazon S3 object to the in-application reference table that is
-// created.
+// When you update a reference data source configuration for a SQL-based Kinesis
+// Data Analytics application, this object provides all the updated values (such
+// as the source bucket name and object key name), the in-application table
+// name that is created, and updated mapping information that maps the data
+// in the Amazon S3 object to the in-application reference table that is created.
 type ReferenceDataSourceUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -8265,12 +12427,20 @@ type ReferenceDataSourceUpdate struct {
 	TableNameUpdate *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReferenceDataSourceUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReferenceDataSourceUpdate) GoString() string {
 	return s.String()
 }
@@ -8328,24 +12498,332 @@ func (s *ReferenceDataSourceUpdate) SetTableNameUpdate(v string) *ReferenceDataS
 	return s
 }
 
-// Describes the starting parameters for an Amazon Kinesis Data Analytics application.
+// The application is not available for this operation.
+type ResourceInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceInUseException(v protocol.ResponseMetadata) error {
+	return &ResourceInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceInUseException) Code() string {
+	return "ResourceInUseException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Specified application can't be found.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Discovery failed to get a record from the streaming source because of the
+// Kinesis Streams ProvisionedThroughputExceededException. For more information,
+// see GetRecords (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html)
+// in the Amazon Kinesis Streams API Reference.
+type ResourceProvisionedThroughputExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceProvisionedThroughputExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceProvisionedThroughputExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceProvisionedThroughputExceededException(v protocol.ResponseMetadata) error {
+	return &ResourceProvisionedThroughputExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceProvisionedThroughputExceededException) Code() string {
+	return "ResourceProvisionedThroughputExceededException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceProvisionedThroughputExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceProvisionedThroughputExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceProvisionedThroughputExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceProvisionedThroughputExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceProvisionedThroughputExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type RollbackApplicationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the application.
+	//
+	// ApplicationName is a required field
+	ApplicationName *string `min:"1" type:"string" required:"true"`
+
+	// The current application version ID. You can retrieve the application version
+	// ID using DescribeApplication.
+	//
+	// CurrentApplicationVersionId is a required field
+	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RollbackApplicationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RollbackApplicationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RollbackApplicationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RollbackApplicationInput"}
+	if s.ApplicationName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+	}
+	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+	}
+	if s.CurrentApplicationVersionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+	}
+	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationName sets the ApplicationName field's value.
+func (s *RollbackApplicationInput) SetApplicationName(v string) *RollbackApplicationInput {
+	s.ApplicationName = &v
+	return s
+}
+
+// SetCurrentApplicationVersionId sets the CurrentApplicationVersionId field's value.
+func (s *RollbackApplicationInput) SetCurrentApplicationVersionId(v int64) *RollbackApplicationInput {
+	s.CurrentApplicationVersionId = &v
+	return s
+}
+
+type RollbackApplicationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the application, including the application Amazon Resource Name
+	// (ARN), status, latest version, and input and output configurations.
+	//
+	// ApplicationDetail is a required field
+	ApplicationDetail *ApplicationDetail `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RollbackApplicationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RollbackApplicationOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplicationDetail sets the ApplicationDetail field's value.
+func (s *RollbackApplicationOutput) SetApplicationDetail(v *ApplicationDetail) *RollbackApplicationOutput {
+	s.ApplicationDetail = v
+	return s
+}
+
+// Describes the starting parameters for an Kinesis Data Analytics application.
 type RunConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Describes the restore behavior of a restarting application.
 	ApplicationRestoreConfiguration *ApplicationRestoreConfiguration `type:"structure"`
 
-	// Describes the starting parameters for an SQL-based Kinesis Data Analytics
+	// Describes the starting parameters for a Flink-based Kinesis Data Analytics
 	// application.
+	FlinkRunConfiguration *FlinkRunConfiguration `type:"structure"`
+
+	// Describes the starting parameters for a SQL-based Kinesis Data Analytics
+	// application application.
 	SqlRunConfigurations []*SqlRunConfiguration `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RunConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RunConfiguration) GoString() string {
 	return s.String()
 }
@@ -8381,6 +12859,12 @@ func (s *RunConfiguration) SetApplicationRestoreConfiguration(v *ApplicationRest
 	return s
 }
 
+// SetFlinkRunConfiguration sets the FlinkRunConfiguration field's value.
+func (s *RunConfiguration) SetFlinkRunConfiguration(v *FlinkRunConfiguration) *RunConfiguration {
+	s.FlinkRunConfiguration = v
+	return s
+}
+
 // SetSqlRunConfigurations sets the SqlRunConfigurations field's value.
 func (s *RunConfiguration) SetSqlRunConfigurations(v []*SqlRunConfiguration) *RunConfiguration {
 	s.SqlRunConfigurations = v
@@ -8393,14 +12877,26 @@ type RunConfigurationDescription struct {
 
 	// Describes the restore behavior of a restarting application.
 	ApplicationRestoreConfigurationDescription *ApplicationRestoreConfiguration `type:"structure"`
+
+	// Describes the starting parameters for a Flink-based Kinesis Data Analytics
+	// application.
+	FlinkRunConfigurationDescription *FlinkRunConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RunConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RunConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -8411,6 +12907,12 @@ func (s *RunConfigurationDescription) SetApplicationRestoreConfigurationDescript
 	return s
 }
 
+// SetFlinkRunConfigurationDescription sets the FlinkRunConfigurationDescription field's value.
+func (s *RunConfigurationDescription) SetFlinkRunConfigurationDescription(v *FlinkRunConfiguration) *RunConfigurationDescription {
+	s.FlinkRunConfigurationDescription = v
+	return s
+}
+
 // Describes the updates to the starting parameters for a Kinesis Data Analytics
 // application.
 type RunConfigurationUpdate struct {
@@ -8418,14 +12920,26 @@ type RunConfigurationUpdate struct {
 
 	// Describes updates to the restore behavior of a restarting application.
 	ApplicationRestoreConfiguration *ApplicationRestoreConfiguration `type:"structure"`
+
+	// Describes the starting parameters for a Flink-based Kinesis Data Analytics
+	// application.
+	FlinkRunConfiguration *FlinkRunConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RunConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RunConfigurationUpdate) GoString() string {
 	return s.String()
 }
@@ -8451,8 +12965,13 @@ func (s *RunConfigurationUpdate) SetApplicationRestoreConfiguration(v *Applicati
 	return s
 }
 
-// Describes the location of a Java-based Amazon Kinesis Data Analytics application's
-// code stored in an S3 bucket.
+// SetFlinkRunConfiguration sets the FlinkRunConfiguration field's value.
+func (s *RunConfigurationUpdate) SetFlinkRunConfiguration(v *FlinkRunConfiguration) *RunConfigurationUpdate {
+	s.FlinkRunConfiguration = v
+	return s
+}
+
+// Describes the location of an application's code stored in an S3 bucket.
 type S3ApplicationCodeLocationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -8471,12 +12990,20 @@ type S3ApplicationCodeLocationDescription struct {
 	ObjectVersion *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ApplicationCodeLocationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ApplicationCodeLocationDescription) GoString() string {
 	return s.String()
 }
@@ -8499,7 +13026,7 @@ func (s *S3ApplicationCodeLocationDescription) SetObjectVersion(v string) *S3App
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, provides a description
+// For a SQL-based Kinesis Data Analytics application, provides a description
 // of an Amazon S3 data source, including the Amazon Resource Name (ARN) of
 // the S3 bucket and the name of the Amazon S3 object that contains the data.
 type S3Configuration struct {
@@ -8516,12 +13043,20 @@ type S3Configuration struct {
 	FileKey *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3Configuration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3Configuration) GoString() string {
 	return s.String()
 }
@@ -8560,10 +13095,172 @@ func (s *S3Configuration) SetFileKey(v string) *S3Configuration {
 	return s
 }
 
-// For a Java-based Amazon Kinesis Data Analytics application, provides a description
-// of an Amazon S3 object, including the Amazon Resource Name (ARN) of the S3
-// bucket, the name of the Amazon S3 object that contains the data, and the
-// version number of the Amazon S3 object that contains the data.
+// The S3 bucket that holds the application information.
+type S3ContentBaseLocation struct {
+	_ struct{} `type:"structure"`
+
+	// The base path for the S3 bucket.
+	BasePath *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the S3 bucket.
+	//
+	// BucketARN is a required field
+	BucketARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3ContentBaseLocation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3ContentBaseLocation) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3ContentBaseLocation) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3ContentBaseLocation"}
+	if s.BasePath != nil && len(*s.BasePath) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BasePath", 1))
+	}
+	if s.BucketARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("BucketARN"))
+	}
+	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BucketARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBasePath sets the BasePath field's value.
+func (s *S3ContentBaseLocation) SetBasePath(v string) *S3ContentBaseLocation {
+	s.BasePath = &v
+	return s
+}
+
+// SetBucketARN sets the BucketARN field's value.
+func (s *S3ContentBaseLocation) SetBucketARN(v string) *S3ContentBaseLocation {
+	s.BucketARN = &v
+	return s
+}
+
+// The description of the S3 base location that holds the application.
+type S3ContentBaseLocationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The base path for the S3 bucket.
+	BasePath *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the S3 bucket.
+	//
+	// BucketARN is a required field
+	BucketARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3ContentBaseLocationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3ContentBaseLocationDescription) GoString() string {
+	return s.String()
+}
+
+// SetBasePath sets the BasePath field's value.
+func (s *S3ContentBaseLocationDescription) SetBasePath(v string) *S3ContentBaseLocationDescription {
+	s.BasePath = &v
+	return s
+}
+
+// SetBucketARN sets the BucketARN field's value.
+func (s *S3ContentBaseLocationDescription) SetBucketARN(v string) *S3ContentBaseLocationDescription {
+	s.BucketARN = &v
+	return s
+}
+
+// The information required to update the S3 base location that holds the application.
+type S3ContentBaseLocationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The updated S3 bucket path.
+	BasePathUpdate *string `min:"1" type:"string"`
+
+	// The updated Amazon Resource Name (ARN) of the S3 bucket.
+	BucketARNUpdate *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3ContentBaseLocationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3ContentBaseLocationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3ContentBaseLocationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3ContentBaseLocationUpdate"}
+	if s.BasePathUpdate != nil && len(*s.BasePathUpdate) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BasePathUpdate", 1))
+	}
+	if s.BucketARNUpdate != nil && len(*s.BucketARNUpdate) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BucketARNUpdate", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBasePathUpdate sets the BasePathUpdate field's value.
+func (s *S3ContentBaseLocationUpdate) SetBasePathUpdate(v string) *S3ContentBaseLocationUpdate {
+	s.BasePathUpdate = &v
+	return s
+}
+
+// SetBucketARNUpdate sets the BucketARNUpdate field's value.
+func (s *S3ContentBaseLocationUpdate) SetBucketARNUpdate(v string) *S3ContentBaseLocationUpdate {
+	s.BucketARNUpdate = &v
+	return s
+}
+
+// For a Kinesis Data Analytics application provides a description of an Amazon
+// S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the
+// name of the Amazon S3 object that contains the data, and the version number
+// of the Amazon S3 object that contains the data.
 type S3ContentLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -8582,12 +13279,20 @@ type S3ContentLocation struct {
 	ObjectVersion *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ContentLocation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ContentLocation) GoString() string {
 	return s.String()
 }
@@ -8632,8 +13337,7 @@ func (s *S3ContentLocation) SetObjectVersion(v string) *S3ContentLocation {
 	return s
 }
 
-// Describes an update for the Amazon S3 code content location for a Java-based
-// Amazon Kinesis Data Analytics application.
+// Describes an update for the Amazon S3 code content location for an application.
 type S3ContentLocationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -8648,12 +13352,20 @@ type S3ContentLocationUpdate struct {
 	ObjectVersionUpdate *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ContentLocationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ContentLocationUpdate) GoString() string {
 	return s.String()
 }
@@ -8692,8 +13404,8 @@ func (s *S3ContentLocationUpdate) SetObjectVersionUpdate(v string) *S3ContentLoc
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, identifies the
-// Amazon S3 bucket and object that contains the reference data.
+// For a SQL-based Kinesis Data Analytics application, identifies the Amazon
+// S3 bucket and object that contains the reference data.
 //
 // A Kinesis Data Analytics application loads reference data only once. If the
 // data changes, you call the UpdateApplication operation to trigger reloading
@@ -8708,12 +13420,20 @@ type S3ReferenceDataSource struct {
 	FileKey *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ReferenceDataSource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ReferenceDataSource) GoString() string {
 	return s.String()
 }
@@ -8746,8 +13466,8 @@ func (s *S3ReferenceDataSource) SetFileKey(v string) *S3ReferenceDataSource {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, provides the
-// bucket name and object key name that stores the reference data.
+// For a SQL-based Kinesis Data Analytics application, provides the bucket name
+// and object key name that stores the reference data.
 type S3ReferenceDataSourceDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -8771,12 +13491,20 @@ type S3ReferenceDataSourceDescription struct {
 	ReferenceRoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ReferenceDataSourceDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ReferenceDataSourceDescription) GoString() string {
 	return s.String()
 }
@@ -8799,9 +13527,8 @@ func (s *S3ReferenceDataSourceDescription) SetReferenceRoleARN(v string) *S3Refe
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes the
-// Amazon S3 bucket name and object key name for an in-application reference
-// table.
+// For a SQL-based Kinesis Data Analytics application, describes the Amazon
+// S3 bucket name and object key name for an in-application reference table.
 type S3ReferenceDataSourceUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -8812,12 +13539,20 @@ type S3ReferenceDataSourceUpdate struct {
 	FileKeyUpdate *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ReferenceDataSourceUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3ReferenceDataSourceUpdate) GoString() string {
 	return s.String()
 }
@@ -8850,6 +13585,70 @@ func (s *S3ReferenceDataSourceUpdate) SetFileKeyUpdate(v string) *S3ReferenceDat
 	return s
 }
 
+// The service cannot complete the request.
+type ServiceUnavailableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceUnavailableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceUnavailableException) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceUnavailableException(v protocol.ResponseMetadata) error {
+	return &ServiceUnavailableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceUnavailableException) Code() string {
+	return "ServiceUnavailableException"
+}
+
+// Message returns the exception's message.
+func (s *ServiceUnavailableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceUnavailableException) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceUnavailableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceUnavailableException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Provides details about a snapshot of application state.
 type SnapshotDetails struct {
 	_ struct{} `type:"structure"`
@@ -8873,12 +13672,20 @@ type SnapshotDetails struct {
 	SnapshotStatus *string `type:"string" required:"true" enum:"SnapshotStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SnapshotDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SnapshotDetails) GoString() string {
 	return s.String()
 }
@@ -8907,9 +13714,9 @@ func (s *SnapshotDetails) SetSnapshotStatus(v string) *SnapshotDetails {
 	return s
 }
 
-// For an SQL-based Amazon Kinesis Data Analytics application, describes the
-// format of the data in the streaming source, and how each data element maps
-// to corresponding columns created in the in-application stream.
+// For a SQL-based Kinesis Data Analytics application, describes the format
+// of the data in the streaming source, and how each data element maps to corresponding
+// columns created in the in-application stream.
 type SourceSchema struct {
 	_ struct{} `type:"structure"`
 
@@ -8920,7 +13727,7 @@ type SourceSchema struct {
 
 	// Specifies the encoding of the records in the streaming source. For example,
 	// UTF-8.
-	RecordEncoding *string `type:"string"`
+	RecordEncoding *string `min:"5" type:"string"`
 
 	// Specifies the format of the records on the streaming source.
 	//
@@ -8928,12 +13735,20 @@ type SourceSchema struct {
 	RecordFormat *RecordFormat `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SourceSchema) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SourceSchema) GoString() string {
 	return s.String()
 }
@@ -8946,6 +13761,9 @@ func (s *SourceSchema) Validate() error {
 	}
 	if s.RecordColumns != nil && len(s.RecordColumns) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("RecordColumns", 1))
+	}
+	if s.RecordEncoding != nil && len(*s.RecordEncoding) < 5 {
+		invalidParams.Add(request.NewErrParamMinLen("RecordEncoding", 5))
 	}
 	if s.RecordFormat == nil {
 		invalidParams.Add(request.NewErrParamRequired("RecordFormat"))
@@ -8990,7 +13808,7 @@ func (s *SourceSchema) SetRecordFormat(v *RecordFormat) *SourceSchema {
 	return s
 }
 
-// Describes the inputs, outputs, and reference data sources for an SQL-based
+// Describes the inputs, outputs, and reference data sources for a SQL-based
 // Kinesis Data Analytics application.
 type SqlApplicationConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -9007,12 +13825,20 @@ type SqlApplicationConfiguration struct {
 	ReferenceDataSources []*ReferenceDataSource `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SqlApplicationConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SqlApplicationConfiguration) GoString() string {
 	return s.String()
 }
@@ -9075,7 +13901,7 @@ func (s *SqlApplicationConfiguration) SetReferenceDataSources(v []*ReferenceData
 	return s
 }
 
-// Describes the inputs, outputs, and reference data sources for an SQL-based
+// Describes the inputs, outputs, and reference data sources for a SQL-based
 // Kinesis Data Analytics application.
 type SqlApplicationConfigurationDescription struct {
 	_ struct{} `type:"structure"`
@@ -9093,12 +13919,20 @@ type SqlApplicationConfigurationDescription struct {
 	ReferenceDataSourceDescriptions []*ReferenceDataSourceDescription `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SqlApplicationConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SqlApplicationConfigurationDescription) GoString() string {
 	return s.String()
 }
@@ -9122,7 +13956,7 @@ func (s *SqlApplicationConfigurationDescription) SetReferenceDataSourceDescripti
 }
 
 // Describes updates to the input streams, destination streams, and reference
-// data sources for an SQL-based Kinesis Data Analytics application.
+// data sources for a SQL-based Kinesis Data Analytics application.
 type SqlApplicationConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -9139,12 +13973,20 @@ type SqlApplicationConfigurationUpdate struct {
 	ReferenceDataSourceUpdates []*ReferenceDataSourceUpdate `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SqlApplicationConfigurationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SqlApplicationConfigurationUpdate) GoString() string {
 	return s.String()
 }
@@ -9207,7 +14049,7 @@ func (s *SqlApplicationConfigurationUpdate) SetReferenceDataSourceUpdates(v []*R
 	return s
 }
 
-// Describes the starting parameters for an SQL-based Kinesis Data Analytics
+// Describes the starting parameters for a SQL-based Kinesis Data Analytics
 // application.
 type SqlRunConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -9225,12 +14067,20 @@ type SqlRunConfiguration struct {
 	InputStartingPositionConfiguration *InputStartingPositionConfiguration `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SqlRunConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SqlRunConfiguration) GoString() string {
 	return s.String()
 }
@@ -9276,17 +14126,23 @@ type StartApplicationInput struct {
 
 	// Identifies the run configuration (start parameters) of a Kinesis Data Analytics
 	// application.
-	//
-	// RunConfiguration is a required field
-	RunConfiguration *RunConfiguration `type:"structure" required:"true"`
+	RunConfiguration *RunConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartApplicationInput) GoString() string {
 	return s.String()
 }
@@ -9299,9 +14155,6 @@ func (s *StartApplicationInput) Validate() error {
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
-	}
-	if s.RunConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("RunConfiguration"))
 	}
 	if s.RunConfiguration != nil {
 		if err := s.RunConfiguration.Validate(); err != nil {
@@ -9331,12 +14184,20 @@ type StartApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -9348,14 +14209,36 @@ type StopApplicationInput struct {
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `min:"1" type:"string" required:"true"`
+
+	// Set to true to force the application to stop. If you set Force to true, Kinesis
+	// Data Analytics stops the application without taking a snapshot.
+	//
+	// Force-stopping your application may lead to data loss or duplication. To
+	// prevent data loss or duplicate processing of data during application restarts,
+	// we recommend you to take frequent snapshots of your application.
+	//
+	// You can only force stop a Flink-based Kinesis Data Analytics application.
+	// You can't force stop a SQL-based Kinesis Data Analytics application.
+	//
+	// The application must be in the STARTING, UPDATING, STOPPING, AUTOSCALING,
+	// or RUNNING status.
+	Force *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopApplicationInput) GoString() string {
 	return s.String()
 }
@@ -9382,17 +14265,485 @@ func (s *StopApplicationInput) SetApplicationName(v string) *StopApplicationInpu
 	return s
 }
 
+// SetForce sets the Force field's value.
+func (s *StopApplicationInput) SetForce(v bool) *StopApplicationInput {
+	s.Force = &v
+	return s
+}
+
 type StopApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopApplicationOutput) GoString() string {
+	return s.String()
+}
+
+// A key-value pair (the value is optional) that you can define and assign to
+// Amazon resources. If you specify a tag that already exists, the tag value
+// is replaced with the value that you specify in the request. Note that the
+// maximum number of application tags includes system tags. The maximum number
+// of user-defined application tags is 50. For more information, see Using Tagging
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of the key-value tag.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The value of the key-value tag. The value is optional.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	if s.Key == nil {
+		invalidParams.Add(request.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKey sets the Key field's value.
+func (s *Tag) SetKey(v string) *Tag {
+	s.Key = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *Tag) SetValue(v string) *Tag {
+	s.Value = &v
+	return s
+}
+
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the application to assign the tags.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+
+	// The key-value tags to assign to the application.
+	//
+	// Tags is a required field
+	Tags []*Tag `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+	if s.Tags == nil {
+		invalidParams.Add(request.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *TagResourceInput) SetResourceARN(v string) *TagResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *TagResourceInput) SetTags(v []*Tag) *TagResourceInput {
+	s.Tags = v
+	return s
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// Application created with too many tags, or too many tags added to an application.
+// Note that the maximum number of application tags includes system tags. The
+// maximum number of user-defined application tags is 50.
+type TooManyTagsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyTagsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyTagsException) GoString() string {
+	return s.String()
+}
+
+func newErrorTooManyTagsException(v protocol.ResponseMetadata) error {
+	return &TooManyTagsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TooManyTagsException) Code() string {
+	return "TooManyTagsException"
+}
+
+// Message returns the exception's message.
+func (s *TooManyTagsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TooManyTagsException) OrigErr() error {
+	return nil
+}
+
+func (s *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TooManyTagsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TooManyTagsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The data format is not valid. Kinesis Data Analytics cannot detect the schema
+// for the given streaming source.
+type UnableToDetectSchemaException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// Stream data that was modified by the processor specified in the InputProcessingConfiguration
+	// parameter.
+	ProcessedInputRecords []*string `type:"list"`
+
+	// Raw stream data that was sampled to infer the schema.
+	RawInputRecords []*string `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnableToDetectSchemaException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnableToDetectSchemaException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnableToDetectSchemaException(v protocol.ResponseMetadata) error {
+	return &UnableToDetectSchemaException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnableToDetectSchemaException) Code() string {
+	return "UnableToDetectSchemaException"
+}
+
+// Message returns the exception's message.
+func (s *UnableToDetectSchemaException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnableToDetectSchemaException) OrigErr() error {
+	return nil
+}
+
+func (s *UnableToDetectSchemaException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnableToDetectSchemaException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnableToDetectSchemaException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The request was rejected because a specified parameter is not supported or
+// a specified resource is not valid for this operation.
+type UnsupportedOperationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedOperationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedOperationException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedOperationException(v protocol.ResponseMetadata) error {
+	return &UnsupportedOperationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedOperationException) Code() string {
+	return "UnsupportedOperationException"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedOperationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedOperationException) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedOperationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedOperationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the Kinesis Data Analytics application from which to remove the
+	// tags.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+
+	// A list of keys of tags to remove from the specified application.
+	//
+	// TagKeys is a required field
+	TagKeys []*string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+	if s.TagKeys == nil {
+		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+	}
+	if s.TagKeys != nil && len(s.TagKeys) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("TagKeys", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *UntagResourceInput) SetResourceARN(v string) *UntagResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+// SetTagKeys sets the TagKeys field's value.
+func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+	s.TagKeys = v
+	return s
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) GoString() string {
 	return s.String()
 }
 
@@ -9412,11 +14763,18 @@ type UpdateApplicationInput struct {
 	// CloudWatch logging option, use AddApplicationCloudWatchLoggingOption.
 	CloudWatchLoggingOptionUpdates []*CloudWatchLoggingOptionUpdate `type:"list"`
 
-	// The current application version ID. You can retrieve the application version
-	// ID using DescribeApplication.
-	//
-	// CurrentApplicationVersionId is a required field
-	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
+	// A value you use to implement strong concurrency for application updates.
+	// You must provide the CurrentApplicationVersionId or the ConditionalToken.
+	// You get the application's current ConditionalToken using DescribeApplication.
+	// For better concurrency support, use the ConditionalToken parameter instead
+	// of CurrentApplicationVersionId.
+	ConditionalToken *string `min:"1" type:"string"`
+
+	// The current application version ID. You must provide the CurrentApplicationVersionId
+	// or the ConditionalToken.You can retrieve the application version ID using
+	// DescribeApplication. For better concurrency support, use the ConditionalToken
+	// parameter instead of CurrentApplicationVersionId.
+	CurrentApplicationVersionId *int64 `min:"1" type:"long"`
 
 	// Describes updates to the application's starting parameters.
 	RunConfigurationUpdate *RunConfigurationUpdate `type:"structure"`
@@ -9425,12 +14783,20 @@ type UpdateApplicationInput struct {
 	ServiceExecutionRoleUpdate *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationInput) GoString() string {
 	return s.String()
 }
@@ -9444,8 +14810,8 @@ func (s *UpdateApplicationInput) Validate() error {
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
 	}
-	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+	if s.ConditionalToken != nil && len(*s.ConditionalToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ConditionalToken", 1))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
@@ -9498,6 +14864,12 @@ func (s *UpdateApplicationInput) SetCloudWatchLoggingOptionUpdates(v []*CloudWat
 	return s
 }
 
+// SetConditionalToken sets the ConditionalToken field's value.
+func (s *UpdateApplicationInput) SetConditionalToken(v string) *UpdateApplicationInput {
+	s.ConditionalToken = &v
+	return s
+}
+
 // SetCurrentApplicationVersionId sets the CurrentApplicationVersionId field's value.
 func (s *UpdateApplicationInput) SetCurrentApplicationVersionId(v int64) *UpdateApplicationInput {
 	s.CurrentApplicationVersionId = &v
@@ -9516,6 +14888,115 @@ func (s *UpdateApplicationInput) SetServiceExecutionRoleUpdate(v string) *Update
 	return s
 }
 
+type UpdateApplicationMaintenanceConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the application maintenance configuration update.
+	//
+	// ApplicationMaintenanceConfigurationUpdate is a required field
+	ApplicationMaintenanceConfigurationUpdate *ApplicationMaintenanceConfigurationUpdate `type:"structure" required:"true"`
+
+	// The name of the application for which you want to update the maintenance
+	// configuration.
+	//
+	// ApplicationName is a required field
+	ApplicationName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateApplicationMaintenanceConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateApplicationMaintenanceConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateApplicationMaintenanceConfigurationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateApplicationMaintenanceConfigurationInput"}
+	if s.ApplicationMaintenanceConfigurationUpdate == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationMaintenanceConfigurationUpdate"))
+	}
+	if s.ApplicationName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+	}
+	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+	}
+	if s.ApplicationMaintenanceConfigurationUpdate != nil {
+		if err := s.ApplicationMaintenanceConfigurationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("ApplicationMaintenanceConfigurationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationMaintenanceConfigurationUpdate sets the ApplicationMaintenanceConfigurationUpdate field's value.
+func (s *UpdateApplicationMaintenanceConfigurationInput) SetApplicationMaintenanceConfigurationUpdate(v *ApplicationMaintenanceConfigurationUpdate) *UpdateApplicationMaintenanceConfigurationInput {
+	s.ApplicationMaintenanceConfigurationUpdate = v
+	return s
+}
+
+// SetApplicationName sets the ApplicationName field's value.
+func (s *UpdateApplicationMaintenanceConfigurationInput) SetApplicationName(v string) *UpdateApplicationMaintenanceConfigurationInput {
+	s.ApplicationName = &v
+	return s
+}
+
+type UpdateApplicationMaintenanceConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the application.
+	ApplicationARN *string `min:"1" type:"string"`
+
+	// The application maintenance configuration description after the update.
+	ApplicationMaintenanceConfigurationDescription *ApplicationMaintenanceConfigurationDescription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateApplicationMaintenanceConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateApplicationMaintenanceConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplicationARN sets the ApplicationARN field's value.
+func (s *UpdateApplicationMaintenanceConfigurationOutput) SetApplicationARN(v string) *UpdateApplicationMaintenanceConfigurationOutput {
+	s.ApplicationARN = &v
+	return s
+}
+
+// SetApplicationMaintenanceConfigurationDescription sets the ApplicationMaintenanceConfigurationDescription field's value.
+func (s *UpdateApplicationMaintenanceConfigurationOutput) SetApplicationMaintenanceConfigurationDescription(v *ApplicationMaintenanceConfigurationDescription) *UpdateApplicationMaintenanceConfigurationOutput {
+	s.ApplicationMaintenanceConfigurationDescription = v
+	return s
+}
+
 type UpdateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9525,12 +15006,20 @@ type UpdateApplicationOutput struct {
 	ApplicationDetail *ApplicationDetail `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -9539,6 +15028,624 @@ func (s UpdateApplicationOutput) GoString() string {
 func (s *UpdateApplicationOutput) SetApplicationDetail(v *ApplicationDetail) *UpdateApplicationOutput {
 	s.ApplicationDetail = v
 	return s
+}
+
+// Describes the parameters of a VPC used by the application.
+type VpcConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The array of SecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
+	// IDs used by the VPC configuration.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []*string `min:"1" type:"list" required:"true"`
+
+	// The array of Subnet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
+	// IDs used by the VPC configuration.
+	//
+	// SubnetIds is a required field
+	SubnetIds []*string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "VpcConfiguration"}
+	if s.SecurityGroupIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if s.SecurityGroupIds != nil && len(s.SecurityGroupIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SecurityGroupIds", 1))
+	}
+	if s.SubnetIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+	}
+	if s.SubnetIds != nil && len(s.SubnetIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SubnetIds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSecurityGroupIds sets the SecurityGroupIds field's value.
+func (s *VpcConfiguration) SetSecurityGroupIds(v []*string) *VpcConfiguration {
+	s.SecurityGroupIds = v
+	return s
+}
+
+// SetSubnetIds sets the SubnetIds field's value.
+func (s *VpcConfiguration) SetSubnetIds(v []*string) *VpcConfiguration {
+	s.SubnetIds = v
+	return s
+}
+
+// Describes the parameters of a VPC used by the application.
+type VpcConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The array of SecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
+	// IDs used by the VPC configuration.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []*string `min:"1" type:"list" required:"true"`
+
+	// The array of Subnet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
+	// IDs used by the VPC configuration.
+	//
+	// SubnetIds is a required field
+	SubnetIds []*string `min:"1" type:"list" required:"true"`
+
+	// The ID of the VPC configuration.
+	//
+	// VpcConfigurationId is a required field
+	VpcConfigurationId *string `min:"1" type:"string" required:"true"`
+
+	// The ID of the associated VPC.
+	//
+	// VpcId is a required field
+	VpcId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// SetSecurityGroupIds sets the SecurityGroupIds field's value.
+func (s *VpcConfigurationDescription) SetSecurityGroupIds(v []*string) *VpcConfigurationDescription {
+	s.SecurityGroupIds = v
+	return s
+}
+
+// SetSubnetIds sets the SubnetIds field's value.
+func (s *VpcConfigurationDescription) SetSubnetIds(v []*string) *VpcConfigurationDescription {
+	s.SubnetIds = v
+	return s
+}
+
+// SetVpcConfigurationId sets the VpcConfigurationId field's value.
+func (s *VpcConfigurationDescription) SetVpcConfigurationId(v string) *VpcConfigurationDescription {
+	s.VpcConfigurationId = &v
+	return s
+}
+
+// SetVpcId sets the VpcId field's value.
+func (s *VpcConfigurationDescription) SetVpcId(v string) *VpcConfigurationDescription {
+	s.VpcId = &v
+	return s
+}
+
+// Describes updates to the VPC configuration used by the application.
+type VpcConfigurationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Describes updates to the array of SecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
+	// IDs used by the VPC configuration.
+	SecurityGroupIdUpdates []*string `min:"1" type:"list"`
+
+	// Describes updates to the array of Subnet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
+	// IDs used by the VPC configuration.
+	SubnetIdUpdates []*string `min:"1" type:"list"`
+
+	// Describes an update to the ID of the VPC configuration.
+	//
+	// VpcConfigurationId is a required field
+	VpcConfigurationId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfigurationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfigurationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcConfigurationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "VpcConfigurationUpdate"}
+	if s.SecurityGroupIdUpdates != nil && len(s.SecurityGroupIdUpdates) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SecurityGroupIdUpdates", 1))
+	}
+	if s.SubnetIdUpdates != nil && len(s.SubnetIdUpdates) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SubnetIdUpdates", 1))
+	}
+	if s.VpcConfigurationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("VpcConfigurationId"))
+	}
+	if s.VpcConfigurationId != nil && len(*s.VpcConfigurationId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("VpcConfigurationId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSecurityGroupIdUpdates sets the SecurityGroupIdUpdates field's value.
+func (s *VpcConfigurationUpdate) SetSecurityGroupIdUpdates(v []*string) *VpcConfigurationUpdate {
+	s.SecurityGroupIdUpdates = v
+	return s
+}
+
+// SetSubnetIdUpdates sets the SubnetIdUpdates field's value.
+func (s *VpcConfigurationUpdate) SetSubnetIdUpdates(v []*string) *VpcConfigurationUpdate {
+	s.SubnetIdUpdates = v
+	return s
+}
+
+// SetVpcConfigurationId sets the VpcConfigurationId field's value.
+func (s *VpcConfigurationUpdate) SetVpcConfigurationId(v string) *VpcConfigurationUpdate {
+	s.VpcConfigurationId = &v
+	return s
+}
+
+// The configuration of a Kinesis Data Analytics Studio notebook.
+type ZeppelinApplicationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics
+	// Studio notebook.
+	CatalogConfiguration *CatalogConfiguration `type:"structure"`
+
+	// Custom artifacts are dependency JARs and user-defined functions (UDF).
+	CustomArtifactsConfiguration []*CustomArtifactConfiguration `type:"list"`
+
+	// The information required to deploy a Kinesis Data Analytics Studio notebook
+	// as an application with durable state.
+	DeployAsApplicationConfiguration *DeployAsApplicationConfiguration `type:"structure"`
+
+	// The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+	MonitoringConfiguration *ZeppelinMonitoringConfiguration `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinApplicationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinApplicationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ZeppelinApplicationConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ZeppelinApplicationConfiguration"}
+	if s.CatalogConfiguration != nil {
+		if err := s.CatalogConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("CatalogConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.CustomArtifactsConfiguration != nil {
+		for i, v := range s.CustomArtifactsConfiguration {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CustomArtifactsConfiguration", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.DeployAsApplicationConfiguration != nil {
+		if err := s.DeployAsApplicationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("DeployAsApplicationConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.MonitoringConfiguration != nil {
+		if err := s.MonitoringConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("MonitoringConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCatalogConfiguration sets the CatalogConfiguration field's value.
+func (s *ZeppelinApplicationConfiguration) SetCatalogConfiguration(v *CatalogConfiguration) *ZeppelinApplicationConfiguration {
+	s.CatalogConfiguration = v
+	return s
+}
+
+// SetCustomArtifactsConfiguration sets the CustomArtifactsConfiguration field's value.
+func (s *ZeppelinApplicationConfiguration) SetCustomArtifactsConfiguration(v []*CustomArtifactConfiguration) *ZeppelinApplicationConfiguration {
+	s.CustomArtifactsConfiguration = v
+	return s
+}
+
+// SetDeployAsApplicationConfiguration sets the DeployAsApplicationConfiguration field's value.
+func (s *ZeppelinApplicationConfiguration) SetDeployAsApplicationConfiguration(v *DeployAsApplicationConfiguration) *ZeppelinApplicationConfiguration {
+	s.DeployAsApplicationConfiguration = v
+	return s
+}
+
+// SetMonitoringConfiguration sets the MonitoringConfiguration field's value.
+func (s *ZeppelinApplicationConfiguration) SetMonitoringConfiguration(v *ZeppelinMonitoringConfiguration) *ZeppelinApplicationConfiguration {
+	s.MonitoringConfiguration = v
+	return s
+}
+
+// The configuration of a Kinesis Data Analytics Studio notebook.
+type ZeppelinApplicationConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics
+	// Studio notebook.
+	CatalogConfigurationDescription *CatalogConfigurationDescription `type:"structure"`
+
+	// Custom artifacts are dependency JARs and user-defined functions (UDF).
+	CustomArtifactsConfigurationDescription []*CustomArtifactConfigurationDescription `type:"list"`
+
+	// The parameters required to deploy a Kinesis Data Analytics Studio notebook
+	// as an application with durable state.
+	DeployAsApplicationConfigurationDescription *DeployAsApplicationConfigurationDescription `type:"structure"`
+
+	// The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+	//
+	// MonitoringConfigurationDescription is a required field
+	MonitoringConfigurationDescription *ZeppelinMonitoringConfigurationDescription `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinApplicationConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinApplicationConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// SetCatalogConfigurationDescription sets the CatalogConfigurationDescription field's value.
+func (s *ZeppelinApplicationConfigurationDescription) SetCatalogConfigurationDescription(v *CatalogConfigurationDescription) *ZeppelinApplicationConfigurationDescription {
+	s.CatalogConfigurationDescription = v
+	return s
+}
+
+// SetCustomArtifactsConfigurationDescription sets the CustomArtifactsConfigurationDescription field's value.
+func (s *ZeppelinApplicationConfigurationDescription) SetCustomArtifactsConfigurationDescription(v []*CustomArtifactConfigurationDescription) *ZeppelinApplicationConfigurationDescription {
+	s.CustomArtifactsConfigurationDescription = v
+	return s
+}
+
+// SetDeployAsApplicationConfigurationDescription sets the DeployAsApplicationConfigurationDescription field's value.
+func (s *ZeppelinApplicationConfigurationDescription) SetDeployAsApplicationConfigurationDescription(v *DeployAsApplicationConfigurationDescription) *ZeppelinApplicationConfigurationDescription {
+	s.DeployAsApplicationConfigurationDescription = v
+	return s
+}
+
+// SetMonitoringConfigurationDescription sets the MonitoringConfigurationDescription field's value.
+func (s *ZeppelinApplicationConfigurationDescription) SetMonitoringConfigurationDescription(v *ZeppelinMonitoringConfigurationDescription) *ZeppelinApplicationConfigurationDescription {
+	s.MonitoringConfigurationDescription = v
+	return s
+}
+
+// Updates to the configuration of Kinesis Data Analytics Studio notebook.
+type ZeppelinApplicationConfigurationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Updates to the configuration of the Amazon Glue Data Catalog that is associated
+	// with the Kinesis Data Analytics Studio notebook.
+	CatalogConfigurationUpdate *CatalogConfigurationUpdate `type:"structure"`
+
+	// Updates to the customer artifacts. Custom artifacts are dependency JAR files
+	// and user-defined functions (UDF).
+	CustomArtifactsConfigurationUpdate []*CustomArtifactConfiguration `type:"list"`
+
+	// Updates to the configuration information required to deploy an Amazon Data
+	// Analytics Studio notebook as an application with durable state.
+	DeployAsApplicationConfigurationUpdate *DeployAsApplicationConfigurationUpdate `type:"structure"`
+
+	// Updates to the monitoring configuration of a Kinesis Data Analytics Studio
+	// notebook.
+	MonitoringConfigurationUpdate *ZeppelinMonitoringConfigurationUpdate `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinApplicationConfigurationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinApplicationConfigurationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ZeppelinApplicationConfigurationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ZeppelinApplicationConfigurationUpdate"}
+	if s.CatalogConfigurationUpdate != nil {
+		if err := s.CatalogConfigurationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("CatalogConfigurationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.CustomArtifactsConfigurationUpdate != nil {
+		for i, v := range s.CustomArtifactsConfigurationUpdate {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CustomArtifactsConfigurationUpdate", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.DeployAsApplicationConfigurationUpdate != nil {
+		if err := s.DeployAsApplicationConfigurationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("DeployAsApplicationConfigurationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.MonitoringConfigurationUpdate != nil {
+		if err := s.MonitoringConfigurationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("MonitoringConfigurationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCatalogConfigurationUpdate sets the CatalogConfigurationUpdate field's value.
+func (s *ZeppelinApplicationConfigurationUpdate) SetCatalogConfigurationUpdate(v *CatalogConfigurationUpdate) *ZeppelinApplicationConfigurationUpdate {
+	s.CatalogConfigurationUpdate = v
+	return s
+}
+
+// SetCustomArtifactsConfigurationUpdate sets the CustomArtifactsConfigurationUpdate field's value.
+func (s *ZeppelinApplicationConfigurationUpdate) SetCustomArtifactsConfigurationUpdate(v []*CustomArtifactConfiguration) *ZeppelinApplicationConfigurationUpdate {
+	s.CustomArtifactsConfigurationUpdate = v
+	return s
+}
+
+// SetDeployAsApplicationConfigurationUpdate sets the DeployAsApplicationConfigurationUpdate field's value.
+func (s *ZeppelinApplicationConfigurationUpdate) SetDeployAsApplicationConfigurationUpdate(v *DeployAsApplicationConfigurationUpdate) *ZeppelinApplicationConfigurationUpdate {
+	s.DeployAsApplicationConfigurationUpdate = v
+	return s
+}
+
+// SetMonitoringConfigurationUpdate sets the MonitoringConfigurationUpdate field's value.
+func (s *ZeppelinApplicationConfigurationUpdate) SetMonitoringConfigurationUpdate(v *ZeppelinMonitoringConfigurationUpdate) *ZeppelinApplicationConfigurationUpdate {
+	s.MonitoringConfigurationUpdate = v
+	return s
+}
+
+// Describes configuration parameters for Amazon CloudWatch logging for a Kinesis
+// Data Analytics Studio notebook. For more information about CloudWatch logging,
+// see Monitoring (https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html).
+type ZeppelinMonitoringConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The verbosity of the CloudWatch Logs for an application.
+	//
+	// LogLevel is a required field
+	LogLevel *string `type:"string" required:"true" enum:"LogLevel"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinMonitoringConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinMonitoringConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ZeppelinMonitoringConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ZeppelinMonitoringConfiguration"}
+	if s.LogLevel == nil {
+		invalidParams.Add(request.NewErrParamRequired("LogLevel"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLogLevel sets the LogLevel field's value.
+func (s *ZeppelinMonitoringConfiguration) SetLogLevel(v string) *ZeppelinMonitoringConfiguration {
+	s.LogLevel = &v
+	return s
+}
+
+// The monitoring configuration for Apache Zeppelin within a Kinesis Data Analytics
+// Studio notebook.
+type ZeppelinMonitoringConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the verbosity of the CloudWatch Logs for an application.
+	LogLevel *string `type:"string" enum:"LogLevel"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinMonitoringConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinMonitoringConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// SetLogLevel sets the LogLevel field's value.
+func (s *ZeppelinMonitoringConfigurationDescription) SetLogLevel(v string) *ZeppelinMonitoringConfigurationDescription {
+	s.LogLevel = &v
+	return s
+}
+
+// Updates to the monitoring configuration for Apache Zeppelin within a Kinesis
+// Data Analytics Studio notebook.
+type ZeppelinMonitoringConfigurationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Updates to the logging level for Apache Zeppelin within a Kinesis Data Analytics
+	// Studio notebook.
+	//
+	// LogLevelUpdate is a required field
+	LogLevelUpdate *string `type:"string" required:"true" enum:"LogLevel"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinMonitoringConfigurationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZeppelinMonitoringConfigurationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ZeppelinMonitoringConfigurationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ZeppelinMonitoringConfigurationUpdate"}
+	if s.LogLevelUpdate == nil {
+		invalidParams.Add(request.NewErrParamRequired("LogLevelUpdate"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLogLevelUpdate sets the LogLevelUpdate field's value.
+func (s *ZeppelinMonitoringConfigurationUpdate) SetLogLevelUpdate(v string) *ZeppelinMonitoringConfigurationUpdate {
+	s.LogLevelUpdate = &v
+	return s
+}
+
+const (
+	// ApplicationModeStreaming is a ApplicationMode enum value
+	ApplicationModeStreaming = "STREAMING"
+
+	// ApplicationModeInteractive is a ApplicationMode enum value
+	ApplicationModeInteractive = "INTERACTIVE"
+)
+
+// ApplicationMode_Values returns all elements of the ApplicationMode enum
+func ApplicationMode_Values() []string {
+	return []string{
+		ApplicationModeStreaming,
+		ApplicationModeInteractive,
+	}
 }
 
 const (
@@ -9551,6 +15658,15 @@ const (
 	// ApplicationRestoreTypeRestoreFromCustomSnapshot is a ApplicationRestoreType enum value
 	ApplicationRestoreTypeRestoreFromCustomSnapshot = "RESTORE_FROM_CUSTOM_SNAPSHOT"
 )
+
+// ApplicationRestoreType_Values returns all elements of the ApplicationRestoreType enum
+func ApplicationRestoreType_Values() []string {
+	return []string{
+		ApplicationRestoreTypeSkipRestoreFromSnapshot,
+		ApplicationRestoreTypeRestoreFromLatestSnapshot,
+		ApplicationRestoreTypeRestoreFromCustomSnapshot,
+	}
+}
 
 const (
 	// ApplicationStatusDeleting is a ApplicationStatus enum value
@@ -9570,7 +15686,55 @@ const (
 
 	// ApplicationStatusUpdating is a ApplicationStatus enum value
 	ApplicationStatusUpdating = "UPDATING"
+
+	// ApplicationStatusAutoscaling is a ApplicationStatus enum value
+	ApplicationStatusAutoscaling = "AUTOSCALING"
+
+	// ApplicationStatusForceStopping is a ApplicationStatus enum value
+	ApplicationStatusForceStopping = "FORCE_STOPPING"
+
+	// ApplicationStatusRollingBack is a ApplicationStatus enum value
+	ApplicationStatusRollingBack = "ROLLING_BACK"
+
+	// ApplicationStatusMaintenance is a ApplicationStatus enum value
+	ApplicationStatusMaintenance = "MAINTENANCE"
+
+	// ApplicationStatusRolledBack is a ApplicationStatus enum value
+	ApplicationStatusRolledBack = "ROLLED_BACK"
 )
+
+// ApplicationStatus_Values returns all elements of the ApplicationStatus enum
+func ApplicationStatus_Values() []string {
+	return []string{
+		ApplicationStatusDeleting,
+		ApplicationStatusStarting,
+		ApplicationStatusStopping,
+		ApplicationStatusReady,
+		ApplicationStatusRunning,
+		ApplicationStatusUpdating,
+		ApplicationStatusAutoscaling,
+		ApplicationStatusForceStopping,
+		ApplicationStatusRollingBack,
+		ApplicationStatusMaintenance,
+		ApplicationStatusRolledBack,
+	}
+}
+
+const (
+	// ArtifactTypeUdf is a ArtifactType enum value
+	ArtifactTypeUdf = "UDF"
+
+	// ArtifactTypeDependencyJar is a ArtifactType enum value
+	ArtifactTypeDependencyJar = "DEPENDENCY_JAR"
+)
+
+// ArtifactType_Values returns all elements of the ArtifactType enum
+func ArtifactType_Values() []string {
+	return []string{
+		ArtifactTypeUdf,
+		ArtifactTypeDependencyJar,
+	}
+}
 
 const (
 	// CodeContentTypePlaintext is a CodeContentType enum value
@@ -9580,6 +15744,14 @@ const (
 	CodeContentTypeZipfile = "ZIPFILE"
 )
 
+// CodeContentType_Values returns all elements of the CodeContentType enum
+func CodeContentType_Values() []string {
+	return []string{
+		CodeContentTypePlaintext,
+		CodeContentTypeZipfile,
+	}
+}
+
 const (
 	// ConfigurationTypeDefault is a ConfigurationType enum value
 	ConfigurationTypeDefault = "DEFAULT"
@@ -9587,6 +15759,14 @@ const (
 	// ConfigurationTypeCustom is a ConfigurationType enum value
 	ConfigurationTypeCustom = "CUSTOM"
 )
+
+// ConfigurationType_Values returns all elements of the ConfigurationType enum
+func ConfigurationType_Values() []string {
+	return []string{
+		ConfigurationTypeDefault,
+		ConfigurationTypeCustom,
+	}
+}
 
 const (
 	// InputStartingPositionNow is a InputStartingPosition enum value
@@ -9598,6 +15778,15 @@ const (
 	// InputStartingPositionLastStoppedPoint is a InputStartingPosition enum value
 	InputStartingPositionLastStoppedPoint = "LAST_STOPPED_POINT"
 )
+
+// InputStartingPosition_Values returns all elements of the InputStartingPosition enum
+func InputStartingPosition_Values() []string {
+	return []string{
+		InputStartingPositionNow,
+		InputStartingPositionTrimHorizon,
+		InputStartingPositionLastStoppedPoint,
+	}
+}
 
 const (
 	// LogLevelInfo is a LogLevel enum value
@@ -9613,6 +15802,16 @@ const (
 	LogLevelDebug = "DEBUG"
 )
 
+// LogLevel_Values returns all elements of the LogLevel enum
+func LogLevel_Values() []string {
+	return []string{
+		LogLevelInfo,
+		LogLevelWarn,
+		LogLevelError,
+		LogLevelDebug,
+	}
+}
+
 const (
 	// MetricsLevelApplication is a MetricsLevel enum value
 	MetricsLevelApplication = "APPLICATION"
@@ -9627,6 +15826,16 @@ const (
 	MetricsLevelParallelism = "PARALLELISM"
 )
 
+// MetricsLevel_Values returns all elements of the MetricsLevel enum
+func MetricsLevel_Values() []string {
+	return []string{
+		MetricsLevelApplication,
+		MetricsLevelTask,
+		MetricsLevelOperator,
+		MetricsLevelParallelism,
+	}
+}
+
 const (
 	// RecordFormatTypeJson is a RecordFormatType enum value
 	RecordFormatTypeJson = "JSON"
@@ -9635,13 +15844,57 @@ const (
 	RecordFormatTypeCsv = "CSV"
 )
 
+// RecordFormatType_Values returns all elements of the RecordFormatType enum
+func RecordFormatType_Values() []string {
+	return []string{
+		RecordFormatTypeJson,
+		RecordFormatTypeCsv,
+	}
+}
+
 const (
 	// RuntimeEnvironmentSql10 is a RuntimeEnvironment enum value
 	RuntimeEnvironmentSql10 = "SQL-1_0"
 
 	// RuntimeEnvironmentFlink16 is a RuntimeEnvironment enum value
 	RuntimeEnvironmentFlink16 = "FLINK-1_6"
+
+	// RuntimeEnvironmentFlink18 is a RuntimeEnvironment enum value
+	RuntimeEnvironmentFlink18 = "FLINK-1_8"
+
+	// RuntimeEnvironmentZeppelinFlink10 is a RuntimeEnvironment enum value
+	RuntimeEnvironmentZeppelinFlink10 = "ZEPPELIN-FLINK-1_0"
+
+	// RuntimeEnvironmentFlink111 is a RuntimeEnvironment enum value
+	RuntimeEnvironmentFlink111 = "FLINK-1_11"
+
+	// RuntimeEnvironmentFlink113 is a RuntimeEnvironment enum value
+	RuntimeEnvironmentFlink113 = "FLINK-1_13"
+
+	// RuntimeEnvironmentZeppelinFlink20 is a RuntimeEnvironment enum value
+	RuntimeEnvironmentZeppelinFlink20 = "ZEPPELIN-FLINK-2_0"
+
+	// RuntimeEnvironmentFlink115 is a RuntimeEnvironment enum value
+	RuntimeEnvironmentFlink115 = "FLINK-1_15"
+
+	// RuntimeEnvironmentZeppelinFlink30 is a RuntimeEnvironment enum value
+	RuntimeEnvironmentZeppelinFlink30 = "ZEPPELIN-FLINK-3_0"
 )
+
+// RuntimeEnvironment_Values returns all elements of the RuntimeEnvironment enum
+func RuntimeEnvironment_Values() []string {
+	return []string{
+		RuntimeEnvironmentSql10,
+		RuntimeEnvironmentFlink16,
+		RuntimeEnvironmentFlink18,
+		RuntimeEnvironmentZeppelinFlink10,
+		RuntimeEnvironmentFlink111,
+		RuntimeEnvironmentFlink113,
+		RuntimeEnvironmentZeppelinFlink20,
+		RuntimeEnvironmentFlink115,
+		RuntimeEnvironmentZeppelinFlink30,
+	}
+}
 
 const (
 	// SnapshotStatusCreating is a SnapshotStatus enum value
@@ -9656,3 +15909,29 @@ const (
 	// SnapshotStatusFailed is a SnapshotStatus enum value
 	SnapshotStatusFailed = "FAILED"
 )
+
+// SnapshotStatus_Values returns all elements of the SnapshotStatus enum
+func SnapshotStatus_Values() []string {
+	return []string{
+		SnapshotStatusCreating,
+		SnapshotStatusReady,
+		SnapshotStatusDeleting,
+		SnapshotStatusFailed,
+	}
+}
+
+const (
+	// UrlTypeFlinkDashboardUrl is a UrlType enum value
+	UrlTypeFlinkDashboardUrl = "FLINK_DASHBOARD_URL"
+
+	// UrlTypeZeppelinUiUrl is a UrlType enum value
+	UrlTypeZeppelinUiUrl = "ZEPPELIN_UI_URL"
+)
+
+// UrlType_Values returns all elements of the UrlType enum
+func UrlType_Values() []string {
+	return []string{
+		UrlTypeFlinkDashboardUrl,
+		UrlTypeZeppelinUiUrl,
+	}
+}

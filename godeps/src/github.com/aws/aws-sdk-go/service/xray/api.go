@@ -29,14 +29,13 @@ const opBatchGetTraces = "BatchGetTraces"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetTracesRequest method.
+//	req, resp := client.BatchGetTracesRequest(params)
 //
-//    // Example sending a request using the BatchGetTracesRequest method.
-//    req, resp := client.BatchGetTracesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTraces
 func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) (req *request.Request, output *BatchGetTracesOutput) {
@@ -74,12 +73,13 @@ func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) (req *request.R
 // See the AWS API reference guide for AWS X-Ray's
 // API operation BatchGetTraces for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTraces
 func (c *XRay) BatchGetTraces(input *BatchGetTracesInput) (*BatchGetTracesOutput, error) {
@@ -111,15 +111,14 @@ func (c *XRay) BatchGetTracesWithContext(ctx aws.Context, input *BatchGetTracesI
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a BatchGetTraces operation.
-//    pageNum := 0
-//    err := client.BatchGetTracesPages(params,
-//        func(page *BatchGetTracesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a BatchGetTraces operation.
+//	pageNum := 0
+//	err := client.BatchGetTracesPages(params,
+//	    func(page *xray.BatchGetTracesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *XRay) BatchGetTracesPages(input *BatchGetTracesInput, fn func(*BatchGetTracesOutput, bool) bool) error {
 	return c.BatchGetTracesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -146,10 +145,12 @@ func (c *XRay) BatchGetTracesPagesWithContext(ctx aws.Context, input *BatchGetTr
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*BatchGetTracesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*BatchGetTracesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -169,14 +170,13 @@ const opCreateGroup = "CreateGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateGroupRequest method.
+//	req, resp := client.CreateGroupRequest(params)
 //
-//    // Example sending a request using the CreateGroupRequest method.
-//    req, resp := client.CreateGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroup
 func (c *XRay) CreateGroupRequest(input *CreateGroupInput) (req *request.Request, output *CreateGroupOutput) {
@@ -206,12 +206,13 @@ func (c *XRay) CreateGroupRequest(input *CreateGroupInput) (req *request.Request
 // See the AWS API reference guide for AWS X-Ray's
 // API operation CreateGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroup
 func (c *XRay) CreateGroup(input *CreateGroupInput) (*CreateGroupOutput, error) {
@@ -251,14 +252,13 @@ const opCreateSamplingRule = "CreateSamplingRule"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateSamplingRuleRequest method.
+//	req, resp := client.CreateSamplingRuleRequest(params)
 //
-//    // Example sending a request using the CreateSamplingRuleRequest method.
-//    req, resp := client.CreateSamplingRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRule
 func (c *XRay) CreateSamplingRuleRequest(input *CreateSamplingRuleInput) (req *request.Request, output *CreateSamplingRuleOutput) {
@@ -280,12 +280,13 @@ func (c *XRay) CreateSamplingRuleRequest(input *CreateSamplingRuleInput) (req *r
 // CreateSamplingRule API operation for AWS X-Ray.
 //
 // Creates a rule to control sampling behavior for instrumented applications.
-// Services retrieve rules with GetSamplingRules, and evaluate each rule in
-// ascending order of priority for each request. If a rule matches, the service
-// records a trace, borrowing it from the reservoir size. After 10 seconds,
-// the service reports back to X-Ray with GetSamplingTargets to get updated
-// versions of each in-use rule. The updated rule contains a trace quota that
-// the service can use instead of borrowing from the reservoir.
+// Services retrieve rules with GetSamplingRules (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html),
+// and evaluate each rule in ascending order of priority for each request. If
+// a rule matches, the service records a trace, borrowing it from the reservoir
+// size. After 10 seconds, the service reports back to X-Ray with GetSamplingTargets
+// (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html)
+// to get updated versions of each in-use rule. The updated rule contains a
+// trace quota that the service can use instead of borrowing from the reservoir.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -294,15 +295,16 @@ func (c *XRay) CreateSamplingRuleRequest(input *CreateSamplingRuleInput) (req *r
 // See the AWS API reference guide for AWS X-Ray's
 // API operation CreateSamplingRule for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
 //
-//   * ErrCodeRuleLimitExceededException "RuleLimitExceededException"
-//   You have reached the maximum number of sampling rules.
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+//   - RuleLimitExceededException
+//     You have reached the maximum number of sampling rules.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRule
 func (c *XRay) CreateSamplingRule(input *CreateSamplingRuleInput) (*CreateSamplingRuleOutput, error) {
@@ -342,14 +344,13 @@ const opDeleteGroup = "DeleteGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteGroupRequest method.
+//	req, resp := client.DeleteGroupRequest(params)
 //
-//    // Example sending a request using the DeleteGroupRequest method.
-//    req, resp := client.DeleteGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteGroup
 func (c *XRay) DeleteGroupRequest(input *DeleteGroupInput) (req *request.Request, output *DeleteGroupOutput) {
@@ -380,12 +381,13 @@ func (c *XRay) DeleteGroupRequest(input *DeleteGroupInput) (req *request.Request
 // See the AWS API reference guide for AWS X-Ray's
 // API operation DeleteGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteGroup
 func (c *XRay) DeleteGroup(input *DeleteGroupInput) (*DeleteGroupOutput, error) {
@@ -409,6 +411,94 @@ func (c *XRay) DeleteGroupWithContext(ctx aws.Context, input *DeleteGroupInput, 
 	return out, req.Send()
 }
 
+const opDeleteResourcePolicy = "DeleteResourcePolicy"
+
+// DeleteResourcePolicyRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteResourcePolicy operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteResourcePolicy for more information on using the DeleteResourcePolicy
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteResourcePolicyRequest method.
+//	req, resp := client.DeleteResourcePolicyRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteResourcePolicy
+func (c *XRay) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) (req *request.Request, output *DeleteResourcePolicyOutput) {
+	op := &request.Operation{
+		Name:       opDeleteResourcePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/DeleteResourcePolicy",
+	}
+
+	if input == nil {
+		input = &DeleteResourcePolicyInput{}
+	}
+
+	output = &DeleteResourcePolicyOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteResourcePolicy API operation for AWS X-Ray.
+//
+// Deletes a resource policy from the target Amazon Web Services account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation DeleteResourcePolicy for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - InvalidPolicyRevisionIdException
+//     A policy revision id was provided which does not match the latest policy
+//     revision. This exception is also if a policy revision id of 0 is provided
+//     via PutResourcePolicy and a policy with the same name already exists.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteResourcePolicy
+func (c *XRay) DeleteResourcePolicy(input *DeleteResourcePolicyInput) (*DeleteResourcePolicyOutput, error) {
+	req, out := c.DeleteResourcePolicyRequest(input)
+	return out, req.Send()
+}
+
+// DeleteResourcePolicyWithContext is the same as DeleteResourcePolicy with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteResourcePolicy for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) DeleteResourcePolicyWithContext(ctx aws.Context, input *DeleteResourcePolicyInput, opts ...request.Option) (*DeleteResourcePolicyOutput, error) {
+	req, out := c.DeleteResourcePolicyRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteSamplingRule = "DeleteSamplingRule"
 
 // DeleteSamplingRuleRequest generates a "aws/request.Request" representing the
@@ -425,14 +515,13 @@ const opDeleteSamplingRule = "DeleteSamplingRule"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteSamplingRuleRequest method.
+//	req, resp := client.DeleteSamplingRuleRequest(params)
 //
-//    // Example sending a request using the DeleteSamplingRuleRequest method.
-//    req, resp := client.DeleteSamplingRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteSamplingRule
 func (c *XRay) DeleteSamplingRuleRequest(input *DeleteSamplingRuleInput) (req *request.Request, output *DeleteSamplingRuleOutput) {
@@ -462,12 +551,13 @@ func (c *XRay) DeleteSamplingRuleRequest(input *DeleteSamplingRuleInput) (req *r
 // See the AWS API reference guide for AWS X-Ray's
 // API operation DeleteSamplingRule for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteSamplingRule
 func (c *XRay) DeleteSamplingRule(input *DeleteSamplingRuleInput) (*DeleteSamplingRuleOutput, error) {
@@ -507,14 +597,13 @@ const opGetEncryptionConfig = "GetEncryptionConfig"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetEncryptionConfigRequest method.
+//	req, resp := client.GetEncryptionConfigRequest(params)
 //
-//    // Example sending a request using the GetEncryptionConfigRequest method.
-//    req, resp := client.GetEncryptionConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfig
 func (c *XRay) GetEncryptionConfigRequest(input *GetEncryptionConfigInput) (req *request.Request, output *GetEncryptionConfigOutput) {
@@ -544,12 +633,13 @@ func (c *XRay) GetEncryptionConfigRequest(input *GetEncryptionConfigInput) (req 
 // See the AWS API reference guide for AWS X-Ray's
 // API operation GetEncryptionConfig for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfig
 func (c *XRay) GetEncryptionConfig(input *GetEncryptionConfigInput) (*GetEncryptionConfigOutput, error) {
@@ -589,14 +679,13 @@ const opGetGroup = "GetGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetGroupRequest method.
+//	req, resp := client.GetGroupRequest(params)
 //
-//    // Example sending a request using the GetGroupRequest method.
-//    req, resp := client.GetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroup
 func (c *XRay) GetGroupRequest(input *GetGroupInput) (req *request.Request, output *GetGroupOutput) {
@@ -626,12 +715,13 @@ func (c *XRay) GetGroupRequest(input *GetGroupInput) (req *request.Request, outp
 // See the AWS API reference guide for AWS X-Ray's
 // API operation GetGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroup
 func (c *XRay) GetGroup(input *GetGroupInput) (*GetGroupOutput, error) {
@@ -671,14 +761,13 @@ const opGetGroups = "GetGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetGroupsRequest method.
+//	req, resp := client.GetGroupsRequest(params)
 //
-//    // Example sending a request using the GetGroupsRequest method.
-//    req, resp := client.GetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroups
 func (c *XRay) GetGroupsRequest(input *GetGroupsInput) (req *request.Request, output *GetGroupsOutput) {
@@ -686,6 +775,12 @@ func (c *XRay) GetGroupsRequest(input *GetGroupsInput) (req *request.Request, ou
 		Name:       opGetGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/Groups",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -708,12 +803,13 @@ func (c *XRay) GetGroupsRequest(input *GetGroupsInput) (req *request.Request, ou
 // See the AWS API reference guide for AWS X-Ray's
 // API operation GetGroups for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroups
 func (c *XRay) GetGroups(input *GetGroupsInput) (*GetGroupsOutput, error) {
@@ -737,6 +833,506 @@ func (c *XRay) GetGroupsWithContext(ctx aws.Context, input *GetGroupsInput, opts
 	return out, req.Send()
 }
 
+// GetGroupsPages iterates over the pages of a GetGroups operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See GetGroups method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a GetGroups operation.
+//	pageNum := 0
+//	err := client.GetGroupsPages(params,
+//	    func(page *xray.GetGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *XRay) GetGroupsPages(input *GetGroupsInput, fn func(*GetGroupsOutput, bool) bool) error {
+	return c.GetGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// GetGroupsPagesWithContext same as GetGroupsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetGroupsPagesWithContext(ctx aws.Context, input *GetGroupsInput, fn func(*GetGroupsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *GetGroupsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.GetGroupsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*GetGroupsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opGetInsight = "GetInsight"
+
+// GetInsightRequest generates a "aws/request.Request" representing the
+// client's request for the GetInsight operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetInsight for more information on using the GetInsight
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetInsightRequest method.
+//	req, resp := client.GetInsightRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsight
+func (c *XRay) GetInsightRequest(input *GetInsightInput) (req *request.Request, output *GetInsightOutput) {
+	op := &request.Operation{
+		Name:       opGetInsight,
+		HTTPMethod: "POST",
+		HTTPPath:   "/Insight",
+	}
+
+	if input == nil {
+		input = &GetInsightInput{}
+	}
+
+	output = &GetInsightOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetInsight API operation for AWS X-Ray.
+//
+// Retrieves the summary information of an insight. This includes impact to
+// clients and root cause services, the top anomalous services, the category,
+// the state of the insight, and the start and end time of the insight.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation GetInsight for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsight
+func (c *XRay) GetInsight(input *GetInsightInput) (*GetInsightOutput, error) {
+	req, out := c.GetInsightRequest(input)
+	return out, req.Send()
+}
+
+// GetInsightWithContext is the same as GetInsight with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetInsight for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetInsightWithContext(ctx aws.Context, input *GetInsightInput, opts ...request.Option) (*GetInsightOutput, error) {
+	req, out := c.GetInsightRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetInsightEvents = "GetInsightEvents"
+
+// GetInsightEventsRequest generates a "aws/request.Request" representing the
+// client's request for the GetInsightEvents operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetInsightEvents for more information on using the GetInsightEvents
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetInsightEventsRequest method.
+//	req, resp := client.GetInsightEventsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightEvents
+func (c *XRay) GetInsightEventsRequest(input *GetInsightEventsInput) (req *request.Request, output *GetInsightEventsOutput) {
+	op := &request.Operation{
+		Name:       opGetInsightEvents,
+		HTTPMethod: "POST",
+		HTTPPath:   "/InsightEvents",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &GetInsightEventsInput{}
+	}
+
+	output = &GetInsightEventsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetInsightEvents API operation for AWS X-Ray.
+//
+// X-Ray reevaluates insights periodically until they're resolved, and records
+// each intermediate state as an event. You can review an insight's events in
+// the Impact Timeline on the Inspect page in the X-Ray console.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation GetInsightEvents for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightEvents
+func (c *XRay) GetInsightEvents(input *GetInsightEventsInput) (*GetInsightEventsOutput, error) {
+	req, out := c.GetInsightEventsRequest(input)
+	return out, req.Send()
+}
+
+// GetInsightEventsWithContext is the same as GetInsightEvents with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetInsightEvents for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetInsightEventsWithContext(ctx aws.Context, input *GetInsightEventsInput, opts ...request.Option) (*GetInsightEventsOutput, error) {
+	req, out := c.GetInsightEventsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// GetInsightEventsPages iterates over the pages of a GetInsightEvents operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See GetInsightEvents method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a GetInsightEvents operation.
+//	pageNum := 0
+//	err := client.GetInsightEventsPages(params,
+//	    func(page *xray.GetInsightEventsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *XRay) GetInsightEventsPages(input *GetInsightEventsInput, fn func(*GetInsightEventsOutput, bool) bool) error {
+	return c.GetInsightEventsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// GetInsightEventsPagesWithContext same as GetInsightEventsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetInsightEventsPagesWithContext(ctx aws.Context, input *GetInsightEventsInput, fn func(*GetInsightEventsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *GetInsightEventsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.GetInsightEventsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*GetInsightEventsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opGetInsightImpactGraph = "GetInsightImpactGraph"
+
+// GetInsightImpactGraphRequest generates a "aws/request.Request" representing the
+// client's request for the GetInsightImpactGraph operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetInsightImpactGraph for more information on using the GetInsightImpactGraph
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetInsightImpactGraphRequest method.
+//	req, resp := client.GetInsightImpactGraphRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightImpactGraph
+func (c *XRay) GetInsightImpactGraphRequest(input *GetInsightImpactGraphInput) (req *request.Request, output *GetInsightImpactGraphOutput) {
+	op := &request.Operation{
+		Name:       opGetInsightImpactGraph,
+		HTTPMethod: "POST",
+		HTTPPath:   "/InsightImpactGraph",
+	}
+
+	if input == nil {
+		input = &GetInsightImpactGraphInput{}
+	}
+
+	output = &GetInsightImpactGraphOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetInsightImpactGraph API operation for AWS X-Ray.
+//
+// Retrieves a service graph structure filtered by the specified insight. The
+// service graph is limited to only structural information. For a complete service
+// graph, use this API with the GetServiceGraph API.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation GetInsightImpactGraph for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightImpactGraph
+func (c *XRay) GetInsightImpactGraph(input *GetInsightImpactGraphInput) (*GetInsightImpactGraphOutput, error) {
+	req, out := c.GetInsightImpactGraphRequest(input)
+	return out, req.Send()
+}
+
+// GetInsightImpactGraphWithContext is the same as GetInsightImpactGraph with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetInsightImpactGraph for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetInsightImpactGraphWithContext(ctx aws.Context, input *GetInsightImpactGraphInput, opts ...request.Option) (*GetInsightImpactGraphOutput, error) {
+	req, out := c.GetInsightImpactGraphRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetInsightSummaries = "GetInsightSummaries"
+
+// GetInsightSummariesRequest generates a "aws/request.Request" representing the
+// client's request for the GetInsightSummaries operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetInsightSummaries for more information on using the GetInsightSummaries
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetInsightSummariesRequest method.
+//	req, resp := client.GetInsightSummariesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightSummaries
+func (c *XRay) GetInsightSummariesRequest(input *GetInsightSummariesInput) (req *request.Request, output *GetInsightSummariesOutput) {
+	op := &request.Operation{
+		Name:       opGetInsightSummaries,
+		HTTPMethod: "POST",
+		HTTPPath:   "/InsightSummaries",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &GetInsightSummariesInput{}
+	}
+
+	output = &GetInsightSummariesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetInsightSummaries API operation for AWS X-Ray.
+//
+// Retrieves the summaries of all insights in the specified group matching the
+// provided filter values.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation GetInsightSummaries for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightSummaries
+func (c *XRay) GetInsightSummaries(input *GetInsightSummariesInput) (*GetInsightSummariesOutput, error) {
+	req, out := c.GetInsightSummariesRequest(input)
+	return out, req.Send()
+}
+
+// GetInsightSummariesWithContext is the same as GetInsightSummaries with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetInsightSummaries for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetInsightSummariesWithContext(ctx aws.Context, input *GetInsightSummariesInput, opts ...request.Option) (*GetInsightSummariesOutput, error) {
+	req, out := c.GetInsightSummariesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// GetInsightSummariesPages iterates over the pages of a GetInsightSummaries operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See GetInsightSummaries method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a GetInsightSummaries operation.
+//	pageNum := 0
+//	err := client.GetInsightSummariesPages(params,
+//	    func(page *xray.GetInsightSummariesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *XRay) GetInsightSummariesPages(input *GetInsightSummariesInput, fn func(*GetInsightSummariesOutput, bool) bool) error {
+	return c.GetInsightSummariesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// GetInsightSummariesPagesWithContext same as GetInsightSummariesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetInsightSummariesPagesWithContext(ctx aws.Context, input *GetInsightSummariesInput, fn func(*GetInsightSummariesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *GetInsightSummariesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.GetInsightSummariesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*GetInsightSummariesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opGetSamplingRules = "GetSamplingRules"
 
 // GetSamplingRulesRequest generates a "aws/request.Request" representing the
@@ -753,14 +1349,13 @@ const opGetSamplingRules = "GetSamplingRules"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetSamplingRulesRequest method.
+//	req, resp := client.GetSamplingRulesRequest(params)
 //
-//    // Example sending a request using the GetSamplingRulesRequest method.
-//    req, resp := client.GetSamplingRulesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRules
 func (c *XRay) GetSamplingRulesRequest(input *GetSamplingRulesInput) (req *request.Request, output *GetSamplingRulesOutput) {
@@ -768,6 +1363,12 @@ func (c *XRay) GetSamplingRulesRequest(input *GetSamplingRulesInput) (req *reque
 		Name:       opGetSamplingRules,
 		HTTPMethod: "POST",
 		HTTPPath:   "/GetSamplingRules",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -790,12 +1391,13 @@ func (c *XRay) GetSamplingRulesRequest(input *GetSamplingRulesInput) (req *reque
 // See the AWS API reference guide for AWS X-Ray's
 // API operation GetSamplingRules for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRules
 func (c *XRay) GetSamplingRules(input *GetSamplingRulesInput) (*GetSamplingRulesOutput, error) {
@@ -819,6 +1421,57 @@ func (c *XRay) GetSamplingRulesWithContext(ctx aws.Context, input *GetSamplingRu
 	return out, req.Send()
 }
 
+// GetSamplingRulesPages iterates over the pages of a GetSamplingRules operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See GetSamplingRules method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a GetSamplingRules operation.
+//	pageNum := 0
+//	err := client.GetSamplingRulesPages(params,
+//	    func(page *xray.GetSamplingRulesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *XRay) GetSamplingRulesPages(input *GetSamplingRulesInput, fn func(*GetSamplingRulesOutput, bool) bool) error {
+	return c.GetSamplingRulesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// GetSamplingRulesPagesWithContext same as GetSamplingRulesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetSamplingRulesPagesWithContext(ctx aws.Context, input *GetSamplingRulesInput, fn func(*GetSamplingRulesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *GetSamplingRulesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.GetSamplingRulesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*GetSamplingRulesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opGetSamplingStatisticSummaries = "GetSamplingStatisticSummaries"
 
 // GetSamplingStatisticSummariesRequest generates a "aws/request.Request" representing the
@@ -835,14 +1488,13 @@ const opGetSamplingStatisticSummaries = "GetSamplingStatisticSummaries"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetSamplingStatisticSummariesRequest method.
+//	req, resp := client.GetSamplingStatisticSummariesRequest(params)
 //
-//    // Example sending a request using the GetSamplingStatisticSummariesRequest method.
-//    req, resp := client.GetSamplingStatisticSummariesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummaries
 func (c *XRay) GetSamplingStatisticSummariesRequest(input *GetSamplingStatisticSummariesInput) (req *request.Request, output *GetSamplingStatisticSummariesOutput) {
@@ -850,6 +1502,12 @@ func (c *XRay) GetSamplingStatisticSummariesRequest(input *GetSamplingStatisticS
 		Name:       opGetSamplingStatisticSummaries,
 		HTTPMethod: "POST",
 		HTTPPath:   "/SamplingStatisticSummaries",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -872,12 +1530,13 @@ func (c *XRay) GetSamplingStatisticSummariesRequest(input *GetSamplingStatisticS
 // See the AWS API reference guide for AWS X-Ray's
 // API operation GetSamplingStatisticSummaries for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummaries
 func (c *XRay) GetSamplingStatisticSummaries(input *GetSamplingStatisticSummariesInput) (*GetSamplingStatisticSummariesOutput, error) {
@@ -901,6 +1560,57 @@ func (c *XRay) GetSamplingStatisticSummariesWithContext(ctx aws.Context, input *
 	return out, req.Send()
 }
 
+// GetSamplingStatisticSummariesPages iterates over the pages of a GetSamplingStatisticSummaries operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See GetSamplingStatisticSummaries method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a GetSamplingStatisticSummaries operation.
+//	pageNum := 0
+//	err := client.GetSamplingStatisticSummariesPages(params,
+//	    func(page *xray.GetSamplingStatisticSummariesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *XRay) GetSamplingStatisticSummariesPages(input *GetSamplingStatisticSummariesInput, fn func(*GetSamplingStatisticSummariesOutput, bool) bool) error {
+	return c.GetSamplingStatisticSummariesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// GetSamplingStatisticSummariesPagesWithContext same as GetSamplingStatisticSummariesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetSamplingStatisticSummariesPagesWithContext(ctx aws.Context, input *GetSamplingStatisticSummariesInput, fn func(*GetSamplingStatisticSummariesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *GetSamplingStatisticSummariesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.GetSamplingStatisticSummariesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*GetSamplingStatisticSummariesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opGetSamplingTargets = "GetSamplingTargets"
 
 // GetSamplingTargetsRequest generates a "aws/request.Request" representing the
@@ -917,14 +1627,13 @@ const opGetSamplingTargets = "GetSamplingTargets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetSamplingTargetsRequest method.
+//	req, resp := client.GetSamplingTargetsRequest(params)
 //
-//    // Example sending a request using the GetSamplingTargetsRequest method.
-//    req, resp := client.GetSamplingTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargets
 func (c *XRay) GetSamplingTargetsRequest(input *GetSamplingTargetsInput) (req *request.Request, output *GetSamplingTargetsOutput) {
@@ -954,12 +1663,13 @@ func (c *XRay) GetSamplingTargetsRequest(input *GetSamplingTargetsInput) (req *r
 // See the AWS API reference guide for AWS X-Ray's
 // API operation GetSamplingTargets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargets
 func (c *XRay) GetSamplingTargets(input *GetSamplingTargetsInput) (*GetSamplingTargetsOutput, error) {
@@ -999,14 +1709,13 @@ const opGetServiceGraph = "GetServiceGraph"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetServiceGraphRequest method.
+//	req, resp := client.GetServiceGraphRequest(params)
 //
-//    // Example sending a request using the GetServiceGraphRequest method.
-//    req, resp := client.GetServiceGraphRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraph
 func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) (req *request.Request, output *GetServiceGraphOutput) {
@@ -1036,8 +1745,9 @@ func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) (req *request
 // Retrieves a document that describes services that process incoming requests,
 // and downstream services that they call as a result. Root services process
 // incoming requests and make calls to downstream services. Root services are
-// applications that use the AWS X-Ray SDK. Downstream services can be other
-// applications, AWS resources, HTTP web APIs, or SQL databases.
+// applications that use the Amazon Web Services X-Ray SDK (https://docs.aws.amazon.com/xray/index.html).
+// Downstream services can be other applications, Amazon Web Services resources,
+// HTTP web APIs, or SQL databases.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1046,12 +1756,13 @@ func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) (req *request
 // See the AWS API reference guide for AWS X-Ray's
 // API operation GetServiceGraph for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraph
 func (c *XRay) GetServiceGraph(input *GetServiceGraphInput) (*GetServiceGraphOutput, error) {
@@ -1083,15 +1794,14 @@ func (c *XRay) GetServiceGraphWithContext(ctx aws.Context, input *GetServiceGrap
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a GetServiceGraph operation.
-//    pageNum := 0
-//    err := client.GetServiceGraphPages(params,
-//        func(page *GetServiceGraphOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a GetServiceGraph operation.
+//	pageNum := 0
+//	err := client.GetServiceGraphPages(params,
+//	    func(page *xray.GetServiceGraphOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *XRay) GetServiceGraphPages(input *GetServiceGraphInput, fn func(*GetServiceGraphOutput, bool) bool) error {
 	return c.GetServiceGraphPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1118,10 +1828,151 @@ func (c *XRay) GetServiceGraphPagesWithContext(ctx aws.Context, input *GetServic
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetServiceGraphOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*GetServiceGraphOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
+	return p.Err()
+}
+
+const opGetTimeSeriesServiceStatistics = "GetTimeSeriesServiceStatistics"
+
+// GetTimeSeriesServiceStatisticsRequest generates a "aws/request.Request" representing the
+// client's request for the GetTimeSeriesServiceStatistics operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetTimeSeriesServiceStatistics for more information on using the GetTimeSeriesServiceStatistics
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetTimeSeriesServiceStatisticsRequest method.
+//	req, resp := client.GetTimeSeriesServiceStatisticsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTimeSeriesServiceStatistics
+func (c *XRay) GetTimeSeriesServiceStatisticsRequest(input *GetTimeSeriesServiceStatisticsInput) (req *request.Request, output *GetTimeSeriesServiceStatisticsOutput) {
+	op := &request.Operation{
+		Name:       opGetTimeSeriesServiceStatistics,
+		HTTPMethod: "POST",
+		HTTPPath:   "/TimeSeriesServiceStatistics",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &GetTimeSeriesServiceStatisticsInput{}
+	}
+
+	output = &GetTimeSeriesServiceStatisticsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetTimeSeriesServiceStatistics API operation for AWS X-Ray.
+//
+// Get an aggregation of service statistics defined by a specific time range.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation GetTimeSeriesServiceStatistics for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTimeSeriesServiceStatistics
+func (c *XRay) GetTimeSeriesServiceStatistics(input *GetTimeSeriesServiceStatisticsInput) (*GetTimeSeriesServiceStatisticsOutput, error) {
+	req, out := c.GetTimeSeriesServiceStatisticsRequest(input)
+	return out, req.Send()
+}
+
+// GetTimeSeriesServiceStatisticsWithContext is the same as GetTimeSeriesServiceStatistics with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetTimeSeriesServiceStatistics for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetTimeSeriesServiceStatisticsWithContext(ctx aws.Context, input *GetTimeSeriesServiceStatisticsInput, opts ...request.Option) (*GetTimeSeriesServiceStatisticsOutput, error) {
+	req, out := c.GetTimeSeriesServiceStatisticsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// GetTimeSeriesServiceStatisticsPages iterates over the pages of a GetTimeSeriesServiceStatistics operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See GetTimeSeriesServiceStatistics method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a GetTimeSeriesServiceStatistics operation.
+//	pageNum := 0
+//	err := client.GetTimeSeriesServiceStatisticsPages(params,
+//	    func(page *xray.GetTimeSeriesServiceStatisticsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *XRay) GetTimeSeriesServiceStatisticsPages(input *GetTimeSeriesServiceStatisticsInput, fn func(*GetTimeSeriesServiceStatisticsOutput, bool) bool) error {
+	return c.GetTimeSeriesServiceStatisticsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// GetTimeSeriesServiceStatisticsPagesWithContext same as GetTimeSeriesServiceStatisticsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) GetTimeSeriesServiceStatisticsPagesWithContext(ctx aws.Context, input *GetTimeSeriesServiceStatisticsInput, fn func(*GetTimeSeriesServiceStatisticsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *GetTimeSeriesServiceStatisticsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.GetTimeSeriesServiceStatisticsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*GetTimeSeriesServiceStatisticsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
 	return p.Err()
 }
 
@@ -1141,14 +1992,13 @@ const opGetTraceGraph = "GetTraceGraph"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetTraceGraphRequest method.
+//	req, resp := client.GetTraceGraphRequest(params)
 //
-//    // Example sending a request using the GetTraceGraphRequest method.
-//    req, resp := client.GetTraceGraphRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraph
 func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) (req *request.Request, output *GetTraceGraphOutput) {
@@ -1184,12 +2034,13 @@ func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) (req *request.Req
 // See the AWS API reference guide for AWS X-Ray's
 // API operation GetTraceGraph for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraph
 func (c *XRay) GetTraceGraph(input *GetTraceGraphInput) (*GetTraceGraphOutput, error) {
@@ -1221,15 +2072,14 @@ func (c *XRay) GetTraceGraphWithContext(ctx aws.Context, input *GetTraceGraphInp
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a GetTraceGraph operation.
-//    pageNum := 0
-//    err := client.GetTraceGraphPages(params,
-//        func(page *GetTraceGraphOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a GetTraceGraph operation.
+//	pageNum := 0
+//	err := client.GetTraceGraphPages(params,
+//	    func(page *xray.GetTraceGraphOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *XRay) GetTraceGraphPages(input *GetTraceGraphInput, fn func(*GetTraceGraphOutput, bool) bool) error {
 	return c.GetTraceGraphPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1256,10 +2106,12 @@ func (c *XRay) GetTraceGraphPagesWithContext(ctx aws.Context, input *GetTraceGra
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTraceGraphOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*GetTraceGraphOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1279,14 +2131,13 @@ const opGetTraceSummaries = "GetTraceSummaries"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetTraceSummariesRequest method.
+//	req, resp := client.GetTraceSummariesRequest(params)
 //
-//    // Example sending a request using the GetTraceSummariesRequest method.
-//    req, resp := client.GetTraceSummariesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummaries
 func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) (req *request.Request, output *GetTraceSummariesOutput) {
@@ -1313,7 +2164,7 @@ func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) (req *req
 
 // GetTraceSummaries API operation for AWS X-Ray.
 //
-// Retrieves IDs and metadata for traces available for a specified time frame
+// Retrieves IDs and annotations for traces available for a specified time frame
 // using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces.
 //
 // A filter expression can target traced requests that hit specific service
@@ -1328,8 +2179,8 @@ func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) (req *req
 // annotation.account = "12345"
 //
 // For a full list of indexed fields and keywords that you can use in filter
-// expressions, see Using Filter Expressions (http://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)
-// in the AWS X-Ray Developer Guide.
+// expressions, see Using Filter Expressions (https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)
+// in the Amazon Web Services X-Ray Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1338,12 +2189,13 @@ func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) (req *req
 // See the AWS API reference guide for AWS X-Ray's
 // API operation GetTraceSummaries for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummaries
 func (c *XRay) GetTraceSummaries(input *GetTraceSummariesInput) (*GetTraceSummariesOutput, error) {
@@ -1375,15 +2227,14 @@ func (c *XRay) GetTraceSummariesWithContext(ctx aws.Context, input *GetTraceSumm
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a GetTraceSummaries operation.
-//    pageNum := 0
-//    err := client.GetTraceSummariesPages(params,
-//        func(page *GetTraceSummariesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a GetTraceSummaries operation.
+//	pageNum := 0
+//	err := client.GetTraceSummariesPages(params,
+//	    func(page *xray.GetTraceSummariesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *XRay) GetTraceSummariesPages(input *GetTraceSummariesInput, fn func(*GetTraceSummariesOutput, bool) bool) error {
 	return c.GetTraceSummariesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1410,10 +2261,295 @@ func (c *XRay) GetTraceSummariesPagesWithContext(ctx aws.Context, input *GetTrac
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTraceSummariesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*GetTraceSummariesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
+	return p.Err()
+}
+
+const opListResourcePolicies = "ListResourcePolicies"
+
+// ListResourcePoliciesRequest generates a "aws/request.Request" representing the
+// client's request for the ListResourcePolicies operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListResourcePolicies for more information on using the ListResourcePolicies
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListResourcePoliciesRequest method.
+//	req, resp := client.ListResourcePoliciesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ListResourcePolicies
+func (c *XRay) ListResourcePoliciesRequest(input *ListResourcePoliciesInput) (req *request.Request, output *ListResourcePoliciesOutput) {
+	op := &request.Operation{
+		Name:       opListResourcePolicies,
+		HTTPMethod: "POST",
+		HTTPPath:   "/ListResourcePolicies",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListResourcePoliciesInput{}
+	}
+
+	output = &ListResourcePoliciesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListResourcePolicies API operation for AWS X-Ray.
+//
+// Returns the list of resource policies in the target Amazon Web Services account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation ListResourcePolicies for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ListResourcePolicies
+func (c *XRay) ListResourcePolicies(input *ListResourcePoliciesInput) (*ListResourcePoliciesOutput, error) {
+	req, out := c.ListResourcePoliciesRequest(input)
+	return out, req.Send()
+}
+
+// ListResourcePoliciesWithContext is the same as ListResourcePolicies with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListResourcePolicies for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) ListResourcePoliciesWithContext(ctx aws.Context, input *ListResourcePoliciesInput, opts ...request.Option) (*ListResourcePoliciesOutput, error) {
+	req, out := c.ListResourcePoliciesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListResourcePoliciesPages iterates over the pages of a ListResourcePolicies operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListResourcePolicies method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListResourcePolicies operation.
+//	pageNum := 0
+//	err := client.ListResourcePoliciesPages(params,
+//	    func(page *xray.ListResourcePoliciesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *XRay) ListResourcePoliciesPages(input *ListResourcePoliciesInput, fn func(*ListResourcePoliciesOutput, bool) bool) error {
+	return c.ListResourcePoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListResourcePoliciesPagesWithContext same as ListResourcePoliciesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) ListResourcePoliciesPagesWithContext(ctx aws.Context, input *ListResourcePoliciesInput, fn func(*ListResourcePoliciesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListResourcePoliciesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListResourcePoliciesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListResourcePoliciesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// client's request for the ListTagsForResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListTagsForResource for more information on using the ListTagsForResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ListTagsForResource
+func (c *XRay) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
+	op := &request.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/ListTagsForResource",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output = &ListTagsForResourceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListTagsForResource API operation for AWS X-Ray.
+//
+// Returns a list of tags that are applied to the specified Amazon Web Services
+// X-Ray group or sampling rule.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation ListTagsForResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+//   - ResourceNotFoundException
+//     The resource was not found. Verify that the name or Amazon Resource Name
+//     (ARN) of the resource is correct.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ListTagsForResource
+func (c *XRay) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	return out, req.Send()
+}
+
+// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListTagsForResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListTagsForResourcePages iterates over the pages of a ListTagsForResource operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListTagsForResource method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListTagsForResource operation.
+//	pageNum := 0
+//	err := client.ListTagsForResourcePages(params,
+//	    func(page *xray.ListTagsForResourceOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *XRay) ListTagsForResourcePages(input *ListTagsForResourceInput, fn func(*ListTagsForResourceOutput, bool) bool) error {
+	return c.ListTagsForResourcePagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListTagsForResourcePagesWithContext same as ListTagsForResourcePages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) ListTagsForResourcePagesWithContext(ctx aws.Context, input *ListTagsForResourceInput, fn func(*ListTagsForResourceOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListTagsForResourceInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListTagsForResourceRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListTagsForResourceOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
 	return p.Err()
 }
 
@@ -1433,14 +2569,13 @@ const opPutEncryptionConfig = "PutEncryptionConfig"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutEncryptionConfigRequest method.
+//	req, resp := client.PutEncryptionConfigRequest(params)
 //
-//    // Example sending a request using the PutEncryptionConfigRequest method.
-//    req, resp := client.PutEncryptionConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfig
 func (c *XRay) PutEncryptionConfigRequest(input *PutEncryptionConfigInput) (req *request.Request, output *PutEncryptionConfigOutput) {
@@ -1470,12 +2605,13 @@ func (c *XRay) PutEncryptionConfigRequest(input *PutEncryptionConfigInput) (req 
 // See the AWS API reference guide for AWS X-Ray's
 // API operation PutEncryptionConfig for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfig
 func (c *XRay) PutEncryptionConfig(input *PutEncryptionConfigInput) (*PutEncryptionConfigOutput, error) {
@@ -1499,6 +2635,108 @@ func (c *XRay) PutEncryptionConfigWithContext(ctx aws.Context, input *PutEncrypt
 	return out, req.Send()
 }
 
+const opPutResourcePolicy = "PutResourcePolicy"
+
+// PutResourcePolicyRequest generates a "aws/request.Request" representing the
+// client's request for the PutResourcePolicy operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See PutResourcePolicy for more information on using the PutResourcePolicy
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the PutResourcePolicyRequest method.
+//	req, resp := client.PutResourcePolicyRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutResourcePolicy
+func (c *XRay) PutResourcePolicyRequest(input *PutResourcePolicyInput) (req *request.Request, output *PutResourcePolicyOutput) {
+	op := &request.Operation{
+		Name:       opPutResourcePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/PutResourcePolicy",
+	}
+
+	if input == nil {
+		input = &PutResourcePolicyInput{}
+	}
+
+	output = &PutResourcePolicyOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// PutResourcePolicy API operation for AWS X-Ray.
+//
+// Sets the resource policy to grant one or more Amazon Web Services services
+// and accounts permissions to access X-Ray. Each resource policy will be associated
+// with a specific Amazon Web Services account. Each Amazon Web Services account
+// can have a maximum of 5 resource policies, and each policy name must be unique
+// within that account. The maximum size of each resource policy is 5KB.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation PutResourcePolicy for usage and error information.
+//
+// Returned Error Types:
+//
+//   - MalformedPolicyDocumentException
+//     Invalid policy document provided in request.
+//
+//   - LockoutPreventionException
+//     The provided resource policy would prevent the caller of this request from
+//     calling PutResourcePolicy in the future.
+//
+//   - InvalidPolicyRevisionIdException
+//     A policy revision id was provided which does not match the latest policy
+//     revision. This exception is also if a policy revision id of 0 is provided
+//     via PutResourcePolicy and a policy with the same name already exists.
+//
+//   - PolicySizeLimitExceededException
+//     Exceeded the maximum size for a resource policy.
+//
+//   - PolicyCountLimitExceededException
+//     Exceeded the maximum number of resource policies for a target Amazon Web
+//     Services account.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutResourcePolicy
+func (c *XRay) PutResourcePolicy(input *PutResourcePolicyInput) (*PutResourcePolicyOutput, error) {
+	req, out := c.PutResourcePolicyRequest(input)
+	return out, req.Send()
+}
+
+// PutResourcePolicyWithContext is the same as PutResourcePolicy with the addition of
+// the ability to pass a context and additional request options.
+//
+// See PutResourcePolicy for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) PutResourcePolicyWithContext(ctx aws.Context, input *PutResourcePolicyInput, opts ...request.Option) (*PutResourcePolicyOutput, error) {
+	req, out := c.PutResourcePolicyRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opPutTelemetryRecords = "PutTelemetryRecords"
 
 // PutTelemetryRecordsRequest generates a "aws/request.Request" representing the
@@ -1515,14 +2753,13 @@ const opPutTelemetryRecords = "PutTelemetryRecords"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutTelemetryRecordsRequest method.
+//	req, resp := client.PutTelemetryRecordsRequest(params)
 //
-//    // Example sending a request using the PutTelemetryRecordsRequest method.
-//    req, resp := client.PutTelemetryRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecords
 func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) (req *request.Request, output *PutTelemetryRecordsOutput) {
@@ -1544,7 +2781,7 @@ func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) (req 
 
 // PutTelemetryRecords API operation for AWS X-Ray.
 //
-// Used by the AWS X-Ray daemon to upload telemetry.
+// Used by the Amazon Web Services X-Ray daemon to upload telemetry.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1553,12 +2790,13 @@ func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) (req 
 // See the AWS API reference guide for AWS X-Ray's
 // API operation PutTelemetryRecords for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecords
 func (c *XRay) PutTelemetryRecords(input *PutTelemetryRecordsInput) (*PutTelemetryRecordsOutput, error) {
@@ -1598,14 +2836,13 @@ const opPutTraceSegments = "PutTraceSegments"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutTraceSegmentsRequest method.
+//	req, resp := client.PutTraceSegmentsRequest(params)
 //
-//    // Example sending a request using the PutTraceSegmentsRequest method.
-//    req, resp := client.PutTraceSegmentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegments
 func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) (req *request.Request, output *PutTraceSegmentsOutput) {
@@ -1626,52 +2863,51 @@ func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) (req *reque
 
 // PutTraceSegments API operation for AWS X-Ray.
 //
-// Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents
-// and sends them to the X-Ray daemon, which uploads them in batches. A segment
-// document can be a completed segment, an in-progress segment, or an array
-// of subsegments.
+// Uploads segment documents to Amazon Web Services X-Ray. The X-Ray SDK (https://docs.aws.amazon.com/xray/index.html)
+// generates segment documents and sends them to the X-Ray daemon, which uploads
+// them in batches. A segment document can be a completed segment, an in-progress
+// segment, or an array of subsegments.
 //
 // Segments must include the following fields. For the full segment document
-// schema, see AWS X-Ray Segment Documents (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
-// in the AWS X-Ray Developer Guide.
+// schema, see Amazon Web Services X-Ray Segment Documents (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
+// in the Amazon Web Services X-Ray Developer Guide.
 //
-// Required Segment Document Fields
+// Required segment document fields
 //
-//    * name - The name of the service that handled the request.
+//   - name - The name of the service that handled the request.
 //
-//    * id - A 64-bit identifier for the segment, unique among segments in the
-//    same trace, in 16 hexadecimal digits.
+//   - id - A 64-bit identifier for the segment, unique among segments in the
+//     same trace, in 16 hexadecimal digits.
 //
-//    * trace_id - A unique identifier that connects all segments and subsegments
-//    originating from a single client request.
+//   - trace_id - A unique identifier that connects all segments and subsegments
+//     originating from a single client request.
 //
-//    * start_time - Time the segment or subsegment was created, in floating
-//    point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010
-//    or 1.480615200010E9.
+//   - start_time - Time the segment or subsegment was created, in floating
+//     point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010
+//     or 1.480615200010E9.
 //
-//    * end_time - Time the segment or subsegment was closed. For example, 1480615200.090
-//    or 1.480615200090E9. Specify either an end_time or in_progress.
+//   - end_time - Time the segment or subsegment was closed. For example, 1480615200.090
+//     or 1.480615200090E9. Specify either an end_time or in_progress.
 //
-//    * in_progress - Set to true instead of specifying an end_time to record
-//    that a segment has been started, but is not complete. Send an in progress
-//    segment when your application receives a request that will take a long
-//    time to serve, to trace the fact that the request was received. When the
-//    response is sent, send the complete segment to overwrite the in-progress
-//    segment.
+//   - in_progress - Set to true instead of specifying an end_time to record
+//     that a segment has been started, but is not complete. Send an in-progress
+//     segment when your application receives a request that will take a long
+//     time to serve, to trace that the request was received. When the response
+//     is sent, send the complete segment to overwrite the in-progress segment.
 //
 // A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979.
 // This includes:
 //
 // Trace ID Format
 //
-//    * The version number, i.e. 1.
+//   - The version number, for instance, 1.
 //
-//    * The time of the original request, in Unix epoch time, in 8 hexadecimal
-//    digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200
-//    seconds, or 58406520 in hexadecimal.
+//   - The time of the original request, in Unix epoch time, in 8 hexadecimal
+//     digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200
+//     seconds, or 58406520 in hexadecimal.
 //
-//    * A 96-bit identifier for the trace, globally unique, in 24 hexadecimal
-//    digits.
+//   - A 96-bit identifier for the trace, globally unique, in 24 hexadecimal
+//     digits.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1680,12 +2916,13 @@ func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) (req *reque
 // See the AWS API reference guide for AWS X-Ray's
 // API operation PutTraceSegments for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegments
 func (c *XRay) PutTraceSegments(input *PutTraceSegmentsInput) (*PutTraceSegmentsOutput, error) {
@@ -1709,6 +2946,184 @@ func (c *XRay) PutTraceSegmentsWithContext(ctx aws.Context, input *PutTraceSegme
 	return out, req.Send()
 }
 
+const opTagResource = "TagResource"
+
+// TagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the TagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See TagResource for more information on using the TagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the TagResourceRequest method.
+//	req, resp := client.TagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TagResource
+func (c *XRay) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
+	op := &request.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/TagResource",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output = &TagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// TagResource API operation for AWS X-Ray.
+//
+// Applies tags to an existing Amazon Web Services X-Ray group or sampling rule.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation TagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+//   - ResourceNotFoundException
+//     The resource was not found. Verify that the name or Amazon Resource Name
+//     (ARN) of the resource is correct.
+//
+//   - TooManyTagsException
+//     You have exceeded the maximum number of tags you can apply to this resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TagResource
+func (c *XRay) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	return out, req.Send()
+}
+
+// TagResourceWithContext is the same as TagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See TagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the UntagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UntagResource for more information on using the UntagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UntagResourceRequest method.
+//	req, resp := client.UntagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UntagResource
+func (c *XRay) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
+	op := &request.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/UntagResource",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output = &UntagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UntagResource API operation for AWS X-Ray.
+//
+// Removes tags from an Amazon Web Services X-Ray group or sampling rule. You
+// cannot edit or delete system tags (those with an aws: prefix).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS X-Ray's
+// API operation UntagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
+//
+//   - ResourceNotFoundException
+//     The resource was not found. Verify that the name or Amazon Resource Name
+//     (ARN) of the resource is correct.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UntagResource
+func (c *XRay) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	return out, req.Send()
+}
+
+// UntagResourceWithContext is the same as UntagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UntagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *XRay) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateGroup = "UpdateGroup"
 
 // UpdateGroupRequest generates a "aws/request.Request" representing the
@@ -1725,14 +3140,13 @@ const opUpdateGroup = "UpdateGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateGroupRequest method.
+//	req, resp := client.UpdateGroupRequest(params)
 //
-//    // Example sending a request using the UpdateGroupRequest method.
-//    req, resp := client.UpdateGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroup
 func (c *XRay) UpdateGroupRequest(input *UpdateGroupInput) (req *request.Request, output *UpdateGroupOutput) {
@@ -1762,12 +3176,13 @@ func (c *XRay) UpdateGroupRequest(input *UpdateGroupInput) (req *request.Request
 // See the AWS API reference guide for AWS X-Ray's
 // API operation UpdateGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroup
 func (c *XRay) UpdateGroup(input *UpdateGroupInput) (*UpdateGroupOutput, error) {
@@ -1807,14 +3222,13 @@ const opUpdateSamplingRule = "UpdateSamplingRule"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateSamplingRuleRequest method.
+//	req, resp := client.UpdateSamplingRuleRequest(params)
 //
-//    // Example sending a request using the UpdateSamplingRuleRequest method.
-//    req, resp := client.UpdateSamplingRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateSamplingRule
 func (c *XRay) UpdateSamplingRuleRequest(input *UpdateSamplingRuleInput) (req *request.Request, output *UpdateSamplingRuleOutput) {
@@ -1844,12 +3258,13 @@ func (c *XRay) UpdateSamplingRuleRequest(input *UpdateSamplingRuleInput) (req *r
 // See the AWS API reference guide for AWS X-Ray's
 // API operation UpdateSamplingRule for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   The request is missing required parameters or has invalid parameters.
+// Returned Error Types:
 //
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request exceeds the maximum number of requests per second.
+//   - InvalidRequestException
+//     The request is missing required parameters or has invalid parameters.
+//
+//   - ThrottledException
+//     The request exceeds the maximum number of requests per second.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateSamplingRule
 func (c *XRay) UpdateSamplingRule(input *UpdateSamplingRuleInput) (*UpdateSamplingRuleOutput, error) {
@@ -1887,12 +3302,20 @@ type Alias struct {
 	Type *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Alias) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Alias) GoString() string {
 	return s.String()
 }
@@ -1915,7 +3338,7 @@ func (s *Alias) SetType(v string) *Alias {
 	return s
 }
 
-// Value of a segment annotation. Has one of three value types: Number, Boolean
+// Value of a segment annotation. Has one of three value types: Number, Boolean,
 // or String.
 type AnnotationValue struct {
 	_ struct{} `type:"structure"`
@@ -1930,12 +3353,20 @@ type AnnotationValue struct {
 	StringValue *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AnnotationValue) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AnnotationValue) GoString() string {
 	return s.String()
 }
@@ -1958,20 +3389,59 @@ func (s *AnnotationValue) SetStringValue(v string) *AnnotationValue {
 	return s
 }
 
-// A list of availability zones corresponding to the segments in a trace.
+// The service within the service graph that has anomalously high fault rates.
+type AnomalousService struct {
+	_ struct{} `type:"structure"`
+
+	ServiceId *ServiceId `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AnomalousService) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AnomalousService) GoString() string {
+	return s.String()
+}
+
+// SetServiceId sets the ServiceId field's value.
+func (s *AnomalousService) SetServiceId(v *ServiceId) *AnomalousService {
+	s.ServiceId = v
+	return s
+}
+
+// A list of Availability Zones corresponding to the segments in a trace.
 type AvailabilityZoneDetail struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a corresponding availability zone.
+	// The name of a corresponding Availability Zone.
 	Name *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AvailabilityZoneDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AvailabilityZoneDetail) GoString() string {
 	return s.String()
 }
@@ -1998,12 +3468,20 @@ type BackendConnectionErrors struct {
 	UnknownHostCount *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BackendConnectionErrors) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BackendConnectionErrors) GoString() string {
 	return s.String()
 }
@@ -2047,7 +3525,7 @@ func (s *BackendConnectionErrors) SetUnknownHostCount(v int64) *BackendConnectio
 type BatchGetTracesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// Specify the trace IDs of requests for which to retrieve segments.
@@ -2056,12 +3534,20 @@ type BatchGetTracesInput struct {
 	TraceIds []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetTracesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetTracesInput) GoString() string {
 	return s.String()
 }
@@ -2094,7 +3580,7 @@ func (s *BatchGetTracesInput) SetTraceIds(v []*string) *BatchGetTracesInput {
 type BatchGetTracesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// Full traces for the specified requests.
@@ -2104,12 +3590,20 @@ type BatchGetTracesOutput struct {
 	UnprocessedTraceIds []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetTracesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetTracesOutput) GoString() string {
 	return s.String()
 }
@@ -2136,21 +3630,61 @@ type CreateGroupInput struct {
 	_ struct{} `type:"structure"`
 
 	// The filter expression defining criteria by which to group traces.
-	FilterExpression *string `min:"1" type:"string"`
+	FilterExpression *string `type:"string"`
 
 	// The case-sensitive name of the new group. Default is a reserved name and
 	// names must be unique.
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
+
+	// The structure containing configurations related to insights.
+	//
+	//    * The InsightsEnabled boolean can be set to true to enable insights for
+	//    the new group or false to disable insights for the new group.
+	//
+	//    * The NotificationsEnabled boolean can be set to true to enable insights
+	//    notifications for the new group. Notifications may only be enabled on
+	//    a group with InsightsEnabled set to true.
+	InsightsConfiguration *InsightsConfiguration `type:"structure"`
+
+	// A map that contains one or more tag keys and tag values to attach to an X-Ray
+	// group. For more information about ways to use tags, see Tagging Amazon Web
+	// Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference.
+	//
+	// The following restrictions apply to tags:
+	//
+	//    * Maximum number of user-applied tags per resource: 50
+	//
+	//    * Maximum tag key length: 128 Unicode characters
+	//
+	//    * Maximum tag value length: 256 Unicode characters
+	//
+	//    * Valid values for key and value: a-z, A-Z, 0-9, space, and the following
+	//    characters: _ . : / = + - and @
+	//
+	//    * Tag keys and values are case sensitive.
+	//
+	//    * Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services
+	//    use.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateGroupInput) GoString() string {
 	return s.String()
 }
@@ -2158,14 +3692,21 @@ func (s CreateGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGroupInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CreateGroupInput"}
-	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterExpression", 1))
-	}
 	if s.GroupName == nil {
 		invalidParams.Add(request.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2186,21 +3727,42 @@ func (s *CreateGroupInput) SetGroupName(v string) *CreateGroupInput {
 	return s
 }
 
+// SetInsightsConfiguration sets the InsightsConfiguration field's value.
+func (s *CreateGroupInput) SetInsightsConfiguration(v *InsightsConfiguration) *CreateGroupInput {
+	s.InsightsConfiguration = v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateGroupInput) SetTags(v []*Tag) *CreateGroupInput {
+	s.Tags = v
+	return s
+}
+
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The group that was created. Contains the name of the group that was created,
-	// the ARN of the group that was generated based on the group name, and the
-	// filter expression that was assigned to the group.
+	// the Amazon Resource Name (ARN) of the group that was generated based on the
+	// group name, the filter expression, and the insight configuration that was
+	// assigned to the group.
 	Group *Group `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateGroupOutput) GoString() string {
 	return s.String()
 }
@@ -2218,14 +3780,44 @@ type CreateSamplingRuleInput struct {
 	//
 	// SamplingRule is a required field
 	SamplingRule *SamplingRule `type:"structure" required:"true"`
+
+	// A map that contains one or more tag keys and tag values to attach to an X-Ray
+	// sampling rule. For more information about ways to use tags, see Tagging Amazon
+	// Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference.
+	//
+	// The following restrictions apply to tags:
+	//
+	//    * Maximum number of user-applied tags per resource: 50
+	//
+	//    * Maximum tag key length: 128 Unicode characters
+	//
+	//    * Maximum tag value length: 256 Unicode characters
+	//
+	//    * Valid values for key and value: a-z, A-Z, 0-9, space, and the following
+	//    characters: _ . : / = + - and @
+	//
+	//    * Tag keys and values are case sensitive.
+	//
+	//    * Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services
+	//    use.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSamplingRuleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSamplingRuleInput) GoString() string {
 	return s.String()
 }
@@ -2241,6 +3833,16 @@ func (s *CreateSamplingRuleInput) Validate() error {
 			invalidParams.AddNested("SamplingRule", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2254,6 +3856,12 @@ func (s *CreateSamplingRuleInput) SetSamplingRule(v *SamplingRule) *CreateSampli
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateSamplingRuleInput) SetTags(v []*Tag) *CreateSamplingRuleInput {
+	s.Tags = v
+	return s
+}
+
 type CreateSamplingRuleOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2261,12 +3869,20 @@ type CreateSamplingRuleOutput struct {
 	SamplingRuleRecord *SamplingRuleRecord `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSamplingRuleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSamplingRuleOutput) GoString() string {
 	return s.String()
 }
@@ -2287,12 +3903,20 @@ type DeleteGroupInput struct {
 	GroupName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteGroupInput) GoString() string {
 	return s.String()
 }
@@ -2329,13 +3953,104 @@ type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteGroupOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteResourcePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the resource policy to delete.
+	//
+	// PolicyName is a required field
+	PolicyName *string `min:"1" type:"string" required:"true"`
+
+	// Specifies a specific policy revision to delete. Provide a PolicyRevisionId
+	// to ensure an atomic delete operation. If the provided revision id does not
+	// match the latest policy revision id, an InvalidPolicyRevisionIdException
+	// exception is returned.
+	PolicyRevisionId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteResourcePolicyInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteResourcePolicyInput"}
+	if s.PolicyName == nil {
+		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+	}
+	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetPolicyName sets the PolicyName field's value.
+func (s *DeleteResourcePolicyInput) SetPolicyName(v string) *DeleteResourcePolicyInput {
+	s.PolicyName = &v
+	return s
+}
+
+// SetPolicyRevisionId sets the PolicyRevisionId field's value.
+func (s *DeleteResourcePolicyInput) SetPolicyRevisionId(v string) *DeleteResourcePolicyInput {
+	s.PolicyRevisionId = &v
+	return s
+}
+
+type DeleteResourcePolicyOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcePolicyOutput) GoString() string {
 	return s.String()
 }
 
@@ -2351,12 +4066,20 @@ type DeleteSamplingRuleInput struct {
 	RuleName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSamplingRuleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSamplingRuleInput) GoString() string {
 	return s.String()
 }
@@ -2380,12 +4103,20 @@ type DeleteSamplingRuleOutput struct {
 	SamplingRuleRecord *SamplingRuleRecord `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSamplingRuleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSamplingRuleOutput) GoString() string {
 	return s.String()
 }
@@ -2396,20 +4127,31 @@ func (s *DeleteSamplingRuleOutput) SetSamplingRuleRecord(v *SamplingRuleRecord) 
 	return s
 }
 
-// Information about a connection between two services.
+// Information about a connection between two services. An edge can be a synchronous
+// connection, such as typical call between client and service, or an asynchronous
+// link, such as a Lambda function which retrieves an event from an SNS queue.
 type Edge struct {
 	_ struct{} `type:"structure"`
 
 	// Aliases for the edge.
 	Aliases []*Alias `type:"list"`
 
+	// Describes an asynchronous connection, with a value of link.
+	EdgeType *string `type:"string"`
+
 	// The end time of the last segment on the edge.
 	EndTime *time.Time `type:"timestamp"`
+
+	// A histogram that maps the spread of event age when received by consumers.
+	// Age is calculated each time an event is received. Only populated when EdgeType
+	// is link.
+	ReceivedEventAgeHistogram []*HistogramEntry `type:"list"`
 
 	// Identifier of the edge. Unique within a service map.
 	ReferenceId *int64 `type:"integer"`
 
-	// A histogram that maps the spread of client response times on an edge.
+	// A histogram that maps the spread of client response times on an edge. Only
+	// populated for synchronous edges.
 	ResponseTimeHistogram []*HistogramEntry `type:"list"`
 
 	// The start time of the first segment on the edge.
@@ -2419,12 +4161,20 @@ type Edge struct {
 	SummaryStatistics *EdgeStatistics `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Edge) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Edge) GoString() string {
 	return s.String()
 }
@@ -2435,9 +4185,21 @@ func (s *Edge) SetAliases(v []*Alias) *Edge {
 	return s
 }
 
+// SetEdgeType sets the EdgeType field's value.
+func (s *Edge) SetEdgeType(v string) *Edge {
+	s.EdgeType = &v
+	return s
+}
+
 // SetEndTime sets the EndTime field's value.
 func (s *Edge) SetEndTime(v time.Time) *Edge {
 	s.EndTime = &v
+	return s
+}
+
+// SetReceivedEventAgeHistogram sets the ReceivedEventAgeHistogram field's value.
+func (s *Edge) SetReceivedEventAgeHistogram(v []*HistogramEntry) *Edge {
+	s.ReceivedEventAgeHistogram = v
 	return s
 }
 
@@ -2485,12 +4247,20 @@ type EdgeStatistics struct {
 	TotalResponseTime *float64 `type:"double"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EdgeStatistics) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EdgeStatistics) GoString() string {
 	return s.String()
 }
@@ -2529,24 +4299,32 @@ func (s *EdgeStatistics) SetTotalResponseTime(v float64) *EdgeStatistics {
 type EncryptionConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the customer master key (CMK) used for encryption, if applicable.
+	// The ID of the KMS key used for encryption, if applicable.
 	KeyId *string `type:"string"`
 
 	// The encryption status. While the status is UPDATING, X-Ray may encrypt data
 	// with a combination of the new and old settings.
 	Status *string `type:"string" enum:"EncryptionStatus"`
 
-	// The type of encryption. Set to KMS for encryption with CMKs. Set to NONE
+	// The type of encryption. Set to KMS for encryption with KMS keys. Set to NONE
 	// for default encryption.
 	Type *string `type:"string" enum:"EncryptionType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EncryptionConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EncryptionConfig) GoString() string {
 	return s.String()
 }
@@ -2573,19 +4351,36 @@ func (s *EncryptionConfig) SetType(v string) *EncryptionConfig {
 type ErrorRootCause struct {
 	_ struct{} `type:"structure"`
 
+	// A flag that denotes that the root cause impacts the trace client.
+	ClientImpacting *bool `type:"boolean"`
+
 	// A list of services corresponding to an error. A service identifies a segment
 	// and it contains a name, account ID, type, and inferred flag.
 	Services []*ErrorRootCauseService `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorRootCause) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorRootCause) GoString() string {
 	return s.String()
+}
+
+// SetClientImpacting sets the ClientImpacting field's value.
+func (s *ErrorRootCause) SetClientImpacting(v bool) *ErrorRootCause {
+	s.ClientImpacting = &v
+	return s
 }
 
 // SetServices sets the Services field's value.
@@ -2609,12 +4404,20 @@ type ErrorRootCauseEntity struct {
 	Remote *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorRootCauseEntity) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorRootCauseEntity) GoString() string {
 	return s.String()
 }
@@ -2660,12 +4463,20 @@ type ErrorRootCauseService struct {
 	Type *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorRootCauseService) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorRootCauseService) GoString() string {
 	return s.String()
 }
@@ -2721,12 +4532,20 @@ type ErrorStatistics struct {
 	TotalCount *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorStatistics) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorStatistics) GoString() string {
 	return s.String()
 }
@@ -2753,19 +4572,36 @@ func (s *ErrorStatistics) SetTotalCount(v int64) *ErrorStatistics {
 type FaultRootCause struct {
 	_ struct{} `type:"structure"`
 
+	// A flag that denotes that the root cause impacts the trace client.
+	ClientImpacting *bool `type:"boolean"`
+
 	// A list of corresponding services. A service identifies a segment and it contains
 	// a name, account ID, type, and inferred flag.
 	Services []*FaultRootCauseService `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FaultRootCause) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FaultRootCause) GoString() string {
 	return s.String()
+}
+
+// SetClientImpacting sets the ClientImpacting field's value.
+func (s *FaultRootCause) SetClientImpacting(v bool) *FaultRootCause {
+	s.ClientImpacting = &v
+	return s
 }
 
 // SetServices sets the Services field's value.
@@ -2789,12 +4625,20 @@ type FaultRootCauseEntity struct {
 	Remote *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FaultRootCauseEntity) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FaultRootCauseEntity) GoString() string {
 	return s.String()
 }
@@ -2840,12 +4684,20 @@ type FaultRootCauseService struct {
 	Type *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FaultRootCauseService) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FaultRootCauseService) GoString() string {
 	return s.String()
 }
@@ -2898,12 +4750,20 @@ type FaultStatistics struct {
 	TotalCount *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FaultStatistics) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FaultStatistics) GoString() string {
 	return s.String()
 }
@@ -2920,16 +4780,66 @@ func (s *FaultStatistics) SetTotalCount(v int64) *FaultStatistics {
 	return s
 }
 
-type GetEncryptionConfigInput struct {
+// The predicted high and low fault count. This is used to determine if a service
+// has become anomalous and if an insight should be created.
+type ForecastStatistics struct {
 	_ struct{} `type:"structure"`
+
+	// The upper limit of fault counts for a service.
+	FaultCountHigh *int64 `type:"long"`
+
+	// The lower limit of fault counts for a service.
+	FaultCountLow *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ForecastStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ForecastStatistics) GoString() string {
+	return s.String()
+}
+
+// SetFaultCountHigh sets the FaultCountHigh field's value.
+func (s *ForecastStatistics) SetFaultCountHigh(v int64) *ForecastStatistics {
+	s.FaultCountHigh = &v
+	return s
+}
+
+// SetFaultCountLow sets the FaultCountLow field's value.
+func (s *ForecastStatistics) SetFaultCountLow(v int64) *ForecastStatistics {
+	s.FaultCountLow = &v
+	return s
+}
+
+type GetEncryptionConfigInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEncryptionConfigInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEncryptionConfigInput) GoString() string {
 	return s.String()
 }
@@ -2941,12 +4851,20 @@ type GetEncryptionConfigOutput struct {
 	EncryptionConfig *EncryptionConfig `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEncryptionConfigOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEncryptionConfigOutput) GoString() string {
 	return s.String()
 }
@@ -2967,12 +4885,20 @@ type GetGroupInput struct {
 	GroupName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetGroupInput) GoString() string {
 	return s.String()
 }
@@ -3009,16 +4935,25 @@ type GetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The group that was requested. Contains the name of the group, the ARN of
-	// the group, and the filter expression that assigned to the group.
+	// the group, the filter expression, and the insight configuration assigned
+	// to the group.
 	Group *Group `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetGroupOutput) GoString() string {
 	return s.String()
 }
@@ -3032,16 +4967,24 @@ func (s *GetGroupOutput) SetGroup(v *Group) *GetGroupOutput {
 type GetGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetGroupsInput) GoString() string {
 	return s.String()
 }
@@ -3071,16 +5014,24 @@ type GetGroupsOutput struct {
 	// The collection of all active groups.
 	Groups []*GroupSummary `type:"list"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetGroupsOutput) GoString() string {
 	return s.String()
 }
@@ -3097,19 +5048,558 @@ func (s *GetGroupsOutput) SetNextToken(v string) *GetGroupsOutput {
 	return s
 }
 
+type GetInsightEventsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The insight's unique identifier. Use the GetInsightSummaries action to retrieve
+	// an InsightId.
+	//
+	// InsightId is a required field
+	InsightId *string `type:"string" required:"true"`
+
+	// Used to retrieve at most the specified value of events.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// Specify the pagination token returned by a previous request to retrieve the
+	// next page of events.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightEventsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightEventsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetInsightEventsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetInsightEventsInput"}
+	if s.InsightId == nil {
+		invalidParams.Add(request.NewErrParamRequired("InsightId"))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetInsightId sets the InsightId field's value.
+func (s *GetInsightEventsInput) SetInsightId(v string) *GetInsightEventsInput {
+	s.InsightId = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *GetInsightEventsInput) SetMaxResults(v int64) *GetInsightEventsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetInsightEventsInput) SetNextToken(v string) *GetInsightEventsInput {
+	s.NextToken = &v
+	return s
+}
+
+type GetInsightEventsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A detailed description of the event. This includes the time of the event,
+	// client and root cause impact statistics, and the top anomalous service at
+	// the time of the event.
+	InsightEvents []*InsightEvent `type:"list"`
+
+	// Use this token to retrieve the next page of insight events.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightEventsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightEventsOutput) GoString() string {
+	return s.String()
+}
+
+// SetInsightEvents sets the InsightEvents field's value.
+func (s *GetInsightEventsOutput) SetInsightEvents(v []*InsightEvent) *GetInsightEventsOutput {
+	s.InsightEvents = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetInsightEventsOutput) SetNextToken(v string) *GetInsightEventsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type GetInsightImpactGraphInput struct {
+	_ struct{} `type:"structure"`
+
+	// The estimated end time of the insight, in Unix time seconds. The EndTime
+	// is exclusive of the value provided. The time range between the start time
+	// and end time can't be more than six hours.
+	//
+	// EndTime is a required field
+	EndTime *time.Time `type:"timestamp" required:"true"`
+
+	// The insight's unique identifier. Use the GetInsightSummaries action to retrieve
+	// an InsightId.
+	//
+	// InsightId is a required field
+	InsightId *string `type:"string" required:"true"`
+
+	// Specify the pagination token returned by a previous request to retrieve the
+	// next page of results.
+	NextToken *string `min:"1" type:"string"`
+
+	// The estimated start time of the insight, in Unix time seconds. The StartTime
+	// is inclusive of the value provided and can't be more than 30 days old.
+	//
+	// StartTime is a required field
+	StartTime *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightImpactGraphInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightImpactGraphInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetInsightImpactGraphInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetInsightImpactGraphInput"}
+	if s.EndTime == nil {
+		invalidParams.Add(request.NewErrParamRequired("EndTime"))
+	}
+	if s.InsightId == nil {
+		invalidParams.Add(request.NewErrParamRequired("InsightId"))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.StartTime == nil {
+		invalidParams.Add(request.NewErrParamRequired("StartTime"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEndTime sets the EndTime field's value.
+func (s *GetInsightImpactGraphInput) SetEndTime(v time.Time) *GetInsightImpactGraphInput {
+	s.EndTime = &v
+	return s
+}
+
+// SetInsightId sets the InsightId field's value.
+func (s *GetInsightImpactGraphInput) SetInsightId(v string) *GetInsightImpactGraphInput {
+	s.InsightId = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetInsightImpactGraphInput) SetNextToken(v string) *GetInsightImpactGraphInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *GetInsightImpactGraphInput) SetStartTime(v time.Time) *GetInsightImpactGraphInput {
+	s.StartTime = &v
+	return s
+}
+
+type GetInsightImpactGraphOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The provided end time.
+	EndTime *time.Time `type:"timestamp"`
+
+	// The insight's unique identifier.
+	InsightId *string `type:"string"`
+
+	// Pagination token.
+	NextToken *string `min:"1" type:"string"`
+
+	// The time, in Unix seconds, at which the service graph ended.
+	ServiceGraphEndTime *time.Time `type:"timestamp"`
+
+	// The time, in Unix seconds, at which the service graph started.
+	ServiceGraphStartTime *time.Time `type:"timestamp"`
+
+	// The Amazon Web Services instrumented services related to the insight.
+	Services []*InsightImpactGraphService `type:"list"`
+
+	// The provided start time.
+	StartTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightImpactGraphOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightImpactGraphOutput) GoString() string {
+	return s.String()
+}
+
+// SetEndTime sets the EndTime field's value.
+func (s *GetInsightImpactGraphOutput) SetEndTime(v time.Time) *GetInsightImpactGraphOutput {
+	s.EndTime = &v
+	return s
+}
+
+// SetInsightId sets the InsightId field's value.
+func (s *GetInsightImpactGraphOutput) SetInsightId(v string) *GetInsightImpactGraphOutput {
+	s.InsightId = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetInsightImpactGraphOutput) SetNextToken(v string) *GetInsightImpactGraphOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetServiceGraphEndTime sets the ServiceGraphEndTime field's value.
+func (s *GetInsightImpactGraphOutput) SetServiceGraphEndTime(v time.Time) *GetInsightImpactGraphOutput {
+	s.ServiceGraphEndTime = &v
+	return s
+}
+
+// SetServiceGraphStartTime sets the ServiceGraphStartTime field's value.
+func (s *GetInsightImpactGraphOutput) SetServiceGraphStartTime(v time.Time) *GetInsightImpactGraphOutput {
+	s.ServiceGraphStartTime = &v
+	return s
+}
+
+// SetServices sets the Services field's value.
+func (s *GetInsightImpactGraphOutput) SetServices(v []*InsightImpactGraphService) *GetInsightImpactGraphOutput {
+	s.Services = v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *GetInsightImpactGraphOutput) SetStartTime(v time.Time) *GetInsightImpactGraphOutput {
+	s.StartTime = &v
+	return s
+}
+
+type GetInsightInput struct {
+	_ struct{} `type:"structure"`
+
+	// The insight's unique identifier. Use the GetInsightSummaries action to retrieve
+	// an InsightId.
+	//
+	// InsightId is a required field
+	InsightId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetInsightInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetInsightInput"}
+	if s.InsightId == nil {
+		invalidParams.Add(request.NewErrParamRequired("InsightId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetInsightId sets the InsightId field's value.
+func (s *GetInsightInput) SetInsightId(v string) *GetInsightInput {
+	s.InsightId = &v
+	return s
+}
+
+type GetInsightOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The summary information of an insight.
+	Insight *Insight `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightOutput) GoString() string {
+	return s.String()
+}
+
+// SetInsight sets the Insight field's value.
+func (s *GetInsightOutput) SetInsight(v *Insight) *GetInsightOutput {
+	s.Insight = v
+	return s
+}
+
+type GetInsightSummariesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The end of the time frame in which the insights ended. The end time can't
+	// be more than 30 days old.
+	//
+	// EndTime is a required field
+	EndTime *time.Time `type:"timestamp" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the group. Required if the GroupName isn't
+	// provided.
+	GroupARN *string `min:"1" type:"string"`
+
+	// The name of the group. Required if the GroupARN isn't provided.
+	GroupName *string `min:"1" type:"string"`
+
+	// The maximum number of results to display.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// Pagination token.
+	NextToken *string `min:"1" type:"string"`
+
+	// The beginning of the time frame in which the insights started. The start
+	// time can't be more than 30 days old.
+	//
+	// StartTime is a required field
+	StartTime *time.Time `type:"timestamp" required:"true"`
+
+	// The list of insight states.
+	States []*string `type:"list" enum:"InsightState"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightSummariesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightSummariesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetInsightSummariesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetInsightSummariesInput"}
+	if s.EndTime == nil {
+		invalidParams.Add(request.NewErrParamRequired("EndTime"))
+	}
+	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GroupARN", 1))
+	}
+	if s.GroupName != nil && len(*s.GroupName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.StartTime == nil {
+		invalidParams.Add(request.NewErrParamRequired("StartTime"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEndTime sets the EndTime field's value.
+func (s *GetInsightSummariesInput) SetEndTime(v time.Time) *GetInsightSummariesInput {
+	s.EndTime = &v
+	return s
+}
+
+// SetGroupARN sets the GroupARN field's value.
+func (s *GetInsightSummariesInput) SetGroupARN(v string) *GetInsightSummariesInput {
+	s.GroupARN = &v
+	return s
+}
+
+// SetGroupName sets the GroupName field's value.
+func (s *GetInsightSummariesInput) SetGroupName(v string) *GetInsightSummariesInput {
+	s.GroupName = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *GetInsightSummariesInput) SetMaxResults(v int64) *GetInsightSummariesInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetInsightSummariesInput) SetNextToken(v string) *GetInsightSummariesInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *GetInsightSummariesInput) SetStartTime(v time.Time) *GetInsightSummariesInput {
+	s.StartTime = &v
+	return s
+}
+
+// SetStates sets the States field's value.
+func (s *GetInsightSummariesInput) SetStates(v []*string) *GetInsightSummariesInput {
+	s.States = v
+	return s
+}
+
+type GetInsightSummariesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The summary of each insight within the group matching the provided filters.
+	// The summary contains the InsightID, start and end time, the root cause service,
+	// the root cause and client impact statistics, the top anomalous services,
+	// and the status of the insight.
+	InsightSummaries []*InsightSummary `type:"list"`
+
+	// Pagination token.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightSummariesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetInsightSummariesOutput) GoString() string {
+	return s.String()
+}
+
+// SetInsightSummaries sets the InsightSummaries field's value.
+func (s *GetInsightSummariesOutput) SetInsightSummaries(v []*InsightSummary) *GetInsightSummariesOutput {
+	s.InsightSummaries = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetInsightSummariesOutput) SetNextToken(v string) *GetInsightSummariesOutput {
+	s.NextToken = &v
+	return s
+}
+
 type GetSamplingRulesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingRulesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingRulesInput) GoString() string {
 	return s.String()
 }
@@ -3123,19 +5613,27 @@ func (s *GetSamplingRulesInput) SetNextToken(v string) *GetSamplingRulesInput {
 type GetSamplingRulesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// Rule definitions and metadata.
 	SamplingRuleRecords []*SamplingRuleRecord `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingRulesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingRulesOutput) GoString() string {
 	return s.String()
 }
@@ -3155,16 +5653,24 @@ func (s *GetSamplingRulesOutput) SetSamplingRuleRecords(v []*SamplingRuleRecord)
 type GetSamplingStatisticSummariesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingStatisticSummariesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingStatisticSummariesInput) GoString() string {
 	return s.String()
 }
@@ -3178,19 +5684,27 @@ func (s *GetSamplingStatisticSummariesInput) SetNextToken(v string) *GetSampling
 type GetSamplingStatisticSummariesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// Information about the number of requests instrumented for each sampling rule.
 	SamplingStatisticSummaries []*SamplingStatisticSummary `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingStatisticSummariesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingStatisticSummariesOutput) GoString() string {
 	return s.String()
 }
@@ -3216,12 +5730,20 @@ type GetSamplingTargetsInput struct {
 	SamplingStatisticsDocuments []*SamplingStatisticsDocument `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingTargetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingTargetsInput) GoString() string {
 	return s.String()
 }
@@ -3260,22 +5782,32 @@ type GetSamplingTargetsOutput struct {
 
 	// The last time a user changed the sampling rule configuration. If the sampling
 	// rule configuration changed since the service last retrieved it, the service
-	// should call GetSamplingRules to get the latest version.
+	// should call GetSamplingRules (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html)
+	// to get the latest version.
 	LastRuleModification *time.Time `type:"timestamp"`
 
 	// Updated rules that the service should use to sample requests.
 	SamplingTargetDocuments []*SamplingTargetDocument `type:"list"`
 
-	// Information about SamplingStatisticsDocument that X-Ray could not process.
+	// Information about SamplingStatisticsDocument (https://docs.aws.amazon.com/xray/latest/api/API_SamplingStatisticsDocument.html)
+	// that X-Ray could not process.
 	UnprocessedStatistics []*UnprocessedStatistics `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingTargetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSamplingTargetsOutput) GoString() string {
 	return s.String()
 }
@@ -3306,13 +5838,14 @@ type GetServiceGraphInput struct {
 	// EndTime is a required field
 	EndTime *time.Time `type:"timestamp" required:"true"`
 
-	// The ARN of a group to generate a graph based on.
+	// The Amazon Resource Name (ARN) of a group based on which you want to generate
+	// a graph.
 	GroupARN *string `min:"1" type:"string"`
 
-	// The name of a group to generate a graph based on.
+	// The name of a group based on which you want to generate a graph.
 	GroupName *string `min:"1" type:"string"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// The start of the time frame for which to generate a graph.
@@ -3321,12 +5854,20 @@ type GetServiceGraphInput struct {
 	StartTime *time.Time `type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetServiceGraphInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetServiceGraphInput) GoString() string {
 	return s.String()
 }
@@ -3394,7 +5935,7 @@ type GetServiceGraphOutput struct {
 	// The end of the time frame for which the graph was generated.
 	EndTime *time.Time `type:"timestamp"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// The services that have processed a traced request during the specified time
@@ -3405,12 +5946,20 @@ type GetServiceGraphOutput struct {
 	StartTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetServiceGraphOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetServiceGraphOutput) GoString() string {
 	return s.String()
 }
@@ -3445,10 +5994,188 @@ func (s *GetServiceGraphOutput) SetStartTime(v time.Time) *GetServiceGraphOutput
 	return s
 }
 
+type GetTimeSeriesServiceStatisticsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The end of the time frame for which to aggregate statistics.
+	//
+	// EndTime is a required field
+	EndTime *time.Time `type:"timestamp" required:"true"`
+
+	// A filter expression defining entities that will be aggregated for statistics.
+	// Supports ID, service, and edge functions. If no selector expression is specified,
+	// edge statistics are returned.
+	EntitySelectorExpression *string `min:"1" type:"string"`
+
+	// The forecasted high and low fault count values. Forecast enabled requests
+	// require the EntitySelectorExpression ID be provided.
+	ForecastStatistics *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the group for which to pull statistics
+	// from.
+	GroupARN *string `min:"1" type:"string"`
+
+	// The case-sensitive name of the group for which to pull statistics from.
+	GroupName *string `min:"1" type:"string"`
+
+	// Pagination token.
+	NextToken *string `type:"string"`
+
+	// Aggregation period in seconds.
+	Period *int64 `type:"integer"`
+
+	// The start of the time frame for which to aggregate statistics.
+	//
+	// StartTime is a required field
+	StartTime *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetTimeSeriesServiceStatisticsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetTimeSeriesServiceStatisticsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetTimeSeriesServiceStatisticsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetTimeSeriesServiceStatisticsInput"}
+	if s.EndTime == nil {
+		invalidParams.Add(request.NewErrParamRequired("EndTime"))
+	}
+	if s.EntitySelectorExpression != nil && len(*s.EntitySelectorExpression) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("EntitySelectorExpression", 1))
+	}
+	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GroupARN", 1))
+	}
+	if s.GroupName != nil && len(*s.GroupName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+	}
+	if s.StartTime == nil {
+		invalidParams.Add(request.NewErrParamRequired("StartTime"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEndTime sets the EndTime field's value.
+func (s *GetTimeSeriesServiceStatisticsInput) SetEndTime(v time.Time) *GetTimeSeriesServiceStatisticsInput {
+	s.EndTime = &v
+	return s
+}
+
+// SetEntitySelectorExpression sets the EntitySelectorExpression field's value.
+func (s *GetTimeSeriesServiceStatisticsInput) SetEntitySelectorExpression(v string) *GetTimeSeriesServiceStatisticsInput {
+	s.EntitySelectorExpression = &v
+	return s
+}
+
+// SetForecastStatistics sets the ForecastStatistics field's value.
+func (s *GetTimeSeriesServiceStatisticsInput) SetForecastStatistics(v bool) *GetTimeSeriesServiceStatisticsInput {
+	s.ForecastStatistics = &v
+	return s
+}
+
+// SetGroupARN sets the GroupARN field's value.
+func (s *GetTimeSeriesServiceStatisticsInput) SetGroupARN(v string) *GetTimeSeriesServiceStatisticsInput {
+	s.GroupARN = &v
+	return s
+}
+
+// SetGroupName sets the GroupName field's value.
+func (s *GetTimeSeriesServiceStatisticsInput) SetGroupName(v string) *GetTimeSeriesServiceStatisticsInput {
+	s.GroupName = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetTimeSeriesServiceStatisticsInput) SetNextToken(v string) *GetTimeSeriesServiceStatisticsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetPeriod sets the Period field's value.
+func (s *GetTimeSeriesServiceStatisticsInput) SetPeriod(v int64) *GetTimeSeriesServiceStatisticsInput {
+	s.Period = &v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *GetTimeSeriesServiceStatisticsInput) SetStartTime(v time.Time) *GetTimeSeriesServiceStatisticsInput {
+	s.StartTime = &v
+	return s
+}
+
+type GetTimeSeriesServiceStatisticsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A flag indicating whether or not a group's filter expression has been consistent,
+	// or if a returned aggregation might show statistics from an older version
+	// of the group's filter expression.
+	ContainsOldGroupVersions *bool `type:"boolean"`
+
+	// Pagination token.
+	NextToken *string `type:"string"`
+
+	// The collection of statistics.
+	TimeSeriesServiceStatistics []*TimeSeriesServiceStatistics `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetTimeSeriesServiceStatisticsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetTimeSeriesServiceStatisticsOutput) GoString() string {
+	return s.String()
+}
+
+// SetContainsOldGroupVersions sets the ContainsOldGroupVersions field's value.
+func (s *GetTimeSeriesServiceStatisticsOutput) SetContainsOldGroupVersions(v bool) *GetTimeSeriesServiceStatisticsOutput {
+	s.ContainsOldGroupVersions = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetTimeSeriesServiceStatisticsOutput) SetNextToken(v string) *GetTimeSeriesServiceStatisticsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetTimeSeriesServiceStatistics sets the TimeSeriesServiceStatistics field's value.
+func (s *GetTimeSeriesServiceStatisticsOutput) SetTimeSeriesServiceStatistics(v []*TimeSeriesServiceStatistics) *GetTimeSeriesServiceStatisticsOutput {
+	s.TimeSeriesServiceStatistics = v
+	return s
+}
+
 type GetTraceGraphInput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// Trace IDs of requests for which to generate a service graph.
@@ -3457,12 +6184,20 @@ type GetTraceGraphInput struct {
 	TraceIds []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTraceGraphInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTraceGraphInput) GoString() string {
 	return s.String()
 }
@@ -3495,19 +6230,27 @@ func (s *GetTraceGraphInput) SetTraceIds(v []*string) *GetTraceGraphInput {
 type GetTraceGraphOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. Not used.
+	// Pagination token.
 	NextToken *string `type:"string"`
 
 	// The services that have processed one of the specified requests.
 	Services []*Service `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTraceGraphOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTraceGraphOutput) GoString() string {
 	return s.String()
 }
@@ -3534,7 +6277,7 @@ type GetTraceSummariesInput struct {
 
 	// Specify a filter expression to retrieve trace summaries for services or requests
 	// that meet certain requirements.
-	FilterExpression *string `min:"1" type:"string"`
+	FilterExpression *string `type:"string"`
 
 	// Specify the pagination token returned by a previous request to retrieve the
 	// next page of results.
@@ -3543,18 +6286,34 @@ type GetTraceSummariesInput struct {
 	// Set to true to get summaries for only a subset of available traces.
 	Sampling *bool `type:"boolean"`
 
+	// A parameter to indicate whether to enable sampling on trace summaries. Input
+	// parameters are Name and Value.
+	SamplingStrategy *SamplingStrategy `type:"structure"`
+
 	// The start of the time frame for which to retrieve traces.
 	//
 	// StartTime is a required field
 	StartTime *time.Time `type:"timestamp" required:"true"`
+
+	// A parameter to indicate whether to query trace summaries by TraceId, Event
+	// (trace update time), or Service (segment end time).
+	TimeRangeType *string `type:"string" enum:"TimeRangeType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTraceSummariesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTraceSummariesInput) GoString() string {
 	return s.String()
 }
@@ -3564,9 +6323,6 @@ func (s *GetTraceSummariesInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "GetTraceSummariesInput"}
 	if s.EndTime == nil {
 		invalidParams.Add(request.NewErrParamRequired("EndTime"))
-	}
-	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterExpression", 1))
 	}
 	if s.StartTime == nil {
 		invalidParams.Add(request.NewErrParamRequired("StartTime"))
@@ -3602,9 +6358,21 @@ func (s *GetTraceSummariesInput) SetSampling(v bool) *GetTraceSummariesInput {
 	return s
 }
 
+// SetSamplingStrategy sets the SamplingStrategy field's value.
+func (s *GetTraceSummariesInput) SetSamplingStrategy(v *SamplingStrategy) *GetTraceSummariesInput {
+	s.SamplingStrategy = v
+	return s
+}
+
 // SetStartTime sets the StartTime field's value.
 func (s *GetTraceSummariesInput) SetStartTime(v time.Time) *GetTraceSummariesInput {
 	s.StartTime = &v
+	return s
+}
+
+// SetTimeRangeType sets the TimeRangeType field's value.
+func (s *GetTraceSummariesInput) SetTimeRangeType(v string) *GetTraceSummariesInput {
+	s.TimeRangeType = &v
 	return s
 }
 
@@ -3616,10 +6384,11 @@ type GetTraceSummariesOutput struct {
 
 	// If the requested time frame contained more than one page of results, you
 	// can use this token to retrieve the next page. The first page contains the
-	// most most recent results, closest to the end of the time frame.
+	// most recent results, closest to the end of the time frame.
 	NextToken *string `type:"string"`
 
-	// Trace IDs and metadata for traces that were found in the specified time frame.
+	// Trace IDs and annotations for traces that were found in the specified time
+	// frame.
 	TraceSummaries []*TraceSummary `type:"list"`
 
 	// The total number of traces processed, including traces that did not match
@@ -3627,12 +6396,20 @@ type GetTraceSummariesOutput struct {
 	TracesProcessedCount *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTraceSummariesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTraceSummariesOutput) GoString() string {
 	return s.String()
 }
@@ -3668,19 +6445,36 @@ type Group struct {
 	// The filter expression defining the parameters to include traces.
 	FilterExpression *string `type:"string"`
 
-	// The ARN of the group generated based on the GroupName.
+	// The Amazon Resource Name (ARN) of the group generated based on the GroupName.
 	GroupARN *string `type:"string"`
 
 	// The unique case-sensitive name of the group.
 	GroupName *string `type:"string"`
+
+	// The structure containing configurations related to insights.
+	//
+	//    * The InsightsEnabled boolean can be set to true to enable insights for
+	//    the group or false to disable insights for the group.
+	//
+	//    * The NotificationsEnabled boolean can be set to true to enable insights
+	//    notifications through Amazon EventBridge for the group.
+	InsightsConfiguration *InsightsConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Group) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Group) GoString() string {
 	return s.String()
 }
@@ -3703,6 +6497,12 @@ func (s *Group) SetGroupName(v string) *Group {
 	return s
 }
 
+// SetInsightsConfiguration sets the InsightsConfiguration field's value.
+func (s *Group) SetInsightsConfiguration(v *InsightsConfiguration) *Group {
+	s.InsightsConfiguration = v
+	return s
+}
+
 // Details for a group without metadata.
 type GroupSummary struct {
 	_ struct{} `type:"structure"`
@@ -3715,14 +6515,32 @@ type GroupSummary struct {
 
 	// The unique case-sensitive name of the group.
 	GroupName *string `type:"string"`
+
+	// The structure containing configurations related to insights.
+	//
+	//    * The InsightsEnabled boolean can be set to true to enable insights for
+	//    the group or false to disable insights for the group.
+	//
+	//    * The NotificationsEnabled boolean can be set to true to enable insights
+	//    notifications. Notifications can only be enabled on a group with InsightsEnabled
+	//    set to true.
+	InsightsConfiguration *InsightsConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GroupSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GroupSummary) GoString() string {
 	return s.String()
 }
@@ -3745,6 +6563,12 @@ func (s *GroupSummary) SetGroupName(v string) *GroupSummary {
 	return s
 }
 
+// SetInsightsConfiguration sets the InsightsConfiguration field's value.
+func (s *GroupSummary) SetInsightsConfiguration(v *InsightsConfiguration) *GroupSummary {
+	s.InsightsConfiguration = v
+	return s
+}
+
 // An entry in a histogram for a statistic. A histogram maps the range of observed
 // values on the X axis, and the prevalence of each value on the Y axis.
 type HistogramEntry struct {
@@ -3757,12 +6581,20 @@ type HistogramEntry struct {
 	Value *float64 `type:"double"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HistogramEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HistogramEntry) GoString() string {
 	return s.String()
 }
@@ -3799,12 +6631,20 @@ type Http struct {
 	UserAgent *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Http) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Http) GoString() string {
 	return s.String()
 }
@@ -3839,6 +6679,528 @@ func (s *Http) SetUserAgent(v string) *Http {
 	return s
 }
 
+// When fault rates go outside of the expected range, X-Ray creates an insight.
+// Insights tracks emergent issues within your applications.
+type Insight struct {
+	_ struct{} `type:"structure"`
+
+	// The categories that label and describe the type of insight.
+	Categories []*string `type:"list" enum:"InsightCategory"`
+
+	// The impact statistics of the client side service. This includes the number
+	// of requests to the client service and whether the requests were faults or
+	// okay.
+	ClientRequestImpactStatistics *RequestImpactStatistics `type:"structure"`
+
+	// The time, in Unix seconds, at which the insight ended.
+	EndTime *time.Time `type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of the group that the insight belongs to.
+	GroupARN *string `min:"1" type:"string"`
+
+	// The name of the group that the insight belongs to.
+	GroupName *string `min:"1" type:"string"`
+
+	// The insights unique identifier.
+	InsightId *string `type:"string"`
+
+	RootCauseServiceId *ServiceId `type:"structure"`
+
+	// The impact statistics of the root cause service. This includes the number
+	// of requests to the client service and whether the requests were faults or
+	// okay.
+	RootCauseServiceRequestImpactStatistics *RequestImpactStatistics `type:"structure"`
+
+	// The time, in Unix seconds, at which the insight began.
+	StartTime *time.Time `type:"timestamp"`
+
+	// The current state of the insight.
+	State *string `type:"string" enum:"InsightState"`
+
+	// A brief description of the insight.
+	Summary *string `type:"string"`
+
+	// The service within the insight that is most impacted by the incident.
+	TopAnomalousServices []*AnomalousService `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Insight) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Insight) GoString() string {
+	return s.String()
+}
+
+// SetCategories sets the Categories field's value.
+func (s *Insight) SetCategories(v []*string) *Insight {
+	s.Categories = v
+	return s
+}
+
+// SetClientRequestImpactStatistics sets the ClientRequestImpactStatistics field's value.
+func (s *Insight) SetClientRequestImpactStatistics(v *RequestImpactStatistics) *Insight {
+	s.ClientRequestImpactStatistics = v
+	return s
+}
+
+// SetEndTime sets the EndTime field's value.
+func (s *Insight) SetEndTime(v time.Time) *Insight {
+	s.EndTime = &v
+	return s
+}
+
+// SetGroupARN sets the GroupARN field's value.
+func (s *Insight) SetGroupARN(v string) *Insight {
+	s.GroupARN = &v
+	return s
+}
+
+// SetGroupName sets the GroupName field's value.
+func (s *Insight) SetGroupName(v string) *Insight {
+	s.GroupName = &v
+	return s
+}
+
+// SetInsightId sets the InsightId field's value.
+func (s *Insight) SetInsightId(v string) *Insight {
+	s.InsightId = &v
+	return s
+}
+
+// SetRootCauseServiceId sets the RootCauseServiceId field's value.
+func (s *Insight) SetRootCauseServiceId(v *ServiceId) *Insight {
+	s.RootCauseServiceId = v
+	return s
+}
+
+// SetRootCauseServiceRequestImpactStatistics sets the RootCauseServiceRequestImpactStatistics field's value.
+func (s *Insight) SetRootCauseServiceRequestImpactStatistics(v *RequestImpactStatistics) *Insight {
+	s.RootCauseServiceRequestImpactStatistics = v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *Insight) SetStartTime(v time.Time) *Insight {
+	s.StartTime = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *Insight) SetState(v string) *Insight {
+	s.State = &v
+	return s
+}
+
+// SetSummary sets the Summary field's value.
+func (s *Insight) SetSummary(v string) *Insight {
+	s.Summary = &v
+	return s
+}
+
+// SetTopAnomalousServices sets the TopAnomalousServices field's value.
+func (s *Insight) SetTopAnomalousServices(v []*AnomalousService) *Insight {
+	s.TopAnomalousServices = v
+	return s
+}
+
+// X-Ray reevaluates insights periodically until they are resolved, and records
+// each intermediate state in an event. You can review incident events in the
+// Impact Timeline on the Inspect page in the X-Ray console.
+type InsightEvent struct {
+	_ struct{} `type:"structure"`
+
+	// The impact statistics of the client side service. This includes the number
+	// of requests to the client service and whether the requests were faults or
+	// okay.
+	ClientRequestImpactStatistics *RequestImpactStatistics `type:"structure"`
+
+	// The time, in Unix seconds, at which the event was recorded.
+	EventTime *time.Time `type:"timestamp"`
+
+	// The impact statistics of the root cause service. This includes the number
+	// of requests to the client service and whether the requests were faults or
+	// okay.
+	RootCauseServiceRequestImpactStatistics *RequestImpactStatistics `type:"structure"`
+
+	// A brief description of the event.
+	Summary *string `type:"string"`
+
+	// The service during the event that is most impacted by the incident.
+	TopAnomalousServices []*AnomalousService `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightEvent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightEvent) GoString() string {
+	return s.String()
+}
+
+// SetClientRequestImpactStatistics sets the ClientRequestImpactStatistics field's value.
+func (s *InsightEvent) SetClientRequestImpactStatistics(v *RequestImpactStatistics) *InsightEvent {
+	s.ClientRequestImpactStatistics = v
+	return s
+}
+
+// SetEventTime sets the EventTime field's value.
+func (s *InsightEvent) SetEventTime(v time.Time) *InsightEvent {
+	s.EventTime = &v
+	return s
+}
+
+// SetRootCauseServiceRequestImpactStatistics sets the RootCauseServiceRequestImpactStatistics field's value.
+func (s *InsightEvent) SetRootCauseServiceRequestImpactStatistics(v *RequestImpactStatistics) *InsightEvent {
+	s.RootCauseServiceRequestImpactStatistics = v
+	return s
+}
+
+// SetSummary sets the Summary field's value.
+func (s *InsightEvent) SetSummary(v string) *InsightEvent {
+	s.Summary = &v
+	return s
+}
+
+// SetTopAnomalousServices sets the TopAnomalousServices field's value.
+func (s *InsightEvent) SetTopAnomalousServices(v []*AnomalousService) *InsightEvent {
+	s.TopAnomalousServices = v
+	return s
+}
+
+// The connection between two service in an insight impact graph.
+type InsightImpactGraphEdge struct {
+	_ struct{} `type:"structure"`
+
+	// Identifier of the edge. Unique within a service map.
+	ReferenceId *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightImpactGraphEdge) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightImpactGraphEdge) GoString() string {
+	return s.String()
+}
+
+// SetReferenceId sets the ReferenceId field's value.
+func (s *InsightImpactGraphEdge) SetReferenceId(v int64) *InsightImpactGraphEdge {
+	s.ReferenceId = &v
+	return s
+}
+
+// Information about an application that processed requests, users that made
+// requests, or downstream services, resources, and applications that an application
+// used.
+type InsightImpactGraphService struct {
+	_ struct{} `type:"structure"`
+
+	// Identifier of the Amazon Web Services account in which the service runs.
+	AccountId *string `type:"string"`
+
+	// Connections to downstream services.
+	Edges []*InsightImpactGraphEdge `type:"list"`
+
+	// The canonical name of the service.
+	Name *string `type:"string"`
+
+	// A list of names for the service, including the canonical name.
+	Names []*string `type:"list"`
+
+	// Identifier for the service. Unique within the service map.
+	ReferenceId *int64 `type:"integer"`
+
+	// Identifier for the service. Unique within the service map.
+	//
+	//    * Amazon Web Services Resource - The type of an Amazon Web Services resource.
+	//    For example, AWS::EC2::Instance for an application running on Amazon EC2
+	//    or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application
+	//    used.
+	//
+	//    * Amazon Web Services Service - The type of an Amazon Web Services service.
+	//    For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that
+	//    didn't target a specific table.
+	//
+	//    * Amazon Web Services Service - The type of an Amazon Web Services service.
+	//    For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that
+	//    didn't target a specific table.
+	//
+	//    * remote - A downstream service of indeterminate type.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightImpactGraphService) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightImpactGraphService) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *InsightImpactGraphService) SetAccountId(v string) *InsightImpactGraphService {
+	s.AccountId = &v
+	return s
+}
+
+// SetEdges sets the Edges field's value.
+func (s *InsightImpactGraphService) SetEdges(v []*InsightImpactGraphEdge) *InsightImpactGraphService {
+	s.Edges = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *InsightImpactGraphService) SetName(v string) *InsightImpactGraphService {
+	s.Name = &v
+	return s
+}
+
+// SetNames sets the Names field's value.
+func (s *InsightImpactGraphService) SetNames(v []*string) *InsightImpactGraphService {
+	s.Names = v
+	return s
+}
+
+// SetReferenceId sets the ReferenceId field's value.
+func (s *InsightImpactGraphService) SetReferenceId(v int64) *InsightImpactGraphService {
+	s.ReferenceId = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *InsightImpactGraphService) SetType(v string) *InsightImpactGraphService {
+	s.Type = &v
+	return s
+}
+
+// Information that describes an insight.
+type InsightSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Categories The categories that label and describe the type of insight.
+	Categories []*string `type:"list" enum:"InsightCategory"`
+
+	// The impact statistics of the client side service. This includes the number
+	// of requests to the client service and whether the requests were faults or
+	// okay.
+	ClientRequestImpactStatistics *RequestImpactStatistics `type:"structure"`
+
+	// The time, in Unix seconds, at which the insight ended.
+	EndTime *time.Time `type:"timestamp"`
+
+	// The Amazon Resource Name (ARN) of the group that the insight belongs to.
+	GroupARN *string `min:"1" type:"string"`
+
+	// The name of the group that the insight belongs to.
+	GroupName *string `min:"1" type:"string"`
+
+	// The insights unique identifier.
+	InsightId *string `type:"string"`
+
+	// The time, in Unix seconds, that the insight was last updated.
+	LastUpdateTime *time.Time `type:"timestamp"`
+
+	RootCauseServiceId *ServiceId `type:"structure"`
+
+	// The impact statistics of the root cause service. This includes the number
+	// of requests to the client service and whether the requests were faults or
+	// okay.
+	RootCauseServiceRequestImpactStatistics *RequestImpactStatistics `type:"structure"`
+
+	// The time, in Unix seconds, at which the insight began.
+	StartTime *time.Time `type:"timestamp"`
+
+	// The current state of the insight.
+	State *string `type:"string" enum:"InsightState"`
+
+	// A brief description of the insight.
+	Summary *string `type:"string"`
+
+	// The service within the insight that is most impacted by the incident.
+	TopAnomalousServices []*AnomalousService `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightSummary) GoString() string {
+	return s.String()
+}
+
+// SetCategories sets the Categories field's value.
+func (s *InsightSummary) SetCategories(v []*string) *InsightSummary {
+	s.Categories = v
+	return s
+}
+
+// SetClientRequestImpactStatistics sets the ClientRequestImpactStatistics field's value.
+func (s *InsightSummary) SetClientRequestImpactStatistics(v *RequestImpactStatistics) *InsightSummary {
+	s.ClientRequestImpactStatistics = v
+	return s
+}
+
+// SetEndTime sets the EndTime field's value.
+func (s *InsightSummary) SetEndTime(v time.Time) *InsightSummary {
+	s.EndTime = &v
+	return s
+}
+
+// SetGroupARN sets the GroupARN field's value.
+func (s *InsightSummary) SetGroupARN(v string) *InsightSummary {
+	s.GroupARN = &v
+	return s
+}
+
+// SetGroupName sets the GroupName field's value.
+func (s *InsightSummary) SetGroupName(v string) *InsightSummary {
+	s.GroupName = &v
+	return s
+}
+
+// SetInsightId sets the InsightId field's value.
+func (s *InsightSummary) SetInsightId(v string) *InsightSummary {
+	s.InsightId = &v
+	return s
+}
+
+// SetLastUpdateTime sets the LastUpdateTime field's value.
+func (s *InsightSummary) SetLastUpdateTime(v time.Time) *InsightSummary {
+	s.LastUpdateTime = &v
+	return s
+}
+
+// SetRootCauseServiceId sets the RootCauseServiceId field's value.
+func (s *InsightSummary) SetRootCauseServiceId(v *ServiceId) *InsightSummary {
+	s.RootCauseServiceId = v
+	return s
+}
+
+// SetRootCauseServiceRequestImpactStatistics sets the RootCauseServiceRequestImpactStatistics field's value.
+func (s *InsightSummary) SetRootCauseServiceRequestImpactStatistics(v *RequestImpactStatistics) *InsightSummary {
+	s.RootCauseServiceRequestImpactStatistics = v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *InsightSummary) SetStartTime(v time.Time) *InsightSummary {
+	s.StartTime = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *InsightSummary) SetState(v string) *InsightSummary {
+	s.State = &v
+	return s
+}
+
+// SetSummary sets the Summary field's value.
+func (s *InsightSummary) SetSummary(v string) *InsightSummary {
+	s.Summary = &v
+	return s
+}
+
+// SetTopAnomalousServices sets the TopAnomalousServices field's value.
+func (s *InsightSummary) SetTopAnomalousServices(v []*AnomalousService) *InsightSummary {
+	s.TopAnomalousServices = v
+	return s
+}
+
+// The structure containing configurations related to insights.
+type InsightsConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Set the InsightsEnabled value to true to enable insights or false to disable
+	// insights.
+	InsightsEnabled *bool `type:"boolean"`
+
+	// Set the NotificationsEnabled value to true to enable insights notifications.
+	// Notifications can only be enabled on a group with InsightsEnabled set to
+	// true.
+	NotificationsEnabled *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightsConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsightsConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetInsightsEnabled sets the InsightsEnabled field's value.
+func (s *InsightsConfiguration) SetInsightsEnabled(v bool) *InsightsConfiguration {
+	s.InsightsEnabled = &v
+	return s
+}
+
+// SetNotificationsEnabled sets the NotificationsEnabled field's value.
+func (s *InsightsConfiguration) SetNotificationsEnabled(v bool) *InsightsConfiguration {
+	s.NotificationsEnabled = &v
+	return s
+}
+
 // A list of EC2 instance IDs corresponding to the segments in a trace.
 type InstanceIdDetail struct {
 	_ struct{} `type:"structure"`
@@ -3847,12 +7209,20 @@ type InstanceIdDetail struct {
 	Id *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceIdDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceIdDetail) GoString() string {
 	return s.String()
 }
@@ -3863,14 +7233,589 @@ func (s *InstanceIdDetail) SetId(v string) *InstanceIdDetail {
 	return s
 }
 
+// A policy revision id was provided which does not match the latest policy
+// revision. This exception is also if a policy revision id of 0 is provided
+// via PutResourcePolicy and a policy with the same name already exists.
+type InvalidPolicyRevisionIdException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPolicyRevisionIdException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPolicyRevisionIdException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidPolicyRevisionIdException(v protocol.ResponseMetadata) error {
+	return &InvalidPolicyRevisionIdException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidPolicyRevisionIdException) Code() string {
+	return "InvalidPolicyRevisionIdException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidPolicyRevisionIdException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidPolicyRevisionIdException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidPolicyRevisionIdException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidPolicyRevisionIdException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidPolicyRevisionIdException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The request is missing required parameters or has invalid parameters.
+type InvalidRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidRequestException(v protocol.ResponseMetadata) error {
+	return &InvalidRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidRequestException) Code() string {
+	return "InvalidRequestException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type ListResourcePoliciesInput struct {
+	_ struct{} `type:"structure"`
+
+	// Not currently supported.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListResourcePoliciesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListResourcePoliciesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListResourcePoliciesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListResourcePoliciesInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListResourcePoliciesInput) SetNextToken(v string) *ListResourcePoliciesInput {
+	s.NextToken = &v
+	return s
+}
+
+type ListResourcePoliciesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Pagination token. Not currently supported.
+	NextToken *string `min:"1" type:"string"`
+
+	// The list of resource policies in the target Amazon Web Services account.
+	ResourcePolicies []*ResourcePolicy `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListResourcePoliciesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListResourcePoliciesOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListResourcePoliciesOutput) SetNextToken(v string) *ListResourcePoliciesOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetResourcePolicies sets the ResourcePolicies field's value.
+func (s *ListResourcePoliciesOutput) SetResourcePolicies(v []*ResourcePolicy) *ListResourcePoliciesOutput {
+	s.ResourcePolicies = v
+	return s
+}
+
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// A pagination token. If multiple pages of results are returned, use the NextToken
+	// value returned with the current page of results as the value of this parameter
+	// to get the next page of results.
+	NextToken *string `type:"string"`
+
+	// The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListTagsForResourceInput) SetNextToken(v string) *ListTagsForResourceInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *ListTagsForResourceInput) SetResourceARN(v string) *ListTagsForResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A pagination token. If multiple pages of results are returned, use the NextToken
+	// value returned with the current page of results to get the next page of results.
+	NextToken *string `type:"string"`
+
+	// A list of tags, as key and value pairs, that is associated with the specified
+	// X-Ray group or sampling rule.
+	Tags []*Tag `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListTagsForResourceOutput) SetNextToken(v string) *ListTagsForResourceOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *ListTagsForResourceOutput) SetTags(v []*Tag) *ListTagsForResourceOutput {
+	s.Tags = v
+	return s
+}
+
+// The provided resource policy would prevent the caller of this request from
+// calling PutResourcePolicy in the future.
+type LockoutPreventionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LockoutPreventionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LockoutPreventionException) GoString() string {
+	return s.String()
+}
+
+func newErrorLockoutPreventionException(v protocol.ResponseMetadata) error {
+	return &LockoutPreventionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LockoutPreventionException) Code() string {
+	return "LockoutPreventionException"
+}
+
+// Message returns the exception's message.
+func (s *LockoutPreventionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LockoutPreventionException) OrigErr() error {
+	return nil
+}
+
+func (s *LockoutPreventionException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LockoutPreventionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LockoutPreventionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Invalid policy document provided in request.
+type MalformedPolicyDocumentException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MalformedPolicyDocumentException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MalformedPolicyDocumentException) GoString() string {
+	return s.String()
+}
+
+func newErrorMalformedPolicyDocumentException(v protocol.ResponseMetadata) error {
+	return &MalformedPolicyDocumentException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *MalformedPolicyDocumentException) Code() string {
+	return "MalformedPolicyDocumentException"
+}
+
+// Message returns the exception's message.
+func (s *MalformedPolicyDocumentException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *MalformedPolicyDocumentException) OrigErr() error {
+	return nil
+}
+
+func (s *MalformedPolicyDocumentException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *MalformedPolicyDocumentException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *MalformedPolicyDocumentException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exceeded the maximum number of resource policies for a target Amazon Web
+// Services account.
+type PolicyCountLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PolicyCountLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PolicyCountLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorPolicyCountLimitExceededException(v protocol.ResponseMetadata) error {
+	return &PolicyCountLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *PolicyCountLimitExceededException) Code() string {
+	return "PolicyCountLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *PolicyCountLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *PolicyCountLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *PolicyCountLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *PolicyCountLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *PolicyCountLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exceeded the maximum size for a resource policy.
+type PolicySizeLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PolicySizeLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PolicySizeLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorPolicySizeLimitExceededException(v protocol.ResponseMetadata) error {
+	return &PolicySizeLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *PolicySizeLimitExceededException) Code() string {
+	return "PolicySizeLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *PolicySizeLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *PolicySizeLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *PolicySizeLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *PolicySizeLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *PolicySizeLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type PutEncryptionConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// An AWS KMS customer master key (CMK) in one of the following formats:
+	// An Amazon Web Services KMS key in one of the following formats:
 	//
 	//    * Alias - The name of the key. For example, alias/MyKey.
 	//
 	//    * Key ID - The KMS key ID of the key. For example, ae4aa6d49-a4d8-9df9-a475-4ff6d7898456.
+	//    Amazon Web Services X-Ray does not support asymmetric KMS keys.
 	//
 	//    * ARN - The full Amazon Resource Name of the key ID or alias. For example,
 	//    arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456.
@@ -3886,12 +7831,20 @@ type PutEncryptionConfigInput struct {
 	Type *string `type:"string" required:"true" enum:"EncryptionType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutEncryptionConfigInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutEncryptionConfigInput) GoString() string {
 	return s.String()
 }
@@ -3931,12 +7884,20 @@ type PutEncryptionConfigOutput struct {
 	EncryptionConfig *EncryptionConfig `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutEncryptionConfigOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutEncryptionConfigOutput) GoString() string {
 	return s.String()
 }
@@ -3944,6 +7905,137 @@ func (s PutEncryptionConfigOutput) GoString() string {
 // SetEncryptionConfig sets the EncryptionConfig field's value.
 func (s *PutEncryptionConfigOutput) SetEncryptionConfig(v *EncryptionConfig) *PutEncryptionConfigOutput {
 	s.EncryptionConfig = v
+	return s
+}
+
+type PutResourcePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// A flag to indicate whether to bypass the resource policy lockout safety check.
+	//
+	// Setting this value to true increases the risk that the policy becomes unmanageable.
+	// Do not set this value to true indiscriminately.
+	//
+	// Use this parameter only when you include a policy in the request and you
+	// intend to prevent the principal that is making the request from making a
+	// subsequent PutResourcePolicy request.
+	//
+	// The default value is false.
+	BypassPolicyLockoutCheck *bool `type:"boolean"`
+
+	// The resource policy document, which can be up to 5kb in size.
+	//
+	// PolicyDocument is a required field
+	PolicyDocument *string `type:"string" required:"true"`
+
+	// The name of the resource policy. Must be unique within a specific Amazon
+	// Web Services account.
+	//
+	// PolicyName is a required field
+	PolicyName *string `min:"1" type:"string" required:"true"`
+
+	// Specifies a specific policy revision, to ensure an atomic create operation.
+	// By default the resource policy is created if it does not exist, or updated
+	// with an incremented revision id. The revision id is unique to each policy
+	// in the account.
+	//
+	// If the policy revision id does not match the latest revision id, the operation
+	// will fail with an InvalidPolicyRevisionIdException exception. You can also
+	// provide a PolicyRevisionId of 0. In this case, the operation will fail with
+	// an InvalidPolicyRevisionIdException exception if a resource policy with the
+	// same name already exists.
+	PolicyRevisionId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutResourcePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutResourcePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutResourcePolicyInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PutResourcePolicyInput"}
+	if s.PolicyDocument == nil {
+		invalidParams.Add(request.NewErrParamRequired("PolicyDocument"))
+	}
+	if s.PolicyName == nil {
+		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+	}
+	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBypassPolicyLockoutCheck sets the BypassPolicyLockoutCheck field's value.
+func (s *PutResourcePolicyInput) SetBypassPolicyLockoutCheck(v bool) *PutResourcePolicyInput {
+	s.BypassPolicyLockoutCheck = &v
+	return s
+}
+
+// SetPolicyDocument sets the PolicyDocument field's value.
+func (s *PutResourcePolicyInput) SetPolicyDocument(v string) *PutResourcePolicyInput {
+	s.PolicyDocument = &v
+	return s
+}
+
+// SetPolicyName sets the PolicyName field's value.
+func (s *PutResourcePolicyInput) SetPolicyName(v string) *PutResourcePolicyInput {
+	s.PolicyName = &v
+	return s
+}
+
+// SetPolicyRevisionId sets the PolicyRevisionId field's value.
+func (s *PutResourcePolicyInput) SetPolicyRevisionId(v string) *PutResourcePolicyInput {
+	s.PolicyRevisionId = &v
+	return s
+}
+
+type PutResourcePolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The resource policy document, as provided in the PutResourcePolicyRequest.
+	ResourcePolicy *ResourcePolicy `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutResourcePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutResourcePolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SetResourcePolicy sets the ResourcePolicy field's value.
+func (s *PutResourcePolicyOutput) SetResourcePolicy(v *ResourcePolicy) *PutResourcePolicyOutput {
+	s.ResourcePolicy = v
 	return s
 }
 
@@ -3960,12 +8052,20 @@ type PutTelemetryRecordsInput struct {
 	TelemetryRecords []*TelemetryRecord `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutTelemetryRecordsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutTelemetryRecordsInput) GoString() string {
 	return s.String()
 }
@@ -4021,12 +8121,20 @@ type PutTelemetryRecordsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutTelemetryRecordsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutTelemetryRecordsOutput) GoString() string {
 	return s.String()
 }
@@ -4040,12 +8148,20 @@ type PutTraceSegmentsInput struct {
 	TraceSegmentDocuments []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutTraceSegmentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutTraceSegmentsInput) GoString() string {
 	return s.String()
 }
@@ -4076,12 +8192,20 @@ type PutTraceSegmentsOutput struct {
 	UnprocessedTraceSegments []*UnprocessedTraceSegment `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutTraceSegmentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutTraceSegmentsOutput) GoString() string {
 	return s.String()
 }
@@ -4089,6 +8213,56 @@ func (s PutTraceSegmentsOutput) GoString() string {
 // SetUnprocessedTraceSegments sets the UnprocessedTraceSegments field's value.
 func (s *PutTraceSegmentsOutput) SetUnprocessedTraceSegments(v []*UnprocessedTraceSegment) *PutTraceSegmentsOutput {
 	s.UnprocessedTraceSegments = v
+	return s
+}
+
+// Statistics that describe how the incident has impacted a service.
+type RequestImpactStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The number of requests that have resulted in a fault,
+	FaultCount *int64 `type:"long"`
+
+	// The number of successful requests.
+	OkCount *int64 `type:"long"`
+
+	// The total number of requests to the service.
+	TotalCount *int64 `type:"long"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestImpactStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestImpactStatistics) GoString() string {
+	return s.String()
+}
+
+// SetFaultCount sets the FaultCount field's value.
+func (s *RequestImpactStatistics) SetFaultCount(v int64) *RequestImpactStatistics {
+	s.FaultCount = &v
+	return s
+}
+
+// SetOkCount sets the OkCount field's value.
+func (s *RequestImpactStatistics) SetOkCount(v int64) *RequestImpactStatistics {
+	s.OkCount = &v
+	return s
+}
+
+// SetTotalCount sets the TotalCount field's value.
+func (s *RequestImpactStatistics) SetTotalCount(v int64) *RequestImpactStatistics {
+	s.TotalCount = &v
 	return s
 }
 
@@ -4100,12 +8274,20 @@ type ResourceARNDetail struct {
 	ARN *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceARNDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceARNDetail) GoString() string {
 	return s.String()
 }
@@ -4116,23 +8298,169 @@ func (s *ResourceARNDetail) SetARN(v string) *ResourceARNDetail {
 	return s
 }
 
+// The resource was not found. Verify that the name or Amazon Resource Name
+// (ARN) of the resource is correct.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	ResourceName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A resource policy grants one or more Amazon Web Services services and accounts
+// permissions to access X-Ray. Each resource policy is associated with a specific
+// Amazon Web Services account.
+type ResourcePolicy struct {
+	_ struct{} `type:"structure"`
+
+	// When the policy was last updated, in Unix time seconds.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// The resource policy document, which can be up to 5kb in size.
+	PolicyDocument *string `type:"string"`
+
+	// The name of the resource policy. Must be unique within a specific Amazon
+	// Web Services account.
+	PolicyName *string `min:"1" type:"string"`
+
+	// Returns the current policy revision id for this policy name.
+	PolicyRevisionId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourcePolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourcePolicy) GoString() string {
+	return s.String()
+}
+
+// SetLastUpdatedTime sets the LastUpdatedTime field's value.
+func (s *ResourcePolicy) SetLastUpdatedTime(v time.Time) *ResourcePolicy {
+	s.LastUpdatedTime = &v
+	return s
+}
+
+// SetPolicyDocument sets the PolicyDocument field's value.
+func (s *ResourcePolicy) SetPolicyDocument(v string) *ResourcePolicy {
+	s.PolicyDocument = &v
+	return s
+}
+
+// SetPolicyName sets the PolicyName field's value.
+func (s *ResourcePolicy) SetPolicyName(v string) *ResourcePolicy {
+	s.PolicyName = &v
+	return s
+}
+
+// SetPolicyRevisionId sets the PolicyRevisionId field's value.
+func (s *ResourcePolicy) SetPolicyRevisionId(v string) *ResourcePolicy {
+	s.PolicyRevisionId = &v
+	return s
+}
+
 // The root cause information for a response time warning.
 type ResponseTimeRootCause struct {
 	_ struct{} `type:"structure"`
+
+	// A flag that denotes that the root cause impacts the trace client.
+	ClientImpacting *bool `type:"boolean"`
 
 	// A list of corresponding services. A service identifies a segment and contains
 	// a name, account ID, type, and inferred flag.
 	Services []*ResponseTimeRootCauseService `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResponseTimeRootCause) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResponseTimeRootCause) GoString() string {
 	return s.String()
+}
+
+// SetClientImpacting sets the ClientImpacting field's value.
+func (s *ResponseTimeRootCause) SetClientImpacting(v bool) *ResponseTimeRootCause {
+	s.ClientImpacting = &v
+	return s
 }
 
 // SetServices sets the Services field's value.
@@ -4146,7 +8474,7 @@ func (s *ResponseTimeRootCause) SetServices(v []*ResponseTimeRootCauseService) *
 type ResponseTimeRootCauseEntity struct {
 	_ struct{} `type:"structure"`
 
-	// The types and messages of the exceptions.
+	// The type and messages of the exceptions.
 	Coverage *float64 `type:"double"`
 
 	// The name of the entity.
@@ -4156,12 +8484,20 @@ type ResponseTimeRootCauseEntity struct {
 	Remote *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResponseTimeRootCauseEntity) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResponseTimeRootCauseEntity) GoString() string {
 	return s.String()
 }
@@ -4207,12 +8543,20 @@ type ResponseTimeRootCauseService struct {
 	Type *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResponseTimeRootCauseService) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResponseTimeRootCauseService) GoString() string {
 	return s.String()
 }
@@ -4264,12 +8608,20 @@ type RootCauseException struct {
 	Name *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RootCauseException) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RootCauseException) GoString() string {
 	return s.String()
 }
@@ -4284,6 +8636,70 @@ func (s *RootCauseException) SetMessage(v string) *RootCauseException {
 func (s *RootCauseException) SetName(v string) *RootCauseException {
 	s.Name = &v
 	return s
+}
+
+// You have reached the maximum number of sampling rules.
+type RuleLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RuleLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RuleLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorRuleLimitExceededException(v protocol.ResponseMetadata) error {
+	return &RuleLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RuleLimitExceededException) Code() string {
+	return "RuleLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *RuleLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RuleLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *RuleLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RuleLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RuleLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // A sampling rule that services use to decide whether to instrument a request.
@@ -4323,7 +8739,8 @@ type SamplingRule struct {
 	// ReservoirSize is a required field
 	ReservoirSize *int64 `type:"integer" required:"true"`
 
-	// Matches the ARN of the AWS resource on which the service runs.
+	// Matches the ARN of the Amazon Web Services resource on which the service
+	// runs.
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `type:"string" required:"true"`
@@ -4357,12 +8774,20 @@ type SamplingRule struct {
 	Version *int64 `min:"1" type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingRule) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingRule) GoString() string {
 	return s.String()
 }
@@ -4494,7 +8919,8 @@ func (s *SamplingRule) SetVersion(v int64) *SamplingRule {
 	return s
 }
 
-// A SamplingRule and its metadata.
+// A SamplingRule (https://docs.aws.amazon.com/xray/latest/api/API_SamplingRule.html)
+// and its metadata.
 type SamplingRuleRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -4508,12 +8934,20 @@ type SamplingRuleRecord struct {
 	SamplingRule *SamplingRule `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingRuleRecord) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingRuleRecord) GoString() string {
 	return s.String()
 }
@@ -4561,7 +8995,8 @@ type SamplingRuleUpdate struct {
 	// to all services using the rule collectively.
 	ReservoirSize *int64 `type:"integer"`
 
-	// Matches the ARN of the AWS resource on which the service runs.
+	// Matches the ARN of the Amazon Web Services resource on which the service
+	// runs.
 	ResourceARN *string `type:"string"`
 
 	// The ARN of the sampling rule. Specify a rule by either name or ARN, but not
@@ -4582,12 +9017,20 @@ type SamplingRuleUpdate struct {
 	URLPath *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingRuleUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingRuleUpdate) GoString() string {
 	return s.String()
 }
@@ -4678,7 +9121,7 @@ func (s *SamplingRuleUpdate) SetURLPath(v string) *SamplingRuleUpdate {
 }
 
 // Aggregated request sampling data for a sampling rule across all services
-// for a 10 second window.
+// for a 10-second window.
 type SamplingStatisticSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -4698,12 +9141,20 @@ type SamplingStatisticSummary struct {
 	Timestamp *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingStatisticSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingStatisticSummary) GoString() string {
 	return s.String()
 }
@@ -4740,7 +9191,7 @@ func (s *SamplingStatisticSummary) SetTimestamp(v time.Time) *SamplingStatisticS
 
 // Request sampling results for a single rule from a service. Results are for
 // the last 10 seconds unless the service has been assigned a longer reporting
-// interval after a previous call to GetSamplingTargets.
+// interval after a previous call to GetSamplingTargets (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html).
 type SamplingStatisticsDocument struct {
 	_ struct{} `type:"structure"`
 
@@ -4773,12 +9224,20 @@ type SamplingStatisticsDocument struct {
 	Timestamp *time.Time `type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingStatisticsDocument) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingStatisticsDocument) GoString() string {
 	return s.String()
 }
@@ -4850,9 +9309,51 @@ func (s *SamplingStatisticsDocument) SetTimestamp(v time.Time) *SamplingStatisti
 	return s
 }
 
+// The name and value of a sampling rule to apply to a trace summary.
+type SamplingStrategy struct {
+	_ struct{} `type:"structure"`
+
+	// The name of a sampling rule.
+	Name *string `type:"string" enum:"SamplingStrategyName"`
+
+	// The value of a sampling rule.
+	Value *float64 `type:"double"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SamplingStrategy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SamplingStrategy) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *SamplingStrategy) SetName(v string) *SamplingStrategy {
+	s.Name = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *SamplingStrategy) SetValue(v float64) *SamplingStrategy {
+	s.Value = &v
+	return s
+}
+
 // Temporary changes to a sampling rule configuration. To meet the global sampling
 // target for a rule, X-Ray calculates a new reservoir for each service based
-// on the recent sampling results of all services that called GetSamplingTargets.
+// on the recent sampling results of all services that called GetSamplingTargets
+// (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html).
 type SamplingTargetDocument struct {
 	_ struct{} `type:"structure"`
 
@@ -4864,7 +9365,7 @@ type SamplingTargetDocument struct {
 	// again.
 	Interval *int64 `type:"integer"`
 
-	// The number of requests per second that X-Ray allocated this service.
+	// The number of requests per second that X-Ray allocated for this service.
 	ReservoirQuota *int64 `type:"integer"`
 
 	// When the reservoir quota expires.
@@ -4874,12 +9375,20 @@ type SamplingTargetDocument struct {
 	RuleName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingTargetDocument) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SamplingTargetDocument) GoString() string {
 	return s.String()
 }
@@ -4915,12 +9424,13 @@ func (s *SamplingTargetDocument) SetRuleName(v string) *SamplingTargetDocument {
 }
 
 // A segment from a trace that has been ingested by the X-Ray service. The segment
-// can be compiled from documents uploaded with PutTraceSegments, or an inferred
-// segment for a downstream service, generated from a subsegment sent by the
-// service that called it.
+// can be compiled from documents uploaded with PutTraceSegments (https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html),
+// or an inferred segment for a downstream service, generated from a subsegment
+// sent by the service that called it.
 //
-// For the full segment document schema, see AWS X-Ray Segment Documents (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
-// in the AWS X-Ray Developer Guide.
+// For the full segment document schema, see Amazon Web Services X-Ray Segment
+// Documents (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
+// in the Amazon Web Services X-Ray Developer Guide.
 type Segment struct {
 	_ struct{} `type:"structure"`
 
@@ -4931,12 +9441,20 @@ type Segment struct {
 	Id *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Segment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Segment) GoString() string {
 	return s.String()
 }
@@ -4954,12 +9472,12 @@ func (s *Segment) SetId(v string) *Segment {
 }
 
 // Information about an application that processed requests, users that made
-// requests, or downstream services, resources and applications that an application
+// requests, or downstream services, resources, and applications that an application
 // used.
 type Service struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier of the AWS account in which the service runs.
+	// Identifier of the Amazon Web Services account in which the service runs.
 	AccountId *string `type:"string"`
 
 	// A histogram that maps the spread of service durations.
@@ -4997,13 +9515,14 @@ type Service struct {
 
 	// The type of service.
 	//
-	//    * AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance
-	//    for a application running on Amazon EC2 or AWS::DynamoDB::Table for an
-	//    Amazon DynamoDB table that the application used.
+	//    * Amazon Web Services Resource - The type of an Amazon Web Services resource.
+	//    For example, AWS::EC2::Instance for an application running on Amazon EC2
+	//    or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application
+	//    used.
 	//
-	//    * AWS Service - The type of an AWS service. For example, AWS::DynamoDB
-	//    for downstream calls to Amazon DynamoDB that didn't target a specific
-	//    table.
+	//    * Amazon Web Services Service - The type of an Amazon Web Services service.
+	//    For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that
+	//    didn't target a specific table.
 	//
 	//    * client - Represents the clients that sent requests to a root service.
 	//
@@ -5011,12 +9530,20 @@ type Service struct {
 	Type *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Service) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Service) GoString() string {
 	return s.String()
 }
@@ -5111,12 +9638,20 @@ type ServiceId struct {
 	Type *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceId) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceId) GoString() string {
 	return s.String()
 }
@@ -5165,12 +9700,20 @@ type ServiceStatistics struct {
 	TotalResponseTime *float64 `type:"double"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceStatistics) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceStatistics) GoString() string {
 	return s.String()
 }
@@ -5205,6 +9748,200 @@ func (s *ServiceStatistics) SetTotalResponseTime(v float64) *ServiceStatistics {
 	return s
 }
 
+// A map that contains tag keys and tag values to attach to an Amazon Web Services
+// X-Ray group or sampling rule. For more information about ways to use tags,
+// see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+// in the Amazon Web Services General Reference.
+//
+// The following restrictions apply to tags:
+//
+//   - Maximum number of user-applied tags per resource: 50
+//
+//   - Tag keys and values are case sensitive.
+//
+//   - Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services
+//     use. You cannot edit or delete system tags.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// A tag key, such as Stage or Name. A tag key cannot be empty. The key can
+	// be a maximum of 128 characters, and can contain only Unicode letters, numbers,
+	// or separators, or the following special characters: + - = . _ : /
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// An optional tag value, such as Production or test-only. The value can be
+	// a maximum of 255 characters, and contain only Unicode letters, numbers, or
+	// separators, or the following special characters: + - = . _ : /
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	if s.Key == nil {
+		invalidParams.Add(request.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+	}
+	if s.Value == nil {
+		invalidParams.Add(request.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKey sets the Key field's value.
+func (s *Tag) SetKey(v string) *Tag {
+	s.Key = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *Tag) SetValue(v string) *Tag {
+	s.Value = &v
+	return s
+}
+
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+
+	// A map that contains one or more tag keys and tag values to attach to an X-Ray
+	// group or sampling rule. For more information about ways to use tags, see
+	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// in the Amazon Web Services General Reference.
+	//
+	// The following restrictions apply to tags:
+	//
+	//    * Maximum number of user-applied tags per resource: 50
+	//
+	//    * Maximum tag key length: 128 Unicode characters
+	//
+	//    * Maximum tag value length: 256 Unicode characters
+	//
+	//    * Valid values for key and value: a-z, A-Z, 0-9, space, and the following
+	//    characters: _ . : / = + - and @
+	//
+	//    * Tag keys and values are case sensitive.
+	//
+	//    * Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services
+	//    use. You cannot edit or delete system tags.
+	//
+	// Tags is a required field
+	Tags []*Tag `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+	if s.Tags == nil {
+		invalidParams.Add(request.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *TagResourceInput) SetResourceARN(v string) *TagResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *TagResourceInput) SetTags(v []*Tag) *TagResourceInput {
+	s.Tags = v
+	return s
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
 type TelemetryRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -5222,12 +9959,20 @@ type TelemetryRecord struct {
 	Timestamp *time.Time `type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TelemetryRecord) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TelemetryRecord) GoString() string {
 	return s.String()
 }
@@ -5281,6 +10026,204 @@ func (s *TelemetryRecord) SetTimestamp(v time.Time) *TelemetryRecord {
 	return s
 }
 
+// The request exceeds the maximum number of requests per second.
+type ThrottledException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottledException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottledException) GoString() string {
+	return s.String()
+}
+
+func newErrorThrottledException(v protocol.ResponseMetadata) error {
+	return &ThrottledException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ThrottledException) Code() string {
+	return "ThrottledException"
+}
+
+// Message returns the exception's message.
+func (s *ThrottledException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ThrottledException) OrigErr() error {
+	return nil
+}
+
+func (s *ThrottledException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ThrottledException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ThrottledException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A list of TimeSeriesStatistic structures.
+type TimeSeriesServiceStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// Response statistics for an edge.
+	EdgeSummaryStatistics *EdgeStatistics `type:"structure"`
+
+	// The response time histogram for the selected entities.
+	ResponseTimeHistogram []*HistogramEntry `type:"list"`
+
+	// The forecasted high and low fault count values.
+	ServiceForecastStatistics *ForecastStatistics `type:"structure"`
+
+	// Response statistics for a service.
+	ServiceSummaryStatistics *ServiceStatistics `type:"structure"`
+
+	// Timestamp of the window for which statistics are aggregated.
+	Timestamp *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TimeSeriesServiceStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TimeSeriesServiceStatistics) GoString() string {
+	return s.String()
+}
+
+// SetEdgeSummaryStatistics sets the EdgeSummaryStatistics field's value.
+func (s *TimeSeriesServiceStatistics) SetEdgeSummaryStatistics(v *EdgeStatistics) *TimeSeriesServiceStatistics {
+	s.EdgeSummaryStatistics = v
+	return s
+}
+
+// SetResponseTimeHistogram sets the ResponseTimeHistogram field's value.
+func (s *TimeSeriesServiceStatistics) SetResponseTimeHistogram(v []*HistogramEntry) *TimeSeriesServiceStatistics {
+	s.ResponseTimeHistogram = v
+	return s
+}
+
+// SetServiceForecastStatistics sets the ServiceForecastStatistics field's value.
+func (s *TimeSeriesServiceStatistics) SetServiceForecastStatistics(v *ForecastStatistics) *TimeSeriesServiceStatistics {
+	s.ServiceForecastStatistics = v
+	return s
+}
+
+// SetServiceSummaryStatistics sets the ServiceSummaryStatistics field's value.
+func (s *TimeSeriesServiceStatistics) SetServiceSummaryStatistics(v *ServiceStatistics) *TimeSeriesServiceStatistics {
+	s.ServiceSummaryStatistics = v
+	return s
+}
+
+// SetTimestamp sets the Timestamp field's value.
+func (s *TimeSeriesServiceStatistics) SetTimestamp(v time.Time) *TimeSeriesServiceStatistics {
+	s.Timestamp = &v
+	return s
+}
+
+// You have exceeded the maximum number of tags you can apply to this resource.
+type TooManyTagsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	ResourceName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyTagsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyTagsException) GoString() string {
+	return s.String()
+}
+
+func newErrorTooManyTagsException(v protocol.ResponseMetadata) error {
+	return &TooManyTagsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TooManyTagsException) Code() string {
+	return "TooManyTagsException"
+}
+
+// Message returns the exception's message.
+func (s *TooManyTagsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TooManyTagsException) OrigErr() error {
+	return nil
+}
+
+func (s *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TooManyTagsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TooManyTagsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A collection of segment documents with matching trace IDs.
 type Trace struct {
 	_ struct{} `type:"structure"`
@@ -5293,16 +10236,29 @@ type Trace struct {
 	// and subsegments.
 	Id *string `min:"1" type:"string"`
 
+	// LimitExceeded is set to true when the trace has exceeded the Trace document
+	// size limit. For more information about this limit and other X-Ray limits
+	// and quotas, see Amazon Web Services X-Ray endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/xray.html).
+	LimitExceeded *bool `type:"boolean"`
+
 	// Segment documents for the segments and subsegments that comprise the trace.
 	Segments []*Segment `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Trace) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Trace) GoString() string {
 	return s.String()
 }
@@ -5319,6 +10275,12 @@ func (s *Trace) SetId(v string) *Trace {
 	return s
 }
 
+// SetLimitExceeded sets the LimitExceeded field's value.
+func (s *Trace) SetLimitExceeded(v bool) *Trace {
+	s.LimitExceeded = &v
+	return s
+}
+
 // SetSegments sets the Segments field's value.
 func (s *Trace) SetSegments(v []*Segment) *Trace {
 	s.Segments = v
@@ -5332,7 +10294,7 @@ type TraceSummary struct {
 	// Annotations from the trace's segment documents.
 	Annotations map[string][]*ValueWithServiceIds `type:"map"`
 
-	// A list of availability zones for any zone corresponding to the trace segments.
+	// A list of Availability Zones for any zone corresponding to the trace segments.
 	AvailabilityZones []*AvailabilityZoneDetail `type:"list"`
 
 	// The length of time in seconds between the start time of the root segment
@@ -5345,14 +10307,13 @@ type TraceSummary struct {
 	// A collection of ErrorRootCause structures corresponding to the trace segments.
 	ErrorRootCauses []*ErrorRootCause `type:"list"`
 
-	// A collection of FaultRootCause structures corresponding to the the trace
-	// segments.
+	// A collection of FaultRootCause structures corresponding to the trace segments.
 	FaultRootCauses []*FaultRootCause `type:"list"`
 
-	// One or more of the segment documents has a 400 series error.
+	// The root segment document has a 400 series error.
 	HasError *bool `type:"boolean"`
 
-	// One or more of the segment documents has a 500 series error.
+	// The root segment document has a 500 series error.
 	HasFault *bool `type:"boolean"`
 
 	// One or more of the segment documents has a 429 throttling error.
@@ -5370,6 +10331,9 @@ type TraceSummary struct {
 
 	// One or more of the segment documents is in progress.
 	IsPartial *bool `type:"boolean"`
+
+	// The matched time stamp of a defined event.
+	MatchedEventTime *time.Time `type:"timestamp"`
 
 	// A list of resource ARNs for any resource corresponding to the trace segments.
 	ResourceARNs []*ResourceARNDetail `type:"list"`
@@ -5390,16 +10354,27 @@ type TraceSummary struct {
 	// Service IDs from the trace's segment documents.
 	ServiceIds []*ServiceId `type:"list"`
 
+	// The start time of a trace, based on the earliest trace segment start time.
+	StartTime *time.Time `type:"timestamp"`
+
 	// Users from the trace's segment documents.
 	Users []*TraceUser `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TraceSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TraceSummary) GoString() string {
 	return s.String()
 }
@@ -5482,6 +10457,12 @@ func (s *TraceSummary) SetIsPartial(v bool) *TraceSummary {
 	return s
 }
 
+// SetMatchedEventTime sets the MatchedEventTime field's value.
+func (s *TraceSummary) SetMatchedEventTime(v time.Time) *TraceSummary {
+	s.MatchedEventTime = &v
+	return s
+}
+
 // SetResourceARNs sets the ResourceARNs field's value.
 func (s *TraceSummary) SetResourceARNs(v []*ResourceARNDetail) *TraceSummary {
 	s.ResourceARNs = v
@@ -5512,6 +10493,12 @@ func (s *TraceSummary) SetServiceIds(v []*ServiceId) *TraceSummary {
 	return s
 }
 
+// SetStartTime sets the StartTime field's value.
+func (s *TraceSummary) SetStartTime(v time.Time) *TraceSummary {
+	s.StartTime = &v
+	return s
+}
+
 // SetUsers sets the Users field's value.
 func (s *TraceSummary) SetUsers(v []*TraceUser) *TraceSummary {
 	s.Users = v
@@ -5529,12 +10516,20 @@ type TraceUser struct {
 	UserName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TraceUser) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TraceUser) GoString() string {
 	return s.String()
 }
@@ -5551,8 +10546,8 @@ func (s *TraceUser) SetUserName(v string) *TraceUser {
 	return s
 }
 
-// Sampling statistics from a call to GetSamplingTargets that X-Ray could not
-// process.
+// Sampling statistics from a call to GetSamplingTargets (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html)
+// that X-Ray could not process.
 type UnprocessedStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -5566,12 +10561,20 @@ type UnprocessedStatistics struct {
 	RuleName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnprocessedStatistics) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnprocessedStatistics) GoString() string {
 	return s.String()
 }
@@ -5608,12 +10611,20 @@ type UnprocessedTraceSegment struct {
 	Message *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnprocessedTraceSegment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnprocessedTraceSegment) GoString() string {
 	return s.String()
 }
@@ -5636,25 +10647,129 @@ func (s *UnprocessedTraceSegment) SetMessage(v string) *UnprocessedTraceSegment 
 	return s
 }
 
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+
+	// Keys for one or more tags that you want to remove from an X-Ray group or
+	// sampling rule.
+	//
+	// TagKeys is a required field
+	TagKeys []*string `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+	if s.TagKeys == nil {
+		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *UntagResourceInput) SetResourceARN(v string) *UntagResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+// SetTagKeys sets the TagKeys field's value.
+func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+	s.TagKeys = v
+	return s
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
 type UpdateGroupInput struct {
 	_ struct{} `type:"structure"`
 
 	// The updated filter expression defining criteria by which to group traces.
-	FilterExpression *string `min:"1" type:"string"`
+	FilterExpression *string `type:"string"`
 
 	// The ARN that was generated upon creation.
 	GroupARN *string `min:"1" type:"string"`
 
 	// The case-sensitive name of the group.
 	GroupName *string `min:"1" type:"string"`
+
+	// The structure containing configurations related to insights.
+	//
+	//    * The InsightsEnabled boolean can be set to true to enable insights for
+	//    the group or false to disable insights for the group.
+	//
+	//    * The NotificationsEnabled boolean can be set to true to enable insights
+	//    notifications for the group. Notifications can only be enabled on a group
+	//    with InsightsEnabled set to true.
+	InsightsConfiguration *InsightsConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateGroupInput) GoString() string {
 	return s.String()
 }
@@ -5662,9 +10777,6 @@ func (s UpdateGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGroupInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "UpdateGroupInput"}
-	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterExpression", 1))
-	}
 	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("GroupARN", 1))
 	}
@@ -5696,21 +10808,35 @@ func (s *UpdateGroupInput) SetGroupName(v string) *UpdateGroupInput {
 	return s
 }
 
+// SetInsightsConfiguration sets the InsightsConfiguration field's value.
+func (s *UpdateGroupInput) SetInsightsConfiguration(v *InsightsConfiguration) *UpdateGroupInput {
+	s.InsightsConfiguration = v
+	return s
+}
+
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The group that was updated. Contains the name of the group that was updated,
-	// the ARN of the group that was updated, and the updated filter expression
-	// assigned to the group.
+	// the ARN of the group that was updated, the updated filter expression, and
+	// the updated insight configuration assigned to the group.
 	Group *Group `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateGroupOutput) GoString() string {
 	return s.String()
 }
@@ -5730,12 +10856,20 @@ type UpdateSamplingRuleInput struct {
 	SamplingRuleUpdate *SamplingRuleUpdate `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSamplingRuleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSamplingRuleInput) GoString() string {
 	return s.String()
 }
@@ -5771,12 +10905,20 @@ type UpdateSamplingRuleOutput struct {
 	SamplingRuleRecord *SamplingRuleRecord `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSamplingRuleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSamplingRuleOutput) GoString() string {
 	return s.String()
 }
@@ -5798,12 +10940,20 @@ type ValueWithServiceIds struct {
 	ServiceIds []*ServiceId `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ValueWithServiceIds) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ValueWithServiceIds) GoString() string {
 	return s.String()
 }
@@ -5828,6 +10978,14 @@ const (
 	EncryptionStatusActive = "ACTIVE"
 )
 
+// EncryptionStatus_Values returns all elements of the EncryptionStatus enum
+func EncryptionStatus_Values() []string {
+	return []string{
+		EncryptionStatusUpdating,
+		EncryptionStatusActive,
+	}
+}
+
 const (
 	// EncryptionTypeNone is a EncryptionType enum value
 	EncryptionTypeNone = "NONE"
@@ -5835,3 +10993,75 @@ const (
 	// EncryptionTypeKms is a EncryptionType enum value
 	EncryptionTypeKms = "KMS"
 )
+
+// EncryptionType_Values returns all elements of the EncryptionType enum
+func EncryptionType_Values() []string {
+	return []string{
+		EncryptionTypeNone,
+		EncryptionTypeKms,
+	}
+}
+
+const (
+	// InsightCategoryFault is a InsightCategory enum value
+	InsightCategoryFault = "FAULT"
+)
+
+// InsightCategory_Values returns all elements of the InsightCategory enum
+func InsightCategory_Values() []string {
+	return []string{
+		InsightCategoryFault,
+	}
+}
+
+const (
+	// InsightStateActive is a InsightState enum value
+	InsightStateActive = "ACTIVE"
+
+	// InsightStateClosed is a InsightState enum value
+	InsightStateClosed = "CLOSED"
+)
+
+// InsightState_Values returns all elements of the InsightState enum
+func InsightState_Values() []string {
+	return []string{
+		InsightStateActive,
+		InsightStateClosed,
+	}
+}
+
+const (
+	// SamplingStrategyNamePartialScan is a SamplingStrategyName enum value
+	SamplingStrategyNamePartialScan = "PartialScan"
+
+	// SamplingStrategyNameFixedRate is a SamplingStrategyName enum value
+	SamplingStrategyNameFixedRate = "FixedRate"
+)
+
+// SamplingStrategyName_Values returns all elements of the SamplingStrategyName enum
+func SamplingStrategyName_Values() []string {
+	return []string{
+		SamplingStrategyNamePartialScan,
+		SamplingStrategyNameFixedRate,
+	}
+}
+
+const (
+	// TimeRangeTypeTraceId is a TimeRangeType enum value
+	TimeRangeTypeTraceId = "TraceId"
+
+	// TimeRangeTypeEvent is a TimeRangeType enum value
+	TimeRangeTypeEvent = "Event"
+
+	// TimeRangeTypeService is a TimeRangeType enum value
+	TimeRangeTypeService = "Service"
+)
+
+// TimeRangeType_Values returns all elements of the TimeRangeType enum
+func TimeRangeType_Values() []string {
+	return []string{
+		TimeRangeTypeTraceId,
+		TimeRangeTypeEvent,
+		TimeRangeTypeService,
+	}
+}

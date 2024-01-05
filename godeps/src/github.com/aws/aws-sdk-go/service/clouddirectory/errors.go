@@ -2,12 +2,18 @@
 
 package clouddirectory
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAccessDeniedException for service response error code
 	// "AccessDeniedException".
 	//
-	// Access denied. Check your permissions.
+	// Access denied or directory not found. Either you don't have permissions for
+	// this directory or the directory does not exist. Try calling ListDirectories
+	// and check your permissions.
 	ErrCodeAccessDeniedException = "AccessDeniedException"
 
 	// ErrCodeBatchWriteException for service response error code
@@ -240,3 +246,41 @@ const (
 	// message.
 	ErrCodeValidationException = "ValidationException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccessDeniedException":            newErrorAccessDeniedException,
+	"BatchWriteException":              newErrorBatchWriteException,
+	"CannotListParentOfRootException":  newErrorCannotListParentOfRootException,
+	"DirectoryAlreadyExistsException":  newErrorDirectoryAlreadyExistsException,
+	"DirectoryDeletedException":        newErrorDirectoryDeletedException,
+	"DirectoryNotDisabledException":    newErrorDirectoryNotDisabledException,
+	"DirectoryNotEnabledException":     newErrorDirectoryNotEnabledException,
+	"FacetAlreadyExistsException":      newErrorFacetAlreadyExistsException,
+	"FacetInUseException":              newErrorFacetInUseException,
+	"FacetNotFoundException":           newErrorFacetNotFoundException,
+	"FacetValidationException":         newErrorFacetValidationException,
+	"IncompatibleSchemaException":      newErrorIncompatibleSchemaException,
+	"IndexedAttributeMissingException": newErrorIndexedAttributeMissingException,
+	"InternalServiceException":         newErrorInternalServiceException,
+	"InvalidArnException":              newErrorInvalidArnException,
+	"InvalidAttachmentException":       newErrorInvalidAttachmentException,
+	"InvalidFacetUpdateException":      newErrorInvalidFacetUpdateException,
+	"InvalidNextTokenException":        newErrorInvalidNextTokenException,
+	"InvalidRuleException":             newErrorInvalidRuleException,
+	"InvalidSchemaDocException":        newErrorInvalidSchemaDocException,
+	"InvalidTaggingRequestException":   newErrorInvalidTaggingRequestException,
+	"LimitExceededException":           newErrorLimitExceededException,
+	"LinkNameAlreadyInUseException":    newErrorLinkNameAlreadyInUseException,
+	"NotIndexException":                newErrorNotIndexException,
+	"NotNodeException":                 newErrorNotNodeException,
+	"NotPolicyException":               newErrorNotPolicyException,
+	"ObjectAlreadyDetachedException":   newErrorObjectAlreadyDetachedException,
+	"ObjectNotDetachedException":       newErrorObjectNotDetachedException,
+	"ResourceNotFoundException":        newErrorResourceNotFoundException,
+	"RetryableConflictException":       newErrorRetryableConflictException,
+	"SchemaAlreadyExistsException":     newErrorSchemaAlreadyExistsException,
+	"SchemaAlreadyPublishedException":  newErrorSchemaAlreadyPublishedException,
+	"StillContainsLinksException":      newErrorStillContainsLinksException,
+	"UnsupportedIndexTypeException":    newErrorUnsupportedIndexTypeException,
+	"ValidationException":              newErrorValidationException,
+}

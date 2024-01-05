@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/rubenv/sql-migrate"
+	migrate "github.com/rubenv/sql-migrate"
 )
 
-type RedoCommand struct {
-}
+type RedoCommand struct{}
 
-func (c *RedoCommand) Help() string {
+func (*RedoCommand) Help() string {
 	helpText := `
 Usage: sql-migrate redo [options] ...
 
@@ -27,7 +26,7 @@ Options:
 	return strings.TrimSpace(helpText)
 }
 
-func (c *RedoCommand) Synopsis() string {
+func (*RedoCommand) Synopsis() string {
 	return "Reapply the last migration"
 }
 
@@ -54,13 +53,17 @@ func (c *RedoCommand) Run(args []string) int {
 		ui.Error(err.Error())
 		return 1
 	}
+	defer db.Close()
 
 	source := migrate.FileMigrationSource{
 		Dir: env.Dir,
 	}
 
 	migrations, _, err := migrate.PlanMigration(db, dialect, source, migrate.Down, 1)
-	if len(migrations) == 0 {
+	if err != nil {
+		ui.Error(fmt.Sprintf("Migration (redo) failed: %v", err))
+		return 1
+	} else if len(migrations) == 0 {
 		ui.Output("Nothing to do!")
 		return 0
 	}

@@ -5,21 +5,26 @@
 package main
 
 import (
+	"context"
+	"embed"
 	"flag"
 	"fmt"
+	"io/fs"
+	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
 	"os"
 	"os/exec"
+	"os/signal"
 	"path/filepath"
-	"regexp"
 	"runtime"
-	"strconv"
+	"runtime/debug"
 	"strings"
+	"syscall"
 	"time"
 
-	"go/build"
+	"golang.org/x/tools/go/packages"
 
 	"github.com/smartystreets/goconvey/web/server/api"
 	"github.com/smartystreets/goconvey/web/server/contract"
@@ -31,39 +36,51 @@ import (
 )
 
 func init() {
-	flags()
-	folders()
-}
-func flags() {
 	flag.IntVar(&port, "port", 8080, "The port at which to serve http.")
 	flag.StringVar(&host, "host", "127.0.0.1", "The host at which to serve http.")
 	flag.DurationVar(&nap, "poll", quarterSecond, "The interval to wait between polling the file system for changes.")
-	flag.IntVar(&packages, "packages", 10, "The number of packages to test in parallel. Higher == faster but more costly in terms of computing.")
+	flag.IntVar(&parallelPackages, "packages", 10, "The number of packages to test in parallel. Higher == faster but more costly in terms of computing.")
 	flag.StringVar(&gobin, "gobin", "go", "The path to the 'go' binary (default: search on the PATH).")
-	flag.BoolVar(&cover, "cover", true, "Enable package-level coverage statistics. Requires Go 1.2+ and the go cover tool.")
+	flag.BoolVar(&cover, "cover", true, "Enable package-level coverage statistics.")
 	flag.IntVar(&depth, "depth", -1, "The directory scanning depth. If -1, scan infinitely deep directory structures. 0: scan working directory. 1+: Scan into nested directories, limited to value.")
 	flag.StringVar(&timeout, "timeout", "0", "The test execution timeout if none is specified in the *.goconvey file (default is '0', which is the same as not providing this option).")
 	flag.StringVar(&watchedSuffixes, "watchedSuffixes", ".go", "A comma separated list of file suffixes to watch for modifications.")
-	flag.StringVar(&excludedDirs, "excludedDirs", "vendor,node_modules", "A comma separated list of directories that will be excluded from being watched")
-	flag.StringVar(&workDir, "workDir", "", "set goconvey working directory (default current directory)")
-	flag.BoolVar(&autoLaunchBrowser, "launchBrowser", true, "toggle auto launching of browser (default: true)")
+	flag.StringVar(&excludedDirs, "excludedDirs", "vendor,node_modules", "A comma separated list of directories that will be excluded from being watched.")
+	flag.StringVar(&workDir, "workDir", "", "set goconvey working directory (default current directory).")
+	flag.BoolVar(&autoLaunchBrowser, "launchBrowser", true, "toggle auto launching of browser.")
+	flag.BoolVar(&leakTemp, "leakTemp", false, "leak temp dir with coverage reports.")
 
 	log.SetOutput(os.Stdout)
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 }
-func folders() {
-	_, file, _, _ := runtime.Caller(0)
-	here := filepath.Dir(file)
-	static = filepath.Join(here, "/web/client")
-	reports = filepath.Join(static, "reports")
-}
 
 func main() {
 	flag.Parse()
-	log.Printf(initialConfiguration, host, port, nap, cover)
+
+	printHeader()
+
+	tmpDir, err := ioutil.TempDir("", "*.goconvey")
+	if err != nil {
+		log.Fatal(err)
+	}
+	reports := filepath.Join(tmpDir, "coverage_out")
+	if err := os.Mkdir(reports, 0700); err != nil {
+		log.Fatal(err)
+	}
+	if leakTemp {
+		log.Printf("leaking temporary directory %q\n", tmpDir)
+	} else {
+		defer func() {
+			if err := os.RemoveAll(tmpDir); err != nil {
+				log.Printf("failed to clean temporary directory %q: %s\n", tmpDir, err)
+			}
+		}()
+	}
+
+	done := make(chan os.Signal)
+	signal.Notify(done, os.Interrupt, syscall.SIGTERM, syscall.SIGINT)
 
 	working := getWorkDir()
-	cover = coverageEnabled(cover, reports)
 	shell := system.NewShell(gobin, reports, cover, timeout)
 
 	watcherInput := make(chan messaging.WatcherCommand)
@@ -73,7 +90,7 @@ func main() {
 
 	parser := parser.NewParser(parser.ParsePackageResults)
 	tester := executor.NewConcurrentTester(shell)
-	tester.SetBatchSize(packages)
+	tester.SetBatchSize(parallelPackages)
 
 	longpollChan := make(chan chan string)
 	executor := executor.NewExecutor(tester, parser, longpollChan)
@@ -84,14 +101,36 @@ func main() {
 	if autoLaunchBrowser {
 		go launchBrowser(listener.Addr().String())
 	}
-	serveHTTP(server, listener)
+	srv := serveHTTP(reports, server, listener)
+
+	<-done
+	log.Println("shutting down")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Printf("failed to shutdown: %s\n", err)
+	}
+}
+
+func printHeader() {
+	log.Println("GoConvey server: ")
+	serverVersion := "<unknown>"
+	if binfo, ok := debug.ReadBuildInfo(); ok {
+		serverVersion = binfo.Main.Version
+	}
+	log.Println("  version:", serverVersion)
+	log.Println("  host:", host)
+	log.Println("  port:", port)
+	log.Println("  poll:", nap)
+	log.Println("  cover:", cover)
+	log.Println()
 }
 
 func browserCmd() (string, bool) {
 	browser := map[string]string{
-		"darwin": "open",
-		"linux":  "xdg-open",
-		"win32":  "start",
+		"darwin":  "open",
+		"linux":   "xdg-open",
+		"windows": "start",
 	}
 	cmd, ok := browser[runtime.GOOS]
 	return cmd, ok
@@ -128,34 +167,45 @@ func runTestOnUpdates(queue chan messaging.Folders, executor contract.Executor, 
 func extractPackages(folderList messaging.Folders) []*contract.Package {
 	packageList := []*contract.Package{}
 	for _, folder := range folderList {
+		if isInsideTestdata(folder) {
+			continue
+		}
 		hasImportCycle := testFilesImportTheirOwnPackage(folder.Path)
-		packageList = append(packageList, contract.NewPackage(folder, hasImportCycle))
+		packageName := resolvePackageName(folder.Path)
+		packageList = append(
+			packageList,
+			contract.NewPackage(folder, packageName, hasImportCycle),
+		)
 	}
 	return packageList
+}
+
+// For packages that operate on Go source code files, such as Go tooling, it is
+// important to have a location that will not be considered part of package
+// source to store those files. The official Go tooling selected the testdata
+// folder for this purpose, so we need to ignore folders inside testdata.
+func isInsideTestdata(folder *messaging.Folder) bool {
+	relativePath, err := filepath.Rel(folder.Root, folder.Path)
+	if err != nil {
+		// There should never be a folder that's not inside the root, but if
+		// there is, we can presumably count it as outside a testdata folder as
+		// well
+		return false
+	}
+
+	for _, directory := range strings.Split(filepath.ToSlash(relativePath), "/") {
+		if directory == "testdata" {
+			return true
+		}
+	}
+
+	return false
 }
 
 func extractRoot(folderList messaging.Folders, packageList []*contract.Package) string {
 	path := packageList[0].Path
 	folder := folderList[path]
 	return folder.Root
-}
-
-// This method exists because of a bug in the go cover tool that
-// causes an infinite loop when you try to run `go test -cover`
-// on a package that has an import cycle defined in one of it's
-// test files. Yuck.
-func testFilesImportTheirOwnPackage(packagePath string) bool {
-	meta, err := build.ImportDir(packagePath, build.AllowBinary)
-	if err != nil {
-		return false
-	}
-
-	for _, dependency := range meta.TestImports {
-		if dependency == meta.ImportPath {
-			return true
-		}
-	}
-	return false
 }
 
 func createListener() net.Listener {
@@ -169,17 +219,16 @@ func createListener() net.Listener {
 	return l
 }
 
-func serveHTTP(server contract.Server, listener net.Listener) {
-	serveStaticResources()
-	serveAjaxMethods(server)
-	activateServer(listener)
-}
+//go:embed web/client
+var static embed.FS
 
-func serveStaticResources() {
-	http.Handle("/", http.FileServer(http.Dir(static)))
-}
+func serveHTTP(reports string, server contract.Server, listener net.Listener) *http.Server {
+	webclient, err := fs.Sub(static, "web/client")
+	if err != nil {
+		log.Fatal(err)
+	}
+	http.Handle("/", http.FileServer(http.FS(webclient)))
 
-func serveAjaxMethods(server contract.Server) {
 	http.HandleFunc("/watch", server.Watch)
 	http.HandleFunc("/ignore", server.Ignore)
 	http.HandleFunc("/reinstate", server.Reinstate)
@@ -188,66 +237,20 @@ func serveAjaxMethods(server contract.Server) {
 	http.HandleFunc("/status", server.Status)
 	http.HandleFunc("/status/poll", server.LongPollStatus)
 	http.HandleFunc("/pause", server.TogglePause)
-}
 
-func activateServer(listener net.Listener) {
+	http.Handle("/reports/", http.StripPrefix("/reports/", http.FileServer(http.Dir(reports))))
+
 	log.Printf("Serving HTTP at: http://%s\n", listener.Addr())
-	err := http.Serve(listener, nil)
-	if err != nil {
-		log.Println(err)
-	}
-}
-
-func coverageEnabled(cover bool, reports string) bool {
-	return (cover &&
-		goMinVersion(1, 2) &&
-		coverToolInstalled() &&
-		ensureReportDirectoryExists(reports))
-}
-func goMinVersion(wanted ...int) bool {
-	version := runtime.Version() // 'go1.2....'
-	s := regexp.MustCompile(`go([\d]+)\.([\d]+)\.?([\d]+)?`).FindAllStringSubmatch(version, 1)
-	if len(s) == 0 {
-		log.Printf("Cannot determine if newer than go1.2, disabling coverage.")
-		return false
-	}
-	for idx, str := range s[0][1:] {
-		if len(wanted) == idx {
-			break
+	ret := &http.Server{}
+	go func() {
+		err := ret.Serve(listener)
+		if err != nil {
+			log.Println(err)
 		}
-		if v, _ := strconv.Atoi(str); v < wanted[idx] {
-			log.Printf(pleaseUpgradeGoVersion, version)
-			return false
-		}
-	}
-	return true
+	}()
+	return ret
 }
-func coverToolInstalled() bool {
-	working := getWorkDir()
-	command := system.NewCommand(working, "go", "tool", "cover").Execute()
-	installed := strings.Contains(command.Output, "Usage of 'go tool cover':")
-	if !installed {
-		log.Print(coverToolMissing)
-		return false
-	}
-	return true
-}
-func ensureReportDirectoryExists(reports string) bool {
-	result, err := exists(reports)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if result {
-		return true
-	}
 
-	if err := os.Mkdir(reports, 0755); err == nil {
-		return true
-	}
-
-	log.Printf(reportDirectoryUnavailable, reports)
-	return false
-}
 func exists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err == nil {
@@ -258,6 +261,7 @@ func exists(path string) (bool, error) {
 	}
 	return false, err
 }
+
 func getWorkDir() string {
 	working := ""
 	var err error
@@ -284,24 +288,68 @@ var (
 	host              string
 	gobin             string
 	nap               time.Duration
-	packages          int
+	parallelPackages  int
 	cover             bool
 	depth             int
 	timeout           string
 	watchedSuffixes   string
 	excludedDirs      string
 	autoLaunchBrowser bool
-
-	static  string
-	reports string
+	leakTemp          bool
 
 	quarterSecond = time.Millisecond * 250
 	workDir       string
 )
 
 const (
-	initialConfiguration       = "Initial configuration: [host: %s] [port: %d] [poll: %v] [cover: %v]\n"
-	pleaseUpgradeGoVersion     = "Go version is less that 1.2 (%s), please upgrade to the latest stable version to enable coverage reporting.\n"
-	coverToolMissing           = "Go cover tool is not installed or not accessible: for Go < 1.5 run`go get golang.org/x/tools/cmd/cover`\n For >= Go 1.5 run `go install $GOROOT/src/cmd/cover`\n"
-	reportDirectoryUnavailable = "Could not find or create the coverage report directory (at: '%s'). You probably won't see any coverage statistics...\n"
+	separator = string(filepath.Separator)
+	endGoPath = separator + "src" + separator
 )
+
+// This method exists because of a bug in the go cover tool that
+// causes an infinite loop when you try to run `go test -cover`
+// on a package that has an import cycle defined in one of it's
+// test files. Yuck.
+func testFilesImportTheirOwnPackage(packagePath string) bool {
+	meta, err := packages.Load(
+		&packages.Config{
+			Mode:  packages.NeedName | packages.NeedImports,
+			Tests: true,
+		},
+		packagePath,
+	)
+	if err != nil {
+		return false
+	}
+
+	testPackageID := fmt.Sprintf("%s [%s.test]", meta[0], meta[0])
+
+	for _, testPackage := range meta[1:] {
+		if testPackage.ID != testPackageID {
+			continue
+		}
+
+		for dependency := range testPackage.Imports {
+			if dependency == meta[0].PkgPath {
+				return true
+			}
+		}
+		break
+	}
+	return false
+}
+
+func resolvePackageName(path string) string {
+	pkg, err := packages.Load(
+		&packages.Config{
+			Mode: packages.NeedName,
+		},
+		path,
+	)
+	if err == nil {
+		return pkg[0].PkgPath
+	}
+
+	nameArr := strings.Split(path, endGoPath)
+	return nameArr[len(nameArr)-1]
+}

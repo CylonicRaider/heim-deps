@@ -2,6 +2,10 @@
 
 package sfn
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeActivityDoesNotExist for service response error code
@@ -24,6 +28,16 @@ const (
 	// been reached.
 	ErrCodeActivityWorkerLimitExceeded = "ActivityWorkerLimitExceeded"
 
+	// ErrCodeConflictException for service response error code
+	// "ConflictException".
+	//
+	// Updating or deleting a resource can cause an inconsistent state. This error
+	// occurs when there're concurrent requests for DeleteStateMachineVersion, PublishStateMachineVersion,
+	// or UpdateStateMachine with the publish parameter set to true.
+	//
+	// HTTP Status Code: 409
+	ErrCodeConflictException = "ConflictException"
+
 	// ErrCodeExecutionAlreadyExists for service response error code
 	// "ExecutionAlreadyExists".
 	//
@@ -45,41 +59,59 @@ const (
 	// must end or be stopped before a new execution can be started.
 	ErrCodeExecutionLimitExceeded = "ExecutionLimitExceeded"
 
+	// ErrCodeExecutionNotRedrivable for service response error code
+	// "ExecutionNotRedrivable".
+	//
+	// The execution Amazon Resource Name (ARN) that you specified for executionArn
+	// cannot be redriven.
+	ErrCodeExecutionNotRedrivable = "ExecutionNotRedrivable"
+
 	// ErrCodeInvalidArn for service response error code
 	// "InvalidArn".
 	//
-	// The provided Amazon Resource Name (ARN) is invalid.
+	// The provided Amazon Resource Name (ARN) is not valid.
 	ErrCodeInvalidArn = "InvalidArn"
 
 	// ErrCodeInvalidDefinition for service response error code
 	// "InvalidDefinition".
 	//
-	// The provided Amazon States Language definition is invalid.
+	// The provided Amazon States Language definition is not valid.
 	ErrCodeInvalidDefinition = "InvalidDefinition"
 
 	// ErrCodeInvalidExecutionInput for service response error code
 	// "InvalidExecutionInput".
 	//
-	// The provided JSON input data is invalid.
+	// The provided JSON input data is not valid.
 	ErrCodeInvalidExecutionInput = "InvalidExecutionInput"
+
+	// ErrCodeInvalidLoggingConfiguration for service response error code
+	// "InvalidLoggingConfiguration".
+	ErrCodeInvalidLoggingConfiguration = "InvalidLoggingConfiguration"
 
 	// ErrCodeInvalidName for service response error code
 	// "InvalidName".
 	//
-	// The provided name is invalid.
+	// The provided name is not valid.
 	ErrCodeInvalidName = "InvalidName"
 
 	// ErrCodeInvalidOutput for service response error code
 	// "InvalidOutput".
 	//
-	// The provided JSON output data is invalid.
+	// The provided JSON output data is not valid.
 	ErrCodeInvalidOutput = "InvalidOutput"
 
 	// ErrCodeInvalidToken for service response error code
 	// "InvalidToken".
 	//
-	// The provided token is invalid.
+	// The provided token is not valid.
 	ErrCodeInvalidToken = "InvalidToken"
+
+	// ErrCodeInvalidTracingConfiguration for service response error code
+	// "InvalidTracingConfiguration".
+	//
+	// Your tracingConfiguration key does not match, or enabled has not been set
+	// to true or false.
+	ErrCodeInvalidTracingConfiguration = "InvalidTracingConfiguration"
 
 	// ErrCodeMissingRequiredParameter for service response error code
 	// "MissingRequiredParameter".
@@ -91,9 +123,16 @@ const (
 	// ErrCodeResourceNotFound for service response error code
 	// "ResourceNotFound".
 	//
-	// Could not fine the referenced resource. Only state machine and activity ARNs
-	// are supported.
+	// Could not find the referenced resource.
 	ErrCodeResourceNotFound = "ResourceNotFound"
+
+	// ErrCodeServiceQuotaExceededException for service response error code
+	// "ServiceQuotaExceededException".
+	//
+	// The request would cause a service quota to be exceeded.
+	//
+	// HTTP Status Code: 402
+	ErrCodeServiceQuotaExceededException = "ServiceQuotaExceededException"
 
 	// ErrCodeStateMachineAlreadyExists for service response error code
 	// "StateMachineAlreadyExists".
@@ -121,19 +160,66 @@ const (
 	// must be deleted before a new state machine can be created.
 	ErrCodeStateMachineLimitExceeded = "StateMachineLimitExceeded"
 
+	// ErrCodeStateMachineTypeNotSupported for service response error code
+	// "StateMachineTypeNotSupported".
+	ErrCodeStateMachineTypeNotSupported = "StateMachineTypeNotSupported"
+
 	// ErrCodeTaskDoesNotExist for service response error code
 	// "TaskDoesNotExist".
+	//
+	// The activity does not exist.
 	ErrCodeTaskDoesNotExist = "TaskDoesNotExist"
 
 	// ErrCodeTaskTimedOut for service response error code
 	// "TaskTimedOut".
+	//
+	// The task token has either expired or the task associated with the token has
+	// already been closed.
 	ErrCodeTaskTimedOut = "TaskTimedOut"
 
 	// ErrCodeTooManyTags for service response error code
 	// "TooManyTags".
 	//
-	// You've exceeded the number of tags allowed for a resource. See the  Limits
-	// Topic (http://docs.aws.amazon.com/step-functions/latest/dg/limits.html) in
-	// the AWS Step Functions Developer Guide.
+	// You've exceeded the number of tags allowed for a resource. See the Limits
+	// Topic (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html)
+	// in the Step Functions Developer Guide.
 	ErrCodeTooManyTags = "TooManyTags"
+
+	// ErrCodeValidationException for service response error code
+	// "ValidationException".
+	//
+	// The input does not satisfy the constraints specified by an Amazon Web Services
+	// service.
+	ErrCodeValidationException = "ValidationException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"ActivityDoesNotExist":          newErrorActivityDoesNotExist,
+	"ActivityLimitExceeded":         newErrorActivityLimitExceeded,
+	"ActivityWorkerLimitExceeded":   newErrorActivityWorkerLimitExceeded,
+	"ConflictException":             newErrorConflictException,
+	"ExecutionAlreadyExists":        newErrorExecutionAlreadyExists,
+	"ExecutionDoesNotExist":         newErrorExecutionDoesNotExist,
+	"ExecutionLimitExceeded":        newErrorExecutionLimitExceeded,
+	"ExecutionNotRedrivable":        newErrorExecutionNotRedrivable,
+	"InvalidArn":                    newErrorInvalidArn,
+	"InvalidDefinition":             newErrorInvalidDefinition,
+	"InvalidExecutionInput":         newErrorInvalidExecutionInput,
+	"InvalidLoggingConfiguration":   newErrorInvalidLoggingConfiguration,
+	"InvalidName":                   newErrorInvalidName,
+	"InvalidOutput":                 newErrorInvalidOutput,
+	"InvalidToken":                  newErrorInvalidToken,
+	"InvalidTracingConfiguration":   newErrorInvalidTracingConfiguration,
+	"MissingRequiredParameter":      newErrorMissingRequiredParameter,
+	"ResourceNotFound":              newErrorResourceNotFound,
+	"ServiceQuotaExceededException": newErrorServiceQuotaExceededException,
+	"StateMachineAlreadyExists":     newErrorStateMachineAlreadyExists,
+	"StateMachineDeleting":          newErrorStateMachineDeleting,
+	"StateMachineDoesNotExist":      newErrorStateMachineDoesNotExist,
+	"StateMachineLimitExceeded":     newErrorStateMachineLimitExceeded,
+	"StateMachineTypeNotSupported":  newErrorStateMachineTypeNotSupported,
+	"TaskDoesNotExist":              newErrorTaskDoesNotExist,
+	"TaskTimedOut":                  newErrorTaskTimedOut,
+	"TooManyTags":                   newErrorTooManyTags,
+	"ValidationException":           newErrorValidationException,
+}

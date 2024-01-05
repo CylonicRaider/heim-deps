@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon CloudSearch.
-//    func myFunc(svc cloudsearchiface.CloudSearchAPI) bool {
-//        // Make svc.BuildSuggesters request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// Amazon CloudSearch.
+//	func myFunc(svc cloudsearchiface.CloudSearchAPI) bool {
+//	    // Make svc.BuildSuggesters request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := cloudsearch.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := cloudsearch.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudSearchClient struct {
-//        cloudsearchiface.CloudSearchAPI
-//    }
-//    func (m *mockCloudSearchClient) BuildSuggesters(input *cloudsearch.BuildSuggestersInput) (*cloudsearch.BuildSuggestersOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockCloudSearchClient struct {
+//	    cloudsearchiface.CloudSearchAPI
+//	}
+//	func (m *mockCloudSearchClient) BuildSuggesters(input *cloudsearch.BuildSuggestersInput) (*cloudsearch.BuildSuggestersOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudSearchClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockCloudSearchClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -112,6 +112,10 @@ type CloudSearchAPI interface {
 	DescribeAvailabilityOptionsWithContext(aws.Context, *cloudsearch.DescribeAvailabilityOptionsInput, ...request.Option) (*cloudsearch.DescribeAvailabilityOptionsOutput, error)
 	DescribeAvailabilityOptionsRequest(*cloudsearch.DescribeAvailabilityOptionsInput) (*request.Request, *cloudsearch.DescribeAvailabilityOptionsOutput)
 
+	DescribeDomainEndpointOptions(*cloudsearch.DescribeDomainEndpointOptionsInput) (*cloudsearch.DescribeDomainEndpointOptionsOutput, error)
+	DescribeDomainEndpointOptionsWithContext(aws.Context, *cloudsearch.DescribeDomainEndpointOptionsInput, ...request.Option) (*cloudsearch.DescribeDomainEndpointOptionsOutput, error)
+	DescribeDomainEndpointOptionsRequest(*cloudsearch.DescribeDomainEndpointOptionsInput) (*request.Request, *cloudsearch.DescribeDomainEndpointOptionsOutput)
+
 	DescribeDomains(*cloudsearch.DescribeDomainsInput) (*cloudsearch.DescribeDomainsOutput, error)
 	DescribeDomainsWithContext(aws.Context, *cloudsearch.DescribeDomainsInput, ...request.Option) (*cloudsearch.DescribeDomainsOutput, error)
 	DescribeDomainsRequest(*cloudsearch.DescribeDomainsInput) (*request.Request, *cloudsearch.DescribeDomainsOutput)
@@ -147,6 +151,10 @@ type CloudSearchAPI interface {
 	UpdateAvailabilityOptions(*cloudsearch.UpdateAvailabilityOptionsInput) (*cloudsearch.UpdateAvailabilityOptionsOutput, error)
 	UpdateAvailabilityOptionsWithContext(aws.Context, *cloudsearch.UpdateAvailabilityOptionsInput, ...request.Option) (*cloudsearch.UpdateAvailabilityOptionsOutput, error)
 	UpdateAvailabilityOptionsRequest(*cloudsearch.UpdateAvailabilityOptionsInput) (*request.Request, *cloudsearch.UpdateAvailabilityOptionsOutput)
+
+	UpdateDomainEndpointOptions(*cloudsearch.UpdateDomainEndpointOptionsInput) (*cloudsearch.UpdateDomainEndpointOptionsOutput, error)
+	UpdateDomainEndpointOptionsWithContext(aws.Context, *cloudsearch.UpdateDomainEndpointOptionsInput, ...request.Option) (*cloudsearch.UpdateDomainEndpointOptionsOutput, error)
+	UpdateDomainEndpointOptionsRequest(*cloudsearch.UpdateDomainEndpointOptionsInput) (*request.Request, *cloudsearch.UpdateDomainEndpointOptionsOutput)
 
 	UpdateScalingParameters(*cloudsearch.UpdateScalingParametersInput) (*cloudsearch.UpdateScalingParametersOutput, error)
 	UpdateScalingParametersWithContext(aws.Context, *cloudsearch.UpdateScalingParametersInput, ...request.Option) (*cloudsearch.UpdateScalingParametersOutput, error)

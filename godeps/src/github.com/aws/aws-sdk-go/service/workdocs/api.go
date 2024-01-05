@@ -29,14 +29,13 @@ const opAbortDocumentVersionUpload = "AbortDocumentVersionUpload"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AbortDocumentVersionUploadRequest method.
+//	req, resp := client.AbortDocumentVersionUploadRequest(params)
 //
-//    // Example sending a request using the AbortDocumentVersionUploadRequest method.
-//    req, resp := client.AbortDocumentVersionUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AbortDocumentVersionUpload
 func (c *WorkDocs) AbortDocumentVersionUploadRequest(input *AbortDocumentVersionUploadInput) (req *request.Request, output *AbortDocumentVersionUploadOutput) {
@@ -69,26 +68,30 @@ func (c *WorkDocs) AbortDocumentVersionUploadRequest(input *AbortDocumentVersion
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation AbortDocumentVersionUpload for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - ConcurrentModificationException
+//     The resource hierarchy is changing.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AbortDocumentVersionUpload
 func (c *WorkDocs) AbortDocumentVersionUpload(input *AbortDocumentVersionUploadInput) (*AbortDocumentVersionUploadOutput, error) {
@@ -128,14 +131,13 @@ const opActivateUser = "ActivateUser"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ActivateUserRequest method.
+//	req, resp := client.ActivateUserRequest(params)
 //
-//    // Example sending a request using the ActivateUserRequest method.
-//    req, resp := client.ActivateUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUser
 func (c *WorkDocs) ActivateUserRequest(input *ActivateUserInput) (req *request.Request, output *ActivateUserOutput) {
@@ -165,23 +167,24 @@ func (c *WorkDocs) ActivateUserRequest(input *ActivateUserInput) (req *request.R
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation ActivateUser for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUser
 func (c *WorkDocs) ActivateUser(input *ActivateUserInput) (*ActivateUserOutput, error) {
@@ -221,14 +224,13 @@ const opAddResourcePermissions = "AddResourcePermissions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddResourcePermissionsRequest method.
+//	req, resp := client.AddResourcePermissionsRequest(params)
 //
-//    // Example sending a request using the AddResourcePermissionsRequest method.
-//    req, resp := client.AddResourcePermissionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissions
 func (c *WorkDocs) AddResourcePermissionsRequest(input *AddResourcePermissionsInput) (req *request.Request, output *AddResourcePermissionsOutput) {
@@ -259,20 +261,24 @@ func (c *WorkDocs) AddResourcePermissionsRequest(input *AddResourcePermissionsIn
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation AddResourcePermissions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissions
 func (c *WorkDocs) AddResourcePermissions(input *AddResourcePermissionsInput) (*AddResourcePermissionsOutput, error) {
@@ -312,14 +318,13 @@ const opCreateComment = "CreateComment"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateCommentRequest method.
+//	req, resp := client.CreateCommentRequest(params)
 //
-//    // Example sending a request using the CreateCommentRequest method.
-//    req, resp := client.CreateCommentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateComment
 func (c *WorkDocs) CreateCommentRequest(input *CreateCommentInput) (req *request.Request, output *CreateCommentOutput) {
@@ -349,33 +354,34 @@ func (c *WorkDocs) CreateCommentRequest(input *CreateCommentInput) (req *request
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation CreateComment for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeDocumentLockedForCommentsException "DocumentLockedForCommentsException"
-//   This exception is thrown when the document is locked for comments and user
-//   tries to create or delete a comment on that document.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
-//   * ErrCodeInvalidCommentOperationException "InvalidCommentOperationException"
-//   The requested operation is not allowed on the specified comment object.
+//   - DocumentLockedForCommentsException
+//     This exception is thrown when the document is locked for comments and user
+//     tries to create or delete a comment on that document.
+//
+//   - InvalidCommentOperationException
+//     The requested operation is not allowed on the specified comment object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateComment
 func (c *WorkDocs) CreateComment(input *CreateCommentInput) (*CreateCommentOutput, error) {
@@ -415,14 +421,13 @@ const opCreateCustomMetadata = "CreateCustomMetadata"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateCustomMetadataRequest method.
+//	req, resp := client.CreateCustomMetadataRequest(params)
 //
-//    // Example sending a request using the CreateCustomMetadataRequest method.
-//    req, resp := client.CreateCustomMetadataRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadata
 func (c *WorkDocs) CreateCustomMetadataRequest(input *CreateCustomMetadataInput) (req *request.Request, output *CreateCustomMetadataOutput) {
@@ -454,30 +459,31 @@ func (c *WorkDocs) CreateCustomMetadataRequest(input *CreateCustomMetadataInput)
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation CreateCustomMetadata for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeCustomMetadataLimitExceededException "CustomMetadataLimitExceededException"
-//   The limit has been reached on the number of custom properties for the specified
-//   resource.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - CustomMetadataLimitExceededException
+//     The limit has been reached on the number of custom properties for the specified
+//     resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadata
 func (c *WorkDocs) CreateCustomMetadata(input *CreateCustomMetadataInput) (*CreateCustomMetadataOutput, error) {
@@ -517,14 +523,13 @@ const opCreateFolder = "CreateFolder"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateFolderRequest method.
+//	req, resp := client.CreateFolderRequest(params)
 //
-//    // Example sending a request using the CreateFolderRequest method.
-//    req, resp := client.CreateFolderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolder
 func (c *WorkDocs) CreateFolderRequest(input *CreateFolderInput) (req *request.Request, output *CreateFolderOutput) {
@@ -554,36 +559,41 @@ func (c *WorkDocs) CreateFolderRequest(input *CreateFolderInput) (req *request.R
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation CreateFolder for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The resource already exists.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityAlreadyExistsException
+//     The resource already exists.
 //
-//   * ErrCodeConflictingOperationException "ConflictingOperationException"
-//   Another operation is in progress on the resource that conflicts with the
-//   current operation.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The maximum of 100,000 folders under the parent folder has been exceeded.
+//   - ConflictingOperationException
+//     Another operation is in progress on the resource that conflicts with the
+//     current operation.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - ConcurrentModificationException
+//     The resource hierarchy is changing.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - LimitExceededException
+//     The maximum of 100,000 files and folders under the parent folder has been
+//     exceeded.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
+//
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolder
 func (c *WorkDocs) CreateFolder(input *CreateFolderInput) (*CreateFolderOutput, error) {
@@ -623,14 +633,13 @@ const opCreateLabels = "CreateLabels"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateLabelsRequest method.
+//	req, resp := client.CreateLabelsRequest(params)
 //
-//    // Example sending a request using the CreateLabelsRequest method.
-//    req, resp := client.CreateLabelsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabels
 func (c *WorkDocs) CreateLabelsRequest(input *CreateLabelsInput) (req *request.Request, output *CreateLabelsOutput) {
@@ -661,26 +670,27 @@ func (c *WorkDocs) CreateLabelsRequest(input *CreateLabelsInput) (req *request.R
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation CreateLabels for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeTooManyLabelsException "TooManyLabelsException"
-//   The limit has been reached on the number of labels for the specified resource.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - TooManyLabelsException
+//     The limit has been reached on the number of labels for the specified resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabels
 func (c *WorkDocs) CreateLabels(input *CreateLabelsInput) (*CreateLabelsOutput, error) {
@@ -720,14 +730,13 @@ const opCreateNotificationSubscription = "CreateNotificationSubscription"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateNotificationSubscriptionRequest method.
+//	req, resp := client.CreateNotificationSubscriptionRequest(params)
 //
-//    // Example sending a request using the CreateNotificationSubscriptionRequest method.
-//    req, resp := client.CreateNotificationSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscription
 func (c *WorkDocs) CreateNotificationSubscriptionRequest(input *CreateNotificationSubscriptionInput) (req *request.Request, output *CreateNotificationSubscriptionOutput) {
@@ -751,7 +760,8 @@ func (c *WorkDocs) CreateNotificationSubscriptionRequest(input *CreateNotificati
 // Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives
 // a confirmation message, and must confirm the subscription.
 //
-// For more information, see Subscribe to Notifications (http://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html)
+// For more information, see Setting up notifications for an IAM user or role
+// (https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html)
 // in the Amazon WorkDocs Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -761,16 +771,20 @@ func (c *WorkDocs) CreateNotificationSubscriptionRequest(input *CreateNotificati
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation CreateNotificationSubscription for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+// Returned Error Types:
 //
-//   * ErrCodeTooManySubscriptionsException "TooManySubscriptionsException"
-//   You've reached the limit on the number of subscriptions for the WorkDocs
-//   instance.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - TooManySubscriptionsException
+//     You've reached the limit on the number of subscriptions for the WorkDocs
+//     instance.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscription
 func (c *WorkDocs) CreateNotificationSubscription(input *CreateNotificationSubscriptionInput) (*CreateNotificationSubscriptionOutput, error) {
@@ -810,14 +824,13 @@ const opCreateUser = "CreateUser"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateUserRequest method.
+//	req, resp := client.CreateUserRequest(params)
 //
-//    // Example sending a request using the CreateUserRequest method.
-//    req, resp := client.CreateUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUser
 func (c *WorkDocs) CreateUserRequest(input *CreateUserInput) (req *request.Request, output *CreateUserOutput) {
@@ -848,23 +861,24 @@ func (c *WorkDocs) CreateUserRequest(input *CreateUserInput) (req *request.Reque
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation CreateUser for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The resource already exists.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityAlreadyExistsException
+//     The resource already exists.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUser
 func (c *WorkDocs) CreateUser(input *CreateUserInput) (*CreateUserOutput, error) {
@@ -904,14 +918,13 @@ const opDeactivateUser = "DeactivateUser"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeactivateUserRequest method.
+//	req, resp := client.DeactivateUserRequest(params)
 //
-//    // Example sending a request using the DeactivateUserRequest method.
-//    req, resp := client.DeactivateUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUser
 func (c *WorkDocs) DeactivateUserRequest(input *DeactivateUserInput) (req *request.Request, output *DeactivateUserOutput) {
@@ -943,23 +956,24 @@ func (c *WorkDocs) DeactivateUserRequest(input *DeactivateUserInput) (req *reque
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DeactivateUser for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUser
 func (c *WorkDocs) DeactivateUser(input *DeactivateUserInput) (*DeactivateUserOutput, error) {
@@ -999,14 +1013,13 @@ const opDeleteComment = "DeleteComment"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteCommentRequest method.
+//	req, resp := client.DeleteCommentRequest(params)
 //
-//    // Example sending a request using the DeleteCommentRequest method.
-//    req, resp := client.DeleteCommentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteComment
 func (c *WorkDocs) DeleteCommentRequest(input *DeleteCommentInput) (req *request.Request, output *DeleteCommentOutput) {
@@ -1037,30 +1050,31 @@ func (c *WorkDocs) DeleteCommentRequest(input *DeleteCommentInput) (req *request
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DeleteComment for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeDocumentLockedForCommentsException "DocumentLockedForCommentsException"
-//   This exception is thrown when the document is locked for comments and user
-//   tries to create or delete a comment on that document.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - DocumentLockedForCommentsException
+//     This exception is thrown when the document is locked for comments and user
+//     tries to create or delete a comment on that document.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteComment
 func (c *WorkDocs) DeleteComment(input *DeleteCommentInput) (*DeleteCommentOutput, error) {
@@ -1100,14 +1114,13 @@ const opDeleteCustomMetadata = "DeleteCustomMetadata"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteCustomMetadataRequest method.
+//	req, resp := client.DeleteCustomMetadataRequest(params)
 //
-//    // Example sending a request using the DeleteCustomMetadataRequest method.
-//    req, resp := client.DeleteCustomMetadataRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadata
 func (c *WorkDocs) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput) (req *request.Request, output *DeleteCustomMetadataOutput) {
@@ -1138,26 +1151,27 @@ func (c *WorkDocs) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput)
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DeleteCustomMetadata for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadata
 func (c *WorkDocs) DeleteCustomMetadata(input *DeleteCustomMetadataInput) (*DeleteCustomMetadataOutput, error) {
@@ -1197,14 +1211,13 @@ const opDeleteDocument = "DeleteDocument"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDocumentRequest method.
+//	req, resp := client.DeleteDocumentRequest(params)
 //
-//    // Example sending a request using the DeleteDocumentRequest method.
-//    req, resp := client.DeleteDocumentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocument
 func (c *WorkDocs) DeleteDocumentRequest(input *DeleteDocumentInput) (req *request.Request, output *DeleteDocumentOutput) {
@@ -1235,33 +1248,38 @@ func (c *WorkDocs) DeleteDocumentRequest(input *DeleteDocumentInput) (req *reque
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DeleteDocument for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeConflictingOperationException "ConflictingOperationException"
-//   Another operation is in progress on the resource that conflicts with the
-//   current operation.
+//   - LimitExceededException
+//     The maximum of 100,000 files and folders under the parent folder has been
+//     exceeded.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   The resource hierarchy is changing.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - ConflictingOperationException
+//     Another operation is in progress on the resource that conflicts with the
+//     current operation.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - ConcurrentModificationException
+//     The resource hierarchy is changing.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
+//
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocument
 func (c *WorkDocs) DeleteDocument(input *DeleteDocumentInput) (*DeleteDocumentOutput, error) {
@@ -1285,6 +1303,110 @@ func (c *WorkDocs) DeleteDocumentWithContext(ctx aws.Context, input *DeleteDocum
 	return out, req.Send()
 }
 
+const opDeleteDocumentVersion = "DeleteDocumentVersion"
+
+// DeleteDocumentVersionRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteDocumentVersion operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteDocumentVersion for more information on using the DeleteDocumentVersion
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteDocumentVersionRequest method.
+//	req, resp := client.DeleteDocumentVersionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentVersion
+func (c *WorkDocs) DeleteDocumentVersionRequest(input *DeleteDocumentVersionInput) (req *request.Request, output *DeleteDocumentVersionOutput) {
+	op := &request.Operation{
+		Name:       opDeleteDocumentVersion,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/api/v1/documentVersions/{DocumentId}/versions/{VersionId}",
+	}
+
+	if input == nil {
+		input = &DeleteDocumentVersionInput{}
+	}
+
+	output = &DeleteDocumentVersionOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteDocumentVersion API operation for Amazon WorkDocs.
+//
+// Deletes a specific version of a document.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkDocs's
+// API operation DeleteDocumentVersion for usage and error information.
+//
+// Returned Error Types:
+//
+//   - EntityNotExistsException
+//     The resource does not exist.
+//
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
+//
+//   - ConflictingOperationException
+//     Another operation is in progress on the resource that conflicts with the
+//     current operation.
+//
+//   - ConcurrentModificationException
+//     The resource hierarchy is changing.
+//
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
+//
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - InvalidOperationException
+//     The operation is invalid.
+//
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentVersion
+func (c *WorkDocs) DeleteDocumentVersion(input *DeleteDocumentVersionInput) (*DeleteDocumentVersionOutput, error) {
+	req, out := c.DeleteDocumentVersionRequest(input)
+	return out, req.Send()
+}
+
+// DeleteDocumentVersionWithContext is the same as DeleteDocumentVersion with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteDocumentVersion for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) DeleteDocumentVersionWithContext(ctx aws.Context, input *DeleteDocumentVersionInput, opts ...request.Option) (*DeleteDocumentVersionOutput, error) {
+	req, out := c.DeleteDocumentVersionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteFolder = "DeleteFolder"
 
 // DeleteFolderRequest generates a "aws/request.Request" representing the
@@ -1301,14 +1423,13 @@ const opDeleteFolder = "DeleteFolder"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteFolderRequest method.
+//	req, resp := client.DeleteFolderRequest(params)
 //
-//    // Example sending a request using the DeleteFolderRequest method.
-//    req, resp := client.DeleteFolderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolder
 func (c *WorkDocs) DeleteFolderRequest(input *DeleteFolderInput) (req *request.Request, output *DeleteFolderOutput) {
@@ -1339,33 +1460,38 @@ func (c *WorkDocs) DeleteFolderRequest(input *DeleteFolderInput) (req *request.R
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DeleteFolder for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeConflictingOperationException "ConflictingOperationException"
-//   Another operation is in progress on the resource that conflicts with the
-//   current operation.
+//   - LimitExceededException
+//     The maximum of 100,000 files and folders under the parent folder has been
+//     exceeded.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   The resource hierarchy is changing.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - ConflictingOperationException
+//     Another operation is in progress on the resource that conflicts with the
+//     current operation.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - ConcurrentModificationException
+//     The resource hierarchy is changing.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
+//
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolder
 func (c *WorkDocs) DeleteFolder(input *DeleteFolderInput) (*DeleteFolderOutput, error) {
@@ -1405,14 +1531,13 @@ const opDeleteFolderContents = "DeleteFolderContents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteFolderContentsRequest method.
+//	req, resp := client.DeleteFolderContentsRequest(params)
 //
-//    // Example sending a request using the DeleteFolderContentsRequest method.
-//    req, resp := client.DeleteFolderContentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderContents
 func (c *WorkDocs) DeleteFolderContentsRequest(input *DeleteFolderContentsInput) (req *request.Request, output *DeleteFolderContentsOutput) {
@@ -1443,30 +1568,31 @@ func (c *WorkDocs) DeleteFolderContentsRequest(input *DeleteFolderContentsInput)
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DeleteFolderContents for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeConflictingOperationException "ConflictingOperationException"
-//   Another operation is in progress on the resource that conflicts with the
-//   current operation.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - ConflictingOperationException
+//     Another operation is in progress on the resource that conflicts with the
+//     current operation.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderContents
 func (c *WorkDocs) DeleteFolderContents(input *DeleteFolderContentsInput) (*DeleteFolderContentsOutput, error) {
@@ -1506,14 +1632,13 @@ const opDeleteLabels = "DeleteLabels"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteLabelsRequest method.
+//	req, resp := client.DeleteLabelsRequest(params)
 //
-//    // Example sending a request using the DeleteLabelsRequest method.
-//    req, resp := client.DeleteLabelsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabels
 func (c *WorkDocs) DeleteLabelsRequest(input *DeleteLabelsInput) (req *request.Request, output *DeleteLabelsOutput) {
@@ -1544,23 +1669,27 @@ func (c *WorkDocs) DeleteLabelsRequest(input *DeleteLabelsInput) (req *request.R
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DeleteLabels for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabels
 func (c *WorkDocs) DeleteLabels(input *DeleteLabelsInput) (*DeleteLabelsOutput, error) {
@@ -1600,14 +1729,13 @@ const opDeleteNotificationSubscription = "DeleteNotificationSubscription"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteNotificationSubscriptionRequest method.
+//	req, resp := client.DeleteNotificationSubscriptionRequest(params)
 //
-//    // Example sending a request using the DeleteNotificationSubscriptionRequest method.
-//    req, resp := client.DeleteNotificationSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteNotificationSubscription
 func (c *WorkDocs) DeleteNotificationSubscriptionRequest(input *DeleteNotificationSubscriptionInput) (req *request.Request, output *DeleteNotificationSubscriptionOutput) {
@@ -1638,18 +1766,19 @@ func (c *WorkDocs) DeleteNotificationSubscriptionRequest(input *DeleteNotificati
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DeleteNotificationSubscription for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+// Returned Error Types:
 //
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteNotificationSubscription
 func (c *WorkDocs) DeleteNotificationSubscription(input *DeleteNotificationSubscriptionInput) (*DeleteNotificationSubscriptionOutput, error) {
@@ -1689,14 +1818,13 @@ const opDeleteUser = "DeleteUser"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteUserRequest method.
+//	req, resp := client.DeleteUserRequest(params)
 //
-//    // Example sending a request using the DeleteUserRequest method.
-//    req, resp := client.DeleteUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteUser
 func (c *WorkDocs) DeleteUserRequest(input *DeleteUserInput) (req *request.Request, output *DeleteUserOutput) {
@@ -1720,6 +1848,9 @@ func (c *WorkDocs) DeleteUserRequest(input *DeleteUserInput) (req *request.Reque
 //
 // Deletes the specified user from a Simple AD or Microsoft AD directory.
 //
+// Deleting a user immediately and permanently deletes all content in that user's
+// folder structure. Site retention policies do NOT apply to this type of deletion.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -1727,23 +1858,24 @@ func (c *WorkDocs) DeleteUserRequest(input *DeleteUserInput) (req *request.Reque
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DeleteUser for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteUser
 func (c *WorkDocs) DeleteUser(input *DeleteUserInput) (*DeleteUserOutput, error) {
@@ -1783,14 +1915,13 @@ const opDescribeActivities = "DescribeActivities"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeActivitiesRequest method.
+//	req, resp := client.DescribeActivitiesRequest(params)
 //
-//    // Example sending a request using the DescribeActivitiesRequest method.
-//    req, resp := client.DescribeActivitiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivities
 func (c *WorkDocs) DescribeActivitiesRequest(input *DescribeActivitiesInput) (req *request.Request, output *DescribeActivitiesOutput) {
@@ -1798,6 +1929,12 @@ func (c *WorkDocs) DescribeActivitiesRequest(input *DescribeActivitiesInput) (re
 		Name:       opDescribeActivities,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/activities",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1820,23 +1957,24 @@ func (c *WorkDocs) DescribeActivitiesRequest(input *DescribeActivitiesInput) (re
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DescribeActivities for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The pagination marker or limit fields are not valid.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivities
 func (c *WorkDocs) DescribeActivities(input *DescribeActivitiesInput) (*DescribeActivitiesOutput, error) {
@@ -1860,6 +1998,57 @@ func (c *WorkDocs) DescribeActivitiesWithContext(ctx aws.Context, input *Describ
 	return out, req.Send()
 }
 
+// DescribeActivitiesPages iterates over the pages of a DescribeActivities operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeActivities method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeActivities operation.
+//	pageNum := 0
+//	err := client.DescribeActivitiesPages(params,
+//	    func(page *workdocs.DescribeActivitiesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *WorkDocs) DescribeActivitiesPages(input *DescribeActivitiesInput, fn func(*DescribeActivitiesOutput, bool) bool) error {
+	return c.DescribeActivitiesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeActivitiesPagesWithContext same as DescribeActivitiesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) DescribeActivitiesPagesWithContext(ctx aws.Context, input *DescribeActivitiesInput, fn func(*DescribeActivitiesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeActivitiesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeActivitiesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeActivitiesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeComments = "DescribeComments"
 
 // DescribeCommentsRequest generates a "aws/request.Request" representing the
@@ -1876,14 +2065,13 @@ const opDescribeComments = "DescribeComments"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeCommentsRequest method.
+//	req, resp := client.DescribeCommentsRequest(params)
 //
-//    // Example sending a request using the DescribeCommentsRequest method.
-//    req, resp := client.DescribeCommentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeComments
 func (c *WorkDocs) DescribeCommentsRequest(input *DescribeCommentsInput) (req *request.Request, output *DescribeCommentsOutput) {
@@ -1891,6 +2079,12 @@ func (c *WorkDocs) DescribeCommentsRequest(input *DescribeCommentsInput) (req *r
 		Name:       opDescribeComments,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/documents/{DocumentId}/versions/{VersionId}/comments",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1913,26 +2107,27 @@ func (c *WorkDocs) DescribeCommentsRequest(input *DescribeCommentsInput) (req *r
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DescribeComments for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeComments
 func (c *WorkDocs) DescribeComments(input *DescribeCommentsInput) (*DescribeCommentsOutput, error) {
@@ -1956,6 +2151,57 @@ func (c *WorkDocs) DescribeCommentsWithContext(ctx aws.Context, input *DescribeC
 	return out, req.Send()
 }
 
+// DescribeCommentsPages iterates over the pages of a DescribeComments operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeComments method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeComments operation.
+//	pageNum := 0
+//	err := client.DescribeCommentsPages(params,
+//	    func(page *workdocs.DescribeCommentsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *WorkDocs) DescribeCommentsPages(input *DescribeCommentsInput, fn func(*DescribeCommentsOutput, bool) bool) error {
+	return c.DescribeCommentsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeCommentsPagesWithContext same as DescribeCommentsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) DescribeCommentsPagesWithContext(ctx aws.Context, input *DescribeCommentsInput, fn func(*DescribeCommentsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeCommentsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeCommentsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeCommentsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeDocumentVersions = "DescribeDocumentVersions"
 
 // DescribeDocumentVersionsRequest generates a "aws/request.Request" representing the
@@ -1972,14 +2218,13 @@ const opDescribeDocumentVersions = "DescribeDocumentVersions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDocumentVersionsRequest method.
+//	req, resp := client.DescribeDocumentVersionsRequest(params)
 //
-//    // Example sending a request using the DescribeDocumentVersionsRequest method.
-//    req, resp := client.DescribeDocumentVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeDocumentVersions
 func (c *WorkDocs) DescribeDocumentVersionsRequest(input *DescribeDocumentVersionsInput) (req *request.Request, output *DescribeDocumentVersionsOutput) {
@@ -2017,29 +2262,33 @@ func (c *WorkDocs) DescribeDocumentVersionsRequest(input *DescribeDocumentVersio
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DescribeDocumentVersions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The pagination marker or limit fields are not valid.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
+//
+//   - InvalidPasswordException
+//     The password is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeDocumentVersions
 func (c *WorkDocs) DescribeDocumentVersions(input *DescribeDocumentVersionsInput) (*DescribeDocumentVersionsOutput, error) {
@@ -2071,15 +2320,14 @@ func (c *WorkDocs) DescribeDocumentVersionsWithContext(ctx aws.Context, input *D
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeDocumentVersions operation.
-//    pageNum := 0
-//    err := client.DescribeDocumentVersionsPages(params,
-//        func(page *DescribeDocumentVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeDocumentVersions operation.
+//	pageNum := 0
+//	err := client.DescribeDocumentVersionsPages(params,
+//	    func(page *workdocs.DescribeDocumentVersionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *WorkDocs) DescribeDocumentVersionsPages(input *DescribeDocumentVersionsInput, fn func(*DescribeDocumentVersionsOutput, bool) bool) error {
 	return c.DescribeDocumentVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2106,10 +2354,12 @@ func (c *WorkDocs) DescribeDocumentVersionsPagesWithContext(ctx aws.Context, inp
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDocumentVersionsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDocumentVersionsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2129,14 +2379,13 @@ const opDescribeFolderContents = "DescribeFolderContents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeFolderContentsRequest method.
+//	req, resp := client.DescribeFolderContentsRequest(params)
 //
-//    // Example sending a request using the DescribeFolderContentsRequest method.
-//    req, resp := client.DescribeFolderContentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContents
 func (c *WorkDocs) DescribeFolderContentsRequest(input *DescribeFolderContentsInput) (req *request.Request, output *DescribeFolderContentsOutput) {
@@ -2178,26 +2427,27 @@ func (c *WorkDocs) DescribeFolderContentsRequest(input *DescribeFolderContentsIn
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DescribeFolderContents for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The pagination marker or limit fields are not valid.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContents
 func (c *WorkDocs) DescribeFolderContents(input *DescribeFolderContentsInput) (*DescribeFolderContentsOutput, error) {
@@ -2229,15 +2479,14 @@ func (c *WorkDocs) DescribeFolderContentsWithContext(ctx aws.Context, input *Des
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeFolderContents operation.
-//    pageNum := 0
-//    err := client.DescribeFolderContentsPages(params,
-//        func(page *DescribeFolderContentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeFolderContents operation.
+//	pageNum := 0
+//	err := client.DescribeFolderContentsPages(params,
+//	    func(page *workdocs.DescribeFolderContentsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *WorkDocs) DescribeFolderContentsPages(input *DescribeFolderContentsInput, fn func(*DescribeFolderContentsOutput, bool) bool) error {
 	return c.DescribeFolderContentsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2264,10 +2513,12 @@ func (c *WorkDocs) DescribeFolderContentsPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeFolderContentsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeFolderContentsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2287,14 +2538,13 @@ const opDescribeGroups = "DescribeGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeGroupsRequest method.
+//	req, resp := client.DescribeGroupsRequest(params)
 //
-//    // Example sending a request using the DescribeGroupsRequest method.
-//    req, resp := client.DescribeGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeGroups
 func (c *WorkDocs) DescribeGroupsRequest(input *DescribeGroupsInput) (req *request.Request, output *DescribeGroupsOutput) {
@@ -2302,6 +2552,12 @@ func (c *WorkDocs) DescribeGroupsRequest(input *DescribeGroupsInput) (req *reque
 		Name:       opDescribeGroups,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/groups",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -2325,20 +2581,21 @@ func (c *WorkDocs) DescribeGroupsRequest(input *DescribeGroupsInput) (req *reque
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DescribeGroups for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeGroups
 func (c *WorkDocs) DescribeGroups(input *DescribeGroupsInput) (*DescribeGroupsOutput, error) {
@@ -2362,6 +2619,57 @@ func (c *WorkDocs) DescribeGroupsWithContext(ctx aws.Context, input *DescribeGro
 	return out, req.Send()
 }
 
+// DescribeGroupsPages iterates over the pages of a DescribeGroups operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeGroups method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeGroups operation.
+//	pageNum := 0
+//	err := client.DescribeGroupsPages(params,
+//	    func(page *workdocs.DescribeGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *WorkDocs) DescribeGroupsPages(input *DescribeGroupsInput, fn func(*DescribeGroupsOutput, bool) bool) error {
+	return c.DescribeGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeGroupsPagesWithContext same as DescribeGroupsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) DescribeGroupsPagesWithContext(ctx aws.Context, input *DescribeGroupsInput, fn func(*DescribeGroupsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeGroupsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeGroupsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeGroupsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeNotificationSubscriptions = "DescribeNotificationSubscriptions"
 
 // DescribeNotificationSubscriptionsRequest generates a "aws/request.Request" representing the
@@ -2378,14 +2686,13 @@ const opDescribeNotificationSubscriptions = "DescribeNotificationSubscriptions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeNotificationSubscriptionsRequest method.
+//	req, resp := client.DescribeNotificationSubscriptionsRequest(params)
 //
-//    // Example sending a request using the DescribeNotificationSubscriptionsRequest method.
-//    req, resp := client.DescribeNotificationSubscriptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeNotificationSubscriptions
 func (c *WorkDocs) DescribeNotificationSubscriptionsRequest(input *DescribeNotificationSubscriptionsInput) (req *request.Request, output *DescribeNotificationSubscriptionsOutput) {
@@ -2393,6 +2700,12 @@ func (c *WorkDocs) DescribeNotificationSubscriptionsRequest(input *DescribeNotif
 		Name:       opDescribeNotificationSubscriptions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/organizations/{OrganizationId}/subscriptions",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -2415,15 +2728,16 @@ func (c *WorkDocs) DescribeNotificationSubscriptionsRequest(input *DescribeNotif
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DescribeNotificationSubscriptions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+// Returned Error Types:
 //
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - EntityNotExistsException
+//     The resource does not exist.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeNotificationSubscriptions
 func (c *WorkDocs) DescribeNotificationSubscriptions(input *DescribeNotificationSubscriptionsInput) (*DescribeNotificationSubscriptionsOutput, error) {
@@ -2447,6 +2761,57 @@ func (c *WorkDocs) DescribeNotificationSubscriptionsWithContext(ctx aws.Context,
 	return out, req.Send()
 }
 
+// DescribeNotificationSubscriptionsPages iterates over the pages of a DescribeNotificationSubscriptions operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeNotificationSubscriptions method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeNotificationSubscriptions operation.
+//	pageNum := 0
+//	err := client.DescribeNotificationSubscriptionsPages(params,
+//	    func(page *workdocs.DescribeNotificationSubscriptionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *WorkDocs) DescribeNotificationSubscriptionsPages(input *DescribeNotificationSubscriptionsInput, fn func(*DescribeNotificationSubscriptionsOutput, bool) bool) error {
+	return c.DescribeNotificationSubscriptionsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeNotificationSubscriptionsPagesWithContext same as DescribeNotificationSubscriptionsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) DescribeNotificationSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeNotificationSubscriptionsInput, fn func(*DescribeNotificationSubscriptionsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeNotificationSubscriptionsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeNotificationSubscriptionsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeNotificationSubscriptionsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeResourcePermissions = "DescribeResourcePermissions"
 
 // DescribeResourcePermissionsRequest generates a "aws/request.Request" representing the
@@ -2463,14 +2828,13 @@ const opDescribeResourcePermissions = "DescribeResourcePermissions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeResourcePermissionsRequest method.
+//	req, resp := client.DescribeResourcePermissionsRequest(params)
 //
-//    // Example sending a request using the DescribeResourcePermissionsRequest method.
-//    req, resp := client.DescribeResourcePermissionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeResourcePermissions
 func (c *WorkDocs) DescribeResourcePermissionsRequest(input *DescribeResourcePermissionsInput) (req *request.Request, output *DescribeResourcePermissionsOutput) {
@@ -2478,6 +2842,12 @@ func (c *WorkDocs) DescribeResourcePermissionsRequest(input *DescribeResourcePer
 		Name:       opDescribeResourcePermissions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/resources/{ResourceId}/permissions",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -2500,20 +2870,24 @@ func (c *WorkDocs) DescribeResourcePermissionsRequest(input *DescribeResourcePer
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DescribeResourcePermissions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
+//
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeResourcePermissions
 func (c *WorkDocs) DescribeResourcePermissions(input *DescribeResourcePermissionsInput) (*DescribeResourcePermissionsOutput, error) {
@@ -2537,6 +2911,57 @@ func (c *WorkDocs) DescribeResourcePermissionsWithContext(ctx aws.Context, input
 	return out, req.Send()
 }
 
+// DescribeResourcePermissionsPages iterates over the pages of a DescribeResourcePermissions operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeResourcePermissions method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeResourcePermissions operation.
+//	pageNum := 0
+//	err := client.DescribeResourcePermissionsPages(params,
+//	    func(page *workdocs.DescribeResourcePermissionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *WorkDocs) DescribeResourcePermissionsPages(input *DescribeResourcePermissionsInput, fn func(*DescribeResourcePermissionsOutput, bool) bool) error {
+	return c.DescribeResourcePermissionsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeResourcePermissionsPagesWithContext same as DescribeResourcePermissionsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) DescribeResourcePermissionsPagesWithContext(ctx aws.Context, input *DescribeResourcePermissionsInput, fn func(*DescribeResourcePermissionsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeResourcePermissionsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeResourcePermissionsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeResourcePermissionsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeRootFolders = "DescribeRootFolders"
 
 // DescribeRootFoldersRequest generates a "aws/request.Request" representing the
@@ -2553,14 +2978,13 @@ const opDescribeRootFolders = "DescribeRootFolders"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeRootFoldersRequest method.
+//	req, resp := client.DescribeRootFoldersRequest(params)
 //
-//    // Example sending a request using the DescribeRootFoldersRequest method.
-//    req, resp := client.DescribeRootFoldersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeRootFolders
 func (c *WorkDocs) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) (req *request.Request, output *DescribeRootFoldersOutput) {
@@ -2568,6 +2992,12 @@ func (c *WorkDocs) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) (
 		Name:       opDescribeRootFolders,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/me/root",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -2588,7 +3018,7 @@ func (c *WorkDocs) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) (
 //
 // This action requires an authentication token. To get an authentication token,
 // register an application with Amazon WorkDocs. For more information, see Authentication
-// and Access Control for User Applications (http://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
+// and Access Control for User Applications (https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
 // in the Amazon WorkDocs Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2598,23 +3028,24 @@ func (c *WorkDocs) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) (
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DescribeRootFolders for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The pagination marker or limit fields are not valid.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeRootFolders
 func (c *WorkDocs) DescribeRootFolders(input *DescribeRootFoldersInput) (*DescribeRootFoldersOutput, error) {
@@ -2638,6 +3069,57 @@ func (c *WorkDocs) DescribeRootFoldersWithContext(ctx aws.Context, input *Descri
 	return out, req.Send()
 }
 
+// DescribeRootFoldersPages iterates over the pages of a DescribeRootFolders operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeRootFolders method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeRootFolders operation.
+//	pageNum := 0
+//	err := client.DescribeRootFoldersPages(params,
+//	    func(page *workdocs.DescribeRootFoldersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *WorkDocs) DescribeRootFoldersPages(input *DescribeRootFoldersInput, fn func(*DescribeRootFoldersOutput, bool) bool) error {
+	return c.DescribeRootFoldersPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeRootFoldersPagesWithContext same as DescribeRootFoldersPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) DescribeRootFoldersPagesWithContext(ctx aws.Context, input *DescribeRootFoldersInput, fn func(*DescribeRootFoldersOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeRootFoldersInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeRootFoldersRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeRootFoldersOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeUsers = "DescribeUsers"
 
 // DescribeUsersRequest generates a "aws/request.Request" representing the
@@ -2654,14 +3136,13 @@ const opDescribeUsers = "DescribeUsers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeUsersRequest method.
+//	req, resp := client.DescribeUsersRequest(params)
 //
-//    // Example sending a request using the DescribeUsersRequest method.
-//    req, resp := client.DescribeUsersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsers
 func (c *WorkDocs) DescribeUsersRequest(input *DescribeUsersInput) (req *request.Request, output *DescribeUsersOutput) {
@@ -2702,30 +3183,31 @@ func (c *WorkDocs) DescribeUsersRequest(input *DescribeUsersInput) (req *request
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation DescribeUsers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The pagination marker or limit fields are not valid.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
-//   * ErrCodeRequestedEntityTooLargeException "RequestedEntityTooLargeException"
-//   The response is too large to return. The request must include a filter to
-//   reduce the size of the response.
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
+//
+//   - RequestedEntityTooLargeException
+//     The response is too large to return. The request must include a filter to
+//     reduce the size of the response.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsers
 func (c *WorkDocs) DescribeUsers(input *DescribeUsersInput) (*DescribeUsersOutput, error) {
@@ -2757,15 +3239,14 @@ func (c *WorkDocs) DescribeUsersWithContext(ctx aws.Context, input *DescribeUser
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeUsers operation.
-//    pageNum := 0
-//    err := client.DescribeUsersPages(params,
-//        func(page *DescribeUsersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeUsers operation.
+//	pageNum := 0
+//	err := client.DescribeUsersPages(params,
+//	    func(page *workdocs.DescribeUsersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *WorkDocs) DescribeUsersPages(input *DescribeUsersInput, fn func(*DescribeUsersOutput, bool) bool) error {
 	return c.DescribeUsersPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2792,10 +3273,12 @@ func (c *WorkDocs) DescribeUsersPagesWithContext(ctx aws.Context, input *Describ
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeUsersOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeUsersOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2815,14 +3298,13 @@ const opGetCurrentUser = "GetCurrentUser"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetCurrentUserRequest method.
+//	req, resp := client.GetCurrentUserRequest(params)
 //
-//    // Example sending a request using the GetCurrentUserRequest method.
-//    req, resp := client.GetCurrentUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUser
 func (c *WorkDocs) GetCurrentUserRequest(input *GetCurrentUserInput) (req *request.Request, output *GetCurrentUserOutput) {
@@ -2846,6 +3328,11 @@ func (c *WorkDocs) GetCurrentUserRequest(input *GetCurrentUserInput) (req *reque
 // Retrieves details of the current user for whom the authentication token was
 // generated. This is not a valid action for SigV4 (administrative API) clients.
 //
+// This action requires an authentication token. To get an authentication token,
+// register an application with Amazon WorkDocs. For more information, see Authentication
+// and Access Control for User Applications (https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
+// in the Amazon WorkDocs Developer Guide.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -2853,23 +3340,24 @@ func (c *WorkDocs) GetCurrentUserRequest(input *GetCurrentUserInput) (req *reque
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation GetCurrentUser for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUser
 func (c *WorkDocs) GetCurrentUser(input *GetCurrentUserInput) (*GetCurrentUserOutput, error) {
@@ -2909,14 +3397,13 @@ const opGetDocument = "GetDocument"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDocumentRequest method.
+//	req, resp := client.GetDocumentRequest(params)
 //
-//    // Example sending a request using the GetDocumentRequest method.
-//    req, resp := client.GetDocumentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocument
 func (c *WorkDocs) GetDocumentRequest(input *GetDocumentInput) (req *request.Request, output *GetDocumentOutput) {
@@ -2946,29 +3433,30 @@ func (c *WorkDocs) GetDocumentRequest(input *GetDocumentInput) (req *request.Req
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation GetDocument for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The pagination marker or limit fields are not valid.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeInvalidPasswordException "InvalidPasswordException"
-//   The password is invalid.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - InvalidPasswordException
+//     The password is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocument
 func (c *WorkDocs) GetDocument(input *GetDocumentInput) (*GetDocumentOutput, error) {
@@ -3008,14 +3496,13 @@ const opGetDocumentPath = "GetDocumentPath"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDocumentPathRequest method.
+//	req, resp := client.GetDocumentPathRequest(params)
 //
-//    // Example sending a request using the GetDocumentPathRequest method.
-//    req, resp := client.GetDocumentPathRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentPath
 func (c *WorkDocs) GetDocumentPathRequest(input *GetDocumentPathInput) (req *request.Request, output *GetDocumentPathOutput) {
@@ -3051,23 +3538,24 @@ func (c *WorkDocs) GetDocumentPathRequest(input *GetDocumentPathInput) (req *req
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation GetDocumentPath for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentPath
 func (c *WorkDocs) GetDocumentPath(input *GetDocumentPathInput) (*GetDocumentPathOutput, error) {
@@ -3107,14 +3595,13 @@ const opGetDocumentVersion = "GetDocumentVersion"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDocumentVersionRequest method.
+//	req, resp := client.GetDocumentVersionRequest(params)
 //
-//    // Example sending a request using the GetDocumentVersionRequest method.
-//    req, resp := client.GetDocumentVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersion
 func (c *WorkDocs) GetDocumentVersionRequest(input *GetDocumentVersionInput) (req *request.Request, output *GetDocumentVersionOutput) {
@@ -3144,29 +3631,30 @@ func (c *WorkDocs) GetDocumentVersionRequest(input *GetDocumentVersionInput) (re
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation GetDocumentVersion for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
-//   * ErrCodeInvalidPasswordException "InvalidPasswordException"
-//   The password is invalid.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
+//
+//   - InvalidPasswordException
+//     The password is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersion
 func (c *WorkDocs) GetDocumentVersion(input *GetDocumentVersionInput) (*GetDocumentVersionOutput, error) {
@@ -3206,14 +3694,13 @@ const opGetFolder = "GetFolder"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetFolderRequest method.
+//	req, resp := client.GetFolderRequest(params)
 //
-//    // Example sending a request using the GetFolderRequest method.
-//    req, resp := client.GetFolderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolder
 func (c *WorkDocs) GetFolderRequest(input *GetFolderInput) (req *request.Request, output *GetFolderOutput) {
@@ -3243,29 +3730,30 @@ func (c *WorkDocs) GetFolderRequest(input *GetFolderInput) (req *request.Request
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation GetFolder for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The pagination marker or limit fields are not valid.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolder
 func (c *WorkDocs) GetFolder(input *GetFolderInput) (*GetFolderOutput, error) {
@@ -3305,14 +3793,13 @@ const opGetFolderPath = "GetFolderPath"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetFolderPathRequest method.
+//	req, resp := client.GetFolderPathRequest(params)
 //
-//    // Example sending a request using the GetFolderPathRequest method.
-//    req, resp := client.GetFolderPathRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderPath
 func (c *WorkDocs) GetFolderPathRequest(input *GetFolderPathInput) (req *request.Request, output *GetFolderPathOutput) {
@@ -3348,23 +3835,24 @@ func (c *WorkDocs) GetFolderPathRequest(input *GetFolderPathInput) (req *request
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation GetFolderPath for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderPath
 func (c *WorkDocs) GetFolderPath(input *GetFolderPathInput) (*GetFolderPathOutput, error) {
@@ -3404,14 +3892,13 @@ const opGetResources = "GetResources"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetResourcesRequest method.
+//	req, resp := client.GetResourcesRequest(params)
 //
-//    // Example sending a request using the GetResourcesRequest method.
-//    req, resp := client.GetResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResources
 func (c *WorkDocs) GetResourcesRequest(input *GetResourcesInput) (req *request.Request, output *GetResourcesOutput) {
@@ -3442,23 +3929,24 @@ func (c *WorkDocs) GetResourcesRequest(input *GetResourcesInput) (req *request.R
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation GetResources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The pagination marker or limit fields are not valid.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResources
 func (c *WorkDocs) GetResources(input *GetResourcesInput) (*GetResourcesOutput, error) {
@@ -3498,14 +3986,13 @@ const opInitiateDocumentVersionUpload = "InitiateDocumentVersionUpload"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the InitiateDocumentVersionUploadRequest method.
+//	req, resp := client.InitiateDocumentVersionUploadRequest(params)
 //
-//    // Example sending a request using the InitiateDocumentVersionUploadRequest method.
-//    req, resp := client.InitiateDocumentVersionUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InitiateDocumentVersionUpload
 func (c *WorkDocs) InitiateDocumentVersionUploadRequest(input *InitiateDocumentVersionUploadInput) (req *request.Request, output *InitiateDocumentVersionUploadOutput) {
@@ -3542,42 +4029,53 @@ func (c *WorkDocs) InitiateDocumentVersionUploadRequest(input *InitiateDocumentV
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation InitiateDocumentVersionUpload for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The resource already exists.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeStorageLimitExceededException "StorageLimitExceededException"
-//   The storage limit has been exceeded.
+//   - EntityAlreadyExistsException
+//     The resource already exists.
 //
-//   * ErrCodeStorageLimitWillExceedException "StorageLimitWillExceedException"
-//   The storage limit will be exceeded.
+//   - StorageLimitExceededException
+//     The storage limit has been exceeded.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - StorageLimitWillExceedException
+//     The storage limit will be exceeded.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - LimitExceededException
+//     The maximum of 100,000 files and folders under the parent folder has been
+//     exceeded.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeDraftUploadOutOfSyncException "DraftUploadOutOfSyncException"
-//   This exception is thrown when a valid checkout ID is not presented on document
-//   version upload calls for a document that has been checked out from Web client.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeResourceAlreadyCheckedOutException "ResourceAlreadyCheckedOutException"
-//   The resource is already checked out.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - DraftUploadOutOfSyncException
+//     This exception is thrown when a valid checkout ID is not presented on document
+//     version upload calls for a document that has been checked out from Web client.
+//
+//   - ResourceAlreadyCheckedOutException
+//     The resource is already checked out.
+//
+//   - InvalidPasswordException
+//     The password is invalid.
+//
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InitiateDocumentVersionUpload
 func (c *WorkDocs) InitiateDocumentVersionUpload(input *InitiateDocumentVersionUploadInput) (*InitiateDocumentVersionUploadOutput, error) {
@@ -3617,14 +4115,13 @@ const opRemoveAllResourcePermissions = "RemoveAllResourcePermissions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RemoveAllResourcePermissionsRequest method.
+//	req, resp := client.RemoveAllResourcePermissionsRequest(params)
 //
-//    // Example sending a request using the RemoveAllResourcePermissionsRequest method.
-//    req, resp := client.RemoveAllResourcePermissionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveAllResourcePermissions
 func (c *WorkDocs) RemoveAllResourcePermissionsRequest(input *RemoveAllResourcePermissionsInput) (req *request.Request, output *RemoveAllResourcePermissionsOutput) {
@@ -3655,20 +4152,21 @@ func (c *WorkDocs) RemoveAllResourcePermissionsRequest(input *RemoveAllResourceP
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation RemoveAllResourcePermissions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveAllResourcePermissions
 func (c *WorkDocs) RemoveAllResourcePermissions(input *RemoveAllResourcePermissionsInput) (*RemoveAllResourcePermissionsOutput, error) {
@@ -3708,14 +4206,13 @@ const opRemoveResourcePermission = "RemoveResourcePermission"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RemoveResourcePermissionRequest method.
+//	req, resp := client.RemoveResourcePermissionRequest(params)
 //
-//    // Example sending a request using the RemoveResourcePermissionRequest method.
-//    req, resp := client.RemoveResourcePermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveResourcePermission
 func (c *WorkDocs) RemoveResourcePermissionRequest(input *RemoveResourcePermissionInput) (req *request.Request, output *RemoveResourcePermissionOutput) {
@@ -3746,20 +4243,21 @@ func (c *WorkDocs) RemoveResourcePermissionRequest(input *RemoveResourcePermissi
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation RemoveResourcePermission for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveResourcePermission
 func (c *WorkDocs) RemoveResourcePermission(input *RemoveResourcePermissionInput) (*RemoveResourcePermissionOutput, error) {
@@ -3783,6 +4281,256 @@ func (c *WorkDocs) RemoveResourcePermissionWithContext(ctx aws.Context, input *R
 	return out, req.Send()
 }
 
+const opRestoreDocumentVersions = "RestoreDocumentVersions"
+
+// RestoreDocumentVersionsRequest generates a "aws/request.Request" representing the
+// client's request for the RestoreDocumentVersions operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RestoreDocumentVersions for more information on using the RestoreDocumentVersions
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RestoreDocumentVersionsRequest method.
+//	req, resp := client.RestoreDocumentVersionsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RestoreDocumentVersions
+func (c *WorkDocs) RestoreDocumentVersionsRequest(input *RestoreDocumentVersionsInput) (req *request.Request, output *RestoreDocumentVersionsOutput) {
+	op := &request.Operation{
+		Name:       opRestoreDocumentVersions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/api/v1/documentVersions/restore/{DocumentId}",
+	}
+
+	if input == nil {
+		input = &RestoreDocumentVersionsInput{}
+	}
+
+	output = &RestoreDocumentVersionsOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// RestoreDocumentVersions API operation for Amazon WorkDocs.
+//
+// Recovers a deleted version of an Amazon WorkDocs document.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkDocs's
+// API operation RestoreDocumentVersions for usage and error information.
+//
+// Returned Error Types:
+//
+//   - EntityNotExistsException
+//     The resource does not exist.
+//
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
+//
+//   - ConflictingOperationException
+//     Another operation is in progress on the resource that conflicts with the
+//     current operation.
+//
+//   - ConcurrentModificationException
+//     The resource hierarchy is changing.
+//
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
+//
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - InvalidOperationException
+//     The operation is invalid.
+//
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RestoreDocumentVersions
+func (c *WorkDocs) RestoreDocumentVersions(input *RestoreDocumentVersionsInput) (*RestoreDocumentVersionsOutput, error) {
+	req, out := c.RestoreDocumentVersionsRequest(input)
+	return out, req.Send()
+}
+
+// RestoreDocumentVersionsWithContext is the same as RestoreDocumentVersions with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RestoreDocumentVersions for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) RestoreDocumentVersionsWithContext(ctx aws.Context, input *RestoreDocumentVersionsInput, opts ...request.Option) (*RestoreDocumentVersionsOutput, error) {
+	req, out := c.RestoreDocumentVersionsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opSearchResources = "SearchResources"
+
+// SearchResourcesRequest generates a "aws/request.Request" representing the
+// client's request for the SearchResources operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See SearchResources for more information on using the SearchResources
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the SearchResourcesRequest method.
+//	req, resp := client.SearchResourcesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/SearchResources
+func (c *WorkDocs) SearchResourcesRequest(input *SearchResourcesInput) (req *request.Request, output *SearchResourcesOutput) {
+	op := &request.Operation{
+		Name:       opSearchResources,
+		HTTPMethod: "POST",
+		HTTPPath:   "/api/v1/search",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &SearchResourcesInput{}
+	}
+
+	output = &SearchResourcesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// SearchResources API operation for Amazon WorkDocs.
+//
+// Searches metadata and the content of folders, documents, document versions,
+// and comments.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkDocs's
+// API operation SearchResources for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
+//
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
+//
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/SearchResources
+func (c *WorkDocs) SearchResources(input *SearchResourcesInput) (*SearchResourcesOutput, error) {
+	req, out := c.SearchResourcesRequest(input)
+	return out, req.Send()
+}
+
+// SearchResourcesWithContext is the same as SearchResources with the addition of
+// the ability to pass a context and additional request options.
+//
+// See SearchResources for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) SearchResourcesWithContext(ctx aws.Context, input *SearchResourcesInput, opts ...request.Option) (*SearchResourcesOutput, error) {
+	req, out := c.SearchResourcesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// SearchResourcesPages iterates over the pages of a SearchResources operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See SearchResources method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a SearchResources operation.
+//	pageNum := 0
+//	err := client.SearchResourcesPages(params,
+//	    func(page *workdocs.SearchResourcesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *WorkDocs) SearchResourcesPages(input *SearchResourcesInput, fn func(*SearchResourcesOutput, bool) bool) error {
+	return c.SearchResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// SearchResourcesPagesWithContext same as SearchResourcesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkDocs) SearchResourcesPagesWithContext(ctx aws.Context, input *SearchResourcesInput, fn func(*SearchResourcesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *SearchResourcesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.SearchResourcesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*SearchResourcesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opUpdateDocument = "UpdateDocument"
 
 // UpdateDocumentRequest generates a "aws/request.Request" representing the
@@ -3799,14 +4547,13 @@ const opUpdateDocument = "UpdateDocument"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDocumentRequest method.
+//	req, resp := client.UpdateDocumentRequest(params)
 //
-//    // Example sending a request using the UpdateDocumentRequest method.
-//    req, resp := client.UpdateDocumentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocument
 func (c *WorkDocs) UpdateDocumentRequest(input *UpdateDocumentInput) (req *request.Request, output *UpdateDocumentOutput) {
@@ -3838,39 +4585,41 @@ func (c *WorkDocs) UpdateDocumentRequest(input *UpdateDocumentInput) (req *reque
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation UpdateDocument for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The resource already exists.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The maximum of 100,000 folders under the parent folder has been exceeded.
+//   - EntityAlreadyExistsException
+//     The resource already exists.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - LimitExceededException
+//     The maximum of 100,000 files and folders under the parent folder has been
+//     exceeded.
 //
-//   * ErrCodeConflictingOperationException "ConflictingOperationException"
-//   Another operation is in progress on the resource that conflicts with the
-//   current operation.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   The resource hierarchy is changing.
+//   - ConflictingOperationException
+//     Another operation is in progress on the resource that conflicts with the
+//     current operation.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - ConcurrentModificationException
+//     The resource hierarchy is changing.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocument
 func (c *WorkDocs) UpdateDocument(input *UpdateDocumentInput) (*UpdateDocumentOutput, error) {
@@ -3910,14 +4659,13 @@ const opUpdateDocumentVersion = "UpdateDocumentVersion"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDocumentVersionRequest method.
+//	req, resp := client.UpdateDocumentVersionRequest(params)
 //
-//    // Example sending a request using the UpdateDocumentVersionRequest method.
-//    req, resp := client.UpdateDocumentVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentVersion
 func (c *WorkDocs) UpdateDocumentVersionRequest(input *UpdateDocumentVersionInput) (req *request.Request, output *UpdateDocumentVersionOutput) {
@@ -3952,32 +4700,33 @@ func (c *WorkDocs) UpdateDocumentVersionRequest(input *UpdateDocumentVersionInpu
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation UpdateDocumentVersion for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   The resource hierarchy is changing.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   The operation is invalid.
+//   - ConcurrentModificationException
+//     The resource hierarchy is changing.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - InvalidOperationException
+//     The operation is invalid.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentVersion
 func (c *WorkDocs) UpdateDocumentVersion(input *UpdateDocumentVersionInput) (*UpdateDocumentVersionOutput, error) {
@@ -4017,14 +4766,13 @@ const opUpdateFolder = "UpdateFolder"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateFolderRequest method.
+//	req, resp := client.UpdateFolderRequest(params)
 //
-//    // Example sending a request using the UpdateFolderRequest method.
-//    req, resp := client.UpdateFolderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolder
 func (c *WorkDocs) UpdateFolderRequest(input *UpdateFolderInput) (req *request.Request, output *UpdateFolderOutput) {
@@ -4056,39 +4804,41 @@ func (c *WorkDocs) UpdateFolderRequest(input *UpdateFolderInput) (req *request.R
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation UpdateFolder for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The resource already exists.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeProhibitedStateException "ProhibitedStateException"
-//   The specified document version is not in the INITIALIZED state.
+//   - EntityAlreadyExistsException
+//     The resource already exists.
 //
-//   * ErrCodeConflictingOperationException "ConflictingOperationException"
-//   Another operation is in progress on the resource that conflicts with the
-//   current operation.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   The resource hierarchy is changing.
+//   - ConflictingOperationException
+//     Another operation is in progress on the resource that conflicts with the
+//     current operation.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The maximum of 100,000 folders under the parent folder has been exceeded.
+//   - ConcurrentModificationException
+//     The resource hierarchy is changing.
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - LimitExceededException
+//     The maximum of 100,000 files and folders under the parent folder has been
+//     exceeded.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
+//
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolder
 func (c *WorkDocs) UpdateFolder(input *UpdateFolderInput) (*UpdateFolderOutput, error) {
@@ -4128,14 +4878,13 @@ const opUpdateUser = "UpdateUser"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateUserRequest method.
+//	req, resp := client.UpdateUserRequest(params)
 //
-//    // Example sending a request using the UpdateUserRequest method.
-//    req, resp := client.UpdateUserRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateUser
 func (c *WorkDocs) UpdateUserRequest(input *UpdateUserInput) (req *request.Request, output *UpdateUserOutput) {
@@ -4166,32 +4915,36 @@ func (c *WorkDocs) UpdateUserRequest(input *UpdateUserInput) (req *request.Reque
 // See the AWS API reference guide for Amazon WorkDocs's
 // API operation UpdateUser for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityNotExistsException "EntityNotExistsException"
-//   The resource does not exist.
+// Returned Error Types:
 //
-//   * ErrCodeUnauthorizedOperationException "UnauthorizedOperationException"
-//   The operation is not permitted.
+//   - EntityNotExistsException
+//     The resource does not exist.
 //
-//   * ErrCodeUnauthorizedResourceAccessException "UnauthorizedResourceAccessException"
-//   The caller does not have access to perform the action on the resource.
+//   - UnauthorizedOperationException
+//     The operation is not permitted.
 //
-//   * ErrCodeIllegalUserStateException "IllegalUserStateException"
-//   The user is undergoing transfer of ownership.
+//   - UnauthorizedResourceAccessException
+//     The caller does not have access to perform the action on the resource.
 //
-//   * ErrCodeFailedDependencyException "FailedDependencyException"
-//   The AWS Directory Service cannot reach an on-premises instance. Or a dependency
-//   under the control of the organization is failing, such as a connected Active
-//   Directory.
+//   - IllegalUserStateException
+//     The user is undergoing transfer of ownership.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   One or more of the dependencies is unavailable.
+//   - ProhibitedStateException
+//     The specified document version is not in the INITIALIZED state.
 //
-//   * ErrCodeDeactivatingLastSystemUserException "DeactivatingLastSystemUserException"
-//   The last user in the organization is being deactivated.
+//   - FailedDependencyException
+//     The Directory Service cannot reach an on-premises instance. Or a dependency
+//     under the control of the organization is failing, such as a connected Active
+//     Directory.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The pagination marker or limit fields are not valid.
+//   - ServiceUnavailableException
+//     One or more of the dependencies is unavailable.
+//
+//   - DeactivatingLastSystemUserException
+//     The last user in the organization is being deactivated.
+//
+//   - InvalidArgumentException
+//     The pagination marker or limit fields are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateUser
 func (c *WorkDocs) UpdateUser(input *UpdateUserInput) (*UpdateUserOutput, error) {
@@ -4216,10 +4969,14 @@ func (c *WorkDocs) UpdateUserWithContext(ctx aws.Context, input *UpdateUserInput
 }
 
 type AbortDocumentVersionUploadInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by AbortDocumentVersionUploadInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -4233,12 +4990,20 @@ type AbortDocumentVersionUploadInput struct {
 	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AbortDocumentVersionUploadInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AbortDocumentVersionUploadInput) GoString() string {
 	return s.String()
 }
@@ -4290,21 +5055,33 @@ type AbortDocumentVersionUploadOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AbortDocumentVersionUploadOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AbortDocumentVersionUploadOutput) GoString() string {
 	return s.String()
 }
 
 type ActivateUserInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ActivateUserInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the user.
@@ -4313,12 +5090,20 @@ type ActivateUserInput struct {
 	UserId *string `location:"uri" locationName:"UserId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivateUserInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivateUserInput) GoString() string {
 	return s.String()
 }
@@ -4361,12 +5146,20 @@ type ActivateUserOutput struct {
 	User *User `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivateUserOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivateUserOutput) GoString() string {
 	return s.String()
 }
@@ -4416,12 +5209,20 @@ type Activity struct {
 	Type *string `type:"string" enum:"ActivityType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Activity) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Activity) GoString() string {
 	return s.String()
 }
@@ -4483,8 +5284,12 @@ func (s *Activity) SetType(v string) *Activity {
 type AddResourcePermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by AddResourcePermissionsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The notification options.
@@ -4501,12 +5306,20 @@ type AddResourcePermissionsInput struct {
 	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddResourcePermissionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddResourcePermissionsInput) GoString() string {
 	return s.String()
 }
@@ -4574,12 +5387,20 @@ type AddResourcePermissionsOutput struct {
 	ShareResults []*ShareResult `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddResourcePermissionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddResourcePermissionsOutput) GoString() string {
 	return s.String()
 }
@@ -4616,6 +5437,10 @@ type Comment struct {
 	Status *string `type:"string" enum:"CommentStatusType"`
 
 	// The text of the comment.
+	//
+	// Text is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by Comment's
+	// String and GoString methods.
 	Text *string `min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the root comment in the thread.
@@ -4627,12 +5452,20 @@ type Comment struct {
 	Visibility *string `type:"string" enum:"CommentVisibilityType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Comment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Comment) GoString() string {
 	return s.String()
 }
@@ -4704,6 +5537,9 @@ type CommentMetadata struct {
 	// The user who made the comment.
 	Contributor *User `type:"structure"`
 
+	// The ID of the user who made the comment.
+	ContributorId *string `min:"1" type:"string"`
+
 	// The timestamp that the comment was created.
 	CreatedTimestamp *time.Time `type:"timestamp"`
 
@@ -4711,12 +5547,20 @@ type CommentMetadata struct {
 	RecipientId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CommentMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CommentMetadata) GoString() string {
 	return s.String()
 }
@@ -4739,6 +5583,12 @@ func (s *CommentMetadata) SetContributor(v *User) *CommentMetadata {
 	return s
 }
 
+// SetContributorId sets the ContributorId field's value.
+func (s *CommentMetadata) SetContributorId(v string) *CommentMetadata {
+	s.ContributorId = &v
+	return s
+}
+
 // SetCreatedTimestamp sets the CreatedTimestamp field's value.
 func (s *CommentMetadata) SetCreatedTimestamp(v time.Time) *CommentMetadata {
 	s.CreatedTimestamp = &v
@@ -4751,11 +5601,144 @@ func (s *CommentMetadata) SetRecipientId(v string) *CommentMetadata {
 	return s
 }
 
+// The resource hierarchy is changing.
+type ConcurrentModificationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) GoString() string {
+	return s.String()
+}
+
+func newErrorConcurrentModificationException(v protocol.ResponseMetadata) error {
+	return &ConcurrentModificationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConcurrentModificationException) Code() string {
+	return "ConcurrentModificationException"
+}
+
+// Message returns the exception's message.
+func (s *ConcurrentModificationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConcurrentModificationException) OrigErr() error {
+	return nil
+}
+
+func (s *ConcurrentModificationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConcurrentModificationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConcurrentModificationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Another operation is in progress on the resource that conflicts with the
+// current operation.
+type ConflictingOperationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConflictingOperationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConflictingOperationException) GoString() string {
+	return s.String()
+}
+
+func newErrorConflictingOperationException(v protocol.ResponseMetadata) error {
+	return &ConflictingOperationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConflictingOperationException) Code() string {
+	return "ConflictingOperationException"
+}
+
+// Message returns the exception's message.
+func (s *ConflictingOperationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConflictingOperationException) OrigErr() error {
+	return nil
+}
+
+func (s *ConflictingOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConflictingOperationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConflictingOperationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type CreateCommentInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateCommentInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -4771,6 +5754,10 @@ type CreateCommentInput struct {
 	ParentId *string `min:"1" type:"string"`
 
 	// The text of the comment.
+	//
+	// Text is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateCommentInput's
+	// String and GoString methods.
 	//
 	// Text is a required field
 	Text *string `min:"1" type:"string" required:"true" sensitive:"true"`
@@ -4789,12 +5776,20 @@ type CreateCommentInput struct {
 	Visibility *string `type:"string" enum:"CommentVisibilityType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateCommentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateCommentInput) GoString() string {
 	return s.String()
 }
@@ -4891,12 +5886,20 @@ type CreateCommentOutput struct {
 	Comment *Comment `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateCommentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateCommentOutput) GoString() string {
 	return s.String()
 }
@@ -4910,8 +5913,12 @@ func (s *CreateCommentOutput) SetComment(v *Comment) *CreateCommentOutput {
 type CreateCustomMetadataInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateCustomMetadataInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// Custom metadata in the form of name-value pairs.
@@ -4929,12 +5936,20 @@ type CreateCustomMetadataInput struct {
 	VersionId *string `location:"querystring" locationName:"versionid" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateCustomMetadataInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateCustomMetadataInput) GoString() string {
 	return s.String()
 }
@@ -4995,12 +6010,20 @@ type CreateCustomMetadataOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateCustomMetadataOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateCustomMetadataOutput) GoString() string {
 	return s.String()
 }
@@ -5008,12 +6031,20 @@ func (s CreateCustomMetadataOutput) GoString() string {
 type CreateFolderInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateFolderInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The name of the new folder.
-	Name *string `min:"1" type:"string"`
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateFolderInput's
+	// String and GoString methods.
+	Name *string `min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the parent folder.
 	//
@@ -5021,12 +6052,20 @@ type CreateFolderInput struct {
 	ParentFolderId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFolderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFolderInput) GoString() string {
 	return s.String()
 }
@@ -5078,12 +6117,20 @@ type CreateFolderOutput struct {
 	Metadata *FolderMetadata `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFolderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFolderOutput) GoString() string {
 	return s.String()
 }
@@ -5097,8 +6144,12 @@ func (s *CreateFolderOutput) SetMetadata(v *FolderMetadata) *CreateFolderOutput 
 type CreateLabelsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateLabelsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// List of labels to add to the resource.
@@ -5112,12 +6163,20 @@ type CreateLabelsInput struct {
 	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLabelsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLabelsInput) GoString() string {
 	return s.String()
 }
@@ -5166,12 +6225,20 @@ type CreateLabelsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLabelsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLabelsOutput) GoString() string {
 	return s.String()
 }
@@ -5180,7 +6247,7 @@ type CreateNotificationSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The endpoint to receive the notifications. If the protocol is HTTPS, the
-	// endpoint is a URL that begins with "https://".
+	// endpoint is a URL that begins with https.
 	//
 	// Endpoint is a required field
 	Endpoint *string `min:"1" type:"string" required:"true"`
@@ -5202,12 +6269,20 @@ type CreateNotificationSubscriptionInput struct {
 	SubscriptionType *string `type:"string" required:"true" enum:"SubscriptionType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateNotificationSubscriptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateNotificationSubscriptionInput) GoString() string {
 	return s.String()
 }
@@ -5271,12 +6346,20 @@ type CreateNotificationSubscriptionOutput struct {
 	Subscription *Subscription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateNotificationSubscriptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateNotificationSubscriptionOutput) GoString() string {
 	return s.String()
 }
@@ -5290,22 +6373,38 @@ func (s *CreateNotificationSubscriptionOutput) SetSubscription(v *Subscription) 
 type CreateUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The email address of the user.
-	EmailAddress *string `min:"1" type:"string"`
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserInput's
+	// String and GoString methods.
+	EmailAddress *string `min:"1" type:"string" sensitive:"true"`
 
 	// The given name of the user.
 	//
+	// GivenName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserInput's
+	// String and GoString methods.
+	//
 	// GivenName is a required field
-	GivenName *string `min:"1" type:"string" required:"true"`
+	GivenName *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The ID of the organization.
 	OrganizationId *string `min:"1" type:"string"`
 
 	// The password of the user.
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserInput's
+	// String and GoString methods.
 	//
 	// Password is a required field
 	Password *string `min:"4" type:"string" required:"true" sensitive:"true"`
@@ -5315,24 +6414,40 @@ type CreateUserInput struct {
 
 	// The surname of the user.
 	//
+	// Surname is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserInput's
+	// String and GoString methods.
+	//
 	// Surname is a required field
-	Surname *string `min:"1" type:"string" required:"true"`
+	Surname *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The time zone ID of the user.
 	TimeZoneId *string `min:"1" type:"string"`
 
 	// The login name of the user.
 	//
+	// Username is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserInput's
+	// String and GoString methods.
+	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserInput) GoString() string {
 	return s.String()
 }
@@ -5444,12 +6559,20 @@ type CreateUserOutput struct {
 	User *User `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserOutput) GoString() string {
 	return s.String()
 }
@@ -5460,11 +6583,121 @@ func (s *CreateUserOutput) SetUser(v *User) *CreateUserOutput {
 	return s
 }
 
-type DeactivateUserInput struct {
+// The limit has been reached on the number of custom properties for the specified
+// resource.
+type CustomMetadataLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomMetadataLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomMetadataLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorCustomMetadataLimitExceededException(v protocol.ResponseMetadata) error {
+	return &CustomMetadataLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CustomMetadataLimitExceededException) Code() string {
+	return "CustomMetadataLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *CustomMetadataLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CustomMetadataLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *CustomMetadataLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CustomMetadataLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CustomMetadataLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Filters results based on timestamp range (in epochs).
+type DateRangeType struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Timestamp range end value (in epochs).
+	EndValue *time.Time `type:"timestamp"`
+
+	// Timestamp range start value (in epochs)
+	StartValue *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DateRangeType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DateRangeType) GoString() string {
+	return s.String()
+}
+
+// SetEndValue sets the EndValue field's value.
+func (s *DateRangeType) SetEndValue(v time.Time) *DateRangeType {
+	s.EndValue = &v
+	return s
+}
+
+// SetStartValue sets the StartValue field's value.
+func (s *DateRangeType) SetStartValue(v time.Time) *DateRangeType {
+	s.StartValue = &v
+	return s
+}
+
+type DeactivateUserInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DeactivateUserInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the user.
@@ -5473,12 +6706,20 @@ type DeactivateUserInput struct {
 	UserId *string `location:"uri" locationName:"UserId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeactivateUserInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeactivateUserInput) GoString() string {
 	return s.String()
 }
@@ -5518,21 +6759,97 @@ type DeactivateUserOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeactivateUserOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeactivateUserOutput) GoString() string {
 	return s.String()
 }
 
-type DeleteCommentInput struct {
-	_ struct{} `type:"structure"`
+// The last user in the organization is being deactivated.
+type DeactivatingLastSystemUserException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeactivatingLastSystemUserException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeactivatingLastSystemUserException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeactivatingLastSystemUserException(v protocol.ResponseMetadata) error {
+	return &DeactivatingLastSystemUserException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeactivatingLastSystemUserException) Code() string {
+	return "DeactivatingLastSystemUserException"
+}
+
+// Message returns the exception's message.
+func (s *DeactivatingLastSystemUserException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeactivatingLastSystemUserException) OrigErr() error {
+	return nil
+}
+
+func (s *DeactivatingLastSystemUserException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeactivatingLastSystemUserException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeactivatingLastSystemUserException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type DeleteCommentInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DeleteCommentInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the comment.
@@ -5551,12 +6868,20 @@ type DeleteCommentInput struct {
 	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteCommentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteCommentInput) GoString() string {
 	return s.String()
 }
@@ -5620,21 +6945,33 @@ type DeleteCommentOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteCommentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteCommentOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteCustomMetadataInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DeleteCustomMetadataInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// Flag to indicate removal of all custom metadata properties from the specified
@@ -5654,12 +6991,20 @@ type DeleteCustomMetadataInput struct {
 	VersionId *string `location:"querystring" locationName:"versionId" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteCustomMetadataInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteCustomMetadataInput) GoString() string {
 	return s.String()
 }
@@ -5720,21 +7065,33 @@ type DeleteCustomMetadataOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteCustomMetadataOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteCustomMetadataOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteDocumentInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DeleteDocumentInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -5743,12 +7100,20 @@ type DeleteDocumentInput struct {
 	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDocumentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDocumentInput) GoString() string {
 	return s.String()
 }
@@ -5788,21 +7153,152 @@ type DeleteDocumentOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDocumentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDocumentOutput) GoString() string {
 	return s.String()
 }
 
-type DeleteFolderContentsInput struct {
-	_ struct{} `type:"structure"`
+type DeleteDocumentVersionInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DeleteDocumentVersionInput's
+	// String and GoString methods.
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
+
+	// Deletes all versions of a document prior to the current version.
+	//
+	// DeletePriorVersions is a required field
+	DeletePriorVersions *bool `location:"querystring" locationName:"deletePriorVersions" type:"boolean" required:"true"`
+
+	// The ID of the document associated with the version being deleted.
+	//
+	// DocumentId is a required field
+	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
+
+	// The ID of the version being deleted.
+	//
+	// VersionId is a required field
+	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDocumentVersionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDocumentVersionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteDocumentVersionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteDocumentVersionInput"}
+	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+	}
+	if s.DeletePriorVersions == nil {
+		invalidParams.Add(request.NewErrParamRequired("DeletePriorVersions"))
+	}
+	if s.DocumentId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+	}
+	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+	}
+	if s.VersionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("VersionId"))
+	}
+	if s.VersionId != nil && len(*s.VersionId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAuthenticationToken sets the AuthenticationToken field's value.
+func (s *DeleteDocumentVersionInput) SetAuthenticationToken(v string) *DeleteDocumentVersionInput {
+	s.AuthenticationToken = &v
+	return s
+}
+
+// SetDeletePriorVersions sets the DeletePriorVersions field's value.
+func (s *DeleteDocumentVersionInput) SetDeletePriorVersions(v bool) *DeleteDocumentVersionInput {
+	s.DeletePriorVersions = &v
+	return s
+}
+
+// SetDocumentId sets the DocumentId field's value.
+func (s *DeleteDocumentVersionInput) SetDocumentId(v string) *DeleteDocumentVersionInput {
+	s.DocumentId = &v
+	return s
+}
+
+// SetVersionId sets the VersionId field's value.
+func (s *DeleteDocumentVersionInput) SetVersionId(v string) *DeleteDocumentVersionInput {
+	s.VersionId = &v
+	return s
+}
+
+type DeleteDocumentVersionOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDocumentVersionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDocumentVersionOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteFolderContentsInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DeleteFolderContentsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the folder.
@@ -5811,12 +7307,20 @@ type DeleteFolderContentsInput struct {
 	FolderId *string `location:"uri" locationName:"FolderId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFolderContentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFolderContentsInput) GoString() string {
 	return s.String()
 }
@@ -5856,21 +7360,33 @@ type DeleteFolderContentsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFolderContentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFolderContentsOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteFolderInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DeleteFolderInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the folder.
@@ -5879,12 +7395,20 @@ type DeleteFolderInput struct {
 	FolderId *string `location:"uri" locationName:"FolderId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFolderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFolderInput) GoString() string {
 	return s.String()
 }
@@ -5924,21 +7448,33 @@ type DeleteFolderOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFolderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFolderOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteLabelsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DeleteLabelsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// Flag to request removal of all labels from the specified resource.
@@ -5953,12 +7489,20 @@ type DeleteLabelsInput struct {
 	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLabelsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLabelsInput) GoString() string {
 	return s.String()
 }
@@ -6010,18 +7554,26 @@ type DeleteLabelsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLabelsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLabelsOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteNotificationSubscriptionInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The ID of the organization.
 	//
@@ -6034,12 +7586,20 @@ type DeleteNotificationSubscriptionInput struct {
 	SubscriptionId *string `location:"uri" locationName:"SubscriptionId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNotificationSubscriptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNotificationSubscriptionInput) GoString() string {
 	return s.String()
 }
@@ -6082,21 +7642,33 @@ type DeleteNotificationSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNotificationSubscriptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNotificationSubscriptionOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteUserInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// API actions, as in accessing the API using Amazon Web Services credentials.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DeleteUserInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the user.
@@ -6105,12 +7677,20 @@ type DeleteUserInput struct {
 	UserId *string `location:"uri" locationName:"UserId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserInput) GoString() string {
 	return s.String()
 }
@@ -6150,25 +7730,37 @@ type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserOutput) GoString() string {
 	return s.String()
 }
 
 type DescribeActivitiesInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// Specifies which activity types to include in the response. If this field
 	// is left empty, all activity types are returned.
 	ActivityTypes *string `location:"querystring" locationName:"activityTypes" min:"1" type:"string"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeActivitiesInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The timestamp that determines the end time of the activities. The response
@@ -6204,12 +7796,20 @@ type DescribeActivitiesInput struct {
 	UserId *string `location:"querystring" locationName:"userId" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeActivitiesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeActivitiesInput) GoString() string {
 	return s.String()
 }
@@ -6315,12 +7915,20 @@ type DescribeActivitiesOutput struct {
 	UserActivities []*Activity `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeActivitiesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeActivitiesOutput) GoString() string {
 	return s.String()
 }
@@ -6338,10 +7946,14 @@ func (s *DescribeActivitiesOutput) SetUserActivities(v []*Activity) *DescribeAct
 }
 
 type DescribeCommentsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeCommentsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -6362,12 +7974,20 @@ type DescribeCommentsInput struct {
 	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeCommentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeCommentsInput) GoString() string {
 	return s.String()
 }
@@ -6444,12 +8064,20 @@ type DescribeCommentsOutput struct {
 	Marker *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeCommentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeCommentsOutput) GoString() string {
 	return s.String()
 }
@@ -6467,10 +8095,14 @@ func (s *DescribeCommentsOutput) SetMarker(v string) *DescribeCommentsOutput {
 }
 
 type DescribeDocumentVersionsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeDocumentVersionsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -6494,12 +8126,20 @@ type DescribeDocumentVersionsInput struct {
 	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDocumentVersionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDocumentVersionsInput) GoString() string {
 	return s.String()
 }
@@ -6582,12 +8222,20 @@ type DescribeDocumentVersionsOutput struct {
 	Marker *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDocumentVersionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDocumentVersionsOutput) GoString() string {
 	return s.String()
 }
@@ -6605,10 +8253,14 @@ func (s *DescribeDocumentVersionsOutput) SetMarker(v string) *DescribeDocumentVe
 }
 
 type DescribeFolderContentsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeFolderContentsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the folder.
@@ -6636,12 +8288,20 @@ type DescribeFolderContentsInput struct {
 	Type *string `location:"querystring" locationName:"type" type:"string" enum:"FolderContentType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeFolderContentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeFolderContentsInput) GoString() string {
 	return s.String()
 }
@@ -6736,12 +8396,20 @@ type DescribeFolderContentsOutput struct {
 	Marker *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeFolderContentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeFolderContentsOutput) GoString() string {
 	return s.String()
 }
@@ -6765,10 +8433,14 @@ func (s *DescribeFolderContentsOutput) SetMarker(v string) *DescribeFolderConten
 }
 
 type DescribeGroupsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeGroupsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The maximum number of items to return with this call.
@@ -6783,16 +8455,28 @@ type DescribeGroupsInput struct {
 
 	// A query to describe groups by group name.
 	//
+	// SearchQuery is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeGroupsInput's
+	// String and GoString methods.
+	//
 	// SearchQuery is a required field
 	SearchQuery *string `location:"querystring" locationName:"searchQuery" min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeGroupsInput) GoString() string {
 	return s.String()
 }
@@ -6866,12 +8550,20 @@ type DescribeGroupsOutput struct {
 	Marker *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeGroupsOutput) GoString() string {
 	return s.String()
 }
@@ -6889,7 +8581,7 @@ func (s *DescribeGroupsOutput) SetMarker(v string) *DescribeGroupsOutput {
 }
 
 type DescribeNotificationSubscriptionsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The maximum number of items to return with this call.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
@@ -6904,12 +8596,20 @@ type DescribeNotificationSubscriptionsInput struct {
 	OrganizationId *string `location:"uri" locationName:"OrganizationId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeNotificationSubscriptionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeNotificationSubscriptionsInput) GoString() string {
 	return s.String()
 }
@@ -6965,12 +8665,20 @@ type DescribeNotificationSubscriptionsOutput struct {
 	Subscriptions []*Subscription `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeNotificationSubscriptionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeNotificationSubscriptionsOutput) GoString() string {
 	return s.String()
 }
@@ -6988,10 +8696,14 @@ func (s *DescribeNotificationSubscriptionsOutput) SetSubscriptions(v []*Subscrip
 }
 
 type DescribeResourcePermissionsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeResourcePermissionsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The maximum number of items to return with this call.
@@ -7010,12 +8722,20 @@ type DescribeResourcePermissionsInput struct {
 	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeResourcePermissionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeResourcePermissionsInput) GoString() string {
 	return s.String()
 }
@@ -7089,12 +8809,20 @@ type DescribeResourcePermissionsOutput struct {
 	Principals []*Principal `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeResourcePermissionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeResourcePermissionsOutput) GoString() string {
 	return s.String()
 }
@@ -7112,10 +8840,13 @@ func (s *DescribeResourcePermissionsOutput) SetPrincipals(v []*Principal) *Descr
 }
 
 type DescribeRootFoldersInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeRootFoldersInput's
+	// String and GoString methods.
 	//
 	// AuthenticationToken is a required field
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" required:"true" sensitive:"true"`
@@ -7128,12 +8859,20 @@ type DescribeRootFoldersInput struct {
 	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeRootFoldersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeRootFoldersInput) GoString() string {
 	return s.String()
 }
@@ -7188,12 +8927,20 @@ type DescribeRootFoldersOutput struct {
 	Marker *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeRootFoldersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeRootFoldersOutput) GoString() string {
 	return s.String()
 }
@@ -7211,10 +8958,14 @@ func (s *DescribeRootFoldersOutput) SetMarker(v string) *DescribeRootFoldersOutp
 }
 
 type DescribeUsersInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeUsersInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// A comma-separated list of values. Specify "STORAGE_METADATA" to include the
@@ -7237,7 +8988,27 @@ type DescribeUsersInput struct {
 	// The ID of the organization.
 	OrganizationId *string `location:"querystring" locationName:"organizationId" min:"1" type:"string"`
 
-	// A query to filter users by user name.
+	// A query to filter users by user name. Remember the following about the Userids
+	// and Query parameters:
+	//
+	//    * If you don't use either parameter, the API returns a paginated list
+	//    of all users on the site.
+	//
+	//    * If you use both parameters, the API ignores the Query parameter.
+	//
+	//    * The Userid parameter only returns user names that match a corresponding
+	//    user ID.
+	//
+	//    * The Query parameter runs a "prefix" search for users by the GivenName,
+	//    SurName, or UserName fields included in a CreateUser (https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html)
+	//    API call. For example, querying on Ma returns Márcia Oliveira, María
+	//    García, and Mateo Jackson. If you use multiple characters, the API only
+	//    returns data that matches all characters. For example, querying on Ma
+	//    J only returns Mateo Jackson.
+	//
+	// Query is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeUsersInput's
+	// String and GoString methods.
 	Query *string `location:"querystring" locationName:"query" min:"1" type:"string" sensitive:"true"`
 
 	// The sorting criteria.
@@ -7247,12 +9018,20 @@ type DescribeUsersInput struct {
 	UserIds *string `location:"querystring" locationName:"userIds" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeUsersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeUsersInput) GoString() string {
 	return s.String()
 }
@@ -7364,12 +9143,20 @@ type DescribeUsersOutput struct {
 	Users []*User `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeUsersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeUsersOutput) GoString() string {
 	return s.String()
 }
@@ -7390,6 +9177,71 @@ func (s *DescribeUsersOutput) SetTotalNumberOfUsers(v int64) *DescribeUsersOutpu
 func (s *DescribeUsersOutput) SetUsers(v []*User) *DescribeUsersOutput {
 	s.Users = v
 	return s
+}
+
+// This exception is thrown when the document is locked for comments and user
+// tries to create or delete a comment on that document.
+type DocumentLockedForCommentsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DocumentLockedForCommentsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DocumentLockedForCommentsException) GoString() string {
+	return s.String()
+}
+
+func newErrorDocumentLockedForCommentsException(v protocol.ResponseMetadata) error {
+	return &DocumentLockedForCommentsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DocumentLockedForCommentsException) Code() string {
+	return "DocumentLockedForCommentsException"
+}
+
+// Message returns the exception's message.
+func (s *DocumentLockedForCommentsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DocumentLockedForCommentsException) OrigErr() error {
+	return nil
+}
+
+func (s *DocumentLockedForCommentsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DocumentLockedForCommentsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DocumentLockedForCommentsException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Describes the document.
@@ -7421,12 +9273,20 @@ type DocumentMetadata struct {
 	ResourceState *string `type:"string" enum:"ResourceStateType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DocumentMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DocumentMetadata) GoString() string {
 	return s.String()
 }
@@ -7505,7 +9365,11 @@ type DocumentVersionMetadata struct {
 	ModifiedTimestamp *time.Time `type:"timestamp"`
 
 	// The name of the version.
-	Name *string `min:"1" type:"string"`
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DocumentVersionMetadata's
+	// String and GoString methods.
+	Name *string `min:"1" type:"string" sensitive:"true"`
 
 	// The signature of the document.
 	Signature *string `type:"string"`
@@ -7523,12 +9387,20 @@ type DocumentVersionMetadata struct {
 	Thumbnail map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DocumentVersionMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DocumentVersionMetadata) GoString() string {
 	return s.String()
 }
@@ -7611,6 +9483,401 @@ func (s *DocumentVersionMetadata) SetThumbnail(v map[string]*string) *DocumentVe
 	return s
 }
 
+// This exception is thrown when a valid checkout ID is not presented on document
+// version upload calls for a document that has been checked out from Web client.
+type DraftUploadOutOfSyncException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DraftUploadOutOfSyncException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DraftUploadOutOfSyncException) GoString() string {
+	return s.String()
+}
+
+func newErrorDraftUploadOutOfSyncException(v protocol.ResponseMetadata) error {
+	return &DraftUploadOutOfSyncException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DraftUploadOutOfSyncException) Code() string {
+	return "DraftUploadOutOfSyncException"
+}
+
+// Message returns the exception's message.
+func (s *DraftUploadOutOfSyncException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DraftUploadOutOfSyncException) OrigErr() error {
+	return nil
+}
+
+func (s *DraftUploadOutOfSyncException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DraftUploadOutOfSyncException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DraftUploadOutOfSyncException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The resource already exists.
+type EntityAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EntityAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EntityAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorEntityAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &EntityAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *EntityAlreadyExistsException) Code() string {
+	return "EntityAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *EntityAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *EntityAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *EntityAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *EntityAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *EntityAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The resource does not exist.
+type EntityNotExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The IDs of the non-existent resources.
+	EntityIds []*string `type:"list"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EntityNotExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EntityNotExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorEntityNotExistsException(v protocol.ResponseMetadata) error {
+	return &EntityNotExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *EntityNotExistsException) Code() string {
+	return "EntityNotExistsException"
+}
+
+// Message returns the exception's message.
+func (s *EntityNotExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *EntityNotExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *EntityNotExistsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *EntityNotExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *EntityNotExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The Directory Service cannot reach an on-premises instance. Or a dependency
+// under the control of the organization is failing, such as a connected Active
+// Directory.
+type FailedDependencyException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FailedDependencyException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FailedDependencyException) GoString() string {
+	return s.String()
+}
+
+func newErrorFailedDependencyException(v protocol.ResponseMetadata) error {
+	return &FailedDependencyException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *FailedDependencyException) Code() string {
+	return "FailedDependencyException"
+}
+
+// Message returns the exception's message.
+func (s *FailedDependencyException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *FailedDependencyException) OrigErr() error {
+	return nil
+}
+
+func (s *FailedDependencyException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *FailedDependencyException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *FailedDependencyException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Filters results based on entity metadata.
+type Filters struct {
+	_ struct{} `type:"structure"`
+
+	// Filter based on resource’s path.
+	AncestorIds []*string `type:"list"`
+
+	// Filters by content category.
+	ContentCategories []*string `type:"list" enum:"ContentCategoryType"`
+
+	// Filter based on resource’s creation timestamp.
+	CreatedRange *DateRangeType `type:"structure"`
+
+	// Filter by labels using exact match.
+	Labels []*string `type:"list"`
+
+	// Filter based on resource’s modified timestamp.
+	ModifiedRange *DateRangeType `type:"structure"`
+
+	// Filter based on UserIds or GroupIds.
+	Principals []*SearchPrincipalType `type:"list"`
+
+	// Filters based on entity type.
+	ResourceTypes []*string `type:"list" enum:"SearchResourceType"`
+
+	// Filter based on file groupings.
+	SearchCollectionTypes []*string `type:"list" enum:"SearchCollectionType"`
+
+	// Filter based on size (in bytes).
+	SizeRange *LongRangeType `type:"structure"`
+
+	// Filters by the locale of the content or comment.
+	TextLocales []*string `type:"list" enum:"LanguageCodeType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Filters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Filters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Filters) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Filters"}
+	if s.Principals != nil {
+		for i, v := range s.Principals {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Principals", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAncestorIds sets the AncestorIds field's value.
+func (s *Filters) SetAncestorIds(v []*string) *Filters {
+	s.AncestorIds = v
+	return s
+}
+
+// SetContentCategories sets the ContentCategories field's value.
+func (s *Filters) SetContentCategories(v []*string) *Filters {
+	s.ContentCategories = v
+	return s
+}
+
+// SetCreatedRange sets the CreatedRange field's value.
+func (s *Filters) SetCreatedRange(v *DateRangeType) *Filters {
+	s.CreatedRange = v
+	return s
+}
+
+// SetLabels sets the Labels field's value.
+func (s *Filters) SetLabels(v []*string) *Filters {
+	s.Labels = v
+	return s
+}
+
+// SetModifiedRange sets the ModifiedRange field's value.
+func (s *Filters) SetModifiedRange(v *DateRangeType) *Filters {
+	s.ModifiedRange = v
+	return s
+}
+
+// SetPrincipals sets the Principals field's value.
+func (s *Filters) SetPrincipals(v []*SearchPrincipalType) *Filters {
+	s.Principals = v
+	return s
+}
+
+// SetResourceTypes sets the ResourceTypes field's value.
+func (s *Filters) SetResourceTypes(v []*string) *Filters {
+	s.ResourceTypes = v
+	return s
+}
+
+// SetSearchCollectionTypes sets the SearchCollectionTypes field's value.
+func (s *Filters) SetSearchCollectionTypes(v []*string) *Filters {
+	s.SearchCollectionTypes = v
+	return s
+}
+
+// SetSizeRange sets the SizeRange field's value.
+func (s *Filters) SetSizeRange(v *LongRangeType) *Filters {
+	s.SizeRange = v
+	return s
+}
+
+// SetTextLocales sets the TextLocales field's value.
+func (s *Filters) SetTextLocales(v []*string) *Filters {
+	s.TextLocales = v
+	return s
+}
+
 // Describes a folder.
 type FolderMetadata struct {
 	_ struct{} `type:"structure"`
@@ -7634,7 +9901,11 @@ type FolderMetadata struct {
 	ModifiedTimestamp *time.Time `type:"timestamp"`
 
 	// The name of the folder.
-	Name *string `min:"1" type:"string"`
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by FolderMetadata's
+	// String and GoString methods.
+	Name *string `min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the parent folder.
 	ParentFolderId *string `min:"1" type:"string"`
@@ -7649,12 +9920,20 @@ type FolderMetadata struct {
 	Size *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FolderMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FolderMetadata) GoString() string {
 	return s.String()
 }
@@ -7726,21 +10005,32 @@ func (s *FolderMetadata) SetSize(v int64) *FolderMetadata {
 }
 
 type GetCurrentUserInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetCurrentUserInput's
+	// String and GoString methods.
 	//
 	// AuthenticationToken is a required field
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetCurrentUserInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetCurrentUserInput) GoString() string {
 	return s.String()
 }
@@ -7774,12 +10064,20 @@ type GetCurrentUserOutput struct {
 	User *User `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetCurrentUserOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetCurrentUserOutput) GoString() string {
 	return s.String()
 }
@@ -7791,10 +10089,14 @@ func (s *GetCurrentUserOutput) SetUser(v *User) *GetCurrentUserOutput {
 }
 
 type GetDocumentInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetDocumentInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -7806,12 +10108,20 @@ type GetDocumentInput struct {
 	IncludeCustomMetadata *bool `location:"querystring" locationName:"includeCustomMetadata" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentInput) GoString() string {
 	return s.String()
 }
@@ -7863,12 +10173,20 @@ type GetDocumentOutput struct {
 	Metadata *DocumentMetadata `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentOutput) GoString() string {
 	return s.String()
 }
@@ -7886,10 +10204,14 @@ func (s *GetDocumentOutput) SetMetadata(v *DocumentMetadata) *GetDocumentOutput 
 }
 
 type GetDocumentPathInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetDocumentPathInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -7908,12 +10230,20 @@ type GetDocumentPathInput struct {
 	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentPathInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentPathInput) GoString() string {
 	return s.String()
 }
@@ -7983,12 +10313,20 @@ type GetDocumentPathOutput struct {
 	Path *ResourcePath `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentPathOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentPathOutput) GoString() string {
 	return s.String()
 }
@@ -8000,10 +10338,14 @@ func (s *GetDocumentPathOutput) SetPath(v *ResourcePath) *GetDocumentPathOutput 
 }
 
 type GetDocumentVersionInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetDocumentVersionInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -8024,12 +10366,20 @@ type GetDocumentVersionInput struct {
 	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentVersionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentVersionInput) GoString() string {
 	return s.String()
 }
@@ -8102,12 +10452,20 @@ type GetDocumentVersionOutput struct {
 	Metadata *DocumentVersionMetadata `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentVersionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDocumentVersionOutput) GoString() string {
 	return s.String()
 }
@@ -8125,10 +10483,14 @@ func (s *GetDocumentVersionOutput) SetMetadata(v *DocumentVersionMetadata) *GetD
 }
 
 type GetFolderInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetFolderInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the folder.
@@ -8140,12 +10502,20 @@ type GetFolderInput struct {
 	IncludeCustomMetadata *bool `location:"querystring" locationName:"includeCustomMetadata" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFolderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFolderInput) GoString() string {
 	return s.String()
 }
@@ -8197,12 +10567,20 @@ type GetFolderOutput struct {
 	Metadata *FolderMetadata `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFolderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFolderOutput) GoString() string {
 	return s.String()
 }
@@ -8220,10 +10598,14 @@ func (s *GetFolderOutput) SetMetadata(v *FolderMetadata) *GetFolderOutput {
 }
 
 type GetFolderPathInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetFolderPathInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// A comma-separated list of values. Specify "NAME" to include the names of
@@ -8242,12 +10624,20 @@ type GetFolderPathInput struct {
 	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFolderPathInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFolderPathInput) GoString() string {
 	return s.String()
 }
@@ -8317,12 +10707,20 @@ type GetFolderPathOutput struct {
 	Path *ResourcePath `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFolderPathOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFolderPathOutput) GoString() string {
 	return s.String()
 }
@@ -8334,10 +10732,14 @@ func (s *GetFolderPathOutput) SetPath(v *ResourcePath) *GetFolderPathOutput {
 }
 
 type GetResourcesInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// The Amazon WorkDocs authentication token. Do not set this field when using
-	// administrative API actions, as in accessing the API operation using AWS credentials.
+	// The Amazon WorkDocs authentication token. Not required when using Amazon
+	// Web Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetResourcesInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The collection type.
@@ -8355,12 +10757,20 @@ type GetResourcesInput struct {
 	UserId *string `location:"querystring" locationName:"userId" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetResourcesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetResourcesInput) GoString() string {
 	return s.String()
 }
@@ -8431,12 +10841,20 @@ type GetResourcesOutput struct {
 	Marker *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetResourcesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetResourcesOutput) GoString() string {
 	return s.String()
 }
@@ -8470,12 +10888,20 @@ type GroupMetadata struct {
 	Name *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GroupMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GroupMetadata) GoString() string {
 	return s.String()
 }
@@ -8492,11 +10918,79 @@ func (s *GroupMetadata) SetName(v string) *GroupMetadata {
 	return s
 }
 
+// The user is undergoing transfer of ownership.
+type IllegalUserStateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IllegalUserStateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IllegalUserStateException) GoString() string {
+	return s.String()
+}
+
+func newErrorIllegalUserStateException(v protocol.ResponseMetadata) error {
+	return &IllegalUserStateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IllegalUserStateException) Code() string {
+	return "IllegalUserStateException"
+}
+
+// Message returns the exception's message.
+func (s *IllegalUserStateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IllegalUserStateException) OrigErr() error {
+	return nil
+}
+
+func (s *IllegalUserStateException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IllegalUserStateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IllegalUserStateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type InitiateDocumentVersionUploadInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by InitiateDocumentVersionUploadInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The timestamp when the content of the document was originally created.
@@ -8515,20 +11009,30 @@ type InitiateDocumentVersionUploadInput struct {
 	Id *string `min:"1" type:"string"`
 
 	// The name of the document.
-	Name *string `min:"1" type:"string"`
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by InitiateDocumentVersionUploadInput's
+	// String and GoString methods.
+	Name *string `min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the parent folder.
-	//
-	// ParentFolderId is a required field
-	ParentFolderId *string `min:"1" type:"string" required:"true"`
+	ParentFolderId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InitiateDocumentVersionUploadInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InitiateDocumentVersionUploadInput) GoString() string {
 	return s.String()
 }
@@ -8547,9 +11051,6 @@ func (s *InitiateDocumentVersionUploadInput) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
-	}
-	if s.ParentFolderId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentFolderId"))
 	}
 	if s.ParentFolderId != nil && len(*s.ParentFolderId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("ParentFolderId", 1))
@@ -8619,12 +11120,20 @@ type InitiateDocumentVersionUploadOutput struct {
 	UploadMetadata *UploadMetadata `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InitiateDocumentVersionUploadOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InitiateDocumentVersionUploadOutput) GoString() string {
 	return s.String()
 }
@@ -8641,23 +11150,397 @@ func (s *InitiateDocumentVersionUploadOutput) SetUploadMetadata(v *UploadMetadat
 	return s
 }
 
+// The pagination marker or limit fields are not valid.
+type InvalidArgumentException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArgumentException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArgumentException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidArgumentException(v protocol.ResponseMetadata) error {
+	return &InvalidArgumentException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidArgumentException) Code() string {
+	return "InvalidArgumentException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidArgumentException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidArgumentException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidArgumentException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidArgumentException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidArgumentException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The requested operation is not allowed on the specified comment object.
+type InvalidCommentOperationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCommentOperationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCommentOperationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidCommentOperationException(v protocol.ResponseMetadata) error {
+	return &InvalidCommentOperationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidCommentOperationException) Code() string {
+	return "InvalidCommentOperationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidCommentOperationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidCommentOperationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidCommentOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidCommentOperationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidCommentOperationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The operation is invalid.
+type InvalidOperationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidOperationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidOperationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidOperationException(v protocol.ResponseMetadata) error {
+	return &InvalidOperationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidOperationException) Code() string {
+	return "InvalidOperationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidOperationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidOperationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidOperationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidOperationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The password is invalid.
+type InvalidPasswordException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPasswordException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPasswordException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidPasswordException(v protocol.ResponseMetadata) error {
+	return &InvalidPasswordException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidPasswordException) Code() string {
+	return "InvalidPasswordException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidPasswordException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidPasswordException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidPasswordException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidPasswordException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidPasswordException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The maximum of 100,000 files and folders under the parent folder has been
+// exceeded.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Filter based on size (in bytes).
+type LongRangeType struct {
+	_ struct{} `type:"structure"`
+
+	// The size end range (in bytes).
+	EndValue *int64 `type:"long"`
+
+	// The size start range (in bytes).
+	StartValue *int64 `type:"long"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LongRangeType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LongRangeType) GoString() string {
+	return s.String()
+}
+
+// SetEndValue sets the EndValue field's value.
+func (s *LongRangeType) SetEndValue(v int64) *LongRangeType {
+	s.EndValue = &v
+	return s
+}
+
+// SetStartValue sets the StartValue field's value.
+func (s *LongRangeType) SetStartValue(v int64) *LongRangeType {
+	s.StartValue = &v
+	return s
+}
+
 // Set of options which defines notification preferences of given action.
 type NotificationOptions struct {
 	_ struct{} `type:"structure"`
 
 	// Text value to be included in the email body.
+	//
+	// EmailMessage is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by NotificationOptions's
+	// String and GoString methods.
 	EmailMessage *string `type:"string" sensitive:"true"`
 
-	// Boolean value to indicate an email notification should be sent to the receipients.
+	// Boolean value to indicate an email notification should be sent to the recipients.
 	SendEmail *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotificationOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotificationOptions) GoString() string {
 	return s.String()
 }
@@ -8685,12 +11568,20 @@ type Participants struct {
 	Users []*UserMetadata `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Participants) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Participants) GoString() string {
 	return s.String()
 }
@@ -8718,12 +11609,20 @@ type PermissionInfo struct {
 	Type *string `type:"string" enum:"RolePermissionType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PermissionInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PermissionInfo) GoString() string {
 	return s.String()
 }
@@ -8754,12 +11653,20 @@ type Principal struct {
 	Type *string `type:"string" enum:"PrincipalType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Principal) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Principal) GoString() string {
 	return s.String()
 }
@@ -8782,11 +11689,79 @@ func (s *Principal) SetType(v string) *Principal {
 	return s
 }
 
-type RemoveAllResourcePermissionsInput struct {
-	_ struct{} `type:"structure"`
+// The specified document version is not in the INITIALIZED state.
+type ProhibitedStateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProhibitedStateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProhibitedStateException) GoString() string {
+	return s.String()
+}
+
+func newErrorProhibitedStateException(v protocol.ResponseMetadata) error {
+	return &ProhibitedStateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ProhibitedStateException) Code() string {
+	return "ProhibitedStateException"
+}
+
+// Message returns the exception's message.
+func (s *ProhibitedStateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ProhibitedStateException) OrigErr() error {
+	return nil
+}
+
+func (s *ProhibitedStateException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ProhibitedStateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ProhibitedStateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type RemoveAllResourcePermissionsInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RemoveAllResourcePermissionsInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the resource.
@@ -8795,12 +11770,20 @@ type RemoveAllResourcePermissionsInput struct {
 	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveAllResourcePermissionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveAllResourcePermissionsInput) GoString() string {
 	return s.String()
 }
@@ -8840,21 +11823,33 @@ type RemoveAllResourcePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveAllResourcePermissionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveAllResourcePermissionsOutput) GoString() string {
 	return s.String()
 }
 
 type RemoveResourcePermissionInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RemoveResourcePermissionInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The principal ID of the resource.
@@ -8871,12 +11866,20 @@ type RemoveResourcePermissionInput struct {
 	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveResourcePermissionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveResourcePermissionInput) GoString() string {
 	return s.String()
 }
@@ -8934,14 +11937,151 @@ type RemoveResourcePermissionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveResourcePermissionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveResourcePermissionOutput) GoString() string {
 	return s.String()
+}
+
+// The response is too large to return. The request must include a filter to
+// reduce the size of the response.
+type RequestedEntityTooLargeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestedEntityTooLargeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestedEntityTooLargeException) GoString() string {
+	return s.String()
+}
+
+func newErrorRequestedEntityTooLargeException(v protocol.ResponseMetadata) error {
+	return &RequestedEntityTooLargeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RequestedEntityTooLargeException) Code() string {
+	return "RequestedEntityTooLargeException"
+}
+
+// Message returns the exception's message.
+func (s *RequestedEntityTooLargeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RequestedEntityTooLargeException) OrigErr() error {
+	return nil
+}
+
+func (s *RequestedEntityTooLargeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RequestedEntityTooLargeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RequestedEntityTooLargeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The resource is already checked out.
+type ResourceAlreadyCheckedOutException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAlreadyCheckedOutException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAlreadyCheckedOutException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceAlreadyCheckedOutException(v protocol.ResponseMetadata) error {
+	return &ResourceAlreadyCheckedOutException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceAlreadyCheckedOutException) Code() string {
+	return "ResourceAlreadyCheckedOutException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceAlreadyCheckedOutException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceAlreadyCheckedOutException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceAlreadyCheckedOutException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceAlreadyCheckedOutException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceAlreadyCheckedOutException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Describes the metadata of a resource.
@@ -8952,10 +12092,18 @@ type ResourceMetadata struct {
 	Id *string `min:"1" type:"string"`
 
 	// The name of the resource.
-	Name *string `min:"1" type:"string"`
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ResourceMetadata's
+	// String and GoString methods.
+	Name *string `min:"1" type:"string" sensitive:"true"`
 
 	// The original name of the resource before a rename operation.
-	OriginalName *string `min:"1" type:"string"`
+	//
+	// OriginalName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ResourceMetadata's
+	// String and GoString methods.
+	OriginalName *string `min:"1" type:"string" sensitive:"true"`
 
 	// The owner of the resource.
 	Owner *UserMetadata `type:"structure"`
@@ -8971,12 +12119,20 @@ type ResourceMetadata struct {
 	VersionId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceMetadata) GoString() string {
 	return s.String()
 }
@@ -9031,12 +12187,20 @@ type ResourcePath struct {
 	Components []*ResourcePathComponent `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourcePath) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourcePath) GoString() string {
 	return s.String()
 }
@@ -9055,15 +12219,27 @@ type ResourcePathComponent struct {
 	Id *string `min:"1" type:"string"`
 
 	// The name of the resource path.
-	Name *string `min:"1" type:"string"`
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ResourcePathComponent's
+	// String and GoString methods.
+	Name *string `min:"1" type:"string" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourcePathComponent) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourcePathComponent) GoString() string {
 	return s.String()
 }
@@ -9078,6 +12254,530 @@ func (s *ResourcePathComponent) SetId(v string) *ResourcePathComponent {
 func (s *ResourcePathComponent) SetName(v string) *ResourcePathComponent {
 	s.Name = &v
 	return s
+}
+
+// List of Documents, Folders, Comments, and Document Versions matching the
+// query.
+type ResponseItem struct {
+	_ struct{} `type:"structure"`
+
+	// The comment that matches the query.
+	CommentMetadata *CommentMetadata `type:"structure"`
+
+	// The document that matches the query.
+	DocumentMetadata *DocumentMetadata `type:"structure"`
+
+	// The document version that matches the metadata.
+	DocumentVersionMetadata *DocumentVersionMetadata `type:"structure"`
+
+	// The folder that matches the query.
+	FolderMetadata *FolderMetadata `type:"structure"`
+
+	// The type of item being returned.
+	ResourceType *string `type:"string" enum:"ResponseItemType"`
+
+	// The webUrl of the item being returned.
+	//
+	// WebUrl is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ResponseItem's
+	// String and GoString methods.
+	WebUrl *string `min:"1" type:"string" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseItem) GoString() string {
+	return s.String()
+}
+
+// SetCommentMetadata sets the CommentMetadata field's value.
+func (s *ResponseItem) SetCommentMetadata(v *CommentMetadata) *ResponseItem {
+	s.CommentMetadata = v
+	return s
+}
+
+// SetDocumentMetadata sets the DocumentMetadata field's value.
+func (s *ResponseItem) SetDocumentMetadata(v *DocumentMetadata) *ResponseItem {
+	s.DocumentMetadata = v
+	return s
+}
+
+// SetDocumentVersionMetadata sets the DocumentVersionMetadata field's value.
+func (s *ResponseItem) SetDocumentVersionMetadata(v *DocumentVersionMetadata) *ResponseItem {
+	s.DocumentVersionMetadata = v
+	return s
+}
+
+// SetFolderMetadata sets the FolderMetadata field's value.
+func (s *ResponseItem) SetFolderMetadata(v *FolderMetadata) *ResponseItem {
+	s.FolderMetadata = v
+	return s
+}
+
+// SetResourceType sets the ResourceType field's value.
+func (s *ResponseItem) SetResourceType(v string) *ResponseItem {
+	s.ResourceType = &v
+	return s
+}
+
+// SetWebUrl sets the WebUrl field's value.
+func (s *ResponseItem) SetWebUrl(v string) *ResponseItem {
+	s.WebUrl = &v
+	return s
+}
+
+type RestoreDocumentVersionsInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RestoreDocumentVersionsInput's
+	// String and GoString methods.
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
+
+	// The ID of the document.
+	//
+	// DocumentId is a required field
+	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RestoreDocumentVersionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RestoreDocumentVersionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RestoreDocumentVersionsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RestoreDocumentVersionsInput"}
+	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+	}
+	if s.DocumentId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+	}
+	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAuthenticationToken sets the AuthenticationToken field's value.
+func (s *RestoreDocumentVersionsInput) SetAuthenticationToken(v string) *RestoreDocumentVersionsInput {
+	s.AuthenticationToken = &v
+	return s
+}
+
+// SetDocumentId sets the DocumentId field's value.
+func (s *RestoreDocumentVersionsInput) SetDocumentId(v string) *RestoreDocumentVersionsInput {
+	s.DocumentId = &v
+	return s
+}
+
+type RestoreDocumentVersionsOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RestoreDocumentVersionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RestoreDocumentVersionsOutput) GoString() string {
+	return s.String()
+}
+
+// Filter based on UserIds or GroupIds.
+type SearchPrincipalType struct {
+	_ struct{} `type:"structure"`
+
+	// UserIds or GroupIds.
+	//
+	// Id is a required field
+	Id *string `min:"1" type:"string" required:"true"`
+
+	// The Role of a User or Group.
+	Roles []*string `type:"list" enum:"PrincipalRoleType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchPrincipalType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchPrincipalType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SearchPrincipalType) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SearchPrincipalType"}
+	if s.Id == nil {
+		invalidParams.Add(request.NewErrParamRequired("Id"))
+	}
+	if s.Id != nil && len(*s.Id) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetId sets the Id field's value.
+func (s *SearchPrincipalType) SetId(v string) *SearchPrincipalType {
+	s.Id = &v
+	return s
+}
+
+// SetRoles sets the Roles field's value.
+func (s *SearchPrincipalType) SetRoles(v []*string) *SearchPrincipalType {
+	s.Roles = v
+	return s
+}
+
+type SearchResourcesInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of attributes to include in the response. Used to request fields that
+	// are not normally returned in a standard response.
+	AdditionalResponseFields []*string `type:"list" enum:"AdditionalResponseFieldType"`
+
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by SearchResourcesInput's
+	// String and GoString methods.
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
+
+	// Filters results based on entity metadata.
+	Filters *Filters `type:"structure"`
+
+	// Max results count per page.
+	Limit *int64 `min:"1" type:"integer"`
+
+	// The marker for the next set of results.
+	Marker *string `min:"1" type:"string"`
+
+	// Order by results in one or more categories.
+	OrderBy []*SearchSortResult `type:"list"`
+
+	// Filters based on the resource owner OrgId. This is a mandatory parameter
+	// when using Admin SigV4 credentials.
+	OrganizationId *string `min:"1" type:"string"`
+
+	// Filter based on the text field type. A Folder has only a name and no content.
+	// A Comment has only content and no name. A Document or Document Version has
+	// a name and content
+	QueryScopes []*string `type:"list" enum:"SearchQueryScopeType"`
+
+	// The String to search for. Searches across different text fields based on
+	// request parameters. Use double quotes around the query string for exact phrase
+	// matches.
+	//
+	// QueryText is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by SearchResourcesInput's
+	// String and GoString methods.
+	QueryText *string `min:"1" type:"string" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchResourcesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchResourcesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SearchResourcesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SearchResourcesInput"}
+	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+	}
+	if s.Marker != nil && len(*s.Marker) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+	}
+	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("OrganizationId", 1))
+	}
+	if s.QueryText != nil && len(*s.QueryText) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("QueryText", 1))
+	}
+	if s.Filters != nil {
+		if err := s.Filters.Validate(); err != nil {
+			invalidParams.AddNested("Filters", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdditionalResponseFields sets the AdditionalResponseFields field's value.
+func (s *SearchResourcesInput) SetAdditionalResponseFields(v []*string) *SearchResourcesInput {
+	s.AdditionalResponseFields = v
+	return s
+}
+
+// SetAuthenticationToken sets the AuthenticationToken field's value.
+func (s *SearchResourcesInput) SetAuthenticationToken(v string) *SearchResourcesInput {
+	s.AuthenticationToken = &v
+	return s
+}
+
+// SetFilters sets the Filters field's value.
+func (s *SearchResourcesInput) SetFilters(v *Filters) *SearchResourcesInput {
+	s.Filters = v
+	return s
+}
+
+// SetLimit sets the Limit field's value.
+func (s *SearchResourcesInput) SetLimit(v int64) *SearchResourcesInput {
+	s.Limit = &v
+	return s
+}
+
+// SetMarker sets the Marker field's value.
+func (s *SearchResourcesInput) SetMarker(v string) *SearchResourcesInput {
+	s.Marker = &v
+	return s
+}
+
+// SetOrderBy sets the OrderBy field's value.
+func (s *SearchResourcesInput) SetOrderBy(v []*SearchSortResult) *SearchResourcesInput {
+	s.OrderBy = v
+	return s
+}
+
+// SetOrganizationId sets the OrganizationId field's value.
+func (s *SearchResourcesInput) SetOrganizationId(v string) *SearchResourcesInput {
+	s.OrganizationId = &v
+	return s
+}
+
+// SetQueryScopes sets the QueryScopes field's value.
+func (s *SearchResourcesInput) SetQueryScopes(v []*string) *SearchResourcesInput {
+	s.QueryScopes = v
+	return s
+}
+
+// SetQueryText sets the QueryText field's value.
+func (s *SearchResourcesInput) SetQueryText(v string) *SearchResourcesInput {
+	s.QueryText = &v
+	return s
+}
+
+type SearchResourcesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// List of Documents, Folders, Comments, and Document Versions matching the
+	// query.
+	Items []*ResponseItem `type:"list"`
+
+	// The marker to use when requesting the next set of results. If there are no
+	// additional results, the string is empty.
+	Marker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchResourcesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchResourcesOutput) GoString() string {
+	return s.String()
+}
+
+// SetItems sets the Items field's value.
+func (s *SearchResourcesOutput) SetItems(v []*ResponseItem) *SearchResourcesOutput {
+	s.Items = v
+	return s
+}
+
+// SetMarker sets the Marker field's value.
+func (s *SearchResourcesOutput) SetMarker(v string) *SearchResourcesOutput {
+	s.Marker = &v
+	return s
+}
+
+// The result of the sort operation.
+type SearchSortResult struct {
+	_ struct{} `type:"structure"`
+
+	// Sort search results based on this field name.
+	Field *string `type:"string" enum:"OrderByFieldType"`
+
+	// Sort direction.
+	Order *string `type:"string" enum:"SortOrder"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchSortResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SearchSortResult) GoString() string {
+	return s.String()
+}
+
+// SetField sets the Field field's value.
+func (s *SearchSortResult) SetField(v string) *SearchSortResult {
+	s.Field = &v
+	return s
+}
+
+// SetOrder sets the Order field's value.
+func (s *SearchSortResult) SetOrder(v string) *SearchSortResult {
+	s.Order = &v
+	return s
+}
+
+// One or more of the dependencies is unavailable.
+type ServiceUnavailableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceUnavailableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceUnavailableException) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceUnavailableException(v protocol.ResponseMetadata) error {
+	return &ServiceUnavailableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceUnavailableException) Code() string {
+	return "ServiceUnavailableException"
+}
+
+// Message returns the exception's message.
+func (s *ServiceUnavailableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceUnavailableException) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceUnavailableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceUnavailableException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Describes the recipient type and ID, if available.
@@ -9100,12 +12800,20 @@ type SharePrincipal struct {
 	Type *string `type:"string" required:"true" enum:"PrincipalType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SharePrincipal) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SharePrincipal) GoString() string {
 	return s.String()
 }
@@ -9170,15 +12878,27 @@ type ShareResult struct {
 	Status *string `type:"string" enum:"ShareStatusType"`
 
 	// The status message.
+	//
+	// StatusMessage is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ShareResult's
+	// String and GoString methods.
 	StatusMessage *string `type:"string" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ShareResult) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ShareResult) GoString() string {
 	return s.String()
 }
@@ -9219,6 +12939,134 @@ func (s *ShareResult) SetStatusMessage(v string) *ShareResult {
 	return s
 }
 
+// The storage limit has been exceeded.
+type StorageLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StorageLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StorageLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorStorageLimitExceededException(v protocol.ResponseMetadata) error {
+	return &StorageLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *StorageLimitExceededException) Code() string {
+	return "StorageLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *StorageLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *StorageLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *StorageLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *StorageLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *StorageLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The storage limit will be exceeded.
+type StorageLimitWillExceedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StorageLimitWillExceedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StorageLimitWillExceedException) GoString() string {
+	return s.String()
+}
+
+func newErrorStorageLimitWillExceedException(v protocol.ResponseMetadata) error {
+	return &StorageLimitWillExceedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *StorageLimitWillExceedException) Code() string {
+	return "StorageLimitWillExceedException"
+}
+
+// Message returns the exception's message.
+func (s *StorageLimitWillExceedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *StorageLimitWillExceedException) OrigErr() error {
+	return nil
+}
+
+func (s *StorageLimitWillExceedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *StorageLimitWillExceedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *StorageLimitWillExceedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Describes the storage for a user.
 type StorageRuleType struct {
 	_ struct{} `type:"structure"`
@@ -9230,12 +13078,20 @@ type StorageRuleType struct {
 	StorageType *string `type:"string" enum:"StorageType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StorageRuleType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StorageRuleType) GoString() string {
 	return s.String()
 }
@@ -9266,12 +13122,20 @@ type Subscription struct {
 	SubscriptionId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subscription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subscription) GoString() string {
 	return s.String()
 }
@@ -9294,11 +13158,272 @@ func (s *Subscription) SetSubscriptionId(v string) *Subscription {
 	return s
 }
 
+// The limit has been reached on the number of labels for the specified resource.
+type TooManyLabelsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyLabelsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyLabelsException) GoString() string {
+	return s.String()
+}
+
+func newErrorTooManyLabelsException(v protocol.ResponseMetadata) error {
+	return &TooManyLabelsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TooManyLabelsException) Code() string {
+	return "TooManyLabelsException"
+}
+
+// Message returns the exception's message.
+func (s *TooManyLabelsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TooManyLabelsException) OrigErr() error {
+	return nil
+}
+
+func (s *TooManyLabelsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TooManyLabelsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TooManyLabelsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// You've reached the limit on the number of subscriptions for the WorkDocs
+// instance.
+type TooManySubscriptionsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManySubscriptionsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManySubscriptionsException) GoString() string {
+	return s.String()
+}
+
+func newErrorTooManySubscriptionsException(v protocol.ResponseMetadata) error {
+	return &TooManySubscriptionsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TooManySubscriptionsException) Code() string {
+	return "TooManySubscriptionsException"
+}
+
+// Message returns the exception's message.
+func (s *TooManySubscriptionsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TooManySubscriptionsException) OrigErr() error {
+	return nil
+}
+
+func (s *TooManySubscriptionsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TooManySubscriptionsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TooManySubscriptionsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The operation is not permitted.
+type UnauthorizedOperationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnauthorizedOperationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnauthorizedOperationException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnauthorizedOperationException(v protocol.ResponseMetadata) error {
+	return &UnauthorizedOperationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnauthorizedOperationException) Code() string {
+	return "UnauthorizedOperationException"
+}
+
+// Message returns the exception's message.
+func (s *UnauthorizedOperationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnauthorizedOperationException) OrigErr() error {
+	return nil
+}
+
+func (s *UnauthorizedOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnauthorizedOperationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnauthorizedOperationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The caller does not have access to perform the action on the resource.
+type UnauthorizedResourceAccessException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnauthorizedResourceAccessException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnauthorizedResourceAccessException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnauthorizedResourceAccessException(v protocol.ResponseMetadata) error {
+	return &UnauthorizedResourceAccessException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnauthorizedResourceAccessException) Code() string {
+	return "UnauthorizedResourceAccessException"
+}
+
+// Message returns the exception's message.
+func (s *UnauthorizedResourceAccessException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnauthorizedResourceAccessException) OrigErr() error {
+	return nil
+}
+
+func (s *UnauthorizedResourceAccessException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnauthorizedResourceAccessException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnauthorizedResourceAccessException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type UpdateDocumentInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateDocumentInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -9307,7 +13432,11 @@ type UpdateDocumentInput struct {
 	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
 
 	// The name of the document.
-	Name *string `min:"1" type:"string"`
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateDocumentInput's
+	// String and GoString methods.
+	Name *string `min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the parent folder.
 	ParentFolderId *string `min:"1" type:"string"`
@@ -9316,12 +13445,20 @@ type UpdateDocumentInput struct {
 	ResourceState *string `type:"string" enum:"ResourceStateType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDocumentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDocumentInput) GoString() string {
 	return s.String()
 }
@@ -9385,12 +13522,20 @@ type UpdateDocumentOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDocumentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDocumentOutput) GoString() string {
 	return s.String()
 }
@@ -9398,8 +13543,12 @@ func (s UpdateDocumentOutput) GoString() string {
 type UpdateDocumentVersionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateDocumentVersionInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
@@ -9416,12 +13565,20 @@ type UpdateDocumentVersionInput struct {
 	VersionStatus *string `type:"string" enum:"DocumentVersionStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDocumentVersionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDocumentVersionInput) GoString() string {
 	return s.String()
 }
@@ -9479,12 +13636,20 @@ type UpdateDocumentVersionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDocumentVersionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDocumentVersionOutput) GoString() string {
 	return s.String()
 }
@@ -9492,8 +13657,12 @@ func (s UpdateDocumentVersionOutput) GoString() string {
 type UpdateFolderInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateFolderInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the folder.
@@ -9502,7 +13671,11 @@ type UpdateFolderInput struct {
 	FolderId *string `location:"uri" locationName:"FolderId" min:"1" type:"string" required:"true"`
 
 	// The name of the folder.
-	Name *string `min:"1" type:"string"`
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateFolderInput's
+	// String and GoString methods.
+	Name *string `min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the parent folder.
 	ParentFolderId *string `min:"1" type:"string"`
@@ -9512,12 +13685,20 @@ type UpdateFolderInput struct {
 	ResourceState *string `type:"string" enum:"ResourceStateType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFolderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFolderInput) GoString() string {
 	return s.String()
 }
@@ -9581,12 +13762,20 @@ type UpdateFolderOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFolderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFolderOutput) GoString() string {
 	return s.String()
 }
@@ -9594,14 +13783,22 @@ func (s UpdateFolderOutput) GoString() string {
 type UpdateUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
+	// Amazon WorkDocs authentication token. Not required when using Amazon Web
+	// Services administrator credentials to access the API.
+	//
+	// AuthenticationToken is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateUserInput's
+	// String and GoString methods.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The given name of the user.
-	GivenName *string `min:"1" type:"string"`
+	//
+	// GivenName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateUserInput's
+	// String and GoString methods.
+	GivenName *string `min:"1" type:"string" sensitive:"true"`
 
-	// Boolean value to determine whether the user is granted Poweruser privileges.
+	// Boolean value to determine whether the user is granted Power user privileges.
 	GrantPoweruserPrivileges *string `type:"string" enum:"BooleanEnumType"`
 
 	// The locale of the user.
@@ -9611,7 +13808,11 @@ type UpdateUserInput struct {
 	StorageRule *StorageRuleType `type:"structure"`
 
 	// The surname of the user.
-	Surname *string `min:"1" type:"string"`
+	//
+	// Surname is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateUserInput's
+	// String and GoString methods.
+	Surname *string `min:"1" type:"string" sensitive:"true"`
 
 	// The time zone ID of the user.
 	TimeZoneId *string `min:"1" type:"string"`
@@ -9625,12 +13826,20 @@ type UpdateUserInput struct {
 	UserId *string `location:"uri" locationName:"UserId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateUserInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateUserInput) GoString() string {
 	return s.String()
 }
@@ -9724,12 +13933,20 @@ type UpdateUserOutput struct {
 	User *User `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateUserOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateUserOutput) GoString() string {
 	return s.String()
 }
@@ -9748,15 +13965,27 @@ type UploadMetadata struct {
 	SignedHeaders map[string]*string `type:"map"`
 
 	// The URL of the upload.
+	//
+	// UploadUrl is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UploadMetadata's
+	// String and GoString methods.
 	UploadUrl *string `min:"1" type:"string" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UploadMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UploadMetadata) GoString() string {
 	return s.String()
 }
@@ -9781,10 +14010,18 @@ type User struct {
 	CreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The email address of the user.
-	EmailAddress *string `min:"1" type:"string"`
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by User's
+	// String and GoString methods.
+	EmailAddress *string `min:"1" type:"string" sensitive:"true"`
 
 	// The given name of the user.
-	GivenName *string `min:"1" type:"string"`
+	//
+	// GivenName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by User's
+	// String and GoString methods.
+	GivenName *string `min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the user.
 	Id *string `min:"1" type:"string"`
@@ -9811,7 +14048,11 @@ type User struct {
 	Storage *UserStorageMetadata `type:"structure"`
 
 	// The surname of the user.
-	Surname *string `min:"1" type:"string"`
+	//
+	// Surname is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by User's
+	// String and GoString methods.
+	Surname *string `min:"1" type:"string" sensitive:"true"`
 
 	// The time zone ID of the user.
 	TimeZoneId *string `min:"1" type:"string"`
@@ -9820,15 +14061,27 @@ type User struct {
 	Type *string `type:"string" enum:"UserType"`
 
 	// The login name of the user.
-	Username *string `min:"1" type:"string"`
+	//
+	// Username is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by User's
+	// String and GoString methods.
+	Username *string `min:"1" type:"string" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s User) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s User) GoString() string {
 	return s.String()
 }
@@ -9928,27 +14181,51 @@ type UserMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// The email address of the user.
-	EmailAddress *string `min:"1" type:"string"`
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UserMetadata's
+	// String and GoString methods.
+	EmailAddress *string `min:"1" type:"string" sensitive:"true"`
 
 	// The given name of the user before a rename operation.
-	GivenName *string `min:"1" type:"string"`
+	//
+	// GivenName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UserMetadata's
+	// String and GoString methods.
+	GivenName *string `min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the user.
 	Id *string `min:"1" type:"string"`
 
 	// The surname of the user.
-	Surname *string `min:"1" type:"string"`
+	//
+	// Surname is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UserMetadata's
+	// String and GoString methods.
+	Surname *string `min:"1" type:"string" sensitive:"true"`
 
 	// The name of the user.
-	Username *string `min:"1" type:"string"`
+	//
+	// Username is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UserMetadata's
+	// String and GoString methods.
+	Username *string `min:"1" type:"string" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserMetadata) GoString() string {
 	return s.String()
 }
@@ -9994,12 +14271,20 @@ type UserStorageMetadata struct {
 	StorageUtilizedInBytes *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserStorageMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserStorageMetadata) GoString() string {
 	return s.String()
 }
@@ -10117,6 +14402,57 @@ const (
 	ActivityTypeFolderMoved = "FOLDER_MOVED"
 )
 
+// ActivityType_Values returns all elements of the ActivityType enum
+func ActivityType_Values() []string {
+	return []string{
+		ActivityTypeDocumentCheckedIn,
+		ActivityTypeDocumentCheckedOut,
+		ActivityTypeDocumentRenamed,
+		ActivityTypeDocumentVersionUploaded,
+		ActivityTypeDocumentVersionDeleted,
+		ActivityTypeDocumentVersionViewed,
+		ActivityTypeDocumentVersionDownloaded,
+		ActivityTypeDocumentRecycled,
+		ActivityTypeDocumentRestored,
+		ActivityTypeDocumentReverted,
+		ActivityTypeDocumentShared,
+		ActivityTypeDocumentUnshared,
+		ActivityTypeDocumentSharePermissionChanged,
+		ActivityTypeDocumentShareableLinkCreated,
+		ActivityTypeDocumentShareableLinkRemoved,
+		ActivityTypeDocumentShareableLinkPermissionChanged,
+		ActivityTypeDocumentMoved,
+		ActivityTypeDocumentCommentAdded,
+		ActivityTypeDocumentCommentDeleted,
+		ActivityTypeDocumentAnnotationAdded,
+		ActivityTypeDocumentAnnotationDeleted,
+		ActivityTypeFolderCreated,
+		ActivityTypeFolderDeleted,
+		ActivityTypeFolderRenamed,
+		ActivityTypeFolderRecycled,
+		ActivityTypeFolderRestored,
+		ActivityTypeFolderShared,
+		ActivityTypeFolderUnshared,
+		ActivityTypeFolderSharePermissionChanged,
+		ActivityTypeFolderShareableLinkCreated,
+		ActivityTypeFolderShareableLinkRemoved,
+		ActivityTypeFolderShareableLinkPermissionChanged,
+		ActivityTypeFolderMoved,
+	}
+}
+
+const (
+	// AdditionalResponseFieldTypeWeburl is a AdditionalResponseFieldType enum value
+	AdditionalResponseFieldTypeWeburl = "WEBURL"
+)
+
+// AdditionalResponseFieldType_Values returns all elements of the AdditionalResponseFieldType enum
+func AdditionalResponseFieldType_Values() []string {
+	return []string{
+		AdditionalResponseFieldTypeWeburl,
+	}
+}
+
 const (
 	// BooleanEnumTypeTrue is a BooleanEnumType enum value
 	BooleanEnumTypeTrue = "TRUE"
@@ -10124,6 +14460,14 @@ const (
 	// BooleanEnumTypeFalse is a BooleanEnumType enum value
 	BooleanEnumTypeFalse = "FALSE"
 )
+
+// BooleanEnumType_Values returns all elements of the BooleanEnumType enum
+func BooleanEnumType_Values() []string {
+	return []string{
+		BooleanEnumTypeTrue,
+		BooleanEnumTypeFalse,
+	}
+}
 
 const (
 	// CommentStatusTypeDraft is a CommentStatusType enum value
@@ -10136,6 +14480,15 @@ const (
 	CommentStatusTypeDeleted = "DELETED"
 )
 
+// CommentStatusType_Values returns all elements of the CommentStatusType enum
+func CommentStatusType_Values() []string {
+	return []string{
+		CommentStatusTypeDraft,
+		CommentStatusTypePublished,
+		CommentStatusTypeDeleted,
+	}
+}
+
 const (
 	// CommentVisibilityTypePublic is a CommentVisibilityType enum value
 	CommentVisibilityTypePublic = "PUBLIC"
@@ -10143,6 +14496,58 @@ const (
 	// CommentVisibilityTypePrivate is a CommentVisibilityType enum value
 	CommentVisibilityTypePrivate = "PRIVATE"
 )
+
+// CommentVisibilityType_Values returns all elements of the CommentVisibilityType enum
+func CommentVisibilityType_Values() []string {
+	return []string{
+		CommentVisibilityTypePublic,
+		CommentVisibilityTypePrivate,
+	}
+}
+
+const (
+	// ContentCategoryTypeImage is a ContentCategoryType enum value
+	ContentCategoryTypeImage = "IMAGE"
+
+	// ContentCategoryTypeDocument is a ContentCategoryType enum value
+	ContentCategoryTypeDocument = "DOCUMENT"
+
+	// ContentCategoryTypePdf is a ContentCategoryType enum value
+	ContentCategoryTypePdf = "PDF"
+
+	// ContentCategoryTypeSpreadsheet is a ContentCategoryType enum value
+	ContentCategoryTypeSpreadsheet = "SPREADSHEET"
+
+	// ContentCategoryTypePresentation is a ContentCategoryType enum value
+	ContentCategoryTypePresentation = "PRESENTATION"
+
+	// ContentCategoryTypeAudio is a ContentCategoryType enum value
+	ContentCategoryTypeAudio = "AUDIO"
+
+	// ContentCategoryTypeVideo is a ContentCategoryType enum value
+	ContentCategoryTypeVideo = "VIDEO"
+
+	// ContentCategoryTypeSourceCode is a ContentCategoryType enum value
+	ContentCategoryTypeSourceCode = "SOURCE_CODE"
+
+	// ContentCategoryTypeOther is a ContentCategoryType enum value
+	ContentCategoryTypeOther = "OTHER"
+)
+
+// ContentCategoryType_Values returns all elements of the ContentCategoryType enum
+func ContentCategoryType_Values() []string {
+	return []string{
+		ContentCategoryTypeImage,
+		ContentCategoryTypeDocument,
+		ContentCategoryTypePdf,
+		ContentCategoryTypeSpreadsheet,
+		ContentCategoryTypePresentation,
+		ContentCategoryTypeAudio,
+		ContentCategoryTypeVideo,
+		ContentCategoryTypeSourceCode,
+		ContentCategoryTypeOther,
+	}
+}
 
 const (
 	// DocumentSourceTypeOriginal is a DocumentSourceType enum value
@@ -10152,6 +14557,14 @@ const (
 	DocumentSourceTypeWithComments = "WITH_COMMENTS"
 )
 
+// DocumentSourceType_Values returns all elements of the DocumentSourceType enum
+func DocumentSourceType_Values() []string {
+	return []string{
+		DocumentSourceTypeOriginal,
+		DocumentSourceTypeWithComments,
+	}
+}
+
 const (
 	// DocumentStatusTypeInitialized is a DocumentStatusType enum value
 	DocumentStatusTypeInitialized = "INITIALIZED"
@@ -10159,6 +14572,14 @@ const (
 	// DocumentStatusTypeActive is a DocumentStatusType enum value
 	DocumentStatusTypeActive = "ACTIVE"
 )
+
+// DocumentStatusType_Values returns all elements of the DocumentStatusType enum
+func DocumentStatusType_Values() []string {
+	return []string{
+		DocumentStatusTypeInitialized,
+		DocumentStatusTypeActive,
+	}
+}
 
 const (
 	// DocumentThumbnailTypeSmall is a DocumentThumbnailType enum value
@@ -10171,10 +14592,26 @@ const (
 	DocumentThumbnailTypeLarge = "LARGE"
 )
 
+// DocumentThumbnailType_Values returns all elements of the DocumentThumbnailType enum
+func DocumentThumbnailType_Values() []string {
+	return []string{
+		DocumentThumbnailTypeSmall,
+		DocumentThumbnailTypeSmallHq,
+		DocumentThumbnailTypeLarge,
+	}
+}
+
 const (
 	// DocumentVersionStatusActive is a DocumentVersionStatus enum value
 	DocumentVersionStatusActive = "ACTIVE"
 )
+
+// DocumentVersionStatus_Values returns all elements of the DocumentVersionStatus enum
+func DocumentVersionStatus_Values() []string {
+	return []string{
+		DocumentVersionStatusActive,
+	}
+}
 
 const (
 	// FolderContentTypeAll is a FolderContentType enum value
@@ -10186,6 +14623,147 @@ const (
 	// FolderContentTypeFolder is a FolderContentType enum value
 	FolderContentTypeFolder = "FOLDER"
 )
+
+// FolderContentType_Values returns all elements of the FolderContentType enum
+func FolderContentType_Values() []string {
+	return []string{
+		FolderContentTypeAll,
+		FolderContentTypeDocument,
+		FolderContentTypeFolder,
+	}
+}
+
+const (
+	// LanguageCodeTypeAr is a LanguageCodeType enum value
+	LanguageCodeTypeAr = "AR"
+
+	// LanguageCodeTypeBg is a LanguageCodeType enum value
+	LanguageCodeTypeBg = "BG"
+
+	// LanguageCodeTypeBn is a LanguageCodeType enum value
+	LanguageCodeTypeBn = "BN"
+
+	// LanguageCodeTypeDa is a LanguageCodeType enum value
+	LanguageCodeTypeDa = "DA"
+
+	// LanguageCodeTypeDe is a LanguageCodeType enum value
+	LanguageCodeTypeDe = "DE"
+
+	// LanguageCodeTypeCs is a LanguageCodeType enum value
+	LanguageCodeTypeCs = "CS"
+
+	// LanguageCodeTypeEl is a LanguageCodeType enum value
+	LanguageCodeTypeEl = "EL"
+
+	// LanguageCodeTypeEn is a LanguageCodeType enum value
+	LanguageCodeTypeEn = "EN"
+
+	// LanguageCodeTypeEs is a LanguageCodeType enum value
+	LanguageCodeTypeEs = "ES"
+
+	// LanguageCodeTypeFa is a LanguageCodeType enum value
+	LanguageCodeTypeFa = "FA"
+
+	// LanguageCodeTypeFi is a LanguageCodeType enum value
+	LanguageCodeTypeFi = "FI"
+
+	// LanguageCodeTypeFr is a LanguageCodeType enum value
+	LanguageCodeTypeFr = "FR"
+
+	// LanguageCodeTypeHi is a LanguageCodeType enum value
+	LanguageCodeTypeHi = "HI"
+
+	// LanguageCodeTypeHu is a LanguageCodeType enum value
+	LanguageCodeTypeHu = "HU"
+
+	// LanguageCodeTypeId is a LanguageCodeType enum value
+	LanguageCodeTypeId = "ID"
+
+	// LanguageCodeTypeIt is a LanguageCodeType enum value
+	LanguageCodeTypeIt = "IT"
+
+	// LanguageCodeTypeJa is a LanguageCodeType enum value
+	LanguageCodeTypeJa = "JA"
+
+	// LanguageCodeTypeKo is a LanguageCodeType enum value
+	LanguageCodeTypeKo = "KO"
+
+	// LanguageCodeTypeLt is a LanguageCodeType enum value
+	LanguageCodeTypeLt = "LT"
+
+	// LanguageCodeTypeLv is a LanguageCodeType enum value
+	LanguageCodeTypeLv = "LV"
+
+	// LanguageCodeTypeNl is a LanguageCodeType enum value
+	LanguageCodeTypeNl = "NL"
+
+	// LanguageCodeTypeNo is a LanguageCodeType enum value
+	LanguageCodeTypeNo = "NO"
+
+	// LanguageCodeTypePt is a LanguageCodeType enum value
+	LanguageCodeTypePt = "PT"
+
+	// LanguageCodeTypeRo is a LanguageCodeType enum value
+	LanguageCodeTypeRo = "RO"
+
+	// LanguageCodeTypeRu is a LanguageCodeType enum value
+	LanguageCodeTypeRu = "RU"
+
+	// LanguageCodeTypeSv is a LanguageCodeType enum value
+	LanguageCodeTypeSv = "SV"
+
+	// LanguageCodeTypeSw is a LanguageCodeType enum value
+	LanguageCodeTypeSw = "SW"
+
+	// LanguageCodeTypeTh is a LanguageCodeType enum value
+	LanguageCodeTypeTh = "TH"
+
+	// LanguageCodeTypeTr is a LanguageCodeType enum value
+	LanguageCodeTypeTr = "TR"
+
+	// LanguageCodeTypeZh is a LanguageCodeType enum value
+	LanguageCodeTypeZh = "ZH"
+
+	// LanguageCodeTypeDefault is a LanguageCodeType enum value
+	LanguageCodeTypeDefault = "DEFAULT"
+)
+
+// LanguageCodeType_Values returns all elements of the LanguageCodeType enum
+func LanguageCodeType_Values() []string {
+	return []string{
+		LanguageCodeTypeAr,
+		LanguageCodeTypeBg,
+		LanguageCodeTypeBn,
+		LanguageCodeTypeDa,
+		LanguageCodeTypeDe,
+		LanguageCodeTypeCs,
+		LanguageCodeTypeEl,
+		LanguageCodeTypeEn,
+		LanguageCodeTypeEs,
+		LanguageCodeTypeFa,
+		LanguageCodeTypeFi,
+		LanguageCodeTypeFr,
+		LanguageCodeTypeHi,
+		LanguageCodeTypeHu,
+		LanguageCodeTypeId,
+		LanguageCodeTypeIt,
+		LanguageCodeTypeJa,
+		LanguageCodeTypeKo,
+		LanguageCodeTypeLt,
+		LanguageCodeTypeLv,
+		LanguageCodeTypeNl,
+		LanguageCodeTypeNo,
+		LanguageCodeTypePt,
+		LanguageCodeTypeRo,
+		LanguageCodeTypeRu,
+		LanguageCodeTypeSv,
+		LanguageCodeTypeSw,
+		LanguageCodeTypeTh,
+		LanguageCodeTypeTr,
+		LanguageCodeTypeZh,
+		LanguageCodeTypeDefault,
+	}
+}
 
 const (
 	// LocaleTypeEn is a LocaleType enum value
@@ -10222,6 +14800,51 @@ const (
 	LocaleTypeDefault = "default"
 )
 
+// LocaleType_Values returns all elements of the LocaleType enum
+func LocaleType_Values() []string {
+	return []string{
+		LocaleTypeEn,
+		LocaleTypeFr,
+		LocaleTypeKo,
+		LocaleTypeDe,
+		LocaleTypeEs,
+		LocaleTypeJa,
+		LocaleTypeRu,
+		LocaleTypeZhCn,
+		LocaleTypeZhTw,
+		LocaleTypePtBr,
+		LocaleTypeDefault,
+	}
+}
+
+const (
+	// OrderByFieldTypeRelevance is a OrderByFieldType enum value
+	OrderByFieldTypeRelevance = "RELEVANCE"
+
+	// OrderByFieldTypeName is a OrderByFieldType enum value
+	OrderByFieldTypeName = "NAME"
+
+	// OrderByFieldTypeSize is a OrderByFieldType enum value
+	OrderByFieldTypeSize = "SIZE"
+
+	// OrderByFieldTypeCreatedTimestamp is a OrderByFieldType enum value
+	OrderByFieldTypeCreatedTimestamp = "CREATED_TIMESTAMP"
+
+	// OrderByFieldTypeModifiedTimestamp is a OrderByFieldType enum value
+	OrderByFieldTypeModifiedTimestamp = "MODIFIED_TIMESTAMP"
+)
+
+// OrderByFieldType_Values returns all elements of the OrderByFieldType enum
+func OrderByFieldType_Values() []string {
+	return []string{
+		OrderByFieldTypeRelevance,
+		OrderByFieldTypeName,
+		OrderByFieldTypeSize,
+		OrderByFieldTypeCreatedTimestamp,
+		OrderByFieldTypeModifiedTimestamp,
+	}
+}
+
 const (
 	// OrderTypeAscending is a OrderType enum value
 	OrderTypeAscending = "ASCENDING"
@@ -10229,6 +14852,38 @@ const (
 	// OrderTypeDescending is a OrderType enum value
 	OrderTypeDescending = "DESCENDING"
 )
+
+// OrderType_Values returns all elements of the OrderType enum
+func OrderType_Values() []string {
+	return []string{
+		OrderTypeAscending,
+		OrderTypeDescending,
+	}
+}
+
+const (
+	// PrincipalRoleTypeViewer is a PrincipalRoleType enum value
+	PrincipalRoleTypeViewer = "VIEWER"
+
+	// PrincipalRoleTypeContributor is a PrincipalRoleType enum value
+	PrincipalRoleTypeContributor = "CONTRIBUTOR"
+
+	// PrincipalRoleTypeOwner is a PrincipalRoleType enum value
+	PrincipalRoleTypeOwner = "OWNER"
+
+	// PrincipalRoleTypeCoowner is a PrincipalRoleType enum value
+	PrincipalRoleTypeCoowner = "COOWNER"
+)
+
+// PrincipalRoleType_Values returns all elements of the PrincipalRoleType enum
+func PrincipalRoleType_Values() []string {
+	return []string{
+		PrincipalRoleTypeViewer,
+		PrincipalRoleTypeContributor,
+		PrincipalRoleTypeOwner,
+		PrincipalRoleTypeCoowner,
+	}
+}
 
 const (
 	// PrincipalTypeUser is a PrincipalType enum value
@@ -10247,10 +14902,28 @@ const (
 	PrincipalTypeOrganization = "ORGANIZATION"
 )
 
+// PrincipalType_Values returns all elements of the PrincipalType enum
+func PrincipalType_Values() []string {
+	return []string{
+		PrincipalTypeUser,
+		PrincipalTypeGroup,
+		PrincipalTypeInvite,
+		PrincipalTypeAnonymous,
+		PrincipalTypeOrganization,
+	}
+}
+
 const (
 	// ResourceCollectionTypeSharedWithMe is a ResourceCollectionType enum value
 	ResourceCollectionTypeSharedWithMe = "SHARED_WITH_ME"
 )
+
+// ResourceCollectionType_Values returns all elements of the ResourceCollectionType enum
+func ResourceCollectionType_Values() []string {
+	return []string{
+		ResourceCollectionTypeSharedWithMe,
+	}
+}
 
 const (
 	// ResourceSortTypeDate is a ResourceSortType enum value
@@ -10259,6 +14932,14 @@ const (
 	// ResourceSortTypeName is a ResourceSortType enum value
 	ResourceSortTypeName = "NAME"
 )
+
+// ResourceSortType_Values returns all elements of the ResourceSortType enum
+func ResourceSortType_Values() []string {
+	return []string{
+		ResourceSortTypeDate,
+		ResourceSortTypeName,
+	}
+}
 
 const (
 	// ResourceStateTypeActive is a ResourceStateType enum value
@@ -10274,6 +14955,16 @@ const (
 	ResourceStateTypeRecycled = "RECYCLED"
 )
 
+// ResourceStateType_Values returns all elements of the ResourceStateType enum
+func ResourceStateType_Values() []string {
+	return []string{
+		ResourceStateTypeActive,
+		ResourceStateTypeRestoring,
+		ResourceStateTypeRecycling,
+		ResourceStateTypeRecycled,
+	}
+}
+
 const (
 	// ResourceTypeFolder is a ResourceType enum value
 	ResourceTypeFolder = "FOLDER"
@@ -10282,6 +14973,38 @@ const (
 	ResourceTypeDocument = "DOCUMENT"
 )
 
+// ResourceType_Values returns all elements of the ResourceType enum
+func ResourceType_Values() []string {
+	return []string{
+		ResourceTypeFolder,
+		ResourceTypeDocument,
+	}
+}
+
+const (
+	// ResponseItemTypeDocument is a ResponseItemType enum value
+	ResponseItemTypeDocument = "DOCUMENT"
+
+	// ResponseItemTypeFolder is a ResponseItemType enum value
+	ResponseItemTypeFolder = "FOLDER"
+
+	// ResponseItemTypeComment is a ResponseItemType enum value
+	ResponseItemTypeComment = "COMMENT"
+
+	// ResponseItemTypeDocumentVersion is a ResponseItemType enum value
+	ResponseItemTypeDocumentVersion = "DOCUMENT_VERSION"
+)
+
+// ResponseItemType_Values returns all elements of the ResponseItemType enum
+func ResponseItemType_Values() []string {
+	return []string{
+		ResponseItemTypeDocument,
+		ResponseItemTypeFolder,
+		ResponseItemTypeComment,
+		ResponseItemTypeDocumentVersion,
+	}
+}
+
 const (
 	// RolePermissionTypeDirect is a RolePermissionType enum value
 	RolePermissionTypeDirect = "DIRECT"
@@ -10289,6 +15012,14 @@ const (
 	// RolePermissionTypeInherited is a RolePermissionType enum value
 	RolePermissionTypeInherited = "INHERITED"
 )
+
+// RolePermissionType_Values returns all elements of the RolePermissionType enum
+func RolePermissionType_Values() []string {
+	return []string{
+		RolePermissionTypeDirect,
+		RolePermissionTypeInherited,
+	}
+}
 
 const (
 	// RoleTypeViewer is a RoleType enum value
@@ -10304,6 +15035,72 @@ const (
 	RoleTypeCoowner = "COOWNER"
 )
 
+// RoleType_Values returns all elements of the RoleType enum
+func RoleType_Values() []string {
+	return []string{
+		RoleTypeViewer,
+		RoleTypeContributor,
+		RoleTypeOwner,
+		RoleTypeCoowner,
+	}
+}
+
+const (
+	// SearchCollectionTypeOwned is a SearchCollectionType enum value
+	SearchCollectionTypeOwned = "OWNED"
+
+	// SearchCollectionTypeSharedWithMe is a SearchCollectionType enum value
+	SearchCollectionTypeSharedWithMe = "SHARED_WITH_ME"
+)
+
+// SearchCollectionType_Values returns all elements of the SearchCollectionType enum
+func SearchCollectionType_Values() []string {
+	return []string{
+		SearchCollectionTypeOwned,
+		SearchCollectionTypeSharedWithMe,
+	}
+}
+
+const (
+	// SearchQueryScopeTypeName is a SearchQueryScopeType enum value
+	SearchQueryScopeTypeName = "NAME"
+
+	// SearchQueryScopeTypeContent is a SearchQueryScopeType enum value
+	SearchQueryScopeTypeContent = "CONTENT"
+)
+
+// SearchQueryScopeType_Values returns all elements of the SearchQueryScopeType enum
+func SearchQueryScopeType_Values() []string {
+	return []string{
+		SearchQueryScopeTypeName,
+		SearchQueryScopeTypeContent,
+	}
+}
+
+const (
+	// SearchResourceTypeFolder is a SearchResourceType enum value
+	SearchResourceTypeFolder = "FOLDER"
+
+	// SearchResourceTypeDocument is a SearchResourceType enum value
+	SearchResourceTypeDocument = "DOCUMENT"
+
+	// SearchResourceTypeComment is a SearchResourceType enum value
+	SearchResourceTypeComment = "COMMENT"
+
+	// SearchResourceTypeDocumentVersion is a SearchResourceType enum value
+	SearchResourceTypeDocumentVersion = "DOCUMENT_VERSION"
+)
+
+// SearchResourceType_Values returns all elements of the SearchResourceType enum
+func SearchResourceType_Values() []string {
+	return []string{
+		SearchResourceTypeFolder,
+		SearchResourceTypeDocument,
+		SearchResourceTypeComment,
+		SearchResourceTypeDocumentVersion,
+	}
+}
+
 const (
 	// ShareStatusTypeSuccess is a ShareStatusType enum value
 	ShareStatusTypeSuccess = "SUCCESS"
@@ -10311,6 +15108,30 @@ const (
 	// ShareStatusTypeFailure is a ShareStatusType enum value
 	ShareStatusTypeFailure = "FAILURE"
 )
+
+// ShareStatusType_Values returns all elements of the ShareStatusType enum
+func ShareStatusType_Values() []string {
+	return []string{
+		ShareStatusTypeSuccess,
+		ShareStatusTypeFailure,
+	}
+}
+
+const (
+	// SortOrderAsc is a SortOrder enum value
+	SortOrderAsc = "ASC"
+
+	// SortOrderDesc is a SortOrder enum value
+	SortOrderDesc = "DESC"
+)
+
+// SortOrder_Values returns all elements of the SortOrder enum
+func SortOrder_Values() []string {
+	return []string{
+		SortOrderAsc,
+		SortOrderDesc,
+	}
+}
 
 const (
 	// StorageTypeUnlimited is a StorageType enum value
@@ -10320,15 +15141,41 @@ const (
 	StorageTypeQuota = "QUOTA"
 )
 
+// StorageType_Values returns all elements of the StorageType enum
+func StorageType_Values() []string {
+	return []string{
+		StorageTypeUnlimited,
+		StorageTypeQuota,
+	}
+}
+
 const (
 	// SubscriptionProtocolTypeHttps is a SubscriptionProtocolType enum value
 	SubscriptionProtocolTypeHttps = "HTTPS"
+
+	// SubscriptionProtocolTypeSqs is a SubscriptionProtocolType enum value
+	SubscriptionProtocolTypeSqs = "SQS"
 )
+
+// SubscriptionProtocolType_Values returns all elements of the SubscriptionProtocolType enum
+func SubscriptionProtocolType_Values() []string {
+	return []string{
+		SubscriptionProtocolTypeHttps,
+		SubscriptionProtocolTypeSqs,
+	}
+}
 
 const (
 	// SubscriptionTypeAll is a SubscriptionType enum value
 	SubscriptionTypeAll = "ALL"
 )
+
+// SubscriptionType_Values returns all elements of the SubscriptionType enum
+func SubscriptionType_Values() []string {
+	return []string{
+		SubscriptionTypeAll,
+	}
+}
 
 const (
 	// UserFilterTypeAll is a UserFilterType enum value
@@ -10337,6 +15184,14 @@ const (
 	// UserFilterTypeActivePending is a UserFilterType enum value
 	UserFilterTypeActivePending = "ACTIVE_PENDING"
 )
+
+// UserFilterType_Values returns all elements of the UserFilterType enum
+func UserFilterType_Values() []string {
+	return []string{
+		UserFilterTypeAll,
+		UserFilterTypeActivePending,
+	}
+}
 
 const (
 	// UserSortTypeUserName is a UserSortType enum value
@@ -10355,6 +15210,17 @@ const (
 	UserSortTypeStorageUsed = "STORAGE_USED"
 )
 
+// UserSortType_Values returns all elements of the UserSortType enum
+func UserSortType_Values() []string {
+	return []string{
+		UserSortTypeUserName,
+		UserSortTypeFullName,
+		UserSortTypeStorageLimit,
+		UserSortTypeUserStatus,
+		UserSortTypeStorageUsed,
+	}
+}
+
 const (
 	// UserStatusTypeActive is a UserStatusType enum value
 	UserStatusTypeActive = "ACTIVE"
@@ -10365,6 +15231,15 @@ const (
 	// UserStatusTypePending is a UserStatusType enum value
 	UserStatusTypePending = "PENDING"
 )
+
+// UserStatusType_Values returns all elements of the UserStatusType enum
+func UserStatusType_Values() []string {
+	return []string{
+		UserStatusTypeActive,
+		UserStatusTypeInactive,
+		UserStatusTypePending,
+	}
+}
 
 const (
 	// UserTypeUser is a UserType enum value
@@ -10382,3 +15257,14 @@ const (
 	// UserTypeWorkspacesuser is a UserType enum value
 	UserTypeWorkspacesuser = "WORKSPACESUSER"
 )
+
+// UserType_Values returns all elements of the UserType enum
+func UserType_Values() []string {
+	return []string{
+		UserTypeUser,
+		UserTypeAdmin,
+		UserTypePoweruser,
+		UserTypeMinimaluser,
+		UserTypeWorkspacesuser,
+	}
+}

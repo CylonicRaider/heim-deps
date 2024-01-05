@@ -4,8 +4,9 @@ import "strings"
 
 func noGoFiles(line string) bool {
 	return strings.HasPrefix(line, "can't load package: ") &&
-		(strings.Contains(line, ": no buildable Go source files in ") || strings.Contains(line, ": no Go "))
-
+		(strings.Contains(line, ": no buildable Go source files in ") ||
+			strings.Contains(line, ": no Go ") ||
+			strings.Contains(line, "cannot find module providing package"))
 }
 func buildFailed(line string) bool {
 	return strings.HasPrefix(line, "# ") ||
@@ -40,5 +41,5 @@ func packagePassed(line string) bool {
 	return strings.HasPrefix(line, "ok  \t")
 }
 func isCoverageSummary(line string) bool {
-	return strings.HasPrefix(line, "coverage: ") && strings.Contains(line, "% of statements")
+	return strings.Contains(line, "coverage: ") && strings.Contains(line, "% of statements")
 }

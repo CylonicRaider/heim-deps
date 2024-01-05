@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds"
 	"github.com/aws/aws-sdk-go/aws/credentials/endpointcreds"
 	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go/internal/sdktesting"
 	"github.com/aws/aws-sdk-go/internal/shareddefaults"
 )
 
@@ -22,10 +23,12 @@ func TestHTTPCredProvider(t *testing.T) {
 			Addrs []string
 			Err   error
 		}{
-			"localhost":       {Addrs: []string{"::1", "127.0.0.1"}},
-			"actuallylocal":   {Addrs: []string{"127.0.0.2"}},
-			"notlocal":        {Addrs: []string{"::1", "127.0.0.1", "192.168.1.10"}},
-			"www.example.com": {Addrs: []string{"10.10.10.10"}},
+			"localhost":         {Addrs: []string{"::1", "127.0.0.1"}},
+			"actuallylocal":     {Addrs: []string{"127.0.0.2"}},
+			"notlocal":          {Addrs: []string{"::1", "127.0.0.1", "192.168.1.10"}},
+			"www.example.com":   {Addrs: []string{"10.10.10.10"}},
+			"www.eks.legit.com": {Addrs: []string{"fd00:ec2::23"}},
+			"www.eks.scary.com": {Addrs: []string{"fd00:ec3::23"}},
 		}
 
 		h, ok := m[host]
@@ -48,11 +51,18 @@ func TestHTTPCredProvider(t *testing.T) {
 		{Host: "127.1.1.1", Fail: false},
 		{Host: "[::1]", Fail: false},
 		{Host: "www.example.com", Fail: true},
-		{Host: "169.254.170.2", Fail: true},
+		{Host: "169.254.170.2", Fail: false},
+		{Host: "169.254.170.23", Fail: false},
+		{Host: "[fd00:ec2::23]", Fail: false},
+		{Host: "[fd00:ec2:0::23]", Fail: false},
+		{Host: "[fd00:ec2:0:1::23]", Fail: true},
+		{Host: "www.eks.legit.com", Fail: false},
+		{Host: "www.eks.scary.com", Fail: true},
 		{Host: "localhost", Fail: false, AuthToken: "Basic abc123"},
 	}
 
-	defer os.Clearenv()
+	restoreEnvFn := sdktesting.StashEnv()
+	defer restoreEnvFn()
 
 	for i, c := range cases {
 		u := fmt.Sprintf("http://%s/abc/123", c.Host)
@@ -89,8 +99,30 @@ func TestHTTPCredProvider(t *testing.T) {
 	}
 }
 
+func TestHTTPAuthTokenFile(t *testing.T) {
+	restoreEnvFn := sdktesting.StashEnv()
+	defer restoreEnvFn()
+	os.Setenv(httpProviderAuthFileEnvVar, "path/to/file")
+	os.Setenv(httpProviderEnvVar, "http://169.254.170.23/abc/123")
+
+	provider := RemoteCredProvider(aws.Config{}, request.Handlers{})
+	if provider == nil {
+		t.Fatalf("expect provider not to be nil, but was")
+	}
+
+	httpProvider := provider.(*endpointcreds.Provider)
+	if httpProvider == nil {
+		t.Fatalf("expect provider not to be nil, but was")
+	}
+
+	if httpProvider.AuthorizationTokenProvider == nil {
+		t.Fatalf("expect auth token provider no to be nil, but was")
+	}
+}
+
 func TestECSCredProvider(t *testing.T) {
-	defer os.Clearenv()
+	restoreEnvFn := sdktesting.StashEnv()
+	defer restoreEnvFn()
 	os.Setenv(shareddefaults.ECSCredsProviderEnvVar, "/abc/123")
 
 	provider := RemoteCredProvider(aws.Config{}, request.Handlers{})
@@ -117,7 +149,7 @@ func TestDefaultEC2RoleProvider(t *testing.T) {
 	if ec2Provider == nil {
 		t.Fatalf("expect provider not to be nil, but was")
 	}
-	if e, a := "http://169.254.169.254/latest", ec2Provider.Client.Endpoint; e != a {
+	if e, a := "http://169.254.169.254", ec2Provider.Client.Endpoint; e != a {
 		t.Errorf("expect %q endpoint, got %q", e, a)
 	}
 }

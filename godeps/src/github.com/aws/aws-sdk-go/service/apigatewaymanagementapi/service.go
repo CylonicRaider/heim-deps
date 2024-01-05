@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/client/metadata"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/aws/signer/v4"
+	"github.com/aws/aws-sdk-go/private/protocol"
 	"github.com/aws/aws-sdk-go/private/protocol/restjson"
 )
 
@@ -31,7 +32,7 @@ var initRequest func(*request.Request)
 const (
 	ServiceName = "ApiGatewayManagementApi" // Name of service.
 	EndpointsID = "execute-api"             // ID to lookup a service endpoint with.
-	ServiceID   = "ApiGatewayManagementApi" // ServiceID is a unique identifer of a specific service.
+	ServiceID   = "ApiGatewayManagementApi" // ServiceID is a unique identifier of a specific service.
 )
 
 // New creates a new instance of the ApiGatewayManagementApi client with a session.
@@ -39,32 +40,36 @@ const (
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a ApiGatewayManagementApi client from just a session.
-//     svc := apigatewaymanagementapi.New(mySession)
 //
-//     // Create a ApiGatewayManagementApi client with additional configuration
-//     svc := apigatewaymanagementapi.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
+//	mySession := session.Must(session.NewSession())
+//
+//	// Create a ApiGatewayManagementApi client from just a session.
+//	svc := apigatewaymanagementapi.New(mySession)
+//
+//	// Create a ApiGatewayManagementApi client with additional configuration
+//	svc := apigatewaymanagementapi.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
 func New(p client.ConfigProvider, cfgs ...*aws.Config) *ApiGatewayManagementApi {
 	c := p.ClientConfig(EndpointsID, cfgs...)
 	if c.SigningNameDerived || len(c.SigningName) == 0 {
 		c.SigningName = "execute-api"
 	}
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
+	return newClient(*c.Config, c.Handlers, c.PartitionID, c.Endpoint, c.SigningRegion, c.SigningName, c.ResolvedRegion)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *ApiGatewayManagementApi {
+func newClient(cfg aws.Config, handlers request.Handlers, partitionID, endpoint, signingRegion, signingName, resolvedRegion string) *ApiGatewayManagementApi {
 	svc := &ApiGatewayManagementApi{
 		Client: client.New(
 			cfg,
 			metadata.ClientInfo{
-				ServiceName:   ServiceName,
-				ServiceID:     ServiceID,
-				SigningName:   signingName,
-				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
-				APIVersion:    "2018-11-29",
-				JSONVersion:   "1.1",
+				ServiceName:    ServiceName,
+				ServiceID:      ServiceID,
+				SigningName:    signingName,
+				SigningRegion:  signingRegion,
+				PartitionID:    partitionID,
+				Endpoint:       endpoint,
+				APIVersion:     "2018-11-29",
+				ResolvedRegion: resolvedRegion,
 			},
 			handlers,
 		),
@@ -75,7 +80,9 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 	svc.Handlers.Build.PushBackNamed(restjson.BuildHandler)
 	svc.Handlers.Unmarshal.PushBackNamed(restjson.UnmarshalHandler)
 	svc.Handlers.UnmarshalMeta.PushBackNamed(restjson.UnmarshalMetaHandler)
-	svc.Handlers.UnmarshalError.PushBackNamed(restjson.UnmarshalErrorHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(
+		protocol.NewUnmarshalErrorHandler(restjson.NewUnmarshalTypedError(exceptionFromCode)).NamedHandler(),
+	)
 
 	// Run custom client initialization if present
 	if initClient != nil {

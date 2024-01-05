@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/client/metadata"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/aws/signer/v4"
+	"github.com/aws/aws-sdk-go/private/protocol"
 	"github.com/aws/aws-sdk-go/private/protocol/restjson"
 )
 
@@ -31,7 +32,7 @@ var initRequest func(*request.Request)
 const (
 	ServiceName = "cloudsearchdomain"  // Name of service.
 	EndpointsID = ServiceName          // ID to lookup a service endpoint with.
-	ServiceID   = "CloudSearch Domain" // ServiceID is a unique identifer of a specific service.
+	ServiceID   = "CloudSearch Domain" // ServiceID is a unique identifier of a specific service.
 )
 
 // New creates a new instance of the CloudSearchDomain client with a session.
@@ -39,11 +40,14 @@ const (
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a CloudSearchDomain client from just a session.
-//     svc := cloudsearchdomain.New(mySession)
 //
-//     // Create a CloudSearchDomain client with additional configuration
-//     svc := cloudsearchdomain.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
+//	mySession := session.Must(session.NewSession())
+//
+//	// Create a CloudSearchDomain client from just a session.
+//	svc := cloudsearchdomain.New(mySession)
+//
+//	// Create a CloudSearchDomain client with additional configuration
+//	svc := cloudsearchdomain.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
 func New(p client.ConfigProvider, cfgs ...*aws.Config) *CloudSearchDomain {
 	var c client.Config
 	if v, ok := p.(client.ConfigNoResolveEndpointProvider); ok {
@@ -54,22 +58,23 @@ func New(p client.ConfigProvider, cfgs ...*aws.Config) *CloudSearchDomain {
 	if c.SigningNameDerived || len(c.SigningName) == 0 {
 		c.SigningName = "cloudsearch"
 	}
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
+	return newClient(*c.Config, c.Handlers, c.PartitionID, c.Endpoint, c.SigningRegion, c.SigningName, c.ResolvedRegion)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *CloudSearchDomain {
+func newClient(cfg aws.Config, handlers request.Handlers, partitionID, endpoint, signingRegion, signingName, resolvedRegion string) *CloudSearchDomain {
 	svc := &CloudSearchDomain{
 		Client: client.New(
 			cfg,
 			metadata.ClientInfo{
-				ServiceName:   ServiceName,
-				ServiceID:     ServiceID,
-				SigningName:   signingName,
-				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
-				APIVersion:    "2013-01-01",
-				JSONVersion:   "1.1",
+				ServiceName:    ServiceName,
+				ServiceID:      ServiceID,
+				SigningName:    signingName,
+				SigningRegion:  signingRegion,
+				PartitionID:    partitionID,
+				Endpoint:       endpoint,
+				APIVersion:     "2013-01-01",
+				ResolvedRegion: resolvedRegion,
 			},
 			handlers,
 		),
@@ -80,7 +85,9 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 	svc.Handlers.Build.PushBackNamed(restjson.BuildHandler)
 	svc.Handlers.Unmarshal.PushBackNamed(restjson.UnmarshalHandler)
 	svc.Handlers.UnmarshalMeta.PushBackNamed(restjson.UnmarshalMetaHandler)
-	svc.Handlers.UnmarshalError.PushBackNamed(restjson.UnmarshalErrorHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(
+		protocol.NewUnmarshalErrorHandler(restjson.NewUnmarshalTypedError(exceptionFromCode)).NamedHandler(),
+	)
 
 	// Run custom client initialization if present
 	if initClient != nil {

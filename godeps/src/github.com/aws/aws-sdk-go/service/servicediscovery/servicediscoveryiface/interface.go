@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Cloud Map.
-//    func myFunc(svc servicediscoveryiface.ServiceDiscoveryAPI) bool {
-//        // Make svc.CreateHttpNamespace request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Cloud Map.
+//	func myFunc(svc servicediscoveryiface.ServiceDiscoveryAPI) bool {
+//	    // Make svc.CreateHttpNamespace request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := servicediscovery.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := servicediscovery.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockServiceDiscoveryClient struct {
-//        servicediscoveryiface.ServiceDiscoveryAPI
-//    }
-//    func (m *mockServiceDiscoveryClient) CreateHttpNamespace(input *servicediscovery.CreateHttpNamespaceInput) (*servicediscovery.CreateHttpNamespaceOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockServiceDiscoveryClient struct {
+//	    servicediscoveryiface.ServiceDiscoveryAPI
+//	}
+//	func (m *mockServiceDiscoveryClient) CreateHttpNamespace(input *servicediscovery.CreateHttpNamespaceInput) (*servicediscovery.CreateHttpNamespaceOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockServiceDiscoveryClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockServiceDiscoveryClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -91,6 +91,10 @@ type ServiceDiscoveryAPI interface {
 	DiscoverInstances(*servicediscovery.DiscoverInstancesInput) (*servicediscovery.DiscoverInstancesOutput, error)
 	DiscoverInstancesWithContext(aws.Context, *servicediscovery.DiscoverInstancesInput, ...request.Option) (*servicediscovery.DiscoverInstancesOutput, error)
 	DiscoverInstancesRequest(*servicediscovery.DiscoverInstancesInput) (*request.Request, *servicediscovery.DiscoverInstancesOutput)
+
+	DiscoverInstancesRevision(*servicediscovery.DiscoverInstancesRevisionInput) (*servicediscovery.DiscoverInstancesRevisionOutput, error)
+	DiscoverInstancesRevisionWithContext(aws.Context, *servicediscovery.DiscoverInstancesRevisionInput, ...request.Option) (*servicediscovery.DiscoverInstancesRevisionOutput, error)
+	DiscoverInstancesRevisionRequest(*servicediscovery.DiscoverInstancesRevisionInput) (*request.Request, *servicediscovery.DiscoverInstancesRevisionOutput)
 
 	GetInstance(*servicediscovery.GetInstanceInput) (*servicediscovery.GetInstanceOutput, error)
 	GetInstanceWithContext(aws.Context, *servicediscovery.GetInstanceInput, ...request.Option) (*servicediscovery.GetInstanceOutput, error)
@@ -143,13 +147,37 @@ type ServiceDiscoveryAPI interface {
 	ListServicesPages(*servicediscovery.ListServicesInput, func(*servicediscovery.ListServicesOutput, bool) bool) error
 	ListServicesPagesWithContext(aws.Context, *servicediscovery.ListServicesInput, func(*servicediscovery.ListServicesOutput, bool) bool, ...request.Option) error
 
+	ListTagsForResource(*servicediscovery.ListTagsForResourceInput) (*servicediscovery.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *servicediscovery.ListTagsForResourceInput, ...request.Option) (*servicediscovery.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*servicediscovery.ListTagsForResourceInput) (*request.Request, *servicediscovery.ListTagsForResourceOutput)
+
 	RegisterInstance(*servicediscovery.RegisterInstanceInput) (*servicediscovery.RegisterInstanceOutput, error)
 	RegisterInstanceWithContext(aws.Context, *servicediscovery.RegisterInstanceInput, ...request.Option) (*servicediscovery.RegisterInstanceOutput, error)
 	RegisterInstanceRequest(*servicediscovery.RegisterInstanceInput) (*request.Request, *servicediscovery.RegisterInstanceOutput)
 
+	TagResource(*servicediscovery.TagResourceInput) (*servicediscovery.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *servicediscovery.TagResourceInput, ...request.Option) (*servicediscovery.TagResourceOutput, error)
+	TagResourceRequest(*servicediscovery.TagResourceInput) (*request.Request, *servicediscovery.TagResourceOutput)
+
+	UntagResource(*servicediscovery.UntagResourceInput) (*servicediscovery.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *servicediscovery.UntagResourceInput, ...request.Option) (*servicediscovery.UntagResourceOutput, error)
+	UntagResourceRequest(*servicediscovery.UntagResourceInput) (*request.Request, *servicediscovery.UntagResourceOutput)
+
+	UpdateHttpNamespace(*servicediscovery.UpdateHttpNamespaceInput) (*servicediscovery.UpdateHttpNamespaceOutput, error)
+	UpdateHttpNamespaceWithContext(aws.Context, *servicediscovery.UpdateHttpNamespaceInput, ...request.Option) (*servicediscovery.UpdateHttpNamespaceOutput, error)
+	UpdateHttpNamespaceRequest(*servicediscovery.UpdateHttpNamespaceInput) (*request.Request, *servicediscovery.UpdateHttpNamespaceOutput)
+
 	UpdateInstanceCustomHealthStatus(*servicediscovery.UpdateInstanceCustomHealthStatusInput) (*servicediscovery.UpdateInstanceCustomHealthStatusOutput, error)
 	UpdateInstanceCustomHealthStatusWithContext(aws.Context, *servicediscovery.UpdateInstanceCustomHealthStatusInput, ...request.Option) (*servicediscovery.UpdateInstanceCustomHealthStatusOutput, error)
 	UpdateInstanceCustomHealthStatusRequest(*servicediscovery.UpdateInstanceCustomHealthStatusInput) (*request.Request, *servicediscovery.UpdateInstanceCustomHealthStatusOutput)
+
+	UpdatePrivateDnsNamespace(*servicediscovery.UpdatePrivateDnsNamespaceInput) (*servicediscovery.UpdatePrivateDnsNamespaceOutput, error)
+	UpdatePrivateDnsNamespaceWithContext(aws.Context, *servicediscovery.UpdatePrivateDnsNamespaceInput, ...request.Option) (*servicediscovery.UpdatePrivateDnsNamespaceOutput, error)
+	UpdatePrivateDnsNamespaceRequest(*servicediscovery.UpdatePrivateDnsNamespaceInput) (*request.Request, *servicediscovery.UpdatePrivateDnsNamespaceOutput)
+
+	UpdatePublicDnsNamespace(*servicediscovery.UpdatePublicDnsNamespaceInput) (*servicediscovery.UpdatePublicDnsNamespaceOutput, error)
+	UpdatePublicDnsNamespaceWithContext(aws.Context, *servicediscovery.UpdatePublicDnsNamespaceInput, ...request.Option) (*servicediscovery.UpdatePublicDnsNamespaceOutput, error)
+	UpdatePublicDnsNamespaceRequest(*servicediscovery.UpdatePublicDnsNamespaceInput) (*request.Request, *servicediscovery.UpdatePublicDnsNamespaceOutput)
 
 	UpdateService(*servicediscovery.UpdateServiceInput) (*servicediscovery.UpdateServiceOutput, error)
 	UpdateServiceWithContext(aws.Context, *servicediscovery.UpdateServiceInput, ...request.Option) (*servicediscovery.UpdateServiceOutput, error)

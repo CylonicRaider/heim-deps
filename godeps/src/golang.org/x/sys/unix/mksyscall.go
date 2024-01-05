@@ -2,18 +2,18 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build ignore
+//go:build ignore
 
 /*
 This program reads a file containing function prototypes
 (like syscall_darwin.go) and generates system call bodies.
 The prototypes are marked by lines beginning with "//sys"
 and read like func declarations if //sys is replaced by func, but:
-	* The parameter lists must give a name for each argument.
-	  This includes return parameters.
-	* The parameter lists must give a type for each argument:
-	  the (x, y, z int) shorthand is not allowed.
-	* If the return parameter is an error number, it must be named errno.
+  - The parameter lists must give a name for each argument.
+    This includes return parameters.
+  - The parameter lists must give a type for each argument:
+    the (x, y, z int) shorthand is not allowed.
+  - If the return parameter is an error number, it must be named errno.
 
 A line beginning with //sysnb is like //sys, except that the
 goroutine will not be suspended during the execution of the system
@@ -35,6 +35,7 @@ import (
 var (
 	b32       = flag.Bool("b32", false, "32bit big-endian")
 	l32       = flag.Bool("l32", false, "32bit little-endian")
+	libc      = flag.Bool("libc", false, "libc system calls")
 	plan9     = flag.Bool("plan9", false, "plan9")
 	openbsd   = flag.Bool("openbsd", false, "openbsd")
 	netbsd    = flag.Bool("netbsd", false, "netbsd")
@@ -42,6 +43,8 @@ var (
 	arm       = flag.Bool("arm", false, "arm") // 64-bit value should use (even, odd)-pair
 	tags      = flag.String("tags", "", "build tags")
 	filename  = flag.String("output", "", "output file name (standard output if omitted)")
+
+	libcPath = "libc.so"
 )
 
 // cmdLine returns this programs's commandline arguments
@@ -49,9 +52,9 @@ func cmdLine() string {
 	return "go run mksyscall.go " + strings.Join(os.Args[1:], " ")
 }
 
-// buildTags returns build tags
-func buildTags() string {
-	return *tags
+// goBuildTags returns build tags in the go:build format.
+func goBuildTags() string {
+	return strings.ReplaceAll(*tags, ",", " && ")
 }
 
 // Param is function parameter
@@ -86,15 +89,13 @@ func parseParam(p string) Param {
 }
 
 func main() {
-	// Get the OS and architecture (using GOARCH_TARGET if it exists)
-	goos := os.Getenv("GOOS")
+	goos := os.Getenv("GOOS_TARGET")
+	if goos == "" {
+		goos = os.Getenv("GOOS")
+	}
 	if goos == "" {
 		fmt.Fprintln(os.Stderr, "GOOS not defined in environment")
 		os.Exit(1)
-	}
-	goarch := os.Getenv("GOARCH_TARGET")
-	if goarch == "" {
-		goarch = os.Getenv("GOARCH")
 	}
 
 	// Check that we are using the Docker-based build system if we should
@@ -120,10 +121,11 @@ func main() {
 		endianness = "little-endian"
 	}
 
-	libc := false
-	if goos == "darwin" && strings.Contains(buildTags(), ",go1.12") {
-		libc = true
+	if goos == "darwin" {
+		libcPath = "/usr/lib/libSystem.B.dylib"
+		*libc = true
 	}
+
 	trampolines := map[string]bool{}
 
 	text := ""
@@ -136,17 +138,15 @@ func main() {
 		s := bufio.NewScanner(file)
 		for s.Scan() {
 			t := s.Text()
-			t = strings.TrimSpace(t)
-			t = regexp.MustCompile(`\s+`).ReplaceAllString(t, ` `)
-			nonblock := regexp.MustCompile(`^\/\/sysnb `).FindStringSubmatch(t)
-			if regexp.MustCompile(`^\/\/sys `).FindStringSubmatch(t) == nil && nonblock == nil {
+			nonblock := regexp.MustCompile(`^\/\/sysnb\t`).FindStringSubmatch(t)
+			if regexp.MustCompile(`^\/\/sys\t`).FindStringSubmatch(t) == nil && nonblock == nil {
 				continue
 			}
 
 			// Line must be of the form
 			//	func Open(path string, mode int, perm int) (fd int, errno error)
 			// Split into name, in params, out params.
-			f := regexp.MustCompile(`^\/\/sys(nb)? (\w+)\(([^()]*)\)\s*(?:\(([^()]+)\))?\s*(?:=\s*((?i)SYS_[A-Z0-9_]+))?$`).FindStringSubmatch(t)
+			f := regexp.MustCompile(`^\/\/sys(nb)?\t(\w+)\(([^()]*)\)\s*(?:\(([^()]+)\))?\s*(?:=\s*((?i)SYS_[A-Z0-9_]+))?$`).FindStringSubmatch(t)
 			if f == nil {
 				fmt.Fprintf(os.Stderr, "%s:%s\nmalformed //sys declaration\n", path, t)
 				os.Exit(1)
@@ -208,7 +208,7 @@ func main() {
 					text += fmt.Sprintf(" else {\n\t\t_p%d = unsafe.Pointer(&_zero)\n\t}\n", n)
 					args = append(args, fmt.Sprintf("uintptr(_p%d)", n), fmt.Sprintf("uintptr(len(%s))", p.Name))
 					n++
-				} else if p.Type == "int64" && (*openbsd || *netbsd) {
+				} else if p.Type == "int64" && ((*openbsd && !*libc) || *netbsd) {
 					args = append(args, "0")
 					if endianness == "big-endian" {
 						args = append(args, fmt.Sprintf("uintptr(%s>>32)", p.Name), fmt.Sprintf("uintptr(%s)", p.Name))
@@ -228,7 +228,7 @@ func main() {
 					} else {
 						args = append(args, fmt.Sprintf("uintptr(%s)", p.Name))
 					}
-				} else if p.Type == "int64" && endianness != "" {
+				} else if (p.Type == "int64" || p.Type == "uint64") && endianness != "" {
 					if len(args)%2 == 1 && *arm {
 						// arm abi specifies 64-bit argument uses
 						// (even, odd) pair
@@ -283,17 +283,20 @@ func main() {
 			}
 
 			var libcFn string
-			if libc {
+			if *libc {
 				asm = "syscall_" + strings.ToLower(asm[:1]) + asm[1:] // internal syscall call
 				sysname = strings.TrimPrefix(sysname, "SYS_")         // remove SYS_
 				sysname = strings.ToLower(sysname)                    // lowercase
-				if sysname == "getdirentries64" {
-					// Special case - libSystem name and
-					// raw syscall name don't match.
-					sysname = "__getdirentries64"
+				if *openbsd && *libc {
+					switch sysname {
+					case "__getcwd":
+						sysname = "getcwd"
+					case "__sysctl":
+						sysname = "sysctl"
+					}
 				}
 				libcFn = sysname
-				sysname = "funcPC(libc_" + sysname + "_trampoline)"
+				sysname = "libc_" + sysname + "_trampoline_addr"
 			}
 
 			// Actual call.
@@ -363,15 +366,14 @@ func main() {
 			text += "\treturn\n"
 			text += "}\n\n"
 
-			if libc && !trampolines[libcFn] {
-				// some system calls share a trampoline, like read and readlen.
+			if *libc && !trampolines[libcFn] {
+				// Some system calls share a trampoline.
 				trampolines[libcFn] = true
-				// Declare assembly trampoline.
-				text += fmt.Sprintf("func libc_%s_trampoline()\n", libcFn)
+				// Declare assembly trampoline address.
+				text += fmt.Sprintf("var libc_%s_trampoline_addr uintptr\n\n", libcFn)
 				// Assembly trampoline calls the libc_* function, which this magic
 				// redirects to use the function from libSystem.
-				text += fmt.Sprintf("//go:linkname libc_%s libc_%s\n", libcFn, libcFn)
-				text += fmt.Sprintf("//go:cgo_import_dynamic libc_%s %s \"/usr/lib/libSystem.B.dylib\"\n", libcFn, libcFn)
+				text += fmt.Sprintf("//go:cgo_import_dynamic libc_%s %s %q\n", libcFn, libcFn, libcPath)
 				text += "\n"
 			}
 		}
@@ -381,13 +383,13 @@ func main() {
 		}
 		file.Close()
 	}
-	fmt.Printf(srcTemplate, cmdLine(), buildTags(), text)
+	fmt.Printf(srcTemplate, cmdLine(), goBuildTags(), text)
 }
 
 const srcTemplate = `// %s
 // Code generated by the command above; see README.md. DO NOT EDIT.
 
-// +build %s
+//go:build %s
 
 package unix
 

@@ -2,6 +2,10 @@
 
 package workdocs
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeConcurrentModificationException for service response error code
@@ -59,7 +63,7 @@ const (
 	// ErrCodeFailedDependencyException for service response error code
 	// "FailedDependencyException".
 	//
-	// The AWS Directory Service cannot reach an on-premises instance. Or a dependency
+	// The Directory Service cannot reach an on-premises instance. Or a dependency
 	// under the control of the organization is failing, such as a connected Active
 	// Directory.
 	ErrCodeFailedDependencyException = "FailedDependencyException"
@@ -97,7 +101,8 @@ const (
 	// ErrCodeLimitExceededException for service response error code
 	// "LimitExceededException".
 	//
-	// The maximum of 100,000 folders under the parent folder has been exceeded.
+	// The maximum of 100,000 files and folders under the parent folder has been
+	// exceeded.
 	ErrCodeLimitExceededException = "LimitExceededException"
 
 	// ErrCodeProhibitedStateException for service response error code
@@ -162,3 +167,31 @@ const (
 	// The caller does not have access to perform the action on the resource.
 	ErrCodeUnauthorizedResourceAccessException = "UnauthorizedResourceAccessException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"ConcurrentModificationException":      newErrorConcurrentModificationException,
+	"ConflictingOperationException":        newErrorConflictingOperationException,
+	"CustomMetadataLimitExceededException": newErrorCustomMetadataLimitExceededException,
+	"DeactivatingLastSystemUserException":  newErrorDeactivatingLastSystemUserException,
+	"DocumentLockedForCommentsException":   newErrorDocumentLockedForCommentsException,
+	"DraftUploadOutOfSyncException":        newErrorDraftUploadOutOfSyncException,
+	"EntityAlreadyExistsException":         newErrorEntityAlreadyExistsException,
+	"EntityNotExistsException":             newErrorEntityNotExistsException,
+	"FailedDependencyException":            newErrorFailedDependencyException,
+	"IllegalUserStateException":            newErrorIllegalUserStateException,
+	"InvalidArgumentException":             newErrorInvalidArgumentException,
+	"InvalidCommentOperationException":     newErrorInvalidCommentOperationException,
+	"InvalidOperationException":            newErrorInvalidOperationException,
+	"InvalidPasswordException":             newErrorInvalidPasswordException,
+	"LimitExceededException":               newErrorLimitExceededException,
+	"ProhibitedStateException":             newErrorProhibitedStateException,
+	"RequestedEntityTooLargeException":     newErrorRequestedEntityTooLargeException,
+	"ResourceAlreadyCheckedOutException":   newErrorResourceAlreadyCheckedOutException,
+	"ServiceUnavailableException":          newErrorServiceUnavailableException,
+	"StorageLimitExceededException":        newErrorStorageLimitExceededException,
+	"StorageLimitWillExceedException":      newErrorStorageLimitWillExceedException,
+	"TooManyLabelsException":               newErrorTooManyLabelsException,
+	"TooManySubscriptionsException":        newErrorTooManySubscriptionsException,
+	"UnauthorizedOperationException":       newErrorUnauthorizedOperationException,
+	"UnauthorizedResourceAccessException":  newErrorUnauthorizedResourceAccessException,
+}

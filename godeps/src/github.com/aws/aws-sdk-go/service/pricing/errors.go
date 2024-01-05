@@ -2,7 +2,17 @@
 
 package pricing
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
+
+	// ErrCodeAccessDeniedException for service response error code
+	// "AccessDeniedException".
+	//
+	// General authentication failure. The request wasn't signed correctly.
+	ErrCodeAccessDeniedException = "AccessDeniedException"
 
 	// ErrCodeExpiredNextTokenException for service response error code
 	// "ExpiredNextTokenException".
@@ -35,3 +45,12 @@ const (
 	// The requested resource can't be found.
 	ErrCodeNotFoundException = "NotFoundException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccessDeniedException":     newErrorAccessDeniedException,
+	"ExpiredNextTokenException": newErrorExpiredNextTokenException,
+	"InternalErrorException":    newErrorInternalErrorException,
+	"InvalidNextTokenException": newErrorInvalidNextTokenException,
+	"InvalidParameterException": newErrorInvalidParameterException,
+	"NotFoundException":         newErrorNotFoundException,
+}

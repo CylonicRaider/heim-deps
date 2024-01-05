@@ -2,7 +2,17 @@
 
 package appsync
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
+
+	// ErrCodeAccessDeniedException for service response error code
+	// "AccessDeniedException".
+	//
+	// You don't have access to perform this operation on this resource.
+	ErrCodeAccessDeniedException = "AccessDeniedException"
 
 	// ErrCodeApiKeyLimitExceededException for service response error code
 	// "ApiKeyLimitExceededException".
@@ -46,7 +56,7 @@ const (
 	// ErrCodeInternalFailureException for service response error code
 	// "InternalFailureException".
 	//
-	// An internal AWS AppSync error occurred. Try your request again.
+	// An internal AppSync error occurred. Try your request again.
 	ErrCodeInternalFailureException = "InternalFailureException"
 
 	// ErrCodeLimitExceededException for service response error code
@@ -65,6 +75,20 @@ const (
 	// ErrCodeUnauthorizedException for service response error code
 	// "UnauthorizedException".
 	//
-	// You are not authorized to perform this operation.
+	// You aren't authorized to perform this operation.
 	ErrCodeUnauthorizedException = "UnauthorizedException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccessDeniedException":              newErrorAccessDeniedException,
+	"ApiKeyLimitExceededException":       newErrorApiKeyLimitExceededException,
+	"ApiKeyValidityOutOfBoundsException": newErrorApiKeyValidityOutOfBoundsException,
+	"ApiLimitExceededException":          newErrorApiLimitExceededException,
+	"BadRequestException":                newErrorBadRequestException,
+	"ConcurrentModificationException":    newErrorConcurrentModificationException,
+	"GraphQLSchemaException":             newErrorGraphQLSchemaException,
+	"InternalFailureException":           newErrorInternalFailureException,
+	"LimitExceededException":             newErrorLimitExceededException,
+	"NotFoundException":                  newErrorNotFoundException,
+	"UnauthorizedException":              newErrorUnauthorizedException,
+}

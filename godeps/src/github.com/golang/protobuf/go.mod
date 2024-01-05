@@ -1,7 +1,9 @@
+// Deprecated: Use the "google.golang.org/protobuf" module instead.
 module github.com/golang/protobuf
 
+go 1.9
+
 require (
-	golang.org/x/net v0.0.0-20180906233101-161cd47e91fd // indirect
-	golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f
-	google.golang.org/genproto v0.0.0-20180831171423-11092d34479b
+	github.com/google/go-cmp v0.5.5
+	google.golang.org/protobuf v1.26.0
 )

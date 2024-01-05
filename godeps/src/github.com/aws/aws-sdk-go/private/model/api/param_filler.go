@@ -1,3 +1,4 @@
+//go:build codegen
 // +build codegen
 
 package api
@@ -139,7 +140,7 @@ func (f paramFiller) paramsStructList(value []interface{}, shape *Shape) string 
 // findParamMember searches a map for a key ignoring case. Returns the map key if found.
 func findParamMember(value map[string]interface{}, key string) string {
 	for actualKey := range value {
-		if strings.ToLower(key) == strings.ToLower(actualKey) {
+		if strings.EqualFold(key, actualKey) {
 			return actualKey
 		}
 	}

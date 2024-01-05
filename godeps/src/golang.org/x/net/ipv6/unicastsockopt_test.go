@@ -10,17 +10,17 @@ import (
 	"testing"
 
 	"golang.org/x/net/internal/iana"
-	"golang.org/x/net/internal/nettest"
 	"golang.org/x/net/ipv6"
+	"golang.org/x/net/nettest"
 )
 
 func TestConnUnicastSocketOptions(t *testing.T) {
 	switch runtime.GOOS {
-	case "js", "nacl", "plan9", "windows":
+	case "fuchsia", "hurd", "js", "nacl", "plan9", "wasip1", "windows":
 		t.Skipf("not supported on %s", runtime.GOOS)
 	}
-	if !supportsIPv6 {
-		t.Skip("ipv6 is not supported")
+	if _, err := nettest.RoutedInterface("ip6", net.FlagUp|net.FlagLoopback); err != nil {
+		t.Skip("ipv6 is not enabled for loopback interface")
 	}
 
 	ln, err := net.Listen("tcp6", "[::1]:0")
@@ -61,17 +61,17 @@ var packetConnUnicastSocketOptionTests = []struct {
 
 func TestPacketConnUnicastSocketOptions(t *testing.T) {
 	switch runtime.GOOS {
-	case "js", "nacl", "plan9", "windows":
+	case "fuchsia", "hurd", "js", "nacl", "plan9", "wasip1", "windows":
 		t.Skipf("not supported on %s", runtime.GOOS)
 	}
-	if !supportsIPv6 {
-		t.Skip("ipv6 is not supported")
+	if _, err := nettest.RoutedInterface("ip6", net.FlagUp|net.FlagLoopback); err != nil {
+		t.Skip("ipv6 is not enabled for loopback interface")
 	}
 
-	m, ok := nettest.SupportsRawIPSocket()
+	ok := nettest.SupportsRawSocket()
 	for _, tt := range packetConnUnicastSocketOptionTests {
 		if tt.net == "ip6" && !ok {
-			t.Log(m)
+			t.Logf("not supported on %s/%s", runtime.GOOS, runtime.GOARCH)
 			continue
 		}
 		c, err := net.ListenPacket(tt.net+tt.proto, tt.addr)
@@ -92,13 +92,10 @@ type testIPv6UnicastConn interface {
 }
 
 func testUnicastSocketOptions(t *testing.T, c testIPv6UnicastConn) {
+	t.Helper()
+
 	tclass := iana.DiffServCS0 | iana.NotECNTransport
 	if err := c.SetTrafficClass(tclass); err != nil {
-		switch runtime.GOOS {
-		case "darwin": // older darwin kernels don't support IPV6_TCLASS option
-			t.Logf("not supported on %s", runtime.GOOS)
-			goto next
-		}
 		t.Fatal(err)
 	}
 	if v, err := c.TrafficClass(); err != nil {
@@ -107,7 +104,6 @@ func testUnicastSocketOptions(t *testing.T, c testIPv6UnicastConn) {
 		t.Fatalf("got %v; want %v", v, tclass)
 	}
 
-next:
 	hoplim := 255
 	if err := c.SetHopLimit(hoplim); err != nil {
 		t.Fatal(err)

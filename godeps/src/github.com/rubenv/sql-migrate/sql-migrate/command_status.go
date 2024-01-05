@@ -8,13 +8,13 @@ import (
 	"time"
 
 	"github.com/olekukonko/tablewriter"
-	"github.com/rubenv/sql-migrate"
+
+	migrate "github.com/rubenv/sql-migrate"
 )
 
-type StatusCommand struct {
-}
+type StatusCommand struct{}
 
-func (c *StatusCommand) Help() string {
+func (*StatusCommand) Help() string {
 	helpText := `
 Usage: sql-migrate status [options] ...
 
@@ -29,7 +29,7 @@ Options:
 	return strings.TrimSpace(helpText)
 }
 
-func (c *StatusCommand) Synopsis() string {
+func (*StatusCommand) Synopsis() string {
 	return "Show migration status"
 }
 
@@ -53,6 +53,7 @@ func (c *StatusCommand) Run(args []string) int {
 		ui.Error(err.Error())
 		return 1
 	}
+	defer db.Close()
 
 	source := migrate.FileMigrationSource{
 		Dir: env.Dir,

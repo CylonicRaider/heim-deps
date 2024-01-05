@@ -2,7 +2,26 @@
 
 package route53resolver
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
+
+	// ErrCodeAccessDeniedException for service response error code
+	// "AccessDeniedException".
+	//
+	// The current account doesn't have the IAM permissions required to perform
+	// the specified Resolver operation.
+	ErrCodeAccessDeniedException = "AccessDeniedException"
+
+	// ErrCodeConflictException for service response error code
+	// "ConflictException".
+	//
+	// The requested state transition isn't valid. For example, you can't delete
+	// a firewall domain list if it is in the process of being deleted, or you can't
+	// import domains into a domain list that is in the process of being deleted.
+	ErrCodeConflictException = "ConflictException"
 
 	// ErrCodeInternalServiceErrorException for service response error code
 	// "InternalServiceErrorException".
@@ -25,7 +44,7 @@ const (
 	// ErrCodeInvalidPolicyDocument for service response error code
 	// "InvalidPolicyDocument".
 	//
-	// The specified resolver rule policy is invalid.
+	// The specified Resolver rule policy is invalid.
 	ErrCodeInvalidPolicyDocument = "InvalidPolicyDocument"
 
 	// ErrCodeInvalidRequestException for service response error code
@@ -70,6 +89,12 @@ const (
 	// The specified resource isn't available.
 	ErrCodeResourceUnavailableException = "ResourceUnavailableException"
 
+	// ErrCodeServiceQuotaExceededException for service response error code
+	// "ServiceQuotaExceededException".
+	//
+	// Fulfilling the request would cause one or more quotas to be exceeded.
+	ErrCodeServiceQuotaExceededException = "ServiceQuotaExceededException"
+
 	// ErrCodeThrottlingException for service response error code
 	// "ThrottlingException".
 	//
@@ -81,4 +106,31 @@ const (
 	//
 	// The specified resource doesn't exist.
 	ErrCodeUnknownResourceException = "UnknownResourceException"
+
+	// ErrCodeValidationException for service response error code
+	// "ValidationException".
+	//
+	// You have provided an invalid command. If you ran the UpdateFirewallDomains
+	// request. supported values are ADD, REMOVE, or REPLACE a domain.
+	ErrCodeValidationException = "ValidationException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccessDeniedException":         newErrorAccessDeniedException,
+	"ConflictException":             newErrorConflictException,
+	"InternalServiceErrorException": newErrorInternalServiceErrorException,
+	"InvalidNextTokenException":     newErrorInvalidNextTokenException,
+	"InvalidParameterException":     newErrorInvalidParameterException,
+	"InvalidPolicyDocument":         newErrorInvalidPolicyDocument,
+	"InvalidRequestException":       newErrorInvalidRequestException,
+	"InvalidTagException":           newErrorInvalidTagException,
+	"LimitExceededException":        newErrorLimitExceededException,
+	"ResourceExistsException":       newErrorResourceExistsException,
+	"ResourceInUseException":        newErrorResourceInUseException,
+	"ResourceNotFoundException":     newErrorResourceNotFoundException,
+	"ResourceUnavailableException":  newErrorResourceUnavailableException,
+	"ServiceQuotaExceededException": newErrorServiceQuotaExceededException,
+	"ThrottlingException":           newErrorThrottlingException,
+	"UnknownResourceException":      newErrorUnknownResourceException,
+	"ValidationException":           newErrorValidationException,
+}

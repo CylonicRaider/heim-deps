@@ -10,7 +10,6 @@ import (
 	"fmt"
 	"golang.org/x/crypto/openpgp/errors"
 	"io"
-	"io/ioutil"
 	"testing"
 )
 
@@ -100,7 +99,7 @@ var partialLengthReaderTests = []struct {
 func TestPartialLengthReader(t *testing.T) {
 	for i, test := range partialLengthReaderTests {
 		r := &partialLengthReader{readerFromHex(test.hexInput), 0, true}
-		out, err := ioutil.ReadAll(r)
+		out, err := io.ReadAll(r)
 		if test.err != nil {
 			if err != test.err {
 				t.Errorf("%d: expected different error got:%s want:%s", i, err, test.err)
@@ -172,7 +171,7 @@ func TestReadHeader(t *testing.T) {
 			continue
 		}
 
-		body, err := ioutil.ReadAll(contents)
+		body, err := io.ReadAll(contents)
 		if err != nil {
 			if !test.unexpectedEOF || err != io.ErrUnexpectedEOF {
 				t.Errorf("%d: unexpected error from contents: %s", i, err)
@@ -232,7 +231,21 @@ func TestPartialLengths(t *testing.T) {
 			t.Errorf("error from write: %s", err)
 		}
 	}
-	w.Close()
+	if err := w.Close(); err != nil {
+		t.Fatal(err)
+	}
+
+	// The first packet should be at least 512 bytes.
+	first, err := buf.ReadByte()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if plen := 1 << (first & 0x1f); plen < 512 {
+		t.Errorf("first packet too short: got %d want at least %d", plen, 512)
+	}
+	if err := buf.UnreadByte(); err != nil {
+		t.Fatal(err)
+	}
 
 	want := (maxChunkSize * (maxChunkSize + 1)) / 2
 	copyBuf := bytes.NewBuffer(nil)
@@ -251,5 +264,27 @@ func TestPartialLengths(t *testing.T) {
 			t.Errorf("bad pattern in copy at %d", i)
 			break
 		}
+	}
+}
+
+func TestPartialLengthsShortWrite(t *testing.T) {
+	buf := bytes.NewBuffer(nil)
+	w := &partialLengthWriter{
+		w: noOpCloser{buf},
+	}
+	data := bytes.Repeat([]byte("a"), 510)
+	if _, err := w.Write(data); err != nil {
+		t.Fatal(err)
+	}
+	if err := w.Close(); err != nil {
+		t.Fatal(err)
+	}
+	copyBuf := bytes.NewBuffer(nil)
+	r := &partialLengthReader{buf, 0, true}
+	if _, err := io.Copy(copyBuf, r); err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(copyBuf.Bytes(), data) {
+		t.Errorf("got %q want %q", buf.Bytes(), data)
 	}
 }

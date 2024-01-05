@@ -2,7 +2,18 @@
 
 package lexmodelbuildingservice
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
+
+	// ErrCodeAccessDeniedException for service response error code
+	// "AccessDeniedException".
+	//
+	// Your IAM user or role does not have permission to call the Amazon Lex V2
+	// APIs required to migrate your bot.
+	ErrCodeAccessDeniedException = "AccessDeniedException"
 
 	// ErrCodeBadRequestException for service response error code
 	// "BadRequestException".
@@ -59,3 +70,14 @@ const (
 	// "name": string, "version": string } }
 	ErrCodeResourceInUseException = "ResourceInUseException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccessDeniedException":       newErrorAccessDeniedException,
+	"BadRequestException":         newErrorBadRequestException,
+	"ConflictException":           newErrorConflictException,
+	"InternalFailureException":    newErrorInternalFailureException,
+	"LimitExceededException":      newErrorLimitExceededException,
+	"NotFoundException":           newErrorNotFoundException,
+	"PreconditionFailedException": newErrorPreconditionFailedException,
+	"ResourceInUseException":      newErrorResourceInUseException,
+}

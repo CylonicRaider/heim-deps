@@ -1,3 +1,9 @@
+// Copyright 2012 James Cooper. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
+// +build integration
+
 package gorp_test
 
 import "testing"
@@ -82,7 +88,7 @@ AND field12 IN (:FieldIntList)
 		Field14 float64 `db:"field14"`
 	}
 
-	dbmap := newDbMap()
+	dbmap := newDBMap(t)
 	dbmap.ExpandSliceArgs = true
 	dbmap.AddTableWithName(dataFormat{}, "crazy_table")
 
@@ -248,7 +254,7 @@ AND field12 IN (:FieldIntList)
 		Field14 float64 `db:"field14"`
 	}
 
-	dbmap := newDbMap()
+	dbmap := newDBMap(t)
 	dbmap.ExpandSliceArgs = true
 	dbmap.AddTableWithName(dataFormat{}, "crazy_table")
 

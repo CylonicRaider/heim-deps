@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go/private/protocol"
 )
 
 const opAddTagsToResource = "AddTagsToResource"
@@ -26,17 +27,21 @@ const opAddTagsToResource = "AddTagsToResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddTagsToResourceRequest method.
+//	req, resp := client.AddTagsToResourceRequest(params)
 //
-//    // Example sending a request using the AddTagsToResourceRequest method.
-//    req, resp := client.AddTagsToResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResource
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *AddTagsToResourceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, AddTagsToResource, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
@@ -56,12 +61,12 @@ func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req 
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Adds or overwrites one or more tags for the specified AWS CloudHSM resource.
 //
@@ -74,17 +79,20 @@ func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req 
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation AddTagsToResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResource
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResourceOutput, error) {
 	req, out := c.AddTagsToResourceRequest(input)
 	return out, req.Send()
@@ -99,6 +107,8 @@ func (c *CloudHSM) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...request.Option) (*AddTagsToResourceOutput, error) {
 	req, out := c.AddTagsToResourceRequest(input)
 	req.SetContext(ctx)
@@ -122,17 +132,21 @@ const opCreateHapg = "CreateHapg"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateHapgRequest method.
+//	req, resp := client.CreateHapgRequest(params)
 //
-//    // Example sending a request using the CreateHapgRequest method.
-//    req, resp := client.CreateHapgRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapg
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) (req *request.Request, output *CreateHapgOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateHapg, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateHapg,
 		HTTPMethod: "POST",
@@ -152,12 +166,12 @@ func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) (req *request.Reque
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Creates a high-availability partition group. A high-availability partition
 // group is a group of partitions that spans multiple physical HSMs.
@@ -169,17 +183,20 @@ func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) (req *request.Reque
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation CreateHapg for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapg
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) CreateHapg(input *CreateHapgInput) (*CreateHapgOutput, error) {
 	req, out := c.CreateHapgRequest(input)
 	return out, req.Send()
@@ -194,6 +211,8 @@ func (c *CloudHSM) CreateHapg(input *CreateHapgInput) (*CreateHapgOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) CreateHapgWithContext(ctx aws.Context, input *CreateHapgInput, opts ...request.Option) (*CreateHapgOutput, error) {
 	req, out := c.CreateHapgRequest(input)
 	req.SetContext(ctx)
@@ -217,17 +236,21 @@ const opCreateHsm = "CreateHsm"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateHsmRequest method.
+//	req, resp := client.CreateHsmRequest(params)
 //
-//    // Example sending a request using the CreateHsmRequest method.
-//    req, resp := client.CreateHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsm
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) (req *request.Request, output *CreateHsmOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateHsm, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateHsm,
 		HTTPMethod: "POST",
@@ -247,12 +270,12 @@ func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) (req *request.Request
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Creates an uninitialized HSM instance.
 //
@@ -273,17 +296,20 @@ func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) (req *request.Request
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation CreateHsm for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsm
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) CreateHsm(input *CreateHsmInput) (*CreateHsmOutput, error) {
 	req, out := c.CreateHsmRequest(input)
 	return out, req.Send()
@@ -298,6 +324,8 @@ func (c *CloudHSM) CreateHsm(input *CreateHsmInput) (*CreateHsmOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) CreateHsmWithContext(ctx aws.Context, input *CreateHsmInput, opts ...request.Option) (*CreateHsmOutput, error) {
 	req, out := c.CreateHsmRequest(input)
 	req.SetContext(ctx)
@@ -321,17 +349,21 @@ const opCreateLunaClient = "CreateLunaClient"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateLunaClientRequest method.
+//	req, resp := client.CreateLunaClientRequest(params)
 //
-//    // Example sending a request using the CreateLunaClientRequest method.
-//    req, resp := client.CreateLunaClientRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClient
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) (req *request.Request, output *CreateLunaClientOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, CreateLunaClient, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opCreateLunaClient,
 		HTTPMethod: "POST",
@@ -351,12 +383,12 @@ func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) (req *r
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Creates an HSM client.
 //
@@ -367,17 +399,20 @@ func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) (req *r
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation CreateLunaClient for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClient
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) CreateLunaClient(input *CreateLunaClientInput) (*CreateLunaClientOutput, error) {
 	req, out := c.CreateLunaClientRequest(input)
 	return out, req.Send()
@@ -392,6 +427,8 @@ func (c *CloudHSM) CreateLunaClient(input *CreateLunaClientInput) (*CreateLunaCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) CreateLunaClientWithContext(ctx aws.Context, input *CreateLunaClientInput, opts ...request.Option) (*CreateLunaClientOutput, error) {
 	req, out := c.CreateLunaClientRequest(input)
 	req.SetContext(ctx)
@@ -415,17 +452,21 @@ const opDeleteHapg = "DeleteHapg"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteHapgRequest method.
+//	req, resp := client.DeleteHapgRequest(params)
 //
-//    // Example sending a request using the DeleteHapgRequest method.
-//    req, resp := client.DeleteHapgRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapg
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) (req *request.Request, output *DeleteHapgOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteHapg, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteHapg,
 		HTTPMethod: "POST",
@@ -445,12 +486,12 @@ func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) (req *request.Reque
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Deletes a high-availability partition group.
 //
@@ -461,17 +502,20 @@ func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) (req *request.Reque
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation DeleteHapg for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapg
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DeleteHapg(input *DeleteHapgInput) (*DeleteHapgOutput, error) {
 	req, out := c.DeleteHapgRequest(input)
 	return out, req.Send()
@@ -486,6 +530,8 @@ func (c *CloudHSM) DeleteHapg(input *DeleteHapgInput) (*DeleteHapgOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DeleteHapgWithContext(ctx aws.Context, input *DeleteHapgInput, opts ...request.Option) (*DeleteHapgOutput, error) {
 	req, out := c.DeleteHapgRequest(input)
 	req.SetContext(ctx)
@@ -509,17 +555,21 @@ const opDeleteHsm = "DeleteHsm"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteHsmRequest method.
+//	req, resp := client.DeleteHsmRequest(params)
 //
-//    // Example sending a request using the DeleteHsmRequest method.
-//    req, resp := client.DeleteHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsm
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) (req *request.Request, output *DeleteHsmOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteHsm, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteHsm,
 		HTTPMethod: "POST",
@@ -539,12 +589,12 @@ func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) (req *request.Request
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Deletes an HSM. After completion, this operation cannot be undone and your
 // key material cannot be recovered.
@@ -556,17 +606,20 @@ func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) (req *request.Request
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation DeleteHsm for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsm
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DeleteHsm(input *DeleteHsmInput) (*DeleteHsmOutput, error) {
 	req, out := c.DeleteHsmRequest(input)
 	return out, req.Send()
@@ -581,6 +634,8 @@ func (c *CloudHSM) DeleteHsm(input *DeleteHsmInput) (*DeleteHsmOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DeleteHsmWithContext(ctx aws.Context, input *DeleteHsmInput, opts ...request.Option) (*DeleteHsmOutput, error) {
 	req, out := c.DeleteHsmRequest(input)
 	req.SetContext(ctx)
@@ -604,17 +659,21 @@ const opDeleteLunaClient = "DeleteLunaClient"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteLunaClientRequest method.
+//	req, resp := client.DeleteLunaClientRequest(params)
 //
-//    // Example sending a request using the DeleteLunaClientRequest method.
-//    req, resp := client.DeleteLunaClientRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClient
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) (req *request.Request, output *DeleteLunaClientOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DeleteLunaClient, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDeleteLunaClient,
 		HTTPMethod: "POST",
@@ -634,12 +693,12 @@ func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) (req *r
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Deletes a client.
 //
@@ -650,17 +709,20 @@ func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) (req *r
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation DeleteLunaClient for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClient
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DeleteLunaClient(input *DeleteLunaClientInput) (*DeleteLunaClientOutput, error) {
 	req, out := c.DeleteLunaClientRequest(input)
 	return out, req.Send()
@@ -675,6 +737,8 @@ func (c *CloudHSM) DeleteLunaClient(input *DeleteLunaClientInput) (*DeleteLunaCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DeleteLunaClientWithContext(ctx aws.Context, input *DeleteLunaClientInput, opts ...request.Option) (*DeleteLunaClientOutput, error) {
 	req, out := c.DeleteLunaClientRequest(input)
 	req.SetContext(ctx)
@@ -698,17 +762,21 @@ const opDescribeHapg = "DescribeHapg"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeHapgRequest method.
+//	req, resp := client.DescribeHapgRequest(params)
 //
-//    // Example sending a request using the DescribeHapgRequest method.
-//    req, resp := client.DescribeHapgRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapg
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) (req *request.Request, output *DescribeHapgOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DescribeHapg, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDescribeHapg,
 		HTTPMethod: "POST",
@@ -728,12 +796,12 @@ func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) (req *request.R
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Retrieves information about a high-availability partition group.
 //
@@ -744,17 +812,20 @@ func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) (req *request.R
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation DescribeHapg for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapg
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DescribeHapg(input *DescribeHapgInput) (*DescribeHapgOutput, error) {
 	req, out := c.DescribeHapgRequest(input)
 	return out, req.Send()
@@ -769,6 +840,8 @@ func (c *CloudHSM) DescribeHapg(input *DescribeHapgInput) (*DescribeHapgOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DescribeHapgWithContext(ctx aws.Context, input *DescribeHapgInput, opts ...request.Option) (*DescribeHapgOutput, error) {
 	req, out := c.DescribeHapgRequest(input)
 	req.SetContext(ctx)
@@ -792,17 +865,21 @@ const opDescribeHsm = "DescribeHsm"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeHsmRequest method.
+//	req, resp := client.DescribeHsmRequest(params)
 //
-//    // Example sending a request using the DescribeHsmRequest method.
-//    req, resp := client.DescribeHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsm
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) (req *request.Request, output *DescribeHsmOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DescribeHsm, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDescribeHsm,
 		HTTPMethod: "POST",
@@ -822,12 +899,12 @@ func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) (req *request.Req
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Retrieves information about an HSM. You can identify the HSM by its ARN or
 // its serial number.
@@ -839,17 +916,20 @@ func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) (req *request.Req
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation DescribeHsm for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsm
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DescribeHsm(input *DescribeHsmInput) (*DescribeHsmOutput, error) {
 	req, out := c.DescribeHsmRequest(input)
 	return out, req.Send()
@@ -864,6 +944,8 @@ func (c *CloudHSM) DescribeHsm(input *DescribeHsmInput) (*DescribeHsmOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DescribeHsmWithContext(ctx aws.Context, input *DescribeHsmInput, opts ...request.Option) (*DescribeHsmOutput, error) {
 	req, out := c.DescribeHsmRequest(input)
 	req.SetContext(ctx)
@@ -887,17 +969,21 @@ const opDescribeLunaClient = "DescribeLunaClient"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeLunaClientRequest method.
+//	req, resp := client.DescribeLunaClientRequest(params)
 //
-//    // Example sending a request using the DescribeLunaClientRequest method.
-//    req, resp := client.DescribeLunaClientRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClient
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) (req *request.Request, output *DescribeLunaClientOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DescribeLunaClient, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDescribeLunaClient,
 		HTTPMethod: "POST",
@@ -917,12 +1003,12 @@ func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) (re
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Retrieves information about an HSM client.
 //
@@ -933,17 +1019,20 @@ func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) (re
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation DescribeLunaClient for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClient
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DescribeLunaClient(input *DescribeLunaClientInput) (*DescribeLunaClientOutput, error) {
 	req, out := c.DescribeLunaClientRequest(input)
 	return out, req.Send()
@@ -958,6 +1047,8 @@ func (c *CloudHSM) DescribeLunaClient(input *DescribeLunaClientInput) (*Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) DescribeLunaClientWithContext(ctx aws.Context, input *DescribeLunaClientInput, opts ...request.Option) (*DescribeLunaClientOutput, error) {
 	req, out := c.DescribeLunaClientRequest(input)
 	req.SetContext(ctx)
@@ -981,17 +1072,21 @@ const opGetConfig = "GetConfig"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetConfigRequest method.
+//	req, resp := client.GetConfigRequest(params)
 //
-//    // Example sending a request using the GetConfigRequest method.
-//    req, resp := client.GetConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfig
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) (req *request.Request, output *GetConfigOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetConfig, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetConfig,
 		HTTPMethod: "POST",
@@ -1011,12 +1106,12 @@ func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) (req *request.Request
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Gets the configuration files necessary to connect to all high availability
 // partition groups the client is associated with.
@@ -1028,17 +1123,20 @@ func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) (req *request.Request
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation GetConfig for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfig
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) GetConfig(input *GetConfigInput) (*GetConfigOutput, error) {
 	req, out := c.GetConfigRequest(input)
 	return out, req.Send()
@@ -1053,6 +1151,8 @@ func (c *CloudHSM) GetConfig(input *GetConfigInput) (*GetConfigOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) GetConfigWithContext(ctx aws.Context, input *GetConfigInput, opts ...request.Option) (*GetConfigOutput, error) {
 	req, out := c.GetConfigRequest(input)
 	req.SetContext(ctx)
@@ -1076,17 +1176,21 @@ const opListAvailableZones = "ListAvailableZones"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAvailableZonesRequest method.
+//	req, resp := client.ListAvailableZonesRequest(params)
 //
-//    // Example sending a request using the ListAvailableZonesRequest method.
-//    req, resp := client.ListAvailableZonesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZones
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) (req *request.Request, output *ListAvailableZonesOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListAvailableZones, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListAvailableZones,
 		HTTPMethod: "POST",
@@ -1106,12 +1210,12 @@ func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) (re
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Lists the Availability Zones that have available AWS CloudHSM capacity.
 //
@@ -1122,17 +1226,20 @@ func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) (re
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation ListAvailableZones for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZones
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListAvailableZones(input *ListAvailableZonesInput) (*ListAvailableZonesOutput, error) {
 	req, out := c.ListAvailableZonesRequest(input)
 	return out, req.Send()
@@ -1147,6 +1254,8 @@ func (c *CloudHSM) ListAvailableZones(input *ListAvailableZonesInput) (*ListAvai
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListAvailableZonesWithContext(ctx aws.Context, input *ListAvailableZonesInput, opts ...request.Option) (*ListAvailableZonesOutput, error) {
 	req, out := c.ListAvailableZonesRequest(input)
 	req.SetContext(ctx)
@@ -1170,17 +1279,21 @@ const opListHapgs = "ListHapgs"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListHapgsRequest method.
+//	req, resp := client.ListHapgsRequest(params)
 //
-//    // Example sending a request using the ListHapgsRequest method.
-//    req, resp := client.ListHapgsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgs
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) (req *request.Request, output *ListHapgsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListHapgs, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListHapgs,
 		HTTPMethod: "POST",
@@ -1200,12 +1313,12 @@ func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) (req *request.Request
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Lists the high-availability partition groups for the account.
 //
@@ -1221,17 +1334,20 @@ func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) (req *request.Request
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation ListHapgs for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgs
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListHapgs(input *ListHapgsInput) (*ListHapgsOutput, error) {
 	req, out := c.ListHapgsRequest(input)
 	return out, req.Send()
@@ -1246,6 +1362,8 @@ func (c *CloudHSM) ListHapgs(input *ListHapgsInput) (*ListHapgsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListHapgsWithContext(ctx aws.Context, input *ListHapgsInput, opts ...request.Option) (*ListHapgsOutput, error) {
 	req, out := c.ListHapgsRequest(input)
 	req.SetContext(ctx)
@@ -1269,17 +1387,21 @@ const opListHsms = "ListHsms"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListHsmsRequest method.
+//	req, resp := client.ListHsmsRequest(params)
 //
-//    // Example sending a request using the ListHsmsRequest method.
-//    req, resp := client.ListHsmsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsms
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) (req *request.Request, output *ListHsmsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListHsms, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListHsms,
 		HTTPMethod: "POST",
@@ -1299,12 +1421,12 @@ func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) (req *request.Request, 
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Retrieves the identifiers of all of the HSMs provisioned for the current
 // customer.
@@ -1321,17 +1443,20 @@ func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) (req *request.Request, 
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation ListHsms for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsms
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListHsms(input *ListHsmsInput) (*ListHsmsOutput, error) {
 	req, out := c.ListHsmsRequest(input)
 	return out, req.Send()
@@ -1346,6 +1471,8 @@ func (c *CloudHSM) ListHsms(input *ListHsmsInput) (*ListHsmsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListHsmsWithContext(ctx aws.Context, input *ListHsmsInput, opts ...request.Option) (*ListHsmsOutput, error) {
 	req, out := c.ListHsmsRequest(input)
 	req.SetContext(ctx)
@@ -1369,17 +1496,21 @@ const opListLunaClients = "ListLunaClients"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListLunaClientsRequest method.
+//	req, resp := client.ListLunaClientsRequest(params)
 //
-//    // Example sending a request using the ListLunaClientsRequest method.
-//    req, resp := client.ListLunaClientsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClients
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) (req *request.Request, output *ListLunaClientsOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListLunaClients, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListLunaClients,
 		HTTPMethod: "POST",
@@ -1399,12 +1530,12 @@ func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) (req *req
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Lists all of the clients.
 //
@@ -1420,17 +1551,20 @@ func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) (req *req
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation ListLunaClients for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClients
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListLunaClients(input *ListLunaClientsInput) (*ListLunaClientsOutput, error) {
 	req, out := c.ListLunaClientsRequest(input)
 	return out, req.Send()
@@ -1445,6 +1579,8 @@ func (c *CloudHSM) ListLunaClients(input *ListLunaClientsInput) (*ListLunaClient
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListLunaClientsWithContext(ctx aws.Context, input *ListLunaClientsInput, opts ...request.Option) (*ListLunaClientsOutput, error) {
 	req, out := c.ListLunaClientsRequest(input)
 	req.SetContext(ctx)
@@ -1468,17 +1604,21 @@ const opListTagsForResource = "ListTagsForResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
 //
-//    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResource
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListTagsForResource, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -1498,12 +1638,12 @@ func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Returns a list of all tags for the specified AWS CloudHSM resource.
 //
@@ -1514,17 +1654,20 @@ func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation ListTagsForResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResource
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	return out, req.Send()
@@ -1539,6 +1682,8 @@ func (c *CloudHSM) ListTagsForResource(input *ListTagsForResourceInput) (*ListTa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
@@ -1562,17 +1707,21 @@ const opModifyHapg = "ModifyHapg"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyHapgRequest method.
+//	req, resp := client.ModifyHapgRequest(params)
 //
-//    // Example sending a request using the ModifyHapgRequest method.
-//    req, resp := client.ModifyHapgRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapg
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) (req *request.Request, output *ModifyHapgOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ModifyHapg, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opModifyHapg,
 		HTTPMethod: "POST",
@@ -1592,12 +1741,12 @@ func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) (req *request.Reque
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Modifies an existing high-availability partition group.
 //
@@ -1608,17 +1757,20 @@ func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) (req *request.Reque
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation ModifyHapg for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapg
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ModifyHapg(input *ModifyHapgInput) (*ModifyHapgOutput, error) {
 	req, out := c.ModifyHapgRequest(input)
 	return out, req.Send()
@@ -1633,6 +1785,8 @@ func (c *CloudHSM) ModifyHapg(input *ModifyHapgInput) (*ModifyHapgOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ModifyHapgWithContext(ctx aws.Context, input *ModifyHapgInput, opts ...request.Option) (*ModifyHapgOutput, error) {
 	req, out := c.ModifyHapgRequest(input)
 	req.SetContext(ctx)
@@ -1656,17 +1810,21 @@ const opModifyHsm = "ModifyHsm"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyHsmRequest method.
+//	req, resp := client.ModifyHsmRequest(params)
 //
-//    // Example sending a request using the ModifyHsmRequest method.
-//    req, resp := client.ModifyHsmRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsm
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) (req *request.Request, output *ModifyHsmOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ModifyHsm, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opModifyHsm,
 		HTTPMethod: "POST",
@@ -1686,12 +1844,12 @@ func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) (req *request.Request
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Modifies an HSM.
 //
@@ -1708,17 +1866,20 @@ func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) (req *request.Request
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation ModifyHsm for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsm
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ModifyHsm(input *ModifyHsmInput) (*ModifyHsmOutput, error) {
 	req, out := c.ModifyHsmRequest(input)
 	return out, req.Send()
@@ -1733,6 +1894,8 @@ func (c *CloudHSM) ModifyHsm(input *ModifyHsmInput) (*ModifyHsmOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ModifyHsmWithContext(ctx aws.Context, input *ModifyHsmInput, opts ...request.Option) (*ModifyHsmOutput, error) {
 	req, out := c.ModifyHsmRequest(input)
 	req.SetContext(ctx)
@@ -1756,17 +1919,21 @@ const opModifyLunaClient = "ModifyLunaClient"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyLunaClientRequest method.
+//	req, resp := client.ModifyLunaClientRequest(params)
 //
-//    // Example sending a request using the ModifyLunaClientRequest method.
-//    req, resp := client.ModifyLunaClientRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClient
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) (req *request.Request, output *ModifyLunaClientOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ModifyLunaClient, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opModifyLunaClient,
 		HTTPMethod: "POST",
@@ -1786,12 +1953,12 @@ func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) (req *r
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Modifies the certificate used by the client.
 //
@@ -1805,11 +1972,13 @@ func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) (req *r
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation ModifyLunaClient for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClient
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ModifyLunaClient(input *ModifyLunaClientInput) (*ModifyLunaClientOutput, error) {
 	req, out := c.ModifyLunaClientRequest(input)
 	return out, req.Send()
@@ -1824,6 +1993,8 @@ func (c *CloudHSM) ModifyLunaClient(input *ModifyLunaClientInput) (*ModifyLunaCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) ModifyLunaClientWithContext(ctx aws.Context, input *ModifyLunaClientInput, opts ...request.Option) (*ModifyLunaClientOutput, error) {
 	req, out := c.ModifyLunaClientRequest(input)
 	req.SetContext(ctx)
@@ -1847,17 +2018,21 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RemoveTagsFromResourceRequest method.
+//	req, resp := client.RemoveTagsFromResourceRequest(params)
 //
-//    // Example sending a request using the RemoveTagsFromResourceRequest method.
-//    req, resp := client.RemoveTagsFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResource
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *RemoveTagsFromResourceOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, RemoveTagsFromResource, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
@@ -1877,12 +2052,12 @@ func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceIn
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see
 // AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
-// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
-// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+// the AWS CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
 //
 // For information about the current version of AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
-// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Removes one or more tags from the specified AWS CloudHSM resource.
 //
@@ -1896,17 +2071,20 @@ func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceIn
 // See the AWS API reference guide for Amazon CloudHSM's
 // API operation RemoveTagsFromResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeCloudHsmServiceException "CloudHsmServiceException"
-//   Indicates that an exception occurred in the AWS CloudHSM service.
+// Returned Error Types:
 //
-//   * ErrCodeCloudHsmInternalException "CloudHsmInternalException"
-//   Indicates that an internal error occurred.
+//   - CloudHsmServiceException
+//     Indicates that an exception occurred in the AWS CloudHSM service.
 //
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
-//   Indicates that one or more of the request parameters are not valid.
+//   - CloudHsmInternalException
+//     Indicates that an internal error occurred.
+//
+//   - InvalidRequestException
+//     Indicates that one or more of the request parameters are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResource
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*RemoveTagsFromResourceOutput, error) {
 	req, out := c.RemoveTagsFromResourceRequest(input)
 	return out, req.Send()
@@ -1921,6 +2099,8 @@ func (c *CloudHSM) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This API is deprecated.
 func (c *CloudHSM) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...request.Option) (*RemoveTagsFromResourceOutput, error) {
 	req, out := c.RemoveTagsFromResourceRequest(input)
 	req.SetContext(ctx)
@@ -1942,12 +2122,20 @@ type AddTagsToResourceInput struct {
 	TagList []*Tag `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceInput) GoString() string {
 	return s.String()
 }
@@ -1999,12 +2187,20 @@ type AddTagsToResourceOutput struct {
 	Status *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceOutput) GoString() string {
 	return s.String()
 }
@@ -2013,6 +2209,138 @@ func (s AddTagsToResourceOutput) GoString() string {
 func (s *AddTagsToResourceOutput) SetStatus(v string) *AddTagsToResourceOutput {
 	s.Status = &v
 	return s
+}
+
+// Indicates that an internal error occurred.
+type CloudHsmInternalException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CloudHsmInternalException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CloudHsmInternalException) GoString() string {
+	return s.String()
+}
+
+func newErrorCloudHsmInternalException(v protocol.ResponseMetadata) error {
+	return &CloudHsmInternalException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CloudHsmInternalException) Code() string {
+	return "CloudHsmInternalException"
+}
+
+// Message returns the exception's message.
+func (s *CloudHsmInternalException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CloudHsmInternalException) OrigErr() error {
+	return nil
+}
+
+func (s *CloudHsmInternalException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CloudHsmInternalException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CloudHsmInternalException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates that an exception occurred in the AWS CloudHSM service.
+type CloudHsmServiceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Additional information about the error.
+	Message_ *string `locationName:"message" type:"string"`
+
+	// Indicates if the action can be retried.
+	Retryable *bool `locationName:"retryable" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CloudHsmServiceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CloudHsmServiceException) GoString() string {
+	return s.String()
+}
+
+func newErrorCloudHsmServiceException(v protocol.ResponseMetadata) error {
+	return &CloudHsmServiceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CloudHsmServiceException) Code() string {
+	return "CloudHsmServiceException"
+}
+
+// Message returns the exception's message.
+func (s *CloudHsmServiceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CloudHsmServiceException) OrigErr() error {
+	return nil
+}
+
+func (s *CloudHsmServiceException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CloudHsmServiceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CloudHsmServiceException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Contains the inputs for the CreateHapgRequest action.
@@ -2025,12 +2353,20 @@ type CreateHapgInput struct {
 	Label *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHapgInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHapgInput) GoString() string {
 	return s.String()
 }
@@ -2062,12 +2398,20 @@ type CreateHapgOutput struct {
 	HapgArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHapgOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHapgOutput) GoString() string {
 	return s.String()
 }
@@ -2080,36 +2424,36 @@ func (s *CreateHapgOutput) SetHapgArn(v string) *CreateHapgOutput {
 
 // Contains the inputs for the CreateHsm operation.
 type CreateHsmInput struct {
-	_ struct{} `locationName:"CreateHsmRequest" type:"structure"`
+	_ struct{} `type:"structure"`
 
 	// A user-defined token to ensure idempotence. Subsequent calls to this operation
 	// with the same token will be ignored.
-	ClientToken *string `locationName:"ClientToken" type:"string"`
+	ClientToken *string `type:"string"`
 
 	// The IP address to assign to the HSM's ENI.
 	//
 	// If an IP address is not specified, an IP address will be randomly chosen
 	// from the CIDR range of the subnet.
-	EniIp *string `locationName:"EniIp" type:"string"`
+	EniIp *string `type:"string"`
 
 	// The external ID from IamRoleArn, if present.
-	ExternalId *string `locationName:"ExternalId" type:"string"`
+	ExternalId *string `type:"string"`
 
 	// The ARN of an IAM role to enable the AWS CloudHSM service to allocate an
 	// ENI on your behalf.
 	//
 	// IamRoleArn is a required field
-	IamRoleArn *string `locationName:"IamRoleArn" type:"string" required:"true"`
+	IamRoleArn *string `type:"string" required:"true"`
 
 	// The SSH public key to install on the HSM.
 	//
 	// SshKey is a required field
-	SshKey *string `locationName:"SshKey" type:"string" required:"true"`
+	SshKey *string `type:"string" required:"true"`
 
 	// The identifier of the subnet in your VPC in which to place the HSM.
 	//
 	// SubnetId is a required field
-	SubnetId *string `locationName:"SubnetId" type:"string" required:"true"`
+	SubnetId *string `type:"string" required:"true"`
 
 	// Specifies the type of subscription for the HSM.
 	//
@@ -2118,19 +2462,27 @@ type CreateHsmInput struct {
 	//    * TRIAL - The HSM is being used in a product trial.
 	//
 	// SubscriptionType is a required field
-	SubscriptionType *string `locationName:"SubscriptionType" type:"string" required:"true" enum:"SubscriptionType"`
+	SubscriptionType *string `type:"string" required:"true" enum:"SubscriptionType"`
 
 	// The IP address for the syslog monitoring server. The AWS CloudHSM service
 	// only supports one syslog monitoring server.
-	SyslogIp *string `locationName:"SyslogIp" type:"string"`
+	SyslogIp *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHsmInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHsmInput) GoString() string {
 	return s.String()
 }
@@ -2213,12 +2565,20 @@ type CreateHsmOutput struct {
 	HsmArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHsmOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHsmOutput) GoString() string {
 	return s.String()
 }
@@ -2243,12 +2603,20 @@ type CreateLunaClientInput struct {
 	Label *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLunaClientInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLunaClientInput) GoString() string {
 	return s.String()
 }
@@ -2289,12 +2657,20 @@ type CreateLunaClientOutput struct {
 	ClientArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLunaClientOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLunaClientOutput) GoString() string {
 	return s.String()
 }
@@ -2315,12 +2691,20 @@ type DeleteHapgInput struct {
 	HapgArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHapgInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHapgInput) GoString() string {
 	return s.String()
 }
@@ -2354,12 +2738,20 @@ type DeleteHapgOutput struct {
 	Status *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHapgOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHapgOutput) GoString() string {
 	return s.String()
 }
@@ -2372,20 +2764,28 @@ func (s *DeleteHapgOutput) SetStatus(v string) *DeleteHapgOutput {
 
 // Contains the inputs for the DeleteHsm operation.
 type DeleteHsmInput struct {
-	_ struct{} `locationName:"DeleteHsmRequest" type:"structure"`
+	_ struct{} `type:"structure"`
 
 	// The ARN of the HSM to delete.
 	//
 	// HsmArn is a required field
-	HsmArn *string `locationName:"HsmArn" type:"string" required:"true"`
+	HsmArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHsmInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHsmInput) GoString() string {
 	return s.String()
 }
@@ -2419,12 +2819,20 @@ type DeleteHsmOutput struct {
 	Status *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHsmOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHsmOutput) GoString() string {
 	return s.String()
 }
@@ -2444,12 +2852,20 @@ type DeleteLunaClientInput struct {
 	ClientArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLunaClientInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLunaClientInput) GoString() string {
 	return s.String()
 }
@@ -2482,12 +2898,20 @@ type DeleteLunaClientOutput struct {
 	Status *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLunaClientOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLunaClientOutput) GoString() string {
 	return s.String()
 }
@@ -2508,12 +2932,20 @@ type DescribeHapgInput struct {
 	HapgArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeHapgInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeHapgInput) GoString() string {
 	return s.String()
 }
@@ -2570,12 +3002,20 @@ type DescribeHapgOutput struct {
 	State *string `type:"string" enum:"CloudHsmObjectState"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeHapgOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeHapgOutput) GoString() string {
 	return s.String()
 }
@@ -2647,12 +3087,20 @@ type DescribeHsmInput struct {
 	HsmSerialNumber *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeHsmInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeHsmInput) GoString() string {
 	return s.String()
 }
@@ -2741,12 +3189,20 @@ type DescribeHsmOutput struct {
 	VpcId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeHsmOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeHsmOutput) GoString() string {
 	return s.String()
 }
@@ -2887,12 +3343,20 @@ type DescribeLunaClientInput struct {
 	ClientArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeLunaClientInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeLunaClientInput) GoString() string {
 	return s.String()
 }
@@ -2928,12 +3392,20 @@ type DescribeLunaClientOutput struct {
 	LastModifiedTimestamp *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeLunaClientOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeLunaClientOutput) GoString() string {
 	return s.String()
 }
@@ -2988,12 +3460,20 @@ type GetConfigInput struct {
 	HapgList []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConfigInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConfigInput) GoString() string {
 	return s.String()
 }
@@ -3048,12 +3528,20 @@ type GetConfigOutput struct {
 	ConfigType *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConfigOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConfigOutput) GoString() string {
 	return s.String()
 }
@@ -3076,17 +3564,89 @@ func (s *GetConfigOutput) SetConfigType(v string) *GetConfigOutput {
 	return s
 }
 
+// Indicates that one or more of the request parameters are not valid.
+type InvalidRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidRequestException(v protocol.ResponseMetadata) error {
+	return &InvalidRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidRequestException) Code() string {
+	return "InvalidRequestException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Contains the inputs for the ListAvailableZones action.
 type ListAvailableZonesInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAvailableZonesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAvailableZonesInput) GoString() string {
 	return s.String()
 }
@@ -3098,12 +3658,20 @@ type ListAvailableZonesOutput struct {
 	AZList []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAvailableZonesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAvailableZonesOutput) GoString() string {
 	return s.String()
 }
@@ -3122,12 +3690,20 @@ type ListHapgsInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHapgsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHapgsInput) GoString() string {
 	return s.String()
 }
@@ -3151,12 +3727,20 @@ type ListHapgsOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHapgsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHapgsOutput) GoString() string {
 	return s.String()
 }
@@ -3181,12 +3765,20 @@ type ListHsmsInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHsmsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHsmsInput) GoString() string {
 	return s.String()
 }
@@ -3209,12 +3801,20 @@ type ListHsmsOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHsmsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHsmsOutput) GoString() string {
 	return s.String()
 }
@@ -3239,12 +3839,20 @@ type ListLunaClientsInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListLunaClientsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListLunaClientsInput) GoString() string {
 	return s.String()
 }
@@ -3268,12 +3876,20 @@ type ListLunaClientsOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListLunaClientsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListLunaClientsOutput) GoString() string {
 	return s.String()
 }
@@ -3299,12 +3915,20 @@ type ListTagsForResourceInput struct {
 	ResourceArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) GoString() string {
 	return s.String()
 }
@@ -3337,12 +3961,20 @@ type ListTagsForResourceOutput struct {
 	TagList []*Tag `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
 }
@@ -3369,12 +4001,20 @@ type ModifyHapgInput struct {
 	PartitionSerialList []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyHapgInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyHapgInput) GoString() string {
 	return s.String()
 }
@@ -3417,12 +4057,20 @@ type ModifyHapgOutput struct {
 	HapgArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyHapgOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyHapgOutput) GoString() string {
 	return s.String()
 }
@@ -3435,41 +4083,49 @@ func (s *ModifyHapgOutput) SetHapgArn(v string) *ModifyHapgOutput {
 
 // Contains the inputs for the ModifyHsm operation.
 type ModifyHsmInput struct {
-	_ struct{} `locationName:"ModifyHsmRequest" type:"structure"`
+	_ struct{} `type:"structure"`
 
 	// The new IP address for the elastic network interface (ENI) attached to the
 	// HSM.
 	//
 	// If the HSM is moved to a different subnet, and an IP address is not specified,
 	// an IP address will be randomly chosen from the CIDR range of the new subnet.
-	EniIp *string `locationName:"EniIp" type:"string"`
+	EniIp *string `type:"string"`
 
 	// The new external ID.
-	ExternalId *string `locationName:"ExternalId" type:"string"`
+	ExternalId *string `type:"string"`
 
 	// The ARN of the HSM to modify.
 	//
 	// HsmArn is a required field
-	HsmArn *string `locationName:"HsmArn" type:"string" required:"true"`
+	HsmArn *string `type:"string" required:"true"`
 
 	// The new IAM role ARN.
-	IamRoleArn *string `locationName:"IamRoleArn" type:"string"`
+	IamRoleArn *string `type:"string"`
 
 	// The new identifier of the subnet that the HSM is in. The new subnet must
 	// be in the same Availability Zone as the current subnet.
-	SubnetId *string `locationName:"SubnetId" type:"string"`
+	SubnetId *string `type:"string"`
 
 	// The new IP address for the syslog monitoring server. The AWS CloudHSM service
 	// only supports one syslog monitoring server.
-	SyslogIp *string `locationName:"SyslogIp" type:"string"`
+	SyslogIp *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyHsmInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyHsmInput) GoString() string {
 	return s.String()
 }
@@ -3531,12 +4187,20 @@ type ModifyHsmOutput struct {
 	HsmArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyHsmOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyHsmOutput) GoString() string {
 	return s.String()
 }
@@ -3561,12 +4225,20 @@ type ModifyLunaClientInput struct {
 	ClientArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyLunaClientInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyLunaClientInput) GoString() string {
 	return s.String()
 }
@@ -3609,12 +4281,20 @@ type ModifyLunaClientOutput struct {
 	ClientArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyLunaClientOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyLunaClientOutput) GoString() string {
 	return s.String()
 }
@@ -3642,12 +4322,20 @@ type RemoveTagsFromResourceInput struct {
 	TagKeyList []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceInput) GoString() string {
 	return s.String()
 }
@@ -3689,12 +4377,20 @@ type RemoveTagsFromResourceOutput struct {
 	Status *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
 }
@@ -3721,12 +4417,20 @@ type Tag struct {
 	Value *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -3770,6 +4474,14 @@ const (
 	ClientVersion53 = "5.3"
 )
 
+// ClientVersion_Values returns all elements of the ClientVersion enum
+func ClientVersion_Values() []string {
+	return []string{
+		ClientVersion51,
+		ClientVersion53,
+	}
+}
+
 const (
 	// CloudHsmObjectStateReady is a CloudHsmObjectState enum value
 	CloudHsmObjectStateReady = "READY"
@@ -3780,6 +4492,15 @@ const (
 	// CloudHsmObjectStateDegraded is a CloudHsmObjectState enum value
 	CloudHsmObjectStateDegraded = "DEGRADED"
 )
+
+// CloudHsmObjectState_Values returns all elements of the CloudHsmObjectState enum
+func CloudHsmObjectState_Values() []string {
+	return []string{
+		CloudHsmObjectStateReady,
+		CloudHsmObjectStateUpdating,
+		CloudHsmObjectStateDegraded,
+	}
+}
 
 const (
 	// HsmStatusPending is a HsmStatus enum value
@@ -3804,12 +4525,32 @@ const (
 	HsmStatusDegraded = "DEGRADED"
 )
 
+// HsmStatus_Values returns all elements of the HsmStatus enum
+func HsmStatus_Values() []string {
+	return []string{
+		HsmStatusPending,
+		HsmStatusRunning,
+		HsmStatusUpdating,
+		HsmStatusSuspended,
+		HsmStatusTerminating,
+		HsmStatusTerminated,
+		HsmStatusDegraded,
+	}
+}
+
 // Specifies the type of subscription for the HSM.
 //
-//    * PRODUCTION - The HSM is being used in a production environment.
+//   - PRODUCTION - The HSM is being used in a production environment.
 //
-//    * TRIAL - The HSM is being used in a product trial.
+//   - TRIAL - The HSM is being used in a product trial.
 const (
 	// SubscriptionTypeProduction is a SubscriptionType enum value
 	SubscriptionTypeProduction = "PRODUCTION"
 )
+
+// SubscriptionType_Values returns all elements of the SubscriptionType enum
+func SubscriptionType_Values() []string {
+	return []string{
+		SubscriptionTypeProduction,
+	}
+}

@@ -1,19 +1,14 @@
-// +build example,exclude
+//go:build example
+// +build example
 
 package rdsutils_test
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"database/sql"
 	"flag"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 	"net/url"
 	"os"
-
-	"github.com/go-sql-driver/mysql"
 
 	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -22,7 +17,13 @@ import (
 
 // ExampleConnectionStringBuilder contains usage of assuming a role and using
 // that to build the auth token.
+//
+// For MySQL you many need to configure your MySQL driver with the TLS
+// certificate to ensure verified TLS handshake,
+// https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
+//
 // Usage:
+//
 //	./main -user "iamuser" -dbname "foo" -region "us-west-2" -rolearn "arn" -endpoint "dbendpoint" -port 3306
 func ExampleConnectionStringBuilder() {
 	userPtr := flag.String("user", "", "user of the credentials")
@@ -47,11 +48,6 @@ func ExampleConnectionStringBuilder() {
 		fmt.Printf("Error: %v\n\n", err)
 		flag.PrintDefaults()
 		os.Exit(1)
-	}
-
-	err := registerRDSMysqlCerts(http.DefaultClient)
-	if err != nil {
-		panic(err)
 	}
 
 	sess := session.Must(session.NewSession())
@@ -97,23 +93,4 @@ func requiredFlags(flags ...interface{}) error {
 		}
 	}
 	return nil
-}
-
-func registerRDSMysqlCerts(c *http.Client) error {
-	resp, err := c.Get("https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem")
-	if err != nil {
-		return err
-	}
-
-	pem, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return err
-	}
-
-	rootCertPool := x509.NewCertPool()
-	if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
-		return fmt.Errorf("failed to append cert to cert pool!")
-	}
-
-	return mysql.RegisterTLSConfig("rds", &tls.Config{RootCAs: rootCertPool, InsecureSkipVerify: true})
 }

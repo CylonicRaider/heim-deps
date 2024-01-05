@@ -4,6 +4,7 @@ package guardduty
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
@@ -11,6 +12,90 @@ import (
 	"github.com/aws/aws-sdk-go/private/protocol"
 	"github.com/aws/aws-sdk-go/private/protocol/restjson"
 )
+
+const opAcceptAdministratorInvitation = "AcceptAdministratorInvitation"
+
+// AcceptAdministratorInvitationRequest generates a "aws/request.Request" representing the
+// client's request for the AcceptAdministratorInvitation operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AcceptAdministratorInvitation for more information on using the AcceptAdministratorInvitation
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AcceptAdministratorInvitationRequest method.
+//	req, resp := client.AcceptAdministratorInvitationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptAdministratorInvitation
+func (c *GuardDuty) AcceptAdministratorInvitationRequest(input *AcceptAdministratorInvitationInput) (req *request.Request, output *AcceptAdministratorInvitationOutput) {
+	op := &request.Operation{
+		Name:       opAcceptAdministratorInvitation,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/administrator",
+	}
+
+	if input == nil {
+		input = &AcceptAdministratorInvitationInput{}
+	}
+
+	output = &AcceptAdministratorInvitationOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// AcceptAdministratorInvitation API operation for Amazon GuardDuty.
+//
+// Accepts the invitation to be a member account and get monitored by a GuardDuty
+// administrator account that sent the invitation.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation AcceptAdministratorInvitation for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptAdministratorInvitation
+func (c *GuardDuty) AcceptAdministratorInvitation(input *AcceptAdministratorInvitationInput) (*AcceptAdministratorInvitationOutput, error) {
+	req, out := c.AcceptAdministratorInvitationRequest(input)
+	return out, req.Send()
+}
+
+// AcceptAdministratorInvitationWithContext is the same as AcceptAdministratorInvitation with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AcceptAdministratorInvitation for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) AcceptAdministratorInvitationWithContext(ctx aws.Context, input *AcceptAdministratorInvitationInput, opts ...request.Option) (*AcceptAdministratorInvitationOutput, error) {
+	req, out := c.AcceptAdministratorInvitationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
 
 const opAcceptInvitation = "AcceptInvitation"
 
@@ -28,17 +113,21 @@ const opAcceptInvitation = "AcceptInvitation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AcceptInvitationRequest method.
+//	req, resp := client.AcceptInvitationRequest(params)
 //
-//    // Example sending a request using the AcceptInvitationRequest method.
-//    req, resp := client.AcceptInvitationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitation
+//
+// Deprecated: This operation is deprecated, use AcceptAdministratorInvitation instead
 func (c *GuardDuty) AcceptInvitationRequest(input *AcceptInvitationInput) (req *request.Request, output *AcceptInvitationOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, AcceptInvitation, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opAcceptInvitation,
 		HTTPMethod: "POST",
@@ -57,7 +146,7 @@ func (c *GuardDuty) AcceptInvitationRequest(input *AcceptInvitationInput) (req *
 
 // AcceptInvitation API operation for Amazon GuardDuty.
 //
-// Accepts the invitation to be monitored by a master GuardDuty account.
+// Accepts the invitation to be monitored by a GuardDuty administrator account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -66,14 +155,17 @@ func (c *GuardDuty) AcceptInvitationRequest(input *AcceptInvitationInput) (req *
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation AcceptInvitation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitation
+//
+// Deprecated: This operation is deprecated, use AcceptAdministratorInvitation instead
 func (c *GuardDuty) AcceptInvitation(input *AcceptInvitationInput) (*AcceptInvitationOutput, error) {
 	req, out := c.AcceptInvitationRequest(input)
 	return out, req.Send()
@@ -88,6 +180,8 @@ func (c *GuardDuty) AcceptInvitation(input *AcceptInvitationInput) (*AcceptInvit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This operation is deprecated, use AcceptAdministratorInvitation instead
 func (c *GuardDuty) AcceptInvitationWithContext(ctx aws.Context, input *AcceptInvitationInput, opts ...request.Option) (*AcceptInvitationOutput, error) {
 	req, out := c.AcceptInvitationRequest(input)
 	req.SetContext(ctx)
@@ -111,14 +205,13 @@ const opArchiveFindings = "ArchiveFindings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ArchiveFindingsRequest method.
+//	req, resp := client.ArchiveFindingsRequest(params)
 //
-//    // Example sending a request using the ArchiveFindingsRequest method.
-//    req, resp := client.ArchiveFindingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindings
 func (c *GuardDuty) ArchiveFindingsRequest(input *ArchiveFindingsInput) (req *request.Request, output *ArchiveFindingsOutput) {
@@ -140,7 +233,10 @@ func (c *GuardDuty) ArchiveFindingsRequest(input *ArchiveFindingsInput) (req *re
 
 // ArchiveFindings API operation for Amazon GuardDuty.
 //
-// Archives Amazon GuardDuty findings specified by the list of finding IDs.
+// Archives GuardDuty findings that are specified by the list of finding IDs.
+//
+// Only the administrator account can archive findings. Member accounts don't
+// have permission to archive findings from their accounts.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -149,12 +245,13 @@ func (c *GuardDuty) ArchiveFindingsRequest(input *ArchiveFindingsInput) (req *re
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation ArchiveFindings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindings
 func (c *GuardDuty) ArchiveFindings(input *ArchiveFindingsInput) (*ArchiveFindingsOutput, error) {
@@ -194,14 +291,13 @@ const opCreateDetector = "CreateDetector"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDetectorRequest method.
+//	req, resp := client.CreateDetectorRequest(params)
 //
-//    // Example sending a request using the CreateDetectorRequest method.
-//    req, resp := client.CreateDetectorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetector
 func (c *GuardDuty) CreateDetectorRequest(input *CreateDetectorInput) (req *request.Request, output *CreateDetectorOutput) {
@@ -222,9 +318,15 @@ func (c *GuardDuty) CreateDetectorRequest(input *CreateDetectorInput) (req *requ
 
 // CreateDetector API operation for Amazon GuardDuty.
 //
-// Creates a single Amazon GuardDuty detector. A detector is an object that
-// represents the GuardDuty service. A detector must be created in order for
-// GuardDuty to become operational.
+// Creates a single Amazon GuardDuty detector. A detector is a resource that
+// represents the GuardDuty service. To start using GuardDuty, you must create
+// a detector in each Region where you enable the service. You can have only
+// one detector per account per Region. All data sources are enabled in a new
+// detector by default.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -233,12 +335,13 @@ func (c *GuardDuty) CreateDetectorRequest(input *CreateDetectorInput) (req *requ
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation CreateDetector for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetector
 func (c *GuardDuty) CreateDetector(input *CreateDetectorInput) (*CreateDetectorOutput, error) {
@@ -278,14 +381,13 @@ const opCreateFilter = "CreateFilter"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateFilterRequest method.
+//	req, resp := client.CreateFilterRequest(params)
 //
-//    // Example sending a request using the CreateFilterRequest method.
-//    req, resp := client.CreateFilterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilter
 func (c *GuardDuty) CreateFilterRequest(input *CreateFilterInput) (req *request.Request, output *CreateFilterOutput) {
@@ -306,7 +408,9 @@ func (c *GuardDuty) CreateFilterRequest(input *CreateFilterInput) (req *request.
 
 // CreateFilter API operation for Amazon GuardDuty.
 //
-// Creates a filter using the specified finding criteria.
+// Creates a filter using the specified finding criteria. The maximum number
+// of saved filters per Amazon Web Services account per Region is 100. For more
+// information, see Quotas for GuardDuty (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -315,12 +419,13 @@ func (c *GuardDuty) CreateFilterRequest(input *CreateFilterInput) (req *request.
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation CreateFilter for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilter
 func (c *GuardDuty) CreateFilter(input *CreateFilterInput) (*CreateFilterOutput, error) {
@@ -360,14 +465,13 @@ const opCreateIPSet = "CreateIPSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateIPSetRequest method.
+//	req, resp := client.CreateIPSetRequest(params)
 //
-//    // Example sending a request using the CreateIPSetRequest method.
-//    req, resp := client.CreateIPSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSet
 func (c *GuardDuty) CreateIPSetRequest(input *CreateIPSetInput) (req *request.Request, output *CreateIPSetOutput) {
@@ -388,8 +492,11 @@ func (c *GuardDuty) CreateIPSetRequest(input *CreateIPSetInput) (req *request.Re
 
 // CreateIPSet API operation for Amazon GuardDuty.
 //
-// Creates a new IPSet - a list of trusted IP addresses that have been whitelisted
-// for secure communication with AWS infrastructure and applications.
+// Creates a new IPSet, which is called a trusted IP list in the console user
+// interface. An IPSet is a list of IP addresses that are trusted for secure
+// communication with Amazon Web Services infrastructure and applications. GuardDuty
+// doesn't generate findings for IP addresses that are included in IPSets. Only
+// users from the administrator account can use this operation.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -398,12 +505,13 @@ func (c *GuardDuty) CreateIPSetRequest(input *CreateIPSetInput) (req *request.Re
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation CreateIPSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSet
 func (c *GuardDuty) CreateIPSet(input *CreateIPSetInput) (*CreateIPSetOutput, error) {
@@ -443,14 +551,13 @@ const opCreateMembers = "CreateMembers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateMembersRequest method.
+//	req, resp := client.CreateMembersRequest(params)
 //
-//    // Example sending a request using the CreateMembersRequest method.
-//    req, resp := client.CreateMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembers
 func (c *GuardDuty) CreateMembersRequest(input *CreateMembersInput) (req *request.Request, output *CreateMembersOutput) {
@@ -471,9 +578,33 @@ func (c *GuardDuty) CreateMembersRequest(input *CreateMembersInput) (req *reques
 
 // CreateMembers API operation for Amazon GuardDuty.
 //
-// Creates member accounts of the current AWS account by specifying a list of
-// AWS account IDs. The current AWS account can then invite these members to
-// manage GuardDuty in their accounts.
+// Creates member accounts of the current Amazon Web Services account by specifying
+// a list of Amazon Web Services account IDs. This step is a prerequisite for
+// managing the associated member accounts either by invitation or through an
+// organization.
+//
+// As a delegated administrator, using CreateMembers will enable GuardDuty in
+// the added member accounts, with the exception of the organization delegated
+// administrator account. A delegated administrator must enable GuardDuty prior
+// to being added as a member.
+//
+// When you use CreateMembers as an Organizations delegated administrator, GuardDuty
+// applies your organization's auto-enable settings to the member accounts in
+// this request, irrespective of the accounts being new or existing members.
+// For more information about the existing auto-enable settings for your organization,
+// see DescribeOrganizationConfiguration (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeOrganizationConfiguration.html).
+//
+// If you are adding accounts by invitation, before using InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html),
+// use CreateMembers after GuardDuty has been enabled in potential member accounts.
+//
+// If you disassociate a member from a GuardDuty delegated administrator, the
+// member account details obtained from this API, including the associated email
+// addresses, will be retained. This is done so that the delegated administrator
+// can invoke the InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// API without the need to invoke the CreateMembers API again. To remove the
+// details associated with a member account, the delegated administrator must
+// invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
+// API.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -482,12 +613,13 @@ func (c *GuardDuty) CreateMembersRequest(input *CreateMembersInput) (req *reques
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation CreateMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembers
 func (c *GuardDuty) CreateMembers(input *CreateMembersInput) (*CreateMembersOutput, error) {
@@ -511,6 +643,89 @@ func (c *GuardDuty) CreateMembersWithContext(ctx aws.Context, input *CreateMembe
 	return out, req.Send()
 }
 
+const opCreatePublishingDestination = "CreatePublishingDestination"
+
+// CreatePublishingDestinationRequest generates a "aws/request.Request" representing the
+// client's request for the CreatePublishingDestination operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreatePublishingDestination for more information on using the CreatePublishingDestination
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreatePublishingDestinationRequest method.
+//	req, resp := client.CreatePublishingDestinationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreatePublishingDestination
+func (c *GuardDuty) CreatePublishingDestinationRequest(input *CreatePublishingDestinationInput) (req *request.Request, output *CreatePublishingDestinationOutput) {
+	op := &request.Operation{
+		Name:       opCreatePublishingDestination,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/publishingDestination",
+	}
+
+	if input == nil {
+		input = &CreatePublishingDestinationInput{}
+	}
+
+	output = &CreatePublishingDestinationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreatePublishingDestination API operation for Amazon GuardDuty.
+//
+// Creates a publishing destination to export findings to. The resource to export
+// findings to must exist before you use this operation.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation CreatePublishingDestination for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreatePublishingDestination
+func (c *GuardDuty) CreatePublishingDestination(input *CreatePublishingDestinationInput) (*CreatePublishingDestinationOutput, error) {
+	req, out := c.CreatePublishingDestinationRequest(input)
+	return out, req.Send()
+}
+
+// CreatePublishingDestinationWithContext is the same as CreatePublishingDestination with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreatePublishingDestination for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) CreatePublishingDestinationWithContext(ctx aws.Context, input *CreatePublishingDestinationInput, opts ...request.Option) (*CreatePublishingDestinationOutput, error) {
+	req, out := c.CreatePublishingDestinationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateSampleFindings = "CreateSampleFindings"
 
 // CreateSampleFindingsRequest generates a "aws/request.Request" representing the
@@ -527,14 +742,13 @@ const opCreateSampleFindings = "CreateSampleFindings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateSampleFindingsRequest method.
+//	req, resp := client.CreateSampleFindingsRequest(params)
 //
-//    // Example sending a request using the CreateSampleFindingsRequest method.
-//    req, resp := client.CreateSampleFindingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindings
 func (c *GuardDuty) CreateSampleFindingsRequest(input *CreateSampleFindingsInput) (req *request.Request, output *CreateSampleFindingsOutput) {
@@ -556,8 +770,8 @@ func (c *GuardDuty) CreateSampleFindingsRequest(input *CreateSampleFindingsInput
 
 // CreateSampleFindings API operation for Amazon GuardDuty.
 //
-// Generates example findings of types specified by the list of finding types.
-// If 'NULL' is specified for findingTypes, the API generates example findings
+// Generates sample findings of types specified by the list of finding types.
+// If 'NULL' is specified for findingTypes, the API generates sample findings
 // of all supported finding types.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -567,12 +781,13 @@ func (c *GuardDuty) CreateSampleFindingsRequest(input *CreateSampleFindingsInput
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation CreateSampleFindings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindings
 func (c *GuardDuty) CreateSampleFindings(input *CreateSampleFindingsInput) (*CreateSampleFindingsOutput, error) {
@@ -612,14 +827,13 @@ const opCreateThreatIntelSet = "CreateThreatIntelSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateThreatIntelSetRequest method.
+//	req, resp := client.CreateThreatIntelSetRequest(params)
 //
-//    // Example sending a request using the CreateThreatIntelSetRequest method.
-//    req, resp := client.CreateThreatIntelSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSet
 func (c *GuardDuty) CreateThreatIntelSetRequest(input *CreateThreatIntelSetInput) (req *request.Request, output *CreateThreatIntelSetOutput) {
@@ -640,8 +854,9 @@ func (c *GuardDuty) CreateThreatIntelSetRequest(input *CreateThreatIntelSetInput
 
 // CreateThreatIntelSet API operation for Amazon GuardDuty.
 //
-// Create a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP
-// addresses. GuardDuty generates findings based on ThreatIntelSets.
+// Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious
+// IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only
+// users of the administrator account can use this operation.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -650,12 +865,13 @@ func (c *GuardDuty) CreateThreatIntelSetRequest(input *CreateThreatIntelSetInput
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation CreateThreatIntelSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSet
 func (c *GuardDuty) CreateThreatIntelSet(input *CreateThreatIntelSetInput) (*CreateThreatIntelSetOutput, error) {
@@ -695,14 +911,13 @@ const opDeclineInvitations = "DeclineInvitations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeclineInvitationsRequest method.
+//	req, resp := client.DeclineInvitationsRequest(params)
 //
-//    // Example sending a request using the DeclineInvitationsRequest method.
-//    req, resp := client.DeclineInvitationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitations
 func (c *GuardDuty) DeclineInvitationsRequest(input *DeclineInvitationsInput) (req *request.Request, output *DeclineInvitationsOutput) {
@@ -723,8 +938,8 @@ func (c *GuardDuty) DeclineInvitationsRequest(input *DeclineInvitationsInput) (r
 
 // DeclineInvitations API operation for Amazon GuardDuty.
 //
-// Declines invitations sent to the current member account by AWS account specified
-// by their account IDs.
+// Declines invitations sent to the current member account by Amazon Web Services
+// accounts specified by their account IDs.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -733,12 +948,13 @@ func (c *GuardDuty) DeclineInvitationsRequest(input *DeclineInvitationsInput) (r
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation DeclineInvitations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitations
 func (c *GuardDuty) DeclineInvitations(input *DeclineInvitationsInput) (*DeclineInvitationsOutput, error) {
@@ -778,14 +994,13 @@ const opDeleteDetector = "DeleteDetector"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDetectorRequest method.
+//	req, resp := client.DeleteDetectorRequest(params)
 //
-//    // Example sending a request using the DeleteDetectorRequest method.
-//    req, resp := client.DeleteDetectorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetector
 func (c *GuardDuty) DeleteDetectorRequest(input *DeleteDetectorInput) (req *request.Request, output *DeleteDetectorOutput) {
@@ -807,7 +1022,7 @@ func (c *GuardDuty) DeleteDetectorRequest(input *DeleteDetectorInput) (req *requ
 
 // DeleteDetector API operation for Amazon GuardDuty.
 //
-// Deletes a Amazon GuardDuty detector specified by the detector ID.
+// Deletes an Amazon GuardDuty detector that is specified by the detector ID.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -816,12 +1031,13 @@ func (c *GuardDuty) DeleteDetectorRequest(input *DeleteDetectorInput) (req *requ
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation DeleteDetector for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetector
 func (c *GuardDuty) DeleteDetector(input *DeleteDetectorInput) (*DeleteDetectorOutput, error) {
@@ -861,14 +1077,13 @@ const opDeleteFilter = "DeleteFilter"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteFilterRequest method.
+//	req, resp := client.DeleteFilterRequest(params)
 //
-//    // Example sending a request using the DeleteFilterRequest method.
-//    req, resp := client.DeleteFilterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilter
 func (c *GuardDuty) DeleteFilterRequest(input *DeleteFilterInput) (req *request.Request, output *DeleteFilterOutput) {
@@ -899,12 +1114,13 @@ func (c *GuardDuty) DeleteFilterRequest(input *DeleteFilterInput) (req *request.
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation DeleteFilter for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilter
 func (c *GuardDuty) DeleteFilter(input *DeleteFilterInput) (*DeleteFilterOutput, error) {
@@ -944,14 +1160,13 @@ const opDeleteIPSet = "DeleteIPSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteIPSetRequest method.
+//	req, resp := client.DeleteIPSetRequest(params)
 //
-//    // Example sending a request using the DeleteIPSetRequest method.
-//    req, resp := client.DeleteIPSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSet
 func (c *GuardDuty) DeleteIPSetRequest(input *DeleteIPSetInput) (req *request.Request, output *DeleteIPSetOutput) {
@@ -973,7 +1188,8 @@ func (c *GuardDuty) DeleteIPSetRequest(input *DeleteIPSetInput) (req *request.Re
 
 // DeleteIPSet API operation for Amazon GuardDuty.
 //
-// Deletes the IPSet specified by the IPSet ID.
+// Deletes the IPSet specified by the ipSetId. IPSets are called trusted IP
+// lists in the console user interface.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -982,12 +1198,13 @@ func (c *GuardDuty) DeleteIPSetRequest(input *DeleteIPSetInput) (req *request.Re
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation DeleteIPSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSet
 func (c *GuardDuty) DeleteIPSet(input *DeleteIPSetInput) (*DeleteIPSetOutput, error) {
@@ -1027,14 +1244,13 @@ const opDeleteInvitations = "DeleteInvitations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteInvitationsRequest method.
+//	req, resp := client.DeleteInvitationsRequest(params)
 //
-//    // Example sending a request using the DeleteInvitationsRequest method.
-//    req, resp := client.DeleteInvitationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitations
 func (c *GuardDuty) DeleteInvitationsRequest(input *DeleteInvitationsInput) (req *request.Request, output *DeleteInvitationsOutput) {
@@ -1055,8 +1271,8 @@ func (c *GuardDuty) DeleteInvitationsRequest(input *DeleteInvitationsInput) (req
 
 // DeleteInvitations API operation for Amazon GuardDuty.
 //
-// Deletes invitations sent to the current member account by AWS accounts specified
-// by their account IDs.
+// Deletes invitations sent to the current member account by Amazon Web Services
+// accounts specified by their account IDs.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1065,12 +1281,13 @@ func (c *GuardDuty) DeleteInvitationsRequest(input *DeleteInvitationsInput) (req
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation DeleteInvitations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitations
 func (c *GuardDuty) DeleteInvitations(input *DeleteInvitationsInput) (*DeleteInvitationsOutput, error) {
@@ -1110,14 +1327,13 @@ const opDeleteMembers = "DeleteMembers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteMembersRequest method.
+//	req, resp := client.DeleteMembersRequest(params)
 //
-//    // Example sending a request using the DeleteMembersRequest method.
-//    req, resp := client.DeleteMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembers
 func (c *GuardDuty) DeleteMembersRequest(input *DeleteMembersInput) (req *request.Request, output *DeleteMembersOutput) {
@@ -1138,8 +1354,12 @@ func (c *GuardDuty) DeleteMembersRequest(input *DeleteMembersInput) (req *reques
 
 // DeleteMembers API operation for Amazon GuardDuty.
 //
-// Deletes GuardDuty member accounts (to the current GuardDuty master account)
-// specified by the account IDs.
+// Deletes GuardDuty member accounts (to the current GuardDuty administrator
+// account) specified by the account IDs.
+//
+// With autoEnableOrganizationMembers configuration for your organization set
+// to ALL, you'll receive an error if you attempt to disable GuardDuty for a
+// member account in your organization.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1148,12 +1368,13 @@ func (c *GuardDuty) DeleteMembersRequest(input *DeleteMembersInput) (req *reques
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation DeleteMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembers
 func (c *GuardDuty) DeleteMembers(input *DeleteMembersInput) (*DeleteMembersOutput, error) {
@@ -1177,6 +1398,89 @@ func (c *GuardDuty) DeleteMembersWithContext(ctx aws.Context, input *DeleteMembe
 	return out, req.Send()
 }
 
+const opDeletePublishingDestination = "DeletePublishingDestination"
+
+// DeletePublishingDestinationRequest generates a "aws/request.Request" representing the
+// client's request for the DeletePublishingDestination operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeletePublishingDestination for more information on using the DeletePublishingDestination
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeletePublishingDestinationRequest method.
+//	req, resp := client.DeletePublishingDestinationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeletePublishingDestination
+func (c *GuardDuty) DeletePublishingDestinationRequest(input *DeletePublishingDestinationInput) (req *request.Request, output *DeletePublishingDestinationOutput) {
+	op := &request.Operation{
+		Name:       opDeletePublishingDestination,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/detector/{detectorId}/publishingDestination/{destinationId}",
+	}
+
+	if input == nil {
+		input = &DeletePublishingDestinationInput{}
+	}
+
+	output = &DeletePublishingDestinationOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeletePublishingDestination API operation for Amazon GuardDuty.
+//
+// Deletes the publishing definition with the specified destinationId.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation DeletePublishingDestination for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeletePublishingDestination
+func (c *GuardDuty) DeletePublishingDestination(input *DeletePublishingDestinationInput) (*DeletePublishingDestinationOutput, error) {
+	req, out := c.DeletePublishingDestinationRequest(input)
+	return out, req.Send()
+}
+
+// DeletePublishingDestinationWithContext is the same as DeletePublishingDestination with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeletePublishingDestination for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) DeletePublishingDestinationWithContext(ctx aws.Context, input *DeletePublishingDestinationInput, opts ...request.Option) (*DeletePublishingDestinationOutput, error) {
+	req, out := c.DeletePublishingDestinationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteThreatIntelSet = "DeleteThreatIntelSet"
 
 // DeleteThreatIntelSetRequest generates a "aws/request.Request" representing the
@@ -1193,14 +1497,13 @@ const opDeleteThreatIntelSet = "DeleteThreatIntelSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteThreatIntelSetRequest method.
+//	req, resp := client.DeleteThreatIntelSetRequest(params)
 //
-//    // Example sending a request using the DeleteThreatIntelSetRequest method.
-//    req, resp := client.DeleteThreatIntelSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSet
 func (c *GuardDuty) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput) (req *request.Request, output *DeleteThreatIntelSetOutput) {
@@ -1222,7 +1525,7 @@ func (c *GuardDuty) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput
 
 // DeleteThreatIntelSet API operation for Amazon GuardDuty.
 //
-// Deletes ThreatIntelSet specified by the ThreatIntelSet ID.
+// Deletes the ThreatIntelSet specified by the ThreatIntelSet ID.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1231,12 +1534,13 @@ func (c *GuardDuty) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation DeleteThreatIntelSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSet
 func (c *GuardDuty) DeleteThreatIntelSet(input *DeleteThreatIntelSetInput) (*DeleteThreatIntelSetOutput, error) {
@@ -1260,6 +1564,559 @@ func (c *GuardDuty) DeleteThreatIntelSetWithContext(ctx aws.Context, input *Dele
 	return out, req.Send()
 }
 
+const opDescribeMalwareScans = "DescribeMalwareScans"
+
+// DescribeMalwareScansRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeMalwareScans operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeMalwareScans for more information on using the DescribeMalwareScans
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeMalwareScansRequest method.
+//	req, resp := client.DescribeMalwareScansRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeMalwareScans
+func (c *GuardDuty) DescribeMalwareScansRequest(input *DescribeMalwareScansInput) (req *request.Request, output *DescribeMalwareScansOutput) {
+	op := &request.Operation{
+		Name:       opDescribeMalwareScans,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/malware-scans",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeMalwareScansInput{}
+	}
+
+	output = &DescribeMalwareScansOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeMalwareScans API operation for Amazon GuardDuty.
+//
+// Returns a list of malware scans. Each member account can view the malware
+// scans for their own accounts. An administrator can view the malware scans
+// for all the member accounts.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation DescribeMalwareScans for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeMalwareScans
+func (c *GuardDuty) DescribeMalwareScans(input *DescribeMalwareScansInput) (*DescribeMalwareScansOutput, error) {
+	req, out := c.DescribeMalwareScansRequest(input)
+	return out, req.Send()
+}
+
+// DescribeMalwareScansWithContext is the same as DescribeMalwareScans with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeMalwareScans for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) DescribeMalwareScansWithContext(ctx aws.Context, input *DescribeMalwareScansInput, opts ...request.Option) (*DescribeMalwareScansOutput, error) {
+	req, out := c.DescribeMalwareScansRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeMalwareScansPages iterates over the pages of a DescribeMalwareScans operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeMalwareScans method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeMalwareScans operation.
+//	pageNum := 0
+//	err := client.DescribeMalwareScansPages(params,
+//	    func(page *guardduty.DescribeMalwareScansOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *GuardDuty) DescribeMalwareScansPages(input *DescribeMalwareScansInput, fn func(*DescribeMalwareScansOutput, bool) bool) error {
+	return c.DescribeMalwareScansPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeMalwareScansPagesWithContext same as DescribeMalwareScansPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) DescribeMalwareScansPagesWithContext(ctx aws.Context, input *DescribeMalwareScansInput, fn func(*DescribeMalwareScansOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeMalwareScansInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeMalwareScansRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeMalwareScansOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeOrganizationConfiguration = "DescribeOrganizationConfiguration"
+
+// DescribeOrganizationConfigurationRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeOrganizationConfiguration operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeOrganizationConfiguration for more information on using the DescribeOrganizationConfiguration
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeOrganizationConfigurationRequest method.
+//	req, resp := client.DescribeOrganizationConfigurationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfiguration
+func (c *GuardDuty) DescribeOrganizationConfigurationRequest(input *DescribeOrganizationConfigurationInput) (req *request.Request, output *DescribeOrganizationConfigurationOutput) {
+	op := &request.Operation{
+		Name:       opDescribeOrganizationConfiguration,
+		HTTPMethod: "GET",
+		HTTPPath:   "/detector/{detectorId}/admin",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeOrganizationConfigurationInput{}
+	}
+
+	output = &DescribeOrganizationConfigurationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeOrganizationConfiguration API operation for Amazon GuardDuty.
+//
+// Returns information about the account selected as the delegated administrator
+// for GuardDuty.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation DescribeOrganizationConfiguration for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfiguration
+func (c *GuardDuty) DescribeOrganizationConfiguration(input *DescribeOrganizationConfigurationInput) (*DescribeOrganizationConfigurationOutput, error) {
+	req, out := c.DescribeOrganizationConfigurationRequest(input)
+	return out, req.Send()
+}
+
+// DescribeOrganizationConfigurationWithContext is the same as DescribeOrganizationConfiguration with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeOrganizationConfiguration for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) DescribeOrganizationConfigurationWithContext(ctx aws.Context, input *DescribeOrganizationConfigurationInput, opts ...request.Option) (*DescribeOrganizationConfigurationOutput, error) {
+	req, out := c.DescribeOrganizationConfigurationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeOrganizationConfigurationPages iterates over the pages of a DescribeOrganizationConfiguration operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeOrganizationConfiguration method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeOrganizationConfiguration operation.
+//	pageNum := 0
+//	err := client.DescribeOrganizationConfigurationPages(params,
+//	    func(page *guardduty.DescribeOrganizationConfigurationOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *GuardDuty) DescribeOrganizationConfigurationPages(input *DescribeOrganizationConfigurationInput, fn func(*DescribeOrganizationConfigurationOutput, bool) bool) error {
+	return c.DescribeOrganizationConfigurationPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeOrganizationConfigurationPagesWithContext same as DescribeOrganizationConfigurationPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) DescribeOrganizationConfigurationPagesWithContext(ctx aws.Context, input *DescribeOrganizationConfigurationInput, fn func(*DescribeOrganizationConfigurationOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeOrganizationConfigurationInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeOrganizationConfigurationRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeOrganizationConfigurationOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribePublishingDestination = "DescribePublishingDestination"
+
+// DescribePublishingDestinationRequest generates a "aws/request.Request" representing the
+// client's request for the DescribePublishingDestination operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribePublishingDestination for more information on using the DescribePublishingDestination
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribePublishingDestinationRequest method.
+//	req, resp := client.DescribePublishingDestinationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribePublishingDestination
+func (c *GuardDuty) DescribePublishingDestinationRequest(input *DescribePublishingDestinationInput) (req *request.Request, output *DescribePublishingDestinationOutput) {
+	op := &request.Operation{
+		Name:       opDescribePublishingDestination,
+		HTTPMethod: "GET",
+		HTTPPath:   "/detector/{detectorId}/publishingDestination/{destinationId}",
+	}
+
+	if input == nil {
+		input = &DescribePublishingDestinationInput{}
+	}
+
+	output = &DescribePublishingDestinationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribePublishingDestination API operation for Amazon GuardDuty.
+//
+// Returns information about the publishing destination specified by the provided
+// destinationId.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation DescribePublishingDestination for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribePublishingDestination
+func (c *GuardDuty) DescribePublishingDestination(input *DescribePublishingDestinationInput) (*DescribePublishingDestinationOutput, error) {
+	req, out := c.DescribePublishingDestinationRequest(input)
+	return out, req.Send()
+}
+
+// DescribePublishingDestinationWithContext is the same as DescribePublishingDestination with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribePublishingDestination for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) DescribePublishingDestinationWithContext(ctx aws.Context, input *DescribePublishingDestinationInput, opts ...request.Option) (*DescribePublishingDestinationOutput, error) {
+	req, out := c.DescribePublishingDestinationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDisableOrganizationAdminAccount = "DisableOrganizationAdminAccount"
+
+// DisableOrganizationAdminAccountRequest generates a "aws/request.Request" representing the
+// client's request for the DisableOrganizationAdminAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisableOrganizationAdminAccount for more information on using the DisableOrganizationAdminAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisableOrganizationAdminAccountRequest method.
+//	req, resp := client.DisableOrganizationAdminAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisableOrganizationAdminAccount
+func (c *GuardDuty) DisableOrganizationAdminAccountRequest(input *DisableOrganizationAdminAccountInput) (req *request.Request, output *DisableOrganizationAdminAccountOutput) {
+	op := &request.Operation{
+		Name:       opDisableOrganizationAdminAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/admin/disable",
+	}
+
+	if input == nil {
+		input = &DisableOrganizationAdminAccountInput{}
+	}
+
+	output = &DisableOrganizationAdminAccountOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DisableOrganizationAdminAccount API operation for Amazon GuardDuty.
+//
+// Removes the existing GuardDuty delegated administrator of the organization.
+// Only the organization's management account can run this API operation.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation DisableOrganizationAdminAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisableOrganizationAdminAccount
+func (c *GuardDuty) DisableOrganizationAdminAccount(input *DisableOrganizationAdminAccountInput) (*DisableOrganizationAdminAccountOutput, error) {
+	req, out := c.DisableOrganizationAdminAccountRequest(input)
+	return out, req.Send()
+}
+
+// DisableOrganizationAdminAccountWithContext is the same as DisableOrganizationAdminAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisableOrganizationAdminAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) DisableOrganizationAdminAccountWithContext(ctx aws.Context, input *DisableOrganizationAdminAccountInput, opts ...request.Option) (*DisableOrganizationAdminAccountOutput, error) {
+	req, out := c.DisableOrganizationAdminAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDisassociateFromAdministratorAccount = "DisassociateFromAdministratorAccount"
+
+// DisassociateFromAdministratorAccountRequest generates a "aws/request.Request" representing the
+// client's request for the DisassociateFromAdministratorAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisassociateFromAdministratorAccount for more information on using the DisassociateFromAdministratorAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisassociateFromAdministratorAccountRequest method.
+//	req, resp := client.DisassociateFromAdministratorAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromAdministratorAccount
+func (c *GuardDuty) DisassociateFromAdministratorAccountRequest(input *DisassociateFromAdministratorAccountInput) (req *request.Request, output *DisassociateFromAdministratorAccountOutput) {
+	op := &request.Operation{
+		Name:       opDisassociateFromAdministratorAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/administrator/disassociate",
+	}
+
+	if input == nil {
+		input = &DisassociateFromAdministratorAccountInput{}
+	}
+
+	output = &DisassociateFromAdministratorAccountOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DisassociateFromAdministratorAccount API operation for Amazon GuardDuty.
+//
+// Disassociates the current GuardDuty member account from its administrator
+// account.
+//
+// When you disassociate an invited member from a GuardDuty delegated administrator,
+// the member account details obtained from the CreateMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
+// API, including the associated email addresses, are retained. This is done
+// so that the delegated administrator can invoke the InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// API without the need to invoke the CreateMembers API again. To remove the
+// details associated with a member account, the delegated administrator must
+// invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
+// API.
+//
+// With autoEnableOrganizationMembers configuration for your organization set
+// to ALL, you'll receive an error if you attempt to disable GuardDuty in a
+// member account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation DisassociateFromAdministratorAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromAdministratorAccount
+func (c *GuardDuty) DisassociateFromAdministratorAccount(input *DisassociateFromAdministratorAccountInput) (*DisassociateFromAdministratorAccountOutput, error) {
+	req, out := c.DisassociateFromAdministratorAccountRequest(input)
+	return out, req.Send()
+}
+
+// DisassociateFromAdministratorAccountWithContext is the same as DisassociateFromAdministratorAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisassociateFromAdministratorAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) DisassociateFromAdministratorAccountWithContext(ctx aws.Context, input *DisassociateFromAdministratorAccountInput, opts ...request.Option) (*DisassociateFromAdministratorAccountOutput, error) {
+	req, out := c.DisassociateFromAdministratorAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDisassociateFromMasterAccount = "DisassociateFromMasterAccount"
 
 // DisassociateFromMasterAccountRequest generates a "aws/request.Request" representing the
@@ -1276,17 +2133,21 @@ const opDisassociateFromMasterAccount = "DisassociateFromMasterAccount"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateFromMasterAccountRequest method.
+//	req, resp := client.DisassociateFromMasterAccountRequest(params)
 //
-//    // Example sending a request using the DisassociateFromMasterAccountRequest method.
-//    req, resp := client.DisassociateFromMasterAccountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccount
+//
+// Deprecated: This operation is deprecated, use DisassociateFromAdministratorAccount instead
 func (c *GuardDuty) DisassociateFromMasterAccountRequest(input *DisassociateFromMasterAccountInput) (req *request.Request, output *DisassociateFromMasterAccountOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DisassociateFromMasterAccount, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opDisassociateFromMasterAccount,
 		HTTPMethod: "POST",
@@ -1305,7 +2166,17 @@ func (c *GuardDuty) DisassociateFromMasterAccountRequest(input *DisassociateFrom
 
 // DisassociateFromMasterAccount API operation for Amazon GuardDuty.
 //
-// Disassociates the current GuardDuty member account from its master account.
+// Disassociates the current GuardDuty member account from its administrator
+// account.
+//
+// When you disassociate an invited member from a GuardDuty delegated administrator,
+// the member account details obtained from the CreateMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
+// API, including the associated email addresses, are retained. This is done
+// so that the delegated administrator can invoke the InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// API without the need to invoke the CreateMembers API again. To remove the
+// details associated with a member account, the delegated administrator must
+// invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
+// API.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1314,14 +2185,17 @@ func (c *GuardDuty) DisassociateFromMasterAccountRequest(input *DisassociateFrom
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation DisassociateFromMasterAccount for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccount
+//
+// Deprecated: This operation is deprecated, use DisassociateFromAdministratorAccount instead
 func (c *GuardDuty) DisassociateFromMasterAccount(input *DisassociateFromMasterAccountInput) (*DisassociateFromMasterAccountOutput, error) {
 	req, out := c.DisassociateFromMasterAccountRequest(input)
 	return out, req.Send()
@@ -1336,6 +2210,8 @@ func (c *GuardDuty) DisassociateFromMasterAccount(input *DisassociateFromMasterA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This operation is deprecated, use DisassociateFromAdministratorAccount instead
 func (c *GuardDuty) DisassociateFromMasterAccountWithContext(ctx aws.Context, input *DisassociateFromMasterAccountInput, opts ...request.Option) (*DisassociateFromMasterAccountOutput, error) {
 	req, out := c.DisassociateFromMasterAccountRequest(input)
 	req.SetContext(ctx)
@@ -1359,14 +2235,13 @@ const opDisassociateMembers = "DisassociateMembers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateMembersRequest method.
+//	req, resp := client.DisassociateMembersRequest(params)
 //
-//    // Example sending a request using the DisassociateMembersRequest method.
-//    req, resp := client.DisassociateMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembers
 func (c *GuardDuty) DisassociateMembersRequest(input *DisassociateMembersInput) (req *request.Request, output *DisassociateMembersOutput) {
@@ -1387,8 +2262,21 @@ func (c *GuardDuty) DisassociateMembersRequest(input *DisassociateMembersInput) 
 
 // DisassociateMembers API operation for Amazon GuardDuty.
 //
-// Disassociates GuardDuty member accounts (to the current GuardDuty master
-// account) specified by the account IDs.
+// Disassociates GuardDuty member accounts (from the current administrator account)
+// specified by the account IDs.
+//
+// When you disassociate an invited member from a GuardDuty delegated administrator,
+// the member account details obtained from the CreateMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
+// API, including the associated email addresses, are retained. This is done
+// so that the delegated administrator can invoke the InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// API without the need to invoke the CreateMembers API again. To remove the
+// details associated with a member account, the delegated administrator must
+// invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
+// API.
+//
+// With autoEnableOrganizationMembers configuration for your organization set
+// to ALL, you'll receive an error if you attempt to disassociate a member account
+// before removing them from your organization.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1397,12 +2285,13 @@ func (c *GuardDuty) DisassociateMembersRequest(input *DisassociateMembersInput) 
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation DisassociateMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembers
 func (c *GuardDuty) DisassociateMembers(input *DisassociateMembersInput) (*DisassociateMembersOutput, error) {
@@ -1426,6 +2315,262 @@ func (c *GuardDuty) DisassociateMembersWithContext(ctx aws.Context, input *Disas
 	return out, req.Send()
 }
 
+const opEnableOrganizationAdminAccount = "EnableOrganizationAdminAccount"
+
+// EnableOrganizationAdminAccountRequest generates a "aws/request.Request" representing the
+// client's request for the EnableOrganizationAdminAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See EnableOrganizationAdminAccount for more information on using the EnableOrganizationAdminAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the EnableOrganizationAdminAccountRequest method.
+//	req, resp := client.EnableOrganizationAdminAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EnableOrganizationAdminAccount
+func (c *GuardDuty) EnableOrganizationAdminAccountRequest(input *EnableOrganizationAdminAccountInput) (req *request.Request, output *EnableOrganizationAdminAccountOutput) {
+	op := &request.Operation{
+		Name:       opEnableOrganizationAdminAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/admin/enable",
+	}
+
+	if input == nil {
+		input = &EnableOrganizationAdminAccountInput{}
+	}
+
+	output = &EnableOrganizationAdminAccountOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// EnableOrganizationAdminAccount API operation for Amazon GuardDuty.
+//
+// Designates an Amazon Web Services account within the organization as your
+// GuardDuty delegated administrator. Only the organization's management account
+// can run this API operation.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation EnableOrganizationAdminAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EnableOrganizationAdminAccount
+func (c *GuardDuty) EnableOrganizationAdminAccount(input *EnableOrganizationAdminAccountInput) (*EnableOrganizationAdminAccountOutput, error) {
+	req, out := c.EnableOrganizationAdminAccountRequest(input)
+	return out, req.Send()
+}
+
+// EnableOrganizationAdminAccountWithContext is the same as EnableOrganizationAdminAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See EnableOrganizationAdminAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) EnableOrganizationAdminAccountWithContext(ctx aws.Context, input *EnableOrganizationAdminAccountInput, opts ...request.Option) (*EnableOrganizationAdminAccountOutput, error) {
+	req, out := c.EnableOrganizationAdminAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetAdministratorAccount = "GetAdministratorAccount"
+
+// GetAdministratorAccountRequest generates a "aws/request.Request" representing the
+// client's request for the GetAdministratorAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetAdministratorAccount for more information on using the GetAdministratorAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetAdministratorAccountRequest method.
+//	req, resp := client.GetAdministratorAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetAdministratorAccount
+func (c *GuardDuty) GetAdministratorAccountRequest(input *GetAdministratorAccountInput) (req *request.Request, output *GetAdministratorAccountOutput) {
+	op := &request.Operation{
+		Name:       opGetAdministratorAccount,
+		HTTPMethod: "GET",
+		HTTPPath:   "/detector/{detectorId}/administrator",
+	}
+
+	if input == nil {
+		input = &GetAdministratorAccountInput{}
+	}
+
+	output = &GetAdministratorAccountOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetAdministratorAccount API operation for Amazon GuardDuty.
+//
+// Provides the details of the GuardDuty administrator account associated with
+// the current GuardDuty member account.
+//
+// If the organization's management account or a delegated administrator runs
+// this API, it will return success (HTTP 200) but no content.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation GetAdministratorAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetAdministratorAccount
+func (c *GuardDuty) GetAdministratorAccount(input *GetAdministratorAccountInput) (*GetAdministratorAccountOutput, error) {
+	req, out := c.GetAdministratorAccountRequest(input)
+	return out, req.Send()
+}
+
+// GetAdministratorAccountWithContext is the same as GetAdministratorAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetAdministratorAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) GetAdministratorAccountWithContext(ctx aws.Context, input *GetAdministratorAccountInput, opts ...request.Option) (*GetAdministratorAccountOutput, error) {
+	req, out := c.GetAdministratorAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetCoverageStatistics = "GetCoverageStatistics"
+
+// GetCoverageStatisticsRequest generates a "aws/request.Request" representing the
+// client's request for the GetCoverageStatistics operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetCoverageStatistics for more information on using the GetCoverageStatistics
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetCoverageStatisticsRequest method.
+//	req, resp := client.GetCoverageStatisticsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCoverageStatistics
+func (c *GuardDuty) GetCoverageStatisticsRequest(input *GetCoverageStatisticsInput) (req *request.Request, output *GetCoverageStatisticsOutput) {
+	op := &request.Operation{
+		Name:       opGetCoverageStatistics,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/coverage/statistics",
+	}
+
+	if input == nil {
+		input = &GetCoverageStatisticsInput{}
+	}
+
+	output = &GetCoverageStatisticsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetCoverageStatistics API operation for Amazon GuardDuty.
+//
+// Retrieves aggregated statistics for your account. If you are a GuardDuty
+// administrator, you can retrieve the statistics for all the resources associated
+// with the active member accounts in your organization who have enabled Runtime
+// Monitoring and have the GuardDuty security agent running on their resources.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation GetCoverageStatistics for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCoverageStatistics
+func (c *GuardDuty) GetCoverageStatistics(input *GetCoverageStatisticsInput) (*GetCoverageStatisticsOutput, error) {
+	req, out := c.GetCoverageStatisticsRequest(input)
+	return out, req.Send()
+}
+
+// GetCoverageStatisticsWithContext is the same as GetCoverageStatistics with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetCoverageStatistics for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) GetCoverageStatisticsWithContext(ctx aws.Context, input *GetCoverageStatisticsInput, opts ...request.Option) (*GetCoverageStatisticsOutput, error) {
+	req, out := c.GetCoverageStatisticsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opGetDetector = "GetDetector"
 
 // GetDetectorRequest generates a "aws/request.Request" representing the
@@ -1442,14 +2587,13 @@ const opGetDetector = "GetDetector"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDetectorRequest method.
+//	req, resp := client.GetDetectorRequest(params)
 //
-//    // Example sending a request using the GetDetectorRequest method.
-//    req, resp := client.GetDetectorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector
 func (c *GuardDuty) GetDetectorRequest(input *GetDetectorInput) (req *request.Request, output *GetDetectorOutput) {
@@ -1472,6 +2616,10 @@ func (c *GuardDuty) GetDetectorRequest(input *GetDetectorInput) (req *request.Re
 //
 // Retrieves an Amazon GuardDuty detector specified by the detectorId.
 //
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -1479,12 +2627,13 @@ func (c *GuardDuty) GetDetectorRequest(input *GetDetectorInput) (req *request.Re
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation GetDetector for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector
 func (c *GuardDuty) GetDetector(input *GetDetectorInput) (*GetDetectorOutput, error) {
@@ -1524,14 +2673,13 @@ const opGetFilter = "GetFilter"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetFilterRequest method.
+//	req, resp := client.GetFilterRequest(params)
 //
-//    // Example sending a request using the GetFilterRequest method.
-//    req, resp := client.GetFilterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilter
 func (c *GuardDuty) GetFilterRequest(input *GetFilterInput) (req *request.Request, output *GetFilterOutput) {
@@ -1561,12 +2709,13 @@ func (c *GuardDuty) GetFilterRequest(input *GetFilterInput) (req *request.Reques
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation GetFilter for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilter
 func (c *GuardDuty) GetFilter(input *GetFilterInput) (*GetFilterOutput, error) {
@@ -1606,14 +2755,13 @@ const opGetFindings = "GetFindings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetFindingsRequest method.
+//	req, resp := client.GetFindingsRequest(params)
 //
-//    // Example sending a request using the GetFindingsRequest method.
-//    req, resp := client.GetFindingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindings
 func (c *GuardDuty) GetFindingsRequest(input *GetFindingsInput) (req *request.Request, output *GetFindingsOutput) {
@@ -1643,12 +2791,13 @@ func (c *GuardDuty) GetFindingsRequest(input *GetFindingsInput) (req *request.Re
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation GetFindings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindings
 func (c *GuardDuty) GetFindings(input *GetFindingsInput) (*GetFindingsOutput, error) {
@@ -1688,14 +2837,13 @@ const opGetFindingsStatistics = "GetFindingsStatistics"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetFindingsStatisticsRequest method.
+//	req, resp := client.GetFindingsStatisticsRequest(params)
 //
-//    // Example sending a request using the GetFindingsStatisticsRequest method.
-//    req, resp := client.GetFindingsStatisticsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatistics
 func (c *GuardDuty) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInput) (req *request.Request, output *GetFindingsStatisticsOutput) {
@@ -1716,7 +2864,7 @@ func (c *GuardDuty) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInp
 
 // GetFindingsStatistics API operation for Amazon GuardDuty.
 //
-// Lists Amazon GuardDuty findings' statistics for the specified detector ID.
+// Lists Amazon GuardDuty findings statistics for the specified detector ID.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1725,12 +2873,13 @@ func (c *GuardDuty) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInp
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation GetFindingsStatistics for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatistics
 func (c *GuardDuty) GetFindingsStatistics(input *GetFindingsStatisticsInput) (*GetFindingsStatisticsOutput, error) {
@@ -1770,14 +2919,13 @@ const opGetIPSet = "GetIPSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetIPSetRequest method.
+//	req, resp := client.GetIPSetRequest(params)
 //
-//    // Example sending a request using the GetIPSetRequest method.
-//    req, resp := client.GetIPSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet
 func (c *GuardDuty) GetIPSetRequest(input *GetIPSetInput) (req *request.Request, output *GetIPSetOutput) {
@@ -1798,7 +2946,7 @@ func (c *GuardDuty) GetIPSetRequest(input *GetIPSetInput) (req *request.Request,
 
 // GetIPSet API operation for Amazon GuardDuty.
 //
-// Retrieves the IPSet specified by the IPSet ID.
+// Retrieves the IPSet specified by the ipSetId.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1807,12 +2955,13 @@ func (c *GuardDuty) GetIPSetRequest(input *GetIPSetInput) (req *request.Request,
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation GetIPSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet
 func (c *GuardDuty) GetIPSet(input *GetIPSetInput) (*GetIPSetOutput, error) {
@@ -1852,14 +3001,13 @@ const opGetInvitationsCount = "GetInvitationsCount"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetInvitationsCountRequest method.
+//	req, resp := client.GetInvitationsCountRequest(params)
 //
-//    // Example sending a request using the GetInvitationsCountRequest method.
-//    req, resp := client.GetInvitationsCountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCount
 func (c *GuardDuty) GetInvitationsCountRequest(input *GetInvitationsCountInput) (req *request.Request, output *GetInvitationsCountOutput) {
@@ -1890,12 +3038,13 @@ func (c *GuardDuty) GetInvitationsCountRequest(input *GetInvitationsCountInput) 
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation GetInvitationsCount for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCount
 func (c *GuardDuty) GetInvitationsCount(input *GetInvitationsCountInput) (*GetInvitationsCountOutput, error) {
@@ -1919,6 +3068,92 @@ func (c *GuardDuty) GetInvitationsCountWithContext(ctx aws.Context, input *GetIn
 	return out, req.Send()
 }
 
+const opGetMalwareScanSettings = "GetMalwareScanSettings"
+
+// GetMalwareScanSettingsRequest generates a "aws/request.Request" representing the
+// client's request for the GetMalwareScanSettings operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetMalwareScanSettings for more information on using the GetMalwareScanSettings
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetMalwareScanSettingsRequest method.
+//	req, resp := client.GetMalwareScanSettingsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanSettings
+func (c *GuardDuty) GetMalwareScanSettingsRequest(input *GetMalwareScanSettingsInput) (req *request.Request, output *GetMalwareScanSettingsOutput) {
+	op := &request.Operation{
+		Name:       opGetMalwareScanSettings,
+		HTTPMethod: "GET",
+		HTTPPath:   "/detector/{detectorId}/malware-scan-settings",
+	}
+
+	if input == nil {
+		input = &GetMalwareScanSettingsInput{}
+	}
+
+	output = &GetMalwareScanSettingsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetMalwareScanSettings API operation for Amazon GuardDuty.
+//
+// Returns the details of the malware scan settings.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation GetMalwareScanSettings for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanSettings
+func (c *GuardDuty) GetMalwareScanSettings(input *GetMalwareScanSettingsInput) (*GetMalwareScanSettingsOutput, error) {
+	req, out := c.GetMalwareScanSettingsRequest(input)
+	return out, req.Send()
+}
+
+// GetMalwareScanSettingsWithContext is the same as GetMalwareScanSettings with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetMalwareScanSettings for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) GetMalwareScanSettingsWithContext(ctx aws.Context, input *GetMalwareScanSettingsInput, opts ...request.Option) (*GetMalwareScanSettingsOutput, error) {
+	req, out := c.GetMalwareScanSettingsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opGetMasterAccount = "GetMasterAccount"
 
 // GetMasterAccountRequest generates a "aws/request.Request" representing the
@@ -1935,17 +3170,21 @@ const opGetMasterAccount = "GetMasterAccount"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetMasterAccountRequest method.
+//	req, resp := client.GetMasterAccountRequest(params)
 //
-//    // Example sending a request using the GetMasterAccountRequest method.
-//    req, resp := client.GetMasterAccountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccount
+//
+// Deprecated: This operation is deprecated, use GetAdministratorAccount instead
 func (c *GuardDuty) GetMasterAccountRequest(input *GetMasterAccountInput) (req *request.Request, output *GetMasterAccountOutput) {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetMasterAccount, has been deprecated")
+	}
 	op := &request.Operation{
 		Name:       opGetMasterAccount,
 		HTTPMethod: "GET",
@@ -1963,8 +3202,8 @@ func (c *GuardDuty) GetMasterAccountRequest(input *GetMasterAccountInput) (req *
 
 // GetMasterAccount API operation for Amazon GuardDuty.
 //
-// Provides the details for the GuardDuty master account to the current GuardDuty
-// member account.
+// Provides the details for the GuardDuty administrator account associated with
+// the current GuardDuty member account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1973,14 +3212,17 @@ func (c *GuardDuty) GetMasterAccountRequest(input *GetMasterAccountInput) (req *
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation GetMasterAccount for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccount
+//
+// Deprecated: This operation is deprecated, use GetAdministratorAccount instead
 func (c *GuardDuty) GetMasterAccount(input *GetMasterAccountInput) (*GetMasterAccountOutput, error) {
 	req, out := c.GetMasterAccountRequest(input)
 	return out, req.Send()
@@ -1995,8 +3237,96 @@ func (c *GuardDuty) GetMasterAccount(input *GetMasterAccountInput) (*GetMasterAc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
+//
+// Deprecated: This operation is deprecated, use GetAdministratorAccount instead
 func (c *GuardDuty) GetMasterAccountWithContext(ctx aws.Context, input *GetMasterAccountInput, opts ...request.Option) (*GetMasterAccountOutput, error) {
 	req, out := c.GetMasterAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetMemberDetectors = "GetMemberDetectors"
+
+// GetMemberDetectorsRequest generates a "aws/request.Request" representing the
+// client's request for the GetMemberDetectors operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetMemberDetectors for more information on using the GetMemberDetectors
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetMemberDetectorsRequest method.
+//	req, resp := client.GetMemberDetectorsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMemberDetectors
+func (c *GuardDuty) GetMemberDetectorsRequest(input *GetMemberDetectorsInput) (req *request.Request, output *GetMemberDetectorsOutput) {
+	op := &request.Operation{
+		Name:       opGetMemberDetectors,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/member/detector/get",
+	}
+
+	if input == nil {
+		input = &GetMemberDetectorsInput{}
+	}
+
+	output = &GetMemberDetectorsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetMemberDetectors API operation for Amazon GuardDuty.
+//
+// Describes which data sources are enabled for the member account's detector.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation GetMemberDetectors for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMemberDetectors
+func (c *GuardDuty) GetMemberDetectors(input *GetMemberDetectorsInput) (*GetMemberDetectorsOutput, error) {
+	req, out := c.GetMemberDetectorsRequest(input)
+	return out, req.Send()
+}
+
+// GetMemberDetectorsWithContext is the same as GetMemberDetectors with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetMemberDetectors for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) GetMemberDetectorsWithContext(ctx aws.Context, input *GetMemberDetectorsInput, opts ...request.Option) (*GetMemberDetectorsOutput, error) {
+	req, out := c.GetMemberDetectorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
@@ -2018,14 +3348,13 @@ const opGetMembers = "GetMembers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetMembersRequest method.
+//	req, resp := client.GetMembersRequest(params)
 //
-//    // Example sending a request using the GetMembersRequest method.
-//    req, resp := client.GetMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembers
 func (c *GuardDuty) GetMembersRequest(input *GetMembersInput) (req *request.Request, output *GetMembersOutput) {
@@ -2046,8 +3375,8 @@ func (c *GuardDuty) GetMembersRequest(input *GetMembersInput) (req *request.Requ
 
 // GetMembers API operation for Amazon GuardDuty.
 //
-// Retrieves GuardDuty member accounts (to the current GuardDuty master account)
-// specified by the account IDs.
+// Retrieves GuardDuty member accounts (of the current GuardDuty administrator
+// account) specified by the account IDs.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2056,12 +3385,13 @@ func (c *GuardDuty) GetMembersRequest(input *GetMembersInput) (req *request.Requ
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation GetMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembers
 func (c *GuardDuty) GetMembers(input *GetMembersInput) (*GetMembersOutput, error) {
@@ -2085,6 +3415,176 @@ func (c *GuardDuty) GetMembersWithContext(ctx aws.Context, input *GetMembersInpu
 	return out, req.Send()
 }
 
+const opGetOrganizationStatistics = "GetOrganizationStatistics"
+
+// GetOrganizationStatisticsRequest generates a "aws/request.Request" representing the
+// client's request for the GetOrganizationStatistics operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetOrganizationStatistics for more information on using the GetOrganizationStatistics
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetOrganizationStatisticsRequest method.
+//	req, resp := client.GetOrganizationStatisticsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetOrganizationStatistics
+func (c *GuardDuty) GetOrganizationStatisticsRequest(input *GetOrganizationStatisticsInput) (req *request.Request, output *GetOrganizationStatisticsOutput) {
+	op := &request.Operation{
+		Name:       opGetOrganizationStatistics,
+		HTTPMethod: "GET",
+		HTTPPath:   "/organization/statistics",
+	}
+
+	if input == nil {
+		input = &GetOrganizationStatisticsInput{}
+	}
+
+	output = &GetOrganizationStatisticsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetOrganizationStatistics API operation for Amazon GuardDuty.
+//
+// Retrieves how many active member accounts in your Amazon Web Services organization
+// have each feature enabled within GuardDuty. Only a delegated GuardDuty administrator
+// of an organization can run this API.
+//
+// When you create a new Amazon Web Services organization, it might take up
+// to 24 hours to generate the statistics for the entire organization.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation GetOrganizationStatistics for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetOrganizationStatistics
+func (c *GuardDuty) GetOrganizationStatistics(input *GetOrganizationStatisticsInput) (*GetOrganizationStatisticsOutput, error) {
+	req, out := c.GetOrganizationStatisticsRequest(input)
+	return out, req.Send()
+}
+
+// GetOrganizationStatisticsWithContext is the same as GetOrganizationStatistics with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetOrganizationStatistics for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) GetOrganizationStatisticsWithContext(ctx aws.Context, input *GetOrganizationStatisticsInput, opts ...request.Option) (*GetOrganizationStatisticsOutput, error) {
+	req, out := c.GetOrganizationStatisticsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetRemainingFreeTrialDays = "GetRemainingFreeTrialDays"
+
+// GetRemainingFreeTrialDaysRequest generates a "aws/request.Request" representing the
+// client's request for the GetRemainingFreeTrialDays operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetRemainingFreeTrialDays for more information on using the GetRemainingFreeTrialDays
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetRemainingFreeTrialDaysRequest method.
+//	req, resp := client.GetRemainingFreeTrialDaysRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetRemainingFreeTrialDays
+func (c *GuardDuty) GetRemainingFreeTrialDaysRequest(input *GetRemainingFreeTrialDaysInput) (req *request.Request, output *GetRemainingFreeTrialDaysOutput) {
+	op := &request.Operation{
+		Name:       opGetRemainingFreeTrialDays,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/freeTrial/daysRemaining",
+	}
+
+	if input == nil {
+		input = &GetRemainingFreeTrialDaysInput{}
+	}
+
+	output = &GetRemainingFreeTrialDaysOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetRemainingFreeTrialDays API operation for Amazon GuardDuty.
+//
+// Provides the number of days left for each data source used in the free trial
+// period.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation GetRemainingFreeTrialDays for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetRemainingFreeTrialDays
+func (c *GuardDuty) GetRemainingFreeTrialDays(input *GetRemainingFreeTrialDaysInput) (*GetRemainingFreeTrialDaysOutput, error) {
+	req, out := c.GetRemainingFreeTrialDaysRequest(input)
+	return out, req.Send()
+}
+
+// GetRemainingFreeTrialDaysWithContext is the same as GetRemainingFreeTrialDays with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetRemainingFreeTrialDays for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) GetRemainingFreeTrialDaysWithContext(ctx aws.Context, input *GetRemainingFreeTrialDaysInput, opts ...request.Option) (*GetRemainingFreeTrialDaysOutput, error) {
+	req, out := c.GetRemainingFreeTrialDaysRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opGetThreatIntelSet = "GetThreatIntelSet"
 
 // GetThreatIntelSetRequest generates a "aws/request.Request" representing the
@@ -2101,14 +3601,13 @@ const opGetThreatIntelSet = "GetThreatIntelSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetThreatIntelSetRequest method.
+//	req, resp := client.GetThreatIntelSetRequest(params)
 //
-//    // Example sending a request using the GetThreatIntelSetRequest method.
-//    req, resp := client.GetThreatIntelSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet
 func (c *GuardDuty) GetThreatIntelSetRequest(input *GetThreatIntelSetInput) (req *request.Request, output *GetThreatIntelSetOutput) {
@@ -2138,12 +3637,13 @@ func (c *GuardDuty) GetThreatIntelSetRequest(input *GetThreatIntelSetInput) (req
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation GetThreatIntelSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet
 func (c *GuardDuty) GetThreatIntelSet(input *GetThreatIntelSetInput) (*GetThreatIntelSetOutput, error) {
@@ -2167,6 +3667,150 @@ func (c *GuardDuty) GetThreatIntelSetWithContext(ctx aws.Context, input *GetThre
 	return out, req.Send()
 }
 
+const opGetUsageStatistics = "GetUsageStatistics"
+
+// GetUsageStatisticsRequest generates a "aws/request.Request" representing the
+// client's request for the GetUsageStatistics operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetUsageStatistics for more information on using the GetUsageStatistics
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetUsageStatisticsRequest method.
+//	req, resp := client.GetUsageStatisticsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetUsageStatistics
+func (c *GuardDuty) GetUsageStatisticsRequest(input *GetUsageStatisticsInput) (req *request.Request, output *GetUsageStatisticsOutput) {
+	op := &request.Operation{
+		Name:       opGetUsageStatistics,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/usage/statistics",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &GetUsageStatisticsInput{}
+	}
+
+	output = &GetUsageStatisticsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetUsageStatistics API operation for Amazon GuardDuty.
+//
+// Lists Amazon GuardDuty usage statistics over the last 30 days for the specified
+// detector ID. For newly enabled detectors or data sources, the cost returned
+// will include only the usage so far under 30 days. This may differ from the
+// cost metrics in the console, which project usage over 30 days to provide
+// a monthly cost estimate. For more information, see Understanding How Usage
+// Costs are Calculated (https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation GetUsageStatistics for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetUsageStatistics
+func (c *GuardDuty) GetUsageStatistics(input *GetUsageStatisticsInput) (*GetUsageStatisticsOutput, error) {
+	req, out := c.GetUsageStatisticsRequest(input)
+	return out, req.Send()
+}
+
+// GetUsageStatisticsWithContext is the same as GetUsageStatistics with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetUsageStatistics for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) GetUsageStatisticsWithContext(ctx aws.Context, input *GetUsageStatisticsInput, opts ...request.Option) (*GetUsageStatisticsOutput, error) {
+	req, out := c.GetUsageStatisticsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// GetUsageStatisticsPages iterates over the pages of a GetUsageStatistics operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See GetUsageStatistics method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a GetUsageStatistics operation.
+//	pageNum := 0
+//	err := client.GetUsageStatisticsPages(params,
+//	    func(page *guardduty.GetUsageStatisticsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *GuardDuty) GetUsageStatisticsPages(input *GetUsageStatisticsInput, fn func(*GetUsageStatisticsOutput, bool) bool) error {
+	return c.GetUsageStatisticsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// GetUsageStatisticsPagesWithContext same as GetUsageStatisticsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) GetUsageStatisticsPagesWithContext(ctx aws.Context, input *GetUsageStatisticsInput, fn func(*GetUsageStatisticsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *GetUsageStatisticsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.GetUsageStatisticsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*GetUsageStatisticsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opInviteMembers = "InviteMembers"
 
 // InviteMembersRequest generates a "aws/request.Request" representing the
@@ -2183,14 +3827,13 @@ const opInviteMembers = "InviteMembers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the InviteMembersRequest method.
+//	req, resp := client.InviteMembersRequest(params)
 //
-//    // Example sending a request using the InviteMembersRequest method.
-//    req, resp := client.InviteMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembers
 func (c *GuardDuty) InviteMembersRequest(input *InviteMembersInput) (req *request.Request, output *InviteMembersOutput) {
@@ -2211,10 +3854,29 @@ func (c *GuardDuty) InviteMembersRequest(input *InviteMembersInput) (req *reques
 
 // InviteMembers API operation for Amazon GuardDuty.
 //
-// Invites other AWS accounts (created as members of the current AWS account
-// by CreateMembers) to enable GuardDuty and allow the current AWS account to
-// view and manage these accounts' GuardDuty findings on their behalf as the
-// master account.
+// Invites Amazon Web Services accounts to become members of an organization
+// administered by the Amazon Web Services account that invokes this API. If
+// you are using Amazon Web Services Organizations to manage your GuardDuty
+// environment, this step is not needed. For more information, see Managing
+// accounts with organizations (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html).
+//
+// To invite Amazon Web Services accounts, the first step is to ensure that
+// GuardDuty has been enabled in the potential member accounts. You can now
+// invoke this API to add accounts by invitation. The invited accounts can either
+// accept or decline the invitation from their GuardDuty accounts. Each invited
+// Amazon Web Services account can choose to accept the invitation from only
+// one Amazon Web Services account. For more information, see Managing GuardDuty
+// accounts by invitation (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html).
+//
+// After the invite has been accepted and you choose to disassociate a member
+// account (by using DisassociateMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html))
+// from your account, the details of the member account obtained by invoking
+// CreateMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html),
+// including the associated email addresses, will be retained. This is done
+// so that you can invoke InviteMembers without the need to invoke CreateMembers
+// (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
+// again. To remove the details associated with a member account, you must also
+// invoke DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2223,12 +3885,13 @@ func (c *GuardDuty) InviteMembersRequest(input *InviteMembersInput) (req *reques
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation InviteMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembers
 func (c *GuardDuty) InviteMembers(input *InviteMembersInput) (*InviteMembersOutput, error) {
@@ -2252,6 +3915,150 @@ func (c *GuardDuty) InviteMembersWithContext(ctx aws.Context, input *InviteMembe
 	return out, req.Send()
 }
 
+const opListCoverage = "ListCoverage"
+
+// ListCoverageRequest generates a "aws/request.Request" representing the
+// client's request for the ListCoverage operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListCoverage for more information on using the ListCoverage
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListCoverageRequest method.
+//	req, resp := client.ListCoverageRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCoverage
+func (c *GuardDuty) ListCoverageRequest(input *ListCoverageInput) (req *request.Request, output *ListCoverageOutput) {
+	op := &request.Operation{
+		Name:       opListCoverage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/coverage",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListCoverageInput{}
+	}
+
+	output = &ListCoverageOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListCoverage API operation for Amazon GuardDuty.
+//
+// Lists coverage details for your GuardDuty account. If you're a GuardDuty
+// administrator, you can retrieve all resources associated with the active
+// member accounts in your organization.
+//
+// Make sure the accounts have Runtime Monitoring enabled and GuardDuty agent
+// running on their resources.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation ListCoverage for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCoverage
+func (c *GuardDuty) ListCoverage(input *ListCoverageInput) (*ListCoverageOutput, error) {
+	req, out := c.ListCoverageRequest(input)
+	return out, req.Send()
+}
+
+// ListCoverageWithContext is the same as ListCoverage with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListCoverage for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) ListCoverageWithContext(ctx aws.Context, input *ListCoverageInput, opts ...request.Option) (*ListCoverageOutput, error) {
+	req, out := c.ListCoverageRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListCoveragePages iterates over the pages of a ListCoverage operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListCoverage method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListCoverage operation.
+//	pageNum := 0
+//	err := client.ListCoveragePages(params,
+//	    func(page *guardduty.ListCoverageOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *GuardDuty) ListCoveragePages(input *ListCoverageInput, fn func(*ListCoverageOutput, bool) bool) error {
+	return c.ListCoveragePagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListCoveragePagesWithContext same as ListCoveragePages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) ListCoveragePagesWithContext(ctx aws.Context, input *ListCoverageInput, fn func(*ListCoverageOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListCoverageInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListCoverageRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListCoverageOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListDetectors = "ListDetectors"
 
 // ListDetectorsRequest generates a "aws/request.Request" representing the
@@ -2268,14 +4075,13 @@ const opListDetectors = "ListDetectors"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDetectorsRequest method.
+//	req, resp := client.ListDetectorsRequest(params)
 //
-//    // Example sending a request using the ListDetectorsRequest method.
-//    req, resp := client.ListDetectorsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectors
 func (c *GuardDuty) ListDetectorsRequest(input *ListDetectorsInput) (req *request.Request, output *ListDetectorsOutput) {
@@ -2311,12 +4117,13 @@ func (c *GuardDuty) ListDetectorsRequest(input *ListDetectorsInput) (req *reques
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation ListDetectors for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectors
 func (c *GuardDuty) ListDetectors(input *ListDetectorsInput) (*ListDetectorsOutput, error) {
@@ -2348,15 +4155,14 @@ func (c *GuardDuty) ListDetectorsWithContext(ctx aws.Context, input *ListDetecto
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDetectors operation.
-//    pageNum := 0
-//    err := client.ListDetectorsPages(params,
-//        func(page *ListDetectorsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDetectors operation.
+//	pageNum := 0
+//	err := client.ListDetectorsPages(params,
+//	    func(page *guardduty.ListDetectorsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *GuardDuty) ListDetectorsPages(input *ListDetectorsInput, fn func(*ListDetectorsOutput, bool) bool) error {
 	return c.ListDetectorsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2383,10 +4189,12 @@ func (c *GuardDuty) ListDetectorsPagesWithContext(ctx aws.Context, input *ListDe
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDetectorsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDetectorsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2406,14 +4214,13 @@ const opListFilters = "ListFilters"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListFiltersRequest method.
+//	req, resp := client.ListFiltersRequest(params)
 //
-//    // Example sending a request using the ListFiltersRequest method.
-//    req, resp := client.ListFiltersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFilters
 func (c *GuardDuty) ListFiltersRequest(input *ListFiltersInput) (req *request.Request, output *ListFiltersOutput) {
@@ -2449,12 +4256,13 @@ func (c *GuardDuty) ListFiltersRequest(input *ListFiltersInput) (req *request.Re
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation ListFilters for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFilters
 func (c *GuardDuty) ListFilters(input *ListFiltersInput) (*ListFiltersOutput, error) {
@@ -2486,15 +4294,14 @@ func (c *GuardDuty) ListFiltersWithContext(ctx aws.Context, input *ListFiltersIn
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListFilters operation.
-//    pageNum := 0
-//    err := client.ListFiltersPages(params,
-//        func(page *ListFiltersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListFilters operation.
+//	pageNum := 0
+//	err := client.ListFiltersPages(params,
+//	    func(page *guardduty.ListFiltersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *GuardDuty) ListFiltersPages(input *ListFiltersInput, fn func(*ListFiltersOutput, bool) bool) error {
 	return c.ListFiltersPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2521,10 +4328,12 @@ func (c *GuardDuty) ListFiltersPagesWithContext(ctx aws.Context, input *ListFilt
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFiltersOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListFiltersOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2544,14 +4353,13 @@ const opListFindings = "ListFindings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListFindingsRequest method.
+//	req, resp := client.ListFindingsRequest(params)
 //
-//    // Example sending a request using the ListFindingsRequest method.
-//    req, resp := client.ListFindingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindings
 func (c *GuardDuty) ListFindingsRequest(input *ListFindingsInput) (req *request.Request, output *ListFindingsOutput) {
@@ -2587,12 +4395,13 @@ func (c *GuardDuty) ListFindingsRequest(input *ListFindingsInput) (req *request.
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation ListFindings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindings
 func (c *GuardDuty) ListFindings(input *ListFindingsInput) (*ListFindingsOutput, error) {
@@ -2624,15 +4433,14 @@ func (c *GuardDuty) ListFindingsWithContext(ctx aws.Context, input *ListFindings
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListFindings operation.
-//    pageNum := 0
-//    err := client.ListFindingsPages(params,
-//        func(page *ListFindingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListFindings operation.
+//	pageNum := 0
+//	err := client.ListFindingsPages(params,
+//	    func(page *guardduty.ListFindingsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *GuardDuty) ListFindingsPages(input *ListFindingsInput, fn func(*ListFindingsOutput, bool) bool) error {
 	return c.ListFindingsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2659,10 +4467,12 @@ func (c *GuardDuty) ListFindingsPagesWithContext(ctx aws.Context, input *ListFin
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFindingsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListFindingsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2682,14 +4492,13 @@ const opListIPSets = "ListIPSets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListIPSetsRequest method.
+//	req, resp := client.ListIPSetsRequest(params)
 //
-//    // Example sending a request using the ListIPSetsRequest method.
-//    req, resp := client.ListIPSetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSets
 func (c *GuardDuty) ListIPSetsRequest(input *ListIPSetsInput) (req *request.Request, output *ListIPSetsOutput) {
@@ -2716,7 +4525,9 @@ func (c *GuardDuty) ListIPSetsRequest(input *ListIPSetsInput) (req *request.Requ
 
 // ListIPSets API operation for Amazon GuardDuty.
 //
-// Lists the IPSets of the GuardDuty service specified by the detector ID.
+// Lists the IPSets of the GuardDuty service specified by the detector ID. If
+// you use this operation from a member account, the IPSets returned are the
+// IPSets from the associated administrator account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2725,12 +4536,13 @@ func (c *GuardDuty) ListIPSetsRequest(input *ListIPSetsInput) (req *request.Requ
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation ListIPSets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSets
 func (c *GuardDuty) ListIPSets(input *ListIPSetsInput) (*ListIPSetsOutput, error) {
@@ -2762,15 +4574,14 @@ func (c *GuardDuty) ListIPSetsWithContext(ctx aws.Context, input *ListIPSetsInpu
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListIPSets operation.
-//    pageNum := 0
-//    err := client.ListIPSetsPages(params,
-//        func(page *ListIPSetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListIPSets operation.
+//	pageNum := 0
+//	err := client.ListIPSetsPages(params,
+//	    func(page *guardduty.ListIPSetsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *GuardDuty) ListIPSetsPages(input *ListIPSetsInput, fn func(*ListIPSetsOutput, bool) bool) error {
 	return c.ListIPSetsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2797,10 +4608,12 @@ func (c *GuardDuty) ListIPSetsPagesWithContext(ctx aws.Context, input *ListIPSet
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListIPSetsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListIPSetsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2820,14 +4633,13 @@ const opListInvitations = "ListInvitations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListInvitationsRequest method.
+//	req, resp := client.ListInvitationsRequest(params)
 //
-//    // Example sending a request using the ListInvitationsRequest method.
-//    req, resp := client.ListInvitationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitations
 func (c *GuardDuty) ListInvitationsRequest(input *ListInvitationsInput) (req *request.Request, output *ListInvitationsOutput) {
@@ -2855,7 +4667,7 @@ func (c *GuardDuty) ListInvitationsRequest(input *ListInvitationsInput) (req *re
 // ListInvitations API operation for Amazon GuardDuty.
 //
 // Lists all GuardDuty membership invitations that were sent to the current
-// AWS account.
+// Amazon Web Services account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2864,12 +4676,13 @@ func (c *GuardDuty) ListInvitationsRequest(input *ListInvitationsInput) (req *re
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation ListInvitations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitations
 func (c *GuardDuty) ListInvitations(input *ListInvitationsInput) (*ListInvitationsOutput, error) {
@@ -2901,15 +4714,14 @@ func (c *GuardDuty) ListInvitationsWithContext(ctx aws.Context, input *ListInvit
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListInvitations operation.
-//    pageNum := 0
-//    err := client.ListInvitationsPages(params,
-//        func(page *ListInvitationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListInvitations operation.
+//	pageNum := 0
+//	err := client.ListInvitationsPages(params,
+//	    func(page *guardduty.ListInvitationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *GuardDuty) ListInvitationsPages(input *ListInvitationsInput, fn func(*ListInvitationsOutput, bool) bool) error {
 	return c.ListInvitationsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2936,10 +4748,12 @@ func (c *GuardDuty) ListInvitationsPagesWithContext(ctx aws.Context, input *List
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInvitationsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListInvitationsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2959,14 +4773,13 @@ const opListMembers = "ListMembers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListMembersRequest method.
+//	req, resp := client.ListMembersRequest(params)
 //
-//    // Example sending a request using the ListMembersRequest method.
-//    req, resp := client.ListMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembers
 func (c *GuardDuty) ListMembersRequest(input *ListMembersInput) (req *request.Request, output *ListMembersOutput) {
@@ -2993,7 +4806,7 @@ func (c *GuardDuty) ListMembersRequest(input *ListMembersInput) (req *request.Re
 
 // ListMembers API operation for Amazon GuardDuty.
 //
-// Lists details about all member accounts for the current GuardDuty master
+// Lists details about all member accounts for the current GuardDuty administrator
 // account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3003,12 +4816,13 @@ func (c *GuardDuty) ListMembersRequest(input *ListMembersInput) (req *request.Re
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation ListMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembers
 func (c *GuardDuty) ListMembers(input *ListMembersInput) (*ListMembersOutput, error) {
@@ -3040,15 +4854,14 @@ func (c *GuardDuty) ListMembersWithContext(ctx aws.Context, input *ListMembersIn
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListMembers operation.
-//    pageNum := 0
-//    err := client.ListMembersPages(params,
-//        func(page *ListMembersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListMembers operation.
+//	pageNum := 0
+//	err := client.ListMembersPages(params,
+//	    func(page *guardduty.ListMembersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *GuardDuty) ListMembersPages(input *ListMembersInput, fn func(*ListMembersOutput, bool) bool) error {
 	return c.ListMembersPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3075,11 +4888,380 @@ func (c *GuardDuty) ListMembersPagesWithContext(ctx aws.Context, input *ListMemb
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListMembersOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListMembersOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
+}
+
+const opListOrganizationAdminAccounts = "ListOrganizationAdminAccounts"
+
+// ListOrganizationAdminAccountsRequest generates a "aws/request.Request" representing the
+// client's request for the ListOrganizationAdminAccounts operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListOrganizationAdminAccounts for more information on using the ListOrganizationAdminAccounts
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListOrganizationAdminAccountsRequest method.
+//	req, resp := client.ListOrganizationAdminAccountsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListOrganizationAdminAccounts
+func (c *GuardDuty) ListOrganizationAdminAccountsRequest(input *ListOrganizationAdminAccountsInput) (req *request.Request, output *ListOrganizationAdminAccountsOutput) {
+	op := &request.Operation{
+		Name:       opListOrganizationAdminAccounts,
+		HTTPMethod: "GET",
+		HTTPPath:   "/admin",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListOrganizationAdminAccountsInput{}
+	}
+
+	output = &ListOrganizationAdminAccountsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListOrganizationAdminAccounts API operation for Amazon GuardDuty.
+//
+// Lists the accounts designated as GuardDuty delegated administrators. Only
+// the organization's management account can run this API operation.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation ListOrganizationAdminAccounts for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListOrganizationAdminAccounts
+func (c *GuardDuty) ListOrganizationAdminAccounts(input *ListOrganizationAdminAccountsInput) (*ListOrganizationAdminAccountsOutput, error) {
+	req, out := c.ListOrganizationAdminAccountsRequest(input)
+	return out, req.Send()
+}
+
+// ListOrganizationAdminAccountsWithContext is the same as ListOrganizationAdminAccounts with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListOrganizationAdminAccounts for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) ListOrganizationAdminAccountsWithContext(ctx aws.Context, input *ListOrganizationAdminAccountsInput, opts ...request.Option) (*ListOrganizationAdminAccountsOutput, error) {
+	req, out := c.ListOrganizationAdminAccountsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListOrganizationAdminAccountsPages iterates over the pages of a ListOrganizationAdminAccounts operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListOrganizationAdminAccounts method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListOrganizationAdminAccounts operation.
+//	pageNum := 0
+//	err := client.ListOrganizationAdminAccountsPages(params,
+//	    func(page *guardduty.ListOrganizationAdminAccountsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *GuardDuty) ListOrganizationAdminAccountsPages(input *ListOrganizationAdminAccountsInput, fn func(*ListOrganizationAdminAccountsOutput, bool) bool) error {
+	return c.ListOrganizationAdminAccountsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListOrganizationAdminAccountsPagesWithContext same as ListOrganizationAdminAccountsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) ListOrganizationAdminAccountsPagesWithContext(ctx aws.Context, input *ListOrganizationAdminAccountsInput, fn func(*ListOrganizationAdminAccountsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListOrganizationAdminAccountsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListOrganizationAdminAccountsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListOrganizationAdminAccountsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListPublishingDestinations = "ListPublishingDestinations"
+
+// ListPublishingDestinationsRequest generates a "aws/request.Request" representing the
+// client's request for the ListPublishingDestinations operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListPublishingDestinations for more information on using the ListPublishingDestinations
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListPublishingDestinationsRequest method.
+//	req, resp := client.ListPublishingDestinationsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListPublishingDestinations
+func (c *GuardDuty) ListPublishingDestinationsRequest(input *ListPublishingDestinationsInput) (req *request.Request, output *ListPublishingDestinationsOutput) {
+	op := &request.Operation{
+		Name:       opListPublishingDestinations,
+		HTTPMethod: "GET",
+		HTTPPath:   "/detector/{detectorId}/publishingDestination",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListPublishingDestinationsInput{}
+	}
+
+	output = &ListPublishingDestinationsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListPublishingDestinations API operation for Amazon GuardDuty.
+//
+// Returns a list of publishing destinations associated with the specified detectorId.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation ListPublishingDestinations for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListPublishingDestinations
+func (c *GuardDuty) ListPublishingDestinations(input *ListPublishingDestinationsInput) (*ListPublishingDestinationsOutput, error) {
+	req, out := c.ListPublishingDestinationsRequest(input)
+	return out, req.Send()
+}
+
+// ListPublishingDestinationsWithContext is the same as ListPublishingDestinations with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListPublishingDestinations for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) ListPublishingDestinationsWithContext(ctx aws.Context, input *ListPublishingDestinationsInput, opts ...request.Option) (*ListPublishingDestinationsOutput, error) {
+	req, out := c.ListPublishingDestinationsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListPublishingDestinationsPages iterates over the pages of a ListPublishingDestinations operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListPublishingDestinations method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListPublishingDestinations operation.
+//	pageNum := 0
+//	err := client.ListPublishingDestinationsPages(params,
+//	    func(page *guardduty.ListPublishingDestinationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *GuardDuty) ListPublishingDestinationsPages(input *ListPublishingDestinationsInput, fn func(*ListPublishingDestinationsOutput, bool) bool) error {
+	return c.ListPublishingDestinationsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListPublishingDestinationsPagesWithContext same as ListPublishingDestinationsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) ListPublishingDestinationsPagesWithContext(ctx aws.Context, input *ListPublishingDestinationsInput, fn func(*ListPublishingDestinationsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListPublishingDestinationsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListPublishingDestinationsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListPublishingDestinationsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// client's request for the ListTagsForResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListTagsForResource for more information on using the ListTagsForResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListTagsForResource
+func (c *GuardDuty) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
+	op := &request.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "GET",
+		HTTPPath:   "/tags/{resourceArn}",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output = &ListTagsForResourceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListTagsForResource API operation for Amazon GuardDuty.
+//
+// Lists tags for a resource. Tagging is currently supported for detectors,
+// finding filters, IP sets, threat intel sets, and publishing destination,
+// with a limit of 50 tags per resource. When invoked, this operation returns
+// all assigned tags for a given resource.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation ListTagsForResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - AccessDeniedException
+//     An access denied exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListTagsForResource
+func (c *GuardDuty) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	return out, req.Send()
+}
+
+// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListTagsForResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
 }
 
 const opListThreatIntelSets = "ListThreatIntelSets"
@@ -3098,14 +5280,13 @@ const opListThreatIntelSets = "ListThreatIntelSets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListThreatIntelSetsRequest method.
+//	req, resp := client.ListThreatIntelSetsRequest(params)
 //
-//    // Example sending a request using the ListThreatIntelSetsRequest method.
-//    req, resp := client.ListThreatIntelSetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSets
 func (c *GuardDuty) ListThreatIntelSetsRequest(input *ListThreatIntelSetsInput) (req *request.Request, output *ListThreatIntelSetsOutput) {
@@ -3133,7 +5314,8 @@ func (c *GuardDuty) ListThreatIntelSetsRequest(input *ListThreatIntelSetsInput) 
 // ListThreatIntelSets API operation for Amazon GuardDuty.
 //
 // Lists the ThreatIntelSets of the GuardDuty service specified by the detector
-// ID.
+// ID. If you use this operation from a member account, the ThreatIntelSets
+// associated with the administrator account are returned.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3142,12 +5324,13 @@ func (c *GuardDuty) ListThreatIntelSetsRequest(input *ListThreatIntelSetsInput) 
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation ListThreatIntelSets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSets
 func (c *GuardDuty) ListThreatIntelSets(input *ListThreatIntelSetsInput) (*ListThreatIntelSetsOutput, error) {
@@ -3179,15 +5362,14 @@ func (c *GuardDuty) ListThreatIntelSetsWithContext(ctx aws.Context, input *ListT
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListThreatIntelSets operation.
-//    pageNum := 0
-//    err := client.ListThreatIntelSetsPages(params,
-//        func(page *ListThreatIntelSetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListThreatIntelSets operation.
+//	pageNum := 0
+//	err := client.ListThreatIntelSetsPages(params,
+//	    func(page *guardduty.ListThreatIntelSetsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *GuardDuty) ListThreatIntelSetsPages(input *ListThreatIntelSetsInput, fn func(*ListThreatIntelSetsOutput, bool) bool) error {
 	return c.ListThreatIntelSetsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3214,11 +5396,100 @@ func (c *GuardDuty) ListThreatIntelSetsPagesWithContext(ctx aws.Context, input *
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListThreatIntelSetsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListThreatIntelSetsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
+}
+
+const opStartMalwareScan = "StartMalwareScan"
+
+// StartMalwareScanRequest generates a "aws/request.Request" representing the
+// client's request for the StartMalwareScan operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See StartMalwareScan for more information on using the StartMalwareScan
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the StartMalwareScanRequest method.
+//	req, resp := client.StartMalwareScanRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMalwareScan
+func (c *GuardDuty) StartMalwareScanRequest(input *StartMalwareScanInput) (req *request.Request, output *StartMalwareScanOutput) {
+	op := &request.Operation{
+		Name:       opStartMalwareScan,
+		HTTPMethod: "POST",
+		HTTPPath:   "/malware-scan/start",
+	}
+
+	if input == nil {
+		input = &StartMalwareScanInput{}
+	}
+
+	output = &StartMalwareScanOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// StartMalwareScan API operation for Amazon GuardDuty.
+//
+// Initiates the malware scan. Invoking this API will automatically create the
+// Service-linked role (https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html)
+// in the corresponding account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation StartMalwareScan for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - ConflictException
+//     A request conflict exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMalwareScan
+func (c *GuardDuty) StartMalwareScan(input *StartMalwareScanInput) (*StartMalwareScanOutput, error) {
+	req, out := c.StartMalwareScanRequest(input)
+	return out, req.Send()
+}
+
+// StartMalwareScanWithContext is the same as StartMalwareScan with the addition of
+// the ability to pass a context and additional request options.
+//
+// See StartMalwareScan for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) StartMalwareScanWithContext(ctx aws.Context, input *StartMalwareScanInput, opts ...request.Option) (*StartMalwareScanOutput, error) {
+	req, out := c.StartMalwareScanRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
 }
 
 const opStartMonitoringMembers = "StartMonitoringMembers"
@@ -3237,14 +5508,13 @@ const opStartMonitoringMembers = "StartMonitoringMembers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartMonitoringMembersRequest method.
+//	req, resp := client.StartMonitoringMembersRequest(params)
 //
-//    // Example sending a request using the StartMonitoringMembersRequest method.
-//    req, resp := client.StartMonitoringMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembers
 func (c *GuardDuty) StartMonitoringMembersRequest(input *StartMonitoringMembersInput) (req *request.Request, output *StartMonitoringMembersOutput) {
@@ -3265,9 +5535,10 @@ func (c *GuardDuty) StartMonitoringMembersRequest(input *StartMonitoringMembersI
 
 // StartMonitoringMembers API operation for Amazon GuardDuty.
 //
-// Re-enables GuardDuty to monitor findings of the member accounts specified
-// by the account IDs. A master GuardDuty account can run this command after
-// disabling GuardDuty from monitoring these members' findings by running StopMonitoringMembers.
+// Turns on GuardDuty monitoring of the specified member accounts. Use this
+// operation to restart monitoring of accounts that you stopped monitoring with
+// the StopMonitoringMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_StopMonitoringMembers.html)
+// operation.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3276,12 +5547,13 @@ func (c *GuardDuty) StartMonitoringMembersRequest(input *StartMonitoringMembersI
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation StartMonitoringMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembers
 func (c *GuardDuty) StartMonitoringMembers(input *StartMonitoringMembersInput) (*StartMonitoringMembersOutput, error) {
@@ -3321,14 +5593,13 @@ const opStopMonitoringMembers = "StopMonitoringMembers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StopMonitoringMembersRequest method.
+//	req, resp := client.StopMonitoringMembersRequest(params)
 //
-//    // Example sending a request using the StopMonitoringMembersRequest method.
-//    req, resp := client.StopMonitoringMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembers
 func (c *GuardDuty) StopMonitoringMembersRequest(input *StopMonitoringMembersInput) (req *request.Request, output *StopMonitoringMembersOutput) {
@@ -3349,10 +5620,12 @@ func (c *GuardDuty) StopMonitoringMembersRequest(input *StopMonitoringMembersInp
 
 // StopMonitoringMembers API operation for Amazon GuardDuty.
 //
-// Disables GuardDuty from monitoring findings of the member accounts specified
-// by the account IDs. After running this command, a master GuardDuty account
-// can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’
-// findings.
+// Stops GuardDuty monitoring for the specified member accounts. Use the StartMonitoringMembers
+// operation to restart monitoring for those accounts.
+//
+// With autoEnableOrganizationMembers configuration for your organization set
+// to ALL, you'll receive an error if you attempt to stop monitoring the member
+// accounts in your organization.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3361,12 +5634,13 @@ func (c *GuardDuty) StopMonitoringMembersRequest(input *StopMonitoringMembersInp
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation StopMonitoringMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembers
 func (c *GuardDuty) StopMonitoringMembers(input *StopMonitoringMembersInput) (*StopMonitoringMembersOutput, error) {
@@ -3390,6 +5664,92 @@ func (c *GuardDuty) StopMonitoringMembersWithContext(ctx aws.Context, input *Sto
 	return out, req.Send()
 }
 
+const opTagResource = "TagResource"
+
+// TagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the TagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See TagResource for more information on using the TagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the TagResourceRequest method.
+//	req, resp := client.TagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TagResource
+func (c *GuardDuty) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
+	op := &request.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/tags/{resourceArn}",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output = &TagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// TagResource API operation for Amazon GuardDuty.
+//
+// Adds tags to a resource.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation TagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - AccessDeniedException
+//     An access denied exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TagResource
+func (c *GuardDuty) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	return out, req.Send()
+}
+
+// TagResourceWithContext is the same as TagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See TagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUnarchiveFindings = "UnarchiveFindings"
 
 // UnarchiveFindingsRequest generates a "aws/request.Request" representing the
@@ -3406,14 +5766,13 @@ const opUnarchiveFindings = "UnarchiveFindings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UnarchiveFindingsRequest method.
+//	req, resp := client.UnarchiveFindingsRequest(params)
 //
-//    // Example sending a request using the UnarchiveFindingsRequest method.
-//    req, resp := client.UnarchiveFindingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindings
 func (c *GuardDuty) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) (req *request.Request, output *UnarchiveFindingsOutput) {
@@ -3435,7 +5794,7 @@ func (c *GuardDuty) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) (req
 
 // UnarchiveFindings API operation for Amazon GuardDuty.
 //
-// Unarchives Amazon GuardDuty findings specified by the list of finding IDs.
+// Unarchives GuardDuty findings specified by the findingIds.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3444,12 +5803,13 @@ func (c *GuardDuty) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) (req
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation UnarchiveFindings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindings
 func (c *GuardDuty) UnarchiveFindings(input *UnarchiveFindingsInput) (*UnarchiveFindingsOutput, error) {
@@ -3473,6 +5833,92 @@ func (c *GuardDuty) UnarchiveFindingsWithContext(ctx aws.Context, input *Unarchi
 	return out, req.Send()
 }
 
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the UntagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UntagResource for more information on using the UntagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UntagResourceRequest method.
+//	req, resp := client.UntagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UntagResource
+func (c *GuardDuty) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
+	op := &request.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/tags/{resourceArn}",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output = &UntagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UntagResource API operation for Amazon GuardDuty.
+//
+// Removes tags from a resource.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation UntagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - AccessDeniedException
+//     An access denied exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UntagResource
+func (c *GuardDuty) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	return out, req.Send()
+}
+
+// UntagResourceWithContext is the same as UntagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UntagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateDetector = "UpdateDetector"
 
 // UpdateDetectorRequest generates a "aws/request.Request" representing the
@@ -3489,14 +5935,13 @@ const opUpdateDetector = "UpdateDetector"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDetectorRequest method.
+//	req, resp := client.UpdateDetectorRequest(params)
 //
-//    // Example sending a request using the UpdateDetectorRequest method.
-//    req, resp := client.UpdateDetectorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector
 func (c *GuardDuty) UpdateDetectorRequest(input *UpdateDetectorInput) (req *request.Request, output *UpdateDetectorOutput) {
@@ -3518,7 +5963,11 @@ func (c *GuardDuty) UpdateDetectorRequest(input *UpdateDetectorInput) (req *requ
 
 // UpdateDetector API operation for Amazon GuardDuty.
 //
-// Updates an Amazon GuardDuty detector specified by the detectorId.
+// Updates the Amazon GuardDuty detector specified by the detectorId.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3527,12 +5976,13 @@ func (c *GuardDuty) UpdateDetectorRequest(input *UpdateDetectorInput) (req *requ
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation UpdateDetector for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector
 func (c *GuardDuty) UpdateDetector(input *UpdateDetectorInput) (*UpdateDetectorOutput, error) {
@@ -3572,14 +6022,13 @@ const opUpdateFilter = "UpdateFilter"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateFilterRequest method.
+//	req, resp := client.UpdateFilterRequest(params)
 //
-//    // Example sending a request using the UpdateFilterRequest method.
-//    req, resp := client.UpdateFilterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilter
 func (c *GuardDuty) UpdateFilterRequest(input *UpdateFilterInput) (req *request.Request, output *UpdateFilterOutput) {
@@ -3609,12 +6058,13 @@ func (c *GuardDuty) UpdateFilterRequest(input *UpdateFilterInput) (req *request.
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation UpdateFilter for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilter
 func (c *GuardDuty) UpdateFilter(input *UpdateFilterInput) (*UpdateFilterOutput, error) {
@@ -3654,14 +6104,13 @@ const opUpdateFindingsFeedback = "UpdateFindingsFeedback"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateFindingsFeedbackRequest method.
+//	req, resp := client.UpdateFindingsFeedbackRequest(params)
 //
-//    // Example sending a request using the UpdateFindingsFeedbackRequest method.
-//    req, resp := client.UpdateFindingsFeedbackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback
 func (c *GuardDuty) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackInput) (req *request.Request, output *UpdateFindingsFeedbackOutput) {
@@ -3683,7 +6132,7 @@ func (c *GuardDuty) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackI
 
 // UpdateFindingsFeedback API operation for Amazon GuardDuty.
 //
-// Marks specified Amazon GuardDuty findings as useful or not useful.
+// Marks the specified GuardDuty findings as useful or not useful.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3692,12 +6141,13 @@ func (c *GuardDuty) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackI
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation UpdateFindingsFeedback for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback
 func (c *GuardDuty) UpdateFindingsFeedback(input *UpdateFindingsFeedbackInput) (*UpdateFindingsFeedbackOutput, error) {
@@ -3737,14 +6187,13 @@ const opUpdateIPSet = "UpdateIPSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateIPSetRequest method.
+//	req, resp := client.UpdateIPSetRequest(params)
 //
-//    // Example sending a request using the UpdateIPSetRequest method.
-//    req, resp := client.UpdateIPSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSet
 func (c *GuardDuty) UpdateIPSetRequest(input *UpdateIPSetInput) (req *request.Request, output *UpdateIPSetOutput) {
@@ -3775,12 +6224,13 @@ func (c *GuardDuty) UpdateIPSetRequest(input *UpdateIPSetInput) (req *request.Re
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation UpdateIPSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSet
 func (c *GuardDuty) UpdateIPSet(input *UpdateIPSetInput) (*UpdateIPSetOutput, error) {
@@ -3804,6 +6254,351 @@ func (c *GuardDuty) UpdateIPSetWithContext(ctx aws.Context, input *UpdateIPSetIn
 	return out, req.Send()
 }
 
+const opUpdateMalwareScanSettings = "UpdateMalwareScanSettings"
+
+// UpdateMalwareScanSettingsRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateMalwareScanSettings operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateMalwareScanSettings for more information on using the UpdateMalwareScanSettings
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateMalwareScanSettingsRequest method.
+//	req, resp := client.UpdateMalwareScanSettingsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMalwareScanSettings
+func (c *GuardDuty) UpdateMalwareScanSettingsRequest(input *UpdateMalwareScanSettingsInput) (req *request.Request, output *UpdateMalwareScanSettingsOutput) {
+	op := &request.Operation{
+		Name:       opUpdateMalwareScanSettings,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/malware-scan-settings",
+	}
+
+	if input == nil {
+		input = &UpdateMalwareScanSettingsInput{}
+	}
+
+	output = &UpdateMalwareScanSettingsOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateMalwareScanSettings API operation for Amazon GuardDuty.
+//
+// Updates the malware scan settings.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation UpdateMalwareScanSettings for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMalwareScanSettings
+func (c *GuardDuty) UpdateMalwareScanSettings(input *UpdateMalwareScanSettingsInput) (*UpdateMalwareScanSettingsOutput, error) {
+	req, out := c.UpdateMalwareScanSettingsRequest(input)
+	return out, req.Send()
+}
+
+// UpdateMalwareScanSettingsWithContext is the same as UpdateMalwareScanSettings with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateMalwareScanSettings for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) UpdateMalwareScanSettingsWithContext(ctx aws.Context, input *UpdateMalwareScanSettingsInput, opts ...request.Option) (*UpdateMalwareScanSettingsOutput, error) {
+	req, out := c.UpdateMalwareScanSettingsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateMemberDetectors = "UpdateMemberDetectors"
+
+// UpdateMemberDetectorsRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateMemberDetectors operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateMemberDetectors for more information on using the UpdateMemberDetectors
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateMemberDetectorsRequest method.
+//	req, resp := client.UpdateMemberDetectorsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectors
+func (c *GuardDuty) UpdateMemberDetectorsRequest(input *UpdateMemberDetectorsInput) (req *request.Request, output *UpdateMemberDetectorsOutput) {
+	op := &request.Operation{
+		Name:       opUpdateMemberDetectors,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/member/detector/update",
+	}
+
+	if input == nil {
+		input = &UpdateMemberDetectorsInput{}
+	}
+
+	output = &UpdateMemberDetectorsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdateMemberDetectors API operation for Amazon GuardDuty.
+//
+// Contains information on member accounts to be updated.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation UpdateMemberDetectors for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectors
+func (c *GuardDuty) UpdateMemberDetectors(input *UpdateMemberDetectorsInput) (*UpdateMemberDetectorsOutput, error) {
+	req, out := c.UpdateMemberDetectorsRequest(input)
+	return out, req.Send()
+}
+
+// UpdateMemberDetectorsWithContext is the same as UpdateMemberDetectors with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateMemberDetectors for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) UpdateMemberDetectorsWithContext(ctx aws.Context, input *UpdateMemberDetectorsInput, opts ...request.Option) (*UpdateMemberDetectorsOutput, error) {
+	req, out := c.UpdateMemberDetectorsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateOrganizationConfiguration = "UpdateOrganizationConfiguration"
+
+// UpdateOrganizationConfigurationRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateOrganizationConfiguration operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateOrganizationConfiguration for more information on using the UpdateOrganizationConfiguration
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateOrganizationConfigurationRequest method.
+//	req, resp := client.UpdateOrganizationConfigurationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfiguration
+func (c *GuardDuty) UpdateOrganizationConfigurationRequest(input *UpdateOrganizationConfigurationInput) (req *request.Request, output *UpdateOrganizationConfigurationOutput) {
+	op := &request.Operation{
+		Name:       opUpdateOrganizationConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/admin",
+	}
+
+	if input == nil {
+		input = &UpdateOrganizationConfigurationInput{}
+	}
+
+	output = &UpdateOrganizationConfigurationOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateOrganizationConfiguration API operation for Amazon GuardDuty.
+//
+// Configures the delegated administrator account with the provided values.
+// You must provide a value for either autoEnableOrganizationMembers or autoEnable,
+// but not both.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation UpdateOrganizationConfiguration for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfiguration
+func (c *GuardDuty) UpdateOrganizationConfiguration(input *UpdateOrganizationConfigurationInput) (*UpdateOrganizationConfigurationOutput, error) {
+	req, out := c.UpdateOrganizationConfigurationRequest(input)
+	return out, req.Send()
+}
+
+// UpdateOrganizationConfigurationWithContext is the same as UpdateOrganizationConfiguration with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateOrganizationConfiguration for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) UpdateOrganizationConfigurationWithContext(ctx aws.Context, input *UpdateOrganizationConfigurationInput, opts ...request.Option) (*UpdateOrganizationConfigurationOutput, error) {
+	req, out := c.UpdateOrganizationConfigurationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdatePublishingDestination = "UpdatePublishingDestination"
+
+// UpdatePublishingDestinationRequest generates a "aws/request.Request" representing the
+// client's request for the UpdatePublishingDestination operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdatePublishingDestination for more information on using the UpdatePublishingDestination
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdatePublishingDestinationRequest method.
+//	req, resp := client.UpdatePublishingDestinationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdatePublishingDestination
+func (c *GuardDuty) UpdatePublishingDestinationRequest(input *UpdatePublishingDestinationInput) (req *request.Request, output *UpdatePublishingDestinationOutput) {
+	op := &request.Operation{
+		Name:       opUpdatePublishingDestination,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/publishingDestination/{destinationId}",
+	}
+
+	if input == nil {
+		input = &UpdatePublishingDestinationInput{}
+	}
+
+	output = &UpdatePublishingDestinationOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdatePublishingDestination API operation for Amazon GuardDuty.
+//
+// Updates information about the publishing destination specified by the destinationId.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon GuardDuty's
+// API operation UpdatePublishingDestination for usage and error information.
+//
+// Returned Error Types:
+//
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdatePublishingDestination
+func (c *GuardDuty) UpdatePublishingDestination(input *UpdatePublishingDestinationInput) (*UpdatePublishingDestinationOutput, error) {
+	req, out := c.UpdatePublishingDestinationRequest(input)
+	return out, req.Send()
+}
+
+// UpdatePublishingDestinationWithContext is the same as UpdatePublishingDestination with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdatePublishingDestination for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *GuardDuty) UpdatePublishingDestinationWithContext(ctx aws.Context, input *UpdatePublishingDestinationInput, opts ...request.Option) (*UpdatePublishingDestinationOutput, error) {
+	req, out := c.UpdatePublishingDestinationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateThreatIntelSet = "UpdateThreatIntelSet"
 
 // UpdateThreatIntelSetRequest generates a "aws/request.Request" representing the
@@ -3820,14 +6615,13 @@ const opUpdateThreatIntelSet = "UpdateThreatIntelSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateThreatIntelSetRequest method.
+//	req, resp := client.UpdateThreatIntelSetRequest(params)
 //
-//    // Example sending a request using the UpdateThreatIntelSetRequest method.
-//    req, resp := client.UpdateThreatIntelSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet
 func (c *GuardDuty) UpdateThreatIntelSetRequest(input *UpdateThreatIntelSetInput) (req *request.Request, output *UpdateThreatIntelSetOutput) {
@@ -3849,7 +6643,7 @@ func (c *GuardDuty) UpdateThreatIntelSetRequest(input *UpdateThreatIntelSetInput
 
 // UpdateThreatIntelSet API operation for Amazon GuardDuty.
 //
-// Updates the ThreatIntelSet specified by ThreatIntelSet ID.
+// Updates the ThreatIntelSet specified by the ThreatIntelSet ID.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3858,12 +6652,13 @@ func (c *GuardDuty) UpdateThreatIntelSetRequest(input *UpdateThreatIntelSetInput
 // See the AWS API reference guide for Amazon GuardDuty's
 // API operation UpdateThreatIntelSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Error response object.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerErrorException "InternalServerErrorException"
-//   Error response object.
+//   - BadRequestException
+//     A bad request exception object.
+//
+//   - InternalServerErrorException
+//     An internal server error exception object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet
 func (c *GuardDuty) UpdateThreatIntelSet(input *UpdateThreatIntelSetInput) (*UpdateThreatIntelSetOutput, error) {
@@ -3887,30 +6682,143 @@ func (c *GuardDuty) UpdateThreatIntelSetWithContext(ctx aws.Context, input *Upda
 	return out, req.Send()
 }
 
-// AcceptInvitation request body.
-type AcceptInvitationInput struct {
+type AcceptAdministratorInvitationInput struct {
 	_ struct{} `type:"structure"`
 
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	// The account ID of the GuardDuty administrator account whose invitation you're
+	// accepting.
+	//
+	// AdministratorId is a required field
+	AdministratorId *string `locationName:"administratorId" type:"string" required:"true"`
 
-	// This value is used to validate the master account to the member account.
+	// The unique ID of the detector of the GuardDuty member account.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// The value that is used to validate the administrator account to the member
+	// account.
+	//
+	// InvitationId is a required field
+	InvitationId *string `locationName:"invitationId" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AcceptAdministratorInvitationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AcceptAdministratorInvitationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AcceptAdministratorInvitationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AcceptAdministratorInvitationInput"}
+	if s.AdministratorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AdministratorId"))
+	}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.InvitationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("InvitationId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdministratorId sets the AdministratorId field's value.
+func (s *AcceptAdministratorInvitationInput) SetAdministratorId(v string) *AcceptAdministratorInvitationInput {
+	s.AdministratorId = &v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *AcceptAdministratorInvitationInput) SetDetectorId(v string) *AcceptAdministratorInvitationInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetInvitationId sets the InvitationId field's value.
+func (s *AcceptAdministratorInvitationInput) SetInvitationId(v string) *AcceptAdministratorInvitationInput {
+	s.InvitationId = &v
+	return s
+}
+
+type AcceptAdministratorInvitationOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AcceptAdministratorInvitationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AcceptAdministratorInvitationOutput) GoString() string {
+	return s.String()
+}
+
+// Deprecated: This input is deprecated, use AcceptAdministratorInvitationRequest instead
+type AcceptInvitationInput struct {
+	_ struct{} `deprecated:"true" type:"structure"`
+
+	// The unique ID of the detector of the GuardDuty member account.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// The value that is used to validate the administrator account to the member
+	// account.
 	//
 	// InvitationId is a required field
 	InvitationId *string `locationName:"invitationId" type:"string" required:"true"`
 
-	// The account ID of the master GuardDuty account whose invitation you're accepting.
+	// The account ID of the GuardDuty administrator account whose invitation you're
+	// accepting.
 	//
 	// MasterId is a required field
 	MasterId *string `locationName:"masterId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptInvitationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptInvitationInput) GoString() string {
 	return s.String()
 }
@@ -3955,26 +6863,145 @@ func (s *AcceptInvitationInput) SetMasterId(v string) *AcceptInvitationInput {
 	return s
 }
 
+// Deprecated: This output is deprecated, use AcceptAdministratorInvitationResponse instead
 type AcceptInvitationOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `deprecated:"true" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptInvitationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptInvitationOutput) GoString() string {
 	return s.String()
 }
 
-// The IAM access key details (IAM user information) of a user that engaged
-// in the activity that prompted GuardDuty to generate a finding.
+// Contains information on the current access control policies for the bucket.
+type AccessControlList struct {
+	_ struct{} `type:"structure"`
+
+	// A value that indicates whether public read access for the bucket is enabled
+	// through an Access Control List (ACL).
+	AllowsPublicReadAccess *bool `locationName:"allowsPublicReadAccess" type:"boolean"`
+
+	// A value that indicates whether public write access for the bucket is enabled
+	// through an Access Control List (ACL).
+	AllowsPublicWriteAccess *bool `locationName:"allowsPublicWriteAccess" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessControlList) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessControlList) GoString() string {
+	return s.String()
+}
+
+// SetAllowsPublicReadAccess sets the AllowsPublicReadAccess field's value.
+func (s *AccessControlList) SetAllowsPublicReadAccess(v bool) *AccessControlList {
+	s.AllowsPublicReadAccess = &v
+	return s
+}
+
+// SetAllowsPublicWriteAccess sets the AllowsPublicWriteAccess field's value.
+func (s *AccessControlList) SetAllowsPublicWriteAccess(v bool) *AccessControlList {
+	s.AllowsPublicWriteAccess = &v
+	return s
+}
+
+// An access denied exception object.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message.
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The error type.
+	Type *string `locationName:"__type" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Contains information about the access keys.
 type AccessKeyDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Access key ID of the user.
+	// The access key ID of the user.
 	AccessKeyId *string `locationName:"accessKeyId" type:"string"`
 
 	// The principal ID of the user.
@@ -3987,12 +7014,20 @@ type AccessKeyDetails struct {
 	UserType *string `locationName:"userType" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AccessKeyDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AccessKeyDetails) GoString() string {
 	return s.String()
 }
@@ -4021,27 +7056,35 @@ func (s *AccessKeyDetails) SetUserType(v string) *AccessKeyDetails {
 	return s
 }
 
-// An object containing the member's accountId and email address.
+// Contains information about the account.
 type AccountDetail struct {
 	_ struct{} `type:"structure"`
 
-	// Member account ID.
+	// The member account ID.
 	//
 	// AccountId is a required field
-	AccountId *string `locationName:"accountId" type:"string" required:"true"`
+	AccountId *string `locationName:"accountId" min:"12" type:"string" required:"true"`
 
-	// Member account's email address.
+	// The email address of the member account.
 	//
 	// Email is a required field
-	Email *string `locationName:"email" type:"string" required:"true"`
+	Email *string `locationName:"email" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AccountDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AccountDetail) GoString() string {
 	return s.String()
 }
@@ -4052,8 +7095,14 @@ func (s *AccountDetail) Validate() error {
 	if s.AccountId == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountId"))
 	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
 	if s.Email == nil {
 		invalidParams.Add(request.NewErrParamRequired("Email"))
+	}
+	if s.Email != nil && len(*s.Email) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Email", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4074,11 +7123,95 @@ func (s *AccountDetail) SetEmail(v string) *AccountDetail {
 	return s
 }
 
-// Information about the activity described in a finding.
+// Provides details of the GuardDuty member account that uses a free trial service.
+type AccountFreeTrialInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The account identifier of the GuardDuty member account.
+	AccountId *string `locationName:"accountId" type:"string"`
+
+	// Describes the data source enabled for the GuardDuty member account.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources *DataSourcesFreeTrial `locationName:"dataSources" deprecated:"true" type:"structure"`
+
+	// A list of features enabled for the GuardDuty account.
+	Features []*FreeTrialFeatureConfigurationResult `locationName:"features" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccountFreeTrialInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccountFreeTrialInfo) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *AccountFreeTrialInfo) SetAccountId(v string) *AccountFreeTrialInfo {
+	s.AccountId = &v
+	return s
+}
+
+// SetDataSources sets the DataSources field's value.
+func (s *AccountFreeTrialInfo) SetDataSources(v *DataSourcesFreeTrial) *AccountFreeTrialInfo {
+	s.DataSources = v
+	return s
+}
+
+// SetFeatures sets the Features field's value.
+func (s *AccountFreeTrialInfo) SetFeatures(v []*FreeTrialFeatureConfigurationResult) *AccountFreeTrialInfo {
+	s.Features = v
+	return s
+}
+
+// Contains information about the account level permissions on the S3 bucket.
+type AccountLevelPermissions struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the S3 Block Public Access settings of the bucket's parent account.
+	BlockPublicAccess *BlockPublicAccess `locationName:"blockPublicAccess" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccountLevelPermissions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccountLevelPermissions) GoString() string {
+	return s.String()
+}
+
+// SetBlockPublicAccess sets the BlockPublicAccess field's value.
+func (s *AccountLevelPermissions) SetBlockPublicAccess(v *BlockPublicAccess) *AccountLevelPermissions {
+	s.BlockPublicAccess = v
+	return s
+}
+
+// Contains information about actions.
 type Action struct {
 	_ struct{} `type:"structure"`
 
-	// GuardDuty Finding activity type.
+	// The GuardDuty finding activity type.
 	ActionType *string `locationName:"actionType" type:"string"`
 
 	// Information about the AWS_API_CALL action described in this finding.
@@ -4087,19 +7220,44 @@ type Action struct {
 	// Information about the DNS_REQUEST action described in this finding.
 	DnsRequestAction *DnsRequestAction `locationName:"dnsRequestAction" type:"structure"`
 
+	// Information about the Kubernetes API call action described in this finding.
+	KubernetesApiCallAction *KubernetesApiCallAction `locationName:"kubernetesApiCallAction" type:"structure"`
+
+	// Information whether the user has the permission to use a specific Kubernetes
+	// API.
+	KubernetesPermissionCheckedDetails *KubernetesPermissionCheckedDetails `locationName:"kubernetesPermissionCheckedDetails" type:"structure"`
+
+	// Information about the role binding that grants the permission defined in
+	// a Kubernetes role.
+	KubernetesRoleBindingDetails *KubernetesRoleBindingDetails `locationName:"kubernetesRoleBindingDetails" type:"structure"`
+
+	// Information about the Kubernetes role name and role type.
+	KubernetesRoleDetails *KubernetesRoleDetails `locationName:"kubernetesRoleDetails" type:"structure"`
+
 	// Information about the NETWORK_CONNECTION action described in this finding.
 	NetworkConnectionAction *NetworkConnectionAction `locationName:"networkConnectionAction" type:"structure"`
 
 	// Information about the PORT_PROBE action described in this finding.
 	PortProbeAction *PortProbeAction `locationName:"portProbeAction" type:"structure"`
+
+	// Information about RDS_LOGIN_ATTEMPT action described in this finding.
+	RdsLoginAttemptAction *RdsLoginAttemptAction `locationName:"rdsLoginAttemptAction" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Action) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Action) GoString() string {
 	return s.String()
 }
@@ -4122,6 +7280,30 @@ func (s *Action) SetDnsRequestAction(v *DnsRequestAction) *Action {
 	return s
 }
 
+// SetKubernetesApiCallAction sets the KubernetesApiCallAction field's value.
+func (s *Action) SetKubernetesApiCallAction(v *KubernetesApiCallAction) *Action {
+	s.KubernetesApiCallAction = v
+	return s
+}
+
+// SetKubernetesPermissionCheckedDetails sets the KubernetesPermissionCheckedDetails field's value.
+func (s *Action) SetKubernetesPermissionCheckedDetails(v *KubernetesPermissionCheckedDetails) *Action {
+	s.KubernetesPermissionCheckedDetails = v
+	return s
+}
+
+// SetKubernetesRoleBindingDetails sets the KubernetesRoleBindingDetails field's value.
+func (s *Action) SetKubernetesRoleBindingDetails(v *KubernetesRoleBindingDetails) *Action {
+	s.KubernetesRoleBindingDetails = v
+	return s
+}
+
+// SetKubernetesRoleDetails sets the KubernetesRoleDetails field's value.
+func (s *Action) SetKubernetesRoleDetails(v *KubernetesRoleDetails) *Action {
+	s.KubernetesRoleDetails = v
+	return s
+}
+
 // SetNetworkConnectionAction sets the NetworkConnectionAction field's value.
 func (s *Action) SetNetworkConnectionAction(v *NetworkConnectionAction) *Action {
 	s.NetworkConnectionAction = v
@@ -4134,25 +7316,340 @@ func (s *Action) SetPortProbeAction(v *PortProbeAction) *Action {
 	return s
 }
 
-// Archive Findings Request
+// SetRdsLoginAttemptAction sets the RdsLoginAttemptAction field's value.
+func (s *Action) SetRdsLoginAttemptAction(v *RdsLoginAttemptAction) *Action {
+	s.RdsLoginAttemptAction = v
+	return s
+}
+
+// Information about the installed EKS add-on (GuardDuty security agent).
+type AddonDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Status of the installed EKS add-on.
+	AddonStatus *string `locationName:"addonStatus" type:"string"`
+
+	// Version of the installed EKS add-on.
+	AddonVersion *string `locationName:"addonVersion" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddonDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddonDetails) GoString() string {
+	return s.String()
+}
+
+// SetAddonStatus sets the AddonStatus field's value.
+func (s *AddonDetails) SetAddonStatus(v string) *AddonDetails {
+	s.AddonStatus = &v
+	return s
+}
+
+// SetAddonVersion sets the AddonVersion field's value.
+func (s *AddonDetails) SetAddonVersion(v string) *AddonDetails {
+	s.AddonVersion = &v
+	return s
+}
+
+// The account within the organization specified as the GuardDuty delegated
+// administrator.
+type AdminAccount struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Web Services account ID for the account.
+	AdminAccountId *string `locationName:"adminAccountId" type:"string"`
+
+	// Indicates whether the account is enabled as the delegated administrator.
+	AdminStatus *string `locationName:"adminStatus" min:"1" type:"string" enum:"AdminStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AdminAccount) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AdminAccount) GoString() string {
+	return s.String()
+}
+
+// SetAdminAccountId sets the AdminAccountId field's value.
+func (s *AdminAccount) SetAdminAccountId(v string) *AdminAccount {
+	s.AdminAccountId = &v
+	return s
+}
+
+// SetAdminStatus sets the AdminStatus field's value.
+func (s *AdminAccount) SetAdminStatus(v string) *AdminAccount {
+	s.AdminStatus = &v
+	return s
+}
+
+// Contains information about the administrator account and invitation.
+type Administrator struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the account used as the administrator account.
+	AccountId *string `locationName:"accountId" min:"12" type:"string"`
+
+	// The value that is used to validate the administrator account to the member
+	// account.
+	InvitationId *string `locationName:"invitationId" type:"string"`
+
+	// The timestamp when the invitation was sent.
+	InvitedAt *string `locationName:"invitedAt" type:"string"`
+
+	// The status of the relationship between the administrator and member accounts.
+	RelationshipStatus *string `locationName:"relationshipStatus" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Administrator) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Administrator) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *Administrator) SetAccountId(v string) *Administrator {
+	s.AccountId = &v
+	return s
+}
+
+// SetInvitationId sets the InvitationId field's value.
+func (s *Administrator) SetInvitationId(v string) *Administrator {
+	s.InvitationId = &v
+	return s
+}
+
+// SetInvitedAt sets the InvitedAt field's value.
+func (s *Administrator) SetInvitedAt(v string) *Administrator {
+	s.InvitedAt = &v
+	return s
+}
+
+// SetRelationshipStatus sets the RelationshipStatus field's value.
+func (s *Administrator) SetRelationshipStatus(v string) *Administrator {
+	s.RelationshipStatus = &v
+	return s
+}
+
+// Information about the installed GuardDuty security agent.
+type AgentDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Version of the installed GuardDuty security agent.
+	Version *string `locationName:"version" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AgentDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AgentDetails) GoString() string {
+	return s.String()
+}
+
+// SetVersion sets the Version field's value.
+func (s *AgentDetails) SetVersion(v string) *AgentDetails {
+	s.Version = &v
+	return s
+}
+
+// Contains information about the anomalies.
+type Anomaly struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the types of profiles.
+	Profiles map[string]map[string][]*AnomalyObject `locationName:"profiles" type:"map"`
+
+	// Information about the behavior of the anomalies.
+	Unusual *AnomalyUnusual `locationName:"unusual" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Anomaly) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Anomaly) GoString() string {
+	return s.String()
+}
+
+// SetProfiles sets the Profiles field's value.
+func (s *Anomaly) SetProfiles(v map[string]map[string][]*AnomalyObject) *Anomaly {
+	s.Profiles = v
+	return s
+}
+
+// SetUnusual sets the Unusual field's value.
+func (s *Anomaly) SetUnusual(v *AnomalyUnusual) *Anomaly {
+	s.Unusual = v
+	return s
+}
+
+// Contains information about the unusual anomalies.
+type AnomalyObject struct {
+	_ struct{} `type:"structure"`
+
+	// The recorded value.
+	Observations *Observations `locationName:"observations" type:"structure"`
+
+	// The frequency of the anomaly.
+	ProfileSubtype *string `locationName:"profileSubtype" type:"string" enum:"ProfileSubtype"`
+
+	// The type of behavior of the profile.
+	ProfileType *string `locationName:"profileType" type:"string" enum:"ProfileType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AnomalyObject) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AnomalyObject) GoString() string {
+	return s.String()
+}
+
+// SetObservations sets the Observations field's value.
+func (s *AnomalyObject) SetObservations(v *Observations) *AnomalyObject {
+	s.Observations = v
+	return s
+}
+
+// SetProfileSubtype sets the ProfileSubtype field's value.
+func (s *AnomalyObject) SetProfileSubtype(v string) *AnomalyObject {
+	s.ProfileSubtype = &v
+	return s
+}
+
+// SetProfileType sets the ProfileType field's value.
+func (s *AnomalyObject) SetProfileType(v string) *AnomalyObject {
+	s.ProfileType = &v
+	return s
+}
+
+// Contains information about the behavior of the anomaly that is new to GuardDuty.
+type AnomalyUnusual struct {
+	_ struct{} `type:"structure"`
+
+	// The behavior of the anomalous activity that caused GuardDuty to generate
+	// the finding.
+	Behavior map[string]map[string]*AnomalyObject `locationName:"behavior" type:"map"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AnomalyUnusual) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AnomalyUnusual) GoString() string {
+	return s.String()
+}
+
+// SetBehavior sets the Behavior field's value.
+func (s *AnomalyUnusual) SetBehavior(v map[string]map[string]*AnomalyObject) *AnomalyUnusual {
+	s.Behavior = v
+	return s
+}
+
 type ArchiveFindingsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the detector that specifies the GuardDuty service whose findings
+	// you want to archive.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// IDs of the findings that you want to archive.
+	// The IDs of the findings that you want to archive.
 	//
 	// FindingIds is a required field
 	FindingIds []*string `locationName:"findingIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ArchiveFindingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ArchiveFindingsInput) GoString() string {
 	return s.String()
 }
@@ -4192,44 +7689,81 @@ type ArchiveFindingsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ArchiveFindingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ArchiveFindingsOutput) GoString() string {
 	return s.String()
 }
 
-// Information about the AWS_API_CALL action described in this finding.
+// Contains information about the API action.
 type AwsApiCallAction struct {
 	_ struct{} `type:"structure"`
 
-	// AWS API name.
+	// The details of the Amazon Web Services account that made the API call. This
+	// field identifies the resources that were affected by this API call.
+	AffectedResources map[string]*string `locationName:"affectedResources" type:"map"`
+
+	// The Amazon Web Services API name.
 	Api *string `locationName:"api" type:"string"`
 
-	// AWS API caller type.
+	// The Amazon Web Services API caller type.
 	CallerType *string `locationName:"callerType" type:"string"`
 
-	// Domain information for the AWS API call.
+	// The domain information for the Amazon Web Services API call.
 	DomainDetails *DomainDetails `locationName:"domainDetails" type:"structure"`
 
-	// Remote IP information of the connection.
+	// The error code of the failed Amazon Web Services API action.
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	// The details of the Amazon Web Services account that made the API call. This
+	// field appears if the call was made from outside your account.
+	RemoteAccountDetails *RemoteAccountDetails `locationName:"remoteAccountDetails" type:"structure"`
+
+	// The remote IP information of the connection that initiated the Amazon Web
+	// Services API call.
 	RemoteIpDetails *RemoteIpDetails `locationName:"remoteIpDetails" type:"structure"`
 
-	// AWS service name whose API was invoked.
+	// The Amazon Web Services service name whose API was invoked.
 	ServiceName *string `locationName:"serviceName" type:"string"`
+
+	// The agent through which the API request was made.
+	UserAgent *string `locationName:"userAgent" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AwsApiCallAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AwsApiCallAction) GoString() string {
 	return s.String()
+}
+
+// SetAffectedResources sets the AffectedResources field's value.
+func (s *AwsApiCallAction) SetAffectedResources(v map[string]*string) *AwsApiCallAction {
+	s.AffectedResources = v
+	return s
 }
 
 // SetApi sets the Api field's value.
@@ -4250,6 +7784,18 @@ func (s *AwsApiCallAction) SetDomainDetails(v *DomainDetails) *AwsApiCallAction 
 	return s
 }
 
+// SetErrorCode sets the ErrorCode field's value.
+func (s *AwsApiCallAction) SetErrorCode(v string) *AwsApiCallAction {
+	s.ErrorCode = &v
+	return s
+}
+
+// SetRemoteAccountDetails sets the RemoteAccountDetails field's value.
+func (s *AwsApiCallAction) SetRemoteAccountDetails(v *RemoteAccountDetails) *AwsApiCallAction {
+	s.RemoteAccountDetails = v
+	return s
+}
+
 // SetRemoteIpDetails sets the RemoteIpDetails field's value.
 func (s *AwsApiCallAction) SetRemoteIpDetails(v *RemoteIpDetails) *AwsApiCallAction {
 	s.RemoteIpDetails = v
@@ -4262,20 +7808,257 @@ func (s *AwsApiCallAction) SetServiceName(v string) *AwsApiCallAction {
 	return s
 }
 
-// City information of the remote IP address.
+// SetUserAgent sets the UserAgent field's value.
+func (s *AwsApiCallAction) SetUserAgent(v string) *AwsApiCallAction {
+	s.UserAgent = &v
+	return s
+}
+
+// A bad request exception object.
+type BadRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message.
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The error type.
+	Type *string `locationName:"__type" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BadRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BadRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorBadRequestException(v protocol.ResponseMetadata) error {
+	return &BadRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *BadRequestException) Code() string {
+	return "BadRequestException"
+}
+
+// Message returns the exception's message.
+func (s *BadRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *BadRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *BadRequestException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *BadRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *BadRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Contains information on how the bucker owner's S3 Block Public Access settings
+// are being applied to the S3 bucket. See S3 Block Public Access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
+// for more information.
+type BlockPublicAccess struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates if S3 Block Public Access is set to BlockPublicAcls.
+	BlockPublicAcls *bool `locationName:"blockPublicAcls" type:"boolean"`
+
+	// Indicates if S3 Block Public Access is set to BlockPublicPolicy.
+	BlockPublicPolicy *bool `locationName:"blockPublicPolicy" type:"boolean"`
+
+	// Indicates if S3 Block Public Access is set to IgnorePublicAcls.
+	IgnorePublicAcls *bool `locationName:"ignorePublicAcls" type:"boolean"`
+
+	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets.
+	RestrictPublicBuckets *bool `locationName:"restrictPublicBuckets" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BlockPublicAccess) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BlockPublicAccess) GoString() string {
+	return s.String()
+}
+
+// SetBlockPublicAcls sets the BlockPublicAcls field's value.
+func (s *BlockPublicAccess) SetBlockPublicAcls(v bool) *BlockPublicAccess {
+	s.BlockPublicAcls = &v
+	return s
+}
+
+// SetBlockPublicPolicy sets the BlockPublicPolicy field's value.
+func (s *BlockPublicAccess) SetBlockPublicPolicy(v bool) *BlockPublicAccess {
+	s.BlockPublicPolicy = &v
+	return s
+}
+
+// SetIgnorePublicAcls sets the IgnorePublicAcls field's value.
+func (s *BlockPublicAccess) SetIgnorePublicAcls(v bool) *BlockPublicAccess {
+	s.IgnorePublicAcls = &v
+	return s
+}
+
+// SetRestrictPublicBuckets sets the RestrictPublicBuckets field's value.
+func (s *BlockPublicAccess) SetRestrictPublicBuckets(v bool) *BlockPublicAccess {
+	s.RestrictPublicBuckets = &v
+	return s
+}
+
+// Contains information about the bucket level permissions for the S3 bucket.
+type BucketLevelPermissions struct {
+	_ struct{} `type:"structure"`
+
+	// Contains information on how Access Control Policies are applied to the bucket.
+	AccessControlList *AccessControlList `locationName:"accessControlList" type:"structure"`
+
+	// Contains information on which account level S3 Block Public Access settings
+	// are applied to the S3 bucket.
+	BlockPublicAccess *BlockPublicAccess `locationName:"blockPublicAccess" type:"structure"`
+
+	// Contains information on the bucket policies for the S3 bucket.
+	BucketPolicy *BucketPolicy `locationName:"bucketPolicy" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BucketLevelPermissions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BucketLevelPermissions) GoString() string {
+	return s.String()
+}
+
+// SetAccessControlList sets the AccessControlList field's value.
+func (s *BucketLevelPermissions) SetAccessControlList(v *AccessControlList) *BucketLevelPermissions {
+	s.AccessControlList = v
+	return s
+}
+
+// SetBlockPublicAccess sets the BlockPublicAccess field's value.
+func (s *BucketLevelPermissions) SetBlockPublicAccess(v *BlockPublicAccess) *BucketLevelPermissions {
+	s.BlockPublicAccess = v
+	return s
+}
+
+// SetBucketPolicy sets the BucketPolicy field's value.
+func (s *BucketLevelPermissions) SetBucketPolicy(v *BucketPolicy) *BucketLevelPermissions {
+	s.BucketPolicy = v
+	return s
+}
+
+// Contains information on the current bucket policies for the S3 bucket.
+type BucketPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// A value that indicates whether public read access for the bucket is enabled
+	// through a bucket policy.
+	AllowsPublicReadAccess *bool `locationName:"allowsPublicReadAccess" type:"boolean"`
+
+	// A value that indicates whether public write access for the bucket is enabled
+	// through a bucket policy.
+	AllowsPublicWriteAccess *bool `locationName:"allowsPublicWriteAccess" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BucketPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BucketPolicy) GoString() string {
+	return s.String()
+}
+
+// SetAllowsPublicReadAccess sets the AllowsPublicReadAccess field's value.
+func (s *BucketPolicy) SetAllowsPublicReadAccess(v bool) *BucketPolicy {
+	s.AllowsPublicReadAccess = &v
+	return s
+}
+
+// SetAllowsPublicWriteAccess sets the AllowsPublicWriteAccess field's value.
+func (s *BucketPolicy) SetAllowsPublicWriteAccess(v bool) *BucketPolicy {
+	s.AllowsPublicWriteAccess = &v
+	return s
+}
+
+// Contains information about the city associated with the IP address.
 type City struct {
 	_ struct{} `type:"structure"`
 
-	// City name of the remote IP address.
+	// The city name of the remote IP address.
 	CityName *string `locationName:"cityName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s City) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s City) GoString() string {
 	return s.String()
 }
@@ -4286,42 +8069,120 @@ func (s *City) SetCityName(v string) *City {
 	return s
 }
 
-// Finding attribute (for example, accountId) for which conditions and values
-// must be specified when querying findings.
+// Contains information on the status of CloudTrail as a data source for the
+// detector.
+type CloudTrailConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Describes whether CloudTrail is enabled as a data source for the detector.
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"DataSourceStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CloudTrailConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CloudTrailConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetStatus sets the Status field's value.
+func (s *CloudTrailConfigurationResult) SetStatus(v string) *CloudTrailConfigurationResult {
+	s.Status = &v
+	return s
+}
+
+// Contains information about the condition.
 type Condition struct {
 	_ struct{} `type:"structure"`
 
 	// Represents the equal condition to be applied to a single field when querying
 	// for findings.
-	Eq []*string `locationName:"eq" type:"list"`
+	//
+	// Deprecated: Eq has been deprecated
+	Eq []*string `locationName:"eq" deprecated:"true" type:"list"`
 
-	// Represents the greater than condition to be applied to a single field when
-	// querying for findings.
-	Gt *int64 `locationName:"gt" type:"integer"`
-
-	// Represents the greater than equal condition to be applied to a single field
-	// when querying for findings.
-	Gte *int64 `locationName:"gte" type:"integer"`
-
-	// Represents the less than condition to be applied to a single field when querying
+	// Represents an equal condition to be applied to a single field when querying
 	// for findings.
-	Lt *int64 `locationName:"lt" type:"integer"`
+	Equals []*string `locationName:"equals" type:"list"`
 
-	// Represents the less than equal condition to be applied to a single field
+	// Represents a greater than condition to be applied to a single field when
+	// querying for findings.
+	GreaterThan *int64 `locationName:"greaterThan" type:"long"`
+
+	// Represents a greater than or equal condition to be applied to a single field
 	// when querying for findings.
-	Lte *int64 `locationName:"lte" type:"integer"`
+	GreaterThanOrEqual *int64 `locationName:"greaterThanOrEqual" type:"long"`
+
+	// Represents a greater than condition to be applied to a single field when
+	// querying for findings.
+	//
+	// Deprecated: Gt has been deprecated
+	Gt *int64 `locationName:"gt" deprecated:"true" type:"integer"`
+
+	// Represents a greater than or equal condition to be applied to a single field
+	// when querying for findings.
+	//
+	// Deprecated: Gte has been deprecated
+	Gte *int64 `locationName:"gte" deprecated:"true" type:"integer"`
+
+	// Represents a less than condition to be applied to a single field when querying
+	// for findings.
+	LessThan *int64 `locationName:"lessThan" type:"long"`
+
+	// Represents a less than or equal condition to be applied to a single field
+	// when querying for findings.
+	LessThanOrEqual *int64 `locationName:"lessThanOrEqual" type:"long"`
+
+	// Represents a less than condition to be applied to a single field when querying
+	// for findings.
+	//
+	// Deprecated: Lt has been deprecated
+	Lt *int64 `locationName:"lt" deprecated:"true" type:"integer"`
+
+	// Represents a less than or equal condition to be applied to a single field
+	// when querying for findings.
+	//
+	// Deprecated: Lte has been deprecated
+	Lte *int64 `locationName:"lte" deprecated:"true" type:"integer"`
 
 	// Represents the not equal condition to be applied to a single field when querying
 	// for findings.
-	Neq []*string `locationName:"neq" type:"list"`
+	//
+	// Deprecated: Neq has been deprecated
+	Neq []*string `locationName:"neq" deprecated:"true" type:"list"`
+
+	// Represents a not equal condition to be applied to a single field when querying
+	// for findings.
+	NotEquals []*string `locationName:"notEquals" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Condition) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Condition) GoString() string {
 	return s.String()
 }
@@ -4329,6 +8190,24 @@ func (s Condition) GoString() string {
 // SetEq sets the Eq field's value.
 func (s *Condition) SetEq(v []*string) *Condition {
 	s.Eq = v
+	return s
+}
+
+// SetEquals sets the Equals field's value.
+func (s *Condition) SetEquals(v []*string) *Condition {
+	s.Equals = v
+	return s
+}
+
+// SetGreaterThan sets the GreaterThan field's value.
+func (s *Condition) SetGreaterThan(v int64) *Condition {
+	s.GreaterThan = &v
+	return s
+}
+
+// SetGreaterThanOrEqual sets the GreaterThanOrEqual field's value.
+func (s *Condition) SetGreaterThanOrEqual(v int64) *Condition {
+	s.GreaterThanOrEqual = &v
 	return s
 }
 
@@ -4341,6 +8220,18 @@ func (s *Condition) SetGt(v int64) *Condition {
 // SetGte sets the Gte field's value.
 func (s *Condition) SetGte(v int64) *Condition {
 	s.Gte = &v
+	return s
+}
+
+// SetLessThan sets the LessThan field's value.
+func (s *Condition) SetLessThan(v int64) *Condition {
+	s.LessThan = &v
+	return s
+}
+
+// SetLessThanOrEqual sets the LessThanOrEqual field's value.
+func (s *Condition) SetLessThanOrEqual(v int64) *Condition {
+	s.LessThanOrEqual = &v
 	return s
 }
 
@@ -4362,23 +8253,236 @@ func (s *Condition) SetNeq(v []*string) *Condition {
 	return s
 }
 
-// Country information of the remote IP address.
+// SetNotEquals sets the NotEquals field's value.
+func (s *Condition) SetNotEquals(v []*string) *Condition {
+	s.NotEquals = v
+	return s
+}
+
+// A request conflict exception object.
+type ConflictException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message.
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The error type.
+	Type *string `locationName:"__type" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConflictException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConflictException) GoString() string {
+	return s.String()
+}
+
+func newErrorConflictException(v protocol.ResponseMetadata) error {
+	return &ConflictException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConflictException) Code() string {
+	return "ConflictException"
+}
+
+// Message returns the exception's message.
+func (s *ConflictException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConflictException) OrigErr() error {
+	return nil
+}
+
+func (s *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConflictException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConflictException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Details of a container.
+type Container struct {
+	_ struct{} `type:"structure"`
+
+	// The container runtime (such as, Docker or containerd) used to run the container.
+	ContainerRuntime *string `locationName:"containerRuntime" type:"string"`
+
+	// Container ID.
+	Id *string `locationName:"id" type:"string"`
+
+	// Container image.
+	Image *string `locationName:"image" type:"string"`
+
+	// Part of the image name before the last slash. For example, imagePrefix for
+	// public.ecr.aws/amazonlinux/amazonlinux:latest would be public.ecr.aws/amazonlinux.
+	// If the image name is relative and does not have a slash, this field is empty.
+	ImagePrefix *string `locationName:"imagePrefix" type:"string"`
+
+	// Container name.
+	Name *string `locationName:"name" type:"string"`
+
+	// Container security context.
+	SecurityContext *SecurityContext `locationName:"securityContext" type:"structure"`
+
+	// Container volume mounts.
+	VolumeMounts []*VolumeMount `locationName:"volumeMounts" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Container) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Container) GoString() string {
+	return s.String()
+}
+
+// SetContainerRuntime sets the ContainerRuntime field's value.
+func (s *Container) SetContainerRuntime(v string) *Container {
+	s.ContainerRuntime = &v
+	return s
+}
+
+// SetId sets the Id field's value.
+func (s *Container) SetId(v string) *Container {
+	s.Id = &v
+	return s
+}
+
+// SetImage sets the Image field's value.
+func (s *Container) SetImage(v string) *Container {
+	s.Image = &v
+	return s
+}
+
+// SetImagePrefix sets the ImagePrefix field's value.
+func (s *Container) SetImagePrefix(v string) *Container {
+	s.ImagePrefix = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *Container) SetName(v string) *Container {
+	s.Name = &v
+	return s
+}
+
+// SetSecurityContext sets the SecurityContext field's value.
+func (s *Container) SetSecurityContext(v *SecurityContext) *Container {
+	s.SecurityContext = v
+	return s
+}
+
+// SetVolumeMounts sets the VolumeMounts field's value.
+func (s *Container) SetVolumeMounts(v []*VolumeMount) *Container {
+	s.VolumeMounts = v
+	return s
+}
+
+// Contains information about the Amazon EC2 instance that is running the Amazon
+// ECS container.
+type ContainerInstanceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Represents total number of nodes in the Amazon ECS cluster.
+	CompatibleContainerInstances *int64 `locationName:"compatibleContainerInstances" type:"long"`
+
+	// Represents the nodes in the Amazon ECS cluster that has a HEALTHY coverage
+	// status.
+	CoveredContainerInstances *int64 `locationName:"coveredContainerInstances" type:"long"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ContainerInstanceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ContainerInstanceDetails) GoString() string {
+	return s.String()
+}
+
+// SetCompatibleContainerInstances sets the CompatibleContainerInstances field's value.
+func (s *ContainerInstanceDetails) SetCompatibleContainerInstances(v int64) *ContainerInstanceDetails {
+	s.CompatibleContainerInstances = &v
+	return s
+}
+
+// SetCoveredContainerInstances sets the CoveredContainerInstances field's value.
+func (s *ContainerInstanceDetails) SetCoveredContainerInstances(v int64) *ContainerInstanceDetails {
+	s.CoveredContainerInstances = &v
+	return s
+}
+
+// Contains information about the country where the remote IP address is located.
 type Country struct {
 	_ struct{} `type:"structure"`
 
-	// Country code of the remote IP address.
+	// The country code of the remote IP address.
 	CountryCode *string `locationName:"countryCode" type:"string"`
 
-	// Country name of the remote IP address.
+	// The country name of the remote IP address.
 	CountryName *string `locationName:"countryName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Country) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Country) GoString() string {
 	return s.String()
 }
@@ -4395,28 +8499,616 @@ func (s *Country) SetCountryName(v string) *Country {
 	return s
 }
 
-// Create Detector Request
+// This API is also used when you use GuardDuty Runtime Monitoring for your
+// Amazon EC2 instances (currently in preview release) and is subject to change.
+// The use of this API is subject to Section 2 of the Amazon Web Services Service
+// Terms (http://aws.amazon.com/service-terms/) ("Betas and Previews").
+//
+// Contains information about the Amazon EC2 instance runtime coverage details.
+type CoverageEc2InstanceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the installed security agent.
+	AgentDetails *AgentDetails `locationName:"agentDetails" type:"structure"`
+
+	// The cluster ARN of the Amazon ECS cluster running on the Amazon EC2 instance.
+	ClusterArn *string `locationName:"clusterArn" type:"string"`
+
+	// The Amazon EC2 instance ID.
+	InstanceId *string `locationName:"instanceId" type:"string"`
+
+	// The instance type of the Amazon EC2 instance.
+	InstanceType *string `locationName:"instanceType" type:"string"`
+
+	// Indicates how the GuardDuty security agent is managed for this resource.
+	//
+	//    * AUTO_MANAGED indicates that GuardDuty deploys and manages updates for
+	//    this resource.
+	//
+	//    * MANUAL indicates that you are responsible to deploy, update, and manage
+	//    the GuardDuty security agent updates for this resource.
+	//
+	// The DISABLED status doesn't apply to Amazon EC2 instances and Amazon EKS
+	// clusters.
+	ManagementType *string `locationName:"managementType" type:"string" enum:"ManagementType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageEc2InstanceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageEc2InstanceDetails) GoString() string {
+	return s.String()
+}
+
+// SetAgentDetails sets the AgentDetails field's value.
+func (s *CoverageEc2InstanceDetails) SetAgentDetails(v *AgentDetails) *CoverageEc2InstanceDetails {
+	s.AgentDetails = v
+	return s
+}
+
+// SetClusterArn sets the ClusterArn field's value.
+func (s *CoverageEc2InstanceDetails) SetClusterArn(v string) *CoverageEc2InstanceDetails {
+	s.ClusterArn = &v
+	return s
+}
+
+// SetInstanceId sets the InstanceId field's value.
+func (s *CoverageEc2InstanceDetails) SetInstanceId(v string) *CoverageEc2InstanceDetails {
+	s.InstanceId = &v
+	return s
+}
+
+// SetInstanceType sets the InstanceType field's value.
+func (s *CoverageEc2InstanceDetails) SetInstanceType(v string) *CoverageEc2InstanceDetails {
+	s.InstanceType = &v
+	return s
+}
+
+// SetManagementType sets the ManagementType field's value.
+func (s *CoverageEc2InstanceDetails) SetManagementType(v string) *CoverageEc2InstanceDetails {
+	s.ManagementType = &v
+	return s
+}
+
+// Contains information about Amazon ECS cluster runtime coverage details.
+type CoverageEcsClusterDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon ECS cluster.
+	ClusterName *string `locationName:"clusterName" type:"string"`
+
+	// Information about the Amazon ECS container running on Amazon EC2 instance.
+	ContainerInstanceDetails *ContainerInstanceDetails `locationName:"containerInstanceDetails" type:"structure"`
+
+	// Information about the Fargate details associated with the Amazon ECS cluster.
+	FargateDetails *FargateDetails `locationName:"fargateDetails" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageEcsClusterDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageEcsClusterDetails) GoString() string {
+	return s.String()
+}
+
+// SetClusterName sets the ClusterName field's value.
+func (s *CoverageEcsClusterDetails) SetClusterName(v string) *CoverageEcsClusterDetails {
+	s.ClusterName = &v
+	return s
+}
+
+// SetContainerInstanceDetails sets the ContainerInstanceDetails field's value.
+func (s *CoverageEcsClusterDetails) SetContainerInstanceDetails(v *ContainerInstanceDetails) *CoverageEcsClusterDetails {
+	s.ContainerInstanceDetails = v
+	return s
+}
+
+// SetFargateDetails sets the FargateDetails field's value.
+func (s *CoverageEcsClusterDetails) SetFargateDetails(v *FargateDetails) *CoverageEcsClusterDetails {
+	s.FargateDetails = v
+	return s
+}
+
+// Information about the EKS cluster that has a coverage status.
+type CoverageEksClusterDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the installed EKS add-on.
+	AddonDetails *AddonDetails `locationName:"addonDetails" type:"structure"`
+
+	// Name of the EKS cluster.
+	ClusterName *string `locationName:"clusterName" type:"string"`
+
+	// Represents all the nodes within the EKS cluster in your account.
+	CompatibleNodes *int64 `locationName:"compatibleNodes" type:"long"`
+
+	// Represents the nodes within the EKS cluster that have a HEALTHY coverage
+	// status.
+	CoveredNodes *int64 `locationName:"coveredNodes" type:"long"`
+
+	// Indicates how the Amazon EKS add-on GuardDuty agent is managed for this EKS
+	// cluster.
+	//
+	// AUTO_MANAGED indicates GuardDuty deploys and manages updates for this resource.
+	//
+	// MANUAL indicates that you are responsible to deploy, update, and manage the
+	// Amazon EKS add-on GuardDuty agent for this resource.
+	ManagementType *string `locationName:"managementType" type:"string" enum:"ManagementType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageEksClusterDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageEksClusterDetails) GoString() string {
+	return s.String()
+}
+
+// SetAddonDetails sets the AddonDetails field's value.
+func (s *CoverageEksClusterDetails) SetAddonDetails(v *AddonDetails) *CoverageEksClusterDetails {
+	s.AddonDetails = v
+	return s
+}
+
+// SetClusterName sets the ClusterName field's value.
+func (s *CoverageEksClusterDetails) SetClusterName(v string) *CoverageEksClusterDetails {
+	s.ClusterName = &v
+	return s
+}
+
+// SetCompatibleNodes sets the CompatibleNodes field's value.
+func (s *CoverageEksClusterDetails) SetCompatibleNodes(v int64) *CoverageEksClusterDetails {
+	s.CompatibleNodes = &v
+	return s
+}
+
+// SetCoveredNodes sets the CoveredNodes field's value.
+func (s *CoverageEksClusterDetails) SetCoveredNodes(v int64) *CoverageEksClusterDetails {
+	s.CoveredNodes = &v
+	return s
+}
+
+// SetManagementType sets the ManagementType field's value.
+func (s *CoverageEksClusterDetails) SetManagementType(v string) *CoverageEksClusterDetails {
+	s.ManagementType = &v
+	return s
+}
+
+// Represents a condition that when matched will be added to the response of
+// the operation.
+type CoverageFilterCondition struct {
+	_ struct{} `type:"structure"`
+
+	// Represents an equal condition that is applied to a single field while retrieving
+	// the coverage details.
+	Equals []*string `locationName:"equals" type:"list"`
+
+	// Represents a not equal condition that is applied to a single field while
+	// retrieving the coverage details.
+	NotEquals []*string `locationName:"notEquals" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageFilterCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageFilterCondition) GoString() string {
+	return s.String()
+}
+
+// SetEquals sets the Equals field's value.
+func (s *CoverageFilterCondition) SetEquals(v []*string) *CoverageFilterCondition {
+	s.Equals = v
+	return s
+}
+
+// SetNotEquals sets the NotEquals field's value.
+func (s *CoverageFilterCondition) SetNotEquals(v []*string) *CoverageFilterCondition {
+	s.NotEquals = v
+	return s
+}
+
+// Represents the criteria used in the filter.
+type CoverageFilterCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// Represents a condition that when matched will be added to the response of
+	// the operation.
+	FilterCriterion []*CoverageFilterCriterion `locationName:"filterCriterion" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageFilterCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageFilterCriteria) GoString() string {
+	return s.String()
+}
+
+// SetFilterCriterion sets the FilterCriterion field's value.
+func (s *CoverageFilterCriteria) SetFilterCriterion(v []*CoverageFilterCriterion) *CoverageFilterCriteria {
+	s.FilterCriterion = v
+	return s
+}
+
+// Represents a condition that when matched will be added to the response of
+// the operation.
+type CoverageFilterCriterion struct {
+	_ struct{} `type:"structure"`
+
+	// An enum value representing possible filter fields.
+	//
+	// Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME. CLUSTER_NAME has
+	// been deprecated.
+	CriterionKey *string `locationName:"criterionKey" type:"string" enum:"CoverageFilterCriterionKey"`
+
+	// Contains information about the condition.
+	FilterCondition *CoverageFilterCondition `locationName:"filterCondition" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageFilterCriterion) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageFilterCriterion) GoString() string {
+	return s.String()
+}
+
+// SetCriterionKey sets the CriterionKey field's value.
+func (s *CoverageFilterCriterion) SetCriterionKey(v string) *CoverageFilterCriterion {
+	s.CriterionKey = &v
+	return s
+}
+
+// SetFilterCondition sets the FilterCondition field's value.
+func (s *CoverageFilterCriterion) SetFilterCondition(v *CoverageFilterCondition) *CoverageFilterCriterion {
+	s.FilterCondition = v
+	return s
+}
+
+// Information about the resource of the GuardDuty account.
+type CoverageResource struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of the Amazon Web Services account.
+	AccountId *string `locationName:"accountId" min:"12" type:"string"`
+
+	// Represents the status of the EKS cluster coverage.
+	CoverageStatus *string `locationName:"coverageStatus" type:"string" enum:"CoverageStatus"`
+
+	// The unique ID of the GuardDuty detector associated with the resource.
+	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
+
+	// Represents the reason why a coverage status was UNHEALTHY for the EKS cluster.
+	Issue *string `locationName:"issue" type:"string"`
+
+	// Information about the resource for which the coverage statistics are retrieved.
+	ResourceDetails *CoverageResourceDetails `locationName:"resourceDetails" type:"structure"`
+
+	// The unique ID of the resource.
+	ResourceId *string `locationName:"resourceId" type:"string"`
+
+	// The timestamp at which the coverage details for the resource were last updated.
+	// This is in UTC format.
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageResource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageResource) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *CoverageResource) SetAccountId(v string) *CoverageResource {
+	s.AccountId = &v
+	return s
+}
+
+// SetCoverageStatus sets the CoverageStatus field's value.
+func (s *CoverageResource) SetCoverageStatus(v string) *CoverageResource {
+	s.CoverageStatus = &v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *CoverageResource) SetDetectorId(v string) *CoverageResource {
+	s.DetectorId = &v
+	return s
+}
+
+// SetIssue sets the Issue field's value.
+func (s *CoverageResource) SetIssue(v string) *CoverageResource {
+	s.Issue = &v
+	return s
+}
+
+// SetResourceDetails sets the ResourceDetails field's value.
+func (s *CoverageResource) SetResourceDetails(v *CoverageResourceDetails) *CoverageResource {
+	s.ResourceDetails = v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *CoverageResource) SetResourceId(v string) *CoverageResource {
+	s.ResourceId = &v
+	return s
+}
+
+// SetUpdatedAt sets the UpdatedAt field's value.
+func (s *CoverageResource) SetUpdatedAt(v time.Time) *CoverageResource {
+	s.UpdatedAt = &v
+	return s
+}
+
+// Information about the resource for each individual EKS cluster.
+type CoverageResourceDetails struct {
+	_ struct{} `type:"structure"`
+
+	//
+	// This API is also used when you use GuardDuty Runtime Monitoring for your
+	// Amazon EC2 instances (currently in preview release) and is subject to change.
+	// The use of this API is subject to Section 2 of the Amazon Web Services Service
+	// Terms (http://aws.amazon.com/service-terms/) ("Betas and Previews").
+	//
+	// Information about the Amazon EC2 instance assessed for runtime coverage.
+	Ec2InstanceDetails *CoverageEc2InstanceDetails `locationName:"ec2InstanceDetails" type:"structure"`
+
+	// Information about the Amazon ECS cluster that is assessed for runtime coverage.
+	EcsClusterDetails *CoverageEcsClusterDetails `locationName:"ecsClusterDetails" type:"structure"`
+
+	// EKS cluster details involved in the coverage statistics.
+	EksClusterDetails *CoverageEksClusterDetails `locationName:"eksClusterDetails" type:"structure"`
+
+	// The type of Amazon Web Services resource.
+	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageResourceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageResourceDetails) GoString() string {
+	return s.String()
+}
+
+// SetEc2InstanceDetails sets the Ec2InstanceDetails field's value.
+func (s *CoverageResourceDetails) SetEc2InstanceDetails(v *CoverageEc2InstanceDetails) *CoverageResourceDetails {
+	s.Ec2InstanceDetails = v
+	return s
+}
+
+// SetEcsClusterDetails sets the EcsClusterDetails field's value.
+func (s *CoverageResourceDetails) SetEcsClusterDetails(v *CoverageEcsClusterDetails) *CoverageResourceDetails {
+	s.EcsClusterDetails = v
+	return s
+}
+
+// SetEksClusterDetails sets the EksClusterDetails field's value.
+func (s *CoverageResourceDetails) SetEksClusterDetails(v *CoverageEksClusterDetails) *CoverageResourceDetails {
+	s.EksClusterDetails = v
+	return s
+}
+
+// SetResourceType sets the ResourceType field's value.
+func (s *CoverageResourceDetails) SetResourceType(v string) *CoverageResourceDetails {
+	s.ResourceType = &v
+	return s
+}
+
+// Information about the sorting criteria used in the coverage statistics.
+type CoverageSortCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// Represents the field name used to sort the coverage details.
+	//
+	// Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME. CLUSTER_NAME has
+	// been deprecated.
+	AttributeName *string `locationName:"attributeName" type:"string" enum:"CoverageSortKey"`
+
+	// The order in which the sorted findings are to be displayed.
+	OrderBy *string `locationName:"orderBy" type:"string" enum:"OrderBy"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageSortCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageSortCriteria) GoString() string {
+	return s.String()
+}
+
+// SetAttributeName sets the AttributeName field's value.
+func (s *CoverageSortCriteria) SetAttributeName(v string) *CoverageSortCriteria {
+	s.AttributeName = &v
+	return s
+}
+
+// SetOrderBy sets the OrderBy field's value.
+func (s *CoverageSortCriteria) SetOrderBy(v string) *CoverageSortCriteria {
+	s.OrderBy = &v
+	return s
+}
+
+// Information about the coverage statistics for a resource.
+type CoverageStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// Represents coverage statistics for EKS clusters aggregated by coverage status.
+	CountByCoverageStatus map[string]*int64 `locationName:"countByCoverageStatus" type:"map"`
+
+	// Represents coverage statistics for EKS clusters aggregated by resource type.
+	CountByResourceType map[string]*int64 `locationName:"countByResourceType" type:"map"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CoverageStatistics) GoString() string {
+	return s.String()
+}
+
+// SetCountByCoverageStatus sets the CountByCoverageStatus field's value.
+func (s *CoverageStatistics) SetCountByCoverageStatus(v map[string]*int64) *CoverageStatistics {
+	s.CountByCoverageStatus = v
+	return s
+}
+
+// SetCountByResourceType sets the CountByResourceType field's value.
+func (s *CoverageStatistics) SetCountByResourceType(v map[string]*int64) *CoverageStatistics {
+	s.CountByResourceType = v
+	return s
+}
+
 type CreateDetectorInput struct {
 	_ struct{} `type:"structure"`
 
 	// The idempotency token for the create request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// A boolean value that specifies whether the detector is to be enabled.
+	// Describes which data sources will be enabled for the detector.
+	//
+	// There might be regional differences because some data sources might not be
+	// available in all the Amazon Web Services Regions where GuardDuty is presently
+	// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources *DataSourceConfigurations `locationName:"dataSources" deprecated:"true" type:"structure"`
+
+	// A Boolean value that specifies whether the detector is to be enabled.
 	//
 	// Enable is a required field
 	Enable *bool `locationName:"enable" type:"boolean" required:"true"`
 
-	// A enum value that specifies how frequently customer got Finding updates published.
+	// A list of features that will be configured for the detector.
+	Features []*DetectorFeatureConfiguration `locationName:"features" type:"list"`
+
+	// A value that specifies how frequently updated findings are exported.
 	FindingPublishingFrequency *string `locationName:"findingPublishingFrequency" type:"string" enum:"FindingPublishingFrequency"`
+
+	// The tags to be added to a new detector resource.
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDetectorInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDetectorInput) GoString() string {
 	return s.String()
 }
@@ -4426,6 +9118,14 @@ func (s *CreateDetectorInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CreateDetectorInput"}
 	if s.Enable == nil {
 		invalidParams.Add(request.NewErrParamRequired("Enable"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+	}
+	if s.DataSources != nil {
+		if err := s.DataSources.Validate(); err != nil {
+			invalidParams.AddNested("DataSources", err.(request.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4440,9 +9140,21 @@ func (s *CreateDetectorInput) SetClientToken(v string) *CreateDetectorInput {
 	return s
 }
 
+// SetDataSources sets the DataSources field's value.
+func (s *CreateDetectorInput) SetDataSources(v *DataSourceConfigurations) *CreateDetectorInput {
+	s.DataSources = v
+	return s
+}
+
 // SetEnable sets the Enable field's value.
 func (s *CreateDetectorInput) SetEnable(v bool) *CreateDetectorInput {
 	s.Enable = &v
+	return s
+}
+
+// SetFeatures sets the Features field's value.
+func (s *CreateDetectorInput) SetFeatures(v []*DetectorFeatureConfiguration) *CreateDetectorInput {
+	s.Features = v
 	return s
 }
 
@@ -4452,20 +9164,37 @@ func (s *CreateDetectorInput) SetFindingPublishingFrequency(v string) *CreateDet
 	return s
 }
 
-// CreateDetector response object.
+// SetTags sets the Tags field's value.
+func (s *CreateDetectorInput) SetTags(v map[string]*string) *CreateDetectorInput {
+	s.Tags = v
+	return s
+}
+
 type CreateDetectorOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The unique ID of the created detector.
-	DetectorId *string `locationName:"detectorId" type:"string"`
+	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
+
+	// Specifies the data sources that couldn't be enabled when GuardDuty was enabled
+	// for the first time.
+	UnprocessedDataSources *UnprocessedDataSourcesResult `locationName:"unprocessedDataSources" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDetectorOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDetectorOutput) GoString() string {
 	return s.String()
 }
@@ -4476,44 +9205,257 @@ func (s *CreateDetectorOutput) SetDetectorId(v string) *CreateDetectorOutput {
 	return s
 }
 
-// CreateFilter request object.
+// SetUnprocessedDataSources sets the UnprocessedDataSources field's value.
+func (s *CreateDetectorOutput) SetUnprocessedDataSources(v *UnprocessedDataSourcesResult) *CreateDetectorOutput {
+	s.UnprocessedDataSources = v
+	return s
+}
+
 type CreateFilterInput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the action that is to be applied to the findings that match the
 	// filter.
-	Action *string `locationName:"action" type:"string" enum:"FilterAction"`
+	Action *string `locationName:"action" min:"1" type:"string" enum:"FilterAction"`
 
 	// The idempotency token for the create request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The description of the filter.
+	// The description of the filter. Valid characters include alphanumeric characters,
+	// and special characters such as hyphen, period, colon, underscore, parentheses
+	// ({ }, [ ], and ( )), forward slash, horizontal tab, vertical tab, newline,
+	// form feed, return, and whitespace.
 	Description *string `locationName:"description" type:"string"`
 
+	// The ID of the detector belonging to the GuardDuty account that you want to
+	// create a filter for.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// Represents the criteria to be used in the filter for querying findings.
+	//
+	// You can only use the following attributes to query findings:
+	//
+	//    * accountId
+	//
+	//    * id
+	//
+	//    * region
+	//
+	//    * severity To filter on the basis of severity, the API and CLI use the
+	//    following input list for the FindingCriteria (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html)
+	//    condition: Low: ["1", "2", "3"] Medium: ["4", "5", "6"] High: ["7", "8",
+	//    "9"] For more information, see Severity levels for GuardDuty findings
+	//    (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings.html#guardduty_findings-severity).
+	//
+	//    * type
+	//
+	//    * updatedAt Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or
+	//    YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.
+	//
+	//    * resource.accessKeyDetails.accessKeyId
+	//
+	//    * resource.accessKeyDetails.principalId
+	//
+	//    * resource.accessKeyDetails.userName
+	//
+	//    * resource.accessKeyDetails.userType
+	//
+	//    * resource.instanceDetails.iamInstanceProfile.id
+	//
+	//    * resource.instanceDetails.imageId
+	//
+	//    * resource.instanceDetails.instanceId
+	//
+	//    * resource.instanceDetails.tags.key
+	//
+	//    * resource.instanceDetails.tags.value
+	//
+	//    * resource.instanceDetails.networkInterfaces.ipv6Addresses
+	//
+	//    * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
+	//
+	//    * resource.instanceDetails.networkInterfaces.publicDnsName
+	//
+	//    * resource.instanceDetails.networkInterfaces.publicIp
+	//
+	//    * resource.instanceDetails.networkInterfaces.securityGroups.groupId
+	//
+	//    * resource.instanceDetails.networkInterfaces.securityGroups.groupName
+	//
+	//    * resource.instanceDetails.networkInterfaces.subnetId
+	//
+	//    * resource.instanceDetails.networkInterfaces.vpcId
+	//
+	//    * resource.instanceDetails.outpostArn
+	//
+	//    * resource.resourceType
+	//
+	//    * resource.s3BucketDetails.publicAccess.effectivePermissions
+	//
+	//    * resource.s3BucketDetails.name
+	//
+	//    * resource.s3BucketDetails.tags.key
+	//
+	//    * resource.s3BucketDetails.tags.value
+	//
+	//    * resource.s3BucketDetails.type
+	//
+	//    * service.action.actionType
+	//
+	//    * service.action.awsApiCallAction.api
+	//
+	//    * service.action.awsApiCallAction.callerType
+	//
+	//    * service.action.awsApiCallAction.errorCode
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.city.cityName
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.country.countryName
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.organization.asn
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
+	//
+	//    * service.action.awsApiCallAction.serviceName
+	//
+	//    * service.action.dnsRequestAction.domain
+	//
+	//    * service.action.dnsRequestAction.domainWithSuffix
+	//
+	//    * service.action.networkConnectionAction.blocked
+	//
+	//    * service.action.networkConnectionAction.connectionDirection
+	//
+	//    * service.action.networkConnectionAction.localPortDetails.port
+	//
+	//    * service.action.networkConnectionAction.protocol
+	//
+	//    * service.action.networkConnectionAction.remoteIpDetails.city.cityName
+	//
+	//    * service.action.networkConnectionAction.remoteIpDetails.country.countryName
+	//
+	//    * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
+	//
+	//    * service.action.networkConnectionAction.remoteIpDetails.organization.asn
+	//
+	//    * service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
+	//
+	//    * service.action.networkConnectionAction.remotePortDetails.port
+	//
+	//    * service.action.awsApiCallAction.remoteAccountDetails.affiliated
+	//
+	//    * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
+	//
+	//    * service.action.kubernetesApiCallAction.namespace
+	//
+	//    * service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
+	//
+	//    * service.action.kubernetesApiCallAction.requestUri
+	//
+	//    * service.action.kubernetesApiCallAction.statusCode
+	//
+	//    * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+	//
+	//    * service.action.networkConnectionAction.protocol
+	//
+	//    * service.action.awsApiCallAction.serviceName
+	//
+	//    * service.action.awsApiCallAction.remoteAccountDetails.accountId
+	//
+	//    * service.additionalInfo.threatListName
+	//
+	//    * service.resourceRole
+	//
+	//    * resource.eksClusterDetails.name
+	//
+	//    * resource.kubernetesDetails.kubernetesWorkloadDetails.name
+	//
+	//    * resource.kubernetesDetails.kubernetesWorkloadDetails.namespace
+	//
+	//    * resource.kubernetesDetails.kubernetesUserDetails.username
+	//
+	//    * resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image
+	//
+	//    * resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix
+	//
+	//    * service.ebsVolumeScanDetails.scanId
+	//
+	//    * service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name
+	//
+	//    * service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.severity
+	//
+	//    * service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash
+	//
+	//    * resource.ecsClusterDetails.name
+	//
+	//    * resource.ecsClusterDetails.taskDetails.containers.image
+	//
+	//    * resource.ecsClusterDetails.taskDetails.definitionArn
+	//
+	//    * resource.containerDetails.image
+	//
+	//    * resource.rdsDbInstanceDetails.dbInstanceIdentifier
+	//
+	//    * resource.rdsDbInstanceDetails.dbClusterIdentifier
+	//
+	//    * resource.rdsDbInstanceDetails.engine
+	//
+	//    * resource.rdsDbUserDetails.user
+	//
+	//    * resource.rdsDbInstanceDetails.tags.key
+	//
+	//    * resource.rdsDbInstanceDetails.tags.value
+	//
+	//    * service.runtimeDetails.process.executableSha256
+	//
+	//    * service.runtimeDetails.process.name
+	//
+	//    * service.runtimeDetails.process.name
+	//
+	//    * resource.lambdaDetails.functionName
+	//
+	//    * resource.lambdaDetails.functionArn
+	//
+	//    * resource.lambdaDetails.tags.key
+	//
+	//    * resource.lambdaDetails.tags.value
 	//
 	// FindingCriteria is a required field
 	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure" required:"true"`
 
-	// The name of the filter.
+	// The name of the filter. Valid characters include period (.), underscore (_),
+	// dash (-), and alphanumeric characters. A whitespace is considered to be an
+	// invalid character.
 	//
 	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
+	Name *string `locationName:"name" min:"3" type:"string" required:"true"`
 
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
-	Rank *int64 `locationName:"rank" type:"integer"`
+	Rank *int64 `locationName:"rank" min:"1" type:"integer"`
+
+	// The tags to be added to a new filter resource.
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFilterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFilterInput) GoString() string {
 	return s.String()
 }
@@ -4521,6 +9463,9 @@ func (s CreateFilterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFilterInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CreateFilterInput"}
+	if s.Action != nil && len(*s.Action) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Action", 1))
+	}
 	if s.DetectorId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
 	}
@@ -4532,6 +9477,15 @@ func (s *CreateFilterInput) Validate() error {
 	}
 	if s.Name == nil {
 		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 3 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 3))
+	}
+	if s.Rank != nil && *s.Rank < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("Rank", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4582,20 +9536,35 @@ func (s *CreateFilterInput) SetRank(v int64) *CreateFilterInput {
 	return s
 }
 
-// CreateFilter response object.
+// SetTags sets the Tags field's value.
+func (s *CreateFilterInput) SetTags(v map[string]*string) *CreateFilterInput {
+	s.Tags = v
+	return s
+}
+
 type CreateFilterOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the successfully created filter.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFilterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFilterOutput) GoString() string {
 	return s.String()
 }
@@ -4606,11 +9575,10 @@ func (s *CreateFilterOutput) SetName(v string) *CreateFilterOutput {
 	return s
 }
 
-// Create IP Set Request
 type CreateIPSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// A boolean value that indicates whether GuardDuty is to start using the uploaded
+	// A Boolean value that indicates whether GuardDuty is to start using the uploaded
 	// IPSet.
 	//
 	// Activate is a required field
@@ -4619,33 +9587,48 @@ type CreateIPSetInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
+	// The unique ID of the detector of the GuardDuty account that you want to create
+	// an IPSet for.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// The format of the file that contains the IPSet.
 	//
 	// Format is a required field
-	Format *string `locationName:"format" type:"string" required:"true" enum:"IpSetFormat"`
+	Format *string `locationName:"format" min:"1" type:"string" required:"true" enum:"IpSetFormat"`
 
-	// The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+	// The URI of the file that contains the IPSet.
 	//
 	// Location is a required field
-	Location *string `locationName:"location" type:"string" required:"true"`
+	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
-	// The user friendly name to identify the IPSet. This name is displayed in all
-	// findings that are triggered by activity that involves IP addresses included
-	// in this IPSet.
+	// The user-friendly name to identify the IPSet.
+	//
+	// Allowed characters are alphanumeric, whitespace, dash (-), and underscores
+	// (_).
 	//
 	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// The tags to be added to a new IP set resource.
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIPSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIPSetInput) GoString() string {
 	return s.String()
 }
@@ -4665,11 +9648,23 @@ func (s *CreateIPSetInput) Validate() error {
 	if s.Format == nil {
 		invalidParams.Add(request.NewErrParamRequired("Format"))
 	}
+	if s.Format != nil && len(*s.Format) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Format", 1))
+	}
 	if s.Location == nil {
 		invalidParams.Add(request.NewErrParamRequired("Location"))
 	}
+	if s.Location != nil && len(*s.Location) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Location", 1))
+	}
 	if s.Name == nil {
 		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4714,20 +9709,35 @@ func (s *CreateIPSetInput) SetName(v string) *CreateIPSetInput {
 	return s
 }
 
-// CreateIPSet response object.
+// SetTags sets the Tags field's value.
+func (s *CreateIPSetInput) SetTags(v map[string]*string) *CreateIPSetInput {
+	s.Tags = v
+	return s
+}
+
 type CreateIPSetOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for an IP Set
-	IpSetId *string `locationName:"ipSetId" type:"string"`
+	// The ID of the IPSet resource.
+	//
+	// IpSetId is a required field
+	IpSetId *string `locationName:"ipSetId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIPSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIPSetOutput) GoString() string {
 	return s.String()
 }
@@ -4738,26 +9748,36 @@ func (s *CreateIPSetOutput) SetIpSetId(v string) *CreateIPSetOutput {
 	return s
 }
 
-// CreateMembers body
 type CreateMembersInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of account ID and email address pairs of the accounts that you want
-	// to associate with the master GuardDuty account.
+	// to associate with the GuardDuty administrator account.
 	//
 	// AccountDetails is a required field
-	AccountDetails []*AccountDetail `locationName:"accountDetails" type:"list" required:"true"`
+	AccountDetails []*AccountDetail `locationName:"accountDetails" min:"1" type:"list" required:"true"`
 
+	// The unique ID of the detector of the GuardDuty account that you want to associate
+	// member accounts with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMembersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMembersInput) GoString() string {
 	return s.String()
 }
@@ -4767,6 +9787,9 @@ func (s *CreateMembersInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CreateMembersInput"}
 	if s.AccountDetails == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountDetails"))
+	}
+	if s.AccountDetails != nil && len(s.AccountDetails) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountDetails", 1))
 	}
 	if s.DetectorId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
@@ -4803,21 +9826,30 @@ func (s *CreateMembersInput) SetDetectorId(v string) *CreateMembersInput {
 	return s
 }
 
-// CreateMembers response object.
 type CreateMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	// A list of objects that include the accountIds of the unprocessed accounts
+	// and a result string that explains why each was unprocessed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMembersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMembersOutput) GoString() string {
 	return s.String()
 }
@@ -4828,23 +9860,156 @@ func (s *CreateMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *C
 	return s
 }
 
-// Create Sample Findings Request
+type CreatePublishingDestinationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The idempotency token for the request.
+	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
+
+	// The properties of the publishing destination, including the ARNs for the
+	// destination and the KMS key used for encryption.
+	//
+	// DestinationProperties is a required field
+	DestinationProperties *DestinationProperties `locationName:"destinationProperties" type:"structure" required:"true"`
+
+	// The type of resource for the publishing destination. Currently only Amazon
+	// S3 buckets are supported.
+	//
+	// DestinationType is a required field
+	DestinationType *string `locationName:"destinationType" min:"1" type:"string" required:"true" enum:"DestinationType"`
+
+	// The ID of the GuardDuty detector associated with the publishing destination.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreatePublishingDestinationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreatePublishingDestinationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreatePublishingDestinationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreatePublishingDestinationInput"}
+	if s.DestinationProperties == nil {
+		invalidParams.Add(request.NewErrParamRequired("DestinationProperties"))
+	}
+	if s.DestinationType == nil {
+		invalidParams.Add(request.NewErrParamRequired("DestinationType"))
+	}
+	if s.DestinationType != nil && len(*s.DestinationType) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DestinationType", 1))
+	}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetClientToken sets the ClientToken field's value.
+func (s *CreatePublishingDestinationInput) SetClientToken(v string) *CreatePublishingDestinationInput {
+	s.ClientToken = &v
+	return s
+}
+
+// SetDestinationProperties sets the DestinationProperties field's value.
+func (s *CreatePublishingDestinationInput) SetDestinationProperties(v *DestinationProperties) *CreatePublishingDestinationInput {
+	s.DestinationProperties = v
+	return s
+}
+
+// SetDestinationType sets the DestinationType field's value.
+func (s *CreatePublishingDestinationInput) SetDestinationType(v string) *CreatePublishingDestinationInput {
+	s.DestinationType = &v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *CreatePublishingDestinationInput) SetDetectorId(v string) *CreatePublishingDestinationInput {
+	s.DetectorId = &v
+	return s
+}
+
+type CreatePublishingDestinationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the publishing destination that is created.
+	//
+	// DestinationId is a required field
+	DestinationId *string `locationName:"destinationId" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreatePublishingDestinationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreatePublishingDestinationOutput) GoString() string {
+	return s.String()
+}
+
+// SetDestinationId sets the DestinationId field's value.
+func (s *CreatePublishingDestinationOutput) SetDestinationId(v string) *CreatePublishingDestinationOutput {
+	s.DestinationId = &v
+	return s
+}
+
 type CreateSampleFindingsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the detector to create sample findings for.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// Types of sample findings that you want to generate.
+	// The types of sample findings to generate.
 	FindingTypes []*string `locationName:"findingTypes" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSampleFindingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSampleFindingsInput) GoString() string {
 	return s.String()
 }
@@ -4881,21 +10046,28 @@ type CreateSampleFindingsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSampleFindingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSampleFindingsOutput) GoString() string {
 	return s.String()
 }
 
-// Create Threat Intel Set Request
 type CreateThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// A boolean value that indicates whether GuardDuty is to start using the uploaded
+	// A Boolean value that indicates whether GuardDuty is to start using the uploaded
 	// ThreatIntelSet.
 	//
 	// Activate is a required field
@@ -4904,32 +10076,46 @@ type CreateThreatIntelSetInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
+	// The unique ID of the detector of the GuardDuty account that you want to create
+	// a threatIntelSet for.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// The format of the file that contains the ThreatIntelSet.
 	//
 	// Format is a required field
-	Format *string `locationName:"format" type:"string" required:"true" enum:"ThreatIntelSetFormat"`
+	Format *string `locationName:"format" min:"1" type:"string" required:"true" enum:"ThreatIntelSetFormat"`
 
-	// The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
+	// The URI of the file that contains the ThreatIntelSet.
 	//
 	// Location is a required field
-	Location *string `locationName:"location" type:"string" required:"true"`
+	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
-	// A user-friendly ThreatIntelSet name that is displayed in all finding generated
+	// A user-friendly ThreatIntelSet name displayed in all findings that are generated
 	// by activity that involves IP addresses included in this ThreatIntelSet.
 	//
 	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// The tags to be added to a new threat list resource.
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateThreatIntelSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateThreatIntelSetInput) GoString() string {
 	return s.String()
 }
@@ -4949,11 +10135,23 @@ func (s *CreateThreatIntelSetInput) Validate() error {
 	if s.Format == nil {
 		invalidParams.Add(request.NewErrParamRequired("Format"))
 	}
+	if s.Format != nil && len(*s.Format) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Format", 1))
+	}
 	if s.Location == nil {
 		invalidParams.Add(request.NewErrParamRequired("Location"))
 	}
+	if s.Location != nil && len(*s.Location) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Location", 1))
+	}
 	if s.Name == nil {
 		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4998,20 +10196,35 @@ func (s *CreateThreatIntelSetInput) SetName(v string) *CreateThreatIntelSetInput
 	return s
 }
 
-// CreateThreatIntelSet response object.
+// SetTags sets the Tags field's value.
+func (s *CreateThreatIntelSetInput) SetTags(v map[string]*string) *CreateThreatIntelSetInput {
+	s.Tags = v
+	return s
+}
+
 type CreateThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for an threat intel set
-	ThreatIntelSetId *string `locationName:"threatIntelSetId" type:"string"`
+	// The ID of the ThreatIntelSet resource.
+	//
+	// ThreatIntelSetId is a required field
+	ThreatIntelSetId *string `locationName:"threatIntelSetId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateThreatIntelSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateThreatIntelSetOutput) GoString() string {
 	return s.String()
 }
@@ -5022,23 +10235,335 @@ func (s *CreateThreatIntelSetOutput) SetThreatIntelSetId(v string) *CreateThreat
 	return s
 }
 
-// DeclineInvitations request body.
+// Contains information on the status of DNS logs as a data source.
+type DNSLogsConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Denotes whether DNS logs is enabled as a data source.
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"DataSourceStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DNSLogsConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DNSLogsConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetStatus sets the Status field's value.
+func (s *DNSLogsConfigurationResult) SetStatus(v string) *DNSLogsConfigurationResult {
+	s.Status = &v
+	return s
+}
+
+// Contains information about which data sources are enabled.
+type DataSourceConfigurations struct {
+	_ struct{} `type:"structure"`
+
+	// Describes whether any Kubernetes logs are enabled as data sources.
+	Kubernetes *KubernetesConfiguration `locationName:"kubernetes" type:"structure"`
+
+	// Describes whether Malware Protection is enabled as a data source.
+	MalwareProtection *MalwareProtectionConfiguration `locationName:"malwareProtection" type:"structure"`
+
+	// Describes whether S3 data event logs are enabled as a data source.
+	S3Logs *S3LogsConfiguration `locationName:"s3Logs" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataSourceConfigurations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataSourceConfigurations) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DataSourceConfigurations) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DataSourceConfigurations"}
+	if s.Kubernetes != nil {
+		if err := s.Kubernetes.Validate(); err != nil {
+			invalidParams.AddNested("Kubernetes", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3Logs != nil {
+		if err := s.S3Logs.Validate(); err != nil {
+			invalidParams.AddNested("S3Logs", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKubernetes sets the Kubernetes field's value.
+func (s *DataSourceConfigurations) SetKubernetes(v *KubernetesConfiguration) *DataSourceConfigurations {
+	s.Kubernetes = v
+	return s
+}
+
+// SetMalwareProtection sets the MalwareProtection field's value.
+func (s *DataSourceConfigurations) SetMalwareProtection(v *MalwareProtectionConfiguration) *DataSourceConfigurations {
+	s.MalwareProtection = v
+	return s
+}
+
+// SetS3Logs sets the S3Logs field's value.
+func (s *DataSourceConfigurations) SetS3Logs(v *S3LogsConfiguration) *DataSourceConfigurations {
+	s.S3Logs = v
+	return s
+}
+
+// Contains information on the status of data sources for the detector.
+type DataSourceConfigurationsResult struct {
+	_ struct{} `type:"structure"`
+
+	// An object that contains information on the status of CloudTrail as a data
+	// source.
+	//
+	// CloudTrail is a required field
+	CloudTrail *CloudTrailConfigurationResult `locationName:"cloudTrail" type:"structure" required:"true"`
+
+	// An object that contains information on the status of DNS logs as a data source.
+	//
+	// DNSLogs is a required field
+	DNSLogs *DNSLogsConfigurationResult `locationName:"dnsLogs" type:"structure" required:"true"`
+
+	// An object that contains information on the status of VPC flow logs as a data
+	// source.
+	//
+	// FlowLogs is a required field
+	FlowLogs *FlowLogsConfigurationResult `locationName:"flowLogs" type:"structure" required:"true"`
+
+	// An object that contains information on the status of all Kubernetes data
+	// sources.
+	Kubernetes *KubernetesConfigurationResult `locationName:"kubernetes" type:"structure"`
+
+	// Describes the configuration of Malware Protection data sources.
+	MalwareProtection *MalwareProtectionConfigurationResult `locationName:"malwareProtection" type:"structure"`
+
+	// An object that contains information on the status of S3 Data event logs as
+	// a data source.
+	//
+	// S3Logs is a required field
+	S3Logs *S3LogsConfigurationResult `locationName:"s3Logs" type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataSourceConfigurationsResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataSourceConfigurationsResult) GoString() string {
+	return s.String()
+}
+
+// SetCloudTrail sets the CloudTrail field's value.
+func (s *DataSourceConfigurationsResult) SetCloudTrail(v *CloudTrailConfigurationResult) *DataSourceConfigurationsResult {
+	s.CloudTrail = v
+	return s
+}
+
+// SetDNSLogs sets the DNSLogs field's value.
+func (s *DataSourceConfigurationsResult) SetDNSLogs(v *DNSLogsConfigurationResult) *DataSourceConfigurationsResult {
+	s.DNSLogs = v
+	return s
+}
+
+// SetFlowLogs sets the FlowLogs field's value.
+func (s *DataSourceConfigurationsResult) SetFlowLogs(v *FlowLogsConfigurationResult) *DataSourceConfigurationsResult {
+	s.FlowLogs = v
+	return s
+}
+
+// SetKubernetes sets the Kubernetes field's value.
+func (s *DataSourceConfigurationsResult) SetKubernetes(v *KubernetesConfigurationResult) *DataSourceConfigurationsResult {
+	s.Kubernetes = v
+	return s
+}
+
+// SetMalwareProtection sets the MalwareProtection field's value.
+func (s *DataSourceConfigurationsResult) SetMalwareProtection(v *MalwareProtectionConfigurationResult) *DataSourceConfigurationsResult {
+	s.MalwareProtection = v
+	return s
+}
+
+// SetS3Logs sets the S3Logs field's value.
+func (s *DataSourceConfigurationsResult) SetS3Logs(v *S3LogsConfigurationResult) *DataSourceConfigurationsResult {
+	s.S3Logs = v
+	return s
+}
+
+// Contains information about which data sources are enabled for the GuardDuty
+// member account.
+type DataSourceFreeTrial struct {
+	_ struct{} `type:"structure"`
+
+	// A value that specifies the number of days left to use each enabled data source.
+	FreeTrialDaysRemaining *int64 `locationName:"freeTrialDaysRemaining" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataSourceFreeTrial) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataSourceFreeTrial) GoString() string {
+	return s.String()
+}
+
+// SetFreeTrialDaysRemaining sets the FreeTrialDaysRemaining field's value.
+func (s *DataSourceFreeTrial) SetFreeTrialDaysRemaining(v int64) *DataSourceFreeTrial {
+	s.FreeTrialDaysRemaining = &v
+	return s
+}
+
+// Contains information about which data sources are enabled for the GuardDuty
+// member account.
+type DataSourcesFreeTrial struct {
+	_ struct{} `type:"structure"`
+
+	// Describes whether any Amazon Web Services CloudTrail management event logs
+	// are enabled as data sources.
+	CloudTrail *DataSourceFreeTrial `locationName:"cloudTrail" type:"structure"`
+
+	// Describes whether any DNS logs are enabled as data sources.
+	DnsLogs *DataSourceFreeTrial `locationName:"dnsLogs" type:"structure"`
+
+	// Describes whether any VPC Flow logs are enabled as data sources.
+	FlowLogs *DataSourceFreeTrial `locationName:"flowLogs" type:"structure"`
+
+	// Describes whether any Kubernetes logs are enabled as data sources.
+	Kubernetes *KubernetesDataSourceFreeTrial `locationName:"kubernetes" type:"structure"`
+
+	// Describes whether Malware Protection is enabled as a data source.
+	MalwareProtection *MalwareProtectionDataSourceFreeTrial `locationName:"malwareProtection" type:"structure"`
+
+	// Describes whether any S3 data event logs are enabled as data sources.
+	S3Logs *DataSourceFreeTrial `locationName:"s3Logs" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataSourcesFreeTrial) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataSourcesFreeTrial) GoString() string {
+	return s.String()
+}
+
+// SetCloudTrail sets the CloudTrail field's value.
+func (s *DataSourcesFreeTrial) SetCloudTrail(v *DataSourceFreeTrial) *DataSourcesFreeTrial {
+	s.CloudTrail = v
+	return s
+}
+
+// SetDnsLogs sets the DnsLogs field's value.
+func (s *DataSourcesFreeTrial) SetDnsLogs(v *DataSourceFreeTrial) *DataSourcesFreeTrial {
+	s.DnsLogs = v
+	return s
+}
+
+// SetFlowLogs sets the FlowLogs field's value.
+func (s *DataSourcesFreeTrial) SetFlowLogs(v *DataSourceFreeTrial) *DataSourcesFreeTrial {
+	s.FlowLogs = v
+	return s
+}
+
+// SetKubernetes sets the Kubernetes field's value.
+func (s *DataSourcesFreeTrial) SetKubernetes(v *KubernetesDataSourceFreeTrial) *DataSourcesFreeTrial {
+	s.Kubernetes = v
+	return s
+}
+
+// SetMalwareProtection sets the MalwareProtection field's value.
+func (s *DataSourcesFreeTrial) SetMalwareProtection(v *MalwareProtectionDataSourceFreeTrial) *DataSourcesFreeTrial {
+	s.MalwareProtection = v
+	return s
+}
+
+// SetS3Logs sets the S3Logs field's value.
+func (s *DataSourcesFreeTrial) SetS3Logs(v *DataSourceFreeTrial) *DataSourcesFreeTrial {
+	s.S3Logs = v
+	return s
+}
+
 type DeclineInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs of the AWS accounts that sent invitations to the current
-	// member account that you want to decline invitations from.
+	// A list of account IDs of the Amazon Web Services accounts that sent invitations
+	// to the current member account that you want to decline invitations from.
 	//
 	// AccountIds is a required field
-	AccountIds []*string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeclineInvitationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeclineInvitationsInput) GoString() string {
 	return s.String()
 }
@@ -5048,6 +10573,9 @@ func (s *DeclineInvitationsInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "DeclineInvitationsInput"}
 	if s.AccountIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5062,21 +10590,30 @@ func (s *DeclineInvitationsInput) SetAccountIds(v []*string) *DeclineInvitations
 	return s
 }
 
-// DeclineInvitations response object.
 type DeclineInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeclineInvitationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeclineInvitationsOutput) GoString() string {
 	return s.String()
 }
@@ -5087,19 +10624,73 @@ func (s *DeclineInvitationsOutput) SetUnprocessedAccounts(v []*UnprocessedAccoun
 	return s
 }
 
-type DeleteDetectorInput struct {
+// Contains information on the server side encryption method used in the S3
+// bucket. See S3 Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)
+// for more information.
+type DefaultServerSideEncryption struct {
 	_ struct{} `type:"structure"`
 
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	// The type of encryption used for objects within the S3 bucket.
+	EncryptionType *string `locationName:"encryptionType" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the KMS encryption key. Only available
+	// if the bucket EncryptionType is aws:kms.
+	KmsMasterKeyArn *string `locationName:"kmsMasterKeyArn" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DefaultServerSideEncryption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DefaultServerSideEncryption) GoString() string {
+	return s.String()
+}
+
+// SetEncryptionType sets the EncryptionType field's value.
+func (s *DefaultServerSideEncryption) SetEncryptionType(v string) *DefaultServerSideEncryption {
+	s.EncryptionType = &v
+	return s
+}
+
+// SetKmsMasterKeyArn sets the KmsMasterKeyArn field's value.
+func (s *DefaultServerSideEncryption) SetKmsMasterKeyArn(v string) *DefaultServerSideEncryption {
+	s.KmsMasterKeyArn = &v
+	return s
+}
+
+type DeleteDetectorInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The unique ID of the detector that you want to delete.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDetectorInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDetectorInput) GoString() string {
 	return s.String()
 }
@@ -5130,32 +10721,52 @@ type DeleteDetectorOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDetectorOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDetectorOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteFilterInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The unique ID of the detector that the filter is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The name of the filter that you want to delete.
+	//
 	// FilterName is a required field
 	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFilterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFilterInput) GoString() string {
 	return s.String()
 }
@@ -5198,32 +10809,52 @@ type DeleteFilterOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFilterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFilterOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteIPSetInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The unique ID of the detector associated with the IPSet.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The unique ID of the IPSet to delete.
+	//
 	// IpSetId is a required field
 	IpSetId *string `location:"uri" locationName:"ipSetId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIPSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIPSetInput) GoString() string {
 	return s.String()
 }
@@ -5266,33 +10897,48 @@ type DeleteIPSetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIPSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIPSetOutput) GoString() string {
 	return s.String()
 }
 
-// DeleteInvitations request body.
 type DeleteInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs of the AWS accounts that sent invitations to the current
-	// member account that you want to delete invitations from.
+	// A list of account IDs of the Amazon Web Services accounts that sent invitations
+	// to the current member account that you want to delete invitations from.
 	//
 	// AccountIds is a required field
-	AccountIds []*string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteInvitationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteInvitationsInput) GoString() string {
 	return s.String()
 }
@@ -5302,6 +10948,9 @@ func (s *DeleteInvitationsInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "DeleteInvitationsInput"}
 	if s.AccountIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5316,21 +10965,30 @@ func (s *DeleteInvitationsInput) SetAccountIds(v []*string) *DeleteInvitationsIn
 	return s
 }
 
-// DeleteInvitations response object.
 type DeleteInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteInvitationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteInvitationsOutput) GoString() string {
 	return s.String()
 }
@@ -5341,25 +10999,35 @@ func (s *DeleteInvitationsOutput) SetUnprocessedAccounts(v []*UnprocessedAccount
 	return s
 }
 
-// DeleteMembers request body.
 type DeleteMembersInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of account IDs of the GuardDuty member accounts that you want to delete.
 	//
 	// AccountIds is a required field
-	AccountIds []*string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
+	// The unique ID of the detector of the GuardDuty account whose members you
+	// want to delete.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteMembersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteMembersInput) GoString() string {
 	return s.String()
 }
@@ -5369,6 +11037,9 @@ func (s *DeleteMembersInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "DeleteMembersInput"}
 	if s.AccountIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
 	}
 	if s.DetectorId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
@@ -5395,21 +11066,29 @@ func (s *DeleteMembersInput) SetDetectorId(v string) *DeleteMembersInput {
 	return s
 }
 
-// DeleteMembers response object.
 type DeleteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	// The accounts that could not be processed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteMembersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteMembersOutput) GoString() string {
 	return s.String()
 }
@@ -5420,22 +11099,123 @@ func (s *DeleteMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *D
 	return s
 }
 
-type DeleteThreatIntelSetInput struct {
-	_ struct{} `type:"structure"`
+type DeletePublishingDestinationInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The ID of the publishing destination to delete.
+	//
+	// DestinationId is a required field
+	DestinationId *string `location:"uri" locationName:"destinationId" type:"string" required:"true"`
+
+	// The unique ID of the detector associated with the publishing destination
+	// to delete.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
 
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeletePublishingDestinationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeletePublishingDestinationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeletePublishingDestinationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeletePublishingDestinationInput"}
+	if s.DestinationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DestinationId"))
+	}
+	if s.DestinationId != nil && len(*s.DestinationId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DestinationId", 1))
+	}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDestinationId sets the DestinationId field's value.
+func (s *DeletePublishingDestinationInput) SetDestinationId(v string) *DeletePublishingDestinationInput {
+	s.DestinationId = &v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *DeletePublishingDestinationInput) SetDetectorId(v string) *DeletePublishingDestinationInput {
+	s.DetectorId = &v
+	return s
+}
+
+type DeletePublishingDestinationOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeletePublishingDestinationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeletePublishingDestinationOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteThreatIntelSetInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The unique ID of the detector that the threatIntelSet is associated with.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// The unique ID of the threatIntelSet that you want to delete.
+	//
 	// ThreatIntelSetId is a required field
 	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteThreatIntelSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteThreatIntelSetInput) GoString() string {
 	return s.String()
 }
@@ -5478,29 +11258,990 @@ type DeleteThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteThreatIntelSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteThreatIntelSetOutput) GoString() string {
 	return s.String()
 }
 
-type DisassociateFromMasterAccountInput struct {
+type DescribeMalwareScansInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector that the request is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// Represents the criteria to be used in the filter for describing scan entries.
+	FilterCriteria *FilterCriteria `locationName:"filterCriteria" type:"structure"`
+
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// Represents the criteria used for sorting scan entries. The attributeName
+	// (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_SortCriteria.html#guardduty-Type-SortCriteria-attributeName)
+	// is required and it must be scanStartTime.
+	SortCriteria *SortCriteria `locationName:"sortCriteria" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeMalwareScansInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeMalwareScansInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeMalwareScansInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeMalwareScansInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.FilterCriteria != nil {
+		if err := s.FilterCriteria.Validate(); err != nil {
+			invalidParams.AddNested("FilterCriteria", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *DescribeMalwareScansInput) SetDetectorId(v string) *DescribeMalwareScansInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetFilterCriteria sets the FilterCriteria field's value.
+func (s *DescribeMalwareScansInput) SetFilterCriteria(v *FilterCriteria) *DescribeMalwareScansInput {
+	s.FilterCriteria = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeMalwareScansInput) SetMaxResults(v int64) *DescribeMalwareScansInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeMalwareScansInput) SetNextToken(v string) *DescribeMalwareScansInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetSortCriteria sets the SortCriteria field's value.
+func (s *DescribeMalwareScansInput) SetSortCriteria(v *SortCriteria) *DescribeMalwareScansInput {
+	s.SortCriteria = v
+	return s
+}
+
+type DescribeMalwareScansOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// Contains information about malware scans.
+	//
+	// Scans is a required field
+	Scans []*Scan `locationName:"scans" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeMalwareScansOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeMalwareScansOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeMalwareScansOutput) SetNextToken(v string) *DescribeMalwareScansOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetScans sets the Scans field's value.
+func (s *DescribeMalwareScansOutput) SetScans(v []*Scan) *DescribeMalwareScansOutput {
+	s.Scans = v
+	return s
+}
+
+type DescribeOrganizationConfigurationInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The ID of the detector to retrieve information about the delegated administrator
+	// from.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeOrganizationConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeOrganizationConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeOrganizationConfigurationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeOrganizationConfigurationInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *DescribeOrganizationConfigurationInput) SetDetectorId(v string) *DescribeOrganizationConfigurationInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeOrganizationConfigurationInput) SetMaxResults(v int64) *DescribeOrganizationConfigurationInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeOrganizationConfigurationInput) SetNextToken(v string) *DescribeOrganizationConfigurationInput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeOrganizationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether GuardDuty is automatically enabled for accounts added to
+	// the organization.
+	//
+	// Even though this is still supported, we recommend using AutoEnableOrganizationMembers
+	// to achieve the similar results.
+	//
+	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
+	AutoEnable *bool `locationName:"autoEnable" deprecated:"true" type:"boolean"`
+
+	// Indicates the auto-enablement configuration of GuardDuty for the member accounts
+	// in the organization.
+	//
+	//    * NEW: Indicates that when a new account joins the organization, they
+	//    will have GuardDuty enabled automatically.
+	//
+	//    * ALL: Indicates that all accounts in the organization have GuardDuty
+	//    enabled automatically. This includes NEW accounts that join the organization
+	//    and accounts that may have been suspended or removed from the organization
+	//    in GuardDuty.
+	//
+	//    * NONE: Indicates that GuardDuty will not be automatically enabled for
+	//    any account in the organization. The administrator must manage GuardDuty
+	//    for each account in the organization individually.
+	AutoEnableOrganizationMembers *string `locationName:"autoEnableOrganizationMembers" type:"string" enum:"AutoEnableMembers"`
+
+	// Describes which data sources are enabled automatically for member accounts.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources *OrganizationDataSourceConfigurationsResult `locationName:"dataSources" deprecated:"true" type:"structure"`
+
+	// A list of features that are configured for this organization.
+	Features []*OrganizationFeatureConfigurationResult `locationName:"features" type:"list"`
+
+	// Indicates whether the maximum number of allowed member accounts are already
+	// associated with the delegated administrator account for your organization.
+	//
+	// MemberAccountLimitReached is a required field
+	MemberAccountLimitReached *bool `locationName:"memberAccountLimitReached" type:"boolean" required:"true"`
+
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeOrganizationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeOrganizationConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *DescribeOrganizationConfigurationOutput) SetAutoEnable(v bool) *DescribeOrganizationConfigurationOutput {
+	s.AutoEnable = &v
+	return s
+}
+
+// SetAutoEnableOrganizationMembers sets the AutoEnableOrganizationMembers field's value.
+func (s *DescribeOrganizationConfigurationOutput) SetAutoEnableOrganizationMembers(v string) *DescribeOrganizationConfigurationOutput {
+	s.AutoEnableOrganizationMembers = &v
+	return s
+}
+
+// SetDataSources sets the DataSources field's value.
+func (s *DescribeOrganizationConfigurationOutput) SetDataSources(v *OrganizationDataSourceConfigurationsResult) *DescribeOrganizationConfigurationOutput {
+	s.DataSources = v
+	return s
+}
+
+// SetFeatures sets the Features field's value.
+func (s *DescribeOrganizationConfigurationOutput) SetFeatures(v []*OrganizationFeatureConfigurationResult) *DescribeOrganizationConfigurationOutput {
+	s.Features = v
+	return s
+}
+
+// SetMemberAccountLimitReached sets the MemberAccountLimitReached field's value.
+func (s *DescribeOrganizationConfigurationOutput) SetMemberAccountLimitReached(v bool) *DescribeOrganizationConfigurationOutput {
+	s.MemberAccountLimitReached = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeOrganizationConfigurationOutput) SetNextToken(v string) *DescribeOrganizationConfigurationOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribePublishingDestinationInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The ID of the publishing destination to retrieve.
+	//
+	// DestinationId is a required field
+	DestinationId *string `location:"uri" locationName:"destinationId" type:"string" required:"true"`
+
+	// The unique ID of the detector associated with the publishing destination
+	// to retrieve.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribePublishingDestinationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribePublishingDestinationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribePublishingDestinationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribePublishingDestinationInput"}
+	if s.DestinationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DestinationId"))
+	}
+	if s.DestinationId != nil && len(*s.DestinationId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DestinationId", 1))
+	}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDestinationId sets the DestinationId field's value.
+func (s *DescribePublishingDestinationInput) SetDestinationId(v string) *DescribePublishingDestinationInput {
+	s.DestinationId = &v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *DescribePublishingDestinationInput) SetDetectorId(v string) *DescribePublishingDestinationInput {
+	s.DetectorId = &v
+	return s
+}
+
+type DescribePublishingDestinationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the publishing destination.
+	//
+	// DestinationId is a required field
+	DestinationId *string `locationName:"destinationId" type:"string" required:"true"`
+
+	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn
+	// of the publishing destination.
+	//
+	// DestinationProperties is a required field
+	DestinationProperties *DestinationProperties `locationName:"destinationProperties" type:"structure" required:"true"`
+
+	// The type of publishing destination. Currently, only Amazon S3 buckets are
+	// supported.
+	//
+	// DestinationType is a required field
+	DestinationType *string `locationName:"destinationType" min:"1" type:"string" required:"true" enum:"DestinationType"`
+
+	// The time, in epoch millisecond format, at which GuardDuty was first unable
+	// to publish findings to the destination.
+	//
+	// PublishingFailureStartTimestamp is a required field
+	PublishingFailureStartTimestamp *int64 `locationName:"publishingFailureStartTimestamp" type:"long" required:"true"`
+
+	// The status of the publishing destination.
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"PublishingStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribePublishingDestinationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribePublishingDestinationOutput) GoString() string {
+	return s.String()
+}
+
+// SetDestinationId sets the DestinationId field's value.
+func (s *DescribePublishingDestinationOutput) SetDestinationId(v string) *DescribePublishingDestinationOutput {
+	s.DestinationId = &v
+	return s
+}
+
+// SetDestinationProperties sets the DestinationProperties field's value.
+func (s *DescribePublishingDestinationOutput) SetDestinationProperties(v *DestinationProperties) *DescribePublishingDestinationOutput {
+	s.DestinationProperties = v
+	return s
+}
+
+// SetDestinationType sets the DestinationType field's value.
+func (s *DescribePublishingDestinationOutput) SetDestinationType(v string) *DescribePublishingDestinationOutput {
+	s.DestinationType = &v
+	return s
+}
+
+// SetPublishingFailureStartTimestamp sets the PublishingFailureStartTimestamp field's value.
+func (s *DescribePublishingDestinationOutput) SetPublishingFailureStartTimestamp(v int64) *DescribePublishingDestinationOutput {
+	s.PublishingFailureStartTimestamp = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *DescribePublishingDestinationOutput) SetStatus(v string) *DescribePublishingDestinationOutput {
+	s.Status = &v
+	return s
+}
+
+// Contains information about the publishing destination, including the ID,
+// type, and status.
+type Destination struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of the publishing destination.
+	//
+	// DestinationId is a required field
+	DestinationId *string `locationName:"destinationId" type:"string" required:"true"`
+
+	// The type of resource used for the publishing destination. Currently, only
+	// Amazon S3 buckets are supported.
+	//
+	// DestinationType is a required field
+	DestinationType *string `locationName:"destinationType" min:"1" type:"string" required:"true" enum:"DestinationType"`
+
+	// The status of the publishing destination.
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"PublishingStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Destination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Destination) GoString() string {
+	return s.String()
+}
+
+// SetDestinationId sets the DestinationId field's value.
+func (s *Destination) SetDestinationId(v string) *Destination {
+	s.DestinationId = &v
+	return s
+}
+
+// SetDestinationType sets the DestinationType field's value.
+func (s *Destination) SetDestinationType(v string) *Destination {
+	s.DestinationType = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *Destination) SetStatus(v string) *Destination {
+	s.Status = &v
+	return s
+}
+
+// Contains the Amazon Resource Name (ARN) of the resource to publish to, such
+// as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.
+type DestinationProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource to publish to.
+	//
+	// To specify an S3 bucket folder use the following format: arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/
+	DestinationArn *string `locationName:"destinationArn" type:"string"`
+
+	// The ARN of the KMS key to use for encryption.
+	KmsKeyArn *string `locationName:"kmsKeyArn" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DestinationProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DestinationProperties) GoString() string {
+	return s.String()
+}
+
+// SetDestinationArn sets the DestinationArn field's value.
+func (s *DestinationProperties) SetDestinationArn(v string) *DestinationProperties {
+	s.DestinationArn = &v
+	return s
+}
+
+// SetKmsKeyArn sets the KmsKeyArn field's value.
+func (s *DestinationProperties) SetKmsKeyArn(v string) *DestinationProperties {
+	s.KmsKeyArn = &v
+	return s
+}
+
+// Contains information about the detected behavior.
+type Detection struct {
+	_ struct{} `type:"structure"`
+
+	// The details about the anomalous activity that caused GuardDuty to generate
+	// the finding.
+	Anomaly *Anomaly `locationName:"anomaly" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Detection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Detection) GoString() string {
+	return s.String()
+}
+
+// SetAnomaly sets the Anomaly field's value.
+func (s *Detection) SetAnomaly(v *Anomaly) *Detection {
+	s.Anomaly = v
+	return s
+}
+
+// Information about the additional configuration for a feature in your GuardDuty
+// account.
+type DetectorAdditionalConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the additional configuration.
+	Name *string `locationName:"name" type:"string" enum:"FeatureAdditionalConfiguration"`
+
+	// Status of the additional configuration.
+	Status *string `locationName:"status" type:"string" enum:"FeatureStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DetectorAdditionalConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DetectorAdditionalConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *DetectorAdditionalConfiguration) SetName(v string) *DetectorAdditionalConfiguration {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *DetectorAdditionalConfiguration) SetStatus(v string) *DetectorAdditionalConfiguration {
+	s.Status = &v
+	return s
+}
+
+// Information about the additional configuration.
+type DetectorAdditionalConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the additional configuration.
+	Name *string `locationName:"name" type:"string" enum:"FeatureAdditionalConfiguration"`
+
+	// Status of the additional configuration.
+	Status *string `locationName:"status" type:"string" enum:"FeatureStatus"`
+
+	// The timestamp at which the additional configuration was last updated. This
+	// is in UTC format.
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DetectorAdditionalConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DetectorAdditionalConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *DetectorAdditionalConfigurationResult) SetName(v string) *DetectorAdditionalConfigurationResult {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *DetectorAdditionalConfigurationResult) SetStatus(v string) *DetectorAdditionalConfigurationResult {
+	s.Status = &v
+	return s
+}
+
+// SetUpdatedAt sets the UpdatedAt field's value.
+func (s *DetectorAdditionalConfigurationResult) SetUpdatedAt(v time.Time) *DetectorAdditionalConfigurationResult {
+	s.UpdatedAt = &v
+	return s
+}
+
+// Contains information about a GuardDuty feature.
+type DetectorFeatureConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Additional configuration for a resource.
+	AdditionalConfiguration []*DetectorAdditionalConfiguration `locationName:"additionalConfiguration" type:"list"`
+
+	// The name of the feature.
+	Name *string `locationName:"name" type:"string" enum:"DetectorFeature"`
+
+	// The status of the feature.
+	Status *string `locationName:"status" type:"string" enum:"FeatureStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DetectorFeatureConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DetectorFeatureConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetAdditionalConfiguration sets the AdditionalConfiguration field's value.
+func (s *DetectorFeatureConfiguration) SetAdditionalConfiguration(v []*DetectorAdditionalConfiguration) *DetectorFeatureConfiguration {
+	s.AdditionalConfiguration = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *DetectorFeatureConfiguration) SetName(v string) *DetectorFeatureConfiguration {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *DetectorFeatureConfiguration) SetStatus(v string) *DetectorFeatureConfiguration {
+	s.Status = &v
+	return s
+}
+
+// Contains information about a GuardDuty feature.
+type DetectorFeatureConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Additional configuration for a resource.
+	AdditionalConfiguration []*DetectorAdditionalConfigurationResult `locationName:"additionalConfiguration" type:"list"`
+
+	// Indicates the name of the feature that can be enabled for the detector.
+	Name *string `locationName:"name" type:"string" enum:"DetectorFeatureResult"`
+
+	// Indicates the status of the feature that is enabled for the detector.
+	Status *string `locationName:"status" type:"string" enum:"FeatureStatus"`
+
+	// The timestamp at which the feature object was updated.
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DetectorFeatureConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DetectorFeatureConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetAdditionalConfiguration sets the AdditionalConfiguration field's value.
+func (s *DetectorFeatureConfigurationResult) SetAdditionalConfiguration(v []*DetectorAdditionalConfigurationResult) *DetectorFeatureConfigurationResult {
+	s.AdditionalConfiguration = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *DetectorFeatureConfigurationResult) SetName(v string) *DetectorFeatureConfigurationResult {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *DetectorFeatureConfigurationResult) SetStatus(v string) *DetectorFeatureConfigurationResult {
+	s.Status = &v
+	return s
+}
+
+// SetUpdatedAt sets the UpdatedAt field's value.
+func (s *DetectorFeatureConfigurationResult) SetUpdatedAt(v time.Time) *DetectorFeatureConfigurationResult {
+	s.UpdatedAt = &v
+	return s
+}
+
+type DisableOrganizationAdminAccountInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Web Services Account ID for the organizations account to be disabled
+	// as a GuardDuty delegated administrator.
+	//
+	// AdminAccountId is a required field
+	AdminAccountId *string `locationName:"adminAccountId" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableOrganizationAdminAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableOrganizationAdminAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisableOrganizationAdminAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DisableOrganizationAdminAccountInput"}
+	if s.AdminAccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AdminAccountId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdminAccountId sets the AdminAccountId field's value.
+func (s *DisableOrganizationAdminAccountInput) SetAdminAccountId(v string) *DisableOrganizationAdminAccountInput {
+	s.AdminAccountId = &v
+	return s
+}
+
+type DisableOrganizationAdminAccountOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableOrganizationAdminAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableOrganizationAdminAccountOutput) GoString() string {
+	return s.String()
+}
+
+type DisassociateFromAdministratorAccountInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The unique ID of the detector of the GuardDuty member account.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateFromAdministratorAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateFromAdministratorAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociateFromAdministratorAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DisassociateFromAdministratorAccountInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *DisassociateFromAdministratorAccountInput) SetDetectorId(v string) *DisassociateFromAdministratorAccountInput {
+	s.DetectorId = &v
+	return s
+}
+
+type DisassociateFromAdministratorAccountOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateFromAdministratorAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateFromAdministratorAccountOutput) GoString() string {
+	return s.String()
+}
+
+// Deprecated: This input is deprecated, use DisassociateFromAdministratorAccountRequest instead
+type DisassociateFromMasterAccountInput struct {
+	_ struct{} `deprecated:"true" type:"structure" nopayload:"true"`
+
+	// The unique ID of the detector of the GuardDuty member account.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateFromMasterAccountInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateFromMasterAccountInput) GoString() string {
 	return s.String()
 }
@@ -5527,40 +12268,59 @@ func (s *DisassociateFromMasterAccountInput) SetDetectorId(v string) *Disassocia
 	return s
 }
 
+// Deprecated: This output is deprecated, use DisassociateFromAdministratorAccountResponse instead
 type DisassociateFromMasterAccountOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `deprecated:"true" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateFromMasterAccountOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateFromMasterAccountOutput) GoString() string {
 	return s.String()
 }
 
-// DisassociateMembers request body.
 type DisassociateMembersInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of account IDs of the GuardDuty member accounts that you want to disassociate
-	// from master.
+	// from the administrator account.
 	//
 	// AccountIds is a required field
-	AccountIds []*string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
+	// The unique ID of the detector of the GuardDuty account whose members you
+	// want to disassociate from the administrator account.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateMembersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateMembersInput) GoString() string {
 	return s.String()
 }
@@ -5570,6 +12330,9 @@ func (s *DisassociateMembersInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "DisassociateMembersInput"}
 	if s.AccountIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
 	}
 	if s.DetectorId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
@@ -5596,21 +12359,30 @@ func (s *DisassociateMembersInput) SetDetectorId(v string) *DisassociateMembersI
 	return s
 }
 
-// DisassociateMembers response object.
 type DisassociateMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateMembersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateMembersOutput) GoString() string {
 	return s.String()
 }
@@ -5621,22 +12393,47 @@ func (s *DisassociateMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccou
 	return s
 }
 
-// Information about the DNS_REQUEST action described in this finding.
+// Contains information about the DNS_REQUEST action described in this finding.
 type DnsRequestAction struct {
 	_ struct{} `type:"structure"`
 
-	// Domain information for the DNS request.
+	// Indicates whether the targeted port is blocked.
+	Blocked *bool `locationName:"blocked" type:"boolean"`
+
+	// The domain information for the DNS query.
 	Domain *string `locationName:"domain" type:"string"`
+
+	// The second and top level domain involved in the activity that prompted GuardDuty
+	// to generate this finding.
+	DomainWithSuffix *string `locationName:"domainWithSuffix" type:"string"`
+
+	// The network connection protocol observed in the activity that prompted GuardDuty
+	// to generate the finding.
+	Protocol *string `locationName:"protocol" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsRequestAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DnsRequestAction) GoString() string {
 	return s.String()
+}
+
+// SetBlocked sets the Blocked field's value.
+func (s *DnsRequestAction) SetBlocked(v bool) *DnsRequestAction {
+	s.Blocked = &v
+	return s
 }
 
 // SetDomain sets the Domain field's value.
@@ -5645,100 +12442,925 @@ func (s *DnsRequestAction) SetDomain(v string) *DnsRequestAction {
 	return s
 }
 
-// Domain information for the AWS API call.
-type DomainDetails struct {
-	_ struct{} `type:"structure"`
+// SetDomainWithSuffix sets the DomainWithSuffix field's value.
+func (s *DnsRequestAction) SetDomainWithSuffix(v string) *DnsRequestAction {
+	s.DomainWithSuffix = &v
+	return s
 }
 
-// String returns the string representation
+// SetProtocol sets the Protocol field's value.
+func (s *DnsRequestAction) SetProtocol(v string) *DnsRequestAction {
+	s.Protocol = &v
+	return s
+}
+
+// Contains information about the domain.
+type DomainDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The domain information for the Amazon Web Services API call.
+	Domain *string `locationName:"domain" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainDetails) GoString() string {
 	return s.String()
 }
 
-// Representation of a abnormal or suspicious activity.
+// SetDomain sets the Domain field's value.
+func (s *DomainDetails) SetDomain(v string) *DomainDetails {
+	s.Domain = &v
+	return s
+}
+
+// Contains list of scanned and skipped EBS volumes with details.
+type EbsVolumeDetails struct {
+	_ struct{} `type:"structure"`
+
+	// List of EBS volumes that were scanned.
+	ScannedVolumeDetails []*VolumeDetail `locationName:"scannedVolumeDetails" type:"list"`
+
+	// List of EBS volumes that were skipped from the malware scan.
+	SkippedVolumeDetails []*VolumeDetail `locationName:"skippedVolumeDetails" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EbsVolumeDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EbsVolumeDetails) GoString() string {
+	return s.String()
+}
+
+// SetScannedVolumeDetails sets the ScannedVolumeDetails field's value.
+func (s *EbsVolumeDetails) SetScannedVolumeDetails(v []*VolumeDetail) *EbsVolumeDetails {
+	s.ScannedVolumeDetails = v
+	return s
+}
+
+// SetSkippedVolumeDetails sets the SkippedVolumeDetails field's value.
+func (s *EbsVolumeDetails) SetSkippedVolumeDetails(v []*VolumeDetail) *EbsVolumeDetails {
+	s.SkippedVolumeDetails = v
+	return s
+}
+
+// Contains details from the malware scan that created a finding.
+type EbsVolumeScanDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Returns the completion date and time of the malware scan.
+	ScanCompletedAt *time.Time `locationName:"scanCompletedAt" type:"timestamp"`
+
+	// Contains a complete view providing malware scan result details.
+	ScanDetections *ScanDetections `locationName:"scanDetections" type:"structure"`
+
+	// Unique Id of the malware scan that generated the finding.
+	ScanId *string `locationName:"scanId" type:"string"`
+
+	// Returns the start date and time of the malware scan.
+	ScanStartedAt *time.Time `locationName:"scanStartedAt" type:"timestamp"`
+
+	// Specifies the scan type that invoked the malware scan.
+	ScanType *string `locationName:"scanType" type:"string" enum:"ScanType"`
+
+	// Contains list of threat intelligence sources used to detect threats.
+	Sources []*string `locationName:"sources" type:"list"`
+
+	// GuardDuty finding ID that triggered a malware scan.
+	TriggerFindingId *string `locationName:"triggerFindingId" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EbsVolumeScanDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EbsVolumeScanDetails) GoString() string {
+	return s.String()
+}
+
+// SetScanCompletedAt sets the ScanCompletedAt field's value.
+func (s *EbsVolumeScanDetails) SetScanCompletedAt(v time.Time) *EbsVolumeScanDetails {
+	s.ScanCompletedAt = &v
+	return s
+}
+
+// SetScanDetections sets the ScanDetections field's value.
+func (s *EbsVolumeScanDetails) SetScanDetections(v *ScanDetections) *EbsVolumeScanDetails {
+	s.ScanDetections = v
+	return s
+}
+
+// SetScanId sets the ScanId field's value.
+func (s *EbsVolumeScanDetails) SetScanId(v string) *EbsVolumeScanDetails {
+	s.ScanId = &v
+	return s
+}
+
+// SetScanStartedAt sets the ScanStartedAt field's value.
+func (s *EbsVolumeScanDetails) SetScanStartedAt(v time.Time) *EbsVolumeScanDetails {
+	s.ScanStartedAt = &v
+	return s
+}
+
+// SetScanType sets the ScanType field's value.
+func (s *EbsVolumeScanDetails) SetScanType(v string) *EbsVolumeScanDetails {
+	s.ScanType = &v
+	return s
+}
+
+// SetSources sets the Sources field's value.
+func (s *EbsVolumeScanDetails) SetSources(v []*string) *EbsVolumeScanDetails {
+	s.Sources = v
+	return s
+}
+
+// SetTriggerFindingId sets the TriggerFindingId field's value.
+func (s *EbsVolumeScanDetails) SetTriggerFindingId(v string) *EbsVolumeScanDetails {
+	s.TriggerFindingId = &v
+	return s
+}
+
+// Describes the configuration of scanning EBS volumes as a data source.
+type EbsVolumesResult struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the reason why scanning EBS volumes (Malware Protection) was not
+	// enabled as a data source.
+	Reason *string `locationName:"reason" type:"string"`
+
+	// Describes whether scanning EBS volumes is enabled as a data source.
+	Status *string `locationName:"status" min:"1" type:"string" enum:"DataSourceStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EbsVolumesResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EbsVolumesResult) GoString() string {
+	return s.String()
+}
+
+// SetReason sets the Reason field's value.
+func (s *EbsVolumesResult) SetReason(v string) *EbsVolumesResult {
+	s.Reason = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *EbsVolumesResult) SetStatus(v string) *EbsVolumesResult {
+	s.Status = &v
+	return s
+}
+
+// Contains information about the details of the ECS Cluster.
+type EcsClusterDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The number of services that are running on the cluster in an ACTIVE state.
+	ActiveServicesCount *int64 `locationName:"activeServicesCount" type:"integer"`
+
+	// The Amazon Resource Name (ARN) that identifies the cluster.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The name of the ECS Cluster.
+	Name *string `locationName:"name" type:"string"`
+
+	// The number of container instances registered into the cluster.
+	RegisteredContainerInstancesCount *int64 `locationName:"registeredContainerInstancesCount" type:"integer"`
+
+	// The number of tasks in the cluster that are in the RUNNING state.
+	RunningTasksCount *int64 `locationName:"runningTasksCount" type:"integer"`
+
+	// The status of the ECS cluster.
+	Status *string `locationName:"status" type:"string"`
+
+	// The tags of the ECS Cluster.
+	Tags []*Tag `locationName:"tags" type:"list"`
+
+	// Contains information about the details of the ECS Task.
+	TaskDetails *EcsTaskDetails `locationName:"taskDetails" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EcsClusterDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EcsClusterDetails) GoString() string {
+	return s.String()
+}
+
+// SetActiveServicesCount sets the ActiveServicesCount field's value.
+func (s *EcsClusterDetails) SetActiveServicesCount(v int64) *EcsClusterDetails {
+	s.ActiveServicesCount = &v
+	return s
+}
+
+// SetArn sets the Arn field's value.
+func (s *EcsClusterDetails) SetArn(v string) *EcsClusterDetails {
+	s.Arn = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *EcsClusterDetails) SetName(v string) *EcsClusterDetails {
+	s.Name = &v
+	return s
+}
+
+// SetRegisteredContainerInstancesCount sets the RegisteredContainerInstancesCount field's value.
+func (s *EcsClusterDetails) SetRegisteredContainerInstancesCount(v int64) *EcsClusterDetails {
+	s.RegisteredContainerInstancesCount = &v
+	return s
+}
+
+// SetRunningTasksCount sets the RunningTasksCount field's value.
+func (s *EcsClusterDetails) SetRunningTasksCount(v int64) *EcsClusterDetails {
+	s.RunningTasksCount = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *EcsClusterDetails) SetStatus(v string) *EcsClusterDetails {
+	s.Status = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *EcsClusterDetails) SetTags(v []*Tag) *EcsClusterDetails {
+	s.Tags = v
+	return s
+}
+
+// SetTaskDetails sets the TaskDetails field's value.
+func (s *EcsClusterDetails) SetTaskDetails(v *EcsTaskDetails) *EcsClusterDetails {
+	s.TaskDetails = v
+	return s
+}
+
+// Contains information about the task in an ECS cluster.
+type EcsTaskDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the task.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The containers that's associated with the task.
+	Containers []*Container `locationName:"containers" type:"list"`
+
+	// The ARN of the task definition that creates the task.
+	DefinitionArn *string `locationName:"definitionArn" type:"string"`
+
+	// The name of the task group that's associated with the task.
+	Group *string `locationName:"group" type:"string"`
+
+	// The Unix timestamp for the time when the task started.
+	StartedAt *time.Time `locationName:"startedAt" type:"timestamp"`
+
+	// Contains the tag specified when a task is started.
+	StartedBy *string `locationName:"startedBy" type:"string"`
+
+	// The tags of the ECS Task.
+	Tags []*Tag `locationName:"tags" type:"list"`
+
+	// The Unix timestamp for the time when the task was created.
+	TaskCreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// The version counter for the task.
+	Version *string `locationName:"version" type:"string"`
+
+	// The list of data volume definitions for the task.
+	Volumes []*Volume `locationName:"volumes" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EcsTaskDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EcsTaskDetails) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *EcsTaskDetails) SetArn(v string) *EcsTaskDetails {
+	s.Arn = &v
+	return s
+}
+
+// SetContainers sets the Containers field's value.
+func (s *EcsTaskDetails) SetContainers(v []*Container) *EcsTaskDetails {
+	s.Containers = v
+	return s
+}
+
+// SetDefinitionArn sets the DefinitionArn field's value.
+func (s *EcsTaskDetails) SetDefinitionArn(v string) *EcsTaskDetails {
+	s.DefinitionArn = &v
+	return s
+}
+
+// SetGroup sets the Group field's value.
+func (s *EcsTaskDetails) SetGroup(v string) *EcsTaskDetails {
+	s.Group = &v
+	return s
+}
+
+// SetStartedAt sets the StartedAt field's value.
+func (s *EcsTaskDetails) SetStartedAt(v time.Time) *EcsTaskDetails {
+	s.StartedAt = &v
+	return s
+}
+
+// SetStartedBy sets the StartedBy field's value.
+func (s *EcsTaskDetails) SetStartedBy(v string) *EcsTaskDetails {
+	s.StartedBy = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *EcsTaskDetails) SetTags(v []*Tag) *EcsTaskDetails {
+	s.Tags = v
+	return s
+}
+
+// SetTaskCreatedAt sets the TaskCreatedAt field's value.
+func (s *EcsTaskDetails) SetTaskCreatedAt(v time.Time) *EcsTaskDetails {
+	s.TaskCreatedAt = &v
+	return s
+}
+
+// SetVersion sets the Version field's value.
+func (s *EcsTaskDetails) SetVersion(v string) *EcsTaskDetails {
+	s.Version = &v
+	return s
+}
+
+// SetVolumes sets the Volumes field's value.
+func (s *EcsTaskDetails) SetVolumes(v []*Volume) *EcsTaskDetails {
+	s.Volumes = v
+	return s
+}
+
+// Details about the EKS cluster involved in a Kubernetes finding.
+type EksClusterDetails struct {
+	_ struct{} `type:"structure"`
+
+	// EKS cluster ARN.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The timestamp when the EKS cluster was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// EKS cluster name.
+	Name *string `locationName:"name" type:"string"`
+
+	// The EKS cluster status.
+	Status *string `locationName:"status" type:"string"`
+
+	// The EKS cluster tags.
+	Tags []*Tag `locationName:"tags" type:"list"`
+
+	// The VPC ID to which the EKS cluster is attached.
+	VpcId *string `locationName:"vpcId" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EksClusterDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EksClusterDetails) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *EksClusterDetails) SetArn(v string) *EksClusterDetails {
+	s.Arn = &v
+	return s
+}
+
+// SetCreatedAt sets the CreatedAt field's value.
+func (s *EksClusterDetails) SetCreatedAt(v time.Time) *EksClusterDetails {
+	s.CreatedAt = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *EksClusterDetails) SetName(v string) *EksClusterDetails {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *EksClusterDetails) SetStatus(v string) *EksClusterDetails {
+	s.Status = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *EksClusterDetails) SetTags(v []*Tag) *EksClusterDetails {
+	s.Tags = v
+	return s
+}
+
+// SetVpcId sets the VpcId field's value.
+func (s *EksClusterDetails) SetVpcId(v string) *EksClusterDetails {
+	s.VpcId = &v
+	return s
+}
+
+type EnableOrganizationAdminAccountInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Web Services account ID for the organization account to be enabled
+	// as a GuardDuty delegated administrator.
+	//
+	// AdminAccountId is a required field
+	AdminAccountId *string `locationName:"adminAccountId" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableOrganizationAdminAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableOrganizationAdminAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EnableOrganizationAdminAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "EnableOrganizationAdminAccountInput"}
+	if s.AdminAccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AdminAccountId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdminAccountId sets the AdminAccountId field's value.
+func (s *EnableOrganizationAdminAccountInput) SetAdminAccountId(v string) *EnableOrganizationAdminAccountInput {
+	s.AdminAccountId = &v
+	return s
+}
+
+type EnableOrganizationAdminAccountOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableOrganizationAdminAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableOrganizationAdminAccountOutput) GoString() string {
+	return s.String()
+}
+
+// Contains information about the reason that the finding was generated.
+type Evidence struct {
+	_ struct{} `type:"structure"`
+
+	// A list of threat intelligence details related to the evidence.
+	ThreatIntelligenceDetails []*ThreatIntelligenceDetail `locationName:"threatIntelligenceDetails" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Evidence) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Evidence) GoString() string {
+	return s.String()
+}
+
+// SetThreatIntelligenceDetails sets the ThreatIntelligenceDetails field's value.
+func (s *Evidence) SetThreatIntelligenceDetails(v []*ThreatIntelligenceDetail) *Evidence {
+	s.ThreatIntelligenceDetails = v
+	return s
+}
+
+// Contains information about Amazon Web Services Fargate details associated
+// with an Amazon ECS cluster.
+type FargateDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Runtime coverage issues identified for the resource running on Amazon Web
+	// Services Fargate.
+	Issues []*string `locationName:"issues" type:"list"`
+
+	// Indicates how the GuardDuty security agent is managed for this resource.
+	//
+	//    * AUTO_MANAGED indicates that GuardDuty deploys and manages updates for
+	//    this resource.
+	//
+	//    * DISABLED indicates that the deployment of the GuardDuty security agent
+	//    is disabled for this resource.
+	//
+	// The MANUAL status doesn't apply to the Amazon Web Services Fargate (Amazon
+	// ECS only) woprkloads.
+	ManagementType *string `locationName:"managementType" type:"string" enum:"ManagementType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FargateDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FargateDetails) GoString() string {
+	return s.String()
+}
+
+// SetIssues sets the Issues field's value.
+func (s *FargateDetails) SetIssues(v []*string) *FargateDetails {
+	s.Issues = v
+	return s
+}
+
+// SetManagementType sets the ManagementType field's value.
+func (s *FargateDetails) SetManagementType(v string) *FargateDetails {
+	s.ManagementType = &v
+	return s
+}
+
+// Contains information about the condition.
+type FilterCondition struct {
+	_ struct{} `type:"structure"`
+
+	// Represents an equal condition to be applied to a single field when querying
+	// for scan entries.
+	EqualsValue *string `locationName:"equalsValue" min:"1" type:"string"`
+
+	// Represents a greater than condition to be applied to a single field when
+	// querying for scan entries.
+	GreaterThan *int64 `locationName:"greaterThan" type:"long"`
+
+	// Represents a less than condition to be applied to a single field when querying
+	// for scan entries.
+	LessThan *int64 `locationName:"lessThan" type:"long"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FilterCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FilterCondition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FilterCondition) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "FilterCondition"}
+	if s.EqualsValue != nil && len(*s.EqualsValue) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("EqualsValue", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEqualsValue sets the EqualsValue field's value.
+func (s *FilterCondition) SetEqualsValue(v string) *FilterCondition {
+	s.EqualsValue = &v
+	return s
+}
+
+// SetGreaterThan sets the GreaterThan field's value.
+func (s *FilterCondition) SetGreaterThan(v int64) *FilterCondition {
+	s.GreaterThan = &v
+	return s
+}
+
+// SetLessThan sets the LessThan field's value.
+func (s *FilterCondition) SetLessThan(v int64) *FilterCondition {
+	s.LessThan = &v
+	return s
+}
+
+// Represents the criteria to be used in the filter for describing scan entries.
+type FilterCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// Represents a condition that when matched will be added to the response of
+	// the operation.
+	FilterCriterion []*FilterCriterion `locationName:"filterCriterion" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FilterCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FilterCriteria) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FilterCriteria) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "FilterCriteria"}
+	if s.FilterCriterion != nil {
+		for i, v := range s.FilterCriterion {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterCriterion", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilterCriterion sets the FilterCriterion field's value.
+func (s *FilterCriteria) SetFilterCriterion(v []*FilterCriterion) *FilterCriteria {
+	s.FilterCriterion = v
+	return s
+}
+
+// Represents a condition that when matched will be added to the response of
+// the operation. Irrespective of using any filter criteria, an administrator
+// account can view the scan entries for all of its member accounts. However,
+// each member account can view the scan entries only for their own account.
+type FilterCriterion struct {
+	_ struct{} `type:"structure"`
+
+	// An enum value representing possible scan properties to match with given scan
+	// entries.
+	//
+	// Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME. CLUSTER_NAME has
+	// been deprecated.
+	CriterionKey *string `locationName:"criterionKey" type:"string" enum:"CriterionKey"`
+
+	// Contains information about the condition.
+	FilterCondition *FilterCondition `locationName:"filterCondition" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FilterCriterion) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FilterCriterion) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FilterCriterion) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "FilterCriterion"}
+	if s.FilterCondition != nil {
+		if err := s.FilterCondition.Validate(); err != nil {
+			invalidParams.AddNested("FilterCondition", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCriterionKey sets the CriterionKey field's value.
+func (s *FilterCriterion) SetCriterionKey(v string) *FilterCriterion {
+	s.CriterionKey = &v
+	return s
+}
+
+// SetFilterCondition sets the FilterCondition field's value.
+func (s *FilterCriterion) SetFilterCondition(v *FilterCondition) *FilterCriterion {
+	s.FilterCondition = v
+	return s
+}
+
+// Contains information about the finding that is generated when abnormal or
+// suspicious activity is detected.
 type Finding struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID where the activity occurred that prompted GuardDuty to generate
-	// a finding.
+	// The ID of the account in which the finding was generated.
 	//
 	// AccountId is a required field
 	AccountId *string `locationName:"accountId" type:"string" required:"true"`
 
-	// The ARN of a finding described by the action.
+	// The ARN of the finding.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The confidence level of a finding.
+	// The confidence score for the finding.
 	Confidence *float64 `locationName:"confidence" type:"double"`
 
-	// The time stamp at which a finding was generated.
+	// The time and date when the finding was created.
 	//
 	// CreatedAt is a required field
 	CreatedAt *string `locationName:"createdAt" type:"string" required:"true"`
 
-	// The description of a finding.
+	// The description of the finding.
 	Description *string `locationName:"description" type:"string"`
 
-	// The identifier that corresponds to a finding described by the action.
+	// The ID of the finding.
 	//
 	// Id is a required field
 	Id *string `locationName:"id" type:"string" required:"true"`
 
-	// The AWS resource partition.
+	// The partition associated with the finding.
 	Partition *string `locationName:"partition" type:"string"`
 
-	// The AWS region where the activity occurred that prompted GuardDuty to generate
-	// a finding.
+	// The Region where the finding was generated.
 	//
 	// Region is a required field
 	Region *string `locationName:"region" type:"string" required:"true"`
 
-	// The AWS resource associated with the activity that prompted GuardDuty to
-	// generate a finding.
+	// Contains information about the Amazon Web Services resource associated with
+	// the activity that prompted GuardDuty to generate a finding.
 	//
 	// Resource is a required field
 	Resource *Resource `locationName:"resource" type:"structure" required:"true"`
 
-	// Findings' schema version.
+	// The version of the schema used for the finding.
 	//
 	// SchemaVersion is a required field
 	SchemaVersion *string `locationName:"schemaVersion" type:"string" required:"true"`
 
-	// Additional information assigned to the generated finding by GuardDuty.
+	// Contains additional information about the generated finding.
 	Service *Service `locationName:"service" type:"structure"`
 
-	// The severity of a finding.
+	// The severity of the finding.
 	//
 	// Severity is a required field
 	Severity *float64 `locationName:"severity" type:"double" required:"true"`
 
-	// The title of a finding.
+	// The title of the finding.
 	Title *string `locationName:"title" type:"string"`
 
-	// The type of a finding described by the action.
+	// The type of finding.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true"`
+	Type *string `locationName:"type" min:"1" type:"string" required:"true"`
 
-	// The time stamp at which a finding was last updated.
+	// The time and date when the finding was last updated.
 	//
 	// UpdatedAt is a required field
 	UpdatedAt *string `locationName:"updatedAt" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Finding) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Finding) GoString() string {
 	return s.String()
 }
@@ -5833,7 +13455,7 @@ func (s *Finding) SetUpdatedAt(v string) *Finding {
 	return s
 }
 
-// Represents the criteria used for querying findings.
+// Contains information about the criteria used for querying findings.
 type FindingCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -5842,12 +13464,20 @@ type FindingCriteria struct {
 	Criterion map[string]*Condition `locationName:"criterion" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FindingCriteria) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FindingCriteria) GoString() string {
 	return s.String()
 }
@@ -5858,20 +13488,28 @@ func (s *FindingCriteria) SetCriterion(v map[string]*Condition) *FindingCriteria
 	return s
 }
 
-// Finding statistics object.
+// Contains information about finding statistics.
 type FindingStatistics struct {
 	_ struct{} `type:"structure"`
 
-	// Represents a map of severity to count statistic for a set of findings
+	// Represents a map of severity to count statistics for a set of findings.
 	CountBySeverity map[string]*int64 `locationName:"countBySeverity" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FindingStatistics) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FindingStatistics) GoString() string {
 	return s.String()
 }
@@ -5882,23 +13520,106 @@ func (s *FindingStatistics) SetCountBySeverity(v map[string]*int64) *FindingStat
 	return s
 }
 
-// Location information of the remote IP address.
+// Contains information on the status of VPC flow logs as a data source.
+type FlowLogsConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Denotes whether VPC flow logs is enabled as a data source.
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"DataSourceStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FlowLogsConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FlowLogsConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetStatus sets the Status field's value.
+func (s *FlowLogsConfigurationResult) SetStatus(v string) *FlowLogsConfigurationResult {
+	s.Status = &v
+	return s
+}
+
+// Contains information about the free trial period for a feature.
+type FreeTrialFeatureConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// The number of the remaining free trial days for the feature.
+	FreeTrialDaysRemaining *int64 `locationName:"freeTrialDaysRemaining" type:"integer"`
+
+	// The name of the feature for which the free trial is configured.
+	Name *string `locationName:"name" type:"string" enum:"FreeTrialFeatureResult"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FreeTrialFeatureConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FreeTrialFeatureConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetFreeTrialDaysRemaining sets the FreeTrialDaysRemaining field's value.
+func (s *FreeTrialFeatureConfigurationResult) SetFreeTrialDaysRemaining(v int64) *FreeTrialFeatureConfigurationResult {
+	s.FreeTrialDaysRemaining = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *FreeTrialFeatureConfigurationResult) SetName(v string) *FreeTrialFeatureConfigurationResult {
+	s.Name = &v
+	return s
+}
+
+// Contains information about the location of the remote IP address.
 type GeoLocation struct {
 	_ struct{} `type:"structure"`
 
-	// Latitude information of remote IP address.
+	// The latitude information of the remote IP address.
 	Lat *float64 `locationName:"lat" type:"double"`
 
-	// Longitude information of remote IP address.
+	// The longitude information of the remote IP address.
 	Lon *float64 `locationName:"lon" type:"double"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GeoLocation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GeoLocation) GoString() string {
 	return s.String()
 }
@@ -5915,19 +13636,214 @@ func (s *GeoLocation) SetLon(v float64) *GeoLocation {
 	return s
 }
 
-type GetDetectorInput struct {
-	_ struct{} `type:"structure"`
+type GetAdministratorAccountInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The unique ID of the detector of the GuardDuty member account.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetAdministratorAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetAdministratorAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetAdministratorAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetAdministratorAccountInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *GetAdministratorAccountInput) SetDetectorId(v string) *GetAdministratorAccountInput {
+	s.DetectorId = &v
+	return s
+}
+
+type GetAdministratorAccountOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The administrator account details.
+	//
+	// Administrator is a required field
+	Administrator *Administrator `locationName:"administrator" type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetAdministratorAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetAdministratorAccountOutput) GoString() string {
+	return s.String()
+}
+
+// SetAdministrator sets the Administrator field's value.
+func (s *GetAdministratorAccountOutput) SetAdministrator(v *Administrator) *GetAdministratorAccountOutput {
+	s.Administrator = v
+	return s
+}
+
+type GetCoverageStatisticsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of the GuardDuty detector associated to the coverage statistics.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// Represents the criteria used to filter the coverage statistics
+	FilterCriteria *CoverageFilterCriteria `locationName:"filterCriteria" type:"structure"`
+
+	// Represents the statistics type used to aggregate the coverage details.
+	//
+	// StatisticsType is a required field
+	StatisticsType []*string `locationName:"statisticsType" type:"list" required:"true" enum:"CoverageStatisticsType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetCoverageStatisticsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetCoverageStatisticsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetCoverageStatisticsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetCoverageStatisticsInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.StatisticsType == nil {
+		invalidParams.Add(request.NewErrParamRequired("StatisticsType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *GetCoverageStatisticsInput) SetDetectorId(v string) *GetCoverageStatisticsInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetFilterCriteria sets the FilterCriteria field's value.
+func (s *GetCoverageStatisticsInput) SetFilterCriteria(v *CoverageFilterCriteria) *GetCoverageStatisticsInput {
+	s.FilterCriteria = v
+	return s
+}
+
+// SetStatisticsType sets the StatisticsType field's value.
+func (s *GetCoverageStatisticsInput) SetStatisticsType(v []*string) *GetCoverageStatisticsInput {
+	s.StatisticsType = v
+	return s
+}
+
+type GetCoverageStatisticsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Represents the count aggregated by the statusCode and resourceType.
+	CoverageStatistics *CoverageStatistics `locationName:"coverageStatistics" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetCoverageStatisticsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetCoverageStatisticsOutput) GoString() string {
+	return s.String()
+}
+
+// SetCoverageStatistics sets the CoverageStatistics field's value.
+func (s *GetCoverageStatisticsOutput) SetCoverageStatistics(v *CoverageStatistics) *GetCoverageStatisticsOutput {
+	s.CoverageStatistics = v
+	return s
+}
+
+type GetDetectorInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The unique ID of the detector that you want to get.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDetectorInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDetectorInput) GoString() string {
 	return s.String()
 }
@@ -5954,32 +13870,54 @@ func (s *GetDetectorInput) SetDetectorId(v string) *GetDetectorInput {
 	return s
 }
 
-// GetDetector response object.
 type GetDetectorOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The first time a resource was created. The format will be ISO-8601.
+	// The timestamp of when the detector was created.
 	CreatedAt *string `locationName:"createdAt" type:"string"`
 
-	// A enum value that specifies how frequently customer got Finding updates published.
+	// Describes which data sources are enabled for the detector.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources *DataSourceConfigurationsResult `locationName:"dataSources" deprecated:"true" type:"structure"`
+
+	// Describes the features that have been enabled for the detector.
+	Features []*DetectorFeatureConfigurationResult `locationName:"features" type:"list"`
+
+	// The publishing frequency of the finding.
 	FindingPublishingFrequency *string `locationName:"findingPublishingFrequency" type:"string" enum:"FindingPublishingFrequency"`
 
-	// Customer serviceRole name or ARN for accessing customer resources
-	ServiceRole *string `locationName:"serviceRole" type:"string"`
+	// The GuardDuty service role.
+	//
+	// ServiceRole is a required field
+	ServiceRole *string `locationName:"serviceRole" type:"string" required:"true"`
 
-	// The status of detector.
-	Status *string `locationName:"status" type:"string" enum:"DetectorStatus"`
+	// The detector status.
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"DetectorStatus"`
 
-	// The first time a resource was created. The format will be ISO-8601.
+	// The tags of the detector resource.
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
+
+	// The last-updated timestamp for the detector.
 	UpdatedAt *string `locationName:"updatedAt" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDetectorOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDetectorOutput) GoString() string {
 	return s.String()
 }
@@ -5987,6 +13925,18 @@ func (s GetDetectorOutput) GoString() string {
 // SetCreatedAt sets the CreatedAt field's value.
 func (s *GetDetectorOutput) SetCreatedAt(v string) *GetDetectorOutput {
 	s.CreatedAt = &v
+	return s
+}
+
+// SetDataSources sets the DataSources field's value.
+func (s *GetDetectorOutput) SetDataSources(v *DataSourceConfigurationsResult) *GetDetectorOutput {
+	s.DataSources = v
+	return s
+}
+
+// SetFeatures sets the Features field's value.
+func (s *GetDetectorOutput) SetFeatures(v []*DetectorFeatureConfigurationResult) *GetDetectorOutput {
+	s.Features = v
 	return s
 }
 
@@ -6008,6 +13958,12 @@ func (s *GetDetectorOutput) SetStatus(v string) *GetDetectorOutput {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *GetDetectorOutput) SetTags(v map[string]*string) *GetDetectorOutput {
+	s.Tags = v
+	return s
+}
+
 // SetUpdatedAt sets the UpdatedAt field's value.
 func (s *GetDetectorOutput) SetUpdatedAt(v string) *GetDetectorOutput {
 	s.UpdatedAt = &v
@@ -6015,21 +13971,33 @@ func (s *GetDetectorOutput) SetUpdatedAt(v string) *GetDetectorOutput {
 }
 
 type GetFilterInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The unique ID of the detector that the filter is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The name of the filter you want to get.
+	//
 	// FilterName is a required field
 	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFilterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFilterInput) GoString() string {
 	return s.String()
 }
@@ -6068,34 +14036,50 @@ func (s *GetFilterInput) SetFilterName(v string) *GetFilterInput {
 	return s
 }
 
-// GetFilter response object.
 type GetFilterOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the action that is to be applied to the findings that match the
 	// filter.
-	Action *string `locationName:"action" type:"string" enum:"FilterAction"`
+	//
+	// Action is a required field
+	Action *string `locationName:"action" min:"1" type:"string" required:"true" enum:"FilterAction"`
 
 	// The description of the filter.
 	Description *string `locationName:"description" type:"string"`
 
 	// Represents the criteria to be used in the filter for querying findings.
-	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
+	//
+	// FindingCriteria is a required field
+	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure" required:"true"`
 
 	// The name of the filter.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"3" type:"string" required:"true"`
 
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
-	Rank *int64 `locationName:"rank" type:"integer"`
+	Rank *int64 `locationName:"rank" min:"1" type:"integer"`
+
+	// The tags of the filter resource.
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFilterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFilterOutput) GoString() string {
 	return s.String()
 }
@@ -6130,14 +14114,22 @@ func (s *GetFilterOutput) SetRank(v int64) *GetFilterOutput {
 	return s
 }
 
-// Get Findings Request
+// SetTags sets the Tags field's value.
+func (s *GetFilterOutput) SetTags(v map[string]*string) *GetFilterOutput {
+	s.Tags = v
+	return s
+}
+
 type GetFindingsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the detector that specifies the GuardDuty service whose findings
+	// you want to retrieve.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// IDs of the findings that you want to retrieve.
+	// The IDs of the findings that you want to retrieve.
 	//
 	// FindingIds is a required field
 	FindingIds []*string `locationName:"findingIds" type:"list" required:"true"`
@@ -6146,12 +14138,20 @@ type GetFindingsInput struct {
 	SortCriteria *SortCriteria `locationName:"sortCriteria" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFindingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFindingsInput) GoString() string {
 	return s.String()
 }
@@ -6193,20 +14193,29 @@ func (s *GetFindingsInput) SetSortCriteria(v *SortCriteria) *GetFindingsInput {
 	return s
 }
 
-// GetFindings response object.
 type GetFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of findings.
-	Findings []*Finding `locationName:"findings" type:"list"`
+	//
+	// Findings is a required field
+	Findings []*Finding `locationName:"findings" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFindingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFindingsOutput) GoString() string {
 	return s.String()
 }
@@ -6217,28 +14226,38 @@ func (s *GetFindingsOutput) SetFindings(v []*Finding) *GetFindingsOutput {
 	return s
 }
 
-// Get Findings Statistics Request
 type GetFindingsStatisticsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the detector that specifies the GuardDuty service whose findings'
+	// statistics you want to retrieve.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// Represents the criteria used for querying findings.
+	// Represents the criteria that is used for querying findings.
 	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
 
-	// Types of finding statistics to retrieve.
+	// The types of finding statistics to retrieve.
 	//
 	// FindingStatisticTypes is a required field
-	FindingStatisticTypes []*string `locationName:"findingStatisticTypes" type:"list" required:"true"`
+	FindingStatisticTypes []*string `locationName:"findingStatisticTypes" type:"list" required:"true" enum:"FindingStatisticType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFindingsStatisticsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFindingsStatisticsInput) GoString() string {
 	return s.String()
 }
@@ -6280,20 +14299,29 @@ func (s *GetFindingsStatisticsInput) SetFindingStatisticTypes(v []*string) *GetF
 	return s
 }
 
-// GetFindingsStatistics response object.
 type GetFindingsStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Finding statistics object.
-	FindingStatistics *FindingStatistics `locationName:"findingStatistics" type:"structure"`
+	// The finding statistics object.
+	//
+	// FindingStatistics is a required field
+	FindingStatistics *FindingStatistics `locationName:"findingStatistics" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFindingsStatisticsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFindingsStatisticsOutput) GoString() string {
 	return s.String()
 }
@@ -6305,21 +14333,33 @@ func (s *GetFindingsStatisticsOutput) SetFindingStatistics(v *FindingStatistics)
 }
 
 type GetIPSetInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The unique ID of the detector that the IPSet is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The unique ID of the IPSet to retrieve.
+	//
 	// IpSetId is a required field
 	IpSetId *string `location:"uri" locationName:"ipSetId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetIPSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetIPSetInput) GoString() string {
 	return s.String()
 }
@@ -6358,31 +14398,47 @@ func (s *GetIPSetInput) SetIpSetId(v string) *GetIPSetInput {
 	return s
 }
 
-// GetIPSet response object.
 type GetIPSetOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The format of the file that contains the IPSet.
-	Format *string `locationName:"format" type:"string" enum:"IpSetFormat"`
+	//
+	// Format is a required field
+	Format *string `locationName:"format" min:"1" type:"string" required:"true" enum:"IpSetFormat"`
 
-	// The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
-	Location *string `locationName:"location" type:"string"`
+	// The URI of the file that contains the IPSet.
+	//
+	// Location is a required field
+	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
-	// The user friendly name to identify the IPSet. This name is displayed in all
-	// findings that are triggered by activity that involves IP addresses included
-	// in this IPSet.
-	Name *string `locationName:"name" type:"string"`
+	// The user-friendly name for the IPSet.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
-	// The status of ipSet file uploaded.
-	Status *string `locationName:"status" type:"string" enum:"IpSetStatus"`
+	// The status of IPSet file that was uploaded.
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"IpSetStatus"`
+
+	// The tags of the IPSet resource.
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetIPSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetIPSetOutput) GoString() string {
 	return s.String()
 }
@@ -6411,21 +14467,34 @@ func (s *GetIPSetOutput) SetStatus(v string) *GetIPSetOutput {
 	return s
 }
 
-type GetInvitationsCountInput struct {
-	_ struct{} `type:"structure"`
+// SetTags sets the Tags field's value.
+func (s *GetIPSetOutput) SetTags(v map[string]*string) *GetIPSetOutput {
+	s.Tags = v
+	return s
 }
 
-// String returns the string representation
+type GetInvitationsCountInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInvitationsCountInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInvitationsCountInput) GoString() string {
 	return s.String()
 }
 
-// GetInvitationsCount response object.
 type GetInvitationsCountOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6433,12 +14502,20 @@ type GetInvitationsCountOutput struct {
 	InvitationsCount *int64 `locationName:"invitationsCount" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInvitationsCountOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetInvitationsCountOutput) GoString() string {
 	return s.String()
 }
@@ -6449,19 +14526,119 @@ func (s *GetInvitationsCountOutput) SetInvitationsCount(v int64) *GetInvitations
 	return s
 }
 
-type GetMasterAccountInput struct {
-	_ struct{} `type:"structure"`
+type GetMalwareScanSettingsInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The unique ID of the detector that the scan setting is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetMalwareScanSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetMalwareScanSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetMalwareScanSettingsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetMalwareScanSettingsInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *GetMalwareScanSettingsInput) SetDetectorId(v string) *GetMalwareScanSettingsInput {
+	s.DetectorId = &v
+	return s
+}
+
+type GetMalwareScanSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// An enum value representing possible snapshot preservation settings.
+	EbsSnapshotPreservation *string `locationName:"ebsSnapshotPreservation" type:"string" enum:"EbsSnapshotPreservation"`
+
+	// Represents the criteria to be used in the filter for scanning resources.
+	ScanResourceCriteria *ScanResourceCriteria `locationName:"scanResourceCriteria" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetMalwareScanSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetMalwareScanSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SetEbsSnapshotPreservation sets the EbsSnapshotPreservation field's value.
+func (s *GetMalwareScanSettingsOutput) SetEbsSnapshotPreservation(v string) *GetMalwareScanSettingsOutput {
+	s.EbsSnapshotPreservation = &v
+	return s
+}
+
+// SetScanResourceCriteria sets the ScanResourceCriteria field's value.
+func (s *GetMalwareScanSettingsOutput) SetScanResourceCriteria(v *ScanResourceCriteria) *GetMalwareScanSettingsOutput {
+	s.ScanResourceCriteria = v
+	return s
+}
+
+// Deprecated: This input is deprecated, use GetAdministratorAccountRequest instead
+type GetMasterAccountInput struct {
+	_ struct{} `deprecated:"true" type:"structure" nopayload:"true"`
+
+	// The unique ID of the detector of the GuardDuty member account.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMasterAccountInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMasterAccountInput) GoString() string {
 	return s.String()
 }
@@ -6488,20 +14665,30 @@ func (s *GetMasterAccountInput) SetDetectorId(v string) *GetMasterAccountInput {
 	return s
 }
 
-// GetMasterAccount response object.
+// Deprecated: This output is deprecated, use GetAdministratorAccountResponse instead
 type GetMasterAccountOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `deprecated:"true" type:"structure"`
 
-	// Contains details about the master account.
-	Master *Master `locationName:"master" type:"structure"`
+	// The administrator account details.
+	//
+	// Master is a required field
+	Master *Master `locationName:"master" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMasterAccountOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMasterAccountOutput) GoString() string {
 	return s.String()
 }
@@ -6512,25 +14699,146 @@ func (s *GetMasterAccountOutput) SetMaster(v *Master) *GetMasterAccountOutput {
 	return s
 }
 
-// GetMembers request body.
+type GetMemberDetectorsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the member account.
+	//
+	// AccountIds is a required field
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
+
+	// The detector ID for the administrator account.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetMemberDetectorsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetMemberDetectorsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetMemberDetectorsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetMemberDetectorsInput"}
+	if s.AccountIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
+	}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountIds sets the AccountIds field's value.
+func (s *GetMemberDetectorsInput) SetAccountIds(v []*string) *GetMemberDetectorsInput {
+	s.AccountIds = v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *GetMemberDetectorsInput) SetDetectorId(v string) *GetMemberDetectorsInput {
+	s.DetectorId = &v
+	return s
+}
+
+type GetMemberDetectorsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// An object that describes which data sources are enabled for a member account.
+	//
+	// MemberDataSourceConfigurations is a required field
+	MemberDataSourceConfigurations []*MemberDataSourceConfiguration `locationName:"members" min:"1" type:"list" required:"true"`
+
+	// A list of member account IDs that were unable to be processed along with
+	// an explanation for why they were not processed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetMemberDetectorsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetMemberDetectorsOutput) GoString() string {
+	return s.String()
+}
+
+// SetMemberDataSourceConfigurations sets the MemberDataSourceConfigurations field's value.
+func (s *GetMemberDetectorsOutput) SetMemberDataSourceConfigurations(v []*MemberDataSourceConfiguration) *GetMemberDetectorsOutput {
+	s.MemberDataSourceConfigurations = v
+	return s
+}
+
+// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
+func (s *GetMemberDetectorsOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *GetMemberDetectorsOutput {
+	s.UnprocessedAccounts = v
+	return s
+}
+
 type GetMembersInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of account IDs of the GuardDuty member accounts that you want to describe.
 	//
 	// AccountIds is a required field
-	AccountIds []*string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
+	// The unique ID of the detector of the GuardDuty account whose members you
+	// want to retrieve.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMembersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMembersInput) GoString() string {
 	return s.String()
 }
@@ -6540,6 +14848,9 @@ func (s *GetMembersInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "GetMembersInput"}
 	if s.AccountIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
 	}
 	if s.DetectorId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
@@ -6566,24 +14877,35 @@ func (s *GetMembersInput) SetDetectorId(v string) *GetMembersInput {
 	return s
 }
 
-// GetMembers response object.
 type GetMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of member descriptions.
-	Members []*Member `locationName:"members" type:"list"`
+	// A list of members.
+	//
+	// Members is a required field
+	Members []*Member `locationName:"members" type:"list" required:"true"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMembersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMembersOutput) GoString() string {
 	return s.String()
 }
@@ -6600,22 +14922,189 @@ func (s *GetMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *GetM
 	return s
 }
 
-type GetThreatIntelSetInput struct {
+type GetOrganizationStatisticsInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetOrganizationStatisticsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetOrganizationStatisticsInput) GoString() string {
+	return s.String()
+}
+
+type GetOrganizationStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	// Information about the statistics report for your organization.
+	OrganizationDetails *OrganizationDetails `locationName:"organizationDetails" type:"structure"`
+}
 
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetOrganizationStatisticsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetOrganizationStatisticsOutput) GoString() string {
+	return s.String()
+}
+
+// SetOrganizationDetails sets the OrganizationDetails field's value.
+func (s *GetOrganizationStatisticsOutput) SetOrganizationDetails(v *OrganizationDetails) *GetOrganizationStatisticsOutput {
+	s.OrganizationDetails = v
+	return s
+}
+
+type GetRemainingFreeTrialDaysInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of account identifiers of the GuardDuty member account.
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list"`
+
+	// The unique ID of the detector of the GuardDuty member account.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetRemainingFreeTrialDaysInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetRemainingFreeTrialDaysInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRemainingFreeTrialDaysInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetRemainingFreeTrialDaysInput"}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
+	}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountIds sets the AccountIds field's value.
+func (s *GetRemainingFreeTrialDaysInput) SetAccountIds(v []*string) *GetRemainingFreeTrialDaysInput {
+	s.AccountIds = v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *GetRemainingFreeTrialDaysInput) SetDetectorId(v string) *GetRemainingFreeTrialDaysInput {
+	s.DetectorId = &v
+	return s
+}
+
+type GetRemainingFreeTrialDaysOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The member accounts which were included in a request and were processed successfully.
+	Accounts []*AccountFreeTrialInfo `locationName:"accounts" type:"list"`
+
+	// The member account that was included in a request but for which the request
+	// could not be processed.
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetRemainingFreeTrialDaysOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetRemainingFreeTrialDaysOutput) GoString() string {
+	return s.String()
+}
+
+// SetAccounts sets the Accounts field's value.
+func (s *GetRemainingFreeTrialDaysOutput) SetAccounts(v []*AccountFreeTrialInfo) *GetRemainingFreeTrialDaysOutput {
+	s.Accounts = v
+	return s
+}
+
+// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
+func (s *GetRemainingFreeTrialDaysOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *GetRemainingFreeTrialDaysOutput {
+	s.UnprocessedAccounts = v
+	return s
+}
+
+type GetThreatIntelSetInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The unique ID of the detector that the threatIntelSet is associated with.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// The unique ID of the threatIntelSet that you want to get.
+	//
 	// ThreatIntelSetId is a required field
 	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetThreatIntelSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetThreatIntelSetInput) GoString() string {
 	return s.String()
 }
@@ -6654,30 +15143,48 @@ func (s *GetThreatIntelSetInput) SetThreatIntelSetId(v string) *GetThreatIntelSe
 	return s
 }
 
-// GetThreatIntelSet response object
 type GetThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The format of the threatIntelSet.
-	Format *string `locationName:"format" type:"string" enum:"ThreatIntelSetFormat"`
+	//
+	// Format is a required field
+	Format *string `locationName:"format" min:"1" type:"string" required:"true" enum:"ThreatIntelSetFormat"`
 
-	// The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
-	Location *string `locationName:"location" type:"string"`
+	// The URI of the file that contains the ThreatIntelSet.
+	//
+	// Location is a required field
+	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
-	// A user-friendly ThreatIntelSet name that is displayed in all finding generated
+	// A user-friendly ThreatIntelSet name displayed in all findings that are generated
 	// by activity that involves IP addresses included in this ThreatIntelSet.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The status of threatIntelSet file uploaded.
-	Status *string `locationName:"status" type:"string" enum:"ThreatIntelSetStatus"`
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"ThreatIntelSetStatus"`
+
+	// The tags of the threat list resource.
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetThreatIntelSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetThreatIntelSetOutput) GoString() string {
 	return s.String()
 }
@@ -6706,23 +15213,281 @@ func (s *GetThreatIntelSetOutput) SetStatus(v string) *GetThreatIntelSetOutput {
 	return s
 }
 
-// The profile information of the EC2 instance.
+// SetTags sets the Tags field's value.
+func (s *GetThreatIntelSetOutput) SetTags(v map[string]*string) *GetThreatIntelSetOutput {
+	s.Tags = v
+	return s
+}
+
+type GetUsageStatisticsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the detector that specifies the GuardDuty service whose usage statistics
+	// you want to retrieve.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// The maximum number of results to return in the response.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// A token to use for paginating results that are returned in the response.
+	// Set the value of this parameter to null for the first request to a list action.
+	// For subsequent calls, use the NextToken value returned from the previous
+	// request to continue listing results after the first page.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The currency unit you would like to view your usage statistics in. Current
+	// valid values are USD.
+	Unit *string `locationName:"unit" type:"string"`
+
+	// Represents the criteria used for querying usage.
+	//
+	// UsageCriteria is a required field
+	UsageCriteria *UsageCriteria `locationName:"usageCriteria" type:"structure" required:"true"`
+
+	// The type of usage statistics to retrieve.
+	//
+	// UsageStatisticType is a required field
+	UsageStatisticType *string `locationName:"usageStatisticsType" type:"string" required:"true" enum:"UsageStatisticType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetUsageStatisticsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetUsageStatisticsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetUsageStatisticsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetUsageStatisticsInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.UsageCriteria == nil {
+		invalidParams.Add(request.NewErrParamRequired("UsageCriteria"))
+	}
+	if s.UsageStatisticType == nil {
+		invalidParams.Add(request.NewErrParamRequired("UsageStatisticType"))
+	}
+	if s.UsageCriteria != nil {
+		if err := s.UsageCriteria.Validate(); err != nil {
+			invalidParams.AddNested("UsageCriteria", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *GetUsageStatisticsInput) SetDetectorId(v string) *GetUsageStatisticsInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *GetUsageStatisticsInput) SetMaxResults(v int64) *GetUsageStatisticsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetUsageStatisticsInput) SetNextToken(v string) *GetUsageStatisticsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetUnit sets the Unit field's value.
+func (s *GetUsageStatisticsInput) SetUnit(v string) *GetUsageStatisticsInput {
+	s.Unit = &v
+	return s
+}
+
+// SetUsageCriteria sets the UsageCriteria field's value.
+func (s *GetUsageStatisticsInput) SetUsageCriteria(v *UsageCriteria) *GetUsageStatisticsInput {
+	s.UsageCriteria = v
+	return s
+}
+
+// SetUsageStatisticType sets the UsageStatisticType field's value.
+func (s *GetUsageStatisticsInput) SetUsageStatisticType(v string) *GetUsageStatisticsInput {
+	s.UsageStatisticType = &v
+	return s
+}
+
+type GetUsageStatisticsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The usage statistics object. If a UsageStatisticType was provided, the objects
+	// representing other types will be null.
+	UsageStatistics *UsageStatistics `locationName:"usageStatistics" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetUsageStatisticsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetUsageStatisticsOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *GetUsageStatisticsOutput) SetNextToken(v string) *GetUsageStatisticsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetUsageStatistics sets the UsageStatistics field's value.
+func (s *GetUsageStatisticsOutput) SetUsageStatistics(v *UsageStatistics) *GetUsageStatisticsOutput {
+	s.UsageStatistics = v
+	return s
+}
+
+// Contains details of the highest severity threat detected during scan and
+// number of infected files.
+type HighestSeverityThreatDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Total number of infected files with the highest severity threat detected.
+	Count *int64 `locationName:"count" type:"integer"`
+
+	// Severity level of the highest severity threat detected.
+	Severity *string `locationName:"severity" type:"string"`
+
+	// Threat name of the highest severity threat detected as part of the malware
+	// scan.
+	ThreatName *string `locationName:"threatName" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HighestSeverityThreatDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HighestSeverityThreatDetails) GoString() string {
+	return s.String()
+}
+
+// SetCount sets the Count field's value.
+func (s *HighestSeverityThreatDetails) SetCount(v int64) *HighestSeverityThreatDetails {
+	s.Count = &v
+	return s
+}
+
+// SetSeverity sets the Severity field's value.
+func (s *HighestSeverityThreatDetails) SetSeverity(v string) *HighestSeverityThreatDetails {
+	s.Severity = &v
+	return s
+}
+
+// SetThreatName sets the ThreatName field's value.
+func (s *HighestSeverityThreatDetails) SetThreatName(v string) *HighestSeverityThreatDetails {
+	s.ThreatName = &v
+	return s
+}
+
+// Represents a pre-existing file or directory on the host machine that the
+// volume maps to.
+type HostPath struct {
+	_ struct{} `type:"structure"`
+
+	// Path of the file or directory on the host that the volume maps to.
+	Path *string `locationName:"path" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HostPath) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HostPath) GoString() string {
+	return s.String()
+}
+
+// SetPath sets the Path field's value.
+func (s *HostPath) SetPath(v string) *HostPath {
+	s.Path = &v
+	return s
+}
+
+// Contains information about the EC2 instance profile.
 type IamInstanceProfile struct {
 	_ struct{} `type:"structure"`
 
-	// AWS EC2 instance profile ARN.
+	// The profile ARN of the EC2 instance.
 	Arn *string `locationName:"arn" type:"string"`
 
-	// AWS EC2 instance profile ID.
+	// The profile ID of the EC2 instance.
 	Id *string `locationName:"id" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IamInstanceProfile) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IamInstanceProfile) GoString() string {
 	return s.String()
 }
@@ -6739,12 +15504,52 @@ func (s *IamInstanceProfile) SetId(v string) *IamInstanceProfile {
 	return s
 }
 
-// The information about the EC2 instance associated with the activity that
-// prompted GuardDuty to generate a finding.
+// Contains information about the impersonated user.
+type ImpersonatedUser struct {
+	_ struct{} `type:"structure"`
+
+	// The group to which the user name belongs.
+	Groups []*string `locationName:"groups" type:"list"`
+
+	// Information about the username that was being impersonated.
+	Username *string `locationName:"username" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImpersonatedUser) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImpersonatedUser) GoString() string {
+	return s.String()
+}
+
+// SetGroups sets the Groups field's value.
+func (s *ImpersonatedUser) SetGroups(v []*string) *ImpersonatedUser {
+	s.Groups = v
+	return s
+}
+
+// SetUsername sets the Username field's value.
+func (s *ImpersonatedUser) SetUsername(v string) *ImpersonatedUser {
+	s.Username = &v
+	return s
+}
+
+// Contains information about the details of an instance.
 type InstanceDetails struct {
 	_ struct{} `type:"structure"`
 
-	// The availability zone of the EC2 instance.
+	// The Availability Zone of the EC2 instance.
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The profile information of the EC2 instance.
@@ -6768,8 +15573,12 @@ type InstanceDetails struct {
 	// The launch time of the EC2 instance.
 	LaunchTime *string `locationName:"launchTime" type:"string"`
 
-	// The network interface information of the EC2 instance.
+	// The elastic network interface information of the EC2 instance.
 	NetworkInterfaces []*NetworkInterface `locationName:"networkInterfaces" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Outpost. Only applicable
+	// to Amazon Web Services Outposts instances.
+	OutpostArn *string `locationName:"outpostArn" type:"string"`
 
 	// The platform of the EC2 instance.
 	Platform *string `locationName:"platform" type:"string"`
@@ -6781,12 +15590,20 @@ type InstanceDetails struct {
 	Tags []*Tag `locationName:"tags" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceDetails) GoString() string {
 	return s.String()
 }
@@ -6845,6 +15662,12 @@ func (s *InstanceDetails) SetNetworkInterfaces(v []*NetworkInterface) *InstanceD
 	return s
 }
 
+// SetOutpostArn sets the OutpostArn field's value.
+func (s *InstanceDetails) SetOutpostArn(v string) *InstanceDetails {
+	s.OutpostArn = &v
+	return s
+}
+
 // SetPlatform sets the Platform field's value.
 func (s *InstanceDetails) SetPlatform(v string) *InstanceDetails {
 	s.Platform = &v
@@ -6863,29 +15686,106 @@ func (s *InstanceDetails) SetTags(v []*Tag) *InstanceDetails {
 	return s
 }
 
-// Invitation from an AWS account to become the current account's master.
+// An internal server error exception object.
+type InternalServerErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message.
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The error type.
+	Type *string `locationName:"__type" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServerErrorException(v protocol.ResponseMetadata) error {
+	return &InternalServerErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServerErrorException) Code() string {
+	return "InternalServerErrorException"
+}
+
+// Message returns the exception's message.
+func (s *InternalServerErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServerErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServerErrorException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServerErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServerErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Contains information about the invitation to become a member account.
 type Invitation struct {
 	_ struct{} `type:"structure"`
 
-	// Inviter account ID
-	AccountId *string `locationName:"accountId" type:"string"`
+	// The ID of the account that the invitation was sent from.
+	AccountId *string `locationName:"accountId" min:"12" type:"string"`
 
-	// This value is used to validate the inviter account to the member account.
+	// The ID of the invitation. This value is used to validate the inviter account
+	// to the member account.
 	InvitationId *string `locationName:"invitationId" type:"string"`
 
-	// Timestamp at which the invitation was sent
+	// The timestamp when the invitation was sent.
 	InvitedAt *string `locationName:"invitedAt" type:"string"`
 
 	// The status of the relationship between the inviter and invitee accounts.
 	RelationshipStatus *string `locationName:"relationshipStatus" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Invitation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Invitation) GoString() string {
 	return s.String()
 }
@@ -6914,7 +15814,6 @@ func (s *Invitation) SetRelationshipStatus(v string) *Invitation {
 	return s
 }
 
-// InviteMembers request body.
 type InviteMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6922,26 +15821,37 @@ type InviteMembersInput struct {
 	// as members.
 	//
 	// AccountIds is a required field
-	AccountIds []*string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
+	// The unique ID of the detector of the GuardDuty account that you want to invite
+	// members with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// A boolean value that specifies whether you want to disable email notification
-	// to the accounts that you’re inviting to GuardDuty as members.
+	// A Boolean value that specifies whether you want to disable email notification
+	// to the accounts that you are inviting to GuardDuty as members.
 	DisableEmailNotification *bool `locationName:"disableEmailNotification" type:"boolean"`
 
-	// The invitation message that you want to send to the accounts that you’re
+	// The invitation message that you want to send to the accounts that you're
 	// inviting to GuardDuty as members.
 	Message *string `locationName:"message" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InviteMembersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InviteMembersInput) GoString() string {
 	return s.String()
 }
@@ -6951,6 +15861,9 @@ func (s *InviteMembersInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "InviteMembersInput"}
 	if s.AccountIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
 	}
 	if s.DetectorId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
@@ -6989,21 +15902,30 @@ func (s *InviteMembersInput) SetMessage(v string) *InviteMembersInput {
 	return s
 }
 
-// InviteMembers response object.
 type InviteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InviteMembersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InviteMembersOutput) GoString() string {
 	return s.String()
 }
@@ -7014,22 +15936,1110 @@ func (s *InviteMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *I
 	return s
 }
 
-type ListDetectorsInput struct {
+// Information about the Kubernetes API call action described in this finding.
+type KubernetesApiCallAction struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the namespace where the Kubernetes API call action takes place.
+	Namespace *string `locationName:"namespace" type:"string"`
+
+	// Parameters related to the Kubernetes API call action.
+	Parameters *string `locationName:"parameters" type:"string"`
+
+	// Contains information about the remote IP address of the connection.
+	RemoteIpDetails *RemoteIpDetails `locationName:"remoteIpDetails" type:"structure"`
+
+	// The Kubernetes API request URI.
+	RequestUri *string `locationName:"requestUri" type:"string"`
+
+	// The resource component in the Kubernetes API call action.
+	Resource *string `locationName:"resource" type:"string"`
+
+	// The name of the resource in the Kubernetes API call action.
+	ResourceName *string `locationName:"resourceName" type:"string"`
+
+	// The IP of the Kubernetes API caller and the IPs of any proxies or load balancers
+	// between the caller and the API endpoint.
+	SourceIps []*string `locationName:"sourceIps" type:"list"`
+
+	// The resulting HTTP response code of the Kubernetes API call action.
+	StatusCode *int64 `locationName:"statusCode" type:"integer"`
+
+	// The name of the sub-resource in the Kubernetes API call action.
+	Subresource *string `locationName:"subresource" type:"string"`
+
+	// The user agent of the caller of the Kubernetes API.
+	UserAgent *string `locationName:"userAgent" type:"string"`
+
+	// The Kubernetes API request HTTP verb.
+	Verb *string `locationName:"verb" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesApiCallAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesApiCallAction) GoString() string {
+	return s.String()
+}
+
+// SetNamespace sets the Namespace field's value.
+func (s *KubernetesApiCallAction) SetNamespace(v string) *KubernetesApiCallAction {
+	s.Namespace = &v
+	return s
+}
+
+// SetParameters sets the Parameters field's value.
+func (s *KubernetesApiCallAction) SetParameters(v string) *KubernetesApiCallAction {
+	s.Parameters = &v
+	return s
+}
+
+// SetRemoteIpDetails sets the RemoteIpDetails field's value.
+func (s *KubernetesApiCallAction) SetRemoteIpDetails(v *RemoteIpDetails) *KubernetesApiCallAction {
+	s.RemoteIpDetails = v
+	return s
+}
+
+// SetRequestUri sets the RequestUri field's value.
+func (s *KubernetesApiCallAction) SetRequestUri(v string) *KubernetesApiCallAction {
+	s.RequestUri = &v
+	return s
+}
+
+// SetResource sets the Resource field's value.
+func (s *KubernetesApiCallAction) SetResource(v string) *KubernetesApiCallAction {
+	s.Resource = &v
+	return s
+}
+
+// SetResourceName sets the ResourceName field's value.
+func (s *KubernetesApiCallAction) SetResourceName(v string) *KubernetesApiCallAction {
+	s.ResourceName = &v
+	return s
+}
+
+// SetSourceIps sets the SourceIps field's value.
+func (s *KubernetesApiCallAction) SetSourceIps(v []*string) *KubernetesApiCallAction {
+	s.SourceIps = v
+	return s
+}
+
+// SetStatusCode sets the StatusCode field's value.
+func (s *KubernetesApiCallAction) SetStatusCode(v int64) *KubernetesApiCallAction {
+	s.StatusCode = &v
+	return s
+}
+
+// SetSubresource sets the Subresource field's value.
+func (s *KubernetesApiCallAction) SetSubresource(v string) *KubernetesApiCallAction {
+	s.Subresource = &v
+	return s
+}
+
+// SetUserAgent sets the UserAgent field's value.
+func (s *KubernetesApiCallAction) SetUserAgent(v string) *KubernetesApiCallAction {
+	s.UserAgent = &v
+	return s
+}
+
+// SetVerb sets the Verb field's value.
+func (s *KubernetesApiCallAction) SetVerb(v string) *KubernetesApiCallAction {
+	s.Verb = &v
+	return s
+}
+
+// Describes whether Kubernetes audit logs are enabled as a data source.
+type KubernetesAuditLogsConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The status of Kubernetes audit logs as a data source.
+	//
+	// Enable is a required field
+	Enable *bool `locationName:"enable" type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesAuditLogsConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesAuditLogsConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *KubernetesAuditLogsConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "KubernetesAuditLogsConfiguration"}
+	if s.Enable == nil {
+		invalidParams.Add(request.NewErrParamRequired("Enable"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnable sets the Enable field's value.
+func (s *KubernetesAuditLogsConfiguration) SetEnable(v bool) *KubernetesAuditLogsConfiguration {
+	s.Enable = &v
+	return s
+}
+
+// Describes whether Kubernetes audit logs are enabled as a data source.
+type KubernetesAuditLogsConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// A value that describes whether Kubernetes audit logs are enabled as a data
+	// source.
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"DataSourceStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesAuditLogsConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesAuditLogsConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetStatus sets the Status field's value.
+func (s *KubernetesAuditLogsConfigurationResult) SetStatus(v string) *KubernetesAuditLogsConfigurationResult {
+	s.Status = &v
+	return s
+}
+
+// Describes whether any Kubernetes data sources are enabled.
+type KubernetesConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The status of Kubernetes audit logs as a data source.
+	//
+	// AuditLogs is a required field
+	AuditLogs *KubernetesAuditLogsConfiguration `locationName:"auditLogs" type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *KubernetesConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "KubernetesConfiguration"}
+	if s.AuditLogs == nil {
+		invalidParams.Add(request.NewErrParamRequired("AuditLogs"))
+	}
+	if s.AuditLogs != nil {
+		if err := s.AuditLogs.Validate(); err != nil {
+			invalidParams.AddNested("AuditLogs", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAuditLogs sets the AuditLogs field's value.
+func (s *KubernetesConfiguration) SetAuditLogs(v *KubernetesAuditLogsConfiguration) *KubernetesConfiguration {
+	s.AuditLogs = v
+	return s
+}
+
+// Describes whether any Kubernetes logs will be enabled as a data source.
+type KubernetesConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Describes whether Kubernetes audit logs are enabled as a data source.
+	//
+	// AuditLogs is a required field
+	AuditLogs *KubernetesAuditLogsConfigurationResult `locationName:"auditLogs" type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetAuditLogs sets the AuditLogs field's value.
+func (s *KubernetesConfigurationResult) SetAuditLogs(v *KubernetesAuditLogsConfigurationResult) *KubernetesConfigurationResult {
+	s.AuditLogs = v
+	return s
+}
+
+// Provides details about the Kubernetes resources when it is enabled as a data
+// source.
+type KubernetesDataSourceFreeTrial struct {
+	_ struct{} `type:"structure"`
+
+	// Describes whether Kubernetes audit logs are enabled as a data source.
+	AuditLogs *DataSourceFreeTrial `locationName:"auditLogs" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesDataSourceFreeTrial) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesDataSourceFreeTrial) GoString() string {
+	return s.String()
+}
+
+// SetAuditLogs sets the AuditLogs field's value.
+func (s *KubernetesDataSourceFreeTrial) SetAuditLogs(v *DataSourceFreeTrial) *KubernetesDataSourceFreeTrial {
+	s.AuditLogs = v
+	return s
+}
+
+// Details about Kubernetes resources such as a Kubernetes user or workload
+// resource involved in a Kubernetes finding.
+type KubernetesDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Details about the Kubernetes user involved in a Kubernetes finding.
+	KubernetesUserDetails *KubernetesUserDetails `locationName:"kubernetesUserDetails" type:"structure"`
+
+	// Details about the Kubernetes workload involved in a Kubernetes finding.
+	KubernetesWorkloadDetails *KubernetesWorkloadDetails `locationName:"kubernetesWorkloadDetails" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesDetails) GoString() string {
+	return s.String()
+}
+
+// SetKubernetesUserDetails sets the KubernetesUserDetails field's value.
+func (s *KubernetesDetails) SetKubernetesUserDetails(v *KubernetesUserDetails) *KubernetesDetails {
+	s.KubernetesUserDetails = v
+	return s
+}
+
+// SetKubernetesWorkloadDetails sets the KubernetesWorkloadDetails field's value.
+func (s *KubernetesDetails) SetKubernetesWorkloadDetails(v *KubernetesWorkloadDetails) *KubernetesDetails {
+	s.KubernetesWorkloadDetails = v
+	return s
+}
+
+// Information about the Kubernetes API for which you check if you have permission
+// to call.
+type KubernetesPermissionCheckedDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Information whether the user has the permission to call the Kubernetes API.
+	Allowed *bool `locationName:"allowed" type:"boolean"`
+
+	// The namespace where the Kubernetes API action will take place.
+	Namespace *string `locationName:"namespace" type:"string"`
+
+	// The Kubernetes resource with which your Kubernetes API call will interact.
+	Resource *string `locationName:"resource" type:"string"`
+
+	// The verb component of the Kubernetes API call. For example, when you check
+	// whether or not you have the permission to call the CreatePod API, the verb
+	// component will be Create.
+	Verb *string `locationName:"verb" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesPermissionCheckedDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesPermissionCheckedDetails) GoString() string {
+	return s.String()
+}
+
+// SetAllowed sets the Allowed field's value.
+func (s *KubernetesPermissionCheckedDetails) SetAllowed(v bool) *KubernetesPermissionCheckedDetails {
+	s.Allowed = &v
+	return s
+}
+
+// SetNamespace sets the Namespace field's value.
+func (s *KubernetesPermissionCheckedDetails) SetNamespace(v string) *KubernetesPermissionCheckedDetails {
+	s.Namespace = &v
+	return s
+}
+
+// SetResource sets the Resource field's value.
+func (s *KubernetesPermissionCheckedDetails) SetResource(v string) *KubernetesPermissionCheckedDetails {
+	s.Resource = &v
+	return s
+}
+
+// SetVerb sets the Verb field's value.
+func (s *KubernetesPermissionCheckedDetails) SetVerb(v string) *KubernetesPermissionCheckedDetails {
+	s.Verb = &v
+	return s
+}
+
+// Contains information about the role binding that grants the permission defined
+// in a Kubernetes role.
+type KubernetesRoleBindingDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The kind of the role. For role binding, this value will be RoleBinding.
+	Kind *string `locationName:"kind" type:"string"`
+
+	// The name of the RoleBinding.
+	Name *string `locationName:"name" type:"string"`
+
+	// The type of the role being referenced. This could be either Role or ClusterRole.
+	RoleRefKind *string `locationName:"roleRefKind" type:"string"`
+
+	// The name of the role being referenced. This must match the name of the Role
+	// or ClusterRole that you want to bind to.
+	RoleRefName *string `locationName:"roleRefName" type:"string"`
+
+	// The unique identifier of the role binding.
+	Uid *string `locationName:"uid" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesRoleBindingDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesRoleBindingDetails) GoString() string {
+	return s.String()
+}
+
+// SetKind sets the Kind field's value.
+func (s *KubernetesRoleBindingDetails) SetKind(v string) *KubernetesRoleBindingDetails {
+	s.Kind = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *KubernetesRoleBindingDetails) SetName(v string) *KubernetesRoleBindingDetails {
+	s.Name = &v
+	return s
+}
+
+// SetRoleRefKind sets the RoleRefKind field's value.
+func (s *KubernetesRoleBindingDetails) SetRoleRefKind(v string) *KubernetesRoleBindingDetails {
+	s.RoleRefKind = &v
+	return s
+}
+
+// SetRoleRefName sets the RoleRefName field's value.
+func (s *KubernetesRoleBindingDetails) SetRoleRefName(v string) *KubernetesRoleBindingDetails {
+	s.RoleRefName = &v
+	return s
+}
+
+// SetUid sets the Uid field's value.
+func (s *KubernetesRoleBindingDetails) SetUid(v string) *KubernetesRoleBindingDetails {
+	s.Uid = &v
+	return s
+}
+
+// Information about the Kubernetes role name and role type.
+type KubernetesRoleDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The kind of role. For this API, the value of kind will be Role.
+	Kind *string `locationName:"kind" type:"string"`
+
+	// The name of the Kubernetes role.
+	Name *string `locationName:"name" type:"string"`
+
+	// The unique identifier of the Kubernetes role name.
+	Uid *string `locationName:"uid" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesRoleDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesRoleDetails) GoString() string {
+	return s.String()
+}
+
+// SetKind sets the Kind field's value.
+func (s *KubernetesRoleDetails) SetKind(v string) *KubernetesRoleDetails {
+	s.Kind = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *KubernetesRoleDetails) SetName(v string) *KubernetesRoleDetails {
+	s.Name = &v
+	return s
+}
+
+// SetUid sets the Uid field's value.
+func (s *KubernetesRoleDetails) SetUid(v string) *KubernetesRoleDetails {
+	s.Uid = &v
+	return s
+}
+
+// Details about the Kubernetes user involved in a Kubernetes finding.
+type KubernetesUserDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The groups that include the user who called the Kubernetes API.
+	Groups []*string `locationName:"groups" type:"list"`
+
+	// Information about the impersonated user.
+	ImpersonatedUser *ImpersonatedUser `locationName:"impersonatedUser" type:"structure"`
+
+	// Entity that assumes the IAM role when Kubernetes RBAC permissions are assigned
+	// to that role.
+	SessionName []*string `locationName:"sessionName" type:"list"`
+
+	// The user ID of the user who called the Kubernetes API.
+	Uid *string `locationName:"uid" type:"string"`
+
+	// The username of the user who called the Kubernetes API.
+	Username *string `locationName:"username" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesUserDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesUserDetails) GoString() string {
+	return s.String()
+}
+
+// SetGroups sets the Groups field's value.
+func (s *KubernetesUserDetails) SetGroups(v []*string) *KubernetesUserDetails {
+	s.Groups = v
+	return s
+}
+
+// SetImpersonatedUser sets the ImpersonatedUser field's value.
+func (s *KubernetesUserDetails) SetImpersonatedUser(v *ImpersonatedUser) *KubernetesUserDetails {
+	s.ImpersonatedUser = v
+	return s
+}
+
+// SetSessionName sets the SessionName field's value.
+func (s *KubernetesUserDetails) SetSessionName(v []*string) *KubernetesUserDetails {
+	s.SessionName = v
+	return s
+}
+
+// SetUid sets the Uid field's value.
+func (s *KubernetesUserDetails) SetUid(v string) *KubernetesUserDetails {
+	s.Uid = &v
+	return s
+}
+
+// SetUsername sets the Username field's value.
+func (s *KubernetesUserDetails) SetUsername(v string) *KubernetesUserDetails {
+	s.Username = &v
+	return s
+}
+
+// Details about the Kubernetes workload involved in a Kubernetes finding.
+type KubernetesWorkloadDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Containers running as part of the Kubernetes workload.
+	Containers []*Container `locationName:"containers" type:"list"`
+
+	// Whether the host IPC flag is enabled for the pods in the workload.
+	HostIPC *bool `locationName:"hostIPC" type:"boolean"`
+
+	// Whether the hostNetwork flag is enabled for the pods included in the workload.
+	HostNetwork *bool `locationName:"hostNetwork" type:"boolean"`
+
+	// Whether the host PID flag is enabled for the pods in the workload.
+	HostPID *bool `locationName:"hostPID" type:"boolean"`
+
+	// Kubernetes workload name.
+	Name *string `locationName:"name" type:"string"`
+
+	// Kubernetes namespace that the workload is part of.
+	Namespace *string `locationName:"namespace" type:"string"`
+
+	// The service account name that is associated with a Kubernetes workload.
+	ServiceAccountName *string `locationName:"serviceAccountName" type:"string"`
+
+	// Kubernetes workload type (e.g. Pod, Deployment, etc.).
+	Type *string `locationName:"type" type:"string"`
+
+	// Kubernetes workload ID.
+	Uid *string `locationName:"uid" type:"string"`
+
+	// Volumes used by the Kubernetes workload.
+	Volumes []*Volume `locationName:"volumes" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesWorkloadDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s KubernetesWorkloadDetails) GoString() string {
+	return s.String()
+}
+
+// SetContainers sets the Containers field's value.
+func (s *KubernetesWorkloadDetails) SetContainers(v []*Container) *KubernetesWorkloadDetails {
+	s.Containers = v
+	return s
+}
+
+// SetHostIPC sets the HostIPC field's value.
+func (s *KubernetesWorkloadDetails) SetHostIPC(v bool) *KubernetesWorkloadDetails {
+	s.HostIPC = &v
+	return s
+}
+
+// SetHostNetwork sets the HostNetwork field's value.
+func (s *KubernetesWorkloadDetails) SetHostNetwork(v bool) *KubernetesWorkloadDetails {
+	s.HostNetwork = &v
+	return s
+}
+
+// SetHostPID sets the HostPID field's value.
+func (s *KubernetesWorkloadDetails) SetHostPID(v bool) *KubernetesWorkloadDetails {
+	s.HostPID = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *KubernetesWorkloadDetails) SetName(v string) *KubernetesWorkloadDetails {
+	s.Name = &v
+	return s
+}
+
+// SetNamespace sets the Namespace field's value.
+func (s *KubernetesWorkloadDetails) SetNamespace(v string) *KubernetesWorkloadDetails {
+	s.Namespace = &v
+	return s
+}
+
+// SetServiceAccountName sets the ServiceAccountName field's value.
+func (s *KubernetesWorkloadDetails) SetServiceAccountName(v string) *KubernetesWorkloadDetails {
+	s.ServiceAccountName = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *KubernetesWorkloadDetails) SetType(v string) *KubernetesWorkloadDetails {
+	s.Type = &v
+	return s
+}
+
+// SetUid sets the Uid field's value.
+func (s *KubernetesWorkloadDetails) SetUid(v string) *KubernetesWorkloadDetails {
+	s.Uid = &v
+	return s
+}
+
+// SetVolumes sets the Volumes field's value.
+func (s *KubernetesWorkloadDetails) SetVolumes(v []*Volume) *KubernetesWorkloadDetails {
+	s.Volumes = v
+	return s
+}
+
+// Information about the Lambda function involved in the finding.
+type LambdaDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Description of the Lambda function.
+	Description *string `locationName:"description" type:"string"`
+
+	// Amazon Resource Name (ARN) of the Lambda function.
+	FunctionArn *string `locationName:"functionArn" type:"string"`
+
+	// Name of the Lambda function.
+	FunctionName *string `locationName:"functionName" type:"string"`
+
+	// The version of the Lambda function.
+	FunctionVersion *string `locationName:"functionVersion" type:"string"`
+
+	// The timestamp when the Lambda function was last modified. This field is in
+	// the UTC date string format (2023-03-22T19:37:20.168Z).
+	LastModifiedAt *time.Time `locationName:"lastModifiedAt" type:"timestamp"`
+
+	// The revision ID of the Lambda function version.
+	RevisionId *string `locationName:"revisionId" type:"string"`
+
+	// The execution role of the Lambda function.
+	Role *string `locationName:"role" type:"string"`
+
+	// A list of tags attached to this resource, listed in the format of key:value
+	// pair.
+	Tags []*Tag `locationName:"tags" type:"list"`
+
+	// Amazon Virtual Private Cloud configuration details associated with your Lambda
+	// function.
+	VpcConfig *VpcConfig `locationName:"vpcConfig" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LambdaDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LambdaDetails) GoString() string {
+	return s.String()
+}
+
+// SetDescription sets the Description field's value.
+func (s *LambdaDetails) SetDescription(v string) *LambdaDetails {
+	s.Description = &v
+	return s
+}
+
+// SetFunctionArn sets the FunctionArn field's value.
+func (s *LambdaDetails) SetFunctionArn(v string) *LambdaDetails {
+	s.FunctionArn = &v
+	return s
+}
+
+// SetFunctionName sets the FunctionName field's value.
+func (s *LambdaDetails) SetFunctionName(v string) *LambdaDetails {
+	s.FunctionName = &v
+	return s
+}
+
+// SetFunctionVersion sets the FunctionVersion field's value.
+func (s *LambdaDetails) SetFunctionVersion(v string) *LambdaDetails {
+	s.FunctionVersion = &v
+	return s
+}
+
+// SetLastModifiedAt sets the LastModifiedAt field's value.
+func (s *LambdaDetails) SetLastModifiedAt(v time.Time) *LambdaDetails {
+	s.LastModifiedAt = &v
+	return s
+}
+
+// SetRevisionId sets the RevisionId field's value.
+func (s *LambdaDetails) SetRevisionId(v string) *LambdaDetails {
+	s.RevisionId = &v
+	return s
+}
+
+// SetRole sets the Role field's value.
+func (s *LambdaDetails) SetRole(v string) *LambdaDetails {
+	s.Role = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *LambdaDetails) SetTags(v []*Tag) *LambdaDetails {
+	s.Tags = v
+	return s
+}
+
+// SetVpcConfig sets the VpcConfig field's value.
+func (s *LambdaDetails) SetVpcConfig(v *VpcConfig) *LambdaDetails {
+	s.VpcConfig = v
+	return s
+}
+
+// Information about the runtime process details.
+type LineageObject struct {
+	_ struct{} `type:"structure"`
+
+	// The effective user ID that was used to execute the process.
+	Euid *int64 `locationName:"euid" type:"integer"`
+
+	// The absolute path of the process executable file.
+	ExecutablePath *string `locationName:"executablePath" type:"string"`
+
+	// The name of the process.
+	Name *string `locationName:"name" type:"string"`
+
+	// The process ID of the child process.
+	NamespacePid *int64 `locationName:"namespacePid" type:"integer"`
+
+	// The unique ID of the parent process. This ID is assigned to the parent process
+	// by GuardDuty.
+	ParentUuid *string `locationName:"parentUuid" type:"string"`
+
+	// The ID of the process.
+	Pid *int64 `locationName:"pid" type:"integer"`
+
+	// The time when the process started. This is in UTC format.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
+
+	// The user ID of the user that executed the process.
+	UserId *int64 `locationName:"userId" type:"integer"`
+
+	// The unique ID assigned to the process by GuardDuty.
+	Uuid *string `locationName:"uuid" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LineageObject) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LineageObject) GoString() string {
+	return s.String()
+}
+
+// SetEuid sets the Euid field's value.
+func (s *LineageObject) SetEuid(v int64) *LineageObject {
+	s.Euid = &v
+	return s
+}
+
+// SetExecutablePath sets the ExecutablePath field's value.
+func (s *LineageObject) SetExecutablePath(v string) *LineageObject {
+	s.ExecutablePath = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *LineageObject) SetName(v string) *LineageObject {
+	s.Name = &v
+	return s
+}
+
+// SetNamespacePid sets the NamespacePid field's value.
+func (s *LineageObject) SetNamespacePid(v int64) *LineageObject {
+	s.NamespacePid = &v
+	return s
+}
+
+// SetParentUuid sets the ParentUuid field's value.
+func (s *LineageObject) SetParentUuid(v string) *LineageObject {
+	s.ParentUuid = &v
+	return s
+}
+
+// SetPid sets the Pid field's value.
+func (s *LineageObject) SetPid(v int64) *LineageObject {
+	s.Pid = &v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *LineageObject) SetStartTime(v time.Time) *LineageObject {
+	s.StartTime = &v
+	return s
+}
+
+// SetUserId sets the UserId field's value.
+func (s *LineageObject) SetUserId(v int64) *LineageObject {
+	s.UserId = &v
+	return s
+}
+
+// SetUuid sets the Uuid field's value.
+func (s *LineageObject) SetUuid(v string) *LineageObject {
+	s.Uuid = &v
+	return s
+}
+
+type ListCoverageInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of the detector whose coverage details you want to retrieve.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// Represents the criteria used to filter the coverage details.
+	FilterCriteria *CoverageFilterCriteria `locationName:"filterCriteria" type:"structure"`
+
+	// The maximum number of results to return in the response.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// A token to use for paginating results that are returned in the response.
+	// Set the value of this parameter to null for the first request to a list action.
+	// For subsequent calls, use the NextToken value returned from the previous
+	// request to continue listing results after the first page.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// Represents the criteria used to sort the coverage details.
+	SortCriteria *CoverageSortCriteria `locationName:"sortCriteria" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListCoverageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListCoverageInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListCoverageInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListCoverageInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *ListCoverageInput) SetDetectorId(v string) *ListCoverageInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetFilterCriteria sets the FilterCriteria field's value.
+func (s *ListCoverageInput) SetFilterCriteria(v *CoverageFilterCriteria) *ListCoverageInput {
+	s.FilterCriteria = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListCoverageInput) SetMaxResults(v int64) *ListCoverageInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListCoverageInput) SetNextToken(v string) *ListCoverageInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetSortCriteria sets the SortCriteria field's value.
+func (s *ListCoverageInput) SetSortCriteria(v *CoverageSortCriteria) *ListCoverageInput {
+	s.SortCriteria = v
+	return s
+}
+
+type ListCoverageOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// A list of resources and their attributes providing cluster details.
+	//
+	// Resources is a required field
+	Resources []*CoverageResource `locationName:"resources" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListCoverageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListCoverageOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListCoverageOutput) SetNextToken(v string) *ListCoverageOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetResources sets the Resources field's value.
+func (s *ListCoverageOutput) SetResources(v []*CoverageResource) *ListCoverageOutput {
+	s.Resources = v
+	return s
+}
+
+type ListDetectorsInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
 	// You can use this parameter to indicate the maximum number of items that you
-	// want in the response.
+	// want in the response. The default value is 50. The maximum value is 50.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDetectorsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDetectorsInput) GoString() string {
 	return s.String()
 }
@@ -7059,26 +17069,33 @@ func (s *ListDetectorsInput) SetNextToken(v string) *ListDetectorsInput {
 	return s
 }
 
-// ListDetectors response object.
 type ListDetectorsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of detector Ids.
-	DetectorIds []*string `locationName:"detectorIds" type:"list"`
+	// A list of detector IDs.
+	//
+	// DetectorIds is a required field
+	DetectorIds []*string `locationName:"detectorIds" type:"list" required:"true"`
 
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDetectorsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDetectorsOutput) GoString() string {
 	return s.String()
 }
@@ -7096,24 +17113,38 @@ func (s *ListDetectorsOutput) SetNextToken(v string) *ListDetectorsOutput {
 }
 
 type ListFiltersInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The unique ID of the detector that the filter is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// You can use this parameter to indicate the maximum number of items that you
-	// want in the response.
+	// want in the response. The default value is 50. The maximum value is 50.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFiltersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFiltersInput) GoString() string {
 	return s.String()
 }
@@ -7155,26 +17186,33 @@ func (s *ListFiltersInput) SetNextToken(v string) *ListFiltersInput {
 	return s
 }
 
-// ListFilters response object.
 type ListFiltersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of filter names
-	FilterNames []*string `locationName:"filterNames" type:"list"`
+	// A list of filter names.
+	//
+	// FilterNames is a required field
+	FilterNames []*string `locationName:"filterNames" type:"list" required:"true"`
 
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFiltersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFiltersOutput) GoString() string {
 	return s.String()
 }
@@ -7191,14 +17229,117 @@ func (s *ListFiltersOutput) SetNextToken(v string) *ListFiltersOutput {
 	return s
 }
 
-// List Findings Request
 type ListFindingsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the detector that specifies the GuardDuty service whose findings
+	// you want to list.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// Represents the criteria used for querying findings.
+	// Represents the criteria used for querying findings. Valid values include:
+	//
+	//    * JSON field name
+	//
+	//    * accountId
+	//
+	//    * region
+	//
+	//    * confidence
+	//
+	//    * id
+	//
+	//    * resource.accessKeyDetails.accessKeyId
+	//
+	//    * resource.accessKeyDetails.principalId
+	//
+	//    * resource.accessKeyDetails.userName
+	//
+	//    * resource.accessKeyDetails.userType
+	//
+	//    * resource.instanceDetails.iamInstanceProfile.id
+	//
+	//    * resource.instanceDetails.imageId
+	//
+	//    * resource.instanceDetails.instanceId
+	//
+	//    * resource.instanceDetails.networkInterfaces.ipv6Addresses
+	//
+	//    * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
+	//
+	//    * resource.instanceDetails.networkInterfaces.publicDnsName
+	//
+	//    * resource.instanceDetails.networkInterfaces.publicIp
+	//
+	//    * resource.instanceDetails.networkInterfaces.securityGroups.groupId
+	//
+	//    * resource.instanceDetails.networkInterfaces.securityGroups.groupName
+	//
+	//    * resource.instanceDetails.networkInterfaces.subnetId
+	//
+	//    * resource.instanceDetails.networkInterfaces.vpcId
+	//
+	//    * resource.instanceDetails.tags.key
+	//
+	//    * resource.instanceDetails.tags.value
+	//
+	//    * resource.resourceType
+	//
+	//    * service.action.actionType
+	//
+	//    * service.action.awsApiCallAction.api
+	//
+	//    * service.action.awsApiCallAction.callerType
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.city.cityName
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.country.countryName
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.organization.asn
+	//
+	//    * service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
+	//
+	//    * service.action.awsApiCallAction.serviceName
+	//
+	//    * service.action.dnsRequestAction.domain
+	//
+	//    * service.action.dnsRequestAction.domainWithSuffix
+	//
+	//    * service.action.networkConnectionAction.blocked
+	//
+	//    * service.action.networkConnectionAction.connectionDirection
+	//
+	//    * service.action.networkConnectionAction.localPortDetails.port
+	//
+	//    * service.action.networkConnectionAction.protocol
+	//
+	//    * service.action.networkConnectionAction.remoteIpDetails.country.countryName
+	//
+	//    * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
+	//
+	//    * service.action.networkConnectionAction.remoteIpDetails.organization.asn
+	//
+	//    * service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
+	//
+	//    * service.action.networkConnectionAction.remotePortDetails.port
+	//
+	//    * service.additionalInfo.threatListName
+	//
+	//    * service.archived When this attribute is set to 'true', only archived
+	//    findings are listed. When it's set to 'false', only unarchived findings
+	//    are listed. When this attribute is not set, all existing findings are
+	//    listed.
+	//
+	//    * service.resourceRole
+	//
+	//    * severity
+	//
+	//    * type
+	//
+	//    * updatedAt Type: Timestamp in Unix Epoch millisecond format: 1486685375000
 	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
 
 	// You can use this parameter to indicate the maximum number of items you want
@@ -7206,8 +17347,8 @@ type ListFindingsInput struct {
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
 
 	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the ListFindings action. For subsequent
-	// calls to the action fill nextToken in the request with the value of nextToken
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action, fill nextToken in the request with the value of NextToken
 	// from the previous response to continue listing data.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -7215,12 +17356,20 @@ type ListFindingsInput struct {
 	SortCriteria *SortCriteria `locationName:"sortCriteria" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFindingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFindingsInput) GoString() string {
 	return s.String()
 }
@@ -7274,26 +17423,33 @@ func (s *ListFindingsInput) SetSortCriteria(v *SortCriteria) *ListFindingsInput 
 	return s
 }
 
-// ListFindings response object.
 type ListFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of the Findings.
-	FindingIds []*string `locationName:"findingIds" type:"list"`
+	// The IDs of the findings that you're listing.
+	//
+	// FindingIds is a required field
+	FindingIds []*string `locationName:"findingIds" type:"list" required:"true"`
 
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFindingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFindingsOutput) GoString() string {
 	return s.String()
 }
@@ -7311,24 +17467,38 @@ func (s *ListFindingsOutput) SetNextToken(v string) *ListFindingsOutput {
 }
 
 type ListIPSetsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The unique ID of the detector that the IPSet is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// You can use this parameter to indicate the maximum number of items that you
-	// want in the response.
+	// You can use this parameter to indicate the maximum number of items you want
+	// in the response. The default value is 50. The maximum value is 50.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIPSetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIPSetsInput) GoString() string {
 	return s.String()
 }
@@ -7370,26 +17540,33 @@ func (s *ListIPSetsInput) SetNextToken(v string) *ListIPSetsInput {
 	return s
 }
 
-// ListIPSets response object.
 type ListIPSetsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of the IP set IDs
-	IpSetIds []*string `locationName:"ipSetIds" type:"list"`
+	// The IDs of the IPSet resources.
+	//
+	// IpSetIds is a required field
+	IpSetIds []*string `locationName:"ipSetIds" type:"list" required:"true"`
 
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIPSetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIPSetsOutput) GoString() string {
 	return s.String()
 }
@@ -7407,21 +17584,33 @@ func (s *ListIPSetsOutput) SetNextToken(v string) *ListIPSetsOutput {
 }
 
 type ListInvitationsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// You can use this parameter to indicate the maximum number of items that you
-	// want in the response.
+	// want in the response. The default value is 50. The maximum value is 50.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListInvitationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListInvitationsInput) GoString() string {
 	return s.String()
 }
@@ -7451,26 +17640,31 @@ func (s *ListInvitationsInput) SetNextToken(v string) *ListInvitationsInput {
 	return s
 }
 
-// ListInvitations response object.
 type ListInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of invitation descriptions.
 	Invitations []*Invitation `locationName:"invitations" type:"list"`
 
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListInvitationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListInvitationsOutput) GoString() string {
 	return s.String()
 }
@@ -7488,26 +17682,44 @@ func (s *ListInvitationsOutput) SetNextToken(v string) *ListInvitationsOutput {
 }
 
 type ListMembersInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
+	// The unique ID of the detector the member is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// You can use this parameter to indicate the maximum number of items that you
-	// want in the response.
+	// You can use this parameter to indicate the maximum number of items you want
+	// in the response. The default value is 50. The maximum value is 50.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
+	// Specifies whether to only return associated members or to return all members
+	// (including members who haven't been invited yet or have been disassociated).
+	// Member accounts must have been previously associated with the GuardDuty administrator
+	// account using Create Members (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html).
 	OnlyAssociated *string `location:"querystring" locationName:"onlyAssociated" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListMembersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListMembersInput) GoString() string {
 	return s.String()
 }
@@ -7555,26 +17767,34 @@ func (s *ListMembersInput) SetOnlyAssociated(v string) *ListMembersInput {
 	return s
 }
 
-// ListMembers response object.
 type ListMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of member descriptions.
+	// A list of members.
+	//
+	// The values for email and invitedAt are available only if the member accounts
+	// are added by invitation.
 	Members []*Member `locationName:"members" type:"list"`
 
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListMembersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListMembersOutput) GoString() string {
 	return s.String()
 }
@@ -7591,25 +17811,335 @@ func (s *ListMembersOutput) SetNextToken(v string) *ListMembersOutput {
 	return s
 }
 
-type ListThreatIntelSetsInput struct {
-	_ struct{} `type:"structure"`
+type ListOrganizationAdminAccountsInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
 
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
-
-	// You can use this parameter to indicate the maximum number of items that you
-	// want in the response.
+	// The maximum number of results to return in the response.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
+	// A token to use for paginating results that are returned in the response.
+	// Set the value of this parameter to null for the first request to a list action.
+	// For subsequent calls, use the NextToken value returned from the previous
+	// request to continue listing results after the first page.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListOrganizationAdminAccountsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListOrganizationAdminAccountsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListOrganizationAdminAccountsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListOrganizationAdminAccountsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListOrganizationAdminAccountsInput) SetMaxResults(v int64) *ListOrganizationAdminAccountsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListOrganizationAdminAccountsInput) SetNextToken(v string) *ListOrganizationAdminAccountsInput {
+	s.NextToken = &v
+	return s
+}
+
+type ListOrganizationAdminAccountsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of accounts configured as GuardDuty delegated administrators.
+	AdminAccounts []*AdminAccount `locationName:"adminAccounts" type:"list"`
+
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListOrganizationAdminAccountsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListOrganizationAdminAccountsOutput) GoString() string {
+	return s.String()
+}
+
+// SetAdminAccounts sets the AdminAccounts field's value.
+func (s *ListOrganizationAdminAccountsOutput) SetAdminAccounts(v []*AdminAccount) *ListOrganizationAdminAccountsOutput {
+	s.AdminAccounts = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListOrganizationAdminAccountsOutput) SetNextToken(v string) *ListOrganizationAdminAccountsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type ListPublishingDestinationsInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The ID of the detector to retrieve publishing destinations for.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// The maximum number of results to return in the response.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// A token to use for paginating results that are returned in the response.
+	// Set the value of this parameter to null for the first request to a list action.
+	// For subsequent calls, use the NextToken value returned from the previous
+	// request to continue listing results after the first page.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListPublishingDestinationsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListPublishingDestinationsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListPublishingDestinationsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListPublishingDestinationsInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *ListPublishingDestinationsInput) SetDetectorId(v string) *ListPublishingDestinationsInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListPublishingDestinationsInput) SetMaxResults(v int64) *ListPublishingDestinationsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListPublishingDestinationsInput) SetNextToken(v string) *ListPublishingDestinationsInput {
+	s.NextToken = &v
+	return s
+}
+
+type ListPublishingDestinationsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A Destinations object that includes information about each publishing destination
+	// returned.
+	//
+	// Destinations is a required field
+	Destinations []*Destination `locationName:"destinations" type:"list" required:"true"`
+
+	// A token to use for paginating results that are returned in the response.
+	// Set the value of this parameter to null for the first request to a list action.
+	// For subsequent calls, use the NextToken value returned from the previous
+	// request to continue listing results after the first page.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListPublishingDestinationsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListPublishingDestinationsOutput) GoString() string {
+	return s.String()
+}
+
+// SetDestinations sets the Destinations field's value.
+func (s *ListPublishingDestinationsOutput) SetDestinations(v []*Destination) *ListPublishingDestinationsOutput {
+	s.Destinations = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListPublishingDestinationsOutput) SetNextToken(v string) *ListPublishingDestinationsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The Amazon Resource Name (ARN) for the given GuardDuty resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The tags associated with the resource.
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SetTags sets the Tags field's value.
+func (s *ListTagsForResourceOutput) SetTags(v map[string]*string) *ListTagsForResourceOutput {
+	s.Tags = v
+	return s
+}
+
+type ListThreatIntelSetsInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The unique ID of the detector that the threatIntelSet is associated with.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response. The default value is 50. The maximum value is 50.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// You can use this parameter to paginate results in the response. Set the value
+	// of this parameter to null on your first call to the list action. For subsequent
+	// calls to the action, fill nextToken in the request with the value of NextToken
+	// from the previous response to continue listing data.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListThreatIntelSetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListThreatIntelSetsInput) GoString() string {
 	return s.String()
 }
@@ -7651,26 +18181,33 @@ func (s *ListThreatIntelSetsInput) SetNextToken(v string) *ListThreatIntelSetsIn
 	return s
 }
 
-// ListThreatIntelSets response object.
 type ListThreatIntelSetsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// The pagination parameter to be used on the next list operation to retrieve
+	// more items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The list of the threat intel set IDs
-	ThreatIntelSetIds []*string `locationName:"threatIntelSetIds" type:"list"`
+	// The IDs of the ThreatIntelSet resources.
+	//
+	// ThreatIntelSetIds is a required field
+	ThreatIntelSetIds []*string `locationName:"threatIntelSetIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListThreatIntelSetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListThreatIntelSetsOutput) GoString() string {
 	return s.String()
 }
@@ -7687,23 +18224,63 @@ func (s *ListThreatIntelSetsOutput) SetThreatIntelSetIds(v []*string) *ListThrea
 	return s
 }
 
-// Local port information of the connection.
+// Contains information about the local IP address of the connection.
+type LocalIpDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The IPv4 local address of the connection.
+	IpAddressV4 *string `locationName:"ipAddressV4" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LocalIpDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LocalIpDetails) GoString() string {
+	return s.String()
+}
+
+// SetIpAddressV4 sets the IpAddressV4 field's value.
+func (s *LocalIpDetails) SetIpAddressV4(v string) *LocalIpDetails {
+	s.IpAddressV4 = &v
+	return s
+}
+
+// Contains information about the port for the local connection.
 type LocalPortDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Port number of the local connection.
+	// The port number of the local connection.
 	Port *int64 `locationName:"port" type:"integer"`
 
-	// Port name of the local connection.
+	// The port name of the local connection.
 	PortName *string `locationName:"portName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LocalPortDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LocalPortDetails) GoString() string {
 	return s.String()
 }
@@ -7720,29 +18297,207 @@ func (s *LocalPortDetails) SetPortName(v string) *LocalPortDetails {
 	return s
 }
 
-// Contains details about the master account.
+// Information about the login attempts.
+type LoginAttribute struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates the application name used to attempt log in.
+	Application *string `locationName:"application" type:"string"`
+
+	// Represents the sum of failed (unsuccessful) login attempts made to establish
+	// a connection to the database instance.
+	FailedLoginAttempts *int64 `locationName:"failedLoginAttempts" type:"integer"`
+
+	// Represents the sum of successful connections (a correct combination of login
+	// attributes) made to the database instance by the actor.
+	SuccessfulLoginAttempts *int64 `locationName:"successfulLoginAttempts" type:"integer"`
+
+	// Indicates the user name which attempted to log in.
+	User *string `locationName:"user" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LoginAttribute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LoginAttribute) GoString() string {
+	return s.String()
+}
+
+// SetApplication sets the Application field's value.
+func (s *LoginAttribute) SetApplication(v string) *LoginAttribute {
+	s.Application = &v
+	return s
+}
+
+// SetFailedLoginAttempts sets the FailedLoginAttempts field's value.
+func (s *LoginAttribute) SetFailedLoginAttempts(v int64) *LoginAttribute {
+	s.FailedLoginAttempts = &v
+	return s
+}
+
+// SetSuccessfulLoginAttempts sets the SuccessfulLoginAttempts field's value.
+func (s *LoginAttribute) SetSuccessfulLoginAttempts(v int64) *LoginAttribute {
+	s.SuccessfulLoginAttempts = &v
+	return s
+}
+
+// SetUser sets the User field's value.
+func (s *LoginAttribute) SetUser(v string) *LoginAttribute {
+	s.User = &v
+	return s
+}
+
+// Describes whether Malware Protection will be enabled as a data source.
+type MalwareProtectionConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the configuration of Malware Protection for EC2 instances with
+	// findings.
+	ScanEc2InstanceWithFindings *ScanEc2InstanceWithFindings `locationName:"scanEc2InstanceWithFindings" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MalwareProtectionConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MalwareProtectionConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetScanEc2InstanceWithFindings sets the ScanEc2InstanceWithFindings field's value.
+func (s *MalwareProtectionConfiguration) SetScanEc2InstanceWithFindings(v *ScanEc2InstanceWithFindings) *MalwareProtectionConfiguration {
+	s.ScanEc2InstanceWithFindings = v
+	return s
+}
+
+// An object that contains information on the status of all Malware Protection
+// data sources.
+type MalwareProtectionConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the configuration of Malware Protection for EC2 instances with
+	// findings.
+	ScanEc2InstanceWithFindings *ScanEc2InstanceWithFindingsResult `locationName:"scanEc2InstanceWithFindings" type:"structure"`
+
+	// The GuardDuty Malware Protection service role.
+	ServiceRole *string `locationName:"serviceRole" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MalwareProtectionConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MalwareProtectionConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetScanEc2InstanceWithFindings sets the ScanEc2InstanceWithFindings field's value.
+func (s *MalwareProtectionConfigurationResult) SetScanEc2InstanceWithFindings(v *ScanEc2InstanceWithFindingsResult) *MalwareProtectionConfigurationResult {
+	s.ScanEc2InstanceWithFindings = v
+	return s
+}
+
+// SetServiceRole sets the ServiceRole field's value.
+func (s *MalwareProtectionConfigurationResult) SetServiceRole(v string) *MalwareProtectionConfigurationResult {
+	s.ServiceRole = &v
+	return s
+}
+
+// Provides details about Malware Protection when it is enabled as a data source.
+type MalwareProtectionDataSourceFreeTrial struct {
+	_ struct{} `type:"structure"`
+
+	// Describes whether Malware Protection for EC2 instances with findings is enabled
+	// as a data source.
+	ScanEc2InstanceWithFindings *DataSourceFreeTrial `locationName:"scanEc2InstanceWithFindings" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MalwareProtectionDataSourceFreeTrial) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MalwareProtectionDataSourceFreeTrial) GoString() string {
+	return s.String()
+}
+
+// SetScanEc2InstanceWithFindings sets the ScanEc2InstanceWithFindings field's value.
+func (s *MalwareProtectionDataSourceFreeTrial) SetScanEc2InstanceWithFindings(v *DataSourceFreeTrial) *MalwareProtectionDataSourceFreeTrial {
+	s.ScanEc2InstanceWithFindings = v
+	return s
+}
+
+// Contains information about the administrator account and invitation.
 type Master struct {
 	_ struct{} `type:"structure"`
 
-	// Master account ID
-	AccountId *string `locationName:"accountId" type:"string"`
+	// The ID of the account used as the administrator account.
+	AccountId *string `locationName:"accountId" min:"12" type:"string"`
 
-	// This value is used to validate the master account to the member account.
+	// The value used to validate the administrator account to the member account.
 	InvitationId *string `locationName:"invitationId" type:"string"`
 
-	// Timestamp at which the invitation was sent
+	// The timestamp when the invitation was sent.
 	InvitedAt *string `locationName:"invitedAt" type:"string"`
 
-	// The status of the relationship between the master and member accounts.
+	// The status of the relationship between the administrator and member accounts.
 	RelationshipStatus *string `locationName:"relationshipStatus" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Master) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Master) GoString() string {
 	return s.String()
 }
@@ -7771,48 +18526,59 @@ func (s *Master) SetRelationshipStatus(v string) *Master {
 	return s
 }
 
-// Contains details about the member account.
+// Contains information about the member account.
 type Member struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID.
+	// The ID of the member account.
 	//
 	// AccountId is a required field
-	AccountId *string `locationName:"accountId" type:"string" required:"true"`
+	AccountId *string `locationName:"accountId" min:"12" type:"string" required:"true"`
 
-	// The unique identifier for a detector.
-	DetectorId *string `locationName:"detectorId" type:"string"`
+	// The administrator account ID.
+	AdministratorId *string `locationName:"administratorId" type:"string"`
 
-	// Member account's email address.
+	// The detector ID of the member account.
+	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
+
+	// The email address of the member account.
 	//
 	// Email is a required field
-	Email *string `locationName:"email" type:"string" required:"true"`
+	Email *string `locationName:"email" min:"1" type:"string" required:"true"`
 
-	// Timestamp at which the invitation was sent
+	// The timestamp when the invitation was sent.
 	InvitedAt *string `locationName:"invitedAt" type:"string"`
 
-	// The master account ID.
+	// The administrator account ID.
 	//
 	// MasterId is a required field
 	MasterId *string `locationName:"masterId" type:"string" required:"true"`
 
-	// The status of the relationship between the member and the master.
+	// The status of the relationship between the member and the administrator.
 	//
 	// RelationshipStatus is a required field
 	RelationshipStatus *string `locationName:"relationshipStatus" type:"string" required:"true"`
 
-	// The first time a resource was created. The format will be ISO-8601.
+	// The last-updated timestamp of the member.
 	//
 	// UpdatedAt is a required field
 	UpdatedAt *string `locationName:"updatedAt" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Member) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Member) GoString() string {
 	return s.String()
 }
@@ -7820,6 +18586,12 @@ func (s Member) GoString() string {
 // SetAccountId sets the AccountId field's value.
 func (s *Member) SetAccountId(v string) *Member {
 	s.AccountId = &v
+	return s
+}
+
+// SetAdministratorId sets the AdministratorId field's value.
+func (s *Member) SetAdministratorId(v string) *Member {
+	s.AdministratorId = &v
 	return s
 }
 
@@ -7859,35 +18631,305 @@ func (s *Member) SetUpdatedAt(v string) *Member {
 	return s
 }
 
-// Information about the NETWORK_CONNECTION action described in this finding.
+// Information about the additional configuration for the member account.
+type MemberAdditionalConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the additional configuration.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeatureAdditionalConfiguration"`
+
+	// Status of the additional configuration.
+	Status *string `locationName:"status" type:"string" enum:"FeatureStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberAdditionalConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberAdditionalConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *MemberAdditionalConfiguration) SetName(v string) *MemberAdditionalConfiguration {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *MemberAdditionalConfiguration) SetStatus(v string) *MemberAdditionalConfiguration {
+	s.Status = &v
+	return s
+}
+
+// Information about the additional configuration for the member account.
+type MemberAdditionalConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates the name of the additional configuration that is set for the member
+	// account.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeatureAdditionalConfiguration"`
+
+	// Indicates the status of the additional configuration that is set for the
+	// member account.
+	Status *string `locationName:"status" type:"string" enum:"FeatureStatus"`
+
+	// The timestamp at which the additional configuration was set for the member
+	// account. This is in UTC format.
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberAdditionalConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberAdditionalConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *MemberAdditionalConfigurationResult) SetName(v string) *MemberAdditionalConfigurationResult {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *MemberAdditionalConfigurationResult) SetStatus(v string) *MemberAdditionalConfigurationResult {
+	s.Status = &v
+	return s
+}
+
+// SetUpdatedAt sets the UpdatedAt field's value.
+func (s *MemberAdditionalConfigurationResult) SetUpdatedAt(v time.Time) *MemberAdditionalConfigurationResult {
+	s.UpdatedAt = &v
+	return s
+}
+
+// Contains information on which data sources are enabled for a member account.
+type MemberDataSourceConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID for the member account.
+	//
+	// AccountId is a required field
+	AccountId *string `locationName:"accountId" min:"12" type:"string" required:"true"`
+
+	// Contains information on the status of data sources for the account.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources *DataSourceConfigurationsResult `locationName:"dataSources" deprecated:"true" type:"structure"`
+
+	// Contains information about the status of the features for the member account.
+	Features []*MemberFeaturesConfigurationResult `locationName:"features" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberDataSourceConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberDataSourceConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *MemberDataSourceConfiguration) SetAccountId(v string) *MemberDataSourceConfiguration {
+	s.AccountId = &v
+	return s
+}
+
+// SetDataSources sets the DataSources field's value.
+func (s *MemberDataSourceConfiguration) SetDataSources(v *DataSourceConfigurationsResult) *MemberDataSourceConfiguration {
+	s.DataSources = v
+	return s
+}
+
+// SetFeatures sets the Features field's value.
+func (s *MemberDataSourceConfiguration) SetFeatures(v []*MemberFeaturesConfigurationResult) *MemberDataSourceConfiguration {
+	s.Features = v
+	return s
+}
+
+// Contains information about the features for the member account.
+type MemberFeaturesConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Additional configuration of the feature for the member account.
+	AdditionalConfiguration []*MemberAdditionalConfiguration `locationName:"additionalConfiguration" type:"list"`
+
+	// The name of the feature.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeature"`
+
+	// The status of the feature.
+	Status *string `locationName:"status" type:"string" enum:"FeatureStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberFeaturesConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberFeaturesConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetAdditionalConfiguration sets the AdditionalConfiguration field's value.
+func (s *MemberFeaturesConfiguration) SetAdditionalConfiguration(v []*MemberAdditionalConfiguration) *MemberFeaturesConfiguration {
+	s.AdditionalConfiguration = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *MemberFeaturesConfiguration) SetName(v string) *MemberFeaturesConfiguration {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *MemberFeaturesConfiguration) SetStatus(v string) *MemberFeaturesConfiguration {
+	s.Status = &v
+	return s
+}
+
+// Contains information about the features for the member account.
+type MemberFeaturesConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates the additional configuration of the feature that is configured
+	// for the member account.
+	AdditionalConfiguration []*MemberAdditionalConfigurationResult `locationName:"additionalConfiguration" type:"list"`
+
+	// Indicates the name of the feature that is enabled for the detector.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeature"`
+
+	// Indicates the status of the feature that is enabled for the detector.
+	Status *string `locationName:"status" type:"string" enum:"FeatureStatus"`
+
+	// The timestamp at which the feature object was updated.
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberFeaturesConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MemberFeaturesConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetAdditionalConfiguration sets the AdditionalConfiguration field's value.
+func (s *MemberFeaturesConfigurationResult) SetAdditionalConfiguration(v []*MemberAdditionalConfigurationResult) *MemberFeaturesConfigurationResult {
+	s.AdditionalConfiguration = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *MemberFeaturesConfigurationResult) SetName(v string) *MemberFeaturesConfigurationResult {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *MemberFeaturesConfigurationResult) SetStatus(v string) *MemberFeaturesConfigurationResult {
+	s.Status = &v
+	return s
+}
+
+// SetUpdatedAt sets the UpdatedAt field's value.
+func (s *MemberFeaturesConfigurationResult) SetUpdatedAt(v time.Time) *MemberFeaturesConfigurationResult {
+	s.UpdatedAt = &v
+	return s
+}
+
+// Contains information about the NETWORK_CONNECTION action described in the
+// finding.
 type NetworkConnectionAction struct {
 	_ struct{} `type:"structure"`
 
-	// Network connection blocked information.
+	// Indicates whether EC2 blocked the network connection to your instance.
 	Blocked *bool `locationName:"blocked" type:"boolean"`
 
-	// Network connection direction.
+	// The network connection direction.
 	ConnectionDirection *string `locationName:"connectionDirection" type:"string"`
 
-	// Local port information of the connection.
+	// The local IP information of the connection.
+	LocalIpDetails *LocalIpDetails `locationName:"localIpDetails" type:"structure"`
+
+	// The local port information of the connection.
 	LocalPortDetails *LocalPortDetails `locationName:"localPortDetails" type:"structure"`
 
-	// Network connection protocol.
+	// The network connection protocol.
 	Protocol *string `locationName:"protocol" type:"string"`
 
-	// Remote IP information of the connection.
+	// The remote IP information of the connection.
 	RemoteIpDetails *RemoteIpDetails `locationName:"remoteIpDetails" type:"structure"`
 
-	// Remote port information of the connection.
+	// The remote port information of the connection.
 	RemotePortDetails *RemotePortDetails `locationName:"remotePortDetails" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NetworkConnectionAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NetworkConnectionAction) GoString() string {
 	return s.String()
 }
@@ -7901,6 +18943,12 @@ func (s *NetworkConnectionAction) SetBlocked(v bool) *NetworkConnectionAction {
 // SetConnectionDirection sets the ConnectionDirection field's value.
 func (s *NetworkConnectionAction) SetConnectionDirection(v string) *NetworkConnectionAction {
 	s.ConnectionDirection = &v
+	return s
+}
+
+// SetLocalIpDetails sets the LocalIpDetails field's value.
+func (s *NetworkConnectionAction) SetLocalIpDetails(v *LocalIpDetails) *NetworkConnectionAction {
+	s.LocalIpDetails = v
 	return s
 }
 
@@ -7928,32 +18976,32 @@ func (s *NetworkConnectionAction) SetRemotePortDetails(v *RemotePortDetails) *Ne
 	return s
 }
 
-// The network interface information of the EC2 instance.
+// Contains information about the elastic network interface of the EC2 instance.
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
-	// A list of EC2 instance IPv6 address information.
+	// A list of IPv6 addresses for the EC2 instance.
 	Ipv6Addresses []*string `locationName:"ipv6Addresses" type:"list"`
 
-	// The ID of the network interface
+	// The ID of the network interface.
 	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
-	// Private DNS name of the EC2 instance.
+	// The private DNS name of the EC2 instance.
 	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
-	// Private IP address of the EC2 instance.
+	// The private IP address of the EC2 instance.
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// Other private IP address information of the EC2 instance.
 	PrivateIpAddresses []*PrivateIpAddressDetails `locationName:"privateIpAddresses" type:"list"`
 
-	// Public DNS name of the EC2 instance.
+	// The public DNS name of the EC2 instance.
 	PublicDnsName *string `locationName:"publicDnsName" type:"string"`
 
-	// Public IP address of the EC2 instance.
+	// The public IP address of the EC2 instance.
 	PublicIp *string `locationName:"publicIp" type:"string"`
 
-	// Security groups associated with the EC2 instance.
+	// The security groups associated with the EC2 instance.
 	SecurityGroups []*SecurityGroup `locationName:"securityGroups" type:"list"`
 
 	// The subnet ID of the EC2 instance.
@@ -7963,12 +19011,20 @@ type NetworkInterface struct {
 	VpcId *string `locationName:"vpcId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NetworkInterface) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NetworkInterface) GoString() string {
 	return s.String()
 }
@@ -8033,29 +19089,70 @@ func (s *NetworkInterface) SetVpcId(v string) *NetworkInterface {
 	return s
 }
 
-// ISP Organization information of the remote IP address.
+// Contains information about the observed behavior.
+type Observations struct {
+	_ struct{} `type:"structure"`
+
+	// The text that was unusual.
+	Text []*string `locationName:"text" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Observations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Observations) GoString() string {
+	return s.String()
+}
+
+// SetText sets the Text field's value.
+func (s *Observations) SetText(v []*string) *Observations {
+	s.Text = v
+	return s
+}
+
+// Contains information about the ISP organization of the remote IP address.
 type Organization struct {
 	_ struct{} `type:"structure"`
 
-	// Autonomous system number of the internet provider of the remote IP address.
+	// The Autonomous System Number (ASN) of the internet provider of the remote
+	// IP address.
 	Asn *string `locationName:"asn" type:"string"`
 
-	// Organization that registered this ASN.
+	// The organization that registered this ASN.
 	AsnOrg *string `locationName:"asnOrg" type:"string"`
 
-	// ISP information for the internet provider.
+	// The ISP information for the internet provider.
 	Isp *string `locationName:"isp" type:"string"`
 
-	// Name of the internet provider.
+	// The name of the internet provider.
 	Org *string `locationName:"org" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Organization) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Organization) GoString() string {
 	return s.String()
 }
@@ -8084,23 +19181,1143 @@ func (s *Organization) SetOrg(v string) *Organization {
 	return s
 }
 
-// Information about the PORT_PROBE action described in this finding.
+// A list of additional configurations which will be configured for the organization.
+type OrganizationAdditionalConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the additional configuration that will be configured for the
+	// organization. Use one of the following values to configure the feature status
+	// for the entire organization:
+	//
+	//    * NEW: Indicates that when a new account joins the organization, they
+	//    will have the additional configuration enabled automatically.
+	//
+	//    * ALL: Indicates that all accounts in the organization have the additional
+	//    configuration enabled automatically. This includes NEW accounts that join
+	//    the organization and accounts that may have been suspended or removed
+	//    from the organization in GuardDuty. It may take up to 24 hours to update
+	//    the configuration for all the member accounts.
+	//
+	//    * NONE: Indicates that the additional configuration will not be automatically
+	//    enabled for any account in the organization. The administrator must manage
+	//    the additional configuration for each account individually.
+	AutoEnable *string `locationName:"autoEnable" type:"string" enum:"OrgFeatureStatus"`
+
+	// The name of the additional configuration that will be configured for the
+	// organization.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeatureAdditionalConfiguration"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationAdditionalConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationAdditionalConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationAdditionalConfiguration) SetAutoEnable(v string) *OrganizationAdditionalConfiguration {
+	s.AutoEnable = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *OrganizationAdditionalConfiguration) SetName(v string) *OrganizationAdditionalConfiguration {
+	s.Name = &v
+	return s
+}
+
+// A list of additional configuration which will be configured for the organization.
+type OrganizationAdditionalConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the status of the additional configuration that is configured for
+	// the member accounts within the organization. One of the following values
+	// is the status for the entire organization:
+	//
+	//    * NEW: Indicates that when a new account joins the organization, they
+	//    will have the additional configuration enabled automatically.
+	//
+	//    * ALL: Indicates that all accounts in the organization have the additional
+	//    configuration enabled automatically. This includes NEW accounts that join
+	//    the organization and accounts that may have been suspended or removed
+	//    from the organization in GuardDuty. It may take up to 24 hours to update
+	//    the configuration for all the member accounts.
+	//
+	//    * NONE: Indicates that the additional configuration will not be automatically
+	//    enabled for any account in the organization. The administrator must manage
+	//    the additional configuration for each account individually.
+	AutoEnable *string `locationName:"autoEnable" type:"string" enum:"OrgFeatureStatus"`
+
+	// The name of the additional configuration that is configured for the member
+	// accounts within the organization.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeatureAdditionalConfiguration"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationAdditionalConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationAdditionalConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationAdditionalConfigurationResult) SetAutoEnable(v string) *OrganizationAdditionalConfigurationResult {
+	s.AutoEnable = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *OrganizationAdditionalConfigurationResult) SetName(v string) *OrganizationAdditionalConfigurationResult {
+	s.Name = &v
+	return s
+}
+
+// An object that contains information on which data sources will be configured
+// to be automatically enabled for new members within the organization.
+type OrganizationDataSourceConfigurations struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the configuration of Kubernetes data sources for new members of
+	// the organization.
+	Kubernetes *OrganizationKubernetesConfiguration `locationName:"kubernetes" type:"structure"`
+
+	// Describes the configuration of Malware Protection for new members of the
+	// organization.
+	MalwareProtection *OrganizationMalwareProtectionConfiguration `locationName:"malwareProtection" type:"structure"`
+
+	// Describes whether S3 data event logs are enabled for new members of the organization.
+	S3Logs *OrganizationS3LogsConfiguration `locationName:"s3Logs" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationDataSourceConfigurations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationDataSourceConfigurations) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OrganizationDataSourceConfigurations) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "OrganizationDataSourceConfigurations"}
+	if s.Kubernetes != nil {
+		if err := s.Kubernetes.Validate(); err != nil {
+			invalidParams.AddNested("Kubernetes", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3Logs != nil {
+		if err := s.S3Logs.Validate(); err != nil {
+			invalidParams.AddNested("S3Logs", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKubernetes sets the Kubernetes field's value.
+func (s *OrganizationDataSourceConfigurations) SetKubernetes(v *OrganizationKubernetesConfiguration) *OrganizationDataSourceConfigurations {
+	s.Kubernetes = v
+	return s
+}
+
+// SetMalwareProtection sets the MalwareProtection field's value.
+func (s *OrganizationDataSourceConfigurations) SetMalwareProtection(v *OrganizationMalwareProtectionConfiguration) *OrganizationDataSourceConfigurations {
+	s.MalwareProtection = v
+	return s
+}
+
+// SetS3Logs sets the S3Logs field's value.
+func (s *OrganizationDataSourceConfigurations) SetS3Logs(v *OrganizationS3LogsConfiguration) *OrganizationDataSourceConfigurations {
+	s.S3Logs = v
+	return s
+}
+
+// An object that contains information on which data sources are automatically
+// enabled for new members within the organization.
+type OrganizationDataSourceConfigurationsResult struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the configuration of Kubernetes data sources.
+	Kubernetes *OrganizationKubernetesConfigurationResult `locationName:"kubernetes" type:"structure"`
+
+	// Describes the configuration of Malware Protection data source for an organization.
+	MalwareProtection *OrganizationMalwareProtectionConfigurationResult `locationName:"malwareProtection" type:"structure"`
+
+	// Describes whether S3 data event logs are enabled as a data source.
+	//
+	// S3Logs is a required field
+	S3Logs *OrganizationS3LogsConfigurationResult `locationName:"s3Logs" type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationDataSourceConfigurationsResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationDataSourceConfigurationsResult) GoString() string {
+	return s.String()
+}
+
+// SetKubernetes sets the Kubernetes field's value.
+func (s *OrganizationDataSourceConfigurationsResult) SetKubernetes(v *OrganizationKubernetesConfigurationResult) *OrganizationDataSourceConfigurationsResult {
+	s.Kubernetes = v
+	return s
+}
+
+// SetMalwareProtection sets the MalwareProtection field's value.
+func (s *OrganizationDataSourceConfigurationsResult) SetMalwareProtection(v *OrganizationMalwareProtectionConfigurationResult) *OrganizationDataSourceConfigurationsResult {
+	s.MalwareProtection = v
+	return s
+}
+
+// SetS3Logs sets the S3Logs field's value.
+func (s *OrganizationDataSourceConfigurationsResult) SetS3Logs(v *OrganizationS3LogsConfigurationResult) *OrganizationDataSourceConfigurationsResult {
+	s.S3Logs = v
+	return s
+}
+
+// Information about GuardDuty coverage statistics for members in your Amazon
+// Web Services organization.
+type OrganizationDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the GuardDuty coverage statistics for members in your Amazon
+	// Web Services organization.
+	OrganizationStatistics *OrganizationStatistics `locationName:"organizationStatistics" type:"structure"`
+
+	// The timestamp at which the organization statistics was last updated. This
+	// is in UTC format.
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationDetails) GoString() string {
+	return s.String()
+}
+
+// SetOrganizationStatistics sets the OrganizationStatistics field's value.
+func (s *OrganizationDetails) SetOrganizationStatistics(v *OrganizationStatistics) *OrganizationDetails {
+	s.OrganizationStatistics = v
+	return s
+}
+
+// SetUpdatedAt sets the UpdatedAt field's value.
+func (s *OrganizationDetails) SetUpdatedAt(v time.Time) *OrganizationDetails {
+	s.UpdatedAt = &v
+	return s
+}
+
+// Organization-wide EBS volumes scan configuration.
+type OrganizationEbsVolumes struct {
+	_ struct{} `type:"structure"`
+
+	// Whether scanning EBS volumes should be auto-enabled for new members joining
+	// the organization.
+	AutoEnable *bool `locationName:"autoEnable" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationEbsVolumes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationEbsVolumes) GoString() string {
+	return s.String()
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationEbsVolumes) SetAutoEnable(v bool) *OrganizationEbsVolumes {
+	s.AutoEnable = &v
+	return s
+}
+
+// An object that contains information on the status of whether EBS volumes
+// scanning will be enabled as a data source for an organization.
+type OrganizationEbsVolumesResult struct {
+	_ struct{} `type:"structure"`
+
+	// An object that contains the status of whether scanning EBS volumes should
+	// be auto-enabled for new members joining the organization.
+	AutoEnable *bool `locationName:"autoEnable" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationEbsVolumesResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationEbsVolumesResult) GoString() string {
+	return s.String()
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationEbsVolumesResult) SetAutoEnable(v bool) *OrganizationEbsVolumesResult {
+	s.AutoEnable = &v
+	return s
+}
+
+// A list of features which will be configured for the organization.
+type OrganizationFeatureConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The additional information that will be configured for the organization.
+	AdditionalConfiguration []*OrganizationAdditionalConfiguration `locationName:"additionalConfiguration" type:"list"`
+
+	// Describes the status of the feature that is configured for the member accounts
+	// within the organization. One of the following values is the status for the
+	// entire organization:
+	//
+	//    * NEW: Indicates that when a new account joins the organization, they
+	//    will have the feature enabled automatically.
+	//
+	//    * ALL: Indicates that all accounts in the organization have the feature
+	//    enabled automatically. This includes NEW accounts that join the organization
+	//    and accounts that may have been suspended or removed from the organization
+	//    in GuardDuty. It may take up to 24 hours to update the configuration for
+	//    all the member accounts.
+	//
+	//    * NONE: Indicates that the feature will not be automatically enabled for
+	//    any account in the organization. The administrator must manage the feature
+	//    for each account individually.
+	AutoEnable *string `locationName:"autoEnable" type:"string" enum:"OrgFeatureStatus"`
+
+	// The name of the feature that will be configured for the organization.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeature"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationFeatureConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationFeatureConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetAdditionalConfiguration sets the AdditionalConfiguration field's value.
+func (s *OrganizationFeatureConfiguration) SetAdditionalConfiguration(v []*OrganizationAdditionalConfiguration) *OrganizationFeatureConfiguration {
+	s.AdditionalConfiguration = v
+	return s
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationFeatureConfiguration) SetAutoEnable(v string) *OrganizationFeatureConfiguration {
+	s.AutoEnable = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *OrganizationFeatureConfiguration) SetName(v string) *OrganizationFeatureConfiguration {
+	s.Name = &v
+	return s
+}
+
+// A list of features which will be configured for the organization.
+type OrganizationFeatureConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// The additional configuration that is configured for the member accounts within
+	// the organization.
+	AdditionalConfiguration []*OrganizationAdditionalConfigurationResult `locationName:"additionalConfiguration" type:"list"`
+
+	// Describes the status of the feature that is configured for the member accounts
+	// within the organization.
+	//
+	//    * NEW: Indicates that when a new account joins the organization, they
+	//    will have the feature enabled automatically.
+	//
+	//    * ALL: Indicates that all accounts in the organization have the feature
+	//    enabled automatically. This includes NEW accounts that join the organization
+	//    and accounts that may have been suspended or removed from the organization
+	//    in GuardDuty.
+	//
+	//    * NONE: Indicates that the feature will not be automatically enabled for
+	//    any account in the organization. In this case, each account will be managed
+	//    individually by the administrator.
+	AutoEnable *string `locationName:"autoEnable" type:"string" enum:"OrgFeatureStatus"`
+
+	// The name of the feature that is configured for the member accounts within
+	// the organization.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeature"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationFeatureConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationFeatureConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetAdditionalConfiguration sets the AdditionalConfiguration field's value.
+func (s *OrganizationFeatureConfigurationResult) SetAdditionalConfiguration(v []*OrganizationAdditionalConfigurationResult) *OrganizationFeatureConfigurationResult {
+	s.AdditionalConfiguration = v
+	return s
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationFeatureConfigurationResult) SetAutoEnable(v string) *OrganizationFeatureConfigurationResult {
+	s.AutoEnable = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *OrganizationFeatureConfigurationResult) SetName(v string) *OrganizationFeatureConfigurationResult {
+	s.Name = &v
+	return s
+}
+
+// Information about the number of accounts that have enabled a specific feature.
+type OrganizationFeatureStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the additional configuration.
+	AdditionalConfiguration []*OrganizationFeatureStatisticsAdditionalConfiguration `locationName:"additionalConfiguration" type:"list"`
+
+	// Total number of accounts that have enabled a specific feature.
+	EnabledAccountsCount *int64 `locationName:"enabledAccountsCount" type:"integer"`
+
+	// Name of the feature.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeature"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationFeatureStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationFeatureStatistics) GoString() string {
+	return s.String()
+}
+
+// SetAdditionalConfiguration sets the AdditionalConfiguration field's value.
+func (s *OrganizationFeatureStatistics) SetAdditionalConfiguration(v []*OrganizationFeatureStatisticsAdditionalConfiguration) *OrganizationFeatureStatistics {
+	s.AdditionalConfiguration = v
+	return s
+}
+
+// SetEnabledAccountsCount sets the EnabledAccountsCount field's value.
+func (s *OrganizationFeatureStatistics) SetEnabledAccountsCount(v int64) *OrganizationFeatureStatistics {
+	s.EnabledAccountsCount = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *OrganizationFeatureStatistics) SetName(v string) *OrganizationFeatureStatistics {
+	s.Name = &v
+	return s
+}
+
+// Information about the coverage statistic for the additional configuration
+// of the feature.
+type OrganizationFeatureStatisticsAdditionalConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Total number of accounts that have enabled the additional configuration.
+	EnabledAccountsCount *int64 `locationName:"enabledAccountsCount" type:"integer"`
+
+	// Name of the additional configuration within a feature.
+	Name *string `locationName:"name" type:"string" enum:"OrgFeatureAdditionalConfiguration"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationFeatureStatisticsAdditionalConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationFeatureStatisticsAdditionalConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetEnabledAccountsCount sets the EnabledAccountsCount field's value.
+func (s *OrganizationFeatureStatisticsAdditionalConfiguration) SetEnabledAccountsCount(v int64) *OrganizationFeatureStatisticsAdditionalConfiguration {
+	s.EnabledAccountsCount = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *OrganizationFeatureStatisticsAdditionalConfiguration) SetName(v string) *OrganizationFeatureStatisticsAdditionalConfiguration {
+	s.Name = &v
+	return s
+}
+
+// Organization-wide Kubernetes audit logs configuration.
+type OrganizationKubernetesAuditLogsConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// A value that contains information on whether Kubernetes audit logs should
+	// be enabled automatically as a data source for the organization.
+	//
+	// AutoEnable is a required field
+	AutoEnable *bool `locationName:"autoEnable" type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationKubernetesAuditLogsConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationKubernetesAuditLogsConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OrganizationKubernetesAuditLogsConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "OrganizationKubernetesAuditLogsConfiguration"}
+	if s.AutoEnable == nil {
+		invalidParams.Add(request.NewErrParamRequired("AutoEnable"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationKubernetesAuditLogsConfiguration) SetAutoEnable(v bool) *OrganizationKubernetesAuditLogsConfiguration {
+	s.AutoEnable = &v
+	return s
+}
+
+// The current configuration of Kubernetes audit logs as a data source for the
+// organization.
+type OrganizationKubernetesAuditLogsConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Whether Kubernetes audit logs data source should be auto-enabled for new
+	// members joining the organization.
+	//
+	// AutoEnable is a required field
+	AutoEnable *bool `locationName:"autoEnable" type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationKubernetesAuditLogsConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationKubernetesAuditLogsConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationKubernetesAuditLogsConfigurationResult) SetAutoEnable(v bool) *OrganizationKubernetesAuditLogsConfigurationResult {
+	s.AutoEnable = &v
+	return s
+}
+
+// Organization-wide Kubernetes data sources configurations.
+type OrganizationKubernetesConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Whether Kubernetes audit logs data source should be auto-enabled for new
+	// members joining the organization.
+	//
+	// AuditLogs is a required field
+	AuditLogs *OrganizationKubernetesAuditLogsConfiguration `locationName:"auditLogs" type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationKubernetesConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationKubernetesConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OrganizationKubernetesConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "OrganizationKubernetesConfiguration"}
+	if s.AuditLogs == nil {
+		invalidParams.Add(request.NewErrParamRequired("AuditLogs"))
+	}
+	if s.AuditLogs != nil {
+		if err := s.AuditLogs.Validate(); err != nil {
+			invalidParams.AddNested("AuditLogs", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAuditLogs sets the AuditLogs field's value.
+func (s *OrganizationKubernetesConfiguration) SetAuditLogs(v *OrganizationKubernetesAuditLogsConfiguration) *OrganizationKubernetesConfiguration {
+	s.AuditLogs = v
+	return s
+}
+
+// The current configuration of all Kubernetes data sources for the organization.
+type OrganizationKubernetesConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// The current configuration of Kubernetes audit logs as a data source for the
+	// organization.
+	//
+	// AuditLogs is a required field
+	AuditLogs *OrganizationKubernetesAuditLogsConfigurationResult `locationName:"auditLogs" type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationKubernetesConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationKubernetesConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetAuditLogs sets the AuditLogs field's value.
+func (s *OrganizationKubernetesConfigurationResult) SetAuditLogs(v *OrganizationKubernetesAuditLogsConfigurationResult) *OrganizationKubernetesConfigurationResult {
+	s.AuditLogs = v
+	return s
+}
+
+// Organization-wide Malware Protection configurations.
+type OrganizationMalwareProtectionConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Whether Malware Protection for EC2 instances with findings should be auto-enabled
+	// for new members joining the organization.
+	ScanEc2InstanceWithFindings *OrganizationScanEc2InstanceWithFindings `locationName:"scanEc2InstanceWithFindings" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationMalwareProtectionConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationMalwareProtectionConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetScanEc2InstanceWithFindings sets the ScanEc2InstanceWithFindings field's value.
+func (s *OrganizationMalwareProtectionConfiguration) SetScanEc2InstanceWithFindings(v *OrganizationScanEc2InstanceWithFindings) *OrganizationMalwareProtectionConfiguration {
+	s.ScanEc2InstanceWithFindings = v
+	return s
+}
+
+// An object that contains information on the status of all Malware Protection
+// data source for an organization.
+type OrganizationMalwareProtectionConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the configuration for scanning EC2 instances with findings for
+	// an organization.
+	ScanEc2InstanceWithFindings *OrganizationScanEc2InstanceWithFindingsResult `locationName:"scanEc2InstanceWithFindings" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationMalwareProtectionConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationMalwareProtectionConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetScanEc2InstanceWithFindings sets the ScanEc2InstanceWithFindings field's value.
+func (s *OrganizationMalwareProtectionConfigurationResult) SetScanEc2InstanceWithFindings(v *OrganizationScanEc2InstanceWithFindingsResult) *OrganizationMalwareProtectionConfigurationResult {
+	s.ScanEc2InstanceWithFindings = v
+	return s
+}
+
+// Describes whether S3 data event logs will be automatically enabled for new
+// members of the organization.
+type OrganizationS3LogsConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// A value that contains information on whether S3 data event logs will be enabled
+	// automatically as a data source for the organization.
+	//
+	// AutoEnable is a required field
+	AutoEnable *bool `locationName:"autoEnable" type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationS3LogsConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationS3LogsConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OrganizationS3LogsConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "OrganizationS3LogsConfiguration"}
+	if s.AutoEnable == nil {
+		invalidParams.Add(request.NewErrParamRequired("AutoEnable"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationS3LogsConfiguration) SetAutoEnable(v bool) *OrganizationS3LogsConfiguration {
+	s.AutoEnable = &v
+	return s
+}
+
+// The current configuration of S3 data event logs as a data source for the
+// organization.
+type OrganizationS3LogsConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// A value that describes whether S3 data event logs are automatically enabled
+	// for new members of the organization.
+	//
+	// AutoEnable is a required field
+	AutoEnable *bool `locationName:"autoEnable" type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationS3LogsConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationS3LogsConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *OrganizationS3LogsConfigurationResult) SetAutoEnable(v bool) *OrganizationS3LogsConfigurationResult {
+	s.AutoEnable = &v
+	return s
+}
+
+// Organization-wide EC2 instances with findings scan configuration.
+type OrganizationScanEc2InstanceWithFindings struct {
+	_ struct{} `type:"structure"`
+
+	// Whether scanning EBS volumes should be auto-enabled for new members joining
+	// the organization.
+	EbsVolumes *OrganizationEbsVolumes `locationName:"ebsVolumes" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationScanEc2InstanceWithFindings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationScanEc2InstanceWithFindings) GoString() string {
+	return s.String()
+}
+
+// SetEbsVolumes sets the EbsVolumes field's value.
+func (s *OrganizationScanEc2InstanceWithFindings) SetEbsVolumes(v *OrganizationEbsVolumes) *OrganizationScanEc2InstanceWithFindings {
+	s.EbsVolumes = v
+	return s
+}
+
+// An object that contains information on the status of scanning EC2 instances
+// with findings for an organization.
+type OrganizationScanEc2InstanceWithFindingsResult struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the configuration for scanning EBS volumes for an organization.
+	EbsVolumes *OrganizationEbsVolumesResult `locationName:"ebsVolumes" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationScanEc2InstanceWithFindingsResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationScanEc2InstanceWithFindingsResult) GoString() string {
+	return s.String()
+}
+
+// SetEbsVolumes sets the EbsVolumes field's value.
+func (s *OrganizationScanEc2InstanceWithFindingsResult) SetEbsVolumes(v *OrganizationEbsVolumesResult) *OrganizationScanEc2InstanceWithFindingsResult {
+	s.EbsVolumes = v
+	return s
+}
+
+// Information about the coverage statistics of the features for the entire
+// Amazon Web Services organization.
+//
+// When you create a new Amazon Web Services organization, it might take up
+// to 24 hours to generate the statistics summary for this organization.
+type OrganizationStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// Total number of active accounts in your Amazon Web Services organization
+	// that are associated with GuardDuty.
+	ActiveAccountsCount *int64 `locationName:"activeAccountsCount" type:"integer"`
+
+	// Retrieves the coverage statistics for each feature.
+	CountByFeature []*OrganizationFeatureStatistics `locationName:"countByFeature" type:"list"`
+
+	// Total number of accounts that have enabled GuardDuty.
+	EnabledAccountsCount *int64 `locationName:"enabledAccountsCount" type:"integer"`
+
+	// Total number of accounts in your Amazon Web Services organization that are
+	// associated with GuardDuty.
+	MemberAccountsCount *int64 `locationName:"memberAccountsCount" type:"integer"`
+
+	// Total number of accounts in your Amazon Web Services organization.
+	TotalAccountsCount *int64 `locationName:"totalAccountsCount" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationStatistics) GoString() string {
+	return s.String()
+}
+
+// SetActiveAccountsCount sets the ActiveAccountsCount field's value.
+func (s *OrganizationStatistics) SetActiveAccountsCount(v int64) *OrganizationStatistics {
+	s.ActiveAccountsCount = &v
+	return s
+}
+
+// SetCountByFeature sets the CountByFeature field's value.
+func (s *OrganizationStatistics) SetCountByFeature(v []*OrganizationFeatureStatistics) *OrganizationStatistics {
+	s.CountByFeature = v
+	return s
+}
+
+// SetEnabledAccountsCount sets the EnabledAccountsCount field's value.
+func (s *OrganizationStatistics) SetEnabledAccountsCount(v int64) *OrganizationStatistics {
+	s.EnabledAccountsCount = &v
+	return s
+}
+
+// SetMemberAccountsCount sets the MemberAccountsCount field's value.
+func (s *OrganizationStatistics) SetMemberAccountsCount(v int64) *OrganizationStatistics {
+	s.MemberAccountsCount = &v
+	return s
+}
+
+// SetTotalAccountsCount sets the TotalAccountsCount field's value.
+func (s *OrganizationStatistics) SetTotalAccountsCount(v int64) *OrganizationStatistics {
+	s.TotalAccountsCount = &v
+	return s
+}
+
+// Contains information on the owner of the bucket.
+type Owner struct {
+	_ struct{} `type:"structure"`
+
+	// The canonical user ID of the bucket owner. For information about locating
+	// your canonical user ID see Finding Your Account Canonical User ID. (https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)
+	Id *string `locationName:"id" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Owner) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Owner) GoString() string {
+	return s.String()
+}
+
+// SetId sets the Id field's value.
+func (s *Owner) SetId(v string) *Owner {
+	s.Id = &v
+	return s
+}
+
+// Contains information about how permissions are configured for the S3 bucket.
+type PermissionConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Contains information about the account level permissions on the S3 bucket.
+	AccountLevelPermissions *AccountLevelPermissions `locationName:"accountLevelPermissions" type:"structure"`
+
+	// Contains information about the bucket level permissions for the S3 bucket.
+	BucketLevelPermissions *BucketLevelPermissions `locationName:"bucketLevelPermissions" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PermissionConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PermissionConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetAccountLevelPermissions sets the AccountLevelPermissions field's value.
+func (s *PermissionConfiguration) SetAccountLevelPermissions(v *AccountLevelPermissions) *PermissionConfiguration {
+	s.AccountLevelPermissions = v
+	return s
+}
+
+// SetBucketLevelPermissions sets the BucketLevelPermissions field's value.
+func (s *PermissionConfiguration) SetBucketLevelPermissions(v *BucketLevelPermissions) *PermissionConfiguration {
+	s.BucketLevelPermissions = v
+	return s
+}
+
+// Contains information about the PORT_PROBE action described in the finding.
 type PortProbeAction struct {
 	_ struct{} `type:"structure"`
 
-	// Port probe blocked information.
+	// Indicates whether EC2 blocked the port probe to the instance, such as with
+	// an ACL.
 	Blocked *bool `locationName:"blocked" type:"boolean"`
 
-	// A list of port probe details objects.
+	// A list of objects related to port probe details.
 	PortProbeDetails []*PortProbeDetail `locationName:"portProbeDetails" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PortProbeAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PortProbeAction) GoString() string {
 	return s.String()
 }
@@ -8117,25 +20334,42 @@ func (s *PortProbeAction) SetPortProbeDetails(v []*PortProbeDetail) *PortProbeAc
 	return s
 }
 
-// Details about the port probe finding.
+// Contains information about the port probe details.
 type PortProbeDetail struct {
 	_ struct{} `type:"structure"`
 
-	// Local port information of the connection.
+	// The local IP information of the connection.
+	LocalIpDetails *LocalIpDetails `locationName:"localIpDetails" type:"structure"`
+
+	// The local port information of the connection.
 	LocalPortDetails *LocalPortDetails `locationName:"localPortDetails" type:"structure"`
 
-	// Remote IP information of the connection.
+	// The remote IP information of the connection.
 	RemoteIpDetails *RemoteIpDetails `locationName:"remoteIpDetails" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PortProbeDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PortProbeDetail) GoString() string {
 	return s.String()
+}
+
+// SetLocalIpDetails sets the LocalIpDetails field's value.
+func (s *PortProbeDetail) SetLocalIpDetails(v *LocalIpDetails) *PortProbeDetail {
+	s.LocalIpDetails = v
+	return s
 }
 
 // SetLocalPortDetails sets the LocalPortDetails field's value.
@@ -8150,23 +20384,31 @@ func (s *PortProbeDetail) SetRemoteIpDetails(v *RemoteIpDetails) *PortProbeDetai
 	return s
 }
 
-// Other private IP address information of the EC2 instance.
+// Contains other private IP address information of the EC2 instance.
 type PrivateIpAddressDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Private DNS name of the EC2 instance.
+	// The private DNS name of the EC2 instance.
 	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
-	// Private IP address of the EC2 instance.
+	// The private IP address of the EC2 instance.
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PrivateIpAddressDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PrivateIpAddressDetails) GoString() string {
 	return s.String()
 }
@@ -8183,23 +20425,172 @@ func (s *PrivateIpAddressDetails) SetPrivateIpAddress(v string) *PrivateIpAddres
 	return s
 }
 
-// The product code of the EC2 instance.
+// Information about the observed process.
+type ProcessDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The effective user ID of the user that executed the process.
+	Euid *int64 `locationName:"euid" type:"integer"`
+
+	// The absolute path of the process executable file.
+	ExecutablePath *string `locationName:"executablePath" type:"string"`
+
+	// The SHA256 hash of the process executable.
+	ExecutableSha256 *string `locationName:"executableSha256" type:"string"`
+
+	// Information about the process's lineage.
+	Lineage []*LineageObject `locationName:"lineage" type:"list"`
+
+	// The name of the process.
+	Name *string `locationName:"name" type:"string"`
+
+	// The ID of the child process.
+	NamespacePid *int64 `locationName:"namespacePid" type:"integer"`
+
+	// The unique ID of the parent process. This ID is assigned to the parent process
+	// by GuardDuty.
+	ParentUuid *string `locationName:"parentUuid" type:"string"`
+
+	// The ID of the process.
+	Pid *int64 `locationName:"pid" type:"integer"`
+
+	// The present working directory of the process.
+	Pwd *string `locationName:"pwd" type:"string"`
+
+	// The time when the process started. This is in UTC format.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
+
+	// The user that executed the process.
+	User *string `locationName:"user" type:"string"`
+
+	// The unique ID of the user that executed the process.
+	UserId *int64 `locationName:"userId" type:"integer"`
+
+	// The unique ID assigned to the process by GuardDuty.
+	Uuid *string `locationName:"uuid" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProcessDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProcessDetails) GoString() string {
+	return s.String()
+}
+
+// SetEuid sets the Euid field's value.
+func (s *ProcessDetails) SetEuid(v int64) *ProcessDetails {
+	s.Euid = &v
+	return s
+}
+
+// SetExecutablePath sets the ExecutablePath field's value.
+func (s *ProcessDetails) SetExecutablePath(v string) *ProcessDetails {
+	s.ExecutablePath = &v
+	return s
+}
+
+// SetExecutableSha256 sets the ExecutableSha256 field's value.
+func (s *ProcessDetails) SetExecutableSha256(v string) *ProcessDetails {
+	s.ExecutableSha256 = &v
+	return s
+}
+
+// SetLineage sets the Lineage field's value.
+func (s *ProcessDetails) SetLineage(v []*LineageObject) *ProcessDetails {
+	s.Lineage = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *ProcessDetails) SetName(v string) *ProcessDetails {
+	s.Name = &v
+	return s
+}
+
+// SetNamespacePid sets the NamespacePid field's value.
+func (s *ProcessDetails) SetNamespacePid(v int64) *ProcessDetails {
+	s.NamespacePid = &v
+	return s
+}
+
+// SetParentUuid sets the ParentUuid field's value.
+func (s *ProcessDetails) SetParentUuid(v string) *ProcessDetails {
+	s.ParentUuid = &v
+	return s
+}
+
+// SetPid sets the Pid field's value.
+func (s *ProcessDetails) SetPid(v int64) *ProcessDetails {
+	s.Pid = &v
+	return s
+}
+
+// SetPwd sets the Pwd field's value.
+func (s *ProcessDetails) SetPwd(v string) *ProcessDetails {
+	s.Pwd = &v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *ProcessDetails) SetStartTime(v time.Time) *ProcessDetails {
+	s.StartTime = &v
+	return s
+}
+
+// SetUser sets the User field's value.
+func (s *ProcessDetails) SetUser(v string) *ProcessDetails {
+	s.User = &v
+	return s
+}
+
+// SetUserId sets the UserId field's value.
+func (s *ProcessDetails) SetUserId(v int64) *ProcessDetails {
+	s.UserId = &v
+	return s
+}
+
+// SetUuid sets the Uuid field's value.
+func (s *ProcessDetails) SetUuid(v string) *ProcessDetails {
+	s.Uuid = &v
+	return s
+}
+
+// Contains information about the product code for the EC2 instance.
 type ProductCode struct {
 	_ struct{} `type:"structure"`
 
-	// Product code information.
-	Code *string `locationName:"code" type:"string"`
+	// The product code information.
+	Code *string `locationName:"productCodeId" type:"string"`
 
-	// Product code type.
-	ProductType *string `locationName:"productType" type:"string"`
+	// The product code type.
+	ProductType *string `locationName:"productCodeType" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProductCode) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProductCode) GoString() string {
 	return s.String()
 }
@@ -8216,32 +20607,319 @@ func (s *ProductCode) SetProductType(v string) *ProductCode {
 	return s
 }
 
-// Remote IP information of the connection.
+// Describes the public access policies that apply to the S3 bucket.
+type PublicAccess struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the effective permission on this bucket after factoring all attached
+	// policies.
+	EffectivePermission *string `locationName:"effectivePermission" type:"string"`
+
+	// Contains information about how permissions are configured for the S3 bucket.
+	PermissionConfiguration *PermissionConfiguration `locationName:"permissionConfiguration" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicAccess) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PublicAccess) GoString() string {
+	return s.String()
+}
+
+// SetEffectivePermission sets the EffectivePermission field's value.
+func (s *PublicAccess) SetEffectivePermission(v string) *PublicAccess {
+	s.EffectivePermission = &v
+	return s
+}
+
+// SetPermissionConfiguration sets the PermissionConfiguration field's value.
+func (s *PublicAccess) SetPermissionConfiguration(v *PermissionConfiguration) *PublicAccess {
+	s.PermissionConfiguration = v
+	return s
+}
+
+// Contains information about the resource type RDSDBInstance involved in a
+// GuardDuty finding.
+type RdsDbInstanceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the database cluster that contains the database instance
+	// ID involved in the finding.
+	DbClusterIdentifier *string `locationName:"dbClusterIdentifier" type:"string"`
+
+	// The Amazon Resource Name (ARN) that identifies the database instance involved
+	// in the finding.
+	DbInstanceArn *string `locationName:"dbInstanceArn" type:"string"`
+
+	// The identifier associated to the database instance that was involved in the
+	// finding.
+	DbInstanceIdentifier *string `locationName:"dbInstanceIdentifier" type:"string"`
+
+	// The database engine of the database instance involved in the finding.
+	Engine *string `locationName:"engine" type:"string"`
+
+	// The version of the database engine that was involved in the finding.
+	EngineVersion *string `locationName:"engineVersion" type:"string"`
+
+	// Instance tag key-value pairs associated with the database instance ID.
+	Tags []*Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RdsDbInstanceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RdsDbInstanceDetails) GoString() string {
+	return s.String()
+}
+
+// SetDbClusterIdentifier sets the DbClusterIdentifier field's value.
+func (s *RdsDbInstanceDetails) SetDbClusterIdentifier(v string) *RdsDbInstanceDetails {
+	s.DbClusterIdentifier = &v
+	return s
+}
+
+// SetDbInstanceArn sets the DbInstanceArn field's value.
+func (s *RdsDbInstanceDetails) SetDbInstanceArn(v string) *RdsDbInstanceDetails {
+	s.DbInstanceArn = &v
+	return s
+}
+
+// SetDbInstanceIdentifier sets the DbInstanceIdentifier field's value.
+func (s *RdsDbInstanceDetails) SetDbInstanceIdentifier(v string) *RdsDbInstanceDetails {
+	s.DbInstanceIdentifier = &v
+	return s
+}
+
+// SetEngine sets the Engine field's value.
+func (s *RdsDbInstanceDetails) SetEngine(v string) *RdsDbInstanceDetails {
+	s.Engine = &v
+	return s
+}
+
+// SetEngineVersion sets the EngineVersion field's value.
+func (s *RdsDbInstanceDetails) SetEngineVersion(v string) *RdsDbInstanceDetails {
+	s.EngineVersion = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *RdsDbInstanceDetails) SetTags(v []*Tag) *RdsDbInstanceDetails {
+	s.Tags = v
+	return s
+}
+
+// Contains information about the user and authentication details for a database
+// instance involved in the finding.
+type RdsDbUserDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The application name used in the anomalous login attempt.
+	Application *string `locationName:"application" type:"string"`
+
+	// The authentication method used by the user involved in the finding.
+	AuthMethod *string `locationName:"authMethod" type:"string"`
+
+	// The name of the database instance involved in the anomalous login attempt.
+	Database *string `locationName:"database" type:"string"`
+
+	// The version of the Secure Socket Layer (SSL) used for the network.
+	Ssl *string `locationName:"ssl" type:"string"`
+
+	// The user name used in the anomalous login attempt.
+	User *string `locationName:"user" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RdsDbUserDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RdsDbUserDetails) GoString() string {
+	return s.String()
+}
+
+// SetApplication sets the Application field's value.
+func (s *RdsDbUserDetails) SetApplication(v string) *RdsDbUserDetails {
+	s.Application = &v
+	return s
+}
+
+// SetAuthMethod sets the AuthMethod field's value.
+func (s *RdsDbUserDetails) SetAuthMethod(v string) *RdsDbUserDetails {
+	s.AuthMethod = &v
+	return s
+}
+
+// SetDatabase sets the Database field's value.
+func (s *RdsDbUserDetails) SetDatabase(v string) *RdsDbUserDetails {
+	s.Database = &v
+	return s
+}
+
+// SetSsl sets the Ssl field's value.
+func (s *RdsDbUserDetails) SetSsl(v string) *RdsDbUserDetails {
+	s.Ssl = &v
+	return s
+}
+
+// SetUser sets the User field's value.
+func (s *RdsDbUserDetails) SetUser(v string) *RdsDbUserDetails {
+	s.User = &v
+	return s
+}
+
+// Indicates that a login attempt was made to the potentially compromised database
+// from a remote IP address.
+type RdsLoginAttemptAction struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates the login attributes used in the login attempt.
+	LoginAttributes []*LoginAttribute `type:"list"`
+
+	// Contains information about the remote IP address of the connection.
+	RemoteIpDetails *RemoteIpDetails `locationName:"remoteIpDetails" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RdsLoginAttemptAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RdsLoginAttemptAction) GoString() string {
+	return s.String()
+}
+
+// SetLoginAttributes sets the LoginAttributes field's value.
+func (s *RdsLoginAttemptAction) SetLoginAttributes(v []*LoginAttribute) *RdsLoginAttemptAction {
+	s.LoginAttributes = v
+	return s
+}
+
+// SetRemoteIpDetails sets the RemoteIpDetails field's value.
+func (s *RdsLoginAttemptAction) SetRemoteIpDetails(v *RemoteIpDetails) *RdsLoginAttemptAction {
+	s.RemoteIpDetails = v
+	return s
+}
+
+// Contains details about the remote Amazon Web Services account that made the
+// API call.
+type RemoteAccountDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Web Services account ID of the remote API caller.
+	AccountId *string `locationName:"accountId" type:"string"`
+
+	// Details on whether the Amazon Web Services account of the remote API caller
+	// is related to your GuardDuty environment. If this value is True the API caller
+	// is affiliated to your account in some way. If it is False the API caller
+	// is from outside your environment.
+	Affiliated *bool `locationName:"affiliated" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoteAccountDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoteAccountDetails) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *RemoteAccountDetails) SetAccountId(v string) *RemoteAccountDetails {
+	s.AccountId = &v
+	return s
+}
+
+// SetAffiliated sets the Affiliated field's value.
+func (s *RemoteAccountDetails) SetAffiliated(v bool) *RemoteAccountDetails {
+	s.Affiliated = &v
+	return s
+}
+
+// Contains information about the remote IP address of the connection.
 type RemoteIpDetails struct {
 	_ struct{} `type:"structure"`
 
-	// City information of the remote IP address.
+	// The city information of the remote IP address.
 	City *City `locationName:"city" type:"structure"`
 
-	// Country code of the remote IP address.
+	// The country code of the remote IP address.
 	Country *Country `locationName:"country" type:"structure"`
 
-	// Location information of the remote IP address.
+	// The location information of the remote IP address.
 	GeoLocation *GeoLocation `locationName:"geoLocation" type:"structure"`
 
-	// IPV4 remote address of the connection.
+	// The IPv4 remote address of the connection.
 	IpAddressV4 *string `locationName:"ipAddressV4" type:"string"`
 
-	// ISP Organization information of the remote IP address.
+	// The ISP organization information of the remote IP address.
 	Organization *Organization `locationName:"organization" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoteIpDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoteIpDetails) GoString() string {
 	return s.String()
 }
@@ -8276,23 +20954,31 @@ func (s *RemoteIpDetails) SetOrganization(v *Organization) *RemoteIpDetails {
 	return s
 }
 
-// Remote port information of the connection.
+// Contains information about the remote port.
 type RemotePortDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Port number of the remote connection.
+	// The port number of the remote connection.
 	Port *int64 `locationName:"port" type:"integer"`
 
-	// Port name of the remote connection.
+	// The port name of the remote connection.
 	PortName *string `locationName:"portName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemotePortDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemotePortDetails) GoString() string {
 	return s.String()
 }
@@ -8309,29 +20995,66 @@ func (s *RemotePortDetails) SetPortName(v string) *RemotePortDetails {
 	return s
 }
 
-// The AWS resource associated with the activity that prompted GuardDuty to
-// generate a finding.
+// Contains information about the Amazon Web Services resource associated with
+// the activity that prompted GuardDuty to generate a finding.
 type Resource struct {
 	_ struct{} `type:"structure"`
 
-	// The IAM access key details (IAM user information) of a user that engaged
-	// in the activity that prompted GuardDuty to generate a finding.
+	// The IAM access key details (user information) of a user that engaged in the
+	// activity that prompted GuardDuty to generate a finding.
 	AccessKeyDetails *AccessKeyDetails `locationName:"accessKeyDetails" type:"structure"`
+
+	// Details of a container.
+	ContainerDetails *Container `locationName:"containerDetails" type:"structure"`
+
+	// Contains list of scanned and skipped EBS volumes with details.
+	EbsVolumeDetails *EbsVolumeDetails `locationName:"ebsVolumeDetails" type:"structure"`
+
+	// Contains information about the details of the ECS Cluster.
+	EcsClusterDetails *EcsClusterDetails `locationName:"ecsClusterDetails" type:"structure"`
+
+	// Details about the EKS cluster involved in a Kubernetes finding.
+	EksClusterDetails *EksClusterDetails `locationName:"eksClusterDetails" type:"structure"`
 
 	// The information about the EC2 instance associated with the activity that
 	// prompted GuardDuty to generate a finding.
 	InstanceDetails *InstanceDetails `locationName:"instanceDetails" type:"structure"`
 
-	// The type of the AWS resource.
+	// Details about the Kubernetes user and workload involved in a Kubernetes finding.
+	KubernetesDetails *KubernetesDetails `locationName:"kubernetesDetails" type:"structure"`
+
+	// Contains information about the Lambda function that was involved in a finding.
+	LambdaDetails *LambdaDetails `locationName:"lambdaDetails" type:"structure"`
+
+	// Contains information about the database instance to which an anomalous login
+	// attempt was made.
+	RdsDbInstanceDetails *RdsDbInstanceDetails `locationName:"rdsDbInstanceDetails" type:"structure"`
+
+	// Contains information about the user details through which anomalous login
+	// attempt was made.
+	RdsDbUserDetails *RdsDbUserDetails `locationName:"rdsDbUserDetails" type:"structure"`
+
+	// The type of Amazon Web Services resource.
 	ResourceType *string `locationName:"resourceType" type:"string"`
+
+	// Contains information on the S3 bucket.
+	S3BucketDetails []*S3BucketDetail `locationName:"s3BucketDetails" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Resource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Resource) GoString() string {
 	return s.String()
 }
@@ -8342,9 +21065,57 @@ func (s *Resource) SetAccessKeyDetails(v *AccessKeyDetails) *Resource {
 	return s
 }
 
+// SetContainerDetails sets the ContainerDetails field's value.
+func (s *Resource) SetContainerDetails(v *Container) *Resource {
+	s.ContainerDetails = v
+	return s
+}
+
+// SetEbsVolumeDetails sets the EbsVolumeDetails field's value.
+func (s *Resource) SetEbsVolumeDetails(v *EbsVolumeDetails) *Resource {
+	s.EbsVolumeDetails = v
+	return s
+}
+
+// SetEcsClusterDetails sets the EcsClusterDetails field's value.
+func (s *Resource) SetEcsClusterDetails(v *EcsClusterDetails) *Resource {
+	s.EcsClusterDetails = v
+	return s
+}
+
+// SetEksClusterDetails sets the EksClusterDetails field's value.
+func (s *Resource) SetEksClusterDetails(v *EksClusterDetails) *Resource {
+	s.EksClusterDetails = v
+	return s
+}
+
 // SetInstanceDetails sets the InstanceDetails field's value.
 func (s *Resource) SetInstanceDetails(v *InstanceDetails) *Resource {
 	s.InstanceDetails = v
+	return s
+}
+
+// SetKubernetesDetails sets the KubernetesDetails field's value.
+func (s *Resource) SetKubernetesDetails(v *KubernetesDetails) *Resource {
+	s.KubernetesDetails = v
+	return s
+}
+
+// SetLambdaDetails sets the LambdaDetails field's value.
+func (s *Resource) SetLambdaDetails(v *LambdaDetails) *Resource {
+	s.LambdaDetails = v
+	return s
+}
+
+// SetRdsDbInstanceDetails sets the RdsDbInstanceDetails field's value.
+func (s *Resource) SetRdsDbInstanceDetails(v *RdsDbInstanceDetails) *Resource {
+	s.RdsDbInstanceDetails = v
+	return s
+}
+
+// SetRdsDbUserDetails sets the RdsDbUserDetails field's value.
+func (s *Resource) SetRdsDbUserDetails(v *RdsDbUserDetails) *Resource {
+	s.RdsDbUserDetails = v
 	return s
 }
 
@@ -8354,23 +21125,1219 @@ func (s *Resource) SetResourceType(v string) *Resource {
 	return s
 }
 
-// Security groups associated with the EC2 instance.
+// SetS3BucketDetails sets the S3BucketDetails field's value.
+func (s *Resource) SetS3BucketDetails(v []*S3BucketDetail) *Resource {
+	s.S3BucketDetails = v
+	return s
+}
+
+// Represents the resources that were scanned in the scan entry.
+type ResourceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// InstanceArn that was scanned in the scan entry.
+	InstanceArn *string `locationName:"instanceArn" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceDetails) GoString() string {
+	return s.String()
+}
+
+// SetInstanceArn sets the InstanceArn field's value.
+func (s *ResourceDetails) SetInstanceArn(v string) *ResourceDetails {
+	s.InstanceArn = &v
+	return s
+}
+
+// Additional information about the suspicious activity.
+type RuntimeContext struct {
+	_ struct{} `type:"structure"`
+
+	// Represents the communication protocol associated with the address. For example,
+	// the address family AF_INET is used for IP version of 4 protocol.
+	AddressFamily *string `locationName:"addressFamily" type:"string"`
+
+	// Represents the type of mounted fileSystem.
+	FileSystemType *string `locationName:"fileSystemType" type:"string"`
+
+	// Represents options that control the behavior of a runtime operation or action.
+	// For example, a filesystem mount operation may contain a read-only flag.
+	Flags []*string `locationName:"flags" type:"list"`
+
+	// Specifies a particular protocol within the address family. Usually there
+	// is a single protocol in address families. For example, the address family
+	// AF_INET only has the IP protocol.
+	IanaProtocolNumber *int64 `locationName:"ianaProtocolNumber" type:"integer"`
+
+	// The value of the LD_PRELOAD environment variable.
+	LdPreloadValue *string `locationName:"ldPreloadValue" type:"string"`
+
+	// The path to the new library that was loaded.
+	LibraryPath *string `locationName:"libraryPath" type:"string"`
+
+	// Specifies the Region of a process's address space such as stack and heap.
+	MemoryRegions []*string `locationName:"memoryRegions" type:"list"`
+
+	// The timestamp at which the process modified the current process. The timestamp
+	// is in UTC date string format.
+	ModifiedAt *time.Time `locationName:"modifiedAt" type:"timestamp"`
+
+	// Information about the process that modified the current process. This is
+	// available for multiple finding types.
+	ModifyingProcess *ProcessDetails `locationName:"modifyingProcess" type:"structure"`
+
+	// The path to the module loaded into the kernel.
+	ModuleFilePath *string `locationName:"moduleFilePath" type:"string"`
+
+	// The name of the module loaded into the kernel.
+	ModuleName *string `locationName:"moduleName" type:"string"`
+
+	// The SHA256 hash of the module.
+	ModuleSha256 *string `locationName:"moduleSha256" type:"string"`
+
+	// The path on the host that is mounted by the container.
+	MountSource *string `locationName:"mountSource" type:"string"`
+
+	// The path in the container that is mapped to the host directory.
+	MountTarget *string `locationName:"mountTarget" type:"string"`
+
+	// The path in the container that modified the release agent file.
+	ReleaseAgentPath *string `locationName:"releaseAgentPath" type:"string"`
+
+	// The path to the leveraged runc implementation.
+	RuncBinaryPath *string `locationName:"runcBinaryPath" type:"string"`
+
+	// The path to the script that was executed.
+	ScriptPath *string `locationName:"scriptPath" type:"string"`
+
+	// The path to the modified shell history file.
+	ShellHistoryFilePath *string `locationName:"shellHistoryFilePath" type:"string"`
+
+	// The path to the docket socket that was accessed.
+	SocketPath *string `locationName:"socketPath" type:"string"`
+
+	// Information about the process that had its memory overwritten by the current
+	// process.
+	TargetProcess *ProcessDetails `locationName:"targetProcess" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RuntimeContext) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RuntimeContext) GoString() string {
+	return s.String()
+}
+
+// SetAddressFamily sets the AddressFamily field's value.
+func (s *RuntimeContext) SetAddressFamily(v string) *RuntimeContext {
+	s.AddressFamily = &v
+	return s
+}
+
+// SetFileSystemType sets the FileSystemType field's value.
+func (s *RuntimeContext) SetFileSystemType(v string) *RuntimeContext {
+	s.FileSystemType = &v
+	return s
+}
+
+// SetFlags sets the Flags field's value.
+func (s *RuntimeContext) SetFlags(v []*string) *RuntimeContext {
+	s.Flags = v
+	return s
+}
+
+// SetIanaProtocolNumber sets the IanaProtocolNumber field's value.
+func (s *RuntimeContext) SetIanaProtocolNumber(v int64) *RuntimeContext {
+	s.IanaProtocolNumber = &v
+	return s
+}
+
+// SetLdPreloadValue sets the LdPreloadValue field's value.
+func (s *RuntimeContext) SetLdPreloadValue(v string) *RuntimeContext {
+	s.LdPreloadValue = &v
+	return s
+}
+
+// SetLibraryPath sets the LibraryPath field's value.
+func (s *RuntimeContext) SetLibraryPath(v string) *RuntimeContext {
+	s.LibraryPath = &v
+	return s
+}
+
+// SetMemoryRegions sets the MemoryRegions field's value.
+func (s *RuntimeContext) SetMemoryRegions(v []*string) *RuntimeContext {
+	s.MemoryRegions = v
+	return s
+}
+
+// SetModifiedAt sets the ModifiedAt field's value.
+func (s *RuntimeContext) SetModifiedAt(v time.Time) *RuntimeContext {
+	s.ModifiedAt = &v
+	return s
+}
+
+// SetModifyingProcess sets the ModifyingProcess field's value.
+func (s *RuntimeContext) SetModifyingProcess(v *ProcessDetails) *RuntimeContext {
+	s.ModifyingProcess = v
+	return s
+}
+
+// SetModuleFilePath sets the ModuleFilePath field's value.
+func (s *RuntimeContext) SetModuleFilePath(v string) *RuntimeContext {
+	s.ModuleFilePath = &v
+	return s
+}
+
+// SetModuleName sets the ModuleName field's value.
+func (s *RuntimeContext) SetModuleName(v string) *RuntimeContext {
+	s.ModuleName = &v
+	return s
+}
+
+// SetModuleSha256 sets the ModuleSha256 field's value.
+func (s *RuntimeContext) SetModuleSha256(v string) *RuntimeContext {
+	s.ModuleSha256 = &v
+	return s
+}
+
+// SetMountSource sets the MountSource field's value.
+func (s *RuntimeContext) SetMountSource(v string) *RuntimeContext {
+	s.MountSource = &v
+	return s
+}
+
+// SetMountTarget sets the MountTarget field's value.
+func (s *RuntimeContext) SetMountTarget(v string) *RuntimeContext {
+	s.MountTarget = &v
+	return s
+}
+
+// SetReleaseAgentPath sets the ReleaseAgentPath field's value.
+func (s *RuntimeContext) SetReleaseAgentPath(v string) *RuntimeContext {
+	s.ReleaseAgentPath = &v
+	return s
+}
+
+// SetRuncBinaryPath sets the RuncBinaryPath field's value.
+func (s *RuntimeContext) SetRuncBinaryPath(v string) *RuntimeContext {
+	s.RuncBinaryPath = &v
+	return s
+}
+
+// SetScriptPath sets the ScriptPath field's value.
+func (s *RuntimeContext) SetScriptPath(v string) *RuntimeContext {
+	s.ScriptPath = &v
+	return s
+}
+
+// SetShellHistoryFilePath sets the ShellHistoryFilePath field's value.
+func (s *RuntimeContext) SetShellHistoryFilePath(v string) *RuntimeContext {
+	s.ShellHistoryFilePath = &v
+	return s
+}
+
+// SetSocketPath sets the SocketPath field's value.
+func (s *RuntimeContext) SetSocketPath(v string) *RuntimeContext {
+	s.SocketPath = &v
+	return s
+}
+
+// SetTargetProcess sets the TargetProcess field's value.
+func (s *RuntimeContext) SetTargetProcess(v *ProcessDetails) *RuntimeContext {
+	s.TargetProcess = v
+	return s
+}
+
+// Information about the process and any required context values for a specific
+// finding.
+type RuntimeDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Additional information about the suspicious activity.
+	Context *RuntimeContext `locationName:"context" type:"structure"`
+
+	// Information about the observed process.
+	Process *ProcessDetails `locationName:"process" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RuntimeDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RuntimeDetails) GoString() string {
+	return s.String()
+}
+
+// SetContext sets the Context field's value.
+func (s *RuntimeDetails) SetContext(v *RuntimeContext) *RuntimeDetails {
+	s.Context = v
+	return s
+}
+
+// SetProcess sets the Process field's value.
+func (s *RuntimeDetails) SetProcess(v *ProcessDetails) *RuntimeDetails {
+	s.Process = v
+	return s
+}
+
+// Contains information on the S3 bucket.
+type S3BucketDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the S3 bucket.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The date and time the bucket was created at.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// Describes the server side encryption method used in the S3 bucket.
+	DefaultServerSideEncryption *DefaultServerSideEncryption `locationName:"defaultServerSideEncryption" type:"structure"`
+
+	// The name of the S3 bucket.
+	Name *string `locationName:"name" type:"string"`
+
+	// The owner of the S3 bucket.
+	Owner *Owner `locationName:"owner" type:"structure"`
+
+	// Describes the public access policies that apply to the S3 bucket.
+	PublicAccess *PublicAccess `locationName:"publicAccess" type:"structure"`
+
+	// All tags attached to the S3 bucket
+	Tags []*Tag `locationName:"tags" type:"list"`
+
+	// Describes whether the bucket is a source or destination bucket.
+	Type *string `locationName:"type" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3BucketDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3BucketDetail) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *S3BucketDetail) SetArn(v string) *S3BucketDetail {
+	s.Arn = &v
+	return s
+}
+
+// SetCreatedAt sets the CreatedAt field's value.
+func (s *S3BucketDetail) SetCreatedAt(v time.Time) *S3BucketDetail {
+	s.CreatedAt = &v
+	return s
+}
+
+// SetDefaultServerSideEncryption sets the DefaultServerSideEncryption field's value.
+func (s *S3BucketDetail) SetDefaultServerSideEncryption(v *DefaultServerSideEncryption) *S3BucketDetail {
+	s.DefaultServerSideEncryption = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *S3BucketDetail) SetName(v string) *S3BucketDetail {
+	s.Name = &v
+	return s
+}
+
+// SetOwner sets the Owner field's value.
+func (s *S3BucketDetail) SetOwner(v *Owner) *S3BucketDetail {
+	s.Owner = v
+	return s
+}
+
+// SetPublicAccess sets the PublicAccess field's value.
+func (s *S3BucketDetail) SetPublicAccess(v *PublicAccess) *S3BucketDetail {
+	s.PublicAccess = v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *S3BucketDetail) SetTags(v []*Tag) *S3BucketDetail {
+	s.Tags = v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *S3BucketDetail) SetType(v string) *S3BucketDetail {
+	s.Type = &v
+	return s
+}
+
+// Describes whether S3 data event logs will be enabled as a data source.
+type S3LogsConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The status of S3 data event logs as a data source.
+	//
+	// Enable is a required field
+	Enable *bool `locationName:"enable" type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3LogsConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3LogsConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3LogsConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3LogsConfiguration"}
+	if s.Enable == nil {
+		invalidParams.Add(request.NewErrParamRequired("Enable"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnable sets the Enable field's value.
+func (s *S3LogsConfiguration) SetEnable(v bool) *S3LogsConfiguration {
+	s.Enable = &v
+	return s
+}
+
+// Describes whether S3 data event logs will be enabled as a data source.
+type S3LogsConfigurationResult struct {
+	_ struct{} `type:"structure"`
+
+	// A value that describes whether S3 data event logs are automatically enabled
+	// for new members of the organization.
+	//
+	// Status is a required field
+	Status *string `locationName:"status" min:"1" type:"string" required:"true" enum:"DataSourceStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3LogsConfigurationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3LogsConfigurationResult) GoString() string {
+	return s.String()
+}
+
+// SetStatus sets the Status field's value.
+func (s *S3LogsConfigurationResult) SetStatus(v string) *S3LogsConfigurationResult {
+	s.Status = &v
+	return s
+}
+
+// Contains information about a malware scan.
+type Scan struct {
+	_ struct{} `type:"structure"`
+
+	// The ID for the account that belongs to the scan.
+	AccountId *string `locationName:"accountId" min:"12" type:"string"`
+
+	// The unique detector ID of the administrator account that the request is associated
+	// with. Note that this value will be the same as the one used for DetectorId
+	// if the account is an administrator.
+	AdminDetectorId *string `locationName:"adminDetectorId" min:"1" type:"string"`
+
+	// List of volumes that were attached to the original instance to be scanned.
+	AttachedVolumes []*VolumeDetail `locationName:"attachedVolumes" type:"list"`
+
+	// The unique ID of the detector that the request is associated with.
+	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
+
+	// Represents the reason for FAILED scan status.
+	FailureReason *string `locationName:"failureReason" min:"1" type:"string"`
+
+	// Represents the number of files that were scanned.
+	FileCount *int64 `locationName:"fileCount" type:"long"`
+
+	// Represents the resources that were scanned in the scan entry.
+	ResourceDetails *ResourceDetails `locationName:"resourceDetails" type:"structure"`
+
+	// The timestamp of when the scan was finished.
+	ScanEndTime *time.Time `locationName:"scanEndTime" type:"timestamp"`
+
+	// The unique scan ID associated with a scan entry.
+	ScanId *string `locationName:"scanId" min:"1" type:"string"`
+
+	// Represents the result of the scan.
+	ScanResultDetails *ScanResultDetails `locationName:"scanResultDetails" type:"structure"`
+
+	// The timestamp of when the scan was triggered.
+	ScanStartTime *time.Time `locationName:"scanStartTime" type:"timestamp"`
+
+	// An enum value representing possible scan statuses.
+	ScanStatus *string `locationName:"scanStatus" type:"string" enum:"ScanStatus"`
+
+	// Specifies the scan type that invoked the malware scan.
+	ScanType *string `locationName:"scanType" type:"string" enum:"ScanType"`
+
+	// Represents total bytes that were scanned.
+	TotalBytes *int64 `locationName:"totalBytes" type:"long"`
+
+	// Specifies the reason why the scan was initiated.
+	TriggerDetails *TriggerDetails `locationName:"triggerDetails" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Scan) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Scan) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *Scan) SetAccountId(v string) *Scan {
+	s.AccountId = &v
+	return s
+}
+
+// SetAdminDetectorId sets the AdminDetectorId field's value.
+func (s *Scan) SetAdminDetectorId(v string) *Scan {
+	s.AdminDetectorId = &v
+	return s
+}
+
+// SetAttachedVolumes sets the AttachedVolumes field's value.
+func (s *Scan) SetAttachedVolumes(v []*VolumeDetail) *Scan {
+	s.AttachedVolumes = v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *Scan) SetDetectorId(v string) *Scan {
+	s.DetectorId = &v
+	return s
+}
+
+// SetFailureReason sets the FailureReason field's value.
+func (s *Scan) SetFailureReason(v string) *Scan {
+	s.FailureReason = &v
+	return s
+}
+
+// SetFileCount sets the FileCount field's value.
+func (s *Scan) SetFileCount(v int64) *Scan {
+	s.FileCount = &v
+	return s
+}
+
+// SetResourceDetails sets the ResourceDetails field's value.
+func (s *Scan) SetResourceDetails(v *ResourceDetails) *Scan {
+	s.ResourceDetails = v
+	return s
+}
+
+// SetScanEndTime sets the ScanEndTime field's value.
+func (s *Scan) SetScanEndTime(v time.Time) *Scan {
+	s.ScanEndTime = &v
+	return s
+}
+
+// SetScanId sets the ScanId field's value.
+func (s *Scan) SetScanId(v string) *Scan {
+	s.ScanId = &v
+	return s
+}
+
+// SetScanResultDetails sets the ScanResultDetails field's value.
+func (s *Scan) SetScanResultDetails(v *ScanResultDetails) *Scan {
+	s.ScanResultDetails = v
+	return s
+}
+
+// SetScanStartTime sets the ScanStartTime field's value.
+func (s *Scan) SetScanStartTime(v time.Time) *Scan {
+	s.ScanStartTime = &v
+	return s
+}
+
+// SetScanStatus sets the ScanStatus field's value.
+func (s *Scan) SetScanStatus(v string) *Scan {
+	s.ScanStatus = &v
+	return s
+}
+
+// SetScanType sets the ScanType field's value.
+func (s *Scan) SetScanType(v string) *Scan {
+	s.ScanType = &v
+	return s
+}
+
+// SetTotalBytes sets the TotalBytes field's value.
+func (s *Scan) SetTotalBytes(v int64) *Scan {
+	s.TotalBytes = &v
+	return s
+}
+
+// SetTriggerDetails sets the TriggerDetails field's value.
+func (s *Scan) SetTriggerDetails(v *TriggerDetails) *Scan {
+	s.TriggerDetails = v
+	return s
+}
+
+// Contains information about the condition.
+type ScanCondition struct {
+	_ struct{} `type:"structure"`
+
+	// Represents an mapEqual condition to be applied to a single field when triggering
+	// for malware scan.
+	//
+	// MapEquals is a required field
+	MapEquals []*ScanConditionPair `locationName:"mapEquals" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanCondition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ScanCondition) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ScanCondition"}
+	if s.MapEquals == nil {
+		invalidParams.Add(request.NewErrParamRequired("MapEquals"))
+	}
+	if s.MapEquals != nil {
+		for i, v := range s.MapEquals {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MapEquals", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMapEquals sets the MapEquals field's value.
+func (s *ScanCondition) SetMapEquals(v []*ScanConditionPair) *ScanCondition {
+	s.MapEquals = v
+	return s
+}
+
+// Represents the key:value pair to be matched against given resource property.
+type ScanConditionPair struct {
+	_ struct{} `type:"structure"`
+
+	// Represents the key in the map condition.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// Represents optional value in the map condition. If not specified, only the
+	// key will be matched.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanConditionPair) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanConditionPair) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ScanConditionPair) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ScanConditionPair"}
+	if s.Key == nil {
+		invalidParams.Add(request.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKey sets the Key field's value.
+func (s *ScanConditionPair) SetKey(v string) *ScanConditionPair {
+	s.Key = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *ScanConditionPair) SetValue(v string) *ScanConditionPair {
+	s.Value = &v
+	return s
+}
+
+// Contains a complete view providing malware scan result details.
+type ScanDetections struct {
+	_ struct{} `type:"structure"`
+
+	// Details of the highest severity threat detected during malware scan and number
+	// of infected files.
+	HighestSeverityThreatDetails *HighestSeverityThreatDetails `locationName:"highestSeverityThreatDetails" type:"structure"`
+
+	// Total number of scanned files.
+	ScannedItemCount *ScannedItemCount `locationName:"scannedItemCount" type:"structure"`
+
+	// Contains details about identified threats organized by threat name.
+	ThreatDetectedByName *ThreatDetectedByName `locationName:"threatDetectedByName" type:"structure"`
+
+	// Total number of infected files.
+	ThreatsDetectedItemCount *ThreatsDetectedItemCount `locationName:"threatsDetectedItemCount" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanDetections) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanDetections) GoString() string {
+	return s.String()
+}
+
+// SetHighestSeverityThreatDetails sets the HighestSeverityThreatDetails field's value.
+func (s *ScanDetections) SetHighestSeverityThreatDetails(v *HighestSeverityThreatDetails) *ScanDetections {
+	s.HighestSeverityThreatDetails = v
+	return s
+}
+
+// SetScannedItemCount sets the ScannedItemCount field's value.
+func (s *ScanDetections) SetScannedItemCount(v *ScannedItemCount) *ScanDetections {
+	s.ScannedItemCount = v
+	return s
+}
+
+// SetThreatDetectedByName sets the ThreatDetectedByName field's value.
+func (s *ScanDetections) SetThreatDetectedByName(v *ThreatDetectedByName) *ScanDetections {
+	s.ThreatDetectedByName = v
+	return s
+}
+
+// SetThreatsDetectedItemCount sets the ThreatsDetectedItemCount field's value.
+func (s *ScanDetections) SetThreatsDetectedItemCount(v *ThreatsDetectedItemCount) *ScanDetections {
+	s.ThreatsDetectedItemCount = v
+	return s
+}
+
+// Describes whether Malware Protection for EC2 instances with findings will
+// be enabled as a data source.
+type ScanEc2InstanceWithFindings struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the configuration for scanning EBS volumes as data source.
+	EbsVolumes *bool `locationName:"ebsVolumes" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanEc2InstanceWithFindings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanEc2InstanceWithFindings) GoString() string {
+	return s.String()
+}
+
+// SetEbsVolumes sets the EbsVolumes field's value.
+func (s *ScanEc2InstanceWithFindings) SetEbsVolumes(v bool) *ScanEc2InstanceWithFindings {
+	s.EbsVolumes = &v
+	return s
+}
+
+// An object that contains information on the status of whether Malware Protection
+// for EC2 instances with findings will be enabled as a data source.
+type ScanEc2InstanceWithFindingsResult struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the configuration of scanning EBS volumes as a data source.
+	EbsVolumes *EbsVolumesResult `locationName:"ebsVolumes" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanEc2InstanceWithFindingsResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanEc2InstanceWithFindingsResult) GoString() string {
+	return s.String()
+}
+
+// SetEbsVolumes sets the EbsVolumes field's value.
+func (s *ScanEc2InstanceWithFindingsResult) SetEbsVolumes(v *EbsVolumesResult) *ScanEc2InstanceWithFindingsResult {
+	s.EbsVolumes = v
+	return s
+}
+
+// Contains details of infected file including name, file path and hash.
+type ScanFilePath struct {
+	_ struct{} `type:"structure"`
+
+	// File name of the infected file.
+	FileName *string `locationName:"fileName" type:"string"`
+
+	// The file path of the infected file.
+	FilePath *string `locationName:"filePath" type:"string"`
+
+	// The hash value of the infected file.
+	Hash *string `locationName:"hash" type:"string"`
+
+	// EBS volume Arn details of the infected file.
+	VolumeArn *string `locationName:"volumeArn" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanFilePath) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanFilePath) GoString() string {
+	return s.String()
+}
+
+// SetFileName sets the FileName field's value.
+func (s *ScanFilePath) SetFileName(v string) *ScanFilePath {
+	s.FileName = &v
+	return s
+}
+
+// SetFilePath sets the FilePath field's value.
+func (s *ScanFilePath) SetFilePath(v string) *ScanFilePath {
+	s.FilePath = &v
+	return s
+}
+
+// SetHash sets the Hash field's value.
+func (s *ScanFilePath) SetHash(v string) *ScanFilePath {
+	s.Hash = &v
+	return s
+}
+
+// SetVolumeArn sets the VolumeArn field's value.
+func (s *ScanFilePath) SetVolumeArn(v string) *ScanFilePath {
+	s.VolumeArn = &v
+	return s
+}
+
+// Contains information about criteria used to filter resources before triggering
+// malware scan.
+type ScanResourceCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// Represents condition that when matched will prevent a malware scan for a
+	// certain resource.
+	Exclude map[string]*ScanCondition `locationName:"exclude" type:"map"`
+
+	// Represents condition that when matched will allow a malware scan for a certain
+	// resource.
+	Include map[string]*ScanCondition `locationName:"include" type:"map"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanResourceCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanResourceCriteria) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ScanResourceCriteria) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ScanResourceCriteria"}
+	if s.Exclude != nil {
+		for i, v := range s.Exclude {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Exclude", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Include != nil {
+		for i, v := range s.Include {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Include", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetExclude sets the Exclude field's value.
+func (s *ScanResourceCriteria) SetExclude(v map[string]*ScanCondition) *ScanResourceCriteria {
+	s.Exclude = v
+	return s
+}
+
+// SetInclude sets the Include field's value.
+func (s *ScanResourceCriteria) SetInclude(v map[string]*ScanCondition) *ScanResourceCriteria {
+	s.Include = v
+	return s
+}
+
+// Represents the result of the scan.
+type ScanResultDetails struct {
+	_ struct{} `type:"structure"`
+
+	// An enum value representing possible scan results.
+	ScanResult *string `locationName:"scanResult" type:"string" enum:"ScanResult"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanResultDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanResultDetails) GoString() string {
+	return s.String()
+}
+
+// SetScanResult sets the ScanResult field's value.
+func (s *ScanResultDetails) SetScanResult(v string) *ScanResultDetails {
+	s.ScanResult = &v
+	return s
+}
+
+// Contains files infected with the given threat providing details of malware
+// name and severity.
+type ScanThreatName struct {
+	_ struct{} `type:"structure"`
+
+	// List of infected files in EBS volume with details.
+	FilePaths []*ScanFilePath `locationName:"filePaths" type:"list"`
+
+	// Total number of files infected with given threat.
+	ItemCount *int64 `locationName:"itemCount" type:"integer"`
+
+	// The name of the identified threat.
+	Name *string `locationName:"name" type:"string"`
+
+	// Severity of threat identified as part of the malware scan.
+	Severity *string `locationName:"severity" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanThreatName) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScanThreatName) GoString() string {
+	return s.String()
+}
+
+// SetFilePaths sets the FilePaths field's value.
+func (s *ScanThreatName) SetFilePaths(v []*ScanFilePath) *ScanThreatName {
+	s.FilePaths = v
+	return s
+}
+
+// SetItemCount sets the ItemCount field's value.
+func (s *ScanThreatName) SetItemCount(v int64) *ScanThreatName {
+	s.ItemCount = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *ScanThreatName) SetName(v string) *ScanThreatName {
+	s.Name = &v
+	return s
+}
+
+// SetSeverity sets the Severity field's value.
+func (s *ScanThreatName) SetSeverity(v string) *ScanThreatName {
+	s.Severity = &v
+	return s
+}
+
+// Total number of scanned files.
+type ScannedItemCount struct {
+	_ struct{} `type:"structure"`
+
+	// Number of files scanned.
+	Files *int64 `locationName:"files" type:"integer"`
+
+	// Total GB of files scanned for malware.
+	TotalGb *int64 `locationName:"totalGb" type:"integer"`
+
+	// Total number of scanned volumes.
+	Volumes *int64 `locationName:"volumes" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScannedItemCount) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScannedItemCount) GoString() string {
+	return s.String()
+}
+
+// SetFiles sets the Files field's value.
+func (s *ScannedItemCount) SetFiles(v int64) *ScannedItemCount {
+	s.Files = &v
+	return s
+}
+
+// SetTotalGb sets the TotalGb field's value.
+func (s *ScannedItemCount) SetTotalGb(v int64) *ScannedItemCount {
+	s.TotalGb = &v
+	return s
+}
+
+// SetVolumes sets the Volumes field's value.
+func (s *ScannedItemCount) SetVolumes(v int64) *ScannedItemCount {
+	s.Volumes = &v
+	return s
+}
+
+// Container security context.
+type SecurityContext struct {
+	_ struct{} `type:"structure"`
+
+	// Whether or not a container or a Kubernetes pod is allowed to gain more privileges
+	// than its parent process.
+	AllowPrivilegeEscalation *bool `locationName:"allowPrivilegeEscalation" type:"boolean"`
+
+	// Whether the container is privileged.
+	Privileged *bool `locationName:"privileged" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SecurityContext) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SecurityContext) GoString() string {
+	return s.String()
+}
+
+// SetAllowPrivilegeEscalation sets the AllowPrivilegeEscalation field's value.
+func (s *SecurityContext) SetAllowPrivilegeEscalation(v bool) *SecurityContext {
+	s.AllowPrivilegeEscalation = &v
+	return s
+}
+
+// SetPrivileged sets the Privileged field's value.
+func (s *SecurityContext) SetPrivileged(v bool) *SecurityContext {
+	s.Privileged = &v
+	return s
+}
+
+// Contains information about the security groups associated with the EC2 instance.
 type SecurityGroup struct {
 	_ struct{} `type:"structure"`
 
-	// EC2 instance's security group ID.
+	// The security group ID of the EC2 instance.
 	GroupId *string `locationName:"groupId" type:"string"`
 
-	// EC2 instance's security group name.
+	// The security group name of the EC2 instance.
 	GroupName *string `locationName:"groupName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SecurityGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SecurityGroup) GoString() string {
 	return s.String()
 }
@@ -8387,46 +22354,74 @@ func (s *SecurityGroup) SetGroupName(v string) *SecurityGroup {
 	return s
 }
 
-// Additional information assigned to the generated finding by GuardDuty.
+// Contains additional information about the generated finding.
 type Service struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the activity described in a finding.
+	// Information about the activity that is described in a finding.
 	Action *Action `locationName:"action" type:"structure"`
+
+	// Contains additional information about the generated finding.
+	AdditionalInfo *ServiceAdditionalInfo `locationName:"additionalInfo" type:"structure"`
 
 	// Indicates whether this finding is archived.
 	Archived *bool `locationName:"archived" type:"boolean"`
 
-	// Total count of the occurrences of this finding type.
+	// The total count of the occurrences of this finding type.
 	Count *int64 `locationName:"count" type:"integer"`
 
-	// Detector ID for the GuardDuty service.
-	DetectorId *string `locationName:"detectorId" type:"string"`
+	// Contains information about the detected unusual behavior.
+	Detection *Detection `locationName:"detection" type:"structure"`
 
-	// First seen timestamp of the activity that prompted GuardDuty to generate
+	// The detector ID for the GuardDuty service.
+	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
+
+	// Returns details from the malware scan that created a finding.
+	EbsVolumeScanDetails *EbsVolumeScanDetails `locationName:"ebsVolumeScanDetails" type:"structure"`
+
+	// The first-seen timestamp of the activity that prompted GuardDuty to generate
 	// this finding.
 	EventFirstSeen *string `locationName:"eventFirstSeen" type:"string"`
 
-	// Last seen timestamp of the activity that prompted GuardDuty to generate this
-	// finding.
+	// The last-seen timestamp of the activity that prompted GuardDuty to generate
+	// this finding.
 	EventLastSeen *string `locationName:"eventLastSeen" type:"string"`
 
-	// Resource role information for this finding.
+	// An evidence object associated with the service.
+	Evidence *Evidence `locationName:"evidence" type:"structure"`
+
+	// The name of the feature that generated a finding.
+	FeatureName *string `locationName:"featureName" type:"string"`
+
+	// The resource role information for this finding.
 	ResourceRole *string `locationName:"resourceRole" type:"string"`
 
-	// The name of the AWS service (GuardDuty) that generated a finding.
+	// Information about the process and any required context values for a specific
+	// finding
+	RuntimeDetails *RuntimeDetails `locationName:"runtimeDetails" type:"structure"`
+
+	// The name of the Amazon Web Services service (GuardDuty) that generated a
+	// finding.
 	ServiceName *string `locationName:"serviceName" type:"string"`
 
-	// Feedback left about the finding.
+	// Feedback that was submitted about the finding.
 	UserFeedback *string `locationName:"userFeedback" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Service) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Service) GoString() string {
 	return s.String()
 }
@@ -8434,6 +22429,12 @@ func (s Service) GoString() string {
 // SetAction sets the Action field's value.
 func (s *Service) SetAction(v *Action) *Service {
 	s.Action = v
+	return s
+}
+
+// SetAdditionalInfo sets the AdditionalInfo field's value.
+func (s *Service) SetAdditionalInfo(v *ServiceAdditionalInfo) *Service {
+	s.AdditionalInfo = v
 	return s
 }
 
@@ -8449,9 +22450,21 @@ func (s *Service) SetCount(v int64) *Service {
 	return s
 }
 
+// SetDetection sets the Detection field's value.
+func (s *Service) SetDetection(v *Detection) *Service {
+	s.Detection = v
+	return s
+}
+
 // SetDetectorId sets the DetectorId field's value.
 func (s *Service) SetDetectorId(v string) *Service {
 	s.DetectorId = &v
+	return s
+}
+
+// SetEbsVolumeScanDetails sets the EbsVolumeScanDetails field's value.
+func (s *Service) SetEbsVolumeScanDetails(v *EbsVolumeScanDetails) *Service {
+	s.EbsVolumeScanDetails = v
 	return s
 }
 
@@ -8467,9 +22480,27 @@ func (s *Service) SetEventLastSeen(v string) *Service {
 	return s
 }
 
+// SetEvidence sets the Evidence field's value.
+func (s *Service) SetEvidence(v *Evidence) *Service {
+	s.Evidence = v
+	return s
+}
+
+// SetFeatureName sets the FeatureName field's value.
+func (s *Service) SetFeatureName(v string) *Service {
+	s.FeatureName = &v
+	return s
+}
+
 // SetResourceRole sets the ResourceRole field's value.
 func (s *Service) SetResourceRole(v string) *Service {
 	s.ResourceRole = &v
+	return s
+}
+
+// SetRuntimeDetails sets the RuntimeDetails field's value.
+func (s *Service) SetRuntimeDetails(v *RuntimeDetails) *Service {
+	s.RuntimeDetails = v
 	return s
 }
 
@@ -8485,24 +22516,72 @@ func (s *Service) SetUserFeedback(v string) *Service {
 	return s
 }
 
-// Represents the criteria used for sorting findings.
+// Additional information about the generated finding.
+type ServiceAdditionalInfo struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the type of the additional information.
+	Type *string `locationName:"type" type:"string"`
+
+	// This field specifies the value of the additional information.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceAdditionalInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceAdditionalInfo) GoString() string {
+	return s.String()
+}
+
+// SetType sets the Type field's value.
+func (s *ServiceAdditionalInfo) SetType(v string) *ServiceAdditionalInfo {
+	s.Type = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *ServiceAdditionalInfo) SetValue(v string) *ServiceAdditionalInfo {
+	s.Value = &v
+	return s
+}
+
+// Contains information about the criteria used for sorting findings.
 type SortCriteria struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the finding attribute (for example, accountId) by which to sort
-	// findings.
+	// Represents the finding attribute, such as accountId, that sorts the findings.
 	AttributeName *string `locationName:"attributeName" type:"string"`
 
-	// Order by which the sorted findings are to be displayed.
+	// The order by which the sorted findings are to be displayed.
 	OrderBy *string `locationName:"orderBy" type:"string" enum:"OrderBy"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SortCriteria) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SortCriteria) GoString() string {
 	return s.String()
 }
@@ -8519,26 +22598,114 @@ func (s *SortCriteria) SetOrderBy(v string) *SortCriteria {
 	return s
 }
 
-// StartMonitoringMembers request body.
+type StartMalwareScanInput struct {
+	_ struct{} `type:"structure"`
+
+	// Amazon Resource Name (ARN) of the resource for which you invoked the API.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartMalwareScanInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartMalwareScanInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartMalwareScanInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "StartMalwareScanInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *StartMalwareScanInput) SetResourceArn(v string) *StartMalwareScanInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type StartMalwareScanOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier that gets generated when you invoke the API without any
+	// error. Each malware scan has a corresponding scan ID. Using this scan ID,
+	// you can monitor the status of your malware scan.
+	ScanId *string `locationName:"scanId" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartMalwareScanOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartMalwareScanOutput) GoString() string {
+	return s.String()
+}
+
+// SetScanId sets the ScanId field's value.
+func (s *StartMalwareScanOutput) SetScanId(v string) *StartMalwareScanOutput {
+	s.ScanId = &v
+	return s
+}
+
 type StartMonitoringMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs of the GuardDuty member accounts whose findings you
-	// want the master account to monitor.
+	// A list of account IDs of the GuardDuty member accounts to start monitoring.
 	//
 	// AccountIds is a required field
-	AccountIds []*string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
+	// The unique ID of the detector of the GuardDuty administrator account associated
+	// with the member accounts to monitor.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartMonitoringMembersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartMonitoringMembersInput) GoString() string {
 	return s.String()
 }
@@ -8548,6 +22715,9 @@ func (s *StartMonitoringMembersInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "StartMonitoringMembersInput"}
 	if s.AccountIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
 	}
 	if s.DetectorId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
@@ -8574,21 +22744,30 @@ func (s *StartMonitoringMembersInput) SetDetectorId(v string) *StartMonitoringMe
 	return s
 }
 
-// StartMonitoringMembers response object.
 type StartMonitoringMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	// A list of objects that contain the unprocessed account and a result string
+	// that explains why it was unprocessed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartMonitoringMembersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartMonitoringMembersOutput) GoString() string {
 	return s.String()
 }
@@ -8599,26 +22778,35 @@ func (s *StartMonitoringMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAc
 	return s
 }
 
-// StopMonitoringMembers request body.
 type StopMonitoringMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs of the GuardDuty member accounts whose findings you
-	// want the master account to stop monitoring.
+	// A list of account IDs for the member accounts to stop monitoring.
 	//
 	// AccountIds is a required field
-	AccountIds []*string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
+	// The unique ID of the detector associated with the GuardDuty administrator
+	// account that is monitoring member accounts.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopMonitoringMembersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopMonitoringMembersInput) GoString() string {
 	return s.String()
 }
@@ -8628,6 +22816,9 @@ func (s *StopMonitoringMembersInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "StopMonitoringMembersInput"}
 	if s.AccountIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
 	}
 	if s.DetectorId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
@@ -8654,21 +22845,31 @@ func (s *StopMonitoringMembersInput) SetDetectorId(v string) *StopMonitoringMemb
 	return s
 }
 
-// StopMonitoringMembers response object.
 type StopMonitoringMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	// A list of objects that contain an accountId for each account that could not
+	// be processed, and a result string that indicates why the account was not
+	// processed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopMonitoringMembersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopMonitoringMembersOutput) GoString() string {
 	return s.String()
 }
@@ -8679,23 +22880,31 @@ func (s *StopMonitoringMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAcc
 	return s
 }
 
-// A tag of the EC2 instance.
+// Contains information about a tag associated with the EC2 instance.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
-	// EC2 instance tag key.
+	// The EC2 instance tag key.
 	Key *string `locationName:"key" type:"string"`
 
-	// EC2 instance tag value.
+	// The EC2 instance tag value.
 	Value *string `locationName:"value" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -8712,25 +22921,341 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
-// Unrchive Findings Request
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for the GuardDuty resource to apply a tag
+	// to.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
+
+	// The tags to be added to a resource.
+	//
+	// Tags is a required field
+	Tags map[string]*string `locationName:"tags" min:"1" type:"map" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+	if s.Tags == nil {
+		invalidParams.Add(request.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *TagResourceInput) SetTags(v map[string]*string) *TagResourceInput {
+	s.Tags = v
+	return s
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// Contains details about identified threats organized by threat name.
+type ThreatDetectedByName struct {
+	_ struct{} `type:"structure"`
+
+	// Total number of infected files identified.
+	ItemCount *int64 `locationName:"itemCount" type:"integer"`
+
+	// Flag to determine if the finding contains every single infected file-path
+	// and/or every threat.
+	Shortened *bool `locationName:"shortened" type:"boolean"`
+
+	// List of identified threats with details, organized by threat name.
+	ThreatNames []*ScanThreatName `locationName:"threatNames" type:"list"`
+
+	// Total number of unique threats by name identified, as part of the malware
+	// scan.
+	UniqueThreatNameCount *int64 `locationName:"uniqueThreatNameCount" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThreatDetectedByName) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThreatDetectedByName) GoString() string {
+	return s.String()
+}
+
+// SetItemCount sets the ItemCount field's value.
+func (s *ThreatDetectedByName) SetItemCount(v int64) *ThreatDetectedByName {
+	s.ItemCount = &v
+	return s
+}
+
+// SetShortened sets the Shortened field's value.
+func (s *ThreatDetectedByName) SetShortened(v bool) *ThreatDetectedByName {
+	s.Shortened = &v
+	return s
+}
+
+// SetThreatNames sets the ThreatNames field's value.
+func (s *ThreatDetectedByName) SetThreatNames(v []*ScanThreatName) *ThreatDetectedByName {
+	s.ThreatNames = v
+	return s
+}
+
+// SetUniqueThreatNameCount sets the UniqueThreatNameCount field's value.
+func (s *ThreatDetectedByName) SetUniqueThreatNameCount(v int64) *ThreatDetectedByName {
+	s.UniqueThreatNameCount = &v
+	return s
+}
+
+// An instance of a threat intelligence detail that constitutes evidence for
+// the finding.
+type ThreatIntelligenceDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the threat intelligence list that triggered the finding.
+	ThreatListName *string `locationName:"threatListName" type:"string"`
+
+	// A list of names of the threats in the threat intelligence list that triggered
+	// the finding.
+	ThreatNames []*string `locationName:"threatNames" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThreatIntelligenceDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThreatIntelligenceDetail) GoString() string {
+	return s.String()
+}
+
+// SetThreatListName sets the ThreatListName field's value.
+func (s *ThreatIntelligenceDetail) SetThreatListName(v string) *ThreatIntelligenceDetail {
+	s.ThreatListName = &v
+	return s
+}
+
+// SetThreatNames sets the ThreatNames field's value.
+func (s *ThreatIntelligenceDetail) SetThreatNames(v []*string) *ThreatIntelligenceDetail {
+	s.ThreatNames = v
+	return s
+}
+
+// Contains total number of infected files.
+type ThreatsDetectedItemCount struct {
+	_ struct{} `type:"structure"`
+
+	// Total number of infected files.
+	Files *int64 `locationName:"files" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThreatsDetectedItemCount) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThreatsDetectedItemCount) GoString() string {
+	return s.String()
+}
+
+// SetFiles sets the Files field's value.
+func (s *ThreatsDetectedItemCount) SetFiles(v int64) *ThreatsDetectedItemCount {
+	s.Files = &v
+	return s
+}
+
+// Contains the total usage with the corresponding currency unit for that value.
+type Total struct {
+	_ struct{} `type:"structure"`
+
+	// The total usage.
+	Amount *string `locationName:"amount" type:"string"`
+
+	// The currency unit that the amount is given in.
+	Unit *string `locationName:"unit" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Total) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Total) GoString() string {
+	return s.String()
+}
+
+// SetAmount sets the Amount field's value.
+func (s *Total) SetAmount(v string) *Total {
+	s.Amount = &v
+	return s
+}
+
+// SetUnit sets the Unit field's value.
+func (s *Total) SetUnit(v string) *Total {
+	s.Unit = &v
+	return s
+}
+
+// Represents the reason the scan was triggered.
+type TriggerDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the scan trigger.
+	Description *string `locationName:"description" min:"1" type:"string"`
+
+	// The ID of the GuardDuty finding that triggered the malware scan.
+	GuardDutyFindingId *string `locationName:"guardDutyFindingId" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TriggerDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TriggerDetails) GoString() string {
+	return s.String()
+}
+
+// SetDescription sets the Description field's value.
+func (s *TriggerDetails) SetDescription(v string) *TriggerDetails {
+	s.Description = &v
+	return s
+}
+
+// SetGuardDutyFindingId sets the GuardDutyFindingId field's value.
+func (s *TriggerDetails) SetGuardDutyFindingId(v string) *TriggerDetails {
+	s.GuardDutyFindingId = &v
+	return s
+}
+
 type UnarchiveFindingsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the detector associated with the findings to unarchive.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// IDs of the findings that you want to unarchive.
+	// The IDs of the findings to unarchive.
 	//
 	// FindingIds is a required field
 	FindingIds []*string `locationName:"findingIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnarchiveFindingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnarchiveFindingsInput) GoString() string {
 	return s.String()
 }
@@ -8770,25 +23295,32 @@ type UnarchiveFindingsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnarchiveFindingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnarchiveFindingsOutput) GoString() string {
 	return s.String()
 }
 
-// An object containing the unprocessed account and a result string explaining
-// why it was unprocessed.
+// Contains information about the accounts that weren't processed.
 type UnprocessedAccount struct {
 	_ struct{} `type:"structure"`
 
-	// AWS Account ID.
+	// The Amazon Web Services account ID.
 	//
 	// AccountId is a required field
-	AccountId *string `locationName:"accountId" type:"string" required:"true"`
+	AccountId *string `locationName:"accountId" min:"12" type:"string" required:"true"`
 
 	// A reason why the account hasn't been processed.
 	//
@@ -8796,12 +23328,20 @@ type UnprocessedAccount struct {
 	Result *string `locationName:"result" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnprocessedAccount) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnprocessedAccount) GoString() string {
 	return s.String()
 }
@@ -8818,27 +23358,169 @@ func (s *UnprocessedAccount) SetResult(v string) *UnprocessedAccount {
 	return s
 }
 
-// Update Detector Request
+// Specifies the names of the data sources that couldn't be enabled.
+type UnprocessedDataSourcesResult struct {
+	_ struct{} `type:"structure"`
+
+	// An object that contains information on the status of all Malware Protection
+	// data sources.
+	MalwareProtection *MalwareProtectionConfigurationResult `locationName:"malwareProtection" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnprocessedDataSourcesResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnprocessedDataSourcesResult) GoString() string {
+	return s.String()
+}
+
+// SetMalwareProtection sets the MalwareProtection field's value.
+func (s *UnprocessedDataSourcesResult) SetMalwareProtection(v *MalwareProtectionConfigurationResult) *UnprocessedDataSourcesResult {
+	s.MalwareProtection = v
+	return s
+}
+
+type UntagResourceInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The Amazon Resource Name (ARN) for the resource to remove tags from.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
+
+	// The tag keys to remove from the resource.
+	//
+	// TagKeys is a required field
+	TagKeys []*string `location:"querystring" locationName:"tagKeys" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+	if s.TagKeys == nil {
+		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+	}
+	if s.TagKeys != nil && len(s.TagKeys) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("TagKeys", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTagKeys sets the TagKeys field's value.
+func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+	s.TagKeys = v
+	return s
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
 type UpdateDetectorInput struct {
 	_ struct{} `type:"structure"`
 
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	// Describes which data sources will be updated.
+	//
+	// There might be regional differences because some data sources might not be
+	// available in all the Amazon Web Services Regions where GuardDuty is presently
+	// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources *DataSourceConfigurations `locationName:"dataSources" deprecated:"true" type:"structure"`
 
-	// Updated boolean value for the detector that specifies whether the detector
-	// is enabled.
+	// The unique ID of the detector to update.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// Specifies whether the detector is enabled or not enabled.
 	Enable *bool `locationName:"enable" type:"boolean"`
 
-	// A enum value that specifies how frequently customer got Finding updates published.
+	// Provides the features that will be updated for the detector.
+	Features []*DetectorFeatureConfiguration `locationName:"features" type:"list"`
+
+	// An enum value that specifies how frequently findings are exported, such as
+	// to CloudWatch Events.
 	FindingPublishingFrequency *string `locationName:"findingPublishingFrequency" type:"string" enum:"FindingPublishingFrequency"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDetectorInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDetectorInput) GoString() string {
 	return s.String()
 }
@@ -8852,11 +23534,22 @@ func (s *UpdateDetectorInput) Validate() error {
 	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
 	}
+	if s.DataSources != nil {
+		if err := s.DataSources.Validate(); err != nil {
+			invalidParams.AddNested("DataSources", err.(request.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetDataSources sets the DataSources field's value.
+func (s *UpdateDetectorInput) SetDataSources(v *DataSourceConfigurations) *UpdateDetectorInput {
+	s.DataSources = v
+	return s
 }
 
 // SetDetectorId sets the DetectorId field's value.
@@ -8871,6 +23564,12 @@ func (s *UpdateDetectorInput) SetEnable(v bool) *UpdateDetectorInput {
 	return s
 }
 
+// SetFeatures sets the Features field's value.
+func (s *UpdateDetectorInput) SetFeatures(v []*DetectorFeatureConfiguration) *UpdateDetectorInput {
+	s.Features = v
+	return s
+}
+
 // SetFindingPublishingFrequency sets the FindingPublishingFrequency field's value.
 func (s *UpdateDetectorInput) SetFindingPublishingFrequency(v string) *UpdateDetectorInput {
 	s.FindingPublishingFrequency = &v
@@ -8881,30 +23580,45 @@ type UpdateDetectorOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDetectorOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDetectorOutput) GoString() string {
 	return s.String()
 }
 
-// UpdateFilter request object.
 type UpdateFilterInput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the action that is to be applied to the findings that match the
 	// filter.
-	Action *string `locationName:"action" type:"string" enum:"FilterAction"`
+	Action *string `locationName:"action" min:"1" type:"string" enum:"FilterAction"`
 
-	// The description of the filter.
+	// The description of the filter. Valid characters include alphanumeric characters,
+	// and special characters such as hyphen, period, colon, underscore, parentheses
+	// ({ }, [ ], and ( )), forward slash, horizontal tab, vertical tab, newline,
+	// form feed, return, and whitespace.
 	Description *string `locationName:"description" type:"string"`
 
+	// The unique ID of the detector that specifies the GuardDuty service where
+	// you want to update a filter.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The name of the filter.
+	//
 	// FilterName is a required field
 	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
 
@@ -8913,15 +23627,23 @@ type UpdateFilterInput struct {
 
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
-	Rank *int64 `locationName:"rank" type:"integer"`
+	Rank *int64 `locationName:"rank" min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFilterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFilterInput) GoString() string {
 	return s.String()
 }
@@ -8929,6 +23651,9 @@ func (s UpdateFilterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFilterInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "UpdateFilterInput"}
+	if s.Action != nil && len(*s.Action) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Action", 1))
+	}
 	if s.DetectorId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
 	}
@@ -8940,6 +23665,9 @@ func (s *UpdateFilterInput) Validate() error {
 	}
 	if s.FilterName != nil && len(*s.FilterName) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("FilterName", 1))
+	}
+	if s.Rank != nil && *s.Rank < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("Rank", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8984,20 +23712,29 @@ func (s *UpdateFilterInput) SetRank(v int64) *UpdateFilterInput {
 	return s
 }
 
-// UpdateFilter response object.
 type UpdateFilterOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the filter.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFilterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFilterOutput) GoString() string {
 	return s.String()
 }
@@ -9008,33 +23745,42 @@ func (s *UpdateFilterOutput) SetName(v string) *UpdateFilterOutput {
 	return s
 }
 
-// Update findings feedback body
 type UpdateFindingsFeedbackInput struct {
 	_ struct{} `type:"structure"`
 
 	// Additional feedback about the GuardDuty findings.
 	Comments *string `locationName:"comments" type:"string"`
 
+	// The ID of the detector associated with the findings to update feedback for.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// Valid values: USEFUL | NOT_USEFUL
+	// The feedback for the finding.
 	//
 	// Feedback is a required field
 	Feedback *string `locationName:"feedback" type:"string" required:"true" enum:"Feedback"`
 
-	// IDs of the findings that you want to mark as useful or not useful.
+	// The IDs of the findings that you want to mark as useful or not useful.
 	//
 	// FindingIds is a required field
 	FindingIds []*string `locationName:"findingIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFindingsFeedbackInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFindingsFeedbackInput) GoString() string {
 	return s.String()
 }
@@ -9089,42 +23835,62 @@ type UpdateFindingsFeedbackOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFindingsFeedbackOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFindingsFeedbackOutput) GoString() string {
 	return s.String()
 }
 
-// Update IP Set Request
 type UpdateIPSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The updated boolean value that specifies whether the IPSet is active or not.
+	// The updated Boolean value that specifies whether the IPSet is active or not.
 	Activate *bool `locationName:"activate" type:"boolean"`
 
+	// The detectorID that specifies the GuardDuty service whose IPSet you want
+	// to update.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The unique ID that specifies the IPSet that you want to update.
+	//
 	// IpSetId is a required field
 	IpSetId *string `location:"uri" locationName:"ipSetId" type:"string" required:"true"`
 
-	// The updated URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
-	Location *string `locationName:"location" type:"string"`
+	// The updated URI of the file that contains the IPSet.
+	Location *string `locationName:"location" min:"1" type:"string"`
 
 	// The unique ID that specifies the IPSet that you want to update.
-	Name *string `locationName:"name" type:"string"`
+	Name *string `locationName:"name" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateIPSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateIPSetInput) GoString() string {
 	return s.String()
 }
@@ -9143,6 +23909,12 @@ func (s *UpdateIPSetInput) Validate() error {
 	}
 	if s.IpSetId != nil && len(*s.IpSetId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("IpSetId", 1))
+	}
+	if s.Location != nil && len(*s.Location) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Location", 1))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9185,44 +23957,520 @@ type UpdateIPSetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateIPSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateIPSetOutput) GoString() string {
 	return s.String()
 }
 
-// Update Threat Intel Set Request
+type UpdateMalwareScanSettingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of the detector that specifies the GuardDuty service where
+	// you want to update scan settings.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// An enum value representing possible snapshot preservation settings.
+	EbsSnapshotPreservation *string `locationName:"ebsSnapshotPreservation" type:"string" enum:"EbsSnapshotPreservation"`
+
+	// Represents the criteria to be used in the filter for selecting resources
+	// to scan.
+	ScanResourceCriteria *ScanResourceCriteria `locationName:"scanResourceCriteria" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMalwareScanSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMalwareScanSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateMalwareScanSettingsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateMalwareScanSettingsInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.ScanResourceCriteria != nil {
+		if err := s.ScanResourceCriteria.Validate(); err != nil {
+			invalidParams.AddNested("ScanResourceCriteria", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *UpdateMalwareScanSettingsInput) SetDetectorId(v string) *UpdateMalwareScanSettingsInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetEbsSnapshotPreservation sets the EbsSnapshotPreservation field's value.
+func (s *UpdateMalwareScanSettingsInput) SetEbsSnapshotPreservation(v string) *UpdateMalwareScanSettingsInput {
+	s.EbsSnapshotPreservation = &v
+	return s
+}
+
+// SetScanResourceCriteria sets the ScanResourceCriteria field's value.
+func (s *UpdateMalwareScanSettingsInput) SetScanResourceCriteria(v *ScanResourceCriteria) *UpdateMalwareScanSettingsInput {
+	s.ScanResourceCriteria = v
+	return s
+}
+
+type UpdateMalwareScanSettingsOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMalwareScanSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMalwareScanSettingsOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateMemberDetectorsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of member account IDs to be updated.
+	//
+	// AccountIds is a required field
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list" required:"true"`
+
+	// Describes which data sources will be updated.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources *DataSourceConfigurations `locationName:"dataSources" deprecated:"true" type:"structure"`
+
+	// The detector ID of the administrator account.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// A list of features that will be updated for the specified member accounts.
+	Features []*MemberFeaturesConfiguration `locationName:"features" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMemberDetectorsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMemberDetectorsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateMemberDetectorsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateMemberDetectorsInput"}
+	if s.AccountIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
+	}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.DataSources != nil {
+		if err := s.DataSources.Validate(); err != nil {
+			invalidParams.AddNested("DataSources", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountIds sets the AccountIds field's value.
+func (s *UpdateMemberDetectorsInput) SetAccountIds(v []*string) *UpdateMemberDetectorsInput {
+	s.AccountIds = v
+	return s
+}
+
+// SetDataSources sets the DataSources field's value.
+func (s *UpdateMemberDetectorsInput) SetDataSources(v *DataSourceConfigurations) *UpdateMemberDetectorsInput {
+	s.DataSources = v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *UpdateMemberDetectorsInput) SetDetectorId(v string) *UpdateMemberDetectorsInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetFeatures sets the Features field's value.
+func (s *UpdateMemberDetectorsInput) SetFeatures(v []*MemberFeaturesConfiguration) *UpdateMemberDetectorsInput {
+	s.Features = v
+	return s
+}
+
+type UpdateMemberDetectorsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of member account IDs that were unable to be processed along with
+	// an explanation for why they were not processed.
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []*UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMemberDetectorsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateMemberDetectorsOutput) GoString() string {
+	return s.String()
+}
+
+// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
+func (s *UpdateMemberDetectorsOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *UpdateMemberDetectorsOutput {
+	s.UnprocessedAccounts = v
+	return s
+}
+
+type UpdateOrganizationConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// Represents whether or not to automatically enable member accounts in the
+	// organization.
+	//
+	// Even though this is still supported, we recommend using AutoEnableOrganizationMembers
+	// to achieve the similar results. You must provide a value for either autoEnableOrganizationMembers
+	// or autoEnable.
+	//
+	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
+	AutoEnable *bool `locationName:"autoEnable" deprecated:"true" type:"boolean"`
+
+	// Indicates the auto-enablement configuration of GuardDuty for the member accounts
+	// in the organization. You must provide a value for either autoEnableOrganizationMembers
+	// or autoEnable.
+	//
+	// Use one of the following configuration values for autoEnableOrganizationMembers:
+	//
+	//    * NEW: Indicates that when a new account joins the organization, they
+	//    will have GuardDuty enabled automatically.
+	//
+	//    * ALL: Indicates that all accounts in the organization have GuardDuty
+	//    enabled automatically. This includes NEW accounts that join the organization
+	//    and accounts that may have been suspended or removed from the organization
+	//    in GuardDuty. It may take up to 24 hours to update the configuration for
+	//    all the member accounts.
+	//
+	//    * NONE: Indicates that GuardDuty will not be automatically enabled for
+	//    any account in the organization. The administrator must manage GuardDuty
+	//    for each account in the organization individually.
+	AutoEnableOrganizationMembers *string `locationName:"autoEnableOrganizationMembers" type:"string" enum:"AutoEnableMembers"`
+
+	// Describes which data sources will be updated.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources *OrganizationDataSourceConfigurations `locationName:"dataSources" deprecated:"true" type:"structure"`
+
+	// The ID of the detector that configures the delegated administrator.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// A list of features that will be configured for the organization.
+	Features []*OrganizationFeatureConfiguration `locationName:"features" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateOrganizationConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateOrganizationConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateOrganizationConfigurationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateOrganizationConfigurationInput"}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.DataSources != nil {
+		if err := s.DataSources.Validate(); err != nil {
+			invalidParams.AddNested("DataSources", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAutoEnable sets the AutoEnable field's value.
+func (s *UpdateOrganizationConfigurationInput) SetAutoEnable(v bool) *UpdateOrganizationConfigurationInput {
+	s.AutoEnable = &v
+	return s
+}
+
+// SetAutoEnableOrganizationMembers sets the AutoEnableOrganizationMembers field's value.
+func (s *UpdateOrganizationConfigurationInput) SetAutoEnableOrganizationMembers(v string) *UpdateOrganizationConfigurationInput {
+	s.AutoEnableOrganizationMembers = &v
+	return s
+}
+
+// SetDataSources sets the DataSources field's value.
+func (s *UpdateOrganizationConfigurationInput) SetDataSources(v *OrganizationDataSourceConfigurations) *UpdateOrganizationConfigurationInput {
+	s.DataSources = v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *UpdateOrganizationConfigurationInput) SetDetectorId(v string) *UpdateOrganizationConfigurationInput {
+	s.DetectorId = &v
+	return s
+}
+
+// SetFeatures sets the Features field's value.
+func (s *UpdateOrganizationConfigurationInput) SetFeatures(v []*OrganizationFeatureConfiguration) *UpdateOrganizationConfigurationInput {
+	s.Features = v
+	return s
+}
+
+type UpdateOrganizationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateOrganizationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateOrganizationConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+type UpdatePublishingDestinationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the publishing destination to update.
+	//
+	// DestinationId is a required field
+	DestinationId *string `location:"uri" locationName:"destinationId" type:"string" required:"true"`
+
+	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn
+	// of the publishing destination.
+	DestinationProperties *DestinationProperties `locationName:"destinationProperties" type:"structure"`
+
+	// The ID of the detector associated with the publishing destinations to update.
+	//
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePublishingDestinationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePublishingDestinationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdatePublishingDestinationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdatePublishingDestinationInput"}
+	if s.DestinationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DestinationId"))
+	}
+	if s.DestinationId != nil && len(*s.DestinationId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DestinationId", 1))
+	}
+	if s.DetectorId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDestinationId sets the DestinationId field's value.
+func (s *UpdatePublishingDestinationInput) SetDestinationId(v string) *UpdatePublishingDestinationInput {
+	s.DestinationId = &v
+	return s
+}
+
+// SetDestinationProperties sets the DestinationProperties field's value.
+func (s *UpdatePublishingDestinationInput) SetDestinationProperties(v *DestinationProperties) *UpdatePublishingDestinationInput {
+	s.DestinationProperties = v
+	return s
+}
+
+// SetDetectorId sets the DetectorId field's value.
+func (s *UpdatePublishingDestinationInput) SetDetectorId(v string) *UpdatePublishingDestinationInput {
+	s.DetectorId = &v
+	return s
+}
+
+type UpdatePublishingDestinationOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePublishingDestinationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdatePublishingDestinationOutput) GoString() string {
+	return s.String()
+}
+
 type UpdateThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The updated boolean value that specifies whether the ThreateIntelSet is active
+	// The updated Boolean value that specifies whether the ThreateIntelSet is active
 	// or not.
 	Activate *bool `locationName:"activate" type:"boolean"`
 
+	// The detectorID that specifies the GuardDuty service whose ThreatIntelSet
+	// you want to update.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// The updated URI of the file that contains the ThreateIntelSet. For example
-	// (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
-	Location *string `locationName:"location" type:"string"`
+	// The updated URI of the file that contains the ThreateIntelSet.
+	Location *string `locationName:"location" min:"1" type:"string"`
 
 	// The unique ID that specifies the ThreatIntelSet that you want to update.
-	Name *string `locationName:"name" type:"string"`
+	Name *string `locationName:"name" min:"1" type:"string"`
 
+	// The unique ID that specifies the ThreatIntelSet that you want to update.
+	//
 	// ThreatIntelSetId is a required field
 	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateThreatIntelSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateThreatIntelSetInput) GoString() string {
 	return s.String()
 }
@@ -9235,6 +24483,12 @@ func (s *UpdateThreatIntelSetInput) Validate() error {
 	}
 	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("DetectorId", 1))
+	}
+	if s.Location != nil && len(*s.Location) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Location", 1))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
 	}
 	if s.ThreatIntelSetId == nil {
 		invalidParams.Add(request.NewErrParamRequired("ThreatIntelSetId"))
@@ -9283,17 +24537,995 @@ type UpdateThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateThreatIntelSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateThreatIntelSetOutput) GoString() string {
 	return s.String()
 }
 
-// The status of detector.
+// Contains information on the total of usage based on account IDs.
+type UsageAccountResult struct {
+	_ struct{} `type:"structure"`
+
+	// The Account ID that generated usage.
+	AccountId *string `locationName:"accountId" min:"12" type:"string"`
+
+	// Represents the total of usage for the Account ID.
+	Total *Total `locationName:"total" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageAccountResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageAccountResult) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *UsageAccountResult) SetAccountId(v string) *UsageAccountResult {
+	s.AccountId = &v
+	return s
+}
+
+// SetTotal sets the Total field's value.
+func (s *UsageAccountResult) SetTotal(v *Total) *UsageAccountResult {
+	s.Total = v
+	return s
+}
+
+// Contains information about the criteria used to query usage statistics.
+type UsageCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// The account IDs to aggregate usage statistics from.
+	AccountIds []*string `locationName:"accountIds" min:"1" type:"list"`
+
+	// The data sources to aggregate usage statistics from.
+	//
+	// Deprecated: This parameter is deprecated, use Features instead
+	DataSources []*string `locationName:"dataSources" deprecated:"true" type:"list" enum:"DataSource"`
+
+	// The features to aggregate usage statistics from.
+	Features []*string `locationName:"features" type:"list" enum:"UsageFeature"`
+
+	// The resources to aggregate usage statistics from. Only accepts exact resource
+	// names.
+	Resources []*string `locationName:"resources" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageCriteria) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UsageCriteria) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UsageCriteria"}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountIds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountIds sets the AccountIds field's value.
+func (s *UsageCriteria) SetAccountIds(v []*string) *UsageCriteria {
+	s.AccountIds = v
+	return s
+}
+
+// SetDataSources sets the DataSources field's value.
+func (s *UsageCriteria) SetDataSources(v []*string) *UsageCriteria {
+	s.DataSources = v
+	return s
+}
+
+// SetFeatures sets the Features field's value.
+func (s *UsageCriteria) SetFeatures(v []*string) *UsageCriteria {
+	s.Features = v
+	return s
+}
+
+// SetResources sets the Resources field's value.
+func (s *UsageCriteria) SetResources(v []*string) *UsageCriteria {
+	s.Resources = v
+	return s
+}
+
+// Contains information on the result of usage based on data source type.
+type UsageDataSourceResult struct {
+	_ struct{} `type:"structure"`
+
+	// The data source type that generated usage.
+	DataSource *string `locationName:"dataSource" type:"string" enum:"DataSource"`
+
+	// Represents the total of usage for the specified data source.
+	Total *Total `locationName:"total" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageDataSourceResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageDataSourceResult) GoString() string {
+	return s.String()
+}
+
+// SetDataSource sets the DataSource field's value.
+func (s *UsageDataSourceResult) SetDataSource(v string) *UsageDataSourceResult {
+	s.DataSource = &v
+	return s
+}
+
+// SetTotal sets the Total field's value.
+func (s *UsageDataSourceResult) SetTotal(v *Total) *UsageDataSourceResult {
+	s.Total = v
+	return s
+}
+
+// Contains information about the result of the total usage based on the feature.
+type UsageFeatureResult struct {
+	_ struct{} `type:"structure"`
+
+	// The feature that generated the usage cost.
+	Feature *string `locationName:"feature" type:"string" enum:"UsageFeature"`
+
+	// Contains the total usage with the corresponding currency unit for that value.
+	Total *Total `locationName:"total" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageFeatureResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageFeatureResult) GoString() string {
+	return s.String()
+}
+
+// SetFeature sets the Feature field's value.
+func (s *UsageFeatureResult) SetFeature(v string) *UsageFeatureResult {
+	s.Feature = &v
+	return s
+}
+
+// SetTotal sets the Total field's value.
+func (s *UsageFeatureResult) SetTotal(v *Total) *UsageFeatureResult {
+	s.Total = v
+	return s
+}
+
+// Contains information on the sum of usage based on an Amazon Web Services
+// resource.
+type UsageResourceResult struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Web Services resource that generated usage.
+	Resource *string `locationName:"resource" type:"string"`
+
+	// Represents the sum total of usage for the specified resource type.
+	Total *Total `locationName:"total" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageResourceResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageResourceResult) GoString() string {
+	return s.String()
+}
+
+// SetResource sets the Resource field's value.
+func (s *UsageResourceResult) SetResource(v string) *UsageResourceResult {
+	s.Resource = &v
+	return s
+}
+
+// SetTotal sets the Total field's value.
+func (s *UsageResourceResult) SetTotal(v *Total) *UsageResourceResult {
+	s.Total = v
+	return s
+}
+
+// Contains the result of GuardDuty usage. If a UsageStatisticType is provided
+// the result for other types will be null.
+type UsageStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The usage statistic sum organized by account ID.
+	SumByAccount []*UsageAccountResult `locationName:"sumByAccount" type:"list"`
+
+	// The usage statistic sum organized by on data source.
+	SumByDataSource []*UsageDataSourceResult `locationName:"sumByDataSource" type:"list"`
+
+	// The usage statistic sum organized by feature.
+	SumByFeature []*UsageFeatureResult `locationName:"sumByFeature" type:"list"`
+
+	// The usage statistic sum organized by resource.
+	SumByResource []*UsageResourceResult `locationName:"sumByResource" type:"list"`
+
+	// Lists the top 50 accounts by feature that have generated the most GuardDuty
+	// usage, in the order from most to least expensive.
+	//
+	// Currently, this doesn't support RDS_LOGIN_EVENTS.
+	TopAccountsByFeature []*UsageTopAccountsResult `locationName:"topAccountsByFeature" type:"list"`
+
+	// Lists the top 50 resources that have generated the most GuardDuty usage,
+	// in order from most to least expensive.
+	TopResources []*UsageResourceResult `locationName:"topResources" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageStatistics) GoString() string {
+	return s.String()
+}
+
+// SetSumByAccount sets the SumByAccount field's value.
+func (s *UsageStatistics) SetSumByAccount(v []*UsageAccountResult) *UsageStatistics {
+	s.SumByAccount = v
+	return s
+}
+
+// SetSumByDataSource sets the SumByDataSource field's value.
+func (s *UsageStatistics) SetSumByDataSource(v []*UsageDataSourceResult) *UsageStatistics {
+	s.SumByDataSource = v
+	return s
+}
+
+// SetSumByFeature sets the SumByFeature field's value.
+func (s *UsageStatistics) SetSumByFeature(v []*UsageFeatureResult) *UsageStatistics {
+	s.SumByFeature = v
+	return s
+}
+
+// SetSumByResource sets the SumByResource field's value.
+func (s *UsageStatistics) SetSumByResource(v []*UsageResourceResult) *UsageStatistics {
+	s.SumByResource = v
+	return s
+}
+
+// SetTopAccountsByFeature sets the TopAccountsByFeature field's value.
+func (s *UsageStatistics) SetTopAccountsByFeature(v []*UsageTopAccountsResult) *UsageStatistics {
+	s.TopAccountsByFeature = v
+	return s
+}
+
+// SetTopResources sets the TopResources field's value.
+func (s *UsageStatistics) SetTopResources(v []*UsageResourceResult) *UsageStatistics {
+	s.TopResources = v
+	return s
+}
+
+// Contains information on the total of usage based on the topmost 50 account
+// IDs.
+type UsageTopAccountResult struct {
+	_ struct{} `type:"structure"`
+
+	// The unique account ID.
+	AccountId *string `locationName:"accountId" min:"12" type:"string"`
+
+	// Contains the total usage with the corresponding currency unit for that value.
+	Total *Total `locationName:"total" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageTopAccountResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageTopAccountResult) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *UsageTopAccountResult) SetAccountId(v string) *UsageTopAccountResult {
+	s.AccountId = &v
+	return s
+}
+
+// SetTotal sets the Total field's value.
+func (s *UsageTopAccountResult) SetTotal(v *Total) *UsageTopAccountResult {
+	s.Total = v
+	return s
+}
+
+// Information about the usage statistics, calculated by top accounts by feature.
+type UsageTopAccountsResult struct {
+	_ struct{} `type:"structure"`
+
+	// The accounts that contributed to the total usage cost.
+	Accounts []*UsageTopAccountResult `locationName:"accounts" type:"list"`
+
+	// Features by which you can generate the usage statistics.
+	//
+	// RDS_LOGIN_EVENTS is currently not supported with topAccountsByFeature.
+	Feature *string `locationName:"feature" type:"string" enum:"UsageFeature"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageTopAccountsResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageTopAccountsResult) GoString() string {
+	return s.String()
+}
+
+// SetAccounts sets the Accounts field's value.
+func (s *UsageTopAccountsResult) SetAccounts(v []*UsageTopAccountResult) *UsageTopAccountsResult {
+	s.Accounts = v
+	return s
+}
+
+// SetFeature sets the Feature field's value.
+func (s *UsageTopAccountsResult) SetFeature(v string) *UsageTopAccountsResult {
+	s.Feature = &v
+	return s
+}
+
+// Volume used by the Kubernetes workload.
+type Volume struct {
+	_ struct{} `type:"structure"`
+
+	// Represents a pre-existing file or directory on the host machine that the
+	// volume maps to.
+	HostPath *HostPath `locationName:"hostPath" type:"structure"`
+
+	// Volume name.
+	Name *string `locationName:"name" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Volume) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Volume) GoString() string {
+	return s.String()
+}
+
+// SetHostPath sets the HostPath field's value.
+func (s *Volume) SetHostPath(v *HostPath) *Volume {
+	s.HostPath = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *Volume) SetName(v string) *Volume {
+	s.Name = &v
+	return s
+}
+
+// Contains EBS volume details.
+type VolumeDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The device name for the EBS volume.
+	DeviceName *string `locationName:"deviceName" type:"string"`
+
+	// EBS volume encryption type.
+	EncryptionType *string `locationName:"encryptionType" type:"string"`
+
+	// KMS key Arn used to encrypt the EBS volume.
+	KmsKeyArn *string `locationName:"kmsKeyArn" type:"string"`
+
+	// Snapshot Arn of the EBS volume.
+	SnapshotArn *string `locationName:"snapshotArn" type:"string"`
+
+	// EBS volume Arn information.
+	VolumeArn *string `locationName:"volumeArn" type:"string"`
+
+	// EBS volume size in GB.
+	VolumeSizeInGB *int64 `locationName:"volumeSizeInGB" type:"integer"`
+
+	// The EBS volume type.
+	VolumeType *string `locationName:"volumeType" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VolumeDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VolumeDetail) GoString() string {
+	return s.String()
+}
+
+// SetDeviceName sets the DeviceName field's value.
+func (s *VolumeDetail) SetDeviceName(v string) *VolumeDetail {
+	s.DeviceName = &v
+	return s
+}
+
+// SetEncryptionType sets the EncryptionType field's value.
+func (s *VolumeDetail) SetEncryptionType(v string) *VolumeDetail {
+	s.EncryptionType = &v
+	return s
+}
+
+// SetKmsKeyArn sets the KmsKeyArn field's value.
+func (s *VolumeDetail) SetKmsKeyArn(v string) *VolumeDetail {
+	s.KmsKeyArn = &v
+	return s
+}
+
+// SetSnapshotArn sets the SnapshotArn field's value.
+func (s *VolumeDetail) SetSnapshotArn(v string) *VolumeDetail {
+	s.SnapshotArn = &v
+	return s
+}
+
+// SetVolumeArn sets the VolumeArn field's value.
+func (s *VolumeDetail) SetVolumeArn(v string) *VolumeDetail {
+	s.VolumeArn = &v
+	return s
+}
+
+// SetVolumeSizeInGB sets the VolumeSizeInGB field's value.
+func (s *VolumeDetail) SetVolumeSizeInGB(v int64) *VolumeDetail {
+	s.VolumeSizeInGB = &v
+	return s
+}
+
+// SetVolumeType sets the VolumeType field's value.
+func (s *VolumeDetail) SetVolumeType(v string) *VolumeDetail {
+	s.VolumeType = &v
+	return s
+}
+
+// Container volume mount.
+type VolumeMount struct {
+	_ struct{} `type:"structure"`
+
+	// Volume mount path.
+	MountPath *string `locationName:"mountPath" type:"string"`
+
+	// Volume mount name.
+	Name *string `locationName:"name" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VolumeMount) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VolumeMount) GoString() string {
+	return s.String()
+}
+
+// SetMountPath sets the MountPath field's value.
+func (s *VolumeMount) SetMountPath(v string) *VolumeMount {
+	s.MountPath = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *VolumeMount) SetName(v string) *VolumeMount {
+	s.Name = &v
+	return s
+}
+
+// Amazon Virtual Private Cloud configuration details associated with your Lambda
+// function.
+type VpcConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the security group attached to the Lambda function.
+	SecurityGroups []*SecurityGroup `locationName:"securityGroups" type:"list"`
+
+	// The identifiers of the subnets that are associated with your Lambda function.
+	SubnetIds []*string `locationName:"subnetIds" type:"list"`
+
+	// The identifier of the Amazon Virtual Private Cloud.
+	VpcId *string `locationName:"vpcId" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfig) GoString() string {
+	return s.String()
+}
+
+// SetSecurityGroups sets the SecurityGroups field's value.
+func (s *VpcConfig) SetSecurityGroups(v []*SecurityGroup) *VpcConfig {
+	s.SecurityGroups = v
+	return s
+}
+
+// SetSubnetIds sets the SubnetIds field's value.
+func (s *VpcConfig) SetSubnetIds(v []*string) *VpcConfig {
+	s.SubnetIds = v
+	return s
+}
+
+// SetVpcId sets the VpcId field's value.
+func (s *VpcConfig) SetVpcId(v string) *VpcConfig {
+	s.VpcId = &v
+	return s
+}
+
+const (
+	// AdminStatusEnabled is a AdminStatus enum value
+	AdminStatusEnabled = "ENABLED"
+
+	// AdminStatusDisableInProgress is a AdminStatus enum value
+	AdminStatusDisableInProgress = "DISABLE_IN_PROGRESS"
+)
+
+// AdminStatus_Values returns all elements of the AdminStatus enum
+func AdminStatus_Values() []string {
+	return []string{
+		AdminStatusEnabled,
+		AdminStatusDisableInProgress,
+	}
+}
+
+const (
+	// AutoEnableMembersNew is a AutoEnableMembers enum value
+	AutoEnableMembersNew = "NEW"
+
+	// AutoEnableMembersAll is a AutoEnableMembers enum value
+	AutoEnableMembersAll = "ALL"
+
+	// AutoEnableMembersNone is a AutoEnableMembers enum value
+	AutoEnableMembersNone = "NONE"
+)
+
+// AutoEnableMembers_Values returns all elements of the AutoEnableMembers enum
+func AutoEnableMembers_Values() []string {
+	return []string{
+		AutoEnableMembersNew,
+		AutoEnableMembersAll,
+		AutoEnableMembersNone,
+	}
+}
+
+const (
+	// CoverageFilterCriterionKeyAccountId is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyAccountId = "ACCOUNT_ID"
+
+	// CoverageFilterCriterionKeyClusterName is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyClusterName = "CLUSTER_NAME"
+
+	// CoverageFilterCriterionKeyResourceType is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyResourceType = "RESOURCE_TYPE"
+
+	// CoverageFilterCriterionKeyCoverageStatus is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyCoverageStatus = "COVERAGE_STATUS"
+
+	// CoverageFilterCriterionKeyAddonVersion is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyAddonVersion = "ADDON_VERSION"
+
+	// CoverageFilterCriterionKeyManagementType is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyManagementType = "MANAGEMENT_TYPE"
+
+	// CoverageFilterCriterionKeyEksClusterName is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyEksClusterName = "EKS_CLUSTER_NAME"
+
+	// CoverageFilterCriterionKeyEcsClusterName is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyEcsClusterName = "ECS_CLUSTER_NAME"
+
+	// CoverageFilterCriterionKeyAgentVersion is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyAgentVersion = "AGENT_VERSION"
+
+	// CoverageFilterCriterionKeyInstanceId is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyInstanceId = "INSTANCE_ID"
+
+	// CoverageFilterCriterionKeyClusterArn is a CoverageFilterCriterionKey enum value
+	CoverageFilterCriterionKeyClusterArn = "CLUSTER_ARN"
+)
+
+// CoverageFilterCriterionKey_Values returns all elements of the CoverageFilterCriterionKey enum
+func CoverageFilterCriterionKey_Values() []string {
+	return []string{
+		CoverageFilterCriterionKeyAccountId,
+		CoverageFilterCriterionKeyClusterName,
+		CoverageFilterCriterionKeyResourceType,
+		CoverageFilterCriterionKeyCoverageStatus,
+		CoverageFilterCriterionKeyAddonVersion,
+		CoverageFilterCriterionKeyManagementType,
+		CoverageFilterCriterionKeyEksClusterName,
+		CoverageFilterCriterionKeyEcsClusterName,
+		CoverageFilterCriterionKeyAgentVersion,
+		CoverageFilterCriterionKeyInstanceId,
+		CoverageFilterCriterionKeyClusterArn,
+	}
+}
+
+const (
+	// CoverageSortKeyAccountId is a CoverageSortKey enum value
+	CoverageSortKeyAccountId = "ACCOUNT_ID"
+
+	// CoverageSortKeyClusterName is a CoverageSortKey enum value
+	CoverageSortKeyClusterName = "CLUSTER_NAME"
+
+	// CoverageSortKeyCoverageStatus is a CoverageSortKey enum value
+	CoverageSortKeyCoverageStatus = "COVERAGE_STATUS"
+
+	// CoverageSortKeyIssue is a CoverageSortKey enum value
+	CoverageSortKeyIssue = "ISSUE"
+
+	// CoverageSortKeyAddonVersion is a CoverageSortKey enum value
+	CoverageSortKeyAddonVersion = "ADDON_VERSION"
+
+	// CoverageSortKeyUpdatedAt is a CoverageSortKey enum value
+	CoverageSortKeyUpdatedAt = "UPDATED_AT"
+
+	// CoverageSortKeyEksClusterName is a CoverageSortKey enum value
+	CoverageSortKeyEksClusterName = "EKS_CLUSTER_NAME"
+
+	// CoverageSortKeyEcsClusterName is a CoverageSortKey enum value
+	CoverageSortKeyEcsClusterName = "ECS_CLUSTER_NAME"
+
+	// CoverageSortKeyInstanceId is a CoverageSortKey enum value
+	CoverageSortKeyInstanceId = "INSTANCE_ID"
+)
+
+// CoverageSortKey_Values returns all elements of the CoverageSortKey enum
+func CoverageSortKey_Values() []string {
+	return []string{
+		CoverageSortKeyAccountId,
+		CoverageSortKeyClusterName,
+		CoverageSortKeyCoverageStatus,
+		CoverageSortKeyIssue,
+		CoverageSortKeyAddonVersion,
+		CoverageSortKeyUpdatedAt,
+		CoverageSortKeyEksClusterName,
+		CoverageSortKeyEcsClusterName,
+		CoverageSortKeyInstanceId,
+	}
+}
+
+const (
+	// CoverageStatisticsTypeCountByResourceType is a CoverageStatisticsType enum value
+	CoverageStatisticsTypeCountByResourceType = "COUNT_BY_RESOURCE_TYPE"
+
+	// CoverageStatisticsTypeCountByCoverageStatus is a CoverageStatisticsType enum value
+	CoverageStatisticsTypeCountByCoverageStatus = "COUNT_BY_COVERAGE_STATUS"
+)
+
+// CoverageStatisticsType_Values returns all elements of the CoverageStatisticsType enum
+func CoverageStatisticsType_Values() []string {
+	return []string{
+		CoverageStatisticsTypeCountByResourceType,
+		CoverageStatisticsTypeCountByCoverageStatus,
+	}
+}
+
+const (
+	// CoverageStatusHealthy is a CoverageStatus enum value
+	CoverageStatusHealthy = "HEALTHY"
+
+	// CoverageStatusUnhealthy is a CoverageStatus enum value
+	CoverageStatusUnhealthy = "UNHEALTHY"
+)
+
+// CoverageStatus_Values returns all elements of the CoverageStatus enum
+func CoverageStatus_Values() []string {
+	return []string{
+		CoverageStatusHealthy,
+		CoverageStatusUnhealthy,
+	}
+}
+
+const (
+	// CriterionKeyEc2InstanceArn is a CriterionKey enum value
+	CriterionKeyEc2InstanceArn = "EC2_INSTANCE_ARN"
+
+	// CriterionKeyScanId is a CriterionKey enum value
+	CriterionKeyScanId = "SCAN_ID"
+
+	// CriterionKeyAccountId is a CriterionKey enum value
+	CriterionKeyAccountId = "ACCOUNT_ID"
+
+	// CriterionKeyGuarddutyFindingId is a CriterionKey enum value
+	CriterionKeyGuarddutyFindingId = "GUARDDUTY_FINDING_ID"
+
+	// CriterionKeyScanStartTime is a CriterionKey enum value
+	CriterionKeyScanStartTime = "SCAN_START_TIME"
+
+	// CriterionKeyScanStatus is a CriterionKey enum value
+	CriterionKeyScanStatus = "SCAN_STATUS"
+
+	// CriterionKeyScanType is a CriterionKey enum value
+	CriterionKeyScanType = "SCAN_TYPE"
+)
+
+// CriterionKey_Values returns all elements of the CriterionKey enum
+func CriterionKey_Values() []string {
+	return []string{
+		CriterionKeyEc2InstanceArn,
+		CriterionKeyScanId,
+		CriterionKeyAccountId,
+		CriterionKeyGuarddutyFindingId,
+		CriterionKeyScanStartTime,
+		CriterionKeyScanStatus,
+		CriterionKeyScanType,
+	}
+}
+
+const (
+	// DataSourceFlowLogs is a DataSource enum value
+	DataSourceFlowLogs = "FLOW_LOGS"
+
+	// DataSourceCloudTrail is a DataSource enum value
+	DataSourceCloudTrail = "CLOUD_TRAIL"
+
+	// DataSourceDnsLogs is a DataSource enum value
+	DataSourceDnsLogs = "DNS_LOGS"
+
+	// DataSourceS3Logs is a DataSource enum value
+	DataSourceS3Logs = "S3_LOGS"
+
+	// DataSourceKubernetesAuditLogs is a DataSource enum value
+	DataSourceKubernetesAuditLogs = "KUBERNETES_AUDIT_LOGS"
+
+	// DataSourceEc2MalwareScan is a DataSource enum value
+	DataSourceEc2MalwareScan = "EC2_MALWARE_SCAN"
+)
+
+// DataSource_Values returns all elements of the DataSource enum
+func DataSource_Values() []string {
+	return []string{
+		DataSourceFlowLogs,
+		DataSourceCloudTrail,
+		DataSourceDnsLogs,
+		DataSourceS3Logs,
+		DataSourceKubernetesAuditLogs,
+		DataSourceEc2MalwareScan,
+	}
+}
+
+const (
+	// DataSourceStatusEnabled is a DataSourceStatus enum value
+	DataSourceStatusEnabled = "ENABLED"
+
+	// DataSourceStatusDisabled is a DataSourceStatus enum value
+	DataSourceStatusDisabled = "DISABLED"
+)
+
+// DataSourceStatus_Values returns all elements of the DataSourceStatus enum
+func DataSourceStatus_Values() []string {
+	return []string{
+		DataSourceStatusEnabled,
+		DataSourceStatusDisabled,
+	}
+}
+
+const (
+	// DestinationTypeS3 is a DestinationType enum value
+	DestinationTypeS3 = "S3"
+)
+
+// DestinationType_Values returns all elements of the DestinationType enum
+func DestinationType_Values() []string {
+	return []string{
+		DestinationTypeS3,
+	}
+}
+
+const (
+	// DetectorFeatureS3DataEvents is a DetectorFeature enum value
+	DetectorFeatureS3DataEvents = "S3_DATA_EVENTS"
+
+	// DetectorFeatureEksAuditLogs is a DetectorFeature enum value
+	DetectorFeatureEksAuditLogs = "EKS_AUDIT_LOGS"
+
+	// DetectorFeatureEbsMalwareProtection is a DetectorFeature enum value
+	DetectorFeatureEbsMalwareProtection = "EBS_MALWARE_PROTECTION"
+
+	// DetectorFeatureRdsLoginEvents is a DetectorFeature enum value
+	DetectorFeatureRdsLoginEvents = "RDS_LOGIN_EVENTS"
+
+	// DetectorFeatureEksRuntimeMonitoring is a DetectorFeature enum value
+	DetectorFeatureEksRuntimeMonitoring = "EKS_RUNTIME_MONITORING"
+
+	// DetectorFeatureLambdaNetworkLogs is a DetectorFeature enum value
+	DetectorFeatureLambdaNetworkLogs = "LAMBDA_NETWORK_LOGS"
+
+	// DetectorFeatureRuntimeMonitoring is a DetectorFeature enum value
+	DetectorFeatureRuntimeMonitoring = "RUNTIME_MONITORING"
+)
+
+// DetectorFeature_Values returns all elements of the DetectorFeature enum
+func DetectorFeature_Values() []string {
+	return []string{
+		DetectorFeatureS3DataEvents,
+		DetectorFeatureEksAuditLogs,
+		DetectorFeatureEbsMalwareProtection,
+		DetectorFeatureRdsLoginEvents,
+		DetectorFeatureEksRuntimeMonitoring,
+		DetectorFeatureLambdaNetworkLogs,
+		DetectorFeatureRuntimeMonitoring,
+	}
+}
+
+const (
+	// DetectorFeatureResultFlowLogs is a DetectorFeatureResult enum value
+	DetectorFeatureResultFlowLogs = "FLOW_LOGS"
+
+	// DetectorFeatureResultCloudTrail is a DetectorFeatureResult enum value
+	DetectorFeatureResultCloudTrail = "CLOUD_TRAIL"
+
+	// DetectorFeatureResultDnsLogs is a DetectorFeatureResult enum value
+	DetectorFeatureResultDnsLogs = "DNS_LOGS"
+
+	// DetectorFeatureResultS3DataEvents is a DetectorFeatureResult enum value
+	DetectorFeatureResultS3DataEvents = "S3_DATA_EVENTS"
+
+	// DetectorFeatureResultEksAuditLogs is a DetectorFeatureResult enum value
+	DetectorFeatureResultEksAuditLogs = "EKS_AUDIT_LOGS"
+
+	// DetectorFeatureResultEbsMalwareProtection is a DetectorFeatureResult enum value
+	DetectorFeatureResultEbsMalwareProtection = "EBS_MALWARE_PROTECTION"
+
+	// DetectorFeatureResultRdsLoginEvents is a DetectorFeatureResult enum value
+	DetectorFeatureResultRdsLoginEvents = "RDS_LOGIN_EVENTS"
+
+	// DetectorFeatureResultEksRuntimeMonitoring is a DetectorFeatureResult enum value
+	DetectorFeatureResultEksRuntimeMonitoring = "EKS_RUNTIME_MONITORING"
+
+	// DetectorFeatureResultLambdaNetworkLogs is a DetectorFeatureResult enum value
+	DetectorFeatureResultLambdaNetworkLogs = "LAMBDA_NETWORK_LOGS"
+
+	// DetectorFeatureResultRuntimeMonitoring is a DetectorFeatureResult enum value
+	DetectorFeatureResultRuntimeMonitoring = "RUNTIME_MONITORING"
+)
+
+// DetectorFeatureResult_Values returns all elements of the DetectorFeatureResult enum
+func DetectorFeatureResult_Values() []string {
+	return []string{
+		DetectorFeatureResultFlowLogs,
+		DetectorFeatureResultCloudTrail,
+		DetectorFeatureResultDnsLogs,
+		DetectorFeatureResultS3DataEvents,
+		DetectorFeatureResultEksAuditLogs,
+		DetectorFeatureResultEbsMalwareProtection,
+		DetectorFeatureResultRdsLoginEvents,
+		DetectorFeatureResultEksRuntimeMonitoring,
+		DetectorFeatureResultLambdaNetworkLogs,
+		DetectorFeatureResultRuntimeMonitoring,
+	}
+}
+
 const (
 	// DetectorStatusEnabled is a DetectorStatus enum value
 	DetectorStatusEnabled = "ENABLED"
@@ -9302,7 +25534,62 @@ const (
 	DetectorStatusDisabled = "DISABLED"
 )
 
-// Finding Feedback Value
+// DetectorStatus_Values returns all elements of the DetectorStatus enum
+func DetectorStatus_Values() []string {
+	return []string{
+		DetectorStatusEnabled,
+		DetectorStatusDisabled,
+	}
+}
+
+const (
+	// EbsSnapshotPreservationNoRetention is a EbsSnapshotPreservation enum value
+	EbsSnapshotPreservationNoRetention = "NO_RETENTION"
+
+	// EbsSnapshotPreservationRetentionWithFinding is a EbsSnapshotPreservation enum value
+	EbsSnapshotPreservationRetentionWithFinding = "RETENTION_WITH_FINDING"
+)
+
+// EbsSnapshotPreservation_Values returns all elements of the EbsSnapshotPreservation enum
+func EbsSnapshotPreservation_Values() []string {
+	return []string{
+		EbsSnapshotPreservationNoRetention,
+		EbsSnapshotPreservationRetentionWithFinding,
+	}
+}
+
+const (
+	// FeatureAdditionalConfigurationEksAddonManagement is a FeatureAdditionalConfiguration enum value
+	FeatureAdditionalConfigurationEksAddonManagement = "EKS_ADDON_MANAGEMENT"
+
+	// FeatureAdditionalConfigurationEcsFargateAgentManagement is a FeatureAdditionalConfiguration enum value
+	FeatureAdditionalConfigurationEcsFargateAgentManagement = "ECS_FARGATE_AGENT_MANAGEMENT"
+)
+
+// FeatureAdditionalConfiguration_Values returns all elements of the FeatureAdditionalConfiguration enum
+func FeatureAdditionalConfiguration_Values() []string {
+	return []string{
+		FeatureAdditionalConfigurationEksAddonManagement,
+		FeatureAdditionalConfigurationEcsFargateAgentManagement,
+	}
+}
+
+const (
+	// FeatureStatusEnabled is a FeatureStatus enum value
+	FeatureStatusEnabled = "ENABLED"
+
+	// FeatureStatusDisabled is a FeatureStatus enum value
+	FeatureStatusDisabled = "DISABLED"
+)
+
+// FeatureStatus_Values returns all elements of the FeatureStatus enum
+func FeatureStatus_Values() []string {
+	return []string{
+		FeatureStatusEnabled,
+		FeatureStatusDisabled,
+	}
+}
+
 const (
 	// FeedbackUseful is a Feedback enum value
 	FeedbackUseful = "USEFUL"
@@ -9311,7 +25598,14 @@ const (
 	FeedbackNotUseful = "NOT_USEFUL"
 )
 
-// The action associated with a filter.
+// Feedback_Values returns all elements of the Feedback enum
+func Feedback_Values() []string {
+	return []string{
+		FeedbackUseful,
+		FeedbackNotUseful,
+	}
+}
+
 const (
 	// FilterActionNoop is a FilterAction enum value
 	FilterActionNoop = "NOOP"
@@ -9320,7 +25614,14 @@ const (
 	FilterActionArchive = "ARCHIVE"
 )
 
-// A enum value that specifies how frequently customer got Finding updates published.
+// FilterAction_Values returns all elements of the FilterAction enum
+func FilterAction_Values() []string {
+	return []string{
+		FilterActionNoop,
+		FilterActionArchive,
+	}
+}
+
 const (
 	// FindingPublishingFrequencyFifteenMinutes is a FindingPublishingFrequency enum value
 	FindingPublishingFrequencyFifteenMinutes = "FIFTEEN_MINUTES"
@@ -9332,13 +25633,79 @@ const (
 	FindingPublishingFrequencySixHours = "SIX_HOURS"
 )
 
-// The types of finding statistics.
+// FindingPublishingFrequency_Values returns all elements of the FindingPublishingFrequency enum
+func FindingPublishingFrequency_Values() []string {
+	return []string{
+		FindingPublishingFrequencyFifteenMinutes,
+		FindingPublishingFrequencyOneHour,
+		FindingPublishingFrequencySixHours,
+	}
+}
+
 const (
 	// FindingStatisticTypeCountBySeverity is a FindingStatisticType enum value
 	FindingStatisticTypeCountBySeverity = "COUNT_BY_SEVERITY"
 )
 
-// The format of the ipSet.
+// FindingStatisticType_Values returns all elements of the FindingStatisticType enum
+func FindingStatisticType_Values() []string {
+	return []string{
+		FindingStatisticTypeCountBySeverity,
+	}
+}
+
+const (
+	// FreeTrialFeatureResultFlowLogs is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultFlowLogs = "FLOW_LOGS"
+
+	// FreeTrialFeatureResultCloudTrail is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultCloudTrail = "CLOUD_TRAIL"
+
+	// FreeTrialFeatureResultDnsLogs is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultDnsLogs = "DNS_LOGS"
+
+	// FreeTrialFeatureResultS3DataEvents is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultS3DataEvents = "S3_DATA_EVENTS"
+
+	// FreeTrialFeatureResultEksAuditLogs is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultEksAuditLogs = "EKS_AUDIT_LOGS"
+
+	// FreeTrialFeatureResultEbsMalwareProtection is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultEbsMalwareProtection = "EBS_MALWARE_PROTECTION"
+
+	// FreeTrialFeatureResultRdsLoginEvents is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultRdsLoginEvents = "RDS_LOGIN_EVENTS"
+
+	// FreeTrialFeatureResultEksRuntimeMonitoring is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultEksRuntimeMonitoring = "EKS_RUNTIME_MONITORING"
+
+	// FreeTrialFeatureResultLambdaNetworkLogs is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultLambdaNetworkLogs = "LAMBDA_NETWORK_LOGS"
+
+	// FreeTrialFeatureResultFargateRuntimeMonitoring is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultFargateRuntimeMonitoring = "FARGATE_RUNTIME_MONITORING"
+
+	// FreeTrialFeatureResultEc2RuntimeMonitoring is a FreeTrialFeatureResult enum value
+	FreeTrialFeatureResultEc2RuntimeMonitoring = "EC2_RUNTIME_MONITORING"
+)
+
+// FreeTrialFeatureResult_Values returns all elements of the FreeTrialFeatureResult enum
+func FreeTrialFeatureResult_Values() []string {
+	return []string{
+		FreeTrialFeatureResultFlowLogs,
+		FreeTrialFeatureResultCloudTrail,
+		FreeTrialFeatureResultDnsLogs,
+		FreeTrialFeatureResultS3DataEvents,
+		FreeTrialFeatureResultEksAuditLogs,
+		FreeTrialFeatureResultEbsMalwareProtection,
+		FreeTrialFeatureResultRdsLoginEvents,
+		FreeTrialFeatureResultEksRuntimeMonitoring,
+		FreeTrialFeatureResultLambdaNetworkLogs,
+		FreeTrialFeatureResultFargateRuntimeMonitoring,
+		FreeTrialFeatureResultEc2RuntimeMonitoring,
+	}
+}
+
 const (
 	// IpSetFormatTxt is a IpSetFormat enum value
 	IpSetFormatTxt = "TXT"
@@ -9359,7 +25726,18 @@ const (
 	IpSetFormatFireEye = "FIRE_EYE"
 )
 
-// The status of ipSet file uploaded.
+// IpSetFormat_Values returns all elements of the IpSetFormat enum
+func IpSetFormat_Values() []string {
+	return []string{
+		IpSetFormatTxt,
+		IpSetFormatStix,
+		IpSetFormatOtxCsv,
+		IpSetFormatAlienVault,
+		IpSetFormatProofPoint,
+		IpSetFormatFireEye,
+	}
+}
+
 const (
 	// IpSetStatusInactive is a IpSetStatus enum value
 	IpSetStatusInactive = "INACTIVE"
@@ -9383,6 +25761,39 @@ const (
 	IpSetStatusDeleted = "DELETED"
 )
 
+// IpSetStatus_Values returns all elements of the IpSetStatus enum
+func IpSetStatus_Values() []string {
+	return []string{
+		IpSetStatusInactive,
+		IpSetStatusActivating,
+		IpSetStatusActive,
+		IpSetStatusDeactivating,
+		IpSetStatusError,
+		IpSetStatusDeletePending,
+		IpSetStatusDeleted,
+	}
+}
+
+const (
+	// ManagementTypeAutoManaged is a ManagementType enum value
+	ManagementTypeAutoManaged = "AUTO_MANAGED"
+
+	// ManagementTypeManual is a ManagementType enum value
+	ManagementTypeManual = "MANUAL"
+
+	// ManagementTypeDisabled is a ManagementType enum value
+	ManagementTypeDisabled = "DISABLED"
+)
+
+// ManagementType_Values returns all elements of the ManagementType enum
+func ManagementType_Values() []string {
+	return []string{
+		ManagementTypeAutoManaged,
+		ManagementTypeManual,
+		ManagementTypeDisabled,
+	}
+}
+
 const (
 	// OrderByAsc is a OrderBy enum value
 	OrderByAsc = "ASC"
@@ -9391,7 +25802,236 @@ const (
 	OrderByDesc = "DESC"
 )
 
-// The format of the threatIntelSet.
+// OrderBy_Values returns all elements of the OrderBy enum
+func OrderBy_Values() []string {
+	return []string{
+		OrderByAsc,
+		OrderByDesc,
+	}
+}
+
+const (
+	// OrgFeatureS3DataEvents is a OrgFeature enum value
+	OrgFeatureS3DataEvents = "S3_DATA_EVENTS"
+
+	// OrgFeatureEksAuditLogs is a OrgFeature enum value
+	OrgFeatureEksAuditLogs = "EKS_AUDIT_LOGS"
+
+	// OrgFeatureEbsMalwareProtection is a OrgFeature enum value
+	OrgFeatureEbsMalwareProtection = "EBS_MALWARE_PROTECTION"
+
+	// OrgFeatureRdsLoginEvents is a OrgFeature enum value
+	OrgFeatureRdsLoginEvents = "RDS_LOGIN_EVENTS"
+
+	// OrgFeatureEksRuntimeMonitoring is a OrgFeature enum value
+	OrgFeatureEksRuntimeMonitoring = "EKS_RUNTIME_MONITORING"
+
+	// OrgFeatureLambdaNetworkLogs is a OrgFeature enum value
+	OrgFeatureLambdaNetworkLogs = "LAMBDA_NETWORK_LOGS"
+
+	// OrgFeatureRuntimeMonitoring is a OrgFeature enum value
+	OrgFeatureRuntimeMonitoring = "RUNTIME_MONITORING"
+)
+
+// OrgFeature_Values returns all elements of the OrgFeature enum
+func OrgFeature_Values() []string {
+	return []string{
+		OrgFeatureS3DataEvents,
+		OrgFeatureEksAuditLogs,
+		OrgFeatureEbsMalwareProtection,
+		OrgFeatureRdsLoginEvents,
+		OrgFeatureEksRuntimeMonitoring,
+		OrgFeatureLambdaNetworkLogs,
+		OrgFeatureRuntimeMonitoring,
+	}
+}
+
+const (
+	// OrgFeatureAdditionalConfigurationEksAddonManagement is a OrgFeatureAdditionalConfiguration enum value
+	OrgFeatureAdditionalConfigurationEksAddonManagement = "EKS_ADDON_MANAGEMENT"
+
+	// OrgFeatureAdditionalConfigurationEcsFargateAgentManagement is a OrgFeatureAdditionalConfiguration enum value
+	OrgFeatureAdditionalConfigurationEcsFargateAgentManagement = "ECS_FARGATE_AGENT_MANAGEMENT"
+)
+
+// OrgFeatureAdditionalConfiguration_Values returns all elements of the OrgFeatureAdditionalConfiguration enum
+func OrgFeatureAdditionalConfiguration_Values() []string {
+	return []string{
+		OrgFeatureAdditionalConfigurationEksAddonManagement,
+		OrgFeatureAdditionalConfigurationEcsFargateAgentManagement,
+	}
+}
+
+const (
+	// OrgFeatureStatusNew is a OrgFeatureStatus enum value
+	OrgFeatureStatusNew = "NEW"
+
+	// OrgFeatureStatusNone is a OrgFeatureStatus enum value
+	OrgFeatureStatusNone = "NONE"
+
+	// OrgFeatureStatusAll is a OrgFeatureStatus enum value
+	OrgFeatureStatusAll = "ALL"
+)
+
+// OrgFeatureStatus_Values returns all elements of the OrgFeatureStatus enum
+func OrgFeatureStatus_Values() []string {
+	return []string{
+		OrgFeatureStatusNew,
+		OrgFeatureStatusNone,
+		OrgFeatureStatusAll,
+	}
+}
+
+const (
+	// ProfileSubtypeFrequent is a ProfileSubtype enum value
+	ProfileSubtypeFrequent = "FREQUENT"
+
+	// ProfileSubtypeInfrequent is a ProfileSubtype enum value
+	ProfileSubtypeInfrequent = "INFREQUENT"
+
+	// ProfileSubtypeUnseen is a ProfileSubtype enum value
+	ProfileSubtypeUnseen = "UNSEEN"
+
+	// ProfileSubtypeRare is a ProfileSubtype enum value
+	ProfileSubtypeRare = "RARE"
+)
+
+// ProfileSubtype_Values returns all elements of the ProfileSubtype enum
+func ProfileSubtype_Values() []string {
+	return []string{
+		ProfileSubtypeFrequent,
+		ProfileSubtypeInfrequent,
+		ProfileSubtypeUnseen,
+		ProfileSubtypeRare,
+	}
+}
+
+const (
+	// ProfileTypeFrequency is a ProfileType enum value
+	ProfileTypeFrequency = "FREQUENCY"
+)
+
+// ProfileType_Values returns all elements of the ProfileType enum
+func ProfileType_Values() []string {
+	return []string{
+		ProfileTypeFrequency,
+	}
+}
+
+const (
+	// PublishingStatusPendingVerification is a PublishingStatus enum value
+	PublishingStatusPendingVerification = "PENDING_VERIFICATION"
+
+	// PublishingStatusPublishing is a PublishingStatus enum value
+	PublishingStatusPublishing = "PUBLISHING"
+
+	// PublishingStatusUnableToPublishFixDestinationProperty is a PublishingStatus enum value
+	PublishingStatusUnableToPublishFixDestinationProperty = "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"
+
+	// PublishingStatusStopped is a PublishingStatus enum value
+	PublishingStatusStopped = "STOPPED"
+)
+
+// PublishingStatus_Values returns all elements of the PublishingStatus enum
+func PublishingStatus_Values() []string {
+	return []string{
+		PublishingStatusPendingVerification,
+		PublishingStatusPublishing,
+		PublishingStatusUnableToPublishFixDestinationProperty,
+		PublishingStatusStopped,
+	}
+}
+
+const (
+	// ResourceTypeEks is a ResourceType enum value
+	ResourceTypeEks = "EKS"
+
+	// ResourceTypeEcs is a ResourceType enum value
+	ResourceTypeEcs = "ECS"
+
+	// ResourceTypeEc2 is a ResourceType enum value
+	ResourceTypeEc2 = "EC2"
+)
+
+// ResourceType_Values returns all elements of the ResourceType enum
+func ResourceType_Values() []string {
+	return []string{
+		ResourceTypeEks,
+		ResourceTypeEcs,
+		ResourceTypeEc2,
+	}
+}
+
+// An enum value representing possible resource properties to match with given
+// scan condition.
+const (
+	// ScanCriterionKeyEc2InstanceTag is a ScanCriterionKey enum value
+	ScanCriterionKeyEc2InstanceTag = "EC2_INSTANCE_TAG"
+)
+
+// ScanCriterionKey_Values returns all elements of the ScanCriterionKey enum
+func ScanCriterionKey_Values() []string {
+	return []string{
+		ScanCriterionKeyEc2InstanceTag,
+	}
+}
+
+const (
+	// ScanResultClean is a ScanResult enum value
+	ScanResultClean = "CLEAN"
+
+	// ScanResultInfected is a ScanResult enum value
+	ScanResultInfected = "INFECTED"
+)
+
+// ScanResult_Values returns all elements of the ScanResult enum
+func ScanResult_Values() []string {
+	return []string{
+		ScanResultClean,
+		ScanResultInfected,
+	}
+}
+
+const (
+	// ScanStatusRunning is a ScanStatus enum value
+	ScanStatusRunning = "RUNNING"
+
+	// ScanStatusCompleted is a ScanStatus enum value
+	ScanStatusCompleted = "COMPLETED"
+
+	// ScanStatusFailed is a ScanStatus enum value
+	ScanStatusFailed = "FAILED"
+
+	// ScanStatusSkipped is a ScanStatus enum value
+	ScanStatusSkipped = "SKIPPED"
+)
+
+// ScanStatus_Values returns all elements of the ScanStatus enum
+func ScanStatus_Values() []string {
+	return []string{
+		ScanStatusRunning,
+		ScanStatusCompleted,
+		ScanStatusFailed,
+		ScanStatusSkipped,
+	}
+}
+
+const (
+	// ScanTypeGuarddutyInitiated is a ScanType enum value
+	ScanTypeGuarddutyInitiated = "GUARDDUTY_INITIATED"
+
+	// ScanTypeOnDemand is a ScanType enum value
+	ScanTypeOnDemand = "ON_DEMAND"
+)
+
+// ScanType_Values returns all elements of the ScanType enum
+func ScanType_Values() []string {
+	return []string{
+		ScanTypeGuarddutyInitiated,
+		ScanTypeOnDemand,
+	}
+}
+
 const (
 	// ThreatIntelSetFormatTxt is a ThreatIntelSetFormat enum value
 	ThreatIntelSetFormatTxt = "TXT"
@@ -9412,7 +26052,18 @@ const (
 	ThreatIntelSetFormatFireEye = "FIRE_EYE"
 )
 
-// The status of threatIntelSet file uploaded.
+// ThreatIntelSetFormat_Values returns all elements of the ThreatIntelSetFormat enum
+func ThreatIntelSetFormat_Values() []string {
+	return []string{
+		ThreatIntelSetFormatTxt,
+		ThreatIntelSetFormatStix,
+		ThreatIntelSetFormatOtxCsv,
+		ThreatIntelSetFormatAlienVault,
+		ThreatIntelSetFormatProofPoint,
+		ThreatIntelSetFormatFireEye,
+	}
+}
+
 const (
 	// ThreatIntelSetStatusInactive is a ThreatIntelSetStatus enum value
 	ThreatIntelSetStatusInactive = "INACTIVE"
@@ -9435,3 +26086,100 @@ const (
 	// ThreatIntelSetStatusDeleted is a ThreatIntelSetStatus enum value
 	ThreatIntelSetStatusDeleted = "DELETED"
 )
+
+// ThreatIntelSetStatus_Values returns all elements of the ThreatIntelSetStatus enum
+func ThreatIntelSetStatus_Values() []string {
+	return []string{
+		ThreatIntelSetStatusInactive,
+		ThreatIntelSetStatusActivating,
+		ThreatIntelSetStatusActive,
+		ThreatIntelSetStatusDeactivating,
+		ThreatIntelSetStatusError,
+		ThreatIntelSetStatusDeletePending,
+		ThreatIntelSetStatusDeleted,
+	}
+}
+
+const (
+	// UsageFeatureFlowLogs is a UsageFeature enum value
+	UsageFeatureFlowLogs = "FLOW_LOGS"
+
+	// UsageFeatureCloudTrail is a UsageFeature enum value
+	UsageFeatureCloudTrail = "CLOUD_TRAIL"
+
+	// UsageFeatureDnsLogs is a UsageFeature enum value
+	UsageFeatureDnsLogs = "DNS_LOGS"
+
+	// UsageFeatureS3DataEvents is a UsageFeature enum value
+	UsageFeatureS3DataEvents = "S3_DATA_EVENTS"
+
+	// UsageFeatureEksAuditLogs is a UsageFeature enum value
+	UsageFeatureEksAuditLogs = "EKS_AUDIT_LOGS"
+
+	// UsageFeatureEbsMalwareProtection is a UsageFeature enum value
+	UsageFeatureEbsMalwareProtection = "EBS_MALWARE_PROTECTION"
+
+	// UsageFeatureRdsLoginEvents is a UsageFeature enum value
+	UsageFeatureRdsLoginEvents = "RDS_LOGIN_EVENTS"
+
+	// UsageFeatureLambdaNetworkLogs is a UsageFeature enum value
+	UsageFeatureLambdaNetworkLogs = "LAMBDA_NETWORK_LOGS"
+
+	// UsageFeatureEksRuntimeMonitoring is a UsageFeature enum value
+	UsageFeatureEksRuntimeMonitoring = "EKS_RUNTIME_MONITORING"
+
+	// UsageFeatureFargateRuntimeMonitoring is a UsageFeature enum value
+	UsageFeatureFargateRuntimeMonitoring = "FARGATE_RUNTIME_MONITORING"
+
+	// UsageFeatureEc2RuntimeMonitoring is a UsageFeature enum value
+	UsageFeatureEc2RuntimeMonitoring = "EC2_RUNTIME_MONITORING"
+)
+
+// UsageFeature_Values returns all elements of the UsageFeature enum
+func UsageFeature_Values() []string {
+	return []string{
+		UsageFeatureFlowLogs,
+		UsageFeatureCloudTrail,
+		UsageFeatureDnsLogs,
+		UsageFeatureS3DataEvents,
+		UsageFeatureEksAuditLogs,
+		UsageFeatureEbsMalwareProtection,
+		UsageFeatureRdsLoginEvents,
+		UsageFeatureLambdaNetworkLogs,
+		UsageFeatureEksRuntimeMonitoring,
+		UsageFeatureFargateRuntimeMonitoring,
+		UsageFeatureEc2RuntimeMonitoring,
+	}
+}
+
+const (
+	// UsageStatisticTypeSumByAccount is a UsageStatisticType enum value
+	UsageStatisticTypeSumByAccount = "SUM_BY_ACCOUNT"
+
+	// UsageStatisticTypeSumByDataSource is a UsageStatisticType enum value
+	UsageStatisticTypeSumByDataSource = "SUM_BY_DATA_SOURCE"
+
+	// UsageStatisticTypeSumByResource is a UsageStatisticType enum value
+	UsageStatisticTypeSumByResource = "SUM_BY_RESOURCE"
+
+	// UsageStatisticTypeTopResources is a UsageStatisticType enum value
+	UsageStatisticTypeTopResources = "TOP_RESOURCES"
+
+	// UsageStatisticTypeSumByFeatures is a UsageStatisticType enum value
+	UsageStatisticTypeSumByFeatures = "SUM_BY_FEATURES"
+
+	// UsageStatisticTypeTopAccountsByFeature is a UsageStatisticType enum value
+	UsageStatisticTypeTopAccountsByFeature = "TOP_ACCOUNTS_BY_FEATURE"
+)
+
+// UsageStatisticType_Values returns all elements of the UsageStatisticType enum
+func UsageStatisticType_Values() []string {
+	return []string{
+		UsageStatisticTypeSumByAccount,
+		UsageStatisticTypeSumByDataSource,
+		UsageStatisticTypeSumByResource,
+		UsageStatisticTypeTopResources,
+		UsageStatisticTypeSumByFeatures,
+		UsageStatisticTypeTopAccountsByFeature,
+	}
+}

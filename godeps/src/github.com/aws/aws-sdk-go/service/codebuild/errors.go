@@ -2,12 +2,17 @@
 
 package codebuild
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAccountLimitExceededException for service response error code
 	// "AccountLimitExceededException".
 	//
-	// An AWS service limit was exceeded for the calling AWS account.
+	// An Amazon Web Services service limit was exceeded for the calling Amazon
+	// Web Services account.
 	ErrCodeAccountLimitExceededException = "AccountLimitExceededException"
 
 	// ErrCodeInvalidInputException for service response error code
@@ -25,13 +30,21 @@ const (
 	// ErrCodeResourceAlreadyExistsException for service response error code
 	// "ResourceAlreadyExistsException".
 	//
-	// The specified AWS resource cannot be created, because an AWS resource with
-	// the same settings already exists.
+	// The specified Amazon Web Services resource cannot be created, because an
+	// Amazon Web Services resource with the same settings already exists.
 	ErrCodeResourceAlreadyExistsException = "ResourceAlreadyExistsException"
 
 	// ErrCodeResourceNotFoundException for service response error code
 	// "ResourceNotFoundException".
 	//
-	// The specified AWS resource cannot be found.
+	// The specified Amazon Web Services resource cannot be found.
 	ErrCodeResourceNotFoundException = "ResourceNotFoundException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccountLimitExceededException":  newErrorAccountLimitExceededException,
+	"InvalidInputException":          newErrorInvalidInputException,
+	"OAuthProviderException":         newErrorOAuthProviderException,
+	"ResourceAlreadyExistsException": newErrorResourceAlreadyExistsException,
+	"ResourceNotFoundException":      newErrorResourceNotFoundException,
+}

@@ -7,10 +7,12 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"runtime/debug"
 
-	"github.com/rubenv/sql-migrate"
-	"gopkg.in/gorp.v1"
+	"github.com/go-gorp/gorp/v3"
 	"gopkg.in/yaml.v2"
+
+	migrate "github.com/rubenv/sql-migrate"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
@@ -23,8 +25,10 @@ var dialects = map[string]gorp.Dialect{
 	"mysql":    gorp.MySQLDialect{Engine: "InnoDB", Encoding: "UTF8"},
 }
 
-var ConfigFile string
-var ConfigEnvironment string
+var (
+	ConfigFile        string
+	ConfigEnvironment string
+)
 
 func ConfigFlags(f *flag.FlagSet) {
 	f.StringVar(&ConfigFile, "config", "dbconfig.yml", "Configuration file to use.")
@@ -32,11 +36,12 @@ func ConfigFlags(f *flag.FlagSet) {
 }
 
 type Environment struct {
-	Dialect    string `yaml:"dialect"`
-	DataSource string `yaml:"datasource"`
-	Dir        string `yaml:"dir"`
-	TableName  string `yaml:"table"`
-	SchemaName string `yaml:"schema"`
+	Dialect       string `yaml:"dialect"`
+	DataSource    string `yaml:"datasource"`
+	Dir           string `yaml:"dir"`
+	TableName     string `yaml:"table"`
+	SchemaName    string `yaml:"schema"`
+	IgnoreUnknown bool   `yaml:"ignoreunknown"`
 }
 
 func ReadConfig() (map[string]*Environment, error) {
@@ -86,13 +91,15 @@ func GetEnvironment() (*Environment, error) {
 		migrate.SetSchema(env.SchemaName)
 	}
 
+	migrate.SetIgnoreUnknown(env.IgnoreUnknown)
+
 	return env, nil
 }
 
 func GetConnection(env *Environment) (*sql.DB, string, error) {
 	db, err := sql.Open(env.Dialect, env.DataSource)
 	if err != nil {
-		return nil, "", fmt.Errorf("Cannot connect to database: %s", err)
+		return nil, "", fmt.Errorf("Cannot connect to database: %w", err)
 	}
 
 	// Make sure we only accept dialects that were compiled in.
@@ -102,4 +109,12 @@ func GetConnection(env *Environment) (*sql.DB, string, error) {
 	}
 
 	return db, env.Dialect, nil
+}
+
+// GetVersion returns the version.
+func GetVersion() string {
+	if buildInfo, ok := debug.ReadBuildInfo(); ok && buildInfo.Main.Version != "(devel)" {
+		return buildInfo.Main.Version
+	}
+	return "dev"
 }

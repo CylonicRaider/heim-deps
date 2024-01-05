@@ -118,7 +118,7 @@ func parseClientRPC(v []uint64) (ClientRPC, error) {
 
 func parseV2Stats(v []uint64) (V2Stats, error) {
 	values := int(v[0])
-	if len(v[1:]) != values || values != 18 {
+	if len(v[1:]) != values || values < 18 {
 		return V2Stats{}, fmt.Errorf("invalid V2Stats line %q", v)
 	}
 
@@ -146,7 +146,7 @@ func parseV2Stats(v []uint64) (V2Stats, error) {
 
 func parseV3Stats(v []uint64) (V3Stats, error) {
 	values := int(v[0])
-	if len(v[1:]) != values || values != 22 {
+	if len(v[1:]) != values || values < 22 {
 		return V3Stats{}, fmt.Errorf("invalid V3Stats line %q", v)
 	}
 
@@ -272,45 +272,53 @@ func parseV4Ops(v []uint64) (V4Ops, error) {
 		return V4Ops{}, fmt.Errorf("invalid V4Ops line %q", v)
 	}
 
+	// nfs v2.5.x 39field and >=v2.6.x 40 field;
+	v40 := uint64(0)
+	if values > 39 {
+		v40 = v[40]
+	}
+
 	stats := V4Ops{
-		Op0Unused:    v[1],
-		Op1Unused:    v[2],
-		Op2Future:    v[3],
-		Access:       v[4],
-		Close:        v[5],
-		Commit:       v[6],
-		Create:       v[7],
-		DelegPurge:   v[8],
-		DelegReturn:  v[9],
-		GetAttr:      v[10],
-		GetFH:        v[11],
-		Link:         v[12],
-		Lock:         v[13],
-		Lockt:        v[14],
-		Locku:        v[15],
-		Lookup:       v[16],
-		LookupRoot:   v[17],
-		Nverify:      v[18],
-		Open:         v[19],
-		OpenAttr:     v[20],
-		OpenConfirm:  v[21],
-		OpenDgrd:     v[22],
-		PutFH:        v[23],
-		PutPubFH:     v[24],
-		PutRootFH:    v[25],
-		Read:         v[26],
-		ReadDir:      v[27],
-		ReadLink:     v[28],
-		Remove:       v[29],
-		Rename:       v[30],
-		Renew:        v[31],
-		RestoreFH:    v[32],
-		SaveFH:       v[33],
-		SecInfo:      v[34],
-		SetAttr:      v[35],
-		Verify:       v[36],
-		Write:        v[37],
-		RelLockOwner: v[38],
+		Op0Unused:          v[1],
+		Op1Unused:          v[2],
+		Op2Future:          v[3],
+		Access:             v[4],
+		Close:              v[5],
+		Commit:             v[6],
+		Create:             v[7],
+		DelegPurge:         v[8],
+		DelegReturn:        v[9],
+		GetAttr:            v[10],
+		GetFH:              v[11],
+		Link:               v[12],
+		Lock:               v[13],
+		Lockt:              v[14],
+		Locku:              v[15],
+		Lookup:             v[16],
+		LookupRoot:         v[17],
+		Nverify:            v[18],
+		Open:               v[19],
+		OpenAttr:           v[20],
+		OpenConfirm:        v[21],
+		OpenDgrd:           v[22],
+		PutFH:              v[23],
+		PutPubFH:           v[24],
+		PutRootFH:          v[25],
+		Read:               v[26],
+		ReadDir:            v[27],
+		ReadLink:           v[28],
+		Remove:             v[29],
+		Rename:             v[30],
+		Renew:              v[31],
+		RestoreFH:          v[32],
+		SaveFH:             v[33],
+		SecInfo:            v[34],
+		SetAttr:            v[35],
+		SetClientID:        v[36],
+		SetClientIDConfirm: v[37],
+		Verify:             v[38],
+		Write:              v[39],
+		RelLockOwner:       v40,
 	}
 
 	return stats, nil

@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/rubenv/sql-migrate"
+	migrate "github.com/rubenv/sql-migrate"
 )
 
-type SkipCommand struct {
-}
+type SkipCommand struct{}
 
-func (c *SkipCommand) Help() string {
+func (*SkipCommand) Help() string {
 	helpText := `
 Usage: sql-migrate skip [options] ...
 
@@ -27,13 +26,12 @@ Options:
 	return strings.TrimSpace(helpText)
 }
 
-func (c *SkipCommand) Synopsis() string {
+func (*SkipCommand) Synopsis() string {
 	return "Sets the database level to the most recent version available, without running the migrations"
 }
 
 func (c *SkipCommand) Run(args []string) int {
 	var limit int
-	var dryrun bool
 
 	cmdFlags := flag.NewFlagSet("up", flag.ContinueOnError)
 	cmdFlags.Usage = func() { ui.Output(c.Help()) }
@@ -44,7 +42,7 @@ func (c *SkipCommand) Run(args []string) int {
 		return 1
 	}
 
-	err := SkipMigrations(migrate.Up, dryrun, limit)
+	err := SkipMigrations(migrate.Up, limit)
 	if err != nil {
 		ui.Error(err.Error())
 		return 1
@@ -53,16 +51,17 @@ func (c *SkipCommand) Run(args []string) int {
 	return 0
 }
 
-func SkipMigrations(dir migrate.MigrationDirection, dryrun bool, limit int) error {
+func SkipMigrations(dir migrate.MigrationDirection, limit int) error {
 	env, err := GetEnvironment()
 	if err != nil {
-		return fmt.Errorf("Could not parse config: %s", err)
+		return fmt.Errorf("Could not parse config: %w", err)
 	}
 
 	db, dialect, err := GetConnection(env)
 	if err != nil {
 		return err
 	}
+	defer db.Close()
 
 	source := migrate.FileMigrationSource{
 		Dir: env.Dir,
@@ -70,14 +69,15 @@ func SkipMigrations(dir migrate.MigrationDirection, dryrun bool, limit int) erro
 
 	n, err := migrate.SkipMax(db, dialect, source, dir, limit)
 	if err != nil {
-		return fmt.Errorf("Migration failed: %s", err)
+		return fmt.Errorf("Migration failed: %w", err)
 	}
 
-	ui.Output("Skipped 1 migration")
-
-	if n == 1 {
+	switch n {
+	case 0:
+		ui.Output("All migrations have already been applied")
+	case 1:
 		ui.Output("Skipped 1 migration")
-	} else {
+	default:
 		ui.Output(fmt.Sprintf("Skipped %d migrations", n))
 	}
 

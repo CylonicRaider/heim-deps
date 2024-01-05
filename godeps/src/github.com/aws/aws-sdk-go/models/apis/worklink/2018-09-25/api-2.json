@@ -13,6 +13,44 @@
     "uid":"worklink-2018-09-25"
   },
   "operations":{
+    "AssociateDomain":{
+      "name":"AssociateDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/associateDomain"
+      },
+      "input":{"shape":"AssociateDomainRequest"},
+      "output":{"shape":"AssociateDomainResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "AssociateWebsiteAuthorizationProvider":{
+      "name":"AssociateWebsiteAuthorizationProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/associateWebsiteAuthorizationProvider"
+      },
+      "input":{"shape":"AssociateWebsiteAuthorizationProviderRequest"},
+      "output":{"shape":"AssociateWebsiteAuthorizationProviderResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
     "AssociateWebsiteCertificateAuthority":{
       "name":"AssociateWebsiteCertificateAuthority",
       "http":{
@@ -28,7 +66,9 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceAlreadyExistsException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "CreateFleet":{
       "name":"CreateFleet",
@@ -45,7 +85,9 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceAlreadyExistsException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "DeleteFleet":{
       "name":"DeleteFleet",
@@ -61,7 +103,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "DescribeAuditStreamConfiguration":{
       "name":"DescribeAuditStreamConfiguration",
@@ -77,7 +121,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "DescribeCompanyNetworkConfiguration":{
       "name":"DescribeCompanyNetworkConfiguration",
@@ -93,7 +139,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "DescribeDevice":{
       "name":"DescribeDevice",
@@ -109,7 +157,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "DescribeDevicePolicyConfiguration":{
       "name":"DescribeDevicePolicyConfiguration",
@@ -125,7 +175,27 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "DescribeDomain":{
+      "name":"DescribeDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/describeDomain"
+      },
+      "input":{"shape":"DescribeDomainRequest"},
+      "output":{"shape":"DescribeDomainResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "DescribeFleetMetadata":{
       "name":"DescribeFleetMetadata",
@@ -141,7 +211,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "DescribeIdentityProviderConfiguration":{
       "name":"DescribeIdentityProviderConfiguration",
@@ -157,7 +229,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "DescribeWebsiteCertificateAuthority":{
       "name":"DescribeWebsiteCertificateAuthority",
@@ -173,7 +247,46 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "DisassociateDomain":{
+      "name":"DisassociateDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/disassociateDomain"
+      },
+      "input":{"shape":"DisassociateDomainRequest"},
+      "output":{"shape":"DisassociateDomainResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "DisassociateWebsiteAuthorizationProvider":{
+      "name":"DisassociateWebsiteAuthorizationProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/disassociateWebsiteAuthorizationProvider"
+      },
+      "input":{"shape":"DisassociateWebsiteAuthorizationProviderRequest"},
+      "output":{"shape":"DisassociateWebsiteAuthorizationProviderResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "DisassociateWebsiteCertificateAuthority":{
       "name":"DisassociateWebsiteCertificateAuthority",
@@ -189,7 +302,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "ListDevices":{
       "name":"ListDevices",
@@ -205,7 +320,27 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "ListDomains":{
+      "name":"ListDomains",
+      "http":{
+        "method":"POST",
+        "requestUri":"/listDomains"
+      },
+      "input":{"shape":"ListDomainsRequest"},
+      "output":{"shape":"ListDomainsResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "ListFleets":{
       "name":"ListFleets",
@@ -220,7 +355,41 @@
         {"shape":"InternalServerErrorException"},
         {"shape":"InvalidRequestException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/tags/{ResourceArn}"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "ListWebsiteAuthorizationProviders":{
+      "name":"ListWebsiteAuthorizationProviders",
+      "http":{
+        "method":"POST",
+        "requestUri":"/listWebsiteAuthorizationProviders"
+      },
+      "input":{"shape":"ListWebsiteAuthorizationProvidersRequest"},
+      "output":{"shape":"ListWebsiteAuthorizationProvidersResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "ListWebsiteCertificateAuthorities":{
       "name":"ListWebsiteCertificateAuthorities",
@@ -235,7 +404,45 @@
         {"shape":"InternalServerErrorException"},
         {"shape":"InvalidRequestException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "RestoreDomainAccess":{
+      "name":"RestoreDomainAccess",
+      "http":{
+        "method":"POST",
+        "requestUri":"/restoreDomainAccess"
+      },
+      "input":{"shape":"RestoreDomainAccessRequest"},
+      "output":{"shape":"RestoreDomainAccessResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "RevokeDomainAccess":{
+      "name":"RevokeDomainAccess",
+      "http":{
+        "method":"POST",
+        "requestUri":"/revokeDomainAccess"
+      },
+      "input":{"shape":"RevokeDomainAccessRequest"},
+      "output":{"shape":"RevokeDomainAccessResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "SignOutUser":{
       "name":"SignOutUser",
@@ -251,7 +458,37 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/tags/{ResourceArn}"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/tags/{ResourceArn}"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "UpdateAuditStreamConfiguration":{
       "name":"UpdateAuditStreamConfiguration",
@@ -267,7 +504,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "UpdateCompanyNetworkConfiguration":{
       "name":"UpdateCompanyNetworkConfiguration",
@@ -283,7 +522,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "UpdateDevicePolicyConfiguration":{
       "name":"UpdateDevicePolicyConfiguration",
@@ -299,7 +540,27 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+    },
+    "UpdateDomainMetadata":{
+      "name":"UpdateDomainMetadata",
+      "http":{
+        "method":"POST",
+        "requestUri":"/updateDomainMetadata"
+      },
+      "input":{"shape":"UpdateDomainMetadataRequest"},
+      "output":{"shape":"UpdateDomainMetadataResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "UpdateFleetMetadata":{
       "name":"UpdateFleetMetadata",
@@ -315,7 +576,9 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     },
     "UpdateIdentityProviderConfiguration":{
       "name":"UpdateIdentityProviderConfiguration",
@@ -331,10 +594,53 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
-      ]
+      ],
+      "deprecated":true,
+      "deprecatedMessage":"Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
     }
   },
   "shapes":{
+    "AcmCertificateArn":{
+      "type":"string",
+      "pattern":"arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=/,.@-]+)*"
+    },
+    "AssociateDomainRequest":{
+      "type":"structure",
+      "required":[
+        "FleetArn",
+        "DomainName",
+        "AcmCertificateArn"
+      ],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "DomainName":{"shape":"DomainName"},
+        "DisplayName":{"shape":"DisplayName"},
+        "AcmCertificateArn":{"shape":"AcmCertificateArn"}
+      }
+    },
+    "AssociateDomainResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "AssociateWebsiteAuthorizationProviderRequest":{
+      "type":"structure",
+      "required":[
+        "FleetArn",
+        "AuthorizationProviderType"
+      ],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "AuthorizationProviderType":{"shape":"AuthorizationProviderType"},
+        "DomainName":{"shape":"DomainName"}
+      }
+    },
+    "AssociateWebsiteAuthorizationProviderResponse":{
+      "type":"structure",
+      "members":{
+        "AuthorizationProviderId":{"shape":"Id"}
+      }
+    },
     "AssociateWebsiteCertificateAuthorityRequest":{
       "type":"structure",
       "required":[
@@ -353,7 +659,14 @@
         "WebsiteCaId":{"shape":"Id"}
       }
     },
-    "AuditStreamArn":{"type":"string"},
+    "AuditStreamArn":{
+      "type":"string",
+      "pattern":"^arn:aws:kinesis:.+:[0-9]{12}:stream/AmazonWorkLink-.*$"
+    },
+    "AuthorizationProviderType":{
+      "type":"string",
+      "enum":["SAML"]
+    },
     "Boolean":{"type":"boolean"},
     "Certificate":{
       "type":"string",
@@ -378,7 +691,8 @@
       "members":{
         "FleetName":{"shape":"FleetName"},
         "DisplayName":{"shape":"DisplayName"},
-        "OptimizeForEndUserLocation":{"shape":"Boolean"}
+        "OptimizeForEndUserLocation":{"shape":"Boolean"},
+        "Tags":{"shape":"TagMap"}
       }
     },
     "CreateFleetResponse":{
@@ -466,6 +780,27 @@
         "Username":{"shape":"Username"}
       }
     },
+    "DescribeDomainRequest":{
+      "type":"structure",
+      "required":[
+        "FleetArn",
+        "DomainName"
+      ],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "DomainName":{"shape":"DomainName"}
+      }
+    },
+    "DescribeDomainResponse":{
+      "type":"structure",
+      "members":{
+        "DomainName":{"shape":"DomainName"},
+        "DisplayName":{"shape":"DisplayName"},
+        "CreatedTime":{"shape":"DateTime"},
+        "DomainStatus":{"shape":"DomainStatus"},
+        "AcmCertificateArn":{"shape":"AcmCertificateArn"}
+      }
+    },
     "DescribeFleetMetadataRequest":{
       "type":"structure",
       "required":["FleetArn"],
@@ -482,7 +817,8 @@
         "DisplayName":{"shape":"DisplayName"},
         "OptimizeForEndUserLocation":{"shape":"Boolean"},
         "CompanyCode":{"shape":"CompanyCode"},
-        "FleetStatus":{"shape":"FleetStatus"}
+        "FleetStatus":{"shape":"FleetStatus"},
+        "Tags":{"shape":"TagMap"}
       }
     },
     "DescribeIdentityProviderConfigurationRequest":{
@@ -562,6 +898,38 @@
       "type":"list",
       "member":{"shape":"DeviceSummary"}
     },
+    "DisassociateDomainRequest":{
+      "type":"structure",
+      "required":[
+        "FleetArn",
+        "DomainName"
+      ],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "DomainName":{"shape":"DomainName"}
+      }
+    },
+    "DisassociateDomainResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DisassociateWebsiteAuthorizationProviderRequest":{
+      "type":"structure",
+      "required":[
+        "FleetArn",
+        "AuthorizationProviderId"
+      ],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "AuthorizationProviderId":{"shape":"Id"}
+      }
+    },
+    "DisassociateWebsiteAuthorizationProviderResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DisassociateWebsiteCertificateAuthorityRequest":{
       "type":"structure",
       "required":[
@@ -581,6 +949,43 @@
     "DisplayName":{
       "type":"string",
       "max":100
+    },
+    "DomainName":{
+      "type":"string",
+      "max":253,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\\.)+[a-zA-Z0-9]+$"
+    },
+    "DomainStatus":{
+      "type":"string",
+      "enum":[
+        "PENDING_VALIDATION",
+        "ASSOCIATING",
+        "ACTIVE",
+        "INACTIVE",
+        "DISASSOCIATING",
+        "DISASSOCIATED",
+        "FAILED_TO_ASSOCIATE",
+        "FAILED_TO_DISASSOCIATE"
+      ]
+    },
+    "DomainSummary":{
+      "type":"structure",
+      "required":[
+        "DomainName",
+        "CreatedTime",
+        "DomainStatus"
+      ],
+      "members":{
+        "DomainName":{"shape":"DomainName"},
+        "DisplayName":{"shape":"DisplayName"},
+        "CreatedTime":{"shape":"DateTime"},
+        "DomainStatus":{"shape":"DomainStatus"}
+      }
+    },
+    "DomainSummaryList":{
+      "type":"list",
+      "member":{"shape":"DomainSummary"}
     },
     "ExceptionMessage":{"type":"string"},
     "FleetArn":{
@@ -614,7 +1019,8 @@
         "FleetName":{"shape":"FleetName"},
         "DisplayName":{"shape":"DisplayName"},
         "CompanyCode":{"shape":"CompanyCode"},
-        "FleetStatus":{"shape":"FleetStatus"}
+        "FleetStatus":{"shape":"FleetStatus"},
+        "Tags":{"shape":"TagMap"}
       }
     },
     "FleetSummaryList":{
@@ -662,6 +1068,22 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListDomainsRequest":{
+      "type":"structure",
+      "required":["FleetArn"],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"}
+      }
+    },
+    "ListDomainsResponse":{
+      "type":"structure",
+      "members":{
+        "Domains":{"shape":"DomainSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListFleetsRequest":{
       "type":"structure",
       "members":{
@@ -673,6 +1095,39 @@
       "type":"structure",
       "members":{
         "FleetSummaryList":{"shape":"FleetSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"FleetArn",
+          "location":"uri",
+          "locationName":"ResourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "ListWebsiteAuthorizationProvidersRequest":{
+      "type":"structure",
+      "required":["FleetArn"],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"}
+      }
+    },
+    "ListWebsiteAuthorizationProvidersResponse":{
+      "type":"structure",
+      "members":{
+        "WebsiteAuthorizationProviders":{"shape":"WebsiteAuthorizationProvidersSummaryList"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -718,6 +1173,38 @@
       "error":{"httpStatusCode":404},
       "exception":true
     },
+    "RestoreDomainAccessRequest":{
+      "type":"structure",
+      "required":[
+        "FleetArn",
+        "DomainName"
+      ],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "DomainName":{"shape":"DomainName"}
+      }
+    },
+    "RestoreDomainAccessResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "RevokeDomainAccessRequest":{
+      "type":"structure",
+      "required":[
+        "FleetArn",
+        "DomainName"
+      ],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "DomainName":{"shape":"DomainName"}
+      }
+    },
+    "RevokeDomainAccessResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "SamlMetadata":{
       "type":"string",
       "max":204800,
@@ -729,7 +1216,8 @@
     },
     "SecurityGroupIds":{
       "type":"list",
-      "member":{"shape":"SecurityGroupId"}
+      "member":{"shape":"SecurityGroupId"},
+      "max":5
     },
     "SignOutUserRequest":{
       "type":"structure",
@@ -755,6 +1243,49 @@
       "type":"list",
       "member":{"shape":"SubnetId"}
     },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^(?!aws:)[a-zA-Z+-=._:/]+$"
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"},
+      "max":50,
+      "min":1
+    },
+    "TagMap":{
+      "type":"map",
+      "key":{"shape":"TagKey"},
+      "value":{"shape":"TagValue"},
+      "max":50,
+      "min":1
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "Tags"
+      ],
+      "members":{
+        "ResourceArn":{
+          "shape":"FleetArn",
+          "location":"uri",
+          "locationName":"ResourceArn"
+        },
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256
+    },
     "TooManyRequestsException":{
       "type":"structure",
       "members":{
@@ -770,6 +1301,30 @@
       },
       "error":{"httpStatusCode":403},
       "exception":true
+    },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceArn":{
+          "shape":"FleetArn",
+          "location":"uri",
+          "locationName":"ResourceArn"
+        },
+        "TagKeys":{
+          "shape":"TagKeyList",
+          "location":"querystring",
+          "locationName":"tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "UpdateAuditStreamConfigurationRequest":{
       "type":"structure",
@@ -817,6 +1372,23 @@
       "members":{
       }
     },
+    "UpdateDomainMetadataRequest":{
+      "type":"structure",
+      "required":[
+        "FleetArn",
+        "DomainName"
+      ],
+      "members":{
+        "FleetArn":{"shape":"FleetArn"},
+        "DomainName":{"shape":"DomainName"},
+        "DisplayName":{"shape":"DisplayName"}
+      }
+    },
+    "UpdateDomainMetadataResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "UpdateFleetMetadataRequest":{
       "type":"structure",
       "required":["FleetArn"],
@@ -856,6 +1428,20 @@
     "VpcId":{
       "type":"string",
       "pattern":"^vpc-([0-9a-f]{8}|[0-9a-f]{17})$"
+    },
+    "WebsiteAuthorizationProviderSummary":{
+      "type":"structure",
+      "required":["AuthorizationProviderType"],
+      "members":{
+        "AuthorizationProviderId":{"shape":"Id"},
+        "AuthorizationProviderType":{"shape":"AuthorizationProviderType"},
+        "DomainName":{"shape":"DomainName"},
+        "CreatedTime":{"shape":"DateTime"}
+      }
+    },
+    "WebsiteAuthorizationProvidersSummaryList":{
+      "type":"list",
+      "member":{"shape":"WebsiteAuthorizationProviderSummary"}
     },
     "WebsiteCaSummary":{
       "type":"structure",

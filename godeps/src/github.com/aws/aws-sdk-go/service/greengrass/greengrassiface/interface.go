@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Greengrass.
-//    func myFunc(svc greengrassiface.GreengrassAPI) bool {
-//        // Make svc.AssociateRoleToGroup request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Greengrass.
+//	func myFunc(svc greengrassiface.GreengrassAPI) bool {
+//	    // Make svc.AssociateRoleToGroup request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := greengrass.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := greengrass.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockGreengrassClient struct {
-//        greengrassiface.GreengrassAPI
-//    }
-//    func (m *mockGreengrassClient) AssociateRoleToGroup(input *greengrass.AssociateRoleToGroupInput) (*greengrass.AssociateRoleToGroupOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockGreengrassClient struct {
+//	    greengrassiface.GreengrassAPI
+//	}
+//	func (m *mockGreengrassClient) AssociateRoleToGroup(input *greengrass.AssociateRoleToGroupInput) (*greengrass.AssociateRoleToGroupOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockGreengrassClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockGreengrassClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -276,6 +276,10 @@ type GreengrassAPI interface {
 	GetSubscriptionDefinitionVersionWithContext(aws.Context, *greengrass.GetSubscriptionDefinitionVersionInput, ...request.Option) (*greengrass.GetSubscriptionDefinitionVersionOutput, error)
 	GetSubscriptionDefinitionVersionRequest(*greengrass.GetSubscriptionDefinitionVersionInput) (*request.Request, *greengrass.GetSubscriptionDefinitionVersionOutput)
 
+	GetThingRuntimeConfiguration(*greengrass.GetThingRuntimeConfigurationInput) (*greengrass.GetThingRuntimeConfigurationOutput, error)
+	GetThingRuntimeConfigurationWithContext(aws.Context, *greengrass.GetThingRuntimeConfigurationInput, ...request.Option) (*greengrass.GetThingRuntimeConfigurationOutput, error)
+	GetThingRuntimeConfigurationRequest(*greengrass.GetThingRuntimeConfigurationInput) (*request.Request, *greengrass.GetThingRuntimeConfigurationOutput)
+
 	ListBulkDeploymentDetailedReports(*greengrass.ListBulkDeploymentDetailedReportsInput) (*greengrass.ListBulkDeploymentDetailedReportsOutput, error)
 	ListBulkDeploymentDetailedReportsWithContext(aws.Context, *greengrass.ListBulkDeploymentDetailedReportsInput, ...request.Option) (*greengrass.ListBulkDeploymentDetailedReportsOutput, error)
 	ListBulkDeploymentDetailedReportsRequest(*greengrass.ListBulkDeploymentDetailedReportsInput) (*request.Request, *greengrass.ListBulkDeploymentDetailedReportsOutput)
@@ -356,6 +360,10 @@ type GreengrassAPI interface {
 	ListSubscriptionDefinitionsWithContext(aws.Context, *greengrass.ListSubscriptionDefinitionsInput, ...request.Option) (*greengrass.ListSubscriptionDefinitionsOutput, error)
 	ListSubscriptionDefinitionsRequest(*greengrass.ListSubscriptionDefinitionsInput) (*request.Request, *greengrass.ListSubscriptionDefinitionsOutput)
 
+	ListTagsForResource(*greengrass.ListTagsForResourceInput) (*greengrass.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *greengrass.ListTagsForResourceInput, ...request.Option) (*greengrass.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*greengrass.ListTagsForResourceInput) (*request.Request, *greengrass.ListTagsForResourceOutput)
+
 	ResetDeployments(*greengrass.ResetDeploymentsInput) (*greengrass.ResetDeploymentsOutput, error)
 	ResetDeploymentsWithContext(aws.Context, *greengrass.ResetDeploymentsInput, ...request.Option) (*greengrass.ResetDeploymentsOutput, error)
 	ResetDeploymentsRequest(*greengrass.ResetDeploymentsInput) (*request.Request, *greengrass.ResetDeploymentsOutput)
@@ -367,6 +375,14 @@ type GreengrassAPI interface {
 	StopBulkDeployment(*greengrass.StopBulkDeploymentInput) (*greengrass.StopBulkDeploymentOutput, error)
 	StopBulkDeploymentWithContext(aws.Context, *greengrass.StopBulkDeploymentInput, ...request.Option) (*greengrass.StopBulkDeploymentOutput, error)
 	StopBulkDeploymentRequest(*greengrass.StopBulkDeploymentInput) (*request.Request, *greengrass.StopBulkDeploymentOutput)
+
+	TagResource(*greengrass.TagResourceInput) (*greengrass.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *greengrass.TagResourceInput, ...request.Option) (*greengrass.TagResourceOutput, error)
+	TagResourceRequest(*greengrass.TagResourceInput) (*request.Request, *greengrass.TagResourceOutput)
+
+	UntagResource(*greengrass.UntagResourceInput) (*greengrass.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *greengrass.UntagResourceInput, ...request.Option) (*greengrass.UntagResourceOutput, error)
+	UntagResourceRequest(*greengrass.UntagResourceInput) (*request.Request, *greengrass.UntagResourceOutput)
 
 	UpdateConnectivityInfo(*greengrass.UpdateConnectivityInfoInput) (*greengrass.UpdateConnectivityInfoOutput, error)
 	UpdateConnectivityInfoWithContext(aws.Context, *greengrass.UpdateConnectivityInfoInput, ...request.Option) (*greengrass.UpdateConnectivityInfoOutput, error)
@@ -407,6 +423,10 @@ type GreengrassAPI interface {
 	UpdateSubscriptionDefinition(*greengrass.UpdateSubscriptionDefinitionInput) (*greengrass.UpdateSubscriptionDefinitionOutput, error)
 	UpdateSubscriptionDefinitionWithContext(aws.Context, *greengrass.UpdateSubscriptionDefinitionInput, ...request.Option) (*greengrass.UpdateSubscriptionDefinitionOutput, error)
 	UpdateSubscriptionDefinitionRequest(*greengrass.UpdateSubscriptionDefinitionInput) (*request.Request, *greengrass.UpdateSubscriptionDefinitionOutput)
+
+	UpdateThingRuntimeConfiguration(*greengrass.UpdateThingRuntimeConfigurationInput) (*greengrass.UpdateThingRuntimeConfigurationOutput, error)
+	UpdateThingRuntimeConfigurationWithContext(aws.Context, *greengrass.UpdateThingRuntimeConfigurationInput, ...request.Option) (*greengrass.UpdateThingRuntimeConfigurationOutput, error)
+	UpdateThingRuntimeConfigurationRequest(*greengrass.UpdateThingRuntimeConfigurationInput) (*request.Request, *greengrass.UpdateThingRuntimeConfigurationOutput)
 }
 
 var _ GreengrassAPI = (*greengrass.Greengrass)(nil)

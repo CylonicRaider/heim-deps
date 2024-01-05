@@ -22,10 +22,10 @@ type routeRegexpOptions struct {
 type regexpType int
 
 const (
-	regexpTypePath   regexpType = 0
-	regexpTypeHost   regexpType = 1
-	regexpTypePrefix regexpType = 2
-	regexpTypeQuery  regexpType = 3
+	regexpTypePath regexpType = iota
+	regexpTypeHost
+	regexpTypePrefix
+	regexpTypeQuery
 )
 
 // newRouteRegexp parses a route template and returns a routeRegexp,
@@ -113,6 +113,13 @@ func newRouteRegexp(tpl string, typ regexpType, options routeRegexpOptions) (*ro
 	if typ != regexpTypePrefix {
 		pattern.WriteByte('$')
 	}
+
+	var wildcardHostPort bool
+	if typ == regexpTypeHost {
+		if !strings.Contains(pattern.String(), ":") {
+			wildcardHostPort = true
+		}
+	}
 	reverse.WriteString(raw)
 	if endSlash {
 		reverse.WriteByte('/')
@@ -131,13 +138,14 @@ func newRouteRegexp(tpl string, typ regexpType, options routeRegexpOptions) (*ro
 
 	// Done!
 	return &routeRegexp{
-		template:   template,
-		regexpType: typ,
-		options:    options,
-		regexp:     reg,
-		reverse:    reverse.String(),
-		varsN:      varsN,
-		varsR:      varsR,
+		template:         template,
+		regexpType:       typ,
+		options:          options,
+		regexp:           reg,
+		reverse:          reverse.String(),
+		varsN:            varsN,
+		varsR:            varsR,
+		wildcardHostPort: wildcardHostPort,
 	}, nil
 }
 
@@ -158,22 +166,31 @@ type routeRegexp struct {
 	varsN []string
 	// Variable regexps (validators).
 	varsR []*regexp.Regexp
+	// Wildcard host-port (no strict port match in hostname)
+	wildcardHostPort bool
 }
 
 // Match matches the regexp against the URL host or path.
 func (r *routeRegexp) Match(req *http.Request, match *RouteMatch) bool {
-	if r.regexpType != regexpTypeHost {
-		if r.regexpType == regexpTypeQuery {
-			return r.matchQueryString(req)
+	if r.regexpType == regexpTypeHost {
+		host := getHost(req)
+		if r.wildcardHostPort {
+			// Don't be strict on the port match
+			if i := strings.Index(host, ":"); i != -1 {
+				host = host[:i]
+			}
 		}
-		path := req.URL.Path
-		if r.options.useEncodedPath {
-			path = req.URL.EscapedPath()
-		}
-		return r.regexp.MatchString(path)
+		return r.regexp.MatchString(host)
 	}
 
-	return r.regexp.MatchString(getHost(req))
+	if r.regexpType == regexpTypeQuery {
+		return r.matchQueryString(req)
+	}
+	path := req.URL.Path
+	if r.options.useEncodedPath {
+		path = req.URL.EscapedPath()
+	}
+	return r.regexp.MatchString(path)
 }
 
 // url builds a URL part using the given values.
@@ -213,12 +230,49 @@ func (r *routeRegexp) getURLQuery(req *http.Request) string {
 		return ""
 	}
 	templateKey := strings.SplitN(r.template, "=", 2)[0]
-	for key, vals := range req.URL.Query() {
-		if key == templateKey && len(vals) > 0 {
-			return key + "=" + vals[0]
-		}
+	val, ok := findFirstQueryKey(req.URL.RawQuery, templateKey)
+	if ok {
+		return templateKey + "=" + val
 	}
 	return ""
+}
+
+// findFirstQueryKey returns the same result as (*url.URL).Query()[key][0].
+// If key was not found, empty string and false is returned.
+func findFirstQueryKey(rawQuery, key string) (value string, ok bool) {
+	query := []byte(rawQuery)
+	for len(query) > 0 {
+		foundKey := query
+		if i := bytes.IndexAny(foundKey, "&;"); i >= 0 {
+			foundKey, query = foundKey[:i], foundKey[i+1:]
+		} else {
+			query = query[:0]
+		}
+		if len(foundKey) == 0 {
+			continue
+		}
+		var value []byte
+		if i := bytes.IndexByte(foundKey, '='); i >= 0 {
+			foundKey, value = foundKey[:i], foundKey[i+1:]
+		}
+		if len(foundKey) < len(key) {
+			// Cannot possibly be key.
+			continue
+		}
+		keyString, err := url.QueryUnescape(string(foundKey))
+		if err != nil {
+			continue
+		}
+		if keyString != key {
+			continue
+		}
+		valueString, err := url.QueryUnescape(string(value))
+		if err != nil {
+			continue
+		}
+		return valueString, true
+	}
+	return "", false
 }
 
 func (r *routeRegexp) matchQueryString(req *http.Request) bool {
@@ -270,10 +324,18 @@ type routeRegexpGroup struct {
 func (v routeRegexpGroup) setMatch(req *http.Request, m *RouteMatch, r *Route) {
 	// Store host variables.
 	if v.host != nil {
-		host := getHost(req)
-		matches := v.host.regexp.FindStringSubmatchIndex(host)
-		if len(matches) > 0 {
-			extractVars(host, matches, v.host.varsN, m.Vars)
+		if len(v.host.varsN) > 0 {
+			host := getHost(req)
+			if v.host.wildcardHostPort {
+				// Don't be strict on the port match
+				if i := strings.Index(host, ":"); i != -1 {
+					host = host[:i]
+				}
+			}
+			matches := v.host.regexp.FindStringSubmatchIndex(host)
+			if len(matches) > 0 {
+				m.Vars = extractVars(host, matches, v.host.varsN, m.Vars)
+			}
 		}
 	}
 	path := req.URL.Path
@@ -282,31 +344,36 @@ func (v routeRegexpGroup) setMatch(req *http.Request, m *RouteMatch, r *Route) {
 	}
 	// Store path variables.
 	if v.path != nil {
-		matches := v.path.regexp.FindStringSubmatchIndex(path)
-		if len(matches) > 0 {
-			extractVars(path, matches, v.path.varsN, m.Vars)
-			// Check if we should redirect.
-			if v.path.options.strictSlash {
-				p1 := strings.HasSuffix(path, "/")
-				p2 := strings.HasSuffix(v.path.template, "/")
-				if p1 != p2 {
-					u, _ := url.Parse(req.URL.String())
-					if p1 {
-						u.Path = u.Path[:len(u.Path)-1]
-					} else {
-						u.Path += "/"
-					}
-					m.Handler = http.RedirectHandler(u.String(), http.StatusMovedPermanently)
+		if len(v.path.varsN) > 0 {
+			matches := v.path.regexp.FindStringSubmatchIndex(path)
+			if len(matches) > 0 {
+				m.Vars = extractVars(path, matches, v.path.varsN, m.Vars)
+			}
+		}
+		// Check if we should redirect.
+		if v.path.options.strictSlash {
+			p1 := strings.HasSuffix(path, "/")
+			p2 := strings.HasSuffix(v.path.template, "/")
+			if p1 != p2 {
+				p := req.URL.Path
+				if p1 {
+					p = p[:len(p)-1]
+				} else {
+					p += "/"
 				}
+				u := replaceURLPath(req.URL, p)
+				m.Handler = http.RedirectHandler(u, http.StatusMovedPermanently)
 			}
 		}
 	}
 	// Store query string variables.
 	for _, q := range v.queries {
-		queryURL := q.getURLQuery(req)
-		matches := q.regexp.FindStringSubmatchIndex(queryURL)
-		if len(matches) > 0 {
-			extractVars(queryURL, matches, q.varsN, m.Vars)
+		if len(q.varsN) > 0 {
+			queryURL := q.getURLQuery(req)
+			matches := q.regexp.FindStringSubmatchIndex(queryURL)
+			if len(matches) > 0 {
+				m.Vars = extractVars(queryURL, matches, q.varsN, m.Vars)
+			}
 		}
 	}
 }
@@ -321,8 +388,12 @@ func getHost(r *http.Request) string {
 	return r.Host
 }
 
-func extractVars(input string, matches []int, names []string, output map[string]string) {
+func extractVars(input string, matches []int, names []string, output map[string]string) map[string]string {
 	for i, name := range names {
+		if output == nil {
+			output = make(map[string]string, len(names))
+		}
 		output[name] = input[matches[2*i+2]:matches[2*i+3]]
 	}
+	return output
 }

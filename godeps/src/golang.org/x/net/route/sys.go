@@ -2,15 +2,19 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build darwin dragonfly freebsd netbsd openbsd
+//go:build darwin || dragonfly || freebsd || netbsd || openbsd
 
 package route
 
-import "unsafe"
+import (
+	"syscall"
+	"unsafe"
+)
 
 var (
 	nativeEndian binaryByteOrder
 	kernelAlign  int
+	rtmVersion   byte
 	wireFormats  map[int]*wireFormat
 )
 
@@ -22,6 +26,8 @@ func init() {
 	} else {
 		nativeEndian = bigEndian
 	}
+	// might get overridden in probeRoutingStack
+	rtmVersion = syscall.RTM_VERSION
 	kernelAlign, wireFormats = probeRoutingStack()
 }
 
@@ -29,7 +35,7 @@ func roundup(l int) int {
 	if l == 0 {
 		return kernelAlign
 	}
-	return (l + kernelAlign - 1) & ^(kernelAlign - 1)
+	return (l + kernelAlign - 1) &^ (kernelAlign - 1)
 }
 
 type wireFormat struct {

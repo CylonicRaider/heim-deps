@@ -19,8 +19,8 @@ import (
 )
 
 func TestPSIStats(t *testing.T) {
-	t.Run("fake", func(*testing.T) {
-		stats, err := FS("fixtures").NewPSIStatsForResource("fake")
+	t.Run("fake", func(t *testing.T) {
+		stats, err := getProcFixtures(t).PSIStatsForResource("fake")
 		if err == nil {
 			t.Fatal("fake resource does not have PSI statistics")
 		}
@@ -31,7 +31,7 @@ func TestPSIStats(t *testing.T) {
 	})
 
 	t.Run("cpu", func(t *testing.T) {
-		stats, err := FS("fixtures").NewPSIStatsForResource("cpu")
+		stats, err := getProcFixtures(t).PSIStatsForResource("cpu")
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -68,7 +68,7 @@ func TestPSIStats(t *testing.T) {
 
 	for _, resource := range res {
 		t.Run(resource, func(t *testing.T) {
-			stats, err := FS("fixtures").NewPSIStatsForResource(resource)
+			stats, err := getProcFixtures(t).PSIStatsForResource(resource)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -107,11 +107,11 @@ func TestPSIStats(t *testing.T) {
 	}
 }
 
-// TestParsePSIStats tests the edge cases that we won't run into when running TestPSIStats
+// TestParsePSIStats tests the edge cases that we won't run into when running TestPSIStats.
 func TestParsePSIStats(t *testing.T) {
 	t.Run("unknown measurement type", func(t *testing.T) {
-		raw := "nonesense haha test=fake"
-		_, err := parsePSIStats("fake", strings.NewReader(raw))
+		raw := "nonsense haha test=fake"
+		_, err := parsePSIStats(strings.NewReader(raw))
 		if err != nil {
 			t.Error("unknown measurement type must be ignored")
 		}
@@ -121,7 +121,7 @@ func TestParsePSIStats(t *testing.T) {
 		t.Run("some", func(t *testing.T) {
 			raw := `some avg10=0.10 avg60=2.00 avg300=3.85 total=oops
 full avg10=0.20 avg60=3.00 avg300=teddy total=25`
-			stats, err := parsePSIStats("fake", strings.NewReader(raw))
+			stats, err := parsePSIStats(strings.NewReader(raw))
 			if err == nil {
 				t.Error("a malformed line must result in a parse error")
 			}
@@ -133,7 +133,7 @@ full avg10=0.20 avg60=3.00 avg300=teddy total=25`
 		t.Run("full", func(t *testing.T) {
 			raw := `some avg10=0.10 avg60=2.00 avg300=3.85 total=1
 full avg10=0.20 avg60=3.00 avg300=test total=25`
-			stats, err := parsePSIStats("fake", strings.NewReader(raw))
+			stats, err := parsePSIStats(strings.NewReader(raw))
 			t.Log(err)
 			t.Log(stats)
 			if err == nil {

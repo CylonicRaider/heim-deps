@@ -16,8 +16,8 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"encoding/hex"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io"
@@ -28,29 +28,37 @@ import (
 	"strings"
 	"time"
 
-	"go.etcd.io/etcd/etcdserver/api/snap"
-	"go.etcd.io/etcd/etcdserver/etcdserverpb"
-	"go.etcd.io/etcd/pkg/pbutil"
-	"go.etcd.io/etcd/pkg/types"
-	"go.etcd.io/etcd/raft/raftpb"
-	"go.etcd.io/etcd/wal"
-	"go.etcd.io/etcd/wal/walpb"
-
 	"go.uber.org/zap"
+
+	"go.etcd.io/etcd/api/v3/etcdserverpb"
+	"go.etcd.io/etcd/client/pkg/v3/types"
+	"go.etcd.io/etcd/pkg/v3/pbutil"
+	"go.etcd.io/etcd/server/v3/etcdserver/api/snap"
+	"go.etcd.io/etcd/server/v3/storage/wal"
+	"go.etcd.io/etcd/server/v3/storage/wal/walpb"
+	"go.etcd.io/raft/v3/raftpb"
+)
+
+const (
+	defaultEntryTypes string = "Normal,ConfigChange"
 )
 
 func main() {
 	snapfile := flag.String("start-snap", "", "The base name of snapshot file to start dumping")
+	waldir := flag.String("wal-dir", "", "If set, dumps WAL from the informed path, rather than following the standard 'data_dir/member/wal/' location")
 	index := flag.Uint64("start-index", 0, "The index to start dumping")
-	entrytype := flag.String("entry-type", "", `If set, filters output by entry type. Must be one or more than one of:
-	ConfigChange, Normal, Request, InternalRaftRequest,
-	IRRRange, IRRPut, IRRDeleteRange, IRRTxn,
-	IRRCompaction, IRRLeaseGrant, IRRLeaseRevoke, IRRLeaseCheckpoint`)
+	// Default entry types are Normal and ConfigChange
+	entrytype := flag.String("entry-type", defaultEntryTypes, `If set, filters output by entry type. Must be one or more than one of:
+ConfigChange, Normal, Request, InternalRaftRequest,
+IRRRange, IRRPut, IRRDeleteRange, IRRTxn,
+IRRCompaction, IRRLeaseGrant, IRRLeaseRevoke, IRRLeaseCheckpoint`)
 	streamdecoder := flag.String("stream-decoder", "", `The name of an executable decoding tool, the executable must process
-	hex encoded lines of binary input (from etcd-dump-logs)
-	and output a hex encoded line of binary for each input line`)
+hex encoded lines of binary input (from etcd-dump-logs)
+and output a hex encoded line of binary for each input line`)
+	raw := flag.Bool("raw", false, "Read the logs in the low-level form")
 
 	flag.Parse()
+	lg := zap.NewExample()
 
 	if len(flag.Args()) != 1 {
 		log.Fatalf("Must provide data-dir argument (got %+v)", flag.Args())
@@ -61,6 +69,37 @@ func main() {
 		log.Fatal("start-snap and start-index flags cannot be used together.")
 	}
 
+	if !*raw {
+		ents := readUsingReadAll(lg, index, snapfile, dataDir, waldir)
+
+		fmt.Printf("WAL entries: %d\n", len(ents))
+		if len(ents) > 0 {
+			fmt.Printf("lastIndex=%d\n", ents[len(ents)-1].Index)
+		}
+
+		fmt.Printf("%4s\t%10s\ttype\tdata", "term", "index")
+		if *streamdecoder != "" {
+			fmt.Print("\tdecoder_status\tdecoded_data")
+		}
+		fmt.Println()
+
+		listEntriesType(*entrytype, *streamdecoder, ents)
+	} else {
+		if *snapfile != "" ||
+			*entrytype != defaultEntryTypes ||
+			*streamdecoder != "" {
+			log.Fatalf("Flags --entry-type, --stream-decoder, --entrytype not supported in the RAW mode.")
+		}
+
+		wd := *waldir
+		if wd == "" {
+			wd = walDir(dataDir)
+		}
+		readRaw(index, wd, os.Stdout)
+	}
+}
+
+func readUsingReadAll(lg *zap.Logger, index *uint64, snapfile *string, dataDir string, waldir *string) []raftpb.Entry {
 	var (
 		walsnap  walpb.Snapshot
 		snapshot *raftpb.Snapshot
@@ -74,27 +113,37 @@ func main() {
 		walsnap.Index = *index
 	} else {
 		if *snapfile == "" {
-			ss := snap.New(zap.NewExample(), snapDir(dataDir))
+			ss := snap.New(lg, snapDir(dataDir))
 			snapshot, err = ss.Load()
 		} else {
-			snapshot, err = snap.Read(zap.NewExample(), filepath.Join(snapDir(dataDir), *snapfile))
+			snapshot, err = snap.Read(lg, filepath.Join(snapDir(dataDir), *snapfile))
 		}
 
 		switch err {
 		case nil:
 			walsnap.Index, walsnap.Term = snapshot.Metadata.Index, snapshot.Metadata.Term
-			nodes := genIDSlice(snapshot.Metadata.ConfState.Nodes)
-			fmt.Printf("Snapshot:\nterm=%d index=%d nodes=%s\n",
-				walsnap.Term, walsnap.Index, nodes)
+			nodes := genIDSlice(snapshot.Metadata.ConfState.Voters)
+
+			confStateJSON, merr := json.Marshal(snapshot.Metadata.ConfState)
+			if merr != nil {
+				confStateJSON = []byte(fmt.Sprintf("confstate err: %v", merr))
+			}
+			fmt.Printf("Snapshot:\nterm=%d index=%d nodes=%s confstate=%s\n",
+				walsnap.Term, walsnap.Index, nodes, confStateJSON)
 		case snap.ErrNoSnapshot:
-			fmt.Printf("Snapshot:\nempty\n")
+			fmt.Print("Snapshot:\nempty\n")
 		default:
 			log.Fatalf("Failed loading snapshot: %v", err)
 		}
-		fmt.Println("Start dupmping log entries from snapshot.")
+		fmt.Println("Start dumping log entries from snapshot.")
 	}
 
-	w, err := wal.OpenForRead(zap.NewExample(), walDir(dataDir), walsnap)
+	wd := *waldir
+	if wd == "" {
+		wd = walDir(dataDir)
+	}
+
+	w, err := wal.OpenForRead(zap.NewExample(), wd, walsnap)
 	if err != nil {
 		log.Fatalf("Failed opening WAL: %v", err)
 	}
@@ -107,17 +156,7 @@ func main() {
 	vid := types.ID(state.Vote)
 	fmt.Printf("WAL metadata:\nnodeID=%s clusterID=%s term=%d commitIndex=%d vote=%s\n",
 		id, cid, state.Term, state.Commit, vid)
-
-	fmt.Printf("WAL entries:\n")
-	fmt.Printf("lastIndex=%d\n", ents[len(ents)-1].Index)
-
-	fmt.Printf("%4s\t%10s\ttype\tdata", "term", "index")
-	if *streamdecoder != "" {
-		fmt.Printf("\tdecoder_status\tdecoded_data")
-	}
-	fmt.Println()
-
-	listEntriesType(*entrytype, *streamdecoder, ents)
+	return ents
 }
 
 func walDir(dataDir string) string { return filepath.Join(dataDir, "member", "wal") }
@@ -223,6 +262,10 @@ type EntryPrinter func(e raftpb.Entry)
 func printInternalRaftRequest(entry raftpb.Entry) {
 	var rr etcdserverpb.InternalRaftRequest
 	if err := rr.Unmarshal(entry.Data); err == nil {
+		// Ensure we don't log user password
+		if rr.AuthUserChangePassword != nil && rr.AuthUserChangePassword.Password != "" {
+			rr.AuthUserChangePassword.Password = "<value removed>"
+		}
 		fmt.Printf("%4d\t%10d\tnorm\t%s", entry.Term, entry.Index, rr.String())
 	}
 }
@@ -233,10 +276,10 @@ func printUnknownNormal(entry raftpb.Entry) {
 
 func printConfChange(entry raftpb.Entry) {
 	fmt.Printf("%4d\t%10d", entry.Term, entry.Index)
-	fmt.Printf("\tconf")
+	fmt.Print("\tconf")
 	var r raftpb.ConfChange
 	if err := r.Unmarshal(entry.Data); err != nil {
-		fmt.Printf("\t???")
+		fmt.Print("\t???")
 	} else {
 		fmt.Printf("\tmethod=%s id=%s", r.Type, types.ID(r.NodeID))
 	}
@@ -248,9 +291,9 @@ func printRequest(entry raftpb.Entry) {
 		fmt.Printf("%4d\t%10d\tnorm", entry.Term, entry.Index)
 		switch r.Method {
 		case "":
-			fmt.Printf("\tnoop")
+			fmt.Print("\tnoop")
 		case "SYNC":
-			fmt.Printf("\tmethod=SYNC time=%q", time.Unix(0, r.Time))
+			fmt.Printf("\tmethod=SYNC time=%q", time.Unix(0, r.Time).UTC())
 		case "QGET", "DELETE":
 			fmt.Printf("\tmethod=%s path=%s", r.Method, excerpt(r.Path, 64, 64))
 		default:
@@ -280,12 +323,6 @@ func evaluateEntrytypeFlag(entrytype string) []EntryFilter {
 		"IRRLeaseCheckpoint":  {passIRRLeaseCheckpoint},
 	}
 	filters := make([]EntryFilter, 0)
-	if len(entrytypelist) == 0 {
-		filters = append(filters, passInternalRaftRequest)
-		filters = append(filters, passRequest)
-		filters = append(filters, passUnknownNormal)
-		filters = append(filters, passConfChange)
-	}
 	for _, et := range entrytypelist {
 		if f, ok := validRequest[et]; ok {
 			filters = append(filters, f...)
@@ -301,14 +338,14 @@ IRRCompaction, IRRLeaseGrant, IRRLeaseRevoke, IRRLeaseCheckpoint`, et)
 	return filters
 }
 
-//  listEntriesType filters and prints entries based on the entry-type flag,
+// listEntriesType filters and prints entries based on the entry-type flag,
 func listEntriesType(entrytype string, streamdecoder string, ents []raftpb.Entry) {
 	entryFilters := evaluateEntrytypeFlag(entrytype)
 	printerMap := map[string]EntryPrinter{"InternalRaftRequest": printInternalRaftRequest,
 		"Request":       printRequest,
 		"ConfigChange":  printConfChange,
 		"UnknownNormal": printUnknownNormal}
-	var stderr bytes.Buffer
+	var stderr strings.Builder
 	args := strings.Split(streamdecoder, " ")
 	cmd := exec.Command(args[0], args[1:]...)
 	stdin, err := cmd.StdinPipe()
@@ -357,9 +394,9 @@ func listEntriesType(entrytype string, streamdecoder string, ents []raftpb.Entry
 				return
 			}
 
-			decoder_status, decoded_data := parseDecoderOutput(decoderoutput)
+			decoderStatus, decodedData := parseDecoderOutput(decoderoutput)
 
-			fmt.Printf("\t%s\t%s", decoder_status, decoded_data)
+			fmt.Printf("\t%s\t%s", decoderStatus, decodedData)
 		}
 	}
 
@@ -374,23 +411,23 @@ func listEntriesType(entrytype string, streamdecoder string, ents []raftpb.Entry
 		}
 	}
 
-	fmt.Printf("\nEntry types (%s) count is : %d", entrytype, cnt)
+	fmt.Printf("\nEntry types (%s) count is : %d\n", entrytype, cnt)
 }
 
 func parseDecoderOutput(decoderoutput string) (string, string) {
-	var decoder_status string
-	var decoded_data string
+	var decoderStatus string
+	var decodedData string
 	output := strings.Split(decoderoutput, "|")
 	switch len(output) {
 	case 1:
-		decoder_status = "decoder output format is not right, print output anyway"
-		decoded_data = decoderoutput
+		decoderStatus = "decoder output format is not right, print output anyway"
+		decodedData = decoderoutput
 	case 2:
-		decoder_status = output[0]
-		decoded_data = output[1]
+		decoderStatus = output[0]
+		decodedData = output[1]
 	default:
-		decoder_status = output[0] + "(*WARNING: data might contain deliminator used by etcd-dump-logs)"
-		decoded_data = strings.Join(output[1:], "")
+		decoderStatus = output[0] + "(*WARNING: data might contain deliminator used by etcd-dump-logs)"
+		decodedData = strings.Join(output[1:], "")
 	}
-	return decoder_status, decoded_data
+	return decoderStatus, decodedData
 }

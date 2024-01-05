@@ -3,13 +3,198 @@
 package lexruntimeservice
 
 import (
+	"fmt"
 	"io"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/aws/signer/v4"
+	"github.com/aws/aws-sdk-go/private/protocol"
 )
+
+const opDeleteSession = "DeleteSession"
+
+// DeleteSessionRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteSession operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteSession for more information on using the DeleteSession
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteSessionRequest method.
+//	req, resp := client.DeleteSessionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DeleteSession
+func (c *LexRuntimeService) DeleteSessionRequest(input *DeleteSessionInput) (req *request.Request, output *DeleteSessionOutput) {
+	op := &request.Operation{
+		Name:       opDeleteSession,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
+	}
+
+	if input == nil {
+		input = &DeleteSessionInput{}
+	}
+
+	output = &DeleteSessionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DeleteSession API operation for Amazon Lex Runtime Service.
+//
+// Removes session information for a specified bot, alias, and user ID.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Lex Runtime Service's
+// API operation DeleteSession for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource (such as the Amazon Lex bot or an alias) that is referred to
+//     is not found.
+//
+//   - BadRequestException
+//     Request validation failed, there is no usable message in the context, or
+//     the bot build failed, is still in progress, or contains unbuilt changes.
+//
+//   - LimitExceededException
+//     Exceeded a limit.
+//
+//   - InternalFailureException
+//     Internal service error. Retry the call.
+//
+//   - ConflictException
+//     Two clients are using the same AWS account, Amazon Lex bot, and user ID.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DeleteSession
+func (c *LexRuntimeService) DeleteSession(input *DeleteSessionInput) (*DeleteSessionOutput, error) {
+	req, out := c.DeleteSessionRequest(input)
+	return out, req.Send()
+}
+
+// DeleteSessionWithContext is the same as DeleteSession with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteSession for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *LexRuntimeService) DeleteSessionWithContext(ctx aws.Context, input *DeleteSessionInput, opts ...request.Option) (*DeleteSessionOutput, error) {
+	req, out := c.DeleteSessionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetSession = "GetSession"
+
+// GetSessionRequest generates a "aws/request.Request" representing the
+// client's request for the GetSession operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetSession for more information on using the GetSession
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetSessionRequest method.
+//	req, resp := client.GetSessionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSession
+func (c *LexRuntimeService) GetSessionRequest(input *GetSessionInput) (req *request.Request, output *GetSessionOutput) {
+	op := &request.Operation{
+		Name:       opGetSession,
+		HTTPMethod: "GET",
+		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session/",
+	}
+
+	if input == nil {
+		input = &GetSessionInput{}
+	}
+
+	output = &GetSessionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetSession API operation for Amazon Lex Runtime Service.
+//
+// Returns session information for a specified bot, alias, and user ID.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Lex Runtime Service's
+// API operation GetSession for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource (such as the Amazon Lex bot or an alias) that is referred to
+//     is not found.
+//
+//   - BadRequestException
+//     Request validation failed, there is no usable message in the context, or
+//     the bot build failed, is still in progress, or contains unbuilt changes.
+//
+//   - LimitExceededException
+//     Exceeded a limit.
+//
+//   - InternalFailureException
+//     Internal service error. Retry the call.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSession
+func (c *LexRuntimeService) GetSession(input *GetSessionInput) (*GetSessionOutput, error) {
+	req, out := c.GetSessionRequest(input)
+	return out, req.Send()
+}
+
+// GetSessionWithContext is the same as GetSession with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetSession for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *LexRuntimeService) GetSessionWithContext(ctx aws.Context, input *GetSessionInput, opts ...request.Option) (*GetSessionOutput, error) {
+	req, out := c.GetSessionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
 
 const opPostContent = "PostContent"
 
@@ -27,14 +212,13 @@ const opPostContent = "PostContent"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PostContentRequest method.
+//	req, resp := client.PostContentRequest(params)
 //
-//    // Example sending a request using the PostContentRequest method.
-//    req, resp := client.PostContentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContent
 func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) (req *request.Request, output *PostContentOutput) {
@@ -69,17 +253,17 @@ func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) (req *re
 // In response, Amazon Lex returns the next message to convey to the user. Consider
 // the following example messages:
 //
-//    *  For a user input "I would like a pizza," Amazon Lex might return a
-//    response with a message eliciting slot data (for example, PizzaSize):
-//    "What size pizza would you like?".
+//   - For a user input "I would like a pizza," Amazon Lex might return a response
+//     with a message eliciting slot data (for example, PizzaSize): "What size
+//     pizza would you like?".
 //
-//    *  After the user provides all of the pizza order information, Amazon
-//    Lex might return a response with a message to get user confirmation: "Order
-//    the pizza?".
+//   - After the user provides all of the pizza order information, Amazon Lex
+//     might return a response with a message to get user confirmation: "Order
+//     the pizza?".
 //
-//    *  After the user replies "Yes" to the confirmation prompt, Amazon Lex
-//    might return a conclusion statement: "Thank you, your cheese pizza has
-//    been ordered.".
+//   - After the user replies "Yes" to the confirmation prompt, Amazon Lex
+//     might return a conclusion statement: "Thank you, your cheese pizza has
+//     been ordered.".
 //
 // Not all Amazon Lex messages require a response from the user. For example,
 // conclusion statements do not require a response. Some messages require only
@@ -88,31 +272,23 @@ func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) (req *re
 // behavior, such as displaying the appropriate client user interface. Consider
 // the following examples:
 //
-//    *  If the message is to elicit slot data, Amazon Lex returns the following
-//    context information:
+//   - If the message is to elicit slot data, Amazon Lex returns the following
+//     context information: x-amz-lex-dialog-state header set to ElicitSlot x-amz-lex-intent-name
+//     header set to the intent name in the current context x-amz-lex-slot-to-elicit
+//     header set to the slot name for which the message is eliciting information
+//     x-amz-lex-slots header set to a map of slots configured for the intent
+//     with their current values
 //
-// x-amz-lex-dialog-state header set to ElicitSlot
+//   - If the message is a confirmation prompt, the x-amz-lex-dialog-state
+//     header is set to Confirmation and the x-amz-lex-slot-to-elicit header
+//     is omitted.
 //
-// x-amz-lex-intent-name header set to the intent name in the current context
-//
-//
-// x-amz-lex-slot-to-elicit header set to the slot name for which the message
-//    is eliciting information
-//
-// x-amz-lex-slots header set to a map of slots configured for the intent with
-//    their current values
-//
-//    *  If the message is a confirmation prompt, the x-amz-lex-dialog-state
-//    header is set to Confirmation and the x-amz-lex-slot-to-elicit header
-//    is omitted.
-//
-//    *  If the message is a clarification prompt configured for the intent,
-//    indicating that the user intent is not understood, the x-amz-dialog-state
-//    header is set to ElicitIntent and the x-amz-slot-to-elicit header is omitted.
-//
+//   - If the message is a clarification prompt configured for the intent,
+//     indicating that the user intent is not understood, the x-amz-dialog-state
+//     header is set to ElicitIntent and the x-amz-slot-to-elicit header is omitted.
 //
 // In addition, Amazon Lex also returns your application-specific sessionAttributes.
-// For more information, see Managing Conversation Context (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
+// For more information, see Managing Conversation Context (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -121,51 +297,52 @@ func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) (req *re
 // See the AWS API reference guide for Amazon Lex Runtime Service's
 // API operation PostContent for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource (such as the Amazon Lex bot or an alias) that is referred to
-//   is not found.
+// Returned Error Types:
 //
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Request validation failed, there is no usable message in the context, or
-//   the bot build failed, is still in progress, or contains unbuilt changes.
+//   - NotFoundException
+//     The resource (such as the Amazon Lex bot or an alias) that is referred to
+//     is not found.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Exceeded a limit.
+//   - BadRequestException
+//     Request validation failed, there is no usable message in the context, or
+//     the bot build failed, is still in progress, or contains unbuilt changes.
 //
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   Internal service error. Retry the call.
+//   - LimitExceededException
+//     Exceeded a limit.
 //
-//   * ErrCodeConflictException "ConflictException"
-//   Two clients are using the same AWS account, Amazon Lex bot, and user ID.
+//   - InternalFailureException
+//     Internal service error. Retry the call.
 //
-//   * ErrCodeUnsupportedMediaTypeException "UnsupportedMediaTypeException"
-//   The Content-Type header (PostContent API) has an invalid value.
+//   - ConflictException
+//     Two clients are using the same AWS account, Amazon Lex bot, and user ID.
 //
-//   * ErrCodeNotAcceptableException "NotAcceptableException"
-//   The accept header in the request does not have a valid value.
+//   - UnsupportedMediaTypeException
+//     The Content-Type header (PostContent API) has an invalid value.
 //
-//   * ErrCodeRequestTimeoutException "RequestTimeoutException"
-//   The input speech is too long.
+//   - NotAcceptableException
+//     The accept header in the request does not have a valid value.
 //
-//   * ErrCodeDependencyFailedException "DependencyFailedException"
-//   One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
-//   For example,
+//   - RequestTimeoutException
+//     The input speech is too long.
 //
-//      * If Amazon Lex does not have sufficient permissions to call a Lambda
-//      function.
+//   - DependencyFailedException
+//     One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
+//     For example,
 //
-//      * If a Lambda function takes longer than 30 seconds to execute.
+//   - If Amazon Lex does not have sufficient permissions to call a Lambda
+//     function.
 //
-//      * If a fulfillment Lambda function returns a Delegate dialog action without
-//      removing any slot values.
+//   - If a Lambda function takes longer than 30 seconds to execute.
 //
-//   * ErrCodeBadGatewayException "BadGatewayException"
-//   Either the Amazon Lex bot is still building, or one of the dependent services
-//   (Amazon Polly, AWS Lambda) failed with an internal service error.
+//   - If a fulfillment Lambda function returns a Delegate dialog action without
+//     removing any slot values.
 //
-//   * ErrCodeLoopDetectedException "LoopDetectedException"
-//   This exception is not used.
+//   - BadGatewayException
+//     Either the Amazon Lex bot is still building, or one of the dependent services
+//     (Amazon Polly, AWS Lambda) failed with an internal service error.
+//
+//   - LoopDetectedException
+//     This exception is not used.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContent
 func (c *LexRuntimeService) PostContent(input *PostContentInput) (*PostContentOutput, error) {
@@ -205,14 +382,13 @@ const opPostText = "PostText"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PostTextRequest method.
+//	req, resp := client.PostTextRequest(params)
 //
-//    // Example sending a request using the PostTextRequest method.
-//    req, resp := client.PostTextRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostText
 func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) (req *request.Request, output *PostTextOutput) {
@@ -233,24 +409,24 @@ func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) (req *request.
 
 // PostText API operation for Amazon Lex Runtime Service.
 //
-// Sends user input (text-only) to Amazon Lex. Client applications can use this
-// API to send requests to Amazon Lex at runtime. Amazon Lex then interprets
-// the user input using the machine learning model it built for the bot.
+// Sends user input to Amazon Lex. Client applications can use this API to send
+// requests to Amazon Lex at runtime. Amazon Lex then interprets the user input
+// using the machine learning model it built for the bot.
 //
 // In response, Amazon Lex returns the next message to convey to the user an
 // optional responseCard to display. Consider the following example messages:
 //
-//    *  For a user input "I would like a pizza", Amazon Lex might return a
-//    response with a message eliciting slot data (for example, PizzaSize):
-//    "What size pizza would you like?"
+//   - For a user input "I would like a pizza", Amazon Lex might return a response
+//     with a message eliciting slot data (for example, PizzaSize): "What size
+//     pizza would you like?"
 //
-//    *  After the user provides all of the pizza order information, Amazon
-//    Lex might return a response with a message to obtain user confirmation
-//    "Proceed with the pizza order?".
+//   - After the user provides all of the pizza order information, Amazon Lex
+//     might return a response with a message to obtain user confirmation "Proceed
+//     with the pizza order?".
 //
-//    *  After the user replies to a confirmation prompt with a "yes", Amazon
-//    Lex might return a conclusion statement: "Thank you, your cheese pizza
-//    has been ordered.".
+//   - After the user replies to a confirmation prompt with a "yes", Amazon
+//     Lex might return a conclusion statement: "Thank you, your cheese pizza
+//     has been ordered.".
 //
 // Not all Amazon Lex messages require a user response. For example, a conclusion
 // statement does not require a response. Some messages require only a "yes"
@@ -260,28 +436,21 @@ func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) (req *request.
 // These are the slotToElicit, dialogState, intentName, and slots fields in
 // the response. Consider the following examples:
 //
-//    * If the message is to elicit slot data, Amazon Lex returns the following
-//    context information:
+//   - If the message is to elicit slot data, Amazon Lex returns the following
+//     context information: dialogState set to ElicitSlot intentName set to the
+//     intent name in the current context slotToElicit set to the slot name for
+//     which the message is eliciting information slots set to a map of slots,
+//     configured for the intent, with currently known values
 //
-// dialogState set to ElicitSlot
+//   - If the message is a confirmation prompt, the dialogState is set to ConfirmIntent
+//     and SlotToElicit is set to null.
 //
-// intentName set to the intent name in the current context
-//
-// slotToElicit set to the slot name for which the message is eliciting information
-//
-//
-// slots set to a map of slots, configured for the intent, with currently known
-//    values
-//
-//    *  If the message is a confirmation prompt, the dialogState is set to
-//    ConfirmIntent and SlotToElicit is set to null.
-//
-//    * If the message is a clarification prompt (configured for the intent)
-//    that indicates that user intent is not understood, the dialogState is
-//    set to ElicitIntent and slotToElicit is set to null.
+//   - If the message is a clarification prompt (configured for the intent)
+//     that indicates that user intent is not understood, the dialogState is
+//     set to ElicitIntent and slotToElicit is set to null.
 //
 // In addition, Amazon Lex also returns your application-specific sessionAttributes.
-// For more information, see Managing Conversation Context (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
+// For more information, see Managing Conversation Context (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -290,42 +459,43 @@ func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) (req *request.
 // See the AWS API reference guide for Amazon Lex Runtime Service's
 // API operation PostText for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource (such as the Amazon Lex bot or an alias) that is referred to
-//   is not found.
+// Returned Error Types:
 //
-//   * ErrCodeBadRequestException "BadRequestException"
-//   Request validation failed, there is no usable message in the context, or
-//   the bot build failed, is still in progress, or contains unbuilt changes.
+//   - NotFoundException
+//     The resource (such as the Amazon Lex bot or an alias) that is referred to
+//     is not found.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Exceeded a limit.
+//   - BadRequestException
+//     Request validation failed, there is no usable message in the context, or
+//     the bot build failed, is still in progress, or contains unbuilt changes.
 //
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   Internal service error. Retry the call.
+//   - LimitExceededException
+//     Exceeded a limit.
 //
-//   * ErrCodeConflictException "ConflictException"
-//   Two clients are using the same AWS account, Amazon Lex bot, and user ID.
+//   - InternalFailureException
+//     Internal service error. Retry the call.
 //
-//   * ErrCodeDependencyFailedException "DependencyFailedException"
-//   One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
-//   For example,
+//   - ConflictException
+//     Two clients are using the same AWS account, Amazon Lex bot, and user ID.
 //
-//      * If Amazon Lex does not have sufficient permissions to call a Lambda
-//      function.
+//   - DependencyFailedException
+//     One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
+//     For example,
 //
-//      * If a Lambda function takes longer than 30 seconds to execute.
+//   - If Amazon Lex does not have sufficient permissions to call a Lambda
+//     function.
 //
-//      * If a fulfillment Lambda function returns a Delegate dialog action without
-//      removing any slot values.
+//   - If a Lambda function takes longer than 30 seconds to execute.
 //
-//   * ErrCodeBadGatewayException "BadGatewayException"
-//   Either the Amazon Lex bot is still building, or one of the dependent services
-//   (Amazon Polly, AWS Lambda) failed with an internal service error.
+//   - If a fulfillment Lambda function returns a Delegate dialog action without
+//     removing any slot values.
 //
-//   * ErrCodeLoopDetectedException "LoopDetectedException"
-//   This exception is not used.
+//   - BadGatewayException
+//     Either the Amazon Lex bot is still building, or one of the dependent services
+//     (Amazon Polly, AWS Lambda) failed with an internal service error.
+//
+//   - LoopDetectedException
+//     This exception is not used.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostText
 func (c *LexRuntimeService) PostText(input *PostTextInput) (*PostTextOutput, error) {
@@ -349,6 +519,400 @@ func (c *LexRuntimeService) PostTextWithContext(ctx aws.Context, input *PostText
 	return out, req.Send()
 }
 
+const opPutSession = "PutSession"
+
+// PutSessionRequest generates a "aws/request.Request" representing the
+// client's request for the PutSession operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See PutSession for more information on using the PutSession
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the PutSessionRequest method.
+//	req, resp := client.PutSessionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PutSession
+func (c *LexRuntimeService) PutSessionRequest(input *PutSessionInput) (req *request.Request, output *PutSessionOutput) {
+	op := &request.Operation{
+		Name:       opPutSession,
+		HTTPMethod: "POST",
+		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
+	}
+
+	if input == nil {
+		input = &PutSessionInput{}
+	}
+
+	output = &PutSessionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// PutSession API operation for Amazon Lex Runtime Service.
+//
+// Creates a new session or modifies an existing session with an Amazon Lex
+// bot. Use this operation to enable your application to set the state of the
+// bot.
+//
+// For more information, see Managing Sessions (https://docs.aws.amazon.com/lex/latest/dg/how-session-api.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Lex Runtime Service's
+// API operation PutSession for usage and error information.
+//
+// Returned Error Types:
+//
+//   - NotFoundException
+//     The resource (such as the Amazon Lex bot or an alias) that is referred to
+//     is not found.
+//
+//   - BadRequestException
+//     Request validation failed, there is no usable message in the context, or
+//     the bot build failed, is still in progress, or contains unbuilt changes.
+//
+//   - LimitExceededException
+//     Exceeded a limit.
+//
+//   - InternalFailureException
+//     Internal service error. Retry the call.
+//
+//   - ConflictException
+//     Two clients are using the same AWS account, Amazon Lex bot, and user ID.
+//
+//   - NotAcceptableException
+//     The accept header in the request does not have a valid value.
+//
+//   - DependencyFailedException
+//     One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
+//     For example,
+//
+//   - If Amazon Lex does not have sufficient permissions to call a Lambda
+//     function.
+//
+//   - If a Lambda function takes longer than 30 seconds to execute.
+//
+//   - If a fulfillment Lambda function returns a Delegate dialog action without
+//     removing any slot values.
+//
+//   - BadGatewayException
+//     Either the Amazon Lex bot is still building, or one of the dependent services
+//     (Amazon Polly, AWS Lambda) failed with an internal service error.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PutSession
+func (c *LexRuntimeService) PutSession(input *PutSessionInput) (*PutSessionOutput, error) {
+	req, out := c.PutSessionRequest(input)
+	return out, req.Send()
+}
+
+// PutSessionWithContext is the same as PutSession with the addition of
+// the ability to pass a context and additional request options.
+//
+// See PutSession for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *LexRuntimeService) PutSessionWithContext(ctx aws.Context, input *PutSessionInput, opts ...request.Option) (*PutSessionOutput, error) {
+	req, out := c.PutSessionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// A context is a variable that contains information about the current state
+// of the conversation between a user and Amazon Lex. Context can be set automatically
+// by Amazon Lex when an intent is fulfilled, or it can be set at runtime using
+// the PutContent, PutText, or PutSession operation.
+type ActiveContext struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the context.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// State variables for the current context. You can use these values as default
+	// values for slots in subsequent events.
+	//
+	// Parameters is a required field
+	Parameters map[string]*string `locationName:"parameters" type:"map" required:"true"`
+
+	// The length of time or number of turns that a context remains active.
+	//
+	// TimeToLive is a required field
+	TimeToLive *ActiveContextTimeToLive `locationName:"timeToLive" type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActiveContext) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActiveContext) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ActiveContext) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ActiveContext"}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.Parameters == nil {
+		invalidParams.Add(request.NewErrParamRequired("Parameters"))
+	}
+	if s.TimeToLive == nil {
+		invalidParams.Add(request.NewErrParamRequired("TimeToLive"))
+	}
+	if s.TimeToLive != nil {
+		if err := s.TimeToLive.Validate(); err != nil {
+			invalidParams.AddNested("TimeToLive", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetName sets the Name field's value.
+func (s *ActiveContext) SetName(v string) *ActiveContext {
+	s.Name = &v
+	return s
+}
+
+// SetParameters sets the Parameters field's value.
+func (s *ActiveContext) SetParameters(v map[string]*string) *ActiveContext {
+	s.Parameters = v
+	return s
+}
+
+// SetTimeToLive sets the TimeToLive field's value.
+func (s *ActiveContext) SetTimeToLive(v *ActiveContextTimeToLive) *ActiveContext {
+	s.TimeToLive = v
+	return s
+}
+
+// The length of time or number of turns that a context remains active.
+type ActiveContextTimeToLive struct {
+	_ struct{} `type:"structure"`
+
+	// The number of seconds that the context should be active after it is first
+	// sent in a PostContent or PostText response. You can set the value between
+	// 5 and 86,400 seconds (24 hours).
+	TimeToLiveInSeconds *int64 `locationName:"timeToLiveInSeconds" min:"5" type:"integer"`
+
+	// The number of conversation turns that the context should be active. A conversation
+	// turn is one PostContent or PostText request and the corresponding response
+	// from Amazon Lex.
+	TurnsToLive *int64 `locationName:"turnsToLive" min:"1" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActiveContextTimeToLive) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActiveContextTimeToLive) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ActiveContextTimeToLive) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ActiveContextTimeToLive"}
+	if s.TimeToLiveInSeconds != nil && *s.TimeToLiveInSeconds < 5 {
+		invalidParams.Add(request.NewErrParamMinValue("TimeToLiveInSeconds", 5))
+	}
+	if s.TurnsToLive != nil && *s.TurnsToLive < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("TurnsToLive", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetTimeToLiveInSeconds sets the TimeToLiveInSeconds field's value.
+func (s *ActiveContextTimeToLive) SetTimeToLiveInSeconds(v int64) *ActiveContextTimeToLive {
+	s.TimeToLiveInSeconds = &v
+	return s
+}
+
+// SetTurnsToLive sets the TurnsToLive field's value.
+func (s *ActiveContextTimeToLive) SetTurnsToLive(v int64) *ActiveContextTimeToLive {
+	s.TurnsToLive = &v
+	return s
+}
+
+// Either the Amazon Lex bot is still building, or one of the dependent services
+// (Amazon Polly, AWS Lambda) failed with an internal service error.
+type BadGatewayException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BadGatewayException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BadGatewayException) GoString() string {
+	return s.String()
+}
+
+func newErrorBadGatewayException(v protocol.ResponseMetadata) error {
+	return &BadGatewayException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *BadGatewayException) Code() string {
+	return "BadGatewayException"
+}
+
+// Message returns the exception's message.
+func (s *BadGatewayException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *BadGatewayException) OrigErr() error {
+	return nil
+}
+
+func (s *BadGatewayException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *BadGatewayException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *BadGatewayException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Request validation failed, there is no usable message in the context, or
+// the bot build failed, is still in progress, or contains unbuilt changes.
+type BadRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BadRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BadRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorBadRequestException(v protocol.ResponseMetadata) error {
+	return &BadRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *BadRequestException) Code() string {
+	return "BadRequestException"
+}
+
+// Message returns the exception's message.
+func (s *BadRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *BadRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *BadRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *BadRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *BadRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Represents an option to be shown on the client platform (Facebook, Slack,
 // etc.)
 type Button struct {
@@ -367,12 +931,20 @@ type Button struct {
 	Value *string `locationName:"value" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Button) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Button) GoString() string {
 	return s.String()
 }
@@ -386,6 +958,432 @@ func (s *Button) SetText(v string) *Button {
 // SetValue sets the Value field's value.
 func (s *Button) SetValue(v string) *Button {
 	s.Value = &v
+	return s
+}
+
+// Two clients are using the same AWS account, Amazon Lex bot, and user ID.
+type ConflictException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConflictException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConflictException) GoString() string {
+	return s.String()
+}
+
+func newErrorConflictException(v protocol.ResponseMetadata) error {
+	return &ConflictException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConflictException) Code() string {
+	return "ConflictException"
+}
+
+// Message returns the exception's message.
+func (s *ConflictException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConflictException) OrigErr() error {
+	return nil
+}
+
+func (s *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConflictException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConflictException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type DeleteSessionInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The alias in use for the bot that contains the session data.
+	//
+	// BotAlias is a required field
+	BotAlias *string `location:"uri" locationName:"botAlias" type:"string" required:"true"`
+
+	// The name of the bot that contains the session data.
+	//
+	// BotName is a required field
+	BotName *string `location:"uri" locationName:"botName" type:"string" required:"true"`
+
+	// The identifier of the user associated with the session data.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"userId" min:"2" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteSessionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteSessionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteSessionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteSessionInput"}
+	if s.BotAlias == nil {
+		invalidParams.Add(request.NewErrParamRequired("BotAlias"))
+	}
+	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BotAlias", 1))
+	}
+	if s.BotName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BotName"))
+	}
+	if s.BotName != nil && len(*s.BotName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BotName", 1))
+	}
+	if s.UserId == nil {
+		invalidParams.Add(request.NewErrParamRequired("UserId"))
+	}
+	if s.UserId != nil && len(*s.UserId) < 2 {
+		invalidParams.Add(request.NewErrParamMinLen("UserId", 2))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBotAlias sets the BotAlias field's value.
+func (s *DeleteSessionInput) SetBotAlias(v string) *DeleteSessionInput {
+	s.BotAlias = &v
+	return s
+}
+
+// SetBotName sets the BotName field's value.
+func (s *DeleteSessionInput) SetBotName(v string) *DeleteSessionInput {
+	s.BotName = &v
+	return s
+}
+
+// SetUserId sets the UserId field's value.
+func (s *DeleteSessionInput) SetUserId(v string) *DeleteSessionInput {
+	s.UserId = &v
+	return s
+}
+
+type DeleteSessionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The alias in use for the bot associated with the session data.
+	BotAlias *string `locationName:"botAlias" type:"string"`
+
+	// The name of the bot associated with the session data.
+	BotName *string `locationName:"botName" type:"string"`
+
+	// The unique identifier for the session.
+	SessionId *string `locationName:"sessionId" type:"string"`
+
+	// The ID of the client application user.
+	UserId *string `locationName:"userId" min:"2" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteSessionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteSessionOutput) GoString() string {
+	return s.String()
+}
+
+// SetBotAlias sets the BotAlias field's value.
+func (s *DeleteSessionOutput) SetBotAlias(v string) *DeleteSessionOutput {
+	s.BotAlias = &v
+	return s
+}
+
+// SetBotName sets the BotName field's value.
+func (s *DeleteSessionOutput) SetBotName(v string) *DeleteSessionOutput {
+	s.BotName = &v
+	return s
+}
+
+// SetSessionId sets the SessionId field's value.
+func (s *DeleteSessionOutput) SetSessionId(v string) *DeleteSessionOutput {
+	s.SessionId = &v
+	return s
+}
+
+// SetUserId sets the UserId field's value.
+func (s *DeleteSessionOutput) SetUserId(v string) *DeleteSessionOutput {
+	s.UserId = &v
+	return s
+}
+
+// One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
+// For example,
+//
+//   - If Amazon Lex does not have sufficient permissions to call a Lambda
+//     function.
+//
+//   - If a Lambda function takes longer than 30 seconds to execute.
+//
+//   - If a fulfillment Lambda function returns a Delegate dialog action without
+//     removing any slot values.
+type DependencyFailedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DependencyFailedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DependencyFailedException) GoString() string {
+	return s.String()
+}
+
+func newErrorDependencyFailedException(v protocol.ResponseMetadata) error {
+	return &DependencyFailedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DependencyFailedException) Code() string {
+	return "DependencyFailedException"
+}
+
+// Message returns the exception's message.
+func (s *DependencyFailedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DependencyFailedException) OrigErr() error {
+	return nil
+}
+
+func (s *DependencyFailedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DependencyFailedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DependencyFailedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Describes the next action that the bot should take in its interaction with
+// the user and provides information about the context in which the action takes
+// place. Use the DialogAction data type to set the interaction to a specific
+// state, or to return the interaction to a previous state.
+type DialogAction struct {
+	_ struct{} `type:"structure"`
+
+	// The fulfillment state of the intent. The possible values are:
+	//
+	//    * Failed - The Lambda function associated with the intent failed to fulfill
+	//    the intent.
+	//
+	//    * Fulfilled - The intent has fulfilled by the Lambda function associated
+	//    with the intent.
+	//
+	//    * ReadyForFulfillment - All of the information necessary for the intent
+	//    is present and the intent ready to be fulfilled by the client application.
+	FulfillmentState *string `locationName:"fulfillmentState" type:"string" enum:"FulfillmentState"`
+
+	// The name of the intent.
+	IntentName *string `locationName:"intentName" type:"string"`
+
+	// The message that should be shown to the user. If you don't specify a message,
+	// Amazon Lex will use the message configured for the intent.
+	//
+	// Message is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DialogAction's
+	// String and GoString methods.
+	Message *string `locationName:"message" min:"1" type:"string" sensitive:"true"`
+
+	//    * PlainText - The message contains plain UTF-8 text.
+	//
+	//    * CustomPayload - The message is a custom format for the client.
+	//
+	//    * SSML - The message contains text formatted for voice output.
+	//
+	//    * Composite - The message contains an escaped JSON object containing one
+	//    or more messages. For more information, see Message Groups (https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html).
+	MessageFormat *string `locationName:"messageFormat" type:"string" enum:"MessageFormatType"`
+
+	// The name of the slot that should be elicited from the user.
+	SlotToElicit *string `locationName:"slotToElicit" type:"string"`
+
+	// Map of the slots that have been gathered and their values.
+	//
+	// Slots is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DialogAction's
+	// String and GoString methods.
+	Slots map[string]*string `locationName:"slots" type:"map" sensitive:"true"`
+
+	// The next action that the bot should take in its interaction with the user.
+	// The possible values are:
+	//
+	//    * ConfirmIntent - The next action is asking the user if the intent is
+	//    complete and ready to be fulfilled. This is a yes/no question such as
+	//    "Place the order?"
+	//
+	//    * Close - Indicates that the there will not be a response from the user.
+	//    For example, the statement "Your order has been placed" does not require
+	//    a response.
+	//
+	//    * Delegate - The next action is determined by Amazon Lex.
+	//
+	//    * ElicitIntent - The next action is to determine the intent that the user
+	//    wants to fulfill.
+	//
+	//    * ElicitSlot - The next action is to elicit a slot value from the user.
+	//
+	// Type is a required field
+	Type *string `locationName:"type" type:"string" required:"true" enum:"DialogActionType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DialogAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DialogAction) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DialogAction) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DialogAction"}
+	if s.Message != nil && len(*s.Message) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Message", 1))
+	}
+	if s.Type == nil {
+		invalidParams.Add(request.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFulfillmentState sets the FulfillmentState field's value.
+func (s *DialogAction) SetFulfillmentState(v string) *DialogAction {
+	s.FulfillmentState = &v
+	return s
+}
+
+// SetIntentName sets the IntentName field's value.
+func (s *DialogAction) SetIntentName(v string) *DialogAction {
+	s.IntentName = &v
+	return s
+}
+
+// SetMessage sets the Message field's value.
+func (s *DialogAction) SetMessage(v string) *DialogAction {
+	s.Message = &v
+	return s
+}
+
+// SetMessageFormat sets the MessageFormat field's value.
+func (s *DialogAction) SetMessageFormat(v string) *DialogAction {
+	s.MessageFormat = &v
+	return s
+}
+
+// SetSlotToElicit sets the SlotToElicit field's value.
+func (s *DialogAction) SetSlotToElicit(v string) *DialogAction {
+	s.SlotToElicit = &v
+	return s
+}
+
+// SetSlots sets the Slots field's value.
+func (s *DialogAction) SetSlots(v map[string]*string) *DialogAction {
+	s.Slots = v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *DialogAction) SetType(v string) *DialogAction {
+	s.Type = &v
 	return s
 }
 
@@ -410,12 +1408,20 @@ type GenericAttachment struct {
 	Title *string `locationName:"title" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GenericAttachment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GenericAttachment) GoString() string {
 	return s.String()
 }
@@ -450,6 +1456,701 @@ func (s *GenericAttachment) SetTitle(v string) *GenericAttachment {
 	return s
 }
 
+type GetSessionInput struct {
+	_ struct{} `type:"structure" nopayload:"true"`
+
+	// The alias in use for the bot that contains the session data.
+	//
+	// BotAlias is a required field
+	BotAlias *string `location:"uri" locationName:"botAlias" type:"string" required:"true"`
+
+	// The name of the bot that contains the session data.
+	//
+	// BotName is a required field
+	BotName *string `location:"uri" locationName:"botName" type:"string" required:"true"`
+
+	// A string used to filter the intents returned in the recentIntentSummaryView
+	// structure.
+	//
+	// When you specify a filter, only intents with their checkpointLabel field
+	// set to that string are returned.
+	CheckpointLabelFilter *string `location:"querystring" locationName:"checkpointLabelFilter" min:"1" type:"string"`
+
+	// The ID of the client application user. Amazon Lex uses this to identify a
+	// user's conversation with your bot.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"userId" min:"2" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetSessionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetSessionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetSessionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetSessionInput"}
+	if s.BotAlias == nil {
+		invalidParams.Add(request.NewErrParamRequired("BotAlias"))
+	}
+	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BotAlias", 1))
+	}
+	if s.BotName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BotName"))
+	}
+	if s.BotName != nil && len(*s.BotName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BotName", 1))
+	}
+	if s.CheckpointLabelFilter != nil && len(*s.CheckpointLabelFilter) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("CheckpointLabelFilter", 1))
+	}
+	if s.UserId == nil {
+		invalidParams.Add(request.NewErrParamRequired("UserId"))
+	}
+	if s.UserId != nil && len(*s.UserId) < 2 {
+		invalidParams.Add(request.NewErrParamMinLen("UserId", 2))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBotAlias sets the BotAlias field's value.
+func (s *GetSessionInput) SetBotAlias(v string) *GetSessionInput {
+	s.BotAlias = &v
+	return s
+}
+
+// SetBotName sets the BotName field's value.
+func (s *GetSessionInput) SetBotName(v string) *GetSessionInput {
+	s.BotName = &v
+	return s
+}
+
+// SetCheckpointLabelFilter sets the CheckpointLabelFilter field's value.
+func (s *GetSessionInput) SetCheckpointLabelFilter(v string) *GetSessionInput {
+	s.CheckpointLabelFilter = &v
+	return s
+}
+
+// SetUserId sets the UserId field's value.
+func (s *GetSessionInput) SetUserId(v string) *GetSessionInput {
+	s.UserId = &v
+	return s
+}
+
+type GetSessionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of active contexts for the session. A context can be set when an intent
+	// is fulfilled or by calling the PostContent, PostText, or PutSession operation.
+	//
+	// You can use a context to control the intents that can follow up an intent,
+	// or to modify the operation of your application.
+	//
+	// ActiveContexts is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetSessionOutput's
+	// String and GoString methods.
+	ActiveContexts []*ActiveContext `locationName:"activeContexts" type:"list" sensitive:"true"`
+
+	// Describes the current state of the bot.
+	DialogAction *DialogAction `locationName:"dialogAction" type:"structure"`
+
+	// An array of information about the intents used in the session. The array
+	// can contain a maximum of three summaries. If more than three intents are
+	// used in the session, the recentIntentSummaryView operation contains information
+	// about the last three intents used.
+	//
+	// If you set the checkpointLabelFilter parameter in the request, the array
+	// contains only the intents with the specified label.
+	RecentIntentSummaryView []*IntentSummary `locationName:"recentIntentSummaryView" type:"list"`
+
+	// Map of key/value pairs representing the session-specific context information.
+	// It contains application information passed between Amazon Lex and a client
+	// application.
+	//
+	// SessionAttributes is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetSessionOutput's
+	// String and GoString methods.
+	SessionAttributes map[string]*string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
+
+	// A unique identifier for the session.
+	SessionId *string `locationName:"sessionId" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetSessionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetSessionOutput) GoString() string {
+	return s.String()
+}
+
+// SetActiveContexts sets the ActiveContexts field's value.
+func (s *GetSessionOutput) SetActiveContexts(v []*ActiveContext) *GetSessionOutput {
+	s.ActiveContexts = v
+	return s
+}
+
+// SetDialogAction sets the DialogAction field's value.
+func (s *GetSessionOutput) SetDialogAction(v *DialogAction) *GetSessionOutput {
+	s.DialogAction = v
+	return s
+}
+
+// SetRecentIntentSummaryView sets the RecentIntentSummaryView field's value.
+func (s *GetSessionOutput) SetRecentIntentSummaryView(v []*IntentSummary) *GetSessionOutput {
+	s.RecentIntentSummaryView = v
+	return s
+}
+
+// SetSessionAttributes sets the SessionAttributes field's value.
+func (s *GetSessionOutput) SetSessionAttributes(v map[string]*string) *GetSessionOutput {
+	s.SessionAttributes = v
+	return s
+}
+
+// SetSessionId sets the SessionId field's value.
+func (s *GetSessionOutput) SetSessionId(v string) *GetSessionOutput {
+	s.SessionId = &v
+	return s
+}
+
+// Provides a score that indicates the confidence that Amazon Lex has that an
+// intent is the one that satisfies the user's intent.
+type IntentConfidence struct {
+	_ struct{} `type:"structure"`
+
+	// A score that indicates how confident Amazon Lex is that an intent satisfies
+	// the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher
+	// confidence.
+	Score *float64 `locationName:"score" type:"double"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IntentConfidence) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IntentConfidence) GoString() string {
+	return s.String()
+}
+
+// SetScore sets the Score field's value.
+func (s *IntentConfidence) SetScore(v float64) *IntentConfidence {
+	s.Score = &v
+	return s
+}
+
+// Provides information about the state of an intent. You can use this information
+// to get the current state of an intent so that you can process the intent,
+// or so that you can return the intent to its previous state.
+type IntentSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A user-defined label that identifies a particular intent. You can use this
+	// label to return to a previous intent.
+	//
+	// Use the checkpointLabelFilter parameter of the GetSessionRequest operation
+	// to filter the intents returned by the operation to those with only the specified
+	// label.
+	CheckpointLabel *string `locationName:"checkpointLabel" min:"1" type:"string"`
+
+	// The status of the intent after the user responds to the confirmation prompt.
+	// If the user confirms the intent, Amazon Lex sets this field to Confirmed.
+	// If the user denies the intent, Amazon Lex sets this value to Denied. The
+	// possible values are:
+	//
+	//    * Confirmed - The user has responded "Yes" to the confirmation prompt,
+	//    confirming that the intent is complete and that it is ready to be fulfilled.
+	//
+	//    * Denied - The user has responded "No" to the confirmation prompt.
+	//
+	//    * None - The user has never been prompted for confirmation; or, the user
+	//    was prompted but did not confirm or deny the prompt.
+	ConfirmationStatus *string `locationName:"confirmationStatus" type:"string" enum:"ConfirmationStatus"`
+
+	// The next action that the bot should take in its interaction with the user.
+	// The possible values are:
+	//
+	//    * ConfirmIntent - The next action is asking the user if the intent is
+	//    complete and ready to be fulfilled. This is a yes/no question such as
+	//    "Place the order?"
+	//
+	//    * Close - Indicates that the there will not be a response from the user.
+	//    For example, the statement "Your order has been placed" does not require
+	//    a response.
+	//
+	//    * ElicitIntent - The next action is to determine the intent that the user
+	//    wants to fulfill.
+	//
+	//    * ElicitSlot - The next action is to elicit a slot value from the user.
+	//
+	// DialogActionType is a required field
+	DialogActionType *string `locationName:"dialogActionType" type:"string" required:"true" enum:"DialogActionType"`
+
+	// The fulfillment state of the intent. The possible values are:
+	//
+	//    * Failed - The Lambda function associated with the intent failed to fulfill
+	//    the intent.
+	//
+	//    * Fulfilled - The intent has fulfilled by the Lambda function associated
+	//    with the intent.
+	//
+	//    * ReadyForFulfillment - All of the information necessary for the intent
+	//    is present and the intent ready to be fulfilled by the client application.
+	FulfillmentState *string `locationName:"fulfillmentState" type:"string" enum:"FulfillmentState"`
+
+	// The name of the intent.
+	IntentName *string `locationName:"intentName" type:"string"`
+
+	// The next slot to elicit from the user. If there is not slot to elicit, the
+	// field is blank.
+	SlotToElicit *string `locationName:"slotToElicit" type:"string"`
+
+	// Map of the slots that have been gathered and their values.
+	//
+	// Slots is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by IntentSummary's
+	// String and GoString methods.
+	Slots map[string]*string `locationName:"slots" type:"map" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IntentSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IntentSummary) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IntentSummary) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "IntentSummary"}
+	if s.CheckpointLabel != nil && len(*s.CheckpointLabel) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("CheckpointLabel", 1))
+	}
+	if s.DialogActionType == nil {
+		invalidParams.Add(request.NewErrParamRequired("DialogActionType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCheckpointLabel sets the CheckpointLabel field's value.
+func (s *IntentSummary) SetCheckpointLabel(v string) *IntentSummary {
+	s.CheckpointLabel = &v
+	return s
+}
+
+// SetConfirmationStatus sets the ConfirmationStatus field's value.
+func (s *IntentSummary) SetConfirmationStatus(v string) *IntentSummary {
+	s.ConfirmationStatus = &v
+	return s
+}
+
+// SetDialogActionType sets the DialogActionType field's value.
+func (s *IntentSummary) SetDialogActionType(v string) *IntentSummary {
+	s.DialogActionType = &v
+	return s
+}
+
+// SetFulfillmentState sets the FulfillmentState field's value.
+func (s *IntentSummary) SetFulfillmentState(v string) *IntentSummary {
+	s.FulfillmentState = &v
+	return s
+}
+
+// SetIntentName sets the IntentName field's value.
+func (s *IntentSummary) SetIntentName(v string) *IntentSummary {
+	s.IntentName = &v
+	return s
+}
+
+// SetSlotToElicit sets the SlotToElicit field's value.
+func (s *IntentSummary) SetSlotToElicit(v string) *IntentSummary {
+	s.SlotToElicit = &v
+	return s
+}
+
+// SetSlots sets the Slots field's value.
+func (s *IntentSummary) SetSlots(v map[string]*string) *IntentSummary {
+	s.Slots = v
+	return s
+}
+
+// Internal service error. Retry the call.
+type InternalFailureException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalFailureException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalFailureException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalFailureException(v protocol.ResponseMetadata) error {
+	return &InternalFailureException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalFailureException) Code() string {
+	return "InternalFailureException"
+}
+
+// Message returns the exception's message.
+func (s *InternalFailureException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalFailureException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalFailureException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalFailureException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalFailureException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exceeded a limit.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+
+	RetryAfterSeconds *string `location:"header" locationName:"Retry-After" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// This exception is not used.
+type LoopDetectedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LoopDetectedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LoopDetectedException) GoString() string {
+	return s.String()
+}
+
+func newErrorLoopDetectedException(v protocol.ResponseMetadata) error {
+	return &LoopDetectedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LoopDetectedException) Code() string {
+	return "LoopDetectedException"
+}
+
+// Message returns the exception's message.
+func (s *LoopDetectedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LoopDetectedException) OrigErr() error {
+	return nil
+}
+
+func (s *LoopDetectedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LoopDetectedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LoopDetectedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The accept header in the request does not have a valid value.
+type NotAcceptableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotAcceptableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotAcceptableException) GoString() string {
+	return s.String()
+}
+
+func newErrorNotAcceptableException(v protocol.ResponseMetadata) error {
+	return &NotAcceptableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NotAcceptableException) Code() string {
+	return "NotAcceptableException"
+}
+
+// Message returns the exception's message.
+func (s *NotAcceptableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NotAcceptableException) OrigErr() error {
+	return nil
+}
+
+func (s *NotAcceptableException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NotAcceptableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NotAcceptableException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The resource (such as the Amazon Lex bot or an alias) that is referred to
+// is not found.
+type NotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorNotFoundException(v protocol.ResponseMetadata) error {
+	return &NotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NotFoundException) Code() string {
+	return "NotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *NotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *NotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type PostContentInput struct {
 	_ struct{} `type:"structure" payload:"InputStream"`
 
@@ -458,26 +2159,32 @@ type PostContentInput struct {
 	// The message Amazon Lex returns in the response can be either text or speech
 	// based on the Accept HTTP header value in the request.
 	//
-	//    *  If the value is text/plain; charset=utf-8, Amazon Lex returns text
-	//    in the response.
+	//    * If the value is text/plain; charset=utf-8, Amazon Lex returns text in
+	//    the response.
 	//
-	//    *  If the value begins with audio/, Amazon Lex returns speech in the response.
+	//    * If the value begins with audio/, Amazon Lex returns speech in the response.
 	//    Amazon Lex uses Amazon Polly to generate the speech (using the configuration
 	//    you specified in the Accept header). For example, if you specify audio/mpeg
 	//    as the value, Amazon Lex returns speech in the MPEG format.
 	//
-	// The following are the accepted values:
+	//    * If the value is audio/pcm, the speech returned is audio/pcm in 16-bit,
+	//    little endian format.
 	//
-	// audio/mpeg
-	//
-	// audio/ogg
-	//
-	// audio/pcm
-	//
-	// text/plain; charset=utf-8
-	//
-	// audio/* (defaults to mpeg)
+	//    * The following are the accepted values: audio/mpeg audio/ogg audio/pcm
+	//    text/plain; charset=utf-8 audio/* (defaults to mpeg)
 	Accept *string `location:"header" locationName:"Accept" type:"string"`
+
+	// A list of contexts active for the request. A context can be activated when
+	// a previous intent is fulfilled, or by including the context in the request,
+	//
+	// If you don't specify a list of contexts, Amazon Lex will use the current
+	// list of contexts for the session. If you specify an empty list, all contexts
+	// for the session are cleared.
+	//
+	// ActiveContexts is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostContentInput's
+	// String and GoString methods.
+	ActiveContexts *string `location:"header" locationName:"x-amz-lex-active-contexts" type:"string" suppressedJSONValue:"true" sensitive:"true"`
 
 	// Alias of the Amazon Lex bot.
 	//
@@ -494,22 +2201,14 @@ type PostContentInput struct {
 	// Indicates the audio format or text. The header value must start with one
 	// of the following prefixes:
 	//
-	//    * PCM format, audio data must be in little-endian byte order.
+	//    * PCM format, audio data must be in little-endian byte order. audio/l16;
+	//    rate=16000; channels=1 audio/x-l16; sample-rate=16000; channel-count=1
+	//    audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1; is-big-endian=false
 	//
-	// audio/l16; rate=16000; channels=1
+	//    * Opus format audio/x-cbr-opus-with-preamble; preamble-size=0; bit-rate=256000;
+	//    frame-size-milliseconds=4
 	//
-	// audio/x-l16; sample-rate=16000; channel-count=1
-	//
-	// audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1; is-big-endian=false
-	//
-	//
-	//    * Opus format
-	//
-	// audio/x-cbr-opus-with-preamble; preamble-size=0; bit-rate=256000; frame-size-milliseconds=4
-	//
-	//    * Text format
-	//
-	// text/plain; charset=utf-8
+	//    * Text format text/plain; charset=utf-8
 	//
 	// ContentType is a required field
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string" required:"true"`
@@ -520,6 +2219,11 @@ type PostContentInput struct {
 	// You can stream audio data to Amazon Lex or you can create a local buffer
 	// that captures all of the audio data before sending. In general, you get better
 	// performance if you stream audio data rather than buffering the data locally.
+	//
+	// To use an non-seekable io.Reader for this request wrap the io.Reader with
+	// "aws.ReadSeekCloser". The SDK will not retry request errors for non-seekable
+	// readers. This will allow the SDK to send the reader's payload as chunked
+	// transfer encoding.
 	//
 	// InputStream is a required field
 	InputStream io.ReadSeeker `locationName:"inputStream" type:"blob" required:"true"`
@@ -534,7 +2238,7 @@ type PostContentInput struct {
 	// The namespace x-amz-lex: is reserved for special attributes. Don't create
 	// any request attributes with the prefix x-amz-lex:.
 	//
-	// For more information, see Setting Request Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
+	// For more information, see Setting Request Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
 	RequestAttributes aws.JSONValue `location:"header" locationName:"x-amz-lex-request-attributes" type:"jsonvalue"`
 
 	// You pass this value as the x-amz-lex-session-attributes HTTP header.
@@ -544,7 +2248,7 @@ type PostContentInput struct {
 	// and values. The total size of the sessionAttributes and requestAttributes
 	// headers is limited to 12 KB.
 	//
-	// For more information, see Setting Session Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
+	// For more information, see Setting Session Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
 	SessionAttributes aws.JSONValue `location:"header" locationName:"x-amz-lex-session-attributes" type:"jsonvalue"`
 
 	// The ID of the client application user. Amazon Lex uses this to identify a
@@ -575,12 +2279,20 @@ type PostContentInput struct {
 	UserId *string `location:"uri" locationName:"userId" min:"2" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PostContentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PostContentInput) GoString() string {
 	return s.String()
 }
@@ -622,6 +2334,12 @@ func (s *PostContentInput) Validate() error {
 // SetAccept sets the Accept field's value.
 func (s *PostContentInput) SetAccept(v string) *PostContentInput {
 	s.Accept = &v
+	return s
+}
+
+// SetActiveContexts sets the ActiveContexts field's value.
+func (s *PostContentInput) SetActiveContexts(v string) *PostContentInput {
+	s.ActiveContexts = &v
 	return s
 }
 
@@ -670,6 +2388,24 @@ func (s *PostContentInput) SetUserId(v string) *PostContentInput {
 type PostContentOutput struct {
 	_ struct{} `type:"structure" payload:"AudioStream"`
 
+	// A list of active contexts for the session. A context can be set when an intent
+	// is fulfilled or by calling the PostContent, PostText, or PutSession operation.
+	//
+	// You can use a context to control the intents that can follow up an intent,
+	// or to modify the operation of your application.
+	//
+	// ActiveContexts is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostContentOutput's
+	// String and GoString methods.
+	ActiveContexts *string `location:"header" locationName:"x-amz-lex-active-contexts" type:"string" suppressedJSONValue:"true" sensitive:"true"`
+
+	// One to four alternative intents that may be applicable to the user's intent.
+	//
+	// Each alternative includes a score that indicates how confident Amazon Lex
+	// is that the intent matches the user's intent. The intents are sorted by the
+	// confidence score.
+	AlternativeIntents *string `location:"header" locationName:"x-amz-lex-alternative-intents" type:"string" suppressedJSONValue:"true"`
+
 	// The prompt (or statement) to convey to the user. This is based on the bot
 	// configuration and context. For example, if Amazon Lex did not understand
 	// the user intent, it sends the clarificationPrompt configured for the bot.
@@ -679,6 +2415,11 @@ type PostContentOutput struct {
 	// to the user. Then Amazon Lex sends that message in the response.
 	AudioStream io.ReadCloser `locationName:"audioStream" type:"blob"`
 
+	// The version of the bot that responded to the conversation. You can use this
+	// information to help determine if one version of a bot is performing better
+	// than another version.
+	BotVersion *string `location:"header" locationName:"x-amz-lex-bot-version" min:"1" type:"string"`
+
 	// Content type as specified in the Accept HTTP header in the request.
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
 
@@ -687,15 +2428,12 @@ type PostContentOutput struct {
 	// this information to customize the user interface.
 	//
 	//    * ElicitIntent - Amazon Lex wants to elicit the user's intent. Consider
-	//    the following examples:
+	//    the following examples: For example, a user might utter an intent ("I
+	//    want to order a pizza"). If Amazon Lex cannot infer the user intent from
+	//    this utterance, it will return this dialog state.
 	//
-	//  For example, a user might utter an intent ("I want to order a pizza"). If
-	//    Amazon Lex cannot infer the user intent from this utterance, it will return
-	//    this dialog state.
-	//
-	//    * ConfirmIntent - Amazon Lex is expecting a "yes" or "no" response.
-	//
-	// For example, Amazon Lex wants user confirmation before fulfilling an intent.
+	//    * ConfirmIntent - Amazon Lex is expecting a "yes" or "no" response. For
+	//    example, Amazon Lex wants user confirmation before fulfilling an intent.
 	//    Instead of a simple "yes" or "no" response, a user might respond with
 	//    additional information. For example, "yes, but make it a thick crust pizza"
 	//    or "no, I want to order a drink." Amazon Lex can process such additional
@@ -703,12 +2441,10 @@ type PostContentOutput struct {
 	//    intent from OrderPizza to OrderDrink).
 	//
 	//    * ElicitSlot - Amazon Lex is expecting the value of a slot for the current
-	//    intent.
-	//
-	//  For example, suppose that in the response Amazon Lex sends this message:
-	//    "What size pizza would you like?". A user might reply with the slot value
-	//    (e.g., "medium"). The user might also provide additional information in
-	//    the response (e.g., "medium thick crust pizza"). Amazon Lex can process
+	//    intent. For example, suppose that in the response Amazon Lex sends this
+	//    message: "What size pizza would you like?". A user might reply with the
+	//    slot value (e.g., "medium"). The user might also provide additional information
+	//    in the response (e.g., "medium thick crust pizza"). Amazon Lex can process
 	//    such additional information appropriately.
 	//
 	//    * Fulfilled - Conveys that the Lambda function has successfully fulfilled
@@ -716,31 +2452,33 @@ type PostContentOutput struct {
 	//
 	//    * ReadyForFulfillment - Conveys that the client has to fulfill the request.
 	//
-	//
-	//    * Failed - Conveys that the conversation with the user failed.
-	//
-	//  This can happen for various reasons, including that the user does not provide
-	//    an appropriate response to prompts from the service (you can configure
-	//    how many times Amazon Lex can prompt a user for specific information),
-	//    or if the Lambda function fails to fulfill the intent.
+	//    * Failed - Conveys that the conversation with the user failed. This can
+	//    happen for various reasons, including that the user does not provide an
+	//    appropriate response to prompts from the service (you can configure how
+	//    many times Amazon Lex can prompt a user for specific information), or
+	//    if the Lambda function fails to fulfill the intent.
 	DialogState *string `location:"header" locationName:"x-amz-lex-dialog-state" type:"string" enum:"DialogState"`
 
 	// The text used to process the request.
 	//
-	// If the input was an audio stream, the inputTranscript field contains the
-	// text extracted from the audio stream. This is the text that is actually processed
-	// to recognize intents and slot values. You can use this information to determine
-	// if Amazon Lex is correctly processing the audio that you send.
-	InputTranscript *string `location:"header" locationName:"x-amz-lex-input-transcript" type:"string"`
-
-	// Current user intent that Amazon Lex is aware of.
-	IntentName *string `location:"header" locationName:"x-amz-lex-intent-name" type:"string"`
+	// If the input was an audio stream, the encodedInputTranscript field contains
+	// the text extracted from the audio stream. This is the text that is actually
+	// processed to recognize intents and slot values. You can use this information
+	// to determine if Amazon Lex is correctly processing the audio that you send.
+	//
+	// The encodedInputTranscript field is base-64 encoded. You must decode the
+	// field before you can use the value.
+	//
+	// EncodedInputTranscript is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostContentOutput's
+	// String and GoString methods.
+	EncodedInputTranscript *string `location:"header" locationName:"x-amz-lex-encoded-input-transcript" type:"string" sensitive:"true"`
 
 	// The message to convey to the user. The message can come from the bot's configuration
 	// or from a Lambda function.
 	//
 	// If the intent is not configured with a Lambda function, or if the Lambda
-	// function returned Delegate as the dialogAction.type its response, Amazon
+	// function returned Delegate as the dialogAction.type in its response, Amazon
 	// Lex decides on the next course of action and selects an appropriate message
 	// from the bot's configuration based on the current interaction context. For
 	// example, if Amazon Lex isn't able to understand user input, it uses a clarification
@@ -754,7 +2492,61 @@ type PostContentOutput struct {
 	//
 	// If the Lambda function returns a message, Amazon Lex passes it to the client
 	// in its response.
-	Message *string `location:"header" locationName:"x-amz-lex-message" min:"1" type:"string" sensitive:"true"`
+	//
+	// The encodedMessage field is base-64 encoded. You must decode the field before
+	// you can use the value.
+	//
+	// EncodedMessage is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostContentOutput's
+	// String and GoString methods.
+	EncodedMessage *string `location:"header" locationName:"x-amz-lex-encoded-message" min:"1" type:"string" sensitive:"true"`
+
+	// The text used to process the request.
+	//
+	// You can use this field only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES,
+	// es-US, fr-CA, fr-FR, and it-IT locales. In all other locales, the inputTranscript
+	// field is null. You should use the encodedInputTranscript field instead.
+	//
+	// If the input was an audio stream, the inputTranscript field contains the
+	// text extracted from the audio stream. This is the text that is actually processed
+	// to recognize intents and slot values. You can use this information to determine
+	// if Amazon Lex is correctly processing the audio that you send.
+	//
+	// Deprecated: The inputTranscript field is deprecated, use the encodedInputTranscript field instead. The inputTranscript field is available only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales.
+	InputTranscript *string `location:"header" locationName:"x-amz-lex-input-transcript" deprecated:"true" type:"string"`
+
+	// Current user intent that Amazon Lex is aware of.
+	IntentName *string `location:"header" locationName:"x-amz-lex-intent-name" type:"string"`
+
+	// You can only use this field in the de-DE, en-AU, en-GB, en-US, es-419, es-ES,
+	// es-US, fr-CA, fr-FR, and it-IT locales. In all other locales, the message
+	// field is null. You should use the encodedMessage field instead.
+	//
+	// The message to convey to the user. The message can come from the bot's configuration
+	// or from a Lambda function.
+	//
+	// If the intent is not configured with a Lambda function, or if the Lambda
+	// function returned Delegate as the dialogAction.type in its response, Amazon
+	// Lex decides on the next course of action and selects an appropriate message
+	// from the bot's configuration based on the current interaction context. For
+	// example, if Amazon Lex isn't able to understand user input, it uses a clarification
+	// prompt message.
+	//
+	// When you create an intent you can assign messages to groups. When messages
+	// are assigned to groups Amazon Lex returns one message from each group in
+	// the response. The message field is an escaped JSON string containing the
+	// messages. For more information about the structure of the JSON string returned,
+	// see msg-prompts-formats.
+	//
+	// If the Lambda function returns a message, Amazon Lex passes it to the client
+	// in its response.
+	//
+	// Deprecated: The message field is deprecated, use the encodedMessage field instead. The message field is available only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales.
+	//
+	// Message is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostContentOutput's
+	// String and GoString methods.
+	Message *string `location:"header" locationName:"x-amz-lex-message" min:"1" deprecated:"true" type:"string" sensitive:"true"`
 
 	// The format of the response message. One of the following values:
 	//
@@ -769,15 +2561,32 @@ type PostContentOutput struct {
 	//    intent was created.
 	MessageFormat *string `location:"header" locationName:"x-amz-lex-message-format" type:"string" enum:"MessageFormatType"`
 
+	// Provides a score that indicates how confident Amazon Lex is that the returned
+	// intent is the one that matches the user's intent. The score is between 0.0
+	// and 1.0.
+	//
+	// The score is a relative score, not an absolute score. The score may change
+	// based on improvements to Amazon Lex.
+	NluIntentConfidence aws.JSONValue `location:"header" locationName:"x-amz-lex-nlu-intent-confidence" type:"jsonvalue"`
+
+	// The sentiment expressed in an utterance.
+	//
+	// When the bot is configured to send utterances to Amazon Comprehend for sentiment
+	// analysis, this field contains the result of the analysis.
+	SentimentResponse *string `location:"header" locationName:"x-amz-lex-sentiment" type:"string"`
+
 	// Map of key/value pairs representing the session-specific context information.
 	SessionAttributes aws.JSONValue `location:"header" locationName:"x-amz-lex-session-attributes" type:"jsonvalue"`
+
+	// The unique identifier for the session.
+	SessionId *string `location:"header" locationName:"x-amz-lex-session-id" type:"string"`
 
 	// If the dialogState value is ElicitSlot, returns the name of the slot for
 	// which Amazon Lex is eliciting a value.
 	SlotToElicit *string `location:"header" locationName:"x-amz-lex-slot-to-elicit" type:"string"`
 
 	// Map of zero or more intent slots (name/value pairs) Amazon Lex detected from
-	// the user input during the conversation.
+	// the user input during the conversation. The field is base-64 encoded.
 	//
 	// Amazon Lex creates a resolution list containing likely values for a slot.
 	// The value that it returns is determined by the valueSelectionStrategy selected
@@ -790,19 +2599,45 @@ type PostContentOutput struct {
 	Slots aws.JSONValue `location:"header" locationName:"x-amz-lex-slots" type:"jsonvalue"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PostContentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PostContentOutput) GoString() string {
 	return s.String()
+}
+
+// SetActiveContexts sets the ActiveContexts field's value.
+func (s *PostContentOutput) SetActiveContexts(v string) *PostContentOutput {
+	s.ActiveContexts = &v
+	return s
+}
+
+// SetAlternativeIntents sets the AlternativeIntents field's value.
+func (s *PostContentOutput) SetAlternativeIntents(v string) *PostContentOutput {
+	s.AlternativeIntents = &v
+	return s
 }
 
 // SetAudioStream sets the AudioStream field's value.
 func (s *PostContentOutput) SetAudioStream(v io.ReadCloser) *PostContentOutput {
 	s.AudioStream = v
+	return s
+}
+
+// SetBotVersion sets the BotVersion field's value.
+func (s *PostContentOutput) SetBotVersion(v string) *PostContentOutput {
+	s.BotVersion = &v
 	return s
 }
 
@@ -815,6 +2650,18 @@ func (s *PostContentOutput) SetContentType(v string) *PostContentOutput {
 // SetDialogState sets the DialogState field's value.
 func (s *PostContentOutput) SetDialogState(v string) *PostContentOutput {
 	s.DialogState = &v
+	return s
+}
+
+// SetEncodedInputTranscript sets the EncodedInputTranscript field's value.
+func (s *PostContentOutput) SetEncodedInputTranscript(v string) *PostContentOutput {
+	s.EncodedInputTranscript = &v
+	return s
+}
+
+// SetEncodedMessage sets the EncodedMessage field's value.
+func (s *PostContentOutput) SetEncodedMessage(v string) *PostContentOutput {
+	s.EncodedMessage = &v
 	return s
 }
 
@@ -842,9 +2689,27 @@ func (s *PostContentOutput) SetMessageFormat(v string) *PostContentOutput {
 	return s
 }
 
+// SetNluIntentConfidence sets the NluIntentConfidence field's value.
+func (s *PostContentOutput) SetNluIntentConfidence(v aws.JSONValue) *PostContentOutput {
+	s.NluIntentConfidence = v
+	return s
+}
+
+// SetSentimentResponse sets the SentimentResponse field's value.
+func (s *PostContentOutput) SetSentimentResponse(v string) *PostContentOutput {
+	s.SentimentResponse = &v
+	return s
+}
+
 // SetSessionAttributes sets the SessionAttributes field's value.
 func (s *PostContentOutput) SetSessionAttributes(v aws.JSONValue) *PostContentOutput {
 	s.SessionAttributes = v
+	return s
+}
+
+// SetSessionId sets the SessionId field's value.
+func (s *PostContentOutput) SetSessionId(v string) *PostContentOutput {
+	s.SessionId = &v
 	return s
 }
 
@@ -863,6 +2728,18 @@ func (s *PostContentOutput) SetSlots(v aws.JSONValue) *PostContentOutput {
 type PostTextInput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of contexts active for the request. A context can be activated when
+	// a previous intent is fulfilled, or by including the context in the request,
+	//
+	// If you don't specify a list of contexts, Amazon Lex will use the current
+	// list of contexts for the session. If you specify an empty list, all contexts
+	// for the session are cleared.
+	//
+	// ActiveContexts is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostTextInput's
+	// String and GoString methods.
+	ActiveContexts []*ActiveContext `locationName:"activeContexts" type:"list" sensitive:"true"`
+
 	// The alias of the Amazon Lex bot.
 	//
 	// BotAlias is a required field
@@ -875,6 +2752,10 @@ type PostTextInput struct {
 
 	// The text that the user entered (Amazon Lex interprets this text).
 	//
+	// InputText is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostTextInput's
+	// String and GoString methods.
+	//
 	// InputText is a required field
 	InputText *string `locationName:"inputText" min:"1" type:"string" required:"true" sensitive:"true"`
 
@@ -883,12 +2764,20 @@ type PostTextInput struct {
 	// The namespace x-amz-lex: is reserved for special attributes. Don't create
 	// any request attributes with the prefix x-amz-lex:.
 	//
-	// For more information, see Setting Request Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
+	// For more information, see Setting Request Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
+	//
+	// RequestAttributes is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostTextInput's
+	// String and GoString methods.
 	RequestAttributes map[string]*string `locationName:"requestAttributes" type:"map" sensitive:"true"`
 
 	// Application-specific information passed between Amazon Lex and a client application.
 	//
-	// For more information, see Setting Session Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
+	// For more information, see Setting Session Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
+	//
+	// SessionAttributes is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostTextInput's
+	// String and GoString methods.
 	SessionAttributes map[string]*string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
 
 	// The ID of the client application user. Amazon Lex uses this to identify a
@@ -919,12 +2808,20 @@ type PostTextInput struct {
 	UserId *string `location:"uri" locationName:"userId" min:"2" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PostTextInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PostTextInput) GoString() string {
 	return s.String()
 }
@@ -956,11 +2853,27 @@ func (s *PostTextInput) Validate() error {
 	if s.UserId != nil && len(*s.UserId) < 2 {
 		invalidParams.Add(request.NewErrParamMinLen("UserId", 2))
 	}
+	if s.ActiveContexts != nil {
+		for i, v := range s.ActiveContexts {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ActiveContexts", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetActiveContexts sets the ActiveContexts field's value.
+func (s *PostTextInput) SetActiveContexts(v []*ActiveContext) *PostTextInput {
+	s.ActiveContexts = v
+	return s
 }
 
 // SetBotAlias sets the BotAlias field's value.
@@ -1002,31 +2915,48 @@ func (s *PostTextInput) SetUserId(v string) *PostTextInput {
 type PostTextOutput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of active contexts for the session. A context can be set when an intent
+	// is fulfilled or by calling the PostContent, PostText, or PutSession operation.
+	//
+	// You can use a context to control the intents that can follow up an intent,
+	// or to modify the operation of your application.
+	//
+	// ActiveContexts is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostTextOutput's
+	// String and GoString methods.
+	ActiveContexts []*ActiveContext `locationName:"activeContexts" type:"list" sensitive:"true"`
+
+	// One to four alternative intents that may be applicable to the user's intent.
+	//
+	// Each alternative includes a score that indicates how confident Amazon Lex
+	// is that the intent matches the user's intent. The intents are sorted by the
+	// confidence score.
+	AlternativeIntents []*PredictedIntent `locationName:"alternativeIntents" type:"list"`
+
+	// The version of the bot that responded to the conversation. You can use this
+	// information to help determine if one version of a bot is performing better
+	// than another version.
+	BotVersion *string `locationName:"botVersion" min:"1" type:"string"`
+
 	// Identifies the current state of the user interaction. Amazon Lex returns
 	// one of the following values as dialogState. The client can optionally use
 	// this information to customize the user interface.
 	//
-	//    * ElicitIntent - Amazon Lex wants to elicit user intent.
+	//    * ElicitIntent - Amazon Lex wants to elicit user intent. For example,
+	//    a user might utter an intent ("I want to order a pizza"). If Amazon Lex
+	//    cannot infer the user intent from this utterance, it will return this
+	//    dialogState.
 	//
-	// For example, a user might utter an intent ("I want to order a pizza"). If
-	//    Amazon Lex cannot infer the user intent from this utterance, it will return
-	//    this dialogState.
-	//
-	//    * ConfirmIntent - Amazon Lex is expecting a "yes" or "no" response.
-	//
-	//  For example, Amazon Lex wants user confirmation before fulfilling an intent.
-	//
-	//
-	// Instead of a simple "yes" or "no," a user might respond with additional information.
-	//    For example, "yes, but make it thick crust pizza" or "no, I want to order
-	//    a drink". Amazon Lex can process such additional information (in these
-	//    examples, update the crust type slot value, or change intent from OrderPizza
-	//    to OrderDrink).
+	//    * ConfirmIntent - Amazon Lex is expecting a "yes" or "no" response. For
+	//    example, Amazon Lex wants user confirmation before fulfilling an intent.
+	//    Instead of a simple "yes" or "no," a user might respond with additional
+	//    information. For example, "yes, but make it thick crust pizza" or "no,
+	//    I want to order a drink". Amazon Lex can process such additional information
+	//    (in these examples, update the crust type slot value, or change intent
+	//    from OrderPizza to OrderDrink).
 	//
 	//    * ElicitSlot - Amazon Lex is expecting a slot value for the current intent.
-	//
-	//
-	// For example, suppose that in the response Amazon Lex sends this message:
+	//    For example, suppose that in the response Amazon Lex sends this message:
 	//    "What size pizza would you like?". A user might reply with the slot value
 	//    (e.g., "medium"). The user might also provide additional information in
 	//    the response (e.g., "medium thick crust pizza"). Amazon Lex can process
@@ -1037,13 +2967,11 @@ type PostTextOutput struct {
 	//
 	//    * ReadyForFulfillment - Conveys that the client has to fulfill the intent.
 	//
-	//
-	//    * Failed - Conveys that the conversation with the user failed.
-	//
-	//  This can happen for various reasons including that the user did not provide
-	//    an appropriate response to prompts from the service (you can configure
-	//    how many times Amazon Lex can prompt a user for specific information),
-	//    or the Lambda function failed to fulfill the intent.
+	//    * Failed - Conveys that the conversation with the user failed. This can
+	//    happen for various reasons including that the user did not provide an
+	//    appropriate response to prompts from the service (you can configure how
+	//    many times Amazon Lex can prompt a user for specific information), or
+	//    the Lambda function failed to fulfill the intent.
 	DialogState *string `locationName:"dialogState" type:"string" enum:"DialogState"`
 
 	// The current user intent that Amazon Lex is aware of.
@@ -1067,6 +2995,10 @@ type PostTextOutput struct {
 	//
 	// If the Lambda function returns a message, Amazon Lex passes it to the client
 	// in its response.
+	//
+	// Message is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostTextOutput's
+	// String and GoString methods.
 	Message *string `locationName:"message" min:"1" type:"string" sensitive:"true"`
 
 	// The format of the response message. One of the following values:
@@ -1083,13 +3015,34 @@ type PostTextOutput struct {
 	//    intent was created.
 	MessageFormat *string `locationName:"messageFormat" type:"string" enum:"MessageFormatType"`
 
+	// Provides a score that indicates how confident Amazon Lex is that the returned
+	// intent is the one that matches the user's intent. The score is between 0.0
+	// and 1.0. For more information, see Confidence Scores (https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html).
+	//
+	// The score is a relative score, not an absolute score. The score may change
+	// based on improvements to Amazon Lex.
+	NluIntentConfidence *IntentConfidence `locationName:"nluIntentConfidence" type:"structure"`
+
 	// Represents the options that the user has to respond to the current prompt.
 	// Response Card can come from the bot configuration (in the Amazon Lex console,
 	// choose the settings button next to a slot) or from a code hook (Lambda function).
 	ResponseCard *ResponseCard `locationName:"responseCard" type:"structure"`
 
+	// The sentiment expressed in and utterance.
+	//
+	// When the bot is configured to send utterances to Amazon Comprehend for sentiment
+	// analysis, this field contains the result of the analysis.
+	SentimentResponse *SentimentResponse `locationName:"sentimentResponse" type:"structure"`
+
 	// A map of key-value pairs representing the session-specific context information.
+	//
+	// SessionAttributes is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostTextOutput's
+	// String and GoString methods.
 	SessionAttributes map[string]*string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
+
+	// A unique identifier for the session.
+	SessionId *string `locationName:"sessionId" type:"string"`
 
 	// If the dialogState value is ElicitSlot, returns the name of the slot for
 	// which Amazon Lex is eliciting a value.
@@ -1105,17 +3058,47 @@ type PostTextOutput struct {
 	// TOP_RESOLUTION Amazon Lex returns the first value in the resolution list
 	// or, if there is no resolution list, null. If you don't specify a valueSelectionStrategy,
 	// the default is ORIGINAL_VALUE.
+	//
+	// Slots is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PostTextOutput's
+	// String and GoString methods.
 	Slots map[string]*string `locationName:"slots" type:"map" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PostTextOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PostTextOutput) GoString() string {
 	return s.String()
+}
+
+// SetActiveContexts sets the ActiveContexts field's value.
+func (s *PostTextOutput) SetActiveContexts(v []*ActiveContext) *PostTextOutput {
+	s.ActiveContexts = v
+	return s
+}
+
+// SetAlternativeIntents sets the AlternativeIntents field's value.
+func (s *PostTextOutput) SetAlternativeIntents(v []*PredictedIntent) *PostTextOutput {
+	s.AlternativeIntents = v
+	return s
+}
+
+// SetBotVersion sets the BotVersion field's value.
+func (s *PostTextOutput) SetBotVersion(v string) *PostTextOutput {
+	s.BotVersion = &v
+	return s
 }
 
 // SetDialogState sets the DialogState field's value.
@@ -1142,15 +3125,33 @@ func (s *PostTextOutput) SetMessageFormat(v string) *PostTextOutput {
 	return s
 }
 
+// SetNluIntentConfidence sets the NluIntentConfidence field's value.
+func (s *PostTextOutput) SetNluIntentConfidence(v *IntentConfidence) *PostTextOutput {
+	s.NluIntentConfidence = v
+	return s
+}
+
 // SetResponseCard sets the ResponseCard field's value.
 func (s *PostTextOutput) SetResponseCard(v *ResponseCard) *PostTextOutput {
 	s.ResponseCard = v
 	return s
 }
 
+// SetSentimentResponse sets the SentimentResponse field's value.
+func (s *PostTextOutput) SetSentimentResponse(v *SentimentResponse) *PostTextOutput {
+	s.SentimentResponse = v
+	return s
+}
+
 // SetSessionAttributes sets the SessionAttributes field's value.
 func (s *PostTextOutput) SetSessionAttributes(v map[string]*string) *PostTextOutput {
 	s.SessionAttributes = v
+	return s
+}
+
+// SetSessionId sets the SessionId field's value.
+func (s *PostTextOutput) SetSessionId(v string) *PostTextOutput {
+	s.SessionId = &v
 	return s
 }
 
@@ -1164,6 +3165,517 @@ func (s *PostTextOutput) SetSlotToElicit(v string) *PostTextOutput {
 func (s *PostTextOutput) SetSlots(v map[string]*string) *PostTextOutput {
 	s.Slots = v
 	return s
+}
+
+// An intent that Amazon Lex suggests satisfies the user's intent. Includes
+// the name of the intent, the confidence that Amazon Lex has that the user's
+// intent is satisfied, and the slots defined for the intent.
+type PredictedIntent struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the intent that Amazon Lex suggests satisfies the user's intent.
+	IntentName *string `locationName:"intentName" type:"string"`
+
+	// Indicates how confident Amazon Lex is that an intent satisfies the user's
+	// intent.
+	NluIntentConfidence *IntentConfidence `locationName:"nluIntentConfidence" type:"structure"`
+
+	// The slot and slot values associated with the predicted intent.
+	//
+	// Slots is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PredictedIntent's
+	// String and GoString methods.
+	Slots map[string]*string `locationName:"slots" type:"map" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PredictedIntent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PredictedIntent) GoString() string {
+	return s.String()
+}
+
+// SetIntentName sets the IntentName field's value.
+func (s *PredictedIntent) SetIntentName(v string) *PredictedIntent {
+	s.IntentName = &v
+	return s
+}
+
+// SetNluIntentConfidence sets the NluIntentConfidence field's value.
+func (s *PredictedIntent) SetNluIntentConfidence(v *IntentConfidence) *PredictedIntent {
+	s.NluIntentConfidence = v
+	return s
+}
+
+// SetSlots sets the Slots field's value.
+func (s *PredictedIntent) SetSlots(v map[string]*string) *PredictedIntent {
+	s.Slots = v
+	return s
+}
+
+type PutSessionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The message that Amazon Lex returns in the response can be either text or
+	// speech based depending on the value of this field.
+	//
+	//    * If the value is text/plain; charset=utf-8, Amazon Lex returns text in
+	//    the response.
+	//
+	//    * If the value begins with audio/, Amazon Lex returns speech in the response.
+	//    Amazon Lex uses Amazon Polly to generate the speech in the configuration
+	//    that you specify. For example, if you specify audio/mpeg as the value,
+	//    Amazon Lex returns speech in the MPEG format.
+	//
+	//    * If the value is audio/pcm, the speech is returned as audio/pcm in 16-bit,
+	//    little endian format.
+	//
+	//    * The following are the accepted values: audio/mpeg audio/ogg audio/pcm
+	//    audio/* (defaults to mpeg) text/plain; charset=utf-8
+	Accept *string `location:"header" locationName:"Accept" type:"string"`
+
+	// A list of contexts active for the request. A context can be activated when
+	// a previous intent is fulfilled, or by including the context in the request,
+	//
+	// If you don't specify a list of contexts, Amazon Lex will use the current
+	// list of contexts for the session. If you specify an empty list, all contexts
+	// for the session are cleared.
+	//
+	// ActiveContexts is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PutSessionInput's
+	// String and GoString methods.
+	ActiveContexts []*ActiveContext `locationName:"activeContexts" type:"list" sensitive:"true"`
+
+	// The alias in use for the bot that contains the session data.
+	//
+	// BotAlias is a required field
+	BotAlias *string `location:"uri" locationName:"botAlias" type:"string" required:"true"`
+
+	// The name of the bot that contains the session data.
+	//
+	// BotName is a required field
+	BotName *string `location:"uri" locationName:"botName" type:"string" required:"true"`
+
+	// Sets the next action that the bot should take to fulfill the conversation.
+	DialogAction *DialogAction `locationName:"dialogAction" type:"structure"`
+
+	// A summary of the recent intents for the bot. You can use the intent summary
+	// view to set a checkpoint label on an intent and modify attributes of intents.
+	// You can also use it to remove or add intent summary objects to the list.
+	//
+	// An intent that you modify or add to the list must make sense for the bot.
+	// For example, the intent name must be valid for the bot. You must provide
+	// valid values for:
+	//
+	//    * intentName
+	//
+	//    * slot names
+	//
+	//    * slotToElict
+	//
+	// If you send the recentIntentSummaryView parameter in a PutSession request,
+	// the contents of the new summary view replaces the old summary view. For example,
+	// if a GetSession request returns three intents in the summary view and you
+	// call PutSession with one intent in the summary view, the next call to GetSession
+	// will only return one intent.
+	RecentIntentSummaryView []*IntentSummary `locationName:"recentIntentSummaryView" type:"list"`
+
+	// Map of key/value pairs representing the session-specific context information.
+	// It contains application information passed between Amazon Lex and a client
+	// application.
+	//
+	// SessionAttributes is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PutSessionInput's
+	// String and GoString methods.
+	SessionAttributes map[string]*string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
+
+	// The ID of the client application user. Amazon Lex uses this to identify a
+	// user's conversation with your bot.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"userId" min:"2" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutSessionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutSessionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutSessionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PutSessionInput"}
+	if s.BotAlias == nil {
+		invalidParams.Add(request.NewErrParamRequired("BotAlias"))
+	}
+	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BotAlias", 1))
+	}
+	if s.BotName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BotName"))
+	}
+	if s.BotName != nil && len(*s.BotName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BotName", 1))
+	}
+	if s.UserId == nil {
+		invalidParams.Add(request.NewErrParamRequired("UserId"))
+	}
+	if s.UserId != nil && len(*s.UserId) < 2 {
+		invalidParams.Add(request.NewErrParamMinLen("UserId", 2))
+	}
+	if s.ActiveContexts != nil {
+		for i, v := range s.ActiveContexts {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ActiveContexts", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.DialogAction != nil {
+		if err := s.DialogAction.Validate(); err != nil {
+			invalidParams.AddNested("DialogAction", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.RecentIntentSummaryView != nil {
+		for i, v := range s.RecentIntentSummaryView {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecentIntentSummaryView", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccept sets the Accept field's value.
+func (s *PutSessionInput) SetAccept(v string) *PutSessionInput {
+	s.Accept = &v
+	return s
+}
+
+// SetActiveContexts sets the ActiveContexts field's value.
+func (s *PutSessionInput) SetActiveContexts(v []*ActiveContext) *PutSessionInput {
+	s.ActiveContexts = v
+	return s
+}
+
+// SetBotAlias sets the BotAlias field's value.
+func (s *PutSessionInput) SetBotAlias(v string) *PutSessionInput {
+	s.BotAlias = &v
+	return s
+}
+
+// SetBotName sets the BotName field's value.
+func (s *PutSessionInput) SetBotName(v string) *PutSessionInput {
+	s.BotName = &v
+	return s
+}
+
+// SetDialogAction sets the DialogAction field's value.
+func (s *PutSessionInput) SetDialogAction(v *DialogAction) *PutSessionInput {
+	s.DialogAction = v
+	return s
+}
+
+// SetRecentIntentSummaryView sets the RecentIntentSummaryView field's value.
+func (s *PutSessionInput) SetRecentIntentSummaryView(v []*IntentSummary) *PutSessionInput {
+	s.RecentIntentSummaryView = v
+	return s
+}
+
+// SetSessionAttributes sets the SessionAttributes field's value.
+func (s *PutSessionInput) SetSessionAttributes(v map[string]*string) *PutSessionInput {
+	s.SessionAttributes = v
+	return s
+}
+
+// SetUserId sets the UserId field's value.
+func (s *PutSessionInput) SetUserId(v string) *PutSessionInput {
+	s.UserId = &v
+	return s
+}
+
+type PutSessionOutput struct {
+	_ struct{} `type:"structure" payload:"AudioStream"`
+
+	// A list of active contexts for the session.
+	//
+	// ActiveContexts is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PutSessionOutput's
+	// String and GoString methods.
+	ActiveContexts *string `location:"header" locationName:"x-amz-lex-active-contexts" type:"string" suppressedJSONValue:"true" sensitive:"true"`
+
+	// The audio version of the message to convey to the user.
+	AudioStream io.ReadCloser `locationName:"audioStream" type:"blob"`
+
+	// Content type as specified in the Accept HTTP header in the request.
+	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
+
+	//    * ConfirmIntent - Amazon Lex is expecting a "yes" or "no" response to
+	//    confirm the intent before fulfilling an intent.
+	//
+	//    * ElicitIntent - Amazon Lex wants to elicit the user's intent.
+	//
+	//    * ElicitSlot - Amazon Lex is expecting the value of a slot for the current
+	//    intent.
+	//
+	//    * Failed - Conveys that the conversation with the user has failed. This
+	//    can happen for various reasons, including the user does not provide an
+	//    appropriate response to prompts from the service, or if the Lambda function
+	//    fails to fulfill the intent.
+	//
+	//    * Fulfilled - Conveys that the Lambda function has sucessfully fulfilled
+	//    the intent.
+	//
+	//    * ReadyForFulfillment - Conveys that the client has to fulfill the intent.
+	DialogState *string `location:"header" locationName:"x-amz-lex-dialog-state" type:"string" enum:"DialogState"`
+
+	// The next message that should be presented to the user.
+	//
+	// The encodedMessage field is base-64 encoded. You must decode the field before
+	// you can use the value.
+	//
+	// EncodedMessage is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PutSessionOutput's
+	// String and GoString methods.
+	EncodedMessage *string `location:"header" locationName:"x-amz-lex-encoded-message" min:"1" type:"string" sensitive:"true"`
+
+	// The name of the current intent.
+	IntentName *string `location:"header" locationName:"x-amz-lex-intent-name" type:"string"`
+
+	// The next message that should be presented to the user.
+	//
+	// You can only use this field in the de-DE, en-AU, en-GB, en-US, es-419, es-ES,
+	// es-US, fr-CA, fr-FR, and it-IT locales. In all other locales, the message
+	// field is null. You should use the encodedMessage field instead.
+	//
+	// Deprecated: The message field is deprecated, use the encodedMessage field instead. The message field is available only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales.
+	//
+	// Message is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by PutSessionOutput's
+	// String and GoString methods.
+	Message *string `location:"header" locationName:"x-amz-lex-message" min:"1" deprecated:"true" type:"string" sensitive:"true"`
+
+	// The format of the response message. One of the following values:
+	//
+	//    * PlainText - The message contains plain UTF-8 text.
+	//
+	//    * CustomPayload - The message is a custom format for the client.
+	//
+	//    * SSML - The message contains text formatted for voice output.
+	//
+	//    * Composite - The message contains an escaped JSON object containing one
+	//    or more messages from the groups that messages were assigned to when the
+	//    intent was created.
+	MessageFormat *string `location:"header" locationName:"x-amz-lex-message-format" type:"string" enum:"MessageFormatType"`
+
+	// Map of key/value pairs representing session-specific context information.
+	SessionAttributes aws.JSONValue `location:"header" locationName:"x-amz-lex-session-attributes" type:"jsonvalue"`
+
+	// A unique identifier for the session.
+	SessionId *string `location:"header" locationName:"x-amz-lex-session-id" type:"string"`
+
+	// If the dialogState is ElicitSlot, returns the name of the slot for which
+	// Amazon Lex is eliciting a value.
+	SlotToElicit *string `location:"header" locationName:"x-amz-lex-slot-to-elicit" type:"string"`
+
+	// Map of zero or more intent slots Amazon Lex detected from the user input
+	// during the conversation.
+	//
+	// Amazon Lex creates a resolution list containing likely values for a slot.
+	// The value that it returns is determined by the valueSelectionStrategy selected
+	// when the slot type was created or updated. If valueSelectionStrategy is set
+	// to ORIGINAL_VALUE, the value provided by the user is returned, if the user
+	// value is similar to the slot values. If valueSelectionStrategy is set to
+	// TOP_RESOLUTION Amazon Lex returns the first value in the resolution list
+	// or, if there is no resolution list, null. If you don't specify a valueSelectionStrategy
+	// the default is ORIGINAL_VALUE.
+	Slots aws.JSONValue `location:"header" locationName:"x-amz-lex-slots" type:"jsonvalue"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutSessionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutSessionOutput) GoString() string {
+	return s.String()
+}
+
+// SetActiveContexts sets the ActiveContexts field's value.
+func (s *PutSessionOutput) SetActiveContexts(v string) *PutSessionOutput {
+	s.ActiveContexts = &v
+	return s
+}
+
+// SetAudioStream sets the AudioStream field's value.
+func (s *PutSessionOutput) SetAudioStream(v io.ReadCloser) *PutSessionOutput {
+	s.AudioStream = v
+	return s
+}
+
+// SetContentType sets the ContentType field's value.
+func (s *PutSessionOutput) SetContentType(v string) *PutSessionOutput {
+	s.ContentType = &v
+	return s
+}
+
+// SetDialogState sets the DialogState field's value.
+func (s *PutSessionOutput) SetDialogState(v string) *PutSessionOutput {
+	s.DialogState = &v
+	return s
+}
+
+// SetEncodedMessage sets the EncodedMessage field's value.
+func (s *PutSessionOutput) SetEncodedMessage(v string) *PutSessionOutput {
+	s.EncodedMessage = &v
+	return s
+}
+
+// SetIntentName sets the IntentName field's value.
+func (s *PutSessionOutput) SetIntentName(v string) *PutSessionOutput {
+	s.IntentName = &v
+	return s
+}
+
+// SetMessage sets the Message field's value.
+func (s *PutSessionOutput) SetMessage(v string) *PutSessionOutput {
+	s.Message = &v
+	return s
+}
+
+// SetMessageFormat sets the MessageFormat field's value.
+func (s *PutSessionOutput) SetMessageFormat(v string) *PutSessionOutput {
+	s.MessageFormat = &v
+	return s
+}
+
+// SetSessionAttributes sets the SessionAttributes field's value.
+func (s *PutSessionOutput) SetSessionAttributes(v aws.JSONValue) *PutSessionOutput {
+	s.SessionAttributes = v
+	return s
+}
+
+// SetSessionId sets the SessionId field's value.
+func (s *PutSessionOutput) SetSessionId(v string) *PutSessionOutput {
+	s.SessionId = &v
+	return s
+}
+
+// SetSlotToElicit sets the SlotToElicit field's value.
+func (s *PutSessionOutput) SetSlotToElicit(v string) *PutSessionOutput {
+	s.SlotToElicit = &v
+	return s
+}
+
+// SetSlots sets the Slots field's value.
+func (s *PutSessionOutput) SetSlots(v aws.JSONValue) *PutSessionOutput {
+	s.Slots = v
+	return s
+}
+
+// The input speech is too long.
+type RequestTimeoutException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestTimeoutException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestTimeoutException) GoString() string {
+	return s.String()
+}
+
+func newErrorRequestTimeoutException(v protocol.ResponseMetadata) error {
+	return &RequestTimeoutException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RequestTimeoutException) Code() string {
+	return "RequestTimeoutException"
+}
+
+// Message returns the exception's message.
+func (s *RequestTimeoutException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RequestTimeoutException) OrigErr() error {
+	return nil
+}
+
+func (s *RequestTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RequestTimeoutException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RequestTimeoutException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // If you configure a response card when creating your bots, Amazon Lex substitutes
@@ -1183,12 +3695,20 @@ type ResponseCard struct {
 	Version *string `locationName:"version" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResponseCard) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResponseCard) GoString() string {
 	return s.String()
 }
@@ -1211,10 +3731,174 @@ func (s *ResponseCard) SetVersion(v string) *ResponseCard {
 	return s
 }
 
+// The sentiment expressed in an utterance.
+//
+// When the bot is configured to send utterances to Amazon Comprehend for sentiment
+// analysis, this field structure contains the result of the analysis.
+type SentimentResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The inferred sentiment that Amazon Comprehend has the highest confidence
+	// in.
+	SentimentLabel *string `locationName:"sentimentLabel" type:"string"`
+
+	// The likelihood that the sentiment was correctly inferred.
+	SentimentScore *string `locationName:"sentimentScore" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SentimentResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SentimentResponse) GoString() string {
+	return s.String()
+}
+
+// SetSentimentLabel sets the SentimentLabel field's value.
+func (s *SentimentResponse) SetSentimentLabel(v string) *SentimentResponse {
+	s.SentimentLabel = &v
+	return s
+}
+
+// SetSentimentScore sets the SentimentScore field's value.
+func (s *SentimentResponse) SetSentimentScore(v string) *SentimentResponse {
+	s.SentimentScore = &v
+	return s
+}
+
+// The Content-Type header (PostContent API) has an invalid value.
+type UnsupportedMediaTypeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedMediaTypeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedMediaTypeException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedMediaTypeException(v protocol.ResponseMetadata) error {
+	return &UnsupportedMediaTypeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedMediaTypeException) Code() string {
+	return "UnsupportedMediaTypeException"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedMediaTypeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedMediaTypeException) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedMediaTypeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedMediaTypeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedMediaTypeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+const (
+	// ConfirmationStatusNone is a ConfirmationStatus enum value
+	ConfirmationStatusNone = "None"
+
+	// ConfirmationStatusConfirmed is a ConfirmationStatus enum value
+	ConfirmationStatusConfirmed = "Confirmed"
+
+	// ConfirmationStatusDenied is a ConfirmationStatus enum value
+	ConfirmationStatusDenied = "Denied"
+)
+
+// ConfirmationStatus_Values returns all elements of the ConfirmationStatus enum
+func ConfirmationStatus_Values() []string {
+	return []string{
+		ConfirmationStatusNone,
+		ConfirmationStatusConfirmed,
+		ConfirmationStatusDenied,
+	}
+}
+
 const (
 	// ContentTypeApplicationVndAmazonawsCardGeneric is a ContentType enum value
 	ContentTypeApplicationVndAmazonawsCardGeneric = "application/vnd.amazonaws.card.generic"
 )
+
+// ContentType_Values returns all elements of the ContentType enum
+func ContentType_Values() []string {
+	return []string{
+		ContentTypeApplicationVndAmazonawsCardGeneric,
+	}
+}
+
+const (
+	// DialogActionTypeElicitIntent is a DialogActionType enum value
+	DialogActionTypeElicitIntent = "ElicitIntent"
+
+	// DialogActionTypeConfirmIntent is a DialogActionType enum value
+	DialogActionTypeConfirmIntent = "ConfirmIntent"
+
+	// DialogActionTypeElicitSlot is a DialogActionType enum value
+	DialogActionTypeElicitSlot = "ElicitSlot"
+
+	// DialogActionTypeClose is a DialogActionType enum value
+	DialogActionTypeClose = "Close"
+
+	// DialogActionTypeDelegate is a DialogActionType enum value
+	DialogActionTypeDelegate = "Delegate"
+)
+
+// DialogActionType_Values returns all elements of the DialogActionType enum
+func DialogActionType_Values() []string {
+	return []string{
+		DialogActionTypeElicitIntent,
+		DialogActionTypeConfirmIntent,
+		DialogActionTypeElicitSlot,
+		DialogActionTypeClose,
+		DialogActionTypeDelegate,
+	}
+}
 
 const (
 	// DialogStateElicitIntent is a DialogState enum value
@@ -1236,6 +3920,38 @@ const (
 	DialogStateFailed = "Failed"
 )
 
+// DialogState_Values returns all elements of the DialogState enum
+func DialogState_Values() []string {
+	return []string{
+		DialogStateElicitIntent,
+		DialogStateConfirmIntent,
+		DialogStateElicitSlot,
+		DialogStateFulfilled,
+		DialogStateReadyForFulfillment,
+		DialogStateFailed,
+	}
+}
+
+const (
+	// FulfillmentStateFulfilled is a FulfillmentState enum value
+	FulfillmentStateFulfilled = "Fulfilled"
+
+	// FulfillmentStateFailed is a FulfillmentState enum value
+	FulfillmentStateFailed = "Failed"
+
+	// FulfillmentStateReadyForFulfillment is a FulfillmentState enum value
+	FulfillmentStateReadyForFulfillment = "ReadyForFulfillment"
+)
+
+// FulfillmentState_Values returns all elements of the FulfillmentState enum
+func FulfillmentState_Values() []string {
+	return []string{
+		FulfillmentStateFulfilled,
+		FulfillmentStateFailed,
+		FulfillmentStateReadyForFulfillment,
+	}
+}
+
 const (
 	// MessageFormatTypePlainText is a MessageFormatType enum value
 	MessageFormatTypePlainText = "PlainText"
@@ -1249,3 +3965,13 @@ const (
 	// MessageFormatTypeComposite is a MessageFormatType enum value
 	MessageFormatTypeComposite = "Composite"
 )
+
+// MessageFormatType_Values returns all elements of the MessageFormatType enum
+func MessageFormatType_Values() []string {
+	return []string{
+		MessageFormatTypePlainText,
+		MessageFormatTypeCustomPayload,
+		MessageFormatTypeSsml,
+		MessageFormatTypeComposite,
+	}
+}

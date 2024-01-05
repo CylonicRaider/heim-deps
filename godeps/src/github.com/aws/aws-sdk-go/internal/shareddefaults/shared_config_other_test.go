@@ -1,3 +1,4 @@
+//go:build !windows
 // +build !windows
 
 package shareddefaults_test
@@ -7,13 +8,13 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/awstesting"
+	"github.com/aws/aws-sdk-go/internal/sdktesting"
 	"github.com/aws/aws-sdk-go/internal/shareddefaults"
 )
 
 func TestSharedCredsFilename(t *testing.T) {
-	env := awstesting.StashEnv()
-	defer awstesting.PopEnv(env)
+	restoreEnvFn := sdktesting.StashEnv()
+	defer restoreEnvFn()
 
 	os.Setenv("HOME", "home_dir")
 	os.Setenv("USERPROFILE", "profile_dir")
@@ -27,8 +28,8 @@ func TestSharedCredsFilename(t *testing.T) {
 }
 
 func TestSharedConfigFilename(t *testing.T) {
-	env := awstesting.StashEnv()
-	defer awstesting.PopEnv(env)
+	restoreEnvFn := sdktesting.StashEnv()
+	defer restoreEnvFn()
 
 	os.Setenv("HOME", "home_dir")
 	os.Setenv("USERPROFILE", "profile_dir")

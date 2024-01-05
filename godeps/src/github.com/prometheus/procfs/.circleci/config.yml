@@ -1,60 +1,61 @@
 ---
 version: 2.1
 
-commands:
-  default:
-    steps:
-    - run: make style check_license vet test staticcheck
-  no-style:
-    steps:
-    - run: make check_license vet test staticcheck
-  no-test:
-    steps:
-    - run: make style check_license vet staticcheck
-  no-style-test:
-    steps:
-    - run: go get -t ./...
-    - run: make check_license vet staticcheck
-
 jobs:
+  lint:
+    docker:
+    - image: cimg/go:1.21
+    steps:
+    - checkout
+    - run: make check_license
+    - run: ./scripts/check_build_tags.sh
+    - run: make fixtures
+    - run: make update_fixtures
+    - run: make style
+    - run: git diff --exit-code
+
   test:
     parameters:
-      command:
-        type: string
       go_version:
         type: string
       os:
         type: string
+      run_test:
+        type: boolean
+        default: true
     docker:
-    - image: circleci/golang:<< parameters.go_version >>
+    - image: cimg/go:<< parameters.go_version >>
     environment:
       GOOS: "<< parameters.os >>"
-    working_directory: /go/src/github.com/prometheus/procfs
     steps:
     - checkout
-    - << parameters.command >>
+    - run: make lint
+    - when:
+        condition: << parameters.run_test >>
+        steps:
+        - run: make test
 
 workflows:
   version: 2
   procfs:
     jobs:
+    - lint
     - test:
-        command: no-style-test
-        name: linux-1-10
+        name: test-linux
         os: linux
-        go_version: "1.10"
+        matrix:
+          parameters:
+            go_version:
+            - "1.19"
+            - "1.20"
+            - "1.21"
     - test:
-        command: default
-        name: linux-1-11
-        os: linux
-        go_version: "1.11"
-    - test:
-        command: no-style-test
-        name: windows-1-10
+        name: test-windows
         os: windows
-        go_version: "1.10"
-    - test:
-        command: no-test
-        name: windows-1-11
-        os: windows
-        go_version: "1.11"
+        run_test: false
+        matrix:
+          parameters:
+            go_version:
+            - "1.19"
+            - "1.20"
+            - "1.21"

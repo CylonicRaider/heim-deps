@@ -22,9 +22,10 @@ import (
 	"strings"
 
 	"github.com/bgentry/speakeasy"
-	"go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/pkg/report"
 	"google.golang.org/grpc/grpclog"
+
+	clientv3 "go.etcd.io/etcd/client/v3"
+	"go.etcd.io/etcd/pkg/v3/report"
 )
 
 var (
@@ -47,22 +48,22 @@ func mustFindLeaderEndpoints(c *clientv3.Client) {
 		os.Exit(1)
 	}
 
-	leaderId := uint64(0)
+	leaderID := uint64(0)
 	for _, ep := range c.Endpoints() {
 		if sresp, serr := c.Status(context.TODO(), ep); serr == nil {
-			leaderId = sresp.Leader
+			leaderID = sresp.Leader
 			break
 		}
 	}
 
 	for _, m := range resp.Members {
-		if m.ID == leaderId {
+		if m.ID == leaderID {
 			leaderEps = m.ClientURLs
 			return
 		}
 	}
 
-	fmt.Fprintf(os.Stderr, "failed to find a leader endpoint\n")
+	fmt.Fprint(os.Stderr, "failed to find a leader endpoint\n")
 	os.Exit(1)
 }
 
@@ -93,8 +94,9 @@ func mustCreateConn() *clientv3.Client {
 		dialTotal++
 	}
 	cfg := clientv3.Config{
-		Endpoints:   connEndpoints,
-		DialTimeout: dialTimeout,
+		AutoSyncInterval: autoSyncInterval,
+		Endpoints:        connEndpoints,
+		DialTimeout:      dialTimeout,
 	}
 	if !tls.Empty() || tls.TrustedCAFile != "" {
 		cfgtls, err := tls.ClientConfig()
@@ -123,7 +125,7 @@ func mustCreateConn() *clientv3.Client {
 		return mustCreateConn()
 	}
 
-	clientv3.SetLogger(grpclog.NewLoggerV2(os.Stderr, os.Stderr, os.Stderr))
+	grpclog.SetLoggerV2(grpclog.NewLoggerV2(os.Stderr, os.Stderr, os.Stderr))
 
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "dial error: %v\n", err)

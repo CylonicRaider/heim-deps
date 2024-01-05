@@ -160,7 +160,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Not found.", http.StatusNotFound)
 		return
 	}
-	if r.Method != "GET" {
+	if r.Method != http.MethodGet {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
@@ -178,7 +178,11 @@ func main() {
 	http.HandleFunc("/r", echoReadAllWriter)
 	http.HandleFunc("/m", echoReadAllWriteMessage)
 	http.HandleFunc("/p", echoReadAllWritePreparedMessage)
-	err := http.ListenAndServe(*addr, nil)
+	server := &http.Server{
+		Addr:              *addr,
+		ReadHeaderTimeout: 3 * time.Second,
+	}
+	err := server.ListenAndServe()
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}

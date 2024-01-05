@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go/private/protocol"
 )
 
 const opBatchMeterUsage = "BatchMeterUsage"
@@ -27,14 +28,13 @@ const opBatchMeterUsage = "BatchMeterUsage"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchMeterUsageRequest method.
+//	req, resp := client.BatchMeterUsageRequest(params)
 //
-//    // Example sending a request using the BatchMeterUsageRequest method.
-//    req, resp := client.BatchMeterUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsage
 func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput) (req *request.Request, output *BatchMeterUsageOutput) {
@@ -55,7 +55,7 @@ func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput
 
 // BatchMeterUsage API operation for AWSMarketplace Metering.
 //
-// BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace
+// BatchMeterUsage is called from a SaaS application listed on AWS Marketplace
 // to post metering records for a set of customers.
 //
 // For identical requests, the API is idempotent; requests can be retried with
@@ -64,7 +64,25 @@ func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput
 // Every request to BatchMeterUsage is for one product. If you need to meter
 // usage for multiple products, you must make multiple calls to BatchMeterUsage.
 //
+// Usage records are expected to be submitted as quickly as possible after the
+// event that is being recorded, and are not accepted more than 6 hours after
+// the event.
+//
 // BatchMeterUsage can process up to 25 UsageRecords at a time.
+//
+// A UsageRecord can optionally include multiple usage allocations, to provide
+// customers with usage data split into buckets by tags that you define (or
+// allow the customer to define).
+//
+// BatchMeterUsage returns a list of UsageRecordResult objects, showing the
+// result for each UsageRecord, as well as a list of UnprocessedRecords, indicating
+// errors in the service side that you should retry.
+//
+// BatchMeterUsage requests must be less than 1MB in size.
+//
+// For an example of using BatchMeterUsage, see BatchMeterUsage code example
+// (https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example)
+// in the AWS Marketplace Seller Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -73,30 +91,42 @@ func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput
 // See the AWS API reference guide for AWSMarketplace Metering's
 // API operation BatchMeterUsage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   An internal error has occurred. Retry your request. If the problem persists,
-//   post a message with details on the AWS forums.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidProductCodeException "InvalidProductCodeException"
-//   The product code passed does not match the product code used for publishing
-//   the product.
+//   - InternalServiceErrorException
+//     An internal error has occurred. Retry your request. If the problem persists,
+//     post a message with details on the AWS forums.
 //
-//   * ErrCodeInvalidUsageDimensionException "InvalidUsageDimensionException"
-//   The usage dimension does not match one of the UsageDimensions associated
-//   with products.
+//   - InvalidProductCodeException
+//     The product code passed does not match the product code used for publishing
+//     the product.
 //
-//   * ErrCodeInvalidCustomerIdentifierException "InvalidCustomerIdentifierException"
-//   You have metered usage for a CustomerIdentifier that does not exist.
+//   - InvalidUsageDimensionException
+//     The usage dimension does not match one of the UsageDimensions associated
+//     with products.
 //
-//   * ErrCodeTimestampOutOfBoundsException "TimestampOutOfBoundsException"
-//   The timestamp value passed in the meterUsage() is out of allowed range.
+//   - InvalidTagException
+//     The tag is invalid, or the number of tags is greater than 5.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The calls to the API are throttled.
+//   - InvalidUsageAllocationsException
+//     The usage allocation objects are invalid, or the number of allocations is
+//     greater than 500 for a single usage record.
 //
-//   * ErrCodeDisabledApiException "DisabledApiException"
-//   The API is disabled in the Region.
+//   - InvalidCustomerIdentifierException
+//     You have metered usage for a CustomerIdentifier that does not exist.
+//
+//   - TimestampOutOfBoundsException
+//     The timestamp value passed in the UsageRecord is out of allowed range.
+//
+//     For BatchMeterUsage, if any of the records are outside of the allowed range,
+//     the entire batch is not processed. You must remove invalid records and try
+//     again.
+//
+//   - ThrottlingException
+//     The calls to the API are throttled.
+//
+//   - DisabledApiException
+//     The API is disabled in the Region.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsage
 func (c *MarketplaceMetering) BatchMeterUsage(input *BatchMeterUsageInput) (*BatchMeterUsageOutput, error) {
@@ -136,14 +166,13 @@ const opMeterUsage = "MeterUsage"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the MeterUsageRequest method.
+//	req, resp := client.MeterUsageRequest(params)
 //
-//    // Example sending a request using the MeterUsageRequest method.
-//    req, resp := client.MeterUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsage
 func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) (req *request.Request, output *MeterUsageOutput) {
@@ -167,8 +196,16 @@ func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) (req *re
 // API to emit metering records. For identical requests, the API is idempotent.
 // It simply returns the metering record ID.
 //
-// MeterUsage is authenticated on the buyer's AWS account, generally when running
-// from an EC2 instance on the AWS Marketplace.
+// MeterUsage is authenticated on the buyer's AWS account using credentials
+// from the EC2 instance, ECS task, or EKS pod.
+//
+// MeterUsage can optionally include multiple usage allocations, to provide
+// customers with usage data split into buckets by tags that you define (or
+// allow the customer to define).
+//
+// Usage records are expected to be submitted as quickly as possible after the
+// event that is being recorded, and are not accepted more than 6 hours after
+// the event.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -177,33 +214,50 @@ func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) (req *re
 // See the AWS API reference guide for AWSMarketplace Metering's
 // API operation MeterUsage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   An internal error has occurred. Retry your request. If the problem persists,
-//   post a message with details on the AWS forums.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidProductCodeException "InvalidProductCodeException"
-//   The product code passed does not match the product code used for publishing
-//   the product.
+//   - InternalServiceErrorException
+//     An internal error has occurred. Retry your request. If the problem persists,
+//     post a message with details on the AWS forums.
 //
-//   * ErrCodeInvalidUsageDimensionException "InvalidUsageDimensionException"
-//   The usage dimension does not match one of the UsageDimensions associated
-//   with products.
+//   - InvalidProductCodeException
+//     The product code passed does not match the product code used for publishing
+//     the product.
 //
-//   * ErrCodeInvalidEndpointRegionException "InvalidEndpointRegionException"
-//   The endpoint being called is in a Region different from your EC2 instance.
-//   The Region of the Metering Service endpoint and the Region of the EC2 instance
-//   must match.
+//   - InvalidUsageDimensionException
+//     The usage dimension does not match one of the UsageDimensions associated
+//     with products.
 //
-//   * ErrCodeTimestampOutOfBoundsException "TimestampOutOfBoundsException"
-//   The timestamp value passed in the meterUsage() is out of allowed range.
+//   - InvalidTagException
+//     The tag is invalid, or the number of tags is greater than 5.
 //
-//   * ErrCodeDuplicateRequestException "DuplicateRequestException"
-//   A metering record has already been emitted by the same EC2 instance for the
-//   given {usageDimension, timestamp} with a different usageQuantity.
+//   - InvalidUsageAllocationsException
+//     The usage allocation objects are invalid, or the number of allocations is
+//     greater than 500 for a single usage record.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The calls to the API are throttled.
+//   - InvalidEndpointRegionException
+//     The endpoint being called is in a AWS Region different from your EC2 instance,
+//     ECS task, or EKS pod. The Region of the Metering Service endpoint and the
+//     AWS Region of the resource must match.
+//
+//   - TimestampOutOfBoundsException
+//     The timestamp value passed in the UsageRecord is out of allowed range.
+//
+//     For BatchMeterUsage, if any of the records are outside of the allowed range,
+//     the entire batch is not processed. You must remove invalid records and try
+//     again.
+//
+//   - DuplicateRequestException
+//     A metering record has already been emitted by the same EC2 instance, ECS
+//     task, or EKS pod for the given {usageDimension, timestamp} with a different
+//     usageQuantity.
+//
+//   - ThrottlingException
+//     The calls to the API are throttled.
+//
+//   - CustomerNotEntitledException
+//     Exception thrown when the customer does not have a valid subscription for
+//     the product.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsage
 func (c *MarketplaceMetering) MeterUsage(input *MeterUsageInput) (*MeterUsageOutput, error) {
@@ -243,14 +297,13 @@ const opRegisterUsage = "RegisterUsage"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterUsageRequest method.
+//	req, resp := client.RegisterUsageRequest(params)
 //
-//    // Example sending a request using the RegisterUsageRequest method.
-//    req, resp := client.RegisterUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/RegisterUsage
 func (c *MarketplaceMetering) RegisterUsageRequest(input *RegisterUsageInput) (req *request.Request, output *RegisterUsageOutput) {
@@ -273,35 +326,35 @@ func (c *MarketplaceMetering) RegisterUsageRequest(input *RegisterUsageInput) (r
 //
 // Paid container software products sold through AWS Marketplace must integrate
 // with the AWS Marketplace Metering Service and call the RegisterUsage operation
-// for software entitlement and metering. Calling RegisterUsage from containers
-// running outside of ECS is not currently supported. Free and BYOL products
-// for ECS aren't required to call RegisterUsage, but you may choose to do so
-// if you would like to receive usage data in your seller reports. The sections
-// below explain the behavior of RegisterUsage. RegisterUsage performs two primary
-// functions: metering and entitlement.
+// for software entitlement and metering. Free and BYOL products for Amazon
+// ECS or Amazon EKS aren't required to call RegisterUsage, but you may choose
+// to do so if you would like to receive usage data in your seller reports.
+// The sections below explain the behavior of RegisterUsage. RegisterUsage performs
+// two primary functions: metering and entitlement.
 //
-//    * Entitlement: RegisterUsage allows you to verify that the customer running
-//    your paid software is subscribed to your product on AWS Marketplace, enabling
-//    you to guard against unauthorized use. Your container image that integrates
-//    with RegisterUsage is only required to guard against unauthorized use
-//    at container startup, as such a CustomerNotSubscribedException/PlatformNotSupportedException
-//    will only be thrown on the initial call to RegisterUsage. Subsequent calls
-//    from the same Amazon ECS task instance (e.g. task-id) will not throw a
-//    CustomerNotSubscribedException, even if the customer unsubscribes while
-//    the Amazon ECS task is still running.
+//   - Entitlement: RegisterUsage allows you to verify that the customer running
+//     your paid software is subscribed to your product on AWS Marketplace, enabling
+//     you to guard against unauthorized use. Your container image that integrates
+//     with RegisterUsage is only required to guard against unauthorized use
+//     at container startup, as such a CustomerNotSubscribedException or PlatformNotSupportedException
+//     will only be thrown on the initial call to RegisterUsage. Subsequent calls
+//     from the same Amazon ECS task instance (e.g. task-id) or Amazon EKS pod
+//     will not throw a CustomerNotSubscribedException, even if the customer
+//     unsubscribes while the Amazon ECS task or Amazon EKS pod is still running.
 //
-//    * Metering: RegisterUsage meters software use per ECS task, per hour,
-//    with usage prorated to the second. A minimum of 1 minute of usage applies
-//    to tasks that are short lived. For example, if a customer has a 10 node
-//    ECS cluster and creates an ECS service configured as a Daemon Set, then
-//    ECS will launch a task on all 10 cluster nodes and the customer will be
-//    charged: (10 * hourly_rate). Metering for software use is automatically
-//    handled by the AWS Marketplace Metering Control Plane -- your software
-//    is not required to perform any metering specific actions, other than call
-//    RegisterUsage once for metering of software use to commence. The AWS Marketplace
-//    Metering Control Plane will also continue to bill customers for running
-//    ECS tasks, regardless of the customers subscription state, removing the
-//    need for your software to perform entitlement checks at runtime.
+//   - Metering: RegisterUsage meters software use per ECS task, per hour,
+//     or per pod for Amazon EKS with usage prorated to the second. A minimum
+//     of 1 minute of usage applies to tasks that are short lived. For example,
+//     if a customer has a 10 node Amazon ECS or Amazon EKS cluster and a service
+//     configured as a Daemon Set, then Amazon ECS or Amazon EKS will launch
+//     a task on all 10 cluster nodes and the customer will be charged: (10 *
+//     hourly_rate). Metering for software use is automatically handled by the
+//     AWS Marketplace Metering Control Plane -- your software is not required
+//     to perform any metering specific actions, other than call RegisterUsage
+//     once for metering of software use to commence. The AWS Marketplace Metering
+//     Control Plane will also continue to bill customers for running ECS tasks
+//     and Amazon EKS pods, regardless of the customers subscription state, removing
+//     the need for your software to perform entitlement checks at runtime.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -310,36 +363,37 @@ func (c *MarketplaceMetering) RegisterUsageRequest(input *RegisterUsageInput) (r
 // See the AWS API reference guide for AWSMarketplace Metering's
 // API operation RegisterUsage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidProductCodeException "InvalidProductCodeException"
-//   The product code passed does not match the product code used for publishing
-//   the product.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidRegionException "InvalidRegionException"
-//   RegisterUsage must be called in the same AWS Region the ECS task was launched
-//   in. This prevents a container from hardcoding a Region (e.g. withRegion(“us-east-1”)
-//   when calling RegisterUsage.
+//   - InvalidProductCodeException
+//     The product code passed does not match the product code used for publishing
+//     the product.
 //
-//   * ErrCodeInvalidPublicKeyVersionException "InvalidPublicKeyVersionException"
-//   Public Key version is invalid.
+//   - InvalidRegionException
+//     RegisterUsage must be called in the same AWS Region the ECS task was launched
+//     in. This prevents a container from hardcoding a Region (e.g. withRegion(“us-east-1”)
+//     when calling RegisterUsage.
 //
-//   * ErrCodePlatformNotSupportedException "PlatformNotSupportedException"
-//   AWS Marketplace does not support metering usage from the underlying platform.
-//   Currently, only Amazon ECS is supported.
+//   - InvalidPublicKeyVersionException
+//     Public Key version is invalid.
 //
-//   * ErrCodeCustomerNotEntitledException "CustomerNotEntitledException"
-//   Exception thrown when the customer does not have a valid subscription for
-//   the product.
+//   - PlatformNotSupportedException
+//     AWS Marketplace does not support metering usage from the underlying platform.
+//     Currently, Amazon ECS, Amazon EKS, and AWS Fargate are supported.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The calls to the API are throttled.
+//   - CustomerNotEntitledException
+//     Exception thrown when the customer does not have a valid subscription for
+//     the product.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   An internal error has occurred. Retry your request. If the problem persists,
-//   post a message with details on the AWS forums.
+//   - ThrottlingException
+//     The calls to the API are throttled.
 //
-//   * ErrCodeDisabledApiException "DisabledApiException"
-//   The API is disabled in the Region.
+//   - InternalServiceErrorException
+//     An internal error has occurred. Retry your request. If the problem persists,
+//     post a message with details on the AWS forums.
+//
+//   - DisabledApiException
+//     The API is disabled in the Region.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/RegisterUsage
 func (c *MarketplaceMetering) RegisterUsage(input *RegisterUsageInput) (*RegisterUsageOutput, error) {
@@ -379,14 +433,13 @@ const opResolveCustomer = "ResolveCustomer"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ResolveCustomerRequest method.
+//	req, resp := client.ResolveCustomerRequest(params)
 //
-//    // Example sending a request using the ResolveCustomerRequest method.
-//    req, resp := client.ResolveCustomerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomer
 func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput) (req *request.Request, output *ResolveCustomerOutput) {
@@ -410,7 +463,15 @@ func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput
 // ResolveCustomer is called by a SaaS application during the registration process.
 // When a buyer visits your website during the registration process, the buyer
 // submits a registration token through their browser. The registration token
-// is resolved through this API to obtain a CustomerIdentifier and product code.
+// is resolved through this API to obtain a CustomerIdentifier along with the
+// CustomerAWSAccountId and ProductCode.
+//
+// The API needs to called from the seller account id used to publish the SaaS
+// application to successfully resolve the token.
+//
+// For an example of using ResolveCustomer, see ResolveCustomer code example
+// (https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example)
+// in the AWS Marketplace Seller Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -419,26 +480,27 @@ func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput
 // See the AWS API reference guide for AWSMarketplace Metering's
 // API operation ResolveCustomer for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidTokenException "InvalidTokenException"
-//   Registration token is invalid.
+// Returned Error Types:
 //
-//   * ErrCodeExpiredTokenException "ExpiredTokenException"
-//   The submitted registration token has expired. This can happen if the buyer's
-//   browser takes too long to redirect to your page, the buyer has resubmitted
-//   the registration token, or your application has held on to the registration
-//   token for too long. Your SaaS registration website should redeem this token
-//   as soon as it is submitted by the buyer's browser.
+//   - InvalidTokenException
+//     Registration token is invalid.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The calls to the API are throttled.
+//   - ExpiredTokenException
+//     The submitted registration token has expired. This can happen if the buyer's
+//     browser takes too long to redirect to your page, the buyer has resubmitted
+//     the registration token, or your application has held on to the registration
+//     token for too long. Your SaaS registration website should redeem this token
+//     as soon as it is submitted by the buyer's browser.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   An internal error has occurred. Retry your request. If the problem persists,
-//   post a message with details on the AWS forums.
+//   - ThrottlingException
+//     The calls to the API are throttled.
 //
-//   * ErrCodeDisabledApiException "DisabledApiException"
-//   The API is disabled in the Region.
+//   - InternalServiceErrorException
+//     An internal error has occurred. Retry your request. If the problem persists,
+//     post a message with details on the AWS forums.
+//
+//   - DisabledApiException
+//     The API is disabled in the Region.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomer
 func (c *MarketplaceMetering) ResolveCustomer(input *ResolveCustomerInput) (*ResolveCustomerOutput, error) {
@@ -481,12 +543,20 @@ type BatchMeterUsageInput struct {
 	UsageRecords []*UsageRecord `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchMeterUsageInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchMeterUsageInput) GoString() string {
 	return s.String()
 }
@@ -538,7 +608,8 @@ type BatchMeterUsageOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Contains all UsageRecords processed by BatchMeterUsage. These records were
-	// either honored by AWS Marketplace Metering Service or were invalid.
+	// either honored by AWS Marketplace Metering Service or were invalid. Invalid
+	// records should be fixed before being resubmitted.
 	Results []*UsageRecordResult `type:"list"`
 
 	// Contains all UsageRecords that were not processed by BatchMeterUsage. This
@@ -547,12 +618,20 @@ type BatchMeterUsageOutput struct {
 	UnprocessedRecords []*UsageRecord `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchMeterUsageOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchMeterUsageOutput) GoString() string {
 	return s.String()
 }
@@ -569,15 +648,924 @@ func (s *BatchMeterUsageOutput) SetUnprocessedRecords(v []*UsageRecord) *BatchMe
 	return s
 }
 
+// Exception thrown when the customer does not have a valid subscription for
+// the product.
+type CustomerNotEntitledException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomerNotEntitledException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomerNotEntitledException) GoString() string {
+	return s.String()
+}
+
+func newErrorCustomerNotEntitledException(v protocol.ResponseMetadata) error {
+	return &CustomerNotEntitledException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CustomerNotEntitledException) Code() string {
+	return "CustomerNotEntitledException"
+}
+
+// Message returns the exception's message.
+func (s *CustomerNotEntitledException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CustomerNotEntitledException) OrigErr() error {
+	return nil
+}
+
+func (s *CustomerNotEntitledException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CustomerNotEntitledException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CustomerNotEntitledException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The API is disabled in the Region.
+type DisabledApiException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisabledApiException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisabledApiException) GoString() string {
+	return s.String()
+}
+
+func newErrorDisabledApiException(v protocol.ResponseMetadata) error {
+	return &DisabledApiException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DisabledApiException) Code() string {
+	return "DisabledApiException"
+}
+
+// Message returns the exception's message.
+func (s *DisabledApiException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DisabledApiException) OrigErr() error {
+	return nil
+}
+
+func (s *DisabledApiException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DisabledApiException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DisabledApiException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A metering record has already been emitted by the same EC2 instance, ECS
+// task, or EKS pod for the given {usageDimension, timestamp} with a different
+// usageQuantity.
+type DuplicateRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorDuplicateRequestException(v protocol.ResponseMetadata) error {
+	return &DuplicateRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DuplicateRequestException) Code() string {
+	return "DuplicateRequestException"
+}
+
+// Message returns the exception's message.
+func (s *DuplicateRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DuplicateRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *DuplicateRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DuplicateRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DuplicateRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The submitted registration token has expired. This can happen if the buyer's
+// browser takes too long to redirect to your page, the buyer has resubmitted
+// the registration token, or your application has held on to the registration
+// token for too long. Your SaaS registration website should redeem this token
+// as soon as it is submitted by the buyer's browser.
+type ExpiredTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExpiredTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExpiredTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorExpiredTokenException(v protocol.ResponseMetadata) error {
+	return &ExpiredTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ExpiredTokenException) Code() string {
+	return "ExpiredTokenException"
+}
+
+// Message returns the exception's message.
+func (s *ExpiredTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ExpiredTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *ExpiredTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ExpiredTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ExpiredTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An internal error has occurred. Retry your request. If the problem persists,
+// post a message with details on the AWS forums.
+type InternalServiceErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServiceErrorException(v protocol.ResponseMetadata) error {
+	return &InternalServiceErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServiceErrorException) Code() string {
+	return "InternalServiceErrorException"
+}
+
+// Message returns the exception's message.
+func (s *InternalServiceErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServiceErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServiceErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServiceErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServiceErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// You have metered usage for a CustomerIdentifier that does not exist.
+type InvalidCustomerIdentifierException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCustomerIdentifierException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCustomerIdentifierException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidCustomerIdentifierException(v protocol.ResponseMetadata) error {
+	return &InvalidCustomerIdentifierException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidCustomerIdentifierException) Code() string {
+	return "InvalidCustomerIdentifierException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidCustomerIdentifierException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidCustomerIdentifierException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidCustomerIdentifierException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidCustomerIdentifierException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidCustomerIdentifierException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The endpoint being called is in a AWS Region different from your EC2 instance,
+// ECS task, or EKS pod. The Region of the Metering Service endpoint and the
+// AWS Region of the resource must match.
+type InvalidEndpointRegionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidEndpointRegionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidEndpointRegionException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidEndpointRegionException(v protocol.ResponseMetadata) error {
+	return &InvalidEndpointRegionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidEndpointRegionException) Code() string {
+	return "InvalidEndpointRegionException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidEndpointRegionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidEndpointRegionException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidEndpointRegionException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidEndpointRegionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidEndpointRegionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The product code passed does not match the product code used for publishing
+// the product.
+type InvalidProductCodeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidProductCodeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidProductCodeException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidProductCodeException(v protocol.ResponseMetadata) error {
+	return &InvalidProductCodeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidProductCodeException) Code() string {
+	return "InvalidProductCodeException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidProductCodeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidProductCodeException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidProductCodeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidProductCodeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidProductCodeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Public Key version is invalid.
+type InvalidPublicKeyVersionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPublicKeyVersionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPublicKeyVersionException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidPublicKeyVersionException(v protocol.ResponseMetadata) error {
+	return &InvalidPublicKeyVersionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidPublicKeyVersionException) Code() string {
+	return "InvalidPublicKeyVersionException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidPublicKeyVersionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidPublicKeyVersionException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidPublicKeyVersionException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidPublicKeyVersionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidPublicKeyVersionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// RegisterUsage must be called in the same AWS Region the ECS task was launched
+// in. This prevents a container from hardcoding a Region (e.g. withRegion(“us-east-1”)
+// when calling RegisterUsage.
+type InvalidRegionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRegionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRegionException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidRegionException(v protocol.ResponseMetadata) error {
+	return &InvalidRegionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidRegionException) Code() string {
+	return "InvalidRegionException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidRegionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidRegionException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidRegionException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidRegionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidRegionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The tag is invalid, or the number of tags is greater than 5.
+type InvalidTagException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTagException(v protocol.ResponseMetadata) error {
+	return &InvalidTagException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTagException) Code() string {
+	return "InvalidTagException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTagException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTagException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTagException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTagException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTagException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Registration token is invalid.
+type InvalidTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTokenException) Code() string {
+	return "InvalidTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The usage allocation objects are invalid, or the number of allocations is
+// greater than 500 for a single usage record.
+type InvalidUsageAllocationsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidUsageAllocationsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidUsageAllocationsException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidUsageAllocationsException(v protocol.ResponseMetadata) error {
+	return &InvalidUsageAllocationsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidUsageAllocationsException) Code() string {
+	return "InvalidUsageAllocationsException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidUsageAllocationsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidUsageAllocationsException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidUsageAllocationsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidUsageAllocationsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidUsageAllocationsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The usage dimension does not match one of the UsageDimensions associated
+// with products.
+type InvalidUsageDimensionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidUsageDimensionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidUsageDimensionException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidUsageDimensionException(v protocol.ResponseMetadata) error {
+	return &InvalidUsageDimensionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidUsageDimensionException) Code() string {
+	return "InvalidUsageDimensionException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidUsageDimensionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidUsageDimensionException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidUsageDimensionException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidUsageDimensionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidUsageDimensionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type MeterUsageInput struct {
 	_ struct{} `type:"structure"`
 
 	// Checks whether you have the permissions required for the action, but does
 	// not make the request. If you have the permissions, the request returns DryRunOperation;
-	// otherwise, it returns UnauthorizedException.
-	//
-	// DryRun is a required field
-	DryRun *bool `type:"boolean" required:"true"`
+	// otherwise, it returns UnauthorizedException. Defaults to false if not specified.
+	DryRun *bool `type:"boolean"`
 
 	// Product code is used to uniquely identify a product in AWS Marketplace. The
 	// product code should be the same as the one used during the publishing of
@@ -586,11 +1574,19 @@ type MeterUsageInput struct {
 	// ProductCode is a required field
 	ProductCode *string `min:"1" type:"string" required:"true"`
 
-	// Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions
-	// of the timestamp will be ignored.
+	// Timestamp, in UTC, for which the usage is being reported. Your application
+	// can meter usage for up to one hour in the past. Make sure the timestamp value
+	// is not before the start of the software usage.
 	//
 	// Timestamp is a required field
 	Timestamp *time.Time `type:"timestamp" required:"true"`
+
+	// The set of UsageAllocations to submit.
+	//
+	// The sum of all UsageAllocation quantities must equal the UsageQuantity of
+	// the MeterUsage request, and each UsageAllocation must have a unique set of
+	// tags (include no tags).
+	UsageAllocations []*UsageAllocation `min:"1" type:"list"`
 
 	// It will be one of the fcp dimension name provided during the publishing of
 	// the product.
@@ -598,18 +1594,24 @@ type MeterUsageInput struct {
 	// UsageDimension is a required field
 	UsageDimension *string `min:"1" type:"string" required:"true"`
 
-	// Consumption value for the hour.
-	//
-	// UsageQuantity is a required field
-	UsageQuantity *int64 `type:"integer" required:"true"`
+	// Consumption value for the hour. Defaults to 0 if not specified.
+	UsageQuantity *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MeterUsageInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MeterUsageInput) GoString() string {
 	return s.String()
 }
@@ -617,9 +1619,6 @@ func (s MeterUsageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MeterUsageInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "MeterUsageInput"}
-	if s.DryRun == nil {
-		invalidParams.Add(request.NewErrParamRequired("DryRun"))
-	}
 	if s.ProductCode == nil {
 		invalidParams.Add(request.NewErrParamRequired("ProductCode"))
 	}
@@ -629,14 +1628,24 @@ func (s *MeterUsageInput) Validate() error {
 	if s.Timestamp == nil {
 		invalidParams.Add(request.NewErrParamRequired("Timestamp"))
 	}
+	if s.UsageAllocations != nil && len(s.UsageAllocations) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("UsageAllocations", 1))
+	}
 	if s.UsageDimension == nil {
 		invalidParams.Add(request.NewErrParamRequired("UsageDimension"))
 	}
 	if s.UsageDimension != nil && len(*s.UsageDimension) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("UsageDimension", 1))
 	}
-	if s.UsageQuantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsageQuantity"))
+	if s.UsageAllocations != nil {
+		for i, v := range s.UsageAllocations {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UsageAllocations", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -663,6 +1672,12 @@ func (s *MeterUsageInput) SetTimestamp(v time.Time) *MeterUsageInput {
 	return s
 }
 
+// SetUsageAllocations sets the UsageAllocations field's value.
+func (s *MeterUsageInput) SetUsageAllocations(v []*UsageAllocation) *MeterUsageInput {
+	s.UsageAllocations = v
+	return s
+}
+
 // SetUsageDimension sets the UsageDimension field's value.
 func (s *MeterUsageInput) SetUsageDimension(v string) *MeterUsageInput {
 	s.UsageDimension = &v
@@ -682,12 +1697,20 @@ type MeterUsageOutput struct {
 	MeteringRecordId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MeterUsageOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MeterUsageOutput) GoString() string {
 	return s.String()
 }
@@ -696,6 +1719,71 @@ func (s MeterUsageOutput) GoString() string {
 func (s *MeterUsageOutput) SetMeteringRecordId(v string) *MeterUsageOutput {
 	s.MeteringRecordId = &v
 	return s
+}
+
+// AWS Marketplace does not support metering usage from the underlying platform.
+// Currently, Amazon ECS, Amazon EKS, and AWS Fargate are supported.
+type PlatformNotSupportedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PlatformNotSupportedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PlatformNotSupportedException) GoString() string {
+	return s.String()
+}
+
+func newErrorPlatformNotSupportedException(v protocol.ResponseMetadata) error {
+	return &PlatformNotSupportedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *PlatformNotSupportedException) Code() string {
+	return "PlatformNotSupportedException"
+}
+
+// Message returns the exception's message.
+func (s *PlatformNotSupportedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *PlatformNotSupportedException) OrigErr() error {
+	return nil
+}
+
+func (s *PlatformNotSupportedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *PlatformNotSupportedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *PlatformNotSupportedException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type RegisterUsageInput struct {
@@ -718,12 +1806,20 @@ type RegisterUsageInput struct {
 	PublicKeyVersion *int64 `min:"1" type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterUsageInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterUsageInput) GoString() string {
 	return s.String()
 }
@@ -778,12 +1874,20 @@ type RegisterUsageOutput struct {
 	Signature *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterUsageOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterUsageOutput) GoString() string {
 	return s.String()
 }
@@ -806,18 +1910,27 @@ type ResolveCustomerInput struct {
 
 	// When a buyer visits your website during the registration process, the buyer
 	// submits a registration token through the browser. The registration token
-	// is resolved to obtain a CustomerIdentifier and product code.
+	// is resolved to obtain a CustomerIdentifier along with the CustomerAWSAccountId
+	// and ProductCode.
 	//
 	// RegistrationToken is a required field
 	RegistrationToken *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResolveCustomerInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResolveCustomerInput) GoString() string {
 	return s.String()
 }
@@ -842,9 +1955,13 @@ func (s *ResolveCustomerInput) SetRegistrationToken(v string) *ResolveCustomerIn
 }
 
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
-// and product code.
+// along with the CustomerAWSAccountId and ProductCode.
 type ResolveCustomerOutput struct {
 	_ struct{} `type:"structure"`
+
+	// The CustomerAWSAccountId provides the AWS account ID associated with the
+	// CustomerIdentifier for the individual customer.
+	CustomerAWSAccountId *string `min:"1" type:"string"`
 
 	// The CustomerIdentifier is used to identify an individual customer in your
 	// application. Calls to BatchMeterUsage require CustomerIdentifiers for each
@@ -857,14 +1974,28 @@ type ResolveCustomerOutput struct {
 	ProductCode *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResolveCustomerOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResolveCustomerOutput) GoString() string {
 	return s.String()
+}
+
+// SetCustomerAWSAccountId sets the CustomerAWSAccountId field's value.
+func (s *ResolveCustomerOutput) SetCustomerAWSAccountId(v string) *ResolveCustomerOutput {
+	s.CustomerAWSAccountId = &v
+	return s
 }
 
 // SetCustomerIdentifier sets the CustomerIdentifier field's value.
@@ -879,10 +2010,283 @@ func (s *ResolveCustomerOutput) SetProductCode(v string) *ResolveCustomerOutput 
 	return s
 }
 
+// Metadata assigned to an allocation. Each tag is made up of a key and a value.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// One part of a key-value pair that makes up a tag. A key is a label that acts
+	// like a category for the specific tag values.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// One part of a key-value pair that makes up a tag. A value acts as a descriptor
+	// within a tag category (key). The value can be empty or null.
+	//
+	// Value is a required field
+	Value *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	if s.Key == nil {
+		invalidParams.Add(request.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+	}
+	if s.Value == nil {
+		invalidParams.Add(request.NewErrParamRequired("Value"))
+	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKey sets the Key field's value.
+func (s *Tag) SetKey(v string) *Tag {
+	s.Key = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *Tag) SetValue(v string) *Tag {
+	s.Value = &v
+	return s
+}
+
+// The calls to the API are throttled.
+type ThrottlingException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) GoString() string {
+	return s.String()
+}
+
+func newErrorThrottlingException(v protocol.ResponseMetadata) error {
+	return &ThrottlingException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ThrottlingException) Code() string {
+	return "ThrottlingException"
+}
+
+// Message returns the exception's message.
+func (s *ThrottlingException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ThrottlingException) OrigErr() error {
+	return nil
+}
+
+func (s *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ThrottlingException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ThrottlingException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The timestamp value passed in the UsageRecord is out of allowed range.
+//
+// For BatchMeterUsage, if any of the records are outside of the allowed range,
+// the entire batch is not processed. You must remove invalid records and try
+// again.
+type TimestampOutOfBoundsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TimestampOutOfBoundsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TimestampOutOfBoundsException) GoString() string {
+	return s.String()
+}
+
+func newErrorTimestampOutOfBoundsException(v protocol.ResponseMetadata) error {
+	return &TimestampOutOfBoundsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TimestampOutOfBoundsException) Code() string {
+	return "TimestampOutOfBoundsException"
+}
+
+// Message returns the exception's message.
+func (s *TimestampOutOfBoundsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TimestampOutOfBoundsException) OrigErr() error {
+	return nil
+}
+
+func (s *TimestampOutOfBoundsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TimestampOutOfBoundsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TimestampOutOfBoundsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Usage allocations allow you to split usage into buckets by tags.
+//
+// Each UsageAllocation indicates the usage quantity for a specific set of tags.
+type UsageAllocation struct {
+	_ struct{} `type:"structure"`
+
+	// The total quantity allocated to this bucket of usage.
+	//
+	// AllocatedUsageQuantity is a required field
+	AllocatedUsageQuantity *int64 `type:"integer" required:"true"`
+
+	// The set of tags that define the bucket of usage. For the bucket of items
+	// with no tags, this parameter can be left out.
+	Tags []*Tag `min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageAllocation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageAllocation) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UsageAllocation) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UsageAllocation"}
+	if s.AllocatedUsageQuantity == nil {
+		invalidParams.Add(request.NewErrParamRequired("AllocatedUsageQuantity"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAllocatedUsageQuantity sets the AllocatedUsageQuantity field's value.
+func (s *UsageAllocation) SetAllocatedUsageQuantity(v int64) *UsageAllocation {
+	s.AllocatedUsageQuantity = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *UsageAllocation) SetTags(v []*Tag) *UsageAllocation {
+	s.Tags = v
+	return s
+}
+
 // A UsageRecord indicates a quantity of usage for a given product, customer,
 // dimension and time.
 //
-// Multiple requests with the same UsageRecords as input will be deduplicated
+// Multiple requests with the same UsageRecords as input will be de-duplicated
 // to prevent double charges.
 type UsageRecord struct {
 	_ struct{} `type:"structure"`
@@ -893,34 +2297,43 @@ type UsageRecord struct {
 	// CustomerIdentifier is a required field
 	CustomerIdentifier *string `min:"1" type:"string" required:"true"`
 
-	// During the process of registering a product on AWS Marketplace, up to eight
-	// dimensions are specified. These represent different units of value in your
-	// application.
+	// During the process of registering a product on AWS Marketplace, dimensions
+	// are specified. These represent different units of value in your application.
 	//
 	// Dimension is a required field
 	Dimension *string `min:"1" type:"string" required:"true"`
 
 	// The quantity of usage consumed by the customer for the given dimension and
-	// time.
-	//
-	// Quantity is a required field
-	Quantity *int64 `type:"integer" required:"true"`
+	// time. Defaults to 0 if not specified.
+	Quantity *int64 `type:"integer"`
 
-	// Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions
-	// of the timestamp will be ignored.
+	// Timestamp, in UTC, for which the usage is being reported.
 	//
-	// Your application can meter usage for up to one hour in the past.
+	// Your application can meter usage for up to one hour in the past. Make sure
+	// the timestamp value is not before the start of the software usage.
 	//
 	// Timestamp is a required field
 	Timestamp *time.Time `type:"timestamp" required:"true"`
+
+	// The set of UsageAllocations to submit. The sum of all UsageAllocation quantities
+	// must equal the Quantity of the UsageRecord.
+	UsageAllocations []*UsageAllocation `min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UsageRecord) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UsageRecord) GoString() string {
 	return s.String()
 }
@@ -940,11 +2353,21 @@ func (s *UsageRecord) Validate() error {
 	if s.Dimension != nil && len(*s.Dimension) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Dimension", 1))
 	}
-	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
-	}
 	if s.Timestamp == nil {
 		invalidParams.Add(request.NewErrParamRequired("Timestamp"))
+	}
+	if s.UsageAllocations != nil && len(s.UsageAllocations) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("UsageAllocations", 1))
+	}
+	if s.UsageAllocations != nil {
+		for i, v := range s.UsageAllocations {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UsageAllocations", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -977,6 +2400,12 @@ func (s *UsageRecord) SetTimestamp(v time.Time) *UsageRecord {
 	return s
 }
 
+// SetUsageAllocations sets the UsageAllocations field's value.
+func (s *UsageRecord) SetUsageAllocations(v []*UsageAllocation) *UsageRecord {
+	s.UsageAllocations = v
+	return s
+}
+
 // A UsageRecordResult indicates the status of a given UsageRecord processed
 // by BatchMeterUsage.
 type UsageRecordResult struct {
@@ -990,9 +2419,13 @@ type UsageRecordResult struct {
 	//
 	//    * Success- The UsageRecord was accepted and honored by BatchMeterUsage.
 	//
-	//    * CustomerNotSubscribed- The CustomerIdentifier specified is not subscribed
-	//    to your product. The UsageRecord was not honored. Future UsageRecords
-	//    for this customer will fail until the customer subscribes to your product.
+	//    * CustomerNotSubscribed- The CustomerIdentifier specified is not able
+	//    to use your product. The UsageRecord was not honored. There are three
+	//    causes for this result: The customer identifier is invalid. The customer
+	//    identifier provided in the metering record does not have an active agreement
+	//    or subscription with this product. Future UsageRecords for this customer
+	//    will fail until the customer subscribes to your product. The customer's
+	//    AWS account was suspended.
 	//
 	//    * DuplicateRecord- Indicates that the UsageRecord was invalid and not
 	//    honored. A previously metered UsageRecord had the same customer, dimension,
@@ -1003,12 +2436,20 @@ type UsageRecordResult struct {
 	UsageRecord *UsageRecord `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UsageRecordResult) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UsageRecordResult) GoString() string {
 	return s.String()
 }
@@ -1041,3 +2482,12 @@ const (
 	// UsageRecordResultStatusDuplicateRecord is a UsageRecordResultStatus enum value
 	UsageRecordResultStatusDuplicateRecord = "DuplicateRecord"
 )
+
+// UsageRecordResultStatus_Values returns all elements of the UsageRecordResultStatus enum
+func UsageRecordResultStatus_Values() []string {
+	return []string{
+		UsageRecordResultStatusSuccess,
+		UsageRecordResultStatusCustomerNotSubscribed,
+		UsageRecordResultStatusDuplicateRecord,
+	}
+}

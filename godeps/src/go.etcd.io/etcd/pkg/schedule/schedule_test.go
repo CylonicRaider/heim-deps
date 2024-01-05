@@ -16,21 +16,32 @@ package schedule
 
 import (
 	"context"
+	"fmt"
 	"testing"
+
+	"go.uber.org/zap/zaptest"
 )
 
 func TestFIFOSchedule(t *testing.T) {
-	s := NewFIFOScheduler()
+	s := NewFIFOScheduler(zaptest.NewLogger(t))
 	defer s.Stop()
 
 	next := 0
 	jobCreator := func(i int) Job {
-		return func(ctx context.Context) {
+		return NewJob(fmt.Sprintf("i_%d_increse", i), func(ctx context.Context) {
+			defer func() {
+				if err := recover(); err != nil {
+					fmt.Println("err: ", err)
+				}
+			}()
 			if next != i {
 				t.Fatalf("job#%d: got %d, want %d", i, next, i)
 			}
 			next = i + 1
-		}
+			if next%3 == 0 {
+				panic("fifo panic")
+			}
+		})
 	}
 
 	var jobs []Job
@@ -43,7 +54,7 @@ func TestFIFOSchedule(t *testing.T) {
 	}
 
 	s.WaitFinish(100)
-	if s.Scheduled() != 100 {
-		t.Errorf("scheduled = %d, want %d", s.Scheduled(), 100)
+	if s.Finished() != 100 {
+		t.Errorf("finished = %d, want %d", s.Finished(), 100)
 	}
 }

@@ -15,26 +15,26 @@
 package e2e
 
 import (
+	"context"
 	"os"
 	"strings"
 	"testing"
 	"time"
 
-	"go.etcd.io/etcd/pkg/expect"
+	"github.com/stretchr/testify/require"
+
+	"go.etcd.io/etcd/pkg/v3/expect"
+	"go.etcd.io/etcd/tests/v3/framework/e2e"
 )
 
 func TestCtlV3Elect(t *testing.T) {
-	oldenv := os.Getenv("EXPECT_DEBUG")
-	defer os.Setenv("EXPECT_DEBUG", oldenv)
-	os.Setenv("EXPECT_DEBUG", "1")
-
 	testCtl(t, testElect)
 }
 
 func testElect(cx ctlCtx) {
 	name := "a"
 
-	holder, ch, err := ctlV3Elect(cx, name, "p1")
+	holder, ch, err := ctlV3Elect(cx, name, "p1", false)
 	if err != nil {
 		cx.t.Fatal(err)
 	}
@@ -50,7 +50,7 @@ func testElect(cx ctlCtx) {
 	}
 
 	// blocked process that won't win the election
-	blocked, ch, err := ctlV3Elect(cx, name, "p2")
+	blocked, ch, err := ctlV3Elect(cx, name, "p2", true)
 	if err != nil {
 		cx.t.Fatal(err)
 	}
@@ -61,11 +61,16 @@ func testElect(cx ctlCtx) {
 	}
 
 	// overlap with a blocker that will win the election
-	blockAcquire, ch, err := ctlV3Elect(cx, name, "p2")
+	blockAcquire, ch, err := ctlV3Elect(cx, name, "p2", false)
 	if err != nil {
 		cx.t.Fatal(err)
 	}
-	defer blockAcquire.Stop()
+	defer func(blockAcquire *expect.ExpectProcess) {
+		err = blockAcquire.Stop()
+		require.NoError(cx.t, err)
+		blockAcquire.Wait()
+	}(blockAcquire)
+
 	select {
 	case <-time.After(100 * time.Millisecond):
 	case <-ch:
@@ -76,15 +81,17 @@ func testElect(cx ctlCtx) {
 	if err = blocked.Signal(os.Interrupt); err != nil {
 		cx.t.Fatal(err)
 	}
-	if err = closeWithTimeout(blocked, time.Second); err != nil {
-		cx.t.Fatal(err)
+	err = e2e.CloseWithTimeout(blocked, time.Second)
+	if err != nil {
+		// due to being blocked, this can potentially get killed and thus exit non-zero sometimes
+		require.ErrorContains(cx.t, err, "unexpected exit code")
 	}
 
 	// kill the holder with clean shutdown
 	if err = holder.Signal(os.Interrupt); err != nil {
 		cx.t.Fatal(err)
 	}
-	if err = closeWithTimeout(holder, time.Second); err != nil {
+	if err = e2e.CloseWithTimeout(holder, time.Second); err != nil {
 		cx.t.Fatal(err)
 	}
 
@@ -100,18 +107,23 @@ func testElect(cx ctlCtx) {
 }
 
 // ctlV3Elect creates a elect process with a channel listening for when it wins the election.
-func ctlV3Elect(cx ctlCtx, name, proposal string) (*expect.ExpectProcess, <-chan string, error) {
+func ctlV3Elect(cx ctlCtx, name, proposal string, expectFailure bool) (*expect.ExpectProcess, <-chan string, error) {
 	cmdArgs := append(cx.PrefixArgs(), "elect", name, proposal)
-	proc, err := spawnCmd(cmdArgs)
+	proc, err := e2e.SpawnCmd(cmdArgs, cx.envMap)
 	outc := make(chan string, 1)
 	if err != nil {
 		close(outc)
 		return proc, outc, err
 	}
 	go func() {
-		s, xerr := proc.ExpectFunc(func(string) bool { return true })
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+
+		s, xerr := proc.ExpectFunc(ctx, func(string) bool { return true })
 		if xerr != nil {
-			cx.t.Errorf("expect failed (%v)", xerr)
+			if !expectFailure {
+				cx.t.Errorf("expect failed (%v)", xerr)
+			}
 		}
 		outc <- s
 	}()

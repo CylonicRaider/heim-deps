@@ -1,3 +1,4 @@
+//go:build codegen
 // +build codegen
 
 package api
@@ -35,26 +36,29 @@ type paginationDefinitions struct {
 }
 
 // AttachPaginators attaches pagination configuration from filename to the API.
-func (a *API) AttachPaginators(filename string) {
+func (a *API) AttachPaginators(filename string) error {
 	p := paginationDefinitions{API: a}
 
 	f, err := os.Open(filename)
 	defer f.Close()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	err = json.NewDecoder(f).Decode(&p)
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("failed to decode %s, err: %v", filename, err)
 	}
 
-	p.setup()
+	return p.setup()
 }
 
 // setup runs post-processing on the paginator configuration.
-func (p *paginationDefinitions) setup() {
+func (p *paginationDefinitions) setup() error {
 	for n, e := range p.Pagination {
 		if e.InputTokens == nil || e.OutputTokens == nil {
+			continue
+		}
+		if _, ok := p.Operations[n]; !ok {
 			continue
 		}
 		paginator := e
@@ -82,12 +86,10 @@ func (p *paginationDefinitions) setup() {
 			paginator.OutputTokens = toks
 		}
 
-		if o, ok := p.Operations[n]; ok {
-			o.Paginator = &paginator
-		} else {
-			panic("unknown operation for paginator " + n)
-		}
+		p.Operations[n].Paginator = &paginator
 	}
+
+	return nil
 }
 
 func enableStopOnSameToken(service string) bool {

@@ -23,43 +23,47 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Signer.
-//    func myFunc(svc signeriface.SignerAPI) bool {
-//        // Make svc.CancelSigningProfile request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Signer.
+//	func myFunc(svc signeriface.SignerAPI) bool {
+//	    // Make svc.AddProfilePermission request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := signer.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := signer.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSignerClient struct {
-//        signeriface.SignerAPI
-//    }
-//    func (m *mockSignerClient) CancelSigningProfile(input *signer.CancelSigningProfileInput) (*signer.CancelSigningProfileOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockSignerClient struct {
+//	    signeriface.SignerAPI
+//	}
+//	func (m *mockSignerClient) AddProfilePermission(input *signer.AddProfilePermissionInput) (*signer.AddProfilePermissionOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSignerClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockSignerClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type SignerAPI interface {
+	AddProfilePermission(*signer.AddProfilePermissionInput) (*signer.AddProfilePermissionOutput, error)
+	AddProfilePermissionWithContext(aws.Context, *signer.AddProfilePermissionInput, ...request.Option) (*signer.AddProfilePermissionOutput, error)
+	AddProfilePermissionRequest(*signer.AddProfilePermissionInput) (*request.Request, *signer.AddProfilePermissionOutput)
+
 	CancelSigningProfile(*signer.CancelSigningProfileInput) (*signer.CancelSigningProfileOutput, error)
 	CancelSigningProfileWithContext(aws.Context, *signer.CancelSigningProfileInput, ...request.Option) (*signer.CancelSigningProfileOutput, error)
 	CancelSigningProfileRequest(*signer.CancelSigningProfileInput) (*request.Request, *signer.CancelSigningProfileOutput)
@@ -68,6 +72,10 @@ type SignerAPI interface {
 	DescribeSigningJobWithContext(aws.Context, *signer.DescribeSigningJobInput, ...request.Option) (*signer.DescribeSigningJobOutput, error)
 	DescribeSigningJobRequest(*signer.DescribeSigningJobInput) (*request.Request, *signer.DescribeSigningJobOutput)
 
+	GetRevocationStatus(*signer.GetRevocationStatusInput) (*signer.GetRevocationStatusOutput, error)
+	GetRevocationStatusWithContext(aws.Context, *signer.GetRevocationStatusInput, ...request.Option) (*signer.GetRevocationStatusOutput, error)
+	GetRevocationStatusRequest(*signer.GetRevocationStatusInput) (*request.Request, *signer.GetRevocationStatusOutput)
+
 	GetSigningPlatform(*signer.GetSigningPlatformInput) (*signer.GetSigningPlatformOutput, error)
 	GetSigningPlatformWithContext(aws.Context, *signer.GetSigningPlatformInput, ...request.Option) (*signer.GetSigningPlatformOutput, error)
 	GetSigningPlatformRequest(*signer.GetSigningPlatformInput) (*request.Request, *signer.GetSigningPlatformOutput)
@@ -75,6 +83,10 @@ type SignerAPI interface {
 	GetSigningProfile(*signer.GetSigningProfileInput) (*signer.GetSigningProfileOutput, error)
 	GetSigningProfileWithContext(aws.Context, *signer.GetSigningProfileInput, ...request.Option) (*signer.GetSigningProfileOutput, error)
 	GetSigningProfileRequest(*signer.GetSigningProfileInput) (*request.Request, *signer.GetSigningProfileOutput)
+
+	ListProfilePermissions(*signer.ListProfilePermissionsInput) (*signer.ListProfilePermissionsOutput, error)
+	ListProfilePermissionsWithContext(aws.Context, *signer.ListProfilePermissionsInput, ...request.Option) (*signer.ListProfilePermissionsOutput, error)
+	ListProfilePermissionsRequest(*signer.ListProfilePermissionsInput) (*request.Request, *signer.ListProfilePermissionsOutput)
 
 	ListSigningJobs(*signer.ListSigningJobsInput) (*signer.ListSigningJobsOutput, error)
 	ListSigningJobsWithContext(aws.Context, *signer.ListSigningJobsInput, ...request.Option) (*signer.ListSigningJobsOutput, error)
@@ -97,13 +109,41 @@ type SignerAPI interface {
 	ListSigningProfilesPages(*signer.ListSigningProfilesInput, func(*signer.ListSigningProfilesOutput, bool) bool) error
 	ListSigningProfilesPagesWithContext(aws.Context, *signer.ListSigningProfilesInput, func(*signer.ListSigningProfilesOutput, bool) bool, ...request.Option) error
 
+	ListTagsForResource(*signer.ListTagsForResourceInput) (*signer.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *signer.ListTagsForResourceInput, ...request.Option) (*signer.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*signer.ListTagsForResourceInput) (*request.Request, *signer.ListTagsForResourceOutput)
+
 	PutSigningProfile(*signer.PutSigningProfileInput) (*signer.PutSigningProfileOutput, error)
 	PutSigningProfileWithContext(aws.Context, *signer.PutSigningProfileInput, ...request.Option) (*signer.PutSigningProfileOutput, error)
 	PutSigningProfileRequest(*signer.PutSigningProfileInput) (*request.Request, *signer.PutSigningProfileOutput)
 
+	RemoveProfilePermission(*signer.RemoveProfilePermissionInput) (*signer.RemoveProfilePermissionOutput, error)
+	RemoveProfilePermissionWithContext(aws.Context, *signer.RemoveProfilePermissionInput, ...request.Option) (*signer.RemoveProfilePermissionOutput, error)
+	RemoveProfilePermissionRequest(*signer.RemoveProfilePermissionInput) (*request.Request, *signer.RemoveProfilePermissionOutput)
+
+	RevokeSignature(*signer.RevokeSignatureInput) (*signer.RevokeSignatureOutput, error)
+	RevokeSignatureWithContext(aws.Context, *signer.RevokeSignatureInput, ...request.Option) (*signer.RevokeSignatureOutput, error)
+	RevokeSignatureRequest(*signer.RevokeSignatureInput) (*request.Request, *signer.RevokeSignatureOutput)
+
+	RevokeSigningProfile(*signer.RevokeSigningProfileInput) (*signer.RevokeSigningProfileOutput, error)
+	RevokeSigningProfileWithContext(aws.Context, *signer.RevokeSigningProfileInput, ...request.Option) (*signer.RevokeSigningProfileOutput, error)
+	RevokeSigningProfileRequest(*signer.RevokeSigningProfileInput) (*request.Request, *signer.RevokeSigningProfileOutput)
+
+	SignPayload(*signer.SignPayloadInput) (*signer.SignPayloadOutput, error)
+	SignPayloadWithContext(aws.Context, *signer.SignPayloadInput, ...request.Option) (*signer.SignPayloadOutput, error)
+	SignPayloadRequest(*signer.SignPayloadInput) (*request.Request, *signer.SignPayloadOutput)
+
 	StartSigningJob(*signer.StartSigningJobInput) (*signer.StartSigningJobOutput, error)
 	StartSigningJobWithContext(aws.Context, *signer.StartSigningJobInput, ...request.Option) (*signer.StartSigningJobOutput, error)
 	StartSigningJobRequest(*signer.StartSigningJobInput) (*request.Request, *signer.StartSigningJobOutput)
+
+	TagResource(*signer.TagResourceInput) (*signer.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *signer.TagResourceInput, ...request.Option) (*signer.TagResourceOutput, error)
+	TagResourceRequest(*signer.TagResourceInput) (*request.Request, *signer.TagResourceOutput)
+
+	UntagResource(*signer.UntagResourceInput) (*signer.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *signer.UntagResourceInput, ...request.Option) (*signer.UntagResourceOutput, error)
+	UntagResourceRequest(*signer.UntagResourceInput) (*request.Request, *signer.UntagResourceOutput)
 
 	WaitUntilSuccessfulSigningJob(*signer.DescribeSigningJobInput) error
 	WaitUntilSuccessfulSigningJobWithContext(aws.Context, *signer.DescribeSigningJobInput, ...request.WaiterOption) error

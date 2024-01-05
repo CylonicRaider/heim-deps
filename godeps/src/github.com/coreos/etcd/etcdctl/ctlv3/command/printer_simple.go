@@ -19,11 +19,12 @@ import (
 	"os"
 	"strings"
 
-	v3 "go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/clientv3/snapshot"
-	pb "go.etcd.io/etcd/etcdserver/etcdserverpb"
-	"go.etcd.io/etcd/pkg/types"
+	pb "go.etcd.io/etcd/api/v3/etcdserverpb"
+	"go.etcd.io/etcd/client/pkg/v3/types"
+	v3 "go.etcd.io/etcd/client/v3"
 )
+
+const rootRole = "root"
 
 type simplePrinter struct {
 	isHex     bool
@@ -125,7 +126,11 @@ func (s *simplePrinter) Alarm(resp v3.AlarmResponse) {
 }
 
 func (s *simplePrinter) MemberAdd(r v3.MemberAddResponse) {
-	fmt.Printf("Member %16x added to cluster %16x\n", r.Member.ID, r.Header.ClusterId)
+	asLearner := " "
+	if r.Member.IsLearner {
+		asLearner = " as learner "
+	}
+	fmt.Printf("Member %16x added%sto cluster %16x\n", r.Member.ID, asLearner, r.Header.ClusterId)
 }
 
 func (s *simplePrinter) MemberRemove(id uint64, r v3.MemberRemoveResponse) {
@@ -134,6 +139,10 @@ func (s *simplePrinter) MemberRemove(id uint64, r v3.MemberRemoveResponse) {
 
 func (s *simplePrinter) MemberUpdate(id uint64, r v3.MemberUpdateResponse) {
 	fmt.Printf("Member %16x updated in cluster %16x\n", id, r.Header.ClusterId)
+}
+
+func (s *simplePrinter) MemberPromote(id uint64, r v3.MemberPromoteResponse) {
+	fmt.Printf("Member %16x promoted in cluster %16x\n", id, r.Header.ClusterId)
 }
 
 func (s *simplePrinter) MemberList(resp v3.MemberListResponse) {
@@ -146,9 +155,9 @@ func (s *simplePrinter) MemberList(resp v3.MemberListResponse) {
 func (s *simplePrinter) EndpointHealth(hs []epHealth) {
 	for _, h := range hs {
 		if h.Error == "" {
-			fmt.Fprintf(os.Stderr, "%s is healthy: successfully committed proposal: took = %v\n", h.Ep, h.Took)
+			fmt.Printf("%s is healthy: successfully committed proposal: took = %v\n", h.Ep, h.Took)
 		} else {
-			fmt.Fprintf(os.Stderr, "%s is unhealthy: failed to commit proposal: %v", h.Ep, h.Error)
+			fmt.Fprintf(os.Stderr, "%s is unhealthy: failed to commit proposal: %v\n", h.Ep, h.Error)
 		}
 	}
 }
@@ -167,15 +176,18 @@ func (s *simplePrinter) EndpointHashKV(hashList []epHashKV) {
 	}
 }
 
-func (s *simplePrinter) DBStatus(ds snapshot.Status) {
-	_, rows := makeDBStatusTable(ds)
-	for _, row := range rows {
-		fmt.Println(strings.Join(row, ", "))
-	}
-}
-
 func (s *simplePrinter) MoveLeader(leader, target uint64, r v3.MoveLeaderResponse) {
 	fmt.Printf("Leadership transferred from %s to %s\n", types.ID(leader), types.ID(target))
+}
+
+func (s *simplePrinter) DowngradeValidate(r v3.DowngradeResponse) {
+	fmt.Printf("Downgrade validate success, cluster version %s\n", r.Version)
+}
+func (s *simplePrinter) DowngradeEnable(r v3.DowngradeResponse) {
+	fmt.Printf("Downgrade enable success, cluster version %s\n", r.Version)
+}
+func (s *simplePrinter) DowngradeCancel(r v3.DowngradeResponse) {
+	fmt.Printf("Downgrade cancel success, cluster version %s\n", r.Version)
 }
 
 func (s *simplePrinter) RoleAdd(role string, r v3.AuthRoleAddResponse) {
@@ -184,6 +196,14 @@ func (s *simplePrinter) RoleAdd(role string, r v3.AuthRoleAddResponse) {
 
 func (s *simplePrinter) RoleGet(role string, r v3.AuthRoleGetResponse) {
 	fmt.Printf("Role %s\n", role)
+	if rootRole == role && r.Perm == nil {
+		fmt.Println("KV Read:")
+		fmt.Println("\t[, <open ended>")
+		fmt.Println("KV Write:")
+		fmt.Println("\t[, <open ended>")
+		return
+	}
+
 	fmt.Println("KV Read:")
 
 	printRange := func(perm *v3.Permission) {
@@ -194,10 +214,10 @@ func (s *simplePrinter) RoleGet(role string, r v3.AuthRoleGetResponse) {
 		} else {
 			fmt.Printf("\t[%s, <open ended>", sKey)
 		}
-		if v3.GetPrefixRangeEnd(sKey) == sRangeEnd {
+		if v3.GetPrefixRangeEnd(sKey) == sRangeEnd && len(sKey) > 0 {
 			fmt.Printf(" (prefix %s)", sKey)
 		}
-		fmt.Printf("\n")
+		fmt.Print("\n")
 	}
 
 	for _, perm := range r.Perm {
@@ -253,11 +273,11 @@ func (s *simplePrinter) UserAdd(name string, r v3.AuthUserAddResponse) {
 
 func (s *simplePrinter) UserGet(name string, r v3.AuthUserGetResponse) {
 	fmt.Printf("User: %s\n", name)
-	fmt.Printf("Roles:")
+	fmt.Print("Roles:")
 	for _, role := range r.Roles {
 		fmt.Printf(" %s", role)
 	}
-	fmt.Printf("\n")
+	fmt.Print("\n")
 }
 
 func (s *simplePrinter) UserChangePassword(v3.AuthUserChangePasswordResponse) {
@@ -280,4 +300,9 @@ func (s *simplePrinter) UserList(r v3.AuthUserListResponse) {
 	for _, user := range r.Users {
 		fmt.Printf("%s\n", user)
 	}
+}
+
+func (s *simplePrinter) AuthStatus(r v3.AuthStatusResponse) {
+	fmt.Println("Authentication Status:", r.Enabled)
+	fmt.Println("AuthRevision:", r.AuthRevision)
 }

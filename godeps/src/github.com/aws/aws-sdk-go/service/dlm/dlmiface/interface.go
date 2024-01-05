@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Data Lifecycle Manager.
-//    func myFunc(svc dlmiface.DLMAPI) bool {
-//        // Make svc.CreateLifecyclePolicy request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// Amazon Data Lifecycle Manager.
+//	func myFunc(svc dlmiface.DLMAPI) bool {
+//	    // Make svc.CreateLifecyclePolicy request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := dlm.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := dlm.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDLMClient struct {
-//        dlmiface.DLMAPI
-//    }
-//    func (m *mockDLMClient) CreateLifecyclePolicy(input *dlm.CreateLifecyclePolicyInput) (*dlm.CreateLifecyclePolicyOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockDLMClient struct {
+//	    dlmiface.DLMAPI
+//	}
+//	func (m *mockDLMClient) CreateLifecyclePolicy(input *dlm.CreateLifecyclePolicyInput) (*dlm.CreateLifecyclePolicyOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockDLMClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockDLMClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -75,6 +75,18 @@ type DLMAPI interface {
 	GetLifecyclePolicy(*dlm.GetLifecyclePolicyInput) (*dlm.GetLifecyclePolicyOutput, error)
 	GetLifecyclePolicyWithContext(aws.Context, *dlm.GetLifecyclePolicyInput, ...request.Option) (*dlm.GetLifecyclePolicyOutput, error)
 	GetLifecyclePolicyRequest(*dlm.GetLifecyclePolicyInput) (*request.Request, *dlm.GetLifecyclePolicyOutput)
+
+	ListTagsForResource(*dlm.ListTagsForResourceInput) (*dlm.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *dlm.ListTagsForResourceInput, ...request.Option) (*dlm.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*dlm.ListTagsForResourceInput) (*request.Request, *dlm.ListTagsForResourceOutput)
+
+	TagResource(*dlm.TagResourceInput) (*dlm.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *dlm.TagResourceInput, ...request.Option) (*dlm.TagResourceOutput, error)
+	TagResourceRequest(*dlm.TagResourceInput) (*request.Request, *dlm.TagResourceOutput)
+
+	UntagResource(*dlm.UntagResourceInput) (*dlm.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *dlm.UntagResourceInput, ...request.Option) (*dlm.UntagResourceOutput, error)
+	UntagResourceRequest(*dlm.UntagResourceInput) (*request.Request, *dlm.UntagResourceOutput)
 
 	UpdateLifecyclePolicy(*dlm.UpdateLifecyclePolicyInput) (*dlm.UpdateLifecyclePolicyOutput, error)
 	UpdateLifecyclePolicyWithContext(aws.Context, *dlm.UpdateLifecyclePolicyInput, ...request.Option) (*dlm.UpdateLifecyclePolicyOutput, error)

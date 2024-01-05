@@ -29,14 +29,13 @@ const opAssociateDRTLogBucket = "AssociateDRTLogBucket"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateDRTLogBucketRequest method.
+//	req, resp := client.AssociateDRTLogBucketRequest(params)
 //
-//    // Example sending a request using the AssociateDRTLogBucketRequest method.
-//    req, resp := client.AssociateDRTLogBucketRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucket
 func (c *Shield) AssociateDRTLogBucketRequest(input *AssociateDRTLogBucketInput) (req *request.Request, output *AssociateDRTLogBucketOutput) {
@@ -58,13 +57,14 @@ func (c *Shield) AssociateDRTLogBucketRequest(input *AssociateDRTLogBucketInput)
 
 // AssociateDRTLogBucket API operation for AWS Shield.
 //
-// Authorizes the DDoS Response team (DRT) to access the specified Amazon S3
-// bucket containing your flow logs. You can associate up to 10 Amazon S3 buckets
-// with your subscription.
+// Authorizes the Shield Response Team (SRT) to access the specified Amazon
+// S3 bucket containing log data such as Application Load Balancer access logs,
+// CloudFront logs, or logs from third party sources. You can associate up to
+// 10 Amazon S3 buckets with your subscription.
 //
-// To use the services of the DRT and make an AssociateDRTLogBucket request,
-// you must be subscribed to the Business Support plan (https://aws.amazon.com/premiumsupport/business-support/)
-// or the Enterprise Support plan (https://aws.amazon.com/premiumsupport/enterprise-support/).
+// To use the services of the SRT and make an AssociateDRTLogBucket request,
+// you must be subscribed to the Business Support plan (http://aws.amazon.com/premiumsupport/business-support/)
+// or the Enterprise Support plan (http://aws.amazon.com/premiumsupport/enterprise-support/).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -73,40 +73,40 @@ func (c *Shield) AssociateDRTLogBucketRequest(input *AssociateDRTLogBucketInput)
 // See the AWS API reference guide for AWS Shield's
 // API operation AssociateDRTLogBucket for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   Exception that indicates that the operation would not cause any change to
-//   occur.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeNoAssociatedRoleException "NoAssociatedRoleException"
-//   The ARN of the role that you specifed does not exist.
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
 //
-//   * ErrCodeLimitsExceededException "LimitsExceededException"
-//   Exception that indicates that the operation would exceed a limit.
+//   - NoAssociatedRoleException
+//     The ARN of the role that you specified does not exist.
 //
-//   Type is the type of limit that would be exceeded.
+//   - LimitsExceededException
+//     Exception that indicates that the operation would exceed a limit.
 //
-//   Limit is the threshold that would be exceeded.
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Exception that indicates that the parameters passed to the API are invalid.
+//   - AccessDeniedForDependencyException
+//     In order to grant the necessary access to the Shield Response Team (SRT)
+//     the user submitting the request must have the iam:PassRole permission. This
+//     error indicates the user did not have the appropriate permissions. For more
+//     information, see Granting a User Permissions to Pass a Role to an Amazon
+//     Web Services Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
 //
-//   * ErrCodeAccessDeniedForDependencyException "AccessDeniedForDependencyException"
-//   In order to grant the necessary access to the DDoS Response Team, the user
-//   submitting AssociateDRTRole must have the iam:PassRole permission. This error
-//   indicates the user did not have the appropriate permissions. For more information,
-//   see Granting a User Permissions to Pass a Role to an AWS Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
 //
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucket
 func (c *Shield) AssociateDRTLogBucket(input *AssociateDRTLogBucketInput) (*AssociateDRTLogBucketOutput, error) {
@@ -146,14 +146,13 @@ const opAssociateDRTRole = "AssociateDRTRole"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateDRTRoleRequest method.
+//	req, resp := client.AssociateDRTRoleRequest(params)
 //
-//    // Example sending a request using the AssociateDRTRoleRequest method.
-//    req, resp := client.AssociateDRTRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRole
 func (c *Shield) AssociateDRTRoleRequest(input *AssociateDRTRoleInput) (req *request.Request, output *AssociateDRTRoleOutput) {
@@ -175,34 +174,34 @@ func (c *Shield) AssociateDRTRoleRequest(input *AssociateDRTRoleInput) (req *req
 
 // AssociateDRTRole API operation for AWS Shield.
 //
-// Authorizes the DDoS Response team (DRT), using the specified role, to access
-// your AWS account to assist with DDoS attack mitigation during potential attacks.
-// This enables the DRT to inspect your AWS WAF configuration and create or
-// update AWS WAF rules and web ACLs.
+// Authorizes the Shield Response Team (SRT) using the specified role, to access
+// your Amazon Web Services account to assist with DDoS attack mitigation during
+// potential attacks. This enables the SRT to inspect your WAF configuration
+// and create or update WAF rules and web ACLs.
 //
 // You can associate only one RoleArn with your subscription. If you submit
 // an AssociateDRTRole request for an account that already has an associated
 // role, the new RoleArn will replace the existing RoleArn.
 //
 // Prior to making the AssociateDRTRole request, you must attach the AWSShieldDRTAccessPolicy
-// (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy)
-// managed policy to the role you will specify in the request. For more information
-// see Attaching and Detaching IAM Policies ( https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
-// The role must also trust the service principal  drt.shield.amazonaws.com.
-// For more information, see IAM JSON Policy Elements: Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html).
+// managed policy to the role that you'll specify in the request. You can access
+// this policy in the IAM console at AWSShieldDRTAccessPolicy (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy).
+// For more information see Adding and removing IAM identity permissions (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
+// The role must also trust the service principal drt.shield.amazonaws.com.
+// For more information, see IAM JSON policy elements: Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html).
 //
-// The DRT will have access only to your AWS WAF and Shield resources. By submitting
-// this request, you authorize the DRT to inspect your AWS WAF and Shield configuration
-// and create and update AWS WAF rules and web ACLs on your behalf. The DRT
-// takes these actions only if explicitly authorized by you.
+// The SRT will have access only to your WAF and Shield resources. By submitting
+// this request, you authorize the SRT to inspect your WAF and Shield configuration
+// and create and update WAF rules and web ACLs on your behalf. The SRT takes
+// these actions only if explicitly authorized by you.
 //
 // You must have the iam:PassRole permission to make an AssociateDRTRole request.
-// For more information, see Granting a User Permissions to Pass a Role to an
-// AWS Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
+// For more information, see Granting a user permissions to pass a role to an
+// Amazon Web Services service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
 //
-// To use the services of the DRT and make an AssociateDRTRole request, you
-// must be subscribed to the Business Support plan (https://aws.amazon.com/premiumsupport/business-support/)
-// or the Enterprise Support plan (https://aws.amazon.com/premiumsupport/enterprise-support/).
+// To use the services of the SRT and make an AssociateDRTRole request, you
+// must be subscribed to the Business Support plan (http://aws.amazon.com/premiumsupport/business-support/)
+// or the Enterprise Support plan (http://aws.amazon.com/premiumsupport/enterprise-support/).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -211,30 +210,34 @@ func (c *Shield) AssociateDRTRoleRequest(input *AssociateDRTRoleInput) (req *req
 // See the AWS API reference guide for AWS Shield's
 // API operation AssociateDRTRole for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   Exception that indicates that the operation would not cause any change to
-//   occur.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Exception that indicates that the parameters passed to the API are invalid.
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
 //
-//   * ErrCodeAccessDeniedForDependencyException "AccessDeniedForDependencyException"
-//   In order to grant the necessary access to the DDoS Response Team, the user
-//   submitting AssociateDRTRole must have the iam:PassRole permission. This error
-//   indicates the user did not have the appropriate permissions. For more information,
-//   see Granting a User Permissions to Pass a Role to an AWS Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
 //
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
+//   - AccessDeniedForDependencyException
+//     In order to grant the necessary access to the Shield Response Team (SRT)
+//     the user submitting the request must have the iam:PassRole permission. This
+//     error indicates the user did not have the appropriate permissions. For more
+//     information, see Granting a User Permissions to Pass a Role to an Amazon
+//     Web Services Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRole
 func (c *Shield) AssociateDRTRole(input *AssociateDRTRoleInput) (*AssociateDRTRoleOutput, error) {
@@ -258,6 +261,226 @@ func (c *Shield) AssociateDRTRoleWithContext(ctx aws.Context, input *AssociateDR
 	return out, req.Send()
 }
 
+const opAssociateHealthCheck = "AssociateHealthCheck"
+
+// AssociateHealthCheckRequest generates a "aws/request.Request" representing the
+// client's request for the AssociateHealthCheck operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AssociateHealthCheck for more information on using the AssociateHealthCheck
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AssociateHealthCheckRequest method.
+//	req, resp := client.AssociateHealthCheckRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateHealthCheck
+func (c *Shield) AssociateHealthCheckRequest(input *AssociateHealthCheckInput) (req *request.Request, output *AssociateHealthCheckOutput) {
+	op := &request.Operation{
+		Name:       opAssociateHealthCheck,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateHealthCheckInput{}
+	}
+
+	output = &AssociateHealthCheckOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// AssociateHealthCheck API operation for AWS Shield.
+//
+// Adds health-based detection to the Shield Advanced protection for a resource.
+// Shield Advanced health-based detection uses the health of your Amazon Web
+// Services resource to improve responsiveness and accuracy in attack detection
+// and response.
+//
+// You define the health check in Route 53 and then associate it with your Shield
+// Advanced protection. For more information, see Shield Advanced Health-Based
+// Detection (https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option)
+// in the WAF Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation AssociateHealthCheck for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - LimitsExceededException
+//     Exception that indicates that the operation would exceed a limit.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - InvalidResourceException
+//     Exception that indicates that the resource is invalid. You might not have
+//     access to the resource, or the resource might not exist.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateHealthCheck
+func (c *Shield) AssociateHealthCheck(input *AssociateHealthCheckInput) (*AssociateHealthCheckOutput, error) {
+	req, out := c.AssociateHealthCheckRequest(input)
+	return out, req.Send()
+}
+
+// AssociateHealthCheckWithContext is the same as AssociateHealthCheck with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AssociateHealthCheck for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) AssociateHealthCheckWithContext(ctx aws.Context, input *AssociateHealthCheckInput, opts ...request.Option) (*AssociateHealthCheckOutput, error) {
+	req, out := c.AssociateHealthCheckRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opAssociateProactiveEngagementDetails = "AssociateProactiveEngagementDetails"
+
+// AssociateProactiveEngagementDetailsRequest generates a "aws/request.Request" representing the
+// client's request for the AssociateProactiveEngagementDetails operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AssociateProactiveEngagementDetails for more information on using the AssociateProactiveEngagementDetails
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AssociateProactiveEngagementDetailsRequest method.
+//	req, resp := client.AssociateProactiveEngagementDetailsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateProactiveEngagementDetails
+func (c *Shield) AssociateProactiveEngagementDetailsRequest(input *AssociateProactiveEngagementDetailsInput) (req *request.Request, output *AssociateProactiveEngagementDetailsOutput) {
+	op := &request.Operation{
+		Name:       opAssociateProactiveEngagementDetails,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateProactiveEngagementDetailsInput{}
+	}
+
+	output = &AssociateProactiveEngagementDetailsOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// AssociateProactiveEngagementDetails API operation for AWS Shield.
+//
+// Initializes proactive engagement and sets the list of contacts for the Shield
+// Response Team (SRT) to use. You must provide at least one phone number in
+// the emergency contact list.
+//
+// After you have initialized proactive engagement using this call, to disable
+// or enable proactive engagement, use the calls DisableProactiveEngagement
+// and EnableProactiveEngagement.
+//
+// This call defines the list of email addresses and phone numbers that the
+// SRT can use to contact you for escalations to the SRT and to initiate proactive
+// customer support.
+//
+// The contacts that you provide in the request replace any contacts that were
+// already defined. If you already have contacts defined and want to use them,
+// retrieve the list using DescribeEmergencyContactSettings and then provide
+// it to this call.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation AssociateProactiveEngagementDetails for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateProactiveEngagementDetails
+func (c *Shield) AssociateProactiveEngagementDetails(input *AssociateProactiveEngagementDetailsInput) (*AssociateProactiveEngagementDetailsOutput, error) {
+	req, out := c.AssociateProactiveEngagementDetailsRequest(input)
+	return out, req.Send()
+}
+
+// AssociateProactiveEngagementDetailsWithContext is the same as AssociateProactiveEngagementDetails with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AssociateProactiveEngagementDetails for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) AssociateProactiveEngagementDetailsWithContext(ctx aws.Context, input *AssociateProactiveEngagementDetailsInput, opts ...request.Option) (*AssociateProactiveEngagementDetailsOutput, error) {
+	req, out := c.AssociateProactiveEngagementDetailsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateProtection = "CreateProtection"
 
 // CreateProtectionRequest generates a "aws/request.Request" representing the
@@ -274,14 +497,13 @@ const opCreateProtection = "CreateProtection"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateProtectionRequest method.
+//	req, resp := client.CreateProtectionRequest(params)
 //
-//    // Example sending a request using the CreateProtectionRequest method.
-//    req, resp := client.CreateProtectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtection
 func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) (req *request.Request, output *CreateProtectionOutput) {
@@ -302,16 +524,19 @@ func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) (req *req
 
 // CreateProtection API operation for AWS Shield.
 //
-// Enables AWS Shield Advanced for a specific AWS resource. The resource can
-// be an Amazon CloudFront distribution, Elastic Load Balancing load balancer,
-// AWS Global Accelerator accelerator, Elastic IP Address, or an Amazon Route
-// 53 hosted zone.
+// Enables Shield Advanced for a specific Amazon Web Services resource. The
+// resource can be an Amazon CloudFront distribution, Amazon Route 53 hosted
+// zone, Global Accelerator standard accelerator, Elastic IP Address, Application
+// Load Balancer, or a Classic Load Balancer. You can protect Amazon EC2 instances
+// and Network Load Balancers by association with protected Amazon EC2 Elastic
+// IP addresses.
 //
 // You can add protection to only a single resource with each CreateProtection
-// request. If you want to add protection to multiple resources at once, use
-// the AWS WAF console (https://console.aws.amazon.com/waf/). For more information
-// see Getting Started with AWS Shield Advanced (https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html)
-// and Add AWS Shield Advanced Protection to more AWS Resources (https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html).
+// request. You can add protection to multiple resources at once through the
+// Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/
+// (https://console.aws.amazon.com/wafv2/shieldv2#/). For more information see
+// Getting Started with Shield Advanced (https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html)
+// and Adding Shield Advanced protection to Amazon Web Services resources (https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -320,35 +545,38 @@ func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) (req *req
 // See the AWS API reference guide for AWS Shield's
 // API operation CreateProtection for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidResourceException "InvalidResourceException"
-//   Exception that indicates that the resource is invalid. You might not have
-//   access to the resource, or the resource might not exist.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   Exception that indicates that the operation would not cause any change to
-//   occur.
+//   - InvalidResourceException
+//     Exception that indicates that the resource is invalid. You might not have
+//     access to the resource, or the resource might not exist.
 //
-//   * ErrCodeLimitsExceededException "LimitsExceededException"
-//   Exception that indicates that the operation would exceed a limit.
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
 //
-//   Type is the type of limit that would be exceeded.
+//   - LimitsExceededException
+//     Exception that indicates that the operation would exceed a limit.
 //
-//   Limit is the threshold that would be exceeded.
+//   - ResourceAlreadyExistsException
+//     Exception indicating the specified resource already exists. If available,
+//     this exception includes details in additional properties.
 //
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   Exception indicating the specified resource already exists.
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
 //
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtection
 func (c *Shield) CreateProtection(input *CreateProtectionInput) (*CreateProtectionOutput, error) {
@@ -372,6 +600,108 @@ func (c *Shield) CreateProtectionWithContext(ctx aws.Context, input *CreateProte
 	return out, req.Send()
 }
 
+const opCreateProtectionGroup = "CreateProtectionGroup"
+
+// CreateProtectionGroupRequest generates a "aws/request.Request" representing the
+// client's request for the CreateProtectionGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateProtectionGroup for more information on using the CreateProtectionGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateProtectionGroupRequest method.
+//	req, resp := client.CreateProtectionGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionGroup
+func (c *Shield) CreateProtectionGroupRequest(input *CreateProtectionGroupInput) (req *request.Request, output *CreateProtectionGroupOutput) {
+	op := &request.Operation{
+		Name:       opCreateProtectionGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateProtectionGroupInput{}
+	}
+
+	output = &CreateProtectionGroupOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// CreateProtectionGroup API operation for AWS Shield.
+//
+// Creates a grouping of protected resources so they can be handled as a collective.
+// This resource grouping improves the accuracy of detection and reduces false
+// positives.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation CreateProtectionGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceAlreadyExistsException
+//     Exception indicating the specified resource already exists. If available,
+//     this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - LimitsExceededException
+//     Exception that indicates that the operation would exceed a limit.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionGroup
+func (c *Shield) CreateProtectionGroup(input *CreateProtectionGroupInput) (*CreateProtectionGroupOutput, error) {
+	req, out := c.CreateProtectionGroupRequest(input)
+	return out, req.Send()
+}
+
+// CreateProtectionGroupWithContext is the same as CreateProtectionGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateProtectionGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) CreateProtectionGroupWithContext(ctx aws.Context, input *CreateProtectionGroupInput, opts ...request.Option) (*CreateProtectionGroupOutput, error) {
+	req, out := c.CreateProtectionGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateSubscription = "CreateSubscription"
 
 // CreateSubscriptionRequest generates a "aws/request.Request" representing the
@@ -388,14 +718,13 @@ const opCreateSubscription = "CreateSubscription"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateSubscriptionRequest method.
+//	req, resp := client.CreateSubscriptionRequest(params)
 //
-//    // Example sending a request using the CreateSubscriptionRequest method.
-//    req, resp := client.CreateSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscription
 func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) (req *request.Request, output *CreateSubscriptionOutput) {
@@ -417,16 +746,15 @@ func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) (req 
 
 // CreateSubscription API operation for AWS Shield.
 //
-// Activates AWS Shield Advanced for an account.
+// Activates Shield Advanced for an account.
 //
-// As part of this request you can specify EmergencySettings that automaticaly
-// grant the DDoS response team (DRT) needed permissions to assist you during
-// a suspected DDoS attack. For more information see Authorize the DDoS Response
-// Team to Create Rules and Web ACLs on Your Behalf (https://docs.aws.amazon.com/waf/latest/developerguide/authorize-DRT.html).
+// For accounts that are members of an Organizations organization, Shield Advanced
+// subscriptions are billed against the organization's payer account, regardless
+// of whether the payer account itself is subscribed.
 //
-// When you initally create a subscription, your subscription is set to be automatically
-// renewed at the end of the existing subscription period. You can change this
-// by submitting an UpdateSubscription request.
+// When you initially create a subscription, your subscription is set to be
+// automatically renewed at the end of the existing subscription period. You
+// can change this by submitting an UpdateSubscription request.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -435,13 +763,15 @@ func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) (req 
 // See the AWS API reference guide for AWS Shield's
 // API operation CreateSubscription for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   Exception indicating the specified resource already exists.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceAlreadyExistsException
+//     Exception indicating the specified resource already exists. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscription
 func (c *Shield) CreateSubscription(input *CreateSubscriptionInput) (*CreateSubscriptionOutput, error) {
@@ -481,14 +811,13 @@ const opDeleteProtection = "DeleteProtection"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteProtectionRequest method.
+//	req, resp := client.DeleteProtectionRequest(params)
 //
-//    // Example sending a request using the DeleteProtectionRequest method.
-//    req, resp := client.DeleteProtectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtection
 func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) (req *request.Request, output *DeleteProtectionOutput) {
@@ -510,7 +839,7 @@ func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) (req *req
 
 // DeleteProtection API operation for AWS Shield.
 //
-// Deletes an AWS Shield Advanced Protection.
+// Deletes an Shield Advanced Protection.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -519,17 +848,19 @@ func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) (req *req
 // See the AWS API reference guide for AWS Shield's
 // API operation DeleteProtection for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtection
 func (c *Shield) DeleteProtection(input *DeleteProtectionInput) (*DeleteProtectionOutput, error) {
@@ -553,6 +884,95 @@ func (c *Shield) DeleteProtectionWithContext(ctx aws.Context, input *DeleteProte
 	return out, req.Send()
 }
 
+const opDeleteProtectionGroup = "DeleteProtectionGroup"
+
+// DeleteProtectionGroupRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteProtectionGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteProtectionGroup for more information on using the DeleteProtectionGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteProtectionGroupRequest method.
+//	req, resp := client.DeleteProtectionGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionGroup
+func (c *Shield) DeleteProtectionGroupRequest(input *DeleteProtectionGroupInput) (req *request.Request, output *DeleteProtectionGroupOutput) {
+	op := &request.Operation{
+		Name:       opDeleteProtectionGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteProtectionGroupInput{}
+	}
+
+	output = &DeleteProtectionGroupOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteProtectionGroup API operation for AWS Shield.
+//
+// Removes the specified protection group.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation DeleteProtectionGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionGroup
+func (c *Shield) DeleteProtectionGroup(input *DeleteProtectionGroupInput) (*DeleteProtectionGroupOutput, error) {
+	req, out := c.DeleteProtectionGroupRequest(input)
+	return out, req.Send()
+}
+
+// DeleteProtectionGroupWithContext is the same as DeleteProtectionGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteProtectionGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) DeleteProtectionGroupWithContext(ctx aws.Context, input *DeleteProtectionGroupInput, opts ...request.Option) (*DeleteProtectionGroupOutput, error) {
+	req, out := c.DeleteProtectionGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteSubscription = "DeleteSubscription"
 
 // DeleteSubscriptionRequest generates a "aws/request.Request" representing the
@@ -569,14 +989,13 @@ const opDeleteSubscription = "DeleteSubscription"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteSubscriptionRequest method.
+//	req, resp := client.DeleteSubscriptionRequest(params)
 //
-//    // Example sending a request using the DeleteSubscriptionRequest method.
-//    req, resp := client.DeleteSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscription
 //
@@ -603,9 +1022,9 @@ func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) (req 
 
 // DeleteSubscription API operation for AWS Shield.
 //
-// Removes AWS Shield Advanced from an account. AWS Shield Advanced requires
-// a 1-year subscription commitment. You cannot delete a subscription prior
-// to the completion of that commitment.
+// Removes Shield Advanced from an account. Shield Advanced requires a 1-year
+// subscription commitment. You cannot delete a subscription prior to the completion
+// of that commitment.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -614,19 +1033,21 @@ func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) (req 
 // See the AWS API reference guide for AWS Shield's
 // API operation DeleteSubscription for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeLockedSubscriptionException "LockedSubscriptionException"
-//   You are trying to update a subscription that has not yet completed the 1-year
-//   commitment. You can change the AutoRenew parameter during the last 30 days
-//   of your subscription. This exception indicates that you are attempting to
-//   change AutoRenew prior to that period.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - LockedSubscriptionException
+//     You are trying to update a subscription that has not yet completed the 1-year
+//     commitment. You can change the AutoRenew parameter during the last 30 days
+//     of your subscription. This exception indicates that you are attempting to
+//     change AutoRenew prior to that period.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscription
 //
@@ -670,14 +1091,13 @@ const opDescribeAttack = "DescribeAttack"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeAttackRequest method.
+//	req, resp := client.DescribeAttackRequest(params)
 //
-//    // Example sending a request using the DescribeAttackRequest method.
-//    req, resp := client.DescribeAttackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttack
 func (c *Shield) DescribeAttackRequest(input *DescribeAttackInput) (req *request.Request, output *DescribeAttackOutput) {
@@ -707,14 +1127,15 @@ func (c *Shield) DescribeAttackRequest(input *DescribeAttackInput) (req *request
 // See the AWS API reference guide for AWS Shield's
 // API operation DescribeAttack for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Exception that indicates the specified AttackId does not exist, or the requester
-//   does not have the appropriate permissions to access the AttackId.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - AccessDeniedException
+//     Exception that indicates the specified AttackId does not exist, or the requester
+//     does not have the appropriate permissions to access the AttackId.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttack
 func (c *Shield) DescribeAttack(input *DescribeAttackInput) (*DescribeAttackOutput, error) {
@@ -738,6 +1159,96 @@ func (c *Shield) DescribeAttackWithContext(ctx aws.Context, input *DescribeAttac
 	return out, req.Send()
 }
 
+const opDescribeAttackStatistics = "DescribeAttackStatistics"
+
+// DescribeAttackStatisticsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeAttackStatistics operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeAttackStatistics for more information on using the DescribeAttackStatistics
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeAttackStatisticsRequest method.
+//	req, resp := client.DescribeAttackStatisticsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackStatistics
+func (c *Shield) DescribeAttackStatisticsRequest(input *DescribeAttackStatisticsInput) (req *request.Request, output *DescribeAttackStatisticsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeAttackStatistics,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeAttackStatisticsInput{}
+	}
+
+	output = &DescribeAttackStatisticsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeAttackStatistics API operation for AWS Shield.
+//
+// Provides information about the number and type of attacks Shield has detected
+// in the last year for all resources that belong to your account, regardless
+// of whether you've defined Shield protections for them. This operation is
+// available to Shield customers as well as to Shield Advanced customers.
+//
+// The operation returns data for the time range of midnight UTC, one year ago,
+// to midnight UTC, today. For example, if the current time is 2020-10-26 15:39:32
+// PDT, equal to 2020-10-26 22:39:32 UTC, then the time range for the attack
+// data returned is from 2019-10-26 00:00:00 UTC to 2020-10-26 00:00:00 UTC.
+//
+// The time range indicates the period covered by the attack statistics data
+// items.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation DescribeAttackStatistics for usage and error information.
+//
+// Returned Error Types:
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackStatistics
+func (c *Shield) DescribeAttackStatistics(input *DescribeAttackStatisticsInput) (*DescribeAttackStatisticsOutput, error) {
+	req, out := c.DescribeAttackStatisticsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeAttackStatisticsWithContext is the same as DescribeAttackStatistics with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeAttackStatistics for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) DescribeAttackStatisticsWithContext(ctx aws.Context, input *DescribeAttackStatisticsInput, opts ...request.Option) (*DescribeAttackStatisticsOutput, error) {
+	req, out := c.DescribeAttackStatisticsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeDRTAccess = "DescribeDRTAccess"
 
 // DescribeDRTAccessRequest generates a "aws/request.Request" representing the
@@ -754,14 +1265,13 @@ const opDescribeDRTAccess = "DescribeDRTAccess"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDRTAccessRequest method.
+//	req, resp := client.DescribeDRTAccessRequest(params)
 //
-//    // Example sending a request using the DescribeDRTAccessRequest method.
-//    req, resp := client.DescribeDRTAccessRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccess
 func (c *Shield) DescribeDRTAccessRequest(input *DescribeDRTAccessInput) (req *request.Request, output *DescribeDRTAccessOutput) {
@@ -782,9 +1292,9 @@ func (c *Shield) DescribeDRTAccessRequest(input *DescribeDRTAccessInput) (req *r
 
 // DescribeDRTAccess API operation for AWS Shield.
 //
-// Returns the current role and list of Amazon S3 log buckets used by the DDoS
-// Response team (DRT) to access your AWS account while assisting with attack
-// mitigation.
+// Returns the current role and list of Amazon S3 log buckets used by the Shield
+// Response Team (SRT) to access your Amazon Web Services account while assisting
+// with attack mitigation.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -793,13 +1303,15 @@ func (c *Shield) DescribeDRTAccessRequest(input *DescribeDRTAccessInput) (req *r
 // See the AWS API reference guide for AWS Shield's
 // API operation DescribeDRTAccess for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccess
 func (c *Shield) DescribeDRTAccess(input *DescribeDRTAccessInput) (*DescribeDRTAccessOutput, error) {
@@ -839,14 +1351,13 @@ const opDescribeEmergencyContactSettings = "DescribeEmergencyContactSettings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeEmergencyContactSettingsRequest method.
+//	req, resp := client.DescribeEmergencyContactSettingsRequest(params)
 //
-//    // Example sending a request using the DescribeEmergencyContactSettingsRequest method.
-//    req, resp := client.DescribeEmergencyContactSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettings
 func (c *Shield) DescribeEmergencyContactSettingsRequest(input *DescribeEmergencyContactSettingsInput) (req *request.Request, output *DescribeEmergencyContactSettingsOutput) {
@@ -867,8 +1378,9 @@ func (c *Shield) DescribeEmergencyContactSettingsRequest(input *DescribeEmergenc
 
 // DescribeEmergencyContactSettings API operation for AWS Shield.
 //
-// Lists the email addresses that the DRT can use to contact you during a suspected
-// attack.
+// A list of email addresses and phone numbers that the Shield Response Team
+// (SRT) can use to contact you if you have proactive engagement enabled, for
+// escalations to the SRT and to initiate proactive customer support.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -877,13 +1389,15 @@ func (c *Shield) DescribeEmergencyContactSettingsRequest(input *DescribeEmergenc
 // See the AWS API reference guide for AWS Shield's
 // API operation DescribeEmergencyContactSettings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettings
 func (c *Shield) DescribeEmergencyContactSettings(input *DescribeEmergencyContactSettingsInput) (*DescribeEmergencyContactSettingsOutput, error) {
@@ -923,14 +1437,13 @@ const opDescribeProtection = "DescribeProtection"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeProtectionRequest method.
+//	req, resp := client.DescribeProtectionRequest(params)
 //
-//    // Example sending a request using the DescribeProtectionRequest method.
-//    req, resp := client.DescribeProtectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection
 func (c *Shield) DescribeProtectionRequest(input *DescribeProtectionInput) (req *request.Request, output *DescribeProtectionOutput) {
@@ -960,16 +1473,19 @@ func (c *Shield) DescribeProtectionRequest(input *DescribeProtectionInput) (req 
 // See the AWS API reference guide for AWS Shield's
 // API operation DescribeProtection for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Exception that indicates that the parameters passed to the API are invalid.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection
 func (c *Shield) DescribeProtection(input *DescribeProtectionInput) (*DescribeProtectionOutput, error) {
@@ -993,6 +1509,90 @@ func (c *Shield) DescribeProtectionWithContext(ctx aws.Context, input *DescribeP
 	return out, req.Send()
 }
 
+const opDescribeProtectionGroup = "DescribeProtectionGroup"
+
+// DescribeProtectionGroupRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeProtectionGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeProtectionGroup for more information on using the DescribeProtectionGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeProtectionGroupRequest method.
+//	req, resp := client.DescribeProtectionGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionGroup
+func (c *Shield) DescribeProtectionGroupRequest(input *DescribeProtectionGroupInput) (req *request.Request, output *DescribeProtectionGroupOutput) {
+	op := &request.Operation{
+		Name:       opDescribeProtectionGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeProtectionGroupInput{}
+	}
+
+	output = &DescribeProtectionGroupOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeProtectionGroup API operation for AWS Shield.
+//
+// Returns the specification for the specified protection group.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation DescribeProtectionGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionGroup
+func (c *Shield) DescribeProtectionGroup(input *DescribeProtectionGroupInput) (*DescribeProtectionGroupOutput, error) {
+	req, out := c.DescribeProtectionGroupRequest(input)
+	return out, req.Send()
+}
+
+// DescribeProtectionGroupWithContext is the same as DescribeProtectionGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeProtectionGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) DescribeProtectionGroupWithContext(ctx aws.Context, input *DescribeProtectionGroupInput, opts ...request.Option) (*DescribeProtectionGroupOutput, error) {
+	req, out := c.DescribeProtectionGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeSubscription = "DescribeSubscription"
 
 // DescribeSubscriptionRequest generates a "aws/request.Request" representing the
@@ -1009,14 +1609,13 @@ const opDescribeSubscription = "DescribeSubscription"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeSubscriptionRequest method.
+//	req, resp := client.DescribeSubscriptionRequest(params)
 //
-//    // Example sending a request using the DescribeSubscriptionRequest method.
-//    req, resp := client.DescribeSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription
 func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) (req *request.Request, output *DescribeSubscriptionOutput) {
@@ -1037,7 +1636,7 @@ func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) (
 
 // DescribeSubscription API operation for AWS Shield.
 //
-// Provides details about the AWS Shield Advanced subscription for an account.
+// Provides details about the Shield Advanced subscription for an account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1046,13 +1645,15 @@ func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) (
 // See the AWS API reference guide for AWS Shield's
 // API operation DescribeSubscription for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription
 func (c *Shield) DescribeSubscription(input *DescribeSubscriptionInput) (*DescribeSubscriptionOutput, error) {
@@ -1076,6 +1677,203 @@ func (c *Shield) DescribeSubscriptionWithContext(ctx aws.Context, input *Describ
 	return out, req.Send()
 }
 
+const opDisableApplicationLayerAutomaticResponse = "DisableApplicationLayerAutomaticResponse"
+
+// DisableApplicationLayerAutomaticResponseRequest generates a "aws/request.Request" representing the
+// client's request for the DisableApplicationLayerAutomaticResponse operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisableApplicationLayerAutomaticResponse for more information on using the DisableApplicationLayerAutomaticResponse
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisableApplicationLayerAutomaticResponseRequest method.
+//	req, resp := client.DisableApplicationLayerAutomaticResponseRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableApplicationLayerAutomaticResponse
+func (c *Shield) DisableApplicationLayerAutomaticResponseRequest(input *DisableApplicationLayerAutomaticResponseInput) (req *request.Request, output *DisableApplicationLayerAutomaticResponseOutput) {
+	op := &request.Operation{
+		Name:       opDisableApplicationLayerAutomaticResponse,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisableApplicationLayerAutomaticResponseInput{}
+	}
+
+	output = &DisableApplicationLayerAutomaticResponseOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DisableApplicationLayerAutomaticResponse API operation for AWS Shield.
+//
+// Disable the Shield Advanced automatic application layer DDoS mitigation feature
+// for the protected resource. This stops Shield Advanced from creating, verifying,
+// and applying WAF rules for attacks that it detects for the resource.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation DisableApplicationLayerAutomaticResponse for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableApplicationLayerAutomaticResponse
+func (c *Shield) DisableApplicationLayerAutomaticResponse(input *DisableApplicationLayerAutomaticResponseInput) (*DisableApplicationLayerAutomaticResponseOutput, error) {
+	req, out := c.DisableApplicationLayerAutomaticResponseRequest(input)
+	return out, req.Send()
+}
+
+// DisableApplicationLayerAutomaticResponseWithContext is the same as DisableApplicationLayerAutomaticResponse with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisableApplicationLayerAutomaticResponse for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) DisableApplicationLayerAutomaticResponseWithContext(ctx aws.Context, input *DisableApplicationLayerAutomaticResponseInput, opts ...request.Option) (*DisableApplicationLayerAutomaticResponseOutput, error) {
+	req, out := c.DisableApplicationLayerAutomaticResponseRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDisableProactiveEngagement = "DisableProactiveEngagement"
+
+// DisableProactiveEngagementRequest generates a "aws/request.Request" representing the
+// client's request for the DisableProactiveEngagement operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisableProactiveEngagement for more information on using the DisableProactiveEngagement
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisableProactiveEngagementRequest method.
+//	req, resp := client.DisableProactiveEngagementRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableProactiveEngagement
+func (c *Shield) DisableProactiveEngagementRequest(input *DisableProactiveEngagementInput) (req *request.Request, output *DisableProactiveEngagementOutput) {
+	op := &request.Operation{
+		Name:       opDisableProactiveEngagement,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisableProactiveEngagementInput{}
+	}
+
+	output = &DisableProactiveEngagementOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DisableProactiveEngagement API operation for AWS Shield.
+//
+// Removes authorization from the Shield Response Team (SRT) to notify contacts
+// about escalations to the SRT and to initiate proactive customer support.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation DisableProactiveEngagement for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableProactiveEngagement
+func (c *Shield) DisableProactiveEngagement(input *DisableProactiveEngagementInput) (*DisableProactiveEngagementOutput, error) {
+	req, out := c.DisableProactiveEngagementRequest(input)
+	return out, req.Send()
+}
+
+// DisableProactiveEngagementWithContext is the same as DisableProactiveEngagement with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisableProactiveEngagement for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) DisableProactiveEngagementWithContext(ctx aws.Context, input *DisableProactiveEngagementInput, opts ...request.Option) (*DisableProactiveEngagementOutput, error) {
+	req, out := c.DisableProactiveEngagementRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDisassociateDRTLogBucket = "DisassociateDRTLogBucket"
 
 // DisassociateDRTLogBucketRequest generates a "aws/request.Request" representing the
@@ -1092,14 +1890,13 @@ const opDisassociateDRTLogBucket = "DisassociateDRTLogBucket"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateDRTLogBucketRequest method.
+//	req, resp := client.DisassociateDRTLogBucketRequest(params)
 //
-//    // Example sending a request using the DisassociateDRTLogBucketRequest method.
-//    req, resp := client.DisassociateDRTLogBucketRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucket
 func (c *Shield) DisassociateDRTLogBucketRequest(input *DisassociateDRTLogBucketInput) (req *request.Request, output *DisassociateDRTLogBucketOutput) {
@@ -1121,15 +1918,8 @@ func (c *Shield) DisassociateDRTLogBucketRequest(input *DisassociateDRTLogBucket
 
 // DisassociateDRTLogBucket API operation for AWS Shield.
 //
-// Removes the DDoS Response team's (DRT) access to the specified Amazon S3
-// bucket containing your flow logs.
-//
-// To make a DisassociateDRTLogBucket request, you must be subscribed to the
-// Business Support plan (https://aws.amazon.com/premiumsupport/business-support/)
-// or the Enterprise Support plan (https://aws.amazon.com/premiumsupport/enterprise-support/).
-// However, if you are not subscribed to one of these support plans, but had
-// been previously and had granted the DRT access to your account, you can submit
-// a DisassociateDRTLogBucket request to remove this access.
+// Removes the Shield Response Team's (SRT) access to the specified Amazon S3
+// bucket containing the logs that you shared previously.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1138,30 +1928,33 @@ func (c *Shield) DisassociateDRTLogBucketRequest(input *DisassociateDRTLogBucket
 // See the AWS API reference guide for AWS Shield's
 // API operation DisassociateDRTLogBucket for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   Exception that indicates that the operation would not cause any change to
-//   occur.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeNoAssociatedRoleException "NoAssociatedRoleException"
-//   The ARN of the role that you specifed does not exist.
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
 //
-//   * ErrCodeAccessDeniedForDependencyException "AccessDeniedForDependencyException"
-//   In order to grant the necessary access to the DDoS Response Team, the user
-//   submitting AssociateDRTRole must have the iam:PassRole permission. This error
-//   indicates the user did not have the appropriate permissions. For more information,
-//   see Granting a User Permissions to Pass a Role to an AWS Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
+//   - NoAssociatedRoleException
+//     The ARN of the role that you specified does not exist.
 //
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
+//   - AccessDeniedForDependencyException
+//     In order to grant the necessary access to the Shield Response Team (SRT)
+//     the user submitting the request must have the iam:PassRole permission. This
+//     error indicates the user did not have the appropriate permissions. For more
+//     information, see Granting a User Permissions to Pass a Role to an Amazon
+//     Web Services Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucket
 func (c *Shield) DisassociateDRTLogBucket(input *DisassociateDRTLogBucketInput) (*DisassociateDRTLogBucketOutput, error) {
@@ -1201,14 +1994,13 @@ const opDisassociateDRTRole = "DisassociateDRTRole"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateDRTRoleRequest method.
+//	req, resp := client.DisassociateDRTRoleRequest(params)
 //
-//    // Example sending a request using the DisassociateDRTRoleRequest method.
-//    req, resp := client.DisassociateDRTRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRole
 func (c *Shield) DisassociateDRTRoleRequest(input *DisassociateDRTRoleInput) (req *request.Request, output *DisassociateDRTRoleOutput) {
@@ -1230,14 +2022,8 @@ func (c *Shield) DisassociateDRTRoleRequest(input *DisassociateDRTRoleInput) (re
 
 // DisassociateDRTRole API operation for AWS Shield.
 //
-// Removes the DDoS Response team's (DRT) access to your AWS account.
-//
-// To make a DisassociateDRTRole request, you must be subscribed to the Business
-// Support plan (https://aws.amazon.com/premiumsupport/business-support/) or
-// the Enterprise Support plan (https://aws.amazon.com/premiumsupport/enterprise-support/).
-// However, if you are not subscribed to one of these support plans, but had
-// been previously and had granted the DRT access to your account, you can submit
-// a DisassociateDRTRole request to remove this access.
+// Removes the Shield Response Team's (SRT) access to your Amazon Web Services
+// account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1246,21 +2032,23 @@ func (c *Shield) DisassociateDRTRoleRequest(input *DisassociateDRTRoleInput) (re
 // See the AWS API reference guide for AWS Shield's
 // API operation DisassociateDRTRole for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   Exception that indicates that the operation would not cause any change to
-//   occur.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRole
 func (c *Shield) DisassociateDRTRole(input *DisassociateDRTRoleInput) (*DisassociateDRTRoleOutput, error) {
@@ -1284,6 +2072,334 @@ func (c *Shield) DisassociateDRTRoleWithContext(ctx aws.Context, input *Disassoc
 	return out, req.Send()
 }
 
+const opDisassociateHealthCheck = "DisassociateHealthCheck"
+
+// DisassociateHealthCheckRequest generates a "aws/request.Request" representing the
+// client's request for the DisassociateHealthCheck operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisassociateHealthCheck for more information on using the DisassociateHealthCheck
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisassociateHealthCheckRequest method.
+//	req, resp := client.DisassociateHealthCheckRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateHealthCheck
+func (c *Shield) DisassociateHealthCheckRequest(input *DisassociateHealthCheckInput) (req *request.Request, output *DisassociateHealthCheckOutput) {
+	op := &request.Operation{
+		Name:       opDisassociateHealthCheck,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisassociateHealthCheckInput{}
+	}
+
+	output = &DisassociateHealthCheckOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DisassociateHealthCheck API operation for AWS Shield.
+//
+// Removes health-based detection from the Shield Advanced protection for a
+// resource. Shield Advanced health-based detection uses the health of your
+// Amazon Web Services resource to improve responsiveness and accuracy in attack
+// detection and response.
+//
+// You define the health check in Route 53 and then associate or disassociate
+// it with your Shield Advanced protection. For more information, see Shield
+// Advanced Health-Based Detection (https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option)
+// in the WAF Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation DisassociateHealthCheck for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - InvalidResourceException
+//     Exception that indicates that the resource is invalid. You might not have
+//     access to the resource, or the resource might not exist.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateHealthCheck
+func (c *Shield) DisassociateHealthCheck(input *DisassociateHealthCheckInput) (*DisassociateHealthCheckOutput, error) {
+	req, out := c.DisassociateHealthCheckRequest(input)
+	return out, req.Send()
+}
+
+// DisassociateHealthCheckWithContext is the same as DisassociateHealthCheck with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisassociateHealthCheck for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) DisassociateHealthCheckWithContext(ctx aws.Context, input *DisassociateHealthCheckInput, opts ...request.Option) (*DisassociateHealthCheckOutput, error) {
+	req, out := c.DisassociateHealthCheckRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opEnableApplicationLayerAutomaticResponse = "EnableApplicationLayerAutomaticResponse"
+
+// EnableApplicationLayerAutomaticResponseRequest generates a "aws/request.Request" representing the
+// client's request for the EnableApplicationLayerAutomaticResponse operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See EnableApplicationLayerAutomaticResponse for more information on using the EnableApplicationLayerAutomaticResponse
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the EnableApplicationLayerAutomaticResponseRequest method.
+//	req, resp := client.EnableApplicationLayerAutomaticResponseRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableApplicationLayerAutomaticResponse
+func (c *Shield) EnableApplicationLayerAutomaticResponseRequest(input *EnableApplicationLayerAutomaticResponseInput) (req *request.Request, output *EnableApplicationLayerAutomaticResponseOutput) {
+	op := &request.Operation{
+		Name:       opEnableApplicationLayerAutomaticResponse,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &EnableApplicationLayerAutomaticResponseInput{}
+	}
+
+	output = &EnableApplicationLayerAutomaticResponseOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// EnableApplicationLayerAutomaticResponse API operation for AWS Shield.
+//
+// Enable the Shield Advanced automatic application layer DDoS mitigation for
+// the protected resource.
+//
+// This feature is available for Amazon CloudFront distributions and Application
+// Load Balancers only.
+//
+// This causes Shield Advanced to create, verify, and apply WAF rules for DDoS
+// attacks that it detects for the resource. Shield Advanced applies the rules
+// in a Shield rule group inside the web ACL that you've associated with the
+// resource. For information about how automatic mitigation works and the requirements
+// for using it, see Shield Advanced automatic application layer DDoS mitigation
+// (https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-automatic-app-layer-response.html).
+//
+// Don't use this action to make changes to automatic mitigation settings when
+// it's already enabled for a resource. Instead, use UpdateApplicationLayerAutomaticResponse.
+//
+// To use this feature, you must associate a web ACL with the protected resource.
+// The web ACL must be created using the latest version of WAF (v2). You can
+// associate the web ACL through the Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/
+// (https://console.aws.amazon.com/wafv2/shieldv2#/). For more information,
+// see Getting Started with Shield Advanced (https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html).
+// You can also associate the web ACL to the resource through the WAF console
+// or the WAF API, but you must manage Shield Advanced automatic mitigation
+// through Shield Advanced. For information about WAF, see WAF Developer Guide
+// (https://docs.aws.amazon.com/waf/latest/developerguide/).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation EnableApplicationLayerAutomaticResponse for usage and error information.
+//
+// Returned Error Types:
+//
+//   - LimitsExceededException
+//     Exception that indicates that the operation would exceed a limit.
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableApplicationLayerAutomaticResponse
+func (c *Shield) EnableApplicationLayerAutomaticResponse(input *EnableApplicationLayerAutomaticResponseInput) (*EnableApplicationLayerAutomaticResponseOutput, error) {
+	req, out := c.EnableApplicationLayerAutomaticResponseRequest(input)
+	return out, req.Send()
+}
+
+// EnableApplicationLayerAutomaticResponseWithContext is the same as EnableApplicationLayerAutomaticResponse with the addition of
+// the ability to pass a context and additional request options.
+//
+// See EnableApplicationLayerAutomaticResponse for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) EnableApplicationLayerAutomaticResponseWithContext(ctx aws.Context, input *EnableApplicationLayerAutomaticResponseInput, opts ...request.Option) (*EnableApplicationLayerAutomaticResponseOutput, error) {
+	req, out := c.EnableApplicationLayerAutomaticResponseRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opEnableProactiveEngagement = "EnableProactiveEngagement"
+
+// EnableProactiveEngagementRequest generates a "aws/request.Request" representing the
+// client's request for the EnableProactiveEngagement operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See EnableProactiveEngagement for more information on using the EnableProactiveEngagement
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the EnableProactiveEngagementRequest method.
+//	req, resp := client.EnableProactiveEngagementRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableProactiveEngagement
+func (c *Shield) EnableProactiveEngagementRequest(input *EnableProactiveEngagementInput) (req *request.Request, output *EnableProactiveEngagementOutput) {
+	op := &request.Operation{
+		Name:       opEnableProactiveEngagement,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &EnableProactiveEngagementInput{}
+	}
+
+	output = &EnableProactiveEngagementOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// EnableProactiveEngagement API operation for AWS Shield.
+//
+// Authorizes the Shield Response Team (SRT) to use email and phone to notify
+// contacts about escalations to the SRT and to initiate proactive customer
+// support.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation EnableProactiveEngagement for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableProactiveEngagement
+func (c *Shield) EnableProactiveEngagement(input *EnableProactiveEngagementInput) (*EnableProactiveEngagementOutput, error) {
+	req, out := c.EnableProactiveEngagementRequest(input)
+	return out, req.Send()
+}
+
+// EnableProactiveEngagementWithContext is the same as EnableProactiveEngagement with the addition of
+// the ability to pass a context and additional request options.
+//
+// See EnableProactiveEngagement for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) EnableProactiveEngagementWithContext(ctx aws.Context, input *EnableProactiveEngagementInput, opts ...request.Option) (*EnableProactiveEngagementOutput, error) {
+	req, out := c.EnableProactiveEngagementRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opGetSubscriptionState = "GetSubscriptionState"
 
 // GetSubscriptionStateRequest generates a "aws/request.Request" representing the
@@ -1300,14 +2416,13 @@ const opGetSubscriptionState = "GetSubscriptionState"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetSubscriptionStateRequest method.
+//	req, resp := client.GetSubscriptionStateRequest(params)
 //
-//    // Example sending a request using the GetSubscriptionStateRequest method.
-//    req, resp := client.GetSubscriptionStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionState
 func (c *Shield) GetSubscriptionStateRequest(input *GetSubscriptionStateInput) (req *request.Request, output *GetSubscriptionStateOutput) {
@@ -1337,10 +2452,10 @@ func (c *Shield) GetSubscriptionStateRequest(input *GetSubscriptionStateInput) (
 // See the AWS API reference guide for AWS Shield's
 // API operation GetSubscriptionState for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionState
 func (c *Shield) GetSubscriptionState(input *GetSubscriptionStateInput) (*GetSubscriptionStateOutput, error) {
@@ -1380,14 +2495,13 @@ const opListAttacks = "ListAttacks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAttacksRequest method.
+//	req, resp := client.ListAttacksRequest(params)
 //
-//    // Example sending a request using the ListAttacksRequest method.
-//    req, resp := client.ListAttacksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacks
 func (c *Shield) ListAttacksRequest(input *ListAttacksInput) (req *request.Request, output *ListAttacksOutput) {
@@ -1395,6 +2509,12 @@ func (c *Shield) ListAttacksRequest(input *ListAttacksInput) (req *request.Reque
 		Name:       opListAttacks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1418,17 +2538,19 @@ func (c *Shield) ListAttacksRequest(input *ListAttacksInput) (req *request.Reque
 // See the AWS API reference guide for AWS Shield's
 // API operation ListAttacks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Exception that indicates that the parameters passed to the API are invalid.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   Exception that indicates that the operation would not cause any change to
-//   occur.
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacks
 func (c *Shield) ListAttacks(input *ListAttacksInput) (*ListAttacksOutput, error) {
@@ -1452,6 +2574,205 @@ func (c *Shield) ListAttacksWithContext(ctx aws.Context, input *ListAttacksInput
 	return out, req.Send()
 }
 
+// ListAttacksPages iterates over the pages of a ListAttacks operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListAttacks method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListAttacks operation.
+//	pageNum := 0
+//	err := client.ListAttacksPages(params,
+//	    func(page *shield.ListAttacksOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Shield) ListAttacksPages(input *ListAttacksInput, fn func(*ListAttacksOutput, bool) bool) error {
+	return c.ListAttacksPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListAttacksPagesWithContext same as ListAttacksPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) ListAttacksPagesWithContext(ctx aws.Context, input *ListAttacksInput, fn func(*ListAttacksOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListAttacksInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListAttacksRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListAttacksOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListProtectionGroups = "ListProtectionGroups"
+
+// ListProtectionGroupsRequest generates a "aws/request.Request" representing the
+// client's request for the ListProtectionGroups operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListProtectionGroups for more information on using the ListProtectionGroups
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListProtectionGroupsRequest method.
+//	req, resp := client.ListProtectionGroupsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionGroups
+func (c *Shield) ListProtectionGroupsRequest(input *ListProtectionGroupsInput) (req *request.Request, output *ListProtectionGroupsOutput) {
+	op := &request.Operation{
+		Name:       opListProtectionGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListProtectionGroupsInput{}
+	}
+
+	output = &ListProtectionGroupsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListProtectionGroups API operation for AWS Shield.
+//
+// Retrieves ProtectionGroup objects for the account. You can retrieve all protection
+// groups or you can provide filtering criteria and retrieve just the subset
+// of protection groups that match the criteria.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation ListProtectionGroups for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - InvalidPaginationTokenException
+//     Exception that indicates that the NextToken specified in the request is invalid.
+//     Submit the request using the NextToken value that was returned in the prior
+//     response.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionGroups
+func (c *Shield) ListProtectionGroups(input *ListProtectionGroupsInput) (*ListProtectionGroupsOutput, error) {
+	req, out := c.ListProtectionGroupsRequest(input)
+	return out, req.Send()
+}
+
+// ListProtectionGroupsWithContext is the same as ListProtectionGroups with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListProtectionGroups for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) ListProtectionGroupsWithContext(ctx aws.Context, input *ListProtectionGroupsInput, opts ...request.Option) (*ListProtectionGroupsOutput, error) {
+	req, out := c.ListProtectionGroupsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListProtectionGroupsPages iterates over the pages of a ListProtectionGroups operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListProtectionGroups method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListProtectionGroups operation.
+//	pageNum := 0
+//	err := client.ListProtectionGroupsPages(params,
+//	    func(page *shield.ListProtectionGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Shield) ListProtectionGroupsPages(input *ListProtectionGroupsInput, fn func(*ListProtectionGroupsOutput, bool) bool) error {
+	return c.ListProtectionGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListProtectionGroupsPagesWithContext same as ListProtectionGroupsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) ListProtectionGroupsPagesWithContext(ctx aws.Context, input *ListProtectionGroupsInput, fn func(*ListProtectionGroupsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListProtectionGroupsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListProtectionGroupsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListProtectionGroupsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListProtections = "ListProtections"
 
 // ListProtectionsRequest generates a "aws/request.Request" representing the
@@ -1468,14 +2789,13 @@ const opListProtections = "ListProtections"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListProtectionsRequest method.
+//	req, resp := client.ListProtectionsRequest(params)
 //
-//    // Example sending a request using the ListProtectionsRequest method.
-//    req, resp := client.ListProtectionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections
 func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) (req *request.Request, output *ListProtectionsOutput) {
@@ -1483,6 +2803,12 @@ func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) (req *reque
 		Name:       opListProtections,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1496,7 +2822,9 @@ func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) (req *reque
 
 // ListProtections API operation for AWS Shield.
 //
-// Lists all Protection objects for the account.
+// Retrieves Protection objects for the account. You can retrieve all protections
+// or you can provide filtering criteria and retrieve just the subset of protections
+// that match the criteria.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1505,17 +2833,20 @@ func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) (req *reque
 // See the AWS API reference guide for AWS Shield's
 // API operation ListProtections for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeInvalidPaginationTokenException "InvalidPaginationTokenException"
-//   Exception that indicates that the NextToken specified in the request is invalid.
-//   Submit the request using the NextToken value that was returned in the response.
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - InvalidPaginationTokenException
+//     Exception that indicates that the NextToken specified in the request is invalid.
+//     Submit the request using the NextToken value that was returned in the prior
+//     response.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections
 func (c *Shield) ListProtections(input *ListProtectionsInput) (*ListProtectionsOutput, error) {
@@ -1539,6 +2870,576 @@ func (c *Shield) ListProtectionsWithContext(ctx aws.Context, input *ListProtecti
 	return out, req.Send()
 }
 
+// ListProtectionsPages iterates over the pages of a ListProtections operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListProtections method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListProtections operation.
+//	pageNum := 0
+//	err := client.ListProtectionsPages(params,
+//	    func(page *shield.ListProtectionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Shield) ListProtectionsPages(input *ListProtectionsInput, fn func(*ListProtectionsOutput, bool) bool) error {
+	return c.ListProtectionsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListProtectionsPagesWithContext same as ListProtectionsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) ListProtectionsPagesWithContext(ctx aws.Context, input *ListProtectionsInput, fn func(*ListProtectionsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListProtectionsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListProtectionsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListProtectionsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListResourcesInProtectionGroup = "ListResourcesInProtectionGroup"
+
+// ListResourcesInProtectionGroupRequest generates a "aws/request.Request" representing the
+// client's request for the ListResourcesInProtectionGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListResourcesInProtectionGroup for more information on using the ListResourcesInProtectionGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListResourcesInProtectionGroupRequest method.
+//	req, resp := client.ListResourcesInProtectionGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListResourcesInProtectionGroup
+func (c *Shield) ListResourcesInProtectionGroupRequest(input *ListResourcesInProtectionGroupInput) (req *request.Request, output *ListResourcesInProtectionGroupOutput) {
+	op := &request.Operation{
+		Name:       opListResourcesInProtectionGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListResourcesInProtectionGroupInput{}
+	}
+
+	output = &ListResourcesInProtectionGroupOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListResourcesInProtectionGroup API operation for AWS Shield.
+//
+// Retrieves the resources that are included in the protection group.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation ListResourcesInProtectionGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - InvalidPaginationTokenException
+//     Exception that indicates that the NextToken specified in the request is invalid.
+//     Submit the request using the NextToken value that was returned in the prior
+//     response.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListResourcesInProtectionGroup
+func (c *Shield) ListResourcesInProtectionGroup(input *ListResourcesInProtectionGroupInput) (*ListResourcesInProtectionGroupOutput, error) {
+	req, out := c.ListResourcesInProtectionGroupRequest(input)
+	return out, req.Send()
+}
+
+// ListResourcesInProtectionGroupWithContext is the same as ListResourcesInProtectionGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListResourcesInProtectionGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) ListResourcesInProtectionGroupWithContext(ctx aws.Context, input *ListResourcesInProtectionGroupInput, opts ...request.Option) (*ListResourcesInProtectionGroupOutput, error) {
+	req, out := c.ListResourcesInProtectionGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListResourcesInProtectionGroupPages iterates over the pages of a ListResourcesInProtectionGroup operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListResourcesInProtectionGroup method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListResourcesInProtectionGroup operation.
+//	pageNum := 0
+//	err := client.ListResourcesInProtectionGroupPages(params,
+//	    func(page *shield.ListResourcesInProtectionGroupOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Shield) ListResourcesInProtectionGroupPages(input *ListResourcesInProtectionGroupInput, fn func(*ListResourcesInProtectionGroupOutput, bool) bool) error {
+	return c.ListResourcesInProtectionGroupPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListResourcesInProtectionGroupPagesWithContext same as ListResourcesInProtectionGroupPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) ListResourcesInProtectionGroupPagesWithContext(ctx aws.Context, input *ListResourcesInProtectionGroupInput, fn func(*ListResourcesInProtectionGroupOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListResourcesInProtectionGroupInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListResourcesInProtectionGroupRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListResourcesInProtectionGroupOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// client's request for the ListTagsForResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListTagsForResource for more information on using the ListTagsForResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListTagsForResource
+func (c *Shield) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
+	op := &request.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output = &ListTagsForResourceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListTagsForResource API operation for AWS Shield.
+//
+// Gets information about Amazon Web Services tags for a specified Amazon Resource
+// Name (ARN) in Shield.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation ListTagsForResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - InvalidResourceException
+//     Exception that indicates that the resource is invalid. You might not have
+//     access to the resource, or the resource might not exist.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListTagsForResource
+func (c *Shield) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	return out, req.Send()
+}
+
+// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListTagsForResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the TagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See TagResource for more information on using the TagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the TagResourceRequest method.
+//	req, resp := client.TagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/TagResource
+func (c *Shield) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
+	op := &request.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output = &TagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// TagResource API operation for AWS Shield.
+//
+// Adds or updates tags for a resource in Shield.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation TagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - InvalidResourceException
+//     Exception that indicates that the resource is invalid. You might not have
+//     access to the resource, or the resource might not exist.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/TagResource
+func (c *Shield) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	return out, req.Send()
+}
+
+// TagResourceWithContext is the same as TagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See TagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the UntagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UntagResource for more information on using the UntagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UntagResourceRequest method.
+//	req, resp := client.UntagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UntagResource
+func (c *Shield) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
+	op := &request.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output = &UntagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UntagResource API operation for AWS Shield.
+//
+// Removes tags from a resource in Shield.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation UntagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - InvalidResourceException
+//     Exception that indicates that the resource is invalid. You might not have
+//     access to the resource, or the resource might not exist.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UntagResource
+func (c *Shield) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	return out, req.Send()
+}
+
+// UntagResourceWithContext is the same as UntagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UntagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateApplicationLayerAutomaticResponse = "UpdateApplicationLayerAutomaticResponse"
+
+// UpdateApplicationLayerAutomaticResponseRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateApplicationLayerAutomaticResponse operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateApplicationLayerAutomaticResponse for more information on using the UpdateApplicationLayerAutomaticResponse
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateApplicationLayerAutomaticResponseRequest method.
+//	req, resp := client.UpdateApplicationLayerAutomaticResponseRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateApplicationLayerAutomaticResponse
+func (c *Shield) UpdateApplicationLayerAutomaticResponseRequest(input *UpdateApplicationLayerAutomaticResponseInput) (req *request.Request, output *UpdateApplicationLayerAutomaticResponseOutput) {
+	op := &request.Operation{
+		Name:       opUpdateApplicationLayerAutomaticResponse,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateApplicationLayerAutomaticResponseInput{}
+	}
+
+	output = &UpdateApplicationLayerAutomaticResponseOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateApplicationLayerAutomaticResponse API operation for AWS Shield.
+//
+// Updates an existing Shield Advanced automatic application layer DDoS mitigation
+// configuration for the specified resource.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation UpdateApplicationLayerAutomaticResponse for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - InvalidOperationException
+//     Exception that indicates that the operation would not cause any change to
+//     occur.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateApplicationLayerAutomaticResponse
+func (c *Shield) UpdateApplicationLayerAutomaticResponse(input *UpdateApplicationLayerAutomaticResponseInput) (*UpdateApplicationLayerAutomaticResponseOutput, error) {
+	req, out := c.UpdateApplicationLayerAutomaticResponseRequest(input)
+	return out, req.Send()
+}
+
+// UpdateApplicationLayerAutomaticResponseWithContext is the same as UpdateApplicationLayerAutomaticResponse with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateApplicationLayerAutomaticResponse for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) UpdateApplicationLayerAutomaticResponseWithContext(ctx aws.Context, input *UpdateApplicationLayerAutomaticResponseInput, opts ...request.Option) (*UpdateApplicationLayerAutomaticResponseOutput, error) {
+	req, out := c.UpdateApplicationLayerAutomaticResponseRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateEmergencyContactSettings = "UpdateEmergencyContactSettings"
 
 // UpdateEmergencyContactSettingsRequest generates a "aws/request.Request" representing the
@@ -1555,14 +3456,13 @@ const opUpdateEmergencyContactSettings = "UpdateEmergencyContactSettings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateEmergencyContactSettingsRequest method.
+//	req, resp := client.UpdateEmergencyContactSettingsRequest(params)
 //
-//    // Example sending a request using the UpdateEmergencyContactSettingsRequest method.
-//    req, resp := client.UpdateEmergencyContactSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettings
 func (c *Shield) UpdateEmergencyContactSettingsRequest(input *UpdateEmergencyContactSettingsInput) (req *request.Request, output *UpdateEmergencyContactSettingsOutput) {
@@ -1584,8 +3484,10 @@ func (c *Shield) UpdateEmergencyContactSettingsRequest(input *UpdateEmergencyCon
 
 // UpdateEmergencyContactSettings API operation for AWS Shield.
 //
-// Updates the details of the list of email addresses that the DRT can use to
-// contact you during a suspected attack.
+// Updates the details of the list of email addresses and phone numbers that
+// the Shield Response Team (SRT) can use to contact you if you have proactive
+// engagement enabled, for escalations to the SRT and to initiate proactive
+// customer support.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1594,20 +3496,23 @@ func (c *Shield) UpdateEmergencyContactSettingsRequest(input *UpdateEmergencyCon
 // See the AWS API reference guide for AWS Shield's
 // API operation UpdateEmergencyContactSettings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Exception that indicates that the parameters passed to the API are invalid.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettings
 func (c *Shield) UpdateEmergencyContactSettings(input *UpdateEmergencyContactSettingsInput) (*UpdateEmergencyContactSettingsOutput, error) {
@@ -1631,6 +3536,101 @@ func (c *Shield) UpdateEmergencyContactSettingsWithContext(ctx aws.Context, inpu
 	return out, req.Send()
 }
 
+const opUpdateProtectionGroup = "UpdateProtectionGroup"
+
+// UpdateProtectionGroupRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateProtectionGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateProtectionGroup for more information on using the UpdateProtectionGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateProtectionGroupRequest method.
+//	req, resp := client.UpdateProtectionGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateProtectionGroup
+func (c *Shield) UpdateProtectionGroupRequest(input *UpdateProtectionGroupInput) (req *request.Request, output *UpdateProtectionGroupOutput) {
+	op := &request.Operation{
+		Name:       opUpdateProtectionGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateProtectionGroupInput{}
+	}
+
+	output = &UpdateProtectionGroupOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateProtectionGroup API operation for AWS Shield.
+//
+// Updates an existing protection group. A protection group is a grouping of
+// protected resources so they can be handled as a collective. This resource
+// grouping improves the accuracy of detection and reduces false positives.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Shield's
+// API operation UpdateProtectionGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
+//
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
+//
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateProtectionGroup
+func (c *Shield) UpdateProtectionGroup(input *UpdateProtectionGroupInput) (*UpdateProtectionGroupOutput, error) {
+	req, out := c.UpdateProtectionGroupRequest(input)
+	return out, req.Send()
+}
+
+// UpdateProtectionGroupWithContext is the same as UpdateProtectionGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateProtectionGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Shield) UpdateProtectionGroupWithContext(ctx aws.Context, input *UpdateProtectionGroupInput, opts ...request.Option) (*UpdateProtectionGroupOutput, error) {
+	req, out := c.UpdateProtectionGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateSubscription = "UpdateSubscription"
 
 // UpdateSubscriptionRequest generates a "aws/request.Request" representing the
@@ -1647,14 +3647,13 @@ const opUpdateSubscription = "UpdateSubscription"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateSubscriptionRequest method.
+//	req, resp := client.UpdateSubscriptionRequest(params)
 //
-//    // Example sending a request using the UpdateSubscriptionRequest method.
-//    req, resp := client.UpdateSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscription
 func (c *Shield) UpdateSubscriptionRequest(input *UpdateSubscriptionInput) (req *request.Request, output *UpdateSubscriptionOutput) {
@@ -1679,6 +3678,10 @@ func (c *Shield) UpdateSubscriptionRequest(input *UpdateSubscriptionInput) (req 
 // Updates the details of an existing subscription. Only enter values for parameters
 // you want to change. Empty parameters are not updated.
 //
+// For accounts that are members of an Organizations organization, Shield Advanced
+// subscriptions are billed against the organization's payer account, regardless
+// of whether the payer account itself is subscribed.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -1686,26 +3689,29 @@ func (c *Shield) UpdateSubscriptionRequest(input *UpdateSubscriptionInput) (req 
 // See the AWS API reference guide for AWS Shield's
 // API operation UpdateSubscription for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Exception that indicates that a problem occurred with the service infrastructure.
-//   You can retry the request.
+// Returned Error Types:
 //
-//   * ErrCodeLockedSubscriptionException "LockedSubscriptionException"
-//   You are trying to update a subscription that has not yet completed the 1-year
-//   commitment. You can change the AutoRenew parameter during the last 30 days
-//   of your subscription. This exception indicates that you are attempting to
-//   change AutoRenew prior to that period.
+//   - InternalErrorException
+//     Exception that indicates that a problem occurred with the service infrastructure.
+//     You can retry the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception indicating the specified resource does not exist.
+//   - LockedSubscriptionException
+//     You are trying to update a subscription that has not yet completed the 1-year
+//     commitment. You can change the AutoRenew parameter during the last 30 days
+//     of your subscription. This exception indicates that you are attempting to
+//     change AutoRenew prior to that period.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Exception that indicates that the parameters passed to the API are invalid.
+//   - ResourceNotFoundException
+//     Exception indicating the specified resource does not exist. If available,
+//     this exception includes details in additional properties.
 //
-//   * ErrCodeOptimisticLockException "OptimisticLockException"
-//   Exception that indicates that the protection state has been modified by another
-//   client. You can retry the request.
+//   - InvalidParameterException
+//     Exception that indicates that the parameters passed to the API are invalid.
+//     If available, this exception includes details in additional properties.
+//
+//   - OptimisticLockException
+//     Exception that indicates that the resource state has been modified by another
+//     client. Retrieve the resource and then retry your request.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscription
 func (c *Shield) UpdateSubscription(input *UpdateSubscriptionInput) (*UpdateSubscriptionOutput, error) {
@@ -1729,21 +3735,216 @@ func (c *Shield) UpdateSubscriptionWithContext(ctx aws.Context, input *UpdateSub
 	return out, req.Send()
 }
 
+// Exception that indicates the specified AttackId does not exist, or the requester
+// does not have the appropriate permissions to access the AttackId.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// In order to grant the necessary access to the Shield Response Team (SRT)
+// the user submitting the request must have the iam:PassRole permission. This
+// error indicates the user did not have the appropriate permissions. For more
+// information, see Granting a User Permissions to Pass a Role to an Amazon
+// Web Services Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
+type AccessDeniedForDependencyException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedForDependencyException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedForDependencyException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedForDependencyException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedForDependencyException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedForDependencyException) Code() string {
+	return "AccessDeniedForDependencyException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedForDependencyException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedForDependencyException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedForDependencyException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedForDependencyException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedForDependencyException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The automatic application layer DDoS mitigation settings for a Protection.
+// This configuration determines whether Shield Advanced automatically manages
+// rules in the web ACL in order to respond to application layer events that
+// Shield Advanced determines to be DDoS attacks.
+type ApplicationLayerAutomaticResponseConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the action setting that Shield Advanced should use in the WAF rules
+	// that it creates on behalf of the protected resource in response to DDoS attacks.
+	// You specify this as part of the configuration for the automatic application
+	// layer DDoS mitigation feature, when you enable or update automatic mitigation.
+	// Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group,
+	// inside the web ACL that you have associated with the resource.
+	//
+	// Action is a required field
+	Action *ResponseAction `type:"structure" required:"true"`
+
+	// Indicates whether automatic application layer DDoS mitigation is enabled
+	// for the protection.
+	//
+	// Status is a required field
+	Status *string `type:"string" required:"true" enum:"ApplicationLayerAutomaticResponseStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationLayerAutomaticResponseConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationLayerAutomaticResponseConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetAction sets the Action field's value.
+func (s *ApplicationLayerAutomaticResponseConfiguration) SetAction(v *ResponseAction) *ApplicationLayerAutomaticResponseConfiguration {
+	s.Action = v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *ApplicationLayerAutomaticResponseConfiguration) SetStatus(v string) *ApplicationLayerAutomaticResponseConfiguration {
+	s.Status = &v
+	return s
+}
+
 type AssociateDRTLogBucketInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon S3 bucket that contains your flow logs.
+	// The Amazon S3 bucket that contains the logs that you want to share.
 	//
 	// LogBucket is a required field
 	LogBucket *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDRTLogBucketInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDRTLogBucketInput) GoString() string {
 	return s.String()
 }
@@ -1774,12 +3975,20 @@ type AssociateDRTLogBucketOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDRTLogBucketOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDRTLogBucketOutput) GoString() string {
 	return s.String()
 }
@@ -1787,24 +3996,32 @@ func (s AssociateDRTLogBucketOutput) GoString() string {
 type AssociateDRTRoleInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the role the DRT will use to access your
-	// AWS account.
+	// The Amazon Resource Name (ARN) of the role the SRT will use to access your
+	// Amazon Web Services account.
 	//
 	// Prior to making the AssociateDRTRole request, you must attach the AWSShieldDRTAccessPolicy
 	// (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy)
 	// managed policy to this role. For more information see Attaching and Detaching
-	// IAM Policies ( https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
+	// IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
 	//
 	// RoleArn is a required field
 	RoleArn *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDRTRoleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDRTRoleInput) GoString() string {
 	return s.String()
 }
@@ -1835,13 +4052,198 @@ type AssociateDRTRoleOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDRTRoleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDRTRoleOutput) GoString() string {
+	return s.String()
+}
+
+type AssociateHealthCheckInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the health check to associate with the
+	// protection.
+	//
+	// HealthCheckArn is a required field
+	HealthCheckArn *string `min:"1" type:"string" required:"true"`
+
+	// The unique identifier (ID) for the Protection object to add the health check
+	// association to.
+	//
+	// ProtectionId is a required field
+	ProtectionId *string `min:"36" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateHealthCheckInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateHealthCheckInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateHealthCheckInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AssociateHealthCheckInput"}
+	if s.HealthCheckArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("HealthCheckArn"))
+	}
+	if s.HealthCheckArn != nil && len(*s.HealthCheckArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("HealthCheckArn", 1))
+	}
+	if s.ProtectionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProtectionId"))
+	}
+	if s.ProtectionId != nil && len(*s.ProtectionId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionId", 36))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetHealthCheckArn sets the HealthCheckArn field's value.
+func (s *AssociateHealthCheckInput) SetHealthCheckArn(v string) *AssociateHealthCheckInput {
+	s.HealthCheckArn = &v
+	return s
+}
+
+// SetProtectionId sets the ProtectionId field's value.
+func (s *AssociateHealthCheckInput) SetProtectionId(v string) *AssociateHealthCheckInput {
+	s.ProtectionId = &v
+	return s
+}
+
+type AssociateHealthCheckOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateHealthCheckOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateHealthCheckOutput) GoString() string {
+	return s.String()
+}
+
+type AssociateProactiveEngagementDetailsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of email addresses and phone numbers that the Shield Response Team
+	// (SRT) can use to contact you for escalations to the SRT and to initiate proactive
+	// customer support.
+	//
+	// To enable proactive engagement, the contact list must include at least one
+	// phone number.
+	//
+	// The contacts that you provide here replace any contacts that were already
+	// defined. If you already have contacts defined and want to use them, retrieve
+	// the list using DescribeEmergencyContactSettings and then provide it here.
+	//
+	// EmergencyContactList is a required field
+	EmergencyContactList []*EmergencyContact `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateProactiveEngagementDetailsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateProactiveEngagementDetailsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateProactiveEngagementDetailsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AssociateProactiveEngagementDetailsInput"}
+	if s.EmergencyContactList == nil {
+		invalidParams.Add(request.NewErrParamRequired("EmergencyContactList"))
+	}
+	if s.EmergencyContactList != nil {
+		for i, v := range s.EmergencyContactList {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EmergencyContactList", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEmergencyContactList sets the EmergencyContactList field's value.
+func (s *AssociateProactiveEngagementDetailsInput) SetEmergencyContactList(v []*EmergencyContact) *AssociateProactiveEngagementDetailsInput {
+	s.EmergencyContactList = v
+	return s
+}
+
+type AssociateProactiveEngagementDetailsOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateProactiveEngagementDetailsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateProactiveEngagementDetailsOutput) GoString() string {
 	return s.String()
 }
 
@@ -1855,11 +4257,15 @@ type AttackDetail struct {
 	// The unique identifier (ID) of the attack.
 	AttackId *string `min:"1" type:"string"`
 
-	// The array of AttackProperty objects.
+	// The array of objects that provide details of the Shield event.
+	//
+	// For infrastructure layer events (L3 and L4 events), you can view metrics
+	// for top contributors in Amazon CloudWatch metrics. For more information,
+	// see Shield metrics and alarms (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
+	// in the WAF Developer Guide.
 	AttackProperties []*AttackProperty `type:"list"`
 
-	// The time the attack ended, in Unix time in seconds. For more information
-	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The time the attack ended, in Unix time in seconds.
 	EndTime *time.Time `type:"timestamp"`
 
 	// List of mitigation actions taken for the attack.
@@ -1868,8 +4274,7 @@ type AttackDetail struct {
 	// The ARN (Amazon Resource Name) of the resource that was attacked.
 	ResourceArn *string `min:"1" type:"string"`
 
-	// The time the attack started, in Unix time in seconds. For more information
-	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The time the attack started, in Unix time in seconds.
 	StartTime *time.Time `type:"timestamp"`
 
 	// If applicable, additional detail about the resource being attacked, for example,
@@ -1877,12 +4282,20 @@ type AttackDetail struct {
 	SubResources []*SubResourceSummary `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttackDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttackDetail) GoString() string {
 	return s.String()
 }
@@ -1935,35 +4348,50 @@ func (s *AttackDetail) SetSubResources(v []*SubResourceSummary) *AttackDetail {
 	return s
 }
 
-// Details of the described attack.
+// Details of a Shield event. This is provided as part of an AttackDetail.
 type AttackProperty struct {
 	_ struct{} `type:"structure"`
 
-	// The type of DDoS event that was observed. NETWORK indicates layer 3 and layer
-	// 4 events and APPLICATION indicates layer 7 events.
+	// The type of Shield event that was observed. NETWORK indicates layer 3 and
+	// layer 4 events and APPLICATION indicates layer 7 events.
+	//
+	// For infrastructure layer events (L3 and L4 events), you can view metrics
+	// for top contributors in Amazon CloudWatch metrics. For more information,
+	// see Shield metrics and alarms (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
+	// in the WAF Developer Guide.
 	AttackLayer *string `type:"string" enum:"AttackLayer"`
 
-	// Defines the DDoS attack property information that is provided.
+	// Defines the Shield event property information that is provided. The WORDPRESS_PINGBACK_REFLECTOR
+	// and WORDPRESS_PINGBACK_SOURCE values are valid only for WordPress reflective
+	// pingback events.
 	AttackPropertyIdentifier *string `type:"string" enum:"AttackPropertyIdentifier"`
 
-	// The array of Contributor objects that includes the top five contributors
-	// to an attack.
+	// Contributor objects for the top five contributors to a Shield event. A contributor
+	// is a source of traffic that Shield Advanced identifies as responsible for
+	// some or all of an event.
 	TopContributors []*Contributor `type:"list"`
 
-	// The total contributions made to this attack by all contributors, not just
-	// the five listed in the TopContributors list.
+	// The total contributions made to this Shield event by all contributors.
 	Total *int64 `type:"long"`
 
-	// The unit of the Value of the contributions.
+	// The unit used for the Contributor Value property.
 	Unit *string `type:"string" enum:"Unit"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttackProperty) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttackProperty) GoString() string {
 	return s.String()
 }
@@ -1998,6 +4426,53 @@ func (s *AttackProperty) SetUnit(v string) *AttackProperty {
 	return s
 }
 
+// A single attack statistics data record. This is returned by DescribeAttackStatistics
+// along with a time range indicating the time period that the attack statistics
+// apply to.
+type AttackStatisticsDataItem struct {
+	_ struct{} `type:"structure"`
+
+	// The number of attacks detected during the time period. This is always present,
+	// but might be zero.
+	//
+	// AttackCount is a required field
+	AttackCount *int64 `type:"long" required:"true"`
+
+	// Information about the volume of attacks during the time period. If the accompanying
+	// AttackCount is zero, this setting might be empty.
+	AttackVolume *AttackVolume `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AttackStatisticsDataItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AttackStatisticsDataItem) GoString() string {
+	return s.String()
+}
+
+// SetAttackCount sets the AttackCount field's value.
+func (s *AttackStatisticsDataItem) SetAttackCount(v int64) *AttackStatisticsDataItem {
+	s.AttackCount = &v
+	return s
+}
+
+// SetAttackVolume sets the AttackVolume field's value.
+func (s *AttackStatisticsDataItem) SetAttackVolume(v *AttackVolume) *AttackStatisticsDataItem {
+	s.AttackVolume = v
+	return s
+}
+
 // Summarizes all DDoS attacks for a specified time period.
 type AttackSummary struct {
 	_ struct{} `type:"structure"`
@@ -2008,24 +4483,30 @@ type AttackSummary struct {
 	// The list of attacks for a specified time period.
 	AttackVectors []*AttackVectorDescription `type:"list"`
 
-	// The end time of the attack, in Unix time in seconds. For more information
-	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The end time of the attack, in Unix time in seconds.
 	EndTime *time.Time `type:"timestamp"`
 
 	// The ARN (Amazon Resource Name) of the resource that was attacked.
 	ResourceArn *string `type:"string"`
 
-	// The start time of the attack, in Unix time in seconds. For more information
-	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The start time of the attack, in Unix time in seconds.
 	StartTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttackSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttackSummary) GoString() string {
 	return s.String()
 }
@@ -2096,16 +4577,30 @@ type AttackVectorDescription struct {
 	//
 	//    * REQUEST_FLOOD
 	//
+	//    * HTTP_REFLECTION
+	//
+	//    * UDS_REFLECTION
+	//
+	//    * MEMCACHED_REFLECTION
+	//
 	// VectorType is a required field
 	VectorType *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttackVectorDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttackVectorDescription) GoString() string {
 	return s.String()
 }
@@ -2116,13 +4611,132 @@ func (s *AttackVectorDescription) SetVectorType(v string) *AttackVectorDescripti
 	return s
 }
 
+// Information about the volume of attacks during the time period, included
+// in an AttackStatisticsDataItem. If the accompanying AttackCount in the statistics
+// object is zero, this setting might be empty.
+type AttackVolume struct {
+	_ struct{} `type:"structure"`
+
+	// A statistics object that uses bits per second as the unit. This is included
+	// for network level attacks.
+	BitsPerSecond *AttackVolumeStatistics `type:"structure"`
+
+	// A statistics object that uses packets per second as the unit. This is included
+	// for network level attacks.
+	PacketsPerSecond *AttackVolumeStatistics `type:"structure"`
+
+	// A statistics object that uses requests per second as the unit. This is included
+	// for application level attacks, and is only available for accounts that are
+	// subscribed to Shield Advanced.
+	RequestsPerSecond *AttackVolumeStatistics `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AttackVolume) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AttackVolume) GoString() string {
+	return s.String()
+}
+
+// SetBitsPerSecond sets the BitsPerSecond field's value.
+func (s *AttackVolume) SetBitsPerSecond(v *AttackVolumeStatistics) *AttackVolume {
+	s.BitsPerSecond = v
+	return s
+}
+
+// SetPacketsPerSecond sets the PacketsPerSecond field's value.
+func (s *AttackVolume) SetPacketsPerSecond(v *AttackVolumeStatistics) *AttackVolume {
+	s.PacketsPerSecond = v
+	return s
+}
+
+// SetRequestsPerSecond sets the RequestsPerSecond field's value.
+func (s *AttackVolume) SetRequestsPerSecond(v *AttackVolumeStatistics) *AttackVolume {
+	s.RequestsPerSecond = v
+	return s
+}
+
+// Statistics objects for the various data types in AttackVolume.
+type AttackVolumeStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum attack volume observed for the given unit.
+	//
+	// Max is a required field
+	Max *float64 `type:"double" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AttackVolumeStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AttackVolumeStatistics) GoString() string {
+	return s.String()
+}
+
+// SetMax sets the Max field's value.
+func (s *AttackVolumeStatistics) SetMax(v float64) *AttackVolumeStatistics {
+	s.Max = &v
+	return s
+}
+
+// Specifies that Shield Advanced should configure its WAF rules with the WAF
+// Block action.
+//
+// This is only used in the context of the ResponseAction setting.
+//
+// JSON specification: "Block": {}
+type BlockAction struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BlockAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BlockAction) GoString() string {
+	return s.String()
+}
+
 // A contributor to the attack and their contribution.
 type Contributor struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the contributor. This is dependent on the AttackPropertyIdentifier.
-	// For example, if the AttackPropertyIdentifier is SOURCE_COUNTRY, the Name
-	// could be United States.
+	// The name of the contributor. The type of name that you'll find here depends
+	// on the AttackPropertyIdentifier setting in the AttackProperty where this
+	// contributor is defined. For example, if the AttackPropertyIdentifier is SOURCE_COUNTRY,
+	// the Name could be United States.
 	Name *string `type:"string"`
 
 	// The contribution of this contributor expressed in Protection units. For example
@@ -2130,12 +4744,20 @@ type Contributor struct {
 	Value *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Contributor) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Contributor) GoString() string {
 	return s.String()
 }
@@ -2150,6 +4772,195 @@ func (s *Contributor) SetName(v string) *Contributor {
 func (s *Contributor) SetValue(v int64) *Contributor {
 	s.Value = &v
 	return s
+}
+
+// Specifies that Shield Advanced should configure its WAF rules with the WAF
+// Count action.
+//
+// This is only used in the context of the ResponseAction setting.
+//
+// JSON specification: "Count": {}
+type CountAction struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CountAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CountAction) GoString() string {
+	return s.String()
+}
+
+type CreateProtectionGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// Defines how Shield combines resource data for the group in order to detect,
+	// mitigate, and report events.
+	//
+	//    * Sum - Use the total traffic across the group. This is a good choice
+	//    for most cases. Examples include Elastic IP addresses for EC2 instances
+	//    that scale manually or automatically.
+	//
+	//    * Mean - Use the average of the traffic across the group. This is a good
+	//    choice for resources that share traffic uniformly. Examples include accelerators
+	//    and load balancers.
+	//
+	//    * Max - Use the highest traffic from each resource. This is useful for
+	//    resources that don't share traffic and for resources that share that traffic
+	//    in a non-uniform way. Examples include Amazon CloudFront and origin resources
+	//    for CloudFront distributions.
+	//
+	// Aggregation is a required field
+	Aggregation *string `type:"string" required:"true" enum:"ProtectionGroupAggregation"`
+
+	// The Amazon Resource Names (ARNs) of the resources to include in the protection
+	// group. You must set this when you set Pattern to ARBITRARY and you must not
+	// set it for any other Pattern setting.
+	Members []*string `type:"list"`
+
+	// The criteria to use to choose the protected resources for inclusion in the
+	// group. You can include all resources that have protections, provide a list
+	// of resource Amazon Resource Names (ARNs), or include all resources of a specified
+	// resource type.
+	//
+	// Pattern is a required field
+	Pattern *string `type:"string" required:"true" enum:"ProtectionGroupPattern"`
+
+	// The name of the protection group. You use this to identify the protection
+	// group in lists and to manage the protection group, for example to update,
+	// delete, or describe it.
+	//
+	// ProtectionGroupId is a required field
+	ProtectionGroupId *string `min:"1" type:"string" required:"true"`
+
+	// The resource type to include in the protection group. All protected resources
+	// of this type are included in the protection group. Newly protected resources
+	// of this type are automatically added to the group. You must set this when
+	// you set Pattern to BY_RESOURCE_TYPE and you must not set it for any other
+	// Pattern setting.
+	ResourceType *string `type:"string" enum:"ProtectedResourceType"`
+
+	// One or more tag key-value pairs for the protection group.
+	Tags []*Tag `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateProtectionGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateProtectionGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateProtectionGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateProtectionGroupInput"}
+	if s.Aggregation == nil {
+		invalidParams.Add(request.NewErrParamRequired("Aggregation"))
+	}
+	if s.Pattern == nil {
+		invalidParams.Add(request.NewErrParamRequired("Pattern"))
+	}
+	if s.ProtectionGroupId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProtectionGroupId"))
+	}
+	if s.ProtectionGroupId != nil && len(*s.ProtectionGroupId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionGroupId", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAggregation sets the Aggregation field's value.
+func (s *CreateProtectionGroupInput) SetAggregation(v string) *CreateProtectionGroupInput {
+	s.Aggregation = &v
+	return s
+}
+
+// SetMembers sets the Members field's value.
+func (s *CreateProtectionGroupInput) SetMembers(v []*string) *CreateProtectionGroupInput {
+	s.Members = v
+	return s
+}
+
+// SetPattern sets the Pattern field's value.
+func (s *CreateProtectionGroupInput) SetPattern(v string) *CreateProtectionGroupInput {
+	s.Pattern = &v
+	return s
+}
+
+// SetProtectionGroupId sets the ProtectionGroupId field's value.
+func (s *CreateProtectionGroupInput) SetProtectionGroupId(v string) *CreateProtectionGroupInput {
+	s.ProtectionGroupId = &v
+	return s
+}
+
+// SetResourceType sets the ResourceType field's value.
+func (s *CreateProtectionGroupInput) SetResourceType(v string) *CreateProtectionGroupInput {
+	s.ResourceType = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateProtectionGroupInput) SetTags(v []*Tag) *CreateProtectionGroupInput {
+	s.Tags = v
+	return s
+}
+
+type CreateProtectionGroupOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateProtectionGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateProtectionGroupOutput) GoString() string {
+	return s.String()
 }
 
 type CreateProtectionInput struct {
@@ -2168,9 +4979,9 @@ type CreateProtectionInput struct {
 	//
 	//    * For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
 	//
-	//    * For an AWS CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id
+	//    * For an Amazon CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id
 	//
-	//    * For an AWS Global Accelerator accelerator: arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
+	//    * For an Global Accelerator standard accelerator: arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
 	//
 	//    * For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id
 	//
@@ -2178,14 +4989,25 @@ type CreateProtectionInput struct {
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"1" type:"string" required:"true"`
+
+	// One or more tag key-value pairs for the Protection object that is created.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProtectionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProtectionInput) GoString() string {
 	return s.String()
 }
@@ -2204,6 +5026,16 @@ func (s *CreateProtectionInput) Validate() error {
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2224,19 +5056,33 @@ func (s *CreateProtectionInput) SetResourceArn(v string) *CreateProtectionInput 
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateProtectionInput) SetTags(v []*Tag) *CreateProtectionInput {
+	s.Tags = v
+	return s
+}
+
 type CreateProtectionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The unique identifier (ID) for the Protection object that is created.
-	ProtectionId *string `min:"1" type:"string"`
+	ProtectionId *string `min:"36" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProtectionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProtectionOutput) GoString() string {
 	return s.String()
 }
@@ -2251,12 +5097,20 @@ type CreateSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSubscriptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSubscriptionInput) GoString() string {
 	return s.String()
 }
@@ -2265,13 +5119,94 @@ type CreateSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSubscriptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSubscriptionOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteProtectionGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the protection group. You use this to identify the protection
+	// group in lists and to manage the protection group, for example to update,
+	// delete, or describe it.
+	//
+	// ProtectionGroupId is a required field
+	ProtectionGroupId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteProtectionGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteProtectionGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteProtectionGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteProtectionGroupInput"}
+	if s.ProtectionGroupId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProtectionGroupId"))
+	}
+	if s.ProtectionGroupId != nil && len(*s.ProtectionGroupId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionGroupId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetProtectionGroupId sets the ProtectionGroupId field's value.
+func (s *DeleteProtectionGroupInput) SetProtectionGroupId(v string) *DeleteProtectionGroupInput {
+	s.ProtectionGroupId = &v
+	return s
+}
+
+type DeleteProtectionGroupOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteProtectionGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteProtectionGroupOutput) GoString() string {
 	return s.String()
 }
 
@@ -2281,15 +5216,23 @@ type DeleteProtectionInput struct {
 	// The unique identifier (ID) for the Protection object to be deleted.
 	//
 	// ProtectionId is a required field
-	ProtectionId *string `min:"1" type:"string" required:"true"`
+	ProtectionId *string `min:"36" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProtectionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProtectionInput) GoString() string {
 	return s.String()
 }
@@ -2300,8 +5243,8 @@ func (s *DeleteProtectionInput) Validate() error {
 	if s.ProtectionId == nil {
 		invalidParams.Add(request.NewErrParamRequired("ProtectionId"))
 	}
-	if s.ProtectionId != nil && len(*s.ProtectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProtectionId", 1))
+	if s.ProtectionId != nil && len(*s.ProtectionId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2320,12 +5263,20 @@ type DeleteProtectionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProtectionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProtectionOutput) GoString() string {
 	return s.String()
 }
@@ -2335,12 +5286,20 @@ type DeleteSubscriptionInput struct {
 	_ struct{} `deprecated:"true" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSubscriptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSubscriptionInput) GoString() string {
 	return s.String()
 }
@@ -2350,12 +5309,20 @@ type DeleteSubscriptionOutput struct {
 	_ struct{} `deprecated:"true" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSubscriptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSubscriptionOutput) GoString() string {
 	return s.String()
 }
@@ -2363,18 +5330,26 @@ func (s DeleteSubscriptionOutput) GoString() string {
 type DescribeAttackInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier (ID) for the attack that to be described.
+	// The unique identifier (ID) for the attack.
 	//
 	// AttackId is a required field
 	AttackId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAttackInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAttackInput) GoString() string {
 	return s.String()
 }
@@ -2404,16 +5379,24 @@ func (s *DescribeAttackInput) SetAttackId(v string) *DescribeAttackInput {
 type DescribeAttackOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The attack that is described.
+	// The attack that you requested.
 	Attack *AttackDetail `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAttackOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAttackOutput) GoString() string {
 	return s.String()
 }
@@ -2424,16 +5407,90 @@ func (s *DescribeAttackOutput) SetAttack(v *AttackDetail) *DescribeAttackOutput 
 	return s
 }
 
+type DescribeAttackStatisticsInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeAttackStatisticsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeAttackStatisticsInput) GoString() string {
+	return s.String()
+}
+
+type DescribeAttackStatisticsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The data that describes the attacks detected during the time period.
+	//
+	// DataItems is a required field
+	DataItems []*AttackStatisticsDataItem `type:"list" required:"true"`
+
+	// The time range of the attack.
+	//
+	// TimeRange is a required field
+	TimeRange *TimeRange `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeAttackStatisticsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeAttackStatisticsOutput) GoString() string {
+	return s.String()
+}
+
+// SetDataItems sets the DataItems field's value.
+func (s *DescribeAttackStatisticsOutput) SetDataItems(v []*AttackStatisticsDataItem) *DescribeAttackStatisticsOutput {
+	s.DataItems = v
+	return s
+}
+
+// SetTimeRange sets the TimeRange field's value.
+func (s *DescribeAttackStatisticsOutput) SetTimeRange(v *TimeRange) *DescribeAttackStatisticsOutput {
+	s.TimeRange = v
+	return s
+}
+
 type DescribeDRTAccessInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDRTAccessInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDRTAccessInput) GoString() string {
 	return s.String()
 }
@@ -2441,20 +5498,28 @@ func (s DescribeDRTAccessInput) GoString() string {
 type DescribeDRTAccessOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of Amazon S3 buckets accessed by the DRT.
+	// The list of Amazon S3 buckets accessed by the SRT.
 	LogBucketList []*string `type:"list"`
 
-	// The Amazon Resource Name (ARN) of the role the DRT used to access your AWS
-	// account.
+	// The Amazon Resource Name (ARN) of the role the SRT used to access your Amazon
+	// Web Services account.
 	RoleArn *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDRTAccessOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDRTAccessOutput) GoString() string {
 	return s.String()
 }
@@ -2475,12 +5540,20 @@ type DescribeEmergencyContactSettingsInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEmergencyContactSettingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEmergencyContactSettingsInput) GoString() string {
 	return s.String()
 }
@@ -2488,17 +5561,26 @@ func (s DescribeEmergencyContactSettingsInput) GoString() string {
 type DescribeEmergencyContactSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of email addresses that the DRT can use to contact you during a suspected
-	// attack.
+	// A list of email addresses and phone numbers that the Shield Response Team
+	// (SRT) can use to contact you if you have proactive engagement enabled, for
+	// escalations to the SRT and to initiate proactive customer support.
 	EmergencyContactList []*EmergencyContact `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEmergencyContactSettingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEmergencyContactSettingsOutput) GoString() string {
 	return s.String()
 }
@@ -2509,26 +5591,120 @@ func (s *DescribeEmergencyContactSettingsOutput) SetEmergencyContactList(v []*Em
 	return s
 }
 
+type DescribeProtectionGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the protection group. You use this to identify the protection
+	// group in lists and to manage the protection group, for example to update,
+	// delete, or describe it.
+	//
+	// ProtectionGroupId is a required field
+	ProtectionGroupId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeProtectionGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeProtectionGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeProtectionGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeProtectionGroupInput"}
+	if s.ProtectionGroupId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProtectionGroupId"))
+	}
+	if s.ProtectionGroupId != nil && len(*s.ProtectionGroupId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionGroupId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetProtectionGroupId sets the ProtectionGroupId field's value.
+func (s *DescribeProtectionGroupInput) SetProtectionGroupId(v string) *DescribeProtectionGroupInput {
+	s.ProtectionGroupId = &v
+	return s
+}
+
+type DescribeProtectionGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A grouping of protected resources that you and Shield Advanced can monitor
+	// as a collective. This resource grouping improves the accuracy of detection
+	// and reduces false positives.
+	//
+	// ProtectionGroup is a required field
+	ProtectionGroup *ProtectionGroup `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeProtectionGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeProtectionGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetProtectionGroup sets the ProtectionGroup field's value.
+func (s *DescribeProtectionGroupOutput) SetProtectionGroup(v *ProtectionGroup) *DescribeProtectionGroupOutput {
+	s.ProtectionGroup = v
+	return s
+}
+
 type DescribeProtectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier (ID) for the Protection object that is described. When
-	// submitting the DescribeProtection request you must provide either the ResourceArn
-	// or the ProtectionID, but not both.
-	ProtectionId *string `min:"1" type:"string"`
+	// The unique identifier (ID) for the Protection object to describe. You must
+	// provide either the ResourceArn of the protected resource or the ProtectionID
+	// of the protection, but not both.
+	ProtectionId *string `min:"36" type:"string"`
 
-	// The ARN (Amazon Resource Name) of the AWS resource for the Protection object
-	// that is described. When submitting the DescribeProtection request you must
-	// provide either the ResourceArn or the ProtectionID, but not both.
+	// The ARN (Amazon Resource Name) of the protected Amazon Web Services resource.
+	// You must provide either the ResourceArn of the protected resource or the
+	// ProtectionID of the protection, but not both.
 	ResourceArn *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeProtectionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeProtectionInput) GoString() string {
 	return s.String()
 }
@@ -2536,8 +5712,8 @@ func (s DescribeProtectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProtectionInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "DescribeProtectionInput"}
-	if s.ProtectionId != nil && len(*s.ProtectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProtectionId", 1))
+	if s.ProtectionId != nil && len(*s.ProtectionId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionId", 36))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
@@ -2564,16 +5740,24 @@ func (s *DescribeProtectionInput) SetResourceArn(v string) *DescribeProtectionIn
 type DescribeProtectionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The Protection object that is described.
+	// The Protection that you requested.
 	Protection *Protection `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeProtectionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeProtectionOutput) GoString() string {
 	return s.String()
 }
@@ -2588,12 +5772,20 @@ type DescribeSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSubscriptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSubscriptionInput) GoString() string {
 	return s.String()
 }
@@ -2601,16 +5793,24 @@ func (s DescribeSubscriptionInput) GoString() string {
 type DescribeSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Shield Advanced subscription details for an account.
+	// The Shield Advanced subscription details for an account.
 	Subscription *Subscription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSubscriptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSubscriptionOutput) GoString() string {
 	return s.String()
 }
@@ -2621,21 +5821,144 @@ func (s *DescribeSubscriptionOutput) SetSubscription(v *Subscription) *DescribeS
 	return s
 }
 
+type DisableApplicationLayerAutomaticResponseInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN (Amazon Resource Name) of the protected resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableApplicationLayerAutomaticResponseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableApplicationLayerAutomaticResponseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisableApplicationLayerAutomaticResponseInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DisableApplicationLayerAutomaticResponseInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *DisableApplicationLayerAutomaticResponseInput) SetResourceArn(v string) *DisableApplicationLayerAutomaticResponseInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type DisableApplicationLayerAutomaticResponseOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableApplicationLayerAutomaticResponseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableApplicationLayerAutomaticResponseOutput) GoString() string {
+	return s.String()
+}
+
+type DisableProactiveEngagementInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableProactiveEngagementInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableProactiveEngagementInput) GoString() string {
+	return s.String()
+}
+
+type DisableProactiveEngagementOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableProactiveEngagementOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableProactiveEngagementOutput) GoString() string {
+	return s.String()
+}
+
 type DisassociateDRTLogBucketInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon S3 bucket that contains your flow logs.
+	// The Amazon S3 bucket that contains the logs that you want to share.
 	//
 	// LogBucket is a required field
 	LogBucket *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDRTLogBucketInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDRTLogBucketInput) GoString() string {
 	return s.String()
 }
@@ -2666,12 +5989,20 @@ type DisassociateDRTLogBucketOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDRTLogBucketOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDRTLogBucketOutput) GoString() string {
 	return s.String()
 }
@@ -2680,12 +6011,20 @@ type DisassociateDRTRoleInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDRTRoleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDRTRoleInput) GoString() string {
 	return s.String()
 }
@@ -2694,45 +6033,72 @@ type DisassociateDRTRoleOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDRTRoleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDRTRoleOutput) GoString() string {
 	return s.String()
 }
 
-// Contact information that the DRT can use to contact you during a suspected
-// attack.
-type EmergencyContact struct {
+type DisassociateHealthCheckInput struct {
 	_ struct{} `type:"structure"`
 
-	// An email address that the DRT can use to contact you during a suspected attack.
+	// The Amazon Resource Name (ARN) of the health check that is associated with
+	// the protection.
 	//
-	// EmailAddress is a required field
-	EmailAddress *string `min:"1" type:"string" required:"true"`
+	// HealthCheckArn is a required field
+	HealthCheckArn *string `min:"1" type:"string" required:"true"`
+
+	// The unique identifier (ID) for the Protection object to remove the health
+	// check association from.
+	//
+	// ProtectionId is a required field
+	ProtectionId *string `min:"36" type:"string" required:"true"`
 }
 
-// String returns the string representation
-func (s EmergencyContact) String() string {
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateHealthCheckInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
-func (s EmergencyContact) GoString() string {
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateHealthCheckInput) GoString() string {
 	return s.String()
 }
 
 // Validate inspects the fields of the type to determine if they are valid.
-func (s *EmergencyContact) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EmergencyContact"}
-	if s.EmailAddress == nil {
-		invalidParams.Add(request.NewErrParamRequired("EmailAddress"))
+func (s *DisassociateHealthCheckInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DisassociateHealthCheckInput"}
+	if s.HealthCheckArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("HealthCheckArn"))
 	}
-	if s.EmailAddress != nil && len(*s.EmailAddress) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailAddress", 1))
+	if s.HealthCheckArn != nil && len(*s.HealthCheckArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("HealthCheckArn", 1))
+	}
+	if s.ProtectionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProtectionId"))
+	}
+	if s.ProtectionId != nil && len(*s.ProtectionId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2741,22 +6107,268 @@ func (s *EmergencyContact) Validate() error {
 	return nil
 }
 
+// SetHealthCheckArn sets the HealthCheckArn field's value.
+func (s *DisassociateHealthCheckInput) SetHealthCheckArn(v string) *DisassociateHealthCheckInput {
+	s.HealthCheckArn = &v
+	return s
+}
+
+// SetProtectionId sets the ProtectionId field's value.
+func (s *DisassociateHealthCheckInput) SetProtectionId(v string) *DisassociateHealthCheckInput {
+	s.ProtectionId = &v
+	return s
+}
+
+type DisassociateHealthCheckOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateHealthCheckOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateHealthCheckOutput) GoString() string {
+	return s.String()
+}
+
+// Contact information that the SRT can use to contact you if you have proactive
+// engagement enabled, for escalations to the SRT and to initiate proactive
+// customer support.
+type EmergencyContact struct {
+	_ struct{} `type:"structure"`
+
+	// Additional notes regarding the contact.
+	ContactNotes *string `min:"1" type:"string"`
+
+	// The email address for the contact.
+	//
+	// EmailAddress is a required field
+	EmailAddress *string `min:"1" type:"string" required:"true"`
+
+	// The phone number for the contact.
+	PhoneNumber *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EmergencyContact) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EmergencyContact) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EmergencyContact) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "EmergencyContact"}
+	if s.ContactNotes != nil && len(*s.ContactNotes) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ContactNotes", 1))
+	}
+	if s.EmailAddress == nil {
+		invalidParams.Add(request.NewErrParamRequired("EmailAddress"))
+	}
+	if s.EmailAddress != nil && len(*s.EmailAddress) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("EmailAddress", 1))
+	}
+	if s.PhoneNumber != nil && len(*s.PhoneNumber) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("PhoneNumber", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetContactNotes sets the ContactNotes field's value.
+func (s *EmergencyContact) SetContactNotes(v string) *EmergencyContact {
+	s.ContactNotes = &v
+	return s
+}
+
 // SetEmailAddress sets the EmailAddress field's value.
 func (s *EmergencyContact) SetEmailAddress(v string) *EmergencyContact {
 	s.EmailAddress = &v
 	return s
 }
 
+// SetPhoneNumber sets the PhoneNumber field's value.
+func (s *EmergencyContact) SetPhoneNumber(v string) *EmergencyContact {
+	s.PhoneNumber = &v
+	return s
+}
+
+type EnableApplicationLayerAutomaticResponseInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the action setting that Shield Advanced should use in the WAF rules
+	// that it creates on behalf of the protected resource in response to DDoS attacks.
+	// You specify this as part of the configuration for the automatic application
+	// layer DDoS mitigation feature, when you enable or update automatic mitigation.
+	// Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group,
+	// inside the web ACL that you have associated with the resource.
+	//
+	// Action is a required field
+	Action *ResponseAction `type:"structure" required:"true"`
+
+	// The ARN (Amazon Resource Name) of the protected resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableApplicationLayerAutomaticResponseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableApplicationLayerAutomaticResponseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EnableApplicationLayerAutomaticResponseInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "EnableApplicationLayerAutomaticResponseInput"}
+	if s.Action == nil {
+		invalidParams.Add(request.NewErrParamRequired("Action"))
+	}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAction sets the Action field's value.
+func (s *EnableApplicationLayerAutomaticResponseInput) SetAction(v *ResponseAction) *EnableApplicationLayerAutomaticResponseInput {
+	s.Action = v
+	return s
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *EnableApplicationLayerAutomaticResponseInput) SetResourceArn(v string) *EnableApplicationLayerAutomaticResponseInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type EnableApplicationLayerAutomaticResponseOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableApplicationLayerAutomaticResponseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableApplicationLayerAutomaticResponseOutput) GoString() string {
+	return s.String()
+}
+
+type EnableProactiveEngagementInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableProactiveEngagementInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableProactiveEngagementInput) GoString() string {
+	return s.String()
+}
+
+type EnableProactiveEngagementOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableProactiveEngagementOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableProactiveEngagementOutput) GoString() string {
+	return s.String()
+}
+
 type GetSubscriptionStateInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSubscriptionStateInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSubscriptionStateInput) GoString() string {
 	return s.String()
 }
@@ -2770,12 +6382,20 @@ type GetSubscriptionStateOutput struct {
 	SubscriptionState *string `type:"string" required:"true" enum:"SubscriptionState"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSubscriptionStateOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSubscriptionStateOutput) GoString() string {
 	return s.String()
 }
@@ -2784,6 +6404,501 @@ func (s GetSubscriptionStateOutput) GoString() string {
 func (s *GetSubscriptionStateOutput) SetSubscriptionState(v string) *GetSubscriptionStateOutput {
 	s.SubscriptionState = &v
 	return s
+}
+
+// Narrows the set of protections that the call retrieves. You can retrieve
+// a single protection by providing its name or the ARN (Amazon Resource Name)
+// of its protected resource. You can also retrieve all protections for a specific
+// resource type. You can provide up to one criteria per filter type. Shield
+// Advanced returns protections that exactly match all of the filter criteria
+// that you provide.
+type InclusionProtectionFilters struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the protection that you want to retrieve.
+	ProtectionNames []*string `min:"1" type:"list"`
+
+	// The ARN (Amazon Resource Name) of the resource whose protection you want
+	// to retrieve.
+	ResourceArns []*string `min:"1" type:"list"`
+
+	// The type of protected resource whose protections you want to retrieve.
+	ResourceTypes []*string `min:"1" type:"list" enum:"ProtectedResourceType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InclusionProtectionFilters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InclusionProtectionFilters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InclusionProtectionFilters) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "InclusionProtectionFilters"}
+	if s.ProtectionNames != nil && len(s.ProtectionNames) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionNames", 1))
+	}
+	if s.ResourceArns != nil && len(s.ResourceArns) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArns", 1))
+	}
+	if s.ResourceTypes != nil && len(s.ResourceTypes) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceTypes", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetProtectionNames sets the ProtectionNames field's value.
+func (s *InclusionProtectionFilters) SetProtectionNames(v []*string) *InclusionProtectionFilters {
+	s.ProtectionNames = v
+	return s
+}
+
+// SetResourceArns sets the ResourceArns field's value.
+func (s *InclusionProtectionFilters) SetResourceArns(v []*string) *InclusionProtectionFilters {
+	s.ResourceArns = v
+	return s
+}
+
+// SetResourceTypes sets the ResourceTypes field's value.
+func (s *InclusionProtectionFilters) SetResourceTypes(v []*string) *InclusionProtectionFilters {
+	s.ResourceTypes = v
+	return s
+}
+
+// Narrows the set of protection groups that the call retrieves. You can retrieve
+// a single protection group by its name and you can retrieve all protection
+// groups that are configured with a specific pattern, aggregation, or resource
+// type. You can provide up to one criteria per filter type. Shield Advanced
+// returns the protection groups that exactly match all of the search criteria
+// that you provide.
+type InclusionProtectionGroupFilters struct {
+	_ struct{} `type:"structure"`
+
+	// The aggregation setting of the protection groups that you want to retrieve.
+	Aggregations []*string `min:"1" type:"list" enum:"ProtectionGroupAggregation"`
+
+	// The pattern specification of the protection groups that you want to retrieve.
+	Patterns []*string `min:"1" type:"list" enum:"ProtectionGroupPattern"`
+
+	// The ID of the protection group that you want to retrieve.
+	ProtectionGroupIds []*string `min:"1" type:"list"`
+
+	// The resource type configuration of the protection groups that you want to
+	// retrieve. In the protection group configuration, you specify the resource
+	// type when you set the group's Pattern to BY_RESOURCE_TYPE.
+	ResourceTypes []*string `min:"1" type:"list" enum:"ProtectedResourceType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InclusionProtectionGroupFilters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InclusionProtectionGroupFilters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InclusionProtectionGroupFilters) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "InclusionProtectionGroupFilters"}
+	if s.Aggregations != nil && len(s.Aggregations) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Aggregations", 1))
+	}
+	if s.Patterns != nil && len(s.Patterns) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Patterns", 1))
+	}
+	if s.ProtectionGroupIds != nil && len(s.ProtectionGroupIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionGroupIds", 1))
+	}
+	if s.ResourceTypes != nil && len(s.ResourceTypes) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceTypes", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAggregations sets the Aggregations field's value.
+func (s *InclusionProtectionGroupFilters) SetAggregations(v []*string) *InclusionProtectionGroupFilters {
+	s.Aggregations = v
+	return s
+}
+
+// SetPatterns sets the Patterns field's value.
+func (s *InclusionProtectionGroupFilters) SetPatterns(v []*string) *InclusionProtectionGroupFilters {
+	s.Patterns = v
+	return s
+}
+
+// SetProtectionGroupIds sets the ProtectionGroupIds field's value.
+func (s *InclusionProtectionGroupFilters) SetProtectionGroupIds(v []*string) *InclusionProtectionGroupFilters {
+	s.ProtectionGroupIds = v
+	return s
+}
+
+// SetResourceTypes sets the ResourceTypes field's value.
+func (s *InclusionProtectionGroupFilters) SetResourceTypes(v []*string) *InclusionProtectionGroupFilters {
+	s.ResourceTypes = v
+	return s
+}
+
+// Exception that indicates that a problem occurred with the service infrastructure.
+// You can retry the request.
+type InternalErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalErrorException(v protocol.ResponseMetadata) error {
+	return &InternalErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalErrorException) Code() string {
+	return "InternalErrorException"
+}
+
+// Message returns the exception's message.
+func (s *InternalErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception that indicates that the operation would not cause any change to
+// occur.
+type InvalidOperationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidOperationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidOperationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidOperationException(v protocol.ResponseMetadata) error {
+	return &InvalidOperationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidOperationException) Code() string {
+	return "InvalidOperationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidOperationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidOperationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidOperationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidOperationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception that indicates that the NextToken specified in the request is invalid.
+// Submit the request using the NextToken value that was returned in the prior
+// response.
+type InvalidPaginationTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPaginationTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPaginationTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidPaginationTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidPaginationTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidPaginationTokenException) Code() string {
+	return "InvalidPaginationTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidPaginationTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidPaginationTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidPaginationTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidPaginationTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidPaginationTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception that indicates that the parameters passed to the API are invalid.
+// If available, this exception includes details in additional properties.
+type InvalidParameterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Fields that caused the exception.
+	Fields []*ValidationExceptionField `locationName:"fields" type:"list"`
+
+	Message_ *string `locationName:"message" type:"string"`
+
+	// Additional information about the exception.
+	Reason *string `locationName:"reason" type:"string" enum:"ValidationExceptionReason"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidParameterException(v protocol.ResponseMetadata) error {
+	return &InvalidParameterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidParameterException) Code() string {
+	return "InvalidParameterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidParameterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidParameterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidParameterException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidParameterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidParameterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception that indicates that the resource is invalid. You might not have
+// access to the resource, or the resource might not exist.
+type InvalidResourceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidResourceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidResourceException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidResourceException(v protocol.ResponseMetadata) error {
+	return &InvalidResourceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidResourceException) Code() string {
+	return "InvalidResourceException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidResourceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidResourceException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidResourceException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidResourceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidResourceException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Specifies how many protections of a given type you can create.
@@ -2797,12 +6912,20 @@ type Limit struct {
 	Type *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Limit) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Limit) GoString() string {
 	return s.String()
 }
@@ -2819,46 +6942,136 @@ func (s *Limit) SetType(v string) *Limit {
 	return s
 }
 
+// Exception that indicates that the operation would exceed a limit.
+type LimitsExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The threshold that would be exceeded.
+	Limit *int64 `type:"long"`
+
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The type of limit that would be exceeded.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitsExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitsExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitsExceededException(v protocol.ResponseMetadata) error {
+	return &LimitsExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitsExceededException) Code() string {
+	return "LimitsExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitsExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitsExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitsExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitsExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitsExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListAttacksInput struct {
 	_ struct{} `type:"structure"`
 
 	// The end of the time period for the attacks. This is a timestamp type. The
-	// sample request above indicates a number type because the default used by
-	// WAF is Unix time in seconds. However any valid timestamp format (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types)
-	// is allowed.
+	// request syntax listing for this call indicates a number type, but you can
+	// provide the time in any valid timestamp format (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
+	// setting.
 	EndTime *TimeRange `type:"structure"`
 
-	// The maximum number of AttackSummary objects to be returned. If this is left
-	// blank, the first 20 results will be returned.
+	// The greatest number of objects that you want Shield Advanced to return to
+	// the list request. Shield Advanced might return fewer objects than you indicate
+	// in this setting, even if more objects are available. If there are more objects
+	// remaining, Shield Advanced will always also return a NextToken value in the
+	// response.
 	//
-	// This is a maximum value; it is possible that AWS WAF will return the results
-	// in smaller batches. That is, the number of AttackSummary objects returned
-	// could be less than MaxResults, even if there are still more AttackSummary
-	// objects yet to return. If there are more AttackSummary objects to return,
-	// AWS WAF will always also return a NextToken.
+	// The default setting is 20.
 	MaxResults *int64 `type:"integer"`
 
-	// The ListAttacksRequest.NextMarker value from a previous call to ListAttacksRequest.
-	// Pass null if this is the first call.
+	// When you request a list of objects from Shield Advanced, if the response
+	// does not include all of the remaining available objects, Shield Advanced
+	// includes a NextToken value in the response. You can retrieve the next batch
+	// of objects by requesting the list again and providing the token that was
+	// returned by the prior call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced
+	// to return for a single call with the MaxResults setting. Shield Advanced
+	// will not return more than MaxResults objects, but may return fewer, even
+	// if more objects are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to
+	// you, the response will include a NextToken value.
+	//
+	// On your first call to a list operation, leave this setting empty.
 	NextToken *string `min:"1" type:"string"`
 
-	// The ARN (Amazon Resource Name) of the resource that was attacked. If this
-	// is left blank, all applicable resources for this account will be included.
+	// The ARNs (Amazon Resource Names) of the resources that were attacked. If
+	// you leave this blank, all applicable resources for this account will be included.
 	ResourceArns []*string `type:"list"`
 
 	// The start of the time period for the attacks. This is a timestamp type. The
-	// sample request above indicates a number type because the default used by
-	// WAF is Unix time in seconds. However any valid timestamp format (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types)
-	// is allowed.
+	// request syntax listing for this call indicates a number type, but you can
+	// provide the time in any valid timestamp format (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
+	// setting.
 	StartTime *TimeRange `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAttacksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAttacksInput) GoString() string {
 	return s.String()
 }
@@ -2912,23 +7125,36 @@ type ListAttacksOutput struct {
 	// The attack information for the specified time range.
 	AttackSummaries []*AttackSummary `type:"list"`
 
-	// The token returned by a previous call to indicate that there is more data
-	// available. If not null, more results are available. Pass this value for the
-	// NextMarker parameter in a subsequent call to ListAttacks to retrieve the
-	// next set of items.
+	// When you request a list of objects from Shield Advanced, if the response
+	// does not include all of the remaining available objects, Shield Advanced
+	// includes a NextToken value in the response. You can retrieve the next batch
+	// of objects by requesting the list again and providing the token that was
+	// returned by the prior call in your request.
 	//
-	// AWS WAF might return the list of AttackSummary objects in batches smaller
-	// than the number specified by MaxResults. If there are more AttackSummary
-	// objects to return, AWS WAF will always also return a NextToken.
+	// You can indicate the maximum number of objects that you want Shield Advanced
+	// to return for a single call with the MaxResults setting. Shield Advanced
+	// will not return more than MaxResults objects, but may return fewer, even
+	// if more objects are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to
+	// you, the response will include a NextToken value.
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAttacksOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAttacksOutput) GoString() string {
 	return s.String()
 }
@@ -2945,30 +7171,202 @@ func (s *ListAttacksOutput) SetNextToken(v string) *ListAttacksOutput {
 	return s
 }
 
-type ListProtectionsInput struct {
+type ListProtectionGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of Protection objects to be returned. If this is left
-	// blank the first 20 results will be returned.
+	// Narrows the set of protection groups that the call retrieves. You can retrieve
+	// a single protection group by its name and you can retrieve all protection
+	// groups that are configured with specific pattern or aggregation settings.
+	// You can provide up to one criteria per filter type. Shield Advanced returns
+	// the protection groups that exactly match all of the search criteria that
+	// you provide.
+	InclusionFilters *InclusionProtectionGroupFilters `type:"structure"`
+
+	// The greatest number of objects that you want Shield Advanced to return to
+	// the list request. Shield Advanced might return fewer objects than you indicate
+	// in this setting, even if more objects are available. If there are more objects
+	// remaining, Shield Advanced will always also return a NextToken value in the
+	// response.
 	//
-	// This is a maximum value; it is possible that AWS WAF will return the results
-	// in smaller batches. That is, the number of Protection objects returned could
-	// be less than MaxResults, even if there are still more Protection objects
-	// yet to return. If there are more Protection objects to return, AWS WAF will
-	// always also return a NextToken.
+	// The default setting is 20.
 	MaxResults *int64 `type:"integer"`
 
-	// The ListProtectionsRequest.NextToken value from a previous call to ListProtections.
-	// Pass null if this is the first call.
+	// When you request a list of objects from Shield Advanced, if the response
+	// does not include all of the remaining available objects, Shield Advanced
+	// includes a NextToken value in the response. You can retrieve the next batch
+	// of objects by requesting the list again and providing the token that was
+	// returned by the prior call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced
+	// to return for a single call with the MaxResults setting. Shield Advanced
+	// will not return more than MaxResults objects, but may return fewer, even
+	// if more objects are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to
+	// you, the response will include a NextToken value.
+	//
+	// On your first call to a list operation, leave this setting empty.
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListProtectionGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListProtectionGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListProtectionGroupsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListProtectionGroupsInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.InclusionFilters != nil {
+		if err := s.InclusionFilters.Validate(); err != nil {
+			invalidParams.AddNested("InclusionFilters", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetInclusionFilters sets the InclusionFilters field's value.
+func (s *ListProtectionGroupsInput) SetInclusionFilters(v *InclusionProtectionGroupFilters) *ListProtectionGroupsInput {
+	s.InclusionFilters = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListProtectionGroupsInput) SetMaxResults(v int64) *ListProtectionGroupsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListProtectionGroupsInput) SetNextToken(v string) *ListProtectionGroupsInput {
+	s.NextToken = &v
+	return s
+}
+
+type ListProtectionGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// When you request a list of objects from Shield Advanced, if the response
+	// does not include all of the remaining available objects, Shield Advanced
+	// includes a NextToken value in the response. You can retrieve the next batch
+	// of objects by requesting the list again and providing the token that was
+	// returned by the prior call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced
+	// to return for a single call with the MaxResults setting. Shield Advanced
+	// will not return more than MaxResults objects, but may return fewer, even
+	// if more objects are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to
+	// you, the response will include a NextToken value.
+	NextToken *string `min:"1" type:"string"`
+
+	// ProtectionGroups is a required field
+	ProtectionGroups []*ProtectionGroup `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListProtectionGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListProtectionGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListProtectionGroupsOutput) SetNextToken(v string) *ListProtectionGroupsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetProtectionGroups sets the ProtectionGroups field's value.
+func (s *ListProtectionGroupsOutput) SetProtectionGroups(v []*ProtectionGroup) *ListProtectionGroupsOutput {
+	s.ProtectionGroups = v
+	return s
+}
+
+type ListProtectionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Narrows the set of protections that the call retrieves. You can retrieve
+	// a single protection by providing its name or the ARN (Amazon Resource Name)
+	// of its protected resource. You can also retrieve all protections for a specific
+	// resource type. You can provide up to one criteria per filter type. Shield
+	// Advanced returns protections that exactly match all of the filter criteria
+	// that you provide.
+	InclusionFilters *InclusionProtectionFilters `type:"structure"`
+
+	// The greatest number of objects that you want Shield Advanced to return to
+	// the list request. Shield Advanced might return fewer objects than you indicate
+	// in this setting, even if more objects are available. If there are more objects
+	// remaining, Shield Advanced will always also return a NextToken value in the
+	// response.
+	//
+	// The default setting is 20.
+	MaxResults *int64 `type:"integer"`
+
+	// When you request a list of objects from Shield Advanced, if the response
+	// does not include all of the remaining available objects, Shield Advanced
+	// includes a NextToken value in the response. You can retrieve the next batch
+	// of objects by requesting the list again and providing the token that was
+	// returned by the prior call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced
+	// to return for a single call with the MaxResults setting. Shield Advanced
+	// will not return more than MaxResults objects, but may return fewer, even
+	// if more objects are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to
+	// you, the response will include a NextToken value.
+	//
+	// On your first call to a list operation, leave this setting empty.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProtectionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProtectionsInput) GoString() string {
 	return s.String()
 }
@@ -2979,11 +7377,22 @@ func (s *ListProtectionsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
 	}
+	if s.InclusionFilters != nil {
+		if err := s.InclusionFilters.Validate(); err != nil {
+			invalidParams.AddNested("InclusionFilters", err.(request.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetInclusionFilters sets the InclusionFilters field's value.
+func (s *ListProtectionsInput) SetInclusionFilters(v *InclusionProtectionFilters) *ListProtectionsInput {
+	s.InclusionFilters = v
+	return s
 }
 
 // SetMaxResults sets the MaxResults field's value.
@@ -3001,27 +7410,39 @@ func (s *ListProtectionsInput) SetNextToken(v string) *ListProtectionsInput {
 type ListProtectionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// If you specify a value for MaxResults and you have more Protections than
-	// the value of MaxResults, AWS Shield Advanced returns a NextToken value in
-	// the response that allows you to list another group of Protections. For the
-	// second and subsequent ListProtections requests, specify the value of NextToken
-	// from the previous response to get information about another batch of Protections.
+	// When you request a list of objects from Shield Advanced, if the response
+	// does not include all of the remaining available objects, Shield Advanced
+	// includes a NextToken value in the response. You can retrieve the next batch
+	// of objects by requesting the list again and providing the token that was
+	// returned by the prior call in your request.
 	//
-	// AWS WAF might return the list of Protection objects in batches smaller than
-	// the number specified by MaxResults. If there are more Protection objects
-	// to return, AWS WAF will always also return a NextToken.
+	// You can indicate the maximum number of objects that you want Shield Advanced
+	// to return for a single call with the MaxResults setting. Shield Advanced
+	// will not return more than MaxResults objects, but may return fewer, even
+	// if more objects are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to
+	// you, the response will include a NextToken value.
 	NextToken *string `min:"1" type:"string"`
 
 	// The array of enabled Protection objects.
 	Protections []*Protection `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProtectionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProtectionsOutput) GoString() string {
 	return s.String()
 }
@@ -3038,6 +7459,300 @@ func (s *ListProtectionsOutput) SetProtections(v []*Protection) *ListProtections
 	return s
 }
 
+type ListResourcesInProtectionGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The greatest number of objects that you want Shield Advanced to return to
+	// the list request. Shield Advanced might return fewer objects than you indicate
+	// in this setting, even if more objects are available. If there are more objects
+	// remaining, Shield Advanced will always also return a NextToken value in the
+	// response.
+	//
+	// The default setting is 20.
+	MaxResults *int64 `type:"integer"`
+
+	// When you request a list of objects from Shield Advanced, if the response
+	// does not include all of the remaining available objects, Shield Advanced
+	// includes a NextToken value in the response. You can retrieve the next batch
+	// of objects by requesting the list again and providing the token that was
+	// returned by the prior call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced
+	// to return for a single call with the MaxResults setting. Shield Advanced
+	// will not return more than MaxResults objects, but may return fewer, even
+	// if more objects are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to
+	// you, the response will include a NextToken value.
+	//
+	// On your first call to a list operation, leave this setting empty.
+	NextToken *string `min:"1" type:"string"`
+
+	// The name of the protection group. You use this to identify the protection
+	// group in lists and to manage the protection group, for example to update,
+	// delete, or describe it.
+	//
+	// ProtectionGroupId is a required field
+	ProtectionGroupId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListResourcesInProtectionGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListResourcesInProtectionGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListResourcesInProtectionGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListResourcesInProtectionGroupInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.ProtectionGroupId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProtectionGroupId"))
+	}
+	if s.ProtectionGroupId != nil && len(*s.ProtectionGroupId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionGroupId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListResourcesInProtectionGroupInput) SetMaxResults(v int64) *ListResourcesInProtectionGroupInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListResourcesInProtectionGroupInput) SetNextToken(v string) *ListResourcesInProtectionGroupInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetProtectionGroupId sets the ProtectionGroupId field's value.
+func (s *ListResourcesInProtectionGroupInput) SetProtectionGroupId(v string) *ListResourcesInProtectionGroupInput {
+	s.ProtectionGroupId = &v
+	return s
+}
+
+type ListResourcesInProtectionGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// When you request a list of objects from Shield Advanced, if the response
+	// does not include all of the remaining available objects, Shield Advanced
+	// includes a NextToken value in the response. You can retrieve the next batch
+	// of objects by requesting the list again and providing the token that was
+	// returned by the prior call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced
+	// to return for a single call with the MaxResults setting. Shield Advanced
+	// will not return more than MaxResults objects, but may return fewer, even
+	// if more objects are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to
+	// you, the response will include a NextToken value.
+	NextToken *string `min:"1" type:"string"`
+
+	// The Amazon Resource Names (ARNs) of the resources that are included in the
+	// protection group.
+	//
+	// ResourceArns is a required field
+	ResourceArns []*string `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListResourcesInProtectionGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListResourcesInProtectionGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListResourcesInProtectionGroupOutput) SetNextToken(v string) *ListResourcesInProtectionGroupOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetResourceArns sets the ResourceArns field's value.
+func (s *ListResourcesInProtectionGroupOutput) SetResourceArns(v []*string) *ListResourcesInProtectionGroupOutput {
+	s.ResourceArns = v
+	return s
+}
+
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource to get tags for.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *ListTagsForResourceInput) SetResourceARN(v string) *ListTagsForResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of tag key and value pairs associated with the specified resource.
+	Tags []*Tag `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SetTags sets the Tags field's value.
+func (s *ListTagsForResourceOutput) SetTags(v []*Tag) *ListTagsForResourceOutput {
+	s.Tags = v
+	return s
+}
+
+// You are trying to update a subscription that has not yet completed the 1-year
+// commitment. You can change the AutoRenew parameter during the last 30 days
+// of your subscription. This exception indicates that you are attempting to
+// change AutoRenew prior to that period.
+type LockedSubscriptionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LockedSubscriptionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LockedSubscriptionException) GoString() string {
+	return s.String()
+}
+
+func newErrorLockedSubscriptionException(v protocol.ResponseMetadata) error {
+	return &LockedSubscriptionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LockedSubscriptionException) Code() string {
+	return "LockedSubscriptionException"
+}
+
+// Message returns the exception's message.
+func (s *LockedSubscriptionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LockedSubscriptionException) OrigErr() error {
+	return nil
+}
+
+func (s *LockedSubscriptionException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LockedSubscriptionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LockedSubscriptionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The mitigation applied to a DDoS attack.
 type Mitigation struct {
 	_ struct{} `type:"structure"`
@@ -3046,12 +7761,20 @@ type Mitigation struct {
 	MitigationName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Mitigation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Mitigation) GoString() string {
 	return s.String()
 }
@@ -3062,28 +7785,191 @@ func (s *Mitigation) SetMitigationName(v string) *Mitigation {
 	return s
 }
 
+// The ARN of the role that you specified does not exist.
+type NoAssociatedRoleException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NoAssociatedRoleException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NoAssociatedRoleException) GoString() string {
+	return s.String()
+}
+
+func newErrorNoAssociatedRoleException(v protocol.ResponseMetadata) error {
+	return &NoAssociatedRoleException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NoAssociatedRoleException) Code() string {
+	return "NoAssociatedRoleException"
+}
+
+// Message returns the exception's message.
+func (s *NoAssociatedRoleException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NoAssociatedRoleException) OrigErr() error {
+	return nil
+}
+
+func (s *NoAssociatedRoleException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NoAssociatedRoleException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NoAssociatedRoleException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception that indicates that the resource state has been modified by another
+// client. Retrieve the resource and then retry your request.
+type OptimisticLockException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OptimisticLockException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OptimisticLockException) GoString() string {
+	return s.String()
+}
+
+func newErrorOptimisticLockException(v protocol.ResponseMetadata) error {
+	return &OptimisticLockException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OptimisticLockException) Code() string {
+	return "OptimisticLockException"
+}
+
+// Message returns the exception's message.
+func (s *OptimisticLockException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OptimisticLockException) OrigErr() error {
+	return nil
+}
+
+func (s *OptimisticLockException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OptimisticLockException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OptimisticLockException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // An object that represents a resource that is under DDoS protection.
 type Protection struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier (ID) of the protection.
-	Id *string `min:"1" type:"string"`
+	// The automatic application layer DDoS mitigation settings for the protection.
+	// This configuration determines whether Shield Advanced automatically manages
+	// rules in the web ACL in order to respond to application layer events that
+	// Shield Advanced determines to be DDoS attacks.
+	ApplicationLayerAutomaticResponseConfiguration *ApplicationLayerAutomaticResponseConfiguration `type:"structure"`
 
-	// The friendly name of the protection. For example, My CloudFront distributions.
+	// The unique identifier (ID) for the Route 53 health check that's associated
+	// with the protection.
+	HealthCheckIds []*string `type:"list"`
+
+	// The unique identifier (ID) of the protection.
+	Id *string `min:"36" type:"string"`
+
+	// The name of the protection. For example, My CloudFront distributions.
 	Name *string `min:"1" type:"string"`
 
-	// The ARN (Amazon Resource Name) of the AWS resource that is protected.
+	// The ARN (Amazon Resource Name) of the protection.
+	ProtectionArn *string `min:"1" type:"string"`
+
+	// The ARN (Amazon Resource Name) of the Amazon Web Services resource that is
+	// protected.
 	ResourceArn *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Protection) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Protection) GoString() string {
 	return s.String()
+}
+
+// SetApplicationLayerAutomaticResponseConfiguration sets the ApplicationLayerAutomaticResponseConfiguration field's value.
+func (s *Protection) SetApplicationLayerAutomaticResponseConfiguration(v *ApplicationLayerAutomaticResponseConfiguration) *Protection {
+	s.ApplicationLayerAutomaticResponseConfiguration = v
+	return s
+}
+
+// SetHealthCheckIds sets the HealthCheckIds field's value.
+func (s *Protection) SetHealthCheckIds(v []*string) *Protection {
+	s.HealthCheckIds = v
+	return s
 }
 
 // SetId sets the Id field's value.
@@ -3098,9 +7984,462 @@ func (s *Protection) SetName(v string) *Protection {
 	return s
 }
 
+// SetProtectionArn sets the ProtectionArn field's value.
+func (s *Protection) SetProtectionArn(v string) *Protection {
+	s.ProtectionArn = &v
+	return s
+}
+
 // SetResourceArn sets the ResourceArn field's value.
 func (s *Protection) SetResourceArn(v string) *Protection {
 	s.ResourceArn = &v
+	return s
+}
+
+// A grouping of protected resources that you and Shield Advanced can monitor
+// as a collective. This resource grouping improves the accuracy of detection
+// and reduces false positives.
+type ProtectionGroup struct {
+	_ struct{} `type:"structure"`
+
+	// Defines how Shield combines resource data for the group in order to detect,
+	// mitigate, and report events.
+	//
+	//    * Sum - Use the total traffic across the group. This is a good choice
+	//    for most cases. Examples include Elastic IP addresses for EC2 instances
+	//    that scale manually or automatically.
+	//
+	//    * Mean - Use the average of the traffic across the group. This is a good
+	//    choice for resources that share traffic uniformly. Examples include accelerators
+	//    and load balancers.
+	//
+	//    * Max - Use the highest traffic from each resource. This is useful for
+	//    resources that don't share traffic and for resources that share that traffic
+	//    in a non-uniform way. Examples include Amazon CloudFront distributions
+	//    and origin resources for CloudFront distributions.
+	//
+	// Aggregation is a required field
+	Aggregation *string `type:"string" required:"true" enum:"ProtectionGroupAggregation"`
+
+	// The ARNs (Amazon Resource Names) of the resources to include in the protection
+	// group. You must set this when you set Pattern to ARBITRARY and you must not
+	// set it for any other Pattern setting.
+	//
+	// Members is a required field
+	Members []*string `type:"list" required:"true"`
+
+	// The criteria to use to choose the protected resources for inclusion in the
+	// group. You can include all resources that have protections, provide a list
+	// of resource ARNs (Amazon Resource Names), or include all resources of a specified
+	// resource type.
+	//
+	// Pattern is a required field
+	Pattern *string `type:"string" required:"true" enum:"ProtectionGroupPattern"`
+
+	// The ARN (Amazon Resource Name) of the protection group.
+	ProtectionGroupArn *string `min:"1" type:"string"`
+
+	// The name of the protection group. You use this to identify the protection
+	// group in lists and to manage the protection group, for example to update,
+	// delete, or describe it.
+	//
+	// ProtectionGroupId is a required field
+	ProtectionGroupId *string `min:"1" type:"string" required:"true"`
+
+	// The resource type to include in the protection group. All protected resources
+	// of this type are included in the protection group. You must set this when
+	// you set Pattern to BY_RESOURCE_TYPE and you must not set it for any other
+	// Pattern setting.
+	ResourceType *string `type:"string" enum:"ProtectedResourceType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionGroup) GoString() string {
+	return s.String()
+}
+
+// SetAggregation sets the Aggregation field's value.
+func (s *ProtectionGroup) SetAggregation(v string) *ProtectionGroup {
+	s.Aggregation = &v
+	return s
+}
+
+// SetMembers sets the Members field's value.
+func (s *ProtectionGroup) SetMembers(v []*string) *ProtectionGroup {
+	s.Members = v
+	return s
+}
+
+// SetPattern sets the Pattern field's value.
+func (s *ProtectionGroup) SetPattern(v string) *ProtectionGroup {
+	s.Pattern = &v
+	return s
+}
+
+// SetProtectionGroupArn sets the ProtectionGroupArn field's value.
+func (s *ProtectionGroup) SetProtectionGroupArn(v string) *ProtectionGroup {
+	s.ProtectionGroupArn = &v
+	return s
+}
+
+// SetProtectionGroupId sets the ProtectionGroupId field's value.
+func (s *ProtectionGroup) SetProtectionGroupId(v string) *ProtectionGroup {
+	s.ProtectionGroupId = &v
+	return s
+}
+
+// SetResourceType sets the ResourceType field's value.
+func (s *ProtectionGroup) SetResourceType(v string) *ProtectionGroup {
+	s.ResourceType = &v
+	return s
+}
+
+// Limits settings on protection groups with arbitrary pattern type.
+type ProtectionGroupArbitraryPatternLimits struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of resources you can specify for a single arbitrary pattern
+	// in a protection group.
+	//
+	// MaxMembers is a required field
+	MaxMembers *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionGroupArbitraryPatternLimits) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionGroupArbitraryPatternLimits) GoString() string {
+	return s.String()
+}
+
+// SetMaxMembers sets the MaxMembers field's value.
+func (s *ProtectionGroupArbitraryPatternLimits) SetMaxMembers(v int64) *ProtectionGroupArbitraryPatternLimits {
+	s.MaxMembers = &v
+	return s
+}
+
+// Limits settings on protection groups for your subscription.
+type ProtectionGroupLimits struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of protection groups that you can have at one time.
+	//
+	// MaxProtectionGroups is a required field
+	MaxProtectionGroups *int64 `type:"long" required:"true"`
+
+	// Limits settings by pattern type in the protection groups for your subscription.
+	//
+	// PatternTypeLimits is a required field
+	PatternTypeLimits *ProtectionGroupPatternTypeLimits `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionGroupLimits) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionGroupLimits) GoString() string {
+	return s.String()
+}
+
+// SetMaxProtectionGroups sets the MaxProtectionGroups field's value.
+func (s *ProtectionGroupLimits) SetMaxProtectionGroups(v int64) *ProtectionGroupLimits {
+	s.MaxProtectionGroups = &v
+	return s
+}
+
+// SetPatternTypeLimits sets the PatternTypeLimits field's value.
+func (s *ProtectionGroupLimits) SetPatternTypeLimits(v *ProtectionGroupPatternTypeLimits) *ProtectionGroupLimits {
+	s.PatternTypeLimits = v
+	return s
+}
+
+// Limits settings by pattern type in the protection groups for your subscription.
+type ProtectionGroupPatternTypeLimits struct {
+	_ struct{} `type:"structure"`
+
+	// Limits settings on protection groups with arbitrary pattern type.
+	//
+	// ArbitraryPatternLimits is a required field
+	ArbitraryPatternLimits *ProtectionGroupArbitraryPatternLimits `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionGroupPatternTypeLimits) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionGroupPatternTypeLimits) GoString() string {
+	return s.String()
+}
+
+// SetArbitraryPatternLimits sets the ArbitraryPatternLimits field's value.
+func (s *ProtectionGroupPatternTypeLimits) SetArbitraryPatternLimits(v *ProtectionGroupArbitraryPatternLimits) *ProtectionGroupPatternTypeLimits {
+	s.ArbitraryPatternLimits = v
+	return s
+}
+
+// Limits settings on protections for your subscription.
+type ProtectionLimits struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of resource types that you can specify in a protection.
+	//
+	// ProtectedResourceTypeLimits is a required field
+	ProtectedResourceTypeLimits []*Limit `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionLimits) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProtectionLimits) GoString() string {
+	return s.String()
+}
+
+// SetProtectedResourceTypeLimits sets the ProtectedResourceTypeLimits field's value.
+func (s *ProtectionLimits) SetProtectedResourceTypeLimits(v []*Limit) *ProtectionLimits {
+	s.ProtectedResourceTypeLimits = v
+	return s
+}
+
+// Exception indicating the specified resource already exists. If available,
+// this exception includes details in additional properties.
+type ResourceAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The type of resource that already exists.
+	ResourceType *string `locationName:"resourceType" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &ResourceAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceAlreadyExistsException) Code() string {
+	return "ResourceAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception indicating the specified resource does not exist. If available,
+// this exception includes details in additional properties.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+
+	// Type of resource.
+	ResourceType *string `locationName:"resourceType" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Specifies the action setting that Shield Advanced should use in the WAF rules
+// that it creates on behalf of the protected resource in response to DDoS attacks.
+// You specify this as part of the configuration for the automatic application
+// layer DDoS mitigation feature, when you enable or update automatic mitigation.
+// Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group,
+// inside the web ACL that you have associated with the resource.
+type ResponseAction struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies that Shield Advanced should configure its WAF rules with the WAF
+	// Block action.
+	//
+	// You must specify exactly one action, either Block or Count.
+	Block *BlockAction `type:"structure"`
+
+	// Specifies that Shield Advanced should configure its WAF rules with the WAF
+	// Count action.
+	//
+	// You must specify exactly one action, either Block or Count.
+	Count *CountAction `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResponseAction) GoString() string {
+	return s.String()
+}
+
+// SetBlock sets the Block field's value.
+func (s *ResponseAction) SetBlock(v *BlockAction) *ResponseAction {
+	s.Block = v
+	return s
+}
+
+// SetCount sets the Count field's value.
+func (s *ResponseAction) SetCount(v *CountAction) *ResponseAction {
+	s.Count = v
 	return s
 }
 
@@ -3121,12 +8460,20 @@ type SubResourceSummary struct {
 	Type *string `type:"string" enum:"SubResourceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubResourceSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubResourceSummary) GoString() string {
 	return s.String()
 }
@@ -3155,7 +8502,7 @@ func (s *SubResourceSummary) SetType(v string) *SubResourceSummary {
 	return s
 }
 
-// Information about the AWS Shield Advanced subscription for an account.
+// Information about the Shield Advanced subscription for an account.
 type Subscription struct {
 	_ struct{} `type:"structure"`
 
@@ -3174,20 +8521,46 @@ type Subscription struct {
 	// Specifies how many protections of a given type you can create.
 	Limits []*Limit `type:"list"`
 
-	// The start time of the subscription, in Unix time in seconds. For more information
-	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// If ENABLED, the Shield Response Team (SRT) will use email and phone to notify
+	// contacts about escalations to the SRT and to initiate proactive customer
+	// support.
+	//
+	// If PENDING, you have requested proactive engagement and the request is pending.
+	// The status changes to ENABLED when your request is fully processed.
+	//
+	// If DISABLED, the SRT will not proactively notify contacts about escalations
+	// or to initiate proactive customer support.
+	ProactiveEngagementStatus *string `type:"string" enum:"ProactiveEngagementStatus"`
+
+	// The start time of the subscription, in Unix time in seconds.
 	StartTime *time.Time `type:"timestamp"`
 
-	// The length, in seconds, of the AWS Shield Advanced subscription for the account.
+	// The ARN (Amazon Resource Name) of the subscription.
+	SubscriptionArn *string `min:"1" type:"string"`
+
+	// Limits settings for your subscription.
+	//
+	// SubscriptionLimits is a required field
+	SubscriptionLimits *SubscriptionLimits `type:"structure" required:"true"`
+
+	// The length, in seconds, of the Shield Advanced subscription for the account.
 	TimeCommitmentInSeconds *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subscription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subscription) GoString() string {
 	return s.String()
 }
@@ -3210,15 +8583,78 @@ func (s *Subscription) SetLimits(v []*Limit) *Subscription {
 	return s
 }
 
+// SetProactiveEngagementStatus sets the ProactiveEngagementStatus field's value.
+func (s *Subscription) SetProactiveEngagementStatus(v string) *Subscription {
+	s.ProactiveEngagementStatus = &v
+	return s
+}
+
 // SetStartTime sets the StartTime field's value.
 func (s *Subscription) SetStartTime(v time.Time) *Subscription {
 	s.StartTime = &v
 	return s
 }
 
+// SetSubscriptionArn sets the SubscriptionArn field's value.
+func (s *Subscription) SetSubscriptionArn(v string) *Subscription {
+	s.SubscriptionArn = &v
+	return s
+}
+
+// SetSubscriptionLimits sets the SubscriptionLimits field's value.
+func (s *Subscription) SetSubscriptionLimits(v *SubscriptionLimits) *Subscription {
+	s.SubscriptionLimits = v
+	return s
+}
+
 // SetTimeCommitmentInSeconds sets the TimeCommitmentInSeconds field's value.
 func (s *Subscription) SetTimeCommitmentInSeconds(v int64) *Subscription {
 	s.TimeCommitmentInSeconds = &v
+	return s
+}
+
+// Limits settings for your subscription.
+type SubscriptionLimits struct {
+	_ struct{} `type:"structure"`
+
+	// Limits settings on protection groups for your subscription.
+	//
+	// ProtectionGroupLimits is a required field
+	ProtectionGroupLimits *ProtectionGroupLimits `type:"structure" required:"true"`
+
+	// Limits settings on protections for your subscription.
+	//
+	// ProtectionLimits is a required field
+	ProtectionLimits *ProtectionLimits `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SubscriptionLimits) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SubscriptionLimits) GoString() string {
+	return s.String()
+}
+
+// SetProtectionGroupLimits sets the ProtectionGroupLimits field's value.
+func (s *SubscriptionLimits) SetProtectionGroupLimits(v *ProtectionGroupLimits) *SubscriptionLimits {
+	s.ProtectionGroupLimits = v
+	return s
+}
+
+// SetProtectionLimits sets the ProtectionLimits field's value.
+func (s *SubscriptionLimits) SetProtectionLimits(v *ProtectionLimits) *SubscriptionLimits {
+	s.ProtectionLimits = v
 	return s
 }
 
@@ -3235,12 +8671,20 @@ type SummarizedAttackVector struct {
 	VectorType *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SummarizedAttackVector) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SummarizedAttackVector) GoString() string {
 	return s.String()
 }
@@ -3280,12 +8724,20 @@ type SummarizedCounter struct {
 	Unit *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SummarizedCounter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SummarizedCounter) GoString() string {
 	return s.String()
 }
@@ -3326,25 +8778,191 @@ func (s *SummarizedCounter) SetUnit(v string) *SummarizedCounter {
 	return s
 }
 
+// A tag associated with an Amazon Web Services resource. Tags are key:value
+// pairs that you can use to categorize and manage your resources, for purposes
+// like billing or other management. Typically, the tag key represents a category,
+// such as "environment", and the tag value represents a specific value within
+// that category, such as "test," "development," or "production". Or you might
+// set the tag key to "customer" and the value to the customer name or ID. You
+// can specify one or more tags to add to each Amazon Web Services resource,
+// up to 50 tags for a resource.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// Part of the key:value pair that defines a tag. You can use a tag key to describe
+	// a category of information, such as "customer." Tag keys are case-sensitive.
+	Key *string `min:"1" type:"string"`
+
+	// Part of the key:value pair that defines a tag. You can use a tag value to
+	// describe a specific value within a category, such as "companyA" or "companyB."
+	// Tag values are case-sensitive.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKey sets the Key field's value.
+func (s *Tag) SetKey(v string) *Tag {
+	s.Key = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *Tag) SetValue(v string) *Tag {
+	s.Value = &v
+	return s
+}
+
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource that you want to add or update
+	// tags for.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+
+	// The tags that you want to modify or add to the resource.
+	//
+	// Tags is a required field
+	Tags []*Tag `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+	if s.Tags == nil {
+		invalidParams.Add(request.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *TagResourceInput) SetResourceARN(v string) *TagResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *TagResourceInput) SetTags(v []*Tag) *TagResourceInput {
+	s.Tags = v
+	return s
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
 // The time range.
 type TimeRange struct {
 	_ struct{} `type:"structure"`
 
-	// The start time, in Unix time in seconds. For more information see timestamp
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The start time, in Unix time in seconds.
 	FromInclusive *time.Time `type:"timestamp"`
 
-	// The end time, in Unix time in seconds. For more information see timestamp
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The end time, in Unix time in seconds.
 	ToExclusive *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeRange) GoString() string {
 	return s.String()
 }
@@ -3361,20 +8979,208 @@ func (s *TimeRange) SetToExclusive(v time.Time) *TimeRange {
 	return s
 }
 
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource that you want to remove tags
+	// from.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `min:"1" type:"string" required:"true"`
+
+	// The tag key for each tag that you want to remove from the resource.
+	//
+	// TagKeys is a required field
+	TagKeys []*string `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	if s.ResourceARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+	}
+	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+	}
+	if s.TagKeys == nil {
+		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceARN sets the ResourceARN field's value.
+func (s *UntagResourceInput) SetResourceARN(v string) *UntagResourceInput {
+	s.ResourceARN = &v
+	return s
+}
+
+// SetTagKeys sets the TagKeys field's value.
+func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+	s.TagKeys = v
+	return s
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateApplicationLayerAutomaticResponseInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the action setting that Shield Advanced should use in the WAF rules
+	// that it creates on behalf of the protected resource in response to DDoS attacks.
+	// You specify this as part of the configuration for the automatic application
+	// layer DDoS mitigation feature, when you enable or update automatic mitigation.
+	// Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group,
+	// inside the web ACL that you have associated with the resource.
+	//
+	// Action is a required field
+	Action *ResponseAction `type:"structure" required:"true"`
+
+	// The ARN (Amazon Resource Name) of the resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateApplicationLayerAutomaticResponseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateApplicationLayerAutomaticResponseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateApplicationLayerAutomaticResponseInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateApplicationLayerAutomaticResponseInput"}
+	if s.Action == nil {
+		invalidParams.Add(request.NewErrParamRequired("Action"))
+	}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAction sets the Action field's value.
+func (s *UpdateApplicationLayerAutomaticResponseInput) SetAction(v *ResponseAction) *UpdateApplicationLayerAutomaticResponseInput {
+	s.Action = v
+	return s
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *UpdateApplicationLayerAutomaticResponseInput) SetResourceArn(v string) *UpdateApplicationLayerAutomaticResponseInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type UpdateApplicationLayerAutomaticResponseOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateApplicationLayerAutomaticResponseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateApplicationLayerAutomaticResponseOutput) GoString() string {
+	return s.String()
+}
+
 type UpdateEmergencyContactSettingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of email addresses that the DRT can use to contact you during a suspected
-	// attack.
+	// A list of email addresses and phone numbers that the Shield Response Team
+	// (SRT) can use to contact you if you have proactive engagement enabled, for
+	// escalations to the SRT and to initiate proactive customer support.
+	//
+	// If you have proactive engagement enabled, the contact list must include at
+	// least one phone number.
 	EmergencyContactList []*EmergencyContact `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateEmergencyContactSettingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateEmergencyContactSettingsInput) GoString() string {
 	return s.String()
 }
@@ -3409,13 +9215,162 @@ type UpdateEmergencyContactSettingsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateEmergencyContactSettingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateEmergencyContactSettingsOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateProtectionGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// Defines how Shield combines resource data for the group in order to detect,
+	// mitigate, and report events.
+	//
+	//    * Sum - Use the total traffic across the group. This is a good choice
+	//    for most cases. Examples include Elastic IP addresses for EC2 instances
+	//    that scale manually or automatically.
+	//
+	//    * Mean - Use the average of the traffic across the group. This is a good
+	//    choice for resources that share traffic uniformly. Examples include accelerators
+	//    and load balancers.
+	//
+	//    * Max - Use the highest traffic from each resource. This is useful for
+	//    resources that don't share traffic and for resources that share that traffic
+	//    in a non-uniform way. Examples include Amazon CloudFront distributions
+	//    and origin resources for CloudFront distributions.
+	//
+	// Aggregation is a required field
+	Aggregation *string `type:"string" required:"true" enum:"ProtectionGroupAggregation"`
+
+	// The Amazon Resource Names (ARNs) of the resources to include in the protection
+	// group. You must set this when you set Pattern to ARBITRARY and you must not
+	// set it for any other Pattern setting.
+	Members []*string `type:"list"`
+
+	// The criteria to use to choose the protected resources for inclusion in the
+	// group. You can include all resources that have protections, provide a list
+	// of resource Amazon Resource Names (ARNs), or include all resources of a specified
+	// resource type.
+	//
+	// Pattern is a required field
+	Pattern *string `type:"string" required:"true" enum:"ProtectionGroupPattern"`
+
+	// The name of the protection group. You use this to identify the protection
+	// group in lists and to manage the protection group, for example to update,
+	// delete, or describe it.
+	//
+	// ProtectionGroupId is a required field
+	ProtectionGroupId *string `min:"1" type:"string" required:"true"`
+
+	// The resource type to include in the protection group. All protected resources
+	// of this type are included in the protection group. You must set this when
+	// you set Pattern to BY_RESOURCE_TYPE and you must not set it for any other
+	// Pattern setting.
+	ResourceType *string `type:"string" enum:"ProtectedResourceType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProtectionGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProtectionGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateProtectionGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateProtectionGroupInput"}
+	if s.Aggregation == nil {
+		invalidParams.Add(request.NewErrParamRequired("Aggregation"))
+	}
+	if s.Pattern == nil {
+		invalidParams.Add(request.NewErrParamRequired("Pattern"))
+	}
+	if s.ProtectionGroupId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProtectionGroupId"))
+	}
+	if s.ProtectionGroupId != nil && len(*s.ProtectionGroupId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProtectionGroupId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAggregation sets the Aggregation field's value.
+func (s *UpdateProtectionGroupInput) SetAggregation(v string) *UpdateProtectionGroupInput {
+	s.Aggregation = &v
+	return s
+}
+
+// SetMembers sets the Members field's value.
+func (s *UpdateProtectionGroupInput) SetMembers(v []*string) *UpdateProtectionGroupInput {
+	s.Members = v
+	return s
+}
+
+// SetPattern sets the Pattern field's value.
+func (s *UpdateProtectionGroupInput) SetPattern(v string) *UpdateProtectionGroupInput {
+	s.Pattern = &v
+	return s
+}
+
+// SetProtectionGroupId sets the ProtectionGroupId field's value.
+func (s *UpdateProtectionGroupInput) SetProtectionGroupId(v string) *UpdateProtectionGroupInput {
+	s.ProtectionGroupId = &v
+	return s
+}
+
+// SetResourceType sets the ResourceType field's value.
+func (s *UpdateProtectionGroupInput) SetResourceType(v string) *UpdateProtectionGroupInput {
+	s.ResourceType = &v
+	return s
+}
+
+type UpdateProtectionGroupOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProtectionGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProtectionGroupOutput) GoString() string {
 	return s.String()
 }
 
@@ -3430,12 +9385,20 @@ type UpdateSubscriptionInput struct {
 	AutoRenew *string `type:"string" enum:"AutoRenew"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSubscriptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSubscriptionInput) GoString() string {
 	return s.String()
 }
@@ -3450,14 +9413,84 @@ type UpdateSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSubscriptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSubscriptionOutput) GoString() string {
 	return s.String()
+}
+
+// Provides information about a particular parameter passed inside a request
+// that resulted in an exception.
+type ValidationExceptionField struct {
+	_ struct{} `type:"structure"`
+
+	// The message describing why the parameter failed validation.
+	//
+	// Message is a required field
+	Message *string `locationName:"message" type:"string" required:"true"`
+
+	// The name of the parameter that failed validation.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationExceptionField) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationExceptionField) GoString() string {
+	return s.String()
+}
+
+// SetMessage sets the Message field's value.
+func (s *ValidationExceptionField) SetMessage(v string) *ValidationExceptionField {
+	s.Message = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *ValidationExceptionField) SetName(v string) *ValidationExceptionField {
+	s.Name = &v
+	return s
+}
+
+const (
+	// ApplicationLayerAutomaticResponseStatusEnabled is a ApplicationLayerAutomaticResponseStatus enum value
+	ApplicationLayerAutomaticResponseStatusEnabled = "ENABLED"
+
+	// ApplicationLayerAutomaticResponseStatusDisabled is a ApplicationLayerAutomaticResponseStatus enum value
+	ApplicationLayerAutomaticResponseStatusDisabled = "DISABLED"
+)
+
+// ApplicationLayerAutomaticResponseStatus_Values returns all elements of the ApplicationLayerAutomaticResponseStatus enum
+func ApplicationLayerAutomaticResponseStatus_Values() []string {
+	return []string{
+		ApplicationLayerAutomaticResponseStatusEnabled,
+		ApplicationLayerAutomaticResponseStatusDisabled,
+	}
 }
 
 const (
@@ -3467,6 +9500,14 @@ const (
 	// AttackLayerApplication is a AttackLayer enum value
 	AttackLayerApplication = "APPLICATION"
 )
+
+// AttackLayer_Values returns all elements of the AttackLayer enum
+func AttackLayer_Values() []string {
+	return []string{
+		AttackLayerNetwork,
+		AttackLayerApplication,
+	}
+}
 
 const (
 	// AttackPropertyIdentifierDestinationUrl is a AttackPropertyIdentifier enum value
@@ -3486,7 +9527,27 @@ const (
 
 	// AttackPropertyIdentifierSourceUserAgent is a AttackPropertyIdentifier enum value
 	AttackPropertyIdentifierSourceUserAgent = "SOURCE_USER_AGENT"
+
+	// AttackPropertyIdentifierWordpressPingbackReflector is a AttackPropertyIdentifier enum value
+	AttackPropertyIdentifierWordpressPingbackReflector = "WORDPRESS_PINGBACK_REFLECTOR"
+
+	// AttackPropertyIdentifierWordpressPingbackSource is a AttackPropertyIdentifier enum value
+	AttackPropertyIdentifierWordpressPingbackSource = "WORDPRESS_PINGBACK_SOURCE"
 )
+
+// AttackPropertyIdentifier_Values returns all elements of the AttackPropertyIdentifier enum
+func AttackPropertyIdentifier_Values() []string {
+	return []string{
+		AttackPropertyIdentifierDestinationUrl,
+		AttackPropertyIdentifierReferrer,
+		AttackPropertyIdentifierSourceAsn,
+		AttackPropertyIdentifierSourceCountry,
+		AttackPropertyIdentifierSourceIpAddress,
+		AttackPropertyIdentifierSourceUserAgent,
+		AttackPropertyIdentifierWordpressPingbackReflector,
+		AttackPropertyIdentifierWordpressPingbackSource,
+	}
+}
 
 const (
 	// AutoRenewEnabled is a AutoRenew enum value
@@ -3496,6 +9557,106 @@ const (
 	AutoRenewDisabled = "DISABLED"
 )
 
+// AutoRenew_Values returns all elements of the AutoRenew enum
+func AutoRenew_Values() []string {
+	return []string{
+		AutoRenewEnabled,
+		AutoRenewDisabled,
+	}
+}
+
+const (
+	// ProactiveEngagementStatusEnabled is a ProactiveEngagementStatus enum value
+	ProactiveEngagementStatusEnabled = "ENABLED"
+
+	// ProactiveEngagementStatusDisabled is a ProactiveEngagementStatus enum value
+	ProactiveEngagementStatusDisabled = "DISABLED"
+
+	// ProactiveEngagementStatusPending is a ProactiveEngagementStatus enum value
+	ProactiveEngagementStatusPending = "PENDING"
+)
+
+// ProactiveEngagementStatus_Values returns all elements of the ProactiveEngagementStatus enum
+func ProactiveEngagementStatus_Values() []string {
+	return []string{
+		ProactiveEngagementStatusEnabled,
+		ProactiveEngagementStatusDisabled,
+		ProactiveEngagementStatusPending,
+	}
+}
+
+const (
+	// ProtectedResourceTypeCloudfrontDistribution is a ProtectedResourceType enum value
+	ProtectedResourceTypeCloudfrontDistribution = "CLOUDFRONT_DISTRIBUTION"
+
+	// ProtectedResourceTypeRoute53HostedZone is a ProtectedResourceType enum value
+	ProtectedResourceTypeRoute53HostedZone = "ROUTE_53_HOSTED_ZONE"
+
+	// ProtectedResourceTypeElasticIpAllocation is a ProtectedResourceType enum value
+	ProtectedResourceTypeElasticIpAllocation = "ELASTIC_IP_ALLOCATION"
+
+	// ProtectedResourceTypeClassicLoadBalancer is a ProtectedResourceType enum value
+	ProtectedResourceTypeClassicLoadBalancer = "CLASSIC_LOAD_BALANCER"
+
+	// ProtectedResourceTypeApplicationLoadBalancer is a ProtectedResourceType enum value
+	ProtectedResourceTypeApplicationLoadBalancer = "APPLICATION_LOAD_BALANCER"
+
+	// ProtectedResourceTypeGlobalAccelerator is a ProtectedResourceType enum value
+	ProtectedResourceTypeGlobalAccelerator = "GLOBAL_ACCELERATOR"
+)
+
+// ProtectedResourceType_Values returns all elements of the ProtectedResourceType enum
+func ProtectedResourceType_Values() []string {
+	return []string{
+		ProtectedResourceTypeCloudfrontDistribution,
+		ProtectedResourceTypeRoute53HostedZone,
+		ProtectedResourceTypeElasticIpAllocation,
+		ProtectedResourceTypeClassicLoadBalancer,
+		ProtectedResourceTypeApplicationLoadBalancer,
+		ProtectedResourceTypeGlobalAccelerator,
+	}
+}
+
+const (
+	// ProtectionGroupAggregationSum is a ProtectionGroupAggregation enum value
+	ProtectionGroupAggregationSum = "SUM"
+
+	// ProtectionGroupAggregationMean is a ProtectionGroupAggregation enum value
+	ProtectionGroupAggregationMean = "MEAN"
+
+	// ProtectionGroupAggregationMax is a ProtectionGroupAggregation enum value
+	ProtectionGroupAggregationMax = "MAX"
+)
+
+// ProtectionGroupAggregation_Values returns all elements of the ProtectionGroupAggregation enum
+func ProtectionGroupAggregation_Values() []string {
+	return []string{
+		ProtectionGroupAggregationSum,
+		ProtectionGroupAggregationMean,
+		ProtectionGroupAggregationMax,
+	}
+}
+
+const (
+	// ProtectionGroupPatternAll is a ProtectionGroupPattern enum value
+	ProtectionGroupPatternAll = "ALL"
+
+	// ProtectionGroupPatternArbitrary is a ProtectionGroupPattern enum value
+	ProtectionGroupPatternArbitrary = "ARBITRARY"
+
+	// ProtectionGroupPatternByResourceType is a ProtectionGroupPattern enum value
+	ProtectionGroupPatternByResourceType = "BY_RESOURCE_TYPE"
+)
+
+// ProtectionGroupPattern_Values returns all elements of the ProtectionGroupPattern enum
+func ProtectionGroupPattern_Values() []string {
+	return []string{
+		ProtectionGroupPatternAll,
+		ProtectionGroupPatternArbitrary,
+		ProtectionGroupPatternByResourceType,
+	}
+}
+
 const (
 	// SubResourceTypeIp is a SubResourceType enum value
 	SubResourceTypeIp = "IP"
@@ -3504,6 +9665,14 @@ const (
 	SubResourceTypeUrl = "URL"
 )
 
+// SubResourceType_Values returns all elements of the SubResourceType enum
+func SubResourceType_Values() []string {
+	return []string{
+		SubResourceTypeIp,
+		SubResourceTypeUrl,
+	}
+}
+
 const (
 	// SubscriptionStateActive is a SubscriptionState enum value
 	SubscriptionStateActive = "ACTIVE"
@@ -3511,6 +9680,14 @@ const (
 	// SubscriptionStateInactive is a SubscriptionState enum value
 	SubscriptionStateInactive = "INACTIVE"
 )
+
+// SubscriptionState_Values returns all elements of the SubscriptionState enum
+func SubscriptionState_Values() []string {
+	return []string{
+		SubscriptionStateActive,
+		SubscriptionStateInactive,
+	}
+}
 
 const (
 	// UnitBits is a Unit enum value
@@ -3525,3 +9702,29 @@ const (
 	// UnitRequests is a Unit enum value
 	UnitRequests = "REQUESTS"
 )
+
+// Unit_Values returns all elements of the Unit enum
+func Unit_Values() []string {
+	return []string{
+		UnitBits,
+		UnitBytes,
+		UnitPackets,
+		UnitRequests,
+	}
+}
+
+const (
+	// ValidationExceptionReasonFieldValidationFailed is a ValidationExceptionReason enum value
+	ValidationExceptionReasonFieldValidationFailed = "FIELD_VALIDATION_FAILED"
+
+	// ValidationExceptionReasonOther is a ValidationExceptionReason enum value
+	ValidationExceptionReasonOther = "OTHER"
+)
+
+// ValidationExceptionReason_Values returns all elements of the ValidationExceptionReason enum
+func ValidationExceptionReason_Values() []string {
+	return []string{
+		ValidationExceptionReasonFieldValidationFailed,
+		ValidationExceptionReasonOther,
+	}
+}

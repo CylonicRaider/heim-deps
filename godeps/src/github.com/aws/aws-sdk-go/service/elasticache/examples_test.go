@@ -26,7 +26,6 @@ func parseTime(layout, value string) *time.Time {
 }
 
 // AddTagsToResource
-//
 // Adds up to 10 tags, key/value pairs, to a cluster or snapshot resource.
 func ExampleElastiCache_AddTagsToResource_shared00() {
 	svc := elasticache.New(session.New())
@@ -50,8 +49,32 @@ func ExampleElastiCache_AddTagsToResource_shared00() {
 			switch aerr.Code() {
 			case elasticache.ErrCodeCacheClusterNotFoundFault:
 				fmt.Println(elasticache.ErrCodeCacheClusterNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeCacheParameterGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeCacheParameterGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeCacheSecurityGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeCacheSecurityGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeCacheSubnetGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeCacheSubnetGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidReplicationGroupStateFault, aerr.Error())
+			case elasticache.ErrCodeReplicationGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeReplicationGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeReservedCacheNodeNotFoundFault:
+				fmt.Println(elasticache.ErrCodeReservedCacheNodeNotFoundFault, aerr.Error())
 			case elasticache.ErrCodeSnapshotNotFoundFault:
 				fmt.Println(elasticache.ErrCodeSnapshotNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeUserNotFoundFault:
+				fmt.Println(elasticache.ErrCodeUserNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeUserGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeUserGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeServerlessCacheNotFoundFault:
+				fmt.Println(elasticache.ErrCodeServerlessCacheNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidServerlessCacheStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidServerlessCacheStateFault, aerr.Error())
+			case elasticache.ErrCodeServerlessCacheSnapshotNotFoundFault:
+				fmt.Println(elasticache.ErrCodeServerlessCacheSnapshotNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidServerlessCacheSnapshotStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidServerlessCacheSnapshotStateFault, aerr.Error())
 			case elasticache.ErrCodeTagQuotaPerResourceExceeded:
 				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeInvalidARNFault:
@@ -71,7 +94,6 @@ func ExampleElastiCache_AddTagsToResource_shared00() {
 }
 
 // AuthorizeCacheCacheSecurityGroupIngress
-//
 // Allows network ingress to a cache security group. Applications using ElastiCache
 // must be running on Amazon EC2. Amazon EC2 security groups are used as the authorization
 // mechanism.
@@ -112,7 +134,6 @@ func ExampleElastiCache_AuthorizeCacheSecurityGroupIngress_shared00() {
 }
 
 // CopySnapshot
-//
 // Copies a snapshot to a specified name.
 func ExampleElastiCache_CopySnapshot_shared00() {
 	svc := elasticache.New(session.New())
@@ -134,6 +155,8 @@ func ExampleElastiCache_CopySnapshot_shared00() {
 				fmt.Println(elasticache.ErrCodeSnapshotQuotaExceededFault, aerr.Error())
 			case elasticache.ErrCodeInvalidSnapshotStateFault:
 				fmt.Println(elasticache.ErrCodeInvalidSnapshotStateFault, aerr.Error())
+			case elasticache.ErrCodeTagQuotaPerResourceExceeded:
+				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
@@ -153,7 +176,6 @@ func ExampleElastiCache_CopySnapshot_shared00() {
 }
 
 // CreateCacheCluster
-//
 // Creates a Memcached cluster with 2 nodes.
 func ExampleElastiCache_CreateCacheCluster_shared00() {
 	svc := elasticache.New(session.New())
@@ -215,19 +237,18 @@ func ExampleElastiCache_CreateCacheCluster_shared00() {
 }
 
 // CreateCacheCluster
-//
 // Creates a Redis cluster with 1 node.
 func ExampleElastiCache_CreateCacheCluster_shared01() {
 	svc := elasticache.New(session.New())
 	input := &elasticache.CreateCacheClusterInput{
-		AutoMinorVersionUpgrade: aws.Bool(true),
-		CacheClusterId:          aws.String("my-redis"),
-		CacheNodeType:           aws.String("cache.r3.larage"),
-		CacheSubnetGroupName:    aws.String("default"),
-		Engine:                  aws.String("redis"),
-		EngineVersion:           aws.String("3.2.4"),
-		NumCacheNodes:           aws.Int64(1),
-		Port:                    aws.Int64(6379),
+		AutoMinorVersionUpgrade:   aws.Bool(true),
+		CacheClusterId:            aws.String("my-redis"),
+		CacheNodeType:             aws.String("cache.r3.larage"),
+		CacheSubnetGroupName:      aws.String("default"),
+		Engine:                    aws.String("redis"),
+		EngineVersion:             aws.String("3.2.4"),
+		NumCacheNodes:             aws.Int64(1),
+		Port:                      aws.Int64(6379),
 		PreferredAvailabilityZone: aws.String("us-east-1c"),
 		SnapshotRetentionLimit:    aws.Int64(7),
 	}
@@ -279,7 +300,6 @@ func ExampleElastiCache_CreateCacheCluster_shared01() {
 }
 
 // CreateCacheParameterGroup
-//
 // Creates the Amazon ElastiCache parameter group custom-redis2-8.
 func ExampleElastiCache_CreateCacheParameterGroup_shared00() {
 	svc := elasticache.New(session.New())
@@ -299,6 +319,8 @@ func ExampleElastiCache_CreateCacheParameterGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeCacheParameterGroupAlreadyExistsFault, aerr.Error())
 			case elasticache.ErrCodeInvalidCacheParameterGroupStateFault:
 				fmt.Println(elasticache.ErrCodeInvalidCacheParameterGroupStateFault, aerr.Error())
+			case elasticache.ErrCodeTagQuotaPerResourceExceeded:
+				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
@@ -318,7 +340,6 @@ func ExampleElastiCache_CreateCacheParameterGroup_shared00() {
 }
 
 // CreateCacheSecurityGroup
-//
 // Creates an ElastiCache security group. ElastiCache security groups are only for clusters
 // not running in an AWS VPC.
 func ExampleElastiCache_CreateCacheSecurityGroup_shared00() {
@@ -336,6 +357,8 @@ func ExampleElastiCache_CreateCacheSecurityGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeCacheSecurityGroupAlreadyExistsFault, aerr.Error())
 			case elasticache.ErrCodeCacheSecurityGroupQuotaExceededFault:
 				fmt.Println(elasticache.ErrCodeCacheSecurityGroupQuotaExceededFault, aerr.Error())
+			case elasticache.ErrCodeTagQuotaPerResourceExceeded:
+				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
@@ -355,7 +378,6 @@ func ExampleElastiCache_CreateCacheSecurityGroup_shared00() {
 }
 
 // CreateCacheSubnet
-//
 // Creates a new cache subnet group.
 func ExampleElastiCache_CreateCacheSubnetGroup_shared00() {
 	svc := elasticache.New(session.New())
@@ -379,8 +401,12 @@ func ExampleElastiCache_CreateCacheSubnetGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeCacheSubnetGroupQuotaExceededFault, aerr.Error())
 			case elasticache.ErrCodeCacheSubnetQuotaExceededFault:
 				fmt.Println(elasticache.ErrCodeCacheSubnetQuotaExceededFault, aerr.Error())
+			case elasticache.ErrCodeTagQuotaPerResourceExceeded:
+				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeInvalidSubnet:
 				fmt.Println(elasticache.ErrCodeInvalidSubnet, aerr.Error())
+			case elasticache.ErrCodeSubnetNotAllowedFault:
+				fmt.Println(elasticache.ErrCodeSubnetNotAllowedFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -396,7 +422,6 @@ func ExampleElastiCache_CreateCacheSubnetGroup_shared00() {
 }
 
 // CreateCacheReplicationGroup
-//
 // Creates a Redis replication group with 3 nodes.
 func ExampleElastiCache_CreateReplicationGroup_shared00() {
 	svc := elasticache.New(session.New())
@@ -421,6 +446,10 @@ func ExampleElastiCache_CreateReplicationGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeInvalidCacheClusterStateFault, aerr.Error())
 			case elasticache.ErrCodeReplicationGroupAlreadyExistsFault:
 				fmt.Println(elasticache.ErrCodeReplicationGroupAlreadyExistsFault, aerr.Error())
+			case elasticache.ErrCodeInvalidUserGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidUserGroupStateFault, aerr.Error())
+			case elasticache.ErrCodeUserGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeUserGroupNotFoundFault, aerr.Error())
 			case elasticache.ErrCodeInsufficientCacheClusterCapacityFault:
 				fmt.Println(elasticache.ErrCodeInsufficientCacheClusterCapacityFault, aerr.Error())
 			case elasticache.ErrCodeCacheSecurityGroupNotFoundFault:
@@ -441,6 +470,10 @@ func ExampleElastiCache_CreateReplicationGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeNodeGroupsPerReplicationGroupQuotaExceededFault:
 				fmt.Println(elasticache.ErrCodeNodeGroupsPerReplicationGroupQuotaExceededFault, aerr.Error())
+			case elasticache.ErrCodeGlobalReplicationGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeGlobalReplicationGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
@@ -460,7 +493,6 @@ func ExampleElastiCache_CreateReplicationGroup_shared00() {
 }
 
 // CreateReplicationGroup
-//
 // Creates a Redis (cluster mode enabled) replication group with two shards. One shard
 // has one read replica node and the other shard has two read replicas.
 func ExampleElastiCache_CreateReplicationGroup_shared01() {
@@ -506,6 +538,10 @@ func ExampleElastiCache_CreateReplicationGroup_shared01() {
 				fmt.Println(elasticache.ErrCodeInvalidCacheClusterStateFault, aerr.Error())
 			case elasticache.ErrCodeReplicationGroupAlreadyExistsFault:
 				fmt.Println(elasticache.ErrCodeReplicationGroupAlreadyExistsFault, aerr.Error())
+			case elasticache.ErrCodeInvalidUserGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidUserGroupStateFault, aerr.Error())
+			case elasticache.ErrCodeUserGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeUserGroupNotFoundFault, aerr.Error())
 			case elasticache.ErrCodeInsufficientCacheClusterCapacityFault:
 				fmt.Println(elasticache.ErrCodeInsufficientCacheClusterCapacityFault, aerr.Error())
 			case elasticache.ErrCodeCacheSecurityGroupNotFoundFault:
@@ -526,6 +562,10 @@ func ExampleElastiCache_CreateReplicationGroup_shared01() {
 				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeNodeGroupsPerReplicationGroupQuotaExceededFault:
 				fmt.Println(elasticache.ErrCodeNodeGroupsPerReplicationGroupQuotaExceededFault, aerr.Error())
+			case elasticache.ErrCodeGlobalReplicationGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeGlobalReplicationGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
@@ -545,7 +585,6 @@ func ExampleElastiCache_CreateReplicationGroup_shared01() {
 }
 
 // CreateSnapshot - NonClustered Redis, no read-replicas
-//
 // Creates a snapshot of a non-clustered Redis cluster that has only one node.
 func ExampleElastiCache_CreateSnapshot_shared00() {
 	svc := elasticache.New(session.New())
@@ -572,6 +611,8 @@ func ExampleElastiCache_CreateSnapshot_shared00() {
 				fmt.Println(elasticache.ErrCodeSnapshotQuotaExceededFault, aerr.Error())
 			case elasticache.ErrCodeSnapshotFeatureNotSupportedFault:
 				fmt.Println(elasticache.ErrCodeSnapshotFeatureNotSupportedFault, aerr.Error())
+			case elasticache.ErrCodeTagQuotaPerResourceExceeded:
+				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterCombinationException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
@@ -591,7 +632,6 @@ func ExampleElastiCache_CreateSnapshot_shared00() {
 }
 
 // CreateSnapshot - NonClustered Redis, 2 read-replicas
-//
 // Creates a snapshot of a non-clustered Redis cluster that has only three nodes, primary
 // and two read-replicas. CacheClusterId must be a specific node in the cluster.
 func ExampleElastiCache_CreateSnapshot_shared01() {
@@ -619,6 +659,8 @@ func ExampleElastiCache_CreateSnapshot_shared01() {
 				fmt.Println(elasticache.ErrCodeSnapshotQuotaExceededFault, aerr.Error())
 			case elasticache.ErrCodeSnapshotFeatureNotSupportedFault:
 				fmt.Println(elasticache.ErrCodeSnapshotFeatureNotSupportedFault, aerr.Error())
+			case elasticache.ErrCodeTagQuotaPerResourceExceeded:
+				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterCombinationException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
@@ -638,7 +680,6 @@ func ExampleElastiCache_CreateSnapshot_shared01() {
 }
 
 // CreateSnapshot-clustered Redis
-//
 // Creates a snapshot of a clustered Redis cluster that has 2 shards, each with a primary
 // and 4 read-replicas.
 func ExampleElastiCache_CreateSnapshot_shared02() {
@@ -666,6 +707,8 @@ func ExampleElastiCache_CreateSnapshot_shared02() {
 				fmt.Println(elasticache.ErrCodeSnapshotQuotaExceededFault, aerr.Error())
 			case elasticache.ErrCodeSnapshotFeatureNotSupportedFault:
 				fmt.Println(elasticache.ErrCodeSnapshotFeatureNotSupportedFault, aerr.Error())
+			case elasticache.ErrCodeTagQuotaPerResourceExceeded:
+				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterCombinationException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
@@ -685,7 +728,6 @@ func ExampleElastiCache_CreateSnapshot_shared02() {
 }
 
 // DeleteCacheCluster
-//
 // Deletes an Amazon ElastiCache cluster.
 func ExampleElastiCache_DeleteCacheCluster_shared00() {
 	svc := elasticache.New(session.New())
@@ -726,7 +768,6 @@ func ExampleElastiCache_DeleteCacheCluster_shared00() {
 }
 
 // DeleteCacheParameterGroup
-//
 // Deletes the Amazon ElastiCache parameter group custom-mem1-4.
 func ExampleElastiCache_DeleteCacheParameterGroup_shared00() {
 	svc := elasticache.New(session.New())
@@ -761,7 +802,6 @@ func ExampleElastiCache_DeleteCacheParameterGroup_shared00() {
 }
 
 // DeleteCacheSecurityGroup
-//
 // Deletes a cache security group.
 func ExampleElastiCache_DeleteCacheSecurityGroup_shared00() {
 	svc := elasticache.New(session.New())
@@ -796,7 +836,6 @@ func ExampleElastiCache_DeleteCacheSecurityGroup_shared00() {
 }
 
 // DeleteCacheSubnetGroup
-//
 // Deletes the Amazon ElastiCache subnet group my-subnet-group.
 func ExampleElastiCache_DeleteCacheSubnetGroup_shared00() {
 	svc := elasticache.New(session.New())
@@ -827,7 +866,6 @@ func ExampleElastiCache_DeleteCacheSubnetGroup_shared00() {
 }
 
 // DeleteReplicationGroup
-//
 // Deletes the Amazon ElastiCache replication group my-redis-rg.
 func ExampleElastiCache_DeleteReplicationGroup_shared00() {
 	svc := elasticache.New(session.New())
@@ -869,7 +907,6 @@ func ExampleElastiCache_DeleteReplicationGroup_shared00() {
 }
 
 // DeleteSnapshot
-//
 // Deletes the Redis snapshot snapshot-20160822.
 func ExampleElastiCache_DeleteSnapshot_shared00() {
 	svc := elasticache.New(session.New())
@@ -904,7 +941,6 @@ func ExampleElastiCache_DeleteSnapshot_shared00() {
 }
 
 // DescribeCacheClusters
-//
 // Lists the details for up to 50 cache clusters.
 func ExampleElastiCache_DescribeCacheClusters_shared00() {
 	svc := elasticache.New(session.New())
@@ -937,7 +973,6 @@ func ExampleElastiCache_DescribeCacheClusters_shared00() {
 }
 
 // DescribeCacheClusters
-//
 // Lists the details for the cache cluster my-mem-cluster.
 func ExampleElastiCache_DescribeCacheClusters_shared01() {
 	svc := elasticache.New(session.New())
@@ -971,7 +1006,6 @@ func ExampleElastiCache_DescribeCacheClusters_shared01() {
 }
 
 // DescribeCacheEngineVersions
-//
 // Lists the details for up to 25 Memcached and Redis cache engine versions.
 func ExampleElastiCache_DescribeCacheEngineVersions_shared00() {
 	svc := elasticache.New(session.New())
@@ -996,7 +1030,6 @@ func ExampleElastiCache_DescribeCacheEngineVersions_shared00() {
 }
 
 // DescribeCacheEngineVersions
-//
 // Lists the details for up to 50 Redis cache engine versions.
 func ExampleElastiCache_DescribeCacheEngineVersions_shared01() {
 	svc := elasticache.New(session.New())
@@ -1025,7 +1058,6 @@ func ExampleElastiCache_DescribeCacheEngineVersions_shared01() {
 }
 
 // DescribeCacheParameterGroups
-//
 // Returns a list of cache parameter group descriptions. If a cache parameter group
 // name is specified, the list contains only the descriptions for that group.
 func ExampleElastiCache_DescribeCacheParameterGroups_shared00() {
@@ -1059,7 +1091,6 @@ func ExampleElastiCache_DescribeCacheParameterGroups_shared00() {
 }
 
 // DescribeCacheParameters
-//
 // Lists up to 100 user parameter values for the parameter group custom.redis2.8.
 func ExampleElastiCache_DescribeCacheParameters_shared00() {
 	svc := elasticache.New(session.New())
@@ -1094,7 +1125,6 @@ func ExampleElastiCache_DescribeCacheParameters_shared00() {
 }
 
 // DescribeCacheSecurityGroups
-//
 // Returns a list of cache security group descriptions. If a cache security group name
 // is specified, the list contains only the description of that group.
 func ExampleElastiCache_DescribeCacheSecurityGroups_shared00() {
@@ -1128,7 +1158,6 @@ func ExampleElastiCache_DescribeCacheSecurityGroups_shared00() {
 }
 
 // DescribeCacheSubnetGroups
-//
 // Describes up to 25 cache subnet groups.
 func ExampleElastiCache_DescribeCacheSubnetGroups_shared00() {
 	svc := elasticache.New(session.New())
@@ -1157,7 +1186,6 @@ func ExampleElastiCache_DescribeCacheSubnetGroups_shared00() {
 }
 
 // DescribeEngineDefaultParameters
-//
 // Returns the default engine and system parameter information for the specified cache
 // engine.
 func ExampleElastiCache_DescribeEngineDefaultParameters_shared00() {
@@ -1190,7 +1218,6 @@ func ExampleElastiCache_DescribeEngineDefaultParameters_shared00() {
 }
 
 // DescribeEvents
-//
 // Describes all the cache-cluster events for the past 120 minutes.
 func ExampleElastiCache_DescribeEvents_shared00() {
 	svc := elasticache.New(session.New())
@@ -1222,12 +1249,11 @@ func ExampleElastiCache_DescribeEvents_shared00() {
 }
 
 // DescribeEvents
-//
 // Describes all the replication-group events from 3:00P to 5:00P on November 11, 2016.
 func ExampleElastiCache_DescribeEvents_shared01() {
 	svc := elasticache.New(session.New())
 	input := &elasticache.DescribeEventsInput{
-		StartTime: parseTime("2006-01-02T15:04:05Z", "2016-12-22T15:00:00.000Z"),
+		StartTime: parseTime("2006-01-02T15:04:05.999999999Z", "2016-12-22T15:00:00.000Z"),
 	}
 
 	result, err := svc.DescribeEvents(input)
@@ -1253,7 +1279,6 @@ func ExampleElastiCache_DescribeEvents_shared01() {
 }
 
 // DescribeReplicationGroups
-//
 // Returns information about the replication group myreplgroup.
 func ExampleElastiCache_DescribeReplicationGroups_shared00() {
 	svc := elasticache.New(session.New())
@@ -1284,7 +1309,6 @@ func ExampleElastiCache_DescribeReplicationGroups_shared00() {
 }
 
 // DescribeReservedCacheNodes
-//
 // Returns information about reserved cache nodes for this account, or about a specified
 // reserved cache node. If the account has no reserved cache nodes, the operation returns
 // an empty list, as shown here.
@@ -1319,7 +1343,6 @@ func ExampleElastiCache_DescribeReservedCacheNodes_shared00() {
 }
 
 // DescribeReseredCacheNodeOfferings
-//
 // Lists available reserved cache node offerings.
 func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared00() {
 	svc := elasticache.New(session.New())
@@ -1352,7 +1375,6 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared00() {
 }
 
 // DescribeReseredCacheNodeOfferings
-//
 // Lists available reserved cache node offerings for cache.r3.large nodes with a 3 year
 // commitment.
 func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared01() {
@@ -1390,7 +1412,6 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared01() {
 }
 
 // DescribeReseredCacheNodeOfferings
-//
 // Lists available reserved cache node offerings.
 func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared02() {
 	svc := elasticache.New(session.New())
@@ -1429,7 +1450,6 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared02() {
 }
 
 // DescribeSnapshots
-//
 // Returns information about the snapshot mysnapshot. By default.
 func ExampleElastiCache_DescribeSnapshots_shared00() {
 	svc := elasticache.New(session.New())
@@ -1464,7 +1484,6 @@ func ExampleElastiCache_DescribeSnapshots_shared00() {
 }
 
 // ListAllowedNodeTypeModifications
-//
 // Lists all available node types that you can scale your Redis cluster's or replication
 // group's current node type up to.
 func ExampleElastiCache_ListAllowedNodeTypeModifications_shared00() {
@@ -1500,7 +1519,6 @@ func ExampleElastiCache_ListAllowedNodeTypeModifications_shared00() {
 }
 
 // ListAllowedNodeTypeModifications
-//
 // Lists all available node types that you can scale your Redis cluster's or replication
 // group's current node type up to.
 func ExampleElastiCache_ListAllowedNodeTypeModifications_shared01() {
@@ -1536,7 +1554,6 @@ func ExampleElastiCache_ListAllowedNodeTypeModifications_shared01() {
 }
 
 // ListTagsForResource
-//
 // Lists all cost allocation tags currently on the named resource. A cost allocation
 // tag is a key-value pair where the key is case-sensitive and the value is optional.
 // You can use cost allocation tags to categorize and track your AWS costs.
@@ -1552,8 +1569,32 @@ func ExampleElastiCache_ListTagsForResource_shared00() {
 			switch aerr.Code() {
 			case elasticache.ErrCodeCacheClusterNotFoundFault:
 				fmt.Println(elasticache.ErrCodeCacheClusterNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeCacheParameterGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeCacheParameterGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeCacheSecurityGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeCacheSecurityGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeCacheSubnetGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeCacheSubnetGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidReplicationGroupStateFault, aerr.Error())
+			case elasticache.ErrCodeReplicationGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeReplicationGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeReservedCacheNodeNotFoundFault:
+				fmt.Println(elasticache.ErrCodeReservedCacheNodeNotFoundFault, aerr.Error())
 			case elasticache.ErrCodeSnapshotNotFoundFault:
 				fmt.Println(elasticache.ErrCodeSnapshotNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeUserNotFoundFault:
+				fmt.Println(elasticache.ErrCodeUserNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeUserGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeUserGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeServerlessCacheNotFoundFault:
+				fmt.Println(elasticache.ErrCodeServerlessCacheNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidServerlessCacheStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidServerlessCacheStateFault, aerr.Error())
+			case elasticache.ErrCodeServerlessCacheSnapshotNotFoundFault:
+				fmt.Println(elasticache.ErrCodeServerlessCacheSnapshotNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidServerlessCacheSnapshotStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidServerlessCacheSnapshotStateFault, aerr.Error())
 			case elasticache.ErrCodeInvalidARNFault:
 				fmt.Println(elasticache.ErrCodeInvalidARNFault, aerr.Error())
 			default:
@@ -1571,7 +1612,6 @@ func ExampleElastiCache_ListTagsForResource_shared00() {
 }
 
 // ModifyCacheCluster
-//
 // Copies a snapshot to a specified name.
 func ExampleElastiCache_ModifyCacheCluster_shared00() {
 	svc := elasticache.New(session.New())
@@ -1622,7 +1662,6 @@ func ExampleElastiCache_ModifyCacheCluster_shared00() {
 }
 
 // ModifyCacheParameterGroup
-//
 // Modifies one or more parameter values in the specified parameter group. You cannot
 // modify any default parameter group.
 func ExampleElastiCache_ModifyCacheParameterGroup_shared00() {
@@ -1653,6 +1692,8 @@ func ExampleElastiCache_ModifyCacheParameterGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterCombinationException, aerr.Error())
+			case elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1668,7 +1709,6 @@ func ExampleElastiCache_ModifyCacheParameterGroup_shared00() {
 }
 
 // ModifyCacheSubnetGroup
-//
 // Modifies an existing ElastiCache subnet group.
 func ExampleElastiCache_ModifyCacheSubnetGroup_shared00() {
 	svc := elasticache.New(session.New())
@@ -1691,6 +1731,8 @@ func ExampleElastiCache_ModifyCacheSubnetGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeSubnetInUse, aerr.Error())
 			case elasticache.ErrCodeInvalidSubnet:
 				fmt.Println(elasticache.ErrCodeInvalidSubnet, aerr.Error())
+			case elasticache.ErrCodeSubnetNotAllowedFault:
+				fmt.Println(elasticache.ErrCodeSubnetNotAllowedFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1726,6 +1768,10 @@ func ExampleElastiCache_ModifyReplicationGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeReplicationGroupNotFoundFault, aerr.Error())
 			case elasticache.ErrCodeInvalidReplicationGroupStateFault:
 				fmt.Println(elasticache.ErrCodeInvalidReplicationGroupStateFault, aerr.Error())
+			case elasticache.ErrCodeInvalidUserGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidUserGroupStateFault, aerr.Error())
+			case elasticache.ErrCodeUserGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeUserGroupNotFoundFault, aerr.Error())
 			case elasticache.ErrCodeInvalidCacheClusterStateFault:
 				fmt.Println(elasticache.ErrCodeInvalidCacheClusterStateFault, aerr.Error())
 			case elasticache.ErrCodeInvalidCacheSecurityGroupStateFault:
@@ -1744,6 +1790,8 @@ func ExampleElastiCache_ModifyReplicationGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeCacheParameterGroupNotFoundFault, aerr.Error())
 			case elasticache.ErrCodeInvalidVPCNetworkStateFault:
 				fmt.Println(elasticache.ErrCodeInvalidVPCNetworkStateFault, aerr.Error())
+			case elasticache.ErrCodeInvalidKMSKeyFault:
+				fmt.Println(elasticache.ErrCodeInvalidKMSKeyFault, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
@@ -1763,7 +1811,6 @@ func ExampleElastiCache_ModifyReplicationGroup_shared00() {
 }
 
 // PurchaseReservedCacheNodesOfferings
-//
 // Allows you to purchase a reserved cache node offering.
 func ExampleElastiCache_PurchaseReservedCacheNodesOffering_shared00() {
 	svc := elasticache.New(session.New())
@@ -1781,6 +1828,8 @@ func ExampleElastiCache_PurchaseReservedCacheNodesOffering_shared00() {
 				fmt.Println(elasticache.ErrCodeReservedCacheNodeAlreadyExistsFault, aerr.Error())
 			case elasticache.ErrCodeReservedCacheNodeQuotaExceededFault:
 				fmt.Println(elasticache.ErrCodeReservedCacheNodeQuotaExceededFault, aerr.Error())
+			case elasticache.ErrCodeTagQuotaPerResourceExceeded:
+				fmt.Println(elasticache.ErrCodeTagQuotaPerResourceExceeded, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
@@ -1800,7 +1849,6 @@ func ExampleElastiCache_PurchaseReservedCacheNodesOffering_shared00() {
 }
 
 // RebootCacheCluster
-//
 // Reboots the specified nodes in the names cluster.
 func ExampleElastiCache_RebootCacheCluster_shared00() {
 	svc := elasticache.New(session.New())
@@ -1835,7 +1883,6 @@ func ExampleElastiCache_RebootCacheCluster_shared00() {
 }
 
 // RemoveTagsFromResource
-//
 // Removes tags identified by a list of tag keys from the list of tags on the specified
 // resource.
 func ExampleElastiCache_RemoveTagsFromResource_shared00() {
@@ -1855,8 +1902,32 @@ func ExampleElastiCache_RemoveTagsFromResource_shared00() {
 			switch aerr.Code() {
 			case elasticache.ErrCodeCacheClusterNotFoundFault:
 				fmt.Println(elasticache.ErrCodeCacheClusterNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeCacheParameterGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeCacheParameterGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeCacheSecurityGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeCacheSecurityGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeCacheSubnetGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeCacheSubnetGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidReplicationGroupStateFault, aerr.Error())
+			case elasticache.ErrCodeReplicationGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeReplicationGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeReservedCacheNodeNotFoundFault:
+				fmt.Println(elasticache.ErrCodeReservedCacheNodeNotFoundFault, aerr.Error())
 			case elasticache.ErrCodeSnapshotNotFoundFault:
 				fmt.Println(elasticache.ErrCodeSnapshotNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeUserNotFoundFault:
+				fmt.Println(elasticache.ErrCodeUserNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeUserGroupNotFoundFault:
+				fmt.Println(elasticache.ErrCodeUserGroupNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeServerlessCacheNotFoundFault:
+				fmt.Println(elasticache.ErrCodeServerlessCacheNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidServerlessCacheStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidServerlessCacheStateFault, aerr.Error())
+			case elasticache.ErrCodeServerlessCacheSnapshotNotFoundFault:
+				fmt.Println(elasticache.ErrCodeServerlessCacheSnapshotNotFoundFault, aerr.Error())
+			case elasticache.ErrCodeInvalidServerlessCacheSnapshotStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidServerlessCacheSnapshotStateFault, aerr.Error())
 			case elasticache.ErrCodeInvalidARNFault:
 				fmt.Println(elasticache.ErrCodeInvalidARNFault, aerr.Error())
 			case elasticache.ErrCodeTagNotFoundFault:
@@ -1876,7 +1947,6 @@ func ExampleElastiCache_RemoveTagsFromResource_shared00() {
 }
 
 // ResetCacheParameterGroup
-//
 // Modifies the parameters of a cache parameter group to the engine or system default
 // value.
 func ExampleElastiCache_ResetCacheParameterGroup_shared00() {
@@ -1898,6 +1968,8 @@ func ExampleElastiCache_ResetCacheParameterGroup_shared00() {
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterCombinationException, aerr.Error())
+			case elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault:
+				fmt.Println(elasticache.ErrCodeInvalidGlobalReplicationGroupStateFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1913,7 +1985,6 @@ func ExampleElastiCache_ResetCacheParameterGroup_shared00() {
 }
 
 // DescribeCacheSecurityGroups
-//
 // Returns a list of cache security group descriptions. If a cache security group name
 // is specified, the list contains only the description of that group.
 func ExampleElastiCache_RevokeCacheSecurityGroupIngress_shared00() {

@@ -26,7 +26,6 @@ func parseTime(layout, value string) *time.Time {
 }
 
 // To create a new device pool
-//
 // The following example creates a new device pool named MyDevicePool inside an existing
 // project.
 func ExampleDeviceFarm_CreateDevicePool_shared00() {
@@ -64,7 +63,6 @@ func ExampleDeviceFarm_CreateDevicePool_shared00() {
 }
 
 // To create a new project
-//
 // The following example creates a new project named MyProject.
 func ExampleDeviceFarm_CreateProject_shared00() {
 	svc := devicefarm.New(session.New())
@@ -84,6 +82,8 @@ func ExampleDeviceFarm_CreateProject_shared00() {
 				fmt.Println(devicefarm.ErrCodeLimitExceededException, aerr.Error())
 			case devicefarm.ErrCodeServiceAccountException:
 				fmt.Println(devicefarm.ErrCodeServiceAccountException, aerr.Error())
+			case devicefarm.ErrCodeTagOperationException:
+				fmt.Println(devicefarm.ErrCodeTagOperationException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -99,7 +99,6 @@ func ExampleDeviceFarm_CreateProject_shared00() {
 }
 
 // To create a remote access session
-//
 // The following example creates a remote access session named MySession.
 func ExampleDeviceFarm_CreateRemoteAccessSession_shared00() {
 	svc := devicefarm.New(session.New())
@@ -139,7 +138,6 @@ func ExampleDeviceFarm_CreateRemoteAccessSession_shared00() {
 }
 
 // To create a new test package upload
-//
 // The following example creates a new Appium Python test package upload inside an existing
 // project.
 func ExampleDeviceFarm_CreateUpload_shared00() {
@@ -177,7 +175,6 @@ func ExampleDeviceFarm_CreateUpload_shared00() {
 }
 
 // To delete a device pool
-//
 // The following example deletes a specific device pool.
 func ExampleDeviceFarm_DeleteDevicePool_shared00() {
 	svc := devicefarm.New(session.New())
@@ -212,7 +209,6 @@ func ExampleDeviceFarm_DeleteDevicePool_shared00() {
 }
 
 // To delete a project
-//
 // The following example deletes a specific project.
 func ExampleDeviceFarm_DeleteProject_shared00() {
 	svc := devicefarm.New(session.New())
@@ -247,7 +243,6 @@ func ExampleDeviceFarm_DeleteProject_shared00() {
 }
 
 // To delete a specific remote access session
-//
 // The following example deletes a specific remote access session.
 func ExampleDeviceFarm_DeleteRemoteAccessSession_shared00() {
 	svc := devicefarm.New(session.New())
@@ -282,7 +277,6 @@ func ExampleDeviceFarm_DeleteRemoteAccessSession_shared00() {
 }
 
 // To delete a run
-//
 // The following example deletes a specific test run.
 func ExampleDeviceFarm_DeleteRun_shared00() {
 	svc := devicefarm.New(session.New())
@@ -317,7 +311,6 @@ func ExampleDeviceFarm_DeleteRun_shared00() {
 }
 
 // To delete a specific upload
-//
 // The following example deletes a specific upload.
 func ExampleDeviceFarm_DeleteUpload_shared00() {
 	svc := devicefarm.New(session.New())
@@ -352,7 +345,6 @@ func ExampleDeviceFarm_DeleteUpload_shared00() {
 }
 
 // To get information about account settings
-//
 // The following example returns information about your Device Farm account settings.
 func ExampleDeviceFarm_GetAccountSettings_shared00() {
 	svc := devicefarm.New(session.New())
@@ -385,7 +377,6 @@ func ExampleDeviceFarm_GetAccountSettings_shared00() {
 }
 
 // To get information about a device
-//
 // The following example returns information about a specific device.
 func ExampleDeviceFarm_GetDevice_shared00() {
 	svc := devicefarm.New(session.New())
@@ -420,7 +411,6 @@ func ExampleDeviceFarm_GetDevice_shared00() {
 }
 
 // To get information about a device pool
-//
 // The following example returns information about a specific device pool, given a project
 // ARN.
 func ExampleDeviceFarm_GetDevicePool_shared00() {
@@ -456,7 +446,6 @@ func ExampleDeviceFarm_GetDevicePool_shared00() {
 }
 
 // To get information about the compatibility of a device pool
-//
 // The following example returns information about the compatibility of a specific device
 // pool, given its ARN.
 func ExampleDeviceFarm_GetDevicePoolCompatibility_shared00() {
@@ -494,7 +483,6 @@ func ExampleDeviceFarm_GetDevicePoolCompatibility_shared00() {
 }
 
 // To get information about a job
-//
 // The following example returns information about a specific job.
 func ExampleDeviceFarm_GetJob_shared00() {
 	svc := devicefarm.New(session.New())
@@ -529,7 +517,6 @@ func ExampleDeviceFarm_GetJob_shared00() {
 }
 
 // To get status information about device offerings
-//
 // The following example returns information about Device Farm offerings available to
 // your account.
 func ExampleDeviceFarm_GetOfferingStatus_shared00() {
@@ -567,7 +554,6 @@ func ExampleDeviceFarm_GetOfferingStatus_shared00() {
 }
 
 // To get information about a project
-//
 // The following example gets information about a specific project.
 func ExampleDeviceFarm_GetProject_shared00() {
 	svc := devicefarm.New(session.New())
@@ -602,7 +588,6 @@ func ExampleDeviceFarm_GetProject_shared00() {
 }
 
 // To get a remote access session
-//
 // The following example gets a specific remote access session.
 func ExampleDeviceFarm_GetRemoteAccessSession_shared00() {
 	svc := devicefarm.New(session.New())
@@ -637,7 +622,6 @@ func ExampleDeviceFarm_GetRemoteAccessSession_shared00() {
 }
 
 // To get information about a test run
-//
 // The following example gets information about a specific test run.
 func ExampleDeviceFarm_GetRun_shared00() {
 	svc := devicefarm.New(session.New())
@@ -672,7 +656,6 @@ func ExampleDeviceFarm_GetRun_shared00() {
 }
 
 // To get information about a test suite
-//
 // The following example gets information about a specific test suite.
 func ExampleDeviceFarm_GetSuite_shared00() {
 	svc := devicefarm.New(session.New())
@@ -707,7 +690,6 @@ func ExampleDeviceFarm_GetSuite_shared00() {
 }
 
 // To get information about a specific test
-//
 // The following example gets information about a specific test.
 func ExampleDeviceFarm_GetTest_shared00() {
 	svc := devicefarm.New(session.New())
@@ -742,7 +724,6 @@ func ExampleDeviceFarm_GetTest_shared00() {
 }
 
 // To get information about a specific upload
-//
 // The following example gets information about a specific upload.
 func ExampleDeviceFarm_GetUpload_shared00() {
 	svc := devicefarm.New(session.New())
@@ -777,7 +758,6 @@ func ExampleDeviceFarm_GetUpload_shared00() {
 }
 
 // To install to a remote access session
-//
 // The following example installs a specific app to a device in a specific remote access
 // session.
 func ExampleDeviceFarm_InstallToRemoteAccessSession_shared00() {
@@ -814,7 +794,6 @@ func ExampleDeviceFarm_InstallToRemoteAccessSession_shared00() {
 }
 
 // To list artifacts for a resource
-//
 // The following example lists screenshot artifacts for a specific run.
 func ExampleDeviceFarm_ListArtifacts_shared00() {
 	svc := devicefarm.New(session.New())
@@ -850,7 +829,6 @@ func ExampleDeviceFarm_ListArtifacts_shared00() {
 }
 
 // To get information about device pools
-//
 // The following example returns information about the private device pools in a specific
 // project.
 func ExampleDeviceFarm_ListDevicePools_shared00() {
@@ -887,7 +865,6 @@ func ExampleDeviceFarm_ListDevicePools_shared00() {
 }
 
 // To get information about devices
-//
 // The following example returns information about the available devices in a specific
 // project.
 func ExampleDeviceFarm_ListDevices_shared00() {
@@ -923,7 +900,6 @@ func ExampleDeviceFarm_ListDevices_shared00() {
 }
 
 // To get information about jobs
-//
 // The following example returns information about jobs in a specific project.
 func ExampleDeviceFarm_ListJobs_shared00() {
 	svc := devicefarm.New(session.New())
@@ -958,7 +934,6 @@ func ExampleDeviceFarm_ListJobs_shared00() {
 }
 
 // To get information about device offering transactions
-//
 // The following example returns information about Device Farm offering transactions.
 func ExampleDeviceFarm_ListOfferingTransactions_shared00() {
 	svc := devicefarm.New(session.New())
@@ -995,7 +970,6 @@ func ExampleDeviceFarm_ListOfferingTransactions_shared00() {
 }
 
 // To get information about device offerings
-//
 // The following example returns information about available device offerings.
 func ExampleDeviceFarm_ListOfferings_shared00() {
 	svc := devicefarm.New(session.New())
@@ -1032,7 +1006,6 @@ func ExampleDeviceFarm_ListOfferings_shared00() {
 }
 
 // To get information about a Device Farm project
-//
 // The following example returns information about the specified project in Device Farm.
 func ExampleDeviceFarm_ListProjects_shared00() {
 	svc := devicefarm.New(session.New())
@@ -1068,7 +1041,6 @@ func ExampleDeviceFarm_ListProjects_shared00() {
 }
 
 // To get information about a remote access session
-//
 // The following example returns information about a specific Device Farm remote access
 // session.
 func ExampleDeviceFarm_ListRemoteAccessSessions_shared00() {
@@ -1105,7 +1077,6 @@ func ExampleDeviceFarm_ListRemoteAccessSessions_shared00() {
 }
 
 // To get information about a test run
-//
 // The following example returns information about a specific test run.
 func ExampleDeviceFarm_ListRuns_shared00() {
 	svc := devicefarm.New(session.New())
@@ -1141,7 +1112,6 @@ func ExampleDeviceFarm_ListRuns_shared00() {
 }
 
 // To get information about samples
-//
 // The following example returns information about samples, given a specific Device
 // Farm project.
 func ExampleDeviceFarm_ListSamples_shared00() {
@@ -1178,13 +1148,12 @@ func ExampleDeviceFarm_ListSamples_shared00() {
 }
 
 // To get information about suites
-//
 // The following example returns information about suites, given a specific Device Farm
-// project.
+// job.
 func ExampleDeviceFarm_ListSuites_shared00() {
 	svc := devicefarm.New(session.New())
 	input := &devicefarm.ListSuitesInput{
-		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
+		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:job:EXAMPLE-GUID-123-456"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
 
@@ -1215,7 +1184,6 @@ func ExampleDeviceFarm_ListSuites_shared00() {
 }
 
 // To get information about tests
-//
 // The following example returns information about tests, given a specific Device Farm
 // project.
 func ExampleDeviceFarm_ListTests_shared00() {
@@ -1252,7 +1220,6 @@ func ExampleDeviceFarm_ListTests_shared00() {
 }
 
 // To get information about unique problems
-//
 // The following example returns information about unique problems, given a specific
 // Device Farm project.
 func ExampleDeviceFarm_ListUniqueProblems_shared00() {
@@ -1289,7 +1256,6 @@ func ExampleDeviceFarm_ListUniqueProblems_shared00() {
 }
 
 // To get information about uploads
-//
 // The following example returns information about uploads, given a specific Device
 // Farm project.
 func ExampleDeviceFarm_ListUploads_shared00() {
@@ -1326,7 +1292,6 @@ func ExampleDeviceFarm_ListUploads_shared00() {
 }
 
 // To purchase a device slot offering
-//
 // The following example purchases a specific device slot offering.
 func ExampleDeviceFarm_PurchaseOffering_shared00() {
 	svc := devicefarm.New(session.New())
@@ -1364,7 +1329,6 @@ func ExampleDeviceFarm_PurchaseOffering_shared00() {
 }
 
 // To renew a device slot offering
-//
 // The following example renews a specific device slot offering.
 func ExampleDeviceFarm_RenewOffering_shared00() {
 	svc := devicefarm.New(session.New())
@@ -1402,7 +1366,6 @@ func ExampleDeviceFarm_RenewOffering_shared00() {
 }
 
 // To schedule a test run
-//
 // The following example schedules a test run named MyRun.
 func ExampleDeviceFarm_ScheduleRun_shared00() {
 	svc := devicefarm.New(session.New())
@@ -1445,7 +1408,6 @@ func ExampleDeviceFarm_ScheduleRun_shared00() {
 }
 
 // To stop a test run
-//
 // The following example stops a specific test run.
 func ExampleDeviceFarm_StopRun_shared00() {
 	svc := devicefarm.New(session.New())
@@ -1480,7 +1442,6 @@ func ExampleDeviceFarm_StopRun_shared00() {
 }
 
 // To update a device pool
-//
 // The following example updates the specified device pool with a new name and description.
 // It also enables remote access of devices in the device pool.
 func ExampleDeviceFarm_UpdateDevicePool_shared00() {
@@ -1525,7 +1486,6 @@ func ExampleDeviceFarm_UpdateDevicePool_shared00() {
 }
 
 // To update a device pool
-//
 // The following example updates the specified project with a new name.
 func ExampleDeviceFarm_UpdateProject_shared00() {
 	svc := devicefarm.New(session.New())

@@ -26,7 +26,6 @@ func parseTime(layout, value string) *time.Time {
 }
 
 // To accept a handshake from another account
-//
 // Bill is the owner of an organization, and he invites Juan's account (222222222222)
 // to join his organization. The following example shows Juan's account accepting the
 // handshake and thus agreeing to the invitation.
@@ -77,9 +76,7 @@ func ExampleOrganizations_AcceptHandshake_shared00() {
 }
 
 // To attach a policy to an OU
-//
 // The following example shows how to attach a service control policy (SCP) to an OU:
-//
 func ExampleOrganizations_AttachPolicy_shared00() {
 	svc := organizations.New(session.New())
 	input := &organizations.AttachPolicyInput{
@@ -113,6 +110,10 @@ func ExampleOrganizations_AttachPolicy_shared00() {
 				fmt.Println(organizations.ErrCodeTargetNotFoundException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -128,9 +129,7 @@ func ExampleOrganizations_AttachPolicy_shared00() {
 }
 
 // To attach a policy to an account
-//
 // The following example shows how to attach a service control policy (SCP) to an account:
-//
 func ExampleOrganizations_AttachPolicy_shared01() {
 	svc := organizations.New(session.New())
 	input := &organizations.AttachPolicyInput{
@@ -164,6 +163,10 @@ func ExampleOrganizations_AttachPolicy_shared01() {
 				fmt.Println(organizations.ErrCodeTargetNotFoundException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -179,11 +182,9 @@ func ExampleOrganizations_AttachPolicy_shared01() {
 }
 
 // To cancel a handshake sent to a member account
-//
 // Bill previously sent an invitation to Susan's account to join his organization. He
 // changes his mind and decides to cancel the invitation before Susan accepts it. The
 // following example shows Bill's cancellation:
-//
 func ExampleOrganizations_CancelHandshake_shared00() {
 	svc := organizations.New(session.New())
 	input := &organizations.CancelHandshakeInput{
@@ -225,14 +226,12 @@ func ExampleOrganizations_CancelHandshake_shared00() {
 }
 
 // To create a new account that is automatically part of the organization
-//
 // The owner of an organization creates a member account in the organization. The following
 // example shows that when the organization owner creates the member account, the account
 // is preconfigured with the name "Production Account" and an owner email address of
-// susan@example.com.  An IAM role is automatically created using the default name because
+// susan@example.com. An IAM role is automatically created using the default name because
 // the roleName parameter is not used. AWS Organizations sends Susan a "Welcome to AWS"
 // email:
-//
 func ExampleOrganizations_CreateAccount_shared00() {
 	svc := organizations.New(session.New())
 	input := &organizations.CreateAccountInput{
@@ -260,6 +259,8 @@ func ExampleOrganizations_CreateAccount_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -275,12 +276,10 @@ func ExampleOrganizations_CreateAccount_shared00() {
 }
 
 // To create a new organization with all features enabled
-//
 // Bill wants to create an organization using credentials from account 111111111111.
 // The following example shows that the account becomes the master account in the new
 // organization. Because he does not specify a feature set, the new organization defaults
 // to all features enabled and service control policies enabled on the root:
-//
 func ExampleOrganizations_CreateOrganization_shared00() {
 	svc := organizations.New(session.New())
 	input := &organizations.CreateOrganizationInput{}
@@ -320,11 +319,9 @@ func ExampleOrganizations_CreateOrganization_shared00() {
 }
 
 // To create a new organization with consolidated billing features only
-//
 // In the following example, Bill creates an organization using credentials from account
 // 111111111111, and configures the organization to support only the consolidated billing
 // feature set:
-//
 func ExampleOrganizations_CreateOrganization_shared01() {
 	svc := organizations.New(session.New())
 	input := &organizations.CreateOrganizationInput{
@@ -366,10 +363,8 @@ func ExampleOrganizations_CreateOrganization_shared01() {
 }
 
 // To create a new organization unit
-//
 // The following example shows how to create an OU that is named AccountingOU. The new
 // OU is directly under the root.:
-//
 func ExampleOrganizations_CreateOrganizationalUnit_shared00() {
 	svc := organizations.New(session.New())
 	input := &organizations.CreateOrganizationalUnitInput{
@@ -414,13 +409,11 @@ func ExampleOrganizations_CreateOrganizationalUnit_shared00() {
 }
 
 // To create a service control policy
-//
 // The following example shows how to create a service control policy (SCP) that is
 // named AllowAllS3Actions. The JSON string in the content parameter specifies the content
 // in the policy. The parameter string is escaped with backslashes to ensure that the
 // embedded double quotes in the JSON policy are treated as literals in the parameter,
 // which itself is surrounded by double quotes:
-//
 func ExampleOrganizations_CreatePolicy_shared00() {
 	svc := organizations.New(session.New())
 	input := &organizations.CreatePolicyInput{
@@ -454,6 +447,8 @@ func ExampleOrganizations_CreatePolicy_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -469,7 +464,6 @@ func ExampleOrganizations_CreatePolicy_shared00() {
 }
 
 // To decline a handshake sent from the master account
-//
 // The following example shows Susan declining an invitation to join Bill's organization.
 // The DeclineHandshake operation returns a handshake object, showing that the state
 // is now DECLINED:
@@ -514,10 +508,8 @@ func ExampleOrganizations_DeclineHandshake_shared00() {
 }
 
 // To delete an organization unit
-//
 // The following example shows how to delete an OU. The example assumes that you previously
 // removed all accounts and other OUs from the OU:
-//
 func ExampleOrganizations_DeleteOrganizationalUnit_shared00() {
 	svc := organizations.New(session.New())
 	input := &organizations.DeleteOrganizationalUnitInput{
@@ -559,10 +551,8 @@ func ExampleOrganizations_DeleteOrganizationalUnit_shared00() {
 }
 
 // To delete a policy
-//
 // The following example shows how to delete a policy from an organization. The example
 // assumes that you previously detached the policy from all entities:
-//
 func ExampleOrganizations_DeletePolicy_shared00() {
 	svc := organizations.New(session.New())
 	input := &organizations.DeletePolicyInput{
@@ -589,6 +579,8 @@ func ExampleOrganizations_DeletePolicy_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -604,7 +596,6 @@ func ExampleOrganizations_DeletePolicy_shared00() {
 }
 
 // To get the details about an account
-//
 // The following example shows a user in the master account (111111111111) asking for
 // details about account 555555555555:
 func ExampleOrganizations_DescribeAccount_shared00() {
@@ -644,7 +635,6 @@ func ExampleOrganizations_DescribeAccount_shared00() {
 }
 
 // To get information about a request to create an account
-//
 // The following example shows how to request the status about a previous request to
 // create an account in an organization. This operation can be called only by a principal
 // from the organization's master account. In the example, the specified "createAccountRequestId"
@@ -671,6 +661,8 @@ func ExampleOrganizations_DescribeCreateAccountStatus_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -686,7 +678,6 @@ func ExampleOrganizations_DescribeCreateAccountStatus_shared00() {
 }
 
 // To get information about a handshake
-//
 // The following example shows you how to request details about a handshake. The handshake
 // ID comes either from the original call to "InviteAccountToOrganization", or from
 // a call to "ListHandshakesForAccount" or "ListHandshakesForOrganization":
@@ -727,7 +718,6 @@ func ExampleOrganizations_DescribeHandshake_shared00() {
 }
 
 // To get information about an organization
-//
 // The following example shows how to request information about the current user's organization:/n/n
 func ExampleOrganizations_DescribeOrganization_shared00() {
 	svc := organizations.New(session.New())
@@ -762,7 +752,6 @@ func ExampleOrganizations_DescribeOrganization_shared00() {
 }
 
 // To get information about an organizational unit
-//
 // The following example shows how to request details about an OU:/n/n
 func ExampleOrganizations_DescribeOrganizationalUnit_shared00() {
 	svc := organizations.New(session.New())
@@ -801,7 +790,6 @@ func ExampleOrganizations_DescribeOrganizationalUnit_shared00() {
 }
 
 // To get information about a policy
-//
 // The following example shows how to request information about a policy:/n/n
 func ExampleOrganizations_DescribePolicy_shared00() {
 	svc := organizations.New(session.New())
@@ -825,6 +813,8 @@ func ExampleOrganizations_DescribePolicy_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -840,7 +830,6 @@ func ExampleOrganizations_DescribePolicy_shared00() {
 }
 
 // To detach a policy from a root, OU, or account
-//
 // The following example shows how to detach a policy from an OU:/n/n
 func ExampleOrganizations_DetachPolicy_shared00() {
 	svc := organizations.New(session.New())
@@ -873,6 +862,10 @@ func ExampleOrganizations_DetachPolicy_shared00() {
 				fmt.Println(organizations.ErrCodeTargetNotFoundException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -888,7 +881,6 @@ func ExampleOrganizations_DetachPolicy_shared00() {
 }
 
 // To disable a policy type in a root
-//
 // The following example shows how to disable the service control policy (SCP) policy
 // type in a root. The response shows that the PolicyTypes response element no longer
 // includes SERVICE_CONTROL_POLICY:/n/n
@@ -921,6 +913,10 @@ func ExampleOrganizations_DisablePolicyType_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -936,7 +932,6 @@ func ExampleOrganizations_DisablePolicyType_shared00() {
 }
 
 // To enable all features in an organization
-//
 // This example shows the administrator asking all the invited accounts in the organization
 // to approve enabling all features in the organization. AWS Organizations sends an
 // email to the address that is registered with every invited member account asking
@@ -981,7 +976,6 @@ func ExampleOrganizations_EnableAllFeatures_shared00() {
 }
 
 // To enable a policy type in a root
-//
 // The following example shows how to enable the service control policy (SCP) policy
 // type in a root. The output shows a root object with a PolicyTypes response element
 // showing that SCPs are now enabled:/n/n
@@ -1016,6 +1010,10 @@ func ExampleOrganizations_EnablePolicyType_shared00() {
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
 			case organizations.ErrCodePolicyTypeNotAvailableForOrganizationException:
 				fmt.Println(organizations.ErrCodePolicyTypeNotAvailableForOrganizationException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1031,7 +1029,6 @@ func ExampleOrganizations_EnablePolicyType_shared00() {
 }
 
 // To invite an account to join an organization
-//
 // The following example shows the admin of the master account owned by bill@example.com
 // inviting the account owned by juan@example.com to join an organization.
 func ExampleOrganizations_InviteAccountToOrganization_shared00() {
@@ -1060,6 +1057,8 @@ func ExampleOrganizations_InviteAccountToOrganization_shared00() {
 				fmt.Println(organizations.ErrCodeHandshakeConstraintViolationException, aerr.Error())
 			case organizations.ErrCodeDuplicateHandshakeException:
 				fmt.Println(organizations.ErrCodeDuplicateHandshakeException, aerr.Error())
+			case organizations.ErrCodeConstraintViolationException:
+				fmt.Println(organizations.ErrCodeConstraintViolationException, aerr.Error())
 			case organizations.ErrCodeInvalidInputException:
 				fmt.Println(organizations.ErrCodeInvalidInputException, aerr.Error())
 			case organizations.ErrCodeFinalizingOrganizationException:
@@ -1083,7 +1082,6 @@ func ExampleOrganizations_InviteAccountToOrganization_shared00() {
 }
 
 // To leave an organization as a member account
-//
 // TThe following example shows how to remove your member account from an organization:
 func ExampleOrganizations_LeaveOrganization_shared00() {
 	svc := organizations.New(session.New())
@@ -1126,7 +1124,6 @@ func ExampleOrganizations_LeaveOrganization_shared00() {
 }
 
 // To retrieve a list of all of the accounts in an organization
-//
 // The following example shows you how to request a list of the accounts in an organization:
 func ExampleOrganizations_ListAccounts_shared00() {
 	svc := organizations.New(session.New())
@@ -1161,7 +1158,6 @@ func ExampleOrganizations_ListAccounts_shared00() {
 }
 
 // To retrieve a list of all of the accounts in a root or OU
-//
 // The following example shows how to request a list of the accounts in an OU:/n/n
 func ExampleOrganizations_ListAccountsForParent_shared00() {
 	svc := organizations.New(session.New())
@@ -1200,7 +1196,6 @@ func ExampleOrganizations_ListAccountsForParent_shared00() {
 }
 
 // To retrieve a list of all of the child accounts and OUs in a parent root or OU
-//
 // The following example shows how to request a list of the child OUs in a parent root
 // or OU:/n/n
 func ExampleOrganizations_ListChildren_shared00() {
@@ -1241,7 +1236,6 @@ func ExampleOrganizations_ListChildren_shared00() {
 }
 
 // To get a list of completed account creation requests made in the organization
-//
 // The following example shows a user requesting a list of only the completed account
 // creation requests made for the current organization:
 func ExampleOrganizations_ListCreateAccountStatus_shared00() {
@@ -1266,6 +1260,8 @@ func ExampleOrganizations_ListCreateAccountStatus_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1281,7 +1277,6 @@ func ExampleOrganizations_ListCreateAccountStatus_shared00() {
 }
 
 // To get a list of all account creation requests made in the organization
-//
 // The following example shows a user requesting a list of only the in-progress account
 // creation requests made for the current organization:
 func ExampleOrganizations_ListCreateAccountStatus_shared01() {
@@ -1306,6 +1301,8 @@ func ExampleOrganizations_ListCreateAccountStatus_shared01() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1321,7 +1318,6 @@ func ExampleOrganizations_ListCreateAccountStatus_shared01() {
 }
 
 // To retrieve a list of the handshakes sent to an account
-//
 // The following example shows you how to get a list of handshakes that are associated
 // with the account of the credentials used to call the operation:
 func ExampleOrganizations_ListHandshakesForAccount_shared00() {
@@ -1357,7 +1353,6 @@ func ExampleOrganizations_ListHandshakesForAccount_shared00() {
 }
 
 // To retrieve a list of the handshakes associated with an organization
-//
 // The following example shows you how to get a list of handshakes associated with the
 // current organization:
 func ExampleOrganizations_ListHandshakesForOrganization_shared00() {
@@ -1395,7 +1390,6 @@ func ExampleOrganizations_ListHandshakesForOrganization_shared00() {
 }
 
 // To retrieve a list of all of the child OUs in a parent root or OU
-//
 // The following example shows how to get a list of OUs in a specified root:/n/n
 func ExampleOrganizations_ListOrganizationalUnitsForParent_shared00() {
 	svc := organizations.New(session.New())
@@ -1434,7 +1428,6 @@ func ExampleOrganizations_ListOrganizationalUnitsForParent_shared00() {
 }
 
 // To retrieve a list of all of the parents of a child OU or account
-//
 // The following example shows how to list the root or OUs that contain account 444444444444:/n/n
 func ExampleOrganizations_ListParents_shared00() {
 	svc := organizations.New(session.New())
@@ -1473,7 +1466,6 @@ func ExampleOrganizations_ListParents_shared00() {
 }
 
 // To retrieve a list policies in the organization
-//
 // The following example shows how to get a list of service control policies (SCPs):/n/n
 func ExampleOrganizations_ListPolicies_shared00() {
 	svc := organizations.New(session.New())
@@ -1495,6 +1487,8 @@ func ExampleOrganizations_ListPolicies_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1510,7 +1504,6 @@ func ExampleOrganizations_ListPolicies_shared00() {
 }
 
 // To retrieve a list policies attached to a root, OU, or account
-//
 // The following example shows how to get a list of all service control policies (SCPs)
 // of the type specified by the Filter parameter, that are directly attached to an account.
 // The returned list does not include policies that apply to the account because of
@@ -1538,6 +1531,8 @@ func ExampleOrganizations_ListPoliciesForTarget_shared00() {
 				fmt.Println(organizations.ErrCodeTargetNotFoundException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1553,7 +1548,6 @@ func ExampleOrganizations_ListPoliciesForTarget_shared00() {
 }
 
 // To retrieve a list of roots in the organization
-//
 // The following example shows how to get the list of the roots in the current organization:/n/n
 func ExampleOrganizations_ListRoots_shared00() {
 	svc := organizations.New(session.New())
@@ -1588,7 +1582,6 @@ func ExampleOrganizations_ListRoots_shared00() {
 }
 
 // To retrieve a list of roots, OUs, and accounts to which a policy is attached
-//
 // The following example shows how to get the list of roots, OUs, and accounts to which
 // the specified policy is attached:/n/n
 func ExampleOrganizations_ListTargetsForPolicy_shared00() {
@@ -1613,6 +1606,8 @@ func ExampleOrganizations_ListTargetsForPolicy_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1628,7 +1623,6 @@ func ExampleOrganizations_ListTargetsForPolicy_shared00() {
 }
 
 // To move an OU or account to another OU or the root
-//
 // The following example shows how to move a member account from the root to an OU:/n/n
 func ExampleOrganizations_MoveAccount_shared00() {
 	svc := organizations.New(session.New())
@@ -1677,7 +1671,6 @@ func ExampleOrganizations_MoveAccount_shared00() {
 }
 
 // To remove an account from an organization as the master account
-//
 // The following example shows you how to remove an account from an organization:
 func ExampleOrganizations_RemoveAccountFromOrganization_shared00() {
 	svc := organizations.New(session.New())
@@ -1722,7 +1715,6 @@ func ExampleOrganizations_RemoveAccountFromOrganization_shared00() {
 }
 
 // To rename an organizational unit
-//
 // The following example shows how to rename an OU. The output confirms the new name:/n/n
 func ExampleOrganizations_UpdateOrganizationalUnit_shared00() {
 	svc := organizations.New(session.New())
@@ -1766,7 +1758,6 @@ func ExampleOrganizations_UpdateOrganizationalUnit_shared00() {
 }
 
 // To update the details of a policy
-//
 // The following example shows how to rename a policy and give it a new description
 // and new content. The output confirms the new name and description text:/n/n
 func ExampleOrganizations_UpdatePolicy_shared00() {
@@ -1801,6 +1792,10 @@ func ExampleOrganizations_UpdatePolicy_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1816,7 +1811,6 @@ func ExampleOrganizations_UpdatePolicy_shared00() {
 }
 
 // To update the content of a policy
-//
 // The following example shows how to replace the JSON text of the SCP from the preceding
 // example with a new JSON policy text string that allows S3 actions instead of EC2
 // actions:/n/n
@@ -1851,6 +1845,10 @@ func ExampleOrganizations_UpdatePolicy_shared01() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
+			case organizations.ErrCodePolicyChangesInProgressException:
+				fmt.Println(organizations.ErrCodePolicyChangesInProgressException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

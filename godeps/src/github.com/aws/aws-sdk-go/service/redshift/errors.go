@@ -4,12 +4,38 @@ package redshift
 
 const (
 
+	// ErrCodeAccessToClusterDeniedFault for service response error code
+	// "AccessToClusterDenied".
+	//
+	// You are not authorized to access the cluster.
+	ErrCodeAccessToClusterDeniedFault = "AccessToClusterDenied"
+
 	// ErrCodeAccessToSnapshotDeniedFault for service response error code
 	// "AccessToSnapshotDenied".
 	//
 	// The owner of the specified snapshot has not authorized your account to access
 	// the snapshot.
 	ErrCodeAccessToSnapshotDeniedFault = "AccessToSnapshotDenied"
+
+	// ErrCodeAuthenticationProfileAlreadyExistsFault for service response error code
+	// "AuthenticationProfileAlreadyExistsFault".
+	//
+	// The authentication profile already exists.
+	ErrCodeAuthenticationProfileAlreadyExistsFault = "AuthenticationProfileAlreadyExistsFault"
+
+	// ErrCodeAuthenticationProfileNotFoundFault for service response error code
+	// "AuthenticationProfileNotFoundFault".
+	//
+	// The authentication profile can't be found.
+	ErrCodeAuthenticationProfileNotFoundFault = "AuthenticationProfileNotFoundFault"
+
+	// ErrCodeAuthenticationProfileQuotaExceededFault for service response error code
+	// "AuthenticationProfileQuotaExceededFault".
+	//
+	// The size or number of authentication profiles has exceeded the quota. The
+	// maximum length of the JSON string and maximum number of authentication profiles
+	// is determined by a quota for your account.
+	ErrCodeAuthenticationProfileQuotaExceededFault = "AuthenticationProfileQuotaExceededFault"
 
 	// ErrCodeAuthorizationAlreadyExistsFault for service response error code
 	// "AuthorizationAlreadyExists".
@@ -86,7 +112,7 @@ const (
 	//
 	// The request would result in the user exceeding the allowed number of cluster
 	// parameter groups. For information about increasing your quota, go to Limits
-	// in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeClusterParameterGroupQuotaExceededFault = "ClusterParameterGroupQuotaExceeded"
 
@@ -95,7 +121,7 @@ const (
 	//
 	// The request would exceed the allowed number of cluster instances for this
 	// account. For information about increasing your quota, go to Limits in Amazon
-	// Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeClusterQuotaExceededFault = "ClusterQuotaExceeded"
 
@@ -117,7 +143,7 @@ const (
 	//
 	// The request would result in the user exceeding the allowed number of cluster
 	// security groups. For information about increasing your quota, go to Limits
-	// in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeClusterSecurityGroupQuotaExceededFault = "QuotaExceeded.ClusterSecurityGroup"
 
@@ -159,7 +185,7 @@ const (
 	//
 	// The request would result in user exceeding the allowed number of cluster
 	// subnet groups. For information about increasing your quota, go to Limits
-	// in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeClusterSubnetGroupQuotaExceededFault = "ClusterSubnetGroupQuotaExceeded"
 
@@ -168,15 +194,39 @@ const (
 	//
 	// The request would result in user exceeding the allowed number of subnets
 	// in a cluster subnet groups. For information about increasing your quota,
-	// go to Limits in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// go to Limits in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeClusterSubnetQuotaExceededFault = "ClusterSubnetQuotaExceededFault"
+
+	// ErrCodeConflictPolicyUpdateFault for service response error code
+	// "ConflictPolicyUpdateFault".
+	//
+	// There is a conflict while updating the resource policy.
+	ErrCodeConflictPolicyUpdateFault = "ConflictPolicyUpdateFault"
 
 	// ErrCodeCopyToRegionDisabledFault for service response error code
 	// "CopyToRegionDisabledFault".
 	//
 	// Cross-region snapshot copy was temporarily disabled. Try your request again.
 	ErrCodeCopyToRegionDisabledFault = "CopyToRegionDisabledFault"
+
+	// ErrCodeCustomCnameAssociationFault for service response error code
+	// "CustomCnameAssociationFault".
+	//
+	// An error occurred when an attempt was made to change the custom domain association.
+	ErrCodeCustomCnameAssociationFault = "CustomCnameAssociationFault"
+
+	// ErrCodeCustomDomainAssociationNotFoundFault for service response error code
+	// "CustomDomainAssociationNotFoundFault".
+	//
+	// An error occurred. The custom domain name couldn't be found.
+	ErrCodeCustomDomainAssociationNotFoundFault = "CustomDomainAssociationNotFoundFault"
+
+	// ErrCodeDependentServiceAccessDeniedFault for service response error code
+	// "DependentServiceAccessDenied".
+	//
+	// A dependent service denied access for the integration.
+	ErrCodeDependentServiceAccessDeniedFault = "DependentServiceAccessDenied"
 
 	// ErrCodeDependentServiceRequestThrottlingFault for service response error code
 	// "DependentServiceRequestThrottlingFault".
@@ -192,12 +242,56 @@ const (
 	// temporarily unavailable. Wait 30 to 60 seconds and try again.
 	ErrCodeDependentServiceUnavailableFault = "DependentServiceUnavailableFault"
 
+	// ErrCodeEndpointAlreadyExistsFault for service response error code
+	// "EndpointAlreadyExists".
+	//
+	// The account already has a Redshift-managed VPC endpoint with the given identifier.
+	ErrCodeEndpointAlreadyExistsFault = "EndpointAlreadyExists"
+
+	// ErrCodeEndpointAuthorizationAlreadyExistsFault for service response error code
+	// "EndpointAuthorizationAlreadyExists".
+	//
+	// The authorization already exists for this endpoint.
+	ErrCodeEndpointAuthorizationAlreadyExistsFault = "EndpointAuthorizationAlreadyExists"
+
+	// ErrCodeEndpointAuthorizationNotFoundFault for service response error code
+	// "EndpointAuthorizationNotFound".
+	//
+	// The authorization for this endpoint can't be found.
+	ErrCodeEndpointAuthorizationNotFoundFault = "EndpointAuthorizationNotFound"
+
+	// ErrCodeEndpointAuthorizationsPerClusterLimitExceededFault for service response error code
+	// "EndpointAuthorizationsPerClusterLimitExceeded".
+	//
+	// The number of endpoint authorizations per cluster has exceeded its limit.
+	ErrCodeEndpointAuthorizationsPerClusterLimitExceededFault = "EndpointAuthorizationsPerClusterLimitExceeded"
+
+	// ErrCodeEndpointNotFoundFault for service response error code
+	// "EndpointNotFound".
+	//
+	// The endpoint name doesn't refer to an existing endpoint.
+	ErrCodeEndpointNotFoundFault = "EndpointNotFound"
+
+	// ErrCodeEndpointsPerAuthorizationLimitExceededFault for service response error code
+	// "EndpointsPerAuthorizationLimitExceeded".
+	//
+	// The number of Redshift-managed VPC endpoints per authorization has exceeded
+	// its limit.
+	ErrCodeEndpointsPerAuthorizationLimitExceededFault = "EndpointsPerAuthorizationLimitExceeded"
+
+	// ErrCodeEndpointsPerClusterLimitExceededFault for service response error code
+	// "EndpointsPerClusterLimitExceeded".
+	//
+	// The number of Redshift-managed VPC endpoints per cluster has exceeded its
+	// limit.
+	ErrCodeEndpointsPerClusterLimitExceededFault = "EndpointsPerClusterLimitExceeded"
+
 	// ErrCodeEventSubscriptionQuotaExceededFault for service response error code
 	// "EventSubscriptionQuotaExceeded".
 	//
 	// The request would exceed the allowed number of event subscriptions for this
 	// account. For information about increasing your quota, go to Limits in Amazon
-	// Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeEventSubscriptionQuotaExceededFault = "EventSubscriptionQuotaExceeded"
 
@@ -218,7 +312,7 @@ const (
 	// "HsmClientCertificateQuotaExceededFault".
 	//
 	// The quota for HSM client certificates has been reached. For information about
-	// increasing your quota, go to Limits in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// increasing your quota, go to Limits in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeHsmClientCertificateQuotaExceededFault = "HsmClientCertificateQuotaExceededFault"
 
@@ -239,7 +333,7 @@ const (
 	// "HsmConfigurationQuotaExceededFault".
 	//
 	// The quota for HSM configurations has been reached. For information about
-	// increasing your quota, go to Limits in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// increasing your quota, go to Limits in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeHsmConfigurationQuotaExceededFault = "HsmConfigurationQuotaExceededFault"
 
@@ -268,6 +362,26 @@ const (
 	// The cluster does not have read bucket or put object permissions on the S3
 	// bucket specified when enabling logging.
 	ErrCodeInsufficientS3BucketPolicyFault = "InsufficientS3BucketPolicyFault"
+
+	// ErrCodeIntegrationNotFoundFault for service response error code
+	// "IntegrationNotFoundFault".
+	//
+	// The integration can't be found.
+	ErrCodeIntegrationNotFoundFault = "IntegrationNotFoundFault"
+
+	// ErrCodeInvalidAuthenticationProfileRequestFault for service response error code
+	// "InvalidAuthenticationProfileRequestFault".
+	//
+	// The authentication profile request is not valid. The profile name can't be
+	// null or empty. The authentication profile API operation must be available
+	// in the Amazon Web Services Region.
+	ErrCodeInvalidAuthenticationProfileRequestFault = "InvalidAuthenticationProfileRequestFault"
+
+	// ErrCodeInvalidAuthorizationStateFault for service response error code
+	// "InvalidAuthorizationState".
+	//
+	// The status of the authorization is not valid.
+	ErrCodeInvalidAuthorizationStateFault = "InvalidAuthorizationState"
 
 	// ErrCodeInvalidClusterParameterGroupStateFault for service response error code
 	// "InvalidClusterParameterGroupState".
@@ -320,11 +434,23 @@ const (
 	// The provided cluster track name is not valid.
 	ErrCodeInvalidClusterTrackFault = "InvalidClusterTrack"
 
+	// ErrCodeInvalidDataShareFault for service response error code
+	// "InvalidDataShareFault".
+	//
+	// There is an error with the datashare.
+	ErrCodeInvalidDataShareFault = "InvalidDataShareFault"
+
 	// ErrCodeInvalidElasticIpFault for service response error code
 	// "InvalidElasticIpFault".
 	//
 	// The Elastic IP (EIP) is invalid or cannot be found.
 	ErrCodeInvalidElasticIpFault = "InvalidElasticIpFault"
+
+	// ErrCodeInvalidEndpointStateFault for service response error code
+	// "InvalidEndpointState".
+	//
+	// The status of the endpoint is not valid.
+	ErrCodeInvalidEndpointStateFault = "InvalidEndpointState"
 
 	// ErrCodeInvalidHsmClientCertificateStateFault for service response error code
 	// "InvalidHsmClientCertificateStateFault".
@@ -339,6 +465,19 @@ const (
 	// The specified HSM configuration is not in the available state, or it is still
 	// in use by one or more Amazon Redshift clusters.
 	ErrCodeInvalidHsmConfigurationStateFault = "InvalidHsmConfigurationStateFault"
+
+	// ErrCodeInvalidNamespaceFault for service response error code
+	// "InvalidNamespaceFault".
+	//
+	// The namespace isn't valid because the namespace doesn't exist. Provide a
+	// valid namespace.
+	ErrCodeInvalidNamespaceFault = "InvalidNamespaceFault"
+
+	// ErrCodeInvalidPolicyFault for service response error code
+	// "InvalidPolicyFault".
+	//
+	// The resource policy isn't valid.
+	ErrCodeInvalidPolicyFault = "InvalidPolicyFault"
 
 	// ErrCodeInvalidReservedNodeStateFault for service response error code
 	// "InvalidReservedNodeState".
@@ -364,7 +503,7 @@ const (
 	// "InvalidS3BucketNameFault".
 	//
 	// The S3 bucket name is invalid. For more information about naming rules, go
-	// to Bucket Restrictions and Limitations (http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
+	// to Bucket Restrictions and Limitations (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
 	// in the Amazon Simple Storage Service (S3) Developer Guide.
 	ErrCodeInvalidS3BucketNameFault = "InvalidS3BucketNameFault"
 
@@ -380,6 +519,12 @@ const (
 	//
 	// The schedule you submitted isn't valid.
 	ErrCodeInvalidScheduleFault = "InvalidSchedule"
+
+	// ErrCodeInvalidScheduledActionFault for service response error code
+	// "InvalidScheduledAction".
+	//
+	// The scheduled action is not valid.
+	ErrCodeInvalidScheduledActionFault = "InvalidScheduledAction"
 
 	// ErrCodeInvalidSnapshotCopyGrantStateFault for service response error code
 	// "InvalidSnapshotCopyGrantStateFault".
@@ -415,16 +560,29 @@ const (
 	// The tag is invalid.
 	ErrCodeInvalidTagFault = "InvalidTagFault"
 
+	// ErrCodeInvalidUsageLimitFault for service response error code
+	// "InvalidUsageLimit".
+	//
+	// The usage limit is not valid.
+	ErrCodeInvalidUsageLimitFault = "InvalidUsageLimit"
+
 	// ErrCodeInvalidVPCNetworkStateFault for service response error code
 	// "InvalidVPCNetworkStateFault".
 	//
 	// The cluster subnet group does not cover all Availability Zones.
 	ErrCodeInvalidVPCNetworkStateFault = "InvalidVPCNetworkStateFault"
 
+	// ErrCodeIpv6CidrBlockNotFoundFault for service response error code
+	// "Ipv6CidrBlockNotFoundFault".
+	//
+	// There are no subnets in your VPC with associated IPv6 CIDR blocks. To use
+	// dual-stack mode, associate an IPv6 CIDR block with each subnet in your VPC.
+	ErrCodeIpv6CidrBlockNotFoundFault = "Ipv6CidrBlockNotFoundFault"
+
 	// ErrCodeLimitExceededFault for service response error code
 	// "LimitExceededFault".
 	//
-	// The encryption key has exceeded its grant limit in AWS KMS.
+	// The encryption key has exceeded its grant limit in Amazon Web Services KMS.
 	ErrCodeLimitExceededFault = "LimitExceededFault"
 
 	// ErrCodeNumberOfNodesPerClusterLimitExceededFault for service response error code
@@ -438,9 +596,33 @@ const (
 	//
 	// The operation would exceed the number of nodes allotted to the account. For
 	// information about increasing your quota, go to Limits in Amazon Redshift
-	// (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeNumberOfNodesQuotaExceededFault = "NumberOfNodesQuotaExceeded"
+
+	// ErrCodePartnerNotFoundFault for service response error code
+	// "PartnerNotFound".
+	//
+	// The name of the partner was not found.
+	ErrCodePartnerNotFoundFault = "PartnerNotFound"
+
+	// ErrCodeRedshiftIdcApplicationAlreadyExistsFault for service response error code
+	// "RedshiftIdcApplicationAlreadyExists".
+	//
+	// The application you attempted to add already exists.
+	ErrCodeRedshiftIdcApplicationAlreadyExistsFault = "RedshiftIdcApplicationAlreadyExists"
+
+	// ErrCodeRedshiftIdcApplicationNotExistsFault for service response error code
+	// "RedshiftIdcApplicationNotExists".
+	//
+	// The application you attempted to find doesn't exist.
+	ErrCodeRedshiftIdcApplicationNotExistsFault = "RedshiftIdcApplicationNotExists"
+
+	// ErrCodeRedshiftIdcApplicationQuotaExceededFault for service response error code
+	// "RedshiftIdcApplicationQuotaExceeded".
+	//
+	// The maximum number of Redshift IAM Identity Center applications was exceeded.
+	ErrCodeRedshiftIdcApplicationQuotaExceededFault = "RedshiftIdcApplicationQuotaExceeded"
 
 	// ErrCodeReservedNodeAlreadyExistsFault for service response error code
 	// "ReservedNodeAlreadyExists".
@@ -453,6 +635,12 @@ const (
 	//
 	// Indicates that the reserved node has already been exchanged.
 	ErrCodeReservedNodeAlreadyMigratedFault = "ReservedNodeAlreadyMigrated"
+
+	// ErrCodeReservedNodeExchangeNotFoundFault for service response error code
+	// "ReservedNodeExchangeNotFond".
+	//
+	// The reserved-node exchange status wasn't found.
+	ErrCodeReservedNodeExchangeNotFoundFault = "ReservedNodeExchangeNotFond"
 
 	// ErrCodeReservedNodeNotFoundFault for service response error code
 	// "ReservedNodeNotFound".
@@ -470,7 +658,7 @@ const (
 	// "ReservedNodeQuotaExceeded".
 	//
 	// Request would exceed the user's compute node quota. For information about
-	// increasing your quota, go to Limits in Amazon Redshift (http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// increasing your quota, go to Limits in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ErrCodeReservedNodeQuotaExceededFault = "ReservedNodeQuotaExceeded"
 
@@ -512,6 +700,30 @@ const (
 	// The definition you submitted is not supported.
 	ErrCodeScheduleDefinitionTypeUnsupportedFault = "ScheduleDefinitionTypeUnsupported"
 
+	// ErrCodeScheduledActionAlreadyExistsFault for service response error code
+	// "ScheduledActionAlreadyExists".
+	//
+	// The scheduled action already exists.
+	ErrCodeScheduledActionAlreadyExistsFault = "ScheduledActionAlreadyExists"
+
+	// ErrCodeScheduledActionNotFoundFault for service response error code
+	// "ScheduledActionNotFound".
+	//
+	// The scheduled action cannot be found.
+	ErrCodeScheduledActionNotFoundFault = "ScheduledActionNotFound"
+
+	// ErrCodeScheduledActionQuotaExceededFault for service response error code
+	// "ScheduledActionQuotaExceeded".
+	//
+	// The quota for scheduled actions exceeded.
+	ErrCodeScheduledActionQuotaExceededFault = "ScheduledActionQuotaExceeded"
+
+	// ErrCodeScheduledActionTypeUnsupportedFault for service response error code
+	// "ScheduledActionTypeUnsupported".
+	//
+	// The action type specified for a scheduled action is not supported.
+	ErrCodeScheduledActionTypeUnsupportedFault = "ScheduledActionTypeUnsupported"
+
 	// ErrCodeSnapshotCopyAlreadyDisabledFault for service response error code
 	// "SnapshotCopyAlreadyDisabledFault".
 	//
@@ -547,8 +759,8 @@ const (
 	// ErrCodeSnapshotCopyGrantQuotaExceededFault for service response error code
 	// "SnapshotCopyGrantQuotaExceededFault".
 	//
-	// The AWS account has exceeded the maximum number of snapshot copy grants in
-	// this region.
+	// The Amazon Web Services account has exceeded the maximum number of snapshot
+	// copy grants in this region.
 	ErrCodeSnapshotCopyGrantQuotaExceededFault = "SnapshotCopyGrantQuotaExceededFault"
 
 	// ErrCodeSnapshotScheduleAlreadyExistsFault for service response error code
@@ -648,6 +860,12 @@ const (
 	// Your account is not authorized to perform the requested operation.
 	ErrCodeUnauthorizedOperation = "UnauthorizedOperation"
 
+	// ErrCodeUnauthorizedPartnerIntegrationFault for service response error code
+	// "UnauthorizedPartnerIntegration".
+	//
+	// The partner integration is not authorized.
+	ErrCodeUnauthorizedPartnerIntegrationFault = "UnauthorizedPartnerIntegration"
+
 	// ErrCodeUnknownSnapshotCopyRegionFault for service response error code
 	// "UnknownSnapshotCopyRegionFault".
 	//
@@ -665,4 +883,16 @@ const (
 	//
 	// A request option was specified that is not supported.
 	ErrCodeUnsupportedOptionFault = "UnsupportedOptionFault"
+
+	// ErrCodeUsageLimitAlreadyExistsFault for service response error code
+	// "UsageLimitAlreadyExists".
+	//
+	// The usage limit already exists.
+	ErrCodeUsageLimitAlreadyExistsFault = "UsageLimitAlreadyExists"
+
+	// ErrCodeUsageLimitNotFoundFault for service response error code
+	// "UsageLimitNotFound".
+	//
+	// The usage limit identifier can't be found.
+	ErrCodeUsageLimitNotFoundFault = "UsageLimitNotFound"
 )

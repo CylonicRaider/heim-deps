@@ -22,12 +22,12 @@ import (
 	"os"
 	"time"
 
-	v3 "go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/pkg/report"
-
+	"github.com/cheggaaa/pb/v3"
 	"github.com/spf13/cobra"
 	"golang.org/x/time/rate"
-	"gopkg.in/cheggaaa/pb.v1"
+
+	v3 "go.etcd.io/etcd/client/v3"
+	"go.etcd.io/etcd/pkg/v3/report"
 )
 
 // txnPutCmd represents the txnPut command
@@ -55,9 +55,15 @@ func init() {
 	txnPutCmd.Flags().IntVar(&keySpaceSize, "key-space-size", 1, "Maximum possible keys")
 }
 
-func txnPutFunc(cmd *cobra.Command, args []string) {
+func txnPutFunc(_ *cobra.Command, _ []string) {
 	if keySpaceSize <= 0 {
 		fmt.Fprintf(os.Stderr, "expected positive --key-space-size, got (%v)", keySpaceSize)
+		os.Exit(1)
+	}
+
+	if txnPutOpsPerTxn > keySpaceSize {
+		fmt.Fprintf(os.Stderr, "expected --txn-ops no larger than --key-space-size, "+
+			"got txn-ops(%v) key-space-size(%v)\n", txnPutOpsPerTxn, keySpaceSize)
 		os.Exit(1)
 	}
 
@@ -70,7 +76,6 @@ func txnPutFunc(cmd *cobra.Command, args []string) {
 	k, v := make([]byte, keySize), string(mustRandBytes(valSize))
 
 	bar = pb.New(txnPutTotal)
-	bar.Format("Bom !")
 	bar.Start()
 
 	r := newReport()

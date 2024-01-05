@@ -1,3 +1,6 @@
+//go:build go1.7
+// +build go1.7
+
 package s3crypto
 
 import (
@@ -31,5 +34,34 @@ func TestDecodeMaterialDescription(t *testing.T) {
 	}
 	if !reflect.DeepEqual(expected, md) {
 		t.Error("expected material description to be equivalent, but received otherwise")
+	}
+}
+
+func TestMaterialDescription_Clone(t *testing.T) {
+	tests := map[string]struct {
+		md        MaterialDescription
+		wantClone MaterialDescription
+	}{
+		"it handles nil": {
+			md:        nil,
+			wantClone: nil,
+		},
+		"it copies all values": {
+			md: MaterialDescription{
+				"key1": aws.String("value1"),
+				"key2": aws.String("value2"),
+			},
+			wantClone: MaterialDescription{
+				"key1": aws.String("value1"),
+				"key2": aws.String("value2"),
+			},
+		},
+	}
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			if gotClone := tt.md.Clone(); !reflect.DeepEqual(gotClone, tt.wantClone) {
+				t.Errorf("Clone() = %v, want %v", gotClone, tt.wantClone)
+			}
+		})
 	}
 }

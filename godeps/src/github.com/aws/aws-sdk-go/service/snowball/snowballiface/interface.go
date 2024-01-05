@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Import/Export Snowball.
-//    func myFunc(svc snowballiface.SnowballAPI) bool {
-//        // Make svc.CancelCluster request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// Amazon Import/Export Snowball.
+//	func myFunc(svc snowballiface.SnowballAPI) bool {
+//	    // Make svc.CancelCluster request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := snowball.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := snowball.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSnowballClient struct {
-//        snowballiface.SnowballAPI
-//    }
-//    func (m *mockSnowballClient) CancelCluster(input *snowball.CancelClusterInput) (*snowball.CancelClusterOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockSnowballClient struct {
+//	    snowballiface.SnowballAPI
+//	}
+//	func (m *mockSnowballClient) CancelCluster(input *snowball.CancelClusterInput) (*snowball.CancelClusterOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSnowballClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockSnowballClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -80,6 +80,14 @@ type SnowballAPI interface {
 	CreateJobWithContext(aws.Context, *snowball.CreateJobInput, ...request.Option) (*snowball.CreateJobOutput, error)
 	CreateJobRequest(*snowball.CreateJobInput) (*request.Request, *snowball.CreateJobOutput)
 
+	CreateLongTermPricing(*snowball.CreateLongTermPricingInput) (*snowball.CreateLongTermPricingOutput, error)
+	CreateLongTermPricingWithContext(aws.Context, *snowball.CreateLongTermPricingInput, ...request.Option) (*snowball.CreateLongTermPricingOutput, error)
+	CreateLongTermPricingRequest(*snowball.CreateLongTermPricingInput) (*request.Request, *snowball.CreateLongTermPricingOutput)
+
+	CreateReturnShippingLabel(*snowball.CreateReturnShippingLabelInput) (*snowball.CreateReturnShippingLabelOutput, error)
+	CreateReturnShippingLabelWithContext(aws.Context, *snowball.CreateReturnShippingLabelInput, ...request.Option) (*snowball.CreateReturnShippingLabelOutput, error)
+	CreateReturnShippingLabelRequest(*snowball.CreateReturnShippingLabelInput) (*request.Request, *snowball.CreateReturnShippingLabelOutput)
+
 	DescribeAddress(*snowball.DescribeAddressInput) (*snowball.DescribeAddressOutput, error)
 	DescribeAddressWithContext(aws.Context, *snowball.DescribeAddressInput, ...request.Option) (*snowball.DescribeAddressOutput, error)
 	DescribeAddressRequest(*snowball.DescribeAddressInput) (*request.Request, *snowball.DescribeAddressOutput)
@@ -99,6 +107,10 @@ type SnowballAPI interface {
 	DescribeJobWithContext(aws.Context, *snowball.DescribeJobInput, ...request.Option) (*snowball.DescribeJobOutput, error)
 	DescribeJobRequest(*snowball.DescribeJobInput) (*request.Request, *snowball.DescribeJobOutput)
 
+	DescribeReturnShippingLabel(*snowball.DescribeReturnShippingLabelInput) (*snowball.DescribeReturnShippingLabelOutput, error)
+	DescribeReturnShippingLabelWithContext(aws.Context, *snowball.DescribeReturnShippingLabelInput, ...request.Option) (*snowball.DescribeReturnShippingLabelOutput, error)
+	DescribeReturnShippingLabelRequest(*snowball.DescribeReturnShippingLabelInput) (*request.Request, *snowball.DescribeReturnShippingLabelOutput)
+
 	GetJobManifest(*snowball.GetJobManifestInput) (*snowball.GetJobManifestOutput, error)
 	GetJobManifestWithContext(aws.Context, *snowball.GetJobManifestInput, ...request.Option) (*snowball.GetJobManifestOutput, error)
 	GetJobManifestRequest(*snowball.GetJobManifestInput) (*request.Request, *snowball.GetJobManifestOutput)
@@ -111,17 +123,30 @@ type SnowballAPI interface {
 	GetSnowballUsageWithContext(aws.Context, *snowball.GetSnowballUsageInput, ...request.Option) (*snowball.GetSnowballUsageOutput, error)
 	GetSnowballUsageRequest(*snowball.GetSnowballUsageInput) (*request.Request, *snowball.GetSnowballUsageOutput)
 
+	GetSoftwareUpdates(*snowball.GetSoftwareUpdatesInput) (*snowball.GetSoftwareUpdatesOutput, error)
+	GetSoftwareUpdatesWithContext(aws.Context, *snowball.GetSoftwareUpdatesInput, ...request.Option) (*snowball.GetSoftwareUpdatesOutput, error)
+	GetSoftwareUpdatesRequest(*snowball.GetSoftwareUpdatesInput) (*request.Request, *snowball.GetSoftwareUpdatesOutput)
+
 	ListClusterJobs(*snowball.ListClusterJobsInput) (*snowball.ListClusterJobsOutput, error)
 	ListClusterJobsWithContext(aws.Context, *snowball.ListClusterJobsInput, ...request.Option) (*snowball.ListClusterJobsOutput, error)
 	ListClusterJobsRequest(*snowball.ListClusterJobsInput) (*request.Request, *snowball.ListClusterJobsOutput)
+
+	ListClusterJobsPages(*snowball.ListClusterJobsInput, func(*snowball.ListClusterJobsOutput, bool) bool) error
+	ListClusterJobsPagesWithContext(aws.Context, *snowball.ListClusterJobsInput, func(*snowball.ListClusterJobsOutput, bool) bool, ...request.Option) error
 
 	ListClusters(*snowball.ListClustersInput) (*snowball.ListClustersOutput, error)
 	ListClustersWithContext(aws.Context, *snowball.ListClustersInput, ...request.Option) (*snowball.ListClustersOutput, error)
 	ListClustersRequest(*snowball.ListClustersInput) (*request.Request, *snowball.ListClustersOutput)
 
+	ListClustersPages(*snowball.ListClustersInput, func(*snowball.ListClustersOutput, bool) bool) error
+	ListClustersPagesWithContext(aws.Context, *snowball.ListClustersInput, func(*snowball.ListClustersOutput, bool) bool, ...request.Option) error
+
 	ListCompatibleImages(*snowball.ListCompatibleImagesInput) (*snowball.ListCompatibleImagesOutput, error)
 	ListCompatibleImagesWithContext(aws.Context, *snowball.ListCompatibleImagesInput, ...request.Option) (*snowball.ListCompatibleImagesOutput, error)
 	ListCompatibleImagesRequest(*snowball.ListCompatibleImagesInput) (*request.Request, *snowball.ListCompatibleImagesOutput)
+
+	ListCompatibleImagesPages(*snowball.ListCompatibleImagesInput, func(*snowball.ListCompatibleImagesOutput, bool) bool) error
+	ListCompatibleImagesPagesWithContext(aws.Context, *snowball.ListCompatibleImagesInput, func(*snowball.ListCompatibleImagesOutput, bool) bool, ...request.Option) error
 
 	ListJobs(*snowball.ListJobsInput) (*snowball.ListJobsOutput, error)
 	ListJobsWithContext(aws.Context, *snowball.ListJobsInput, ...request.Option) (*snowball.ListJobsOutput, error)
@@ -130,6 +155,24 @@ type SnowballAPI interface {
 	ListJobsPages(*snowball.ListJobsInput, func(*snowball.ListJobsOutput, bool) bool) error
 	ListJobsPagesWithContext(aws.Context, *snowball.ListJobsInput, func(*snowball.ListJobsOutput, bool) bool, ...request.Option) error
 
+	ListLongTermPricing(*snowball.ListLongTermPricingInput) (*snowball.ListLongTermPricingOutput, error)
+	ListLongTermPricingWithContext(aws.Context, *snowball.ListLongTermPricingInput, ...request.Option) (*snowball.ListLongTermPricingOutput, error)
+	ListLongTermPricingRequest(*snowball.ListLongTermPricingInput) (*request.Request, *snowball.ListLongTermPricingOutput)
+
+	ListLongTermPricingPages(*snowball.ListLongTermPricingInput, func(*snowball.ListLongTermPricingOutput, bool) bool) error
+	ListLongTermPricingPagesWithContext(aws.Context, *snowball.ListLongTermPricingInput, func(*snowball.ListLongTermPricingOutput, bool) bool, ...request.Option) error
+
+	ListPickupLocations(*snowball.ListPickupLocationsInput) (*snowball.ListPickupLocationsOutput, error)
+	ListPickupLocationsWithContext(aws.Context, *snowball.ListPickupLocationsInput, ...request.Option) (*snowball.ListPickupLocationsOutput, error)
+	ListPickupLocationsRequest(*snowball.ListPickupLocationsInput) (*request.Request, *snowball.ListPickupLocationsOutput)
+
+	ListPickupLocationsPages(*snowball.ListPickupLocationsInput, func(*snowball.ListPickupLocationsOutput, bool) bool) error
+	ListPickupLocationsPagesWithContext(aws.Context, *snowball.ListPickupLocationsInput, func(*snowball.ListPickupLocationsOutput, bool) bool, ...request.Option) error
+
+	ListServiceVersions(*snowball.ListServiceVersionsInput) (*snowball.ListServiceVersionsOutput, error)
+	ListServiceVersionsWithContext(aws.Context, *snowball.ListServiceVersionsInput, ...request.Option) (*snowball.ListServiceVersionsOutput, error)
+	ListServiceVersionsRequest(*snowball.ListServiceVersionsInput) (*request.Request, *snowball.ListServiceVersionsOutput)
+
 	UpdateCluster(*snowball.UpdateClusterInput) (*snowball.UpdateClusterOutput, error)
 	UpdateClusterWithContext(aws.Context, *snowball.UpdateClusterInput, ...request.Option) (*snowball.UpdateClusterOutput, error)
 	UpdateClusterRequest(*snowball.UpdateClusterInput) (*request.Request, *snowball.UpdateClusterOutput)
@@ -137,6 +180,14 @@ type SnowballAPI interface {
 	UpdateJob(*snowball.UpdateJobInput) (*snowball.UpdateJobOutput, error)
 	UpdateJobWithContext(aws.Context, *snowball.UpdateJobInput, ...request.Option) (*snowball.UpdateJobOutput, error)
 	UpdateJobRequest(*snowball.UpdateJobInput) (*request.Request, *snowball.UpdateJobOutput)
+
+	UpdateJobShipmentState(*snowball.UpdateJobShipmentStateInput) (*snowball.UpdateJobShipmentStateOutput, error)
+	UpdateJobShipmentStateWithContext(aws.Context, *snowball.UpdateJobShipmentStateInput, ...request.Option) (*snowball.UpdateJobShipmentStateOutput, error)
+	UpdateJobShipmentStateRequest(*snowball.UpdateJobShipmentStateInput) (*request.Request, *snowball.UpdateJobShipmentStateOutput)
+
+	UpdateLongTermPricing(*snowball.UpdateLongTermPricingInput) (*snowball.UpdateLongTermPricingOutput, error)
+	UpdateLongTermPricingWithContext(aws.Context, *snowball.UpdateLongTermPricingInput, ...request.Option) (*snowball.UpdateLongTermPricingOutput, error)
+	UpdateLongTermPricingRequest(*snowball.UpdateLongTermPricingInput) (*request.Request, *snowball.UpdateLongTermPricingOutput)
 }
 
 var _ SnowballAPI = (*snowball.Snowball)(nil)

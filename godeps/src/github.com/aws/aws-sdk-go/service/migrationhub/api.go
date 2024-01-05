@@ -29,14 +29,13 @@ const opAssociateCreatedArtifact = "AssociateCreatedArtifact"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateCreatedArtifactRequest method.
+//	req, resp := client.AssociateCreatedArtifactRequest(params)
 //
-//    // Example sending a request using the AssociateCreatedArtifactRequest method.
-//    req, resp := client.AssociateCreatedArtifactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
 func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifactInput) (req *request.Request, output *AssociateCreatedArtifactOutput) {
@@ -62,15 +61,15 @@ func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedAr
 // the migration, with the migration task performed by a migration tool. This
 // API has the following traits:
 //
-//    * Migration tools can call the AssociateCreatedArtifact operation to indicate
-//    which AWS artifact is associated with a migration task.
+//   - Migration tools can call the AssociateCreatedArtifact operation to indicate
+//     which AWS artifact is associated with a migration task.
 //
-//    * The created artifact name must be provided in ARN (Amazon Resource Name)
-//    format which will contain information about type and region; for example:
-//    arn:aws:ec2:us-east-1:488216288981:image/ami-6d0ba87b.
+//   - The created artifact name must be provided in ARN (Amazon Resource Name)
+//     format which will contain information about type and region; for example:
+//     arn:aws:ec2:us-east-1:488216288981:image/ami-6d0ba87b.
 //
-//    * Examples of the AWS resource behind the created artifact are, AMI's,
-//    EC2 instance, or DMS endpoint, etc.
+//   - Examples of the AWS resource behind the created artifact are, AMI's,
+//     EC2 instance, or DMS endpoint, etc.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -79,34 +78,42 @@ func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedAr
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation AssociateCreatedArtifact for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
 func (c *MigrationHub) AssociateCreatedArtifact(input *AssociateCreatedArtifactInput) (*AssociateCreatedArtifactOutput, error) {
@@ -146,14 +153,13 @@ const opAssociateDiscoveredResource = "AssociateDiscoveredResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateDiscoveredResourceRequest method.
+//	req, resp := client.AssociateDiscoveredResourceRequest(params)
 //
-//    // Example sending a request using the AssociateDiscoveredResourceRequest method.
-//    req, resp := client.AssociateDiscoveredResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResource
 func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscoveredResourceInput) (req *request.Request, output *AssociateDiscoveredResourceOutput) {
@@ -175,8 +181,8 @@ func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscov
 
 // AssociateDiscoveredResource API operation for AWS Migration Hub.
 //
-// Associates a discovered resource ID from Application Discovery Service (ADS)
-// with a migration task.
+// Associates a discovered resource ID from Application Discovery Service with
+// a migration task.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -185,39 +191,47 @@ func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscov
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation AssociateDiscoveredResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodePolicyErrorException "PolicyErrorException"
-//   Exception raised when there are problems accessing ADS (Application Discovery
-//   Service); most likely due to a misconfigured policy or the migrationhub-discovery
-//   role is missing or not configured correctly.
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - PolicyErrorException
+//     Exception raised when there are problems accessing Application Discovery
+//     Service (Application Discovery Service); most likely due to a misconfigured
+//     policy or the migrationhub-discovery role is missing or not configured correctly.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResource
 func (c *MigrationHub) AssociateDiscoveredResource(input *AssociateDiscoveredResourceInput) (*AssociateDiscoveredResourceOutput, error) {
@@ -257,14 +271,13 @@ const opCreateProgressUpdateStream = "CreateProgressUpdateStream"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateProgressUpdateStreamRequest method.
+//	req, resp := client.CreateProgressUpdateStreamRequest(params)
 //
-//    // Example sending a request using the CreateProgressUpdateStreamRequest method.
-//    req, resp := client.CreateProgressUpdateStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
 func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateStreamInput) (req *request.Request, output *CreateProgressUpdateStreamOutput) {
@@ -299,29 +312,36 @@ func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUp
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation CreateProgressUpdateStream for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
+//
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
 func (c *MigrationHub) CreateProgressUpdateStream(input *CreateProgressUpdateStreamInput) (*CreateProgressUpdateStreamOutput, error) {
@@ -361,14 +381,13 @@ const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteProgressUpdateStreamRequest method.
+//	req, resp := client.DeleteProgressUpdateStreamRequest(params)
 //
-//    // Example sending a request using the DeleteProgressUpdateStreamRequest method.
-//    req, resp := client.DeleteProgressUpdateStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
 func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateStreamInput) (req *request.Request, output *DeleteProgressUpdateStreamOutput) {
@@ -394,25 +413,25 @@ func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUp
 // created as an AWS resource used for access control. This API has the following
 // traits:
 //
-//    * The only parameter needed for DeleteProgressUpdateStream is the stream
-//    name (same as a CreateProgressUpdateStream call).
+//   - The only parameter needed for DeleteProgressUpdateStream is the stream
+//     name (same as a CreateProgressUpdateStream call).
 //
-//    * The call will return, and a background process will asynchronously delete
-//    the stream and all of its resources (tasks, associated resources, resource
-//    attributes, created artifacts).
+//   - The call will return, and a background process will asynchronously delete
+//     the stream and all of its resources (tasks, associated resources, resource
+//     attributes, created artifacts).
 //
-//    * If the stream takes time to be deleted, it might still show up on a
-//    ListProgressUpdateStreams call.
+//   - If the stream takes time to be deleted, it might still show up on a
+//     ListProgressUpdateStreams call.
 //
-//    * CreateProgressUpdateStream, ImportMigrationTask, NotifyMigrationTaskState,
-//    and all Associate[*] APIs realted to the tasks belonging to the stream
-//    will throw "InvalidInputException" if the stream of the same name is in
-//    the process of being deleted.
+//   - CreateProgressUpdateStream, ImportMigrationTask, NotifyMigrationTaskState,
+//     and all Associate[*] APIs related to the tasks belonging to the stream
+//     will throw "InvalidInputException" if the stream of the same name is in
+//     the process of being deleted.
 //
-//    * Once the stream and all of its resources are deleted, CreateProgressUpdateStream
-//    for a stream of the same name will succeed, and that stream will be an
-//    entirely new logical resource (without any resources associated with the
-//    old stream).
+//   - Once the stream and all of its resources are deleted, CreateProgressUpdateStream
+//     for a stream of the same name will succeed, and that stream will be an
+//     entirely new logical resource (without any resources associated with the
+//     old stream).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -421,34 +440,42 @@ func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUp
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation DeleteProgressUpdateStream for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
 func (c *MigrationHub) DeleteProgressUpdateStream(input *DeleteProgressUpdateStreamInput) (*DeleteProgressUpdateStreamOutput, error) {
@@ -488,14 +515,13 @@ const opDescribeApplicationState = "DescribeApplicationState"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeApplicationStateRequest method.
+//	req, resp := client.DescribeApplicationStateRequest(params)
 //
-//    // Example sending a request using the DescribeApplicationStateRequest method.
-//    req, resp := client.DescribeApplicationStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
 func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicationStateInput) (req *request.Request, output *DescribeApplicationStateOutput) {
@@ -525,31 +551,39 @@ func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicatio
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation DescribeApplicationState for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodePolicyErrorException "PolicyErrorException"
-//   Exception raised when there are problems accessing ADS (Application Discovery
-//   Service); most likely due to a misconfigured policy or the migrationhub-discovery
-//   role is missing or not configured correctly.
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - PolicyErrorException
+//     Exception raised when there are problems accessing Application Discovery
+//     Service (Application Discovery Service); most likely due to a misconfigured
+//     policy or the migrationhub-discovery role is missing or not configured correctly.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
 func (c *MigrationHub) DescribeApplicationState(input *DescribeApplicationStateInput) (*DescribeApplicationStateOutput, error) {
@@ -589,14 +623,13 @@ const opDescribeMigrationTask = "DescribeMigrationTask"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeMigrationTaskRequest method.
+//	req, resp := client.DescribeMigrationTaskRequest(params)
 //
-//    // Example sending a request using the DescribeMigrationTaskRequest method.
-//    req, resp := client.DescribeMigrationTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
 func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput) (req *request.Request, output *DescribeMigrationTaskOutput) {
@@ -626,26 +659,34 @@ func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTask
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation DescribeMigrationTask for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
 func (c *MigrationHub) DescribeMigrationTask(input *DescribeMigrationTaskInput) (*DescribeMigrationTaskOutput, error) {
@@ -685,14 +726,13 @@ const opDisassociateCreatedArtifact = "DisassociateCreatedArtifact"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateCreatedArtifactRequest method.
+//	req, resp := client.DisassociateCreatedArtifactRequest(params)
 //
-//    // Example sending a request using the DisassociateCreatedArtifactRequest method.
-//    req, resp := client.DisassociateCreatedArtifactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
 func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCreatedArtifactInput) (req *request.Request, output *DisassociateCreatedArtifactOutput) {
@@ -718,15 +758,15 @@ func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCre
 // performed by a migration tool that was previously associated. This API has
 // the following traits:
 //
-//    * A migration user can call the DisassociateCreatedArtifacts operation
-//    to disassociate a created AWS Artifact from a migration task.
+//   - A migration user can call the DisassociateCreatedArtifacts operation
+//     to disassociate a created AWS Artifact from a migration task.
 //
-//    * The created artifact name must be provided in ARN (Amazon Resource Name)
-//    format which will contain information about type and region; for example:
-//    arn:aws:ec2:us-east-1:488216288981:image/ami-6d0ba87b.
+//   - The created artifact name must be provided in ARN (Amazon Resource Name)
+//     format which will contain information about type and region; for example:
+//     arn:aws:ec2:us-east-1:488216288981:image/ami-6d0ba87b.
 //
-//    * Examples of the AWS resource behind the created artifact are, AMI's,
-//    EC2 instance, or RDS instance, etc.
+//   - Examples of the AWS resource behind the created artifact are, AMI's,
+//     EC2 instance, or RDS instance, etc.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -735,34 +775,42 @@ func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCre
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation DisassociateCreatedArtifact for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
 func (c *MigrationHub) DisassociateCreatedArtifact(input *DisassociateCreatedArtifactInput) (*DisassociateCreatedArtifactOutput, error) {
@@ -802,14 +850,13 @@ const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateDiscoveredResourceRequest method.
+//	req, resp := client.DisassociateDiscoveredResourceRequest(params)
 //
-//    // Example sending a request using the DisassociateDiscoveredResourceRequest method.
-//    req, resp := client.DisassociateDiscoveredResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
 func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *DisassociateDiscoveredResourceInput) (req *request.Request, output *DisassociateDiscoveredResourceOutput) {
@@ -831,8 +878,8 @@ func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *Disassociate
 
 // DisassociateDiscoveredResource API operation for AWS Migration Hub.
 //
-// Disassociate an Application Discovery Service (ADS) discovered resource from
-// a migration task.
+// Disassociate an Application Discovery Service discovered resource from a
+// migration task.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -841,34 +888,42 @@ func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *Disassociate
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation DisassociateDiscoveredResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
 func (c *MigrationHub) DisassociateDiscoveredResource(input *DisassociateDiscoveredResourceInput) (*DisassociateDiscoveredResourceOutput, error) {
@@ -908,14 +963,13 @@ const opImportMigrationTask = "ImportMigrationTask"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ImportMigrationTaskRequest method.
+//	req, resp := client.ImportMigrationTaskRequest(params)
 //
-//    // Example sending a request using the ImportMigrationTaskRequest method.
-//    req, resp := client.ImportMigrationTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTask
 func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInput) (req *request.Request, output *ImportMigrationTaskOutput) {
@@ -951,34 +1005,42 @@ func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInpu
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation ImportMigrationTask for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTask
 func (c *MigrationHub) ImportMigrationTask(input *ImportMigrationTaskInput) (*ImportMigrationTaskOutput, error) {
@@ -1002,6 +1064,162 @@ func (c *MigrationHub) ImportMigrationTaskWithContext(ctx aws.Context, input *Im
 	return out, req.Send()
 }
 
+const opListApplicationStates = "ListApplicationStates"
+
+// ListApplicationStatesRequest generates a "aws/request.Request" representing the
+// client's request for the ListApplicationStates operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListApplicationStates for more information on using the ListApplicationStates
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListApplicationStatesRequest method.
+//	req, resp := client.ListApplicationStatesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListApplicationStates
+func (c *MigrationHub) ListApplicationStatesRequest(input *ListApplicationStatesInput) (req *request.Request, output *ListApplicationStatesOutput) {
+	op := &request.Operation{
+		Name:       opListApplicationStates,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListApplicationStatesInput{}
+	}
+
+	output = &ListApplicationStatesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListApplicationStates API operation for AWS Migration Hub.
+//
+// Lists all the migration statuses for your applications. If you use the optional
+// ApplicationIds parameter, only the migration statuses for those applications
+// will be returned.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Migration Hub's
+// API operation ListApplicationStates for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
+//
+//   - ThrottlingException
+//     The request was denied due to request throttling.
+//
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
+//
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListApplicationStates
+func (c *MigrationHub) ListApplicationStates(input *ListApplicationStatesInput) (*ListApplicationStatesOutput, error) {
+	req, out := c.ListApplicationStatesRequest(input)
+	return out, req.Send()
+}
+
+// ListApplicationStatesWithContext is the same as ListApplicationStates with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListApplicationStates for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *MigrationHub) ListApplicationStatesWithContext(ctx aws.Context, input *ListApplicationStatesInput, opts ...request.Option) (*ListApplicationStatesOutput, error) {
+	req, out := c.ListApplicationStatesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListApplicationStatesPages iterates over the pages of a ListApplicationStates operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListApplicationStates method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListApplicationStates operation.
+//	pageNum := 0
+//	err := client.ListApplicationStatesPages(params,
+//	    func(page *migrationhub.ListApplicationStatesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *MigrationHub) ListApplicationStatesPages(input *ListApplicationStatesInput, fn func(*ListApplicationStatesOutput, bool) bool) error {
+	return c.ListApplicationStatesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListApplicationStatesPagesWithContext same as ListApplicationStatesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *MigrationHub) ListApplicationStatesPagesWithContext(ctx aws.Context, input *ListApplicationStatesInput, fn func(*ListApplicationStatesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListApplicationStatesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListApplicationStatesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListApplicationStatesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListCreatedArtifacts = "ListCreatedArtifacts"
 
 // ListCreatedArtifactsRequest generates a "aws/request.Request" representing the
@@ -1018,14 +1236,13 @@ const opListCreatedArtifacts = "ListCreatedArtifacts"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListCreatedArtifactsRequest method.
+//	req, resp := client.ListCreatedArtifactsRequest(params)
 //
-//    // Example sending a request using the ListCreatedArtifactsRequest method.
-//    req, resp := client.ListCreatedArtifactsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
 func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) (req *request.Request, output *ListCreatedArtifactsOutput) {
@@ -1033,6 +1250,12 @@ func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsIn
 		Name:       opListCreatedArtifacts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1049,12 +1272,12 @@ func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsIn
 // Lists the created artifacts attached to a given migration task in an update
 // stream. This API has the following traits:
 //
-//    * Gets the list of the created artifacts while migration is taking place.
+//   - Gets the list of the created artifacts while migration is taking place.
 //
-//    * Shows the artifacts created by the migration tool that was associated
-//    by the AssociateCreatedArtifact API.
+//   - Shows the artifacts created by the migration tool that was associated
+//     by the AssociateCreatedArtifact API.
 //
-//    * Lists created artifacts in a paginated interface.
+//   - Lists created artifacts in a paginated interface.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1063,26 +1286,34 @@ func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsIn
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation ListCreatedArtifacts for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
 func (c *MigrationHub) ListCreatedArtifacts(input *ListCreatedArtifactsInput) (*ListCreatedArtifactsOutput, error) {
@@ -1106,6 +1337,57 @@ func (c *MigrationHub) ListCreatedArtifactsWithContext(ctx aws.Context, input *L
 	return out, req.Send()
 }
 
+// ListCreatedArtifactsPages iterates over the pages of a ListCreatedArtifacts operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListCreatedArtifacts method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListCreatedArtifacts operation.
+//	pageNum := 0
+//	err := client.ListCreatedArtifactsPages(params,
+//	    func(page *migrationhub.ListCreatedArtifactsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *MigrationHub) ListCreatedArtifactsPages(input *ListCreatedArtifactsInput, fn func(*ListCreatedArtifactsOutput, bool) bool) error {
+	return c.ListCreatedArtifactsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListCreatedArtifactsPagesWithContext same as ListCreatedArtifactsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *MigrationHub) ListCreatedArtifactsPagesWithContext(ctx aws.Context, input *ListCreatedArtifactsInput, fn func(*ListCreatedArtifactsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListCreatedArtifactsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListCreatedArtifactsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListCreatedArtifactsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListDiscoveredResources = "ListDiscoveredResources"
 
 // ListDiscoveredResourcesRequest generates a "aws/request.Request" representing the
@@ -1122,14 +1404,13 @@ const opListDiscoveredResources = "ListDiscoveredResources"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDiscoveredResourcesRequest method.
+//	req, resp := client.ListDiscoveredResourcesRequest(params)
 //
-//    // Example sending a request using the ListDiscoveredResourcesRequest method.
-//    req, resp := client.ListDiscoveredResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResources
 func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) (req *request.Request, output *ListDiscoveredResourcesOutput) {
@@ -1137,6 +1418,12 @@ func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResou
 		Name:       opListDiscoveredResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1159,26 +1446,34 @@ func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResou
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation ListDiscoveredResources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResources
 func (c *MigrationHub) ListDiscoveredResources(input *ListDiscoveredResourcesInput) (*ListDiscoveredResourcesOutput, error) {
@@ -1202,6 +1497,57 @@ func (c *MigrationHub) ListDiscoveredResourcesWithContext(ctx aws.Context, input
 	return out, req.Send()
 }
 
+// ListDiscoveredResourcesPages iterates over the pages of a ListDiscoveredResources operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListDiscoveredResources method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListDiscoveredResources operation.
+//	pageNum := 0
+//	err := client.ListDiscoveredResourcesPages(params,
+//	    func(page *migrationhub.ListDiscoveredResourcesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *MigrationHub) ListDiscoveredResourcesPages(input *ListDiscoveredResourcesInput, fn func(*ListDiscoveredResourcesOutput, bool) bool) error {
+	return c.ListDiscoveredResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListDiscoveredResourcesPagesWithContext same as ListDiscoveredResourcesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *MigrationHub) ListDiscoveredResourcesPagesWithContext(ctx aws.Context, input *ListDiscoveredResourcesInput, fn func(*ListDiscoveredResourcesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListDiscoveredResourcesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListDiscoveredResourcesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListDiscoveredResourcesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListMigrationTasks = "ListMigrationTasks"
 
 // ListMigrationTasksRequest generates a "aws/request.Request" representing the
@@ -1218,14 +1564,13 @@ const opListMigrationTasks = "ListMigrationTasks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListMigrationTasksRequest method.
+//	req, resp := client.ListMigrationTasksRequest(params)
 //
-//    // Example sending a request using the ListMigrationTasksRequest method.
-//    req, resp := client.ListMigrationTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasks
 func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput) (req *request.Request, output *ListMigrationTasksOutput) {
@@ -1233,6 +1578,12 @@ func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput)
 		Name:       opListMigrationTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1249,12 +1600,12 @@ func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput)
 // Lists all, or filtered by resource name, migration tasks associated with
 // the user account making this call. This API has the following traits:
 //
-//    * Can show a summary list of the most recent migration tasks.
+//   - Can show a summary list of the most recent migration tasks.
 //
-//    * Can show a summary list of migration tasks associated with a given discovered
-//    resource.
+//   - Can show a summary list of migration tasks associated with a given discovered
+//     resource.
 //
-//    * Lists migration tasks in a paginated interface.
+//   - Lists migration tasks in a paginated interface.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1263,31 +1614,39 @@ func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput)
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation ListMigrationTasks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodePolicyErrorException "PolicyErrorException"
-//   Exception raised when there are problems accessing ADS (Application Discovery
-//   Service); most likely due to a misconfigured policy or the migrationhub-discovery
-//   role is missing or not configured correctly.
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - PolicyErrorException
+//     Exception raised when there are problems accessing Application Discovery
+//     Service (Application Discovery Service); most likely due to a misconfigured
+//     policy or the migrationhub-discovery role is missing or not configured correctly.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasks
 func (c *MigrationHub) ListMigrationTasks(input *ListMigrationTasksInput) (*ListMigrationTasksOutput, error) {
@@ -1311,6 +1670,57 @@ func (c *MigrationHub) ListMigrationTasksWithContext(ctx aws.Context, input *Lis
 	return out, req.Send()
 }
 
+// ListMigrationTasksPages iterates over the pages of a ListMigrationTasks operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListMigrationTasks method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListMigrationTasks operation.
+//	pageNum := 0
+//	err := client.ListMigrationTasksPages(params,
+//	    func(page *migrationhub.ListMigrationTasksOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *MigrationHub) ListMigrationTasksPages(input *ListMigrationTasksInput, fn func(*ListMigrationTasksOutput, bool) bool) error {
+	return c.ListMigrationTasksPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListMigrationTasksPagesWithContext same as ListMigrationTasksPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *MigrationHub) ListMigrationTasksPagesWithContext(ctx aws.Context, input *ListMigrationTasksInput, fn func(*ListMigrationTasksOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListMigrationTasksInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListMigrationTasksRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListMigrationTasksOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListProgressUpdateStreams = "ListProgressUpdateStreams"
 
 // ListProgressUpdateStreamsRequest generates a "aws/request.Request" representing the
@@ -1327,14 +1737,13 @@ const opListProgressUpdateStreams = "ListProgressUpdateStreams"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListProgressUpdateStreamsRequest method.
+//	req, resp := client.ListProgressUpdateStreamsRequest(params)
 //
-//    // Example sending a request using the ListProgressUpdateStreamsRequest method.
-//    req, resp := client.ListProgressUpdateStreamsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreams
 func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdateStreamsInput) (req *request.Request, output *ListProgressUpdateStreamsOutput) {
@@ -1342,6 +1751,12 @@ func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdat
 		Name:       opListProgressUpdateStreams,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1365,21 +1780,28 @@ func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdat
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation ListProgressUpdateStreams for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
+//
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreams
 func (c *MigrationHub) ListProgressUpdateStreams(input *ListProgressUpdateStreamsInput) (*ListProgressUpdateStreamsOutput, error) {
@@ -1403,6 +1825,57 @@ func (c *MigrationHub) ListProgressUpdateStreamsWithContext(ctx aws.Context, inp
 	return out, req.Send()
 }
 
+// ListProgressUpdateStreamsPages iterates over the pages of a ListProgressUpdateStreams operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListProgressUpdateStreams method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListProgressUpdateStreams operation.
+//	pageNum := 0
+//	err := client.ListProgressUpdateStreamsPages(params,
+//	    func(page *migrationhub.ListProgressUpdateStreamsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *MigrationHub) ListProgressUpdateStreamsPages(input *ListProgressUpdateStreamsInput, fn func(*ListProgressUpdateStreamsOutput, bool) bool) error {
+	return c.ListProgressUpdateStreamsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListProgressUpdateStreamsPagesWithContext same as ListProgressUpdateStreamsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *MigrationHub) ListProgressUpdateStreamsPagesWithContext(ctx aws.Context, input *ListProgressUpdateStreamsInput, fn func(*ListProgressUpdateStreamsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListProgressUpdateStreamsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListProgressUpdateStreamsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListProgressUpdateStreamsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opNotifyApplicationState = "NotifyApplicationState"
 
 // NotifyApplicationStateRequest generates a "aws/request.Request" representing the
@@ -1419,14 +1892,13 @@ const opNotifyApplicationState = "NotifyApplicationState"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the NotifyApplicationStateRequest method.
+//	req, resp := client.NotifyApplicationStateRequest(params)
 //
-//    // Example sending a request using the NotifyApplicationStateRequest method.
-//    req, resp := client.NotifyApplicationStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
 func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationStateInput) (req *request.Request, output *NotifyApplicationStateOutput) {
@@ -1459,39 +1931,47 @@ func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationSta
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation NotifyApplicationState for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodePolicyErrorException "PolicyErrorException"
-//   Exception raised when there are problems accessing ADS (Application Discovery
-//   Service); most likely due to a misconfigured policy or the migrationhub-discovery
-//   role is missing or not configured correctly.
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - PolicyErrorException
+//     Exception raised when there are problems accessing Application Discovery
+//     Service (Application Discovery Service); most likely due to a misconfigured
+//     policy or the migrationhub-discovery role is missing or not configured correctly.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
 func (c *MigrationHub) NotifyApplicationState(input *NotifyApplicationStateInput) (*NotifyApplicationStateOutput, error) {
@@ -1531,14 +2011,13 @@ const opNotifyMigrationTaskState = "NotifyMigrationTaskState"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the NotifyMigrationTaskStateRequest method.
+//	req, resp := client.NotifyMigrationTaskStateRequest(params)
 //
-//    // Example sending a request using the NotifyMigrationTaskStateRequest method.
-//    req, resp := client.NotifyMigrationTaskStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
 func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTaskStateInput) (req *request.Request, output *NotifyMigrationTaskStateOutput) {
@@ -1563,13 +2042,13 @@ func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTas
 // Notifies Migration Hub of the current status, progress, or other detail regarding
 // a migration task. This API has the following traits:
 //
-//    * Migration tools will call the NotifyMigrationTaskState API to share
-//    the latest progress and status.
+//   - Migration tools will call the NotifyMigrationTaskState API to share
+//     the latest progress and status.
 //
-//    * MigrationTaskName is used for addressing updates to the correct target.
+//   - MigrationTaskName is used for addressing updates to the correct target.
 //
-//    * ProgressUpdateStream is used for access control and to provide a namespace
-//    for each migration tool.
+//   - ProgressUpdateStream is used for access control and to provide a namespace
+//     for each migration tool.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1578,34 +2057,42 @@ func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTas
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation NotifyMigrationTaskState for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
 func (c *MigrationHub) NotifyMigrationTaskState(input *NotifyMigrationTaskStateInput) (*NotifyMigrationTaskStateOutput, error) {
@@ -1645,14 +2132,13 @@ const opPutResourceAttributes = "PutResourceAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutResourceAttributesRequest method.
+//	req, resp := client.PutResourceAttributesRequest(params)
 //
-//    // Example sending a request using the PutResourceAttributesRequest method.
-//    req, resp := client.PutResourceAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
 func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributesInput) (req *request.Request, output *PutResourceAttributesOutput) {
@@ -1675,18 +2161,18 @@ func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributes
 // PutResourceAttributes API operation for AWS Migration Hub.
 //
 // Provides identifying details of the resource being migrated so that it can
-// be associated in the Application Discovery Service (ADS)'s repository. This
-// association occurs asynchronously after PutResourceAttributes returns.
+// be associated in the Application Discovery Service repository. This association
+// occurs asynchronously after PutResourceAttributes returns.
 //
-// Keep in mind that subsequent calls to PutResourceAttributes will override
-// previously stored attributes. For example, if it is first called with a MAC
-// address, but later, it is desired to add an IP address, it will then be required
-// to call it with both the IP and MAC addresses to prevent overiding the MAC
-// address.
+//   - Keep in mind that subsequent calls to PutResourceAttributes will override
+//     previously stored attributes. For example, if it is first called with
+//     a MAC address, but later, it is desired to add an IP address, it will
+//     then be required to call it with both the IP and MAC addresses to prevent
+//     overriding the MAC address.
 //
-// Note the instructions regarding the special use case of the ResourceAttributeList
-// (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList)
-// parameter when specifying any "VM" related value.
+//   - Note the instructions regarding the special use case of the ResourceAttributeList
+//     (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList)
+//     parameter when specifying any "VM" related value.
 //
 // Because this is an asynchronous call, it will always return 200, whether
 // an association occurs or not. To confirm if an association was found based
@@ -1699,34 +2185,42 @@ func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributes
 // See the AWS API reference guide for AWS Migration Hub's
 // API operation PutResourceAttributes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - AccessDeniedException
+//     You do not have sufficient access to perform this action.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Exception raised when there is an internal, configuration, or dependency
-//   error encountered.
+//   - ThrottlingException
+//     The request was denied due to request throttling.
 //
-//   * ErrCodeDryRunOperation "DryRunOperation"
-//   Exception raised to indicate a successfully authorized action when the DryRun
-//   flag is set to "true".
+//   - InternalServerError
+//     Exception raised when an internal, configuration, or dependency error is
+//     encountered.
 //
-//   * ErrCodeUnauthorizedOperation "UnauthorizedOperation"
-//   Exception raised to indicate a request was not authorized when the DryRun
-//   flag is set to "true".
+//   - ServiceUnavailableException
+//     Exception raised when there is an internal, configuration, or dependency
+//     error encountered.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Exception raised when the provided input violates a policy constraint or
-//   is entered in the wrong format or data type.
+//   - DryRunOperation
+//     Exception raised to indicate a successfully authorized action when the DryRun
+//     flag is set to "true".
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Exception raised when the request references a resource (ADS configuration,
-//   update stream, migration task, etc.) that does not exist in ADS (Application
-//   Discovery Service) or in Migration Hub's repository.
+//   - UnauthorizedOperation
+//     Exception raised to indicate a request was not authorized when the DryRun
+//     flag is set to "true".
+//
+//   - InvalidInputException
+//     Exception raised when the provided input violates a policy constraint or
+//     is entered in the wrong format or data type.
+//
+//   - ResourceNotFoundException
+//     Exception raised when the request references a resource (Application Discovery
+//     Service configuration, update stream, migration task, etc.) that does not
+//     exist in Application Discovery Service (Application Discovery Service) or
+//     in Migration Hub's repository.
+//
+//   - HomeRegionNotSetException
+//     The home region is not set. Set the home region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
 func (c *MigrationHub) PutResourceAttributes(input *PutResourceAttributesInput) (*PutResourceAttributesOutput, error) {
@@ -1750,6 +2244,122 @@ func (c *MigrationHub) PutResourceAttributesWithContext(ctx aws.Context, input *
 	return out, req.Send()
 }
 
+// You do not have sufficient access to perform this action.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The state of an application discovered through Migration Hub import, the
+// AWS Agentless Discovery Connector, or the AWS Application Discovery Agent.
+type ApplicationState struct {
+	_ struct{} `type:"structure"`
+
+	// The configurationId from the Application Discovery Service that uniquely
+	// identifies an application.
+	ApplicationId *string `min:"1" type:"string"`
+
+	// The current status of an application.
+	ApplicationStatus *string `type:"string" enum:"ApplicationStatus"`
+
+	// The timestamp when the application status was last updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationState) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationState) GoString() string {
+	return s.String()
+}
+
+// SetApplicationId sets the ApplicationId field's value.
+func (s *ApplicationState) SetApplicationId(v string) *ApplicationState {
+	s.ApplicationId = &v
+	return s
+}
+
+// SetApplicationStatus sets the ApplicationStatus field's value.
+func (s *ApplicationState) SetApplicationStatus(v string) *ApplicationState {
+	s.ApplicationStatus = &v
+	return s
+}
+
+// SetLastUpdatedTime sets the LastUpdatedTime field's value.
+func (s *ApplicationState) SetLastUpdatedTime(v time.Time) *ApplicationState {
+	s.LastUpdatedTime = &v
+	return s
+}
+
 type AssociateCreatedArtifactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1763,7 +2373,8 @@ type AssociateCreatedArtifactInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -1774,12 +2385,20 @@ type AssociateCreatedArtifactInput struct {
 	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateCreatedArtifactInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateCreatedArtifactInput) GoString() string {
 	return s.String()
 }
@@ -1842,12 +2461,20 @@ type AssociateCreatedArtifactOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateCreatedArtifactOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateCreatedArtifactOutput) GoString() string {
 	return s.String()
 }
@@ -1864,7 +2491,8 @@ type AssociateDiscoveredResourceInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// The identifier given to the MigrationTask.
+	// The identifier given to the MigrationTask. Do not store personal data in
+	// this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -1875,12 +2503,20 @@ type AssociateDiscoveredResourceInput struct {
 	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDiscoveredResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDiscoveredResourceInput) GoString() string {
 	return s.String()
 }
@@ -1943,12 +2579,20 @@ type AssociateDiscoveredResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDiscoveredResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateDiscoveredResourceOutput) GoString() string {
 	return s.String()
 }
@@ -1960,18 +2604,27 @@ type CreateProgressUpdateStreamInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// The name of the ProgressUpdateStream.
+	// The name of the ProgressUpdateStream. Do not store personal data in this
+	// field.
 	//
 	// ProgressUpdateStreamName is a required field
 	ProgressUpdateStreamName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProgressUpdateStreamInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProgressUpdateStreamInput) GoString() string {
 	return s.String()
 }
@@ -2008,12 +2661,20 @@ type CreateProgressUpdateStreamOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProgressUpdateStreamOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProgressUpdateStreamOutput) GoString() string {
 	return s.String()
 }
@@ -2033,12 +2694,20 @@ type CreatedArtifact struct {
 	Name *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatedArtifact) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatedArtifact) GoString() string {
 	return s.String()
 }
@@ -2078,18 +2747,27 @@ type DeleteProgressUpdateStreamInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// The name of the ProgressUpdateStream.
+	// The name of the ProgressUpdateStream. Do not store personal data in this
+	// field.
 	//
 	// ProgressUpdateStreamName is a required field
 	ProgressUpdateStreamName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProgressUpdateStreamInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProgressUpdateStreamInput) GoString() string {
 	return s.String()
 }
@@ -2126,12 +2804,20 @@ type DeleteProgressUpdateStreamOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProgressUpdateStreamOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProgressUpdateStreamOutput) GoString() string {
 	return s.String()
 }
@@ -2139,18 +2825,27 @@ func (s DeleteProgressUpdateStreamOutput) GoString() string {
 type DescribeApplicationStateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The configurationId in ADS that uniquely identifies the grouped application.
+	// The configurationId in Application Discovery Service that uniquely identifies
+	// the grouped application.
 	//
 	// ApplicationId is a required field
 	ApplicationId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationStateInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationStateInput) GoString() string {
 	return s.String()
 }
@@ -2187,12 +2882,20 @@ type DescribeApplicationStateOutput struct {
 	LastUpdatedTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationStateOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeApplicationStateOutput) GoString() string {
 	return s.String()
 }
@@ -2212,7 +2915,8 @@ func (s *DescribeApplicationStateOutput) SetLastUpdatedTime(v time.Time) *Descri
 type DescribeMigrationTaskInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier given to the MigrationTask.
+	// The identifier given to the MigrationTask. Do not store personal data in
+	// this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -2223,12 +2927,20 @@ type DescribeMigrationTaskInput struct {
 	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeMigrationTaskInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeMigrationTaskInput) GoString() string {
 	return s.String()
 }
@@ -2274,12 +2986,20 @@ type DescribeMigrationTaskOutput struct {
 	MigrationTask *MigrationTask `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeMigrationTaskOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeMigrationTaskOutput) GoString() string {
 	return s.String()
 }
@@ -2304,7 +3024,7 @@ type DisassociateCreatedArtifactInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// Unique identifier that references the migration task to be disassociated
-	// with the artifact.
+	// with the artifact. Do not store personal data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -2315,12 +3035,20 @@ type DisassociateCreatedArtifactInput struct {
 	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateCreatedArtifactInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateCreatedArtifactInput) GoString() string {
 	return s.String()
 }
@@ -2381,12 +3109,20 @@ type DisassociateCreatedArtifactOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateCreatedArtifactOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateCreatedArtifactOutput) GoString() string {
 	return s.String()
 }
@@ -2394,7 +3130,7 @@ func (s DisassociateCreatedArtifactOutput) GoString() string {
 type DisassociateDiscoveredResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// ConfigurationId of the ADS resource to be disassociated.
+	// ConfigurationId of the Application Discovery Service resource to be disassociated.
 	//
 	// ConfigurationId is a required field
 	ConfigurationId *string `min:"1" type:"string" required:"true"`
@@ -2403,7 +3139,8 @@ type DisassociateDiscoveredResourceInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// The identifier given to the MigrationTask.
+	// The identifier given to the MigrationTask. Do not store personal data in
+	// this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -2414,12 +3151,20 @@ type DisassociateDiscoveredResourceInput struct {
 	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDiscoveredResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDiscoveredResourceInput) GoString() string {
 	return s.String()
 }
@@ -2480,12 +3225,20 @@ type DisassociateDiscoveredResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDiscoveredResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateDiscoveredResourceOutput) GoString() string {
 	return s.String()
 }
@@ -2494,7 +3247,8 @@ func (s DisassociateDiscoveredResourceOutput) GoString() string {
 type DiscoveredResource struct {
 	_ struct{} `type:"structure"`
 
-	// The configurationId in ADS that uniquely identifies the on-premise resource.
+	// The configurationId in Application Discovery Service that uniquely identifies
+	// the on-premise resource.
 	//
 	// ConfigurationId is a required field
 	ConfigurationId *string `min:"1" type:"string" required:"true"`
@@ -2504,12 +3258,20 @@ type DiscoveredResource struct {
 	Description *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoveredResource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DiscoveredResource) GoString() string {
 	return s.String()
 }
@@ -2542,6 +3304,135 @@ func (s *DiscoveredResource) SetDescription(v string) *DiscoveredResource {
 	return s
 }
 
+// Exception raised to indicate a successfully authorized action when the DryRun
+// flag is set to "true".
+type DryRunOperation struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DryRunOperation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DryRunOperation) GoString() string {
+	return s.String()
+}
+
+func newErrorDryRunOperation(v protocol.ResponseMetadata) error {
+	return &DryRunOperation{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DryRunOperation) Code() string {
+	return "DryRunOperation"
+}
+
+// Message returns the exception's message.
+func (s *DryRunOperation) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DryRunOperation) OrigErr() error {
+	return nil
+}
+
+func (s *DryRunOperation) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DryRunOperation) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DryRunOperation) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The home region is not set. Set the home region to continue.
+type HomeRegionNotSetException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HomeRegionNotSetException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HomeRegionNotSetException) GoString() string {
+	return s.String()
+}
+
+func newErrorHomeRegionNotSetException(v protocol.ResponseMetadata) error {
+	return &HomeRegionNotSetException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *HomeRegionNotSetException) Code() string {
+	return "HomeRegionNotSetException"
+}
+
+// Message returns the exception's message.
+func (s *HomeRegionNotSetException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *HomeRegionNotSetException) OrigErr() error {
+	return nil
+}
+
+func (s *HomeRegionNotSetException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *HomeRegionNotSetException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *HomeRegionNotSetException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ImportMigrationTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2549,23 +3440,32 @@ type ImportMigrationTaskInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
 
-	// The name of the ProgressUpdateStream.
+	// The name of the ProgressUpdateStream. >
 	//
 	// ProgressUpdateStream is a required field
 	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportMigrationTaskInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportMigrationTaskInput) GoString() string {
 	return s.String()
 }
@@ -2614,14 +3514,262 @@ type ImportMigrationTaskOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportMigrationTaskOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportMigrationTaskOutput) GoString() string {
 	return s.String()
+}
+
+// Exception raised when an internal, configuration, or dependency error is
+// encountered.
+type InternalServerError struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerError) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServerError(v protocol.ResponseMetadata) error {
+	return &InternalServerError{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServerError) Code() string {
+	return "InternalServerError"
+}
+
+// Message returns the exception's message.
+func (s *InternalServerError) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServerError) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServerError) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServerError) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServerError) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception raised when the provided input violates a policy constraint or
+// is entered in the wrong format or data type.
+type InvalidInputException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInputException(v protocol.ResponseMetadata) error {
+	return &InvalidInputException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInputException) Code() string {
+	return "InvalidInputException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInputException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInputException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInputException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInputException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInputException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type ListApplicationStatesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The configurationIds from the Application Discovery Service that uniquely
+	// identifies your applications.
+	ApplicationIds []*string `min:"1" type:"list"`
+
+	// Maximum number of results to be returned per page.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If a NextToken was returned by a previous call, there are more results available.
+	// To retrieve the next page of results, make the call again using the returned
+	// token in NextToken.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListApplicationStatesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListApplicationStatesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListApplicationStatesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListApplicationStatesInput"}
+	if s.ApplicationIds != nil && len(s.ApplicationIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationIds", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationIds sets the ApplicationIds field's value.
+func (s *ListApplicationStatesInput) SetApplicationIds(v []*string) *ListApplicationStatesInput {
+	s.ApplicationIds = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListApplicationStatesInput) SetMaxResults(v int64) *ListApplicationStatesInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListApplicationStatesInput) SetNextToken(v string) *ListApplicationStatesInput {
+	s.NextToken = &v
+	return s
+}
+
+type ListApplicationStatesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of Applications that exist in Application Discovery Service.
+	ApplicationStateList []*ApplicationState `type:"list"`
+
+	// If a NextToken was returned by a previous call, there are more results available.
+	// To retrieve the next page of results, make the call again using the returned
+	// token in NextToken.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListApplicationStatesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListApplicationStatesOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplicationStateList sets the ApplicationStateList field's value.
+func (s *ListApplicationStatesOutput) SetApplicationStateList(v []*ApplicationState) *ListApplicationStatesOutput {
+	s.ApplicationStateList = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListApplicationStatesOutput) SetNextToken(v string) *ListApplicationStatesOutput {
+	s.NextToken = &v
+	return s
 }
 
 type ListCreatedArtifactsInput struct {
@@ -2630,7 +3778,8 @@ type ListCreatedArtifactsInput struct {
 	// Maximum number of results to be returned per page.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -2646,12 +3795,20 @@ type ListCreatedArtifactsInput struct {
 	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListCreatedArtifactsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListCreatedArtifactsInput) GoString() string {
 	return s.String()
 }
@@ -2717,12 +3874,20 @@ type ListCreatedArtifactsOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListCreatedArtifactsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListCreatedArtifactsOutput) GoString() string {
 	return s.String()
 }
@@ -2745,7 +3910,7 @@ type ListDiscoveredResourcesInput struct {
 	// The maximum number of results returned per page.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// The name of the MigrationTask.
+	// The name of the MigrationTask. Do not store personal data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -2761,12 +3926,20 @@ type ListDiscoveredResourcesInput struct {
 	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDiscoveredResourcesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDiscoveredResourcesInput) GoString() string {
 	return s.String()
 }
@@ -2831,12 +4004,20 @@ type ListDiscoveredResourcesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDiscoveredResourcesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDiscoveredResourcesOutput) GoString() string {
 	return s.String()
 }
@@ -2868,12 +4049,20 @@ type ListMigrationTasksInput struct {
 	ResourceName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListMigrationTasksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListMigrationTasksInput) GoString() string {
 	return s.String()
 }
@@ -2924,12 +4113,20 @@ type ListMigrationTasksOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListMigrationTasksOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListMigrationTasksOutput) GoString() string {
 	return s.String()
 }
@@ -2958,12 +4155,20 @@ type ListProgressUpdateStreamsInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProgressUpdateStreamsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProgressUpdateStreamsInput) GoString() string {
 	return s.String()
 }
@@ -3005,12 +4210,20 @@ type ListProgressUpdateStreamsOutput struct {
 	ProgressUpdateStreamSummaryList []*ProgressUpdateStreamSummary `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProgressUpdateStreamsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProgressUpdateStreamsOutput) GoString() string {
 	return s.String()
 }
@@ -3031,12 +4244,15 @@ func (s *ListProgressUpdateStreamsOutput) SetProgressUpdateStreamSummaryList(v [
 type MigrationTask struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	MigrationTaskName *string `min:"1" type:"string"`
 
 	// A name that identifies the vendor of the migration tool being used.
 	ProgressUpdateStream *string `min:"1" type:"string"`
 
+	// Information about the resource that is being migrated. This data will be
+	// used to map the task to a resource in the Application Discovery Service repository.
 	ResourceAttributeList []*ResourceAttribute `type:"list"`
 
 	// Task object encapsulating task information.
@@ -3046,12 +4262,20 @@ type MigrationTask struct {
 	UpdateDateTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MigrationTask) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MigrationTask) GoString() string {
 	return s.String()
 }
@@ -3091,9 +4315,11 @@ func (s *MigrationTask) SetUpdateDateTime(v time.Time) *MigrationTask {
 type MigrationTaskSummary struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	MigrationTaskName *string `min:"1" type:"string"`
 
+	// Indication of the percentage completion of the task.
 	ProgressPercent *int64 `type:"integer"`
 
 	// An AWS resource used for access control. It should uniquely identify the
@@ -3110,12 +4336,20 @@ type MigrationTaskSummary struct {
 	UpdateDateTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MigrationTaskSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MigrationTaskSummary) GoString() string {
 	return s.String()
 }
@@ -3159,7 +4393,8 @@ func (s *MigrationTaskSummary) SetUpdateDateTime(v time.Time) *MigrationTaskSumm
 type NotifyApplicationStateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The configurationId in ADS that uniquely identifies the grouped application.
+	// The configurationId in Application Discovery Service that uniquely identifies
+	// the grouped application.
 	//
 	// ApplicationId is a required field
 	ApplicationId *string `min:"1" type:"string" required:"true"`
@@ -3172,14 +4407,25 @@ type NotifyApplicationStateInput struct {
 	//
 	// Status is a required field
 	Status *string `type:"string" required:"true" enum:"ApplicationStatus"`
+
+	// The timestamp when the application state changed.
+	UpdateDateTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyApplicationStateInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyApplicationStateInput) GoString() string {
 	return s.String()
 }
@@ -3221,16 +4467,30 @@ func (s *NotifyApplicationStateInput) SetStatus(v string) *NotifyApplicationStat
 	return s
 }
 
+// SetUpdateDateTime sets the UpdateDateTime field's value.
+func (s *NotifyApplicationStateInput) SetUpdateDateTime(v time.Time) *NotifyApplicationStateInput {
+	s.UpdateDateTime = &v
+	return s
+}
+
 type NotifyApplicationStateOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyApplicationStateOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyApplicationStateOutput) GoString() string {
 	return s.String()
 }
@@ -3242,7 +4502,8 @@ type NotifyMigrationTaskStateInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -3270,12 +4531,20 @@ type NotifyMigrationTaskStateInput struct {
 	UpdateDateTime *time.Time `type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyMigrationTaskStateInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyMigrationTaskStateInput) GoString() string {
 	return s.String()
 }
@@ -3356,14 +4625,88 @@ type NotifyMigrationTaskStateOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyMigrationTaskStateOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyMigrationTaskStateOutput) GoString() string {
 	return s.String()
+}
+
+// Exception raised when there are problems accessing Application Discovery
+// Service (Application Discovery Service); most likely due to a misconfigured
+// policy or the migrationhub-discovery role is missing or not configured correctly.
+type PolicyErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PolicyErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PolicyErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorPolicyErrorException(v protocol.ResponseMetadata) error {
+	return &PolicyErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *PolicyErrorException) Code() string {
+	return "PolicyErrorException"
+}
+
+// Message returns the exception's message.
+func (s *PolicyErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *PolicyErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *PolicyErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *PolicyErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *PolicyErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Summary of the AWS resource used for access control that is implicitly linked
@@ -3371,16 +4714,25 @@ func (s NotifyMigrationTaskStateOutput) GoString() string {
 type ProgressUpdateStreamSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the ProgressUpdateStream.
+	// The name of the ProgressUpdateStream. Do not store personal data in this
+	// field.
 	ProgressUpdateStreamName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProgressUpdateStreamSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProgressUpdateStreamSummary) GoString() string {
 	return s.String()
 }
@@ -3398,7 +4750,8 @@ type PutResourceAttributesInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -3409,8 +4762,7 @@ type PutResourceAttributesInput struct {
 	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
 
 	// Information about the resource that is being migrated. This data will be
-	// used to map the task to a resource in the Application Discovery Service (ADS)'s
-	// repository.
+	// used to map the task to a resource in the Application Discovery Service repository.
 	//
 	// Takes the object array of ResourceAttribute where the Type field is reserved
 	// for the following values: IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN
@@ -3418,27 +4770,35 @@ type PutResourceAttributesInput struct {
 	// | MOTHERBOARD_SERIAL_NUMBER where the identifying value can be a string up
 	// to 256 characters.
 	//
-	// If any "VM" related value is set for a ResourceAttribute object, it is required
-	// that VM_MANAGER_ID, as a minimum, is always set. If VM_MANAGER_ID is not
-	// set, then all "VM" fields will be discarded and "VM" fields will not be used
-	// for matching the migration task to a server in Application Discovery Service
-	// (ADS)'s repository. See the Example (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples)
-	// section below for a use case of specifying "VM" related values.
+	//    * If any "VM" related value is set for a ResourceAttribute object, it
+	//    is required that VM_MANAGER_ID, as a minimum, is always set. If VM_MANAGER_ID
+	//    is not set, then all "VM" fields will be discarded and "VM" fields will
+	//    not be used for matching the migration task to a server in Application
+	//    Discovery Service repository. See the Example (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples)
+	//    section below for a use case of specifying "VM" related values.
 	//
-	//  If a server you are trying to match has multiple IP or MAC addresses, you
-	// should provide as many as you know in separate type/value pairs passed to
-	// the ResourceAttributeList parameter to maximize the chances of matching.
+	//    * If a server you are trying to match has multiple IP or MAC addresses,
+	//    you should provide as many as you know in separate type/value pairs passed
+	//    to the ResourceAttributeList parameter to maximize the chances of matching.
 	//
 	// ResourceAttributeList is a required field
 	ResourceAttributeList []*ResourceAttribute `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutResourceAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutResourceAttributesInput) GoString() string {
 	return s.String()
 }
@@ -3509,12 +4869,20 @@ type PutResourceAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutResourceAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutResourceAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -3523,17 +4891,25 @@ func (s PutResourceAttributesOutput) GoString() string {
 //
 // Note the corresponding format required per type listed below:
 //
-// IPV4x.x.x.x
+// # IPV4
+//
+// x.x.x.x
 //
 // where x is an integer in the range [0,255]
 //
-// IPV6y : y : y : y : y : y : y : y
+// # IPV6
+//
+// y : y : y : y : y : y : y : y
 //
 // where y is a hexadecimal between 0 and FFFF. [0, FFFF]
 //
-// MAC_ADDRESS^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+// MAC_ADDRESS
 //
-// FQDN^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$
+// ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+//
+// # FQDN
+//
+// ^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$
 type ResourceAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -3548,12 +4924,20 @@ type ResourceAttribute struct {
 	Value *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceAttribute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceAttribute) GoString() string {
 	return s.String()
 }
@@ -3589,6 +4973,138 @@ func (s *ResourceAttribute) SetValue(v string) *ResourceAttribute {
 	return s
 }
 
+// Exception raised when the request references a resource (Application Discovery
+// Service configuration, update stream, migration task, etc.) that does not
+// exist in Application Discovery Service (Application Discovery Service) or
+// in Migration Hub's repository.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception raised when there is an internal, configuration, or dependency
+// error encountered.
+type ServiceUnavailableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceUnavailableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceUnavailableException) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceUnavailableException(v protocol.ResponseMetadata) error {
+	return &ServiceUnavailableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceUnavailableException) Code() string {
+	return "ServiceUnavailableException"
+}
+
+// Message returns the exception's message.
+func (s *ServiceUnavailableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceUnavailableException) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceUnavailableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceUnavailableException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Task object encapsulating task information.
 type Task struct {
 	_ struct{} `type:"structure"`
@@ -3607,12 +5123,20 @@ type Task struct {
 	StatusDetail *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Task) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Task) GoString() string {
 	return s.String()
 }
@@ -3648,6 +5172,139 @@ func (s *Task) SetStatusDetail(v string) *Task {
 	return s
 }
 
+// The request was denied due to request throttling.
+type ThrottlingException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A message that provides information about the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The number of seconds the caller should wait before retrying.
+	RetryAfterSeconds *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) GoString() string {
+	return s.String()
+}
+
+func newErrorThrottlingException(v protocol.ResponseMetadata) error {
+	return &ThrottlingException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ThrottlingException) Code() string {
+	return "ThrottlingException"
+}
+
+// Message returns the exception's message.
+func (s *ThrottlingException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ThrottlingException) OrigErr() error {
+	return nil
+}
+
+func (s *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ThrottlingException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ThrottlingException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Exception raised to indicate a request was not authorized when the DryRun
+// flag is set to "true".
+type UnauthorizedOperation struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnauthorizedOperation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnauthorizedOperation) GoString() string {
+	return s.String()
+}
+
+func newErrorUnauthorizedOperation(v protocol.ResponseMetadata) error {
+	return &UnauthorizedOperation{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnauthorizedOperation) Code() string {
+	return "UnauthorizedOperation"
+}
+
+// Message returns the exception's message.
+func (s *UnauthorizedOperation) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnauthorizedOperation) OrigErr() error {
+	return nil
+}
+
+func (s *UnauthorizedOperation) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnauthorizedOperation) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnauthorizedOperation) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 const (
 	// ApplicationStatusNotStarted is a ApplicationStatus enum value
 	ApplicationStatusNotStarted = "NOT_STARTED"
@@ -3658,6 +5315,15 @@ const (
 	// ApplicationStatusCompleted is a ApplicationStatus enum value
 	ApplicationStatusCompleted = "COMPLETED"
 )
+
+// ApplicationStatus_Values returns all elements of the ApplicationStatus enum
+func ApplicationStatus_Values() []string {
+	return []string{
+		ApplicationStatusNotStarted,
+		ApplicationStatusInProgress,
+		ApplicationStatusCompleted,
+	}
+}
 
 const (
 	// ResourceAttributeTypeIpv4Address is a ResourceAttributeType enum value
@@ -3691,6 +5357,22 @@ const (
 	ResourceAttributeTypeMotherboardSerialNumber = "MOTHERBOARD_SERIAL_NUMBER"
 )
 
+// ResourceAttributeType_Values returns all elements of the ResourceAttributeType enum
+func ResourceAttributeType_Values() []string {
+	return []string{
+		ResourceAttributeTypeIpv4Address,
+		ResourceAttributeTypeIpv6Address,
+		ResourceAttributeTypeMacAddress,
+		ResourceAttributeTypeFqdn,
+		ResourceAttributeTypeVmManagerId,
+		ResourceAttributeTypeVmManagedObjectReference,
+		ResourceAttributeTypeVmName,
+		ResourceAttributeTypeVmPath,
+		ResourceAttributeTypeBiosId,
+		ResourceAttributeTypeMotherboardSerialNumber,
+	}
+}
+
 const (
 	// StatusNotStarted is a Status enum value
 	StatusNotStarted = "NOT_STARTED"
@@ -3704,3 +5386,13 @@ const (
 	// StatusCompleted is a Status enum value
 	StatusCompleted = "COMPLETED"
 )
+
+// Status_Values returns all elements of the Status enum
+func Status_Values() []string {
+	return []string{
+		StatusNotStarted,
+		StatusInProgress,
+		StatusFailed,
+		StatusCompleted,
+	}
+}

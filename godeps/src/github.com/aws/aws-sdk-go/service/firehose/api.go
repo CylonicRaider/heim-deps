@@ -29,14 +29,13 @@ const opCreateDeliveryStream = "CreateDeliveryStream"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDeliveryStreamRequest method.
+//	req, resp := client.CreateDeliveryStreamRequest(params)
 //
-//    // Example sending a request using the CreateDeliveryStreamRequest method.
-//    req, resp := client.CreateDeliveryStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStream
 func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput) (req *request.Request, output *CreateDeliveryStreamOutput) {
@@ -59,13 +58,19 @@ func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput)
 //
 // Creates a Kinesis Data Firehose delivery stream.
 //
-// By default, you can create up to 50 delivery streams per AWS Region.
+// By default, you can create up to 50 delivery streams per Amazon Web Services
+// Region.
 //
 // This is an asynchronous operation that immediately returns. The initial status
 // of the delivery stream is CREATING. After the delivery stream is created,
-// its status is ACTIVE and it now accepts data. Attempts to send data to a
-// delivery stream that is not in the ACTIVE state cause an exception. To check
-// the state of a delivery stream, use DescribeDeliveryStream.
+// its status is ACTIVE and it now accepts data. If the delivery stream creation
+// fails, the status transitions to CREATING_FAILED. Attempts to send data to
+// a delivery stream that is not in the ACTIVE state cause an exception. To
+// check the state of a delivery stream, use DescribeDeliveryStream.
+//
+// If the status of a delivery stream is CREATING_FAILED, this status doesn't
+// change, and you can't invoke CreateDeliveryStream again on it. However, you
+// can invoke the DeleteDeliveryStream operation to delete it.
 //
 // A Kinesis Data Firehose delivery stream can be configured to receive records
 // directly from providers using PutRecord or PutRecordBatch, or it can be configured
@@ -74,11 +79,19 @@ func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput)
 // and provide the Kinesis stream Amazon Resource Name (ARN) and role ARN in
 // the KinesisStreamSourceConfiguration parameter.
 //
-// A delivery stream is configured with a single destination: Amazon S3, Amazon
-// ES, Amazon Redshift, or Splunk. You must specify only one of the following
-// destination configuration parameters: ExtendedS3DestinationConfiguration,
-// S3DestinationConfiguration, ElasticsearchDestinationConfiguration, RedshiftDestinationConfiguration,
-// or SplunkDestinationConfiguration.
+// To create a delivery stream with server-side encryption (SSE) enabled, include
+// DeliveryStreamEncryptionConfigurationInput in your request. This is optional.
+// You can also invoke StartDeliveryStreamEncryption to turn on SSE for an existing
+// delivery stream that doesn't have SSE enabled.
+//
+// A delivery stream is configured with a single destination, such as Amazon
+// Simple Storage Service (Amazon S3), Amazon Redshift, Amazon OpenSearch Service,
+// Amazon OpenSearch Serverless, Splunk, and any custom HTTP endpoint or HTTP
+// endpoints owned by or supported by third-party service providers, including
+// Datadog, Dynatrace, LogicMonitor, MongoDB, New Relic, and Sumo Logic. You
+// must specify only one of the following destination configuration parameters:
+// ExtendedS3DestinationConfiguration, S3DestinationConfiguration, ElasticsearchDestinationConfiguration,
+// RedshiftDestinationConfiguration, or SplunkDestinationConfiguration.
 //
 // When you specify S3DestinationConfiguration, you can also provide the following
 // optional values: BufferingHints, EncryptionConfiguration, and CompressionFormat.
@@ -92,24 +105,24 @@ func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput)
 //
 // A few notes about Amazon Redshift as a destination:
 //
-//    * An Amazon Redshift destination requires an S3 bucket as intermediate
-//    location. Kinesis Data Firehose first delivers data to Amazon S3 and then
-//    uses COPY syntax to load data into an Amazon Redshift table. This is specified
-//    in the RedshiftDestinationConfiguration.S3Configuration parameter.
+//   - An Amazon Redshift destination requires an S3 bucket as intermediate
+//     location. Kinesis Data Firehose first delivers data to Amazon S3 and then
+//     uses COPY syntax to load data into an Amazon Redshift table. This is specified
+//     in the RedshiftDestinationConfiguration.S3Configuration parameter.
 //
-//    * The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration
-//    because the Amazon Redshift COPY operation that reads from the S3 bucket
-//    doesn't support these compression formats.
+//   - The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration
+//     because the Amazon Redshift COPY operation that reads from the S3 bucket
+//     doesn't support these compression formats.
 //
-//    * We strongly recommend that you use the user name and password you provide
-//    exclusively with Kinesis Data Firehose, and that the permissions for the
-//    account are restricted for Amazon Redshift INSERT permissions.
+//   - We strongly recommend that you use the user name and password you provide
+//     exclusively with Kinesis Data Firehose, and that the permissions for the
+//     account are restricted for Amazon Redshift INSERT permissions.
 //
 // Kinesis Data Firehose assumes the IAM role that is configured as part of
 // the destination. The role should allow the Kinesis Data Firehose principal
 // to assume the role, and the role should have permissions that allow the service
 // to deliver the data. For more information, see Grant Kinesis Data Firehose
-// Access to an Amazon S3 Destination (http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
+// Access to an Amazon S3 Destination (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
 // in the Amazon Kinesis Data Firehose Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -119,15 +132,22 @@ func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput)
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation CreateDeliveryStream for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have already reached the limit for a requested resource.
+//   - InvalidArgumentException
+//     The specified input parameter has a value that is not valid.
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
+//   - LimitExceededException
+//     You have already reached the limit for a requested resource.
+//
+//   - ResourceInUseException
+//     The resource is already in use and not available for this operation.
+//
+//   - InvalidKMSResourceException
+//     Kinesis Data Firehose throws this exception when an attempt to put records
+//     or to start or stop delivery stream encryption fails. This happens when the
+//     KMS service throws one of the following exception types: AccessDeniedException,
+//     InvalidStateException, DisabledException, or NotFoundException.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStream
 func (c *Firehose) CreateDeliveryStream(input *CreateDeliveryStreamInput) (*CreateDeliveryStreamOutput, error) {
@@ -167,14 +187,13 @@ const opDeleteDeliveryStream = "DeleteDeliveryStream"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDeliveryStreamRequest method.
+//	req, resp := client.DeleteDeliveryStreamRequest(params)
 //
-//    // Example sending a request using the DeleteDeliveryStreamRequest method.
-//    req, resp := client.DeleteDeliveryStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStream
 func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput) (req *request.Request, output *DeleteDeliveryStreamOutput) {
@@ -198,16 +217,16 @@ func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput)
 //
 // Deletes a delivery stream and its data.
 //
-// You can delete a delivery stream only if it is in ACTIVE or DELETING state,
-// and not in the CREATING state. While the deletion request is in process,
-// the delivery stream is in the DELETING state.
+// To check the state of a delivery stream, use DescribeDeliveryStream. You
+// can delete a delivery stream only if it is in one of the following states:
+// ACTIVE, DELETING, CREATING_FAILED, or DELETING_FAILED. You can't delete a
+// delivery stream that is in the CREATING state. While the deletion request
+// is in process, the delivery stream is in the DELETING state.
 //
-// To check the state of a delivery stream, use DescribeDeliveryStream.
-//
-// While the delivery stream is DELETING state, the service might continue to
-// accept the records, but it doesn't make any guarantees with respect to delivering
-// the data. Therefore, as a best practice, you should first stop any applications
-// that are sending records before deleting a delivery stream.
+// While the delivery stream is in the DELETING state, the service might continue
+// to accept records, but it doesn't make any guarantees with respect to delivering
+// the data. Therefore, as a best practice, first stop any applications that
+// are sending records before you delete a delivery stream.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -216,12 +235,13 @@ func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput)
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation DeleteDeliveryStream for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - ResourceInUseException
+//     The resource is already in use and not available for this operation.
+//
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStream
 func (c *Firehose) DeleteDeliveryStream(input *DeleteDeliveryStreamInput) (*DeleteDeliveryStreamOutput, error) {
@@ -261,14 +281,13 @@ const opDescribeDeliveryStream = "DescribeDeliveryStream"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDeliveryStreamRequest method.
+//	req, resp := client.DescribeDeliveryStreamRequest(params)
 //
-//    // Example sending a request using the DescribeDeliveryStreamRequest method.
-//    req, resp := client.DescribeDeliveryStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream
 func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamInput) (req *request.Request, output *DescribeDeliveryStreamOutput) {
@@ -289,10 +308,16 @@ func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamIn
 
 // DescribeDeliveryStream API operation for Amazon Kinesis Firehose.
 //
-// Describes the specified delivery stream and gets the status. For example,
-// after your delivery stream is created, call DescribeDeliveryStream to see
-// whether the delivery stream is ACTIVE and therefore ready for data to be
-// sent to it.
+// Describes the specified delivery stream and its status. For example, after
+// your delivery stream is created, call DescribeDeliveryStream to see whether
+// the delivery stream is ACTIVE and therefore ready for data to be sent to
+// it.
+//
+// If the status of a delivery stream is CREATING_FAILED, this status doesn't
+// change, and you can't invoke CreateDeliveryStream again on it. However, you
+// can invoke the DeleteDeliveryStream operation to delete it. If the status
+// is DELETING_FAILED, you can force deletion by invoking DeleteDeliveryStream
+// again but with DeleteDeliveryStreamInput$AllowForceDelete set to true.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -301,9 +326,9 @@ func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamIn
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation DescribeDeliveryStream for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream
 func (c *Firehose) DescribeDeliveryStream(input *DescribeDeliveryStreamInput) (*DescribeDeliveryStreamOutput, error) {
@@ -343,14 +368,13 @@ const opListDeliveryStreams = "ListDeliveryStreams"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDeliveryStreamsRequest method.
+//	req, resp := client.ListDeliveryStreamsRequest(params)
 //
-//    // Example sending a request using the ListDeliveryStreamsRequest method.
-//    req, resp := client.ListDeliveryStreamsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreams
 func (c *Firehose) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) (req *request.Request, output *ListDeliveryStreamsOutput) {
@@ -425,14 +449,13 @@ const opListTagsForDeliveryStream = "ListTagsForDeliveryStream"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTagsForDeliveryStreamRequest method.
+//	req, resp := client.ListTagsForDeliveryStreamRequest(params)
 //
-//    // Example sending a request using the ListTagsForDeliveryStreamRequest method.
-//    req, resp := client.ListTagsForDeliveryStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListTagsForDeliveryStream
 func (c *Firehose) ListTagsForDeliveryStreamRequest(input *ListTagsForDeliveryStreamInput) (req *request.Request, output *ListTagsForDeliveryStreamOutput) {
@@ -463,15 +486,16 @@ func (c *Firehose) ListTagsForDeliveryStreamRequest(input *ListTagsForDeliverySt
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation ListTagsForDeliveryStream for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have already reached the limit for a requested resource.
+//   - InvalidArgumentException
+//     The specified input parameter has a value that is not valid.
+//
+//   - LimitExceededException
+//     You have already reached the limit for a requested resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListTagsForDeliveryStream
 func (c *Firehose) ListTagsForDeliveryStream(input *ListTagsForDeliveryStreamInput) (*ListTagsForDeliveryStreamOutput, error) {
@@ -511,14 +535,13 @@ const opPutRecord = "PutRecord"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutRecordRequest method.
+//	req, resp := client.PutRecordRequest(params)
 //
-//    // Example sending a request using the PutRecordRequest method.
-//    req, resp := client.PutRecordRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecord
 func (c *Firehose) PutRecordRequest(input *PutRecordInput) (req *request.Request, output *PutRecordOutput) {
@@ -547,11 +570,17 @@ func (c *Firehose) PutRecordRequest(input *PutRecordInput) (req *request.Request
 // second, 5,000 records per second, or 5 MB per second. If you use PutRecord
 // and PutRecordBatch, the limits are an aggregate across these two operations
 // for each delivery stream. For more information about limits and how to request
-// an increase, see Amazon Kinesis Data Firehose Limits (http://docs.aws.amazon.com/firehose/latest/dev/limits.html).
+// an increase, see Amazon Kinesis Data Firehose Limits (https://docs.aws.amazon.com/firehose/latest/dev/limits.html).
+//
+// Kinesis Data Firehose accumulates and publishes a particular metric for a
+// customer account in one minute intervals. It is possible that the bursts
+// of incoming bytes/records ingested to a delivery stream last only for a few
+// seconds. Due to this, the actual spikes in the traffic might not be fully
+// visible in the customer's 1 minute CloudWatch metrics.
 //
 // You must specify the name of the delivery stream and the data record when
 // using PutRecord. The data record consists of a data blob that can be up to
-// 1,000 KB in size, and any kind of data. For example, it can be a segment
+// 1,000 KiB in size, and any kind of data. For example, it can be a segment
 // from a log file, geographic location data, website clickstream data, and
 // so on.
 //
@@ -565,9 +594,14 @@ func (c *Firehose) PutRecordRequest(input *PutRecordInput) (req *request.Request
 // to each record. Producer applications can use this ID for purposes such as
 // auditability and investigation.
 //
-// If the PutRecord operation throws a ServiceUnavailableException, back off
-// and retry. If the exception persists, it is possible that the throughput
-// limits have been exceeded for the delivery stream.
+// If the PutRecord operation throws a ServiceUnavailableException, the API
+// is automatically reinvoked (retried) 3 times. If the exception persists,
+// it is possible that the throughput limits have been exceeded for the delivery
+// stream.
+//
+// Re-invoking the Put API operations (for example, PutRecord and PutRecordBatch)
+// can result in data duplicates. For larger data assets, allow for a longer
+// time out before retrying Put API operations.
 //
 // Data records sent to Kinesis Data Firehose are stored for 24 hours from the
 // time they are added to a delivery stream as it tries to send the records
@@ -584,18 +618,29 @@ func (c *Firehose) PutRecordRequest(input *PutRecordInput) (req *request.Request
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation PutRecord for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is unavailable. Back off and retry the operation. If you continue
-//   to see the exception, throughput limits for the delivery stream may have
-//   been exceeded. For more information about limits and how to request an increase,
-//   see Amazon Kinesis Data Firehose Limits (http://docs.aws.amazon.com/firehose/latest/dev/limits.html).
+//   - InvalidArgumentException
+//     The specified input parameter has a value that is not valid.
+//
+//   - InvalidKMSResourceException
+//     Kinesis Data Firehose throws this exception when an attempt to put records
+//     or to start or stop delivery stream encryption fails. This happens when the
+//     KMS service throws one of the following exception types: AccessDeniedException,
+//     InvalidStateException, DisabledException, or NotFoundException.
+//
+//   - InvalidSourceException
+//     Only requests from CloudWatch Logs are supported when CloudWatch Logs decompression
+//     is enabled.
+//
+//   - ServiceUnavailableException
+//     The service is unavailable. Back off and retry the operation. If you continue
+//     to see the exception, throughput limits for the delivery stream may have
+//     been exceeded. For more information about limits and how to request an increase,
+//     see Amazon Kinesis Data Firehose Limits (https://docs.aws.amazon.com/firehose/latest/dev/limits.html).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecord
 func (c *Firehose) PutRecord(input *PutRecordInput) (*PutRecordOutput, error) {
@@ -635,14 +680,13 @@ const opPutRecordBatch = "PutRecordBatch"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutRecordBatchRequest method.
+//	req, resp := client.PutRecordBatchRequest(params)
 //
-//    // Example sending a request using the PutRecordBatchRequest method.
-//    req, resp := client.PutRecordBatchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatch
 func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) (req *request.Request, output *PutRecordBatchOutput) {
@@ -668,14 +712,17 @@ func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) (req *reque
 // To write single data records into a delivery stream, use PutRecord. Applications
 // using these operations are referred to as producers.
 //
-// By default, each delivery stream can take in up to 2,000 transactions per
-// second, 5,000 records per second, or 5 MB per second. If you use PutRecord
-// and PutRecordBatch, the limits are an aggregate across these two operations
-// for each delivery stream. For more information about limits, see Amazon Kinesis
-// Data Firehose Limits (http://docs.aws.amazon.com/firehose/latest/dev/limits.html).
+// Kinesis Data Firehose accumulates and publishes a particular metric for a
+// customer account in one minute intervals. It is possible that the bursts
+// of incoming bytes/records ingested to a delivery stream last only for a few
+// seconds. Due to this, the actual spikes in the traffic might not be fully
+// visible in the customer's 1 minute CloudWatch metrics.
+//
+// For information about service quota, see Amazon Kinesis Data Firehose Quota
+// (https://docs.aws.amazon.com/firehose/latest/dev/limits.html).
 //
 // Each PutRecordBatch request supports up to 500 records. Each record in the
-// request can be as large as 1,000 KB (before 64-bit encoding), up to a limit
+// request can be as large as 1,000 KB (before base64 encoding), up to a limit
 // of 4 MB for the entire request. These limits cannot be changed.
 //
 // You must specify the name of the delivery stream and the data record when
@@ -715,9 +762,13 @@ func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) (req *reque
 // corresponding charges). We recommend that you handle any duplicates at the
 // destination.
 //
-// If PutRecordBatch throws ServiceUnavailableException, back off and retry.
-// If the exception persists, it is possible that the throughput limits have
-// been exceeded for the delivery stream.
+// If PutRecordBatch throws ServiceUnavailableException, the API is automatically
+// reinvoked (retried) 3 times. If the exception persists, it is possible that
+// the throughput limits have been exceeded for the delivery stream.
+//
+// Re-invoking the Put API operations (for example, PutRecord and PutRecordBatch)
+// can result in data duplicates. For larger data assets, allow for a longer
+// time out before retrying Put API operations.
 //
 // Data records sent to Kinesis Data Firehose are stored for 24 hours from the
 // time they are added to a delivery stream as it attempts to send the records
@@ -734,18 +785,29 @@ func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) (req *reque
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation PutRecordBatch for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is unavailable. Back off and retry the operation. If you continue
-//   to see the exception, throughput limits for the delivery stream may have
-//   been exceeded. For more information about limits and how to request an increase,
-//   see Amazon Kinesis Data Firehose Limits (http://docs.aws.amazon.com/firehose/latest/dev/limits.html).
+//   - InvalidArgumentException
+//     The specified input parameter has a value that is not valid.
+//
+//   - InvalidKMSResourceException
+//     Kinesis Data Firehose throws this exception when an attempt to put records
+//     or to start or stop delivery stream encryption fails. This happens when the
+//     KMS service throws one of the following exception types: AccessDeniedException,
+//     InvalidStateException, DisabledException, or NotFoundException.
+//
+//   - InvalidSourceException
+//     Only requests from CloudWatch Logs are supported when CloudWatch Logs decompression
+//     is enabled.
+//
+//   - ServiceUnavailableException
+//     The service is unavailable. Back off and retry the operation. If you continue
+//     to see the exception, throughput limits for the delivery stream may have
+//     been exceeded. For more information about limits and how to request an increase,
+//     see Amazon Kinesis Data Firehose Limits (https://docs.aws.amazon.com/firehose/latest/dev/limits.html).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatch
 func (c *Firehose) PutRecordBatch(input *PutRecordBatchInput) (*PutRecordBatchOutput, error) {
@@ -785,14 +847,13 @@ const opStartDeliveryStreamEncryption = "StartDeliveryStreamEncryption"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartDeliveryStreamEncryptionRequest method.
+//	req, resp := client.StartDeliveryStreamEncryptionRequest(params)
 //
-//    // Example sending a request using the StartDeliveryStreamEncryptionRequest method.
-//    req, resp := client.StartDeliveryStreamEncryptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StartDeliveryStreamEncryption
 func (c *Firehose) StartDeliveryStreamEncryptionRequest(input *StartDeliveryStreamEncryptionInput) (req *request.Request, output *StartDeliveryStreamEncryptionOutput) {
@@ -817,18 +878,43 @@ func (c *Firehose) StartDeliveryStreamEncryptionRequest(input *StartDeliveryStre
 // Enables server-side encryption (SSE) for the delivery stream.
 //
 // This operation is asynchronous. It returns immediately. When you invoke it,
-// Kinesis Data Firehose first sets the status of the stream to ENABLING, and
-// then to ENABLED. You can continue to read and write data to your stream while
-// its status is ENABLING, but the data is not encrypted. It can take up to
-// 5 seconds after the encryption status changes to ENABLED before all records
-// written to the delivery stream are encrypted. To find out whether a record
-// or a batch of records was encrypted, check the response elements PutRecordOutput$Encrypted
-// and PutRecordBatchOutput$Encrypted, respectively.
+// Kinesis Data Firehose first sets the encryption status of the stream to ENABLING,
+// and then to ENABLED. The encryption status of a delivery stream is the Status
+// property in DeliveryStreamEncryptionConfiguration. If the operation fails,
+// the encryption status changes to ENABLING_FAILED. You can continue to read
+// and write data to your delivery stream while the encryption status is ENABLING,
+// but the data is not encrypted. It can take up to 5 seconds after the encryption
+// status changes to ENABLED before all records written to the delivery stream
+// are encrypted. To find out whether a record or a batch of records was encrypted,
+// check the response elements PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted,
+// respectively.
 //
-// To check the encryption state of a delivery stream, use DescribeDeliveryStream.
+// To check the encryption status of a delivery stream, use DescribeDeliveryStream.
 //
-// You can only enable SSE for a delivery stream that uses DirectPut as its
-// source.
+// Even if encryption is currently enabled for a delivery stream, you can still
+// invoke this operation on it to change the ARN of the CMK or both its type
+// and ARN. If you invoke this method to change the CMK, and the old CMK is
+// of type CUSTOMER_MANAGED_CMK, Kinesis Data Firehose schedules the grant it
+// had on the old CMK for retirement. If the new CMK is of type CUSTOMER_MANAGED_CMK,
+// Kinesis Data Firehose creates a grant that enables it to use the new CMK
+// to encrypt and decrypt data and to manage the grant.
+//
+// For the KMS grant creation to be successful, Kinesis Data Firehose APIs StartDeliveryStreamEncryption
+// and CreateDeliveryStream should not be called with session credentials that
+// are more than 6 hours old.
+//
+// If a delivery stream already has encryption enabled and then you invoke this
+// operation to change the ARN of the CMK or both its type and ARN and you get
+// ENABLING_FAILED, this only means that the attempt to change the CMK failed.
+// In this case, encryption remains enabled with the old CMK.
+//
+// If the encryption status of your delivery stream is ENABLING_FAILED, you
+// can invoke this operation again with a valid CMK. The CMK must be enabled
+// and the key policy mustn't explicitly deny the permission for Kinesis Data
+// Firehose to invoke KMS encrypt and decrypt operations.
+//
+// You can enable SSE for a delivery stream only if it's a delivery stream that
+// uses DirectPut as its source.
 //
 // The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations
 // have a combined limit of 25 calls per delivery stream per 24 hours. For example,
@@ -843,18 +929,25 @@ func (c *Firehose) StartDeliveryStreamEncryptionRequest(input *StartDeliveryStre
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation StartDeliveryStreamEncryption for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
+//   - ResourceInUseException
+//     The resource is already in use and not available for this operation.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have already reached the limit for a requested resource.
+//   - InvalidArgumentException
+//     The specified input parameter has a value that is not valid.
+//
+//   - LimitExceededException
+//     You have already reached the limit for a requested resource.
+//
+//   - InvalidKMSResourceException
+//     Kinesis Data Firehose throws this exception when an attempt to put records
+//     or to start or stop delivery stream encryption fails. This happens when the
+//     KMS service throws one of the following exception types: AccessDeniedException,
+//     InvalidStateException, DisabledException, or NotFoundException.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StartDeliveryStreamEncryption
 func (c *Firehose) StartDeliveryStreamEncryption(input *StartDeliveryStreamEncryptionInput) (*StartDeliveryStreamEncryptionOutput, error) {
@@ -894,14 +987,13 @@ const opStopDeliveryStreamEncryption = "StopDeliveryStreamEncryption"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StopDeliveryStreamEncryptionRequest method.
+//	req, resp := client.StopDeliveryStreamEncryptionRequest(params)
 //
-//    // Example sending a request using the StopDeliveryStreamEncryptionRequest method.
-//    req, resp := client.StopDeliveryStreamEncryptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StopDeliveryStreamEncryption
 func (c *Firehose) StopDeliveryStreamEncryptionRequest(input *StopDeliveryStreamEncryptionInput) (req *request.Request, output *StopDeliveryStreamEncryptionOutput) {
@@ -926,8 +1018,8 @@ func (c *Firehose) StopDeliveryStreamEncryptionRequest(input *StopDeliveryStream
 // Disables server-side encryption (SSE) for the delivery stream.
 //
 // This operation is asynchronous. It returns immediately. When you invoke it,
-// Kinesis Data Firehose first sets the status of the stream to DISABLING, and
-// then to DISABLED. You can continue to read and write data to your stream
+// Kinesis Data Firehose first sets the encryption status of the stream to DISABLING,
+// and then to DISABLED. You can continue to read and write data to your stream
 // while its status is DISABLING. It can take up to 5 seconds after the encryption
 // status changes to DISABLED before all records written to the delivery stream
 // are no longer subject to encryption. To find out whether a record or a batch
@@ -935,6 +1027,11 @@ func (c *Firehose) StopDeliveryStreamEncryptionRequest(input *StopDeliveryStream
 // and PutRecordBatchOutput$Encrypted, respectively.
 //
 // To check the encryption state of a delivery stream, use DescribeDeliveryStream.
+//
+// If SSE is enabled using a customer managed CMK and then you invoke StopDeliveryStreamEncryption,
+// Kinesis Data Firehose schedules the related KMS grant for retirement and
+// then retires it after it ensures that it is finished delivering records to
+// the destination.
 //
 // The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations
 // have a combined limit of 25 calls per delivery stream per 24 hours. For example,
@@ -949,18 +1046,19 @@ func (c *Firehose) StopDeliveryStreamEncryptionRequest(input *StopDeliveryStream
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation StopDeliveryStreamEncryption for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
+//   - ResourceInUseException
+//     The resource is already in use and not available for this operation.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have already reached the limit for a requested resource.
+//   - InvalidArgumentException
+//     The specified input parameter has a value that is not valid.
+//
+//   - LimitExceededException
+//     You have already reached the limit for a requested resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/StopDeliveryStreamEncryption
 func (c *Firehose) StopDeliveryStreamEncryption(input *StopDeliveryStreamEncryptionInput) (*StopDeliveryStreamEncryptionOutput, error) {
@@ -1000,14 +1098,13 @@ const opTagDeliveryStream = "TagDeliveryStream"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the TagDeliveryStreamRequest method.
+//	req, resp := client.TagDeliveryStreamRequest(params)
 //
-//    // Example sending a request using the TagDeliveryStreamRequest method.
-//    req, resp := client.TagDeliveryStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagDeliveryStream
 func (c *Firehose) TagDeliveryStreamRequest(input *TagDeliveryStreamInput) (req *request.Request, output *TagDeliveryStreamOutput) {
@@ -1030,13 +1127,13 @@ func (c *Firehose) TagDeliveryStreamRequest(input *TagDeliveryStreamInput) (req 
 // TagDeliveryStream API operation for Amazon Kinesis Firehose.
 //
 // Adds or updates tags for the specified delivery stream. A tag is a key-value
-// pair that you can define and assign to AWS resources. If you specify a tag
-// that already exists, the tag value is replaced with the value that you specify
-// in the request. Tags are metadata. For example, you can add friendly names
-// and descriptions or other types of information that can help you distinguish
-// the delivery stream. For more information about tags, see Using Cost Allocation
-// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the AWS Billing and Cost Management User Guide.
+// pair that you can define and assign to Amazon Web Services resources. If
+// you specify a tag that already exists, the tag value is replaced with the
+// value that you specify in the request. Tags are metadata. For example, you
+// can add friendly names and descriptions or other types of information that
+// can help you distinguish the delivery stream. For more information about
+// tags, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// in the Amazon Web Services Billing and Cost Management User Guide.
 //
 // Each delivery stream can have up to 50 tags.
 //
@@ -1049,18 +1146,19 @@ func (c *Firehose) TagDeliveryStreamRequest(input *TagDeliveryStreamInput) (req 
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation TagDeliveryStream for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
+//   - ResourceInUseException
+//     The resource is already in use and not available for this operation.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have already reached the limit for a requested resource.
+//   - InvalidArgumentException
+//     The specified input parameter has a value that is not valid.
+//
+//   - LimitExceededException
+//     You have already reached the limit for a requested resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagDeliveryStream
 func (c *Firehose) TagDeliveryStream(input *TagDeliveryStreamInput) (*TagDeliveryStreamOutput, error) {
@@ -1100,14 +1198,13 @@ const opUntagDeliveryStream = "UntagDeliveryStream"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UntagDeliveryStreamRequest method.
+//	req, resp := client.UntagDeliveryStreamRequest(params)
 //
-//    // Example sending a request using the UntagDeliveryStreamRequest method.
-//    req, resp := client.UntagDeliveryStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UntagDeliveryStream
 func (c *Firehose) UntagDeliveryStreamRequest(input *UntagDeliveryStreamInput) (req *request.Request, output *UntagDeliveryStreamOutput) {
@@ -1143,18 +1240,19 @@ func (c *Firehose) UntagDeliveryStreamRequest(input *UntagDeliveryStreamInput) (
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation UntagDeliveryStream for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
+//   - ResourceInUseException
+//     The resource is already in use and not available for this operation.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have already reached the limit for a requested resource.
+//   - InvalidArgumentException
+//     The specified input parameter has a value that is not valid.
+//
+//   - LimitExceededException
+//     You have already reached the limit for a requested resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UntagDeliveryStream
 func (c *Firehose) UntagDeliveryStream(input *UntagDeliveryStreamInput) (*UntagDeliveryStreamOutput, error) {
@@ -1194,14 +1292,13 @@ const opUpdateDestination = "UpdateDestination"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDestinationRequest method.
+//	req, resp := client.UpdateDestinationRequest(params)
 //
-//    // Example sending a request using the UpdateDestinationRequest method.
-//    req, resp := client.UpdateDestinationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination
 func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) (req *request.Request, output *UpdateDestinationOutput) {
@@ -1233,8 +1330,9 @@ func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) (req 
 // writes to the delivery stream can continue during this process. The updated
 // configurations are usually effective within a few minutes.
 //
-// Switching between Amazon ES and other services is not supported. For an Amazon
-// ES destination, you can only update to another Amazon ES destination.
+// Switching between Amazon OpenSearch Service and other services is not supported.
+// For an Amazon OpenSearch Service destination, you can only update to another
+// Amazon OpenSearch Service destination.
 //
 // If the destination type is the same, Kinesis Data Firehose merges the configuration
 // parameters specified with the destination configuration that already exists
@@ -1261,19 +1359,20 @@ func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) (req 
 // See the AWS API reference guide for Amazon Kinesis Firehose's
 // API operation UpdateDestination for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
+//   - InvalidArgumentException
+//     The specified input parameter has a value that is not valid.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - ResourceInUseException
+//     The resource is already in use and not available for this operation.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification has already happened. Fetch VersionId again and use
-//   it to update the destination.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - ConcurrentModificationException
+//     Another modification has already happened. Fetch VersionId again and use
+//     it to update the destination.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination
 func (c *Firehose) UpdateDestination(input *UpdateDestinationInput) (*UpdateDestinationOutput, error) {
@@ -1297,15 +1396,14 @@ func (c *Firehose) UpdateDestinationWithContext(ctx aws.Context, input *UpdateDe
 	return out, req.Send()
 }
 
-// Describes hints for the buffering to perform before delivering data to the
-// destination. These options are treated as hints, and therefore Kinesis Data
-// Firehose might choose to use different values when it is optimal.
-type BufferingHints struct {
+// Describes the buffering to perform before delivering data to the Serverless
+// offering for Amazon OpenSearch Service destination.
+type AmazonOpenSearchServerlessBufferingHints struct {
 	_ struct{} `type:"structure"`
 
 	// Buffer incoming data for the specified period of time, in seconds, before
-	// delivering it to the destination. The default value is 300.
-	IntervalInSeconds *int64 `min:"60" type:"integer"`
+	// delivering it to the destination. The default value is 300 (5 minutes).
+	IntervalInSeconds *int64 `type:"integer"`
 
 	// Buffer incoming data to the specified size, in MBs, before delivering it
 	// to the destination. The default value is 5.
@@ -1316,12 +1414,1295 @@ type BufferingHints struct {
 	SizeInMBs *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessBufferingHints) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessBufferingHints) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AmazonOpenSearchServerlessBufferingHints) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AmazonOpenSearchServerlessBufferingHints"}
+	if s.SizeInMBs != nil && *s.SizeInMBs < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("SizeInMBs", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetIntervalInSeconds sets the IntervalInSeconds field's value.
+func (s *AmazonOpenSearchServerlessBufferingHints) SetIntervalInSeconds(v int64) *AmazonOpenSearchServerlessBufferingHints {
+	s.IntervalInSeconds = &v
+	return s
+}
+
+// SetSizeInMBs sets the SizeInMBs field's value.
+func (s *AmazonOpenSearchServerlessBufferingHints) SetSizeInMBs(v int64) *AmazonOpenSearchServerlessBufferingHints {
+	s.SizeInMBs = &v
+	return s
+}
+
+// Describes the configuration of a destination in the Serverless offering for
+// Amazon OpenSearch Service.
+type AmazonOpenSearchServerlessDestinationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The buffering options. If no value is specified, the default values for AmazonopensearchserviceBufferingHints
+	// are used.
+	BufferingHints *AmazonOpenSearchServerlessBufferingHints `type:"structure"`
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The endpoint to use when communicating with the collection in the Serverless
+	// offering for Amazon OpenSearch Service.
+	CollectionEndpoint *string `min:"1" type:"string"`
+
+	// The Serverless offering for Amazon OpenSearch Service index name.
+	//
+	// IndexName is a required field
+	IndexName *string `min:"1" type:"string" required:"true"`
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to the Serverless offering for Amazon OpenSearch Service. The default value
+	// is 300 (5 minutes).
+	RetryOptions *AmazonOpenSearchServerlessRetryOptions `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
+	// Firehose for calling the Serverless offering for Amazon OpenSearch Service
+	// Configuration API and for indexing documents.
+	//
+	// RoleARN is a required field
+	RoleARN *string `min:"1" type:"string" required:"true"`
+
+	// Defines how documents should be delivered to Amazon S3. When it is set to
+	// FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could
+	// not be indexed to the configured Amazon S3 destination, with AmazonOpenSearchService-failed/
+	// appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose
+	// delivers all incoming records to Amazon S3, and also writes failed documents
+	// with AmazonOpenSearchService-failed/ appended to the prefix.
+	S3BackupMode *string `type:"string" enum:"AmazonOpenSearchServerlessS3BackupMode"`
+
+	// Describes the configuration of a destination in Amazon S3.
+	//
+	// S3Configuration is a required field
+	S3Configuration *S3DestinationConfiguration `type:"structure" required:"true"`
+
+	// The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch Serverless
+	// destination.
+	VpcConfiguration *VpcConfiguration `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessDestinationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessDestinationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AmazonOpenSearchServerlessDestinationConfiguration"}
+	if s.CollectionEndpoint != nil && len(*s.CollectionEndpoint) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("CollectionEndpoint", 1))
+	}
+	if s.IndexName == nil {
+		invalidParams.Add(request.NewErrParamRequired("IndexName"))
+	}
+	if s.IndexName != nil && len(*s.IndexName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("IndexName", 1))
+	}
+	if s.RoleARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+	}
+	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+	}
+	if s.S3Configuration == nil {
+		invalidParams.Add(request.NewErrParamRequired("S3Configuration"))
+	}
+	if s.BufferingHints != nil {
+		if err := s.BufferingHints.Validate(); err != nil {
+			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ProcessingConfiguration != nil {
+		if err := s.ProcessingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3Configuration != nil {
+		if err := s.S3Configuration.Validate(); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.VpcConfiguration != nil {
+		if err := s.VpcConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetBufferingHints(v *AmazonOpenSearchServerlessBufferingHints) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.BufferingHints = v
+	return s
+}
+
+// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetCollectionEndpoint sets the CollectionEndpoint field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetCollectionEndpoint(v string) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.CollectionEndpoint = &v
+	return s
+}
+
+// SetIndexName sets the IndexName field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetIndexName(v string) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.IndexName = &v
+	return s
+}
+
+// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetProcessingConfiguration(v *ProcessingConfiguration) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.ProcessingConfiguration = v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetRetryOptions(v *AmazonOpenSearchServerlessRetryOptions) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.RetryOptions = v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetRoleARN(v string) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.RoleARN = &v
+	return s
+}
+
+// SetS3BackupMode sets the S3BackupMode field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetS3BackupMode(v string) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.S3BackupMode = &v
+	return s
+}
+
+// SetS3Configuration sets the S3Configuration field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetS3Configuration(v *S3DestinationConfiguration) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.S3Configuration = v
+	return s
+}
+
+// SetVpcConfiguration sets the VpcConfiguration field's value.
+func (s *AmazonOpenSearchServerlessDestinationConfiguration) SetVpcConfiguration(v *VpcConfiguration) *AmazonOpenSearchServerlessDestinationConfiguration {
+	s.VpcConfiguration = v
+	return s
+}
+
+// The destination description in the Serverless offering for Amazon OpenSearch
+// Service.
+type AmazonOpenSearchServerlessDestinationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The buffering options.
+	BufferingHints *AmazonOpenSearchServerlessBufferingHints `type:"structure"`
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The endpoint to use when communicating with the collection in the Serverless
+	// offering for Amazon OpenSearch Service.
+	CollectionEndpoint *string `min:"1" type:"string"`
+
+	// The Serverless offering for Amazon OpenSearch Service index name.
+	IndexName *string `min:"1" type:"string"`
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The Serverless offering for Amazon OpenSearch Service retry options.
+	RetryOptions *AmazonOpenSearchServerlessRetryOptions `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials.
+	RoleARN *string `min:"1" type:"string"`
+
+	// The Amazon S3 backup mode.
+	S3BackupMode *string `type:"string" enum:"AmazonOpenSearchServerlessS3BackupMode"`
+
+	// Describes a destination in Amazon S3.
+	S3DestinationDescription *S3DestinationDescription `type:"structure"`
+
+	// The details of the VPC of the Amazon ES destination.
+	VpcConfigurationDescription *VpcConfigurationDescription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessDestinationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessDestinationDescription) GoString() string {
+	return s.String()
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetBufferingHints(v *AmazonOpenSearchServerlessBufferingHints) *AmazonOpenSearchServerlessDestinationDescription {
+	s.BufferingHints = v
+	return s
+}
+
+// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *AmazonOpenSearchServerlessDestinationDescription {
+	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetCollectionEndpoint sets the CollectionEndpoint field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetCollectionEndpoint(v string) *AmazonOpenSearchServerlessDestinationDescription {
+	s.CollectionEndpoint = &v
+	return s
+}
+
+// SetIndexName sets the IndexName field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetIndexName(v string) *AmazonOpenSearchServerlessDestinationDescription {
+	s.IndexName = &v
+	return s
+}
+
+// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetProcessingConfiguration(v *ProcessingConfiguration) *AmazonOpenSearchServerlessDestinationDescription {
+	s.ProcessingConfiguration = v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetRetryOptions(v *AmazonOpenSearchServerlessRetryOptions) *AmazonOpenSearchServerlessDestinationDescription {
+	s.RetryOptions = v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetRoleARN(v string) *AmazonOpenSearchServerlessDestinationDescription {
+	s.RoleARN = &v
+	return s
+}
+
+// SetS3BackupMode sets the S3BackupMode field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetS3BackupMode(v string) *AmazonOpenSearchServerlessDestinationDescription {
+	s.S3BackupMode = &v
+	return s
+}
+
+// SetS3DestinationDescription sets the S3DestinationDescription field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetS3DestinationDescription(v *S3DestinationDescription) *AmazonOpenSearchServerlessDestinationDescription {
+	s.S3DestinationDescription = v
+	return s
+}
+
+// SetVpcConfigurationDescription sets the VpcConfigurationDescription field's value.
+func (s *AmazonOpenSearchServerlessDestinationDescription) SetVpcConfigurationDescription(v *VpcConfigurationDescription) *AmazonOpenSearchServerlessDestinationDescription {
+	s.VpcConfigurationDescription = v
+	return s
+}
+
+// Describes an update for a destination in the Serverless offering for Amazon
+// OpenSearch Service.
+type AmazonOpenSearchServerlessDestinationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The buffering options. If no value is specified, AmazonopensearchBufferingHints
+	// object default values are used.
+	BufferingHints *AmazonOpenSearchServerlessBufferingHints `type:"structure"`
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The endpoint to use when communicating with the collection in the Serverless
+	// offering for Amazon OpenSearch Service.
+	CollectionEndpoint *string `min:"1" type:"string"`
+
+	// The Serverless offering for Amazon OpenSearch Service index name.
+	IndexName *string `min:"1" type:"string"`
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to the Serverless offering for Amazon OpenSearch Service. The default value
+	// is 300 (5 minutes).
+	RetryOptions *AmazonOpenSearchServerlessRetryOptions `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
+	// Firehose for calling the Serverless offering for Amazon OpenSearch Service
+	// Configuration API and for indexing documents.
+	RoleARN *string `min:"1" type:"string"`
+
+	// Describes an update for a destination in Amazon S3.
+	S3Update *S3DestinationUpdate `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessDestinationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessDestinationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AmazonOpenSearchServerlessDestinationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AmazonOpenSearchServerlessDestinationUpdate"}
+	if s.CollectionEndpoint != nil && len(*s.CollectionEndpoint) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("CollectionEndpoint", 1))
+	}
+	if s.IndexName != nil && len(*s.IndexName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("IndexName", 1))
+	}
+	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+	}
+	if s.BufferingHints != nil {
+		if err := s.BufferingHints.Validate(); err != nil {
+			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ProcessingConfiguration != nil {
+		if err := s.ProcessingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3Update != nil {
+		if err := s.S3Update.Validate(); err != nil {
+			invalidParams.AddNested("S3Update", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *AmazonOpenSearchServerlessDestinationUpdate) SetBufferingHints(v *AmazonOpenSearchServerlessBufferingHints) *AmazonOpenSearchServerlessDestinationUpdate {
+	s.BufferingHints = v
+	return s
+}
+
+// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
+func (s *AmazonOpenSearchServerlessDestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *AmazonOpenSearchServerlessDestinationUpdate {
+	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetCollectionEndpoint sets the CollectionEndpoint field's value.
+func (s *AmazonOpenSearchServerlessDestinationUpdate) SetCollectionEndpoint(v string) *AmazonOpenSearchServerlessDestinationUpdate {
+	s.CollectionEndpoint = &v
+	return s
+}
+
+// SetIndexName sets the IndexName field's value.
+func (s *AmazonOpenSearchServerlessDestinationUpdate) SetIndexName(v string) *AmazonOpenSearchServerlessDestinationUpdate {
+	s.IndexName = &v
+	return s
+}
+
+// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
+func (s *AmazonOpenSearchServerlessDestinationUpdate) SetProcessingConfiguration(v *ProcessingConfiguration) *AmazonOpenSearchServerlessDestinationUpdate {
+	s.ProcessingConfiguration = v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *AmazonOpenSearchServerlessDestinationUpdate) SetRetryOptions(v *AmazonOpenSearchServerlessRetryOptions) *AmazonOpenSearchServerlessDestinationUpdate {
+	s.RetryOptions = v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *AmazonOpenSearchServerlessDestinationUpdate) SetRoleARN(v string) *AmazonOpenSearchServerlessDestinationUpdate {
+	s.RoleARN = &v
+	return s
+}
+
+// SetS3Update sets the S3Update field's value.
+func (s *AmazonOpenSearchServerlessDestinationUpdate) SetS3Update(v *S3DestinationUpdate) *AmazonOpenSearchServerlessDestinationUpdate {
+	s.S3Update = v
+	return s
+}
+
+// Configures retry behavior in case Kinesis Data Firehose is unable to deliver
+// documents to the Serverless offering for Amazon OpenSearch Service.
+type AmazonOpenSearchServerlessRetryOptions struct {
+	_ struct{} `type:"structure"`
+
+	// After an initial failure to deliver to the Serverless offering for Amazon
+	// OpenSearch Service, the total amount of time during which Kinesis Data Firehose
+	// retries delivery (including the first attempt). After this time has elapsed,
+	// the failed documents are written to Amazon S3. Default value is 300 seconds
+	// (5 minutes). A value of 0 (zero) results in no retries.
+	DurationInSeconds *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessRetryOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonOpenSearchServerlessRetryOptions) GoString() string {
+	return s.String()
+}
+
+// SetDurationInSeconds sets the DurationInSeconds field's value.
+func (s *AmazonOpenSearchServerlessRetryOptions) SetDurationInSeconds(v int64) *AmazonOpenSearchServerlessRetryOptions {
+	s.DurationInSeconds = &v
+	return s
+}
+
+// Describes the buffering to perform before delivering data to the Amazon OpenSearch
+// Service destination.
+type AmazonopensearchserviceBufferingHints struct {
+	_ struct{} `type:"structure"`
+
+	// Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 300 (5 minutes).
+	IntervalInSeconds *int64 `type:"integer"`
+
+	// Buffer incoming data to the specified size, in MBs, before delivering it
+	// to the destination. The default value is 5.
+	//
+	// We recommend setting this parameter to a value greater than the amount of
+	// data you typically ingest into the delivery stream in 10 seconds. For example,
+	// if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
+	SizeInMBs *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceBufferingHints) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceBufferingHints) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AmazonopensearchserviceBufferingHints) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AmazonopensearchserviceBufferingHints"}
+	if s.SizeInMBs != nil && *s.SizeInMBs < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("SizeInMBs", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetIntervalInSeconds sets the IntervalInSeconds field's value.
+func (s *AmazonopensearchserviceBufferingHints) SetIntervalInSeconds(v int64) *AmazonopensearchserviceBufferingHints {
+	s.IntervalInSeconds = &v
+	return s
+}
+
+// SetSizeInMBs sets the SizeInMBs field's value.
+func (s *AmazonopensearchserviceBufferingHints) SetSizeInMBs(v int64) *AmazonopensearchserviceBufferingHints {
+	s.SizeInMBs = &v
+	return s
+}
+
+// Describes the configuration of a destination in Amazon OpenSearch Service
+type AmazonopensearchserviceDestinationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The buffering options. If no value is specified, the default values for AmazonopensearchserviceBufferingHints
+	// are used.
+	BufferingHints *AmazonopensearchserviceBufferingHints `type:"structure"`
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
+	ClusterEndpoint *string `min:"1" type:"string"`
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions `type:"structure"`
+
+	// The ARN of the Amazon OpenSearch Service domain. The IAM role must have permissions
+	// for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig
+	// after assuming the role specified in RoleARN.
+	DomainARN *string `min:"1" type:"string"`
+
+	// The ElasticsearAmazon OpenSearch Service index name.
+	//
+	// IndexName is a required field
+	IndexName *string `min:"1" type:"string" required:"true"`
+
+	// The Amazon OpenSearch Service index rotation period. Index rotation appends
+	// a timestamp to the IndexName to facilitate the expiration of old data.
+	IndexRotationPeriod *string `type:"string" enum:"AmazonopensearchserviceIndexRotationPeriod"`
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to Amazon OpenSearch Service. The default value is 300 (5 minutes).
+	RetryOptions *AmazonopensearchserviceRetryOptions `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
+	// Firehose for calling the Amazon OpenSearch Service Configuration API and
+	// for indexing documents.
+	//
+	// RoleARN is a required field
+	RoleARN *string `min:"1" type:"string" required:"true"`
+
+	// Defines how documents should be delivered to Amazon S3. When it is set to
+	// FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could
+	// not be indexed to the configured Amazon S3 destination, with AmazonOpenSearchService-failed/
+	// appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose
+	// delivers all incoming records to Amazon S3, and also writes failed documents
+	// with AmazonOpenSearchService-failed/ appended to the prefix.
+	S3BackupMode *string `type:"string" enum:"AmazonopensearchserviceS3BackupMode"`
+
+	// Describes the configuration of a destination in Amazon S3.
+	//
+	// S3Configuration is a required field
+	S3Configuration *S3DestinationConfiguration `type:"structure" required:"true"`
+
+	// The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can
+	// be only one type per index. If you try to specify a new type for an existing
+	// index that already has another type, Kinesis Data Firehose returns an error
+	// during run time.
+	TypeName *string `type:"string"`
+
+	// The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch Serverless
+	// destination.
+	VpcConfiguration *VpcConfiguration `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceDestinationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceDestinationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AmazonopensearchserviceDestinationConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AmazonopensearchserviceDestinationConfiguration"}
+	if s.ClusterEndpoint != nil && len(*s.ClusterEndpoint) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ClusterEndpoint", 1))
+	}
+	if s.DomainARN != nil && len(*s.DomainARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DomainARN", 1))
+	}
+	if s.IndexName == nil {
+		invalidParams.Add(request.NewErrParamRequired("IndexName"))
+	}
+	if s.IndexName != nil && len(*s.IndexName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("IndexName", 1))
+	}
+	if s.RoleARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+	}
+	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+	}
+	if s.S3Configuration == nil {
+		invalidParams.Add(request.NewErrParamRequired("S3Configuration"))
+	}
+	if s.BufferingHints != nil {
+		if err := s.BufferingHints.Validate(); err != nil {
+			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DocumentIdOptions != nil {
+		if err := s.DocumentIdOptions.Validate(); err != nil {
+			invalidParams.AddNested("DocumentIdOptions", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ProcessingConfiguration != nil {
+		if err := s.ProcessingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3Configuration != nil {
+		if err := s.S3Configuration.Validate(); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.VpcConfiguration != nil {
+		if err := s.VpcConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetBufferingHints(v *AmazonopensearchserviceBufferingHints) *AmazonopensearchserviceDestinationConfiguration {
+	s.BufferingHints = v
+	return s
+}
+
+// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *AmazonopensearchserviceDestinationConfiguration {
+	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetClusterEndpoint sets the ClusterEndpoint field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetClusterEndpoint(v string) *AmazonopensearchserviceDestinationConfiguration {
+	s.ClusterEndpoint = &v
+	return s
+}
+
+// SetDocumentIdOptions sets the DocumentIdOptions field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetDocumentIdOptions(v *DocumentIdOptions) *AmazonopensearchserviceDestinationConfiguration {
+	s.DocumentIdOptions = v
+	return s
+}
+
+// SetDomainARN sets the DomainARN field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetDomainARN(v string) *AmazonopensearchserviceDestinationConfiguration {
+	s.DomainARN = &v
+	return s
+}
+
+// SetIndexName sets the IndexName field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetIndexName(v string) *AmazonopensearchserviceDestinationConfiguration {
+	s.IndexName = &v
+	return s
+}
+
+// SetIndexRotationPeriod sets the IndexRotationPeriod field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetIndexRotationPeriod(v string) *AmazonopensearchserviceDestinationConfiguration {
+	s.IndexRotationPeriod = &v
+	return s
+}
+
+// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetProcessingConfiguration(v *ProcessingConfiguration) *AmazonopensearchserviceDestinationConfiguration {
+	s.ProcessingConfiguration = v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetRetryOptions(v *AmazonopensearchserviceRetryOptions) *AmazonopensearchserviceDestinationConfiguration {
+	s.RetryOptions = v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetRoleARN(v string) *AmazonopensearchserviceDestinationConfiguration {
+	s.RoleARN = &v
+	return s
+}
+
+// SetS3BackupMode sets the S3BackupMode field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetS3BackupMode(v string) *AmazonopensearchserviceDestinationConfiguration {
+	s.S3BackupMode = &v
+	return s
+}
+
+// SetS3Configuration sets the S3Configuration field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetS3Configuration(v *S3DestinationConfiguration) *AmazonopensearchserviceDestinationConfiguration {
+	s.S3Configuration = v
+	return s
+}
+
+// SetTypeName sets the TypeName field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetTypeName(v string) *AmazonopensearchserviceDestinationConfiguration {
+	s.TypeName = &v
+	return s
+}
+
+// SetVpcConfiguration sets the VpcConfiguration field's value.
+func (s *AmazonopensearchserviceDestinationConfiguration) SetVpcConfiguration(v *VpcConfiguration) *AmazonopensearchserviceDestinationConfiguration {
+	s.VpcConfiguration = v
+	return s
+}
+
+// The destination description in Amazon OpenSearch Service.
+type AmazonopensearchserviceDestinationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The buffering options.
+	BufferingHints *AmazonopensearchserviceBufferingHints `type:"structure"`
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The endpoint to use when communicating with the cluster. Kinesis Data Firehose
+	// uses either this ClusterEndpoint or the DomainARN field to send data to Amazon
+	// OpenSearch Service.
+	ClusterEndpoint *string `min:"1" type:"string"`
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions `type:"structure"`
+
+	// The ARN of the Amazon OpenSearch Service domain.
+	DomainARN *string `min:"1" type:"string"`
+
+	// The Amazon OpenSearch Service index name.
+	IndexName *string `min:"1" type:"string"`
+
+	// The Amazon OpenSearch Service index rotation period
+	IndexRotationPeriod *string `type:"string" enum:"AmazonopensearchserviceIndexRotationPeriod"`
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The Amazon OpenSearch Service retry options.
+	RetryOptions *AmazonopensearchserviceRetryOptions `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials.
+	RoleARN *string `min:"1" type:"string"`
+
+	// The Amazon S3 backup mode.
+	S3BackupMode *string `type:"string" enum:"AmazonopensearchserviceS3BackupMode"`
+
+	// Describes a destination in Amazon S3.
+	S3DestinationDescription *S3DestinationDescription `type:"structure"`
+
+	// The Amazon OpenSearch Service type name. This applies to Elasticsearch 6.x
+	// and lower versions. For Elasticsearch 7.x and OpenSearch Service 1.x, there's
+	// no value for TypeName.
+	TypeName *string `type:"string"`
+
+	// The details of the VPC of the Amazon ES destination.
+	VpcConfigurationDescription *VpcConfigurationDescription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceDestinationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceDestinationDescription) GoString() string {
+	return s.String()
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetBufferingHints(v *AmazonopensearchserviceBufferingHints) *AmazonopensearchserviceDestinationDescription {
+	s.BufferingHints = v
+	return s
+}
+
+// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *AmazonopensearchserviceDestinationDescription {
+	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetClusterEndpoint sets the ClusterEndpoint field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetClusterEndpoint(v string) *AmazonopensearchserviceDestinationDescription {
+	s.ClusterEndpoint = &v
+	return s
+}
+
+// SetDocumentIdOptions sets the DocumentIdOptions field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetDocumentIdOptions(v *DocumentIdOptions) *AmazonopensearchserviceDestinationDescription {
+	s.DocumentIdOptions = v
+	return s
+}
+
+// SetDomainARN sets the DomainARN field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetDomainARN(v string) *AmazonopensearchserviceDestinationDescription {
+	s.DomainARN = &v
+	return s
+}
+
+// SetIndexName sets the IndexName field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetIndexName(v string) *AmazonopensearchserviceDestinationDescription {
+	s.IndexName = &v
+	return s
+}
+
+// SetIndexRotationPeriod sets the IndexRotationPeriod field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetIndexRotationPeriod(v string) *AmazonopensearchserviceDestinationDescription {
+	s.IndexRotationPeriod = &v
+	return s
+}
+
+// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetProcessingConfiguration(v *ProcessingConfiguration) *AmazonopensearchserviceDestinationDescription {
+	s.ProcessingConfiguration = v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetRetryOptions(v *AmazonopensearchserviceRetryOptions) *AmazonopensearchserviceDestinationDescription {
+	s.RetryOptions = v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetRoleARN(v string) *AmazonopensearchserviceDestinationDescription {
+	s.RoleARN = &v
+	return s
+}
+
+// SetS3BackupMode sets the S3BackupMode field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetS3BackupMode(v string) *AmazonopensearchserviceDestinationDescription {
+	s.S3BackupMode = &v
+	return s
+}
+
+// SetS3DestinationDescription sets the S3DestinationDescription field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetS3DestinationDescription(v *S3DestinationDescription) *AmazonopensearchserviceDestinationDescription {
+	s.S3DestinationDescription = v
+	return s
+}
+
+// SetTypeName sets the TypeName field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetTypeName(v string) *AmazonopensearchserviceDestinationDescription {
+	s.TypeName = &v
+	return s
+}
+
+// SetVpcConfigurationDescription sets the VpcConfigurationDescription field's value.
+func (s *AmazonopensearchserviceDestinationDescription) SetVpcConfigurationDescription(v *VpcConfigurationDescription) *AmazonopensearchserviceDestinationDescription {
+	s.VpcConfigurationDescription = v
+	return s
+}
+
+// Describes an update for a destination in Amazon OpenSearch Service.
+type AmazonopensearchserviceDestinationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The buffering options. If no value is specified, AmazonopensearchBufferingHints
+	// object default values are used.
+	BufferingHints *AmazonopensearchserviceBufferingHints `type:"structure"`
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
+	ClusterEndpoint *string `min:"1" type:"string"`
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions `type:"structure"`
+
+	// The ARN of the Amazon OpenSearch Service domain. The IAM role must have permissions
+	// for DescribeDomain, DescribeDomains, and DescribeDomainConfig after assuming
+	// the IAM role specified in RoleARN.
+	DomainARN *string `min:"1" type:"string"`
+
+	// The Amazon OpenSearch Service index name.
+	IndexName *string `min:"1" type:"string"`
+
+	// The Amazon OpenSearch Service index rotation period. Index rotation appends
+	// a timestamp to IndexName to facilitate the expiration of old data.
+	IndexRotationPeriod *string `type:"string" enum:"AmazonopensearchserviceIndexRotationPeriod"`
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to Amazon OpenSearch Service. The default value is 300 (5 minutes).
+	RetryOptions *AmazonopensearchserviceRetryOptions `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
+	// Firehose for calling the Amazon OpenSearch Service Configuration API and
+	// for indexing documents.
+	RoleARN *string `min:"1" type:"string"`
+
+	// Describes an update for a destination in Amazon S3.
+	S3Update *S3DestinationUpdate `type:"structure"`
+
+	// The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can
+	// be only one type per index. If you try to specify a new type for an existing
+	// index that already has another type, Kinesis Data Firehose returns an error
+	// during runtime.
+	//
+	// If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery
+	// stream, Kinesis Data Firehose still delivers data to Elasticsearch with the
+	// old index name and type name. If you want to update your delivery stream
+	// with a new index name, provide an empty string for TypeName.
+	TypeName *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceDestinationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceDestinationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AmazonopensearchserviceDestinationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AmazonopensearchserviceDestinationUpdate"}
+	if s.ClusterEndpoint != nil && len(*s.ClusterEndpoint) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ClusterEndpoint", 1))
+	}
+	if s.DomainARN != nil && len(*s.DomainARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DomainARN", 1))
+	}
+	if s.IndexName != nil && len(*s.IndexName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("IndexName", 1))
+	}
+	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+	}
+	if s.BufferingHints != nil {
+		if err := s.BufferingHints.Validate(); err != nil {
+			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DocumentIdOptions != nil {
+		if err := s.DocumentIdOptions.Validate(); err != nil {
+			invalidParams.AddNested("DocumentIdOptions", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ProcessingConfiguration != nil {
+		if err := s.ProcessingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3Update != nil {
+		if err := s.S3Update.Validate(); err != nil {
+			invalidParams.AddNested("S3Update", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetBufferingHints(v *AmazonopensearchserviceBufferingHints) *AmazonopensearchserviceDestinationUpdate {
+	s.BufferingHints = v
+	return s
+}
+
+// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *AmazonopensearchserviceDestinationUpdate {
+	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetClusterEndpoint sets the ClusterEndpoint field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetClusterEndpoint(v string) *AmazonopensearchserviceDestinationUpdate {
+	s.ClusterEndpoint = &v
+	return s
+}
+
+// SetDocumentIdOptions sets the DocumentIdOptions field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetDocumentIdOptions(v *DocumentIdOptions) *AmazonopensearchserviceDestinationUpdate {
+	s.DocumentIdOptions = v
+	return s
+}
+
+// SetDomainARN sets the DomainARN field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetDomainARN(v string) *AmazonopensearchserviceDestinationUpdate {
+	s.DomainARN = &v
+	return s
+}
+
+// SetIndexName sets the IndexName field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetIndexName(v string) *AmazonopensearchserviceDestinationUpdate {
+	s.IndexName = &v
+	return s
+}
+
+// SetIndexRotationPeriod sets the IndexRotationPeriod field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetIndexRotationPeriod(v string) *AmazonopensearchserviceDestinationUpdate {
+	s.IndexRotationPeriod = &v
+	return s
+}
+
+// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetProcessingConfiguration(v *ProcessingConfiguration) *AmazonopensearchserviceDestinationUpdate {
+	s.ProcessingConfiguration = v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetRetryOptions(v *AmazonopensearchserviceRetryOptions) *AmazonopensearchserviceDestinationUpdate {
+	s.RetryOptions = v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetRoleARN(v string) *AmazonopensearchserviceDestinationUpdate {
+	s.RoleARN = &v
+	return s
+}
+
+// SetS3Update sets the S3Update field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetS3Update(v *S3DestinationUpdate) *AmazonopensearchserviceDestinationUpdate {
+	s.S3Update = v
+	return s
+}
+
+// SetTypeName sets the TypeName field's value.
+func (s *AmazonopensearchserviceDestinationUpdate) SetTypeName(v string) *AmazonopensearchserviceDestinationUpdate {
+	s.TypeName = &v
+	return s
+}
+
+// Configures retry behavior in case Kinesis Data Firehose is unable to deliver
+// documents to Amazon OpenSearch Service.
+type AmazonopensearchserviceRetryOptions struct {
+	_ struct{} `type:"structure"`
+
+	// After an initial failure to deliver to Amazon OpenSearch Service, the total
+	// amount of time during which Kinesis Data Firehose retries delivery (including
+	// the first attempt). After this time has elapsed, the failed documents are
+	// written to Amazon S3. Default value is 300 seconds (5 minutes). A value of
+	// 0 (zero) results in no retries.
+	DurationInSeconds *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceRetryOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AmazonopensearchserviceRetryOptions) GoString() string {
+	return s.String()
+}
+
+// SetDurationInSeconds sets the DurationInSeconds field's value.
+func (s *AmazonopensearchserviceRetryOptions) SetDurationInSeconds(v int64) *AmazonopensearchserviceRetryOptions {
+	s.DurationInSeconds = &v
+	return s
+}
+
+// The authentication configuration of the Amazon MSK cluster.
+type AuthenticationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The type of connectivity used to access the Amazon MSK cluster.
+	//
+	// Connectivity is a required field
+	Connectivity *string `type:"string" required:"true" enum:"Connectivity"`
+
+	// The ARN of the role used to access the Amazon MSK cluster.
+	//
+	// RoleARN is a required field
+	RoleARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AuthenticationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AuthenticationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AuthenticationConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AuthenticationConfiguration"}
+	if s.Connectivity == nil {
+		invalidParams.Add(request.NewErrParamRequired("Connectivity"))
+	}
+	if s.RoleARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+	}
+	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetConnectivity sets the Connectivity field's value.
+func (s *AuthenticationConfiguration) SetConnectivity(v string) *AuthenticationConfiguration {
+	s.Connectivity = &v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *AuthenticationConfiguration) SetRoleARN(v string) *AuthenticationConfiguration {
+	s.RoleARN = &v
+	return s
+}
+
+// Describes hints for the buffering to perform before delivering data to the
+// destination. These options are treated as hints, and therefore Kinesis Data
+// Firehose might choose to use different values when it is optimal. The SizeInMBs
+// and IntervalInSeconds parameters are optional. However, if specify a value
+// for one of them, you must also provide a value for the other.
+type BufferingHints struct {
+	_ struct{} `type:"structure"`
+
+	// Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 300. This parameter
+	// is optional but if you specify a value for it, you must also specify a value
+	// for SizeInMBs, and vice versa.
+	IntervalInSeconds *int64 `type:"integer"`
+
+	// Buffer incoming data to the specified size, in MiBs, before delivering it
+	// to the destination. The default value is 5. This parameter is optional but
+	// if you specify a value for it, you must also specify a value for IntervalInSeconds,
+	// and vice versa.
+	//
+	// We recommend setting this parameter to a value greater than the amount of
+	// data you typically ingest into the delivery stream in 10 seconds. For example,
+	// if you typically ingest data at 1 MiB/sec, the value should be 10 MiB or
+	// higher.
+	SizeInMBs *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BufferingHints) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BufferingHints) GoString() string {
 	return s.String()
 }
@@ -1329,9 +2710,6 @@ func (s BufferingHints) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BufferingHints) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "BufferingHints"}
-	if s.IntervalInSeconds != nil && *s.IntervalInSeconds < 60 {
-		invalidParams.Add(request.NewErrParamMinValue("IntervalInSeconds", 60))
-	}
 	if s.SizeInMBs != nil && *s.SizeInMBs < 1 {
 		invalidParams.Add(request.NewErrParamMinValue("SizeInMBs", 1))
 	}
@@ -1370,12 +2748,20 @@ type CloudWatchLoggingOptions struct {
 	LogStreamName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLoggingOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLoggingOptions) GoString() string {
 	return s.String()
 }
@@ -1398,13 +2784,79 @@ func (s *CloudWatchLoggingOptions) SetLogStreamName(v string) *CloudWatchLogging
 	return s
 }
 
+// Another modification has already happened. Fetch VersionId again and use
+// it to update the destination.
+type ConcurrentModificationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A message that provides information about the error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) GoString() string {
+	return s.String()
+}
+
+func newErrorConcurrentModificationException(v protocol.ResponseMetadata) error {
+	return &ConcurrentModificationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConcurrentModificationException) Code() string {
+	return "ConcurrentModificationException"
+}
+
+// Message returns the exception's message.
+func (s *ConcurrentModificationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConcurrentModificationException) OrigErr() error {
+	return nil
+}
+
+func (s *ConcurrentModificationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConcurrentModificationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConcurrentModificationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Describes a COPY command for Amazon Redshift.
 type CopyCommand struct {
 	_ struct{} `type:"structure"`
 
 	// Optional parameters to use with the Amazon Redshift COPY command. For more
 	// information, see the "Optional Parameters" section of Amazon Redshift COPY
-	// command (http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html). Some
+	// command (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html). Some
 	// possible examples that would apply to Kinesis Data Firehose are as follows:
 	//
 	// delimiter '\t' lzop; - fields are delimited with "\t" (TAB character) and
@@ -1421,7 +2873,7 @@ type CopyCommand struct {
 	// JSON 's3://mybucket/jsonpaths.txt' - data is in JSON format, and the path
 	// specified is the format of the data.
 	//
-	// For more examples, see Amazon Redshift COPY command examples (http://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html).
+	// For more examples, see Amazon Redshift COPY command examples (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html).
 	CopyOptions *string `type:"string"`
 
 	// A comma-separated list of column names.
@@ -1433,12 +2885,20 @@ type CopyCommand struct {
 	DataTableName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyCommand) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyCommand) GoString() string {
 	return s.String()
 }
@@ -1480,10 +2940,21 @@ func (s *CopyCommand) SetDataTableName(v string) *CopyCommand {
 type CreateDeliveryStreamInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the delivery stream. This name must be unique per AWS account
-	// in the same AWS Region. If the delivery streams are in different accounts
-	// or different Regions, you can have multiple delivery streams with the same
-	// name.
+	// The destination in the Serverless offering for Amazon OpenSearch Service.
+	// You can specify only one destination.
+	AmazonOpenSearchServerlessDestinationConfiguration *AmazonOpenSearchServerlessDestinationConfiguration `type:"structure"`
+
+	// The destination in Amazon OpenSearch Service. You can specify only one destination.
+	AmazonopensearchserviceDestinationConfiguration *AmazonopensearchserviceDestinationConfiguration `type:"structure"`
+
+	// Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed
+	// for Server-Side Encryption (SSE).
+	DeliveryStreamEncryptionConfigurationInput *DeliveryStreamEncryptionConfigurationInput `type:"structure"`
+
+	// The name of the delivery stream. This name must be unique per Amazon Web
+	// Services account in the same Amazon Web Services Region. If the delivery
+	// streams are in different accounts or different Regions, you can have multiple
+	// delivery streams with the same name.
 	//
 	// DeliveryStreamName is a required field
 	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
@@ -1502,10 +2973,18 @@ type CreateDeliveryStreamInput struct {
 	// The destination in Amazon S3. You can specify only one destination.
 	ExtendedS3DestinationConfiguration *ExtendedS3DestinationConfiguration `type:"structure"`
 
+	// Enables configuring Kinesis Firehose to deliver data to any HTTP endpoint
+	// destination. You can specify only one destination.
+	HttpEndpointDestinationConfiguration *HttpEndpointDestinationConfiguration `type:"structure"`
+
 	// When a Kinesis data stream is used as the source for the delivery stream,
 	// a KinesisStreamSourceConfiguration containing the Kinesis data stream Amazon
 	// Resource Name (ARN) and the role ARN for the source stream.
 	KinesisStreamSourceConfiguration *KinesisStreamSourceConfiguration `type:"structure"`
+
+	// The configuration for the Amazon MSK cluster to be used as the source for
+	// a delivery stream.
+	MSKSourceConfiguration *MSKSourceConfiguration `type:"structure"`
 
 	// The destination in Amazon Redshift. You can specify only one destination.
 	RedshiftDestinationConfiguration *RedshiftDestinationConfiguration `type:"structure"`
@@ -1519,22 +2998,30 @@ type CreateDeliveryStreamInput struct {
 	SplunkDestinationConfiguration *SplunkDestinationConfiguration `type:"structure"`
 
 	// A set of tags to assign to the delivery stream. A tag is a key-value pair
-	// that you can define and assign to AWS resources. Tags are metadata. For example,
-	// you can add friendly names and descriptions or other types of information
-	// that can help you distinguish the delivery stream. For more information about
-	// tags, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-	// in the AWS Billing and Cost Management User Guide.
+	// that you can define and assign to Amazon Web Services resources. Tags are
+	// metadata. For example, you can add friendly names and descriptions or other
+	// types of information that can help you distinguish the delivery stream. For
+	// more information about tags, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+	// in the Amazon Web Services Billing and Cost Management User Guide.
 	//
 	// You can specify up to 50 tags when creating a delivery stream.
 	Tags []*Tag `min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeliveryStreamInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeliveryStreamInput) GoString() string {
 	return s.String()
 }
@@ -1551,6 +3038,21 @@ func (s *CreateDeliveryStreamInput) Validate() error {
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
 	}
+	if s.AmazonOpenSearchServerlessDestinationConfiguration != nil {
+		if err := s.AmazonOpenSearchServerlessDestinationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("AmazonOpenSearchServerlessDestinationConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.AmazonopensearchserviceDestinationConfiguration != nil {
+		if err := s.AmazonopensearchserviceDestinationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("AmazonopensearchserviceDestinationConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DeliveryStreamEncryptionConfigurationInput != nil {
+		if err := s.DeliveryStreamEncryptionConfigurationInput.Validate(); err != nil {
+			invalidParams.AddNested("DeliveryStreamEncryptionConfigurationInput", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.ElasticsearchDestinationConfiguration != nil {
 		if err := s.ElasticsearchDestinationConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("ElasticsearchDestinationConfiguration", err.(request.ErrInvalidParams))
@@ -1561,9 +3063,19 @@ func (s *CreateDeliveryStreamInput) Validate() error {
 			invalidParams.AddNested("ExtendedS3DestinationConfiguration", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.HttpEndpointDestinationConfiguration != nil {
+		if err := s.HttpEndpointDestinationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("HttpEndpointDestinationConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.KinesisStreamSourceConfiguration != nil {
 		if err := s.KinesisStreamSourceConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("KinesisStreamSourceConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.MSKSourceConfiguration != nil {
+		if err := s.MSKSourceConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("MSKSourceConfiguration", err.(request.ErrInvalidParams))
 		}
 	}
 	if s.RedshiftDestinationConfiguration != nil {
@@ -1598,6 +3110,24 @@ func (s *CreateDeliveryStreamInput) Validate() error {
 	return nil
 }
 
+// SetAmazonOpenSearchServerlessDestinationConfiguration sets the AmazonOpenSearchServerlessDestinationConfiguration field's value.
+func (s *CreateDeliveryStreamInput) SetAmazonOpenSearchServerlessDestinationConfiguration(v *AmazonOpenSearchServerlessDestinationConfiguration) *CreateDeliveryStreamInput {
+	s.AmazonOpenSearchServerlessDestinationConfiguration = v
+	return s
+}
+
+// SetAmazonopensearchserviceDestinationConfiguration sets the AmazonopensearchserviceDestinationConfiguration field's value.
+func (s *CreateDeliveryStreamInput) SetAmazonopensearchserviceDestinationConfiguration(v *AmazonopensearchserviceDestinationConfiguration) *CreateDeliveryStreamInput {
+	s.AmazonopensearchserviceDestinationConfiguration = v
+	return s
+}
+
+// SetDeliveryStreamEncryptionConfigurationInput sets the DeliveryStreamEncryptionConfigurationInput field's value.
+func (s *CreateDeliveryStreamInput) SetDeliveryStreamEncryptionConfigurationInput(v *DeliveryStreamEncryptionConfigurationInput) *CreateDeliveryStreamInput {
+	s.DeliveryStreamEncryptionConfigurationInput = v
+	return s
+}
+
 // SetDeliveryStreamName sets the DeliveryStreamName field's value.
 func (s *CreateDeliveryStreamInput) SetDeliveryStreamName(v string) *CreateDeliveryStreamInput {
 	s.DeliveryStreamName = &v
@@ -1622,9 +3152,21 @@ func (s *CreateDeliveryStreamInput) SetExtendedS3DestinationConfiguration(v *Ext
 	return s
 }
 
+// SetHttpEndpointDestinationConfiguration sets the HttpEndpointDestinationConfiguration field's value.
+func (s *CreateDeliveryStreamInput) SetHttpEndpointDestinationConfiguration(v *HttpEndpointDestinationConfiguration) *CreateDeliveryStreamInput {
+	s.HttpEndpointDestinationConfiguration = v
+	return s
+}
+
 // SetKinesisStreamSourceConfiguration sets the KinesisStreamSourceConfiguration field's value.
 func (s *CreateDeliveryStreamInput) SetKinesisStreamSourceConfiguration(v *KinesisStreamSourceConfiguration) *CreateDeliveryStreamInput {
 	s.KinesisStreamSourceConfiguration = v
+	return s
+}
+
+// SetMSKSourceConfiguration sets the MSKSourceConfiguration field's value.
+func (s *CreateDeliveryStreamInput) SetMSKSourceConfiguration(v *MSKSourceConfiguration) *CreateDeliveryStreamInput {
+	s.MSKSourceConfiguration = v
 	return s
 }
 
@@ -1659,12 +3201,20 @@ type CreateDeliveryStreamOutput struct {
 	DeliveryStreamARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeliveryStreamOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeliveryStreamOutput) GoString() string {
 	return s.String()
 }
@@ -1678,9 +3228,10 @@ func (s *CreateDeliveryStreamOutput) SetDeliveryStreamARN(v string) *CreateDeliv
 // Specifies that you want Kinesis Data Firehose to convert data from the JSON
 // format to the Parquet or ORC format before writing it to Amazon S3. Kinesis
 // Data Firehose uses the serializer and deserializer that you specify, in addition
-// to the column information from the AWS Glue table, to deserialize your input
-// data from JSON and then serialize it to the Parquet or ORC format. For more
-// information, see Kinesis Data Firehose Record Format Conversion (https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html).
+// to the column information from the Amazon Web Services Glue table, to deserialize
+// your input data from JSON and then serialize it to the Parquet or ORC format.
+// For more information, see Kinesis Data Firehose Record Format Conversion
+// (https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html).
 type DataFormatConversionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1689,23 +3240,34 @@ type DataFormatConversionConfiguration struct {
 	Enabled *bool `type:"boolean"`
 
 	// Specifies the deserializer that you want Kinesis Data Firehose to use to
-	// convert the format of your data from JSON.
+	// convert the format of your data from JSON. This parameter is required if
+	// Enabled is set to true.
 	InputFormatConfiguration *InputFormatConfiguration `type:"structure"`
 
 	// Specifies the serializer that you want Kinesis Data Firehose to use to convert
-	// the format of your data to the Parquet or ORC format.
+	// the format of your data to the Parquet or ORC format. This parameter is required
+	// if Enabled is set to true.
 	OutputFormatConfiguration *OutputFormatConfiguration `type:"structure"`
 
-	// Specifies the AWS Glue Data Catalog table that contains the column information.
+	// Specifies the Amazon Web Services Glue Data Catalog table that contains the
+	// column information. This parameter is required if Enabled is set to true.
 	SchemaConfiguration *SchemaConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DataFormatConversionConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DataFormatConversionConfiguration) GoString() string {
 	return s.String()
 }
@@ -1716,6 +3278,11 @@ func (s *DataFormatConversionConfiguration) Validate() error {
 	if s.OutputFormatConfiguration != nil {
 		if err := s.OutputFormatConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("OutputFormatConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.SchemaConfiguration != nil {
+		if err := s.SchemaConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("SchemaConfiguration", err.(request.ErrInvalidParams))
 		}
 	}
 
@@ -1752,18 +3319,38 @@ func (s *DataFormatConversionConfiguration) SetSchemaConfiguration(v *SchemaConf
 type DeleteDeliveryStreamInput struct {
 	_ struct{} `type:"structure"`
 
+	// Set this to true if you want to delete the delivery stream even if Kinesis
+	// Data Firehose is unable to retire the grant for the CMK. Kinesis Data Firehose
+	// might be unable to retire the grant due to a customer error, such as when
+	// the CMK or the grant are in an invalid state. If you force deletion, you
+	// can then use the RevokeGrant (https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html)
+	// operation to revoke the grant you gave to Kinesis Data Firehose. If a failure
+	// to retire the grant happens due to an Amazon Web Services KMS issue, Kinesis
+	// Data Firehose keeps retrying the delete operation.
+	//
+	// The default value is false.
+	AllowForceDelete *bool `type:"boolean"`
+
 	// The name of the delivery stream.
 	//
 	// DeliveryStreamName is a required field
 	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeliveryStreamInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeliveryStreamInput) GoString() string {
 	return s.String()
 }
@@ -1784,6 +3371,12 @@ func (s *DeleteDeliveryStreamInput) Validate() error {
 	return nil
 }
 
+// SetAllowForceDelete sets the AllowForceDelete field's value.
+func (s *DeleteDeliveryStreamInput) SetAllowForceDelete(v bool) *DeleteDeliveryStreamInput {
+	s.AllowForceDelete = &v
+	return s
+}
+
 // SetDeliveryStreamName sets the DeliveryStreamName field's value.
 func (s *DeleteDeliveryStreamInput) SetDeliveryStreamName(v string) *DeleteDeliveryStreamInput {
 	s.DeliveryStreamName = &v
@@ -1794,12 +3387,20 @@ type DeleteDeliveryStreamOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeliveryStreamOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeliveryStreamOutput) GoString() string {
 	return s.String()
 }
@@ -1812,7 +3413,8 @@ type DeliveryStreamDescription struct {
 	CreateTimestamp *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the delivery stream. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// DeliveryStreamARN is a required field
 	DeliveryStreamARN *string `min:"1" type:"string" required:"true"`
@@ -1825,7 +3427,10 @@ type DeliveryStreamDescription struct {
 	// DeliveryStreamName is a required field
 	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
 
-	// The status of the delivery stream.
+	// The status of the delivery stream. If the status of a delivery stream is
+	// CREATING_FAILED, this status doesn't change, and you can't invoke CreateDeliveryStream
+	// again on it. However, you can invoke the DeleteDeliveryStream operation to
+	// delete it.
 	//
 	// DeliveryStreamStatus is a required field
 	DeliveryStreamStatus *string `type:"string" required:"true" enum:"DeliveryStreamStatus"`
@@ -1844,6 +3449,11 @@ type DeliveryStreamDescription struct {
 	//
 	// Destinations is a required field
 	Destinations []*DestinationDescription `type:"list" required:"true"`
+
+	// Provides details in case one of the following operations fails due to an
+	// error related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption,
+	// StopDeliveryStreamEncryption.
+	FailureDescription *FailureDescription `type:"structure"`
 
 	// Indicates whether there are more destinations available to list.
 	//
@@ -1866,12 +3476,20 @@ type DeliveryStreamDescription struct {
 	VersionId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeliveryStreamDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeliveryStreamDescription) GoString() string {
 	return s.String()
 }
@@ -1918,6 +3536,12 @@ func (s *DeliveryStreamDescription) SetDestinations(v []*DestinationDescription)
 	return s
 }
 
+// SetFailureDescription sets the FailureDescription field's value.
+func (s *DeliveryStreamDescription) SetFailureDescription(v *FailureDescription) *DeliveryStreamDescription {
+	s.FailureDescription = v
+	return s
+}
+
 // SetHasMoreDestinations sets the HasMoreDestinations field's value.
 func (s *DeliveryStreamDescription) SetHasMoreDestinations(v bool) *DeliveryStreamDescription {
 	s.HasMoreDestinations = &v
@@ -1942,28 +3566,157 @@ func (s *DeliveryStreamDescription) SetVersionId(v string) *DeliveryStreamDescri
 	return s
 }
 
-// Indicates the server-side encryption (SSE) status for the delivery stream.
+// Contains information about the server-side encryption (SSE) status for the
+// delivery stream, the type customer master key (CMK) in use, if any, and the
+// ARN of the CMK. You can get DeliveryStreamEncryptionConfiguration by invoking
+// the DescribeDeliveryStream operation.
 type DeliveryStreamEncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// Provides details in case one of the following operations fails due to an
+	// error related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption,
+	// StopDeliveryStreamEncryption.
+	FailureDescription *FailureDescription `type:"structure"`
+
+	// If KeyType is CUSTOMER_MANAGED_CMK, this field contains the ARN of the customer
+	// managed CMK. If KeyType is Amazon Web Services_OWNED_CMK, DeliveryStreamEncryptionConfiguration
+	// doesn't contain a value for KeyARN.
+	KeyARN *string `min:"1" type:"string"`
+
+	// Indicates the type of customer master key (CMK) that is used for encryption.
+	// The default setting is Amazon Web Services_OWNED_CMK. For more information
+	// about CMKs, see Customer Master Keys (CMKs) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
+	KeyType *string `type:"string" enum:"KeyType"`
+
+	// This is the server-side encryption (SSE) status for the delivery stream.
 	// For a full description of the different values of this status, see StartDeliveryStreamEncryption
-	// and StopDeliveryStreamEncryption.
+	// and StopDeliveryStreamEncryption. If this status is ENABLING_FAILED or DISABLING_FAILED,
+	// it is the status of the most recent attempt to enable or disable SSE, respectively.
 	Status *string `type:"string" enum:"DeliveryStreamEncryptionStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeliveryStreamEncryptionConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeliveryStreamEncryptionConfiguration) GoString() string {
 	return s.String()
+}
+
+// SetFailureDescription sets the FailureDescription field's value.
+func (s *DeliveryStreamEncryptionConfiguration) SetFailureDescription(v *FailureDescription) *DeliveryStreamEncryptionConfiguration {
+	s.FailureDescription = v
+	return s
+}
+
+// SetKeyARN sets the KeyARN field's value.
+func (s *DeliveryStreamEncryptionConfiguration) SetKeyARN(v string) *DeliveryStreamEncryptionConfiguration {
+	s.KeyARN = &v
+	return s
+}
+
+// SetKeyType sets the KeyType field's value.
+func (s *DeliveryStreamEncryptionConfiguration) SetKeyType(v string) *DeliveryStreamEncryptionConfiguration {
+	s.KeyType = &v
+	return s
 }
 
 // SetStatus sets the Status field's value.
 func (s *DeliveryStreamEncryptionConfiguration) SetStatus(v string) *DeliveryStreamEncryptionConfiguration {
 	s.Status = &v
+	return s
+}
+
+// Specifies the type and Amazon Resource Name (ARN) of the CMK to use for Server-Side
+// Encryption (SSE).
+type DeliveryStreamEncryptionConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// If you set KeyType to CUSTOMER_MANAGED_CMK, you must specify the Amazon Resource
+	// Name (ARN) of the CMK. If you set KeyType to Amazon Web Services_OWNED_CMK,
+	// Kinesis Data Firehose uses a service-account CMK.
+	KeyARN *string `min:"1" type:"string"`
+
+	// Indicates the type of customer master key (CMK) to use for encryption. The
+	// default setting is Amazon Web Services_OWNED_CMK. For more information about
+	// CMKs, see Customer Master Keys (CMKs) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
+	// When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with
+	// KeyType set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon
+	// KMS operation CreateGrant (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html)
+	// to create a grant that allows the Kinesis Data Firehose service to use the
+	// customer managed CMK to perform encryption and decryption. Kinesis Data Firehose
+	// manages that grant.
+	//
+	// When you invoke StartDeliveryStreamEncryption to change the CMK for a delivery
+	// stream that is encrypted with a customer managed CMK, Kinesis Data Firehose
+	// schedules the grant it had on the old CMK for retirement.
+	//
+	// You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery
+	// streams. If a CreateDeliveryStream or StartDeliveryStreamEncryption operation
+	// exceeds this limit, Kinesis Data Firehose throws a LimitExceededException.
+	//
+	// To encrypt your delivery stream, use symmetric CMKs. Kinesis Data Firehose
+	// doesn't support asymmetric CMKs. For information about symmetric and asymmetric
+	// CMKs, see About Symmetric and Asymmetric CMKs (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html)
+	// in the Amazon Web Services Key Management Service developer guide.
+	//
+	// KeyType is a required field
+	KeyType *string `type:"string" required:"true" enum:"KeyType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeliveryStreamEncryptionConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeliveryStreamEncryptionConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeliveryStreamEncryptionConfigurationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeliveryStreamEncryptionConfigurationInput"}
+	if s.KeyARN != nil && len(*s.KeyARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("KeyARN", 1))
+	}
+	if s.KeyType == nil {
+		invalidParams.Add(request.NewErrParamRequired("KeyType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKeyARN sets the KeyARN field's value.
+func (s *DeliveryStreamEncryptionConfigurationInput) SetKeyARN(v string) *DeliveryStreamEncryptionConfigurationInput {
+	s.KeyARN = &v
+	return s
+}
+
+// SetKeyType sets the KeyType field's value.
+func (s *DeliveryStreamEncryptionConfigurationInput) SetKeyType(v string) *DeliveryStreamEncryptionConfigurationInput {
+	s.KeyType = &v
 	return s
 }
 
@@ -1984,12 +3737,20 @@ type DescribeDeliveryStreamInput struct {
 	Limit *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDeliveryStreamInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDeliveryStreamInput) GoString() string {
 	return s.String()
 }
@@ -2043,12 +3804,20 @@ type DescribeDeliveryStreamOutput struct {
 	DeliveryStreamDescription *DeliveryStreamDescription `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDeliveryStreamOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDeliveryStreamOutput) GoString() string {
 	return s.String()
 }
@@ -2082,12 +3851,20 @@ type Deserializer struct {
 	OpenXJsonSerDe *OpenXJsonSerDe `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Deserializer) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Deserializer) GoString() string {
 	return s.String()
 }
@@ -2108,6 +3885,12 @@ func (s *Deserializer) SetOpenXJsonSerDe(v *OpenXJsonSerDe) *Deserializer {
 type DestinationDescription struct {
 	_ struct{} `type:"structure"`
 
+	// The destination in the Serverless offering for Amazon OpenSearch Service.
+	AmazonOpenSearchServerlessDestinationDescription *AmazonOpenSearchServerlessDestinationDescription `type:"structure"`
+
+	// The destination in Amazon OpenSearch Service.
+	AmazonopensearchserviceDestinationDescription *AmazonopensearchserviceDestinationDescription `type:"structure"`
+
 	// The ID of the destination.
 	//
 	// DestinationId is a required field
@@ -2119,6 +3902,9 @@ type DestinationDescription struct {
 	// The destination in Amazon S3.
 	ExtendedS3DestinationDescription *ExtendedS3DestinationDescription `type:"structure"`
 
+	// Describes the specified HTTP endpoint destination.
+	HttpEndpointDestinationDescription *HttpEndpointDestinationDescription `type:"structure"`
+
 	// The destination in Amazon Redshift.
 	RedshiftDestinationDescription *RedshiftDestinationDescription `type:"structure"`
 
@@ -2129,14 +3915,34 @@ type DestinationDescription struct {
 	SplunkDestinationDescription *SplunkDestinationDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DestinationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DestinationDescription) GoString() string {
 	return s.String()
+}
+
+// SetAmazonOpenSearchServerlessDestinationDescription sets the AmazonOpenSearchServerlessDestinationDescription field's value.
+func (s *DestinationDescription) SetAmazonOpenSearchServerlessDestinationDescription(v *AmazonOpenSearchServerlessDestinationDescription) *DestinationDescription {
+	s.AmazonOpenSearchServerlessDestinationDescription = v
+	return s
+}
+
+// SetAmazonopensearchserviceDestinationDescription sets the AmazonopensearchserviceDestinationDescription field's value.
+func (s *DestinationDescription) SetAmazonopensearchserviceDestinationDescription(v *AmazonopensearchserviceDestinationDescription) *DestinationDescription {
+	s.AmazonopensearchserviceDestinationDescription = v
+	return s
 }
 
 // SetDestinationId sets the DestinationId field's value.
@@ -2154,6 +3960,12 @@ func (s *DestinationDescription) SetElasticsearchDestinationDescription(v *Elast
 // SetExtendedS3DestinationDescription sets the ExtendedS3DestinationDescription field's value.
 func (s *DestinationDescription) SetExtendedS3DestinationDescription(v *ExtendedS3DestinationDescription) *DestinationDescription {
 	s.ExtendedS3DestinationDescription = v
+	return s
+}
+
+// SetHttpEndpointDestinationDescription sets the HttpEndpointDestinationDescription field's value.
+func (s *DestinationDescription) SetHttpEndpointDestinationDescription(v *HttpEndpointDestinationDescription) *DestinationDescription {
+	s.HttpEndpointDestinationDescription = v
 	return s
 }
 
@@ -2175,6 +3987,113 @@ func (s *DestinationDescription) SetSplunkDestinationDescription(v *SplunkDestin
 	return s
 }
 
+// Indicates the method for setting up document ID. The supported methods are
+// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+// document ID.
+type DocumentIdOptions struct {
+	_ struct{} `type:"structure"`
+
+	// When the FIREHOSE_DEFAULT option is chosen, Kinesis Data Firehose generates
+	// a unique document ID for each record based on a unique internal identifier.
+	// The generated document ID is stable across multiple delivery attempts, which
+	// helps prevent the same record from being indexed multiple times with different
+	// document IDs.
+	//
+	// When the NO_DOCUMENT_ID option is chosen, Kinesis Data Firehose does not
+	// include any document IDs in the requests it sends to the Amazon OpenSearch
+	// Service. This causes the Amazon OpenSearch Service domain to generate document
+	// IDs. In case of multiple delivery attempts, this may cause the same record
+	// to be indexed more than once with different document IDs. This option enables
+	// write-heavy operations, such as the ingestion of logs and observability data,
+	// to consume less resources in the Amazon OpenSearch Service domain, resulting
+	// in improved performance.
+	//
+	// DefaultDocumentIdFormat is a required field
+	DefaultDocumentIdFormat *string `type:"string" required:"true" enum:"DefaultDocumentIdFormat"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DocumentIdOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DocumentIdOptions) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DocumentIdOptions) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DocumentIdOptions"}
+	if s.DefaultDocumentIdFormat == nil {
+		invalidParams.Add(request.NewErrParamRequired("DefaultDocumentIdFormat"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDefaultDocumentIdFormat sets the DefaultDocumentIdFormat field's value.
+func (s *DocumentIdOptions) SetDefaultDocumentIdFormat(v string) *DocumentIdOptions {
+	s.DefaultDocumentIdFormat = &v
+	return s
+}
+
+// The configuration of the dynamic partitioning mechanism that creates smaller
+// data sets from the streaming data by partitioning it based on partition keys.
+// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
+type DynamicPartitioningConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies that the dynamic partitioning is enabled for this Kinesis Data
+	// Firehose delivery stream.
+	Enabled *bool `type:"boolean"`
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver data
+	// to an Amazon S3 prefix.
+	RetryOptions *RetryOptions `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DynamicPartitioningConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DynamicPartitioningConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *DynamicPartitioningConfiguration) SetEnabled(v bool) *DynamicPartitioningConfiguration {
+	s.Enabled = &v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *DynamicPartitioningConfiguration) SetRetryOptions(v *RetryOptions) *DynamicPartitioningConfiguration {
+	s.RetryOptions = v
+	return s
+}
+
 // Describes the buffering to perform before delivering data to the Amazon ES
 // destination.
 type ElasticsearchBufferingHints struct {
@@ -2182,7 +4101,7 @@ type ElasticsearchBufferingHints struct {
 
 	// Buffer incoming data for the specified period of time, in seconds, before
 	// delivering it to the destination. The default value is 300 (5 minutes).
-	IntervalInSeconds *int64 `min:"60" type:"integer"`
+	IntervalInSeconds *int64 `type:"integer"`
 
 	// Buffer incoming data to the specified size, in MBs, before delivering it
 	// to the destination. The default value is 5.
@@ -2193,12 +4112,20 @@ type ElasticsearchBufferingHints struct {
 	SizeInMBs *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchBufferingHints) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchBufferingHints) GoString() string {
 	return s.String()
 }
@@ -2206,9 +4133,6 @@ func (s ElasticsearchBufferingHints) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchBufferingHints) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "ElasticsearchBufferingHints"}
-	if s.IntervalInSeconds != nil && *s.IntervalInSeconds < 60 {
-		invalidParams.Add(request.NewErrParamMinValue("IntervalInSeconds", 60))
-	}
 	if s.SizeInMBs != nil && *s.SizeInMBs < 1 {
 		invalidParams.Add(request.NewErrParamMinValue("SizeInMBs", 1))
 	}
@@ -2242,13 +4166,22 @@ type ElasticsearchDestinationConfiguration struct {
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
-	// The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeElasticsearchDomain,
-	// DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after
-	// assuming the role specified in RoleARN. For more information, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
+	ClusterEndpoint *string `min:"1" type:"string"`
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions `type:"structure"`
+
+	// The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeDomain,
+	// DescribeDomains, and DescribeDomainConfig after assuming the role specified
+	// in RoleARN. For more information, see Amazon Resource Names (ARNs) and Amazon
+	// Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
-	// DomainARN is a required field
-	DomainARN *string `min:"1" type:"string" required:"true"`
+	// Specify either ClusterEndpoint or DomainARN.
+	DomainARN *string `min:"1" type:"string"`
 
 	// The Elasticsearch index name.
 	//
@@ -2257,8 +4190,8 @@ type ElasticsearchDestinationConfiguration struct {
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp
 	// to the IndexName to facilitate the expiration of old data. For more information,
-	// see Index Rotation for the Amazon ES Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
-	// The default value is OneDay.
+	// see Index Rotation for the Amazon ES Destination (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
+	// The default value is OneDay.
 	IndexRotationPeriod *string `type:"string" enum:"ElasticsearchIndexRotationPeriod"`
 
 	// The data processing configuration.
@@ -2271,20 +4204,23 @@ type ElasticsearchDestinationConfiguration struct {
 	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
 	// Firehose for calling the Amazon ES Configuration API and for indexing documents.
 	// For more information, see Grant Kinesis Data Firehose Access to an Amazon
-	// S3 Destination (http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
-	// and Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// S3 Destination (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
+	// and Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
 
 	// Defines how documents should be delivered to Amazon S3. When it is set to
 	// FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could
-	// not be indexed to the configured Amazon S3 destination, with elasticsearch-failed/
+	// not be indexed to the configured Amazon S3 destination, with AmazonOpenSearchService-failed/
 	// appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose
 	// delivers all incoming records to Amazon S3, and also writes failed documents
-	// with elasticsearch-failed/ appended to the prefix. For more information,
-	// see Amazon S3 Backup for the Amazon ES Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup).
+	// with AmazonOpenSearchService-failed/ appended to the prefix. For more information,
+	// see Amazon S3 Backup for the Amazon ES Destination (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup).
 	// Default value is FailedDocumentsOnly.
+	//
+	// You can't change this backup mode after you create the delivery stream.
 	S3BackupMode *string `type:"string" enum:"ElasticsearchS3BackupMode"`
 
 	// The configuration for the backup Amazon S3 location.
@@ -2297,16 +4233,27 @@ type ElasticsearchDestinationConfiguration struct {
 	// already has another type, Kinesis Data Firehose returns an error during run
 	// time.
 	//
-	// TypeName is a required field
-	TypeName *string `min:"1" type:"string" required:"true"`
+	// For Elasticsearch 7.x, don't specify a TypeName.
+	TypeName *string `type:"string"`
+
+	// The details of the VPC of the Amazon destination.
+	VpcConfiguration *VpcConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchDestinationConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchDestinationConfiguration) GoString() string {
 	return s.String()
 }
@@ -2314,8 +4261,8 @@ func (s ElasticsearchDestinationConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchDestinationConfiguration) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "ElasticsearchDestinationConfiguration"}
-	if s.DomainARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainARN"))
+	if s.ClusterEndpoint != nil && len(*s.ClusterEndpoint) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ClusterEndpoint", 1))
 	}
 	if s.DomainARN != nil && len(*s.DomainARN) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("DomainARN", 1))
@@ -2335,15 +4282,14 @@ func (s *ElasticsearchDestinationConfiguration) Validate() error {
 	if s.S3Configuration == nil {
 		invalidParams.Add(request.NewErrParamRequired("S3Configuration"))
 	}
-	if s.TypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypeName"))
-	}
-	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TypeName", 1))
-	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
 			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DocumentIdOptions != nil {
+		if err := s.DocumentIdOptions.Validate(); err != nil {
+			invalidParams.AddNested("DocumentIdOptions", err.(request.ErrInvalidParams))
 		}
 	}
 	if s.ProcessingConfiguration != nil {
@@ -2354,6 +4300,11 @@ func (s *ElasticsearchDestinationConfiguration) Validate() error {
 	if s.S3Configuration != nil {
 		if err := s.S3Configuration.Validate(); err != nil {
 			invalidParams.AddNested("S3Configuration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.VpcConfiguration != nil {
+		if err := s.VpcConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(request.ErrInvalidParams))
 		}
 	}
 
@@ -2372,6 +4323,18 @@ func (s *ElasticsearchDestinationConfiguration) SetBufferingHints(v *Elasticsear
 // SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
 func (s *ElasticsearchDestinationConfiguration) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *ElasticsearchDestinationConfiguration {
 	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetClusterEndpoint sets the ClusterEndpoint field's value.
+func (s *ElasticsearchDestinationConfiguration) SetClusterEndpoint(v string) *ElasticsearchDestinationConfiguration {
+	s.ClusterEndpoint = &v
+	return s
+}
+
+// SetDocumentIdOptions sets the DocumentIdOptions field's value.
+func (s *ElasticsearchDestinationConfiguration) SetDocumentIdOptions(v *DocumentIdOptions) *ElasticsearchDestinationConfiguration {
+	s.DocumentIdOptions = v
 	return s
 }
 
@@ -2429,6 +4392,12 @@ func (s *ElasticsearchDestinationConfiguration) SetTypeName(v string) *Elasticse
 	return s
 }
 
+// SetVpcConfiguration sets the VpcConfiguration field's value.
+func (s *ElasticsearchDestinationConfiguration) SetVpcConfiguration(v *VpcConfiguration) *ElasticsearchDestinationConfiguration {
+	s.VpcConfiguration = v
+	return s
+}
+
 // The destination description in Amazon ES.
 type ElasticsearchDestinationDescription struct {
 	_ struct{} `type:"structure"`
@@ -2439,8 +4408,21 @@ type ElasticsearchDestinationDescription struct {
 	// The Amazon CloudWatch logging options.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
+	// The endpoint to use when communicating with the cluster. Kinesis Data Firehose
+	// uses either this ClusterEndpoint or the DomainARN field to send data to Amazon
+	// ES.
+	ClusterEndpoint *string `min:"1" type:"string"`
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions `type:"structure"`
+
 	// The ARN of the Amazon ES domain. For more information, see Amazon Resource
-	// Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Names (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// Kinesis Data Firehose uses either ClusterEndpoint or DomainARN to send data
+	// to Amazon ES.
 	DomainARN *string `min:"1" type:"string"`
 
 	// The Elasticsearch index name.
@@ -2455,8 +4437,9 @@ type ElasticsearchDestinationDescription struct {
 	// The Amazon ES retry options.
 	RetryOptions *ElasticsearchRetryOptions `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string `min:"1" type:"string"`
 
 	// The Amazon S3 backup mode.
@@ -2465,16 +4448,30 @@ type ElasticsearchDestinationDescription struct {
 	// The Amazon S3 destination.
 	S3DestinationDescription *S3DestinationDescription `type:"structure"`
 
-	// The Elasticsearch type name.
-	TypeName *string `min:"1" type:"string"`
+	// The Elasticsearch type name. This applies to Elasticsearch 6.x and lower
+	// versions. For Elasticsearch 7.x and OpenSearch Service 1.x, there's no value
+	// for TypeName.
+	TypeName *string `type:"string"`
+
+	// The details of the VPC of the Amazon OpenSearch or the Amazon OpenSearch
+	// Serverless destination.
+	VpcConfigurationDescription *VpcConfigurationDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchDestinationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchDestinationDescription) GoString() string {
 	return s.String()
 }
@@ -2488,6 +4485,18 @@ func (s *ElasticsearchDestinationDescription) SetBufferingHints(v *Elasticsearch
 // SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
 func (s *ElasticsearchDestinationDescription) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *ElasticsearchDestinationDescription {
 	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetClusterEndpoint sets the ClusterEndpoint field's value.
+func (s *ElasticsearchDestinationDescription) SetClusterEndpoint(v string) *ElasticsearchDestinationDescription {
+	s.ClusterEndpoint = &v
+	return s
+}
+
+// SetDocumentIdOptions sets the DocumentIdOptions field's value.
+func (s *ElasticsearchDestinationDescription) SetDocumentIdOptions(v *DocumentIdOptions) *ElasticsearchDestinationDescription {
+	s.DocumentIdOptions = v
 	return s
 }
 
@@ -2545,6 +4554,12 @@ func (s *ElasticsearchDestinationDescription) SetTypeName(v string) *Elasticsear
 	return s
 }
 
+// SetVpcConfigurationDescription sets the VpcConfigurationDescription field's value.
+func (s *ElasticsearchDestinationDescription) SetVpcConfigurationDescription(v *VpcConfigurationDescription) *ElasticsearchDestinationDescription {
+	s.VpcConfigurationDescription = v
+	return s
+}
+
 // Describes an update for a destination in Amazon ES.
 type ElasticsearchDestinationUpdate struct {
 	_ struct{} `type:"structure"`
@@ -2556,10 +4571,21 @@ type ElasticsearchDestinationUpdate struct {
 	// The CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
-	// The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeElasticsearchDomain,
-	// DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after
-	// assuming the IAM role specified in RoleARN. For more information, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
+	ClusterEndpoint *string `min:"1" type:"string"`
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions `type:"structure"`
+
+	// The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeDomain,
+	// DescribeDomains, and DescribeDomainConfig after assuming the IAM role specified
+	// in RoleARN. For more information, see Amazon Resource Names (ARNs) and Amazon
+	// Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// Specify either ClusterEndpoint or DomainARN.
 	DomainARN *string `min:"1" type:"string"`
 
 	// The Elasticsearch index name.
@@ -2567,8 +4593,8 @@ type ElasticsearchDestinationUpdate struct {
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp
 	// to IndexName to facilitate the expiration of old data. For more information,
-	// see Index Rotation for the Amazon ES Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
-	// Default value is OneDay.
+	// see Index Rotation for the Amazon ES Destination (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
+	// Default value is OneDay.
 	IndexRotationPeriod *string `type:"string" enum:"ElasticsearchIndexRotationPeriod"`
 
 	// The data processing configuration.
@@ -2581,8 +4607,9 @@ type ElasticsearchDestinationUpdate struct {
 	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
 	// Firehose for calling the Amazon ES Configuration API and for indexing documents.
 	// For more information, see Grant Kinesis Data Firehose Access to an Amazon
-	// S3 Destination (http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
-	// and Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// S3 Destination (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
+	// and Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string `min:"1" type:"string"`
 
 	// The Amazon S3 destination.
@@ -2591,15 +4618,28 @@ type ElasticsearchDestinationUpdate struct {
 	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one
 	// type per index. If you try to specify a new type for an existing index that
 	// already has another type, Kinesis Data Firehose returns an error during runtime.
-	TypeName *string `min:"1" type:"string"`
+	//
+	// If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery
+	// stream, Kinesis Data Firehose still delivers data to Elasticsearch with the
+	// old index name and type name. If you want to update your delivery stream
+	// with a new index name, provide an empty string for TypeName.
+	TypeName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchDestinationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchDestinationUpdate) GoString() string {
 	return s.String()
 }
@@ -2607,6 +4647,9 @@ func (s ElasticsearchDestinationUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchDestinationUpdate) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "ElasticsearchDestinationUpdate"}
+	if s.ClusterEndpoint != nil && len(*s.ClusterEndpoint) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ClusterEndpoint", 1))
+	}
 	if s.DomainARN != nil && len(*s.DomainARN) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("DomainARN", 1))
 	}
@@ -2616,12 +4659,14 @@ func (s *ElasticsearchDestinationUpdate) Validate() error {
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
 	}
-	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TypeName", 1))
-	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
 			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DocumentIdOptions != nil {
+		if err := s.DocumentIdOptions.Validate(); err != nil {
+			invalidParams.AddNested("DocumentIdOptions", err.(request.ErrInvalidParams))
 		}
 	}
 	if s.ProcessingConfiguration != nil {
@@ -2650,6 +4695,18 @@ func (s *ElasticsearchDestinationUpdate) SetBufferingHints(v *ElasticsearchBuffe
 // SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
 func (s *ElasticsearchDestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *ElasticsearchDestinationUpdate {
 	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetClusterEndpoint sets the ClusterEndpoint field's value.
+func (s *ElasticsearchDestinationUpdate) SetClusterEndpoint(v string) *ElasticsearchDestinationUpdate {
+	s.ClusterEndpoint = &v
+	return s
+}
+
+// SetDocumentIdOptions sets the DocumentIdOptions field's value.
+func (s *ElasticsearchDestinationUpdate) SetDocumentIdOptions(v *DocumentIdOptions) *ElasticsearchDestinationUpdate {
+	s.DocumentIdOptions = v
 	return s
 }
 
@@ -2714,12 +4771,20 @@ type ElasticsearchRetryOptions struct {
 	DurationInSeconds *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchRetryOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ElasticsearchRetryOptions) GoString() string {
 	return s.String()
 }
@@ -2742,12 +4807,20 @@ type EncryptionConfiguration struct {
 	NoEncryptionConfig *string `type:"string" enum:"NoEncryptionConfig"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EncryptionConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EncryptionConfiguration) GoString() string {
 	return s.String()
 }
@@ -2784,7 +4857,7 @@ type ExtendedS3DestinationConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// BucketARN is a required field
 	BucketARN *string `min:"1" type:"string" required:"true"`
@@ -2802,28 +4875,32 @@ type ExtendedS3DestinationConfiguration struct {
 	// format to the Parquet or ORC format before writing it to Amazon S3.
 	DataFormatConversionConfiguration *DataFormatConversionConfiguration `type:"structure"`
 
+	// The configuration of the dynamic partitioning mechanism that creates smaller
+	// data sets from the streaming data by partitioning it based on partition keys.
+	// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
+	DynamicPartitioningConfiguration *DynamicPartitioningConfiguration `type:"structure"`
+
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
 	EncryptionConfiguration *EncryptionConfiguration `type:"structure"`
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
@@ -2831,16 +4908,26 @@ type ExtendedS3DestinationConfiguration struct {
 	// The configuration for backup in Amazon S3.
 	S3BackupConfiguration *S3DestinationConfiguration `type:"structure"`
 
-	// The Amazon S3 backup mode.
+	// The Amazon S3 backup mode. After you create a delivery stream, you can update
+	// it to enable Amazon S3 backup if it is disabled. If backup is enabled, you
+	// can't update the delivery stream to disable it.
 	S3BackupMode *string `type:"string" enum:"S3BackupMode"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExtendedS3DestinationConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExtendedS3DestinationConfiguration) GoString() string {
 	return s.String()
 }
@@ -2922,6 +5009,12 @@ func (s *ExtendedS3DestinationConfiguration) SetDataFormatConversionConfiguratio
 	return s
 }
 
+// SetDynamicPartitioningConfiguration sets the DynamicPartitioningConfiguration field's value.
+func (s *ExtendedS3DestinationConfiguration) SetDynamicPartitioningConfiguration(v *DynamicPartitioningConfiguration) *ExtendedS3DestinationConfiguration {
+	s.DynamicPartitioningConfiguration = v
+	return s
+}
+
 // SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
 func (s *ExtendedS3DestinationConfiguration) SetEncryptionConfiguration(v *EncryptionConfiguration) *ExtendedS3DestinationConfiguration {
 	s.EncryptionConfiguration = v
@@ -2969,7 +5062,7 @@ type ExtendedS3DestinationDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// BucketARN is a required field
 	BucketARN *string `min:"1" type:"string" required:"true"`
@@ -2991,6 +5084,11 @@ type ExtendedS3DestinationDescription struct {
 	// format to the Parquet or ORC format before writing it to Amazon S3.
 	DataFormatConversionConfiguration *DataFormatConversionConfiguration `type:"structure"`
 
+	// The configuration of the dynamic partitioning mechanism that creates smaller
+	// data sets from the streaming data by partitioning it based on partition keys.
+	// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
+	DynamicPartitioningConfiguration *DynamicPartitioningConfiguration `type:"structure"`
+
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
 	//
@@ -2999,22 +5097,21 @@ type ExtendedS3DestinationDescription struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
@@ -3026,12 +5123,20 @@ type ExtendedS3DestinationDescription struct {
 	S3BackupMode *string `type:"string" enum:"S3BackupMode"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExtendedS3DestinationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExtendedS3DestinationDescription) GoString() string {
 	return s.String()
 }
@@ -3063,6 +5168,12 @@ func (s *ExtendedS3DestinationDescription) SetCompressionFormat(v string) *Exten
 // SetDataFormatConversionConfiguration sets the DataFormatConversionConfiguration field's value.
 func (s *ExtendedS3DestinationDescription) SetDataFormatConversionConfiguration(v *DataFormatConversionConfiguration) *ExtendedS3DestinationDescription {
 	s.DataFormatConversionConfiguration = v
+	return s
+}
+
+// SetDynamicPartitioningConfiguration sets the DynamicPartitioningConfiguration field's value.
+func (s *ExtendedS3DestinationDescription) SetDynamicPartitioningConfiguration(v *DynamicPartitioningConfiguration) *ExtendedS3DestinationDescription {
+	s.DynamicPartitioningConfiguration = v
 	return s
 }
 
@@ -3113,7 +5224,7 @@ type ExtendedS3DestinationUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	BucketARN *string `min:"1" type:"string"`
 
 	// The buffering option.
@@ -3129,43 +5240,56 @@ type ExtendedS3DestinationUpdate struct {
 	// format to the Parquet or ORC format before writing it to Amazon S3.
 	DataFormatConversionConfiguration *DataFormatConversionConfiguration `type:"structure"`
 
+	// The configuration of the dynamic partitioning mechanism that creates smaller
+	// data sets from the streaming data by partitioning it based on partition keys.
+	// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
+	DynamicPartitioningConfiguration *DynamicPartitioningConfiguration `type:"structure"`
+
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
 	EncryptionConfiguration *EncryptionConfiguration `type:"structure"`
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string `min:"1" type:"string"`
 
-	// Enables or disables Amazon S3 backup mode.
+	// You can update a delivery stream to enable Amazon S3 backup if it is disabled.
+	// If backup is enabled, you can't update the delivery stream to disable it.
 	S3BackupMode *string `type:"string" enum:"S3BackupMode"`
 
 	// The Amazon S3 destination for backup.
 	S3BackupUpdate *S3DestinationUpdate `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExtendedS3DestinationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExtendedS3DestinationUpdate) GoString() string {
 	return s.String()
 }
@@ -3241,6 +5365,12 @@ func (s *ExtendedS3DestinationUpdate) SetDataFormatConversionConfiguration(v *Da
 	return s
 }
 
+// SetDynamicPartitioningConfiguration sets the DynamicPartitioningConfiguration field's value.
+func (s *ExtendedS3DestinationUpdate) SetDynamicPartitioningConfiguration(v *DynamicPartitioningConfiguration) *ExtendedS3DestinationUpdate {
+	s.DynamicPartitioningConfiguration = v
+	return s
+}
+
 // SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
 func (s *ExtendedS3DestinationUpdate) SetEncryptionConfiguration(v *EncryptionConfiguration) *ExtendedS3DestinationUpdate {
 	s.EncryptionConfiguration = v
@@ -3283,6 +5413,53 @@ func (s *ExtendedS3DestinationUpdate) SetS3BackupUpdate(v *S3DestinationUpdate) 
 	return s
 }
 
+// Provides details in case one of the following operations fails due to an
+// error related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption,
+// StopDeliveryStreamEncryption.
+type FailureDescription struct {
+	_ struct{} `type:"structure"`
+
+	// A message providing details about the error that caused the failure.
+	//
+	// Details is a required field
+	Details *string `min:"1" type:"string" required:"true"`
+
+	// The type of error that caused the failure.
+	//
+	// Type is a required field
+	Type *string `type:"string" required:"true" enum:"DeliveryStreamFailureType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FailureDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FailureDescription) GoString() string {
+	return s.String()
+}
+
+// SetDetails sets the Details field's value.
+func (s *FailureDescription) SetDetails(v string) *FailureDescription {
+	s.Details = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *FailureDescription) SetType(v string) *FailureDescription {
+	s.Type = &v
+	return s
+}
+
 // The native Hive / HCatalog JsonSerDe. Used by Kinesis Data Firehose for deserializing
 // data, which means converting it from the JSON format in preparation for serializing
 // it to the Parquet or ORC format. This is one of two deserializers you can
@@ -3301,12 +5478,20 @@ type HiveJsonSerDe struct {
 	TimestampFormats []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HiveJsonSerDe) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HiveJsonSerDe) GoString() string {
 	return s.String()
 }
@@ -3317,8 +5502,806 @@ func (s *HiveJsonSerDe) SetTimestampFormats(v []*string) *HiveJsonSerDe {
 	return s
 }
 
+// Describes the buffering options that can be applied before data is delivered
+// to the HTTP endpoint destination. Kinesis Data Firehose treats these options
+// as hints, and it might choose to use more optimal values. The SizeInMBs and
+// IntervalInSeconds parameters are optional. However, if specify a value for
+// one of them, you must also provide a value for the other.
+type HttpEndpointBufferingHints struct {
+	_ struct{} `type:"structure"`
+
+	// Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 300 (5 minutes).
+	IntervalInSeconds *int64 `type:"integer"`
+
+	// Buffer incoming data to the specified size, in MBs, before delivering it
+	// to the destination. The default value is 5.
+	//
+	// We recommend setting this parameter to a value greater than the amount of
+	// data you typically ingest into the delivery stream in 10 seconds. For example,
+	// if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
+	SizeInMBs *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointBufferingHints) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointBufferingHints) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpEndpointBufferingHints) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "HttpEndpointBufferingHints"}
+	if s.SizeInMBs != nil && *s.SizeInMBs < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("SizeInMBs", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetIntervalInSeconds sets the IntervalInSeconds field's value.
+func (s *HttpEndpointBufferingHints) SetIntervalInSeconds(v int64) *HttpEndpointBufferingHints {
+	s.IntervalInSeconds = &v
+	return s
+}
+
+// SetSizeInMBs sets the SizeInMBs field's value.
+func (s *HttpEndpointBufferingHints) SetSizeInMBs(v int64) *HttpEndpointBufferingHints {
+	s.SizeInMBs = &v
+	return s
+}
+
+// Describes the metadata that's delivered to the specified HTTP endpoint destination.
+type HttpEndpointCommonAttribute struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the HTTP endpoint common attribute.
+	//
+	// AttributeName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by HttpEndpointCommonAttribute's
+	// String and GoString methods.
+	//
+	// AttributeName is a required field
+	AttributeName *string `min:"1" type:"string" required:"true" sensitive:"true"`
+
+	// The value of the HTTP endpoint common attribute.
+	//
+	// AttributeValue is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by HttpEndpointCommonAttribute's
+	// String and GoString methods.
+	//
+	// AttributeValue is a required field
+	AttributeValue *string `type:"string" required:"true" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointCommonAttribute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointCommonAttribute) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpEndpointCommonAttribute) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "HttpEndpointCommonAttribute"}
+	if s.AttributeName == nil {
+		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+	}
+	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+	}
+	if s.AttributeValue == nil {
+		invalidParams.Add(request.NewErrParamRequired("AttributeValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAttributeName sets the AttributeName field's value.
+func (s *HttpEndpointCommonAttribute) SetAttributeName(v string) *HttpEndpointCommonAttribute {
+	s.AttributeName = &v
+	return s
+}
+
+// SetAttributeValue sets the AttributeValue field's value.
+func (s *HttpEndpointCommonAttribute) SetAttributeValue(v string) *HttpEndpointCommonAttribute {
+	s.AttributeValue = &v
+	return s
+}
+
+// Describes the configuration of the HTTP endpoint to which Kinesis Firehose
+// delivers data.
+type HttpEndpointConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The access key required for Kinesis Firehose to authenticate with the HTTP
+	// endpoint selected as the destination.
+	//
+	// AccessKey is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by HttpEndpointConfiguration's
+	// String and GoString methods.
+	AccessKey *string `type:"string" sensitive:"true"`
+
+	// The name of the HTTP endpoint selected as the destination.
+	Name *string `min:"1" type:"string"`
+
+	// The URL of the HTTP endpoint selected as the destination.
+	//
+	// If you choose an HTTP endpoint as your destination, review and follow the
+	// instructions in the Appendix - HTTP Endpoint Delivery Request and Response
+	// Specifications (https://docs.aws.amazon.com/firehose/latest/dev/httpdeliveryrequestresponse.html).
+	//
+	// Url is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by HttpEndpointConfiguration's
+	// String and GoString methods.
+	//
+	// Url is a required field
+	Url *string `min:"1" type:"string" required:"true" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpEndpointConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "HttpEndpointConfiguration"}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.Url == nil {
+		invalidParams.Add(request.NewErrParamRequired("Url"))
+	}
+	if s.Url != nil && len(*s.Url) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Url", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccessKey sets the AccessKey field's value.
+func (s *HttpEndpointConfiguration) SetAccessKey(v string) *HttpEndpointConfiguration {
+	s.AccessKey = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *HttpEndpointConfiguration) SetName(v string) *HttpEndpointConfiguration {
+	s.Name = &v
+	return s
+}
+
+// SetUrl sets the Url field's value.
+func (s *HttpEndpointConfiguration) SetUrl(v string) *HttpEndpointConfiguration {
+	s.Url = &v
+	return s
+}
+
+// Describes the HTTP endpoint selected as the destination.
+type HttpEndpointDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the HTTP endpoint selected as the destination.
+	Name *string `min:"1" type:"string"`
+
+	// The URL of the HTTP endpoint selected as the destination.
+	//
+	// Url is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by HttpEndpointDescription's
+	// String and GoString methods.
+	Url *string `min:"1" type:"string" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointDescription) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *HttpEndpointDescription) SetName(v string) *HttpEndpointDescription {
+	s.Name = &v
+	return s
+}
+
+// SetUrl sets the Url field's value.
+func (s *HttpEndpointDescription) SetUrl(v string) *HttpEndpointDescription {
+	s.Url = &v
+	return s
+}
+
+// Describes the configuration of the HTTP endpoint destination.
+type HttpEndpointDestinationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The buffering options that can be used before data is delivered to the specified
+	// destination. Kinesis Data Firehose treats these options as hints, and it
+	// might choose to use more optimal values. The SizeInMBs and IntervalInSeconds
+	// parameters are optional. However, if you specify a value for one of them,
+	// you must also provide a value for the other.
+	BufferingHints *HttpEndpointBufferingHints `type:"structure"`
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The configuration of the HTTP endpoint selected as the destination.
+	//
+	// EndpointConfiguration is a required field
+	EndpointConfiguration *HttpEndpointConfiguration `type:"structure" required:"true"`
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The configuration of the requeste sent to the HTTP endpoint specified as
+	// the destination.
+	RequestConfiguration *HttpEndpointRequestConfiguration `type:"structure"`
+
+	// Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
+	// data to the specified HTTP endpoint destination, or if it doesn't receive
+	// a valid acknowledgment of receipt from the specified HTTP endpoint destination.
+	RetryOptions *HttpEndpointRetryOptions `type:"structure"`
+
+	// Kinesis Data Firehose uses this IAM role for all the permissions that the
+	// delivery stream needs.
+	RoleARN *string `min:"1" type:"string"`
+
+	// Describes the S3 bucket backup options for the data that Kinesis Data Firehose
+	// delivers to the HTTP endpoint destination. You can back up all documents
+	// (AllData) or only the documents that Kinesis Data Firehose could not deliver
+	// to the specified HTTP endpoint destination (FailedDataOnly).
+	S3BackupMode *string `type:"string" enum:"HttpEndpointS3BackupMode"`
+
+	// Describes the configuration of a destination in Amazon S3.
+	//
+	// S3Configuration is a required field
+	S3Configuration *S3DestinationConfiguration `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointDestinationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointDestinationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpEndpointDestinationConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "HttpEndpointDestinationConfiguration"}
+	if s.EndpointConfiguration == nil {
+		invalidParams.Add(request.NewErrParamRequired("EndpointConfiguration"))
+	}
+	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+	}
+	if s.S3Configuration == nil {
+		invalidParams.Add(request.NewErrParamRequired("S3Configuration"))
+	}
+	if s.BufferingHints != nil {
+		if err := s.BufferingHints.Validate(); err != nil {
+			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.EndpointConfiguration != nil {
+		if err := s.EndpointConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("EndpointConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ProcessingConfiguration != nil {
+		if err := s.ProcessingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.RequestConfiguration != nil {
+		if err := s.RequestConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("RequestConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3Configuration != nil {
+		if err := s.S3Configuration.Validate(); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *HttpEndpointDestinationConfiguration) SetBufferingHints(v *HttpEndpointBufferingHints) *HttpEndpointDestinationConfiguration {
+	s.BufferingHints = v
+	return s
+}
+
+// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
+func (s *HttpEndpointDestinationConfiguration) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *HttpEndpointDestinationConfiguration {
+	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetEndpointConfiguration sets the EndpointConfiguration field's value.
+func (s *HttpEndpointDestinationConfiguration) SetEndpointConfiguration(v *HttpEndpointConfiguration) *HttpEndpointDestinationConfiguration {
+	s.EndpointConfiguration = v
+	return s
+}
+
+// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
+func (s *HttpEndpointDestinationConfiguration) SetProcessingConfiguration(v *ProcessingConfiguration) *HttpEndpointDestinationConfiguration {
+	s.ProcessingConfiguration = v
+	return s
+}
+
+// SetRequestConfiguration sets the RequestConfiguration field's value.
+func (s *HttpEndpointDestinationConfiguration) SetRequestConfiguration(v *HttpEndpointRequestConfiguration) *HttpEndpointDestinationConfiguration {
+	s.RequestConfiguration = v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *HttpEndpointDestinationConfiguration) SetRetryOptions(v *HttpEndpointRetryOptions) *HttpEndpointDestinationConfiguration {
+	s.RetryOptions = v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *HttpEndpointDestinationConfiguration) SetRoleARN(v string) *HttpEndpointDestinationConfiguration {
+	s.RoleARN = &v
+	return s
+}
+
+// SetS3BackupMode sets the S3BackupMode field's value.
+func (s *HttpEndpointDestinationConfiguration) SetS3BackupMode(v string) *HttpEndpointDestinationConfiguration {
+	s.S3BackupMode = &v
+	return s
+}
+
+// SetS3Configuration sets the S3Configuration field's value.
+func (s *HttpEndpointDestinationConfiguration) SetS3Configuration(v *S3DestinationConfiguration) *HttpEndpointDestinationConfiguration {
+	s.S3Configuration = v
+	return s
+}
+
+// Describes the HTTP endpoint destination.
+type HttpEndpointDestinationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// Describes buffering options that can be applied to the data before it is
+	// delivered to the HTTPS endpoint destination. Kinesis Data Firehose teats
+	// these options as hints, and it might choose to use more optimal values. The
+	// SizeInMBs and IntervalInSeconds parameters are optional. However, if specify
+	// a value for one of them, you must also provide a value for the other.
+	BufferingHints *HttpEndpointBufferingHints `type:"structure"`
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The configuration of the specified HTTP endpoint destination.
+	EndpointConfiguration *HttpEndpointDescription `type:"structure"`
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The configuration of request sent to the HTTP endpoint specified as the destination.
+	RequestConfiguration *HttpEndpointRequestConfiguration `type:"structure"`
+
+	// Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
+	// data to the specified HTTP endpoint destination, or if it doesn't receive
+	// a valid acknowledgment of receipt from the specified HTTP endpoint destination.
+	RetryOptions *HttpEndpointRetryOptions `type:"structure"`
+
+	// Kinesis Data Firehose uses this IAM role for all the permissions that the
+	// delivery stream needs.
+	RoleARN *string `min:"1" type:"string"`
+
+	// Describes the S3 bucket backup options for the data that Kinesis Firehose
+	// delivers to the HTTP endpoint destination. You can back up all documents
+	// (AllData) or only the documents that Kinesis Data Firehose could not deliver
+	// to the specified HTTP endpoint destination (FailedDataOnly).
+	S3BackupMode *string `type:"string" enum:"HttpEndpointS3BackupMode"`
+
+	// Describes a destination in Amazon S3.
+	S3DestinationDescription *S3DestinationDescription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointDestinationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointDestinationDescription) GoString() string {
+	return s.String()
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *HttpEndpointDestinationDescription) SetBufferingHints(v *HttpEndpointBufferingHints) *HttpEndpointDestinationDescription {
+	s.BufferingHints = v
+	return s
+}
+
+// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
+func (s *HttpEndpointDestinationDescription) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *HttpEndpointDestinationDescription {
+	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetEndpointConfiguration sets the EndpointConfiguration field's value.
+func (s *HttpEndpointDestinationDescription) SetEndpointConfiguration(v *HttpEndpointDescription) *HttpEndpointDestinationDescription {
+	s.EndpointConfiguration = v
+	return s
+}
+
+// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
+func (s *HttpEndpointDestinationDescription) SetProcessingConfiguration(v *ProcessingConfiguration) *HttpEndpointDestinationDescription {
+	s.ProcessingConfiguration = v
+	return s
+}
+
+// SetRequestConfiguration sets the RequestConfiguration field's value.
+func (s *HttpEndpointDestinationDescription) SetRequestConfiguration(v *HttpEndpointRequestConfiguration) *HttpEndpointDestinationDescription {
+	s.RequestConfiguration = v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *HttpEndpointDestinationDescription) SetRetryOptions(v *HttpEndpointRetryOptions) *HttpEndpointDestinationDescription {
+	s.RetryOptions = v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *HttpEndpointDestinationDescription) SetRoleARN(v string) *HttpEndpointDestinationDescription {
+	s.RoleARN = &v
+	return s
+}
+
+// SetS3BackupMode sets the S3BackupMode field's value.
+func (s *HttpEndpointDestinationDescription) SetS3BackupMode(v string) *HttpEndpointDestinationDescription {
+	s.S3BackupMode = &v
+	return s
+}
+
+// SetS3DestinationDescription sets the S3DestinationDescription field's value.
+func (s *HttpEndpointDestinationDescription) SetS3DestinationDescription(v *S3DestinationDescription) *HttpEndpointDestinationDescription {
+	s.S3DestinationDescription = v
+	return s
+}
+
+// Updates the specified HTTP endpoint destination.
+type HttpEndpointDestinationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Describes buffering options that can be applied to the data before it is
+	// delivered to the HTTPS endpoint destination. Kinesis Data Firehose teats
+	// these options as hints, and it might choose to use more optimal values. The
+	// SizeInMBs and IntervalInSeconds parameters are optional. However, if specify
+	// a value for one of them, you must also provide a value for the other.
+	BufferingHints *HttpEndpointBufferingHints `type:"structure"`
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// Describes the configuration of the HTTP endpoint destination.
+	EndpointConfiguration *HttpEndpointConfiguration `type:"structure"`
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The configuration of the request sent to the HTTP endpoint specified as the
+	// destination.
+	RequestConfiguration *HttpEndpointRequestConfiguration `type:"structure"`
+
+	// Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
+	// data to the specified HTTP endpoint destination, or if it doesn't receive
+	// a valid acknowledgment of receipt from the specified HTTP endpoint destination.
+	RetryOptions *HttpEndpointRetryOptions `type:"structure"`
+
+	// Kinesis Data Firehose uses this IAM role for all the permissions that the
+	// delivery stream needs.
+	RoleARN *string `min:"1" type:"string"`
+
+	// Describes the S3 bucket backup options for the data that Kinesis Firehose
+	// delivers to the HTTP endpoint destination. You can back up all documents
+	// (AllData) or only the documents that Kinesis Data Firehose could not deliver
+	// to the specified HTTP endpoint destination (FailedDataOnly).
+	S3BackupMode *string `type:"string" enum:"HttpEndpointS3BackupMode"`
+
+	// Describes an update for a destination in Amazon S3.
+	S3Update *S3DestinationUpdate `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointDestinationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointDestinationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpEndpointDestinationUpdate) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "HttpEndpointDestinationUpdate"}
+	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+	}
+	if s.BufferingHints != nil {
+		if err := s.BufferingHints.Validate(); err != nil {
+			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.EndpointConfiguration != nil {
+		if err := s.EndpointConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("EndpointConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ProcessingConfiguration != nil {
+		if err := s.ProcessingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.RequestConfiguration != nil {
+		if err := s.RequestConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("RequestConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.S3Update != nil {
+		if err := s.S3Update.Validate(); err != nil {
+			invalidParams.AddNested("S3Update", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *HttpEndpointDestinationUpdate) SetBufferingHints(v *HttpEndpointBufferingHints) *HttpEndpointDestinationUpdate {
+	s.BufferingHints = v
+	return s
+}
+
+// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
+func (s *HttpEndpointDestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *HttpEndpointDestinationUpdate {
+	s.CloudWatchLoggingOptions = v
+	return s
+}
+
+// SetEndpointConfiguration sets the EndpointConfiguration field's value.
+func (s *HttpEndpointDestinationUpdate) SetEndpointConfiguration(v *HttpEndpointConfiguration) *HttpEndpointDestinationUpdate {
+	s.EndpointConfiguration = v
+	return s
+}
+
+// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
+func (s *HttpEndpointDestinationUpdate) SetProcessingConfiguration(v *ProcessingConfiguration) *HttpEndpointDestinationUpdate {
+	s.ProcessingConfiguration = v
+	return s
+}
+
+// SetRequestConfiguration sets the RequestConfiguration field's value.
+func (s *HttpEndpointDestinationUpdate) SetRequestConfiguration(v *HttpEndpointRequestConfiguration) *HttpEndpointDestinationUpdate {
+	s.RequestConfiguration = v
+	return s
+}
+
+// SetRetryOptions sets the RetryOptions field's value.
+func (s *HttpEndpointDestinationUpdate) SetRetryOptions(v *HttpEndpointRetryOptions) *HttpEndpointDestinationUpdate {
+	s.RetryOptions = v
+	return s
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *HttpEndpointDestinationUpdate) SetRoleARN(v string) *HttpEndpointDestinationUpdate {
+	s.RoleARN = &v
+	return s
+}
+
+// SetS3BackupMode sets the S3BackupMode field's value.
+func (s *HttpEndpointDestinationUpdate) SetS3BackupMode(v string) *HttpEndpointDestinationUpdate {
+	s.S3BackupMode = &v
+	return s
+}
+
+// SetS3Update sets the S3Update field's value.
+func (s *HttpEndpointDestinationUpdate) SetS3Update(v *S3DestinationUpdate) *HttpEndpointDestinationUpdate {
+	s.S3Update = v
+	return s
+}
+
+// The configuration of the HTTP endpoint request.
+type HttpEndpointRequestConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the metadata sent to the HTTP endpoint destination.
+	CommonAttributes []*HttpEndpointCommonAttribute `type:"list"`
+
+	// Kinesis Data Firehose uses the content encoding to compress the body of a
+	// request before sending the request to the destination. For more information,
+	// see Content-Encoding (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding)
+	// in MDN Web Docs, the official Mozilla documentation.
+	ContentEncoding *string `type:"string" enum:"ContentEncoding"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointRequestConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointRequestConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpEndpointRequestConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "HttpEndpointRequestConfiguration"}
+	if s.CommonAttributes != nil {
+		for i, v := range s.CommonAttributes {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CommonAttributes", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCommonAttributes sets the CommonAttributes field's value.
+func (s *HttpEndpointRequestConfiguration) SetCommonAttributes(v []*HttpEndpointCommonAttribute) *HttpEndpointRequestConfiguration {
+	s.CommonAttributes = v
+	return s
+}
+
+// SetContentEncoding sets the ContentEncoding field's value.
+func (s *HttpEndpointRequestConfiguration) SetContentEncoding(v string) *HttpEndpointRequestConfiguration {
+	s.ContentEncoding = &v
+	return s
+}
+
+// Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
+// data to the specified HTTP endpoint destination, or if it doesn't receive
+// a valid acknowledgment of receipt from the specified HTTP endpoint destination.
+type HttpEndpointRetryOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The total amount of time that Kinesis Data Firehose spends on retries. This
+	// duration starts after the initial attempt to send data to the custom destination
+	// via HTTPS endpoint fails. It doesn't include the periods during which Kinesis
+	// Data Firehose waits for acknowledgment from the specified destination after
+	// each attempt.
+	DurationInSeconds *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointRetryOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HttpEndpointRetryOptions) GoString() string {
+	return s.String()
+}
+
+// SetDurationInSeconds sets the DurationInSeconds field's value.
+func (s *HttpEndpointRetryOptions) SetDurationInSeconds(v int64) *HttpEndpointRetryOptions {
+	s.DurationInSeconds = &v
+	return s
+}
+
 // Specifies the deserializer you want to use to convert the format of the input
-// data.
+// data. This parameter is required if Enabled is set to true.
 type InputFormatConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3328,12 +6311,20 @@ type InputFormatConfiguration struct {
 	Deserializer *Deserializer `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputFormatConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputFormatConfiguration) GoString() string {
 	return s.String()
 }
@@ -3344,24 +6335,234 @@ func (s *InputFormatConfiguration) SetDeserializer(v *Deserializer) *InputFormat
 	return s
 }
 
+// The specified input parameter has a value that is not valid.
+type InvalidArgumentException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A message that provides information about the error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArgumentException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArgumentException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidArgumentException(v protocol.ResponseMetadata) error {
+	return &InvalidArgumentException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidArgumentException) Code() string {
+	return "InvalidArgumentException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidArgumentException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidArgumentException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidArgumentException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidArgumentException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidArgumentException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Kinesis Data Firehose throws this exception when an attempt to put records
+// or to start or stop delivery stream encryption fails. This happens when the
+// KMS service throws one of the following exception types: AccessDeniedException,
+// InvalidStateException, DisabledException, or NotFoundException.
+type InvalidKMSResourceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Code_ *string `locationName:"code" type:"string"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidKMSResourceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidKMSResourceException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidKMSResourceException(v protocol.ResponseMetadata) error {
+	return &InvalidKMSResourceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidKMSResourceException) Code() string {
+	return "InvalidKMSResourceException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidKMSResourceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidKMSResourceException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidKMSResourceException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidKMSResourceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidKMSResourceException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Only requests from CloudWatch Logs are supported when CloudWatch Logs decompression
+// is enabled.
+type InvalidSourceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Code_ *string `locationName:"code" type:"string"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSourceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSourceException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidSourceException(v protocol.ResponseMetadata) error {
+	return &InvalidSourceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidSourceException) Code() string {
+	return "InvalidSourceException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidSourceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidSourceException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidSourceException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidSourceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidSourceException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Describes an encryption key for a destination in Amazon S3.
 type KMSEncryptionConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the encryption key. Must belong to the
-	// same AWS Region as the destination Amazon S3 bucket. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// same Amazon Web Services Region as the destination Amazon S3 bucket. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// AWSKMSKeyARN is a required field
 	AWSKMSKeyARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KMSEncryptionConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KMSEncryptionConfig) GoString() string {
 	return s.String()
 }
@@ -3400,19 +6601,27 @@ type KinesisStreamSourceConfiguration struct {
 	KinesisStreamARN *string `min:"1" type:"string" required:"true"`
 
 	// The ARN of the role that provides access to the source Kinesis data stream.
-	// For more information, see AWS Identity and Access Management (IAM) ARN Format
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam).
+	// For more information, see Amazon Web Services Identity and Access Management
+	// (IAM) ARN Format (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam).
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamSourceConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamSourceConfiguration) GoString() string {
 	return s.String()
 }
@@ -3465,16 +6674,24 @@ type KinesisStreamSourceDescription struct {
 	KinesisStreamARN *string `min:"1" type:"string"`
 
 	// The ARN of the role used by the source Kinesis data stream. For more information,
-	// see AWS Identity and Access Management (IAM) ARN Format (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam).
+	// see Amazon Web Services Identity and Access Management (IAM) ARN Format (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam).
 	RoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamSourceDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisStreamSourceDescription) GoString() string {
 	return s.String()
 }
@@ -3495,6 +6712,71 @@ func (s *KinesisStreamSourceDescription) SetKinesisStreamARN(v string) *KinesisS
 func (s *KinesisStreamSourceDescription) SetRoleARN(v string) *KinesisStreamSourceDescription {
 	s.RoleARN = &v
 	return s
+}
+
+// You have already reached the limit for a requested resource.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A message that provides information about the error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type ListDeliveryStreamsInput struct {
@@ -3520,12 +6802,20 @@ type ListDeliveryStreamsInput struct {
 	Limit *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeliveryStreamsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeliveryStreamsInput) GoString() string {
 	return s.String()
 }
@@ -3578,12 +6868,20 @@ type ListDeliveryStreamsOutput struct {
 	HasMoreDeliveryStreams *bool `type:"boolean" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeliveryStreamsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeliveryStreamsOutput) GoString() string {
 	return s.String()
 }
@@ -3619,12 +6917,20 @@ type ListTagsForDeliveryStreamInput struct {
 	Limit *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForDeliveryStreamInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForDeliveryStreamInput) GoString() string {
 	return s.String()
 }
@@ -3686,12 +6992,20 @@ type ListTagsForDeliveryStreamOutput struct {
 	Tags []*Tag `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForDeliveryStreamOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForDeliveryStreamOutput) GoString() string {
 	return s.String()
 }
@@ -3705,6 +7019,154 @@ func (s *ListTagsForDeliveryStreamOutput) SetHasMoreTags(v bool) *ListTagsForDel
 // SetTags sets the Tags field's value.
 func (s *ListTagsForDeliveryStreamOutput) SetTags(v []*Tag) *ListTagsForDeliveryStreamOutput {
 	s.Tags = v
+	return s
+}
+
+// The configuration for the Amazon MSK cluster to be used as the source for
+// a delivery stream.
+type MSKSourceConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication configuration of the Amazon MSK cluster.
+	//
+	// AuthenticationConfiguration is a required field
+	AuthenticationConfiguration *AuthenticationConfiguration `type:"structure" required:"true"`
+
+	// The ARN of the Amazon MSK cluster.
+	//
+	// MSKClusterARN is a required field
+	MSKClusterARN *string `min:"1" type:"string" required:"true"`
+
+	// The topic name within the Amazon MSK cluster.
+	//
+	// TopicName is a required field
+	TopicName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MSKSourceConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MSKSourceConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MSKSourceConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "MSKSourceConfiguration"}
+	if s.AuthenticationConfiguration == nil {
+		invalidParams.Add(request.NewErrParamRequired("AuthenticationConfiguration"))
+	}
+	if s.MSKClusterARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("MSKClusterARN"))
+	}
+	if s.MSKClusterARN != nil && len(*s.MSKClusterARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("MSKClusterARN", 1))
+	}
+	if s.TopicName == nil {
+		invalidParams.Add(request.NewErrParamRequired("TopicName"))
+	}
+	if s.TopicName != nil && len(*s.TopicName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("TopicName", 1))
+	}
+	if s.AuthenticationConfiguration != nil {
+		if err := s.AuthenticationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("AuthenticationConfiguration", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAuthenticationConfiguration sets the AuthenticationConfiguration field's value.
+func (s *MSKSourceConfiguration) SetAuthenticationConfiguration(v *AuthenticationConfiguration) *MSKSourceConfiguration {
+	s.AuthenticationConfiguration = v
+	return s
+}
+
+// SetMSKClusterARN sets the MSKClusterARN field's value.
+func (s *MSKSourceConfiguration) SetMSKClusterARN(v string) *MSKSourceConfiguration {
+	s.MSKClusterARN = &v
+	return s
+}
+
+// SetTopicName sets the TopicName field's value.
+func (s *MSKSourceConfiguration) SetTopicName(v string) *MSKSourceConfiguration {
+	s.TopicName = &v
+	return s
+}
+
+// Details about the Amazon MSK cluster used as the source for a Kinesis Data
+// Firehose delivery stream.
+type MSKSourceDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication configuration of the Amazon MSK cluster.
+	AuthenticationConfiguration *AuthenticationConfiguration `type:"structure"`
+
+	// Kinesis Data Firehose starts retrieving records from the topic within the
+	// Amazon MSK cluster starting with this timestamp.
+	DeliveryStartTimestamp *time.Time `type:"timestamp"`
+
+	// The ARN of the Amazon MSK cluster.
+	MSKClusterARN *string `min:"1" type:"string"`
+
+	// The topic name within the Amazon MSK cluster.
+	TopicName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MSKSourceDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MSKSourceDescription) GoString() string {
+	return s.String()
+}
+
+// SetAuthenticationConfiguration sets the AuthenticationConfiguration field's value.
+func (s *MSKSourceDescription) SetAuthenticationConfiguration(v *AuthenticationConfiguration) *MSKSourceDescription {
+	s.AuthenticationConfiguration = v
+	return s
+}
+
+// SetDeliveryStartTimestamp sets the DeliveryStartTimestamp field's value.
+func (s *MSKSourceDescription) SetDeliveryStartTimestamp(v time.Time) *MSKSourceDescription {
+	s.DeliveryStartTimestamp = &v
+	return s
+}
+
+// SetMSKClusterARN sets the MSKClusterARN field's value.
+func (s *MSKSourceDescription) SetMSKClusterARN(v string) *MSKSourceDescription {
+	s.MSKClusterARN = &v
+	return s
+}
+
+// SetTopicName sets the TopicName field's value.
+func (s *MSKSourceDescription) SetTopicName(v string) *MSKSourceDescription {
+	s.TopicName = &v
 	return s
 }
 
@@ -3736,12 +7198,20 @@ type OpenXJsonSerDe struct {
 	ConvertDotsInJsonKeysToUnderscores *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OpenXJsonSerDe) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OpenXJsonSerDe) GoString() string {
 	return s.String()
 }
@@ -3826,12 +7296,20 @@ type OrcSerDe struct {
 	StripeSizeBytes *int64 `min:"8.388608e+06" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OrcSerDe) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OrcSerDe) GoString() string {
 	return s.String()
 }
@@ -3916,7 +7394,8 @@ func (s *OrcSerDe) SetStripeSizeBytes(v int64) *OrcSerDe {
 }
 
 // Specifies the serializer that you want Kinesis Data Firehose to use to convert
-// the format of your data before it writes it to Amazon S3.
+// the format of your data before it writes it to Amazon S3. This parameter
+// is required if Enabled is set to true.
 type OutputFormatConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3925,12 +7404,20 @@ type OutputFormatConfiguration struct {
 	Serializer *Serializer `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OutputFormatConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OutputFormatConfiguration) GoString() string {
 	return s.String()
 }
@@ -3969,7 +7456,7 @@ type ParquetSerDe struct {
 
 	// The compression code to use over data blocks. The possible values are UNCOMPRESSED,
 	// SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression
-	// speed. Use GZIP if the compression ration is more important than speed.
+	// speed. Use GZIP if the compression ratio is more important than speed.
 	Compression *string `type:"string" enum:"ParquetCompression"`
 
 	// Indicates whether to enable dictionary compression.
@@ -3989,12 +7476,20 @@ type ParquetSerDe struct {
 	WriterVersion *string `type:"string" enum:"ParquetWriterVersion"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParquetSerDe) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParquetSerDe) GoString() string {
 	return s.String()
 }
@@ -4062,12 +7557,20 @@ type ProcessingConfiguration struct {
 	Processors []*Processor `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProcessingConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProcessingConfiguration) GoString() string {
 	return s.String()
 }
@@ -4117,12 +7620,20 @@ type Processor struct {
 	Type *string `type:"string" required:"true" enum:"ProcessorType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Processor) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Processor) GoString() string {
 	return s.String()
 }
@@ -4166,7 +7677,11 @@ func (s *Processor) SetType(v string) *Processor {
 type ProcessorParameter struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the parameter.
+	// The name of the parameter. Currently the following default values are supported:
+	// 3 for NumberOfRetries and 60 for the BufferIntervalInSeconds. The BufferSizeInMBs
+	// ranges between 0.2 MB and up to 3MB. The default buffering hint is 1MB for
+	// all destinations, except Splunk. For Splunk, the default buffering hint is
+	// 256 KB.
 	//
 	// ParameterName is a required field
 	ParameterName *string `type:"string" required:"true" enum:"ProcessorParameterName"`
@@ -4177,12 +7692,20 @@ type ProcessorParameter struct {
 	ParameterValue *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProcessorParameter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProcessorParameter) GoString() string {
 	return s.String()
 }
@@ -4232,12 +7755,20 @@ type PutRecordBatchInput struct {
 	Records []*Record `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordBatchInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordBatchInput) GoString() string {
 	return s.String()
 }
@@ -4306,12 +7837,20 @@ type PutRecordBatchOutput struct {
 	RequestResponses []*PutRecordBatchResponseEntry `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordBatchOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordBatchOutput) GoString() string {
 	return s.String()
 }
@@ -4351,12 +7890,20 @@ type PutRecordBatchResponseEntry struct {
 	RecordId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordBatchResponseEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordBatchResponseEntry) GoString() string {
 	return s.String()
 }
@@ -4393,12 +7940,20 @@ type PutRecordInput struct {
 	Record *Record `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordInput) GoString() string {
 	return s.String()
 }
@@ -4451,12 +8006,20 @@ type PutRecordOutput struct {
 	RecordId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutRecordOutput) GoString() string {
 	return s.String()
 }
@@ -4479,19 +8042,26 @@ type Record struct {
 
 	// The data blob, which is base64-encoded when the blob is serialized. The maximum
 	// size of the data blob, before base64-encoding, is 1,000 KiB.
-	//
 	// Data is automatically base64 encoded/decoded by the SDK.
 	//
 	// Data is a required field
 	Data []byte `type:"blob" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Record) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Record) GoString() string {
 	return s.String()
 }
@@ -4534,6 +8104,10 @@ type RedshiftDestinationConfiguration struct {
 
 	// The user password.
 	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RedshiftDestinationConfiguration's
+	// String and GoString methods.
+	//
 	// Password is a required field
 	Password *string `min:"6" type:"string" required:"true" sensitive:"true"`
 
@@ -4544,8 +8118,9 @@ type RedshiftDestinationConfiguration struct {
 	// to Amazon Redshift. Default value is 3600 (60 minutes).
 	RetryOptions *RedshiftRetryOptions `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
@@ -4553,7 +8128,9 @@ type RedshiftDestinationConfiguration struct {
 	// The configuration for backup in Amazon S3.
 	S3BackupConfiguration *S3DestinationConfiguration `type:"structure"`
 
-	// The Amazon S3 backup mode.
+	// The Amazon S3 backup mode. After you create a delivery stream, you can update
+	// it to enable Amazon S3 backup if it is disabled. If backup is enabled, you
+	// can't update the delivery stream to disable it.
 	S3BackupMode *string `type:"string" enum:"RedshiftS3BackupMode"`
 
 	// The configuration for the intermediate Amazon S3 location from which Amazon
@@ -4568,16 +8145,28 @@ type RedshiftDestinationConfiguration struct {
 
 	// The name of the user.
 	//
+	// Username is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RedshiftDestinationConfiguration's
+	// String and GoString methods.
+	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDestinationConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDestinationConfiguration) GoString() string {
 	return s.String()
 }
@@ -4732,8 +8321,9 @@ type RedshiftDestinationDescription struct {
 	// to Amazon Redshift. Default value is 3600 (60 minutes).
 	RetryOptions *RedshiftRetryOptions `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
@@ -4751,16 +8341,28 @@ type RedshiftDestinationDescription struct {
 
 	// The name of the user.
 	//
+	// Username is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RedshiftDestinationDescription's
+	// String and GoString methods.
+	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDestinationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDestinationDescription) GoString() string {
 	return s.String()
 }
@@ -4839,6 +8441,10 @@ type RedshiftDestinationUpdate struct {
 	CopyCommand *CopyCommand `type:"structure"`
 
 	// The user password.
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RedshiftDestinationUpdate's
+	// String and GoString methods.
 	Password *string `min:"6" type:"string" sensitive:"true"`
 
 	// The data processing configuration.
@@ -4848,11 +8454,13 @@ type RedshiftDestinationUpdate struct {
 	// to Amazon Redshift. Default value is 3600 (60 minutes).
 	RetryOptions *RedshiftRetryOptions `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string `min:"1" type:"string"`
 
-	// The Amazon S3 backup mode.
+	// You can update a delivery stream to enable Amazon S3 backup if it is disabled.
+	// If backup is enabled, you can't update the delivery stream to disable it.
 	S3BackupMode *string `type:"string" enum:"RedshiftS3BackupMode"`
 
 	// The Amazon S3 destination for backup.
@@ -4866,15 +8474,27 @@ type RedshiftDestinationUpdate struct {
 	S3Update *S3DestinationUpdate `type:"structure"`
 
 	// The name of the user.
+	//
+	// Username is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RedshiftDestinationUpdate's
+	// String and GoString methods.
 	Username *string `min:"1" type:"string" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDestinationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDestinationUpdate) GoString() string {
 	return s.String()
 }
@@ -5000,12 +8620,20 @@ type RedshiftRetryOptions struct {
 	DurationInSeconds *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftRetryOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftRetryOptions) GoString() string {
 	return s.String()
 }
@@ -5016,12 +8644,176 @@ func (s *RedshiftRetryOptions) SetDurationInSeconds(v int64) *RedshiftRetryOptio
 	return s
 }
 
+// The resource is already in use and not available for this operation.
+type ResourceInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A message that provides information about the error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceInUseException(v protocol.ResponseMetadata) error {
+	return &ResourceInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceInUseException) Code() string {
+	return "ResourceInUseException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified resource could not be found.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A message that provides information about the error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The retry behavior in case Kinesis Data Firehose is unable to deliver data
+// to an Amazon S3 prefix.
+type RetryOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The period of time during which Kinesis Data Firehose retries to deliver
+	// data to the specified Amazon S3 prefix.
+	DurationInSeconds *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryOptions) GoString() string {
+	return s.String()
+}
+
+// SetDurationInSeconds sets the DurationInSeconds field's value.
+func (s *RetryOptions) SetDurationInSeconds(v int64) *RetryOptions {
+	s.DurationInSeconds = &v
+	return s
+}
+
 // Describes the configuration of a destination in Amazon S3.
 type S3DestinationConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// BucketARN is a required field
 	BucketARN *string `min:"1" type:"string" required:"true"`
@@ -5046,30 +8838,37 @@ type S3DestinationConfiguration struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3DestinationConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3DestinationConfiguration) GoString() string {
 	return s.String()
 }
@@ -5159,7 +8958,7 @@ type S3DestinationDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// BucketARN is a required field
 	BucketARN *string `min:"1" type:"string" required:"true"`
@@ -5186,30 +8985,37 @@ type S3DestinationDescription struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3DestinationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3DestinationDescription) GoString() string {
 	return s.String()
 }
@@ -5267,7 +9073,7 @@ type S3DestinationUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names
-	// (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	BucketARN *string `min:"1" type:"string"`
 
 	// The buffering option. If no value is specified, BufferingHints object default
@@ -5290,28 +9096,35 @@ type S3DestinationUpdate struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3DestinationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3DestinationUpdate) GoString() string {
 	return s.String()
 }
@@ -5391,45 +9204,95 @@ func (s *S3DestinationUpdate) SetRoleARN(v string) *S3DestinationUpdate {
 }
 
 // Specifies the schema to which you want Kinesis Data Firehose to configure
-// your data before it writes it to Amazon S3.
+// your data before it writes it to Amazon S3. This parameter is required if
+// Enabled is set to true.
 type SchemaConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account
-	// ID is used by default.
-	CatalogId *string `type:"string"`
+	// The ID of the Amazon Web Services Glue Data Catalog. If you don't supply
+	// this, the Amazon Web Services account ID is used by default.
+	CatalogId *string `min:"1" type:"string"`
 
-	// Specifies the name of the AWS Glue database that contains the schema for
-	// the output data.
-	DatabaseName *string `type:"string"`
+	// Specifies the name of the Amazon Web Services Glue database that contains
+	// the schema for the output data.
+	//
+	// If the SchemaConfiguration request parameter is used as part of invoking
+	// the CreateDeliveryStream API, then the DatabaseName property is required
+	// and its value must be specified.
+	DatabaseName *string `min:"1" type:"string"`
 
-	// If you don't specify an AWS Region, the default is the current Region.
-	Region *string `type:"string"`
+	// If you don't specify an Amazon Web Services Region, the default is the current
+	// Region.
+	Region *string `min:"1" type:"string"`
 
-	// The role that Kinesis Data Firehose can use to access AWS Glue. This role
-	// must be in the same account you use for Kinesis Data Firehose. Cross-account
-	// roles aren't allowed.
-	RoleARN *string `type:"string"`
+	// The role that Kinesis Data Firehose can use to access Amazon Web Services
+	// Glue. This role must be in the same account you use for Kinesis Data Firehose.
+	// Cross-account roles aren't allowed.
+	//
+	// If the SchemaConfiguration request parameter is used as part of invoking
+	// the CreateDeliveryStream API, then the RoleARN property is required and its
+	// value must be specified.
+	RoleARN *string `min:"1" type:"string"`
 
-	// Specifies the AWS Glue table that contains the column information that constitutes
-	// your data schema.
-	TableName *string `type:"string"`
+	// Specifies the Amazon Web Services Glue table that contains the column information
+	// that constitutes your data schema.
+	//
+	// If the SchemaConfiguration request parameter is used as part of invoking
+	// the CreateDeliveryStream API, then the TableName property is required and
+	// its value must be specified.
+	TableName *string `min:"1" type:"string"`
 
 	// Specifies the table version for the output data schema. If you don't specify
 	// this version ID, or if you set it to LATEST, Kinesis Data Firehose uses the
 	// most recent version. This means that any updates to the table are automatically
 	// picked up.
-	VersionId *string `type:"string"`
+	VersionId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SchemaConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SchemaConfiguration) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SchemaConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SchemaConfiguration"}
+	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+	}
+	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+	}
+	if s.Region != nil && len(*s.Region) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Region", 1))
+	}
+	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+	}
+	if s.TableName != nil && len(*s.TableName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+	}
+	if s.VersionId != nil && len(*s.VersionId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetCatalogId sets the CatalogId field's value.
@@ -5484,12 +9347,20 @@ type Serializer struct {
 	ParquetSerDe *ParquetSerDe `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Serializer) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Serializer) GoString() string {
 	return s.String()
 }
@@ -5526,6 +9397,74 @@ func (s *Serializer) SetParquetSerDe(v *ParquetSerDe) *Serializer {
 	return s
 }
 
+// The service is unavailable. Back off and retry the operation. If you continue
+// to see the exception, throughput limits for the delivery stream may have
+// been exceeded. For more information about limits and how to request an increase,
+// see Amazon Kinesis Data Firehose Limits (https://docs.aws.amazon.com/firehose/latest/dev/limits.html).
+type ServiceUnavailableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A message that provides information about the error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceUnavailableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceUnavailableException) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceUnavailableException(v protocol.ResponseMetadata) error {
+	return &ServiceUnavailableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceUnavailableException) Code() string {
+	return "ServiceUnavailableException"
+}
+
+// Message returns the exception's message.
+func (s *ServiceUnavailableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceUnavailableException) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceUnavailableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceUnavailableException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Details about a Kinesis data stream used as the source for a Kinesis Data
 // Firehose delivery stream.
 type SourceDescription struct {
@@ -5533,14 +9472,26 @@ type SourceDescription struct {
 
 	// The KinesisStreamSourceDescription value for the source Kinesis data stream.
 	KinesisStreamSourceDescription *KinesisStreamSourceDescription `type:"structure"`
+
+	// The configuration description for the Amazon MSK cluster to be used as the
+	// source for a delivery stream.
+	MSKSourceDescription *MSKSourceDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SourceDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SourceDescription) GoString() string {
 	return s.String()
 }
@@ -5551,9 +9502,76 @@ func (s *SourceDescription) SetKinesisStreamSourceDescription(v *KinesisStreamSo
 	return s
 }
 
+// SetMSKSourceDescription sets the MSKSourceDescription field's value.
+func (s *SourceDescription) SetMSKSourceDescription(v *MSKSourceDescription) *SourceDescription {
+	s.MSKSourceDescription = v
+	return s
+}
+
+// The buffering options. If no value is specified, the default values for Splunk
+// are used.
+type SplunkBufferingHints struct {
+	_ struct{} `type:"structure"`
+
+	// Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 60 (1 minute).
+	IntervalInSeconds *int64 `type:"integer"`
+
+	// Buffer incoming data to the specified size, in MBs, before delivering it
+	// to the destination. The default value is 5.
+	SizeInMBs *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SplunkBufferingHints) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SplunkBufferingHints) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SplunkBufferingHints) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SplunkBufferingHints"}
+	if s.SizeInMBs != nil && *s.SizeInMBs < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("SizeInMBs", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetIntervalInSeconds sets the IntervalInSeconds field's value.
+func (s *SplunkBufferingHints) SetIntervalInSeconds(v int64) *SplunkBufferingHints {
+	s.IntervalInSeconds = &v
+	return s
+}
+
+// SetSizeInMBs sets the SizeInMBs field's value.
+func (s *SplunkBufferingHints) SetSizeInMBs(v int64) *SplunkBufferingHints {
+	s.SizeInMBs = &v
+	return s
+}
+
 // Describes the configuration of a destination in Splunk.
 type SplunkDestinationConfiguration struct {
 	_ struct{} `type:"structure"`
+
+	// The buffering options. If no value is specified, the default values for Splunk
+	// are used.
+	BufferingHints *SplunkBufferingHints `type:"structure"`
 
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
@@ -5588,11 +9606,14 @@ type SplunkDestinationConfiguration struct {
 	// to Splunk, or if it doesn't receive an acknowledgment of receipt from Splunk.
 	RetryOptions *SplunkRetryOptions `type:"structure"`
 
-	// Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly,
+	// Defines how documents should be delivered to Amazon S3. When set to FailedEventsOnly,
 	// Kinesis Data Firehose writes any data that could not be indexed to the configured
-	// Amazon S3 destination. When set to AllDocuments, Kinesis Data Firehose delivers
+	// Amazon S3 destination. When set to AllEvents, Kinesis Data Firehose delivers
 	// all incoming records to Amazon S3, and also writes failed documents to Amazon
-	// S3. Default value is FailedDocumentsOnly.
+	// S3. The default value is FailedEventsOnly.
+	//
+	// You can update this backup mode from FailedEventsOnly to AllEvents. You can't
+	// update it from AllEvents to FailedEventsOnly.
 	S3BackupMode *string `type:"string" enum:"SplunkS3BackupMode"`
 
 	// The configuration for the backup Amazon S3 location.
@@ -5601,12 +9622,20 @@ type SplunkDestinationConfiguration struct {
 	S3Configuration *S3DestinationConfiguration `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SplunkDestinationConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SplunkDestinationConfiguration) GoString() string {
 	return s.String()
 }
@@ -5629,6 +9658,11 @@ func (s *SplunkDestinationConfiguration) Validate() error {
 	if s.S3Configuration == nil {
 		invalidParams.Add(request.NewErrParamRequired("S3Configuration"))
 	}
+	if s.BufferingHints != nil {
+		if err := s.BufferingHints.Validate(); err != nil {
+			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.ProcessingConfiguration != nil {
 		if err := s.ProcessingConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
@@ -5644,6 +9678,12 @@ func (s *SplunkDestinationConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *SplunkDestinationConfiguration) SetBufferingHints(v *SplunkBufferingHints) *SplunkDestinationConfiguration {
+	s.BufferingHints = v
+	return s
 }
 
 // SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
@@ -5704,6 +9744,10 @@ func (s *SplunkDestinationConfiguration) SetS3Configuration(v *S3DestinationConf
 type SplunkDestinationDescription struct {
 	_ struct{} `type:"structure"`
 
+	// The buffering options. If no value is specified, the default values for Splunk
+	// are used.
+	BufferingHints *SplunkBufferingHints `type:"structure"`
+
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
@@ -5741,14 +9785,28 @@ type SplunkDestinationDescription struct {
 	S3DestinationDescription *S3DestinationDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SplunkDestinationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SplunkDestinationDescription) GoString() string {
 	return s.String()
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *SplunkDestinationDescription) SetBufferingHints(v *SplunkBufferingHints) *SplunkDestinationDescription {
+	s.BufferingHints = v
+	return s
 }
 
 // SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
@@ -5809,6 +9867,10 @@ func (s *SplunkDestinationDescription) SetS3DestinationDescription(v *S3Destinat
 type SplunkDestinationUpdate struct {
 	_ struct{} `type:"structure"`
 
+	// The buffering options. If no value is specified, the default values for Splunk
+	// are used.
+	BufferingHints *SplunkBufferingHints `type:"structure"`
+
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
@@ -5836,23 +9898,34 @@ type SplunkDestinationUpdate struct {
 	// to Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
 	RetryOptions *SplunkRetryOptions `type:"structure"`
 
-	// Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly,
-	// Kinesis Data Firehose writes any data that could not be indexed to the configured
-	// Amazon S3 destination. When set to AllDocuments, Kinesis Data Firehose delivers
-	// all incoming records to Amazon S3, and also writes failed documents to Amazon
-	// S3. Default value is FailedDocumentsOnly.
+	// Specifies how you want Kinesis Data Firehose to back up documents to Amazon
+	// S3. When set to FailedDocumentsOnly, Kinesis Data Firehose writes any data
+	// that could not be indexed to the configured Amazon S3 destination. When set
+	// to AllEvents, Kinesis Data Firehose delivers all incoming records to Amazon
+	// S3, and also writes failed documents to Amazon S3. The default value is FailedEventsOnly.
+	//
+	// You can update this backup mode from FailedEventsOnly to AllEvents. You can't
+	// update it from AllEvents to FailedEventsOnly.
 	S3BackupMode *string `type:"string" enum:"SplunkS3BackupMode"`
 
 	// Your update to the configuration of the backup Amazon S3 location.
 	S3Update *S3DestinationUpdate `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SplunkDestinationUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SplunkDestinationUpdate) GoString() string {
 	return s.String()
 }
@@ -5862,6 +9935,11 @@ func (s *SplunkDestinationUpdate) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "SplunkDestinationUpdate"}
 	if s.HECAcknowledgmentTimeoutInSeconds != nil && *s.HECAcknowledgmentTimeoutInSeconds < 180 {
 		invalidParams.Add(request.NewErrParamMinValue("HECAcknowledgmentTimeoutInSeconds", 180))
+	}
+	if s.BufferingHints != nil {
+		if err := s.BufferingHints.Validate(); err != nil {
+			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+		}
 	}
 	if s.ProcessingConfiguration != nil {
 		if err := s.ProcessingConfiguration.Validate(); err != nil {
@@ -5878,6 +9956,12 @@ func (s *SplunkDestinationUpdate) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetBufferingHints sets the BufferingHints field's value.
+func (s *SplunkDestinationUpdate) SetBufferingHints(v *SplunkBufferingHints) *SplunkDestinationUpdate {
+	s.BufferingHints = v
+	return s
 }
 
 // SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
@@ -5946,12 +10030,20 @@ type SplunkRetryOptions struct {
 	DurationInSeconds *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SplunkRetryOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SplunkRetryOptions) GoString() string {
 	return s.String()
 }
@@ -5965,6 +10057,10 @@ func (s *SplunkRetryOptions) SetDurationInSeconds(v int64) *SplunkRetryOptions {
 type StartDeliveryStreamEncryptionInput struct {
 	_ struct{} `type:"structure"`
 
+	// Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed
+	// for Server-Side Encryption (SSE).
+	DeliveryStreamEncryptionConfigurationInput *DeliveryStreamEncryptionConfigurationInput `type:"structure"`
+
 	// The name of the delivery stream for which you want to enable server-side
 	// encryption (SSE).
 	//
@@ -5972,12 +10068,20 @@ type StartDeliveryStreamEncryptionInput struct {
 	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDeliveryStreamEncryptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDeliveryStreamEncryptionInput) GoString() string {
 	return s.String()
 }
@@ -5991,11 +10095,22 @@ func (s *StartDeliveryStreamEncryptionInput) Validate() error {
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
+	if s.DeliveryStreamEncryptionConfigurationInput != nil {
+		if err := s.DeliveryStreamEncryptionConfigurationInput.Validate(); err != nil {
+			invalidParams.AddNested("DeliveryStreamEncryptionConfigurationInput", err.(request.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetDeliveryStreamEncryptionConfigurationInput sets the DeliveryStreamEncryptionConfigurationInput field's value.
+func (s *StartDeliveryStreamEncryptionInput) SetDeliveryStreamEncryptionConfigurationInput(v *DeliveryStreamEncryptionConfigurationInput) *StartDeliveryStreamEncryptionInput {
+	s.DeliveryStreamEncryptionConfigurationInput = v
+	return s
 }
 
 // SetDeliveryStreamName sets the DeliveryStreamName field's value.
@@ -6008,12 +10123,20 @@ type StartDeliveryStreamEncryptionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDeliveryStreamEncryptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDeliveryStreamEncryptionOutput) GoString() string {
 	return s.String()
 }
@@ -6028,12 +10151,20 @@ type StopDeliveryStreamEncryptionInput struct {
 	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDeliveryStreamEncryptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDeliveryStreamEncryptionInput) GoString() string {
 	return s.String()
 }
@@ -6064,12 +10195,20 @@ type StopDeliveryStreamEncryptionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDeliveryStreamEncryptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDeliveryStreamEncryptionOutput) GoString() string {
 	return s.String()
 }
@@ -6091,12 +10230,20 @@ type Tag struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -6143,12 +10290,20 @@ type TagDeliveryStreamInput struct {
 	Tags []*Tag `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagDeliveryStreamInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagDeliveryStreamInput) GoString() string {
 	return s.String()
 }
@@ -6201,12 +10356,20 @@ type TagDeliveryStreamOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagDeliveryStreamOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagDeliveryStreamOutput) GoString() string {
 	return s.String()
 }
@@ -6225,12 +10388,20 @@ type UntagDeliveryStreamInput struct {
 	TagKeys []*string `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagDeliveryStreamInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagDeliveryStreamInput) GoString() string {
 	return s.String()
 }
@@ -6273,18 +10444,33 @@ type UntagDeliveryStreamOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagDeliveryStreamOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagDeliveryStreamOutput) GoString() string {
 	return s.String()
 }
 
 type UpdateDestinationInput struct {
 	_ struct{} `type:"structure"`
+
+	// Describes an update for a destination in the Serverless offering for Amazon
+	// OpenSearch Service.
+	AmazonOpenSearchServerlessDestinationUpdate *AmazonOpenSearchServerlessDestinationUpdate `type:"structure"`
+
+	// Describes an update for a destination in Amazon OpenSearch Service.
+	AmazonopensearchserviceDestinationUpdate *AmazonopensearchserviceDestinationUpdate `type:"structure"`
 
 	// Obtain this value from the VersionId result of DeliveryStreamDescription.
 	// This value is required, and helps the service perform conditional operations.
@@ -6312,6 +10498,9 @@ type UpdateDestinationInput struct {
 	// Describes an update for a destination in Amazon S3.
 	ExtendedS3DestinationUpdate *ExtendedS3DestinationUpdate `type:"structure"`
 
+	// Describes an update to the specified HTTP endpoint destination.
+	HttpEndpointDestinationUpdate *HttpEndpointDestinationUpdate `type:"structure"`
+
 	// Describes an update for a destination in Amazon Redshift.
 	RedshiftDestinationUpdate *RedshiftDestinationUpdate `type:"structure"`
 
@@ -6324,12 +10513,20 @@ type UpdateDestinationInput struct {
 	SplunkDestinationUpdate *SplunkDestinationUpdate `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDestinationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDestinationInput) GoString() string {
 	return s.String()
 }
@@ -6355,6 +10552,16 @@ func (s *UpdateDestinationInput) Validate() error {
 	if s.DestinationId != nil && len(*s.DestinationId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("DestinationId", 1))
 	}
+	if s.AmazonOpenSearchServerlessDestinationUpdate != nil {
+		if err := s.AmazonOpenSearchServerlessDestinationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("AmazonOpenSearchServerlessDestinationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.AmazonopensearchserviceDestinationUpdate != nil {
+		if err := s.AmazonopensearchserviceDestinationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("AmazonopensearchserviceDestinationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.ElasticsearchDestinationUpdate != nil {
 		if err := s.ElasticsearchDestinationUpdate.Validate(); err != nil {
 			invalidParams.AddNested("ElasticsearchDestinationUpdate", err.(request.ErrInvalidParams))
@@ -6363,6 +10570,11 @@ func (s *UpdateDestinationInput) Validate() error {
 	if s.ExtendedS3DestinationUpdate != nil {
 		if err := s.ExtendedS3DestinationUpdate.Validate(); err != nil {
 			invalidParams.AddNested("ExtendedS3DestinationUpdate", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.HttpEndpointDestinationUpdate != nil {
+		if err := s.HttpEndpointDestinationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("HttpEndpointDestinationUpdate", err.(request.ErrInvalidParams))
 		}
 	}
 	if s.RedshiftDestinationUpdate != nil {
@@ -6385,6 +10597,18 @@ func (s *UpdateDestinationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAmazonOpenSearchServerlessDestinationUpdate sets the AmazonOpenSearchServerlessDestinationUpdate field's value.
+func (s *UpdateDestinationInput) SetAmazonOpenSearchServerlessDestinationUpdate(v *AmazonOpenSearchServerlessDestinationUpdate) *UpdateDestinationInput {
+	s.AmazonOpenSearchServerlessDestinationUpdate = v
+	return s
+}
+
+// SetAmazonopensearchserviceDestinationUpdate sets the AmazonopensearchserviceDestinationUpdate field's value.
+func (s *UpdateDestinationInput) SetAmazonopensearchserviceDestinationUpdate(v *AmazonopensearchserviceDestinationUpdate) *UpdateDestinationInput {
+	s.AmazonopensearchserviceDestinationUpdate = v
+	return s
 }
 
 // SetCurrentDeliveryStreamVersionId sets the CurrentDeliveryStreamVersionId field's value.
@@ -6417,6 +10641,12 @@ func (s *UpdateDestinationInput) SetExtendedS3DestinationUpdate(v *ExtendedS3Des
 	return s
 }
 
+// SetHttpEndpointDestinationUpdate sets the HttpEndpointDestinationUpdate field's value.
+func (s *UpdateDestinationInput) SetHttpEndpointDestinationUpdate(v *HttpEndpointDestinationUpdate) *UpdateDestinationInput {
+	s.HttpEndpointDestinationUpdate = v
+	return s
+}
+
 // SetRedshiftDestinationUpdate sets the RedshiftDestinationUpdate field's value.
 func (s *UpdateDestinationInput) SetRedshiftDestinationUpdate(v *RedshiftDestinationUpdate) *UpdateDestinationInput {
 	s.RedshiftDestinationUpdate = v
@@ -6439,14 +10669,330 @@ type UpdateDestinationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDestinationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDestinationOutput) GoString() string {
 	return s.String()
+}
+
+// The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch Serverless
+// destination.
+type VpcConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the IAM role that you want the delivery stream to use to create
+	// endpoints in the destination VPC. You can use your existing Kinesis Data
+	// Firehose delivery role or you can specify a new role. In either case, make
+	// sure that the role trusts the Kinesis Data Firehose service principal and
+	// that it grants the following permissions:
+	//
+	//    * ec2:DescribeVpcs
+	//
+	//    * ec2:DescribeVpcAttribute
+	//
+	//    * ec2:DescribeSubnets
+	//
+	//    * ec2:DescribeSecurityGroups
+	//
+	//    * ec2:DescribeNetworkInterfaces
+	//
+	//    * ec2:CreateNetworkInterface
+	//
+	//    * ec2:CreateNetworkInterfacePermission
+	//
+	//    * ec2:DeleteNetworkInterface
+	//
+	// If you revoke these permissions after you create the delivery stream, Kinesis
+	// Data Firehose can't scale out by creating more ENIs when necessary. You might
+	// therefore see a degradation in performance.
+	//
+	// RoleARN is a required field
+	RoleARN *string `min:"1" type:"string" required:"true"`
+
+	// The IDs of the security groups that you want Kinesis Data Firehose to use
+	// when it creates ENIs in the VPC of the Amazon ES destination. You can use
+	// the same security group that the Amazon ES domain uses or different ones.
+	// If you specify different security groups here, ensure that they allow outbound
+	// HTTPS traffic to the Amazon ES domain's security group. Also ensure that
+	// the Amazon ES domain's security group allows HTTPS traffic from the security
+	// groups specified here. If you use the same security group for both your delivery
+	// stream and the Amazon ES domain, make sure the security group inbound rule
+	// allows HTTPS traffic. For more information about security group rules, see
+	// Security group rules (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)
+	// in the Amazon VPC documentation.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []*string `min:"1" type:"list" required:"true"`
+
+	// The IDs of the subnets that you want Kinesis Data Firehose to use to create
+	// ENIs in the VPC of the Amazon ES destination. Make sure that the routing
+	// tables and inbound and outbound rules allow traffic to flow from the subnets
+	// whose IDs are specified here to the subnets that have the destination Amazon
+	// ES endpoints. Kinesis Data Firehose creates at least one ENI in each of the
+	// subnets that are specified here. Do not delete or modify these ENIs.
+	//
+	// The number of ENIs that Kinesis Data Firehose creates in the subnets specified
+	// here scales up and down automatically based on throughput. To enable Kinesis
+	// Data Firehose to scale up the number of ENIs to match throughput, ensure
+	// that you have sufficient quota. To help you calculate the quota you need,
+	// assume that Kinesis Data Firehose can create up to three ENIs for this delivery
+	// stream for each of the subnets specified here. For more information about
+	// ENI quota, see Network Interfaces (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis)
+	// in the Amazon VPC Quotas topic.
+	//
+	// SubnetIds is a required field
+	SubnetIds []*string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcConfiguration) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "VpcConfiguration"}
+	if s.RoleARN == nil {
+		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+	}
+	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+	}
+	if s.SecurityGroupIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if s.SecurityGroupIds != nil && len(s.SecurityGroupIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SecurityGroupIds", 1))
+	}
+	if s.SubnetIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+	}
+	if s.SubnetIds != nil && len(s.SubnetIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SubnetIds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *VpcConfiguration) SetRoleARN(v string) *VpcConfiguration {
+	s.RoleARN = &v
+	return s
+}
+
+// SetSecurityGroupIds sets the SecurityGroupIds field's value.
+func (s *VpcConfiguration) SetSecurityGroupIds(v []*string) *VpcConfiguration {
+	s.SecurityGroupIds = v
+	return s
+}
+
+// SetSubnetIds sets the SubnetIds field's value.
+func (s *VpcConfiguration) SetSubnetIds(v []*string) *VpcConfiguration {
+	s.SubnetIds = v
+	return s
+}
+
+// The details of the VPC of the Amazon ES destination.
+type VpcConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the IAM role that the delivery stream uses to create endpoints
+	// in the destination VPC. You can use your existing Kinesis Data Firehose delivery
+	// role or you can specify a new role. In either case, make sure that the role
+	// trusts the Kinesis Data Firehose service principal and that it grants the
+	// following permissions:
+	//
+	//    * ec2:DescribeVpcs
+	//
+	//    * ec2:DescribeVpcAttribute
+	//
+	//    * ec2:DescribeSubnets
+	//
+	//    * ec2:DescribeSecurityGroups
+	//
+	//    * ec2:DescribeNetworkInterfaces
+	//
+	//    * ec2:CreateNetworkInterface
+	//
+	//    * ec2:CreateNetworkInterfacePermission
+	//
+	//    * ec2:DeleteNetworkInterface
+	//
+	// If you revoke these permissions after you create the delivery stream, Kinesis
+	// Data Firehose can't scale out by creating more ENIs when necessary. You might
+	// therefore see a degradation in performance.
+	//
+	// RoleARN is a required field
+	RoleARN *string `min:"1" type:"string" required:"true"`
+
+	// The IDs of the security groups that Kinesis Data Firehose uses when it creates
+	// ENIs in the VPC of the Amazon ES destination. You can use the same security
+	// group that the Amazon ES domain uses or different ones. If you specify different
+	// security groups, ensure that they allow outbound HTTPS traffic to the Amazon
+	// ES domain's security group. Also ensure that the Amazon ES domain's security
+	// group allows HTTPS traffic from the security groups specified here. If you
+	// use the same security group for both your delivery stream and the Amazon
+	// ES domain, make sure the security group inbound rule allows HTTPS traffic.
+	// For more information about security group rules, see Security group rules
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)
+	// in the Amazon VPC documentation.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []*string `min:"1" type:"list" required:"true"`
+
+	// The IDs of the subnets that Kinesis Data Firehose uses to create ENIs in
+	// the VPC of the Amazon ES destination. Make sure that the routing tables and
+	// inbound and outbound rules allow traffic to flow from the subnets whose IDs
+	// are specified here to the subnets that have the destination Amazon ES endpoints.
+	// Kinesis Data Firehose creates at least one ENI in each of the subnets that
+	// are specified here. Do not delete or modify these ENIs.
+	//
+	// The number of ENIs that Kinesis Data Firehose creates in the subnets specified
+	// here scales up and down automatically based on throughput. To enable Kinesis
+	// Data Firehose to scale up the number of ENIs to match throughput, ensure
+	// that you have sufficient quota. To help you calculate the quota you need,
+	// assume that Kinesis Data Firehose can create up to three ENIs for this delivery
+	// stream for each of the subnets specified here. For more information about
+	// ENI quota, see Network Interfaces (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis)
+	// in the Amazon VPC Quotas topic.
+	//
+	// SubnetIds is a required field
+	SubnetIds []*string `min:"1" type:"list" required:"true"`
+
+	// The ID of the Amazon ES destination's VPC.
+	//
+	// VpcId is a required field
+	VpcId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s VpcConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// SetRoleARN sets the RoleARN field's value.
+func (s *VpcConfigurationDescription) SetRoleARN(v string) *VpcConfigurationDescription {
+	s.RoleARN = &v
+	return s
+}
+
+// SetSecurityGroupIds sets the SecurityGroupIds field's value.
+func (s *VpcConfigurationDescription) SetSecurityGroupIds(v []*string) *VpcConfigurationDescription {
+	s.SecurityGroupIds = v
+	return s
+}
+
+// SetSubnetIds sets the SubnetIds field's value.
+func (s *VpcConfigurationDescription) SetSubnetIds(v []*string) *VpcConfigurationDescription {
+	s.SubnetIds = v
+	return s
+}
+
+// SetVpcId sets the VpcId field's value.
+func (s *VpcConfigurationDescription) SetVpcId(v string) *VpcConfigurationDescription {
+	s.VpcId = &v
+	return s
+}
+
+const (
+	// AmazonOpenSearchServerlessS3BackupModeFailedDocumentsOnly is a AmazonOpenSearchServerlessS3BackupMode enum value
+	AmazonOpenSearchServerlessS3BackupModeFailedDocumentsOnly = "FailedDocumentsOnly"
+
+	// AmazonOpenSearchServerlessS3BackupModeAllDocuments is a AmazonOpenSearchServerlessS3BackupMode enum value
+	AmazonOpenSearchServerlessS3BackupModeAllDocuments = "AllDocuments"
+)
+
+// AmazonOpenSearchServerlessS3BackupMode_Values returns all elements of the AmazonOpenSearchServerlessS3BackupMode enum
+func AmazonOpenSearchServerlessS3BackupMode_Values() []string {
+	return []string{
+		AmazonOpenSearchServerlessS3BackupModeFailedDocumentsOnly,
+		AmazonOpenSearchServerlessS3BackupModeAllDocuments,
+	}
+}
+
+const (
+	// AmazonopensearchserviceIndexRotationPeriodNoRotation is a AmazonopensearchserviceIndexRotationPeriod enum value
+	AmazonopensearchserviceIndexRotationPeriodNoRotation = "NoRotation"
+
+	// AmazonopensearchserviceIndexRotationPeriodOneHour is a AmazonopensearchserviceIndexRotationPeriod enum value
+	AmazonopensearchserviceIndexRotationPeriodOneHour = "OneHour"
+
+	// AmazonopensearchserviceIndexRotationPeriodOneDay is a AmazonopensearchserviceIndexRotationPeriod enum value
+	AmazonopensearchserviceIndexRotationPeriodOneDay = "OneDay"
+
+	// AmazonopensearchserviceIndexRotationPeriodOneWeek is a AmazonopensearchserviceIndexRotationPeriod enum value
+	AmazonopensearchserviceIndexRotationPeriodOneWeek = "OneWeek"
+
+	// AmazonopensearchserviceIndexRotationPeriodOneMonth is a AmazonopensearchserviceIndexRotationPeriod enum value
+	AmazonopensearchserviceIndexRotationPeriodOneMonth = "OneMonth"
+)
+
+// AmazonopensearchserviceIndexRotationPeriod_Values returns all elements of the AmazonopensearchserviceIndexRotationPeriod enum
+func AmazonopensearchserviceIndexRotationPeriod_Values() []string {
+	return []string{
+		AmazonopensearchserviceIndexRotationPeriodNoRotation,
+		AmazonopensearchserviceIndexRotationPeriodOneHour,
+		AmazonopensearchserviceIndexRotationPeriodOneDay,
+		AmazonopensearchserviceIndexRotationPeriodOneWeek,
+		AmazonopensearchserviceIndexRotationPeriodOneMonth,
+	}
+}
+
+const (
+	// AmazonopensearchserviceS3BackupModeFailedDocumentsOnly is a AmazonopensearchserviceS3BackupMode enum value
+	AmazonopensearchserviceS3BackupModeFailedDocumentsOnly = "FailedDocumentsOnly"
+
+	// AmazonopensearchserviceS3BackupModeAllDocuments is a AmazonopensearchserviceS3BackupMode enum value
+	AmazonopensearchserviceS3BackupModeAllDocuments = "AllDocuments"
+)
+
+// AmazonopensearchserviceS3BackupMode_Values returns all elements of the AmazonopensearchserviceS3BackupMode enum
+func AmazonopensearchserviceS3BackupMode_Values() []string {
+	return []string{
+		AmazonopensearchserviceS3BackupModeFailedDocumentsOnly,
+		AmazonopensearchserviceS3BackupModeAllDocuments,
+	}
 }
 
 const (
@@ -6461,7 +11007,69 @@ const (
 
 	// CompressionFormatSnappy is a CompressionFormat enum value
 	CompressionFormatSnappy = "Snappy"
+
+	// CompressionFormatHadoopSnappy is a CompressionFormat enum value
+	CompressionFormatHadoopSnappy = "HADOOP_SNAPPY"
 )
+
+// CompressionFormat_Values returns all elements of the CompressionFormat enum
+func CompressionFormat_Values() []string {
+	return []string{
+		CompressionFormatUncompressed,
+		CompressionFormatGzip,
+		CompressionFormatZip,
+		CompressionFormatSnappy,
+		CompressionFormatHadoopSnappy,
+	}
+}
+
+const (
+	// ConnectivityPublic is a Connectivity enum value
+	ConnectivityPublic = "PUBLIC"
+
+	// ConnectivityPrivate is a Connectivity enum value
+	ConnectivityPrivate = "PRIVATE"
+)
+
+// Connectivity_Values returns all elements of the Connectivity enum
+func Connectivity_Values() []string {
+	return []string{
+		ConnectivityPublic,
+		ConnectivityPrivate,
+	}
+}
+
+const (
+	// ContentEncodingNone is a ContentEncoding enum value
+	ContentEncodingNone = "NONE"
+
+	// ContentEncodingGzip is a ContentEncoding enum value
+	ContentEncodingGzip = "GZIP"
+)
+
+// ContentEncoding_Values returns all elements of the ContentEncoding enum
+func ContentEncoding_Values() []string {
+	return []string{
+		ContentEncodingNone,
+		ContentEncodingGzip,
+	}
+}
+
+const (
+	// DefaultDocumentIdFormatFirehoseDefault is a DefaultDocumentIdFormat enum value
+	DefaultDocumentIdFormatFirehoseDefault = "FIREHOSE_DEFAULT"
+
+	// DefaultDocumentIdFormatNoDocumentId is a DefaultDocumentIdFormat enum value
+	DefaultDocumentIdFormatNoDocumentId = "NO_DOCUMENT_ID"
+)
+
+// DefaultDocumentIdFormat_Values returns all elements of the DefaultDocumentIdFormat enum
+func DefaultDocumentIdFormat_Values() []string {
+	return []string{
+		DefaultDocumentIdFormatFirehoseDefault,
+		DefaultDocumentIdFormatNoDocumentId,
+	}
+}
 
 const (
 	// DeliveryStreamEncryptionStatusEnabled is a DeliveryStreamEncryptionStatus enum value
@@ -6470,23 +11078,126 @@ const (
 	// DeliveryStreamEncryptionStatusEnabling is a DeliveryStreamEncryptionStatus enum value
 	DeliveryStreamEncryptionStatusEnabling = "ENABLING"
 
+	// DeliveryStreamEncryptionStatusEnablingFailed is a DeliveryStreamEncryptionStatus enum value
+	DeliveryStreamEncryptionStatusEnablingFailed = "ENABLING_FAILED"
+
 	// DeliveryStreamEncryptionStatusDisabled is a DeliveryStreamEncryptionStatus enum value
 	DeliveryStreamEncryptionStatusDisabled = "DISABLED"
 
 	// DeliveryStreamEncryptionStatusDisabling is a DeliveryStreamEncryptionStatus enum value
 	DeliveryStreamEncryptionStatusDisabling = "DISABLING"
+
+	// DeliveryStreamEncryptionStatusDisablingFailed is a DeliveryStreamEncryptionStatus enum value
+	DeliveryStreamEncryptionStatusDisablingFailed = "DISABLING_FAILED"
 )
+
+// DeliveryStreamEncryptionStatus_Values returns all elements of the DeliveryStreamEncryptionStatus enum
+func DeliveryStreamEncryptionStatus_Values() []string {
+	return []string{
+		DeliveryStreamEncryptionStatusEnabled,
+		DeliveryStreamEncryptionStatusEnabling,
+		DeliveryStreamEncryptionStatusEnablingFailed,
+		DeliveryStreamEncryptionStatusDisabled,
+		DeliveryStreamEncryptionStatusDisabling,
+		DeliveryStreamEncryptionStatusDisablingFailed,
+	}
+}
+
+const (
+	// DeliveryStreamFailureTypeRetireKmsGrantFailed is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeRetireKmsGrantFailed = "RETIRE_KMS_GRANT_FAILED"
+
+	// DeliveryStreamFailureTypeCreateKmsGrantFailed is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeCreateKmsGrantFailed = "CREATE_KMS_GRANT_FAILED"
+
+	// DeliveryStreamFailureTypeKmsAccessDenied is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeKmsAccessDenied = "KMS_ACCESS_DENIED"
+
+	// DeliveryStreamFailureTypeDisabledKmsKey is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeDisabledKmsKey = "DISABLED_KMS_KEY"
+
+	// DeliveryStreamFailureTypeInvalidKmsKey is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeInvalidKmsKey = "INVALID_KMS_KEY"
+
+	// DeliveryStreamFailureTypeKmsKeyNotFound is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeKmsKeyNotFound = "KMS_KEY_NOT_FOUND"
+
+	// DeliveryStreamFailureTypeKmsOptInRequired is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeKmsOptInRequired = "KMS_OPT_IN_REQUIRED"
+
+	// DeliveryStreamFailureTypeCreateEniFailed is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeCreateEniFailed = "CREATE_ENI_FAILED"
+
+	// DeliveryStreamFailureTypeDeleteEniFailed is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeDeleteEniFailed = "DELETE_ENI_FAILED"
+
+	// DeliveryStreamFailureTypeSubnetNotFound is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeSubnetNotFound = "SUBNET_NOT_FOUND"
+
+	// DeliveryStreamFailureTypeSecurityGroupNotFound is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeSecurityGroupNotFound = "SECURITY_GROUP_NOT_FOUND"
+
+	// DeliveryStreamFailureTypeEniAccessDenied is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeEniAccessDenied = "ENI_ACCESS_DENIED"
+
+	// DeliveryStreamFailureTypeSubnetAccessDenied is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeSubnetAccessDenied = "SUBNET_ACCESS_DENIED"
+
+	// DeliveryStreamFailureTypeSecurityGroupAccessDenied is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeSecurityGroupAccessDenied = "SECURITY_GROUP_ACCESS_DENIED"
+
+	// DeliveryStreamFailureTypeUnknownError is a DeliveryStreamFailureType enum value
+	DeliveryStreamFailureTypeUnknownError = "UNKNOWN_ERROR"
+)
+
+// DeliveryStreamFailureType_Values returns all elements of the DeliveryStreamFailureType enum
+func DeliveryStreamFailureType_Values() []string {
+	return []string{
+		DeliveryStreamFailureTypeRetireKmsGrantFailed,
+		DeliveryStreamFailureTypeCreateKmsGrantFailed,
+		DeliveryStreamFailureTypeKmsAccessDenied,
+		DeliveryStreamFailureTypeDisabledKmsKey,
+		DeliveryStreamFailureTypeInvalidKmsKey,
+		DeliveryStreamFailureTypeKmsKeyNotFound,
+		DeliveryStreamFailureTypeKmsOptInRequired,
+		DeliveryStreamFailureTypeCreateEniFailed,
+		DeliveryStreamFailureTypeDeleteEniFailed,
+		DeliveryStreamFailureTypeSubnetNotFound,
+		DeliveryStreamFailureTypeSecurityGroupNotFound,
+		DeliveryStreamFailureTypeEniAccessDenied,
+		DeliveryStreamFailureTypeSubnetAccessDenied,
+		DeliveryStreamFailureTypeSecurityGroupAccessDenied,
+		DeliveryStreamFailureTypeUnknownError,
+	}
+}
 
 const (
 	// DeliveryStreamStatusCreating is a DeliveryStreamStatus enum value
 	DeliveryStreamStatusCreating = "CREATING"
 
+	// DeliveryStreamStatusCreatingFailed is a DeliveryStreamStatus enum value
+	DeliveryStreamStatusCreatingFailed = "CREATING_FAILED"
+
 	// DeliveryStreamStatusDeleting is a DeliveryStreamStatus enum value
 	DeliveryStreamStatusDeleting = "DELETING"
+
+	// DeliveryStreamStatusDeletingFailed is a DeliveryStreamStatus enum value
+	DeliveryStreamStatusDeletingFailed = "DELETING_FAILED"
 
 	// DeliveryStreamStatusActive is a DeliveryStreamStatus enum value
 	DeliveryStreamStatusActive = "ACTIVE"
 )
+
+// DeliveryStreamStatus_Values returns all elements of the DeliveryStreamStatus enum
+func DeliveryStreamStatus_Values() []string {
+	return []string{
+		DeliveryStreamStatusCreating,
+		DeliveryStreamStatusCreatingFailed,
+		DeliveryStreamStatusDeleting,
+		DeliveryStreamStatusDeletingFailed,
+		DeliveryStreamStatusActive,
+	}
+}
 
 const (
 	// DeliveryStreamTypeDirectPut is a DeliveryStreamType enum value
@@ -6494,7 +11205,19 @@ const (
 
 	// DeliveryStreamTypeKinesisStreamAsSource is a DeliveryStreamType enum value
 	DeliveryStreamTypeKinesisStreamAsSource = "KinesisStreamAsSource"
+
+	// DeliveryStreamTypeMskasSource is a DeliveryStreamType enum value
+	DeliveryStreamTypeMskasSource = "MSKAsSource"
 )
+
+// DeliveryStreamType_Values returns all elements of the DeliveryStreamType enum
+func DeliveryStreamType_Values() []string {
+	return []string{
+		DeliveryStreamTypeDirectPut,
+		DeliveryStreamTypeKinesisStreamAsSource,
+		DeliveryStreamTypeMskasSource,
+	}
+}
 
 const (
 	// ElasticsearchIndexRotationPeriodNoRotation is a ElasticsearchIndexRotationPeriod enum value
@@ -6513,6 +11236,17 @@ const (
 	ElasticsearchIndexRotationPeriodOneMonth = "OneMonth"
 )
 
+// ElasticsearchIndexRotationPeriod_Values returns all elements of the ElasticsearchIndexRotationPeriod enum
+func ElasticsearchIndexRotationPeriod_Values() []string {
+	return []string{
+		ElasticsearchIndexRotationPeriodNoRotation,
+		ElasticsearchIndexRotationPeriodOneHour,
+		ElasticsearchIndexRotationPeriodOneDay,
+		ElasticsearchIndexRotationPeriodOneWeek,
+		ElasticsearchIndexRotationPeriodOneMonth,
+	}
+}
+
 const (
 	// ElasticsearchS3BackupModeFailedDocumentsOnly is a ElasticsearchS3BackupMode enum value
 	ElasticsearchS3BackupModeFailedDocumentsOnly = "FailedDocumentsOnly"
@@ -6520,6 +11254,14 @@ const (
 	// ElasticsearchS3BackupModeAllDocuments is a ElasticsearchS3BackupMode enum value
 	ElasticsearchS3BackupModeAllDocuments = "AllDocuments"
 )
+
+// ElasticsearchS3BackupMode_Values returns all elements of the ElasticsearchS3BackupMode enum
+func ElasticsearchS3BackupMode_Values() []string {
+	return []string{
+		ElasticsearchS3BackupModeFailedDocumentsOnly,
+		ElasticsearchS3BackupModeAllDocuments,
+	}
+}
 
 const (
 	// HECEndpointTypeRaw is a HECEndpointType enum value
@@ -6529,10 +11271,57 @@ const (
 	HECEndpointTypeEvent = "Event"
 )
 
+// HECEndpointType_Values returns all elements of the HECEndpointType enum
+func HECEndpointType_Values() []string {
+	return []string{
+		HECEndpointTypeRaw,
+		HECEndpointTypeEvent,
+	}
+}
+
+const (
+	// HttpEndpointS3BackupModeFailedDataOnly is a HttpEndpointS3BackupMode enum value
+	HttpEndpointS3BackupModeFailedDataOnly = "FailedDataOnly"
+
+	// HttpEndpointS3BackupModeAllData is a HttpEndpointS3BackupMode enum value
+	HttpEndpointS3BackupModeAllData = "AllData"
+)
+
+// HttpEndpointS3BackupMode_Values returns all elements of the HttpEndpointS3BackupMode enum
+func HttpEndpointS3BackupMode_Values() []string {
+	return []string{
+		HttpEndpointS3BackupModeFailedDataOnly,
+		HttpEndpointS3BackupModeAllData,
+	}
+}
+
+const (
+	// KeyTypeAwsOwnedCmk is a KeyType enum value
+	KeyTypeAwsOwnedCmk = "AWS_OWNED_CMK"
+
+	// KeyTypeCustomerManagedCmk is a KeyType enum value
+	KeyTypeCustomerManagedCmk = "CUSTOMER_MANAGED_CMK"
+)
+
+// KeyType_Values returns all elements of the KeyType enum
+func KeyType_Values() []string {
+	return []string{
+		KeyTypeAwsOwnedCmk,
+		KeyTypeCustomerManagedCmk,
+	}
+}
+
 const (
 	// NoEncryptionConfigNoEncryption is a NoEncryptionConfig enum value
 	NoEncryptionConfigNoEncryption = "NoEncryption"
 )
+
+// NoEncryptionConfig_Values returns all elements of the NoEncryptionConfig enum
+func NoEncryptionConfig_Values() []string {
+	return []string{
+		NoEncryptionConfigNoEncryption,
+	}
+}
 
 const (
 	// OrcCompressionNone is a OrcCompression enum value
@@ -6545,6 +11334,15 @@ const (
 	OrcCompressionSnappy = "SNAPPY"
 )
 
+// OrcCompression_Values returns all elements of the OrcCompression enum
+func OrcCompression_Values() []string {
+	return []string{
+		OrcCompressionNone,
+		OrcCompressionZlib,
+		OrcCompressionSnappy,
+	}
+}
+
 const (
 	// OrcFormatVersionV011 is a OrcFormatVersion enum value
 	OrcFormatVersionV011 = "V0_11"
@@ -6552,6 +11350,14 @@ const (
 	// OrcFormatVersionV012 is a OrcFormatVersion enum value
 	OrcFormatVersionV012 = "V0_12"
 )
+
+// OrcFormatVersion_Values returns all elements of the OrcFormatVersion enum
+func OrcFormatVersion_Values() []string {
+	return []string{
+		OrcFormatVersionV011,
+		OrcFormatVersionV012,
+	}
+}
 
 const (
 	// ParquetCompressionUncompressed is a ParquetCompression enum value
@@ -6564,6 +11370,15 @@ const (
 	ParquetCompressionSnappy = "SNAPPY"
 )
 
+// ParquetCompression_Values returns all elements of the ParquetCompression enum
+func ParquetCompression_Values() []string {
+	return []string{
+		ParquetCompressionUncompressed,
+		ParquetCompressionGzip,
+		ParquetCompressionSnappy,
+	}
+}
+
 const (
 	// ParquetWriterVersionV1 is a ParquetWriterVersion enum value
 	ParquetWriterVersionV1 = "V1"
@@ -6572,12 +11387,26 @@ const (
 	ParquetWriterVersionV2 = "V2"
 )
 
+// ParquetWriterVersion_Values returns all elements of the ParquetWriterVersion enum
+func ParquetWriterVersion_Values() []string {
+	return []string{
+		ParquetWriterVersionV1,
+		ParquetWriterVersionV2,
+	}
+}
+
 const (
 	// ProcessorParameterNameLambdaArn is a ProcessorParameterName enum value
 	ProcessorParameterNameLambdaArn = "LambdaArn"
 
 	// ProcessorParameterNameNumberOfRetries is a ProcessorParameterName enum value
 	ProcessorParameterNameNumberOfRetries = "NumberOfRetries"
+
+	// ProcessorParameterNameMetadataExtractionQuery is a ProcessorParameterName enum value
+	ProcessorParameterNameMetadataExtractionQuery = "MetadataExtractionQuery"
+
+	// ProcessorParameterNameJsonParsingEngine is a ProcessorParameterName enum value
+	ProcessorParameterNameJsonParsingEngine = "JsonParsingEngine"
 
 	// ProcessorParameterNameRoleArn is a ProcessorParameterName enum value
 	ProcessorParameterNameRoleArn = "RoleArn"
@@ -6587,12 +11416,60 @@ const (
 
 	// ProcessorParameterNameBufferIntervalInSeconds is a ProcessorParameterName enum value
 	ProcessorParameterNameBufferIntervalInSeconds = "BufferIntervalInSeconds"
+
+	// ProcessorParameterNameSubRecordType is a ProcessorParameterName enum value
+	ProcessorParameterNameSubRecordType = "SubRecordType"
+
+	// ProcessorParameterNameDelimiter is a ProcessorParameterName enum value
+	ProcessorParameterNameDelimiter = "Delimiter"
+
+	// ProcessorParameterNameCompressionFormat is a ProcessorParameterName enum value
+	ProcessorParameterNameCompressionFormat = "CompressionFormat"
 )
 
+// ProcessorParameterName_Values returns all elements of the ProcessorParameterName enum
+func ProcessorParameterName_Values() []string {
+	return []string{
+		ProcessorParameterNameLambdaArn,
+		ProcessorParameterNameNumberOfRetries,
+		ProcessorParameterNameMetadataExtractionQuery,
+		ProcessorParameterNameJsonParsingEngine,
+		ProcessorParameterNameRoleArn,
+		ProcessorParameterNameBufferSizeInMbs,
+		ProcessorParameterNameBufferIntervalInSeconds,
+		ProcessorParameterNameSubRecordType,
+		ProcessorParameterNameDelimiter,
+		ProcessorParameterNameCompressionFormat,
+	}
+}
+
 const (
+	// ProcessorTypeRecordDeAggregation is a ProcessorType enum value
+	ProcessorTypeRecordDeAggregation = "RecordDeAggregation"
+
+	// ProcessorTypeDecompression is a ProcessorType enum value
+	ProcessorTypeDecompression = "Decompression"
+
 	// ProcessorTypeLambda is a ProcessorType enum value
 	ProcessorTypeLambda = "Lambda"
+
+	// ProcessorTypeMetadataExtraction is a ProcessorType enum value
+	ProcessorTypeMetadataExtraction = "MetadataExtraction"
+
+	// ProcessorTypeAppendDelimiterToRecord is a ProcessorType enum value
+	ProcessorTypeAppendDelimiterToRecord = "AppendDelimiterToRecord"
 )
+
+// ProcessorType_Values returns all elements of the ProcessorType enum
+func ProcessorType_Values() []string {
+	return []string{
+		ProcessorTypeRecordDeAggregation,
+		ProcessorTypeDecompression,
+		ProcessorTypeLambda,
+		ProcessorTypeMetadataExtraction,
+		ProcessorTypeAppendDelimiterToRecord,
+	}
+}
 
 const (
 	// RedshiftS3BackupModeDisabled is a RedshiftS3BackupMode enum value
@@ -6602,6 +11479,14 @@ const (
 	RedshiftS3BackupModeEnabled = "Enabled"
 )
 
+// RedshiftS3BackupMode_Values returns all elements of the RedshiftS3BackupMode enum
+func RedshiftS3BackupMode_Values() []string {
+	return []string{
+		RedshiftS3BackupModeDisabled,
+		RedshiftS3BackupModeEnabled,
+	}
+}
+
 const (
 	// S3BackupModeDisabled is a S3BackupMode enum value
 	S3BackupModeDisabled = "Disabled"
@@ -6610,6 +11495,14 @@ const (
 	S3BackupModeEnabled = "Enabled"
 )
 
+// S3BackupMode_Values returns all elements of the S3BackupMode enum
+func S3BackupMode_Values() []string {
+	return []string{
+		S3BackupModeDisabled,
+		S3BackupModeEnabled,
+	}
+}
+
 const (
 	// SplunkS3BackupModeFailedEventsOnly is a SplunkS3BackupMode enum value
 	SplunkS3BackupModeFailedEventsOnly = "FailedEventsOnly"
@@ -6617,3 +11510,11 @@ const (
 	// SplunkS3BackupModeAllEvents is a SplunkS3BackupMode enum value
 	SplunkS3BackupModeAllEvents = "AllEvents"
 )
+
+// SplunkS3BackupMode_Values returns all elements of the SplunkS3BackupMode enum
+func SplunkS3BackupMode_Values() []string {
+	return []string{
+		SplunkS3BackupModeFailedEventsOnly,
+		SplunkS3BackupModeAllEvents,
+	}
+}

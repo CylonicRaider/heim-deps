@@ -23,43 +23,50 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Health APIs and Notifications.
-//    func myFunc(svc healthiface.HealthAPI) bool {
-//        // Make svc.DescribeAffectedEntities request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Health APIs and Notifications.
+//	func myFunc(svc healthiface.HealthAPI) bool {
+//	    // Make svc.DescribeAffectedAccountsForOrganization request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := health.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := health.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockHealthClient struct {
-//        healthiface.HealthAPI
-//    }
-//    func (m *mockHealthClient) DescribeAffectedEntities(input *health.DescribeAffectedEntitiesInput) (*health.DescribeAffectedEntitiesOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockHealthClient struct {
+//	    healthiface.HealthAPI
+//	}
+//	func (m *mockHealthClient) DescribeAffectedAccountsForOrganization(input *health.DescribeAffectedAccountsForOrganizationInput) (*health.DescribeAffectedAccountsForOrganizationOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockHealthClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockHealthClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type HealthAPI interface {
+	DescribeAffectedAccountsForOrganization(*health.DescribeAffectedAccountsForOrganizationInput) (*health.DescribeAffectedAccountsForOrganizationOutput, error)
+	DescribeAffectedAccountsForOrganizationWithContext(aws.Context, *health.DescribeAffectedAccountsForOrganizationInput, ...request.Option) (*health.DescribeAffectedAccountsForOrganizationOutput, error)
+	DescribeAffectedAccountsForOrganizationRequest(*health.DescribeAffectedAccountsForOrganizationInput) (*request.Request, *health.DescribeAffectedAccountsForOrganizationOutput)
+
+	DescribeAffectedAccountsForOrganizationPages(*health.DescribeAffectedAccountsForOrganizationInput, func(*health.DescribeAffectedAccountsForOrganizationOutput, bool) bool) error
+	DescribeAffectedAccountsForOrganizationPagesWithContext(aws.Context, *health.DescribeAffectedAccountsForOrganizationInput, func(*health.DescribeAffectedAccountsForOrganizationOutput, bool) bool, ...request.Option) error
+
 	DescribeAffectedEntities(*health.DescribeAffectedEntitiesInput) (*health.DescribeAffectedEntitiesOutput, error)
 	DescribeAffectedEntitiesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, ...request.Option) (*health.DescribeAffectedEntitiesOutput, error)
 	DescribeAffectedEntitiesRequest(*health.DescribeAffectedEntitiesInput) (*request.Request, *health.DescribeAffectedEntitiesOutput)
@@ -67,9 +74,20 @@ type HealthAPI interface {
 	DescribeAffectedEntitiesPages(*health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool) error
 	DescribeAffectedEntitiesPagesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool, ...request.Option) error
 
+	DescribeAffectedEntitiesForOrganization(*health.DescribeAffectedEntitiesForOrganizationInput) (*health.DescribeAffectedEntitiesForOrganizationOutput, error)
+	DescribeAffectedEntitiesForOrganizationWithContext(aws.Context, *health.DescribeAffectedEntitiesForOrganizationInput, ...request.Option) (*health.DescribeAffectedEntitiesForOrganizationOutput, error)
+	DescribeAffectedEntitiesForOrganizationRequest(*health.DescribeAffectedEntitiesForOrganizationInput) (*request.Request, *health.DescribeAffectedEntitiesForOrganizationOutput)
+
+	DescribeAffectedEntitiesForOrganizationPages(*health.DescribeAffectedEntitiesForOrganizationInput, func(*health.DescribeAffectedEntitiesForOrganizationOutput, bool) bool) error
+	DescribeAffectedEntitiesForOrganizationPagesWithContext(aws.Context, *health.DescribeAffectedEntitiesForOrganizationInput, func(*health.DescribeAffectedEntitiesForOrganizationOutput, bool) bool, ...request.Option) error
+
 	DescribeEntityAggregates(*health.DescribeEntityAggregatesInput) (*health.DescribeEntityAggregatesOutput, error)
 	DescribeEntityAggregatesWithContext(aws.Context, *health.DescribeEntityAggregatesInput, ...request.Option) (*health.DescribeEntityAggregatesOutput, error)
 	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) (*request.Request, *health.DescribeEntityAggregatesOutput)
+
+	DescribeEntityAggregatesForOrganization(*health.DescribeEntityAggregatesForOrganizationInput) (*health.DescribeEntityAggregatesForOrganizationOutput, error)
+	DescribeEntityAggregatesForOrganizationWithContext(aws.Context, *health.DescribeEntityAggregatesForOrganizationInput, ...request.Option) (*health.DescribeEntityAggregatesForOrganizationOutput, error)
+	DescribeEntityAggregatesForOrganizationRequest(*health.DescribeEntityAggregatesForOrganizationInput) (*request.Request, *health.DescribeEntityAggregatesForOrganizationOutput)
 
 	DescribeEventAggregates(*health.DescribeEventAggregatesInput) (*health.DescribeEventAggregatesOutput, error)
 	DescribeEventAggregatesWithContext(aws.Context, *health.DescribeEventAggregatesInput, ...request.Option) (*health.DescribeEventAggregatesOutput, error)
@@ -81,6 +99,10 @@ type HealthAPI interface {
 	DescribeEventDetails(*health.DescribeEventDetailsInput) (*health.DescribeEventDetailsOutput, error)
 	DescribeEventDetailsWithContext(aws.Context, *health.DescribeEventDetailsInput, ...request.Option) (*health.DescribeEventDetailsOutput, error)
 	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) (*request.Request, *health.DescribeEventDetailsOutput)
+
+	DescribeEventDetailsForOrganization(*health.DescribeEventDetailsForOrganizationInput) (*health.DescribeEventDetailsForOrganizationOutput, error)
+	DescribeEventDetailsForOrganizationWithContext(aws.Context, *health.DescribeEventDetailsForOrganizationInput, ...request.Option) (*health.DescribeEventDetailsForOrganizationOutput, error)
+	DescribeEventDetailsForOrganizationRequest(*health.DescribeEventDetailsForOrganizationInput) (*request.Request, *health.DescribeEventDetailsForOrganizationOutput)
 
 	DescribeEventTypes(*health.DescribeEventTypesInput) (*health.DescribeEventTypesOutput, error)
 	DescribeEventTypesWithContext(aws.Context, *health.DescribeEventTypesInput, ...request.Option) (*health.DescribeEventTypesOutput, error)
@@ -95,6 +117,25 @@ type HealthAPI interface {
 
 	DescribeEventsPages(*health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool) error
 	DescribeEventsPagesWithContext(aws.Context, *health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool, ...request.Option) error
+
+	DescribeEventsForOrganization(*health.DescribeEventsForOrganizationInput) (*health.DescribeEventsForOrganizationOutput, error)
+	DescribeEventsForOrganizationWithContext(aws.Context, *health.DescribeEventsForOrganizationInput, ...request.Option) (*health.DescribeEventsForOrganizationOutput, error)
+	DescribeEventsForOrganizationRequest(*health.DescribeEventsForOrganizationInput) (*request.Request, *health.DescribeEventsForOrganizationOutput)
+
+	DescribeEventsForOrganizationPages(*health.DescribeEventsForOrganizationInput, func(*health.DescribeEventsForOrganizationOutput, bool) bool) error
+	DescribeEventsForOrganizationPagesWithContext(aws.Context, *health.DescribeEventsForOrganizationInput, func(*health.DescribeEventsForOrganizationOutput, bool) bool, ...request.Option) error
+
+	DescribeHealthServiceStatusForOrganization(*health.DescribeHealthServiceStatusForOrganizationInput) (*health.DescribeHealthServiceStatusForOrganizationOutput, error)
+	DescribeHealthServiceStatusForOrganizationWithContext(aws.Context, *health.DescribeHealthServiceStatusForOrganizationInput, ...request.Option) (*health.DescribeHealthServiceStatusForOrganizationOutput, error)
+	DescribeHealthServiceStatusForOrganizationRequest(*health.DescribeHealthServiceStatusForOrganizationInput) (*request.Request, *health.DescribeHealthServiceStatusForOrganizationOutput)
+
+	DisableHealthServiceAccessForOrganization(*health.DisableHealthServiceAccessForOrganizationInput) (*health.DisableHealthServiceAccessForOrganizationOutput, error)
+	DisableHealthServiceAccessForOrganizationWithContext(aws.Context, *health.DisableHealthServiceAccessForOrganizationInput, ...request.Option) (*health.DisableHealthServiceAccessForOrganizationOutput, error)
+	DisableHealthServiceAccessForOrganizationRequest(*health.DisableHealthServiceAccessForOrganizationInput) (*request.Request, *health.DisableHealthServiceAccessForOrganizationOutput)
+
+	EnableHealthServiceAccessForOrganization(*health.EnableHealthServiceAccessForOrganizationInput) (*health.EnableHealthServiceAccessForOrganizationOutput, error)
+	EnableHealthServiceAccessForOrganizationWithContext(aws.Context, *health.EnableHealthServiceAccessForOrganizationInput, ...request.Option) (*health.EnableHealthServiceAccessForOrganizationOutput, error)
+	EnableHealthServiceAccessForOrganizationRequest(*health.EnableHealthServiceAccessForOrganizationInput) (*request.Request, *health.EnableHealthServiceAccessForOrganizationOutput)
 }
 
 var _ HealthAPI = (*health.Health)(nil)

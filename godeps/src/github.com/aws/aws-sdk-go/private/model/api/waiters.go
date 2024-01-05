@@ -1,3 +1,4 @@
+//go:build codegen
 // +build codegen
 
 package api
@@ -65,23 +66,23 @@ type waiterDefinitions struct {
 
 // AttachWaiters reads a file of waiter definitions, and adds those to the API.
 // Will panic if an error occurs.
-func (a *API) AttachWaiters(filename string) {
+func (a *API) AttachWaiters(filename string) error {
 	p := waiterDefinitions{API: a}
 
 	f, err := os.Open(filename)
 	defer f.Close()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	err = json.NewDecoder(f).Decode(&p)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	p.setup()
+	return p.setup()
 }
 
-func (p *waiterDefinitions) setup() {
+func (p *waiterDefinitions) setup() error {
 	p.API.Waiters = []Waiter{}
 	i, keys := 0, make([]string, len(p.Waiters))
 	for k := range p.Waiters {
@@ -97,10 +98,12 @@ func (p *waiterDefinitions) setup() {
 		e.OperationName = p.ExportableName(e.OperationName)
 		e.Operation = p.API.Operations[e.OperationName]
 		if e.Operation == nil {
-			panic("unknown operation " + e.OperationName + " for waiter " + n)
+			continue
 		}
 		p.API.Waiters = append(p.API.Waiters, e)
 	}
+
+	return nil
 }
 
 var waiterTmpls = template.Must(template.New("waiterTmpls").Funcs(

@@ -15,60 +15,52 @@
 package e2e
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
+	"go.etcd.io/etcd/pkg/v3/expect"
+	"go.etcd.io/etcd/tests/v3/framework/e2e"
 )
 
-func TestCtlV3Put(t *testing.T)              { testCtl(t, putTest, withDialTimeout(7*time.Second)) }
-func TestCtlV3PutNoTLS(t *testing.T)         { testCtl(t, putTest, withCfg(configNoTLS)) }
-func TestCtlV3PutClientTLS(t *testing.T)     { testCtl(t, putTest, withCfg(configClientTLS)) }
-func TestCtlV3PutClientAutoTLS(t *testing.T) { testCtl(t, putTest, withCfg(configClientAutoTLS)) }
-func TestCtlV3PutPeerTLS(t *testing.T)       { testCtl(t, putTest, withCfg(configPeerTLS)) }
-func TestCtlV3PutTimeout(t *testing.T)       { testCtl(t, putTest, withDialTimeout(0)) }
+func TestCtlV3PutTimeout(t *testing.T) { testCtl(t, putTest, withDefaultDialTimeout()) }
 func TestCtlV3PutClientTLSFlagByEnv(t *testing.T) {
-	testCtl(t, putTest, withCfg(configClientTLS), withFlagByEnv())
+	testCtl(t, putTest, withCfg(*e2e.NewConfigClientTLS()), withFlagByEnv())
 }
 func TestCtlV3PutIgnoreValue(t *testing.T) { testCtl(t, putTestIgnoreValue) }
 func TestCtlV3PutIgnoreLease(t *testing.T) { testCtl(t, putTestIgnoreLease) }
 
-func TestCtlV3Get(t *testing.T)              { testCtl(t, getTest) }
-func TestCtlV3GetNoTLS(t *testing.T)         { testCtl(t, getTest, withCfg(configNoTLS)) }
-func TestCtlV3GetClientTLS(t *testing.T)     { testCtl(t, getTest, withCfg(configClientTLS)) }
-func TestCtlV3GetClientAutoTLS(t *testing.T) { testCtl(t, getTest, withCfg(configClientAutoTLS)) }
-func TestCtlV3GetPeerTLS(t *testing.T)       { testCtl(t, getTest, withCfg(configPeerTLS)) }
-func TestCtlV3GetTimeout(t *testing.T)       { testCtl(t, getTest, withDialTimeout(0)) }
-func TestCtlV3GetQuorum(t *testing.T)        { testCtl(t, getTest, withQuorum()) }
+func TestCtlV3GetTimeout(t *testing.T) { testCtl(t, getTest, withDefaultDialTimeout()) }
 
-func TestCtlV3GetFormat(t *testing.T)   { testCtl(t, getFormatTest) }
-func TestCtlV3GetRev(t *testing.T)      { testCtl(t, getRevTest) }
-func TestCtlV3GetKeysOnly(t *testing.T) { testCtl(t, getKeysOnlyTest) }
+func TestCtlV3GetFormat(t *testing.T)    { testCtl(t, getFormatTest) }
+func TestCtlV3GetRev(t *testing.T)       { testCtl(t, getRevTest) }
+func TestCtlV3GetKeysOnly(t *testing.T)  { testCtl(t, getKeysOnlyTest) }
+func TestCtlV3GetCountOnly(t *testing.T) { testCtl(t, getCountOnlyTest) }
 
-func TestCtlV3Del(t *testing.T)          { testCtl(t, delTest) }
-func TestCtlV3DelNoTLS(t *testing.T)     { testCtl(t, delTest, withCfg(configNoTLS)) }
-func TestCtlV3DelClientTLS(t *testing.T) { testCtl(t, delTest, withCfg(configClientTLS)) }
-func TestCtlV3DelPeerTLS(t *testing.T)   { testCtl(t, delTest, withCfg(configPeerTLS)) }
-func TestCtlV3DelTimeout(t *testing.T)   { testCtl(t, delTest, withDialTimeout(0)) }
+func TestCtlV3DelTimeout(t *testing.T) { testCtl(t, delTest, withDefaultDialTimeout()) }
 
 func TestCtlV3GetRevokedCRL(t *testing.T) {
-	cfg := etcdProcessClusterConfig{
-		clusterSize:           1,
-		initialToken:          "new",
-		clientTLS:             clientTLS,
-		isClientCRL:           true,
-		clientCertAuthEnabled: true,
-	}
-	testCtl(t, testGetRevokedCRL, withCfg(cfg))
+	cfg := e2e.NewConfig(
+		e2e.WithClusterSize(1),
+		e2e.WithClientConnType(e2e.ClientTLS),
+		e2e.WithClientRevokeCerts(true),
+		e2e.WithClientCertAuthority(true),
+	)
+	testCtl(t, testGetRevokedCRL, withCfg(*cfg))
 }
 
 func testGetRevokedCRL(cx ctlCtx) {
 	// test reject
-	if err := ctlV3Put(cx, "k", "v", ""); err == nil || !strings.Contains(err.Error(), "Error:") {
-		cx.t.Fatalf("expected reset connection on put, got %v", err)
-	}
+	err := ctlV3Put(cx, "k", "v", "")
+	require.ErrorContains(cx.t, err, "context deadline exceeded")
+
 	// test accept
-	cx.epc.cfg.isClientCRL = false
+	cx.epc.Cfg.Client.RevokeCerts = false
 	if err := ctlV3Put(cx, "k", "v", ""); err != nil {
 		cx.t.Fatal(err)
 	}
@@ -189,9 +181,11 @@ func getFormatTest(cx ctlCtx) {
 			cmdArgs = append(cmdArgs, "--print-value-only")
 		}
 		cmdArgs = append(cmdArgs, "abc")
-		if err := spawnWithExpect(cmdArgs, tt.wstr); err != nil {
-			cx.t.Errorf("#%d: error (%v), wanted %v", i, err, tt.wstr)
+		lines, err := e2e.RunUtilCompletion(cmdArgs, cx.envMap)
+		if err != nil {
+			cx.t.Errorf("#%d: error (%v)", i, err)
 		}
+		assert.Contains(cx.t, strings.Join(lines, "\n"), tt.wstr)
 	}
 }
 
@@ -227,12 +221,55 @@ func getKeysOnlyTest(cx ctlCtx) {
 		cx.t.Fatal(err)
 	}
 	cmdArgs := append(cx.PrefixArgs(), []string{"get", "--keys-only", "key"}...)
-	if err := spawnWithExpect(cmdArgs, "key"); err != nil {
+	if err := e2e.SpawnWithExpectWithEnv(cmdArgs, cx.envMap, expect.ExpectedResponse{Value: "key"}); err != nil {
 		cx.t.Fatal(err)
 	}
-	if err := spawnWithExpects(cmdArgs, "val"); err == nil {
-		cx.t.Fatalf("got value but passed --keys-only")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	lines, err := e2e.SpawnWithExpectLines(ctx, cmdArgs, cx.envMap, expect.ExpectedResponse{Value: "key"})
+	require.NoError(cx.t, err)
+	require.NotContains(cx.t, lines, "val", "got value but passed --keys-only")
+}
+
+func getCountOnlyTest(cx ctlCtx) {
+	cmdArgs := append(cx.PrefixArgs(), []string{"get", "--count-only", "key", "--prefix", "--write-out=fields"}...)
+	if err := e2e.SpawnWithExpects(cmdArgs, cx.envMap, expect.ExpectedResponse{Value: "\"Count\" : 0"}); err != nil {
+		cx.t.Fatal(err)
 	}
+	if err := ctlV3Put(cx, "key", "val", ""); err != nil {
+		cx.t.Fatal(err)
+	}
+	cmdArgs = append(cx.PrefixArgs(), []string{"get", "--count-only", "key", "--prefix", "--write-out=fields"}...)
+	if err := e2e.SpawnWithExpects(cmdArgs, cx.envMap, expect.ExpectedResponse{Value: "\"Count\" : 1"}); err != nil {
+		cx.t.Fatal(err)
+	}
+	if err := ctlV3Put(cx, "key1", "val", ""); err != nil {
+		cx.t.Fatal(err)
+	}
+	if err := ctlV3Put(cx, "key1", "val", ""); err != nil {
+		cx.t.Fatal(err)
+	}
+	cmdArgs = append(cx.PrefixArgs(), []string{"get", "--count-only", "key", "--prefix", "--write-out=fields"}...)
+	if err := e2e.SpawnWithExpects(cmdArgs, cx.envMap, expect.ExpectedResponse{Value: "\"Count\" : 2"}); err != nil {
+		cx.t.Fatal(err)
+	}
+	if err := ctlV3Put(cx, "key2", "val", ""); err != nil {
+		cx.t.Fatal(err)
+	}
+	cmdArgs = append(cx.PrefixArgs(), []string{"get", "--count-only", "key", "--prefix", "--write-out=fields"}...)
+	if err := e2e.SpawnWithExpects(cmdArgs, cx.envMap, expect.ExpectedResponse{Value: "\"Count\" : 3"}); err != nil {
+		cx.t.Fatal(err)
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	cmdArgs = append(cx.PrefixArgs(), []string{"get", "--count-only", "key3", "--prefix", "--write-out=fields"}...)
+	lines, err := e2e.SpawnWithExpectLines(ctx, cmdArgs, cx.envMap, expect.ExpectedResponse{Value: "\"Count\""})
+	require.NoError(cx.t, err)
+	require.NotContains(cx.t, lines, "\"Count\" : 3")
 }
 
 func delTest(cx ctlCtx) {
@@ -309,7 +346,7 @@ func ctlV3Put(cx ctlCtx, key, value, leaseID string, flags ...string) error {
 	if len(flags) != 0 {
 		cmdArgs = append(cmdArgs, flags...)
 	}
-	return spawnWithExpect(cmdArgs, "OK")
+	return e2e.SpawnWithExpectWithEnv(cmdArgs, cx.envMap, expect.ExpectedResponse{Value: "OK"})
 }
 
 type kv struct {
@@ -322,15 +359,15 @@ func ctlV3Get(cx ctlCtx, args []string, kvs ...kv) error {
 	if !cx.quorum {
 		cmdArgs = append(cmdArgs, "--consistency", "s")
 	}
-	var lines []string
+	var lines []expect.ExpectedResponse
 	for _, elem := range kvs {
-		lines = append(lines, elem.key, elem.val)
+		lines = append(lines, expect.ExpectedResponse{Value: elem.key}, expect.ExpectedResponse{Value: elem.val})
 	}
-	return spawnWithExpects(cmdArgs, lines...)
+	return e2e.SpawnWithExpects(cmdArgs, cx.envMap, lines...)
 }
 
 func ctlV3Del(cx ctlCtx, args []string, num int) error {
 	cmdArgs := append(cx.PrefixArgs(), "del")
 	cmdArgs = append(cmdArgs, args...)
-	return spawnWithExpects(cmdArgs, fmt.Sprintf("%d", num))
+	return e2e.SpawnWithExpects(cmdArgs, cx.envMap, expect.ExpectedResponse{Value: fmt.Sprintf("%d", num)})
 }

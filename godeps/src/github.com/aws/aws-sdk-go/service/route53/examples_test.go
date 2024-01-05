@@ -26,7 +26,6 @@ func parseTime(layout, value string) *time.Time {
 }
 
 // To associate a VPC with a hosted zone
-//
 // The following example associates the VPC with ID vpc-1a2b3c4d with the hosted zone
 // with ID Z3M3LMPEXAMPLE.
 func ExampleRoute53_AssociateVPCWithHostedZone_shared00() {
@@ -58,6 +57,8 @@ func ExampleRoute53_AssociateVPCWithHostedZone_shared00() {
 				fmt.Println(route53.ErrCodeConflictingDomainExists, aerr.Error())
 			case route53.ErrCodeLimitsExceeded:
 				fmt.Println(route53.ErrCodeLimitsExceeded, aerr.Error())
+			case route53.ErrCodePriorRequestNotComplete:
+				fmt.Println(route53.ErrCodePriorRequestNotComplete, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -73,7 +74,6 @@ func ExampleRoute53_AssociateVPCWithHostedZone_shared00() {
 }
 
 // To create a basic resource record set
-//
 // The following example creates a resource record set that routes Internet traffic
 // to a resource with an IP address of 192.0.2.44.
 func ExampleRoute53_ChangeResourceRecordSets_shared00() {
@@ -129,7 +129,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared00() {
 }
 
 // To create weighted resource record sets
-//
 // The following example creates two weighted resource record sets. The resource with
 // a Weight of 100 will get 1/3rd of traffic (100/100+200), and the other resource will
 // get the rest of the traffic for example.com.
@@ -205,7 +204,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared01() {
 }
 
 // To create an alias resource record set
-//
 // The following example creates an alias resource record set that routes traffic to
 // a CloudFront distribution.
 func ExampleRoute53_ChangeResourceRecordSets_shared02() {
@@ -260,7 +258,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared02() {
 }
 
 // To create weighted alias resource record sets
-//
 // The following example creates two weighted alias resource record sets that route
 // traffic to ELB load balancers. The resource with a Weight of 100 will get 1/3rd of
 // traffic (100/100+200), and the other resource will get the rest of the traffic for
@@ -333,7 +330,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared03() {
 }
 
 // To create latency resource record sets
-//
 // The following example creates two latency resource record sets that route traffic
 // to EC2 instances. Traffic for example.com is routed either to the Ohio region or
 // the Oregon region, depending on the latency between the user and those regions.
@@ -409,7 +405,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared04() {
 }
 
 // To create latency alias resource record sets
-//
 // The following example creates two latency alias resource record sets that route traffic
 // for example.com to ELB load balancers. Requests are routed either to the Ohio region
 // or the Oregon region, depending on the latency between the user and those regions.
@@ -481,7 +476,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared05() {
 }
 
 // To create failover resource record sets
-//
 // The following example creates primary and secondary failover resource record sets
 // that route traffic to EC2 instances. Traffic is generally routed to the primary resource,
 // in the Ohio region. If that resource is unavailable, traffic is routed to the secondary
@@ -558,7 +552,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared06() {
 }
 
 // To create failover alias resource record sets
-//
 // The following example creates primary and secondary failover alias resource record
 // sets that route traffic to ELB load balancers. Traffic is generally routed to the
 // primary resource, in the Ohio region. If that resource is unavailable, traffic is
@@ -631,7 +624,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared07() {
 }
 
 // To create geolocation resource record sets
-//
 // The following example creates four geolocation resource record sets that use IPv4
 // addresses to route traffic to resources such as web servers running on EC2 instances.
 // Traffic is routed to one of four IP addresses, for North America (NA), for South
@@ -744,7 +736,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared08() {
 }
 
 // To create geolocation alias resource record sets
-//
 // The following example creates four geolocation alias resource record sets that route
 // traffic to ELB load balancers. Traffic is routed to one of four IP addresses, for
 // North America (NA), for South America (SA), for Europe (EU), and for all other locations
@@ -853,7 +844,6 @@ func ExampleRoute53_ChangeResourceRecordSets_shared09() {
 }
 
 // To add or remove tags from a hosted zone or health check
-//
 // The following example adds two tags and removes one tag from the hosted zone with
 // ID Z3M3LMPEXAMPLE.
 func ExampleRoute53_ChangeTagsForResource_shared00() {
@@ -905,7 +895,6 @@ func ExampleRoute53_ChangeTagsForResource_shared00() {
 }
 
 // To get information about a hosted zone
-//
 // The following example gets information about the Z3M3LMPEXAMPLE hosted zone.
 func ExampleRoute53_GetHostedZone_shared00() {
 	svc := route53.New(session.New())

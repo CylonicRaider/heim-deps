@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Certificate Manager Private Certificate Authority.
-//    func myFunc(svc acmpcaiface.ACMPCAAPI) bool {
-//        // Make svc.CreateCertificateAuthority request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Certificate Manager Private Certificate Authority.
+//	func myFunc(svc acmpcaiface.ACMPCAAPI) bool {
+//	    // Make svc.CreateCertificateAuthority request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := acmpca.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := acmpca.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockACMPCAClient struct {
-//        acmpcaiface.ACMPCAAPI
-//    }
-//    func (m *mockACMPCAClient) CreateCertificateAuthority(input *acmpca.CreateCertificateAuthorityInput) (*acmpca.CreateCertificateAuthorityOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockACMPCAClient struct {
+//	    acmpcaiface.ACMPCAAPI
+//	}
+//	func (m *mockACMPCAClient) CreateCertificateAuthority(input *acmpca.CreateCertificateAuthorityInput) (*acmpca.CreateCertificateAuthorityOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockACMPCAClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockACMPCAClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -68,9 +68,21 @@ type ACMPCAAPI interface {
 	CreateCertificateAuthorityAuditReportWithContext(aws.Context, *acmpca.CreateCertificateAuthorityAuditReportInput, ...request.Option) (*acmpca.CreateCertificateAuthorityAuditReportOutput, error)
 	CreateCertificateAuthorityAuditReportRequest(*acmpca.CreateCertificateAuthorityAuditReportInput) (*request.Request, *acmpca.CreateCertificateAuthorityAuditReportOutput)
 
+	CreatePermission(*acmpca.CreatePermissionInput) (*acmpca.CreatePermissionOutput, error)
+	CreatePermissionWithContext(aws.Context, *acmpca.CreatePermissionInput, ...request.Option) (*acmpca.CreatePermissionOutput, error)
+	CreatePermissionRequest(*acmpca.CreatePermissionInput) (*request.Request, *acmpca.CreatePermissionOutput)
+
 	DeleteCertificateAuthority(*acmpca.DeleteCertificateAuthorityInput) (*acmpca.DeleteCertificateAuthorityOutput, error)
 	DeleteCertificateAuthorityWithContext(aws.Context, *acmpca.DeleteCertificateAuthorityInput, ...request.Option) (*acmpca.DeleteCertificateAuthorityOutput, error)
 	DeleteCertificateAuthorityRequest(*acmpca.DeleteCertificateAuthorityInput) (*request.Request, *acmpca.DeleteCertificateAuthorityOutput)
+
+	DeletePermission(*acmpca.DeletePermissionInput) (*acmpca.DeletePermissionOutput, error)
+	DeletePermissionWithContext(aws.Context, *acmpca.DeletePermissionInput, ...request.Option) (*acmpca.DeletePermissionOutput, error)
+	DeletePermissionRequest(*acmpca.DeletePermissionInput) (*request.Request, *acmpca.DeletePermissionOutput)
+
+	DeletePolicy(*acmpca.DeletePolicyInput) (*acmpca.DeletePolicyOutput, error)
+	DeletePolicyWithContext(aws.Context, *acmpca.DeletePolicyInput, ...request.Option) (*acmpca.DeletePolicyOutput, error)
+	DeletePolicyRequest(*acmpca.DeletePolicyInput) (*request.Request, *acmpca.DeletePolicyOutput)
 
 	DescribeCertificateAuthority(*acmpca.DescribeCertificateAuthorityInput) (*acmpca.DescribeCertificateAuthorityOutput, error)
 	DescribeCertificateAuthorityWithContext(aws.Context, *acmpca.DescribeCertificateAuthorityInput, ...request.Option) (*acmpca.DescribeCertificateAuthorityOutput, error)
@@ -92,6 +104,10 @@ type ACMPCAAPI interface {
 	GetCertificateAuthorityCsrWithContext(aws.Context, *acmpca.GetCertificateAuthorityCsrInput, ...request.Option) (*acmpca.GetCertificateAuthorityCsrOutput, error)
 	GetCertificateAuthorityCsrRequest(*acmpca.GetCertificateAuthorityCsrInput) (*request.Request, *acmpca.GetCertificateAuthorityCsrOutput)
 
+	GetPolicy(*acmpca.GetPolicyInput) (*acmpca.GetPolicyOutput, error)
+	GetPolicyWithContext(aws.Context, *acmpca.GetPolicyInput, ...request.Option) (*acmpca.GetPolicyOutput, error)
+	GetPolicyRequest(*acmpca.GetPolicyInput) (*request.Request, *acmpca.GetPolicyOutput)
+
 	ImportCertificateAuthorityCertificate(*acmpca.ImportCertificateAuthorityCertificateInput) (*acmpca.ImportCertificateAuthorityCertificateOutput, error)
 	ImportCertificateAuthorityCertificateWithContext(aws.Context, *acmpca.ImportCertificateAuthorityCertificateInput, ...request.Option) (*acmpca.ImportCertificateAuthorityCertificateOutput, error)
 	ImportCertificateAuthorityCertificateRequest(*acmpca.ImportCertificateAuthorityCertificateInput) (*request.Request, *acmpca.ImportCertificateAuthorityCertificateOutput)
@@ -107,9 +123,23 @@ type ACMPCAAPI interface {
 	ListCertificateAuthoritiesPages(*acmpca.ListCertificateAuthoritiesInput, func(*acmpca.ListCertificateAuthoritiesOutput, bool) bool) error
 	ListCertificateAuthoritiesPagesWithContext(aws.Context, *acmpca.ListCertificateAuthoritiesInput, func(*acmpca.ListCertificateAuthoritiesOutput, bool) bool, ...request.Option) error
 
+	ListPermissions(*acmpca.ListPermissionsInput) (*acmpca.ListPermissionsOutput, error)
+	ListPermissionsWithContext(aws.Context, *acmpca.ListPermissionsInput, ...request.Option) (*acmpca.ListPermissionsOutput, error)
+	ListPermissionsRequest(*acmpca.ListPermissionsInput) (*request.Request, *acmpca.ListPermissionsOutput)
+
+	ListPermissionsPages(*acmpca.ListPermissionsInput, func(*acmpca.ListPermissionsOutput, bool) bool) error
+	ListPermissionsPagesWithContext(aws.Context, *acmpca.ListPermissionsInput, func(*acmpca.ListPermissionsOutput, bool) bool, ...request.Option) error
+
 	ListTags(*acmpca.ListTagsInput) (*acmpca.ListTagsOutput, error)
 	ListTagsWithContext(aws.Context, *acmpca.ListTagsInput, ...request.Option) (*acmpca.ListTagsOutput, error)
 	ListTagsRequest(*acmpca.ListTagsInput) (*request.Request, *acmpca.ListTagsOutput)
+
+	ListTagsPages(*acmpca.ListTagsInput, func(*acmpca.ListTagsOutput, bool) bool) error
+	ListTagsPagesWithContext(aws.Context, *acmpca.ListTagsInput, func(*acmpca.ListTagsOutput, bool) bool, ...request.Option) error
+
+	PutPolicy(*acmpca.PutPolicyInput) (*acmpca.PutPolicyOutput, error)
+	PutPolicyWithContext(aws.Context, *acmpca.PutPolicyInput, ...request.Option) (*acmpca.PutPolicyOutput, error)
+	PutPolicyRequest(*acmpca.PutPolicyInput) (*request.Request, *acmpca.PutPolicyOutput)
 
 	RestoreCertificateAuthority(*acmpca.RestoreCertificateAuthorityInput) (*acmpca.RestoreCertificateAuthorityOutput, error)
 	RestoreCertificateAuthorityWithContext(aws.Context, *acmpca.RestoreCertificateAuthorityInput, ...request.Option) (*acmpca.RestoreCertificateAuthorityOutput, error)

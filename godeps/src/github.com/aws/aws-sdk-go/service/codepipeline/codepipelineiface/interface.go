@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CodePipeline.
-//    func myFunc(svc codepipelineiface.CodePipelineAPI) bool {
-//        // Make svc.AcknowledgeJob request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS CodePipeline.
+//	func myFunc(svc codepipelineiface.CodePipelineAPI) bool {
+//	    // Make svc.AcknowledgeJob request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := codepipeline.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := codepipeline.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCodePipelineClient struct {
-//        codepipelineiface.CodePipelineAPI
-//    }
-//    func (m *mockCodePipelineClient) AcknowledgeJob(input *codepipeline.AcknowledgeJobInput) (*codepipeline.AcknowledgeJobOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockCodePipelineClient struct {
+//	    codepipelineiface.CodePipelineAPI
+//	}
+//	func (m *mockCodePipelineClient) AcknowledgeJob(input *codepipeline.AcknowledgeJobInput) (*codepipeline.AcknowledgeJobOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCodePipelineClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockCodePipelineClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -100,6 +100,10 @@ type CodePipelineAPI interface {
 	EnableStageTransitionWithContext(aws.Context, *codepipeline.EnableStageTransitionInput, ...request.Option) (*codepipeline.EnableStageTransitionOutput, error)
 	EnableStageTransitionRequest(*codepipeline.EnableStageTransitionInput) (*request.Request, *codepipeline.EnableStageTransitionOutput)
 
+	GetActionType(*codepipeline.GetActionTypeInput) (*codepipeline.GetActionTypeOutput, error)
+	GetActionTypeWithContext(aws.Context, *codepipeline.GetActionTypeInput, ...request.Option) (*codepipeline.GetActionTypeOutput, error)
+	GetActionTypeRequest(*codepipeline.GetActionTypeInput) (*request.Request, *codepipeline.GetActionTypeOutput)
+
 	GetJobDetails(*codepipeline.GetJobDetailsInput) (*codepipeline.GetJobDetailsOutput, error)
 	GetJobDetailsWithContext(aws.Context, *codepipeline.GetJobDetailsInput, ...request.Option) (*codepipeline.GetJobDetailsOutput, error)
 	GetJobDetailsRequest(*codepipeline.GetJobDetailsInput) (*request.Request, *codepipeline.GetJobDetailsOutput)
@@ -120,21 +124,47 @@ type CodePipelineAPI interface {
 	GetThirdPartyJobDetailsWithContext(aws.Context, *codepipeline.GetThirdPartyJobDetailsInput, ...request.Option) (*codepipeline.GetThirdPartyJobDetailsOutput, error)
 	GetThirdPartyJobDetailsRequest(*codepipeline.GetThirdPartyJobDetailsInput) (*request.Request, *codepipeline.GetThirdPartyJobDetailsOutput)
 
+	ListActionExecutions(*codepipeline.ListActionExecutionsInput) (*codepipeline.ListActionExecutionsOutput, error)
+	ListActionExecutionsWithContext(aws.Context, *codepipeline.ListActionExecutionsInput, ...request.Option) (*codepipeline.ListActionExecutionsOutput, error)
+	ListActionExecutionsRequest(*codepipeline.ListActionExecutionsInput) (*request.Request, *codepipeline.ListActionExecutionsOutput)
+
+	ListActionExecutionsPages(*codepipeline.ListActionExecutionsInput, func(*codepipeline.ListActionExecutionsOutput, bool) bool) error
+	ListActionExecutionsPagesWithContext(aws.Context, *codepipeline.ListActionExecutionsInput, func(*codepipeline.ListActionExecutionsOutput, bool) bool, ...request.Option) error
+
 	ListActionTypes(*codepipeline.ListActionTypesInput) (*codepipeline.ListActionTypesOutput, error)
 	ListActionTypesWithContext(aws.Context, *codepipeline.ListActionTypesInput, ...request.Option) (*codepipeline.ListActionTypesOutput, error)
 	ListActionTypesRequest(*codepipeline.ListActionTypesInput) (*request.Request, *codepipeline.ListActionTypesOutput)
+
+	ListActionTypesPages(*codepipeline.ListActionTypesInput, func(*codepipeline.ListActionTypesOutput, bool) bool) error
+	ListActionTypesPagesWithContext(aws.Context, *codepipeline.ListActionTypesInput, func(*codepipeline.ListActionTypesOutput, bool) bool, ...request.Option) error
 
 	ListPipelineExecutions(*codepipeline.ListPipelineExecutionsInput) (*codepipeline.ListPipelineExecutionsOutput, error)
 	ListPipelineExecutionsWithContext(aws.Context, *codepipeline.ListPipelineExecutionsInput, ...request.Option) (*codepipeline.ListPipelineExecutionsOutput, error)
 	ListPipelineExecutionsRequest(*codepipeline.ListPipelineExecutionsInput) (*request.Request, *codepipeline.ListPipelineExecutionsOutput)
 
+	ListPipelineExecutionsPages(*codepipeline.ListPipelineExecutionsInput, func(*codepipeline.ListPipelineExecutionsOutput, bool) bool) error
+	ListPipelineExecutionsPagesWithContext(aws.Context, *codepipeline.ListPipelineExecutionsInput, func(*codepipeline.ListPipelineExecutionsOutput, bool) bool, ...request.Option) error
+
 	ListPipelines(*codepipeline.ListPipelinesInput) (*codepipeline.ListPipelinesOutput, error)
 	ListPipelinesWithContext(aws.Context, *codepipeline.ListPipelinesInput, ...request.Option) (*codepipeline.ListPipelinesOutput, error)
 	ListPipelinesRequest(*codepipeline.ListPipelinesInput) (*request.Request, *codepipeline.ListPipelinesOutput)
 
+	ListPipelinesPages(*codepipeline.ListPipelinesInput, func(*codepipeline.ListPipelinesOutput, bool) bool) error
+	ListPipelinesPagesWithContext(aws.Context, *codepipeline.ListPipelinesInput, func(*codepipeline.ListPipelinesOutput, bool) bool, ...request.Option) error
+
+	ListTagsForResource(*codepipeline.ListTagsForResourceInput) (*codepipeline.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *codepipeline.ListTagsForResourceInput, ...request.Option) (*codepipeline.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*codepipeline.ListTagsForResourceInput) (*request.Request, *codepipeline.ListTagsForResourceOutput)
+
+	ListTagsForResourcePages(*codepipeline.ListTagsForResourceInput, func(*codepipeline.ListTagsForResourceOutput, bool) bool) error
+	ListTagsForResourcePagesWithContext(aws.Context, *codepipeline.ListTagsForResourceInput, func(*codepipeline.ListTagsForResourceOutput, bool) bool, ...request.Option) error
+
 	ListWebhooks(*codepipeline.ListWebhooksInput) (*codepipeline.ListWebhooksOutput, error)
 	ListWebhooksWithContext(aws.Context, *codepipeline.ListWebhooksInput, ...request.Option) (*codepipeline.ListWebhooksOutput, error)
 	ListWebhooksRequest(*codepipeline.ListWebhooksInput) (*request.Request, *codepipeline.ListWebhooksOutput)
+
+	ListWebhooksPages(*codepipeline.ListWebhooksInput, func(*codepipeline.ListWebhooksOutput, bool) bool) error
+	ListWebhooksPagesWithContext(aws.Context, *codepipeline.ListWebhooksInput, func(*codepipeline.ListWebhooksOutput, bool) bool, ...request.Option) error
 
 	PollForJobs(*codepipeline.PollForJobsInput) (*codepipeline.PollForJobsOutput, error)
 	PollForJobsWithContext(aws.Context, *codepipeline.PollForJobsInput, ...request.Option) (*codepipeline.PollForJobsOutput, error)
@@ -183,6 +213,22 @@ type CodePipelineAPI interface {
 	StartPipelineExecution(*codepipeline.StartPipelineExecutionInput) (*codepipeline.StartPipelineExecutionOutput, error)
 	StartPipelineExecutionWithContext(aws.Context, *codepipeline.StartPipelineExecutionInput, ...request.Option) (*codepipeline.StartPipelineExecutionOutput, error)
 	StartPipelineExecutionRequest(*codepipeline.StartPipelineExecutionInput) (*request.Request, *codepipeline.StartPipelineExecutionOutput)
+
+	StopPipelineExecution(*codepipeline.StopPipelineExecutionInput) (*codepipeline.StopPipelineExecutionOutput, error)
+	StopPipelineExecutionWithContext(aws.Context, *codepipeline.StopPipelineExecutionInput, ...request.Option) (*codepipeline.StopPipelineExecutionOutput, error)
+	StopPipelineExecutionRequest(*codepipeline.StopPipelineExecutionInput) (*request.Request, *codepipeline.StopPipelineExecutionOutput)
+
+	TagResource(*codepipeline.TagResourceInput) (*codepipeline.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *codepipeline.TagResourceInput, ...request.Option) (*codepipeline.TagResourceOutput, error)
+	TagResourceRequest(*codepipeline.TagResourceInput) (*request.Request, *codepipeline.TagResourceOutput)
+
+	UntagResource(*codepipeline.UntagResourceInput) (*codepipeline.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *codepipeline.UntagResourceInput, ...request.Option) (*codepipeline.UntagResourceOutput, error)
+	UntagResourceRequest(*codepipeline.UntagResourceInput) (*request.Request, *codepipeline.UntagResourceOutput)
+
+	UpdateActionType(*codepipeline.UpdateActionTypeInput) (*codepipeline.UpdateActionTypeOutput, error)
+	UpdateActionTypeWithContext(aws.Context, *codepipeline.UpdateActionTypeInput, ...request.Option) (*codepipeline.UpdateActionTypeOutput, error)
+	UpdateActionTypeRequest(*codepipeline.UpdateActionTypeInput) (*request.Request, *codepipeline.UpdateActionTypeOutput)
 
 	UpdatePipeline(*codepipeline.UpdatePipelineInput) (*codepipeline.UpdatePipelineOutput, error)
 	UpdatePipelineWithContext(aws.Context, *codepipeline.UpdatePipelineInput, ...request.Option) (*codepipeline.UpdatePipelineOutput, error)

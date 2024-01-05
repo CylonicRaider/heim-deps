@@ -2,6 +2,10 @@
 
 package iot
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeCertificateConflictException for service response error code
@@ -23,6 +27,12 @@ const (
 	//
 	// The certificate is invalid.
 	ErrCodeCertificateValidationException = "CertificateValidationException"
+
+	// ErrCodeConflictException for service response error code
+	// "ConflictException".
+	//
+	// A resource with the same name already exists.
+	ErrCodeConflictException = "ConflictException"
 
 	// ErrCodeConflictingResourceUpdateException for service response error code
 	// "ConflictingResourceUpdateException".
@@ -54,6 +64,19 @@ const (
 	//
 	// An unexpected error has occurred.
 	ErrCodeInternalFailureException = "InternalFailureException"
+
+	// ErrCodeInternalServerException for service response error code
+	// "InternalServerException".
+	//
+	// Internal error from the service that indicates an unexpected error or that
+	// the service is unavailable.
+	ErrCodeInternalServerException = "InternalServerException"
+
+	// ErrCodeInvalidAggregationException for service response error code
+	// "InvalidAggregationException".
+	//
+	// The aggregation is invalid.
+	ErrCodeInvalidAggregationException = "InvalidAggregationException"
 
 	// ErrCodeInvalidQueryException for service response error code
 	// "InvalidQueryException".
@@ -123,6 +146,12 @@ const (
 	// The resource registration failed.
 	ErrCodeResourceRegistrationFailureException = "ResourceRegistrationFailureException"
 
+	// ErrCodeServiceQuotaExceededException for service response error code
+	// "ServiceQuotaExceededException".
+	//
+	// A limit has been exceeded.
+	ErrCodeServiceQuotaExceededException = "ServiceQuotaExceededException"
+
 	// ErrCodeServiceUnavailableException for service response error code
 	// "ServiceUnavailableException".
 	//
@@ -134,6 +163,13 @@ const (
 	//
 	// The Rule-SQL expression can't be parsed correctly.
 	ErrCodeSqlParseException = "SqlParseException"
+
+	// ErrCodeTaskAlreadyExistsException for service response error code
+	// "TaskAlreadyExistsException".
+	//
+	// This exception occurs if you attempt to start a task with the same task-id
+	// as an existing task but with a different clientRequestToken.
+	ErrCodeTaskAlreadyExistsException = "TaskAlreadyExistsException"
 
 	// ErrCodeThrottlingException for service response error code
 	// "ThrottlingException".
@@ -161,6 +197,12 @@ const (
 	// You are not authorized to perform this operation.
 	ErrCodeUnauthorizedException = "UnauthorizedException"
 
+	// ErrCodeValidationException for service response error code
+	// "ValidationException".
+	//
+	// The request is not valid.
+	ErrCodeValidationException = "ValidationException"
+
 	// ErrCodeVersionConflictException for service response error code
 	// "VersionConflictException".
 	//
@@ -174,3 +216,39 @@ const (
 	// The number of policy versions exceeds the limit.
 	ErrCodeVersionsLimitExceededException = "VersionsLimitExceededException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"CertificateConflictException":         newErrorCertificateConflictException,
+	"CertificateStateException":            newErrorCertificateStateException,
+	"CertificateValidationException":       newErrorCertificateValidationException,
+	"ConflictException":                    newErrorConflictException,
+	"ConflictingResourceUpdateException":   newErrorConflictingResourceUpdateException,
+	"DeleteConflictException":              newErrorDeleteConflictException,
+	"IndexNotReadyException":               newErrorIndexNotReadyException,
+	"InternalException":                    newErrorInternalException,
+	"InternalFailureException":             newErrorInternalFailureException,
+	"InternalServerException":              newErrorInternalServerException,
+	"InvalidAggregationException":          newErrorInvalidAggregationException,
+	"InvalidQueryException":                newErrorInvalidQueryException,
+	"InvalidRequestException":              newErrorInvalidRequestException,
+	"InvalidResponseException":             newErrorInvalidResponseException,
+	"InvalidStateTransitionException":      newErrorInvalidStateTransitionException,
+	"LimitExceededException":               newErrorLimitExceededException,
+	"MalformedPolicyException":             newErrorMalformedPolicyException,
+	"NotConfiguredException":               newErrorNotConfiguredException,
+	"RegistrationCodeValidationException":  newErrorRegistrationCodeValidationException,
+	"ResourceAlreadyExistsException":       newErrorResourceAlreadyExistsException,
+	"ResourceNotFoundException":            newErrorResourceNotFoundException,
+	"ResourceRegistrationFailureException": newErrorResourceRegistrationFailureException,
+	"ServiceQuotaExceededException":        newErrorServiceQuotaExceededException,
+	"ServiceUnavailableException":          newErrorServiceUnavailableException,
+	"SqlParseException":                    newErrorSqlParseException,
+	"TaskAlreadyExistsException":           newErrorTaskAlreadyExistsException,
+	"ThrottlingException":                  newErrorThrottlingException,
+	"TransferAlreadyCompletedException":    newErrorTransferAlreadyCompletedException,
+	"TransferConflictException":            newErrorTransferConflictException,
+	"UnauthorizedException":                newErrorUnauthorizedException,
+	"ValidationException":                  newErrorValidationException,
+	"VersionConflictException":             newErrorVersionConflictException,
+	"VersionsLimitExceededException":       newErrorVersionsLimitExceededException,
+}

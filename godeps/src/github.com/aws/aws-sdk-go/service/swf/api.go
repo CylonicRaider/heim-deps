@@ -29,14 +29,13 @@ const opCountClosedWorkflowExecutions = "CountClosedWorkflowExecutions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CountClosedWorkflowExecutionsRequest method.
+//	req, resp := client.CountClosedWorkflowExecutionsRequest(params)
 //
-//    // Example sending a request using the CountClosedWorkflowExecutionsRequest method.
-//    req, resp := client.CountClosedWorkflowExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExecutionsInput) (req *request.Request, output *WorkflowExecutionCount) {
 	op := &request.Operation{
 		Name:       opCountClosedWorkflowExecutions,
@@ -61,30 +60,26 @@ func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExe
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
-//
-// typeFilter.name: String constraint. The key is swf:typeFilter.name.
-//
-// typeFilter.version: String constraint. The key is swf:typeFilter.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
+//     typeFilter.name: String constraint. The key is swf:typeFilter.name. typeFilter.version:
+//     String constraint. The key is swf:typeFilter.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -94,16 +89,16 @@ func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExe
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation CountClosedWorkflowExecutions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) CountClosedWorkflowExecutions(input *CountClosedWorkflowExecutionsInput) (*WorkflowExecutionCount, error) {
 	req, out := c.CountClosedWorkflowExecutionsRequest(input)
 	return out, req.Send()
@@ -141,14 +136,13 @@ const opCountOpenWorkflowExecutions = "CountOpenWorkflowExecutions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CountOpenWorkflowExecutionsRequest method.
+//	req, resp := client.CountOpenWorkflowExecutionsRequest(params)
 //
-//    // Example sending a request using the CountOpenWorkflowExecutionsRequest method.
-//    req, resp := client.CountOpenWorkflowExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecutionsInput) (req *request.Request, output *WorkflowExecutionCount) {
 	op := &request.Operation{
 		Name:       opCountOpenWorkflowExecutions,
@@ -173,30 +167,26 @@ func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecuti
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
-//
-// typeFilter.name: String constraint. The key is swf:typeFilter.name.
-//
-// typeFilter.version: String constraint. The key is swf:typeFilter.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
+//     typeFilter.name: String constraint. The key is swf:typeFilter.name. typeFilter.version:
+//     String constraint. The key is swf:typeFilter.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -206,16 +196,16 @@ func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecuti
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation CountOpenWorkflowExecutions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) CountOpenWorkflowExecutions(input *CountOpenWorkflowExecutionsInput) (*WorkflowExecutionCount, error) {
 	req, out := c.CountOpenWorkflowExecutionsRequest(input)
 	return out, req.Send()
@@ -253,14 +243,13 @@ const opCountPendingActivityTasks = "CountPendingActivityTasks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CountPendingActivityTasksRequest method.
+//	req, resp := client.CountPendingActivityTasksRequest(params)
 //
-//    // Example sending a request using the CountPendingActivityTasksRequest method.
-//    req, resp := client.CountPendingActivityTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksInput) (req *request.Request, output *PendingTaskCount) {
 	op := &request.Operation{
 		Name:       opCountPendingActivityTasks,
@@ -284,25 +273,25 @@ func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksI
 // If you specify a task list that no activity task was ever scheduled in then
 // 0 is returned.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the taskList.name parameter by using a Condition element with
-//    the swf:taskList.name key to allow the action to access only certain task
-//    lists.
+//   - Constrain the taskList.name parameter by using a Condition element with
+//     the swf:taskList.name key to allow the action to access only certain task
+//     lists.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -312,16 +301,16 @@ func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksI
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation CountPendingActivityTasks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) CountPendingActivityTasks(input *CountPendingActivityTasksInput) (*PendingTaskCount, error) {
 	req, out := c.CountPendingActivityTasksRequest(input)
 	return out, req.Send()
@@ -359,14 +348,13 @@ const opCountPendingDecisionTasks = "CountPendingDecisionTasks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CountPendingDecisionTasksRequest method.
+//	req, resp := client.CountPendingDecisionTasksRequest(params)
 //
-//    // Example sending a request using the CountPendingDecisionTasksRequest method.
-//    req, resp := client.CountPendingDecisionTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksInput) (req *request.Request, output *PendingTaskCount) {
 	op := &request.Operation{
 		Name:       opCountPendingDecisionTasks,
@@ -390,25 +378,25 @@ func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksI
 // If you specify a task list that no decision task was ever scheduled in then
 // 0 is returned.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the taskList.name parameter by using a Condition element with
-//    the swf:taskList.name key to allow the action to access only certain task
-//    lists.
+//   - Constrain the taskList.name parameter by using a Condition element with
+//     the swf:taskList.name key to allow the action to access only certain task
+//     lists.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -418,16 +406,16 @@ func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksI
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation CountPendingDecisionTasks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) CountPendingDecisionTasks(input *CountPendingDecisionTasksInput) (*PendingTaskCount, error) {
 	req, out := c.CountPendingDecisionTasksRequest(input)
 	return out, req.Send()
@@ -465,14 +453,13 @@ const opDeprecateActivityType = "DeprecateActivityType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeprecateActivityTypeRequest method.
+//	req, resp := client.DeprecateActivityTypeRequest(params)
 //
-//    // Example sending a request using the DeprecateActivityTypeRequest method.
-//    req, resp := client.DeprecateActivityTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) (req *request.Request, output *DeprecateActivityTypeOutput) {
 	op := &request.Operation{
 		Name:       opDeprecateActivityType,
@@ -499,28 +486,26 @@ func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) (r
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// activityType.name: String constraint. The key is swf:activityType.name.
-//
-// activityType.version: String constraint. The key is swf:activityType.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. activityType.name: String constraint. The key is
+//     swf:activityType.name. activityType.version: String constraint. The key
+//     is swf:activityType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -530,19 +515,19 @@ func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) (r
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation DeprecateActivityType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeTypeDeprecatedFault "TypeDeprecatedFault"
-//   Returned when the specified activity or workflow type was already deprecated.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - TypeDeprecatedFault
+//     Returned when the specified activity or workflow type was already deprecated.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) DeprecateActivityType(input *DeprecateActivityTypeInput) (*DeprecateActivityTypeOutput, error) {
 	req, out := c.DeprecateActivityTypeRequest(input)
 	return out, req.Send()
@@ -580,14 +565,13 @@ const opDeprecateDomain = "DeprecateDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeprecateDomainRequest method.
+//	req, resp := client.DeprecateDomainRequest(params)
 //
-//    // Example sending a request using the DeprecateDomainRequest method.
-//    req, resp := client.DeprecateDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) (req *request.Request, output *DeprecateDomainOutput) {
 	op := &request.Operation{
 		Name:       opDeprecateDomain,
@@ -617,23 +601,23 @@ func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) (req *request.
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -643,19 +627,19 @@ func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) (req *request.
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation DeprecateDomain for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeDomainDeprecatedFault "DomainDeprecatedFault"
-//   Returned when the specified domain has been deprecated.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - DomainDeprecatedFault
+//     Returned when the specified domain has been deprecated.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) DeprecateDomain(input *DeprecateDomainInput) (*DeprecateDomainOutput, error) {
 	req, out := c.DeprecateDomainRequest(input)
 	return out, req.Send()
@@ -693,14 +677,13 @@ const opDeprecateWorkflowType = "DeprecateWorkflowType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeprecateWorkflowTypeRequest method.
+//	req, resp := client.DeprecateWorkflowTypeRequest(params)
 //
-//    // Example sending a request using the DeprecateWorkflowTypeRequest method.
-//    req, resp := client.DeprecateWorkflowTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) (req *request.Request, output *DeprecateWorkflowTypeOutput) {
 	op := &request.Operation{
 		Name:       opDeprecateWorkflowType,
@@ -728,28 +711,26 @@ func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) (r
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// workflowType.name: String constraint. The key is swf:workflowType.name.
-//
-// workflowType.version: String constraint. The key is swf:workflowType.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. workflowType.name: String constraint. The key is
+//     swf:workflowType.name. workflowType.version: String constraint. The key
+//     is swf:workflowType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -759,19 +740,19 @@ func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) (r
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation DeprecateWorkflowType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeTypeDeprecatedFault "TypeDeprecatedFault"
-//   Returned when the specified activity or workflow type was already deprecated.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - TypeDeprecatedFault
+//     Returned when the specified activity or workflow type was already deprecated.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) DeprecateWorkflowType(input *DeprecateWorkflowTypeInput) (*DeprecateWorkflowTypeOutput, error) {
 	req, out := c.DeprecateWorkflowTypeRequest(input)
 	return out, req.Send()
@@ -809,14 +790,13 @@ const opDescribeActivityType = "DescribeActivityType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeActivityTypeRequest method.
+//	req, resp := client.DescribeActivityTypeRequest(params)
 //
-//    // Example sending a request using the DescribeActivityTypeRequest method.
-//    req, resp := client.DescribeActivityTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) (req *request.Request, output *DescribeActivityTypeOutput) {
 	op := &request.Operation{
 		Name:       opDescribeActivityType,
@@ -839,28 +819,26 @@ func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) (req
 // settings provided when the type was registered and other general information
 // about the type.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// activityType.name: String constraint. The key is swf:activityType.name.
-//
-// activityType.version: String constraint. The key is swf:activityType.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. activityType.name: String constraint. The key is
+//     swf:activityType.name. activityType.version: String constraint. The key
+//     is swf:activityType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -870,16 +848,16 @@ func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) (req
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation DescribeActivityType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) DescribeActivityType(input *DescribeActivityTypeInput) (*DescribeActivityTypeOutput, error) {
 	req, out := c.DescribeActivityTypeRequest(input)
 	return out, req.Send()
@@ -917,14 +895,13 @@ const opDescribeDomain = "DescribeDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDomainRequest method.
+//	req, resp := client.DescribeDomainRequest(params)
 //
-//    // Example sending a request using the DescribeDomainRequest method.
-//    req, resp := client.DescribeDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) (req *request.Request, output *DescribeDomainOutput) {
 	op := &request.Operation{
 		Name:       opDescribeDomain,
@@ -946,23 +923,23 @@ func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) (req *request.Re
 // Returns information about the specified domain, including description and
 // status.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -972,16 +949,16 @@ func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) (req *request.Re
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation DescribeDomain for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) DescribeDomain(input *DescribeDomainInput) (*DescribeDomainOutput, error) {
 	req, out := c.DescribeDomainRequest(input)
 	return out, req.Send()
@@ -1019,14 +996,13 @@ const opDescribeWorkflowExecution = "DescribeWorkflowExecution"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeWorkflowExecutionRequest method.
+//	req, resp := client.DescribeWorkflowExecutionRequest(params)
 //
-//    // Example sending a request using the DescribeWorkflowExecutionRequest method.
-//    req, resp := client.DescribeWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionInput) (req *request.Request, output *DescribeWorkflowExecutionOutput) {
 	op := &request.Operation{
 		Name:       opDescribeWorkflowExecution,
@@ -1051,23 +1027,23 @@ func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionI
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1077,16 +1053,16 @@ func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionI
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation DescribeWorkflowExecution for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) DescribeWorkflowExecution(input *DescribeWorkflowExecutionInput) (*DescribeWorkflowExecutionOutput, error) {
 	req, out := c.DescribeWorkflowExecutionRequest(input)
 	return out, req.Send()
@@ -1124,14 +1100,13 @@ const opDescribeWorkflowType = "DescribeWorkflowType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeWorkflowTypeRequest method.
+//	req, resp := client.DescribeWorkflowTypeRequest(params)
 //
-//    // Example sending a request using the DescribeWorkflowTypeRequest method.
-//    req, resp := client.DescribeWorkflowTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) (req *request.Request, output *DescribeWorkflowTypeOutput) {
 	op := &request.Operation{
 		Name:       opDescribeWorkflowType,
@@ -1154,28 +1129,26 @@ func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) (req
 // settings specified when the type was registered and other information such
 // as creation date, current status, etc.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// workflowType.name: String constraint. The key is swf:workflowType.name.
-//
-// workflowType.version: String constraint. The key is swf:workflowType.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. workflowType.name: String constraint. The key is
+//     swf:workflowType.name. workflowType.version: String constraint. The key
+//     is swf:workflowType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1185,16 +1158,16 @@ func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) (req
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation DescribeWorkflowType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) DescribeWorkflowType(input *DescribeWorkflowTypeInput) (*DescribeWorkflowTypeOutput, error) {
 	req, out := c.DescribeWorkflowTypeRequest(input)
 	return out, req.Send()
@@ -1232,14 +1205,13 @@ const opGetWorkflowExecutionHistory = "GetWorkflowExecutionHistory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetWorkflowExecutionHistoryRequest method.
+//	req, resp := client.GetWorkflowExecutionHistoryRequest(params)
 //
-//    // Example sending a request using the GetWorkflowExecutionHistoryRequest method.
-//    req, resp := client.GetWorkflowExecutionHistoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHistoryInput) (req *request.Request, output *GetWorkflowExecutionHistoryOutput) {
 	op := &request.Operation{
 		Name:       opGetWorkflowExecutionHistory,
@@ -1271,23 +1243,23 @@ func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHist
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1297,16 +1269,16 @@ func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHist
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation GetWorkflowExecutionHistory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) GetWorkflowExecutionHistory(input *GetWorkflowExecutionHistoryInput) (*GetWorkflowExecutionHistoryOutput, error) {
 	req, out := c.GetWorkflowExecutionHistoryRequest(input)
 	return out, req.Send()
@@ -1336,15 +1308,14 @@ func (c *SWF) GetWorkflowExecutionHistoryWithContext(ctx aws.Context, input *Get
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a GetWorkflowExecutionHistory operation.
-//    pageNum := 0
-//    err := client.GetWorkflowExecutionHistoryPages(params,
-//        func(page *GetWorkflowExecutionHistoryOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a GetWorkflowExecutionHistory operation.
+//	pageNum := 0
+//	err := client.GetWorkflowExecutionHistoryPages(params,
+//	    func(page *swf.GetWorkflowExecutionHistoryOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *SWF) GetWorkflowExecutionHistoryPages(input *GetWorkflowExecutionHistoryInput, fn func(*GetWorkflowExecutionHistoryOutput, bool) bool) error {
 	return c.GetWorkflowExecutionHistoryPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1371,10 +1342,12 @@ func (c *SWF) GetWorkflowExecutionHistoryPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetWorkflowExecutionHistoryOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*GetWorkflowExecutionHistoryOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1394,14 +1367,13 @@ const opListActivityTypes = "ListActivityTypes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListActivityTypesRequest method.
+//	req, resp := client.ListActivityTypesRequest(params)
 //
-//    // Example sending a request using the ListActivityTypesRequest method.
-//    req, resp := client.ListActivityTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) (req *request.Request, output *ListActivityTypesOutput) {
 	op := &request.Operation{
 		Name:       opListActivityTypes,
@@ -1432,23 +1404,23 @@ func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) (req *requ
 // results may be split into multiple pages. To retrieve subsequent pages, make
 // the call again using the nextPageToken returned by the initial call.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1458,16 +1430,16 @@ func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) (req *requ
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation ListActivityTypes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+// Returned Error Types:
 //
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 //
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 func (c *SWF) ListActivityTypes(input *ListActivityTypesInput) (*ListActivityTypesOutput, error) {
 	req, out := c.ListActivityTypesRequest(input)
 	return out, req.Send()
@@ -1497,15 +1469,14 @@ func (c *SWF) ListActivityTypesWithContext(ctx aws.Context, input *ListActivityT
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListActivityTypes operation.
-//    pageNum := 0
-//    err := client.ListActivityTypesPages(params,
-//        func(page *ListActivityTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListActivityTypes operation.
+//	pageNum := 0
+//	err := client.ListActivityTypesPages(params,
+//	    func(page *swf.ListActivityTypesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *SWF) ListActivityTypesPages(input *ListActivityTypesInput, fn func(*ListActivityTypesOutput, bool) bool) error {
 	return c.ListActivityTypesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1532,10 +1503,12 @@ func (c *SWF) ListActivityTypesPagesWithContext(ctx aws.Context, input *ListActi
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListActivityTypesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListActivityTypesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1555,14 +1528,13 @@ const opListClosedWorkflowExecutions = "ListClosedWorkflowExecutions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListClosedWorkflowExecutionsRequest method.
+//	req, resp := client.ListClosedWorkflowExecutionsRequest(params)
 //
-//    // Example sending a request using the ListClosedWorkflowExecutionsRequest method.
-//    req, resp := client.ListClosedWorkflowExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecutionsInput) (req *request.Request, output *WorkflowExecutionInfos) {
 	op := &request.Operation{
 		Name:       opListClosedWorkflowExecutions,
@@ -1595,30 +1567,26 @@ func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecu
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
-//
-// typeFilter.name: String constraint. The key is swf:typeFilter.name.
-//
-// typeFilter.version: String constraint. The key is swf:typeFilter.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
+//     typeFilter.name: String constraint. The key is swf:typeFilter.name. typeFilter.version:
+//     String constraint. The key is swf:typeFilter.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1628,16 +1596,16 @@ func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecu
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation ListClosedWorkflowExecutions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) ListClosedWorkflowExecutions(input *ListClosedWorkflowExecutionsInput) (*WorkflowExecutionInfos, error) {
 	req, out := c.ListClosedWorkflowExecutionsRequest(input)
 	return out, req.Send()
@@ -1667,15 +1635,14 @@ func (c *SWF) ListClosedWorkflowExecutionsWithContext(ctx aws.Context, input *Li
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListClosedWorkflowExecutions operation.
-//    pageNum := 0
-//    err := client.ListClosedWorkflowExecutionsPages(params,
-//        func(page *WorkflowExecutionInfos, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListClosedWorkflowExecutions operation.
+//	pageNum := 0
+//	err := client.ListClosedWorkflowExecutionsPages(params,
+//	    func(page *swf.WorkflowExecutionInfos, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *SWF) ListClosedWorkflowExecutionsPages(input *ListClosedWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool) error {
 	return c.ListClosedWorkflowExecutionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1702,10 +1669,12 @@ func (c *SWF) ListClosedWorkflowExecutionsPagesWithContext(ctx aws.Context, inpu
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*WorkflowExecutionInfos), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*WorkflowExecutionInfos), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1725,14 +1694,13 @@ const opListDomains = "ListDomains"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDomainsRequest method.
+//	req, resp := client.ListDomainsRequest(params)
 //
-//    // Example sending a request using the ListDomainsRequest method.
-//    req, resp := client.ListDomainsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) ListDomainsRequest(input *ListDomainsInput) (req *request.Request, output *ListDomainsOutput) {
 	op := &request.Operation{
 		Name:       opListDomains,
@@ -1764,24 +1732,24 @@ func (c *SWF) ListDomainsRequest(input *ListDomainsInput) (req *request.Request,
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains. The element must be set to arn:aws:swf::AccountID:domain/*,
-//    where AccountID is the account ID, with no dashes.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains. The element must be set to arn:aws:swf::AccountID:domain/*,
+//     where AccountID is the account ID, with no dashes.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1791,11 +1759,10 @@ func (c *SWF) ListDomainsRequest(input *ListDomainsInput) (req *request.Request,
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation ListDomains for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
+// Returned Error Types:
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) ListDomains(input *ListDomainsInput) (*ListDomainsOutput, error) {
 	req, out := c.ListDomainsRequest(input)
 	return out, req.Send()
@@ -1825,15 +1792,14 @@ func (c *SWF) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInput, o
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDomains operation.
-//    pageNum := 0
-//    err := client.ListDomainsPages(params,
-//        func(page *ListDomainsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDomains operation.
+//	pageNum := 0
+//	err := client.ListDomainsPages(params,
+//	    func(page *swf.ListDomainsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *SWF) ListDomainsPages(input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool) error {
 	return c.ListDomainsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1860,10 +1826,12 @@ func (c *SWF) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInp
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDomainsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDomainsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1883,14 +1851,13 @@ const opListOpenWorkflowExecutions = "ListOpenWorkflowExecutions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListOpenWorkflowExecutionsRequest method.
+//	req, resp := client.ListOpenWorkflowExecutionsRequest(params)
 //
-//    // Example sending a request using the ListOpenWorkflowExecutionsRequest method.
-//    req, resp := client.ListOpenWorkflowExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecutionsInput) (req *request.Request, output *WorkflowExecutionInfos) {
 	op := &request.Operation{
 		Name:       opListOpenWorkflowExecutions,
@@ -1923,30 +1890,26 @@ func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecution
 // This operation is eventually consistent. The results are best effort and
 // may not exactly reflect recent updates and changes.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
-//
-// typeFilter.name: String constraint. The key is swf:typeFilter.name.
-//
-// typeFilter.version: String constraint. The key is swf:typeFilter.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
+//     typeFilter.name: String constraint. The key is swf:typeFilter.name. typeFilter.version:
+//     String constraint. The key is swf:typeFilter.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1956,16 +1919,16 @@ func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecution
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation ListOpenWorkflowExecutions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) ListOpenWorkflowExecutions(input *ListOpenWorkflowExecutionsInput) (*WorkflowExecutionInfos, error) {
 	req, out := c.ListOpenWorkflowExecutionsRequest(input)
 	return out, req.Send()
@@ -1995,15 +1958,14 @@ func (c *SWF) ListOpenWorkflowExecutionsWithContext(ctx aws.Context, input *List
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListOpenWorkflowExecutions operation.
-//    pageNum := 0
-//    err := client.ListOpenWorkflowExecutionsPages(params,
-//        func(page *WorkflowExecutionInfos, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListOpenWorkflowExecutions operation.
+//	pageNum := 0
+//	err := client.ListOpenWorkflowExecutionsPages(params,
+//	    func(page *swf.WorkflowExecutionInfos, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *SWF) ListOpenWorkflowExecutionsPages(input *ListOpenWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool) error {
 	return c.ListOpenWorkflowExecutionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2030,11 +1992,99 @@ func (c *SWF) ListOpenWorkflowExecutionsPagesWithContext(ctx aws.Context, input 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*WorkflowExecutionInfos), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*WorkflowExecutionInfos), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
+}
+
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// client's request for the ListTagsForResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListTagsForResource for more information on using the ListTagsForResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *SWF) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
+	op := &request.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output = &ListTagsForResourceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListTagsForResource API operation for Amazon Simple Workflow Service.
+//
+// List tags for a given domain.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Simple Workflow Service's
+// API operation ListTagsForResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
+//
+//   - LimitExceededFault
+//     Returned by any operation if a system imposed limitation has been reached.
+//     To address this fault you should either clean up unused resources or increase
+//     the limit by contacting AWS.
+//
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
+func (c *SWF) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	return out, req.Send()
+}
+
+// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListTagsForResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *SWF) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
 }
 
 const opListWorkflowTypes = "ListWorkflowTypes"
@@ -2053,14 +2103,13 @@ const opListWorkflowTypes = "ListWorkflowTypes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListWorkflowTypesRequest method.
+//	req, resp := client.ListWorkflowTypesRequest(params)
 //
-//    // Example sending a request using the ListWorkflowTypesRequest method.
-//    req, resp := client.ListWorkflowTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) (req *request.Request, output *ListWorkflowTypesOutput) {
 	op := &request.Operation{
 		Name:       opListWorkflowTypes,
@@ -2089,23 +2138,23 @@ func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) (req *requ
 // may be split into multiple pages that can be retrieved by making the call
 // repeatedly.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2115,16 +2164,16 @@ func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) (req *requ
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation ListWorkflowTypes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+// Returned Error Types:
 //
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 //
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 func (c *SWF) ListWorkflowTypes(input *ListWorkflowTypesInput) (*ListWorkflowTypesOutput, error) {
 	req, out := c.ListWorkflowTypesRequest(input)
 	return out, req.Send()
@@ -2154,15 +2203,14 @@ func (c *SWF) ListWorkflowTypesWithContext(ctx aws.Context, input *ListWorkflowT
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListWorkflowTypes operation.
-//    pageNum := 0
-//    err := client.ListWorkflowTypesPages(params,
-//        func(page *ListWorkflowTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListWorkflowTypes operation.
+//	pageNum := 0
+//	err := client.ListWorkflowTypesPages(params,
+//	    func(page *swf.ListWorkflowTypesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *SWF) ListWorkflowTypesPages(input *ListWorkflowTypesInput, fn func(*ListWorkflowTypesOutput, bool) bool) error {
 	return c.ListWorkflowTypesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2189,10 +2237,12 @@ func (c *SWF) ListWorkflowTypesPagesWithContext(ctx aws.Context, input *ListWork
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListWorkflowTypesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListWorkflowTypesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2212,14 +2262,13 @@ const opPollForActivityTask = "PollForActivityTask"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PollForActivityTaskRequest method.
+//	req, resp := client.PollForActivityTaskRequest(params)
 //
-//    // Example sending a request using the PollForActivityTaskRequest method.
-//    req, resp := client.PollForActivityTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) (req *request.Request, output *PollForActivityTaskOutput) {
 	op := &request.Operation{
 		Name:       opPollForActivityTask,
@@ -2250,25 +2299,25 @@ func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) (req *
 // Workers should set their client side socket timeout to at least 70 seconds
 // (10 seconds higher than the maximum time service may hold the poll request).
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the taskList.name parameter by using a Condition element with
-//    the swf:taskList.name key to allow the action to access only certain task
-//    lists.
+//   - Constrain the taskList.name parameter by using a Condition element with
+//     the swf:taskList.name key to allow the action to access only certain task
+//     lists.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2278,21 +2327,21 @@ func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) (req *
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation PollForActivityTask for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 //
+//   - LimitExceededFault
+//     Returned by any operation if a system imposed limitation has been reached.
+//     To address this fault you should either clean up unused resources or increase
+//     the limit by contacting AWS.
 func (c *SWF) PollForActivityTask(input *PollForActivityTaskInput) (*PollForActivityTaskOutput, error) {
 	req, out := c.PollForActivityTaskRequest(input)
 	return out, req.Send()
@@ -2330,14 +2379,13 @@ const opPollForDecisionTask = "PollForDecisionTask"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PollForDecisionTaskRequest method.
+//	req, resp := client.PollForDecisionTaskRequest(params)
 //
-//    // Example sending a request using the PollForDecisionTaskRequest method.
-//    req, resp := client.PollForDecisionTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) (req *request.Request, output *PollForDecisionTaskOutput) {
 	op := &request.Operation{
 		Name:       opPollForDecisionTask,
@@ -2384,25 +2432,25 @@ func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) (req *
 // call GetWorkflowExecutionHistory with this nextPageToken. Instead, call PollForDecisionTask
 // again.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the taskList.name parameter by using a Condition element with
-//    the swf:taskList.name key to allow the action to access only certain task
-//    lists.
+//   - Constrain the taskList.name parameter by using a Condition element with
+//     the swf:taskList.name key to allow the action to access only certain task
+//     lists.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2412,21 +2460,21 @@ func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) (req *
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation PollForDecisionTask for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 //
+//   - LimitExceededFault
+//     Returned by any operation if a system imposed limitation has been reached.
+//     To address this fault you should either clean up unused resources or increase
+//     the limit by contacting AWS.
 func (c *SWF) PollForDecisionTask(input *PollForDecisionTaskInput) (*PollForDecisionTaskOutput, error) {
 	req, out := c.PollForDecisionTaskRequest(input)
 	return out, req.Send()
@@ -2456,15 +2504,14 @@ func (c *SWF) PollForDecisionTaskWithContext(ctx aws.Context, input *PollForDeci
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a PollForDecisionTask operation.
-//    pageNum := 0
-//    err := client.PollForDecisionTaskPages(params,
-//        func(page *PollForDecisionTaskOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a PollForDecisionTask operation.
+//	pageNum := 0
+//	err := client.PollForDecisionTaskPages(params,
+//	    func(page *swf.PollForDecisionTaskOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *SWF) PollForDecisionTaskPages(input *PollForDecisionTaskInput, fn func(*PollForDecisionTaskOutput, bool) bool) error {
 	return c.PollForDecisionTaskPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2491,10 +2538,12 @@ func (c *SWF) PollForDecisionTaskPagesWithContext(ctx aws.Context, input *PollFo
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*PollForDecisionTaskOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*PollForDecisionTaskOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2514,14 +2563,13 @@ const opRecordActivityTaskHeartbeat = "RecordActivityTaskHeartbeat"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RecordActivityTaskHeartbeatRequest method.
+//	req, resp := client.RecordActivityTaskHeartbeatRequest(params)
 //
-//    // Example sending a request using the RecordActivityTaskHeartbeatRequest method.
-//    req, resp := client.RecordActivityTaskHeartbeatRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartbeatInput) (req *request.Request, output *RecordActivityTaskHeartbeatOutput) {
 	op := &request.Operation{
 		Name:       opRecordActivityTaskHeartbeat,
@@ -2567,23 +2615,23 @@ func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartb
 // If the worker can cancel the activity, it should respond with RespondActivityTaskCanceled.
 // Otherwise, it should ignore the cancellation request.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2593,16 +2641,16 @@ func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartb
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation RecordActivityTaskHeartbeat for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) RecordActivityTaskHeartbeat(input *RecordActivityTaskHeartbeatInput) (*RecordActivityTaskHeartbeatOutput, error) {
 	req, out := c.RecordActivityTaskHeartbeatRequest(input)
 	return out, req.Send()
@@ -2640,14 +2688,13 @@ const opRegisterActivityType = "RegisterActivityType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterActivityTypeRequest method.
+//	req, resp := client.RegisterActivityTypeRequest(params)
 //
-//    // Example sending a request using the RegisterActivityTypeRequest method.
-//    req, resp := client.RegisterActivityTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) (req *request.Request, output *RegisterActivityTypeOutput) {
 	op := &request.Operation{
 		Name:       opRegisterActivityType,
@@ -2674,30 +2721,26 @@ func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) (req
 // You cannot change any configuration settings of the type after its registration,
 // and it must be registered as a new version.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// defaultTaskList.name: String constraint. The key is swf:defaultTaskList.name.
-//
-// name: String constraint. The key is swf:name.
-//
-// version: String constraint. The key is swf:version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. defaultTaskList.name: String constraint. The key
+//     is swf:defaultTaskList.name. name: String constraint. The key is swf:name.
+//     version: String constraint. The key is swf:version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2707,27 +2750,26 @@ func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) (req
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation RegisterActivityType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeTypeAlreadyExistsFault "TypeAlreadyExistsFault"
-//   Returned if the type already exists in the specified domain. You get this
-//   fault even if the existing type is in deprecated status. You can specify
-//   another version if the intent is to create a new distinct version of the
-//   type.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
+//   - TypeAlreadyExistsFault
+//     Returned if the type already exists in the specified domain. You may get
+//     this fault if you are registering a type that is either already registered
+//     or deprecated, or if you undeprecate a type that is currently registered.
 //
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+//   - LimitExceededFault
+//     Returned by any operation if a system imposed limitation has been reached.
+//     To address this fault you should either clean up unused resources or increase
+//     the limit by contacting AWS.
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) RegisterActivityType(input *RegisterActivityTypeInput) (*RegisterActivityTypeOutput, error) {
 	req, out := c.RegisterActivityTypeRequest(input)
 	return out, req.Send()
@@ -2765,14 +2807,13 @@ const opRegisterDomain = "RegisterDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterDomainRequest method.
+//	req, resp := client.RegisterDomainRequest(params)
 //
-//    // Example sending a request using the RegisterDomainRequest method.
-//    req, resp := client.RegisterDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) (req *request.Request, output *RegisterDomainOutput) {
 	op := &request.Operation{
 		Name:       opRegisterDomain,
@@ -2794,24 +2835,24 @@ func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) (req *request.Re
 //
 // Registers a new domain.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * You cannot use an IAM policy to control domain access for this action.
-//    The name of the domain being registered is available as the resource of
-//    this action.
+//   - You cannot use an IAM policy to control domain access for this action.
+//     The name of the domain being registered is available as the resource of
+//     this action.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2821,20 +2862,24 @@ func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) (req *request.Re
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation RegisterDomain for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDomainAlreadyExistsFault "DomainAlreadyExistsFault"
-//   Returned if the specified domain already exists. You get this fault even
-//   if the existing domain is in deprecated status.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
+//   - DomainAlreadyExistsFault
+//     Returned if the domain already exists. You may get this fault if you are
+//     registering a domain that is either already registered or deprecated, or
+//     if you undeprecate a domain that is currently registered.
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - LimitExceededFault
+//     Returned by any operation if a system imposed limitation has been reached.
+//     To address this fault you should either clean up unused resources or increase
+//     the limit by contacting AWS.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
+//
+//   - TooManyTagsFault
+//     You've exceeded the number of tags allowed for a domain.
 func (c *SWF) RegisterDomain(input *RegisterDomainInput) (*RegisterDomainOutput, error) {
 	req, out := c.RegisterDomainRequest(input)
 	return out, req.Send()
@@ -2872,14 +2917,13 @@ const opRegisterWorkflowType = "RegisterWorkflowType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterWorkflowTypeRequest method.
+//	req, resp := client.RegisterWorkflowTypeRequest(params)
 //
-//    // Example sending a request using the RegisterWorkflowTypeRequest method.
-//    req, resp := client.RegisterWorkflowTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) (req *request.Request, output *RegisterWorkflowTypeOutput) {
 	op := &request.Operation{
 		Name:       opRegisterWorkflowType,
@@ -2909,30 +2953,26 @@ func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) (req
 // cannot change the configuration settings of a workflow type once it is registered
 // and it must be registered as a new version.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// defaultTaskList.name: String constraint. The key is swf:defaultTaskList.name.
-//
-// name: String constraint. The key is swf:name.
-//
-// version: String constraint. The key is swf:version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. defaultTaskList.name: String constraint. The key
+//     is swf:defaultTaskList.name. name: String constraint. The key is swf:name.
+//     version: String constraint. The key is swf:version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2942,27 +2982,26 @@ func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) (req
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation RegisterWorkflowType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeTypeAlreadyExistsFault "TypeAlreadyExistsFault"
-//   Returned if the type already exists in the specified domain. You get this
-//   fault even if the existing type is in deprecated status. You can specify
-//   another version if the intent is to create a new distinct version of the
-//   type.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
+//   - TypeAlreadyExistsFault
+//     Returned if the type already exists in the specified domain. You may get
+//     this fault if you are registering a type that is either already registered
+//     or deprecated, or if you undeprecate a type that is currently registered.
 //
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+//   - LimitExceededFault
+//     Returned by any operation if a system imposed limitation has been reached.
+//     To address this fault you should either clean up unused resources or increase
+//     the limit by contacting AWS.
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) RegisterWorkflowType(input *RegisterWorkflowTypeInput) (*RegisterWorkflowTypeOutput, error) {
 	req, out := c.RegisterWorkflowTypeRequest(input)
 	return out, req.Send()
@@ -3000,14 +3039,13 @@ const opRequestCancelWorkflowExecution = "RequestCancelWorkflowExecution"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RequestCancelWorkflowExecutionRequest method.
+//	req, resp := client.RequestCancelWorkflowExecutionRequest(params)
 //
-//    // Example sending a request using the RequestCancelWorkflowExecutionRequest method.
-//    req, resp := client.RequestCancelWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflowExecutionInput) (req *request.Request, output *RequestCancelWorkflowExecutionOutput) {
 	op := &request.Operation{
 		Name:       opRequestCancelWorkflowExecution,
@@ -3040,23 +3078,23 @@ func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflow
 // Because this action allows the workflow to properly clean up and gracefully
 // close, it should be used instead of TerminateWorkflowExecution when possible.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3066,16 +3104,16 @@ func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflow
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation RequestCancelWorkflowExecution for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) RequestCancelWorkflowExecution(input *RequestCancelWorkflowExecutionInput) (*RequestCancelWorkflowExecutionOutput, error) {
 	req, out := c.RequestCancelWorkflowExecutionRequest(input)
 	return out, req.Send()
@@ -3113,14 +3151,13 @@ const opRespondActivityTaskCanceled = "RespondActivityTaskCanceled"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RespondActivityTaskCanceledRequest method.
+//	req, resp := client.RespondActivityTaskCanceledRequest(params)
 //
-//    // Example sending a request using the RespondActivityTaskCanceledRequest method.
-//    req, resp := client.RespondActivityTaskCanceledRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCanceledInput) (req *request.Request, output *RespondActivityTaskCanceledOutput) {
 	op := &request.Operation{
 		Name:       opRespondActivityTaskCanceled,
@@ -3154,25 +3191,25 @@ func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCance
 // closed. Therefore a task is reported as open while a worker is processing
 // it. A task is closed after it has been specified in a call to RespondActivityTaskCompleted,
 // RespondActivityTaskCanceled, RespondActivityTaskFailed, or the task has timed
-// out (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types).
+// out (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types).
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3182,16 +3219,16 @@ func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCance
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation RespondActivityTaskCanceled for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) RespondActivityTaskCanceled(input *RespondActivityTaskCanceledInput) (*RespondActivityTaskCanceledOutput, error) {
 	req, out := c.RespondActivityTaskCanceledRequest(input)
 	return out, req.Send()
@@ -3229,14 +3266,13 @@ const opRespondActivityTaskCompleted = "RespondActivityTaskCompleted"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RespondActivityTaskCompletedRequest method.
+//	req, resp := client.RespondActivityTaskCompletedRequest(params)
 //
-//    // Example sending a request using the RespondActivityTaskCompletedRequest method.
-//    req, resp := client.RespondActivityTaskCompletedRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskCompletedInput) (req *request.Request, output *RespondActivityTaskCompletedOutput) {
 	op := &request.Operation{
 		Name:       opRespondActivityTaskCompleted,
@@ -3269,25 +3305,25 @@ func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskComp
 // closed. Therefore a task is reported as open while a worker is processing
 // it. A task is closed after it has been specified in a call to RespondActivityTaskCompleted,
 // RespondActivityTaskCanceled, RespondActivityTaskFailed, or the task has timed
-// out (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types).
+// out (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types).
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3297,16 +3333,16 @@ func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskComp
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation RespondActivityTaskCompleted for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) RespondActivityTaskCompleted(input *RespondActivityTaskCompletedInput) (*RespondActivityTaskCompletedOutput, error) {
 	req, out := c.RespondActivityTaskCompletedRequest(input)
 	return out, req.Send()
@@ -3344,14 +3380,13 @@ const opRespondActivityTaskFailed = "RespondActivityTaskFailed"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RespondActivityTaskFailedRequest method.
+//	req, resp := client.RespondActivityTaskFailedRequest(params)
 //
-//    // Example sending a request using the RespondActivityTaskFailedRequest method.
-//    req, resp := client.RespondActivityTaskFailedRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedInput) (req *request.Request, output *RespondActivityTaskFailedOutput) {
 	op := &request.Operation{
 		Name:       opRespondActivityTaskFailed,
@@ -3379,25 +3414,25 @@ func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedI
 // closed. Therefore a task is reported as open while a worker is processing
 // it. A task is closed after it has been specified in a call to RespondActivityTaskCompleted,
 // RespondActivityTaskCanceled, RespondActivityTaskFailed, or the task has timed
-// out (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types).
+// out (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types).
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3407,16 +3442,16 @@ func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedI
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation RespondActivityTaskFailed for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) RespondActivityTaskFailed(input *RespondActivityTaskFailedInput) (*RespondActivityTaskFailedOutput, error) {
 	req, out := c.RespondActivityTaskFailedRequest(input)
 	return out, req.Send()
@@ -3454,14 +3489,13 @@ const opRespondDecisionTaskCompleted = "RespondDecisionTaskCompleted"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RespondDecisionTaskCompletedRequest method.
+//	req, resp := client.RespondDecisionTaskCompletedRequest(params)
 //
-//    // Example sending a request using the RespondDecisionTaskCompletedRequest method.
-//    req, resp := client.RespondDecisionTaskCompletedRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskCompletedInput) (req *request.Request, output *RespondDecisionTaskCompletedOutput) {
 	op := &request.Operation{
 		Name:       opRespondDecisionTaskCompleted,
@@ -3488,7 +3522,7 @@ func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskComp
 // A DecisionTaskCompleted event is added to the workflow history. The executionContext
 // specified is attached to the event in the workflow execution history.
 //
-// Access Control
+// # Access Control
 //
 // If an IAM policy grants permission to use RespondDecisionTaskCompleted, it
 // can express permissions for the list of decisions in the decisions parameter.
@@ -3496,7 +3530,7 @@ func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskComp
 // call. To allow for policies to be as readable as possible, you can express
 // permissions on decisions as if they were actual API calls, including applying
 // conditions to some parameters. For more information, see Using IAM to Manage
-// Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3506,16 +3540,16 @@ func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskComp
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation RespondDecisionTaskCompleted for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) RespondDecisionTaskCompleted(input *RespondDecisionTaskCompletedInput) (*RespondDecisionTaskCompletedOutput, error) {
 	req, out := c.RespondDecisionTaskCompletedRequest(input)
 	return out, req.Send()
@@ -3553,14 +3587,13 @@ const opSignalWorkflowExecution = "SignalWorkflowExecution"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SignalWorkflowExecutionRequest method.
+//	req, resp := client.SignalWorkflowExecutionRequest(params)
 //
-//    // Example sending a request using the SignalWorkflowExecutionRequest method.
-//    req, resp := client.SignalWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput) (req *request.Request, output *SignalWorkflowExecutionOutput) {
 	op := &request.Operation{
 		Name:       opSignalWorkflowExecution,
@@ -3591,23 +3624,23 @@ func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput
 //
 // If the specified workflow execution isn't open, this method fails with UnknownResource.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3617,16 +3650,16 @@ func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation SignalWorkflowExecution for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) SignalWorkflowExecution(input *SignalWorkflowExecutionInput) (*SignalWorkflowExecutionOutput, error) {
 	req, out := c.SignalWorkflowExecutionRequest(input)
 	return out, req.Send()
@@ -3664,14 +3697,13 @@ const opStartWorkflowExecution = "StartWorkflowExecution"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartWorkflowExecutionRequest method.
+//	req, resp := client.StartWorkflowExecutionRequest(params)
 //
-//    // Example sending a request using the StartWorkflowExecutionRequest method.
-//    req, resp := client.StartWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) (req *request.Request, output *StartWorkflowExecutionOutput) {
 	op := &request.Operation{
 		Name:       opStartWorkflowExecution,
@@ -3695,40 +3727,30 @@ func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) 
 //
 // This action returns the newly started workflow execution.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// tagList.member.0: The key is swf:tagList.member.0.
-//
-// tagList.member.1: The key is swf:tagList.member.1.
-//
-// tagList.member.2: The key is swf:tagList.member.2.
-//
-// tagList.member.3: The key is swf:tagList.member.3.
-//
-// tagList.member.4: The key is swf:tagList.member.4.
-//
-// taskList: String constraint. The key is swf:taskList.name.
-//
-// workflowType.name: String constraint. The key is swf:workflowType.name.
-//
-// workflowType.version: String constraint. The key is swf:workflowType.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. tagList.member.0: The key is swf:tagList.member.0.
+//     tagList.member.1: The key is swf:tagList.member.1. tagList.member.2: The
+//     key is swf:tagList.member.2. tagList.member.3: The key is swf:tagList.member.3.
+//     tagList.member.4: The key is swf:tagList.member.4. taskList: String constraint.
+//     The key is swf:taskList.name. workflowType.name: String constraint. The
+//     key is swf:workflowType.name. workflowType.version: String constraint.
+//     The key is swf:workflowType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3738,41 +3760,41 @@ func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) 
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation StartWorkflowExecution for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeTypeDeprecatedFault "TypeDeprecatedFault"
-//   Returned when the specified activity or workflow type was already deprecated.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
-//   * ErrCodeWorkflowExecutionAlreadyStartedFault "WorkflowExecutionAlreadyStartedFault"
-//   Returned by StartWorkflowExecution when an open execution with the same workflowId
-//   is already running in the specified domain.
+//   - TypeDeprecatedFault
+//     Returned when the specified activity or workflow type was already deprecated.
 //
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
+//   - WorkflowExecutionAlreadyStartedFault
+//     Returned by StartWorkflowExecution when an open execution with the same workflowId
+//     is already running in the specified domain.
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - LimitExceededFault
+//     Returned by any operation if a system imposed limitation has been reached.
+//     To address this fault you should either clean up unused resources or increase
+//     the limit by contacting AWS.
 //
-//   * ErrCodeDefaultUndefinedFault "DefaultUndefinedFault"
-//   The StartWorkflowExecution API action was called without the required parameters
-//   set.
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 //
-//   Some workflow execution parameters, such as the decision taskList, must be
-//   set to start the execution. However, these parameters might have been set
-//   as defaults when the workflow type was registered. In this case, you can
-//   omit these parameters from the StartWorkflowExecution call and Amazon SWF
-//   uses the values defined in the workflow type.
+//   - DefaultUndefinedFault
+//     The StartWorkflowExecution API action was called without the required parameters
+//     set.
 //
-//   If these parameters aren't set and no default parameters were defined in
-//   the workflow type, this error is displayed.
+//     Some workflow execution parameters, such as the decision taskList, must be
+//     set to start the execution. However, these parameters might have been set
+//     as defaults when the workflow type was registered. In this case, you can
+//     omit these parameters from the StartWorkflowExecution call and Amazon SWF
+//     uses the values defined in the workflow type.
 //
+//     If these parameters aren't set and no default parameters were defined in
+//     the workflow type, this error is displayed.
 func (c *SWF) StartWorkflowExecution(input *StartWorkflowExecutionInput) (*StartWorkflowExecutionOutput, error) {
 	req, out := c.StartWorkflowExecutionRequest(input)
 	return out, req.Send()
@@ -3794,6 +3816,98 @@ func (c *SWF) StartWorkflowExecutionWithContext(ctx aws.Context, input *StartWor
 	return out, req.Send()
 }
 
+const opTagResource = "TagResource"
+
+// TagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the TagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See TagResource for more information on using the TagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the TagResourceRequest method.
+//	req, resp := client.TagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *SWF) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
+	op := &request.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output = &TagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// TagResource API operation for Amazon Simple Workflow Service.
+//
+// Add a tag to a Amazon SWF domain.
+//
+// Amazon SWF supports a maximum of 50 tags per resource.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Simple Workflow Service's
+// API operation TagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
+//
+//   - TooManyTagsFault
+//     You've exceeded the number of tags allowed for a domain.
+//
+//   - LimitExceededFault
+//     Returned by any operation if a system imposed limitation has been reached.
+//     To address this fault you should either clean up unused resources or increase
+//     the limit by contacting AWS.
+//
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
+func (c *SWF) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	return out, req.Send()
+}
+
+// TagResourceWithContext is the same as TagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See TagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *SWF) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opTerminateWorkflowExecution = "TerminateWorkflowExecution"
 
 // TerminateWorkflowExecutionRequest generates a "aws/request.Request" representing the
@@ -3810,14 +3924,13 @@ const opTerminateWorkflowExecution = "TerminateWorkflowExecution"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the TerminateWorkflowExecutionRequest method.
+//	req, resp := client.TerminateWorkflowExecutionRequest(params)
 //
-//    // Example sending a request using the TerminateWorkflowExecutionRequest method.
-//    req, resp := client.TerminateWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutionInput) (req *request.Request, output *TerminateWorkflowExecutionOutput) {
 	op := &request.Operation{
 		Name:       opTerminateWorkflowExecution,
@@ -3853,23 +3966,23 @@ func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutio
 // it allows the workflow to gracefully close while TerminateWorkflowExecution
 // doesn't.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this action's access to Amazon SWF resources
 // as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3879,16 +3992,16 @@ func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutio
 // See the AWS API reference guide for Amazon Simple Workflow Service's
 // API operation TerminateWorkflowExecution for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
+// Returned Error Types:
 //
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
 //
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
 func (c *SWF) TerminateWorkflowExecution(input *TerminateWorkflowExecutionInput) (*TerminateWorkflowExecutionOutput, error) {
 	req, out := c.TerminateWorkflowExecutionRequest(input)
 	return out, req.Send()
@@ -3905,6 +4018,429 @@ func (c *SWF) TerminateWorkflowExecution(input *TerminateWorkflowExecutionInput)
 // for more information on using Contexts.
 func (c *SWF) TerminateWorkflowExecutionWithContext(ctx aws.Context, input *TerminateWorkflowExecutionInput, opts ...request.Option) (*TerminateWorkflowExecutionOutput, error) {
 	req, out := c.TerminateWorkflowExecutionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUndeprecateActivityType = "UndeprecateActivityType"
+
+// UndeprecateActivityTypeRequest generates a "aws/request.Request" representing the
+// client's request for the UndeprecateActivityType operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UndeprecateActivityType for more information on using the UndeprecateActivityType
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UndeprecateActivityTypeRequest method.
+//	req, resp := client.UndeprecateActivityTypeRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *SWF) UndeprecateActivityTypeRequest(input *UndeprecateActivityTypeInput) (req *request.Request, output *UndeprecateActivityTypeOutput) {
+	op := &request.Operation{
+		Name:       opUndeprecateActivityType,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UndeprecateActivityTypeInput{}
+	}
+
+	output = &UndeprecateActivityTypeOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UndeprecateActivityType API operation for Amazon Simple Workflow Service.
+//
+// Undeprecates a previously deprecated activity type. After an activity type
+// has been undeprecated, you can create new tasks of that activity type.
+//
+// This operation is eventually consistent. The results are best effort and
+// may not exactly reflect recent updates and changes.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF resources
+// as follows:
+//
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
+//
+//   - Use an Action element to allow or deny permission to call this action.
+//
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. activityType.name: String constraint. The key is
+//     swf:activityType.name. activityType.version: String constraint. The key
+//     is swf:activityType.version.
+//
+// If the caller doesn't have sufficient permissions to invoke the action, or
+// the parameter values fall outside the specified constraints, the action fails.
+// The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
+// For details and example IAM policies, see Using IAM to Manage Access to Amazon
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// in the Amazon SWF Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Simple Workflow Service's
+// API operation UndeprecateActivityType for usage and error information.
+//
+// Returned Error Types:
+//
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
+//
+//   - TypeAlreadyExistsFault
+//     Returned if the type already exists in the specified domain. You may get
+//     this fault if you are registering a type that is either already registered
+//     or deprecated, or if you undeprecate a type that is currently registered.
+//
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
+func (c *SWF) UndeprecateActivityType(input *UndeprecateActivityTypeInput) (*UndeprecateActivityTypeOutput, error) {
+	req, out := c.UndeprecateActivityTypeRequest(input)
+	return out, req.Send()
+}
+
+// UndeprecateActivityTypeWithContext is the same as UndeprecateActivityType with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UndeprecateActivityType for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *SWF) UndeprecateActivityTypeWithContext(ctx aws.Context, input *UndeprecateActivityTypeInput, opts ...request.Option) (*UndeprecateActivityTypeOutput, error) {
+	req, out := c.UndeprecateActivityTypeRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUndeprecateDomain = "UndeprecateDomain"
+
+// UndeprecateDomainRequest generates a "aws/request.Request" representing the
+// client's request for the UndeprecateDomain operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UndeprecateDomain for more information on using the UndeprecateDomain
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UndeprecateDomainRequest method.
+//	req, resp := client.UndeprecateDomainRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *SWF) UndeprecateDomainRequest(input *UndeprecateDomainInput) (req *request.Request, output *UndeprecateDomainOutput) {
+	op := &request.Operation{
+		Name:       opUndeprecateDomain,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UndeprecateDomainInput{}
+	}
+
+	output = &UndeprecateDomainOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UndeprecateDomain API operation for Amazon Simple Workflow Service.
+//
+// Undeprecates a previously deprecated domain. After a domain has been undeprecated
+// it can be used to create new workflow executions or register new types.
+//
+// This operation is eventually consistent. The results are best effort and
+// may not exactly reflect recent updates and changes.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF resources
+// as follows:
+//
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
+//
+//   - Use an Action element to allow or deny permission to call this action.
+//
+//   - You cannot use an IAM policy to constrain this action's parameters.
+//
+// If the caller doesn't have sufficient permissions to invoke the action, or
+// the parameter values fall outside the specified constraints, the action fails.
+// The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
+// For details and example IAM policies, see Using IAM to Manage Access to Amazon
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// in the Amazon SWF Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Simple Workflow Service's
+// API operation UndeprecateDomain for usage and error information.
+//
+// Returned Error Types:
+//
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
+//
+//   - DomainAlreadyExistsFault
+//     Returned if the domain already exists. You may get this fault if you are
+//     registering a domain that is either already registered or deprecated, or
+//     if you undeprecate a domain that is currently registered.
+//
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
+func (c *SWF) UndeprecateDomain(input *UndeprecateDomainInput) (*UndeprecateDomainOutput, error) {
+	req, out := c.UndeprecateDomainRequest(input)
+	return out, req.Send()
+}
+
+// UndeprecateDomainWithContext is the same as UndeprecateDomain with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UndeprecateDomain for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *SWF) UndeprecateDomainWithContext(ctx aws.Context, input *UndeprecateDomainInput, opts ...request.Option) (*UndeprecateDomainOutput, error) {
+	req, out := c.UndeprecateDomainRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUndeprecateWorkflowType = "UndeprecateWorkflowType"
+
+// UndeprecateWorkflowTypeRequest generates a "aws/request.Request" representing the
+// client's request for the UndeprecateWorkflowType operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UndeprecateWorkflowType for more information on using the UndeprecateWorkflowType
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UndeprecateWorkflowTypeRequest method.
+//	req, resp := client.UndeprecateWorkflowTypeRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *SWF) UndeprecateWorkflowTypeRequest(input *UndeprecateWorkflowTypeInput) (req *request.Request, output *UndeprecateWorkflowTypeOutput) {
+	op := &request.Operation{
+		Name:       opUndeprecateWorkflowType,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UndeprecateWorkflowTypeInput{}
+	}
+
+	output = &UndeprecateWorkflowTypeOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UndeprecateWorkflowType API operation for Amazon Simple Workflow Service.
+//
+// Undeprecates a previously deprecated workflow type. After a workflow type
+// has been undeprecated, you can create new executions of that type.
+//
+// This operation is eventually consistent. The results are best effort and
+// may not exactly reflect recent updates and changes.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF resources
+// as follows:
+//
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
+//
+//   - Use an Action element to allow or deny permission to call this action.
+//
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. workflowType.name: String constraint. The key is
+//     swf:workflowType.name. workflowType.version: String constraint. The key
+//     is swf:workflowType.version.
+//
+// If the caller doesn't have sufficient permissions to invoke the action, or
+// the parameter values fall outside the specified constraints, the action fails.
+// The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
+// For details and example IAM policies, see Using IAM to Manage Access to Amazon
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// in the Amazon SWF Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Simple Workflow Service's
+// API operation UndeprecateWorkflowType for usage and error information.
+//
+// Returned Error Types:
+//
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
+//
+//   - TypeAlreadyExistsFault
+//     Returned if the type already exists in the specified domain. You may get
+//     this fault if you are registering a type that is either already registered
+//     or deprecated, or if you undeprecate a type that is currently registered.
+//
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
+func (c *SWF) UndeprecateWorkflowType(input *UndeprecateWorkflowTypeInput) (*UndeprecateWorkflowTypeOutput, error) {
+	req, out := c.UndeprecateWorkflowTypeRequest(input)
+	return out, req.Send()
+}
+
+// UndeprecateWorkflowTypeWithContext is the same as UndeprecateWorkflowType with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UndeprecateWorkflowType for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *SWF) UndeprecateWorkflowTypeWithContext(ctx aws.Context, input *UndeprecateWorkflowTypeInput, opts ...request.Option) (*UndeprecateWorkflowTypeOutput, error) {
+	req, out := c.UndeprecateWorkflowTypeRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the UntagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UntagResource for more information on using the UntagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UntagResourceRequest method.
+//	req, resp := client.UntagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *SWF) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
+	op := &request.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output = &UntagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UntagResource API operation for Amazon Simple Workflow Service.
+//
+// Remove a tag from a Amazon SWF domain.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Simple Workflow Service's
+// API operation UntagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - UnknownResourceFault
+//     Returned when the named resource cannot be found with in the scope of this
+//     operation (region or domain). This could happen if the named resource was
+//     never created or is no longer available for this operation.
+//
+//   - LimitExceededFault
+//     Returned by any operation if a system imposed limitation has been reached.
+//     To address this fault you should either clean up unused resources or increase
+//     the limit by contacting AWS.
+//
+//   - OperationNotPermittedFault
+//     Returned when the caller doesn't have sufficient permissions to invoke the
+//     action.
+func (c *SWF) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	return out, req.Send()
+}
+
+// UntagResourceWithContext is the same as UntagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UntagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *SWF) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
@@ -3928,12 +4464,20 @@ type ActivityTaskCancelRequestedEventAttributes struct {
 	DecisionTaskCompletedEventId *int64 `locationName:"decisionTaskCompletedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskCancelRequestedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskCancelRequestedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -3977,12 +4521,20 @@ type ActivityTaskCanceledEventAttributes struct {
 	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskCanceledEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskCanceledEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4033,12 +4585,20 @@ type ActivityTaskCompletedEventAttributes struct {
 	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskCompletedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskCompletedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4086,12 +4646,20 @@ type ActivityTaskFailedEventAttributes struct {
 	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4177,17 +4745,25 @@ type ActivityTaskScheduledEventAttributes struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskScheduledEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskScheduledEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4274,12 +4850,20 @@ type ActivityTaskStartedEventAttributes struct {
 	ScheduledEventId *int64 `locationName:"scheduledEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskStartedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskStartedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4324,12 +4908,20 @@ type ActivityTaskTimedOutEventAttributes struct {
 	TimeoutType *string `locationName:"timeoutType" type:"string" required:"true" enum:"ActivityTaskTimeoutType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskTimedOutEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTaskTimedOutEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4379,12 +4971,20 @@ type ActivityType struct {
 	Version *string `locationName:"version" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityType) GoString() string {
 	return s.String()
 }
@@ -4431,11 +5031,11 @@ type ActivityTypeConfiguration struct {
 	// task must report progress by calling RecordActivityTaskHeartbeat.
 	//
 	// You can specify this value only when registering an activity type. The registered
-	// default value can be overridden when you schedule a task through the ScheduleActivityTaskDecision.
-	// If the activity worker subsequently attempts to record a heartbeat or returns
-	// a result, the activity worker receives an UnknownResource fault. In this
-	// case, Amazon SWF no longer considers the activity task to be valid; the activity
-	// worker should clean up the activity task.
+	// default value can be overridden when you schedule a task through the ScheduleActivityTask
+	// Decision. If the activity worker subsequently attempts to record a heartbeat
+	// or returns a result, the activity worker receives an UnknownResource fault.
+	// In this case, Amazon SWF no longer considers the activity task to be valid;
+	// the activity worker should clean up the activity task.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -4443,8 +5043,8 @@ type ActivityTypeConfiguration struct {
 
 	// The default task list specified for this activity type at registration. This
 	// default is used if a task list isn't provided when a task is scheduled through
-	// the ScheduleActivityTaskDecision. You can override the default registered
-	// task list when scheduling a task through the ScheduleActivityTaskDecision.
+	// the ScheduleActivityTask Decision. You can override the default registered
+	// task list when scheduling a task through the ScheduleActivityTask Decision.
 	DefaultTaskList *TaskList `locationName:"defaultTaskList" type:"structure"`
 
 	// The default task priority for tasks of this activity type, specified at registration.
@@ -4455,13 +5055,13 @@ type ActivityTypeConfiguration struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string `locationName:"defaultTaskPriority" type:"string"`
 
 	// The default maximum duration, specified when registering the activity type,
 	// for tasks of this activity type. You can override this default when scheduling
-	// a task through the ScheduleActivityTaskDecision.
+	// a task through the ScheduleActivityTask Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -4469,7 +5069,8 @@ type ActivityTypeConfiguration struct {
 
 	// The default maximum duration, specified when registering the activity type,
 	// that a task of an activity type can wait before being assigned to a worker.
-	// You can override this default when scheduling a task through the ScheduleActivityTaskDecision.
+	// You can override this default when scheduling a task through the ScheduleActivityTask
+	// Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -4477,19 +5078,27 @@ type ActivityTypeConfiguration struct {
 
 	// The default maximum duration for tasks of an activity type specified when
 	// registering the activity type. You can override this default when scheduling
-	// a task through the ScheduleActivityTaskDecision.
+	// a task through the ScheduleActivityTask Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
 	DefaultTaskStartToCloseTimeout *string `locationName:"defaultTaskStartToCloseTimeout" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTypeConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTypeConfiguration) GoString() string {
 	return s.String()
 }
@@ -4556,12 +5165,20 @@ type ActivityTypeInfo struct {
 	Status *string `locationName:"status" type:"string" required:"true" enum:"RegistrationStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTypeInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ActivityTypeInfo) GoString() string {
 	return s.String()
 }
@@ -4598,23 +5215,23 @@ func (s *ActivityTypeInfo) SetStatus(v string) *ActivityTypeInfo {
 
 // Provides the details of the CancelTimer decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CancelTimerDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -4625,12 +5242,20 @@ type CancelTimerDecisionAttributes struct {
 	TimerId *string `locationName:"timerId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelTimerDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelTimerDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -4666,7 +5291,7 @@ type CancelTimerFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -4686,12 +5311,20 @@ type CancelTimerFailedEventAttributes struct {
 	TimerId *string `locationName:"timerId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelTimerFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelTimerFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4716,23 +5349,23 @@ func (s *CancelTimerFailedEventAttributes) SetTimerId(v string) *CancelTimerFail
 
 // Provides the details of the CancelWorkflowExecution decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CancelWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -4741,12 +5374,20 @@ type CancelWorkflowExecutionDecisionAttributes struct {
 	Details *string `locationName:"details" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelWorkflowExecutionDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -4766,7 +5407,7 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -4781,12 +5422,20 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	DecisionTaskCompletedEventId *int64 `locationName:"decisionTaskCompletedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelWorkflowExecutionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4811,7 +5460,7 @@ type ChildWorkflowExecutionCanceledEventAttributes struct {
 	Details *string `locationName:"details" type:"string"`
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to
-	// the StartChildWorkflowExecutionDecision to start this child workflow execution.
+	// the StartChildWorkflowExecution Decision to start this child workflow execution.
 	// This information can be useful for diagnosing problems by tracing back the
 	// chain of events leading up to this event.
 	//
@@ -4836,12 +5485,20 @@ type ChildWorkflowExecutionCanceledEventAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionCanceledEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionCanceledEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4881,7 +5538,7 @@ type ChildWorkflowExecutionCompletedEventAttributes struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to
-	// the StartChildWorkflowExecutionDecision to start this child workflow execution.
+	// the StartChildWorkflowExecution Decision to start this child workflow execution.
 	// This information can be useful for diagnosing problems by tracing back the
 	// chain of events leading up to this event.
 	//
@@ -4909,12 +5566,20 @@ type ChildWorkflowExecutionCompletedEventAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionCompletedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionCompletedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -4957,7 +5622,7 @@ type ChildWorkflowExecutionFailedEventAttributes struct {
 	Details *string `locationName:"details" type:"string"`
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to
-	// the StartChildWorkflowExecutionDecision to start this child workflow execution.
+	// the StartChildWorkflowExecution Decision to start this child workflow execution.
 	// This information can be useful for diagnosing problems by tracing back the
 	// chain of events leading up to this event.
 	//
@@ -4985,12 +5650,20 @@ type ChildWorkflowExecutionFailedEventAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -5036,7 +5709,7 @@ type ChildWorkflowExecutionStartedEventAttributes struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to
-	// the StartChildWorkflowExecutionDecision to start this child workflow execution.
+	// the StartChildWorkflowExecution Decision to start this child workflow execution.
 	// This information can be useful for diagnosing problems by tracing back the
 	// chain of events leading up to this event.
 	//
@@ -5054,12 +5727,20 @@ type ChildWorkflowExecutionStartedEventAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionStartedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionStartedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -5087,7 +5768,7 @@ type ChildWorkflowExecutionTerminatedEventAttributes struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to
-	// the StartChildWorkflowExecutionDecision to start this child workflow execution.
+	// the StartChildWorkflowExecution Decision to start this child workflow execution.
 	// This information can be useful for diagnosing problems by tracing back the
 	// chain of events leading up to this event.
 	//
@@ -5112,12 +5793,20 @@ type ChildWorkflowExecutionTerminatedEventAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionTerminatedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionTerminatedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -5151,7 +5840,7 @@ type ChildWorkflowExecutionTimedOutEventAttributes struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to
-	// the StartChildWorkflowExecutionDecision to start this child workflow execution.
+	// the StartChildWorkflowExecution Decision to start this child workflow execution.
 	// This information can be useful for diagnosing problems by tracing back the
 	// chain of events leading up to this event.
 	//
@@ -5182,12 +5871,20 @@ type ChildWorkflowExecutionTimedOutEventAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionTimedOutEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ChildWorkflowExecutionTimedOutEventAttributes) GoString() string {
 	return s.String()
 }
@@ -5234,12 +5931,20 @@ type CloseStatusFilter struct {
 	Status *string `locationName:"status" type:"string" required:"true" enum:"CloseStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloseStatusFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloseStatusFilter) GoString() string {
 	return s.String()
 }
@@ -5265,23 +5970,23 @@ func (s *CloseStatusFilter) SetStatus(v string) *CloseStatusFilter {
 
 // Provides the details of the CompleteWorkflowExecution decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CompleteWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -5291,12 +5996,20 @@ type CompleteWorkflowExecutionDecisionAttributes struct {
 	Result *string `locationName:"result" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CompleteWorkflowExecutionDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CompleteWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -5316,7 +6029,7 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -5331,12 +6044,20 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 	DecisionTaskCompletedEventId *int64 `locationName:"decisionTaskCompletedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CompleteWorkflowExecutionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CompleteWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -5355,30 +6076,26 @@ func (s *CompleteWorkflowExecutionFailedEventAttributes) SetDecisionTaskComplete
 
 // Provides the details of the ContinueAsNewWorkflowExecution decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// tag – A tag used to identify the workflow execution
-//
-// taskList – String constraint. The key is swf:taskList.name.
-//
-// workflowType.version – String constraint. The key is swf:workflowType.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. tag – A tag used to identify the workflow execution
+//     taskList – String constraint. The key is swf:taskList.name. workflowType.version
+//     – String constraint. The key is swf:workflowType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -5440,7 +6157,7 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	// Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -5461,12 +6178,20 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	WorkflowTypeVersion *string `locationName:"workflowTypeVersion" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinueAsNewWorkflowExecutionDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinueAsNewWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -5555,7 +6280,7 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -5570,12 +6295,20 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 	DecisionTaskCompletedEventId *int64 `locationName:"decisionTaskCompletedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinueAsNewWorkflowExecutionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinueAsNewWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -5642,12 +6375,20 @@ type CountClosedWorkflowExecutionsInput struct {
 	TypeFilter *WorkflowTypeFilter `locationName:"typeFilter" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CountClosedWorkflowExecutionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CountClosedWorkflowExecutionsInput) GoString() string {
 	return s.String()
 }
@@ -5775,12 +6516,20 @@ type CountOpenWorkflowExecutionsInput struct {
 	TypeFilter *WorkflowTypeFilter `locationName:"typeFilter" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CountOpenWorkflowExecutionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CountOpenWorkflowExecutionsInput) GoString() string {
 	return s.String()
 }
@@ -5868,12 +6617,20 @@ type CountPendingActivityTasksInput struct {
 	TaskList *TaskList `locationName:"taskList" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CountPendingActivityTasksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CountPendingActivityTasksInput) GoString() string {
 	return s.String()
 }
@@ -5928,12 +6685,20 @@ type CountPendingDecisionTasksInput struct {
 	TaskList *TaskList `locationName:"taskList" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CountPendingDecisionTasksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CountPendingDecisionTasksInput) GoString() string {
 	return s.String()
 }
@@ -5977,124 +6742,124 @@ func (s *CountPendingDecisionTasksInput) SetTaskList(v *TaskList) *CountPendingD
 // Specifies a decision made by the decider. A decision can be one of these
 // types:
 //
-//    * CancelTimer – Cancels a previously started timer and records a TimerCanceled
-//    event in the history.
+//   - CancelTimer – Cancels a previously started timer and records a TimerCanceled
+//     event in the history.
 //
-//    * CancelWorkflowExecution – Closes the workflow execution and records
-//    a WorkflowExecutionCanceled event in the history.
+//   - CancelWorkflowExecution – Closes the workflow execution and records
+//     a WorkflowExecutionCanceled event in the history.
 //
-//    * CompleteWorkflowExecution – Closes the workflow execution and records
-//    a WorkflowExecutionCompleted event in the history .
+//   - CompleteWorkflowExecution – Closes the workflow execution and records
+//     a WorkflowExecutionCompleted event in the history .
 //
-//    * ContinueAsNewWorkflowExecution – Closes the workflow execution and starts
-//    a new workflow execution of the same type using the same workflow ID and
-//    a unique run Id. A WorkflowExecutionContinuedAsNew event is recorded in
-//    the history.
+//   - ContinueAsNewWorkflowExecution – Closes the workflow execution and
+//     starts a new workflow execution of the same type using the same workflow
+//     ID and a unique run Id. A WorkflowExecutionContinuedAsNew event is recorded
+//     in the history.
 //
-//    * FailWorkflowExecution – Closes the workflow execution and records a
-//    WorkflowExecutionFailed event in the history.
+//   - FailWorkflowExecution – Closes the workflow execution and records
+//     a WorkflowExecutionFailed event in the history.
 //
-//    * RecordMarker – Records a MarkerRecorded event in the history. Markers
-//    can be used for adding custom information in the history for instance
-//    to let deciders know that they don't need to look at the history beyond
-//    the marker event.
+//   - RecordMarker – Records a MarkerRecorded event in the history. Markers
+//     can be used for adding custom information in the history for instance
+//     to let deciders know that they don't need to look at the history beyond
+//     the marker event.
 //
-//    * RequestCancelActivityTask – Attempts to cancel a previously scheduled
-//    activity task. If the activity task was scheduled but has not been assigned
-//    to a worker, then it is canceled. If the activity task was already assigned
-//    to a worker, then the worker is informed that cancellation has been requested
-//    in the response to RecordActivityTaskHeartbeat.
+//   - RequestCancelActivityTask – Attempts to cancel a previously scheduled
+//     activity task. If the activity task was scheduled but has not been assigned
+//     to a worker, then it is canceled. If the activity task was already assigned
+//     to a worker, then the worker is informed that cancellation has been requested
+//     in the response to RecordActivityTaskHeartbeat.
 //
-//    * RequestCancelExternalWorkflowExecution – Requests that a request be
-//    made to cancel the specified external workflow execution and records a
-//    RequestCancelExternalWorkflowExecutionInitiated event in the history.
+//   - RequestCancelExternalWorkflowExecution – Requests that a request be
+//     made to cancel the specified external workflow execution and records a
+//     RequestCancelExternalWorkflowExecutionInitiated event in the history.
 //
-//    * ScheduleActivityTask – Schedules an activity task.
+//   - ScheduleActivityTask – Schedules an activity task.
 //
-//    * SignalExternalWorkflowExecution – Requests a signal to be delivered
-//    to the specified external workflow execution and records a SignalExternalWorkflowExecutionInitiated
-//    event in the history.
+//   - SignalExternalWorkflowExecution – Requests a signal to be delivered
+//     to the specified external workflow execution and records a SignalExternalWorkflowExecutionInitiated
+//     event in the history.
 //
-//    * StartChildWorkflowExecution – Requests that a child workflow execution
-//    be started and records a StartChildWorkflowExecutionInitiated event in
-//    the history. The child workflow execution is a separate workflow execution
-//    with its own history.
+//   - StartChildWorkflowExecution – Requests that a child workflow execution
+//     be started and records a StartChildWorkflowExecutionInitiated event in
+//     the history. The child workflow execution is a separate workflow execution
+//     with its own history.
 //
-//    * StartTimer – Starts a timer for this workflow execution and records
-//    a TimerStarted event in the history. This timer fires after the specified
-//    delay and record a TimerFired event.
+//   - StartTimer – Starts a timer for this workflow execution and records
+//     a TimerStarted event in the history. This timer fires after the specified
+//     delay and record a TimerFired event.
 //
-// Access Control
+// # Access Control
 //
 // If you grant permission to use RespondDecisionTaskCompleted, you can use
 // IAM policies to express permissions for the list of decisions returned by
 // this action as if they were members of the API. Treating decisions as a pseudo
 // API maintains a uniform conceptual model and helps keep policies readable.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Decision Failure
+// # Decision Failure
 //
 // Decisions can fail for several reasons
 //
-//    * The ordering of decisions should follow a logical flow. Some decisions
-//    might not make sense in the current context of the workflow execution
-//    and therefore fails.
+//   - The ordering of decisions should follow a logical flow. Some decisions
+//     might not make sense in the current context of the workflow execution
+//     and therefore fails.
 //
-//    * A limit on your account was reached.
+//   - A limit on your account was reached.
 //
-//    * The decision lacks sufficient permissions.
+//   - The decision lacks sufficient permissions.
 //
 // One of the following events might be added to the history to indicate an
 // error. The event attribute's cause parameter indicates the cause. If cause
 // is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked
 // sufficient permissions. For details and example IAM policies, see Using IAM
-// to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-//    * ScheduleActivityTaskFailed – A ScheduleActivityTask decision failed.
-//    This could happen if the activity type specified in the decision isn't
-//    registered, is in a deprecated state, or the decision isn't properly configured.
+//   - ScheduleActivityTaskFailed – A ScheduleActivityTask decision failed.
+//     This could happen if the activity type specified in the decision isn't
+//     registered, is in a deprecated state, or the decision isn't properly configured.
 //
-//    * RequestCancelActivityTaskFailed – A RequestCancelActivityTask decision
-//    failed. This could happen if there is no open activity task with the specified
-//    activityId.
+//   - RequestCancelActivityTaskFailed – A RequestCancelActivityTask decision
+//     failed. This could happen if there is no open activity task with the specified
+//     activityId.
 //
-//    * StartTimerFailed – A StartTimer decision failed. This could happen if
-//    there is another open timer with the same timerId.
+//   - StartTimerFailed – A StartTimer decision failed. This could happen
+//     if there is another open timer with the same timerId.
 //
-//    * CancelTimerFailed – A CancelTimer decision failed. This could happen
-//    if there is no open timer with the specified timerId.
+//   - CancelTimerFailed – A CancelTimer decision failed. This could happen
+//     if there is no open timer with the specified timerId.
 //
-//    * StartChildWorkflowExecutionFailed – A StartChildWorkflowExecution decision
-//    failed. This could happen if the workflow type specified isn't registered,
-//    is deprecated, or the decision isn't properly configured.
+//   - StartChildWorkflowExecutionFailed – A StartChildWorkflowExecution
+//     decision failed. This could happen if the workflow type specified isn't
+//     registered, is deprecated, or the decision isn't properly configured.
 //
-//    * SignalExternalWorkflowExecutionFailed – A SignalExternalWorkflowExecution
-//    decision failed. This could happen if the workflowID specified in the
-//    decision was incorrect.
+//   - SignalExternalWorkflowExecutionFailed – A SignalExternalWorkflowExecution
+//     decision failed. This could happen if the workflowID specified in the
+//     decision was incorrect.
 //
-//    * RequestCancelExternalWorkflowExecutionFailed – A RequestCancelExternalWorkflowExecution
-//    decision failed. This could happen if the workflowID specified in the
-//    decision was incorrect.
+//   - RequestCancelExternalWorkflowExecutionFailed – A RequestCancelExternalWorkflowExecution
+//     decision failed. This could happen if the workflowID specified in the
+//     decision was incorrect.
 //
-//    * CancelWorkflowExecutionFailed – A CancelWorkflowExecution decision failed.
-//    This could happen if there is an unhandled decision task pending in the
-//    workflow execution.
+//   - CancelWorkflowExecutionFailed – A CancelWorkflowExecution decision
+//     failed. This could happen if there is an unhandled decision task pending
+//     in the workflow execution.
 //
-//    * CompleteWorkflowExecutionFailed – A CompleteWorkflowExecution decision
-//    failed. This could happen if there is an unhandled decision task pending
-//    in the workflow execution.
+//   - CompleteWorkflowExecutionFailed – A CompleteWorkflowExecution decision
+//     failed. This could happen if there is an unhandled decision task pending
+//     in the workflow execution.
 //
-//    * ContinueAsNewWorkflowExecutionFailed – A ContinueAsNewWorkflowExecution
-//    decision failed. This could happen if there is an unhandled decision task
-//    pending in the workflow execution or the ContinueAsNewWorkflowExecution
-//    decision was not configured correctly.
+//   - ContinueAsNewWorkflowExecutionFailed – A ContinueAsNewWorkflowExecution
+//     decision failed. This could happen if there is an unhandled decision task
+//     pending in the workflow execution or the ContinueAsNewWorkflowExecution
+//     decision was not configured correctly.
 //
-//    * FailWorkflowExecutionFailed – A FailWorkflowExecution decision failed.
-//    This could happen if there is an unhandled decision task pending in the
-//    workflow execution.
+//   - FailWorkflowExecutionFailed – A FailWorkflowExecution decision failed.
+//     This could happen if there is an unhandled decision task pending in the
+//     workflow execution.
 //
 // The preceding error events might occur due to an error in the decider logic,
 // which might put the workflow execution in an unstable state The cause field
@@ -6112,35 +6877,35 @@ func (s *CountPendingDecisionTasksInput) SetTaskList(v *TaskList) *CountPendingD
 // new events included in the history. The decider should handle the new events
 // and may decide to close the workflow execution.
 //
-// How to Code a Decision
+// # How to Code a Decision
 //
 // You code a decision by first setting the decision type field to one of the
 // above decision values, and then set the corresponding attributes field shown
 // below:
 //
-//    * ScheduleActivityTaskDecisionAttributes
+//   - ScheduleActivityTaskDecisionAttributes
 //
-//    * RequestCancelActivityTaskDecisionAttributes
+//   - RequestCancelActivityTaskDecisionAttributes
 //
-//    * CompleteWorkflowExecutionDecisionAttributes
+//   - CompleteWorkflowExecutionDecisionAttributes
 //
-//    * FailWorkflowExecutionDecisionAttributes
+//   - FailWorkflowExecutionDecisionAttributes
 //
-//    * CancelWorkflowExecutionDecisionAttributes
+//   - CancelWorkflowExecutionDecisionAttributes
 //
-//    * ContinueAsNewWorkflowExecutionDecisionAttributes
+//   - ContinueAsNewWorkflowExecutionDecisionAttributes
 //
-//    * RecordMarkerDecisionAttributes
+//   - RecordMarkerDecisionAttributes
 //
-//    * StartTimerDecisionAttributes
+//   - StartTimerDecisionAttributes
 //
-//    * CancelTimerDecisionAttributes
+//   - CancelTimerDecisionAttributes
 //
-//    * SignalExternalWorkflowExecutionDecisionAttributes
+//   - SignalExternalWorkflowExecutionDecisionAttributes
 //
-//    * RequestCancelExternalWorkflowExecutionDecisionAttributes
+//   - RequestCancelExternalWorkflowExecutionDecisionAttributes
 //
-//    * StartChildWorkflowExecutionDecisionAttributes
+//   - StartChildWorkflowExecutionDecisionAttributes
 type Decision struct {
 	_ struct{} `type:"structure"`
 
@@ -6202,12 +6967,20 @@ type Decision struct {
 	StartTimerDecisionAttributes *StartTimerDecisionAttributes `locationName:"startTimerDecisionAttributes" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Decision) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Decision) GoString() string {
 	return s.String()
 }
@@ -6379,14 +7152,29 @@ type DecisionTaskCompletedEventAttributes struct {
 	//
 	// StartedEventId is a required field
 	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
+
+	// Represents a task list.
+	TaskList *TaskList `locationName:"taskList" type:"structure"`
+
+	// The maximum amount of time the decision task can wait to be assigned to a
+	// worker.
+	TaskListScheduleToStartTimeout *string `locationName:"taskListScheduleToStartTimeout" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DecisionTaskCompletedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DecisionTaskCompletedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -6409,9 +7197,25 @@ func (s *DecisionTaskCompletedEventAttributes) SetStartedEventId(v int64) *Decis
 	return s
 }
 
+// SetTaskList sets the TaskList field's value.
+func (s *DecisionTaskCompletedEventAttributes) SetTaskList(v *TaskList) *DecisionTaskCompletedEventAttributes {
+	s.TaskList = v
+	return s
+}
+
+// SetTaskListScheduleToStartTimeout sets the TaskListScheduleToStartTimeout field's value.
+func (s *DecisionTaskCompletedEventAttributes) SetTaskListScheduleToStartTimeout(v string) *DecisionTaskCompletedEventAttributes {
+	s.TaskListScheduleToStartTimeout = &v
+	return s
+}
+
 // Provides details about the DecisionTaskScheduled event.
 type DecisionTaskScheduledEventAttributes struct {
 	_ struct{} `type:"structure"`
+
+	// The maximum amount of time the decision task can wait to be assigned to a
+	// worker.
+	ScheduleToStartTimeout *string `locationName:"scheduleToStartTimeout" type:"string"`
 
 	// The maximum duration for this decision task. The task is considered timed
 	// out if it doesn't completed within this duration.
@@ -6430,19 +7234,33 @@ type DecisionTaskScheduledEventAttributes struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DecisionTaskScheduledEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DecisionTaskScheduledEventAttributes) GoString() string {
 	return s.String()
+}
+
+// SetScheduleToStartTimeout sets the ScheduleToStartTimeout field's value.
+func (s *DecisionTaskScheduledEventAttributes) SetScheduleToStartTimeout(v string) *DecisionTaskScheduledEventAttributes {
+	s.ScheduleToStartTimeout = &v
+	return s
 }
 
 // SetStartToCloseTimeout sets the StartToCloseTimeout field's value.
@@ -6479,12 +7297,20 @@ type DecisionTaskStartedEventAttributes struct {
 	ScheduledEventId *int64 `locationName:"scheduledEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DecisionTaskStartedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DecisionTaskStartedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -6525,12 +7351,20 @@ type DecisionTaskTimedOutEventAttributes struct {
 	TimeoutType *string `locationName:"timeoutType" type:"string" required:"true" enum:"DecisionTaskTimeoutType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DecisionTaskTimedOutEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DecisionTaskTimedOutEventAttributes) GoString() string {
 	return s.String()
 }
@@ -6553,6 +7387,80 @@ func (s *DecisionTaskTimedOutEventAttributes) SetTimeoutType(v string) *Decision
 	return s
 }
 
+// The StartWorkflowExecution API action was called without the required parameters
+// set.
+//
+// Some workflow execution parameters, such as the decision taskList, must be
+// set to start the execution. However, these parameters might have been set
+// as defaults when the workflow type was registered. In this case, you can
+// omit these parameters from the StartWorkflowExecution call and Amazon SWF
+// uses the values defined in the workflow type.
+//
+// If these parameters aren't set and no default parameters were defined in
+// the workflow type, this error is displayed.
+type DefaultUndefinedFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DefaultUndefinedFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DefaultUndefinedFault) GoString() string {
+	return s.String()
+}
+
+func newErrorDefaultUndefinedFault(v protocol.ResponseMetadata) error {
+	return &DefaultUndefinedFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DefaultUndefinedFault) Code() string {
+	return "DefaultUndefinedFault"
+}
+
+// Message returns the exception's message.
+func (s *DefaultUndefinedFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DefaultUndefinedFault) OrigErr() error {
+	return nil
+}
+
+func (s *DefaultUndefinedFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DefaultUndefinedFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DefaultUndefinedFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type DeprecateActivityTypeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6567,12 +7475,20 @@ type DeprecateActivityTypeInput struct {
 	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateActivityTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateActivityTypeInput) GoString() string {
 	return s.String()
 }
@@ -6617,12 +7533,20 @@ type DeprecateActivityTypeOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateActivityTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateActivityTypeOutput) GoString() string {
 	return s.String()
 }
@@ -6636,12 +7560,20 @@ type DeprecateDomainInput struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateDomainInput) GoString() string {
 	return s.String()
 }
@@ -6672,12 +7604,20 @@ type DeprecateDomainOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateDomainOutput) GoString() string {
 	return s.String()
 }
@@ -6696,12 +7636,20 @@ type DeprecateWorkflowTypeInput struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateWorkflowTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateWorkflowTypeInput) GoString() string {
 	return s.String()
 }
@@ -6746,12 +7694,20 @@ type DeprecateWorkflowTypeOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateWorkflowTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeprecateWorkflowTypeOutput) GoString() string {
 	return s.String()
 }
@@ -6771,12 +7727,20 @@ type DescribeActivityTypeInput struct {
 	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeActivityTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeActivityTypeInput) GoString() string {
 	return s.String()
 }
@@ -6834,20 +7798,28 @@ type DescribeActivityTypeOutput struct {
 	//    * REGISTERED – The type is registered and available. Workers supporting
 	//    this type should be running.
 	//
-	//    * DEPRECATED – The type was deprecated using DeprecateActivityType, but
-	//    is still in use. You should keep workers supporting this type running.
+	//    * DEPRECATED – The type was deprecated using DeprecateActivityType,
+	//    but is still in use. You should keep workers supporting this type running.
 	//    You cannot create new tasks of this type.
 	//
 	// TypeInfo is a required field
 	TypeInfo *ActivityTypeInfo `locationName:"typeInfo" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeActivityTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeActivityTypeOutput) GoString() string {
 	return s.String()
 }
@@ -6873,12 +7845,20 @@ type DescribeDomainInput struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainInput) GoString() string {
 	return s.String()
 }
@@ -6921,12 +7901,20 @@ type DescribeDomainOutput struct {
 	DomainInfo *DomainInfo `locationName:"domainInfo" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainOutput) GoString() string {
 	return s.String()
 }
@@ -6957,12 +7945,20 @@ type DescribeWorkflowExecutionInput struct {
 	Execution *WorkflowExecution `locationName:"execution" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkflowExecutionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkflowExecutionInput) GoString() string {
 	return s.String()
 }
@@ -7035,12 +8031,20 @@ type DescribeWorkflowExecutionOutput struct {
 	OpenCounts *WorkflowExecutionOpenCounts `locationName:"openCounts" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkflowExecutionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkflowExecutionOutput) GoString() string {
 	return s.String()
 }
@@ -7089,12 +8093,20 @@ type DescribeWorkflowTypeInput struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkflowTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkflowTypeInput) GoString() string {
 	return s.String()
 }
@@ -7152,20 +8164,28 @@ type DescribeWorkflowTypeOutput struct {
 	//    * REGISTERED – The type is registered and available. Workers supporting
 	//    this type should be running.
 	//
-	//    * DEPRECATED – The type was deprecated using DeprecateWorkflowType, but
-	//    is still in use. You should keep workers supporting this type running.
+	//    * DEPRECATED – The type was deprecated using DeprecateWorkflowType,
+	//    but is still in use. You should keep workers supporting this type running.
 	//    You cannot create new workflow executions of this type.
 	//
 	// TypeInfo is a required field
 	TypeInfo *WorkflowTypeInfo `locationName:"typeInfo" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkflowTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkflowTypeOutput) GoString() string {
 	return s.String()
 }
@@ -7182,6 +8202,73 @@ func (s *DescribeWorkflowTypeOutput) SetTypeInfo(v *WorkflowTypeInfo) *DescribeW
 	return s
 }
 
+// Returned if the domain already exists. You may get this fault if you are
+// registering a domain that is either already registered or deprecated, or
+// if you undeprecate a domain that is currently registered.
+type DomainAlreadyExistsFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A description that may help with diagnosing the cause of the fault.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainAlreadyExistsFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainAlreadyExistsFault) GoString() string {
+	return s.String()
+}
+
+func newErrorDomainAlreadyExistsFault(v protocol.ResponseMetadata) error {
+	return &DomainAlreadyExistsFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DomainAlreadyExistsFault) Code() string {
+	return "DomainAlreadyExistsFault"
+}
+
+// Message returns the exception's message.
+func (s *DomainAlreadyExistsFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DomainAlreadyExistsFault) OrigErr() error {
+	return nil
+}
+
+func (s *DomainAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DomainAlreadyExistsFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DomainAlreadyExistsFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Contains the configuration settings of a domain.
 type DomainConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -7192,12 +8279,20 @@ type DomainConfiguration struct {
 	WorkflowExecutionRetentionPeriodInDays *string `locationName:"workflowExecutionRetentionPeriodInDays" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainConfiguration) GoString() string {
 	return s.String()
 }
@@ -7208,9 +8303,77 @@ func (s *DomainConfiguration) SetWorkflowExecutionRetentionPeriodInDays(v string
 	return s
 }
 
+// Returned when the specified domain has been deprecated.
+type DomainDeprecatedFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A description that may help with diagnosing the cause of the fault.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainDeprecatedFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainDeprecatedFault) GoString() string {
+	return s.String()
+}
+
+func newErrorDomainDeprecatedFault(v protocol.ResponseMetadata) error {
+	return &DomainDeprecatedFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DomainDeprecatedFault) Code() string {
+	return "DomainDeprecatedFault"
+}
+
+// Message returns the exception's message.
+func (s *DomainDeprecatedFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DomainDeprecatedFault) OrigErr() error {
+	return nil
+}
+
+func (s *DomainDeprecatedFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DomainDeprecatedFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DomainDeprecatedFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Contains general information about a domain.
 type DomainInfo struct {
 	_ struct{} `type:"structure"`
+
+	// The ARN of the domain.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The description of the domain provided through RegisterDomain.
 	Description *string `locationName:"description" type:"string"`
@@ -7222,25 +8385,39 @@ type DomainInfo struct {
 
 	// The status of the domain:
 	//
-	//    * REGISTERED – The domain is properly registered and available. You can
-	//    use this domain for registering types and creating new workflow executions.
+	//    * REGISTERED – The domain is properly registered and available. You
+	//    can use this domain for registering types and creating new workflow executions.
 	//
-	//
-	//    * DEPRECATED – The domain was deprecated using DeprecateDomain, but is
-	//    still in use. You should not create new workflow executions in this domain.
+	//    * DEPRECATED – The domain was deprecated using DeprecateDomain, but
+	//    is still in use. You should not create new workflow executions in this
+	//    domain.
 	//
 	// Status is a required field
 	Status *string `locationName:"status" type:"string" required:"true" enum:"RegistrationStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainInfo) GoString() string {
 	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *DomainInfo) SetArn(v string) *DomainInfo {
+	s.Arn = &v
+	return s
 }
 
 // SetDescription sets the Description field's value.
@@ -7278,12 +8455,20 @@ type ExecutionTimeFilter struct {
 	OldestDate *time.Time `locationName:"oldestDate" type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExecutionTimeFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExecutionTimeFilter) GoString() string {
 	return s.String()
 }
@@ -7331,12 +8516,20 @@ type ExternalWorkflowExecutionCancelRequestedEventAttributes struct {
 	WorkflowExecution *WorkflowExecution `locationName:"workflowExecution" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExternalWorkflowExecutionCancelRequestedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExternalWorkflowExecutionCancelRequestedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -7371,12 +8564,20 @@ type ExternalWorkflowExecutionSignaledEventAttributes struct {
 	WorkflowExecution *WorkflowExecution `locationName:"workflowExecution" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExternalWorkflowExecutionSignaledEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExternalWorkflowExecutionSignaledEventAttributes) GoString() string {
 	return s.String()
 }
@@ -7395,23 +8596,23 @@ func (s *ExternalWorkflowExecutionSignaledEventAttributes) SetWorkflowExecution(
 
 // Provides the details of the FailWorkflowExecution decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type FailWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -7423,12 +8624,20 @@ type FailWorkflowExecutionDecisionAttributes struct {
 	Reason *string `locationName:"reason" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailWorkflowExecutionDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -7454,7 +8663,7 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -7469,12 +8678,20 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 	DecisionTaskCompletedEventId *int64 `locationName:"decisionTaskCompletedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailWorkflowExecutionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -7504,18 +8721,16 @@ type GetWorkflowExecutionHistoryInput struct {
 	// Execution is a required field
 	Execution *WorkflowExecution `locationName:"execution" type:"structure" required:"true"`
 
-	// The maximum number of results that are returned per call. nextPageToken can
-	// be used to obtain futher pages of results. The default is 1000, which is
-	// the maximum allowed page size. You can, however, specify a page size smaller
-	// than the maximum.
-	//
-	// This is an upper limit only; the actual number of results returned per call
-	// may be fewer than the specified maximum.
+	// The maximum number of results that are returned per call. Use nextPageToken
+	// to obtain further pages of results.
 	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
 
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
+	// If NextPageToken is returned there are more results available. The value
+	// of NextPageToken is a unique pagination token for each page. Make the call
+	// again using the returned token to retrieve the next page. Keep all other
+	// arguments unchanged. Each pagination token expires after 24 hours. Using
+	// an expired pagination token will return a 400 error: "Specified token has
+	// exceeded its maximum lifetime".
 	//
 	// The configured maximumPageSize determines how many results can be returned
 	// in a single call.
@@ -7526,12 +8741,20 @@ type GetWorkflowExecutionHistoryInput struct {
 	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetWorkflowExecutionHistoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetWorkflowExecutionHistoryInput) GoString() string {
 	return s.String()
 }
@@ -7610,12 +8833,20 @@ type GetWorkflowExecutionHistoryOutput struct {
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetWorkflowExecutionHistoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetWorkflowExecutionHistoryOutput) GoString() string {
 	return s.String()
 }
@@ -7634,143 +8865,144 @@ func (s *GetWorkflowExecutionHistoryOutput) SetNextPageToken(v string) *GetWorkf
 
 // Event within a workflow execution. A history event can be one of these types:
 //
-//    * ActivityTaskCancelRequested – A RequestCancelActivityTask decision was
-//    received by the system.
+//   - ActivityTaskCancelRequested – A RequestCancelActivityTask decision
+//     was received by the system.
 //
-//    * ActivityTaskCanceled – The activity task was successfully canceled.
+//   - ActivityTaskCanceled – The activity task was successfully canceled.
 //
-//    * ActivityTaskCompleted – An activity worker successfully completed an
-//    activity task by calling RespondActivityTaskCompleted.
+//   - ActivityTaskCompleted – An activity worker successfully completed
+//     an activity task by calling RespondActivityTaskCompleted.
 //
-//    * ActivityTaskFailed – An activity worker failed an activity task by calling
-//    RespondActivityTaskFailed.
+//   - ActivityTaskFailed – An activity worker failed an activity task by
+//     calling RespondActivityTaskFailed.
 //
-//    * ActivityTaskScheduled – An activity task was scheduled for execution.
+//   - ActivityTaskScheduled – An activity task was scheduled for execution.
 //
-//    * ActivityTaskStarted – The scheduled activity task was dispatched to
-//    a worker.
+//   - ActivityTaskStarted – The scheduled activity task was dispatched to
+//     a worker.
 //
-//    * ActivityTaskTimedOut – The activity task timed out.
+//   - ActivityTaskTimedOut – The activity task timed out.
 //
-//    * CancelTimerFailed – Failed to process CancelTimer decision. This happens
-//    when the decision isn't configured properly, for example no timer exists
-//    with the specified timer Id.
+//   - CancelTimerFailed – Failed to process CancelTimer decision. This happens
+//     when the decision isn't configured properly, for example no timer exists
+//     with the specified timer Id.
 //
-//    * CancelWorkflowExecutionFailed – A request to cancel a workflow execution
-//    failed.
+//   - CancelWorkflowExecutionFailed – A request to cancel a workflow execution
+//     failed.
 //
-//    * ChildWorkflowExecutionCanceled – A child workflow execution, started
-//    by this workflow execution, was canceled and closed.
+//   - ChildWorkflowExecutionCanceled – A child workflow execution, started
+//     by this workflow execution, was canceled and closed.
 //
-//    * ChildWorkflowExecutionCompleted – A child workflow execution, started
-//    by this workflow execution, completed successfully and was closed.
+//   - ChildWorkflowExecutionCompleted – A child workflow execution, started
+//     by this workflow execution, completed successfully and was closed.
 //
-//    * ChildWorkflowExecutionFailed – A child workflow execution, started by
-//    this workflow execution, failed to complete successfully and was closed.
+//   - ChildWorkflowExecutionFailed – A child workflow execution, started
+//     by this workflow execution, failed to complete successfully and was closed.
 //
-//    * ChildWorkflowExecutionStarted – A child workflow execution was successfully
-//    started.
+//   - ChildWorkflowExecutionStarted – A child workflow execution was successfully
+//     started.
 //
-//    * ChildWorkflowExecutionTerminated – A child workflow execution, started
-//    by this workflow execution, was terminated.
+//   - ChildWorkflowExecutionTerminated – A child workflow execution, started
+//     by this workflow execution, was terminated.
 //
-//    * ChildWorkflowExecutionTimedOut – A child workflow execution, started
-//    by this workflow execution, timed out and was closed.
+//   - ChildWorkflowExecutionTimedOut – A child workflow execution, started
+//     by this workflow execution, timed out and was closed.
 //
-//    * CompleteWorkflowExecutionFailed – The workflow execution failed to complete.
+//   - CompleteWorkflowExecutionFailed – The workflow execution failed to
+//     complete.
 //
-//    * ContinueAsNewWorkflowExecutionFailed – The workflow execution failed
-//    to complete after being continued as a new workflow execution.
+//   - ContinueAsNewWorkflowExecutionFailed – The workflow execution failed
+//     to complete after being continued as a new workflow execution.
 //
-//    * DecisionTaskCompleted – The decider successfully completed a decision
-//    task by calling RespondDecisionTaskCompleted.
+//   - DecisionTaskCompleted – The decider successfully completed a decision
+//     task by calling RespondDecisionTaskCompleted.
 //
-//    * DecisionTaskScheduled – A decision task was scheduled for the workflow
-//    execution.
+//   - DecisionTaskScheduled – A decision task was scheduled for the workflow
+//     execution.
 //
-//    * DecisionTaskStarted – The decision task was dispatched to a decider.
+//   - DecisionTaskStarted – The decision task was dispatched to a decider.
 //
-//    * DecisionTaskTimedOut – The decision task timed out.
+//   - DecisionTaskTimedOut – The decision task timed out.
 //
-//    * ExternalWorkflowExecutionCancelRequested – Request to cancel an external
-//    workflow execution was successfully delivered to the target execution.
+//   - ExternalWorkflowExecutionCancelRequested – Request to cancel an external
+//     workflow execution was successfully delivered to the target execution.
 //
-//    * ExternalWorkflowExecutionSignaled – A signal, requested by this workflow
-//    execution, was successfully delivered to the target external workflow
-//    execution.
+//   - ExternalWorkflowExecutionSignaled – A signal, requested by this workflow
+//     execution, was successfully delivered to the target external workflow
+//     execution.
 //
-//    * FailWorkflowExecutionFailed – A request to mark a workflow execution
-//    as failed, itself failed.
+//   - FailWorkflowExecutionFailed – A request to mark a workflow execution
+//     as failed, itself failed.
 //
-//    * MarkerRecorded – A marker was recorded in the workflow history as the
-//    result of a RecordMarker decision.
+//   - MarkerRecorded – A marker was recorded in the workflow history as
+//     the result of a RecordMarker decision.
 //
-//    * RecordMarkerFailed – A RecordMarker decision was returned as failed.
+//   - RecordMarkerFailed – A RecordMarker decision was returned as failed.
 //
-//    * RequestCancelActivityTaskFailed – Failed to process RequestCancelActivityTask
-//    decision. This happens when the decision isn't configured properly.
+//   - RequestCancelActivityTaskFailed – Failed to process RequestCancelActivityTask
+//     decision. This happens when the decision isn't configured properly.
 //
-//    * RequestCancelExternalWorkflowExecutionFailed – Request to cancel an
-//    external workflow execution failed.
+//   - RequestCancelExternalWorkflowExecutionFailed – Request to cancel an
+//     external workflow execution failed.
 //
-//    * RequestCancelExternalWorkflowExecutionInitiated – A request was made
-//    to request the cancellation of an external workflow execution.
+//   - RequestCancelExternalWorkflowExecutionInitiated – A request was made
+//     to request the cancellation of an external workflow execution.
 //
-//    * ScheduleActivityTaskFailed – Failed to process ScheduleActivityTask
-//    decision. This happens when the decision isn't configured properly, for
-//    example the activity type specified isn't registered.
+//   - ScheduleActivityTaskFailed – Failed to process ScheduleActivityTask
+//     decision. This happens when the decision isn't configured properly, for
+//     example the activity type specified isn't registered.
 //
-//    * SignalExternalWorkflowExecutionFailed – The request to signal an external
-//    workflow execution failed.
+//   - SignalExternalWorkflowExecutionFailed – The request to signal an external
+//     workflow execution failed.
 //
-//    * SignalExternalWorkflowExecutionInitiated – A request to signal an external
-//    workflow was made.
+//   - SignalExternalWorkflowExecutionInitiated – A request to signal an
+//     external workflow was made.
 //
-//    * StartActivityTaskFailed – A scheduled activity task failed to start.
+//   - StartActivityTaskFailed – A scheduled activity task failed to start.
 //
-//    * StartChildWorkflowExecutionFailed – Failed to process StartChildWorkflowExecution
-//    decision. This happens when the decision isn't configured properly, for
-//    example the workflow type specified isn't registered.
+//   - StartChildWorkflowExecutionFailed – Failed to process StartChildWorkflowExecution
+//     decision. This happens when the decision isn't configured properly, for
+//     example the workflow type specified isn't registered.
 //
-//    * StartChildWorkflowExecutionInitiated – A request was made to start a
-//    child workflow execution.
+//   - StartChildWorkflowExecutionInitiated – A request was made to start
+//     a child workflow execution.
 //
-//    * StartTimerFailed – Failed to process StartTimer decision. This happens
-//    when the decision isn't configured properly, for example a timer already
-//    exists with the specified timer Id.
+//   - StartTimerFailed – Failed to process StartTimer decision. This happens
+//     when the decision isn't configured properly, for example a timer already
+//     exists with the specified timer Id.
 //
-//    * TimerCanceled – A timer, previously started for this workflow execution,
-//    was successfully canceled.
+//   - TimerCanceled – A timer, previously started for this workflow execution,
+//     was successfully canceled.
 //
-//    * TimerFired – A timer, previously started for this workflow execution,
-//    fired.
+//   - TimerFired – A timer, previously started for this workflow execution,
+//     fired.
 //
-//    * TimerStarted – A timer was started for the workflow execution due to
-//    a StartTimer decision.
+//   - TimerStarted – A timer was started for the workflow execution due
+//     to a StartTimer decision.
 //
-//    * WorkflowExecutionCancelRequested – A request to cancel this workflow
-//    execution was made.
+//   - WorkflowExecutionCancelRequested – A request to cancel this workflow
+//     execution was made.
 //
-//    * WorkflowExecutionCanceled – The workflow execution was successfully
-//    canceled and closed.
+//   - WorkflowExecutionCanceled – The workflow execution was successfully
+//     canceled and closed.
 //
-//    * WorkflowExecutionCompleted – The workflow execution was closed due to
-//    successful completion.
+//   - WorkflowExecutionCompleted – The workflow execution was closed due
+//     to successful completion.
 //
-//    * WorkflowExecutionContinuedAsNew – The workflow execution was closed
-//    and a new execution of the same type was created with the same workflowId.
+//   - WorkflowExecutionContinuedAsNew – The workflow execution was closed
+//     and a new execution of the same type was created with the same workflowId.
 //
-//    * WorkflowExecutionFailed – The workflow execution closed due to a failure.
+//   - WorkflowExecutionFailed – The workflow execution closed due to a failure.
 //
-//    * WorkflowExecutionSignaled – An external signal was received for the
-//    workflow execution.
+//   - WorkflowExecutionSignaled – An external signal was received for the
+//     workflow execution.
 //
-//    * WorkflowExecutionStarted – The workflow execution was started.
+//   - WorkflowExecutionStarted – The workflow execution was started.
 //
-//    * WorkflowExecutionTerminated – The workflow execution was terminated.
+//   - WorkflowExecutionTerminated – The workflow execution was terminated.
 //
-//    * WorkflowExecutionTimedOut – The workflow execution was closed because
-//    a time out was exceeded.
+//   - WorkflowExecutionTimedOut – The workflow execution was closed because
+//     a time out was exceeded.
 type HistoryEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -8044,12 +9276,20 @@ type HistoryEvent struct {
 	WorkflowExecutionTimedOutEventAttributes *WorkflowExecutionTimedOutEventAttributes `locationName:"workflowExecutionTimedOutEventAttributes" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HistoryEvent) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HistoryEvent) GoString() string {
 	return s.String()
 }
@@ -8419,12 +9659,20 @@ type LambdaFunctionCompletedEventAttributes struct {
 	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionCompletedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionCompletedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -8473,12 +9721,20 @@ type LambdaFunctionFailedEventAttributes struct {
 	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -8541,12 +9797,20 @@ type LambdaFunctionScheduledEventAttributes struct {
 	StartToCloseTimeout *string `locationName:"startToCloseTimeout" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionScheduledEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionScheduledEventAttributes) GoString() string {
 	return s.String()
 }
@@ -8600,12 +9864,20 @@ type LambdaFunctionStartedEventAttributes struct {
 	ScheduledEventId *int64 `locationName:"scheduledEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionStartedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionStartedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -8638,12 +9910,20 @@ type LambdaFunctionTimedOutEventAttributes struct {
 	TimeoutType *string `locationName:"timeoutType" type:"string" enum:"LambdaFunctionTimeoutType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionTimedOutEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaFunctionTimedOutEventAttributes) GoString() string {
 	return s.String()
 }
@@ -8666,6 +9946,73 @@ func (s *LambdaFunctionTimedOutEventAttributes) SetTimeoutType(v string) *Lambda
 	return s
 }
 
+// Returned by any operation if a system imposed limitation has been reached.
+// To address this fault you should either clean up unused resources or increase
+// the limit by contacting AWS.
+type LimitExceededFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A description that may help with diagnosing the cause of the fault.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededFault) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededFault(v protocol.ResponseMetadata) error {
+	return &LimitExceededFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededFault) Code() string {
+	return "LimitExceededFault"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededFault) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListActivityTypesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8674,21 +10021,19 @@ type ListActivityTypesInput struct {
 	// Domain is a required field
 	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
 
-	// The maximum number of results that are returned per call. nextPageToken can
-	// be used to obtain futher pages of results. The default is 1000, which is
-	// the maximum allowed page size. You can, however, specify a page size smaller
-	// than the maximum.
-	//
-	// This is an upper limit only; the actual number of results returned per call
-	// may be fewer than the specified maximum.
+	// The maximum number of results that are returned per call. Use nextPageToken
+	// to obtain further pages of results.
 	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
 
 	// If specified, only lists the activity types that have this name.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
+	// If NextPageToken is returned there are more results available. The value
+	// of NextPageToken is a unique pagination token for each page. Make the call
+	// again using the returned token to retrieve the next page. Keep all other
+	// arguments unchanged. Each pagination token expires after 24 hours. Using
+	// an expired pagination token will return a 400 error: "Specified token has
+	// exceeded its maximum lifetime".
 	//
 	// The configured maximumPageSize determines how many results can be returned
 	// in a single call.
@@ -8704,12 +10049,20 @@ type ListActivityTypesInput struct {
 	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListActivityTypesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListActivityTypesInput) GoString() string {
 	return s.String()
 }
@@ -8790,12 +10143,20 @@ type ListActivityTypesOutput struct {
 	TypeInfos []*ActivityTypeInfo `locationName:"typeInfos" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListActivityTypesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListActivityTypesOutput) GoString() string {
 	return s.String()
 }
@@ -8844,18 +10205,16 @@ type ListClosedWorkflowExecutionsInput struct {
 	// exclusive. You can specify at most one of these in a request.
 	ExecutionFilter *WorkflowExecutionFilter `locationName:"executionFilter" type:"structure"`
 
-	// The maximum number of results that are returned per call. nextPageToken can
-	// be used to obtain futher pages of results. The default is 1000, which is
-	// the maximum allowed page size. You can, however, specify a page size smaller
-	// than the maximum.
-	//
-	// This is an upper limit only; the actual number of results returned per call
-	// may be fewer than the specified maximum.
+	// The maximum number of results that are returned per call. Use nextPageToken
+	// to obtain further pages of results.
 	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
 
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
+	// If NextPageToken is returned there are more results available. The value
+	// of NextPageToken is a unique pagination token for each page. Make the call
+	// again using the returned token to retrieve the next page. Keep all other
+	// arguments unchanged. Each pagination token expires after 24 hours. Using
+	// an expired pagination token will return a 400 error: "Specified token has
+	// exceeded its maximum lifetime".
 	//
 	// The configured maximumPageSize determines how many results can be returned
 	// in a single call.
@@ -8887,12 +10246,20 @@ type ListClosedWorkflowExecutionsInput struct {
 	TypeFilter *WorkflowTypeFilter `locationName:"typeFilter" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListClosedWorkflowExecutionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListClosedWorkflowExecutionsInput) GoString() string {
 	return s.String()
 }
@@ -9006,18 +10373,16 @@ func (s *ListClosedWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter)
 type ListDomainsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of results that are returned per call. nextPageToken can
-	// be used to obtain futher pages of results. The default is 1000, which is
-	// the maximum allowed page size. You can, however, specify a page size smaller
-	// than the maximum.
-	//
-	// This is an upper limit only; the actual number of results returned per call
-	// may be fewer than the specified maximum.
+	// The maximum number of results that are returned per call. Use nextPageToken
+	// to obtain further pages of results.
 	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
 
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
+	// If NextPageToken is returned there are more results available. The value
+	// of NextPageToken is a unique pagination token for each page. Make the call
+	// again using the returned token to retrieve the next page. Keep all other
+	// arguments unchanged. Each pagination token expires after 24 hours. Using
+	// an expired pagination token will return a 400 error: "Specified token has
+	// exceeded its maximum lifetime".
 	//
 	// The configured maximumPageSize determines how many results can be returned
 	// in a single call.
@@ -9033,12 +10398,20 @@ type ListDomainsInput struct {
 	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsInput) GoString() string {
 	return s.String()
 }
@@ -9098,12 +10471,20 @@ type ListDomainsOutput struct {
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsOutput) GoString() string {
 	return s.String()
 }
@@ -9135,18 +10516,16 @@ type ListOpenWorkflowExecutionsInput struct {
 	// specify at most one of these in a request.
 	ExecutionFilter *WorkflowExecutionFilter `locationName:"executionFilter" type:"structure"`
 
-	// The maximum number of results that are returned per call. nextPageToken can
-	// be used to obtain futher pages of results. The default is 1000, which is
-	// the maximum allowed page size. You can, however, specify a page size smaller
-	// than the maximum.
-	//
-	// This is an upper limit only; the actual number of results returned per call
-	// may be fewer than the specified maximum.
+	// The maximum number of results that are returned per call. Use nextPageToken
+	// to obtain further pages of results.
 	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
 
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
+	// If NextPageToken is returned there are more results available. The value
+	// of NextPageToken is a unique pagination token for each page. Make the call
+	// again using the returned token to retrieve the next page. Keep all other
+	// arguments unchanged. Each pagination token expires after 24 hours. Using
+	// an expired pagination token will return a 400 error: "Specified token has
+	// exceeded its maximum lifetime".
 	//
 	// The configured maximumPageSize determines how many results can be returned
 	// in a single call.
@@ -9175,12 +10554,20 @@ type ListOpenWorkflowExecutionsInput struct {
 	TypeFilter *WorkflowTypeFilter `locationName:"typeFilter" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOpenWorkflowExecutionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOpenWorkflowExecutionsInput) GoString() string {
 	return s.String()
 }
@@ -9272,6 +10659,86 @@ func (s *ListOpenWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter) *
 	return s
 }
 
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for the Amazon SWF domain.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of tags associated with the domain.
+	Tags []*ResourceTag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SetTags sets the Tags field's value.
+func (s *ListTagsForResourceOutput) SetTags(v []*ResourceTag) *ListTagsForResourceOutput {
+	s.Tags = v
+	return s
+}
+
 type ListWorkflowTypesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9280,21 +10747,19 @@ type ListWorkflowTypesInput struct {
 	// Domain is a required field
 	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
 
-	// The maximum number of results that are returned per call. nextPageToken can
-	// be used to obtain futher pages of results. The default is 1000, which is
-	// the maximum allowed page size. You can, however, specify a page size smaller
-	// than the maximum.
-	//
-	// This is an upper limit only; the actual number of results returned per call
-	// may be fewer than the specified maximum.
+	// The maximum number of results that are returned per call. Use nextPageToken
+	// to obtain further pages of results.
 	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
 
 	// If specified, lists the workflow type with this name.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
+	// If NextPageToken is returned there are more results available. The value
+	// of NextPageToken is a unique pagination token for each page. Make the call
+	// again using the returned token to retrieve the next page. Keep all other
+	// arguments unchanged. Each pagination token expires after 24 hours. Using
+	// an expired pagination token will return a 400 error: "Specified token has
+	// exceeded its maximum lifetime".
 	//
 	// The configured maximumPageSize determines how many results can be returned
 	// in a single call.
@@ -9311,12 +10776,20 @@ type ListWorkflowTypesInput struct {
 	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkflowTypesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkflowTypesInput) GoString() string {
 	return s.String()
 }
@@ -9397,12 +10870,20 @@ type ListWorkflowTypesOutput struct {
 	TypeInfos []*WorkflowTypeInfo `locationName:"typeInfos" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkflowTypesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkflowTypesOutput) GoString() string {
 	return s.String()
 }
@@ -9440,12 +10921,20 @@ type MarkerRecordedEventAttributes struct {
 	MarkerName *string `locationName:"markerName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MarkerRecordedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MarkerRecordedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -9468,6 +10957,72 @@ func (s *MarkerRecordedEventAttributes) SetMarkerName(v string) *MarkerRecordedE
 	return s
 }
 
+// Returned when the caller doesn't have sufficient permissions to invoke the
+// action.
+type OperationNotPermittedFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A description that may help with diagnosing the cause of the fault.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotPermittedFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotPermittedFault) GoString() string {
+	return s.String()
+}
+
+func newErrorOperationNotPermittedFault(v protocol.ResponseMetadata) error {
+	return &OperationNotPermittedFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OperationNotPermittedFault) Code() string {
+	return "OperationNotPermittedFault"
+}
+
+// Message returns the exception's message.
+func (s *OperationNotPermittedFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OperationNotPermittedFault) OrigErr() error {
+	return nil
+}
+
+func (s *OperationNotPermittedFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OperationNotPermittedFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OperationNotPermittedFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Contains the count of tasks in a task list.
 type PendingTaskCount struct {
 	_ struct{} `type:"structure"`
@@ -9482,12 +11037,20 @@ type PendingTaskCount struct {
 	Truncated *bool `locationName:"truncated" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PendingTaskCount) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PendingTaskCount) GoString() string {
 	return s.String()
 }
@@ -9521,18 +11084,26 @@ type PollForActivityTaskInput struct {
 	//
 	// The specified string must not start or end with whitespace. It must not contain
 	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// | \u007f-\u009f). Also, it must not be the literal string arn.
 	//
 	// TaskList is a required field
 	TaskList *TaskList `locationName:"taskList" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PollForActivityTaskInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PollForActivityTaskInput) GoString() string {
 	return s.String()
 }
@@ -9615,12 +11186,20 @@ type PollForActivityTaskOutput struct {
 	WorkflowExecution *WorkflowExecution `locationName:"workflowExecution" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PollForActivityTaskOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PollForActivityTaskOutput) GoString() string {
 	return s.String()
 }
@@ -9674,18 +11253,19 @@ type PollForDecisionTaskInput struct {
 	// arise. The form of this identity is user defined.
 	Identity *string `locationName:"identity" type:"string"`
 
-	// The maximum number of results that are returned per call. nextPageToken can
-	// be used to obtain futher pages of results. The default is 1000, which is
-	// the maximum allowed page size. You can, however, specify a page size smaller
-	// than the maximum.
+	// The maximum number of results that are returned per call. Use nextPageToken
+	// to obtain further pages of results.
 	//
 	// This is an upper limit only; the actual number of results returned per call
 	// may be fewer than the specified maximum.
 	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
 
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
+	// If NextPageToken is returned there are more results available. The value
+	// of NextPageToken is a unique pagination token for each page. Make the call
+	// again using the returned token to retrieve the next page. Keep all other
+	// arguments unchanged. Each pagination token expires after 24 hours. Using
+	// an expired pagination token will return a 400 error: "Specified token has
+	// exceeded its maximum lifetime".
 	//
 	// The configured maximumPageSize determines how many results can be returned
 	// in a single call.
@@ -9700,22 +11280,35 @@ type PollForDecisionTaskInput struct {
 	// are returned in ascending order of the eventTimestamp of the events.
 	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
 
+	// When set to true, returns the events with eventTimestamp greater than or
+	// equal to eventTimestamp of the most recent DecisionTaskStarted event. By
+	// default, this parameter is set to false.
+	StartAtPreviousStartedEvent *bool `locationName:"startAtPreviousStartedEvent" type:"boolean"`
+
 	// Specifies the task list to poll for decision tasks.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	//
 	// TaskList is a required field
 	TaskList *TaskList `locationName:"taskList" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PollForDecisionTaskInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PollForDecisionTaskInput) GoString() string {
 	return s.String()
 }
@@ -9774,6 +11367,12 @@ func (s *PollForDecisionTaskInput) SetReverseOrder(v bool) *PollForDecisionTaskI
 	return s
 }
 
+// SetStartAtPreviousStartedEvent sets the StartAtPreviousStartedEvent field's value.
+func (s *PollForDecisionTaskInput) SetStartAtPreviousStartedEvent(v bool) *PollForDecisionTaskInput {
+	s.StartAtPreviousStartedEvent = &v
+	return s
+}
+
 // SetTaskList sets the TaskList field's value.
 func (s *PollForDecisionTaskInput) SetTaskList(v *TaskList) *PollForDecisionTaskInput {
 	s.TaskList = v
@@ -9828,12 +11427,20 @@ type PollForDecisionTaskOutput struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PollForDecisionTaskOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PollForDecisionTaskOutput) GoString() string {
 	return s.String()
 }
@@ -9896,12 +11503,20 @@ type RecordActivityTaskHeartbeatInput struct {
 	TaskToken *string `locationName:"taskToken" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordActivityTaskHeartbeatInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordActivityTaskHeartbeatInput) GoString() string {
 	return s.String()
 }
@@ -9944,12 +11559,20 @@ type RecordActivityTaskHeartbeatOutput struct {
 	CancelRequested *bool `locationName:"cancelRequested" type:"boolean" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordActivityTaskHeartbeatOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordActivityTaskHeartbeatOutput) GoString() string {
 	return s.String()
 }
@@ -9962,23 +11585,23 @@ func (s *RecordActivityTaskHeartbeatOutput) SetCancelRequested(v bool) *RecordAc
 
 // Provides the details of the RecordMarker decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RecordMarkerDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -9992,12 +11615,20 @@ type RecordMarkerDecisionAttributes struct {
 	MarkerName *string `locationName:"markerName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordMarkerDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordMarkerDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -10039,7 +11670,7 @@ type RecordMarkerFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -10059,12 +11690,20 @@ type RecordMarkerFailedEventAttributes struct {
 	MarkerName *string `locationName:"markerName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordMarkerFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordMarkerFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -10094,7 +11733,7 @@ type RegisterActivityTypeInput struct {
 	// a task of this type must report progress by calling RecordActivityTaskHeartbeat.
 	// If the timeout is exceeded, the activity task is automatically timed out.
 	// This default can be overridden when scheduling an activity task using the
-	// ScheduleActivityTaskDecision. If the activity worker subsequently attempts
+	// ScheduleActivityTask Decision. If the activity worker subsequently attempts
 	// to record a heartbeat or returns a result, the activity worker receives an
 	// UnknownResource fault. In this case, Amazon SWF no longer considers the activity
 	// task to be valid; the activity worker should clean up the activity task.
@@ -10105,7 +11744,7 @@ type RegisterActivityTypeInput struct {
 
 	// If set, specifies the default task list to use for scheduling tasks of this
 	// activity type. This default task list is used if a task list isn't provided
-	// when a task is scheduled through the ScheduleActivityTaskDecision.
+	// when a task is scheduled through the ScheduleActivityTask Decision.
 	DefaultTaskList *TaskList `locationName:"defaultTaskList" type:"structure"`
 
 	// The default task priority to assign to the activity type. If not assigned,
@@ -10114,13 +11753,13 @@ type RegisterActivityTypeInput struct {
 	// higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the in the Amazon SWF Developer Guide..
 	DefaultTaskPriority *string `locationName:"defaultTaskPriority" type:"string"`
 
 	// If set, specifies the default maximum duration for a task of this activity
 	// type. This default can be overridden when scheduling an activity task using
-	// the ScheduleActivityTaskDecision.
+	// the ScheduleActivityTask Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -10128,7 +11767,7 @@ type RegisterActivityTypeInput struct {
 
 	// If set, specifies the default maximum duration that a task of this activity
 	// type can wait before being assigned to a worker. This default can be overridden
-	// when scheduling an activity task using the ScheduleActivityTaskDecision.
+	// when scheduling an activity task using the ScheduleActivityTask Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -10136,7 +11775,7 @@ type RegisterActivityTypeInput struct {
 
 	// If set, specifies the default maximum duration that a worker can take to
 	// process tasks of this activity type. This default can be overridden when
-	// scheduling an activity task using the ScheduleActivityTaskDecision.
+	// scheduling an activity task using the ScheduleActivityTask Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -10152,9 +11791,9 @@ type RegisterActivityTypeInput struct {
 
 	// The name of the activity type within the domain.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
@@ -10164,20 +11803,28 @@ type RegisterActivityTypeInput struct {
 	// The activity type consists of the name and version, the combination of which
 	// must be unique within the domain.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	//
 	// Version is a required field
 	Version *string `locationName:"version" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterActivityTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterActivityTypeInput) GoString() string {
 	return s.String()
 }
@@ -10279,12 +11926,20 @@ type RegisterActivityTypeOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterActivityTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterActivityTypeOutput) GoString() string {
 	return s.String()
 }
@@ -10300,10 +11955,16 @@ type RegisterDomainInput struct {
 	//
 	// The specified string must not start or end with whitespace. It must not contain
 	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// | \u007f-\u009f). Also, it must not be the literal string arn.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// Tags to be added when registering a domain.
+	//
+	// Tags may only contain unicode letters, digits, whitespace, or these symbols:
+	// _ . : / = + - @.
+	Tags []*ResourceTag `locationName:"tags" type:"list"`
 
 	// The duration (in days) that records and histories of workflow executions
 	// on the domain should be kept by the service. After the retention period,
@@ -10314,19 +11975,27 @@ type RegisterDomainInput struct {
 	// record and its history are deleted.
 	//
 	// The maximum workflow execution retention period is 90 days. For more information
-	// about Amazon SWF service limits, see: Amazon SWF Service Limits (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html)
+	// about Amazon SWF service limits, see: Amazon SWF Service Limits (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// WorkflowExecutionRetentionPeriodInDays is a required field
 	WorkflowExecutionRetentionPeriodInDays *string `locationName:"workflowExecutionRetentionPeriodInDays" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDomainInput) GoString() string {
 	return s.String()
 }
@@ -10345,6 +12014,16 @@ func (s *RegisterDomainInput) Validate() error {
 	}
 	if s.WorkflowExecutionRetentionPeriodInDays != nil && len(*s.WorkflowExecutionRetentionPeriodInDays) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("WorkflowExecutionRetentionPeriodInDays", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10365,6 +12044,12 @@ func (s *RegisterDomainInput) SetName(v string) *RegisterDomainInput {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *RegisterDomainInput) SetTags(v []*ResourceTag) *RegisterDomainInput {
+	s.Tags = v
+	return s
+}
+
 // SetWorkflowExecutionRetentionPeriodInDays sets the WorkflowExecutionRetentionPeriodInDays field's value.
 func (s *RegisterDomainInput) SetWorkflowExecutionRetentionPeriodInDays(v string) *RegisterDomainInput {
 	s.WorkflowExecutionRetentionPeriodInDays = &v
@@ -10375,12 +12060,20 @@ type RegisterDomainOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDomainOutput) GoString() string {
 	return s.String()
 }
@@ -10392,7 +12085,7 @@ type RegisterWorkflowTypeInput struct {
 	// when a workflow execution of this type is terminated, by calling the TerminateWorkflowExecution
 	// action explicitly or due to an expired timeout. This default can be overridden
 	// when starting a workflow execution using the StartWorkflowExecution action
-	// or the StartChildWorkflowExecutionDecision.
+	// or the StartChildWorkflowExecution Decision.
 	//
 	// The supported child policies are:
 	//
@@ -10408,7 +12101,7 @@ type RegisterWorkflowTypeInput struct {
 
 	// If set, specifies the default maximum duration for executions of this workflow
 	// type. You can override this default when starting an execution through the
-	// StartWorkflowExecution Action or StartChildWorkflowExecutionDecision.
+	// StartWorkflowExecution Action or StartChildWorkflowExecution Decision.
 	//
 	// The duration is specified in seconds; an integer greater than or equal to
 	// 0. Unlike some of the other timeout parameters in Amazon SWF, you cannot
@@ -10421,15 +12114,15 @@ type RegisterWorkflowTypeInput struct {
 	//
 	// Executions of this workflow type need IAM roles to invoke Lambda functions.
 	// If you don't specify an IAM role when you start this workflow type, the default
-	// Lambda role is attached to the execution. For more information, see http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// Lambda role is attached to the execution. For more information, see https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultLambdaRole *string `locationName:"defaultLambdaRole" min:"1" type:"string"`
 
 	// If set, specifies the default task list to use for scheduling decision tasks
 	// for executions of this workflow type. This default is used only if a task
 	// list isn't provided when starting the execution through the StartWorkflowExecution
-	// Action or StartChildWorkflowExecutionDecision.
+	// Action or StartChildWorkflowExecution Decision.
 	DefaultTaskList *TaskList `locationName:"defaultTaskList" type:"structure"`
 
 	// The default task priority to assign to the workflow type. If not assigned,
@@ -10438,13 +12131,14 @@ type RegisterWorkflowTypeInput struct {
 	// higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string `locationName:"defaultTaskPriority" type:"string"`
 
 	// If set, specifies the default maximum duration of decision tasks for this
 	// workflow type. This default can be overridden when starting a workflow execution
-	// using the StartWorkflowExecution action or the StartChildWorkflowExecutionDecision.
+	// using the StartWorkflowExecution action or the StartChildWorkflowExecution
+	// Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -10460,9 +12154,9 @@ type RegisterWorkflowTypeInput struct {
 
 	// The name of the workflow type.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
@@ -10473,20 +12167,28 @@ type RegisterWorkflowTypeInput struct {
 	// must be unique within the domain. To get a list of all currently registered
 	// workflow types, use the ListWorkflowTypes action.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	//
 	// Version is a required field
 	Version *string `locationName:"version" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterWorkflowTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterWorkflowTypeInput) GoString() string {
 	return s.String()
 }
@@ -10591,35 +12293,43 @@ type RegisterWorkflowTypeOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterWorkflowTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterWorkflowTypeOutput) GoString() string {
 	return s.String()
 }
 
 // Provides the details of the RequestCancelActivityTask decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RequestCancelActivityTaskDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -10630,12 +12340,20 @@ type RequestCancelActivityTaskDecisionAttributes struct {
 	ActivityId *string `locationName:"activityId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelActivityTaskDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelActivityTaskDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -10676,7 +12394,7 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -10691,12 +12409,20 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 	DecisionTaskCompletedEventId *int64 `locationName:"decisionTaskCompletedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelActivityTaskFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelActivityTaskFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -10721,23 +12447,23 @@ func (s *RequestCancelActivityTaskFailedEventAttributes) SetDecisionTaskComplete
 
 // Provides the details of the RequestCancelExternalWorkflowExecution decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RequestCancelExternalWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -10755,12 +12481,20 @@ type RequestCancelExternalWorkflowExecutionDecisionAttributes struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelExternalWorkflowExecutionDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelExternalWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -10809,7 +12543,7 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -10845,12 +12579,20 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelExternalWorkflowExecutionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelExternalWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -10917,12 +12659,20 @@ type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -10968,12 +12718,20 @@ type RequestCancelWorkflowExecutionInput struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelWorkflowExecutionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelWorkflowExecutionInput) GoString() string {
 	return s.String()
 }
@@ -11022,14 +12780,85 @@ type RequestCancelWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelWorkflowExecutionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RequestCancelWorkflowExecutionOutput) GoString() string {
 	return s.String()
+}
+
+// Tags are key-value pairs that can be associated with Amazon SWF state machines
+// and activities.
+//
+// Tags may only contain unicode letters, digits, whitespace, or these symbols:
+// _ . : / = + - @.
+type ResourceTag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of a tag.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// The value of a tag.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceTag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceTag) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceTag) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ResourceTag"}
+	if s.Key == nil {
+		invalidParams.Add(request.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKey sets the Key field's value.
+func (s *ResourceTag) SetKey(v string) *ResourceTag {
+	s.Key = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *ResourceTag) SetValue(v string) *ResourceTag {
+	s.Value = &v
+	return s
 }
 
 type RespondActivityTaskCanceledInput struct {
@@ -11048,12 +12877,20 @@ type RespondActivityTaskCanceledInput struct {
 	TaskToken *string `locationName:"taskToken" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskCanceledInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskCanceledInput) GoString() string {
 	return s.String()
 }
@@ -11090,12 +12927,20 @@ type RespondActivityTaskCanceledOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskCanceledOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskCanceledOutput) GoString() string {
 	return s.String()
 }
@@ -11117,12 +12962,20 @@ type RespondActivityTaskCompletedInput struct {
 	TaskToken *string `locationName:"taskToken" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskCompletedInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskCompletedInput) GoString() string {
 	return s.String()
 }
@@ -11159,12 +13012,20 @@ type RespondActivityTaskCompletedOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskCompletedOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskCompletedOutput) GoString() string {
 	return s.String()
 }
@@ -11188,12 +13049,20 @@ type RespondActivityTaskFailedInput struct {
 	TaskToken *string `locationName:"taskToken" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskFailedInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskFailedInput) GoString() string {
 	return s.String()
 }
@@ -11236,12 +13105,20 @@ type RespondActivityTaskFailedOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskFailedOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondActivityTaskFailedOutput) GoString() string {
 	return s.String()
 }
@@ -11257,6 +13134,24 @@ type RespondDecisionTaskCompletedInput struct {
 	// User defined context to add to workflow execution.
 	ExecutionContext *string `locationName:"executionContext" type:"string"`
 
+	// The task list to use for the future decision tasks of this workflow execution.
+	// This list overrides the original task list you specified while starting the
+	// workflow execution.
+	TaskList *TaskList `locationName:"taskList" type:"structure"`
+
+	// Specifies a timeout (in seconds) for the task list override. When this parameter
+	// is missing, the task list override is permanent. This parameter makes it
+	// possible to temporarily override the task list. If a decision task scheduled
+	// on the override task list is not started within the timeout, the decision
+	// task will time out. Amazon SWF will revert the override and schedule a new
+	// decision task to the original task list.
+	//
+	// If a decision task scheduled on the override task list is started within
+	// the timeout, but not completed within the start-to-close timeout, Amazon
+	// SWF will also revert the override and schedule a new decision task to the
+	// original task list.
+	TaskListScheduleToStartTimeout *string `locationName:"taskListScheduleToStartTimeout" type:"string"`
+
 	// The taskToken from the DecisionTask.
 	//
 	// taskToken is generated by the service and should be treated as an opaque
@@ -11267,12 +13162,20 @@ type RespondDecisionTaskCompletedInput struct {
 	TaskToken *string `locationName:"taskToken" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondDecisionTaskCompletedInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondDecisionTaskCompletedInput) GoString() string {
 	return s.String()
 }
@@ -11296,6 +13199,11 @@ func (s *RespondDecisionTaskCompletedInput) Validate() error {
 			}
 		}
 	}
+	if s.TaskList != nil {
+		if err := s.TaskList.Validate(); err != nil {
+			invalidParams.AddNested("TaskList", err.(request.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11315,6 +13223,18 @@ func (s *RespondDecisionTaskCompletedInput) SetExecutionContext(v string) *Respo
 	return s
 }
 
+// SetTaskList sets the TaskList field's value.
+func (s *RespondDecisionTaskCompletedInput) SetTaskList(v *TaskList) *RespondDecisionTaskCompletedInput {
+	s.TaskList = v
+	return s
+}
+
+// SetTaskListScheduleToStartTimeout sets the TaskListScheduleToStartTimeout field's value.
+func (s *RespondDecisionTaskCompletedInput) SetTaskListScheduleToStartTimeout(v string) *RespondDecisionTaskCompletedInput {
+	s.TaskListScheduleToStartTimeout = &v
+	return s
+}
+
 // SetTaskToken sets the TaskToken field's value.
 func (s *RespondDecisionTaskCompletedInput) SetTaskToken(v string) *RespondDecisionTaskCompletedInput {
 	s.TaskToken = &v
@@ -11325,51 +13245,56 @@ type RespondDecisionTaskCompletedOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondDecisionTaskCompletedOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RespondDecisionTaskCompletedOutput) GoString() string {
 	return s.String()
 }
 
 // Provides the details of the ScheduleActivityTask decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// activityType.name – String constraint. The key is swf:activityType.name.
-//
-// activityType.version – String constraint. The key is swf:activityType.version.
-//
-// taskList – String constraint. The key is swf:taskList.name.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. activityType.name – String constraint. The key
+//     is swf:activityType.name. activityType.version – String constraint.
+//     The key is swf:activityType.version. taskList – String constraint. The
+//     key is swf:taskList.name.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type ScheduleActivityTaskDecisionAttributes struct {
 	_ struct{} `type:"structure"`
 
 	// The activityId of the activity task.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	//
 	// ActivityId is a required field
 	ActivityId *string `locationName:"activityId" min:"1" type:"string" required:"true"`
@@ -11443,9 +13368,9 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	// nor a default task list was specified at registration time then a fault is
 	// returned.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	TaskList *TaskList `locationName:"taskList" type:"structure"`
 
 	// If set, specifies the priority with which the activity task is to be assigned
@@ -11455,17 +13380,25 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	// Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScheduleActivityTaskDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScheduleActivityTaskDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -11578,7 +13511,7 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -11593,12 +13526,20 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	DecisionTaskCompletedEventId *int64 `locationName:"decisionTaskCompletedEventId" type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScheduleActivityTaskFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScheduleActivityTaskFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -11650,17 +13591,26 @@ type ScheduleLambdaFunctionDecisionAttributes struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The timeout value, in seconds, after which the Lambda function is considered
-	// to be failed once it has started. This can be any integer from 1-300 (1s-5m).
-	// If no value is supplied, than a default value of 300s is assumed.
+	// to be failed once it has started. This can be any integer from 1-900 (1s-15m).
+	//
+	// If no value is supplied, then a default value of 900s is assumed.
 	StartToCloseTimeout *string `locationName:"startToCloseTimeout" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScheduleLambdaFunctionDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScheduleLambdaFunctionDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -11727,7 +13677,7 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -11751,12 +13701,20 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScheduleLambdaFunctionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScheduleLambdaFunctionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -11787,23 +13745,23 @@ func (s *ScheduleLambdaFunctionFailedEventAttributes) SetName(v string) *Schedul
 
 // Provides the details of the SignalExternalWorkflowExecution decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type SignalExternalWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -11831,12 +13789,20 @@ type SignalExternalWorkflowExecutionDecisionAttributes struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalExternalWorkflowExecutionDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalExternalWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -11902,7 +13868,7 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -11939,12 +13905,20 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalExternalWorkflowExecutionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalExternalWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -12018,12 +13992,20 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalExternalWorkflowExecutionInitiatedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalExternalWorkflowExecutionInitiatedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -12090,12 +14072,20 @@ type SignalWorkflowExecutionInput struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalWorkflowExecutionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalWorkflowExecutionInput) GoString() string {
 	return s.String()
 }
@@ -12162,45 +14152,48 @@ type SignalWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalWorkflowExecutionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SignalWorkflowExecutionOutput) GoString() string {
 	return s.String()
 }
 
 // Provides the details of the StartChildWorkflowExecution decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// tagList.member.N – The key is "swf:tagList.N" where N is the tag number from
-//    0 to 4, inclusive.
-//
-// taskList – String constraint. The key is swf:taskList.name.
-//
-// workflowType.name – String constraint. The key is swf:workflowType.name.
-//
-// workflowType.version – String constraint. The key is swf:workflowType.version.
+//   - Constrain the following parameters by using a Condition element with
+//     the appropriate keys. tagList.member.N – The key is "swf:tagList.N"
+//     where N is the tag number from 0 to 4, inclusive. taskList – String
+//     constraint. The key is swf:taskList.name. workflowType.name – String
+//     constraint. The key is swf:workflowType.name. workflowType.version –
+//     String constraint. The key is swf:workflowType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type StartChildWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -12265,7 +14258,7 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	//
 	// The specified string must not start or end with whitespace. It must not contain
 	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// | \u007f-\u009f). Also, it must not be the literal string arn.
 	TaskList *TaskList `locationName:"taskList" type:"structure"`
 
 	// A task priority that, if set, specifies the priority for a decision task
@@ -12275,7 +14268,7 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -12294,9 +14287,9 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 
 	// The workflowId of the workflow execution.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	//
 	// WorkflowId is a required field
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
@@ -12307,12 +14300,20 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartChildWorkflowExecutionDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartChildWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -12424,7 +14425,7 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	//
 	// When cause is set to OPERATION_NOT_PERMITTED, the decision fails because
 	// it lacks sufficient permissions. For details and example IAM policies, see
-	//  Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -12435,7 +14436,7 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	Control *string `locationName:"control" type:"string"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the StartChildWorkflowExecutionDecision to request this
+	// that resulted in the StartChildWorkflowExecution Decision to request this
 	// child workflow execution. This information can be useful for diagnosing problems
 	// by tracing back the chain of events.
 	//
@@ -12443,9 +14444,10 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	DecisionTaskCompletedEventId *int64 `locationName:"decisionTaskCompletedEventId" type:"long" required:"true"`
 
 	// When the cause is WORKFLOW_ALREADY_RUNNING, initiatedEventId is the ID of
-	// the StartChildWorkflowExecutionInitiated event that corresponds to the StartChildWorkflowExecutionDecision
-	// to start the workflow execution. You can use this information to diagnose
-	// problems by tracing back the chain of events leading up to this event.
+	// the StartChildWorkflowExecutionInitiated event that corresponds to the StartChildWorkflowExecution
+	// Decision to start the workflow execution. You can use this information to
+	// diagnose problems by tracing back the chain of events leading up to this
+	// event.
 	//
 	// When the cause isn't WORKFLOW_ALREADY_RUNNING, initiatedEventId is set to
 	// 0 because the StartChildWorkflowExecutionInitiated event doesn't exist.
@@ -12458,19 +14460,27 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	// WorkflowId is a required field
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 
-	// The workflow type provided in the StartChildWorkflowExecutionDecision that
+	// The workflow type provided in the StartChildWorkflowExecution Decision that
 	// failed.
 	//
 	// WorkflowType is a required field
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartChildWorkflowExecutionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartChildWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -12538,7 +14548,7 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	Control *string `locationName:"control" type:"string"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the StartChildWorkflowExecutionDecision to request this
+	// that resulted in the StartChildWorkflowExecution Decision to request this
 	// child workflow execution. This information can be useful for diagnosing problems
 	// by tracing back the cause of events.
 	//
@@ -12572,7 +14582,7 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -12593,12 +14603,20 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartChildWorkflowExecutionInitiatedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartChildWorkflowExecutionInitiatedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -12685,7 +14703,7 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because the
 	// IAM role attached to the execution lacked sufficient permissions. For details
-	// and example IAM policies, see Lambda Tasks (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// and example IAM policies, see Lambda Tasks (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	Cause *string `locationName:"cause" type:"string" enum:"StartLambdaFunctionFailedCause"`
 
@@ -12698,12 +14716,20 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	ScheduledEventId *int64 `locationName:"scheduledEventId" type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartLambdaFunctionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartLambdaFunctionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -12728,23 +14754,23 @@ func (s *StartLambdaFunctionFailedEventAttributes) SetScheduledEventId(v int64) 
 
 // Provides the details of the StartTimer decision.
 //
-// Access Control
+// # Access Control
 //
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//    * Use a Resource element with the domain name to limit the action to only
-//    specified domains.
+//   - Use a Resource element with the domain name to limit the action to only
+//     specified domains.
 //
-//    * Use an Action element to allow or deny permission to call this action.
+//   - Use an Action element to allow or deny permission to call this action.
 //
-//    * You cannot use an IAM policy to constrain this action's parameters.
+//   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type StartTimerDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -12763,20 +14789,28 @@ type StartTimerDecisionAttributes struct {
 
 	// The unique ID of the timer.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	//
 	// TimerId is a required field
 	TimerId *string `locationName:"timerId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartTimerDecisionAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartTimerDecisionAttributes) GoString() string {
 	return s.String()
 }
@@ -12830,7 +14864,7 @@ type StartTimerFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -12850,12 +14884,20 @@ type StartTimerFailedEventAttributes struct {
 	TimerId *string `locationName:"timerId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartTimerFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartTimerFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -12905,6 +14947,10 @@ type StartWorkflowExecutionInput struct {
 
 	// The name of the domain in which the workflow execution is created.
 	//
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
+	//
 	// Domain is a required field
 	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
 
@@ -12933,8 +14979,8 @@ type StartWorkflowExecutionInput struct {
 	// Executions of this workflow type need IAM roles to invoke Lambda functions.
 	// If you don't attach an IAM role, any attempt to schedule a Lambda task fails.
 	// This results in a ScheduleLambdaFunctionFailed history event. For more information,
-	// see http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// see https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	LambdaRole *string `locationName:"lambdaRole" min:"1" type:"string"`
 
@@ -12953,9 +14999,9 @@ type StartWorkflowExecutionInput struct {
 	// is set nor a default task list was specified at registration time then a
 	// fault is returned.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	TaskList *TaskList `locationName:"taskList" type:"structure"`
 
 	// The task priority to use for this workflow execution. This overrides any
@@ -12965,7 +15011,7 @@ type StartWorkflowExecutionInput struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -12986,11 +15032,11 @@ type StartWorkflowExecutionInput struct {
 	// use this to associate a custom identifier with the workflow execution. You
 	// may specify the same identifier if a workflow execution is logically a restart
 	// of a previous execution. You cannot have two open workflow executions with
-	// the same workflowId at the same time.
+	// the same workflowId at the same time within the same domain.
 	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// The specified string must not contain a : (colon), / (slash), | (vertical
+	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it
+	// must not be the literal string arn.
 	//
 	// WorkflowId is a required field
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
@@ -13001,12 +15047,20 @@ type StartWorkflowExecutionInput struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartWorkflowExecutionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartWorkflowExecutionInput) GoString() string {
 	return s.String()
 }
@@ -13124,12 +15178,20 @@ type StartWorkflowExecutionOutput struct {
 	RunId *string `locationName:"runId" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartWorkflowExecutionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartWorkflowExecutionOutput) GoString() string {
 	return s.String()
 }
@@ -13147,16 +15209,27 @@ type TagFilter struct {
 	// Specifies the tag that must be associated with the execution for it to meet
 	// the filter criteria.
 	//
+	// Tags may only contain unicode letters, digits, whitespace, or these symbols:
+	// _ . : / = + - @.
+	//
 	// Tag is a required field
 	Tag *string `locationName:"tag" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagFilter) GoString() string {
 	return s.String()
 }
@@ -13180,6 +15253,104 @@ func (s *TagFilter) SetTag(v string) *TagFilter {
 	return s
 }
 
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for the Amazon SWF domain.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
+
+	// The list of tags to add to a domain.
+	//
+	// Tags may only contain unicode letters, digits, whitespace, or these symbols:
+	// _ . : / = + - @.
+	//
+	// Tags is a required field
+	Tags []*ResourceTag `locationName:"tags" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+	if s.Tags == nil {
+		invalidParams.Add(request.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *TagResourceInput) SetTags(v []*ResourceTag) *TagResourceInput {
+	s.Tags = v
+	return s
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
 // Represents a task list.
 type TaskList struct {
 	_ struct{} `type:"structure"`
@@ -13190,12 +15361,20 @@ type TaskList struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TaskList) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TaskList) GoString() string {
 	return s.String()
 }
@@ -13267,12 +15446,20 @@ type TerminateWorkflowExecutionInput struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateWorkflowExecutionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateWorkflowExecutionInput) GoString() string {
 	return s.String()
 }
@@ -13339,12 +15526,20 @@ type TerminateWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateWorkflowExecutionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateWorkflowExecutionOutput) GoString() string {
 	return s.String()
 }
@@ -13374,12 +15569,20 @@ type TimerCanceledEventAttributes struct {
 	TimerId *string `locationName:"timerId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimerCanceledEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimerCanceledEventAttributes) GoString() string {
 	return s.String()
 }
@@ -13419,12 +15622,20 @@ type TimerFiredEventAttributes struct {
 	TimerId *string `locationName:"timerId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimerFiredEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimerFiredEventAttributes) GoString() string {
 	return s.String()
 }
@@ -13471,12 +15682,20 @@ type TimerStartedEventAttributes struct {
 	TimerId *string `locationName:"timerId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimerStartedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimerStartedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -13505,6 +15724,605 @@ func (s *TimerStartedEventAttributes) SetTimerId(v string) *TimerStartedEventAtt
 	return s
 }
 
+// You've exceeded the number of tags allowed for a domain.
+type TooManyTagsFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyTagsFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyTagsFault) GoString() string {
+	return s.String()
+}
+
+func newErrorTooManyTagsFault(v protocol.ResponseMetadata) error {
+	return &TooManyTagsFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TooManyTagsFault) Code() string {
+	return "TooManyTagsFault"
+}
+
+// Message returns the exception's message.
+func (s *TooManyTagsFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TooManyTagsFault) OrigErr() error {
+	return nil
+}
+
+func (s *TooManyTagsFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TooManyTagsFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TooManyTagsFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Returned if the type already exists in the specified domain. You may get
+// this fault if you are registering a type that is either already registered
+// or deprecated, or if you undeprecate a type that is currently registered.
+type TypeAlreadyExistsFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A description that may help with diagnosing the cause of the fault.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TypeAlreadyExistsFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TypeAlreadyExistsFault) GoString() string {
+	return s.String()
+}
+
+func newErrorTypeAlreadyExistsFault(v protocol.ResponseMetadata) error {
+	return &TypeAlreadyExistsFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TypeAlreadyExistsFault) Code() string {
+	return "TypeAlreadyExistsFault"
+}
+
+// Message returns the exception's message.
+func (s *TypeAlreadyExistsFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TypeAlreadyExistsFault) OrigErr() error {
+	return nil
+}
+
+func (s *TypeAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TypeAlreadyExistsFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TypeAlreadyExistsFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Returned when the specified activity or workflow type was already deprecated.
+type TypeDeprecatedFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A description that may help with diagnosing the cause of the fault.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TypeDeprecatedFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TypeDeprecatedFault) GoString() string {
+	return s.String()
+}
+
+func newErrorTypeDeprecatedFault(v protocol.ResponseMetadata) error {
+	return &TypeDeprecatedFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TypeDeprecatedFault) Code() string {
+	return "TypeDeprecatedFault"
+}
+
+// Message returns the exception's message.
+func (s *TypeDeprecatedFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TypeDeprecatedFault) OrigErr() error {
+	return nil
+}
+
+func (s *TypeDeprecatedFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TypeDeprecatedFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TypeDeprecatedFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type UndeprecateActivityTypeInput struct {
+	_ struct{} `type:"structure"`
+
+	// The activity type to undeprecate.
+	//
+	// ActivityType is a required field
+	ActivityType *ActivityType `locationName:"activityType" type:"structure" required:"true"`
+
+	// The name of the domain of the deprecated activity type.
+	//
+	// Domain is a required field
+	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateActivityTypeInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateActivityTypeInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UndeprecateActivityTypeInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UndeprecateActivityTypeInput"}
+	if s.ActivityType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActivityType"))
+	}
+	if s.Domain == nil {
+		invalidParams.Add(request.NewErrParamRequired("Domain"))
+	}
+	if s.Domain != nil && len(*s.Domain) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+	}
+	if s.ActivityType != nil {
+		if err := s.ActivityType.Validate(); err != nil {
+			invalidParams.AddNested("ActivityType", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetActivityType sets the ActivityType field's value.
+func (s *UndeprecateActivityTypeInput) SetActivityType(v *ActivityType) *UndeprecateActivityTypeInput {
+	s.ActivityType = v
+	return s
+}
+
+// SetDomain sets the Domain field's value.
+func (s *UndeprecateActivityTypeInput) SetDomain(v string) *UndeprecateActivityTypeInput {
+	s.Domain = &v
+	return s
+}
+
+type UndeprecateActivityTypeOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateActivityTypeOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateActivityTypeOutput) GoString() string {
+	return s.String()
+}
+
+type UndeprecateDomainInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain of the deprecated workflow type.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateDomainInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateDomainInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UndeprecateDomainInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UndeprecateDomainInput"}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetName sets the Name field's value.
+func (s *UndeprecateDomainInput) SetName(v string) *UndeprecateDomainInput {
+	s.Name = &v
+	return s
+}
+
+type UndeprecateDomainOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateDomainOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateDomainOutput) GoString() string {
+	return s.String()
+}
+
+type UndeprecateWorkflowTypeInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain of the deprecated workflow type.
+	//
+	// Domain is a required field
+	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
+
+	// The name of the domain of the deprecated workflow type.
+	//
+	// WorkflowType is a required field
+	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateWorkflowTypeInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateWorkflowTypeInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UndeprecateWorkflowTypeInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UndeprecateWorkflowTypeInput"}
+	if s.Domain == nil {
+		invalidParams.Add(request.NewErrParamRequired("Domain"))
+	}
+	if s.Domain != nil && len(*s.Domain) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+	}
+	if s.WorkflowType == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkflowType"))
+	}
+	if s.WorkflowType != nil {
+		if err := s.WorkflowType.Validate(); err != nil {
+			invalidParams.AddNested("WorkflowType", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDomain sets the Domain field's value.
+func (s *UndeprecateWorkflowTypeInput) SetDomain(v string) *UndeprecateWorkflowTypeInput {
+	s.Domain = &v
+	return s
+}
+
+// SetWorkflowType sets the WorkflowType field's value.
+func (s *UndeprecateWorkflowTypeInput) SetWorkflowType(v *WorkflowType) *UndeprecateWorkflowTypeInput {
+	s.WorkflowType = v
+	return s
+}
+
+type UndeprecateWorkflowTypeOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateWorkflowTypeOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UndeprecateWorkflowTypeOutput) GoString() string {
+	return s.String()
+}
+
+// Returned when the named resource cannot be found with in the scope of this
+// operation (region or domain). This could happen if the named resource was
+// never created or is no longer available for this operation.
+type UnknownResourceFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A description that may help with diagnosing the cause of the fault.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnknownResourceFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnknownResourceFault) GoString() string {
+	return s.String()
+}
+
+func newErrorUnknownResourceFault(v protocol.ResponseMetadata) error {
+	return &UnknownResourceFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnknownResourceFault) Code() string {
+	return "UnknownResourceFault"
+}
+
+// Message returns the exception's message.
+func (s *UnknownResourceFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnknownResourceFault) OrigErr() error {
+	return nil
+}
+
+func (s *UnknownResourceFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnknownResourceFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnknownResourceFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for the Amazon SWF domain.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
+
+	// The list of tags to remove from the Amazon SWF domain.
+	//
+	// TagKeys is a required field
+	TagKeys []*string `locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+	if s.TagKeys == nil {
+		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTagKeys sets the TagKeys field's value.
+func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+	s.TagKeys = v
+	return s
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
 // Represents a workflow execution.
 type WorkflowExecution struct {
 	_ struct{} `type:"structure"`
@@ -13520,12 +16338,20 @@ type WorkflowExecution struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecution) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecution) GoString() string {
 	return s.String()
 }
@@ -13564,6 +16390,72 @@ func (s *WorkflowExecution) SetWorkflowId(v string) *WorkflowExecution {
 	return s
 }
 
+// Returned by StartWorkflowExecution when an open execution with the same workflowId
+// is already running in the specified domain.
+type WorkflowExecutionAlreadyStartedFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A description that may help with diagnosing the cause of the fault.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkflowExecutionAlreadyStartedFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkflowExecutionAlreadyStartedFault) GoString() string {
+	return s.String()
+}
+
+func newErrorWorkflowExecutionAlreadyStartedFault(v protocol.ResponseMetadata) error {
+	return &WorkflowExecutionAlreadyStartedFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *WorkflowExecutionAlreadyStartedFault) Code() string {
+	return "WorkflowExecutionAlreadyStartedFault"
+}
+
+// Message returns the exception's message.
+func (s *WorkflowExecutionAlreadyStartedFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *WorkflowExecutionAlreadyStartedFault) OrigErr() error {
+	return nil
+}
+
+func (s *WorkflowExecutionAlreadyStartedFault) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *WorkflowExecutionAlreadyStartedFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *WorkflowExecutionAlreadyStartedFault) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Provides the details of the WorkflowExecutionCancelRequested event.
 type WorkflowExecutionCancelRequestedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -13584,12 +16476,20 @@ type WorkflowExecutionCancelRequestedEventAttributes struct {
 	ExternalWorkflowExecution *WorkflowExecution `locationName:"externalWorkflowExecution" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionCancelRequestedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionCancelRequestedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -13628,12 +16528,20 @@ type WorkflowExecutionCanceledEventAttributes struct {
 	Details *string `locationName:"details" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionCanceledEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionCanceledEventAttributes) GoString() string {
 	return s.String()
 }
@@ -13666,12 +16574,20 @@ type WorkflowExecutionCompletedEventAttributes struct {
 	Result *string `locationName:"result" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionCompletedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionCompletedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -13734,7 +16650,7 @@ type WorkflowExecutionConfiguration struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -13747,12 +16663,20 @@ type WorkflowExecutionConfiguration struct {
 	TaskStartToCloseTimeout *string `locationName:"taskStartToCloseTimeout" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionConfiguration) GoString() string {
 	return s.String()
 }
@@ -13864,12 +16788,20 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionContinuedAsNewEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionContinuedAsNewEventAttributes) GoString() string {
 	return s.String()
 }
@@ -13955,12 +16887,20 @@ type WorkflowExecutionCount struct {
 	Truncated *bool `locationName:"truncated" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionCount) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionCount) GoString() string {
 	return s.String()
 }
@@ -13996,12 +16936,20 @@ type WorkflowExecutionFailedEventAttributes struct {
 	Reason *string `locationName:"reason" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionFailedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -14034,12 +16982,20 @@ type WorkflowExecutionFilter struct {
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionFilter) GoString() string {
 	return s.String()
 }
@@ -14085,8 +17041,8 @@ type WorkflowExecutionInfo struct {
 	//
 	//    * FAILED – the execution failed to complete.
 	//
-	//    * TIMED_OUT – the execution did not complete in the alloted time and was
-	//    automatically timed out.
+	//    * TIMED_OUT – the execution did not complete in the alloted time and
+	//    was automatically timed out.
 	//
 	//    * CONTINUED_AS_NEW – the execution is logically continued. This means
 	//    the current execution was completed and a new execution was started to
@@ -14127,12 +17083,20 @@ type WorkflowExecutionInfo struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionInfo) GoString() string {
 	return s.String()
 }
@@ -14209,12 +17173,20 @@ type WorkflowExecutionInfos struct {
 	NextPageToken *string `locationName:"nextPageToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionInfos) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionInfos) GoString() string {
 	return s.String()
 }
@@ -14262,12 +17234,20 @@ type WorkflowExecutionOpenCounts struct {
 	OpenTimers *int64 `locationName:"openTimers" type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionOpenCounts) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionOpenCounts) GoString() string {
 	return s.String()
 }
@@ -14329,12 +17309,20 @@ type WorkflowExecutionSignaledEventAttributes struct {
 	SignalName *string `locationName:"signalName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionSignaledEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionSignaledEventAttributes) GoString() string {
 	return s.String()
 }
@@ -14403,7 +17391,7 @@ type WorkflowExecutionStartedEventAttributes struct {
 	LambdaRole *string `locationName:"lambdaRole" min:"1" type:"string"`
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to
-	// the StartChildWorkflowExecutionDecision to start this workflow execution.
+	// the StartChildWorkflowExecution Decision to start this workflow execution.
 	// The source event with this ID can be found in the history of the source workflow
 	// execution. This information can be useful for diagnosing problems by tracing
 	// back the chain of events leading up to this event.
@@ -14438,12 +17426,20 @@ type WorkflowExecutionStartedEventAttributes struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionStartedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionStartedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -14552,12 +17548,20 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 	Reason *string `locationName:"reason" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionTerminatedEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionTerminatedEventAttributes) GoString() string {
 	return s.String()
 }
@@ -14612,12 +17616,20 @@ type WorkflowExecutionTimedOutEventAttributes struct {
 	TimeoutType *string `locationName:"timeoutType" type:"string" required:"true" enum:"WorkflowExecutionTimeoutType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionTimedOutEventAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowExecutionTimedOutEventAttributes) GoString() string {
 	return s.String()
 }
@@ -14655,12 +17667,20 @@ type WorkflowType struct {
 	Version *string `locationName:"version" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowType) GoString() string {
 	return s.String()
 }
@@ -14707,7 +17727,7 @@ type WorkflowTypeConfiguration struct {
 	// execution of this type is terminated, by calling the TerminateWorkflowExecution
 	// action explicitly or due to an expired timeout. This default can be overridden
 	// when starting a workflow execution using the StartWorkflowExecution action
-	// or the StartChildWorkflowExecutionDecision.
+	// or the StartChildWorkflowExecution Decision.
 	//
 	// The supported child policies are:
 	//
@@ -14724,7 +17744,7 @@ type WorkflowTypeConfiguration struct {
 	// The default maximum duration, specified when registering the workflow type,
 	// for executions of this workflow type. This default can be overridden when
 	// starting a workflow execution using the StartWorkflowExecution action or
-	// the StartChildWorkflowExecutionDecision.
+	// the StartChildWorkflowExecution Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -14734,15 +17754,15 @@ type WorkflowTypeConfiguration struct {
 	//
 	// Executions of this workflow type need IAM roles to invoke Lambda functions.
 	// If you don't specify an IAM role when starting this workflow type, the default
-	// Lambda role is attached to the execution. For more information, see http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// Lambda role is attached to the execution. For more information, see https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultLambdaRole *string `locationName:"defaultLambdaRole" min:"1" type:"string"`
 
 	// The default task list, specified when registering the workflow type, for
 	// decisions tasks scheduled for workflow executions of this type. This default
 	// can be overridden when starting a workflow execution using the StartWorkflowExecution
-	// action or the StartChildWorkflowExecutionDecision.
+	// action or the StartChildWorkflowExecution Decision.
 	DefaultTaskList *TaskList `locationName:"defaultTaskList" type:"structure"`
 
 	// The default task priority, specified when registering the workflow type,
@@ -14754,7 +17774,7 @@ type WorkflowTypeConfiguration struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string `locationName:"defaultTaskPriority" type:"string"`
 
@@ -14764,19 +17784,27 @@ type WorkflowTypeConfiguration struct {
 	// time then the task is automatically timed out and rescheduled. If the decider
 	// eventually reports a completion or failure, it is ignored. This default can
 	// be overridden when starting a workflow execution using the StartWorkflowExecution
-	// action or the StartChildWorkflowExecutionDecision.
+	// action or the StartChildWorkflowExecution Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
 	DefaultTaskStartToCloseTimeout *string `locationName:"defaultTaskStartToCloseTimeout" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowTypeConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowTypeConfiguration) GoString() string {
 	return s.String()
 }
@@ -14831,12 +17859,20 @@ type WorkflowTypeFilter struct {
 	Version *string `locationName:"version" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowTypeFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowTypeFilter) GoString() string {
 	return s.String()
 }
@@ -14896,12 +17932,20 @@ type WorkflowTypeInfo struct {
 	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowTypeInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkflowTypeInfo) GoString() string {
 	return s.String()
 }
@@ -14950,6 +17994,16 @@ const (
 	ActivityTaskTimeoutTypeHeartbeat = "HEARTBEAT"
 )
 
+// ActivityTaskTimeoutType_Values returns all elements of the ActivityTaskTimeoutType enum
+func ActivityTaskTimeoutType_Values() []string {
+	return []string{
+		ActivityTaskTimeoutTypeStartToClose,
+		ActivityTaskTimeoutTypeScheduleToStart,
+		ActivityTaskTimeoutTypeScheduleToClose,
+		ActivityTaskTimeoutTypeHeartbeat,
+	}
+}
+
 const (
 	// CancelTimerFailedCauseTimerIdUnknown is a CancelTimerFailedCause enum value
 	CancelTimerFailedCauseTimerIdUnknown = "TIMER_ID_UNKNOWN"
@@ -14958,6 +18012,14 @@ const (
 	CancelTimerFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
 
+// CancelTimerFailedCause_Values returns all elements of the CancelTimerFailedCause enum
+func CancelTimerFailedCause_Values() []string {
+	return []string{
+		CancelTimerFailedCauseTimerIdUnknown,
+		CancelTimerFailedCauseOperationNotPermitted,
+	}
+}
+
 const (
 	// CancelWorkflowExecutionFailedCauseUnhandledDecision is a CancelWorkflowExecutionFailedCause enum value
 	CancelWorkflowExecutionFailedCauseUnhandledDecision = "UNHANDLED_DECISION"
@@ -14965,6 +18027,14 @@ const (
 	// CancelWorkflowExecutionFailedCauseOperationNotPermitted is a CancelWorkflowExecutionFailedCause enum value
 	CancelWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
+
+// CancelWorkflowExecutionFailedCause_Values returns all elements of the CancelWorkflowExecutionFailedCause enum
+func CancelWorkflowExecutionFailedCause_Values() []string {
+	return []string{
+		CancelWorkflowExecutionFailedCauseUnhandledDecision,
+		CancelWorkflowExecutionFailedCauseOperationNotPermitted,
+	}
+}
 
 const (
 	// ChildPolicyTerminate is a ChildPolicy enum value
@@ -14976,6 +18046,15 @@ const (
 	// ChildPolicyAbandon is a ChildPolicy enum value
 	ChildPolicyAbandon = "ABANDON"
 )
+
+// ChildPolicy_Values returns all elements of the ChildPolicy enum
+func ChildPolicy_Values() []string {
+	return []string{
+		ChildPolicyTerminate,
+		ChildPolicyRequestCancel,
+		ChildPolicyAbandon,
+	}
+}
 
 const (
 	// CloseStatusCompleted is a CloseStatus enum value
@@ -14997,6 +18076,18 @@ const (
 	CloseStatusTimedOut = "TIMED_OUT"
 )
 
+// CloseStatus_Values returns all elements of the CloseStatus enum
+func CloseStatus_Values() []string {
+	return []string{
+		CloseStatusCompleted,
+		CloseStatusFailed,
+		CloseStatusCanceled,
+		CloseStatusTerminated,
+		CloseStatusContinuedAsNew,
+		CloseStatusTimedOut,
+	}
+}
+
 const (
 	// CompleteWorkflowExecutionFailedCauseUnhandledDecision is a CompleteWorkflowExecutionFailedCause enum value
 	CompleteWorkflowExecutionFailedCauseUnhandledDecision = "UNHANDLED_DECISION"
@@ -15004,6 +18095,14 @@ const (
 	// CompleteWorkflowExecutionFailedCauseOperationNotPermitted is a CompleteWorkflowExecutionFailedCause enum value
 	CompleteWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
+
+// CompleteWorkflowExecutionFailedCause_Values returns all elements of the CompleteWorkflowExecutionFailedCause enum
+func CompleteWorkflowExecutionFailedCause_Values() []string {
+	return []string{
+		CompleteWorkflowExecutionFailedCauseUnhandledDecision,
+		CompleteWorkflowExecutionFailedCauseOperationNotPermitted,
+	}
+}
 
 const (
 	// ContinueAsNewWorkflowExecutionFailedCauseUnhandledDecision is a ContinueAsNewWorkflowExecutionFailedCause enum value
@@ -15034,10 +18133,36 @@ const (
 	ContinueAsNewWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
 
+// ContinueAsNewWorkflowExecutionFailedCause_Values returns all elements of the ContinueAsNewWorkflowExecutionFailedCause enum
+func ContinueAsNewWorkflowExecutionFailedCause_Values() []string {
+	return []string{
+		ContinueAsNewWorkflowExecutionFailedCauseUnhandledDecision,
+		ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDeprecated,
+		ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist,
+		ContinueAsNewWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined,
+		ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined,
+		ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskListUndefined,
+		ContinueAsNewWorkflowExecutionFailedCauseDefaultChildPolicyUndefined,
+		ContinueAsNewWorkflowExecutionFailedCauseContinueAsNewWorkflowExecutionRateExceeded,
+		ContinueAsNewWorkflowExecutionFailedCauseOperationNotPermitted,
+	}
+}
+
 const (
 	// DecisionTaskTimeoutTypeStartToClose is a DecisionTaskTimeoutType enum value
 	DecisionTaskTimeoutTypeStartToClose = "START_TO_CLOSE"
+
+	// DecisionTaskTimeoutTypeScheduleToStart is a DecisionTaskTimeoutType enum value
+	DecisionTaskTimeoutTypeScheduleToStart = "SCHEDULE_TO_START"
 )
+
+// DecisionTaskTimeoutType_Values returns all elements of the DecisionTaskTimeoutType enum
+func DecisionTaskTimeoutType_Values() []string {
+	return []string{
+		DecisionTaskTimeoutTypeStartToClose,
+		DecisionTaskTimeoutTypeScheduleToStart,
+	}
+}
 
 const (
 	// DecisionTypeScheduleActivityTask is a DecisionType enum value
@@ -15079,6 +18204,25 @@ const (
 	// DecisionTypeScheduleLambdaFunction is a DecisionType enum value
 	DecisionTypeScheduleLambdaFunction = "ScheduleLambdaFunction"
 )
+
+// DecisionType_Values returns all elements of the DecisionType enum
+func DecisionType_Values() []string {
+	return []string{
+		DecisionTypeScheduleActivityTask,
+		DecisionTypeRequestCancelActivityTask,
+		DecisionTypeCompleteWorkflowExecution,
+		DecisionTypeFailWorkflowExecution,
+		DecisionTypeCancelWorkflowExecution,
+		DecisionTypeContinueAsNewWorkflowExecution,
+		DecisionTypeRecordMarker,
+		DecisionTypeStartTimer,
+		DecisionTypeCancelTimer,
+		DecisionTypeSignalExternalWorkflowExecution,
+		DecisionTypeRequestCancelExternalWorkflowExecution,
+		DecisionTypeStartChildWorkflowExecution,
+		DecisionTypeScheduleLambdaFunction,
+	}
+}
 
 const (
 	// EventTypeWorkflowExecutionStarted is a EventType enum value
@@ -15244,6 +18388,66 @@ const (
 	EventTypeStartLambdaFunctionFailed = "StartLambdaFunctionFailed"
 )
 
+// EventType_Values returns all elements of the EventType enum
+func EventType_Values() []string {
+	return []string{
+		EventTypeWorkflowExecutionStarted,
+		EventTypeWorkflowExecutionCancelRequested,
+		EventTypeWorkflowExecutionCompleted,
+		EventTypeCompleteWorkflowExecutionFailed,
+		EventTypeWorkflowExecutionFailed,
+		EventTypeFailWorkflowExecutionFailed,
+		EventTypeWorkflowExecutionTimedOut,
+		EventTypeWorkflowExecutionCanceled,
+		EventTypeCancelWorkflowExecutionFailed,
+		EventTypeWorkflowExecutionContinuedAsNew,
+		EventTypeContinueAsNewWorkflowExecutionFailed,
+		EventTypeWorkflowExecutionTerminated,
+		EventTypeDecisionTaskScheduled,
+		EventTypeDecisionTaskStarted,
+		EventTypeDecisionTaskCompleted,
+		EventTypeDecisionTaskTimedOut,
+		EventTypeActivityTaskScheduled,
+		EventTypeScheduleActivityTaskFailed,
+		EventTypeActivityTaskStarted,
+		EventTypeActivityTaskCompleted,
+		EventTypeActivityTaskFailed,
+		EventTypeActivityTaskTimedOut,
+		EventTypeActivityTaskCanceled,
+		EventTypeActivityTaskCancelRequested,
+		EventTypeRequestCancelActivityTaskFailed,
+		EventTypeWorkflowExecutionSignaled,
+		EventTypeMarkerRecorded,
+		EventTypeRecordMarkerFailed,
+		EventTypeTimerStarted,
+		EventTypeStartTimerFailed,
+		EventTypeTimerFired,
+		EventTypeTimerCanceled,
+		EventTypeCancelTimerFailed,
+		EventTypeStartChildWorkflowExecutionInitiated,
+		EventTypeStartChildWorkflowExecutionFailed,
+		EventTypeChildWorkflowExecutionStarted,
+		EventTypeChildWorkflowExecutionCompleted,
+		EventTypeChildWorkflowExecutionFailed,
+		EventTypeChildWorkflowExecutionTimedOut,
+		EventTypeChildWorkflowExecutionCanceled,
+		EventTypeChildWorkflowExecutionTerminated,
+		EventTypeSignalExternalWorkflowExecutionInitiated,
+		EventTypeSignalExternalWorkflowExecutionFailed,
+		EventTypeExternalWorkflowExecutionSignaled,
+		EventTypeRequestCancelExternalWorkflowExecutionInitiated,
+		EventTypeRequestCancelExternalWorkflowExecutionFailed,
+		EventTypeExternalWorkflowExecutionCancelRequested,
+		EventTypeLambdaFunctionScheduled,
+		EventTypeLambdaFunctionStarted,
+		EventTypeLambdaFunctionCompleted,
+		EventTypeLambdaFunctionFailed,
+		EventTypeLambdaFunctionTimedOut,
+		EventTypeScheduleLambdaFunctionFailed,
+		EventTypeStartLambdaFunctionFailed,
+	}
+}
+
 const (
 	// ExecutionStatusOpen is a ExecutionStatus enum value
 	ExecutionStatusOpen = "OPEN"
@@ -15251,6 +18455,14 @@ const (
 	// ExecutionStatusClosed is a ExecutionStatus enum value
 	ExecutionStatusClosed = "CLOSED"
 )
+
+// ExecutionStatus_Values returns all elements of the ExecutionStatus enum
+func ExecutionStatus_Values() []string {
+	return []string{
+		ExecutionStatusOpen,
+		ExecutionStatusClosed,
+	}
+}
 
 const (
 	// FailWorkflowExecutionFailedCauseUnhandledDecision is a FailWorkflowExecutionFailedCause enum value
@@ -15260,15 +18472,37 @@ const (
 	FailWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
 
+// FailWorkflowExecutionFailedCause_Values returns all elements of the FailWorkflowExecutionFailedCause enum
+func FailWorkflowExecutionFailedCause_Values() []string {
+	return []string{
+		FailWorkflowExecutionFailedCauseUnhandledDecision,
+		FailWorkflowExecutionFailedCauseOperationNotPermitted,
+	}
+}
+
 const (
 	// LambdaFunctionTimeoutTypeStartToClose is a LambdaFunctionTimeoutType enum value
 	LambdaFunctionTimeoutTypeStartToClose = "START_TO_CLOSE"
 )
 
+// LambdaFunctionTimeoutType_Values returns all elements of the LambdaFunctionTimeoutType enum
+func LambdaFunctionTimeoutType_Values() []string {
+	return []string{
+		LambdaFunctionTimeoutTypeStartToClose,
+	}
+}
+
 const (
 	// RecordMarkerFailedCauseOperationNotPermitted is a RecordMarkerFailedCause enum value
 	RecordMarkerFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
+
+// RecordMarkerFailedCause_Values returns all elements of the RecordMarkerFailedCause enum
+func RecordMarkerFailedCause_Values() []string {
+	return []string{
+		RecordMarkerFailedCauseOperationNotPermitted,
+	}
+}
 
 const (
 	// RegistrationStatusRegistered is a RegistrationStatus enum value
@@ -15278,6 +18512,14 @@ const (
 	RegistrationStatusDeprecated = "DEPRECATED"
 )
 
+// RegistrationStatus_Values returns all elements of the RegistrationStatus enum
+func RegistrationStatus_Values() []string {
+	return []string{
+		RegistrationStatusRegistered,
+		RegistrationStatusDeprecated,
+	}
+}
+
 const (
 	// RequestCancelActivityTaskFailedCauseActivityIdUnknown is a RequestCancelActivityTaskFailedCause enum value
 	RequestCancelActivityTaskFailedCauseActivityIdUnknown = "ACTIVITY_ID_UNKNOWN"
@@ -15285,6 +18527,14 @@ const (
 	// RequestCancelActivityTaskFailedCauseOperationNotPermitted is a RequestCancelActivityTaskFailedCause enum value
 	RequestCancelActivityTaskFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
+
+// RequestCancelActivityTaskFailedCause_Values returns all elements of the RequestCancelActivityTaskFailedCause enum
+func RequestCancelActivityTaskFailedCause_Values() []string {
+	return []string{
+		RequestCancelActivityTaskFailedCauseActivityIdUnknown,
+		RequestCancelActivityTaskFailedCauseOperationNotPermitted,
+	}
+}
 
 const (
 	// RequestCancelExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution is a RequestCancelExternalWorkflowExecutionFailedCause enum value
@@ -15296,6 +18546,15 @@ const (
 	// RequestCancelExternalWorkflowExecutionFailedCauseOperationNotPermitted is a RequestCancelExternalWorkflowExecutionFailedCause enum value
 	RequestCancelExternalWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
+
+// RequestCancelExternalWorkflowExecutionFailedCause_Values returns all elements of the RequestCancelExternalWorkflowExecutionFailedCause enum
+func RequestCancelExternalWorkflowExecutionFailedCause_Values() []string {
+	return []string{
+		RequestCancelExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution,
+		RequestCancelExternalWorkflowExecutionFailedCauseRequestCancelExternalWorkflowExecutionRateExceeded,
+		RequestCancelExternalWorkflowExecutionFailedCauseOperationNotPermitted,
+	}
+}
 
 const (
 	// ScheduleActivityTaskFailedCauseActivityTypeDeprecated is a ScheduleActivityTaskFailedCause enum value
@@ -15332,6 +18591,23 @@ const (
 	ScheduleActivityTaskFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
 
+// ScheduleActivityTaskFailedCause_Values returns all elements of the ScheduleActivityTaskFailedCause enum
+func ScheduleActivityTaskFailedCause_Values() []string {
+	return []string{
+		ScheduleActivityTaskFailedCauseActivityTypeDeprecated,
+		ScheduleActivityTaskFailedCauseActivityTypeDoesNotExist,
+		ScheduleActivityTaskFailedCauseActivityIdAlreadyInUse,
+		ScheduleActivityTaskFailedCauseOpenActivitiesLimitExceeded,
+		ScheduleActivityTaskFailedCauseActivityCreationRateExceeded,
+		ScheduleActivityTaskFailedCauseDefaultScheduleToCloseTimeoutUndefined,
+		ScheduleActivityTaskFailedCauseDefaultTaskListUndefined,
+		ScheduleActivityTaskFailedCauseDefaultScheduleToStartTimeoutUndefined,
+		ScheduleActivityTaskFailedCauseDefaultStartToCloseTimeoutUndefined,
+		ScheduleActivityTaskFailedCauseDefaultHeartbeatTimeoutUndefined,
+		ScheduleActivityTaskFailedCauseOperationNotPermitted,
+	}
+}
+
 const (
 	// ScheduleLambdaFunctionFailedCauseIdAlreadyInUse is a ScheduleLambdaFunctionFailedCause enum value
 	ScheduleLambdaFunctionFailedCauseIdAlreadyInUse = "ID_ALREADY_IN_USE"
@@ -15346,6 +18622,16 @@ const (
 	ScheduleLambdaFunctionFailedCauseLambdaServiceNotAvailableInRegion = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
 )
 
+// ScheduleLambdaFunctionFailedCause_Values returns all elements of the ScheduleLambdaFunctionFailedCause enum
+func ScheduleLambdaFunctionFailedCause_Values() []string {
+	return []string{
+		ScheduleLambdaFunctionFailedCauseIdAlreadyInUse,
+		ScheduleLambdaFunctionFailedCauseOpenLambdaFunctionsLimitExceeded,
+		ScheduleLambdaFunctionFailedCauseLambdaFunctionCreationRateExceeded,
+		ScheduleLambdaFunctionFailedCauseLambdaServiceNotAvailableInRegion,
+	}
+}
+
 const (
 	// SignalExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution is a SignalExternalWorkflowExecutionFailedCause enum value
 	SignalExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
@@ -15356,6 +18642,15 @@ const (
 	// SignalExternalWorkflowExecutionFailedCauseOperationNotPermitted is a SignalExternalWorkflowExecutionFailedCause enum value
 	SignalExternalWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
+
+// SignalExternalWorkflowExecutionFailedCause_Values returns all elements of the SignalExternalWorkflowExecutionFailedCause enum
+func SignalExternalWorkflowExecutionFailedCause_Values() []string {
+	return []string{
+		SignalExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution,
+		SignalExternalWorkflowExecutionFailedCauseSignalExternalWorkflowExecutionRateExceeded,
+		SignalExternalWorkflowExecutionFailedCauseOperationNotPermitted,
+	}
+}
 
 const (
 	// StartChildWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist is a StartChildWorkflowExecutionFailedCause enum value
@@ -15392,10 +18687,34 @@ const (
 	StartChildWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
 
+// StartChildWorkflowExecutionFailedCause_Values returns all elements of the StartChildWorkflowExecutionFailedCause enum
+func StartChildWorkflowExecutionFailedCause_Values() []string {
+	return []string{
+		StartChildWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist,
+		StartChildWorkflowExecutionFailedCauseWorkflowTypeDeprecated,
+		StartChildWorkflowExecutionFailedCauseOpenChildrenLimitExceeded,
+		StartChildWorkflowExecutionFailedCauseOpenWorkflowsLimitExceeded,
+		StartChildWorkflowExecutionFailedCauseChildCreationRateExceeded,
+		StartChildWorkflowExecutionFailedCauseWorkflowAlreadyRunning,
+		StartChildWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined,
+		StartChildWorkflowExecutionFailedCauseDefaultTaskListUndefined,
+		StartChildWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined,
+		StartChildWorkflowExecutionFailedCauseDefaultChildPolicyUndefined,
+		StartChildWorkflowExecutionFailedCauseOperationNotPermitted,
+	}
+}
+
 const (
 	// StartLambdaFunctionFailedCauseAssumeRoleFailed is a StartLambdaFunctionFailedCause enum value
 	StartLambdaFunctionFailedCauseAssumeRoleFailed = "ASSUME_ROLE_FAILED"
 )
+
+// StartLambdaFunctionFailedCause_Values returns all elements of the StartLambdaFunctionFailedCause enum
+func StartLambdaFunctionFailedCause_Values() []string {
+	return []string{
+		StartLambdaFunctionFailedCauseAssumeRoleFailed,
+	}
+}
 
 const (
 	// StartTimerFailedCauseTimerIdAlreadyInUse is a StartTimerFailedCause enum value
@@ -15411,10 +18730,27 @@ const (
 	StartTimerFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
 )
 
+// StartTimerFailedCause_Values returns all elements of the StartTimerFailedCause enum
+func StartTimerFailedCause_Values() []string {
+	return []string{
+		StartTimerFailedCauseTimerIdAlreadyInUse,
+		StartTimerFailedCauseOpenTimersLimitExceeded,
+		StartTimerFailedCauseTimerCreationRateExceeded,
+		StartTimerFailedCauseOperationNotPermitted,
+	}
+}
+
 const (
 	// WorkflowExecutionCancelRequestedCauseChildPolicyApplied is a WorkflowExecutionCancelRequestedCause enum value
 	WorkflowExecutionCancelRequestedCauseChildPolicyApplied = "CHILD_POLICY_APPLIED"
 )
+
+// WorkflowExecutionCancelRequestedCause_Values returns all elements of the WorkflowExecutionCancelRequestedCause enum
+func WorkflowExecutionCancelRequestedCause_Values() []string {
+	return []string{
+		WorkflowExecutionCancelRequestedCauseChildPolicyApplied,
+	}
+}
 
 const (
 	// WorkflowExecutionTerminatedCauseChildPolicyApplied is a WorkflowExecutionTerminatedCause enum value
@@ -15427,7 +18763,23 @@ const (
 	WorkflowExecutionTerminatedCauseOperatorInitiated = "OPERATOR_INITIATED"
 )
 
+// WorkflowExecutionTerminatedCause_Values returns all elements of the WorkflowExecutionTerminatedCause enum
+func WorkflowExecutionTerminatedCause_Values() []string {
+	return []string{
+		WorkflowExecutionTerminatedCauseChildPolicyApplied,
+		WorkflowExecutionTerminatedCauseEventLimitExceeded,
+		WorkflowExecutionTerminatedCauseOperatorInitiated,
+	}
+}
+
 const (
 	// WorkflowExecutionTimeoutTypeStartToClose is a WorkflowExecutionTimeoutType enum value
 	WorkflowExecutionTimeoutTypeStartToClose = "START_TO_CLOSE"
 )
+
+// WorkflowExecutionTimeoutType_Values returns all elements of the WorkflowExecutionTimeoutType enum
+func WorkflowExecutionTimeoutType_Values() []string {
+	return []string{
+		WorkflowExecutionTimeoutTypeStartToClose,
+	}
+}

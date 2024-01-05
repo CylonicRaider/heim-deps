@@ -2,6 +2,10 @@
 
 package appstream
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeConcurrentModificationException for service response error code
@@ -10,10 +14,22 @@ const (
 	// An API error occurred. Wait a few minutes and try again.
 	ErrCodeConcurrentModificationException = "ConcurrentModificationException"
 
+	// ErrCodeEntitlementAlreadyExistsException for service response error code
+	// "EntitlementAlreadyExistsException".
+	//
+	// The entitlement already exists.
+	ErrCodeEntitlementAlreadyExistsException = "EntitlementAlreadyExistsException"
+
+	// ErrCodeEntitlementNotFoundException for service response error code
+	// "EntitlementNotFoundException".
+	//
+	// The entitlement can't be found.
+	ErrCodeEntitlementNotFoundException = "EntitlementNotFoundException"
+
 	// ErrCodeIncompatibleImageException for service response error code
 	// "IncompatibleImageException".
 	//
-	// The image does not support storage connectors.
+	// The image can't be updated because it's not compatible for updates.
 	ErrCodeIncompatibleImageException = "IncompatibleImageException"
 
 	// ErrCodeInvalidAccountStatusException for service response error code
@@ -47,6 +63,14 @@ const (
 	// The attempted operation is not permitted.
 	ErrCodeOperationNotPermittedException = "OperationNotPermittedException"
 
+	// ErrCodeRequestLimitExceededException for service response error code
+	// "RequestLimitExceededException".
+	//
+	// AppStream 2.0 can’t process the request right now because the Describe
+	// calls from your AWS account are being throttled by Amazon EC2. Try again
+	// later.
+	ErrCodeRequestLimitExceededException = "RequestLimitExceededException"
+
 	// ErrCodeResourceAlreadyExistsException for service response error code
 	// "ResourceAlreadyExistsException".
 	//
@@ -71,3 +95,20 @@ const (
 	// The specified resource was not found.
 	ErrCodeResourceNotFoundException = "ResourceNotFoundException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"ConcurrentModificationException":      newErrorConcurrentModificationException,
+	"EntitlementAlreadyExistsException":    newErrorEntitlementAlreadyExistsException,
+	"EntitlementNotFoundException":         newErrorEntitlementNotFoundException,
+	"IncompatibleImageException":           newErrorIncompatibleImageException,
+	"InvalidAccountStatusException":        newErrorInvalidAccountStatusException,
+	"InvalidParameterCombinationException": newErrorInvalidParameterCombinationException,
+	"InvalidRoleException":                 newErrorInvalidRoleException,
+	"LimitExceededException":               newErrorLimitExceededException,
+	"OperationNotPermittedException":       newErrorOperationNotPermittedException,
+	"RequestLimitExceededException":        newErrorRequestLimitExceededException,
+	"ResourceAlreadyExistsException":       newErrorResourceAlreadyExistsException,
+	"ResourceInUseException":               newErrorResourceInUseException,
+	"ResourceNotAvailableException":        newErrorResourceNotAvailableException,
+	"ResourceNotFoundException":            newErrorResourceNotFoundException,
+}

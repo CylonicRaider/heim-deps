@@ -23,43 +23,55 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Route 53 Domains.
-//    func myFunc(svc route53domainsiface.Route53DomainsAPI) bool {
-//        // Make svc.CheckDomainAvailability request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// Amazon Route 53 Domains.
+//	func myFunc(svc route53domainsiface.Route53DomainsAPI) bool {
+//	    // Make svc.AcceptDomainTransferFromAnotherAwsAccount request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := route53domains.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := route53domains.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRoute53DomainsClient struct {
-//        route53domainsiface.Route53DomainsAPI
-//    }
-//    func (m *mockRoute53DomainsClient) CheckDomainAvailability(input *route53domains.CheckDomainAvailabilityInput) (*route53domains.CheckDomainAvailabilityOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockRoute53DomainsClient struct {
+//	    route53domainsiface.Route53DomainsAPI
+//	}
+//	func (m *mockRoute53DomainsClient) AcceptDomainTransferFromAnotherAwsAccount(input *route53domains.AcceptDomainTransferFromAnotherAwsAccountInput) (*route53domains.AcceptDomainTransferFromAnotherAwsAccountOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockRoute53DomainsClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockRoute53DomainsClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type Route53DomainsAPI interface {
+	AcceptDomainTransferFromAnotherAwsAccount(*route53domains.AcceptDomainTransferFromAnotherAwsAccountInput) (*route53domains.AcceptDomainTransferFromAnotherAwsAccountOutput, error)
+	AcceptDomainTransferFromAnotherAwsAccountWithContext(aws.Context, *route53domains.AcceptDomainTransferFromAnotherAwsAccountInput, ...request.Option) (*route53domains.AcceptDomainTransferFromAnotherAwsAccountOutput, error)
+	AcceptDomainTransferFromAnotherAwsAccountRequest(*route53domains.AcceptDomainTransferFromAnotherAwsAccountInput) (*request.Request, *route53domains.AcceptDomainTransferFromAnotherAwsAccountOutput)
+
+	AssociateDelegationSignerToDomain(*route53domains.AssociateDelegationSignerToDomainInput) (*route53domains.AssociateDelegationSignerToDomainOutput, error)
+	AssociateDelegationSignerToDomainWithContext(aws.Context, *route53domains.AssociateDelegationSignerToDomainInput, ...request.Option) (*route53domains.AssociateDelegationSignerToDomainOutput, error)
+	AssociateDelegationSignerToDomainRequest(*route53domains.AssociateDelegationSignerToDomainInput) (*request.Request, *route53domains.AssociateDelegationSignerToDomainOutput)
+
+	CancelDomainTransferToAnotherAwsAccount(*route53domains.CancelDomainTransferToAnotherAwsAccountInput) (*route53domains.CancelDomainTransferToAnotherAwsAccountOutput, error)
+	CancelDomainTransferToAnotherAwsAccountWithContext(aws.Context, *route53domains.CancelDomainTransferToAnotherAwsAccountInput, ...request.Option) (*route53domains.CancelDomainTransferToAnotherAwsAccountOutput, error)
+	CancelDomainTransferToAnotherAwsAccountRequest(*route53domains.CancelDomainTransferToAnotherAwsAccountInput) (*request.Request, *route53domains.CancelDomainTransferToAnotherAwsAccountOutput)
+
 	CheckDomainAvailability(*route53domains.CheckDomainAvailabilityInput) (*route53domains.CheckDomainAvailabilityOutput, error)
 	CheckDomainAvailabilityWithContext(aws.Context, *route53domains.CheckDomainAvailabilityInput, ...request.Option) (*route53domains.CheckDomainAvailabilityOutput, error)
 	CheckDomainAvailabilityRequest(*route53domains.CheckDomainAvailabilityInput) (*request.Request, *route53domains.CheckDomainAvailabilityOutput)
@@ -67,6 +79,10 @@ type Route53DomainsAPI interface {
 	CheckDomainTransferability(*route53domains.CheckDomainTransferabilityInput) (*route53domains.CheckDomainTransferabilityOutput, error)
 	CheckDomainTransferabilityWithContext(aws.Context, *route53domains.CheckDomainTransferabilityInput, ...request.Option) (*route53domains.CheckDomainTransferabilityOutput, error)
 	CheckDomainTransferabilityRequest(*route53domains.CheckDomainTransferabilityInput) (*request.Request, *route53domains.CheckDomainTransferabilityOutput)
+
+	DeleteDomain(*route53domains.DeleteDomainInput) (*route53domains.DeleteDomainOutput, error)
+	DeleteDomainWithContext(aws.Context, *route53domains.DeleteDomainInput, ...request.Option) (*route53domains.DeleteDomainOutput, error)
+	DeleteDomainRequest(*route53domains.DeleteDomainInput) (*request.Request, *route53domains.DeleteDomainOutput)
 
 	DeleteTagsForDomain(*route53domains.DeleteTagsForDomainInput) (*route53domains.DeleteTagsForDomainOutput, error)
 	DeleteTagsForDomainWithContext(aws.Context, *route53domains.DeleteTagsForDomainInput, ...request.Option) (*route53domains.DeleteTagsForDomainOutput, error)
@@ -79,6 +95,10 @@ type Route53DomainsAPI interface {
 	DisableDomainTransferLock(*route53domains.DisableDomainTransferLockInput) (*route53domains.DisableDomainTransferLockOutput, error)
 	DisableDomainTransferLockWithContext(aws.Context, *route53domains.DisableDomainTransferLockInput, ...request.Option) (*route53domains.DisableDomainTransferLockOutput, error)
 	DisableDomainTransferLockRequest(*route53domains.DisableDomainTransferLockInput) (*request.Request, *route53domains.DisableDomainTransferLockOutput)
+
+	DisassociateDelegationSignerFromDomain(*route53domains.DisassociateDelegationSignerFromDomainInput) (*route53domains.DisassociateDelegationSignerFromDomainOutput, error)
+	DisassociateDelegationSignerFromDomainWithContext(aws.Context, *route53domains.DisassociateDelegationSignerFromDomainInput, ...request.Option) (*route53domains.DisassociateDelegationSignerFromDomainOutput, error)
+	DisassociateDelegationSignerFromDomainRequest(*route53domains.DisassociateDelegationSignerFromDomainInput) (*request.Request, *route53domains.DisassociateDelegationSignerFromDomainOutput)
 
 	EnableDomainAutoRenew(*route53domains.EnableDomainAutoRenewInput) (*route53domains.EnableDomainAutoRenewOutput, error)
 	EnableDomainAutoRenewWithContext(aws.Context, *route53domains.EnableDomainAutoRenewInput, ...request.Option) (*route53domains.EnableDomainAutoRenewOutput, error)
@@ -118,13 +138,28 @@ type Route53DomainsAPI interface {
 	ListOperationsPages(*route53domains.ListOperationsInput, func(*route53domains.ListOperationsOutput, bool) bool) error
 	ListOperationsPagesWithContext(aws.Context, *route53domains.ListOperationsInput, func(*route53domains.ListOperationsOutput, bool) bool, ...request.Option) error
 
+	ListPrices(*route53domains.ListPricesInput) (*route53domains.ListPricesOutput, error)
+	ListPricesWithContext(aws.Context, *route53domains.ListPricesInput, ...request.Option) (*route53domains.ListPricesOutput, error)
+	ListPricesRequest(*route53domains.ListPricesInput) (*request.Request, *route53domains.ListPricesOutput)
+
+	ListPricesPages(*route53domains.ListPricesInput, func(*route53domains.ListPricesOutput, bool) bool) error
+	ListPricesPagesWithContext(aws.Context, *route53domains.ListPricesInput, func(*route53domains.ListPricesOutput, bool) bool, ...request.Option) error
+
 	ListTagsForDomain(*route53domains.ListTagsForDomainInput) (*route53domains.ListTagsForDomainOutput, error)
 	ListTagsForDomainWithContext(aws.Context, *route53domains.ListTagsForDomainInput, ...request.Option) (*route53domains.ListTagsForDomainOutput, error)
 	ListTagsForDomainRequest(*route53domains.ListTagsForDomainInput) (*request.Request, *route53domains.ListTagsForDomainOutput)
 
+	PushDomain(*route53domains.PushDomainInput) (*route53domains.PushDomainOutput, error)
+	PushDomainWithContext(aws.Context, *route53domains.PushDomainInput, ...request.Option) (*route53domains.PushDomainOutput, error)
+	PushDomainRequest(*route53domains.PushDomainInput) (*request.Request, *route53domains.PushDomainOutput)
+
 	RegisterDomain(*route53domains.RegisterDomainInput) (*route53domains.RegisterDomainOutput, error)
 	RegisterDomainWithContext(aws.Context, *route53domains.RegisterDomainInput, ...request.Option) (*route53domains.RegisterDomainOutput, error)
 	RegisterDomainRequest(*route53domains.RegisterDomainInput) (*request.Request, *route53domains.RegisterDomainOutput)
+
+	RejectDomainTransferFromAnotherAwsAccount(*route53domains.RejectDomainTransferFromAnotherAwsAccountInput) (*route53domains.RejectDomainTransferFromAnotherAwsAccountOutput, error)
+	RejectDomainTransferFromAnotherAwsAccountWithContext(aws.Context, *route53domains.RejectDomainTransferFromAnotherAwsAccountInput, ...request.Option) (*route53domains.RejectDomainTransferFromAnotherAwsAccountOutput, error)
+	RejectDomainTransferFromAnotherAwsAccountRequest(*route53domains.RejectDomainTransferFromAnotherAwsAccountInput) (*request.Request, *route53domains.RejectDomainTransferFromAnotherAwsAccountOutput)
 
 	RenewDomain(*route53domains.RenewDomainInput) (*route53domains.RenewDomainOutput, error)
 	RenewDomainWithContext(aws.Context, *route53domains.RenewDomainInput, ...request.Option) (*route53domains.RenewDomainOutput, error)
@@ -134,6 +169,10 @@ type Route53DomainsAPI interface {
 	ResendContactReachabilityEmailWithContext(aws.Context, *route53domains.ResendContactReachabilityEmailInput, ...request.Option) (*route53domains.ResendContactReachabilityEmailOutput, error)
 	ResendContactReachabilityEmailRequest(*route53domains.ResendContactReachabilityEmailInput) (*request.Request, *route53domains.ResendContactReachabilityEmailOutput)
 
+	ResendOperationAuthorization(*route53domains.ResendOperationAuthorizationInput) (*route53domains.ResendOperationAuthorizationOutput, error)
+	ResendOperationAuthorizationWithContext(aws.Context, *route53domains.ResendOperationAuthorizationInput, ...request.Option) (*route53domains.ResendOperationAuthorizationOutput, error)
+	ResendOperationAuthorizationRequest(*route53domains.ResendOperationAuthorizationInput) (*request.Request, *route53domains.ResendOperationAuthorizationOutput)
+
 	RetrieveDomainAuthCode(*route53domains.RetrieveDomainAuthCodeInput) (*route53domains.RetrieveDomainAuthCodeOutput, error)
 	RetrieveDomainAuthCodeWithContext(aws.Context, *route53domains.RetrieveDomainAuthCodeInput, ...request.Option) (*route53domains.RetrieveDomainAuthCodeOutput, error)
 	RetrieveDomainAuthCodeRequest(*route53domains.RetrieveDomainAuthCodeInput) (*request.Request, *route53domains.RetrieveDomainAuthCodeOutput)
@@ -141,6 +180,10 @@ type Route53DomainsAPI interface {
 	TransferDomain(*route53domains.TransferDomainInput) (*route53domains.TransferDomainOutput, error)
 	TransferDomainWithContext(aws.Context, *route53domains.TransferDomainInput, ...request.Option) (*route53domains.TransferDomainOutput, error)
 	TransferDomainRequest(*route53domains.TransferDomainInput) (*request.Request, *route53domains.TransferDomainOutput)
+
+	TransferDomainToAnotherAwsAccount(*route53domains.TransferDomainToAnotherAwsAccountInput) (*route53domains.TransferDomainToAnotherAwsAccountOutput, error)
+	TransferDomainToAnotherAwsAccountWithContext(aws.Context, *route53domains.TransferDomainToAnotherAwsAccountInput, ...request.Option) (*route53domains.TransferDomainToAnotherAwsAccountOutput, error)
+	TransferDomainToAnotherAwsAccountRequest(*route53domains.TransferDomainToAnotherAwsAccountInput) (*request.Request, *route53domains.TransferDomainToAnotherAwsAccountOutput)
 
 	UpdateDomainContact(*route53domains.UpdateDomainContactInput) (*route53domains.UpdateDomainContactOutput, error)
 	UpdateDomainContactWithContext(aws.Context, *route53domains.UpdateDomainContactInput, ...request.Option) (*route53domains.UpdateDomainContactOutput, error)
@@ -161,6 +204,9 @@ type Route53DomainsAPI interface {
 	ViewBilling(*route53domains.ViewBillingInput) (*route53domains.ViewBillingOutput, error)
 	ViewBillingWithContext(aws.Context, *route53domains.ViewBillingInput, ...request.Option) (*route53domains.ViewBillingOutput, error)
 	ViewBillingRequest(*route53domains.ViewBillingInput) (*request.Request, *route53domains.ViewBillingOutput)
+
+	ViewBillingPages(*route53domains.ViewBillingInput, func(*route53domains.ViewBillingOutput, bool) bool) error
+	ViewBillingPagesWithContext(aws.Context, *route53domains.ViewBillingInput, func(*route53domains.ViewBillingOutput, bool) bool, ...request.Option) error
 }
 
 var _ Route53DomainsAPI = (*route53domains.Route53Domains)(nil)

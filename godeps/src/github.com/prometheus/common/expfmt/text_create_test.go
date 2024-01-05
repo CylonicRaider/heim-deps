@@ -19,7 +19,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/golang/protobuf/proto"
+	"google.golang.org/protobuf/proto"
 
 	dto "github.com/prometheus/client_model/go"
 )
@@ -109,7 +109,7 @@ name{labelname="val2",basename="basevalue"} 0.23 1234567890
 							},
 						},
 						Gauge: &dto.Gauge{
-							Value: proto.Float64(3.14E42),
+							Value: proto.Float64(3.14e42),
 						},
 					},
 				},

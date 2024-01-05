@@ -3,22 +3,24 @@
 // Package mediatailor provides the client and types for making API
 // requests to AWS MediaTailor.
 //
-// Use the AWS Elemental MediaTailor SDK to configure scalable ad insertion
-// for your live and VOD content. With AWS Elemental MediaTailor, you can serve
-// targeted ads to viewers while maintaining broadcast quality in over-the-top
-// (OTT) video applications. For information about using the service, including
-// detailed information about the settings covered in this guide, see the AWS
-// Elemental MediaTailor User Guide.Through the SDK, you manage AWS Elemental
-// MediaTailor configurations the same as you do through the console. For example,
-// you specify ad insertion behavior and mapping information for the origin
-// server and the ad decision server (ADS).
+// Use the AWS Elemental MediaTailor SDKs and CLI to configure scalable ad insertion
+// and linear channels. With MediaTailor, you can assemble existing content
+// into a linear stream and serve targeted ads to viewers while maintaining
+// broadcast quality in over-the-top (OTT) video applications. For information
+// about using the service, including detailed information about the settings
+// covered in this guide, see the AWS Elemental MediaTailor User Guide (https://docs.aws.amazon.com/mediatailor/latest/ug/).
+//
+// Through the SDKs and the CLI you manage AWS Elemental MediaTailor configurations
+// and channels the same as you do through the console. For example, you specify
+// ad insertion behavior and mapping information for the origin server and the
+// ad decision server (ADS).
 //
 // See https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23 for more information on this service.
 //
 // See mediatailor package documentation for more information.
 // https://docs.aws.amazon.com/sdk-for-go/api/service/mediatailor/
 //
-// Using the Client
+// # Using the Client
 //
 // To contact AWS MediaTailor with the SDK use the New function to create
 // a new service client. With that client you can make API requests to the service.

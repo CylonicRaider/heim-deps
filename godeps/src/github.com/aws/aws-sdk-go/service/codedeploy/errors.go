@@ -2,6 +2,10 @@
 
 package codedeploy
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAlarmsLimitExceededException for service response error code
@@ -13,14 +17,14 @@ const (
 	// ErrCodeApplicationAlreadyExistsException for service response error code
 	// "ApplicationAlreadyExistsException".
 	//
-	// An application with the specified name with the IAM user or AWS account already
-	// exists.
+	// An application with the specified name with the user or Amazon Web Services
+	// account already exists.
 	ErrCodeApplicationAlreadyExistsException = "ApplicationAlreadyExistsException"
 
 	// ErrCodeApplicationDoesNotExistException for service response error code
 	// "ApplicationDoesNotExistException".
 	//
-	// The application does not exist with the IAM user or AWS account.
+	// The application does not exist with the user or Amazon Web Services account.
 	ErrCodeApplicationDoesNotExistException = "ApplicationDoesNotExistException"
 
 	// ErrCodeApplicationLimitExceededException for service response error code
@@ -34,6 +38,13 @@ const (
 	//
 	// The minimum number of required application names was not specified.
 	ErrCodeApplicationNameRequiredException = "ApplicationNameRequiredException"
+
+	// ErrCodeArnNotSupportedException for service response error code
+	// "ArnNotSupportedException".
+	//
+	// The specified ARN is not supported. For example, it might be an ARN for a
+	// resource that is not expected.
+	ErrCodeArnNotSupportedException = "ArnNotSupportedException"
 
 	// ErrCodeBatchLimitExceededException for service response error code
 	// "BatchLimitExceededException".
@@ -56,14 +67,15 @@ const (
 	// ErrCodeDeploymentConfigAlreadyExistsException for service response error code
 	// "DeploymentConfigAlreadyExistsException".
 	//
-	// A deployment configuration with the specified name with the IAM user or AWS
-	// account already exists .
+	// A deployment configuration with the specified name with the user or Amazon
+	// Web Services account already exists.
 	ErrCodeDeploymentConfigAlreadyExistsException = "DeploymentConfigAlreadyExistsException"
 
 	// ErrCodeDeploymentConfigDoesNotExistException for service response error code
 	// "DeploymentConfigDoesNotExistException".
 	//
-	// The deployment configuration does not exist with the IAM user or AWS account.
+	// The deployment configuration does not exist with the user or Amazon Web Services
+	// account.
 	ErrCodeDeploymentConfigDoesNotExistException = "DeploymentConfigDoesNotExistException"
 
 	// ErrCodeDeploymentConfigInUseException for service response error code
@@ -87,20 +99,21 @@ const (
 	// ErrCodeDeploymentDoesNotExistException for service response error code
 	// "DeploymentDoesNotExistException".
 	//
-	// The deployment with the IAM user or AWS account does not exist.
+	// The deployment with the user or Amazon Web Services account does not exist.
 	ErrCodeDeploymentDoesNotExistException = "DeploymentDoesNotExistException"
 
 	// ErrCodeDeploymentGroupAlreadyExistsException for service response error code
 	// "DeploymentGroupAlreadyExistsException".
 	//
-	// A deployment group with the specified name with the IAM user or AWS account
-	// already exists.
+	// A deployment group with the specified name with the user or Amazon Web Services
+	// account already exists.
 	ErrCodeDeploymentGroupAlreadyExistsException = "DeploymentGroupAlreadyExistsException"
 
 	// ErrCodeDeploymentGroupDoesNotExistException for service response error code
 	// "DeploymentGroupDoesNotExistException".
 	//
-	// The named deployment group with the IAM user or AWS account does not exist.
+	// The named deployment group with the user or Amazon Web Services account does
+	// not exist.
 	ErrCodeDeploymentGroupDoesNotExistException = "DeploymentGroupDoesNotExistException"
 
 	// ErrCodeDeploymentGroupLimitExceededException for service response error code
@@ -155,7 +168,7 @@ const (
 	// "DeploymentTargetListSizeExceededException".
 	//
 	// The maximum number of targets that can be associated with an Amazon ECS or
-	// AWS Lambda deployment was exceeded. The target list of both types of deployments
+	// Lambda deployment was exceeded. The target list of both types of deployments
 	// must have exactly one item. This exception does not apply to EC2/On-premises
 	// deployments.
 	ErrCodeDeploymentTargetListSizeExceededException = "DeploymentTargetListSizeExceededException"
@@ -189,7 +202,7 @@ const (
 	// "IamArnRequiredException".
 	//
 	// No IAM ARN was included in the request. You must use an IAM session ARN or
-	// IAM user ARN in the request.
+	// user ARN in the request.
 	ErrCodeIamArnRequiredException = "IamArnRequiredException"
 
 	// ErrCodeIamSessionArnAlreadyRegisteredException for service response error code
@@ -202,13 +215,13 @@ const (
 	// ErrCodeIamUserArnAlreadyRegisteredException for service response error code
 	// "IamUserArnAlreadyRegisteredException".
 	//
-	// The specified IAM user ARN is already registered with an on-premises instance.
+	// The specified user ARN is already registered with an on-premises instance.
 	ErrCodeIamUserArnAlreadyRegisteredException = "IamUserArnAlreadyRegisteredException"
 
 	// ErrCodeIamUserArnRequiredException for service response error code
 	// "IamUserArnRequiredException".
 	//
-	// An IAM user ARN was not specified.
+	// An user ARN was not specified.
 	ErrCodeIamUserArnRequiredException = "IamUserArnRequiredException"
 
 	// ErrCodeInstanceDoesNotExistException for service response error code
@@ -270,6 +283,12 @@ const (
 	// The application name was specified in an invalid format.
 	ErrCodeInvalidApplicationNameException = "InvalidApplicationNameException"
 
+	// ErrCodeInvalidArnException for service response error code
+	// "InvalidArnException".
+	//
+	// The specified ARN is not in a valid format.
+	ErrCodeInvalidArnException = "InvalidArnException"
+
 	// ErrCodeInvalidAutoRollbackConfigException for service response error code
 	// "InvalidAutoRollbackConfigException".
 	//
@@ -301,7 +320,8 @@ const (
 	// ErrCodeInvalidComputePlatformException for service response error code
 	// "InvalidComputePlatformException".
 	//
-	// The computePlatform is invalid. The computePlatform should be Lambda or Server.
+	// The computePlatform is invalid. The computePlatform should be Lambda, Server,
+	// or ECS.
 	ErrCodeInvalidComputePlatformException = "InvalidComputePlatformException"
 
 	// ErrCodeInvalidDeployedStateFilterException for service response error code
@@ -380,10 +400,16 @@ const (
 	// The Amazon ECS service identifier is not valid.
 	ErrCodeInvalidECSServiceException = "InvalidECSServiceException"
 
+	// ErrCodeInvalidExternalIdException for service response error code
+	// "InvalidExternalIdException".
+	//
+	// The external ID was specified in an invalid format.
+	ErrCodeInvalidExternalIdException = "InvalidExternalIdException"
+
 	// ErrCodeInvalidFileExistsBehaviorException for service response error code
 	// "InvalidFileExistsBehaviorException".
 	//
-	// An invalid fileExistsBehavior option was specified to determine how AWS CodeDeploy
+	// An invalid fileExistsBehavior option was specified to determine how CodeDeploy
 	// handles files or directories that already exist in a deployment target location,
 	// but weren't part of the previous successful deployment. Valid values include
 	// "DISALLOW," "OVERWRITE," and "RETAIN."
@@ -410,13 +436,13 @@ const (
 	// ErrCodeInvalidIamUserArnException for service response error code
 	// "InvalidIamUserArnException".
 	//
-	// The IAM user ARN was specified in an invalid format.
+	// The user ARN was specified in an invalid format.
 	ErrCodeInvalidIamUserArnException = "InvalidIamUserArnException"
 
 	// ErrCodeInvalidIgnoreApplicationStopFailuresValueException for service response error code
 	// "InvalidIgnoreApplicationStopFailuresValueException".
 	//
-	// The IgnoreApplicationStopFailures value is invalid. For AWS Lambda deployments,
+	// The IgnoreApplicationStopFailures value is invalid. For Lambda deployments,
 	// false is expected. For EC2/On-premises deployments, true or false is expected.
 	ErrCodeInvalidIgnoreApplicationStopFailuresValueException = "InvalidIgnoreApplicationStopFailuresValueException"
 
@@ -542,6 +568,12 @@ const (
 	// The tag filter was specified in an invalid format.
 	ErrCodeInvalidTagFilterException = "InvalidTagFilterException"
 
+	// ErrCodeInvalidTagsToAddException for service response error code
+	// "InvalidTagsToAddException".
+	//
+	// The specified tags are not valid.
+	ErrCodeInvalidTagsToAddException = "InvalidTagsToAddException"
+
 	// ErrCodeInvalidTargetFilterNameException for service response error code
 	// "InvalidTargetFilterNameException".
 	//
@@ -591,9 +623,15 @@ const (
 	// ErrCodeInvalidUpdateOutdatedInstancesOnlyValueException for service response error code
 	// "InvalidUpdateOutdatedInstancesOnlyValueException".
 	//
-	// The UpdateOutdatedInstancesOnly value is invalid. For AWS Lambda deployments,
+	// The UpdateOutdatedInstancesOnly value is invalid. For Lambda deployments,
 	// false is expected. For EC2/On-premises deployments, true or false is expected.
 	ErrCodeInvalidUpdateOutdatedInstancesOnlyValueException = "InvalidUpdateOutdatedInstancesOnlyValueException"
+
+	// ErrCodeInvalidZonalDeploymentConfigurationException for service response error code
+	// "InvalidZonalDeploymentConfigurationException".
+	//
+	// The ZonalConfig object is not valid.
+	ErrCodeInvalidZonalDeploymentConfigurationException = "InvalidZonalDeploymentConfigurationException"
 
 	// ErrCodeLifecycleEventAlreadyCompletedException for service response error code
 	// "LifecycleEventAlreadyCompletedException".
@@ -610,8 +648,8 @@ const (
 	// ErrCodeMultipleIamArnsProvidedException for service response error code
 	// "MultipleIamArnsProvidedException".
 	//
-	// Both an IAM user ARN and an IAM session ARN were included in the request.
-	// Use only one ARN type.
+	// Both an user ARN and an IAM session ARN were included in the request. Use
+	// only one ARN type.
 	ErrCodeMultipleIamArnsProvidedException = "MultipleIamArnsProvidedException"
 
 	// ErrCodeOperationNotSupportedException for service response error code
@@ -619,6 +657,12 @@ const (
 	//
 	// The API used does not support the deployment.
 	ErrCodeOperationNotSupportedException = "OperationNotSupportedException"
+
+	// ErrCodeResourceArnRequiredException for service response error code
+	// "ResourceArnRequiredException".
+	//
+	// The ARN of a resource is required, but was not found.
+	ErrCodeResourceArnRequiredException = "ResourceArnRequiredException"
 
 	// ErrCodeResourceValidationException for service response error code
 	// "ResourceValidationException".
@@ -629,7 +673,7 @@ const (
 	// ErrCodeRevisionDoesNotExistException for service response error code
 	// "RevisionDoesNotExistException".
 	//
-	// The named revision does not exist with the IAM user or AWS account.
+	// The named revision does not exist with the user or Amazon Web Services account.
 	ErrCodeRevisionDoesNotExistException = "RevisionDoesNotExistException"
 
 	// ErrCodeRevisionRequiredException for service response error code
@@ -681,3 +725,116 @@ const (
 	// A call was submitted that is not supported for the specified deployment type.
 	ErrCodeUnsupportedActionForDeploymentTypeException = "UnsupportedActionForDeploymentTypeException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AlarmsLimitExceededException":                       newErrorAlarmsLimitExceededException,
+	"ApplicationAlreadyExistsException":                  newErrorApplicationAlreadyExistsException,
+	"ApplicationDoesNotExistException":                   newErrorApplicationDoesNotExistException,
+	"ApplicationLimitExceededException":                  newErrorApplicationLimitExceededException,
+	"ApplicationNameRequiredException":                   newErrorApplicationNameRequiredException,
+	"ArnNotSupportedException":                           newErrorArnNotSupportedException,
+	"BatchLimitExceededException":                        newErrorBatchLimitExceededException,
+	"BucketNameFilterRequiredException":                  newErrorBucketNameFilterRequiredException,
+	"DeploymentAlreadyCompletedException":                newErrorDeploymentAlreadyCompletedException,
+	"DeploymentConfigAlreadyExistsException":             newErrorDeploymentConfigAlreadyExistsException,
+	"DeploymentConfigDoesNotExistException":              newErrorDeploymentConfigDoesNotExistException,
+	"DeploymentConfigInUseException":                     newErrorDeploymentConfigInUseException,
+	"DeploymentConfigLimitExceededException":             newErrorDeploymentConfigLimitExceededException,
+	"DeploymentConfigNameRequiredException":              newErrorDeploymentConfigNameRequiredException,
+	"DeploymentDoesNotExistException":                    newErrorDeploymentDoesNotExistException,
+	"DeploymentGroupAlreadyExistsException":              newErrorDeploymentGroupAlreadyExistsException,
+	"DeploymentGroupDoesNotExistException":               newErrorDeploymentGroupDoesNotExistException,
+	"DeploymentGroupLimitExceededException":              newErrorDeploymentGroupLimitExceededException,
+	"DeploymentGroupNameRequiredException":               newErrorDeploymentGroupNameRequiredException,
+	"DeploymentIdRequiredException":                      newErrorDeploymentIdRequiredException,
+	"DeploymentIsNotInReadyStateException":               newErrorDeploymentIsNotInReadyStateException,
+	"DeploymentLimitExceededException":                   newErrorDeploymentLimitExceededException,
+	"DeploymentNotStartedException":                      newErrorDeploymentNotStartedException,
+	"DeploymentTargetDoesNotExistException":              newErrorDeploymentTargetDoesNotExistException,
+	"DeploymentTargetIdRequiredException":                newErrorDeploymentTargetIdRequiredException,
+	"DeploymentTargetListSizeExceededException":          newErrorDeploymentTargetListSizeExceededException,
+	"DescriptionTooLongException":                        newErrorDescriptionTooLongException,
+	"ECSServiceMappingLimitExceededException":            newErrorECSServiceMappingLimitExceededException,
+	"GitHubAccountTokenDoesNotExistException":            newErrorGitHubAccountTokenDoesNotExistException,
+	"GitHubAccountTokenNameRequiredException":            newErrorGitHubAccountTokenNameRequiredException,
+	"IamArnRequiredException":                            newErrorIamArnRequiredException,
+	"IamSessionArnAlreadyRegisteredException":            newErrorIamSessionArnAlreadyRegisteredException,
+	"IamUserArnAlreadyRegisteredException":               newErrorIamUserArnAlreadyRegisteredException,
+	"IamUserArnRequiredException":                        newErrorIamUserArnRequiredException,
+	"InstanceDoesNotExistException":                      newErrorInstanceDoesNotExistException,
+	"InstanceIdRequiredException":                        newErrorInstanceIdRequiredException,
+	"InstanceLimitExceededException":                     newErrorInstanceLimitExceededException,
+	"InstanceNameAlreadyRegisteredException":             newErrorInstanceNameAlreadyRegisteredException,
+	"InstanceNameRequiredException":                      newErrorInstanceNameRequiredException,
+	"InstanceNotRegisteredException":                     newErrorInstanceNotRegisteredException,
+	"InvalidAlarmConfigException":                        newErrorInvalidAlarmConfigException,
+	"InvalidApplicationNameException":                    newErrorInvalidApplicationNameException,
+	"InvalidArnException":                                newErrorInvalidArnException,
+	"InvalidAutoRollbackConfigException":                 newErrorInvalidAutoRollbackConfigException,
+	"InvalidAutoScalingGroupException":                   newErrorInvalidAutoScalingGroupException,
+	"InvalidBlueGreenDeploymentConfigurationException":   newErrorInvalidBlueGreenDeploymentConfigurationException,
+	"InvalidBucketNameFilterException":                   newErrorInvalidBucketNameFilterException,
+	"InvalidComputePlatformException":                    newErrorInvalidComputePlatformException,
+	"InvalidDeployedStateFilterException":                newErrorInvalidDeployedStateFilterException,
+	"InvalidDeploymentConfigNameException":               newErrorInvalidDeploymentConfigNameException,
+	"InvalidDeploymentGroupNameException":                newErrorInvalidDeploymentGroupNameException,
+	"InvalidDeploymentIdException":                       newErrorInvalidDeploymentIdException,
+	"InvalidDeploymentInstanceTypeException":             newErrorInvalidDeploymentInstanceTypeException,
+	"InvalidDeploymentStatusException":                   newErrorInvalidDeploymentStatusException,
+	"InvalidDeploymentStyleException":                    newErrorInvalidDeploymentStyleException,
+	"InvalidDeploymentTargetIdException":                 newErrorInvalidDeploymentTargetIdException,
+	"InvalidDeploymentWaitTypeException":                 newErrorInvalidDeploymentWaitTypeException,
+	"InvalidEC2TagCombinationException":                  newErrorInvalidEC2TagCombinationException,
+	"InvalidEC2TagException":                             newErrorInvalidEC2TagException,
+	"InvalidECSServiceException":                         newErrorInvalidECSServiceException,
+	"InvalidExternalIdException":                         newErrorInvalidExternalIdException,
+	"InvalidFileExistsBehaviorException":                 newErrorInvalidFileExistsBehaviorException,
+	"InvalidGitHubAccountTokenException":                 newErrorInvalidGitHubAccountTokenException,
+	"InvalidGitHubAccountTokenNameException":             newErrorInvalidGitHubAccountTokenNameException,
+	"InvalidIamSessionArnException":                      newErrorInvalidIamSessionArnException,
+	"InvalidIamUserArnException":                         newErrorInvalidIamUserArnException,
+	"InvalidIgnoreApplicationStopFailuresValueException": newErrorInvalidIgnoreApplicationStopFailuresValueException,
+	"InvalidInputException":                              newErrorInvalidInputException,
+	"InvalidInstanceNameException":                       newErrorInvalidInstanceNameException,
+	"InvalidInstanceStatusException":                     newErrorInvalidInstanceStatusException,
+	"InvalidInstanceTypeException":                       newErrorInvalidInstanceTypeException,
+	"InvalidKeyPrefixFilterException":                    newErrorInvalidKeyPrefixFilterException,
+	"InvalidLifecycleEventHookExecutionIdException":      newErrorInvalidLifecycleEventHookExecutionIdException,
+	"InvalidLifecycleEventHookExecutionStatusException":  newErrorInvalidLifecycleEventHookExecutionStatusException,
+	"InvalidLoadBalancerInfoException":                   newErrorInvalidLoadBalancerInfoException,
+	"InvalidMinimumHealthyHostValueException":            newErrorInvalidMinimumHealthyHostValueException,
+	"InvalidNextTokenException":                          newErrorInvalidNextTokenException,
+	"InvalidOnPremisesTagCombinationException":           newErrorInvalidOnPremisesTagCombinationException,
+	"InvalidOperationException":                          newErrorInvalidOperationException,
+	"InvalidRegistrationStatusException":                 newErrorInvalidRegistrationStatusException,
+	"InvalidRevisionException":                           newErrorInvalidRevisionException,
+	"InvalidRoleException":                               newErrorInvalidRoleException,
+	"InvalidSortByException":                             newErrorInvalidSortByException,
+	"InvalidSortOrderException":                          newErrorInvalidSortOrderException,
+	"InvalidTagException":                                newErrorInvalidTagException,
+	"InvalidTagFilterException":                          newErrorInvalidTagFilterException,
+	"InvalidTagsToAddException":                          newErrorInvalidTagsToAddException,
+	"InvalidTargetFilterNameException":                   newErrorInvalidTargetFilterNameException,
+	"InvalidTargetGroupPairException":                    newErrorInvalidTargetGroupPairException,
+	"InvalidTargetInstancesException":                    newErrorInvalidTargetInstancesException,
+	"InvalidTimeRangeException":                          newErrorInvalidTimeRangeException,
+	"InvalidTrafficRoutingConfigurationException":        newErrorInvalidTrafficRoutingConfigurationException,
+	"InvalidTriggerConfigException":                      newErrorInvalidTriggerConfigException,
+	"InvalidUpdateOutdatedInstancesOnlyValueException":   newErrorInvalidUpdateOutdatedInstancesOnlyValueException,
+	"InvalidZonalDeploymentConfigurationException":       newErrorInvalidZonalDeploymentConfigurationException,
+	"LifecycleEventAlreadyCompletedException":            newErrorLifecycleEventAlreadyCompletedException,
+	"LifecycleHookLimitExceededException":                newErrorLifecycleHookLimitExceededException,
+	"MultipleIamArnsProvidedException":                   newErrorMultipleIamArnsProvidedException,
+	"OperationNotSupportedException":                     newErrorOperationNotSupportedException,
+	"ResourceArnRequiredException":                       newErrorResourceArnRequiredException,
+	"ResourceValidationException":                        newErrorResourceValidationException,
+	"RevisionDoesNotExistException":                      newErrorRevisionDoesNotExistException,
+	"RevisionRequiredException":                          newErrorRevisionRequiredException,
+	"RoleRequiredException":                              newErrorRoleRequiredException,
+	"TagLimitExceededException":                          newErrorTagLimitExceededException,
+	"TagRequiredException":                               newErrorTagRequiredException,
+	"TagSetListLimitExceededException":                   newErrorTagSetListLimitExceededException,
+	"ThrottlingException":                                newErrorThrottlingException,
+	"TriggerTargetsLimitExceededException":               newErrorTriggerTargetsLimitExceededException,
+	"UnsupportedActionForDeploymentTypeException":        newErrorUnsupportedActionForDeploymentTypeException,
+}

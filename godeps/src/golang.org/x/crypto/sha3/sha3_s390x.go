@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//+build !gccgo,!appengine
+//go:build gc && !purego
 
 package sha3
 
@@ -12,6 +12,8 @@ package sha3
 
 import (
 	"hash"
+
+	"golang.org/x/sys/cpu"
 )
 
 // codes represent 7-bit KIMD/KLMD function codes as defined in
@@ -29,20 +31,15 @@ const (
 	nopad          = 0x100
 )
 
-// hasMSA6 reports whether the machine supports the SHA-3 and SHAKE function
-// codes, as defined in message-security-assist extension 6.
-func hasMSA6() bool
-
-// hasAsm caches the result of hasMSA6 (which might be expensive to call).
-var hasAsm = hasMSA6()
-
 // kimd is a wrapper for the 'compute intermediate message digest' instruction.
 // src must be a multiple of the rate for the given function code.
+//
 //go:noescape
 func kimd(function code, chain *[200]byte, src []byte)
 
 // klmd is a wrapper for the 'compute last message digest' instruction.
 // src padding is handled by the instruction.
+//
 //go:noescape
 func klmd(function code, chain *[200]byte, dst, src []byte)
 
@@ -51,7 +48,7 @@ type asmState struct {
 	buf       []byte          // care must be taken to ensure cap(buf) is a multiple of rate
 	rate      int             // equivalent to block size
 	storage   [3072]byte      // underlying storage for buf
-	outputLen int             // output length if fixed, 0 if not
+	outputLen int             // output length for full security
 	function  code            // KIMD/KLMD function code
 	state     spongeDirection // whether the sponge is absorbing or squeezing
 }
@@ -74,8 +71,10 @@ func newAsmState(function code) *asmState {
 		s.outputLen = 64
 	case shake_128:
 		s.rate = 168
+		s.outputLen = 32
 	case shake_256:
 		s.rate = 136
+		s.outputLen = 64
 	default:
 		panic("sha3: unrecognized function code")
 	}
@@ -110,14 +109,14 @@ func (s *asmState) resetBuf() {
 // It never returns an error.
 func (s *asmState) Write(b []byte) (int, error) {
 	if s.state != spongeAbsorbing {
-		panic("sha3: write to sponge after read")
+		panic("sha3: Write after Read")
 	}
 	length := len(b)
 	for len(b) > 0 {
 		if len(s.buf) == 0 && len(b) >= cap(s.buf) {
 			// Hash the data directly and push any remaining bytes
 			// into the buffer.
-			remainder := len(s.buf) % s.rate
+			remainder := len(b) % s.rate
 			kimd(s.function, &s.a, b[:len(b)-remainder])
 			if remainder != 0 {
 				s.copyIntoBuf(b[len(b)-remainder:])
@@ -194,8 +193,8 @@ func (s *asmState) Read(out []byte) (n int, err error) {
 // Sum appends the current hash to b and returns the resulting slice.
 // It does not change the underlying hash state.
 func (s *asmState) Sum(b []byte) []byte {
-	if s.outputLen == 0 {
-		panic("sha3: cannot call Sum on SHAKE functions")
+	if s.state != spongeAbsorbing {
+		panic("sha3: Sum after Read")
 	}
 
 	// Copy the state to preserve the original.
@@ -237,7 +236,7 @@ func (s *asmState) Clone() ShakeHash {
 // new224Asm returns an assembly implementation of SHA3-224 if available,
 // otherwise it returns nil.
 func new224Asm() hash.Hash {
-	if hasAsm {
+	if cpu.S390X.HasSHA3 {
 		return newAsmState(sha3_224)
 	}
 	return nil
@@ -246,7 +245,7 @@ func new224Asm() hash.Hash {
 // new256Asm returns an assembly implementation of SHA3-256 if available,
 // otherwise it returns nil.
 func new256Asm() hash.Hash {
-	if hasAsm {
+	if cpu.S390X.HasSHA3 {
 		return newAsmState(sha3_256)
 	}
 	return nil
@@ -255,7 +254,7 @@ func new256Asm() hash.Hash {
 // new384Asm returns an assembly implementation of SHA3-384 if available,
 // otherwise it returns nil.
 func new384Asm() hash.Hash {
-	if hasAsm {
+	if cpu.S390X.HasSHA3 {
 		return newAsmState(sha3_384)
 	}
 	return nil
@@ -264,7 +263,7 @@ func new384Asm() hash.Hash {
 // new512Asm returns an assembly implementation of SHA3-512 if available,
 // otherwise it returns nil.
 func new512Asm() hash.Hash {
-	if hasAsm {
+	if cpu.S390X.HasSHA3 {
 		return newAsmState(sha3_512)
 	}
 	return nil
@@ -273,7 +272,7 @@ func new512Asm() hash.Hash {
 // newShake128Asm returns an assembly implementation of SHAKE-128 if available,
 // otherwise it returns nil.
 func newShake128Asm() ShakeHash {
-	if hasAsm {
+	if cpu.S390X.HasSHA3 {
 		return newAsmState(shake_128)
 	}
 	return nil
@@ -282,7 +281,7 @@ func newShake128Asm() ShakeHash {
 // newShake256Asm returns an assembly implementation of SHAKE-256 if available,
 // otherwise it returns nil.
 func newShake256Asm() ShakeHash {
-	if hasAsm {
+	if cpu.S390X.HasSHA3 {
 		return newAsmState(shake_256)
 	}
 	return nil

@@ -17,10 +17,9 @@ package command
 import (
 	"os"
 
-	v3 "go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/clientv3/snapshot"
-
 	"github.com/olekukonko/tablewriter"
+
+	v3 "go.etcd.io/etcd/client/v3"
 )
 
 type tablePrinter struct{ printer }
@@ -57,16 +56,6 @@ func (tp *tablePrinter) EndpointStatus(r []epStatus) {
 }
 func (tp *tablePrinter) EndpointHashKV(r []epHashKV) {
 	hdr, rows := makeEndpointHashKVTable(r)
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader(hdr)
-	for _, row := range rows {
-		table.Append(row)
-	}
-	table.SetAlignment(tablewriter.ALIGN_RIGHT)
-	table.Render()
-}
-func (tp *tablePrinter) DBStatus(r snapshot.Status) {
-	hdr, rows := makeDBStatusTable(r)
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader(hdr)
 	for _, row := range rows {

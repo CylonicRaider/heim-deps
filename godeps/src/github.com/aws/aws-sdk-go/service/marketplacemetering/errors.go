@@ -2,6 +2,10 @@
 
 package marketplacemetering
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeCustomerNotEntitledException for service response error code
@@ -20,8 +24,9 @@ const (
 	// ErrCodeDuplicateRequestException for service response error code
 	// "DuplicateRequestException".
 	//
-	// A metering record has already been emitted by the same EC2 instance for the
-	// given {usageDimension, timestamp} with a different usageQuantity.
+	// A metering record has already been emitted by the same EC2 instance, ECS
+	// task, or EKS pod for the given {usageDimension, timestamp} with a different
+	// usageQuantity.
 	ErrCodeDuplicateRequestException = "DuplicateRequestException"
 
 	// ErrCodeExpiredTokenException for service response error code
@@ -50,9 +55,9 @@ const (
 	// ErrCodeInvalidEndpointRegionException for service response error code
 	// "InvalidEndpointRegionException".
 	//
-	// The endpoint being called is in a Region different from your EC2 instance.
-	// The Region of the Metering Service endpoint and the Region of the EC2 instance
-	// must match.
+	// The endpoint being called is in a AWS Region different from your EC2 instance,
+	// ECS task, or EKS pod. The Region of the Metering Service endpoint and the
+	// AWS Region of the resource must match.
 	ErrCodeInvalidEndpointRegionException = "InvalidEndpointRegionException"
 
 	// ErrCodeInvalidProductCodeException for service response error code
@@ -76,11 +81,24 @@ const (
 	// when calling RegisterUsage.
 	ErrCodeInvalidRegionException = "InvalidRegionException"
 
+	// ErrCodeInvalidTagException for service response error code
+	// "InvalidTagException".
+	//
+	// The tag is invalid, or the number of tags is greater than 5.
+	ErrCodeInvalidTagException = "InvalidTagException"
+
 	// ErrCodeInvalidTokenException for service response error code
 	// "InvalidTokenException".
 	//
 	// Registration token is invalid.
 	ErrCodeInvalidTokenException = "InvalidTokenException"
+
+	// ErrCodeInvalidUsageAllocationsException for service response error code
+	// "InvalidUsageAllocationsException".
+	//
+	// The usage allocation objects are invalid, or the number of allocations is
+	// greater than 500 for a single usage record.
+	ErrCodeInvalidUsageAllocationsException = "InvalidUsageAllocationsException"
 
 	// ErrCodeInvalidUsageDimensionException for service response error code
 	// "InvalidUsageDimensionException".
@@ -93,7 +111,7 @@ const (
 	// "PlatformNotSupportedException".
 	//
 	// AWS Marketplace does not support metering usage from the underlying platform.
-	// Currently, only Amazon ECS is supported.
+	// Currently, Amazon ECS, Amazon EKS, and AWS Fargate are supported.
 	ErrCodePlatformNotSupportedException = "PlatformNotSupportedException"
 
 	// ErrCodeThrottlingException for service response error code
@@ -105,6 +123,30 @@ const (
 	// ErrCodeTimestampOutOfBoundsException for service response error code
 	// "TimestampOutOfBoundsException".
 	//
-	// The timestamp value passed in the meterUsage() is out of allowed range.
+	// The timestamp value passed in the UsageRecord is out of allowed range.
+	//
+	// For BatchMeterUsage, if any of the records are outside of the allowed range,
+	// the entire batch is not processed. You must remove invalid records and try
+	// again.
 	ErrCodeTimestampOutOfBoundsException = "TimestampOutOfBoundsException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"CustomerNotEntitledException":       newErrorCustomerNotEntitledException,
+	"DisabledApiException":               newErrorDisabledApiException,
+	"DuplicateRequestException":          newErrorDuplicateRequestException,
+	"ExpiredTokenException":              newErrorExpiredTokenException,
+	"InternalServiceErrorException":      newErrorInternalServiceErrorException,
+	"InvalidCustomerIdentifierException": newErrorInvalidCustomerIdentifierException,
+	"InvalidEndpointRegionException":     newErrorInvalidEndpointRegionException,
+	"InvalidProductCodeException":        newErrorInvalidProductCodeException,
+	"InvalidPublicKeyVersionException":   newErrorInvalidPublicKeyVersionException,
+	"InvalidRegionException":             newErrorInvalidRegionException,
+	"InvalidTagException":                newErrorInvalidTagException,
+	"InvalidTokenException":              newErrorInvalidTokenException,
+	"InvalidUsageAllocationsException":   newErrorInvalidUsageAllocationsException,
+	"InvalidUsageDimensionException":     newErrorInvalidUsageDimensionException,
+	"PlatformNotSupportedException":      newErrorPlatformNotSupportedException,
+	"ThrottlingException":                newErrorThrottlingException,
+	"TimestampOutOfBoundsException":      newErrorTimestampOutOfBoundsException,
+}

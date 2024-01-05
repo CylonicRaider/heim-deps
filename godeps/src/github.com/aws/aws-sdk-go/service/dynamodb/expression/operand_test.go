@@ -1,3 +1,4 @@
+//go:build go1.7
 // +build go1.7
 
 package expression
@@ -51,6 +52,30 @@ func TestBuildOperand(t *testing.T) {
 		{
 			name:  "basic value",
 			input: Value(5),
+			expected: exprNode{
+				values: []dynamodb.AttributeValue{
+					{
+						N: aws.String("5"),
+					},
+				},
+				fmtExpr: "$v",
+			},
+		},
+		{
+			name:  "dynamodb.AttributeValue as value",
+			input: Value(dynamodb.AttributeValue{N: aws.String("5")}),
+			expected: exprNode{
+				values: []dynamodb.AttributeValue{
+					{
+						N: aws.String("5"),
+					},
+				},
+				fmtExpr: "$v",
+			},
+		},
+		{
+			name:  "*dynamodb.AttributeValue as value",
+			input: Value(&dynamodb.AttributeValue{N: aws.String("5")}),
 			expected: exprNode{
 				values: []dynamodb.AttributeValue{
 					{

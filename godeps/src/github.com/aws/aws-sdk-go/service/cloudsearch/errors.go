@@ -35,10 +35,23 @@ const (
 	// The request was rejected because a resource limit has already been met.
 	ErrCodeLimitExceededException = "LimitExceeded"
 
+	// ErrCodeResourceAlreadyExistsException for service response error code
+	// "ResourceAlreadyExists".
+	//
+	// The request was rejected because it attempted to create a resource that already
+	// exists.
+	ErrCodeResourceAlreadyExistsException = "ResourceAlreadyExists"
+
 	// ErrCodeResourceNotFoundException for service response error code
 	// "ResourceNotFound".
 	//
 	// The request was rejected because it attempted to reference a resource that
 	// does not exist.
 	ErrCodeResourceNotFoundException = "ResourceNotFound"
+
+	// ErrCodeValidationException for service response error code
+	// "ValidationException".
+	//
+	// The request was rejected because it has invalid parameters.
+	ErrCodeValidationException = "ValidationException"
 )

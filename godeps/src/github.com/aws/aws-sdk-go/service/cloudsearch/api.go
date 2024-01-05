@@ -26,14 +26,13 @@ const opBuildSuggesters = "BuildSuggesters"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BuildSuggestersRequest method.
+//	req, resp := client.BuildSuggestersRequest(params)
 //
-//    // Example sending a request using the BuildSuggestersRequest method.
-//    req, resp := client.BuildSuggestersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) BuildSuggestersRequest(input *BuildSuggestersInput) (req *request.Request, output *BuildSuggestersOutput) {
 	op := &request.Operation{
 		Name:       opBuildSuggesters,
@@ -64,17 +63,20 @@ func (c *CloudSearch) BuildSuggestersRequest(input *BuildSuggestersInput) (req *
 // API operation BuildSuggesters for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) BuildSuggesters(input *BuildSuggestersInput) (*BuildSuggestersOutput, error) {
 	req, out := c.BuildSuggestersRequest(input)
 	return out, req.Send()
@@ -112,14 +114,13 @@ const opCreateDomain = "CreateDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDomainRequest method.
+//	req, resp := client.CreateDomainRequest(params)
 //
-//    // Example sending a request using the CreateDomainRequest method.
-//    req, resp := client.CreateDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) CreateDomainRequest(input *CreateDomainInput) (req *request.Request, output *CreateDomainOutput) {
 	op := &request.Operation{
 		Name:       opCreateDomain,
@@ -150,16 +151,23 @@ func (c *CloudSearch) CreateDomainRequest(input *CreateDomainInput) (req *reques
 // API operation CreateDomain for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
+//
+//   - ErrCodeResourceAlreadyExistsException "ResourceAlreadyExists"
+//     The request was rejected because it attempted to create a resource that already
+//     exists.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) CreateDomain(input *CreateDomainInput) (*CreateDomainOutput, error) {
 	req, out := c.CreateDomainRequest(input)
 	return out, req.Send()
@@ -197,14 +205,13 @@ const opDefineAnalysisScheme = "DefineAnalysisScheme"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DefineAnalysisSchemeRequest method.
+//	req, resp := client.DefineAnalysisSchemeRequest(params)
 //
-//    // Example sending a request using the DefineAnalysisSchemeRequest method.
-//    req, resp := client.DefineAnalysisSchemeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DefineAnalysisSchemeRequest(input *DefineAnalysisSchemeInput) (req *request.Request, output *DefineAnalysisSchemeOutput) {
 	op := &request.Operation{
 		Name:       opDefineAnalysisScheme,
@@ -236,23 +243,26 @@ func (c *CloudSearch) DefineAnalysisSchemeRequest(input *DefineAnalysisSchemeInp
 // API operation DefineAnalysisScheme for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) DefineAnalysisScheme(input *DefineAnalysisSchemeInput) (*DefineAnalysisSchemeOutput, error) {
 	req, out := c.DefineAnalysisSchemeRequest(input)
 	return out, req.Send()
@@ -290,14 +300,13 @@ const opDefineExpression = "DefineExpression"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DefineExpressionRequest method.
+//	req, resp := client.DefineExpressionRequest(params)
 //
-//    // Example sending a request using the DefineExpressionRequest method.
-//    req, resp := client.DefineExpressionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DefineExpressionRequest(input *DefineExpressionInput) (req *request.Request, output *DefineExpressionOutput) {
 	op := &request.Operation{
 		Name:       opDefineExpression,
@@ -329,23 +338,26 @@ func (c *CloudSearch) DefineExpressionRequest(input *DefineExpressionInput) (req
 // API operation DefineExpression for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) DefineExpression(input *DefineExpressionInput) (*DefineExpressionOutput, error) {
 	req, out := c.DefineExpressionRequest(input)
 	return out, req.Send()
@@ -383,14 +395,13 @@ const opDefineIndexField = "DefineIndexField"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DefineIndexFieldRequest method.
+//	req, resp := client.DefineIndexFieldRequest(params)
 //
-//    // Example sending a request using the DefineIndexFieldRequest method.
-//    req, resp := client.DefineIndexFieldRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DefineIndexFieldRequest(input *DefineIndexFieldInput) (req *request.Request, output *DefineIndexFieldOutput) {
 	op := &request.Operation{
 		Name:       opDefineIndexField,
@@ -426,23 +437,26 @@ func (c *CloudSearch) DefineIndexFieldRequest(input *DefineIndexFieldInput) (req
 // API operation DefineIndexField for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) DefineIndexField(input *DefineIndexFieldInput) (*DefineIndexFieldOutput, error) {
 	req, out := c.DefineIndexFieldRequest(input)
 	return out, req.Send()
@@ -480,14 +494,13 @@ const opDefineSuggester = "DefineSuggester"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DefineSuggesterRequest method.
+//	req, resp := client.DefineSuggesterRequest(params)
 //
-//    // Example sending a request using the DefineSuggesterRequest method.
-//    req, resp := client.DefineSuggesterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DefineSuggesterRequest(input *DefineSuggesterInput) (req *request.Request, output *DefineSuggesterOutput) {
 	op := &request.Operation{
 		Name:       opDefineSuggester,
@@ -521,23 +534,26 @@ func (c *CloudSearch) DefineSuggesterRequest(input *DefineSuggesterInput) (req *
 // API operation DefineSuggester for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) DefineSuggester(input *DefineSuggesterInput) (*DefineSuggesterOutput, error) {
 	req, out := c.DefineSuggesterRequest(input)
 	return out, req.Send()
@@ -575,14 +591,13 @@ const opDeleteAnalysisScheme = "DeleteAnalysisScheme"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteAnalysisSchemeRequest method.
+//	req, resp := client.DeleteAnalysisSchemeRequest(params)
 //
-//    // Example sending a request using the DeleteAnalysisSchemeRequest method.
-//    req, resp := client.DeleteAnalysisSchemeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DeleteAnalysisSchemeRequest(input *DeleteAnalysisSchemeInput) (req *request.Request, output *DeleteAnalysisSchemeOutput) {
 	op := &request.Operation{
 		Name:       opDeleteAnalysisScheme,
@@ -613,20 +628,23 @@ func (c *CloudSearch) DeleteAnalysisSchemeRequest(input *DeleteAnalysisSchemeInp
 // API operation DeleteAnalysisScheme for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) DeleteAnalysisScheme(input *DeleteAnalysisSchemeInput) (*DeleteAnalysisSchemeOutput, error) {
 	req, out := c.DeleteAnalysisSchemeRequest(input)
 	return out, req.Send()
@@ -664,14 +682,13 @@ const opDeleteDomain = "DeleteDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDomainRequest method.
+//	req, resp := client.DeleteDomainRequest(params)
 //
-//    // Example sending a request using the DeleteDomainRequest method.
-//    req, resp := client.DeleteDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DeleteDomainRequest(input *DeleteDomainInput) (req *request.Request, output *DeleteDomainOutput) {
 	op := &request.Operation{
 		Name:       opDeleteDomain,
@@ -703,13 +720,13 @@ func (c *CloudSearch) DeleteDomainRequest(input *DeleteDomainInput) (req *reques
 // API operation DeleteDomain for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 func (c *CloudSearch) DeleteDomain(input *DeleteDomainInput) (*DeleteDomainOutput, error) {
 	req, out := c.DeleteDomainRequest(input)
 	return out, req.Send()
@@ -747,14 +764,13 @@ const opDeleteExpression = "DeleteExpression"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteExpressionRequest method.
+//	req, resp := client.DeleteExpressionRequest(params)
 //
-//    // Example sending a request using the DeleteExpressionRequest method.
-//    req, resp := client.DeleteExpressionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DeleteExpressionRequest(input *DeleteExpressionInput) (req *request.Request, output *DeleteExpressionOutput) {
 	op := &request.Operation{
 		Name:       opDeleteExpression,
@@ -785,20 +801,23 @@ func (c *CloudSearch) DeleteExpressionRequest(input *DeleteExpressionInput) (req
 // API operation DeleteExpression for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) DeleteExpression(input *DeleteExpressionInput) (*DeleteExpressionOutput, error) {
 	req, out := c.DeleteExpressionRequest(input)
 	return out, req.Send()
@@ -836,14 +855,13 @@ const opDeleteIndexField = "DeleteIndexField"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteIndexFieldRequest method.
+//	req, resp := client.DeleteIndexFieldRequest(params)
 //
-//    // Example sending a request using the DeleteIndexFieldRequest method.
-//    req, resp := client.DeleteIndexFieldRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) (req *request.Request, output *DeleteIndexFieldOutput) {
 	op := &request.Operation{
 		Name:       opDeleteIndexField,
@@ -874,20 +892,23 @@ func (c *CloudSearch) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) (req
 // API operation DeleteIndexField for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) DeleteIndexField(input *DeleteIndexFieldInput) (*DeleteIndexFieldOutput, error) {
 	req, out := c.DeleteIndexFieldRequest(input)
 	return out, req.Send()
@@ -925,14 +946,13 @@ const opDeleteSuggester = "DeleteSuggester"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteSuggesterRequest method.
+//	req, resp := client.DeleteSuggesterRequest(params)
 //
-//    // Example sending a request using the DeleteSuggesterRequest method.
-//    req, resp := client.DeleteSuggesterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DeleteSuggesterRequest(input *DeleteSuggesterInput) (req *request.Request, output *DeleteSuggesterOutput) {
 	op := &request.Operation{
 		Name:       opDeleteSuggester,
@@ -963,20 +983,23 @@ func (c *CloudSearch) DeleteSuggesterRequest(input *DeleteSuggesterInput) (req *
 // API operation DeleteSuggester for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) DeleteSuggester(input *DeleteSuggesterInput) (*DeleteSuggesterOutput, error) {
 	req, out := c.DeleteSuggesterRequest(input)
 	return out, req.Send()
@@ -1014,14 +1037,13 @@ const opDescribeAnalysisSchemes = "DescribeAnalysisSchemes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeAnalysisSchemesRequest method.
+//	req, resp := client.DescribeAnalysisSchemesRequest(params)
 //
-//    // Example sending a request using the DescribeAnalysisSchemesRequest method.
-//    req, resp := client.DescribeAnalysisSchemesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSchemesInput) (req *request.Request, output *DescribeAnalysisSchemesOutput) {
 	op := &request.Operation{
 		Name:       opDescribeAnalysisSchemes,
@@ -1056,17 +1078,17 @@ func (c *CloudSearch) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSche
 // API operation DescribeAnalysisSchemes for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 func (c *CloudSearch) DescribeAnalysisSchemes(input *DescribeAnalysisSchemesInput) (*DescribeAnalysisSchemesOutput, error) {
 	req, out := c.DescribeAnalysisSchemesRequest(input)
 	return out, req.Send()
@@ -1104,14 +1126,13 @@ const opDescribeAvailabilityOptions = "DescribeAvailabilityOptions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeAvailabilityOptionsRequest method.
+//	req, resp := client.DescribeAvailabilityOptionsRequest(params)
 //
-//    // Example sending a request using the DescribeAvailabilityOptionsRequest method.
-//    req, resp := client.DescribeAvailabilityOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DescribeAvailabilityOptionsRequest(input *DescribeAvailabilityOptionsInput) (req *request.Request, output *DescribeAvailabilityOptionsOutput) {
 	op := &request.Operation{
 		Name:       opDescribeAvailabilityOptions,
@@ -1144,26 +1165,26 @@ func (c *CloudSearch) DescribeAvailabilityOptionsRequest(input *DescribeAvailabi
 // API operation DescribeAvailabilityOptions for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
 //
-//   * ErrCodeDisabledOperationException "DisabledAction"
-//   The request was rejected because it attempted an operation which is not enabled.
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 //
+//   - ErrCodeDisabledOperationException "DisabledAction"
+//     The request was rejected because it attempted an operation which is not enabled.
 func (c *CloudSearch) DescribeAvailabilityOptions(input *DescribeAvailabilityOptionsInput) (*DescribeAvailabilityOptionsOutput, error) {
 	req, out := c.DescribeAvailabilityOptionsRequest(input)
 	return out, req.Send()
@@ -1185,6 +1206,98 @@ func (c *CloudSearch) DescribeAvailabilityOptionsWithContext(ctx aws.Context, in
 	return out, req.Send()
 }
 
+const opDescribeDomainEndpointOptions = "DescribeDomainEndpointOptions"
+
+// DescribeDomainEndpointOptionsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeDomainEndpointOptions operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeDomainEndpointOptions for more information on using the DescribeDomainEndpointOptions
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeDomainEndpointOptionsRequest method.
+//	req, resp := client.DescribeDomainEndpointOptionsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *CloudSearch) DescribeDomainEndpointOptionsRequest(input *DescribeDomainEndpointOptionsInput) (req *request.Request, output *DescribeDomainEndpointOptionsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeDomainEndpointOptions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeDomainEndpointOptionsInput{}
+	}
+
+	output = &DescribeDomainEndpointOptionsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeDomainEndpointOptions API operation for Amazon CloudSearch.
+//
+// Returns the domain's endpoint options, specifically whether all requests
+// to the domain must arrive over HTTPS. For more information, see Configuring
+// Domain Endpoint Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html)
+// in the Amazon CloudSearch Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon CloudSearch's
+// API operation DescribeDomainEndpointOptions for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
+//
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
+//
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeDisabledOperationException "DisabledAction"
+//     The request was rejected because it attempted an operation which is not enabled.
+func (c *CloudSearch) DescribeDomainEndpointOptions(input *DescribeDomainEndpointOptionsInput) (*DescribeDomainEndpointOptionsOutput, error) {
+	req, out := c.DescribeDomainEndpointOptionsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeDomainEndpointOptionsWithContext is the same as DescribeDomainEndpointOptions with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeDomainEndpointOptions for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CloudSearch) DescribeDomainEndpointOptionsWithContext(ctx aws.Context, input *DescribeDomainEndpointOptionsInput, opts ...request.Option) (*DescribeDomainEndpointOptionsOutput, error) {
+	req, out := c.DescribeDomainEndpointOptionsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeDomains = "DescribeDomains"
 
 // DescribeDomainsRequest generates a "aws/request.Request" representing the
@@ -1201,14 +1314,13 @@ const opDescribeDomains = "DescribeDomains"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDomainsRequest method.
+//	req, resp := client.DescribeDomainsRequest(params)
 //
-//    // Example sending a request using the DescribeDomainsRequest method.
-//    req, resp := client.DescribeDomainsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DescribeDomainsRequest(input *DescribeDomainsInput) (req *request.Request, output *DescribeDomainsOutput) {
 	op := &request.Operation{
 		Name:       opDescribeDomains,
@@ -1242,13 +1354,13 @@ func (c *CloudSearch) DescribeDomainsRequest(input *DescribeDomainsInput) (req *
 // API operation DescribeDomains for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 func (c *CloudSearch) DescribeDomains(input *DescribeDomainsInput) (*DescribeDomainsOutput, error) {
 	req, out := c.DescribeDomainsRequest(input)
 	return out, req.Send()
@@ -1286,14 +1398,13 @@ const opDescribeExpressions = "DescribeExpressions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeExpressionsRequest method.
+//	req, resp := client.DescribeExpressionsRequest(params)
 //
-//    // Example sending a request using the DescribeExpressionsRequest method.
-//    req, resp := client.DescribeExpressionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DescribeExpressionsRequest(input *DescribeExpressionsInput) (req *request.Request, output *DescribeExpressionsOutput) {
 	op := &request.Operation{
 		Name:       opDescribeExpressions,
@@ -1327,17 +1438,17 @@ func (c *CloudSearch) DescribeExpressionsRequest(input *DescribeExpressionsInput
 // API operation DescribeExpressions for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 func (c *CloudSearch) DescribeExpressions(input *DescribeExpressionsInput) (*DescribeExpressionsOutput, error) {
 	req, out := c.DescribeExpressionsRequest(input)
 	return out, req.Send()
@@ -1375,14 +1486,13 @@ const opDescribeIndexFields = "DescribeIndexFields"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeIndexFieldsRequest method.
+//	req, resp := client.DescribeIndexFieldsRequest(params)
 //
-//    // Example sending a request using the DescribeIndexFieldsRequest method.
-//    req, resp := client.DescribeIndexFieldsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput) (req *request.Request, output *DescribeIndexFieldsOutput) {
 	op := &request.Operation{
 		Name:       opDescribeIndexFields,
@@ -1416,17 +1526,17 @@ func (c *CloudSearch) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput
 // API operation DescribeIndexFields for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 func (c *CloudSearch) DescribeIndexFields(input *DescribeIndexFieldsInput) (*DescribeIndexFieldsOutput, error) {
 	req, out := c.DescribeIndexFieldsRequest(input)
 	return out, req.Send()
@@ -1464,14 +1574,13 @@ const opDescribeScalingParameters = "DescribeScalingParameters"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeScalingParametersRequest method.
+//	req, resp := client.DescribeScalingParametersRequest(params)
 //
-//    // Example sending a request using the DescribeScalingParametersRequest method.
-//    req, resp := client.DescribeScalingParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DescribeScalingParametersRequest(input *DescribeScalingParametersInput) (req *request.Request, output *DescribeScalingParametersOutput) {
 	op := &request.Operation{
 		Name:       opDescribeScalingParameters,
@@ -1503,17 +1612,17 @@ func (c *CloudSearch) DescribeScalingParametersRequest(input *DescribeScalingPar
 // API operation DescribeScalingParameters for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 func (c *CloudSearch) DescribeScalingParameters(input *DescribeScalingParametersInput) (*DescribeScalingParametersOutput, error) {
 	req, out := c.DescribeScalingParametersRequest(input)
 	return out, req.Send()
@@ -1551,14 +1660,13 @@ const opDescribeServiceAccessPolicies = "DescribeServiceAccessPolicies"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeServiceAccessPoliciesRequest method.
+//	req, resp := client.DescribeServiceAccessPoliciesRequest(params)
 //
-//    // Example sending a request using the DescribeServiceAccessPoliciesRequest method.
-//    req, resp := client.DescribeServiceAccessPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DescribeServiceAccessPoliciesRequest(input *DescribeServiceAccessPoliciesInput) (req *request.Request, output *DescribeServiceAccessPoliciesOutput) {
 	op := &request.Operation{
 		Name:       opDescribeServiceAccessPolicies,
@@ -1592,17 +1700,17 @@ func (c *CloudSearch) DescribeServiceAccessPoliciesRequest(input *DescribeServic
 // API operation DescribeServiceAccessPolicies for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 func (c *CloudSearch) DescribeServiceAccessPolicies(input *DescribeServiceAccessPoliciesInput) (*DescribeServiceAccessPoliciesOutput, error) {
 	req, out := c.DescribeServiceAccessPoliciesRequest(input)
 	return out, req.Send()
@@ -1640,14 +1748,13 @@ const opDescribeSuggesters = "DescribeSuggesters"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeSuggestersRequest method.
+//	req, resp := client.DescribeSuggestersRequest(params)
 //
-//    // Example sending a request using the DescribeSuggestersRequest method.
-//    req, resp := client.DescribeSuggestersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) DescribeSuggestersRequest(input *DescribeSuggestersInput) (req *request.Request, output *DescribeSuggestersOutput) {
 	op := &request.Operation{
 		Name:       opDescribeSuggesters,
@@ -1682,17 +1789,17 @@ func (c *CloudSearch) DescribeSuggestersRequest(input *DescribeSuggestersInput) 
 // API operation DescribeSuggesters for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 func (c *CloudSearch) DescribeSuggesters(input *DescribeSuggestersInput) (*DescribeSuggestersOutput, error) {
 	req, out := c.DescribeSuggestersRequest(input)
 	return out, req.Send()
@@ -1730,14 +1837,13 @@ const opIndexDocuments = "IndexDocuments"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the IndexDocumentsRequest method.
+//	req, resp := client.IndexDocumentsRequest(params)
 //
-//    // Example sending a request using the IndexDocumentsRequest method.
-//    req, resp := client.IndexDocumentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) IndexDocumentsRequest(input *IndexDocumentsInput) (req *request.Request, output *IndexDocumentsOutput) {
 	op := &request.Operation{
 		Name:       opIndexDocuments,
@@ -1768,17 +1874,20 @@ func (c *CloudSearch) IndexDocumentsRequest(input *IndexDocumentsInput) (req *re
 // API operation IndexDocuments for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) IndexDocuments(input *IndexDocumentsInput) (*IndexDocumentsOutput, error) {
 	req, out := c.IndexDocumentsRequest(input)
 	return out, req.Send()
@@ -1816,14 +1925,13 @@ const opListDomainNames = "ListDomainNames"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDomainNamesRequest method.
+//	req, resp := client.ListDomainNamesRequest(params)
 //
-//    // Example sending a request using the ListDomainNamesRequest method.
-//    req, resp := client.ListDomainNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) ListDomainNamesRequest(input *ListDomainNamesInput) (req *request.Request, output *ListDomainNamesOutput) {
 	op := &request.Operation{
 		Name:       opListDomainNames,
@@ -1852,9 +1960,8 @@ func (c *CloudSearch) ListDomainNamesRequest(input *ListDomainNamesInput) (req *
 // API operation ListDomainNames for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 func (c *CloudSearch) ListDomainNames(input *ListDomainNamesInput) (*ListDomainNamesOutput, error) {
 	req, out := c.ListDomainNamesRequest(input)
 	return out, req.Send()
@@ -1892,14 +1999,13 @@ const opUpdateAvailabilityOptions = "UpdateAvailabilityOptions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateAvailabilityOptionsRequest method.
+//	req, resp := client.UpdateAvailabilityOptionsRequest(params)
 //
-//    // Example sending a request using the UpdateAvailabilityOptionsRequest method.
-//    req, resp := client.UpdateAvailabilityOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) UpdateAvailabilityOptionsRequest(input *UpdateAvailabilityOptionsInput) (req *request.Request, output *UpdateAvailabilityOptionsOutput) {
 	op := &request.Operation{
 		Name:       opUpdateAvailabilityOptions,
@@ -1933,26 +2039,29 @@ func (c *CloudSearch) UpdateAvailabilityOptionsRequest(input *UpdateAvailability
 // API operation UpdateAvailabilityOptions for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
 //
-//   * ErrCodeDisabledOperationException "DisabledAction"
-//   The request was rejected because it attempted an operation which is not enabled.
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 //
+//   - ErrCodeDisabledOperationException "DisabledAction"
+//     The request was rejected because it attempted an operation which is not enabled.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) UpdateAvailabilityOptions(input *UpdateAvailabilityOptionsInput) (*UpdateAvailabilityOptionsOutput, error) {
 	req, out := c.UpdateAvailabilityOptionsRequest(input)
 	return out, req.Send()
@@ -1974,6 +2083,104 @@ func (c *CloudSearch) UpdateAvailabilityOptionsWithContext(ctx aws.Context, inpu
 	return out, req.Send()
 }
 
+const opUpdateDomainEndpointOptions = "UpdateDomainEndpointOptions"
+
+// UpdateDomainEndpointOptionsRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateDomainEndpointOptions operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateDomainEndpointOptions for more information on using the UpdateDomainEndpointOptions
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateDomainEndpointOptionsRequest method.
+//	req, resp := client.UpdateDomainEndpointOptionsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *CloudSearch) UpdateDomainEndpointOptionsRequest(input *UpdateDomainEndpointOptionsInput) (req *request.Request, output *UpdateDomainEndpointOptionsOutput) {
+	op := &request.Operation{
+		Name:       opUpdateDomainEndpointOptions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateDomainEndpointOptionsInput{}
+	}
+
+	output = &UpdateDomainEndpointOptionsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdateDomainEndpointOptions API operation for Amazon CloudSearch.
+//
+// Updates the domain's endpoint options, specifically whether all requests
+// to the domain must arrive over HTTPS. For more information, see Configuring
+// Domain Endpoint Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html)
+// in the Amazon CloudSearch Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon CloudSearch's
+// API operation UpdateDomainEndpointOptions for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
+//
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
+//
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
+//
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
+//
+//   - ErrCodeDisabledOperationException "DisabledAction"
+//     The request was rejected because it attempted an operation which is not enabled.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
+func (c *CloudSearch) UpdateDomainEndpointOptions(input *UpdateDomainEndpointOptionsInput) (*UpdateDomainEndpointOptionsOutput, error) {
+	req, out := c.UpdateDomainEndpointOptionsRequest(input)
+	return out, req.Send()
+}
+
+// UpdateDomainEndpointOptionsWithContext is the same as UpdateDomainEndpointOptions with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateDomainEndpointOptions for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CloudSearch) UpdateDomainEndpointOptionsWithContext(ctx aws.Context, input *UpdateDomainEndpointOptionsInput, opts ...request.Option) (*UpdateDomainEndpointOptionsOutput, error) {
+	req, out := c.UpdateDomainEndpointOptionsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateScalingParameters = "UpdateScalingParameters"
 
 // UpdateScalingParametersRequest generates a "aws/request.Request" representing the
@@ -1990,14 +2197,13 @@ const opUpdateScalingParameters = "UpdateScalingParameters"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateScalingParametersRequest method.
+//	req, resp := client.UpdateScalingParametersRequest(params)
 //
-//    // Example sending a request using the UpdateScalingParametersRequest method.
-//    req, resp := client.UpdateScalingParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) UpdateScalingParametersRequest(input *UpdateScalingParametersInput) (req *request.Request, output *UpdateScalingParametersOutput) {
 	op := &request.Operation{
 		Name:       opUpdateScalingParameters,
@@ -2033,23 +2239,26 @@ func (c *CloudSearch) UpdateScalingParametersRequest(input *UpdateScalingParamet
 // API operation UpdateScalingParameters for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 //
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) UpdateScalingParameters(input *UpdateScalingParametersInput) (*UpdateScalingParametersOutput, error) {
 	req, out := c.UpdateScalingParametersRequest(input)
 	return out, req.Send()
@@ -2087,14 +2296,13 @@ const opUpdateServiceAccessPolicies = "UpdateServiceAccessPolicies"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateServiceAccessPoliciesRequest method.
+//	req, resp := client.UpdateServiceAccessPoliciesRequest(params)
 //
-//    // Example sending a request using the UpdateServiceAccessPoliciesRequest method.
-//    req, resp := client.UpdateServiceAccessPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *CloudSearch) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAccessPoliciesInput) (req *request.Request, output *UpdateServiceAccessPoliciesOutput) {
 	op := &request.Operation{
 		Name:       opUpdateServiceAccessPolicies,
@@ -2114,7 +2322,7 @@ func (c *CloudSearch) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAcc
 // UpdateServiceAccessPolicies API operation for Amazon CloudSearch.
 //
 // Configures the access rules that control access to the domain's document
-// and search endpoints. For more information, see  Configuring Access for an
+// and search endpoints. For more information, see Configuring Access for an
 // Amazon CloudSearch Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2125,23 +2333,26 @@ func (c *CloudSearch) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAcc
 // API operation UpdateServiceAccessPolicies for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
 //
-//   * ErrCodeInternalException "InternalException"
-//   An internal error occurred while processing the request. If this problem
-//   persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
+//   - ErrCodeBaseException "BaseException"
+//     An error occurred while processing the request.
 //
-//   * ErrCodeLimitExceededException "LimitExceeded"
-//   The request was rejected because a resource limit has already been met.
+//   - ErrCodeInternalException "InternalException"
+//     An internal error occurred while processing the request. If this problem
+//     persists, report an issue from the Service Health Dashboard (http://status.aws.amazon.com/).
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFound"
-//   The request was rejected because it attempted to reference a resource that
-//   does not exist.
+//   - ErrCodeLimitExceededException "LimitExceeded"
+//     The request was rejected because a resource limit has already been met.
 //
-//   * ErrCodeInvalidTypeException "InvalidType"
-//   The request was rejected because it specified an invalid type definition.
+//   - ErrCodeResourceNotFoundException "ResourceNotFound"
+//     The request was rejected because it attempted to reference a resource that
+//     does not exist.
 //
+//   - ErrCodeInvalidTypeException "InvalidType"
+//     The request was rejected because it specified an invalid type definition.
+//
+//   - ErrCodeValidationException "ValidationException"
+//     The request was rejected because it has invalid parameters.
 func (c *CloudSearch) UpdateServiceAccessPolicies(input *UpdateServiceAccessPoliciesInput) (*UpdateServiceAccessPoliciesOutput, error) {
 	req, out := c.UpdateServiceAccessPoliciesRequest(input)
 	return out, req.Send()
@@ -2182,12 +2393,20 @@ type AccessPoliciesStatus struct {
 	Status *OptionStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AccessPoliciesStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AccessPoliciesStatus) GoString() string {
 	return s.String()
 }
@@ -2246,12 +2465,20 @@ type AnalysisOptions struct {
 	Synonyms *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AnalysisOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AnalysisOptions) GoString() string {
 	return s.String()
 }
@@ -2310,12 +2537,20 @@ type AnalysisScheme struct {
 	AnalysisSchemeName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AnalysisScheme) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AnalysisScheme) GoString() string {
 	return s.String()
 }
@@ -2375,12 +2610,20 @@ type AnalysisSchemeStatus struct {
 	Status *OptionStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AnalysisSchemeStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AnalysisSchemeStatus) GoString() string {
 	return s.String()
 }
@@ -2412,12 +2655,20 @@ type AvailabilityOptionsStatus struct {
 	Status *OptionStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AvailabilityOptionsStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AvailabilityOptionsStatus) GoString() string {
 	return s.String()
 }
@@ -2448,12 +2699,20 @@ type BuildSuggestersInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildSuggestersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildSuggestersInput) GoString() string {
 	return s.String()
 }
@@ -2489,12 +2748,20 @@ type BuildSuggestersOutput struct {
 	FieldNames []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildSuggestersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildSuggestersOutput) GoString() string {
 	return s.String()
 }
@@ -2518,12 +2785,20 @@ type CreateDomainInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDomainInput) GoString() string {
 	return s.String()
 }
@@ -2559,12 +2834,20 @@ type CreateDomainOutput struct {
 	DomainStatus *DomainStatus `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDomainOutput) GoString() string {
 	return s.String()
 }
@@ -2596,12 +2879,20 @@ type DateArrayOptions struct {
 	SourceFields *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DateArrayOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DateArrayOptions) GoString() string {
 	return s.String()
 }
@@ -2675,12 +2966,20 @@ type DateOptions struct {
 	SourceField *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DateOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DateOptions) GoString() string {
 	return s.String()
 }
@@ -2756,12 +3055,20 @@ type DefineAnalysisSchemeInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineAnalysisSchemeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineAnalysisSchemeInput) GoString() string {
 	return s.String()
 }
@@ -2813,12 +3120,20 @@ type DefineAnalysisSchemeOutput struct {
 	AnalysisScheme *AnalysisSchemeStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineAnalysisSchemeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineAnalysisSchemeOutput) GoString() string {
 	return s.String()
 }
@@ -2851,12 +3166,20 @@ type DefineExpressionInput struct {
 	Expression *Expression `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineExpressionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineExpressionInput) GoString() string {
 	return s.String()
 }
@@ -2908,12 +3231,20 @@ type DefineExpressionOutput struct {
 	Expression *ExpressionStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineExpressionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineExpressionOutput) GoString() string {
 	return s.String()
 }
@@ -2943,12 +3274,20 @@ type DefineIndexFieldInput struct {
 	IndexField *IndexField `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineIndexFieldInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineIndexFieldInput) GoString() string {
 	return s.String()
 }
@@ -3000,12 +3339,20 @@ type DefineIndexFieldOutput struct {
 	IndexField *IndexFieldStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineIndexFieldOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineIndexFieldOutput) GoString() string {
 	return s.String()
 }
@@ -3037,12 +3384,20 @@ type DefineSuggesterInput struct {
 	Suggester *Suggester `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineSuggesterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineSuggesterInput) GoString() string {
 	return s.String()
 }
@@ -3094,12 +3449,20 @@ type DefineSuggesterOutput struct {
 	Suggester *SuggesterStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineSuggesterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefineSuggesterOutput) GoString() string {
 	return s.String()
 }
@@ -3130,12 +3493,20 @@ type DeleteAnalysisSchemeInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAnalysisSchemeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAnalysisSchemeInput) GoString() string {
 	return s.String()
 }
@@ -3185,12 +3556,20 @@ type DeleteAnalysisSchemeOutput struct {
 	AnalysisScheme *AnalysisSchemeStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAnalysisSchemeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAnalysisSchemeOutput) GoString() string {
 	return s.String()
 }
@@ -3212,12 +3591,20 @@ type DeleteDomainInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDomainInput) GoString() string {
 	return s.String()
 }
@@ -3253,12 +3640,20 @@ type DeleteDomainOutput struct {
 	DomainStatus *DomainStatus `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDomainOutput) GoString() string {
 	return s.String()
 }
@@ -3289,12 +3684,20 @@ type DeleteExpressionInput struct {
 	ExpressionName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteExpressionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteExpressionInput) GoString() string {
 	return s.String()
 }
@@ -3344,12 +3747,20 @@ type DeleteExpressionOutput struct {
 	Expression *ExpressionStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteExpressionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteExpressionOutput) GoString() string {
 	return s.String()
 }
@@ -3381,12 +3792,20 @@ type DeleteIndexFieldInput struct {
 	IndexFieldName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIndexFieldInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIndexFieldInput) GoString() string {
 	return s.String()
 }
@@ -3435,12 +3854,20 @@ type DeleteIndexFieldOutput struct {
 	IndexField *IndexFieldStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIndexFieldOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIndexFieldOutput) GoString() string {
 	return s.String()
 }
@@ -3471,12 +3898,20 @@ type DeleteSuggesterInput struct {
 	SuggesterName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSuggesterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSuggesterInput) GoString() string {
 	return s.String()
 }
@@ -3526,12 +3961,20 @@ type DeleteSuggesterOutput struct {
 	Suggester *SuggesterStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSuggesterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSuggesterOutput) GoString() string {
 	return s.String()
 }
@@ -3563,12 +4006,20 @@ type DescribeAnalysisSchemesInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAnalysisSchemesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAnalysisSchemesInput) GoString() string {
 	return s.String()
 }
@@ -3618,12 +4069,20 @@ type DescribeAnalysisSchemesOutput struct {
 	AnalysisSchemes []*AnalysisSchemeStatus `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAnalysisSchemesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAnalysisSchemesOutput) GoString() string {
 	return s.String()
 }
@@ -3651,12 +4110,20 @@ type DescribeAvailabilityOptionsInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAvailabilityOptionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAvailabilityOptionsInput) GoString() string {
 	return s.String()
 }
@@ -3699,12 +4166,20 @@ type DescribeAvailabilityOptionsOutput struct {
 	AvailabilityOptions *AvailabilityOptionsStatus `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAvailabilityOptionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAvailabilityOptionsOutput) GoString() string {
 	return s.String()
 }
@@ -3712,6 +4187,101 @@ func (s DescribeAvailabilityOptionsOutput) GoString() string {
 // SetAvailabilityOptions sets the AvailabilityOptions field's value.
 func (s *DescribeAvailabilityOptionsOutput) SetAvailabilityOptions(v *AvailabilityOptionsStatus) *DescribeAvailabilityOptionsOutput {
 	s.AvailabilityOptions = v
+	return s
+}
+
+// Container for the parameters to the DescribeDomainEndpointOptions operation.
+// Specify the name of the domain you want to describe. To show the active configuration
+// and exclude any pending changes, set the Deployed option to true.
+type DescribeDomainEndpointOptionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Whether to retrieve the latest configuration (which might be in a Processing
+	// state) or the current, active configuration. Defaults to false.
+	Deployed *bool `type:"boolean"`
+
+	// A string that represents the name of a domain.
+	//
+	// DomainName is a required field
+	DomainName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeDomainEndpointOptionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeDomainEndpointOptionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeDomainEndpointOptionsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeDomainEndpointOptionsInput"}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDeployed sets the Deployed field's value.
+func (s *DescribeDomainEndpointOptionsInput) SetDeployed(v bool) *DescribeDomainEndpointOptionsInput {
+	s.Deployed = &v
+	return s
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *DescribeDomainEndpointOptionsInput) SetDomainName(v string) *DescribeDomainEndpointOptionsInput {
+	s.DomainName = &v
+	return s
+}
+
+// The result of a DescribeDomainEndpointOptions request. Contains the status
+// and configuration of a search domain's endpoint options.
+type DescribeDomainEndpointOptionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The status and configuration of a search domain's endpoint options.
+	DomainEndpointOptions *DomainEndpointOptionsStatus `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeDomainEndpointOptionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeDomainEndpointOptionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetDomainEndpointOptions sets the DomainEndpointOptions field's value.
+func (s *DescribeDomainEndpointOptionsOutput) SetDomainEndpointOptions(v *DomainEndpointOptionsStatus) *DescribeDomainEndpointOptionsOutput {
+	s.DomainEndpointOptions = v
 	return s
 }
 
@@ -3725,12 +4295,20 @@ type DescribeDomainsInput struct {
 	DomainNames []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainsInput) GoString() string {
 	return s.String()
 }
@@ -3752,12 +4330,20 @@ type DescribeDomainsOutput struct {
 	DomainStatusList []*DomainStatus `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainsOutput) GoString() string {
 	return s.String()
 }
@@ -3790,12 +4376,20 @@ type DescribeExpressionsInput struct {
 	ExpressionNames []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExpressionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExpressionsInput) GoString() string {
 	return s.String()
 }
@@ -3845,12 +4439,20 @@ type DescribeExpressionsOutput struct {
 	Expressions []*ExpressionStatus `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExpressionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExpressionsOutput) GoString() string {
 	return s.String()
 }
@@ -3883,12 +4485,20 @@ type DescribeIndexFieldsInput struct {
 	FieldNames []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIndexFieldsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIndexFieldsInput) GoString() string {
 	return s.String()
 }
@@ -3938,12 +4548,20 @@ type DescribeIndexFieldsOutput struct {
 	IndexFields []*IndexFieldStatus `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIndexFieldsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIndexFieldsOutput) GoString() string {
 	return s.String()
 }
@@ -3968,12 +4586,20 @@ type DescribeScalingParametersInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingParametersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingParametersInput) GoString() string {
 	return s.String()
 }
@@ -4011,12 +4637,20 @@ type DescribeScalingParametersOutput struct {
 	ScalingParameters *ScalingParametersStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingParametersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingParametersOutput) GoString() string {
 	return s.String()
 }
@@ -4044,12 +4678,20 @@ type DescribeServiceAccessPoliciesInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeServiceAccessPoliciesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeServiceAccessPoliciesInput) GoString() string {
 	return s.String()
 }
@@ -4092,12 +4734,20 @@ type DescribeServiceAccessPoliciesOutput struct {
 	AccessPolicies *AccessPoliciesStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeServiceAccessPoliciesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeServiceAccessPoliciesOutput) GoString() string {
 	return s.String()
 }
@@ -4129,12 +4779,20 @@ type DescribeSuggestersInput struct {
 	SuggesterNames []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSuggestersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSuggestersInput) GoString() string {
 	return s.String()
 }
@@ -4183,12 +4841,20 @@ type DescribeSuggestersOutput struct {
 	Suggesters []*SuggesterStatus `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSuggestersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSuggestersOutput) GoString() string {
 	return s.String()
 }
@@ -4225,12 +4891,20 @@ type DocumentSuggesterOptions struct {
 	SourceField *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DocumentSuggesterOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DocumentSuggesterOptions) GoString() string {
 	return s.String()
 }
@@ -4266,6 +4940,92 @@ func (s *DocumentSuggesterOptions) SetSortExpression(v string) *DocumentSuggeste
 // SetSourceField sets the SourceField field's value.
 func (s *DocumentSuggesterOptions) SetSourceField(v string) *DocumentSuggesterOptions {
 	s.SourceField = &v
+	return s
+}
+
+// The domain's endpoint options.
+type DomainEndpointOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Whether the domain is HTTPS only enabled.
+	EnforceHTTPS *bool `type:"boolean"`
+
+	// The minimum required TLS version
+	TLSSecurityPolicy *string `type:"string" enum:"TLSSecurityPolicy"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainEndpointOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainEndpointOptions) GoString() string {
+	return s.String()
+}
+
+// SetEnforceHTTPS sets the EnforceHTTPS field's value.
+func (s *DomainEndpointOptions) SetEnforceHTTPS(v bool) *DomainEndpointOptions {
+	s.EnforceHTTPS = &v
+	return s
+}
+
+// SetTLSSecurityPolicy sets the TLSSecurityPolicy field's value.
+func (s *DomainEndpointOptions) SetTLSSecurityPolicy(v string) *DomainEndpointOptions {
+	s.TLSSecurityPolicy = &v
+	return s
+}
+
+// The configuration and status of the domain's endpoint options.
+type DomainEndpointOptionsStatus struct {
+	_ struct{} `type:"structure"`
+
+	// The domain endpoint options configured for the domain.
+	//
+	// Options is a required field
+	Options *DomainEndpointOptions `type:"structure" required:"true"`
+
+	// The status of the configured domain endpoint options.
+	//
+	// Status is a required field
+	Status *OptionStatus `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainEndpointOptionsStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainEndpointOptionsStatus) GoString() string {
+	return s.String()
+}
+
+// SetOptions sets the Options field's value.
+func (s *DomainEndpointOptionsStatus) SetOptions(v *DomainEndpointOptions) *DomainEndpointOptionsStatus {
+	s.Options = v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *DomainEndpointOptionsStatus) SetStatus(v *OptionStatus) *DomainEndpointOptionsStatus {
+	s.Status = v
 	return s
 }
 
@@ -4330,12 +5090,20 @@ type DomainStatus struct {
 	SearchService *ServiceEndpoint `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainStatus) GoString() string {
 	return s.String()
 }
@@ -4440,12 +5208,20 @@ type DoubleArrayOptions struct {
 	SourceFields *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DoubleArrayOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DoubleArrayOptions) GoString() string {
 	return s.String()
 }
@@ -4506,12 +5282,20 @@ type DoubleOptions struct {
 	SourceField *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DoubleOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DoubleOptions) GoString() string {
 	return s.String()
 }
@@ -4586,12 +5370,20 @@ type Expression struct {
 	ExpressionValue *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Expression) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Expression) GoString() string {
 	return s.String()
 }
@@ -4645,12 +5437,20 @@ type ExpressionStatus struct {
 	Status *OptionStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExpressionStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExpressionStatus) GoString() string {
 	return s.String()
 }
@@ -4681,12 +5481,20 @@ type IndexDocumentsInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexDocumentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexDocumentsInput) GoString() string {
 	return s.String()
 }
@@ -4722,12 +5530,20 @@ type IndexDocumentsOutput struct {
 	FieldNames []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexDocumentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexDocumentsOutput) GoString() string {
 	return s.String()
 }
@@ -4822,12 +5638,20 @@ type IndexField struct {
 	TextOptions *TextOptions `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexField) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexField) GoString() string {
 	return s.String()
 }
@@ -4975,12 +5799,20 @@ type IndexFieldStatus struct {
 	Status *OptionStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexFieldStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexFieldStatus) GoString() string {
 	return s.String()
 }
@@ -5019,12 +5851,20 @@ type IntArrayOptions struct {
 	SourceFields *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IntArrayOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IntArrayOptions) GoString() string {
 	return s.String()
 }
@@ -5085,12 +5925,20 @@ type IntOptions struct {
 	SourceField *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IntOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IntOptions) GoString() string {
 	return s.String()
 }
@@ -5182,12 +6030,20 @@ type LatLonOptions struct {
 	SourceField *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LatLonOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LatLonOptions) GoString() string {
 	return s.String()
 }
@@ -5251,12 +6107,20 @@ type Limits struct {
 	MaximumReplicationCount *int64 `min:"1" type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Limits) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Limits) GoString() string {
 	return s.String()
 }
@@ -5277,12 +6141,20 @@ type ListDomainNamesInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainNamesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainNamesInput) GoString() string {
 	return s.String()
 }
@@ -5296,12 +6168,20 @@ type ListDomainNamesOutput struct {
 	DomainNames map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainNamesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainNamesOutput) GoString() string {
 	return s.String()
 }
@@ -5334,12 +6214,20 @@ type LiteralArrayOptions struct {
 	SourceFields *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LiteralArrayOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LiteralArrayOptions) GoString() string {
 	return s.String()
 }
@@ -5411,12 +6299,20 @@ type LiteralOptions struct {
 	SourceField *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LiteralOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LiteralOptions) GoString() string {
 	return s.String()
 }
@@ -5486,9 +6382,11 @@ type OptionStatus struct {
 	//
 	//    * RequiresIndexDocuments: the option's latest value will not be deployed
 	//    until IndexDocuments has been called and indexing is complete.
+	//
 	//    * Processing: the option's latest value is in the process of being activated.
 	//
 	//    * Active: the option's latest value is completely deployed.
+	//
 	//    * FailedToValidate: the option value is not compatible with the domain's
 	//    data and cannot be used to index the data. You must either modify the
 	//    option value or update or remove the incompatible documents.
@@ -5505,12 +6403,20 @@ type OptionStatus struct {
 	UpdateVersion *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OptionStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OptionStatus) GoString() string {
 	return s.String()
 }
@@ -5561,12 +6467,20 @@ type ScalingParameters struct {
 	DesiredReplicationCount *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingParameters) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingParameters) GoString() string {
 	return s.String()
 }
@@ -5604,12 +6518,20 @@ type ScalingParametersStatus struct {
 	Status *OptionStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingParametersStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingParametersStatus) GoString() string {
 	return s.String()
 }
@@ -5635,12 +6557,20 @@ type ServiceEndpoint struct {
 	Endpoint *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceEndpoint) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceEndpoint) GoString() string {
 	return s.String()
 }
@@ -5669,12 +6599,20 @@ type Suggester struct {
 	SuggesterName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Suggester) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Suggester) GoString() string {
 	return s.String()
 }
@@ -5732,12 +6670,20 @@ type SuggesterStatus struct {
 	Status *OptionStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SuggesterStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SuggesterStatus) GoString() string {
 	return s.String()
 }
@@ -5776,12 +6722,20 @@ type TextArrayOptions struct {
 	SourceFields *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TextArrayOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TextArrayOptions) GoString() string {
 	return s.String()
 }
@@ -5854,12 +6808,20 @@ type TextOptions struct {
 	SourceField *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TextOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TextOptions) GoString() string {
 	return s.String()
 }
@@ -5936,12 +6898,20 @@ type UpdateAvailabilityOptionsInput struct {
 	MultiAZ *bool `type:"boolean" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAvailabilityOptionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAvailabilityOptionsInput) GoString() string {
 	return s.String()
 }
@@ -5987,12 +6957,20 @@ type UpdateAvailabilityOptionsOutput struct {
 	AvailabilityOptions *AvailabilityOptionsStatus `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAvailabilityOptionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAvailabilityOptionsOutput) GoString() string {
 	return s.String()
 }
@@ -6000,6 +6978,107 @@ func (s UpdateAvailabilityOptionsOutput) GoString() string {
 // SetAvailabilityOptions sets the AvailabilityOptions field's value.
 func (s *UpdateAvailabilityOptionsOutput) SetAvailabilityOptions(v *AvailabilityOptionsStatus) *UpdateAvailabilityOptionsOutput {
 	s.AvailabilityOptions = v
+	return s
+}
+
+// Container for the parameters to the UpdateDomainEndpointOptions operation.
+// Specifies the name of the domain you want to update and the domain endpoint
+// options.
+type UpdateDomainEndpointOptionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Whether to require that all requests to the domain arrive over HTTPS. We
+	// recommend Policy-Min-TLS-1-2-2019-07 for TLSSecurityPolicy. For compatibility
+	// with older clients, the default is Policy-Min-TLS-1-0-2019-07.
+	//
+	// DomainEndpointOptions is a required field
+	DomainEndpointOptions *DomainEndpointOptions `type:"structure" required:"true"`
+
+	// A string that represents the name of a domain.
+	//
+	// DomainName is a required field
+	DomainName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateDomainEndpointOptionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateDomainEndpointOptionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateDomainEndpointOptionsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateDomainEndpointOptionsInput"}
+	if s.DomainEndpointOptions == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainEndpointOptions"))
+	}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDomainEndpointOptions sets the DomainEndpointOptions field's value.
+func (s *UpdateDomainEndpointOptionsInput) SetDomainEndpointOptions(v *DomainEndpointOptions) *UpdateDomainEndpointOptionsInput {
+	s.DomainEndpointOptions = v
+	return s
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *UpdateDomainEndpointOptionsInput) SetDomainName(v string) *UpdateDomainEndpointOptionsInput {
+	s.DomainName = &v
+	return s
+}
+
+// The result of a UpdateDomainEndpointOptions request. Contains the configuration
+// and status of the domain's endpoint options.
+type UpdateDomainEndpointOptionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The newly-configured domain endpoint options.
+	DomainEndpointOptions *DomainEndpointOptionsStatus `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateDomainEndpointOptionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateDomainEndpointOptionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetDomainEndpointOptions sets the DomainEndpointOptions field's value.
+func (s *UpdateDomainEndpointOptionsOutput) SetDomainEndpointOptions(v *DomainEndpointOptionsStatus) *UpdateDomainEndpointOptionsOutput {
+	s.DomainEndpointOptions = v
 	return s
 }
 
@@ -6023,12 +7102,20 @@ type UpdateScalingParametersInput struct {
 	ScalingParameters *ScalingParameters `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateScalingParametersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateScalingParametersInput) GoString() string {
 	return s.String()
 }
@@ -6075,12 +7162,20 @@ type UpdateScalingParametersOutput struct {
 	ScalingParameters *ScalingParametersStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateScalingParametersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateScalingParametersOutput) GoString() string {
 	return s.String()
 }
@@ -6112,12 +7207,20 @@ type UpdateServiceAccessPoliciesInput struct {
 	DomainName *string `min:"3" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateServiceAccessPoliciesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateServiceAccessPoliciesInput) GoString() string {
 	return s.String()
 }
@@ -6164,12 +7267,20 @@ type UpdateServiceAccessPoliciesOutput struct {
 	AccessPolicies *AccessPoliciesStatus `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateServiceAccessPoliciesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateServiceAccessPoliciesOutput) GoString() string {
 	return s.String()
 }
@@ -6193,6 +7304,16 @@ const (
 	// AlgorithmicStemmingFull is a AlgorithmicStemming enum value
 	AlgorithmicStemmingFull = "full"
 )
+
+// AlgorithmicStemming_Values returns all elements of the AlgorithmicStemming enum
+func AlgorithmicStemming_Values() []string {
+	return []string{
+		AlgorithmicStemmingNone,
+		AlgorithmicStemmingMinimal,
+		AlgorithmicStemmingLight,
+		AlgorithmicStemmingFull,
+	}
+}
 
 // An IETF RFC 4646 (http://tools.ietf.org/html/rfc4646) language code or mul
 // for multiple languages.
@@ -6303,6 +7424,47 @@ const (
 	AnalysisSchemeLanguageZhHant = "zh-Hant"
 )
 
+// AnalysisSchemeLanguage_Values returns all elements of the AnalysisSchemeLanguage enum
+func AnalysisSchemeLanguage_Values() []string {
+	return []string{
+		AnalysisSchemeLanguageAr,
+		AnalysisSchemeLanguageBg,
+		AnalysisSchemeLanguageCa,
+		AnalysisSchemeLanguageCs,
+		AnalysisSchemeLanguageDa,
+		AnalysisSchemeLanguageDe,
+		AnalysisSchemeLanguageEl,
+		AnalysisSchemeLanguageEn,
+		AnalysisSchemeLanguageEs,
+		AnalysisSchemeLanguageEu,
+		AnalysisSchemeLanguageFa,
+		AnalysisSchemeLanguageFi,
+		AnalysisSchemeLanguageFr,
+		AnalysisSchemeLanguageGa,
+		AnalysisSchemeLanguageGl,
+		AnalysisSchemeLanguageHe,
+		AnalysisSchemeLanguageHi,
+		AnalysisSchemeLanguageHu,
+		AnalysisSchemeLanguageHy,
+		AnalysisSchemeLanguageId,
+		AnalysisSchemeLanguageIt,
+		AnalysisSchemeLanguageJa,
+		AnalysisSchemeLanguageKo,
+		AnalysisSchemeLanguageLv,
+		AnalysisSchemeLanguageMul,
+		AnalysisSchemeLanguageNl,
+		AnalysisSchemeLanguageNo,
+		AnalysisSchemeLanguagePt,
+		AnalysisSchemeLanguageRo,
+		AnalysisSchemeLanguageRu,
+		AnalysisSchemeLanguageSv,
+		AnalysisSchemeLanguageTh,
+		AnalysisSchemeLanguageTr,
+		AnalysisSchemeLanguageZhHans,
+		AnalysisSchemeLanguageZhHant,
+	}
+}
+
 // The type of field. The valid options for a field depend on the field type.
 // For more information about the supported field types, see Configuring Index
 // Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
@@ -6342,16 +7504,35 @@ const (
 	IndexFieldTypeDateArray = "date-array"
 )
 
+// IndexFieldType_Values returns all elements of the IndexFieldType enum
+func IndexFieldType_Values() []string {
+	return []string{
+		IndexFieldTypeInt,
+		IndexFieldTypeDouble,
+		IndexFieldTypeLiteral,
+		IndexFieldTypeText,
+		IndexFieldTypeDate,
+		IndexFieldTypeLatlon,
+		IndexFieldTypeIntArray,
+		IndexFieldTypeDoubleArray,
+		IndexFieldTypeLiteralArray,
+		IndexFieldTypeTextArray,
+		IndexFieldTypeDateArray,
+	}
+}
+
 // The state of processing a change to an option. One of:
 //
-//    * RequiresIndexDocuments: The option's latest value will not be deployed
-//    until IndexDocuments has been called and indexing is complete.
-//    * Processing: The option's latest value is in the process of being activated.
+//   - RequiresIndexDocuments: The option's latest value will not be deployed
+//     until IndexDocuments has been called and indexing is complete.
 //
-//    * Active: The option's latest value is fully deployed.
-//    * FailedToValidate: The option value is not compatible with the domain's
-//    data and cannot be used to index the data. You must either modify the
-//    option value or update or remove the incompatible documents.
+//   - Processing: The option's latest value is in the process of being activated.
+//
+//   - Active: The option's latest value is fully deployed.
+//
+//   - FailedToValidate: The option value is not compatible with the domain's
+//     data and cannot be used to index the data. You must either modify the
+//     option value or update or remove the incompatible documents.
 const (
 	// OptionStateRequiresIndexDocuments is a OptionState enum value
 	OptionStateRequiresIndexDocuments = "RequiresIndexDocuments"
@@ -6365,6 +7546,16 @@ const (
 	// OptionStateFailedToValidate is a OptionState enum value
 	OptionStateFailedToValidate = "FailedToValidate"
 )
+
+// OptionState_Values returns all elements of the OptionState enum
+func OptionState_Values() []string {
+	return []string{
+		OptionStateRequiresIndexDocuments,
+		OptionStateProcessing,
+		OptionStateActive,
+		OptionStateFailedToValidate,
+	}
+}
 
 // The instance type (such as search.m1.small) on which an index partition is
 // hosted.
@@ -6392,7 +7583,57 @@ const (
 
 	// PartitionInstanceTypeSearchM32xlarge is a PartitionInstanceType enum value
 	PartitionInstanceTypeSearchM32xlarge = "search.m3.2xlarge"
+
+	// PartitionInstanceTypeSearchSmall is a PartitionInstanceType enum value
+	PartitionInstanceTypeSearchSmall = "search.small"
+
+	// PartitionInstanceTypeSearchMedium is a PartitionInstanceType enum value
+	PartitionInstanceTypeSearchMedium = "search.medium"
+
+	// PartitionInstanceTypeSearchLarge is a PartitionInstanceType enum value
+	PartitionInstanceTypeSearchLarge = "search.large"
+
+	// PartitionInstanceTypeSearchXlarge is a PartitionInstanceType enum value
+	PartitionInstanceTypeSearchXlarge = "search.xlarge"
+
+	// PartitionInstanceTypeSearch2xlarge is a PartitionInstanceType enum value
+	PartitionInstanceTypeSearch2xlarge = "search.2xlarge"
+
+	// PartitionInstanceTypeSearchPreviousgenerationSmall is a PartitionInstanceType enum value
+	PartitionInstanceTypeSearchPreviousgenerationSmall = "search.previousgeneration.small"
+
+	// PartitionInstanceTypeSearchPreviousgenerationLarge is a PartitionInstanceType enum value
+	PartitionInstanceTypeSearchPreviousgenerationLarge = "search.previousgeneration.large"
+
+	// PartitionInstanceTypeSearchPreviousgenerationXlarge is a PartitionInstanceType enum value
+	PartitionInstanceTypeSearchPreviousgenerationXlarge = "search.previousgeneration.xlarge"
+
+	// PartitionInstanceTypeSearchPreviousgeneration2xlarge is a PartitionInstanceType enum value
+	PartitionInstanceTypeSearchPreviousgeneration2xlarge = "search.previousgeneration.2xlarge"
 )
+
+// PartitionInstanceType_Values returns all elements of the PartitionInstanceType enum
+func PartitionInstanceType_Values() []string {
+	return []string{
+		PartitionInstanceTypeSearchM1Small,
+		PartitionInstanceTypeSearchM1Large,
+		PartitionInstanceTypeSearchM2Xlarge,
+		PartitionInstanceTypeSearchM22xlarge,
+		PartitionInstanceTypeSearchM3Medium,
+		PartitionInstanceTypeSearchM3Large,
+		PartitionInstanceTypeSearchM3Xlarge,
+		PartitionInstanceTypeSearchM32xlarge,
+		PartitionInstanceTypeSearchSmall,
+		PartitionInstanceTypeSearchMedium,
+		PartitionInstanceTypeSearchLarge,
+		PartitionInstanceTypeSearchXlarge,
+		PartitionInstanceTypeSearch2xlarge,
+		PartitionInstanceTypeSearchPreviousgenerationSmall,
+		PartitionInstanceTypeSearchPreviousgenerationLarge,
+		PartitionInstanceTypeSearchPreviousgenerationXlarge,
+		PartitionInstanceTypeSearchPreviousgeneration2xlarge,
+	}
+}
 
 const (
 	// SuggesterFuzzyMatchingNone is a SuggesterFuzzyMatching enum value
@@ -6404,3 +7645,29 @@ const (
 	// SuggesterFuzzyMatchingHigh is a SuggesterFuzzyMatching enum value
 	SuggesterFuzzyMatchingHigh = "high"
 )
+
+// SuggesterFuzzyMatching_Values returns all elements of the SuggesterFuzzyMatching enum
+func SuggesterFuzzyMatching_Values() []string {
+	return []string{
+		SuggesterFuzzyMatchingNone,
+		SuggesterFuzzyMatchingLow,
+		SuggesterFuzzyMatchingHigh,
+	}
+}
+
+// The minimum required TLS version.
+const (
+	// TLSSecurityPolicyPolicyMinTls10201907 is a TLSSecurityPolicy enum value
+	TLSSecurityPolicyPolicyMinTls10201907 = "Policy-Min-TLS-1-0-2019-07"
+
+	// TLSSecurityPolicyPolicyMinTls12201907 is a TLSSecurityPolicy enum value
+	TLSSecurityPolicyPolicyMinTls12201907 = "Policy-Min-TLS-1-2-2019-07"
+)
+
+// TLSSecurityPolicy_Values returns all elements of the TLSSecurityPolicy enum
+func TLSSecurityPolicy_Values() []string {
+	return []string{
+		TLSSecurityPolicyPolicyMinTls10201907,
+		TLSSecurityPolicyPolicyMinTls12201907,
+	}
+}

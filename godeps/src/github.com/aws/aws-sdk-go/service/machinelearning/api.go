@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go/private/protocol"
 )
 
 const opAddTags = "AddTags"
@@ -27,14 +28,13 @@ const opAddTags = "AddTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddTagsRequest method.
+//	req, resp := client.AddTagsRequest(params)
 //
-//    // Example sending a request using the AddTagsRequest method.
-//    req, resp := client.AddTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) AddTagsRequest(input *AddTagsInput) (req *request.Request, output *AddTagsOutput) {
 	op := &request.Operation{
 		Name:       opAddTags,
@@ -64,21 +64,21 @@ func (c *MachineLearning) AddTagsRequest(input *AddTagsInput) (req *request.Requ
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation AddTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidTagException "InvalidTagException"
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeTagLimitExceededException "TagLimitExceededException"
+//   - InvalidTagException
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - TagLimitExceededException
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
 	req, out := c.AddTagsRequest(input)
 	return out, req.Send()
@@ -116,14 +116,13 @@ const opCreateBatchPrediction = "CreateBatchPrediction"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateBatchPredictionRequest method.
+//	req, resp := client.CreateBatchPredictionRequest(params)
 //
-//    // Example sending a request using the CreateBatchPredictionRequest method.
-//    req, resp := client.CreateBatchPredictionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) CreateBatchPredictionRequest(input *CreateBatchPredictionInput) (req *request.Request, output *CreateBatchPredictionOutput) {
 	op := &request.Operation{
 		Name:       opCreateBatchPrediction,
@@ -164,19 +163,19 @@ func (c *MachineLearning) CreateBatchPredictionRequest(input *CreateBatchPredict
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation CreateBatchPrediction for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 //
+//   - IdempotentParameterMismatchException
+//     A second request to use or change an object was not allowed. This can result
+//     from retrying a request using a parameter that was not present in the original
+//     request.
 func (c *MachineLearning) CreateBatchPrediction(input *CreateBatchPredictionInput) (*CreateBatchPredictionOutput, error) {
 	req, out := c.CreateBatchPredictionRequest(input)
 	return out, req.Send()
@@ -214,14 +213,13 @@ const opCreateDataSourceFromRDS = "CreateDataSourceFromRDS"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDataSourceFromRDSRequest method.
+//	req, resp := client.CreateDataSourceFromRDSRequest(params)
 //
-//    // Example sending a request using the CreateDataSourceFromRDSRequest method.
-//    req, resp := client.CreateDataSourceFromRDSRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSourceFromRDSInput) (req *request.Request, output *CreateDataSourceFromRDSOutput) {
 	op := &request.Operation{
 		Name:       opCreateDataSourceFromRDS,
@@ -240,7 +238,7 @@ func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSource
 
 // CreateDataSourceFromRDS API operation for Amazon Machine Learning.
 //
-// Creates a DataSource object from an  Amazon Relational Database Service (http://aws.amazon.com/rds/)
+// Creates a DataSource object from an Amazon Relational Database Service (http://aws.amazon.com/rds/)
 // (Amazon RDS). A DataSource references data that can be used to perform CreateMLModel,
 // CreateEvaluation, or CreateBatchPrediction operations.
 //
@@ -262,19 +260,19 @@ func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSource
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation CreateDataSourceFromRDS for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 //
+//   - IdempotentParameterMismatchException
+//     A second request to use or change an object was not allowed. This can result
+//     from retrying a request using a parameter that was not present in the original
+//     request.
 func (c *MachineLearning) CreateDataSourceFromRDS(input *CreateDataSourceFromRDSInput) (*CreateDataSourceFromRDSOutput, error) {
 	req, out := c.CreateDataSourceFromRDSRequest(input)
 	return out, req.Send()
@@ -312,14 +310,13 @@ const opCreateDataSourceFromRedshift = "CreateDataSourceFromRedshift"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDataSourceFromRedshiftRequest method.
+//	req, resp := client.CreateDataSourceFromRedshiftRequest(params)
 //
-//    // Example sending a request using the CreateDataSourceFromRedshiftRequest method.
-//    req, resp := client.CreateDataSourceFromRedshiftRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) CreateDataSourceFromRedshiftRequest(input *CreateDataSourceFromRedshiftInput) (req *request.Request, output *CreateDataSourceFromRedshiftOutput) {
 	op := &request.Operation{
 		Name:       opCreateDataSourceFromRedshift,
@@ -379,19 +376,19 @@ func (c *MachineLearning) CreateDataSourceFromRedshiftRequest(input *CreateDataS
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation CreateDataSourceFromRedshift for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 //
+//   - IdempotentParameterMismatchException
+//     A second request to use or change an object was not allowed. This can result
+//     from retrying a request using a parameter that was not present in the original
+//     request.
 func (c *MachineLearning) CreateDataSourceFromRedshift(input *CreateDataSourceFromRedshiftInput) (*CreateDataSourceFromRedshiftOutput, error) {
 	req, out := c.CreateDataSourceFromRedshiftRequest(input)
 	return out, req.Send()
@@ -429,14 +426,13 @@ const opCreateDataSourceFromS3 = "CreateDataSourceFromS3"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDataSourceFromS3Request method.
+//	req, resp := client.CreateDataSourceFromS3Request(params)
 //
-//    // Example sending a request using the CreateDataSourceFromS3Request method.
-//    req, resp := client.CreateDataSourceFromS3Request(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) CreateDataSourceFromS3Request(input *CreateDataSourceFromS3Input) (req *request.Request, output *CreateDataSourceFromS3Output) {
 	op := &request.Operation{
 		Name:       opCreateDataSourceFromS3,
@@ -491,19 +487,19 @@ func (c *MachineLearning) CreateDataSourceFromS3Request(input *CreateDataSourceF
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation CreateDataSourceFromS3 for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 //
+//   - IdempotentParameterMismatchException
+//     A second request to use or change an object was not allowed. This can result
+//     from retrying a request using a parameter that was not present in the original
+//     request.
 func (c *MachineLearning) CreateDataSourceFromS3(input *CreateDataSourceFromS3Input) (*CreateDataSourceFromS3Output, error) {
 	req, out := c.CreateDataSourceFromS3Request(input)
 	return out, req.Send()
@@ -541,14 +537,13 @@ const opCreateEvaluation = "CreateEvaluation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateEvaluationRequest method.
+//	req, resp := client.CreateEvaluationRequest(params)
 //
-//    // Example sending a request using the CreateEvaluationRequest method.
-//    req, resp := client.CreateEvaluationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) CreateEvaluationRequest(input *CreateEvaluationInput) (req *request.Request, output *CreateEvaluationOutput) {
 	op := &request.Operation{
 		Name:       opCreateEvaluation,
@@ -591,19 +586,19 @@ func (c *MachineLearning) CreateEvaluationRequest(input *CreateEvaluationInput) 
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation CreateEvaluation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 //
+//   - IdempotentParameterMismatchException
+//     A second request to use or change an object was not allowed. This can result
+//     from retrying a request using a parameter that was not present in the original
+//     request.
 func (c *MachineLearning) CreateEvaluation(input *CreateEvaluationInput) (*CreateEvaluationOutput, error) {
 	req, out := c.CreateEvaluationRequest(input)
 	return out, req.Send()
@@ -641,14 +636,13 @@ const opCreateMLModel = "CreateMLModel"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateMLModelRequest method.
+//	req, resp := client.CreateMLModelRequest(params)
 //
-//    // Example sending a request using the CreateMLModelRequest method.
-//    req, resp := client.CreateMLModelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) CreateMLModelRequest(input *CreateMLModelInput) (req *request.Request, output *CreateMLModelOutput) {
 	op := &request.Operation{
 		Name:       opCreateMLModel,
@@ -692,19 +686,19 @@ func (c *MachineLearning) CreateMLModelRequest(input *CreateMLModelInput) (req *
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation CreateMLModel for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeIdempotentParameterMismatchException "IdempotentParameterMismatchException"
-//   A second request to use or change an object was not allowed. This can result
-//   from retrying a request using a parameter that was not present in the original
-//   request.
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 //
+//   - IdempotentParameterMismatchException
+//     A second request to use or change an object was not allowed. This can result
+//     from retrying a request using a parameter that was not present in the original
+//     request.
 func (c *MachineLearning) CreateMLModel(input *CreateMLModelInput) (*CreateMLModelOutput, error) {
 	req, out := c.CreateMLModelRequest(input)
 	return out, req.Send()
@@ -742,14 +736,13 @@ const opCreateRealtimeEndpoint = "CreateRealtimeEndpoint"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateRealtimeEndpointRequest method.
+//	req, resp := client.CreateRealtimeEndpointRequest(params)
 //
-//    // Example sending a request using the CreateRealtimeEndpointRequest method.
-//    req, resp := client.CreateRealtimeEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) CreateRealtimeEndpointRequest(input *CreateRealtimeEndpointInput) (req *request.Request, output *CreateRealtimeEndpointOutput) {
 	op := &request.Operation{
 		Name:       opCreateRealtimeEndpoint,
@@ -779,17 +772,17 @@ func (c *MachineLearning) CreateRealtimeEndpointRequest(input *CreateRealtimeEnd
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation CreateRealtimeEndpoint for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) CreateRealtimeEndpoint(input *CreateRealtimeEndpointInput) (*CreateRealtimeEndpointOutput, error) {
 	req, out := c.CreateRealtimeEndpointRequest(input)
 	return out, req.Send()
@@ -827,14 +820,13 @@ const opDeleteBatchPrediction = "DeleteBatchPrediction"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteBatchPredictionRequest method.
+//	req, resp := client.DeleteBatchPredictionRequest(params)
 //
-//    // Example sending a request using the DeleteBatchPredictionRequest method.
-//    req, resp := client.DeleteBatchPredictionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DeleteBatchPredictionRequest(input *DeleteBatchPredictionInput) (req *request.Request, output *DeleteBatchPredictionOutput) {
 	op := &request.Operation{
 		Name:       opDeleteBatchPrediction,
@@ -867,17 +859,17 @@ func (c *MachineLearning) DeleteBatchPredictionRequest(input *DeleteBatchPredict
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DeleteBatchPrediction for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DeleteBatchPrediction(input *DeleteBatchPredictionInput) (*DeleteBatchPredictionOutput, error) {
 	req, out := c.DeleteBatchPredictionRequest(input)
 	return out, req.Send()
@@ -915,14 +907,13 @@ const opDeleteDataSource = "DeleteDataSource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDataSourceRequest method.
+//	req, resp := client.DeleteDataSourceRequest(params)
 //
-//    // Example sending a request using the DeleteDataSourceRequest method.
-//    req, resp := client.DeleteDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DeleteDataSourceRequest(input *DeleteDataSourceInput) (req *request.Request, output *DeleteDataSourceOutput) {
 	op := &request.Operation{
 		Name:       opDeleteDataSource,
@@ -955,17 +946,17 @@ func (c *MachineLearning) DeleteDataSourceRequest(input *DeleteDataSourceInput) 
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DeleteDataSource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DeleteDataSource(input *DeleteDataSourceInput) (*DeleteDataSourceOutput, error) {
 	req, out := c.DeleteDataSourceRequest(input)
 	return out, req.Send()
@@ -1003,14 +994,13 @@ const opDeleteEvaluation = "DeleteEvaluation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteEvaluationRequest method.
+//	req, resp := client.DeleteEvaluationRequest(params)
 //
-//    // Example sending a request using the DeleteEvaluationRequest method.
-//    req, resp := client.DeleteEvaluationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) (req *request.Request, output *DeleteEvaluationOutput) {
 	op := &request.Operation{
 		Name:       opDeleteEvaluation,
@@ -1034,7 +1024,7 @@ func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) 
 // After invoking the DeleteEvaluation operation, you can use the GetEvaluation
 // operation to verify that the status of the Evaluation changed to DELETED.
 //
-// CautionThe results of the DeleteEvaluation operation are irreversible.
+// Caution: The results of the DeleteEvaluation operation are irreversible.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1043,17 +1033,17 @@ func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) 
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DeleteEvaluation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DeleteEvaluation(input *DeleteEvaluationInput) (*DeleteEvaluationOutput, error) {
 	req, out := c.DeleteEvaluationRequest(input)
 	return out, req.Send()
@@ -1091,14 +1081,13 @@ const opDeleteMLModel = "DeleteMLModel"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteMLModelRequest method.
+//	req, resp := client.DeleteMLModelRequest(params)
 //
-//    // Example sending a request using the DeleteMLModelRequest method.
-//    req, resp := client.DeleteMLModelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DeleteMLModelRequest(input *DeleteMLModelInput) (req *request.Request, output *DeleteMLModelOutput) {
 	op := &request.Operation{
 		Name:       opDeleteMLModel,
@@ -1131,17 +1120,17 @@ func (c *MachineLearning) DeleteMLModelRequest(input *DeleteMLModelInput) (req *
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DeleteMLModel for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DeleteMLModel(input *DeleteMLModelInput) (*DeleteMLModelOutput, error) {
 	req, out := c.DeleteMLModelRequest(input)
 	return out, req.Send()
@@ -1179,14 +1168,13 @@ const opDeleteRealtimeEndpoint = "DeleteRealtimeEndpoint"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteRealtimeEndpointRequest method.
+//	req, resp := client.DeleteRealtimeEndpointRequest(params)
 //
-//    // Example sending a request using the DeleteRealtimeEndpointRequest method.
-//    req, resp := client.DeleteRealtimeEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEndpointInput) (req *request.Request, output *DeleteRealtimeEndpointOutput) {
 	op := &request.Operation{
 		Name:       opDeleteRealtimeEndpoint,
@@ -1214,17 +1202,17 @@ func (c *MachineLearning) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEnd
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DeleteRealtimeEndpoint for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DeleteRealtimeEndpoint(input *DeleteRealtimeEndpointInput) (*DeleteRealtimeEndpointOutput, error) {
 	req, out := c.DeleteRealtimeEndpointRequest(input)
 	return out, req.Send()
@@ -1262,14 +1250,13 @@ const opDeleteTags = "DeleteTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteTagsRequest method.
+//	req, resp := client.DeleteTagsRequest(params)
 //
-//    // Example sending a request using the DeleteTagsRequest method.
-//    req, resp := client.DeleteTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Request, output *DeleteTagsOutput) {
 	op := &request.Operation{
 		Name:       opDeleteTags,
@@ -1300,19 +1287,19 @@ func (c *MachineLearning) DeleteTagsRequest(input *DeleteTagsInput) (req *reques
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DeleteTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidTagException "InvalidTagException"
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidTagException
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
 	req, out := c.DeleteTagsRequest(input)
 	return out, req.Send()
@@ -1350,14 +1337,13 @@ const opDescribeBatchPredictions = "DescribeBatchPredictions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeBatchPredictionsRequest method.
+//	req, resp := client.DescribeBatchPredictionsRequest(params)
 //
-//    // Example sending a request using the DescribeBatchPredictionsRequest method.
-//    req, resp := client.DescribeBatchPredictionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPredictionsInput) (req *request.Request, output *DescribeBatchPredictionsOutput) {
 	op := &request.Operation{
 		Name:       opDescribeBatchPredictions,
@@ -1392,14 +1378,14 @@ func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPr
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DescribeBatchPredictions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DescribeBatchPredictions(input *DescribeBatchPredictionsInput) (*DescribeBatchPredictionsOutput, error) {
 	req, out := c.DescribeBatchPredictionsRequest(input)
 	return out, req.Send()
@@ -1429,15 +1415,14 @@ func (c *MachineLearning) DescribeBatchPredictionsWithContext(ctx aws.Context, i
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeBatchPredictions operation.
-//    pageNum := 0
-//    err := client.DescribeBatchPredictionsPages(params,
-//        func(page *DescribeBatchPredictionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeBatchPredictions operation.
+//	pageNum := 0
+//	err := client.DescribeBatchPredictionsPages(params,
+//	    func(page *machinelearning.DescribeBatchPredictionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MachineLearning) DescribeBatchPredictionsPages(input *DescribeBatchPredictionsInput, fn func(*DescribeBatchPredictionsOutput, bool) bool) error {
 	return c.DescribeBatchPredictionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1464,10 +1449,12 @@ func (c *MachineLearning) DescribeBatchPredictionsPagesWithContext(ctx aws.Conte
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeBatchPredictionsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeBatchPredictionsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1487,14 +1474,13 @@ const opDescribeDataSources = "DescribeDataSources"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDataSourcesRequest method.
+//	req, resp := client.DescribeDataSourcesRequest(params)
 //
-//    // Example sending a request using the DescribeDataSourcesRequest method.
-//    req, resp := client.DescribeDataSourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesInput) (req *request.Request, output *DescribeDataSourcesOutput) {
 	op := &request.Operation{
 		Name:       opDescribeDataSources,
@@ -1528,14 +1514,14 @@ func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesI
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DescribeDataSources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DescribeDataSources(input *DescribeDataSourcesInput) (*DescribeDataSourcesOutput, error) {
 	req, out := c.DescribeDataSourcesRequest(input)
 	return out, req.Send()
@@ -1565,15 +1551,14 @@ func (c *MachineLearning) DescribeDataSourcesWithContext(ctx aws.Context, input 
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeDataSources operation.
-//    pageNum := 0
-//    err := client.DescribeDataSourcesPages(params,
-//        func(page *DescribeDataSourcesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeDataSources operation.
+//	pageNum := 0
+//	err := client.DescribeDataSourcesPages(params,
+//	    func(page *machinelearning.DescribeDataSourcesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MachineLearning) DescribeDataSourcesPages(input *DescribeDataSourcesInput, fn func(*DescribeDataSourcesOutput, bool) bool) error {
 	return c.DescribeDataSourcesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1600,10 +1585,12 @@ func (c *MachineLearning) DescribeDataSourcesPagesWithContext(ctx aws.Context, i
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDataSourcesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDataSourcesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1623,14 +1610,13 @@ const opDescribeEvaluations = "DescribeEvaluations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeEvaluationsRequest method.
+//	req, resp := client.DescribeEvaluationsRequest(params)
 //
-//    // Example sending a request using the DescribeEvaluationsRequest method.
-//    req, resp := client.DescribeEvaluationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsInput) (req *request.Request, output *DescribeEvaluationsOutput) {
 	op := &request.Operation{
 		Name:       opDescribeEvaluations,
@@ -1665,14 +1651,14 @@ func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsI
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DescribeEvaluations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DescribeEvaluations(input *DescribeEvaluationsInput) (*DescribeEvaluationsOutput, error) {
 	req, out := c.DescribeEvaluationsRequest(input)
 	return out, req.Send()
@@ -1702,15 +1688,14 @@ func (c *MachineLearning) DescribeEvaluationsWithContext(ctx aws.Context, input 
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeEvaluations operation.
-//    pageNum := 0
-//    err := client.DescribeEvaluationsPages(params,
-//        func(page *DescribeEvaluationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeEvaluations operation.
+//	pageNum := 0
+//	err := client.DescribeEvaluationsPages(params,
+//	    func(page *machinelearning.DescribeEvaluationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MachineLearning) DescribeEvaluationsPages(input *DescribeEvaluationsInput, fn func(*DescribeEvaluationsOutput, bool) bool) error {
 	return c.DescribeEvaluationsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1737,10 +1722,12 @@ func (c *MachineLearning) DescribeEvaluationsPagesWithContext(ctx aws.Context, i
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEvaluationsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeEvaluationsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1760,14 +1747,13 @@ const opDescribeMLModels = "DescribeMLModels"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeMLModelsRequest method.
+//	req, resp := client.DescribeMLModelsRequest(params)
 //
-//    // Example sending a request using the DescribeMLModelsRequest method.
-//    req, resp := client.DescribeMLModelsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) (req *request.Request, output *DescribeMLModelsOutput) {
 	op := &request.Operation{
 		Name:       opDescribeMLModels,
@@ -1801,14 +1787,14 @@ func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) 
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DescribeMLModels for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DescribeMLModels(input *DescribeMLModelsInput) (*DescribeMLModelsOutput, error) {
 	req, out := c.DescribeMLModelsRequest(input)
 	return out, req.Send()
@@ -1838,15 +1824,14 @@ func (c *MachineLearning) DescribeMLModelsWithContext(ctx aws.Context, input *De
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeMLModels operation.
-//    pageNum := 0
-//    err := client.DescribeMLModelsPages(params,
-//        func(page *DescribeMLModelsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeMLModels operation.
+//	pageNum := 0
+//	err := client.DescribeMLModelsPages(params,
+//	    func(page *machinelearning.DescribeMLModelsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MachineLearning) DescribeMLModelsPages(input *DescribeMLModelsInput, fn func(*DescribeMLModelsOutput, bool) bool) error {
 	return c.DescribeMLModelsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1873,10 +1858,12 @@ func (c *MachineLearning) DescribeMLModelsPagesWithContext(ctx aws.Context, inpu
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeMLModelsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeMLModelsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1896,14 +1883,13 @@ const opDescribeTags = "DescribeTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeTagsRequest method.
+//	req, resp := client.DescribeTagsRequest(params)
 //
-//    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
 	op := &request.Operation{
 		Name:       opDescribeTags,
@@ -1931,17 +1917,17 @@ func (c *MachineLearning) DescribeTagsRequest(input *DescribeTagsInput) (req *re
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation DescribeTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
 	req, out := c.DescribeTagsRequest(input)
 	return out, req.Send()
@@ -1979,14 +1965,13 @@ const opGetBatchPrediction = "GetBatchPrediction"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetBatchPredictionRequest method.
+//	req, resp := client.GetBatchPredictionRequest(params)
 //
-//    // Example sending a request using the GetBatchPredictionRequest method.
-//    req, resp := client.GetBatchPredictionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) GetBatchPredictionRequest(input *GetBatchPredictionInput) (req *request.Request, output *GetBatchPredictionOutput) {
 	op := &request.Operation{
 		Name:       opGetBatchPrediction,
@@ -2015,17 +2000,17 @@ func (c *MachineLearning) GetBatchPredictionRequest(input *GetBatchPredictionInp
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation GetBatchPrediction for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) GetBatchPrediction(input *GetBatchPredictionInput) (*GetBatchPredictionOutput, error) {
 	req, out := c.GetBatchPredictionRequest(input)
 	return out, req.Send()
@@ -2063,14 +2048,13 @@ const opGetDataSource = "GetDataSource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDataSourceRequest method.
+//	req, resp := client.GetDataSourceRequest(params)
 //
-//    // Example sending a request using the GetDataSourceRequest method.
-//    req, resp := client.GetDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) GetDataSourceRequest(input *GetDataSourceInput) (req *request.Request, output *GetDataSourceOutput) {
 	op := &request.Operation{
 		Name:       opGetDataSource,
@@ -2103,17 +2087,17 @@ func (c *MachineLearning) GetDataSourceRequest(input *GetDataSourceInput) (req *
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation GetDataSource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) GetDataSource(input *GetDataSourceInput) (*GetDataSourceOutput, error) {
 	req, out := c.GetDataSourceRequest(input)
 	return out, req.Send()
@@ -2151,14 +2135,13 @@ const opGetEvaluation = "GetEvaluation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetEvaluationRequest method.
+//	req, resp := client.GetEvaluationRequest(params)
 //
-//    // Example sending a request using the GetEvaluationRequest method.
-//    req, resp := client.GetEvaluationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) GetEvaluationRequest(input *GetEvaluationInput) (req *request.Request, output *GetEvaluationOutput) {
 	op := &request.Operation{
 		Name:       opGetEvaluation,
@@ -2187,17 +2170,17 @@ func (c *MachineLearning) GetEvaluationRequest(input *GetEvaluationInput) (req *
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation GetEvaluation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) GetEvaluation(input *GetEvaluationInput) (*GetEvaluationOutput, error) {
 	req, out := c.GetEvaluationRequest(input)
 	return out, req.Send()
@@ -2235,14 +2218,13 @@ const opGetMLModel = "GetMLModel"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetMLModelRequest method.
+//	req, resp := client.GetMLModelRequest(params)
 //
-//    // Example sending a request using the GetMLModelRequest method.
-//    req, resp := client.GetMLModelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) GetMLModelRequest(input *GetMLModelInput) (req *request.Request, output *GetMLModelOutput) {
 	op := &request.Operation{
 		Name:       opGetMLModel,
@@ -2273,17 +2255,17 @@ func (c *MachineLearning) GetMLModelRequest(input *GetMLModelInput) (req *reques
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation GetMLModel for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) GetMLModel(input *GetMLModelInput) (*GetMLModelOutput, error) {
 	req, out := c.GetMLModelRequest(input)
 	return out, req.Send()
@@ -2321,14 +2303,13 @@ const opPredict = "Predict"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PredictRequest method.
+//	req, resp := client.PredictRequest(params)
 //
-//    // Example sending a request using the PredictRequest method.
-//    req, resp := client.PredictRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) PredictRequest(input *PredictInput) (req *request.Request, output *PredictOutput) {
 	op := &request.Operation{
 		Name:       opPredict,
@@ -2349,7 +2330,7 @@ func (c *MachineLearning) PredictRequest(input *PredictInput) (req *request.Requ
 //
 // Generates a prediction for the observation using the specified ML Model.
 //
-// NoteNot all response parameters will be populated. Whether a response parameter
+// Note: Not all response parameters will be populated. Whether a response parameter
 // is populated depends on the type of model requested.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2359,24 +2340,24 @@ func (c *MachineLearning) PredictRequest(input *PredictInput) (req *request.Requ
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation Predict for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The subscriber exceeded the maximum number of operations. This exception
-//   can occur when listing objects such as DataSource.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - LimitExceededException
+//     The subscriber exceeded the maximum number of operations. This exception
+//     can occur when listing objects such as DataSource.
 //
-//   * ErrCodePredictorNotMountedException "PredictorNotMountedException"
-//   The exception is thrown when a predict request is made to an unmounted MLModel.
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 //
+//   - PredictorNotMountedException
+//     The exception is thrown when a predict request is made to an unmounted MLModel.
 func (c *MachineLearning) Predict(input *PredictInput) (*PredictOutput, error) {
 	req, out := c.PredictRequest(input)
 	return out, req.Send()
@@ -2414,14 +2395,13 @@ const opUpdateBatchPrediction = "UpdateBatchPrediction"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateBatchPredictionRequest method.
+//	req, resp := client.UpdateBatchPredictionRequest(params)
 //
-//    // Example sending a request using the UpdateBatchPredictionRequest method.
-//    req, resp := client.UpdateBatchPredictionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) UpdateBatchPredictionRequest(input *UpdateBatchPredictionInput) (req *request.Request, output *UpdateBatchPredictionOutput) {
 	op := &request.Operation{
 		Name:       opUpdateBatchPrediction,
@@ -2452,17 +2432,17 @@ func (c *MachineLearning) UpdateBatchPredictionRequest(input *UpdateBatchPredict
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation UpdateBatchPrediction for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) UpdateBatchPrediction(input *UpdateBatchPredictionInput) (*UpdateBatchPredictionOutput, error) {
 	req, out := c.UpdateBatchPredictionRequest(input)
 	return out, req.Send()
@@ -2500,14 +2480,13 @@ const opUpdateDataSource = "UpdateDataSource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDataSourceRequest method.
+//	req, resp := client.UpdateDataSourceRequest(params)
 //
-//    // Example sending a request using the UpdateDataSourceRequest method.
-//    req, resp := client.UpdateDataSourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) UpdateDataSourceRequest(input *UpdateDataSourceInput) (req *request.Request, output *UpdateDataSourceOutput) {
 	op := &request.Operation{
 		Name:       opUpdateDataSource,
@@ -2538,17 +2517,17 @@ func (c *MachineLearning) UpdateDataSourceRequest(input *UpdateDataSourceInput) 
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation UpdateDataSource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) UpdateDataSource(input *UpdateDataSourceInput) (*UpdateDataSourceOutput, error) {
 	req, out := c.UpdateDataSourceRequest(input)
 	return out, req.Send()
@@ -2586,14 +2565,13 @@ const opUpdateEvaluation = "UpdateEvaluation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateEvaluationRequest method.
+//	req, resp := client.UpdateEvaluationRequest(params)
 //
-//    // Example sending a request using the UpdateEvaluationRequest method.
-//    req, resp := client.UpdateEvaluationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) UpdateEvaluationRequest(input *UpdateEvaluationInput) (req *request.Request, output *UpdateEvaluationOutput) {
 	op := &request.Operation{
 		Name:       opUpdateEvaluation,
@@ -2624,17 +2602,17 @@ func (c *MachineLearning) UpdateEvaluationRequest(input *UpdateEvaluationInput) 
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation UpdateEvaluation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) UpdateEvaluation(input *UpdateEvaluationInput) (*UpdateEvaluationOutput, error) {
 	req, out := c.UpdateEvaluationRequest(input)
 	return out, req.Send()
@@ -2672,14 +2650,13 @@ const opUpdateMLModel = "UpdateMLModel"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateMLModelRequest method.
+//	req, resp := client.UpdateMLModelRequest(params)
 //
-//    // Example sending a request using the UpdateMLModelRequest method.
-//    req, resp := client.UpdateMLModelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *MachineLearning) UpdateMLModelRequest(input *UpdateMLModelInput) (req *request.Request, output *UpdateMLModelOutput) {
 	op := &request.Operation{
 		Name:       opUpdateMLModel,
@@ -2710,17 +2687,17 @@ func (c *MachineLearning) UpdateMLModelRequest(input *UpdateMLModelInput) (req *
 // See the AWS API reference guide for Amazon Machine Learning's
 // API operation UpdateMLModel for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A specified resource cannot be located.
+//   - InvalidInputException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInternalServerException "InternalServerException"
-//   An error on the server occurred when trying to process a request.
+//   - ResourceNotFoundException
+//     A specified resource cannot be located.
 //
+//   - InternalServerException
+//     An error on the server occurred when trying to process a request.
 func (c *MachineLearning) UpdateMLModel(input *UpdateMLModelInput) (*UpdateMLModelOutput, error) {
 	req, out := c.UpdateMLModelRequest(input)
 	return out, req.Send()
@@ -2762,12 +2739,20 @@ type AddTagsInput struct {
 	Tags []*Tag `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsInput) GoString() string {
 	return s.String()
 }
@@ -2833,12 +2818,20 @@ type AddTagsOutput struct {
 	ResourceType *string `type:"string" enum:"TaggableResourceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsOutput) GoString() string {
 	return s.String()
 }
@@ -2919,10 +2912,14 @@ type BatchPrediction struct {
 	//
 	//    * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	//    generate predictions for a batch of observations.
+	//
 	//    * INPROGRESS - The process is underway.
+	//
 	//    * FAILED - The request to perform a batch prediction did not run to completion.
 	//    It is not usable.
+	//
 	//    * COMPLETED - The batch prediction process completed successfully.
+	//
 	//    * DELETED - The BatchPrediction is marked as deleted. It is not usable.
 	Status *string `type:"string" enum:"EntityStatus"`
 
@@ -2930,12 +2927,20 @@ type BatchPrediction struct {
 	TotalRecordCount *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchPrediction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchPrediction) GoString() string {
 	return s.String()
 }
@@ -3064,18 +3069,26 @@ type CreateBatchPredictionInput struct {
 	//
 	// Amazon ML needs permissions to store and retrieve the logs on your behalf.
 	// For information about how to set permissions, see the Amazon Machine Learning
-	// Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
+	// Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg).
 	//
 	// OutputUri is a required field
 	OutputUri *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBatchPredictionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBatchPredictionInput) GoString() string {
 	return s.String()
 }
@@ -3155,12 +3168,20 @@ type CreateBatchPredictionOutput struct {
 	BatchPredictionId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBatchPredictionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBatchPredictionOutput) GoString() string {
 	return s.String()
 }
@@ -3191,6 +3212,43 @@ type CreateDataSourceFromRDSInput struct {
 
 	// The data specification of an Amazon RDS DataSource:
 	//
+	//    * DatabaseInformation - DatabaseName - The name of the Amazon RDS database.
+	//    InstanceIdentifier - A unique identifier for the Amazon RDS database instance.
+	//
+	//    * DatabaseCredentials - AWS Identity and Access Management (IAM) credentials
+	//    that are used to connect to the Amazon RDS database.
+	//
+	//    * ResourceRole - A role (DataPipelineDefaultResourceRole) assumed by an
+	//    EC2 instance to carry out the copy task from Amazon RDS to Amazon Simple
+	//    Storage Service (Amazon S3). For more information, see Role templates
+	//    (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+	//    for data pipelines.
+	//
+	//    * ServiceRole - A role (DataPipelineDefaultRole) assumed by the AWS Data
+	//    Pipeline service to monitor the progress of the copy task from Amazon
+	//    RDS to Amazon S3. For more information, see Role templates (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+	//    for data pipelines.
+	//
+	//    * SecurityInfo - The security information to use to access an RDS DB instance.
+	//    You need to set up appropriate ingress rules for the security entity IDs
+	//    provided to allow access to the Amazon RDS instance. Specify a [SubnetId,
+	//    SecurityGroupIds] pair for a VPC-based RDS DB instance.
+	//
+	//    * SelectSqlQuery - A query that is used to retrieve the observation data
+	//    for the Datasource.
+	//
+	//    * S3StagingLocation - The Amazon S3 location for staging Amazon RDS data.
+	//    The data retrieved from Amazon RDS using SelectSqlQuery is stored in this
+	//    location.
+	//
+	//    * DataSchemaUri - The Amazon S3 location of the DataSchema.
+	//
+	//    * DataSchema - A JSON string representing the schema. This is not required
+	//    if DataSchemaUri is specified.
+	//
+	//    * DataRearrangement - A JSON string that represents the splitting and
+	//    rearrangement requirements for the Datasource. Sample - "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	//
 	// RDSData is a required field
 	RDSData *RDSDataSpec `type:"structure" required:"true"`
 
@@ -3202,12 +3260,20 @@ type CreateDataSourceFromRDSInput struct {
 	RoleARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromRDSInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromRDSInput) GoString() string {
 	return s.String()
 }
@@ -3279,7 +3345,7 @@ func (s *CreateDataSourceFromRDSInput) SetRoleARN(v string) *CreateDataSourceFro
 // updates by using the GetBatchPrediction operation and checking the Status
 // parameter. You can inspect the Message when Status shows up as FAILED. You
 // can also check the progress of the copy operation by going to the DataPipeline
-// console and looking up the pipeline using the pipelineId  from the describe
+// console and looking up the pipeline using the pipelineId from the describe
 // call.
 type CreateDataSourceFromRDSOutput struct {
 	_ struct{} `type:"structure"`
@@ -3289,12 +3355,20 @@ type CreateDataSourceFromRDSOutput struct {
 	DataSourceId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromRDSOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromRDSOutput) GoString() string {
 	return s.String()
 }
@@ -3325,8 +3399,7 @@ type CreateDataSourceFromRedshiftInput struct {
 	// The data specification of an Amazon Redshift DataSource:
 	//
 	//    * DatabaseInformation - DatabaseName - The name of the Amazon Redshift
-	//    database.
-	//  ClusterIdentifier - The unique ID for the Amazon Redshift cluster.
+	//    database. ClusterIdentifier - The unique ID for the Amazon Redshift cluster.
 	//
 	//    * DatabaseCredentials - The AWS Identity and Access Management (IAM) credentials
 	//    that are used to connect to the Amazon Redshift database.
@@ -3344,9 +3417,7 @@ type CreateDataSourceFromRedshiftInput struct {
 	//    if DataSchemaUri is specified.
 	//
 	//    * DataRearrangement - A JSON string that represents the splitting and
-	//    rearrangement requirements for the DataSource.
-	//
-	//  Sample -  "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	//    rearrangement requirements for the DataSource. Sample - "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
 	//
 	// DataSpec is a required field
 	DataSpec *RedshiftDataSpec `type:"structure" required:"true"`
@@ -3354,22 +3425,30 @@ type CreateDataSourceFromRedshiftInput struct {
 	// A fully specified role Amazon Resource Name (ARN). Amazon ML assumes the
 	// role on behalf of the user to create the following:
 	//
-	// A security group to allow Amazon ML to execute the SelectSqlQuery query on
-	// an Amazon Redshift cluster
+	//    * A security group to allow Amazon ML to execute the SelectSqlQuery query
+	//    on an Amazon Redshift cluster
 	//
-	// An Amazon S3 bucket policy to grant Amazon ML read/write permissions on the
-	// S3StagingLocation
+	//    * An Amazon S3 bucket policy to grant Amazon ML read/write permissions
+	//    on the S3StagingLocation
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromRedshiftInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromRedshiftInput) GoString() string {
 	return s.String()
 }
@@ -3448,12 +3527,20 @@ type CreateDataSourceFromRedshiftOutput struct {
 	DataSourceId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromRedshiftOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromRedshiftOutput) GoString() string {
 	return s.String()
 }
@@ -3491,20 +3578,26 @@ type CreateDataSourceFromS3Input struct {
 	//    if DataSchemaUri is specified.
 	//
 	//    * DataRearrangement - A JSON string that represents the splitting and
-	//    rearrangement requirements for the Datasource.
-	//
-	//  Sample -  "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	//    rearrangement requirements for the Datasource. Sample - "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
 	//
 	// DataSpec is a required field
 	DataSpec *S3DataSpec `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromS3Input) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromS3Input) GoString() string {
 	return s.String()
 }
@@ -3570,12 +3663,20 @@ type CreateDataSourceFromS3Output struct {
 	DataSourceId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromS3Output) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDataSourceFromS3Output) GoString() string {
 	return s.String()
 }
@@ -3612,12 +3713,20 @@ type CreateEvaluationInput struct {
 	MLModelId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateEvaluationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateEvaluationInput) GoString() string {
 	return s.String()
 }
@@ -3687,12 +3796,20 @@ type CreateEvaluationOutput struct {
 	EvaluationId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateEvaluationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateEvaluationOutput) GoString() string {
 	return s.String()
 }
@@ -3720,9 +3837,10 @@ type CreateMLModelInput struct {
 	//    * Choose REGRESSION if the MLModel will be used to predict a numeric value.
 	//
 	//    * Choose BINARY if the MLModel result has two possible values.
+	//
 	//    * Choose MULTICLASS if the MLModel result has a limited number of values.
 	//
-	// For more information, see the Amazon Machine Learning Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
+	// For more information, see the Amazon Machine Learning Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg).
 	//
 	// MLModelType is a required field
 	MLModelType *string `type:"string" required:"true" enum:"MLModelType"`
@@ -3734,8 +3852,7 @@ type CreateMLModelInput struct {
 	//
 	//    * sgd.maxMLModelSizeInBytes - The maximum allowed size of the model. Depending
 	//    on the input data, the size of the model might affect its performance.
-	//
-	//  The value is an integer that ranges from 100000 to 2147483648. The default
+	//    The value is an integer that ranges from 100000 to 2147483648. The default
 	//    value is 33554432.
 	//
 	//    * sgd.maxPasses - The number of times that the training process traverses
@@ -3751,20 +3868,17 @@ type CreateMLModelInput struct {
 	//    It controls overfitting the data by penalizing large coefficients. This
 	//    tends to drive coefficients to zero, resulting in a sparse feature set.
 	//    If you use this parameter, start by specifying a small value, such as
-	//    1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
-	//    not use L1 normalization. This parameter can't be used when L2 is specified.
-	//    Use this parameter sparingly.
+	//    1.0E-08. The value is a double that ranges from 0 to MAX_DOUBLE. The default
+	//    is to not use L1 normalization. This parameter can't be used when L2 is
+	//    specified. Use this parameter sparingly.
 	//
 	//    * sgd.l2RegularizationAmount - The coefficient regularization L2 norm.
 	//    It controls overfitting the data by penalizing large coefficients. This
 	//    tends to drive coefficients to small, nonzero values. If you use this
-	//    parameter, start by specifying a small value, such as 1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
-	//    not use L2 normalization. This parameter can't be used when L1 is specified.
-	//    Use this parameter sparingly.
+	//    parameter, start by specifying a small value, such as 1.0E-08. The value
+	//    is a double that ranges from 0 to MAX_DOUBLE. The default is to not use
+	//    L2 normalization. This parameter can't be used when L1 is specified. Use
+	//    this parameter sparingly.
 	Parameters map[string]*string `type:"map"`
 
 	// The data recipe for creating the MLModel. You must specify either the recipe
@@ -3783,12 +3897,20 @@ type CreateMLModelInput struct {
 	TrainingDataSourceId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMLModelInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMLModelInput) GoString() string {
 	return s.String()
 }
@@ -3873,12 +3995,20 @@ type CreateMLModelOutput struct {
 	MLModelId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMLModelOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMLModelOutput) GoString() string {
 	return s.String()
 }
@@ -3898,12 +4028,20 @@ type CreateRealtimeEndpointInput struct {
 	MLModelId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateRealtimeEndpointInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateRealtimeEndpointInput) GoString() string {
 	return s.String()
 }
@@ -3934,8 +4072,8 @@ func (s *CreateRealtimeEndpointInput) SetMLModelId(v string) *CreateRealtimeEndp
 //
 // The result contains the MLModelId and the endpoint information for the MLModel.
 //
-// The endpoint information includes the URI of the MLModel; that is, the location
-// to send online prediction requests for the specified MLModel.
+// Note: The endpoint information includes the URI of the MLModel; that is,
+// the location to send online prediction requests for the specified MLModel.
 type CreateRealtimeEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3947,12 +4085,20 @@ type CreateRealtimeEndpointOutput struct {
 	RealtimeEndpointInfo *RealtimeEndpointInfo `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateRealtimeEndpointOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateRealtimeEndpointOutput) GoString() string {
 	return s.String()
 }
@@ -4029,7 +4175,7 @@ type DataSource struct {
 	// Describes the DataSource details specific to Amazon Redshift.
 	RedshiftMetadata *RedshiftMetadata `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of an AWS IAM Role (http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts),
+	// The Amazon Resource Name (ARN) of an AWS IAM Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts),
 	// such as the following: arn:aws:iam::account:role/rolename.
 	RoleARN *string `min:"1" type:"string"`
 
@@ -4041,20 +4187,32 @@ type DataSource struct {
 	//
 	//    * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	//    create a DataSource.
+	//
 	//    * INPROGRESS - The creation process is underway.
+	//
 	//    * FAILED - The request to create a DataSource did not run to completion.
 	//    It is not usable.
+	//
 	//    * COMPLETED - The creation process completed successfully.
+	//
 	//    * DELETED - The DataSource is marked as deleted. It is not usable.
 	Status *string `type:"string" enum:"EntityStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DataSource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DataSource) GoString() string {
 	return s.String()
 }
@@ -4176,12 +4334,20 @@ type DeleteBatchPredictionInput struct {
 	BatchPredictionId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBatchPredictionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBatchPredictionInput) GoString() string {
 	return s.String()
 }
@@ -4220,12 +4386,20 @@ type DeleteBatchPredictionOutput struct {
 	BatchPredictionId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBatchPredictionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBatchPredictionOutput) GoString() string {
 	return s.String()
 }
@@ -4245,12 +4419,20 @@ type DeleteDataSourceInput struct {
 	DataSourceId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDataSourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDataSourceInput) GoString() string {
 	return s.String()
 }
@@ -4286,12 +4468,20 @@ type DeleteDataSourceOutput struct {
 	DataSourceId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDataSourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDataSourceOutput) GoString() string {
 	return s.String()
 }
@@ -4311,12 +4501,20 @@ type DeleteEvaluationInput struct {
 	EvaluationId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteEvaluationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteEvaluationInput) GoString() string {
 	return s.String()
 }
@@ -4356,12 +4554,20 @@ type DeleteEvaluationOutput struct {
 	EvaluationId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteEvaluationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteEvaluationOutput) GoString() string {
 	return s.String()
 }
@@ -4381,12 +4587,20 @@ type DeleteMLModelInput struct {
 	MLModelId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteMLModelInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteMLModelInput) GoString() string {
 	return s.String()
 }
@@ -4425,12 +4639,20 @@ type DeleteMLModelOutput struct {
 	MLModelId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteMLModelOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteMLModelOutput) GoString() string {
 	return s.String()
 }
@@ -4450,12 +4672,20 @@ type DeleteRealtimeEndpointInput struct {
 	MLModelId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRealtimeEndpointInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRealtimeEndpointInput) GoString() string {
 	return s.String()
 }
@@ -4496,12 +4726,20 @@ type DeleteRealtimeEndpointOutput struct {
 	RealtimeEndpointInfo *RealtimeEndpointInfo `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRealtimeEndpointOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteRealtimeEndpointOutput) GoString() string {
 	return s.String()
 }
@@ -4537,12 +4775,20 @@ type DeleteTagsInput struct {
 	TagKeys []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsInput) GoString() string {
 	return s.String()
 }
@@ -4598,12 +4844,20 @@ type DeleteTagsOutput struct {
 	ResourceType *string `type:"string" enum:"TaggableResourceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsOutput) GoString() string {
 	return s.String()
 }
@@ -4631,15 +4885,20 @@ type DescribeBatchPredictionsInput struct {
 	//
 	//    * CreatedAt - Sets the search criteria to the BatchPrediction creation
 	//    date.
+	//
 	//    * Status - Sets the search criteria to the BatchPrediction status.
-	//    * Name - Sets the search criteria to the contents of the BatchPredictionName.
+	//
+	//    * Name - Sets the search criteria to the contents of the BatchPrediction
+	//    Name.
 	//
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    the BatchPrediction creation.
+	//
 	//    * MLModelId - Sets the search criteria to the MLModel used in the BatchPrediction.
 	//
 	//    * DataSourceId - Sets the search criteria to the DataSource used in the
 	//    BatchPrediction.
+	//
 	//    * DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
 	//    The URL can identify either a file or an Amazon Simple Storage Solution
 	//    (Amazon S3) bucket or directory.
@@ -4676,7 +4935,7 @@ type DescribeBatchPredictionsInput struct {
 
 	// A string that is found at the beginning of a variable, such as Name or Id.
 	//
-	// For example, a Batch Prediction operation could have the Name2014-09-09-HolidayGiftMailer.
+	// For example, a Batch Prediction operation could have the Name 2014-09-09-HolidayGiftMailer.
 	// To search for this BatchPrediction, select Name for the FilterVariable and
 	// any of the following strings for the Prefix:
 	//
@@ -4691,17 +4950,27 @@ type DescribeBatchPredictionsInput struct {
 	// of MLModels.
 	//
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
 	// Results are sorted by FilterVariable.
 	SortOrder *string `type:"string" enum:"SortOrder"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBatchPredictionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBatchPredictionsInput) GoString() string {
 	return s.String()
 }
@@ -4798,12 +5067,20 @@ type DescribeBatchPredictionsOutput struct {
 	Results []*BatchPrediction `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBatchPredictionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBatchPredictionsOutput) GoString() string {
 	return s.String()
 }
@@ -4830,11 +5107,15 @@ type DescribeDataSourcesInput struct {
 	// Use one of the following variables to filter a list of DataSource:
 	//
 	//    * CreatedAt - Sets the search criteria to DataSource creation dates.
+	//
 	//    * Status - Sets the search criteria to DataSource statuses.
-	//    * Name - Sets the search criteria to the contents of DataSourceName.
+	//
+	//    * Name - Sets the search criteria to the contents of DataSource Name.
+	//
 	//    * DataUri - Sets the search criteria to the URI of data files used to
 	//    create the DataSource. The URI can identify either a file or an Amazon
 	//    Simple Storage Service (Amazon S3) bucket or directory.
+	//
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    the DataSource creation.
 	FilterVariable *string `type:"string" enum:"DataSourceFilterVariable"`
@@ -4867,7 +5148,7 @@ type DescribeDataSourcesInput struct {
 
 	// A string that is found at the beginning of a variable, such as Name or Id.
 	//
-	// For example, a DataSource could have the Name2014-09-09-HolidayGiftMailer.
+	// For example, a DataSource could have the Name 2014-09-09-HolidayGiftMailer.
 	// To search for this DataSource, select Name for the FilterVariable and any
 	// of the following strings for the Prefix:
 	//
@@ -4882,17 +5163,27 @@ type DescribeDataSourcesInput struct {
 	// of DataSource.
 	//
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
 	// Results are sorted by FilterVariable.
 	SortOrder *string `type:"string" enum:"SortOrder"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDataSourcesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDataSourcesInput) GoString() string {
 	return s.String()
 }
@@ -4989,12 +5280,20 @@ type DescribeDataSourcesOutput struct {
 	Results []*DataSource `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDataSourcesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDataSourcesOutput) GoString() string {
 	return s.String()
 }
@@ -5023,9 +5322,12 @@ type DescribeEvaluationsInput struct {
 	//    * CreatedAt - Sets the search criteria to the Evaluation creation date.
 	//
 	//    * Status - Sets the search criteria to the Evaluation status.
-	//    * Name - Sets the search criteria to the contents of EvaluationName.
+	//
+	//    * Name - Sets the search criteria to the contents of Evaluation Name.
+	//
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    an Evaluation.
+	//
 	//    * MLModelId - Sets the search criteria to the MLModel that was evaluated.
 	//
 	//    * DataSourceId - Sets the search criteria to the DataSource used in Evaluation.
@@ -5063,7 +5365,7 @@ type DescribeEvaluationsInput struct {
 
 	// A string that is found at the beginning of a variable, such as Name or Id.
 	//
-	// For example, an Evaluation could have the Name2014-09-09-HolidayGiftMailer.
+	// For example, an Evaluation could have the Name 2014-09-09-HolidayGiftMailer.
 	// To search for this Evaluation, select Name for the FilterVariable and any
 	// of the following strings for the Prefix:
 	//
@@ -5078,17 +5380,27 @@ type DescribeEvaluationsInput struct {
 	// of Evaluation.
 	//
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
 	// Results are sorted by FilterVariable.
 	SortOrder *string `type:"string" enum:"SortOrder"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEvaluationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEvaluationsInput) GoString() string {
 	return s.String()
 }
@@ -5185,12 +5497,20 @@ type DescribeEvaluationsOutput struct {
 	Results []*Evaluation `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEvaluationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEvaluationsOutput) GoString() string {
 	return s.String()
 }
@@ -5217,18 +5537,26 @@ type DescribeMLModelsInput struct {
 	// Use one of the following variables to filter a list of MLModel:
 	//
 	//    * CreatedAt - Sets the search criteria to MLModel creation date.
+	//
 	//    * Status - Sets the search criteria to MLModel status.
-	//    * Name - Sets the search criteria to the contents of MLModelName.
+	//
+	//    * Name - Sets the search criteria to the contents of MLModel Name.
+	//
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    the MLModel creation.
+	//
 	//    * TrainingDataSourceId - Sets the search criteria to the DataSource used
 	//    to train one or more MLModel.
+	//
 	//    * RealtimeEndpointStatus - Sets the search criteria to the MLModel real-time
 	//    endpoint status.
+	//
 	//    * MLModelType - Sets the search criteria to MLModel type: binary, regression,
 	//    or multi-class.
+	//
 	//    * Algorithm - Sets the search criteria to the algorithm that the MLModel
 	//    uses.
+	//
 	//    * TrainingDataURI - Sets the search criteria to the data file(s) used
 	//    in training a MLModel. The URL can identify either a file or an Amazon
 	//    Simple Storage Service (Amazon S3) bucket or directory.
@@ -5263,7 +5591,7 @@ type DescribeMLModelsInput struct {
 
 	// A string that is found at the beginning of a variable, such as Name or Id.
 	//
-	// For example, an MLModel could have the Name2014-09-09-HolidayGiftMailer.
+	// For example, an MLModel could have the Name 2014-09-09-HolidayGiftMailer.
 	// To search for this MLModel, select Name for the FilterVariable and any of
 	// the following strings for the Prefix:
 	//
@@ -5278,17 +5606,27 @@ type DescribeMLModelsInput struct {
 	// of MLModel.
 	//
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
 	// Results are sorted by FilterVariable.
 	SortOrder *string `type:"string" enum:"SortOrder"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeMLModelsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeMLModelsInput) GoString() string {
 	return s.String()
 }
@@ -5385,12 +5723,20 @@ type DescribeMLModelsOutput struct {
 	Results []*MLModel `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeMLModelsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeMLModelsOutput) GoString() string {
 	return s.String()
 }
@@ -5421,12 +5767,20 @@ type DescribeTagsInput struct {
 	ResourceType *string `type:"string" required:"true" enum:"TaggableResourceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsInput) GoString() string {
 	return s.String()
 }
@@ -5476,12 +5830,20 @@ type DescribeTagsOutput struct {
 	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
 }
@@ -5564,7 +5926,7 @@ type Evaluation struct {
 	//    to measure performance.
 	//
 	// For more information about performance metrics, please see the Amazon Machine
-	// Learning Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
+	// Learning Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg).
 	PerformanceMetrics *PerformanceMetrics `type:"structure"`
 
 	// A timestamp represented in epoch time.
@@ -5575,20 +5937,32 @@ type Evaluation struct {
 	//
 	//    * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	//    evaluate an MLModel.
+	//
 	//    * INPROGRESS - The evaluation is underway.
+	//
 	//    * FAILED - The request to evaluate an MLModel did not run to completion.
 	//    It is not usable.
+	//
 	//    * COMPLETED - The evaluation process completed successfully.
+	//
 	//    * DELETED - The Evaluation is marked as deleted. It is not usable.
 	Status *string `type:"string" enum:"EntityStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Evaluation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Evaluation) GoString() string {
 	return s.String()
 }
@@ -5686,12 +6060,20 @@ type GetBatchPredictionInput struct {
 	BatchPredictionId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetBatchPredictionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetBatchPredictionInput) GoString() string {
 	return s.String()
 }
@@ -5788,10 +6170,14 @@ type GetBatchPredictionOutput struct {
 	//
 	//    * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	//    generate batch predictions.
+	//
 	//    * INPROGRESS - The batch predictions are in progress.
+	//
 	//    * FAILED - The request to perform a batch prediction did not run to completion.
 	//    It is not usable.
+	//
 	//    * COMPLETED - The batch prediction process completed successfully.
+	//
 	//    * DELETED - The BatchPrediction is marked as deleted. It is not usable.
 	Status *string `type:"string" enum:"EntityStatus"`
 
@@ -5800,12 +6186,20 @@ type GetBatchPredictionOutput struct {
 	TotalRecordCount *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetBatchPredictionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetBatchPredictionOutput) GoString() string {
 	return s.String()
 }
@@ -5928,12 +6322,20 @@ type GetDataSourceInput struct {
 	Verbose *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDataSourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDataSourceInput) GoString() string {
 	return s.String()
 }
@@ -6006,7 +6408,7 @@ type GetDataSourceOutput struct {
 
 	// The schema used by all of the data files of this DataSource.
 	//
-	// NoteThis parameter is provided as part of the verbose format.
+	// Note: This parameter is provided as part of the verbose format.
 	DataSourceSchema *string `type:"string"`
 
 	// The epoch time when Amazon Machine Learning marked the DataSource as COMPLETED
@@ -6037,7 +6439,7 @@ type GetDataSourceOutput struct {
 	// Describes the DataSource details specific to Amazon Redshift.
 	RedshiftMetadata *RedshiftMetadata `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of an AWS IAM Role (http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts),
+	// The Amazon Resource Name (ARN) of an AWS IAM Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts),
 	// such as the following: arn:aws:iam::account:role/rolename.
 	RoleARN *string `min:"1" type:"string"`
 
@@ -6049,20 +6451,32 @@ type GetDataSourceOutput struct {
 	// values:
 	//
 	//    * PENDING - Amazon ML submitted a request to create a DataSource.
+	//
 	//    * INPROGRESS - The creation process is underway.
+	//
 	//    * FAILED - The request to create a DataSource did not run to completion.
 	//    It is not usable.
+	//
 	//    * COMPLETED - The creation process completed successfully.
+	//
 	//    * DELETED - The DataSource is marked as deleted. It is not usable.
 	Status *string `type:"string" enum:"EntityStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDataSourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDataSourceOutput) GoString() string {
 	return s.String()
 }
@@ -6197,12 +6611,20 @@ type GetEvaluationInput struct {
 	EvaluationId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEvaluationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEvaluationInput) GoString() string {
 	return s.String()
 }
@@ -6293,7 +6715,7 @@ type GetEvaluationOutput struct {
 	//    to measure performance.
 	//
 	// For more information about performance metrics, please see the Amazon Machine
-	// Learning Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
+	// Learning Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg).
 	PerformanceMetrics *PerformanceMetrics `type:"structure"`
 
 	// The epoch time when Amazon Machine Learning marked the Evaluation as INPROGRESS.
@@ -6305,20 +6727,32 @@ type GetEvaluationOutput struct {
 	//
 	//    * PENDING - Amazon Machine Language (Amazon ML) submitted a request to
 	//    evaluate an MLModel.
+	//
 	//    * INPROGRESS - The evaluation is underway.
+	//
 	//    * FAILED - The request to evaluate an MLModel did not run to completion.
 	//    It is not usable.
+	//
 	//    * COMPLETED - The evaluation process completed successfully.
+	//
 	//    * DELETED - The Evaluation is marked as deleted. It is not usable.
 	Status *string `type:"string" enum:"EntityStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEvaluationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEvaluationOutput) GoString() string {
 	return s.String()
 }
@@ -6429,12 +6863,20 @@ type GetMLModelInput struct {
 	Verbose *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMLModelInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMLModelInput) GoString() string {
 	return s.String()
 }
@@ -6511,8 +6953,10 @@ type GetMLModelOutput struct {
 	//
 	//    * REGRESSION -- Produces a numeric result. For example, "What price should
 	//    a house be listed at?"
+	//
 	//    * BINARY -- Produces one of two possible results. For example, "Is this
 	//    an e-commerce website?"
+	//
 	//    * MULTICLASS -- Produces one of several possible results. For example,
 	//    "Is this a HIGH, LOW or MEDIUM risk trade?"
 	MLModelType *string `type:"string" enum:"MLModelType"`
@@ -6527,15 +6971,15 @@ type GetMLModelOutput struct {
 	// information about the observation data to use during training, and manipulations
 	// to perform on the observation data during training.
 	//
-	// NoteThis parameter is provided as part of the verbose format.
+	// Note: This parameter is provided as part of the verbose format.
 	Recipe *string `type:"string"`
 
 	// The schema used by all of the data files referenced by the DataSource.
 	//
-	// NoteThis parameter is provided as part of the verbose format.
+	// Note: This parameter is provided as part of the verbose format.
 	Schema *string `type:"string"`
 
-	// The scoring threshold is used in binary classification MLModelmodels. It
+	// The scoring threshold is used in binary classification MLModel models. It
 	// marks the boundary between a positive prediction and a negative prediction.
 	//
 	// Output values greater than or equal to the threshold receive a positive result
@@ -6559,10 +7003,13 @@ type GetMLModelOutput struct {
 	//
 	//    * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	//    describe a MLModel.
+	//
 	//    * INPROGRESS - The request is processing.
+	//
 	//    * FAILED - The request did not run to completion. The ML model isn't usable.
 	//
 	//    * COMPLETED - The request completed successfully.
+	//
 	//    * DELETED - The MLModel is marked as deleted. It isn't usable.
 	Status *string `type:"string" enum:"EntityStatus"`
 
@@ -6576,8 +7023,7 @@ type GetMLModelOutput struct {
 	//
 	//    * sgd.maxMLModelSizeInBytes - The maximum allowed size of the model. Depending
 	//    on the input data, the size of the model might affect its performance.
-	//
-	//  The value is an integer that ranges from 100000 to 2147483648. The default
+	//    The value is an integer that ranges from 100000 to 2147483648. The default
 	//    value is 33554432.
 	//
 	//    * sgd.maxPasses - The number of times that the training process traverses
@@ -6593,29 +7039,34 @@ type GetMLModelOutput struct {
 	//    It controls overfitting the data by penalizing large coefficients. This
 	//    tends to drive coefficients to zero, resulting in a sparse feature set.
 	//    If you use this parameter, start by specifying a small value, such as
-	//    1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
-	//    not use L1 normalization. This parameter can't be used when L2 is specified.
-	//    Use this parameter sparingly.
+	//    1.0E-08. The value is a double that ranges from 0 to MAX_DOUBLE. The default
+	//    is to not use L1 normalization. This parameter can't be used when L2 is
+	//    specified. Use this parameter sparingly.
 	//
 	//    * sgd.l2RegularizationAmount - The coefficient regularization L2 norm.
 	//    It controls overfitting the data by penalizing large coefficients. This
 	//    tends to drive coefficients to small, nonzero values. If you use this
-	//    parameter, start by specifying a small value, such as 1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
-	//    not use L2 normalization. This parameter can't be used when L1 is specified.
-	//    Use this parameter sparingly.
+	//    parameter, start by specifying a small value, such as 1.0E-08. The value
+	//    is a double that ranges from 0 to MAX_DOUBLE. The default is to not use
+	//    L2 normalization. This parameter can't be used when L1 is specified. Use
+	//    this parameter sparingly.
 	TrainingParameters map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMLModelOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetMLModelOutput) GoString() string {
 	return s.String()
 }
@@ -6746,6 +7197,337 @@ func (s *GetMLModelOutput) SetTrainingParameters(v map[string]*string) *GetMLMod
 	return s
 }
 
+// A second request to use or change an object was not allowed. This can result
+// from retrying a request using a parameter that was not present in the original
+// request.
+type IdempotentParameterMismatchException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Code_ *int64 `locationName:"code" type:"integer"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IdempotentParameterMismatchException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IdempotentParameterMismatchException) GoString() string {
+	return s.String()
+}
+
+func newErrorIdempotentParameterMismatchException(v protocol.ResponseMetadata) error {
+	return &IdempotentParameterMismatchException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IdempotentParameterMismatchException) Code() string {
+	return "IdempotentParameterMismatchException"
+}
+
+// Message returns the exception's message.
+func (s *IdempotentParameterMismatchException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IdempotentParameterMismatchException) OrigErr() error {
+	return nil
+}
+
+func (s *IdempotentParameterMismatchException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IdempotentParameterMismatchException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IdempotentParameterMismatchException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An error on the server occurred when trying to process a request.
+type InternalServerException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Code_ *int64 `locationName:"code" type:"integer"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServerException(v protocol.ResponseMetadata) error {
+	return &InternalServerException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServerException) Code() string {
+	return "InternalServerException"
+}
+
+// Message returns the exception's message.
+func (s *InternalServerException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServerException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServerException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServerException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServerException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An error on the client occurred. Typically, the cause is an invalid input
+// value.
+type InvalidInputException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Code_ *int64 `locationName:"code" type:"integer"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInputException(v protocol.ResponseMetadata) error {
+	return &InvalidInputException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInputException) Code() string {
+	return "InvalidInputException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInputException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInputException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInputException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInputException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInputException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type InvalidTagException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTagException(v protocol.ResponseMetadata) error {
+	return &InvalidTagException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTagException) Code() string {
+	return "InvalidTagException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTagException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTagException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTagException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTagException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTagException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The subscriber exceeded the maximum number of operations. This exception
+// can occur when listing objects such as DataSource.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Code_ *int64 `locationName:"code" type:"integer"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Represents the output of a GetMLModel operation.
 //
 // The content consists of the detailed metadata and the current status of the
@@ -6791,8 +7573,10 @@ type MLModel struct {
 	//
 	//    * REGRESSION - Produces a numeric result. For example, "What price should
 	//    a house be listed at?"
+	//
 	//    * BINARY - Produces one of two possible results. For example, "Is this
 	//    a child-friendly web site?".
+	//
 	//    * MULTICLASS - Produces one of several possible results. For example,
 	//    "Is this a HIGH-, LOW-, or MEDIUM-risk trade?".
 	MLModelType *string `type:"string" enum:"MLModelType"`
@@ -6820,10 +7604,14 @@ type MLModel struct {
 	//
 	//    * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	//    create an MLModel.
+	//
 	//    * INPROGRESS - The creation process is underway.
+	//
 	//    * FAILED - The request to create an MLModel didn't run to completion.
 	//    The model isn't usable.
+	//
 	//    * COMPLETED - The creation process completed successfully.
+	//
 	//    * DELETED - The MLModel is marked as deleted. It isn't usable.
 	Status *string `type:"string" enum:"EntityStatus"`
 
@@ -6837,8 +7625,7 @@ type MLModel struct {
 	//
 	//    * sgd.maxMLModelSizeInBytes - The maximum allowed size of the model. Depending
 	//    on the input data, the size of the model might affect its performance.
-	//
-	//  The value is an integer that ranges from 100000 to 2147483648. The default
+	//    The value is an integer that ranges from 100000 to 2147483648. The default
 	//    value is 33554432.
 	//
 	//    * sgd.maxPasses - The number of times that the training process traverses
@@ -6854,29 +7641,34 @@ type MLModel struct {
 	//    which controls overfitting the data by penalizing large coefficients.
 	//    This parameter tends to drive coefficients to zero, resulting in sparse
 	//    feature set. If you use this parameter, start by specifying a small value,
-	//    such as 1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
-	//    not use L1 normalization. This parameter can't be used when L2 is specified.
-	//    Use this parameter sparingly.
+	//    such as 1.0E-08. The value is a double that ranges from 0 to MAX_DOUBLE.
+	//    The default is to not use L1 normalization. This parameter can't be used
+	//    when L2 is specified. Use this parameter sparingly.
 	//
 	//    * sgd.l2RegularizationAmount - The coefficient regularization L2 norm,
 	//    which controls overfitting the data by penalizing large coefficients.
 	//    This tends to drive coefficients to small, nonzero values. If you use
-	//    this parameter, start by specifying a small value, such as 1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
+	//    this parameter, start by specifying a small value, such as 1.0E-08. The
+	//    value is a double that ranges from 0 to MAX_DOUBLE. The default is to
 	//    not use L2 normalization. This parameter can't be used when L1 is specified.
 	//    Use this parameter sparingly.
 	TrainingParameters map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MLModel) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MLModel) GoString() string {
 	return s.String()
 }
@@ -6998,30 +7790,38 @@ func (s *MLModel) SetTrainingParameters(v map[string]*string) *MLModel {
 // Measurements of how well the MLModel performed on known observations. One
 // of the following metrics is returned, based on the type of the MLModel:
 //
-//    * BinaryAUC: The binary MLModel uses the Area Under the Curve (AUC) technique
-//    to measure performance.
+//   - BinaryAUC: The binary MLModel uses the Area Under the Curve (AUC) technique
+//     to measure performance.
 //
-//    * RegressionRMSE: The regression MLModel uses the Root Mean Square Error
-//    (RMSE) technique to measure performance. RMSE measures the difference
-//    between predicted and actual values for a single variable.
+//   - RegressionRMSE: The regression MLModel uses the Root Mean Square Error
+//     (RMSE) technique to measure performance. RMSE measures the difference
+//     between predicted and actual values for a single variable.
 //
-//    * MulticlassAvgFScore: The multiclass MLModel uses the F1 score technique
-//    to measure performance.
+//   - MulticlassAvgFScore: The multiclass MLModel uses the F1 score technique
+//     to measure performance.
 //
 // For more information about performance metrics, please see the Amazon Machine
-// Learning Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
+// Learning Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg).
 type PerformanceMetrics struct {
 	_ struct{} `type:"structure"`
 
 	Properties map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PerformanceMetrics) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PerformanceMetrics) GoString() string {
 	return s.String()
 }
@@ -7049,12 +7849,20 @@ type PredictInput struct {
 	Record map[string]*string `type:"map" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PredictInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PredictInput) GoString() string {
 	return s.String()
 }
@@ -7105,24 +7913,31 @@ type PredictOutput struct {
 	// The output from a Predict operation:
 	//
 	//    * Details - Contains the following attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE
-	//    - REGRESSION | BINARY | MULTICLASSDetailsAttributes.ALGORITHM - SGD
+	//    - REGRESSION | BINARY | MULTICLASS DetailsAttributes.ALGORITHM - SGD
 	//
-	//    * PredictedLabel - Present for either a BINARY or MULTICLASSMLModel request.
-	//
+	//    * PredictedLabel - Present for either a BINARY or MULTICLASS MLModel request.
 	//
 	//    * PredictedScores - Contains the raw classification score corresponding
 	//    to each label.
 	//
-	//    * PredictedValue - Present for a REGRESSIONMLModel request.
+	//    * PredictedValue - Present for a REGRESSION MLModel request.
 	Prediction *Prediction `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PredictOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PredictOutput) GoString() string {
 	return s.String()
 }
@@ -7135,38 +7950,46 @@ func (s *PredictOutput) SetPrediction(v *Prediction) *PredictOutput {
 
 // The output from a Predict operation:
 //
-//    * Details - Contains the following attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE
-//    - REGRESSION | BINARY | MULTICLASSDetailsAttributes.ALGORITHM - SGD
+//   - Details - Contains the following attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE
 //
-//    * PredictedLabel - Present for either a BINARY or MULTICLASSMLModel request.
+//   - REGRESSION | BINARY | MULTICLASS DetailsAttributes.ALGORITHM - SGD
 //
+//   - PredictedLabel - Present for either a BINARY or MULTICLASS MLModel request.
 //
-//    * PredictedScores - Contains the raw classification score corresponding
-//    to each label.
+//   - PredictedScores - Contains the raw classification score corresponding
+//     to each label.
 //
-//    * PredictedValue - Present for a REGRESSIONMLModel request.
+//   - PredictedValue - Present for a REGRESSION MLModel request.
 type Prediction struct {
 	_ struct{} `type:"structure"`
 
 	// Provides any additional details regarding the prediction.
 	Details map[string]*string `locationName:"details" type:"map"`
 
-	// The prediction label for either a BINARY or MULTICLASSMLModel.
+	// The prediction label for either a BINARY or MULTICLASS MLModel.
 	PredictedLabel *string `locationName:"predictedLabel" min:"1" type:"string"`
 
 	// Provides the raw classification score corresponding to each label.
 	PredictedScores map[string]*float64 `locationName:"predictedScores" type:"map"`
 
-	// The prediction value for REGRESSIONMLModel
+	// The prediction value for REGRESSION MLModel.
 	PredictedValue *float64 `locationName:"predictedValue" type:"float"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Prediction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Prediction) GoString() string {
 	return s.String()
 }
@@ -7195,6 +8018,70 @@ func (s *Prediction) SetPredictedValue(v float64) *Prediction {
 	return s
 }
 
+// The exception is thrown when a predict request is made to an unmounted MLModel.
+type PredictorNotMountedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PredictorNotMountedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PredictorNotMountedException) GoString() string {
+	return s.String()
+}
+
+func newErrorPredictorNotMountedException(v protocol.ResponseMetadata) error {
+	return &PredictorNotMountedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *PredictorNotMountedException) Code() string {
+	return "PredictorNotMountedException"
+}
+
+// Message returns the exception's message.
+func (s *PredictorNotMountedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *PredictorNotMountedException) OrigErr() error {
+	return nil
+}
+
+func (s *PredictorNotMountedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *PredictorNotMountedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *PredictorNotMountedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The data specification of an Amazon Relational Database Service (Amazon RDS)
 // DataSource.
 type RDSDataSpec struct {
@@ -7207,56 +8094,36 @@ type RDSDataSpec struct {
 	// There are multiple parameters that control what data is used to create a
 	// datasource:
 	//
-	//    * percentBegin
+	//    * percentBegin Use percentBegin to indicate the beginning of the range
+	//    of the data used to create the Datasource. If you do not include percentBegin
+	//    and percentEnd, Amazon ML includes all of the data when creating the datasource.
 	//
-	// Use percentBegin to indicate the beginning of the range of the data used
-	//    to create the Datasource. If you do not include percentBegin and percentEnd,
-	//    Amazon ML includes all of the data when creating the datasource.
+	//    * percentEnd Use percentEnd to indicate the end of the range of the data
+	//    used to create the Datasource. If you do not include percentBegin and
+	//    percentEnd, Amazon ML includes all of the data when creating the datasource.
 	//
-	//    * percentEnd
+	//    * complement The complement parameter instructs Amazon ML to use the data
+	//    that is not included in the range of percentBegin to percentEnd to create
+	//    a datasource. The complement parameter is useful if you need to create
+	//    complementary datasources for training and evaluation. To create a complementary
+	//    datasource, use the same values for percentBegin and percentEnd, along
+	//    with the complement parameter. For example, the following two datasources
+	//    do not share any data, and can be used to train and evaluate a model.
+	//    The first datasource has 25 percent of the data, and the second one has
+	//    75 percent of the data. Datasource for evaluation: {"splitting":{"percentBegin":0,
+	//    "percentEnd":25}} Datasource for training: {"splitting":{"percentBegin":0,
+	//    "percentEnd":25, "complement":"true"}}
 	//
-	// Use percentEnd to indicate the end of the range of the data used to create
-	//    the Datasource. If you do not include percentBegin and percentEnd, Amazon
-	//    ML includes all of the data when creating the datasource.
-	//
-	//    * complement
-	//
-	// The complement parameter instructs Amazon ML to use the data that is not
-	//    included in the range of percentBegin to percentEnd to create a datasource.
-	//    The complement parameter is useful if you need to create complementary
-	//    datasources for training and evaluation. To create a complementary datasource,
-	//    use the same values for percentBegin and percentEnd, along with the complement
-	//    parameter.
-	//
-	// For example, the following two datasources do not share any data, and can
-	//    be used to train and evaluate a model. The first datasource has 25 percent
-	//    of the data, and the second one has 75 percent of the data.
-	//
-	// Datasource for evaluation: {"splitting":{"percentBegin":0, "percentEnd":25}}
-	//
-	// Datasource for training: {"splitting":{"percentBegin":0, "percentEnd":25,
-	//    "complement":"true"}}
-	//
-	//    * strategy
-	//
-	// To change how Amazon ML splits the data for a datasource, use the strategy
-	//    parameter.
-	//
-	// The default value for the strategy parameter is sequential, meaning that
-	//    Amazon ML takes all of the data records between the percentBegin and percentEnd
-	//    parameters for the datasource, in the order that the records appear in
-	//    the input data.
-	//
-	// The following two DataRearrangement lines are examples of sequentially ordered
-	//    training and evaluation datasources:
-	//
-	// Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
-	//    "strategy":"sequential"}}
-	//
-	// Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100,
-	//    "strategy":"sequential", "complement":"true"}}
-	//
-	// To randomly split the input data into the proportions indicated by the percentBegin
+	//    * strategy To change how Amazon ML splits the data for a datasource, use
+	//    the strategy parameter. The default value for the strategy parameter is
+	//    sequential, meaning that Amazon ML takes all of the data records between
+	//    the percentBegin and percentEnd parameters for the datasource, in the
+	//    order that the records appear in the input data. The following two DataRearrangement
+	//    lines are examples of sequentially ordered training and evaluation datasources:
+	//    Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
+	//    "strategy":"sequential"}} Datasource for training: {"splitting":{"percentBegin":70,
+	//    "percentEnd":100, "strategy":"sequential", "complement":"true"}} To randomly
+	//    split the input data into the proportions indicated by the percentBegin
 	//    and percentEnd parameters, set the strategy parameter to random and provide
 	//    a string that is used as the seed value for the random data splitting
 	//    (for example, you can use the S3 path to your data as the random seed
@@ -7269,15 +8136,11 @@ type RDSDataSpec struct {
 	//    ensures that variables in the training and evaluation data are distributed
 	//    similarly. It is useful in the cases where the input data may have an
 	//    implicit sort order, which would otherwise result in training and evaluation
-	//    datasources containing non-similar data records.
-	//
-	// The following two DataRearrangement lines are examples of non-sequentially
-	//    ordered training and evaluation datasources:
-	//
-	// Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
-	//    "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}
-	//
-	// Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100,
+	//    datasources containing non-similar data records. The following two DataRearrangement
+	//    lines are examples of non-sequentially ordered training and evaluation
+	//    datasources: Datasource for evaluation: {"splitting":{"percentBegin":70,
+	//    "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}
+	//    Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100,
 	//    "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}
 	DataRearrangement *string `type:"string"`
 
@@ -7331,7 +8194,7 @@ type RDSDataSpec struct {
 
 	// The role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic Compute
 	// Cloud (Amazon EC2) instance to carry out the copy operation from Amazon RDS
-	// to an Amazon S3 task. For more information, see Role templates (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+	// to an Amazon S3 task. For more information, see Role templates (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 	// for data pipelines.
 	//
 	// ResourceRole is a required field
@@ -7358,7 +8221,7 @@ type RDSDataSpec struct {
 
 	// The role (DataPipelineDefaultRole) assumed by AWS Data Pipeline service to
 	// monitor the progress of the copy task from Amazon RDS to Amazon S3. For more
-	// information, see Role templates (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+	// information, see Role templates (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 	// for data pipelines.
 	//
 	// ServiceRole is a required field
@@ -7372,12 +8235,20 @@ type RDSDataSpec struct {
 	SubnetId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RDSDataSpec) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RDSDataSpec) GoString() string {
 	return s.String()
 }
@@ -7519,12 +8390,20 @@ type RDSDatabase struct {
 	InstanceIdentifier *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RDSDatabase) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RDSDatabase) GoString() string {
 	return s.String()
 }
@@ -7571,8 +8450,12 @@ type RDSDatabaseCredentials struct {
 	// instance. The password should have sufficient permissions to execute the
 	// RDSSelectQuery query.
 	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RDSDatabaseCredentials's
+	// String and GoString methods.
+	//
 	// Password is a required field
-	Password *string `min:"8" type:"string" required:"true"`
+	Password *string `min:"8" type:"string" required:"true" sensitive:"true"`
 
 	// The username to be used by Amazon ML to connect to database on an Amazon
 	// RDS instance. The username should have sufficient permissions to execute
@@ -7582,12 +8465,20 @@ type RDSDatabaseCredentials struct {
 	Username *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RDSDatabaseCredentials) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RDSDatabaseCredentials) GoString() string {
 	return s.String()
 }
@@ -7645,7 +8536,7 @@ type RDSMetadata struct {
 
 	// The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance
 	// to carry out the copy task from Amazon RDS to Amazon S3. For more information,
-	// see Role templates (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+	// see Role templates (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 	// for data pipelines.
 	ResourceRole *string `min:"1" type:"string"`
 
@@ -7655,17 +8546,25 @@ type RDSMetadata struct {
 
 	// The role (DataPipelineDefaultRole) assumed by the Data Pipeline service to
 	// monitor the progress of the copy task from Amazon RDS to Amazon S3. For more
-	// information, see Role templates (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+	// information, see Role templates (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 	// for data pipelines.
 	ServiceRole *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RDSMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RDSMetadata) GoString() string {
 	return s.String()
 }
@@ -7718,14 +8617,16 @@ type RealtimeEndpointInfo struct {
 	// can have one of the following values:
 	//
 	//    * NONE - Endpoint does not exist or was previously deleted.
+	//
 	//    * READY - Endpoint is ready to be used for real-time predictions.
+	//
 	//    * UPDATING - Updating/creating the endpoint.
 	EndpointStatus *string `type:"string" enum:"RealtimeEndpointStatus"`
 
 	// The URI that specifies where to send real-time prediction requests for the
 	// MLModel.
 	//
-	// NoteThe application must wait until the real-time endpoint is ready before
+	// Note: The application must wait until the real-time endpoint is ready before
 	// using this URI.
 	EndpointUrl *string `type:"string"`
 
@@ -7734,12 +8635,20 @@ type RealtimeEndpointInfo struct {
 	PeakRequestsPerSecond *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RealtimeEndpointInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RealtimeEndpointInfo) GoString() string {
 	return s.String()
 }
@@ -7779,56 +8688,36 @@ type RedshiftDataSpec struct {
 	// There are multiple parameters that control what data is used to create a
 	// datasource:
 	//
-	//    * percentBegin
+	//    * percentBegin Use percentBegin to indicate the beginning of the range
+	//    of the data used to create the Datasource. If you do not include percentBegin
+	//    and percentEnd, Amazon ML includes all of the data when creating the datasource.
 	//
-	// Use percentBegin to indicate the beginning of the range of the data used
-	//    to create the Datasource. If you do not include percentBegin and percentEnd,
-	//    Amazon ML includes all of the data when creating the datasource.
+	//    * percentEnd Use percentEnd to indicate the end of the range of the data
+	//    used to create the Datasource. If you do not include percentBegin and
+	//    percentEnd, Amazon ML includes all of the data when creating the datasource.
 	//
-	//    * percentEnd
+	//    * complement The complement parameter instructs Amazon ML to use the data
+	//    that is not included in the range of percentBegin to percentEnd to create
+	//    a datasource. The complement parameter is useful if you need to create
+	//    complementary datasources for training and evaluation. To create a complementary
+	//    datasource, use the same values for percentBegin and percentEnd, along
+	//    with the complement parameter. For example, the following two datasources
+	//    do not share any data, and can be used to train and evaluate a model.
+	//    The first datasource has 25 percent of the data, and the second one has
+	//    75 percent of the data. Datasource for evaluation: {"splitting":{"percentBegin":0,
+	//    "percentEnd":25}} Datasource for training: {"splitting":{"percentBegin":0,
+	//    "percentEnd":25, "complement":"true"}}
 	//
-	// Use percentEnd to indicate the end of the range of the data used to create
-	//    the Datasource. If you do not include percentBegin and percentEnd, Amazon
-	//    ML includes all of the data when creating the datasource.
-	//
-	//    * complement
-	//
-	// The complement parameter instructs Amazon ML to use the data that is not
-	//    included in the range of percentBegin to percentEnd to create a datasource.
-	//    The complement parameter is useful if you need to create complementary
-	//    datasources for training and evaluation. To create a complementary datasource,
-	//    use the same values for percentBegin and percentEnd, along with the complement
-	//    parameter.
-	//
-	// For example, the following two datasources do not share any data, and can
-	//    be used to train and evaluate a model. The first datasource has 25 percent
-	//    of the data, and the second one has 75 percent of the data.
-	//
-	// Datasource for evaluation: {"splitting":{"percentBegin":0, "percentEnd":25}}
-	//
-	// Datasource for training: {"splitting":{"percentBegin":0, "percentEnd":25,
-	//    "complement":"true"}}
-	//
-	//    * strategy
-	//
-	// To change how Amazon ML splits the data for a datasource, use the strategy
-	//    parameter.
-	//
-	// The default value for the strategy parameter is sequential, meaning that
-	//    Amazon ML takes all of the data records between the percentBegin and percentEnd
-	//    parameters for the datasource, in the order that the records appear in
-	//    the input data.
-	//
-	// The following two DataRearrangement lines are examples of sequentially ordered
-	//    training and evaluation datasources:
-	//
-	// Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
-	//    "strategy":"sequential"}}
-	//
-	// Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100,
-	//    "strategy":"sequential", "complement":"true"}}
-	//
-	// To randomly split the input data into the proportions indicated by the percentBegin
+	//    * strategy To change how Amazon ML splits the data for a datasource, use
+	//    the strategy parameter. The default value for the strategy parameter is
+	//    sequential, meaning that Amazon ML takes all of the data records between
+	//    the percentBegin and percentEnd parameters for the datasource, in the
+	//    order that the records appear in the input data. The following two DataRearrangement
+	//    lines are examples of sequentially ordered training and evaluation datasources:
+	//    Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
+	//    "strategy":"sequential"}} Datasource for training: {"splitting":{"percentBegin":70,
+	//    "percentEnd":100, "strategy":"sequential", "complement":"true"}} To randomly
+	//    split the input data into the proportions indicated by the percentBegin
 	//    and percentEnd parameters, set the strategy parameter to random and provide
 	//    a string that is used as the seed value for the random data splitting
 	//    (for example, you can use the S3 path to your data as the random seed
@@ -7841,15 +8730,11 @@ type RedshiftDataSpec struct {
 	//    ensures that variables in the training and evaluation data are distributed
 	//    similarly. It is useful in the cases where the input data may have an
 	//    implicit sort order, which would otherwise result in training and evaluation
-	//    datasources containing non-similar data records.
-	//
-	// The following two DataRearrangement lines are examples of non-sequentially
-	//    ordered training and evaluation datasources:
-	//
-	// Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
-	//    "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}
-	//
-	// Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100,
+	//    datasources containing non-similar data records. The following two DataRearrangement
+	//    lines are examples of non-sequentially ordered training and evaluation
+	//    datasources: Datasource for evaluation: {"splitting":{"percentBegin":70,
+	//    "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}
+	//    Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100,
 	//    "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}
 	DataRearrangement *string `type:"string"`
 
@@ -7914,12 +8799,20 @@ type RedshiftDataSpec struct {
 	SelectSqlQuery *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDataSpec) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDataSpec) GoString() string {
 	return s.String()
 }
@@ -8017,12 +8910,20 @@ type RedshiftDatabase struct {
 	DatabaseName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDatabase) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDatabase) GoString() string {
 	return s.String()
 }
@@ -8069,26 +8970,38 @@ type RedshiftDatabaseCredentials struct {
 	// A password to be used by Amazon ML to connect to a database on an Amazon
 	// Redshift cluster. The password should have sufficient permissions to execute
 	// a RedshiftSelectSqlQuery query. The password should be valid for an Amazon
-	// Redshift USER (http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html).
+	// Redshift USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html).
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RedshiftDatabaseCredentials's
+	// String and GoString methods.
 	//
 	// Password is a required field
-	Password *string `min:"8" type:"string" required:"true"`
+	Password *string `min:"8" type:"string" required:"true" sensitive:"true"`
 
 	// A username to be used by Amazon Machine Learning (Amazon ML)to connect to
 	// a database on an Amazon Redshift cluster. The username should have sufficient
 	// permissions to execute the RedshiftSelectSqlQuery query. The username should
-	// be valid for an Amazon Redshift USER (http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html).
+	// be valid for an Amazon Redshift USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html).
 	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDatabaseCredentials) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftDatabaseCredentials) GoString() string {
 	return s.String()
 }
@@ -8134,7 +9047,7 @@ type RedshiftMetadata struct {
 	// A username to be used by Amazon Machine Learning (Amazon ML)to connect to
 	// a database on an Amazon Redshift cluster. The username should have sufficient
 	// permissions to execute the RedshiftSelectSqlQuery query. The username should
-	// be valid for an Amazon Redshift USER (http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html).
+	// be valid for an Amazon Redshift USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html).
 	DatabaseUserName *string `min:"1" type:"string"`
 
 	// Describes the database details required to connect to an Amazon Redshift
@@ -8146,12 +9059,20 @@ type RedshiftMetadata struct {
 	SelectSqlQuery *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RedshiftMetadata) GoString() string {
 	return s.String()
 }
@@ -8174,6 +9095,72 @@ func (s *RedshiftMetadata) SetSelectSqlQuery(v string) *RedshiftMetadata {
 	return s
 }
 
+// A specified resource cannot be located.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Code_ *int64 `locationName:"code" type:"integer"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Describes the data specification of a DataSource.
 type S3DataSpec struct {
 	_ struct{} `type:"structure"`
@@ -8192,56 +9179,36 @@ type S3DataSpec struct {
 	// There are multiple parameters that control what data is used to create a
 	// datasource:
 	//
-	//    * percentBegin
+	//    * percentBegin Use percentBegin to indicate the beginning of the range
+	//    of the data used to create the Datasource. If you do not include percentBegin
+	//    and percentEnd, Amazon ML includes all of the data when creating the datasource.
 	//
-	// Use percentBegin to indicate the beginning of the range of the data used
-	//    to create the Datasource. If you do not include percentBegin and percentEnd,
-	//    Amazon ML includes all of the data when creating the datasource.
+	//    * percentEnd Use percentEnd to indicate the end of the range of the data
+	//    used to create the Datasource. If you do not include percentBegin and
+	//    percentEnd, Amazon ML includes all of the data when creating the datasource.
 	//
-	//    * percentEnd
+	//    * complement The complement parameter instructs Amazon ML to use the data
+	//    that is not included in the range of percentBegin to percentEnd to create
+	//    a datasource. The complement parameter is useful if you need to create
+	//    complementary datasources for training and evaluation. To create a complementary
+	//    datasource, use the same values for percentBegin and percentEnd, along
+	//    with the complement parameter. For example, the following two datasources
+	//    do not share any data, and can be used to train and evaluate a model.
+	//    The first datasource has 25 percent of the data, and the second one has
+	//    75 percent of the data. Datasource for evaluation: {"splitting":{"percentBegin":0,
+	//    "percentEnd":25}} Datasource for training: {"splitting":{"percentBegin":0,
+	//    "percentEnd":25, "complement":"true"}}
 	//
-	// Use percentEnd to indicate the end of the range of the data used to create
-	//    the Datasource. If you do not include percentBegin and percentEnd, Amazon
-	//    ML includes all of the data when creating the datasource.
-	//
-	//    * complement
-	//
-	// The complement parameter instructs Amazon ML to use the data that is not
-	//    included in the range of percentBegin to percentEnd to create a datasource.
-	//    The complement parameter is useful if you need to create complementary
-	//    datasources for training and evaluation. To create a complementary datasource,
-	//    use the same values for percentBegin and percentEnd, along with the complement
-	//    parameter.
-	//
-	// For example, the following two datasources do not share any data, and can
-	//    be used to train and evaluate a model. The first datasource has 25 percent
-	//    of the data, and the second one has 75 percent of the data.
-	//
-	// Datasource for evaluation: {"splitting":{"percentBegin":0, "percentEnd":25}}
-	//
-	// Datasource for training: {"splitting":{"percentBegin":0, "percentEnd":25,
-	//    "complement":"true"}}
-	//
-	//    * strategy
-	//
-	// To change how Amazon ML splits the data for a datasource, use the strategy
-	//    parameter.
-	//
-	// The default value for the strategy parameter is sequential, meaning that
-	//    Amazon ML takes all of the data records between the percentBegin and percentEnd
-	//    parameters for the datasource, in the order that the records appear in
-	//    the input data.
-	//
-	// The following two DataRearrangement lines are examples of sequentially ordered
-	//    training and evaluation datasources:
-	//
-	// Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
-	//    "strategy":"sequential"}}
-	//
-	// Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100,
-	//    "strategy":"sequential", "complement":"true"}}
-	//
-	// To randomly split the input data into the proportions indicated by the percentBegin
+	//    * strategy To change how Amazon ML splits the data for a datasource, use
+	//    the strategy parameter. The default value for the strategy parameter is
+	//    sequential, meaning that Amazon ML takes all of the data records between
+	//    the percentBegin and percentEnd parameters for the datasource, in the
+	//    order that the records appear in the input data. The following two DataRearrangement
+	//    lines are examples of sequentially ordered training and evaluation datasources:
+	//    Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
+	//    "strategy":"sequential"}} Datasource for training: {"splitting":{"percentBegin":70,
+	//    "percentEnd":100, "strategy":"sequential", "complement":"true"}} To randomly
+	//    split the input data into the proportions indicated by the percentBegin
 	//    and percentEnd parameters, set the strategy parameter to random and provide
 	//    a string that is used as the seed value for the random data splitting
 	//    (for example, you can use the S3 path to your data as the random seed
@@ -8254,15 +9221,11 @@ type S3DataSpec struct {
 	//    ensures that variables in the training and evaluation data are distributed
 	//    similarly. It is useful in the cases where the input data may have an
 	//    implicit sort order, which would otherwise result in training and evaluation
-	//    datasources containing non-similar data records.
-	//
-	// The following two DataRearrangement lines are examples of non-sequentially
-	//    ordered training and evaluation datasources:
-	//
-	// Datasource for evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
-	//    "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}
-	//
-	// Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100,
+	//    datasources containing non-similar data records. The following two DataRearrangement
+	//    lines are examples of non-sequentially ordered training and evaluation
+	//    datasources: Datasource for evaluation: {"splitting":{"percentBegin":70,
+	//    "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}
+	//    Datasource for training: {"splitting":{"percentBegin":70, "percentEnd":100,
 	//    "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}
 	DataRearrangement *string `type:"string"`
 
@@ -8305,12 +9268,20 @@ type S3DataSpec struct {
 	DataSchemaLocationS3 *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3DataSpec) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3DataSpec) GoString() string {
 	return s.String()
 }
@@ -8365,12 +9336,20 @@ type Tag struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -8400,6 +9379,69 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
+type TagLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorTagLimitExceededException(v protocol.ResponseMetadata) error {
+	return &TagLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TagLimitExceededException) Code() string {
+	return "TagLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *TagLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TagLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *TagLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TagLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TagLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type UpdateBatchPredictionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8414,12 +9456,20 @@ type UpdateBatchPredictionInput struct {
 	BatchPredictionName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBatchPredictionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBatchPredictionInput) GoString() string {
 	return s.String()
 }
@@ -8466,12 +9516,20 @@ type UpdateBatchPredictionOutput struct {
 	BatchPredictionId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBatchPredictionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBatchPredictionOutput) GoString() string {
 	return s.String()
 }
@@ -8497,12 +9555,20 @@ type UpdateDataSourceInput struct {
 	DataSourceName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDataSourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDataSourceInput) GoString() string {
 	return s.String()
 }
@@ -8549,12 +9615,20 @@ type UpdateDataSourceOutput struct {
 	DataSourceId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDataSourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDataSourceOutput) GoString() string {
 	return s.String()
 }
@@ -8580,12 +9654,20 @@ type UpdateEvaluationInput struct {
 	EvaluationName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateEvaluationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateEvaluationInput) GoString() string {
 	return s.String()
 }
@@ -8632,12 +9714,20 @@ type UpdateEvaluationOutput struct {
 	EvaluationId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateEvaluationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateEvaluationOutput) GoString() string {
 	return s.String()
 }
@@ -8668,12 +9758,20 @@ type UpdateMLModelInput struct {
 	ScoreThreshold *float64 `type:"float"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateMLModelInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateMLModelInput) GoString() string {
 	return s.String()
 }
@@ -8723,12 +9821,20 @@ type UpdateMLModelOutput struct {
 	MLModelId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateMLModelOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateMLModelOutput) GoString() string {
 	return s.String()
 }
@@ -8742,29 +9848,40 @@ func (s *UpdateMLModelOutput) SetMLModelId(v string) *UpdateMLModelOutput {
 // The function used to train an MLModel. Training choices supported by Amazon
 // ML include the following:
 //
-//    * SGD - Stochastic Gradient Descent.
-//    * RandomForest - Random forest of decision trees.
+//   - SGD - Stochastic Gradient Descent.
+//
+//   - RandomForest - Random forest of decision trees.
 const (
 	// AlgorithmSgd is a Algorithm enum value
 	AlgorithmSgd = "sgd"
 )
 
+// Algorithm_Values returns all elements of the Algorithm enum
+func Algorithm_Values() []string {
+	return []string{
+		AlgorithmSgd,
+	}
+}
+
 // A list of the variables to use in searching or filtering BatchPrediction.
 //
-//    * CreatedAt - Sets the search criteria to BatchPrediction creation date.
+//   - CreatedAt - Sets the search criteria to BatchPrediction creation date.
 //
-//    * Status - Sets the search criteria to BatchPrediction status.
-//    * Name - Sets the search criteria to the contents of BatchPredictionName.
+//   - Status - Sets the search criteria to BatchPrediction status.
 //
-//    * IAMUser - Sets the search criteria to the user account that invoked
-//    the BatchPrediction creation.
-//    * MLModelId - Sets the search criteria to the MLModel used in the BatchPrediction.
+//   - Name - Sets the search criteria to the contents of BatchPrediction Name.
 //
-//    * DataSourceId - Sets the search criteria to the DataSource used in the
-//    BatchPrediction.
-//    * DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
-//    The URL can identify either a file or an Amazon Simple Storage Service
-//    (Amazon S3) bucket or directory.
+//   - IAMUser - Sets the search criteria to the user account that invoked
+//     the BatchPrediction creation.
+//
+//   - MLModelId - Sets the search criteria to the MLModel used in the BatchPrediction.
+//
+//   - DataSourceId - Sets the search criteria to the DataSource used in the
+//     BatchPrediction.
+//
+//   - DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
+//     The URL can identify either a file or an Amazon Simple Storage Service
+//     (Amazon S3) bucket or directory.
 const (
 	// BatchPredictionFilterVariableCreatedAt is a BatchPredictionFilterVariable enum value
 	BatchPredictionFilterVariableCreatedAt = "CreatedAt"
@@ -8791,17 +9908,36 @@ const (
 	BatchPredictionFilterVariableDataUri = "DataURI"
 )
 
+// BatchPredictionFilterVariable_Values returns all elements of the BatchPredictionFilterVariable enum
+func BatchPredictionFilterVariable_Values() []string {
+	return []string{
+		BatchPredictionFilterVariableCreatedAt,
+		BatchPredictionFilterVariableLastUpdatedAt,
+		BatchPredictionFilterVariableStatus,
+		BatchPredictionFilterVariableName,
+		BatchPredictionFilterVariableIamuser,
+		BatchPredictionFilterVariableMlmodelId,
+		BatchPredictionFilterVariableDataSourceId,
+		BatchPredictionFilterVariableDataUri,
+	}
+}
+
 // A list of the variables to use in searching or filtering DataSource.
 //
-//    * CreatedAt - Sets the search criteria to DataSource creation date.
-//    * Status - Sets the search criteria to DataSource status.
-//    * Name - Sets the search criteria to the contents of DataSourceName.
-//    * DataUri - Sets the search criteria to the URI of data files used to
-//    create the DataSource. The URI can identify either a file or an Amazon
-//    Simple Storage Service (Amazon S3) bucket or directory.
-//    * IAMUser - Sets the search criteria to the user account that invoked
-//    the DataSource creation.
-// NoteThe variable names should match the variable names in the DataSource.
+//   - CreatedAt - Sets the search criteria to DataSource creation date.
+//
+//   - Status - Sets the search criteria to DataSource status.
+//
+//   - Name - Sets the search criteria to the contents of DataSource Name.
+//
+//   - DataUri - Sets the search criteria to the URI of data files used to
+//     create the DataSource. The URI can identify either a file or an Amazon
+//     Simple Storage Service (Amazon S3) bucket or directory.
+//
+//   - IAMUser - Sets the search criteria to the user account that invoked
+//     the DataSource creation.
+//
+// Note: The variable names should match the variable names in the DataSource.
 const (
 	// DataSourceFilterVariableCreatedAt is a DataSourceFilterVariable enum value
 	DataSourceFilterVariableCreatedAt = "CreatedAt"
@@ -8822,7 +9958,23 @@ const (
 	DataSourceFilterVariableIamuser = "IAMUser"
 )
 
-// Contains the key values of DetailsMap: PredictiveModelType- Indicates the type of the MLModel. Algorithm- Indicates the algorithm that was used for the MLModel
+// DataSourceFilterVariable_Values returns all elements of the DataSourceFilterVariable enum
+func DataSourceFilterVariable_Values() []string {
+	return []string{
+		DataSourceFilterVariableCreatedAt,
+		DataSourceFilterVariableLastUpdatedAt,
+		DataSourceFilterVariableStatus,
+		DataSourceFilterVariableName,
+		DataSourceFilterVariableDataLocationS3,
+		DataSourceFilterVariableIamuser,
+	}
+}
+
+// Contains the key values of DetailsMap:
+//
+//   - PredictiveModelType - Indicates the type of the MLModel.
+//
+//   - Algorithm - Indicates the algorithm that was used for the MLModel.
 const (
 	// DetailsAttributesPredictiveModelType is a DetailsAttributes enum value
 	DetailsAttributesPredictiveModelType = "PredictiveModelType"
@@ -8831,13 +9983,25 @@ const (
 	DetailsAttributesAlgorithm = "Algorithm"
 )
 
+// DetailsAttributes_Values returns all elements of the DetailsAttributes enum
+func DetailsAttributes_Values() []string {
+	return []string{
+		DetailsAttributesPredictiveModelType,
+		DetailsAttributesAlgorithm,
+	}
+}
+
 // Object status with the following possible values:
 //
-//    * PENDING
-//    * INPROGRESS
-//    * FAILED
-//    * COMPLETED
-//    * DELETED
+//   - PENDING
+//
+//   - INPROGRESS
+//
+//   - FAILED
+//
+//   - COMPLETED
+//
+//   - DELETED
 const (
 	// EntityStatusPending is a EntityStatus enum value
 	EntityStatusPending = "PENDING"
@@ -8855,20 +10019,35 @@ const (
 	EntityStatusDeleted = "DELETED"
 )
 
+// EntityStatus_Values returns all elements of the EntityStatus enum
+func EntityStatus_Values() []string {
+	return []string{
+		EntityStatusPending,
+		EntityStatusInprogress,
+		EntityStatusFailed,
+		EntityStatusCompleted,
+		EntityStatusDeleted,
+	}
+}
+
 // A list of the variables to use in searching or filtering Evaluation.
 //
-//    * CreatedAt - Sets the search criteria to Evaluation creation date.
-//    * Status - Sets the search criteria to Evaluation status.
-//    * Name - Sets the search criteria to the contents of EvaluationName.
-//    * IAMUser - Sets the search criteria to the user account that invoked
-//    an evaluation.
-//    * MLModelId - Sets the search criteria to the Predictor that was evaluated.
+//   - CreatedAt - Sets the search criteria to Evaluation creation date.
 //
-//    * DataSourceId - Sets the search criteria to the DataSource used in evaluation.
+//   - Status - Sets the search criteria to Evaluation status.
 //
-//    * DataUri - Sets the search criteria to the data file(s) used in evaluation.
-//    The URL can identify either a file or an Amazon Simple Storage Service
-//    (Amazon S3) bucket or directory.
+//   - Name - Sets the search criteria to the contents of Evaluation Name.
+//
+//   - IAMUser - Sets the search criteria to the user account that invoked
+//     an evaluation.
+//
+//   - MLModelId - Sets the search criteria to the Predictor that was evaluated.
+//
+//   - DataSourceId - Sets the search criteria to the DataSource used in evaluation.
+//
+//   - DataUri - Sets the search criteria to the data file(s) used in evaluation.
+//     The URL can identify either a file or an Amazon Simple Storage Service
+//     (Amazon S3) bucket or directory.
 const (
 	// EvaluationFilterVariableCreatedAt is a EvaluationFilterVariable enum value
 	EvaluationFilterVariableCreatedAt = "CreatedAt"
@@ -8894,6 +10073,20 @@ const (
 	// EvaluationFilterVariableDataUri is a EvaluationFilterVariable enum value
 	EvaluationFilterVariableDataUri = "DataURI"
 )
+
+// EvaluationFilterVariable_Values returns all elements of the EvaluationFilterVariable enum
+func EvaluationFilterVariable_Values() []string {
+	return []string{
+		EvaluationFilterVariableCreatedAt,
+		EvaluationFilterVariableLastUpdatedAt,
+		EvaluationFilterVariableStatus,
+		EvaluationFilterVariableName,
+		EvaluationFilterVariableIamuser,
+		EvaluationFilterVariableMlmodelId,
+		EvaluationFilterVariableDataSourceId,
+		EvaluationFilterVariableDataUri,
+	}
+}
 
 const (
 	// MLModelFilterVariableCreatedAt is a MLModelFilterVariable enum value
@@ -8927,6 +10120,22 @@ const (
 	MLModelFilterVariableTrainingDataUri = "TrainingDataURI"
 )
 
+// MLModelFilterVariable_Values returns all elements of the MLModelFilterVariable enum
+func MLModelFilterVariable_Values() []string {
+	return []string{
+		MLModelFilterVariableCreatedAt,
+		MLModelFilterVariableLastUpdatedAt,
+		MLModelFilterVariableStatus,
+		MLModelFilterVariableName,
+		MLModelFilterVariableIamuser,
+		MLModelFilterVariableTrainingDataSourceId,
+		MLModelFilterVariableRealtimeEndpointStatus,
+		MLModelFilterVariableMlmodelType,
+		MLModelFilterVariableAlgorithm,
+		MLModelFilterVariableTrainingDataUri,
+	}
+}
+
 const (
 	// MLModelTypeRegression is a MLModelType enum value
 	MLModelTypeRegression = "REGRESSION"
@@ -8937,6 +10146,15 @@ const (
 	// MLModelTypeMulticlass is a MLModelType enum value
 	MLModelTypeMulticlass = "MULTICLASS"
 )
+
+// MLModelType_Values returns all elements of the MLModelType enum
+func MLModelType_Values() []string {
+	return []string{
+		MLModelTypeRegression,
+		MLModelTypeBinary,
+		MLModelTypeMulticlass,
+	}
+}
 
 const (
 	// RealtimeEndpointStatusNone is a RealtimeEndpointStatus enum value
@@ -8952,11 +10170,22 @@ const (
 	RealtimeEndpointStatusFailed = "FAILED"
 )
 
+// RealtimeEndpointStatus_Values returns all elements of the RealtimeEndpointStatus enum
+func RealtimeEndpointStatus_Values() []string {
+	return []string{
+		RealtimeEndpointStatusNone,
+		RealtimeEndpointStatusReady,
+		RealtimeEndpointStatusUpdating,
+		RealtimeEndpointStatusFailed,
+	}
+}
+
 // The sort order specified in a listing condition. Possible values include
 // the following:
 //
-//    * asc - Present the information in ascending order (from A-Z).
-//    * dsc - Present the information in descending order (from Z-A).
+//   - asc - Present the information in ascending order (from A-Z).
+//
+//   - dsc - Present the information in descending order (from Z-A).
 const (
 	// SortOrderAsc is a SortOrder enum value
 	SortOrderAsc = "asc"
@@ -8964,6 +10193,14 @@ const (
 	// SortOrderDsc is a SortOrder enum value
 	SortOrderDsc = "dsc"
 )
+
+// SortOrder_Values returns all elements of the SortOrder enum
+func SortOrder_Values() []string {
+	return []string{
+		SortOrderAsc,
+		SortOrderDsc,
+	}
+}
 
 const (
 	// TaggableResourceTypeBatchPrediction is a TaggableResourceType enum value
@@ -8978,3 +10215,13 @@ const (
 	// TaggableResourceTypeMlmodel is a TaggableResourceType enum value
 	TaggableResourceTypeMlmodel = "MLModel"
 )
+
+// TaggableResourceType_Values returns all elements of the TaggableResourceType enum
+func TaggableResourceType_Values() []string {
+	return []string{
+		TaggableResourceTypeBatchPrediction,
+		TaggableResourceTypeDataSource,
+		TaggableResourceTypeEvaluation,
+		TaggableResourceTypeMlmodel,
+	}
+}

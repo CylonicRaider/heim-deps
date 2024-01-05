@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CloudHSM V2.
-//    func myFunc(svc cloudhsmv2iface.CloudHSMV2API) bool {
-//        // Make svc.CopyBackupToRegion request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS CloudHSM V2.
+//	func myFunc(svc cloudhsmv2iface.CloudHSMV2API) bool {
+//	    // Make svc.CopyBackupToRegion request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := cloudhsmv2.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := cloudhsmv2.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudHSMV2Client struct {
-//        cloudhsmv2iface.CloudHSMV2API
-//    }
-//    func (m *mockCloudHSMV2Client) CopyBackupToRegion(input *cloudhsmv2.CopyBackupToRegionInput) (*cloudhsmv2.CopyBackupToRegionOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockCloudHSMV2Client struct {
+//	    cloudhsmv2iface.CloudHSMV2API
+//	}
+//	func (m *mockCloudHSMV2Client) CopyBackupToRegion(input *cloudhsmv2.CopyBackupToRegionInput) (*cloudhsmv2.CopyBackupToRegionOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudHSMV2Client{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockCloudHSMV2Client{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -108,6 +108,14 @@ type CloudHSMV2API interface {
 
 	ListTagsPages(*cloudhsmv2.ListTagsInput, func(*cloudhsmv2.ListTagsOutput, bool) bool) error
 	ListTagsPagesWithContext(aws.Context, *cloudhsmv2.ListTagsInput, func(*cloudhsmv2.ListTagsOutput, bool) bool, ...request.Option) error
+
+	ModifyBackupAttributes(*cloudhsmv2.ModifyBackupAttributesInput) (*cloudhsmv2.ModifyBackupAttributesOutput, error)
+	ModifyBackupAttributesWithContext(aws.Context, *cloudhsmv2.ModifyBackupAttributesInput, ...request.Option) (*cloudhsmv2.ModifyBackupAttributesOutput, error)
+	ModifyBackupAttributesRequest(*cloudhsmv2.ModifyBackupAttributesInput) (*request.Request, *cloudhsmv2.ModifyBackupAttributesOutput)
+
+	ModifyCluster(*cloudhsmv2.ModifyClusterInput) (*cloudhsmv2.ModifyClusterOutput, error)
+	ModifyClusterWithContext(aws.Context, *cloudhsmv2.ModifyClusterInput, ...request.Option) (*cloudhsmv2.ModifyClusterOutput, error)
+	ModifyClusterRequest(*cloudhsmv2.ModifyClusterInput) (*request.Request, *cloudhsmv2.ModifyClusterOutput)
 
 	RestoreBackup(*cloudhsmv2.RestoreBackupInput) (*cloudhsmv2.RestoreBackupOutput, error)
 	RestoreBackupWithContext(aws.Context, *cloudhsmv2.RestoreBackupInput, ...request.Option) (*cloudhsmv2.RestoreBackupOutput, error)

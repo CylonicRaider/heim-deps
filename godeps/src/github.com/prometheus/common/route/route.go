@@ -22,9 +22,13 @@ import (
 
 type param string
 
-// Param returns param p for the context.
+// Param returns param p for the context, or the empty string when
+// param does not exist in context.
 func Param(ctx context.Context, p string) string {
-	return ctx.Value(param(p)).(string)
+	if v := ctx.Value(param(p)); v != nil {
+		return v.(string)
+	}
+	return ""
 }
 
 // WithParam returns a new context with param p set to v.
@@ -49,6 +53,12 @@ func New() *Router {
 
 // WithInstrumentation returns a router with instrumentation support.
 func (r *Router) WithInstrumentation(instrh func(handlerName string, handler http.HandlerFunc) http.HandlerFunc) *Router {
+	if r.instrh != nil {
+		newInstrh := instrh
+		instrh = func(handlerName string, handler http.HandlerFunc) http.HandlerFunc {
+			return newInstrh(handlerName, r.instrh(handlerName, handler))
+		}
+	}
 	return &Router{rtr: r.rtr, prefix: r.prefix, instrh: instrh}
 }
 
@@ -97,6 +107,11 @@ func (r *Router) Put(path string, h http.HandlerFunc) {
 // Post registers a new POST route.
 func (r *Router) Post(path string, h http.HandlerFunc) {
 	r.rtr.POST(r.prefix+path, r.handle(path, h))
+}
+
+// Head registers a new HEAD route.
+func (r *Router) Head(path string, h http.HandlerFunc) {
+	r.rtr.HEAD(r.prefix+path, r.handle(path, h))
 }
 
 // Redirect takes an absolute path and sends an internal HTTP redirect for it,

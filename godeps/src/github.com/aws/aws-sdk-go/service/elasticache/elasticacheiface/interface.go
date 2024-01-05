@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon ElastiCache.
-//    func myFunc(svc elasticacheiface.ElastiCacheAPI) bool {
-//        // Make svc.AddTagsToResource request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// Amazon ElastiCache.
+//	func myFunc(svc elasticacheiface.ElastiCacheAPI) bool {
+//	    // Make svc.AddTagsToResource request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := elasticache.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := elasticache.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockElastiCacheClient struct {
-//        elasticacheiface.ElastiCacheAPI
-//    }
-//    func (m *mockElastiCacheClient) AddTagsToResource(input *elasticache.AddTagsToResourceInput) (*elasticache.TagListMessage, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockElastiCacheClient struct {
+//	    elasticacheiface.ElastiCacheAPI
+//	}
+//	func (m *mockElastiCacheClient) AddTagsToResource(input *elasticache.AddTagsToResourceInput) (*elasticache.TagListMessage, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockElastiCacheClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockElastiCacheClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -67,6 +67,22 @@ type ElastiCacheAPI interface {
 	AuthorizeCacheSecurityGroupIngress(*elasticache.AuthorizeCacheSecurityGroupIngressInput) (*elasticache.AuthorizeCacheSecurityGroupIngressOutput, error)
 	AuthorizeCacheSecurityGroupIngressWithContext(aws.Context, *elasticache.AuthorizeCacheSecurityGroupIngressInput, ...request.Option) (*elasticache.AuthorizeCacheSecurityGroupIngressOutput, error)
 	AuthorizeCacheSecurityGroupIngressRequest(*elasticache.AuthorizeCacheSecurityGroupIngressInput) (*request.Request, *elasticache.AuthorizeCacheSecurityGroupIngressOutput)
+
+	BatchApplyUpdateAction(*elasticache.BatchApplyUpdateActionInput) (*elasticache.BatchApplyUpdateActionOutput, error)
+	BatchApplyUpdateActionWithContext(aws.Context, *elasticache.BatchApplyUpdateActionInput, ...request.Option) (*elasticache.BatchApplyUpdateActionOutput, error)
+	BatchApplyUpdateActionRequest(*elasticache.BatchApplyUpdateActionInput) (*request.Request, *elasticache.BatchApplyUpdateActionOutput)
+
+	BatchStopUpdateAction(*elasticache.BatchStopUpdateActionInput) (*elasticache.BatchStopUpdateActionOutput, error)
+	BatchStopUpdateActionWithContext(aws.Context, *elasticache.BatchStopUpdateActionInput, ...request.Option) (*elasticache.BatchStopUpdateActionOutput, error)
+	BatchStopUpdateActionRequest(*elasticache.BatchStopUpdateActionInput) (*request.Request, *elasticache.BatchStopUpdateActionOutput)
+
+	CompleteMigration(*elasticache.CompleteMigrationInput) (*elasticache.CompleteMigrationOutput, error)
+	CompleteMigrationWithContext(aws.Context, *elasticache.CompleteMigrationInput, ...request.Option) (*elasticache.CompleteMigrationOutput, error)
+	CompleteMigrationRequest(*elasticache.CompleteMigrationInput) (*request.Request, *elasticache.CompleteMigrationOutput)
+
+	CopyServerlessCacheSnapshot(*elasticache.CopyServerlessCacheSnapshotInput) (*elasticache.CopyServerlessCacheSnapshotOutput, error)
+	CopyServerlessCacheSnapshotWithContext(aws.Context, *elasticache.CopyServerlessCacheSnapshotInput, ...request.Option) (*elasticache.CopyServerlessCacheSnapshotOutput, error)
+	CopyServerlessCacheSnapshotRequest(*elasticache.CopyServerlessCacheSnapshotInput) (*request.Request, *elasticache.CopyServerlessCacheSnapshotOutput)
 
 	CopySnapshot(*elasticache.CopySnapshotInput) (*elasticache.CopySnapshotOutput, error)
 	CopySnapshotWithContext(aws.Context, *elasticache.CopySnapshotInput, ...request.Option) (*elasticache.CopySnapshotOutput, error)
@@ -88,13 +104,37 @@ type ElastiCacheAPI interface {
 	CreateCacheSubnetGroupWithContext(aws.Context, *elasticache.CreateCacheSubnetGroupInput, ...request.Option) (*elasticache.CreateCacheSubnetGroupOutput, error)
 	CreateCacheSubnetGroupRequest(*elasticache.CreateCacheSubnetGroupInput) (*request.Request, *elasticache.CreateCacheSubnetGroupOutput)
 
+	CreateGlobalReplicationGroup(*elasticache.CreateGlobalReplicationGroupInput) (*elasticache.CreateGlobalReplicationGroupOutput, error)
+	CreateGlobalReplicationGroupWithContext(aws.Context, *elasticache.CreateGlobalReplicationGroupInput, ...request.Option) (*elasticache.CreateGlobalReplicationGroupOutput, error)
+	CreateGlobalReplicationGroupRequest(*elasticache.CreateGlobalReplicationGroupInput) (*request.Request, *elasticache.CreateGlobalReplicationGroupOutput)
+
 	CreateReplicationGroup(*elasticache.CreateReplicationGroupInput) (*elasticache.CreateReplicationGroupOutput, error)
 	CreateReplicationGroupWithContext(aws.Context, *elasticache.CreateReplicationGroupInput, ...request.Option) (*elasticache.CreateReplicationGroupOutput, error)
 	CreateReplicationGroupRequest(*elasticache.CreateReplicationGroupInput) (*request.Request, *elasticache.CreateReplicationGroupOutput)
 
+	CreateServerlessCache(*elasticache.CreateServerlessCacheInput) (*elasticache.CreateServerlessCacheOutput, error)
+	CreateServerlessCacheWithContext(aws.Context, *elasticache.CreateServerlessCacheInput, ...request.Option) (*elasticache.CreateServerlessCacheOutput, error)
+	CreateServerlessCacheRequest(*elasticache.CreateServerlessCacheInput) (*request.Request, *elasticache.CreateServerlessCacheOutput)
+
+	CreateServerlessCacheSnapshot(*elasticache.CreateServerlessCacheSnapshotInput) (*elasticache.CreateServerlessCacheSnapshotOutput, error)
+	CreateServerlessCacheSnapshotWithContext(aws.Context, *elasticache.CreateServerlessCacheSnapshotInput, ...request.Option) (*elasticache.CreateServerlessCacheSnapshotOutput, error)
+	CreateServerlessCacheSnapshotRequest(*elasticache.CreateServerlessCacheSnapshotInput) (*request.Request, *elasticache.CreateServerlessCacheSnapshotOutput)
+
 	CreateSnapshot(*elasticache.CreateSnapshotInput) (*elasticache.CreateSnapshotOutput, error)
 	CreateSnapshotWithContext(aws.Context, *elasticache.CreateSnapshotInput, ...request.Option) (*elasticache.CreateSnapshotOutput, error)
 	CreateSnapshotRequest(*elasticache.CreateSnapshotInput) (*request.Request, *elasticache.CreateSnapshotOutput)
+
+	CreateUser(*elasticache.CreateUserInput) (*elasticache.CreateUserOutput, error)
+	CreateUserWithContext(aws.Context, *elasticache.CreateUserInput, ...request.Option) (*elasticache.CreateUserOutput, error)
+	CreateUserRequest(*elasticache.CreateUserInput) (*request.Request, *elasticache.CreateUserOutput)
+
+	CreateUserGroup(*elasticache.CreateUserGroupInput) (*elasticache.CreateUserGroupOutput, error)
+	CreateUserGroupWithContext(aws.Context, *elasticache.CreateUserGroupInput, ...request.Option) (*elasticache.CreateUserGroupOutput, error)
+	CreateUserGroupRequest(*elasticache.CreateUserGroupInput) (*request.Request, *elasticache.CreateUserGroupOutput)
+
+	DecreaseNodeGroupsInGlobalReplicationGroup(*elasticache.DecreaseNodeGroupsInGlobalReplicationGroupInput) (*elasticache.DecreaseNodeGroupsInGlobalReplicationGroupOutput, error)
+	DecreaseNodeGroupsInGlobalReplicationGroupWithContext(aws.Context, *elasticache.DecreaseNodeGroupsInGlobalReplicationGroupInput, ...request.Option) (*elasticache.DecreaseNodeGroupsInGlobalReplicationGroupOutput, error)
+	DecreaseNodeGroupsInGlobalReplicationGroupRequest(*elasticache.DecreaseNodeGroupsInGlobalReplicationGroupInput) (*request.Request, *elasticache.DecreaseNodeGroupsInGlobalReplicationGroupOutput)
 
 	DecreaseReplicaCount(*elasticache.DecreaseReplicaCountInput) (*elasticache.DecreaseReplicaCountOutput, error)
 	DecreaseReplicaCountWithContext(aws.Context, *elasticache.DecreaseReplicaCountInput, ...request.Option) (*elasticache.DecreaseReplicaCountOutput, error)
@@ -116,13 +156,33 @@ type ElastiCacheAPI interface {
 	DeleteCacheSubnetGroupWithContext(aws.Context, *elasticache.DeleteCacheSubnetGroupInput, ...request.Option) (*elasticache.DeleteCacheSubnetGroupOutput, error)
 	DeleteCacheSubnetGroupRequest(*elasticache.DeleteCacheSubnetGroupInput) (*request.Request, *elasticache.DeleteCacheSubnetGroupOutput)
 
+	DeleteGlobalReplicationGroup(*elasticache.DeleteGlobalReplicationGroupInput) (*elasticache.DeleteGlobalReplicationGroupOutput, error)
+	DeleteGlobalReplicationGroupWithContext(aws.Context, *elasticache.DeleteGlobalReplicationGroupInput, ...request.Option) (*elasticache.DeleteGlobalReplicationGroupOutput, error)
+	DeleteGlobalReplicationGroupRequest(*elasticache.DeleteGlobalReplicationGroupInput) (*request.Request, *elasticache.DeleteGlobalReplicationGroupOutput)
+
 	DeleteReplicationGroup(*elasticache.DeleteReplicationGroupInput) (*elasticache.DeleteReplicationGroupOutput, error)
 	DeleteReplicationGroupWithContext(aws.Context, *elasticache.DeleteReplicationGroupInput, ...request.Option) (*elasticache.DeleteReplicationGroupOutput, error)
 	DeleteReplicationGroupRequest(*elasticache.DeleteReplicationGroupInput) (*request.Request, *elasticache.DeleteReplicationGroupOutput)
 
+	DeleteServerlessCache(*elasticache.DeleteServerlessCacheInput) (*elasticache.DeleteServerlessCacheOutput, error)
+	DeleteServerlessCacheWithContext(aws.Context, *elasticache.DeleteServerlessCacheInput, ...request.Option) (*elasticache.DeleteServerlessCacheOutput, error)
+	DeleteServerlessCacheRequest(*elasticache.DeleteServerlessCacheInput) (*request.Request, *elasticache.DeleteServerlessCacheOutput)
+
+	DeleteServerlessCacheSnapshot(*elasticache.DeleteServerlessCacheSnapshotInput) (*elasticache.DeleteServerlessCacheSnapshotOutput, error)
+	DeleteServerlessCacheSnapshotWithContext(aws.Context, *elasticache.DeleteServerlessCacheSnapshotInput, ...request.Option) (*elasticache.DeleteServerlessCacheSnapshotOutput, error)
+	DeleteServerlessCacheSnapshotRequest(*elasticache.DeleteServerlessCacheSnapshotInput) (*request.Request, *elasticache.DeleteServerlessCacheSnapshotOutput)
+
 	DeleteSnapshot(*elasticache.DeleteSnapshotInput) (*elasticache.DeleteSnapshotOutput, error)
 	DeleteSnapshotWithContext(aws.Context, *elasticache.DeleteSnapshotInput, ...request.Option) (*elasticache.DeleteSnapshotOutput, error)
 	DeleteSnapshotRequest(*elasticache.DeleteSnapshotInput) (*request.Request, *elasticache.DeleteSnapshotOutput)
+
+	DeleteUser(*elasticache.DeleteUserInput) (*elasticache.DeleteUserOutput, error)
+	DeleteUserWithContext(aws.Context, *elasticache.DeleteUserInput, ...request.Option) (*elasticache.DeleteUserOutput, error)
+	DeleteUserRequest(*elasticache.DeleteUserInput) (*request.Request, *elasticache.DeleteUserOutput)
+
+	DeleteUserGroup(*elasticache.DeleteUserGroupInput) (*elasticache.DeleteUserGroupOutput, error)
+	DeleteUserGroupWithContext(aws.Context, *elasticache.DeleteUserGroupInput, ...request.Option) (*elasticache.DeleteUserGroupOutput, error)
+	DeleteUserGroupRequest(*elasticache.DeleteUserGroupInput) (*request.Request, *elasticache.DeleteUserGroupOutput)
 
 	DescribeCacheClusters(*elasticache.DescribeCacheClustersInput) (*elasticache.DescribeCacheClustersOutput, error)
 	DescribeCacheClustersWithContext(aws.Context, *elasticache.DescribeCacheClustersInput, ...request.Option) (*elasticache.DescribeCacheClustersOutput, error)
@@ -180,6 +240,13 @@ type ElastiCacheAPI interface {
 	DescribeEventsPages(*elasticache.DescribeEventsInput, func(*elasticache.DescribeEventsOutput, bool) bool) error
 	DescribeEventsPagesWithContext(aws.Context, *elasticache.DescribeEventsInput, func(*elasticache.DescribeEventsOutput, bool) bool, ...request.Option) error
 
+	DescribeGlobalReplicationGroups(*elasticache.DescribeGlobalReplicationGroupsInput) (*elasticache.DescribeGlobalReplicationGroupsOutput, error)
+	DescribeGlobalReplicationGroupsWithContext(aws.Context, *elasticache.DescribeGlobalReplicationGroupsInput, ...request.Option) (*elasticache.DescribeGlobalReplicationGroupsOutput, error)
+	DescribeGlobalReplicationGroupsRequest(*elasticache.DescribeGlobalReplicationGroupsInput) (*request.Request, *elasticache.DescribeGlobalReplicationGroupsOutput)
+
+	DescribeGlobalReplicationGroupsPages(*elasticache.DescribeGlobalReplicationGroupsInput, func(*elasticache.DescribeGlobalReplicationGroupsOutput, bool) bool) error
+	DescribeGlobalReplicationGroupsPagesWithContext(aws.Context, *elasticache.DescribeGlobalReplicationGroupsInput, func(*elasticache.DescribeGlobalReplicationGroupsOutput, bool) bool, ...request.Option) error
+
 	DescribeReplicationGroups(*elasticache.DescribeReplicationGroupsInput) (*elasticache.DescribeReplicationGroupsOutput, error)
 	DescribeReplicationGroupsWithContext(aws.Context, *elasticache.DescribeReplicationGroupsInput, ...request.Option) (*elasticache.DescribeReplicationGroupsOutput, error)
 	DescribeReplicationGroupsRequest(*elasticache.DescribeReplicationGroupsInput) (*request.Request, *elasticache.DescribeReplicationGroupsOutput)
@@ -201,12 +268,70 @@ type ElastiCacheAPI interface {
 	DescribeReservedCacheNodesOfferingsPages(*elasticache.DescribeReservedCacheNodesOfferingsInput, func(*elasticache.DescribeReservedCacheNodesOfferingsOutput, bool) bool) error
 	DescribeReservedCacheNodesOfferingsPagesWithContext(aws.Context, *elasticache.DescribeReservedCacheNodesOfferingsInput, func(*elasticache.DescribeReservedCacheNodesOfferingsOutput, bool) bool, ...request.Option) error
 
+	DescribeServerlessCacheSnapshots(*elasticache.DescribeServerlessCacheSnapshotsInput) (*elasticache.DescribeServerlessCacheSnapshotsOutput, error)
+	DescribeServerlessCacheSnapshotsWithContext(aws.Context, *elasticache.DescribeServerlessCacheSnapshotsInput, ...request.Option) (*elasticache.DescribeServerlessCacheSnapshotsOutput, error)
+	DescribeServerlessCacheSnapshotsRequest(*elasticache.DescribeServerlessCacheSnapshotsInput) (*request.Request, *elasticache.DescribeServerlessCacheSnapshotsOutput)
+
+	DescribeServerlessCacheSnapshotsPages(*elasticache.DescribeServerlessCacheSnapshotsInput, func(*elasticache.DescribeServerlessCacheSnapshotsOutput, bool) bool) error
+	DescribeServerlessCacheSnapshotsPagesWithContext(aws.Context, *elasticache.DescribeServerlessCacheSnapshotsInput, func(*elasticache.DescribeServerlessCacheSnapshotsOutput, bool) bool, ...request.Option) error
+
+	DescribeServerlessCaches(*elasticache.DescribeServerlessCachesInput) (*elasticache.DescribeServerlessCachesOutput, error)
+	DescribeServerlessCachesWithContext(aws.Context, *elasticache.DescribeServerlessCachesInput, ...request.Option) (*elasticache.DescribeServerlessCachesOutput, error)
+	DescribeServerlessCachesRequest(*elasticache.DescribeServerlessCachesInput) (*request.Request, *elasticache.DescribeServerlessCachesOutput)
+
+	DescribeServerlessCachesPages(*elasticache.DescribeServerlessCachesInput, func(*elasticache.DescribeServerlessCachesOutput, bool) bool) error
+	DescribeServerlessCachesPagesWithContext(aws.Context, *elasticache.DescribeServerlessCachesInput, func(*elasticache.DescribeServerlessCachesOutput, bool) bool, ...request.Option) error
+
+	DescribeServiceUpdates(*elasticache.DescribeServiceUpdatesInput) (*elasticache.DescribeServiceUpdatesOutput, error)
+	DescribeServiceUpdatesWithContext(aws.Context, *elasticache.DescribeServiceUpdatesInput, ...request.Option) (*elasticache.DescribeServiceUpdatesOutput, error)
+	DescribeServiceUpdatesRequest(*elasticache.DescribeServiceUpdatesInput) (*request.Request, *elasticache.DescribeServiceUpdatesOutput)
+
+	DescribeServiceUpdatesPages(*elasticache.DescribeServiceUpdatesInput, func(*elasticache.DescribeServiceUpdatesOutput, bool) bool) error
+	DescribeServiceUpdatesPagesWithContext(aws.Context, *elasticache.DescribeServiceUpdatesInput, func(*elasticache.DescribeServiceUpdatesOutput, bool) bool, ...request.Option) error
+
 	DescribeSnapshots(*elasticache.DescribeSnapshotsInput) (*elasticache.DescribeSnapshotsOutput, error)
 	DescribeSnapshotsWithContext(aws.Context, *elasticache.DescribeSnapshotsInput, ...request.Option) (*elasticache.DescribeSnapshotsOutput, error)
 	DescribeSnapshotsRequest(*elasticache.DescribeSnapshotsInput) (*request.Request, *elasticache.DescribeSnapshotsOutput)
 
 	DescribeSnapshotsPages(*elasticache.DescribeSnapshotsInput, func(*elasticache.DescribeSnapshotsOutput, bool) bool) error
 	DescribeSnapshotsPagesWithContext(aws.Context, *elasticache.DescribeSnapshotsInput, func(*elasticache.DescribeSnapshotsOutput, bool) bool, ...request.Option) error
+
+	DescribeUpdateActions(*elasticache.DescribeUpdateActionsInput) (*elasticache.DescribeUpdateActionsOutput, error)
+	DescribeUpdateActionsWithContext(aws.Context, *elasticache.DescribeUpdateActionsInput, ...request.Option) (*elasticache.DescribeUpdateActionsOutput, error)
+	DescribeUpdateActionsRequest(*elasticache.DescribeUpdateActionsInput) (*request.Request, *elasticache.DescribeUpdateActionsOutput)
+
+	DescribeUpdateActionsPages(*elasticache.DescribeUpdateActionsInput, func(*elasticache.DescribeUpdateActionsOutput, bool) bool) error
+	DescribeUpdateActionsPagesWithContext(aws.Context, *elasticache.DescribeUpdateActionsInput, func(*elasticache.DescribeUpdateActionsOutput, bool) bool, ...request.Option) error
+
+	DescribeUserGroups(*elasticache.DescribeUserGroupsInput) (*elasticache.DescribeUserGroupsOutput, error)
+	DescribeUserGroupsWithContext(aws.Context, *elasticache.DescribeUserGroupsInput, ...request.Option) (*elasticache.DescribeUserGroupsOutput, error)
+	DescribeUserGroupsRequest(*elasticache.DescribeUserGroupsInput) (*request.Request, *elasticache.DescribeUserGroupsOutput)
+
+	DescribeUserGroupsPages(*elasticache.DescribeUserGroupsInput, func(*elasticache.DescribeUserGroupsOutput, bool) bool) error
+	DescribeUserGroupsPagesWithContext(aws.Context, *elasticache.DescribeUserGroupsInput, func(*elasticache.DescribeUserGroupsOutput, bool) bool, ...request.Option) error
+
+	DescribeUsers(*elasticache.DescribeUsersInput) (*elasticache.DescribeUsersOutput, error)
+	DescribeUsersWithContext(aws.Context, *elasticache.DescribeUsersInput, ...request.Option) (*elasticache.DescribeUsersOutput, error)
+	DescribeUsersRequest(*elasticache.DescribeUsersInput) (*request.Request, *elasticache.DescribeUsersOutput)
+
+	DescribeUsersPages(*elasticache.DescribeUsersInput, func(*elasticache.DescribeUsersOutput, bool) bool) error
+	DescribeUsersPagesWithContext(aws.Context, *elasticache.DescribeUsersInput, func(*elasticache.DescribeUsersOutput, bool) bool, ...request.Option) error
+
+	DisassociateGlobalReplicationGroup(*elasticache.DisassociateGlobalReplicationGroupInput) (*elasticache.DisassociateGlobalReplicationGroupOutput, error)
+	DisassociateGlobalReplicationGroupWithContext(aws.Context, *elasticache.DisassociateGlobalReplicationGroupInput, ...request.Option) (*elasticache.DisassociateGlobalReplicationGroupOutput, error)
+	DisassociateGlobalReplicationGroupRequest(*elasticache.DisassociateGlobalReplicationGroupInput) (*request.Request, *elasticache.DisassociateGlobalReplicationGroupOutput)
+
+	ExportServerlessCacheSnapshot(*elasticache.ExportServerlessCacheSnapshotInput) (*elasticache.ExportServerlessCacheSnapshotOutput, error)
+	ExportServerlessCacheSnapshotWithContext(aws.Context, *elasticache.ExportServerlessCacheSnapshotInput, ...request.Option) (*elasticache.ExportServerlessCacheSnapshotOutput, error)
+	ExportServerlessCacheSnapshotRequest(*elasticache.ExportServerlessCacheSnapshotInput) (*request.Request, *elasticache.ExportServerlessCacheSnapshotOutput)
+
+	FailoverGlobalReplicationGroup(*elasticache.FailoverGlobalReplicationGroupInput) (*elasticache.FailoverGlobalReplicationGroupOutput, error)
+	FailoverGlobalReplicationGroupWithContext(aws.Context, *elasticache.FailoverGlobalReplicationGroupInput, ...request.Option) (*elasticache.FailoverGlobalReplicationGroupOutput, error)
+	FailoverGlobalReplicationGroupRequest(*elasticache.FailoverGlobalReplicationGroupInput) (*request.Request, *elasticache.FailoverGlobalReplicationGroupOutput)
+
+	IncreaseNodeGroupsInGlobalReplicationGroup(*elasticache.IncreaseNodeGroupsInGlobalReplicationGroupInput) (*elasticache.IncreaseNodeGroupsInGlobalReplicationGroupOutput, error)
+	IncreaseNodeGroupsInGlobalReplicationGroupWithContext(aws.Context, *elasticache.IncreaseNodeGroupsInGlobalReplicationGroupInput, ...request.Option) (*elasticache.IncreaseNodeGroupsInGlobalReplicationGroupOutput, error)
+	IncreaseNodeGroupsInGlobalReplicationGroupRequest(*elasticache.IncreaseNodeGroupsInGlobalReplicationGroupInput) (*request.Request, *elasticache.IncreaseNodeGroupsInGlobalReplicationGroupOutput)
 
 	IncreaseReplicaCount(*elasticache.IncreaseReplicaCountInput) (*elasticache.IncreaseReplicaCountOutput, error)
 	IncreaseReplicaCountWithContext(aws.Context, *elasticache.IncreaseReplicaCountInput, ...request.Option) (*elasticache.IncreaseReplicaCountOutput, error)
@@ -232,6 +357,10 @@ type ElastiCacheAPI interface {
 	ModifyCacheSubnetGroupWithContext(aws.Context, *elasticache.ModifyCacheSubnetGroupInput, ...request.Option) (*elasticache.ModifyCacheSubnetGroupOutput, error)
 	ModifyCacheSubnetGroupRequest(*elasticache.ModifyCacheSubnetGroupInput) (*request.Request, *elasticache.ModifyCacheSubnetGroupOutput)
 
+	ModifyGlobalReplicationGroup(*elasticache.ModifyGlobalReplicationGroupInput) (*elasticache.ModifyGlobalReplicationGroupOutput, error)
+	ModifyGlobalReplicationGroupWithContext(aws.Context, *elasticache.ModifyGlobalReplicationGroupInput, ...request.Option) (*elasticache.ModifyGlobalReplicationGroupOutput, error)
+	ModifyGlobalReplicationGroupRequest(*elasticache.ModifyGlobalReplicationGroupInput) (*request.Request, *elasticache.ModifyGlobalReplicationGroupOutput)
+
 	ModifyReplicationGroup(*elasticache.ModifyReplicationGroupInput) (*elasticache.ModifyReplicationGroupOutput, error)
 	ModifyReplicationGroupWithContext(aws.Context, *elasticache.ModifyReplicationGroupInput, ...request.Option) (*elasticache.ModifyReplicationGroupOutput, error)
 	ModifyReplicationGroupRequest(*elasticache.ModifyReplicationGroupInput) (*request.Request, *elasticache.ModifyReplicationGroupOutput)
@@ -240,9 +369,25 @@ type ElastiCacheAPI interface {
 	ModifyReplicationGroupShardConfigurationWithContext(aws.Context, *elasticache.ModifyReplicationGroupShardConfigurationInput, ...request.Option) (*elasticache.ModifyReplicationGroupShardConfigurationOutput, error)
 	ModifyReplicationGroupShardConfigurationRequest(*elasticache.ModifyReplicationGroupShardConfigurationInput) (*request.Request, *elasticache.ModifyReplicationGroupShardConfigurationOutput)
 
+	ModifyServerlessCache(*elasticache.ModifyServerlessCacheInput) (*elasticache.ModifyServerlessCacheOutput, error)
+	ModifyServerlessCacheWithContext(aws.Context, *elasticache.ModifyServerlessCacheInput, ...request.Option) (*elasticache.ModifyServerlessCacheOutput, error)
+	ModifyServerlessCacheRequest(*elasticache.ModifyServerlessCacheInput) (*request.Request, *elasticache.ModifyServerlessCacheOutput)
+
+	ModifyUser(*elasticache.ModifyUserInput) (*elasticache.ModifyUserOutput, error)
+	ModifyUserWithContext(aws.Context, *elasticache.ModifyUserInput, ...request.Option) (*elasticache.ModifyUserOutput, error)
+	ModifyUserRequest(*elasticache.ModifyUserInput) (*request.Request, *elasticache.ModifyUserOutput)
+
+	ModifyUserGroup(*elasticache.ModifyUserGroupInput) (*elasticache.ModifyUserGroupOutput, error)
+	ModifyUserGroupWithContext(aws.Context, *elasticache.ModifyUserGroupInput, ...request.Option) (*elasticache.ModifyUserGroupOutput, error)
+	ModifyUserGroupRequest(*elasticache.ModifyUserGroupInput) (*request.Request, *elasticache.ModifyUserGroupOutput)
+
 	PurchaseReservedCacheNodesOffering(*elasticache.PurchaseReservedCacheNodesOfferingInput) (*elasticache.PurchaseReservedCacheNodesOfferingOutput, error)
 	PurchaseReservedCacheNodesOfferingWithContext(aws.Context, *elasticache.PurchaseReservedCacheNodesOfferingInput, ...request.Option) (*elasticache.PurchaseReservedCacheNodesOfferingOutput, error)
 	PurchaseReservedCacheNodesOfferingRequest(*elasticache.PurchaseReservedCacheNodesOfferingInput) (*request.Request, *elasticache.PurchaseReservedCacheNodesOfferingOutput)
+
+	RebalanceSlotsInGlobalReplicationGroup(*elasticache.RebalanceSlotsInGlobalReplicationGroupInput) (*elasticache.RebalanceSlotsInGlobalReplicationGroupOutput, error)
+	RebalanceSlotsInGlobalReplicationGroupWithContext(aws.Context, *elasticache.RebalanceSlotsInGlobalReplicationGroupInput, ...request.Option) (*elasticache.RebalanceSlotsInGlobalReplicationGroupOutput, error)
+	RebalanceSlotsInGlobalReplicationGroupRequest(*elasticache.RebalanceSlotsInGlobalReplicationGroupInput) (*request.Request, *elasticache.RebalanceSlotsInGlobalReplicationGroupOutput)
 
 	RebootCacheCluster(*elasticache.RebootCacheClusterInput) (*elasticache.RebootCacheClusterOutput, error)
 	RebootCacheClusterWithContext(aws.Context, *elasticache.RebootCacheClusterInput, ...request.Option) (*elasticache.RebootCacheClusterOutput, error)
@@ -260,9 +405,17 @@ type ElastiCacheAPI interface {
 	RevokeCacheSecurityGroupIngressWithContext(aws.Context, *elasticache.RevokeCacheSecurityGroupIngressInput, ...request.Option) (*elasticache.RevokeCacheSecurityGroupIngressOutput, error)
 	RevokeCacheSecurityGroupIngressRequest(*elasticache.RevokeCacheSecurityGroupIngressInput) (*request.Request, *elasticache.RevokeCacheSecurityGroupIngressOutput)
 
+	StartMigration(*elasticache.StartMigrationInput) (*elasticache.StartMigrationOutput, error)
+	StartMigrationWithContext(aws.Context, *elasticache.StartMigrationInput, ...request.Option) (*elasticache.StartMigrationOutput, error)
+	StartMigrationRequest(*elasticache.StartMigrationInput) (*request.Request, *elasticache.StartMigrationOutput)
+
 	TestFailover(*elasticache.TestFailoverInput) (*elasticache.TestFailoverOutput, error)
 	TestFailoverWithContext(aws.Context, *elasticache.TestFailoverInput, ...request.Option) (*elasticache.TestFailoverOutput, error)
 	TestFailoverRequest(*elasticache.TestFailoverInput) (*request.Request, *elasticache.TestFailoverOutput)
+
+	TestMigration(*elasticache.TestMigrationInput) (*elasticache.TestMigrationOutput, error)
+	TestMigrationWithContext(aws.Context, *elasticache.TestMigrationInput, ...request.Option) (*elasticache.TestMigrationOutput, error)
+	TestMigrationRequest(*elasticache.TestMigrationInput) (*request.Request, *elasticache.TestMigrationOutput)
 
 	WaitUntilCacheClusterAvailable(*elasticache.DescribeCacheClustersInput) error
 	WaitUntilCacheClusterAvailableWithContext(aws.Context, *elasticache.DescribeCacheClustersInput, ...request.WaiterOption) error

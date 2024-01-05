@@ -5,13 +5,14 @@
 package ipv6_test
 
 import (
+	"errors"
 	"net"
 	"reflect"
 	"runtime"
 	"testing"
 
-	"golang.org/x/net/internal/nettest"
 	"golang.org/x/net/ipv6"
+	"golang.org/x/net/nettest"
 )
 
 var icmpStringTests = []struct {
@@ -34,7 +35,7 @@ func TestICMPString(t *testing.T) {
 
 func TestICMPFilter(t *testing.T) {
 	switch runtime.GOOS {
-	case "js", "nacl", "plan9", "windows":
+	case "fuchsia", "hurd", "js", "nacl", "plan9", "wasip1", "windows":
 		t.Skipf("not supported on %s", runtime.GOOS)
 	}
 
@@ -60,15 +61,11 @@ func TestICMPFilter(t *testing.T) {
 }
 
 func TestSetICMPFilter(t *testing.T) {
-	switch runtime.GOOS {
-	case "js", "nacl", "plan9", "windows":
-		t.Skipf("not supported on %s", runtime.GOOS)
-	}
-	if !supportsIPv6 {
+	if !nettest.SupportsIPv6() {
 		t.Skip("ipv6 is not supported")
 	}
-	if m, ok := nettest.SupportsRawIPSocket(); !ok {
-		t.Skip(m)
+	if !nettest.SupportsRawSocket() {
+		t.Skipf("not supported on %s/%s", runtime.GOOS, runtime.GOARCH)
 	}
 
 	c, err := net.ListenPacket("ip6:ipv6-icmp", "::1")
@@ -83,9 +80,12 @@ func TestSetICMPFilter(t *testing.T) {
 	f.SetAll(true)
 	f.Accept(ipv6.ICMPTypeEchoRequest)
 	f.Accept(ipv6.ICMPTypeEchoReply)
-	if err := p.SetICMPFilter(&f); err != nil {
+	if err := p.SetICMPFilter(&f); errors.Is(err, ipv6.ErrNotImplemented) {
+		t.Skipf("setting ICMP filter not supported: %v", err)
+	} else if err != nil {
 		t.Fatal(err)
 	}
+
 	kf, err := p.ICMPFilter()
 	if err != nil {
 		t.Fatal(err)

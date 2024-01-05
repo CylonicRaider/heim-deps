@@ -3,6 +3,8 @@
 package pinpointsmsvoice
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/aws/aws-sdk-go/aws/request"
@@ -26,14 +28,13 @@ const opCreateConfigurationSet = "CreateConfigurationSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateConfigurationSetRequest method.
+//	req, resp := client.CreateConfigurationSetRequest(params)
 //
-//    // Example sending a request using the CreateConfigurationSetRequest method.
-//    req, resp := client.CreateConfigurationSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSet
 func (c *PinpointSMSVoice) CreateConfigurationSetRequest(input *CreateConfigurationSetInput) (req *request.Request, output *CreateConfigurationSetOutput) {
@@ -65,23 +66,24 @@ func (c *PinpointSMSVoice) CreateConfigurationSetRequest(input *CreateConfigurat
 // See the AWS API reference guide for Amazon Pinpoint SMS and Voice Service's
 // API operation CreateConfigurationSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   You've issued too many requests to the resource. Wait a few minutes, and
-//   then try again.
+// Returned Error Types:
 //
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The input you provided is invalid.
+//   - TooManyRequestsException
+//     You've issued too many requests to the resource. Wait a few minutes, and
+//     then try again.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   There are too many instances of the specified resource type.
+//   - BadRequestException
+//     The input you provided is invalid.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   The API encountered an unexpected error and couldn't complete the request.
-//   You might be able to successfully issue the request again in the future.
+//   - LimitExceededException
+//     There are too many instances of the specified resource type.
 //
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource specified in your request already exists.
+//   - InternalServiceErrorException
+//     The API encountered an unexpected error and couldn't complete the request.
+//     You might be able to successfully issue the request again in the future.
+//
+//   - AlreadyExistsException
+//     The resource specified in your request already exists.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSet
 func (c *PinpointSMSVoice) CreateConfigurationSet(input *CreateConfigurationSetInput) (*CreateConfigurationSetOutput, error) {
@@ -121,14 +123,13 @@ const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDes
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateConfigurationSetEventDestinationRequest method.
+//	req, resp := client.CreateConfigurationSetEventDestinationRequest(params)
 //
-//    // Example sending a request using the CreateConfigurationSetEventDestinationRequest method.
-//    req, resp := client.CreateConfigurationSetEventDestinationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSetEventDestination
 func (c *PinpointSMSVoice) CreateConfigurationSetEventDestinationRequest(input *CreateConfigurationSetEventDestinationInput) (req *request.Request, output *CreateConfigurationSetEventDestinationOutput) {
@@ -159,26 +160,27 @@ func (c *PinpointSMSVoice) CreateConfigurationSetEventDestinationRequest(input *
 // See the AWS API reference guide for Amazon Pinpoint SMS and Voice Service's
 // API operation CreateConfigurationSetEventDestination for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The input you provided is invalid.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   There are too many instances of the specified resource type.
+//   - BadRequestException
+//     The input you provided is invalid.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   The API encountered an unexpected error and couldn't complete the request.
-//   You might be able to successfully issue the request again in the future.
+//   - LimitExceededException
+//     There are too many instances of the specified resource type.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource you attempted to access doesn't exist.
+//   - InternalServiceErrorException
+//     The API encountered an unexpected error and couldn't complete the request.
+//     You might be able to successfully issue the request again in the future.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   You've issued too many requests to the resource. Wait a few minutes, and
-//   then try again.
+//   - NotFoundException
+//     The resource you attempted to access doesn't exist.
 //
-//   * ErrCodeAlreadyExistsException "AlreadyExistsException"
-//   The resource specified in your request already exists.
+//   - TooManyRequestsException
+//     You've issued too many requests to the resource. Wait a few minutes, and
+//     then try again.
+//
+//   - AlreadyExistsException
+//     The resource specified in your request already exists.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSetEventDestination
 func (c *PinpointSMSVoice) CreateConfigurationSetEventDestination(input *CreateConfigurationSetEventDestinationInput) (*CreateConfigurationSetEventDestinationOutput, error) {
@@ -218,14 +220,13 @@ const opDeleteConfigurationSet = "DeleteConfigurationSet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteConfigurationSetRequest method.
+//	req, resp := client.DeleteConfigurationSetRequest(params)
 //
-//    // Example sending a request using the DeleteConfigurationSetRequest method.
-//    req, resp := client.DeleteConfigurationSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/DeleteConfigurationSet
 func (c *PinpointSMSVoice) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInput) (req *request.Request, output *DeleteConfigurationSetOutput) {
@@ -256,20 +257,21 @@ func (c *PinpointSMSVoice) DeleteConfigurationSetRequest(input *DeleteConfigurat
 // See the AWS API reference guide for Amazon Pinpoint SMS and Voice Service's
 // API operation DeleteConfigurationSet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource you attempted to access doesn't exist.
+// Returned Error Types:
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   You've issued too many requests to the resource. Wait a few minutes, and
-//   then try again.
+//   - NotFoundException
+//     The resource you attempted to access doesn't exist.
 //
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The input you provided is invalid.
+//   - TooManyRequestsException
+//     You've issued too many requests to the resource. Wait a few minutes, and
+//     then try again.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   The API encountered an unexpected error and couldn't complete the request.
-//   You might be able to successfully issue the request again in the future.
+//   - BadRequestException
+//     The input you provided is invalid.
+//
+//   - InternalServiceErrorException
+//     The API encountered an unexpected error and couldn't complete the request.
+//     You might be able to successfully issue the request again in the future.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/DeleteConfigurationSet
 func (c *PinpointSMSVoice) DeleteConfigurationSet(input *DeleteConfigurationSetInput) (*DeleteConfigurationSetOutput, error) {
@@ -309,14 +311,13 @@ const opDeleteConfigurationSetEventDestination = "DeleteConfigurationSetEventDes
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteConfigurationSetEventDestinationRequest method.
+//	req, resp := client.DeleteConfigurationSetEventDestinationRequest(params)
 //
-//    // Example sending a request using the DeleteConfigurationSetEventDestinationRequest method.
-//    req, resp := client.DeleteConfigurationSetEventDestinationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/DeleteConfigurationSetEventDestination
 func (c *PinpointSMSVoice) DeleteConfigurationSetEventDestinationRequest(input *DeleteConfigurationSetEventDestinationInput) (req *request.Request, output *DeleteConfigurationSetEventDestinationOutput) {
@@ -347,20 +348,21 @@ func (c *PinpointSMSVoice) DeleteConfigurationSetEventDestinationRequest(input *
 // See the AWS API reference guide for Amazon Pinpoint SMS and Voice Service's
 // API operation DeleteConfigurationSetEventDestination for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource you attempted to access doesn't exist.
+// Returned Error Types:
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   You've issued too many requests to the resource. Wait a few minutes, and
-//   then try again.
+//   - NotFoundException
+//     The resource you attempted to access doesn't exist.
 //
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The input you provided is invalid.
+//   - TooManyRequestsException
+//     You've issued too many requests to the resource. Wait a few minutes, and
+//     then try again.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   The API encountered an unexpected error and couldn't complete the request.
-//   You might be able to successfully issue the request again in the future.
+//   - BadRequestException
+//     The input you provided is invalid.
+//
+//   - InternalServiceErrorException
+//     The API encountered an unexpected error and couldn't complete the request.
+//     You might be able to successfully issue the request again in the future.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/DeleteConfigurationSetEventDestination
 func (c *PinpointSMSVoice) DeleteConfigurationSetEventDestination(input *DeleteConfigurationSetEventDestinationInput) (*DeleteConfigurationSetEventDestinationOutput, error) {
@@ -400,14 +402,13 @@ const opGetConfigurationSetEventDestinations = "GetConfigurationSetEventDestinat
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetConfigurationSetEventDestinationsRequest method.
+//	req, resp := client.GetConfigurationSetEventDestinationsRequest(params)
 //
-//    // Example sending a request using the GetConfigurationSetEventDestinationsRequest method.
-//    req, resp := client.GetConfigurationSetEventDestinationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/GetConfigurationSetEventDestinations
 func (c *PinpointSMSVoice) GetConfigurationSetEventDestinationsRequest(input *GetConfigurationSetEventDestinationsInput) (req *request.Request, output *GetConfigurationSetEventDestinationsOutput) {
@@ -439,20 +440,21 @@ func (c *PinpointSMSVoice) GetConfigurationSetEventDestinationsRequest(input *Ge
 // See the AWS API reference guide for Amazon Pinpoint SMS and Voice Service's
 // API operation GetConfigurationSetEventDestinations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource you attempted to access doesn't exist.
+// Returned Error Types:
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   You've issued too many requests to the resource. Wait a few minutes, and
-//   then try again.
+//   - NotFoundException
+//     The resource you attempted to access doesn't exist.
 //
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The input you provided is invalid.
+//   - TooManyRequestsException
+//     You've issued too many requests to the resource. Wait a few minutes, and
+//     then try again.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   The API encountered an unexpected error and couldn't complete the request.
-//   You might be able to successfully issue the request again in the future.
+//   - BadRequestException
+//     The input you provided is invalid.
+//
+//   - InternalServiceErrorException
+//     The API encountered an unexpected error and couldn't complete the request.
+//     You might be able to successfully issue the request again in the future.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/GetConfigurationSetEventDestinations
 func (c *PinpointSMSVoice) GetConfigurationSetEventDestinations(input *GetConfigurationSetEventDestinationsInput) (*GetConfigurationSetEventDestinationsOutput, error) {
@@ -492,14 +494,13 @@ const opListConfigurationSets = "ListConfigurationSets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListConfigurationSetsRequest method.
+//	req, resp := client.ListConfigurationSetsRequest(params)
 //
-//    // Example sending a request using the ListConfigurationSetsRequest method.
-//    req, resp := client.ListConfigurationSetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSets
 func (c *PinpointSMSVoice) ListConfigurationSetsRequest(input *ListConfigurationSetsInput) (req *request.Request, output *ListConfigurationSetsOutput) {
@@ -530,17 +531,18 @@ func (c *PinpointSMSVoice) ListConfigurationSetsRequest(input *ListConfiguration
 // See the AWS API reference guide for Amazon Pinpoint SMS and Voice Service's
 // API operation ListConfigurationSets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   You've issued too many requests to the resource. Wait a few minutes, and
-//   then try again.
+// Returned Error Types:
 //
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The input you provided is invalid.
+//   - TooManyRequestsException
+//     You've issued too many requests to the resource. Wait a few minutes, and
+//     then try again.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   The API encountered an unexpected error and couldn't complete the request.
-//   You might be able to successfully issue the request again in the future.
+//   - BadRequestException
+//     The input you provided is invalid.
+//
+//   - InternalServiceErrorException
+//     The API encountered an unexpected error and couldn't complete the request.
+//     You might be able to successfully issue the request again in the future.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSets
 func (c *PinpointSMSVoice) ListConfigurationSets(input *ListConfigurationSetsInput) (*ListConfigurationSetsOutput, error) {
@@ -580,14 +582,13 @@ const opSendVoiceMessage = "SendVoiceMessage"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SendVoiceMessageRequest method.
+//	req, resp := client.SendVoiceMessageRequest(params)
 //
-//    // Example sending a request using the SendVoiceMessageRequest method.
-//    req, resp := client.SendVoiceMessageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/SendVoiceMessage
 func (c *PinpointSMSVoice) SendVoiceMessageRequest(input *SendVoiceMessageInput) (req *request.Request, output *SendVoiceMessageOutput) {
@@ -617,17 +618,18 @@ func (c *PinpointSMSVoice) SendVoiceMessageRequest(input *SendVoiceMessageInput)
 // See the AWS API reference guide for Amazon Pinpoint SMS and Voice Service's
 // API operation SendVoiceMessage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   You've issued too many requests to the resource. Wait a few minutes, and
-//   then try again.
+// Returned Error Types:
 //
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The input you provided is invalid.
+//   - TooManyRequestsException
+//     You've issued too many requests to the resource. Wait a few minutes, and
+//     then try again.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   The API encountered an unexpected error and couldn't complete the request.
-//   You might be able to successfully issue the request again in the future.
+//   - BadRequestException
+//     The input you provided is invalid.
+//
+//   - InternalServiceErrorException
+//     The API encountered an unexpected error and couldn't complete the request.
+//     You might be able to successfully issue the request again in the future.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/SendVoiceMessage
 func (c *PinpointSMSVoice) SendVoiceMessage(input *SendVoiceMessageInput) (*SendVoiceMessageOutput, error) {
@@ -667,14 +669,13 @@ const opUpdateConfigurationSetEventDestination = "UpdateConfigurationSetEventDes
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateConfigurationSetEventDestinationRequest method.
+//	req, resp := client.UpdateConfigurationSetEventDestinationRequest(params)
 //
-//    // Example sending a request using the UpdateConfigurationSetEventDestinationRequest method.
-//    req, resp := client.UpdateConfigurationSetEventDestinationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/UpdateConfigurationSetEventDestination
 func (c *PinpointSMSVoice) UpdateConfigurationSetEventDestinationRequest(input *UpdateConfigurationSetEventDestinationInput) (req *request.Request, output *UpdateConfigurationSetEventDestinationOutput) {
@@ -708,20 +709,21 @@ func (c *PinpointSMSVoice) UpdateConfigurationSetEventDestinationRequest(input *
 // See the AWS API reference guide for Amazon Pinpoint SMS and Voice Service's
 // API operation UpdateConfigurationSetEventDestination for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotFoundException "NotFoundException"
-//   The resource you attempted to access doesn't exist.
+// Returned Error Types:
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   You've issued too many requests to the resource. Wait a few minutes, and
-//   then try again.
+//   - NotFoundException
+//     The resource you attempted to access doesn't exist.
 //
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The input you provided is invalid.
+//   - TooManyRequestsException
+//     You've issued too many requests to the resource. Wait a few minutes, and
+//     then try again.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   The API encountered an unexpected error and couldn't complete the request.
-//   You might be able to successfully issue the request again in the future.
+//   - BadRequestException
+//     The input you provided is invalid.
+//
+//   - InternalServiceErrorException
+//     The API encountered an unexpected error and couldn't complete the request.
+//     You might be able to successfully issue the request again in the future.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/UpdateConfigurationSetEventDestination
 func (c *PinpointSMSVoice) UpdateConfigurationSetEventDestination(input *UpdateConfigurationSetEventDestinationInput) (*UpdateConfigurationSetEventDestinationOutput, error) {
@@ -745,6 +747,134 @@ func (c *PinpointSMSVoice) UpdateConfigurationSetEventDestinationWithContext(ctx
 	return out, req.Send()
 }
 
+// The resource specified in your request already exists.
+type AlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &AlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AlreadyExistsException) Code() string {
+	return "AlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *AlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *AlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The input you provided is invalid.
+type BadRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BadRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BadRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorBadRequestException(v protocol.ResponseMetadata) error {
+	return &BadRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *BadRequestException) Code() string {
+	return "BadRequestException"
+}
+
+// Message returns the exception's message.
+func (s *BadRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *BadRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *BadRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *BadRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *BadRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // An object that defines a message that contains text formatted using Amazon
 // Pinpoint Voice Instructions markup.
 type CallInstructionsMessageType struct {
@@ -755,12 +885,20 @@ type CallInstructionsMessageType struct {
 	Text *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CallInstructionsMessageType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CallInstructionsMessageType) GoString() string {
 	return s.String()
 }
@@ -785,12 +923,20 @@ type CloudWatchLogsDestination struct {
 	LogGroupArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLogsDestination) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLogsDestination) GoString() string {
 	return s.String()
 }
@@ -821,12 +967,20 @@ type CreateConfigurationSetEventDestinationInput struct {
 	EventDestinationName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConfigurationSetEventDestinationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConfigurationSetEventDestinationInput) GoString() string {
 	return s.String()
 }
@@ -870,12 +1024,20 @@ type CreateConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConfigurationSetEventDestinationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConfigurationSetEventDestinationOutput) GoString() string {
 	return s.String()
 }
@@ -888,12 +1050,20 @@ type CreateConfigurationSetInput struct {
 	ConfigurationSetName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConfigurationSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConfigurationSetInput) GoString() string {
 	return s.String()
 }
@@ -910,18 +1080,26 @@ type CreateConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConfigurationSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConfigurationSetOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteConfigurationSetEventDestinationInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// ConfigurationSetName is a required field
 	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
@@ -930,12 +1108,20 @@ type DeleteConfigurationSetEventDestinationInput struct {
 	EventDestinationName *string `location:"uri" locationName:"EventDestinationName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConfigurationSetEventDestinationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConfigurationSetEventDestinationInput) GoString() string {
 	return s.String()
 }
@@ -979,29 +1165,45 @@ type DeleteConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConfigurationSetEventDestinationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConfigurationSetEventDestinationOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteConfigurationSetInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// ConfigurationSetName is a required field
 	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConfigurationSetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConfigurationSetInput) GoString() string {
 	return s.String()
 }
@@ -1033,12 +1235,20 @@ type DeleteConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConfigurationSetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConfigurationSetOutput) GoString() string {
 	return s.String()
 }
@@ -1062,7 +1272,7 @@ type EventDestination struct {
 
 	// An array of EventDestination objects. Each EventDestination object includes
 	// ARNs and other information that define an event destination.
-	MatchingEventTypes []*string `type:"list"`
+	MatchingEventTypes []*string `type:"list" enum:"EventType"`
 
 	// A name that identifies the event destination configuration.
 	Name *string `type:"string"`
@@ -1072,12 +1282,20 @@ type EventDestination struct {
 	SnsDestination *SnsDestination `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventDestination) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventDestination) GoString() string {
 	return s.String()
 }
@@ -1137,19 +1355,27 @@ type EventDestinationDefinition struct {
 
 	// An array of EventDestination objects. Each EventDestination object includes
 	// ARNs and other information that define an event destination.
-	MatchingEventTypes []*string `type:"list"`
+	MatchingEventTypes []*string `type:"list" enum:"EventType"`
 
 	// An object that contains information about an event destination that sends
 	// data to Amazon SNS.
 	SnsDestination *SnsDestination `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventDestinationDefinition) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventDestinationDefinition) GoString() string {
 	return s.String()
 }
@@ -1185,18 +1411,26 @@ func (s *EventDestinationDefinition) SetSnsDestination(v *SnsDestination) *Event
 }
 
 type GetConfigurationSetEventDestinationsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// ConfigurationSetName is a required field
 	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConfigurationSetEventDestinationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConfigurationSetEventDestinationsInput) GoString() string {
 	return s.String()
 }
@@ -1232,12 +1466,20 @@ type GetConfigurationSetEventDestinationsOutput struct {
 	EventDestinations []*EventDestination `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConfigurationSetEventDestinationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetConfigurationSetEventDestinationsOutput) GoString() string {
 	return s.String()
 }
@@ -1246,6 +1488,71 @@ func (s GetConfigurationSetEventDestinationsOutput) GoString() string {
 func (s *GetConfigurationSetEventDestinationsOutput) SetEventDestinations(v []*EventDestination) *GetConfigurationSetEventDestinationsOutput {
 	s.EventDestinations = v
 	return s
+}
+
+// The API encountered an unexpected error and couldn't complete the request.
+// You might be able to successfully issue the request again in the future.
+type InternalServiceErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServiceErrorException(v protocol.ResponseMetadata) error {
+	return &InternalServiceErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServiceErrorException) Code() string {
+	return "InternalServiceErrorException"
+}
+
+// Message returns the exception's message.
+func (s *InternalServiceErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServiceErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServiceErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServiceErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServiceErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // An object that contains information about an event destination that sends
@@ -1262,12 +1569,20 @@ type KinesisFirehoseDestination struct {
 	IamRoleArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseDestination) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s KinesisFirehoseDestination) GoString() string {
 	return s.String()
 }
@@ -1284,20 +1599,92 @@ func (s *KinesisFirehoseDestination) SetIamRoleArn(v string) *KinesisFirehoseDes
 	return s
 }
 
+// There are too many instances of the specified resource type.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListConfigurationSetsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 
 	PageSize *string `location:"querystring" locationName:"PageSize" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConfigurationSetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConfigurationSetsInput) GoString() string {
 	return s.String()
 }
@@ -1328,12 +1715,20 @@ type ListConfigurationSetsOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConfigurationSetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConfigurationSetsOutput) GoString() string {
 	return s.String()
 }
@@ -1348,6 +1743,70 @@ func (s *ListConfigurationSetsOutput) SetConfigurationSets(v []*string) *ListCon
 func (s *ListConfigurationSetsOutput) SetNextToken(v string) *ListConfigurationSetsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// The resource you attempted to access doesn't exist.
+type NotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorNotFoundException(v protocol.ResponseMetadata) error {
+	return &NotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NotFoundException) Code() string {
+	return "NotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *NotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *NotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // An object that defines a message that contains unformatted text.
@@ -1366,12 +1825,20 @@ type PlainTextMessageType struct {
 	VoiceId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PlainTextMessageType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PlainTextMessageType) GoString() string {
 	return s.String()
 }
@@ -1410,12 +1877,20 @@ type SSMLMessageType struct {
 	VoiceId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SSMLMessageType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SSMLMessageType) GoString() string {
 	return s.String()
 }
@@ -1463,12 +1938,20 @@ type SendVoiceMessageInput struct {
 	OriginationPhoneNumber *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendVoiceMessageInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendVoiceMessageInput) GoString() string {
 	return s.String()
 }
@@ -1512,12 +1995,20 @@ type SendVoiceMessageOutput struct {
 	MessageId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendVoiceMessageOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendVoiceMessageOutput) GoString() string {
 	return s.String()
 }
@@ -1538,12 +2029,20 @@ type SnsDestination struct {
 	TopicArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SnsDestination) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SnsDestination) GoString() string {
 	return s.String()
 }
@@ -1552,6 +2051,71 @@ func (s SnsDestination) GoString() string {
 func (s *SnsDestination) SetTopicArn(v string) *SnsDestination {
 	s.TopicArn = &v
 	return s
+}
+
+// You've issued too many requests to the resource. Wait a few minutes, and
+// then try again.
+type TooManyRequestsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyRequestsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyRequestsException) GoString() string {
+	return s.String()
+}
+
+func newErrorTooManyRequestsException(v protocol.ResponseMetadata) error {
+	return &TooManyRequestsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TooManyRequestsException) Code() string {
+	return "TooManyRequestsException"
+}
+
+// Message returns the exception's message.
+func (s *TooManyRequestsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TooManyRequestsException) OrigErr() error {
+	return nil
+}
+
+func (s *TooManyRequestsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TooManyRequestsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TooManyRequestsException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // An object that defines a request to update an existing event destination.
@@ -1568,12 +2132,20 @@ type UpdateConfigurationSetEventDestinationInput struct {
 	EventDestinationName *string `location:"uri" locationName:"EventDestinationName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConfigurationSetEventDestinationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConfigurationSetEventDestinationInput) GoString() string {
 	return s.String()
 }
@@ -1623,12 +2195,20 @@ type UpdateConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConfigurationSetEventDestinationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConfigurationSetEventDestinationOutput) GoString() string {
 	return s.String()
 }
@@ -1649,12 +2229,20 @@ type VoiceMessageContent struct {
 	SSMLMessage *SSMLMessageType `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VoiceMessageContent) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VoiceMessageContent) GoString() string {
 	return s.String()
 }
@@ -1700,3 +2288,16 @@ const (
 	// EventTypeNoAnswer is a EventType enum value
 	EventTypeNoAnswer = "NO_ANSWER"
 )
+
+// EventType_Values returns all elements of the EventType enum
+func EventType_Values() []string {
+	return []string{
+		EventTypeInitiatedCall,
+		EventTypeRinging,
+		EventTypeAnswered,
+		EventTypeCompletedCall,
+		EventTypeBusy,
+		EventTypeFailed,
+		EventTypeNoAnswer,
+	}
+}

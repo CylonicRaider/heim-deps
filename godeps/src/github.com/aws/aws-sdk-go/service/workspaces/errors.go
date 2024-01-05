@@ -2,6 +2,10 @@
 
 package workspaces
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAccessDeniedException for service response error code
@@ -9,6 +13,24 @@ const (
 	//
 	// The user is not authorized to access a resource.
 	ErrCodeAccessDeniedException = "AccessDeniedException"
+
+	// ErrCodeApplicationNotSupportedException for service response error code
+	// "ApplicationNotSupportedException".
+	//
+	// The specified application is not supported.
+	ErrCodeApplicationNotSupportedException = "ApplicationNotSupportedException"
+
+	// ErrCodeComputeNotCompatibleException for service response error code
+	// "ComputeNotCompatibleException".
+	//
+	// The compute type of the WorkSpace is not compatible with the application.
+	ErrCodeComputeNotCompatibleException = "ComputeNotCompatibleException"
+
+	// ErrCodeIncompatibleApplicationsException for service response error code
+	// "IncompatibleApplicationsException".
+	//
+	// The specified application is not compatible with the resource.
+	ErrCodeIncompatibleApplicationsException = "IncompatibleApplicationsException"
 
 	// ErrCodeInvalidParameterValuesException for service response error code
 	// "InvalidParameterValuesException".
@@ -21,6 +43,12 @@ const (
 	//
 	// The state of the resource is not valid for this operation.
 	ErrCodeInvalidResourceStateException = "InvalidResourceStateException"
+
+	// ErrCodeOperatingSystemNotCompatibleException for service response error code
+	// "OperatingSystemNotCompatibleException".
+	//
+	// The operating system of the WorkSpace is not compatible with the application.
+	ErrCodeOperatingSystemNotCompatibleException = "OperatingSystemNotCompatibleException"
 
 	// ErrCodeOperationInProgressException for service response error code
 	// "OperationInProgressException".
@@ -53,6 +81,12 @@ const (
 	// The resource could not be created.
 	ErrCodeResourceCreationFailedException = "ResourceCreationFailedException"
 
+	// ErrCodeResourceInUseException for service response error code
+	// "ResourceInUseException".
+	//
+	// The specified resource is currently in use.
+	ErrCodeResourceInUseException = "ResourceInUseException"
+
 	// ErrCodeResourceLimitExceededException for service response error code
 	// "ResourceLimitExceededException".
 	//
@@ -71,10 +105,51 @@ const (
 	// The specified resource is not available.
 	ErrCodeResourceUnavailableException = "ResourceUnavailableException"
 
+	// ErrCodeUnsupportedNetworkConfigurationException for service response error code
+	// "UnsupportedNetworkConfigurationException".
+	//
+	// The configuration of this network is not supported for this operation, or
+	// your network configuration conflicts with the Amazon WorkSpaces management
+	// network IP range. For more information, see Configure a VPC for Amazon WorkSpaces
+	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html).
+	ErrCodeUnsupportedNetworkConfigurationException = "UnsupportedNetworkConfigurationException"
+
 	// ErrCodeUnsupportedWorkspaceConfigurationException for service response error code
 	// "UnsupportedWorkspaceConfigurationException".
 	//
 	// The configuration of this WorkSpace is not supported for this operation.
-	// For more information, see the Amazon WorkSpaces Administration Guide (http://docs.aws.amazon.com/workspaces/latest/adminguide/).
+	// For more information, see Required Configuration and Service Components for
+	// WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html).
 	ErrCodeUnsupportedWorkspaceConfigurationException = "UnsupportedWorkspaceConfigurationException"
+
+	// ErrCodeWorkspacesDefaultRoleNotFoundException for service response error code
+	// "WorkspacesDefaultRoleNotFoundException".
+	//
+	// The workspaces_DefaultRole role could not be found. If this is the first
+	// time you are registering a directory, you will need to create the workspaces_DefaultRole
+	// role before you can register a directory. For more information, see Creating
+	// the workspaces_DefaultRole Role (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role).
+	ErrCodeWorkspacesDefaultRoleNotFoundException = "WorkspacesDefaultRoleNotFoundException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccessDeniedException":                      newErrorAccessDeniedException,
+	"ApplicationNotSupportedException":           newErrorApplicationNotSupportedException,
+	"ComputeNotCompatibleException":              newErrorComputeNotCompatibleException,
+	"IncompatibleApplicationsException":          newErrorIncompatibleApplicationsException,
+	"InvalidParameterValuesException":            newErrorInvalidParameterValuesException,
+	"InvalidResourceStateException":              newErrorInvalidResourceStateException,
+	"OperatingSystemNotCompatibleException":      newErrorOperatingSystemNotCompatibleException,
+	"OperationInProgressException":               newErrorOperationInProgressException,
+	"OperationNotSupportedException":             newErrorOperationNotSupportedException,
+	"ResourceAlreadyExistsException":             newErrorResourceAlreadyExistsException,
+	"ResourceAssociatedException":                newErrorResourceAssociatedException,
+	"ResourceCreationFailedException":            newErrorResourceCreationFailedException,
+	"ResourceInUseException":                     newErrorResourceInUseException,
+	"ResourceLimitExceededException":             newErrorResourceLimitExceededException,
+	"ResourceNotFoundException":                  newErrorResourceNotFoundException,
+	"ResourceUnavailableException":               newErrorResourceUnavailableException,
+	"UnsupportedNetworkConfigurationException":   newErrorUnsupportedNetworkConfigurationException,
+	"UnsupportedWorkspaceConfigurationException": newErrorUnsupportedWorkspaceConfigurationException,
+	"WorkspacesDefaultRoleNotFoundException":     newErrorWorkspacesDefaultRoleNotFoundException,
+}

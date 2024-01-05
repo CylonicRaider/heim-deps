@@ -31,7 +31,7 @@ var initRequest func(*request.Request)
 const (
 	ServiceName = "DocDB" // Name of service.
 	EndpointsID = "rds"   // ID to lookup a service endpoint with.
-	ServiceID   = "DocDB" // ServiceID is a unique identifer of a specific service.
+	ServiceID   = "DocDB" // ServiceID is a unique identifier of a specific service.
 )
 
 // New creates a new instance of the DocDB client with a session.
@@ -39,31 +39,36 @@ const (
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a DocDB client from just a session.
-//     svc := docdb.New(mySession)
 //
-//     // Create a DocDB client with additional configuration
-//     svc := docdb.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
+//	mySession := session.Must(session.NewSession())
+//
+//	// Create a DocDB client from just a session.
+//	svc := docdb.New(mySession)
+//
+//	// Create a DocDB client with additional configuration
+//	svc := docdb.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
 func New(p client.ConfigProvider, cfgs ...*aws.Config) *DocDB {
 	c := p.ClientConfig(EndpointsID, cfgs...)
 	if c.SigningNameDerived || len(c.SigningName) == 0 {
 		c.SigningName = "rds"
 	}
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
+	return newClient(*c.Config, c.Handlers, c.PartitionID, c.Endpoint, c.SigningRegion, c.SigningName, c.ResolvedRegion)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *DocDB {
+func newClient(cfg aws.Config, handlers request.Handlers, partitionID, endpoint, signingRegion, signingName, resolvedRegion string) *DocDB {
 	svc := &DocDB{
 		Client: client.New(
 			cfg,
 			metadata.ClientInfo{
-				ServiceName:   ServiceName,
-				ServiceID:     ServiceID,
-				SigningName:   signingName,
-				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
-				APIVersion:    "2014-10-31",
+				ServiceName:    ServiceName,
+				ServiceID:      ServiceID,
+				SigningName:    signingName,
+				SigningRegion:  signingRegion,
+				PartitionID:    partitionID,
+				Endpoint:       endpoint,
+				APIVersion:     "2014-10-31",
+				ResolvedRegion: resolvedRegion,
 			},
 			handlers,
 		),

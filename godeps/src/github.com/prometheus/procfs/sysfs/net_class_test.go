@@ -11,7 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build !windows
+//go:build linux
+// +build linux
 
 package sysfs
 
@@ -20,13 +21,53 @@ import (
 	"testing"
 )
 
-func TestNewNetClass(t *testing.T) {
-	fs, err := NewFS("fixtures")
+func TestNewNetClassDevices(t *testing.T) {
+	fs, err := NewFS(sysTestFixtures)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	nc, err := fs.NewNetClass()
+	devices, err := fs.NetClassDevices()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(devices) != 1 {
+		t.Errorf("Unexpected number of devices, want %d, have %d", 1, len(devices))
+	}
+	if devices[0] != "eth0" {
+		t.Errorf("Found unexpected device, want %s, have %s", "eth0", devices[0])
+	}
+}
+
+func TestNewNetClassDevicesByIface(t *testing.T) {
+	fs, err := NewFS(sysTestFixtures)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	_, err = fs.NetClassByIface("non-existent")
+	if err == nil {
+		t.Fatal("expected error, have none")
+	}
+
+	device, err := fs.NetClassByIface("eth0")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if device.Name != "eth0" {
+		t.Errorf("Found unexpected device, want %s, have %s", "eth0", device.Name)
+	}
+}
+
+func TestNetClass(t *testing.T) {
+	fs, err := NewFS(sysTestFixtures)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	nc, err := fs.NetClass()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -46,7 +87,7 @@ func TestNewNetClass(t *testing.T) {
 		linkMode         int64 = 1
 		mtu              int64 = 1500
 		nameAssignType   int64 = 2
-		netDevGroup      int64 = 0
+		netDevGroup      int64
 		speed            int64 = 1000
 		txQueueLen       int64 = 1000
 		netType          int64 = 1

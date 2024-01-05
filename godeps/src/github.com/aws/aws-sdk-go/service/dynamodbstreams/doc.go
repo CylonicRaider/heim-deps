@@ -5,7 +5,7 @@
 //
 // Amazon DynamoDB Streams provides API actions for accessing streams and processing
 // stream records. To learn more about application development with Streams,
-// see Capturing Table Activity with DynamoDB Streams (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html)
+// see Capturing Table Activity with DynamoDB Streams (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html)
 // in the Amazon DynamoDB Developer Guide.
 //
 // See https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10 for more information on this service.
@@ -13,7 +13,7 @@
 // See dynamodbstreams package documentation for more information.
 // https://docs.aws.amazon.com/sdk-for-go/api/service/dynamodbstreams/
 //
-// Using the Client
+// # Using the Client
 //
 // To contact Amazon DynamoDB Streams with the SDK use the New function to create
 // a new service client. With that client you can make API requests to the service.

@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS X-Ray.
-//    func myFunc(svc xrayiface.XRayAPI) bool {
-//        // Make svc.BatchGetTraces request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS X-Ray.
+//	func myFunc(svc xrayiface.XRayAPI) bool {
+//	    // Make svc.BatchGetTraces request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := xray.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := xray.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockXRayClient struct {
-//        xrayiface.XRayAPI
-//    }
-//    func (m *mockXRayClient) BatchGetTraces(input *xray.BatchGetTracesInput) (*xray.BatchGetTracesOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockXRayClient struct {
+//	    xrayiface.XRayAPI
+//	}
+//	func (m *mockXRayClient) BatchGetTraces(input *xray.BatchGetTracesInput) (*xray.BatchGetTracesOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockXRayClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockXRayClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -79,6 +79,10 @@ type XRayAPI interface {
 	DeleteGroupWithContext(aws.Context, *xray.DeleteGroupInput, ...request.Option) (*xray.DeleteGroupOutput, error)
 	DeleteGroupRequest(*xray.DeleteGroupInput) (*request.Request, *xray.DeleteGroupOutput)
 
+	DeleteResourcePolicy(*xray.DeleteResourcePolicyInput) (*xray.DeleteResourcePolicyOutput, error)
+	DeleteResourcePolicyWithContext(aws.Context, *xray.DeleteResourcePolicyInput, ...request.Option) (*xray.DeleteResourcePolicyOutput, error)
+	DeleteResourcePolicyRequest(*xray.DeleteResourcePolicyInput) (*request.Request, *xray.DeleteResourcePolicyOutput)
+
 	DeleteSamplingRule(*xray.DeleteSamplingRuleInput) (*xray.DeleteSamplingRuleOutput, error)
 	DeleteSamplingRuleWithContext(aws.Context, *xray.DeleteSamplingRuleInput, ...request.Option) (*xray.DeleteSamplingRuleOutput, error)
 	DeleteSamplingRuleRequest(*xray.DeleteSamplingRuleInput) (*request.Request, *xray.DeleteSamplingRuleOutput)
@@ -95,13 +99,44 @@ type XRayAPI interface {
 	GetGroupsWithContext(aws.Context, *xray.GetGroupsInput, ...request.Option) (*xray.GetGroupsOutput, error)
 	GetGroupsRequest(*xray.GetGroupsInput) (*request.Request, *xray.GetGroupsOutput)
 
+	GetGroupsPages(*xray.GetGroupsInput, func(*xray.GetGroupsOutput, bool) bool) error
+	GetGroupsPagesWithContext(aws.Context, *xray.GetGroupsInput, func(*xray.GetGroupsOutput, bool) bool, ...request.Option) error
+
+	GetInsight(*xray.GetInsightInput) (*xray.GetInsightOutput, error)
+	GetInsightWithContext(aws.Context, *xray.GetInsightInput, ...request.Option) (*xray.GetInsightOutput, error)
+	GetInsightRequest(*xray.GetInsightInput) (*request.Request, *xray.GetInsightOutput)
+
+	GetInsightEvents(*xray.GetInsightEventsInput) (*xray.GetInsightEventsOutput, error)
+	GetInsightEventsWithContext(aws.Context, *xray.GetInsightEventsInput, ...request.Option) (*xray.GetInsightEventsOutput, error)
+	GetInsightEventsRequest(*xray.GetInsightEventsInput) (*request.Request, *xray.GetInsightEventsOutput)
+
+	GetInsightEventsPages(*xray.GetInsightEventsInput, func(*xray.GetInsightEventsOutput, bool) bool) error
+	GetInsightEventsPagesWithContext(aws.Context, *xray.GetInsightEventsInput, func(*xray.GetInsightEventsOutput, bool) bool, ...request.Option) error
+
+	GetInsightImpactGraph(*xray.GetInsightImpactGraphInput) (*xray.GetInsightImpactGraphOutput, error)
+	GetInsightImpactGraphWithContext(aws.Context, *xray.GetInsightImpactGraphInput, ...request.Option) (*xray.GetInsightImpactGraphOutput, error)
+	GetInsightImpactGraphRequest(*xray.GetInsightImpactGraphInput) (*request.Request, *xray.GetInsightImpactGraphOutput)
+
+	GetInsightSummaries(*xray.GetInsightSummariesInput) (*xray.GetInsightSummariesOutput, error)
+	GetInsightSummariesWithContext(aws.Context, *xray.GetInsightSummariesInput, ...request.Option) (*xray.GetInsightSummariesOutput, error)
+	GetInsightSummariesRequest(*xray.GetInsightSummariesInput) (*request.Request, *xray.GetInsightSummariesOutput)
+
+	GetInsightSummariesPages(*xray.GetInsightSummariesInput, func(*xray.GetInsightSummariesOutput, bool) bool) error
+	GetInsightSummariesPagesWithContext(aws.Context, *xray.GetInsightSummariesInput, func(*xray.GetInsightSummariesOutput, bool) bool, ...request.Option) error
+
 	GetSamplingRules(*xray.GetSamplingRulesInput) (*xray.GetSamplingRulesOutput, error)
 	GetSamplingRulesWithContext(aws.Context, *xray.GetSamplingRulesInput, ...request.Option) (*xray.GetSamplingRulesOutput, error)
 	GetSamplingRulesRequest(*xray.GetSamplingRulesInput) (*request.Request, *xray.GetSamplingRulesOutput)
 
+	GetSamplingRulesPages(*xray.GetSamplingRulesInput, func(*xray.GetSamplingRulesOutput, bool) bool) error
+	GetSamplingRulesPagesWithContext(aws.Context, *xray.GetSamplingRulesInput, func(*xray.GetSamplingRulesOutput, bool) bool, ...request.Option) error
+
 	GetSamplingStatisticSummaries(*xray.GetSamplingStatisticSummariesInput) (*xray.GetSamplingStatisticSummariesOutput, error)
 	GetSamplingStatisticSummariesWithContext(aws.Context, *xray.GetSamplingStatisticSummariesInput, ...request.Option) (*xray.GetSamplingStatisticSummariesOutput, error)
 	GetSamplingStatisticSummariesRequest(*xray.GetSamplingStatisticSummariesInput) (*request.Request, *xray.GetSamplingStatisticSummariesOutput)
+
+	GetSamplingStatisticSummariesPages(*xray.GetSamplingStatisticSummariesInput, func(*xray.GetSamplingStatisticSummariesOutput, bool) bool) error
+	GetSamplingStatisticSummariesPagesWithContext(aws.Context, *xray.GetSamplingStatisticSummariesInput, func(*xray.GetSamplingStatisticSummariesOutput, bool) bool, ...request.Option) error
 
 	GetSamplingTargets(*xray.GetSamplingTargetsInput) (*xray.GetSamplingTargetsOutput, error)
 	GetSamplingTargetsWithContext(aws.Context, *xray.GetSamplingTargetsInput, ...request.Option) (*xray.GetSamplingTargetsOutput, error)
@@ -113,6 +148,13 @@ type XRayAPI interface {
 
 	GetServiceGraphPages(*xray.GetServiceGraphInput, func(*xray.GetServiceGraphOutput, bool) bool) error
 	GetServiceGraphPagesWithContext(aws.Context, *xray.GetServiceGraphInput, func(*xray.GetServiceGraphOutput, bool) bool, ...request.Option) error
+
+	GetTimeSeriesServiceStatistics(*xray.GetTimeSeriesServiceStatisticsInput) (*xray.GetTimeSeriesServiceStatisticsOutput, error)
+	GetTimeSeriesServiceStatisticsWithContext(aws.Context, *xray.GetTimeSeriesServiceStatisticsInput, ...request.Option) (*xray.GetTimeSeriesServiceStatisticsOutput, error)
+	GetTimeSeriesServiceStatisticsRequest(*xray.GetTimeSeriesServiceStatisticsInput) (*request.Request, *xray.GetTimeSeriesServiceStatisticsOutput)
+
+	GetTimeSeriesServiceStatisticsPages(*xray.GetTimeSeriesServiceStatisticsInput, func(*xray.GetTimeSeriesServiceStatisticsOutput, bool) bool) error
+	GetTimeSeriesServiceStatisticsPagesWithContext(aws.Context, *xray.GetTimeSeriesServiceStatisticsInput, func(*xray.GetTimeSeriesServiceStatisticsOutput, bool) bool, ...request.Option) error
 
 	GetTraceGraph(*xray.GetTraceGraphInput) (*xray.GetTraceGraphOutput, error)
 	GetTraceGraphWithContext(aws.Context, *xray.GetTraceGraphInput, ...request.Option) (*xray.GetTraceGraphOutput, error)
@@ -128,9 +170,27 @@ type XRayAPI interface {
 	GetTraceSummariesPages(*xray.GetTraceSummariesInput, func(*xray.GetTraceSummariesOutput, bool) bool) error
 	GetTraceSummariesPagesWithContext(aws.Context, *xray.GetTraceSummariesInput, func(*xray.GetTraceSummariesOutput, bool) bool, ...request.Option) error
 
+	ListResourcePolicies(*xray.ListResourcePoliciesInput) (*xray.ListResourcePoliciesOutput, error)
+	ListResourcePoliciesWithContext(aws.Context, *xray.ListResourcePoliciesInput, ...request.Option) (*xray.ListResourcePoliciesOutput, error)
+	ListResourcePoliciesRequest(*xray.ListResourcePoliciesInput) (*request.Request, *xray.ListResourcePoliciesOutput)
+
+	ListResourcePoliciesPages(*xray.ListResourcePoliciesInput, func(*xray.ListResourcePoliciesOutput, bool) bool) error
+	ListResourcePoliciesPagesWithContext(aws.Context, *xray.ListResourcePoliciesInput, func(*xray.ListResourcePoliciesOutput, bool) bool, ...request.Option) error
+
+	ListTagsForResource(*xray.ListTagsForResourceInput) (*xray.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *xray.ListTagsForResourceInput, ...request.Option) (*xray.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*xray.ListTagsForResourceInput) (*request.Request, *xray.ListTagsForResourceOutput)
+
+	ListTagsForResourcePages(*xray.ListTagsForResourceInput, func(*xray.ListTagsForResourceOutput, bool) bool) error
+	ListTagsForResourcePagesWithContext(aws.Context, *xray.ListTagsForResourceInput, func(*xray.ListTagsForResourceOutput, bool) bool, ...request.Option) error
+
 	PutEncryptionConfig(*xray.PutEncryptionConfigInput) (*xray.PutEncryptionConfigOutput, error)
 	PutEncryptionConfigWithContext(aws.Context, *xray.PutEncryptionConfigInput, ...request.Option) (*xray.PutEncryptionConfigOutput, error)
 	PutEncryptionConfigRequest(*xray.PutEncryptionConfigInput) (*request.Request, *xray.PutEncryptionConfigOutput)
+
+	PutResourcePolicy(*xray.PutResourcePolicyInput) (*xray.PutResourcePolicyOutput, error)
+	PutResourcePolicyWithContext(aws.Context, *xray.PutResourcePolicyInput, ...request.Option) (*xray.PutResourcePolicyOutput, error)
+	PutResourcePolicyRequest(*xray.PutResourcePolicyInput) (*request.Request, *xray.PutResourcePolicyOutput)
 
 	PutTelemetryRecords(*xray.PutTelemetryRecordsInput) (*xray.PutTelemetryRecordsOutput, error)
 	PutTelemetryRecordsWithContext(aws.Context, *xray.PutTelemetryRecordsInput, ...request.Option) (*xray.PutTelemetryRecordsOutput, error)
@@ -139,6 +199,14 @@ type XRayAPI interface {
 	PutTraceSegments(*xray.PutTraceSegmentsInput) (*xray.PutTraceSegmentsOutput, error)
 	PutTraceSegmentsWithContext(aws.Context, *xray.PutTraceSegmentsInput, ...request.Option) (*xray.PutTraceSegmentsOutput, error)
 	PutTraceSegmentsRequest(*xray.PutTraceSegmentsInput) (*request.Request, *xray.PutTraceSegmentsOutput)
+
+	TagResource(*xray.TagResourceInput) (*xray.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *xray.TagResourceInput, ...request.Option) (*xray.TagResourceOutput, error)
+	TagResourceRequest(*xray.TagResourceInput) (*request.Request, *xray.TagResourceOutput)
+
+	UntagResource(*xray.UntagResourceInput) (*xray.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *xray.UntagResourceInput, ...request.Option) (*xray.UntagResourceOutput, error)
+	UntagResourceRequest(*xray.UntagResourceInput) (*request.Request, *xray.UntagResourceOutput)
 
 	UpdateGroup(*xray.UpdateGroupInput) (*xray.UpdateGroupOutput, error)
 	UpdateGroupWithContext(aws.Context, *xray.UpdateGroupInput, ...request.Option) (*xray.UpdateGroupOutput, error)

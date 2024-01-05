@@ -23,43 +23,51 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Lex Runtime Service.
-//    func myFunc(svc lexruntimeserviceiface.LexRuntimeServiceAPI) bool {
-//        // Make svc.PostContent request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// Amazon Lex Runtime Service.
+//	func myFunc(svc lexruntimeserviceiface.LexRuntimeServiceAPI) bool {
+//	    // Make svc.DeleteSession request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := lexruntimeservice.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := lexruntimeservice.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockLexRuntimeServiceClient struct {
-//        lexruntimeserviceiface.LexRuntimeServiceAPI
-//    }
-//    func (m *mockLexRuntimeServiceClient) PostContent(input *lexruntimeservice.PostContentInput) (*lexruntimeservice.PostContentOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockLexRuntimeServiceClient struct {
+//	    lexruntimeserviceiface.LexRuntimeServiceAPI
+//	}
+//	func (m *mockLexRuntimeServiceClient) DeleteSession(input *lexruntimeservice.DeleteSessionInput) (*lexruntimeservice.DeleteSessionOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockLexRuntimeServiceClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockLexRuntimeServiceClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type LexRuntimeServiceAPI interface {
+	DeleteSession(*lexruntimeservice.DeleteSessionInput) (*lexruntimeservice.DeleteSessionOutput, error)
+	DeleteSessionWithContext(aws.Context, *lexruntimeservice.DeleteSessionInput, ...request.Option) (*lexruntimeservice.DeleteSessionOutput, error)
+	DeleteSessionRequest(*lexruntimeservice.DeleteSessionInput) (*request.Request, *lexruntimeservice.DeleteSessionOutput)
+
+	GetSession(*lexruntimeservice.GetSessionInput) (*lexruntimeservice.GetSessionOutput, error)
+	GetSessionWithContext(aws.Context, *lexruntimeservice.GetSessionInput, ...request.Option) (*lexruntimeservice.GetSessionOutput, error)
+	GetSessionRequest(*lexruntimeservice.GetSessionInput) (*request.Request, *lexruntimeservice.GetSessionOutput)
+
 	PostContent(*lexruntimeservice.PostContentInput) (*lexruntimeservice.PostContentOutput, error)
 	PostContentWithContext(aws.Context, *lexruntimeservice.PostContentInput, ...request.Option) (*lexruntimeservice.PostContentOutput, error)
 	PostContentRequest(*lexruntimeservice.PostContentInput) (*request.Request, *lexruntimeservice.PostContentOutput)
@@ -67,6 +75,10 @@ type LexRuntimeServiceAPI interface {
 	PostText(*lexruntimeservice.PostTextInput) (*lexruntimeservice.PostTextOutput, error)
 	PostTextWithContext(aws.Context, *lexruntimeservice.PostTextInput, ...request.Option) (*lexruntimeservice.PostTextOutput, error)
 	PostTextRequest(*lexruntimeservice.PostTextInput) (*request.Request, *lexruntimeservice.PostTextOutput)
+
+	PutSession(*lexruntimeservice.PutSessionInput) (*lexruntimeservice.PutSessionOutput, error)
+	PutSessionWithContext(aws.Context, *lexruntimeservice.PutSessionInput, ...request.Option) (*lexruntimeservice.PutSessionOutput, error)
+	PutSessionRequest(*lexruntimeservice.PutSessionInput) (*request.Request, *lexruntimeservice.PutSessionOutput)
 }
 
 var _ LexRuntimeServiceAPI = (*lexruntimeservice.LexRuntimeService)(nil)

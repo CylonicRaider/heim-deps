@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Pinpoint Email Service.
-//    func myFunc(svc pinpointemailiface.PinpointEmailAPI) bool {
-//        // Make svc.CreateConfigurationSet request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// Amazon Pinpoint Email Service.
+//	func myFunc(svc pinpointemailiface.PinpointEmailAPI) bool {
+//	    // Make svc.CreateConfigurationSet request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := pinpointemail.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := pinpointemail.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockPinpointEmailClient struct {
-//        pinpointemailiface.PinpointEmailAPI
-//    }
-//    func (m *mockPinpointEmailClient) CreateConfigurationSet(input *pinpointemail.CreateConfigurationSetInput) (*pinpointemail.CreateConfigurationSetOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockPinpointEmailClient struct {
+//	    pinpointemailiface.PinpointEmailAPI
+//	}
+//	func (m *mockPinpointEmailClient) CreateConfigurationSet(input *pinpointemail.CreateConfigurationSetInput) (*pinpointemail.CreateConfigurationSetOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockPinpointEmailClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockPinpointEmailClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -131,6 +131,10 @@ type PinpointEmailAPI interface {
 	GetDeliverabilityTestReportWithContext(aws.Context, *pinpointemail.GetDeliverabilityTestReportInput, ...request.Option) (*pinpointemail.GetDeliverabilityTestReportOutput, error)
 	GetDeliverabilityTestReportRequest(*pinpointemail.GetDeliverabilityTestReportInput) (*request.Request, *pinpointemail.GetDeliverabilityTestReportOutput)
 
+	GetDomainDeliverabilityCampaign(*pinpointemail.GetDomainDeliverabilityCampaignInput) (*pinpointemail.GetDomainDeliverabilityCampaignOutput, error)
+	GetDomainDeliverabilityCampaignWithContext(aws.Context, *pinpointemail.GetDomainDeliverabilityCampaignInput, ...request.Option) (*pinpointemail.GetDomainDeliverabilityCampaignOutput, error)
+	GetDomainDeliverabilityCampaignRequest(*pinpointemail.GetDomainDeliverabilityCampaignInput) (*request.Request, *pinpointemail.GetDomainDeliverabilityCampaignOutput)
+
 	GetDomainStatisticsReport(*pinpointemail.GetDomainStatisticsReportInput) (*pinpointemail.GetDomainStatisticsReportOutput, error)
 	GetDomainStatisticsReportWithContext(aws.Context, *pinpointemail.GetDomainStatisticsReportInput, ...request.Option) (*pinpointemail.GetDomainStatisticsReportOutput, error)
 	GetDomainStatisticsReportRequest(*pinpointemail.GetDomainStatisticsReportInput) (*request.Request, *pinpointemail.GetDomainStatisticsReportOutput)
@@ -160,12 +164,23 @@ type PinpointEmailAPI interface {
 	ListDeliverabilityTestReportsPages(*pinpointemail.ListDeliverabilityTestReportsInput, func(*pinpointemail.ListDeliverabilityTestReportsOutput, bool) bool) error
 	ListDeliverabilityTestReportsPagesWithContext(aws.Context, *pinpointemail.ListDeliverabilityTestReportsInput, func(*pinpointemail.ListDeliverabilityTestReportsOutput, bool) bool, ...request.Option) error
 
+	ListDomainDeliverabilityCampaigns(*pinpointemail.ListDomainDeliverabilityCampaignsInput) (*pinpointemail.ListDomainDeliverabilityCampaignsOutput, error)
+	ListDomainDeliverabilityCampaignsWithContext(aws.Context, *pinpointemail.ListDomainDeliverabilityCampaignsInput, ...request.Option) (*pinpointemail.ListDomainDeliverabilityCampaignsOutput, error)
+	ListDomainDeliverabilityCampaignsRequest(*pinpointemail.ListDomainDeliverabilityCampaignsInput) (*request.Request, *pinpointemail.ListDomainDeliverabilityCampaignsOutput)
+
+	ListDomainDeliverabilityCampaignsPages(*pinpointemail.ListDomainDeliverabilityCampaignsInput, func(*pinpointemail.ListDomainDeliverabilityCampaignsOutput, bool) bool) error
+	ListDomainDeliverabilityCampaignsPagesWithContext(aws.Context, *pinpointemail.ListDomainDeliverabilityCampaignsInput, func(*pinpointemail.ListDomainDeliverabilityCampaignsOutput, bool) bool, ...request.Option) error
+
 	ListEmailIdentities(*pinpointemail.ListEmailIdentitiesInput) (*pinpointemail.ListEmailIdentitiesOutput, error)
 	ListEmailIdentitiesWithContext(aws.Context, *pinpointemail.ListEmailIdentitiesInput, ...request.Option) (*pinpointemail.ListEmailIdentitiesOutput, error)
 	ListEmailIdentitiesRequest(*pinpointemail.ListEmailIdentitiesInput) (*request.Request, *pinpointemail.ListEmailIdentitiesOutput)
 
 	ListEmailIdentitiesPages(*pinpointemail.ListEmailIdentitiesInput, func(*pinpointemail.ListEmailIdentitiesOutput, bool) bool) error
 	ListEmailIdentitiesPagesWithContext(aws.Context, *pinpointemail.ListEmailIdentitiesInput, func(*pinpointemail.ListEmailIdentitiesOutput, bool) bool, ...request.Option) error
+
+	ListTagsForResource(*pinpointemail.ListTagsForResourceInput) (*pinpointemail.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *pinpointemail.ListTagsForResourceInput, ...request.Option) (*pinpointemail.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*pinpointemail.ListTagsForResourceInput) (*request.Request, *pinpointemail.ListTagsForResourceOutput)
 
 	PutAccountDedicatedIpWarmupAttributes(*pinpointemail.PutAccountDedicatedIpWarmupAttributesInput) (*pinpointemail.PutAccountDedicatedIpWarmupAttributesOutput, error)
 	PutAccountDedicatedIpWarmupAttributesWithContext(aws.Context, *pinpointemail.PutAccountDedicatedIpWarmupAttributesInput, ...request.Option) (*pinpointemail.PutAccountDedicatedIpWarmupAttributesOutput, error)
@@ -218,6 +233,14 @@ type PinpointEmailAPI interface {
 	SendEmail(*pinpointemail.SendEmailInput) (*pinpointemail.SendEmailOutput, error)
 	SendEmailWithContext(aws.Context, *pinpointemail.SendEmailInput, ...request.Option) (*pinpointemail.SendEmailOutput, error)
 	SendEmailRequest(*pinpointemail.SendEmailInput) (*request.Request, *pinpointemail.SendEmailOutput)
+
+	TagResource(*pinpointemail.TagResourceInput) (*pinpointemail.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *pinpointemail.TagResourceInput, ...request.Option) (*pinpointemail.TagResourceOutput, error)
+	TagResourceRequest(*pinpointemail.TagResourceInput) (*request.Request, *pinpointemail.TagResourceOutput)
+
+	UntagResource(*pinpointemail.UntagResourceInput) (*pinpointemail.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *pinpointemail.UntagResourceInput, ...request.Option) (*pinpointemail.UntagResourceOutput, error)
+	UntagResourceRequest(*pinpointemail.UntagResourceInput) (*request.Request, *pinpointemail.UntagResourceOutput)
 
 	UpdateConfigurationSetEventDestination(*pinpointemail.UpdateConfigurationSetEventDestinationInput) (*pinpointemail.UpdateConfigurationSetEventDestinationOutput, error)
 	UpdateConfigurationSetEventDestinationWithContext(aws.Context, *pinpointemail.UpdateConfigurationSetEventDestinationInput, ...request.Option) (*pinpointemail.UpdateConfigurationSetEventDestinationOutput, error)

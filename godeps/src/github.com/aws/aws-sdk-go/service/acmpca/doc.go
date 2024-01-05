@@ -3,45 +3,37 @@
 // Package acmpca provides the client and types for making API
 // requests to AWS Certificate Manager Private Certificate Authority.
 //
-// You can use the ACM PCA API to create a private certificate authority (CA).
-// You must first call the CreateCertificateAuthority operation. If successful,
-// the operation returns an Amazon Resource Name (ARN) for your private CA.
-// Use this ARN as input to the GetCertificateAuthorityCsr operation to retrieve
-// the certificate signing request (CSR) for your private CA certificate. Sign
-// the CSR using the root or an intermediate CA in your on-premises PKI hierarchy,
-// and call the ImportCertificateAuthorityCertificate to import your signed
-// private CA certificate into ACM PCA.
+// This is the Amazon Web Services Private Certificate Authority API Reference.
+// It provides descriptions, syntax, and usage examples for each of the actions
+// and data types involved in creating and managing a private certificate authority
+// (CA) for your organization.
 //
-// Use your private CA to issue and revoke certificates. These are private certificates
-// that identify and secure client computers, servers, applications, services,
-// devices, and users over SSLS/TLS connections within your organization. Call
-// the IssueCertificate operation to issue a certificate. Call the RevokeCertificate
-// operation to revoke a certificate.
+// The documentation for each action shows the API request parameters and the
+// JSON response. Alternatively, you can use one of the Amazon Web Services
+// SDKs to access an API that is tailored to the programming language or platform
+// that you prefer. For more information, see Amazon Web Services SDKs (https://aws.amazon.com/tools/#SDKs).
 //
-// Certificates issued by your private CA can be trusted only within your organization,
-// not publicly.
+// Each Amazon Web Services Private CA API operation has a quota that determines
+// the number of times the operation can be called per second. Amazon Web Services
+// Private CA throttles API requests at different rates depending on the operation.
+// Throttling means that Amazon Web Services Private CA rejects an otherwise
+// valid request because the request exceeds the operation's quota for the number
+// of requests per second. When a request is throttled, Amazon Web Services
+// Private CA returns a ThrottlingException (https://docs.aws.amazon.com/privateca/latest/APIReference/CommonErrors.html)
+// error. Amazon Web Services Private CA does not guarantee a minimum request
+// rate for APIs.
 //
-// Your private CA can optionally create a certificate revocation list (CRL)
-// to track the certificates you revoke. To create a CRL, you must specify a
-// RevocationConfiguration object when you call the CreateCertificateAuthority
-// operation. ACM PCA writes the CRL to an S3 bucket that you specify. You must
-// specify a bucket policy that grants ACM PCA write permission.
-//
-// You can also call the CreateCertificateAuthorityAuditReport to create an
-// optional audit report, which enumerates all of the issued, valid, expired,
-// and revoked certificates from the CA.
-//
-// Each ACM PCA API operation has a throttling limit which determines the number
-// of times the operation can be called per second. For more information, see
-// API Rate Limits in ACM PCA (acm-pca/latest/userguide/PcaLimits.html#PcaLimits-api)
-// in the ACM PCA user guide.
+// To see an up-to-date list of your Amazon Web Services Private CA quotas,
+// or to request a quota increase, log into your Amazon Web Services account
+// and visit the Service Quotas (https://console.aws.amazon.com/servicequotas/)
+// console.
 //
 // See https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22 for more information on this service.
 //
 // See acmpca package documentation for more information.
 // https://docs.aws.amazon.com/sdk-for-go/api/service/acmpca/
 //
-// Using the Client
+// # Using the Client
 //
 // To contact AWS Certificate Manager Private Certificate Authority with the SDK use the New function to create
 // a new service client. With that client you can make API requests to the service.

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build ignore
+//go:build ignore
 
 /*
 This program reads a file containing function prototypes
@@ -17,7 +17,7 @@ and read like func declarations if //sys is replaced by func, but:
 	* If go func name needs to be different than its libc name,
 	* or the function is not in libc, name could be specified
 	* at the end, after "=" sign, like
-	  //sys getsockopt(s int, level int, name int, val uintptr, vallen *_Socklen) (err error) = libsocket.getsockopt
+	  //sys	getsockopt(s int, level int, name int, val uintptr, vallen *_Socklen) (err error) = libsocket.getsockopt
 
 
 This program will generate three files and handle both gc and gccgo implementation:
@@ -65,7 +65,6 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"regexp"
 	"strings"
@@ -83,9 +82,9 @@ func cmdLine() string {
 	return "go run mksyscall_aix_ppc64.go " + strings.Join(os.Args[1:], " ")
 }
 
-// buildTags returns build tags
-func buildTags() string {
-	return *tags
+// goBuildTags returns build tags in the go:build format.
+func goBuildTags() string {
+	return strings.ReplaceAll(*tags, ",", " && ")
 }
 
 // Param is function parameter
@@ -154,20 +153,18 @@ func main() {
 		s := bufio.NewScanner(file)
 		for s.Scan() {
 			t := s.Text()
-			t = strings.TrimSpace(t)
-			t = regexp.MustCompile(`\s+`).ReplaceAllString(t, ` `)
 			if p := regexp.MustCompile(`^package (\S+)$`).FindStringSubmatch(t); p != nil && pack == "" {
 				pack = p[1]
 			}
-			nonblock := regexp.MustCompile(`^\/\/sysnb `).FindStringSubmatch(t)
-			if regexp.MustCompile(`^\/\/sys `).FindStringSubmatch(t) == nil && nonblock == nil {
+			nonblock := regexp.MustCompile(`^\/\/sysnb\t`).FindStringSubmatch(t)
+			if regexp.MustCompile(`^\/\/sys\t`).FindStringSubmatch(t) == nil && nonblock == nil {
 				continue
 			}
 
 			// Line must be of the form
 			//	func Open(path string, mode int, perm int) (fd int, err error)
 			// Split into name, in params, out params.
-			f := regexp.MustCompile(`^\/\/sys(nb)? (\w+)\(([^()]*)\)\s*(?:\(([^()]+)\))?\s*(?:=\s*(?:(\w*)\.)?(\w*))?$`).FindStringSubmatch(t)
+			f := regexp.MustCompile(`^\/\/sys(nb)?\t(\w+)\(([^()]*)\)\s*(?:\(([^()]+)\))?\s*(?:=\s*(?:(\w*)\.)?(\w*))?$`).FindStringSubmatch(t)
 			if f == nil {
 				fmt.Fprintf(os.Stderr, "%s:%s\nmalformed //sys declaration\n", path, t)
 				os.Exit(1)
@@ -186,7 +183,7 @@ func main() {
 			}
 
 			onlyCommon := false
-			if funct == "readlen" || funct == "writelen" || funct == "FcntlInt" || funct == "FcntlFlock" {
+			if funct == "FcntlInt" || funct == "FcntlFlock" || funct == "ioctlPtr" {
 				// This function call another syscall which is already implemented.
 				// Therefore, the gc and gccgo part must not be generated.
 				onlyCommon = true
@@ -282,6 +279,11 @@ func main() {
 			if !onlyCommon {
 				// GCCGO Prototype Generation
 				// Imports of system calls from libc
+				if sysname == "select" {
+					// select is a keyword of Go. Its name is
+					// changed to c_select.
+					cExtern += "#define c_select select\n"
+				}
 				cExtern += fmt.Sprintf("%s %s", cRettype, sysname)
 				cIn := strings.Join(cIn, ", ")
 				cExtern += fmt.Sprintf("(%s);\n", cIn)
@@ -490,7 +492,14 @@ func main() {
 
 			// GCCGO function generation
 			argsgccgolist := strings.Join(argsgccgo, ", ")
-			callgccgo := fmt.Sprintf("C.%s(%s)", sysname, argsgccgolist)
+			var callgccgo string
+			if sysname == "select" {
+				// select is a keyword of Go. Its name is
+				// changed to c_select.
+				callgccgo = fmt.Sprintf("C.c_%s(%s)", sysname, argsgccgolist)
+			} else {
+				callgccgo = fmt.Sprintf("C.%s(%s)", sysname, argsgccgolist)
+			}
 			textgccgo += callProto
 			textgccgo += fmt.Sprintf("\tr1 = uintptr(%s)\n", callgccgo)
 			textgccgo += "\te1 = syscall.GetErrno()\n"
@@ -509,8 +518,8 @@ func main() {
 	}
 
 	// Print zsyscall_aix_ppc64.go
-	err := ioutil.WriteFile("zsyscall_aix_ppc64.go",
-		[]byte(fmt.Sprintf(srcTemplate1, cmdLine(), buildTags(), pack, imp, textcommon)),
+	err := os.WriteFile("zsyscall_aix_ppc64.go",
+		[]byte(fmt.Sprintf(srcTemplate1, cmdLine(), goBuildTags(), pack, imp, textcommon)),
 		0644)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, err.Error())
@@ -520,8 +529,8 @@ func main() {
 	// Print zsyscall_aix_ppc64_gc.go
 	vardecls := "\t" + strings.Join(vars, ",\n\t")
 	vardecls += " syscallFunc"
-	err = ioutil.WriteFile("zsyscall_aix_ppc64_gc.go",
-		[]byte(fmt.Sprintf(srcTemplate2, cmdLine(), buildTags(), pack, imp, dynimports, linknames, vardecls, textgc)),
+	err = os.WriteFile("zsyscall_aix_ppc64_gc.go",
+		[]byte(fmt.Sprintf(srcTemplate2, cmdLine(), goBuildTags(), pack, imp, dynimports, linknames, vardecls, textgc)),
 		0644)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, err.Error())
@@ -529,8 +538,8 @@ func main() {
 	}
 
 	// Print zsyscall_aix_ppc64_gccgo.go
-	err = ioutil.WriteFile("zsyscall_aix_ppc64_gccgo.go",
-		[]byte(fmt.Sprintf(srcTemplate3, cmdLine(), buildTags(), pack, cExtern, imp, textgccgo)),
+	err = os.WriteFile("zsyscall_aix_ppc64_gccgo.go",
+		[]byte(fmt.Sprintf(srcTemplate3, cmdLine(), goBuildTags(), pack, cExtern, imp, textgccgo)),
 		0644)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, err.Error())
@@ -541,7 +550,7 @@ func main() {
 const srcTemplate1 = `// %s
 // Code generated by the command above; see README.md. DO NOT EDIT.
 
-// +build %s
+//go:build %s
 
 package %s
 
@@ -557,8 +566,7 @@ import (
 const srcTemplate2 = `// %s
 // Code generated by the command above; see README.md. DO NOT EDIT.
 
-// +build %s
-// +build !gccgo
+//go:build %s && gc
 
 package %s
 
@@ -583,8 +591,7 @@ func syscall6(trap, nargs, a1, a2, a3, a4, a5, a6 uintptr) (r1, r2 uintptr, err 
 const srcTemplate3 = `// %s
 // Code generated by the command above; see README.md. DO NOT EDIT.
 
-// +build %s
-// +build gccgo
+//go:build %s && gccgo
 
 package %s
 

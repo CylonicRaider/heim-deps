@@ -1,62 +1,69 @@
 {
   "version": "2.0",
-  "service": "<fullname>AWS Service Catalog</fullname> <p> <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> enables organizations to create and manage catalogs of IT services that are approved for use on AWS. To get the most out of this documentation, you should be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">AWS Service Catalog Concepts</a>.</p>",
+  "service": "<fullname>Service Catalog</fullname> <p> <a href=\"http://aws.amazon.com/servicecatalog\">Service Catalog</a> enables organizations to create and manage catalogs of IT services that are approved for Amazon Web Services. To get the most out of this documentation, you should be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">Service Catalog Concepts</a>.</p>",
   "operations": {
     "AcceptPortfolioShare": "<p>Accepts an offer to share the specified portfolio.</p>",
-    "AssociatePrincipalWithPortfolio": "<p>Associates the specified principal ARN with the specified portfolio.</p>",
-    "AssociateProductWithPortfolio": "<p>Associates the specified product with the specified portfolio.</p>",
+    "AssociateBudgetWithResource": "<p>Associates the specified budget with the specified resource.</p>",
+    "AssociatePrincipalWithPortfolio": "<p>Associates the specified principal ARN with the specified portfolio.</p> <p>If you share the portfolio with principal name sharing enabled, the <code>PrincipalARN</code> association is included in the share. </p> <p>The <code>PortfolioID</code>, <code>PrincipalARN</code>, and <code>PrincipalType</code> parameters are required. </p> <p>You can associate a maximum of 10 Principals with a portfolio using <code>PrincipalType</code> as <code>IAM_PATTERN</code>. </p> <note> <p>When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is <i>not</i> an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using <code>PrincipalType</code> as <code>IAM</code>. With this configuration, the <code>PrincipalARN</code> must already exist in the recipient account before it can be associated. </p> </note>",
+    "AssociateProductWithPortfolio": "<p>Associates the specified product with the specified portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>",
     "AssociateServiceActionWithProvisioningArtifact": "<p>Associates a self-service action with a provisioning artifact.</p>",
     "AssociateTagOptionWithResource": "<p>Associate the specified TagOption with the specified portfolio or product.</p>",
     "BatchAssociateServiceActionWithProvisioningArtifact": "<p>Associates multiple self-service actions with provisioning artifacts.</p>",
     "BatchDisassociateServiceActionFromProvisioningArtifact": "<p>Disassociates a batch of self-service actions from the specified provisioning artifact.</p>",
-    "CopyProduct": "<p>Copies the specified source product to the specified target product or a new product.</p> <p>You can copy a product to the same account or another account. You can copy a product to the same region or another region.</p> <p>This operation is performed asynchronously. To track the progress of the operation, use <a>DescribeCopyProductStatus</a>.</p>",
-    "CreateConstraint": "<p>Creates a constraint.</p>",
-    "CreatePortfolio": "<p>Creates a portfolio.</p>",
-    "CreatePortfolioShare": "<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an Organization. AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.</p>",
-    "CreateProduct": "<p>Creates a product.</p>",
-    "CreateProvisionedProductPlan": "<p>Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>",
-    "CreateProvisioningArtifact": "<p>Creates a provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot create a provisioning artifact for a product that was shared with you.</p>",
+    "CopyProduct": "<p>Copies the specified source product to the specified target product or a new product.</p> <p>You can copy a product to the same account or another account. You can copy a product to the same Region or another Region. If you copy a product to another account, you must first share the product in a portfolio using <a>CreatePortfolioShare</a>.</p> <p>This operation is performed asynchronously. To track the progress of the operation, use <a>DescribeCopyProductStatus</a>.</p>",
+    "CreateConstraint": "<p>Creates a constraint.</p> <p>A delegated admin is authorized to invoke this command.</p>",
+    "CreatePortfolio": "<p>Creates a portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>",
+    "CreatePortfolioShare": "<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account.</p> <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p> <p> <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p> <p>You can't share a shared resource, including portfolios that contain a shared product.</p> <p>If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the <code> UpdatePortfolioShare</code> API instead. </p> <note> <p>When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is <i>not</i> an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using <code>PrincipalType</code> as <code>IAM</code>. With this configuration, the <code>PrincipalARN</code> must already exist in the recipient account before it can be associated. </p> </note>",
+    "CreateProduct": "<p>Creates a product.</p> <p>A delegated admin is authorized to invoke this command.</p> <p>The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> IAM policy permission. This policy permission is required when using the <code>ImportFromPhysicalId</code> template source in the information data section.</p>",
+    "CreateProvisionedProductPlan": "<p>Creates a plan.</p> <p>A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan for each provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILABLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>",
+    "CreateProvisioningArtifact": "<p>Creates a provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot create a provisioning artifact for a product that was shared with you.</p> <p>The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> IAM policy permission. This policy permission is required when using the <code>ImportFromPhysicalId</code> template source in the information data section.</p>",
     "CreateServiceAction": "<p>Creates a self-service action.</p>",
     "CreateTagOption": "<p>Creates a TagOption.</p>",
-    "DeleteConstraint": "<p>Deletes the specified constraint.</p>",
-    "DeletePortfolio": "<p>Deletes the specified portfolio.</p> <p>You cannot delete a portfolio if it was shared with you or if it has associated products, users, constraints, or shared accounts.</p>",
-    "DeletePortfolioShare": "<p>Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an Organization.</p>",
-    "DeleteProduct": "<p>Deletes the specified product.</p> <p>You cannot delete a product if it was shared with you or is associated with a portfolio.</p>",
+    "DeleteConstraint": "<p>Deletes the specified constraint.</p> <p>A delegated admin is authorized to invoke this command.</p>",
+    "DeletePortfolio": "<p>Deletes the specified portfolio.</p> <p>You cannot delete a portfolio if it was shared with you or if it has associated products, users, constraints, or shared accounts.</p> <p>A delegated admin is authorized to invoke this command.</p>",
+    "DeletePortfolioShare": "<p>Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the management account of an organization or by a delegated administrator.</p> <p>Note that if a delegated admin is de-registered, portfolio shares created from that account are removed.</p>",
+    "DeleteProduct": "<p>Deletes the specified product.</p> <p>You cannot delete a product if it was shared with you or is associated with a portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>",
     "DeleteProvisionedProductPlan": "<p>Deletes the specified plan.</p>",
     "DeleteProvisioningArtifact": "<p>Deletes the specified provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.</p>",
     "DeleteServiceAction": "<p>Deletes a self-service action.</p>",
     "DeleteTagOption": "<p>Deletes the specified TagOption.</p> <p>You cannot delete a TagOption if it is associated with a product or portfolio.</p>",
     "DescribeConstraint": "<p>Gets information about the specified constraint.</p>",
     "DescribeCopyProductStatus": "<p>Gets the status of the specified copy product operation.</p>",
-    "DescribePortfolio": "<p>Gets information about the specified portfolio.</p>",
-    "DescribePortfolioShareStatus": "<p>Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization.</p>",
-    "DescribeProduct": "<p>Gets information about the specified product.</p>",
+    "DescribePortfolio": "<p>Gets information about the specified portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>",
+    "DescribePortfolioShareStatus": "<p>Gets the status of the specified portfolio share operation. This API can only be called by the management account in the organization or by a delegated admin.</p>",
+    "DescribePortfolioShares": "<p>Returns a summary of each of the portfolio shares that were created for the specified portfolio.</p> <p>You can use this API to determine which accounts or organizational nodes this portfolio have been shared, whether the recipient entity has imported the share, and whether TagOptions are included with the share.</p> <p>The <code>PortfolioId</code> and <code>Type</code> parameters are both required.</p>",
+    "DescribeProduct": "<p>Gets information about the specified product.</p> <note> <p> Running this operation with administrator access results in a failure. <a>DescribeProductAsAdmin</a> should be used instead. </p> </note>",
     "DescribeProductAsAdmin": "<p>Gets information about the specified product. This operation is run with administrator access.</p>",
     "DescribeProductView": "<p>Gets information about the specified product.</p>",
     "DescribeProvisionedProduct": "<p>Gets information about the specified provisioned product.</p>",
     "DescribeProvisionedProductPlan": "<p>Gets information about the resource changes for the specified plan.</p>",
     "DescribeProvisioningArtifact": "<p>Gets information about the specified provisioning artifact (also known as a version) for the specified product.</p>",
     "DescribeProvisioningParameters": "<p>Gets information about the configuration required to provision the specified product using the specified provisioning artifact.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to <a>ProvisionProduct</a>, do not include conflicted TagOption keys as tags, or this causes the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\". Tag the provisioned product with the value <code>sc-tagoption-conflict-portfolioId-productId</code>.</p>",
-    "DescribeRecord": "<p>Gets information about the specified request operation.</p> <p>Use this operation after calling a request operation (for example, <a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p>",
+    "DescribeRecord": "<p>Gets information about the specified request operation.</p> <p>Use this operation after calling a request operation (for example, <a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p> <note> <p>If a provisioned product was transferred to a new owner using <a>UpdateProvisionedProductProperties</a>, the new owner will be able to describe all past records for that product. The previous owner will no longer be able to describe the records, but will be able to use <a>ListRecordHistory</a> to see the product's history from when he was the owner.</p> </note>",
     "DescribeServiceAction": "<p>Describes a self-service action.</p>",
+    "DescribeServiceActionExecutionParameters": "<p>Finds the default parameters for a specific self-service action on a specific provisioned product and returns a map of the results to the user.</p>",
     "DescribeTagOption": "<p>Gets information about the specified TagOption.</p>",
-    "DisableAWSOrganizationsAccess": "<p>Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.</p>",
-    "DisassociatePrincipalFromPortfolio": "<p>Disassociates a previously associated principal ARN from a specified portfolio.</p>",
-    "DisassociateProductFromPortfolio": "<p>Disassociates the specified product from the specified portfolio. </p>",
+    "DisableAWSOrganizationsAccess": "<p>Disable portfolio sharing through the Organizations service. This command will not delete your current shares, but prevents you from creating new shares throughout your organization. Current shares are not kept in sync with your organization structure if the structure changes after calling this API. Only the management account in the organization can call this API.</p> <p>You cannot call this API if there are active delegated administrators in the organization.</p> <p>Note that a delegated administrator is not authorized to invoke <code>DisableAWSOrganizationsAccess</code>.</p> <important> <p>If you share an Service Catalog portfolio in an organization within Organizations, and then disable Organizations access for Service Catalog, the portfolio access permissions will not sync with the latest changes to the organization structure. Specifically, accounts that you removed from the organization after disabling Service Catalog access will retain access to the previously shared portfolio.</p> </important>",
+    "DisassociateBudgetFromResource": "<p>Disassociates the specified budget from the specified resource.</p>",
+    "DisassociatePrincipalFromPortfolio": "<p>Disassociates a previously associated principal ARN from a specified portfolio.</p> <p>The <code>PrincipalType</code> and <code>PrincipalARN</code> must match the <code>AssociatePrincipalWithPortfolio</code> call request details. For example, to disassociate an association created with a <code>PrincipalARN</code> of <code>PrincipalType</code> IAM you must use the <code>PrincipalType</code> IAM when calling <code>DisassociatePrincipalFromPortfolio</code>. </p> <p>For portfolios that have been shared with principal name sharing enabled: after disassociating a principal, share recipient accounts will no longer be able to provision products in this portfolio using a role matching the name of the associated principal. </p> <p>For more information, review <a href=\"https://docs.aws.amazon.com/cli/latest/reference/servicecatalog/associate-principal-with-portfolio.html#options\">associate-principal-with-portfolio</a> in the Amazon Web Services CLI Command Reference. </p> <note> <p>If you disassociate a principal from a portfolio, with PrincipalType as <code>IAM</code>, the same principal will still have access to the portfolio if it matches one of the associated principals of type <code>IAM_PATTERN</code>. To fully remove access for a principal, verify all the associated Principals of type <code>IAM_PATTERN</code>, and then ensure you disassociate any <code>IAM_PATTERN</code> principals that match the principal whose access you are removing.</p> </note>",
+    "DisassociateProductFromPortfolio": "<p>Disassociates the specified product from the specified portfolio. </p> <p>A delegated admin is authorized to invoke this command.</p>",
     "DisassociateServiceActionFromProvisioningArtifact": "<p>Disassociates the specified self-service action association from the specified provisioning artifact.</p>",
     "DisassociateTagOptionFromResource": "<p>Disassociates the specified TagOption from the specified resource.</p>",
-    "EnableAWSOrganizationsAccess": "<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.</p>",
+    "EnableAWSOrganizationsAccess": "<p>Enable portfolio sharing feature through Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the management account in the organization.</p> <p>When you call this API, Service Catalog calls <code>organizations:EnableAWSServiceAccess</code> on your behalf so that your shares stay in sync with any changes in your Organizations structure.</p> <p>Note that a delegated administrator is not authorized to invoke <code>EnableAWSOrganizationsAccess</code>.</p> <important> <p>If you have previously disabled Organizations access for Service Catalog, and then enable access again, the portfolio access permissions might not sync with the latest changes to the organization structure. Specifically, accounts that you removed from the organization after disabling Service Catalog access, and before you enabled access again, can retain access to the previously shared portfolio. As a result, an account that has been removed from the organization might still be able to create or manage Amazon Web Services resources when it is no longer authorized to do so. Amazon Web Services is working to resolve this issue.</p> </important>",
     "ExecuteProvisionedProductPlan": "<p>Provisions or modifies a product based on the resource changes for the specified plan.</p>",
     "ExecuteProvisionedProductServiceAction": "<p>Executes a self-service action against a provisioned product.</p>",
-    "GetAWSOrganizationsAccessStatus": "<p>Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization.</p>",
-    "ListAcceptedPortfolioShares": "<p>Lists all portfolios for which sharing was accepted by this account.</p>",
+    "GetAWSOrganizationsAccessStatus": "<p>Get the Access Status for Organizations portfolio share feature. This API can only be called by the management account in the organization or by a delegated admin.</p>",
+    "GetProvisionedProductOutputs": "<p>This API takes either a <code>ProvisonedProductId</code> or a <code>ProvisionedProductName</code>, along with a list of one or more output keys, and responds with the key/value pairs of those outputs.</p>",
+    "ImportAsProvisionedProduct": "<p> Requests the import of a resource as an Service Catalog provisioned product that is associated to an Service Catalog product and provisioning artifact. Once imported, all supported governance actions are supported on the provisioned product. </p> <p> Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets, and non-root nested stacks, are not supported. </p> <p> The CloudFormation stack must have one of the following statuses to be imported: <code>CREATE_COMPLETE</code>, <code>UPDATE_COMPLETE</code>, <code>UPDATE_ROLLBACK_COMPLETE</code>, <code>IMPORT_COMPLETE</code>, and <code>IMPORT_ROLLBACK_COMPLETE</code>. </p> <p> Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact. </p> <note> <p> When you import an existing CloudFormation stack into a portfolio, Service Catalog does not apply the product's associated constraints during the import process. Service Catalog applies the constraints after you call <code>UpdateProvisionedProduct</code> for the provisioned product. </p> </note> <p> The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> and <code>cloudformation:DescribeStacks</code> IAM policy permissions. </p> <p>You can only import one provisioned product at a time. The product's CloudFormation stack must have the <code>IMPORT_COMPLETE</code> status before you import another. </p>",
+    "ListAcceptedPortfolioShares": "<p>Lists all imported portfolios for which account-to-account shares were accepted by this account. By specifying the <code>PortfolioShareType</code>, you can list portfolios for which organizational shares were accepted by this account.</p>",
+    "ListBudgetsForResource": "<p>Lists all the budgets associated to the specified resource.</p>",
     "ListConstraintsForPortfolio": "<p>Lists the constraints for the specified portfolio and product.</p>",
-    "ListLaunchPaths": "<p>Lists the paths to the specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.</p>",
-    "ListOrganizationPortfolioAccess": "<p>Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization.</p>",
-    "ListPortfolioAccess": "<p>Lists the account IDs that have access to the specified portfolio.</p>",
+    "ListLaunchPaths": "<p> Lists the paths to the specified product. A path describes how the user gets access to a specified product and is necessary when provisioning a product. A path also determines the constraints that are put on a product. A path is dependent on a specific product, porfolio, and principal. </p> <note> <p> When provisioning a product that's been added to a portfolio, you must grant your user, group, or role access to the portfolio. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html\">Granting users access</a> in the <i>Service Catalog User Guide</i>. </p> </note>",
+    "ListOrganizationPortfolioAccess": "<p>Lists the organization nodes that have access to the specified portfolio. This API can only be called by the management account in the organization or by a delegated admin.</p> <p>If a delegated admin is de-registered, they can no longer perform this operation.</p>",
+    "ListPortfolioAccess": "<p>Lists the account IDs that have access to the specified portfolio.</p> <p>A delegated admin can list the accounts that have access to the shared portfolio. Note that if a delegated admin is de-registered, they can no longer perform this operation.</p>",
     "ListPortfolios": "<p>Lists all portfolios in the catalog.</p>",
     "ListPortfoliosForProduct": "<p>Lists all portfolios that the specified product is associated with.</p>",
-    "ListPrincipalsForPortfolio": "<p>Lists all principal ARNs associated with the specified portfolio.</p>",
+    "ListPrincipalsForPortfolio": "<p>Lists all <code>PrincipalARN</code>s and corresponding <code>PrincipalType</code>s associated with the specified portfolio.</p>",
     "ListProvisionedProductPlans": "<p>Lists the plans for the specified provisioned product or all plans to which the user has access.</p>",
     "ListProvisioningArtifacts": "<p>Lists all provisioning artifacts (also known as versions) for the specified product.</p>",
     "ListProvisioningArtifactsForServiceAction": "<p>Lists all provisioning artifacts (also known as versions) for the specified self-service action.</p>",
@@ -64,8 +71,12 @@
     "ListResourcesForTagOption": "<p>Lists the resources associated with the specified TagOption.</p>",
     "ListServiceActions": "<p>Lists all self-service actions.</p>",
     "ListServiceActionsForProvisioningArtifact": "<p>Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.</p>",
+    "ListStackInstancesForProvisionedProduct": "<p>Returns summary information about stack instances that are associated with the specified <code>CFN_STACKSET</code> type provisioned product. You can filter for stack instances that are associated with a specific Amazon Web Services account name or Region. </p>",
     "ListTagOptions": "<p>Lists the specified TagOptions or all TagOptions.</p>",
-    "ProvisionProduct": "<p>Provisions the specified product.</p> <p>A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using <a>DescribeRecord</a>.</p> <p>If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this causes the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\".</p>",
+    "NotifyProvisionProductEngineWorkflowResult": "<p> Notifies the result of the provisioning engine execution. </p>",
+    "NotifyTerminateProvisionedProductEngineWorkflowResult": "<p> Notifies the result of the terminate engine execution. </p>",
+    "NotifyUpdateProvisionedProductEngineWorkflowResult": "<p> Notifies the result of the update engine execution. </p>",
+    "ProvisionProduct": "<p> Provisions the specified product. </p> <p> A provisioned product is a resourced instance of a product. For example, provisioning a product that's based on an CloudFormation template launches an CloudFormation stack and its underlying resources. You can check the status of this request using <a>DescribeRecord</a>. </p> <p> If the request contains a tag key with an empty list of values, there's a tag conflict for that key. Don't include conflicted keys as tags, or this will cause the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\". </p> <note> <p> When provisioning a product that's been added to a portfolio, you must grant your user, group, or role access to the portfolio. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html\">Granting users access</a> in the <i>Service Catalog User Guide</i>. </p> </note>",
     "RejectPortfolioShare": "<p>Rejects an offer to share the specified portfolio.</p>",
     "ScanProvisionedProducts": "<p>Lists the provisioned products that are available (not terminated).</p> <p>To use additional filtering, see <a>SearchProvisionedProducts</a>.</p>",
     "SearchProducts": "<p>Gets information about the products to which the caller has access.</p>",
@@ -74,8 +85,10 @@
     "TerminateProvisionedProduct": "<p>Terminates the specified provisioned product.</p> <p>This operation does not delete any records associated with the provisioned product.</p> <p>You can check the status of this request using <a>DescribeRecord</a>.</p>",
     "UpdateConstraint": "<p>Updates the specified constraint.</p>",
     "UpdatePortfolio": "<p>Updates the specified portfolio.</p> <p>You cannot update a product that was shared with you.</p>",
+    "UpdatePortfolioShare": "<p>Updates the specified portfolio share. You can use this API to enable or disable <code>TagOptions</code> sharing or Principal sharing for an existing portfolio share. </p> <p>The portfolio share cannot be updated if the <code>CreatePortfolioShare</code> operation is <code>IN_PROGRESS</code>, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be completed.</p> <p>You must provide the <code>accountId</code> or organization node in the input, but not both.</p> <p>If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke <code>UpdatePortfolioShare</code> separately for each share type. </p> <p>This API cannot be used for removing the portfolio share. You must use <code>DeletePortfolioShare</code> API for that action. </p> <note> <p>When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is <i>not</i> an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using <code>PrincipalType</code> as <code>IAM</code>. With this configuration, the <code>PrincipalARN</code> must already exist in the recipient account before it can be associated. </p> </note>",
     "UpdateProduct": "<p>Updates the specified product.</p>",
     "UpdateProvisionedProduct": "<p>Requests updates to the configuration of the specified provisioned product.</p> <p>If there are tags associated with the object, they cannot be updated or added. Depending on the specific updates requested, this operation can update with no interruption, with some interruption, or replace the provisioned product entirely.</p> <p>You can check the status of this request using <a>DescribeRecord</a>.</p>",
+    "UpdateProvisionedProductProperties": "<p>Requests updates to the properties of the specified provisioned product.</p>",
     "UpdateProvisioningArtifact": "<p>Updates the specified provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot update a provisioning artifact for a product that was shared with you.</p>",
     "UpdateServiceAction": "<p>Updates a self-service action.</p>",
     "UpdateTagOption": "<p>Updates the specified TagOption.</p>"
@@ -84,71 +97,78 @@
     "AcceptLanguage": {
       "base": null,
       "refs": {
-        "AcceptPortfolioShareInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "AssociatePrincipalWithPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "AssociateProductWithPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "AssociateServiceActionWithProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "BatchAssociateServiceActionWithProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "BatchDisassociateServiceActionFromProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "CopyProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "CreateConstraintInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "CreatePortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "CreatePortfolioShareInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "CreateProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "CreateProvisionedProductPlanInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "CreateProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "CreateServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DeleteConstraintInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DeletePortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DeletePortfolioShareInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DeleteProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DeleteProvisionedProductPlanInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DeleteProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DeleteServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeConstraintInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeCopyProductStatusInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribePortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeProductAsAdminInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeProductViewInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeProvisionedProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeProvisionedProductPlanInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeProvisioningParametersInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeRecordInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DescribeServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DisassociatePrincipalFromPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DisassociateProductFromPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "DisassociateServiceActionFromProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ExecuteProvisionedProductPlanInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ExecuteProvisionedProductServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListAcceptedPortfolioSharesInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListConstraintsForPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListLaunchPathsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListOrganizationPortfolioAccessInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListPortfolioAccessInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListPortfoliosForProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListPortfoliosInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListPrincipalsForPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListProvisionedProductPlansInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListProvisioningArtifactsForServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListProvisioningArtifactsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListRecordHistoryInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListServiceActionsForProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ListServiceActionsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ProvisionProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "RejectPortfolioShareInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "ScanProvisionedProductsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "SearchProductsAsAdminInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "SearchProductsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "SearchProvisionedProductsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "TerminateProvisionedProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "UpdateConstraintInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "UpdatePortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "UpdateProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "UpdateProvisionedProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "UpdateProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
-        "UpdateServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        "AcceptPortfolioShareInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "AssociatePrincipalWithPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "AssociateProductWithPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "AssociateServiceActionWithProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "BatchAssociateServiceActionWithProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "BatchDisassociateServiceActionFromProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "CopyProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "CreateConstraintInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "CreatePortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "CreatePortfolioShareInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "CreateProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "CreateProvisionedProductPlanInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "CreateProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "CreateServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DeleteConstraintInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DeletePortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DeletePortfolioShareInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DeleteProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DeleteProvisionedProductPlanInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DeleteProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DeleteServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeConstraintInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeCopyProductStatusInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribePortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeProductAsAdminInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeProductViewInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeProvisionedProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeProvisionedProductPlanInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeProvisioningParametersInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeRecordInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeServiceActionExecutionParametersInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DescribeServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DisassociatePrincipalFromPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DisassociateProductFromPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "DisassociateServiceActionFromProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ExecuteProvisionedProductPlanInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ExecuteProvisionedProductServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "GetProvisionedProductOutputsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ImportAsProvisionedProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListAcceptedPortfolioSharesInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListBudgetsForResourceInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListConstraintsForPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListLaunchPathsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListOrganizationPortfolioAccessInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListPortfolioAccessInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListPortfoliosForProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListPortfoliosInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListPrincipalsForPortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListProvisionedProductPlansInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListProvisioningArtifactsForServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListProvisioningArtifactsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListRecordHistoryInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListServiceActionsForProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListServiceActionsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ListStackInstancesForProvisionedProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ProvisionProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "RejectPortfolioShareInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "ScanProvisionedProductsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "SearchProductsAsAdminInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "SearchProductsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "SearchProvisionedProductsInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "TerminateProvisionedProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "UpdateConstraintInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "UpdatePortfolioInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "UpdatePortfolioShareInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "UpdateProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "UpdateProvisionedProductInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "UpdateProvisionedProductPropertiesInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "UpdateProvisioningArtifactInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>",
+        "UpdateServiceActionInput$AcceptLanguage": "<p>The language code.</p> <ul> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
       }
     },
     "AcceptPortfolioShareInput": {
@@ -179,7 +199,7 @@
     "AccessLevelFilterValue": {
       "base": null,
       "refs": {
-        "AccessLevelFilter$Value": "<p>The user to which the access level applies. The only supported value is <code>Self</code>.</p>"
+        "AccessLevelFilter$Value": "<p>The user to which the access level applies. The only supported value is <code>self</code>.</p>"
       }
     },
     "AccessStatus": {
@@ -193,17 +213,19 @@
       "refs": {
         "AccountIds$member": null,
         "ConstraintDetail$Owner": "<p>The owner of the constraint.</p>",
-        "CreatePortfolioShareInput$AccountId": "<p>The AWS account ID. For example, <code>123456789012</code>.</p>",
-        "DeletePortfolioShareInput$AccountId": "<p>The AWS account ID.</p>",
+        "CreatePortfolioShareInput$AccountId": "<p>The Amazon Web Services account ID. For example, <code>123456789012</code>.</p>",
+        "DeletePortfolioShareInput$AccountId": "<p>The Amazon Web Services account ID.</p>",
         "Namespaces$member": null,
+        "StackInstance$Account": "<p>The name of the Amazon Web Services account that the stack instance is associated with.</p>",
         "StackSetAccounts$member": null,
-        "SuccessfulShares$member": null
+        "SuccessfulShares$member": null,
+        "UpdatePortfolioShareInput$AccountId": "<p>The Amazon Web Services account Id of the recipient account. This field is required when updating an external account to account type share.</p>"
       }
     },
     "AccountIds": {
       "base": null,
       "refs": {
-        "ListPortfolioAccessOutput$AccountIds": "<p>Information about the AWS accounts with access to the portfolio.</p>"
+        "ListPortfolioAccessOutput$AccountIds": "<p>Information about the Amazon Web Services accounts with access to the portfolio.</p>"
       }
     },
     "AddTags": {
@@ -213,12 +235,6 @@
         "CreateProductInput$Tags": "<p>One or more tags.</p>",
         "UpdatePortfolioInput$AddTags": "<p>The tags to add.</p>",
         "UpdateProductInput$AddTags": "<p>The tags to add to the product.</p>"
-      }
-    },
-    "AllowedValue": {
-      "base": null,
-      "refs": {
-        "AllowedValues$member": null
       }
     },
     "AllowedValues": {
@@ -231,6 +247,16 @@
       "base": null,
       "refs": {
         "ProductViewAggregationValue$ApproximateCount": "<p>An approximate count of the products that match the value.</p>"
+      }
+    },
+    "AssociateBudgetWithResourceInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "AssociateBudgetWithResourceOutput": {
+      "base": null,
+      "refs": {
       }
     },
     "AssociatePrincipalWithPortfolioInput": {
@@ -299,6 +325,40 @@
       "refs": {
       }
     },
+    "Boolean": {
+      "base": null,
+      "refs": {
+        "CreatePortfolioShareInput$ShareTagOptions": "<p>Enables or disables <code>TagOptions </code> sharing when creating the portfolio share. If this flag is not provided, TagOptions sharing is disabled.</p>",
+        "CreatePortfolioShareInput$SharePrincipals": "<p>This parameter is only supported for portfolios with an <b>OrganizationalNode</b> Type of <code>ORGANIZATION</code> or <code>ORGANIZATIONAL_UNIT</code>. </p> <p>Enables or disables <code>Principal</code> sharing when creating the portfolio share. If you do <b>not</b> provide this flag, principal sharing is disabled. </p> <p>When you enable Principal Name Sharing for a portfolio share, the share recipient account end users with a principal that matches any of the associated IAM patterns can provision products from the portfolio. Once shared, the share recipient can view associations of <code>PrincipalType</code>: <code>IAM_PATTERN</code> on their portfolio. You can create the principals in the recipient account before or after creating the share. </p>",
+        "DescribeProvisioningArtifactInput$IncludeProvisioningArtifactParameters": "<p>Indicates if the API call response does or does not include additional details about the provisioning parameters. </p>",
+        "PortfolioShareDetail$Accepted": "<p>Indicates whether the shared portfolio is imported by the recipient account. If the recipient is in an organization node, the share is automatically imported, and the field is always set to true.</p>",
+        "PortfolioShareDetail$ShareTagOptions": "<p>Indicates whether TagOptions sharing is enabled or disabled for the portfolio share.</p>",
+        "PortfolioShareDetail$SharePrincipals": "<p>Indicates if <code>Principal</code> sharing is enabled or disabled for the portfolio share. </p>"
+      }
+    },
+    "BudgetDetail": {
+      "base": "<p>Information about a budget.</p>",
+      "refs": {
+        "Budgets$member": null
+      }
+    },
+    "BudgetName": {
+      "base": null,
+      "refs": {
+        "AssociateBudgetWithResourceInput$BudgetName": "<p>The name of the budget you want to associate.</p>",
+        "BudgetDetail$BudgetName": "<p>Name of the associated budget.</p>",
+        "DisassociateBudgetFromResourceInput$BudgetName": "<p>The name of the budget you want to disassociate.</p>"
+      }
+    },
+    "Budgets": {
+      "base": null,
+      "refs": {
+        "DescribePortfolioOutput$Budgets": "<p>Information about the associated budgets.</p>",
+        "DescribeProductAsAdminOutput$Budgets": "<p>Information about the associated budgets.</p>",
+        "DescribeProductOutput$Budgets": "<p>Information about the associated budgets.</p>",
+        "ListBudgetsForResourceOutput$Budgets": "<p>Information about the associated budgets.</p>"
+      }
+    },
     "CausingEntity": {
       "base": null,
       "refs": {
@@ -329,6 +389,18 @@
         "DescribeProvisionedProductOutput$CloudWatchDashboards": "<p>Any CloudWatch dashboards that were created when provisioning the product.</p>"
       }
     },
+    "CodeStarConnectionArn": {
+      "base": null,
+      "refs": {
+        "CodeStarParameters$ConnectionArn": "<p>The CodeStar ARN, which is the connection between Service Catalog and the external repository.</p>"
+      }
+    },
+    "CodeStarParameters": {
+      "base": "<p>The subtype containing details about the Codestar connection <code>Type</code>. </p>",
+      "refs": {
+        "SourceConnectionParameters$CodeStar": "<p>Provides <code>ConnectionType</code> details.</p>"
+      }
+    },
     "ConstraintDescription": {
       "base": null,
       "refs": {
@@ -356,9 +428,10 @@
     "ConstraintParameters": {
       "base": null,
       "refs": {
-        "CreateConstraintInput$Parameters": "<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>Specify the <code>RoleArn</code> property as follows:</p> <p> <code>{\"RoleArn\" : \"arn:aws:iam::123456789012:role/LaunchRole\"}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>LAUNCH</code> constraint on a product and portfolio.</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p> <code>{\"NotificationArns\" : [\"arn:aws:sns:us-east-1:123456789012:Topic\"]}</code> </p> </dd> <dt>STACKSET</dt> <dd> <p>Specify the <code>Parameters</code> property as follows:</p> <p> <code>{\"Version\": \"String\", \"Properties\": {\"AccountList\": [ \"String\" ], \"RegionList\": [ \"String\" ], \"AdminRole\": \"String\", \"ExecutionRole\": \"String\"}}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>STACKSET</code> constraint on a product and portfolio.</p> <p>Products with a <code>STACKSET</code> constraint will launch an AWS CloudFormation stack set.</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html\">Template Constraint Rules</a>.</p> </dd> </dl>",
+        "CreateConstraintInput$Parameters": "<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>You are required to specify either the <code>RoleArn</code> or the <code>LocalRoleName</code> but can't use both.</p> <p>Specify the <code>RoleArn</code> property as follows:</p> <p> <code>{\"RoleArn\" : \"arn:aws:iam::123456789012:role/LaunchRole\"}</code> </p> <p>Specify the <code>LocalRoleName</code> property as follows:</p> <p> <code>{\"LocalRoleName\": \"SCBasicLaunchRole\"}</code> </p> <p>If you specify the <code>LocalRoleName</code> property, when an account uses the launch constraint, the IAM role with that name in the account will be used. This allows launch-role constraints to be account-agnostic so the administrator can create fewer resources per shared account.</p> <note> <p>The given role name must exist in the account used to create the launch constraint and the account of the user who launches a product with this launch constraint.</p> </note> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>LAUNCH</code> constraint on a product and portfolio.</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p> <code>{\"NotificationArns\" : [\"arn:aws:sns:us-east-1:123456789012:Topic\"]}</code> </p> </dd> <dt>RESOURCE_UPDATE</dt> <dd> <p>Specify the <code>TagUpdatesOnProvisionedProduct</code> property as follows:</p> <p> <code>{\"Version\":\"2.0\",\"Properties\":{\"TagUpdateOnProvisionedProduct\":\"String\"}}</code> </p> <p>The <code>TagUpdatesOnProvisionedProduct</code> property accepts a string value of <code>ALLOWED</code> or <code>NOT_ALLOWED</code>.</p> </dd> <dt>STACKSET</dt> <dd> <p>Specify the <code>Parameters</code> property as follows:</p> <p> <code>{\"Version\": \"String\", \"Properties\": {\"AccountList\": [ \"String\" ], \"RegionList\": [ \"String\" ], \"AdminRole\": \"String\", \"ExecutionRole\": \"String\"}}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>STACKSET</code> constraint on a product and portfolio.</p> <p>Products with a <code>STACKSET</code> constraint will launch an CloudFormation stack set.</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html\">Template Constraint Rules</a>.</p> </dd> </dl>",
         "CreateConstraintOutput$ConstraintParameters": "<p>The constraint parameters.</p>",
         "DescribeConstraintOutput$ConstraintParameters": "<p>The constraint parameters.</p>",
+        "UpdateConstraintInput$Parameters": "<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>You are required to specify either the <code>RoleArn</code> or the <code>LocalRoleName</code> but can't use both.</p> <p>Specify the <code>RoleArn</code> property as follows:</p> <p> <code>{\"RoleArn\" : \"arn:aws:iam::123456789012:role/LaunchRole\"}</code> </p> <p>Specify the <code>LocalRoleName</code> property as follows:</p> <p> <code>{\"LocalRoleName\": \"SCBasicLaunchRole\"}</code> </p> <p>If you specify the <code>LocalRoleName</code> property, when an account uses the launch constraint, the IAM role with that name in the account will be used. This allows launch-role constraints to be account-agnostic so the administrator can create fewer resources per shared account.</p> <note> <p>The given role name must exist in the account used to create the launch constraint and the account of the user who launches a product with this launch constraint.</p> </note> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>LAUNCH</code> constraint on a product and portfolio.</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p> <code>{\"NotificationArns\" : [\"arn:aws:sns:us-east-1:123456789012:Topic\"]}</code> </p> </dd> <dt>RESOURCE_UPDATE</dt> <dd> <p>Specify the <code>TagUpdatesOnProvisionedProduct</code> property as follows:</p> <p> <code>{\"Version\":\"2.0\",\"Properties\":{\"TagUpdateOnProvisionedProduct\":\"String\"}}</code> </p> <p>The <code>TagUpdatesOnProvisionedProduct</code> property accepts a string value of <code>ALLOWED</code> or <code>NOT_ALLOWED</code>.</p> </dd> <dt>STACKSET</dt> <dd> <p>Specify the <code>Parameters</code> property as follows:</p> <p> <code>{\"Version\": \"String\", \"Properties\": {\"AccountList\": [ \"String\" ], \"RegionList\": [ \"String\" ], \"AdminRole\": \"String\", \"ExecutionRole\": \"String\"}}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>STACKSET</code> constraint on a product and portfolio.</p> <p>Products with a <code>STACKSET</code> constraint will launch an CloudFormation stack set.</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html\">Template Constraint Rules</a>.</p> </dd> </dl>",
         "UpdateConstraintOutput$ConstraintParameters": "<p>The constraint parameters.</p>"
       }
     },
@@ -380,7 +453,7 @@
       "refs": {
         "ConstraintDetail$Type": "<p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p>STACKSET</p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>",
         "ConstraintSummary$Type": "<p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p>STACKSET</p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>",
-        "CreateConstraintInput$Type": "<p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>STACKSET</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>"
+        "CreateConstraintInput$Type": "<p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>RESOURCE_UPDATE</code> </p> </li> <li> <p> <code>STACKSET</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>"
       }
     },
     "CopyOption": {
@@ -634,6 +707,23 @@
       "refs": {
       }
     },
+    "DescribePortfolioShareType": {
+      "base": null,
+      "refs": {
+        "DescribePortfolioSharesInput$Type": "<p>The type of portfolio share to summarize. This field acts as a filter on the type of portfolio share, which can be one of the following:</p> <p>1. <code>ACCOUNT</code> - Represents an external account to account share.</p> <p>2. <code>ORGANIZATION</code> - Represents a share to an organization. This share is available to every account in the organization.</p> <p>3. <code>ORGANIZATIONAL_UNIT</code> - Represents a share to an organizational unit.</p> <p>4. <code>ORGANIZATION_MEMBER_ACCOUNT</code> - Represents a share to an account in the organization.</p>",
+        "PortfolioShareDetail$Type": "<p>The type of the portfolio share.</p>"
+      }
+    },
+    "DescribePortfolioSharesInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DescribePortfolioSharesOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
     "DescribeProductAsAdminInput": {
       "base": null,
       "refs": {
@@ -665,7 +755,7 @@
       }
     },
     "DescribeProvisionedProductInput": {
-      "base": null,
+      "base": "DescribeProvisionedProductAPI input structure. AcceptLanguage - [Optional] The language code for localization. Id - [Optional] The provisioned product identifier. Name - [Optional] Another provisioned product identifier. Customers must provide either Id or Name.",
       "refs": {
       }
     },
@@ -714,6 +804,16 @@
       "refs": {
       }
     },
+    "DescribeServiceActionExecutionParametersInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DescribeServiceActionExecutionParametersOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
     "DescribeServiceActionInput": {
       "base": null,
       "refs": {
@@ -747,6 +847,22 @@
       }
     },
     "DisableAWSOrganizationsAccessOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DisableTemplateValidation": {
+      "base": null,
+      "refs": {
+        "ProvisioningArtifactProperties$DisableTemplateValidation": "<p>If set to true, Service Catalog stops validating the specified provisioning artifact even if it is invalid. </p> <p>Service Catalog does not support template validation for the <code>TERRAFORM_OS</code> product type. </p>"
+      }
+    },
+    "DisassociateBudgetFromResourceInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DisassociateBudgetFromResourceOutput": {
       "base": null,
       "refs": {
       }
@@ -806,6 +922,36 @@
       "refs": {
       }
     },
+    "EngineWorkflowFailureReason": {
+      "base": null,
+      "refs": {
+        "NotifyProvisionProductEngineWorkflowResultInput$FailureReason": "<p> The reason why the provisioning engine execution failed. </p>",
+        "NotifyTerminateProvisionedProductEngineWorkflowResultInput$FailureReason": "<p> The reason why the terminate engine execution failed. </p>",
+        "NotifyUpdateProvisionedProductEngineWorkflowResultInput$FailureReason": "<p> The reason why the update engine execution failed. </p>"
+      }
+    },
+    "EngineWorkflowResourceIdentifier": {
+      "base": "<p> The ID for the provisioned product resources that are part of a resource group. </p>",
+      "refs": {
+        "NotifyProvisionProductEngineWorkflowResultInput$ResourceIdentifier": "<p> The ID for the provisioned product resources that are part of a resource group. </p>"
+      }
+    },
+    "EngineWorkflowStatus": {
+      "base": null,
+      "refs": {
+        "NotifyProvisionProductEngineWorkflowResultInput$Status": "<p> The status of the provisioning engine execution. </p>",
+        "NotifyTerminateProvisionedProductEngineWorkflowResultInput$Status": "<p> The status of the terminate engine execution. </p>",
+        "NotifyUpdateProvisionedProductEngineWorkflowResultInput$Status": "<p> The status of the update engine execution. </p>"
+      }
+    },
+    "EngineWorkflowToken": {
+      "base": null,
+      "refs": {
+        "NotifyProvisionProductEngineWorkflowResultInput$WorkflowToken": "<p> The encrypted contents of the provisioning engine execution payload that Service Catalog sends after the Terraform product provisioning workflow starts. </p>",
+        "NotifyTerminateProvisionedProductEngineWorkflowResultInput$WorkflowToken": "<p> The encrypted contents of the terminate engine execution payload that Service Catalog sends after the Terraform product terminate workflow starts. </p>",
+        "NotifyUpdateProvisionedProductEngineWorkflowResultInput$WorkflowToken": "<p> The encrypted contents of the update engine execution payload that Service Catalog sends after the Terraform product update workflow starts. </p>"
+      }
+    },
     "Error": {
       "base": null,
       "refs": {
@@ -850,6 +996,50 @@
       "refs": {
       }
     },
+    "ExecutionParameter": {
+      "base": "<p>Details of an execution parameter value that is passed to a self-service action when executed on a provisioned product.</p>",
+      "refs": {
+        "ExecutionParameters$member": null
+      }
+    },
+    "ExecutionParameterKey": {
+      "base": null,
+      "refs": {
+        "ExecutionParameter$Name": "<p>The name of the execution parameter.</p>",
+        "ExecutionParameterMap$key": null
+      }
+    },
+    "ExecutionParameterMap": {
+      "base": null,
+      "refs": {
+        "ExecuteProvisionedProductServiceActionInput$Parameters": "<p>A map of all self-service action parameters and their values. If a provided parameter is of a special type, such as <code>TARGET</code>, the provided value will override the default value generated by Service Catalog. If the parameters field is not provided, no additional parameters are passed and default values will be used for any special parameters such as <code>TARGET</code>.</p>"
+      }
+    },
+    "ExecutionParameterType": {
+      "base": null,
+      "refs": {
+        "ExecutionParameter$Type": "<p>The execution parameter type.</p>"
+      }
+    },
+    "ExecutionParameterValue": {
+      "base": null,
+      "refs": {
+        "ExecutionParameterValueList$member": null
+      }
+    },
+    "ExecutionParameterValueList": {
+      "base": null,
+      "refs": {
+        "ExecutionParameter$DefaultValues": "<p>The default values for the execution parameter.</p>",
+        "ExecutionParameterMap$value": null
+      }
+    },
+    "ExecutionParameters": {
+      "base": null,
+      "refs": {
+        "DescribeServiceActionExecutionParametersOutput$ServiceActionParameters": "<p>The parameters of the self-service action.</p>"
+      }
+    },
     "FailedServiceActionAssociation": {
       "base": "<p>An object containing information about the error, along with identifying information about the self-service action and its associations.</p>",
       "refs": {
@@ -873,6 +1063,16 @@
       "refs": {
       }
     },
+    "GetProvisionedProductOutputsInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetProvisionedProductOutputsOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
     "HasDefaultPath": {
       "base": null,
       "refs": {
@@ -883,6 +1083,7 @@
       "base": null,
       "refs": {
         "AcceptPortfolioShareInput$PortfolioId": "<p>The portfolio identifier.</p>",
+        "AssociateBudgetWithResourceInput$ResourceId": "<p> The resource identifier. Either a portfolio-id or a product-id.</p>",
         "AssociatePrincipalWithPortfolioInput$PortfolioId": "<p>The portfolio identifier.</p>",
         "AssociateProductWithPortfolioInput$ProductId": "<p>The product identifier.</p>",
         "AssociateProductWithPortfolioInput$PortfolioId": "<p>The portfolio identifier.</p>",
@@ -891,11 +1092,14 @@
         "AssociateServiceActionWithProvisioningArtifactInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.</p>",
         "AssociateServiceActionWithProvisioningArtifactInput$ServiceActionId": "<p>The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.</p>",
         "ConstraintDetail$ConstraintId": "<p>The identifier of the constraint.</p>",
+        "ConstraintDetail$ProductId": "<p>The identifier of the product the constraint applies to. Note that a constraint applies to a specific instance of a product within a certain portfolio.</p>",
+        "ConstraintDetail$PortfolioId": "<p>The identifier of the portfolio the product resides in. The constraint applies only to the instance of the product that lives within this portfolio.</p>",
         "CopyProductInput$TargetProductId": "<p>The identifier of the target product. By default, a new product is created.</p>",
         "CopyProductOutput$CopyProductToken": "<p>The token to use to track the progress of the operation.</p>",
         "CreateConstraintInput$PortfolioId": "<p>The portfolio identifier.</p>",
         "CreateConstraintInput$ProductId": "<p>The product identifier.</p>",
         "CreatePortfolioShareInput$PortfolioId": "<p>The portfolio identifier.</p>",
+        "CreatePortfolioShareOutput$PortfolioShareToken": "<p>The portfolio shares a unique identifier that only returns if the portfolio is shared to an organization node.</p>",
         "CreateProvisionedProductPlanInput$PathId": "<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.</p>",
         "CreateProvisionedProductPlanInput$ProductId": "<p>The product identifier.</p>",
         "CreateProvisionedProductPlanInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact.</p>",
@@ -906,6 +1110,7 @@
         "DeleteConstraintInput$Id": "<p>The identifier of the constraint.</p>",
         "DeletePortfolioInput$Id": "<p>The portfolio identifier.</p>",
         "DeletePortfolioShareInput$PortfolioId": "<p>The portfolio identifier.</p>",
+        "DeletePortfolioShareOutput$PortfolioShareToken": "<p>The portfolio share unique identifier. This will only be returned if delete is made to an organization node.</p>",
         "DeleteProductInput$Id": "<p>The product identifier.</p>",
         "DeleteProvisionedProductPlanInput$PlanId": "<p>The plan identifier.</p>",
         "DeleteProvisioningArtifactInput$ProductId": "<p>The product identifier.</p>",
@@ -915,19 +1120,26 @@
         "DescribeCopyProductStatusInput$CopyProductToken": "<p>The token for the copy product operation. This token is returned by <a>CopyProduct</a>.</p>",
         "DescribeCopyProductStatusOutput$TargetProductId": "<p>The identifier of the copied product.</p>",
         "DescribePortfolioInput$Id": "<p>The portfolio identifier.</p>",
+        "DescribePortfolioShareStatusInput$PortfolioShareToken": "<p>The token for the portfolio share operation. This token is returned either by CreatePortfolioShare or by DeletePortfolioShare.</p>",
+        "DescribePortfolioShareStatusOutput$PortfolioShareToken": "<p>The token for the portfolio share operation. For example, <code>share-6v24abcdefghi</code>.</p>",
         "DescribePortfolioShareStatusOutput$PortfolioId": "<p>The portfolio identifier.</p>",
+        "DescribePortfolioSharesInput$PortfolioId": "<p>The unique identifier of the portfolio for which shares will be retrieved.</p>",
         "DescribeProductAsAdminInput$Id": "<p>The product identifier.</p>",
+        "DescribeProductAsAdminInput$SourcePortfolioId": "<p>The unique identifier of the shared portfolio that the specified product is associated with.</p> <p>You can provide this parameter to retrieve the shared TagOptions associated with the product. If this parameter is provided and if TagOptions sharing is enabled in the portfolio share, the API returns both local and shared TagOptions associated with the product. Otherwise only local TagOptions will be returned. </p>",
         "DescribeProductInput$Id": "<p>The product identifier.</p>",
         "DescribeProductViewInput$Id": "<p>The product view identifier.</p>",
-        "DescribeProvisionedProductInput$Id": "<p>The provisioned product identifier.</p>",
+        "DescribeProvisionedProductInput$Id": "<p>The provisioned product identifier. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>",
         "DescribeProvisionedProductPlanInput$PlanId": "<p>The plan identifier.</p>",
         "DescribeProvisioningArtifactInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact.</p>",
         "DescribeProvisioningArtifactInput$ProductId": "<p>The product identifier.</p>",
-        "DescribeProvisioningParametersInput$ProductId": "<p>The product identifier.</p>",
-        "DescribeProvisioningParametersInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact.</p>",
-        "DescribeProvisioningParametersInput$PathId": "<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.</p>",
+        "DescribeProvisioningParametersInput$ProductId": "<p>The product identifier. You must provide the product name or ID, but not both.</p>",
+        "DescribeProvisioningParametersInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact. You must provide the name or ID, but not both.</p>",
+        "DescribeProvisioningParametersInput$PathId": "<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>. You must provide the name or ID, but not both.</p>",
         "DescribeRecordInput$Id": "<p>The record identifier of the provisioned product. This identifier is returned by the request operation.</p>",
+        "DescribeServiceActionExecutionParametersInput$ProvisionedProductId": "<p>The identifier of the provisioned product.</p>",
+        "DescribeServiceActionExecutionParametersInput$ServiceActionId": "<p>The self-service action identifier.</p>",
         "DescribeServiceActionInput$Id": "<p>The self-service action identifier.</p>",
+        "DisassociateBudgetFromResourceInput$ResourceId": "<p>The resource identifier you want to disassociate from. Either a portfolio-id or a product-id.</p>",
         "DisassociatePrincipalFromPortfolioInput$PortfolioId": "<p>The portfolio identifier.</p>",
         "DisassociateProductFromPortfolioInput$ProductId": "<p>The product identifier.</p>",
         "DisassociateProductFromPortfolioInput$PortfolioId": "<p>The portfolio identifier.</p>",
@@ -940,12 +1152,19 @@
         "FailedServiceActionAssociation$ServiceActionId": "<p>The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.</p>",
         "FailedServiceActionAssociation$ProductId": "<p>The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.</p>",
         "FailedServiceActionAssociation$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.</p>",
+        "GetProvisionedProductOutputsInput$ProvisionedProductId": "<p>The identifier of the provisioned product that you want the outputs from.</p>",
+        "ImportAsProvisionedProductInput$ProductId": "<p>The product identifier.</p>",
+        "ImportAsProvisionedProductInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact.</p>",
+        "LastSync$LastSuccessfulSyncProvisioningArtifactId": "<p>The ProvisioningArtifactID of the ProvisioningArtifact created from the latest successful sync. </p>",
+        "LaunchPath$Id": "<p>The identifier of the launch path.</p>",
         "LaunchPathSummary$Id": "<p>The identifier of the product path.</p>",
+        "ListBudgetsForResourceInput$ResourceId": "<p>The resource identifier.</p>",
         "ListConstraintsForPortfolioInput$PortfolioId": "<p>The portfolio identifier.</p>",
         "ListConstraintsForPortfolioInput$ProductId": "<p>The product identifier.</p>",
         "ListLaunchPathsInput$ProductId": "<p>The product identifier.</p>",
         "ListOrganizationPortfolioAccessInput$PortfolioId": "<p>The portfolio identifier. For example, <code>port-2abcdext3y5fk</code>.</p>",
         "ListPortfolioAccessInput$PortfolioId": "<p>The portfolio identifier.</p>",
+        "ListPortfolioAccessInput$OrganizationParentId": "<p>The ID of an organization node the portfolio is shared with. All children of this node with an inherited portfolio share will be returned.</p>",
         "ListPortfoliosForProductInput$ProductId": "<p>The product identifier.</p>",
         "ListPrincipalsForPortfolioInput$PortfolioId": "<p>The portfolio identifier.</p>",
         "ListProvisionedProductPlansInput$ProvisionProductId": "<p>The product identifier.</p>",
@@ -953,16 +1172,25 @@
         "ListProvisioningArtifactsInput$ProductId": "<p>The product identifier.</p>",
         "ListServiceActionsForProvisioningArtifactInput$ProductId": "<p>The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.</p>",
         "ListServiceActionsForProvisioningArtifactInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.</p>",
+        "ListStackInstancesForProvisionedProductInput$ProvisionedProductId": "<p>The identifier of the provisioned product.</p>",
+        "NotifyProvisionProductEngineWorkflowResultInput$RecordId": "<p> The identifier of the record. </p>",
+        "NotifyTerminateProvisionedProductEngineWorkflowResultInput$RecordId": "<p> The identifier of the record. </p>",
+        "NotifyUpdateProvisionedProductEngineWorkflowResultInput$RecordId": "<p> The identifier of the record. </p>",
         "PortfolioDetail$Id": "<p>The portfolio identifier.</p>",
+        "PortfolioShareDetail$PrincipalId": "<p>The identifier of the recipient entity that received the portfolio share. The recipient entity can be one of the following:</p> <p>1. An external account.</p> <p>2. An organziation member account.</p> <p>3. An organzational unit (OU).</p> <p>4. The organization itself. (This shares with every account in the organization).</p>",
         "ProductViewSummary$Id": "<p>The product view identifier.</p>",
         "ProductViewSummary$ProductId": "<p>The product identifier.</p>",
-        "ProvisionProductInput$ProductId": "<p>The product identifier.</p>",
-        "ProvisionProductInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact.</p>",
-        "ProvisionProductInput$PathId": "<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.</p>",
+        "ProvisionProductInput$ProductId": "<p>The product identifier. You must provide the name or ID, but not both.</p>",
+        "ProvisionProductInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact. You must provide the name or ID, but not both.</p>",
+        "ProvisionProductInput$PathId": "<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>. You must provide the name or ID, but not both.</p>",
         "ProvisionedProductAttribute$Id": "<p>The identifier of the provisioned product.</p>",
         "ProvisionedProductAttribute$LastRecordId": "<p>The record identifier of the last request performed on this provisioned product.</p>",
+        "ProvisionedProductAttribute$LastProvisioningRecordId": "<p>The record identifier of the last request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>",
+        "ProvisionedProductAttribute$LastSuccessfulProvisioningRecordId": "<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>",
         "ProvisionedProductAttribute$ProductId": "<p>The product identifier.</p>",
         "ProvisionedProductAttribute$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact.</p>",
+        "ProvisionedProductDetail$LastProvisioningRecordId": "<p>The record identifier of the last request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>",
+        "ProvisionedProductDetail$LastSuccessfulProvisioningRecordId": "<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>",
         "ProvisionedProductDetail$ProductId": "<p>The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.</p>",
         "ProvisionedProductDetail$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.</p>",
         "ProvisionedProductPlanDetails$PathId": "<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.</p>",
@@ -990,11 +1218,16 @@
         "TerminateProvisionedProductInput$ProvisionedProductId": "<p>The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>",
         "UpdateConstraintInput$Id": "<p>The identifier of the constraint.</p>",
         "UpdatePortfolioInput$Id": "<p>The portfolio identifier.</p>",
+        "UpdatePortfolioShareInput$PortfolioId": "<p>The unique identifier of the portfolio for which the share will be updated.</p>",
+        "UpdatePortfolioShareOutput$PortfolioShareToken": "<p>The token that tracks the status of the <code>UpdatePortfolioShare</code> operation for external account to account or organizational type sharing.</p>",
         "UpdateProductInput$Id": "<p>The product identifier.</p>",
-        "UpdateProvisionedProductInput$ProvisionedProductId": "<p>The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>",
-        "UpdateProvisionedProductInput$ProductId": "<p>The identifier of the product.</p>",
+        "UpdateProvisionedProductInput$ProvisionedProductId": "<p>The identifier of the provisioned product. You must provide the name or ID, but not both.</p>",
+        "UpdateProvisionedProductInput$ProductId": "<p>The identifier of the product. You must provide the name or ID, but not both.</p>",
         "UpdateProvisionedProductInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact.</p>",
-        "UpdateProvisionedProductInput$PathId": "<p>The new path identifier. This value is optional if the product has a default path, and required if the product has more than one path.</p>",
+        "UpdateProvisionedProductInput$PathId": "<p>The path identifier. This value is optional if the product has a default path, and required if the product has more than one path. You must provide the name or ID, but not both.</p>",
+        "UpdateProvisionedProductPropertiesInput$ProvisionedProductId": "<p>The identifier of the provisioned product.</p>",
+        "UpdateProvisionedProductPropertiesOutput$ProvisionedProductId": "<p>The provisioned product identifier.</p>",
+        "UpdateProvisionedProductPropertiesOutput$RecordId": "<p>The identifier of the record.</p>",
         "UpdateProvisioningArtifactInput$ProductId": "<p>The product identifier.</p>",
         "UpdateProvisioningArtifactInput$ProvisioningArtifactId": "<p>The identifier of the provisioning artifact.</p>",
         "UpdateServiceActionInput$Id": "<p>The self-service action identifier.</p>"
@@ -1003,6 +1236,7 @@
     "IdempotencyToken": {
       "base": null,
       "refs": {
+        "AssociateServiceActionWithProvisioningArtifactInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. </p>",
         "CopyProductInput$IdempotencyToken": "<p> A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request. </p>",
         "CreateConstraintInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
         "CreatePortfolioInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
@@ -1010,20 +1244,37 @@
         "CreateProvisionedProductPlanInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
         "CreateProvisioningArtifactInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
         "CreateServiceActionInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
+        "DeleteServiceActionInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. </p>",
+        "DisassociateServiceActionFromProvisioningArtifactInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. </p>",
         "ExecuteProvisionedProductPlanInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
         "ExecuteProvisionedProductServiceActionInput$ExecuteToken": "<p>An idempotency token that uniquely identifies the execute request.</p>",
+        "ImportAsProvisionedProductInput$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
+        "NotifyProvisionProductEngineWorkflowResultInput$IdempotencyToken": "<p> The idempotency token that identifies the provisioning engine execution. </p>",
+        "NotifyTerminateProvisionedProductEngineWorkflowResultInput$IdempotencyToken": "<p> The idempotency token that identifies the terminate engine execution. </p>",
+        "NotifyUpdateProvisionedProductEngineWorkflowResultInput$IdempotencyToken": "<p> The idempotency token that identifies the update engine execution. </p>",
         "ProvisionProductInput$ProvisionToken": "<p>An idempotency token that uniquely identifies the provisioning request.</p>",
         "ProvisionedProductAttribute$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
         "ProvisionedProductDetail$IdempotencyToken": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
         "TerminateProvisionedProductInput$TerminateToken": "<p>An idempotency token that uniquely identifies the termination request. This token is only valid during the termination process. After the provisioned product is terminated, subsequent requests to terminate the same provisioned product always return <b>ResourceNotFound</b>.</p>",
-        "UpdateProvisionedProductInput$UpdateToken": "<p>The idempotency token that uniquely identifies the provisioning update request.</p>"
+        "UpdateProvisionedProductInput$UpdateToken": "<p>The idempotency token that uniquely identifies the provisioning update request.</p>",
+        "UpdateProvisionedProductPropertiesInput$IdempotencyToken": "<p>The idempotency token that uniquely identifies the provisioning product update request.</p>"
       }
     },
     "IgnoreErrors": {
       "base": null,
       "refs": {
-        "DeleteProvisionedProductPlanInput$IgnoreErrors": "<p>If set to true, AWS Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.</p>",
-        "TerminateProvisionedProductInput$IgnoreErrors": "<p>If set to true, AWS Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.</p>"
+        "DeleteProvisionedProductPlanInput$IgnoreErrors": "<p>If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.</p>",
+        "TerminateProvisionedProductInput$IgnoreErrors": "<p>If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.</p>"
+      }
+    },
+    "ImportAsProvisionedProductInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ImportAsProvisionedProductOutput": {
+      "base": null,
+      "refs": {
       }
     },
     "InstructionType": {
@@ -1054,6 +1305,42 @@
         "ProvisionedProductDetail$LastRecordId": "<p>The record identifier of the last request performed on this provisioned product.</p>"
       }
     },
+    "LastSuccessfulSyncTime": {
+      "base": null,
+      "refs": {
+        "LastSync$LastSuccessfulSyncTime": "<p>The time of the latest successful sync from the source repo artifact to the Service Catalog product.</p>"
+      }
+    },
+    "LastSync": {
+      "base": "<p>Provides details about the product's connection sync and contains the following sub-fields. </p> <ul> <li> <p> <code>LastSyncTime</code> </p> </li> <li> <p> <code>LastSyncStatus</code> </p> </li> <li> <p> <code>LastSyncStatusMessage</code> </p> </li> <li> <p> <code>LastSuccessfulSyncTime</code> </p> </li> <li> <p> <code>LastSuccessfulSyncProvisioningArtifactID</code> </p> </li> </ul>",
+      "refs": {
+        "SourceConnectionDetail$LastSync": "<p>Provides details about the product's connection sync and contains the following sub-fields. </p> <ul> <li> <p> <code>LastSyncTime</code> </p> </li> <li> <p> <code>LastSyncStatus</code> </p> </li> <li> <p> <code>LastSyncStatusMessage</code> </p> </li> <li> <p> <code>LastSuccessfulSyncTime</code> </p> </li> <li> <p> <code>LastSuccessfulSyncProvisioningArtifactID</code> </p> </li> </ul>"
+      }
+    },
+    "LastSyncStatus": {
+      "base": null,
+      "refs": {
+        "LastSync$LastSyncStatus": "<p>The current status of the sync. Responses include <code>SUCCEEDED</code> or <code>FAILED</code>. </p>"
+      }
+    },
+    "LastSyncStatusMessage": {
+      "base": null,
+      "refs": {
+        "LastSync$LastSyncStatusMessage": "<p>The sync's status message. </p>"
+      }
+    },
+    "LastSyncTime": {
+      "base": null,
+      "refs": {
+        "LastSync$LastSyncTime": "<p>The time of the last attempted sync from the repository to the Service Catalog product. </p>"
+      }
+    },
+    "LaunchPath": {
+      "base": "<p>A launch path object.</p>",
+      "refs": {
+        "LaunchPaths$member": null
+      }
+    },
     "LaunchPathSummaries": {
       "base": null,
       "refs": {
@@ -1064,6 +1351,12 @@
       "base": "<p>Summary information about a product path for a user.</p>",
       "refs": {
         "LaunchPathSummaries$member": null
+      }
+    },
+    "LaunchPaths": {
+      "base": null,
+      "refs": {
+        "DescribeProductOutput$LaunchPaths": "<p>Information about the associated launch paths.</p>"
       }
     },
     "LimitExceededException": {
@@ -1077,6 +1370,16 @@
       }
     },
     "ListAcceptedPortfolioSharesOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListBudgetsForResourceInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListBudgetsForResourceOutput": {
       "base": null,
       "refs": {
       }
@@ -1227,6 +1530,16 @@
       "refs": {
       }
     },
+    "ListStackInstancesForProvisionedProductInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListStackInstancesForProvisionedProductOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
     "ListTagOptionsFilters": {
       "base": "<p>Filters to use when listing TagOptions.</p>",
       "refs": {
@@ -1281,6 +1594,43 @@
         "ProvisionedProductPlanDetails$NotificationArns": "<p>Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.</p>"
       }
     },
+    "NotifyProvisionProductEngineWorkflowResultInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "NotifyProvisionProductEngineWorkflowResultOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "NotifyTerminateProvisionedProductEngineWorkflowResultInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "NotifyTerminateProvisionedProductEngineWorkflowResultOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "NotifyUpdateProvisionedProductEngineWorkflowResultInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "NotifyUpdateProvisionedProductEngineWorkflowResultOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "NullableBoolean": {
+      "base": null,
+      "refs": {
+        "UpdatePortfolioShareInput$ShareTagOptions": "<p>Enables or disables <code>TagOptions</code> sharing for the portfolio share. If this field is not provided, the current state of TagOptions sharing on the portfolio share will not be modified.</p>",
+        "UpdatePortfolioShareInput$SharePrincipals": "<p>A flag to enables or disables <code>Principals</code> sharing in the portfolio. If this field is not provided, the current state of the <code>Principals</code> sharing on the portfolio share will not be modified. </p>"
+      }
+    },
     "OperationNotSupportedException": {
       "base": "<p>The operation is not supported.</p>",
       "refs": {
@@ -1289,9 +1639,10 @@
     "OrganizationNode": {
       "base": "<p>Information about the organization node.</p>",
       "refs": {
-        "CreatePortfolioShareInput$OrganizationNode": "<p>The organization node to whom you are going to share. If <code>OrganizationNode</code> is passed in, <code>PortfolioShare</code> will be created for the node and its children (when applies), and a <code>PortfolioShareToken</code> will be returned in the output in order for the administrator to monitor the status of the <code>PortfolioShare</code> creation process.</p>",
+        "CreatePortfolioShareInput$OrganizationNode": "<p>The organization node to whom you are going to share. When you pass <code>OrganizationNode</code>, it creates <code>PortfolioShare</code> for all of the Amazon Web Services accounts that are associated to the <code>OrganizationNode</code>. The output returns a <code>PortfolioShareToken</code>, which enables the administrator to monitor the status of the <code>PortfolioShare</code> creation process.</p>",
         "DeletePortfolioShareInput$OrganizationNode": "<p>The organization node to whom you are going to stop sharing.</p>",
-        "OrganizationNodes$member": null
+        "OrganizationNodes$member": null,
+        "UpdatePortfolioShareInput$OrganizationNode": null
       }
     },
     "OrganizationNodeType": {
@@ -1314,10 +1665,23 @@
         "ListOrganizationPortfolioAccessOutput$OrganizationNodes": "<p>Displays information about the organization nodes.</p>"
       }
     },
+    "OutputDescription": {
+      "base": null,
+      "refs": {
+        "ProvisioningArtifactOutput$Description": "<p>Description of the provisioning artifact output key.</p>"
+      }
+    },
     "OutputKey": {
       "base": null,
       "refs": {
+        "OutputKeys$member": null,
         "RecordOutput$OutputKey": "<p>The output key.</p>"
+      }
+    },
+    "OutputKeys": {
+      "base": null,
+      "refs": {
+        "GetProvisionedProductOutputsInput$OutputKeys": "<p>The list of keys that the API should return with their values. If none are provided, the API will return all outputs of the provisioned product.</p>"
       }
     },
     "OutputValue": {
@@ -1326,17 +1690,22 @@
         "RecordOutput$OutputValue": "<p>The output value.</p>"
       }
     },
+    "Owner": {
+      "base": null,
+      "refs": {
+        "TagOptionDetail$Owner": "<p>The Amazon Web Services account Id of the owner account that created the TagOption.</p>"
+      }
+    },
     "PageSize": {
       "base": null,
       "refs": {
         "DescribeProvisionedProductPlanInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "DescribeRecordInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
-        "ListAcceptedPortfolioSharesInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
+        "GetProvisionedProductOutputsInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
+        "ListBudgetsForResourceInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ListConstraintsForPortfolioInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ListLaunchPathsInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ListOrganizationPortfolioAccessInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
-        "ListPortfoliosForProductInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
-        "ListPortfoliosInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ListPrincipalsForPortfolioInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ListProvisionedProductPlansInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ListProvisioningArtifactsForServiceActionInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
@@ -1344,27 +1713,45 @@
         "ListResourcesForTagOptionInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ListServiceActionsForProvisioningArtifactInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ListServiceActionsInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
+        "ListStackInstancesForProvisionedProductInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ListTagOptionsInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "ScanProvisionedProductsInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
-        "SearchProductsAsAdminInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
+        "SearchProductsAsAdminInput$PageSize": "<p>The maximum number of items to return with this call.</p>"
+      }
+    },
+    "PageSizeMax100": {
+      "base": null,
+      "refs": {
+        "DescribePortfolioSharesInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
+        "ListAcceptedPortfolioSharesInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
+        "ListPortfolioAccessInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
+        "ListPortfoliosForProductInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
+        "ListPortfoliosInput$PageSize": "<p>The maximum number of items to return with this call.</p>",
         "SearchProductsInput$PageSize": "<p>The maximum number of items to return with this call.</p>"
       }
     },
     "PageToken": {
       "base": null,
       "refs": {
+        "DescribePortfolioSharesInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
+        "DescribePortfolioSharesOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
         "DescribeProvisionedProductPlanInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "DescribeProvisionedProductPlanOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
         "DescribeRecordInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "DescribeRecordOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
+        "GetProvisionedProductOutputsInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
+        "GetProvisionedProductOutputsOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
         "ListAcceptedPortfolioSharesInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "ListAcceptedPortfolioSharesOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
+        "ListBudgetsForResourceInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
+        "ListBudgetsForResourceOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
         "ListConstraintsForPortfolioInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "ListConstraintsForPortfolioOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
         "ListLaunchPathsInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "ListLaunchPathsOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
         "ListOrganizationPortfolioAccessInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "ListOrganizationPortfolioAccessOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
+        "ListPortfolioAccessInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "ListPortfolioAccessOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
         "ListPortfoliosForProductInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "ListPortfoliosForProductOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
@@ -1385,6 +1772,8 @@
         "ListServiceActionsForProvisioningArtifactOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
         "ListServiceActionsInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "ListServiceActionsOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
+        "ListStackInstancesForProvisionedProductInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
+        "ListStackInstancesForProvisionedProductOutput$NextPageToken": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>",
         "ListTagOptionsInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "ListTagOptionsOutput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
         "ScanProvisionedProductsInput$PageToken": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>",
@@ -1427,6 +1816,7 @@
     "PhysicalId": {
       "base": null,
       "refs": {
+        "ImportAsProvisionedProductInput$PhysicalId": "<p>The unique identifier of the resource to be imported. It only currently supports CloudFormation stack IDs.</p>",
         "ProvisionedProductAttribute$PhysicalId": "<p>The assigned identifier for the resource, such as an EC2 instance ID or an S3 bucket name.</p>"
       }
     },
@@ -1471,31 +1861,38 @@
       "base": null,
       "refs": {
         "CreatePortfolioInput$DisplayName": "<p>The name to use for display purposes.</p>",
+        "DescribeProvisioningParametersInput$PathName": "<p>The name of the path. You must provide the name or ID, but not both.</p>",
         "PortfolioDetail$DisplayName": "<p>The name to use for display purposes.</p>",
-        "UpdatePortfolioInput$DisplayName": "<p>The name to use for display purposes.</p>"
+        "ProvisionProductInput$PathName": "<p>The name of the path. You must provide the name or ID, but not both.</p>",
+        "UpdatePortfolioInput$DisplayName": "<p>The name to use for display purposes.</p>",
+        "UpdateProvisionedProductInput$PathName": "<p>The name of the path. You must provide the name or ID, but not both.</p>"
       }
     },
     "PortfolioName": {
       "base": null,
       "refs": {
-        "LaunchPathSummary$Name": "<p>The name of the portfolio to which the user was assigned.</p>"
+        "LaunchPath$Name": "<p>The name of the launch path.</p>",
+        "LaunchPathSummary$Name": "<p>The name of the portfolio that contains the product. </p>"
       }
     },
-    "PortfolioShareToken": {
+    "PortfolioShareDetail": {
+      "base": "<p>Information about the portfolio share.</p>",
+      "refs": {
+        "PortfolioShareDetails$member": null
+      }
+    },
+    "PortfolioShareDetails": {
       "base": null,
       "refs": {
-        "CreatePortfolioShareOutput$PortfolioShareToken": "<p>The portfolio share unique identifier. This will only be returned if portfolio is shared to an organization node.</p>",
-        "DeletePortfolioShareOutput$PortfolioShareToken": "<p>The portfolio share unique identifier. This will only be returned if delete is made to an organization node.</p>",
-        "DescribePortfolioShareStatusInput$PortfolioShareToken": "<p>The token for the portfolio share operation. This token is returned either by CreatePortfolioShare or by DeletePortfolioShare.</p>",
-        "DescribePortfolioShareStatusOutput$PortfolioShareToken": "<p>The token for the portfolio share operation. For example, <code>share-6v24abcdefghi</code>.</p>"
+        "DescribePortfolioSharesOutput$PortfolioShareDetails": "<p>Summaries about each of the portfolio shares.</p>"
       }
     },
     "PortfolioShareType": {
       "base": null,
       "refs": {
-        "AcceptPortfolioShareInput$PortfolioShareType": "<p>The type of shared portfolios to accept. The default is to accept imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Accept portfolios shared by the master account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Accept imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog accept-portfolio-share --portfolio-id \"port-2qwzkwxt3y5fk\" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>",
-        "ListAcceptedPortfolioSharesInput$PortfolioShareType": "<p>The type of shared portfolios to list. The default is to list imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - List portfolios shared by the master account of your organization</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - List default portfolios</p> </li> <li> <p> <code>IMPORTED</code> - List imported portfolios</p> </li> </ul>",
-        "RejectPortfolioShareInput$PortfolioShareType": "<p>The type of shared portfolios to reject. The default is to reject imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Reject portfolios shared by the master account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Reject imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog reject-portfolio-share --portfolio-id \"port-2qwzkwxt3y5fk\" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>"
+        "AcceptPortfolioShareInput$PortfolioShareType": "<p>The type of shared portfolios to accept. The default is to accept imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Accept portfolios shared by the management account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Accept imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog accept-portfolio-share --portfolio-id \"port-2qwzkwxt3y5fk\" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>",
+        "ListAcceptedPortfolioSharesInput$PortfolioShareType": "<p>The type of shared portfolios to list. The default is to list imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - List portfolios accepted and shared via organizational sharing by the management account or delegated administrator of your organization.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Deprecated type.</p> </li> <li> <p> <code>IMPORTED</code> - List imported portfolios that have been accepted and shared through account-to-account sharing.</p> </li> </ul>",
+        "RejectPortfolioShareInput$PortfolioShareType": "<p>The type of shared portfolios to reject. The default is to reject imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Reject portfolios shared by the management account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Reject imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog reject-portfolio-share --portfolio-id \"port-2qwzkwxt3y5fk\" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>"
       }
     },
     "Principal": {
@@ -1507,22 +1904,23 @@
     "PrincipalARN": {
       "base": null,
       "refs": {
-        "AssociatePrincipalWithPortfolioInput$PrincipalARN": "<p>The ARN of the principal (IAM user, role, or group).</p>",
-        "DisassociatePrincipalFromPortfolioInput$PrincipalARN": "<p>The ARN of the principal (IAM user, role, or group).</p>",
-        "Principal$PrincipalARN": "<p>The ARN of the principal (IAM user, role, or group).</p>"
+        "AssociatePrincipalWithPortfolioInput$PrincipalARN": "<p>The ARN of the principal (user, role, or group). If the <code>PrincipalType</code> is <code>IAM</code>, the supported value is a fully defined <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM Amazon Resource Name (ARN)</a>. If the <code>PrincipalType</code> is <code>IAM_PATTERN</code>, the supported value is an <code>IAM</code> ARN <i>without an AccountID</i> in the following format:</p> <p> <i>arn:partition:iam:::resource-type/resource-id</i> </p> <p>The ARN resource-id can be either:</p> <ul> <li> <p>A fully formed resource-id. For example, <i>arn:aws:iam:::role/resource-name</i> or <i>arn:aws:iam:::role/resource-path/resource-name</i> </p> </li> <li> <p>A wildcard ARN. The wildcard ARN accepts <code>IAM_PATTERN</code> values with a \"*\" or \"?\" in the resource-id segment of the ARN. For example <i>arn:partition:service:::resource-type/resource-path/resource-name</i>. The new symbols are exclusive to the <b>resource-path</b> and <b>resource-name</b> and cannot replace the <b>resource-type</b> or other ARN values. </p> <p>The ARN path and principal name allow unlimited wildcard characters.</p> </li> </ul> <p>Examples of an <b>acceptable</b> wildcard ARN:</p> <ul> <li> <p>arn:aws:iam:::role/ResourceName_*</p> </li> <li> <p>arn:aws:iam:::role/*/ResourceName_?</p> </li> </ul> <p>Examples of an <b>unacceptable</b> wildcard ARN:</p> <ul> <li> <p>arn:aws:iam:::*/ResourceName</p> </li> </ul> <p>You can associate multiple <code>IAM_PATTERN</code>s even if the account has no principal with that name. </p> <p>The \"?\" wildcard character matches zero or one of any character. This is similar to \".?\" in regular regex context. The \"*\" wildcard character matches any number of any characters. This is similar to \".*\" in regular regex context.</p> <p>In the IAM Principal ARN format (<i>arn:partition:iam:::resource-type/resource-path/resource-name</i>), valid resource-type values include <b>user/</b>, <b>group/</b>, or <b>role/</b>. The \"?\" and \"*\" characters are allowed only after the resource-type in the resource-id segment. You can use special characters anywhere within the resource-id. </p> <p>The \"*\" character also matches the \"/\" character, allowing paths to be formed <i>within</i> the resource-id. For example, <i>arn:aws:iam:::role/<b>*</b>/ResourceName_?</i> matches both <i>arn:aws:iam:::role/pathA/pathB/ResourceName_1</i> and <i>arn:aws:iam:::role/pathA/ResourceName_1</i>. </p>",
+        "DisassociatePrincipalFromPortfolioInput$PrincipalARN": "<p>The ARN of the principal (user, role, or group). This field allows an ARN with no <code>accountID</code> with or without wildcard characters if <code>PrincipalType</code> is <code>IAM_PATTERN</code>.</p>",
+        "Principal$PrincipalARN": "<p>The ARN of the principal (user, role, or group). This field allows for an ARN with no <code>accountID</code>, with or without wildcard characters if the <code>PrincipalType</code> is an <code>IAM_PATTERN</code>. </p> <p>For more information, review <a href=\"https://docs.aws.amazon.com/cli/latest/reference/servicecatalog/associate-principal-with-portfolio.html#options\">associate-principal-with-portfolio</a> in the Amazon Web Services CLI Command Reference. </p>"
       }
     },
     "PrincipalType": {
       "base": null,
       "refs": {
-        "AssociatePrincipalWithPortfolioInput$PrincipalType": "<p>The principal type. The supported value is <code>IAM</code>.</p>",
-        "Principal$PrincipalType": "<p>The principal type. The supported value is <code>IAM</code>.</p>"
+        "AssociatePrincipalWithPortfolioInput$PrincipalType": "<p>The principal type. The supported value is <code>IAM</code> if you use a fully defined Amazon Resource Name (ARN), or <code>IAM_PATTERN</code> if you use an ARN with no <code>accountID</code>, with or without wildcard characters. </p>",
+        "DisassociatePrincipalFromPortfolioInput$PrincipalType": "<p>The supported value is <code>IAM</code> if you use a fully defined ARN, or <code>IAM_PATTERN</code> if you specify an <code>IAM</code> ARN with no AccountId, with or without wildcard characters. </p>",
+        "Principal$PrincipalType": "<p>The principal type. The supported value is <code>IAM</code> if you use a fully defined ARN, or <code>IAM_PATTERN</code> if you use an ARN with no <code>accountID</code>, with or without wildcard characters. </p>"
       }
     },
     "Principals": {
       "base": null,
       "refs": {
-        "ListPrincipalsForPortfolioOutput$Principals": "<p>The IAM principals (users or roles) associated with the portfolio.</p>"
+        "ListPrincipalsForPortfolioOutput$Principals": "<p>The <code>PrincipalARN</code>s and corresponding <code>PrincipalType</code>s associated with the portfolio.</p>"
       }
     },
     "ProductArn": {
@@ -1541,7 +1939,7 @@
       "base": null,
       "refs": {
         "CreateProductInput$ProductType": "<p>The type of product.</p>",
-        "ProductViewSummary$Type": "<p>The product type. Contact the product administrator for the significance of this value. If this value is <code>MARKETPLACE</code>, the product was created by AWS Marketplace.</p>"
+        "ProductViewSummary$Type": "<p>The product type. Contact the product administrator for the significance of this value. If this value is <code>MARKETPLACE</code>, the product was created by Amazon Web Services Marketplace.</p>"
       }
     },
     "ProductViewAggregationType": {
@@ -1619,8 +2017,15 @@
       "refs": {
         "CopyProductInput$TargetProductName": "<p>A name for the target product. The default is the name of the source product.</p>",
         "CreateProductInput$Name": "<p>The name of the product.</p>",
+        "DescribeProductAsAdminInput$Name": "<p>The product name.</p>",
+        "DescribeProductInput$Name": "<p>The product name.</p>",
+        "DescribeProvisioningArtifactInput$ProductName": "<p>The product name.</p>",
+        "DescribeProvisioningParametersInput$ProductName": "<p>The name of the product. You must provide the name or ID, but not both.</p>",
         "ProductViewSummary$Name": "<p>The name of the product.</p>",
-        "UpdateProductInput$Name": "<p>The updated product name.</p>"
+        "ProvisionProductInput$ProductName": "<p>The name of the product. You must provide the name or ID, but not both.</p>",
+        "ProvisionedProductAttribute$ProductName": "<p>The name of the product.</p>",
+        "UpdateProductInput$Name": "<p>The updated product name.</p>",
+        "UpdateProvisionedProductInput$ProductName": "<p>The name of the product. You must provide the name or ID, but not both.</p>"
       }
     },
     "ProductViewOwner": {
@@ -1664,10 +2069,22 @@
         "ProvisioningArtifactView$ProductViewSummary": "<p>Summary information about a product view.</p>"
       }
     },
+    "PropertyKey": {
+      "base": null,
+      "refs": {
+        "ProvisionedProductProperties$key": null
+      }
+    },
     "PropertyName": {
       "base": null,
       "refs": {
         "ResourceTargetDefinition$Name": "<p>If the attribute is <code>Properties</code>, the value is the name of the property. Otherwise, the value is null.</p>"
+      }
+    },
+    "PropertyValue": {
+      "base": null,
+      "refs": {
+        "ProvisionedProductProperties$value": null
       }
     },
     "ProviderName": {
@@ -1716,7 +2133,7 @@
     "ProvisionedProductFilters": {
       "base": null,
       "refs": {
-        "SearchProvisionedProductsInput$Filters": "<p>The search filters.</p> <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>, <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, <code>provisioningArtifact</code>, <code>type</code>, <code>status</code>, <code>tags</code>, <code>userArn</code>, and <code>userArnSession</code>.</p> <p>Example: <code>\"SearchQuery\":[\"status:AVAILABLE\"]</code> </p>"
+        "SearchProvisionedProductsInput$Filters": "<p>The search filters.</p> <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>, <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, <code>provisioningArtifactId</code>, <code>type</code>, <code>status</code>, <code>tags</code>, <code>userArn</code>, <code>userArnSession</code>, <code>lastProvisioningRecordId</code>, <code>lastSuccessfulProvisioningRecordId</code>, <code>productName</code>, and <code>provisioningArtifactName</code>.</p> <p>Example: <code>\"SearchQuery\":[\"status:AVAILABLE\"]</code> </p>"
       }
     },
     "ProvisionedProductId": {
@@ -1728,9 +2145,12 @@
     "ProvisionedProductName": {
       "base": null,
       "refs": {
-        "CreateProvisionedProductPlanInput$ProvisionedProductName": "<p>A user-friendly name for the provisioned product. This value must be unique for the AWS account and cannot be updated after the product is provisioned.</p>",
+        "CreateProvisionedProductPlanInput$ProvisionedProductName": "<p>A user-friendly name for the provisioned product. This value must be unique for the Amazon Web Services account and cannot be updated after the product is provisioned.</p>",
         "CreateProvisionedProductPlanOutput$ProvisionedProductName": "<p>The user-friendly name of the provisioned product.</p>",
-        "ProvisionProductInput$ProvisionedProductName": "<p>A user-friendly name for the provisioned product. This value must be unique for the AWS account and cannot be updated after the product is provisioned.</p>",
+        "DescribeProvisionedProductInput$Name": "<p>The name of the provisioned product. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>",
+        "GetProvisionedProductOutputsInput$ProvisionedProductName": "<p>The name of the provisioned product that you want the outputs from.</p>",
+        "ImportAsProvisionedProductInput$ProvisionedProductName": "<p>The user-friendly name of the provisioned product. The value must be unique for the Amazon Web Services account. The name cannot be updated after the product is provisioned. </p>",
+        "ProvisionProductInput$ProvisionedProductName": "<p>A user-friendly name for the provisioned product. This value must be unique for the Amazon Web Services account and cannot be updated after the product is provisioned.</p>",
         "ProvisionedProductPlanDetails$ProvisionProductName": "<p>The user-friendly name of the provisioned product.</p>",
         "ProvisionedProductPlanSummary$ProvisionProductName": "<p>The user-friendly name of the provisioned product.</p>",
         "RecordDetail$ProvisionedProductName": "<p>The user-friendly name of the provisioned product.</p>"
@@ -1744,7 +2164,7 @@
         "ProvisionedProductDetail$Name": "<p>The user-friendly name of the provisioned product.</p>",
         "ProvisionedProductDetail$Arn": "<p>The ARN of the provisioned product.</p>",
         "TerminateProvisionedProductInput$ProvisionedProductName": "<p>The name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>",
-        "UpdateProvisionedProductInput$ProvisionedProductName": "<p>The updated name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>"
+        "UpdateProvisionedProductInput$ProvisionedProductName": "<p>The name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>"
       }
     },
     "ProvisionedProductPlanDetails": {
@@ -1788,6 +2208,13 @@
         "ListProvisionedProductPlansOutput$ProvisionedProductPlans": "<p>Information about the plans.</p>"
       }
     },
+    "ProvisionedProductProperties": {
+      "base": null,
+      "refs": {
+        "UpdateProvisionedProductPropertiesInput$ProvisionedProductProperties": "<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>LAUNCH_ROLE</code> key accepts role ARNs. This key allows an administrator to call <code>UpdateProvisionedProductProperties</code> to update the launch role that is associated with a provisioned product. This role is used when an end user calls a provisioning operation such as <code>UpdateProvisionedProduct</code>, <code>TerminateProvisionedProduct</code>, or <code>ExecuteProvisionedProductServiceAction</code>. Only a role ARN is valid. A user ARN is invalid. </p> <p>The <code>OWNER</code> key accepts user ARNs, IAM role ARNs, and STS assumed-role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM or STS entity within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product's history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>",
+        "UpdateProvisionedProductPropertiesOutput$ProvisionedProductProperties": "<p>A map that contains the properties updated.</p>"
+      }
+    },
     "ProvisionedProductStatus": {
       "base": null,
       "refs": {
@@ -1805,9 +2232,9 @@
     "ProvisionedProductType": {
       "base": null,
       "refs": {
-        "ProvisionedProductAttribute$Type": "<p>The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.</p>",
-        "ProvisionedProductDetail$Type": "<p>The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.</p>",
-        "RecordDetail$ProvisionedProductType": "<p>The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.</p>"
+        "ProvisionedProductAttribute$Type": "<p>The type of provisioned product. The supported values are <code>CFN_STACK</code>, <code>CFN_STACKSET</code>, <code>TERRAFORM_OPEN_SOURCE</code>, <code>TERRAFORM_CLOUD</code>, and <code>EXTERNAL</code>.</p>",
+        "ProvisionedProductDetail$Type": "<p>The type of provisioned product. The supported values are <code>CFN_STACK</code>, <code>CFN_STACKSET</code>, <code>TERRAFORM_OPEN_SOURCE</code>, <code>TERRAFORM_CLOUD</code>, and <code>EXTERNAL</code>.</p>",
+        "RecordDetail$ProvisionedProductType": "<p>The type of provisioned product. The supported values are <code>CFN_STACK</code>, <code>CFN_STACKSET</code>, <code>TERRAFORM_OPEN_SOURCE</code>, <code>TERRAFORM_CLOUD</code>, and <code>EXTERNAL</code>.</p>"
       }
     },
     "ProvisionedProductViewFilterBy": {
@@ -1839,7 +2266,7 @@
       "base": null,
       "refs": {
         "ProvisioningArtifactDetail$Active": "<p>Indicates whether the product version is active.</p>",
-        "UpdateProvisioningArtifactInput$Active": "<p>Indicates whether the product version is active.</p>"
+        "UpdateProvisioningArtifactInput$Active": "<p>Indicates whether the product version is active.</p> <p>Inactive provisioning artifacts are invisible to end users. End users cannot launch or update a provisioned product from an inactive provisioning artifact.</p>"
       }
     },
     "ProvisioningArtifactCreatedTime": {
@@ -1861,7 +2288,7 @@
     "ProvisioningArtifactDetail": {
       "base": "<p>Information about a provisioning artifact (also known as a version) for a product.</p>",
       "refs": {
-        "CreateProductOutput$ProvisioningArtifactDetail": "<p>Information about the provisioning artifact.</p>",
+        "CreateProductOutput$ProvisioningArtifactDetail": "<p>Information about the provisioning artifact. </p>",
         "CreateProvisioningArtifactOutput$ProvisioningArtifactDetail": "<p>Information about the provisioning artifact.</p>",
         "DescribeProvisioningArtifactOutput$ProvisioningArtifactDetail": "<p>Information about the provisioning artifact.</p>",
         "ProvisioningArtifactDetails$member": null,
@@ -1874,14 +2301,22 @@
         "ListProvisioningArtifactsOutput$ProvisioningArtifactDetails": "<p>Information about the provisioning artifacts.</p>"
       }
     },
+    "ProvisioningArtifactGuidance": {
+      "base": null,
+      "refs": {
+        "ProvisioningArtifact$Guidance": "<p>Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.</p>",
+        "ProvisioningArtifactDetail$Guidance": "<p>Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.</p>",
+        "UpdateProvisioningArtifactInput$Guidance": "<p>Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.</p> <p>The <code>DEFAULT</code> value indicates that the product version is active.</p> <p>The administrator can set the guidance to <code>DEPRECATED</code> to inform users that the product version is deprecated. Users are able to make updates to a provisioned product of a deprecated version but cannot launch new provisioned products using a deprecated version.</p>"
+      }
+    },
     "ProvisioningArtifactInfo": {
       "base": null,
       "refs": {
-        "CreateProvisioningArtifactOutput$Info": "<p>The URL of the CloudFormation template in Amazon S3, in JSON format.</p>",
-        "DescribeProvisioningArtifactOutput$Info": "<p>The URL of the CloudFormation template in Amazon S3.</p>",
-        "ProvisioningArtifactProperties$Info": "<p>The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:</p> <p> <code>\"LoadTemplateFromURL\": \"https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/...\"</code> </p>",
-        "ProvisioningArtifactSummary$ProvisioningArtifactMetadata": "<p>The metadata for the provisioning artifact. This is used with AWS Marketplace products.</p>",
-        "UpdateProvisioningArtifactOutput$Info": "<p>The URL of the CloudFormation template in Amazon S3.</p>"
+        "CreateProvisioningArtifactOutput$Info": "<p>Specify the template source with one of the following options, but not both. Keys accepted: [ <code>LoadTemplateFromURL</code>, <code>ImportFromPhysicalId</code> ].</p> <p>Use the URL of the CloudFormation template in Amazon S3 or GitHub in JSON format. </p> <p> <code>LoadTemplateFromURL</code> </p> <p>Use the URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.</p> <p> <code>ImportFromPhysicalId</code> </p> <p>Use the physical id of the resource that contains the template; currently supports CloudFormation stack ARN.</p>",
+        "DescribeProvisioningArtifactOutput$Info": "<p>The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.</p>",
+        "ProvisioningArtifactProperties$Info": "<p>Specify the template source with one of the following options, but not both. Keys accepted: [ <code>LoadTemplateFromURL</code>, <code>ImportFromPhysicalId</code> ]</p> <p>The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format. Specify the URL in JSON format as follows:</p> <p> <code>\"LoadTemplateFromURL\": \"https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/...\"</code> </p> <p> <code>ImportFromPhysicalId</code>: The physical id of the resource that contains the template. Currently only supports CloudFormation stack arn. Specify the physical id in JSON format as follows: <code>ImportFromPhysicalId: “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]</code> </p>",
+        "ProvisioningArtifactSummary$ProvisioningArtifactMetadata": "<p>The metadata for the provisioning artifact. This is used with Amazon Web Services Marketplace products.</p>",
+        "UpdateProvisioningArtifactOutput$Info": "<p>The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.</p>"
       }
     },
     "ProvisioningArtifactInfoKey": {
@@ -1899,12 +2334,36 @@
     "ProvisioningArtifactName": {
       "base": null,
       "refs": {
+        "DescribeProvisioningArtifactInput$ProvisioningArtifactName": "<p>The provisioning artifact name.</p>",
+        "DescribeProvisioningParametersInput$ProvisioningArtifactName": "<p>The name of the provisioning artifact. You must provide the name or ID, but not both.</p>",
+        "ProvisionProductInput$ProvisioningArtifactName": "<p>The name of the provisioning artifact. You must provide the name or ID, but not both.</p>",
+        "ProvisionedProductAttribute$ProvisioningArtifactName": "<p>The name of the provisioning artifact.</p>",
         "ProvisioningArtifact$Name": "<p>The name of the provisioning artifact.</p>",
         "ProvisioningArtifactDetail$Name": "<p>The name of the provisioning artifact.</p>",
         "ProvisioningArtifactDetail$Description": "<p>The description of the provisioning artifact.</p>",
         "ProvisioningArtifactProperties$Name": "<p>The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.</p>",
         "ProvisioningArtifactSummary$Name": "<p>The name of the provisioning artifact.</p>",
+        "UpdateProvisionedProductInput$ProvisioningArtifactName": "<p>The name of the provisioning artifact. You must provide the name or ID, but not both.</p>",
         "UpdateProvisioningArtifactInput$Name": "<p>The updated name of the provisioning artifact.</p>"
+      }
+    },
+    "ProvisioningArtifactOutput": {
+      "base": "<p>Provisioning artifact output.</p>",
+      "refs": {
+        "ProvisioningArtifactOutputs$member": null
+      }
+    },
+    "ProvisioningArtifactOutputKey": {
+      "base": null,
+      "refs": {
+        "ProvisioningArtifactOutput$Key": "<p>The provisioning artifact output key.</p>"
+      }
+    },
+    "ProvisioningArtifactOutputs": {
+      "base": null,
+      "refs": {
+        "DescribeProvisioningParametersOutput$ProvisioningArtifactOutputs": "<p>The output of the provisioning artifact.</p>",
+        "DescribeProvisioningParametersOutput$ProvisioningArtifactOutputKeys": "<p>A list of the keys and descriptions of the outputs. These outputs can be referenced from a provisioned product launched from this provisioning artifact.</p>"
       }
     },
     "ProvisioningArtifactParameter": {
@@ -1916,19 +2375,20 @@
     "ProvisioningArtifactParameters": {
       "base": null,
       "refs": {
+        "DescribeProvisioningArtifactOutput$ProvisioningArtifactParameters": "<p>Information about the parameters used to provision the product. </p>",
         "DescribeProvisioningParametersOutput$ProvisioningArtifactParameters": "<p>Information about the parameters used to provision the product.</p>"
       }
     },
     "ProvisioningArtifactPreferences": {
-      "base": "<p>The user-defined preferences that will be applied during product provisioning, unless overridden by <code>ProvisioningPreferences</code> or <code>UpdateProvisioningPreferences</code>.</p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options\">Stack set operation options</a> in the <i>AWS CloudFormation User Guide</i>.</p>",
+      "base": "<p>The user-defined preferences that will be applied during product provisioning, unless overridden by <code>ProvisioningPreferences</code> or <code>UpdateProvisioningPreferences</code>.</p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options\">Stack set operation options</a> in the <i>CloudFormation User Guide</i>.</p>",
       "refs": {
-        "DescribeProvisioningParametersOutput$ProvisioningArtifactPreferences": "<p>An object that contains information about preferences, such as regions and accounts, for the provisioning artifact.</p>"
+        "DescribeProvisioningParametersOutput$ProvisioningArtifactPreferences": "<p>An object that contains information about preferences, such as Regions and accounts, for the provisioning artifact.</p>"
       }
     },
     "ProvisioningArtifactProperties": {
       "base": "<p>Information about a provisioning artifact (also known as a version) for a product.</p>",
       "refs": {
-        "CreateProductInput$ProvisioningArtifactParameters": "<p>The configuration of the provisioning artifact.</p>",
+        "CreateProductInput$ProvisioningArtifactParameters": "<p>The configuration of the provisioning artifact. </p>",
         "CreateProvisioningArtifactInput$Parameters": "<p>The configuration for the provisioning artifact.</p>"
       }
     },
@@ -1959,8 +2419,8 @@
     "ProvisioningArtifactType": {
       "base": null,
       "refs": {
-        "ProvisioningArtifactDetail$Type": "<p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>",
-        "ProvisioningArtifactProperties$Type": "<p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>"
+        "ProvisioningArtifactDetail$Type": "<p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - CloudFormation template</p> </li> <li> <p> <code>TERRAFORM_OPEN_SOURCE</code> - Terraform Open Source configuration file</p> </li> <li> <p> <code>TERRAFORM_CLOUD</code> - Terraform Cloud configuration file</p> </li> <li> <p> <code>EXTERNAL</code> - External configuration file</p> </li> </ul>",
+        "ProvisioningArtifactProperties$Type": "<p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - CloudFormation template</p> </li> <li> <p> <code>TERRAFORM_OPEN_SOURCE</code> - Terraform Open Source configuration file</p> </li> <li> <p> <code>TERRAFORM_CLOUD</code> - Terraform Cloud configuration file</p> </li> <li> <p> <code>EXTERNAL</code> - External configuration file</p> </li> </ul>"
       }
     },
     "ProvisioningArtifactView": {
@@ -1995,7 +2455,7 @@
       }
     },
     "ProvisioningPreferences": {
-      "base": "<p>The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product types.</p>",
+      "base": "<p>The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product type</p> <p>One or more Amazon Web Services accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The Amazon Web Services accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>",
       "refs": {
         "ProvisionProductInput$ProvisioningPreferences": "<p>An object that contains information about the provisioning preferences for a stack set.</p>"
       }
@@ -2006,6 +2466,7 @@
         "DescribeRecordOutput$RecordDetail": "<p>Information about the product.</p>",
         "ExecuteProvisionedProductPlanOutput$RecordDetail": "<p>Information about the result of provisioning the product.</p>",
         "ExecuteProvisionedProductServiceActionOutput$RecordDetail": "<p>An object containing detailed information about the result of provisioning the product.</p>",
+        "ImportAsProvisionedProductOutput$RecordDetail": null,
         "ProvisionProductOutput$RecordDetail": "<p>Information about the result of provisioning the product.</p>",
         "RecordDetails$member": null,
         "TerminateProvisionedProductOutput$RecordDetail": "<p>Information about the result of this request.</p>",
@@ -2039,13 +2500,17 @@
     "RecordOutputs": {
       "base": null,
       "refs": {
-        "DescribeRecordOutput$RecordOutputs": "<p>Information about the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL.</p>"
+        "DescribeRecordOutput$RecordOutputs": "<p>Information about the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL.</p>",
+        "GetProvisionedProductOutputsOutput$Outputs": "<p>Information about the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL. </p>",
+        "NotifyProvisionProductEngineWorkflowResultInput$Outputs": "<p> The output of the provisioning engine execution. </p>",
+        "NotifyUpdateProvisionedProductEngineWorkflowResultInput$Outputs": "<p> The output of the update engine execution. </p>"
       }
     },
     "RecordStatus": {
       "base": null,
       "refs": {
-        "RecordDetail$Status": "<p>The status of the provisioned product.</p> <ul> <li> <p> <code>CREATED</code> - The request was created but the operation has not started.</p> </li> <li> <p> <code>IN_PROGRESS</code> - The requested operation is in progress.</p> </li> <li> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> </li> <li> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> </li> <li> <p> <code>FAILED</code> - The requested operation has unsuccessfully completed. Investigate using the error messages returned.</p> </li> </ul>"
+        "RecordDetail$Status": "<p>The status of the provisioned product.</p> <ul> <li> <p> <code>CREATED</code> - The request was created but the operation has not started.</p> </li> <li> <p> <code>IN_PROGRESS</code> - The requested operation is in progress.</p> </li> <li> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> </li> <li> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> </li> <li> <p> <code>FAILED</code> - The requested operation has unsuccessfully completed. Investigate using the error messages returned.</p> </li> </ul>",
+        "UpdateProvisionedProductPropertiesOutput$Status": "<p>The status of the request.</p>"
       }
     },
     "RecordTag": {
@@ -2081,6 +2546,7 @@
     "Region": {
       "base": null,
       "refs": {
+        "StackInstance$Region": "<p>The name of the Amazon Web Services Region that the stack instance is associated with.</p>",
         "StackSetRegions$member": null
       }
     },
@@ -2098,6 +2564,24 @@
       "base": null,
       "refs": {
         "ResourceChange$Replacement": "<p>If the change type is <code>Modify</code>, indicates whether the existing resource is deleted and replaced with a new one.</p>"
+      }
+    },
+    "Repository": {
+      "base": null,
+      "refs": {
+        "CodeStarParameters$Repository": "<p>The specific repository where the product’s artifact-to-be-synced resides, formatted as \"Account/Repo.\" </p>"
+      }
+    },
+    "RepositoryArtifactPath": {
+      "base": null,
+      "refs": {
+        "CodeStarParameters$ArtifactPath": "<p>The absolute path wehre the artifact resides within the repo and branch, formatted as \"folder/file.json.\" </p>"
+      }
+    },
+    "RepositoryBranch": {
+      "base": null,
+      "refs": {
+        "CodeStarParameters$Branch": "<p>The specific branch where the artifact resides. </p>"
       }
     },
     "RequiresRecreation": {
@@ -2215,6 +2699,19 @@
         "ListResourcesForTagOptionInput$ResourceType": "<p>The resource type.</p> <ul> <li> <p> <code>Portfolio</code> </p> </li> <li> <p> <code>Product</code> </p> </li> </ul>"
       }
     },
+    "RetainPhysicalResources": {
+      "base": null,
+      "refs": {
+        "TerminateProvisionedProductInput$RetainPhysicalResources": "<p>When this boolean parameter is set to true, the <code>TerminateProvisionedProduct</code> API deletes the Service Catalog provisioned product. However, it does not remove the CloudFormation stack, stack set, or the underlying resources of the deleted provisioned product. The default value is false.</p>"
+      }
+    },
+    "RoleArn": {
+      "base": null,
+      "refs": {
+        "ProvisionedProductDetail$LaunchRoleArn": "<p>The ARN of the launch role associated with the provisioned product.</p>",
+        "RecordDetail$LaunchRoleArn": "<p>The ARN of the launch role associated with the provisioned product.</p>"
+      }
+    },
     "ScanProvisionedProductsInput": {
       "base": null,
       "refs": {
@@ -2313,7 +2810,7 @@
     "ServiceActionDefinitionMap": {
       "base": null,
       "refs": {
-        "CreateServiceActionInput$Definition": "<p>The self-service action definition. Can be one of the following:</p> <dl> <dt>Name</dt> <dd> <p>The name of the AWS Systems Manager Document. For example, <code>AWS-RestartEC2Instance</code>.</p> </dd> <dt>Version</dt> <dd> <p>The AWS Systems Manager automation document version. For example, <code>\"Version\": \"1\"</code> </p> </dd> <dt>AssumeRole</dt> <dd> <p>The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, <code>\"AssumeRole\": \"arn:aws:iam::12345678910:role/ActionRole\"</code>.</p> <p>To reuse the provisioned product launch role, set to <code>\"AssumeRole\": \"LAUNCH_ROLE\"</code>.</p> </dd> <dt>Parameters</dt> <dd> <p>The list of parameters in JSON format.</p> <p>For example: <code>[{\\\"Name\\\":\\\"InstanceId\\\",\\\"Type\\\":\\\"TARGET\\\"}]</code>.</p> </dd> </dl>",
+        "CreateServiceActionInput$Definition": "<p>The self-service action definition. Can be one of the following:</p> <dl> <dt>Name</dt> <dd> <p>The name of the Amazon Web Services Systems Manager document (SSM document). For example, <code>AWS-RestartEC2Instance</code>.</p> <p>If you are using a shared SSM document, you must provide the ARN instead of the name.</p> </dd> <dt>Version</dt> <dd> <p>The Amazon Web Services Systems Manager automation document version. For example, <code>\"Version\": \"1\"</code> </p> </dd> <dt>AssumeRole</dt> <dd> <p>The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, <code>\"AssumeRole\": \"arn:aws:iam::12345678910:role/ActionRole\"</code>.</p> <p>To reuse the provisioned product launch role, set to <code>\"AssumeRole\": \"LAUNCH_ROLE\"</code>.</p> </dd> <dt>Parameters</dt> <dd> <p>The list of parameters in JSON format.</p> <p>For example: <code>[{\\\"Name\\\":\\\"InstanceId\\\",\\\"Type\\\":\\\"TARGET\\\"}]</code> or <code>[{\\\"Name\\\":\\\"InstanceId\\\",\\\"Type\\\":\\\"TEXT_VALUE\\\"}]</code>.</p> </dd> </dl>",
         "ServiceActionDetail$Definition": "<p>A map that defines the self-service action.</p>",
         "UpdateServiceActionInput$Definition": "<p>A map that defines the self-service action.</p>"
       }
@@ -2390,7 +2887,8 @@
     "ShareStatus": {
       "base": null,
       "refs": {
-        "DescribePortfolioShareStatusOutput$Status": "<p>Status of the portfolio share operation.</p>"
+        "DescribePortfolioShareStatusOutput$Status": "<p>Status of the portfolio share operation.</p>",
+        "UpdatePortfolioShareOutput$Status": "<p>The status of <code>UpdatePortfolioShare</code> operation. You can also obtain the operation status using <code>DescribePortfolioShareStatus</code> API. </p>"
       }
     },
     "SortField": {
@@ -2407,6 +2905,26 @@
         "SearchProvisionedProductsInput$SortOrder": "<p>The sort order. If no value is specified, the results are not sorted.</p>"
       }
     },
+    "SourceConnection": {
+      "base": "<p>A top level <code>ProductViewDetail</code> response containing details about the product’s connection. Service Catalog returns this field for the <code>CreateProduct</code>, <code>UpdateProduct</code>, <code>DescribeProductAsAdmin</code>, and <code>SearchProductAsAdmin</code> APIs. This response contains the same fields as the <code>ConnectionParameters</code> request, with the addition of the <code>LastSync</code> response.</p>",
+      "refs": {
+        "CreateProductInput$SourceConnection": "<p>Specifies connection details for the created product and syncs the product to the connection source artifact. This automatically manages the product's artifacts based on changes to the source. The <code>SourceConnection</code> parameter consists of the following sub-fields.</p> <ul> <li> <p> <code>Type</code> </p> </li> <li> <p> <code>ConnectionParamters</code> </p> </li> </ul>",
+        "UpdateProductInput$SourceConnection": "<p>Specifies connection details for the updated product and syncs the product to the connection source artifact. This automatically manages the product's artifacts based on changes to the source. The <code>SourceConnection</code> parameter consists of the following sub-fields.</p> <ul> <li> <p> <code>Type</code> </p> </li> <li> <p> <code>ConnectionParamters</code> </p> </li> </ul>"
+      }
+    },
+    "SourceConnectionDetail": {
+      "base": "<p>Provides details about the configured <code>SourceConnection</code>. </p>",
+      "refs": {
+        "ProductViewDetail$SourceConnection": "<p>A top level <code>ProductViewDetail</code> response containing details about the product’s connection. Service Catalog returns this field for the <code>CreateProduct</code>, <code>UpdateProduct</code>, <code>DescribeProductAsAdmin</code>, and <code>SearchProductAsAdmin</code> APIs. This response contains the same fields as the <code>ConnectionParameters</code> request, with the addition of the <code>LastSync</code> response.</p>"
+      }
+    },
+    "SourceConnectionParameters": {
+      "base": "<p>Provides connection details.</p>",
+      "refs": {
+        "SourceConnection$ConnectionParameters": "<p>The connection details based on the connection <code>Type</code>. </p>",
+        "SourceConnectionDetail$ConnectionParameters": "<p>The connection details based on the connection <code>Type</code>.</p>"
+      }
+    },
     "SourceProvisioningArtifactProperties": {
       "base": null,
       "refs": {
@@ -2419,26 +2937,57 @@
         "SourceProvisioningArtifactProperties$member": null
       }
     },
+    "SourceRevision": {
+      "base": null,
+      "refs": {
+        "ProvisioningArtifactDetail$SourceRevision": "<p>Specifies the revision of the external artifact that was used to automatically sync the Service Catalog product and create the provisioning artifact. Service Catalog includes this response parameter as a high level field to the existing <code>ProvisioningArtifactDetail</code> type, which is returned as part of the response for <code>CreateProduct</code>, <code>UpdateProduct</code>, <code>DescribeProductAsAdmin</code>, <code>DescribeProvisioningArtifact</code>, <code>ListProvisioningArtifact</code>, and <code>UpdateProvisioningArticat</code> APIs. </p> <p>This field only exists for Repo-Synced products. </p>"
+      }
+    },
+    "SourceType": {
+      "base": null,
+      "refs": {
+        "SourceConnection$Type": "<p>The only supported <code>SourceConnection</code> type is Codestar. </p>",
+        "SourceConnectionDetail$Type": "<p>The only supported <code>SourceConnection</code> type is Codestar.</p>"
+      }
+    },
+    "StackInstance": {
+      "base": "<p>An CloudFormation stack, in a specific account and Region, that's part of a stack set operation. A stack instance is a reference to an attempted or actual stack in a given account within a given Region. A stack instance can exist without a stack—for example, if the stack couldn't be created for some reason. A stack instance is associated with only one stack set. Each stack instance contains the ID of its associated stack set, as well as the ID of the actual stack and the stack status. </p>",
+      "refs": {
+        "StackInstances$member": null
+      }
+    },
+    "StackInstanceStatus": {
+      "base": null,
+      "refs": {
+        "StackInstance$StackInstanceStatus": "<p>The status of the stack instance, in terms of its synchronization with its associated stack set. </p> <ul> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to true, to delete the stack instance, and then delete the stack manually. </p> </li> <li> <p> <code>OUTDATED</code>: The stack isn't currently up to date with the stack set because either the associated stack failed during a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation, or the stack was part of a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation that failed or was stopped before the stack was created or updated.</p> </li> <li> <p> <code>CURRENT</code>: The stack is currently up to date with the stack set.</p> </li> </ul>"
+      }
+    },
+    "StackInstances": {
+      "base": null,
+      "refs": {
+        "ListStackInstancesForProvisionedProductOutput$StackInstances": "<p>List of stack instances.</p>"
+      }
+    },
     "StackSetAccounts": {
       "base": null,
       "refs": {
-        "ProvisioningArtifactPreferences$StackSetAccounts": "<p>One or more AWS accounts where stack instances are deployed from the stack set. These accounts can be scoped in <code>ProvisioningPreferences$StackSetAccounts</code> and <code>UpdateProvisioningPreferences$StackSetAccounts</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>",
-        "ProvisioningPreferences$StackSetAccounts": "<p>One or more AWS accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The AWS accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>",
-        "UpdateProvisioningPreferences$StackSetAccounts": "<p>One or more AWS accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The AWS accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>"
+        "ProvisioningArtifactPreferences$StackSetAccounts": "<p>One or more Amazon Web Services accounts where stack instances are deployed from the stack set. These accounts can be scoped in <code>ProvisioningPreferences$StackSetAccounts</code> and <code>UpdateProvisioningPreferences$StackSetAccounts</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>",
+        "ProvisioningPreferences$StackSetAccounts": "<p>One or more Amazon Web Services accounts where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified accounts should be within the list of accounts from the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all acounts from the <code>STACKSET</code> constraint.</p>",
+        "UpdateProvisioningPreferences$StackSetAccounts": "<p>One or more Amazon Web Services accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The Amazon Web Services accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>"
       }
     },
     "StackSetFailureToleranceCount": {
       "base": null,
       "refs": {
-        "ProvisioningPreferences$StackSetFailureToleranceCount": "<p>The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p> <p>The default value is <code>0</code> if no value is specified.</p>",
-        "UpdateProvisioningPreferences$StackSetFailureToleranceCount": "<p>The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p> <p>The default value is <code>0</code> if no value is specified.</p>"
+        "ProvisioningPreferences$StackSetFailureToleranceCount": "<p>The number of accounts, per Region, for which this operation can fail before Service Catalog stops the operation in that Region. If the operation is stopped in a Region, Service Catalog doesn't attempt the operation in any subsequent Regions.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p> <p>The default value is <code>0</code> if no value is specified.</p>",
+        "UpdateProvisioningPreferences$StackSetFailureToleranceCount": "<p>The number of accounts, per Region, for which this operation can fail before Service Catalog stops the operation in that Region. If the operation is stopped in a Region, Service Catalog doesn't attempt the operation in any subsequent Regions.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p> <p>The default value is <code>0</code> if no value is specified.</p>"
       }
     },
     "StackSetFailureTolerancePercentage": {
       "base": null,
       "refs": {
-        "ProvisioningPreferences$StackSetFailureTolerancePercentage": "<p>The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p>",
-        "UpdateProvisioningPreferences$StackSetFailureTolerancePercentage": "<p>The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p>"
+        "ProvisioningPreferences$StackSetFailureTolerancePercentage": "<p>The percentage of accounts, per Region, for which this stack operation can fail before Service Catalog stops the operation in that Region. If the operation is stopped in a Region, Service Catalog doesn't attempt the operation in any subsequent Regions.</p> <p>When calculating the number of accounts based on the specified percentage, Service Catalog rounds down to the next whole number.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p>",
+        "UpdateProvisioningPreferences$StackSetFailureTolerancePercentage": "<p>The percentage of accounts, per Region, for which this stack operation can fail before Service Catalog stops the operation in that Region. If the operation is stopped in a Region, Service Catalog doesn't attempt the operation in any subsequent Regions.</p> <p>When calculating the number of accounts based on the specified percentage, Service Catalog rounds down to the next whole number.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p>"
       }
     },
     "StackSetMaxConcurrencyCount": {
@@ -2451,22 +3000,22 @@
     "StackSetMaxConcurrencyPercentage": {
       "base": null,
       "refs": {
-        "ProvisioningPreferences$StackSetMaxConcurrencyPercentage": "<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as <code>1</code> instead.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>",
-        "UpdateProvisioningPreferences$StackSetMaxConcurrencyPercentage": "<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as <code>1</code> instead.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>"
+        "ProvisioningPreferences$StackSetMaxConcurrencyPercentage": "<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, Service Catalog sets the number as <code>1</code> instead.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>",
+        "UpdateProvisioningPreferences$StackSetMaxConcurrencyPercentage": "<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, Service Catalog sets the number as <code>1</code> instead.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>"
       }
     },
     "StackSetOperationType": {
       "base": null,
       "refs": {
-        "UpdateProvisioningPreferences$StackSetOperationType": "<p>Determines what action AWS Service Catalog performs to a stack set or a stack instance represented by the provisioned product. The default value is <code>UPDATE</code> if nothing is specified.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <dl> <dt>CREATE</dt> <dd> <p>Creates a new stack instance in the stack set represented by the provisioned product. In this case, only new stack instances are created based on accounts and regions; if new ProductId or ProvisioningArtifactID are passed, they will be ignored.</p> </dd> <dt>UPDATE</dt> <dd> <p>Updates the stack set represented by the provisioned product and also its stack instances.</p> </dd> <dt>DELETE</dt> <dd> <p>Deletes a stack instance in the stack set represented by the provisioned product.</p> </dd> </dl>"
+        "UpdateProvisioningPreferences$StackSetOperationType": "<p>Determines what action Service Catalog performs to a stack set or a stack instance represented by the provisioned product. The default value is <code>UPDATE</code> if nothing is specified.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <dl> <dt>CREATE</dt> <dd> <p>Creates a new stack instance in the stack set represented by the provisioned product. In this case, only new stack instances are created based on accounts and Regions; if new ProductId or ProvisioningArtifactID are passed, they will be ignored.</p> </dd> <dt>UPDATE</dt> <dd> <p>Updates the stack set represented by the provisioned product and also its stack instances.</p> </dd> <dt>DELETE</dt> <dd> <p>Deletes a stack instance in the stack set represented by the provisioned product.</p> </dd> </dl>"
       }
     },
     "StackSetRegions": {
       "base": null,
       "refs": {
-        "ProvisioningArtifactPreferences$StackSetRegions": "<p>One or more AWS Regions where stack instances are deployed from the stack set. These regions can be scoped in <code>ProvisioningPreferences$StackSetRegions</code> and <code>UpdateProvisioningPreferences$StackSetRegions</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>",
-        "ProvisioningPreferences$StackSetRegions": "<p>One or more AWS Regions where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified regions should be within the list of regions from the <code>STACKSET</code> constraint. To get the list of regions in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all regions from the <code>STACKSET</code> constraint.</p>",
-        "UpdateProvisioningPreferences$StackSetRegions": "<p>One or more AWS Regions where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified regions should be within the list of regions from the <code>STACKSET</code> constraint. To get the list of regions in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all regions from the <code>STACKSET</code> constraint.</p>"
+        "ProvisioningArtifactPreferences$StackSetRegions": "<p>One or more Amazon Web Services Regions where stack instances are deployed from the stack set. These Regions can be scoped in <code>ProvisioningPreferences$StackSetRegions</code> and <code>UpdateProvisioningPreferences$StackSetRegions</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>",
+        "ProvisioningPreferences$StackSetRegions": "<p>One or more Amazon Web Services Regions where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified Regions should be within the list of Regions from the <code>STACKSET</code> constraint. To get the list of Regions in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all Regions from the <code>STACKSET</code> constraint.</p>",
+        "UpdateProvisioningPreferences$StackSetRegions": "<p>One or more Amazon Web Services Regions where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified Regions should be within the list of Regions from the <code>STACKSET</code> constraint. To get the list of Regions in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all Regions from the <code>STACKSET</code> constraint.</p>"
       }
     },
     "Status": {
@@ -2491,6 +3040,18 @@
       "base": null,
       "refs": {
         "ProvisionedProductPlanDetails$StatusMessage": "<p>The status message.</p>"
+      }
+    },
+    "String": {
+      "base": null,
+      "refs": {
+        "AllowedValues$member": null,
+        "ParameterConstraints$AllowedPattern": "<p>A regular expression that represents the patterns that allow for <code>String</code> types. The pattern must match the entire parameter value provided.</p>",
+        "ParameterConstraints$ConstraintDescription": "<p>A string that explains a constraint when the constraint is violated. For example, without a constraint description, a parameter that has an allowed pattern of <code>[A-Za-z0-9]+</code> displays the following error message when the user specifies an invalid value:</p> <p> <code>Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+</code> </p> <p>By adding a constraint description, such as must only contain letters (uppercase and lowercase) and numbers, you can display the following customized error message:</p> <p> <code>Malformed input-Parameter MyParameter must only contain uppercase and lowercase letters and numbers.</code> </p>",
+        "ParameterConstraints$MaxLength": "<p>An integer value that determines the largest number of characters you want to allow for <code>String</code> types. </p>",
+        "ParameterConstraints$MinLength": "<p>An integer value that determines the smallest number of characters you want to allow for <code>String</code> types.</p>",
+        "ParameterConstraints$MaxValue": "<p>A numeric value that determines the largest numeric value you want to allow for <code>Number</code> types.</p>",
+        "ParameterConstraints$MinValue": "<p>A numeric value that determines the smallest numeric value you want to allow for <code>Number</code> types. </p>"
       }
     },
     "SuccessfulShares": {
@@ -2518,7 +3079,7 @@
     "SupportUrl": {
       "base": null,
       "refs": {
-        "CreateProductInput$SupportUrl": "<p>The contact URL for product support.</p>",
+        "CreateProductInput$SupportUrl": "<p>The contact URL for product support.</p> <p> <code>^https?:\\/\\// </code>/ is the pattern used to validate SupportUrl.</p>",
         "ProductViewSummary$SupportUrl": "<p>The URL information to obtain support for this Product.</p>",
         "UpdateProductInput$SupportUrl": "<p>The updated support URL for the product.</p>"
       }
@@ -2591,7 +3152,7 @@
       }
     },
     "TagOptionNotMigratedException": {
-      "base": "<p>An operation requiring TagOptions failed because the TagOptions migration process has not been performed for this account. Please use the AWS console to perform the migration process before retrying the operation.</p>",
+      "base": "<p>An operation requiring TagOptions failed because the TagOptions migration process has not been performed for this account. Use the Amazon Web Services Management Console to perform the migration process before retrying the operation.</p>",
       "refs": {
       }
     },
@@ -2634,7 +3195,7 @@
       "refs": {
         "CreatePortfolioOutput$Tags": "<p>Information about the tags associated with the portfolio.</p>",
         "CreateProductOutput$Tags": "<p>Information about the tags associated with the product.</p>",
-        "CreateProvisionedProductPlanInput$Tags": "<p>One or more tags.</p>",
+        "CreateProvisionedProductPlanInput$Tags": "<p>One or more tags.</p> <p>If the plan is for an existing provisioned product, the product must have a <code>RESOURCE_UPDATE</code> constraint with <code>TagUpdatesOnProvisionedProduct</code> set to <code>ALLOWED</code> to allow tag updates.</p>",
         "DescribePortfolioOutput$Tags": "<p>Information about the tags associated with the portfolio.</p>",
         "DescribeProductAsAdminOutput$Tags": "<p>Information about the tags associated with the product.</p>",
         "LaunchPathSummary$Tags": "<p>The tags associated with this product path.</p>",
@@ -2642,7 +3203,8 @@
         "ProvisionedProductAttribute$Tags": "<p>One or more tags.</p>",
         "ProvisionedProductPlanDetails$Tags": "<p>One or more tags.</p>",
         "UpdatePortfolioOutput$Tags": "<p>Information about the tags associated with the portfolio.</p>",
-        "UpdateProductOutput$Tags": "<p>Information about the tags associated with the product.</p>"
+        "UpdateProductOutput$Tags": "<p>Information about the tags associated with the product.</p>",
+        "UpdateProvisionedProductInput$Tags": "<p>One or more tags. Requires the product to have <code>RESOURCE_UPDATE</code> constraint with <code>TagUpdatesOnProvisionedProduct</code> set to <code>ALLOWED</code> to allow tag updates.</p>"
       }
     },
     "TerminateProvisionedProductInput": {
@@ -2659,6 +3221,24 @@
       "base": null,
       "refs": {
         "SearchProvisionedProductsOutput$TotalResultsCount": "<p>The number of provisioned products found.</p>"
+      }
+    },
+    "UniqueTagKey": {
+      "base": null,
+      "refs": {
+        "UniqueTagResourceIdentifier$Key": "<p> A unique key that's attached to a resource. </p>"
+      }
+    },
+    "UniqueTagResourceIdentifier": {
+      "base": "<p> The unique key-value pair for a tag that identifies provisioned product resources. </p>",
+      "refs": {
+        "EngineWorkflowResourceIdentifier$UniqueTag": "<p> The unique key-value pair for a tag that identifies provisioned product resources. </p>"
+      }
+    },
+    "UniqueTagValue": {
+      "base": null,
+      "refs": {
+        "UniqueTagResourceIdentifier$Value": "<p> A unique value that's attached to a resource. </p>"
       }
     },
     "UpdateConstraintInput": {
@@ -2681,6 +3261,16 @@
       "refs": {
       }
     },
+    "UpdatePortfolioShareInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdatePortfolioShareOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
     "UpdateProductInput": {
       "base": null,
       "refs": {
@@ -2697,6 +3287,16 @@
       }
     },
     "UpdateProvisionedProductOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateProvisionedProductPropertiesInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateProvisionedProductPropertiesOutput": {
       "base": null,
       "refs": {
       }
@@ -2754,7 +3354,7 @@
     "UpdatedTime": {
       "base": null,
       "refs": {
-        "ProvisionedProductPlanDetails$UpdatedTime": "<p>The time when the plan was last updated.</p>",
+        "ProvisionedProductPlanDetails$UpdatedTime": "<p>The UTC time stamp when the plan was last updated.</p>",
         "RecordDetail$UpdatedTime": "<p>The time when the record was last updated.</p>"
       }
     },
@@ -2779,13 +3379,13 @@
     "UserArn": {
       "base": null,
       "refs": {
-        "ProvisionedProductAttribute$UserArn": "<p>The Amazon Resource Name (ARN) of the IAM user.</p>"
+        "ProvisionedProductAttribute$UserArn": "<p>The Amazon Resource Name (ARN) of the user.</p>"
       }
     },
     "UserArnSession": {
       "base": null,
       "refs": {
-        "ProvisionedProductAttribute$UserArnSession": "<p>The ARN of the IAM user in the session. This ARN might contain a session ID.</p>"
+        "ProvisionedProductAttribute$UserArnSession": "<p>The ARN of the user in the session. This ARN might contain a session ID.</p>"
       }
     },
     "Verbose": {

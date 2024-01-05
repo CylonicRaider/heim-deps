@@ -15,12 +15,12 @@
 package report
 
 import (
-	"bytes"
 	"encoding/csv"
 	"fmt"
 	"log"
 	"math"
 	"sort"
+	"strings"
 	"sync"
 	"time"
 )
@@ -119,12 +119,12 @@ func (sp *secondPoints) getTimeSeries() TimeSeries {
 }
 
 func (t TimeSeries) String() string {
-	buf := new(bytes.Buffer)
+	buf := new(strings.Builder)
 	wr := csv.NewWriter(buf)
 	if err := wr.Write([]string{"UNIX-SECOND", "MIN-LATENCY-MS", "AVG-LATENCY-MS", "MAX-LATENCY-MS", "AVG-THROUGHPUT"}); err != nil {
 		log.Fatal(err)
 	}
-	rows := [][]string{}
+	var rows [][]string
 	for i := range t {
 		row := []string{
 			fmt.Sprintf("%d", t[i].Timestamp),

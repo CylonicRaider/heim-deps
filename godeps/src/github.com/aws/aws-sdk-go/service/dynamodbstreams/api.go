@@ -3,11 +3,13 @@
 package dynamodbstreams
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go/private/protocol"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
 
@@ -27,14 +29,13 @@ const opDescribeStream = "DescribeStream"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeStreamRequest method.
+//	req, resp := client.DescribeStreamRequest(params)
 //
-//    // Example sending a request using the DescribeStreamRequest method.
-//    req, resp := client.DescribeStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStream
 func (c *DynamoDBStreams) DescribeStreamRequest(input *DescribeStreamInput) (req *request.Request, output *DescribeStreamOutput) {
@@ -74,12 +75,14 @@ func (c *DynamoDBStreams) DescribeStreamRequest(input *DescribeStreamInput) (req
 // See the AWS API reference guide for Amazon DynamoDB Streams's
 // API operation DescribeStream for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent stream.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//   - ResourceNotFoundException
+//     The operation tried to access a nonexistent table or index. The resource
+//     might not be specified correctly, or its status might not be ACTIVE.
+//
+//   - InternalServerError
+//     An error occurred on the server side.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStream
 func (c *DynamoDBStreams) DescribeStream(input *DescribeStreamInput) (*DescribeStreamOutput, error) {
@@ -119,14 +122,13 @@ const opGetRecords = "GetRecords"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetRecordsRequest method.
+//	req, resp := client.GetRecordsRequest(params)
 //
-//    // Example sending a request using the GetRecordsRequest method.
-//    req, resp := client.GetRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecords
 func (c *DynamoDBStreams) GetRecordsRequest(input *GetRecordsInput) (req *request.Request, output *GetRecordsOutput) {
@@ -166,39 +168,56 @@ func (c *DynamoDBStreams) GetRecordsRequest(input *GetRecordsInput) (req *reques
 // See the AWS API reference guide for Amazon DynamoDB Streams's
 // API operation GetRecords for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent stream.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#APIRetries)
-//   in the Amazon DynamoDB Developer Guide.
+//   - ResourceNotFoundException
+//     The operation tried to access a nonexistent table or index. The resource
+//     might not be specified correctly, or its status might not be ACTIVE.
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//   - LimitExceededException
+//     There is no limit to the number of daily on-demand backups that can be taken.
 //
-//   * ErrCodeExpiredIteratorException "ExpiredIteratorException"
-//   The shard iterator has expired and can no longer be used to retrieve stream
-//   records. A shard iterator expires 15 minutes after it is retrieved using
-//   the GetShardIterator action.
+//     For most purposes, up to 500 simultaneous table operations are allowed per
+//     account. These operations include CreateTable, UpdateTable, DeleteTable,UpdateTimeToLive,
+//     RestoreTableFromBackup, and RestoreTableToPointInTime.
 //
-//   * ErrCodeTrimmedDataAccessException "TrimmedDataAccessException"
-//   The operation attempted to read past the oldest stream record in a shard.
+//     When you are creating a table with one or more secondary indexes, you can
+//     have up to 250 such requests running at a time. However, if the table or
+//     index specifications are complex, then DynamoDB might temporarily reduce
+//     the number of concurrent operations.
 //
-//   In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records
-//   whose age exceeds this limit are subject to removal (trimming) from the stream.
-//   You might receive a TrimmedDataAccessException if:
+//     When importing into DynamoDB, up to 50 simultaneous import table operations
+//     are allowed per account.
 //
-//      * You request a shard iterator with a sequence number older than the trim
-//      point (24 hours).
+//     There is a soft account quota of 2,500 tables.
 //
-//      * You obtain a shard iterator, but before you use the iterator in a GetRecords
-//      request, a stream record in the shard exceeds the 24 hour period and is
-//      trimmed. This causes the iterator to access a record that no longer exists.
+//     GetRecords was called with a value of more than 1000 for the limit request
+//     parameter.
+//
+//     More than 2 processes are reading from the same streams shard at the same
+//     time. Exceeding this limit may result in request throttling.
+//
+//   - InternalServerError
+//     An error occurred on the server side.
+//
+//   - ExpiredIteratorException
+//     The shard iterator has expired and can no longer be used to retrieve stream
+//     records. A shard iterator expires 15 minutes after it is retrieved using
+//     the GetShardIterator action.
+//
+//   - TrimmedDataAccessException
+//     The operation attempted to read past the oldest stream record in a shard.
+//
+//     In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records
+//     whose age exceeds this limit are subject to removal (trimming) from the stream.
+//     You might receive a TrimmedDataAccessException if:
+//
+//   - You request a shard iterator with a sequence number older than the trim
+//     point (24 hours).
+//
+//   - You obtain a shard iterator, but before you use the iterator in a GetRecords
+//     request, a stream record in the shard exceeds the 24 hour period and is
+//     trimmed. This causes the iterator to access a record that no longer exists.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecords
 func (c *DynamoDBStreams) GetRecords(input *GetRecordsInput) (*GetRecordsOutput, error) {
@@ -238,14 +257,13 @@ const opGetShardIterator = "GetShardIterator"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetShardIteratorRequest method.
+//	req, resp := client.GetShardIteratorRequest(params)
 //
-//    // Example sending a request using the GetShardIteratorRequest method.
-//    req, resp := client.GetShardIteratorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIterator
 func (c *DynamoDBStreams) GetShardIteratorRequest(input *GetShardIteratorInput) (req *request.Request, output *GetShardIteratorOutput) {
@@ -279,26 +297,28 @@ func (c *DynamoDBStreams) GetShardIteratorRequest(input *GetShardIteratorInput) 
 // See the AWS API reference guide for Amazon DynamoDB Streams's
 // API operation GetShardIterator for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent stream.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//   - ResourceNotFoundException
+//     The operation tried to access a nonexistent table or index. The resource
+//     might not be specified correctly, or its status might not be ACTIVE.
 //
-//   * ErrCodeTrimmedDataAccessException "TrimmedDataAccessException"
-//   The operation attempted to read past the oldest stream record in a shard.
+//   - InternalServerError
+//     An error occurred on the server side.
 //
-//   In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records
-//   whose age exceeds this limit are subject to removal (trimming) from the stream.
-//   You might receive a TrimmedDataAccessException if:
+//   - TrimmedDataAccessException
+//     The operation attempted to read past the oldest stream record in a shard.
 //
-//      * You request a shard iterator with a sequence number older than the trim
-//      point (24 hours).
+//     In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records
+//     whose age exceeds this limit are subject to removal (trimming) from the stream.
+//     You might receive a TrimmedDataAccessException if:
 //
-//      * You obtain a shard iterator, but before you use the iterator in a GetRecords
-//      request, a stream record in the shard exceeds the 24 hour period and is
-//      trimmed. This causes the iterator to access a record that no longer exists.
+//   - You request a shard iterator with a sequence number older than the trim
+//     point (24 hours).
+//
+//   - You obtain a shard iterator, but before you use the iterator in a GetRecords
+//     request, a stream record in the shard exceeds the 24 hour period and is
+//     trimmed. This causes the iterator to access a record that no longer exists.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIterator
 func (c *DynamoDBStreams) GetShardIterator(input *GetShardIteratorInput) (*GetShardIteratorOutput, error) {
@@ -338,14 +358,13 @@ const opListStreams = "ListStreams"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListStreamsRequest method.
+//	req, resp := client.ListStreamsRequest(params)
 //
-//    // Example sending a request using the ListStreamsRequest method.
-//    req, resp := client.ListStreamsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreams
 func (c *DynamoDBStreams) ListStreamsRequest(input *ListStreamsInput) (req *request.Request, output *ListStreamsOutput) {
@@ -379,12 +398,14 @@ func (c *DynamoDBStreams) ListStreamsRequest(input *ListStreamsInput) (req *requ
 // See the AWS API reference guide for Amazon DynamoDB Streams's
 // API operation ListStreams for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent stream.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//   - ResourceNotFoundException
+//     The operation tried to access a nonexistent table or index. The resource
+//     might not be specified correctly, or its status might not be ACTIVE.
+//
+//   - InternalServerError
+//     An error occurred on the server side.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreams
 func (c *DynamoDBStreams) ListStreams(input *ListStreamsInput) (*ListStreamsOutput, error) {
@@ -425,12 +446,20 @@ type DescribeStreamInput struct {
 	StreamArn *string `min:"37" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeStreamInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeStreamInput) GoString() string {
 	return s.String()
 }
@@ -486,12 +515,20 @@ type DescribeStreamOutput struct {
 	StreamDescription *StreamDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeStreamOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeStreamOutput) GoString() string {
 	return s.String()
 }
@@ -500,6 +537,73 @@ func (s DescribeStreamOutput) GoString() string {
 func (s *DescribeStreamOutput) SetStreamDescription(v *StreamDescription) *DescribeStreamOutput {
 	s.StreamDescription = v
 	return s
+}
+
+// The shard iterator has expired and can no longer be used to retrieve stream
+// records. A shard iterator expires 15 minutes after it is retrieved using
+// the GetShardIterator action.
+type ExpiredIteratorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The provided iterator exceeds the maximum age allowed.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExpiredIteratorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExpiredIteratorException) GoString() string {
+	return s.String()
+}
+
+func newErrorExpiredIteratorException(v protocol.ResponseMetadata) error {
+	return &ExpiredIteratorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ExpiredIteratorException) Code() string {
+	return "ExpiredIteratorException"
+}
+
+// Message returns the exception's message.
+func (s *ExpiredIteratorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ExpiredIteratorException) OrigErr() error {
+	return nil
+}
+
+func (s *ExpiredIteratorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ExpiredIteratorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ExpiredIteratorException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Represents the input of a GetRecords operation.
@@ -517,12 +621,20 @@ type GetRecordsInput struct {
 	ShardIterator *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRecordsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRecordsInput) GoString() string {
 	return s.String()
 }
@@ -571,12 +683,20 @@ type GetRecordsOutput struct {
 	Records []*Record `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRecordsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetRecordsOutput) GoString() string {
 	return s.String()
 }
@@ -632,12 +752,20 @@ type GetShardIteratorInput struct {
 	StreamArn *string `min:"37" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetShardIteratorInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetShardIteratorInput) GoString() string {
 	return s.String()
 }
@@ -704,12 +832,20 @@ type GetShardIteratorOutput struct {
 	ShardIterator *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetShardIteratorOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetShardIteratorOutput) GoString() string {
 	return s.String()
 }
@@ -732,12 +868,20 @@ type Identity struct {
 	Type *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Identity) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Identity) GoString() string {
 	return s.String()
 }
@@ -752,6 +896,156 @@ func (s *Identity) SetPrincipalId(v string) *Identity {
 func (s *Identity) SetType(v string) *Identity {
 	s.Type = &v
 	return s
+}
+
+// An error occurred on the server side.
+type InternalServerError struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The server encountered an internal error trying to fulfill the request.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServerError) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServerError(v protocol.ResponseMetadata) error {
+	return &InternalServerError{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServerError) Code() string {
+	return "InternalServerError"
+}
+
+// Message returns the exception's message.
+func (s *InternalServerError) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServerError) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServerError) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServerError) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServerError) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// There is no limit to the number of daily on-demand backups that can be taken.
+//
+// For most purposes, up to 500 simultaneous table operations are allowed per
+// account. These operations include CreateTable, UpdateTable, DeleteTable,UpdateTimeToLive,
+// RestoreTableFromBackup, and RestoreTableToPointInTime.
+//
+// When you are creating a table with one or more secondary indexes, you can
+// have up to 250 such requests running at a time. However, if the table or
+// index specifications are complex, then DynamoDB might temporarily reduce
+// the number of concurrent operations.
+//
+// When importing into DynamoDB, up to 50 simultaneous import table operations
+// are allowed per account.
+//
+// There is a soft account quota of 2,500 tables.
+//
+// GetRecords was called with a value of more than 1000 for the limit request
+// parameter.
+//
+// More than 2 processes are reading from the same streams shard at the same
+// time. Exceeding this limit may result in request throttling.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Too many operations for a given subscriber.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Represents the input of a ListStreams operation.
@@ -771,12 +1065,20 @@ type ListStreamsInput struct {
 	TableName *string `min:"3" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListStreamsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListStreamsInput) GoString() string {
 	return s.String()
 }
@@ -838,12 +1140,20 @@ type ListStreamsOutput struct {
 	Streams []*Stream `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListStreamsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListStreamsOutput) GoString() string {
 	return s.String()
 }
@@ -884,8 +1194,8 @@ type Record struct {
 	//    * REMOVE - the item was deleted from the table
 	EventName *string `locationName:"eventName" type:"string" enum:"OperationType"`
 
-	// The AWS service from which the stream record originated. For DynamoDB Streams,
-	// this is aws:dynamodb.
+	// The Amazon Web Services service from which the stream record originated.
+	// For DynamoDB Streams, this is aws:dynamodb.
 	EventSource *string `locationName:"eventSource" type:"string"`
 
 	// The version number of the stream record format. This number is updated whenever
@@ -899,22 +1209,26 @@ type Record struct {
 	// Items that are deleted by the Time to Live process after expiration have
 	// the following fields:
 	//
-	//    * Records[].userIdentity.type
+	//    * Records[].userIdentity.type "Service"
 	//
-	// "Service"
-	//
-	//    * Records[].userIdentity.principalId
-	//
-	// "dynamodb.amazonaws.com"
+	//    * Records[].userIdentity.principalId "dynamodb.amazonaws.com"
 	UserIdentity *Identity `locationName:"userIdentity" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Record) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Record) GoString() string {
 	return s.String()
 }
@@ -961,24 +1275,100 @@ func (s *Record) SetUserIdentity(v *Identity) *Record {
 	return s
 }
 
+// The operation tried to access a nonexistent table or index. The resource
+// might not be specified correctly, or its status might not be ACTIVE.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The resource which is being requested does not exist.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The beginning and ending sequence numbers for the stream records contained
 // within a shard.
 type SequenceNumberRange struct {
 	_ struct{} `type:"structure"`
 
-	// The last sequence number.
+	// The last sequence number for the stream records contained within a shard.
+	// String contains numeric characters only.
 	EndingSequenceNumber *string `min:"21" type:"string"`
 
-	// The first sequence number.
+	// The first sequence number for the stream records contained within a shard.
+	// String contains numeric characters only.
 	StartingSequenceNumber *string `min:"21" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SequenceNumberRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SequenceNumberRange) GoString() string {
 	return s.String()
 }
@@ -1009,12 +1399,20 @@ type Shard struct {
 	ShardId *string `min:"28" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Shard) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Shard) GoString() string {
 	return s.String()
 }
@@ -1051,7 +1449,7 @@ type Stream struct {
 	// However, the combination of the following three elements is guaranteed to
 	// be unique:
 	//
-	//    * the AWS customer ID.
+	//    * the Amazon Web Services customer ID.
 	//
 	//    * the table name
 	//
@@ -1062,12 +1460,20 @@ type Stream struct {
 	TableName *string `min:"3" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Stream) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Stream) GoString() string {
 	return s.String()
 }
@@ -1125,7 +1531,7 @@ type StreamDescription struct {
 	// However, the combination of the following three elements is guaranteed to
 	// be unique:
 	//
-	//    * the AWS customer ID.
+	//    * the Amazon Web Services customer ID.
 	//
 	//    * the table name
 	//
@@ -1162,12 +1568,20 @@ type StreamDescription struct {
 	TableName *string `min:"3" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StreamDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StreamDescription) GoString() string {
 	return s.String()
 }
@@ -1232,7 +1646,8 @@ type StreamRecord struct {
 	_ struct{} `type:"structure"`
 
 	// The approximate date and time when the stream record was created, in UNIX
-	// epoch time (http://www.epochconverter.com/) format.
+	// epoch time (http://www.epochconverter.com/) format and rounded down to the
+	// closest second.
 	ApproximateCreationDateTime *time.Time `type:"timestamp"`
 
 	// The primary key attribute(s) for the DynamoDB item that was modified.
@@ -1263,12 +1678,20 @@ type StreamRecord struct {
 	StreamViewType *string `type:"string" enum:"StreamViewType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StreamRecord) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StreamRecord) GoString() string {
 	return s.String()
 }
@@ -1315,6 +1738,82 @@ func (s *StreamRecord) SetStreamViewType(v string) *StreamRecord {
 	return s
 }
 
+// The operation attempted to read past the oldest stream record in a shard.
+//
+// In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records
+// whose age exceeds this limit are subject to removal (trimming) from the stream.
+// You might receive a TrimmedDataAccessException if:
+//
+//   - You request a shard iterator with a sequence number older than the trim
+//     point (24 hours).
+//
+//   - You obtain a shard iterator, but before you use the iterator in a GetRecords
+//     request, a stream record in the shard exceeds the 24 hour period and is
+//     trimmed. This causes the iterator to access a record that no longer exists.
+type TrimmedDataAccessException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// "The data you are trying to access has been trimmed.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TrimmedDataAccessException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TrimmedDataAccessException) GoString() string {
+	return s.String()
+}
+
+func newErrorTrimmedDataAccessException(v protocol.ResponseMetadata) error {
+	return &TrimmedDataAccessException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TrimmedDataAccessException) Code() string {
+	return "TrimmedDataAccessException"
+}
+
+// Message returns the exception's message.
+func (s *TrimmedDataAccessException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TrimmedDataAccessException) OrigErr() error {
+	return nil
+}
+
+func (s *TrimmedDataAccessException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TrimmedDataAccessException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TrimmedDataAccessException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 const (
 	// KeyTypeHash is a KeyType enum value
 	KeyTypeHash = "HASH"
@@ -1322,6 +1821,14 @@ const (
 	// KeyTypeRange is a KeyType enum value
 	KeyTypeRange = "RANGE"
 )
+
+// KeyType_Values returns all elements of the KeyType enum
+func KeyType_Values() []string {
+	return []string{
+		KeyTypeHash,
+		KeyTypeRange,
+	}
+}
 
 const (
 	// OperationTypeInsert is a OperationType enum value
@@ -1333,6 +1840,15 @@ const (
 	// OperationTypeRemove is a OperationType enum value
 	OperationTypeRemove = "REMOVE"
 )
+
+// OperationType_Values returns all elements of the OperationType enum
+func OperationType_Values() []string {
+	return []string{
+		OperationTypeInsert,
+		OperationTypeModify,
+		OperationTypeRemove,
+	}
+}
 
 const (
 	// ShardIteratorTypeTrimHorizon is a ShardIteratorType enum value
@@ -1348,6 +1864,16 @@ const (
 	ShardIteratorTypeAfterSequenceNumber = "AFTER_SEQUENCE_NUMBER"
 )
 
+// ShardIteratorType_Values returns all elements of the ShardIteratorType enum
+func ShardIteratorType_Values() []string {
+	return []string{
+		ShardIteratorTypeTrimHorizon,
+		ShardIteratorTypeLatest,
+		ShardIteratorTypeAtSequenceNumber,
+		ShardIteratorTypeAfterSequenceNumber,
+	}
+}
+
 const (
 	// StreamStatusEnabling is a StreamStatus enum value
 	StreamStatusEnabling = "ENABLING"
@@ -1362,6 +1888,16 @@ const (
 	StreamStatusDisabled = "DISABLED"
 )
 
+// StreamStatus_Values returns all elements of the StreamStatus enum
+func StreamStatus_Values() []string {
+	return []string{
+		StreamStatusEnabling,
+		StreamStatusEnabled,
+		StreamStatusDisabling,
+		StreamStatusDisabled,
+	}
+}
+
 const (
 	// StreamViewTypeNewImage is a StreamViewType enum value
 	StreamViewTypeNewImage = "NEW_IMAGE"
@@ -1375,3 +1911,13 @@ const (
 	// StreamViewTypeKeysOnly is a StreamViewType enum value
 	StreamViewTypeKeysOnly = "KEYS_ONLY"
 )
+
+// StreamViewType_Values returns all elements of the StreamViewType enum
+func StreamViewType_Values() []string {
+	return []string{
+		StreamViewTypeNewImage,
+		StreamViewTypeOldImage,
+		StreamViewTypeNewAndOldImages,
+		StreamViewTypeKeysOnly,
+	}
+}

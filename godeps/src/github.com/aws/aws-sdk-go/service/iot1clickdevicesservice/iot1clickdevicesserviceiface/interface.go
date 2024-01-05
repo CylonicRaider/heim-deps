@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS IoT 1-Click Devices Service.
-//    func myFunc(svc iot1clickdevicesserviceiface.IoT1ClickDevicesServiceAPI) bool {
-//        // Make svc.ClaimDevicesByClaimCode request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS IoT 1-Click Devices Service.
+//	func myFunc(svc iot1clickdevicesserviceiface.IoT1ClickDevicesServiceAPI) bool {
+//	    // Make svc.ClaimDevicesByClaimCode request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := iot1clickdevicesservice.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := iot1clickdevicesservice.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockIoT1ClickDevicesServiceClient struct {
-//        iot1clickdevicesserviceiface.IoT1ClickDevicesServiceAPI
-//    }
-//    func (m *mockIoT1ClickDevicesServiceClient) ClaimDevicesByClaimCode(input *iot1clickdevicesservice.ClaimDevicesByClaimCodeInput) (*iot1clickdevicesservice.ClaimDevicesByClaimCodeOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockIoT1ClickDevicesServiceClient struct {
+//	    iot1clickdevicesserviceiface.IoT1ClickDevicesServiceAPI
+//	}
+//	func (m *mockIoT1ClickDevicesServiceClient) ClaimDevicesByClaimCode(input *iot1clickdevicesservice.ClaimDevicesByClaimCodeInput) (*iot1clickdevicesservice.ClaimDevicesByClaimCodeOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockIoT1ClickDevicesServiceClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockIoT1ClickDevicesServiceClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -92,9 +92,21 @@ type IoT1ClickDevicesServiceAPI interface {
 	ListDevicesWithContext(aws.Context, *iot1clickdevicesservice.ListDevicesInput, ...request.Option) (*iot1clickdevicesservice.ListDevicesOutput, error)
 	ListDevicesRequest(*iot1clickdevicesservice.ListDevicesInput) (*request.Request, *iot1clickdevicesservice.ListDevicesOutput)
 
+	ListTagsForResource(*iot1clickdevicesservice.ListTagsForResourceInput) (*iot1clickdevicesservice.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *iot1clickdevicesservice.ListTagsForResourceInput, ...request.Option) (*iot1clickdevicesservice.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*iot1clickdevicesservice.ListTagsForResourceInput) (*request.Request, *iot1clickdevicesservice.ListTagsForResourceOutput)
+
+	TagResource(*iot1clickdevicesservice.TagResourceInput) (*iot1clickdevicesservice.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *iot1clickdevicesservice.TagResourceInput, ...request.Option) (*iot1clickdevicesservice.TagResourceOutput, error)
+	TagResourceRequest(*iot1clickdevicesservice.TagResourceInput) (*request.Request, *iot1clickdevicesservice.TagResourceOutput)
+
 	UnclaimDevice(*iot1clickdevicesservice.UnclaimDeviceInput) (*iot1clickdevicesservice.UnclaimDeviceOutput, error)
 	UnclaimDeviceWithContext(aws.Context, *iot1clickdevicesservice.UnclaimDeviceInput, ...request.Option) (*iot1clickdevicesservice.UnclaimDeviceOutput, error)
 	UnclaimDeviceRequest(*iot1clickdevicesservice.UnclaimDeviceInput) (*request.Request, *iot1clickdevicesservice.UnclaimDeviceOutput)
+
+	UntagResource(*iot1clickdevicesservice.UntagResourceInput) (*iot1clickdevicesservice.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *iot1clickdevicesservice.UntagResourceInput, ...request.Option) (*iot1clickdevicesservice.UntagResourceOutput, error)
+	UntagResourceRequest(*iot1clickdevicesservice.UntagResourceInput) (*request.Request, *iot1clickdevicesservice.UntagResourceOutput)
 
 	UpdateDeviceState(*iot1clickdevicesservice.UpdateDeviceStateInput) (*iot1clickdevicesservice.UpdateDeviceStateOutput, error)
 	UpdateDeviceStateWithContext(aws.Context, *iot1clickdevicesservice.UpdateDeviceStateInput, ...request.Option) (*iot1clickdevicesservice.UpdateDeviceStateOutput, error)

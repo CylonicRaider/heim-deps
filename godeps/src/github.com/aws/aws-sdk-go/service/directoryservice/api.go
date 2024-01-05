@@ -29,14 +29,13 @@ const opAcceptSharedDirectory = "AcceptSharedDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AcceptSharedDirectoryRequest method.
+//	req, resp := client.AcceptSharedDirectoryRequest(params)
 //
-//    // Example sending a request using the AcceptSharedDirectoryRequest method.
-//    req, resp := client.AcceptSharedDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AcceptSharedDirectory
 func (c *DirectoryService) AcceptSharedDirectoryRequest(input *AcceptSharedDirectoryInput) (req *request.Request, output *AcceptSharedDirectoryOutput) {
@@ -67,21 +66,23 @@ func (c *DirectoryService) AcceptSharedDirectoryRequest(input *AcceptSharedDirec
 // See the AWS API reference guide for AWS Directory Service's
 // API operation AcceptSharedDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeDirectoryAlreadySharedException "DirectoryAlreadySharedException"
-//   The specified directory has already been shared with this AWS account.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - DirectoryAlreadySharedException
+//     The specified directory has already been shared with this Amazon Web Services
+//     account.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AcceptSharedDirectory
 func (c *DirectoryService) AcceptSharedDirectory(input *AcceptSharedDirectoryInput) (*AcceptSharedDirectoryOutput, error) {
@@ -121,14 +122,13 @@ const opAddIpRoutes = "AddIpRoutes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddIpRoutesRequest method.
+//	req, resp := client.AddIpRoutesRequest(params)
 //
-//    // Example sending a request using the AddIpRoutesRequest method.
-//    req, resp := client.AddIpRoutesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutes
 func (c *DirectoryService) AddIpRoutesRequest(input *AddIpRoutesInput) (req *request.Request, output *AddIpRoutesOutput) {
@@ -150,16 +150,17 @@ func (c *DirectoryService) AddIpRoutesRequest(input *AddIpRoutesInput) (req *req
 
 // AddIpRoutes API operation for AWS Directory Service.
 //
-// If the DNS server for your on-premises domain uses a publicly addressable
+// If the DNS server for your self-managed domain uses a publicly addressable
 // IP address, you must add a CIDR address block to correctly route traffic
 // to and from your Microsoft AD on Amazon Web Services. AddIpRoutes adds this
 // address block. You can also use AddIpRoutes to facilitate routing traffic
-// that uses public IP ranges from your Microsoft AD on AWS to a peer VPC.
+// that uses public IP ranges from your Microsoft AD on Amazon Web Services
+// to a peer VPC.
 //
 // Before you call AddIpRoutes, ensure that all of the required permissions
 // have been explicitly granted through a policy. For details about what permissions
-// are required to run the AddIpRoutes operation, see AWS Directory Service
-// API Permissions: Actions, Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
+// are required to run the AddIpRoutes operation, see Directory Service API
+// Permissions: Actions, Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -168,28 +169,29 @@ func (c *DirectoryService) AddIpRoutesRequest(input *AddIpRoutesInput) (req *req
 // See the AWS API reference guide for AWS Directory Service's
 // API operation AddIpRoutes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The specified entity already exists.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityAlreadyExistsException
+//     The specified entity already exists.
 //
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeIpRouteLimitExceededException "IpRouteLimitExceededException"
-//   The maximum allowed number of IP addresses was exceeded. The default limit
-//   is 100 IP address blocks.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - IpRouteLimitExceededException
+//     The maximum allowed number of IP addresses was exceeded. The default limit
+//     is 100 IP address blocks.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutes
 func (c *DirectoryService) AddIpRoutes(input *AddIpRoutesInput) (*AddIpRoutesOutput, error) {
@@ -213,6 +215,115 @@ func (c *DirectoryService) AddIpRoutesWithContext(ctx aws.Context, input *AddIpR
 	return out, req.Send()
 }
 
+const opAddRegion = "AddRegion"
+
+// AddRegionRequest generates a "aws/request.Request" representing the
+// client's request for the AddRegion operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AddRegion for more information on using the AddRegion
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AddRegionRequest method.
+//	req, resp := client.AddRegionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddRegion
+func (c *DirectoryService) AddRegionRequest(input *AddRegionInput) (req *request.Request, output *AddRegionOutput) {
+	op := &request.Operation{
+		Name:       opAddRegion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AddRegionInput{}
+	}
+
+	output = &AddRegionOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// AddRegion API operation for AWS Directory Service.
+//
+// Adds two domain controllers in the specified Region for the specified directory.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation AddRegion for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
+//
+//   - DirectoryAlreadyInRegionException
+//     The Region you specified is the same Region where the Managed Microsoft AD
+//     directory was created. Specify a different Region and try again.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - RegionLimitExceededException
+//     You have reached the limit for maximum number of simultaneous Region replications
+//     per directory.
+//
+//   - AccessDeniedException
+//     Client authentication is not available in this region at this time.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddRegion
+func (c *DirectoryService) AddRegion(input *AddRegionInput) (*AddRegionOutput, error) {
+	req, out := c.AddRegionRequest(input)
+	return out, req.Send()
+}
+
+// AddRegionWithContext is the same as AddRegion with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AddRegion for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) AddRegionWithContext(ctx aws.Context, input *AddRegionInput, opts ...request.Option) (*AddRegionOutput, error) {
+	req, out := c.AddRegionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opAddTagsToResource = "AddTagsToResource"
 
 // AddTagsToResourceRequest generates a "aws/request.Request" representing the
@@ -229,14 +340,13 @@ const opAddTagsToResource = "AddTagsToResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddTagsToResourceRequest method.
+//	req, resp := client.AddTagsToResourceRequest(params)
 //
-//    // Example sending a request using the AddTagsToResourceRequest method.
-//    req, resp := client.AddTagsToResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddTagsToResource
 func (c *DirectoryService) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *AddTagsToResourceOutput) {
@@ -269,21 +379,22 @@ func (c *DirectoryService) AddTagsToResourceRequest(input *AddTagsToResourceInpu
 // See the AWS API reference guide for AWS Directory Service's
 // API operation AddTagsToResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeTagLimitExceededException "TagLimitExceededException"
-//   The maximum allowed number of tags was exceeded.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - TagLimitExceededException
+//     The maximum allowed number of tags was exceeded.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddTagsToResource
 func (c *DirectoryService) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResourceOutput, error) {
@@ -323,14 +434,13 @@ const opCancelSchemaExtension = "CancelSchemaExtension"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CancelSchemaExtensionRequest method.
+//	req, resp := client.CancelSchemaExtensionRequest(params)
 //
-//    // Example sending a request using the CancelSchemaExtensionRequest method.
-//    req, resp := client.CancelSchemaExtensionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtension
 func (c *DirectoryService) CancelSchemaExtensionRequest(input *CancelSchemaExtensionInput) (req *request.Request, output *CancelSchemaExtensionOutput) {
@@ -364,15 +474,16 @@ func (c *DirectoryService) CancelSchemaExtensionRequest(input *CancelSchemaExten
 // See the AWS API reference guide for AWS Directory Service's
 // API operation CancelSchemaExtension for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtension
 func (c *DirectoryService) CancelSchemaExtension(input *CancelSchemaExtensionInput) (*CancelSchemaExtensionOutput, error) {
@@ -412,14 +523,13 @@ const opConnectDirectory = "ConnectDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ConnectDirectoryRequest method.
+//	req, resp := client.ConnectDirectoryRequest(params)
 //
-//    // Example sending a request using the ConnectDirectoryRequest method.
-//    req, resp := client.ConnectDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectory
 func (c *DirectoryService) ConnectDirectoryRequest(input *ConnectDirectoryInput) (req *request.Request, output *ConnectDirectoryOutput) {
@@ -440,11 +550,11 @@ func (c *DirectoryService) ConnectDirectoryRequest(input *ConnectDirectoryInput)
 
 // ConnectDirectory API operation for AWS Directory Service.
 //
-// Creates an AD Connector to connect to an on-premises directory.
+// Creates an AD Connector to connect to a self-managed directory.
 //
 // Before you call ConnectDirectory, ensure that all of the required permissions
 // have been explicitly granted through a policy. For details about what permissions
-// are required to run the ConnectDirectory operation, see AWS Directory Service
+// are required to run the ConnectDirectory operation, see Directory Service
 // API Permissions: Actions, Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -454,20 +564,21 @@ func (c *DirectoryService) ConnectDirectoryRequest(input *ConnectDirectoryInput)
 // See the AWS API reference guide for AWS Directory Service's
 // API operation ConnectDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDirectoryLimitExceededException "DirectoryLimitExceededException"
-//   The maximum number of directories in the region has been reached. You can
-//   use the GetDirectoryLimits operation to determine your directory limits in
-//   the region.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - DirectoryLimitExceededException
+//     The maximum number of directories in the region has been reached. You can
+//     use the GetDirectoryLimits operation to determine your directory limits in
+//     the region.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectory
 func (c *DirectoryService) ConnectDirectory(input *ConnectDirectoryInput) (*ConnectDirectoryOutput, error) {
@@ -507,14 +618,13 @@ const opCreateAlias = "CreateAlias"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateAliasRequest method.
+//	req, resp := client.CreateAliasRequest(params)
 //
-//    // Example sending a request using the CreateAliasRequest method.
-//    req, resp := client.CreateAliasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateAlias
 func (c *DirectoryService) CreateAliasRequest(input *CreateAliasInput) (req *request.Request, output *CreateAliasOutput) {
@@ -549,21 +659,22 @@ func (c *DirectoryService) CreateAliasRequest(input *CreateAliasInput) (req *req
 // See the AWS API reference guide for AWS Directory Service's
 // API operation CreateAlias for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The specified entity already exists.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - EntityAlreadyExistsException
+//     The specified entity already exists.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateAlias
 func (c *DirectoryService) CreateAlias(input *CreateAliasInput) (*CreateAliasOutput, error) {
@@ -603,14 +714,13 @@ const opCreateComputer = "CreateComputer"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateComputerRequest method.
+//	req, resp := client.CreateComputerRequest(params)
 //
-//    // Example sending a request using the CreateComputerRequest method.
-//    req, resp := client.CreateComputerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputer
 func (c *DirectoryService) CreateComputerRequest(input *CreateComputerInput) (req *request.Request, output *CreateComputerOutput) {
@@ -631,8 +741,7 @@ func (c *DirectoryService) CreateComputerRequest(input *CreateComputerInput) (re
 
 // CreateComputer API operation for AWS Directory Service.
 //
-// Creates a computer account in the specified directory, and joins the computer
-// to the directory.
+// Creates an Active Directory computer object in the specified directory.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -641,30 +750,31 @@ func (c *DirectoryService) CreateComputerRequest(input *CreateComputerInput) (re
 // See the AWS API reference guide for AWS Directory Service's
 // API operation CreateComputer for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthenticationFailedException "AuthenticationFailedException"
-//   An authentication error occurred.
+// Returned Error Types:
 //
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+//   - AuthenticationFailedException
+//     An authentication error occurred.
 //
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The specified entity already exists.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - EntityAlreadyExistsException
+//     The specified entity already exists.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputer
 func (c *DirectoryService) CreateComputer(input *CreateComputerInput) (*CreateComputerOutput, error) {
@@ -704,14 +814,13 @@ const opCreateConditionalForwarder = "CreateConditionalForwarder"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateConditionalForwarderRequest method.
+//	req, resp := client.CreateConditionalForwarderRequest(params)
 //
-//    // Example sending a request using the CreateConditionalForwarderRequest method.
-//    req, resp := client.CreateConditionalForwarderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarder
 func (c *DirectoryService) CreateConditionalForwarderRequest(input *CreateConditionalForwarderInput) (req *request.Request, output *CreateConditionalForwarderOutput) {
@@ -733,9 +842,10 @@ func (c *DirectoryService) CreateConditionalForwarderRequest(input *CreateCondit
 
 // CreateConditionalForwarder API operation for AWS Directory Service.
 //
-// Creates a conditional forwarder associated with your AWS directory. Conditional
-// forwarders are required in order to set up a trust relationship with another
-// domain. The conditional forwarder points to the trusted domain.
+// Creates a conditional forwarder associated with your Amazon Web Services
+// directory. Conditional forwarders are required in order to set up a trust
+// relationship with another domain. The conditional forwarder points to the
+// trusted domain.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -744,27 +854,28 @@ func (c *DirectoryService) CreateConditionalForwarderRequest(input *CreateCondit
 // See the AWS API reference guide for AWS Directory Service's
 // API operation CreateConditionalForwarder for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The specified entity already exists.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - EntityAlreadyExistsException
+//     The specified entity already exists.
 //
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarder
 func (c *DirectoryService) CreateConditionalForwarder(input *CreateConditionalForwarderInput) (*CreateConditionalForwarderOutput, error) {
@@ -804,14 +915,13 @@ const opCreateDirectory = "CreateDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDirectoryRequest method.
+//	req, resp := client.CreateDirectoryRequest(params)
 //
-//    // Example sending a request using the CreateDirectoryRequest method.
-//    req, resp := client.CreateDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectory
 func (c *DirectoryService) CreateDirectoryRequest(input *CreateDirectoryInput) (req *request.Request, output *CreateDirectoryOutput) {
@@ -832,11 +942,13 @@ func (c *DirectoryService) CreateDirectoryRequest(input *CreateDirectoryInput) (
 
 // CreateDirectory API operation for AWS Directory Service.
 //
-// Creates a Simple AD directory.
+// Creates a Simple AD directory. For more information, see Simple Active Directory
+// (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html)
+// in the Directory Service Admin Guide.
 //
 // Before you call CreateDirectory, ensure that all of the required permissions
 // have been explicitly granted through a policy. For details about what permissions
-// are required to run the CreateDirectory operation, see AWS Directory Service
+// are required to run the CreateDirectory operation, see Directory Service
 // API Permissions: Actions, Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -846,20 +958,21 @@ func (c *DirectoryService) CreateDirectoryRequest(input *CreateDirectoryInput) (
 // See the AWS API reference guide for AWS Directory Service's
 // API operation CreateDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDirectoryLimitExceededException "DirectoryLimitExceededException"
-//   The maximum number of directories in the region has been reached. You can
-//   use the GetDirectoryLimits operation to determine your directory limits in
-//   the region.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - DirectoryLimitExceededException
+//     The maximum number of directories in the region has been reached. You can
+//     use the GetDirectoryLimits operation to determine your directory limits in
+//     the region.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectory
 func (c *DirectoryService) CreateDirectory(input *CreateDirectoryInput) (*CreateDirectoryOutput, error) {
@@ -899,14 +1012,13 @@ const opCreateLogSubscription = "CreateLogSubscription"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateLogSubscriptionRequest method.
+//	req, resp := client.CreateLogSubscriptionRequest(params)
 //
-//    // Example sending a request using the CreateLogSubscriptionRequest method.
-//    req, resp := client.CreateLogSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscription
 func (c *DirectoryService) CreateLogSubscriptionRequest(input *CreateLogSubscriptionInput) (req *request.Request, output *CreateLogSubscriptionOutput) {
@@ -928,8 +1040,9 @@ func (c *DirectoryService) CreateLogSubscriptionRequest(input *CreateLogSubscrip
 
 // CreateLogSubscription API operation for AWS Directory Service.
 //
-// Creates a subscription to forward real time Directory Service domain controller
-// security logs to the specified CloudWatch log group in your AWS account.
+// Creates a subscription to forward real-time Directory Service domain controller
+// security logs to the specified Amazon CloudWatch log group in your Amazon
+// Web Services account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -938,24 +1051,25 @@ func (c *DirectoryService) CreateLogSubscriptionRequest(input *CreateLogSubscrip
 // See the AWS API reference guide for AWS Directory Service's
 // API operation CreateLogSubscription for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The specified entity already exists.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - EntityAlreadyExistsException
+//     The specified entity already exists.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInsufficientPermissionsException "InsufficientPermissionsException"
-//   The account does not have sufficient permission to perform the operation.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InsufficientPermissionsException
+//     The account does not have sufficient permission to perform the operation.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscription
 func (c *DirectoryService) CreateLogSubscription(input *CreateLogSubscriptionInput) (*CreateLogSubscriptionOutput, error) {
@@ -995,14 +1109,13 @@ const opCreateMicrosoftAD = "CreateMicrosoftAD"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateMicrosoftADRequest method.
+//	req, resp := client.CreateMicrosoftADRequest(params)
 //
-//    // Example sending a request using the CreateMicrosoftADRequest method.
-//    req, resp := client.CreateMicrosoftADRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftAD
 func (c *DirectoryService) CreateMicrosoftADRequest(input *CreateMicrosoftADInput) (req *request.Request, output *CreateMicrosoftADOutput) {
@@ -1023,11 +1136,13 @@ func (c *DirectoryService) CreateMicrosoftADRequest(input *CreateMicrosoftADInpu
 
 // CreateMicrosoftAD API operation for AWS Directory Service.
 //
-// Creates an AWS Managed Microsoft AD directory.
+// Creates a Microsoft AD directory in the Amazon Web Services Cloud. For more
+// information, see Managed Microsoft AD (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
+// in the Directory Service Admin Guide.
 //
 // Before you call CreateMicrosoftAD, ensure that all of the required permissions
 // have been explicitly granted through a policy. For details about what permissions
-// are required to run the CreateMicrosoftAD operation, see AWS Directory Service
+// are required to run the CreateMicrosoftAD operation, see Directory Service
 // API Permissions: Actions, Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1037,23 +1152,24 @@ func (c *DirectoryService) CreateMicrosoftADRequest(input *CreateMicrosoftADInpu
 // See the AWS API reference guide for AWS Directory Service's
 // API operation CreateMicrosoftAD for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDirectoryLimitExceededException "DirectoryLimitExceededException"
-//   The maximum number of directories in the region has been reached. You can
-//   use the GetDirectoryLimits operation to determine your directory limits in
-//   the region.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - DirectoryLimitExceededException
+//     The maximum number of directories in the region has been reached. You can
+//     use the GetDirectoryLimits operation to determine your directory limits in
+//     the region.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftAD
 func (c *DirectoryService) CreateMicrosoftAD(input *CreateMicrosoftADInput) (*CreateMicrosoftADOutput, error) {
@@ -1093,14 +1209,13 @@ const opCreateSnapshot = "CreateSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateSnapshotRequest method.
+//	req, resp := client.CreateSnapshotRequest(params)
 //
-//    // Example sending a request using the CreateSnapshotRequest method.
-//    req, resp := client.CreateSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateSnapshot
 func (c *DirectoryService) CreateSnapshotRequest(input *CreateSnapshotInput) (req *request.Request, output *CreateSnapshotOutput) {
@@ -1121,7 +1236,8 @@ func (c *DirectoryService) CreateSnapshotRequest(input *CreateSnapshotInput) (re
 
 // CreateSnapshot API operation for AWS Directory Service.
 //
-// Creates a snapshot of a Simple AD or Microsoft AD directory in the AWS cloud.
+// Creates a snapshot of a Simple AD or Microsoft AD directory in the Amazon
+// Web Services cloud.
 //
 // You cannot take snapshots of AD Connector directories.
 //
@@ -1132,23 +1248,24 @@ func (c *DirectoryService) CreateSnapshotRequest(input *CreateSnapshotInput) (re
 // See the AWS API reference guide for AWS Directory Service's
 // API operation CreateSnapshot for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeSnapshotLimitExceededException "SnapshotLimitExceededException"
-//   The maximum number of manual snapshots for the directory has been reached.
-//   You can use the GetSnapshotLimits operation to determine the snapshot limits
-//   for a directory.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - SnapshotLimitExceededException
+//     The maximum number of manual snapshots for the directory has been reached.
+//     You can use the GetSnapshotLimits operation to determine the snapshot limits
+//     for a directory.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateSnapshot
 func (c *DirectoryService) CreateSnapshot(input *CreateSnapshotInput) (*CreateSnapshotOutput, error) {
@@ -1188,14 +1305,13 @@ const opCreateTrust = "CreateTrust"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateTrustRequest method.
+//	req, resp := client.CreateTrustRequest(params)
 //
-//    // Example sending a request using the CreateTrustRequest method.
-//    req, resp := client.CreateTrustRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrust
 func (c *DirectoryService) CreateTrustRequest(input *CreateTrustInput) (req *request.Request, output *CreateTrustOutput) {
@@ -1216,15 +1332,15 @@ func (c *DirectoryService) CreateTrustRequest(input *CreateTrustInput) (req *req
 
 // CreateTrust API operation for AWS Directory Service.
 //
-// AWS Directory Service for Microsoft Active Directory allows you to configure
+// Directory Service for Microsoft Active Directory allows you to configure
 // trust relationships. For example, you can establish a trust between your
-// AWS Managed Microsoft AD directory, and your existing on-premises Microsoft
+// Managed Microsoft AD directory, and your existing self-managed Microsoft
 // Active Directory. This would allow you to provide users and groups access
 // to resources in either domain, with a single set of credentials.
 //
-// This action initiates the creation of the AWS side of a trust relationship
-// between an AWS Managed Microsoft AD directory and an external domain. You
-// can create either a forest trust or an external trust.
+// This action initiates the creation of the Amazon Web Services side of a trust
+// relationship between an Managed Microsoft AD directory and an external domain.
+// You can create either a forest trust or an external trust.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1233,24 +1349,25 @@ func (c *DirectoryService) CreateTrustRequest(input *CreateTrustInput) (req *req
 // See the AWS API reference guide for AWS Directory Service's
 // API operation CreateTrust for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The specified entity already exists.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - EntityAlreadyExistsException
+//     The specified entity already exists.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrust
 func (c *DirectoryService) CreateTrust(input *CreateTrustInput) (*CreateTrustOutput, error) {
@@ -1290,14 +1407,13 @@ const opDeleteConditionalForwarder = "DeleteConditionalForwarder"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteConditionalForwarderRequest method.
+//	req, resp := client.DeleteConditionalForwarderRequest(params)
 //
-//    // Example sending a request using the DeleteConditionalForwarderRequest method.
-//    req, resp := client.DeleteConditionalForwarderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarder
 func (c *DirectoryService) DeleteConditionalForwarderRequest(input *DeleteConditionalForwarderInput) (req *request.Request, output *DeleteConditionalForwarderOutput) {
@@ -1319,7 +1435,8 @@ func (c *DirectoryService) DeleteConditionalForwarderRequest(input *DeleteCondit
 
 // DeleteConditionalForwarder API operation for AWS Directory Service.
 //
-// Deletes a conditional forwarder that has been set up for your AWS directory.
+// Deletes a conditional forwarder that has been set up for your Amazon Web
+// Services directory.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1328,24 +1445,25 @@ func (c *DirectoryService) DeleteConditionalForwarderRequest(input *DeleteCondit
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DeleteConditionalForwarder for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarder
 func (c *DirectoryService) DeleteConditionalForwarder(input *DeleteConditionalForwarderInput) (*DeleteConditionalForwarderOutput, error) {
@@ -1385,14 +1503,13 @@ const opDeleteDirectory = "DeleteDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDirectoryRequest method.
+//	req, resp := client.DeleteDirectoryRequest(params)
 //
-//    // Example sending a request using the DeleteDirectoryRequest method.
-//    req, resp := client.DeleteDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteDirectory
 func (c *DirectoryService) DeleteDirectoryRequest(input *DeleteDirectoryInput) (req *request.Request, output *DeleteDirectoryOutput) {
@@ -1413,11 +1530,11 @@ func (c *DirectoryService) DeleteDirectoryRequest(input *DeleteDirectoryInput) (
 
 // DeleteDirectory API operation for AWS Directory Service.
 //
-// Deletes an AWS Directory Service directory.
+// Deletes an Directory Service directory.
 //
 // Before you call DeleteDirectory, ensure that all of the required permissions
 // have been explicitly granted through a policy. For details about what permissions
-// are required to run the DeleteDirectory operation, see AWS Directory Service
+// are required to run the DeleteDirectory operation, see Directory Service
 // API Permissions: Actions, Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1427,15 +1544,16 @@ func (c *DirectoryService) DeleteDirectoryRequest(input *DeleteDirectoryInput) (
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DeleteDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteDirectory
 func (c *DirectoryService) DeleteDirectory(input *DeleteDirectoryInput) (*DeleteDirectoryOutput, error) {
@@ -1475,14 +1593,13 @@ const opDeleteLogSubscription = "DeleteLogSubscription"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteLogSubscriptionRequest method.
+//	req, resp := client.DeleteLogSubscriptionRequest(params)
 //
-//    // Example sending a request using the DeleteLogSubscriptionRequest method.
-//    req, resp := client.DeleteLogSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscription
 func (c *DirectoryService) DeleteLogSubscriptionRequest(input *DeleteLogSubscriptionInput) (req *request.Request, output *DeleteLogSubscriptionOutput) {
@@ -1513,18 +1630,19 @@ func (c *DirectoryService) DeleteLogSubscriptionRequest(input *DeleteLogSubscrip
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DeleteLogSubscription for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscription
 func (c *DirectoryService) DeleteLogSubscription(input *DeleteLogSubscriptionInput) (*DeleteLogSubscriptionOutput, error) {
@@ -1564,14 +1682,13 @@ const opDeleteSnapshot = "DeleteSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteSnapshotRequest method.
+//	req, resp := client.DeleteSnapshotRequest(params)
 //
-//    // Example sending a request using the DeleteSnapshotRequest method.
-//    req, resp := client.DeleteSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteSnapshot
 func (c *DirectoryService) DeleteSnapshotRequest(input *DeleteSnapshotInput) (req *request.Request, output *DeleteSnapshotOutput) {
@@ -1601,18 +1718,19 @@ func (c *DirectoryService) DeleteSnapshotRequest(input *DeleteSnapshotInput) (re
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DeleteSnapshot for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteSnapshot
 func (c *DirectoryService) DeleteSnapshot(input *DeleteSnapshotInput) (*DeleteSnapshotOutput, error) {
@@ -1652,14 +1770,13 @@ const opDeleteTrust = "DeleteTrust"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteTrustRequest method.
+//	req, resp := client.DeleteTrustRequest(params)
 //
-//    // Example sending a request using the DeleteTrustRequest method.
-//    req, resp := client.DeleteTrustRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteTrust
 func (c *DirectoryService) DeleteTrustRequest(input *DeleteTrustInput) (req *request.Request, output *DeleteTrustOutput) {
@@ -1680,8 +1797,8 @@ func (c *DirectoryService) DeleteTrustRequest(input *DeleteTrustInput) (req *req
 
 // DeleteTrust API operation for AWS Directory Service.
 //
-// Deletes an existing trust relationship between your AWS Managed Microsoft
-// AD directory and an external domain.
+// Deletes an existing trust relationship between your Managed Microsoft AD
+// directory and an external domain.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1690,21 +1807,22 @@ func (c *DirectoryService) DeleteTrustRequest(input *DeleteTrustInput) (req *req
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DeleteTrust for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteTrust
 func (c *DirectoryService) DeleteTrust(input *DeleteTrustInput) (*DeleteTrustOutput, error) {
@@ -1728,6 +1846,109 @@ func (c *DirectoryService) DeleteTrustWithContext(ctx aws.Context, input *Delete
 	return out, req.Send()
 }
 
+const opDeregisterCertificate = "DeregisterCertificate"
+
+// DeregisterCertificateRequest generates a "aws/request.Request" representing the
+// client's request for the DeregisterCertificate operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeregisterCertificate for more information on using the DeregisterCertificate
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeregisterCertificateRequest method.
+//	req, resp := client.DeregisterCertificateRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterCertificate
+func (c *DirectoryService) DeregisterCertificateRequest(input *DeregisterCertificateInput) (req *request.Request, output *DeregisterCertificateOutput) {
+	op := &request.Operation{
+		Name:       opDeregisterCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeregisterCertificateInput{}
+	}
+
+	output = &DeregisterCertificateOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeregisterCertificate API operation for AWS Directory Service.
+//
+// Deletes from the system the certificate that was registered for secure LDAP
+// or client certificate authentication.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation DeregisterCertificate for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - CertificateDoesNotExistException
+//     The certificate is not present in the system for describe or deregister activities.
+//
+//   - CertificateInUseException
+//     The certificate is being used for the LDAP security connection and cannot
+//     be removed without disabling LDAP security.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterCertificate
+func (c *DirectoryService) DeregisterCertificate(input *DeregisterCertificateInput) (*DeregisterCertificateOutput, error) {
+	req, out := c.DeregisterCertificateRequest(input)
+	return out, req.Send()
+}
+
+// DeregisterCertificateWithContext is the same as DeregisterCertificate with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeregisterCertificate for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DeregisterCertificateWithContext(ctx aws.Context, input *DeregisterCertificateInput, opts ...request.Option) (*DeregisterCertificateOutput, error) {
+	req, out := c.DeregisterCertificateRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeregisterEventTopic = "DeregisterEventTopic"
 
 // DeregisterEventTopicRequest generates a "aws/request.Request" representing the
@@ -1744,14 +1965,13 @@ const opDeregisterEventTopic = "DeregisterEventTopic"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeregisterEventTopicRequest method.
+//	req, resp := client.DeregisterEventTopicRequest(params)
 //
-//    // Example sending a request using the DeregisterEventTopicRequest method.
-//    req, resp := client.DeregisterEventTopicRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopic
 func (c *DirectoryService) DeregisterEventTopicRequest(input *DeregisterEventTopicInput) (req *request.Request, output *DeregisterEventTopicOutput) {
@@ -1773,7 +1993,8 @@ func (c *DirectoryService) DeregisterEventTopicRequest(input *DeregisterEventTop
 
 // DeregisterEventTopic API operation for AWS Directory Service.
 //
-// Removes the specified directory as a publisher to the specified SNS topic.
+// Removes the specified directory as a publisher to the specified Amazon SNS
+// topic.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1782,18 +2003,19 @@ func (c *DirectoryService) DeregisterEventTopicRequest(input *DeregisterEventTop
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DeregisterEventTopic for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopic
 func (c *DirectoryService) DeregisterEventTopic(input *DeregisterEventTopicInput) (*DeregisterEventTopicOutput, error) {
@@ -1817,6 +2039,255 @@ func (c *DirectoryService) DeregisterEventTopicWithContext(ctx aws.Context, inpu
 	return out, req.Send()
 }
 
+const opDescribeCertificate = "DescribeCertificate"
+
+// DescribeCertificateRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeCertificate operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeCertificate for more information on using the DescribeCertificate
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeCertificateRequest method.
+//	req, resp := client.DescribeCertificateRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCertificate
+func (c *DirectoryService) DescribeCertificateRequest(input *DescribeCertificateInput) (req *request.Request, output *DescribeCertificateOutput) {
+	op := &request.Operation{
+		Name:       opDescribeCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeCertificateInput{}
+	}
+
+	output = &DescribeCertificateOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeCertificate API operation for AWS Directory Service.
+//
+// Displays information about the certificate registered for secure LDAP or
+// client certificate authentication.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation DescribeCertificate for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - CertificateDoesNotExistException
+//     The certificate is not present in the system for describe or deregister activities.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCertificate
+func (c *DirectoryService) DescribeCertificate(input *DescribeCertificateInput) (*DescribeCertificateOutput, error) {
+	req, out := c.DescribeCertificateRequest(input)
+	return out, req.Send()
+}
+
+// DescribeCertificateWithContext is the same as DescribeCertificate with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeCertificate for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeCertificateWithContext(ctx aws.Context, input *DescribeCertificateInput, opts ...request.Option) (*DescribeCertificateOutput, error) {
+	req, out := c.DescribeCertificateRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDescribeClientAuthenticationSettings = "DescribeClientAuthenticationSettings"
+
+// DescribeClientAuthenticationSettingsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeClientAuthenticationSettings operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeClientAuthenticationSettings for more information on using the DescribeClientAuthenticationSettings
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeClientAuthenticationSettingsRequest method.
+//	req, resp := client.DescribeClientAuthenticationSettingsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeClientAuthenticationSettings
+func (c *DirectoryService) DescribeClientAuthenticationSettingsRequest(input *DescribeClientAuthenticationSettingsInput) (req *request.Request, output *DescribeClientAuthenticationSettingsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeClientAuthenticationSettings,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeClientAuthenticationSettingsInput{}
+	}
+
+	output = &DescribeClientAuthenticationSettingsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeClientAuthenticationSettings API operation for AWS Directory Service.
+//
+// Retrieves information about the type of client authentication for the specified
+// directory, if the type is specified. If no type is specified, information
+// about all client authentication types that are supported for the specified
+// directory is retrieved. Currently, only SmartCard is supported.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation DescribeClientAuthenticationSettings for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - AccessDeniedException
+//     Client authentication is not available in this region at this time.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeClientAuthenticationSettings
+func (c *DirectoryService) DescribeClientAuthenticationSettings(input *DescribeClientAuthenticationSettingsInput) (*DescribeClientAuthenticationSettingsOutput, error) {
+	req, out := c.DescribeClientAuthenticationSettingsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeClientAuthenticationSettingsWithContext is the same as DescribeClientAuthenticationSettings with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeClientAuthenticationSettings for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeClientAuthenticationSettingsWithContext(ctx aws.Context, input *DescribeClientAuthenticationSettingsInput, opts ...request.Option) (*DescribeClientAuthenticationSettingsOutput, error) {
+	req, out := c.DescribeClientAuthenticationSettingsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeClientAuthenticationSettingsPages iterates over the pages of a DescribeClientAuthenticationSettings operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeClientAuthenticationSettings method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeClientAuthenticationSettings operation.
+//	pageNum := 0
+//	err := client.DescribeClientAuthenticationSettingsPages(params,
+//	    func(page *directoryservice.DescribeClientAuthenticationSettingsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) DescribeClientAuthenticationSettingsPages(input *DescribeClientAuthenticationSettingsInput, fn func(*DescribeClientAuthenticationSettingsOutput, bool) bool) error {
+	return c.DescribeClientAuthenticationSettingsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeClientAuthenticationSettingsPagesWithContext same as DescribeClientAuthenticationSettingsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeClientAuthenticationSettingsPagesWithContext(ctx aws.Context, input *DescribeClientAuthenticationSettingsInput, fn func(*DescribeClientAuthenticationSettingsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeClientAuthenticationSettingsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeClientAuthenticationSettingsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeClientAuthenticationSettingsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeConditionalForwarders = "DescribeConditionalForwarders"
 
 // DescribeConditionalForwardersRequest generates a "aws/request.Request" representing the
@@ -1833,14 +2304,13 @@ const opDescribeConditionalForwarders = "DescribeConditionalForwarders"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeConditionalForwardersRequest method.
+//	req, resp := client.DescribeConditionalForwardersRequest(params)
 //
-//    // Example sending a request using the DescribeConditionalForwardersRequest method.
-//    req, resp := client.DescribeConditionalForwardersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwarders
 func (c *DirectoryService) DescribeConditionalForwardersRequest(input *DescribeConditionalForwardersInput) (req *request.Request, output *DescribeConditionalForwardersOutput) {
@@ -1873,24 +2343,25 @@ func (c *DirectoryService) DescribeConditionalForwardersRequest(input *DescribeC
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DescribeConditionalForwarders for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwarders
 func (c *DirectoryService) DescribeConditionalForwarders(input *DescribeConditionalForwardersInput) (*DescribeConditionalForwardersOutput, error) {
@@ -1930,14 +2401,13 @@ const opDescribeDirectories = "DescribeDirectories"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDirectoriesRequest method.
+//	req, resp := client.DescribeDirectoriesRequest(params)
 //
-//    // Example sending a request using the DescribeDirectoriesRequest method.
-//    req, resp := client.DescribeDirectoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories
 func (c *DirectoryService) DescribeDirectoriesRequest(input *DescribeDirectoriesInput) (req *request.Request, output *DescribeDirectoriesOutput) {
@@ -1945,6 +2415,12 @@ func (c *DirectoryService) DescribeDirectoriesRequest(input *DescribeDirectories
 		Name:       opDescribeDirectories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1978,21 +2454,22 @@ func (c *DirectoryService) DescribeDirectoriesRequest(input *DescribeDirectories
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DescribeDirectories for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken value is not valid.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories
 func (c *DirectoryService) DescribeDirectories(input *DescribeDirectoriesInput) (*DescribeDirectoriesOutput, error) {
@@ -2016,6 +2493,57 @@ func (c *DirectoryService) DescribeDirectoriesWithContext(ctx aws.Context, input
 	return out, req.Send()
 }
 
+// DescribeDirectoriesPages iterates over the pages of a DescribeDirectories operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeDirectories method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeDirectories operation.
+//	pageNum := 0
+//	err := client.DescribeDirectoriesPages(params,
+//	    func(page *directoryservice.DescribeDirectoriesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) DescribeDirectoriesPages(input *DescribeDirectoriesInput, fn func(*DescribeDirectoriesOutput, bool) bool) error {
+	return c.DescribeDirectoriesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeDirectoriesPagesWithContext same as DescribeDirectoriesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeDirectoriesPagesWithContext(ctx aws.Context, input *DescribeDirectoriesInput, fn func(*DescribeDirectoriesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeDirectoriesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeDirectoriesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDirectoriesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeDomainControllers = "DescribeDomainControllers"
 
 // DescribeDomainControllersRequest generates a "aws/request.Request" representing the
@@ -2032,14 +2560,13 @@ const opDescribeDomainControllers = "DescribeDomainControllers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDomainControllersRequest method.
+//	req, resp := client.DescribeDomainControllersRequest(params)
 //
-//    // Example sending a request using the DescribeDomainControllersRequest method.
-//    req, resp := client.DescribeDomainControllersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDomainControllers
 func (c *DirectoryService) DescribeDomainControllersRequest(input *DescribeDomainControllersInput) (req *request.Request, output *DescribeDomainControllersOutput) {
@@ -2075,24 +2602,25 @@ func (c *DirectoryService) DescribeDomainControllersRequest(input *DescribeDomai
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DescribeDomainControllers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken value is not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDomainControllers
 func (c *DirectoryService) DescribeDomainControllers(input *DescribeDomainControllersInput) (*DescribeDomainControllersOutput, error) {
@@ -2124,15 +2652,14 @@ func (c *DirectoryService) DescribeDomainControllersWithContext(ctx aws.Context,
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeDomainControllers operation.
-//    pageNum := 0
-//    err := client.DescribeDomainControllersPages(params,
-//        func(page *DescribeDomainControllersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeDomainControllers operation.
+//	pageNum := 0
+//	err := client.DescribeDomainControllersPages(params,
+//	    func(page *directoryservice.DescribeDomainControllersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *DirectoryService) DescribeDomainControllersPages(input *DescribeDomainControllersInput, fn func(*DescribeDomainControllersOutput, bool) bool) error {
 	return c.DescribeDomainControllersPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2159,10 +2686,12 @@ func (c *DirectoryService) DescribeDomainControllersPagesWithContext(ctx aws.Con
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDomainControllersOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDomainControllersOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2182,14 +2711,13 @@ const opDescribeEventTopics = "DescribeEventTopics"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeEventTopicsRequest method.
+//	req, resp := client.DescribeEventTopicsRequest(params)
 //
-//    // Example sending a request using the DescribeEventTopicsRequest method.
-//    req, resp := client.DescribeEventTopicsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeEventTopics
 func (c *DirectoryService) DescribeEventTopicsRequest(input *DescribeEventTopicsInput) (req *request.Request, output *DescribeEventTopicsOutput) {
@@ -2210,8 +2738,8 @@ func (c *DirectoryService) DescribeEventTopicsRequest(input *DescribeEventTopics
 
 // DescribeEventTopics API operation for AWS Directory Service.
 //
-// Obtains information about which SNS topics receive status messages from the
-// specified directory.
+// Obtains information about which Amazon SNS topics receive status messages
+// from the specified directory.
 //
 // If no input parameters are provided, such as DirectoryId or TopicName, this
 // request describes all of the associations in the account.
@@ -2223,18 +2751,19 @@ func (c *DirectoryService) DescribeEventTopicsRequest(input *DescribeEventTopics
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DescribeEventTopics for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeEventTopics
 func (c *DirectoryService) DescribeEventTopics(input *DescribeEventTopicsInput) (*DescribeEventTopicsOutput, error) {
@@ -2258,6 +2787,406 @@ func (c *DirectoryService) DescribeEventTopicsWithContext(ctx aws.Context, input
 	return out, req.Send()
 }
 
+const opDescribeLDAPSSettings = "DescribeLDAPSSettings"
+
+// DescribeLDAPSSettingsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeLDAPSSettings operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeLDAPSSettings for more information on using the DescribeLDAPSSettings
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeLDAPSSettingsRequest method.
+//	req, resp := client.DescribeLDAPSSettingsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeLDAPSSettings
+func (c *DirectoryService) DescribeLDAPSSettingsRequest(input *DescribeLDAPSSettingsInput) (req *request.Request, output *DescribeLDAPSSettingsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeLDAPSSettings,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeLDAPSSettingsInput{}
+	}
+
+	output = &DescribeLDAPSSettingsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeLDAPSSettings API operation for AWS Directory Service.
+//
+// Describes the status of LDAP security for the specified directory.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation DescribeLDAPSSettings for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeLDAPSSettings
+func (c *DirectoryService) DescribeLDAPSSettings(input *DescribeLDAPSSettingsInput) (*DescribeLDAPSSettingsOutput, error) {
+	req, out := c.DescribeLDAPSSettingsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeLDAPSSettingsWithContext is the same as DescribeLDAPSSettings with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeLDAPSSettings for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeLDAPSSettingsWithContext(ctx aws.Context, input *DescribeLDAPSSettingsInput, opts ...request.Option) (*DescribeLDAPSSettingsOutput, error) {
+	req, out := c.DescribeLDAPSSettingsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeLDAPSSettingsPages iterates over the pages of a DescribeLDAPSSettings operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeLDAPSSettings method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeLDAPSSettings operation.
+//	pageNum := 0
+//	err := client.DescribeLDAPSSettingsPages(params,
+//	    func(page *directoryservice.DescribeLDAPSSettingsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) DescribeLDAPSSettingsPages(input *DescribeLDAPSSettingsInput, fn func(*DescribeLDAPSSettingsOutput, bool) bool) error {
+	return c.DescribeLDAPSSettingsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeLDAPSSettingsPagesWithContext same as DescribeLDAPSSettingsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeLDAPSSettingsPagesWithContext(ctx aws.Context, input *DescribeLDAPSSettingsInput, fn func(*DescribeLDAPSSettingsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeLDAPSSettingsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeLDAPSSettingsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeLDAPSSettingsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeRegions = "DescribeRegions"
+
+// DescribeRegionsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeRegions operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeRegions for more information on using the DescribeRegions
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeRegionsRequest method.
+//	req, resp := client.DescribeRegionsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeRegions
+func (c *DirectoryService) DescribeRegionsRequest(input *DescribeRegionsInput) (req *request.Request, output *DescribeRegionsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeRegions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeRegionsInput{}
+	}
+
+	output = &DescribeRegionsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeRegions API operation for AWS Directory Service.
+//
+// Provides information about the Regions that are configured for multi-Region
+// replication.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation DescribeRegions for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
+//
+//   - AccessDeniedException
+//     Client authentication is not available in this region at this time.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeRegions
+func (c *DirectoryService) DescribeRegions(input *DescribeRegionsInput) (*DescribeRegionsOutput, error) {
+	req, out := c.DescribeRegionsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeRegionsWithContext is the same as DescribeRegions with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeRegions for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeRegionsWithContext(ctx aws.Context, input *DescribeRegionsInput, opts ...request.Option) (*DescribeRegionsOutput, error) {
+	req, out := c.DescribeRegionsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeRegionsPages iterates over the pages of a DescribeRegions operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeRegions method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeRegions operation.
+//	pageNum := 0
+//	err := client.DescribeRegionsPages(params,
+//	    func(page *directoryservice.DescribeRegionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) DescribeRegionsPages(input *DescribeRegionsInput, fn func(*DescribeRegionsOutput, bool) bool) error {
+	return c.DescribeRegionsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeRegionsPagesWithContext same as DescribeRegionsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeRegionsPagesWithContext(ctx aws.Context, input *DescribeRegionsInput, fn func(*DescribeRegionsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeRegionsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeRegionsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeRegionsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeSettings = "DescribeSettings"
+
+// DescribeSettingsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeSettings operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeSettings for more information on using the DescribeSettings
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeSettingsRequest method.
+//	req, resp := client.DescribeSettingsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSettings
+func (c *DirectoryService) DescribeSettingsRequest(input *DescribeSettingsInput) (req *request.Request, output *DescribeSettingsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeSettings,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeSettingsInput{}
+	}
+
+	output = &DescribeSettingsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeSettings API operation for AWS Directory Service.
+//
+// Retrieves information about the configurable settings for the specified directory.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation DescribeSettings for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSettings
+func (c *DirectoryService) DescribeSettings(input *DescribeSettingsInput) (*DescribeSettingsOutput, error) {
+	req, out := c.DescribeSettingsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeSettingsWithContext is the same as DescribeSettings with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeSettings for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeSettingsWithContext(ctx aws.Context, input *DescribeSettingsInput, opts ...request.Option) (*DescribeSettingsOutput, error) {
+	req, out := c.DescribeSettingsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeSharedDirectories = "DescribeSharedDirectories"
 
 // DescribeSharedDirectoriesRequest generates a "aws/request.Request" representing the
@@ -2274,14 +3203,13 @@ const opDescribeSharedDirectories = "DescribeSharedDirectories"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeSharedDirectoriesRequest method.
+//	req, resp := client.DescribeSharedDirectoriesRequest(params)
 //
-//    // Example sending a request using the DescribeSharedDirectoriesRequest method.
-//    req, resp := client.DescribeSharedDirectoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSharedDirectories
 func (c *DirectoryService) DescribeSharedDirectoriesRequest(input *DescribeSharedDirectoriesInput) (req *request.Request, output *DescribeSharedDirectoriesOutput) {
@@ -2289,6 +3217,12 @@ func (c *DirectoryService) DescribeSharedDirectoriesRequest(input *DescribeShare
 		Name:       opDescribeSharedDirectories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -2311,24 +3245,25 @@ func (c *DirectoryService) DescribeSharedDirectoriesRequest(input *DescribeShare
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DescribeSharedDirectories for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken value is not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSharedDirectories
 func (c *DirectoryService) DescribeSharedDirectories(input *DescribeSharedDirectoriesInput) (*DescribeSharedDirectoriesOutput, error) {
@@ -2352,6 +3287,57 @@ func (c *DirectoryService) DescribeSharedDirectoriesWithContext(ctx aws.Context,
 	return out, req.Send()
 }
 
+// DescribeSharedDirectoriesPages iterates over the pages of a DescribeSharedDirectories operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeSharedDirectories method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeSharedDirectories operation.
+//	pageNum := 0
+//	err := client.DescribeSharedDirectoriesPages(params,
+//	    func(page *directoryservice.DescribeSharedDirectoriesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) DescribeSharedDirectoriesPages(input *DescribeSharedDirectoriesInput, fn func(*DescribeSharedDirectoriesOutput, bool) bool) error {
+	return c.DescribeSharedDirectoriesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeSharedDirectoriesPagesWithContext same as DescribeSharedDirectoriesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeSharedDirectoriesPagesWithContext(ctx aws.Context, input *DescribeSharedDirectoriesInput, fn func(*DescribeSharedDirectoriesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeSharedDirectoriesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeSharedDirectoriesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeSharedDirectoriesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeSnapshots = "DescribeSnapshots"
 
 // DescribeSnapshotsRequest generates a "aws/request.Request" representing the
@@ -2368,14 +3354,13 @@ const opDescribeSnapshots = "DescribeSnapshots"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeSnapshotsRequest method.
+//	req, resp := client.DescribeSnapshotsRequest(params)
 //
-//    // Example sending a request using the DescribeSnapshotsRequest method.
-//    req, resp := client.DescribeSnapshotsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSnapshots
 func (c *DirectoryService) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) (req *request.Request, output *DescribeSnapshotsOutput) {
@@ -2383,6 +3368,12 @@ func (c *DirectoryService) DescribeSnapshotsRequest(input *DescribeSnapshotsInpu
 		Name:       opDescribeSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -2412,21 +3403,22 @@ func (c *DirectoryService) DescribeSnapshotsRequest(input *DescribeSnapshotsInpu
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DescribeSnapshots for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken value is not valid.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSnapshots
 func (c *DirectoryService) DescribeSnapshots(input *DescribeSnapshotsInput) (*DescribeSnapshotsOutput, error) {
@@ -2450,6 +3442,57 @@ func (c *DirectoryService) DescribeSnapshotsWithContext(ctx aws.Context, input *
 	return out, req.Send()
 }
 
+// DescribeSnapshotsPages iterates over the pages of a DescribeSnapshots operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeSnapshots method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeSnapshots operation.
+//	pageNum := 0
+//	err := client.DescribeSnapshotsPages(params,
+//	    func(page *directoryservice.DescribeSnapshotsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) DescribeSnapshotsPages(input *DescribeSnapshotsInput, fn func(*DescribeSnapshotsOutput, bool) bool) error {
+	return c.DescribeSnapshotsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeSnapshotsPagesWithContext same as DescribeSnapshotsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeSnapshotsPagesWithContext(ctx aws.Context, input *DescribeSnapshotsInput, fn func(*DescribeSnapshotsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeSnapshotsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeSnapshotsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeSnapshotsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeTrusts = "DescribeTrusts"
 
 // DescribeTrustsRequest generates a "aws/request.Request" representing the
@@ -2466,14 +3509,13 @@ const opDescribeTrusts = "DescribeTrusts"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeTrustsRequest method.
+//	req, resp := client.DescribeTrustsRequest(params)
 //
-//    // Example sending a request using the DescribeTrustsRequest method.
-//    req, resp := client.DescribeTrustsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrusts
 func (c *DirectoryService) DescribeTrustsRequest(input *DescribeTrustsInput) (req *request.Request, output *DescribeTrustsOutput) {
@@ -2481,6 +3523,12 @@ func (c *DirectoryService) DescribeTrustsRequest(input *DescribeTrustsInput) (re
 		Name:       opDescribeTrusts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -2506,24 +3554,25 @@ func (c *DirectoryService) DescribeTrustsRequest(input *DescribeTrustsInput) (re
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DescribeTrusts for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken value is not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrusts
 func (c *DirectoryService) DescribeTrusts(input *DescribeTrustsInput) (*DescribeTrustsOutput, error) {
@@ -2547,6 +3596,402 @@ func (c *DirectoryService) DescribeTrustsWithContext(ctx aws.Context, input *Des
 	return out, req.Send()
 }
 
+// DescribeTrustsPages iterates over the pages of a DescribeTrusts operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeTrusts method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeTrusts operation.
+//	pageNum := 0
+//	err := client.DescribeTrustsPages(params,
+//	    func(page *directoryservice.DescribeTrustsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) DescribeTrustsPages(input *DescribeTrustsInput, fn func(*DescribeTrustsOutput, bool) bool) error {
+	return c.DescribeTrustsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeTrustsPagesWithContext same as DescribeTrustsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeTrustsPagesWithContext(ctx aws.Context, input *DescribeTrustsInput, fn func(*DescribeTrustsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeTrustsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeTrustsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeTrustsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeUpdateDirectory = "DescribeUpdateDirectory"
+
+// DescribeUpdateDirectoryRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeUpdateDirectory operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeUpdateDirectory for more information on using the DescribeUpdateDirectory
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeUpdateDirectoryRequest method.
+//	req, resp := client.DescribeUpdateDirectoryRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeUpdateDirectory
+func (c *DirectoryService) DescribeUpdateDirectoryRequest(input *DescribeUpdateDirectoryInput) (req *request.Request, output *DescribeUpdateDirectoryOutput) {
+	op := &request.Operation{
+		Name:       opDescribeUpdateDirectory,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeUpdateDirectoryInput{}
+	}
+
+	output = &DescribeUpdateDirectoryOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeUpdateDirectory API operation for AWS Directory Service.
+//
+// Describes the updates of a directory for a particular update type.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation DescribeUpdateDirectory for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - AccessDeniedException
+//     Client authentication is not available in this region at this time.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeUpdateDirectory
+func (c *DirectoryService) DescribeUpdateDirectory(input *DescribeUpdateDirectoryInput) (*DescribeUpdateDirectoryOutput, error) {
+	req, out := c.DescribeUpdateDirectoryRequest(input)
+	return out, req.Send()
+}
+
+// DescribeUpdateDirectoryWithContext is the same as DescribeUpdateDirectory with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeUpdateDirectory for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeUpdateDirectoryWithContext(ctx aws.Context, input *DescribeUpdateDirectoryInput, opts ...request.Option) (*DescribeUpdateDirectoryOutput, error) {
+	req, out := c.DescribeUpdateDirectoryRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeUpdateDirectoryPages iterates over the pages of a DescribeUpdateDirectory operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeUpdateDirectory method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeUpdateDirectory operation.
+//	pageNum := 0
+//	err := client.DescribeUpdateDirectoryPages(params,
+//	    func(page *directoryservice.DescribeUpdateDirectoryOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) DescribeUpdateDirectoryPages(input *DescribeUpdateDirectoryInput, fn func(*DescribeUpdateDirectoryOutput, bool) bool) error {
+	return c.DescribeUpdateDirectoryPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeUpdateDirectoryPagesWithContext same as DescribeUpdateDirectoryPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DescribeUpdateDirectoryPagesWithContext(ctx aws.Context, input *DescribeUpdateDirectoryInput, fn func(*DescribeUpdateDirectoryOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeUpdateDirectoryInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeUpdateDirectoryRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeUpdateDirectoryOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDisableClientAuthentication = "DisableClientAuthentication"
+
+// DisableClientAuthenticationRequest generates a "aws/request.Request" representing the
+// client's request for the DisableClientAuthentication operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisableClientAuthentication for more information on using the DisableClientAuthentication
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisableClientAuthenticationRequest method.
+//	req, resp := client.DisableClientAuthenticationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableClientAuthentication
+func (c *DirectoryService) DisableClientAuthenticationRequest(input *DisableClientAuthenticationInput) (req *request.Request, output *DisableClientAuthenticationOutput) {
+	op := &request.Operation{
+		Name:       opDisableClientAuthentication,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisableClientAuthenticationInput{}
+	}
+
+	output = &DisableClientAuthenticationOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DisableClientAuthentication API operation for AWS Directory Service.
+//
+// Disables alternative client authentication methods for the specified directory.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation DisableClientAuthentication for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidClientAuthStatusException
+//     Client authentication is already enabled.
+//
+//   - AccessDeniedException
+//     Client authentication is not available in this region at this time.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableClientAuthentication
+func (c *DirectoryService) DisableClientAuthentication(input *DisableClientAuthenticationInput) (*DisableClientAuthenticationOutput, error) {
+	req, out := c.DisableClientAuthenticationRequest(input)
+	return out, req.Send()
+}
+
+// DisableClientAuthenticationWithContext is the same as DisableClientAuthentication with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisableClientAuthentication for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DisableClientAuthenticationWithContext(ctx aws.Context, input *DisableClientAuthenticationInput, opts ...request.Option) (*DisableClientAuthenticationOutput, error) {
+	req, out := c.DisableClientAuthenticationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDisableLDAPS = "DisableLDAPS"
+
+// DisableLDAPSRequest generates a "aws/request.Request" representing the
+// client's request for the DisableLDAPS operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisableLDAPS for more information on using the DisableLDAPS
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisableLDAPSRequest method.
+//	req, resp := client.DisableLDAPSRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableLDAPS
+func (c *DirectoryService) DisableLDAPSRequest(input *DisableLDAPSInput) (req *request.Request, output *DisableLDAPSOutput) {
+	op := &request.Operation{
+		Name:       opDisableLDAPS,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisableLDAPSInput{}
+	}
+
+	output = &DisableLDAPSOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DisableLDAPS API operation for AWS Directory Service.
+//
+// Deactivates LDAP secure calls for the specified directory.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation DisableLDAPS for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - InvalidLDAPSStatusException
+//     The LDAP activities could not be performed because they are limited by the
+//     LDAPS status.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableLDAPS
+func (c *DirectoryService) DisableLDAPS(input *DisableLDAPSInput) (*DisableLDAPSOutput, error) {
+	req, out := c.DisableLDAPSRequest(input)
+	return out, req.Send()
+}
+
+// DisableLDAPSWithContext is the same as DisableLDAPS with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisableLDAPS for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) DisableLDAPSWithContext(ctx aws.Context, input *DisableLDAPSInput, opts ...request.Option) (*DisableLDAPSOutput, error) {
+	req, out := c.DisableLDAPSRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDisableRadius = "DisableRadius"
 
 // DisableRadiusRequest generates a "aws/request.Request" representing the
@@ -2563,14 +4008,13 @@ const opDisableRadius = "DisableRadius"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisableRadiusRequest method.
+//	req, resp := client.DisableRadiusRequest(params)
 //
-//    // Example sending a request using the DisableRadiusRequest method.
-//    req, resp := client.DisableRadiusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadius
 func (c *DirectoryService) DisableRadiusRequest(input *DisableRadiusInput) (req *request.Request, output *DisableRadiusOutput) {
@@ -2603,15 +4047,16 @@ func (c *DirectoryService) DisableRadiusRequest(input *DisableRadiusInput) (req 
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DisableRadius for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadius
 func (c *DirectoryService) DisableRadius(input *DisableRadiusInput) (*DisableRadiusOutput, error) {
@@ -2651,14 +4096,13 @@ const opDisableSso = "DisableSso"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisableSsoRequest method.
+//	req, resp := client.DisableSsoRequest(params)
 //
-//    // Example sending a request using the DisableSsoRequest method.
-//    req, resp := client.DisableSsoRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSso
 func (c *DirectoryService) DisableSsoRequest(input *DisableSsoInput) (req *request.Request, output *DisableSsoOutput) {
@@ -2689,21 +4133,22 @@ func (c *DirectoryService) DisableSsoRequest(input *DisableSsoInput) (req *reque
 // See the AWS API reference guide for AWS Directory Service's
 // API operation DisableSso for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInsufficientPermissionsException "InsufficientPermissionsException"
-//   The account does not have sufficient permission to perform the operation.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeAuthenticationFailedException "AuthenticationFailedException"
-//   An authentication error occurred.
+//   - InsufficientPermissionsException
+//     The account does not have sufficient permission to perform the operation.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - AuthenticationFailedException
+//     An authentication error occurred.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSso
 func (c *DirectoryService) DisableSso(input *DisableSsoInput) (*DisableSsoOutput, error) {
@@ -2727,6 +4172,209 @@ func (c *DirectoryService) DisableSsoWithContext(ctx aws.Context, input *Disable
 	return out, req.Send()
 }
 
+const opEnableClientAuthentication = "EnableClientAuthentication"
+
+// EnableClientAuthenticationRequest generates a "aws/request.Request" representing the
+// client's request for the EnableClientAuthentication operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See EnableClientAuthentication for more information on using the EnableClientAuthentication
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the EnableClientAuthenticationRequest method.
+//	req, resp := client.EnableClientAuthenticationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableClientAuthentication
+func (c *DirectoryService) EnableClientAuthenticationRequest(input *EnableClientAuthenticationInput) (req *request.Request, output *EnableClientAuthenticationOutput) {
+	op := &request.Operation{
+		Name:       opEnableClientAuthentication,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &EnableClientAuthenticationInput{}
+	}
+
+	output = &EnableClientAuthenticationOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// EnableClientAuthentication API operation for AWS Directory Service.
+//
+// Enables alternative client authentication methods for the specified directory.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation EnableClientAuthentication for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidClientAuthStatusException
+//     Client authentication is already enabled.
+//
+//   - AccessDeniedException
+//     Client authentication is not available in this region at this time.
+//
+//   - NoAvailableCertificateException
+//     Client authentication setup could not be completed because at least one valid
+//     certificate must be registered in the system.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableClientAuthentication
+func (c *DirectoryService) EnableClientAuthentication(input *EnableClientAuthenticationInput) (*EnableClientAuthenticationOutput, error) {
+	req, out := c.EnableClientAuthenticationRequest(input)
+	return out, req.Send()
+}
+
+// EnableClientAuthenticationWithContext is the same as EnableClientAuthentication with the addition of
+// the ability to pass a context and additional request options.
+//
+// See EnableClientAuthentication for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) EnableClientAuthenticationWithContext(ctx aws.Context, input *EnableClientAuthenticationInput, opts ...request.Option) (*EnableClientAuthenticationOutput, error) {
+	req, out := c.EnableClientAuthenticationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opEnableLDAPS = "EnableLDAPS"
+
+// EnableLDAPSRequest generates a "aws/request.Request" representing the
+// client's request for the EnableLDAPS operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See EnableLDAPS for more information on using the EnableLDAPS
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the EnableLDAPSRequest method.
+//	req, resp := client.EnableLDAPSRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableLDAPS
+func (c *DirectoryService) EnableLDAPSRequest(input *EnableLDAPSInput) (req *request.Request, output *EnableLDAPSOutput) {
+	op := &request.Operation{
+		Name:       opEnableLDAPS,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &EnableLDAPSInput{}
+	}
+
+	output = &EnableLDAPSOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// EnableLDAPS API operation for AWS Directory Service.
+//
+// Activates the switch for the specific directory to always use LDAP secure
+// calls.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation EnableLDAPS for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - NoAvailableCertificateException
+//     Client authentication setup could not be completed because at least one valid
+//     certificate must be registered in the system.
+//
+//   - InvalidLDAPSStatusException
+//     The LDAP activities could not be performed because they are limited by the
+//     LDAPS status.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableLDAPS
+func (c *DirectoryService) EnableLDAPS(input *EnableLDAPSInput) (*EnableLDAPSOutput, error) {
+	req, out := c.EnableLDAPSRequest(input)
+	return out, req.Send()
+}
+
+// EnableLDAPSWithContext is the same as EnableLDAPS with the addition of
+// the ability to pass a context and additional request options.
+//
+// See EnableLDAPS for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) EnableLDAPSWithContext(ctx aws.Context, input *EnableLDAPSInput, opts ...request.Option) (*EnableLDAPSOutput, error) {
+	req, out := c.EnableLDAPSRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opEnableRadius = "EnableRadius"
 
 // EnableRadiusRequest generates a "aws/request.Request" representing the
@@ -2743,14 +4391,13 @@ const opEnableRadius = "EnableRadius"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the EnableRadiusRequest method.
+//	req, resp := client.EnableRadiusRequest(params)
 //
-//    // Example sending a request using the EnableRadiusRequest method.
-//    req, resp := client.EnableRadiusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadius
 func (c *DirectoryService) EnableRadiusRequest(input *EnableRadiusInput) (req *request.Request, output *EnableRadiusOutput) {
@@ -2783,21 +4430,22 @@ func (c *DirectoryService) EnableRadiusRequest(input *EnableRadiusInput) (req *r
 // See the AWS API reference guide for AWS Directory Service's
 // API operation EnableRadius for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeEntityAlreadyExistsException "EntityAlreadyExistsException"
-//   The specified entity already exists.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - EntityAlreadyExistsException
+//     The specified entity already exists.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadius
 func (c *DirectoryService) EnableRadius(input *EnableRadiusInput) (*EnableRadiusOutput, error) {
@@ -2837,14 +4485,13 @@ const opEnableSso = "EnableSso"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the EnableSsoRequest method.
+//	req, resp := client.EnableSsoRequest(params)
 //
-//    // Example sending a request using the EnableSsoRequest method.
-//    req, resp := client.EnableSsoRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSso
 func (c *DirectoryService) EnableSsoRequest(input *EnableSsoInput) (req *request.Request, output *EnableSsoOutput) {
@@ -2866,7 +4513,9 @@ func (c *DirectoryService) EnableSsoRequest(input *EnableSsoInput) (req *request
 
 // EnableSso API operation for AWS Directory Service.
 //
-// Enables single sign-on for a directory.
+// Enables single sign-on for a directory. Single sign-on allows users in your
+// directory to access certain Amazon Web Services services from a computer
+// joined to the directory without having to enter their credentials separately.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2875,21 +4524,22 @@ func (c *DirectoryService) EnableSsoRequest(input *EnableSsoInput) (req *request
 // See the AWS API reference guide for AWS Directory Service's
 // API operation EnableSso for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInsufficientPermissionsException "InsufficientPermissionsException"
-//   The account does not have sufficient permission to perform the operation.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeAuthenticationFailedException "AuthenticationFailedException"
-//   An authentication error occurred.
+//   - InsufficientPermissionsException
+//     The account does not have sufficient permission to perform the operation.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - AuthenticationFailedException
+//     An authentication error occurred.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSso
 func (c *DirectoryService) EnableSso(input *EnableSsoInput) (*EnableSsoOutput, error) {
@@ -2929,14 +4579,13 @@ const opGetDirectoryLimits = "GetDirectoryLimits"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDirectoryLimitsRequest method.
+//	req, resp := client.GetDirectoryLimitsRequest(params)
 //
-//    // Example sending a request using the GetDirectoryLimitsRequest method.
-//    req, resp := client.GetDirectoryLimitsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimits
 func (c *DirectoryService) GetDirectoryLimitsRequest(input *GetDirectoryLimitsInput) (req *request.Request, output *GetDirectoryLimitsOutput) {
@@ -2957,7 +4606,7 @@ func (c *DirectoryService) GetDirectoryLimitsRequest(input *GetDirectoryLimitsIn
 
 // GetDirectoryLimits API operation for AWS Directory Service.
 //
-// Obtains directory limit information for the current region.
+// Obtains directory limit information for the current Region.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2966,15 +4615,16 @@ func (c *DirectoryService) GetDirectoryLimitsRequest(input *GetDirectoryLimitsIn
 // See the AWS API reference guide for AWS Directory Service's
 // API operation GetDirectoryLimits for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimits
 func (c *DirectoryService) GetDirectoryLimits(input *GetDirectoryLimitsInput) (*GetDirectoryLimitsOutput, error) {
@@ -3014,14 +4664,13 @@ const opGetSnapshotLimits = "GetSnapshotLimits"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetSnapshotLimitsRequest method.
+//	req, resp := client.GetSnapshotLimitsRequest(params)
 //
-//    // Example sending a request using the GetSnapshotLimitsRequest method.
-//    req, resp := client.GetSnapshotLimitsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetSnapshotLimits
 func (c *DirectoryService) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInput) (req *request.Request, output *GetSnapshotLimitsOutput) {
@@ -3051,15 +4700,16 @@ func (c *DirectoryService) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInpu
 // See the AWS API reference guide for AWS Directory Service's
 // API operation GetSnapshotLimits for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetSnapshotLimits
 func (c *DirectoryService) GetSnapshotLimits(input *GetSnapshotLimitsInput) (*GetSnapshotLimitsOutput, error) {
@@ -3083,6 +4733,158 @@ func (c *DirectoryService) GetSnapshotLimitsWithContext(ctx aws.Context, input *
 	return out, req.Send()
 }
 
+const opListCertificates = "ListCertificates"
+
+// ListCertificatesRequest generates a "aws/request.Request" representing the
+// client's request for the ListCertificates operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListCertificates for more information on using the ListCertificates
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListCertificatesRequest method.
+//	req, resp := client.ListCertificatesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListCertificates
+func (c *DirectoryService) ListCertificatesRequest(input *ListCertificatesInput) (req *request.Request, output *ListCertificatesOutput) {
+	op := &request.Operation{
+		Name:       opListCertificates,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListCertificatesInput{}
+	}
+
+	output = &ListCertificatesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListCertificates API operation for AWS Directory Service.
+//
+// For the specified directory, lists all the certificates registered for a
+// secure LDAP or client certificate authentication.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation ListCertificates for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListCertificates
+func (c *DirectoryService) ListCertificates(input *ListCertificatesInput) (*ListCertificatesOutput, error) {
+	req, out := c.ListCertificatesRequest(input)
+	return out, req.Send()
+}
+
+// ListCertificatesWithContext is the same as ListCertificates with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListCertificates for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) ListCertificatesWithContext(ctx aws.Context, input *ListCertificatesInput, opts ...request.Option) (*ListCertificatesOutput, error) {
+	req, out := c.ListCertificatesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListCertificatesPages iterates over the pages of a ListCertificates operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListCertificates method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListCertificates operation.
+//	pageNum := 0
+//	err := client.ListCertificatesPages(params,
+//	    func(page *directoryservice.ListCertificatesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) ListCertificatesPages(input *ListCertificatesInput, fn func(*ListCertificatesOutput, bool) bool) error {
+	return c.ListCertificatesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListCertificatesPagesWithContext same as ListCertificatesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) ListCertificatesPagesWithContext(ctx aws.Context, input *ListCertificatesInput, fn func(*ListCertificatesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListCertificatesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListCertificatesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListCertificatesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListIpRoutes = "ListIpRoutes"
 
 // ListIpRoutesRequest generates a "aws/request.Request" representing the
@@ -3099,14 +4901,13 @@ const opListIpRoutes = "ListIpRoutes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListIpRoutesRequest method.
+//	req, resp := client.ListIpRoutesRequest(params)
 //
-//    // Example sending a request using the ListIpRoutesRequest method.
-//    req, resp := client.ListIpRoutesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListIpRoutes
 func (c *DirectoryService) ListIpRoutesRequest(input *ListIpRoutesInput) (req *request.Request, output *ListIpRoutesOutput) {
@@ -3114,6 +4915,12 @@ func (c *DirectoryService) ListIpRoutesRequest(input *ListIpRoutesInput) (req *r
 		Name:       opListIpRoutes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3136,21 +4943,22 @@ func (c *DirectoryService) ListIpRoutesRequest(input *ListIpRoutesInput) (req *r
 // See the AWS API reference guide for AWS Directory Service's
 // API operation ListIpRoutes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken value is not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListIpRoutes
 func (c *DirectoryService) ListIpRoutes(input *ListIpRoutesInput) (*ListIpRoutesOutput, error) {
@@ -3174,6 +4982,57 @@ func (c *DirectoryService) ListIpRoutesWithContext(ctx aws.Context, input *ListI
 	return out, req.Send()
 }
 
+// ListIpRoutesPages iterates over the pages of a ListIpRoutes operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListIpRoutes method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListIpRoutes operation.
+//	pageNum := 0
+//	err := client.ListIpRoutesPages(params,
+//	    func(page *directoryservice.ListIpRoutesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) ListIpRoutesPages(input *ListIpRoutesInput, fn func(*ListIpRoutesOutput, bool) bool) error {
+	return c.ListIpRoutesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListIpRoutesPagesWithContext same as ListIpRoutesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) ListIpRoutesPagesWithContext(ctx aws.Context, input *ListIpRoutesInput, fn func(*ListIpRoutesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListIpRoutesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListIpRoutesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListIpRoutesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListLogSubscriptions = "ListLogSubscriptions"
 
 // ListLogSubscriptionsRequest generates a "aws/request.Request" representing the
@@ -3190,14 +5049,13 @@ const opListLogSubscriptions = "ListLogSubscriptions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListLogSubscriptionsRequest method.
+//	req, resp := client.ListLogSubscriptionsRequest(params)
 //
-//    // Example sending a request using the ListLogSubscriptionsRequest method.
-//    req, resp := client.ListLogSubscriptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptions
 func (c *DirectoryService) ListLogSubscriptionsRequest(input *ListLogSubscriptionsInput) (req *request.Request, output *ListLogSubscriptionsOutput) {
@@ -3205,6 +5063,12 @@ func (c *DirectoryService) ListLogSubscriptionsRequest(input *ListLogSubscriptio
 		Name:       opListLogSubscriptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3218,7 +5082,7 @@ func (c *DirectoryService) ListLogSubscriptionsRequest(input *ListLogSubscriptio
 
 // ListLogSubscriptions API operation for AWS Directory Service.
 //
-// Lists the active log subscriptions for the AWS account.
+// Lists the active log subscriptions for the Amazon Web Services account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3227,18 +5091,19 @@ func (c *DirectoryService) ListLogSubscriptionsRequest(input *ListLogSubscriptio
 // See the AWS API reference guide for AWS Directory Service's
 // API operation ListLogSubscriptions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken value is not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptions
 func (c *DirectoryService) ListLogSubscriptions(input *ListLogSubscriptionsInput) (*ListLogSubscriptionsOutput, error) {
@@ -3262,6 +5127,57 @@ func (c *DirectoryService) ListLogSubscriptionsWithContext(ctx aws.Context, inpu
 	return out, req.Send()
 }
 
+// ListLogSubscriptionsPages iterates over the pages of a ListLogSubscriptions operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListLogSubscriptions method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListLogSubscriptions operation.
+//	pageNum := 0
+//	err := client.ListLogSubscriptionsPages(params,
+//	    func(page *directoryservice.ListLogSubscriptionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) ListLogSubscriptionsPages(input *ListLogSubscriptionsInput, fn func(*ListLogSubscriptionsOutput, bool) bool) error {
+	return c.ListLogSubscriptionsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListLogSubscriptionsPagesWithContext same as ListLogSubscriptionsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) ListLogSubscriptionsPagesWithContext(ctx aws.Context, input *ListLogSubscriptionsInput, fn func(*ListLogSubscriptionsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListLogSubscriptionsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListLogSubscriptionsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListLogSubscriptionsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListSchemaExtensions = "ListSchemaExtensions"
 
 // ListSchemaExtensionsRequest generates a "aws/request.Request" representing the
@@ -3278,14 +5194,13 @@ const opListSchemaExtensions = "ListSchemaExtensions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListSchemaExtensionsRequest method.
+//	req, resp := client.ListSchemaExtensionsRequest(params)
 //
-//    // Example sending a request using the ListSchemaExtensionsRequest method.
-//    req, resp := client.ListSchemaExtensionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListSchemaExtensions
 func (c *DirectoryService) ListSchemaExtensionsRequest(input *ListSchemaExtensionsInput) (req *request.Request, output *ListSchemaExtensionsOutput) {
@@ -3293,6 +5208,12 @@ func (c *DirectoryService) ListSchemaExtensionsRequest(input *ListSchemaExtensio
 		Name:       opListSchemaExtensions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3315,18 +5236,19 @@ func (c *DirectoryService) ListSchemaExtensionsRequest(input *ListSchemaExtensio
 // See the AWS API reference guide for AWS Directory Service's
 // API operation ListSchemaExtensions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken value is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListSchemaExtensions
 func (c *DirectoryService) ListSchemaExtensions(input *ListSchemaExtensionsInput) (*ListSchemaExtensionsOutput, error) {
@@ -3350,6 +5272,57 @@ func (c *DirectoryService) ListSchemaExtensionsWithContext(ctx aws.Context, inpu
 	return out, req.Send()
 }
 
+// ListSchemaExtensionsPages iterates over the pages of a ListSchemaExtensions operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListSchemaExtensions method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListSchemaExtensions operation.
+//	pageNum := 0
+//	err := client.ListSchemaExtensionsPages(params,
+//	    func(page *directoryservice.ListSchemaExtensionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) ListSchemaExtensionsPages(input *ListSchemaExtensionsInput, fn func(*ListSchemaExtensionsOutput, bool) bool) error {
+	return c.ListSchemaExtensionsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListSchemaExtensionsPagesWithContext same as ListSchemaExtensionsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) ListSchemaExtensionsPagesWithContext(ctx aws.Context, input *ListSchemaExtensionsInput, fn func(*ListSchemaExtensionsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListSchemaExtensionsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListSchemaExtensionsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListSchemaExtensionsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListTagsForResource = "ListTagsForResource"
 
 // ListTagsForResourceRequest generates a "aws/request.Request" representing the
@@ -3366,14 +5339,13 @@ const opListTagsForResource = "ListTagsForResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
 //
-//    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListTagsForResource
 func (c *DirectoryService) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
@@ -3381,6 +5353,12 @@ func (c *DirectoryService) ListTagsForResourceRequest(input *ListTagsForResource
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3403,21 +5381,22 @@ func (c *DirectoryService) ListTagsForResourceRequest(input *ListTagsForResource
 // See the AWS API reference guide for AWS Directory Service's
 // API operation ListTagsForResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken value is not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - InvalidNextTokenException
+//     The NextToken value is not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListTagsForResource
 func (c *DirectoryService) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
@@ -3441,6 +5420,161 @@ func (c *DirectoryService) ListTagsForResourceWithContext(ctx aws.Context, input
 	return out, req.Send()
 }
 
+// ListTagsForResourcePages iterates over the pages of a ListTagsForResource operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListTagsForResource method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListTagsForResource operation.
+//	pageNum := 0
+//	err := client.ListTagsForResourcePages(params,
+//	    func(page *directoryservice.ListTagsForResourceOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DirectoryService) ListTagsForResourcePages(input *ListTagsForResourceInput, fn func(*ListTagsForResourceOutput, bool) bool) error {
+	return c.ListTagsForResourcePagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListTagsForResourcePagesWithContext same as ListTagsForResourcePages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) ListTagsForResourcePagesWithContext(ctx aws.Context, input *ListTagsForResourceInput, fn func(*ListTagsForResourceOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListTagsForResourceInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListTagsForResourceRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListTagsForResourceOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opRegisterCertificate = "RegisterCertificate"
+
+// RegisterCertificateRequest generates a "aws/request.Request" representing the
+// client's request for the RegisterCertificate operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RegisterCertificate for more information on using the RegisterCertificate
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RegisterCertificateRequest method.
+//	req, resp := client.RegisterCertificateRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterCertificate
+func (c *DirectoryService) RegisterCertificateRequest(input *RegisterCertificateInput) (req *request.Request, output *RegisterCertificateOutput) {
+	op := &request.Operation{
+		Name:       opRegisterCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RegisterCertificateInput{}
+	}
+
+	output = &RegisterCertificateOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// RegisterCertificate API operation for AWS Directory Service.
+//
+// Registers a certificate for a secure LDAP or client certificate authentication.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation RegisterCertificate for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - InvalidCertificateException
+//     The certificate PEM that was provided has incorrect encoding.
+//
+//   - CertificateLimitExceededException
+//     The certificate could not be added because the certificate limit has been
+//     reached.
+//
+//   - CertificateAlreadyExistsException
+//     The certificate has already been registered into the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterCertificate
+func (c *DirectoryService) RegisterCertificate(input *RegisterCertificateInput) (*RegisterCertificateOutput, error) {
+	req, out := c.RegisterCertificateRequest(input)
+	return out, req.Send()
+}
+
+// RegisterCertificateWithContext is the same as RegisterCertificate with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RegisterCertificate for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) RegisterCertificateWithContext(ctx aws.Context, input *RegisterCertificateInput, opts ...request.Option) (*RegisterCertificateOutput, error) {
+	req, out := c.RegisterCertificateRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opRegisterEventTopic = "RegisterEventTopic"
 
 // RegisterEventTopicRequest generates a "aws/request.Request" representing the
@@ -3457,14 +5591,13 @@ const opRegisterEventTopic = "RegisterEventTopic"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterEventTopicRequest method.
+//	req, resp := client.RegisterEventTopicRequest(params)
 //
-//    // Example sending a request using the RegisterEventTopicRequest method.
-//    req, resp := client.RegisterEventTopicRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopic
 func (c *DirectoryService) RegisterEventTopicRequest(input *RegisterEventTopicInput) (req *request.Request, output *RegisterEventTopicOutput) {
@@ -3486,10 +5619,10 @@ func (c *DirectoryService) RegisterEventTopicRequest(input *RegisterEventTopicIn
 
 // RegisterEventTopic API operation for AWS Directory Service.
 //
-// Associates a directory with an SNS topic. This establishes the directory
-// as a publisher to the specified SNS topic. You can then receive email or
-// text (SMS) messages when the status of your directory changes. You get notified
-// if your directory goes from an Active status to an Impaired or Inoperable
+// Associates a directory with an Amazon SNS topic. This establishes the directory
+// as a publisher to the specified Amazon SNS topic. You can then receive email
+// or text (SMS) messages when the status of your directory changes. You get
+// notified if your directory goes from an Active status to an Impaired or Inoperable
 // status. You also receive a notification when the directory returns to an
 // Active status.
 //
@@ -3500,18 +5633,19 @@ func (c *DirectoryService) RegisterEventTopicRequest(input *RegisterEventTopicIn
 // See the AWS API reference guide for AWS Directory Service's
 // API operation RegisterEventTopic for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopic
 func (c *DirectoryService) RegisterEventTopic(input *RegisterEventTopicInput) (*RegisterEventTopicOutput, error) {
@@ -3551,14 +5685,13 @@ const opRejectSharedDirectory = "RejectSharedDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RejectSharedDirectoryRequest method.
+//	req, resp := client.RejectSharedDirectoryRequest(params)
 //
-//    // Example sending a request using the RejectSharedDirectoryRequest method.
-//    req, resp := client.RejectSharedDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RejectSharedDirectory
 func (c *DirectoryService) RejectSharedDirectoryRequest(input *RejectSharedDirectoryInput) (req *request.Request, output *RejectSharedDirectoryOutput) {
@@ -3589,21 +5722,23 @@ func (c *DirectoryService) RejectSharedDirectoryRequest(input *RejectSharedDirec
 // See the AWS API reference guide for AWS Directory Service's
 // API operation RejectSharedDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeDirectoryAlreadySharedException "DirectoryAlreadySharedException"
-//   The specified directory has already been shared with this AWS account.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - DirectoryAlreadySharedException
+//     The specified directory has already been shared with this Amazon Web Services
+//     account.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RejectSharedDirectory
 func (c *DirectoryService) RejectSharedDirectory(input *RejectSharedDirectoryInput) (*RejectSharedDirectoryOutput, error) {
@@ -3643,14 +5778,13 @@ const opRemoveIpRoutes = "RemoveIpRoutes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RemoveIpRoutesRequest method.
+//	req, resp := client.RemoveIpRoutesRequest(params)
 //
-//    // Example sending a request using the RemoveIpRoutesRequest method.
-//    req, resp := client.RemoveIpRoutesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutes
 func (c *DirectoryService) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) (req *request.Request, output *RemoveIpRoutesOutput) {
@@ -3681,21 +5815,22 @@ func (c *DirectoryService) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) (re
 // See the AWS API reference guide for AWS Directory Service's
 // API operation RemoveIpRoutes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutes
 func (c *DirectoryService) RemoveIpRoutes(input *RemoveIpRoutesInput) (*RemoveIpRoutesOutput, error) {
@@ -3719,6 +5854,103 @@ func (c *DirectoryService) RemoveIpRoutesWithContext(ctx aws.Context, input *Rem
 	return out, req.Send()
 }
 
+const opRemoveRegion = "RemoveRegion"
+
+// RemoveRegionRequest generates a "aws/request.Request" representing the
+// client's request for the RemoveRegion operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RemoveRegion for more information on using the RemoveRegion
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RemoveRegionRequest method.
+//	req, resp := client.RemoveRegionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveRegion
+func (c *DirectoryService) RemoveRegionRequest(input *RemoveRegionInput) (req *request.Request, output *RemoveRegionOutput) {
+	op := &request.Operation{
+		Name:       opRemoveRegion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RemoveRegionInput{}
+	}
+
+	output = &RemoveRegionOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// RemoveRegion API operation for AWS Directory Service.
+//
+// Stops all replication and removes the domain controllers from the specified
+// Region. You cannot remove the primary Region with this operation. Instead,
+// use the DeleteDirectory API.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation RemoveRegion for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - AccessDeniedException
+//     Client authentication is not available in this region at this time.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveRegion
+func (c *DirectoryService) RemoveRegion(input *RemoveRegionInput) (*RemoveRegionOutput, error) {
+	req, out := c.RemoveRegionRequest(input)
+	return out, req.Send()
+}
+
+// RemoveRegionWithContext is the same as RemoveRegion with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RemoveRegion for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) RemoveRegionWithContext(ctx aws.Context, input *RemoveRegionInput, opts ...request.Option) (*RemoveRegionOutput, error) {
+	req, out := c.RemoveRegionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
 // RemoveTagsFromResourceRequest generates a "aws/request.Request" representing the
@@ -3735,14 +5967,13 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RemoveTagsFromResourceRequest method.
+//	req, resp := client.RemoveTagsFromResourceRequest(params)
 //
-//    // Example sending a request using the RemoveTagsFromResourceRequest method.
-//    req, resp := client.RemoveTagsFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResource
 func (c *DirectoryService) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *RemoveTagsFromResourceOutput) {
@@ -3773,18 +6004,19 @@ func (c *DirectoryService) RemoveTagsFromResourceRequest(input *RemoveTagsFromRe
 // See the AWS API reference guide for AWS Directory Service's
 // API operation RemoveTagsFromResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResource
 func (c *DirectoryService) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*RemoveTagsFromResourceOutput, error) {
@@ -3824,14 +6056,13 @@ const opResetUserPassword = "ResetUserPassword"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ResetUserPasswordRequest method.
+//	req, resp := client.ResetUserPasswordRequest(params)
 //
-//    // Example sending a request using the ResetUserPasswordRequest method.
-//    req, resp := client.ResetUserPasswordRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPassword
 func (c *DirectoryService) ResetUserPasswordRequest(input *ResetUserPasswordInput) (req *request.Request, output *ResetUserPasswordOutput) {
@@ -3853,8 +6084,23 @@ func (c *DirectoryService) ResetUserPasswordRequest(input *ResetUserPasswordInpu
 
 // ResetUserPassword API operation for AWS Directory Service.
 //
-// Resets the password for any user in your AWS Managed Microsoft AD or Simple
-// AD directory.
+// Resets the password for any user in your Managed Microsoft AD or Simple AD
+// directory.
+//
+// You can reset the password for any user in your directory with the following
+// exceptions:
+//
+//   - For Simple AD, you cannot reset the password for any user that is a
+//     member of either the Domain Admins or Enterprise Admins group except for
+//     the administrator user.
+//
+//   - For Managed Microsoft AD, you can only reset the password for a user
+//     that is in an OU based off of the NetBIOS name that you typed when you
+//     created your directory. For example, you cannot reset the password for
+//     a user in the Amazon Web Services Reserved OU. For more information about
+//     the OU structure for an Managed Microsoft AD directory, see What Gets
+//     Created (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html)
+//     in the Directory Service Administration Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3863,28 +6109,29 @@ func (c *DirectoryService) ResetUserPasswordRequest(input *ResetUserPasswordInpu
 // See the AWS API reference guide for AWS Directory Service's
 // API operation ResetUserPassword for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeUserDoesNotExistException "UserDoesNotExistException"
-//   The user provided a username that does not exist in your directory.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeInvalidPasswordException "InvalidPasswordException"
-//   The new password provided by the user does not meet the password complexity
-//   requirements defined in your directory.
+//   - UserDoesNotExistException
+//     The user provided a username that does not exist in your directory.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - InvalidPasswordException
+//     The new password provided by the user does not meet the password complexity
+//     requirements defined in your directory.
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPassword
 func (c *DirectoryService) ResetUserPassword(input *ResetUserPasswordInput) (*ResetUserPasswordOutput, error) {
@@ -3924,14 +6171,13 @@ const opRestoreFromSnapshot = "RestoreFromSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RestoreFromSnapshotRequest method.
+//	req, resp := client.RestoreFromSnapshotRequest(params)
 //
-//    // Example sending a request using the RestoreFromSnapshotRequest method.
-//    req, resp := client.RestoreFromSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RestoreFromSnapshot
 func (c *DirectoryService) RestoreFromSnapshotRequest(input *RestoreFromSnapshotInput) (req *request.Request, output *RestoreFromSnapshotOutput) {
@@ -3970,18 +6216,19 @@ func (c *DirectoryService) RestoreFromSnapshotRequest(input *RestoreFromSnapshot
 // See the AWS API reference guide for AWS Directory Service's
 // API operation RestoreFromSnapshot for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RestoreFromSnapshot
 func (c *DirectoryService) RestoreFromSnapshot(input *RestoreFromSnapshotInput) (*RestoreFromSnapshotOutput, error) {
@@ -4021,14 +6268,13 @@ const opShareDirectory = "ShareDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ShareDirectoryRequest method.
+//	req, resp := client.ShareDirectoryRequest(params)
 //
-//    // Example sending a request using the ShareDirectoryRequest method.
-//    req, resp := client.ShareDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectory
 func (c *DirectoryService) ShareDirectoryRequest(input *ShareDirectoryInput) (req *request.Request, output *ShareDirectoryOutput) {
@@ -4049,21 +6295,22 @@ func (c *DirectoryService) ShareDirectoryRequest(input *ShareDirectoryInput) (re
 
 // ShareDirectory API operation for AWS Directory Service.
 //
-// Shares a specified directory (DirectoryId) in your AWS account (directory
-// owner) with another AWS account (directory consumer). With this operation
-// you can use your directory from any AWS account and from any Amazon VPC within
-// an AWS Region.
+// Shares a specified directory (DirectoryId) in your Amazon Web Services account
+// (directory owner) with another Amazon Web Services account (directory consumer).
+// With this operation you can use your directory from any Amazon Web Services
+// account and from any Amazon VPC within an Amazon Web Services Region.
 //
-// When you share your AWS Managed Microsoft AD directory, AWS Directory Service
-// creates a shared directory in the directory consumer account. This shared
-// directory contains the metadata to provide access to the directory within
-// the directory owner account. The shared directory is visible in all VPCs
-// in the directory consumer account.
+// When you share your Managed Microsoft AD directory, Directory Service creates
+// a shared directory in the directory consumer account. This shared directory
+// contains the metadata to provide access to the directory within the directory
+// owner account. The shared directory is visible in all VPCs in the directory
+// consumer account.
 //
 // The ShareMethod parameter determines whether the specified directory can
-// be shared between AWS accounts inside the same AWS organization (ORGANIZATIONS).
-// It also determines whether you can share the directory with any other AWS
-// account either inside or outside of the organization (HANDSHAKE).
+// be shared between Amazon Web Services accounts inside the same Amazon Web
+// Services organization (ORGANIZATIONS). It also determines whether you can
+// share the directory with any other Amazon Web Services account either inside
+// or outside of the organization (HANDSHAKE).
 //
 // The ShareNotes parameter is only used when HANDSHAKE is called, which sends
 // a directory sharing request to the directory consumer.
@@ -4075,37 +6322,39 @@ func (c *DirectoryService) ShareDirectoryRequest(input *ShareDirectoryInput) (re
 // See the AWS API reference guide for AWS Directory Service's
 // API operation ShareDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDirectoryAlreadySharedException "DirectoryAlreadySharedException"
-//   The specified directory has already been shared with this AWS account.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - DirectoryAlreadySharedException
+//     The specified directory has already been shared with this Amazon Web Services
+//     account.
 //
-//   * ErrCodeInvalidTargetException "InvalidTargetException"
-//   The specified shared target is not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - InvalidTargetException
+//     The specified shared target is not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeShareLimitExceededException "ShareLimitExceededException"
-//   The maximum number of AWS accounts that you can share with this directory
-//   has been reached.
+//   - ClientException
+//     A client exception has occurred.
 //
-//   * ErrCodeOrganizationsException "OrganizationsException"
-//   Exception encountered while trying to access your AWS organization.
+//   - ShareLimitExceededException
+//     The maximum number of Amazon Web Services accounts that you can share with
+//     this directory has been reached.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have sufficient access to perform this action.
+//   - OrganizationsException
+//     Exception encountered while trying to access your Amazon Web Services organization.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - AccessDeniedException
+//     Client authentication is not available in this region at this time.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectory
 func (c *DirectoryService) ShareDirectory(input *ShareDirectoryInput) (*ShareDirectoryOutput, error) {
@@ -4145,14 +6394,13 @@ const opStartSchemaExtension = "StartSchemaExtension"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartSchemaExtensionRequest method.
+//	req, resp := client.StartSchemaExtensionRequest(params)
 //
-//    // Example sending a request using the StartSchemaExtensionRequest method.
-//    req, resp := client.StartSchemaExtensionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartSchemaExtension
 func (c *DirectoryService) StartSchemaExtensionRequest(input *StartSchemaExtensionInput) (req *request.Request, output *StartSchemaExtensionOutput) {
@@ -4182,26 +6430,27 @@ func (c *DirectoryService) StartSchemaExtensionRequest(input *StartSchemaExtensi
 // See the AWS API reference guide for AWS Directory Service's
 // API operation StartSchemaExtension for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeSnapshotLimitExceededException "SnapshotLimitExceededException"
-//   The maximum number of manual snapshots for the directory has been reached.
-//   You can use the GetSnapshotLimits operation to determine the snapshot limits
-//   for a directory.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - SnapshotLimitExceededException
+//     The maximum number of manual snapshots for the directory has been reached.
+//     You can use the GetSnapshotLimits operation to determine the snapshot limits
+//     for a directory.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartSchemaExtension
 func (c *DirectoryService) StartSchemaExtension(input *StartSchemaExtensionInput) (*StartSchemaExtensionOutput, error) {
@@ -4241,14 +6490,13 @@ const opUnshareDirectory = "UnshareDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UnshareDirectoryRequest method.
+//	req, resp := client.UnshareDirectoryRequest(params)
 //
-//    // Example sending a request using the UnshareDirectoryRequest method.
-//    req, resp := client.UnshareDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareDirectory
 func (c *DirectoryService) UnshareDirectoryRequest(input *UnshareDirectoryInput) (req *request.Request, output *UnshareDirectoryOutput) {
@@ -4278,21 +6526,23 @@ func (c *DirectoryService) UnshareDirectoryRequest(input *UnshareDirectoryInput)
 // See the AWS API reference guide for AWS Directory Service's
 // API operation UnshareDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidTargetException "InvalidTargetException"
-//   The specified shared target is not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeDirectoryNotSharedException "DirectoryNotSharedException"
-//   The specified directory has not been shared with this AWS account.
+//   - InvalidTargetException
+//     The specified shared target is not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - DirectoryNotSharedException
+//     The specified directory has not been shared with this Amazon Web Services
+//     account.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareDirectory
 func (c *DirectoryService) UnshareDirectory(input *UnshareDirectoryInput) (*UnshareDirectoryOutput, error) {
@@ -4332,14 +6582,13 @@ const opUpdateConditionalForwarder = "UpdateConditionalForwarder"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateConditionalForwarderRequest method.
+//	req, resp := client.UpdateConditionalForwarderRequest(params)
 //
-//    // Example sending a request using the UpdateConditionalForwarderRequest method.
-//    req, resp := client.UpdateConditionalForwarderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarder
 func (c *DirectoryService) UpdateConditionalForwarderRequest(input *UpdateConditionalForwarderInput) (req *request.Request, output *UpdateConditionalForwarderOutput) {
@@ -4361,7 +6610,8 @@ func (c *DirectoryService) UpdateConditionalForwarderRequest(input *UpdateCondit
 
 // UpdateConditionalForwarder API operation for AWS Directory Service.
 //
-// Updates a conditional forwarder that has been set up for your AWS directory.
+// Updates a conditional forwarder that has been set up for your Amazon Web
+// Services directory.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -4370,24 +6620,25 @@ func (c *DirectoryService) UpdateConditionalForwarderRequest(input *UpdateCondit
 // See the AWS API reference guide for AWS Directory Service's
 // API operation UpdateConditionalForwarder for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarder
 func (c *DirectoryService) UpdateConditionalForwarder(input *UpdateConditionalForwarderInput) (*UpdateConditionalForwarderOutput, error) {
@@ -4411,6 +6662,112 @@ func (c *DirectoryService) UpdateConditionalForwarderWithContext(ctx aws.Context
 	return out, req.Send()
 }
 
+const opUpdateDirectorySetup = "UpdateDirectorySetup"
+
+// UpdateDirectorySetupRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateDirectorySetup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateDirectorySetup for more information on using the UpdateDirectorySetup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateDirectorySetupRequest method.
+//	req, resp := client.UpdateDirectorySetupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateDirectorySetup
+func (c *DirectoryService) UpdateDirectorySetupRequest(input *UpdateDirectorySetupInput) (req *request.Request, output *UpdateDirectorySetupOutput) {
+	op := &request.Operation{
+		Name:       opUpdateDirectorySetup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateDirectorySetupInput{}
+	}
+
+	output = &UpdateDirectorySetupOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateDirectorySetup API operation for AWS Directory Service.
+//
+// Updates the directory for a particular update type.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation UpdateDirectorySetup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - DirectoryInDesiredStateException
+//     The directory is already updated to desired update type settings.
+//
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
+//
+//   - SnapshotLimitExceededException
+//     The maximum number of manual snapshots for the directory has been reached.
+//     You can use the GetSnapshotLimits operation to determine the snapshot limits
+//     for a directory.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - AccessDeniedException
+//     Client authentication is not available in this region at this time.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateDirectorySetup
+func (c *DirectoryService) UpdateDirectorySetup(input *UpdateDirectorySetupInput) (*UpdateDirectorySetupOutput, error) {
+	req, out := c.UpdateDirectorySetupRequest(input)
+	return out, req.Send()
+}
+
+// UpdateDirectorySetupWithContext is the same as UpdateDirectorySetup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateDirectorySetup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) UpdateDirectorySetupWithContext(ctx aws.Context, input *UpdateDirectorySetupInput, opts ...request.Option) (*UpdateDirectorySetupOutput, error) {
+	req, out := c.UpdateDirectorySetupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateNumberOfDomainControllers = "UpdateNumberOfDomainControllers"
 
 // UpdateNumberOfDomainControllersRequest generates a "aws/request.Request" representing the
@@ -4427,14 +6784,13 @@ const opUpdateNumberOfDomainControllers = "UpdateNumberOfDomainControllers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateNumberOfDomainControllersRequest method.
+//	req, resp := client.UpdateNumberOfDomainControllersRequest(params)
 //
-//    // Example sending a request using the UpdateNumberOfDomainControllersRequest method.
-//    req, resp := client.UpdateNumberOfDomainControllersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateNumberOfDomainControllers
 func (c *DirectoryService) UpdateNumberOfDomainControllersRequest(input *UpdateNumberOfDomainControllersInput) (req *request.Request, output *UpdateNumberOfDomainControllersOutput) {
@@ -4470,28 +6826,29 @@ func (c *DirectoryService) UpdateNumberOfDomainControllersRequest(input *UpdateN
 // See the AWS API reference guide for AWS Directory Service's
 // API operation UpdateNumberOfDomainControllers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeDirectoryUnavailableException "DirectoryUnavailableException"
-//   The specified directory is unavailable or could not be found.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeDomainControllerLimitExceededException "DomainControllerLimitExceededException"
-//   The maximum allowed number of domain controllers per directory was exceeded.
-//   The default limit per directory is 20 domain controllers.
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - DomainControllerLimitExceededException
+//     The maximum allowed number of domain controllers per directory was exceeded.
+//     The default limit per directory is 20 domain controllers.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateNumberOfDomainControllers
 func (c *DirectoryService) UpdateNumberOfDomainControllers(input *UpdateNumberOfDomainControllersInput) (*UpdateNumberOfDomainControllersOutput, error) {
@@ -4531,14 +6888,13 @@ const opUpdateRadius = "UpdateRadius"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateRadiusRequest method.
+//	req, resp := client.UpdateRadiusRequest(params)
 //
-//    // Example sending a request using the UpdateRadiusRequest method.
-//    req, resp := client.UpdateRadiusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadius
 func (c *DirectoryService) UpdateRadiusRequest(input *UpdateRadiusInput) (req *request.Request, output *UpdateRadiusOutput) {
@@ -4570,18 +6926,19 @@ func (c *DirectoryService) UpdateRadiusRequest(input *UpdateRadiusInput) (req *r
 // See the AWS API reference guide for AWS Directory Service's
 // API operation UpdateRadius for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadius
 func (c *DirectoryService) UpdateRadius(input *UpdateRadiusInput) (*UpdateRadiusOutput, error) {
@@ -4605,6 +6962,106 @@ func (c *DirectoryService) UpdateRadiusWithContext(ctx aws.Context, input *Updat
 	return out, req.Send()
 }
 
+const opUpdateSettings = "UpdateSettings"
+
+// UpdateSettingsRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateSettings operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateSettings for more information on using the UpdateSettings
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateSettingsRequest method.
+//	req, resp := client.UpdateSettingsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateSettings
+func (c *DirectoryService) UpdateSettingsRequest(input *UpdateSettingsInput) (req *request.Request, output *UpdateSettingsOutput) {
+	op := &request.Operation{
+		Name:       opUpdateSettings,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateSettingsInput{}
+	}
+
+	output = &UpdateSettingsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdateSettings API operation for AWS Directory Service.
+//
+// Updates the configurable settings for the specified directory.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Directory Service's
+// API operation UpdateSettings for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DirectoryDoesNotExistException
+//     The specified directory does not exist in the system.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
+//
+//   - DirectoryUnavailableException
+//     The specified directory is unavailable or could not be found.
+//
+//   - IncompatibleSettingsException
+//     The specified directory setting is not compatible with other settings.
+//
+//   - UnsupportedSettingsException
+//     The specified directory setting is not supported.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid.
+//
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateSettings
+func (c *DirectoryService) UpdateSettings(input *UpdateSettingsInput) (*UpdateSettingsOutput, error) {
+	req, out := c.UpdateSettingsRequest(input)
+	return out, req.Send()
+}
+
+// UpdateSettingsWithContext is the same as UpdateSettings with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateSettings for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DirectoryService) UpdateSettingsWithContext(ctx aws.Context, input *UpdateSettingsInput, opts ...request.Option) (*UpdateSettingsOutput, error) {
+	req, out := c.UpdateSettingsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateTrust = "UpdateTrust"
 
 // UpdateTrustRequest generates a "aws/request.Request" representing the
@@ -4621,14 +7078,13 @@ const opUpdateTrust = "UpdateTrust"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateTrustRequest method.
+//	req, resp := client.UpdateTrustRequest(params)
 //
-//    // Example sending a request using the UpdateTrustRequest method.
-//    req, resp := client.UpdateTrustRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateTrust
 func (c *DirectoryService) UpdateTrustRequest(input *UpdateTrustInput) (req *request.Request, output *UpdateTrustOutput) {
@@ -4649,8 +7105,8 @@ func (c *DirectoryService) UpdateTrustRequest(input *UpdateTrustInput) (req *req
 
 // UpdateTrust API operation for AWS Directory Service.
 //
-// Updates the trust that has been set up between your AWS Managed Microsoft
-// AD directory and an on-premises Active Directory.
+// Updates the trust that has been set up between your Managed Microsoft AD
+// directory and an self-managed Active Directory.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -4659,18 +7115,19 @@ func (c *DirectoryService) UpdateTrustRequest(input *UpdateTrustInput) (req *req
 // See the AWS API reference guide for AWS Directory Service's
 // API operation UpdateTrust for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
+//
+//   - ServiceException
+//     An exception has occurred in Directory Service.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateTrust
 func (c *DirectoryService) UpdateTrust(input *UpdateTrustInput) (*UpdateTrustOutput, error) {
@@ -4710,14 +7167,13 @@ const opVerifyTrust = "VerifyTrust"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the VerifyTrustRequest method.
+//	req, resp := client.VerifyTrustRequest(params)
 //
-//    // Example sending a request using the VerifyTrustRequest method.
-//    req, resp := client.VerifyTrustRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/VerifyTrust
 func (c *DirectoryService) VerifyTrustRequest(input *VerifyTrustInput) (req *request.Request, output *VerifyTrustOutput) {
@@ -4738,10 +7194,10 @@ func (c *DirectoryService) VerifyTrustRequest(input *VerifyTrustInput) (req *req
 
 // VerifyTrust API operation for AWS Directory Service.
 //
-// AWS Directory Service for Microsoft Active Directory allows you to configure
+// Directory Service for Microsoft Active Directory allows you to configure
 // and verify trust relationships.
 //
-// This action verifies a trust relationship between your AWS Managed Microsoft
+// This action verifies a trust relationship between your Managed Microsoft
 // AD directory and an external domain.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -4751,21 +7207,22 @@ func (c *DirectoryService) VerifyTrustRequest(input *VerifyTrustInput) (req *req
 // See the AWS API reference guide for AWS Directory Service's
 // API operation VerifyTrust for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeEntityDoesNotExistException "EntityDoesNotExistException"
-//   The specified entity could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid.
+//   - EntityDoesNotExistException
+//     The specified entity could not be found.
 //
-//   * ErrCodeClientException "ClientException"
-//   A client exception has occurred.
+//   - InvalidParameterException
+//     One or more parameters are not valid.
 //
-//   * ErrCodeServiceException "ServiceException"
-//   An exception has occurred in AWS Directory Service.
+//   - ClientException
+//     A client exception has occurred.
 //
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   The operation is not supported.
+//   - ServiceException
+//     An exception has occurred in Directory Service.
+//
+//   - UnsupportedOperationException
+//     The operation is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/VerifyTrust
 func (c *DirectoryService) VerifyTrust(input *VerifyTrustInput) (*VerifyTrustOutput, error) {
@@ -4799,12 +7256,20 @@ type AcceptSharedDirectoryInput struct {
 	SharedDirectoryId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptSharedDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptSharedDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -4835,12 +7300,20 @@ type AcceptSharedDirectoryOutput struct {
 	SharedDirectory *SharedDirectory `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptSharedDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptSharedDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -4849,6 +7322,74 @@ func (s AcceptSharedDirectoryOutput) GoString() string {
 func (s *AcceptSharedDirectoryOutput) SetSharedDirectory(v *SharedDirectory) *AcceptSharedDirectoryOutput {
 	s.SharedDirectory = v
 	return s
+}
+
+// Client authentication is not available in this region at this time.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type AddIpRoutesInput struct {
@@ -4860,14 +7401,14 @@ type AddIpRoutesInput struct {
 	DirectoryId *string `type:"string" required:"true"`
 
 	// IP address blocks, using CIDR format, of the traffic to route. This is often
-	// the IP address block of the DNS server used for your on-premises domain.
+	// the IP address block of the DNS server used for your self-managed domain.
 	//
 	// IpRoutes is a required field
 	IpRoutes []*IpRoute `type:"list" required:"true"`
 
 	// If set to true, updates the inbound and outbound rules of the security group
-	// that has the description: "AWS created security group for directory ID directory
-	// controllers." Following are the new rules:
+	// that has the description: "Amazon Web Services created security group for
+	// directory ID directory controllers." Following are the new rules:
 	//
 	// Inbound:
 	//
@@ -4907,16 +7448,27 @@ type AddIpRoutesInput struct {
 	//
 	// Outbound:
 	//
-	// Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0
+	//    * Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0
+	//
+	// These security rules impact an internal network interface that is not exposed
+	// publicly.
 	UpdateSecurityGroupForDirectoryControllers *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddIpRoutesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddIpRoutesInput) GoString() string {
 	return s.String()
 }
@@ -4959,13 +7511,126 @@ type AddIpRoutesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddIpRoutesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddIpRoutesOutput) GoString() string {
+	return s.String()
+}
+
+type AddRegionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory to which you want to add Region replication.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The name of the Region where you want to add domain controllers for replication.
+	// For example, us-east-1.
+	//
+	// RegionName is a required field
+	RegionName *string `min:"8" type:"string" required:"true"`
+
+	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
+	//
+	// VPCSettings is a required field
+	VPCSettings *DirectoryVpcSettings `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddRegionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddRegionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AddRegionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AddRegionInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.RegionName == nil {
+		invalidParams.Add(request.NewErrParamRequired("RegionName"))
+	}
+	if s.RegionName != nil && len(*s.RegionName) < 8 {
+		invalidParams.Add(request.NewErrParamMinLen("RegionName", 8))
+	}
+	if s.VPCSettings == nil {
+		invalidParams.Add(request.NewErrParamRequired("VPCSettings"))
+	}
+	if s.VPCSettings != nil {
+		if err := s.VPCSettings.Validate(); err != nil {
+			invalidParams.AddNested("VPCSettings", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *AddRegionInput) SetDirectoryId(v string) *AddRegionInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetRegionName sets the RegionName field's value.
+func (s *AddRegionInput) SetRegionName(v string) *AddRegionInput {
+	s.RegionName = &v
+	return s
+}
+
+// SetVPCSettings sets the VPCSettings field's value.
+func (s *AddRegionInput) SetVPCSettings(v *DirectoryVpcSettings) *AddRegionInput {
+	s.VPCSettings = v
+	return s
+}
+
+type AddRegionOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddRegionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddRegionOutput) GoString() string {
 	return s.String()
 }
 
@@ -4983,12 +7648,20 @@ type AddTagsToResourceInput struct {
 	Tags []*Tag `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceInput) GoString() string {
 	return s.String()
 }
@@ -5035,12 +7708,20 @@ type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceOutput) GoString() string {
 	return s.String()
 }
@@ -5056,12 +7737,20 @@ type Attribute struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Attribute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Attribute) GoString() string {
 	return s.String()
 }
@@ -5091,6 +7780,74 @@ func (s *Attribute) SetValue(v string) *Attribute {
 	return s
 }
 
+// An authentication error occurred.
+type AuthenticationFailedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The textual message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The identifier of the request that caused the exception.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AuthenticationFailedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AuthenticationFailedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAuthenticationFailedException(v protocol.ResponseMetadata) error {
+	return &AuthenticationFailedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AuthenticationFailedException) Code() string {
+	return "AuthenticationFailedException"
+}
+
+// Message returns the exception's message.
+func (s *AuthenticationFailedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AuthenticationFailedException) OrigErr() error {
+	return nil
+}
+
+func (s *AuthenticationFailedException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AuthenticationFailedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AuthenticationFailedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type CancelSchemaExtensionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5105,12 +7862,20 @@ type CancelSchemaExtensionInput struct {
 	SchemaExtensionId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelSchemaExtensionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelSchemaExtensionInput) GoString() string {
 	return s.String()
 }
@@ -5147,14 +7912,632 @@ type CancelSchemaExtensionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelSchemaExtensionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelSchemaExtensionOutput) GoString() string {
 	return s.String()
+}
+
+// Information about the certificate.
+type Certificate struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the certificate.
+	CertificateId *string `type:"string"`
+
+	// A ClientCertAuthSettings object that contains client certificate authentication
+	// settings.
+	ClientCertAuthSettings *ClientCertAuthSettings `type:"structure"`
+
+	// The common name for the certificate.
+	CommonName *string `type:"string"`
+
+	// The date and time when the certificate will expire.
+	ExpiryDateTime *time.Time `type:"timestamp"`
+
+	// The date and time that the certificate was registered.
+	RegisteredDateTime *time.Time `type:"timestamp"`
+
+	// The state of the certificate.
+	State *string `type:"string" enum:"CertificateState"`
+
+	// Describes a state change for the certificate.
+	StateReason *string `type:"string"`
+
+	// The function that the registered certificate performs. Valid values include
+	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
+	Type *string `type:"string" enum:"CertificateType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Certificate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Certificate) GoString() string {
+	return s.String()
+}
+
+// SetCertificateId sets the CertificateId field's value.
+func (s *Certificate) SetCertificateId(v string) *Certificate {
+	s.CertificateId = &v
+	return s
+}
+
+// SetClientCertAuthSettings sets the ClientCertAuthSettings field's value.
+func (s *Certificate) SetClientCertAuthSettings(v *ClientCertAuthSettings) *Certificate {
+	s.ClientCertAuthSettings = v
+	return s
+}
+
+// SetCommonName sets the CommonName field's value.
+func (s *Certificate) SetCommonName(v string) *Certificate {
+	s.CommonName = &v
+	return s
+}
+
+// SetExpiryDateTime sets the ExpiryDateTime field's value.
+func (s *Certificate) SetExpiryDateTime(v time.Time) *Certificate {
+	s.ExpiryDateTime = &v
+	return s
+}
+
+// SetRegisteredDateTime sets the RegisteredDateTime field's value.
+func (s *Certificate) SetRegisteredDateTime(v time.Time) *Certificate {
+	s.RegisteredDateTime = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *Certificate) SetState(v string) *Certificate {
+	s.State = &v
+	return s
+}
+
+// SetStateReason sets the StateReason field's value.
+func (s *Certificate) SetStateReason(v string) *Certificate {
+	s.StateReason = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *Certificate) SetType(v string) *Certificate {
+	s.Type = &v
+	return s
+}
+
+// The certificate has already been registered into the system.
+type CertificateAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorCertificateAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &CertificateAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CertificateAlreadyExistsException) Code() string {
+	return "CertificateAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *CertificateAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CertificateAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *CertificateAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CertificateAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CertificateAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The certificate is not present in the system for describe or deregister activities.
+type CertificateDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorCertificateDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &CertificateDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CertificateDoesNotExistException) Code() string {
+	return "CertificateDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *CertificateDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CertificateDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *CertificateDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CertificateDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CertificateDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The certificate is being used for the LDAP security connection and cannot
+// be removed without disabling LDAP security.
+type CertificateInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorCertificateInUseException(v protocol.ResponseMetadata) error {
+	return &CertificateInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CertificateInUseException) Code() string {
+	return "CertificateInUseException"
+}
+
+// Message returns the exception's message.
+func (s *CertificateInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CertificateInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *CertificateInUseException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CertificateInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CertificateInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Contains general information about a certificate.
+type CertificateInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the certificate.
+	CertificateId *string `type:"string"`
+
+	// The common name for the certificate.
+	CommonName *string `type:"string"`
+
+	// The date and time when the certificate will expire.
+	ExpiryDateTime *time.Time `type:"timestamp"`
+
+	// The state of the certificate.
+	State *string `type:"string" enum:"CertificateState"`
+
+	// The function that the registered certificate performs. Valid values include
+	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
+	Type *string `type:"string" enum:"CertificateType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateInfo) GoString() string {
+	return s.String()
+}
+
+// SetCertificateId sets the CertificateId field's value.
+func (s *CertificateInfo) SetCertificateId(v string) *CertificateInfo {
+	s.CertificateId = &v
+	return s
+}
+
+// SetCommonName sets the CommonName field's value.
+func (s *CertificateInfo) SetCommonName(v string) *CertificateInfo {
+	s.CommonName = &v
+	return s
+}
+
+// SetExpiryDateTime sets the ExpiryDateTime field's value.
+func (s *CertificateInfo) SetExpiryDateTime(v time.Time) *CertificateInfo {
+	s.ExpiryDateTime = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *CertificateInfo) SetState(v string) *CertificateInfo {
+	s.State = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *CertificateInfo) SetType(v string) *CertificateInfo {
+	s.Type = &v
+	return s
+}
+
+// The certificate could not be added because the certificate limit has been
+// reached.
+type CertificateLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorCertificateLimitExceededException(v protocol.ResponseMetadata) error {
+	return &CertificateLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CertificateLimitExceededException) Code() string {
+	return "CertificateLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *CertificateLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CertificateLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *CertificateLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CertificateLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CertificateLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Contains information about a client authentication method for a directory.
+type ClientAuthenticationSettingInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The date and time when the status of the client authentication type was last
+	// updated.
+	LastUpdatedDateTime *time.Time `type:"timestamp"`
+
+	// Whether the client authentication type is enabled or disabled for the specified
+	// directory.
+	Status *string `type:"string" enum:"ClientAuthenticationStatus"`
+
+	// The type of client authentication for the specified directory. If no type
+	// is specified, a list of all client authentication types that are supported
+	// for the directory is retrieved.
+	Type *string `type:"string" enum:"ClientAuthenticationType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ClientAuthenticationSettingInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ClientAuthenticationSettingInfo) GoString() string {
+	return s.String()
+}
+
+// SetLastUpdatedDateTime sets the LastUpdatedDateTime field's value.
+func (s *ClientAuthenticationSettingInfo) SetLastUpdatedDateTime(v time.Time) *ClientAuthenticationSettingInfo {
+	s.LastUpdatedDateTime = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *ClientAuthenticationSettingInfo) SetStatus(v string) *ClientAuthenticationSettingInfo {
+	s.Status = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *ClientAuthenticationSettingInfo) SetType(v string) *ClientAuthenticationSettingInfo {
+	s.Type = &v
+	return s
+}
+
+// Contains information about the client certificate authentication settings
+// for the RegisterCertificate and DescribeCertificate operations.
+type ClientCertAuthSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the URL of the default OCSP server used to check for revocation
+	// status. A secondary value to any OCSP address found in the AIA extension
+	// of the user certificate.
+	OCSPUrl *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ClientCertAuthSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ClientCertAuthSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ClientCertAuthSettings) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ClientCertAuthSettings"}
+	if s.OCSPUrl != nil && len(*s.OCSPUrl) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("OCSPUrl", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetOCSPUrl sets the OCSPUrl field's value.
+func (s *ClientCertAuthSettings) SetOCSPUrl(v string) *ClientCertAuthSettings {
+	s.OCSPUrl = &v
+	return s
+}
+
+// A client exception has occurred.
+type ClientException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ClientException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ClientException) GoString() string {
+	return s.String()
+}
+
+func newErrorClientException(v protocol.ResponseMetadata) error {
+	return &ClientException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ClientException) Code() string {
+	return "ClientException"
+}
+
+// Message returns the exception's message.
+func (s *ClientException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ClientException) OrigErr() error {
+	return nil
+}
+
+func (s *ClientException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ClientException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ClientException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Contains information about a computer account in a directory.
@@ -5172,12 +8555,20 @@ type Computer struct {
 	ComputerName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Computer) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Computer) GoString() string {
 	return s.String()
 }
@@ -5217,16 +8608,24 @@ type ConditionalForwarder struct {
 
 	// The replication scope of the conditional forwarder. The only allowed value
 	// is Domain, which will replicate the conditional forwarder to all of the domain
-	// controllers for your AWS directory.
+	// controllers for your Amazon Web Services directory.
 	ReplicationScope *string `type:"string" enum:"ReplicationScope"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConditionalForwarder) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConditionalForwarder) GoString() string {
 	return s.String()
 }
@@ -5259,34 +8658,49 @@ type ConnectDirectoryInput struct {
 	// ConnectSettings is a required field
 	ConnectSettings *DirectoryConnectSettings `type:"structure" required:"true"`
 
-	// A textual description for the directory.
+	// A description for the directory.
 	Description *string `type:"string"`
 
-	// The fully qualified name of the on-premises directory, such as corp.example.com.
+	// The fully qualified name of your self-managed directory, such as corp.example.com.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// The password for the on-premises user account.
+	// The password for your self-managed user account.
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ConnectDirectoryInput's
+	// String and GoString methods.
 	//
 	// Password is a required field
 	Password *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
-	// The NetBIOS name of the on-premises directory, such as CORP.
+	// The NetBIOS name of your self-managed directory, such as CORP.
 	ShortName *string `type:"string"`
 
 	// The size of the directory.
 	//
 	// Size is a required field
 	Size *string `type:"string" required:"true" enum:"DirectorySize"`
+
+	// The tags to be assigned to AD Connector.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConnectDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConnectDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -5312,6 +8726,16 @@ func (s *ConnectDirectoryInput) Validate() error {
 	if s.ConnectSettings != nil {
 		if err := s.ConnectSettings.Validate(); err != nil {
 			invalidParams.AddNested("ConnectSettings", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -5357,6 +8781,12 @@ func (s *ConnectDirectoryInput) SetSize(v string) *ConnectDirectoryInput {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *ConnectDirectoryInput) SetTags(v []*Tag) *ConnectDirectoryInput {
+	s.Tags = v
+	return s
+}
+
 // Contains the results of the ConnectDirectory operation.
 type ConnectDirectoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -5365,12 +8795,20 @@ type ConnectDirectoryOutput struct {
 	DirectoryId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConnectDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConnectDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -5387,8 +8825,9 @@ type CreateAliasInput struct {
 
 	// The requested alias.
 	//
-	// The alias must be unique amongst all aliases in AWS. This operation throws
-	// an EntityAlreadyExistsException error if the alias already exists.
+	// The alias must be unique amongst all aliases in Amazon Web Services. This
+	// operation throws an EntityAlreadyExistsException error if the alias already
+	// exists.
 	//
 	// Alias is a required field
 	Alias *string `min:"1" type:"string" required:"true"`
@@ -5399,12 +8838,20 @@ type CreateAliasInput struct {
 	DirectoryId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAliasInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAliasInput) GoString() string {
 	return s.String()
 }
@@ -5451,12 +8898,20 @@ type CreateAliasOutput struct {
 	DirectoryId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAliasOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAliasOutput) GoString() string {
 	return s.String()
 }
@@ -5498,16 +8953,28 @@ type CreateComputerInput struct {
 	// A one-time password that is used to join the computer to the directory. You
 	// should generate a random, strong password to use for this parameter.
 	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateComputerInput's
+	// String and GoString methods.
+	//
 	// Password is a required field
 	Password *string `min:"8" type:"string" required:"true" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateComputerInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateComputerInput) GoString() string {
 	return s.String()
 }
@@ -5588,12 +9055,20 @@ type CreateComputerOutput struct {
 	Computer *Computer `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateComputerOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateComputerOutput) GoString() string {
 	return s.String()
 }
@@ -5604,14 +9079,14 @@ func (s *CreateComputerOutput) SetComputer(v *Computer) *CreateComputerOutput {
 	return s
 }
 
-// Initiates the creation of a conditional forwarder for your AWS Directory
-// Service for Microsoft Active Directory. Conditional forwarders are required
-// in order to set up a trust relationship with another domain.
+// Initiates the creation of a conditional forwarder for your Directory Service
+// for Microsoft Active Directory. Conditional forwarders are required in order
+// to set up a trust relationship with another domain.
 type CreateConditionalForwarderInput struct {
 	_ struct{} `type:"structure"`
 
-	// The directory ID of the AWS directory for which you are creating the conditional
-	// forwarder.
+	// The directory ID of the Amazon Web Services directory for which you are creating
+	// the conditional forwarder.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
@@ -5628,12 +9103,20 @@ type CreateConditionalForwarderInput struct {
 	RemoteDomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConditionalForwarderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConditionalForwarderInput) GoString() string {
 	return s.String()
 }
@@ -5680,12 +9163,20 @@ type CreateConditionalForwarderOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConditionalForwarderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateConditionalForwarderOutput) GoString() string {
 	return s.String()
 }
@@ -5694,7 +9185,7 @@ func (s CreateConditionalForwarderOutput) GoString() string {
 type CreateDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
-	// A textual description for the directory.
+	// A description for the directory.
 	Description *string `type:"string"`
 
 	// The fully qualified name for the directory, such as corp.example.com.
@@ -5706,10 +9197,35 @@ type CreateDirectoryInput struct {
 	// creates a directory administrator account with the user name Administrator
 	// and this password.
 	//
+	// If you need to change the password for the administrator account, you can
+	// use the ResetUserPassword API call.
+	//
+	// The regex pattern for this string is made up of the following conditions:
+	//
+	//    * Length (?=^.{8,64}$) – Must be between 8 and 64 characters
+	//
+	// AND any 3 of the following password complexity rules required by Active Directory:
+	//
+	//    * Numbers and upper case and lowercase (?=.*\d)(?=.*[A-Z])(?=.*[a-z])
+	//
+	//    * Numbers and special characters and lower case (?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])
+	//
+	//    * Special characters and upper case and lower case (?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])
+	//
+	//    * Numbers and upper case and special characters (?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s])
+	//
+	// For additional information about how Active Directory passwords are enforced,
+	// see Password must meet complexity requirements (https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements)
+	// on the Microsoft website.
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateDirectoryInput's
+	// String and GoString methods.
+	//
 	// Password is a required field
 	Password *string `type:"string" required:"true" sensitive:"true"`
 
-	// The short name of the directory, such as CORP.
+	// The NetBIOS name of the directory, such as CORP.
 	ShortName *string `type:"string"`
 
 	// The size of the directory.
@@ -5717,17 +9233,28 @@ type CreateDirectoryInput struct {
 	// Size is a required field
 	Size *string `type:"string" required:"true" enum:"DirectorySize"`
 
+	// The tags to be assigned to the Simple AD directory.
+	Tags []*Tag `type:"list"`
+
 	// A DirectoryVpcSettings object that contains additional information for the
 	// operation.
 	VpcSettings *DirectoryVpcSettings `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -5743,6 +9270,16 @@ func (s *CreateDirectoryInput) Validate() error {
 	}
 	if s.Size == nil {
 		invalidParams.Add(request.NewErrParamRequired("Size"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 	if s.VpcSettings != nil {
 		if err := s.VpcSettings.Validate(); err != nil {
@@ -5786,6 +9323,12 @@ func (s *CreateDirectoryInput) SetSize(v string) *CreateDirectoryInput {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateDirectoryInput) SetTags(v []*Tag) *CreateDirectoryInput {
+	s.Tags = v
+	return s
+}
+
 // SetVpcSettings sets the VpcSettings field's value.
 func (s *CreateDirectoryInput) SetVpcSettings(v *DirectoryVpcSettings) *CreateDirectoryInput {
 	s.VpcSettings = v
@@ -5800,12 +9343,20 @@ type CreateDirectoryOutput struct {
 	DirectoryId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -5819,8 +9370,8 @@ func (s *CreateDirectoryOutput) SetDirectoryId(v string) *CreateDirectoryOutput 
 type CreateLogSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier (ID) of the directory to which you want to subscribe and receive
-	// real-time logs to your specified CloudWatch log group.
+	// Identifier of the directory to which you want to subscribe and receive real-time
+	// logs to your specified CloudWatch log group.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
@@ -5832,12 +9383,20 @@ type CreateLogSubscriptionInput struct {
 	LogGroupName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLogSubscriptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLogSubscriptionInput) GoString() string {
 	return s.String()
 }
@@ -5877,44 +9436,62 @@ type CreateLogSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLogSubscriptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateLogSubscriptionOutput) GoString() string {
 	return s.String()
 }
 
-// Creates an AWS Managed Microsoft AD directory.
+// Creates an Managed Microsoft AD directory.
 type CreateMicrosoftADInput struct {
 	_ struct{} `type:"structure"`
 
-	// A textual description for the directory. This label will appear on the AWS
-	// console Directory Details page after the directory is created.
+	// A description for the directory. This label will appear on the Amazon Web
+	// Services console Directory Details page after the directory is created.
 	Description *string `type:"string"`
 
-	// AWS Managed Microsoft AD is available in two editions: Standard and Enterprise.
+	// Managed Microsoft AD is available in two editions: Standard and Enterprise.
 	// Enterprise is the default.
 	Edition *string `type:"string" enum:"DirectoryEdition"`
 
-	// The fully qualified domain name for the directory, such as corp.example.com.
-	// This name will resolve inside your VPC only. It does not need to be publicly
-	// resolvable.
+	// The fully qualified domain name for the Managed Microsoft AD directory, such
+	// as corp.example.com. This name will resolve inside your VPC only. It does
+	// not need to be publicly resolvable.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
 	// The password for the default administrative user named Admin.
 	//
+	// If you need to change the password for the administrator account, you can
+	// use the ResetUserPassword API call.
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateMicrosoftADInput's
+	// String and GoString methods.
+	//
 	// Password is a required field
 	Password *string `type:"string" required:"true" sensitive:"true"`
 
-	// The NetBIOS name for your domain. A short identifier for your domain, such
-	// as CORP. If you don't specify a NetBIOS name, it will default to the first
-	// part of your directory DNS. For example, CORP for the directory DNS corp.example.com.
+	// The NetBIOS name for your domain, such as CORP. If you don't specify a NetBIOS
+	// name, it will default to the first part of your directory DNS. For example,
+	// CORP for the directory DNS corp.example.com.
 	ShortName *string `type:"string"`
+
+	// The tags to be assigned to the Managed Microsoft AD directory.
+	Tags []*Tag `type:"list"`
 
 	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
 	//
@@ -5922,12 +9499,20 @@ type CreateMicrosoftADInput struct {
 	VpcSettings *DirectoryVpcSettings `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMicrosoftADInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMicrosoftADInput) GoString() string {
 	return s.String()
 }
@@ -5943,6 +9528,16 @@ func (s *CreateMicrosoftADInput) Validate() error {
 	}
 	if s.VpcSettings == nil {
 		invalidParams.Add(request.NewErrParamRequired("VpcSettings"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 	if s.VpcSettings != nil {
 		if err := s.VpcSettings.Validate(); err != nil {
@@ -5986,6 +9581,12 @@ func (s *CreateMicrosoftADInput) SetShortName(v string) *CreateMicrosoftADInput 
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateMicrosoftADInput) SetTags(v []*Tag) *CreateMicrosoftADInput {
+	s.Tags = v
+	return s
+}
+
 // SetVpcSettings sets the VpcSettings field's value.
 func (s *CreateMicrosoftADInput) SetVpcSettings(v *DirectoryVpcSettings) *CreateMicrosoftADInput {
 	s.VpcSettings = v
@@ -6000,12 +9601,20 @@ type CreateMicrosoftADOutput struct {
 	DirectoryId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMicrosoftADOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateMicrosoftADOutput) GoString() string {
 	return s.String()
 }
@@ -6029,12 +9638,20 @@ type CreateSnapshotInput struct {
 	Name *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -6072,12 +9689,20 @@ type CreateSnapshotOutput struct {
 	SnapshotId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSnapshotOutput) GoString() string {
 	return s.String()
 }
@@ -6088,21 +9713,21 @@ func (s *CreateSnapshotOutput) SetSnapshotId(v string) *CreateSnapshotOutput {
 	return s
 }
 
-// AWS Directory Service for Microsoft Active Directory allows you to configure
+// Directory Service for Microsoft Active Directory allows you to configure
 // trust relationships. For example, you can establish a trust between your
-// AWS Managed Microsoft AD directory, and your existing on-premises Microsoft
+// Managed Microsoft AD directory, and your existing self-managed Microsoft
 // Active Directory. This would allow you to provide users and groups access
 // to resources in either domain, with a single set of credentials.
 //
-// This action initiates the creation of the AWS side of a trust relationship
-// between an AWS Managed Microsoft AD directory and an external domain.
+// This action initiates the creation of the Amazon Web Services side of a trust
+// relationship between an Managed Microsoft AD directory and an external domain.
 type CreateTrustInput struct {
 	_ struct{} `type:"structure"`
 
 	// The IP addresses of the remote DNS server associated with RemoteDomainName.
 	ConditionalForwarderIpAddrs []*string `type:"list"`
 
-	// The Directory ID of the AWS Managed Microsoft AD directory for which to establish
+	// The Directory ID of the Managed Microsoft AD directory for which to establish
 	// the trust relationship.
 	//
 	// DirectoryId is a required field
@@ -6125,6 +9750,10 @@ type CreateTrustInput struct {
 	// The trust password. The must be the same password that was used when creating
 	// the trust relationship on the external domain.
 	//
+	// TrustPassword is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateTrustInput's
+	// String and GoString methods.
+	//
 	// TrustPassword is a required field
 	TrustPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
@@ -6132,12 +9761,20 @@ type CreateTrustInput struct {
 	TrustType *string `type:"string" enum:"TrustType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTrustInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTrustInput) GoString() string {
 	return s.String()
 }
@@ -6217,12 +9854,20 @@ type CreateTrustOutput struct {
 	TrustId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTrustOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTrustOutput) GoString() string {
 	return s.String()
 }
@@ -6249,12 +9894,20 @@ type DeleteConditionalForwarderInput struct {
 	RemoteDomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConditionalForwarderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConditionalForwarderInput) GoString() string {
 	return s.String()
 }
@@ -6292,12 +9945,20 @@ type DeleteConditionalForwarderOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConditionalForwarderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteConditionalForwarderOutput) GoString() string {
 	return s.String()
 }
@@ -6312,12 +9973,20 @@ type DeleteDirectoryInput struct {
 	DirectoryId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -6349,12 +10018,20 @@ type DeleteDirectoryOutput struct {
 	DirectoryId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -6368,18 +10045,26 @@ func (s *DeleteDirectoryOutput) SetDirectoryId(v string) *DeleteDirectoryOutput 
 type DeleteLogSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier (ID) of the directory whose log subscription you want to delete.
+	// Identifier of the directory whose log subscription you want to delete.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLogSubscriptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLogSubscriptionInput) GoString() string {
 	return s.String()
 }
@@ -6407,12 +10092,20 @@ type DeleteLogSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLogSubscriptionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteLogSubscriptionOutput) GoString() string {
 	return s.String()
 }
@@ -6427,12 +10120,20 @@ type DeleteSnapshotInput struct {
 	SnapshotId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -6464,12 +10165,20 @@ type DeleteSnapshotOutput struct {
 	SnapshotId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSnapshotOutput) GoString() string {
 	return s.String()
 }
@@ -6480,8 +10189,8 @@ func (s *DeleteSnapshotOutput) SetSnapshotId(v string) *DeleteSnapshotOutput {
 	return s
 }
 
-// Deletes the local side of an existing trust relationship between the AWS
-// Managed Microsoft AD directory and the external domain.
+// Deletes the local side of an existing trust relationship between the Managed
+// Microsoft AD directory and the external domain.
 type DeleteTrustInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6494,12 +10203,20 @@ type DeleteTrustInput struct {
 	TrustId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTrustInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTrustInput) GoString() string {
 	return s.String()
 }
@@ -6537,12 +10254,20 @@ type DeleteTrustOutput struct {
 	TrustId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTrustOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTrustOutput) GoString() string {
 	return s.String()
 }
@@ -6553,28 +10278,120 @@ func (s *DeleteTrustOutput) SetTrustId(v string) *DeleteTrustOutput {
 	return s
 }
 
-// Removes the specified directory as a publisher to the specified SNS topic.
+type DeregisterCertificateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the certificate.
+	//
+	// CertificateId is a required field
+	CertificateId *string `type:"string" required:"true"`
+
+	// The identifier of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeregisterCertificateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeregisterCertificateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeregisterCertificateInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeregisterCertificateInput"}
+	if s.CertificateId == nil {
+		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+	}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCertificateId sets the CertificateId field's value.
+func (s *DeregisterCertificateInput) SetCertificateId(v string) *DeregisterCertificateInput {
+	s.CertificateId = &v
+	return s
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DeregisterCertificateInput) SetDirectoryId(v string) *DeregisterCertificateInput {
+	s.DirectoryId = &v
+	return s
+}
+
+type DeregisterCertificateOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeregisterCertificateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeregisterCertificateOutput) GoString() string {
+	return s.String()
+}
+
+// Removes the specified directory as a publisher to the specified Amazon SNS
+// topic.
 type DeregisterEventTopicInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Directory ID to remove as a publisher. This directory will no longer
-	// send messages to the specified SNS topic.
+	// send messages to the specified Amazon SNS topic.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
 
-	// The name of the SNS topic from which to remove the directory as a publisher.
+	// The name of the Amazon SNS topic from which to remove the directory as a
+	// publisher.
 	//
 	// TopicName is a required field
 	TopicName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterEventTopicInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterEventTopicInput) GoString() string {
 	return s.String()
 }
@@ -6615,14 +10432,240 @@ type DeregisterEventTopicOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterEventTopicOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterEventTopicOutput) GoString() string {
 	return s.String()
+}
+
+type DescribeCertificateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the certificate.
+	//
+	// CertificateId is a required field
+	CertificateId *string `type:"string" required:"true"`
+
+	// The identifier of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCertificateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCertificateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeCertificateInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeCertificateInput"}
+	if s.CertificateId == nil {
+		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+	}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCertificateId sets the CertificateId field's value.
+func (s *DescribeCertificateInput) SetCertificateId(v string) *DescribeCertificateInput {
+	s.CertificateId = &v
+	return s
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DescribeCertificateInput) SetDirectoryId(v string) *DescribeCertificateInput {
+	s.DirectoryId = &v
+	return s
+}
+
+type DescribeCertificateOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the certificate, including registered date time, certificate
+	// state, the reason for the state, expiration date time, and certificate common
+	// name.
+	Certificate *Certificate `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCertificateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCertificateOutput) GoString() string {
+	return s.String()
+}
+
+// SetCertificate sets the Certificate field's value.
+func (s *DescribeCertificateOutput) SetCertificate(v *Certificate) *DescribeCertificateOutput {
+	s.Certificate = v
+	return s
+}
+
+type DescribeClientAuthenticationSettingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory for which to retrieve information.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The maximum number of items to return. If this value is zero, the maximum
+	// number of items is specified by the limitations of the operation.
+	Limit *int64 `min:"1" type:"integer"`
+
+	// The DescribeClientAuthenticationSettingsResult.NextToken value from a previous
+	// call to DescribeClientAuthenticationSettings. Pass null if this is the first
+	// call.
+	NextToken *string `type:"string"`
+
+	// The type of client authentication for which to retrieve information. If no
+	// type is specified, a list of all client authentication types that are supported
+	// for the specified directory is retrieved.
+	Type *string `type:"string" enum:"ClientAuthenticationType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeClientAuthenticationSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeClientAuthenticationSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeClientAuthenticationSettingsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeClientAuthenticationSettingsInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DescribeClientAuthenticationSettingsInput) SetDirectoryId(v string) *DescribeClientAuthenticationSettingsInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetLimit sets the Limit field's value.
+func (s *DescribeClientAuthenticationSettingsInput) SetLimit(v int64) *DescribeClientAuthenticationSettingsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeClientAuthenticationSettingsInput) SetNextToken(v string) *DescribeClientAuthenticationSettingsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *DescribeClientAuthenticationSettingsInput) SetType(v string) *DescribeClientAuthenticationSettingsInput {
+	s.Type = &v
+	return s
+}
+
+type DescribeClientAuthenticationSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the type of client authentication for the specified directory.
+	// The following information is retrieved: The date and time when the status
+	// of the client authentication type was last updated, whether the client authentication
+	// type is enabled or disabled, and the type of client authentication.
+	ClientAuthenticationSettingsInfo []*ClientAuthenticationSettingInfo `type:"list"`
+
+	// The next token used to retrieve the client authentication settings if the
+	// number of setting types exceeds page limit and there is another page.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeClientAuthenticationSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeClientAuthenticationSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SetClientAuthenticationSettingsInfo sets the ClientAuthenticationSettingsInfo field's value.
+func (s *DescribeClientAuthenticationSettingsOutput) SetClientAuthenticationSettingsInfo(v []*ClientAuthenticationSettingInfo) *DescribeClientAuthenticationSettingsOutput {
+	s.ClientAuthenticationSettingsInfo = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeClientAuthenticationSettingsOutput) SetNextToken(v string) *DescribeClientAuthenticationSettingsOutput {
+	s.NextToken = &v
+	return s
 }
 
 // Describes a conditional forwarder.
@@ -6640,12 +10683,20 @@ type DescribeConditionalForwardersInput struct {
 	RemoteDomainNames []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeConditionalForwardersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeConditionalForwardersInput) GoString() string {
 	return s.String()
 }
@@ -6683,12 +10734,20 @@ type DescribeConditionalForwardersOutput struct {
 	ConditionalForwarders []*ConditionalForwarder `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeConditionalForwardersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeConditionalForwardersOutput) GoString() string {
 	return s.String()
 }
@@ -6719,12 +10778,20 @@ type DescribeDirectoriesInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDirectoriesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDirectoriesInput) GoString() string {
 	return s.String()
 }
@@ -6765,12 +10832,20 @@ type DescribeDirectoriesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDirectoriesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDirectoriesOutput) GoString() string {
 	return s.String()
 }
@@ -6807,12 +10882,20 @@ type DescribeDomainControllersInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainControllersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainControllersInput) GoString() string {
 	return s.String()
 }
@@ -6866,12 +10949,20 @@ type DescribeDomainControllersOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainControllersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDomainControllersOutput) GoString() string {
 	return s.String()
 }
@@ -6892,23 +10983,32 @@ func (s *DescribeDomainControllersOutput) SetNextToken(v string) *DescribeDomain
 type DescribeEventTopicsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Directory ID for which to get the list of associated SNS topics. If this
-	// member is null, associations for all Directory IDs are returned.
+	// The Directory ID for which to get the list of associated Amazon SNS topics.
+	// If this member is null, associations for all Directory IDs are returned.
 	DirectoryId *string `type:"string"`
 
-	// A list of SNS topic names for which to obtain the information. If this member
-	// is null, all associations for the specified Directory ID are returned.
+	// A list of Amazon SNS topic names for which to obtain the information. If
+	// this member is null, all associations for the specified Directory ID are
+	// returned.
 	//
 	// An empty list results in an InvalidParameterException being thrown.
 	TopicNames []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventTopicsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventTopicsInput) GoString() string {
 	return s.String()
 }
@@ -6929,17 +11029,25 @@ func (s *DescribeEventTopicsInput) SetTopicNames(v []*string) *DescribeEventTopi
 type DescribeEventTopicsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of SNS topic names that receive status messages from the specified
+	// A list of Amazon SNS topic names that receive status messages from the specified
 	// Directory ID.
 	EventTopics []*EventTopic `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventTopicsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventTopicsOutput) GoString() string {
 	return s.String()
 }
@@ -6947,6 +11055,355 @@ func (s DescribeEventTopicsOutput) GoString() string {
 // SetEventTopics sets the EventTopics field's value.
 func (s *DescribeEventTopicsOutput) SetEventTopics(v []*EventTopic) *DescribeEventTopicsOutput {
 	s.EventTopics = v
+	return s
+}
+
+type DescribeLDAPSSettingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// Specifies the number of items that should be displayed on one page.
+	Limit *int64 `min:"1" type:"integer"`
+
+	// The type of next token used for pagination.
+	NextToken *string `type:"string"`
+
+	// The type of LDAP security to enable. Currently only the value Client is supported.
+	Type *string `type:"string" enum:"LDAPSType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeLDAPSSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeLDAPSSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeLDAPSSettingsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeLDAPSSettingsInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DescribeLDAPSSettingsInput) SetDirectoryId(v string) *DescribeLDAPSSettingsInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetLimit sets the Limit field's value.
+func (s *DescribeLDAPSSettingsInput) SetLimit(v int64) *DescribeLDAPSSettingsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeLDAPSSettingsInput) SetNextToken(v string) *DescribeLDAPSSettingsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *DescribeLDAPSSettingsInput) SetType(v string) *DescribeLDAPSSettingsInput {
+	s.Type = &v
+	return s
+}
+
+type DescribeLDAPSSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about LDAP security for the specified directory, including status
+	// of enablement, state last updated date time, and the reason for the state.
+	LDAPSSettingsInfo []*LDAPSSettingInfo `type:"list"`
+
+	// The next token used to retrieve the LDAPS settings if the number of setting
+	// types exceeds page limit and there is another page.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeLDAPSSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeLDAPSSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SetLDAPSSettingsInfo sets the LDAPSSettingsInfo field's value.
+func (s *DescribeLDAPSSettingsOutput) SetLDAPSSettingsInfo(v []*LDAPSSettingInfo) *DescribeLDAPSSettingsOutput {
+	s.LDAPSSettingsInfo = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeLDAPSSettingsOutput) SetNextToken(v string) *DescribeLDAPSSettingsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeRegionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The DescribeRegionsResult.NextToken value from a previous call to DescribeRegions.
+	// Pass null if this is the first call.
+	NextToken *string `type:"string"`
+
+	// The name of the Region. For example, us-east-1.
+	RegionName *string `min:"8" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeRegionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeRegionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeRegionsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeRegionsInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.RegionName != nil && len(*s.RegionName) < 8 {
+		invalidParams.Add(request.NewErrParamMinLen("RegionName", 8))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DescribeRegionsInput) SetDirectoryId(v string) *DescribeRegionsInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeRegionsInput) SetNextToken(v string) *DescribeRegionsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetRegionName sets the RegionName field's value.
+func (s *DescribeRegionsInput) SetRegionName(v string) *DescribeRegionsInput {
+	s.RegionName = &v
+	return s
+}
+
+type DescribeRegionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// If not null, more results are available. Pass this value for the NextToken
+	// parameter in a subsequent call to DescribeRegions to retrieve the next set
+	// of items.
+	NextToken *string `type:"string"`
+
+	// List of Region information related to the directory for each replicated Region.
+	RegionsDescription []*RegionDescription `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeRegionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeRegionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeRegionsOutput) SetNextToken(v string) *DescribeRegionsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetRegionsDescription sets the RegionsDescription field's value.
+func (s *DescribeRegionsOutput) SetRegionsDescription(v []*RegionDescription) *DescribeRegionsOutput {
+	s.RegionsDescription = v
+	return s
+}
+
+type DescribeSettingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory for which to retrieve information.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The DescribeSettingsResult.NextToken value from a previous call to DescribeSettings.
+	// Pass null if this is the first call.
+	NextToken *string `type:"string"`
+
+	// The status of the directory settings for which to retrieve information.
+	Status *string `type:"string" enum:"DirectoryConfigurationStatus"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeSettingsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeSettingsInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DescribeSettingsInput) SetDirectoryId(v string) *DescribeSettingsInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeSettingsInput) SetNextToken(v string) *DescribeSettingsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *DescribeSettingsInput) SetStatus(v string) *DescribeSettingsInput {
+	s.Status = &v
+	return s
+}
+
+type DescribeSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	DirectoryId *string `type:"string"`
+
+	// If not null, token that indicates that more results are available. Pass this
+	// value for the NextToken parameter in a subsequent call to DescribeSettings
+	// to retrieve the next set of items.
+	NextToken *string `type:"string"`
+
+	// The list of SettingEntry objects that were retrieved.
+	//
+	// It is possible that this list contains less than the number of items specified
+	// in the Limit member of the request. This occurs if there are less than the
+	// requested number of items left to retrieve, or if the limitations of the
+	// operation have been exceeded.
+	SettingEntries []*SettingEntry `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DescribeSettingsOutput) SetDirectoryId(v string) *DescribeSettingsOutput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeSettingsOutput) SetNextToken(v string) *DescribeSettingsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetSettingEntries sets the SettingEntries field's value.
+func (s *DescribeSettingsOutput) SetSettingEntries(v []*SettingEntry) *DescribeSettingsOutput {
+	s.SettingEntries = v
 	return s
 }
 
@@ -6969,12 +11426,20 @@ type DescribeSharedDirectoriesInput struct {
 	SharedDirectoryIds []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSharedDirectoriesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSharedDirectoriesInput) GoString() string {
 	return s.String()
 }
@@ -7028,12 +11493,20 @@ type DescribeSharedDirectoriesOutput struct {
 	SharedDirectories []*SharedDirectory `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSharedDirectoriesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSharedDirectoriesOutput) GoString() string {
 	return s.String()
 }
@@ -7070,12 +11543,20 @@ type DescribeSnapshotsInput struct {
 	SnapshotIds []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSnapshotsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSnapshotsInput) GoString() string {
 	return s.String()
 }
@@ -7121,12 +11602,20 @@ type DescribeSnapshotsOutput struct {
 	Snapshots []*Snapshot `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSnapshotsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSnapshotsOutput) GoString() string {
 	return s.String()
 }
@@ -7143,14 +11632,14 @@ func (s *DescribeSnapshotsOutput) SetSnapshots(v []*Snapshot) *DescribeSnapshots
 	return s
 }
 
-// Describes the trust relationships for a particular AWS Managed Microsoft
-// AD directory. If no input parameters are are provided, such as directory
-// ID or trust ID, this request describes all the trust relationships.
+// Describes the trust relationships for a particular Managed Microsoft AD directory.
+// If no input parameters are provided, such as directory ID or trust ID, this
+// request describes all the trust relationships.
 type DescribeTrustsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Directory ID of the AWS directory that is a part of the requested trust
-	// relationship.
+	// The Directory ID of the Amazon Web Services directory that is a part of the
+	// requested trust relationship.
 	DirectoryId *string `type:"string"`
 
 	// The maximum number of objects to return.
@@ -7168,12 +11657,20 @@ type DescribeTrustsInput struct {
 	TrustIds []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTrustsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTrustsInput) GoString() string {
 	return s.String()
 }
@@ -7220,12 +11717,20 @@ type DescribeTrustsOutput struct {
 	Trusts []*Trust `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTrustsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTrustsOutput) GoString() string {
 	return s.String()
 }
@@ -7242,18 +11747,279 @@ func (s *DescribeTrustsOutput) SetTrusts(v []*Trust) *DescribeTrustsOutput {
 	return s
 }
 
+type DescribeUpdateDirectoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The DescribeUpdateDirectoryResult. NextToken value from a previous call to
+	// DescribeUpdateDirectory. Pass null if this is the first call.
+	NextToken *string `type:"string"`
+
+	// The name of the Region.
+	RegionName *string `min:"8" type:"string"`
+
+	// The type of updates you want to describe for the directory.
+	//
+	// UpdateType is a required field
+	UpdateType *string `type:"string" required:"true" enum:"UpdateType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeUpdateDirectoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeUpdateDirectoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeUpdateDirectoryInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeUpdateDirectoryInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.RegionName != nil && len(*s.RegionName) < 8 {
+		invalidParams.Add(request.NewErrParamMinLen("RegionName", 8))
+	}
+	if s.UpdateType == nil {
+		invalidParams.Add(request.NewErrParamRequired("UpdateType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DescribeUpdateDirectoryInput) SetDirectoryId(v string) *DescribeUpdateDirectoryInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeUpdateDirectoryInput) SetNextToken(v string) *DescribeUpdateDirectoryInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetRegionName sets the RegionName field's value.
+func (s *DescribeUpdateDirectoryInput) SetRegionName(v string) *DescribeUpdateDirectoryInput {
+	s.RegionName = &v
+	return s
+}
+
+// SetUpdateType sets the UpdateType field's value.
+func (s *DescribeUpdateDirectoryInput) SetUpdateType(v string) *DescribeUpdateDirectoryInput {
+	s.UpdateType = &v
+	return s
+}
+
+type DescribeUpdateDirectoryOutput struct {
+	_ struct{} `type:"structure"`
+
+	// If not null, more results are available. Pass this value for the NextToken
+	// parameter.
+	NextToken *string `type:"string"`
+
+	// The list of update activities on a directory for the requested update type.
+	UpdateActivities []*UpdateInfoEntry `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeUpdateDirectoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeUpdateDirectoryOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeUpdateDirectoryOutput) SetNextToken(v string) *DescribeUpdateDirectoryOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetUpdateActivities sets the UpdateActivities field's value.
+func (s *DescribeUpdateDirectoryOutput) SetUpdateActivities(v []*UpdateInfoEntry) *DescribeUpdateDirectoryOutput {
+	s.UpdateActivities = v
+	return s
+}
+
+// The Region you specified is the same Region where the Managed Microsoft AD
+// directory was created. Specify a different Region and try again.
+type DirectoryAlreadyInRegionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryAlreadyInRegionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryAlreadyInRegionException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryAlreadyInRegionException(v protocol.ResponseMetadata) error {
+	return &DirectoryAlreadyInRegionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryAlreadyInRegionException) Code() string {
+	return "DirectoryAlreadyInRegionException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryAlreadyInRegionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryAlreadyInRegionException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryAlreadyInRegionException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryAlreadyInRegionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryAlreadyInRegionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified directory has already been shared with this Amazon Web Services
+// account.
+type DirectoryAlreadySharedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryAlreadySharedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryAlreadySharedException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryAlreadySharedException(v protocol.ResponseMetadata) error {
+	return &DirectoryAlreadySharedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryAlreadySharedException) Code() string {
+	return "DirectoryAlreadySharedException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryAlreadySharedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryAlreadySharedException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryAlreadySharedException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryAlreadySharedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryAlreadySharedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Contains information for the ConnectDirectory operation when an AD Connector
 // directory is being created.
 type DirectoryConnectSettings struct {
 	_ struct{} `type:"structure"`
 
 	// A list of one or more IP addresses of DNS servers or domain controllers in
-	// the on-premises directory.
+	// your self-managed directory.
 	//
 	// CustomerDnsIps is a required field
 	CustomerDnsIps []*string `type:"list" required:"true"`
 
-	// The user name of an account in the on-premises directory that is used to
+	// The user name of an account in your self-managed directory that is used to
 	// connect to the directory. This account must have the following permissions:
 	//
 	//    * Read users and groups
@@ -7276,12 +12042,20 @@ type DirectoryConnectSettings struct {
 	VpcId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryConnectSettings) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryConnectSettings) GoString() string {
 	return s.String()
 }
@@ -7345,25 +12119,33 @@ type DirectoryConnectSettingsDescription struct {
 	// The IP addresses of the AD Connector servers.
 	ConnectIps []*string `type:"list"`
 
-	// The user name of the service account in the on-premises directory.
+	// The user name of the service account in your self-managed directory.
 	CustomerUserName *string `min:"1" type:"string"`
 
 	// The security group identifier for the AD Connector directory.
 	SecurityGroupId *string `type:"string"`
 
-	// A list of subnet identifiers in the VPC that the AD connector is in.
+	// A list of subnet identifiers in the VPC that the AD Connector is in.
 	SubnetIds []*string `type:"list"`
 
 	// The identifier of the VPC that the AD Connector is in.
 	VpcId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryConnectSettingsDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryConnectSettingsDescription) GoString() string {
 	return s.String()
 }
@@ -7404,7 +12186,7 @@ func (s *DirectoryConnectSettingsDescription) SetVpcId(v string) *DirectoryConne
 	return s
 }
 
-// Contains information about an AWS Directory Service directory.
+// Contains information about an Directory Service directory.
 type DirectoryDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -7422,7 +12204,7 @@ type DirectoryDescription struct {
 	// is an AD Connector directory.
 	ConnectSettings *DirectoryConnectSettingsDescription `type:"structure"`
 
-	// The textual description for the directory.
+	// The description for the directory.
 	Description *string `type:"string"`
 
 	// The desired number of domain controllers in the directory if the directory
@@ -7435,7 +12217,7 @@ type DirectoryDescription struct {
 	// The IP addresses of the DNS servers for the directory. For a Simple AD or
 	// Microsoft AD directory, these are the IP addresses of the Simple AD or Microsoft
 	// AD directory servers. For an AD Connector directory, these are the IP addresses
-	// of the DNS servers or domain controllers in the on-premises directory to
+	// of the DNS servers or domain controllers in your self-managed directory to
 	// which the AD Connector is connected.
 	DnsIpAddrs []*string `type:"list"`
 
@@ -7448,7 +12230,10 @@ type DirectoryDescription struct {
 	// The fully qualified name of the directory.
 	Name *string `type:"string"`
 
-	// Describes the AWS Managed Microsoft AD directory in the directory owner account.
+	// The operating system (OS) version of the directory.
+	OsVersion *string `type:"string" enum:"OSVersion"`
+
+	// Describes the Managed Microsoft AD directory in the directory owner account.
 	OwnerDirectoryDescription *OwnerDirectoryDescription `type:"structure"`
 
 	// A RadiusSettings object that contains information about the RADIUS server
@@ -7458,17 +12243,25 @@ type DirectoryDescription struct {
 	// The status of the RADIUS MFA server connection.
 	RadiusStatus *string `type:"string" enum:"RadiusStatus"`
 
+	// Lists the Regions where the directory has replicated.
+	RegionsInfo *RegionsInfo `type:"structure"`
+
 	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your AWS organization (ORGANIZATIONS) or with any
-	// AWS account by sending a shared directory request (HANDSHAKE).
+	// should be shared within your Amazon Web Services organization (ORGANIZATIONS)
+	// or with any Amazon Web Services account by sending a shared directory request
+	// (HANDSHAKE).
 	ShareMethod *string `type:"string" enum:"ShareMethod"`
 
 	// A directory share request that is sent by the directory owner to the directory
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
+	//
+	// ShareNotes is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DirectoryDescription's
+	// String and GoString methods.
 	ShareNotes *string `type:"string" sensitive:"true"`
 
-	// Current directory status of the shared AWS Managed Microsoft AD directory.
+	// Current directory status of the shared Managed Microsoft AD directory.
 	ShareStatus *string `type:"string" enum:"ShareStatus"`
 
 	// The short name of the directory.
@@ -7495,16 +12288,24 @@ type DirectoryDescription struct {
 
 	// A DirectoryVpcSettingsDescription object that contains additional information
 	// about a directory. This member is only present if the directory is a Simple
-	// AD or Managed AD directory.
+	// AD or Managed Microsoft AD directory.
 	VpcSettings *DirectoryVpcSettingsDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryDescription) GoString() string {
 	return s.String()
 }
@@ -7569,6 +12370,12 @@ func (s *DirectoryDescription) SetName(v string) *DirectoryDescription {
 	return s
 }
 
+// SetOsVersion sets the OsVersion field's value.
+func (s *DirectoryDescription) SetOsVersion(v string) *DirectoryDescription {
+	s.OsVersion = &v
+	return s
+}
+
 // SetOwnerDirectoryDescription sets the OwnerDirectoryDescription field's value.
 func (s *DirectoryDescription) SetOwnerDirectoryDescription(v *OwnerDirectoryDescription) *DirectoryDescription {
 	s.OwnerDirectoryDescription = v
@@ -7584,6 +12391,12 @@ func (s *DirectoryDescription) SetRadiusSettings(v *RadiusSettings) *DirectoryDe
 // SetRadiusStatus sets the RadiusStatus field's value.
 func (s *DirectoryDescription) SetRadiusStatus(v string) *DirectoryDescription {
 	s.RadiusStatus = &v
+	return s
+}
+
+// SetRegionsInfo sets the RegionsInfo field's value.
+func (s *DirectoryDescription) SetRegionsInfo(v *RegionsInfo) *DirectoryDescription {
+	s.RegionsInfo = v
 	return s
 }
 
@@ -7653,45 +12466,258 @@ func (s *DirectoryDescription) SetVpcSettings(v *DirectoryVpcSettingsDescription
 	return s
 }
 
-// Contains directory limit information for a region.
+// The specified directory does not exist in the system.
+type DirectoryDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &DirectoryDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryDoesNotExistException) Code() string {
+	return "DirectoryDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The directory is already updated to desired update type settings.
+type DirectoryInDesiredStateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryInDesiredStateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryInDesiredStateException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryInDesiredStateException(v protocol.ResponseMetadata) error {
+	return &DirectoryInDesiredStateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryInDesiredStateException) Code() string {
+	return "DirectoryInDesiredStateException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryInDesiredStateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryInDesiredStateException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryInDesiredStateException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryInDesiredStateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryInDesiredStateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The maximum number of directories in the region has been reached. You can
+// use the GetDirectoryLimits operation to determine your directory limits in
+// the region.
+type DirectoryLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryLimitExceededException(v protocol.ResponseMetadata) error {
+	return &DirectoryLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryLimitExceededException) Code() string {
+	return "DirectoryLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Contains directory limit information for a Region.
 type DirectoryLimits struct {
 	_ struct{} `type:"structure"`
 
-	// The current number of cloud directories in the region.
+	// The current number of cloud directories in the Region.
 	CloudOnlyDirectoriesCurrentCount *int64 `type:"integer"`
 
-	// The maximum number of cloud directories allowed in the region.
+	// The maximum number of cloud directories allowed in the Region.
 	CloudOnlyDirectoriesLimit *int64 `type:"integer"`
 
 	// Indicates if the cloud directory limit has been reached.
 	CloudOnlyDirectoriesLimitReached *bool `type:"boolean"`
 
-	// The current number of AWS Managed Microsoft AD directories in the region.
+	// The current number of Managed Microsoft AD directories in the region.
 	CloudOnlyMicrosoftADCurrentCount *int64 `type:"integer"`
 
-	// The maximum number of AWS Managed Microsoft AD directories allowed in the
-	// region.
+	// The maximum number of Managed Microsoft AD directories allowed in the region.
 	CloudOnlyMicrosoftADLimit *int64 `type:"integer"`
 
-	// Indicates if the AWS Managed Microsoft AD directory limit has been reached.
+	// Indicates if the Managed Microsoft AD directory limit has been reached.
 	CloudOnlyMicrosoftADLimitReached *bool `type:"boolean"`
 
-	// The current number of connected directories in the region.
+	// The current number of connected directories in the Region.
 	ConnectedDirectoriesCurrentCount *int64 `type:"integer"`
 
-	// The maximum number of connected directories allowed in the region.
+	// The maximum number of connected directories allowed in the Region.
 	ConnectedDirectoriesLimit *int64 `type:"integer"`
 
 	// Indicates if the connected directory limit has been reached.
 	ConnectedDirectoriesLimitReached *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryLimits) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryLimits) GoString() string {
 	return s.String()
 }
@@ -7750,13 +12776,150 @@ func (s *DirectoryLimits) SetConnectedDirectoriesLimitReached(v bool) *Directory
 	return s
 }
 
+// The specified directory has not been shared with this Amazon Web Services
+// account.
+type DirectoryNotSharedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryNotSharedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryNotSharedException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryNotSharedException(v protocol.ResponseMetadata) error {
+	return &DirectoryNotSharedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryNotSharedException) Code() string {
+	return "DirectoryNotSharedException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryNotSharedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryNotSharedException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryNotSharedException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryNotSharedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryNotSharedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified directory is unavailable or could not be found.
+type DirectoryUnavailableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryUnavailableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryUnavailableException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryUnavailableException(v protocol.ResponseMetadata) error {
+	return &DirectoryUnavailableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryUnavailableException) Code() string {
+	return "DirectoryUnavailableException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryUnavailableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryUnavailableException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryUnavailableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryUnavailableException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
 type DirectoryVpcSettings struct {
 	_ struct{} `type:"structure"`
 
 	// The identifiers of the subnets for the directory servers. The two subnets
-	// must be in different Availability Zones. AWS Directory Service creates a
-	// directory server and a DNS server in each of these subnets.
+	// must be in different Availability Zones. Directory Service creates a directory
+	// server and a DNS server in each of these subnets.
 	//
 	// SubnetIds is a required field
 	SubnetIds []*string `type:"list" required:"true"`
@@ -7767,12 +12930,20 @@ type DirectoryVpcSettings struct {
 	VpcId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryVpcSettings) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryVpcSettings) GoString() string {
 	return s.String()
 }
@@ -7822,12 +12993,20 @@ type DirectoryVpcSettingsDescription struct {
 	VpcId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryVpcSettingsDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DirectoryVpcSettingsDescription) GoString() string {
 	return s.String()
 }
@@ -7856,6 +13035,171 @@ func (s *DirectoryVpcSettingsDescription) SetVpcId(v string) *DirectoryVpcSettin
 	return s
 }
 
+type DisableClientAuthenticationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The type of client authentication to disable. Currently, only the parameter,
+	// SmartCard is supported.
+	//
+	// Type is a required field
+	Type *string `type:"string" required:"true" enum:"ClientAuthenticationType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableClientAuthenticationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableClientAuthenticationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisableClientAuthenticationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DisableClientAuthenticationInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.Type == nil {
+		invalidParams.Add(request.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DisableClientAuthenticationInput) SetDirectoryId(v string) *DisableClientAuthenticationInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *DisableClientAuthenticationInput) SetType(v string) *DisableClientAuthenticationInput {
+	s.Type = &v
+	return s
+}
+
+type DisableClientAuthenticationOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableClientAuthenticationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableClientAuthenticationOutput) GoString() string {
+	return s.String()
+}
+
+type DisableLDAPSInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The type of LDAP security to enable. Currently only the value Client is supported.
+	//
+	// Type is a required field
+	Type *string `type:"string" required:"true" enum:"LDAPSType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableLDAPSInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableLDAPSInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisableLDAPSInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DisableLDAPSInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.Type == nil {
+		invalidParams.Add(request.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DisableLDAPSInput) SetDirectoryId(v string) *DisableLDAPSInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *DisableLDAPSInput) SetType(v string) *DisableLDAPSInput {
+	s.Type = &v
+	return s
+}
+
+type DisableLDAPSOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableLDAPSOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisableLDAPSOutput) GoString() string {
+	return s.String()
+}
+
 // Contains the inputs for the DisableRadius operation.
 type DisableRadiusInput struct {
 	_ struct{} `type:"structure"`
@@ -7866,12 +13210,20 @@ type DisableRadiusInput struct {
 	DirectoryId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableRadiusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableRadiusInput) GoString() string {
 	return s.String()
 }
@@ -7900,12 +13252,20 @@ type DisableRadiusOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableRadiusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableRadiusOutput) GoString() string {
 	return s.String()
 }
@@ -7922,6 +13282,10 @@ type DisableSsoInput struct {
 	// The password of an alternate account to use to disable single-sign on. This
 	// is only used for AD Connector directories. For more information, see the
 	// UserName parameter.
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DisableSsoInput's
+	// String and GoString methods.
 	Password *string `min:"1" type:"string" sensitive:"true"`
 
 	// The username of an alternate account to use to disable single-sign on. This
@@ -7936,12 +13300,20 @@ type DisableSsoInput struct {
 	UserName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableSsoInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableSsoInput) GoString() string {
 	return s.String()
 }
@@ -7988,12 +13360,20 @@ type DisableSsoOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableSsoOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableSsoOutput) GoString() string {
 	return s.String()
 }
@@ -8033,12 +13413,20 @@ type DomainController struct {
 	VpcId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainController) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainController) GoString() string {
 	return s.String()
 }
@@ -8103,6 +13491,242 @@ func (s *DomainController) SetVpcId(v string) *DomainController {
 	return s
 }
 
+// The maximum allowed number of domain controllers per directory was exceeded.
+// The default limit per directory is 20 domain controllers.
+type DomainControllerLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainControllerLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainControllerLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorDomainControllerLimitExceededException(v protocol.ResponseMetadata) error {
+	return &DomainControllerLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DomainControllerLimitExceededException) Code() string {
+	return "DomainControllerLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *DomainControllerLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DomainControllerLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *DomainControllerLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DomainControllerLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DomainControllerLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type EnableClientAuthenticationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the specified directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The type of client authentication to enable. Currently only the value SmartCard
+	// is supported. Smart card authentication in AD Connector requires that you
+	// enable Kerberos Constrained Delegation for the Service User to the LDAP service
+	// in your self-managed AD.
+	//
+	// Type is a required field
+	Type *string `type:"string" required:"true" enum:"ClientAuthenticationType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableClientAuthenticationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableClientAuthenticationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EnableClientAuthenticationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "EnableClientAuthenticationInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.Type == nil {
+		invalidParams.Add(request.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *EnableClientAuthenticationInput) SetDirectoryId(v string) *EnableClientAuthenticationInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *EnableClientAuthenticationInput) SetType(v string) *EnableClientAuthenticationInput {
+	s.Type = &v
+	return s
+}
+
+type EnableClientAuthenticationOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableClientAuthenticationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableClientAuthenticationOutput) GoString() string {
+	return s.String()
+}
+
+type EnableLDAPSInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The type of LDAP security to enable. Currently only the value Client is supported.
+	//
+	// Type is a required field
+	Type *string `type:"string" required:"true" enum:"LDAPSType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableLDAPSInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableLDAPSInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EnableLDAPSInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "EnableLDAPSInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.Type == nil {
+		invalidParams.Add(request.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *EnableLDAPSInput) SetDirectoryId(v string) *EnableLDAPSInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *EnableLDAPSInput) SetType(v string) *EnableLDAPSInput {
+	s.Type = &v
+	return s
+}
+
+type EnableLDAPSOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableLDAPSOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EnableLDAPSOutput) GoString() string {
+	return s.String()
+}
+
 // Contains the inputs for the EnableRadius operation.
 type EnableRadiusInput struct {
 	_ struct{} `type:"structure"`
@@ -8118,12 +13742,20 @@ type EnableRadiusInput struct {
 	RadiusSettings *RadiusSettings `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableRadiusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableRadiusInput) GoString() string {
 	return s.String()
 }
@@ -8166,12 +13798,20 @@ type EnableRadiusOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableRadiusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableRadiusOutput) GoString() string {
 	return s.String()
 }
@@ -8188,6 +13828,10 @@ type EnableSsoInput struct {
 	// The password of an alternate account to use to enable single-sign on. This
 	// is only used for AD Connector directories. For more information, see the
 	// UserName parameter.
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by EnableSsoInput's
+	// String and GoString methods.
 	Password *string `min:"1" type:"string" sensitive:"true"`
 
 	// The username of an alternate account to use to enable single-sign on. This
@@ -8202,12 +13846,20 @@ type EnableSsoInput struct {
 	UserName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableSsoInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableSsoInput) GoString() string {
 	return s.String()
 }
@@ -8254,43 +13906,196 @@ type EnableSsoOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableSsoOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableSsoOutput) GoString() string {
 	return s.String()
 }
 
-// Information about SNS topic and AWS Directory Service directory associations.
+// The specified entity already exists.
+type EntityAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EntityAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EntityAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorEntityAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &EntityAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *EntityAlreadyExistsException) Code() string {
+	return "EntityAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *EntityAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *EntityAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *EntityAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *EntityAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *EntityAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified entity could not be found.
+type EntityDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EntityDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EntityDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorEntityDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &EntityDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *EntityDoesNotExistException) Code() string {
+	return "EntityDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *EntityDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *EntityDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *EntityDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *EntityDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *EntityDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Information about Amazon SNS topic and Directory Service directory associations.
 type EventTopic struct {
 	_ struct{} `type:"structure"`
 
-	// The date and time of when you associated your directory with the SNS topic.
+	// The date and time of when you associated your directory with the Amazon SNS
+	// topic.
 	CreatedDateTime *time.Time `type:"timestamp"`
 
-	// The Directory ID of an AWS Directory Service directory that will publish
-	// status messages to an SNS topic.
+	// The Directory ID of an Directory Service directory that will publish status
+	// messages to an Amazon SNS topic.
 	DirectoryId *string `type:"string"`
 
 	// The topic registration status.
 	Status *string `type:"string" enum:"TopicStatus"`
 
-	// The SNS topic ARN (Amazon Resource Name).
+	// The Amazon SNS topic ARN (Amazon Resource Name).
 	TopicArn *string `type:"string"`
 
-	// The name of an AWS SNS topic the receives status messages from the directory.
+	// The name of an Amazon SNS topic the receives status messages from the directory.
 	TopicName *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventTopic) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventTopic) GoString() string {
 	return s.String()
 }
@@ -8330,12 +14135,20 @@ type GetDirectoryLimitsInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDirectoryLimitsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDirectoryLimitsInput) GoString() string {
 	return s.String()
 }
@@ -8345,16 +14158,24 @@ type GetDirectoryLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A DirectoryLimits object that contains the directory limits for the current
-	// region.
+	// Region.
 	DirectoryLimits *DirectoryLimits `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDirectoryLimitsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDirectoryLimitsOutput) GoString() string {
 	return s.String()
 }
@@ -8375,12 +14196,20 @@ type GetSnapshotLimitsInput struct {
 	DirectoryId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSnapshotLimitsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSnapshotLimitsInput) GoString() string {
 	return s.String()
 }
@@ -8413,12 +14242,20 @@ type GetSnapshotLimitsOutput struct {
 	SnapshotLimits *SnapshotLimits `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSnapshotLimitsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSnapshotLimitsOutput) GoString() string {
 	return s.String()
 }
@@ -8429,13 +14266,627 @@ func (s *GetSnapshotLimitsOutput) SetSnapshotLimits(v *SnapshotLimits) *GetSnaps
 	return s
 }
 
+// The specified directory setting is not compatible with other settings.
+type IncompatibleSettingsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IncompatibleSettingsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IncompatibleSettingsException) GoString() string {
+	return s.String()
+}
+
+func newErrorIncompatibleSettingsException(v protocol.ResponseMetadata) error {
+	return &IncompatibleSettingsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IncompatibleSettingsException) Code() string {
+	return "IncompatibleSettingsException"
+}
+
+// Message returns the exception's message.
+func (s *IncompatibleSettingsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IncompatibleSettingsException) OrigErr() error {
+	return nil
+}
+
+func (s *IncompatibleSettingsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IncompatibleSettingsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IncompatibleSettingsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The account does not have sufficient permission to perform the operation.
+type InsufficientPermissionsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsufficientPermissionsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InsufficientPermissionsException) GoString() string {
+	return s.String()
+}
+
+func newErrorInsufficientPermissionsException(v protocol.ResponseMetadata) error {
+	return &InsufficientPermissionsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InsufficientPermissionsException) Code() string {
+	return "InsufficientPermissionsException"
+}
+
+// Message returns the exception's message.
+func (s *InsufficientPermissionsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InsufficientPermissionsException) OrigErr() error {
+	return nil
+}
+
+func (s *InsufficientPermissionsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InsufficientPermissionsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InsufficientPermissionsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The certificate PEM that was provided has incorrect encoding.
+type InvalidCertificateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCertificateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCertificateException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidCertificateException(v protocol.ResponseMetadata) error {
+	return &InvalidCertificateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidCertificateException) Code() string {
+	return "InvalidCertificateException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidCertificateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidCertificateException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidCertificateException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidCertificateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidCertificateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Client authentication is already enabled.
+type InvalidClientAuthStatusException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidClientAuthStatusException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidClientAuthStatusException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidClientAuthStatusException(v protocol.ResponseMetadata) error {
+	return &InvalidClientAuthStatusException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidClientAuthStatusException) Code() string {
+	return "InvalidClientAuthStatusException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidClientAuthStatusException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidClientAuthStatusException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidClientAuthStatusException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidClientAuthStatusException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidClientAuthStatusException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The LDAP activities could not be performed because they are limited by the
+// LDAPS status.
+type InvalidLDAPSStatusException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLDAPSStatusException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLDAPSStatusException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidLDAPSStatusException(v protocol.ResponseMetadata) error {
+	return &InvalidLDAPSStatusException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidLDAPSStatusException) Code() string {
+	return "InvalidLDAPSStatusException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidLDAPSStatusException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidLDAPSStatusException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidLDAPSStatusException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidLDAPSStatusException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidLDAPSStatusException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The NextToken value is not valid.
+type InvalidNextTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidNextTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidNextTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidNextTokenException) Code() string {
+	return "InvalidNextTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidNextTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidNextTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidNextTokenException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidNextTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidNextTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// One or more parameters are not valid.
+type InvalidParameterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidParameterException(v protocol.ResponseMetadata) error {
+	return &InvalidParameterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidParameterException) Code() string {
+	return "InvalidParameterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidParameterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidParameterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidParameterException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidParameterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidParameterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The new password provided by the user does not meet the password complexity
+// requirements defined in your directory.
+type InvalidPasswordException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPasswordException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidPasswordException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidPasswordException(v protocol.ResponseMetadata) error {
+	return &InvalidPasswordException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidPasswordException) Code() string {
+	return "InvalidPasswordException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidPasswordException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidPasswordException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidPasswordException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidPasswordException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidPasswordException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified shared target is not valid.
+type InvalidTargetException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTargetException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTargetException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTargetException(v protocol.ResponseMetadata) error {
+	return &InvalidTargetException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTargetException) Code() string {
+	return "InvalidTargetException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTargetException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTargetException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTargetException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTargetException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTargetException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // IP address block. This is often the address block of the DNS server used
-// for your on-premises domain.
+// for your self-managed domain.
 type IpRoute struct {
 	_ struct{} `type:"structure"`
 
 	// IP address block using CIDR format, for example 10.0.0.0/24. This is often
-	// the address block of the DNS server used for your on-premises domain. For
+	// the address block of the DNS server used for your self-managed domain. For
 	// a single IP address use a CIDR address block with /32. For example 10.0.0.0/32.
 	CidrIp *string `type:"string"`
 
@@ -8443,12 +14894,20 @@ type IpRoute struct {
 	Description *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IpRoute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IpRoute) GoString() string {
 	return s.String()
 }
@@ -8488,12 +14947,20 @@ type IpRouteInfo struct {
 	IpRouteStatusReason *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IpRouteInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IpRouteInfo) GoString() string {
 	return s.String()
 }
@@ -8534,6 +15001,237 @@ func (s *IpRouteInfo) SetIpRouteStatusReason(v string) *IpRouteInfo {
 	return s
 }
 
+// The maximum allowed number of IP addresses was exceeded. The default limit
+// is 100 IP address blocks.
+type IpRouteLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IpRouteLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IpRouteLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorIpRouteLimitExceededException(v protocol.ResponseMetadata) error {
+	return &IpRouteLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IpRouteLimitExceededException) Code() string {
+	return "IpRouteLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *IpRouteLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IpRouteLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *IpRouteLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IpRouteLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IpRouteLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Contains general information about the LDAPS settings.
+type LDAPSSettingInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The state of the LDAPS settings.
+	LDAPSStatus *string `type:"string" enum:"LDAPSStatus"`
+
+	// Describes a state change for LDAPS.
+	LDAPSStatusReason *string `type:"string"`
+
+	// The date and time when the LDAPS settings were last updated.
+	LastUpdatedDateTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LDAPSSettingInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LDAPSSettingInfo) GoString() string {
+	return s.String()
+}
+
+// SetLDAPSStatus sets the LDAPSStatus field's value.
+func (s *LDAPSSettingInfo) SetLDAPSStatus(v string) *LDAPSSettingInfo {
+	s.LDAPSStatus = &v
+	return s
+}
+
+// SetLDAPSStatusReason sets the LDAPSStatusReason field's value.
+func (s *LDAPSSettingInfo) SetLDAPSStatusReason(v string) *LDAPSSettingInfo {
+	s.LDAPSStatusReason = &v
+	return s
+}
+
+// SetLastUpdatedDateTime sets the LastUpdatedDateTime field's value.
+func (s *LDAPSSettingInfo) SetLastUpdatedDateTime(v time.Time) *LDAPSSettingInfo {
+	s.LastUpdatedDateTime = &v
+	return s
+}
+
+type ListCertificatesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The number of items that should show up on one page
+	Limit *int64 `min:"1" type:"integer"`
+
+	// A token for requesting another page of certificates if the NextToken response
+	// element indicates that more certificates are available. Use the value of
+	// the returned NextToken element in your request until the token comes back
+	// as null. Pass null if this is the first call.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListCertificatesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListCertificatesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListCertificatesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListCertificatesInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *ListCertificatesInput) SetDirectoryId(v string) *ListCertificatesInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListCertificatesInput) SetLimit(v int64) *ListCertificatesInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListCertificatesInput) SetNextToken(v string) *ListCertificatesInput {
+	s.NextToken = &v
+	return s
+}
+
+type ListCertificatesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of certificates with basic details including certificate ID, certificate
+	// common name, certificate state.
+	CertificatesInfo []*CertificateInfo `type:"list"`
+
+	// Indicates whether another page of certificates is available when the number
+	// of available certificates exceeds the page limit.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListCertificatesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListCertificatesOutput) GoString() string {
+	return s.String()
+}
+
+// SetCertificatesInfo sets the CertificatesInfo field's value.
+func (s *ListCertificatesOutput) SetCertificatesInfo(v []*CertificateInfo) *ListCertificatesOutput {
+	s.CertificatesInfo = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListCertificatesOutput) SetNextToken(v string) *ListCertificatesOutput {
+	s.NextToken = &v
+	return s
+}
+
 type ListIpRoutesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8551,12 +15249,20 @@ type ListIpRoutesInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIpRoutesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIpRoutesInput) GoString() string {
 	return s.String()
 }
@@ -8604,12 +15310,20 @@ type ListIpRoutesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIpRoutesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIpRoutesOutput) GoString() string {
 	return s.String()
 }
@@ -8631,8 +15345,9 @@ type ListLogSubscriptionsInput struct {
 
 	// If a DirectoryID is provided, lists only the log subscription associated
 	// with that directory. If no DirectoryId is provided, lists all log subscriptions
-	// associated with your AWS account. If there are no log subscriptions for the
-	// AWS account or the directory, an empty list will be returned.
+	// associated with your Amazon Web Services account. If there are no log subscriptions
+	// for the Amazon Web Services account or the directory, an empty list will
+	// be returned.
 	DirectoryId *string `type:"string"`
 
 	// The maximum number of items returned.
@@ -8642,12 +15357,20 @@ type ListLogSubscriptionsInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListLogSubscriptionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListLogSubscriptionsInput) GoString() string {
 	return s.String()
 }
@@ -8673,19 +15396,28 @@ func (s *ListLogSubscriptionsInput) SetNextToken(v string) *ListLogSubscriptions
 type ListLogSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of active LogSubscription objects for calling the AWS account.
+	// A list of active LogSubscription objects for calling the Amazon Web Services
+	// account.
 	LogSubscriptions []*LogSubscription `type:"list"`
 
 	// The token for the next set of items to return.
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListLogSubscriptionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListLogSubscriptionsOutput) GoString() string {
 	return s.String()
 }
@@ -8719,12 +15451,20 @@ type ListSchemaExtensionsInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSchemaExtensionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSchemaExtensionsInput) GoString() string {
 	return s.String()
 }
@@ -8772,12 +15512,20 @@ type ListSchemaExtensionsOutput struct {
 	SchemaExtensionsInfo []*SchemaExtensionInfo `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSchemaExtensionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSchemaExtensionsOutput) GoString() string {
 	return s.String()
 }
@@ -8809,12 +15557,20 @@ type ListTagsForResourceInput struct {
 	ResourceId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) GoString() string {
 	return s.String()
 }
@@ -8860,12 +15616,20 @@ type ListTagsForResourceOutput struct {
 	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
 }
@@ -8898,12 +15662,20 @@ type LogSubscription struct {
 	SubscriptionCreatedDateTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LogSubscription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LogSubscription) GoString() string {
 	return s.String()
 }
@@ -8926,6 +15698,175 @@ func (s *LogSubscription) SetSubscriptionCreatedDateTime(v time.Time) *LogSubscr
 	return s
 }
 
+// Client authentication setup could not be completed because at least one valid
+// certificate must be registered in the system.
+type NoAvailableCertificateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NoAvailableCertificateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NoAvailableCertificateException) GoString() string {
+	return s.String()
+}
+
+func newErrorNoAvailableCertificateException(v protocol.ResponseMetadata) error {
+	return &NoAvailableCertificateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NoAvailableCertificateException) Code() string {
+	return "NoAvailableCertificateException"
+}
+
+// Message returns the exception's message.
+func (s *NoAvailableCertificateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NoAvailableCertificateException) OrigErr() error {
+	return nil
+}
+
+func (s *NoAvailableCertificateException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NoAvailableCertificateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NoAvailableCertificateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// OS version that the directory needs to be updated to.
+type OSUpdateSettings struct {
+	_ struct{} `type:"structure"`
+
+	// OS version that the directory needs to be updated to.
+	OSVersion *string `type:"string" enum:"OSVersion"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OSUpdateSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OSUpdateSettings) GoString() string {
+	return s.String()
+}
+
+// SetOSVersion sets the OSVersion field's value.
+func (s *OSUpdateSettings) SetOSVersion(v string) *OSUpdateSettings {
+	s.OSVersion = &v
+	return s
+}
+
+// Exception encountered while trying to access your Amazon Web Services organization.
+type OrganizationsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OrganizationsException) GoString() string {
+	return s.String()
+}
+
+func newErrorOrganizationsException(v protocol.ResponseMetadata) error {
+	return &OrganizationsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OrganizationsException) Code() string {
+	return "OrganizationsException"
+}
+
+// Message returns the exception's message.
+func (s *OrganizationsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OrganizationsException) OrigErr() error {
+	return nil
+}
+
+func (s *OrganizationsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OrganizationsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OrganizationsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Describes the directory owner account details that have been shared to the
 // directory consumer account.
 type OwnerDirectoryDescription struct {
@@ -8934,8 +15875,7 @@ type OwnerDirectoryDescription struct {
 	// Identifier of the directory owner account.
 	AccountId *string `type:"string"`
 
-	// Identifier of the AWS Managed Microsoft AD directory in the directory owner
-	// account.
+	// Identifier of the Managed Microsoft AD directory in the directory owner account.
 	DirectoryId *string `type:"string"`
 
 	// IP address of the directory’s domain controllers.
@@ -8951,12 +15891,20 @@ type OwnerDirectoryDescription struct {
 	VpcSettings *DirectoryVpcSettingsDescription `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OwnerDirectoryDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OwnerDirectoryDescription) GoString() string {
 	return s.String()
 }
@@ -9008,35 +15956,48 @@ type RadiusSettings struct {
 	// Not currently used.
 	DisplayLabel *string `min:"1" type:"string"`
 
-	// The port that your RADIUS server is using for communications. Your on-premises
-	// network must allow inbound traffic over this port from the AWS Directory
-	// Service servers.
+	// The port that your RADIUS server is using for communications. Your self-managed
+	// network must allow inbound traffic over this port from the Directory Service
+	// servers.
 	RadiusPort *int64 `min:"1025" type:"integer"`
 
 	// The maximum number of times that communication with the RADIUS server is
 	// attempted.
 	RadiusRetries *int64 `type:"integer"`
 
-	// An array of strings that contains the IP addresses of the RADIUS server endpoints,
-	// or the IP addresses of your RADIUS server load balancer.
+	// An array of strings that contains the fully qualified domain name (FQDN)
+	// or IP addresses of the RADIUS server endpoints, or the FQDN or IP addresses
+	// of your RADIUS server load balancer.
 	RadiusServers []*string `type:"list"`
 
 	// The amount of time, in seconds, to wait for the RADIUS server to respond.
 	RadiusTimeout *int64 `min:"1" type:"integer"`
 
 	// Required for enabling RADIUS on the directory.
+	//
+	// SharedSecret is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RadiusSettings's
+	// String and GoString methods.
 	SharedSecret *string `min:"8" type:"string" sensitive:"true"`
 
 	// Not currently used.
 	UseSameUsername *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RadiusSettings) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RadiusSettings) GoString() string {
 	return s.String()
 }
@@ -9111,28 +16072,373 @@ func (s *RadiusSettings) SetUseSameUsername(v bool) *RadiusSettings {
 	return s
 }
 
-// Registers a new event topic.
-type RegisterEventTopicInput struct {
+// The replicated Region information for a directory.
+type RegionDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The Directory ID that will publish status messages to the SNS topic.
+	// The desired number of domain controllers in the specified Region for the
+	// specified directory.
+	DesiredNumberOfDomainControllers *int64 `min:"2" type:"integer"`
+
+	// The identifier of the directory.
+	DirectoryId *string `type:"string"`
+
+	// The date and time that the Region description was last updated.
+	LastUpdatedDateTime *time.Time `type:"timestamp"`
+
+	// Specifies when the Region replication began.
+	LaunchTime *time.Time `type:"timestamp"`
+
+	// The name of the Region. For example, us-east-1.
+	RegionName *string `min:"8" type:"string"`
+
+	// Specifies whether the Region is the primary Region or an additional Region.
+	RegionType *string `type:"string" enum:"RegionType"`
+
+	// The status of the replication process for the specified Region.
+	Status *string `type:"string" enum:"DirectoryStage"`
+
+	// The date and time that the Region status was last updated.
+	StatusLastUpdatedDateTime *time.Time `type:"timestamp"`
+
+	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
+	VpcSettings *DirectoryVpcSettings `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegionDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegionDescription) GoString() string {
+	return s.String()
+}
+
+// SetDesiredNumberOfDomainControllers sets the DesiredNumberOfDomainControllers field's value.
+func (s *RegionDescription) SetDesiredNumberOfDomainControllers(v int64) *RegionDescription {
+	s.DesiredNumberOfDomainControllers = &v
+	return s
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *RegionDescription) SetDirectoryId(v string) *RegionDescription {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetLastUpdatedDateTime sets the LastUpdatedDateTime field's value.
+func (s *RegionDescription) SetLastUpdatedDateTime(v time.Time) *RegionDescription {
+	s.LastUpdatedDateTime = &v
+	return s
+}
+
+// SetLaunchTime sets the LaunchTime field's value.
+func (s *RegionDescription) SetLaunchTime(v time.Time) *RegionDescription {
+	s.LaunchTime = &v
+	return s
+}
+
+// SetRegionName sets the RegionName field's value.
+func (s *RegionDescription) SetRegionName(v string) *RegionDescription {
+	s.RegionName = &v
+	return s
+}
+
+// SetRegionType sets the RegionType field's value.
+func (s *RegionDescription) SetRegionType(v string) *RegionDescription {
+	s.RegionType = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *RegionDescription) SetStatus(v string) *RegionDescription {
+	s.Status = &v
+	return s
+}
+
+// SetStatusLastUpdatedDateTime sets the StatusLastUpdatedDateTime field's value.
+func (s *RegionDescription) SetStatusLastUpdatedDateTime(v time.Time) *RegionDescription {
+	s.StatusLastUpdatedDateTime = &v
+	return s
+}
+
+// SetVpcSettings sets the VpcSettings field's value.
+func (s *RegionDescription) SetVpcSettings(v *DirectoryVpcSettings) *RegionDescription {
+	s.VpcSettings = v
+	return s
+}
+
+// You have reached the limit for maximum number of simultaneous Region replications
+// per directory.
+type RegionLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegionLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegionLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorRegionLimitExceededException(v protocol.ResponseMetadata) error {
+	return &RegionLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RegionLimitExceededException) Code() string {
+	return "RegionLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *RegionLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RegionLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *RegionLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RegionLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RegionLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Provides information about the Regions that are configured for multi-Region
+// replication.
+type RegionsInfo struct {
+	_ struct{} `type:"structure"`
+
+	// Lists the Regions where the directory has been replicated, excluding the
+	// primary Region.
+	AdditionalRegions []*string `type:"list"`
+
+	// The Region where the Managed Microsoft AD directory was originally created.
+	PrimaryRegion *string `min:"8" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegionsInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegionsInfo) GoString() string {
+	return s.String()
+}
+
+// SetAdditionalRegions sets the AdditionalRegions field's value.
+func (s *RegionsInfo) SetAdditionalRegions(v []*string) *RegionsInfo {
+	s.AdditionalRegions = v
+	return s
+}
+
+// SetPrimaryRegion sets the PrimaryRegion field's value.
+func (s *RegionsInfo) SetPrimaryRegion(v string) *RegionsInfo {
+	s.PrimaryRegion = &v
+	return s
+}
+
+type RegisterCertificateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The certificate PEM string that needs to be registered.
+	//
+	// CertificateData is a required field
+	CertificateData *string `min:"1" type:"string" required:"true"`
+
+	// A ClientCertAuthSettings object that contains client certificate authentication
+	// settings.
+	ClientCertAuthSettings *ClientCertAuthSettings `type:"structure"`
+
+	// The identifier of the directory.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
 
-	// The SNS topic name to which the directory will publish status messages. This
-	// SNS topic must be in the same region as the specified Directory ID.
+	// The function that the registered certificate performs. Valid values include
+	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
+	Type *string `type:"string" enum:"CertificateType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisterCertificateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisterCertificateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegisterCertificateInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RegisterCertificateInput"}
+	if s.CertificateData == nil {
+		invalidParams.Add(request.NewErrParamRequired("CertificateData"))
+	}
+	if s.CertificateData != nil && len(*s.CertificateData) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("CertificateData", 1))
+	}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.ClientCertAuthSettings != nil {
+		if err := s.ClientCertAuthSettings.Validate(); err != nil {
+			invalidParams.AddNested("ClientCertAuthSettings", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCertificateData sets the CertificateData field's value.
+func (s *RegisterCertificateInput) SetCertificateData(v string) *RegisterCertificateInput {
+	s.CertificateData = &v
+	return s
+}
+
+// SetClientCertAuthSettings sets the ClientCertAuthSettings field's value.
+func (s *RegisterCertificateInput) SetClientCertAuthSettings(v *ClientCertAuthSettings) *RegisterCertificateInput {
+	s.ClientCertAuthSettings = v
+	return s
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *RegisterCertificateInput) SetDirectoryId(v string) *RegisterCertificateInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *RegisterCertificateInput) SetType(v string) *RegisterCertificateInput {
+	s.Type = &v
+	return s
+}
+
+type RegisterCertificateOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the certificate.
+	CertificateId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisterCertificateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisterCertificateOutput) GoString() string {
+	return s.String()
+}
+
+// SetCertificateId sets the CertificateId field's value.
+func (s *RegisterCertificateOutput) SetCertificateId(v string) *RegisterCertificateOutput {
+	s.CertificateId = &v
+	return s
+}
+
+// Registers a new event topic.
+type RegisterEventTopicInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Directory ID that will publish status messages to the Amazon SNS topic.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The Amazon SNS topic name to which the directory will publish status messages.
+	// This Amazon SNS topic must be in the same region as the specified Directory
+	// ID.
 	//
 	// TopicName is a required field
 	TopicName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterEventTopicInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterEventTopicInput) GoString() string {
 	return s.String()
 }
@@ -9173,12 +16479,20 @@ type RegisterEventTopicOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterEventTopicOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterEventTopicOutput) GoString() string {
 	return s.String()
 }
@@ -9193,12 +16507,20 @@ type RejectSharedDirectoryInput struct {
 	SharedDirectoryId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectSharedDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectSharedDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -9229,12 +16551,20 @@ type RejectSharedDirectoryOutput struct {
 	SharedDirectoryId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectSharedDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectSharedDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -9259,12 +16589,20 @@ type RemoveIpRoutesInput struct {
 	DirectoryId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveIpRoutesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveIpRoutesInput) GoString() string {
 	return s.String()
 }
@@ -9301,13 +16639,89 @@ type RemoveIpRoutesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveIpRoutesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveIpRoutesOutput) GoString() string {
+	return s.String()
+}
+
+type RemoveRegionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory for which you want to remove Region replication.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveRegionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveRegionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RemoveRegionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RemoveRegionInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *RemoveRegionInput) SetDirectoryId(v string) *RemoveRegionInput {
+	s.DirectoryId = &v
+	return s
+}
+
+type RemoveRegionOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveRegionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveRegionOutput) GoString() string {
 	return s.String()
 }
 
@@ -9325,12 +16739,20 @@ type RemoveTagsFromResourceInput struct {
 	TagKeys []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceInput) GoString() string {
 	return s.String()
 }
@@ -9367,12 +16789,20 @@ type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
 }
@@ -9380,13 +16810,17 @@ func (s RemoveTagsFromResourceOutput) GoString() string {
 type ResetUserPasswordInput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier of the AWS Managed Microsoft AD or Simple AD directory in which
-	// the user resides.
+	// Identifier of the Managed Microsoft AD or Simple AD directory in which the
+	// user resides.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
 
 	// The new password that will be reset.
+	//
+	// NewPassword is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ResetUserPasswordInput's
+	// String and GoString methods.
 	//
 	// NewPassword is a required field
 	NewPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
@@ -9397,12 +16831,20 @@ type ResetUserPasswordInput struct {
 	UserName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResetUserPasswordInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResetUserPasswordInput) GoString() string {
 	return s.String()
 }
@@ -9454,12 +16896,20 @@ type ResetUserPasswordOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResetUserPasswordOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResetUserPasswordOutput) GoString() string {
 	return s.String()
 }
@@ -9474,12 +16924,20 @@ type RestoreFromSnapshotInput struct {
 	SnapshotId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreFromSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreFromSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -9508,12 +16966,20 @@ type RestoreFromSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreFromSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreFromSnapshotOutput) GoString() string {
 	return s.String()
 }
@@ -9545,12 +17011,20 @@ type SchemaExtensionInfo struct {
 	StartDateTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SchemaExtensionInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SchemaExtensionInfo) GoString() string {
 	return s.String()
 }
@@ -9597,18 +17071,290 @@ func (s *SchemaExtensionInfo) SetStartDateTime(v time.Time) *SchemaExtensionInfo
 	return s
 }
 
+// An exception has occurred in Directory Service.
+type ServiceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceException) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceException(v protocol.ResponseMetadata) error {
+	return &ServiceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceException) Code() string {
+	return "ServiceException"
+}
+
+// Message returns the exception's message.
+func (s *ServiceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceException) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Contains information about the configurable settings for a directory.
+type Setting struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the directory setting. For example:
+	//
+	// TLS_1_0
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The value of the directory setting for which to retrieve information. For
+	// example, for TLS_1_0, the valid values are: Enable and Disable.
+	//
+	// Value is a required field
+	Value *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Setting) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Setting) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Setting) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Setting"}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.Value == nil {
+		invalidParams.Add(request.NewErrParamRequired("Value"))
+	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetName sets the Name field's value.
+func (s *Setting) SetName(v string) *Setting {
+	s.Name = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *Setting) SetValue(v string) *Setting {
+	s.Value = &v
+	return s
+}
+
+// Contains information about the specified configurable setting for a directory.
+type SettingEntry struct {
+	_ struct{} `type:"structure"`
+
+	// The valid range of values for the directory setting. These values depend
+	// on the DataType of your directory.
+	AllowedValues *string `type:"string"`
+
+	// The value of the directory setting that is applied to the directory.
+	AppliedValue *string `min:"1" type:"string"`
+
+	// The data type of a directory setting. This is used to define the AllowedValues
+	// of a setting. For example a data type can be Boolean, DurationInSeconds,
+	// or Enum.
+	DataType *string `type:"string"`
+
+	// The date and time when the request to update a directory setting was last
+	// submitted.
+	LastRequestedDateTime *time.Time `type:"timestamp"`
+
+	// The date and time when the directory setting was last updated.
+	LastUpdatedDateTime *time.Time `type:"timestamp"`
+
+	// The name of the directory setting. For example:
+	//
+	// TLS_1_0
+	Name *string `min:"1" type:"string"`
+
+	// Details about the status of the request to update the directory setting.
+	// If the directory setting is deployed in more than one region, status is returned
+	// for the request in each region where the setting is deployed.
+	RequestDetailedStatus map[string]*string `type:"map"`
+
+	// The overall status of the request to update the directory setting request.
+	// If the directory setting is deployed in more than one region, and the request
+	// fails in any region, the overall status is Failed.
+	RequestStatus *string `type:"string" enum:"DirectoryConfigurationStatus"`
+
+	// The last status message for the directory status request.
+	RequestStatusMessage *string `type:"string"`
+
+	// The value that was last requested for the directory setting.
+	RequestedValue *string `min:"1" type:"string"`
+
+	// The type, or category, of a directory setting. Similar settings have the
+	// same type. For example, Protocol, Cipher, or Certificate-Based Authentication.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SettingEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SettingEntry) GoString() string {
+	return s.String()
+}
+
+// SetAllowedValues sets the AllowedValues field's value.
+func (s *SettingEntry) SetAllowedValues(v string) *SettingEntry {
+	s.AllowedValues = &v
+	return s
+}
+
+// SetAppliedValue sets the AppliedValue field's value.
+func (s *SettingEntry) SetAppliedValue(v string) *SettingEntry {
+	s.AppliedValue = &v
+	return s
+}
+
+// SetDataType sets the DataType field's value.
+func (s *SettingEntry) SetDataType(v string) *SettingEntry {
+	s.DataType = &v
+	return s
+}
+
+// SetLastRequestedDateTime sets the LastRequestedDateTime field's value.
+func (s *SettingEntry) SetLastRequestedDateTime(v time.Time) *SettingEntry {
+	s.LastRequestedDateTime = &v
+	return s
+}
+
+// SetLastUpdatedDateTime sets the LastUpdatedDateTime field's value.
+func (s *SettingEntry) SetLastUpdatedDateTime(v time.Time) *SettingEntry {
+	s.LastUpdatedDateTime = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *SettingEntry) SetName(v string) *SettingEntry {
+	s.Name = &v
+	return s
+}
+
+// SetRequestDetailedStatus sets the RequestDetailedStatus field's value.
+func (s *SettingEntry) SetRequestDetailedStatus(v map[string]*string) *SettingEntry {
+	s.RequestDetailedStatus = v
+	return s
+}
+
+// SetRequestStatus sets the RequestStatus field's value.
+func (s *SettingEntry) SetRequestStatus(v string) *SettingEntry {
+	s.RequestStatus = &v
+	return s
+}
+
+// SetRequestStatusMessage sets the RequestStatusMessage field's value.
+func (s *SettingEntry) SetRequestStatusMessage(v string) *SettingEntry {
+	s.RequestStatusMessage = &v
+	return s
+}
+
+// SetRequestedValue sets the RequestedValue field's value.
+func (s *SettingEntry) SetRequestedValue(v string) *SettingEntry {
+	s.RequestedValue = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *SettingEntry) SetType(v string) *SettingEntry {
+	s.Type = &v
+	return s
+}
+
 type ShareDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier of the AWS Managed Microsoft AD directory that you want to share
-	// with other AWS accounts.
+	// Identifier of the Managed Microsoft AD directory that you want to share with
+	// other Amazon Web Services accounts.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
 
 	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your AWS organization (ORGANIZATIONS) or with any
-	// AWS account by sending a directory sharing request (HANDSHAKE).
+	// should be shared within your Amazon Web Services organization (ORGANIZATIONS)
+	// or with any Amazon Web Services account by sending a directory sharing request
+	// (HANDSHAKE).
 	//
 	// ShareMethod is a required field
 	ShareMethod *string `type:"string" required:"true" enum:"ShareMethod"`
@@ -9616,6 +17362,10 @@ type ShareDirectoryInput struct {
 	// A directory share request that is sent by the directory owner to the directory
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
+	//
+	// ShareNotes is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ShareDirectoryInput's
+	// String and GoString methods.
 	ShareNotes *string `type:"string" sensitive:"true"`
 
 	// Identifier for the directory consumer account with whom the directory is
@@ -9625,12 +17375,20 @@ type ShareDirectoryInput struct {
 	ShareTarget *ShareTarget `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ShareDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ShareDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -9691,12 +17449,20 @@ type ShareDirectoryOutput struct {
 	SharedDirectoryId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ShareDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ShareDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -9705,6 +17471,75 @@ func (s ShareDirectoryOutput) GoString() string {
 func (s *ShareDirectoryOutput) SetSharedDirectoryId(v string) *ShareDirectoryOutput {
 	s.SharedDirectoryId = &v
 	return s
+}
+
+// The maximum number of Amazon Web Services accounts that you can share with
+// this directory has been reached.
+type ShareLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ShareLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ShareLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorShareLimitExceededException(v protocol.ResponseMetadata) error {
+	return &ShareLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ShareLimitExceededException) Code() string {
+	return "ShareLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *ShareLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ShareLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *ShareLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ShareLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ShareLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Identifier that contains details about the directory consumer account.
@@ -9722,12 +17557,20 @@ type ShareTarget struct {
 	Type *string `type:"string" required:"true" enum:"TargetType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ShareTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ShareTarget) GoString() string {
 	return s.String()
 }
@@ -9782,16 +17625,21 @@ type SharedDirectory struct {
 	OwnerDirectoryId *string `type:"string"`
 
 	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your AWS organization (ORGANIZATIONS) or with any
-	// AWS account by sending a shared directory request (HANDSHAKE).
+	// should be shared within your Amazon Web Services organization (ORGANIZATIONS)
+	// or with any Amazon Web Services account by sending a shared directory request
+	// (HANDSHAKE).
 	ShareMethod *string `type:"string" enum:"ShareMethod"`
 
 	// A directory share request that is sent by the directory owner to the directory
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
+	//
+	// ShareNotes is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by SharedDirectory's
+	// String and GoString methods.
 	ShareNotes *string `type:"string" sensitive:"true"`
 
-	// Current directory status of the shared AWS Managed Microsoft AD directory.
+	// Current directory status of the shared Managed Microsoft AD directory.
 	ShareStatus *string `type:"string" enum:"ShareStatus"`
 
 	// Identifier of the directory consumer account that has access to the shared
@@ -9803,12 +17651,20 @@ type SharedDirectory struct {
 	SharedDirectoryId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SharedDirectory) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SharedDirectory) GoString() string {
 	return s.String()
 }
@@ -9890,12 +17746,20 @@ type Snapshot struct {
 	Type *string `type:"string" enum:"SnapshotType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Snapshot) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Snapshot) GoString() string {
 	return s.String()
 }
@@ -9936,6 +17800,76 @@ func (s *Snapshot) SetType(v string) *Snapshot {
 	return s
 }
 
+// The maximum number of manual snapshots for the directory has been reached.
+// You can use the GetSnapshotLimits operation to determine the snapshot limits
+// for a directory.
+type SnapshotLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SnapshotLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SnapshotLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorSnapshotLimitExceededException(v protocol.ResponseMetadata) error {
+	return &SnapshotLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *SnapshotLimitExceededException) Code() string {
+	return "SnapshotLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *SnapshotLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *SnapshotLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *SnapshotLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *SnapshotLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *SnapshotLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Contains manual snapshot limit information for a directory.
 type SnapshotLimits struct {
 	_ struct{} `type:"structure"`
@@ -9950,12 +17884,20 @@ type SnapshotLimits struct {
 	ManualSnapshotsLimitReached *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SnapshotLimits) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SnapshotLimits) GoString() string {
 	return s.String()
 }
@@ -10006,12 +17948,20 @@ type StartSchemaExtensionInput struct {
 	LdifContent *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartSchemaExtensionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartSchemaExtensionInput) GoString() string {
 	return s.String()
 }
@@ -10072,12 +18022,20 @@ type StartSchemaExtensionOutput struct {
 	SchemaExtensionId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartSchemaExtensionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartSchemaExtensionOutput) GoString() string {
 	return s.String()
 }
@@ -10107,12 +18065,20 @@ type Tag struct {
 	Value *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -10148,7 +18114,75 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
-// Describes a trust relationship between an AWS Managed Microsoft AD directory
+// The maximum allowed number of tags was exceeded.
+type TagLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorTagLimitExceededException(v protocol.ResponseMetadata) error {
+	return &TagLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TagLimitExceededException) Code() string {
+	return "TagLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *TagLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TagLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *TagLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TagLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TagLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Describes a trust relationship between an Managed Microsoft AD directory
 // and an external domain.
 type Trust struct {
 	_ struct{} `type:"structure"`
@@ -10156,7 +18190,8 @@ type Trust struct {
 	// The date and time that the trust relationship was created.
 	CreatedDateTime *time.Time `type:"timestamp"`
 
-	// The Directory ID of the AWS directory involved in the trust relationship.
+	// The Directory ID of the Amazon Web Services directory involved in the trust
+	// relationship.
 	DirectoryId *string `type:"string"`
 
 	// The date and time that the trust relationship was last updated.
@@ -10188,12 +18223,20 @@ type Trust struct {
 	TrustType *string `type:"string" enum:"TrustType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Trust) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Trust) GoString() string {
 	return s.String()
 }
@@ -10267,8 +18310,8 @@ func (s *Trust) SetTrustType(v string) *Trust {
 type UnshareDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the AWS Managed Microsoft AD directory that you want to
-	// stop sharing.
+	// The identifier of the Managed Microsoft AD directory that you want to stop
+	// sharing.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
@@ -10280,12 +18323,20 @@ type UnshareDirectoryInput struct {
 	UnshareTarget *UnshareTarget `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnshareDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnshareDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -10331,12 +18382,20 @@ type UnshareDirectoryOutput struct {
 	SharedDirectoryId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnshareDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnshareDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -10363,12 +18422,20 @@ type UnshareTarget struct {
 	Type *string `type:"string" required:"true" enum:"TargetType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnshareTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnshareTarget) GoString() string {
 	return s.String()
 }
@@ -10404,12 +18471,148 @@ func (s *UnshareTarget) SetType(v string) *UnshareTarget {
 	return s
 }
 
+// The operation is not supported.
+type UnsupportedOperationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedOperationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedOperationException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedOperationException(v protocol.ResponseMetadata) error {
+	return &UnsupportedOperationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedOperationException) Code() string {
+	return "UnsupportedOperationException"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedOperationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedOperationException) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedOperationException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedOperationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedOperationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified directory setting is not supported.
+type UnsupportedSettingsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedSettingsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedSettingsException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedSettingsException(v protocol.ResponseMetadata) error {
+	return &UnsupportedSettingsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedSettingsException) Code() string {
+	return "UnsupportedSettingsException"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedSettingsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedSettingsException) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedSettingsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedSettingsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedSettingsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Updates a conditional forwarder.
 type UpdateConditionalForwarderInput struct {
 	_ struct{} `type:"structure"`
 
-	// The directory ID of the AWS directory for which to update the conditional
-	// forwarder.
+	// The directory ID of the Amazon Web Services directory for which to update
+	// the conditional forwarder.
 	//
 	// DirectoryId is a required field
 	DirectoryId *string `type:"string" required:"true"`
@@ -10427,12 +18630,20 @@ type UpdateConditionalForwarderInput struct {
 	RemoteDomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConditionalForwarderInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConditionalForwarderInput) GoString() string {
 	return s.String()
 }
@@ -10479,14 +18690,220 @@ type UpdateConditionalForwarderOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConditionalForwarderOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateConditionalForwarderOutput) GoString() string {
 	return s.String()
+}
+
+type UpdateDirectorySetupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The boolean that specifies if a snapshot for the directory needs to be taken
+	// before updating the directory.
+	CreateSnapshotBeforeUpdate *bool `type:"boolean"`
+
+	// The identifier of the directory on which you want to perform the update.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The settings for the OS update that needs to be performed on the directory.
+	OSUpdateSettings *OSUpdateSettings `type:"structure"`
+
+	// The type of update that needs to be performed on the directory. For example,
+	// OS.
+	//
+	// UpdateType is a required field
+	UpdateType *string `type:"string" required:"true" enum:"UpdateType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateDirectorySetupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateDirectorySetupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateDirectorySetupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateDirectorySetupInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.UpdateType == nil {
+		invalidParams.Add(request.NewErrParamRequired("UpdateType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCreateSnapshotBeforeUpdate sets the CreateSnapshotBeforeUpdate field's value.
+func (s *UpdateDirectorySetupInput) SetCreateSnapshotBeforeUpdate(v bool) *UpdateDirectorySetupInput {
+	s.CreateSnapshotBeforeUpdate = &v
+	return s
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *UpdateDirectorySetupInput) SetDirectoryId(v string) *UpdateDirectorySetupInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetOSUpdateSettings sets the OSUpdateSettings field's value.
+func (s *UpdateDirectorySetupInput) SetOSUpdateSettings(v *OSUpdateSettings) *UpdateDirectorySetupInput {
+	s.OSUpdateSettings = v
+	return s
+}
+
+// SetUpdateType sets the UpdateType field's value.
+func (s *UpdateDirectorySetupInput) SetUpdateType(v string) *UpdateDirectorySetupInput {
+	s.UpdateType = &v
+	return s
+}
+
+type UpdateDirectorySetupOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateDirectorySetupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateDirectorySetupOutput) GoString() string {
+	return s.String()
+}
+
+// An entry of update information related to a requested update type.
+type UpdateInfoEntry struct {
+	_ struct{} `type:"structure"`
+
+	// This specifies if the update was initiated by the customer or by the service
+	// team.
+	InitiatedBy *string `type:"string"`
+
+	// The last updated date and time of a particular directory setting.
+	LastUpdatedDateTime *time.Time `type:"timestamp"`
+
+	// The new value of the target setting.
+	NewValue *UpdateValue `type:"structure"`
+
+	// The old value of the target setting.
+	PreviousValue *UpdateValue `type:"structure"`
+
+	// The name of the Region.
+	Region *string `min:"8" type:"string"`
+
+	// The start time of the UpdateDirectorySetup for the particular type.
+	StartTime *time.Time `type:"timestamp"`
+
+	// The status of the update performed on the directory.
+	Status *string `type:"string" enum:"UpdateStatus"`
+
+	// The reason for the current status of the update type activity.
+	StatusReason *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateInfoEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateInfoEntry) GoString() string {
+	return s.String()
+}
+
+// SetInitiatedBy sets the InitiatedBy field's value.
+func (s *UpdateInfoEntry) SetInitiatedBy(v string) *UpdateInfoEntry {
+	s.InitiatedBy = &v
+	return s
+}
+
+// SetLastUpdatedDateTime sets the LastUpdatedDateTime field's value.
+func (s *UpdateInfoEntry) SetLastUpdatedDateTime(v time.Time) *UpdateInfoEntry {
+	s.LastUpdatedDateTime = &v
+	return s
+}
+
+// SetNewValue sets the NewValue field's value.
+func (s *UpdateInfoEntry) SetNewValue(v *UpdateValue) *UpdateInfoEntry {
+	s.NewValue = v
+	return s
+}
+
+// SetPreviousValue sets the PreviousValue field's value.
+func (s *UpdateInfoEntry) SetPreviousValue(v *UpdateValue) *UpdateInfoEntry {
+	s.PreviousValue = v
+	return s
+}
+
+// SetRegion sets the Region field's value.
+func (s *UpdateInfoEntry) SetRegion(v string) *UpdateInfoEntry {
+	s.Region = &v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *UpdateInfoEntry) SetStartTime(v time.Time) *UpdateInfoEntry {
+	s.StartTime = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *UpdateInfoEntry) SetStatus(v string) *UpdateInfoEntry {
+	s.Status = &v
+	return s
+}
+
+// SetStatusReason sets the StatusReason field's value.
+func (s *UpdateInfoEntry) SetStatusReason(v string) *UpdateInfoEntry {
+	s.StatusReason = &v
+	return s
 }
 
 type UpdateNumberOfDomainControllersInput struct {
@@ -10504,12 +18921,20 @@ type UpdateNumberOfDomainControllersInput struct {
 	DirectoryId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNumberOfDomainControllersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNumberOfDomainControllersInput) GoString() string {
 	return s.String()
 }
@@ -10549,12 +18974,20 @@ type UpdateNumberOfDomainControllersOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNumberOfDomainControllersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNumberOfDomainControllersOutput) GoString() string {
 	return s.String()
 }
@@ -10574,12 +19007,20 @@ type UpdateRadiusInput struct {
 	RadiusSettings *RadiusSettings `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRadiusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRadiusInput) GoString() string {
 	return s.String()
 }
@@ -10622,14 +19063,123 @@ type UpdateRadiusOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRadiusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRadiusOutput) GoString() string {
 	return s.String()
+}
+
+type UpdateSettingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory for which to update settings.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The list of Setting objects.
+	//
+	// Settings is a required field
+	Settings []*Setting `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateSettingsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateSettingsInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.Settings == nil {
+		invalidParams.Add(request.NewErrParamRequired("Settings"))
+	}
+	if s.Settings != nil {
+		for i, v := range s.Settings {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Settings", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *UpdateSettingsInput) SetDirectoryId(v string) *UpdateSettingsInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetSettings sets the Settings field's value.
+func (s *UpdateSettingsInput) SetSettings(v []*Setting) *UpdateSettingsInput {
+	s.Settings = v
+	return s
+}
+
+type UpdateSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	DirectoryId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *UpdateSettingsOutput) SetDirectoryId(v string) *UpdateSettingsOutput {
+	s.DirectoryId = &v
+	return s
 }
 
 type UpdateTrustInput struct {
@@ -10644,12 +19194,20 @@ type UpdateTrustInput struct {
 	TrustId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTrustInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTrustInput) GoString() string {
 	return s.String()
 }
@@ -10682,19 +19240,27 @@ func (s *UpdateTrustInput) SetTrustId(v string) *UpdateTrustInput {
 type UpdateTrustOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS request identifier.
+	// The Amazon Web Services request identifier.
 	RequestId *string `type:"string"`
 
 	// Identifier of the trust relationship.
 	TrustId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTrustOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTrustOutput) GoString() string {
 	return s.String()
 }
@@ -10711,8 +19277,108 @@ func (s *UpdateTrustOutput) SetTrustId(v string) *UpdateTrustOutput {
 	return s
 }
 
-// Initiates the verification of an existing trust relationship between an AWS
-// Managed Microsoft AD directory and an external domain.
+// The value for a given type of UpdateSettings.
+type UpdateValue struct {
+	_ struct{} `type:"structure"`
+
+	// The OS update related settings.
+	OSUpdateSettings *OSUpdateSettings `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateValue) GoString() string {
+	return s.String()
+}
+
+// SetOSUpdateSettings sets the OSUpdateSettings field's value.
+func (s *UpdateValue) SetOSUpdateSettings(v *OSUpdateSettings) *UpdateValue {
+	s.OSUpdateSettings = v
+	return s
+}
+
+// The user provided a username that does not exist in your directory.
+type UserDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The descriptive message for the exception.
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// The Amazon Web Services request identifier.
+	RequestId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UserDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UserDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorUserDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &UserDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UserDoesNotExistException) Code() string {
+	return "UserDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *UserDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UserDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *UserDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UserDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UserDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Initiates the verification of an existing trust relationship between an Managed
+// Microsoft AD directory and an external domain.
 type VerifyTrustInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10722,12 +19388,20 @@ type VerifyTrustInput struct {
 	TrustId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VerifyTrustInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VerifyTrustInput) GoString() string {
 	return s.String()
 }
@@ -10759,12 +19433,20 @@ type VerifyTrustOutput struct {
 	TrustId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VerifyTrustOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VerifyTrustOutput) GoString() string {
 	return s.String()
 }
@@ -10776,12 +19458,128 @@ func (s *VerifyTrustOutput) SetTrustId(v string) *VerifyTrustOutput {
 }
 
 const (
+	// CertificateStateRegistering is a CertificateState enum value
+	CertificateStateRegistering = "Registering"
+
+	// CertificateStateRegistered is a CertificateState enum value
+	CertificateStateRegistered = "Registered"
+
+	// CertificateStateRegisterFailed is a CertificateState enum value
+	CertificateStateRegisterFailed = "RegisterFailed"
+
+	// CertificateStateDeregistering is a CertificateState enum value
+	CertificateStateDeregistering = "Deregistering"
+
+	// CertificateStateDeregistered is a CertificateState enum value
+	CertificateStateDeregistered = "Deregistered"
+
+	// CertificateStateDeregisterFailed is a CertificateState enum value
+	CertificateStateDeregisterFailed = "DeregisterFailed"
+)
+
+// CertificateState_Values returns all elements of the CertificateState enum
+func CertificateState_Values() []string {
+	return []string{
+		CertificateStateRegistering,
+		CertificateStateRegistered,
+		CertificateStateRegisterFailed,
+		CertificateStateDeregistering,
+		CertificateStateDeregistered,
+		CertificateStateDeregisterFailed,
+	}
+}
+
+const (
+	// CertificateTypeClientCertAuth is a CertificateType enum value
+	CertificateTypeClientCertAuth = "ClientCertAuth"
+
+	// CertificateTypeClientLdaps is a CertificateType enum value
+	CertificateTypeClientLdaps = "ClientLDAPS"
+)
+
+// CertificateType_Values returns all elements of the CertificateType enum
+func CertificateType_Values() []string {
+	return []string{
+		CertificateTypeClientCertAuth,
+		CertificateTypeClientLdaps,
+	}
+}
+
+const (
+	// ClientAuthenticationStatusEnabled is a ClientAuthenticationStatus enum value
+	ClientAuthenticationStatusEnabled = "Enabled"
+
+	// ClientAuthenticationStatusDisabled is a ClientAuthenticationStatus enum value
+	ClientAuthenticationStatusDisabled = "Disabled"
+)
+
+// ClientAuthenticationStatus_Values returns all elements of the ClientAuthenticationStatus enum
+func ClientAuthenticationStatus_Values() []string {
+	return []string{
+		ClientAuthenticationStatusEnabled,
+		ClientAuthenticationStatusDisabled,
+	}
+}
+
+const (
+	// ClientAuthenticationTypeSmartCard is a ClientAuthenticationType enum value
+	ClientAuthenticationTypeSmartCard = "SmartCard"
+
+	// ClientAuthenticationTypeSmartCardOrPassword is a ClientAuthenticationType enum value
+	ClientAuthenticationTypeSmartCardOrPassword = "SmartCardOrPassword"
+)
+
+// ClientAuthenticationType_Values returns all elements of the ClientAuthenticationType enum
+func ClientAuthenticationType_Values() []string {
+	return []string{
+		ClientAuthenticationTypeSmartCard,
+		ClientAuthenticationTypeSmartCardOrPassword,
+	}
+}
+
+const (
+	// DirectoryConfigurationStatusRequested is a DirectoryConfigurationStatus enum value
+	DirectoryConfigurationStatusRequested = "Requested"
+
+	// DirectoryConfigurationStatusUpdating is a DirectoryConfigurationStatus enum value
+	DirectoryConfigurationStatusUpdating = "Updating"
+
+	// DirectoryConfigurationStatusUpdated is a DirectoryConfigurationStatus enum value
+	DirectoryConfigurationStatusUpdated = "Updated"
+
+	// DirectoryConfigurationStatusFailed is a DirectoryConfigurationStatus enum value
+	DirectoryConfigurationStatusFailed = "Failed"
+
+	// DirectoryConfigurationStatusDefault is a DirectoryConfigurationStatus enum value
+	DirectoryConfigurationStatusDefault = "Default"
+)
+
+// DirectoryConfigurationStatus_Values returns all elements of the DirectoryConfigurationStatus enum
+func DirectoryConfigurationStatus_Values() []string {
+	return []string{
+		DirectoryConfigurationStatusRequested,
+		DirectoryConfigurationStatusUpdating,
+		DirectoryConfigurationStatusUpdated,
+		DirectoryConfigurationStatusFailed,
+		DirectoryConfigurationStatusDefault,
+	}
+}
+
+const (
 	// DirectoryEditionEnterprise is a DirectoryEdition enum value
 	DirectoryEditionEnterprise = "Enterprise"
 
 	// DirectoryEditionStandard is a DirectoryEdition enum value
 	DirectoryEditionStandard = "Standard"
 )
+
+// DirectoryEdition_Values returns all elements of the DirectoryEdition enum
+func DirectoryEdition_Values() []string {
+	return []string{
+		DirectoryEditionEnterprise,
+		DirectoryEditionStandard,
+	}
+}
 
 const (
 	// DirectorySizeSmall is a DirectorySize enum value
@@ -10790,6 +19588,14 @@ const (
 	// DirectorySizeLarge is a DirectorySize enum value
 	DirectorySizeLarge = "Large"
 )
+
+// DirectorySize_Values returns all elements of the DirectorySize enum
+func DirectorySize_Values() []string {
+	return []string{
+		DirectorySizeSmall,
+		DirectorySizeLarge,
+	}
+}
 
 const (
 	// DirectoryStageRequested is a DirectoryStage enum value
@@ -10826,6 +19632,23 @@ const (
 	DirectoryStageFailed = "Failed"
 )
 
+// DirectoryStage_Values returns all elements of the DirectoryStage enum
+func DirectoryStage_Values() []string {
+	return []string{
+		DirectoryStageRequested,
+		DirectoryStageCreating,
+		DirectoryStageCreated,
+		DirectoryStageActive,
+		DirectoryStageInoperable,
+		DirectoryStageImpaired,
+		DirectoryStageRestoring,
+		DirectoryStageRestoreFailed,
+		DirectoryStageDeleting,
+		DirectoryStageDeleted,
+		DirectoryStageFailed,
+	}
+}
+
 const (
 	// DirectoryTypeSimpleAd is a DirectoryType enum value
 	DirectoryTypeSimpleAd = "SimpleAD"
@@ -10839,6 +19662,16 @@ const (
 	// DirectoryTypeSharedMicrosoftAd is a DirectoryType enum value
 	DirectoryTypeSharedMicrosoftAd = "SharedMicrosoftAD"
 )
+
+// DirectoryType_Values returns all elements of the DirectoryType enum
+func DirectoryType_Values() []string {
+	return []string{
+		DirectoryTypeSimpleAd,
+		DirectoryTypeAdconnector,
+		DirectoryTypeMicrosoftAd,
+		DirectoryTypeSharedMicrosoftAd,
+	}
+}
 
 const (
 	// DomainControllerStatusCreating is a DomainControllerStatus enum value
@@ -10863,6 +19696,19 @@ const (
 	DomainControllerStatusFailed = "Failed"
 )
 
+// DomainControllerStatus_Values returns all elements of the DomainControllerStatus enum
+func DomainControllerStatus_Values() []string {
+	return []string{
+		DomainControllerStatusCreating,
+		DomainControllerStatusActive,
+		DomainControllerStatusImpaired,
+		DomainControllerStatusRestoring,
+		DomainControllerStatusDeleting,
+		DomainControllerStatusDeleted,
+		DomainControllerStatusFailed,
+	}
+}
+
 const (
 	// IpRouteStatusMsgAdding is a IpRouteStatusMsg enum value
 	IpRouteStatusMsgAdding = "Adding"
@@ -10883,6 +19729,70 @@ const (
 	IpRouteStatusMsgRemoveFailed = "RemoveFailed"
 )
 
+// IpRouteStatusMsg_Values returns all elements of the IpRouteStatusMsg enum
+func IpRouteStatusMsg_Values() []string {
+	return []string{
+		IpRouteStatusMsgAdding,
+		IpRouteStatusMsgAdded,
+		IpRouteStatusMsgRemoving,
+		IpRouteStatusMsgRemoved,
+		IpRouteStatusMsgAddFailed,
+		IpRouteStatusMsgRemoveFailed,
+	}
+}
+
+const (
+	// LDAPSStatusEnabling is a LDAPSStatus enum value
+	LDAPSStatusEnabling = "Enabling"
+
+	// LDAPSStatusEnabled is a LDAPSStatus enum value
+	LDAPSStatusEnabled = "Enabled"
+
+	// LDAPSStatusEnableFailed is a LDAPSStatus enum value
+	LDAPSStatusEnableFailed = "EnableFailed"
+
+	// LDAPSStatusDisabled is a LDAPSStatus enum value
+	LDAPSStatusDisabled = "Disabled"
+)
+
+// LDAPSStatus_Values returns all elements of the LDAPSStatus enum
+func LDAPSStatus_Values() []string {
+	return []string{
+		LDAPSStatusEnabling,
+		LDAPSStatusEnabled,
+		LDAPSStatusEnableFailed,
+		LDAPSStatusDisabled,
+	}
+}
+
+const (
+	// LDAPSTypeClient is a LDAPSType enum value
+	LDAPSTypeClient = "Client"
+)
+
+// LDAPSType_Values returns all elements of the LDAPSType enum
+func LDAPSType_Values() []string {
+	return []string{
+		LDAPSTypeClient,
+	}
+}
+
+const (
+	// OSVersionServer2012 is a OSVersion enum value
+	OSVersionServer2012 = "SERVER_2012"
+
+	// OSVersionServer2019 is a OSVersion enum value
+	OSVersionServer2019 = "SERVER_2019"
+)
+
+// OSVersion_Values returns all elements of the OSVersion enum
+func OSVersion_Values() []string {
+	return []string{
+		OSVersionServer2012,
+		OSVersionServer2019,
+	}
+}
+
 const (
 	// RadiusAuthenticationProtocolPap is a RadiusAuthenticationProtocol enum value
 	RadiusAuthenticationProtocolPap = "PAP"
@@ -10897,6 +19807,16 @@ const (
 	RadiusAuthenticationProtocolMsChapv2 = "MS-CHAPv2"
 )
 
+// RadiusAuthenticationProtocol_Values returns all elements of the RadiusAuthenticationProtocol enum
+func RadiusAuthenticationProtocol_Values() []string {
+	return []string{
+		RadiusAuthenticationProtocolPap,
+		RadiusAuthenticationProtocolChap,
+		RadiusAuthenticationProtocolMsChapv1,
+		RadiusAuthenticationProtocolMsChapv2,
+	}
+}
+
 const (
 	// RadiusStatusCreating is a RadiusStatus enum value
 	RadiusStatusCreating = "Creating"
@@ -10908,10 +19828,42 @@ const (
 	RadiusStatusFailed = "Failed"
 )
 
+// RadiusStatus_Values returns all elements of the RadiusStatus enum
+func RadiusStatus_Values() []string {
+	return []string{
+		RadiusStatusCreating,
+		RadiusStatusCompleted,
+		RadiusStatusFailed,
+	}
+}
+
+const (
+	// RegionTypePrimary is a RegionType enum value
+	RegionTypePrimary = "Primary"
+
+	// RegionTypeAdditional is a RegionType enum value
+	RegionTypeAdditional = "Additional"
+)
+
+// RegionType_Values returns all elements of the RegionType enum
+func RegionType_Values() []string {
+	return []string{
+		RegionTypePrimary,
+		RegionTypeAdditional,
+	}
+}
+
 const (
 	// ReplicationScopeDomain is a ReplicationScope enum value
 	ReplicationScopeDomain = "Domain"
 )
+
+// ReplicationScope_Values returns all elements of the ReplicationScope enum
+func ReplicationScope_Values() []string {
+	return []string{
+		ReplicationScopeDomain,
+	}
+}
 
 const (
 	// SchemaExtensionStatusInitializing is a SchemaExtensionStatus enum value
@@ -10942,6 +19894,21 @@ const (
 	SchemaExtensionStatusCompleted = "Completed"
 )
 
+// SchemaExtensionStatus_Values returns all elements of the SchemaExtensionStatus enum
+func SchemaExtensionStatus_Values() []string {
+	return []string{
+		SchemaExtensionStatusInitializing,
+		SchemaExtensionStatusCreatingSnapshot,
+		SchemaExtensionStatusUpdatingSchema,
+		SchemaExtensionStatusReplicating,
+		SchemaExtensionStatusCancelInProgress,
+		SchemaExtensionStatusRollbackInProgress,
+		SchemaExtensionStatusCancelled,
+		SchemaExtensionStatusFailed,
+		SchemaExtensionStatusCompleted,
+	}
+}
+
 const (
 	// SelectiveAuthEnabled is a SelectiveAuth enum value
 	SelectiveAuthEnabled = "Enabled"
@@ -10950,6 +19917,14 @@ const (
 	SelectiveAuthDisabled = "Disabled"
 )
 
+// SelectiveAuth_Values returns all elements of the SelectiveAuth enum
+func SelectiveAuth_Values() []string {
+	return []string{
+		SelectiveAuthEnabled,
+		SelectiveAuthDisabled,
+	}
+}
+
 const (
 	// ShareMethodOrganizations is a ShareMethod enum value
 	ShareMethodOrganizations = "ORGANIZATIONS"
@@ -10957,6 +19932,14 @@ const (
 	// ShareMethodHandshake is a ShareMethod enum value
 	ShareMethodHandshake = "HANDSHAKE"
 )
+
+// ShareMethod_Values returns all elements of the ShareMethod enum
+func ShareMethod_Values() []string {
+	return []string{
+		ShareMethodOrganizations,
+		ShareMethodHandshake,
+	}
+}
 
 const (
 	// ShareStatusShared is a ShareStatus enum value
@@ -10987,6 +19970,21 @@ const (
 	ShareStatusDeleting = "Deleting"
 )
 
+// ShareStatus_Values returns all elements of the ShareStatus enum
+func ShareStatus_Values() []string {
+	return []string{
+		ShareStatusShared,
+		ShareStatusPendingAcceptance,
+		ShareStatusRejected,
+		ShareStatusRejecting,
+		ShareStatusRejectFailed,
+		ShareStatusSharing,
+		ShareStatusShareFailed,
+		ShareStatusDeleted,
+		ShareStatusDeleting,
+	}
+}
+
 const (
 	// SnapshotStatusCreating is a SnapshotStatus enum value
 	SnapshotStatusCreating = "Creating"
@@ -10998,6 +19996,15 @@ const (
 	SnapshotStatusFailed = "Failed"
 )
 
+// SnapshotStatus_Values returns all elements of the SnapshotStatus enum
+func SnapshotStatus_Values() []string {
+	return []string{
+		SnapshotStatusCreating,
+		SnapshotStatusCompleted,
+		SnapshotStatusFailed,
+	}
+}
+
 const (
 	// SnapshotTypeAuto is a SnapshotType enum value
 	SnapshotTypeAuto = "Auto"
@@ -11006,10 +20013,25 @@ const (
 	SnapshotTypeManual = "Manual"
 )
 
+// SnapshotType_Values returns all elements of the SnapshotType enum
+func SnapshotType_Values() []string {
+	return []string{
+		SnapshotTypeAuto,
+		SnapshotTypeManual,
+	}
+}
+
 const (
 	// TargetTypeAccount is a TargetType enum value
 	TargetTypeAccount = "ACCOUNT"
 )
+
+// TargetType_Values returns all elements of the TargetType enum
+func TargetType_Values() []string {
+	return []string{
+		TargetTypeAccount,
+	}
+}
 
 const (
 	// TopicStatusRegistered is a TopicStatus enum value
@@ -11025,6 +20047,16 @@ const (
 	TopicStatusDeleted = "Deleted"
 )
 
+// TopicStatus_Values returns all elements of the TopicStatus enum
+func TopicStatus_Values() []string {
+	return []string{
+		TopicStatusRegistered,
+		TopicStatusTopicnotfound,
+		TopicStatusFailed,
+		TopicStatusDeleted,
+	}
+}
+
 const (
 	// TrustDirectionOneWayOutgoing is a TrustDirection enum value
 	TrustDirectionOneWayOutgoing = "One-Way: Outgoing"
@@ -11035,6 +20067,15 @@ const (
 	// TrustDirectionTwoWay is a TrustDirection enum value
 	TrustDirectionTwoWay = "Two-Way"
 )
+
+// TrustDirection_Values returns all elements of the TrustDirection enum
+func TrustDirection_Values() []string {
+	return []string{
+		TrustDirectionOneWayOutgoing,
+		TrustDirectionOneWayIncoming,
+		TrustDirectionTwoWay,
+	}
+}
 
 const (
 	// TrustStateCreating is a TrustState enum value
@@ -11071,6 +20112,23 @@ const (
 	TrustStateFailed = "Failed"
 )
 
+// TrustState_Values returns all elements of the TrustState enum
+func TrustState_Values() []string {
+	return []string{
+		TrustStateCreating,
+		TrustStateCreated,
+		TrustStateVerifying,
+		TrustStateVerifyFailed,
+		TrustStateVerified,
+		TrustStateUpdating,
+		TrustStateUpdateFailed,
+		TrustStateUpdated,
+		TrustStateDeleting,
+		TrustStateDeleted,
+		TrustStateFailed,
+	}
+}
+
 const (
 	// TrustTypeForest is a TrustType enum value
 	TrustTypeForest = "Forest"
@@ -11078,3 +20136,43 @@ const (
 	// TrustTypeExternal is a TrustType enum value
 	TrustTypeExternal = "External"
 )
+
+// TrustType_Values returns all elements of the TrustType enum
+func TrustType_Values() []string {
+	return []string{
+		TrustTypeForest,
+		TrustTypeExternal,
+	}
+}
+
+const (
+	// UpdateStatusUpdated is a UpdateStatus enum value
+	UpdateStatusUpdated = "Updated"
+
+	// UpdateStatusUpdating is a UpdateStatus enum value
+	UpdateStatusUpdating = "Updating"
+
+	// UpdateStatusUpdateFailed is a UpdateStatus enum value
+	UpdateStatusUpdateFailed = "UpdateFailed"
+)
+
+// UpdateStatus_Values returns all elements of the UpdateStatus enum
+func UpdateStatus_Values() []string {
+	return []string{
+		UpdateStatusUpdated,
+		UpdateStatusUpdating,
+		UpdateStatusUpdateFailed,
+	}
+}
+
+const (
+	// UpdateTypeOs is a UpdateType enum value
+	UpdateTypeOs = "OS"
+)
+
+// UpdateType_Values returns all elements of the UpdateType enum
+func UpdateType_Values() []string {
+	return []string{
+		UpdateTypeOs,
+	}
+}

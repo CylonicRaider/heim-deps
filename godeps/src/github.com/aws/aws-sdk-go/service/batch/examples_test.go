@@ -26,7 +26,6 @@ func parseTime(layout, value string) *time.Time {
 }
 
 // To cancel a job
-//
 // This example cancels a job with the specified job ID.
 func ExampleBatch_CancelJob_shared00() {
 	svc := batch.New(session.New())
@@ -58,7 +57,6 @@ func ExampleBatch_CancelJob_shared00() {
 }
 
 // To create a managed EC2 compute environment
-//
 // This example creates a managed compute environment with specific C4 instance types
 // that are launched on demand. The compute environment is called C4OnDemand.
 func ExampleBatch_CreateComputeEnvironment_shared00() {
@@ -119,7 +117,6 @@ func ExampleBatch_CreateComputeEnvironment_shared00() {
 }
 
 // To create a managed EC2 Spot compute environment
-//
 // This example creates a managed compute environment with the M4 instance type that
 // is launched when the Spot bid price is at or below 20% of the On-Demand price for
 // the instance type. The compute environment is called M4Spot.
@@ -179,7 +176,6 @@ func ExampleBatch_CreateComputeEnvironment_shared01() {
 }
 
 // To create a job queue with a single compute environment
-//
 // This example creates a job queue called LowPriority that uses the M4Spot compute
 // environment.
 func ExampleBatch_CreateJobQueue_shared00() {
@@ -219,7 +215,6 @@ func ExampleBatch_CreateJobQueue_shared00() {
 }
 
 // To create a job queue with multiple compute environments
-//
 // This example creates a job queue called HighPriority that uses the C4OnDemand compute
 // environment with an order of 1 and the M4Spot compute environment with an order of
 // 2.
@@ -264,7 +259,6 @@ func ExampleBatch_CreateJobQueue_shared01() {
 }
 
 // To delete a compute environment
-//
 // This example deletes the P2OnDemand compute environment.
 func ExampleBatch_DeleteComputeEnvironment_shared00() {
 	svc := batch.New(session.New())
@@ -295,7 +289,6 @@ func ExampleBatch_DeleteComputeEnvironment_shared00() {
 }
 
 // To delete a job queue
-//
 // This example deletes the GPGPU job queue.
 func ExampleBatch_DeleteJobQueue_shared00() {
 	svc := batch.New(session.New())
@@ -326,7 +319,6 @@ func ExampleBatch_DeleteJobQueue_shared00() {
 }
 
 // To deregister a job definition
-//
 // This example deregisters a job definition called sleep10.
 func ExampleBatch_DeregisterJobDefinition_shared00() {
 	svc := batch.New(session.New())
@@ -357,7 +349,6 @@ func ExampleBatch_DeregisterJobDefinition_shared00() {
 }
 
 // To describe a compute environment
-//
 // This example describes the P2OnDemand compute environment.
 func ExampleBatch_DescribeComputeEnvironments_shared00() {
 	svc := batch.New(session.New())
@@ -390,7 +381,6 @@ func ExampleBatch_DescribeComputeEnvironments_shared00() {
 }
 
 // To describe active job definitions
-//
 // This example describes all of your active job definitions.
 func ExampleBatch_DescribeJobDefinitions_shared00() {
 	svc := batch.New(session.New())
@@ -421,7 +411,6 @@ func ExampleBatch_DescribeJobDefinitions_shared00() {
 }
 
 // To describe a job queue
-//
 // This example describes the HighPriority job queue.
 func ExampleBatch_DescribeJobQueues_shared00() {
 	svc := batch.New(session.New())
@@ -454,7 +443,6 @@ func ExampleBatch_DescribeJobQueues_shared00() {
 }
 
 // To describe a specific job
-//
 // This example describes a job with the specified job ID.
 func ExampleBatch_DescribeJobs_shared00() {
 	svc := batch.New(session.New())
@@ -487,7 +475,6 @@ func ExampleBatch_DescribeJobs_shared00() {
 }
 
 // To list running jobs
-//
 // This example lists the running jobs in the HighPriority job queue.
 func ExampleBatch_ListJobs_shared00() {
 	svc := batch.New(session.New())
@@ -518,7 +505,6 @@ func ExampleBatch_ListJobs_shared00() {
 }
 
 // To list submitted jobs
-//
 // This example lists jobs in the HighPriority job queue that are in the SUBMITTED job
 // status.
 func ExampleBatch_ListJobs_shared01() {
@@ -550,8 +536,37 @@ func ExampleBatch_ListJobs_shared01() {
 	fmt.Println(result)
 }
 
+// ListTagsForResource Example
+// This demonstrates calling the ListTagsForResource action.
+func ExampleBatch_ListTagsForResource_shared00() {
+	svc := batch.New(session.New())
+	input := &batch.ListTagsForResourceInput{
+		ResourceArn: aws.String("arn:aws:batch:us-east-1:123456789012:job-definition/sleep30:1"),
+	}
+
+	result, err := svc.ListTagsForResource(input)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case batch.ErrCodeClientException:
+				fmt.Println(batch.ErrCodeClientException, aerr.Error())
+			case batch.ErrCodeServerException:
+				fmt.Println(batch.ErrCodeServerException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To register a job definition
-//
 // This example registers a job definition for a simple container job.
 func ExampleBatch_RegisterJobDefinition_shared00() {
 	svc := batch.New(session.New())
@@ -561,9 +576,17 @@ func ExampleBatch_RegisterJobDefinition_shared00() {
 				aws.String("sleep"),
 				aws.String("10"),
 			},
-			Image:  aws.String("busybox"),
-			Memory: aws.Int64(128),
-			Vcpus:  aws.Int64(1),
+			Image: aws.String("busybox"),
+			ResourceRequirements: []*batch.ResourceRequirement{
+				{
+					Type:  aws.String("MEMORY"),
+					Value: aws.String("128"),
+				},
+				{
+					Type:  aws.String("VCPU"),
+					Value: aws.String("1"),
+				},
+			},
 		},
 		JobDefinitionName: aws.String("sleep10"),
 		Type:              aws.String("container"),
@@ -591,8 +614,59 @@ func ExampleBatch_RegisterJobDefinition_shared00() {
 	fmt.Println(result)
 }
 
+// RegisterJobDefinition with tags
+// This demonstrates calling the RegisterJobDefinition action, including tags.
+func ExampleBatch_RegisterJobDefinition_shared01() {
+	svc := batch.New(session.New())
+	input := &batch.RegisterJobDefinitionInput{
+		ContainerProperties: &batch.ContainerProperties{
+			Command: []*string{
+				aws.String("sleep"),
+				aws.String("30"),
+			},
+			Image: aws.String("busybox"),
+			ResourceRequirements: []*batch.ResourceRequirement{
+				{
+					Type:  aws.String("MEMORY"),
+					Value: aws.String("128"),
+				},
+				{
+					Type:  aws.String("VCPU"),
+					Value: aws.String("1"),
+				},
+			},
+		},
+		JobDefinitionName: aws.String("sleep30"),
+		Tags: map[string]*string{
+			"Department": aws.String("Engineering"),
+			"User":       aws.String("JaneDoe"),
+		},
+		Type: aws.String("container"),
+	}
+
+	result, err := svc.RegisterJobDefinition(input)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case batch.ErrCodeClientException:
+				fmt.Println(batch.ErrCodeClientException, aerr.Error())
+			case batch.ErrCodeServerException:
+				fmt.Println(batch.ErrCodeServerException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To submit a job to a queue
-//
 // This example submits a simple container job called example to the HighPriority job
 // queue.
 func ExampleBatch_SubmitJob_shared00() {
@@ -625,8 +699,40 @@ func ExampleBatch_SubmitJob_shared00() {
 	fmt.Println(result)
 }
 
+// TagResource Example
+// This demonstrates calling the TagResource action.
+func ExampleBatch_TagResource_shared00() {
+	svc := batch.New(session.New())
+	input := &batch.TagResourceInput{
+		ResourceArn: aws.String("arn:aws:batch:us-east-1:123456789012:job-definition/sleep30:1"),
+		Tags: map[string]*string{
+			"Stage": aws.String("Alpha"),
+		},
+	}
+
+	result, err := svc.TagResource(input)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case batch.ErrCodeClientException:
+				fmt.Println(batch.ErrCodeClientException, aerr.Error())
+			case batch.ErrCodeServerException:
+				fmt.Println(batch.ErrCodeServerException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To terminate a job
-//
 // This example terminates a job with the specified job ID.
 func ExampleBatch_TerminateJob_shared00() {
 	svc := batch.New(session.New())
@@ -657,8 +763,40 @@ func ExampleBatch_TerminateJob_shared00() {
 	fmt.Println(result)
 }
 
+// UntagResource Example
+// This demonstrates calling the UntagResource action.
+func ExampleBatch_UntagResource_shared00() {
+	svc := batch.New(session.New())
+	input := &batch.UntagResourceInput{
+		ResourceArn: aws.String("arn:aws:batch:us-east-1:123456789012:job-definition/sleep30:1"),
+		TagKeys: []*string{
+			aws.String("Stage"),
+		},
+	}
+
+	result, err := svc.UntagResource(input)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case batch.ErrCodeClientException:
+				fmt.Println(batch.ErrCodeClientException, aerr.Error())
+			case batch.ErrCodeServerException:
+				fmt.Println(batch.ErrCodeServerException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To update a compute environment
-//
 // This example disables the P2OnDemand compute environment so it can be deleted.
 func ExampleBatch_UpdateComputeEnvironment_shared00() {
 	svc := batch.New(session.New())
@@ -690,7 +828,6 @@ func ExampleBatch_UpdateComputeEnvironment_shared00() {
 }
 
 // To update a job queue
-//
 // This example disables a job queue so that it can be deleted.
 func ExampleBatch_UpdateJobQueue_shared00() {
 	svc := batch.New(session.New())

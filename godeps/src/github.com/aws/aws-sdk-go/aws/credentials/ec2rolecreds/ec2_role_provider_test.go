@@ -21,13 +21,13 @@ const credsRespTmpl = `{
   "SecretAccessKey" : "secret",
   "Token" : "token",
   "Expiration" : "%s",
-  "LastUpdated" : "2009-11-23T0:00:00Z"
+  "LastUpdated" : "2009-11-23T00:00:00Z"
 }`
 
 const credsFailRespTmpl = `{
   "Code": "ErrorCode",
   "Message": "ErrorMsg",
-  "LastUpdated": "2009-11-23T0:00:00Z"
+  "LastUpdated": "2009-11-23T00:00:00Z"
 }`
 
 func initTestServer(expireOn string, failAssume bool) *httptest.Server {
@@ -41,7 +41,7 @@ func initTestServer(expireOn string, failAssume bool) *httptest.Server {
 				fmt.Fprintf(w, credsRespTmpl, expireOn)
 			}
 		} else {
-			http.Error(w, "bad request", http.StatusBadRequest)
+			http.Error(w, "Not found", http.StatusNotFound)
 		}
 	}))
 

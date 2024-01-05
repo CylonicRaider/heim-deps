@@ -150,7 +150,7 @@ func TestParsePackage_Golang17Subtests_ReturnsPackageResult(t *testing.T) {
 	assertEqual(t, expectedGolang17Subtests, *actual)
 }
 
-func assertEqual(t *testing.T, expected, actual interface{}) {
+func assertEqual(t *testing.T, expected, actual any) {
 	a, _ := json.Marshal(expected)
 	b, _ := json.Marshal(actual)
 	if string(a) != string(b) {
@@ -967,7 +967,7 @@ var expectedExampleFunctions = contract.PackageResult{
 
 const inputGolang15 = `
 === RUN   Golang15
---- PASS: Golang15 (0.00s)
+--- PASS: Golang15 (0.01s)
 PASS
 ok  	github.com/smartystreets/goconvey/webserver/examples	0.008s
 `
@@ -979,7 +979,7 @@ var expectedGolang15 = contract.PackageResult{
 	TestResults: []contract.TestResult{
 		contract.TestResult{
 			TestName: "Golang15",
-			Elapsed:  0.00,
+			Elapsed:  0.01,
 			Passed:   true,
 			File:     "",
 			Line:     0,
@@ -997,10 +997,10 @@ const inputGolang17Subtests = `
 === RUN   Test/nested/nested_success
 === RUN   Test/nested/nested_fail
 --- FAIL: Test (0.00s)
-    --- PASS: Test/success (0.00s)
+    --- PASS: Test/success (0.01s)
     --- FAIL: Test/fail (0.00s)
     --- FAIL: Test/nested (0.00s)
-        --- PASS: Test/nested/nested_success (0.00s)
+        --- PASS: Test/nested/nested_success (0.02s)
         --- FAIL: Test/nested/nested_fail (0.00s)
 FAIL
 exit status 1
@@ -1050,7 +1050,7 @@ var expectedGolang17Subtests = contract.PackageResult{
 		},
 		contract.TestResult{
 			TestName: "Test/nested/nested_success",
-			Elapsed:  0.00,
+			Elapsed:  0.02,
 			Passed:   true,
 			File:     "",
 			Line:     0,
@@ -1059,7 +1059,7 @@ var expectedGolang17Subtests = contract.PackageResult{
 		},
 		contract.TestResult{
 			TestName: "Test/success",
-			Elapsed:  0.00,
+			Elapsed:  0.01,
 			Passed:   true,
 			File:     "",
 			Line:     0,
@@ -1067,4 +1067,46 @@ var expectedGolang17Subtests = contract.PackageResult{
 			Stories:  []reporting.ScopeResult{},
 		},
 	},
+}
+
+const inputGinkgo_Passes = `
+SUCCESS! -- 12 Passed | 0 Failed | 0 Pending | 0 Skipped --- PASS: TestModels (0.01s)
+PASS
+ok  	github.com/smartystreets/goconvey/webserver/examples	3.433s
+`
+
+var expectedGinkgo_Passes = contract.PackageResult{
+	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	Elapsed:     3.433,
+	Outcome:     contract.Passed,
+}
+
+func TestParsePackage_GinkgoWithSuccessOutput(t *testing.T) {
+	actual := &contract.PackageResult{PackageName: expectedGinkgo_Passes.PackageName}
+	ParsePackageResults(actual, inputGinkgo_Passes)
+	assertEqual(t, expectedGinkgo_Passes, *actual)
+}
+
+const inputGinkgo_Fails = `
+Summarizing 1 Failure:
+
+[Fail] main.go GetHostname [It] returns an error if systemInfo.hostname == nil
+/Users/joeuser/go/src/github.com/smartystreets/goconvey/webserver/examples/main.go:141
+
+Ran 33 of 33 Specs in 0.005 seconds
+FAIL! -- 32 Passed | 1 Failed | 0 Pending | 0 Skipped --- FAIL: TestRoutes (0.01s)
+FAIL
+FAIL	github.com/smartystreets/goconvey/webserver/examples	0.810s
+`
+
+var expectedGinkgo_Fails = contract.PackageResult{
+	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	Elapsed:     0.810,
+	Outcome:     contract.Failed,
+}
+
+func TestParsePackage_GinkgoWithFailureOutput(t *testing.T) {
+	actual := &contract.PackageResult{PackageName: expectedGinkgo_Fails.PackageName}
+	ParsePackageResults(actual, inputGinkgo_Fails)
+	assertEqual(t, expectedGinkgo_Fails, *actual)
 }

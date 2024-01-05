@@ -2,7 +2,19 @@
 
 package route53domains
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
+
+	// ErrCodeDnssecLimitExceeded for service response error code
+	// "DnssecLimitExceeded".
+	//
+	// This error is returned if you call AssociateDelegationSignerToDomain when
+	// the specified domain has reached the maximum number of DS records. You can't
+	// add any additional DS records unless you delete an existing one first.
+	ErrCodeDnssecLimitExceeded = "DnssecLimitExceeded"
 
 	// ErrCodeDomainLimitExceeded for service response error code
 	// "DomainLimitExceeded".
@@ -19,9 +31,10 @@ const (
 	// ErrCodeInvalidInput for service response error code
 	// "InvalidInput".
 	//
-	// The requested item is not acceptable. For example, for an OperationId it
-	// might refer to the ID of an operation that is already completed. For a domain
-	// name, it might not be a valid domain name or belong to the requester account.
+	// The requested item is not acceptable. For example, for APIs that accept a
+	// domain name, the request might specify a domain name that doesn't belong
+	// to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+	// the password might be invalid.
 	ErrCodeInvalidInput = "InvalidInput"
 
 	// ErrCodeOperationLimitExceeded for service response error code
@@ -43,3 +56,13 @@ const (
 	// Amazon Route 53 does not support this top-level domain (TLD).
 	ErrCodeUnsupportedTLD = "UnsupportedTLD"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"DnssecLimitExceeded":    newErrorDnssecLimitExceeded,
+	"DomainLimitExceeded":    newErrorDomainLimitExceeded,
+	"DuplicateRequest":       newErrorDuplicateRequest,
+	"InvalidInput":           newErrorInvalidInput,
+	"OperationLimitExceeded": newErrorOperationLimitExceeded,
+	"TLDRulesViolation":      newErrorTLDRulesViolation,
+	"UnsupportedTLD":         newErrorUnsupportedTLD,
+}

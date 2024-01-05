@@ -29,14 +29,13 @@ const opAssociateConfigurationItemsToApplication = "AssociateConfigurationItemsT
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateConfigurationItemsToApplicationRequest method.
+//	req, resp := client.AssociateConfigurationItemsToApplicationRequest(params)
 //
-//    // Example sending a request using the AssociateConfigurationItemsToApplicationRequest method.
-//    req, resp := client.AssociateConfigurationItemsToApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AssociateConfigurationItemsToApplication
 func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationRequest(input *AssociateConfigurationItemsToApplicationInput) (req *request.Request, output *AssociateConfigurationItemsToApplicationOutput) {
@@ -67,20 +66,24 @@ func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationRe
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation AssociateConfigurationItemsToApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AssociateConfigurationItemsToApplication
 func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplication(input *AssociateConfigurationItemsToApplicationInput) (*AssociateConfigurationItemsToApplicationOutput, error) {
@@ -104,6 +107,98 @@ func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationWi
 	return out, req.Send()
 }
 
+const opBatchDeleteAgents = "BatchDeleteAgents"
+
+// BatchDeleteAgentsRequest generates a "aws/request.Request" representing the
+// client's request for the BatchDeleteAgents operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See BatchDeleteAgents for more information on using the BatchDeleteAgents
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the BatchDeleteAgentsRequest method.
+//	req, resp := client.BatchDeleteAgentsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/BatchDeleteAgents
+func (c *ApplicationDiscoveryService) BatchDeleteAgentsRequest(input *BatchDeleteAgentsInput) (req *request.Request, output *BatchDeleteAgentsOutput) {
+	op := &request.Operation{
+		Name:       opBatchDeleteAgents,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchDeleteAgentsInput{}
+	}
+
+	output = &BatchDeleteAgentsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// BatchDeleteAgents API operation for AWS Application Discovery Service.
+//
+// Deletes one or more agents or collectors as specified by ID. Deleting an
+// agent or collector does not delete the previously discovered data. To delete
+// the data collected, use StartBatchDeleteConfigurationTask.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Application Discovery Service's
+// API operation BatchDeleteAgents for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
+//
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
+//
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/BatchDeleteAgents
+func (c *ApplicationDiscoveryService) BatchDeleteAgents(input *BatchDeleteAgentsInput) (*BatchDeleteAgentsOutput, error) {
+	req, out := c.BatchDeleteAgentsRequest(input)
+	return out, req.Send()
+}
+
+// BatchDeleteAgentsWithContext is the same as BatchDeleteAgents with the addition of
+// the ability to pass a context and additional request options.
+//
+// See BatchDeleteAgents for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ApplicationDiscoveryService) BatchDeleteAgentsWithContext(ctx aws.Context, input *BatchDeleteAgentsInput, opts ...request.Option) (*BatchDeleteAgentsOutput, error) {
+	req, out := c.BatchDeleteAgentsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opBatchDeleteImportData = "BatchDeleteImportData"
 
 // BatchDeleteImportDataRequest generates a "aws/request.Request" representing the
@@ -120,14 +215,13 @@ const opBatchDeleteImportData = "BatchDeleteImportData"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchDeleteImportDataRequest method.
+//	req, resp := client.BatchDeleteImportDataRequest(params)
 //
-//    // Example sending a request using the BatchDeleteImportDataRequest method.
-//    req, resp := client.BatchDeleteImportDataRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/BatchDeleteImportData
 func (c *ApplicationDiscoveryService) BatchDeleteImportDataRequest(input *BatchDeleteImportDataInput) (req *request.Request, output *BatchDeleteImportDataOutput) {
@@ -151,12 +245,12 @@ func (c *ApplicationDiscoveryService) BatchDeleteImportDataRequest(input *BatchD
 // Deletes one or more import tasks, each identified by their import ID. Each
 // import task has a number of records that can identify servers or applications.
 //
-// AWS Application Discovery Service has built-in matching logic that will identify
-// when discovered servers match existing entries that you've previously discovered,
-// the information for the already-existing discovered server is updated. When
-// you delete an import task that contains records that were used to match,
-// the information in those matched records that comes from the deleted records
-// will also be deleted.
+// Amazon Web Services Application Discovery Service has built-in matching logic
+// that will identify when discovered servers match existing entries that you've
+// previously discovered, the information for the already-existing discovered
+// server is updated. When you delete an import task that contains records that
+// were used to match, the information in those matched records that comes from
+// the deleted records will also be deleted.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -165,17 +259,24 @@ func (c *ApplicationDiscoveryService) BatchDeleteImportDataRequest(input *BatchD
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation BatchDeleteImportData for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
+//
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/BatchDeleteImportData
 func (c *ApplicationDiscoveryService) BatchDeleteImportData(input *BatchDeleteImportDataInput) (*BatchDeleteImportDataOutput, error) {
@@ -215,14 +316,13 @@ const opCreateApplication = "CreateApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateApplicationRequest method.
+//	req, resp := client.CreateApplicationRequest(params)
 //
-//    // Example sending a request using the CreateApplicationRequest method.
-//    req, resp := client.CreateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateApplication
 func (c *ApplicationDiscoveryService) CreateApplicationRequest(input *CreateApplicationInput) (req *request.Request, output *CreateApplicationOutput) {
@@ -252,20 +352,24 @@ func (c *ApplicationDiscoveryService) CreateApplicationRequest(input *CreateAppl
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation CreateApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateApplication
 func (c *ApplicationDiscoveryService) CreateApplication(input *CreateApplicationInput) (*CreateApplicationOutput, error) {
@@ -305,14 +409,13 @@ const opCreateTags = "CreateTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateTagsRequest method.
+//	req, resp := client.CreateTagsRequest(params)
 //
-//    // Example sending a request using the CreateTagsRequest method.
-//    req, resp := client.CreateTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateTags
 func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) (req *request.Request, output *CreateTagsOutput) {
@@ -338,6 +441,8 @@ func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) 
 // help you categorize IT assets. This API accepts a list of multiple configuration
 // items.
 //
+// Do not store sensitive information (like personal data) in tags.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -345,24 +450,28 @@ func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) 
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation CreateTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - ResourceNotFoundException
+//     The specified configuration ID was not located. Verify the configuration
+//     ID and try again.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateTags
 func (c *ApplicationDiscoveryService) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error) {
@@ -402,14 +511,13 @@ const opDeleteApplications = "DeleteApplications"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteApplicationsRequest method.
+//	req, resp := client.DeleteApplicationsRequest(params)
 //
-//    // Example sending a request using the DeleteApplicationsRequest method.
-//    req, resp := client.DeleteApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteApplications
 func (c *ApplicationDiscoveryService) DeleteApplicationsRequest(input *DeleteApplicationsInput) (req *request.Request, output *DeleteApplicationsOutput) {
@@ -441,20 +549,24 @@ func (c *ApplicationDiscoveryService) DeleteApplicationsRequest(input *DeleteApp
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DeleteApplications for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteApplications
 func (c *ApplicationDiscoveryService) DeleteApplications(input *DeleteApplicationsInput) (*DeleteApplicationsOutput, error) {
@@ -494,14 +606,13 @@ const opDeleteTags = "DeleteTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteTagsRequest method.
+//	req, resp := client.DeleteTagsRequest(params)
 //
-//    // Example sending a request using the DeleteTagsRequest method.
-//    req, resp := client.DeleteTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteTags
 func (c *ApplicationDiscoveryService) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Request, output *DeleteTagsOutput) {
@@ -533,24 +644,28 @@ func (c *ApplicationDiscoveryService) DeleteTagsRequest(input *DeleteTagsInput) 
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DeleteTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - ResourceNotFoundException
+//     The specified configuration ID was not located. Verify the configuration
+//     ID and try again.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteTags
 func (c *ApplicationDiscoveryService) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
@@ -590,14 +705,13 @@ const opDescribeAgents = "DescribeAgents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeAgentsRequest method.
+//	req, resp := client.DescribeAgentsRequest(params)
 //
-//    // Example sending a request using the DescribeAgentsRequest method.
-//    req, resp := client.DescribeAgentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeAgents
 func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgentsInput) (req *request.Request, output *DescribeAgentsOutput) {
@@ -605,6 +719,12 @@ func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgent
 		Name:       opDescribeAgents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -618,9 +738,9 @@ func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgent
 
 // DescribeAgents API operation for AWS Application Discovery Service.
 //
-// Lists agents or connectors as specified by ID or other filters. All agents/connectors
-// associated with your user account can be listed if you call DescribeAgents
-// as is without passing any parameters.
+// Lists agents or collectors as specified by ID or other filters. All agents/collectors
+// associated with your user can be listed if you call DescribeAgents as is
+// without passing any parameters.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -629,20 +749,24 @@ func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgent
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DescribeAgents for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeAgents
 func (c *ApplicationDiscoveryService) DescribeAgents(input *DescribeAgentsInput) (*DescribeAgentsOutput, error) {
@@ -666,6 +790,148 @@ func (c *ApplicationDiscoveryService) DescribeAgentsWithContext(ctx aws.Context,
 	return out, req.Send()
 }
 
+// DescribeAgentsPages iterates over the pages of a DescribeAgents operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeAgents method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeAgents operation.
+//	pageNum := 0
+//	err := client.DescribeAgentsPages(params,
+//	    func(page *applicationdiscoveryservice.DescribeAgentsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *ApplicationDiscoveryService) DescribeAgentsPages(input *DescribeAgentsInput, fn func(*DescribeAgentsOutput, bool) bool) error {
+	return c.DescribeAgentsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeAgentsPagesWithContext same as DescribeAgentsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ApplicationDiscoveryService) DescribeAgentsPagesWithContext(ctx aws.Context, input *DescribeAgentsInput, fn func(*DescribeAgentsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeAgentsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeAgentsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeAgentsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeBatchDeleteConfigurationTask = "DescribeBatchDeleteConfigurationTask"
+
+// DescribeBatchDeleteConfigurationTaskRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeBatchDeleteConfigurationTask operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeBatchDeleteConfigurationTask for more information on using the DescribeBatchDeleteConfigurationTask
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeBatchDeleteConfigurationTaskRequest method.
+//	req, resp := client.DescribeBatchDeleteConfigurationTaskRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeBatchDeleteConfigurationTask
+func (c *ApplicationDiscoveryService) DescribeBatchDeleteConfigurationTaskRequest(input *DescribeBatchDeleteConfigurationTaskInput) (req *request.Request, output *DescribeBatchDeleteConfigurationTaskOutput) {
+	op := &request.Operation{
+		Name:       opDescribeBatchDeleteConfigurationTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeBatchDeleteConfigurationTaskInput{}
+	}
+
+	output = &DescribeBatchDeleteConfigurationTaskOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeBatchDeleteConfigurationTask API operation for AWS Application Discovery Service.
+//
+// Takes a unique deletion task identifier as input and returns metadata about
+// a configuration deletion task.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Application Discovery Service's
+// API operation DescribeBatchDeleteConfigurationTask for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
+//
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeBatchDeleteConfigurationTask
+func (c *ApplicationDiscoveryService) DescribeBatchDeleteConfigurationTask(input *DescribeBatchDeleteConfigurationTaskInput) (*DescribeBatchDeleteConfigurationTaskOutput, error) {
+	req, out := c.DescribeBatchDeleteConfigurationTaskRequest(input)
+	return out, req.Send()
+}
+
+// DescribeBatchDeleteConfigurationTaskWithContext is the same as DescribeBatchDeleteConfigurationTask with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeBatchDeleteConfigurationTask for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ApplicationDiscoveryService) DescribeBatchDeleteConfigurationTaskWithContext(ctx aws.Context, input *DescribeBatchDeleteConfigurationTaskInput, opts ...request.Option) (*DescribeBatchDeleteConfigurationTaskOutput, error) {
+	req, out := c.DescribeBatchDeleteConfigurationTaskRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeConfigurations = "DescribeConfigurations"
 
 // DescribeConfigurationsRequest generates a "aws/request.Request" representing the
@@ -682,14 +948,13 @@ const opDescribeConfigurations = "DescribeConfigurations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeConfigurationsRequest method.
+//	req, resp := client.DescribeConfigurationsRequest(params)
 //
-//    // Example sending a request using the DescribeConfigurationsRequest method.
-//    req, resp := client.DescribeConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeConfigurations
 func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *DescribeConfigurationsInput) (req *request.Request, output *DescribeConfigurationsOutput) {
@@ -714,13 +979,13 @@ func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *Descr
 //
 // All of the supplied IDs must be for the same asset type from one of the following:
 //
-// server
+//   - server
 //
-// application
+//   - application
 //
-// process
+//   - process
 //
-// connection
+//   - connection
 //
 // Output fields are specific to the asset type specified. For example, the
 // output for a server configuration item includes a list of attributes about
@@ -728,7 +993,8 @@ func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *Descr
 // etc.
 //
 // For a complete list of outputs for each asset type, see Using the DescribeConfigurations
-// Action (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations).
+// Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations)
+// in the Amazon Web Services Application Discovery Service User Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -737,20 +1003,24 @@ func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *Descr
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DescribeConfigurations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeConfigurations
 func (c *ApplicationDiscoveryService) DescribeConfigurations(input *DescribeConfigurationsInput) (*DescribeConfigurationsOutput, error) {
@@ -790,14 +1060,13 @@ const opDescribeContinuousExports = "DescribeContinuousExports"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeContinuousExportsRequest method.
+//	req, resp := client.DescribeContinuousExportsRequest(params)
 //
-//    // Example sending a request using the DescribeContinuousExportsRequest method.
-//    req, resp := client.DescribeContinuousExportsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeContinuousExports
 func (c *ApplicationDiscoveryService) DescribeContinuousExportsRequest(input *DescribeContinuousExportsInput) (req *request.Request, output *DescribeContinuousExportsOutput) {
@@ -825,8 +1094,8 @@ func (c *ApplicationDiscoveryService) DescribeContinuousExportsRequest(input *De
 // DescribeContinuousExports API operation for AWS Application Discovery Service.
 //
 // Lists exports as specified by ID. All continuous exports associated with
-// your user account can be listed if you call DescribeContinuousExports as
-// is without passing any parameters.
+// your user can be listed if you call DescribeContinuousExports as is without
+// passing any parameters.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -835,27 +1104,31 @@ func (c *ApplicationDiscoveryService) DescribeContinuousExportsRequest(input *De
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DescribeContinuousExports for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
 //
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This operation is not permitted.
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
+//   - OperationNotPermittedException
+//     This operation is not permitted.
+//
+//   - ResourceNotFoundException
+//     The specified configuration ID was not located. Verify the configuration
+//     ID and try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeContinuousExports
 func (c *ApplicationDiscoveryService) DescribeContinuousExports(input *DescribeContinuousExportsInput) (*DescribeContinuousExportsOutput, error) {
@@ -887,15 +1160,14 @@ func (c *ApplicationDiscoveryService) DescribeContinuousExportsWithContext(ctx a
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeContinuousExports operation.
-//    pageNum := 0
-//    err := client.DescribeContinuousExportsPages(params,
-//        func(page *DescribeContinuousExportsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeContinuousExports operation.
+//	pageNum := 0
+//	err := client.DescribeContinuousExportsPages(params,
+//	    func(page *applicationdiscoveryservice.DescribeContinuousExportsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ApplicationDiscoveryService) DescribeContinuousExportsPages(input *DescribeContinuousExportsInput, fn func(*DescribeContinuousExportsOutput, bool) bool) error {
 	return c.DescribeContinuousExportsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -922,10 +1194,12 @@ func (c *ApplicationDiscoveryService) DescribeContinuousExportsPagesWithContext(
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeContinuousExportsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeContinuousExportsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -945,14 +1219,13 @@ const opDescribeExportConfigurations = "DescribeExportConfigurations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeExportConfigurationsRequest method.
+//	req, resp := client.DescribeExportConfigurationsRequest(params)
 //
-//    // Example sending a request using the DescribeExportConfigurationsRequest method.
-//    req, resp := client.DescribeExportConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportConfigurations
 //
@@ -965,6 +1238,12 @@ func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input 
 		Name:       opDescribeExportConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -978,9 +1257,8 @@ func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input 
 
 // DescribeExportConfigurations API operation for AWS Application Discovery Service.
 //
-// DescribeExportConfigurations is deprecated.
-//
-// Use instead DescribeExportTasks (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html).
+// DescribeExportConfigurations is deprecated. Use DescribeExportTasks (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html),
+// instead.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -989,24 +1267,28 @@ func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input 
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DescribeExportConfigurations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - ResourceNotFoundException
+//     The specified configuration ID was not located. Verify the configuration
+//     ID and try again.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportConfigurations
 //
@@ -1034,6 +1316,61 @@ func (c *ApplicationDiscoveryService) DescribeExportConfigurationsWithContext(ct
 	return out, req.Send()
 }
 
+// DescribeExportConfigurationsPages iterates over the pages of a DescribeExportConfigurations operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeExportConfigurations method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeExportConfigurations operation.
+//	pageNum := 0
+//	err := client.DescribeExportConfigurationsPages(params,
+//	    func(page *applicationdiscoveryservice.DescribeExportConfigurationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+//
+// Deprecated: DescribeExportConfigurationsPages has been deprecated
+func (c *ApplicationDiscoveryService) DescribeExportConfigurationsPages(input *DescribeExportConfigurationsInput, fn func(*DescribeExportConfigurationsOutput, bool) bool) error {
+	return c.DescribeExportConfigurationsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeExportConfigurationsPagesWithContext same as DescribeExportConfigurationsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+//
+// Deprecated: DescribeExportConfigurationsPagesWithContext has been deprecated
+func (c *ApplicationDiscoveryService) DescribeExportConfigurationsPagesWithContext(ctx aws.Context, input *DescribeExportConfigurationsInput, fn func(*DescribeExportConfigurationsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeExportConfigurationsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeExportConfigurationsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeExportConfigurationsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeExportTasks = "DescribeExportTasks"
 
 // DescribeExportTasksRequest generates a "aws/request.Request" representing the
@@ -1050,14 +1387,13 @@ const opDescribeExportTasks = "DescribeExportTasks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeExportTasksRequest method.
+//	req, resp := client.DescribeExportTasksRequest(params)
 //
-//    // Example sending a request using the DescribeExportTasksRequest method.
-//    req, resp := client.DescribeExportTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportTasks
 func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *DescribeExportTasksInput) (req *request.Request, output *DescribeExportTasksOutput) {
@@ -1065,6 +1401,12 @@ func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *Describe
 		Name:       opDescribeExportTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1088,20 +1430,24 @@ func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *Describe
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DescribeExportTasks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportTasks
 func (c *ApplicationDiscoveryService) DescribeExportTasks(input *DescribeExportTasksInput) (*DescribeExportTasksOutput, error) {
@@ -1125,6 +1471,57 @@ func (c *ApplicationDiscoveryService) DescribeExportTasksWithContext(ctx aws.Con
 	return out, req.Send()
 }
 
+// DescribeExportTasksPages iterates over the pages of a DescribeExportTasks operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeExportTasks method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeExportTasks operation.
+//	pageNum := 0
+//	err := client.DescribeExportTasksPages(params,
+//	    func(page *applicationdiscoveryservice.DescribeExportTasksOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *ApplicationDiscoveryService) DescribeExportTasksPages(input *DescribeExportTasksInput, fn func(*DescribeExportTasksOutput, bool) bool) error {
+	return c.DescribeExportTasksPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeExportTasksPagesWithContext same as DescribeExportTasksPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ApplicationDiscoveryService) DescribeExportTasksPagesWithContext(ctx aws.Context, input *DescribeExportTasksInput, fn func(*DescribeExportTasksOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeExportTasksInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeExportTasksRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeExportTasksOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeImportTasks = "DescribeImportTasks"
 
 // DescribeImportTasksRequest generates a "aws/request.Request" representing the
@@ -1141,14 +1538,13 @@ const opDescribeImportTasks = "DescribeImportTasks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeImportTasksRequest method.
+//	req, resp := client.DescribeImportTasksRequest(params)
 //
-//    // Example sending a request using the DescribeImportTasksRequest method.
-//    req, resp := client.DescribeImportTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeImportTasks
 func (c *ApplicationDiscoveryService) DescribeImportTasksRequest(input *DescribeImportTasksInput) (req *request.Request, output *DescribeImportTasksOutput) {
@@ -1185,17 +1581,24 @@ func (c *ApplicationDiscoveryService) DescribeImportTasksRequest(input *Describe
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DescribeImportTasks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
+//
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeImportTasks
 func (c *ApplicationDiscoveryService) DescribeImportTasks(input *DescribeImportTasksInput) (*DescribeImportTasksOutput, error) {
@@ -1227,15 +1630,14 @@ func (c *ApplicationDiscoveryService) DescribeImportTasksWithContext(ctx aws.Con
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeImportTasks operation.
-//    pageNum := 0
-//    err := client.DescribeImportTasksPages(params,
-//        func(page *DescribeImportTasksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeImportTasks operation.
+//	pageNum := 0
+//	err := client.DescribeImportTasksPages(params,
+//	    func(page *applicationdiscoveryservice.DescribeImportTasksOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ApplicationDiscoveryService) DescribeImportTasksPages(input *DescribeImportTasksInput, fn func(*DescribeImportTasksOutput, bool) bool) error {
 	return c.DescribeImportTasksPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1262,10 +1664,12 @@ func (c *ApplicationDiscoveryService) DescribeImportTasksPagesWithContext(ctx aw
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeImportTasksOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeImportTasksOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1285,14 +1689,13 @@ const opDescribeTags = "DescribeTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeTagsRequest method.
+//	req, resp := client.DescribeTagsRequest(params)
 //
-//    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeTags
 func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
@@ -1300,6 +1703,12 @@ func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInp
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1318,14 +1727,14 @@ func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInp
 //
 // There are three valid tag filter names:
 //
-//    * tagKey
+//   - tagKey
 //
-//    * tagValue
+//   - tagValue
 //
-//    * configurationId
+//   - configurationId
 //
-// Also, all configuration items associated with your user account that have
-// tags can be listed if you call DescribeTags as is without passing any parameters.
+// Also, all configuration items associated with your user that have tags can
+// be listed if you call DescribeTags as is without passing any parameters.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1334,24 +1743,28 @@ func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInp
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DescribeTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - ResourceNotFoundException
+//     The specified configuration ID was not located. Verify the configuration
+//     ID and try again.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeTags
 func (c *ApplicationDiscoveryService) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
@@ -1375,6 +1788,57 @@ func (c *ApplicationDiscoveryService) DescribeTagsWithContext(ctx aws.Context, i
 	return out, req.Send()
 }
 
+// DescribeTagsPages iterates over the pages of a DescribeTags operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeTags method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeTags operation.
+//	pageNum := 0
+//	err := client.DescribeTagsPages(params,
+//	    func(page *applicationdiscoveryservice.DescribeTagsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *ApplicationDiscoveryService) DescribeTagsPages(input *DescribeTagsInput, fn func(*DescribeTagsOutput, bool) bool) error {
+	return c.DescribeTagsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeTagsPagesWithContext same as DescribeTagsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ApplicationDiscoveryService) DescribeTagsPagesWithContext(ctx aws.Context, input *DescribeTagsInput, fn func(*DescribeTagsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeTagsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeTagsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeTagsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDisassociateConfigurationItemsFromApplication = "DisassociateConfigurationItemsFromApplication"
 
 // DisassociateConfigurationItemsFromApplicationRequest generates a "aws/request.Request" representing the
@@ -1391,14 +1855,13 @@ const opDisassociateConfigurationItemsFromApplication = "DisassociateConfigurati
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateConfigurationItemsFromApplicationRequest method.
+//	req, resp := client.DisassociateConfigurationItemsFromApplicationRequest(params)
 //
-//    // Example sending a request using the DisassociateConfigurationItemsFromApplicationRequest method.
-//    req, resp := client.DisassociateConfigurationItemsFromApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DisassociateConfigurationItemsFromApplication
 func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicationRequest(input *DisassociateConfigurationItemsFromApplicationInput) (req *request.Request, output *DisassociateConfigurationItemsFromApplicationOutput) {
@@ -1429,20 +1892,24 @@ func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicat
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation DisassociateConfigurationItemsFromApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DisassociateConfigurationItemsFromApplication
 func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplication(input *DisassociateConfigurationItemsFromApplicationInput) (*DisassociateConfigurationItemsFromApplicationOutput, error) {
@@ -1482,14 +1949,13 @@ const opExportConfigurations = "ExportConfigurations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ExportConfigurationsRequest method.
+//	req, resp := client.ExportConfigurationsRequest(params)
 //
-//    // Example sending a request using the ExportConfigurationsRequest method.
-//    req, resp := client.ExportConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ExportConfigurations
 //
@@ -1530,23 +1996,27 @@ func (c *ApplicationDiscoveryService) ExportConfigurationsRequest(input *ExportC
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation ExportConfigurations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
 //
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This operation is not permitted.
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - OperationNotPermittedException
+//     This operation is not permitted.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ExportConfigurations
 //
@@ -1590,14 +2060,13 @@ const opGetDiscoverySummary = "GetDiscoverySummary"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDiscoverySummaryRequest method.
+//	req, resp := client.GetDiscoverySummaryRequest(params)
 //
-//    // Example sending a request using the GetDiscoverySummaryRequest method.
-//    req, resp := client.GetDiscoverySummaryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/GetDiscoverySummary
 func (c *ApplicationDiscoveryService) GetDiscoverySummaryRequest(input *GetDiscoverySummaryInput) (req *request.Request, output *GetDiscoverySummaryOutput) {
@@ -1630,20 +2099,24 @@ func (c *ApplicationDiscoveryService) GetDiscoverySummaryRequest(input *GetDisco
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation GetDiscoverySummary for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/GetDiscoverySummary
 func (c *ApplicationDiscoveryService) GetDiscoverySummary(input *GetDiscoverySummaryInput) (*GetDiscoverySummaryOutput, error) {
@@ -1683,14 +2156,13 @@ const opListConfigurations = "ListConfigurations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListConfigurationsRequest method.
+//	req, resp := client.ListConfigurationsRequest(params)
 //
-//    // Example sending a request using the ListConfigurationsRequest method.
-//    req, resp := client.ListConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListConfigurations
 func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfigurationsInput) (req *request.Request, output *ListConfigurationsOutput) {
@@ -1698,6 +2170,12 @@ func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfi
 		Name:       opListConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1712,7 +2190,7 @@ func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfi
 // ListConfigurations API operation for AWS Application Discovery Service.
 //
 // Retrieves a list of configuration items as specified by the value passed
-// to the required paramater configurationType. Optional filtering may be applied
+// to the required parameter configurationType. Optional filtering may be applied
 // to refine search results.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1722,24 +2200,28 @@ func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfi
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation ListConfigurations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - ResourceNotFoundException
+//     The specified configuration ID was not located. Verify the configuration
+//     ID and try again.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListConfigurations
 func (c *ApplicationDiscoveryService) ListConfigurations(input *ListConfigurationsInput) (*ListConfigurationsOutput, error) {
@@ -1763,6 +2245,57 @@ func (c *ApplicationDiscoveryService) ListConfigurationsWithContext(ctx aws.Cont
 	return out, req.Send()
 }
 
+// ListConfigurationsPages iterates over the pages of a ListConfigurations operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListConfigurations method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListConfigurations operation.
+//	pageNum := 0
+//	err := client.ListConfigurationsPages(params,
+//	    func(page *applicationdiscoveryservice.ListConfigurationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *ApplicationDiscoveryService) ListConfigurationsPages(input *ListConfigurationsInput, fn func(*ListConfigurationsOutput, bool) bool) error {
+	return c.ListConfigurationsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListConfigurationsPagesWithContext same as ListConfigurationsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ApplicationDiscoveryService) ListConfigurationsPagesWithContext(ctx aws.Context, input *ListConfigurationsInput, fn func(*ListConfigurationsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListConfigurationsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListConfigurationsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListConfigurationsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListServerNeighbors = "ListServerNeighbors"
 
 // ListServerNeighborsRequest generates a "aws/request.Request" representing the
@@ -1779,14 +2312,13 @@ const opListServerNeighbors = "ListServerNeighbors"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListServerNeighborsRequest method.
+//	req, resp := client.ListServerNeighborsRequest(params)
 //
-//    // Example sending a request using the ListServerNeighborsRequest method.
-//    req, resp := client.ListServerNeighborsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListServerNeighbors
 func (c *ApplicationDiscoveryService) ListServerNeighborsRequest(input *ListServerNeighborsInput) (req *request.Request, output *ListServerNeighborsOutput) {
@@ -1817,20 +2349,24 @@ func (c *ApplicationDiscoveryService) ListServerNeighborsRequest(input *ListServ
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation ListServerNeighbors for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListServerNeighbors
 func (c *ApplicationDiscoveryService) ListServerNeighbors(input *ListServerNeighborsInput) (*ListServerNeighborsOutput, error) {
@@ -1854,6 +2390,103 @@ func (c *ApplicationDiscoveryService) ListServerNeighborsWithContext(ctx aws.Con
 	return out, req.Send()
 }
 
+const opStartBatchDeleteConfigurationTask = "StartBatchDeleteConfigurationTask"
+
+// StartBatchDeleteConfigurationTaskRequest generates a "aws/request.Request" representing the
+// client's request for the StartBatchDeleteConfigurationTask operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See StartBatchDeleteConfigurationTask for more information on using the StartBatchDeleteConfigurationTask
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the StartBatchDeleteConfigurationTaskRequest method.
+//	req, resp := client.StartBatchDeleteConfigurationTaskRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartBatchDeleteConfigurationTask
+func (c *ApplicationDiscoveryService) StartBatchDeleteConfigurationTaskRequest(input *StartBatchDeleteConfigurationTaskInput) (req *request.Request, output *StartBatchDeleteConfigurationTaskOutput) {
+	op := &request.Operation{
+		Name:       opStartBatchDeleteConfigurationTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StartBatchDeleteConfigurationTaskInput{}
+	}
+
+	output = &StartBatchDeleteConfigurationTaskOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// StartBatchDeleteConfigurationTask API operation for AWS Application Discovery Service.
+//
+// Takes a list of configurationId as input and starts an asynchronous deletion
+// task to remove the configurationItems. Returns a unique deletion task identifier.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Application Discovery Service's
+// API operation StartBatchDeleteConfigurationTask for usage and error information.
+//
+// Returned Error Types:
+//
+//   - LimitExceededException
+//     The limit of 200 configuration IDs per request has been exceeded.
+//
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
+//
+//   - OperationNotPermittedException
+//     This operation is not permitted.
+//
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartBatchDeleteConfigurationTask
+func (c *ApplicationDiscoveryService) StartBatchDeleteConfigurationTask(input *StartBatchDeleteConfigurationTaskInput) (*StartBatchDeleteConfigurationTaskOutput, error) {
+	req, out := c.StartBatchDeleteConfigurationTaskRequest(input)
+	return out, req.Send()
+}
+
+// StartBatchDeleteConfigurationTaskWithContext is the same as StartBatchDeleteConfigurationTask with the addition of
+// the ability to pass a context and additional request options.
+//
+// See StartBatchDeleteConfigurationTask for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ApplicationDiscoveryService) StartBatchDeleteConfigurationTaskWithContext(ctx aws.Context, input *StartBatchDeleteConfigurationTaskInput, opts ...request.Option) (*StartBatchDeleteConfigurationTaskOutput, error) {
+	req, out := c.StartBatchDeleteConfigurationTaskRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opStartContinuousExport = "StartContinuousExport"
 
 // StartContinuousExportRequest generates a "aws/request.Request" representing the
@@ -1870,14 +2503,13 @@ const opStartContinuousExport = "StartContinuousExport"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartContinuousExportRequest method.
+//	req, resp := client.StartContinuousExportRequest(params)
 //
-//    // Example sending a request using the StartContinuousExportRequest method.
-//    req, resp := client.StartContinuousExportRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartContinuousExport
 func (c *ApplicationDiscoveryService) StartContinuousExportRequest(input *StartContinuousExportInput) (req *request.Request, output *StartContinuousExportOutput) {
@@ -1907,32 +2539,37 @@ func (c *ApplicationDiscoveryService) StartContinuousExportRequest(input *StartC
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation StartContinuousExport for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConflictErrorException "ConflictErrorException"
+// Returned Error Types:
 //
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+//   - ConflictErrorException
+//     Conflict error.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
 //
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This operation is not permitted.
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   This issue occurs when the same clientRequestToken is used with the StartImportTask
-//   action, but with different parameters. For example, you use the same request
-//   token but have two different import URLs, you can encounter this issue. If
-//   the import tasks are meant to be different, use a different clientRequestToken,
-//   and try again.
+//   - OperationNotPermittedException
+//     This operation is not permitted.
+//
+//   - ResourceInUseException
+//     This issue occurs when the same clientRequestToken is used with the StartImportTask
+//     action, but with different parameters. For example, you use the same request
+//     token but have two different import URLs, you can encounter this issue. If
+//     the import tasks are meant to be different, use a different clientRequestToken,
+//     and try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartContinuousExport
 func (c *ApplicationDiscoveryService) StartContinuousExport(input *StartContinuousExportInput) (*StartContinuousExportOutput, error) {
@@ -1972,14 +2609,13 @@ const opStartDataCollectionByAgentIds = "StartDataCollectionByAgentIds"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartDataCollectionByAgentIdsRequest method.
+//	req, resp := client.StartDataCollectionByAgentIdsRequest(params)
 //
-//    // Example sending a request using the StartDataCollectionByAgentIdsRequest method.
-//    req, resp := client.StartDataCollectionByAgentIdsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartDataCollectionByAgentIds
 func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input *StartDataCollectionByAgentIdsInput) (req *request.Request, output *StartDataCollectionByAgentIdsOutput) {
@@ -2000,7 +2636,7 @@ func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input
 
 // StartDataCollectionByAgentIds API operation for AWS Application Discovery Service.
 //
-// Instructs the specified agents or connectors to start collecting data.
+// Instructs the specified agents to start collecting data.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2009,20 +2645,24 @@ func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation StartDataCollectionByAgentIds for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartDataCollectionByAgentIds
 func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIds(input *StartDataCollectionByAgentIdsInput) (*StartDataCollectionByAgentIdsOutput, error) {
@@ -2062,14 +2702,13 @@ const opStartExportTask = "StartExportTask"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartExportTaskRequest method.
+//	req, resp := client.StartExportTaskRequest(params)
 //
-//    // Example sending a request using the StartExportTaskRequest method.
-//    req, resp := client.StartExportTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartExportTask
 func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportTaskInput) (req *request.Request, output *StartExportTaskOutput) {
@@ -2090,17 +2729,31 @@ func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportT
 
 // StartExportTask API operation for AWS Application Discovery Service.
 //
-// Begins the export of discovered data to an S3 bucket.
+// Begins the export of a discovered data report to an Amazon S3 bucket managed
+// by Amazon Web Services.
+//
+// Exports might provide an estimate of fees and savings based on certain information
+// that you provide. Fee estimates do not include any taxes that might apply.
+// Your actual fees and savings depend on a variety of factors, including your
+// actual usage of Amazon Web Services services, which might vary from the estimates
+// provided in this report.
+//
+// If you do not specify preferences or agentIds in the filter, a summary of
+// all servers, applications, tags, and performance is generated. This data
+// is an aggregation of all server data collected through on-premises tooling,
+// file import, application grouping and applying tags.
 //
 // If you specify agentIds in a filter, the task exports up to 72 hours of detailed
 // data collected by the identified Application Discovery Agent, including network,
 // process, and performance details. A time range for exported agent data may
 // be set by using startTime and endTime. Export of detailed agent data is limited
-// to five concurrently running exports.
+// to five concurrently running exports. Export of detailed agent data is limited
+// to two exports per day.
 //
-// If you do not include an agentIds filter, summary data is exported that includes
-// both AWS Agentless Discovery Connector data and summary data from AWS Discovery
-// Agents. Export of summary data is limited to two exports per day.
+// If you enable ec2RecommendationsPreferences in preferences , an Amazon EC2
+// instance matching the characteristics of each server in Application Discovery
+// Service is generated. Changing the attributes of the ec2RecommendationsPreferences
+// changes the criteria of the recommendation.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2109,23 +2762,27 @@ func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportT
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation StartExportTask for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
 //
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This operation is not permitted.
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - OperationNotPermittedException
+//     This operation is not permitted.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartExportTask
 func (c *ApplicationDiscoveryService) StartExportTask(input *StartExportTaskInput) (*StartExportTaskOutput, error) {
@@ -2165,14 +2822,13 @@ const opStartImportTask = "StartImportTask"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartImportTaskRequest method.
+//	req, resp := client.StartImportTaskRequest(params)
 //
-//    // Example sending a request using the StartImportTaskRequest method.
-//    req, resp := client.StartImportTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartImportTask
 func (c *ApplicationDiscoveryService) StartImportTaskRequest(input *StartImportTaskInput) (req *request.Request, output *StartImportTaskOutput) {
@@ -2194,34 +2850,37 @@ func (c *ApplicationDiscoveryService) StartImportTaskRequest(input *StartImportT
 // StartImportTask API operation for AWS Application Discovery Service.
 //
 // Starts an import task, which allows you to import details of your on-premises
-// environment directly into AWS without having to use the Application Discovery
-// Service (ADS) tools such as the Discovery Connector or Discovery Agent. This
-// gives you the option to perform migration assessment and planning directly
-// from your imported data, including the ability to group your devices as applications
+// environment directly into Amazon Web Services Migration Hub without having
+// to use the Amazon Web Services Application Discovery Service (Application
+// Discovery Service) tools such as the Amazon Web Services Application Discovery
+// Service Agentless Collector or Application Discovery Agent. This gives you
+// the option to perform migration assessment and planning directly from your
+// imported data, including the ability to group your devices as applications
 // and track their migration status.
 //
 // To start an import request, do this:
 //
 // Download the specially formatted comma separated value (CSV) import template,
-// which you can find here: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
-// (https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv).
+// which you can find here: https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
+// (https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv).
 //
 // Fill out the template with your server and application data.
 //
 // Upload your import file to an Amazon S3 bucket, and make a note of it's Object
 // URL. Your import file must be in the CSV format.
 //
-// Use the console or the StartImportTask command with the AWS CLI or one of
-// the AWS SDKs to import the records from your file.
+// Use the console or the StartImportTask command with the Amazon Web Services
+// CLI or one of the Amazon Web Services SDKs to import the records from your
+// file.
 //
 // For more information, including step-by-step procedures, see Migration Hub
 // Import (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html)
-// in the AWS Application Discovery Service User Guide.
+// in the Amazon Web Services Application Discovery Service User Guide.
 //
 // There are limits to the number of import tasks you can create (and delete)
-// in an AWS account. For more information, see AWS Application Discovery Service
-// Limits (https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html)
-// in the AWS Application Discovery Service User Guide.
+// in an Amazon Web Services account. For more information, see Amazon Web Services
+// Application Discovery Service Limits (https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html)
+// in the Amazon Web Services Application Discovery Service User Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2230,24 +2889,31 @@ func (c *ApplicationDiscoveryService) StartImportTaskRequest(input *StartImportT
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation StartImportTask for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   This issue occurs when the same clientRequestToken is used with the StartImportTask
-//   action, but with different parameters. For example, you use the same request
-//   token but have two different import URLs, you can encounter this issue. If
-//   the import tasks are meant to be different, use a different clientRequestToken,
-//   and try again.
+// Returned Error Types:
 //
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+//   - ResourceInUseException
+//     This issue occurs when the same clientRequestToken is used with the StartImportTask
+//     action, but with different parameters. For example, you use the same request
+//     token but have two different import URLs, you can encounter this issue. If
+//     the import tasks are meant to be different, use a different clientRequestToken,
+//     and try again.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
+//
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartImportTask
 func (c *ApplicationDiscoveryService) StartImportTask(input *StartImportTaskInput) (*StartImportTaskOutput, error) {
@@ -2287,14 +2953,13 @@ const opStopContinuousExport = "StopContinuousExport"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StopContinuousExportRequest method.
+//	req, resp := client.StopContinuousExportRequest(params)
 //
-//    // Example sending a request using the StopContinuousExportRequest method.
-//    req, resp := client.StopContinuousExportRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StopContinuousExport
 func (c *ApplicationDiscoveryService) StopContinuousExportRequest(input *StopContinuousExportInput) (req *request.Request, output *StopContinuousExportOutput) {
@@ -2324,34 +2989,38 @@ func (c *ApplicationDiscoveryService) StopContinuousExportRequest(input *StopCon
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation StopContinuousExport for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
 //
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This operation is not permitted.
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified configuration ID was not located. Verify the configuration
-//   ID and try again.
+//   - OperationNotPermittedException
+//     This operation is not permitted.
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   This issue occurs when the same clientRequestToken is used with the StartImportTask
-//   action, but with different parameters. For example, you use the same request
-//   token but have two different import URLs, you can encounter this issue. If
-//   the import tasks are meant to be different, use a different clientRequestToken,
-//   and try again.
+//   - ResourceNotFoundException
+//     The specified configuration ID was not located. Verify the configuration
+//     ID and try again.
+//
+//   - ResourceInUseException
+//     This issue occurs when the same clientRequestToken is used with the StartImportTask
+//     action, but with different parameters. For example, you use the same request
+//     token but have two different import URLs, you can encounter this issue. If
+//     the import tasks are meant to be different, use a different clientRequestToken,
+//     and try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StopContinuousExport
 func (c *ApplicationDiscoveryService) StopContinuousExport(input *StopContinuousExportInput) (*StopContinuousExportOutput, error) {
@@ -2391,14 +3060,13 @@ const opStopDataCollectionByAgentIds = "StopDataCollectionByAgentIds"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StopDataCollectionByAgentIdsRequest method.
+//	req, resp := client.StopDataCollectionByAgentIdsRequest(params)
 //
-//    // Example sending a request using the StopDataCollectionByAgentIdsRequest method.
-//    req, resp := client.StopDataCollectionByAgentIdsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StopDataCollectionByAgentIds
 func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input *StopDataCollectionByAgentIdsInput) (req *request.Request, output *StopDataCollectionByAgentIdsOutput) {
@@ -2419,7 +3087,7 @@ func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input 
 
 // StopDataCollectionByAgentIds API operation for AWS Application Discovery Service.
 //
-// Instructs the specified agents or connectors to stop collecting data.
+// Instructs the specified agents to stop collecting data.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2428,20 +3096,24 @@ func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input 
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation StopDataCollectionByAgentIds for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StopDataCollectionByAgentIds
 func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIds(input *StopDataCollectionByAgentIdsInput) (*StopDataCollectionByAgentIdsOutput, error) {
@@ -2481,14 +3153,13 @@ const opUpdateApplication = "UpdateApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateApplicationRequest method.
+//	req, resp := client.UpdateApplicationRequest(params)
 //
-//    // Example sending a request using the UpdateApplicationRequest method.
-//    req, resp := client.UpdateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/UpdateApplication
 func (c *ApplicationDiscoveryService) UpdateApplicationRequest(input *UpdateApplicationInput) (req *request.Request, output *UpdateApplicationOutput) {
@@ -2519,20 +3190,24 @@ func (c *ApplicationDiscoveryService) UpdateApplicationRequest(input *UpdateAppl
 // See the AWS API reference guide for AWS Application Discovery Service's
 // API operation UpdateApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAuthorizationErrorException "AuthorizationErrorException"
-//   The AWS user account does not have permission to perform the action. Check
-//   the IAM policy associated with this account.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters are not valid. Verify the parameters and try again.
+//   - AuthorizationErrorException
+//     The user does not have permission to perform the action. Check the IAM policy
+//     associated with this user.
 //
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   The value of one or more parameters are either invalid or out of range. Verify
-//   the parameter values and try again.
+//   - InvalidParameterException
+//     One or more parameters are not valid. Verify the parameters and try again.
 //
-//   * ErrCodeServerInternalErrorException "ServerInternalErrorException"
-//   The server experienced an internal error. Try again.
+//   - InvalidParameterValueException
+//     The value of one or more parameters are either invalid or out of range. Verify
+//     the parameter values and try again.
+//
+//   - ServerInternalErrorException
+//     The server experienced an internal error. Try again.
+//
+//   - HomeRegionNotSetException
+//     The home Region is not set. Set the home Region to continue.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/UpdateApplication
 func (c *ApplicationDiscoveryService) UpdateApplication(input *UpdateApplicationInput) (*UpdateApplicationOutput, error) {
@@ -2556,30 +3231,38 @@ func (c *ApplicationDiscoveryService) UpdateApplicationWithContext(ctx aws.Conte
 	return out, req.Send()
 }
 
-// Information about agents or connectors that were instructed to start collecting
-// data. Information includes the agent/connector ID, a description of the operation,
-// and whether the agent/connector configuration was updated.
+// Information about agents that were instructed to start collecting data. Information
+// includes the agent ID, a description of the operation, and whether the agent
+// configuration was updated.
 type AgentConfigurationStatus struct {
 	_ struct{} `type:"structure"`
 
-	// The agent/connector ID.
+	// The agent ID.
 	AgentId *string `locationName:"agentId" type:"string"`
 
 	// A description of the operation performed.
 	Description *string `locationName:"description" type:"string"`
 
 	// Information about the status of the StartDataCollection and StopDataCollection
-	// operations. The system has recorded the data collection operation. The agent/connector
+	// operations. The system has recorded the data collection operation. The agent
 	// receives this command the next time it polls for a new command.
 	OperationSucceeded *bool `locationName:"operationSucceeded" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentConfigurationStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentConfigurationStatus) GoString() string {
 	return s.String()
 }
@@ -2602,51 +3285,59 @@ func (s *AgentConfigurationStatus) SetOperationSucceeded(v bool) *AgentConfigura
 	return s
 }
 
-// Information about agents or connectors associated with the user’s AWS account.
-// Information includes agent or connector IDs, IP addresses, media access control
-// (MAC) addresses, agent or connector health, hostname where the agent or connector
-// resides, and agent version for each agent.
+// Information about agents associated with the user’s Amazon Web Services
+// account. Information includes agent IDs, IP addresses, media access control
+// (MAC) addresses, agent or collector status, hostname where the agent resides,
+// and agent version for each agent.
 type AgentInfo struct {
 	_ struct{} `type:"structure"`
 
-	// The agent or connector ID.
-	AgentId *string `locationName:"agentId" type:"string"`
+	// The agent or collector ID.
+	AgentId *string `locationName:"agentId" min:"10" type:"string"`
 
-	// Network details about the host where the agent or connector resides.
+	// Network details about the host where the agent or collector resides.
 	AgentNetworkInfoList []*AgentNetworkInfo `locationName:"agentNetworkInfoList" type:"list"`
 
 	// Type of agent.
 	AgentType *string `locationName:"agentType" type:"string"`
 
-	// Status of the collection process for an agent or connector.
+	// Status of the collection process for an agent.
 	CollectionStatus *string `locationName:"collectionStatus" type:"string"`
 
 	// The ID of the connector.
 	ConnectorId *string `locationName:"connectorId" type:"string"`
 
-	// The health of the agent or connector.
+	// The health of the agent.
 	Health *string `locationName:"health" type:"string" enum:"AgentStatus"`
 
-	// The name of the host where the agent or connector resides. The host can be
+	// The name of the host where the agent or collector resides. The host can be
 	// a server or virtual machine.
 	HostName *string `locationName:"hostName" type:"string"`
 
-	// Time since agent or connector health was reported.
+	// Time since agent health was reported.
 	LastHealthPingTime *string `locationName:"lastHealthPingTime" type:"string"`
 
 	// Agent's first registration timestamp in UTC.
 	RegisteredTime *string `locationName:"registeredTime" type:"string"`
 
-	// The agent or connector version.
+	// The agent or collector version.
 	Version *string `locationName:"version" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentInfo) GoString() string {
 	return s.String()
 }
@@ -2711,23 +3402,31 @@ func (s *AgentInfo) SetVersion(v string) *AgentInfo {
 	return s
 }
 
-// Network details about the host where the agent/connector resides.
+// Network details about the host where the agent/collector resides.
 type AgentNetworkInfo struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
-	// The IP address for the host where the agent/connector resides.
+	// The IP address for the host where the agent/collector resides.
 	IpAddress *string `locationName:"ipAddress" type:"string"`
 
-	// The MAC address for the host where the agent/connector resides.
+	// The MAC address for the host where the agent/collector resides.
 	MacAddress *string `locationName:"macAddress" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentNetworkInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentNetworkInfo) GoString() string {
 	return s.String()
 }
@@ -2758,12 +3457,20 @@ type AssociateConfigurationItemsToApplicationInput struct {
 	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateConfigurationItemsToApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateConfigurationItemsToApplicationInput) GoString() string {
 	return s.String()
 }
@@ -2800,14 +3507,346 @@ type AssociateConfigurationItemsToApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateConfigurationItemsToApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateConfigurationItemsToApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// The user does not have permission to perform the action. Check the IAM policy
+// associated with this user.
+type AuthorizationErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AuthorizationErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AuthorizationErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorAuthorizationErrorException(v protocol.ResponseMetadata) error {
+	return &AuthorizationErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AuthorizationErrorException) Code() string {
+	return "AuthorizationErrorException"
+}
+
+// Message returns the exception's message.
+func (s *AuthorizationErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AuthorizationErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *AuthorizationErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AuthorizationErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AuthorizationErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An object representing the agent or data collector that failed to delete,
+// each containing agentId, errorMessage, and errorCode.
+type BatchDeleteAgentError struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the agent or data collector to delete.
+	//
+	// AgentId is a required field
+	AgentId *string `locationName:"agentId" min:"10" type:"string" required:"true"`
+
+	// The type of error that occurred for the delete failed agent. Valid status
+	// are: AGENT_IN_USE | NOT_FOUND | INTERNAL_SERVER_ERROR.
+	//
+	// ErrorCode is a required field
+	ErrorCode *string `locationName:"errorCode" type:"string" required:"true" enum:"DeleteAgentErrorCode"`
+
+	// The description of the error that occurred for the delete failed agent.
+	//
+	// ErrorMessage is a required field
+	ErrorMessage *string `locationName:"errorMessage" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchDeleteAgentError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchDeleteAgentError) GoString() string {
+	return s.String()
+}
+
+// SetAgentId sets the AgentId field's value.
+func (s *BatchDeleteAgentError) SetAgentId(v string) *BatchDeleteAgentError {
+	s.AgentId = &v
+	return s
+}
+
+// SetErrorCode sets the ErrorCode field's value.
+func (s *BatchDeleteAgentError) SetErrorCode(v string) *BatchDeleteAgentError {
+	s.ErrorCode = &v
+	return s
+}
+
+// SetErrorMessage sets the ErrorMessage field's value.
+func (s *BatchDeleteAgentError) SetErrorMessage(v string) *BatchDeleteAgentError {
+	s.ErrorMessage = &v
+	return s
+}
+
+type BatchDeleteAgentsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The list of agents to delete.
+	//
+	// DeleteAgents is a required field
+	DeleteAgents []*DeleteAgent `locationName:"deleteAgents" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchDeleteAgentsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchDeleteAgentsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchDeleteAgentsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "BatchDeleteAgentsInput"}
+	if s.DeleteAgents == nil {
+		invalidParams.Add(request.NewErrParamRequired("DeleteAgents"))
+	}
+	if s.DeleteAgents != nil && len(s.DeleteAgents) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("DeleteAgents", 1))
+	}
+	if s.DeleteAgents != nil {
+		for i, v := range s.DeleteAgents {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DeleteAgents", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDeleteAgents sets the DeleteAgents field's value.
+func (s *BatchDeleteAgentsInput) SetDeleteAgents(v []*DeleteAgent) *BatchDeleteAgentsInput {
+	s.DeleteAgents = v
+	return s
+}
+
+type BatchDeleteAgentsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of agent IDs that failed to delete during the deletion task, each
+	// paired with an error message.
+	Errors []*BatchDeleteAgentError `locationName:"errors" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchDeleteAgentsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchDeleteAgentsOutput) GoString() string {
+	return s.String()
+}
+
+// SetErrors sets the Errors field's value.
+func (s *BatchDeleteAgentsOutput) SetErrors(v []*BatchDeleteAgentError) *BatchDeleteAgentsOutput {
+	s.Errors = v
+	return s
+}
+
+// A metadata object that represents the deletion task being executed.
+type BatchDeleteConfigurationTask struct {
+	_ struct{} `type:"structure"`
+
+	// The type of configuration item to delete. Supported types are: SERVER.
+	ConfigurationType *string `locationName:"configurationType" type:"string" enum:"DeletionConfigurationItemType"`
+
+	// The list of configuration IDs that were successfully deleted by the deletion
+	// task.
+	DeletedConfigurations []*string `locationName:"deletedConfigurations" type:"list"`
+
+	// A list of configuration IDs that produced warnings regarding their deletion,
+	// paired with a warning message.
+	DeletionWarnings []*DeletionWarning `locationName:"deletionWarnings" type:"list"`
+
+	// An epoch seconds timestamp (UTC) of when the deletion task was completed
+	// or failed.
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
+
+	// A list of configuration IDs that failed to delete during the deletion task,
+	// each paired with an error message.
+	FailedConfigurations []*FailedConfiguration `locationName:"failedConfigurations" type:"list"`
+
+	// The list of configuration IDs that were originally requested to be deleted
+	// by the deletion task.
+	RequestedConfigurations []*string `locationName:"requestedConfigurations" type:"list"`
+
+	// An epoch seconds timestamp (UTC) of when the deletion task was started.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
+
+	// The current execution status of the deletion task. Valid status are: INITIALIZING
+	// | VALIDATING | DELETING | COMPLETED | FAILED.
+	Status *string `locationName:"status" type:"string" enum:"BatchDeleteConfigurationTaskStatus"`
+
+	// The deletion task's unique identifier.
+	TaskId *string `locationName:"taskId" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchDeleteConfigurationTask) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchDeleteConfigurationTask) GoString() string {
+	return s.String()
+}
+
+// SetConfigurationType sets the ConfigurationType field's value.
+func (s *BatchDeleteConfigurationTask) SetConfigurationType(v string) *BatchDeleteConfigurationTask {
+	s.ConfigurationType = &v
+	return s
+}
+
+// SetDeletedConfigurations sets the DeletedConfigurations field's value.
+func (s *BatchDeleteConfigurationTask) SetDeletedConfigurations(v []*string) *BatchDeleteConfigurationTask {
+	s.DeletedConfigurations = v
+	return s
+}
+
+// SetDeletionWarnings sets the DeletionWarnings field's value.
+func (s *BatchDeleteConfigurationTask) SetDeletionWarnings(v []*DeletionWarning) *BatchDeleteConfigurationTask {
+	s.DeletionWarnings = v
+	return s
+}
+
+// SetEndTime sets the EndTime field's value.
+func (s *BatchDeleteConfigurationTask) SetEndTime(v time.Time) *BatchDeleteConfigurationTask {
+	s.EndTime = &v
+	return s
+}
+
+// SetFailedConfigurations sets the FailedConfigurations field's value.
+func (s *BatchDeleteConfigurationTask) SetFailedConfigurations(v []*FailedConfiguration) *BatchDeleteConfigurationTask {
+	s.FailedConfigurations = v
+	return s
+}
+
+// SetRequestedConfigurations sets the RequestedConfigurations field's value.
+func (s *BatchDeleteConfigurationTask) SetRequestedConfigurations(v []*string) *BatchDeleteConfigurationTask {
+	s.RequestedConfigurations = v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *BatchDeleteConfigurationTask) SetStartTime(v time.Time) *BatchDeleteConfigurationTask {
+	s.StartTime = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *BatchDeleteConfigurationTask) SetStatus(v string) *BatchDeleteConfigurationTask {
+	s.Status = &v
+	return s
+}
+
+// SetTaskId sets the TaskId field's value.
+func (s *BatchDeleteConfigurationTask) SetTaskId(v string) *BatchDeleteConfigurationTask {
+	s.TaskId = &v
+	return s
 }
 
 // Error messages returned for each import task that you deleted as a response
@@ -2825,12 +3864,20 @@ type BatchDeleteImportDataError struct {
 	ImportTaskId *string `locationName:"importTaskId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteImportDataError) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteImportDataError) GoString() string {
 	return s.String()
 }
@@ -2856,18 +3903,29 @@ func (s *BatchDeleteImportDataError) SetImportTaskId(v string) *BatchDeleteImpor
 type BatchDeleteImportDataInput struct {
 	_ struct{} `type:"structure"`
 
+	// Set to true to remove the deleted import task from DescribeImportTasks.
+	DeleteHistory *bool `locationName:"deleteHistory" type:"boolean"`
+
 	// The IDs for the import tasks that you want to delete.
 	//
 	// ImportTaskIds is a required field
 	ImportTaskIds []*string `locationName:"importTaskIds" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteImportDataInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteImportDataInput) GoString() string {
 	return s.String()
 }
@@ -2888,6 +3946,12 @@ func (s *BatchDeleteImportDataInput) Validate() error {
 	return nil
 }
 
+// SetDeleteHistory sets the DeleteHistory field's value.
+func (s *BatchDeleteImportDataInput) SetDeleteHistory(v bool) *BatchDeleteImportDataInput {
+	s.DeleteHistory = &v
+	return s
+}
+
 // SetImportTaskIds sets the ImportTaskIds field's value.
 func (s *BatchDeleteImportDataInput) SetImportTaskIds(v []*string) *BatchDeleteImportDataInput {
 	s.ImportTaskIds = v
@@ -2902,12 +3966,20 @@ type BatchDeleteImportDataOutput struct {
 	Errors []*BatchDeleteImportDataError `locationName:"errors" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteImportDataOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteImportDataOutput) GoString() string {
 	return s.String()
 }
@@ -2942,12 +4014,20 @@ type ConfigurationTag struct {
 	Value *string `locationName:"value" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConfigurationTag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ConfigurationTag) GoString() string {
 	return s.String()
 }
@@ -2980,6 +4060,70 @@ func (s *ConfigurationTag) SetTimeOfCreation(v time.Time) *ConfigurationTag {
 func (s *ConfigurationTag) SetValue(v string) *ConfigurationTag {
 	s.Value = &v
 	return s
+}
+
+// Conflict error.
+type ConflictErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConflictErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConflictErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorConflictErrorException(v protocol.ResponseMetadata) error {
+	return &ConflictErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConflictErrorException) Code() string {
+	return "ConflictErrorException"
+}
+
+// Message returns the exception's message.
+func (s *ConflictErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConflictErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *ConflictErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConflictErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConflictErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // A list of continuous export descriptions.
@@ -3029,8 +4173,9 @@ type ContinuousExportDescription struct {
 	// can have the following values:
 	//
 	//    * ACCESS_DENIED - You don’t have permission to start Data Exploration
-	//    in Amazon Athena. Contact your AWS administrator for help. For more information,
-	//    see Setting Up AWS Application Discovery Service (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html)
+	//    in Amazon Athena. Contact your Amazon Web Services administrator for help.
+	//    For more information, see Setting Up Amazon Web Services Application Discovery
+	//    Service (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html)
 	//    in the Application Discovery Service User Guide.
 	//
 	//    * DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis
@@ -3040,24 +4185,44 @@ type ContinuousExportDescription struct {
 	//    in the Amazon Kinesis Data Streams Developer Guide.
 	//
 	//    * FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an error
-	//    state because your IAM User is missing the AWSApplicationDiscoveryServiceFirehose
+	//    state because your user is missing the Amazon Web ServicesApplicationDiscoveryServiceFirehose
 	//    role. Turn on Data Exploration in Amazon Athena and try again. For more
-	//    information, see Step 3: Provide Application Discovery Service Access
-	//    to Non-Administrator Users by Attaching Policies (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy)
+	//    information, see Creating the Amazon Web ServicesApplicationDiscoveryServiceFirehose
+	//    Role (https://docs.aws.amazon.com/application-discovery/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-create-firehose-role)
 	//    in the Application Discovery Service User Guide.
 	//
 	//    * FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in
-	//    an error state because your IAM User is missing one or more of the Kinesis
+	//    an error state because your user is missing one or more of the Kinesis
 	//    data delivery streams.
 	//
 	//    * INTERNAL_FAILURE - The Data Exploration feature is in an error state
 	//    because of an internal failure. Try again later. If this problem persists,
-	//    contact AWS Support.
+	//    contact Amazon Web Services Support.
+	//
+	//    * LAKE_FORMATION_ACCESS_DENIED - You don't have sufficient lake formation
+	//    permissions to start continuous export. For more information, see Upgrading
+	//    Amazon Web Services Glue Data Permissions to the Amazon Web Services Lake
+	//    Formation Model (http://docs.aws.amazon.com/lake-formation/latest/dg/upgrade-glue-lake-formation.html)
+	//    in the Amazon Web Services Lake Formation Developer Guide. You can use
+	//    one of the following two ways to resolve this issue. If you don’t want
+	//    to use the Lake Formation permission model, you can change the default
+	//    Data Catalog settings to use only Amazon Web Services Identity and Access
+	//    Management (IAM) access control for new databases. For more information,
+	//    see Change Data Catalog Settings (https://docs.aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#setup-change-cat-settings)
+	//    in the Lake Formation Developer Guide. You can give the service-linked
+	//    IAM roles AWSServiceRoleForApplicationDiscoveryServiceContinuousExport
+	//    and AWSApplicationDiscoveryServiceFirehose the required Lake Formation
+	//    permissions. For more information, see Granting Database Permissions (https://docs.aws.amazon.com/lake-formation/latest/dg/granting-database-permissions.html)
+	//    in the Lake Formation Developer Guide. AWSServiceRoleForApplicationDiscoveryServiceContinuousExport
+	//    - Grant database creator permissions, which gives the role database creation
+	//    ability and implicit permissions for any created tables. For more information,
+	//    see Implicit Lake Formation Permissions (https://docs.aws.amazon.com/lake-formation/latest/dg/implicit-permissions.html)
+	//    in the Lake Formation Developer Guide. AWSApplicationDiscoveryServiceFirehose
+	//    - Grant describe permissions for all tables in the database.
 	//
 	//    * S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets.
-	//    Reduce the number of Amazon S3 buckets or request a limit increase and
-	//    try again. For more information, see Bucket Restrictions and Limitations
-	//    (http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
+	//    Reduce the number of S3 buckets or request a limit increase and try again.
+	//    For more information, see Bucket Restrictions and Limitations (http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
 	//    in the Amazon Simple Storage Service Developer Guide.
 	//
 	//    * S3_NOT_SIGNED_UP - Your account is not signed up for the Amazon S3 service.
@@ -3069,12 +4234,20 @@ type ContinuousExportDescription struct {
 	StopTime *time.Time `locationName:"stopTime" type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinuousExportDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinuousExportDescription) GoString() string {
 	return s.String()
 }
@@ -3139,12 +4312,20 @@ type CreateApplicationInput struct {
 	Name *string `locationName:"name" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationInput) GoString() string {
 	return s.String()
 }
@@ -3181,12 +4362,20 @@ type CreateApplicationOutput struct {
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -3214,12 +4403,20 @@ type CreateTagsInput struct {
 	Tags []*Tag `locationName:"tags" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTagsInput) GoString() string {
 	return s.String()
 }
@@ -3266,12 +4463,20 @@ type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTagsOutput) GoString() string {
 	return s.String()
 }
@@ -3316,12 +4521,20 @@ type CustomerAgentInfo struct {
 	UnknownAgents *int64 `locationName:"unknownAgents" type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CustomerAgentInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CustomerAgentInfo) GoString() string {
 	return s.String()
 }
@@ -3368,6 +4581,106 @@ func (s *CustomerAgentInfo) SetUnknownAgents(v int64) *CustomerAgentInfo {
 	return s
 }
 
+// The inventory data for installed Agentless Collector collectors.
+type CustomerAgentlessCollectorInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The number of active Agentless Collector collectors.
+	//
+	// ActiveAgentlessCollectors is a required field
+	ActiveAgentlessCollectors *int64 `locationName:"activeAgentlessCollectors" type:"integer" required:"true"`
+
+	// The number of deny-listed Agentless Collector collectors.
+	//
+	// DenyListedAgentlessCollectors is a required field
+	DenyListedAgentlessCollectors *int64 `locationName:"denyListedAgentlessCollectors" type:"integer" required:"true"`
+
+	// The number of healthy Agentless Collector collectors.
+	//
+	// HealthyAgentlessCollectors is a required field
+	HealthyAgentlessCollectors *int64 `locationName:"healthyAgentlessCollectors" type:"integer" required:"true"`
+
+	// The number of Agentless Collector collectors with SHUTDOWN status.
+	//
+	// ShutdownAgentlessCollectors is a required field
+	ShutdownAgentlessCollectors *int64 `locationName:"shutdownAgentlessCollectors" type:"integer" required:"true"`
+
+	// The total number of Agentless Collector collectors.
+	//
+	// TotalAgentlessCollectors is a required field
+	TotalAgentlessCollectors *int64 `locationName:"totalAgentlessCollectors" type:"integer" required:"true"`
+
+	// The number of unhealthy Agentless Collector collectors.
+	//
+	// UnhealthyAgentlessCollectors is a required field
+	UnhealthyAgentlessCollectors *int64 `locationName:"unhealthyAgentlessCollectors" type:"integer" required:"true"`
+
+	// The number of unknown Agentless Collector collectors.
+	//
+	// UnknownAgentlessCollectors is a required field
+	UnknownAgentlessCollectors *int64 `locationName:"unknownAgentlessCollectors" type:"integer" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomerAgentlessCollectorInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomerAgentlessCollectorInfo) GoString() string {
+	return s.String()
+}
+
+// SetActiveAgentlessCollectors sets the ActiveAgentlessCollectors field's value.
+func (s *CustomerAgentlessCollectorInfo) SetActiveAgentlessCollectors(v int64) *CustomerAgentlessCollectorInfo {
+	s.ActiveAgentlessCollectors = &v
+	return s
+}
+
+// SetDenyListedAgentlessCollectors sets the DenyListedAgentlessCollectors field's value.
+func (s *CustomerAgentlessCollectorInfo) SetDenyListedAgentlessCollectors(v int64) *CustomerAgentlessCollectorInfo {
+	s.DenyListedAgentlessCollectors = &v
+	return s
+}
+
+// SetHealthyAgentlessCollectors sets the HealthyAgentlessCollectors field's value.
+func (s *CustomerAgentlessCollectorInfo) SetHealthyAgentlessCollectors(v int64) *CustomerAgentlessCollectorInfo {
+	s.HealthyAgentlessCollectors = &v
+	return s
+}
+
+// SetShutdownAgentlessCollectors sets the ShutdownAgentlessCollectors field's value.
+func (s *CustomerAgentlessCollectorInfo) SetShutdownAgentlessCollectors(v int64) *CustomerAgentlessCollectorInfo {
+	s.ShutdownAgentlessCollectors = &v
+	return s
+}
+
+// SetTotalAgentlessCollectors sets the TotalAgentlessCollectors field's value.
+func (s *CustomerAgentlessCollectorInfo) SetTotalAgentlessCollectors(v int64) *CustomerAgentlessCollectorInfo {
+	s.TotalAgentlessCollectors = &v
+	return s
+}
+
+// SetUnhealthyAgentlessCollectors sets the UnhealthyAgentlessCollectors field's value.
+func (s *CustomerAgentlessCollectorInfo) SetUnhealthyAgentlessCollectors(v int64) *CustomerAgentlessCollectorInfo {
+	s.UnhealthyAgentlessCollectors = &v
+	return s
+}
+
+// SetUnknownAgentlessCollectors sets the UnknownAgentlessCollectors field's value.
+func (s *CustomerAgentlessCollectorInfo) SetUnknownAgentlessCollectors(v int64) *CustomerAgentlessCollectorInfo {
+	s.UnknownAgentlessCollectors = &v
+	return s
+}
+
 // Inventory data for installed discovery connectors.
 type CustomerConnectorInfo struct {
 	_ struct{} `type:"structure"`
@@ -3408,12 +4721,20 @@ type CustomerConnectorInfo struct {
 	UnknownConnectors *int64 `locationName:"unknownConnectors" type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CustomerConnectorInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CustomerConnectorInfo) GoString() string {
 	return s.String()
 }
@@ -3460,6 +4781,170 @@ func (s *CustomerConnectorInfo) SetUnknownConnectors(v int64) *CustomerConnector
 	return s
 }
 
+// The inventory data for installed Migration Evaluator collectors.
+type CustomerMeCollectorInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The number of active Migration Evaluator collectors.
+	//
+	// ActiveMeCollectors is a required field
+	ActiveMeCollectors *int64 `locationName:"activeMeCollectors" type:"integer" required:"true"`
+
+	// The number of deny-listed Migration Evaluator collectors.
+	//
+	// DenyListedMeCollectors is a required field
+	DenyListedMeCollectors *int64 `locationName:"denyListedMeCollectors" type:"integer" required:"true"`
+
+	// The number of healthy Migration Evaluator collectors.
+	//
+	// HealthyMeCollectors is a required field
+	HealthyMeCollectors *int64 `locationName:"healthyMeCollectors" type:"integer" required:"true"`
+
+	// The number of Migration Evaluator collectors with SHUTDOWN status.
+	//
+	// ShutdownMeCollectors is a required field
+	ShutdownMeCollectors *int64 `locationName:"shutdownMeCollectors" type:"integer" required:"true"`
+
+	// The total number of Migration Evaluator collectors.
+	//
+	// TotalMeCollectors is a required field
+	TotalMeCollectors *int64 `locationName:"totalMeCollectors" type:"integer" required:"true"`
+
+	// The number of unhealthy Migration Evaluator collectors.
+	//
+	// UnhealthyMeCollectors is a required field
+	UnhealthyMeCollectors *int64 `locationName:"unhealthyMeCollectors" type:"integer" required:"true"`
+
+	// The number of unknown Migration Evaluator collectors.
+	//
+	// UnknownMeCollectors is a required field
+	UnknownMeCollectors *int64 `locationName:"unknownMeCollectors" type:"integer" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomerMeCollectorInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CustomerMeCollectorInfo) GoString() string {
+	return s.String()
+}
+
+// SetActiveMeCollectors sets the ActiveMeCollectors field's value.
+func (s *CustomerMeCollectorInfo) SetActiveMeCollectors(v int64) *CustomerMeCollectorInfo {
+	s.ActiveMeCollectors = &v
+	return s
+}
+
+// SetDenyListedMeCollectors sets the DenyListedMeCollectors field's value.
+func (s *CustomerMeCollectorInfo) SetDenyListedMeCollectors(v int64) *CustomerMeCollectorInfo {
+	s.DenyListedMeCollectors = &v
+	return s
+}
+
+// SetHealthyMeCollectors sets the HealthyMeCollectors field's value.
+func (s *CustomerMeCollectorInfo) SetHealthyMeCollectors(v int64) *CustomerMeCollectorInfo {
+	s.HealthyMeCollectors = &v
+	return s
+}
+
+// SetShutdownMeCollectors sets the ShutdownMeCollectors field's value.
+func (s *CustomerMeCollectorInfo) SetShutdownMeCollectors(v int64) *CustomerMeCollectorInfo {
+	s.ShutdownMeCollectors = &v
+	return s
+}
+
+// SetTotalMeCollectors sets the TotalMeCollectors field's value.
+func (s *CustomerMeCollectorInfo) SetTotalMeCollectors(v int64) *CustomerMeCollectorInfo {
+	s.TotalMeCollectors = &v
+	return s
+}
+
+// SetUnhealthyMeCollectors sets the UnhealthyMeCollectors field's value.
+func (s *CustomerMeCollectorInfo) SetUnhealthyMeCollectors(v int64) *CustomerMeCollectorInfo {
+	s.UnhealthyMeCollectors = &v
+	return s
+}
+
+// SetUnknownMeCollectors sets the UnknownMeCollectors field's value.
+func (s *CustomerMeCollectorInfo) SetUnknownMeCollectors(v int64) *CustomerMeCollectorInfo {
+	s.UnknownMeCollectors = &v
+	return s
+}
+
+// An object representing the agent or data collector to be deleted along with
+// the optional configurations for error handling.
+type DeleteAgent struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the agent or data collector to delete.
+	//
+	// AgentId is a required field
+	AgentId *string `locationName:"agentId" min:"10" type:"string" required:"true"`
+
+	// Optional flag used to force delete an agent or data collector. It is needed
+	// to delete any agent in HEALTHY/UNHEALTHY/RUNNING status. Note that deleting
+	// an agent that is actively reporting health causes it to be re-registered
+	// with a different agent ID after data collector re-connects with Amazon Web
+	// Services.
+	Force *bool `locationName:"force" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteAgent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteAgent) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteAgent) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteAgent"}
+	if s.AgentId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AgentId"))
+	}
+	if s.AgentId != nil && len(*s.AgentId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("AgentId", 10))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAgentId sets the AgentId field's value.
+func (s *DeleteAgent) SetAgentId(v string) *DeleteAgent {
+	s.AgentId = &v
+	return s
+}
+
+// SetForce sets the Force field's value.
+func (s *DeleteAgent) SetForce(v bool) *DeleteAgent {
+	s.Force = &v
+	return s
+}
+
 type DeleteApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3469,12 +4954,20 @@ type DeleteApplicationsInput struct {
 	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationsInput) GoString() string {
 	return s.String()
 }
@@ -3502,12 +4995,20 @@ type DeleteApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationsOutput) GoString() string {
 	return s.String()
 }
@@ -3527,12 +5028,20 @@ type DeleteTagsInput struct {
 	Tags []*Tag `locationName:"tags" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsInput) GoString() string {
 	return s.String()
 }
@@ -3576,22 +5085,80 @@ type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsOutput) GoString() string {
 	return s.String()
+}
+
+// A configuration ID paired with a warning message.
+type DeletionWarning struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier of the configuration that produced a warning.
+	ConfigurationId *string `locationName:"configurationId" type:"string"`
+
+	// The integer warning code associated with the warning message.
+	WarningCode *int64 `locationName:"warningCode" type:"integer"`
+
+	// A descriptive message of the warning the associated configuration ID produced.
+	WarningText *string `locationName:"warningText" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeletionWarning) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeletionWarning) GoString() string {
+	return s.String()
+}
+
+// SetConfigurationId sets the ConfigurationId field's value.
+func (s *DeletionWarning) SetConfigurationId(v string) *DeletionWarning {
+	s.ConfigurationId = &v
+	return s
+}
+
+// SetWarningCode sets the WarningCode field's value.
+func (s *DeletionWarning) SetWarningCode(v int64) *DeletionWarning {
+	s.WarningCode = &v
+	return s
+}
+
+// SetWarningText sets the WarningText field's value.
+func (s *DeletionWarning) SetWarningText(v string) *DeletionWarning {
+	s.WarningText = &v
+	return s
 }
 
 type DescribeAgentsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The agent or the Connector IDs for which you want information. If you specify
-	// no IDs, the system returns information about all agents/Connectors associated
-	// with your AWS user account.
+	// The agent or the collector IDs for which you want information. If you specify
+	// no IDs, the system returns information about all agents/collectors associated
+	// with your user.
 	AgentIds []*string `locationName:"agentIds" type:"list"`
 
 	// You can filter the request using various logical operators and a key-value
@@ -3600,7 +5167,7 @@ type DescribeAgentsInput struct {
 	// {"key": "collectionStatus", "value": "STARTED"}
 	Filters []*Filter `locationName:"filters" type:"list"`
 
-	// The total number of agents/Connectors to return in a single page of output.
+	// The total number of agents/collectors to return in a single page of output.
 	// The maximum value is 100.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
@@ -3611,12 +5178,20 @@ type DescribeAgentsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAgentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAgentsInput) GoString() string {
 	return s.String()
 }
@@ -3668,11 +5243,11 @@ func (s *DescribeAgentsInput) SetNextToken(v string) *DescribeAgentsInput {
 type DescribeAgentsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Lists agents or the Connector by ID or lists all agents/Connectors associated
-	// with your user account if you did not specify an agent/Connector ID. The
-	// output includes agent/Connector IDs, IP addresses, media access control (MAC)
-	// addresses, agent/Connector health, host name where the agent/Connector resides,
-	// and the version number of each agent/Connector.
+	// Lists agents or the collector by ID or lists all agents/collectors associated
+	// with your user, if you did not specify an agent/collector ID. The output
+	// includes agent/collector IDs, IP addresses, media access control (MAC) addresses,
+	// agent/collector health, host name where the agent/collector resides, and
+	// the version number of each agent/collector.
 	AgentsInfo []*AgentInfo `locationName:"agentsInfo" type:"list"`
 
 	// Token to retrieve the next set of results. For example, if you specified
@@ -3682,12 +5257,20 @@ type DescribeAgentsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAgentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAgentsOutput) GoString() string {
 	return s.String()
 }
@@ -3704,6 +5287,84 @@ func (s *DescribeAgentsOutput) SetNextToken(v string) *DescribeAgentsOutput {
 	return s
 }
 
+type DescribeBatchDeleteConfigurationTaskInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the task to delete.
+	//
+	// TaskId is a required field
+	TaskId *string `locationName:"taskId" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBatchDeleteConfigurationTaskInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBatchDeleteConfigurationTaskInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBatchDeleteConfigurationTaskInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeBatchDeleteConfigurationTaskInput"}
+	if s.TaskId == nil {
+		invalidParams.Add(request.NewErrParamRequired("TaskId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetTaskId sets the TaskId field's value.
+func (s *DescribeBatchDeleteConfigurationTaskInput) SetTaskId(v string) *DescribeBatchDeleteConfigurationTaskInput {
+	s.TaskId = &v
+	return s
+}
+
+type DescribeBatchDeleteConfigurationTaskOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The BatchDeleteConfigurationTask that represents the deletion task being
+	// executed.
+	Task *BatchDeleteConfigurationTask `locationName:"task" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBatchDeleteConfigurationTaskOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBatchDeleteConfigurationTaskOutput) GoString() string {
+	return s.String()
+}
+
+// SetTask sets the Task field's value.
+func (s *DescribeBatchDeleteConfigurationTaskOutput) SetTask(v *BatchDeleteConfigurationTask) *DescribeBatchDeleteConfigurationTaskOutput {
+	s.Task = v
+	return s
+}
+
 type DescribeConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3713,12 +5374,20 @@ type DescribeConfigurationsInput struct {
 	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeConfigurationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeConfigurationsInput) GoString() string {
 	return s.String()
 }
@@ -3749,12 +5418,20 @@ type DescribeConfigurationsOutput struct {
 	Configurations []map[string]*string `locationName:"configurations" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeConfigurationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeConfigurationsOutput) GoString() string {
 	return s.String()
 }
@@ -3779,12 +5456,20 @@ type DescribeContinuousExportsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeContinuousExportsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeContinuousExportsInput) GoString() string {
 	return s.String()
 }
@@ -3830,12 +5515,20 @@ type DescribeContinuousExportsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeContinuousExportsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeContinuousExportsOutput) GoString() string {
 	return s.String()
 }
@@ -3855,7 +5548,7 @@ func (s *DescribeContinuousExportsOutput) SetNextToken(v string) *DescribeContin
 type DescribeExportConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of continuous export ids to search for.
+	// A list of continuous export IDs to search for.
 	ExportIds []*string `locationName:"exportIds" type:"list"`
 
 	// A number between 1 and 100 specifying the maximum number of continuous export
@@ -3866,12 +5559,20 @@ type DescribeExportConfigurationsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExportConfigurationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExportConfigurationsInput) GoString() string {
 	return s.String()
 }
@@ -3903,12 +5604,20 @@ type DescribeExportConfigurationsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExportConfigurationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExportConfigurationsOutput) GoString() string {
 	return s.String()
 }
@@ -3949,12 +5658,20 @@ type DescribeExportTasksInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExportTasksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExportTasksInput) GoString() string {
 	return s.String()
 }
@@ -4018,12 +5735,20 @@ type DescribeExportTasksOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExportTasksOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExportTasksOutput) GoString() string {
 	return s.String()
 }
@@ -4056,12 +5781,20 @@ type DescribeImportTasksInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeImportTasksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeImportTasksInput) GoString() string {
 	return s.String()
 }
@@ -4118,12 +5851,20 @@ type DescribeImportTasksOutput struct {
 	Tasks []*ImportTask `locationName:"tasks" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeImportTasksOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeImportTasksOutput) GoString() string {
 	return s.String()
 }
@@ -4156,12 +5897,20 @@ type DescribeTagsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsInput) GoString() string {
 	return s.String()
 }
@@ -4215,12 +5964,20 @@ type DescribeTagsOutput struct {
 	Tags []*ConfigurationTag `locationName:"tags" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
 }
@@ -4251,12 +6008,20 @@ type DisassociateConfigurationItemsFromApplicationInput struct {
 	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateConfigurationItemsFromApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateConfigurationItemsFromApplicationInput) GoString() string {
 	return s.String()
 }
@@ -4293,26 +6058,155 @@ type DisassociateConfigurationItemsFromApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateConfigurationItemsFromApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateConfigurationItemsFromApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// Indicates that the exported data must include EC2 instance type matches for
+// on-premises servers that are discovered through Amazon Web Services Application
+// Discovery Service.
+type Ec2RecommendationsExportPreferences struct {
+	_ struct{} `type:"structure"`
+
+	// The recommended EC2 instance type that matches the CPU usage metric of server
+	// performance data.
+	CpuPerformanceMetricBasis *UsageMetricBasis `locationName:"cpuPerformanceMetricBasis" type:"structure"`
+
+	// If set to true, the export preferences (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html#API_StartExportTask_RequestSyntax)
+	// is set to Ec2RecommendationsExportPreferences.
+	Enabled *bool `locationName:"enabled" type:"boolean"`
+
+	// An array of instance types to exclude from recommendations.
+	ExcludedInstanceTypes []*string `locationName:"excludedInstanceTypes" type:"list"`
+
+	// The target Amazon Web Services Region for the recommendations. You can use
+	// any of the Region codes available for the chosen service, as listed in Amazon
+	// Web Services service endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
+	// in the Amazon Web Services General Reference.
+	PreferredRegion *string `locationName:"preferredRegion" min:"1" type:"string"`
+
+	// The recommended EC2 instance type that matches the Memory usage metric of
+	// server performance data.
+	RamPerformanceMetricBasis *UsageMetricBasis `locationName:"ramPerformanceMetricBasis" type:"structure"`
+
+	// The contract type for a reserved instance. If blank, we assume an On-Demand
+	// instance is preferred.
+	ReservedInstanceOptions *ReservedInstanceOptions `locationName:"reservedInstanceOptions" type:"structure"`
+
+	// The target tenancy to use for your recommended EC2 instances.
+	Tenancy *string `locationName:"tenancy" type:"string" enum:"Tenancy"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Ec2RecommendationsExportPreferences) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Ec2RecommendationsExportPreferences) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Ec2RecommendationsExportPreferences) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Ec2RecommendationsExportPreferences"}
+	if s.PreferredRegion != nil && len(*s.PreferredRegion) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("PreferredRegion", 1))
+	}
+	if s.ReservedInstanceOptions != nil {
+		if err := s.ReservedInstanceOptions.Validate(); err != nil {
+			invalidParams.AddNested("ReservedInstanceOptions", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCpuPerformanceMetricBasis sets the CpuPerformanceMetricBasis field's value.
+func (s *Ec2RecommendationsExportPreferences) SetCpuPerformanceMetricBasis(v *UsageMetricBasis) *Ec2RecommendationsExportPreferences {
+	s.CpuPerformanceMetricBasis = v
+	return s
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *Ec2RecommendationsExportPreferences) SetEnabled(v bool) *Ec2RecommendationsExportPreferences {
+	s.Enabled = &v
+	return s
+}
+
+// SetExcludedInstanceTypes sets the ExcludedInstanceTypes field's value.
+func (s *Ec2RecommendationsExportPreferences) SetExcludedInstanceTypes(v []*string) *Ec2RecommendationsExportPreferences {
+	s.ExcludedInstanceTypes = v
+	return s
+}
+
+// SetPreferredRegion sets the PreferredRegion field's value.
+func (s *Ec2RecommendationsExportPreferences) SetPreferredRegion(v string) *Ec2RecommendationsExportPreferences {
+	s.PreferredRegion = &v
+	return s
+}
+
+// SetRamPerformanceMetricBasis sets the RamPerformanceMetricBasis field's value.
+func (s *Ec2RecommendationsExportPreferences) SetRamPerformanceMetricBasis(v *UsageMetricBasis) *Ec2RecommendationsExportPreferences {
+	s.RamPerformanceMetricBasis = v
+	return s
+}
+
+// SetReservedInstanceOptions sets the ReservedInstanceOptions field's value.
+func (s *Ec2RecommendationsExportPreferences) SetReservedInstanceOptions(v *ReservedInstanceOptions) *Ec2RecommendationsExportPreferences {
+	s.ReservedInstanceOptions = v
+	return s
+}
+
+// SetTenancy sets the Tenancy field's value.
+func (s *Ec2RecommendationsExportPreferences) SetTenancy(v string) *Ec2RecommendationsExportPreferences {
+	s.Tenancy = &v
+	return s
 }
 
 type ExportConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExportConfigurationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExportConfigurationsInput) GoString() string {
 	return s.String()
 }
@@ -4324,12 +6218,20 @@ type ExportConfigurationsOutput struct {
 	ExportId *string `locationName:"exportId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExportConfigurationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExportConfigurationsOutput) GoString() string {
 	return s.String()
 }
@@ -4351,25 +6253,33 @@ type ExportFilter struct {
 	// Condition is a required field
 	Condition *string `locationName:"condition" type:"string" required:"true"`
 
-	// A single ExportFilter name. Supported filters: agentId.
+	// A single ExportFilter name. Supported filters: agentIds.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// A single agentId for a Discovery Agent. An agentId can be found using the
-	// DescribeAgents (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html)
-	// action. Typically an ADS agentId is in the form o-0123456789abcdef0.
+	// A single agent ID for a Discovery Agent. An agent ID can be found using the
+	// DescribeAgents (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeAgents.html)
+	// action. Typically an ADS agent ID is in the form o-0123456789abcdef0.
 	//
 	// Values is a required field
 	Values []*string `locationName:"values" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExportFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExportFilter) GoString() string {
 	return s.String()
 }
@@ -4455,12 +6365,20 @@ type ExportInfo struct {
 	StatusMessage *string `locationName:"statusMessage" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExportInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExportInfo) GoString() string {
 	return s.String()
 }
@@ -4513,10 +6431,112 @@ func (s *ExportInfo) SetStatusMessage(v string) *ExportInfo {
 	return s
 }
 
+// Indicates the type of data that is being exported. Only one ExportPreferences
+// can be enabled for a StartExportTask (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html)
+// action.
+type ExportPreferences struct {
+	_ struct{} `type:"structure"`
+
+	// If enabled, exported data includes EC2 instance type matches for on-premises
+	// servers discovered through Amazon Web Services Application Discovery Service.
+	Ec2RecommendationsPreferences *Ec2RecommendationsExportPreferences `locationName:"ec2RecommendationsPreferences" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExportPreferences) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExportPreferences) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExportPreferences) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ExportPreferences"}
+	if s.Ec2RecommendationsPreferences != nil {
+		if err := s.Ec2RecommendationsPreferences.Validate(); err != nil {
+			invalidParams.AddNested("Ec2RecommendationsPreferences", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEc2RecommendationsPreferences sets the Ec2RecommendationsPreferences field's value.
+func (s *ExportPreferences) SetEc2RecommendationsPreferences(v *Ec2RecommendationsExportPreferences) *ExportPreferences {
+	s.Ec2RecommendationsPreferences = v
+	return s
+}
+
+// A configuration ID paired with an error message.
+type FailedConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier of the configuration the failed to delete.
+	ConfigurationId *string `locationName:"configurationId" type:"string"`
+
+	// A descriptive message indicating why the associated configuration failed
+	// to delete.
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+
+	// The integer error code associated with the error message.
+	ErrorStatusCode *int64 `locationName:"errorStatusCode" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FailedConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FailedConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetConfigurationId sets the ConfigurationId field's value.
+func (s *FailedConfiguration) SetConfigurationId(v string) *FailedConfiguration {
+	s.ConfigurationId = &v
+	return s
+}
+
+// SetErrorMessage sets the ErrorMessage field's value.
+func (s *FailedConfiguration) SetErrorMessage(v string) *FailedConfiguration {
+	s.ErrorMessage = &v
+	return s
+}
+
+// SetErrorStatusCode sets the ErrorStatusCode field's value.
+func (s *FailedConfiguration) SetErrorStatusCode(v int64) *FailedConfiguration {
+	s.ErrorStatusCode = &v
+	return s
+}
+
 // A filter that can use conditional operators.
 //
 // For more information about filters, see Querying Discovered Configuration
-// Items (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html).
+// Items (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html)
+// in the Amazon Web Services Application Discovery Service User Guide.
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -4542,12 +6562,20 @@ type Filter struct {
 	Values []*string `locationName:"values" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Filter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Filter) GoString() string {
 	return s.String()
 }
@@ -4593,12 +6621,20 @@ type GetDiscoverySummaryInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDiscoverySummaryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDiscoverySummaryInput) GoString() string {
 	return s.String()
 }
@@ -4609,11 +6645,18 @@ type GetDiscoverySummaryOutput struct {
 	// Details about discovered agents, including agent status and health.
 	AgentSummary *CustomerAgentInfo `locationName:"agentSummary" type:"structure"`
 
+	// Details about Agentless Collector collectors, including status.
+	AgentlessCollectorSummary *CustomerAgentlessCollectorInfo `locationName:"agentlessCollectorSummary" type:"structure"`
+
 	// The number of applications discovered.
 	Applications *int64 `locationName:"applications" type:"long"`
 
 	// Details about discovered connectors, including connector status and health.
 	ConnectorSummary *CustomerConnectorInfo `locationName:"connectorSummary" type:"structure"`
+
+	// Details about Migration Evaluator collectors, including collector status
+	// and health.
+	MeCollectorSummary *CustomerMeCollectorInfo `locationName:"meCollectorSummary" type:"structure"`
 
 	// The number of servers discovered.
 	Servers *int64 `locationName:"servers" type:"long"`
@@ -4625,12 +6668,20 @@ type GetDiscoverySummaryOutput struct {
 	ServersMappedtoTags *int64 `locationName:"serversMappedtoTags" type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDiscoverySummaryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDiscoverySummaryOutput) GoString() string {
 	return s.String()
 }
@@ -4638,6 +6689,12 @@ func (s GetDiscoverySummaryOutput) GoString() string {
 // SetAgentSummary sets the AgentSummary field's value.
 func (s *GetDiscoverySummaryOutput) SetAgentSummary(v *CustomerAgentInfo) *GetDiscoverySummaryOutput {
 	s.AgentSummary = v
+	return s
+}
+
+// SetAgentlessCollectorSummary sets the AgentlessCollectorSummary field's value.
+func (s *GetDiscoverySummaryOutput) SetAgentlessCollectorSummary(v *CustomerAgentlessCollectorInfo) *GetDiscoverySummaryOutput {
+	s.AgentlessCollectorSummary = v
 	return s
 }
 
@@ -4650,6 +6707,12 @@ func (s *GetDiscoverySummaryOutput) SetApplications(v int64) *GetDiscoverySummar
 // SetConnectorSummary sets the ConnectorSummary field's value.
 func (s *GetDiscoverySummaryOutput) SetConnectorSummary(v *CustomerConnectorInfo) *GetDiscoverySummaryOutput {
 	s.ConnectorSummary = v
+	return s
+}
+
+// SetMeCollectorSummary sets the MeCollectorSummary field's value.
+func (s *GetDiscoverySummaryOutput) SetMeCollectorSummary(v *CustomerMeCollectorInfo) *GetDiscoverySummaryOutput {
+	s.MeCollectorSummary = v
 	return s
 }
 
@@ -4669,6 +6732,70 @@ func (s *GetDiscoverySummaryOutput) SetServersMappedToApplications(v int64) *Get
 func (s *GetDiscoverySummaryOutput) SetServersMappedtoTags(v int64) *GetDiscoverySummaryOutput {
 	s.ServersMappedtoTags = &v
 	return s
+}
+
+// The home Region is not set. Set the home Region to continue.
+type HomeRegionNotSetException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HomeRegionNotSetException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HomeRegionNotSetException) GoString() string {
+	return s.String()
+}
+
+func newErrorHomeRegionNotSetException(v protocol.ResponseMetadata) error {
+	return &HomeRegionNotSetException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *HomeRegionNotSetException) Code() string {
+	return "HomeRegionNotSetException"
+}
+
+// Message returns the exception's message.
+func (s *HomeRegionNotSetException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *HomeRegionNotSetException) OrigErr() error {
+	return nil
+}
+
+func (s *HomeRegionNotSetException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *HomeRegionNotSetException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *HomeRegionNotSetException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // An array of information related to the import task request that includes
@@ -4701,7 +6828,7 @@ type ImportTask struct {
 	//
 	// If some records failed to be imported we recommend that you correct the records
 	// in the failed entries file and then imports that failed entries file. This
-	// prevents you frmo having to correct and update the larger original file and
+	// prevents you from having to correct and update the larger original file and
 	// attempt importing it again.
 	ErrorsAndFailedEntriesZip *string `locationName:"errorsAndFailedEntriesZip" type:"string"`
 
@@ -4718,7 +6845,7 @@ type ImportTask struct {
 	ImportRequestTime *time.Time `locationName:"importRequestTime" type:"timestamp"`
 
 	// The unique ID for a specific import task. These IDs aren't globally unique,
-	// but they are unique within an AWS account.
+	// but they are unique within an Amazon Web Services account.
 	ImportTaskId *string `locationName:"importTaskId" type:"string"`
 
 	// The URL for your import file that you've uploaded to Amazon S3.
@@ -4744,12 +6871,20 @@ type ImportTask struct {
 	Status *string `locationName:"status" type:"string" enum:"ImportStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportTask) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportTask) GoString() string {
 	return s.String()
 }
@@ -4847,12 +6982,20 @@ type ImportTaskFilter struct {
 	Values []*string `locationName:"values" min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportTaskFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportTaskFilter) GoString() string {
 	return s.String()
 }
@@ -4882,6 +7025,199 @@ func (s *ImportTaskFilter) SetValues(v []*string) *ImportTaskFilter {
 	return s
 }
 
+// One or more parameters are not valid. Verify the parameters and try again.
+type InvalidParameterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidParameterException(v protocol.ResponseMetadata) error {
+	return &InvalidParameterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidParameterException) Code() string {
+	return "InvalidParameterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidParameterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidParameterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidParameterException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidParameterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidParameterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The value of one or more parameters are either invalid or out of range. Verify
+// the parameter values and try again.
+type InvalidParameterValueException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterValueException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterValueException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidParameterValueException(v protocol.ResponseMetadata) error {
+	return &InvalidParameterValueException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidParameterValueException) Code() string {
+	return "InvalidParameterValueException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidParameterValueException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidParameterValueException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidParameterValueException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidParameterValueException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidParameterValueException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The limit of 200 configuration IDs per request has been exceeded.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4896,7 +7232,8 @@ type ListConfigurationsInput struct {
 	// {"key": "serverType", "value": "webServer"}
 	//
 	// For a complete list of filter options and guidance about using them with
-	// this action, see Querying Discovered Configuration Items (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations).
+	// this action, see Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
+	// in the Amazon Web Services Application Discovery Service User Guide.
 	Filters []*Filter `locationName:"filters" type:"list"`
 
 	// The total number of items to return. The maximum value is 100.
@@ -4910,16 +7247,25 @@ type ListConfigurationsInput struct {
 
 	// Certain filter criteria return output that can be sorted in ascending or
 	// descending order. For a list of output characteristics for each filter, see
-	// Using the ListConfigurations Action (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations).
+	// Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
+	// in the Amazon Web Services Application Discovery Service User Guide.
 	OrderBy []*OrderByElement `locationName:"orderBy" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConfigurationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConfigurationsInput) GoString() string {
 	return s.String()
 }
@@ -5001,12 +7347,20 @@ type ListConfigurationsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConfigurationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListConfigurationsOutput) GoString() string {
 	return s.String()
 }
@@ -5049,12 +7403,20 @@ type ListServerNeighborsInput struct {
 	PortInformationNeeded *bool `locationName:"portInformationNeeded" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListServerNeighborsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListServerNeighborsInput) GoString() string {
 	return s.String()
 }
@@ -5120,12 +7482,20 @@ type ListServerNeighborsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListServerNeighborsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListServerNeighborsOutput) GoString() string {
 	return s.String()
 }
@@ -5174,12 +7544,20 @@ type NeighborConnectionDetail struct {
 	TransportProtocol *string `locationName:"transportProtocol" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NeighborConnectionDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NeighborConnectionDetail) GoString() string {
 	return s.String()
 }
@@ -5214,6 +7592,70 @@ func (s *NeighborConnectionDetail) SetTransportProtocol(v string) *NeighborConne
 	return s
 }
 
+// This operation is not permitted.
+type OperationNotPermittedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotPermittedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotPermittedException) GoString() string {
+	return s.String()
+}
+
+func newErrorOperationNotPermittedException(v protocol.ResponseMetadata) error {
+	return &OperationNotPermittedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OperationNotPermittedException) Code() string {
+	return "OperationNotPermittedException"
+}
+
+// Message returns the exception's message.
+func (s *OperationNotPermittedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OperationNotPermittedException) OrigErr() error {
+	return nil
+}
+
+func (s *OperationNotPermittedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OperationNotPermittedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OperationNotPermittedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A field and direction for ordered output.
 type OrderByElement struct {
 	_ struct{} `type:"structure"`
@@ -5224,15 +7666,23 @@ type OrderByElement struct {
 	FieldName *string `locationName:"fieldName" type:"string" required:"true"`
 
 	// Ordering direction.
-	SortOrder *string `locationName:"sortOrder" type:"string" enum:"orderString"`
+	SortOrder *string `locationName:"sortOrder" type:"string" enum:"OrderString"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OrderByElement) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OrderByElement) GoString() string {
 	return s.String()
 }
@@ -5262,16 +7712,387 @@ func (s *OrderByElement) SetSortOrder(v string) *OrderByElement {
 	return s
 }
 
+// Used to provide Reserved Instance preferences for the recommendation.
+type ReservedInstanceOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The flexibility to change the instance types needed for your Reserved Instance.
+	//
+	// OfferingClass is a required field
+	OfferingClass *string `locationName:"offeringClass" type:"string" required:"true" enum:"OfferingClass"`
+
+	// The payment plan to use for your Reserved Instance.
+	//
+	// PurchasingOption is a required field
+	PurchasingOption *string `locationName:"purchasingOption" type:"string" required:"true" enum:"PurchasingOption"`
+
+	// The preferred duration of the Reserved Instance term.
+	//
+	// TermLength is a required field
+	TermLength *string `locationName:"termLength" type:"string" required:"true" enum:"TermLength"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReservedInstanceOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReservedInstanceOptions) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReservedInstanceOptions) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ReservedInstanceOptions"}
+	if s.OfferingClass == nil {
+		invalidParams.Add(request.NewErrParamRequired("OfferingClass"))
+	}
+	if s.PurchasingOption == nil {
+		invalidParams.Add(request.NewErrParamRequired("PurchasingOption"))
+	}
+	if s.TermLength == nil {
+		invalidParams.Add(request.NewErrParamRequired("TermLength"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetOfferingClass sets the OfferingClass field's value.
+func (s *ReservedInstanceOptions) SetOfferingClass(v string) *ReservedInstanceOptions {
+	s.OfferingClass = &v
+	return s
+}
+
+// SetPurchasingOption sets the PurchasingOption field's value.
+func (s *ReservedInstanceOptions) SetPurchasingOption(v string) *ReservedInstanceOptions {
+	s.PurchasingOption = &v
+	return s
+}
+
+// SetTermLength sets the TermLength field's value.
+func (s *ReservedInstanceOptions) SetTermLength(v string) *ReservedInstanceOptions {
+	s.TermLength = &v
+	return s
+}
+
+// This issue occurs when the same clientRequestToken is used with the StartImportTask
+// action, but with different parameters. For example, you use the same request
+// token but have two different import URLs, you can encounter this issue. If
+// the import tasks are meant to be different, use a different clientRequestToken,
+// and try again.
+type ResourceInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceInUseException(v protocol.ResponseMetadata) error {
+	return &ResourceInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceInUseException) Code() string {
+	return "ResourceInUseException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified configuration ID was not located. Verify the configuration
+// ID and try again.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The server experienced an internal error. Try again.
+type ServerInternalErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServerInternalErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServerInternalErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorServerInternalErrorException(v protocol.ResponseMetadata) error {
+	return &ServerInternalErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServerInternalErrorException) Code() string {
+	return "ServerInternalErrorException"
+}
+
+// Message returns the exception's message.
+func (s *ServerInternalErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServerInternalErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *ServerInternalErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServerInternalErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServerInternalErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type StartBatchDeleteConfigurationTaskInput struct {
+	_ struct{} `type:"structure"`
+
+	// The list of configuration IDs that will be deleted by the task.
+	//
+	// ConfigurationIds is a required field
+	ConfigurationIds []*string `locationName:"configurationIds" type:"list" required:"true"`
+
+	// The type of configuration item to delete. Supported types are: SERVER.
+	//
+	// ConfigurationType is a required field
+	ConfigurationType *string `locationName:"configurationType" type:"string" required:"true" enum:"DeletionConfigurationItemType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartBatchDeleteConfigurationTaskInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartBatchDeleteConfigurationTaskInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartBatchDeleteConfigurationTaskInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "StartBatchDeleteConfigurationTaskInput"}
+	if s.ConfigurationIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("ConfigurationIds"))
+	}
+	if s.ConfigurationType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ConfigurationType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetConfigurationIds sets the ConfigurationIds field's value.
+func (s *StartBatchDeleteConfigurationTaskInput) SetConfigurationIds(v []*string) *StartBatchDeleteConfigurationTaskInput {
+	s.ConfigurationIds = v
+	return s
+}
+
+// SetConfigurationType sets the ConfigurationType field's value.
+func (s *StartBatchDeleteConfigurationTaskInput) SetConfigurationType(v string) *StartBatchDeleteConfigurationTaskInput {
+	s.ConfigurationType = &v
+	return s
+}
+
+type StartBatchDeleteConfigurationTaskOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier associated with the newly started deletion task.
+	TaskId *string `locationName:"taskId" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartBatchDeleteConfigurationTaskOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartBatchDeleteConfigurationTaskOutput) GoString() string {
+	return s.String()
+}
+
+// SetTaskId sets the TaskId field's value.
+func (s *StartBatchDeleteConfigurationTaskOutput) SetTaskId(v string) *StartBatchDeleteConfigurationTaskOutput {
+	s.TaskId = &v
+	return s
+}
+
 type StartContinuousExportInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartContinuousExportInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartContinuousExportInput) GoString() string {
 	return s.String()
 }
@@ -5298,12 +8119,20 @@ type StartContinuousExportOutput struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartContinuousExportOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartContinuousExportOutput) GoString() string {
 	return s.String()
 }
@@ -5341,24 +8170,32 @@ func (s *StartContinuousExportOutput) SetStartTime(v time.Time) *StartContinuous
 type StartDataCollectionByAgentIdsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The IDs of the agents or connectors from which to start collecting data.
-	// If you send a request to an agent/connector ID that you do not have permission
-	// to contact, according to your AWS account, the service does not throw an
-	// exception. Instead, it returns the error in the Description field. If you
-	// send a request to multiple agents/connectors and you do not have permission
-	// to contact some of those agents/connectors, the system does not throw an
-	// exception. Instead, the system shows Failed in the Description field.
+	// The IDs of the agents from which to start collecting data. If you send a
+	// request to an agent ID that you do not have permission to contact, according
+	// to your Amazon Web Services account, the service does not throw an exception.
+	// Instead, it returns the error in the Description field. If you send a request
+	// to multiple agents and you do not have permission to contact some of those
+	// agents, the system does not throw an exception. Instead, the system shows
+	// Failed in the Description field.
 	//
 	// AgentIds is a required field
 	AgentIds []*string `locationName:"agentIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDataCollectionByAgentIdsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDataCollectionByAgentIdsInput) GoString() string {
 	return s.String()
 }
@@ -5385,18 +8222,26 @@ func (s *StartDataCollectionByAgentIdsInput) SetAgentIds(v []*string) *StartData
 type StartDataCollectionByAgentIdsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Information about agents or the connector that were instructed to start collecting
-	// data. Information includes the agent/connector ID, a description of the operation
-	// performed, and whether the agent/connector configuration was updated.
+	// Information about agents that were instructed to start collecting data. Information
+	// includes the agent ID, a description of the operation performed, and whether
+	// the agent configuration was updated.
 	AgentsConfigurationStatus []*AgentConfigurationStatus `locationName:"agentsConfigurationStatus" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDataCollectionByAgentIdsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartDataCollectionByAgentIdsOutput) GoString() string {
 	return s.String()
 }
@@ -5415,16 +8260,22 @@ type StartExportTaskInput struct {
 	// the most recent data collected by the agent.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
-	// The file format for the returned export data. Default value is CSV. Note:TheGRAPHMLoption
-	// has been deprecated.
-	ExportDataFormat []*string `locationName:"exportDataFormat" type:"list"`
+	// The file format for the returned export data. Default value is CSV. Note:
+	// The GRAPHML option has been deprecated.
+	ExportDataFormat []*string `locationName:"exportDataFormat" type:"list" enum:"ExportDataFormat"`
 
 	// If a filter is present, it selects the single agentId of the Application
 	// Discovery Agent for which data is exported. The agentId can be found in the
 	// results of the DescribeAgents API or CLI. If no filter is present, startTime
-	// and endTime are ignored and exported data includes both Agentless Discovery
-	// Connector data and summary data from Application Discovery agents.
+	// and endTime are ignored and exported data includes both Amazon Web Services
+	// Application Discovery Service Agentless Collector collectors data and summary
+	// data from Application Discovery Agent agents.
 	Filters []*ExportFilter `locationName:"filters" type:"list"`
+
+	// Indicates the type of data that needs to be exported. Only one ExportPreferences
+	// (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_ExportPreferences.html)
+	// can be enabled at any time.
+	Preferences *ExportPreferences `locationName:"preferences" type:"structure"`
 
 	// The start timestamp for exported data from the single Application Discovery
 	// Agent selected in the filters. If no value is specified, data is exported
@@ -5432,12 +8283,20 @@ type StartExportTaskInput struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartExportTaskInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartExportTaskInput) GoString() string {
 	return s.String()
 }
@@ -5453,6 +8312,11 @@ func (s *StartExportTaskInput) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
 			}
+		}
+	}
+	if s.Preferences != nil {
+		if err := s.Preferences.Validate(); err != nil {
+			invalidParams.AddNested("Preferences", err.(request.ErrInvalidParams))
 		}
 	}
 
@@ -5480,6 +8344,12 @@ func (s *StartExportTaskInput) SetFilters(v []*ExportFilter) *StartExportTaskInp
 	return s
 }
 
+// SetPreferences sets the Preferences field's value.
+func (s *StartExportTaskInput) SetPreferences(v *ExportPreferences) *StartExportTaskInput {
+	s.Preferences = v
+	return s
+}
+
 // SetStartTime sets the StartTime field's value.
 func (s *StartExportTaskInput) SetStartTime(v time.Time) *StartExportTaskInput {
 	s.StartTime = &v
@@ -5493,12 +8363,20 @@ type StartExportTaskOutput struct {
 	ExportId *string `locationName:"exportId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartExportTaskOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartExportTaskOutput) GoString() string {
 	return s.String()
 }
@@ -5523,7 +8401,8 @@ type StartImportTaskInput struct {
 
 	// The URL for your import file that you've uploaded to Amazon S3.
 	//
-	// If you're using the AWS CLI, this URL is structured as follows: s3://BucketName/ImportFileName.CSV
+	// If you're using the Amazon Web Services CLI, this URL is structured as follows:
+	// s3://BucketName/ImportFileName.CSV
 	//
 	// ImportUrl is a required field
 	ImportUrl *string `locationName:"importUrl" min:"1" type:"string" required:"true"`
@@ -5537,12 +8416,20 @@ type StartImportTaskInput struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartImportTaskInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartImportTaskInput) GoString() string {
 	return s.String()
 }
@@ -5599,12 +8486,20 @@ type StartImportTaskOutput struct {
 	Task *ImportTask `locationName:"task" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartImportTaskOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartImportTaskOutput) GoString() string {
 	return s.String()
 }
@@ -5624,12 +8519,20 @@ type StopContinuousExportInput struct {
 	ExportId *string `locationName:"exportId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopContinuousExportInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopContinuousExportInput) GoString() string {
 	return s.String()
 }
@@ -5664,12 +8567,20 @@ type StopContinuousExportOutput struct {
 	StopTime *time.Time `locationName:"stopTime" type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopContinuousExportOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopContinuousExportOutput) GoString() string {
 	return s.String()
 }
@@ -5689,18 +8600,26 @@ func (s *StopContinuousExportOutput) SetStopTime(v time.Time) *StopContinuousExp
 type StopDataCollectionByAgentIdsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The IDs of the agents or connectors from which to stop collecting data.
+	// The IDs of the agents from which to stop collecting data.
 	//
 	// AgentIds is a required field
 	AgentIds []*string `locationName:"agentIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDataCollectionByAgentIdsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDataCollectionByAgentIdsInput) GoString() string {
 	return s.String()
 }
@@ -5727,18 +8646,26 @@ func (s *StopDataCollectionByAgentIdsInput) SetAgentIds(v []*string) *StopDataCo
 type StopDataCollectionByAgentIdsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the agents or connector that were instructed to stop collecting
-	// data. Information includes the agent/connector ID, a description of the operation
-	// performed, and whether the agent/connector configuration was updated.
+	// Information about the agents that were instructed to stop collecting data.
+	// Information includes the agent ID, a description of the operation performed,
+	// and whether the agent configuration was updated.
 	AgentsConfigurationStatus []*AgentConfigurationStatus `locationName:"agentsConfigurationStatus" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDataCollectionByAgentIdsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDataCollectionByAgentIdsOutput) GoString() string {
 	return s.String()
 }
@@ -5750,6 +8677,8 @@ func (s *StopDataCollectionByAgentIdsOutput) SetAgentsConfigurationStatus(v []*A
 }
 
 // Metadata that help you categorize IT assets.
+//
+// Do not store sensitive information (like personal data) in tags.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -5764,12 +8693,20 @@ type Tag struct {
 	Value *string `locationName:"value" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -5817,12 +8754,20 @@ type TagFilter struct {
 	Values []*string `locationName:"values" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagFilter) GoString() string {
 	return s.String()
 }
@@ -5870,12 +8815,20 @@ type UpdateApplicationInput struct {
 	Name *string `locationName:"name" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationInput) GoString() string {
 	return s.String()
 }
@@ -5915,14 +8868,65 @@ type UpdateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationOutput) GoString() string {
 	return s.String()
+}
+
+// Specifies the performance metrics to use for the server that is used for
+// recommendations.
+type UsageMetricBasis struct {
+	_ struct{} `type:"structure"`
+
+	// A utilization metric that is used by the recommendations.
+	Name *string `locationName:"name" type:"string"`
+
+	// Specifies the percentage of the specified utilization metric that is used
+	// by the recommendations.
+	PercentageAdjust *float64 `locationName:"percentageAdjust" type:"double"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageMetricBasis) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UsageMetricBasis) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *UsageMetricBasis) SetName(v string) *UsageMetricBasis {
+	s.Name = &v
+	return s
+}
+
+// SetPercentageAdjust sets the PercentageAdjust field's value.
+func (s *UsageMetricBasis) SetPercentageAdjust(v float64) *UsageMetricBasis {
+	s.PercentageAdjust = &v
+	return s
 }
 
 const (
@@ -5945,13 +8949,65 @@ const (
 	AgentStatusShutdown = "SHUTDOWN"
 )
 
+// AgentStatus_Values returns all elements of the AgentStatus enum
+func AgentStatus_Values() []string {
+	return []string{
+		AgentStatusHealthy,
+		AgentStatusUnhealthy,
+		AgentStatusRunning,
+		AgentStatusUnknown,
+		AgentStatusBlacklisted,
+		AgentStatusShutdown,
+	}
+}
+
+const (
+	// BatchDeleteConfigurationTaskStatusInitializing is a BatchDeleteConfigurationTaskStatus enum value
+	BatchDeleteConfigurationTaskStatusInitializing = "INITIALIZING"
+
+	// BatchDeleteConfigurationTaskStatusValidating is a BatchDeleteConfigurationTaskStatus enum value
+	BatchDeleteConfigurationTaskStatusValidating = "VALIDATING"
+
+	// BatchDeleteConfigurationTaskStatusDeleting is a BatchDeleteConfigurationTaskStatus enum value
+	BatchDeleteConfigurationTaskStatusDeleting = "DELETING"
+
+	// BatchDeleteConfigurationTaskStatusCompleted is a BatchDeleteConfigurationTaskStatus enum value
+	BatchDeleteConfigurationTaskStatusCompleted = "COMPLETED"
+
+	// BatchDeleteConfigurationTaskStatusFailed is a BatchDeleteConfigurationTaskStatus enum value
+	BatchDeleteConfigurationTaskStatusFailed = "FAILED"
+)
+
+// BatchDeleteConfigurationTaskStatus_Values returns all elements of the BatchDeleteConfigurationTaskStatus enum
+func BatchDeleteConfigurationTaskStatus_Values() []string {
+	return []string{
+		BatchDeleteConfigurationTaskStatusInitializing,
+		BatchDeleteConfigurationTaskStatusValidating,
+		BatchDeleteConfigurationTaskStatusDeleting,
+		BatchDeleteConfigurationTaskStatusCompleted,
+		BatchDeleteConfigurationTaskStatusFailed,
+	}
+}
+
 const (
 	// BatchDeleteImportDataErrorCodeNotFound is a BatchDeleteImportDataErrorCode enum value
 	BatchDeleteImportDataErrorCodeNotFound = "NOT_FOUND"
 
 	// BatchDeleteImportDataErrorCodeInternalServerError is a BatchDeleteImportDataErrorCode enum value
 	BatchDeleteImportDataErrorCodeInternalServerError = "INTERNAL_SERVER_ERROR"
+
+	// BatchDeleteImportDataErrorCodeOverLimit is a BatchDeleteImportDataErrorCode enum value
+	BatchDeleteImportDataErrorCodeOverLimit = "OVER_LIMIT"
 )
+
+// BatchDeleteImportDataErrorCode_Values returns all elements of the BatchDeleteImportDataErrorCode enum
+func BatchDeleteImportDataErrorCode_Values() []string {
+	return []string{
+		BatchDeleteImportDataErrorCodeNotFound,
+		BatchDeleteImportDataErrorCodeInternalServerError,
+		BatchDeleteImportDataErrorCodeOverLimit,
+	}
+}
 
 const (
 	// ConfigurationItemTypeServer is a ConfigurationItemType enum value
@@ -5966,6 +9022,16 @@ const (
 	// ConfigurationItemTypeApplication is a ConfigurationItemType enum value
 	ConfigurationItemTypeApplication = "APPLICATION"
 )
+
+// ConfigurationItemType_Values returns all elements of the ConfigurationItemType enum
+func ConfigurationItemType_Values() []string {
+	return []string{
+		ConfigurationItemTypeServer,
+		ConfigurationItemTypeProcess,
+		ConfigurationItemTypeConnection,
+		ConfigurationItemTypeApplication,
+	}
+}
 
 const (
 	// ContinuousExportStatusStartInProgress is a ContinuousExportStatus enum value
@@ -5990,18 +9056,74 @@ const (
 	ContinuousExportStatusInactive = "INACTIVE"
 )
 
+// ContinuousExportStatus_Values returns all elements of the ContinuousExportStatus enum
+func ContinuousExportStatus_Values() []string {
+	return []string{
+		ContinuousExportStatusStartInProgress,
+		ContinuousExportStatusStartFailed,
+		ContinuousExportStatusActive,
+		ContinuousExportStatusError,
+		ContinuousExportStatusStopInProgress,
+		ContinuousExportStatusStopFailed,
+		ContinuousExportStatusInactive,
+	}
+}
+
 const (
 	// DataSourceAgent is a DataSource enum value
 	DataSourceAgent = "AGENT"
 )
 
+// DataSource_Values returns all elements of the DataSource enum
+func DataSource_Values() []string {
+	return []string{
+		DataSourceAgent,
+	}
+}
+
+const (
+	// DeleteAgentErrorCodeNotFound is a DeleteAgentErrorCode enum value
+	DeleteAgentErrorCodeNotFound = "NOT_FOUND"
+
+	// DeleteAgentErrorCodeInternalServerError is a DeleteAgentErrorCode enum value
+	DeleteAgentErrorCodeInternalServerError = "INTERNAL_SERVER_ERROR"
+
+	// DeleteAgentErrorCodeAgentInUse is a DeleteAgentErrorCode enum value
+	DeleteAgentErrorCodeAgentInUse = "AGENT_IN_USE"
+)
+
+// DeleteAgentErrorCode_Values returns all elements of the DeleteAgentErrorCode enum
+func DeleteAgentErrorCode_Values() []string {
+	return []string{
+		DeleteAgentErrorCodeNotFound,
+		DeleteAgentErrorCodeInternalServerError,
+		DeleteAgentErrorCodeAgentInUse,
+	}
+}
+
+const (
+	// DeletionConfigurationItemTypeServer is a DeletionConfigurationItemType enum value
+	DeletionConfigurationItemTypeServer = "SERVER"
+)
+
+// DeletionConfigurationItemType_Values returns all elements of the DeletionConfigurationItemType enum
+func DeletionConfigurationItemType_Values() []string {
+	return []string{
+		DeletionConfigurationItemTypeServer,
+	}
+}
+
 const (
 	// ExportDataFormatCsv is a ExportDataFormat enum value
 	ExportDataFormatCsv = "CSV"
-
-	// ExportDataFormatGraphml is a ExportDataFormat enum value
-	ExportDataFormatGraphml = "GRAPHML"
 )
+
+// ExportDataFormat_Values returns all elements of the ExportDataFormat enum
+func ExportDataFormat_Values() []string {
+	return []string{
+		ExportDataFormatCsv,
+	}
+}
 
 const (
 	// ExportStatusFailed is a ExportStatus enum value
@@ -6014,12 +9136,24 @@ const (
 	ExportStatusInProgress = "IN_PROGRESS"
 )
 
+// ExportStatus_Values returns all elements of the ExportStatus enum
+func ExportStatus_Values() []string {
+	return []string{
+		ExportStatusFailed,
+		ExportStatusSucceeded,
+		ExportStatusInProgress,
+	}
+}
+
 const (
 	// ImportStatusImportInProgress is a ImportStatus enum value
 	ImportStatusImportInProgress = "IMPORT_IN_PROGRESS"
 
 	// ImportStatusImportComplete is a ImportStatus enum value
 	ImportStatusImportComplete = "IMPORT_COMPLETE"
+
+	// ImportStatusImportCompleteWithErrors is a ImportStatus enum value
+	ImportStatusImportCompleteWithErrors = "IMPORT_COMPLETE_WITH_ERRORS"
 
 	// ImportStatusImportFailed is a ImportStatus enum value
 	ImportStatusImportFailed = "IMPORT_FAILED"
@@ -6041,7 +9175,27 @@ const (
 
 	// ImportStatusDeleteFailedLimitExceeded is a ImportStatus enum value
 	ImportStatusDeleteFailedLimitExceeded = "DELETE_FAILED_LIMIT_EXCEEDED"
+
+	// ImportStatusInternalError is a ImportStatus enum value
+	ImportStatusInternalError = "INTERNAL_ERROR"
 )
+
+// ImportStatus_Values returns all elements of the ImportStatus enum
+func ImportStatus_Values() []string {
+	return []string{
+		ImportStatusImportInProgress,
+		ImportStatusImportComplete,
+		ImportStatusImportCompleteWithErrors,
+		ImportStatusImportFailed,
+		ImportStatusImportFailedServerLimitExceeded,
+		ImportStatusImportFailedRecordLimitExceeded,
+		ImportStatusDeleteInProgress,
+		ImportStatusDeleteComplete,
+		ImportStatusDeleteFailed,
+		ImportStatusDeleteFailedLimitExceeded,
+		ImportStatusInternalError,
+	}
+}
 
 const (
 	// ImportTaskFilterNameImportTaskId is a ImportTaskFilterName enum value
@@ -6054,10 +9208,95 @@ const (
 	ImportTaskFilterNameName = "NAME"
 )
 
+// ImportTaskFilterName_Values returns all elements of the ImportTaskFilterName enum
+func ImportTaskFilterName_Values() []string {
+	return []string{
+		ImportTaskFilterNameImportTaskId,
+		ImportTaskFilterNameStatus,
+		ImportTaskFilterNameName,
+	}
+}
+
 const (
-	// OrderStringAsc is a orderString enum value
+	// OfferingClassStandard is a OfferingClass enum value
+	OfferingClassStandard = "STANDARD"
+
+	// OfferingClassConvertible is a OfferingClass enum value
+	OfferingClassConvertible = "CONVERTIBLE"
+)
+
+// OfferingClass_Values returns all elements of the OfferingClass enum
+func OfferingClass_Values() []string {
+	return []string{
+		OfferingClassStandard,
+		OfferingClassConvertible,
+	}
+}
+
+const (
+	// OrderStringAsc is a OrderString enum value
 	OrderStringAsc = "ASC"
 
-	// OrderStringDesc is a orderString enum value
+	// OrderStringDesc is a OrderString enum value
 	OrderStringDesc = "DESC"
 )
+
+// OrderString_Values returns all elements of the OrderString enum
+func OrderString_Values() []string {
+	return []string{
+		OrderStringAsc,
+		OrderStringDesc,
+	}
+}
+
+const (
+	// PurchasingOptionAllUpfront is a PurchasingOption enum value
+	PurchasingOptionAllUpfront = "ALL_UPFRONT"
+
+	// PurchasingOptionPartialUpfront is a PurchasingOption enum value
+	PurchasingOptionPartialUpfront = "PARTIAL_UPFRONT"
+
+	// PurchasingOptionNoUpfront is a PurchasingOption enum value
+	PurchasingOptionNoUpfront = "NO_UPFRONT"
+)
+
+// PurchasingOption_Values returns all elements of the PurchasingOption enum
+func PurchasingOption_Values() []string {
+	return []string{
+		PurchasingOptionAllUpfront,
+		PurchasingOptionPartialUpfront,
+		PurchasingOptionNoUpfront,
+	}
+}
+
+const (
+	// TenancyDedicated is a Tenancy enum value
+	TenancyDedicated = "DEDICATED"
+
+	// TenancyShared is a Tenancy enum value
+	TenancyShared = "SHARED"
+)
+
+// Tenancy_Values returns all elements of the Tenancy enum
+func Tenancy_Values() []string {
+	return []string{
+		TenancyDedicated,
+		TenancyShared,
+	}
+}
+
+const (
+	// TermLengthOneYear is a TermLength enum value
+	TermLengthOneYear = "ONE_YEAR"
+
+	// TermLengthThreeYear is a TermLength enum value
+	TermLengthThreeYear = "THREE_YEAR"
+)
+
+// TermLength_Values returns all elements of the TermLength enum
+func TermLength_Values() []string {
+	return []string{
+		TermLengthOneYear,
+		TermLengthThreeYear,
+	}
+}

@@ -3,11 +3,13 @@
 package marketplaceentitlementservice
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go/private/protocol"
 )
 
 const opGetEntitlements = "GetEntitlements"
@@ -26,14 +28,13 @@ const opGetEntitlements = "GetEntitlements"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetEntitlementsRequest method.
+//	req, resp := client.GetEntitlementsRequest(params)
 //
-//    // Example sending a request using the GetEntitlementsRequest method.
-//    req, resp := client.GetEntitlementsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/GetEntitlements
 func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitlementsInput) (req *request.Request, output *GetEntitlementsOutput) {
@@ -41,6 +42,12 @@ func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitle
 		Name:       opGetEntitlements,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -64,16 +71,17 @@ func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitle
 // See the AWS API reference guide for AWS Marketplace Entitlement Service's
 // API operation GetEntitlements for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   One or more parameters in your request was invalid.
+// Returned Error Types:
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The calls to the GetEntitlements API are throttled.
+//   - InvalidParameterException
+//     One or more parameters in your request was invalid.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   An internal error has occurred. Retry your request. If the problem persists,
-//   post a message with details on the AWS forums.
+//   - ThrottlingException
+//     The calls to the GetEntitlements API are throttled.
+//
+//   - InternalServiceErrorException
+//     An internal error has occurred. Retry your request. If the problem persists,
+//     post a message with details on the AWS forums.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/GetEntitlements
 func (c *MarketplaceEntitlementService) GetEntitlements(input *GetEntitlementsInput) (*GetEntitlementsOutput, error) {
@@ -95,6 +103,57 @@ func (c *MarketplaceEntitlementService) GetEntitlementsWithContext(ctx aws.Conte
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
+}
+
+// GetEntitlementsPages iterates over the pages of a GetEntitlements operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See GetEntitlements method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a GetEntitlements operation.
+//	pageNum := 0
+//	err := client.GetEntitlementsPages(params,
+//	    func(page *marketplaceentitlementservice.GetEntitlementsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *MarketplaceEntitlementService) GetEntitlementsPages(input *GetEntitlementsInput, fn func(*GetEntitlementsOutput, bool) bool) error {
+	return c.GetEntitlementsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// GetEntitlementsPagesWithContext same as GetEntitlementsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *MarketplaceEntitlementService) GetEntitlementsPagesWithContext(ctx aws.Context, input *GetEntitlementsInput, fn func(*GetEntitlementsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *GetEntitlementsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.GetEntitlementsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*GetEntitlementsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
 }
 
 // An entitlement represents capacity in a product owned by the customer. For
@@ -129,12 +188,20 @@ type Entitlement struct {
 	Value *EntitlementValue `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Entitlement) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Entitlement) GoString() string {
 	return s.String()
 }
@@ -191,12 +258,20 @@ type EntitlementValue struct {
 	StringValue *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EntitlementValue) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EntitlementValue) GoString() string {
 	return s.String()
 }
@@ -237,7 +312,7 @@ type GetEntitlementsInput struct {
 
 	// The maximum number of items to retrieve from the GetEntitlements operation.
 	// For pagination, use the NextToken field in subsequent calls to GetEntitlements.
-	MaxResults *int64 `type:"integer"`
+	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For paginated calls to GetEntitlements, pass the NextToken from the previous
 	// GetEntitlementsResult.
@@ -251,12 +326,20 @@ type GetEntitlementsInput struct {
 	ProductCode *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEntitlementsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEntitlementsInput) GoString() string {
 	return s.String()
 }
@@ -264,6 +347,9 @@ func (s GetEntitlementsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEntitlementsInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "GetEntitlementsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
 	if s.ProductCode == nil {
 		invalidParams.Add(request.NewErrParamRequired("ProductCode"))
 	}
@@ -316,12 +402,20 @@ type GetEntitlementsOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEntitlementsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetEntitlementsOutput) GoString() string {
 	return s.String()
 }
@@ -338,6 +432,199 @@ func (s *GetEntitlementsOutput) SetNextToken(v string) *GetEntitlementsOutput {
 	return s
 }
 
+// An internal error has occurred. Retry your request. If the problem persists,
+// post a message with details on the AWS forums.
+type InternalServiceErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServiceErrorException(v protocol.ResponseMetadata) error {
+	return &InternalServiceErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServiceErrorException) Code() string {
+	return "InternalServiceErrorException"
+}
+
+// Message returns the exception's message.
+func (s *InternalServiceErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServiceErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServiceErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServiceErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServiceErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// One or more parameters in your request was invalid.
+type InvalidParameterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidParameterException(v protocol.ResponseMetadata) error {
+	return &InvalidParameterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidParameterException) Code() string {
+	return "InvalidParameterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidParameterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidParameterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidParameterException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidParameterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidParameterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The calls to the GetEntitlements API are throttled.
+type ThrottlingException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) GoString() string {
+	return s.String()
+}
+
+func newErrorThrottlingException(v protocol.ResponseMetadata) error {
+	return &ThrottlingException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ThrottlingException) Code() string {
+	return "ThrottlingException"
+}
+
+// Message returns the exception's message.
+func (s *ThrottlingException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ThrottlingException) OrigErr() error {
+	return nil
+}
+
+func (s *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ThrottlingException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ThrottlingException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 const (
 	// GetEntitlementFilterNameCustomerIdentifier is a GetEntitlementFilterName enum value
 	GetEntitlementFilterNameCustomerIdentifier = "CUSTOMER_IDENTIFIER"
@@ -345,3 +632,11 @@ const (
 	// GetEntitlementFilterNameDimension is a GetEntitlementFilterName enum value
 	GetEntitlementFilterNameDimension = "DIMENSION"
 )
+
+// GetEntitlementFilterName_Values returns all elements of the GetEntitlementFilterName enum
+func GetEntitlementFilterName_Values() []string {
+	return []string{
+		GetEntitlementFilterNameCustomerIdentifier,
+		GetEntitlementFilterNameDimension,
+	}
+}

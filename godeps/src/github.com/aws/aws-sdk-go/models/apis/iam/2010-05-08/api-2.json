@@ -142,6 +142,7 @@
       },
       "input":{"shape":"CreateAccountAliasRequest"},
       "errors":[
+        {"shape":"ConcurrentModificationException"},
         {"shape":"EntityAlreadyExistsException"},
         {"shape":"LimitExceededException"},
         {"shape":"ServiceFailureException"}
@@ -178,7 +179,9 @@
       },
       "errors":[
         {"shape":"EntityAlreadyExistsException"},
+        {"shape":"InvalidInputException"},
         {"shape":"LimitExceededException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
     },
@@ -216,6 +219,7 @@
         {"shape":"InvalidInputException"},
         {"shape":"EntityAlreadyExistsException"},
         {"shape":"LimitExceededException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
     },
@@ -235,6 +239,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"EntityAlreadyExistsException"},
         {"shape":"MalformedPolicyDocumentException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
     },
@@ -292,6 +297,7 @@
         {"shape":"InvalidInputException"},
         {"shape":"EntityAlreadyExistsException"},
         {"shape":"LimitExceededException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
     },
@@ -363,7 +369,9 @@
       },
       "errors":[
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidInputException"},
         {"shape":"EntityAlreadyExistsException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
     },
@@ -378,7 +386,8 @@
         {"shape":"EntityTemporarilyUnmodifiableException"},
         {"shape":"NoSuchEntityException"},
         {"shape":"LimitExceededException"},
-        {"shape":"ServiceFailureException"}
+        {"shape":"ServiceFailureException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "DeleteAccessKey":{
@@ -402,6 +411,7 @@
       },
       "input":{"shape":"DeleteAccountAliasRequest"},
       "errors":[
+        {"shape":"ConcurrentModificationException"},
         {"shape":"NoSuchEntityException"},
         {"shape":"LimitExceededException"},
         {"shape":"ServiceFailureException"}
@@ -637,6 +647,7 @@
       "errors":[
         {"shape":"NoSuchEntityException"},
         {"shape":"LimitExceededException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
     },
@@ -691,7 +702,8 @@
         {"shape":"NoSuchEntityException"},
         {"shape":"DeleteConflictException"},
         {"shape":"LimitExceededException"},
-        {"shape":"ServiceFailureException"}
+        {"shape":"ServiceFailureException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "DetachGroupPolicy":{
@@ -750,7 +762,8 @@
         {"shape":"InvalidAuthenticationCodeException"},
         {"shape":"LimitExceededException"},
         {"shape":"NoSuchEntityException"},
-        {"shape":"ServiceFailureException"}
+        {"shape":"ServiceFailureException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "GenerateCredentialReport":{
@@ -766,6 +779,21 @@
       "errors":[
         {"shape":"LimitExceededException"},
         {"shape":"ServiceFailureException"}
+      ]
+    },
+    "GenerateOrganizationsAccessReport":{
+      "name":"GenerateOrganizationsAccessReport",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GenerateOrganizationsAccessReportRequest"},
+      "output":{
+        "shape":"GenerateOrganizationsAccessReportResponse",
+        "resultWrapper":"GenerateOrganizationsAccessReportResult"
+      },
+      "errors":[
+        {"shape":"ReportGenerationLimitExceededException"}
       ]
     },
     "GenerateServiceLastAccessedDetails":{
@@ -794,10 +822,7 @@
       "output":{
         "shape":"GetAccessKeyLastUsedResponse",
         "resultWrapper":"GetAccessKeyLastUsedResult"
-      },
-      "errors":[
-        {"shape":"NoSuchEntityException"}
-      ]
+      }
     },
     "GetAccountAuthorizationDetails":{
       "name":"GetAccountAuthorizationDetails",
@@ -955,6 +980,22 @@
         {"shape":"ServiceFailureException"}
       ]
     },
+    "GetMFADevice":{
+      "name":"GetMFADevice",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetMFADeviceRequest"},
+      "output":{
+        "shape":"GetMFADeviceResponse",
+        "resultWrapper":"GetMFADeviceResult"
+      },
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
     "GetOpenIDConnectProvider":{
       "name":"GetOpenIDConnectProvider",
       "http":{
@@ -970,6 +1011,21 @@
         {"shape":"InvalidInputException"},
         {"shape":"NoSuchEntityException"},
         {"shape":"ServiceFailureException"}
+      ]
+    },
+    "GetOrganizationsAccessReport":{
+      "name":"GetOrganizationsAccessReport",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetOrganizationsAccessReportRequest"},
+      "output":{
+        "shape":"GetOrganizationsAccessReportResponse",
+        "resultWrapper":"GetOrganizationsAccessReportResult"
+      },
+      "errors":[
+        {"shape":"NoSuchEntityException"}
       ]
     },
     "GetPolicy":{
@@ -1314,6 +1370,22 @@
         {"shape":"ServiceFailureException"}
       ]
     },
+    "ListInstanceProfileTags":{
+      "name":"ListInstanceProfileTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListInstanceProfileTagsRequest"},
+      "output":{
+        "shape":"ListInstanceProfileTagsResponse",
+        "resultWrapper":"ListInstanceProfileTagsResult"
+      },
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
     "ListInstanceProfiles":{
       "name":"ListInstanceProfiles",
       "http":{
@@ -1345,6 +1417,23 @@
         {"shape":"ServiceFailureException"}
       ]
     },
+    "ListMFADeviceTags":{
+      "name":"ListMFADeviceTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListMFADeviceTagsRequest"},
+      "output":{
+        "shape":"ListMFADeviceTagsResponse",
+        "resultWrapper":"ListMFADeviceTagsResult"
+      },
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
     "ListMFADevices":{
       "name":"ListMFADevices",
       "http":{
@@ -1359,6 +1448,23 @@
       "errors":[
         {"shape":"NoSuchEntityException"},
         {"shape":"ServiceFailureException"}
+      ]
+    },
+    "ListOpenIDConnectProviderTags":{
+      "name":"ListOpenIDConnectProviderTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListOpenIDConnectProviderTagsRequest"},
+      "output":{
+        "shape":"ListOpenIDConnectProviderTagsResponse",
+        "resultWrapper":"ListOpenIDConnectProviderTagsResult"
+      },
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"InvalidInputException"}
       ]
     },
     "ListOpenIDConnectProviders":{
@@ -1404,6 +1510,23 @@
       },
       "errors":[
         {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "ListPolicyTags":{
+      "name":"ListPolicyTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListPolicyTagsRequest"},
+      "output":{
+        "shape":"ListPolicyTagsResponse",
+        "resultWrapper":"ListPolicyTagsResult"
+      },
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"ServiceFailureException"},
         {"shape":"InvalidInputException"}
       ]
     },
@@ -1471,6 +1594,23 @@
         {"shape":"ServiceFailureException"}
       ]
     },
+    "ListSAMLProviderTags":{
+      "name":"ListSAMLProviderTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListSAMLProviderTagsRequest"},
+      "output":{
+        "shape":"ListSAMLProviderTagsResponse",
+        "resultWrapper":"ListSAMLProviderTagsResult"
+      },
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"InvalidInputException"}
+      ]
+    },
     "ListSAMLProviders":{
       "name":"ListSAMLProviders",
       "http":{
@@ -1499,6 +1639,22 @@
       },
       "errors":[
         {"shape":"NoSuchEntityException"}
+      ]
+    },
+    "ListServerCertificateTags":{
+      "name":"ListServerCertificateTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListServerCertificateTagsRequest"},
+      "output":{
+        "shape":"ListServerCertificateTagsResponse",
+        "resultWrapper":"ListServerCertificateTagsResult"
+      },
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"ServiceFailureException"}
       ]
     },
     "ListServerCertificates":{
@@ -1745,7 +1901,8 @@
         {"shape":"InvalidAuthenticationCodeException"},
         {"shape":"NoSuchEntityException"},
         {"shape":"LimitExceededException"},
-        {"shape":"ServiceFailureException"}
+        {"shape":"ServiceFailureException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "SetDefaultPolicyVersion":{
@@ -1759,6 +1916,17 @@
         {"shape":"NoSuchEntityException"},
         {"shape":"InvalidInputException"},
         {"shape":"LimitExceededException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "SetSecurityTokenServicePreferences":{
+      "name":"SetSecurityTokenServicePreferences",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SetSecurityTokenServicePreferencesRequest"},
+      "errors":[
         {"shape":"ServiceFailureException"}
       ]
     },
@@ -1795,6 +1963,66 @@
         {"shape":"PolicyEvaluationException"}
       ]
     },
+    "TagInstanceProfile":{
+      "name":"TagInstanceProfile",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagInstanceProfileRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "TagMFADevice":{
+      "name":"TagMFADevice",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagMFADeviceRequest"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"NoSuchEntityException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "TagOpenIDConnectProvider":{
+      "name":"TagOpenIDConnectProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagOpenIDConnectProviderRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "TagPolicy":{
+      "name":"TagPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagPolicyRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
     "TagRole":{
       "name":"TagRole",
       "http":{
@@ -1806,6 +2034,36 @@
         {"shape":"NoSuchEntityException"},
         {"shape":"LimitExceededException"},
         {"shape":"InvalidInputException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "TagSAMLProvider":{
+      "name":"TagSAMLProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagSAMLProviderRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "TagServerCertificate":{
+      "name":"TagServerCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagServerCertificateRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"LimitExceededException"},
         {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
@@ -1825,6 +2083,62 @@
         {"shape":"ServiceFailureException"}
       ]
     },
+    "UntagInstanceProfile":{
+      "name":"UntagInstanceProfile",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagInstanceProfileRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "UntagMFADevice":{
+      "name":"UntagMFADevice",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagMFADeviceRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "UntagOpenIDConnectProvider":{
+      "name":"UntagOpenIDConnectProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagOpenIDConnectProviderRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "UntagPolicy":{
+      "name":"UntagPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagPolicyRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
     "UntagRole":{
       "name":"UntagRole",
       "http":{
@@ -1834,6 +2148,34 @@
       "input":{"shape":"UntagRoleRequest"},
       "errors":[
         {"shape":"NoSuchEntityException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "UntagSAMLProvider":{
+      "name":"UntagSAMLProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagSAMLProviderRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "UntagServerCertificate":{
+      "name":"UntagServerCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagServerCertificateRequest"},
+      "errors":[
+        {"shape":"NoSuchEntityException"},
+        {"shape":"InvalidInputException"},
         {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
@@ -2084,9 +2426,11 @@
       },
       "errors":[
         {"shape":"LimitExceededException"},
+        {"shape":"InvalidInputException"},
         {"shape":"EntityAlreadyExistsException"},
         {"shape":"MalformedCertificateException"},
         {"shape":"KeyPairMismatchException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
     },
@@ -2108,11 +2452,38 @@
         {"shape":"InvalidCertificateException"},
         {"shape":"DuplicateCertificateException"},
         {"shape":"NoSuchEntityException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceFailureException"}
       ]
     }
   },
   "shapes":{
+    "AccessAdvisorUsageGranularityType":{
+      "type":"string",
+      "enum":[
+        "SERVICE_LEVEL",
+        "ACTION_LEVEL"
+      ]
+    },
+    "AccessDetail":{
+      "type":"structure",
+      "required":[
+        "ServiceName",
+        "ServiceNamespace"
+      ],
+      "members":{
+        "ServiceName":{"shape":"serviceNameType"},
+        "ServiceNamespace":{"shape":"serviceNamespaceType"},
+        "Region":{"shape":"stringType"},
+        "EntityPath":{"shape":"organizationsEntityPathType"},
+        "LastAuthenticatedTime":{"shape":"dateType"},
+        "TotalAuthenticatedEntities":{"shape":"integerType"}
+      }
+    },
+    "AccessDetails":{
+      "type":"list",
+      "member":{"shape":"AccessDetail"}
+    },
     "AccessKey":{
       "type":"structure",
       "required":[
@@ -2248,6 +2619,23 @@
       "type":"blob",
       "sensitive":true
     },
+    "CertificationKeyType":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\u0020-\\u00FF]+"
+    },
+    "CertificationMapType":{
+      "type":"map",
+      "key":{"shape":"CertificationKeyType"},
+      "value":{"shape":"CertificationValueType"}
+    },
+    "CertificationValueType":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"[\\u0020-\\u00FF]+"
+    },
     "ChangePasswordRequest":{
       "type":"structure",
       "required":[
@@ -2356,7 +2744,8 @@
       "required":["InstanceProfileName"],
       "members":{
         "InstanceProfileName":{"shape":"instanceProfileNameType"},
-        "Path":{"shape":"pathType"}
+        "Path":{"shape":"pathType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "CreateInstanceProfileResponse":{
@@ -2394,13 +2783,15 @@
       "members":{
         "Url":{"shape":"OpenIDConnectProviderUrlType"},
         "ClientIDList":{"shape":"clientIDListType"},
-        "ThumbprintList":{"shape":"thumbprintListType"}
+        "ThumbprintList":{"shape":"thumbprintListType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "CreateOpenIDConnectProviderResponse":{
       "type":"structure",
       "members":{
-        "OpenIDConnectProviderArn":{"shape":"arnType"}
+        "OpenIDConnectProviderArn":{"shape":"arnType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "CreatePolicyRequest":{
@@ -2413,7 +2804,8 @@
         "PolicyName":{"shape":"policyNameType"},
         "Path":{"shape":"policyPathType"},
         "PolicyDocument":{"shape":"policyDocumentType"},
-        "Description":{"shape":"policyDescriptionType"}
+        "Description":{"shape":"policyDescriptionType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "CreatePolicyResponse":{
@@ -2471,13 +2863,15 @@
       ],
       "members":{
         "SAMLMetadataDocument":{"shape":"SAMLMetadataDocumentType"},
-        "Name":{"shape":"SAMLProviderNameType"}
+        "Name":{"shape":"SAMLProviderNameType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "CreateSAMLProviderResponse":{
       "type":"structure",
       "members":{
-        "SAMLProviderArn":{"shape":"arnType"}
+        "SAMLProviderArn":{"shape":"arnType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "CreateServiceLinkedRoleRequest":{
@@ -2533,7 +2927,8 @@
       "required":["VirtualMFADeviceName"],
       "members":{
         "Path":{"shape":"pathType"},
-        "VirtualMFADeviceName":{"shape":"virtualMFADeviceName"}
+        "VirtualMFADeviceName":{"shape":"virtualMFADeviceName"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "CreateVirtualMFADeviceResponse":{
@@ -2971,6 +3366,7 @@
         "MatchedStatements":{"shape":"StatementListType"},
         "MissingContextValues":{"shape":"ContextKeyNamesResultListType"},
         "OrganizationsDecisionDetail":{"shape":"OrganizationsDecisionDetail"},
+        "PermissionsBoundaryDecisionDetail":{"shape":"PermissionsBoundaryDecisionDetail"},
         "EvalDecisionDetails":{"shape":"EvalDecisionDetailsType"},
         "ResourceSpecificResults":{"shape":"ResourceSpecificResultListType"}
       }
@@ -2986,11 +3382,26 @@
         "Description":{"shape":"ReportStateDescriptionType"}
       }
     },
+    "GenerateOrganizationsAccessReportRequest":{
+      "type":"structure",
+      "required":["EntityPath"],
+      "members":{
+        "EntityPath":{"shape":"organizationsEntityPathType"},
+        "OrganizationsPolicyId":{"shape":"organizationsPolicyIdType"}
+      }
+    },
+    "GenerateOrganizationsAccessReportResponse":{
+      "type":"structure",
+      "members":{
+        "JobId":{"shape":"jobIDType"}
+      }
+    },
     "GenerateServiceLastAccessedDetailsRequest":{
       "type":"structure",
       "required":["Arn"],
       "members":{
-        "Arn":{"shape":"arnType"}
+        "Arn":{"shape":"arnType"},
+        "Granularity":{"shape":"AccessAdvisorUsageGranularityType"}
       }
     },
     "GenerateServiceLastAccessedDetailsResponse":{
@@ -3029,7 +3440,7 @@
         "RoleDetailList":{"shape":"roleDetailListType"},
         "Policies":{"shape":"ManagedPolicyDetailListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "GetAccountPasswordPolicyResponse":{
@@ -3117,7 +3528,7 @@
         "Group":{"shape":"Group"},
         "Users":{"shape":"userListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "GetInstanceProfileRequest":{
@@ -3148,6 +3559,24 @@
         "LoginProfile":{"shape":"LoginProfile"}
       }
     },
+    "GetMFADeviceRequest":{
+      "type":"structure",
+      "required":["SerialNumber"],
+      "members":{
+        "SerialNumber":{"shape":"serialNumberType"},
+        "UserName":{"shape":"userNameType"}
+      }
+    },
+    "GetMFADeviceResponse":{
+      "type":"structure",
+      "required":["SerialNumber"],
+      "members":{
+        "UserName":{"shape":"userNameType"},
+        "SerialNumber":{"shape":"serialNumberType"},
+        "EnableDate":{"shape":"dateType"},
+        "Certifications":{"shape":"CertificationMapType"}
+      }
+    },
     "GetOpenIDConnectProviderRequest":{
       "type":"structure",
       "required":["OpenIDConnectProviderArn"],
@@ -3161,7 +3590,36 @@
         "Url":{"shape":"OpenIDConnectProviderUrlType"},
         "ClientIDList":{"shape":"clientIDListType"},
         "ThumbprintList":{"shape":"thumbprintListType"},
-        "CreateDate":{"shape":"dateType"}
+        "CreateDate":{"shape":"dateType"},
+        "Tags":{"shape":"tagListType"}
+      }
+    },
+    "GetOrganizationsAccessReportRequest":{
+      "type":"structure",
+      "required":["JobId"],
+      "members":{
+        "JobId":{"shape":"jobIDType"},
+        "MaxItems":{"shape":"maxItemsType"},
+        "Marker":{"shape":"markerType"},
+        "SortKey":{"shape":"sortKeyType"}
+      }
+    },
+    "GetOrganizationsAccessReportResponse":{
+      "type":"structure",
+      "required":[
+        "JobStatus",
+        "JobCreationDate"
+      ],
+      "members":{
+        "JobStatus":{"shape":"jobStatusType"},
+        "JobCreationDate":{"shape":"dateType"},
+        "JobCompletionDate":{"shape":"dateType"},
+        "NumberOfServicesAccessible":{"shape":"integerType"},
+        "NumberOfServicesNotAccessed":{"shape":"integerType"},
+        "AccessDetails":{"shape":"AccessDetails"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"markerType"},
+        "ErrorDetails":{"shape":"ErrorDetails"}
       }
     },
     "GetPolicyRequest":{
@@ -3244,7 +3702,8 @@
       "members":{
         "SAMLMetadataDocument":{"shape":"SAMLMetadataDocumentType"},
         "CreateDate":{"shape":"dateType"},
-        "ValidUntil":{"shape":"dateType"}
+        "ValidUntil":{"shape":"dateType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "GetSSHPublicKeyRequest":{
@@ -3299,11 +3758,12 @@
       ],
       "members":{
         "JobStatus":{"shape":"jobStatusType"},
+        "JobType":{"shape":"AccessAdvisorUsageGranularityType"},
         "JobCreationDate":{"shape":"dateType"},
         "ServicesLastAccessed":{"shape":"ServicesLastAccessed"},
         "JobCompletionDate":{"shape":"dateType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"},
+        "Marker":{"shape":"responseMarkerType"},
         "Error":{"shape":"ErrorDetails"}
       }
     },
@@ -3334,7 +3794,7 @@
         "JobCompletionDate":{"shape":"dateType"},
         "EntityDetailsList":{"shape":"entityDetailsListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"},
+        "Marker":{"shape":"responseMarkerType"},
         "Error":{"shape":"ErrorDetails"}
       }
     },
@@ -3435,7 +3895,8 @@
         "InstanceProfileId":{"shape":"idType"},
         "Arn":{"shape":"arnType"},
         "CreateDate":{"shape":"dateType"},
-        "Roles":{"shape":"roleListType"}
+        "Roles":{"shape":"roleListType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "InvalidAuthenticationCodeException":{
@@ -3537,7 +3998,7 @@
       "members":{
         "AccessKeyMetadata":{"shape":"accessKeyMetadataListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListAccountAliasesRequest":{
@@ -3553,7 +4014,7 @@
       "members":{
         "AccountAliases":{"shape":"accountAliasListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListAttachedGroupPoliciesRequest":{
@@ -3571,7 +4032,7 @@
       "members":{
         "AttachedPolicies":{"shape":"attachedPoliciesListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListAttachedRolePoliciesRequest":{
@@ -3589,7 +4050,7 @@
       "members":{
         "AttachedPolicies":{"shape":"attachedPoliciesListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListAttachedUserPoliciesRequest":{
@@ -3607,7 +4068,7 @@
       "members":{
         "AttachedPolicies":{"shape":"attachedPoliciesListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListEntitiesForPolicyRequest":{
@@ -3629,7 +4090,7 @@
         "PolicyUsers":{"shape":"PolicyUserListType"},
         "PolicyRoles":{"shape":"PolicyRoleListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListGroupPoliciesRequest":{
@@ -3647,7 +4108,7 @@
       "members":{
         "PolicyNames":{"shape":"policyNameListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListGroupsForUserRequest":{
@@ -3665,7 +4126,7 @@
       "members":{
         "Groups":{"shape":"groupListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListGroupsRequest":{
@@ -3682,7 +4143,25 @@
       "members":{
         "Groups":{"shape":"groupListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
+      }
+    },
+    "ListInstanceProfileTagsRequest":{
+      "type":"structure",
+      "required":["InstanceProfileName"],
+      "members":{
+        "InstanceProfileName":{"shape":"instanceProfileNameType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListInstanceProfileTagsResponse":{
+      "type":"structure",
+      "required":["Tags"],
+      "members":{
+        "Tags":{"shape":"tagListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListInstanceProfilesForRoleRequest":{
@@ -3700,7 +4179,7 @@
       "members":{
         "InstanceProfiles":{"shape":"instanceProfileListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListInstanceProfilesRequest":{
@@ -3717,7 +4196,25 @@
       "members":{
         "InstanceProfiles":{"shape":"instanceProfileListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
+      }
+    },
+    "ListMFADeviceTagsRequest":{
+      "type":"structure",
+      "required":["SerialNumber"],
+      "members":{
+        "SerialNumber":{"shape":"serialNumberType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListMFADeviceTagsResponse":{
+      "type":"structure",
+      "required":["Tags"],
+      "members":{
+        "Tags":{"shape":"tagListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListMFADevicesRequest":{
@@ -3734,7 +4231,25 @@
       "members":{
         "MFADevices":{"shape":"mfaDeviceListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
+      }
+    },
+    "ListOpenIDConnectProviderTagsRequest":{
+      "type":"structure",
+      "required":["OpenIDConnectProviderArn"],
+      "members":{
+        "OpenIDConnectProviderArn":{"shape":"arnType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListOpenIDConnectProviderTagsResponse":{
+      "type":"structure",
+      "required":["Tags"],
+      "members":{
+        "Tags":{"shape":"tagListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListOpenIDConnectProvidersRequest":{
@@ -3773,7 +4288,7 @@
       "members":{
         "PoliciesGrantingServiceAccess":{"shape":"listPolicyGrantingServiceAccessResponseListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListPoliciesRequest":{
@@ -3792,7 +4307,25 @@
       "members":{
         "Policies":{"shape":"policyListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
+      }
+    },
+    "ListPolicyTagsRequest":{
+      "type":"structure",
+      "required":["PolicyArn"],
+      "members":{
+        "PolicyArn":{"shape":"arnType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListPolicyTagsResponse":{
+      "type":"structure",
+      "required":["Tags"],
+      "members":{
+        "Tags":{"shape":"tagListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListPolicyVersionsRequest":{
@@ -3809,7 +4342,7 @@
       "members":{
         "Versions":{"shape":"policyDocumentVersionListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListRolePoliciesRequest":{
@@ -3827,7 +4360,7 @@
       "members":{
         "PolicyNames":{"shape":"policyNameListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListRoleTagsRequest":{
@@ -3845,7 +4378,7 @@
       "members":{
         "Tags":{"shape":"tagListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListRolesRequest":{
@@ -3862,7 +4395,25 @@
       "members":{
         "Roles":{"shape":"roleListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
+      }
+    },
+    "ListSAMLProviderTagsRequest":{
+      "type":"structure",
+      "required":["SAMLProviderArn"],
+      "members":{
+        "SAMLProviderArn":{"shape":"arnType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListSAMLProviderTagsResponse":{
+      "type":"structure",
+      "required":["Tags"],
+      "members":{
+        "Tags":{"shape":"tagListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListSAMLProvidersRequest":{
@@ -3889,7 +4440,25 @@
       "members":{
         "SSHPublicKeys":{"shape":"SSHPublicKeyListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
+      }
+    },
+    "ListServerCertificateTagsRequest":{
+      "type":"structure",
+      "required":["ServerCertificateName"],
+      "members":{
+        "ServerCertificateName":{"shape":"serverCertificateNameType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListServerCertificateTagsResponse":{
+      "type":"structure",
+      "required":["Tags"],
+      "members":{
+        "Tags":{"shape":"tagListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListServerCertificatesRequest":{
@@ -3906,7 +4475,7 @@
       "members":{
         "ServerCertificateMetadataList":{"shape":"serverCertificateMetadataListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListServiceSpecificCredentialsRequest":{
@@ -3936,7 +4505,7 @@
       "members":{
         "Certificates":{"shape":"certificateListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListUserPoliciesRequest":{
@@ -3954,7 +4523,7 @@
       "members":{
         "PolicyNames":{"shape":"policyNameListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListUserTagsRequest":{
@@ -3972,7 +4541,7 @@
       "members":{
         "Tags":{"shape":"tagListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListUsersRequest":{
@@ -3989,7 +4558,7 @@
       "members":{
         "Users":{"shape":"userListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "ListVirtualMFADevicesRequest":{
@@ -4006,7 +4575,7 @@
       "members":{
         "VirtualMFADevices":{"shape":"virtualMFADeviceListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "LoginProfile":{
@@ -4143,6 +4712,12 @@
       "type":"string",
       "enum":["PermissionsBoundaryPolicy"]
     },
+    "PermissionsBoundaryDecisionDetail":{
+      "type":"structure",
+      "members":{
+        "AllowedByPermissionsBoundary":{"shape":"booleanType"}
+      }
+    },
     "Policy":{
       "type":"structure",
       "members":{
@@ -4156,7 +4731,8 @@
         "IsAttachable":{"shape":"booleanType"},
         "Description":{"shape":"policyDescriptionType"},
         "CreateDate":{"shape":"dateType"},
-        "UpdateDate":{"shape":"dateType"}
+        "UpdateDate":{"shape":"dateType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "PolicyDetail":{
@@ -4388,6 +4964,18 @@
       "type":"string",
       "enum":["text/csv"]
     },
+    "ReportGenerationLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"reportGenerationLimitExceededMessage"}
+      },
+      "error":{
+        "code":"ReportGenerationLimitExceeded",
+        "httpStatusCode":409,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "ReportStateDescriptionType":{"type":"string"},
     "ReportStateType":{
       "type":"string",
@@ -4436,7 +5024,8 @@
         "EvalResourceDecision":{"shape":"PolicyEvaluationDecisionType"},
         "MatchedStatements":{"shape":"StatementListType"},
         "MissingContextValues":{"shape":"ContextKeyNamesResultListType"},
-        "EvalDecisionDetails":{"shape":"EvalDecisionDetailsType"}
+        "EvalDecisionDetails":{"shape":"EvalDecisionDetailsType"},
+        "PermissionsBoundaryDecisionDetail":{"shape":"PermissionsBoundaryDecisionDetail"}
       }
     },
     "ResourceSpecificResultListType":{
@@ -4477,7 +5066,8 @@
         "Description":{"shape":"roleDescriptionType"},
         "MaxSessionDuration":{"shape":"roleMaxSessionDurationType"},
         "PermissionsBoundary":{"shape":"AttachedPermissionsBoundary"},
-        "Tags":{"shape":"tagListType"}
+        "Tags":{"shape":"tagListType"},
+        "RoleLastUsed":{"shape":"RoleLastUsed"}
       }
     },
     "RoleDetail":{
@@ -4493,7 +5083,15 @@
         "RolePolicyList":{"shape":"policyDetailListType"},
         "AttachedManagedPolicies":{"shape":"attachedPoliciesListType"},
         "PermissionsBoundary":{"shape":"AttachedPermissionsBoundary"},
-        "Tags":{"shape":"tagListType"}
+        "Tags":{"shape":"tagListType"},
+        "RoleLastUsed":{"shape":"RoleLastUsed"}
+      }
+    },
+    "RoleLastUsed":{
+      "type":"structure",
+      "members":{
+        "LastUsedDate":{"shape":"dateType"},
+        "Region":{"shape":"stringType"}
       }
     },
     "RoleUsageListType":{
@@ -4576,7 +5174,8 @@
       "members":{
         "ServerCertificateMetadata":{"shape":"ServerCertificateMetadata"},
         "CertificateBody":{"shape":"certificateBodyType"},
-        "CertificateChain":{"shape":"certificateChainType"}
+        "CertificateChain":{"shape":"certificateChainType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "ServerCertificateMetadata":{
@@ -4618,7 +5217,9 @@
         "LastAuthenticated":{"shape":"dateType"},
         "ServiceNamespace":{"shape":"serviceNamespaceType"},
         "LastAuthenticatedEntity":{"shape":"arnType"},
-        "TotalAuthenticatedEntities":{"shape":"integerType"}
+        "LastAuthenticatedRegion":{"shape":"stringType"},
+        "TotalAuthenticatedEntities":{"shape":"integerType"},
+        "TrackedActionsLastAccessed":{"shape":"TrackedActionsLastAccessed"}
       }
     },
     "ServiceNotSupportedException":{
@@ -4692,6 +5293,13 @@
         "VersionId":{"shape":"policyVersionIdType"}
       }
     },
+    "SetSecurityTokenServicePreferencesRequest":{
+      "type":"structure",
+      "required":["GlobalEndpointTokenVersion"],
+      "members":{
+        "GlobalEndpointTokenVersion":{"shape":"globalEndpointTokenVersion"}
+      }
+    },
     "SigningCertificate":{
       "type":"structure",
       "required":[
@@ -4716,6 +5324,7 @@
       ],
       "members":{
         "PolicyInputList":{"shape":"SimulationPolicyListType"},
+        "PermissionsBoundaryPolicyInputList":{"shape":"SimulationPolicyListType"},
         "ActionNames":{"shape":"ActionNameListType"},
         "ResourceArns":{"shape":"ResourceNameListType"},
         "ResourcePolicy":{"shape":"policyDocumentType"},
@@ -4732,7 +5341,7 @@
       "members":{
         "EvaluationResults":{"shape":"EvaluationResultsListType"},
         "IsTruncated":{"shape":"booleanType"},
-        "Marker":{"shape":"markerType"}
+        "Marker":{"shape":"responseMarkerType"}
       }
     },
     "SimulatePrincipalPolicyRequest":{
@@ -4744,6 +5353,7 @@
       "members":{
         "PolicySourceArn":{"shape":"arnType"},
         "PolicyInputList":{"shape":"SimulationPolicyListType"},
+        "PermissionsBoundaryPolicyInputList":{"shape":"SimulationPolicyListType"},
         "ActionNames":{"shape":"ActionNameListType"},
         "ResourceArns":{"shape":"ResourceNameListType"},
         "ResourcePolicy":{"shape":"policyDocumentType"},
@@ -4783,6 +5393,50 @@
         "Value":{"shape":"tagValueType"}
       }
     },
+    "TagInstanceProfileRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceProfileName",
+        "Tags"
+      ],
+      "members":{
+        "InstanceProfileName":{"shape":"instanceProfileNameType"},
+        "Tags":{"shape":"tagListType"}
+      }
+    },
+    "TagMFADeviceRequest":{
+      "type":"structure",
+      "required":[
+        "SerialNumber",
+        "Tags"
+      ],
+      "members":{
+        "SerialNumber":{"shape":"serialNumberType"},
+        "Tags":{"shape":"tagListType"}
+      }
+    },
+    "TagOpenIDConnectProviderRequest":{
+      "type":"structure",
+      "required":[
+        "OpenIDConnectProviderArn",
+        "Tags"
+      ],
+      "members":{
+        "OpenIDConnectProviderArn":{"shape":"arnType"},
+        "Tags":{"shape":"tagListType"}
+      }
+    },
+    "TagPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "PolicyArn",
+        "Tags"
+      ],
+      "members":{
+        "PolicyArn":{"shape":"arnType"},
+        "Tags":{"shape":"tagListType"}
+      }
+    },
     "TagRoleRequest":{
       "type":"structure",
       "required":[
@@ -4791,6 +5445,28 @@
       ],
       "members":{
         "RoleName":{"shape":"roleNameType"},
+        "Tags":{"shape":"tagListType"}
+      }
+    },
+    "TagSAMLProviderRequest":{
+      "type":"structure",
+      "required":[
+        "SAMLProviderArn",
+        "Tags"
+      ],
+      "members":{
+        "SAMLProviderArn":{"shape":"arnType"},
+        "Tags":{"shape":"tagListType"}
+      }
+    },
+    "TagServerCertificateRequest":{
+      "type":"structure",
+      "required":[
+        "ServerCertificateName",
+        "Tags"
+      ],
+      "members":{
+        "ServerCertificateName":{"shape":"serverCertificateNameType"},
         "Tags":{"shape":"tagListType"}
       }
     },
@@ -4804,6 +5480,19 @@
         "UserName":{"shape":"existingUserNameType"},
         "Tags":{"shape":"tagListType"}
       }
+    },
+    "TrackedActionLastAccessed":{
+      "type":"structure",
+      "members":{
+        "ActionName":{"shape":"stringType"},
+        "LastAccessedEntity":{"shape":"arnType"},
+        "LastAccessedTime":{"shape":"dateType"},
+        "LastAccessedRegion":{"shape":"stringType"}
+      }
+    },
+    "TrackedActionsLastAccessed":{
+      "type":"list",
+      "member":{"shape":"TrackedActionLastAccessed"}
     },
     "UnmodifiableEntityException":{
       "type":"structure",
@@ -4829,6 +5518,50 @@
       },
       "exception":true
     },
+    "UntagInstanceProfileRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceProfileName",
+        "TagKeys"
+      ],
+      "members":{
+        "InstanceProfileName":{"shape":"instanceProfileNameType"},
+        "TagKeys":{"shape":"tagKeyListType"}
+      }
+    },
+    "UntagMFADeviceRequest":{
+      "type":"structure",
+      "required":[
+        "SerialNumber",
+        "TagKeys"
+      ],
+      "members":{
+        "SerialNumber":{"shape":"serialNumberType"},
+        "TagKeys":{"shape":"tagKeyListType"}
+      }
+    },
+    "UntagOpenIDConnectProviderRequest":{
+      "type":"structure",
+      "required":[
+        "OpenIDConnectProviderArn",
+        "TagKeys"
+      ],
+      "members":{
+        "OpenIDConnectProviderArn":{"shape":"arnType"},
+        "TagKeys":{"shape":"tagKeyListType"}
+      }
+    },
+    "UntagPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "PolicyArn",
+        "TagKeys"
+      ],
+      "members":{
+        "PolicyArn":{"shape":"arnType"},
+        "TagKeys":{"shape":"tagKeyListType"}
+      }
+    },
     "UntagRoleRequest":{
       "type":"structure",
       "required":[
@@ -4837,6 +5570,28 @@
       ],
       "members":{
         "RoleName":{"shape":"roleNameType"},
+        "TagKeys":{"shape":"tagKeyListType"}
+      }
+    },
+    "UntagSAMLProviderRequest":{
+      "type":"structure",
+      "required":[
+        "SAMLProviderArn",
+        "TagKeys"
+      ],
+      "members":{
+        "SAMLProviderArn":{"shape":"arnType"},
+        "TagKeys":{"shape":"tagKeyListType"}
+      }
+    },
+    "UntagServerCertificateRequest":{
+      "type":"structure",
+      "required":[
+        "ServerCertificateName",
+        "TagKeys"
+      ],
+      "members":{
+        "ServerCertificateName":{"shape":"serverCertificateNameType"},
         "TagKeys":{"shape":"tagKeyListType"}
       }
     },
@@ -5049,13 +5804,15 @@
         "ServerCertificateName":{"shape":"serverCertificateNameType"},
         "CertificateBody":{"shape":"certificateBodyType"},
         "PrivateKey":{"shape":"privateKeyType"},
-        "CertificateChain":{"shape":"certificateChainType"}
+        "CertificateChain":{"shape":"certificateChainType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "UploadServerCertificateResponse":{
       "type":"structure",
       "members":{
-        "ServerCertificateMetadata":{"shape":"ServerCertificateMetadata"}
+        "ServerCertificateMetadata":{"shape":"ServerCertificateMetadata"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "UploadSigningCertificateRequest":{
@@ -5116,7 +5873,8 @@
         "Base32StringSeed":{"shape":"BootstrapDatum"},
         "QRCodePNG":{"shape":"BootstrapDatum"},
         "User":{"shape":"User"},
-        "EnableDate":{"shape":"dateType"}
+        "EnableDate":{"shape":"dateType"},
+        "Tags":{"shape":"tagListType"}
       }
     },
     "accessKeyIdType":{
@@ -5141,7 +5899,7 @@
       "type":"string",
       "max":63,
       "min":3,
-      "pattern":"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$"
+      "pattern":"^[a-z0-9]([a-z0-9]|-(?!-)){1,61}[a-z0-9]$"
     },
     "arnType":{
       "type":"string",
@@ -5245,6 +6003,13 @@
       "min":1,
       "pattern":"[\\w+=,.@-]+"
     },
+    "globalEndpointTokenVersion":{
+      "type":"string",
+      "enum":[
+        "v1Token",
+        "v2Token"
+      ]
+    },
     "groupDetailListType":{
       "type":"list",
       "member":{"shape":"GroupDetail"}
@@ -5333,6 +6098,16 @@
       "min":6
     },
     "noSuchEntityMessage":{"type":"string"},
+    "organizationsEntityPathType":{
+      "type":"string",
+      "max":427,
+      "min":19,
+      "pattern":"^o-[0-9a-z]{10,32}\\/r-[0-9a-z]{4,32}[0-9a-z-\\/]*"
+    },
+    "organizationsPolicyIdType":{
+      "type":"string",
+      "pattern":"^p-[0-9a-zA-Z_]{8,128}$"
+    },
     "passwordPolicyViolationMessage":{"type":"string"},
     "passwordReusePreventionType":{
       "type":"integer",
@@ -5357,7 +6132,7 @@
       "type":"string",
       "max":512,
       "min":1,
-      "pattern":"(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)"
+      "pattern":"(\\u002F)|(\\u002F[\\u0021-\\u007E]+\\u002F)"
     },
     "policyDescriptionType":{
       "type":"string",
@@ -5407,6 +6182,8 @@
     },
     "policyPathType":{
       "type":"string",
+      "max":512,
+      "min":1,
       "pattern":"((/[A-Za-z0-9\\.,\\+@=_-]+)*)/"
     },
     "policyScopeType":{
@@ -5453,10 +6230,12 @@
       "min":1,
       "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
     },
+    "reportGenerationLimitExceededMessage":{"type":"string"},
+    "responseMarkerType":{"type":"string"},
     "roleDescriptionType":{
       "type":"string",
       "max":1000,
-      "pattern":"[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*"
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*"
     },
     "roleDetailListType":{
       "type":"list",
@@ -5525,6 +6304,15 @@
       "min":17,
       "pattern":"[\\w+=,.@-]+"
     },
+    "sortKeyType":{
+      "type":"string",
+      "enum":[
+        "SERVICE_NAMESPACE_ASCENDING",
+        "SERVICE_NAMESPACE_DESCENDING",
+        "LAST_AUTHENTICATED_TIME_ASCENDING",
+        "LAST_AUTHENTICATED_TIME_DESCENDING"
+      ]
+    },
     "statusType":{
       "type":"string",
       "enum":[
@@ -5560,7 +6348,8 @@
         "PolicySizeQuota",
         "PolicyVersionsInUse",
         "PolicyVersionsInUseQuota",
-        "VersionsPerPolicyQuota"
+        "VersionsPerPolicyQuota",
+        "GlobalEndpointTokenVersion"
       ]
     },
     "summaryMapType":{

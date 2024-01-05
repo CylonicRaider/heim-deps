@@ -29,14 +29,13 @@ const opAddAttributesToFindings = "AddAttributesToFindings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddAttributesToFindingsRequest method.
+//	req, resp := client.AddAttributesToFindingsRequest(params)
 //
-//    // Example sending a request using the AddAttributesToFindingsRequest method.
-//    req, resp := client.AddAttributesToFindingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AddAttributesToFindings
 func (c *Inspector) AddAttributesToFindingsRequest(input *AddAttributesToFindingsInput) (req *request.Request, output *AddAttributesToFindingsOutput) {
@@ -67,23 +66,24 @@ func (c *Inspector) AddAttributesToFindingsRequest(input *AddAttributesToFinding
 // See the AWS API reference guide for Amazon Inspector's
 // API operation AddAttributesToFindings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AddAttributesToFindings
 func (c *Inspector) AddAttributesToFindings(input *AddAttributesToFindingsInput) (*AddAttributesToFindingsOutput, error) {
@@ -123,14 +123,13 @@ const opCreateAssessmentTarget = "CreateAssessmentTarget"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateAssessmentTargetRequest method.
+//	req, resp := client.CreateAssessmentTargetRequest(params)
 //
-//    // Example sending a request using the CreateAssessmentTargetRequest method.
-//    req, resp := client.CreateAssessmentTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTarget
 func (c *Inspector) CreateAssessmentTargetRequest(input *CreateAssessmentTargetInput) (req *request.Request, output *CreateAssessmentTargetOutput) {
@@ -159,7 +158,7 @@ func (c *Inspector) CreateAssessmentTargetRequest(input *CreateAssessmentTargetI
 // role to grant Amazon Inspector access to AWS Services needed to perform security
 // assessments. You can create up to 50 assessment targets per AWS account.
 // You can run up to 500 concurrent agents per AWS account. For more information,
-// see  Amazon Inspector Assessment Targets (http://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html).
+// see Amazon Inspector Assessment Targets (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -168,31 +167,32 @@ func (c *Inspector) CreateAssessmentTargetRequest(input *CreateAssessmentTargetI
 // See the AWS API reference guide for Amazon Inspector's
 // API operation CreateAssessmentTarget for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error code describes the limit exceeded.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - LimitExceededException
+//     The request was rejected because it attempted to create resources beyond
+//     the current AWS account limits. The error code describes the limit exceeded.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeInvalidCrossAccountRoleException "InvalidCrossAccountRoleException"
-//   Amazon Inspector cannot assume the cross-account role that it needs to list
-//   your EC2 instances during the assessment run.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - InvalidCrossAccountRoleException
+//     Amazon Inspector cannot assume the cross-account role that it needs to list
+//     your EC2 instances during the assessment run.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTarget
 func (c *Inspector) CreateAssessmentTarget(input *CreateAssessmentTargetInput) (*CreateAssessmentTargetOutput, error) {
@@ -232,14 +232,13 @@ const opCreateAssessmentTemplate = "CreateAssessmentTemplate"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateAssessmentTemplateRequest method.
+//	req, resp := client.CreateAssessmentTemplateRequest(params)
 //
-//    // Example sending a request using the CreateAssessmentTemplateRequest method.
-//    req, resp := client.CreateAssessmentTemplateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTemplate
 func (c *Inspector) CreateAssessmentTemplateRequest(input *CreateAssessmentTemplateInput) (req *request.Request, output *CreateAssessmentTemplateOutput) {
@@ -273,27 +272,28 @@ func (c *Inspector) CreateAssessmentTemplateRequest(input *CreateAssessmentTempl
 // See the AWS API reference guide for Amazon Inspector's
 // API operation CreateAssessmentTemplate for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error code describes the limit exceeded.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - LimitExceededException
+//     The request was rejected because it attempted to create resources beyond
+//     the current AWS account limits. The error code describes the limit exceeded.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTemplate
 func (c *Inspector) CreateAssessmentTemplate(input *CreateAssessmentTemplateInput) (*CreateAssessmentTemplateOutput, error) {
@@ -333,14 +333,13 @@ const opCreateExclusionsPreview = "CreateExclusionsPreview"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateExclusionsPreviewRequest method.
+//	req, resp := client.CreateExclusionsPreviewRequest(params)
 //
-//    // Example sending a request using the CreateExclusionsPreviewRequest method.
-//    req, resp := client.CreateExclusionsPreviewRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateExclusionsPreview
 func (c *Inspector) CreateExclusionsPreviewRequest(input *CreateExclusionsPreviewInput) (req *request.Request, output *CreateExclusionsPreviewOutput) {
@@ -372,27 +371,28 @@ func (c *Inspector) CreateExclusionsPreviewRequest(input *CreateExclusionsPrevie
 // See the AWS API reference guide for Amazon Inspector's
 // API operation CreateExclusionsPreview for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+// Returned Error Types:
 //
-//   * ErrCodePreviewGenerationInProgressException "PreviewGenerationInProgressException"
-//   The request is rejected. The specified assessment template is currently generating
-//   an exclusions preview.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+//   - PreviewGenerationInProgressException
+//     The request is rejected. The specified assessment template is currently generating
+//     an exclusions preview.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateExclusionsPreview
 func (c *Inspector) CreateExclusionsPreview(input *CreateExclusionsPreviewInput) (*CreateExclusionsPreviewOutput, error) {
@@ -432,14 +432,13 @@ const opCreateResourceGroup = "CreateResourceGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateResourceGroupRequest method.
+//	req, resp := client.CreateResourceGroupRequest(params)
 //
-//    // Example sending a request using the CreateResourceGroupRequest method.
-//    req, resp := client.CreateResourceGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateResourceGroup
 func (c *Inspector) CreateResourceGroupRequest(input *CreateResourceGroupInput) (req *request.Request, output *CreateResourceGroupOutput) {
@@ -472,23 +471,24 @@ func (c *Inspector) CreateResourceGroupRequest(input *CreateResourceGroupInput) 
 // See the AWS API reference guide for Amazon Inspector's
 // API operation CreateResourceGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error code describes the limit exceeded.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - LimitExceededException
+//     The request was rejected because it attempted to create resources beyond
+//     the current AWS account limits. The error code describes the limit exceeded.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateResourceGroup
 func (c *Inspector) CreateResourceGroup(input *CreateResourceGroupInput) (*CreateResourceGroupOutput, error) {
@@ -528,14 +528,13 @@ const opDeleteAssessmentRun = "DeleteAssessmentRun"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteAssessmentRunRequest method.
+//	req, resp := client.DeleteAssessmentRunRequest(params)
 //
-//    // Example sending a request using the DeleteAssessmentRunRequest method.
-//    req, resp := client.DeleteAssessmentRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRun
 func (c *Inspector) DeleteAssessmentRunRequest(input *DeleteAssessmentRunInput) (req *request.Request, output *DeleteAssessmentRunOutput) {
@@ -567,27 +566,28 @@ func (c *Inspector) DeleteAssessmentRunRequest(input *DeleteAssessmentRunInput) 
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DeleteAssessmentRun for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAssessmentRunInProgressException "AssessmentRunInProgressException"
-//   You cannot perform a specified action if an assessment run is currently in
-//   progress.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - AssessmentRunInProgressException
+//     You cannot perform a specified action if an assessment run is currently in
+//     progress.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRun
 func (c *Inspector) DeleteAssessmentRun(input *DeleteAssessmentRunInput) (*DeleteAssessmentRunOutput, error) {
@@ -627,14 +627,13 @@ const opDeleteAssessmentTarget = "DeleteAssessmentTarget"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteAssessmentTargetRequest method.
+//	req, resp := client.DeleteAssessmentTargetRequest(params)
 //
-//    // Example sending a request using the DeleteAssessmentTargetRequest method.
-//    req, resp := client.DeleteAssessmentTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTarget
 func (c *Inspector) DeleteAssessmentTargetRequest(input *DeleteAssessmentTargetInput) (req *request.Request, output *DeleteAssessmentTargetOutput) {
@@ -666,27 +665,28 @@ func (c *Inspector) DeleteAssessmentTargetRequest(input *DeleteAssessmentTargetI
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DeleteAssessmentTarget for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAssessmentRunInProgressException "AssessmentRunInProgressException"
-//   You cannot perform a specified action if an assessment run is currently in
-//   progress.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - AssessmentRunInProgressException
+//     You cannot perform a specified action if an assessment run is currently in
+//     progress.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTarget
 func (c *Inspector) DeleteAssessmentTarget(input *DeleteAssessmentTargetInput) (*DeleteAssessmentTargetOutput, error) {
@@ -726,14 +726,13 @@ const opDeleteAssessmentTemplate = "DeleteAssessmentTemplate"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteAssessmentTemplateRequest method.
+//	req, resp := client.DeleteAssessmentTemplateRequest(params)
 //
-//    // Example sending a request using the DeleteAssessmentTemplateRequest method.
-//    req, resp := client.DeleteAssessmentTemplateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTemplate
 func (c *Inspector) DeleteAssessmentTemplateRequest(input *DeleteAssessmentTemplateInput) (req *request.Request, output *DeleteAssessmentTemplateOutput) {
@@ -765,27 +764,28 @@ func (c *Inspector) DeleteAssessmentTemplateRequest(input *DeleteAssessmentTempl
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DeleteAssessmentTemplate for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAssessmentRunInProgressException "AssessmentRunInProgressException"
-//   You cannot perform a specified action if an assessment run is currently in
-//   progress.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - AssessmentRunInProgressException
+//     You cannot perform a specified action if an assessment run is currently in
+//     progress.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTemplate
 func (c *Inspector) DeleteAssessmentTemplate(input *DeleteAssessmentTemplateInput) (*DeleteAssessmentTemplateOutput, error) {
@@ -825,14 +825,13 @@ const opDescribeAssessmentRuns = "DescribeAssessmentRuns"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeAssessmentRunsRequest method.
+//	req, resp := client.DescribeAssessmentRunsRequest(params)
 //
-//    // Example sending a request using the DescribeAssessmentRunsRequest method.
-//    req, resp := client.DescribeAssessmentRunsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentRuns
 func (c *Inspector) DescribeAssessmentRunsRequest(input *DescribeAssessmentRunsInput) (req *request.Request, output *DescribeAssessmentRunsOutput) {
@@ -863,13 +862,14 @@ func (c *Inspector) DescribeAssessmentRunsRequest(input *DescribeAssessmentRunsI
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DescribeAssessmentRuns for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
+//
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentRuns
 func (c *Inspector) DescribeAssessmentRuns(input *DescribeAssessmentRunsInput) (*DescribeAssessmentRunsOutput, error) {
@@ -909,14 +909,13 @@ const opDescribeAssessmentTargets = "DescribeAssessmentTargets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeAssessmentTargetsRequest method.
+//	req, resp := client.DescribeAssessmentTargetsRequest(params)
 //
-//    // Example sending a request using the DescribeAssessmentTargetsRequest method.
-//    req, resp := client.DescribeAssessmentTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTargets
 func (c *Inspector) DescribeAssessmentTargetsRequest(input *DescribeAssessmentTargetsInput) (req *request.Request, output *DescribeAssessmentTargetsOutput) {
@@ -947,13 +946,14 @@ func (c *Inspector) DescribeAssessmentTargetsRequest(input *DescribeAssessmentTa
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DescribeAssessmentTargets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
+//
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTargets
 func (c *Inspector) DescribeAssessmentTargets(input *DescribeAssessmentTargetsInput) (*DescribeAssessmentTargetsOutput, error) {
@@ -993,14 +993,13 @@ const opDescribeAssessmentTemplates = "DescribeAssessmentTemplates"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeAssessmentTemplatesRequest method.
+//	req, resp := client.DescribeAssessmentTemplatesRequest(params)
 //
-//    // Example sending a request using the DescribeAssessmentTemplatesRequest method.
-//    req, resp := client.DescribeAssessmentTemplatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTemplates
 func (c *Inspector) DescribeAssessmentTemplatesRequest(input *DescribeAssessmentTemplatesInput) (req *request.Request, output *DescribeAssessmentTemplatesOutput) {
@@ -1031,13 +1030,14 @@ func (c *Inspector) DescribeAssessmentTemplatesRequest(input *DescribeAssessment
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DescribeAssessmentTemplates for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
+//
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTemplates
 func (c *Inspector) DescribeAssessmentTemplates(input *DescribeAssessmentTemplatesInput) (*DescribeAssessmentTemplatesOutput, error) {
@@ -1077,14 +1077,13 @@ const opDescribeCrossAccountAccessRole = "DescribeCrossAccountAccessRole"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeCrossAccountAccessRoleRequest method.
+//	req, resp := client.DescribeCrossAccountAccessRoleRequest(params)
 //
-//    // Example sending a request using the DescribeCrossAccountAccessRoleRequest method.
-//    req, resp := client.DescribeCrossAccountAccessRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeCrossAccountAccessRole
 func (c *Inspector) DescribeCrossAccountAccessRoleRequest(input *DescribeCrossAccountAccessRoleInput) (req *request.Request, output *DescribeCrossAccountAccessRoleOutput) {
@@ -1114,9 +1113,9 @@ func (c *Inspector) DescribeCrossAccountAccessRoleRequest(input *DescribeCrossAc
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DescribeCrossAccountAccessRole for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
+//   - InternalException
+//     Internal server error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeCrossAccountAccessRole
 func (c *Inspector) DescribeCrossAccountAccessRole(input *DescribeCrossAccountAccessRoleInput) (*DescribeCrossAccountAccessRoleOutput, error) {
@@ -1156,14 +1155,13 @@ const opDescribeExclusions = "DescribeExclusions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeExclusionsRequest method.
+//	req, resp := client.DescribeExclusionsRequest(params)
 //
-//    // Example sending a request using the DescribeExclusionsRequest method.
-//    req, resp := client.DescribeExclusionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeExclusions
 func (c *Inspector) DescribeExclusionsRequest(input *DescribeExclusionsInput) (req *request.Request, output *DescribeExclusionsOutput) {
@@ -1193,13 +1191,14 @@ func (c *Inspector) DescribeExclusionsRequest(input *DescribeExclusionsInput) (r
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DescribeExclusions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
+//
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeExclusions
 func (c *Inspector) DescribeExclusions(input *DescribeExclusionsInput) (*DescribeExclusionsOutput, error) {
@@ -1239,14 +1238,13 @@ const opDescribeFindings = "DescribeFindings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeFindingsRequest method.
+//	req, resp := client.DescribeFindingsRequest(params)
 //
-//    // Example sending a request using the DescribeFindingsRequest method.
-//    req, resp := client.DescribeFindingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeFindings
 func (c *Inspector) DescribeFindingsRequest(input *DescribeFindingsInput) (req *request.Request, output *DescribeFindingsOutput) {
@@ -1276,13 +1274,14 @@ func (c *Inspector) DescribeFindingsRequest(input *DescribeFindingsInput) (req *
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DescribeFindings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
+//
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeFindings
 func (c *Inspector) DescribeFindings(input *DescribeFindingsInput) (*DescribeFindingsOutput, error) {
@@ -1322,14 +1321,13 @@ const opDescribeResourceGroups = "DescribeResourceGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeResourceGroupsRequest method.
+//	req, resp := client.DescribeResourceGroupsRequest(params)
 //
-//    // Example sending a request using the DescribeResourceGroupsRequest method.
-//    req, resp := client.DescribeResourceGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeResourceGroups
 func (c *Inspector) DescribeResourceGroupsRequest(input *DescribeResourceGroupsInput) (req *request.Request, output *DescribeResourceGroupsOutput) {
@@ -1360,13 +1358,14 @@ func (c *Inspector) DescribeResourceGroupsRequest(input *DescribeResourceGroupsI
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DescribeResourceGroups for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
+//
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeResourceGroups
 func (c *Inspector) DescribeResourceGroups(input *DescribeResourceGroupsInput) (*DescribeResourceGroupsOutput, error) {
@@ -1406,14 +1405,13 @@ const opDescribeRulesPackages = "DescribeRulesPackages"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeRulesPackagesRequest method.
+//	req, resp := client.DescribeRulesPackagesRequest(params)
 //
-//    // Example sending a request using the DescribeRulesPackagesRequest method.
-//    req, resp := client.DescribeRulesPackagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeRulesPackages
 func (c *Inspector) DescribeRulesPackagesRequest(input *DescribeRulesPackagesInput) (req *request.Request, output *DescribeRulesPackagesOutput) {
@@ -1444,13 +1442,14 @@ func (c *Inspector) DescribeRulesPackagesRequest(input *DescribeRulesPackagesInp
 // See the AWS API reference guide for Amazon Inspector's
 // API operation DescribeRulesPackages for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
+//
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeRulesPackages
 func (c *Inspector) DescribeRulesPackages(input *DescribeRulesPackagesInput) (*DescribeRulesPackagesOutput, error) {
@@ -1490,14 +1489,13 @@ const opGetAssessmentReport = "GetAssessmentReport"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetAssessmentReportRequest method.
+//	req, resp := client.GetAssessmentReportRequest(params)
 //
-//    // Example sending a request using the GetAssessmentReportRequest method.
-//    req, resp := client.GetAssessmentReportRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReport
 func (c *Inspector) GetAssessmentReportRequest(input *GetAssessmentReportInput) (req *request.Request, output *GetAssessmentReportOutput) {
@@ -1528,34 +1526,35 @@ func (c *Inspector) GetAssessmentReportRequest(input *GetAssessmentReportInput) 
 // See the AWS API reference guide for Amazon Inspector's
 // API operation GetAssessmentReport for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeAssessmentRunInProgressException "AssessmentRunInProgressException"
-//   You cannot perform a specified action if an assessment run is currently in
-//   progress.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
-//   * ErrCodeUnsupportedFeatureException "UnsupportedFeatureException"
-//   Used by the GetAssessmentReport API. The request was rejected because you
-//   tried to generate a report for an assessment run that existed before reporting
-//   was supported in Amazon Inspector. You can only generate reports for assessment
-//   runs that took place or will take place after generating reports in Amazon
-//   Inspector became available.
+//   - AssessmentRunInProgressException
+//     You cannot perform a specified action if an assessment run is currently in
+//     progress.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - UnsupportedFeatureException
+//     Used by the GetAssessmentReport API. The request was rejected because you
+//     tried to generate a report for an assessment run that existed before reporting
+//     was supported in Amazon Inspector. You can only generate reports for assessment
+//     runs that took place or will take place after generating reports in Amazon
+//     Inspector became available.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReport
 func (c *Inspector) GetAssessmentReport(input *GetAssessmentReportInput) (*GetAssessmentReportOutput, error) {
@@ -1595,14 +1594,13 @@ const opGetExclusionsPreview = "GetExclusionsPreview"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetExclusionsPreviewRequest method.
+//	req, resp := client.GetExclusionsPreviewRequest(params)
 //
-//    // Example sending a request using the GetExclusionsPreviewRequest method.
-//    req, resp := client.GetExclusionsPreviewRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetExclusionsPreview
 func (c *Inspector) GetExclusionsPreviewRequest(input *GetExclusionsPreviewInput) (req *request.Request, output *GetExclusionsPreviewOutput) {
@@ -1640,20 +1638,21 @@ func (c *Inspector) GetExclusionsPreviewRequest(input *GetExclusionsPreviewInput
 // See the AWS API reference guide for Amazon Inspector's
 // API operation GetExclusionsPreview for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+// Returned Error Types:
 //
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetExclusionsPreview
 func (c *Inspector) GetExclusionsPreview(input *GetExclusionsPreviewInput) (*GetExclusionsPreviewOutput, error) {
@@ -1685,15 +1684,14 @@ func (c *Inspector) GetExclusionsPreviewWithContext(ctx aws.Context, input *GetE
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a GetExclusionsPreview operation.
-//    pageNum := 0
-//    err := client.GetExclusionsPreviewPages(params,
-//        func(page *GetExclusionsPreviewOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a GetExclusionsPreview operation.
+//	pageNum := 0
+//	err := client.GetExclusionsPreviewPages(params,
+//	    func(page *inspector.GetExclusionsPreviewOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) GetExclusionsPreviewPages(input *GetExclusionsPreviewInput, fn func(*GetExclusionsPreviewOutput, bool) bool) error {
 	return c.GetExclusionsPreviewPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1720,10 +1718,12 @@ func (c *Inspector) GetExclusionsPreviewPagesWithContext(ctx aws.Context, input 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetExclusionsPreviewOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*GetExclusionsPreviewOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1743,14 +1743,13 @@ const opGetTelemetryMetadata = "GetTelemetryMetadata"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetTelemetryMetadataRequest method.
+//	req, resp := client.GetTelemetryMetadataRequest(params)
 //
-//    // Example sending a request using the GetTelemetryMetadataRequest method.
-//    req, resp := client.GetTelemetryMetadataRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetTelemetryMetadata
 func (c *Inspector) GetTelemetryMetadataRequest(input *GetTelemetryMetadataInput) (req *request.Request, output *GetTelemetryMetadataOutput) {
@@ -1781,20 +1780,21 @@ func (c *Inspector) GetTelemetryMetadataRequest(input *GetTelemetryMetadataInput
 // See the AWS API reference guide for Amazon Inspector's
 // API operation GetTelemetryMetadata for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetTelemetryMetadata
 func (c *Inspector) GetTelemetryMetadata(input *GetTelemetryMetadataInput) (*GetTelemetryMetadataOutput, error) {
@@ -1834,14 +1834,13 @@ const opListAssessmentRunAgents = "ListAssessmentRunAgents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAssessmentRunAgentsRequest method.
+//	req, resp := client.ListAssessmentRunAgentsRequest(params)
 //
-//    // Example sending a request using the ListAssessmentRunAgentsRequest method.
-//    req, resp := client.ListAssessmentRunAgentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunAgents
 func (c *Inspector) ListAssessmentRunAgentsRequest(input *ListAssessmentRunAgentsInput) (req *request.Request, output *ListAssessmentRunAgentsOutput) {
@@ -1878,20 +1877,21 @@ func (c *Inspector) ListAssessmentRunAgentsRequest(input *ListAssessmentRunAgent
 // See the AWS API reference guide for Amazon Inspector's
 // API operation ListAssessmentRunAgents for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunAgents
 func (c *Inspector) ListAssessmentRunAgents(input *ListAssessmentRunAgentsInput) (*ListAssessmentRunAgentsOutput, error) {
@@ -1923,15 +1923,14 @@ func (c *Inspector) ListAssessmentRunAgentsWithContext(ctx aws.Context, input *L
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListAssessmentRunAgents operation.
-//    pageNum := 0
-//    err := client.ListAssessmentRunAgentsPages(params,
-//        func(page *ListAssessmentRunAgentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListAssessmentRunAgents operation.
+//	pageNum := 0
+//	err := client.ListAssessmentRunAgentsPages(params,
+//	    func(page *inspector.ListAssessmentRunAgentsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) ListAssessmentRunAgentsPages(input *ListAssessmentRunAgentsInput, fn func(*ListAssessmentRunAgentsOutput, bool) bool) error {
 	return c.ListAssessmentRunAgentsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1958,10 +1957,12 @@ func (c *Inspector) ListAssessmentRunAgentsPagesWithContext(ctx aws.Context, inp
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssessmentRunAgentsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListAssessmentRunAgentsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1981,14 +1982,13 @@ const opListAssessmentRuns = "ListAssessmentRuns"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAssessmentRunsRequest method.
+//	req, resp := client.ListAssessmentRunsRequest(params)
 //
-//    // Example sending a request using the ListAssessmentRunsRequest method.
-//    req, resp := client.ListAssessmentRunsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRuns
 func (c *Inspector) ListAssessmentRunsRequest(input *ListAssessmentRunsInput) (req *request.Request, output *ListAssessmentRunsOutput) {
@@ -2025,20 +2025,21 @@ func (c *Inspector) ListAssessmentRunsRequest(input *ListAssessmentRunsInput) (r
 // See the AWS API reference guide for Amazon Inspector's
 // API operation ListAssessmentRuns for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRuns
 func (c *Inspector) ListAssessmentRuns(input *ListAssessmentRunsInput) (*ListAssessmentRunsOutput, error) {
@@ -2070,15 +2071,14 @@ func (c *Inspector) ListAssessmentRunsWithContext(ctx aws.Context, input *ListAs
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListAssessmentRuns operation.
-//    pageNum := 0
-//    err := client.ListAssessmentRunsPages(params,
-//        func(page *ListAssessmentRunsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListAssessmentRuns operation.
+//	pageNum := 0
+//	err := client.ListAssessmentRunsPages(params,
+//	    func(page *inspector.ListAssessmentRunsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) ListAssessmentRunsPages(input *ListAssessmentRunsInput, fn func(*ListAssessmentRunsOutput, bool) bool) error {
 	return c.ListAssessmentRunsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2105,10 +2105,12 @@ func (c *Inspector) ListAssessmentRunsPagesWithContext(ctx aws.Context, input *L
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssessmentRunsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListAssessmentRunsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2128,14 +2130,13 @@ const opListAssessmentTargets = "ListAssessmentTargets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAssessmentTargetsRequest method.
+//	req, resp := client.ListAssessmentTargetsRequest(params)
 //
-//    // Example sending a request using the ListAssessmentTargetsRequest method.
-//    req, resp := client.ListAssessmentTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTargets
 func (c *Inspector) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInput) (req *request.Request, output *ListAssessmentTargetsOutput) {
@@ -2164,7 +2165,7 @@ func (c *Inspector) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInp
 //
 // Lists the ARNs of the assessment targets within this AWS account. For more
 // information about assessment targets, see Amazon Inspector Assessment Targets
-// (http://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html).
+// (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2173,16 +2174,17 @@ func (c *Inspector) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInp
 // See the AWS API reference guide for Amazon Inspector's
 // API operation ListAssessmentTargets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
+//
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTargets
 func (c *Inspector) ListAssessmentTargets(input *ListAssessmentTargetsInput) (*ListAssessmentTargetsOutput, error) {
@@ -2214,15 +2216,14 @@ func (c *Inspector) ListAssessmentTargetsWithContext(ctx aws.Context, input *Lis
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListAssessmentTargets operation.
-//    pageNum := 0
-//    err := client.ListAssessmentTargetsPages(params,
-//        func(page *ListAssessmentTargetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListAssessmentTargets operation.
+//	pageNum := 0
+//	err := client.ListAssessmentTargetsPages(params,
+//	    func(page *inspector.ListAssessmentTargetsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) ListAssessmentTargetsPages(input *ListAssessmentTargetsInput, fn func(*ListAssessmentTargetsOutput, bool) bool) error {
 	return c.ListAssessmentTargetsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2249,10 +2250,12 @@ func (c *Inspector) ListAssessmentTargetsPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssessmentTargetsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListAssessmentTargetsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2272,14 +2275,13 @@ const opListAssessmentTemplates = "ListAssessmentTemplates"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAssessmentTemplatesRequest method.
+//	req, resp := client.ListAssessmentTemplatesRequest(params)
 //
-//    // Example sending a request using the ListAssessmentTemplatesRequest method.
-//    req, resp := client.ListAssessmentTemplatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplates
 func (c *Inspector) ListAssessmentTemplatesRequest(input *ListAssessmentTemplatesInput) (req *request.Request, output *ListAssessmentTemplatesOutput) {
@@ -2316,20 +2318,21 @@ func (c *Inspector) ListAssessmentTemplatesRequest(input *ListAssessmentTemplate
 // See the AWS API reference guide for Amazon Inspector's
 // API operation ListAssessmentTemplates for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplates
 func (c *Inspector) ListAssessmentTemplates(input *ListAssessmentTemplatesInput) (*ListAssessmentTemplatesOutput, error) {
@@ -2361,15 +2364,14 @@ func (c *Inspector) ListAssessmentTemplatesWithContext(ctx aws.Context, input *L
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListAssessmentTemplates operation.
-//    pageNum := 0
-//    err := client.ListAssessmentTemplatesPages(params,
-//        func(page *ListAssessmentTemplatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListAssessmentTemplates operation.
+//	pageNum := 0
+//	err := client.ListAssessmentTemplatesPages(params,
+//	    func(page *inspector.ListAssessmentTemplatesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) ListAssessmentTemplatesPages(input *ListAssessmentTemplatesInput, fn func(*ListAssessmentTemplatesOutput, bool) bool) error {
 	return c.ListAssessmentTemplatesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2396,10 +2398,12 @@ func (c *Inspector) ListAssessmentTemplatesPagesWithContext(ctx aws.Context, inp
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssessmentTemplatesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListAssessmentTemplatesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2419,14 +2423,13 @@ const opListEventSubscriptions = "ListEventSubscriptions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListEventSubscriptionsRequest method.
+//	req, resp := client.ListEventSubscriptionsRequest(params)
 //
-//    // Example sending a request using the ListEventSubscriptionsRequest method.
-//    req, resp := client.ListEventSubscriptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListEventSubscriptions
 func (c *Inspector) ListEventSubscriptionsRequest(input *ListEventSubscriptionsInput) (req *request.Request, output *ListEventSubscriptionsOutput) {
@@ -2464,20 +2467,21 @@ func (c *Inspector) ListEventSubscriptionsRequest(input *ListEventSubscriptionsI
 // See the AWS API reference guide for Amazon Inspector's
 // API operation ListEventSubscriptions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListEventSubscriptions
 func (c *Inspector) ListEventSubscriptions(input *ListEventSubscriptionsInput) (*ListEventSubscriptionsOutput, error) {
@@ -2509,15 +2513,14 @@ func (c *Inspector) ListEventSubscriptionsWithContext(ctx aws.Context, input *Li
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListEventSubscriptions operation.
-//    pageNum := 0
-//    err := client.ListEventSubscriptionsPages(params,
-//        func(page *ListEventSubscriptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListEventSubscriptions operation.
+//	pageNum := 0
+//	err := client.ListEventSubscriptionsPages(params,
+//	    func(page *inspector.ListEventSubscriptionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) ListEventSubscriptionsPages(input *ListEventSubscriptionsInput, fn func(*ListEventSubscriptionsOutput, bool) bool) error {
 	return c.ListEventSubscriptionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2544,10 +2547,12 @@ func (c *Inspector) ListEventSubscriptionsPagesWithContext(ctx aws.Context, inpu
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListEventSubscriptionsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListEventSubscriptionsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2567,14 +2572,13 @@ const opListExclusions = "ListExclusions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListExclusionsRequest method.
+//	req, resp := client.ListExclusionsRequest(params)
 //
-//    // Example sending a request using the ListExclusionsRequest method.
-//    req, resp := client.ListExclusionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListExclusions
 func (c *Inspector) ListExclusionsRequest(input *ListExclusionsInput) (req *request.Request, output *ListExclusionsOutput) {
@@ -2610,20 +2614,21 @@ func (c *Inspector) ListExclusionsRequest(input *ListExclusionsInput) (req *requ
 // See the AWS API reference guide for Amazon Inspector's
 // API operation ListExclusions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListExclusions
 func (c *Inspector) ListExclusions(input *ListExclusionsInput) (*ListExclusionsOutput, error) {
@@ -2655,15 +2660,14 @@ func (c *Inspector) ListExclusionsWithContext(ctx aws.Context, input *ListExclus
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListExclusions operation.
-//    pageNum := 0
-//    err := client.ListExclusionsPages(params,
-//        func(page *ListExclusionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListExclusions operation.
+//	pageNum := 0
+//	err := client.ListExclusionsPages(params,
+//	    func(page *inspector.ListExclusionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) ListExclusionsPages(input *ListExclusionsInput, fn func(*ListExclusionsOutput, bool) bool) error {
 	return c.ListExclusionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2690,10 +2694,12 @@ func (c *Inspector) ListExclusionsPagesWithContext(ctx aws.Context, input *ListE
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListExclusionsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListExclusionsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2713,14 +2719,13 @@ const opListFindings = "ListFindings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListFindingsRequest method.
+//	req, resp := client.ListFindingsRequest(params)
 //
-//    // Example sending a request using the ListFindingsRequest method.
-//    req, resp := client.ListFindingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListFindings
 func (c *Inspector) ListFindingsRequest(input *ListFindingsInput) (req *request.Request, output *ListFindingsOutput) {
@@ -2757,20 +2762,21 @@ func (c *Inspector) ListFindingsRequest(input *ListFindingsInput) (req *request.
 // See the AWS API reference guide for Amazon Inspector's
 // API operation ListFindings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListFindings
 func (c *Inspector) ListFindings(input *ListFindingsInput) (*ListFindingsOutput, error) {
@@ -2802,15 +2808,14 @@ func (c *Inspector) ListFindingsWithContext(ctx aws.Context, input *ListFindings
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListFindings operation.
-//    pageNum := 0
-//    err := client.ListFindingsPages(params,
-//        func(page *ListFindingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListFindings operation.
+//	pageNum := 0
+//	err := client.ListFindingsPages(params,
+//	    func(page *inspector.ListFindingsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) ListFindingsPages(input *ListFindingsInput, fn func(*ListFindingsOutput, bool) bool) error {
 	return c.ListFindingsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2837,10 +2842,12 @@ func (c *Inspector) ListFindingsPagesWithContext(ctx aws.Context, input *ListFin
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFindingsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListFindingsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2860,14 +2867,13 @@ const opListRulesPackages = "ListRulesPackages"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListRulesPackagesRequest method.
+//	req, resp := client.ListRulesPackagesRequest(params)
 //
-//    // Example sending a request using the ListRulesPackagesRequest method.
-//    req, resp := client.ListRulesPackagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListRulesPackages
 func (c *Inspector) ListRulesPackagesRequest(input *ListRulesPackagesInput) (req *request.Request, output *ListRulesPackagesOutput) {
@@ -2903,16 +2909,17 @@ func (c *Inspector) ListRulesPackagesRequest(input *ListRulesPackagesInput) (req
 // See the AWS API reference guide for Amazon Inspector's
 // API operation ListRulesPackages for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
+//
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListRulesPackages
 func (c *Inspector) ListRulesPackages(input *ListRulesPackagesInput) (*ListRulesPackagesOutput, error) {
@@ -2944,15 +2951,14 @@ func (c *Inspector) ListRulesPackagesWithContext(ctx aws.Context, input *ListRul
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListRulesPackages operation.
-//    pageNum := 0
-//    err := client.ListRulesPackagesPages(params,
-//        func(page *ListRulesPackagesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListRulesPackages operation.
+//	pageNum := 0
+//	err := client.ListRulesPackagesPages(params,
+//	    func(page *inspector.ListRulesPackagesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) ListRulesPackagesPages(input *ListRulesPackagesInput, fn func(*ListRulesPackagesOutput, bool) bool) error {
 	return c.ListRulesPackagesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2979,10 +2985,12 @@ func (c *Inspector) ListRulesPackagesPagesWithContext(ctx aws.Context, input *Li
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListRulesPackagesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListRulesPackagesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3002,14 +3010,13 @@ const opListTagsForResource = "ListTagsForResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
 //
-//    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListTagsForResource
 func (c *Inspector) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
@@ -3039,20 +3046,21 @@ func (c *Inspector) ListTagsForResourceRequest(input *ListTagsForResourceInput) 
 // See the AWS API reference guide for Amazon Inspector's
 // API operation ListTagsForResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
+//
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListTagsForResource
 func (c *Inspector) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
@@ -3092,14 +3100,13 @@ const opPreviewAgents = "PreviewAgents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PreviewAgentsRequest method.
+//	req, resp := client.PreviewAgentsRequest(params)
 //
-//    // Example sending a request using the PreviewAgentsRequest method.
-//    req, resp := client.PreviewAgentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgents
 func (c *Inspector) PreviewAgentsRequest(input *PreviewAgentsInput) (req *request.Request, output *PreviewAgentsOutput) {
@@ -3136,24 +3143,25 @@ func (c *Inspector) PreviewAgentsRequest(input *PreviewAgentsInput) (req *reques
 // See the AWS API reference guide for Amazon Inspector's
 // API operation PreviewAgents for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeInvalidCrossAccountRoleException "InvalidCrossAccountRoleException"
-//   Amazon Inspector cannot assume the cross-account role that it needs to list
-//   your EC2 instances during the assessment run.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - InvalidCrossAccountRoleException
+//     Amazon Inspector cannot assume the cross-account role that it needs to list
+//     your EC2 instances during the assessment run.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgents
 func (c *Inspector) PreviewAgents(input *PreviewAgentsInput) (*PreviewAgentsOutput, error) {
@@ -3185,15 +3193,14 @@ func (c *Inspector) PreviewAgentsWithContext(ctx aws.Context, input *PreviewAgen
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a PreviewAgents operation.
-//    pageNum := 0
-//    err := client.PreviewAgentsPages(params,
-//        func(page *PreviewAgentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a PreviewAgents operation.
+//	pageNum := 0
+//	err := client.PreviewAgentsPages(params,
+//	    func(page *inspector.PreviewAgentsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Inspector) PreviewAgentsPages(input *PreviewAgentsInput, fn func(*PreviewAgentsOutput, bool) bool) error {
 	return c.PreviewAgentsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3220,10 +3227,12 @@ func (c *Inspector) PreviewAgentsPagesWithContext(ctx aws.Context, input *Previe
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*PreviewAgentsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*PreviewAgentsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3243,14 +3252,13 @@ const opRegisterCrossAccountAccessRole = "RegisterCrossAccountAccessRole"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterCrossAccountAccessRoleRequest method.
+//	req, resp := client.RegisterCrossAccountAccessRoleRequest(params)
 //
-//    // Example sending a request using the RegisterCrossAccountAccessRoleRequest method.
-//    req, resp := client.RegisterCrossAccountAccessRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRole
 func (c *Inspector) RegisterCrossAccountAccessRoleRequest(input *RegisterCrossAccountAccessRoleInput) (req *request.Request, output *RegisterCrossAccountAccessRoleOutput) {
@@ -3282,23 +3290,24 @@ func (c *Inspector) RegisterCrossAccountAccessRoleRequest(input *RegisterCrossAc
 // See the AWS API reference guide for Amazon Inspector's
 // API operation RegisterCrossAccountAccessRole for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeInvalidCrossAccountRoleException "InvalidCrossAccountRoleException"
-//   Amazon Inspector cannot assume the cross-account role that it needs to list
-//   your EC2 instances during the assessment run.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - InvalidCrossAccountRoleException
+//     Amazon Inspector cannot assume the cross-account role that it needs to list
+//     your EC2 instances during the assessment run.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRole
 func (c *Inspector) RegisterCrossAccountAccessRole(input *RegisterCrossAccountAccessRoleInput) (*RegisterCrossAccountAccessRoleOutput, error) {
@@ -3338,14 +3347,13 @@ const opRemoveAttributesFromFindings = "RemoveAttributesFromFindings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RemoveAttributesFromFindingsRequest method.
+//	req, resp := client.RemoveAttributesFromFindingsRequest(params)
 //
-//    // Example sending a request using the RemoveAttributesFromFindingsRequest method.
-//    req, resp := client.RemoveAttributesFromFindingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RemoveAttributesFromFindings
 func (c *Inspector) RemoveAttributesFromFindingsRequest(input *RemoveAttributesFromFindingsInput) (req *request.Request, output *RemoveAttributesFromFindingsOutput) {
@@ -3377,23 +3385,24 @@ func (c *Inspector) RemoveAttributesFromFindingsRequest(input *RemoveAttributesF
 // See the AWS API reference guide for Amazon Inspector's
 // API operation RemoveAttributesFromFindings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RemoveAttributesFromFindings
 func (c *Inspector) RemoveAttributesFromFindings(input *RemoveAttributesFromFindingsInput) (*RemoveAttributesFromFindingsOutput, error) {
@@ -3433,14 +3442,13 @@ const opSetTagsForResource = "SetTagsForResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SetTagsForResourceRequest method.
+//	req, resp := client.SetTagsForResourceRequest(params)
 //
-//    // Example sending a request using the SetTagsForResourceRequest method.
-//    req, resp := client.SetTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResource
 func (c *Inspector) SetTagsForResourceRequest(input *SetTagsForResourceInput) (req *request.Request, output *SetTagsForResourceOutput) {
@@ -3472,23 +3480,24 @@ func (c *Inspector) SetTagsForResourceRequest(input *SetTagsForResourceInput) (r
 // See the AWS API reference guide for Amazon Inspector's
 // API operation SetTagsForResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResource
 func (c *Inspector) SetTagsForResource(input *SetTagsForResourceInput) (*SetTagsForResourceOutput, error) {
@@ -3528,14 +3537,13 @@ const opStartAssessmentRun = "StartAssessmentRun"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartAssessmentRunRequest method.
+//	req, resp := client.StartAssessmentRunRequest(params)
 //
-//    // Example sending a request using the StartAssessmentRunRequest method.
-//    req, resp := client.StartAssessmentRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StartAssessmentRun
 func (c *Inspector) StartAssessmentRunRequest(input *StartAssessmentRunInput) (req *request.Request, output *StartAssessmentRunOutput) {
@@ -3567,35 +3575,36 @@ func (c *Inspector) StartAssessmentRunRequest(input *StartAssessmentRunInput) (r
 // See the AWS API reference guide for Amazon Inspector's
 // API operation StartAssessmentRun for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error code describes the limit exceeded.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - LimitExceededException
+//     The request was rejected because it attempted to create resources beyond
+//     the current AWS account limits. The error code describes the limit exceeded.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeInvalidCrossAccountRoleException "InvalidCrossAccountRoleException"
-//   Amazon Inspector cannot assume the cross-account role that it needs to list
-//   your EC2 instances during the assessment run.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
 //
-//   * ErrCodeAgentsAlreadyRunningAssessmentException "AgentsAlreadyRunningAssessmentException"
-//   You started an assessment run, but one of the instances is already participating
-//   in another assessment run.
+//   - InvalidCrossAccountRoleException
+//     Amazon Inspector cannot assume the cross-account role that it needs to list
+//     your EC2 instances during the assessment run.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - AgentsAlreadyRunningAssessmentException
+//     You started an assessment run, but one of the instances is already participating
+//     in another assessment run.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StartAssessmentRun
 func (c *Inspector) StartAssessmentRun(input *StartAssessmentRunInput) (*StartAssessmentRunOutput, error) {
@@ -3635,14 +3644,13 @@ const opStopAssessmentRun = "StopAssessmentRun"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StopAssessmentRunRequest method.
+//	req, resp := client.StopAssessmentRunRequest(params)
 //
-//    // Example sending a request using the StopAssessmentRunRequest method.
-//    req, resp := client.StopAssessmentRunRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StopAssessmentRun
 func (c *Inspector) StopAssessmentRunRequest(input *StopAssessmentRunInput) (req *request.Request, output *StopAssessmentRunOutput) {
@@ -3673,23 +3681,24 @@ func (c *Inspector) StopAssessmentRunRequest(input *StopAssessmentRunInput) (req
 // See the AWS API reference guide for Amazon Inspector's
 // API operation StopAssessmentRun for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StopAssessmentRun
 func (c *Inspector) StopAssessmentRun(input *StopAssessmentRunInput) (*StopAssessmentRunOutput, error) {
@@ -3729,14 +3738,13 @@ const opSubscribeToEvent = "SubscribeToEvent"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SubscribeToEventRequest method.
+//	req, resp := client.SubscribeToEventRequest(params)
 //
-//    // Example sending a request using the SubscribeToEventRequest method.
-//    req, resp := client.SubscribeToEventRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SubscribeToEvent
 func (c *Inspector) SubscribeToEventRequest(input *SubscribeToEventInput) (req *request.Request, output *SubscribeToEventOutput) {
@@ -3768,27 +3776,28 @@ func (c *Inspector) SubscribeToEventRequest(input *SubscribeToEventInput) (req *
 // See the AWS API reference guide for Amazon Inspector's
 // API operation SubscribeToEvent for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The request was rejected because it attempted to create resources beyond
-//   the current AWS account limits. The error code describes the limit exceeded.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - LimitExceededException
+//     The request was rejected because it attempted to create resources beyond
+//     the current AWS account limits. The error code describes the limit exceeded.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SubscribeToEvent
 func (c *Inspector) SubscribeToEvent(input *SubscribeToEventInput) (*SubscribeToEventOutput, error) {
@@ -3828,14 +3837,13 @@ const opUnsubscribeFromEvent = "UnsubscribeFromEvent"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UnsubscribeFromEventRequest method.
+//	req, resp := client.UnsubscribeFromEventRequest(params)
 //
-//    // Example sending a request using the UnsubscribeFromEventRequest method.
-//    req, resp := client.UnsubscribeFromEventRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UnsubscribeFromEvent
 func (c *Inspector) UnsubscribeFromEventRequest(input *UnsubscribeFromEventInput) (req *request.Request, output *UnsubscribeFromEventOutput) {
@@ -3867,23 +3875,24 @@ func (c *Inspector) UnsubscribeFromEventRequest(input *UnsubscribeFromEventInput
 // See the AWS API reference guide for Amazon Inspector's
 // API operation UnsubscribeFromEvent for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UnsubscribeFromEvent
 func (c *Inspector) UnsubscribeFromEvent(input *UnsubscribeFromEventInput) (*UnsubscribeFromEventOutput, error) {
@@ -3923,14 +3932,13 @@ const opUpdateAssessmentTarget = "UpdateAssessmentTarget"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateAssessmentTargetRequest method.
+//	req, resp := client.UpdateAssessmentTargetRequest(params)
 //
-//    // Example sending a request using the UpdateAssessmentTargetRequest method.
-//    req, resp := client.UpdateAssessmentTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UpdateAssessmentTarget
 func (c *Inspector) UpdateAssessmentTargetRequest(input *UpdateAssessmentTargetInput) (req *request.Request, output *UpdateAssessmentTargetOutput) {
@@ -3965,23 +3973,24 @@ func (c *Inspector) UpdateAssessmentTargetRequest(input *UpdateAssessmentTargetI
 // See the AWS API reference guide for Amazon Inspector's
 // API operation UpdateAssessmentTarget for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
-//   Internal server error.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The request was rejected because an invalid or out-of-range value was supplied
-//   for an input parameter.
+//   - InternalException
+//     Internal server error.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You do not have required permissions to access the requested resource.
+//   - InvalidInputException
+//     The request was rejected because an invalid or out-of-range value was supplied
+//     for an input parameter.
 //
-//   * ErrCodeNoSuchEntityException "NoSuchEntityException"
-//   The request was rejected because it referenced an entity that does not exist.
-//   The error code describes the entity.
+//   - AccessDeniedException
+//     You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeServiceTemporarilyUnavailableException "ServiceTemporarilyUnavailableException"
-//   The serice is temporary unavailable.
+//   - NoSuchEntityException
+//     The request was rejected because it referenced an entity that does not exist.
+//     The error code describes the entity.
+//
+//   - ServiceTemporarilyUnavailableException
+//     The serice is temporary unavailable.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UpdateAssessmentTarget
 func (c *Inspector) UpdateAssessmentTarget(input *UpdateAssessmentTargetInput) (*UpdateAssessmentTargetOutput, error) {
@@ -4005,6 +4014,81 @@ func (c *Inspector) UpdateAssessmentTargetWithContext(ctx aws.Context, input *Up
 	return out, req.Send()
 }
 
+// You do not have required permissions to access the requested resource.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// You can immediately retry your request.
+	//
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	// Code that indicates the type of error that is generated.
+	//
+	// ErrorCode is a required field
+	ErrorCode *string `locationName:"errorCode" type:"string" required:"true" enum:"AccessDeniedErrorCode"`
+
+	// Details of the exception error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type AddAttributesToFindingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4019,12 +4103,20 @@ type AddAttributesToFindingsInput struct {
 	FindingArns []*string `locationName:"findingArns" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddAttributesToFindingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddAttributesToFindingsInput) GoString() string {
 	return s.String()
 }
@@ -4080,12 +4172,20 @@ type AddAttributesToFindingsOutput struct {
 	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddAttributesToFindingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddAttributesToFindingsOutput) GoString() string {
 	return s.String()
 }
@@ -4114,12 +4214,20 @@ type AgentAlreadyRunningAssessment struct {
 	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentAlreadyRunningAssessment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentAlreadyRunningAssessment) GoString() string {
 	return s.String()
 }
@@ -4145,20 +4253,28 @@ type AgentFilter struct {
 	// SHUTDOWN, UNHEALTHY, THROTTLED, and UNKNOWN.
 	//
 	// AgentHealthCodes is a required field
-	AgentHealthCodes []*string `locationName:"agentHealthCodes" type:"list" required:"true"`
+	AgentHealthCodes []*string `locationName:"agentHealthCodes" type:"list" required:"true" enum:"AgentHealthCode"`
 
 	// The current health state of the agent. Values can be set to HEALTHY or UNHEALTHY.
 	//
 	// AgentHealths is a required field
-	AgentHealths []*string `locationName:"agentHealths" type:"list" required:"true"`
+	AgentHealths []*string `locationName:"agentHealths" type:"list" required:"true" enum:"AgentHealth"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentFilter) GoString() string {
 	return s.String()
 }
@@ -4225,12 +4341,20 @@ type AgentPreview struct {
 	OperatingSystem *string `locationName:"operatingSystem" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentPreview) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AgentPreview) GoString() string {
 	return s.String()
 }
@@ -4281,6 +4405,83 @@ func (s *AgentPreview) SetKernelVersion(v string) *AgentPreview {
 func (s *AgentPreview) SetOperatingSystem(v string) *AgentPreview {
 	s.OperatingSystem = &v
 	return s
+}
+
+// You started an assessment run, but one of the instances is already participating
+// in another assessment run.
+type AgentsAlreadyRunningAssessmentException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Agents is a required field
+	Agents []*AgentAlreadyRunningAssessment `locationName:"agents" min:"1" type:"list" required:"true"`
+
+	// AgentsTruncated is a required field
+	AgentsTruncated *bool `locationName:"agentsTruncated" type:"boolean" required:"true"`
+
+	// You can immediately retry your request.
+	//
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	// Details of the exception error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AgentsAlreadyRunningAssessmentException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AgentsAlreadyRunningAssessmentException) GoString() string {
+	return s.String()
+}
+
+func newErrorAgentsAlreadyRunningAssessmentException(v protocol.ResponseMetadata) error {
+	return &AgentsAlreadyRunningAssessmentException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AgentsAlreadyRunningAssessmentException) Code() string {
+	return "AgentsAlreadyRunningAssessmentException"
+}
+
+// Message returns the exception's message.
+func (s *AgentsAlreadyRunningAssessmentException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AgentsAlreadyRunningAssessmentException) OrigErr() error {
+	return nil
+}
+
+func (s *AgentsAlreadyRunningAssessmentException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AgentsAlreadyRunningAssessmentException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AgentsAlreadyRunningAssessmentException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // A snapshot of an Amazon Inspector assessment run that contains the findings
@@ -4366,12 +4567,20 @@ type AssessmentRun struct {
 	UserAttributesForFindings []*Attribute `locationName:"userAttributesForFindings" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRun) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRun) GoString() string {
 	return s.String()
 }
@@ -4504,12 +4713,20 @@ type AssessmentRunAgent struct {
 	TelemetryMetadata []*TelemetryMetadata `locationName:"telemetryMetadata" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRunAgent) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRunAgent) GoString() string {
 	return s.String()
 }
@@ -4595,15 +4812,23 @@ type AssessmentRunFilter struct {
 	// For a record to match a filter, one of the values specified for this data
 	// type property must be the exact match of the value of the assessmentRunState
 	// property of the AssessmentRun data type.
-	States []*string `locationName:"states" type:"list"`
+	States []*string `locationName:"states" type:"list" enum:"AssessmentRunState"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRunFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRunFilter) GoString() string {
 	return s.String()
 }
@@ -4668,6 +4893,88 @@ func (s *AssessmentRunFilter) SetStates(v []*string) *AssessmentRunFilter {
 	return s
 }
 
+// You cannot perform a specified action if an assessment run is currently in
+// progress.
+type AssessmentRunInProgressException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The ARNs of the assessment runs that are currently in progress.
+	//
+	// AssessmentRunArns is a required field
+	AssessmentRunArns []*string `locationName:"assessmentRunArns" min:"1" type:"list" required:"true"`
+
+	// Boolean value that indicates whether the ARN list of the assessment runs
+	// is truncated.
+	//
+	// AssessmentRunArnsTruncated is a required field
+	AssessmentRunArnsTruncated *bool `locationName:"assessmentRunArnsTruncated" type:"boolean" required:"true"`
+
+	// You can immediately retry your request.
+	//
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	// Details of the exception error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssessmentRunInProgressException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssessmentRunInProgressException) GoString() string {
+	return s.String()
+}
+
+func newErrorAssessmentRunInProgressException(v protocol.ResponseMetadata) error {
+	return &AssessmentRunInProgressException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AssessmentRunInProgressException) Code() string {
+	return "AssessmentRunInProgressException"
+}
+
+// Message returns the exception's message.
+func (s *AssessmentRunInProgressException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AssessmentRunInProgressException) OrigErr() error {
+	return nil
+}
+
+func (s *AssessmentRunInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AssessmentRunInProgressException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AssessmentRunInProgressException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Used as one of the elements of the AssessmentRun data type.
 type AssessmentRunNotification struct {
 	_ struct{} `type:"structure"`
@@ -4697,12 +5004,20 @@ type AssessmentRunNotification struct {
 	SnsTopicArn *string `locationName:"snsTopicArn" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRunNotification) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRunNotification) GoString() string {
 	return s.String()
 }
@@ -4758,12 +5073,20 @@ type AssessmentRunStateChange struct {
 	StateChangedAt *time.Time `locationName:"stateChangedAt" type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRunStateChange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentRunStateChange) GoString() string {
 	return s.String()
 }
@@ -4810,12 +5133,20 @@ type AssessmentTarget struct {
 	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentTarget) GoString() string {
 	return s.String()
 }
@@ -4860,12 +5191,20 @@ type AssessmentTargetFilter struct {
 	AssessmentTargetNamePattern *string `locationName:"assessmentTargetNamePattern" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentTargetFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentTargetFilter) GoString() string {
 	return s.String()
 }
@@ -4945,12 +5284,20 @@ type AssessmentTemplate struct {
 	UserAttributesForFindings []*Attribute `locationName:"userAttributesForFindings" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentTemplate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentTemplate) GoString() string {
 	return s.String()
 }
@@ -5029,12 +5376,20 @@ type AssessmentTemplateFilter struct {
 	RulesPackageArns []*string `locationName:"rulesPackageArns" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentTemplateFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssessmentTemplateFilter) GoString() string {
 	return s.String()
 }
@@ -5109,12 +5464,20 @@ type AssetAttributes struct {
 	Tags []*Tag `locationName:"tags" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssetAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssetAttributes) GoString() string {
 	return s.String()
 }
@@ -5181,12 +5544,20 @@ type Attribute struct {
 	Value *string `locationName:"value" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Attribute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Attribute) GoString() string {
 	return s.String()
 }
@@ -5237,12 +5608,20 @@ type CreateAssessmentTargetInput struct {
 	ResourceGroupArn *string `locationName:"resourceGroupArn" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAssessmentTargetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAssessmentTargetInput) GoString() string {
 	return s.String()
 }
@@ -5287,12 +5666,20 @@ type CreateAssessmentTargetOutput struct {
 	AssessmentTargetArn *string `locationName:"assessmentTargetArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAssessmentTargetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAssessmentTargetOutput) GoString() string {
 	return s.String()
 }
@@ -5338,12 +5725,20 @@ type CreateAssessmentTemplateInput struct {
 	UserAttributesForFindings []*Attribute `locationName:"userAttributesForFindings" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAssessmentTemplateInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAssessmentTemplateInput) GoString() string {
 	return s.String()
 }
@@ -5428,12 +5823,20 @@ type CreateAssessmentTemplateOutput struct {
 	AssessmentTemplateArn *string `locationName:"assessmentTemplateArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAssessmentTemplateOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAssessmentTemplateOutput) GoString() string {
 	return s.String()
 }
@@ -5454,12 +5857,20 @@ type CreateExclusionsPreviewInput struct {
 	AssessmentTemplateArn *string `locationName:"assessmentTemplateArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateExclusionsPreviewInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateExclusionsPreviewInput) GoString() string {
 	return s.String()
 }
@@ -5497,12 +5908,20 @@ type CreateExclusionsPreviewOutput struct {
 	PreviewToken *string `locationName:"previewToken" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateExclusionsPreviewOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateExclusionsPreviewOutput) GoString() string {
 	return s.String()
 }
@@ -5524,12 +5943,20 @@ type CreateResourceGroupInput struct {
 	ResourceGroupTags []*ResourceGroupTag `locationName:"resourceGroupTags" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateResourceGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateResourceGroupInput) GoString() string {
 	return s.String()
 }
@@ -5575,12 +6002,20 @@ type CreateResourceGroupOutput struct {
 	ResourceGroupArn *string `locationName:"resourceGroupArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateResourceGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateResourceGroupOutput) GoString() string {
 	return s.String()
 }
@@ -5600,12 +6035,20 @@ type DeleteAssessmentRunInput struct {
 	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentRunInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentRunInput) GoString() string {
 	return s.String()
 }
@@ -5636,12 +6079,20 @@ type DeleteAssessmentRunOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentRunOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentRunOutput) GoString() string {
 	return s.String()
 }
@@ -5655,12 +6106,20 @@ type DeleteAssessmentTargetInput struct {
 	AssessmentTargetArn *string `locationName:"assessmentTargetArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentTargetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentTargetInput) GoString() string {
 	return s.String()
 }
@@ -5691,12 +6150,20 @@ type DeleteAssessmentTargetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentTargetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentTargetOutput) GoString() string {
 	return s.String()
 }
@@ -5710,12 +6177,20 @@ type DeleteAssessmentTemplateInput struct {
 	AssessmentTemplateArn *string `locationName:"assessmentTemplateArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentTemplateInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentTemplateInput) GoString() string {
 	return s.String()
 }
@@ -5746,12 +6221,20 @@ type DeleteAssessmentTemplateOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentTemplateOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteAssessmentTemplateOutput) GoString() string {
 	return s.String()
 }
@@ -5765,12 +6248,20 @@ type DescribeAssessmentRunsInput struct {
 	AssessmentRunArns []*string `locationName:"assessmentRunArns" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentRunsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentRunsInput) GoString() string {
 	return s.String()
 }
@@ -5812,12 +6303,20 @@ type DescribeAssessmentRunsOutput struct {
 	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentRunsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentRunsOutput) GoString() string {
 	return s.String()
 }
@@ -5843,12 +6342,20 @@ type DescribeAssessmentTargetsInput struct {
 	AssessmentTargetArns []*string `locationName:"assessmentTargetArns" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentTargetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentTargetsInput) GoString() string {
 	return s.String()
 }
@@ -5890,12 +6397,20 @@ type DescribeAssessmentTargetsOutput struct {
 	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentTargetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentTargetsOutput) GoString() string {
 	return s.String()
 }
@@ -5919,12 +6434,20 @@ type DescribeAssessmentTemplatesInput struct {
 	AssessmentTemplateArns []*string `locationName:"assessmentTemplateArns" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentTemplatesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentTemplatesInput) GoString() string {
 	return s.String()
 }
@@ -5966,12 +6489,20 @@ type DescribeAssessmentTemplatesOutput struct {
 	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentTemplatesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAssessmentTemplatesOutput) GoString() string {
 	return s.String()
 }
@@ -5992,12 +6523,20 @@ type DescribeCrossAccountAccessRoleInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeCrossAccountAccessRoleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeCrossAccountAccessRoleInput) GoString() string {
 	return s.String()
 }
@@ -6023,12 +6562,20 @@ type DescribeCrossAccountAccessRoleOutput struct {
 	Valid *bool `locationName:"valid" type:"boolean" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeCrossAccountAccessRoleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeCrossAccountAccessRoleOutput) GoString() string {
 	return s.String()
 }
@@ -6064,12 +6611,20 @@ type DescribeExclusionsInput struct {
 	Locale *string `locationName:"locale" type:"string" enum:"Locale"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExclusionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExclusionsInput) GoString() string {
 	return s.String()
 }
@@ -6117,12 +6672,20 @@ type DescribeExclusionsOutput struct {
 	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExclusionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeExclusionsOutput) GoString() string {
 	return s.String()
 }
@@ -6152,12 +6715,20 @@ type DescribeFindingsInput struct {
 	Locale *string `locationName:"locale" type:"string" enum:"Locale"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeFindingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeFindingsInput) GoString() string {
 	return s.String()
 }
@@ -6205,12 +6776,20 @@ type DescribeFindingsOutput struct {
 	Findings []*Finding `locationName:"findings" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeFindingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeFindingsOutput) GoString() string {
 	return s.String()
 }
@@ -6236,12 +6815,20 @@ type DescribeResourceGroupsInput struct {
 	ResourceGroupArns []*string `locationName:"resourceGroupArns" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeResourceGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeResourceGroupsInput) GoString() string {
 	return s.String()
 }
@@ -6283,12 +6870,20 @@ type DescribeResourceGroupsOutput struct {
 	ResourceGroups []*ResourceGroup `locationName:"resourceGroups" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeResourceGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeResourceGroupsOutput) GoString() string {
 	return s.String()
 }
@@ -6317,12 +6912,20 @@ type DescribeRulesPackagesInput struct {
 	RulesPackageArns []*string `locationName:"rulesPackageArns" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeRulesPackagesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeRulesPackagesInput) GoString() string {
 	return s.String()
 }
@@ -6370,12 +6973,20 @@ type DescribeRulesPackagesOutput struct {
 	RulesPackages []*RulesPackage `locationName:"rulesPackages" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeRulesPackagesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeRulesPackagesOutput) GoString() string {
 	return s.String()
 }
@@ -6404,12 +7015,20 @@ type DurationRange struct {
 	MinSeconds *int64 `locationName:"minSeconds" min:"180" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DurationRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DurationRange) GoString() string {
 	return s.String()
 }
@@ -6458,12 +7077,20 @@ type EventSubscription struct {
 	SubscribedAt *time.Time `locationName:"subscribedAt" type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventSubscription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventSubscription) GoString() string {
 	return s.String()
 }
@@ -6513,12 +7140,20 @@ type Exclusion struct {
 	Title *string `locationName:"title" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Exclusion) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Exclusion) GoString() string {
 	return s.String()
 }
@@ -6588,12 +7223,20 @@ type ExclusionPreview struct {
 	Title *string `locationName:"title" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExclusionPreview) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExclusionPreview) GoString() string {
 	return s.String()
 }
@@ -6644,12 +7287,20 @@ type FailedItemDetails struct {
 	Retryable *bool `locationName:"retryable" type:"boolean" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailedItemDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailedItemDetails) GoString() string {
 	return s.String()
 }
@@ -6736,12 +7387,20 @@ type Finding struct {
 	UserAttributes []*Attribute `locationName:"userAttributes" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Finding) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Finding) GoString() string {
 	return s.String()
 }
@@ -6889,7 +7548,7 @@ type FindingFilter struct {
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the severity property
 	// of the Finding data type.
-	Severities []*string `locationName:"severities" type:"list"`
+	Severities []*string `locationName:"severities" type:"list" enum:"Severity"`
 
 	// For a record to match a filter, the value that is specified for this data
 	// type property must be contained in the list of values of the userAttributes
@@ -6897,12 +7556,20 @@ type FindingFilter struct {
 	UserAttributes []*Attribute `locationName:"userAttributes" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FindingFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FindingFilter) GoString() string {
 	return s.String()
 }
@@ -7002,18 +7669,26 @@ type GetAssessmentReportInput struct {
 
 	// Specifies the type of the assessment report that you want to generate. There
 	// are two types of assessment reports: a finding report and a full report.
-	// For more information, see Assessment Reports (http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html).
+	// For more information, see Assessment Reports (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html).
 	//
 	// ReportType is a required field
 	ReportType *string `locationName:"reportType" type:"string" required:"true" enum:"ReportType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAssessmentReportInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAssessmentReportInput) GoString() string {
 	return s.String()
 }
@@ -7071,12 +7746,20 @@ type GetAssessmentReportOutput struct {
 	Url *string `locationName:"url" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAssessmentReportOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAssessmentReportOutput) GoString() string {
 	return s.String()
 }
@@ -7122,12 +7805,20 @@ type GetExclusionsPreviewInput struct {
 	PreviewToken *string `locationName:"previewToken" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetExclusionsPreviewInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetExclusionsPreviewInput) GoString() string {
 	return s.String()
 }
@@ -7202,12 +7893,20 @@ type GetExclusionsPreviewOutput struct {
 	PreviewStatus *string `locationName:"previewStatus" type:"string" required:"true" enum:"PreviewStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetExclusionsPreviewOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetExclusionsPreviewOutput) GoString() string {
 	return s.String()
 }
@@ -7240,12 +7939,20 @@ type GetTelemetryMetadataInput struct {
 	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTelemetryMetadataInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTelemetryMetadataInput) GoString() string {
 	return s.String()
 }
@@ -7281,12 +7988,20 @@ type GetTelemetryMetadataOutput struct {
 	TelemetryMetadata []*TelemetryMetadata `locationName:"telemetryMetadata" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTelemetryMetadataOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTelemetryMetadataOutput) GoString() string {
 	return s.String()
 }
@@ -7295,6 +8010,304 @@ func (s GetTelemetryMetadataOutput) GoString() string {
 func (s *GetTelemetryMetadataOutput) SetTelemetryMetadata(v []*TelemetryMetadata) *GetTelemetryMetadataOutput {
 	s.TelemetryMetadata = v
 	return s
+}
+
+// Internal server error.
+type InternalException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// You can immediately retry your request.
+	//
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	// Details of the exception error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalException(v protocol.ResponseMetadata) error {
+	return &InternalException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalException) Code() string {
+	return "InternalException"
+}
+
+// Message returns the exception's message.
+func (s *InternalException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Amazon Inspector cannot assume the cross-account role that it needs to list
+// your EC2 instances during the assessment run.
+type InvalidCrossAccountRoleException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// You can immediately retry your request.
+	//
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	// Code that indicates the type of error that is generated.
+	//
+	// ErrorCode is a required field
+	ErrorCode *string `locationName:"errorCode" type:"string" required:"true" enum:"InvalidCrossAccountRoleErrorCode"`
+
+	// Details of the exception error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCrossAccountRoleException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidCrossAccountRoleException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidCrossAccountRoleException(v protocol.ResponseMetadata) error {
+	return &InvalidCrossAccountRoleException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidCrossAccountRoleException) Code() string {
+	return "InvalidCrossAccountRoleException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidCrossAccountRoleException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidCrossAccountRoleException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidCrossAccountRoleException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidCrossAccountRoleException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidCrossAccountRoleException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The request was rejected because an invalid or out-of-range value was supplied
+// for an input parameter.
+type InvalidInputException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// You can immediately retry your request.
+	//
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	// Code that indicates the type of error that is generated.
+	//
+	// ErrorCode is a required field
+	ErrorCode *string `locationName:"errorCode" type:"string" required:"true" enum:"InvalidInputErrorCode"`
+
+	// Details of the exception error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInputException(v protocol.ResponseMetadata) error {
+	return &InvalidInputException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInputException) Code() string {
+	return "InvalidInputException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInputException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInputException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInputException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInputException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInputException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The request was rejected because it attempted to create resources beyond
+// the current AWS account limits. The error code describes the limit exceeded.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// You can immediately retry your request.
+	//
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	// Code that indicates the type of error that is generated.
+	//
+	// ErrorCode is a required field
+	ErrorCode *string `locationName:"errorCode" type:"string" required:"true" enum:"LimitExceededErrorCode"`
+
+	// Details of the exception error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type ListAssessmentRunAgentsInput struct {
@@ -7324,12 +8337,20 @@ type ListAssessmentRunAgentsInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentRunAgentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentRunAgentsInput) GoString() string {
 	return s.String()
 }
@@ -7397,12 +8418,20 @@ type ListAssessmentRunAgentsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentRunAgentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentRunAgentsOutput) GoString() string {
 	return s.String()
 }
@@ -7445,12 +8474,20 @@ type ListAssessmentRunsInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentRunsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentRunsInput) GoString() string {
 	return s.String()
 }
@@ -7513,12 +8550,20 @@ type ListAssessmentRunsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentRunsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentRunsOutput) GoString() string {
 	return s.String()
 }
@@ -7557,12 +8602,20 @@ type ListAssessmentTargetsInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentTargetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentTargetsInput) GoString() string {
 	return s.String()
 }
@@ -7619,12 +8672,20 @@ type ListAssessmentTargetsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentTargetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentTargetsOutput) GoString() string {
 	return s.String()
 }
@@ -7667,12 +8728,20 @@ type ListAssessmentTemplatesInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentTemplatesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentTemplatesInput) GoString() string {
 	return s.String()
 }
@@ -7734,12 +8803,20 @@ type ListAssessmentTemplatesOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentTemplatesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssessmentTemplatesOutput) GoString() string {
 	return s.String()
 }
@@ -7774,12 +8851,20 @@ type ListEventSubscriptionsInput struct {
 	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListEventSubscriptionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListEventSubscriptionsInput) GoString() string {
 	return s.String()
 }
@@ -7833,12 +8918,20 @@ type ListEventSubscriptionsOutput struct {
 	Subscriptions []*Subscription `locationName:"subscriptions" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListEventSubscriptionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListEventSubscriptionsOutput) GoString() string {
 	return s.String()
 }
@@ -7875,12 +8968,20 @@ type ListExclusionsInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListExclusionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListExclusionsInput) GoString() string {
 	return s.String()
 }
@@ -7937,12 +9038,20 @@ type ListExclusionsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListExclusionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListExclusionsOutput) GoString() string {
 	return s.String()
 }
@@ -7985,12 +9094,20 @@ type ListFindingsInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFindingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFindingsInput) GoString() string {
 	return s.String()
 }
@@ -8052,12 +9169,20 @@ type ListFindingsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFindingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFindingsOutput) GoString() string {
 	return s.String()
 }
@@ -8088,12 +9213,20 @@ type ListRulesPackagesInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListRulesPackagesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListRulesPackagesInput) GoString() string {
 	return s.String()
 }
@@ -8138,12 +9271,20 @@ type ListRulesPackagesOutput struct {
 	RulesPackageArns []*string `locationName:"rulesPackageArns" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListRulesPackagesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListRulesPackagesOutput) GoString() string {
 	return s.String()
 }
@@ -8169,12 +9310,20 @@ type ListTagsForResourceInput struct {
 	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) GoString() string {
 	return s.String()
 }
@@ -8210,12 +9359,20 @@ type ListTagsForResourceOutput struct {
 	Tags []*Tag `locationName:"tags" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
 }
@@ -8265,12 +9422,20 @@ type NetworkInterface struct {
 	VpcId *string `locationName:"vpcId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NetworkInterface) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NetworkInterface) GoString() string {
 	return s.String()
 }
@@ -8335,6 +9500,82 @@ func (s *NetworkInterface) SetVpcId(v string) *NetworkInterface {
 	return s
 }
 
+// The request was rejected because it referenced an entity that does not exist.
+// The error code describes the entity.
+type NoSuchEntityException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// You can immediately retry your request.
+	//
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	// Code that indicates the type of error that is generated.
+	//
+	// ErrorCode is a required field
+	ErrorCode *string `locationName:"errorCode" type:"string" required:"true" enum:"NoSuchEntityErrorCode"`
+
+	// Details of the exception error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NoSuchEntityException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NoSuchEntityException) GoString() string {
+	return s.String()
+}
+
+func newErrorNoSuchEntityException(v protocol.ResponseMetadata) error {
+	return &NoSuchEntityException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NoSuchEntityException) Code() string {
+	return "NoSuchEntityException"
+}
+
+// Message returns the exception's message.
+func (s *NoSuchEntityException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NoSuchEntityException) OrigErr() error {
+	return nil
+}
+
+func (s *NoSuchEntityException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NoSuchEntityException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NoSuchEntityException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type PreviewAgentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8354,12 +9595,20 @@ type PreviewAgentsInput struct {
 	PreviewAgentsArn *string `locationName:"previewAgentsArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PreviewAgentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PreviewAgentsInput) GoString() string {
 	return s.String()
 }
@@ -8416,12 +9665,20 @@ type PreviewAgentsOutput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PreviewAgentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PreviewAgentsOutput) GoString() string {
 	return s.String()
 }
@@ -8438,6 +9695,71 @@ func (s *PreviewAgentsOutput) SetNextToken(v string) *PreviewAgentsOutput {
 	return s
 }
 
+// The request is rejected. The specified assessment template is currently generating
+// an exclusions preview.
+type PreviewGenerationInProgressException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PreviewGenerationInProgressException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PreviewGenerationInProgressException) GoString() string {
+	return s.String()
+}
+
+func newErrorPreviewGenerationInProgressException(v protocol.ResponseMetadata) error {
+	return &PreviewGenerationInProgressException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *PreviewGenerationInProgressException) Code() string {
+	return "PreviewGenerationInProgressException"
+}
+
+// Message returns the exception's message.
+func (s *PreviewGenerationInProgressException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *PreviewGenerationInProgressException) OrigErr() error {
+	return nil
+}
+
+func (s *PreviewGenerationInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *PreviewGenerationInProgressException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *PreviewGenerationInProgressException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Contains information about a private IP address associated with a network
 // interface. This data type is used as a response element in the DescribeFindings
 // action.
@@ -8451,12 +9773,20 @@ type PrivateIp struct {
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PrivateIp) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PrivateIp) GoString() string {
 	return s.String()
 }
@@ -8483,12 +9813,20 @@ type RegisterCrossAccountAccessRoleInput struct {
 	RoleArn *string `locationName:"roleArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterCrossAccountAccessRoleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterCrossAccountAccessRoleInput) GoString() string {
 	return s.String()
 }
@@ -8519,12 +9857,20 @@ type RegisterCrossAccountAccessRoleOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterCrossAccountAccessRoleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterCrossAccountAccessRoleOutput) GoString() string {
 	return s.String()
 }
@@ -8543,12 +9889,20 @@ type RemoveAttributesFromFindingsInput struct {
 	FindingArns []*string `locationName:"findingArns" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveAttributesFromFindingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveAttributesFromFindingsInput) GoString() string {
 	return s.String()
 }
@@ -8594,12 +9948,20 @@ type RemoveAttributesFromFindingsOutput struct {
 	FailedItems map[string]*FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveAttributesFromFindingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveAttributesFromFindingsOutput) GoString() string {
 	return s.String()
 }
@@ -8634,12 +9996,20 @@ type ResourceGroup struct {
 	Tags []*ResourceGroupTag `locationName:"tags" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceGroup) GoString() string {
 	return s.String()
 }
@@ -8675,12 +10045,20 @@ type ResourceGroupTag struct {
 	Value *string `locationName:"value" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceGroupTag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourceGroupTag) GoString() string {
 	return s.String()
 }
@@ -8745,12 +10123,20 @@ type RulesPackage struct {
 	Version *string `locationName:"version" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RulesPackage) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RulesPackage) GoString() string {
 	return s.String()
 }
@@ -8796,12 +10182,20 @@ type Scope struct {
 	Value *string `locationName:"value" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Scope) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Scope) GoString() string {
 	return s.String()
 }
@@ -8831,12 +10225,20 @@ type SecurityGroup struct {
 	GroupName *string `locationName:"groupName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SecurityGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SecurityGroup) GoString() string {
 	return s.String()
 }
@@ -8869,12 +10271,20 @@ type ServiceAttributes struct {
 	SchemaVersion *int64 `locationName:"schemaVersion" type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ServiceAttributes) GoString() string {
 	return s.String()
 }
@@ -8897,6 +10307,76 @@ func (s *ServiceAttributes) SetSchemaVersion(v int64) *ServiceAttributes {
 	return s
 }
 
+// The serice is temporary unavailable.
+type ServiceTemporarilyUnavailableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// You can wait and then retry your request.
+	//
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	// Details of the exception error.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceTemporarilyUnavailableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceTemporarilyUnavailableException) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceTemporarilyUnavailableException(v protocol.ResponseMetadata) error {
+	return &ServiceTemporarilyUnavailableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceTemporarilyUnavailableException) Code() string {
+	return "ServiceTemporarilyUnavailableException"
+}
+
+// Message returns the exception's message.
+func (s *ServiceTemporarilyUnavailableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceTemporarilyUnavailableException) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceTemporarilyUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceTemporarilyUnavailableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceTemporarilyUnavailableException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type SetTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8910,12 +10390,20 @@ type SetTagsForResourceInput struct {
 	Tags []*Tag `locationName:"tags" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetTagsForResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetTagsForResourceInput) GoString() string {
 	return s.String()
 }
@@ -8962,12 +10450,20 @@ type SetTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetTagsForResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetTagsForResourceOutput) GoString() string {
 	return s.String()
 }
@@ -8986,12 +10482,20 @@ type StartAssessmentRunInput struct {
 	AssessmentTemplateArn *string `locationName:"assessmentTemplateArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartAssessmentRunInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartAssessmentRunInput) GoString() string {
 	return s.String()
 }
@@ -9036,12 +10540,20 @@ type StartAssessmentRunOutput struct {
 	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartAssessmentRunOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartAssessmentRunOutput) GoString() string {
 	return s.String()
 }
@@ -9068,12 +10580,20 @@ type StopAssessmentRunInput struct {
 	StopAction *string `locationName:"stopAction" type:"string" enum:"StopAction"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopAssessmentRunInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopAssessmentRunInput) GoString() string {
 	return s.String()
 }
@@ -9110,12 +10630,20 @@ type StopAssessmentRunOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopAssessmentRunOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopAssessmentRunOutput) GoString() string {
 	return s.String()
 }
@@ -9140,12 +10668,20 @@ type SubscribeToEventInput struct {
 	TopicArn *string `locationName:"topicArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubscribeToEventInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubscribeToEventInput) GoString() string {
 	return s.String()
 }
@@ -9197,12 +10733,20 @@ type SubscribeToEventOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubscribeToEventOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubscribeToEventOutput) GoString() string {
 	return s.String()
 }
@@ -9230,12 +10774,20 @@ type Subscription struct {
 	TopicArn *string `locationName:"topicArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subscription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subscription) GoString() string {
 	return s.String()
 }
@@ -9273,12 +10825,20 @@ type Tag struct {
 	Value *string `locationName:"value" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -9334,12 +10894,20 @@ type TelemetryMetadata struct {
 	MessageType *string `locationName:"messageType" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TelemetryMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TelemetryMetadata) GoString() string {
 	return s.String()
 }
@@ -9373,12 +10941,20 @@ type TimestampRange struct {
 	EndDate *time.Time `locationName:"endDate" type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimestampRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimestampRange) GoString() string {
 	return s.String()
 }
@@ -9415,12 +10991,20 @@ type UnsubscribeFromEventInput struct {
 	TopicArn *string `locationName:"topicArn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnsubscribeFromEventInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnsubscribeFromEventInput) GoString() string {
 	return s.String()
 }
@@ -9472,14 +11056,93 @@ type UnsubscribeFromEventOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnsubscribeFromEventOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnsubscribeFromEventOutput) GoString() string {
 	return s.String()
+}
+
+// Used by the GetAssessmentReport API. The request was rejected because you
+// tried to generate a report for an assessment run that existed before reporting
+// was supported in Amazon Inspector. You can only generate reports for assessment
+// runs that took place or will take place after generating reports in Amazon
+// Inspector became available.
+type UnsupportedFeatureException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// CanRetry is a required field
+	CanRetry *bool `locationName:"canRetry" type:"boolean" required:"true"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedFeatureException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedFeatureException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedFeatureException(v protocol.ResponseMetadata) error {
+	return &UnsupportedFeatureException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedFeatureException) Code() string {
+	return "UnsupportedFeatureException"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedFeatureException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedFeatureException) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedFeatureException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedFeatureException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedFeatureException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type UpdateAssessmentTargetInput struct {
@@ -9500,12 +11163,20 @@ type UpdateAssessmentTargetInput struct {
 	ResourceGroupArn *string `locationName:"resourceGroupArn" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAssessmentTargetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAssessmentTargetInput) GoString() string {
 	return s.String()
 }
@@ -9557,12 +11228,20 @@ type UpdateAssessmentTargetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAssessmentTargetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateAssessmentTargetOutput) GoString() string {
 	return s.String()
 }
@@ -9593,6 +11272,20 @@ const (
 	AccessDeniedErrorCodeAccessDeniedToIamRole = "ACCESS_DENIED_TO_IAM_ROLE"
 )
 
+// AccessDeniedErrorCode_Values returns all elements of the AccessDeniedErrorCode enum
+func AccessDeniedErrorCode_Values() []string {
+	return []string{
+		AccessDeniedErrorCodeAccessDeniedToAssessmentTarget,
+		AccessDeniedErrorCodeAccessDeniedToAssessmentTemplate,
+		AccessDeniedErrorCodeAccessDeniedToAssessmentRun,
+		AccessDeniedErrorCodeAccessDeniedToFinding,
+		AccessDeniedErrorCodeAccessDeniedToResourceGroup,
+		AccessDeniedErrorCodeAccessDeniedToRulesPackage,
+		AccessDeniedErrorCodeAccessDeniedToSnsTopic,
+		AccessDeniedErrorCodeAccessDeniedToIamRole,
+	}
+}
+
 const (
 	// AgentHealthHealthy is a AgentHealth enum value
 	AgentHealthHealthy = "HEALTHY"
@@ -9603,6 +11296,15 @@ const (
 	// AgentHealthUnknown is a AgentHealth enum value
 	AgentHealthUnknown = "UNKNOWN"
 )
+
+// AgentHealth_Values returns all elements of the AgentHealth enum
+func AgentHealth_Values() []string {
+	return []string{
+		AgentHealthHealthy,
+		AgentHealthUnhealthy,
+		AgentHealthUnknown,
+	}
+}
 
 const (
 	// AgentHealthCodeIdle is a AgentHealthCode enum value
@@ -9624,6 +11326,18 @@ const (
 	AgentHealthCodeUnknown = "UNKNOWN"
 )
 
+// AgentHealthCode_Values returns all elements of the AgentHealthCode enum
+func AgentHealthCode_Values() []string {
+	return []string{
+		AgentHealthCodeIdle,
+		AgentHealthCodeRunning,
+		AgentHealthCodeShutdown,
+		AgentHealthCodeUnhealthy,
+		AgentHealthCodeThrottled,
+		AgentHealthCodeUnknown,
+	}
+}
+
 const (
 	// AssessmentRunNotificationSnsStatusCodeSuccess is a AssessmentRunNotificationSnsStatusCode enum value
 	AssessmentRunNotificationSnsStatusCodeSuccess = "SUCCESS"
@@ -9637,6 +11351,16 @@ const (
 	// AssessmentRunNotificationSnsStatusCodeInternalError is a AssessmentRunNotificationSnsStatusCode enum value
 	AssessmentRunNotificationSnsStatusCodeInternalError = "INTERNAL_ERROR"
 )
+
+// AssessmentRunNotificationSnsStatusCode_Values returns all elements of the AssessmentRunNotificationSnsStatusCode enum
+func AssessmentRunNotificationSnsStatusCode_Values() []string {
+	return []string{
+		AssessmentRunNotificationSnsStatusCodeSuccess,
+		AssessmentRunNotificationSnsStatusCodeTopicDoesNotExist,
+		AssessmentRunNotificationSnsStatusCodeAccessDenied,
+		AssessmentRunNotificationSnsStatusCodeInternalError,
+	}
+}
 
 const (
 	// AssessmentRunStateCreated is a AssessmentRunState enum value
@@ -9679,10 +11403,36 @@ const (
 	AssessmentRunStateCanceled = "CANCELED"
 )
 
+// AssessmentRunState_Values returns all elements of the AssessmentRunState enum
+func AssessmentRunState_Values() []string {
+	return []string{
+		AssessmentRunStateCreated,
+		AssessmentRunStateStartDataCollectionPending,
+		AssessmentRunStateStartDataCollectionInProgress,
+		AssessmentRunStateCollectingData,
+		AssessmentRunStateStopDataCollectionPending,
+		AssessmentRunStateDataCollected,
+		AssessmentRunStateStartEvaluatingRulesPending,
+		AssessmentRunStateEvaluatingRules,
+		AssessmentRunStateFailed,
+		AssessmentRunStateError,
+		AssessmentRunStateCompleted,
+		AssessmentRunStateCompletedWithErrors,
+		AssessmentRunStateCanceled,
+	}
+}
+
 const (
 	// AssetTypeEc2Instance is a AssetType enum value
 	AssetTypeEc2Instance = "ec2-instance"
 )
+
+// AssetType_Values returns all elements of the AssetType enum
+func AssetType_Values() []string {
+	return []string{
+		AssetTypeEc2Instance,
+	}
+}
 
 const (
 	// EventAssessmentRunStarted is a Event enum value
@@ -9700,6 +11450,17 @@ const (
 	// EventOther is a Event enum value
 	EventOther = "OTHER"
 )
+
+// Event_Values returns all elements of the Event enum
+func Event_Values() []string {
+	return []string{
+		EventAssessmentRunStarted,
+		EventAssessmentRunCompleted,
+		EventAssessmentRunStateChanged,
+		EventFindingReported,
+		EventOther,
+	}
+}
 
 const (
 	// FailedItemErrorCodeInvalidArn is a FailedItemErrorCode enum value
@@ -9721,6 +11482,18 @@ const (
 	FailedItemErrorCodeInternalError = "INTERNAL_ERROR"
 )
 
+// FailedItemErrorCode_Values returns all elements of the FailedItemErrorCode enum
+func FailedItemErrorCode_Values() []string {
+	return []string{
+		FailedItemErrorCodeInvalidArn,
+		FailedItemErrorCodeDuplicateArn,
+		FailedItemErrorCodeItemDoesNotExist,
+		FailedItemErrorCodeAccessDenied,
+		FailedItemErrorCodeLimitExceeded,
+		FailedItemErrorCodeInternalError,
+	}
+}
+
 const (
 	// InvalidCrossAccountRoleErrorCodeRoleDoesNotExistOrInvalidTrustRelationship is a InvalidCrossAccountRoleErrorCode enum value
 	InvalidCrossAccountRoleErrorCodeRoleDoesNotExistOrInvalidTrustRelationship = "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"
@@ -9728,6 +11501,14 @@ const (
 	// InvalidCrossAccountRoleErrorCodeRoleDoesNotHaveCorrectPolicy is a InvalidCrossAccountRoleErrorCode enum value
 	InvalidCrossAccountRoleErrorCodeRoleDoesNotHaveCorrectPolicy = "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
 )
+
+// InvalidCrossAccountRoleErrorCode_Values returns all elements of the InvalidCrossAccountRoleErrorCode enum
+func InvalidCrossAccountRoleErrorCode_Values() []string {
+	return []string{
+		InvalidCrossAccountRoleErrorCodeRoleDoesNotExistOrInvalidTrustRelationship,
+		InvalidCrossAccountRoleErrorCodeRoleDoesNotHaveCorrectPolicy,
+	}
+}
 
 const (
 	// InvalidInputErrorCodeInvalidAssessmentTargetArn is a InvalidInputErrorCode enum value
@@ -9893,6 +11674,66 @@ const (
 	InvalidInputErrorCodeInvalidNumberOfSeverities = "INVALID_NUMBER_OF_SEVERITIES"
 )
 
+// InvalidInputErrorCode_Values returns all elements of the InvalidInputErrorCode enum
+func InvalidInputErrorCode_Values() []string {
+	return []string{
+		InvalidInputErrorCodeInvalidAssessmentTargetArn,
+		InvalidInputErrorCodeInvalidAssessmentTemplateArn,
+		InvalidInputErrorCodeInvalidAssessmentRunArn,
+		InvalidInputErrorCodeInvalidFindingArn,
+		InvalidInputErrorCodeInvalidResourceGroupArn,
+		InvalidInputErrorCodeInvalidRulesPackageArn,
+		InvalidInputErrorCodeInvalidResourceArn,
+		InvalidInputErrorCodeInvalidSnsTopicArn,
+		InvalidInputErrorCodeInvalidIamRoleArn,
+		InvalidInputErrorCodeInvalidAssessmentTargetName,
+		InvalidInputErrorCodeInvalidAssessmentTargetNamePattern,
+		InvalidInputErrorCodeInvalidAssessmentTemplateName,
+		InvalidInputErrorCodeInvalidAssessmentTemplateNamePattern,
+		InvalidInputErrorCodeInvalidAssessmentTemplateDuration,
+		InvalidInputErrorCodeInvalidAssessmentTemplateDurationRange,
+		InvalidInputErrorCodeInvalidAssessmentRunDurationRange,
+		InvalidInputErrorCodeInvalidAssessmentRunStartTimeRange,
+		InvalidInputErrorCodeInvalidAssessmentRunCompletionTimeRange,
+		InvalidInputErrorCodeInvalidAssessmentRunStateChangeTimeRange,
+		InvalidInputErrorCodeInvalidAssessmentRunState,
+		InvalidInputErrorCodeInvalidTag,
+		InvalidInputErrorCodeInvalidTagKey,
+		InvalidInputErrorCodeInvalidTagValue,
+		InvalidInputErrorCodeInvalidResourceGroupTagKey,
+		InvalidInputErrorCodeInvalidResourceGroupTagValue,
+		InvalidInputErrorCodeInvalidAttribute,
+		InvalidInputErrorCodeInvalidUserAttribute,
+		InvalidInputErrorCodeInvalidUserAttributeKey,
+		InvalidInputErrorCodeInvalidUserAttributeValue,
+		InvalidInputErrorCodeInvalidPaginationToken,
+		InvalidInputErrorCodeInvalidMaxResults,
+		InvalidInputErrorCodeInvalidAgentId,
+		InvalidInputErrorCodeInvalidAutoScalingGroup,
+		InvalidInputErrorCodeInvalidRuleName,
+		InvalidInputErrorCodeInvalidSeverity,
+		InvalidInputErrorCodeInvalidLocale,
+		InvalidInputErrorCodeInvalidEvent,
+		InvalidInputErrorCodeAssessmentTargetNameAlreadyTaken,
+		InvalidInputErrorCodeAssessmentTemplateNameAlreadyTaken,
+		InvalidInputErrorCodeInvalidNumberOfAssessmentTargetArns,
+		InvalidInputErrorCodeInvalidNumberOfAssessmentTemplateArns,
+		InvalidInputErrorCodeInvalidNumberOfAssessmentRunArns,
+		InvalidInputErrorCodeInvalidNumberOfFindingArns,
+		InvalidInputErrorCodeInvalidNumberOfResourceGroupArns,
+		InvalidInputErrorCodeInvalidNumberOfRulesPackageArns,
+		InvalidInputErrorCodeInvalidNumberOfAssessmentRunStates,
+		InvalidInputErrorCodeInvalidNumberOfTags,
+		InvalidInputErrorCodeInvalidNumberOfResourceGroupTags,
+		InvalidInputErrorCodeInvalidNumberOfAttributes,
+		InvalidInputErrorCodeInvalidNumberOfUserAttributes,
+		InvalidInputErrorCodeInvalidNumberOfAgentIds,
+		InvalidInputErrorCodeInvalidNumberOfAutoScalingGroups,
+		InvalidInputErrorCodeInvalidNumberOfRuleNames,
+		InvalidInputErrorCodeInvalidNumberOfSeverities,
+	}
+}
+
 const (
 	// LimitExceededErrorCodeAssessmentTargetLimitExceeded is a LimitExceededErrorCode enum value
 	LimitExceededErrorCodeAssessmentTargetLimitExceeded = "ASSESSMENT_TARGET_LIMIT_EXCEEDED"
@@ -9910,10 +11751,28 @@ const (
 	LimitExceededErrorCodeEventSubscriptionLimitExceeded = "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"
 )
 
+// LimitExceededErrorCode_Values returns all elements of the LimitExceededErrorCode enum
+func LimitExceededErrorCode_Values() []string {
+	return []string{
+		LimitExceededErrorCodeAssessmentTargetLimitExceeded,
+		LimitExceededErrorCodeAssessmentTemplateLimitExceeded,
+		LimitExceededErrorCodeAssessmentRunLimitExceeded,
+		LimitExceededErrorCodeResourceGroupLimitExceeded,
+		LimitExceededErrorCodeEventSubscriptionLimitExceeded,
+	}
+}
+
 const (
 	// LocaleEnUs is a Locale enum value
 	LocaleEnUs = "EN_US"
 )
+
+// Locale_Values returns all elements of the Locale enum
+func Locale_Values() []string {
+	return []string{
+		LocaleEnUs,
+	}
+}
 
 const (
 	// NoSuchEntityErrorCodeAssessmentTargetDoesNotExist is a NoSuchEntityErrorCode enum value
@@ -9941,6 +11800,20 @@ const (
 	NoSuchEntityErrorCodeIamRoleDoesNotExist = "IAM_ROLE_DOES_NOT_EXIST"
 )
 
+// NoSuchEntityErrorCode_Values returns all elements of the NoSuchEntityErrorCode enum
+func NoSuchEntityErrorCode_Values() []string {
+	return []string{
+		NoSuchEntityErrorCodeAssessmentTargetDoesNotExist,
+		NoSuchEntityErrorCodeAssessmentTemplateDoesNotExist,
+		NoSuchEntityErrorCodeAssessmentRunDoesNotExist,
+		NoSuchEntityErrorCodeFindingDoesNotExist,
+		NoSuchEntityErrorCodeResourceGroupDoesNotExist,
+		NoSuchEntityErrorCodeRulesPackageDoesNotExist,
+		NoSuchEntityErrorCodeSnsTopicDoesNotExist,
+		NoSuchEntityErrorCodeIamRoleDoesNotExist,
+	}
+}
+
 const (
 	// PreviewStatusWorkInProgress is a PreviewStatus enum value
 	PreviewStatusWorkInProgress = "WORK_IN_PROGRESS"
@@ -9949,6 +11822,14 @@ const (
 	PreviewStatusCompleted = "COMPLETED"
 )
 
+// PreviewStatus_Values returns all elements of the PreviewStatus enum
+func PreviewStatus_Values() []string {
+	return []string{
+		PreviewStatusWorkInProgress,
+		PreviewStatusCompleted,
+	}
+}
+
 const (
 	// ReportFileFormatHtml is a ReportFileFormat enum value
 	ReportFileFormatHtml = "HTML"
@@ -9956,6 +11837,14 @@ const (
 	// ReportFileFormatPdf is a ReportFileFormat enum value
 	ReportFileFormatPdf = "PDF"
 )
+
+// ReportFileFormat_Values returns all elements of the ReportFileFormat enum
+func ReportFileFormat_Values() []string {
+	return []string{
+		ReportFileFormatHtml,
+		ReportFileFormatPdf,
+	}
+}
 
 const (
 	// ReportStatusWorkInProgress is a ReportStatus enum value
@@ -9968,6 +11857,15 @@ const (
 	ReportStatusCompleted = "COMPLETED"
 )
 
+// ReportStatus_Values returns all elements of the ReportStatus enum
+func ReportStatus_Values() []string {
+	return []string{
+		ReportStatusWorkInProgress,
+		ReportStatusFailed,
+		ReportStatusCompleted,
+	}
+}
+
 const (
 	// ReportTypeFinding is a ReportType enum value
 	ReportTypeFinding = "FINDING"
@@ -9976,6 +11874,14 @@ const (
 	ReportTypeFull = "FULL"
 )
 
+// ReportType_Values returns all elements of the ReportType enum
+func ReportType_Values() []string {
+	return []string{
+		ReportTypeFinding,
+		ReportTypeFull,
+	}
+}
+
 const (
 	// ScopeTypeInstanceId is a ScopeType enum value
 	ScopeTypeInstanceId = "INSTANCE_ID"
@@ -9983,6 +11889,14 @@ const (
 	// ScopeTypeRulesPackageArn is a ScopeType enum value
 	ScopeTypeRulesPackageArn = "RULES_PACKAGE_ARN"
 )
+
+// ScopeType_Values returns all elements of the ScopeType enum
+func ScopeType_Values() []string {
+	return []string{
+		ScopeTypeInstanceId,
+		ScopeTypeRulesPackageArn,
+	}
+}
 
 const (
 	// SeverityLow is a Severity enum value
@@ -10001,6 +11915,17 @@ const (
 	SeverityUndefined = "Undefined"
 )
 
+// Severity_Values returns all elements of the Severity enum
+func Severity_Values() []string {
+	return []string{
+		SeverityLow,
+		SeverityMedium,
+		SeverityHigh,
+		SeverityInformational,
+		SeverityUndefined,
+	}
+}
+
 const (
 	// StopActionStartEvaluation is a StopAction enum value
 	StopActionStartEvaluation = "START_EVALUATION"
@@ -10008,3 +11933,11 @@ const (
 	// StopActionSkipEvaluation is a StopAction enum value
 	StopActionSkipEvaluation = "SKIP_EVALUATION"
 )
+
+// StopAction_Values returns all elements of the StopAction enum
+func StopAction_Values() []string {
+	return []string{
+		StopActionStartEvaluation,
+		StopActionSkipEvaluation,
+	}
+}

@@ -3,30 +3,27 @@
 // Package ram provides the client and types for making API
 // requests to AWS Resource Access Manager.
 //
-// Use AWS Resource Access Manager to share AWS resources between AWS accounts.
-// To share a resource, you create a resource share, associate the resource
-// with the resource share, and specify the principals that can access the resource.
-// The following principals are supported:
+// This is the Resource Access Manager API Reference. This documentation provides
+// descriptions and syntax for each of the actions and data types in RAM. RAM
+// is a service that helps you securely share your Amazon Web Services resources
+// to other Amazon Web Services accounts. If you use Organizations to manage
+// your accounts, then you can share your resources with your entire organization
+// or to organizational units (OUs). For supported resource types, you can also
+// share resources with individual Identity and Access Management (IAM) roles
+// and users.
 //
-//    * The ID of an AWS account
+// To learn more about RAM, see the following resources:
 //
-//    * The Amazon Resource Name (ARN) of an OU from AWS Organizations
+//   - Resource Access Manager product page (http://aws.amazon.com/ram)
 //
-//    * The Amazon Resource Name (ARN) of an organization from AWS Organizations
-//
-// If you specify an AWS account that doesn't exist in the same organization
-// as the account that owns the resource share, the owner of the specified account
-// receives an invitation to accept the resource share. After the owner accepts
-// the invitation, they can access the resources in the resource share. An administrator
-// of the specified account can use IAM policies to restrict access resources
-// in the resource share.
+//   - Resource Access Manager User Guide (https://docs.aws.amazon.com/ram/latest/userguide/)
 //
 // See https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04 for more information on this service.
 //
 // See ram package documentation for more information.
 // https://docs.aws.amazon.com/sdk-for-go/api/service/ram/
 //
-// Using the Client
+// # Using the Client
 //
 // To contact AWS Resource Access Manager with the SDK use the New function to create
 // a new service client. With that client you can make API requests to the service.

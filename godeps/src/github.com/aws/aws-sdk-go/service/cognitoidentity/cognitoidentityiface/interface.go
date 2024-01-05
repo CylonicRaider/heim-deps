@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Cognito Identity.
-//    func myFunc(svc cognitoidentityiface.CognitoIdentityAPI) bool {
-//        // Make svc.CreateIdentityPool request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// Amazon Cognito Identity.
+//	func myFunc(svc cognitoidentityiface.CognitoIdentityAPI) bool {
+//	    // Make svc.CreateIdentityPool request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := cognitoidentity.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := cognitoidentity.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCognitoIdentityClient struct {
-//        cognitoidentityiface.CognitoIdentityAPI
-//    }
-//    func (m *mockCognitoIdentityClient) CreateIdentityPool(input *cognitoidentity.CreateIdentityPoolInput) (*cognitoidentity.IdentityPool, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockCognitoIdentityClient struct {
+//	    cognitoidentityiface.CognitoIdentityAPI
+//	}
+//	func (m *mockCognitoIdentityClient) CreateIdentityPool(input *cognitoidentity.CreateIdentityPoolInput) (*cognitoidentity.IdentityPool, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCognitoIdentityClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockCognitoIdentityClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -100,6 +100,10 @@ type CognitoIdentityAPI interface {
 	GetOpenIdTokenForDeveloperIdentityWithContext(aws.Context, *cognitoidentity.GetOpenIdTokenForDeveloperIdentityInput, ...request.Option) (*cognitoidentity.GetOpenIdTokenForDeveloperIdentityOutput, error)
 	GetOpenIdTokenForDeveloperIdentityRequest(*cognitoidentity.GetOpenIdTokenForDeveloperIdentityInput) (*request.Request, *cognitoidentity.GetOpenIdTokenForDeveloperIdentityOutput)
 
+	GetPrincipalTagAttributeMap(*cognitoidentity.GetPrincipalTagAttributeMapInput) (*cognitoidentity.GetPrincipalTagAttributeMapOutput, error)
+	GetPrincipalTagAttributeMapWithContext(aws.Context, *cognitoidentity.GetPrincipalTagAttributeMapInput, ...request.Option) (*cognitoidentity.GetPrincipalTagAttributeMapOutput, error)
+	GetPrincipalTagAttributeMapRequest(*cognitoidentity.GetPrincipalTagAttributeMapInput) (*request.Request, *cognitoidentity.GetPrincipalTagAttributeMapOutput)
+
 	ListIdentities(*cognitoidentity.ListIdentitiesInput) (*cognitoidentity.ListIdentitiesOutput, error)
 	ListIdentitiesWithContext(aws.Context, *cognitoidentity.ListIdentitiesInput, ...request.Option) (*cognitoidentity.ListIdentitiesOutput, error)
 	ListIdentitiesRequest(*cognitoidentity.ListIdentitiesInput) (*request.Request, *cognitoidentity.ListIdentitiesOutput)
@@ -107,6 +111,13 @@ type CognitoIdentityAPI interface {
 	ListIdentityPools(*cognitoidentity.ListIdentityPoolsInput) (*cognitoidentity.ListIdentityPoolsOutput, error)
 	ListIdentityPoolsWithContext(aws.Context, *cognitoidentity.ListIdentityPoolsInput, ...request.Option) (*cognitoidentity.ListIdentityPoolsOutput, error)
 	ListIdentityPoolsRequest(*cognitoidentity.ListIdentityPoolsInput) (*request.Request, *cognitoidentity.ListIdentityPoolsOutput)
+
+	ListIdentityPoolsPages(*cognitoidentity.ListIdentityPoolsInput, func(*cognitoidentity.ListIdentityPoolsOutput, bool) bool) error
+	ListIdentityPoolsPagesWithContext(aws.Context, *cognitoidentity.ListIdentityPoolsInput, func(*cognitoidentity.ListIdentityPoolsOutput, bool) bool, ...request.Option) error
+
+	ListTagsForResource(*cognitoidentity.ListTagsForResourceInput) (*cognitoidentity.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *cognitoidentity.ListTagsForResourceInput, ...request.Option) (*cognitoidentity.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*cognitoidentity.ListTagsForResourceInput) (*request.Request, *cognitoidentity.ListTagsForResourceOutput)
 
 	LookupDeveloperIdentity(*cognitoidentity.LookupDeveloperIdentityInput) (*cognitoidentity.LookupDeveloperIdentityOutput, error)
 	LookupDeveloperIdentityWithContext(aws.Context, *cognitoidentity.LookupDeveloperIdentityInput, ...request.Option) (*cognitoidentity.LookupDeveloperIdentityOutput, error)
@@ -120,6 +131,14 @@ type CognitoIdentityAPI interface {
 	SetIdentityPoolRolesWithContext(aws.Context, *cognitoidentity.SetIdentityPoolRolesInput, ...request.Option) (*cognitoidentity.SetIdentityPoolRolesOutput, error)
 	SetIdentityPoolRolesRequest(*cognitoidentity.SetIdentityPoolRolesInput) (*request.Request, *cognitoidentity.SetIdentityPoolRolesOutput)
 
+	SetPrincipalTagAttributeMap(*cognitoidentity.SetPrincipalTagAttributeMapInput) (*cognitoidentity.SetPrincipalTagAttributeMapOutput, error)
+	SetPrincipalTagAttributeMapWithContext(aws.Context, *cognitoidentity.SetPrincipalTagAttributeMapInput, ...request.Option) (*cognitoidentity.SetPrincipalTagAttributeMapOutput, error)
+	SetPrincipalTagAttributeMapRequest(*cognitoidentity.SetPrincipalTagAttributeMapInput) (*request.Request, *cognitoidentity.SetPrincipalTagAttributeMapOutput)
+
+	TagResource(*cognitoidentity.TagResourceInput) (*cognitoidentity.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *cognitoidentity.TagResourceInput, ...request.Option) (*cognitoidentity.TagResourceOutput, error)
+	TagResourceRequest(*cognitoidentity.TagResourceInput) (*request.Request, *cognitoidentity.TagResourceOutput)
+
 	UnlinkDeveloperIdentity(*cognitoidentity.UnlinkDeveloperIdentityInput) (*cognitoidentity.UnlinkDeveloperIdentityOutput, error)
 	UnlinkDeveloperIdentityWithContext(aws.Context, *cognitoidentity.UnlinkDeveloperIdentityInput, ...request.Option) (*cognitoidentity.UnlinkDeveloperIdentityOutput, error)
 	UnlinkDeveloperIdentityRequest(*cognitoidentity.UnlinkDeveloperIdentityInput) (*request.Request, *cognitoidentity.UnlinkDeveloperIdentityOutput)
@@ -127,6 +146,10 @@ type CognitoIdentityAPI interface {
 	UnlinkIdentity(*cognitoidentity.UnlinkIdentityInput) (*cognitoidentity.UnlinkIdentityOutput, error)
 	UnlinkIdentityWithContext(aws.Context, *cognitoidentity.UnlinkIdentityInput, ...request.Option) (*cognitoidentity.UnlinkIdentityOutput, error)
 	UnlinkIdentityRequest(*cognitoidentity.UnlinkIdentityInput) (*request.Request, *cognitoidentity.UnlinkIdentityOutput)
+
+	UntagResource(*cognitoidentity.UntagResourceInput) (*cognitoidentity.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *cognitoidentity.UntagResourceInput, ...request.Option) (*cognitoidentity.UntagResourceOutput, error)
+	UntagResourceRequest(*cognitoidentity.UntagResourceInput) (*request.Request, *cognitoidentity.UntagResourceOutput)
 
 	UpdateIdentityPool(*cognitoidentity.IdentityPool) (*cognitoidentity.IdentityPool, error)
 	UpdateIdentityPoolWithContext(aws.Context, *cognitoidentity.IdentityPool, ...request.Option) (*cognitoidentity.IdentityPool, error)

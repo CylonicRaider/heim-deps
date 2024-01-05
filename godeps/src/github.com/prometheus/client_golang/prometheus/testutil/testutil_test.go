@@ -14,6 +14,9 @@
 package testutil
 
 import (
+	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"strings"
 	"testing"
 
@@ -165,6 +168,26 @@ func TestCollectAndCompareNoLabel(t *testing.T) {
 	}
 }
 
+func TestCollectAndCompareNoHelp(t *testing.T) {
+	const metadata = `
+		# TYPE some_total counter
+	`
+
+	c := prometheus.NewCounter(prometheus.CounterOpts{
+		Name: "some_total",
+	})
+	c.Inc()
+
+	expected := `
+
+		some_total 1
+	`
+
+	if err := CollectAndCompare(c, strings.NewReader(metadata+expected), "some_total"); err != nil {
+		t.Errorf("unexpected collecting result:\n%s", err)
+	}
+}
+
 func TestCollectAndCompareHistogram(t *testing.T) {
 	inputs := []struct {
 		name        string
@@ -227,7 +250,7 @@ func TestCollectAndCompareHistogram(t *testing.T) {
 		case *prometheus.HistogramVec:
 			collector.WithLabelValues("test").Observe(input.observation)
 		default:
-			t.Fatalf("unsuported collector tested")
+			t.Fatalf("unsupported collector tested")
 
 		}
 
@@ -284,17 +307,18 @@ func TestMetricNotFound(t *testing.T) {
 	`
 
 	expectedError := `
-metric output does not match expectation; want:
 
-# HELP some_other_metric A value that represents a counter.
-# TYPE some_other_metric counter
-some_other_metric{label1="value1"} 1
-
-got:
-
-# HELP some_total A value that represents a counter.
-# TYPE some_total counter
-some_total{label1="value1"} 1
+Diff:
+--- metric output does not match expectation; want
++++ got:
+@@ -1,4 +1,4 @@
+-(bytes.Buffer) # HELP some_other_metric A value that represents a counter.
+-# TYPE some_other_metric counter
+-some_other_metric{label1="value1"} 1
++(bytes.Buffer) # HELP some_total A value that represents a counter.
++# TYPE some_total counter
++some_total{label1="value1"} 1
+ 
 `
 
 	err := CollectAndCompare(c, strings.NewReader(metadata+expected))
@@ -304,5 +328,112 @@ some_total{label1="value1"} 1
 
 	if err.Error() != expectedError {
 		t.Errorf("Expected\n%#+v\nGot:\n%#+v", expectedError, err.Error())
+	}
+}
+
+func TestScrapeAndCompare(t *testing.T) {
+	const expected = `
+		# HELP some_total A value that represents a counter.
+		# TYPE some_total counter
+
+		some_total{ label1 = "value1" } 1
+	`
+
+	expectedReader := strings.NewReader(expected)
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, expected)
+	}))
+	defer ts.Close()
+
+	if err := ScrapeAndCompare(ts.URL, expectedReader, "some_total"); err != nil {
+		t.Errorf("unexpected scraping result:\n%s", err)
+	}
+}
+
+func TestScrapeAndCompareWithMultipleExpected(t *testing.T) {
+	const expected = `
+		# HELP some_total A value that represents a counter.
+		# TYPE some_total counter
+
+		some_total{ label1 = "value1" } 1
+
+		# HELP some_total2 A value that represents a counter.
+		# TYPE some_total2 counter
+
+		some_total2{ label2 = "value2" } 1
+	`
+
+	expectedReader := strings.NewReader(expected)
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, expected)
+	}))
+	defer ts.Close()
+
+	if err := ScrapeAndCompare(ts.URL, expectedReader, "some_total2"); err != nil {
+		t.Errorf("unexpected scraping result:\n%s", err)
+	}
+}
+
+func TestScrapeAndCompareFetchingFail(t *testing.T) {
+	err := ScrapeAndCompare("some_url", strings.NewReader("some expectation"), "some_total")
+	if err == nil {
+		t.Errorf("expected an error but got nil")
+	}
+	if !strings.HasPrefix(err.Error(), "scraping metrics failed") {
+		t.Errorf("unexpected error happened: %s", err)
+	}
+}
+
+func TestScrapeAndCompareBadStatusCode(t *testing.T) {
+	const expected = `
+		# HELP some_total A value that represents a counter.
+		# TYPE some_total counter
+
+		some_total{ label1 = "value1" } 1
+	`
+
+	expectedReader := strings.NewReader(expected)
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusBadGateway)
+		fmt.Fprintln(w, expected)
+	}))
+	defer ts.Close()
+
+	err := ScrapeAndCompare(ts.URL, expectedReader, "some_total")
+	if err == nil {
+		t.Errorf("expected an error but got nil")
+	}
+	if !strings.HasPrefix(err.Error(), "the scraping target returned a status code other than 200") {
+		t.Errorf("unexpected error happened: %s", err)
+	}
+}
+
+func TestCollectAndCount(t *testing.T) {
+	c := prometheus.NewCounterVec(
+		prometheus.CounterOpts{
+			Name: "some_total",
+			Help: "A value that represents a counter.",
+		},
+		[]string{"foo"},
+	)
+	if got, want := CollectAndCount(c), 0; got != want {
+		t.Errorf("unexpected metric count, got %d, want %d", got, want)
+	}
+	c.WithLabelValues("bar")
+	if got, want := CollectAndCount(c), 1; got != want {
+		t.Errorf("unexpected metric count, got %d, want %d", got, want)
+	}
+	c.WithLabelValues("baz")
+	if got, want := CollectAndCount(c), 2; got != want {
+		t.Errorf("unexpected metric count, got %d, want %d", got, want)
+	}
+	if got, want := CollectAndCount(c, "some_total"), 2; got != want {
+		t.Errorf("unexpected metric count, got %d, want %d", got, want)
+	}
+	if got, want := CollectAndCount(c, "some_other_total"), 0; got != want {
+		t.Errorf("unexpected metric count, got %d, want %d", got, want)
 	}
 }

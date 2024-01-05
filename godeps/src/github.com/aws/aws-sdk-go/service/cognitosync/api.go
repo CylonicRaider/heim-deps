@@ -29,14 +29,13 @@ const opBulkPublish = "BulkPublish"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BulkPublishRequest method.
+//	req, resp := client.BulkPublishRequest(params)
 //
-//    // Example sending a request using the BulkPublishRequest method.
-//    req, resp := client.BulkPublishRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublish
 func (c *CognitoSync) BulkPublishRequest(input *BulkPublishInput) (req *request.Request, output *BulkPublishOutput) {
@@ -72,26 +71,27 @@ func (c *CognitoSync) BulkPublishRequest(input *BulkPublishInput) (req *request.
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation BulkPublish for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeDuplicateRequestException "DuplicateRequestException"
-//   An exception thrown when there is an IN_PROGRESS bulk publish operation for
-//   the given identity pool.
+//   - InternalErrorException
+//     Indicates an internal service error.
 //
-//   * ErrCodeAlreadyStreamedException "AlreadyStreamedException"
-//   An exception thrown when a bulk publish operation is requested less than
-//   24 hours after a previous bulk publish operation completed successfully.
+//   - DuplicateRequestException
+//     An exception thrown when there is an IN_PROGRESS bulk publish operation for
+//     the given identity pool.
+//
+//   - AlreadyStreamedException
+//     An exception thrown when a bulk publish operation is requested less than
+//     24 hours after a previous bulk publish operation completed successfully.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublish
 func (c *CognitoSync) BulkPublish(input *BulkPublishInput) (*BulkPublishOutput, error) {
@@ -131,14 +131,13 @@ const opDeleteDataset = "DeleteDataset"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDatasetRequest method.
+//	req, resp := client.DeleteDatasetRequest(params)
 //
-//    // Example sending a request using the DeleteDatasetRequest method.
-//    req, resp := client.DeleteDatasetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDataset
 func (c *CognitoSync) DeleteDatasetRequest(input *DeleteDatasetInput) (req *request.Request, output *DeleteDatasetOutput) {
@@ -174,25 +173,26 @@ func (c *CognitoSync) DeleteDatasetRequest(input *DeleteDatasetInput) (req *requ
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation DeleteDataset for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
 //
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   Thrown if an update can't be applied because the resource was changed by
-//   another call and this would result in a conflict.
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
+//
+//   - ResourceConflictException
+//     Thrown if an update can't be applied because the resource was changed by
+//     another call and this would result in a conflict.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDataset
 func (c *CognitoSync) DeleteDataset(input *DeleteDatasetInput) (*DeleteDatasetOutput, error) {
@@ -232,14 +232,13 @@ const opDescribeDataset = "DescribeDataset"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDatasetRequest method.
+//	req, resp := client.DescribeDatasetRequest(params)
 //
-//    // Example sending a request using the DescribeDatasetRequest method.
-//    req, resp := client.DescribeDatasetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDataset
 func (c *CognitoSync) DescribeDatasetRequest(input *DescribeDatasetInput) (req *request.Request, output *DescribeDatasetOutput) {
@@ -275,21 +274,22 @@ func (c *CognitoSync) DescribeDatasetRequest(input *DescribeDatasetInput) (req *
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation DescribeDataset for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDataset
 func (c *CognitoSync) DescribeDataset(input *DescribeDatasetInput) (*DescribeDatasetOutput, error) {
@@ -329,14 +329,13 @@ const opDescribeIdentityPoolUsage = "DescribeIdentityPoolUsage"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeIdentityPoolUsageRequest method.
+//	req, resp := client.DescribeIdentityPoolUsageRequest(params)
 //
-//    // Example sending a request using the DescribeIdentityPoolUsageRequest method.
-//    req, resp := client.DescribeIdentityPoolUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsage
 func (c *CognitoSync) DescribeIdentityPoolUsageRequest(input *DescribeIdentityPoolUsageInput) (req *request.Request, output *DescribeIdentityPoolUsageOutput) {
@@ -370,21 +369,22 @@ func (c *CognitoSync) DescribeIdentityPoolUsageRequest(input *DescribeIdentityPo
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation DescribeIdentityPoolUsage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsage
 func (c *CognitoSync) DescribeIdentityPoolUsage(input *DescribeIdentityPoolUsageInput) (*DescribeIdentityPoolUsageOutput, error) {
@@ -424,14 +424,13 @@ const opDescribeIdentityUsage = "DescribeIdentityUsage"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeIdentityUsageRequest method.
+//	req, resp := client.DescribeIdentityUsageRequest(params)
 //
-//    // Example sending a request using the DescribeIdentityUsageRequest method.
-//    req, resp := client.DescribeIdentityUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityUsage
 func (c *CognitoSync) DescribeIdentityUsageRequest(input *DescribeIdentityUsageInput) (req *request.Request, output *DescribeIdentityUsageOutput) {
@@ -465,21 +464,22 @@ func (c *CognitoSync) DescribeIdentityUsageRequest(input *DescribeIdentityUsageI
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation DescribeIdentityUsage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityUsage
 func (c *CognitoSync) DescribeIdentityUsage(input *DescribeIdentityUsageInput) (*DescribeIdentityUsageOutput, error) {
@@ -519,14 +519,13 @@ const opGetBulkPublishDetails = "GetBulkPublishDetails"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetBulkPublishDetailsRequest method.
+//	req, resp := client.GetBulkPublishDetailsRequest(params)
 //
-//    // Example sending a request using the GetBulkPublishDetailsRequest method.
-//    req, resp := client.GetBulkPublishDetailsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetails
 func (c *CognitoSync) GetBulkPublishDetailsRequest(input *GetBulkPublishDetailsInput) (req *request.Request, output *GetBulkPublishDetailsOutput) {
@@ -559,18 +558,19 @@ func (c *CognitoSync) GetBulkPublishDetailsRequest(input *GetBulkPublishDetailsI
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation GetBulkPublishDetails for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
+//
+//   - InternalErrorException
+//     Indicates an internal service error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetails
 func (c *CognitoSync) GetBulkPublishDetails(input *GetBulkPublishDetailsInput) (*GetBulkPublishDetailsOutput, error) {
@@ -610,14 +610,13 @@ const opGetCognitoEvents = "GetCognitoEvents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetCognitoEventsRequest method.
+//	req, resp := client.GetCognitoEventsRequest(params)
 //
-//    // Example sending a request using the GetCognitoEventsRequest method.
-//    req, resp := client.GetCognitoEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEvents
 func (c *CognitoSync) GetCognitoEventsRequest(input *GetCognitoEventsInput) (req *request.Request, output *GetCognitoEventsOutput) {
@@ -651,21 +650,22 @@ func (c *CognitoSync) GetCognitoEventsRequest(input *GetCognitoEventsInput) (req
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation GetCognitoEvents for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEvents
 func (c *CognitoSync) GetCognitoEvents(input *GetCognitoEventsInput) (*GetCognitoEventsOutput, error) {
@@ -705,14 +705,13 @@ const opGetIdentityPoolConfiguration = "GetIdentityPoolConfiguration"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetIdentityPoolConfigurationRequest method.
+//	req, resp := client.GetIdentityPoolConfigurationRequest(params)
 //
-//    // Example sending a request using the GetIdentityPoolConfigurationRequest method.
-//    req, resp := client.GetIdentityPoolConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetIdentityPoolConfiguration
 func (c *CognitoSync) GetIdentityPoolConfigurationRequest(input *GetIdentityPoolConfigurationInput) (req *request.Request, output *GetIdentityPoolConfigurationOutput) {
@@ -745,21 +744,22 @@ func (c *CognitoSync) GetIdentityPoolConfigurationRequest(input *GetIdentityPool
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation GetIdentityPoolConfiguration for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetIdentityPoolConfiguration
 func (c *CognitoSync) GetIdentityPoolConfiguration(input *GetIdentityPoolConfigurationInput) (*GetIdentityPoolConfigurationOutput, error) {
@@ -799,14 +799,13 @@ const opListDatasets = "ListDatasets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDatasetsRequest method.
+//	req, resp := client.ListDatasetsRequest(params)
 //
-//    // Example sending a request using the ListDatasetsRequest method.
-//    req, resp := client.ListDatasetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasets
 func (c *CognitoSync) ListDatasetsRequest(input *ListDatasetsInput) (req *request.Request, output *ListDatasetsOutput) {
@@ -842,18 +841,19 @@ func (c *CognitoSync) ListDatasetsRequest(input *ListDatasetsInput) (req *reques
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation ListDatasets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasets
 func (c *CognitoSync) ListDatasets(input *ListDatasetsInput) (*ListDatasetsOutput, error) {
@@ -893,14 +893,13 @@ const opListIdentityPoolUsage = "ListIdentityPoolUsage"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListIdentityPoolUsageRequest method.
+//	req, resp := client.ListIdentityPoolUsageRequest(params)
 //
-//    // Example sending a request using the ListIdentityPoolUsageRequest method.
-//    req, resp := client.ListIdentityPoolUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsage
 func (c *CognitoSync) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageInput) (req *request.Request, output *ListIdentityPoolUsageOutput) {
@@ -934,18 +933,19 @@ func (c *CognitoSync) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageI
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation ListIdentityPoolUsage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsage
 func (c *CognitoSync) ListIdentityPoolUsage(input *ListIdentityPoolUsageInput) (*ListIdentityPoolUsageOutput, error) {
@@ -985,14 +985,13 @@ const opListRecords = "ListRecords"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListRecordsRequest method.
+//	req, resp := client.ListRecordsRequest(params)
 //
-//    // Example sending a request using the ListRecordsRequest method.
-//    req, resp := client.ListRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecords
 func (c *CognitoSync) ListRecordsRequest(input *ListRecordsInput) (req *request.Request, output *ListRecordsOutput) {
@@ -1029,18 +1028,19 @@ func (c *CognitoSync) ListRecordsRequest(input *ListRecordsInput) (req *request.
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation ListRecords for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+// Returned Error Types:
 //
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
+//
+//   - InternalErrorException
+//     Indicates an internal service error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecords
 func (c *CognitoSync) ListRecords(input *ListRecordsInput) (*ListRecordsOutput, error) {
@@ -1080,14 +1080,13 @@ const opRegisterDevice = "RegisterDevice"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterDeviceRequest method.
+//	req, resp := client.RegisterDeviceRequest(params)
 //
-//    // Example sending a request using the RegisterDeviceRequest method.
-//    req, resp := client.RegisterDeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDevice
 func (c *CognitoSync) RegisterDeviceRequest(input *RegisterDeviceInput) (req *request.Request, output *RegisterDeviceOutput) {
@@ -1120,23 +1119,24 @@ func (c *CognitoSync) RegisterDeviceRequest(input *RegisterDeviceInput) (req *re
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation RegisterDevice for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeInvalidConfigurationException "InvalidConfigurationException"
+//   - InternalErrorException
+//     Indicates an internal service error.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InvalidConfigurationException
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDevice
 func (c *CognitoSync) RegisterDevice(input *RegisterDeviceInput) (*RegisterDeviceOutput, error) {
@@ -1176,14 +1176,13 @@ const opSetCognitoEvents = "SetCognitoEvents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SetCognitoEventsRequest method.
+//	req, resp := client.SetCognitoEventsRequest(params)
 //
-//    // Example sending a request using the SetCognitoEventsRequest method.
-//    req, resp := client.SetCognitoEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEvents
 func (c *CognitoSync) SetCognitoEventsRequest(input *SetCognitoEventsInput) (req *request.Request, output *SetCognitoEventsOutput) {
@@ -1220,21 +1219,22 @@ func (c *CognitoSync) SetCognitoEventsRequest(input *SetCognitoEventsInput) (req
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation SetCognitoEvents for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEvents
 func (c *CognitoSync) SetCognitoEvents(input *SetCognitoEventsInput) (*SetCognitoEventsOutput, error) {
@@ -1274,14 +1274,13 @@ const opSetIdentityPoolConfiguration = "SetIdentityPoolConfiguration"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SetIdentityPoolConfigurationRequest method.
+//	req, resp := client.SetIdentityPoolConfigurationRequest(params)
 //
-//    // Example sending a request using the SetIdentityPoolConfigurationRequest method.
-//    req, resp := client.SetIdentityPoolConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfiguration
 func (c *CognitoSync) SetIdentityPoolConfigurationRequest(input *SetIdentityPoolConfigurationInput) (req *request.Request, output *SetIdentityPoolConfigurationOutput) {
@@ -1314,24 +1313,25 @@ func (c *CognitoSync) SetIdentityPoolConfigurationRequest(input *SetIdentityPool
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation SetIdentityPoolConfiguration for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InternalErrorException
+//     Indicates an internal service error.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Thrown if there are parallel requests to modify a resource.
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
+//
+//   - ConcurrentModificationException
+//     Thrown if there are parallel requests to modify a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfiguration
 func (c *CognitoSync) SetIdentityPoolConfiguration(input *SetIdentityPoolConfigurationInput) (*SetIdentityPoolConfigurationOutput, error) {
@@ -1371,14 +1371,13 @@ const opSubscribeToDataset = "SubscribeToDataset"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SubscribeToDatasetRequest method.
+//	req, resp := client.SubscribeToDatasetRequest(params)
 //
-//    // Example sending a request using the SubscribeToDatasetRequest method.
-//    req, resp := client.SubscribeToDatasetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDataset
 func (c *CognitoSync) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) (req *request.Request, output *SubscribeToDatasetOutput) {
@@ -1413,23 +1412,24 @@ func (c *CognitoSync) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) 
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation SubscribeToDataset for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeInvalidConfigurationException "InvalidConfigurationException"
+//   - InternalErrorException
+//     Indicates an internal service error.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InvalidConfigurationException
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDataset
 func (c *CognitoSync) SubscribeToDataset(input *SubscribeToDatasetInput) (*SubscribeToDatasetOutput, error) {
@@ -1469,14 +1469,13 @@ const opUnsubscribeFromDataset = "UnsubscribeFromDataset"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UnsubscribeFromDatasetRequest method.
+//	req, resp := client.UnsubscribeFromDatasetRequest(params)
 //
-//    // Example sending a request using the UnsubscribeFromDatasetRequest method.
-//    req, resp := client.UnsubscribeFromDatasetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDataset
 func (c *CognitoSync) UnsubscribeFromDatasetRequest(input *UnsubscribeFromDatasetInput) (req *request.Request, output *UnsubscribeFromDatasetOutput) {
@@ -1511,23 +1510,24 @@ func (c *CognitoSync) UnsubscribeFromDatasetRequest(input *UnsubscribeFromDatase
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation UnsubscribeFromDataset for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeInvalidConfigurationException "InvalidConfigurationException"
+//   - InternalErrorException
+//     Indicates an internal service error.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - InvalidConfigurationException
+//
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDataset
 func (c *CognitoSync) UnsubscribeFromDataset(input *UnsubscribeFromDatasetInput) (*UnsubscribeFromDatasetOutput, error) {
@@ -1567,14 +1567,13 @@ const opUpdateRecords = "UpdateRecords"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateRecordsRequest method.
+//	req, resp := client.UpdateRecordsRequest(params)
 //
-//    // Example sending a request using the UpdateRecordsRequest method.
-//    req, resp := client.UpdateRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecords
 func (c *CognitoSync) UpdateRecordsRequest(input *UpdateRecordsInput) (req *request.Request, output *UpdateRecordsOutput) {
@@ -1619,34 +1618,35 @@ func (c *CognitoSync) UpdateRecordsRequest(input *UpdateRecordsInput) (req *requ
 // See the AWS API reference guide for Amazon Cognito Sync's
 // API operation UpdateRecords for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Thrown when the limit on the number of objects or operations has been exceeded.
+//   - InvalidParameterException
+//     Thrown when a request parameter does not comply with the associated constraints.
 //
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
+//   - LimitExceededException
+//     Thrown when the limit on the number of objects or operations has been exceeded.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
+//   - NotAuthorizedException
+//     Thrown when a user is not authorized to access the requested resource.
 //
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   Thrown if an update can't be applied because the resource was changed by
-//   another call and this would result in a conflict.
+//   - ResourceNotFoundException
+//     Thrown if the resource doesn't exist.
 //
-//   * ErrCodeInvalidLambdaFunctionOutputException "InvalidLambdaFunctionOutputException"
-//   The AWS Lambda function returned invalid output or an exception.
+//   - ResourceConflictException
+//     Thrown if an update can't be applied because the resource was changed by
+//     another call and this would result in a conflict.
 //
-//   * ErrCodeLambdaThrottledException "LambdaThrottledException"
-//   AWS Lambda throttled your account, please contact AWS Support
+//   - InvalidLambdaFunctionOutputException
+//     The AWS Lambda function returned invalid output or an exception.
 //
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
+//   - LambdaThrottledException
+//     AWS Lambda throttled your account, please contact AWS Support
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//   - TooManyRequestsException
+//     Thrown if the request is throttled.
+//
+//   - InternalErrorException
+//     Indicates an internal service error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecords
 func (c *CognitoSync) UpdateRecords(input *UpdateRecordsInput) (*UpdateRecordsOutput, error) {
@@ -1670,9 +1670,75 @@ func (c *CognitoSync) UpdateRecordsWithContext(ctx aws.Context, input *UpdateRec
 	return out, req.Send()
 }
 
+// An exception thrown when a bulk publish operation is requested less than
+// 24 hours after a previous bulk publish operation completed successfully.
+type AlreadyStreamedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The message associated with the AlreadyStreamedException exception.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AlreadyStreamedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AlreadyStreamedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAlreadyStreamedException(v protocol.ResponseMetadata) error {
+	return &AlreadyStreamedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AlreadyStreamedException) Code() string {
+	return "AlreadyStreamedException"
+}
+
+// Message returns the exception's message.
+func (s *AlreadyStreamedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AlreadyStreamedException) OrigErr() error {
+	return nil
+}
+
+func (s *AlreadyStreamedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AlreadyStreamedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AlreadyStreamedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The input for the BulkPublish operation.
 type BulkPublishInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
@@ -1681,12 +1747,20 @@ type BulkPublishInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BulkPublishInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BulkPublishInput) GoString() string {
 	return s.String()
 }
@@ -1722,12 +1796,20 @@ type BulkPublishOutput struct {
 	IdentityPoolId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BulkPublishOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BulkPublishOutput) GoString() string {
 	return s.String()
 }
@@ -1751,20 +1833,28 @@ type CognitoStreams struct {
 	// the developers account and in the same region as the identity pool.
 	StreamName *string `min:"1" type:"string"`
 
-	// Status of the Cognito streams. Valid values are: ENABLED - Streaming of updates
-	// to identity pool is enabled.
+	// Status of the Cognito streams. Valid values are:
+	// ENABLED - Streaming of updates to identity pool is enabled.
 	//
 	// DISABLED - Streaming of updates to identity pool is disabled. Bulk publish
 	// will also fail if StreamingStatus is DISABLED.
 	StreamingStatus *string `type:"string" enum:"StreamingStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CognitoStreams) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CognitoStreams) GoString() string {
 	return s.String()
 }
@@ -1803,6 +1893,71 @@ func (s *CognitoStreams) SetStreamingStatus(v string) *CognitoStreams {
 	return s
 }
 
+// Thrown if there are parallel requests to modify a resource.
+type ConcurrentModificationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The message returned by a ConcurrentModicationException.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) GoString() string {
+	return s.String()
+}
+
+func newErrorConcurrentModificationException(v protocol.ResponseMetadata) error {
+	return &ConcurrentModificationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConcurrentModificationException) Code() string {
+	return "ConcurrentModificationException"
+}
+
+// Message returns the exception's message.
+func (s *ConcurrentModificationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConcurrentModificationException) OrigErr() error {
+	return nil
+}
+
+func (s *ConcurrentModificationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConcurrentModificationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConcurrentModificationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A collection of data for an identity pool. An identity pool can have multiple
 // datasets. A dataset is per identity and can be general or associated with
 // a particular entity in an application (like a saved game). Datasets are automatically
@@ -1835,12 +1990,20 @@ type Dataset struct {
 	NumRecords *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Dataset) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Dataset) GoString() string {
 	return s.String()
 }
@@ -1889,7 +2052,7 @@ func (s *Dataset) SetNumRecords(v int64) *Dataset {
 
 // A request to delete the specific dataset.
 type DeleteDatasetInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
 	// (underscore), '-' (dash), and '.' (dot).
@@ -1910,12 +2073,20 @@ type DeleteDatasetInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDatasetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDatasetInput) GoString() string {
 	return s.String()
 }
@@ -1978,12 +2149,20 @@ type DeleteDatasetOutput struct {
 	Dataset *Dataset `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDatasetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDatasetOutput) GoString() string {
 	return s.String()
 }
@@ -1997,7 +2176,7 @@ func (s *DeleteDatasetOutput) SetDataset(v *Dataset) *DeleteDatasetOutput {
 // A request for meta data about a dataset (creation date, number of records,
 // size) by owner and dataset name.
 type DescribeDatasetInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
 	// (underscore), '-' (dash), and '.' (dot).
@@ -2018,12 +2197,20 @@ type DescribeDatasetInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDatasetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDatasetInput) GoString() string {
 	return s.String()
 }
@@ -2086,12 +2273,20 @@ type DescribeDatasetOutput struct {
 	Dataset *Dataset `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDatasetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDatasetOutput) GoString() string {
 	return s.String()
 }
@@ -2104,7 +2299,7 @@ func (s *DescribeDatasetOutput) SetDataset(v *Dataset) *DescribeDatasetOutput {
 
 // A request for usage information about the identity pool.
 type DescribeIdentityPoolUsageInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
@@ -2113,12 +2308,20 @@ type DescribeIdentityPoolUsageInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIdentityPoolUsageInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIdentityPoolUsageInput) GoString() string {
 	return s.String()
 }
@@ -2153,12 +2356,20 @@ type DescribeIdentityPoolUsageOutput struct {
 	IdentityPoolUsage *IdentityPoolUsage `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIdentityPoolUsageOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIdentityPoolUsageOutput) GoString() string {
 	return s.String()
 }
@@ -2171,7 +2382,7 @@ func (s *DescribeIdentityPoolUsageOutput) SetIdentityPoolUsage(v *IdentityPoolUs
 
 // A request for information about the usage of an identity pool.
 type DescribeIdentityUsageInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
@@ -2186,12 +2397,20 @@ type DescribeIdentityUsageInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIdentityUsageInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIdentityUsageInput) GoString() string {
 	return s.String()
 }
@@ -2238,12 +2457,20 @@ type DescribeIdentityUsageOutput struct {
 	IdentityUsage *IdentityUsage `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIdentityUsageOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIdentityUsageOutput) GoString() string {
 	return s.String()
 }
@@ -2254,9 +2481,75 @@ func (s *DescribeIdentityUsageOutput) SetIdentityUsage(v *IdentityUsage) *Descri
 	return s
 }
 
+// An exception thrown when there is an IN_PROGRESS bulk publish operation for
+// the given identity pool.
+type DuplicateRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The message associated with the DuplicateRequestException exception.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorDuplicateRequestException(v protocol.ResponseMetadata) error {
+	return &DuplicateRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DuplicateRequestException) Code() string {
+	return "DuplicateRequestException"
+}
+
+// Message returns the exception's message.
+func (s *DuplicateRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DuplicateRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *DuplicateRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DuplicateRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DuplicateRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The input for the GetBulkPublishDetails operation.
 type GetBulkPublishDetailsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
@@ -2265,12 +2558,20 @@ type GetBulkPublishDetailsInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetBulkPublishDetailsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetBulkPublishDetailsInput) GoString() string {
 	return s.String()
 }
@@ -2308,8 +2609,8 @@ type GetBulkPublishDetailsOutput struct {
 	// The date/time at which the last bulk publish was initiated.
 	BulkPublishStartTime *time.Time `type:"timestamp"`
 
-	// Status of the last bulk publish operation, valid values are: NOT_STARTED
-	// - No bulk publish has been requested for this identity pool
+	// Status of the last bulk publish operation, valid values are:
+	// NOT_STARTED - No bulk publish has been requested for this identity pool
 	//
 	// IN_PROGRESS - Data is being published to the configured stream
 	//
@@ -2329,12 +2630,20 @@ type GetBulkPublishDetailsOutput struct {
 	IdentityPoolId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetBulkPublishDetailsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetBulkPublishDetailsOutput) GoString() string {
 	return s.String()
 }
@@ -2371,7 +2680,7 @@ func (s *GetBulkPublishDetailsOutput) SetIdentityPoolId(v string) *GetBulkPublis
 
 // A request for a list of the configured Cognito Events
 type GetCognitoEventsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The Cognito Identity Pool ID for the request
 	//
@@ -2379,12 +2688,20 @@ type GetCognitoEventsInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetCognitoEventsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetCognitoEventsInput) GoString() string {
 	return s.String()
 }
@@ -2419,12 +2736,20 @@ type GetCognitoEventsOutput struct {
 	Events map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetCognitoEventsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetCognitoEventsOutput) GoString() string {
 	return s.String()
 }
@@ -2437,7 +2762,7 @@ func (s *GetCognitoEventsOutput) SetEvents(v map[string]*string) *GetCognitoEven
 
 // The input for the GetIdentityPoolConfiguration operation.
 type GetIdentityPoolConfigurationInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. This is the ID of the pool for which to return
@@ -2447,12 +2772,20 @@ type GetIdentityPoolConfigurationInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetIdentityPoolConfigurationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetIdentityPoolConfigurationInput) GoString() string {
 	return s.String()
 }
@@ -2494,12 +2827,20 @@ type GetIdentityPoolConfigurationOutput struct {
 	PushSync *PushSync `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetIdentityPoolConfigurationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetIdentityPoolConfigurationOutput) GoString() string {
 	return s.String()
 }
@@ -2540,12 +2881,20 @@ type IdentityPoolUsage struct {
 	SyncSessionsCount *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IdentityPoolUsage) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IdentityPoolUsage) GoString() string {
 	return s.String()
 }
@@ -2596,12 +2945,20 @@ type IdentityUsage struct {
 	LastModifiedDate *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IdentityUsage) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IdentityUsage) GoString() string {
 	return s.String()
 }
@@ -2636,9 +2993,398 @@ func (s *IdentityUsage) SetLastModifiedDate(v time.Time) *IdentityUsage {
 	return s
 }
 
+// Indicates an internal service error.
+type InternalErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Message returned by InternalErrorException.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalErrorException(v protocol.ResponseMetadata) error {
+	return &InternalErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalErrorException) Code() string {
+	return "InternalErrorException"
+}
+
+// Message returns the exception's message.
+func (s *InternalErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type InvalidConfigurationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Message returned by InvalidConfigurationException.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidConfigurationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidConfigurationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidConfigurationException(v protocol.ResponseMetadata) error {
+	return &InvalidConfigurationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidConfigurationException) Code() string {
+	return "InvalidConfigurationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidConfigurationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidConfigurationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidConfigurationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidConfigurationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidConfigurationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The AWS Lambda function returned invalid output or an exception.
+type InvalidLambdaFunctionOutputException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A message returned when an InvalidLambdaFunctionOutputException occurs
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLambdaFunctionOutputException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLambdaFunctionOutputException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidLambdaFunctionOutputException(v protocol.ResponseMetadata) error {
+	return &InvalidLambdaFunctionOutputException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidLambdaFunctionOutputException) Code() string {
+	return "InvalidLambdaFunctionOutputException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidLambdaFunctionOutputException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidLambdaFunctionOutputException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidLambdaFunctionOutputException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidLambdaFunctionOutputException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidLambdaFunctionOutputException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Thrown when a request parameter does not comply with the associated constraints.
+type InvalidParameterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Message returned by InvalidParameterException.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidParameterException(v protocol.ResponseMetadata) error {
+	return &InvalidParameterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidParameterException) Code() string {
+	return "InvalidParameterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidParameterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidParameterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidParameterException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidParameterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidParameterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// AWS Lambda throttled your account, please contact AWS Support
+type LambdaThrottledException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// A message returned when an LambdaThrottledException is thrown
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LambdaThrottledException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LambdaThrottledException) GoString() string {
+	return s.String()
+}
+
+func newErrorLambdaThrottledException(v protocol.ResponseMetadata) error {
+	return &LambdaThrottledException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LambdaThrottledException) Code() string {
+	return "LambdaThrottledException"
+}
+
+// Message returns the exception's message.
+func (s *LambdaThrottledException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LambdaThrottledException) OrigErr() error {
+	return nil
+}
+
+func (s *LambdaThrottledException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LambdaThrottledException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LambdaThrottledException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Thrown when the limit on the number of objects or operations has been exceeded.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Message returned by LimitExceededException.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Request for a list of datasets for an identity.
 type ListDatasetsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
@@ -2659,12 +3405,20 @@ type ListDatasetsInput struct {
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDatasetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDatasetsInput) GoString() string {
 	return s.String()
 }
@@ -2729,12 +3483,20 @@ type ListDatasetsOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDatasetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDatasetsOutput) GoString() string {
 	return s.String()
 }
@@ -2759,7 +3521,7 @@ func (s *ListDatasetsOutput) SetNextToken(v string) *ListDatasetsOutput {
 
 // A request for usage information on an identity pool.
 type ListIdentityPoolUsageInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The maximum number of results to be returned.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
@@ -2768,12 +3530,20 @@ type ListIdentityPoolUsageInput struct {
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIdentityPoolUsageInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIdentityPoolUsageInput) GoString() string {
 	return s.String()
 }
@@ -2807,12 +3577,20 @@ type ListIdentityPoolUsageOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIdentityPoolUsageOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIdentityPoolUsageOutput) GoString() string {
 	return s.String()
 }
@@ -2843,7 +3621,7 @@ func (s *ListIdentityPoolUsageOutput) SetNextToken(v string) *ListIdentityPoolUs
 
 // A request for a list of records.
 type ListRecordsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
 	// (underscore), '-' (dash), and '.' (dot).
@@ -2876,12 +3654,20 @@ type ListRecordsInput struct {
 	SyncSessionToken *string `location:"querystring" locationName:"syncSessionToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListRecordsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListRecordsInput) GoString() string {
 	return s.String()
 }
@@ -2988,12 +3774,20 @@ type ListRecordsOutput struct {
 	SyncSessionToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListRecordsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListRecordsOutput) GoString() string {
 	return s.String()
 }
@@ -3052,6 +3846,71 @@ func (s *ListRecordsOutput) SetSyncSessionToken(v string) *ListRecordsOutput {
 	return s
 }
 
+// Thrown when a user is not authorized to access the requested resource.
+type NotAuthorizedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The message returned by a NotAuthorizedException.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotAuthorizedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotAuthorizedException) GoString() string {
+	return s.String()
+}
+
+func newErrorNotAuthorizedException(v protocol.ResponseMetadata) error {
+	return &NotAuthorizedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NotAuthorizedException) Code() string {
+	return "NotAuthorizedException"
+}
+
+// Message returns the exception's message.
+func (s *NotAuthorizedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NotAuthorizedException) OrigErr() error {
+	return nil
+}
+
+func (s *NotAuthorizedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NotAuthorizedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NotAuthorizedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Configuration options to be applied to the identity pool.
 type PushSync struct {
 	_ struct{} `type:"structure"`
@@ -3063,12 +3922,20 @@ type PushSync struct {
 	RoleArn *string `min:"20" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PushSync) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PushSync) GoString() string {
 	return s.String()
 }
@@ -3121,12 +3988,20 @@ type Record struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Record) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Record) GoString() string {
 	return s.String()
 }
@@ -3193,12 +4068,20 @@ type RecordPatch struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordPatch) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RecordPatch) GoString() string {
 	return s.String()
 }
@@ -3282,12 +4165,20 @@ type RegisterDeviceInput struct {
 	Token *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDeviceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDeviceInput) GoString() string {
 	return s.String()
 }
@@ -3352,12 +4243,20 @@ type RegisterDeviceOutput struct {
 	DeviceId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDeviceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDeviceOutput) GoString() string {
 	return s.String()
 }
@@ -3368,7 +4267,139 @@ func (s *RegisterDeviceOutput) SetDeviceId(v string) *RegisterDeviceOutput {
 	return s
 }
 
+// Thrown if an update can't be applied because the resource was changed by
+// another call and this would result in a conflict.
+type ResourceConflictException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The message returned by a ResourceConflictException.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceConflictException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceConflictException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceConflictException(v protocol.ResponseMetadata) error {
+	return &ResourceConflictException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceConflictException) Code() string {
+	return "ResourceConflictException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceConflictException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceConflictException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceConflictException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceConflictException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Thrown if the resource doesn't exist.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Message returned by a ResourceNotFoundException.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A request to configure Cognito Events"
+// "
 type SetCognitoEventsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3383,12 +4414,20 @@ type SetCognitoEventsInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetCognitoEventsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetCognitoEventsInput) GoString() string {
 	return s.String()
 }
@@ -3428,12 +4467,20 @@ type SetCognitoEventsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetCognitoEventsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetCognitoEventsOutput) GoString() string {
 	return s.String()
 }
@@ -3455,12 +4502,20 @@ type SetIdentityPoolConfigurationInput struct {
 	PushSync *PushSync `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetIdentityPoolConfigurationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetIdentityPoolConfigurationInput) GoString() string {
 	return s.String()
 }
@@ -3524,12 +4579,20 @@ type SetIdentityPoolConfigurationOutput struct {
 	PushSync *PushSync `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetIdentityPoolConfigurationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SetIdentityPoolConfigurationOutput) GoString() string {
 	return s.String()
 }
@@ -3554,7 +4617,7 @@ func (s *SetIdentityPoolConfigurationOutput) SetPushSync(v *PushSync) *SetIdenti
 
 // A request to SubscribeToDatasetRequest.
 type SubscribeToDatasetInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The name of the dataset to subcribe to.
 	//
@@ -3578,12 +4641,20 @@ type SubscribeToDatasetInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubscribeToDatasetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubscribeToDatasetInput) GoString() string {
 	return s.String()
 }
@@ -3651,19 +4722,92 @@ type SubscribeToDatasetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubscribeToDatasetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SubscribeToDatasetOutput) GoString() string {
 	return s.String()
 }
 
+// Thrown if the request is throttled.
+type TooManyRequestsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Message returned by a TooManyRequestsException.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyRequestsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TooManyRequestsException) GoString() string {
+	return s.String()
+}
+
+func newErrorTooManyRequestsException(v protocol.ResponseMetadata) error {
+	return &TooManyRequestsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TooManyRequestsException) Code() string {
+	return "TooManyRequestsException"
+}
+
+// Message returns the exception's message.
+func (s *TooManyRequestsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TooManyRequestsException) OrigErr() error {
+	return nil
+}
+
+func (s *TooManyRequestsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TooManyRequestsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TooManyRequestsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A request to UnsubscribeFromDataset.
 type UnsubscribeFromDatasetInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The name of the dataset from which to unsubcribe.
 	//
@@ -3687,12 +4831,20 @@ type UnsubscribeFromDatasetInput struct {
 	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnsubscribeFromDatasetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnsubscribeFromDatasetInput) GoString() string {
 	return s.String()
 }
@@ -3760,12 +4912,20 @@ type UnsubscribeFromDatasetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnsubscribeFromDatasetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UnsubscribeFromDatasetOutput) GoString() string {
 	return s.String()
 }
@@ -3810,12 +4970,20 @@ type UpdateRecordsInput struct {
 	SyncSessionToken *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRecordsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRecordsInput) GoString() string {
 	return s.String()
 }
@@ -3914,12 +5082,20 @@ type UpdateRecordsOutput struct {
 	Records []*Record `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRecordsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRecordsOutput) GoString() string {
 	return s.String()
 }
@@ -3944,6 +5120,16 @@ const (
 	BulkPublishStatusSucceeded = "SUCCEEDED"
 )
 
+// BulkPublishStatus_Values returns all elements of the BulkPublishStatus enum
+func BulkPublishStatus_Values() []string {
+	return []string{
+		BulkPublishStatusNotStarted,
+		BulkPublishStatusInProgress,
+		BulkPublishStatusFailed,
+		BulkPublishStatusSucceeded,
+	}
+}
+
 const (
 	// OperationReplace is a Operation enum value
 	OperationReplace = "replace"
@@ -3951,6 +5137,14 @@ const (
 	// OperationRemove is a Operation enum value
 	OperationRemove = "remove"
 )
+
+// Operation_Values returns all elements of the Operation enum
+func Operation_Values() []string {
+	return []string{
+		OperationReplace,
+		OperationRemove,
+	}
+}
 
 const (
 	// PlatformApns is a Platform enum value
@@ -3966,6 +5160,16 @@ const (
 	PlatformAdm = "ADM"
 )
 
+// Platform_Values returns all elements of the Platform enum
+func Platform_Values() []string {
+	return []string{
+		PlatformApns,
+		PlatformApnsSandbox,
+		PlatformGcm,
+		PlatformAdm,
+	}
+}
+
 const (
 	// StreamingStatusEnabled is a StreamingStatus enum value
 	StreamingStatusEnabled = "ENABLED"
@@ -3973,3 +5177,11 @@ const (
 	// StreamingStatusDisabled is a StreamingStatus enum value
 	StreamingStatusDisabled = "DISABLED"
 )
+
+// StreamingStatus_Values returns all elements of the StreamingStatus enum
+func StreamingStatus_Values() []string {
+	return []string{
+		StreamingStatusEnabled,
+		StreamingStatusDisabled,
+	}
+}

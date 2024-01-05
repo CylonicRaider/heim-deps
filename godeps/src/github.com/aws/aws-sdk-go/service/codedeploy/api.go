@@ -3,6 +3,7 @@
 package codedeploy
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -28,14 +29,13 @@ const opAddTagsToOnPremisesInstances = "AddTagsToOnPremisesInstances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddTagsToOnPremisesInstancesRequest method.
+//	req, resp := client.AddTagsToOnPremisesInstancesRequest(params)
 //
-//    // Example sending a request using the AddTagsToOnPremisesInstancesRequest method.
-//    req, resp := client.AddTagsToOnPremisesInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstances
 func (c *CodeDeploy) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremisesInstancesInput) (req *request.Request, output *AddTagsToOnPremisesInstancesOutput) {
@@ -66,28 +66,29 @@ func (c *CodeDeploy) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremi
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation AddTagsToOnPremisesInstances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The on-premises instance name was specified in an invalid format.
+//   - InstanceNameRequiredException
+//     An on-premises instance name was not specified.
 //
-//   * ErrCodeTagRequiredException "TagRequiredException"
-//   A tag was not specified.
+//   - InvalidInstanceNameException
+//     The on-premises instance name was specified in an invalid format.
 //
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   The tag was specified in an invalid format.
+//   - TagRequiredException
+//     A tag was not specified.
 //
-//   * ErrCodeTagLimitExceededException "TagLimitExceededException"
-//   The maximum allowed number of tags was exceeded.
+//   - InvalidTagException
+//     The tag was specified in an invalid format.
 //
-//   * ErrCodeInstanceLimitExceededException "InstanceLimitExceededException"
-//   The maximum number of allowed on-premises instances in a single call was
-//   exceeded.
+//   - TagLimitExceededException
+//     The maximum allowed number of tags was exceeded.
 //
-//   * ErrCodeInstanceNotRegisteredException "InstanceNotRegisteredException"
-//   The specified on-premises instance is not registered.
+//   - InstanceLimitExceededException
+//     The maximum number of allowed on-premises instances in a single call was
+//     exceeded.
+//
+//   - InstanceNotRegisteredException
+//     The specified on-premises instance is not registered.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstances
 func (c *CodeDeploy) AddTagsToOnPremisesInstances(input *AddTagsToOnPremisesInstancesInput) (*AddTagsToOnPremisesInstancesOutput, error) {
@@ -127,14 +128,13 @@ const opBatchGetApplicationRevisions = "BatchGetApplicationRevisions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetApplicationRevisionsRequest method.
+//	req, resp := client.BatchGetApplicationRevisionsRequest(params)
 //
-//    // Example sending a request using the BatchGetApplicationRevisionsRequest method.
-//    req, resp := client.BatchGetApplicationRevisionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisions
 func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicationRevisionsInput) (req *request.Request, output *BatchGetApplicationRevisionsOutput) {
@@ -155,7 +155,8 @@ func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicat
 
 // BatchGetApplicationRevisions API operation for AWS CodeDeploy.
 //
-// Gets information about one or more application revisions.
+// Gets information about one or more application revisions. The maximum number
+// of application revisions that can be returned is 25.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -164,24 +165,25 @@ func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicat
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation BatchGetApplicationRevisions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+// Returned Error Types:
 //
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeRevisionRequiredException "RevisionRequiredException"
-//   The revision ID was not specified.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeInvalidRevisionException "InvalidRevisionException"
-//   The revision was specified in an invalid format.
+//   - RevisionRequiredException
+//     The revision ID was not specified.
 //
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
+//   - InvalidRevisionException
+//     The revision was specified in an invalid format.
+//
+//   - BatchLimitExceededException
+//     The maximum number of names or IDs allowed for this request (100) was exceeded.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisions
 func (c *CodeDeploy) BatchGetApplicationRevisions(input *BatchGetApplicationRevisionsInput) (*BatchGetApplicationRevisionsOutput, error) {
@@ -221,14 +223,13 @@ const opBatchGetApplications = "BatchGetApplications"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetApplicationsRequest method.
+//	req, resp := client.BatchGetApplicationsRequest(params)
 //
-//    // Example sending a request using the BatchGetApplicationsRequest method.
-//    req, resp := client.BatchGetApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications
 func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInput) (req *request.Request, output *BatchGetApplicationsOutput) {
@@ -249,7 +250,8 @@ func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInpu
 
 // BatchGetApplications API operation for AWS CodeDeploy.
 //
-// Gets information about one or more applications.
+// Gets information about one or more applications. The maximum number of applications
+// that can be returned is 100.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -258,18 +260,19 @@ func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInpu
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation BatchGetApplications for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
+//
+//   - BatchLimitExceededException
+//     The maximum number of names or IDs allowed for this request (100) was exceeded.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications
 func (c *CodeDeploy) BatchGetApplications(input *BatchGetApplicationsInput) (*BatchGetApplicationsOutput, error) {
@@ -309,14 +312,13 @@ const opBatchGetDeploymentGroups = "BatchGetDeploymentGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetDeploymentGroupsRequest method.
+//	req, resp := client.BatchGetDeploymentGroupsRequest(params)
 //
-//    // Example sending a request using the BatchGetDeploymentGroupsRequest method.
-//    req, resp := client.BatchGetDeploymentGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups
 func (c *CodeDeploy) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGroupsInput) (req *request.Request, output *BatchGetDeploymentGroupsOutput) {
@@ -346,27 +348,29 @@ func (c *CodeDeploy) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGr
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation BatchGetDeploymentGroups for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
+//   - DeploymentGroupNameRequiredException
+//     The deployment group name was not specified.
 //
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
+//   - InvalidDeploymentGroupNameException
+//     The deployment group name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the IAM user or AWS account.
+//   - BatchLimitExceededException
+//     The maximum number of names or IDs allowed for this request (100) was exceeded.
+//
+//   - DeploymentConfigDoesNotExistException
+//     The deployment configuration does not exist with the user or Amazon Web Services
+//     account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups
 func (c *CodeDeploy) BatchGetDeploymentGroups(input *BatchGetDeploymentGroupsInput) (*BatchGetDeploymentGroupsOutput, error) {
@@ -406,14 +410,13 @@ const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetDeploymentInstancesRequest method.
+//	req, resp := client.BatchGetDeploymentInstancesRequest(params)
 //
-//    // Example sending a request using the BatchGetDeploymentInstancesRequest method.
-//    req, resp := client.BatchGetDeploymentInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances
 //
@@ -441,9 +444,10 @@ func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymen
 //
 // This method works, but is deprecated. Use BatchGetDeploymentTargets instead.
 //
-// Returns an array of instances associated with a deployment. This method works
-// with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets
-// works with all compute platforms.
+// Returns an array of one or more instances associated with a deployment. This
+// method works with EC2/On-premises and Lambda compute platforms. The newer
+// BatchGetDeploymentTargets works with all compute platforms. The maximum number
+// of instances that can be returned is 25.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -452,27 +456,29 @@ func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymen
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation BatchGetDeploymentInstances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeInstanceIdRequiredException "InstanceIdRequiredException"
-//   The instance ID was not specified.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - InstanceIdRequiredException
+//     The instance ID was not specified.
 //
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The on-premises instance name was specified in an invalid format.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
 //
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
+//   - InvalidInstanceNameException
+//     The on-premises instance name was specified in an invalid format.
 //
-//   * ErrCodeInvalidComputePlatformException "InvalidComputePlatformException"
-//   The computePlatform is invalid. The computePlatform should be Lambda or Server.
+//   - BatchLimitExceededException
+//     The maximum number of names or IDs allowed for this request (100) was exceeded.
+//
+//   - InvalidComputePlatformException
+//     The computePlatform is invalid. The computePlatform should be Lambda, Server,
+//     or ECS.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances
 //
@@ -516,14 +522,13 @@ const opBatchGetDeploymentTargets = "BatchGetDeploymentTargets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetDeploymentTargetsRequest method.
+//	req, resp := client.BatchGetDeploymentTargetsRequest(params)
 //
-//    // Example sending a request using the BatchGetDeploymentTargetsRequest method.
-//    req, resp := client.BatchGetDeploymentTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargets
 func (c *CodeDeploy) BatchGetDeploymentTargetsRequest(input *BatchGetDeploymentTargetsInput) (req *request.Request, output *BatchGetDeploymentTargetsOutput) {
@@ -544,16 +549,22 @@ func (c *CodeDeploy) BatchGetDeploymentTargetsRequest(input *BatchGetDeploymentT
 
 // BatchGetDeploymentTargets API operation for AWS CodeDeploy.
 //
-// Returns an array of targets associated with a deployment. This method works
-// with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.
+// Returns an array of one or more targets associated with a deployment. This
+// method works with all compute types and should be used instead of the deprecated
+// BatchGetDeploymentInstances. The maximum number of targets that can be returned
+// is 25.
 //
-// The type of targets returned depends on the deployment's compute platform:
+// The type of targets returned depends on the deployment's compute platform
+// or deployment method:
 //
-//    * EC2/On-premises: Information about EC2 instance targets.
+//   - EC2/On-premises: Information about Amazon EC2 instance targets.
 //
-//    * AWS Lambda: Information about Lambda functions targets.
+//   - Lambda: Information about Lambda functions targets.
 //
-//    * Amazon ECS: Information about Amazon ECS service targets.
+//   - Amazon ECS: Information about Amazon ECS service targets.
+//
+//   - CloudFormation: Information about targets of blue/green deployments
+//     initiated by a CloudFormation stack update.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -562,30 +573,37 @@ func (c *CodeDeploy) BatchGetDeploymentTargetsRequest(input *BatchGetDeploymentT
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation BatchGetDeploymentTargets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeDeploymentTargetIdRequiredException "DeploymentTargetIdRequiredException"
-//   A deployment target ID was not provided.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeInvalidDeploymentTargetIdException "InvalidDeploymentTargetIdException"
-//   The target ID provided was not valid.
+//   - DeploymentNotStartedException
+//     The specified deployment has not started.
 //
-//   * ErrCodeDeploymentTargetDoesNotExistException "DeploymentTargetDoesNotExistException"
-//   The provided target ID does not belong to the attempted deployment.
+//   - DeploymentTargetIdRequiredException
+//     A deployment target ID was not provided.
 //
-//   * ErrCodeDeploymentTargetListSizeExceededException "DeploymentTargetListSizeExceededException"
-//   The maximum number of targets that can be associated with an Amazon ECS or
-//   AWS Lambda deployment was exceeded. The target list of both types of deployments
-//   must have exactly one item. This exception does not apply to EC2/On-premises
-//   deployments.
+//   - InvalidDeploymentTargetIdException
+//     The target ID provided was not valid.
+//
+//   - DeploymentTargetDoesNotExistException
+//     The provided target ID does not belong to the attempted deployment.
+//
+//   - DeploymentTargetListSizeExceededException
+//     The maximum number of targets that can be associated with an Amazon ECS or
+//     Lambda deployment was exceeded. The target list of both types of deployments
+//     must have exactly one item. This exception does not apply to EC2/On-premises
+//     deployments.
+//
+//   - InstanceDoesNotExistException
+//     The specified instance does not exist in the deployment group.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargets
 func (c *CodeDeploy) BatchGetDeploymentTargets(input *BatchGetDeploymentTargetsInput) (*BatchGetDeploymentTargetsOutput, error) {
@@ -625,14 +643,13 @@ const opBatchGetDeployments = "BatchGetDeployments"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetDeploymentsRequest method.
+//	req, resp := client.BatchGetDeploymentsRequest(params)
 //
-//    // Example sending a request using the BatchGetDeploymentsRequest method.
-//    req, resp := client.BatchGetDeploymentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments
 func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput) (req *request.Request, output *BatchGetDeploymentsOutput) {
@@ -653,7 +670,8 @@ func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput)
 
 // BatchGetDeployments API operation for AWS CodeDeploy.
 //
-// Gets information about one or more deployments.
+// Gets information about one or more deployments. The maximum number of deployments
+// that can be returned is 25.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -662,15 +680,16 @@ func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput)
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation BatchGetDeployments for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
+//
+//   - BatchLimitExceededException
+//     The maximum number of names or IDs allowed for this request (100) was exceeded.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments
 func (c *CodeDeploy) BatchGetDeployments(input *BatchGetDeploymentsInput) (*BatchGetDeploymentsOutput, error) {
@@ -710,14 +729,13 @@ const opBatchGetOnPremisesInstances = "BatchGetOnPremisesInstances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetOnPremisesInstancesRequest method.
+//	req, resp := client.BatchGetOnPremisesInstancesRequest(params)
 //
-//    // Example sending a request using the BatchGetOnPremisesInstancesRequest method.
-//    req, resp := client.BatchGetOnPremisesInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstances
 func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremisesInstancesInput) (req *request.Request, output *BatchGetOnPremisesInstancesOutput) {
@@ -738,7 +756,8 @@ func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremise
 
 // BatchGetOnPremisesInstances API operation for AWS CodeDeploy.
 //
-// Gets information about one or more on-premises instances.
+// Gets information about one or more on-premises instances. The maximum number
+// of on-premises instances that can be returned is 25.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -747,15 +766,16 @@ func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremise
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation BatchGetOnPremisesInstances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The on-premises instance name was specified in an invalid format.
+//   - InstanceNameRequiredException
+//     An on-premises instance name was not specified.
 //
-//   * ErrCodeBatchLimitExceededException "BatchLimitExceededException"
-//   The maximum number of names or IDs allowed for this request (100) was exceeded.
+//   - InvalidInstanceNameException
+//     The on-premises instance name was specified in an invalid format.
+//
+//   - BatchLimitExceededException
+//     The maximum number of names or IDs allowed for this request (100) was exceeded.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstances
 func (c *CodeDeploy) BatchGetOnPremisesInstances(input *BatchGetOnPremisesInstancesInput) (*BatchGetOnPremisesInstancesOutput, error) {
@@ -795,14 +815,13 @@ const opContinueDeployment = "ContinueDeployment"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ContinueDeploymentRequest method.
+//	req, resp := client.ContinueDeploymentRequest(params)
 //
-//    // Example sending a request using the ContinueDeploymentRequest method.
-//    req, resp := client.ContinueDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeployment
 func (c *CodeDeploy) ContinueDeploymentRequest(input *ContinueDeploymentInput) (req *request.Request, output *ContinueDeploymentOutput) {
@@ -838,30 +857,31 @@ func (c *CodeDeploy) ContinueDeploymentRequest(input *ContinueDeploymentInput) (
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ContinueDeployment for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeDeploymentAlreadyCompletedException "DeploymentAlreadyCompletedException"
-//   The deployment is already complete.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - DeploymentAlreadyCompletedException
+//     The deployment is already complete.
 //
-//   * ErrCodeDeploymentIsNotInReadyStateException "DeploymentIsNotInReadyStateException"
-//   The deployment does not have a status of Ready and can't continue yet.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
 //
-//   * ErrCodeUnsupportedActionForDeploymentTypeException "UnsupportedActionForDeploymentTypeException"
-//   A call was submitted that is not supported for the specified deployment type.
+//   - DeploymentIsNotInReadyStateException
+//     The deployment does not have a status of Ready and can't continue yet.
 //
-//   * ErrCodeInvalidDeploymentWaitTypeException "InvalidDeploymentWaitTypeException"
-//   The wait type is invalid.
+//   - UnsupportedActionForDeploymentTypeException
+//     A call was submitted that is not supported for the specified deployment type.
 //
-//   * ErrCodeInvalidDeploymentStatusException "InvalidDeploymentStatusException"
-//   The specified deployment status doesn't exist or cannot be determined.
+//   - InvalidDeploymentWaitTypeException
+//     The wait type is invalid.
+//
+//   - InvalidDeploymentStatusException
+//     The specified deployment status doesn't exist or cannot be determined.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeployment
 func (c *CodeDeploy) ContinueDeployment(input *ContinueDeploymentInput) (*ContinueDeploymentOutput, error) {
@@ -901,14 +921,13 @@ const opCreateApplication = "CreateApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateApplicationRequest method.
+//	req, resp := client.CreateApplicationRequest(params)
 //
-//    // Example sending a request using the CreateApplicationRequest method.
-//    req, resp := client.CreateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplication
 func (c *CodeDeploy) CreateApplicationRequest(input *CreateApplicationInput) (req *request.Request, output *CreateApplicationOutput) {
@@ -938,22 +957,27 @@ func (c *CodeDeploy) CreateApplicationRequest(input *CreateApplicationInput) (re
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation CreateApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationAlreadyExistsException "ApplicationAlreadyExistsException"
-//   An application with the specified name with the IAM user or AWS account already
-//   exists.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeApplicationLimitExceededException "ApplicationLimitExceededException"
-//   More applications were attempted to be created than are allowed.
+//   - ApplicationAlreadyExistsException
+//     An application with the specified name with the user or Amazon Web Services
+//     account already exists.
 //
-//   * ErrCodeInvalidComputePlatformException "InvalidComputePlatformException"
-//   The computePlatform is invalid. The computePlatform should be Lambda or Server.
+//   - ApplicationLimitExceededException
+//     More applications were attempted to be created than are allowed.
+//
+//   - InvalidComputePlatformException
+//     The computePlatform is invalid. The computePlatform should be Lambda, Server,
+//     or ECS.
+//
+//   - InvalidTagsToAddException
+//     The specified tags are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplication
 func (c *CodeDeploy) CreateApplication(input *CreateApplicationInput) (*CreateApplicationOutput, error) {
@@ -993,14 +1017,13 @@ const opCreateDeployment = "CreateDeployment"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDeploymentRequest method.
+//	req, resp := client.CreateDeploymentRequest(params)
 //
-//    // Example sending a request using the CreateDeploymentRequest method.
-//    req, resp := client.CreateDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeployment
 func (c *CodeDeploy) CreateDeploymentRequest(input *CreateDeploymentInput) (req *request.Request, output *CreateDeploymentOutput) {
@@ -1030,93 +1053,116 @@ func (c *CodeDeploy) CreateDeploymentRequest(input *CreateDeploymentInput) (req 
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation CreateDeployment for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
+//   - DeploymentGroupNameRequiredException
+//     The deployment group name was not specified.
 //
-//   * ErrCodeDeploymentGroupDoesNotExistException "DeploymentGroupDoesNotExistException"
-//   The named deployment group with the IAM user or AWS account does not exist.
+//   - InvalidDeploymentGroupNameException
+//     The deployment group name was specified in an invalid format.
 //
-//   * ErrCodeRevisionRequiredException "RevisionRequiredException"
-//   The revision ID was not specified.
+//   - DeploymentGroupDoesNotExistException
+//     The named deployment group with the user or Amazon Web Services account does
+//     not exist.
 //
-//   * ErrCodeRevisionDoesNotExistException "RevisionDoesNotExistException"
-//   The named revision does not exist with the IAM user or AWS account.
+//   - RevisionRequiredException
+//     The revision ID was not specified.
 //
-//   * ErrCodeInvalidRevisionException "InvalidRevisionException"
-//   The revision was specified in an invalid format.
+//   - RevisionDoesNotExistException
+//     The named revision does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
+//   - InvalidRevisionException
+//     The revision was specified in an invalid format.
 //
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the IAM user or AWS account.
+//   - InvalidDeploymentConfigNameException
+//     The deployment configuration name was specified in an invalid format.
 //
-//   * ErrCodeDescriptionTooLongException "DescriptionTooLongException"
-//   The description is too long.
+//   - DeploymentConfigDoesNotExistException
+//     The deployment configuration does not exist with the user or Amazon Web Services
+//     account.
 //
-//   * ErrCodeDeploymentLimitExceededException "DeploymentLimitExceededException"
-//   The number of allowed deployments was exceeded.
+//   - DescriptionTooLongException
+//     The description is too long.
 //
-//   * ErrCodeInvalidTargetInstancesException "InvalidTargetInstancesException"
-//   The target instance configuration is invalid. Possible causes include:
+//   - DeploymentLimitExceededException
+//     The number of allowed deployments was exceeded.
 //
-//      * Configuration data for target instances was entered for an in-place
-//      deployment.
+//   - InvalidTargetInstancesException
+//     The target instance configuration is invalid. Possible causes include:
 //
-//      * The limit of 10 tags for a tag type was exceeded.
+//   - Configuration data for target instances was entered for an in-place
+//     deployment.
 //
-//      * The combined length of the tag names exceeded the limit.
+//   - The limit of 10 tags for a tag type was exceeded.
 //
-//      * A specified tag is not currently applied to any instances.
+//   - The combined length of the tag names exceeded the limit.
 //
-//   * ErrCodeInvalidAutoRollbackConfigException "InvalidAutoRollbackConfigException"
-//   The automatic rollback configuration was specified in an invalid format.
-//   For example, automatic rollback is enabled, but an invalid triggering event
-//   type or no event types were listed.
+//   - A specified tag is not currently applied to any instances.
 //
-//   * ErrCodeInvalidLoadBalancerInfoException "InvalidLoadBalancerInfoException"
-//   An invalid load balancer name, or no load balancer name, was specified.
+//   - InvalidAlarmConfigException
+//     The format of the alarm configuration is invalid. Possible causes include:
 //
-//   * ErrCodeInvalidFileExistsBehaviorException "InvalidFileExistsBehaviorException"
-//   An invalid fileExistsBehavior option was specified to determine how AWS CodeDeploy
-//   handles files or directories that already exist in a deployment target location,
-//   but weren't part of the previous successful deployment. Valid values include
-//   "DISALLOW," "OVERWRITE," and "RETAIN."
+//   - The alarm list is null.
 //
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The service role ARN was specified in an invalid format. Or, if an Auto Scaling
-//   group was specified, the specified service role does not grant the appropriate
-//   permissions to Amazon EC2 Auto Scaling.
+//   - The alarm object is null.
 //
-//   * ErrCodeInvalidAutoScalingGroupException "InvalidAutoScalingGroupException"
-//   The Auto Scaling group was specified in an invalid format or does not exist.
+//   - The alarm name is empty or null or exceeds the limit of 255 characters.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   An API function was called too frequently.
+//   - Two alarms with the same name have been specified.
 //
-//   * ErrCodeInvalidUpdateOutdatedInstancesOnlyValueException "InvalidUpdateOutdatedInstancesOnlyValueException"
-//   The UpdateOutdatedInstancesOnly value is invalid. For AWS Lambda deployments,
-//   false is expected. For EC2/On-premises deployments, true or false is expected.
+//   - The alarm configuration is enabled, but the alarm list is empty.
 //
-//   * ErrCodeInvalidIgnoreApplicationStopFailuresValueException "InvalidIgnoreApplicationStopFailuresValueException"
-//   The IgnoreApplicationStopFailures value is invalid. For AWS Lambda deployments,
-//   false is expected. For EC2/On-premises deployments, true or false is expected.
+//   - AlarmsLimitExceededException
+//     The maximum number of alarms for a deployment group (10) was exceeded.
 //
-//   * ErrCodeInvalidGitHubAccountTokenException "InvalidGitHubAccountTokenException"
-//   The GitHub token is not valid.
+//   - InvalidAutoRollbackConfigException
+//     The automatic rollback configuration was specified in an invalid format.
+//     For example, automatic rollback is enabled, but an invalid triggering event
+//     type or no event types were listed.
+//
+//   - InvalidLoadBalancerInfoException
+//     An invalid load balancer name, or no load balancer name, was specified.
+//
+//   - InvalidFileExistsBehaviorException
+//     An invalid fileExistsBehavior option was specified to determine how CodeDeploy
+//     handles files or directories that already exist in a deployment target location,
+//     but weren't part of the previous successful deployment. Valid values include
+//     "DISALLOW," "OVERWRITE," and "RETAIN."
+//
+//   - InvalidRoleException
+//     The service role ARN was specified in an invalid format. Or, if an Auto Scaling
+//     group was specified, the specified service role does not grant the appropriate
+//     permissions to Amazon EC2 Auto Scaling.
+//
+//   - InvalidAutoScalingGroupException
+//     The Auto Scaling group was specified in an invalid format or does not exist.
+//
+//   - ThrottlingException
+//     An API function was called too frequently.
+//
+//   - InvalidUpdateOutdatedInstancesOnlyValueException
+//     The UpdateOutdatedInstancesOnly value is invalid. For Lambda deployments,
+//     false is expected. For EC2/On-premises deployments, true or false is expected.
+//
+//   - InvalidIgnoreApplicationStopFailuresValueException
+//     The IgnoreApplicationStopFailures value is invalid. For Lambda deployments,
+//     false is expected. For EC2/On-premises deployments, true or false is expected.
+//
+//   - InvalidGitHubAccountTokenException
+//     The GitHub token is not valid.
+//
+//   - InvalidTrafficRoutingConfigurationException
+//     The configuration that specifies how traffic is routed during a deployment
+//     is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeployment
 func (c *CodeDeploy) CreateDeployment(input *CreateDeploymentInput) (*CreateDeploymentOutput, error) {
@@ -1156,14 +1202,13 @@ const opCreateDeploymentConfig = "CreateDeploymentConfig"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDeploymentConfigRequest method.
+//	req, resp := client.CreateDeploymentConfigRequest(params)
 //
-//    // Example sending a request using the CreateDeploymentConfigRequest method.
-//    req, resp := client.CreateDeploymentConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfig
 func (c *CodeDeploy) CreateDeploymentConfigRequest(input *CreateDeploymentConfigInput) (req *request.Request, output *CreateDeploymentConfigOutput) {
@@ -1193,29 +1238,34 @@ func (c *CodeDeploy) CreateDeploymentConfigRequest(input *CreateDeploymentConfig
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation CreateDeploymentConfig for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentConfigNameRequiredException "DeploymentConfigNameRequiredException"
-//   The deployment configuration name was not specified.
+//   - InvalidDeploymentConfigNameException
+//     The deployment configuration name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentConfigAlreadyExistsException "DeploymentConfigAlreadyExistsException"
-//   A deployment configuration with the specified name with the IAM user or AWS
-//   account already exists .
+//   - DeploymentConfigNameRequiredException
+//     The deployment configuration name was not specified.
 //
-//   * ErrCodeInvalidMinimumHealthyHostValueException "InvalidMinimumHealthyHostValueException"
-//   The minimum healthy instance value was specified in an invalid format.
+//   - DeploymentConfigAlreadyExistsException
+//     A deployment configuration with the specified name with the user or Amazon
+//     Web Services account already exists.
 //
-//   * ErrCodeDeploymentConfigLimitExceededException "DeploymentConfigLimitExceededException"
-//   The deployment configurations limit was exceeded.
+//   - InvalidMinimumHealthyHostValueException
+//     The minimum healthy instance value was specified in an invalid format.
 //
-//   * ErrCodeInvalidComputePlatformException "InvalidComputePlatformException"
-//   The computePlatform is invalid. The computePlatform should be Lambda or Server.
+//   - DeploymentConfigLimitExceededException
+//     The deployment configurations limit was exceeded.
 //
-//   * ErrCodeInvalidTrafficRoutingConfigurationException "InvalidTrafficRoutingConfigurationException"
-//   The configuration that specifies how traffic is routed during a deployment
-//   is invalid.
+//   - InvalidComputePlatformException
+//     The computePlatform is invalid. The computePlatform should be Lambda, Server,
+//     or ECS.
+//
+//   - InvalidTrafficRoutingConfigurationException
+//     The configuration that specifies how traffic is routed during a deployment
+//     is invalid.
+//
+//   - InvalidZonalDeploymentConfigurationException
+//     The ZonalConfig object is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfig
 func (c *CodeDeploy) CreateDeploymentConfig(input *CreateDeploymentConfigInput) (*CreateDeploymentConfigOutput, error) {
@@ -1255,14 +1305,13 @@ const opCreateDeploymentGroup = "CreateDeploymentGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDeploymentGroupRequest method.
+//	req, resp := client.CreateDeploymentGroupRequest(params)
 //
-//    // Example sending a request using the CreateDeploymentGroupRequest method.
-//    req, resp := client.CreateDeploymentGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroup
 func (c *CodeDeploy) CreateDeploymentGroupRequest(input *CreateDeploymentGroupInput) (req *request.Request, output *CreateDeploymentGroupOutput) {
@@ -1292,122 +1341,131 @@ func (c *CodeDeploy) CreateDeploymentGroupRequest(input *CreateDeploymentGroupIn
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation CreateDeploymentGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
+//   - DeploymentGroupNameRequiredException
+//     The deployment group name was not specified.
 //
-//   * ErrCodeDeploymentGroupAlreadyExistsException "DeploymentGroupAlreadyExistsException"
-//   A deployment group with the specified name with the IAM user or AWS account
-//   already exists.
+//   - InvalidDeploymentGroupNameException
+//     The deployment group name was specified in an invalid format.
 //
-//   * ErrCodeInvalidEC2TagException "InvalidEC2TagException"
-//   The tag was specified in an invalid format.
+//   - DeploymentGroupAlreadyExistsException
+//     A deployment group with the specified name with the user or Amazon Web Services
+//     account already exists.
 //
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   The tag was specified in an invalid format.
+//   - InvalidEC2TagException
+//     The tag was specified in an invalid format.
 //
-//   * ErrCodeInvalidAutoScalingGroupException "InvalidAutoScalingGroupException"
-//   The Auto Scaling group was specified in an invalid format or does not exist.
+//   - InvalidTagException
+//     The tag was specified in an invalid format.
 //
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
+//   - InvalidAutoScalingGroupException
+//     The Auto Scaling group was specified in an invalid format or does not exist.
 //
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the IAM user or AWS account.
+//   - InvalidDeploymentConfigNameException
+//     The deployment configuration name was specified in an invalid format.
 //
-//   * ErrCodeRoleRequiredException "RoleRequiredException"
-//   The role ID was not specified.
+//   - DeploymentConfigDoesNotExistException
+//     The deployment configuration does not exist with the user or Amazon Web Services
+//     account.
 //
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The service role ARN was specified in an invalid format. Or, if an Auto Scaling
-//   group was specified, the specified service role does not grant the appropriate
-//   permissions to Amazon EC2 Auto Scaling.
+//   - RoleRequiredException
+//     The role ID was not specified.
 //
-//   * ErrCodeDeploymentGroupLimitExceededException "DeploymentGroupLimitExceededException"
-//   The deployment groups limit was exceeded.
+//   - InvalidRoleException
+//     The service role ARN was specified in an invalid format. Or, if an Auto Scaling
+//     group was specified, the specified service role does not grant the appropriate
+//     permissions to Amazon EC2 Auto Scaling.
 //
-//   * ErrCodeLifecycleHookLimitExceededException "LifecycleHookLimitExceededException"
-//   The limit for lifecycle hooks was exceeded.
+//   - DeploymentGroupLimitExceededException
+//     The deployment groups limit was exceeded.
 //
-//   * ErrCodeInvalidTriggerConfigException "InvalidTriggerConfigException"
-//   The trigger was specified in an invalid format.
+//   - LifecycleHookLimitExceededException
+//     The limit for lifecycle hooks was exceeded.
 //
-//   * ErrCodeTriggerTargetsLimitExceededException "TriggerTargetsLimitExceededException"
-//   The maximum allowed number of triggers was exceeded.
+//   - InvalidTriggerConfigException
+//     The trigger was specified in an invalid format.
 //
-//   * ErrCodeInvalidAlarmConfigException "InvalidAlarmConfigException"
-//   The format of the alarm configuration is invalid. Possible causes include:
+//   - TriggerTargetsLimitExceededException
+//     The maximum allowed number of triggers was exceeded.
 //
-//      * The alarm list is null.
+//   - InvalidAlarmConfigException
+//     The format of the alarm configuration is invalid. Possible causes include:
 //
-//      * The alarm object is null.
+//   - The alarm list is null.
 //
-//      * The alarm name is empty or null or exceeds the limit of 255 characters.
+//   - The alarm object is null.
 //
-//      * Two alarms with the same name have been specified.
+//   - The alarm name is empty or null or exceeds the limit of 255 characters.
 //
-//      * The alarm configuration is enabled, but the alarm list is empty.
+//   - Two alarms with the same name have been specified.
 //
-//   * ErrCodeAlarmsLimitExceededException "AlarmsLimitExceededException"
-//   The maximum number of alarms for a deployment group (10) was exceeded.
+//   - The alarm configuration is enabled, but the alarm list is empty.
 //
-//   * ErrCodeInvalidAutoRollbackConfigException "InvalidAutoRollbackConfigException"
-//   The automatic rollback configuration was specified in an invalid format.
-//   For example, automatic rollback is enabled, but an invalid triggering event
-//   type or no event types were listed.
+//   - AlarmsLimitExceededException
+//     The maximum number of alarms for a deployment group (10) was exceeded.
 //
-//   * ErrCodeInvalidLoadBalancerInfoException "InvalidLoadBalancerInfoException"
-//   An invalid load balancer name, or no load balancer name, was specified.
+//   - InvalidAutoRollbackConfigException
+//     The automatic rollback configuration was specified in an invalid format.
+//     For example, automatic rollback is enabled, but an invalid triggering event
+//     type or no event types were listed.
 //
-//   * ErrCodeInvalidDeploymentStyleException "InvalidDeploymentStyleException"
-//   An invalid deployment style was specified. Valid deployment types include
-//   "IN_PLACE" and "BLUE_GREEN." Valid deployment options include "WITH_TRAFFIC_CONTROL"
-//   and "WITHOUT_TRAFFIC_CONTROL."
+//   - InvalidLoadBalancerInfoException
+//     An invalid load balancer name, or no load balancer name, was specified.
 //
-//   * ErrCodeInvalidBlueGreenDeploymentConfigurationException "InvalidBlueGreenDeploymentConfigurationException"
-//   The configuration for the blue/green deployment group was provided in an
-//   invalid format. For information about deployment configuration format, see
-//   CreateDeploymentConfig.
+//   - InvalidDeploymentStyleException
+//     An invalid deployment style was specified. Valid deployment types include
+//     "IN_PLACE" and "BLUE_GREEN." Valid deployment options include "WITH_TRAFFIC_CONTROL"
+//     and "WITHOUT_TRAFFIC_CONTROL."
 //
-//   * ErrCodeInvalidEC2TagCombinationException "InvalidEC2TagCombinationException"
-//   A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but
-//   only one of these data types can be used in a single call.
+//   - InvalidBlueGreenDeploymentConfigurationException
+//     The configuration for the blue/green deployment group was provided in an
+//     invalid format. For information about deployment configuration format, see
+//     CreateDeploymentConfig.
 //
-//   * ErrCodeInvalidOnPremisesTagCombinationException "InvalidOnPremisesTagCombinationException"
-//   A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet,
-//   but only one of these data types can be used in a single call.
+//   - InvalidEC2TagCombinationException
+//     A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but
+//     only one of these data types can be used in a single call.
 //
-//   * ErrCodeTagSetListLimitExceededException "TagSetListLimitExceededException"
-//   The number of tag groups included in the tag set list exceeded the maximum
-//   allowed limit of 3.
+//   - InvalidOnPremisesTagCombinationException
+//     A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet,
+//     but only one of these data types can be used in a single call.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input was specified in an invalid format.
+//   - TagSetListLimitExceededException
+//     The number of tag groups included in the tag set list exceeded the maximum
+//     allowed limit of 3.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   An API function was called too frequently.
+//   - InvalidInputException
+//     The input was specified in an invalid format.
 //
-//   * ErrCodeInvalidECSServiceException "InvalidECSServiceException"
-//   The Amazon ECS service identifier is not valid.
+//   - ThrottlingException
+//     An API function was called too frequently.
 //
-//   * ErrCodeInvalidTargetGroupPairException "InvalidTargetGroupPairException"
-//   A target group pair associated with this deployment is not valid.
+//   - InvalidECSServiceException
+//     The Amazon ECS service identifier is not valid.
 //
-//   * ErrCodeECSServiceMappingLimitExceededException "ECSServiceMappingLimitExceededException"
-//   The Amazon ECS service is associated with more than one deployment groups.
-//   An Amazon ECS service can be associated with only one deployment group.
+//   - InvalidTargetGroupPairException
+//     A target group pair associated with this deployment is not valid.
+//
+//   - ECSServiceMappingLimitExceededException
+//     The Amazon ECS service is associated with more than one deployment groups.
+//     An Amazon ECS service can be associated with only one deployment group.
+//
+//   - InvalidTagsToAddException
+//     The specified tags are not valid.
+//
+//   - InvalidTrafficRoutingConfigurationException
+//     The configuration that specifies how traffic is routed during a deployment
+//     is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroup
 func (c *CodeDeploy) CreateDeploymentGroup(input *CreateDeploymentGroupInput) (*CreateDeploymentGroupOutput, error) {
@@ -1447,14 +1505,13 @@ const opDeleteApplication = "DeleteApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteApplicationRequest method.
+//	req, resp := client.DeleteApplicationRequest(params)
 //
-//    // Example sending a request using the DeleteApplicationRequest method.
-//    req, resp := client.DeleteApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplication
 func (c *CodeDeploy) DeleteApplicationRequest(input *DeleteApplicationInput) (req *request.Request, output *DeleteApplicationOutput) {
@@ -1485,12 +1542,18 @@ func (c *CodeDeploy) DeleteApplicationRequest(input *DeleteApplicationInput) (re
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation DeleteApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
+//
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
+//
+//   - InvalidRoleException
+//     The service role ARN was specified in an invalid format. Or, if an Auto Scaling
+//     group was specified, the specified service role does not grant the appropriate
+//     permissions to Amazon EC2 Auto Scaling.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplication
 func (c *CodeDeploy) DeleteApplication(input *DeleteApplicationInput) (*DeleteApplicationOutput, error) {
@@ -1530,14 +1593,13 @@ const opDeleteDeploymentConfig = "DeleteDeploymentConfig"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDeploymentConfigRequest method.
+//	req, resp := client.DeleteDeploymentConfigRequest(params)
 //
-//    // Example sending a request using the DeleteDeploymentConfigRequest method.
-//    req, resp := client.DeleteDeploymentConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfig
 func (c *CodeDeploy) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfigInput) (req *request.Request, output *DeleteDeploymentConfigOutput) {
@@ -1571,18 +1633,19 @@ func (c *CodeDeploy) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfig
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation DeleteDeploymentConfig for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentConfigNameRequiredException "DeploymentConfigNameRequiredException"
-//   The deployment configuration name was not specified.
+//   - InvalidDeploymentConfigNameException
+//     The deployment configuration name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentConfigInUseException "DeploymentConfigInUseException"
-//   The deployment configuration is still in use.
+//   - DeploymentConfigNameRequiredException
+//     The deployment configuration name was not specified.
 //
-//   * ErrCodeInvalidOperationException "InvalidOperationException"
-//   An invalid operation was detected.
+//   - DeploymentConfigInUseException
+//     The deployment configuration is still in use.
+//
+//   - InvalidOperationException
+//     An invalid operation was detected.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfig
 func (c *CodeDeploy) DeleteDeploymentConfig(input *DeleteDeploymentConfigInput) (*DeleteDeploymentConfigOutput, error) {
@@ -1622,14 +1685,13 @@ const opDeleteDeploymentGroup = "DeleteDeploymentGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDeploymentGroupRequest method.
+//	req, resp := client.DeleteDeploymentGroupRequest(params)
 //
-//    // Example sending a request using the DeleteDeploymentGroupRequest method.
-//    req, resp := client.DeleteDeploymentGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroup
 func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupInput) (req *request.Request, output *DeleteDeploymentGroupOutput) {
@@ -1659,23 +1721,24 @@ func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupIn
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation DeleteDeploymentGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
+//   - DeploymentGroupNameRequiredException
+//     The deployment group name was not specified.
 //
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The service role ARN was specified in an invalid format. Or, if an Auto Scaling
-//   group was specified, the specified service role does not grant the appropriate
-//   permissions to Amazon EC2 Auto Scaling.
+//   - InvalidDeploymentGroupNameException
+//     The deployment group name was specified in an invalid format.
+//
+//   - InvalidRoleException
+//     The service role ARN was specified in an invalid format. Or, if an Auto Scaling
+//     group was specified, the specified service role does not grant the appropriate
+//     permissions to Amazon EC2 Auto Scaling.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroup
 func (c *CodeDeploy) DeleteDeploymentGroup(input *DeleteDeploymentGroupInput) (*DeleteDeploymentGroupOutput, error) {
@@ -1715,14 +1778,13 @@ const opDeleteGitHubAccountToken = "DeleteGitHubAccountToken"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteGitHubAccountTokenRequest method.
+//	req, resp := client.DeleteGitHubAccountTokenRequest(params)
 //
-//    // Example sending a request using the DeleteGitHubAccountTokenRequest method.
-//    req, resp := client.DeleteGitHubAccountTokenRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountToken
 func (c *CodeDeploy) DeleteGitHubAccountTokenRequest(input *DeleteGitHubAccountTokenInput) (req *request.Request, output *DeleteGitHubAccountTokenOutput) {
@@ -1752,21 +1814,22 @@ func (c *CodeDeploy) DeleteGitHubAccountTokenRequest(input *DeleteGitHubAccountT
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation DeleteGitHubAccountToken for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeGitHubAccountTokenNameRequiredException "GitHubAccountTokenNameRequiredException"
-//   The call is missing a required GitHub account connection name.
+// Returned Error Types:
 //
-//   * ErrCodeGitHubAccountTokenDoesNotExistException "GitHubAccountTokenDoesNotExistException"
-//   No GitHub account connection exists with the named specified in the call.
+//   - GitHubAccountTokenNameRequiredException
+//     The call is missing a required GitHub account connection name.
 //
-//   * ErrCodeInvalidGitHubAccountTokenNameException "InvalidGitHubAccountTokenNameException"
-//   The format of the specified GitHub account connection name is invalid.
+//   - GitHubAccountTokenDoesNotExistException
+//     No GitHub account connection exists with the named specified in the call.
 //
-//   * ErrCodeResourceValidationException "ResourceValidationException"
-//   The specified resource could not be validated.
+//   - InvalidGitHubAccountTokenNameException
+//     The format of the specified GitHub account connection name is invalid.
 //
-//   * ErrCodeOperationNotSupportedException "OperationNotSupportedException"
-//   The API used does not support the deployment.
+//   - ResourceValidationException
+//     The specified resource could not be validated.
+//
+//   - OperationNotSupportedException
+//     The API used does not support the deployment.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountToken
 func (c *CodeDeploy) DeleteGitHubAccountToken(input *DeleteGitHubAccountTokenInput) (*DeleteGitHubAccountTokenOutput, error) {
@@ -1790,6 +1853,86 @@ func (c *CodeDeploy) DeleteGitHubAccountTokenWithContext(ctx aws.Context, input 
 	return out, req.Send()
 }
 
+const opDeleteResourcesByExternalId = "DeleteResourcesByExternalId"
+
+// DeleteResourcesByExternalIdRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteResourcesByExternalId operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteResourcesByExternalId for more information on using the DeleteResourcesByExternalId
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteResourcesByExternalIdRequest method.
+//	req, resp := client.DeleteResourcesByExternalIdRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteResourcesByExternalId
+func (c *CodeDeploy) DeleteResourcesByExternalIdRequest(input *DeleteResourcesByExternalIdInput) (req *request.Request, output *DeleteResourcesByExternalIdOutput) {
+	op := &request.Operation{
+		Name:       opDeleteResourcesByExternalId,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteResourcesByExternalIdInput{}
+	}
+
+	output = &DeleteResourcesByExternalIdOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteResourcesByExternalId API operation for AWS CodeDeploy.
+//
+// Deletes resources linked to an external ID. This action only applies if you
+// have configured blue/green deployments through CloudFormation.
+//
+// It is not necessary to call this action directly. CloudFormation calls it
+// on your behalf when it needs to delete stack resources. This action is offered
+// publicly in case you need to delete resources to comply with General Data
+// Protection Regulation (GDPR) requirements.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeDeploy's
+// API operation DeleteResourcesByExternalId for usage and error information.
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteResourcesByExternalId
+func (c *CodeDeploy) DeleteResourcesByExternalId(input *DeleteResourcesByExternalIdInput) (*DeleteResourcesByExternalIdOutput, error) {
+	req, out := c.DeleteResourcesByExternalIdRequest(input)
+	return out, req.Send()
+}
+
+// DeleteResourcesByExternalIdWithContext is the same as DeleteResourcesByExternalId with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteResourcesByExternalId for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeDeploy) DeleteResourcesByExternalIdWithContext(ctx aws.Context, input *DeleteResourcesByExternalIdInput, opts ...request.Option) (*DeleteResourcesByExternalIdOutput, error) {
+	req, out := c.DeleteResourcesByExternalIdRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeregisterOnPremisesInstance = "DeregisterOnPremisesInstance"
 
 // DeregisterOnPremisesInstanceRequest generates a "aws/request.Request" representing the
@@ -1806,14 +1949,13 @@ const opDeregisterOnPremisesInstance = "DeregisterOnPremisesInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeregisterOnPremisesInstanceRequest method.
+//	req, resp := client.DeregisterOnPremisesInstanceRequest(params)
 //
-//    // Example sending a request using the DeregisterOnPremisesInstanceRequest method.
-//    req, resp := client.DeregisterOnPremisesInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstance
 func (c *CodeDeploy) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPremisesInstanceInput) (req *request.Request, output *DeregisterOnPremisesInstanceOutput) {
@@ -1844,12 +1986,13 @@ func (c *CodeDeploy) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPrem
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation DeregisterOnPremisesInstance for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The on-premises instance name was specified in an invalid format.
+//   - InstanceNameRequiredException
+//     An on-premises instance name was not specified.
+//
+//   - InvalidInstanceNameException
+//     The on-premises instance name was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstance
 func (c *CodeDeploy) DeregisterOnPremisesInstance(input *DeregisterOnPremisesInstanceInput) (*DeregisterOnPremisesInstanceOutput, error) {
@@ -1889,14 +2032,13 @@ const opGetApplication = "GetApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetApplicationRequest method.
+//	req, resp := client.GetApplicationRequest(params)
 //
-//    // Example sending a request using the GetApplicationRequest method.
-//    req, resp := client.GetApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication
 func (c *CodeDeploy) GetApplicationRequest(input *GetApplicationInput) (req *request.Request, output *GetApplicationOutput) {
@@ -1926,15 +2068,16 @@ func (c *CodeDeploy) GetApplicationRequest(input *GetApplicationInput) (req *req
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation GetApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
+//
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication
 func (c *CodeDeploy) GetApplication(input *GetApplicationInput) (*GetApplicationOutput, error) {
@@ -1974,14 +2117,13 @@ const opGetApplicationRevision = "GetApplicationRevision"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetApplicationRevisionRequest method.
+//	req, resp := client.GetApplicationRevisionRequest(params)
 //
-//    // Example sending a request using the GetApplicationRevisionRequest method.
-//    req, resp := client.GetApplicationRevisionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevision
 func (c *CodeDeploy) GetApplicationRevisionRequest(input *GetApplicationRevisionInput) (req *request.Request, output *GetApplicationRevisionOutput) {
@@ -2011,24 +2153,25 @@ func (c *CodeDeploy) GetApplicationRevisionRequest(input *GetApplicationRevision
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation GetApplicationRevision for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+// Returned Error Types:
 //
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeRevisionDoesNotExistException "RevisionDoesNotExistException"
-//   The named revision does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeRevisionRequiredException "RevisionRequiredException"
-//   The revision ID was not specified.
+//   - RevisionDoesNotExistException
+//     The named revision does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidRevisionException "InvalidRevisionException"
-//   The revision was specified in an invalid format.
+//   - RevisionRequiredException
+//     The revision ID was not specified.
+//
+//   - InvalidRevisionException
+//     The revision was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevision
 func (c *CodeDeploy) GetApplicationRevision(input *GetApplicationRevisionInput) (*GetApplicationRevisionOutput, error) {
@@ -2068,14 +2211,13 @@ const opGetDeployment = "GetDeployment"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDeploymentRequest method.
+//	req, resp := client.GetDeploymentRequest(params)
 //
-//    // Example sending a request using the GetDeploymentRequest method.
-//    req, resp := client.GetDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment
 func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) (req *request.Request, output *GetDeploymentOutput) {
@@ -2098,6 +2240,11 @@ func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) (req *reque
 //
 // Gets information about a deployment.
 //
+// The content property of the appSpecContent object in the returned revision
+// is always null. Use GetApplicationRevision and the sha256 property of the
+// returned appSpecContent object to get the content of the deployment’s AppSpec
+// file.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -2105,15 +2252,16 @@ func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) (req *reque
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation GetDeployment for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
+//
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment
 func (c *CodeDeploy) GetDeployment(input *GetDeploymentInput) (*GetDeploymentOutput, error) {
@@ -2153,14 +2301,13 @@ const opGetDeploymentConfig = "GetDeploymentConfig"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDeploymentConfigRequest method.
+//	req, resp := client.GetDeploymentConfigRequest(params)
 //
-//    // Example sending a request using the GetDeploymentConfigRequest method.
-//    req, resp := client.GetDeploymentConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfig
 func (c *CodeDeploy) GetDeploymentConfigRequest(input *GetDeploymentConfigInput) (req *request.Request, output *GetDeploymentConfigOutput) {
@@ -2190,18 +2337,21 @@ func (c *CodeDeploy) GetDeploymentConfigRequest(input *GetDeploymentConfigInput)
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation GetDeploymentConfig for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentConfigNameRequiredException "DeploymentConfigNameRequiredException"
-//   The deployment configuration name was not specified.
+//   - InvalidDeploymentConfigNameException
+//     The deployment configuration name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the IAM user or AWS account.
+//   - DeploymentConfigNameRequiredException
+//     The deployment configuration name was not specified.
 //
-//   * ErrCodeInvalidComputePlatformException "InvalidComputePlatformException"
-//   The computePlatform is invalid. The computePlatform should be Lambda or Server.
+//   - DeploymentConfigDoesNotExistException
+//     The deployment configuration does not exist with the user or Amazon Web Services
+//     account.
+//
+//   - InvalidComputePlatformException
+//     The computePlatform is invalid. The computePlatform should be Lambda, Server,
+//     or ECS.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfig
 func (c *CodeDeploy) GetDeploymentConfig(input *GetDeploymentConfigInput) (*GetDeploymentConfigOutput, error) {
@@ -2241,14 +2391,13 @@ const opGetDeploymentGroup = "GetDeploymentGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDeploymentGroupRequest method.
+//	req, resp := client.GetDeploymentGroupRequest(params)
 //
-//    // Example sending a request using the GetDeploymentGroupRequest method.
-//    req, resp := client.GetDeploymentGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup
 func (c *CodeDeploy) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) (req *request.Request, output *GetDeploymentGroupOutput) {
@@ -2278,27 +2427,30 @@ func (c *CodeDeploy) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) (
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation GetDeploymentGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
+//   - DeploymentGroupNameRequiredException
+//     The deployment group name was not specified.
 //
-//   * ErrCodeDeploymentGroupDoesNotExistException "DeploymentGroupDoesNotExistException"
-//   The named deployment group with the IAM user or AWS account does not exist.
+//   - InvalidDeploymentGroupNameException
+//     The deployment group name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the IAM user or AWS account.
+//   - DeploymentGroupDoesNotExistException
+//     The named deployment group with the user or Amazon Web Services account does
+//     not exist.
+//
+//   - DeploymentConfigDoesNotExistException
+//     The deployment configuration does not exist with the user or Amazon Web Services
+//     account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup
 func (c *CodeDeploy) GetDeploymentGroup(input *GetDeploymentGroupInput) (*GetDeploymentGroupOutput, error) {
@@ -2338,14 +2490,13 @@ const opGetDeploymentInstance = "GetDeploymentInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDeploymentInstanceRequest method.
+//	req, resp := client.GetDeploymentInstanceRequest(params)
 //
-//    // Example sending a request using the GetDeploymentInstanceRequest method.
-//    req, resp := client.GetDeploymentInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance
 //
@@ -2380,27 +2531,29 @@ func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceIn
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation GetDeploymentInstance for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeInstanceIdRequiredException "InstanceIdRequiredException"
-//   The instance ID was not specified.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - InstanceIdRequiredException
+//     The instance ID was not specified.
 //
-//   * ErrCodeInstanceDoesNotExistException "InstanceDoesNotExistException"
-//   The specified instance does not exist in the deployment group.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
 //
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The on-premises instance name was specified in an invalid format.
+//   - InstanceDoesNotExistException
+//     The specified instance does not exist in the deployment group.
 //
-//   * ErrCodeInvalidComputePlatformException "InvalidComputePlatformException"
-//   The computePlatform is invalid. The computePlatform should be Lambda or Server.
+//   - InvalidInstanceNameException
+//     The on-premises instance name was specified in an invalid format.
+//
+//   - InvalidComputePlatformException
+//     The computePlatform is invalid. The computePlatform should be Lambda, Server,
+//     or ECS.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance
 //
@@ -2444,14 +2597,13 @@ const opGetDeploymentTarget = "GetDeploymentTarget"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDeploymentTargetRequest method.
+//	req, resp := client.GetDeploymentTargetRequest(params)
 //
-//    // Example sending a request using the GetDeploymentTargetRequest method.
-//    req, resp := client.GetDeploymentTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTarget
 func (c *CodeDeploy) GetDeploymentTargetRequest(input *GetDeploymentTargetInput) (req *request.Request, output *GetDeploymentTargetOutput) {
@@ -2481,27 +2633,31 @@ func (c *CodeDeploy) GetDeploymentTargetRequest(input *GetDeploymentTargetInput)
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation GetDeploymentTarget for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeDeploymentTargetIdRequiredException "DeploymentTargetIdRequiredException"
-//   A deployment target ID was not provided.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeInvalidDeploymentTargetIdException "InvalidDeploymentTargetIdException"
-//   The target ID provided was not valid.
+//   - DeploymentNotStartedException
+//     The specified deployment has not started.
 //
-//   * ErrCodeDeploymentTargetDoesNotExistException "DeploymentTargetDoesNotExistException"
-//   The provided target ID does not belong to the attempted deployment.
+//   - DeploymentTargetIdRequiredException
+//     A deployment target ID was not provided.
 //
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The on-premises instance name was specified in an invalid format.
+//   - InvalidDeploymentTargetIdException
+//     The target ID provided was not valid.
+//
+//   - DeploymentTargetDoesNotExistException
+//     The provided target ID does not belong to the attempted deployment.
+//
+//   - InvalidInstanceNameException
+//     The on-premises instance name was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTarget
 func (c *CodeDeploy) GetDeploymentTarget(input *GetDeploymentTargetInput) (*GetDeploymentTargetOutput, error) {
@@ -2541,14 +2697,13 @@ const opGetOnPremisesInstance = "GetOnPremisesInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetOnPremisesInstanceRequest method.
+//	req, resp := client.GetOnPremisesInstanceRequest(params)
 //
-//    // Example sending a request using the GetOnPremisesInstanceRequest method.
-//    req, resp := client.GetOnPremisesInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstance
 func (c *CodeDeploy) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceInput) (req *request.Request, output *GetOnPremisesInstanceOutput) {
@@ -2578,15 +2733,16 @@ func (c *CodeDeploy) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceIn
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation GetOnPremisesInstance for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInstanceNotRegisteredException "InstanceNotRegisteredException"
-//   The specified on-premises instance is not registered.
+//   - InstanceNameRequiredException
+//     An on-premises instance name was not specified.
 //
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The on-premises instance name was specified in an invalid format.
+//   - InstanceNotRegisteredException
+//     The specified on-premises instance is not registered.
+//
+//   - InvalidInstanceNameException
+//     The on-premises instance name was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstance
 func (c *CodeDeploy) GetOnPremisesInstance(input *GetOnPremisesInstanceInput) (*GetOnPremisesInstanceOutput, error) {
@@ -2626,14 +2782,13 @@ const opListApplicationRevisions = "ListApplicationRevisions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListApplicationRevisionsRequest method.
+//	req, resp := client.ListApplicationRevisionsRequest(params)
 //
-//    // Example sending a request using the ListApplicationRevisionsRequest method.
-//    req, resp := client.ListApplicationRevisionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions
 func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevisionsInput) (req *request.Request, output *ListApplicationRevisionsOutput) {
@@ -2669,37 +2824,38 @@ func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevis
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ListApplicationRevisions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+// Returned Error Types:
 //
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeInvalidSortByException "InvalidSortByException"
-//   The column name to sort by is either not present or was specified in an invalid
-//   format.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeInvalidSortOrderException "InvalidSortOrderException"
-//   The sort order was specified in an invalid format.
+//   - InvalidSortByException
+//     The column name to sort by is either not present or was specified in an invalid
+//     format.
 //
-//   * ErrCodeInvalidBucketNameFilterException "InvalidBucketNameFilterException"
-//   The bucket name either doesn't exist or was specified in an invalid format.
+//   - InvalidSortOrderException
+//     The sort order was specified in an invalid format.
 //
-//   * ErrCodeInvalidKeyPrefixFilterException "InvalidKeyPrefixFilterException"
-//   The specified key prefix filter was specified in an invalid format.
+//   - InvalidBucketNameFilterException
+//     The bucket name either doesn't exist or was specified in an invalid format.
 //
-//   * ErrCodeBucketNameFilterRequiredException "BucketNameFilterRequiredException"
-//   A bucket name is required, but was not provided.
+//   - InvalidKeyPrefixFilterException
+//     The specified key prefix filter was specified in an invalid format.
 //
-//   * ErrCodeInvalidDeployedStateFilterException "InvalidDeployedStateFilterException"
-//   The deployed state filter was specified in an invalid format.
+//   - BucketNameFilterRequiredException
+//     A bucket name is required, but was not provided.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
+//   - InvalidDeployedStateFilterException
+//     The deployed state filter was specified in an invalid format.
+//
+//   - InvalidNextTokenException
+//     The next token was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions
 func (c *CodeDeploy) ListApplicationRevisions(input *ListApplicationRevisionsInput) (*ListApplicationRevisionsOutput, error) {
@@ -2731,15 +2887,14 @@ func (c *CodeDeploy) ListApplicationRevisionsWithContext(ctx aws.Context, input 
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListApplicationRevisions operation.
-//    pageNum := 0
-//    err := client.ListApplicationRevisionsPages(params,
-//        func(page *ListApplicationRevisionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListApplicationRevisions operation.
+//	pageNum := 0
+//	err := client.ListApplicationRevisionsPages(params,
+//	    func(page *codedeploy.ListApplicationRevisionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CodeDeploy) ListApplicationRevisionsPages(input *ListApplicationRevisionsInput, fn func(*ListApplicationRevisionsOutput, bool) bool) error {
 	return c.ListApplicationRevisionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2766,10 +2921,12 @@ func (c *CodeDeploy) ListApplicationRevisionsPagesWithContext(ctx aws.Context, i
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListApplicationRevisionsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListApplicationRevisionsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2789,14 +2946,13 @@ const opListApplications = "ListApplications"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListApplicationsRequest method.
+//	req, resp := client.ListApplicationsRequest(params)
 //
-//    // Example sending a request using the ListApplicationsRequest method.
-//    req, resp := client.ListApplicationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplications
 func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) (req *request.Request, output *ListApplicationsOutput) {
@@ -2823,7 +2979,7 @@ func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) (req 
 
 // ListApplications API operation for AWS CodeDeploy.
 //
-// Lists the applications registered with the IAM user or AWS account.
+// Lists the applications registered with the user or Amazon Web Services account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2832,9 +2988,9 @@ func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) (req 
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ListApplications for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
+// Returned Error Types:
+//   - InvalidNextTokenException
+//     The next token was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplications
 func (c *CodeDeploy) ListApplications(input *ListApplicationsInput) (*ListApplicationsOutput, error) {
@@ -2866,15 +3022,14 @@ func (c *CodeDeploy) ListApplicationsWithContext(ctx aws.Context, input *ListApp
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListApplications operation.
-//    pageNum := 0
-//    err := client.ListApplicationsPages(params,
-//        func(page *ListApplicationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListApplications operation.
+//	pageNum := 0
+//	err := client.ListApplicationsPages(params,
+//	    func(page *codedeploy.ListApplicationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CodeDeploy) ListApplicationsPages(input *ListApplicationsInput, fn func(*ListApplicationsOutput, bool) bool) error {
 	return c.ListApplicationsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2901,10 +3056,12 @@ func (c *CodeDeploy) ListApplicationsPagesWithContext(ctx aws.Context, input *Li
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListApplicationsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListApplicationsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2924,14 +3081,13 @@ const opListDeploymentConfigs = "ListDeploymentConfigs"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDeploymentConfigsRequest method.
+//	req, resp := client.ListDeploymentConfigsRequest(params)
 //
-//    // Example sending a request using the ListDeploymentConfigsRequest method.
-//    req, resp := client.ListDeploymentConfigsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigs
 func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsInput) (req *request.Request, output *ListDeploymentConfigsOutput) {
@@ -2958,7 +3114,8 @@ func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsIn
 
 // ListDeploymentConfigs API operation for AWS CodeDeploy.
 //
-// Lists the deployment configurations with the IAM user or AWS account.
+// Lists the deployment configurations with the user or Amazon Web Services
+// account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2967,9 +3124,9 @@ func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsIn
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ListDeploymentConfigs for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
+// Returned Error Types:
+//   - InvalidNextTokenException
+//     The next token was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigs
 func (c *CodeDeploy) ListDeploymentConfigs(input *ListDeploymentConfigsInput) (*ListDeploymentConfigsOutput, error) {
@@ -3001,15 +3158,14 @@ func (c *CodeDeploy) ListDeploymentConfigsWithContext(ctx aws.Context, input *Li
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDeploymentConfigs operation.
-//    pageNum := 0
-//    err := client.ListDeploymentConfigsPages(params,
-//        func(page *ListDeploymentConfigsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDeploymentConfigs operation.
+//	pageNum := 0
+//	err := client.ListDeploymentConfigsPages(params,
+//	    func(page *codedeploy.ListDeploymentConfigsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CodeDeploy) ListDeploymentConfigsPages(input *ListDeploymentConfigsInput, fn func(*ListDeploymentConfigsOutput, bool) bool) error {
 	return c.ListDeploymentConfigsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3036,10 +3192,12 @@ func (c *CodeDeploy) ListDeploymentConfigsPagesWithContext(ctx aws.Context, inpu
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDeploymentConfigsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDeploymentConfigsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3059,14 +3217,13 @@ const opListDeploymentGroups = "ListDeploymentGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDeploymentGroupsRequest method.
+//	req, resp := client.ListDeploymentGroupsRequest(params)
 //
-//    // Example sending a request using the ListDeploymentGroupsRequest method.
-//    req, resp := client.ListDeploymentGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroups
 func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInput) (req *request.Request, output *ListDeploymentGroupsOutput) {
@@ -3093,8 +3250,8 @@ func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInpu
 
 // ListDeploymentGroups API operation for AWS CodeDeploy.
 //
-// Lists the deployment groups for an application registered with the IAM user
-// or AWS account.
+// Lists the deployment groups for an application registered with the Amazon
+// Web Services user or Amazon Web Services account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3103,18 +3260,19 @@ func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInpu
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ListDeploymentGroups for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
+//
+//   - InvalidNextTokenException
+//     The next token was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroups
 func (c *CodeDeploy) ListDeploymentGroups(input *ListDeploymentGroupsInput) (*ListDeploymentGroupsOutput, error) {
@@ -3146,15 +3304,14 @@ func (c *CodeDeploy) ListDeploymentGroupsWithContext(ctx aws.Context, input *Lis
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDeploymentGroups operation.
-//    pageNum := 0
-//    err := client.ListDeploymentGroupsPages(params,
-//        func(page *ListDeploymentGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDeploymentGroups operation.
+//	pageNum := 0
+//	err := client.ListDeploymentGroupsPages(params,
+//	    func(page *codedeploy.ListDeploymentGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CodeDeploy) ListDeploymentGroupsPages(input *ListDeploymentGroupsInput, fn func(*ListDeploymentGroupsOutput, bool) bool) error {
 	return c.ListDeploymentGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3181,10 +3338,12 @@ func (c *CodeDeploy) ListDeploymentGroupsPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDeploymentGroupsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDeploymentGroupsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3204,14 +3363,13 @@ const opListDeploymentInstances = "ListDeploymentInstances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDeploymentInstancesRequest method.
+//	req, resp := client.ListDeploymentInstancesRequest(params)
 //
-//    // Example sending a request using the ListDeploymentInstancesRequest method.
-//    req, resp := client.ListDeploymentInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstances
 //
@@ -3245,9 +3403,10 @@ func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstanc
 //
 // The newer BatchGetDeploymentTargets should be used instead because it works
 // with all compute types. ListDeploymentInstances throws an exception if it
-// is used with a compute platform other than EC2/On-premises or AWS Lambda.
+// is used with a compute platform other than EC2/On-premises or Lambda.
 //
-// Lists the instance for a deployment associated with the IAM user or AWS account.
+// Lists the instance for a deployment associated with the user or Amazon Web
+// Services account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3256,39 +3415,41 @@ func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstanc
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ListDeploymentInstances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeDeploymentNotStartedException "DeploymentNotStartedException"
-//   The specified deployment has not started.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
+//   - DeploymentNotStartedException
+//     The specified deployment has not started.
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - InvalidNextTokenException
+//     The next token was specified in an invalid format.
 //
-//   * ErrCodeInvalidInstanceStatusException "InvalidInstanceStatusException"
-//   The specified instance status does not exist.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
 //
-//   * ErrCodeInvalidInstanceTypeException "InvalidInstanceTypeException"
-//   An invalid instance type was specified for instances in a blue/green deployment.
-//   Valid values include "Blue" for an original environment and "Green" for a
-//   replacement environment.
+//   - InvalidInstanceStatusException
+//     The specified instance status does not exist.
 //
-//   * ErrCodeInvalidDeploymentInstanceTypeException "InvalidDeploymentInstanceTypeException"
-//   An instance type was specified for an in-place deployment. Instance types
-//   are supported for blue/green deployments only.
+//   - InvalidInstanceTypeException
+//     An invalid instance type was specified for instances in a blue/green deployment.
+//     Valid values include "Blue" for an original environment and "Green" for a
+//     replacement environment.
 //
-//   * ErrCodeInvalidTargetFilterNameException "InvalidTargetFilterNameException"
-//   The target filter name is invalid.
+//   - InvalidDeploymentInstanceTypeException
+//     An instance type was specified for an in-place deployment. Instance types
+//     are supported for blue/green deployments only.
 //
-//   * ErrCodeInvalidComputePlatformException "InvalidComputePlatformException"
-//   The computePlatform is invalid. The computePlatform should be Lambda or Server.
+//   - InvalidTargetFilterNameException
+//     The target filter name is invalid.
+//
+//   - InvalidComputePlatformException
+//     The computePlatform is invalid. The computePlatform should be Lambda, Server,
+//     or ECS.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstances
 //
@@ -3324,15 +3485,14 @@ func (c *CodeDeploy) ListDeploymentInstancesWithContext(ctx aws.Context, input *
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDeploymentInstances operation.
-//    pageNum := 0
-//    err := client.ListDeploymentInstancesPages(params,
-//        func(page *ListDeploymentInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDeploymentInstances operation.
+//	pageNum := 0
+//	err := client.ListDeploymentInstancesPages(params,
+//	    func(page *codedeploy.ListDeploymentInstancesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 //
 // Deprecated: This operation is deprecated, use ListDeploymentTargets instead.
 func (c *CodeDeploy) ListDeploymentInstancesPages(input *ListDeploymentInstancesInput, fn func(*ListDeploymentInstancesOutput, bool) bool) error {
@@ -3363,10 +3523,12 @@ func (c *CodeDeploy) ListDeploymentInstancesPagesWithContext(ctx aws.Context, in
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDeploymentInstancesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDeploymentInstancesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3386,14 +3548,13 @@ const opListDeploymentTargets = "ListDeploymentTargets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDeploymentTargetsRequest method.
+//	req, resp := client.ListDeploymentTargetsRequest(params)
 //
-//    // Example sending a request using the ListDeploymentTargetsRequest method.
-//    req, resp := client.ListDeploymentTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargets
 func (c *CodeDeploy) ListDeploymentTargetsRequest(input *ListDeploymentTargetsInput) (req *request.Request, output *ListDeploymentTargetsOutput) {
@@ -3423,33 +3584,37 @@ func (c *CodeDeploy) ListDeploymentTargetsRequest(input *ListDeploymentTargetsIn
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ListDeploymentTargets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeDeploymentNotStartedException "DeploymentNotStartedException"
-//   The specified deployment has not started.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
+//   - DeploymentNotStartedException
+//     The specified deployment has not started.
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - InvalidNextTokenException
+//     The next token was specified in an invalid format.
 //
-//   * ErrCodeInvalidInstanceStatusException "InvalidInstanceStatusException"
-//   The specified instance status does not exist.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
 //
-//   * ErrCodeInvalidInstanceTypeException "InvalidInstanceTypeException"
-//   An invalid instance type was specified for instances in a blue/green deployment.
-//   Valid values include "Blue" for an original environment and "Green" for a
-//   replacement environment.
+//   - InvalidInstanceStatusException
+//     The specified instance status does not exist.
 //
-//   * ErrCodeInvalidDeploymentInstanceTypeException "InvalidDeploymentInstanceTypeException"
-//   An instance type was specified for an in-place deployment. Instance types
-//   are supported for blue/green deployments only.
+//   - InvalidInstanceTypeException
+//     An invalid instance type was specified for instances in a blue/green deployment.
+//     Valid values include "Blue" for an original environment and "Green" for a
+//     replacement environment.
+//
+//   - InvalidDeploymentInstanceTypeException
+//     An instance type was specified for an in-place deployment. Instance types
+//     are supported for blue/green deployments only.
+//
+//   - InvalidTargetFilterNameException
+//     The target filter name is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargets
 func (c *CodeDeploy) ListDeploymentTargets(input *ListDeploymentTargetsInput) (*ListDeploymentTargetsOutput, error) {
@@ -3489,14 +3654,13 @@ const opListDeployments = "ListDeployments"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDeploymentsRequest method.
+//	req, resp := client.ListDeploymentsRequest(params)
 //
-//    // Example sending a request using the ListDeploymentsRequest method.
-//    req, resp := client.ListDeploymentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeployments
 func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) (req *request.Request, output *ListDeploymentsOutput) {
@@ -3524,7 +3688,7 @@ func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) (req *r
 // ListDeployments API operation for AWS CodeDeploy.
 //
 // Lists the deployments in a deployment group for an application registered
-// with the IAM user or AWS account.
+// with the user or Amazon Web Services account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3533,33 +3697,41 @@ func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) (req *r
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ListDeployments for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeDeploymentGroupDoesNotExistException "DeploymentGroupDoesNotExistException"
-//   The named deployment group with the IAM user or AWS account does not exist.
+//   - InvalidDeploymentGroupNameException
+//     The deployment group name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
+//   - DeploymentGroupDoesNotExistException
+//     The named deployment group with the user or Amazon Web Services account does
+//     not exist.
 //
-//   * ErrCodeInvalidTimeRangeException "InvalidTimeRangeException"
-//   The specified time range was specified in an invalid format.
+//   - DeploymentGroupNameRequiredException
+//     The deployment group name was not specified.
 //
-//   * ErrCodeInvalidDeploymentStatusException "InvalidDeploymentStatusException"
-//   The specified deployment status doesn't exist or cannot be determined.
+//   - InvalidTimeRangeException
+//     The specified time range was specified in an invalid format.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
+//   - InvalidDeploymentStatusException
+//     The specified deployment status doesn't exist or cannot be determined.
+//
+//   - InvalidNextTokenException
+//     The next token was specified in an invalid format.
+//
+//   - InvalidExternalIdException
+//     The external ID was specified in an invalid format.
+//
+//   - InvalidInputException
+//     The input was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeployments
 func (c *CodeDeploy) ListDeployments(input *ListDeploymentsInput) (*ListDeploymentsOutput, error) {
@@ -3591,15 +3763,14 @@ func (c *CodeDeploy) ListDeploymentsWithContext(ctx aws.Context, input *ListDepl
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDeployments operation.
-//    pageNum := 0
-//    err := client.ListDeploymentsPages(params,
-//        func(page *ListDeploymentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDeployments operation.
+//	pageNum := 0
+//	err := client.ListDeploymentsPages(params,
+//	    func(page *codedeploy.ListDeploymentsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CodeDeploy) ListDeploymentsPages(input *ListDeploymentsInput, fn func(*ListDeploymentsOutput, bool) bool) error {
 	return c.ListDeploymentsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3626,10 +3797,12 @@ func (c *CodeDeploy) ListDeploymentsPagesWithContext(ctx aws.Context, input *Lis
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDeploymentsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDeploymentsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3649,14 +3822,13 @@ const opListGitHubAccountTokenNames = "ListGitHubAccountTokenNames"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListGitHubAccountTokenNamesRequest method.
+//	req, resp := client.ListGitHubAccountTokenNamesRequest(params)
 //
-//    // Example sending a request using the ListGitHubAccountTokenNamesRequest method.
-//    req, resp := client.ListGitHubAccountTokenNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNames
 func (c *CodeDeploy) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccountTokenNamesInput) (req *request.Request, output *ListGitHubAccountTokenNamesOutput) {
@@ -3686,15 +3858,16 @@ func (c *CodeDeploy) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccount
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ListGitHubAccountTokenNames for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
+// Returned Error Types:
 //
-//   * ErrCodeResourceValidationException "ResourceValidationException"
-//   The specified resource could not be validated.
+//   - InvalidNextTokenException
+//     The next token was specified in an invalid format.
 //
-//   * ErrCodeOperationNotSupportedException "OperationNotSupportedException"
-//   The API used does not support the deployment.
+//   - ResourceValidationException
+//     The specified resource could not be validated.
+//
+//   - OperationNotSupportedException
+//     The API used does not support the deployment.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNames
 func (c *CodeDeploy) ListGitHubAccountTokenNames(input *ListGitHubAccountTokenNamesInput) (*ListGitHubAccountTokenNamesOutput, error) {
@@ -3734,14 +3907,13 @@ const opListOnPremisesInstances = "ListOnPremisesInstances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListOnPremisesInstancesRequest method.
+//	req, resp := client.ListOnPremisesInstancesRequest(params)
 //
-//    // Example sending a request using the ListOnPremisesInstancesRequest method.
-//    req, resp := client.ListOnPremisesInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstances
 func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstancesInput) (req *request.Request, output *ListOnPremisesInstancesOutput) {
@@ -3775,15 +3947,16 @@ func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstanc
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation ListOnPremisesInstances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRegistrationStatusException "InvalidRegistrationStatusException"
-//   The registration status was specified in an invalid format.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidTagFilterException "InvalidTagFilterException"
-//   The tag filter was specified in an invalid format.
+//   - InvalidRegistrationStatusException
+//     The registration status was specified in an invalid format.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token was specified in an invalid format.
+//   - InvalidTagFilterException
+//     The tag filter was specified in an invalid format.
+//
+//   - InvalidNextTokenException
+//     The next token was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstances
 func (c *CodeDeploy) ListOnPremisesInstances(input *ListOnPremisesInstancesInput) (*ListOnPremisesInstancesOutput, error) {
@@ -3807,6 +3980,94 @@ func (c *CodeDeploy) ListOnPremisesInstancesWithContext(ctx aws.Context, input *
 	return out, req.Send()
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// client's request for the ListTagsForResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListTagsForResource for more information on using the ListTagsForResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListTagsForResource
+func (c *CodeDeploy) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
+	op := &request.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output = &ListTagsForResourceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListTagsForResource API operation for AWS CodeDeploy.
+//
+// Returns a list of tags for the resource identified by a specified Amazon
+// Resource Name (ARN). Tags are used to organize and categorize your CodeDeploy
+// resources.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeDeploy's
+// API operation ListTagsForResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ArnNotSupportedException
+//     The specified ARN is not supported. For example, it might be an ARN for a
+//     resource that is not expected.
+//
+//   - InvalidArnException
+//     The specified ARN is not in a valid format.
+//
+//   - ResourceArnRequiredException
+//     The ARN of a resource is required, but was not found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListTagsForResource
+func (c *CodeDeploy) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	return out, req.Send()
+}
+
+// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListTagsForResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeDeploy) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opPutLifecycleEventHookExecutionStatus = "PutLifecycleEventHookExecutionStatus"
 
 // PutLifecycleEventHookExecutionStatusRequest generates a "aws/request.Request" representing the
@@ -3823,14 +4084,13 @@ const opPutLifecycleEventHookExecutionStatus = "PutLifecycleEventHookExecutionSt
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutLifecycleEventHookExecutionStatusRequest method.
+//	req, resp := client.PutLifecycleEventHookExecutionStatusRequest(params)
 //
-//    // Example sending a request using the PutLifecycleEventHookExecutionStatusRequest method.
-//    req, resp := client.PutLifecycleEventHookExecutionStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatus
 func (c *CodeDeploy) PutLifecycleEventHookExecutionStatusRequest(input *PutLifecycleEventHookExecutionStatusInput) (req *request.Request, output *PutLifecycleEventHookExecutionStatusOutput) {
@@ -3851,9 +4111,15 @@ func (c *CodeDeploy) PutLifecycleEventHookExecutionStatusRequest(input *PutLifec
 
 // PutLifecycleEventHookExecutionStatus API operation for AWS CodeDeploy.
 //
-// Sets the result of a Lambda validation function. The function validates one
-// or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns
-// Succeeded or Failed.
+// Sets the result of a Lambda validation function. The function validates lifecycle
+// hooks during a deployment that uses the Lambda or Amazon ECS compute platform.
+// For Lambda deployments, the available lifecycle hooks are BeforeAllowTraffic
+// and AfterAllowTraffic. For Amazon ECS deployments, the available lifecycle
+// hooks are BeforeInstall, AfterInstall, AfterAllowTestTraffic, BeforeAllowTraffic,
+// and AfterAllowTraffic. Lambda validation functions return Succeeded or Failed.
+// For more information, see AppSpec 'hooks' Section for an Lambda Deployment
+// (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda)
+// and AppSpec 'hooks' Section for an Amazon ECS Deployment (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3862,29 +4128,30 @@ func (c *CodeDeploy) PutLifecycleEventHookExecutionStatusRequest(input *PutLifec
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation PutLifecycleEventHookExecutionStatus for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidLifecycleEventHookExecutionStatusException "InvalidLifecycleEventHookExecutionStatusException"
-//   The result of a Lambda validation function that verifies a lifecycle event
-//   is invalid. It should return Succeeded or Failed.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidLifecycleEventHookExecutionIdException "InvalidLifecycleEventHookExecutionIdException"
-//   A lifecycle event hook is invalid. Review the hooks section in your AppSpec
-//   file to ensure the lifecycle events and hooks functions are valid.
+//   - InvalidLifecycleEventHookExecutionStatusException
+//     The result of a Lambda validation function that verifies a lifecycle event
+//     is invalid. It should return Succeeded or Failed.
 //
-//   * ErrCodeLifecycleEventAlreadyCompletedException "LifecycleEventAlreadyCompletedException"
-//   An attempt to return the status of an already completed lifecycle event occurred.
+//   - InvalidLifecycleEventHookExecutionIdException
+//     A lifecycle event hook is invalid. Review the hooks section in your AppSpec
+//     file to ensure the lifecycle events and hooks functions are valid.
 //
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+//   - LifecycleEventAlreadyCompletedException
+//     An attempt to return the status of an already completed lifecycle event occurred.
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeUnsupportedActionForDeploymentTypeException "UnsupportedActionForDeploymentTypeException"
-//   A call was submitted that is not supported for the specified deployment type.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
+//
+//   - UnsupportedActionForDeploymentTypeException
+//     A call was submitted that is not supported for the specified deployment type.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatus
 func (c *CodeDeploy) PutLifecycleEventHookExecutionStatus(input *PutLifecycleEventHookExecutionStatusInput) (*PutLifecycleEventHookExecutionStatusOutput, error) {
@@ -3924,14 +4191,13 @@ const opRegisterApplicationRevision = "RegisterApplicationRevision"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterApplicationRevisionRequest method.
+//	req, resp := client.RegisterApplicationRevisionRequest(params)
 //
-//    // Example sending a request using the RegisterApplicationRevisionRequest method.
-//    req, resp := client.RegisterApplicationRevisionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevision
 func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicationRevisionInput) (req *request.Request, output *RegisterApplicationRevisionOutput) {
@@ -3953,7 +4219,7 @@ func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicati
 
 // RegisterApplicationRevision API operation for AWS CodeDeploy.
 //
-// Registers with AWS CodeDeploy a revision for the specified application.
+// Registers with CodeDeploy a revision for the specified application.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3962,24 +4228,25 @@ func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicati
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation RegisterApplicationRevision for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+// Returned Error Types:
 //
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeDescriptionTooLongException "DescriptionTooLongException"
-//   The description is too long.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeRevisionRequiredException "RevisionRequiredException"
-//   The revision ID was not specified.
+//   - DescriptionTooLongException
+//     The description is too long.
 //
-//   * ErrCodeInvalidRevisionException "InvalidRevisionException"
-//   The revision was specified in an invalid format.
+//   - RevisionRequiredException
+//     The revision ID was not specified.
+//
+//   - InvalidRevisionException
+//     The revision was specified in an invalid format.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevision
 func (c *CodeDeploy) RegisterApplicationRevision(input *RegisterApplicationRevisionInput) (*RegisterApplicationRevisionOutput, error) {
@@ -4019,14 +4286,13 @@ const opRegisterOnPremisesInstance = "RegisterOnPremisesInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterOnPremisesInstanceRequest method.
+//	req, resp := client.RegisterOnPremisesInstanceRequest(params)
 //
-//    // Example sending a request using the RegisterOnPremisesInstanceRequest method.
-//    req, resp := client.RegisterOnPremisesInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstance
 func (c *CodeDeploy) RegisterOnPremisesInstanceRequest(input *RegisterOnPremisesInstanceInput) (req *request.Request, output *RegisterOnPremisesInstanceOutput) {
@@ -4060,39 +4326,40 @@ func (c *CodeDeploy) RegisterOnPremisesInstanceRequest(input *RegisterOnPremises
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation RegisterOnPremisesInstance for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInstanceNameAlreadyRegisteredException "InstanceNameAlreadyRegisteredException"
-//   The specified on-premises instance name is already registered.
+// Returned Error Types:
 //
-//   * ErrCodeIamArnRequiredException "IamArnRequiredException"
-//   No IAM ARN was included in the request. You must use an IAM session ARN or
-//   IAM user ARN in the request.
+//   - InstanceNameAlreadyRegisteredException
+//     The specified on-premises instance name is already registered.
 //
-//   * ErrCodeIamSessionArnAlreadyRegisteredException "IamSessionArnAlreadyRegisteredException"
-//   The request included an IAM session ARN that has already been used to register
-//   a different instance.
+//   - IamArnRequiredException
+//     No IAM ARN was included in the request. You must use an IAM session ARN or
+//     user ARN in the request.
 //
-//   * ErrCodeIamUserArnAlreadyRegisteredException "IamUserArnAlreadyRegisteredException"
-//   The specified IAM user ARN is already registered with an on-premises instance.
+//   - IamSessionArnAlreadyRegisteredException
+//     The request included an IAM session ARN that has already been used to register
+//     a different instance.
 //
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
+//   - IamUserArnAlreadyRegisteredException
+//     The specified user ARN is already registered with an on-premises instance.
 //
-//   * ErrCodeIamUserArnRequiredException "IamUserArnRequiredException"
-//   An IAM user ARN was not specified.
+//   - InstanceNameRequiredException
+//     An on-premises instance name was not specified.
 //
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The on-premises instance name was specified in an invalid format.
+//   - IamUserArnRequiredException
+//     An user ARN was not specified.
 //
-//   * ErrCodeInvalidIamSessionArnException "InvalidIamSessionArnException"
-//   The IAM session ARN was specified in an invalid format.
+//   - InvalidInstanceNameException
+//     The on-premises instance name was specified in an invalid format.
 //
-//   * ErrCodeInvalidIamUserArnException "InvalidIamUserArnException"
-//   The IAM user ARN was specified in an invalid format.
+//   - InvalidIamSessionArnException
+//     The IAM session ARN was specified in an invalid format.
 //
-//   * ErrCodeMultipleIamArnsProvidedException "MultipleIamArnsProvidedException"
-//   Both an IAM user ARN and an IAM session ARN were included in the request.
-//   Use only one ARN type.
+//   - InvalidIamUserArnException
+//     The user ARN was specified in an invalid format.
+//
+//   - MultipleIamArnsProvidedException
+//     Both an user ARN and an IAM session ARN were included in the request. Use
+//     only one ARN type.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstance
 func (c *CodeDeploy) RegisterOnPremisesInstance(input *RegisterOnPremisesInstanceInput) (*RegisterOnPremisesInstanceOutput, error) {
@@ -4132,14 +4399,13 @@ const opRemoveTagsFromOnPremisesInstances = "RemoveTagsFromOnPremisesInstances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RemoveTagsFromOnPremisesInstancesRequest method.
+//	req, resp := client.RemoveTagsFromOnPremisesInstancesRequest(params)
 //
-//    // Example sending a request using the RemoveTagsFromOnPremisesInstancesRequest method.
-//    req, resp := client.RemoveTagsFromOnPremisesInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstances
 func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsFromOnPremisesInstancesInput) (req *request.Request, output *RemoveTagsFromOnPremisesInstancesOutput) {
@@ -4170,28 +4436,29 @@ func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsF
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation RemoveTagsFromOnPremisesInstances for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInstanceNameRequiredException "InstanceNameRequiredException"
-//   An on-premises instance name was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidInstanceNameException "InvalidInstanceNameException"
-//   The on-premises instance name was specified in an invalid format.
+//   - InstanceNameRequiredException
+//     An on-premises instance name was not specified.
 //
-//   * ErrCodeTagRequiredException "TagRequiredException"
-//   A tag was not specified.
+//   - InvalidInstanceNameException
+//     The on-premises instance name was specified in an invalid format.
 //
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   The tag was specified in an invalid format.
+//   - TagRequiredException
+//     A tag was not specified.
 //
-//   * ErrCodeTagLimitExceededException "TagLimitExceededException"
-//   The maximum allowed number of tags was exceeded.
+//   - InvalidTagException
+//     The tag was specified in an invalid format.
 //
-//   * ErrCodeInstanceLimitExceededException "InstanceLimitExceededException"
-//   The maximum number of allowed on-premises instances in a single call was
-//   exceeded.
+//   - TagLimitExceededException
+//     The maximum allowed number of tags was exceeded.
 //
-//   * ErrCodeInstanceNotRegisteredException "InstanceNotRegisteredException"
-//   The specified on-premises instance is not registered.
+//   - InstanceLimitExceededException
+//     The maximum number of allowed on-premises instances in a single call was
+//     exceeded.
+//
+//   - InstanceNotRegisteredException
+//     The specified on-premises instance is not registered.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstances
 func (c *CodeDeploy) RemoveTagsFromOnPremisesInstances(input *RemoveTagsFromOnPremisesInstancesInput) (*RemoveTagsFromOnPremisesInstancesOutput, error) {
@@ -4231,14 +4498,13 @@ const opSkipWaitTimeForInstanceTermination = "SkipWaitTimeForInstanceTermination
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SkipWaitTimeForInstanceTerminationRequest method.
+//	req, resp := client.SkipWaitTimeForInstanceTerminationRequest(params)
 //
-//    // Example sending a request using the SkipWaitTimeForInstanceTerminationRequest method.
-//    req, resp := client.SkipWaitTimeForInstanceTerminationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTermination
 //
@@ -4275,24 +4541,25 @@ func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTi
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation SkipWaitTimeForInstanceTermination for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeDeploymentAlreadyCompletedException "DeploymentAlreadyCompletedException"
-//   The deployment is already complete.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - DeploymentAlreadyCompletedException
+//     The deployment is already complete.
 //
-//   * ErrCodeDeploymentNotStartedException "DeploymentNotStartedException"
-//   The specified deployment has not started.
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
 //
-//   * ErrCodeUnsupportedActionForDeploymentTypeException "UnsupportedActionForDeploymentTypeException"
-//   A call was submitted that is not supported for the specified deployment type.
+//   - DeploymentNotStartedException
+//     The specified deployment has not started.
+//
+//   - UnsupportedActionForDeploymentTypeException
+//     A call was submitted that is not supported for the specified deployment type.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTermination
 //
@@ -4336,14 +4603,13 @@ const opStopDeployment = "StopDeployment"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StopDeploymentRequest method.
+//	req, resp := client.StopDeploymentRequest(params)
 //
-//    // Example sending a request using the StopDeploymentRequest method.
-//    req, resp := client.StopDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeployment
 func (c *CodeDeploy) StopDeploymentRequest(input *StopDeploymentInput) (req *request.Request, output *StopDeploymentOutput) {
@@ -4373,21 +4639,26 @@ func (c *CodeDeploy) StopDeploymentRequest(input *StopDeploymentInput) (req *req
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation StopDeployment for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeDeploymentIdRequiredException "DeploymentIdRequiredException"
-//   At least one deployment ID must be specified.
+// Returned Error Types:
 //
-//   * ErrCodeDeploymentDoesNotExistException "DeploymentDoesNotExistException"
-//   The deployment with the IAM user or AWS account does not exist.
+//   - DeploymentIdRequiredException
+//     At least one deployment ID must be specified.
 //
-//   * ErrCodeDeploymentGroupDoesNotExistException "DeploymentGroupDoesNotExistException"
-//   The named deployment group with the IAM user or AWS account does not exist.
+//   - DeploymentDoesNotExistException
+//     The deployment with the user or Amazon Web Services account does not exist.
 //
-//   * ErrCodeDeploymentAlreadyCompletedException "DeploymentAlreadyCompletedException"
-//   The deployment is already complete.
+//   - DeploymentGroupDoesNotExistException
+//     The named deployment group with the user or Amazon Web Services account does
+//     not exist.
 //
-//   * ErrCodeInvalidDeploymentIdException "InvalidDeploymentIdException"
-//   At least one of the deployment IDs was specified in an invalid format.
+//   - DeploymentAlreadyCompletedException
+//     The deployment is already complete.
+//
+//   - InvalidDeploymentIdException
+//     At least one of the deployment IDs was specified in an invalid format.
+//
+//   - UnsupportedActionForDeploymentTypeException
+//     A call was submitted that is not supported for the specified deployment type.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeployment
 func (c *CodeDeploy) StopDeployment(input *StopDeploymentInput) (*StopDeploymentOutput, error) {
@@ -4411,6 +4682,217 @@ func (c *CodeDeploy) StopDeploymentWithContext(ctx aws.Context, input *StopDeplo
 	return out, req.Send()
 }
 
+const opTagResource = "TagResource"
+
+// TagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the TagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See TagResource for more information on using the TagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the TagResourceRequest method.
+//	req, resp := client.TagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagResource
+func (c *CodeDeploy) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
+	op := &request.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output = &TagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// TagResource API operation for AWS CodeDeploy.
+//
+// Associates the list of tags in the input Tags parameter with the resource
+// identified by the ResourceArn input parameter.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeDeploy's
+// API operation TagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceArnRequiredException
+//     The ARN of a resource is required, but was not found.
+//
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
+//
+//   - DeploymentGroupDoesNotExistException
+//     The named deployment group with the user or Amazon Web Services account does
+//     not exist.
+//
+//   - DeploymentConfigDoesNotExistException
+//     The deployment configuration does not exist with the user or Amazon Web Services
+//     account.
+//
+//   - TagRequiredException
+//     A tag was not specified.
+//
+//   - InvalidTagsToAddException
+//     The specified tags are not valid.
+//
+//   - ArnNotSupportedException
+//     The specified ARN is not supported. For example, it might be an ARN for a
+//     resource that is not expected.
+//
+//   - InvalidArnException
+//     The specified ARN is not in a valid format.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagResource
+func (c *CodeDeploy) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	return out, req.Send()
+}
+
+// TagResourceWithContext is the same as TagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See TagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeDeploy) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the UntagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UntagResource for more information on using the UntagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UntagResourceRequest method.
+//	req, resp := client.UntagResourceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UntagResource
+func (c *CodeDeploy) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
+	op := &request.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output = &UntagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UntagResource API operation for AWS CodeDeploy.
+//
+// Disassociates a resource from a list of tags. The resource is identified
+// by the ResourceArn input parameter. The tags are identified by the list of
+// keys in the TagKeys input parameter.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeDeploy's
+// API operation UntagResource for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceArnRequiredException
+//     The ARN of a resource is required, but was not found.
+//
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
+//
+//   - DeploymentGroupDoesNotExistException
+//     The named deployment group with the user or Amazon Web Services account does
+//     not exist.
+//
+//   - DeploymentConfigDoesNotExistException
+//     The deployment configuration does not exist with the user or Amazon Web Services
+//     account.
+//
+//   - TagRequiredException
+//     A tag was not specified.
+//
+//   - InvalidTagsToAddException
+//     The specified tags are not valid.
+//
+//   - ArnNotSupportedException
+//     The specified ARN is not supported. For example, it might be an ARN for a
+//     resource that is not expected.
+//
+//   - InvalidArnException
+//     The specified ARN is not in a valid format.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UntagResource
+func (c *CodeDeploy) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	return out, req.Send()
+}
+
+// UntagResourceWithContext is the same as UntagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UntagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeDeploy) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateApplication = "UpdateApplication"
 
 // UpdateApplicationRequest generates a "aws/request.Request" representing the
@@ -4427,14 +4909,13 @@ const opUpdateApplication = "UpdateApplication"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateApplicationRequest method.
+//	req, resp := client.UpdateApplicationRequest(params)
 //
-//    // Example sending a request using the UpdateApplicationRequest method.
-//    req, resp := client.UpdateApplicationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplication
 func (c *CodeDeploy) UpdateApplicationRequest(input *UpdateApplicationInput) (req *request.Request, output *UpdateApplicationOutput) {
@@ -4465,19 +4946,20 @@ func (c *CodeDeploy) UpdateApplicationRequest(input *UpdateApplicationInput) (re
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation UpdateApplication for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationAlreadyExistsException "ApplicationAlreadyExistsException"
-//   An application with the specified name with the IAM user or AWS account already
-//   exists.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - ApplicationAlreadyExistsException
+//     An application with the specified name with the user or Amazon Web Services
+//     account already exists.
+//
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplication
 func (c *CodeDeploy) UpdateApplication(input *UpdateApplicationInput) (*UpdateApplicationOutput, error) {
@@ -4517,14 +4999,13 @@ const opUpdateDeploymentGroup = "UpdateDeploymentGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDeploymentGroupRequest method.
+//	req, resp := client.UpdateDeploymentGroupRequest(params)
 //
-//    // Example sending a request using the UpdateDeploymentGroupRequest method.
-//    req, resp := client.UpdateDeploymentGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroup
 func (c *CodeDeploy) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupInput) (req *request.Request, output *UpdateDeploymentGroupOutput) {
@@ -4554,119 +5035,126 @@ func (c *CodeDeploy) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupIn
 // See the AWS API reference guide for AWS CodeDeploy's
 // API operation UpdateDeploymentGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeApplicationNameRequiredException "ApplicationNameRequiredException"
-//   The minimum number of required application names was not specified.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidApplicationNameException "InvalidApplicationNameException"
-//   The application name was specified in an invalid format.
+//   - ApplicationNameRequiredException
+//     The minimum number of required application names was not specified.
 //
-//   * ErrCodeApplicationDoesNotExistException "ApplicationDoesNotExistException"
-//   The application does not exist with the IAM user or AWS account.
+//   - InvalidApplicationNameException
+//     The application name was specified in an invalid format.
 //
-//   * ErrCodeInvalidDeploymentGroupNameException "InvalidDeploymentGroupNameException"
-//   The deployment group name was specified in an invalid format.
+//   - ApplicationDoesNotExistException
+//     The application does not exist with the user or Amazon Web Services account.
 //
-//   * ErrCodeDeploymentGroupAlreadyExistsException "DeploymentGroupAlreadyExistsException"
-//   A deployment group with the specified name with the IAM user or AWS account
-//   already exists.
+//   - InvalidDeploymentGroupNameException
+//     The deployment group name was specified in an invalid format.
 //
-//   * ErrCodeDeploymentGroupNameRequiredException "DeploymentGroupNameRequiredException"
-//   The deployment group name was not specified.
+//   - DeploymentGroupAlreadyExistsException
+//     A deployment group with the specified name with the user or Amazon Web Services
+//     account already exists.
 //
-//   * ErrCodeDeploymentGroupDoesNotExistException "DeploymentGroupDoesNotExistException"
-//   The named deployment group with the IAM user or AWS account does not exist.
+//   - DeploymentGroupNameRequiredException
+//     The deployment group name was not specified.
 //
-//   * ErrCodeInvalidEC2TagException "InvalidEC2TagException"
-//   The tag was specified in an invalid format.
+//   - DeploymentGroupDoesNotExistException
+//     The named deployment group with the user or Amazon Web Services account does
+//     not exist.
 //
-//   * ErrCodeInvalidTagException "InvalidTagException"
-//   The tag was specified in an invalid format.
+//   - InvalidEC2TagException
+//     The tag was specified in an invalid format.
 //
-//   * ErrCodeInvalidAutoScalingGroupException "InvalidAutoScalingGroupException"
-//   The Auto Scaling group was specified in an invalid format or does not exist.
+//   - InvalidTagException
+//     The tag was specified in an invalid format.
 //
-//   * ErrCodeInvalidDeploymentConfigNameException "InvalidDeploymentConfigNameException"
-//   The deployment configuration name was specified in an invalid format.
+//   - InvalidAutoScalingGroupException
+//     The Auto Scaling group was specified in an invalid format or does not exist.
 //
-//   * ErrCodeDeploymentConfigDoesNotExistException "DeploymentConfigDoesNotExistException"
-//   The deployment configuration does not exist with the IAM user or AWS account.
+//   - InvalidDeploymentConfigNameException
+//     The deployment configuration name was specified in an invalid format.
 //
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The service role ARN was specified in an invalid format. Or, if an Auto Scaling
-//   group was specified, the specified service role does not grant the appropriate
-//   permissions to Amazon EC2 Auto Scaling.
+//   - DeploymentConfigDoesNotExistException
+//     The deployment configuration does not exist with the user or Amazon Web Services
+//     account.
 //
-//   * ErrCodeLifecycleHookLimitExceededException "LifecycleHookLimitExceededException"
-//   The limit for lifecycle hooks was exceeded.
+//   - InvalidRoleException
+//     The service role ARN was specified in an invalid format. Or, if an Auto Scaling
+//     group was specified, the specified service role does not grant the appropriate
+//     permissions to Amazon EC2 Auto Scaling.
 //
-//   * ErrCodeInvalidTriggerConfigException "InvalidTriggerConfigException"
-//   The trigger was specified in an invalid format.
+//   - LifecycleHookLimitExceededException
+//     The limit for lifecycle hooks was exceeded.
 //
-//   * ErrCodeTriggerTargetsLimitExceededException "TriggerTargetsLimitExceededException"
-//   The maximum allowed number of triggers was exceeded.
+//   - InvalidTriggerConfigException
+//     The trigger was specified in an invalid format.
 //
-//   * ErrCodeInvalidAlarmConfigException "InvalidAlarmConfigException"
-//   The format of the alarm configuration is invalid. Possible causes include:
+//   - TriggerTargetsLimitExceededException
+//     The maximum allowed number of triggers was exceeded.
 //
-//      * The alarm list is null.
+//   - InvalidAlarmConfigException
+//     The format of the alarm configuration is invalid. Possible causes include:
 //
-//      * The alarm object is null.
+//   - The alarm list is null.
 //
-//      * The alarm name is empty or null or exceeds the limit of 255 characters.
+//   - The alarm object is null.
 //
-//      * Two alarms with the same name have been specified.
+//   - The alarm name is empty or null or exceeds the limit of 255 characters.
 //
-//      * The alarm configuration is enabled, but the alarm list is empty.
+//   - Two alarms with the same name have been specified.
 //
-//   * ErrCodeAlarmsLimitExceededException "AlarmsLimitExceededException"
-//   The maximum number of alarms for a deployment group (10) was exceeded.
+//   - The alarm configuration is enabled, but the alarm list is empty.
 //
-//   * ErrCodeInvalidAutoRollbackConfigException "InvalidAutoRollbackConfigException"
-//   The automatic rollback configuration was specified in an invalid format.
-//   For example, automatic rollback is enabled, but an invalid triggering event
-//   type or no event types were listed.
+//   - AlarmsLimitExceededException
+//     The maximum number of alarms for a deployment group (10) was exceeded.
 //
-//   * ErrCodeInvalidLoadBalancerInfoException "InvalidLoadBalancerInfoException"
-//   An invalid load balancer name, or no load balancer name, was specified.
+//   - InvalidAutoRollbackConfigException
+//     The automatic rollback configuration was specified in an invalid format.
+//     For example, automatic rollback is enabled, but an invalid triggering event
+//     type or no event types were listed.
 //
-//   * ErrCodeInvalidDeploymentStyleException "InvalidDeploymentStyleException"
-//   An invalid deployment style was specified. Valid deployment types include
-//   "IN_PLACE" and "BLUE_GREEN." Valid deployment options include "WITH_TRAFFIC_CONTROL"
-//   and "WITHOUT_TRAFFIC_CONTROL."
+//   - InvalidLoadBalancerInfoException
+//     An invalid load balancer name, or no load balancer name, was specified.
 //
-//   * ErrCodeInvalidBlueGreenDeploymentConfigurationException "InvalidBlueGreenDeploymentConfigurationException"
-//   The configuration for the blue/green deployment group was provided in an
-//   invalid format. For information about deployment configuration format, see
-//   CreateDeploymentConfig.
+//   - InvalidDeploymentStyleException
+//     An invalid deployment style was specified. Valid deployment types include
+//     "IN_PLACE" and "BLUE_GREEN." Valid deployment options include "WITH_TRAFFIC_CONTROL"
+//     and "WITHOUT_TRAFFIC_CONTROL."
 //
-//   * ErrCodeInvalidEC2TagCombinationException "InvalidEC2TagCombinationException"
-//   A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but
-//   only one of these data types can be used in a single call.
+//   - InvalidBlueGreenDeploymentConfigurationException
+//     The configuration for the blue/green deployment group was provided in an
+//     invalid format. For information about deployment configuration format, see
+//     CreateDeploymentConfig.
 //
-//   * ErrCodeInvalidOnPremisesTagCombinationException "InvalidOnPremisesTagCombinationException"
-//   A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet,
-//   but only one of these data types can be used in a single call.
+//   - InvalidEC2TagCombinationException
+//     A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but
+//     only one of these data types can be used in a single call.
 //
-//   * ErrCodeTagSetListLimitExceededException "TagSetListLimitExceededException"
-//   The number of tag groups included in the tag set list exceeded the maximum
-//   allowed limit of 3.
+//   - InvalidOnPremisesTagCombinationException
+//     A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet,
+//     but only one of these data types can be used in a single call.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input was specified in an invalid format.
+//   - TagSetListLimitExceededException
+//     The number of tag groups included in the tag set list exceeded the maximum
+//     allowed limit of 3.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   An API function was called too frequently.
+//   - InvalidInputException
+//     The input was specified in an invalid format.
 //
-//   * ErrCodeInvalidECSServiceException "InvalidECSServiceException"
-//   The Amazon ECS service identifier is not valid.
+//   - ThrottlingException
+//     An API function was called too frequently.
 //
-//   * ErrCodeInvalidTargetGroupPairException "InvalidTargetGroupPairException"
-//   A target group pair associated with this deployment is not valid.
+//   - InvalidECSServiceException
+//     The Amazon ECS service identifier is not valid.
 //
-//   * ErrCodeECSServiceMappingLimitExceededException "ECSServiceMappingLimitExceededException"
-//   The Amazon ECS service is associated with more than one deployment groups.
-//   An Amazon ECS service can be associated with only one deployment group.
+//   - InvalidTargetGroupPairException
+//     A target group pair associated with this deployment is not valid.
+//
+//   - ECSServiceMappingLimitExceededException
+//     The Amazon ECS service is associated with more than one deployment groups.
+//     An Amazon ECS service can be associated with only one deployment group.
+//
+//   - InvalidTrafficRoutingConfigurationException
+//     The configuration that specifies how traffic is routed during a deployment
+//     is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroup
 func (c *CodeDeploy) UpdateDeploymentGroup(input *UpdateDeploymentGroupInput) (*UpdateDeploymentGroupOutput, error) {
@@ -4708,12 +5196,20 @@ type AddTagsToOnPremisesInstancesInput struct {
 	Tags []*Tag `locationName:"tags" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToOnPremisesInstancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToOnPremisesInstancesInput) GoString() string {
 	return s.String()
 }
@@ -4750,12 +5246,20 @@ type AddTagsToOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToOnPremisesInstancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToOnPremisesInstancesOutput) GoString() string {
 	return s.String()
 }
@@ -4769,12 +5273,20 @@ type Alarm struct {
 	Name *string `locationName:"name" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Alarm) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Alarm) GoString() string {
 	return s.String()
 }
@@ -4785,12 +5297,12 @@ func (s *Alarm) SetName(v string) *Alarm {
 	return s
 }
 
-// Information about alarms associated with the deployment group.
+// Information about alarms associated with a deployment or deployment group.
 type AlarmConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// A list of alarms configured for the deployment group. A maximum of 10 alarms
-	// can be added to a deployment group.
+	// A list of alarms configured for the deployment or deployment group. A maximum
+	// of 10 alarms can be added.
 	Alarms []*Alarm `locationName:"alarms" type:"list"`
 
 	// Indicates whether the alarm configuration is enabled.
@@ -4808,12 +5320,20 @@ type AlarmConfiguration struct {
 	IgnorePollAlarmFailure *bool `locationName:"ignorePollAlarmFailure" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AlarmConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AlarmConfiguration) GoString() string {
 	return s.String()
 }
@@ -4836,17 +5356,81 @@ func (s *AlarmConfiguration) SetIgnorePollAlarmFailure(v bool) *AlarmConfigurati
 	return s
 }
 
-// A revision for an AWS Lambda or Amazon ECS deployment that is a YAML-formatted
-// or JSON-formatted string. For AWS Lambda and Amazon ECS deployments, the
-// revision is the same as the AppSpec file. This method replaces the deprecated
-// RawString data type.
+// The maximum number of alarms for a deployment group (10) was exceeded.
+type AlarmsLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AlarmsLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AlarmsLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorAlarmsLimitExceededException(v protocol.ResponseMetadata) error {
+	return &AlarmsLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AlarmsLimitExceededException) Code() string {
+	return "AlarmsLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *AlarmsLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AlarmsLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *AlarmsLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AlarmsLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AlarmsLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A revision for an Lambda or Amazon ECS deployment that is a YAML-formatted
+// or JSON-formatted string. For Lambda and Amazon ECS deployments, the revision
+// is the same as the AppSpec file. This method replaces the deprecated RawString
+// data type.
 type AppSpecContent struct {
 	_ struct{} `type:"structure"`
 
 	// The YAML-formatted or JSON-formatted revision string.
 	//
-	// For an AWS Lambda deployment, the content includes a Lambda function name,
-	// the alias for its original version, and the alias for its replacement version.
+	// For an Lambda deployment, the content includes a Lambda function name, the
+	// alias for its original version, and the alias for its replacement version.
 	// The deployment shifts traffic from the original version of the Lambda function
 	// to the replacement version.
 	//
@@ -4861,12 +5445,20 @@ type AppSpecContent struct {
 	Sha256 *string `locationName:"sha256" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AppSpecContent) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AppSpecContent) GoString() string {
 	return s.String()
 }
@@ -4881,6 +5473,135 @@ func (s *AppSpecContent) SetContent(v string) *AppSpecContent {
 func (s *AppSpecContent) SetSha256(v string) *AppSpecContent {
 	s.Sha256 = &v
 	return s
+}
+
+// An application with the specified name with the user or Amazon Web Services
+// account already exists.
+type ApplicationAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorApplicationAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &ApplicationAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ApplicationAlreadyExistsException) Code() string {
+	return "ApplicationAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *ApplicationAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ApplicationAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *ApplicationAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ApplicationAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ApplicationAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The application does not exist with the user or Amazon Web Services account.
+type ApplicationDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorApplicationDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &ApplicationDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ApplicationDoesNotExistException) Code() string {
+	return "ApplicationDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *ApplicationDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ApplicationDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *ApplicationDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ApplicationDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ApplicationDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Information about an application.
@@ -4908,12 +5629,20 @@ type ApplicationInfo struct {
 	LinkedToGitHub *bool `locationName:"linkedToGitHub" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationInfo) GoString() string {
 	return s.String()
 }
@@ -4954,6 +5683,199 @@ func (s *ApplicationInfo) SetLinkedToGitHub(v bool) *ApplicationInfo {
 	return s
 }
 
+// More applications were attempted to be created than are allowed.
+type ApplicationLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorApplicationLimitExceededException(v protocol.ResponseMetadata) error {
+	return &ApplicationLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ApplicationLimitExceededException) Code() string {
+	return "ApplicationLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *ApplicationLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ApplicationLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *ApplicationLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ApplicationLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ApplicationLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The minimum number of required application names was not specified.
+type ApplicationNameRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationNameRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationNameRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorApplicationNameRequiredException(v protocol.ResponseMetadata) error {
+	return &ApplicationNameRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ApplicationNameRequiredException) Code() string {
+	return "ApplicationNameRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *ApplicationNameRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ApplicationNameRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *ApplicationNameRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ApplicationNameRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ApplicationNameRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified ARN is not supported. For example, it might be an ARN for a
+// resource that is not expected.
+type ArnNotSupportedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ArnNotSupportedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ArnNotSupportedException) GoString() string {
+	return s.String()
+}
+
+func newErrorArnNotSupportedException(v protocol.ResponseMetadata) error {
+	return &ArnNotSupportedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ArnNotSupportedException) Code() string {
+	return "ArnNotSupportedException"
+}
+
+// Message returns the exception's message.
+func (s *ArnNotSupportedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ArnNotSupportedException) OrigErr() error {
+	return nil
+}
+
+func (s *ArnNotSupportedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ArnNotSupportedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ArnNotSupportedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Information about a configuration for automatically rolling back to a previous
 // version of an application revision when a deployment is not completed successfully.
 type AutoRollbackConfiguration struct {
@@ -4964,15 +5886,23 @@ type AutoRollbackConfiguration struct {
 	Enabled *bool `locationName:"enabled" type:"boolean"`
 
 	// The event type or types that trigger a rollback.
-	Events []*string `locationName:"events" type:"list"`
+	Events []*string `locationName:"events" type:"list" enum:"AutoRollbackEvent"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AutoRollbackConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AutoRollbackConfiguration) GoString() string {
 	return s.String()
 }
@@ -4993,19 +5923,40 @@ func (s *AutoRollbackConfiguration) SetEvents(v []*string) *AutoRollbackConfigur
 type AutoScalingGroup struct {
 	_ struct{} `type:"structure"`
 
-	// An Auto Scaling lifecycle event hook name.
+	// The name of the launch hook that CodeDeploy installed into the Auto Scaling
+	// group.
+	//
+	// For more information about the launch hook, see How Amazon EC2 Auto Scaling
+	// works with CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors)
+	// in the CodeDeploy User Guide.
 	Hook *string `locationName:"hook" type:"string"`
 
 	// The Auto Scaling group name.
 	Name *string `locationName:"name" type:"string"`
+
+	// The name of the termination hook that CodeDeploy installed into the Auto
+	// Scaling group.
+	//
+	// For more information about the termination hook, see Enabling termination
+	// deployments during Auto Scaling scale-in events (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable)
+	// in the CodeDeploy User Guide.
+	TerminationHook *string `locationName:"terminationHook" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AutoScalingGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AutoScalingGroup) GoString() string {
 	return s.String()
 }
@@ -5022,27 +5973,43 @@ func (s *AutoScalingGroup) SetName(v string) *AutoScalingGroup {
 	return s
 }
 
+// SetTerminationHook sets the TerminationHook field's value.
+func (s *AutoScalingGroup) SetTerminationHook(v string) *AutoScalingGroup {
+	s.TerminationHook = &v
+	return s
+}
+
 // Represents the input of a BatchGetApplicationRevisions operation.
 type BatchGetApplicationRevisionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application about which to get revision information.
+	// The name of an CodeDeploy application about which to get revision information.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
 
-	// Information to get about the application revisions, including type and location.
+	// An array of RevisionLocation objects that specify information to get about
+	// the application revisions, including type and location. The maximum number
+	// of RevisionLocation objects you can specify is 25.
 	//
 	// Revisions is a required field
 	Revisions []*RevisionLocation `locationName:"revisions" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetApplicationRevisionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetApplicationRevisionsInput) GoString() string {
 	return s.String()
 }
@@ -5092,12 +6059,20 @@ type BatchGetApplicationRevisionsOutput struct {
 	Revisions []*RevisionInfo `locationName:"revisions" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetApplicationRevisionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetApplicationRevisionsOutput) GoString() string {
 	return s.String()
 }
@@ -5124,18 +6099,27 @@ func (s *BatchGetApplicationRevisionsOutput) SetRevisions(v []*RevisionInfo) *Ba
 type BatchGetApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of application names separated by spaces.
+	// A list of application names separated by spaces. The maximum number of application
+	// names you can specify is 100.
 	//
 	// ApplicationNames is a required field
 	ApplicationNames []*string `locationName:"applicationNames" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetApplicationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetApplicationsInput) GoString() string {
 	return s.String()
 }
@@ -5167,12 +6151,20 @@ type BatchGetApplicationsOutput struct {
 	ApplicationsInfo []*ApplicationInfo `locationName:"applicationsInfo" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetApplicationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetApplicationsOutput) GoString() string {
 	return s.String()
 }
@@ -5187,8 +6179,8 @@ func (s *BatchGetApplicationsOutput) SetApplicationsInfo(v []*ApplicationInfo) *
 type BatchGetDeploymentGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the applicable
-	// IAM user or AWS account.
+	// The name of an CodeDeploy application associated with the applicable user
+	// or Amazon Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
@@ -5199,12 +6191,20 @@ type BatchGetDeploymentGroupsInput struct {
 	DeploymentGroupNames []*string `locationName:"deploymentGroupNames" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentGroupsInput) GoString() string {
 	return s.String()
 }
@@ -5251,12 +6251,20 @@ type BatchGetDeploymentGroupsOutput struct {
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentGroupsOutput) GoString() string {
 	return s.String()
 }
@@ -5282,18 +6290,27 @@ type BatchGetDeploymentInstancesInput struct {
 	// DeploymentId is a required field
 	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
 
-	// The unique IDs of instances used in the deployment.
+	// The unique IDs of instances used in the deployment. The maximum number of
+	// instance IDs you can specify is 25.
 	//
 	// InstanceIds is a required field
 	InstanceIds []*string `locationName:"instanceIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentInstancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentInstancesInput) GoString() string {
 	return s.String()
 }
@@ -5337,12 +6354,20 @@ type BatchGetDeploymentInstancesOutput struct {
 	InstancesSummary []*InstanceSummary `locationName:"instancesSummary" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentInstancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentInstancesOutput) GoString() string {
 	return s.String()
 }
@@ -5363,33 +6388,64 @@ type BatchGetDeploymentTargetsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The unique ID of a deployment.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
+	//
+	// DeploymentId is a required field
+	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
 
 	// The unique IDs of the deployment targets. The compute platform of the deployment
-	// determines the type of the targets and their formats.
+	// determines the type of the targets and their formats. The maximum number
+	// of deployment target IDs you can specify is 25.
 	//
-	//    *  For deployments that use the EC2/On-premises compute platform, the
-	//    target IDs are EC2 or on-premises instances IDs, and their target type
+	//    * For deployments that use the EC2/On-premises compute platform, the target
+	//    IDs are Amazon EC2 or on-premises instances IDs, and their target type
 	//    is instanceTarget.
 	//
-	//    *  For deployments that use the AWS Lambda compute platform, the target
-	//    IDs are the names of Lambda functions, and their target type is instanceTarget.
+	//    * For deployments that use the Lambda compute platform, the target IDs
+	//    are the names of Lambda functions, and their target type is instanceTarget.
 	//
-	//
-	//    *  For deployments that use the Amazon ECS compute platform, the target
+	//    * For deployments that use the Amazon ECS compute platform, the target
 	//    IDs are pairs of Amazon ECS clusters and services specified using the
 	//    format <clustername>:<servicename>. Their target type is ecsTarget.
-	TargetIds []*string `locationName:"targetIds" type:"list"`
+	//
+	//    * For deployments that are deployed with CloudFormation, the target IDs
+	//    are CloudFormation stack IDs. Their target type is cloudFormationTarget.
+	//
+	// TargetIds is a required field
+	TargetIds []*string `locationName:"targetIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentTargetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentTargetsInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetDeploymentTargetsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "BatchGetDeploymentTargetsInput"}
+	if s.DeploymentId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+	}
+	if s.TargetIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("TargetIds"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetDeploymentId sets the DeploymentId field's value.
@@ -5411,22 +6467,31 @@ type BatchGetDeploymentTargetsOutput struct {
 	// about the target, such as its status and lifecycle events. The type of the
 	// target objects depends on the deployment' compute platform.
 	//
-	//    * EC2/On-premises: Each target object is an EC2 or on-premises instance.
+	//    * EC2/On-premises: Each target object is an Amazon EC2 or on-premises
+	//    instance.
 	//
-	//
-	//    * AWS Lambda: The target object is a specific version of an AWS Lambda
-	//    function.
+	//    * Lambda: The target object is a specific version of an Lambda function.
 	//
 	//    * Amazon ECS: The target object is an Amazon ECS service.
+	//
+	//    * CloudFormation: The target object is an CloudFormation blue/green deployment.
 	DeploymentTargets []*DeploymentTarget `locationName:"deploymentTargets" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentTargetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentTargetsOutput) GoString() string {
 	return s.String()
 }
@@ -5441,18 +6506,27 @@ func (s *BatchGetDeploymentTargetsOutput) SetDeploymentTargets(v []*DeploymentTa
 type BatchGetDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of deployment IDs, separated by spaces.
+	// A list of deployment IDs, separated by spaces. The maximum number of deployment
+	// IDs you can specify is 25.
 	//
 	// DeploymentIds is a required field
 	DeploymentIds []*string `locationName:"deploymentIds" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentsInput) GoString() string {
 	return s.String()
 }
@@ -5484,12 +6558,20 @@ type BatchGetDeploymentsOutput struct {
 	DeploymentsInfo []*DeploymentInfo `locationName:"deploymentsInfo" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetDeploymentsOutput) GoString() string {
 	return s.String()
 }
@@ -5504,18 +6586,27 @@ func (s *BatchGetDeploymentsOutput) SetDeploymentsInfo(v []*DeploymentInfo) *Bat
 type BatchGetOnPremisesInstancesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The names of the on-premises instances about which to get information.
+	// The names of the on-premises instances about which to get information. The
+	// maximum number of instance names you can specify is 25.
 	//
 	// InstanceNames is a required field
 	InstanceNames []*string `locationName:"instanceNames" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetOnPremisesInstancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetOnPremisesInstancesInput) GoString() string {
 	return s.String()
 }
@@ -5547,12 +6638,20 @@ type BatchGetOnPremisesInstancesOutput struct {
 	InstanceInfos []*InstanceInfo `locationName:"instanceInfos" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetOnPremisesInstancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetOnPremisesInstancesOutput) GoString() string {
 	return s.String()
 }
@@ -5561,6 +6660,70 @@ func (s BatchGetOnPremisesInstancesOutput) GoString() string {
 func (s *BatchGetOnPremisesInstancesOutput) SetInstanceInfos(v []*InstanceInfo) *BatchGetOnPremisesInstancesOutput {
 	s.InstanceInfos = v
 	return s
+}
+
+// The maximum number of names or IDs allowed for this request (100) was exceeded.
+type BatchLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorBatchLimitExceededException(v protocol.ResponseMetadata) error {
+	return &BatchLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *BatchLimitExceededException) Code() string {
+	return "BatchLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *BatchLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *BatchLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *BatchLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *BatchLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *BatchLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Information about blue/green deployment options for a deployment group.
@@ -5580,12 +6743,20 @@ type BlueGreenDeploymentConfiguration struct {
 	TerminateBlueInstancesOnDeploymentSuccess *BlueInstanceTerminationOption `locationName:"terminateBlueInstancesOnDeploymentSuccess" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BlueGreenDeploymentConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BlueGreenDeploymentConfiguration) GoString() string {
 	return s.String()
 }
@@ -5609,7 +6780,8 @@ func (s *BlueGreenDeploymentConfiguration) SetTerminateBlueInstancesOnDeployment
 }
 
 // Information about whether instances in the original environment are terminated
-// when a blue/green deployment is successful.
+// when a blue/green deployment is successful. BlueInstanceTerminationOption
+// does not apply to Lambda deployments.
 type BlueInstanceTerminationOption struct {
 	_ struct{} `type:"structure"`
 
@@ -5622,18 +6794,31 @@ type BlueInstanceTerminationOption struct {
 	//    the load balancer and removed from the deployment group.
 	Action *string `locationName:"action" type:"string" enum:"InstanceAction"`
 
-	// The number of minutes to wait after a successful blue/green deployment before
-	// terminating instances from the original environment. The maximum setting
-	// is 2880 minutes (2 days).
+	// For an Amazon EC2 deployment, the number of minutes to wait after a successful
+	// blue/green deployment before terminating instances from the original environment.
+	//
+	// For an Amazon ECS deployment, the number of minutes before deleting the original
+	// (blue) task set. During an Amazon ECS deployment, CodeDeploy shifts traffic
+	// from the original (blue) task set to a replacement (green) task set.
+	//
+	// The maximum setting is 2880 minutes (2 days).
 	TerminationWaitTimeInMinutes *int64 `locationName:"terminationWaitTimeInMinutes" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BlueInstanceTerminationOption) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BlueInstanceTerminationOption) GoString() string {
 	return s.String()
 }
@@ -5650,6 +6835,161 @@ func (s *BlueInstanceTerminationOption) SetTerminationWaitTimeInMinutes(v int64)
 	return s
 }
 
+// A bucket name is required, but was not provided.
+type BucketNameFilterRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BucketNameFilterRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BucketNameFilterRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorBucketNameFilterRequiredException(v protocol.ResponseMetadata) error {
+	return &BucketNameFilterRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *BucketNameFilterRequiredException) Code() string {
+	return "BucketNameFilterRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *BucketNameFilterRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *BucketNameFilterRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *BucketNameFilterRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *BucketNameFilterRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *BucketNameFilterRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Information about the target to be updated by an CloudFormation blue/green
+// deployment. This target type is used for all deployments initiated by a CloudFormation
+// stack update.
+type CloudFormationTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of an CloudFormation blue/green deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The date and time when the target application was updated by an CloudFormation
+	// blue/green deployment.
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
+
+	// The lifecycle events of the CloudFormation blue/green deployment to this
+	// target application.
+	LifecycleEvents []*LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
+
+	// The resource type for the CloudFormation blue/green deployment.
+	ResourceType *string `locationName:"resourceType" type:"string"`
+
+	// The status of an CloudFormation blue/green deployment's target application.
+	Status *string `locationName:"status" type:"string" enum:"TargetStatus"`
+
+	// The unique ID of a deployment target that has a type of CloudFormationTarget.
+	TargetId *string `locationName:"targetId" type:"string"`
+
+	// The percentage of production traffic that the target version of an CloudFormation
+	// blue/green deployment receives.
+	TargetVersionWeight *float64 `locationName:"targetVersionWeight" type:"double"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CloudFormationTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CloudFormationTarget) GoString() string {
+	return s.String()
+}
+
+// SetDeploymentId sets the DeploymentId field's value.
+func (s *CloudFormationTarget) SetDeploymentId(v string) *CloudFormationTarget {
+	s.DeploymentId = &v
+	return s
+}
+
+// SetLastUpdatedAt sets the LastUpdatedAt field's value.
+func (s *CloudFormationTarget) SetLastUpdatedAt(v time.Time) *CloudFormationTarget {
+	s.LastUpdatedAt = &v
+	return s
+}
+
+// SetLifecycleEvents sets the LifecycleEvents field's value.
+func (s *CloudFormationTarget) SetLifecycleEvents(v []*LifecycleEvent) *CloudFormationTarget {
+	s.LifecycleEvents = v
+	return s
+}
+
+// SetResourceType sets the ResourceType field's value.
+func (s *CloudFormationTarget) SetResourceType(v string) *CloudFormationTarget {
+	s.ResourceType = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *CloudFormationTarget) SetStatus(v string) *CloudFormationTarget {
+	s.Status = &v
+	return s
+}
+
+// SetTargetId sets the TargetId field's value.
+func (s *CloudFormationTarget) SetTargetId(v string) *CloudFormationTarget {
+	s.TargetId = &v
+	return s
+}
+
+// SetTargetVersionWeight sets the TargetVersionWeight field's value.
+func (s *CloudFormationTarget) SetTargetVersionWeight(v float64) *CloudFormationTarget {
+	s.TargetVersionWeight = &v
+	return s
+}
+
 type ContinueDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5657,18 +6997,26 @@ type ContinueDeploymentInput struct {
 	// traffic to the replacement environment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
-	// The status of the deployment's waiting period. READY_WAIT indicates the deployment
-	// is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic
-	// is shifted, but the original target is not terminated.
+	// The status of the deployment's waiting period. READY_WAIT indicates that
+	// the deployment is ready to start shifting traffic. TERMINATION_WAIT indicates
+	// that the traffic is shifted, but the original target is not terminated.
 	DeploymentWaitType *string `locationName:"deploymentWaitType" type:"string" enum:"DeploymentWaitType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinueDeploymentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinueDeploymentInput) GoString() string {
 	return s.String()
 }
@@ -5689,12 +7037,20 @@ type ContinueDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinueDeploymentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContinueDeploymentOutput) GoString() string {
 	return s.String()
 }
@@ -5704,21 +7060,34 @@ type CreateApplicationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the application. This name must be unique with the applicable
-	// IAM user or AWS account.
+	// user or Amazon Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
 
-	// The destination platform type for the deployment (Lambda or Server).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform *string `locationName:"computePlatform" type:"string" enum:"ComputePlatform"`
+
+	// The metadata that you apply to CodeDeploy applications to help you organize
+	// and categorize them. Each tag consists of a key and an optional value, both
+	// of which you define.
+	Tags []*Tag `locationName:"tags" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationInput) GoString() string {
 	return s.String()
 }
@@ -5751,6 +7120,12 @@ func (s *CreateApplicationInput) SetComputePlatform(v string) *CreateApplication
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateApplicationInput) SetTags(v []*Tag) *CreateApplicationInput {
+	s.Tags = v
+	return s
+}
+
 // Represents the output of a CreateApplication operation.
 type CreateApplicationOutput struct {
 	_ struct{} `type:"structure"`
@@ -5759,12 +7134,20 @@ type CreateApplicationOutput struct {
 	ApplicationId *string `locationName:"applicationId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -5779,7 +7162,7 @@ func (s *CreateApplicationOutput) SetApplicationId(v string) *CreateApplicationO
 type CreateDeploymentConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// The destination platform type for the deployment (Lambda or Server>).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform *string `locationName:"computePlatform" type:"string" enum:"ComputePlatform"`
 
 	// The name of the deployment configuration to create.
@@ -5799,7 +7182,7 @@ type CreateDeploymentConfigInput struct {
 	//    * FLEET_PERCENT: The value parameter represents the minimum number of
 	//    healthy instances as a percentage of the total number of instances in
 	//    the deployment. If you specify FLEET_PERCENT, at the start of the deployment,
-	//    AWS CodeDeploy converts the percentage to the equivalent number of instance
+	//    CodeDeploy converts the percentage to the equivalent number of instances
 	//    and rounds up fractional instances.
 	//
 	// The value parameter takes an integer.
@@ -5810,14 +7193,31 @@ type CreateDeploymentConfigInput struct {
 
 	// The configuration that specifies how the deployment traffic is routed.
 	TrafficRoutingConfig *TrafficRoutingConfig `locationName:"trafficRoutingConfig" type:"structure"`
+
+	// Configure the ZonalConfig object if you want CodeDeploy to deploy your application
+	// to one Availability Zone (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones)
+	// at a time, within an Amazon Web Services Region.
+	//
+	// For more information about the zonal configuration feature, see zonal configuration
+	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+	// in the CodeDeploy User Guide.
+	ZonalConfig *ZonalConfig `locationName:"zonalConfig" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentConfigInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentConfigInput) GoString() string {
 	return s.String()
 }
@@ -5862,6 +7262,12 @@ func (s *CreateDeploymentConfigInput) SetTrafficRoutingConfig(v *TrafficRoutingC
 	return s
 }
 
+// SetZonalConfig sets the ZonalConfig field's value.
+func (s *CreateDeploymentConfigInput) SetZonalConfig(v *ZonalConfig) *CreateDeploymentConfigInput {
+	s.ZonalConfig = v
+	return s
+}
+
 // Represents the output of a CreateDeploymentConfig operation.
 type CreateDeploymentConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -5870,12 +7276,20 @@ type CreateDeploymentConfigOutput struct {
 	DeploymentConfigId *string `locationName:"deploymentConfigId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentConfigOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentConfigOutput) GoString() string {
 	return s.String()
 }
@@ -5894,8 +7308,8 @@ type CreateDeploymentGroupInput struct {
 	// is created.
 	AlarmConfiguration *AlarmConfiguration `locationName:"alarmConfiguration" type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
@@ -5911,7 +7325,7 @@ type CreateDeploymentGroupInput struct {
 	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `locationName:"blueGreenDeploymentConfiguration" type:"structure"`
 
 	// If specified, the deployment configuration name can be either one of the
-	// predefined configurations provided with AWS CodeDeploy or a custom deployment
+	// predefined configurations provided with CodeDeploy or a custom deployment
 	// configuration that you create by calling the create deployment configuration
 	// operation.
 	//
@@ -5919,9 +7333,9 @@ type CreateDeploymentGroupInput struct {
 	// is used if a configuration isn't specified for the deployment or deployment
 	// group.
 	//
-	// For more information about the predefined deployment configurations in AWS
-	// CodeDeploy, see Working with Deployment Groups in AWS CodeDeploy (http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html)
-	// in the AWS CodeDeploy User Guide.
+	// For more information about the predefined deployment configurations in CodeDeploy,
+	// see Working with Deployment Configurations in CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html)
+	// in the CodeDeploy User Guide.
 	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string"`
 
 	// The name of a new deployment group for the specified application.
@@ -5933,14 +7347,14 @@ type CreateDeploymentGroupInput struct {
 	// want to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *DeploymentStyle `locationName:"deploymentStyle" type:"structure"`
 
-	// The Amazon EC2 tags on which to filter. The deployment group includes EC2
-	// instances with any of the specified tags. Cannot be used in the same call
-	// as ec2TagSet.
+	// The Amazon EC2 tags on which to filter. The deployment group includes Amazon
+	// EC2 instances with any of the specified tags. Cannot be used in the same
+	// call as ec2TagSet.
 	Ec2TagFilters []*EC2TagFilter `locationName:"ec2TagFilters" type:"list"`
 
-	// Information about groups of tags applied to EC2 instances. The deployment
-	// group includes only EC2 instances identified by all the tag groups. Cannot
-	// be used in the same call as ec2TagFilters.
+	// Information about groups of tags applied to Amazon EC2 instances. The deployment
+	// group includes only Amazon EC2 instances identified by all the tag groups.
+	// Cannot be used in the same call as ec2TagFilters.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
 	// The target Amazon ECS services in the deployment group. This applies only
@@ -5962,24 +7376,67 @@ type CreateDeploymentGroupInput struct {
 	// Cannot be used in the same call as onPremisesInstanceTagFilters.
 	OnPremisesTagSet *OnPremisesTagSet `locationName:"onPremisesTagSet" type:"structure"`
 
-	// A service role ARN that allows AWS CodeDeploy to act on the user's behalf
-	// when interacting with AWS services.
+	// Indicates what happens when new Amazon EC2 instances are launched mid-deployment
+	// and do not receive the deployed application revision.
+	//
+	// If this option is set to UPDATE or is unspecified, CodeDeploy initiates one
+	// or more 'auto-update outdated instances' deployments to apply the deployed
+	// application revision to the new Amazon EC2 instances.
+	//
+	// If this option is set to IGNORE, CodeDeploy does not initiate a deployment
+	// to update the new Amazon EC2 instances. This may result in instances having
+	// different revisions.
+	OutdatedInstancesStrategy *string `locationName:"outdatedInstancesStrategy" type:"string" enum:"OutdatedInstancesStrategy"`
+
+	// A service role Amazon Resource Name (ARN) that allows CodeDeploy to act on
+	// the user's behalf when interacting with Amazon Web Services services.
 	//
 	// ServiceRoleArn is a required field
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string" required:"true"`
 
+	// The metadata that you apply to CodeDeploy deployment groups to help you organize
+	// and categorize them. Each tag consists of a key and an optional value, both
+	// of which you define.
+	Tags []*Tag `locationName:"tags" type:"list"`
+
+	// This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto
+	// Scaling. For more information, see Integrating CodeDeploy with Amazon EC2
+	// Auto Scaling (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html)
+	// in the CodeDeploy User Guide.
+	//
+	// Set terminationHookEnabled to true to have CodeDeploy install a termination
+	// hook into your Auto Scaling group when you create a deployment group. When
+	// this hook is installed, CodeDeploy will perform termination deployments.
+	//
+	// For information about termination deployments, see Enabling termination deployments
+	// during Auto Scaling scale-in events (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable)
+	// in the CodeDeploy User Guide.
+	//
+	// For more information about Auto Scaling scale-in events, see the Scale in
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html#as-lifecycle-scale-in)
+	// topic in the Amazon EC2 Auto Scaling User Guide.
+	TerminationHookEnabled *bool `locationName:"terminationHookEnabled" type:"boolean"`
+
 	// Information about triggers to create when the deployment group is created.
-	// For examples, see Create a Trigger for an AWS CodeDeploy Event (http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
-	// in the AWS CodeDeploy User Guide.
+	// For examples, see Create a Trigger for an CodeDeploy Event (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
+	// in the CodeDeploy User Guide.
 	TriggerConfigurations []*TriggerConfig `locationName:"triggerConfigurations" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentGroupInput) GoString() string {
 	return s.String()
 }
@@ -6096,9 +7553,27 @@ func (s *CreateDeploymentGroupInput) SetOnPremisesTagSet(v *OnPremisesTagSet) *C
 	return s
 }
 
+// SetOutdatedInstancesStrategy sets the OutdatedInstancesStrategy field's value.
+func (s *CreateDeploymentGroupInput) SetOutdatedInstancesStrategy(v string) *CreateDeploymentGroupInput {
+	s.OutdatedInstancesStrategy = &v
+	return s
+}
+
 // SetServiceRoleArn sets the ServiceRoleArn field's value.
 func (s *CreateDeploymentGroupInput) SetServiceRoleArn(v string) *CreateDeploymentGroupInput {
 	s.ServiceRoleArn = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateDeploymentGroupInput) SetTags(v []*Tag) *CreateDeploymentGroupInput {
+	s.Tags = v
+	return s
+}
+
+// SetTerminationHookEnabled sets the TerminationHookEnabled field's value.
+func (s *CreateDeploymentGroupInput) SetTerminationHookEnabled(v bool) *CreateDeploymentGroupInput {
+	s.TerminationHookEnabled = &v
 	return s
 }
 
@@ -6116,12 +7591,20 @@ type CreateDeploymentGroupOutput struct {
 	DeploymentGroupId *string `locationName:"deploymentGroupId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentGroupOutput) GoString() string {
 	return s.String()
 }
@@ -6136,8 +7619,8 @@ func (s *CreateDeploymentGroupOutput) SetDeploymentGroupId(v string) *CreateDepl
 type CreateDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
@@ -6146,8 +7629,8 @@ type CreateDeploymentInput struct {
 	// deployment is created.
 	AutoRollbackConfiguration *AutoRollbackConfiguration `locationName:"autoRollbackConfiguration" type:"structure"`
 
-	// The name of a deployment configuration associated with the IAM user or AWS
-	// account.
+	// The name of a deployment configuration associated with the user or Amazon
+	// Web Services account.
 	//
 	// If not specified, the value configured in the deployment group is used as
 	// the default. If the deployment group does not have a deployment configuration
@@ -6160,9 +7643,8 @@ type CreateDeploymentInput struct {
 	// A comment about the deployment.
 	Description *string `locationName:"description" type:"string"`
 
-	// Information about how AWS CodeDeploy handles files that already exist in
-	// a deployment target location but weren't part of the previous successful
-	// deployment.
+	// Information about how CodeDeploy handles files that already exist in a deployment
+	// target location but weren't part of the previous successful deployment.
 	//
 	// The fileExistsBehavior parameter takes any of the following values:
 	//
@@ -6176,16 +7658,44 @@ type CreateDeploymentInput struct {
 	//    used as part of the new deployment.
 	FileExistsBehavior *string `locationName:"fileExistsBehavior" type:"string" enum:"FileExistsBehavior"`
 
-	// If set to true, then if the deployment causes the ApplicationStop deployment
-	// lifecycle event to an instance to fail, the deployment to that instance is
-	// considered to have failed at that point and continues on to the BeforeInstall
-	// deployment lifecycle event.
+	// If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic
+	// deployment lifecycle event to an instance fails, then the deployment continues
+	// to the next deployment lifecycle event. For example, if ApplicationStop fails,
+	// the deployment continues with DownloadBundle. If BeforeBlockTraffic fails,
+	// the deployment continues with BlockTraffic. If AfterBlockTraffic fails, the
+	// deployment continues with ApplicationStop.
 	//
-	// If set to false or not specified, then if the deployment causes the ApplicationStop
-	// deployment lifecycle event to fail to an instance, the deployment to that
-	// instance stops, and the deployment to that instance is considered to have
-	// failed.
+	// If false or not specified, then if a lifecycle event fails during a deployment
+	// to an instance, that deployment fails. If deployment to that instance is
+	// part of an overall deployment and the number of healthy hosts is not less
+	// than the minimum number of healthy hosts, then a deployment to the next instance
+	// is attempted.
+	//
+	// During a deployment, the CodeDeploy agent runs the scripts specified for
+	// ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic in the AppSpec
+	// file from the previous successful deployment. (All other scripts are run
+	// from the AppSpec file in the current deployment.) If one of these scripts
+	// contains an error and does not run successfully, the deployment can fail.
+	//
+	// If the cause of the failure is a script from the last successful deployment
+	// that will never run successfully, create a new deployment and use ignoreApplicationStopFailures
+	// to specify that the ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic
+	// failures should be ignored.
 	IgnoreApplicationStopFailures *bool `locationName:"ignoreApplicationStopFailures" type:"boolean"`
+
+	// Allows you to specify information about alarms associated with a deployment.
+	// The alarm configuration that you specify here will override the alarm configuration
+	// at the deployment group level. Consider overriding the alarm configuration
+	// if you have set up alarms at the deployment group level that are causing
+	// deployment failures. In this case, you would call CreateDeployment to create
+	// a new deployment that uses a previous application revision that is known
+	// to work, and set its alarm configuration to turn off alarm polling. Turning
+	// off alarm polling ensures that the new deployment proceeds without being
+	// blocked by the alarm that was generated by the previous, failed, deployment.
+	//
+	// If you specify an overrideAlarmConfiguration, you need the UpdateDeploymentGroup
+	// IAM permission when calling CreateDeployment.
+	OverrideAlarmConfiguration *AlarmConfiguration `locationName:"overrideAlarmConfiguration" type:"structure"`
 
 	// The type and location of the revision to deploy.
 	Revision *RevisionLocation `locationName:"revision" type:"structure"`
@@ -6199,12 +7709,20 @@ type CreateDeploymentInput struct {
 	UpdateOutdatedInstancesOnly *bool `locationName:"updateOutdatedInstancesOnly" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentInput) GoString() string {
 	return s.String()
 }
@@ -6273,6 +7791,12 @@ func (s *CreateDeploymentInput) SetIgnoreApplicationStopFailures(v bool) *Create
 	return s
 }
 
+// SetOverrideAlarmConfiguration sets the OverrideAlarmConfiguration field's value.
+func (s *CreateDeploymentInput) SetOverrideAlarmConfiguration(v *AlarmConfiguration) *CreateDeploymentInput {
+	s.OverrideAlarmConfiguration = v
+	return s
+}
+
 // SetRevision sets the Revision field's value.
 func (s *CreateDeploymentInput) SetRevision(v *RevisionLocation) *CreateDeploymentInput {
 	s.Revision = v
@@ -6299,12 +7823,20 @@ type CreateDeploymentOutput struct {
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDeploymentOutput) GoString() string {
 	return s.String()
 }
@@ -6319,19 +7851,27 @@ func (s *CreateDeploymentOutput) SetDeploymentId(v string) *CreateDeploymentOutp
 type DeleteApplicationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationInput) GoString() string {
 	return s.String()
 }
@@ -6362,12 +7902,20 @@ type DeleteApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -6376,19 +7924,27 @@ func (s DeleteApplicationOutput) GoString() string {
 type DeleteDeploymentConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a deployment configuration associated with the IAM user or AWS
-	// account.
+	// The name of a deployment configuration associated with the user or Amazon
+	// Web Services account.
 	//
 	// DeploymentConfigName is a required field
 	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeploymentConfigInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeploymentConfigInput) GoString() string {
 	return s.String()
 }
@@ -6419,12 +7975,20 @@ type DeleteDeploymentConfigOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeploymentConfigOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeploymentConfigOutput) GoString() string {
 	return s.String()
 }
@@ -6433,8 +7997,8 @@ func (s DeleteDeploymentConfigOutput) GoString() string {
 type DeleteDeploymentGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
@@ -6445,12 +8009,20 @@ type DeleteDeploymentGroupInput struct {
 	DeploymentGroupName *string `locationName:"deploymentGroupName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeploymentGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeploymentGroupInput) GoString() string {
 	return s.String()
 }
@@ -6494,20 +8066,28 @@ type DeleteDeploymentGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// If the output contains no data, and the corresponding deployment group contained
-	// at least one Auto Scaling group, AWS CodeDeploy successfully removed all
-	// corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances
-	// in the Auto Scaling group. If the output contains data, AWS CodeDeploy could
-	// not remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances
-	// in the Auto Scaling group.
+	// at least one Auto Scaling group, CodeDeploy successfully removed all corresponding
+	// Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto
+	// Scaling group. If the output contains data, CodeDeploy could not remove some
+	// Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto
+	// Scaling group.
 	HooksNotCleanedUp []*AutoScalingGroup `locationName:"hooksNotCleanedUp" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeploymentGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDeploymentGroupOutput) GoString() string {
 	return s.String()
 }
@@ -6526,12 +8106,20 @@ type DeleteGitHubAccountTokenInput struct {
 	TokenName *string `locationName:"tokenName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteGitHubAccountTokenInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteGitHubAccountTokenInput) GoString() string {
 	return s.String()
 }
@@ -6550,12 +8138,20 @@ type DeleteGitHubAccountTokenOutput struct {
 	TokenName *string `locationName:"tokenName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteGitHubAccountTokenOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteGitHubAccountTokenOutput) GoString() string {
 	return s.String()
 }
@@ -6566,11 +8162,323 @@ func (s *DeleteGitHubAccountTokenOutput) SetTokenName(v string) *DeleteGitHubAcc
 	return s
 }
 
+type DeleteResourcesByExternalIdInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of an external resource (for example, a CloudFormation stack
+	// ID) that is linked to one or more CodeDeploy resources.
+	ExternalId *string `locationName:"externalId" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcesByExternalIdInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcesByExternalIdInput) GoString() string {
+	return s.String()
+}
+
+// SetExternalId sets the ExternalId field's value.
+func (s *DeleteResourcesByExternalIdInput) SetExternalId(v string) *DeleteResourcesByExternalIdInput {
+	s.ExternalId = &v
+	return s
+}
+
+type DeleteResourcesByExternalIdOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcesByExternalIdOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcesByExternalIdOutput) GoString() string {
+	return s.String()
+}
+
+// The deployment is already complete.
+type DeploymentAlreadyCompletedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentAlreadyCompletedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentAlreadyCompletedException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentAlreadyCompletedException(v protocol.ResponseMetadata) error {
+	return &DeploymentAlreadyCompletedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentAlreadyCompletedException) Code() string {
+	return "DeploymentAlreadyCompletedException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentAlreadyCompletedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentAlreadyCompletedException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentAlreadyCompletedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentAlreadyCompletedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentAlreadyCompletedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A deployment configuration with the specified name with the user or Amazon
+// Web Services account already exists.
+type DeploymentConfigAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentConfigAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &DeploymentConfigAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentConfigAlreadyExistsException) Code() string {
+	return "DeploymentConfigAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentConfigAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentConfigAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentConfigAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentConfigAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentConfigAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The deployment configuration does not exist with the user or Amazon Web Services
+// account.
+type DeploymentConfigDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentConfigDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &DeploymentConfigDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentConfigDoesNotExistException) Code() string {
+	return "DeploymentConfigDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentConfigDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentConfigDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentConfigDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentConfigDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentConfigDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The deployment configuration is still in use.
+type DeploymentConfigInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentConfigInUseException(v protocol.ResponseMetadata) error {
+	return &DeploymentConfigInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentConfigInUseException) Code() string {
+	return "DeploymentConfigInUseException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentConfigInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentConfigInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentConfigInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentConfigInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentConfigInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Information about a deployment configuration.
 type DeploymentConfigInfo struct {
 	_ struct{} `type:"structure"`
 
-	// The destination platform type for the deployment (Lambda or Server).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform *string `locationName:"computePlatform" type:"string" enum:"ComputePlatform"`
 
 	// The time at which the deployment configuration was created.
@@ -6582,20 +8490,31 @@ type DeploymentConfigInfo struct {
 	// The deployment configuration name.
 	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string"`
 
-	// Information about the number or percentage of minimum healthy instance.
+	// Information about the number or percentage of minimum healthy instances.
 	MinimumHealthyHosts *MinimumHealthyHosts `locationName:"minimumHealthyHosts" type:"structure"`
 
-	// The configuration that specifies how the deployment traffic is routed. Only
-	// deployments with a Lambda compute platform can specify this.
+	// The configuration that specifies how the deployment traffic is routed. Used
+	// for deployments with a Lambda or Amazon ECS compute platform only.
 	TrafficRoutingConfig *TrafficRoutingConfig `locationName:"trafficRoutingConfig" type:"structure"`
+
+	// Information about a zonal configuration.
+	ZonalConfig *ZonalConfig `locationName:"zonalConfig" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentConfigInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentConfigInfo) GoString() string {
 	return s.String()
 }
@@ -6636,6 +8555,334 @@ func (s *DeploymentConfigInfo) SetTrafficRoutingConfig(v *TrafficRoutingConfig) 
 	return s
 }
 
+// SetZonalConfig sets the ZonalConfig field's value.
+func (s *DeploymentConfigInfo) SetZonalConfig(v *ZonalConfig) *DeploymentConfigInfo {
+	s.ZonalConfig = v
+	return s
+}
+
+// The deployment configurations limit was exceeded.
+type DeploymentConfigLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentConfigLimitExceededException(v protocol.ResponseMetadata) error {
+	return &DeploymentConfigLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentConfigLimitExceededException) Code() string {
+	return "DeploymentConfigLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentConfigLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentConfigLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentConfigLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentConfigLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentConfigLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The deployment configuration name was not specified.
+type DeploymentConfigNameRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigNameRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentConfigNameRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentConfigNameRequiredException(v protocol.ResponseMetadata) error {
+	return &DeploymentConfigNameRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentConfigNameRequiredException) Code() string {
+	return "DeploymentConfigNameRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentConfigNameRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentConfigNameRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentConfigNameRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentConfigNameRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentConfigNameRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The deployment with the user or Amazon Web Services account does not exist.
+type DeploymentDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &DeploymentDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentDoesNotExistException) Code() string {
+	return "DeploymentDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A deployment group with the specified name with the user or Amazon Web Services
+// account already exists.
+type DeploymentGroupAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentGroupAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentGroupAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentGroupAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &DeploymentGroupAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentGroupAlreadyExistsException) Code() string {
+	return "DeploymentGroupAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentGroupAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentGroupAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentGroupAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentGroupAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentGroupAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The named deployment group with the user or Amazon Web Services account does
+// not exist.
+type DeploymentGroupDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentGroupDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentGroupDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentGroupDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &DeploymentGroupDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentGroupDoesNotExistException) Code() string {
+	return "DeploymentGroupDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentGroupDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentGroupDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentGroupDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentGroupDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentGroupDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Information about a deployment group.
 type DeploymentGroupInfo struct {
 	_ struct{} `type:"structure"`
@@ -6656,7 +8903,7 @@ type DeploymentGroupInfo struct {
 	// Information about blue/green deployment options for a deployment group.
 	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `locationName:"blueGreenDeploymentConfiguration" type:"structure"`
 
-	// The destination platform type for the deployment group (Lambda or Server).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform *string `locationName:"computePlatform" type:"string" enum:"ComputePlatform"`
 
 	// The deployment configuration name.
@@ -6676,9 +8923,9 @@ type DeploymentGroupInfo struct {
 	// instances with any of the specified tags.
 	Ec2TagFilters []*EC2TagFilter `locationName:"ec2TagFilters" type:"list"`
 
-	// Information about groups of tags applied to an EC2 instance. The deployment
-	// group includes only EC2 instances identified by all of the tag groups. Cannot
-	// be used in the same call as ec2TagFilters.
+	// Information about groups of tags applied to an Amazon EC2 instance. The deployment
+	// group includes only Amazon EC2 instances identified by all of the tag groups.
+	// Cannot be used in the same call as ec2TagFilters.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
 	// The target Amazon ECS services in the deployment group. This applies only
@@ -6707,23 +8954,54 @@ type DeploymentGroupInfo struct {
 	// tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
 	OnPremisesTagSet *OnPremisesTagSet `locationName:"onPremisesTagSet" type:"structure"`
 
-	// A service role ARN.
+	// Indicates what happens when new Amazon EC2 instances are launched mid-deployment
+	// and do not receive the deployed application revision.
+	//
+	// If this option is set to UPDATE or is unspecified, CodeDeploy initiates one
+	// or more 'auto-update outdated instances' deployments to apply the deployed
+	// application revision to the new Amazon EC2 instances.
+	//
+	// If this option is set to IGNORE, CodeDeploy does not initiate a deployment
+	// to update the new Amazon EC2 instances. This may result in instances having
+	// different revisions.
+	OutdatedInstancesStrategy *string `locationName:"outdatedInstancesStrategy" type:"string" enum:"OutdatedInstancesStrategy"`
+
+	// A service role Amazon Resource Name (ARN) that grants CodeDeploy permission
+	// to make calls to Amazon Web Services services on your behalf. For more information,
+	// see Create a Service Role for CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html)
+	// in the CodeDeploy User Guide.
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string"`
 
 	// Information about the deployment group's target revision, including type
 	// and location.
 	TargetRevision *RevisionLocation `locationName:"targetRevision" type:"structure"`
 
+	// Indicates whether the deployment group was configured to have CodeDeploy
+	// install a termination hook into an Auto Scaling group.
+	//
+	// For more information about the termination hook, see How Amazon EC2 Auto
+	// Scaling works with CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors)
+	// in the CodeDeploy User Guide.
+	TerminationHookEnabled *bool `locationName:"terminationHookEnabled" type:"boolean"`
+
 	// Information about triggers associated with the deployment group.
 	TriggerConfigurations []*TriggerConfig `locationName:"triggerConfigurations" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentGroupInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentGroupInfo) GoString() string {
 	return s.String()
 }
@@ -6836,6 +9114,12 @@ func (s *DeploymentGroupInfo) SetOnPremisesTagSet(v *OnPremisesTagSet) *Deployme
 	return s
 }
 
+// SetOutdatedInstancesStrategy sets the OutdatedInstancesStrategy field's value.
+func (s *DeploymentGroupInfo) SetOutdatedInstancesStrategy(v string) *DeploymentGroupInfo {
+	s.OutdatedInstancesStrategy = &v
+	return s
+}
+
 // SetServiceRoleArn sets the ServiceRoleArn field's value.
 func (s *DeploymentGroupInfo) SetServiceRoleArn(v string) *DeploymentGroupInfo {
 	s.ServiceRoleArn = &v
@@ -6848,10 +9132,208 @@ func (s *DeploymentGroupInfo) SetTargetRevision(v *RevisionLocation) *Deployment
 	return s
 }
 
+// SetTerminationHookEnabled sets the TerminationHookEnabled field's value.
+func (s *DeploymentGroupInfo) SetTerminationHookEnabled(v bool) *DeploymentGroupInfo {
+	s.TerminationHookEnabled = &v
+	return s
+}
+
 // SetTriggerConfigurations sets the TriggerConfigurations field's value.
 func (s *DeploymentGroupInfo) SetTriggerConfigurations(v []*TriggerConfig) *DeploymentGroupInfo {
 	s.TriggerConfigurations = v
 	return s
+}
+
+// The deployment groups limit was exceeded.
+type DeploymentGroupLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentGroupLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentGroupLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentGroupLimitExceededException(v protocol.ResponseMetadata) error {
+	return &DeploymentGroupLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentGroupLimitExceededException) Code() string {
+	return "DeploymentGroupLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentGroupLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentGroupLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentGroupLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentGroupLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentGroupLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The deployment group name was not specified.
+type DeploymentGroupNameRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentGroupNameRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentGroupNameRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentGroupNameRequiredException(v protocol.ResponseMetadata) error {
+	return &DeploymentGroupNameRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentGroupNameRequiredException) Code() string {
+	return "DeploymentGroupNameRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentGroupNameRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentGroupNameRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentGroupNameRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentGroupNameRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentGroupNameRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// At least one deployment ID must be specified.
+type DeploymentIdRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentIdRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentIdRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentIdRequiredException(v protocol.ResponseMetadata) error {
+	return &DeploymentIdRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentIdRequiredException) Code() string {
+	return "DeploymentIdRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentIdRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentIdRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentIdRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentIdRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentIdRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Information about a deployment.
@@ -6875,7 +9357,7 @@ type DeploymentInfo struct {
 	// A timestamp that indicates when the deployment was complete.
 	CompleteTime *time.Time `locationName:"completeTime" type:"timestamp"`
 
-	// The destination platform type for the deployment (Lambda or Server).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform *string `locationName:"computePlatform" type:"string" enum:"ComputePlatform"`
 
 	// A timestamp that indicates when the deployment was created.
@@ -6888,6 +9370,9 @@ type DeploymentInfo struct {
 	//    * autoscaling: Amazon EC2 Auto Scaling created the deployment.
 	//
 	//    * codeDeployRollback: A rollback process created the deployment.
+	//
+	//    * CodeDeployAutoUpdate: An auto-update process created the deployment
+	//    when it detected outdated Amazon EC2 instances.
 	Creator *string `locationName:"creator" type:"string" enum:"DeploymentCreator"`
 
 	// The deployment configuration name.
@@ -6915,9 +9400,12 @@ type DeploymentInfo struct {
 	// Information about any error associated with this deployment.
 	ErrorInformation *ErrorInformation `locationName:"errorInformation" type:"structure"`
 
-	// Information about how AWS CodeDeploy handles files that already exist in
-	// a deployment target location but weren't part of the previous successful
-	// deployment.
+	// The unique ID for an external resource (for example, a CloudFormation stack
+	// ID) that is linked to this deployment.
+	ExternalId *string `locationName:"externalId" type:"string"`
+
+	// Information about how CodeDeploy handles files that already exist in a deployment
+	// target location but weren't part of the previous successful deployment.
 	//
 	//    * DISALLOW: The deployment fails. This is also the default behavior if
 	//    no option is specified.
@@ -6929,15 +9417,29 @@ type DeploymentInfo struct {
 	//    used as part of the new deployment.
 	FileExistsBehavior *string `locationName:"fileExistsBehavior" type:"string" enum:"FileExistsBehavior"`
 
-	// If true, then if the deployment causes the ApplicationStop deployment lifecycle
-	// event to an instance to fail, the deployment to that instance is not considered
-	// to have failed at that point and continues on to the BeforeInstall deployment
-	// lifecycle event.
+	// If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic
+	// deployment lifecycle event to an instance fails, then the deployment continues
+	// to the next deployment lifecycle event. For example, if ApplicationStop fails,
+	// the deployment continues with DownloadBundle. If BeforeBlockTraffic fails,
+	// the deployment continues with BlockTraffic. If AfterBlockTraffic fails, the
+	// deployment continues with ApplicationStop.
 	//
-	// If false or not specified, then if the deployment causes the ApplicationStop
-	// deployment lifecycle event to an instance to fail, the deployment to that
-	// instance stops, and the deployment to that instance is considered to have
-	// failed.
+	// If false or not specified, then if a lifecycle event fails during a deployment
+	// to an instance, that deployment fails. If deployment to that instance is
+	// part of an overall deployment and the number of healthy hosts is not less
+	// than the minimum number of healthy hosts, then a deployment to the next instance
+	// is attempted.
+	//
+	// During a deployment, the CodeDeploy agent runs the scripts specified for
+	// ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic in the AppSpec
+	// file from the previous successful deployment. (All other scripts are run
+	// from the AppSpec file in the current deployment.) If one of these scripts
+	// contains an error and does not run successfully, the deployment can fail.
+	//
+	// If the cause of the failure is a script from the last successful deployment
+	// that will never run successfully, create a new deployment and use ignoreApplicationStopFailures
+	// to specify that the ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic
+	// failures should be ignored.
 	IgnoreApplicationStopFailures *bool `locationName:"ignoreApplicationStopFailures" type:"boolean"`
 
 	// Indicates whether the wait period set for the termination of instances in
@@ -6949,9 +9451,15 @@ type DeploymentInfo struct {
 	// Information about the load balancer used in the deployment.
 	LoadBalancerInfo *LoadBalancerInfo `locationName:"loadBalancerInfo" type:"structure"`
 
+	// Information about alarms associated with a deployment or deployment group.
+	OverrideAlarmConfiguration *AlarmConfiguration `locationName:"overrideAlarmConfiguration" type:"structure"`
+
 	// Information about the application revision that was deployed to the deployment
 	// group before the most recent successful deployment.
 	PreviousRevision *RevisionLocation `locationName:"previousRevision" type:"structure"`
+
+	// Information about deployments related to the specified deployment.
+	RelatedDeployments *RelatedDeployments `locationName:"relatedDeployments" type:"structure"`
 
 	// Information about the location of stored application artifacts and the service
 	// from which to retrieve them.
@@ -6980,12 +9488,20 @@ type DeploymentInfo struct {
 	UpdateOutdatedInstancesOnly *bool `locationName:"updateOutdatedInstancesOnly" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentInfo) GoString() string {
 	return s.String()
 }
@@ -7086,6 +9602,12 @@ func (s *DeploymentInfo) SetErrorInformation(v *ErrorInformation) *DeploymentInf
 	return s
 }
 
+// SetExternalId sets the ExternalId field's value.
+func (s *DeploymentInfo) SetExternalId(v string) *DeploymentInfo {
+	s.ExternalId = &v
+	return s
+}
+
 // SetFileExistsBehavior sets the FileExistsBehavior field's value.
 func (s *DeploymentInfo) SetFileExistsBehavior(v string) *DeploymentInfo {
 	s.FileExistsBehavior = &v
@@ -7110,9 +9632,21 @@ func (s *DeploymentInfo) SetLoadBalancerInfo(v *LoadBalancerInfo) *DeploymentInf
 	return s
 }
 
+// SetOverrideAlarmConfiguration sets the OverrideAlarmConfiguration field's value.
+func (s *DeploymentInfo) SetOverrideAlarmConfiguration(v *AlarmConfiguration) *DeploymentInfo {
+	s.OverrideAlarmConfiguration = v
+	return s
+}
+
 // SetPreviousRevision sets the PreviousRevision field's value.
 func (s *DeploymentInfo) SetPreviousRevision(v *RevisionLocation) *DeploymentInfo {
 	s.PreviousRevision = v
+	return s
+}
+
+// SetRelatedDeployments sets the RelatedDeployments field's value.
+func (s *DeploymentInfo) SetRelatedDeployments(v *RelatedDeployments) *DeploymentInfo {
+	s.RelatedDeployments = v
 	return s
 }
 
@@ -7152,6 +9686,198 @@ func (s *DeploymentInfo) SetUpdateOutdatedInstancesOnly(v bool) *DeploymentInfo 
 	return s
 }
 
+// The deployment does not have a status of Ready and can't continue yet.
+type DeploymentIsNotInReadyStateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentIsNotInReadyStateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentIsNotInReadyStateException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentIsNotInReadyStateException(v protocol.ResponseMetadata) error {
+	return &DeploymentIsNotInReadyStateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentIsNotInReadyStateException) Code() string {
+	return "DeploymentIsNotInReadyStateException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentIsNotInReadyStateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentIsNotInReadyStateException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentIsNotInReadyStateException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentIsNotInReadyStateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentIsNotInReadyStateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The number of allowed deployments was exceeded.
+type DeploymentLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentLimitExceededException(v protocol.ResponseMetadata) error {
+	return &DeploymentLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentLimitExceededException) Code() string {
+	return "DeploymentLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified deployment has not started.
+type DeploymentNotStartedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentNotStartedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentNotStartedException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentNotStartedException(v protocol.ResponseMetadata) error {
+	return &DeploymentNotStartedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentNotStartedException) Code() string {
+	return "DeploymentNotStartedException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentNotStartedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentNotStartedException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentNotStartedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentNotStartedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentNotStartedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Information about the deployment status of the instances in the deployment.
 type DeploymentOverview struct {
 	_ struct{} `type:"structure"`
@@ -7177,12 +9903,20 @@ type DeploymentOverview struct {
 	Succeeded *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentOverview) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentOverview) GoString() string {
 	return s.String()
 }
@@ -7243,16 +9977,24 @@ type DeploymentReadyOption struct {
 
 	// The number of minutes to wait before the status of a blue/green deployment
 	// is changed to Stopped if rerouting is not started manually. Applies only
-	// to the STOP_DEPLOYMENT option for actionOnTimeout
+	// to the STOP_DEPLOYMENT option for actionOnTimeout.
 	WaitTimeInMinutes *int64 `locationName:"waitTimeInMinutes" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentReadyOption) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentReadyOption) GoString() string {
 	return s.String()
 }
@@ -7281,12 +10023,20 @@ type DeploymentStyle struct {
 	DeploymentType *string `locationName:"deploymentType" type:"string" enum:"DeploymentType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentStyle) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentStyle) GoString() string {
 	return s.String()
 }
@@ -7307,7 +10057,13 @@ func (s *DeploymentStyle) SetDeploymentType(v string) *DeploymentStyle {
 type DeploymentTarget struct {
 	_ struct{} `type:"structure"`
 
-	// The deployment type that is specific to the deployment's compute platform.
+	// Information about the target to be updated by an CloudFormation blue/green
+	// deployment. This target type is used for all deployments initiated by a CloudFormation
+	// stack update.
+	CloudFormationTarget *CloudFormationTarget `locationName:"cloudFormationTarget" type:"structure"`
+
+	// The deployment type that is specific to the deployment's compute platform
+	// or deployments initiated by a CloudFormation stack update.
 	DeploymentTargetType *string `locationName:"deploymentTargetType" type:"string" enum:"DeploymentTargetType"`
 
 	// Information about the target for a deployment that uses the Amazon ECS compute
@@ -7318,19 +10074,33 @@ type DeploymentTarget struct {
 	// compute platform.
 	InstanceTarget *InstanceTarget `locationName:"instanceTarget" type:"structure"`
 
-	// Information about the target for a deployment that uses the AWS Lambda compute
+	// Information about the target for a deployment that uses the Lambda compute
 	// platform.
 	LambdaTarget *LambdaTarget `locationName:"lambdaTarget" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeploymentTarget) GoString() string {
 	return s.String()
+}
+
+// SetCloudFormationTarget sets the CloudFormationTarget field's value.
+func (s *DeploymentTarget) SetCloudFormationTarget(v *CloudFormationTarget) *DeploymentTarget {
+	s.CloudFormationTarget = v
+	return s
 }
 
 // SetDeploymentTargetType sets the DeploymentTargetType field's value.
@@ -7357,6 +10127,201 @@ func (s *DeploymentTarget) SetLambdaTarget(v *LambdaTarget) *DeploymentTarget {
 	return s
 }
 
+// The provided target ID does not belong to the attempted deployment.
+type DeploymentTargetDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentTargetDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentTargetDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentTargetDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &DeploymentTargetDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentTargetDoesNotExistException) Code() string {
+	return "DeploymentTargetDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentTargetDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentTargetDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentTargetDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentTargetDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentTargetDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A deployment target ID was not provided.
+type DeploymentTargetIdRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentTargetIdRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentTargetIdRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentTargetIdRequiredException(v protocol.ResponseMetadata) error {
+	return &DeploymentTargetIdRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentTargetIdRequiredException) Code() string {
+	return "DeploymentTargetIdRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentTargetIdRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentTargetIdRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentTargetIdRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentTargetIdRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentTargetIdRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The maximum number of targets that can be associated with an Amazon ECS or
+// Lambda deployment was exceeded. The target list of both types of deployments
+// must have exactly one item. This exception does not apply to EC2/On-premises
+// deployments.
+type DeploymentTargetListSizeExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentTargetListSizeExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeploymentTargetListSizeExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorDeploymentTargetListSizeExceededException(v protocol.ResponseMetadata) error {
+	return &DeploymentTargetListSizeExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DeploymentTargetListSizeExceededException) Code() string {
+	return "DeploymentTargetListSizeExceededException"
+}
+
+// Message returns the exception's message.
+func (s *DeploymentTargetListSizeExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DeploymentTargetListSizeExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *DeploymentTargetListSizeExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DeploymentTargetListSizeExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DeploymentTargetListSizeExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Represents the input of a DeregisterOnPremisesInstance operation.
 type DeregisterOnPremisesInstanceInput struct {
 	_ struct{} `type:"structure"`
@@ -7367,12 +10332,20 @@ type DeregisterOnPremisesInstanceInput struct {
 	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterOnPremisesInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterOnPremisesInstanceInput) GoString() string {
 	return s.String()
 }
@@ -7400,14 +10373,86 @@ type DeregisterOnPremisesInstanceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterOnPremisesInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeregisterOnPremisesInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// The description is too long.
+type DescriptionTooLongException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescriptionTooLongException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescriptionTooLongException) GoString() string {
+	return s.String()
+}
+
+func newErrorDescriptionTooLongException(v protocol.ResponseMetadata) error {
+	return &DescriptionTooLongException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DescriptionTooLongException) Code() string {
+	return "DescriptionTooLongException"
+}
+
+// Message returns the exception's message.
+func (s *DescriptionTooLongException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DescriptionTooLongException) OrigErr() error {
+	return nil
+}
+
+func (s *DescriptionTooLongException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DescriptionTooLongException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DescriptionTooLongException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Diagnostic information about executable scripts that are part of a deployment.
@@ -7433,8 +10478,7 @@ type Diagnostics struct {
 
 	// The last portion of the diagnostic log.
 	//
-	// If available, AWS CodeDeploy returns up to the last 4 KB of the diagnostic
-	// log.
+	// If available, CodeDeploy returns up to the last 4 KB of the diagnostic log.
 	LogTail *string `locationName:"logTail" type:"string"`
 
 	// The message associated with the error.
@@ -7444,12 +10488,20 @@ type Diagnostics struct {
 	ScriptName *string `locationName:"scriptName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Diagnostics) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Diagnostics) GoString() string {
 	return s.String()
 }
@@ -7498,12 +10550,20 @@ type EC2TagFilter struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EC2TagFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EC2TagFilter) GoString() string {
 	return s.String()
 }
@@ -7526,22 +10586,30 @@ func (s *EC2TagFilter) SetValue(v string) *EC2TagFilter {
 	return s
 }
 
-// Information about groups of EC2 instance tags.
+// Information about groups of Amazon EC2 instance tags.
 type EC2TagSet struct {
 	_ struct{} `type:"structure"`
 
-	// A list that contains other lists of EC2 instance tag groups. For an instance
-	// to be included in the deployment group, it must be identified by all of the
-	// tag groups in the list.
+	// A list that contains other lists of Amazon EC2 instance tag groups. For an
+	// instance to be included in the deployment group, it must be identified by
+	// all of the tag groups in the list.
 	Ec2TagSetList [][]*EC2TagFilter `locationName:"ec2TagSetList" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EC2TagSet) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EC2TagSet) GoString() string {
 	return s.String()
 }
@@ -7564,12 +10632,20 @@ type ECSService struct {
 	ServiceName *string `locationName:"serviceName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ECSService) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ECSService) GoString() string {
 	return s.String()
 }
@@ -7584,6 +10660,71 @@ func (s *ECSService) SetClusterName(v string) *ECSService {
 func (s *ECSService) SetServiceName(v string) *ECSService {
 	s.ServiceName = &v
 	return s
+}
+
+// The Amazon ECS service is associated with more than one deployment groups.
+// An Amazon ECS service can be associated with only one deployment group.
+type ECSServiceMappingLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ECSServiceMappingLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ECSServiceMappingLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorECSServiceMappingLimitExceededException(v protocol.ResponseMetadata) error {
+	return &ECSServiceMappingLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ECSServiceMappingLimitExceededException) Code() string {
+	return "ECSServiceMappingLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *ECSServiceMappingLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ECSServiceMappingLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *ECSServiceMappingLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ECSServiceMappingLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ECSServiceMappingLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Information about the target of an Amazon ECS deployment.
@@ -7603,7 +10744,7 @@ type ECSTarget struct {
 	// The status an Amazon ECS deployment's target ECS application.
 	Status *string `locationName:"status" type:"string" enum:"TargetStatus"`
 
-	// The ARN of the target.
+	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string `locationName:"targetArn" type:"string"`
 
 	// The unique ID of a deployment target that has a type of ecsTarget.
@@ -7613,12 +10754,20 @@ type ECSTarget struct {
 	TaskSetsInfo []*ECSTaskSet `locationName:"taskSetsInfo" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ECSTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ECSTarget) GoString() string {
 	return s.String()
 }
@@ -7665,10 +10814,10 @@ func (s *ECSTarget) SetTaskSetsInfo(v []*ECSTaskSet) *ECSTarget {
 	return s
 }
 
-// Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment.
+// Information about a set of Amazon ECS tasks in an CodeDeploy deployment.
 // An Amazon ECS task set includes details such as the desired number of tasks,
 // how many tasks are running, and whether the task set serves production traffic.
-// An AWS CodeDeploy application that uses the Amazon ECS compute platform deploys
+// An CodeDeploy application that uses the Amazon ECS compute platform deploys
 // a containerized application in an Amazon ECS service as a task set.
 type ECSTaskSet struct {
 	_ struct{} `type:"structure"`
@@ -7704,7 +10853,7 @@ type ECSTaskSet struct {
 	Status *string `locationName:"status" type:"string"`
 
 	// The target group associated with the task set. The target group is used by
-	// AWS CodeDeploy to manage traffic to a task set.
+	// CodeDeploy to manage traffic to a task set.
 	TargetGroup *TargetGroupInfo `locationName:"targetGroup" type:"structure"`
 
 	// A label that identifies whether the ECS task set is an original target (BLUE)
@@ -7715,12 +10864,20 @@ type ECSTaskSet struct {
 	TrafficWeight *float64 `locationName:"trafficWeight" type:"double"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ECSTaskSet) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ECSTaskSet) GoString() string {
 	return s.String()
 }
@@ -7773,26 +10930,35 @@ func (s *ECSTaskSet) SetTrafficWeight(v float64) *ECSTaskSet {
 	return s
 }
 
-// Information about a load balancer in Elastic Load Balancing to use in a deployment.
-// Instances are registered directly with a load balancer, and traffic is routed
-// to the load balancer.
+// Information about a Classic Load Balancer in Elastic Load Balancing to use
+// in a deployment. Instances are registered directly with a load balancer,
+// and traffic is routed to the load balancer.
 type ELBInfo struct {
 	_ struct{} `type:"structure"`
 
-	// For blue/green deployments, the name of the load balancer that is used to
-	// route traffic from original instances to replacement instances in a blue/green
-	// deployment. For in-place deployments, the name of the load balancer that
-	// instances are deregistered from so they are not serving traffic during a
-	// deployment, and then re-registered with after the deployment is complete.
+	// For blue/green deployments, the name of the Classic Load Balancer that is
+	// used to route traffic from original instances to replacement instances in
+	// a blue/green deployment. For in-place deployments, the name of the Classic
+	// Load Balancer that instances are deregistered from so they are not serving
+	// traffic during a deployment, and then re-registered with after the deployment
+	// is complete.
 	Name *string `locationName:"name" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ELBInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ELBInfo) GoString() string {
 	return s.String()
 }
@@ -7807,8 +10973,8 @@ func (s *ELBInfo) SetName(v string) *ELBInfo {
 type ErrorInformation struct {
 	_ struct{} `type:"structure"`
 
-	// For more information, see Error Codes for AWS CodeDeploy (http://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html)
-	// in the AWS CodeDeploy User Guide (http://docs.aws.amazon.com/codedeploy/latest/userguide).
+	// For more information, see Error Codes for CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html)
+	// in the CodeDeploy User Guide (https://docs.aws.amazon.com/codedeploy/latest/userguide).
 	//
 	// The error code:
 	//
@@ -7840,7 +11006,7 @@ type ErrorInformation struct {
 	//    * OVER_MAX_INSTANCES: The maximum number of instances was exceeded.
 	//
 	//    * THROTTLED: The operation was throttled because the calling account exceeded
-	//    the throttling limits of one or more AWS services.
+	//    the throttling limits of one or more Amazon Web Services services.
 	//
 	//    * TIMEOUT: The deployment has timed out.
 	//
@@ -7853,12 +11019,20 @@ type ErrorInformation struct {
 	Message *string `locationName:"message" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorInformation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ErrorInformation) GoString() string {
 	return s.String()
 }
@@ -7885,22 +11059,30 @@ type GenericRevisionInfo struct {
 	// A comment about the revision.
 	Description *string `locationName:"description" type:"string"`
 
-	// When the revision was first used by AWS CodeDeploy.
+	// When the revision was first used by CodeDeploy.
 	FirstUsedTime *time.Time `locationName:"firstUsedTime" type:"timestamp"`
 
-	// When the revision was last used by AWS CodeDeploy.
+	// When the revision was last used by CodeDeploy.
 	LastUsedTime *time.Time `locationName:"lastUsedTime" type:"timestamp"`
 
-	// When the revision was registered with AWS CodeDeploy.
+	// When the revision was registered with CodeDeploy.
 	RegisterTime *time.Time `locationName:"registerTime" type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GenericRevisionInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GenericRevisionInfo) GoString() string {
 	return s.String()
 }
@@ -7939,19 +11121,27 @@ func (s *GenericRevisionInfo) SetRegisterTime(v time.Time) *GenericRevisionInfo 
 type GetApplicationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetApplicationInput) GoString() string {
 	return s.String()
 }
@@ -7986,12 +11176,20 @@ type GetApplicationOutput struct {
 	Application *ApplicationInfo `locationName:"application" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -8017,12 +11215,20 @@ type GetApplicationRevisionInput struct {
 	Revision *RevisionLocation `locationName:"revision" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetApplicationRevisionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetApplicationRevisionInput) GoString() string {
 	return s.String()
 }
@@ -8072,12 +11278,20 @@ type GetApplicationRevisionOutput struct {
 	RevisionInfo *GenericRevisionInfo `locationName:"revisionInfo" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetApplicationRevisionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetApplicationRevisionOutput) GoString() string {
 	return s.String()
 }
@@ -8104,19 +11318,27 @@ func (s *GetApplicationRevisionOutput) SetRevisionInfo(v *GenericRevisionInfo) *
 type GetDeploymentConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a deployment configuration associated with the IAM user or AWS
-	// account.
+	// The name of a deployment configuration associated with the user or Amazon
+	// Web Services account.
 	//
 	// DeploymentConfigName is a required field
 	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentConfigInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentConfigInput) GoString() string {
 	return s.String()
 }
@@ -8151,12 +11373,20 @@ type GetDeploymentConfigOutput struct {
 	DeploymentConfigInfo *DeploymentConfigInfo `locationName:"deploymentConfigInfo" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentConfigOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentConfigOutput) GoString() string {
 	return s.String()
 }
@@ -8171,8 +11401,8 @@ func (s *GetDeploymentConfigOutput) SetDeploymentConfigInfo(v *DeploymentConfigI
 type GetDeploymentGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
@@ -8183,12 +11413,20 @@ type GetDeploymentGroupInput struct {
 	DeploymentGroupName *string `locationName:"deploymentGroupName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentGroupInput) GoString() string {
 	return s.String()
 }
@@ -8235,12 +11473,20 @@ type GetDeploymentGroupOutput struct {
 	DeploymentGroupInfo *DeploymentGroupInfo `locationName:"deploymentGroupInfo" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentGroupOutput) GoString() string {
 	return s.String()
 }
@@ -8255,18 +11501,27 @@ func (s *GetDeploymentGroupOutput) SetDeploymentGroupInfo(v *DeploymentGroupInfo
 type GetDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique ID of a deployment associated with the IAM user or AWS account.
+	// The unique ID of a deployment associated with the user or Amazon Web Services
+	// account.
 	//
 	// DeploymentId is a required field
 	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentInput) GoString() string {
 	return s.String()
 }
@@ -8305,12 +11560,20 @@ type GetDeploymentInstanceInput struct {
 	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentInstanceInput) GoString() string {
 	return s.String()
 }
@@ -8351,12 +11614,20 @@ type GetDeploymentInstanceOutput struct {
 	InstanceSummary *InstanceSummary `locationName:"instanceSummary" deprecated:"true" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentInstanceOutput) GoString() string {
 	return s.String()
 }
@@ -8375,12 +11646,20 @@ type GetDeploymentOutput struct {
 	DeploymentInfo *DeploymentInfo `locationName:"deploymentInfo" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentOutput) GoString() string {
 	return s.String()
 }
@@ -8395,20 +11674,48 @@ type GetDeploymentTargetInput struct {
 	_ struct{} `type:"structure"`
 
 	// The unique ID of a deployment.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
+	//
+	// DeploymentId is a required field
+	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
 
 	// The unique ID of a deployment target.
-	TargetId *string `locationName:"targetId" type:"string"`
+	//
+	// TargetId is a required field
+	TargetId *string `locationName:"targetId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentTargetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentTargetInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetDeploymentTargetInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetDeploymentTargetInput"}
+	if s.DeploymentId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+	}
+	if s.TargetId == nil {
+		invalidParams.Add(request.NewErrParamRequired("TargetId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetDeploymentId sets the DeploymentId field's value.
@@ -8427,18 +11734,26 @@ type GetDeploymentTargetOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A deployment target that contains information about a deployment such as
-	// its status, lifecyle events, and when it was last updated. It also contains
+	// its status, lifecycle events, and when it was last updated. It also contains
 	// metadata about the deployment target. The deployment target metadata depends
 	// on the deployment target's type (instanceTarget, lambdaTarget, or ecsTarget).
 	DeploymentTarget *DeploymentTarget `locationName:"deploymentTarget" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentTargetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDeploymentTargetOutput) GoString() string {
 	return s.String()
 }
@@ -8459,12 +11774,20 @@ type GetOnPremisesInstanceInput struct {
 	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOnPremisesInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOnPremisesInstanceInput) GoString() string {
 	return s.String()
 }
@@ -8496,12 +11819,20 @@ type GetOnPremisesInstanceOutput struct {
 	InstanceInfo *InstanceInfo `locationName:"instanceInfo" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOnPremisesInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOnPremisesInstanceOutput) GoString() string {
 	return s.String()
 }
@@ -8510,6 +11841,134 @@ func (s GetOnPremisesInstanceOutput) GoString() string {
 func (s *GetOnPremisesInstanceOutput) SetInstanceInfo(v *InstanceInfo) *GetOnPremisesInstanceOutput {
 	s.InstanceInfo = v
 	return s
+}
+
+// No GitHub account connection exists with the named specified in the call.
+type GitHubAccountTokenDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GitHubAccountTokenDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GitHubAccountTokenDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorGitHubAccountTokenDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &GitHubAccountTokenDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *GitHubAccountTokenDoesNotExistException) Code() string {
+	return "GitHubAccountTokenDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *GitHubAccountTokenDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *GitHubAccountTokenDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *GitHubAccountTokenDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *GitHubAccountTokenDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *GitHubAccountTokenDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The call is missing a required GitHub account connection name.
+type GitHubAccountTokenNameRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GitHubAccountTokenNameRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GitHubAccountTokenNameRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorGitHubAccountTokenNameRequiredException(v protocol.ResponseMetadata) error {
+	return &GitHubAccountTokenNameRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *GitHubAccountTokenNameRequiredException) Code() string {
+	return "GitHubAccountTokenNameRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *GitHubAccountTokenNameRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *GitHubAccountTokenNameRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *GitHubAccountTokenNameRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *GitHubAccountTokenNameRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *GitHubAccountTokenNameRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Information about the location of application artifacts stored in GitHub.
@@ -8527,12 +11986,20 @@ type GitHubLocation struct {
 	Repository *string `locationName:"repository" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GitHubLocation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GitHubLocation) GoString() string {
 	return s.String()
 }
@@ -8564,12 +12031,20 @@ type GreenFleetProvisioningOption struct {
 	Action *string `locationName:"action" type:"string" enum:"GreenFleetProvisioningAction"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GreenFleetProvisioningOption) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GreenFleetProvisioningOption) GoString() string {
 	return s.String()
 }
@@ -8578,6 +12053,396 @@ func (s GreenFleetProvisioningOption) GoString() string {
 func (s *GreenFleetProvisioningOption) SetAction(v string) *GreenFleetProvisioningOption {
 	s.Action = &v
 	return s
+}
+
+// No IAM ARN was included in the request. You must use an IAM session ARN or
+// user ARN in the request.
+type IamArnRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamArnRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamArnRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorIamArnRequiredException(v protocol.ResponseMetadata) error {
+	return &IamArnRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IamArnRequiredException) Code() string {
+	return "IamArnRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *IamArnRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IamArnRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *IamArnRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IamArnRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IamArnRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The request included an IAM session ARN that has already been used to register
+// a different instance.
+type IamSessionArnAlreadyRegisteredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamSessionArnAlreadyRegisteredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamSessionArnAlreadyRegisteredException) GoString() string {
+	return s.String()
+}
+
+func newErrorIamSessionArnAlreadyRegisteredException(v protocol.ResponseMetadata) error {
+	return &IamSessionArnAlreadyRegisteredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IamSessionArnAlreadyRegisteredException) Code() string {
+	return "IamSessionArnAlreadyRegisteredException"
+}
+
+// Message returns the exception's message.
+func (s *IamSessionArnAlreadyRegisteredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IamSessionArnAlreadyRegisteredException) OrigErr() error {
+	return nil
+}
+
+func (s *IamSessionArnAlreadyRegisteredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IamSessionArnAlreadyRegisteredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IamSessionArnAlreadyRegisteredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified user ARN is already registered with an on-premises instance.
+type IamUserArnAlreadyRegisteredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamUserArnAlreadyRegisteredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamUserArnAlreadyRegisteredException) GoString() string {
+	return s.String()
+}
+
+func newErrorIamUserArnAlreadyRegisteredException(v protocol.ResponseMetadata) error {
+	return &IamUserArnAlreadyRegisteredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IamUserArnAlreadyRegisteredException) Code() string {
+	return "IamUserArnAlreadyRegisteredException"
+}
+
+// Message returns the exception's message.
+func (s *IamUserArnAlreadyRegisteredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IamUserArnAlreadyRegisteredException) OrigErr() error {
+	return nil
+}
+
+func (s *IamUserArnAlreadyRegisteredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IamUserArnAlreadyRegisteredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IamUserArnAlreadyRegisteredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An user ARN was not specified.
+type IamUserArnRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamUserArnRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamUserArnRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorIamUserArnRequiredException(v protocol.ResponseMetadata) error {
+	return &IamUserArnRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IamUserArnRequiredException) Code() string {
+	return "IamUserArnRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *IamUserArnRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IamUserArnRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *IamUserArnRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IamUserArnRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IamUserArnRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified instance does not exist in the deployment group.
+//
+// Deprecated: This exception is deprecated, use DeploymentTargetDoesNotExistException instead.
+type InstanceDoesNotExistException struct {
+	_            struct{}                  `deprecated:"true" type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorInstanceDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &InstanceDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InstanceDoesNotExistException) Code() string {
+	return "InstanceDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *InstanceDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InstanceDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *InstanceDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InstanceDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InstanceDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The instance ID was not specified.
+//
+// Deprecated: This exception is deprecated, use DeploymentTargetIdRequiredException instead.
+type InstanceIdRequiredException struct {
+	_            struct{}                  `deprecated:"true" type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceIdRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceIdRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorInstanceIdRequiredException(v protocol.ResponseMetadata) error {
+	return &InstanceIdRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InstanceIdRequiredException) Code() string {
+	return "InstanceIdRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *InstanceIdRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InstanceIdRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *InstanceIdRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InstanceIdRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InstanceIdRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Information about an on-premises instance.
@@ -8591,7 +12456,7 @@ type InstanceInfo struct {
 	// The ARN of the IAM session associated with the on-premises instance.
 	IamSessionArn *string `locationName:"iamSessionArn" type:"string"`
 
-	// The IAM user ARN associated with the on-premises instance.
+	// The user ARN associated with the on-premises instance.
 	IamUserArn *string `locationName:"iamUserArn" type:"string"`
 
 	// The ARN of the on-premises instance.
@@ -8607,12 +12472,20 @@ type InstanceInfo struct {
 	Tags []*Tag `locationName:"tags" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceInfo) GoString() string {
 	return s.String()
 }
@@ -8659,6 +12532,263 @@ func (s *InstanceInfo) SetTags(v []*Tag) *InstanceInfo {
 	return s
 }
 
+// The maximum number of allowed on-premises instances in a single call was
+// exceeded.
+type InstanceLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorInstanceLimitExceededException(v protocol.ResponseMetadata) error {
+	return &InstanceLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InstanceLimitExceededException) Code() string {
+	return "InstanceLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *InstanceLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InstanceLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *InstanceLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InstanceLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InstanceLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified on-premises instance name is already registered.
+type InstanceNameAlreadyRegisteredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceNameAlreadyRegisteredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceNameAlreadyRegisteredException) GoString() string {
+	return s.String()
+}
+
+func newErrorInstanceNameAlreadyRegisteredException(v protocol.ResponseMetadata) error {
+	return &InstanceNameAlreadyRegisteredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InstanceNameAlreadyRegisteredException) Code() string {
+	return "InstanceNameAlreadyRegisteredException"
+}
+
+// Message returns the exception's message.
+func (s *InstanceNameAlreadyRegisteredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InstanceNameAlreadyRegisteredException) OrigErr() error {
+	return nil
+}
+
+func (s *InstanceNameAlreadyRegisteredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InstanceNameAlreadyRegisteredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InstanceNameAlreadyRegisteredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An on-premises instance name was not specified.
+type InstanceNameRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceNameRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceNameRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorInstanceNameRequiredException(v protocol.ResponseMetadata) error {
+	return &InstanceNameRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InstanceNameRequiredException) Code() string {
+	return "InstanceNameRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *InstanceNameRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InstanceNameRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *InstanceNameRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InstanceNameRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InstanceNameRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified on-premises instance is not registered.
+type InstanceNotRegisteredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceNotRegisteredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InstanceNotRegisteredException) GoString() string {
+	return s.String()
+}
+
+func newErrorInstanceNotRegisteredException(v protocol.ResponseMetadata) error {
+	return &InstanceNotRegisteredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InstanceNotRegisteredException) Code() string {
+	return "InstanceNotRegisteredException"
+}
+
+// Message returns the exception's message.
+func (s *InstanceNotRegisteredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InstanceNotRegisteredException) OrigErr() error {
+	return nil
+}
+
+func (s *InstanceNotRegisteredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InstanceNotRegisteredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InstanceNotRegisteredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Information about an instance in a deployment.
 //
 // Deprecated: InstanceSummary is deprecated, use DeploymentTarget instead.
@@ -8679,7 +12809,7 @@ type InstanceSummary struct {
 	//    * GREEN: The instance is part of the replacement environment.
 	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
 
-	// A timestamp that indicaties when the instance information was last updated.
+	// A timestamp that indicates when the instance information was last updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// A list of lifecycle events for this instance.
@@ -8701,12 +12831,20 @@ type InstanceSummary struct {
 	Status *string `locationName:"status" deprecated:"true" type:"string" enum:"InstanceStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceSummary) GoString() string {
 	return s.String()
 }
@@ -8768,19 +12906,27 @@ type InstanceTarget struct {
 	// The status an EC2/On-premises deployment's target instance.
 	Status *string `locationName:"status" type:"string" enum:"TargetStatus"`
 
-	// The ARN of the target.
+	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string `locationName:"targetArn" type:"string"`
 
 	// The unique ID of a deployment target that has a type of instanceTarget.
 	TargetId *string `locationName:"targetId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InstanceTarget) GoString() string {
 	return s.String()
 }
@@ -8827,12 +12973,3649 @@ func (s *InstanceTarget) SetTargetId(v string) *InstanceTarget {
 	return s
 }
 
-// Information about the target AWS Lambda function during an AWS Lambda deployment.
+// The format of the alarm configuration is invalid. Possible causes include:
+//
+//   - The alarm list is null.
+//
+//   - The alarm object is null.
+//
+//   - The alarm name is empty or null or exceeds the limit of 255 characters.
+//
+//   - Two alarms with the same name have been specified.
+//
+//   - The alarm configuration is enabled, but the alarm list is empty.
+type InvalidAlarmConfigException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidAlarmConfigException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidAlarmConfigException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidAlarmConfigException(v protocol.ResponseMetadata) error {
+	return &InvalidAlarmConfigException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidAlarmConfigException) Code() string {
+	return "InvalidAlarmConfigException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidAlarmConfigException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidAlarmConfigException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidAlarmConfigException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidAlarmConfigException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidAlarmConfigException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The application name was specified in an invalid format.
+type InvalidApplicationNameException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidApplicationNameException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidApplicationNameException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidApplicationNameException(v protocol.ResponseMetadata) error {
+	return &InvalidApplicationNameException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidApplicationNameException) Code() string {
+	return "InvalidApplicationNameException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidApplicationNameException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidApplicationNameException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidApplicationNameException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidApplicationNameException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidApplicationNameException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified ARN is not in a valid format.
+type InvalidArnException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArnException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArnException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidArnException(v protocol.ResponseMetadata) error {
+	return &InvalidArnException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidArnException) Code() string {
+	return "InvalidArnException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidArnException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidArnException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidArnException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidArnException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidArnException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The automatic rollback configuration was specified in an invalid format.
+// For example, automatic rollback is enabled, but an invalid triggering event
+// type or no event types were listed.
+type InvalidAutoRollbackConfigException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidAutoRollbackConfigException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidAutoRollbackConfigException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidAutoRollbackConfigException(v protocol.ResponseMetadata) error {
+	return &InvalidAutoRollbackConfigException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidAutoRollbackConfigException) Code() string {
+	return "InvalidAutoRollbackConfigException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidAutoRollbackConfigException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidAutoRollbackConfigException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidAutoRollbackConfigException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidAutoRollbackConfigException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidAutoRollbackConfigException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The Auto Scaling group was specified in an invalid format or does not exist.
+type InvalidAutoScalingGroupException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidAutoScalingGroupException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidAutoScalingGroupException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidAutoScalingGroupException(v protocol.ResponseMetadata) error {
+	return &InvalidAutoScalingGroupException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidAutoScalingGroupException) Code() string {
+	return "InvalidAutoScalingGroupException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidAutoScalingGroupException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidAutoScalingGroupException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidAutoScalingGroupException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidAutoScalingGroupException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidAutoScalingGroupException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The configuration for the blue/green deployment group was provided in an
+// invalid format. For information about deployment configuration format, see
+// CreateDeploymentConfig.
+type InvalidBlueGreenDeploymentConfigurationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidBlueGreenDeploymentConfigurationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidBlueGreenDeploymentConfigurationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidBlueGreenDeploymentConfigurationException(v protocol.ResponseMetadata) error {
+	return &InvalidBlueGreenDeploymentConfigurationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidBlueGreenDeploymentConfigurationException) Code() string {
+	return "InvalidBlueGreenDeploymentConfigurationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidBlueGreenDeploymentConfigurationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidBlueGreenDeploymentConfigurationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidBlueGreenDeploymentConfigurationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidBlueGreenDeploymentConfigurationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidBlueGreenDeploymentConfigurationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The bucket name either doesn't exist or was specified in an invalid format.
+type InvalidBucketNameFilterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidBucketNameFilterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidBucketNameFilterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidBucketNameFilterException(v protocol.ResponseMetadata) error {
+	return &InvalidBucketNameFilterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidBucketNameFilterException) Code() string {
+	return "InvalidBucketNameFilterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidBucketNameFilterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidBucketNameFilterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidBucketNameFilterException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidBucketNameFilterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidBucketNameFilterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The computePlatform is invalid. The computePlatform should be Lambda, Server,
+// or ECS.
+type InvalidComputePlatformException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidComputePlatformException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidComputePlatformException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidComputePlatformException(v protocol.ResponseMetadata) error {
+	return &InvalidComputePlatformException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidComputePlatformException) Code() string {
+	return "InvalidComputePlatformException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidComputePlatformException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidComputePlatformException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidComputePlatformException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidComputePlatformException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidComputePlatformException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The deployed state filter was specified in an invalid format.
+type InvalidDeployedStateFilterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeployedStateFilterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeployedStateFilterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeployedStateFilterException(v protocol.ResponseMetadata) error {
+	return &InvalidDeployedStateFilterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeployedStateFilterException) Code() string {
+	return "InvalidDeployedStateFilterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeployedStateFilterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeployedStateFilterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeployedStateFilterException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeployedStateFilterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeployedStateFilterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The deployment configuration name was specified in an invalid format.
+type InvalidDeploymentConfigNameException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentConfigNameException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentConfigNameException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeploymentConfigNameException(v protocol.ResponseMetadata) error {
+	return &InvalidDeploymentConfigNameException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeploymentConfigNameException) Code() string {
+	return "InvalidDeploymentConfigNameException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeploymentConfigNameException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeploymentConfigNameException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeploymentConfigNameException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeploymentConfigNameException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeploymentConfigNameException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The deployment group name was specified in an invalid format.
+type InvalidDeploymentGroupNameException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentGroupNameException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentGroupNameException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeploymentGroupNameException(v protocol.ResponseMetadata) error {
+	return &InvalidDeploymentGroupNameException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeploymentGroupNameException) Code() string {
+	return "InvalidDeploymentGroupNameException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeploymentGroupNameException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeploymentGroupNameException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeploymentGroupNameException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeploymentGroupNameException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeploymentGroupNameException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// At least one of the deployment IDs was specified in an invalid format.
+type InvalidDeploymentIdException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentIdException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentIdException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeploymentIdException(v protocol.ResponseMetadata) error {
+	return &InvalidDeploymentIdException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeploymentIdException) Code() string {
+	return "InvalidDeploymentIdException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeploymentIdException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeploymentIdException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeploymentIdException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeploymentIdException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeploymentIdException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An instance type was specified for an in-place deployment. Instance types
+// are supported for blue/green deployments only.
+type InvalidDeploymentInstanceTypeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentInstanceTypeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentInstanceTypeException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeploymentInstanceTypeException(v protocol.ResponseMetadata) error {
+	return &InvalidDeploymentInstanceTypeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeploymentInstanceTypeException) Code() string {
+	return "InvalidDeploymentInstanceTypeException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeploymentInstanceTypeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeploymentInstanceTypeException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeploymentInstanceTypeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeploymentInstanceTypeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeploymentInstanceTypeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified deployment status doesn't exist or cannot be determined.
+type InvalidDeploymentStatusException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentStatusException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentStatusException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeploymentStatusException(v protocol.ResponseMetadata) error {
+	return &InvalidDeploymentStatusException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeploymentStatusException) Code() string {
+	return "InvalidDeploymentStatusException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeploymentStatusException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeploymentStatusException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeploymentStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeploymentStatusException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeploymentStatusException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An invalid deployment style was specified. Valid deployment types include
+// "IN_PLACE" and "BLUE_GREEN." Valid deployment options include "WITH_TRAFFIC_CONTROL"
+// and "WITHOUT_TRAFFIC_CONTROL."
+type InvalidDeploymentStyleException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentStyleException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentStyleException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeploymentStyleException(v protocol.ResponseMetadata) error {
+	return &InvalidDeploymentStyleException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeploymentStyleException) Code() string {
+	return "InvalidDeploymentStyleException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeploymentStyleException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeploymentStyleException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeploymentStyleException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeploymentStyleException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeploymentStyleException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The target ID provided was not valid.
+type InvalidDeploymentTargetIdException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentTargetIdException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentTargetIdException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeploymentTargetIdException(v protocol.ResponseMetadata) error {
+	return &InvalidDeploymentTargetIdException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeploymentTargetIdException) Code() string {
+	return "InvalidDeploymentTargetIdException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeploymentTargetIdException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeploymentTargetIdException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeploymentTargetIdException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeploymentTargetIdException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeploymentTargetIdException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The wait type is invalid.
+type InvalidDeploymentWaitTypeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentWaitTypeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidDeploymentWaitTypeException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidDeploymentWaitTypeException(v protocol.ResponseMetadata) error {
+	return &InvalidDeploymentWaitTypeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidDeploymentWaitTypeException) Code() string {
+	return "InvalidDeploymentWaitTypeException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidDeploymentWaitTypeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidDeploymentWaitTypeException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidDeploymentWaitTypeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidDeploymentWaitTypeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidDeploymentWaitTypeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but
+// only one of these data types can be used in a single call.
+type InvalidEC2TagCombinationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidEC2TagCombinationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidEC2TagCombinationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidEC2TagCombinationException(v protocol.ResponseMetadata) error {
+	return &InvalidEC2TagCombinationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidEC2TagCombinationException) Code() string {
+	return "InvalidEC2TagCombinationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidEC2TagCombinationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidEC2TagCombinationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidEC2TagCombinationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidEC2TagCombinationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidEC2TagCombinationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The tag was specified in an invalid format.
+type InvalidEC2TagException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidEC2TagException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidEC2TagException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidEC2TagException(v protocol.ResponseMetadata) error {
+	return &InvalidEC2TagException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidEC2TagException) Code() string {
+	return "InvalidEC2TagException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidEC2TagException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidEC2TagException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidEC2TagException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidEC2TagException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidEC2TagException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The Amazon ECS service identifier is not valid.
+type InvalidECSServiceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidECSServiceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidECSServiceException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidECSServiceException(v protocol.ResponseMetadata) error {
+	return &InvalidECSServiceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidECSServiceException) Code() string {
+	return "InvalidECSServiceException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidECSServiceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidECSServiceException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidECSServiceException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidECSServiceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidECSServiceException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The external ID was specified in an invalid format.
+type InvalidExternalIdException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidExternalIdException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidExternalIdException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidExternalIdException(v protocol.ResponseMetadata) error {
+	return &InvalidExternalIdException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidExternalIdException) Code() string {
+	return "InvalidExternalIdException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidExternalIdException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidExternalIdException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidExternalIdException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidExternalIdException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidExternalIdException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An invalid fileExistsBehavior option was specified to determine how CodeDeploy
+// handles files or directories that already exist in a deployment target location,
+// but weren't part of the previous successful deployment. Valid values include
+// "DISALLOW," "OVERWRITE," and "RETAIN."
+type InvalidFileExistsBehaviorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidFileExistsBehaviorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidFileExistsBehaviorException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidFileExistsBehaviorException(v protocol.ResponseMetadata) error {
+	return &InvalidFileExistsBehaviorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidFileExistsBehaviorException) Code() string {
+	return "InvalidFileExistsBehaviorException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidFileExistsBehaviorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidFileExistsBehaviorException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidFileExistsBehaviorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidFileExistsBehaviorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidFileExistsBehaviorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The GitHub token is not valid.
+type InvalidGitHubAccountTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidGitHubAccountTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidGitHubAccountTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidGitHubAccountTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidGitHubAccountTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidGitHubAccountTokenException) Code() string {
+	return "InvalidGitHubAccountTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidGitHubAccountTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidGitHubAccountTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidGitHubAccountTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidGitHubAccountTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidGitHubAccountTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The format of the specified GitHub account connection name is invalid.
+type InvalidGitHubAccountTokenNameException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidGitHubAccountTokenNameException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidGitHubAccountTokenNameException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidGitHubAccountTokenNameException(v protocol.ResponseMetadata) error {
+	return &InvalidGitHubAccountTokenNameException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidGitHubAccountTokenNameException) Code() string {
+	return "InvalidGitHubAccountTokenNameException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidGitHubAccountTokenNameException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidGitHubAccountTokenNameException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidGitHubAccountTokenNameException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidGitHubAccountTokenNameException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidGitHubAccountTokenNameException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The IAM session ARN was specified in an invalid format.
+type InvalidIamSessionArnException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidIamSessionArnException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidIamSessionArnException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidIamSessionArnException(v protocol.ResponseMetadata) error {
+	return &InvalidIamSessionArnException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidIamSessionArnException) Code() string {
+	return "InvalidIamSessionArnException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidIamSessionArnException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidIamSessionArnException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidIamSessionArnException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidIamSessionArnException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidIamSessionArnException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The user ARN was specified in an invalid format.
+type InvalidIamUserArnException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidIamUserArnException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidIamUserArnException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidIamUserArnException(v protocol.ResponseMetadata) error {
+	return &InvalidIamUserArnException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidIamUserArnException) Code() string {
+	return "InvalidIamUserArnException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidIamUserArnException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidIamUserArnException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidIamUserArnException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidIamUserArnException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidIamUserArnException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The IgnoreApplicationStopFailures value is invalid. For Lambda deployments,
+// false is expected. For EC2/On-premises deployments, true or false is expected.
+type InvalidIgnoreApplicationStopFailuresValueException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidIgnoreApplicationStopFailuresValueException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidIgnoreApplicationStopFailuresValueException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidIgnoreApplicationStopFailuresValueException(v protocol.ResponseMetadata) error {
+	return &InvalidIgnoreApplicationStopFailuresValueException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidIgnoreApplicationStopFailuresValueException) Code() string {
+	return "InvalidIgnoreApplicationStopFailuresValueException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidIgnoreApplicationStopFailuresValueException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidIgnoreApplicationStopFailuresValueException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidIgnoreApplicationStopFailuresValueException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidIgnoreApplicationStopFailuresValueException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidIgnoreApplicationStopFailuresValueException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The input was specified in an invalid format.
+type InvalidInputException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInputException(v protocol.ResponseMetadata) error {
+	return &InvalidInputException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInputException) Code() string {
+	return "InvalidInputException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInputException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInputException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInputException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInputException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInputException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The on-premises instance name was specified in an invalid format.
+type InvalidInstanceNameException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInstanceNameException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInstanceNameException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInstanceNameException(v protocol.ResponseMetadata) error {
+	return &InvalidInstanceNameException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInstanceNameException) Code() string {
+	return "InvalidInstanceNameException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInstanceNameException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInstanceNameException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInstanceNameException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInstanceNameException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInstanceNameException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified instance status does not exist.
+type InvalidInstanceStatusException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInstanceStatusException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInstanceStatusException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInstanceStatusException(v protocol.ResponseMetadata) error {
+	return &InvalidInstanceStatusException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInstanceStatusException) Code() string {
+	return "InvalidInstanceStatusException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInstanceStatusException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInstanceStatusException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInstanceStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInstanceStatusException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInstanceStatusException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An invalid instance type was specified for instances in a blue/green deployment.
+// Valid values include "Blue" for an original environment and "Green" for a
+// replacement environment.
+type InvalidInstanceTypeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInstanceTypeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInstanceTypeException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInstanceTypeException(v protocol.ResponseMetadata) error {
+	return &InvalidInstanceTypeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInstanceTypeException) Code() string {
+	return "InvalidInstanceTypeException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInstanceTypeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInstanceTypeException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInstanceTypeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInstanceTypeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInstanceTypeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified key prefix filter was specified in an invalid format.
+type InvalidKeyPrefixFilterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidKeyPrefixFilterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidKeyPrefixFilterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidKeyPrefixFilterException(v protocol.ResponseMetadata) error {
+	return &InvalidKeyPrefixFilterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidKeyPrefixFilterException) Code() string {
+	return "InvalidKeyPrefixFilterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidKeyPrefixFilterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidKeyPrefixFilterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidKeyPrefixFilterException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidKeyPrefixFilterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidKeyPrefixFilterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A lifecycle event hook is invalid. Review the hooks section in your AppSpec
+// file to ensure the lifecycle events and hooks functions are valid.
+type InvalidLifecycleEventHookExecutionIdException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLifecycleEventHookExecutionIdException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLifecycleEventHookExecutionIdException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidLifecycleEventHookExecutionIdException(v protocol.ResponseMetadata) error {
+	return &InvalidLifecycleEventHookExecutionIdException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidLifecycleEventHookExecutionIdException) Code() string {
+	return "InvalidLifecycleEventHookExecutionIdException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidLifecycleEventHookExecutionIdException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidLifecycleEventHookExecutionIdException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidLifecycleEventHookExecutionIdException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidLifecycleEventHookExecutionIdException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidLifecycleEventHookExecutionIdException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The result of a Lambda validation function that verifies a lifecycle event
+// is invalid. It should return Succeeded or Failed.
+type InvalidLifecycleEventHookExecutionStatusException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLifecycleEventHookExecutionStatusException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLifecycleEventHookExecutionStatusException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidLifecycleEventHookExecutionStatusException(v protocol.ResponseMetadata) error {
+	return &InvalidLifecycleEventHookExecutionStatusException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidLifecycleEventHookExecutionStatusException) Code() string {
+	return "InvalidLifecycleEventHookExecutionStatusException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidLifecycleEventHookExecutionStatusException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidLifecycleEventHookExecutionStatusException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidLifecycleEventHookExecutionStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidLifecycleEventHookExecutionStatusException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidLifecycleEventHookExecutionStatusException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An invalid load balancer name, or no load balancer name, was specified.
+type InvalidLoadBalancerInfoException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLoadBalancerInfoException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidLoadBalancerInfoException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidLoadBalancerInfoException(v protocol.ResponseMetadata) error {
+	return &InvalidLoadBalancerInfoException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidLoadBalancerInfoException) Code() string {
+	return "InvalidLoadBalancerInfoException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidLoadBalancerInfoException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidLoadBalancerInfoException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidLoadBalancerInfoException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidLoadBalancerInfoException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidLoadBalancerInfoException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The minimum healthy instance value was specified in an invalid format.
+type InvalidMinimumHealthyHostValueException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidMinimumHealthyHostValueException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidMinimumHealthyHostValueException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidMinimumHealthyHostValueException(v protocol.ResponseMetadata) error {
+	return &InvalidMinimumHealthyHostValueException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidMinimumHealthyHostValueException) Code() string {
+	return "InvalidMinimumHealthyHostValueException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidMinimumHealthyHostValueException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidMinimumHealthyHostValueException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidMinimumHealthyHostValueException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidMinimumHealthyHostValueException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidMinimumHealthyHostValueException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The next token was specified in an invalid format.
+type InvalidNextTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidNextTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidNextTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidNextTokenException) Code() string {
+	return "InvalidNextTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidNextTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidNextTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidNextTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidNextTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidNextTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet,
+// but only one of these data types can be used in a single call.
+type InvalidOnPremisesTagCombinationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidOnPremisesTagCombinationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidOnPremisesTagCombinationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidOnPremisesTagCombinationException(v protocol.ResponseMetadata) error {
+	return &InvalidOnPremisesTagCombinationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidOnPremisesTagCombinationException) Code() string {
+	return "InvalidOnPremisesTagCombinationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidOnPremisesTagCombinationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidOnPremisesTagCombinationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidOnPremisesTagCombinationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidOnPremisesTagCombinationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidOnPremisesTagCombinationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An invalid operation was detected.
+type InvalidOperationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidOperationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidOperationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidOperationException(v protocol.ResponseMetadata) error {
+	return &InvalidOperationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidOperationException) Code() string {
+	return "InvalidOperationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidOperationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidOperationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidOperationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidOperationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The registration status was specified in an invalid format.
+type InvalidRegistrationStatusException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRegistrationStatusException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRegistrationStatusException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidRegistrationStatusException(v protocol.ResponseMetadata) error {
+	return &InvalidRegistrationStatusException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidRegistrationStatusException) Code() string {
+	return "InvalidRegistrationStatusException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidRegistrationStatusException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidRegistrationStatusException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidRegistrationStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidRegistrationStatusException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidRegistrationStatusException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The revision was specified in an invalid format.
+type InvalidRevisionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRevisionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRevisionException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidRevisionException(v protocol.ResponseMetadata) error {
+	return &InvalidRevisionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidRevisionException) Code() string {
+	return "InvalidRevisionException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidRevisionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidRevisionException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidRevisionException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidRevisionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidRevisionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The service role ARN was specified in an invalid format. Or, if an Auto Scaling
+// group was specified, the specified service role does not grant the appropriate
+// permissions to Amazon EC2 Auto Scaling.
+type InvalidRoleException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRoleException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRoleException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidRoleException(v protocol.ResponseMetadata) error {
+	return &InvalidRoleException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidRoleException) Code() string {
+	return "InvalidRoleException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidRoleException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidRoleException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidRoleException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidRoleException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidRoleException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The column name to sort by is either not present or was specified in an invalid
+// format.
+type InvalidSortByException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSortByException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSortByException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidSortByException(v protocol.ResponseMetadata) error {
+	return &InvalidSortByException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidSortByException) Code() string {
+	return "InvalidSortByException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidSortByException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidSortByException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidSortByException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidSortByException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidSortByException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The sort order was specified in an invalid format.
+type InvalidSortOrderException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSortOrderException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSortOrderException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidSortOrderException(v protocol.ResponseMetadata) error {
+	return &InvalidSortOrderException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidSortOrderException) Code() string {
+	return "InvalidSortOrderException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidSortOrderException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidSortOrderException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidSortOrderException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidSortOrderException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidSortOrderException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The tag was specified in an invalid format.
+type InvalidTagException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTagException(v protocol.ResponseMetadata) error {
+	return &InvalidTagException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTagException) Code() string {
+	return "InvalidTagException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTagException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTagException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTagException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTagException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTagException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The tag filter was specified in an invalid format.
+type InvalidTagFilterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagFilterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagFilterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTagFilterException(v protocol.ResponseMetadata) error {
+	return &InvalidTagFilterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTagFilterException) Code() string {
+	return "InvalidTagFilterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTagFilterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTagFilterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTagFilterException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTagFilterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTagFilterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified tags are not valid.
+type InvalidTagsToAddException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagsToAddException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTagsToAddException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTagsToAddException(v protocol.ResponseMetadata) error {
+	return &InvalidTagsToAddException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTagsToAddException) Code() string {
+	return "InvalidTagsToAddException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTagsToAddException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTagsToAddException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTagsToAddException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTagsToAddException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTagsToAddException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The target filter name is invalid.
+type InvalidTargetFilterNameException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTargetFilterNameException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTargetFilterNameException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTargetFilterNameException(v protocol.ResponseMetadata) error {
+	return &InvalidTargetFilterNameException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTargetFilterNameException) Code() string {
+	return "InvalidTargetFilterNameException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTargetFilterNameException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTargetFilterNameException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTargetFilterNameException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTargetFilterNameException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTargetFilterNameException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A target group pair associated with this deployment is not valid.
+type InvalidTargetGroupPairException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTargetGroupPairException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTargetGroupPairException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTargetGroupPairException(v protocol.ResponseMetadata) error {
+	return &InvalidTargetGroupPairException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTargetGroupPairException) Code() string {
+	return "InvalidTargetGroupPairException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTargetGroupPairException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTargetGroupPairException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTargetGroupPairException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTargetGroupPairException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTargetGroupPairException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The target instance configuration is invalid. Possible causes include:
+//
+//   - Configuration data for target instances was entered for an in-place
+//     deployment.
+//
+//   - The limit of 10 tags for a tag type was exceeded.
+//
+//   - The combined length of the tag names exceeded the limit.
+//
+//   - A specified tag is not currently applied to any instances.
+type InvalidTargetInstancesException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTargetInstancesException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTargetInstancesException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTargetInstancesException(v protocol.ResponseMetadata) error {
+	return &InvalidTargetInstancesException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTargetInstancesException) Code() string {
+	return "InvalidTargetInstancesException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTargetInstancesException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTargetInstancesException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTargetInstancesException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTargetInstancesException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTargetInstancesException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified time range was specified in an invalid format.
+type InvalidTimeRangeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTimeRangeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTimeRangeException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTimeRangeException(v protocol.ResponseMetadata) error {
+	return &InvalidTimeRangeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTimeRangeException) Code() string {
+	return "InvalidTimeRangeException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTimeRangeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTimeRangeException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTimeRangeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTimeRangeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTimeRangeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The configuration that specifies how traffic is routed during a deployment
+// is invalid.
+type InvalidTrafficRoutingConfigurationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTrafficRoutingConfigurationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTrafficRoutingConfigurationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTrafficRoutingConfigurationException(v protocol.ResponseMetadata) error {
+	return &InvalidTrafficRoutingConfigurationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTrafficRoutingConfigurationException) Code() string {
+	return "InvalidTrafficRoutingConfigurationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTrafficRoutingConfigurationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTrafficRoutingConfigurationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTrafficRoutingConfigurationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTrafficRoutingConfigurationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTrafficRoutingConfigurationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The trigger was specified in an invalid format.
+type InvalidTriggerConfigException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTriggerConfigException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTriggerConfigException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTriggerConfigException(v protocol.ResponseMetadata) error {
+	return &InvalidTriggerConfigException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTriggerConfigException) Code() string {
+	return "InvalidTriggerConfigException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTriggerConfigException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTriggerConfigException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTriggerConfigException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTriggerConfigException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTriggerConfigException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The UpdateOutdatedInstancesOnly value is invalid. For Lambda deployments,
+// false is expected. For EC2/On-premises deployments, true or false is expected.
+type InvalidUpdateOutdatedInstancesOnlyValueException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidUpdateOutdatedInstancesOnlyValueException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidUpdateOutdatedInstancesOnlyValueException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidUpdateOutdatedInstancesOnlyValueException(v protocol.ResponseMetadata) error {
+	return &InvalidUpdateOutdatedInstancesOnlyValueException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidUpdateOutdatedInstancesOnlyValueException) Code() string {
+	return "InvalidUpdateOutdatedInstancesOnlyValueException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidUpdateOutdatedInstancesOnlyValueException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidUpdateOutdatedInstancesOnlyValueException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidUpdateOutdatedInstancesOnlyValueException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidUpdateOutdatedInstancesOnlyValueException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidUpdateOutdatedInstancesOnlyValueException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The ZonalConfig object is not valid.
+type InvalidZonalDeploymentConfigurationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidZonalDeploymentConfigurationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidZonalDeploymentConfigurationException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidZonalDeploymentConfigurationException(v protocol.ResponseMetadata) error {
+	return &InvalidZonalDeploymentConfigurationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidZonalDeploymentConfigurationException) Code() string {
+	return "InvalidZonalDeploymentConfigurationException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidZonalDeploymentConfigurationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidZonalDeploymentConfigurationException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidZonalDeploymentConfigurationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidZonalDeploymentConfigurationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidZonalDeploymentConfigurationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Information about a Lambda function specified in a deployment.
+type LambdaFunctionInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The version of a Lambda function that production traffic points to.
+	CurrentVersion *string `locationName:"currentVersion" type:"string"`
+
+	// The alias of a Lambda function. For more information, see Lambda Function
+	// Aliases (https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html)
+	// in the Lambda Developer Guide.
+	FunctionAlias *string `locationName:"functionAlias" type:"string"`
+
+	// The name of a Lambda function.
+	FunctionName *string `locationName:"functionName" type:"string"`
+
+	// The version of a Lambda function that production traffic points to after
+	// the Lambda function is deployed.
+	TargetVersion *string `locationName:"targetVersion" type:"string"`
+
+	// The percentage of production traffic that the target version of a Lambda
+	// function receives.
+	TargetVersionWeight *float64 `locationName:"targetVersionWeight" type:"double"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LambdaFunctionInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LambdaFunctionInfo) GoString() string {
+	return s.String()
+}
+
+// SetCurrentVersion sets the CurrentVersion field's value.
+func (s *LambdaFunctionInfo) SetCurrentVersion(v string) *LambdaFunctionInfo {
+	s.CurrentVersion = &v
+	return s
+}
+
+// SetFunctionAlias sets the FunctionAlias field's value.
+func (s *LambdaFunctionInfo) SetFunctionAlias(v string) *LambdaFunctionInfo {
+	s.FunctionAlias = &v
+	return s
+}
+
+// SetFunctionName sets the FunctionName field's value.
+func (s *LambdaFunctionInfo) SetFunctionName(v string) *LambdaFunctionInfo {
+	s.FunctionName = &v
+	return s
+}
+
+// SetTargetVersion sets the TargetVersion field's value.
+func (s *LambdaFunctionInfo) SetTargetVersion(v string) *LambdaFunctionInfo {
+	s.TargetVersion = &v
+	return s
+}
+
+// SetTargetVersionWeight sets the TargetVersionWeight field's value.
+func (s *LambdaFunctionInfo) SetTargetVersionWeight(v float64) *LambdaFunctionInfo {
+	s.TargetVersionWeight = &v
+	return s
+}
+
+// Information about the target Lambda function during an Lambda deployment.
 type LambdaTarget struct {
 	_ struct{} `type:"structure"`
 
 	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// A LambdaFunctionInfo object that describes a target Lambda function.
+	LambdaFunctionInfo *LambdaFunctionInfo `locationName:"lambdaFunctionInfo" type:"structure"`
 
 	// The date and time when the target Lambda function was updated by a deployment.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
@@ -8840,22 +16623,30 @@ type LambdaTarget struct {
 	// The lifecycle events of the deployment to this target Lambda function.
 	LifecycleEvents []*LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
 
-	// The status an AWS Lambda deployment's target Lambda function.
+	// The status an Lambda deployment's target Lambda function.
 	Status *string `locationName:"status" type:"string" enum:"TargetStatus"`
 
-	// The ARN of the target.
+	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string `locationName:"targetArn" type:"string"`
 
 	// The unique ID of a deployment target that has a type of lambdaTarget.
 	TargetId *string `locationName:"targetId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LambdaTarget) GoString() string {
 	return s.String()
 }
@@ -8863,6 +16654,12 @@ func (s LambdaTarget) GoString() string {
 // SetDeploymentId sets the DeploymentId field's value.
 func (s *LambdaTarget) SetDeploymentId(v string) *LambdaTarget {
 	s.DeploymentId = &v
+	return s
+}
+
+// SetLambdaFunctionInfo sets the LambdaFunctionInfo field's value.
+func (s *LambdaTarget) SetLambdaFunctionInfo(v *LambdaFunctionInfo) *LambdaTarget {
+	s.LambdaFunctionInfo = v
 	return s
 }
 
@@ -8916,12 +16713,20 @@ type LastDeploymentInfo struct {
 	Status *string `locationName:"status" type:"string" enum:"DeploymentStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LastDeploymentInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LastDeploymentInfo) GoString() string {
 	return s.String()
 }
@@ -8983,12 +16788,20 @@ type LifecycleEvent struct {
 	Status *string `locationName:"status" type:"string" enum:"LifecycleEventStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LifecycleEvent) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LifecycleEvent) GoString() string {
 	return s.String()
 }
@@ -9023,18 +16836,146 @@ func (s *LifecycleEvent) SetStatus(v string) *LifecycleEvent {
 	return s
 }
 
+// An attempt to return the status of an already completed lifecycle event occurred.
+type LifecycleEventAlreadyCompletedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LifecycleEventAlreadyCompletedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LifecycleEventAlreadyCompletedException) GoString() string {
+	return s.String()
+}
+
+func newErrorLifecycleEventAlreadyCompletedException(v protocol.ResponseMetadata) error {
+	return &LifecycleEventAlreadyCompletedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LifecycleEventAlreadyCompletedException) Code() string {
+	return "LifecycleEventAlreadyCompletedException"
+}
+
+// Message returns the exception's message.
+func (s *LifecycleEventAlreadyCompletedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LifecycleEventAlreadyCompletedException) OrigErr() error {
+	return nil
+}
+
+func (s *LifecycleEventAlreadyCompletedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LifecycleEventAlreadyCompletedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LifecycleEventAlreadyCompletedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The limit for lifecycle hooks was exceeded.
+type LifecycleHookLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LifecycleHookLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LifecycleHookLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLifecycleHookLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LifecycleHookLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LifecycleHookLimitExceededException) Code() string {
+	return "LifecycleHookLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LifecycleHookLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LifecycleHookLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LifecycleHookLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LifecycleHookLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LifecycleHookLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Represents the input of a ListApplicationRevisions operation.
 type ListApplicationRevisionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
 
 	// Whether to list revisions based on whether the revision is the target revision
-	// of an deployment group:
+	// of a deployment group:
 	//
 	//    * include: List revisions that are target revisions of a deployment group.
 	//
@@ -9058,8 +16999,7 @@ type ListApplicationRevisionsInput struct {
 
 	// The column name to use to sort the list results:
 	//
-	//    * registerTime: Sort by the time the revisions were registered with AWS
-	//    CodeDeploy.
+	//    * registerTime: Sort by the time the revisions were registered with CodeDeploy.
 	//
 	//    * firstUsedTime: Sort by the time the revisions were first used in a deployment.
 	//
@@ -9081,12 +17021,20 @@ type ListApplicationRevisionsInput struct {
 	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrder"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationRevisionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationRevisionsInput) GoString() string {
 	return s.String()
 }
@@ -9162,12 +17110,20 @@ type ListApplicationRevisionsOutput struct {
 	Revisions []*RevisionLocation `locationName:"revisions" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationRevisionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationRevisionsOutput) GoString() string {
 	return s.String()
 }
@@ -9193,12 +17149,20 @@ type ListApplicationsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationsInput) GoString() string {
 	return s.String()
 }
@@ -9222,12 +17186,20 @@ type ListApplicationsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListApplicationsOutput) GoString() string {
 	return s.String()
 }
@@ -9253,12 +17225,20 @@ type ListDeploymentConfigsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentConfigsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentConfigsInput) GoString() string {
 	return s.String()
 }
@@ -9283,12 +17263,20 @@ type ListDeploymentConfigsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentConfigsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentConfigsOutput) GoString() string {
 	return s.String()
 }
@@ -9309,8 +17297,8 @@ func (s *ListDeploymentConfigsOutput) SetNextToken(v string) *ListDeploymentConf
 type ListDeploymentGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
@@ -9320,12 +17308,20 @@ type ListDeploymentGroupsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentGroupsInput) GoString() string {
 	return s.String()
 }
@@ -9374,12 +17370,20 @@ type ListDeploymentGroupsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentGroupsOutput) GoString() string {
 	return s.String()
 }
@@ -9424,24 +17428,32 @@ type ListDeploymentInstancesInput struct {
 	//    * Skipped: Include those instances with skipped deployments.
 	//
 	//    * Unknown: Include those instances with deployments in an unknown state.
-	InstanceStatusFilter []*string `locationName:"instanceStatusFilter" type:"list"`
+	InstanceStatusFilter []*string `locationName:"instanceStatusFilter" type:"list" enum:"InstanceStatus"`
 
 	// The set of instances in a blue/green deployment, either those in the original
 	// environment ("BLUE") or those in the replacement environment ("GREEN"), for
 	// which you want to view instance information.
-	InstanceTypeFilter []*string `locationName:"instanceTypeFilter" type:"list"`
+	InstanceTypeFilter []*string `locationName:"instanceTypeFilter" type:"list" enum:"InstanceType"`
 
 	// An identifier returned from the previous list deployment instances call.
 	// It can be used to return the next set of deployment instances in the list.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentInstancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentInstancesInput) GoString() string {
 	return s.String()
 }
@@ -9496,12 +17508,20 @@ type ListDeploymentInstancesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentInstancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentInstancesOutput) GoString() string {
 	return s.String()
 }
@@ -9522,24 +17542,53 @@ type ListDeploymentTargetsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The unique ID of a deployment.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
+	//
+	// DeploymentId is a required field
+	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
 
 	// A token identifier returned from the previous ListDeploymentTargets call.
 	// It can be used to return the next set of deployment targets in the list.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// A key used to filter the returned targets.
+	// A key used to filter the returned targets. The two valid values are:
+	//
+	//    * TargetStatus - A TargetStatus filter string can be Failed, InProgress,
+	//    Pending, Ready, Skipped, Succeeded, or Unknown.
+	//
+	//    * ServerInstanceLabel - A ServerInstanceLabel filter string can be Blue
+	//    or Green.
 	TargetFilters map[string][]*string `locationName:"targetFilters" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentTargetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentTargetsInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListDeploymentTargetsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListDeploymentTargetsInput"}
+	if s.DeploymentId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetDeploymentId sets the DeploymentId field's value.
@@ -9572,12 +17621,20 @@ type ListDeploymentTargetsOutput struct {
 	TargetIds []*string `locationName:"targetIds" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentTargetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentTargetsOutput) GoString() string {
 	return s.String()
 }
@@ -9598,15 +17655,25 @@ func (s *ListDeploymentTargetsOutput) SetTargetIds(v []*string) *ListDeploymentT
 type ListDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
+	//
+	// If applicationName is specified, then deploymentGroupName must be specified.
+	// If it is not specified, then deploymentGroupName must not be specified.
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
 
 	// A time range (start and end) for returning a subset of the list of deployments.
 	CreateTimeRange *TimeRange `locationName:"createTimeRange" type:"structure"`
 
 	// The name of a deployment group for the specified application.
+	//
+	// If deploymentGroupName is specified, then applicationName must be specified.
+	// If it is not specified, then applicationName must not be specified.
 	DeploymentGroupName *string `locationName:"deploymentGroupName" min:"1" type:"string"`
+
+	// The unique ID of an external resource for returning deployments linked to
+	// the external resource.
+	ExternalId *string `locationName:"externalId" type:"string"`
 
 	// A subset of deployments to list by status:
 	//
@@ -9621,19 +17688,27 @@ type ListDeploymentsInput struct {
 	//    * Failed: Include failed deployments in the resulting list.
 	//
 	//    * Stopped: Include stopped deployments in the resulting list.
-	IncludeOnlyStatuses []*string `locationName:"includeOnlyStatuses" type:"list"`
+	IncludeOnlyStatuses []*string `locationName:"includeOnlyStatuses" type:"list" enum:"DeploymentStatus"`
 
 	// An identifier returned from the previous list deployments call. It can be
 	// used to return the next set of deployments in the list.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentsInput) GoString() string {
 	return s.String()
 }
@@ -9672,6 +17747,12 @@ func (s *ListDeploymentsInput) SetDeploymentGroupName(v string) *ListDeployments
 	return s
 }
 
+// SetExternalId sets the ExternalId field's value.
+func (s *ListDeploymentsInput) SetExternalId(v string) *ListDeploymentsInput {
+	s.ExternalId = &v
+	return s
+}
+
 // SetIncludeOnlyStatuses sets the IncludeOnlyStatuses field's value.
 func (s *ListDeploymentsInput) SetIncludeOnlyStatuses(v []*string) *ListDeploymentsInput {
 	s.IncludeOnlyStatuses = v
@@ -9697,12 +17778,20 @@ type ListDeploymentsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDeploymentsOutput) GoString() string {
 	return s.String()
 }
@@ -9728,12 +17817,20 @@ type ListGitHubAccountTokenNamesInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListGitHubAccountTokenNamesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListGitHubAccountTokenNamesInput) GoString() string {
 	return s.String()
 }
@@ -9757,12 +17854,20 @@ type ListGitHubAccountTokenNamesOutput struct {
 	TokenNameList []*string `locationName:"tokenNameList" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListGitHubAccountTokenNamesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListGitHubAccountTokenNamesOutput) GoString() string {
 	return s.String()
 }
@@ -9801,12 +17906,20 @@ type ListOnPremisesInstancesInput struct {
 	TagFilters []*TagFilter `locationName:"tagFilters" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOnPremisesInstancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOnPremisesInstancesInput) GoString() string {
 	return s.String()
 }
@@ -9842,12 +17955,20 @@ type ListOnPremisesInstancesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOnPremisesInstancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOnPremisesInstancesOutput) GoString() string {
 	return s.String()
 }
@@ -9864,23 +17985,137 @@ func (s *ListOnPremisesInstancesOutput) SetNextToken(v string) *ListOnPremisesIn
 	return s
 }
 
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// An identifier returned from the previous ListTagsForResource call. It can
+	// be used to return the next set of applications in the list.
+	NextToken *string `type:"string"`
+
+	// The ARN of a CodeDeploy resource. ListTagsForResource returns all the tags
+	// associated with the resource that is identified by the ResourceArn.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListTagsForResourceInput) SetNextToken(v string) *ListTagsForResourceInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// If a large amount of information is returned, an identifier is also returned.
+	// It can be used in a subsequent list application revisions call to return
+	// the next set of application revisions in the list.
+	NextToken *string `type:"string"`
+
+	// A list of tags returned by ListTagsForResource. The tags are associated with
+	// the resource identified by the input ResourceArn parameter.
+	Tags []*Tag `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListTagsForResourceOutput) SetNextToken(v string) *ListTagsForResourceOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *ListTagsForResourceOutput) SetTags(v []*Tag) *ListTagsForResourceOutput {
+	s.Tags = v
+	return s
+}
+
 // Information about the Elastic Load Balancing load balancer or target group
 // used in a deployment.
+//
+// You can use load balancers and target groups in combination. For example,
+// if you have two Classic Load Balancers, and five target groups tied to an
+// Application Load Balancer, you can specify the two Classic Load Balancers
+// in elbInfoList, and the five target groups in targetGroupInfoList.
 type LoadBalancerInfo struct {
 	_ struct{} `type:"structure"`
 
-	// An array that contains information about the load balancer to use for load
-	// balancing in a deployment. In Elastic Load Balancing, load balancers are
-	// used with Classic Load Balancers.
+	// An array that contains information about the load balancers to use for load
+	// balancing in a deployment. If you're using Classic Load Balancers, specify
+	// those load balancers in this array.
 	//
-	// Adding more than one load balancer to the array is not supported.
+	// You can add up to 10 load balancers to the array.
+	//
+	// If you're using Application Load Balancers or Network Load Balancers, use
+	// the targetGroupInfoList array instead of this one.
 	ElbInfoList []*ELBInfo `locationName:"elbInfoList" type:"list"`
 
-	// An array that contains information about the target group to use for load
-	// balancing in a deployment. In Elastic Load Balancing, target groups are used
-	// with Application Load Balancers.
+	// An array that contains information about the target groups to use for load
+	// balancing in a deployment. If you're using Application Load Balancers and
+	// Network Load Balancers, specify their associated target groups in this array.
 	//
-	// Adding more than one target group to the array is not supported.
+	// You can add up to 10 target groups to the array.
+	//
+	// If you're using Classic Load Balancers, use the elbInfoList array instead
+	// of this one.
 	TargetGroupInfoList []*TargetGroupInfo `locationName:"targetGroupInfoList" type:"list"`
 
 	// The target group pair information. This is an array of TargeGroupPairInfo
@@ -9888,12 +18123,20 @@ type LoadBalancerInfo struct {
 	TargetGroupPairInfoList []*TargetGroupPairInfo `locationName:"targetGroupPairInfoList" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LoadBalancerInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LoadBalancerInfo) GoString() string {
 	return s.String()
 }
@@ -9916,48 +18159,56 @@ func (s *LoadBalancerInfo) SetTargetGroupPairInfoList(v []*TargetGroupPairInfo) 
 	return s
 }
 
-// Information about minimum healthy instance.
+// Information about the minimum number of healthy instances.
 type MinimumHealthyHosts struct {
 	_ struct{} `type:"structure"`
 
 	// The minimum healthy instance type:
 	//
-	//    * HOST_COUNT: The minimum number of healthy instance as an absolute value.
+	//    * HOST_COUNT: The minimum number of healthy instances as an absolute value.
 	//
-	//    * FLEET_PERCENT: The minimum number of healthy instance as a percentage
-	//    of the total number of instance in the deployment.
+	//    * FLEET_PERCENT: The minimum number of healthy instances as a percentage
+	//    of the total number of instances in the deployment.
 	//
-	// In an example of nine instance, if a HOST_COUNT of six is specified, deploy
+	// In an example of nine instances, if a HOST_COUNT of six is specified, deploy
 	// to up to three instances at a time. The deployment is successful if six or
 	// more instances are deployed to successfully. Otherwise, the deployment fails.
-	// If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a
-	// time. The deployment is successful if four or more instance are deployed
+	// If a FLEET_PERCENT of 40 is specified, deploy to up to five instances at
+	// a time. The deployment is successful if four or more instances are deployed
 	// to successfully. Otherwise, the deployment fails.
 	//
-	// In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime
-	// returns a minimum healthy instance type of MOST_CONCURRENCY and a value of
-	// 1. This means a deployment to only one instance at a time. (You cannot set
-	// the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition,
-	// with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that
-	// all instances but one are kept in a healthy state during the deployment.
-	// Although this allows one instance at a time to be taken offline for a new
-	// deployment, it also means that if the deployment to the last instance fails,
-	// the overall deployment is still successful.
+	// In a call to the GetDeploymentConfig, CodeDeployDefault.OneAtATime returns
+	// a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This
+	// means a deployment to only one instance at a time. (You cannot set the type
+	// to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with
+	// CodeDeployDefault.OneAtATime, CodeDeploy attempts to ensure that all instances
+	// but one are kept in a healthy state during the deployment. Although this
+	// allows one instance at a time to be taken offline for a new deployment, it
+	// also means that if the deployment to the last instance fails, the overall
+	// deployment is still successful.
 	//
-	// For more information, see AWS CodeDeploy Instance Health (http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
-	// in the AWS CodeDeploy User Guide.
+	// For more information, see CodeDeploy Instance Health (https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
+	// in the CodeDeploy User Guide.
 	Type *string `locationName:"type" type:"string" enum:"MinimumHealthyHostsType"`
 
 	// The minimum healthy instance value.
 	Value *int64 `locationName:"value" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MinimumHealthyHosts) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MinimumHealthyHosts) GoString() string {
 	return s.String()
 }
@@ -9974,6 +18225,113 @@ func (s *MinimumHealthyHosts) SetValue(v int64) *MinimumHealthyHosts {
 	return s
 }
 
+// Information about the minimum number of healthy instances per Availability
+// Zone.
+type MinimumHealthyHostsPerZone struct {
+	_ struct{} `type:"structure"`
+
+	// The type associated with the MinimumHealthyHostsPerZone option.
+	Type *string `locationName:"type" type:"string" enum:"MinimumHealthyHostsPerZoneType"`
+
+	// The value associated with the MinimumHealthyHostsPerZone option.
+	Value *int64 `locationName:"value" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MinimumHealthyHostsPerZone) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MinimumHealthyHostsPerZone) GoString() string {
+	return s.String()
+}
+
+// SetType sets the Type field's value.
+func (s *MinimumHealthyHostsPerZone) SetType(v string) *MinimumHealthyHostsPerZone {
+	s.Type = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *MinimumHealthyHostsPerZone) SetValue(v int64) *MinimumHealthyHostsPerZone {
+	s.Value = &v
+	return s
+}
+
+// Both an user ARN and an IAM session ARN were included in the request. Use
+// only one ARN type.
+type MultipleIamArnsProvidedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MultipleIamArnsProvidedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MultipleIamArnsProvidedException) GoString() string {
+	return s.String()
+}
+
+func newErrorMultipleIamArnsProvidedException(v protocol.ResponseMetadata) error {
+	return &MultipleIamArnsProvidedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *MultipleIamArnsProvidedException) Code() string {
+	return "MultipleIamArnsProvidedException"
+}
+
+// Message returns the exception's message.
+func (s *MultipleIamArnsProvidedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *MultipleIamArnsProvidedException) OrigErr() error {
+	return nil
+}
+
+func (s *MultipleIamArnsProvidedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *MultipleIamArnsProvidedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *MultipleIamArnsProvidedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Information about groups of on-premises instance tags.
 type OnPremisesTagSet struct {
 	_ struct{} `type:"structure"`
@@ -9984,12 +18342,20 @@ type OnPremisesTagSet struct {
 	OnPremisesTagSetList [][]*TagFilter `locationName:"onPremisesTagSetList" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OnPremisesTagSet) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OnPremisesTagSet) GoString() string {
 	return s.String()
 }
@@ -9998,6 +18364,70 @@ func (s OnPremisesTagSet) GoString() string {
 func (s *OnPremisesTagSet) SetOnPremisesTagSetList(v [][]*TagFilter) *OnPremisesTagSet {
 	s.OnPremisesTagSetList = v
 	return s
+}
+
+// The API used does not support the deployment.
+type OperationNotSupportedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotSupportedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotSupportedException) GoString() string {
+	return s.String()
+}
+
+func newErrorOperationNotSupportedException(v protocol.ResponseMetadata) error {
+	return &OperationNotSupportedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OperationNotSupportedException) Code() string {
+	return "OperationNotSupportedException"
+}
+
+// Message returns the exception's message.
+func (s *OperationNotSupportedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OperationNotSupportedException) OrigErr() error {
+	return nil
+}
+
+func (s *OperationNotSupportedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OperationNotSupportedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OperationNotSupportedException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type PutLifecycleEventHookExecutionStatusInput struct {
@@ -10011,17 +18441,27 @@ type PutLifecycleEventHookExecutionStatusInput struct {
 	// hook is specified in the hooks section of the AppSpec file.
 	LifecycleEventHookExecutionId *string `locationName:"lifecycleEventHookExecutionId" type:"string"`
 
-	// The result of a Lambda function that validates a deployment lifecycle event
-	// (Succeeded or Failed).
+	// The result of a Lambda function that validates a deployment lifecycle event.
+	// The values listed in Valid Values are valid for lifecycle statuses in general;
+	// however, only Succeeded and Failed can be passed successfully in your API
+	// call.
 	Status *string `locationName:"status" type:"string" enum:"LifecycleEventStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutLifecycleEventHookExecutionStatusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutLifecycleEventHookExecutionStatusInput) GoString() string {
 	return s.String()
 }
@@ -10052,12 +18492,20 @@ type PutLifecycleEventHookExecutionStatusOutput struct {
 	LifecycleEventHookExecutionId *string `locationName:"lifecycleEventHookExecutionId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutLifecycleEventHookExecutionStatusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutLifecycleEventHookExecutionStatusOutput) GoString() string {
 	return s.String()
 }
@@ -10068,9 +18516,8 @@ func (s *PutLifecycleEventHookExecutionStatusOutput) SetLifecycleEventHookExecut
 	return s
 }
 
-// A revision for an AWS Lambda deployment that is a YAML-formatted or JSON-formatted
-// string. For AWS Lambda deployments, the revision is the same as the AppSpec
-// file.
+// A revision for an Lambda deployment that is a YAML-formatted or JSON-formatted
+// string. For Lambda deployments, the revision is the same as the AppSpec file.
 //
 // Deprecated: RawString and String revision type are deprecated, use AppSpecContent type instead.
 type RawString struct {
@@ -10085,12 +18532,20 @@ type RawString struct {
 	Sha256 *string `locationName:"sha256" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RawString) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RawString) GoString() string {
 	return s.String()
 }
@@ -10111,8 +18566,8 @@ func (s *RawString) SetSha256(v string) *RawString {
 type RegisterApplicationRevisionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
+	// The name of an CodeDeploy application associated with the user or Amazon
+	// Web Services account.
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
@@ -10127,12 +18582,20 @@ type RegisterApplicationRevisionInput struct {
 	Revision *RevisionLocation `locationName:"revision" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterApplicationRevisionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterApplicationRevisionInput) GoString() string {
 	return s.String()
 }
@@ -10178,12 +18641,20 @@ type RegisterApplicationRevisionOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterApplicationRevisionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterApplicationRevisionOutput) GoString() string {
 	return s.String()
 }
@@ -10195,7 +18666,7 @@ type RegisterOnPremisesInstanceInput struct {
 	// The ARN of the IAM session to associate with the on-premises instance.
 	IamSessionArn *string `locationName:"iamSessionArn" type:"string"`
 
-	// The ARN of the IAM user to associate with the on-premises instance.
+	// The ARN of the user to associate with the on-premises instance.
 	IamUserArn *string `locationName:"iamUserArn" type:"string"`
 
 	// The name of the on-premises instance to register.
@@ -10204,12 +18675,20 @@ type RegisterOnPremisesInstanceInput struct {
 	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterOnPremisesInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterOnPremisesInstanceInput) GoString() string {
 	return s.String()
 }
@@ -10249,14 +18728,64 @@ type RegisterOnPremisesInstanceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterOnPremisesInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterOnPremisesInstanceOutput) GoString() string {
 	return s.String()
+}
+
+// Information about deployments related to the specified deployment.
+type RelatedDeployments struct {
+	_ struct{} `type:"structure"`
+
+	// The deployment IDs of 'auto-update outdated instances' deployments triggered
+	// by this deployment.
+	AutoUpdateOutdatedInstancesDeploymentIds []*string `locationName:"autoUpdateOutdatedInstancesDeploymentIds" type:"list"`
+
+	// The deployment ID of the root deployment that triggered this deployment.
+	AutoUpdateOutdatedInstancesRootDeploymentId *string `locationName:"autoUpdateOutdatedInstancesRootDeploymentId" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RelatedDeployments) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RelatedDeployments) GoString() string {
+	return s.String()
+}
+
+// SetAutoUpdateOutdatedInstancesDeploymentIds sets the AutoUpdateOutdatedInstancesDeploymentIds field's value.
+func (s *RelatedDeployments) SetAutoUpdateOutdatedInstancesDeploymentIds(v []*string) *RelatedDeployments {
+	s.AutoUpdateOutdatedInstancesDeploymentIds = v
+	return s
+}
+
+// SetAutoUpdateOutdatedInstancesRootDeploymentId sets the AutoUpdateOutdatedInstancesRootDeploymentId field's value.
+func (s *RelatedDeployments) SetAutoUpdateOutdatedInstancesRootDeploymentId(v string) *RelatedDeployments {
+	s.AutoUpdateOutdatedInstancesRootDeploymentId = &v
+	return s
 }
 
 // Represents the input of a RemoveTagsFromOnPremisesInstances operation.
@@ -10274,12 +18803,20 @@ type RemoveTagsFromOnPremisesInstancesInput struct {
 	Tags []*Tag `locationName:"tags" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromOnPremisesInstancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromOnPremisesInstancesInput) GoString() string {
 	return s.String()
 }
@@ -10316,14 +18853,214 @@ type RemoveTagsFromOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromOnPremisesInstancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromOnPremisesInstancesOutput) GoString() string {
 	return s.String()
+}
+
+// The ARN of a resource is required, but was not found.
+type ResourceArnRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceArnRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceArnRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceArnRequiredException(v protocol.ResponseMetadata) error {
+	return &ResourceArnRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceArnRequiredException) Code() string {
+	return "ResourceArnRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceArnRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceArnRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceArnRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceArnRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceArnRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified resource could not be validated.
+type ResourceValidationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceValidationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceValidationException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceValidationException(v protocol.ResponseMetadata) error {
+	return &ResourceValidationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceValidationException) Code() string {
+	return "ResourceValidationException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceValidationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceValidationException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceValidationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceValidationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The named revision does not exist with the user or Amazon Web Services account.
+type RevisionDoesNotExistException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RevisionDoesNotExistException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RevisionDoesNotExistException) GoString() string {
+	return s.String()
+}
+
+func newErrorRevisionDoesNotExistException(v protocol.ResponseMetadata) error {
+	return &RevisionDoesNotExistException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RevisionDoesNotExistException) Code() string {
+	return "RevisionDoesNotExistException"
+}
+
+// Message returns the exception's message.
+func (s *RevisionDoesNotExistException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RevisionDoesNotExistException) OrigErr() error {
+	return nil
+}
+
+func (s *RevisionDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RevisionDoesNotExistException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RevisionDoesNotExistException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Information about an application revision.
@@ -10338,12 +19075,20 @@ type RevisionInfo struct {
 	RevisionLocation *RevisionLocation `locationName:"revisionLocation" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevisionInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevisionInfo) GoString() string {
 	return s.String()
 }
@@ -10364,8 +19109,8 @@ func (s *RevisionInfo) SetRevisionLocation(v *RevisionLocation) *RevisionInfo {
 type RevisionLocation struct {
 	_ struct{} `type:"structure"`
 
-	// The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment.
-	// The content is formatted as JSON or YAML and stored as a RawString.
+	// The content of an AppSpec file for an Lambda or Amazon ECS deployment. The
+	// content is formatted as JSON or YAML and stored as a RawString.
 	AppSpecContent *AppSpecContent `locationName:"appSpecContent" type:"structure"`
 
 	// Information about the location of application artifacts stored in GitHub.
@@ -10378,24 +19123,36 @@ type RevisionLocation struct {
 	//    * GitHub: An application revision stored in GitHub (EC2/On-premises deployments
 	//    only).
 	//
-	//    * String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments
+	//    * String: A YAML-formatted or JSON-formatted string (Lambda deployments
 	//    only).
+	//
+	//    * AppSpecContent: An AppSpecContent object that contains the contents
+	//    of an AppSpec file for an Lambda or Amazon ECS deployment. The content
+	//    is formatted as JSON or YAML stored as a RawString.
 	RevisionType *string `locationName:"revisionType" type:"string" enum:"RevisionLocationType"`
 
 	// Information about the location of a revision stored in Amazon S3.
 	S3Location *S3Location `locationName:"s3Location" type:"structure"`
 
-	// Information about the location of an AWS Lambda deployment revision stored
-	// as a RawString.
+	// Information about the location of an Lambda deployment revision stored as
+	// a RawString.
 	String_ *RawString `locationName:"string" deprecated:"true" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevisionLocation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevisionLocation) GoString() string {
 	return s.String()
 }
@@ -10430,6 +19187,134 @@ func (s *RevisionLocation) SetString_(v *RawString) *RevisionLocation {
 	return s
 }
 
+// The revision ID was not specified.
+type RevisionRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RevisionRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RevisionRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorRevisionRequiredException(v protocol.ResponseMetadata) error {
+	return &RevisionRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RevisionRequiredException) Code() string {
+	return "RevisionRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *RevisionRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RevisionRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *RevisionRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RevisionRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RevisionRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The role ID was not specified.
+type RoleRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RoleRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RoleRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorRoleRequiredException(v protocol.ResponseMetadata) error {
+	return &RoleRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RoleRequiredException) Code() string {
+	return "RoleRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *RoleRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RoleRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *RoleRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RoleRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RoleRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Information about a deployment rollback.
 type RollbackInfo struct {
 	_ struct{} `type:"structure"`
@@ -10446,12 +19331,20 @@ type RollbackInfo struct {
 	RollbackTriggeringDeploymentId *string `locationName:"rollbackTriggeringDeploymentId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RollbackInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RollbackInfo) GoString() string {
 	return s.String()
 }
@@ -10489,6 +19382,10 @@ type S3Location struct {
 	//    * tgz: A compressed tar archive file.
 	//
 	//    * zip: A zip archive file.
+	//
+	//    * YAML: A YAML-formatted file.
+	//
+	//    * JSON: A JSON-formatted file.
 	BundleType *string `locationName:"bundleType" type:"string" enum:"BundleType"`
 
 	// The ETag of the Amazon S3 object that represents the bundled artifacts for
@@ -10510,12 +19407,20 @@ type S3Location struct {
 	Version *string `locationName:"version" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3Location) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3Location) GoString() string {
 	return s.String()
 }
@@ -10558,12 +19463,20 @@ type SkipWaitTimeForInstanceTerminationInput struct {
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkipWaitTimeForInstanceTerminationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkipWaitTimeForInstanceTerminationInput) GoString() string {
 	return s.String()
 }
@@ -10578,12 +19491,20 @@ type SkipWaitTimeForInstanceTerminationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkipWaitTimeForInstanceTerminationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SkipWaitTimeForInstanceTerminationOutput) GoString() string {
 	return s.String()
 }
@@ -10603,12 +19524,20 @@ type StopDeploymentInput struct {
 	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDeploymentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDeploymentInput) GoString() string {
 	return s.String()
 }
@@ -10653,12 +19582,20 @@ type StopDeploymentOutput struct {
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDeploymentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopDeploymentOutput) GoString() string {
 	return s.String()
 }
@@ -10686,12 +19623,20 @@ type Tag struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -10728,12 +19673,20 @@ type TagFilter struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagFilter) GoString() string {
 	return s.String()
 }
@@ -10756,6 +19709,285 @@ func (s *TagFilter) SetValue(v string) *TagFilter {
 	return s
 }
 
+// The maximum allowed number of tags was exceeded.
+type TagLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorTagLimitExceededException(v protocol.ResponseMetadata) error {
+	return &TagLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TagLimitExceededException) Code() string {
+	return "TagLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *TagLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TagLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *TagLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TagLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TagLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A tag was not specified.
+type TagRequiredException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagRequiredException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagRequiredException) GoString() string {
+	return s.String()
+}
+
+func newErrorTagRequiredException(v protocol.ResponseMetadata) error {
+	return &TagRequiredException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TagRequiredException) Code() string {
+	return "TagRequiredException"
+}
+
+// Message returns the exception's message.
+func (s *TagRequiredException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TagRequiredException) OrigErr() error {
+	return nil
+}
+
+func (s *TagRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TagRequiredException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TagRequiredException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of a resource, such as a CodeDeploy application or deployment group.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"1" type:"string" required:"true"`
+
+	// A list of tags that TagResource associates with a resource. The resource
+	// is identified by the ResourceArn input parameter.
+	//
+	// Tags is a required field
+	Tags []*Tag `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+	if s.Tags == nil {
+		invalidParams.Add(request.NewErrParamRequired("Tags"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *TagResourceInput) SetTags(v []*Tag) *TagResourceInput {
+	s.Tags = v
+	return s
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// The number of tag groups included in the tag set list exceeded the maximum
+// allowed limit of 3.
+type TagSetListLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagSetListLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TagSetListLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorTagSetListLimitExceededException(v protocol.ResponseMetadata) error {
+	return &TagSetListLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TagSetListLimitExceededException) Code() string {
+	return "TagSetListLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *TagSetListLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TagSetListLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *TagSetListLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TagSetListLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TagSetListLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Information about a target group in Elastic Load Balancing to use in a deployment.
 // Instances are registered as targets in a target group, and traffic is routed
 // to the target group.
@@ -10771,12 +20003,20 @@ type TargetGroupInfo struct {
 	Name *string `locationName:"name" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TargetGroupInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TargetGroupInfo) GoString() string {
 	return s.String()
 }
@@ -10807,12 +20047,20 @@ type TargetGroupPairInfo struct {
 	TestTrafficRoute *TrafficRoute `locationName:"testTrafficRoute" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TargetGroupPairInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TargetGroupPairInfo) GoString() string {
 	return s.String()
 }
@@ -10844,8 +20092,8 @@ type TargetInstances struct {
 	// for a blue/green deployment.
 	AutoScalingGroups []*string `locationName:"autoScalingGroups" type:"list"`
 
-	// Information about the groups of EC2 instance tags that an instance must be
-	// identified by in order for it to be included in the replacement environment
+	// Information about the groups of Amazon EC2 instance tags that an instance
+	// must be identified by in order for it to be included in the replacement environment
 	// for a blue/green deployment. Cannot be used in the same call as tagFilters.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
@@ -10855,12 +20103,20 @@ type TargetInstances struct {
 	TagFilters []*EC2TagFilter `locationName:"tagFilters" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TargetInstances) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TargetInstances) GoString() string {
 	return s.String()
 }
@@ -10883,9 +20139,74 @@ func (s *TargetInstances) SetTagFilters(v []*EC2TagFilter) *TargetInstances {
 	return s
 }
 
+// An API function was called too frequently.
+type ThrottlingException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) GoString() string {
+	return s.String()
+}
+
+func newErrorThrottlingException(v protocol.ResponseMetadata) error {
+	return &ThrottlingException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ThrottlingException) Code() string {
+	return "ThrottlingException"
+}
+
+// Message returns the exception's message.
+func (s *ThrottlingException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ThrottlingException) OrigErr() error {
+	return nil
+}
+
+func (s *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ThrottlingException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ThrottlingException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A configuration that shifts traffic from one version of a Lambda function
-// to another in two increments. The original and target Lambda function versions
-// are specified in the deployment's AppSpec file.
+// or Amazon ECS task set to another in two increments. The original and target
+// Lambda function versions or ECS task sets are specified in the deployment's
+// AppSpec file.
 type TimeBasedCanary struct {
 	_ struct{} `type:"structure"`
 
@@ -10898,12 +20219,20 @@ type TimeBasedCanary struct {
 	CanaryPercentage *int64 `locationName:"canaryPercentage" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeBasedCanary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeBasedCanary) GoString() string {
 	return s.String()
 }
@@ -10921,9 +20250,9 @@ func (s *TimeBasedCanary) SetCanaryPercentage(v int64) *TimeBasedCanary {
 }
 
 // A configuration that shifts traffic from one version of a Lambda function
-// to another in equal increments, with an equal number of minutes between each
-// increment. The original and target Lambda function versions are specified
-// in the deployment's AppSpec file.
+// or ECS task set to another in equal increments, with an equal number of minutes
+// between each increment. The original and target Lambda function versions
+// or ECS task sets are specified in the deployment's AppSpec file.
 type TimeBasedLinear struct {
 	_ struct{} `type:"structure"`
 
@@ -10936,12 +20265,20 @@ type TimeBasedLinear struct {
 	LinearPercentage *int64 `locationName:"linearPercentage" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeBasedLinear) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeBasedLinear) GoString() string {
 	return s.String()
 }
@@ -10973,12 +20310,20 @@ type TimeRange struct {
 	Start *time.Time `locationName:"start" type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeRange) GoString() string {
 	return s.String()
 }
@@ -11000,18 +20345,26 @@ func (s *TimeRange) SetStart(v time.Time) *TimeRange {
 type TrafficRoute struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of one listener. The listener identifies the route between a target
-	// group and a load balancer. This is an array of strings with a maximum size
-	// of one.
+	// The Amazon Resource Name (ARN) of one listener. The listener identifies the
+	// route between a target group and a load balancer. This is an array of strings
+	// with a maximum size of one.
 	ListenerArns []*string `locationName:"listenerArns" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TrafficRoute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TrafficRoute) GoString() string {
 	return s.String()
 }
@@ -11023,32 +20376,43 @@ func (s *TrafficRoute) SetListenerArns(v []*string) *TrafficRoute {
 }
 
 // The configuration that specifies how traffic is shifted from one version
-// of a Lambda function to another version during an AWS Lambda deployment.
+// of a Lambda function to another version during an Lambda deployment, or from
+// one Amazon ECS task set to another during an Amazon ECS deployment.
 type TrafficRoutingConfig struct {
 	_ struct{} `type:"structure"`
 
 	// A configuration that shifts traffic from one version of a Lambda function
-	// to another in two increments. The original and target Lambda function versions
-	// are specified in the deployment's AppSpec file.
+	// or ECS task set to another in two increments. The original and target Lambda
+	// function versions or ECS task sets are specified in the deployment's AppSpec
+	// file.
 	TimeBasedCanary *TimeBasedCanary `locationName:"timeBasedCanary" type:"structure"`
 
 	// A configuration that shifts traffic from one version of a Lambda function
-	// to another in equal increments, with an equal number of minutes between each
-	// increment. The original and target Lambda function versions are specified
-	// in the deployment's AppSpec file.
+	// or Amazon ECS task set to another in equal increments, with an equal number
+	// of minutes between each increment. The original and target Lambda function
+	// versions or Amazon ECS task sets are specified in the deployment's AppSpec
+	// file.
 	TimeBasedLinear *TimeBasedLinear `locationName:"timeBasedLinear" type:"structure"`
 
 	// The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by
-	// a deployment configuration .
+	// a deployment configuration.
 	Type *string `locationName:"type" type:"string" enum:"TrafficRoutingType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TrafficRoutingConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TrafficRoutingConfig) GoString() string {
 	return s.String()
 }
@@ -11076,22 +20440,31 @@ type TriggerConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The event type or types for which notifications are triggered.
-	TriggerEvents []*string `locationName:"triggerEvents" type:"list"`
+	TriggerEvents []*string `locationName:"triggerEvents" type:"list" enum:"TriggerEventType"`
 
 	// The name of the notification trigger.
 	TriggerName *string `locationName:"triggerName" type:"string"`
 
-	// The ARN of the Amazon Simple Notification Service topic through which notifications
-	// about deployment or instance events are sent.
+	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
+	// topic through which notifications about deployment or instance events are
+	// sent.
 	TriggerTargetArn *string `locationName:"triggerTargetArn" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TriggerConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TriggerConfig) GoString() string {
 	return s.String()
 }
@@ -11114,6 +20487,221 @@ func (s *TriggerConfig) SetTriggerTargetArn(v string) *TriggerConfig {
 	return s
 }
 
+// The maximum allowed number of triggers was exceeded.
+type TriggerTargetsLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TriggerTargetsLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TriggerTargetsLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorTriggerTargetsLimitExceededException(v protocol.ResponseMetadata) error {
+	return &TriggerTargetsLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TriggerTargetsLimitExceededException) Code() string {
+	return "TriggerTargetsLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *TriggerTargetsLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TriggerTargetsLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *TriggerTargetsLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TriggerTargetsLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TriggerTargetsLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A call was submitted that is not supported for the specified deployment type.
+type UnsupportedActionForDeploymentTypeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedActionForDeploymentTypeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedActionForDeploymentTypeException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedActionForDeploymentTypeException(v protocol.ResponseMetadata) error {
+	return &UnsupportedActionForDeploymentTypeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedActionForDeploymentTypeException) Code() string {
+	return "UnsupportedActionForDeploymentTypeException"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedActionForDeploymentTypeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedActionForDeploymentTypeException) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedActionForDeploymentTypeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedActionForDeploymentTypeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedActionForDeploymentTypeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) that specifies from which resource to disassociate
+	// the tags with the keys in the TagKeys input parameter.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"1" type:"string" required:"true"`
+
+	// A list of keys of Tag objects. The Tag objects identified by the keys are
+	// disassociated from the resource specified by the ResourceArn input parameter.
+	//
+	// TagKeys is a required field
+	TagKeys []*string `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+	if s.TagKeys == nil {
+		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTagKeys sets the TagKeys field's value.
+func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+	s.TagKeys = v
+	return s
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
 // Represents the input of an UpdateApplication operation.
 type UpdateApplicationInput struct {
 	_ struct{} `type:"structure"`
@@ -11125,12 +20713,20 @@ type UpdateApplicationInput struct {
 	NewApplicationName *string `locationName:"newApplicationName" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationInput) GoString() string {
 	return s.String()
 }
@@ -11167,12 +20763,20 @@ type UpdateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateApplicationOutput) GoString() string {
 	return s.String()
 }
@@ -11195,9 +20799,16 @@ type UpdateDeploymentGroupInput struct {
 	AutoRollbackConfiguration *AutoRollbackConfiguration `locationName:"autoRollbackConfiguration" type:"structure"`
 
 	// The replacement list of Auto Scaling groups to be included in the deployment
-	// group, if you want to change them. To keep the Auto Scaling groups, enter
-	// their names. To remove Auto Scaling groups, do not enter any Auto Scaling
-	// group names.
+	// group, if you want to change them.
+	//
+	//    * To keep the Auto Scaling groups, enter their names or do not specify
+	//    this parameter.
+	//
+	//    * To remove Auto Scaling groups, specify a non-null empty list of Auto
+	//    Scaling group names to detach all CodeDeploy-managed Auto Scaling lifecycle
+	//    hooks. For examples, see Amazon EC2 instances in an Amazon EC2 Auto Scaling
+	//    group fail to launch and receive the error "Heartbeat Timeout" (https://docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat)
+	//    in the CodeDeploy User Guide.
 	AutoScalingGroups []*string `locationName:"autoScalingGroups" type:"list"`
 
 	// Information about blue/green deployment options for a deployment group.
@@ -11222,7 +20833,7 @@ type UpdateDeploymentGroupInput struct {
 	Ec2TagFilters []*EC2TagFilter `locationName:"ec2TagFilters" type:"list"`
 
 	// Information about groups of tags applied to on-premises instances. The deployment
-	// group includes only EC2 instances identified by all the tag groups.
+	// group includes only Amazon EC2 instances identified by all the tag groups.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
 	// The target Amazon ECS services in the deployment group. This applies only
@@ -11246,21 +20857,59 @@ type UpdateDeploymentGroupInput struct {
 	// only on-premises instances identified by all the tag groups.
 	OnPremisesTagSet *OnPremisesTagSet `locationName:"onPremisesTagSet" type:"structure"`
 
+	// Indicates what happens when new Amazon EC2 instances are launched mid-deployment
+	// and do not receive the deployed application revision.
+	//
+	// If this option is set to UPDATE or is unspecified, CodeDeploy initiates one
+	// or more 'auto-update outdated instances' deployments to apply the deployed
+	// application revision to the new Amazon EC2 instances.
+	//
+	// If this option is set to IGNORE, CodeDeploy does not initiate a deployment
+	// to update the new Amazon EC2 instances. This may result in instances having
+	// different revisions.
+	OutdatedInstancesStrategy *string `locationName:"outdatedInstancesStrategy" type:"string" enum:"OutdatedInstancesStrategy"`
+
 	// A replacement ARN for the service role, if you want to change it.
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string"`
 
+	// This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto
+	// Scaling. For more information, see Integrating CodeDeploy with Amazon EC2
+	// Auto Scaling (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html)
+	// in the CodeDeploy User Guide.
+	//
+	// Set terminationHookEnabled to true to have CodeDeploy install a termination
+	// hook into your Auto Scaling group when you update a deployment group. When
+	// this hook is installed, CodeDeploy will perform termination deployments.
+	//
+	// For information about termination deployments, see Enabling termination deployments
+	// during Auto Scaling scale-in events (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable)
+	// in the CodeDeploy User Guide.
+	//
+	// For more information about Auto Scaling scale-in events, see the Scale in
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html#as-lifecycle-scale-in)
+	// topic in the Amazon EC2 Auto Scaling User Guide.
+	TerminationHookEnabled *bool `locationName:"terminationHookEnabled" type:"boolean"`
+
 	// Information about triggers to change when the deployment group is updated.
-	// For examples, see Modify Triggers in an AWS CodeDeploy Deployment Group (http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
-	// in the AWS CodeDeploy User Guide.
+	// For examples, see Edit a Trigger in a CodeDeploy Deployment Group (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
+	// in the CodeDeploy User Guide.
 	TriggerConfigurations []*TriggerConfig `locationName:"triggerConfigurations" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDeploymentGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDeploymentGroupInput) GoString() string {
 	return s.String()
 }
@@ -11383,9 +21032,21 @@ func (s *UpdateDeploymentGroupInput) SetOnPremisesTagSet(v *OnPremisesTagSet) *U
 	return s
 }
 
+// SetOutdatedInstancesStrategy sets the OutdatedInstancesStrategy field's value.
+func (s *UpdateDeploymentGroupInput) SetOutdatedInstancesStrategy(v string) *UpdateDeploymentGroupInput {
+	s.OutdatedInstancesStrategy = &v
+	return s
+}
+
 // SetServiceRoleArn sets the ServiceRoleArn field's value.
 func (s *UpdateDeploymentGroupInput) SetServiceRoleArn(v string) *UpdateDeploymentGroupInput {
 	s.ServiceRoleArn = &v
+	return s
+}
+
+// SetTerminationHookEnabled sets the TerminationHookEnabled field's value.
+func (s *UpdateDeploymentGroupInput) SetTerminationHookEnabled(v bool) *UpdateDeploymentGroupInput {
+	s.TerminationHookEnabled = &v
 	return s
 }
 
@@ -11400,19 +21061,27 @@ type UpdateDeploymentGroupOutput struct {
 	_ struct{} `type:"structure"`
 
 	// If the output contains no data, and the corresponding deployment group contained
-	// at least one Auto Scaling group, AWS CodeDeploy successfully removed all
-	// corresponding Auto Scaling lifecycle event hooks from the AWS account. If
-	// the output contains data, AWS CodeDeploy could not remove some Auto Scaling
-	// lifecycle event hooks from the AWS account.
+	// at least one Auto Scaling group, CodeDeploy successfully removed all corresponding
+	// Auto Scaling lifecycle event hooks from the Amazon Web Services account.
+	// If the output contains data, CodeDeploy could not remove some Auto Scaling
+	// lifecycle event hooks from the Amazon Web Services account.
 	HooksNotCleanedUp []*AutoScalingGroup `locationName:"hooksNotCleanedUp" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDeploymentGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDeploymentGroupOutput) GoString() string {
 	return s.String()
 }
@@ -11420,6 +21089,97 @@ func (s UpdateDeploymentGroupOutput) GoString() string {
 // SetHooksNotCleanedUp sets the HooksNotCleanedUp field's value.
 func (s *UpdateDeploymentGroupOutput) SetHooksNotCleanedUp(v []*AutoScalingGroup) *UpdateDeploymentGroupOutput {
 	s.HooksNotCleanedUp = v
+	return s
+}
+
+// Configure the ZonalConfig object if you want CodeDeploy to deploy your application
+// to one Availability Zone (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones)
+// at a time, within an Amazon Web Services Region. By deploying to one Availability
+// Zone at a time, you can expose your deployment to a progressively larger
+// audience as confidence in the deployment's performance and viability grows.
+// If you don't configure the ZonalConfig object, CodeDeploy deploys your application
+// to a random selection of hosts across a Region.
+//
+// For more information about the zonal configuration feature, see zonal configuration
+// (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+// in the CodeDeploy User Guide.
+type ZonalConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing
+	// a deployment to the first Availability Zone. CodeDeploy will wait this amount
+	// of time before starting a deployment to the second Availability Zone. You
+	// might set this option if you want to allow extra bake time for the first
+	// Availability Zone. If you don't specify a value for firstZoneMonitorDurationInSeconds,
+	// then CodeDeploy uses the monitorDurationInSeconds value for the first Availability
+	// Zone.
+	//
+	// For more information about the zonal configuration feature, see zonal configuration
+	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+	// in the CodeDeploy User Guide.
+	FirstZoneMonitorDurationInSeconds *int64 `locationName:"firstZoneMonitorDurationInSeconds" type:"long"`
+
+	// The number or percentage of instances that must remain available per Availability
+	// Zone during a deployment. This option works in conjunction with the MinimumHealthyHosts
+	// option. For more information, see About the minimum number of healthy hosts
+	// per Availability Zone (https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html#minimum-healthy-hosts-az)
+	// in the CodeDeploy User Guide.
+	//
+	// If you don't specify the minimumHealthyHostsPerZone option, then CodeDeploy
+	// uses a default value of 0 percent.
+	//
+	// For more information about the zonal configuration feature, see zonal configuration
+	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+	// in the CodeDeploy User Guide.
+	MinimumHealthyHostsPerZone *MinimumHealthyHostsPerZone `locationName:"minimumHealthyHostsPerZone" type:"structure"`
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing
+	// a deployment to an Availability Zone. CodeDeploy will wait this amount of
+	// time before starting a deployment to the next Availability Zone. Consider
+	// adding a monitor duration to give the deployment some time to prove itself
+	// (or 'bake') in one Availability Zone before it is released in the next zone.
+	// If you don't specify a monitorDurationInSeconds, CodeDeploy starts deploying
+	// to the next Availability Zone immediately.
+	//
+	// For more information about the zonal configuration feature, see zonal configuration
+	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+	// in the CodeDeploy User Guide.
+	MonitorDurationInSeconds *int64 `locationName:"monitorDurationInSeconds" type:"long"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZonalConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ZonalConfig) GoString() string {
+	return s.String()
+}
+
+// SetFirstZoneMonitorDurationInSeconds sets the FirstZoneMonitorDurationInSeconds field's value.
+func (s *ZonalConfig) SetFirstZoneMonitorDurationInSeconds(v int64) *ZonalConfig {
+	s.FirstZoneMonitorDurationInSeconds = &v
+	return s
+}
+
+// SetMinimumHealthyHostsPerZone sets the MinimumHealthyHostsPerZone field's value.
+func (s *ZonalConfig) SetMinimumHealthyHostsPerZone(v *MinimumHealthyHostsPerZone) *ZonalConfig {
+	s.MinimumHealthyHostsPerZone = v
+	return s
+}
+
+// SetMonitorDurationInSeconds sets the MonitorDurationInSeconds field's value.
+func (s *ZonalConfig) SetMonitorDurationInSeconds(v int64) *ZonalConfig {
+	s.MonitorDurationInSeconds = &v
 	return s
 }
 
@@ -11434,6 +21194,15 @@ const (
 	ApplicationRevisionSortByLastUsedTime = "lastUsedTime"
 )
 
+// ApplicationRevisionSortBy_Values returns all elements of the ApplicationRevisionSortBy enum
+func ApplicationRevisionSortBy_Values() []string {
+	return []string{
+		ApplicationRevisionSortByRegisterTime,
+		ApplicationRevisionSortByFirstUsedTime,
+		ApplicationRevisionSortByLastUsedTime,
+	}
+}
+
 const (
 	// AutoRollbackEventDeploymentFailure is a AutoRollbackEvent enum value
 	AutoRollbackEventDeploymentFailure = "DEPLOYMENT_FAILURE"
@@ -11444,6 +21213,15 @@ const (
 	// AutoRollbackEventDeploymentStopOnRequest is a AutoRollbackEvent enum value
 	AutoRollbackEventDeploymentStopOnRequest = "DEPLOYMENT_STOP_ON_REQUEST"
 )
+
+// AutoRollbackEvent_Values returns all elements of the AutoRollbackEvent enum
+func AutoRollbackEvent_Values() []string {
+	return []string{
+		AutoRollbackEventDeploymentFailure,
+		AutoRollbackEventDeploymentStopOnAlarm,
+		AutoRollbackEventDeploymentStopOnRequest,
+	}
+}
 
 const (
 	// BundleTypeTar is a BundleType enum value
@@ -11462,6 +21240,17 @@ const (
 	BundleTypeJson = "JSON"
 )
 
+// BundleType_Values returns all elements of the BundleType enum
+func BundleType_Values() []string {
+	return []string{
+		BundleTypeTar,
+		BundleTypeTgz,
+		BundleTypeZip,
+		BundleTypeYaml,
+		BundleTypeJson,
+	}
+}
+
 const (
 	// ComputePlatformServer is a ComputePlatform enum value
 	ComputePlatformServer = "Server"
@@ -11473,6 +21262,15 @@ const (
 	ComputePlatformEcs = "ECS"
 )
 
+// ComputePlatform_Values returns all elements of the ComputePlatform enum
+func ComputePlatform_Values() []string {
+	return []string{
+		ComputePlatformServer,
+		ComputePlatformLambda,
+		ComputePlatformEcs,
+	}
+}
+
 const (
 	// DeploymentCreatorUser is a DeploymentCreator enum value
 	DeploymentCreatorUser = "user"
@@ -11482,7 +21280,36 @@ const (
 
 	// DeploymentCreatorCodeDeployRollback is a DeploymentCreator enum value
 	DeploymentCreatorCodeDeployRollback = "codeDeployRollback"
+
+	// DeploymentCreatorCodeDeploy is a DeploymentCreator enum value
+	DeploymentCreatorCodeDeploy = "CodeDeploy"
+
+	// DeploymentCreatorCodeDeployAutoUpdate is a DeploymentCreator enum value
+	DeploymentCreatorCodeDeployAutoUpdate = "CodeDeployAutoUpdate"
+
+	// DeploymentCreatorCloudFormation is a DeploymentCreator enum value
+	DeploymentCreatorCloudFormation = "CloudFormation"
+
+	// DeploymentCreatorCloudFormationRollback is a DeploymentCreator enum value
+	DeploymentCreatorCloudFormationRollback = "CloudFormationRollback"
+
+	// DeploymentCreatorAutoscalingTermination is a DeploymentCreator enum value
+	DeploymentCreatorAutoscalingTermination = "autoscalingTermination"
 )
+
+// DeploymentCreator_Values returns all elements of the DeploymentCreator enum
+func DeploymentCreator_Values() []string {
+	return []string{
+		DeploymentCreatorUser,
+		DeploymentCreatorAutoscaling,
+		DeploymentCreatorCodeDeployRollback,
+		DeploymentCreatorCodeDeploy,
+		DeploymentCreatorCodeDeployAutoUpdate,
+		DeploymentCreatorCloudFormation,
+		DeploymentCreatorCloudFormationRollback,
+		DeploymentCreatorAutoscalingTermination,
+	}
+}
 
 const (
 	// DeploymentOptionWithTrafficControl is a DeploymentOption enum value
@@ -11492,6 +21319,14 @@ const (
 	DeploymentOptionWithoutTrafficControl = "WITHOUT_TRAFFIC_CONTROL"
 )
 
+// DeploymentOption_Values returns all elements of the DeploymentOption enum
+func DeploymentOption_Values() []string {
+	return []string{
+		DeploymentOptionWithTrafficControl,
+		DeploymentOptionWithoutTrafficControl,
+	}
+}
+
 const (
 	// DeploymentReadyActionContinueDeployment is a DeploymentReadyAction enum value
 	DeploymentReadyActionContinueDeployment = "CONTINUE_DEPLOYMENT"
@@ -11499,6 +21334,14 @@ const (
 	// DeploymentReadyActionStopDeployment is a DeploymentReadyAction enum value
 	DeploymentReadyActionStopDeployment = "STOP_DEPLOYMENT"
 )
+
+// DeploymentReadyAction_Values returns all elements of the DeploymentReadyAction enum
+func DeploymentReadyAction_Values() []string {
+	return []string{
+		DeploymentReadyActionContinueDeployment,
+		DeploymentReadyActionStopDeployment,
+	}
+}
 
 const (
 	// DeploymentStatusCreated is a DeploymentStatus enum value
@@ -11509,6 +21352,9 @@ const (
 
 	// DeploymentStatusInProgress is a DeploymentStatus enum value
 	DeploymentStatusInProgress = "InProgress"
+
+	// DeploymentStatusBaking is a DeploymentStatus enum value
+	DeploymentStatusBaking = "Baking"
 
 	// DeploymentStatusSucceeded is a DeploymentStatus enum value
 	DeploymentStatusSucceeded = "Succeeded"
@@ -11523,6 +21369,20 @@ const (
 	DeploymentStatusReady = "Ready"
 )
 
+// DeploymentStatus_Values returns all elements of the DeploymentStatus enum
+func DeploymentStatus_Values() []string {
+	return []string{
+		DeploymentStatusCreated,
+		DeploymentStatusQueued,
+		DeploymentStatusInProgress,
+		DeploymentStatusBaking,
+		DeploymentStatusSucceeded,
+		DeploymentStatusFailed,
+		DeploymentStatusStopped,
+		DeploymentStatusReady,
+	}
+}
+
 const (
 	// DeploymentTargetTypeInstanceTarget is a DeploymentTargetType enum value
 	DeploymentTargetTypeInstanceTarget = "InstanceTarget"
@@ -11532,7 +21392,20 @@ const (
 
 	// DeploymentTargetTypeEcstarget is a DeploymentTargetType enum value
 	DeploymentTargetTypeEcstarget = "ECSTarget"
+
+	// DeploymentTargetTypeCloudFormationTarget is a DeploymentTargetType enum value
+	DeploymentTargetTypeCloudFormationTarget = "CloudFormationTarget"
 )
+
+// DeploymentTargetType_Values returns all elements of the DeploymentTargetType enum
+func DeploymentTargetType_Values() []string {
+	return []string{
+		DeploymentTargetTypeInstanceTarget,
+		DeploymentTargetTypeLambdaTarget,
+		DeploymentTargetTypeEcstarget,
+		DeploymentTargetTypeCloudFormationTarget,
+	}
+}
 
 const (
 	// DeploymentTypeInPlace is a DeploymentType enum value
@@ -11542,6 +21415,14 @@ const (
 	DeploymentTypeBlueGreen = "BLUE_GREEN"
 )
 
+// DeploymentType_Values returns all elements of the DeploymentType enum
+func DeploymentType_Values() []string {
+	return []string{
+		DeploymentTypeInPlace,
+		DeploymentTypeBlueGreen,
+	}
+}
+
 const (
 	// DeploymentWaitTypeReadyWait is a DeploymentWaitType enum value
 	DeploymentWaitTypeReadyWait = "READY_WAIT"
@@ -11549,6 +21430,14 @@ const (
 	// DeploymentWaitTypeTerminationWait is a DeploymentWaitType enum value
 	DeploymentWaitTypeTerminationWait = "TERMINATION_WAIT"
 )
+
+// DeploymentWaitType_Values returns all elements of the DeploymentWaitType enum
+func DeploymentWaitType_Values() []string {
+	return []string{
+		DeploymentWaitTypeReadyWait,
+		DeploymentWaitTypeTerminationWait,
+	}
+}
 
 const (
 	// EC2TagFilterTypeKeyOnly is a EC2TagFilterType enum value
@@ -11561,15 +21450,60 @@ const (
 	EC2TagFilterTypeKeyAndValue = "KEY_AND_VALUE"
 )
 
+// EC2TagFilterType_Values returns all elements of the EC2TagFilterType enum
+func EC2TagFilterType_Values() []string {
+	return []string{
+		EC2TagFilterTypeKeyOnly,
+		EC2TagFilterTypeValueOnly,
+		EC2TagFilterTypeKeyAndValue,
+	}
+}
+
 const (
-	// ErrorCodeDeploymentGroupMissing is a ErrorCode enum value
-	ErrorCodeDeploymentGroupMissing = "DEPLOYMENT_GROUP_MISSING"
+	// ErrorCodeAgentIssue is a ErrorCode enum value
+	ErrorCodeAgentIssue = "AGENT_ISSUE"
+
+	// ErrorCodeAlarmActive is a ErrorCode enum value
+	ErrorCodeAlarmActive = "ALARM_ACTIVE"
 
 	// ErrorCodeApplicationMissing is a ErrorCode enum value
 	ErrorCodeApplicationMissing = "APPLICATION_MISSING"
 
-	// ErrorCodeRevisionMissing is a ErrorCode enum value
-	ErrorCodeRevisionMissing = "REVISION_MISSING"
+	// ErrorCodeAutoscalingValidationError is a ErrorCode enum value
+	ErrorCodeAutoscalingValidationError = "AUTOSCALING_VALIDATION_ERROR"
+
+	// ErrorCodeAutoScalingConfiguration is a ErrorCode enum value
+	ErrorCodeAutoScalingConfiguration = "AUTO_SCALING_CONFIGURATION"
+
+	// ErrorCodeAutoScalingIamRolePermissions is a ErrorCode enum value
+	ErrorCodeAutoScalingIamRolePermissions = "AUTO_SCALING_IAM_ROLE_PERMISSIONS"
+
+	// ErrorCodeCodedeployResourceCannotBeFound is a ErrorCode enum value
+	ErrorCodeCodedeployResourceCannotBeFound = "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND"
+
+	// ErrorCodeCustomerApplicationUnhealthy is a ErrorCode enum value
+	ErrorCodeCustomerApplicationUnhealthy = "CUSTOMER_APPLICATION_UNHEALTHY"
+
+	// ErrorCodeDeploymentGroupMissing is a ErrorCode enum value
+	ErrorCodeDeploymentGroupMissing = "DEPLOYMENT_GROUP_MISSING"
+
+	// ErrorCodeEcsUpdateError is a ErrorCode enum value
+	ErrorCodeEcsUpdateError = "ECS_UPDATE_ERROR"
+
+	// ErrorCodeElasticLoadBalancingInvalid is a ErrorCode enum value
+	ErrorCodeElasticLoadBalancingInvalid = "ELASTIC_LOAD_BALANCING_INVALID"
+
+	// ErrorCodeElbInvalidInstance is a ErrorCode enum value
+	ErrorCodeElbInvalidInstance = "ELB_INVALID_INSTANCE"
+
+	// ErrorCodeHealthConstraints is a ErrorCode enum value
+	ErrorCodeHealthConstraints = "HEALTH_CONSTRAINTS"
+
+	// ErrorCodeHealthConstraintsInvalid is a ErrorCode enum value
+	ErrorCodeHealthConstraintsInvalid = "HEALTH_CONSTRAINTS_INVALID"
+
+	// ErrorCodeHookExecutionFailure is a ErrorCode enum value
+	ErrorCodeHookExecutionFailure = "HOOK_EXECUTION_FAILURE"
 
 	// ErrorCodeIamRoleMissing is a ErrorCode enum value
 	ErrorCodeIamRoleMissing = "IAM_ROLE_MISSING"
@@ -11577,41 +21511,20 @@ const (
 	// ErrorCodeIamRolePermissions is a ErrorCode enum value
 	ErrorCodeIamRolePermissions = "IAM_ROLE_PERMISSIONS"
 
-	// ErrorCodeNoEc2Subscription is a ErrorCode enum value
-	ErrorCodeNoEc2Subscription = "NO_EC2_SUBSCRIPTION"
-
-	// ErrorCodeOverMaxInstances is a ErrorCode enum value
-	ErrorCodeOverMaxInstances = "OVER_MAX_INSTANCES"
-
-	// ErrorCodeNoInstances is a ErrorCode enum value
-	ErrorCodeNoInstances = "NO_INSTANCES"
-
-	// ErrorCodeTimeout is a ErrorCode enum value
-	ErrorCodeTimeout = "TIMEOUT"
-
-	// ErrorCodeHealthConstraintsInvalid is a ErrorCode enum value
-	ErrorCodeHealthConstraintsInvalid = "HEALTH_CONSTRAINTS_INVALID"
-
-	// ErrorCodeHealthConstraints is a ErrorCode enum value
-	ErrorCodeHealthConstraints = "HEALTH_CONSTRAINTS"
-
 	// ErrorCodeInternalError is a ErrorCode enum value
 	ErrorCodeInternalError = "INTERNAL_ERROR"
 
-	// ErrorCodeThrottled is a ErrorCode enum value
-	ErrorCodeThrottled = "THROTTLED"
+	// ErrorCodeInvalidEcsService is a ErrorCode enum value
+	ErrorCodeInvalidEcsService = "INVALID_ECS_SERVICE"
 
-	// ErrorCodeAlarmActive is a ErrorCode enum value
-	ErrorCodeAlarmActive = "ALARM_ACTIVE"
+	// ErrorCodeInvalidLambdaConfiguration is a ErrorCode enum value
+	ErrorCodeInvalidLambdaConfiguration = "INVALID_LAMBDA_CONFIGURATION"
 
-	// ErrorCodeAgentIssue is a ErrorCode enum value
-	ErrorCodeAgentIssue = "AGENT_ISSUE"
+	// ErrorCodeInvalidLambdaFunction is a ErrorCode enum value
+	ErrorCodeInvalidLambdaFunction = "INVALID_LAMBDA_FUNCTION"
 
-	// ErrorCodeAutoScalingIamRolePermissions is a ErrorCode enum value
-	ErrorCodeAutoScalingIamRolePermissions = "AUTO_SCALING_IAM_ROLE_PERMISSIONS"
-
-	// ErrorCodeAutoScalingConfiguration is a ErrorCode enum value
-	ErrorCodeAutoScalingConfiguration = "AUTO_SCALING_CONFIGURATION"
+	// ErrorCodeInvalidRevision is a ErrorCode enum value
+	ErrorCodeInvalidRevision = "INVALID_REVISION"
 
 	// ErrorCodeManualStop is a ErrorCode enum value
 	ErrorCodeManualStop = "MANUAL_STOP"
@@ -11625,33 +21538,70 @@ const (
 	// ErrorCodeMissingGithubToken is a ErrorCode enum value
 	ErrorCodeMissingGithubToken = "MISSING_GITHUB_TOKEN"
 
-	// ErrorCodeElasticLoadBalancingInvalid is a ErrorCode enum value
-	ErrorCodeElasticLoadBalancingInvalid = "ELASTIC_LOAD_BALANCING_INVALID"
+	// ErrorCodeNoEc2Subscription is a ErrorCode enum value
+	ErrorCodeNoEc2Subscription = "NO_EC2_SUBSCRIPTION"
 
-	// ErrorCodeElbInvalidInstance is a ErrorCode enum value
-	ErrorCodeElbInvalidInstance = "ELB_INVALID_INSTANCE"
+	// ErrorCodeNoInstances is a ErrorCode enum value
+	ErrorCodeNoInstances = "NO_INSTANCES"
 
-	// ErrorCodeInvalidLambdaConfiguration is a ErrorCode enum value
-	ErrorCodeInvalidLambdaConfiguration = "INVALID_LAMBDA_CONFIGURATION"
+	// ErrorCodeOverMaxInstances is a ErrorCode enum value
+	ErrorCodeOverMaxInstances = "OVER_MAX_INSTANCES"
 
-	// ErrorCodeInvalidLambdaFunction is a ErrorCode enum value
-	ErrorCodeInvalidLambdaFunction = "INVALID_LAMBDA_FUNCTION"
+	// ErrorCodeResourceLimitExceeded is a ErrorCode enum value
+	ErrorCodeResourceLimitExceeded = "RESOURCE_LIMIT_EXCEEDED"
 
-	// ErrorCodeHookExecutionFailure is a ErrorCode enum value
-	ErrorCodeHookExecutionFailure = "HOOK_EXECUTION_FAILURE"
+	// ErrorCodeRevisionMissing is a ErrorCode enum value
+	ErrorCodeRevisionMissing = "REVISION_MISSING"
 
-	// ErrorCodeAutoscalingValidationError is a ErrorCode enum value
-	ErrorCodeAutoscalingValidationError = "AUTOSCALING_VALIDATION_ERROR"
+	// ErrorCodeThrottled is a ErrorCode enum value
+	ErrorCodeThrottled = "THROTTLED"
 
-	// ErrorCodeInvalidEcsService is a ErrorCode enum value
-	ErrorCodeInvalidEcsService = "INVALID_ECS_SERVICE"
+	// ErrorCodeTimeout is a ErrorCode enum value
+	ErrorCodeTimeout = "TIMEOUT"
 
-	// ErrorCodeEcsUpdateError is a ErrorCode enum value
-	ErrorCodeEcsUpdateError = "ECS_UPDATE_ERROR"
-
-	// ErrorCodeInvalidRevision is a ErrorCode enum value
-	ErrorCodeInvalidRevision = "INVALID_REVISION"
+	// ErrorCodeCloudformationStackFailure is a ErrorCode enum value
+	ErrorCodeCloudformationStackFailure = "CLOUDFORMATION_STACK_FAILURE"
 )
+
+// ErrorCode_Values returns all elements of the ErrorCode enum
+func ErrorCode_Values() []string {
+	return []string{
+		ErrorCodeAgentIssue,
+		ErrorCodeAlarmActive,
+		ErrorCodeApplicationMissing,
+		ErrorCodeAutoscalingValidationError,
+		ErrorCodeAutoScalingConfiguration,
+		ErrorCodeAutoScalingIamRolePermissions,
+		ErrorCodeCodedeployResourceCannotBeFound,
+		ErrorCodeCustomerApplicationUnhealthy,
+		ErrorCodeDeploymentGroupMissing,
+		ErrorCodeEcsUpdateError,
+		ErrorCodeElasticLoadBalancingInvalid,
+		ErrorCodeElbInvalidInstance,
+		ErrorCodeHealthConstraints,
+		ErrorCodeHealthConstraintsInvalid,
+		ErrorCodeHookExecutionFailure,
+		ErrorCodeIamRoleMissing,
+		ErrorCodeIamRolePermissions,
+		ErrorCodeInternalError,
+		ErrorCodeInvalidEcsService,
+		ErrorCodeInvalidLambdaConfiguration,
+		ErrorCodeInvalidLambdaFunction,
+		ErrorCodeInvalidRevision,
+		ErrorCodeManualStop,
+		ErrorCodeMissingBlueGreenDeploymentConfiguration,
+		ErrorCodeMissingElbInformation,
+		ErrorCodeMissingGithubToken,
+		ErrorCodeNoEc2Subscription,
+		ErrorCodeNoInstances,
+		ErrorCodeOverMaxInstances,
+		ErrorCodeResourceLimitExceeded,
+		ErrorCodeRevisionMissing,
+		ErrorCodeThrottled,
+		ErrorCodeTimeout,
+		ErrorCodeCloudformationStackFailure,
+	}
+}
 
 const (
 	// FileExistsBehaviorDisallow is a FileExistsBehavior enum value
@@ -11664,6 +21614,15 @@ const (
 	FileExistsBehaviorRetain = "RETAIN"
 )
 
+// FileExistsBehavior_Values returns all elements of the FileExistsBehavior enum
+func FileExistsBehavior_Values() []string {
+	return []string{
+		FileExistsBehaviorDisallow,
+		FileExistsBehaviorOverwrite,
+		FileExistsBehaviorRetain,
+	}
+}
+
 const (
 	// GreenFleetProvisioningActionDiscoverExisting is a GreenFleetProvisioningAction enum value
 	GreenFleetProvisioningActionDiscoverExisting = "DISCOVER_EXISTING"
@@ -11672,6 +21631,14 @@ const (
 	GreenFleetProvisioningActionCopyAutoScalingGroup = "COPY_AUTO_SCALING_GROUP"
 )
 
+// GreenFleetProvisioningAction_Values returns all elements of the GreenFleetProvisioningAction enum
+func GreenFleetProvisioningAction_Values() []string {
+	return []string{
+		GreenFleetProvisioningActionDiscoverExisting,
+		GreenFleetProvisioningActionCopyAutoScalingGroup,
+	}
+}
+
 const (
 	// InstanceActionTerminate is a InstanceAction enum value
 	InstanceActionTerminate = "TERMINATE"
@@ -11679,6 +21646,14 @@ const (
 	// InstanceActionKeepAlive is a InstanceAction enum value
 	InstanceActionKeepAlive = "KEEP_ALIVE"
 )
+
+// InstanceAction_Values returns all elements of the InstanceAction enum
+func InstanceAction_Values() []string {
+	return []string{
+		InstanceActionTerminate,
+		InstanceActionKeepAlive,
+	}
+}
 
 const (
 	// InstanceStatusPending is a InstanceStatus enum value
@@ -11703,6 +21678,19 @@ const (
 	InstanceStatusReady = "Ready"
 )
 
+// InstanceStatus_Values returns all elements of the InstanceStatus enum
+func InstanceStatus_Values() []string {
+	return []string{
+		InstanceStatusPending,
+		InstanceStatusInProgress,
+		InstanceStatusSucceeded,
+		InstanceStatusFailed,
+		InstanceStatusSkipped,
+		InstanceStatusUnknown,
+		InstanceStatusReady,
+	}
+}
+
 const (
 	// InstanceTypeBlue is a InstanceType enum value
 	InstanceTypeBlue = "Blue"
@@ -11710,6 +21698,14 @@ const (
 	// InstanceTypeGreen is a InstanceType enum value
 	InstanceTypeGreen = "Green"
 )
+
+// InstanceType_Values returns all elements of the InstanceType enum
+func InstanceType_Values() []string {
+	return []string{
+		InstanceTypeBlue,
+		InstanceTypeGreen,
+	}
+}
 
 const (
 	// LifecycleErrorCodeSuccess is a LifecycleErrorCode enum value
@@ -11731,6 +21727,18 @@ const (
 	LifecycleErrorCodeUnknownError = "UnknownError"
 )
 
+// LifecycleErrorCode_Values returns all elements of the LifecycleErrorCode enum
+func LifecycleErrorCode_Values() []string {
+	return []string{
+		LifecycleErrorCodeSuccess,
+		LifecycleErrorCodeScriptMissing,
+		LifecycleErrorCodeScriptNotExecutable,
+		LifecycleErrorCodeScriptTimedOut,
+		LifecycleErrorCodeScriptFailed,
+		LifecycleErrorCodeUnknownError,
+	}
+}
+
 const (
 	// LifecycleEventStatusPending is a LifecycleEventStatus enum value
 	LifecycleEventStatusPending = "Pending"
@@ -11751,6 +21759,18 @@ const (
 	LifecycleEventStatusUnknown = "Unknown"
 )
 
+// LifecycleEventStatus_Values returns all elements of the LifecycleEventStatus enum
+func LifecycleEventStatus_Values() []string {
+	return []string{
+		LifecycleEventStatusPending,
+		LifecycleEventStatusInProgress,
+		LifecycleEventStatusSucceeded,
+		LifecycleEventStatusFailed,
+		LifecycleEventStatusSkipped,
+		LifecycleEventStatusUnknown,
+	}
+}
+
 const (
 	// ListStateFilterActionInclude is a ListStateFilterAction enum value
 	ListStateFilterActionInclude = "include"
@@ -11762,6 +21782,31 @@ const (
 	ListStateFilterActionIgnore = "ignore"
 )
 
+// ListStateFilterAction_Values returns all elements of the ListStateFilterAction enum
+func ListStateFilterAction_Values() []string {
+	return []string{
+		ListStateFilterActionInclude,
+		ListStateFilterActionExclude,
+		ListStateFilterActionIgnore,
+	}
+}
+
+const (
+	// MinimumHealthyHostsPerZoneTypeHostCount is a MinimumHealthyHostsPerZoneType enum value
+	MinimumHealthyHostsPerZoneTypeHostCount = "HOST_COUNT"
+
+	// MinimumHealthyHostsPerZoneTypeFleetPercent is a MinimumHealthyHostsPerZoneType enum value
+	MinimumHealthyHostsPerZoneTypeFleetPercent = "FLEET_PERCENT"
+)
+
+// MinimumHealthyHostsPerZoneType_Values returns all elements of the MinimumHealthyHostsPerZoneType enum
+func MinimumHealthyHostsPerZoneType_Values() []string {
+	return []string{
+		MinimumHealthyHostsPerZoneTypeHostCount,
+		MinimumHealthyHostsPerZoneTypeFleetPercent,
+	}
+}
+
 const (
 	// MinimumHealthyHostsTypeHostCount is a MinimumHealthyHostsType enum value
 	MinimumHealthyHostsTypeHostCount = "HOST_COUNT"
@@ -11770,6 +21815,30 @@ const (
 	MinimumHealthyHostsTypeFleetPercent = "FLEET_PERCENT"
 )
 
+// MinimumHealthyHostsType_Values returns all elements of the MinimumHealthyHostsType enum
+func MinimumHealthyHostsType_Values() []string {
+	return []string{
+		MinimumHealthyHostsTypeHostCount,
+		MinimumHealthyHostsTypeFleetPercent,
+	}
+}
+
+const (
+	// OutdatedInstancesStrategyUpdate is a OutdatedInstancesStrategy enum value
+	OutdatedInstancesStrategyUpdate = "UPDATE"
+
+	// OutdatedInstancesStrategyIgnore is a OutdatedInstancesStrategy enum value
+	OutdatedInstancesStrategyIgnore = "IGNORE"
+)
+
+// OutdatedInstancesStrategy_Values returns all elements of the OutdatedInstancesStrategy enum
+func OutdatedInstancesStrategy_Values() []string {
+	return []string{
+		OutdatedInstancesStrategyUpdate,
+		OutdatedInstancesStrategyIgnore,
+	}
+}
+
 const (
 	// RegistrationStatusRegistered is a RegistrationStatus enum value
 	RegistrationStatusRegistered = "Registered"
@@ -11777,6 +21846,14 @@ const (
 	// RegistrationStatusDeregistered is a RegistrationStatus enum value
 	RegistrationStatusDeregistered = "Deregistered"
 )
+
+// RegistrationStatus_Values returns all elements of the RegistrationStatus enum
+func RegistrationStatus_Values() []string {
+	return []string{
+		RegistrationStatusRegistered,
+		RegistrationStatusDeregistered,
+	}
+}
 
 const (
 	// RevisionLocationTypeS3 is a RevisionLocationType enum value
@@ -11792,6 +21869,16 @@ const (
 	RevisionLocationTypeAppSpecContent = "AppSpecContent"
 )
 
+// RevisionLocationType_Values returns all elements of the RevisionLocationType enum
+func RevisionLocationType_Values() []string {
+	return []string{
+		RevisionLocationTypeS3,
+		RevisionLocationTypeGitHub,
+		RevisionLocationTypeString,
+		RevisionLocationTypeAppSpecContent,
+	}
+}
+
 const (
 	// SortOrderAscending is a SortOrder enum value
 	SortOrderAscending = "ascending"
@@ -11800,6 +21887,14 @@ const (
 	SortOrderDescending = "descending"
 )
 
+// SortOrder_Values returns all elements of the SortOrder enum
+func SortOrder_Values() []string {
+	return []string{
+		SortOrderAscending,
+		SortOrderDescending,
+	}
+}
+
 const (
 	// StopStatusPending is a StopStatus enum value
 	StopStatusPending = "Pending"
@@ -11807,6 +21902,14 @@ const (
 	// StopStatusSucceeded is a StopStatus enum value
 	StopStatusSucceeded = "Succeeded"
 )
+
+// StopStatus_Values returns all elements of the StopStatus enum
+func StopStatus_Values() []string {
+	return []string{
+		StopStatusPending,
+		StopStatusSucceeded,
+	}
+}
 
 const (
 	// TagFilterTypeKeyOnly is a TagFilterType enum value
@@ -11819,6 +21922,15 @@ const (
 	TagFilterTypeKeyAndValue = "KEY_AND_VALUE"
 )
 
+// TagFilterType_Values returns all elements of the TagFilterType enum
+func TagFilterType_Values() []string {
+	return []string{
+		TagFilterTypeKeyOnly,
+		TagFilterTypeValueOnly,
+		TagFilterTypeKeyAndValue,
+	}
+}
+
 const (
 	// TargetFilterNameTargetStatus is a TargetFilterName enum value
 	TargetFilterNameTargetStatus = "TargetStatus"
@@ -11827,6 +21939,14 @@ const (
 	TargetFilterNameServerInstanceLabel = "ServerInstanceLabel"
 )
 
+// TargetFilterName_Values returns all elements of the TargetFilterName enum
+func TargetFilterName_Values() []string {
+	return []string{
+		TargetFilterNameTargetStatus,
+		TargetFilterNameServerInstanceLabel,
+	}
+}
+
 const (
 	// TargetLabelBlue is a TargetLabel enum value
 	TargetLabelBlue = "Blue"
@@ -11834,6 +21954,14 @@ const (
 	// TargetLabelGreen is a TargetLabel enum value
 	TargetLabelGreen = "Green"
 )
+
+// TargetLabel_Values returns all elements of the TargetLabel enum
+func TargetLabel_Values() []string {
+	return []string{
+		TargetLabelBlue,
+		TargetLabelGreen,
+	}
+}
 
 const (
 	// TargetStatusPending is a TargetStatus enum value
@@ -11858,6 +21986,19 @@ const (
 	TargetStatusReady = "Ready"
 )
 
+// TargetStatus_Values returns all elements of the TargetStatus enum
+func TargetStatus_Values() []string {
+	return []string{
+		TargetStatusPending,
+		TargetStatusInProgress,
+		TargetStatusSucceeded,
+		TargetStatusFailed,
+		TargetStatusSkipped,
+		TargetStatusUnknown,
+		TargetStatusReady,
+	}
+}
+
 const (
 	// TrafficRoutingTypeTimeBasedCanary is a TrafficRoutingType enum value
 	TrafficRoutingTypeTimeBasedCanary = "TimeBasedCanary"
@@ -11868,6 +22009,15 @@ const (
 	// TrafficRoutingTypeAllAtOnce is a TrafficRoutingType enum value
 	TrafficRoutingTypeAllAtOnce = "AllAtOnce"
 )
+
+// TrafficRoutingType_Values returns all elements of the TrafficRoutingType enum
+func TrafficRoutingType_Values() []string {
+	return []string{
+		TrafficRoutingTypeTimeBasedCanary,
+		TrafficRoutingTypeTimeBasedLinear,
+		TrafficRoutingTypeAllAtOnce,
+	}
+}
 
 const (
 	// TriggerEventTypeDeploymentStart is a TriggerEventType enum value
@@ -11900,3 +22050,19 @@ const (
 	// TriggerEventTypeInstanceReady is a TriggerEventType enum value
 	TriggerEventTypeInstanceReady = "InstanceReady"
 )
+
+// TriggerEventType_Values returns all elements of the TriggerEventType enum
+func TriggerEventType_Values() []string {
+	return []string{
+		TriggerEventTypeDeploymentStart,
+		TriggerEventTypeDeploymentSuccess,
+		TriggerEventTypeDeploymentFailure,
+		TriggerEventTypeDeploymentStop,
+		TriggerEventTypeDeploymentRollback,
+		TriggerEventTypeDeploymentReady,
+		TriggerEventTypeInstanceStart,
+		TriggerEventTypeInstanceSuccess,
+		TriggerEventTypeInstanceFailure,
+		TriggerEventTypeInstanceReady,
+	}
+}

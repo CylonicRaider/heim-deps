@@ -15,23 +15,23 @@ package procfs
 
 import "testing"
 
-func TestNewLimits(t *testing.T) {
-	p, err := FS("fixtures").NewProc(26231)
+func TestLimits(t *testing.T) {
+	p, err := getProcFixtures(t).Proc(26231)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	l, err := p.NewLimits()
+	l, err := p.Limits()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	for _, test := range []struct {
 		name string
-		want int64
-		have int64
+		want uint64
+		have uint64
 	}{
-		{name: "cpu time", want: -1, have: l.CPUTime},
+		{name: "cpu time", want: 18446744073709551615, have: l.CPUTime},
 		{name: "open files", want: 2048, have: l.OpenFiles},
 		{name: "msgqueue size", want: 819200, have: l.MsqqueueSize},
 		{name: "nice priority", want: 0, have: l.NicePriority},

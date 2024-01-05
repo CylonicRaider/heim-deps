@@ -20,11 +20,15 @@ import (
 	"sync"
 	"time"
 
-	v3 "go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/etcdserver/api/v3rpc/rpctypes"
-	"go.etcd.io/etcd/pkg/flags"
-
 	"github.com/spf13/cobra"
+	"go.uber.org/zap"
+
+	"go.etcd.io/etcd/api/v3/etcdserverpb"
+	"go.etcd.io/etcd/api/v3/v3rpc/rpctypes"
+	"go.etcd.io/etcd/client/pkg/v3/logutil"
+	clientv3 "go.etcd.io/etcd/client/v3"
+	"go.etcd.io/etcd/pkg/v3/cobrautl"
+	"go.etcd.io/etcd/pkg/v3/flags"
 )
 
 var epClusterEndpoints bool
@@ -60,7 +64,7 @@ func newEpStatusCommand() *cobra.Command {
 		Use:   "status",
 		Short: "Prints out the status of endpoints specified in `--endpoints` flag",
 		Long: `When --write-out is set to simple, this command prints out comma-separated status lists for each endpoint.
-The items in the lists are endpoint, ID, version, db size, is leader, raft term, raft index.
+The items in the lists are endpoint, ID, version, db size, is leader, is learner, raft term, raft index, raft applied index, errors.
 `,
 		Run: epStatusCommandFunc,
 	}
@@ -72,7 +76,7 @@ func newEpHashKVCommand() *cobra.Command {
 		Short: "Prints the KV history hash for each endpoint in --endpoints",
 		Run:   epHashKVCommandFunc,
 	}
-	hc.PersistentFlags().Int64Var(&epHashKVRev, "rev", 0, "maximum revision to hash (default: all revisions)")
+	hc.PersistentFlags().Int64Var(&epHashKVRev, "rev", 0, "maximum revision to hash (default: latest revision)")
 	return hc
 }
 
@@ -85,7 +89,11 @@ type epHealth struct {
 
 // epHealthCommandFunc executes the "endpoint-health" command.
 func epHealthCommandFunc(cmd *cobra.Command, args []string) {
-	flags.SetPflagsFromEnv("ETCDCTL", cmd.InheritedFlags())
+	lg, err := logutil.CreateDefaultZapLogger(zap.InfoLevel)
+	if err != nil {
+		cobrautl.ExitWithError(cobrautl.ExitError, err)
+	}
+	flags.SetPflagsFromEnv(lg, "ETCDCTL", cmd.InheritedFlags())
 	initDisplayFromCmd(cmd)
 
 	sec := secureCfgFromCmd(cmd)
@@ -93,11 +101,18 @@ func epHealthCommandFunc(cmd *cobra.Command, args []string) {
 	ka := keepAliveTimeFromCmd(cmd)
 	kat := keepAliveTimeoutFromCmd(cmd)
 	auth := authCfgFromCmd(cmd)
-	cfgs := []*v3.Config{}
+	var cfgs []*clientv3.Config
 	for _, ep := range endpointsFromCluster(cmd) {
-		cfg, err := newClientCfg([]string{ep}, dt, ka, kat, sec, auth)
+		cfg, err := clientv3.NewClientConfig(&clientv3.ConfigSpec{
+			Endpoints:        []string{ep},
+			DialTimeout:      dt,
+			KeepAliveTime:    ka,
+			KeepAliveTimeout: kat,
+			Secure:           sec,
+			Auth:             auth,
+		}, lg)
 		if err != nil {
-			ExitWithError(ExitBadArgs, err)
+			cobrautl.ExitWithError(cobrautl.ExitBadArgs, err)
 		}
 		cfgs = append(cfgs, cfg)
 	}
@@ -106,10 +121,11 @@ func epHealthCommandFunc(cmd *cobra.Command, args []string) {
 	hch := make(chan epHealth, len(cfgs))
 	for _, cfg := range cfgs {
 		wg.Add(1)
-		go func(cfg *v3.Config) {
+		go func(cfg *clientv3.Config) {
 			defer wg.Done()
 			ep := cfg.Endpoints[0]
-			cli, err := v3.New(*cfg)
+			cfg.Logger = lg.Named("client")
+			cli, err := clientv3.New(*cfg)
 			if err != nil {
 				hch <- epHealth{Ep: ep, Health: false, Error: err.Error()}
 				return
@@ -119,7 +135,6 @@ func epHealthCommandFunc(cmd *cobra.Command, args []string) {
 			// endpoint is health.
 			ctx, cancel := commandCtx(cmd)
 			_, err = cli.Get(ctx, "health")
-			cancel()
 			eh := epHealth{Ep: ep, Health: false, Took: time.Since(st).String()}
 			// permission denied is OK since proposal goes through consensus to get it
 			if err == nil || err == rpctypes.ErrPermissionDenied {
@@ -127,6 +142,28 @@ func epHealthCommandFunc(cmd *cobra.Command, args []string) {
 			} else {
 				eh.Error = err.Error()
 			}
+
+			if eh.Health {
+				resp, err := cli.AlarmList(ctx)
+				if err == nil && len(resp.Alarms) > 0 {
+					eh.Health = false
+					eh.Error = "Active Alarm(s): "
+					for _, v := range resp.Alarms {
+						switch v.Alarm {
+						case etcdserverpb.AlarmType_NOSPACE:
+							eh.Error = eh.Error + "NOSPACE "
+						case etcdserverpb.AlarmType_CORRUPT:
+							eh.Error = eh.Error + "CORRUPT "
+						default:
+							eh.Error = eh.Error + "UNKNOWN "
+						}
+					}
+				} else if err != nil {
+					eh.Health = false
+					eh.Error = "Unable to fetch the alarm list"
+				}
+			}
+			cancel()
 			hch <- eh
 		}(cfg)
 	}
@@ -135,7 +172,7 @@ func epHealthCommandFunc(cmd *cobra.Command, args []string) {
 	close(hch)
 
 	errs := false
-	healthList := []epHealth{}
+	var healthList []epHealth
 	for h := range hch {
 		healthList = append(healthList, h)
 		if h.Error != "" {
@@ -144,24 +181,27 @@ func epHealthCommandFunc(cmd *cobra.Command, args []string) {
 	}
 	display.EndpointHealth(healthList)
 	if errs {
-		ExitWithError(ExitError, fmt.Errorf("unhealthy cluster"))
+		cobrautl.ExitWithError(cobrautl.ExitError, fmt.Errorf("unhealthy cluster"))
 	}
 }
 
 type epStatus struct {
-	Ep   string             `json:"Endpoint"`
-	Resp *v3.StatusResponse `json:"Status"`
+	Ep   string                   `json:"Endpoint"`
+	Resp *clientv3.StatusResponse `json:"Status"`
 }
 
 func epStatusCommandFunc(cmd *cobra.Command, args []string) {
-	c := mustClientFromCmd(cmd)
+	cfg := clientConfigFromCmd(cmd)
 
-	statusList := []epStatus{}
+	var statusList []epStatus
 	var err error
 	for _, ep := range endpointsFromCluster(cmd) {
+		cfg.Endpoints = []string{ep}
+		c := mustClient(cfg)
 		ctx, cancel := commandCtx(cmd)
 		resp, serr := c.Status(ctx, ep)
 		cancel()
+		c.Close()
 		if serr != nil {
 			err = serr
 			fmt.Fprintf(os.Stderr, "Failed to get the status of endpoint %s (%v)\n", ep, serr)
@@ -173,24 +213,27 @@ func epStatusCommandFunc(cmd *cobra.Command, args []string) {
 	display.EndpointStatus(statusList)
 
 	if err != nil {
-		os.Exit(ExitError)
+		os.Exit(cobrautl.ExitError)
 	}
 }
 
 type epHashKV struct {
-	Ep   string             `json:"Endpoint"`
-	Resp *v3.HashKVResponse `json:"HashKV"`
+	Ep   string                   `json:"Endpoint"`
+	Resp *clientv3.HashKVResponse `json:"HashKV"`
 }
 
 func epHashKVCommandFunc(cmd *cobra.Command, args []string) {
-	c := mustClientFromCmd(cmd)
+	cfg := clientConfigFromCmd(cmd)
 
-	hashList := []epHashKV{}
+	var hashList []epHashKV
 	var err error
 	for _, ep := range endpointsFromCluster(cmd) {
+		cfg.Endpoints = []string{ep}
+		c := mustClient(cfg)
 		ctx, cancel := commandCtx(cmd)
 		resp, serr := c.HashKV(ctx, ep, epHashKVRev)
 		cancel()
+		c.Close()
 		if serr != nil {
 			err = serr
 			fmt.Fprintf(os.Stderr, "Failed to get the hash of endpoint %s (%v)\n", ep, serr)
@@ -202,7 +245,7 @@ func epHashKVCommandFunc(cmd *cobra.Command, args []string) {
 	display.EndpointHashKV(hashList)
 
 	if err != nil {
-		ExitWithError(ExitError, err)
+		cobrautl.ExitWithError(cobrautl.ExitError, err)
 	}
 }
 
@@ -210,7 +253,7 @@ func endpointsFromCluster(cmd *cobra.Command) []string {
 	if !epClusterEndpoints {
 		endpoints, err := cmd.Flags().GetStringSlice("endpoints")
 		if err != nil {
-			ExitWithError(ExitError, err)
+			cobrautl.ExitWithError(cobrautl.ExitError, err)
 		}
 		return endpoints
 	}
@@ -221,17 +264,23 @@ func endpointsFromCluster(cmd *cobra.Command) []string {
 	kat := keepAliveTimeoutFromCmd(cmd)
 	eps, err := endpointsFromCmd(cmd)
 	if err != nil {
-		ExitWithError(ExitError, err)
+		cobrautl.ExitWithError(cobrautl.ExitError, err)
 	}
 	// exclude auth for not asking needless password (MemberList() doesn't need authentication)
-
-	cfg, err := newClientCfg(eps, dt, ka, kat, sec, nil)
+	lg, _ := logutil.CreateDefaultZapLogger(zap.InfoLevel)
+	cfg, err := clientv3.NewClientConfig(&clientv3.ConfigSpec{
+		Endpoints:        eps,
+		DialTimeout:      dt,
+		KeepAliveTime:    ka,
+		KeepAliveTimeout: kat,
+		Secure:           sec,
+	}, lg)
 	if err != nil {
-		ExitWithError(ExitError, err)
+		cobrautl.ExitWithError(cobrautl.ExitError, err)
 	}
-	c, err := v3.New(*cfg)
+	c, err := clientv3.New(*cfg)
 	if err != nil {
-		ExitWithError(ExitError, err)
+		cobrautl.ExitWithError(cobrautl.ExitError, err)
 	}
 
 	ctx, cancel := commandCtx(cmd)
@@ -242,10 +291,10 @@ func endpointsFromCluster(cmd *cobra.Command) []string {
 	membs, err := c.MemberList(ctx)
 	if err != nil {
 		err = fmt.Errorf("failed to fetch endpoints from etcd cluster member list: %v", err)
-		ExitWithError(ExitError, err)
+		cobrautl.ExitWithError(cobrautl.ExitError, err)
 	}
 
-	ret := []string{}
+	var ret []string
 	for _, m := range membs.Members {
 		ret = append(ret, m.ClientURLs...)
 	}

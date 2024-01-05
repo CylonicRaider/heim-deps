@@ -1,22 +1,24 @@
 package migrate
 
 import (
+	"context"
 	"database/sql"
+	"embed"
 	"net/http"
+	"time"
 
-	"github.com/gobuffalo/packr"
+	"github.com/go-gorp/gorp/v3"
 	_ "github.com/mattn/go-sqlite3"
 	. "gopkg.in/check.v1"
-	"gopkg.in/gorp.v1"
 )
 
 var sqliteMigrations = []*Migration{
-	&Migration{
+	{
 		Id:   "123",
 		Up:   []string{"CREATE TABLE people (id int)"},
 		Down: []string{"DROP TABLE people"},
 	},
-	&Migration{
+	{
 		Id:   "124",
 		Up:   []string{"ALTER TABLE people ADD COLUMN first_name text"},
 		Down: []string{"SELECT 0"}, // Not really supported
@@ -160,39 +162,6 @@ func (s *SqliteMigrateSuite) TestAssetMigrate(c *C) {
 	c.Assert(id, Equals, int64(1))
 }
 
-func (s *SqliteMigrateSuite) TestPackrMigrate(c *C) {
-	migrations := &PackrMigrationSource{
-		Box: packr.NewBox("test-migrations"),
-	}
-
-	// Executes two migrations
-	n, err := Exec(s.Db, "sqlite3", migrations, Up)
-	c.Assert(err, IsNil)
-	c.Assert(n, Equals, 2)
-
-	// Has data
-	id, err := s.DbMap.SelectInt("SELECT id FROM people")
-	c.Assert(err, IsNil)
-	c.Assert(id, Equals, int64(1))
-}
-
-func (s *SqliteMigrateSuite) TestPackrMigrateDir(c *C) {
-	migrations := &PackrMigrationSource{
-		Box: packr.NewBox("."),
-		Dir: "./test-migrations/",
-	}
-
-	// Executes two migrations
-	n, err := Exec(s.Db, "sqlite3", migrations, Up)
-	c.Assert(err, IsNil)
-	c.Assert(n, Equals, 2)
-
-	// Has data
-	id, err := s.DbMap.SelectInt("SELECT id FROM people")
-	c.Assert(err, IsNil)
-	c.Assert(id, Equals, int64(1))
-}
-
 func (s *SqliteMigrateSuite) TestMigrateMax(c *C) {
 	migrations := &FileMigrationSource{
 		Dir: "test-migrations",
@@ -206,6 +175,56 @@ func (s *SqliteMigrateSuite) TestMigrateMax(c *C) {
 	id, err := s.DbMap.SelectInt("SELECT COUNT(*) FROM people")
 	c.Assert(err, IsNil)
 	c.Assert(id, Equals, int64(0))
+}
+
+func (s *SqliteMigrateSuite) TestMigrateVersionInt(c *C) {
+	migrations := &FileMigrationSource{
+		Dir: "test-migrations",
+	}
+
+	// Executes migration with target version 1
+	n, err := ExecVersion(s.Db, "sqlite3", migrations, Up, 1)
+	c.Assert(err, IsNil)
+	c.Assert(n, Equals, 1)
+
+	id, err := s.DbMap.SelectInt("SELECT COUNT(*) FROM people")
+	c.Assert(err, IsNil)
+	c.Assert(id, Equals, int64(0))
+}
+
+func (s *SqliteMigrateSuite) TestMigrateVersionInt2(c *C) {
+	migrations := &FileMigrationSource{
+		Dir: "test-migrations",
+	}
+
+	// Executes migration with target version 2
+	n, err := ExecVersion(s.Db, "sqlite3", migrations, Up, 2)
+	c.Assert(err, IsNil)
+	c.Assert(n, Equals, 2)
+
+	id, err := s.DbMap.SelectInt("SELECT COUNT(*) FROM people")
+	c.Assert(err, IsNil)
+	c.Assert(id, Equals, int64(1))
+}
+
+func (s *SqliteMigrateSuite) TestMigrateVersionIntFailedWithNotExistingVerion(c *C) {
+	migrations := &FileMigrationSource{
+		Dir: "test-migrations",
+	}
+
+	// Executes migration with not existing version 3
+	_, err := ExecVersion(s.Db, "sqlite3", migrations, Up, 3)
+	c.Assert(err, NotNil)
+}
+
+func (s *SqliteMigrateSuite) TestMigrateVersionIntFailedWithInvalidVerion(c *C) {
+	migrations := &FileMigrationSource{
+		Dir: "test-migrations",
+	}
+
+	// Executes migration with invalid version -1
+	_, err := ExecVersion(s.Db, "sqlite3", migrations, Up, -1)
+	c.Assert(err, NotNil)
 }
 
 func (s *SqliteMigrateSuite) TestMigrateDown(c *C) {
@@ -281,7 +300,7 @@ func (s *SqliteMigrateSuite) TestMigrateTransaction(c *C) {
 		Migrations: []*Migration{
 			sqliteMigrations[0],
 			sqliteMigrations[1],
-			&Migration{
+			{
 				Id:   "125",
 				Up:   []string{"INSERT INTO people (id, first_name) VALUES (1, 'Test')", "SELECT fail"},
 				Down: []string{}, // Not important here
@@ -303,17 +322,17 @@ func (s *SqliteMigrateSuite) TestMigrateTransaction(c *C) {
 func (s *SqliteMigrateSuite) TestPlanMigration(c *C) {
 	migrations := &MemoryMigrationSource{
 		Migrations: []*Migration{
-			&Migration{
+			{
 				Id:   "1_create_table.sql",
 				Up:   []string{"CREATE TABLE people (id int)"},
 				Down: []string{"DROP TABLE people"},
 			},
-			&Migration{
+			{
 				Id:   "2_alter_table.sql",
 				Up:   []string{"ALTER TABLE people ADD COLUMN first_name text"},
 				Down: []string{"SELECT 0"}, // Not really supported
 			},
-			&Migration{
+			{
 				Id:   "10_add_last_name.sql",
 				Up:   []string{"ALTER TABLE people ADD COLUMN last_name text"},
 				Down: []string{"ALTER TABLE people DROP COLUMN last_name"},
@@ -346,17 +365,17 @@ func (s *SqliteMigrateSuite) TestPlanMigration(c *C) {
 func (s *SqliteMigrateSuite) TestSkipMigration(c *C) {
 	migrations := &MemoryMigrationSource{
 		Migrations: []*Migration{
-			&Migration{
+			{
 				Id:   "1_create_table.sql",
 				Up:   []string{"CREATE TABLE people (id int)"},
 				Down: []string{"DROP TABLE people"},
 			},
-			&Migration{
+			{
 				Id:   "2_alter_table.sql",
 				Up:   []string{"ALTER TABLE people ADD COLUMN first_name text"},
 				Down: []string{"SELECT 0"}, // Not really supported
 			},
-			&Migration{
+			{
 				Id:   "10_add_last_name.sql",
 				Up:   []string{"ALTER TABLE people ADD COLUMN last_name text"},
 				Down: []string{"ALTER TABLE people DROP COLUMN last_name"},
@@ -386,12 +405,12 @@ func (s *SqliteMigrateSuite) TestPlanMigrationWithHoles(c *C) {
 	down := "SELECT 1"
 	migrations := &MemoryMigrationSource{
 		Migrations: []*Migration{
-			&Migration{
+			{
 				Id:   "1",
 				Up:   []string{up},
 				Down: []string{down},
 			},
-			&Migration{
+			{
 				Id:   "3",
 				Up:   []string{up},
 				Down: []string{down},
@@ -452,7 +471,7 @@ func (s *SqliteMigrateSuite) TestPlanMigrationWithHoles(c *C) {
 	c.Assert(plannedMigrations[2].Queries[0], Equals, down)
 }
 
-func (s *SqliteMigrateSuite) TestLess(c *C) {
+func (*SqliteMigrateSuite) TestLess(c *C) {
 	c.Assert((Migration{Id: "1"}).Less(&Migration{Id: "2"}), Equals, true)           // 1 less than 2
 	c.Assert((Migration{Id: "2"}).Less(&Migration{Id: "1"}), Equals, false)          // 2 not less than 1
 	c.Assert((Migration{Id: "1"}).Less(&Migration{Id: "a"}), Equals, true)           // 1 less than a
@@ -470,23 +489,22 @@ func (s *SqliteMigrateSuite) TestLess(c *C) {
 	// 20160126_1200 not less than 20160126_1100
 	c.Assert((Migration{Id: "20160126_1200"}).
 		Less(&Migration{Id: "20160126_1100"}), Equals, false)
-
 }
 
 func (s *SqliteMigrateSuite) TestPlanMigrationWithUnknownDatabaseMigrationApplied(c *C) {
 	migrations := &MemoryMigrationSource{
 		Migrations: []*Migration{
-			&Migration{
+			{
 				Id:   "1_create_table.sql",
 				Up:   []string{"CREATE TABLE people (id int)"},
 				Down: []string{"DROP TABLE people"},
 			},
-			&Migration{
+			{
 				Id:   "2_alter_table.sql",
 				Up:   []string{"ALTER TABLE people ADD COLUMN first_name text"},
 				Down: []string{"SELECT 0"}, // Not really supported
 			},
-			&Migration{
+			{
 				Id:   "10_add_last_name.sql",
 				Up:   []string{"ALTER TABLE people ADD COLUMN last_name text"},
 				Down: []string{"ALTER TABLE people DROP COLUMN last_name"},
@@ -516,6 +534,90 @@ func (s *SqliteMigrateSuite) TestPlanMigrationWithUnknownDatabaseMigrationApplie
 	c.Assert(err, FitsTypeOf, &PlanError{})
 }
 
+func (s *SqliteMigrateSuite) TestPlanMigrationWithIgnoredUnknownDatabaseMigrationApplied(c *C) {
+	migrations := &MemoryMigrationSource{
+		Migrations: []*Migration{
+			{
+				Id:   "1_create_table.sql",
+				Up:   []string{"CREATE TABLE people (id int)"},
+				Down: []string{"DROP TABLE people"},
+			},
+			{
+				Id:   "2_alter_table.sql",
+				Up:   []string{"ALTER TABLE people ADD COLUMN first_name text"},
+				Down: []string{"SELECT 0"}, // Not really supported
+			},
+			{
+				Id:   "10_add_last_name.sql",
+				Up:   []string{"ALTER TABLE people ADD COLUMN last_name text"},
+				Down: []string{"ALTER TABLE people DROP COLUMN last_name"},
+			},
+		},
+	}
+	SetIgnoreUnknown(true)
+	n, err := Exec(s.Db, "sqlite3", migrations, Up)
+	c.Assert(err, IsNil)
+	c.Assert(n, Equals, 3)
+
+	// Note that migration 10_add_last_name.sql is missing from the new migrations source
+	// so it is considered an "unknown" migration for the planner.
+	migrations.Migrations = append(migrations.Migrations[:2], &Migration{
+		Id:   "10_add_middle_name.sql",
+		Up:   []string{"ALTER TABLE people ADD COLUMN middle_name text"},
+		Down: []string{"ALTER TABLE people DROP COLUMN middle_name"},
+	})
+
+	_, _, err = PlanMigration(s.Db, "sqlite3", migrations, Up, 0)
+	c.Assert(err, IsNil)
+
+	_, _, err = PlanMigration(s.Db, "sqlite3", migrations, Down, 0)
+	c.Assert(err, IsNil)
+	SetIgnoreUnknown(false) // Make sure we are not breaking other tests as this is globaly set
+}
+
+func (s *SqliteMigrateSuite) TestPlanMigrationToVersion(c *C) {
+	migrations := &MemoryMigrationSource{
+		Migrations: []*Migration{
+			{
+				Id:   "1_create_table.sql",
+				Up:   []string{"CREATE TABLE people (id int)"},
+				Down: []string{"DROP TABLE people"},
+			},
+			{
+				Id:   "2_alter_table.sql",
+				Up:   []string{"ALTER TABLE people ADD COLUMN first_name text"},
+				Down: []string{"SELECT 0"}, // Not really supported
+			},
+			{
+				Id:   "10_add_last_name.sql",
+				Up:   []string{"ALTER TABLE people ADD COLUMN last_name text"},
+				Down: []string{"ALTER TABLE people DROP COLUMN last_name"},
+			},
+		},
+	}
+	n, err := Exec(s.Db, "sqlite3", migrations, Up)
+	c.Assert(err, IsNil)
+	c.Assert(n, Equals, 3)
+
+	migrations.Migrations = append(migrations.Migrations, &Migration{
+		Id:   "11_add_middle_name.sql",
+		Up:   []string{"ALTER TABLE people ADD COLUMN middle_name text"},
+		Down: []string{"ALTER TABLE people DROP COLUMN middle_name"},
+	})
+
+	plannedMigrations, _, err := PlanMigrationToVersion(s.Db, "sqlite3", migrations, Up, 11)
+	c.Assert(err, IsNil)
+	c.Assert(plannedMigrations, HasLen, 1)
+	c.Assert(plannedMigrations[0].Migration, Equals, migrations.Migrations[3])
+
+	plannedMigrations, _, err = PlanMigrationToVersion(s.Db, "sqlite3", migrations, Down, 1)
+	c.Assert(err, IsNil)
+	c.Assert(plannedMigrations, HasLen, 3)
+	c.Assert(plannedMigrations[0].Migration, Equals, migrations.Migrations[2])
+	c.Assert(plannedMigrations[1].Migration, Equals, migrations.Migrations[1])
+	c.Assert(plannedMigrations[2].Migration, Equals, migrations.Migrations[0])
+}
+
 // TestExecWithUnknownMigrationInDatabase makes sure that problems found with planning the
 // migrations are propagated and returned by Exec.
 func (s *SqliteMigrateSuite) TestExecWithUnknownMigrationInDatabase(c *C) {
@@ -529,13 +631,13 @@ func (s *SqliteMigrateSuite) TestExecWithUnknownMigrationInDatabase(c *C) {
 	c.Assert(n, Equals, 2)
 
 	// Then create a new migration source with one of the migrations missing
-	var newSqliteMigrations = []*Migration{
-		&Migration{
+	newSqliteMigrations := []*Migration{
+		{
 			Id:   "124_other",
 			Up:   []string{"ALTER TABLE people ADD COLUMN middle_name text"},
 			Down: []string{"ALTER TABLE people DROP COLUMN middle_name"},
 		},
-		&Migration{
+		{
 			Id:   "125",
 			Up:   []string{"ALTER TABLE people ADD COLUMN age int"},
 			Down: []string{"ALTER TABLE people DROP COLUMN age"},
@@ -556,4 +658,175 @@ func (s *SqliteMigrateSuite) TestExecWithUnknownMigrationInDatabase(c *C) {
 	c.Assert(err, NotNil)
 	_, err = s.DbMap.Exec("SELECT age FROM people")
 	c.Assert(err, NotNil)
+}
+
+func (s *SqliteMigrateSuite) TestRunMigrationObjDefaultTable(c *C) {
+	migrations := &MemoryMigrationSource{
+		Migrations: sqliteMigrations[:1],
+	}
+
+	ms := MigrationSet{}
+	// Executes one migration
+	n, err := ms.Exec(s.Db, "sqlite3", migrations, Up)
+	c.Assert(err, IsNil)
+	c.Assert(n, Equals, 1)
+
+	// Can use table now
+	_, err = s.DbMap.Exec("SELECT * FROM people")
+	c.Assert(err, IsNil)
+
+	// Uses default tableName
+	_, err = s.DbMap.Exec("SELECT * FROM gorp_migrations")
+	c.Assert(err, IsNil)
+
+	// Shouldn't apply migration again
+	n, err = ms.Exec(s.Db, "sqlite3", migrations, Up)
+	c.Assert(err, IsNil)
+	c.Assert(n, Equals, 0)
+}
+
+func (s *SqliteMigrateSuite) TestRunMigrationObjOtherTable(c *C) {
+	migrations := &MemoryMigrationSource{
+		Migrations: sqliteMigrations[:1],
+	}
+
+	ms := MigrationSet{TableName: "other_migrations"}
+	// Executes one migration
+	n, err := ms.Exec(s.Db, "sqlite3", migrations, Up)
+	c.Assert(err, IsNil)
+	c.Assert(n, Equals, 1)
+
+	// Can use table now
+	_, err = s.DbMap.Exec("SELECT * FROM people")
+	c.Assert(err, IsNil)
+
+	// Uses default tableName
+	_, err = s.DbMap.Exec("SELECT * FROM other_migrations")
+	c.Assert(err, IsNil)
+
+	// Shouldn't apply migration again
+	n, err = ms.Exec(s.Db, "sqlite3", migrations, Up)
+	c.Assert(err, IsNil)
+	c.Assert(n, Equals, 0)
+}
+
+func (*SqliteMigrateSuite) TestSetDisableCreateTable(c *C) {
+	c.Assert(migSet.DisableCreateTable, Equals, false)
+
+	SetDisableCreateTable(true)
+	c.Assert(migSet.DisableCreateTable, Equals, true)
+
+	SetDisableCreateTable(false)
+	c.Assert(migSet.DisableCreateTable, Equals, false)
+}
+
+func (s *SqliteMigrateSuite) TestGetMigrationDbMapWithDisableCreateTable(c *C) {
+	SetDisableCreateTable(false)
+
+	_, err := migSet.getMigrationDbMap(s.Db, "postgres")
+	c.Assert(err, IsNil)
+}
+
+// If ms.DisableCreateTable == true, then the the migrations table should not be
+// created, regardless of the global migSet.DisableCreateTable setting.
+func (s *SqliteMigrateSuite) TestGetMigrationObjDbMapWithDisableCreateTableTrue(c *C) {
+	SetDisableCreateTable(false)
+	ms := MigrationSet{
+		DisableCreateTable: true,
+		TableName:          "silly_example_table",
+	}
+	c.Assert(migSet.DisableCreateTable, Equals, false)
+	c.Assert(ms.DisableCreateTable, Equals, true)
+
+	dbMap, err := ms.getMigrationDbMap(s.Db, "sqlite3")
+	c.Assert(err, IsNil)
+	c.Assert(dbMap, NotNil)
+
+	tableNameIfExists, err := s.DbMap.SelectNullStr(
+		"SELECT name FROM sqlite_master WHERE type='table' AND name=$1",
+		ms.TableName,
+	)
+	c.Assert(err, IsNil)
+	c.Assert(tableNameIfExists.Valid, Equals, false)
+}
+
+// If ms.DisableCreateTable == false, then the the migrations table should not be
+// created, regardless of the global migSet.DisableCreateTable setting.
+func (s *SqliteMigrateSuite) TestGetMigrationObjDbMapWithDisableCreateTableFalse(c *C) {
+	SetDisableCreateTable(true)
+	defer SetDisableCreateTable(false) // reset the global state when the test ends.
+	ms := MigrationSet{
+		DisableCreateTable: false,
+		TableName:          "silly_example_table",
+	}
+	c.Assert(migSet.DisableCreateTable, Equals, true)
+	c.Assert(ms.DisableCreateTable, Equals, false)
+
+	dbMap, err := ms.getMigrationDbMap(s.Db, "sqlite3")
+	c.Assert(err, IsNil)
+	c.Assert(dbMap, NotNil)
+
+	tableNameIfExists, err := s.DbMap.SelectNullStr(
+		"SELECT name FROM sqlite_master WHERE type='table' AND name=$1",
+		ms.TableName,
+	)
+	c.Assert(err, IsNil)
+	c.Assert(tableNameIfExists.Valid, Equals, true)
+	c.Assert(tableNameIfExists.String, Equals, ms.TableName)
+}
+
+func (s *SqliteMigrateSuite) TestContextTimeout(c *C) {
+	// This statement will run for a long time: 1,000,000 iterations of the fibonacci sequence
+	fibonacciLoopStmt := `WITH RECURSIVE
+	   fibo (curr, next)
+	 AS
+	   ( SELECT 1,1
+	     UNION ALL
+	     SELECT next, curr+next FROM fibo
+	     LIMIT 1000000 )
+	 SELECT group_concat(curr) FROM fibo;
+	`
+	migrations := &MemoryMigrationSource{
+		Migrations: []*Migration{
+			sqliteMigrations[0],
+			sqliteMigrations[1],
+			{
+				Id:   "125",
+				Up:   []string{fibonacciLoopStmt},
+				Down: []string{}, // Not important here
+			},
+			{
+				Id:   "125",
+				Up:   []string{"INSERT INTO people (id, first_name) VALUES (1, 'Test')", "SELECT fail"},
+				Down: []string{}, // Not important here
+			},
+		},
+	}
+
+	// Should never run the insert
+	ctx, cancelFunc := context.WithTimeout(context.Background(), 10*time.Millisecond)
+	defer cancelFunc()
+	n, err := ExecContext(ctx, s.Db, "sqlite3", migrations, Up)
+	c.Assert(err, Not(IsNil))
+	c.Assert(n, Equals, 2)
+}
+
+//go:embed test-migrations/*
+var testEmbedFS embed.FS
+
+func (s *SqliteMigrateSuite) TestEmbedSource(c *C) {
+	migrations := EmbedFileSystemMigrationSource{
+		FileSystem: testEmbedFS,
+		Root:       "test-migrations",
+	}
+
+	// Executes two migrations
+	n, err := Exec(s.Db, "sqlite3", migrations, Up)
+	c.Assert(err, IsNil)
+	c.Assert(n, Equals, 2)
+
+	// Has data
+	id, err := s.DbMap.SelectInt("SELECT id FROM people")
+	c.Assert(err, IsNil)
+	c.Assert(id, Equals, int64(1))
 }

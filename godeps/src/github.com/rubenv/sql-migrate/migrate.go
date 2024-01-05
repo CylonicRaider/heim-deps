@@ -2,11 +2,14 @@ package migrate
 
 import (
 	"bytes"
+	"context"
 	"database/sql"
+	"embed"
 	"errors"
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"path"
 	"regexp"
 	"sort"
@@ -14,8 +17,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/go-gorp/gorp/v3"
+
 	"github.com/rubenv/sql-migrate/sqlparse"
-	"gopkg.in/gorp.v1"
 )
 
 type MigrationDirection int
@@ -25,28 +29,51 @@ const (
 	Down
 )
 
-var tableName = "gorp_migrations"
-var schemaName = ""
+// MigrationSet provides database parameters for a migration execution
+type MigrationSet struct {
+	// TableName name of the table used to store migration info.
+	TableName string
+	// SchemaName schema that the migration table be referenced.
+	SchemaName string
+	// IgnoreUnknown skips the check to see if there is a migration
+	// ran in the database that is not in MigrationSource.
+	//
+	// This should be used sparingly as it is removing a safety check.
+	IgnoreUnknown bool
+	// DisableCreateTable disable the creation of the migration table
+	DisableCreateTable bool
+}
+
+var migSet = MigrationSet{}
+
+// NewMigrationSet returns a parametrized Migration object
+func (ms MigrationSet) getTableName() string {
+	if ms.TableName == "" {
+		return "gorp_migrations"
+	}
+	return ms.TableName
+}
+
 var numberPrefixRegex = regexp.MustCompile(`^(\d+).*$`)
 
 // PlanError happens where no migration plan could be created between the sets
 // of already applied migrations and the currently found. For example, when the database
 // contains a migration which is not among the migrations list found for an operation.
 type PlanError struct {
-	Migration   *Migration
-	ErrorMessag string
+	Migration    *Migration
+	ErrorMessage string
 }
 
 func newPlanError(migration *Migration, errorMessage string) error {
 	return &PlanError{
-		Migration:   migration,
-		ErrorMessag: errorMessage,
+		Migration:    migration,
+		ErrorMessage: errorMessage,
 	}
 }
 
 func (p *PlanError) Error() string {
 	return fmt.Sprintf("Unable to create migration plan because of %s: %s",
-		p.Migration.Id, p.ErrorMessag)
+		p.Migration.Id, p.ErrorMessage)
 }
 
 // TxError is returned when any error is encountered during a database
@@ -73,15 +100,28 @@ func (e *TxError) Error() string {
 // Should be called before any other call such as (Exec, ExecMax, ...).
 func SetTable(name string) {
 	if name != "" {
-		tableName = name
+		migSet.TableName = name
 	}
 }
 
 // SetSchema sets the name of a schema that the migration table be referenced.
 func SetSchema(name string) {
 	if name != "" {
-		schemaName = name
+		migSet.SchemaName = name
 	}
+}
+
+// SetDisableCreateTable sets the boolean to disable the creation of the migration table
+func SetDisableCreateTable(disable bool) {
+	migSet.DisableCreateTable = disable
+}
+
+// SetIgnoreUnknown sets the flag that skips database check to see if there is a
+// migration in the database that is not in migration source.
+//
+// This should be used sparingly as it is removing a safety check.
+func SetIgnoreUnknown(v bool) {
+	migSet.IgnoreUnknown = v
 }
 
 type Migration struct {
@@ -141,12 +181,30 @@ type MigrationRecord struct {
 	AppliedAt time.Time `db:"applied_at"`
 }
 
+type OracleDialect struct {
+	gorp.OracleDialect
+}
+
+func (OracleDialect) IfTableNotExists(command, _, _ string) string {
+	return command
+}
+
+func (OracleDialect) IfSchemaNotExists(command, _ string) string {
+	return command
+}
+
+func (OracleDialect) IfTableExists(command, _, _ string) string {
+	return command
+}
+
 var MigrationDialects = map[string]gorp.Dialect{
-	"sqlite3":  gorp.SqliteDialect{},
-	"postgres": gorp.PostgresDialect{},
-	"mysql":    gorp.MySQLDialect{Engine: "InnoDB", Encoding: "UTF8"},
-	"mssql":    gorp.SqlServerDialect{},
-	"oci8":     gorp.OracleDialect{},
+	"sqlite3":   gorp.SqliteDialect{},
+	"postgres":  gorp.PostgresDialect{},
+	"mysql":     gorp.MySQLDialect{Engine: "InnoDB", Encoding: "UTF8"},
+	"mssql":     gorp.SqlServerDialect{},
+	"oci8":      OracleDialect{},
+	"godror":    OracleDialect{},
+	"snowflake": gorp.SnowflakeDialect{},
 }
 
 type MigrationSource interface {
@@ -182,7 +240,7 @@ type HttpFileSystemMigrationSource struct {
 var _ MigrationSource = (*HttpFileSystemMigrationSource)(nil)
 
 func (f HttpFileSystemMigrationSource) FindMigrations() ([]*Migration, error) {
-	return findMigrations(f.FileSystem)
+	return findMigrations(f.FileSystem, "/")
 }
 
 // A set of migrations loaded from a directory.
@@ -194,13 +252,13 @@ var _ MigrationSource = (*FileMigrationSource)(nil)
 
 func (f FileMigrationSource) FindMigrations() ([]*Migration, error) {
 	filesystem := http.Dir(f.Dir)
-	return findMigrations(filesystem)
+	return findMigrations(filesystem, "/")
 }
 
-func findMigrations(dir http.FileSystem) ([]*Migration, error) {
+func findMigrations(dir http.FileSystem, root string) ([]*Migration, error) {
 	migrations := make([]*Migration, 0)
 
-	file, err := dir.Open("/")
+	file, err := dir.Open(root)
 	if err != nil {
 		return nil, err
 	}
@@ -212,14 +270,9 @@ func findMigrations(dir http.FileSystem) ([]*Migration, error) {
 
 	for _, info := range files {
 		if strings.HasSuffix(info.Name(), ".sql") {
-			file, err := dir.Open(info.Name())
+			migration, err := migrationFromFile(dir, root, info)
 			if err != nil {
-				return nil, fmt.Errorf("Error while opening %s: %s", info.Name(), err)
-			}
-
-			migration, err := ParseMigration(info.Name(), file)
-			if err != nil {
-				return nil, fmt.Errorf("Error while parsing %s: %s", info.Name(), err)
+				return nil, err
 			}
 
 			migrations = append(migrations, migration)
@@ -230,6 +283,21 @@ func findMigrations(dir http.FileSystem) ([]*Migration, error) {
 	sort.Sort(byId(migrations))
 
 	return migrations, nil
+}
+
+func migrationFromFile(dir http.FileSystem, root string, info os.FileInfo) (*Migration, error) {
+	path := path.Join(root, info.Name())
+	file, err := dir.Open(path)
+	if err != nil {
+		return nil, fmt.Errorf("Error while opening %s: %w", info.Name(), err)
+	}
+	defer func() { _ = file.Close() }()
+
+	migration, err := ParseMigration(info.Name(), file)
+	if err != nil {
+		return nil, fmt.Errorf("Error while parsing %s: %w", info.Name(), err)
+	}
+	return migration, nil
 }
 
 // Migrations from a bindata asset set.
@@ -274,6 +342,19 @@ func (a AssetMigrationSource) FindMigrations() ([]*Migration, error) {
 	sort.Sort(byId(migrations))
 
 	return migrations, nil
+}
+
+// A set of migrations loaded from an go1.16 embed.FS
+type EmbedFileSystemMigrationSource struct {
+	FileSystem embed.FS
+
+	Root string
+}
+
+var _ MigrationSource = (*EmbedFileSystemMigrationSource)(nil)
+
+func (f EmbedFileSystemMigrationSource) FindMigrations() ([]*Migration, error) {
+	return findMigrations(http.FS(f.FileSystem), f.Root)
 }
 
 // Avoids pulling in the packr library for everyone, mimicks the bits of
@@ -341,7 +422,7 @@ func ParseMigration(id string, r io.ReadSeeker) (*Migration, error) {
 
 	parsed, err := sqlparse.ParseMigration(r)
 	if err != nil {
-		return nil, fmt.Errorf("Error parsing migration (%s): %s", id, err)
+		return nil, fmt.Errorf("Error parsing migration (%s): %w", id, err)
 	}
 
 	m.Up = parsed.UpStatements
@@ -363,7 +444,24 @@ type SqlExecutor interface {
 //
 // Returns the number of applied migrations.
 func Exec(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection) (int, error) {
-	return ExecMax(db, dialect, m, dir, 0)
+	return ExecMaxContext(context.Background(), db, dialect, m, dir, 0)
+}
+
+// Returns the number of applied migrations.
+func (ms MigrationSet) Exec(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection) (int, error) {
+	return ms.ExecMaxContext(context.Background(), db, dialect, m, dir, 0)
+}
+
+// Execute a set of migrations with an input context.
+//
+// Returns the number of applied migrations.
+func ExecContext(ctx context.Context, db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection) (int, error) {
+	return ExecMaxContext(ctx, db, dialect, m, dir, 0)
+}
+
+// Returns the number of applied migrations.
+func (ms MigrationSet) ExecContext(ctx context.Context, db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection) (int, error) {
+	return ms.ExecMaxContext(ctx, db, dialect, m, dir, 0)
 }
 
 // Execute a set of migrations
@@ -372,26 +470,88 @@ func Exec(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection)
 //
 // Returns the number of applied migrations.
 func ExecMax(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, max int) (int, error) {
-	migrations, dbMap, err := PlanMigration(db, dialect, m, dir, max)
+	return migSet.ExecMax(db, dialect, m, dir, max)
+}
+
+// Execute a set of migrations with an input context.
+//
+// Will apply at most `max` migrations. Pass 0 for no limit (or use Exec).
+//
+// Returns the number of applied migrations.
+func ExecMaxContext(ctx context.Context, db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, max int) (int, error) {
+	return migSet.ExecMaxContext(ctx, db, dialect, m, dir, max)
+}
+
+// Execute a set of migrations
+//
+// Will apply at the target `version` of migration. Cannot be a negative value.
+//
+// Returns the number of applied migrations.
+func ExecVersion(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, version int64) (int, error) {
+	return ExecVersionContext(context.Background(), db, dialect, m, dir, version)
+}
+
+// Execute a set of migrations with an input context.
+//
+// Will apply at the target `version` of migration. Cannot be a negative value.
+//
+// Returns the number of applied migrations.
+func ExecVersionContext(ctx context.Context, db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, version int64) (int, error) {
+	if version < 0 {
+		return 0, fmt.Errorf("target version %d should not be negative", version)
+	}
+	return migSet.ExecVersionContext(ctx, db, dialect, m, dir, version)
+}
+
+// Returns the number of applied migrations.
+func (ms MigrationSet) ExecMax(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, max int) (int, error) {
+	return ms.ExecMaxContext(context.Background(), db, dialect, m, dir, max)
+}
+
+// Returns the number of applied migrations, but applies with an input context.
+func (ms MigrationSet) ExecMaxContext(ctx context.Context, db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, max int) (int, error) {
+	migrations, dbMap, err := ms.PlanMigration(db, dialect, m, dir, max)
 	if err != nil {
 		return 0, err
 	}
+	return ms.applyMigrations(ctx, dir, migrations, dbMap)
+}
 
-	// Apply migrations
+// Returns the number of applied migrations.
+func (ms MigrationSet) ExecVersion(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, version int64) (int, error) {
+	return ms.ExecVersionContext(context.Background(), db, dialect, m, dir, version)
+}
+
+func (ms MigrationSet) ExecVersionContext(ctx context.Context, db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, version int64) (int, error) {
+	migrations, dbMap, err := ms.PlanMigrationToVersion(db, dialect, m, dir, version)
+	if err != nil {
+		return 0, err
+	}
+	return ms.applyMigrations(ctx, dir, migrations, dbMap)
+}
+
+// Applies the planned migrations and returns the number of applied migrations.
+func (MigrationSet) applyMigrations(ctx context.Context, dir MigrationDirection, migrations []*PlannedMigration, dbMap *gorp.DbMap) (int, error) {
 	applied := 0
 	for _, migration := range migrations {
 		var executor SqlExecutor
+		var err error
 
 		if migration.DisableTransaction {
-			executor = dbMap
+			executor = dbMap.WithContext(ctx)
 		} else {
-			executor, err = dbMap.Begin()
+			e, err := dbMap.Begin()
 			if err != nil {
 				return applied, newTxError(migration, err)
 			}
+			executor = e.WithContext(ctx)
 		}
 
 		for _, stmt := range migration.Queries {
+			// remove the semicolon from stmt, fix ORA-00922 issue in database oracle
+			stmt = strings.TrimSuffix(stmt, "\n")
+			stmt = strings.TrimSuffix(stmt, " ")
+			stmt = strings.TrimSuffix(stmt, ";")
 			if _, err := executor.Exec(stmt); err != nil {
 				if trans, ok := executor.(*gorp.Transaction); ok {
 					_ = trans.Rollback()
@@ -443,7 +603,27 @@ func ExecMax(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirecti
 
 // Plan a migration.
 func PlanMigration(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, max int) ([]*PlannedMigration, *gorp.DbMap, error) {
-	dbMap, err := getMigrationDbMap(db, dialect)
+	return migSet.PlanMigration(db, dialect, m, dir, max)
+}
+
+// Plan a migration to version.
+func PlanMigrationToVersion(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, version int64) ([]*PlannedMigration, *gorp.DbMap, error) {
+	return migSet.PlanMigrationToVersion(db, dialect, m, dir, version)
+}
+
+// Plan a migration.
+func (ms MigrationSet) PlanMigration(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, max int) ([]*PlannedMigration, *gorp.DbMap, error) {
+	return ms.planMigrationCommon(db, dialect, m, dir, max, -1)
+}
+
+// Plan a migration to version.
+func (ms MigrationSet) PlanMigrationToVersion(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, version int64) ([]*PlannedMigration, *gorp.DbMap, error) {
+	return ms.planMigrationCommon(db, dialect, m, dir, 0, version)
+}
+
+// A common method to plan a migration.
+func (ms MigrationSet) planMigrationCommon(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirection, max int, version int64) ([]*PlannedMigration, *gorp.DbMap, error) {
+	dbMap, err := ms.getMigrationDbMap(db, dialect)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -454,7 +634,7 @@ func PlanMigration(db *sql.DB, dialect string, m MigrationSource, dir MigrationD
 	}
 
 	var migrationRecords []MigrationRecord
-	_, err = dbMap.Select(&migrationRecords, fmt.Sprintf("SELECT * FROM %s", dbMap.Dialect.QuotedTableForQuery(schemaName, tableName)))
+	_, err = dbMap.Select(&migrationRecords, fmt.Sprintf("SELECT * FROM %s", dbMap.Dialect.QuotedTableForQuery(ms.SchemaName, ms.getTableName())))
 	if err != nil {
 		return nil, nil, err
 	}
@@ -470,13 +650,15 @@ func PlanMigration(db *sql.DB, dialect string, m MigrationSource, dir MigrationD
 
 	// Make sure all migrations in the database are among the found migrations which
 	// are to be applied.
-	migrationsSearch := make(map[string]struct{})
-	for _, migration := range migrations {
-		migrationsSearch[migration.Id] = struct{}{}
-	}
-	for _, existingMigration := range existingMigrations {
-		if _, ok := migrationsSearch[existingMigration.Id]; !ok {
-			return nil, nil, newPlanError(existingMigration, "unknown migration in database")
+	if !ms.IgnoreUnknown {
+		migrationsSearch := make(map[string]struct{})
+		for _, migration := range migrations {
+			migrationsSearch[migration.Id] = struct{}{}
+		}
+		for _, existingMigration := range existingMigrations {
+			if _, ok := migrationsSearch[existingMigration.Id]; !ok {
+				return nil, nil, newPlanError(existingMigration, "unknown migration in database")
+			}
 		}
 	}
 
@@ -497,11 +679,27 @@ func PlanMigration(db *sql.DB, dialect string, m MigrationSource, dir MigrationD
 	// Figure out which migrations to apply
 	toApply := ToApply(migrations, record.Id, dir)
 	toApplyCount := len(toApply)
-	if max > 0 && max < toApplyCount {
+
+	if version >= 0 {
+		targetIndex := 0
+		for targetIndex < len(toApply) {
+			tempVersion := toApply[targetIndex].VersionInt()
+			if dir == Up && tempVersion > version || dir == Down && tempVersion < version {
+				return nil, nil, newPlanError(&Migration{}, fmt.Errorf("unknown migration with version id %d in database", version).Error())
+			}
+			if tempVersion == version {
+				toApplyCount = targetIndex + 1
+				break
+			}
+			targetIndex++
+		}
+		if targetIndex == len(toApply) {
+			return nil, nil, newPlanError(&Migration{}, fmt.Errorf("unknown migration with version id %d in database", version).Error())
+		}
+	} else if max > 0 && max < toApplyCount {
 		toApplyCount = max
 	}
 	for _, v := range toApply[0:toApplyCount] {
-
 		if dir == Up {
 			result = append(result, &PlannedMigration{
 				Migration:          v,
@@ -571,7 +769,7 @@ func SkipMax(db *sql.DB, dialect string, m MigrationSource, dir MigrationDirecti
 
 // Filter a slice of migrations into ones that should be applied.
 func ToApply(migrations []*Migration, current string, direction MigrationDirection) []*Migration {
-	var index = -1
+	index := -1
 	if current != "" {
 		for index < len(migrations)-1 {
 			index++
@@ -621,13 +819,17 @@ func ToCatchup(migrations, existingMigrations []*Migration, lastRun *Migration) 
 }
 
 func GetMigrationRecords(db *sql.DB, dialect string) ([]*MigrationRecord, error) {
-	dbMap, err := getMigrationDbMap(db, dialect)
+	return migSet.GetMigrationRecords(db, dialect)
+}
+
+func (ms MigrationSet) GetMigrationRecords(db *sql.DB, dialect string) ([]*MigrationRecord, error) {
+	dbMap, err := ms.getMigrationDbMap(db, dialect)
 	if err != nil {
 		return nil, err
 	}
 
 	var records []*MigrationRecord
-	query := fmt.Sprintf("SELECT * FROM %s ORDER BY id ASC", dbMap.Dialect.QuotedTableForQuery(schemaName, tableName))
+	query := fmt.Sprintf("SELECT * FROM %s ORDER BY %s ASC", dbMap.Dialect.QuotedTableForQuery(ms.SchemaName, ms.getTableName()), dbMap.Dialect.QuoteField("id"))
 	_, err = dbMap.Select(&records, query)
 	if err != nil {
 		return nil, err
@@ -636,7 +838,7 @@ func GetMigrationRecords(db *sql.DB, dialect string) ([]*MigrationRecord, error)
 	return records, nil
 }
 
-func getMigrationDbMap(db *sql.DB, dialect string) (*gorp.DbMap, error) {
+func (ms MigrationSet) getMigrationDbMap(db *sql.DB, dialect string) (*gorp.DbMap, error) {
 	d, ok := MigrationDialects[dialect]
 	if !ok {
 		return nil, fmt.Errorf("Unknown dialect: %s", dialect)
@@ -656,19 +858,30 @@ func getMigrationDbMap(db *sql.DB, dialect string) (*gorp.DbMap, error) {
 
 Make sure that the parseTime option is supplied to your database connection.
 Check https://github.com/go-sql-driver/mysql#parsetime for more info.`)
-			} else {
-				return nil, err
 			}
+			return nil, err
 		}
 	}
 
 	// Create migration database map
 	dbMap := &gorp.DbMap{Db: db, Dialect: d}
-	dbMap.AddTableWithNameAndSchema(MigrationRecord{}, schemaName, tableName).SetKeys(false, "Id")
-	//dbMap.TraceOn("", log.New(os.Stdout, "migrate: ", log.Lmicroseconds))
+	table := dbMap.AddTableWithNameAndSchema(MigrationRecord{}, ms.SchemaName, ms.getTableName()).SetKeys(false, "Id")
+
+	if dialect == "oci8" || dialect == "godror" {
+		table.ColMap("Id").SetMaxSize(4000)
+	}
+
+	if ms.DisableCreateTable {
+		return dbMap, nil
+	}
 
 	err := dbMap.CreateTablesIfNotExists()
 	if err != nil {
+		// Oracle database does not support `if not exists`, so use `ORA-00955:` error code
+		// to check if the table exists.
+		if (dialect == "oci8" || dialect == "godror") && strings.Contains(err.Error(), "ORA-00955:") {
+			return dbMap, nil
+		}
 		return nil, err
 	}
 

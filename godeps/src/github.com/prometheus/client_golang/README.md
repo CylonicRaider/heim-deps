@@ -1,84 +1,56 @@
 # Prometheus Go client library
 
-[![Build Status](https://travis-ci.org/prometheus/client_golang.svg?branch=master)](https://travis-ci.org/prometheus/client_golang)
+[![CI](https://github.com/prometheus/client_golang/actions/workflows/go.yml/badge.svg)](https://github.com/prometheus/client_golang/actions/workflows/ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/prometheus/client_golang)](https://goreportcard.com/report/github.com/prometheus/client_golang)
-[![go-doc](https://godoc.org/github.com/prometheus/client_golang?status.svg)](https://godoc.org/github.com/prometheus/client_golang)
+[![Go Reference](https://pkg.go.dev/badge/github.com/prometheus/client_golang.svg)](https://pkg.go.dev/github.com/prometheus/client_golang)
+[![Slack](https://img.shields.io/badge/join%20slack-%23prometheus--client_golang-brightgreen.svg)](https://slack.cncf.io/)
 
 This is the [Go](http://golang.org) client library for
 [Prometheus](http://prometheus.io). It has two separate parts, one for
 instrumenting application code, and one for creating clients that talk to the
 Prometheus HTTP API.
 
-__This library requires Go1.7 or later.__
+**This library requires Go1.19 or later.**
+> The library mandates the use of Go1.19 or subsequent versions. While it has demonstrated functionality with versions as old as Go 1.17, our commitment remains to offer support and rectifications for only the most recent three major releases.
 
-## Important note about releases, versioning, tagging, and stability
+## Important note about releases and stability
 
-While our goal is to follow [Semantic Versioning](https://semver.org/), this
-repository is still pre-1.0.0. To quote the
-[Semantic Versioning spec](https://semver.org/#spec-item-4): “Anything may
-change at any time. The public API should not be considered stable.” We know
-that this is at odds with the widespread use of this library. However, just
-declaring something 1.0.0 doesn't make it 1.0.0. Instead, we are working
-towards a 1.0.0 release that actually deserves its major version number.
+This repository generally follows [Semantic
+Versioning](https://semver.org/). However, the API client in
+`prometheus/client_golang/api/…` is still considered experimental. Breaking
+changes of the API client will _not_ trigger a new major release. The same is
+true for selected other new features explicitly marked as **EXPERIMENTAL** in
+CHANGELOG.md.
 
-Having said that, we aim for always keeping the tip of master in a workable
-state. We occasionally tag versions and track their changes in CHANGELOG.md,
-but this happens mostly to keep dependency management tools happy and to give
-people a handle they can talk about easily. In particular, all commits in the
-master branch have passed the same testing and reviewing. There is no QA
-process in place that would render tagged commits more stable or better tested
-than others.
-
-There is a plan behind the current (pre-1.0.0) versioning, though:
-
-- v0.9 is the “production release”, currently tracked in the master
-  branch. “Patch” releases will usually be just bug fixes, indeed, but
-  important new features that do not require invasive code changes might also
-  be included in those. We do not plan any breaking changes from one v0.9.x
-  release to any later v0.9.y release, but nothing is guaranteed. Since the
-  master branch will eventually be switched over to track the upcoming v0.10
-  (see below), we recommend to tell your dependency management tool of choice
-  to use the latest v0.9.x release, at least for your production software. In
-  that way, you should get bug fixes and non-invasive, low-risk new features
-  without the need to change anything on your part.
-- v0.10 is a planned release that will have a _lot_ of breaking changes
-  (despite being only a “minor” release in the Semantic Versioning terminology,
-  but as said, pre-1.0.0 means nothing is guaranteed). Essentially, we have
-  been piling up feature requests that require breaking changes for a while,
-  and they are all collected in the
-  [v0.10 milestone](https://github.com/prometheus/client_golang/milestone/2).
-  Since there will be so many breaking changes, the development for v0.10 is
-  currently not happening in the master branch, but in the
-  [dev-0.10 branch](https://github.com/prometheus/client_golang/tree/dev-0.10).
-  It will violently change for a while, and it will definitely be in a
-  non-working state now and then. It should only be used for sneak-peaks and
-  discussions of the new features and designs.
-- Once v0.10 is ready for real-life use, it will be merged into the master
-  branch (which is the reason why you should lock your dependency management
-  tool to v0.9.x and only migrate to v0.10 when both you and v0.10 are ready
-  for it). In the ideal case, v0.10 will be the basis for the future v1.0
-  release, but we cannot provide an ETA at this time.
+Features that require breaking changes in the stable parts of the repository
+are being batched up and tracked in the [v2
+milestone](https://github.com/prometheus/client_golang/milestone/2). The v2
+development happens in a [separate
+branch](https://github.com/prometheus/client_golang/tree/dev-v2) for the time
+being. v2 releases off that branch will happen once sufficient stability is
+reached. In view of the widespread use of this repository, v1 and v2 will
+coexist for a while to enable a convenient transition.
 
 ## Instrumenting applications
 
-[![code-coverage](http://gocover.io/_badge/github.com/prometheus/client_golang/prometheus)](http://gocover.io/github.com/prometheus/client_golang/prometheus) [![go-doc](https://godoc.org/github.com/prometheus/client_golang/prometheus?status.svg)](https://godoc.org/github.com/prometheus/client_golang/prometheus)
+[![Go Reference](https://pkg.go.dev/badge/github.com/prometheus/client_golang/prometheus.svg)](https://pkg.go.dev/github.com/prometheus/client_golang/prometheus)
 
 The
-[`prometheus` directory](https://github.com/prometheus/client_golang/tree/master/prometheus)
+[`prometheus` directory](https://github.com/prometheus/client_golang/tree/main/prometheus)
 contains the instrumentation library. See the
 [guide](https://prometheus.io/docs/guides/go-application/) on the Prometheus
 website to learn more about instrumenting applications.
 
 The
-[`examples` directory](https://github.com/prometheus/client_golang/tree/master/examples)
+[`examples` directory](https://github.com/prometheus/client_golang/tree/main/examples)
 contains simple examples of instrumented code.
 
 ## Client for the Prometheus HTTP API
 
-[![code-coverage](http://gocover.io/_badge/github.com/prometheus/client_golang/api/prometheus/v1)](http://gocover.io/github.com/prometheus/client_golang/api/prometheus/v1) [![go-doc](https://godoc.org/github.com/prometheus/client_golang/api/prometheus?status.svg)](https://godoc.org/github.com/prometheus/client_golang/api)
+[![Go Reference](https://pkg.go.dev/badge/github.com/prometheus/client_golang/api.svg)](https://pkg.go.dev/github.com/prometheus/client_golang/api)
 
 The
-[`api/prometheus` directory](https://github.com/prometheus/client_golang/tree/master/api/prometheus)
+[`api/prometheus` directory](https://github.com/prometheus/client_golang/tree/main/api/prometheus)
 contains the client for the
 [Prometheus HTTP API](http://prometheus.io/docs/querying/api/). It allows you
 to write Go applications that query time series data from a Prometheus
@@ -87,12 +59,35 @@ server. It is still in alpha stage.
 ## Where is `model`, `extraction`, and `text`?
 
 The `model` packages has been moved to
-[`prometheus/common/model`](https://github.com/prometheus/common/tree/master/model).
+[`prometheus/common/model`](https://github.com/prometheus/common/tree/main/model).
 
 The `extraction` and `text` packages are now contained in
-[`prometheus/common/expfmt`](https://github.com/prometheus/common/tree/master/expfmt).
+[`prometheus/common/expfmt`](https://github.com/prometheus/common/tree/main/expfmt).
 
 ## Contributing and community
 
 See the [contributing guidelines](CONTRIBUTING.md) and the
 [Community section](http://prometheus.io/community/) of the homepage.
+
+`client_golang` community is also present on the CNCF Slack `#prometheus-client_golang`.
+
+### For Maintainers: Release Process
+
+To cut a minor version:
+
+1. Create a new branch `release-<major>.<minor>` on top of the `main` commit you want to cut the version from and push it.
+2. Create a new branch on top of the release branch, e.g. `<yourname>/cut-<major>.<minor>.<patch>`,
+3. Change the `VERSION` file.
+4. Update `CHANGELOG` (only user-impacting changes to mention).
+5. Create PR, and get it reviewed.
+6. Once merged, create a release with the `release-<major>.<minor>` tag on GitHub with the `<version>` title.
+7. Announce on the prometheus-announce mailing list, slack and Twitter.
+8. Merge the release branch back to the `main` using the "merge without squashing" approach (!).
+
+> NOTE: In case of merge conflicts, you can checkout the release branch in a new branch, e.g. `<yourname>/resolve-conflicts`, fix the merge problems there, and then do a PR into main from the new branch. In that way, you still get all the commits in the release branch back into `main`, but leave the release branch alone.
+
+To cut the patch version:
+
+1. Create a branch on top of the release branch you want to use.
+2. Cherry-pick the fixes from the `main` branch (or add new commits) to fix critical bugs for that patch release.
+3. Follow steps 3-8 as above.

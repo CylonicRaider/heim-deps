@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/client/metadata"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/aws/signer/v4"
+	"github.com/aws/aws-sdk-go/private/protocol"
 	"github.com/aws/aws-sdk-go/private/protocol/jsonrpc"
 )
 
@@ -31,7 +32,7 @@ var initRequest func(*request.Request)
 const (
 	ServiceName = "FSx" // Name of service.
 	EndpointsID = "fsx" // ID to lookup a service endpoint with.
-	ServiceID   = "FSx" // ServiceID is a unique identifer of a specific service.
+	ServiceID   = "FSx" // ServiceID is a unique identifier of a specific service.
 )
 
 // New creates a new instance of the FSx client with a session.
@@ -39,30 +40,38 @@ const (
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a FSx client from just a session.
-//     svc := fsx.New(mySession)
 //
-//     // Create a FSx client with additional configuration
-//     svc := fsx.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
+//	mySession := session.Must(session.NewSession())
+//
+//	// Create a FSx client from just a session.
+//	svc := fsx.New(mySession)
+//
+//	// Create a FSx client with additional configuration
+//	svc := fsx.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
 func New(p client.ConfigProvider, cfgs ...*aws.Config) *FSx {
 	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
+	if c.SigningNameDerived || len(c.SigningName) == 0 {
+		c.SigningName = "fsx"
+	}
+	return newClient(*c.Config, c.Handlers, c.PartitionID, c.Endpoint, c.SigningRegion, c.SigningName, c.ResolvedRegion)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *FSx {
+func newClient(cfg aws.Config, handlers request.Handlers, partitionID, endpoint, signingRegion, signingName, resolvedRegion string) *FSx {
 	svc := &FSx{
 		Client: client.New(
 			cfg,
 			metadata.ClientInfo{
-				ServiceName:   ServiceName,
-				ServiceID:     ServiceID,
-				SigningName:   signingName,
-				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
-				APIVersion:    "2018-03-01",
-				JSONVersion:   "1.1",
-				TargetPrefix:  "AWSSimbaAPIService_v20180301",
+				ServiceName:    ServiceName,
+				ServiceID:      ServiceID,
+				SigningName:    signingName,
+				SigningRegion:  signingRegion,
+				PartitionID:    partitionID,
+				Endpoint:       endpoint,
+				APIVersion:     "2018-03-01",
+				ResolvedRegion: resolvedRegion,
+				JSONVersion:    "1.1",
+				TargetPrefix:   "AWSSimbaAPIService_v20180301",
 			},
 			handlers,
 		),
@@ -73,7 +82,9 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 	svc.Handlers.Build.PushBackNamed(jsonrpc.BuildHandler)
 	svc.Handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
 	svc.Handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
-	svc.Handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(
+		protocol.NewUnmarshalErrorHandler(jsonrpc.NewUnmarshalTypedError(exceptionFromCode)).NamedHandler(),
+	)
 
 	// Run custom client initialization if present
 	if initClient != nil {

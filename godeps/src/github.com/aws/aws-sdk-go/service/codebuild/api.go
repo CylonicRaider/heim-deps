@@ -29,14 +29,13 @@ const opBatchDeleteBuilds = "BatchDeleteBuilds"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchDeleteBuildsRequest method.
+//	req, resp := client.BatchDeleteBuildsRequest(params)
 //
-//    // Example sending a request using the BatchDeleteBuildsRequest method.
-//    req, resp := client.BatchDeleteBuildsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuilds
 func (c *CodeBuild) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) (req *request.Request, output *BatchDeleteBuildsOutput) {
@@ -66,9 +65,9 @@ func (c *CodeBuild) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) (req
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation BatchDeleteBuilds for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuilds
 func (c *CodeBuild) BatchDeleteBuilds(input *BatchDeleteBuildsInput) (*BatchDeleteBuildsOutput, error) {
@@ -92,6 +91,84 @@ func (c *CodeBuild) BatchDeleteBuildsWithContext(ctx aws.Context, input *BatchDe
 	return out, req.Send()
 }
 
+const opBatchGetBuildBatches = "BatchGetBuildBatches"
+
+// BatchGetBuildBatchesRequest generates a "aws/request.Request" representing the
+// client's request for the BatchGetBuildBatches operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See BatchGetBuildBatches for more information on using the BatchGetBuildBatches
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the BatchGetBuildBatchesRequest method.
+//	req, resp := client.BatchGetBuildBatchesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuildBatches
+func (c *CodeBuild) BatchGetBuildBatchesRequest(input *BatchGetBuildBatchesInput) (req *request.Request, output *BatchGetBuildBatchesOutput) {
+	op := &request.Operation{
+		Name:       opBatchGetBuildBatches,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetBuildBatchesInput{}
+	}
+
+	output = &BatchGetBuildBatchesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// BatchGetBuildBatches API operation for AWS CodeBuild.
+//
+// Retrieves information about one or more batch builds.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation BatchGetBuildBatches for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuildBatches
+func (c *CodeBuild) BatchGetBuildBatches(input *BatchGetBuildBatchesInput) (*BatchGetBuildBatchesOutput, error) {
+	req, out := c.BatchGetBuildBatchesRequest(input)
+	return out, req.Send()
+}
+
+// BatchGetBuildBatchesWithContext is the same as BatchGetBuildBatches with the addition of
+// the ability to pass a context and additional request options.
+//
+// See BatchGetBuildBatches for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) BatchGetBuildBatchesWithContext(ctx aws.Context, input *BatchGetBuildBatchesInput, opts ...request.Option) (*BatchGetBuildBatchesOutput, error) {
+	req, out := c.BatchGetBuildBatchesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opBatchGetBuilds = "BatchGetBuilds"
 
 // BatchGetBuildsRequest generates a "aws/request.Request" representing the
@@ -108,14 +185,13 @@ const opBatchGetBuilds = "BatchGetBuilds"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetBuildsRequest method.
+//	req, resp := client.BatchGetBuildsRequest(params)
 //
-//    // Example sending a request using the BatchGetBuildsRequest method.
-//    req, resp := client.BatchGetBuildsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuilds
 func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) (req *request.Request, output *BatchGetBuildsOutput) {
@@ -136,7 +212,7 @@ func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) (req *requ
 
 // BatchGetBuilds API operation for AWS CodeBuild.
 //
-// Gets information about builds.
+// Gets information about one or more builds.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -145,9 +221,9 @@ func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) (req *requ
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation BatchGetBuilds for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuilds
 func (c *CodeBuild) BatchGetBuilds(input *BatchGetBuildsInput) (*BatchGetBuildsOutput, error) {
@@ -187,14 +263,13 @@ const opBatchGetProjects = "BatchGetProjects"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchGetProjectsRequest method.
+//	req, resp := client.BatchGetProjectsRequest(params)
 //
-//    // Example sending a request using the BatchGetProjectsRequest method.
-//    req, resp := client.BatchGetProjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjects
 func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) (req *request.Request, output *BatchGetProjectsOutput) {
@@ -215,7 +290,7 @@ func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) (req *
 
 // BatchGetProjects API operation for AWS CodeBuild.
 //
-// Gets information about build projects.
+// Gets information about one or more build projects.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -224,9 +299,9 @@ func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) (req *
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation BatchGetProjects for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjects
 func (c *CodeBuild) BatchGetProjects(input *BatchGetProjectsInput) (*BatchGetProjectsOutput, error) {
@@ -250,6 +325,162 @@ func (c *CodeBuild) BatchGetProjectsWithContext(ctx aws.Context, input *BatchGet
 	return out, req.Send()
 }
 
+const opBatchGetReportGroups = "BatchGetReportGroups"
+
+// BatchGetReportGroupsRequest generates a "aws/request.Request" representing the
+// client's request for the BatchGetReportGroups operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See BatchGetReportGroups for more information on using the BatchGetReportGroups
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the BatchGetReportGroupsRequest method.
+//	req, resp := client.BatchGetReportGroupsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReportGroups
+func (c *CodeBuild) BatchGetReportGroupsRequest(input *BatchGetReportGroupsInput) (req *request.Request, output *BatchGetReportGroupsOutput) {
+	op := &request.Operation{
+		Name:       opBatchGetReportGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetReportGroupsInput{}
+	}
+
+	output = &BatchGetReportGroupsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// BatchGetReportGroups API operation for AWS CodeBuild.
+//
+// Returns an array of report groups.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation BatchGetReportGroups for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReportGroups
+func (c *CodeBuild) BatchGetReportGroups(input *BatchGetReportGroupsInput) (*BatchGetReportGroupsOutput, error) {
+	req, out := c.BatchGetReportGroupsRequest(input)
+	return out, req.Send()
+}
+
+// BatchGetReportGroupsWithContext is the same as BatchGetReportGroups with the addition of
+// the ability to pass a context and additional request options.
+//
+// See BatchGetReportGroups for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) BatchGetReportGroupsWithContext(ctx aws.Context, input *BatchGetReportGroupsInput, opts ...request.Option) (*BatchGetReportGroupsOutput, error) {
+	req, out := c.BatchGetReportGroupsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opBatchGetReports = "BatchGetReports"
+
+// BatchGetReportsRequest generates a "aws/request.Request" representing the
+// client's request for the BatchGetReports operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See BatchGetReports for more information on using the BatchGetReports
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the BatchGetReportsRequest method.
+//	req, resp := client.BatchGetReportsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReports
+func (c *CodeBuild) BatchGetReportsRequest(input *BatchGetReportsInput) (req *request.Request, output *BatchGetReportsOutput) {
+	op := &request.Operation{
+		Name:       opBatchGetReports,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetReportsInput{}
+	}
+
+	output = &BatchGetReportsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// BatchGetReports API operation for AWS CodeBuild.
+//
+// Returns an array of reports.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation BatchGetReports for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReports
+func (c *CodeBuild) BatchGetReports(input *BatchGetReportsInput) (*BatchGetReportsOutput, error) {
+	req, out := c.BatchGetReportsRequest(input)
+	return out, req.Send()
+}
+
+// BatchGetReportsWithContext is the same as BatchGetReports with the addition of
+// the ability to pass a context and additional request options.
+//
+// See BatchGetReports for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) BatchGetReportsWithContext(ctx aws.Context, input *BatchGetReportsInput, opts ...request.Option) (*BatchGetReportsOutput, error) {
+	req, out := c.BatchGetReportsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateProject = "CreateProject"
 
 // CreateProjectRequest generates a "aws/request.Request" representing the
@@ -266,14 +497,13 @@ const opCreateProject = "CreateProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateProjectRequest method.
+//	req, resp := client.CreateProjectRequest(params)
 //
-//    // Example sending a request using the CreateProjectRequest method.
-//    req, resp := client.CreateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject
 func (c *CodeBuild) CreateProjectRequest(input *CreateProjectInput) (req *request.Request, output *CreateProjectOutput) {
@@ -303,16 +533,18 @@ func (c *CodeBuild) CreateProjectRequest(input *CreateProjectInput) (req *reques
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation CreateProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified AWS resource cannot be created, because an AWS resource with
-//   the same settings already exists.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
-//   * ErrCodeAccountLimitExceededException "AccountLimitExceededException"
-//   An AWS service limit was exceeded for the calling AWS account.
+//   - ResourceAlreadyExistsException
+//     The specified Amazon Web Services resource cannot be created, because an
+//     Amazon Web Services resource with the same settings already exists.
+//
+//   - AccountLimitExceededException
+//     An Amazon Web Services service limit was exceeded for the calling Amazon
+//     Web Services account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject
 func (c *CodeBuild) CreateProject(input *CreateProjectInput) (*CreateProjectOutput, error) {
@@ -336,6 +568,93 @@ func (c *CodeBuild) CreateProjectWithContext(ctx aws.Context, input *CreateProje
 	return out, req.Send()
 }
 
+const opCreateReportGroup = "CreateReportGroup"
+
+// CreateReportGroupRequest generates a "aws/request.Request" representing the
+// client's request for the CreateReportGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateReportGroup for more information on using the CreateReportGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateReportGroupRequest method.
+//	req, resp := client.CreateReportGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroup
+func (c *CodeBuild) CreateReportGroupRequest(input *CreateReportGroupInput) (req *request.Request, output *CreateReportGroupOutput) {
+	op := &request.Operation{
+		Name:       opCreateReportGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateReportGroupInput{}
+	}
+
+	output = &CreateReportGroupOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateReportGroup API operation for AWS CodeBuild.
+//
+// Creates a report group. A report group contains a collection of reports.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation CreateReportGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceAlreadyExistsException
+//     The specified Amazon Web Services resource cannot be created, because an
+//     Amazon Web Services resource with the same settings already exists.
+//
+//   - AccountLimitExceededException
+//     An Amazon Web Services service limit was exceeded for the calling Amazon
+//     Web Services account.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroup
+func (c *CodeBuild) CreateReportGroup(input *CreateReportGroupInput) (*CreateReportGroupOutput, error) {
+	req, out := c.CreateReportGroupRequest(input)
+	return out, req.Send()
+}
+
+// CreateReportGroupWithContext is the same as CreateReportGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateReportGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) CreateReportGroupWithContext(ctx aws.Context, input *CreateReportGroupInput, opts ...request.Option) (*CreateReportGroupOutput, error) {
+	req, out := c.CreateReportGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateWebhook = "CreateWebhook"
 
 // CreateWebhookRequest generates a "aws/request.Request" representing the
@@ -352,14 +671,13 @@ const opCreateWebhook = "CreateWebhook"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateWebhookRequest method.
+//	req, resp := client.CreateWebhookRequest(params)
 //
-//    // Example sending a request using the CreateWebhookRequest method.
-//    req, resp := client.CreateWebhookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook
 func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) (req *request.Request, output *CreateWebhookOutput) {
@@ -380,18 +698,17 @@ func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) (req *reques
 
 // CreateWebhook API operation for AWS CodeBuild.
 //
-// For an existing AWS CodeBuild build project that has its source code stored
-// in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding
-// the source code every time a code change is pushed to the repository.
+// For an existing CodeBuild build project that has its source code stored in
+// a GitHub or Bitbucket repository, enables CodeBuild to start rebuilding the
+// source code every time a code change is pushed to the repository.
 //
-// If you enable webhooks for an AWS CodeBuild project, and the project is used
-// as a build step in AWS CodePipeline, then two identical builds are created
-// for each commit. One build is triggered through webhooks, and one through
-// AWS CodePipeline. Because billing is on a per-build basis, you are billed
-// for both builds. Therefore, if you are using AWS CodePipeline, we recommend
-// that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console,
-// clear the Webhook box. For more information, see step 5 in Change a Build
-// Project's Settings (https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console).
+// If you enable webhooks for an CodeBuild project, and the project is used
+// as a build step in CodePipeline, then two identical builds are created for
+// each commit. One build is triggered through webhooks, and one through CodePipeline.
+// Because billing is on a per-build basis, you are billed for both builds.
+// Therefore, if you are using CodePipeline, we recommend that you disable webhooks
+// in CodeBuild. In the CodeBuild console, clear the Webhook box. For more information,
+// see step 5 in Change a Build Project's Settings (https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -400,19 +717,20 @@ func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) (req *reques
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation CreateWebhook for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeOAuthProviderException "OAuthProviderException"
-//   There was a problem with the underlying OAuth provider.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified AWS resource cannot be created, because an AWS resource with
-//   the same settings already exists.
+//   - OAuthProviderException
+//     There was a problem with the underlying OAuth provider.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//   - ResourceAlreadyExistsException
+//     The specified Amazon Web Services resource cannot be created, because an
+//     Amazon Web Services resource with the same settings already exists.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook
 func (c *CodeBuild) CreateWebhook(input *CreateWebhookInput) (*CreateWebhookOutput, error) {
@@ -436,6 +754,84 @@ func (c *CodeBuild) CreateWebhookWithContext(ctx aws.Context, input *CreateWebho
 	return out, req.Send()
 }
 
+const opDeleteBuildBatch = "DeleteBuildBatch"
+
+// DeleteBuildBatchRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteBuildBatch operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteBuildBatch for more information on using the DeleteBuildBatch
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteBuildBatchRequest method.
+//	req, resp := client.DeleteBuildBatchRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteBuildBatch
+func (c *CodeBuild) DeleteBuildBatchRequest(input *DeleteBuildBatchInput) (req *request.Request, output *DeleteBuildBatchOutput) {
+	op := &request.Operation{
+		Name:       opDeleteBuildBatch,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteBuildBatchInput{}
+	}
+
+	output = &DeleteBuildBatchOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DeleteBuildBatch API operation for AWS CodeBuild.
+//
+// Deletes a batch build.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation DeleteBuildBatch for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteBuildBatch
+func (c *CodeBuild) DeleteBuildBatch(input *DeleteBuildBatchInput) (*DeleteBuildBatchOutput, error) {
+	req, out := c.DeleteBuildBatchRequest(input)
+	return out, req.Send()
+}
+
+// DeleteBuildBatchWithContext is the same as DeleteBuildBatch with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteBuildBatch for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) DeleteBuildBatchWithContext(ctx aws.Context, input *DeleteBuildBatchInput, opts ...request.Option) (*DeleteBuildBatchOutput, error) {
+	req, out := c.DeleteBuildBatchRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteProject = "DeleteProject"
 
 // DeleteProjectRequest generates a "aws/request.Request" representing the
@@ -452,14 +848,13 @@ const opDeleteProject = "DeleteProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteProjectRequest method.
+//	req, resp := client.DeleteProjectRequest(params)
 //
-//    // Example sending a request using the DeleteProjectRequest method.
-//    req, resp := client.DeleteProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProject
 func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) (req *request.Request, output *DeleteProjectOutput) {
@@ -481,7 +876,7 @@ func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) (req *reques
 
 // DeleteProject API operation for AWS CodeBuild.
 //
-// Deletes a build project.
+// Deletes a build project. When you delete a project, its builds are not deleted.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -490,9 +885,9 @@ func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) (req *reques
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation DeleteProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProject
 func (c *CodeBuild) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOutput, error) {
@@ -516,6 +911,244 @@ func (c *CodeBuild) DeleteProjectWithContext(ctx aws.Context, input *DeleteProje
 	return out, req.Send()
 }
 
+const opDeleteReport = "DeleteReport"
+
+// DeleteReportRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteReport operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteReport for more information on using the DeleteReport
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteReportRequest method.
+//	req, resp := client.DeleteReportRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReport
+func (c *CodeBuild) DeleteReportRequest(input *DeleteReportInput) (req *request.Request, output *DeleteReportOutput) {
+	op := &request.Operation{
+		Name:       opDeleteReport,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteReportInput{}
+	}
+
+	output = &DeleteReportOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteReport API operation for AWS CodeBuild.
+//
+// Deletes a report.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation DeleteReport for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReport
+func (c *CodeBuild) DeleteReport(input *DeleteReportInput) (*DeleteReportOutput, error) {
+	req, out := c.DeleteReportRequest(input)
+	return out, req.Send()
+}
+
+// DeleteReportWithContext is the same as DeleteReport with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteReport for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) DeleteReportWithContext(ctx aws.Context, input *DeleteReportInput, opts ...request.Option) (*DeleteReportOutput, error) {
+	req, out := c.DeleteReportRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDeleteReportGroup = "DeleteReportGroup"
+
+// DeleteReportGroupRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteReportGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteReportGroup for more information on using the DeleteReportGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteReportGroupRequest method.
+//	req, resp := client.DeleteReportGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReportGroup
+func (c *CodeBuild) DeleteReportGroupRequest(input *DeleteReportGroupInput) (req *request.Request, output *DeleteReportGroupOutput) {
+	op := &request.Operation{
+		Name:       opDeleteReportGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteReportGroupInput{}
+	}
+
+	output = &DeleteReportGroupOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteReportGroup API operation for AWS CodeBuild.
+//
+// Deletes a report group. Before you delete a report group, you must delete
+// its reports.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation DeleteReportGroup for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReportGroup
+func (c *CodeBuild) DeleteReportGroup(input *DeleteReportGroupInput) (*DeleteReportGroupOutput, error) {
+	req, out := c.DeleteReportGroupRequest(input)
+	return out, req.Send()
+}
+
+// DeleteReportGroupWithContext is the same as DeleteReportGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteReportGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) DeleteReportGroupWithContext(ctx aws.Context, input *DeleteReportGroupInput, opts ...request.Option) (*DeleteReportGroupOutput, error) {
+	req, out := c.DeleteReportGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDeleteResourcePolicy = "DeleteResourcePolicy"
+
+// DeleteResourcePolicyRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteResourcePolicy operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteResourcePolicy for more information on using the DeleteResourcePolicy
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteResourcePolicyRequest method.
+//	req, resp := client.DeleteResourcePolicyRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteResourcePolicy
+func (c *CodeBuild) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) (req *request.Request, output *DeleteResourcePolicyOutput) {
+	op := &request.Operation{
+		Name:       opDeleteResourcePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteResourcePolicyInput{}
+	}
+
+	output = &DeleteResourcePolicyOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteResourcePolicy API operation for AWS CodeBuild.
+//
+// Deletes a resource policy that is identified by its resource ARN.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation DeleteResourcePolicy for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteResourcePolicy
+func (c *CodeBuild) DeleteResourcePolicy(input *DeleteResourcePolicyInput) (*DeleteResourcePolicyOutput, error) {
+	req, out := c.DeleteResourcePolicyRequest(input)
+	return out, req.Send()
+}
+
+// DeleteResourcePolicyWithContext is the same as DeleteResourcePolicy with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteResourcePolicy for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) DeleteResourcePolicyWithContext(ctx aws.Context, input *DeleteResourcePolicyInput, opts ...request.Option) (*DeleteResourcePolicyOutput, error) {
+	req, out := c.DeleteResourcePolicyRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteSourceCredentials = "DeleteSourceCredentials"
 
 // DeleteSourceCredentialsRequest generates a "aws/request.Request" representing the
@@ -532,14 +1165,13 @@ const opDeleteSourceCredentials = "DeleteSourceCredentials"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteSourceCredentialsRequest method.
+//	req, resp := client.DeleteSourceCredentialsRequest(params)
 //
-//    // Example sending a request using the DeleteSourceCredentialsRequest method.
-//    req, resp := client.DeleteSourceCredentialsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteSourceCredentials
 func (c *CodeBuild) DeleteSourceCredentialsRequest(input *DeleteSourceCredentialsInput) (req *request.Request, output *DeleteSourceCredentialsOutput) {
@@ -569,12 +1201,13 @@ func (c *CodeBuild) DeleteSourceCredentialsRequest(input *DeleteSourceCredential
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation DeleteSourceCredentials for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteSourceCredentials
 func (c *CodeBuild) DeleteSourceCredentials(input *DeleteSourceCredentialsInput) (*DeleteSourceCredentialsOutput, error) {
@@ -614,14 +1247,13 @@ const opDeleteWebhook = "DeleteWebhook"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteWebhookRequest method.
+//	req, resp := client.DeleteWebhookRequest(params)
 //
-//    // Example sending a request using the DeleteWebhookRequest method.
-//    req, resp := client.DeleteWebhookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhook
 func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) (req *request.Request, output *DeleteWebhookOutput) {
@@ -643,9 +1275,9 @@ func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) (req *reques
 
 // DeleteWebhook API operation for AWS CodeBuild.
 //
-// For an existing AWS CodeBuild build project that has its source code stored
-// in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding
-// the source code every time a code change is pushed to the repository.
+// For an existing CodeBuild build project that has its source code stored in
+// a GitHub or Bitbucket repository, stops CodeBuild from rebuilding the source
+// code every time a code change is pushed to the repository.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -654,15 +1286,16 @@ func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) (req *reques
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation DeleteWebhook for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
-//   * ErrCodeOAuthProviderException "OAuthProviderException"
-//   There was a problem with the underlying OAuth provider.
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+//   - OAuthProviderException
+//     There was a problem with the underlying OAuth provider.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhook
 func (c *CodeBuild) DeleteWebhook(input *DeleteWebhookInput) (*DeleteWebhookOutput, error) {
@@ -686,6 +1319,444 @@ func (c *CodeBuild) DeleteWebhookWithContext(ctx aws.Context, input *DeleteWebho
 	return out, req.Send()
 }
 
+const opDescribeCodeCoverages = "DescribeCodeCoverages"
+
+// DescribeCodeCoveragesRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeCodeCoverages operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeCodeCoverages for more information on using the DescribeCodeCoverages
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeCodeCoveragesRequest method.
+//	req, resp := client.DescribeCodeCoveragesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeCodeCoverages
+func (c *CodeBuild) DescribeCodeCoveragesRequest(input *DescribeCodeCoveragesInput) (req *request.Request, output *DescribeCodeCoveragesOutput) {
+	op := &request.Operation{
+		Name:       opDescribeCodeCoverages,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeCodeCoveragesInput{}
+	}
+
+	output = &DescribeCodeCoveragesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeCodeCoverages API operation for AWS CodeBuild.
+//
+// Retrieves one or more code coverage reports.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation DescribeCodeCoverages for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeCodeCoverages
+func (c *CodeBuild) DescribeCodeCoverages(input *DescribeCodeCoveragesInput) (*DescribeCodeCoveragesOutput, error) {
+	req, out := c.DescribeCodeCoveragesRequest(input)
+	return out, req.Send()
+}
+
+// DescribeCodeCoveragesWithContext is the same as DescribeCodeCoverages with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeCodeCoverages for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) DescribeCodeCoveragesWithContext(ctx aws.Context, input *DescribeCodeCoveragesInput, opts ...request.Option) (*DescribeCodeCoveragesOutput, error) {
+	req, out := c.DescribeCodeCoveragesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeCodeCoveragesPages iterates over the pages of a DescribeCodeCoverages operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeCodeCoverages method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeCodeCoverages operation.
+//	pageNum := 0
+//	err := client.DescribeCodeCoveragesPages(params,
+//	    func(page *codebuild.DescribeCodeCoveragesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) DescribeCodeCoveragesPages(input *DescribeCodeCoveragesInput, fn func(*DescribeCodeCoveragesOutput, bool) bool) error {
+	return c.DescribeCodeCoveragesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeCodeCoveragesPagesWithContext same as DescribeCodeCoveragesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) DescribeCodeCoveragesPagesWithContext(ctx aws.Context, input *DescribeCodeCoveragesInput, fn func(*DescribeCodeCoveragesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeCodeCoveragesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeCodeCoveragesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeCodeCoveragesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeTestCases = "DescribeTestCases"
+
+// DescribeTestCasesRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeTestCases operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeTestCases for more information on using the DescribeTestCases
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeTestCasesRequest method.
+//	req, resp := client.DescribeTestCasesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeTestCases
+func (c *CodeBuild) DescribeTestCasesRequest(input *DescribeTestCasesInput) (req *request.Request, output *DescribeTestCasesOutput) {
+	op := &request.Operation{
+		Name:       opDescribeTestCases,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeTestCasesInput{}
+	}
+
+	output = &DescribeTestCasesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeTestCases API operation for AWS CodeBuild.
+//
+// Returns a list of details about test cases for a report.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation DescribeTestCases for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeTestCases
+func (c *CodeBuild) DescribeTestCases(input *DescribeTestCasesInput) (*DescribeTestCasesOutput, error) {
+	req, out := c.DescribeTestCasesRequest(input)
+	return out, req.Send()
+}
+
+// DescribeTestCasesWithContext is the same as DescribeTestCases with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeTestCases for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) DescribeTestCasesWithContext(ctx aws.Context, input *DescribeTestCasesInput, opts ...request.Option) (*DescribeTestCasesOutput, error) {
+	req, out := c.DescribeTestCasesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeTestCasesPages iterates over the pages of a DescribeTestCases operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeTestCases method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeTestCases operation.
+//	pageNum := 0
+//	err := client.DescribeTestCasesPages(params,
+//	    func(page *codebuild.DescribeTestCasesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) DescribeTestCasesPages(input *DescribeTestCasesInput, fn func(*DescribeTestCasesOutput, bool) bool) error {
+	return c.DescribeTestCasesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeTestCasesPagesWithContext same as DescribeTestCasesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) DescribeTestCasesPagesWithContext(ctx aws.Context, input *DescribeTestCasesInput, fn func(*DescribeTestCasesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeTestCasesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeTestCasesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeTestCasesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opGetReportGroupTrend = "GetReportGroupTrend"
+
+// GetReportGroupTrendRequest generates a "aws/request.Request" representing the
+// client's request for the GetReportGroupTrend operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetReportGroupTrend for more information on using the GetReportGroupTrend
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetReportGroupTrendRequest method.
+//	req, resp := client.GetReportGroupTrendRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetReportGroupTrend
+func (c *CodeBuild) GetReportGroupTrendRequest(input *GetReportGroupTrendInput) (req *request.Request, output *GetReportGroupTrendOutput) {
+	op := &request.Operation{
+		Name:       opGetReportGroupTrend,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetReportGroupTrendInput{}
+	}
+
+	output = &GetReportGroupTrendOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetReportGroupTrend API operation for AWS CodeBuild.
+//
+// Analyzes and accumulates test report values for the specified test reports.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation GetReportGroupTrend for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetReportGroupTrend
+func (c *CodeBuild) GetReportGroupTrend(input *GetReportGroupTrendInput) (*GetReportGroupTrendOutput, error) {
+	req, out := c.GetReportGroupTrendRequest(input)
+	return out, req.Send()
+}
+
+// GetReportGroupTrendWithContext is the same as GetReportGroupTrend with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetReportGroupTrend for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) GetReportGroupTrendWithContext(ctx aws.Context, input *GetReportGroupTrendInput, opts ...request.Option) (*GetReportGroupTrendOutput, error) {
+	req, out := c.GetReportGroupTrendRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opGetResourcePolicy = "GetResourcePolicy"
+
+// GetResourcePolicyRequest generates a "aws/request.Request" representing the
+// client's request for the GetResourcePolicy operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See GetResourcePolicy for more information on using the GetResourcePolicy
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the GetResourcePolicyRequest method.
+//	req, resp := client.GetResourcePolicyRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetResourcePolicy
+func (c *CodeBuild) GetResourcePolicyRequest(input *GetResourcePolicyInput) (req *request.Request, output *GetResourcePolicyOutput) {
+	op := &request.Operation{
+		Name:       opGetResourcePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetResourcePolicyInput{}
+	}
+
+	output = &GetResourcePolicyOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// GetResourcePolicy API operation for AWS CodeBuild.
+//
+// Gets a resource policy that is identified by its resource ARN.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation GetResourcePolicy for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetResourcePolicy
+func (c *CodeBuild) GetResourcePolicy(input *GetResourcePolicyInput) (*GetResourcePolicyOutput, error) {
+	req, out := c.GetResourcePolicyRequest(input)
+	return out, req.Send()
+}
+
+// GetResourcePolicyWithContext is the same as GetResourcePolicy with the addition of
+// the ability to pass a context and additional request options.
+//
+// See GetResourcePolicy for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) GetResourcePolicyWithContext(ctx aws.Context, input *GetResourcePolicyInput, opts ...request.Option) (*GetResourcePolicyOutput, error) {
+	req, out := c.GetResourcePolicyRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opImportSourceCredentials = "ImportSourceCredentials"
 
 // ImportSourceCredentialsRequest generates a "aws/request.Request" representing the
@@ -702,14 +1773,13 @@ const opImportSourceCredentials = "ImportSourceCredentials"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ImportSourceCredentialsRequest method.
+//	req, resp := client.ImportSourceCredentialsRequest(params)
 //
-//    // Example sending a request using the ImportSourceCredentialsRequest method.
-//    req, resp := client.ImportSourceCredentialsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentials
 func (c *CodeBuild) ImportSourceCredentialsRequest(input *ImportSourceCredentialsInput) (req *request.Request, output *ImportSourceCredentialsOutput) {
@@ -730,8 +1800,8 @@ func (c *CodeBuild) ImportSourceCredentialsRequest(input *ImportSourceCredential
 
 // ImportSourceCredentials API operation for AWS CodeBuild.
 //
-// Imports the source repository credentials for an AWS CodeBuild project that
-// has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.
+// Imports the source repository credentials for an CodeBuild project that has
+// its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -740,12 +1810,18 @@ func (c *CodeBuild) ImportSourceCredentialsRequest(input *ImportSourceCredential
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation ImportSourceCredentials for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeAccountLimitExceededException "AccountLimitExceededException"
-//   An AWS service limit was exceeded for the calling AWS account.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - AccountLimitExceededException
+//     An Amazon Web Services service limit was exceeded for the calling Amazon
+//     Web Services account.
+//
+//   - ResourceAlreadyExistsException
+//     The specified Amazon Web Services resource cannot be created, because an
+//     Amazon Web Services resource with the same settings already exists.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentials
 func (c *CodeBuild) ImportSourceCredentials(input *ImportSourceCredentialsInput) (*ImportSourceCredentialsOutput, error) {
@@ -785,14 +1861,13 @@ const opInvalidateProjectCache = "InvalidateProjectCache"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the InvalidateProjectCacheRequest method.
+//	req, resp := client.InvalidateProjectCacheRequest(params)
 //
-//    // Example sending a request using the InvalidateProjectCacheRequest method.
-//    req, resp := client.InvalidateProjectCacheRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCache
 func (c *CodeBuild) InvalidateProjectCacheRequest(input *InvalidateProjectCacheInput) (req *request.Request, output *InvalidateProjectCacheOutput) {
@@ -823,12 +1898,13 @@ func (c *CodeBuild) InvalidateProjectCacheRequest(input *InvalidateProjectCacheI
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation InvalidateProjectCache for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCache
 func (c *CodeBuild) InvalidateProjectCache(input *InvalidateProjectCacheInput) (*InvalidateProjectCacheOutput, error) {
@@ -852,6 +1928,280 @@ func (c *CodeBuild) InvalidateProjectCacheWithContext(ctx aws.Context, input *In
 	return out, req.Send()
 }
 
+const opListBuildBatches = "ListBuildBatches"
+
+// ListBuildBatchesRequest generates a "aws/request.Request" representing the
+// client's request for the ListBuildBatches operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListBuildBatches for more information on using the ListBuildBatches
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListBuildBatchesRequest method.
+//	req, resp := client.ListBuildBatchesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatches
+func (c *CodeBuild) ListBuildBatchesRequest(input *ListBuildBatchesInput) (req *request.Request, output *ListBuildBatchesOutput) {
+	op := &request.Operation{
+		Name:       opListBuildBatches,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListBuildBatchesInput{}
+	}
+
+	output = &ListBuildBatchesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListBuildBatches API operation for AWS CodeBuild.
+//
+// Retrieves the identifiers of your build batches in the current region.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation ListBuildBatches for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatches
+func (c *CodeBuild) ListBuildBatches(input *ListBuildBatchesInput) (*ListBuildBatchesOutput, error) {
+	req, out := c.ListBuildBatchesRequest(input)
+	return out, req.Send()
+}
+
+// ListBuildBatchesWithContext is the same as ListBuildBatches with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListBuildBatches for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListBuildBatchesWithContext(ctx aws.Context, input *ListBuildBatchesInput, opts ...request.Option) (*ListBuildBatchesOutput, error) {
+	req, out := c.ListBuildBatchesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListBuildBatchesPages iterates over the pages of a ListBuildBatches operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListBuildBatches method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListBuildBatches operation.
+//	pageNum := 0
+//	err := client.ListBuildBatchesPages(params,
+//	    func(page *codebuild.ListBuildBatchesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListBuildBatchesPages(input *ListBuildBatchesInput, fn func(*ListBuildBatchesOutput, bool) bool) error {
+	return c.ListBuildBatchesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListBuildBatchesPagesWithContext same as ListBuildBatchesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListBuildBatchesPagesWithContext(ctx aws.Context, input *ListBuildBatchesInput, fn func(*ListBuildBatchesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListBuildBatchesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListBuildBatchesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListBuildBatchesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListBuildBatchesForProject = "ListBuildBatchesForProject"
+
+// ListBuildBatchesForProjectRequest generates a "aws/request.Request" representing the
+// client's request for the ListBuildBatchesForProject operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListBuildBatchesForProject for more information on using the ListBuildBatchesForProject
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListBuildBatchesForProjectRequest method.
+//	req, resp := client.ListBuildBatchesForProjectRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatchesForProject
+func (c *CodeBuild) ListBuildBatchesForProjectRequest(input *ListBuildBatchesForProjectInput) (req *request.Request, output *ListBuildBatchesForProjectOutput) {
+	op := &request.Operation{
+		Name:       opListBuildBatchesForProject,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListBuildBatchesForProjectInput{}
+	}
+
+	output = &ListBuildBatchesForProjectOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListBuildBatchesForProject API operation for AWS CodeBuild.
+//
+// Retrieves the identifiers of the build batches for a specific project.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation ListBuildBatchesForProject for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatchesForProject
+func (c *CodeBuild) ListBuildBatchesForProject(input *ListBuildBatchesForProjectInput) (*ListBuildBatchesForProjectOutput, error) {
+	req, out := c.ListBuildBatchesForProjectRequest(input)
+	return out, req.Send()
+}
+
+// ListBuildBatchesForProjectWithContext is the same as ListBuildBatchesForProject with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListBuildBatchesForProject for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListBuildBatchesForProjectWithContext(ctx aws.Context, input *ListBuildBatchesForProjectInput, opts ...request.Option) (*ListBuildBatchesForProjectOutput, error) {
+	req, out := c.ListBuildBatchesForProjectRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListBuildBatchesForProjectPages iterates over the pages of a ListBuildBatchesForProject operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListBuildBatchesForProject method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListBuildBatchesForProject operation.
+//	pageNum := 0
+//	err := client.ListBuildBatchesForProjectPages(params,
+//	    func(page *codebuild.ListBuildBatchesForProjectOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListBuildBatchesForProjectPages(input *ListBuildBatchesForProjectInput, fn func(*ListBuildBatchesForProjectOutput, bool) bool) error {
+	return c.ListBuildBatchesForProjectPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListBuildBatchesForProjectPagesWithContext same as ListBuildBatchesForProjectPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListBuildBatchesForProjectPagesWithContext(ctx aws.Context, input *ListBuildBatchesForProjectInput, fn func(*ListBuildBatchesForProjectOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListBuildBatchesForProjectInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListBuildBatchesForProjectRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListBuildBatchesForProjectOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListBuilds = "ListBuilds"
 
 // ListBuildsRequest generates a "aws/request.Request" representing the
@@ -868,14 +2218,13 @@ const opListBuilds = "ListBuilds"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListBuildsRequest method.
+//	req, resp := client.ListBuildsRequest(params)
 //
-//    // Example sending a request using the ListBuildsRequest method.
-//    req, resp := client.ListBuildsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuilds
 func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) (req *request.Request, output *ListBuildsOutput) {
@@ -883,6 +2232,12 @@ func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) (req *request.Requ
 		Name:       opListBuilds,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -905,9 +2260,9 @@ func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) (req *request.Requ
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation ListBuilds for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuilds
 func (c *CodeBuild) ListBuilds(input *ListBuildsInput) (*ListBuildsOutput, error) {
@@ -931,6 +2286,57 @@ func (c *CodeBuild) ListBuildsWithContext(ctx aws.Context, input *ListBuildsInpu
 	return out, req.Send()
 }
 
+// ListBuildsPages iterates over the pages of a ListBuilds operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListBuilds method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListBuilds operation.
+//	pageNum := 0
+//	err := client.ListBuildsPages(params,
+//	    func(page *codebuild.ListBuildsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListBuildsPages(input *ListBuildsInput, fn func(*ListBuildsOutput, bool) bool) error {
+	return c.ListBuildsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListBuildsPagesWithContext same as ListBuildsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListBuildsPagesWithContext(ctx aws.Context, input *ListBuildsInput, fn func(*ListBuildsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListBuildsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListBuildsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListBuildsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListBuildsForProject = "ListBuildsForProject"
 
 // ListBuildsForProjectRequest generates a "aws/request.Request" representing the
@@ -947,14 +2353,13 @@ const opListBuildsForProject = "ListBuildsForProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListBuildsForProjectRequest method.
+//	req, resp := client.ListBuildsForProjectRequest(params)
 //
-//    // Example sending a request using the ListBuildsForProjectRequest method.
-//    req, resp := client.ListBuildsForProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProject
 func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput) (req *request.Request, output *ListBuildsForProjectOutput) {
@@ -962,6 +2367,12 @@ func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput
 		Name:       opListBuildsForProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -975,8 +2386,8 @@ func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput
 
 // ListBuildsForProject API operation for AWS CodeBuild.
 //
-// Gets a list of build IDs for the specified build project, with each build
-// ID representing a single build.
+// Gets a list of build identifiers for the specified build project, with each
+// build identifier representing a single build.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -985,12 +2396,13 @@ func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation ListBuildsForProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProject
 func (c *CodeBuild) ListBuildsForProject(input *ListBuildsForProjectInput) (*ListBuildsForProjectOutput, error) {
@@ -1014,6 +2426,57 @@ func (c *CodeBuild) ListBuildsForProjectWithContext(ctx aws.Context, input *List
 	return out, req.Send()
 }
 
+// ListBuildsForProjectPages iterates over the pages of a ListBuildsForProject operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListBuildsForProject method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListBuildsForProject operation.
+//	pageNum := 0
+//	err := client.ListBuildsForProjectPages(params,
+//	    func(page *codebuild.ListBuildsForProjectOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListBuildsForProjectPages(input *ListBuildsForProjectInput, fn func(*ListBuildsForProjectOutput, bool) bool) error {
+	return c.ListBuildsForProjectPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListBuildsForProjectPagesWithContext same as ListBuildsForProjectPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListBuildsForProjectPagesWithContext(ctx aws.Context, input *ListBuildsForProjectInput, fn func(*ListBuildsForProjectOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListBuildsForProjectInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListBuildsForProjectRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListBuildsForProjectOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListCuratedEnvironmentImages = "ListCuratedEnvironmentImages"
 
 // ListCuratedEnvironmentImagesRequest generates a "aws/request.Request" representing the
@@ -1030,14 +2493,13 @@ const opListCuratedEnvironmentImages = "ListCuratedEnvironmentImages"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListCuratedEnvironmentImagesRequest method.
+//	req, resp := client.ListCuratedEnvironmentImagesRequest(params)
 //
-//    // Example sending a request using the ListCuratedEnvironmentImagesRequest method.
-//    req, resp := client.ListCuratedEnvironmentImagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImages
 func (c *CodeBuild) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnvironmentImagesInput) (req *request.Request, output *ListCuratedEnvironmentImagesOutput) {
@@ -1058,7 +2520,7 @@ func (c *CodeBuild) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnviro
 
 // ListCuratedEnvironmentImages API operation for AWS CodeBuild.
 //
-// Gets information about Docker images that are managed by AWS CodeBuild.
+// Gets information about Docker images that are managed by CodeBuild.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1104,14 +2566,13 @@ const opListProjects = "ListProjects"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListProjectsRequest method.
+//	req, resp := client.ListProjectsRequest(params)
 //
-//    // Example sending a request using the ListProjectsRequest method.
-//    req, resp := client.ListProjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjects
 func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) (req *request.Request, output *ListProjectsOutput) {
@@ -1119,6 +2580,12 @@ func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) (req *request.
 		Name:       opListProjects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1142,9 +2609,9 @@ func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) (req *request.
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation ListProjects for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjects
 func (c *CodeBuild) ListProjects(input *ListProjectsInput) (*ListProjectsOutput, error) {
@@ -1168,6 +2635,740 @@ func (c *CodeBuild) ListProjectsWithContext(ctx aws.Context, input *ListProjects
 	return out, req.Send()
 }
 
+// ListProjectsPages iterates over the pages of a ListProjects operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListProjects method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListProjects operation.
+//	pageNum := 0
+//	err := client.ListProjectsPages(params,
+//	    func(page *codebuild.ListProjectsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListProjectsPages(input *ListProjectsInput, fn func(*ListProjectsOutput, bool) bool) error {
+	return c.ListProjectsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListProjectsPagesWithContext same as ListProjectsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListProjectsPagesWithContext(ctx aws.Context, input *ListProjectsInput, fn func(*ListProjectsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListProjectsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListProjectsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListProjectsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListReportGroups = "ListReportGroups"
+
+// ListReportGroupsRequest generates a "aws/request.Request" representing the
+// client's request for the ListReportGroups operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListReportGroups for more information on using the ListReportGroups
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListReportGroupsRequest method.
+//	req, resp := client.ListReportGroupsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportGroups
+func (c *CodeBuild) ListReportGroupsRequest(input *ListReportGroupsInput) (req *request.Request, output *ListReportGroupsOutput) {
+	op := &request.Operation{
+		Name:       opListReportGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListReportGroupsInput{}
+	}
+
+	output = &ListReportGroupsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListReportGroups API operation for AWS CodeBuild.
+//
+// Gets a list ARNs for the report groups in the current Amazon Web Services
+// account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation ListReportGroups for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportGroups
+func (c *CodeBuild) ListReportGroups(input *ListReportGroupsInput) (*ListReportGroupsOutput, error) {
+	req, out := c.ListReportGroupsRequest(input)
+	return out, req.Send()
+}
+
+// ListReportGroupsWithContext is the same as ListReportGroups with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListReportGroups for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListReportGroupsWithContext(ctx aws.Context, input *ListReportGroupsInput, opts ...request.Option) (*ListReportGroupsOutput, error) {
+	req, out := c.ListReportGroupsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListReportGroupsPages iterates over the pages of a ListReportGroups operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListReportGroups method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListReportGroups operation.
+//	pageNum := 0
+//	err := client.ListReportGroupsPages(params,
+//	    func(page *codebuild.ListReportGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListReportGroupsPages(input *ListReportGroupsInput, fn func(*ListReportGroupsOutput, bool) bool) error {
+	return c.ListReportGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListReportGroupsPagesWithContext same as ListReportGroupsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListReportGroupsPagesWithContext(ctx aws.Context, input *ListReportGroupsInput, fn func(*ListReportGroupsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListReportGroupsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListReportGroupsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListReportGroupsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListReports = "ListReports"
+
+// ListReportsRequest generates a "aws/request.Request" representing the
+// client's request for the ListReports operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListReports for more information on using the ListReports
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListReportsRequest method.
+//	req, resp := client.ListReportsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReports
+func (c *CodeBuild) ListReportsRequest(input *ListReportsInput) (req *request.Request, output *ListReportsOutput) {
+	op := &request.Operation{
+		Name:       opListReports,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListReportsInput{}
+	}
+
+	output = &ListReportsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListReports API operation for AWS CodeBuild.
+//
+// Returns a list of ARNs for the reports in the current Amazon Web Services
+// account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation ListReports for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReports
+func (c *CodeBuild) ListReports(input *ListReportsInput) (*ListReportsOutput, error) {
+	req, out := c.ListReportsRequest(input)
+	return out, req.Send()
+}
+
+// ListReportsWithContext is the same as ListReports with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListReports for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListReportsWithContext(ctx aws.Context, input *ListReportsInput, opts ...request.Option) (*ListReportsOutput, error) {
+	req, out := c.ListReportsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListReportsPages iterates over the pages of a ListReports operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListReports method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListReports operation.
+//	pageNum := 0
+//	err := client.ListReportsPages(params,
+//	    func(page *codebuild.ListReportsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListReportsPages(input *ListReportsInput, fn func(*ListReportsOutput, bool) bool) error {
+	return c.ListReportsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListReportsPagesWithContext same as ListReportsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListReportsPagesWithContext(ctx aws.Context, input *ListReportsInput, fn func(*ListReportsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListReportsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListReportsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListReportsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListReportsForReportGroup = "ListReportsForReportGroup"
+
+// ListReportsForReportGroupRequest generates a "aws/request.Request" representing the
+// client's request for the ListReportsForReportGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListReportsForReportGroup for more information on using the ListReportsForReportGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListReportsForReportGroupRequest method.
+//	req, resp := client.ListReportsForReportGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportsForReportGroup
+func (c *CodeBuild) ListReportsForReportGroupRequest(input *ListReportsForReportGroupInput) (req *request.Request, output *ListReportsForReportGroupOutput) {
+	op := &request.Operation{
+		Name:       opListReportsForReportGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListReportsForReportGroupInput{}
+	}
+
+	output = &ListReportsForReportGroupOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListReportsForReportGroup API operation for AWS CodeBuild.
+//
+// Returns a list of ARNs for the reports that belong to a ReportGroup.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation ListReportsForReportGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportsForReportGroup
+func (c *CodeBuild) ListReportsForReportGroup(input *ListReportsForReportGroupInput) (*ListReportsForReportGroupOutput, error) {
+	req, out := c.ListReportsForReportGroupRequest(input)
+	return out, req.Send()
+}
+
+// ListReportsForReportGroupWithContext is the same as ListReportsForReportGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListReportsForReportGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListReportsForReportGroupWithContext(ctx aws.Context, input *ListReportsForReportGroupInput, opts ...request.Option) (*ListReportsForReportGroupOutput, error) {
+	req, out := c.ListReportsForReportGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListReportsForReportGroupPages iterates over the pages of a ListReportsForReportGroup operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListReportsForReportGroup method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListReportsForReportGroup operation.
+//	pageNum := 0
+//	err := client.ListReportsForReportGroupPages(params,
+//	    func(page *codebuild.ListReportsForReportGroupOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListReportsForReportGroupPages(input *ListReportsForReportGroupInput, fn func(*ListReportsForReportGroupOutput, bool) bool) error {
+	return c.ListReportsForReportGroupPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListReportsForReportGroupPagesWithContext same as ListReportsForReportGroupPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListReportsForReportGroupPagesWithContext(ctx aws.Context, input *ListReportsForReportGroupInput, fn func(*ListReportsForReportGroupOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListReportsForReportGroupInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListReportsForReportGroupRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListReportsForReportGroupOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListSharedProjects = "ListSharedProjects"
+
+// ListSharedProjectsRequest generates a "aws/request.Request" representing the
+// client's request for the ListSharedProjects operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListSharedProjects for more information on using the ListSharedProjects
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListSharedProjectsRequest method.
+//	req, resp := client.ListSharedProjectsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedProjects
+func (c *CodeBuild) ListSharedProjectsRequest(input *ListSharedProjectsInput) (req *request.Request, output *ListSharedProjectsOutput) {
+	op := &request.Operation{
+		Name:       opListSharedProjects,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListSharedProjectsInput{}
+	}
+
+	output = &ListSharedProjectsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListSharedProjects API operation for AWS CodeBuild.
+//
+// Gets a list of projects that are shared with other Amazon Web Services accounts
+// or users.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation ListSharedProjects for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedProjects
+func (c *CodeBuild) ListSharedProjects(input *ListSharedProjectsInput) (*ListSharedProjectsOutput, error) {
+	req, out := c.ListSharedProjectsRequest(input)
+	return out, req.Send()
+}
+
+// ListSharedProjectsWithContext is the same as ListSharedProjects with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListSharedProjects for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListSharedProjectsWithContext(ctx aws.Context, input *ListSharedProjectsInput, opts ...request.Option) (*ListSharedProjectsOutput, error) {
+	req, out := c.ListSharedProjectsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListSharedProjectsPages iterates over the pages of a ListSharedProjects operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListSharedProjects method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListSharedProjects operation.
+//	pageNum := 0
+//	err := client.ListSharedProjectsPages(params,
+//	    func(page *codebuild.ListSharedProjectsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListSharedProjectsPages(input *ListSharedProjectsInput, fn func(*ListSharedProjectsOutput, bool) bool) error {
+	return c.ListSharedProjectsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListSharedProjectsPagesWithContext same as ListSharedProjectsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListSharedProjectsPagesWithContext(ctx aws.Context, input *ListSharedProjectsInput, fn func(*ListSharedProjectsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListSharedProjectsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListSharedProjectsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListSharedProjectsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opListSharedReportGroups = "ListSharedReportGroups"
+
+// ListSharedReportGroupsRequest generates a "aws/request.Request" representing the
+// client's request for the ListSharedReportGroups operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListSharedReportGroups for more information on using the ListSharedReportGroups
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListSharedReportGroupsRequest method.
+//	req, resp := client.ListSharedReportGroupsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedReportGroups
+func (c *CodeBuild) ListSharedReportGroupsRequest(input *ListSharedReportGroupsInput) (req *request.Request, output *ListSharedReportGroupsOutput) {
+	op := &request.Operation{
+		Name:       opListSharedReportGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListSharedReportGroupsInput{}
+	}
+
+	output = &ListSharedReportGroupsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListSharedReportGroups API operation for AWS CodeBuild.
+//
+// Gets a list of report groups that are shared with other Amazon Web Services
+// accounts or users.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation ListSharedReportGroups for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedReportGroups
+func (c *CodeBuild) ListSharedReportGroups(input *ListSharedReportGroupsInput) (*ListSharedReportGroupsOutput, error) {
+	req, out := c.ListSharedReportGroupsRequest(input)
+	return out, req.Send()
+}
+
+// ListSharedReportGroupsWithContext is the same as ListSharedReportGroups with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListSharedReportGroups for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListSharedReportGroupsWithContext(ctx aws.Context, input *ListSharedReportGroupsInput, opts ...request.Option) (*ListSharedReportGroupsOutput, error) {
+	req, out := c.ListSharedReportGroupsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListSharedReportGroupsPages iterates over the pages of a ListSharedReportGroups operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListSharedReportGroups method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListSharedReportGroups operation.
+//	pageNum := 0
+//	err := client.ListSharedReportGroupsPages(params,
+//	    func(page *codebuild.ListSharedReportGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *CodeBuild) ListSharedReportGroupsPages(input *ListSharedReportGroupsInput, fn func(*ListSharedReportGroupsOutput, bool) bool) error {
+	return c.ListSharedReportGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListSharedReportGroupsPagesWithContext same as ListSharedReportGroupsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) ListSharedReportGroupsPagesWithContext(ctx aws.Context, input *ListSharedReportGroupsInput, fn func(*ListSharedReportGroupsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListSharedReportGroupsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListSharedReportGroupsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListSharedReportGroupsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opListSourceCredentials = "ListSourceCredentials"
 
 // ListSourceCredentialsRequest generates a "aws/request.Request" representing the
@@ -1184,14 +3385,13 @@ const opListSourceCredentials = "ListSourceCredentials"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListSourceCredentialsRequest method.
+//	req, resp := client.ListSourceCredentialsRequest(params)
 //
-//    // Example sending a request using the ListSourceCredentialsRequest method.
-//    req, resp := client.ListSourceCredentialsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentials
 func (c *CodeBuild) ListSourceCredentialsRequest(input *ListSourceCredentialsInput) (req *request.Request, output *ListSourceCredentialsOutput) {
@@ -1220,6 +3420,11 @@ func (c *CodeBuild) ListSourceCredentialsRequest(input *ListSourceCredentialsInp
 //
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation ListSourceCredentials for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentials
 func (c *CodeBuild) ListSourceCredentials(input *ListSourceCredentialsInput) (*ListSourceCredentialsOutput, error) {
 	req, out := c.ListSourceCredentialsRequest(input)
@@ -1242,6 +3447,257 @@ func (c *CodeBuild) ListSourceCredentialsWithContext(ctx aws.Context, input *Lis
 	return out, req.Send()
 }
 
+const opPutResourcePolicy = "PutResourcePolicy"
+
+// PutResourcePolicyRequest generates a "aws/request.Request" representing the
+// client's request for the PutResourcePolicy operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See PutResourcePolicy for more information on using the PutResourcePolicy
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the PutResourcePolicyRequest method.
+//	req, resp := client.PutResourcePolicyRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/PutResourcePolicy
+func (c *CodeBuild) PutResourcePolicyRequest(input *PutResourcePolicyInput) (req *request.Request, output *PutResourcePolicyOutput) {
+	op := &request.Operation{
+		Name:       opPutResourcePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutResourcePolicyInput{}
+	}
+
+	output = &PutResourcePolicyOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// PutResourcePolicy API operation for AWS CodeBuild.
+//
+// Stores a resource policy for the ARN of a Project or ReportGroup object.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation PutResourcePolicy for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/PutResourcePolicy
+func (c *CodeBuild) PutResourcePolicy(input *PutResourcePolicyInput) (*PutResourcePolicyOutput, error) {
+	req, out := c.PutResourcePolicyRequest(input)
+	return out, req.Send()
+}
+
+// PutResourcePolicyWithContext is the same as PutResourcePolicy with the addition of
+// the ability to pass a context and additional request options.
+//
+// See PutResourcePolicy for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) PutResourcePolicyWithContext(ctx aws.Context, input *PutResourcePolicyInput, opts ...request.Option) (*PutResourcePolicyOutput, error) {
+	req, out := c.PutResourcePolicyRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opRetryBuild = "RetryBuild"
+
+// RetryBuildRequest generates a "aws/request.Request" representing the
+// client's request for the RetryBuild operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RetryBuild for more information on using the RetryBuild
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RetryBuildRequest method.
+//	req, resp := client.RetryBuildRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuild
+func (c *CodeBuild) RetryBuildRequest(input *RetryBuildInput) (req *request.Request, output *RetryBuildOutput) {
+	op := &request.Operation{
+		Name:       opRetryBuild,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RetryBuildInput{}
+	}
+
+	output = &RetryBuildOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// RetryBuild API operation for AWS CodeBuild.
+//
+// Restarts a build.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation RetryBuild for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+//   - AccountLimitExceededException
+//     An Amazon Web Services service limit was exceeded for the calling Amazon
+//     Web Services account.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuild
+func (c *CodeBuild) RetryBuild(input *RetryBuildInput) (*RetryBuildOutput, error) {
+	req, out := c.RetryBuildRequest(input)
+	return out, req.Send()
+}
+
+// RetryBuildWithContext is the same as RetryBuild with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RetryBuild for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) RetryBuildWithContext(ctx aws.Context, input *RetryBuildInput, opts ...request.Option) (*RetryBuildOutput, error) {
+	req, out := c.RetryBuildRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opRetryBuildBatch = "RetryBuildBatch"
+
+// RetryBuildBatchRequest generates a "aws/request.Request" representing the
+// client's request for the RetryBuildBatch operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RetryBuildBatch for more information on using the RetryBuildBatch
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RetryBuildBatchRequest method.
+//	req, resp := client.RetryBuildBatchRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuildBatch
+func (c *CodeBuild) RetryBuildBatchRequest(input *RetryBuildBatchInput) (req *request.Request, output *RetryBuildBatchOutput) {
+	op := &request.Operation{
+		Name:       opRetryBuildBatch,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RetryBuildBatchInput{}
+	}
+
+	output = &RetryBuildBatchOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// RetryBuildBatch API operation for AWS CodeBuild.
+//
+// Restarts a failed batch build. Only batch builds that have failed can be
+// retried.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation RetryBuildBatch for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuildBatch
+func (c *CodeBuild) RetryBuildBatch(input *RetryBuildBatchInput) (*RetryBuildBatchOutput, error) {
+	req, out := c.RetryBuildBatchRequest(input)
+	return out, req.Send()
+}
+
+// RetryBuildBatchWithContext is the same as RetryBuildBatch with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RetryBuildBatch for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) RetryBuildBatchWithContext(ctx aws.Context, input *RetryBuildBatchInput, opts ...request.Option) (*RetryBuildBatchOutput, error) {
+	req, out := c.RetryBuildBatchRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opStartBuild = "StartBuild"
 
 // StartBuildRequest generates a "aws/request.Request" representing the
@@ -1258,14 +3714,13 @@ const opStartBuild = "StartBuild"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartBuildRequest method.
+//	req, resp := client.StartBuildRequest(params)
 //
-//    // Example sending a request using the StartBuildRequest method.
-//    req, resp := client.StartBuildRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild
 func (c *CodeBuild) StartBuildRequest(input *StartBuildInput) (req *request.Request, output *StartBuildOutput) {
@@ -1295,15 +3750,17 @@ func (c *CodeBuild) StartBuildRequest(input *StartBuildInput) (req *request.Requ
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation StartBuild for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
-//   * ErrCodeAccountLimitExceededException "AccountLimitExceededException"
-//   An AWS service limit was exceeded for the calling AWS account.
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+//   - AccountLimitExceededException
+//     An Amazon Web Services service limit was exceeded for the calling Amazon
+//     Web Services account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild
 func (c *CodeBuild) StartBuild(input *StartBuildInput) (*StartBuildOutput, error) {
@@ -1327,6 +3784,88 @@ func (c *CodeBuild) StartBuildWithContext(ctx aws.Context, input *StartBuildInpu
 	return out, req.Send()
 }
 
+const opStartBuildBatch = "StartBuildBatch"
+
+// StartBuildBatchRequest generates a "aws/request.Request" representing the
+// client's request for the StartBuildBatch operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See StartBuildBatch for more information on using the StartBuildBatch
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the StartBuildBatchRequest method.
+//	req, resp := client.StartBuildBatchRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildBatch
+func (c *CodeBuild) StartBuildBatchRequest(input *StartBuildBatchInput) (req *request.Request, output *StartBuildBatchOutput) {
+	op := &request.Operation{
+		Name:       opStartBuildBatch,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StartBuildBatchInput{}
+	}
+
+	output = &StartBuildBatchOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// StartBuildBatch API operation for AWS CodeBuild.
+//
+// Starts a batch build for a project.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation StartBuildBatch for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildBatch
+func (c *CodeBuild) StartBuildBatch(input *StartBuildBatchInput) (*StartBuildBatchOutput, error) {
+	req, out := c.StartBuildBatchRequest(input)
+	return out, req.Send()
+}
+
+// StartBuildBatchWithContext is the same as StartBuildBatch with the addition of
+// the ability to pass a context and additional request options.
+//
+// See StartBuildBatch for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) StartBuildBatchWithContext(ctx aws.Context, input *StartBuildBatchInput, opts ...request.Option) (*StartBuildBatchOutput, error) {
+	req, out := c.StartBuildBatchRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opStopBuild = "StopBuild"
 
 // StopBuildRequest generates a "aws/request.Request" representing the
@@ -1343,14 +3882,13 @@ const opStopBuild = "StopBuild"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StopBuildRequest method.
+//	req, resp := client.StopBuildRequest(params)
 //
-//    // Example sending a request using the StopBuildRequest method.
-//    req, resp := client.StopBuildRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild
 func (c *CodeBuild) StopBuildRequest(input *StopBuildInput) (req *request.Request, output *StopBuildOutput) {
@@ -1380,12 +3918,13 @@ func (c *CodeBuild) StopBuildRequest(input *StopBuildInput) (req *request.Reques
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation StopBuild for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild
 func (c *CodeBuild) StopBuild(input *StopBuildInput) (*StopBuildOutput, error) {
@@ -1409,6 +3948,88 @@ func (c *CodeBuild) StopBuildWithContext(ctx aws.Context, input *StopBuildInput,
 	return out, req.Send()
 }
 
+const opStopBuildBatch = "StopBuildBatch"
+
+// StopBuildBatchRequest generates a "aws/request.Request" representing the
+// client's request for the StopBuildBatch operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See StopBuildBatch for more information on using the StopBuildBatch
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the StopBuildBatchRequest method.
+//	req, resp := client.StopBuildBatchRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildBatch
+func (c *CodeBuild) StopBuildBatchRequest(input *StopBuildBatchInput) (req *request.Request, output *StopBuildBatchOutput) {
+	op := &request.Operation{
+		Name:       opStopBuildBatch,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopBuildBatchInput{}
+	}
+
+	output = &StopBuildBatchOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// StopBuildBatch API operation for AWS CodeBuild.
+//
+// Stops a running batch build.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation StopBuildBatch for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildBatch
+func (c *CodeBuild) StopBuildBatch(input *StopBuildBatchInput) (*StopBuildBatchOutput, error) {
+	req, out := c.StopBuildBatchRequest(input)
+	return out, req.Send()
+}
+
+// StopBuildBatchWithContext is the same as StopBuildBatch with the addition of
+// the ability to pass a context and additional request options.
+//
+// See StopBuildBatch for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) StopBuildBatchWithContext(ctx aws.Context, input *StopBuildBatchInput, opts ...request.Option) (*StopBuildBatchOutput, error) {
+	req, out := c.StopBuildBatchRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateProject = "UpdateProject"
 
 // UpdateProjectRequest generates a "aws/request.Request" representing the
@@ -1425,14 +4046,13 @@ const opUpdateProject = "UpdateProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateProjectRequest method.
+//	req, resp := client.UpdateProjectRequest(params)
 //
-//    // Example sending a request using the UpdateProjectRequest method.
-//    req, resp := client.UpdateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject
 func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) (req *request.Request, output *UpdateProjectOutput) {
@@ -1462,12 +4082,13 @@ func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) (req *reques
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation UpdateProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject
 func (c *CodeBuild) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOutput, error) {
@@ -1491,6 +4112,196 @@ func (c *CodeBuild) UpdateProjectWithContext(ctx aws.Context, input *UpdateProje
 	return out, req.Send()
 }
 
+const opUpdateProjectVisibility = "UpdateProjectVisibility"
+
+// UpdateProjectVisibilityRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateProjectVisibility operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateProjectVisibility for more information on using the UpdateProjectVisibility
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateProjectVisibilityRequest method.
+//	req, resp := client.UpdateProjectVisibilityRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectVisibility
+func (c *CodeBuild) UpdateProjectVisibilityRequest(input *UpdateProjectVisibilityInput) (req *request.Request, output *UpdateProjectVisibilityOutput) {
+	op := &request.Operation{
+		Name:       opUpdateProjectVisibility,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateProjectVisibilityInput{}
+	}
+
+	output = &UpdateProjectVisibilityOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdateProjectVisibility API operation for AWS CodeBuild.
+//
+// Changes the public visibility for a project. The project's build results,
+// logs, and artifacts are available to the general public. For more information,
+// see Public build projects (https://docs.aws.amazon.com/codebuild/latest/userguide/public-builds.html)
+// in the CodeBuild User Guide.
+//
+// The following should be kept in mind when making your projects public:
+//
+//   - All of a project's build results, logs, and artifacts, including builds
+//     that were run when the project was private, are available to the general
+//     public.
+//
+//   - All build logs and artifacts are available to the public. Environment
+//     variables, source code, and other sensitive information may have been
+//     output to the build logs and artifacts. You must be careful about what
+//     information is output to the build logs. Some best practice are: Do not
+//     store sensitive values in environment variables. We recommend that you
+//     use an Amazon EC2 Systems Manager Parameter Store or Secrets Manager to
+//     store sensitive values. Follow Best practices for using webhooks (https://docs.aws.amazon.com/codebuild/latest/userguide/webhooks.html#webhook-best-practices)
+//     in the CodeBuild User Guide to limit which entities can trigger a build,
+//     and do not store the buildspec in the project itself, to ensure that your
+//     webhooks are as secure as possible.
+//
+//   - A malicious user can use public builds to distribute malicious artifacts.
+//     We recommend that you review all pull requests to verify that the pull
+//     request is a legitimate change. We also recommend that you validate any
+//     artifacts with their checksums to make sure that the correct artifacts
+//     are being downloaded.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation UpdateProjectVisibility for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectVisibility
+func (c *CodeBuild) UpdateProjectVisibility(input *UpdateProjectVisibilityInput) (*UpdateProjectVisibilityOutput, error) {
+	req, out := c.UpdateProjectVisibilityRequest(input)
+	return out, req.Send()
+}
+
+// UpdateProjectVisibilityWithContext is the same as UpdateProjectVisibility with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateProjectVisibility for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) UpdateProjectVisibilityWithContext(ctx aws.Context, input *UpdateProjectVisibilityInput, opts ...request.Option) (*UpdateProjectVisibilityOutput, error) {
+	req, out := c.UpdateProjectVisibilityRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateReportGroup = "UpdateReportGroup"
+
+// UpdateReportGroupRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateReportGroup operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateReportGroup for more information on using the UpdateReportGroup
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateReportGroupRequest method.
+//	req, resp := client.UpdateReportGroupRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroup
+func (c *CodeBuild) UpdateReportGroupRequest(input *UpdateReportGroupInput) (req *request.Request, output *UpdateReportGroupOutput) {
+	op := &request.Operation{
+		Name:       opUpdateReportGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateReportGroupInput{}
+	}
+
+	output = &UpdateReportGroupOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdateReportGroup API operation for AWS CodeBuild.
+//
+// Updates a report group.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS CodeBuild's
+// API operation UpdateReportGroup for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInputException
+//     The input value that was provided is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroup
+func (c *CodeBuild) UpdateReportGroup(input *UpdateReportGroupInput) (*UpdateReportGroupOutput, error) {
+	req, out := c.UpdateReportGroupRequest(input)
+	return out, req.Send()
+}
+
+// UpdateReportGroupWithContext is the same as UpdateReportGroup with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateReportGroup for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *CodeBuild) UpdateReportGroupWithContext(ctx aws.Context, input *UpdateReportGroupInput, opts ...request.Option) (*UpdateReportGroupOutput, error) {
+	req, out := c.UpdateReportGroupRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateWebhook = "UpdateWebhook"
 
 // UpdateWebhookRequest generates a "aws/request.Request" representing the
@@ -1507,14 +4318,13 @@ const opUpdateWebhook = "UpdateWebhook"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateWebhookRequest method.
+//	req, resp := client.UpdateWebhookRequest(params)
 //
-//    // Example sending a request using the UpdateWebhookRequest method.
-//    req, resp := client.UpdateWebhookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook
 func (c *CodeBuild) UpdateWebhookRequest(input *UpdateWebhookInput) (req *request.Request, output *UpdateWebhookOutput) {
@@ -1535,7 +4345,7 @@ func (c *CodeBuild) UpdateWebhookRequest(input *UpdateWebhookInput) (req *reques
 
 // UpdateWebhook API operation for AWS CodeBuild.
 //
-// Updates the webhook associated with an AWS CodeBuild build project.
+// Updates the webhook associated with an CodeBuild build project.
 //
 // If you use Bitbucket for your repository, rotateSecret is ignored.
 //
@@ -1546,15 +4356,16 @@ func (c *CodeBuild) UpdateWebhookRequest(input *UpdateWebhookInput) (req *reques
 // See the AWS API reference guide for AWS CodeBuild's
 // API operation UpdateWebhook for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//   - InvalidInputException
+//     The input value that was provided is not valid.
 //
-//   * ErrCodeOAuthProviderException "OAuthProviderException"
-//   There was a problem with the underlying OAuth provider.
+//   - ResourceNotFoundException
+//     The specified Amazon Web Services resource cannot be found.
+//
+//   - OAuthProviderException
+//     There was a problem with the underlying OAuth provider.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook
 func (c *CodeBuild) UpdateWebhook(input *UpdateWebhookInput) (*UpdateWebhookOutput, error) {
@@ -1578,6 +4389,71 @@ func (c *CodeBuild) UpdateWebhookWithContext(ctx aws.Context, input *UpdateWebho
 	return out, req.Send()
 }
 
+// An Amazon Web Services service limit was exceeded for the calling Amazon
+// Web Services account.
+type AccountLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccountLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccountLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccountLimitExceededException(v protocol.ResponseMetadata) error {
+	return &AccountLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccountLimitExceededException) Code() string {
+	return "AccountLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *AccountLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccountLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *AccountLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccountLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccountLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type BatchDeleteBuildsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1587,12 +4463,20 @@ type BatchDeleteBuildsInput struct {
 	Ids []*string `locationName:"ids" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteBuildsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteBuildsInput) GoString() string {
 	return s.String()
 }
@@ -1629,12 +4513,20 @@ type BatchDeleteBuildsOutput struct {
 	BuildsNotDeleted []*BuildNotDeleted `locationName:"buildsNotDeleted" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteBuildsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteBuildsOutput) GoString() string {
 	return s.String()
 }
@@ -1651,6 +4543,92 @@ func (s *BatchDeleteBuildsOutput) SetBuildsNotDeleted(v []*BuildNotDeleted) *Bat
 	return s
 }
 
+type BatchGetBuildBatchesInput struct {
+	_ struct{} `type:"structure"`
+
+	// An array that contains the batch build identifiers to retrieve.
+	//
+	// Ids is a required field
+	Ids []*string `locationName:"ids" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetBuildBatchesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetBuildBatchesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetBuildBatchesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "BatchGetBuildBatchesInput"}
+	if s.Ids == nil {
+		invalidParams.Add(request.NewErrParamRequired("Ids"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetIds sets the Ids field's value.
+func (s *BatchGetBuildBatchesInput) SetIds(v []*string) *BatchGetBuildBatchesInput {
+	s.Ids = v
+	return s
+}
+
+type BatchGetBuildBatchesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of BuildBatch objects that represent the retrieved batch builds.
+	BuildBatches []*BuildBatch `locationName:"buildBatches" type:"list"`
+
+	// An array that contains the identifiers of any batch builds that are not found.
+	BuildBatchesNotFound []*string `locationName:"buildBatchesNotFound" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetBuildBatchesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetBuildBatchesOutput) GoString() string {
+	return s.String()
+}
+
+// SetBuildBatches sets the BuildBatches field's value.
+func (s *BatchGetBuildBatchesOutput) SetBuildBatches(v []*BuildBatch) *BatchGetBuildBatchesOutput {
+	s.BuildBatches = v
+	return s
+}
+
+// SetBuildBatchesNotFound sets the BuildBatchesNotFound field's value.
+func (s *BatchGetBuildBatchesOutput) SetBuildBatchesNotFound(v []*string) *BatchGetBuildBatchesOutput {
+	s.BuildBatchesNotFound = v
+	return s
+}
+
 type BatchGetBuildsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1660,12 +4638,20 @@ type BatchGetBuildsInput struct {
 	Ids []*string `locationName:"ids" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetBuildsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetBuildsInput) GoString() string {
 	return s.String()
 }
@@ -1702,12 +4688,20 @@ type BatchGetBuildsOutput struct {
 	BuildsNotFound []*string `locationName:"buildsNotFound" min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetBuildsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetBuildsOutput) GoString() string {
 	return s.String()
 }
@@ -1727,18 +4721,28 @@ func (s *BatchGetBuildsOutput) SetBuildsNotFound(v []*string) *BatchGetBuildsOut
 type BatchGetProjectsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The names of the build projects.
+	// The names or ARNs of the build projects. To get information about a project
+	// shared with your Amazon Web Services account, its ARN must be specified.
+	// You cannot specify a shared project using its name.
 	//
 	// Names is a required field
 	Names []*string `locationName:"names" min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetProjectsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetProjectsInput) GoString() string {
 	return s.String()
 }
@@ -1775,12 +4779,20 @@ type BatchGetProjectsOutput struct {
 	ProjectsNotFound []*string `locationName:"projectsNotFound" min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetProjectsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetProjectsOutput) GoString() string {
 	return s.String()
 }
@@ -1797,6 +4809,229 @@ func (s *BatchGetProjectsOutput) SetProjectsNotFound(v []*string) *BatchGetProje
 	return s
 }
 
+type BatchGetReportGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of report group ARNs that identify the report groups to return.
+	//
+	// ReportGroupArns is a required field
+	ReportGroupArns []*string `locationName:"reportGroupArns" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetReportGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetReportGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetReportGroupsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "BatchGetReportGroupsInput"}
+	if s.ReportGroupArns == nil {
+		invalidParams.Add(request.NewErrParamRequired("ReportGroupArns"))
+	}
+	if s.ReportGroupArns != nil && len(s.ReportGroupArns) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ReportGroupArns", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetReportGroupArns sets the ReportGroupArns field's value.
+func (s *BatchGetReportGroupsInput) SetReportGroupArns(v []*string) *BatchGetReportGroupsInput {
+	s.ReportGroupArns = v
+	return s
+}
+
+type BatchGetReportGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The array of report groups returned by BatchGetReportGroups.
+	ReportGroups []*ReportGroup `locationName:"reportGroups" min:"1" type:"list"`
+
+	// An array of ARNs passed to BatchGetReportGroups that are not associated with
+	// a ReportGroup.
+	ReportGroupsNotFound []*string `locationName:"reportGroupsNotFound" min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetReportGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetReportGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SetReportGroups sets the ReportGroups field's value.
+func (s *BatchGetReportGroupsOutput) SetReportGroups(v []*ReportGroup) *BatchGetReportGroupsOutput {
+	s.ReportGroups = v
+	return s
+}
+
+// SetReportGroupsNotFound sets the ReportGroupsNotFound field's value.
+func (s *BatchGetReportGroupsOutput) SetReportGroupsNotFound(v []*string) *BatchGetReportGroupsOutput {
+	s.ReportGroupsNotFound = v
+	return s
+}
+
+type BatchGetReportsInput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of ARNs that identify the Report objects to return.
+	//
+	// ReportArns is a required field
+	ReportArns []*string `locationName:"reportArns" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetReportsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetReportsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetReportsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "BatchGetReportsInput"}
+	if s.ReportArns == nil {
+		invalidParams.Add(request.NewErrParamRequired("ReportArns"))
+	}
+	if s.ReportArns != nil && len(s.ReportArns) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ReportArns", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetReportArns sets the ReportArns field's value.
+func (s *BatchGetReportsInput) SetReportArns(v []*string) *BatchGetReportsInput {
+	s.ReportArns = v
+	return s
+}
+
+type BatchGetReportsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The array of Report objects returned by BatchGetReports.
+	Reports []*Report `locationName:"reports" min:"1" type:"list"`
+
+	// An array of ARNs passed to BatchGetReportGroups that are not associated with
+	// a Report.
+	ReportsNotFound []*string `locationName:"reportsNotFound" min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetReportsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchGetReportsOutput) GoString() string {
+	return s.String()
+}
+
+// SetReports sets the Reports field's value.
+func (s *BatchGetReportsOutput) SetReports(v []*Report) *BatchGetReportsOutput {
+	s.Reports = v
+	return s
+}
+
+// SetReportsNotFound sets the ReportsNotFound field's value.
+func (s *BatchGetReportsOutput) SetReportsNotFound(v []*string) *BatchGetReportsOutput {
+	s.ReportsNotFound = v
+	return s
+}
+
+// Specifies restrictions for the batch build.
+type BatchRestrictions struct {
+	_ struct{} `type:"structure"`
+
+	// An array of strings that specify the compute types that are allowed for the
+	// batch build. See Build environment compute types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
+	// in the CodeBuild User Guide for these values.
+	ComputeTypesAllowed []*string `locationName:"computeTypesAllowed" type:"list"`
+
+	// Specifies the maximum number of builds allowed.
+	MaximumBuildsAllowed *int64 `locationName:"maximumBuildsAllowed" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchRestrictions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchRestrictions) GoString() string {
+	return s.String()
+}
+
+// SetComputeTypesAllowed sets the ComputeTypesAllowed field's value.
+func (s *BatchRestrictions) SetComputeTypesAllowed(v []*string) *BatchRestrictions {
+	s.ComputeTypesAllowed = v
+	return s
+}
+
+// SetMaximumBuildsAllowed sets the MaximumBuildsAllowed field's value.
+func (s *BatchRestrictions) SetMaximumBuildsAllowed(v int64) *BatchRestrictions {
+	s.MaximumBuildsAllowed = &v
+	return s
+}
+
 // Information about a build.
 type Build struct {
 	_ struct{} `type:"structure"`
@@ -1807,8 +5042,16 @@ type Build struct {
 	// Information about the output artifacts for the build.
 	Artifacts *BuildArtifacts `locationName:"artifacts" type:"structure"`
 
+	// The ARN of the batch build that this build is a member of, if applicable.
+	BuildBatchArn *string `locationName:"buildBatchArn" type:"string"`
+
 	// Whether the build is complete. True if complete; otherwise, false.
 	BuildComplete *bool `locationName:"buildComplete" type:"boolean"`
+
+	// The number of the build. For each project, the buildNumber of its first build
+	// is 1. The buildNumber of each subsequent build is incremented by 1. If a
+	// build is deleted, the buildNumber of other builds does not change.
+	BuildNumber *int64 `locationName:"buildNumber" type:"long"`
 
 	// The current status of the build. Valid values include:
 	//
@@ -1831,14 +5074,17 @@ type Build struct {
 	// The current build phase.
 	CurrentPhase *string `locationName:"currentPhase" type:"string"`
 
-	// The AWS Key Management Service (AWS KMS) customer master key (CMK) to be
-	// used for encrypting the build output artifacts.
+	// Contains information about the debug session for this build.
+	DebugSession *DebugSession `locationName:"debugSession" type:"structure"`
+
+	// The Key Management Service customer master key (CMK) to be used for encrypting
+	// the build output artifacts.
 	//
 	// You can use a cross-account KMS key to encrypt the build output artifacts
 	// if your service role has permission to that key.
 	//
 	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
-	// the CMK's alias (using the format alias/alias-name).
+	// the CMK's alias (using the format alias/<alias-name>).
 	EncryptionKey *string `locationName:"encryptionKey" min:"1" type:"string"`
 
 	// When the build process ended, expressed in Unix time format.
@@ -1847,22 +5093,34 @@ type Build struct {
 	// Information about the build environment for this build.
 	Environment *ProjectEnvironment `locationName:"environment" type:"structure"`
 
+	// A list of exported environment variables for this build.
+	//
+	// Exported environment variables are used in conjunction with CodePipeline
+	// to export environment variables from the current build stage to subsequent
+	// stages in the pipeline. For more information, see Working with variables
+	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html)
+	// in the CodePipeline User Guide.
+	ExportedEnvironmentVariables []*ExportedEnvironmentVariable `locationName:"exportedEnvironmentVariables" type:"list"`
+
+	// An array of ProjectFileSystemLocation objects for a CodeBuild build project.
+	// A ProjectFileSystemLocation object specifies the identifier, location, mountOptions,
+	// mountPoint, and type of a file system created using Amazon Elastic File System.
+	FileSystemLocations []*ProjectFileSystemLocation `locationName:"fileSystemLocations" type:"list"`
+
 	// The unique ID for the build.
 	Id *string `locationName:"id" min:"1" type:"string"`
 
 	// The entity that started the build. Valid values include:
 	//
-	//    * If AWS CodePipeline started the build, the pipeline's name (for example,
+	//    * If CodePipeline started the build, the pipeline's name (for example,
 	//    codepipeline/my-demo-pipeline).
 	//
-	//    * If an AWS Identity and Access Management (IAM) user started the build,
-	//    the user's name (for example, MyUserName).
+	//    * If a user started the build, the user's name (for example, MyUserName).
 	//
-	//    * If the Jenkins plugin for AWS CodeBuild started the build, the string
-	//    CodeBuild-Jenkins-Plugin.
+	//    * If the Jenkins plugin for CodeBuild started the build, the string CodeBuild-Jenkins-Plugin.
 	Initiator *string `locationName:"initiator" type:"string"`
 
-	// Information about the build's logs in Amazon CloudWatch Logs.
+	// Information about the build's logs in CloudWatch Logs.
 	Logs *LogsLocation `locationName:"logs" type:"structure"`
 
 	// Describes a network interface.
@@ -1872,21 +5130,23 @@ type Build struct {
 	// about any current build phase that is not yet complete.
 	Phases []*BuildPhase `locationName:"phases" type:"list"`
 
-	// The name of the AWS CodeBuild project.
+	// The name of the CodeBuild project.
 	ProjectName *string `locationName:"projectName" min:"1" type:"string"`
 
 	// The number of minutes a build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutes *int64 `locationName:"queuedTimeoutInMinutes" type:"integer"`
 
+	// An array of the ARNs associated with this build's reports.
+	ReportArns []*string `locationName:"reportArns" type:"list"`
+
 	// An identifier for the version of this build's source code.
 	//
-	//    *  For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit
+	//    * For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit
 	//    ID.
 	//
-	//    *  For AWS CodePipeline, the source revision provided by AWS CodePipeline.
+	//    * For CodePipeline, the source revision provided by CodePipeline.
 	//
-	//
-	//    *  For Amazon Simple Storage Service (Amazon S3), this does not apply.
+	//    * For Amazon S3, this does not apply.
 	ResolvedSourceVersion *string `locationName:"resolvedSourceVersion" min:"1" type:"string"`
 
 	// An array of ProjectArtifacts objects.
@@ -1895,7 +5155,7 @@ type Build struct {
 	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must
 	// be one of:
 	//
-	//    * For AWS CodeCommit: the commit ID to use.
+	//    * For CodeCommit: the commit ID, branch, or Git tag to use.
 	//
 	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
 	//    that corresponds to the version of the source code you want to build.
@@ -1909,8 +5169,8 @@ type Build struct {
 	//    is specified, the branch's HEAD commit ID is used. If not specified, the
 	//    default branch's HEAD commit ID is used.
 	//
-	//    * For Amazon Simple Storage Service (Amazon S3): the version ID of the
-	//    object that represents the build input ZIP file to use.
+	//    * For Amazon S3: the version ID of the object that represents the build
+	//    input ZIP file to use.
 	SecondarySourceVersions []*ProjectSourceVersion `locationName:"secondarySourceVersions" type:"list"`
 
 	// An array of ProjectSource objects.
@@ -1922,29 +5182,42 @@ type Build struct {
 	// Information about the source code to be built.
 	Source *ProjectSource `locationName:"source" type:"structure"`
 
-	// Any version identifier for the version of the source code to be built.
+	// Any version identifier for the version of the source code to be built. If
+	// sourceVersion is specified at the project level, then this sourceVersion
+	// (at the build level) takes precedence.
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the CodeBuild User Guide.
 	SourceVersion *string `locationName:"sourceVersion" min:"1" type:"string"`
 
 	// When the build process started, expressed in Unix time format.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
-	// How long, in minutes, for AWS CodeBuild to wait before timing out this build
+	// How long, in minutes, for CodeBuild to wait before timing out this build
 	// if it does not get marked as completed.
 	TimeoutInMinutes *int64 `locationName:"timeoutInMinutes" type:"integer"`
 
-	// If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide
+	// If your CodeBuild project accesses resources in an Amazon VPC, you provide
 	// this parameter that identifies the VPC ID and the list of security group
 	// IDs and subnet IDs. The security groups and subnets must belong to the same
 	// VPC. You must provide at least one security group and one subnet ID.
 	VpcConfig *VpcConfig `locationName:"vpcConfig" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Build) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Build) GoString() string {
 	return s.String()
 }
@@ -1961,9 +5234,21 @@ func (s *Build) SetArtifacts(v *BuildArtifacts) *Build {
 	return s
 }
 
+// SetBuildBatchArn sets the BuildBatchArn field's value.
+func (s *Build) SetBuildBatchArn(v string) *Build {
+	s.BuildBatchArn = &v
+	return s
+}
+
 // SetBuildComplete sets the BuildComplete field's value.
 func (s *Build) SetBuildComplete(v bool) *Build {
 	s.BuildComplete = &v
+	return s
+}
+
+// SetBuildNumber sets the BuildNumber field's value.
+func (s *Build) SetBuildNumber(v int64) *Build {
+	s.BuildNumber = &v
 	return s
 }
 
@@ -1985,6 +5270,12 @@ func (s *Build) SetCurrentPhase(v string) *Build {
 	return s
 }
 
+// SetDebugSession sets the DebugSession field's value.
+func (s *Build) SetDebugSession(v *DebugSession) *Build {
+	s.DebugSession = v
+	return s
+}
+
 // SetEncryptionKey sets the EncryptionKey field's value.
 func (s *Build) SetEncryptionKey(v string) *Build {
 	s.EncryptionKey = &v
@@ -2000,6 +5291,18 @@ func (s *Build) SetEndTime(v time.Time) *Build {
 // SetEnvironment sets the Environment field's value.
 func (s *Build) SetEnvironment(v *ProjectEnvironment) *Build {
 	s.Environment = v
+	return s
+}
+
+// SetExportedEnvironmentVariables sets the ExportedEnvironmentVariables field's value.
+func (s *Build) SetExportedEnvironmentVariables(v []*ExportedEnvironmentVariable) *Build {
+	s.ExportedEnvironmentVariables = v
+	return s
+}
+
+// SetFileSystemLocations sets the FileSystemLocations field's value.
+func (s *Build) SetFileSystemLocations(v []*ProjectFileSystemLocation) *Build {
+	s.FileSystemLocations = v
 	return s
 }
 
@@ -2042,6 +5345,12 @@ func (s *Build) SetProjectName(v string) *Build {
 // SetQueuedTimeoutInMinutes sets the QueuedTimeoutInMinutes field's value.
 func (s *Build) SetQueuedTimeoutInMinutes(v int64) *Build {
 	s.QueuedTimeoutInMinutes = &v
+	return s
+}
+
+// SetReportArns sets the ReportArns field's value.
+func (s *Build) SetReportArns(v []*string) *Build {
+	s.ReportArns = v
 	return s
 }
 
@@ -2112,6 +5421,42 @@ type BuildArtifacts struct {
 	// An identifier for this artifact definition.
 	ArtifactIdentifier *string `locationName:"artifactIdentifier" type:"string"`
 
+	// Specifies the bucket owner's access for objects that another account uploads
+	// to their Amazon S3 bucket. By default, only the account that uploads the
+	// objects to the bucket has access to these objects. This property allows you
+	// to give the bucket owner access to these objects.
+	//
+	// To use this property, your CodeBuild service role must have the s3:PutBucketAcl
+	// permission. This permission allows CodeBuild to modify the access control
+	// list for the bucket.
+	//
+	// This property can be one of the following values:
+	//
+	// NONE
+	//
+	// The bucket owner does not have access to the objects. This is the default.
+	//
+	// READ_ONLY
+	//
+	// The bucket owner has read-only access to the objects. The uploading account
+	// retains ownership of the objects.
+	//
+	// FULL
+	//
+	// The bucket owner has full access to the objects. Object ownership is determined
+	// by the following criteria:
+	//
+	//    * If the bucket is configured with the Bucket owner preferred setting,
+	//    the bucket owner owns the objects. The uploading account will have object
+	//    access as specified by the bucket's policy.
+	//
+	//    * Otherwise, the uploading account retains ownership of the objects.
+	//
+	// For more information about Amazon S3 object ownership, see Controlling ownership
+	// of uploaded objects using S3 Object Ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+	// in the Amazon Simple Storage Service User Guide.
+	BucketOwnerAccess *string `locationName:"bucketOwnerAccess" type:"string" enum:"BucketOwnerAccess"`
+
 	// Information that tells you if encryption for build artifacts is disabled.
 	EncryptionDisabled *bool `locationName:"encryptionDisabled" type:"boolean"`
 
@@ -2127,8 +5472,8 @@ type BuildArtifacts struct {
 	// to ZIP.
 	Md5sum *string `locationName:"md5sum" type:"string"`
 
-	// If this flag is set, a name specified in the build spec file overrides the
-	// artifact name. The name specified in a build spec file is calculated at build
+	// If this flag is set, a name specified in the buildspec file overrides the
+	// artifact name. The name specified in a buildspec file is calculated at build
 	// time and uses the Shell Command Language. For example, you can append a date
 	// and time to your artifact name so that it is always unique.
 	OverrideArtifactName *bool `locationName:"overrideArtifactName" type:"boolean"`
@@ -2143,12 +5488,20 @@ type BuildArtifacts struct {
 	Sha256sum *string `locationName:"sha256sum" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildArtifacts) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildArtifacts) GoString() string {
 	return s.String()
 }
@@ -2156,6 +5509,12 @@ func (s BuildArtifacts) GoString() string {
 // SetArtifactIdentifier sets the ArtifactIdentifier field's value.
 func (s *BuildArtifacts) SetArtifactIdentifier(v string) *BuildArtifacts {
 	s.ArtifactIdentifier = &v
+	return s
+}
+
+// SetBucketOwnerAccess sets the BucketOwnerAccess field's value.
+func (s *BuildArtifacts) SetBucketOwnerAccess(v string) *BuildArtifacts {
+	s.BucketOwnerAccess = &v
 	return s
 }
 
@@ -2189,6 +5548,586 @@ func (s *BuildArtifacts) SetSha256sum(v string) *BuildArtifacts {
 	return s
 }
 
+// Contains information about a batch build.
+type BuildBatch struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the batch build.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+
+	// A BuildArtifacts object the defines the build artifacts for this batch build.
+	Artifacts *BuildArtifacts `locationName:"artifacts" type:"structure"`
+
+	// Contains configuration information about a batch build project.
+	BuildBatchConfig *ProjectBuildBatchConfig `locationName:"buildBatchConfig" type:"structure"`
+
+	// The number of the batch build. For each project, the buildBatchNumber of
+	// its first batch build is 1. The buildBatchNumber of each subsequent batch
+	// build is incremented by 1. If a batch build is deleted, the buildBatchNumber
+	// of other batch builds does not change.
+	BuildBatchNumber *int64 `locationName:"buildBatchNumber" type:"long"`
+
+	// The status of the batch build.
+	BuildBatchStatus *string `locationName:"buildBatchStatus" type:"string" enum:"StatusType"`
+
+	// An array of BuildGroup objects that define the build groups for the batch
+	// build.
+	BuildGroups []*BuildGroup `locationName:"buildGroups" type:"list"`
+
+	// Specifies the maximum amount of time, in minutes, that the build in a batch
+	// must be completed in.
+	BuildTimeoutInMinutes *int64 `locationName:"buildTimeoutInMinutes" type:"integer"`
+
+	// Information about the cache for the build project.
+	Cache *ProjectCache `locationName:"cache" type:"structure"`
+
+	// Indicates if the batch build is complete.
+	Complete *bool `locationName:"complete" type:"boolean"`
+
+	// The current phase of the batch build.
+	CurrentPhase *string `locationName:"currentPhase" type:"string"`
+
+	// Specifies if session debugging is enabled for this batch build. For more
+	// information, see Viewing a running build in Session Manager (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
+	// Batch session debugging is not supported for matrix batch builds.
+	DebugSessionEnabled *bool `locationName:"debugSessionEnabled" type:"boolean"`
+
+	// The Key Management Service customer master key (CMK) to be used for encrypting
+	// the batch build output artifacts.
+	//
+	// You can use a cross-account KMS key to encrypt the build output artifacts
+	// if your service role has permission to that key.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
+	// the CMK's alias (using the format alias/<alias-name>).
+	EncryptionKey *string `locationName:"encryptionKey" min:"1" type:"string"`
+
+	// The date and time that the batch build ended.
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
+
+	// Information about the build environment of the build project.
+	Environment *ProjectEnvironment `locationName:"environment" type:"structure"`
+
+	// An array of ProjectFileSystemLocation objects for the batch build project.
+	// A ProjectFileSystemLocation object specifies the identifier, location, mountOptions,
+	// mountPoint, and type of a file system created using Amazon Elastic File System.
+	FileSystemLocations []*ProjectFileSystemLocation `locationName:"fileSystemLocations" type:"list"`
+
+	// The identifier of the batch build.
+	Id *string `locationName:"id" min:"1" type:"string"`
+
+	// The entity that started the batch build. Valid values include:
+	//
+	//    * If CodePipeline started the build, the pipeline's name (for example,
+	//    codepipeline/my-demo-pipeline).
+	//
+	//    * If a user started the build, the user's name.
+	//
+	//    * If the Jenkins plugin for CodeBuild started the build, the string CodeBuild-Jenkins-Plugin.
+	Initiator *string `locationName:"initiator" type:"string"`
+
+	// Information about logs for a build project. These can be logs in CloudWatch
+	// Logs, built in a specified S3 bucket, or both.
+	LogConfig *LogsConfig `locationName:"logConfig" type:"structure"`
+
+	// An array of BuildBatchPhase objects the specify the phases of the batch build.
+	Phases []*BuildBatchPhase `locationName:"phases" type:"list"`
+
+	// The name of the batch build project.
+	ProjectName *string `locationName:"projectName" min:"1" type:"string"`
+
+	// Specifies the amount of time, in minutes, that the batch build is allowed
+	// to be queued before it times out.
+	QueuedTimeoutInMinutes *int64 `locationName:"queuedTimeoutInMinutes" type:"integer"`
+
+	// The identifier of the resolved version of this batch build's source code.
+	//
+	//    * For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit
+	//    ID.
+	//
+	//    * For CodePipeline, the source revision provided by CodePipeline.
+	//
+	//    * For Amazon S3, this does not apply.
+	ResolvedSourceVersion *string `locationName:"resolvedSourceVersion" min:"1" type:"string"`
+
+	// An array of BuildArtifacts objects the define the build artifacts for this
+	// batch build.
+	SecondaryArtifacts []*BuildArtifacts `locationName:"secondaryArtifacts" type:"list"`
+
+	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must
+	// be one of:
+	//
+	//    * For CodeCommit: the commit ID, branch, or Git tag to use.
+	//
+	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
+	//    that corresponds to the version of the source code you want to build.
+	//    If a pull request ID is specified, it must use the format pr/pull-request-ID
+	//    (for example, pr/25). If a branch name is specified, the branch's HEAD
+	//    commit ID is used. If not specified, the default branch's HEAD commit
+	//    ID is used.
+	//
+	//    * For Bitbucket: the commit ID, branch name, or tag name that corresponds
+	//    to the version of the source code you want to build. If a branch name
+	//    is specified, the branch's HEAD commit ID is used. If not specified, the
+	//    default branch's HEAD commit ID is used.
+	//
+	//    * For Amazon S3: the version ID of the object that represents the build
+	//    input ZIP file to use.
+	SecondarySourceVersions []*ProjectSourceVersion `locationName:"secondarySourceVersions" type:"list"`
+
+	// An array of ProjectSource objects that define the sources for the batch build.
+	SecondarySources []*ProjectSource `locationName:"secondarySources" type:"list"`
+
+	// The name of a service role used for builds in the batch.
+	ServiceRole *string `locationName:"serviceRole" min:"1" type:"string"`
+
+	// Information about the build input source code for the build project.
+	Source *ProjectSource `locationName:"source" type:"structure"`
+
+	// The identifier of the version of the source code to be built.
+	SourceVersion *string `locationName:"sourceVersion" min:"1" type:"string"`
+
+	// The date and time that the batch build started.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
+
+	// Information about the VPC configuration that CodeBuild accesses.
+	VpcConfig *VpcConfig `locationName:"vpcConfig" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildBatch) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildBatch) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *BuildBatch) SetArn(v string) *BuildBatch {
+	s.Arn = &v
+	return s
+}
+
+// SetArtifacts sets the Artifacts field's value.
+func (s *BuildBatch) SetArtifacts(v *BuildArtifacts) *BuildBatch {
+	s.Artifacts = v
+	return s
+}
+
+// SetBuildBatchConfig sets the BuildBatchConfig field's value.
+func (s *BuildBatch) SetBuildBatchConfig(v *ProjectBuildBatchConfig) *BuildBatch {
+	s.BuildBatchConfig = v
+	return s
+}
+
+// SetBuildBatchNumber sets the BuildBatchNumber field's value.
+func (s *BuildBatch) SetBuildBatchNumber(v int64) *BuildBatch {
+	s.BuildBatchNumber = &v
+	return s
+}
+
+// SetBuildBatchStatus sets the BuildBatchStatus field's value.
+func (s *BuildBatch) SetBuildBatchStatus(v string) *BuildBatch {
+	s.BuildBatchStatus = &v
+	return s
+}
+
+// SetBuildGroups sets the BuildGroups field's value.
+func (s *BuildBatch) SetBuildGroups(v []*BuildGroup) *BuildBatch {
+	s.BuildGroups = v
+	return s
+}
+
+// SetBuildTimeoutInMinutes sets the BuildTimeoutInMinutes field's value.
+func (s *BuildBatch) SetBuildTimeoutInMinutes(v int64) *BuildBatch {
+	s.BuildTimeoutInMinutes = &v
+	return s
+}
+
+// SetCache sets the Cache field's value.
+func (s *BuildBatch) SetCache(v *ProjectCache) *BuildBatch {
+	s.Cache = v
+	return s
+}
+
+// SetComplete sets the Complete field's value.
+func (s *BuildBatch) SetComplete(v bool) *BuildBatch {
+	s.Complete = &v
+	return s
+}
+
+// SetCurrentPhase sets the CurrentPhase field's value.
+func (s *BuildBatch) SetCurrentPhase(v string) *BuildBatch {
+	s.CurrentPhase = &v
+	return s
+}
+
+// SetDebugSessionEnabled sets the DebugSessionEnabled field's value.
+func (s *BuildBatch) SetDebugSessionEnabled(v bool) *BuildBatch {
+	s.DebugSessionEnabled = &v
+	return s
+}
+
+// SetEncryptionKey sets the EncryptionKey field's value.
+func (s *BuildBatch) SetEncryptionKey(v string) *BuildBatch {
+	s.EncryptionKey = &v
+	return s
+}
+
+// SetEndTime sets the EndTime field's value.
+func (s *BuildBatch) SetEndTime(v time.Time) *BuildBatch {
+	s.EndTime = &v
+	return s
+}
+
+// SetEnvironment sets the Environment field's value.
+func (s *BuildBatch) SetEnvironment(v *ProjectEnvironment) *BuildBatch {
+	s.Environment = v
+	return s
+}
+
+// SetFileSystemLocations sets the FileSystemLocations field's value.
+func (s *BuildBatch) SetFileSystemLocations(v []*ProjectFileSystemLocation) *BuildBatch {
+	s.FileSystemLocations = v
+	return s
+}
+
+// SetId sets the Id field's value.
+func (s *BuildBatch) SetId(v string) *BuildBatch {
+	s.Id = &v
+	return s
+}
+
+// SetInitiator sets the Initiator field's value.
+func (s *BuildBatch) SetInitiator(v string) *BuildBatch {
+	s.Initiator = &v
+	return s
+}
+
+// SetLogConfig sets the LogConfig field's value.
+func (s *BuildBatch) SetLogConfig(v *LogsConfig) *BuildBatch {
+	s.LogConfig = v
+	return s
+}
+
+// SetPhases sets the Phases field's value.
+func (s *BuildBatch) SetPhases(v []*BuildBatchPhase) *BuildBatch {
+	s.Phases = v
+	return s
+}
+
+// SetProjectName sets the ProjectName field's value.
+func (s *BuildBatch) SetProjectName(v string) *BuildBatch {
+	s.ProjectName = &v
+	return s
+}
+
+// SetQueuedTimeoutInMinutes sets the QueuedTimeoutInMinutes field's value.
+func (s *BuildBatch) SetQueuedTimeoutInMinutes(v int64) *BuildBatch {
+	s.QueuedTimeoutInMinutes = &v
+	return s
+}
+
+// SetResolvedSourceVersion sets the ResolvedSourceVersion field's value.
+func (s *BuildBatch) SetResolvedSourceVersion(v string) *BuildBatch {
+	s.ResolvedSourceVersion = &v
+	return s
+}
+
+// SetSecondaryArtifacts sets the SecondaryArtifacts field's value.
+func (s *BuildBatch) SetSecondaryArtifacts(v []*BuildArtifacts) *BuildBatch {
+	s.SecondaryArtifacts = v
+	return s
+}
+
+// SetSecondarySourceVersions sets the SecondarySourceVersions field's value.
+func (s *BuildBatch) SetSecondarySourceVersions(v []*ProjectSourceVersion) *BuildBatch {
+	s.SecondarySourceVersions = v
+	return s
+}
+
+// SetSecondarySources sets the SecondarySources field's value.
+func (s *BuildBatch) SetSecondarySources(v []*ProjectSource) *BuildBatch {
+	s.SecondarySources = v
+	return s
+}
+
+// SetServiceRole sets the ServiceRole field's value.
+func (s *BuildBatch) SetServiceRole(v string) *BuildBatch {
+	s.ServiceRole = &v
+	return s
+}
+
+// SetSource sets the Source field's value.
+func (s *BuildBatch) SetSource(v *ProjectSource) *BuildBatch {
+	s.Source = v
+	return s
+}
+
+// SetSourceVersion sets the SourceVersion field's value.
+func (s *BuildBatch) SetSourceVersion(v string) *BuildBatch {
+	s.SourceVersion = &v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *BuildBatch) SetStartTime(v time.Time) *BuildBatch {
+	s.StartTime = &v
+	return s
+}
+
+// SetVpcConfig sets the VpcConfig field's value.
+func (s *BuildBatch) SetVpcConfig(v *VpcConfig) *BuildBatch {
+	s.VpcConfig = v
+	return s
+}
+
+// Specifies filters when retrieving batch builds.
+type BuildBatchFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the batch builds to retrieve. Only batch builds that have this
+	// status will be retrieved.
+	Status *string `locationName:"status" type:"string" enum:"StatusType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildBatchFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildBatchFilter) GoString() string {
+	return s.String()
+}
+
+// SetStatus sets the Status field's value.
+func (s *BuildBatchFilter) SetStatus(v string) *BuildBatchFilter {
+	s.Status = &v
+	return s
+}
+
+// Contains information about a stage for a batch build.
+type BuildBatchPhase struct {
+	_ struct{} `type:"structure"`
+
+	// Additional information about the batch build phase. Especially to help troubleshoot
+	// a failed batch build.
+	Contexts []*PhaseContext `locationName:"contexts" type:"list"`
+
+	// How long, in seconds, between the starting and ending times of the batch
+	// build's phase.
+	DurationInSeconds *int64 `locationName:"durationInSeconds" type:"long"`
+
+	// When the batch build phase ended, expressed in Unix time format.
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
+
+	// The current status of the batch build phase. Valid values include:
+	//
+	// FAILED
+	//
+	// The build phase failed.
+	//
+	// FAULT
+	//
+	// The build phase faulted.
+	//
+	// IN_PROGRESS
+	//
+	// The build phase is still in progress.
+	//
+	// STOPPED
+	//
+	// The build phase stopped.
+	//
+	// SUCCEEDED
+	//
+	// The build phase succeeded.
+	//
+	// TIMED_OUT
+	//
+	// The build phase timed out.
+	PhaseStatus *string `locationName:"phaseStatus" type:"string" enum:"StatusType"`
+
+	// The name of the batch build phase. Valid values include:
+	//
+	// COMBINE_ARTIFACTS
+	//
+	// Build output artifacts are being combined and uploaded to the output location.
+	//
+	// DOWNLOAD_BATCHSPEC
+	//
+	// The batch build specification is being downloaded.
+	//
+	// FAILED
+	//
+	// One or more of the builds failed.
+	//
+	// IN_PROGRESS
+	//
+	// The batch build is in progress.
+	//
+	// STOPPED
+	//
+	// The batch build was stopped.
+	//
+	// SUBMITTED
+	//
+	// The btach build has been submitted.
+	//
+	// SUCCEEDED
+	//
+	// The batch build succeeded.
+	PhaseType *string `locationName:"phaseType" type:"string" enum:"BuildBatchPhaseType"`
+
+	// When the batch build phase started, expressed in Unix time format.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildBatchPhase) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildBatchPhase) GoString() string {
+	return s.String()
+}
+
+// SetContexts sets the Contexts field's value.
+func (s *BuildBatchPhase) SetContexts(v []*PhaseContext) *BuildBatchPhase {
+	s.Contexts = v
+	return s
+}
+
+// SetDurationInSeconds sets the DurationInSeconds field's value.
+func (s *BuildBatchPhase) SetDurationInSeconds(v int64) *BuildBatchPhase {
+	s.DurationInSeconds = &v
+	return s
+}
+
+// SetEndTime sets the EndTime field's value.
+func (s *BuildBatchPhase) SetEndTime(v time.Time) *BuildBatchPhase {
+	s.EndTime = &v
+	return s
+}
+
+// SetPhaseStatus sets the PhaseStatus field's value.
+func (s *BuildBatchPhase) SetPhaseStatus(v string) *BuildBatchPhase {
+	s.PhaseStatus = &v
+	return s
+}
+
+// SetPhaseType sets the PhaseType field's value.
+func (s *BuildBatchPhase) SetPhaseType(v string) *BuildBatchPhase {
+	s.PhaseType = &v
+	return s
+}
+
+// SetStartTime sets the StartTime field's value.
+func (s *BuildBatchPhase) SetStartTime(v time.Time) *BuildBatchPhase {
+	s.StartTime = &v
+	return s
+}
+
+// Contains information about a batch build build group. Build groups are used
+// to combine builds that can run in parallel, while still being able to set
+// dependencies on other build groups.
+type BuildGroup struct {
+	_ struct{} `type:"structure"`
+
+	// A BuildSummary object that contains a summary of the current build group.
+	CurrentBuildSummary *BuildSummary `locationName:"currentBuildSummary" type:"structure"`
+
+	// An array of strings that contain the identifiers of the build groups that
+	// this build group depends on.
+	DependsOn []*string `locationName:"dependsOn" type:"list"`
+
+	// Contains the identifier of the build group.
+	Identifier *string `locationName:"identifier" type:"string"`
+
+	// Specifies if failures in this build group can be ignored.
+	IgnoreFailure *bool `locationName:"ignoreFailure" type:"boolean"`
+
+	// An array of BuildSummary objects that contain summaries of previous build
+	// groups.
+	PriorBuildSummaryList []*BuildSummary `locationName:"priorBuildSummaryList" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildGroup) GoString() string {
+	return s.String()
+}
+
+// SetCurrentBuildSummary sets the CurrentBuildSummary field's value.
+func (s *BuildGroup) SetCurrentBuildSummary(v *BuildSummary) *BuildGroup {
+	s.CurrentBuildSummary = v
+	return s
+}
+
+// SetDependsOn sets the DependsOn field's value.
+func (s *BuildGroup) SetDependsOn(v []*string) *BuildGroup {
+	s.DependsOn = v
+	return s
+}
+
+// SetIdentifier sets the Identifier field's value.
+func (s *BuildGroup) SetIdentifier(v string) *BuildGroup {
+	s.Identifier = &v
+	return s
+}
+
+// SetIgnoreFailure sets the IgnoreFailure field's value.
+func (s *BuildGroup) SetIgnoreFailure(v bool) *BuildGroup {
+	s.IgnoreFailure = &v
+	return s
+}
+
+// SetPriorBuildSummaryList sets the PriorBuildSummaryList field's value.
+func (s *BuildGroup) SetPriorBuildSummaryList(v []*BuildSummary) *BuildGroup {
+	s.PriorBuildSummaryList = v
+	return s
+}
+
 // Information about a build that could not be successfully deleted.
 type BuildNotDeleted struct {
 	_ struct{} `type:"structure"`
@@ -2200,12 +6139,20 @@ type BuildNotDeleted struct {
 	StatusCode *string `locationName:"statusCode" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildNotDeleted) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildNotDeleted) GoString() string {
 	return s.String()
 }
@@ -2239,59 +6186,96 @@ type BuildPhase struct {
 
 	// The current status of the build phase. Valid values include:
 	//
-	//    * FAILED: The build phase failed.
+	// FAILED
 	//
-	//    * FAULT: The build phase faulted.
+	// The build phase failed.
 	//
-	//    * IN_PROGRESS: The build phase is still in progress.
+	// FAULT
 	//
-	//    * QUEUED: The build has been submitted and is queued behind other submitted
-	//    builds.
+	// The build phase faulted.
 	//
-	//    * STOPPED: The build phase stopped.
+	// IN_PROGRESS
 	//
-	//    * SUCCEEDED: The build phase succeeded.
+	// The build phase is still in progress.
 	//
-	//    * TIMED_OUT: The build phase timed out.
+	// STOPPED
+	//
+	// The build phase stopped.
+	//
+	// SUCCEEDED
+	//
+	// The build phase succeeded.
+	//
+	// TIMED_OUT
+	//
+	// The build phase timed out.
 	PhaseStatus *string `locationName:"phaseStatus" type:"string" enum:"StatusType"`
 
 	// The name of the build phase. Valid values include:
 	//
-	//    * BUILD: Core build activities typically occur in this build phase.
+	// BUILD
 	//
-	//    * COMPLETED: The build has been completed.
+	// Core build activities typically occur in this build phase.
 	//
-	//    * DOWNLOAD_SOURCE: Source code is being downloaded in this build phase.
+	// COMPLETED
 	//
-	//    * FINALIZING: The build process is completing in this build phase.
+	// The build has been completed.
 	//
-	//    * INSTALL: Installation activities typically occur in this build phase.
+	// DOWNLOAD_SOURCE
 	//
-	//    * POST_BUILD: Post-build activities typically occur in this build phase.
+	// Source code is being downloaded in this build phase.
 	//
-	//    * PRE_BUILD: Pre-build activities typically occur in this build phase.
+	// FINALIZING
 	//
-	//    * PROVISIONING: The build environment is being set up.
+	// The build process is completing in this build phase.
 	//
-	//    * QUEUED: The build has been submitted and is queued behind other submitted
-	//    builds.
+	// INSTALL
 	//
-	//    * SUBMITTED: The build has been submitted.
+	// Installation activities typically occur in this build phase.
 	//
-	//    * UPLOAD_ARTIFACTS: Build output artifacts are being uploaded to the output
-	//    location.
+	// POST_BUILD
+	//
+	// Post-build activities typically occur in this build phase.
+	//
+	// PRE_BUILD
+	//
+	// Pre-build activities typically occur in this build phase.
+	//
+	// PROVISIONING
+	//
+	// The build environment is being set up.
+	//
+	// QUEUED
+	//
+	// The build has been submitted and is queued behind other submitted builds.
+	//
+	// SUBMITTED
+	//
+	// The build has been submitted.
+	//
+	// UPLOAD_ARTIFACTS
+	//
+	// Build output artifacts are being uploaded to the output location.
 	PhaseType *string `locationName:"phaseType" type:"string" enum:"BuildPhaseType"`
 
 	// When the build phase started, expressed in Unix time format.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildPhase) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BuildPhase) GoString() string {
 	return s.String()
 }
@@ -2332,35 +6316,205 @@ func (s *BuildPhase) SetStartTime(v time.Time) *BuildPhase {
 	return s
 }
 
-// Information about Amazon CloudWatch Logs for a build project.
+// Contains information that defines how the CodeBuild build project reports
+// the build status to the source provider.
+type BuildStatusConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the context of the build status CodeBuild sends to the source provider.
+	// The usage of this parameter depends on the source provider.
+	//
+	// Bitbucket
+	//
+	// This parameter is used for the name parameter in the Bitbucket commit status.
+	// For more information, see build (https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build)
+	// in the Bitbucket API documentation.
+	//
+	// GitHub/GitHub Enterprise Server
+	//
+	// This parameter is used for the context parameter in the GitHub commit status.
+	// For more information, see Create a commit status (https://developer.github.com/v3/repos/statuses/#create-a-commit-status)
+	// in the GitHub developer guide.
+	Context *string `locationName:"context" type:"string"`
+
+	// Specifies the target url of the build status CodeBuild sends to the source
+	// provider. The usage of this parameter depends on the source provider.
+	//
+	// Bitbucket
+	//
+	// This parameter is used for the url parameter in the Bitbucket commit status.
+	// For more information, see build (https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build)
+	// in the Bitbucket API documentation.
+	//
+	// GitHub/GitHub Enterprise Server
+	//
+	// This parameter is used for the target_url parameter in the GitHub commit
+	// status. For more information, see Create a commit status (https://developer.github.com/v3/repos/statuses/#create-a-commit-status)
+	// in the GitHub developer guide.
+	TargetUrl *string `locationName:"targetUrl" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildStatusConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildStatusConfig) GoString() string {
+	return s.String()
+}
+
+// SetContext sets the Context field's value.
+func (s *BuildStatusConfig) SetContext(v string) *BuildStatusConfig {
+	s.Context = &v
+	return s
+}
+
+// SetTargetUrl sets the TargetUrl field's value.
+func (s *BuildStatusConfig) SetTargetUrl(v string) *BuildStatusConfig {
+	s.TargetUrl = &v
+	return s
+}
+
+// Contains summary information about a batch build group.
+type BuildSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The batch build ARN.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The status of the build group.
+	//
+	// FAILED
+	//
+	// The build group failed.
+	//
+	// FAULT
+	//
+	// The build group faulted.
+	//
+	// IN_PROGRESS
+	//
+	// The build group is still in progress.
+	//
+	// STOPPED
+	//
+	// The build group stopped.
+	//
+	// SUCCEEDED
+	//
+	// The build group succeeded.
+	//
+	// TIMED_OUT
+	//
+	// The build group timed out.
+	BuildStatus *string `locationName:"buildStatus" type:"string" enum:"StatusType"`
+
+	// A ResolvedArtifact object that represents the primary build artifacts for
+	// the build group.
+	PrimaryArtifact *ResolvedArtifact `locationName:"primaryArtifact" type:"structure"`
+
+	// When the build was started, expressed in Unix time format.
+	RequestedOn *time.Time `locationName:"requestedOn" type:"timestamp"`
+
+	// An array of ResolvedArtifact objects that represents the secondary build
+	// artifacts for the build group.
+	SecondaryArtifacts []*ResolvedArtifact `locationName:"secondaryArtifacts" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BuildSummary) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *BuildSummary) SetArn(v string) *BuildSummary {
+	s.Arn = &v
+	return s
+}
+
+// SetBuildStatus sets the BuildStatus field's value.
+func (s *BuildSummary) SetBuildStatus(v string) *BuildSummary {
+	s.BuildStatus = &v
+	return s
+}
+
+// SetPrimaryArtifact sets the PrimaryArtifact field's value.
+func (s *BuildSummary) SetPrimaryArtifact(v *ResolvedArtifact) *BuildSummary {
+	s.PrimaryArtifact = v
+	return s
+}
+
+// SetRequestedOn sets the RequestedOn field's value.
+func (s *BuildSummary) SetRequestedOn(v time.Time) *BuildSummary {
+	s.RequestedOn = &v
+	return s
+}
+
+// SetSecondaryArtifacts sets the SecondaryArtifacts field's value.
+func (s *BuildSummary) SetSecondaryArtifacts(v []*ResolvedArtifact) *BuildSummary {
+	s.SecondaryArtifacts = v
+	return s
+}
+
+// Information about CloudWatch Logs for a build project.
 type CloudWatchLogsConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The group name of the logs in Amazon CloudWatch Logs. For more information,
-	// see Working with Log Groups and Log Streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html).
+	// The group name of the logs in CloudWatch Logs. For more information, see
+	// Working with Log Groups and Log Streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html).
 	GroupName *string `locationName:"groupName" type:"string"`
 
-	// The current status of the logs in Amazon CloudWatch Logs for a build project.
-	// Valid values are:
+	// The current status of the logs in CloudWatch Logs for a build project. Valid
+	// values are:
 	//
-	//    * ENABLED: Amazon CloudWatch Logs are enabled for this build project.
+	//    * ENABLED: CloudWatch Logs are enabled for this build project.
 	//
-	//    * DISABLED: Amazon CloudWatch Logs are not enabled for this build project.
+	//    * DISABLED: CloudWatch Logs are not enabled for this build project.
 	//
 	// Status is a required field
 	Status *string `locationName:"status" type:"string" required:"true" enum:"LogsConfigStatusType"`
 
-	// The prefix of the stream name of the Amazon CloudWatch Logs. For more information,
+	// The prefix of the stream name of the CloudWatch Logs. For more information,
 	// see Working with Log Groups and Log Streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html).
 	StreamName *string `locationName:"streamName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLogsConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudWatchLogsConfig) GoString() string {
 	return s.String()
 }
@@ -2396,6 +6550,208 @@ func (s *CloudWatchLogsConfig) SetStreamName(v string) *CloudWatchLogsConfig {
 	return s
 }
 
+// Contains code coverage report information.
+//
+// Line coverage measures how many statements your tests cover. A statement
+// is a single instruction, not including comments, conditionals, etc.
+//
+// Branch coverage determines if your tests cover every possible branch of a
+// control structure, such as an if or case statement.
+type CodeCoverage struct {
+	_ struct{} `type:"structure"`
+
+	// The percentage of branches that are covered by your tests.
+	BranchCoveragePercentage *float64 `locationName:"branchCoveragePercentage" type:"double"`
+
+	// The number of conditional branches that are covered by your tests.
+	BranchesCovered *int64 `locationName:"branchesCovered" type:"integer"`
+
+	// The number of conditional branches that are not covered by your tests.
+	BranchesMissed *int64 `locationName:"branchesMissed" type:"integer"`
+
+	// The date and time that the tests were run.
+	Expired *time.Time `locationName:"expired" type:"timestamp"`
+
+	// The path of the test report file.
+	FilePath *string `locationName:"filePath" min:"1" type:"string"`
+
+	// The identifier of the code coverage report.
+	Id *string `locationName:"id" min:"1" type:"string"`
+
+	// The percentage of lines that are covered by your tests.
+	LineCoveragePercentage *float64 `locationName:"lineCoveragePercentage" type:"double"`
+
+	// The number of lines that are covered by your tests.
+	LinesCovered *int64 `locationName:"linesCovered" type:"integer"`
+
+	// The number of lines that are not covered by your tests.
+	LinesMissed *int64 `locationName:"linesMissed" type:"integer"`
+
+	// The ARN of the report.
+	ReportARN *string `locationName:"reportARN" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CodeCoverage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CodeCoverage) GoString() string {
+	return s.String()
+}
+
+// SetBranchCoveragePercentage sets the BranchCoveragePercentage field's value.
+func (s *CodeCoverage) SetBranchCoveragePercentage(v float64) *CodeCoverage {
+	s.BranchCoveragePercentage = &v
+	return s
+}
+
+// SetBranchesCovered sets the BranchesCovered field's value.
+func (s *CodeCoverage) SetBranchesCovered(v int64) *CodeCoverage {
+	s.BranchesCovered = &v
+	return s
+}
+
+// SetBranchesMissed sets the BranchesMissed field's value.
+func (s *CodeCoverage) SetBranchesMissed(v int64) *CodeCoverage {
+	s.BranchesMissed = &v
+	return s
+}
+
+// SetExpired sets the Expired field's value.
+func (s *CodeCoverage) SetExpired(v time.Time) *CodeCoverage {
+	s.Expired = &v
+	return s
+}
+
+// SetFilePath sets the FilePath field's value.
+func (s *CodeCoverage) SetFilePath(v string) *CodeCoverage {
+	s.FilePath = &v
+	return s
+}
+
+// SetId sets the Id field's value.
+func (s *CodeCoverage) SetId(v string) *CodeCoverage {
+	s.Id = &v
+	return s
+}
+
+// SetLineCoveragePercentage sets the LineCoveragePercentage field's value.
+func (s *CodeCoverage) SetLineCoveragePercentage(v float64) *CodeCoverage {
+	s.LineCoveragePercentage = &v
+	return s
+}
+
+// SetLinesCovered sets the LinesCovered field's value.
+func (s *CodeCoverage) SetLinesCovered(v int64) *CodeCoverage {
+	s.LinesCovered = &v
+	return s
+}
+
+// SetLinesMissed sets the LinesMissed field's value.
+func (s *CodeCoverage) SetLinesMissed(v int64) *CodeCoverage {
+	s.LinesMissed = &v
+	return s
+}
+
+// SetReportARN sets the ReportARN field's value.
+func (s *CodeCoverage) SetReportARN(v string) *CodeCoverage {
+	s.ReportARN = &v
+	return s
+}
+
+// Contains a summary of a code coverage report.
+//
+// Line coverage measures how many statements your tests cover. A statement
+// is a single instruction, not including comments, conditionals, etc.
+//
+// Branch coverage determines if your tests cover every possible branch of a
+// control structure, such as an if or case statement.
+type CodeCoverageReportSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The percentage of branches that are covered by your tests.
+	BranchCoveragePercentage *float64 `locationName:"branchCoveragePercentage" type:"double"`
+
+	// The number of conditional branches that are covered by your tests.
+	BranchesCovered *int64 `locationName:"branchesCovered" type:"integer"`
+
+	// The number of conditional branches that are not covered by your tests.
+	BranchesMissed *int64 `locationName:"branchesMissed" type:"integer"`
+
+	// The percentage of lines that are covered by your tests.
+	LineCoveragePercentage *float64 `locationName:"lineCoveragePercentage" type:"double"`
+
+	// The number of lines that are covered by your tests.
+	LinesCovered *int64 `locationName:"linesCovered" type:"integer"`
+
+	// The number of lines that are not covered by your tests.
+	LinesMissed *int64 `locationName:"linesMissed" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CodeCoverageReportSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CodeCoverageReportSummary) GoString() string {
+	return s.String()
+}
+
+// SetBranchCoveragePercentage sets the BranchCoveragePercentage field's value.
+func (s *CodeCoverageReportSummary) SetBranchCoveragePercentage(v float64) *CodeCoverageReportSummary {
+	s.BranchCoveragePercentage = &v
+	return s
+}
+
+// SetBranchesCovered sets the BranchesCovered field's value.
+func (s *CodeCoverageReportSummary) SetBranchesCovered(v int64) *CodeCoverageReportSummary {
+	s.BranchesCovered = &v
+	return s
+}
+
+// SetBranchesMissed sets the BranchesMissed field's value.
+func (s *CodeCoverageReportSummary) SetBranchesMissed(v int64) *CodeCoverageReportSummary {
+	s.BranchesMissed = &v
+	return s
+}
+
+// SetLineCoveragePercentage sets the LineCoveragePercentage field's value.
+func (s *CodeCoverageReportSummary) SetLineCoveragePercentage(v float64) *CodeCoverageReportSummary {
+	s.LineCoveragePercentage = &v
+	return s
+}
+
+// SetLinesCovered sets the LinesCovered field's value.
+func (s *CodeCoverageReportSummary) SetLinesCovered(v int64) *CodeCoverageReportSummary {
+	s.LinesCovered = &v
+	return s
+}
+
+// SetLinesMissed sets the LinesMissed field's value.
+func (s *CodeCoverageReportSummary) SetLinesMissed(v int64) *CodeCoverageReportSummary {
+	s.LinesMissed = &v
+	return s
+}
+
 type CreateProjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2408,21 +6764,32 @@ type CreateProjectInput struct {
 	// build badge.
 	BadgeEnabled *bool `locationName:"badgeEnabled" type:"boolean"`
 
+	// A ProjectBuildBatchConfig object that defines the batch build options for
+	// the project.
+	BuildBatchConfig *ProjectBuildBatchConfig `locationName:"buildBatchConfig" type:"structure"`
+
 	// Stores recently used information so that it can be quickly accessed at a
 	// later time.
 	Cache *ProjectCache `locationName:"cache" type:"structure"`
 
+	// The maximum number of concurrent builds that are allowed for this project.
+	//
+	// New builds are only started if the current number of builds is less than
+	// or equal to this limit. If the current build count meets this limit, new
+	// builds are throttled and are not run.
+	ConcurrentBuildLimit *int64 `locationName:"concurrentBuildLimit" type:"integer"`
+
 	// A description that makes the build project easy to identify.
 	Description *string `locationName:"description" type:"string"`
 
-	// The AWS Key Management Service (AWS KMS) customer master key (CMK) to be
-	// used for encrypting the build output artifacts.
+	// The Key Management Service customer master key (CMK) to be used for encrypting
+	// the build output artifacts.
 	//
 	// You can use a cross-account KMS key to encrypt the build output artifacts
 	// if your service role has permission to that key.
 	//
 	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
-	// the CMK's alias (using the format alias/alias-name).
+	// the CMK's alias (using the format alias/<alias-name>).
 	EncryptionKey *string `locationName:"encryptionKey" min:"1" type:"string"`
 
 	// Information about the build environment for the build project.
@@ -2430,8 +6797,13 @@ type CreateProjectInput struct {
 	// Environment is a required field
 	Environment *ProjectEnvironment `locationName:"environment" type:"structure" required:"true"`
 
-	// Information about logs for the build project. These can be logs in Amazon
-	// CloudWatch Logs, logs uploaded to a specified S3 bucket, or both.
+	// An array of ProjectFileSystemLocation objects for a CodeBuild build project.
+	// A ProjectFileSystemLocation object specifies the identifier, location, mountOptions,
+	// mountPoint, and type of a file system created using Amazon Elastic File System.
+	FileSystemLocations []*ProjectFileSystemLocation `locationName:"fileSystemLocations" type:"list"`
+
+	// Information about logs for the build project. These can be logs in CloudWatch
+	// Logs, logs uploaded to a specified S3 bucket, or both.
 	LogsConfig *LogsConfig `locationName:"logsConfig" type:"structure"`
 
 	// The name of the build project.
@@ -2445,12 +6817,16 @@ type CreateProjectInput struct {
 	// An array of ProjectArtifacts objects.
 	SecondaryArtifacts []*ProjectArtifacts `locationName:"secondaryArtifacts" type:"list"`
 
+	// An array of ProjectSourceVersion objects. If secondarySourceVersions is specified
+	// at the build level, then they take precedence over these secondarySourceVersions
+	// (at the project level).
+	SecondarySourceVersions []*ProjectSourceVersion `locationName:"secondarySourceVersions" type:"list"`
+
 	// An array of ProjectSource objects.
 	SecondarySources []*ProjectSource `locationName:"secondarySources" type:"list"`
 
-	// The ARN of the AWS Identity and Access Management (IAM) role that enables
-	// AWS CodeBuild to interact with dependent AWS services on behalf of the AWS
-	// account.
+	// The ARN of the IAM role that enables CodeBuild to interact with dependent
+	// Amazon Web Services services on behalf of the Amazon Web Services account.
 	//
 	// ServiceRole is a required field
 	ServiceRole *string `locationName:"serviceRole" min:"1" type:"string" required:"true"`
@@ -2460,27 +6836,62 @@ type CreateProjectInput struct {
 	// Source is a required field
 	Source *ProjectSource `locationName:"source" type:"structure" required:"true"`
 
-	// A set of tags for this build project.
+	// A version of the build input to be built for this project. If not specified,
+	// the latest version is used. If specified, it must be one of:
 	//
-	// These tags are available for use by AWS services that support AWS CodeBuild
-	// build project tags.
+	//    * For CodeCommit: the commit ID, branch, or Git tag to use.
+	//
+	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
+	//    that corresponds to the version of the source code you want to build.
+	//    If a pull request ID is specified, it must use the format pr/pull-request-ID
+	//    (for example pr/25). If a branch name is specified, the branch's HEAD
+	//    commit ID is used. If not specified, the default branch's HEAD commit
+	//    ID is used.
+	//
+	//    * For Bitbucket: the commit ID, branch name, or tag name that corresponds
+	//    to the version of the source code you want to build. If a branch name
+	//    is specified, the branch's HEAD commit ID is used. If not specified, the
+	//    default branch's HEAD commit ID is used.
+	//
+	//    * For Amazon S3: the version ID of the object that represents the build
+	//    input ZIP file to use.
+	//
+	// If sourceVersion is specified at the build level, then that version takes
+	// precedence over this sourceVersion (at the project level).
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the CodeBuild User Guide.
+	SourceVersion *string `locationName:"sourceVersion" type:"string"`
+
+	// A list of tag key and value pairs associated with this build project.
+	//
+	// These tags are available for use by Amazon Web Services services that support
+	// CodeBuild build project tags.
 	Tags []*Tag `locationName:"tags" type:"list"`
 
-	// How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait
-	// before it times out any build that has not been marked as completed. The
-	// default is 60 minutes.
+	// How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before
+	// it times out any build that has not been marked as completed. The default
+	// is 60 minutes.
 	TimeoutInMinutes *int64 `locationName:"timeoutInMinutes" min:"5" type:"integer"`
 
-	// VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+	// VpcConfig enables CodeBuild to access resources in an Amazon VPC.
 	VpcConfig *VpcConfig `locationName:"vpcConfig" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProjectInput) GoString() string {
 	return s.String()
 }
@@ -2523,6 +6934,11 @@ func (s *CreateProjectInput) Validate() error {
 			invalidParams.AddNested("Artifacts", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.BuildBatchConfig != nil {
+		if err := s.BuildBatchConfig.Validate(); err != nil {
+			invalidParams.AddNested("BuildBatchConfig", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.Cache != nil {
 		if err := s.Cache.Validate(); err != nil {
 			invalidParams.AddNested("Cache", err.(request.ErrInvalidParams))
@@ -2545,6 +6961,16 @@ func (s *CreateProjectInput) Validate() error {
 			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondaryArtifacts", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SecondarySourceVersions != nil {
+		for i, v := range s.SecondarySourceVersions {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondarySourceVersions", i), err.(request.ErrInvalidParams))
 			}
 		}
 	}
@@ -2597,9 +7023,21 @@ func (s *CreateProjectInput) SetBadgeEnabled(v bool) *CreateProjectInput {
 	return s
 }
 
+// SetBuildBatchConfig sets the BuildBatchConfig field's value.
+func (s *CreateProjectInput) SetBuildBatchConfig(v *ProjectBuildBatchConfig) *CreateProjectInput {
+	s.BuildBatchConfig = v
+	return s
+}
+
 // SetCache sets the Cache field's value.
 func (s *CreateProjectInput) SetCache(v *ProjectCache) *CreateProjectInput {
 	s.Cache = v
+	return s
+}
+
+// SetConcurrentBuildLimit sets the ConcurrentBuildLimit field's value.
+func (s *CreateProjectInput) SetConcurrentBuildLimit(v int64) *CreateProjectInput {
+	s.ConcurrentBuildLimit = &v
 	return s
 }
 
@@ -2618,6 +7056,12 @@ func (s *CreateProjectInput) SetEncryptionKey(v string) *CreateProjectInput {
 // SetEnvironment sets the Environment field's value.
 func (s *CreateProjectInput) SetEnvironment(v *ProjectEnvironment) *CreateProjectInput {
 	s.Environment = v
+	return s
+}
+
+// SetFileSystemLocations sets the FileSystemLocations field's value.
+func (s *CreateProjectInput) SetFileSystemLocations(v []*ProjectFileSystemLocation) *CreateProjectInput {
+	s.FileSystemLocations = v
 	return s
 }
 
@@ -2645,6 +7089,12 @@ func (s *CreateProjectInput) SetSecondaryArtifacts(v []*ProjectArtifacts) *Creat
 	return s
 }
 
+// SetSecondarySourceVersions sets the SecondarySourceVersions field's value.
+func (s *CreateProjectInput) SetSecondarySourceVersions(v []*ProjectSourceVersion) *CreateProjectInput {
+	s.SecondarySourceVersions = v
+	return s
+}
+
 // SetSecondarySources sets the SecondarySources field's value.
 func (s *CreateProjectInput) SetSecondarySources(v []*ProjectSource) *CreateProjectInput {
 	s.SecondarySources = v
@@ -2660,6 +7110,12 @@ func (s *CreateProjectInput) SetServiceRole(v string) *CreateProjectInput {
 // SetSource sets the Source field's value.
 func (s *CreateProjectInput) SetSource(v *ProjectSource) *CreateProjectInput {
 	s.Source = v
+	return s
+}
+
+// SetSourceVersion sets the SourceVersion field's value.
+func (s *CreateProjectInput) SetSourceVersion(v string) *CreateProjectInput {
+	s.SourceVersion = &v
 	return s
 }
 
@@ -2688,12 +7144,20 @@ type CreateProjectOutput struct {
 	Project *Project `locationName:"project" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProjectOutput) GoString() string {
 	return s.String()
 }
@@ -2701,6 +7165,142 @@ func (s CreateProjectOutput) GoString() string {
 // SetProject sets the Project field's value.
 func (s *CreateProjectOutput) SetProject(v *Project) *CreateProjectOutput {
 	s.Project = v
+	return s
+}
+
+type CreateReportGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// A ReportExportConfig object that contains information about where the report
+	// group test results are exported.
+	//
+	// ExportConfig is a required field
+	ExportConfig *ReportExportConfig `locationName:"exportConfig" type:"structure" required:"true"`
+
+	// The name of the report group.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"2" type:"string" required:"true"`
+
+	// A list of tag key and value pairs associated with this report group.
+	//
+	// These tags are available for use by Amazon Web Services services that support
+	// CodeBuild report group tags.
+	Tags []*Tag `locationName:"tags" type:"list"`
+
+	// The type of report group.
+	//
+	// Type is a required field
+	Type *string `locationName:"type" type:"string" required:"true" enum:"ReportType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateReportGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateReportGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateReportGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateReportGroupInput"}
+	if s.ExportConfig == nil {
+		invalidParams.Add(request.NewErrParamRequired("ExportConfig"))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 2 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 2))
+	}
+	if s.Type == nil {
+		invalidParams.Add(request.NewErrParamRequired("Type"))
+	}
+	if s.ExportConfig != nil {
+		if err := s.ExportConfig.Validate(); err != nil {
+			invalidParams.AddNested("ExportConfig", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetExportConfig sets the ExportConfig field's value.
+func (s *CreateReportGroupInput) SetExportConfig(v *ReportExportConfig) *CreateReportGroupInput {
+	s.ExportConfig = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateReportGroupInput) SetName(v string) *CreateReportGroupInput {
+	s.Name = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateReportGroupInput) SetTags(v []*Tag) *CreateReportGroupInput {
+	s.Tags = v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *CreateReportGroupInput) SetType(v string) *CreateReportGroupInput {
+	s.Type = &v
+	return s
+}
+
+type CreateReportGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the report group that was created.
+	ReportGroup *ReportGroup `locationName:"reportGroup" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateReportGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateReportGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetReportGroup sets the ReportGroup field's value.
+func (s *CreateReportGroupOutput) SetReportGroup(v *ReportGroup) *CreateReportGroupOutput {
+	s.ReportGroup = v
 	return s
 }
 
@@ -2715,6 +7315,9 @@ type CreateWebhookInput struct {
 	// It is recommended that you use filterGroups instead of branchFilter.
 	BranchFilter *string `locationName:"branchFilter" type:"string"`
 
+	// Specifies the type of build this webhook will trigger.
+	BuildType *string `locationName:"buildType" type:"string" enum:"WebhookBuildType"`
+
 	// An array of arrays of WebhookFilter objects used to determine which webhooks
 	// are triggered. At least one WebhookFilter in the array must specify EVENT
 	// as its type.
@@ -2723,18 +7326,26 @@ type CreateWebhookInput struct {
 	// array must pass. For a filter group to pass, each of its filters must pass.
 	FilterGroups [][]*WebhookFilter `locationName:"filterGroups" type:"list"`
 
-	// The name of the AWS CodeBuild project.
+	// The name of the CodeBuild project.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"2" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWebhookInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWebhookInput) GoString() string {
 	return s.String()
 }
@@ -2761,6 +7372,12 @@ func (s *CreateWebhookInput) SetBranchFilter(v string) *CreateWebhookInput {
 	return s
 }
 
+// SetBuildType sets the BuildType field's value.
+func (s *CreateWebhookInput) SetBuildType(v string) *CreateWebhookInput {
+	s.BuildType = &v
+	return s
+}
+
 // SetFilterGroups sets the FilterGroups field's value.
 func (s *CreateWebhookInput) SetFilterGroups(v [][]*WebhookFilter) *CreateWebhookInput {
 	s.FilterGroups = v
@@ -2777,16 +7394,24 @@ type CreateWebhookOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about a webhook that connects repository events to a build project
-	// in AWS CodeBuild.
+	// in CodeBuild.
 	Webhook *Webhook `locationName:"webhook" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWebhookOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWebhookOutput) GoString() string {
 	return s.String()
 }
@@ -2794,6 +7419,150 @@ func (s CreateWebhookOutput) GoString() string {
 // SetWebhook sets the Webhook field's value.
 func (s *CreateWebhookOutput) SetWebhook(v *Webhook) *CreateWebhookOutput {
 	s.Webhook = v
+	return s
+}
+
+// Contains information about the debug session for a build. For more information,
+// see Viewing a running build in Session Manager (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
+type DebugSession struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies if session debugging is enabled for this build.
+	SessionEnabled *bool `locationName:"sessionEnabled" type:"boolean"`
+
+	// Contains the identifier of the Session Manager session used for the build.
+	// To work with the paused build, you open this session to examine, control,
+	// and resume the build.
+	SessionTarget *string `locationName:"sessionTarget" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DebugSession) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DebugSession) GoString() string {
+	return s.String()
+}
+
+// SetSessionEnabled sets the SessionEnabled field's value.
+func (s *DebugSession) SetSessionEnabled(v bool) *DebugSession {
+	s.SessionEnabled = &v
+	return s
+}
+
+// SetSessionTarget sets the SessionTarget field's value.
+func (s *DebugSession) SetSessionTarget(v string) *DebugSession {
+	s.SessionTarget = &v
+	return s
+}
+
+type DeleteBuildBatchInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the batch build to delete.
+	//
+	// Id is a required field
+	Id *string `locationName:"id" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteBuildBatchInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteBuildBatchInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteBuildBatchInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteBuildBatchInput"}
+	if s.Id == nil {
+		invalidParams.Add(request.NewErrParamRequired("Id"))
+	}
+	if s.Id != nil && len(*s.Id) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetId sets the Id field's value.
+func (s *DeleteBuildBatchInput) SetId(v string) *DeleteBuildBatchInput {
+	s.Id = &v
+	return s
+}
+
+type DeleteBuildBatchOutput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of strings that contain the identifiers of the builds that were
+	// deleted.
+	BuildsDeleted []*string `locationName:"buildsDeleted" min:"1" type:"list"`
+
+	// An array of BuildNotDeleted objects that specify the builds that could not
+	// be deleted.
+	BuildsNotDeleted []*BuildNotDeleted `locationName:"buildsNotDeleted" type:"list"`
+
+	// The status code.
+	StatusCode *string `locationName:"statusCode" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteBuildBatchOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteBuildBatchOutput) GoString() string {
+	return s.String()
+}
+
+// SetBuildsDeleted sets the BuildsDeleted field's value.
+func (s *DeleteBuildBatchOutput) SetBuildsDeleted(v []*string) *DeleteBuildBatchOutput {
+	s.BuildsDeleted = v
+	return s
+}
+
+// SetBuildsNotDeleted sets the BuildsNotDeleted field's value.
+func (s *DeleteBuildBatchOutput) SetBuildsNotDeleted(v []*BuildNotDeleted) *DeleteBuildBatchOutput {
+	s.BuildsNotDeleted = v
+	return s
+}
+
+// SetStatusCode sets the StatusCode field's value.
+func (s *DeleteBuildBatchOutput) SetStatusCode(v string) *DeleteBuildBatchOutput {
+	s.StatusCode = &v
 	return s
 }
 
@@ -2806,12 +7575,20 @@ type DeleteProjectInput struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProjectInput) GoString() string {
 	return s.String()
 }
@@ -2842,13 +7619,250 @@ type DeleteProjectOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProjectOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteReportGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the report group to delete.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"1" type:"string" required:"true"`
+
+	// If true, deletes any reports that belong to a report group before deleting
+	// the report group.
+	//
+	// If false, you must delete any reports in the report group. Use ListReportsForReportGroup
+	// (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html)
+	// to get the reports in a report group. Use DeleteReport (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html)
+	// to delete the reports. If you call DeleteReportGroup for a report group that
+	// contains one or more reports, an exception is thrown.
+	DeleteReports *bool `locationName:"deleteReports" type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteReportGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteReportGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteReportGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteReportGroupInput"}
+	if s.Arn == nil {
+		invalidParams.Add(request.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Arn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetArn sets the Arn field's value.
+func (s *DeleteReportGroupInput) SetArn(v string) *DeleteReportGroupInput {
+	s.Arn = &v
+	return s
+}
+
+// SetDeleteReports sets the DeleteReports field's value.
+func (s *DeleteReportGroupInput) SetDeleteReports(v bool) *DeleteReportGroupInput {
+	s.DeleteReports = &v
+	return s
+}
+
+type DeleteReportGroupOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteReportGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteReportGroupOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteReportInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the report to delete.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteReportInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteReportInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteReportInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteReportInput"}
+	if s.Arn == nil {
+		invalidParams.Add(request.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Arn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetArn sets the Arn field's value.
+func (s *DeleteReportInput) SetArn(v string) *DeleteReportInput {
+	s.Arn = &v
+	return s
+}
+
+type DeleteReportOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteReportOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteReportOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteResourcePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource that is associated with the resource policy.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteResourcePolicyInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteResourcePolicyInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *DeleteResourcePolicyInput) SetResourceArn(v string) *DeleteResourcePolicyInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type DeleteResourcePolicyOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteResourcePolicyOutput) GoString() string {
 	return s.String()
 }
 
@@ -2861,12 +7875,20 @@ type DeleteSourceCredentialsInput struct {
 	Arn *string `locationName:"arn" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSourceCredentialsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSourceCredentialsInput) GoString() string {
 	return s.String()
 }
@@ -2900,12 +7922,20 @@ type DeleteSourceCredentialsOutput struct {
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSourceCredentialsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSourceCredentialsOutput) GoString() string {
 	return s.String()
 }
@@ -2919,18 +7949,26 @@ func (s *DeleteSourceCredentialsOutput) SetArn(v string) *DeleteSourceCredential
 type DeleteWebhookInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the AWS CodeBuild project.
+	// The name of the CodeBuild project.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"2" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWebhookInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWebhookInput) GoString() string {
 	return s.String()
 }
@@ -2961,17 +7999,312 @@ type DeleteWebhookOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWebhookOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWebhookOutput) GoString() string {
 	return s.String()
 }
 
-// Information about a Docker image that is managed by AWS CodeBuild.
+type DescribeCodeCoveragesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum line coverage percentage to report.
+	MaxLineCoveragePercentage *float64 `locationName:"maxLineCoveragePercentage" type:"double"`
+
+	// The maximum number of results to return.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// The minimum line coverage percentage to report.
+	MinLineCoveragePercentage *float64 `locationName:"minLineCoveragePercentage" type:"double"`
+
+	// The nextToken value returned from a previous call to DescribeCodeCoverages.
+	// This specifies the next item to return. To return the beginning of the list,
+	// exclude this parameter.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The ARN of the report for which test cases are returned.
+	//
+	// ReportArn is a required field
+	ReportArn *string `locationName:"reportArn" min:"1" type:"string" required:"true"`
+
+	// Specifies how the results are sorted. Possible values are:
+	//
+	// FILE_PATH
+	//
+	// The results are sorted by file path.
+	//
+	// LINE_COVERAGE_PERCENTAGE
+	//
+	// The results are sorted by the percentage of lines that are covered.
+	SortBy *string `locationName:"sortBy" type:"string" enum:"ReportCodeCoverageSortByType"`
+
+	// Specifies if the results are sorted in ascending or descending order.
+	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCodeCoveragesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCodeCoveragesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeCodeCoveragesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeCodeCoveragesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.ReportArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ReportArn"))
+	}
+	if s.ReportArn != nil && len(*s.ReportArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ReportArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxLineCoveragePercentage sets the MaxLineCoveragePercentage field's value.
+func (s *DescribeCodeCoveragesInput) SetMaxLineCoveragePercentage(v float64) *DescribeCodeCoveragesInput {
+	s.MaxLineCoveragePercentage = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeCodeCoveragesInput) SetMaxResults(v int64) *DescribeCodeCoveragesInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetMinLineCoveragePercentage sets the MinLineCoveragePercentage field's value.
+func (s *DescribeCodeCoveragesInput) SetMinLineCoveragePercentage(v float64) *DescribeCodeCoveragesInput {
+	s.MinLineCoveragePercentage = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeCodeCoveragesInput) SetNextToken(v string) *DescribeCodeCoveragesInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetReportArn sets the ReportArn field's value.
+func (s *DescribeCodeCoveragesInput) SetReportArn(v string) *DescribeCodeCoveragesInput {
+	s.ReportArn = &v
+	return s
+}
+
+// SetSortBy sets the SortBy field's value.
+func (s *DescribeCodeCoveragesInput) SetSortBy(v string) *DescribeCodeCoveragesInput {
+	s.SortBy = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *DescribeCodeCoveragesInput) SetSortOrder(v string) *DescribeCodeCoveragesInput {
+	s.SortOrder = &v
+	return s
+}
+
+type DescribeCodeCoveragesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of CodeCoverage objects that contain the results.
+	CodeCoverages []*CodeCoverage `locationName:"codeCoverages" type:"list"`
+
+	// If there are more items to return, this contains a token that is passed to
+	// a subsequent call to DescribeCodeCoverages to retrieve the next set of items.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCodeCoveragesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCodeCoveragesOutput) GoString() string {
+	return s.String()
+}
+
+// SetCodeCoverages sets the CodeCoverages field's value.
+func (s *DescribeCodeCoveragesOutput) SetCodeCoverages(v []*CodeCoverage) *DescribeCodeCoveragesOutput {
+	s.CodeCoverages = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeCodeCoveragesOutput) SetNextToken(v string) *DescribeCodeCoveragesOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeTestCasesInput struct {
+	_ struct{} `type:"structure"`
+
+	// A TestCaseFilter object used to filter the returned reports.
+	Filter *TestCaseFilter `locationName:"filter" type:"structure"`
+
+	// The maximum number of paginated test cases returned per response. Use nextToken
+	// to iterate pages in the list of returned TestCase objects. The default value
+	// is 100.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The ARN of the report for which test cases are returned.
+	//
+	// ReportArn is a required field
+	ReportArn *string `locationName:"reportArn" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeTestCasesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeTestCasesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeTestCasesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeTestCasesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.ReportArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ReportArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilter sets the Filter field's value.
+func (s *DescribeTestCasesInput) SetFilter(v *TestCaseFilter) *DescribeTestCasesInput {
+	s.Filter = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeTestCasesInput) SetMaxResults(v int64) *DescribeTestCasesInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeTestCasesInput) SetNextToken(v string) *DescribeTestCasesInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetReportArn sets the ReportArn field's value.
+func (s *DescribeTestCasesInput) SetReportArn(v string) *DescribeTestCasesInput {
+	s.ReportArn = &v
+	return s
+}
+
+type DescribeTestCasesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The returned list of test cases.
+	TestCases []*TestCase `locationName:"testCases" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeTestCasesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeTestCasesOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeTestCasesOutput) SetNextToken(v string) *DescribeTestCasesOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetTestCases sets the TestCases field's value.
+func (s *DescribeTestCasesOutput) SetTestCases(v []*TestCase) *DescribeTestCasesOutput {
+	s.TestCases = v
+	return s
+}
+
+// Information about a Docker image that is managed by CodeBuild.
 type EnvironmentImage struct {
 	_ struct{} `type:"structure"`
 
@@ -2985,12 +8318,20 @@ type EnvironmentImage struct {
 	Versions []*string `locationName:"versions" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentImage) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentImage) GoString() string {
 	return s.String()
 }
@@ -3014,7 +8355,7 @@ func (s *EnvironmentImage) SetVersions(v []*string) *EnvironmentImage {
 }
 
 // A set of Docker images that are related by programming language and are managed
-// by AWS CodeBuild.
+// by CodeBuild.
 type EnvironmentLanguage struct {
 	_ struct{} `type:"structure"`
 
@@ -3025,12 +8366,20 @@ type EnvironmentLanguage struct {
 	Language *string `locationName:"language" type:"string" enum:"LanguageType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentLanguage) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentLanguage) GoString() string {
 	return s.String()
 }
@@ -3047,8 +8396,7 @@ func (s *EnvironmentLanguage) SetLanguage(v string) *EnvironmentLanguage {
 	return s
 }
 
-// A set of Docker images that are related by platform and are managed by AWS
-// CodeBuild.
+// A set of Docker images that are related by platform and are managed by CodeBuild.
 type EnvironmentPlatform struct {
 	_ struct{} `type:"structure"`
 
@@ -3059,12 +8407,20 @@ type EnvironmentPlatform struct {
 	Platform *string `locationName:"platform" type:"string" enum:"PlatformType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentPlatform) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentPlatform) GoString() string {
 	return s.String()
 }
@@ -3092,29 +8448,52 @@ type EnvironmentVariable struct {
 
 	// The type of environment variable. Valid values include:
 	//
-	//    * PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems
-	//    Manager Parameter Store.
+	//    * PARAMETER_STORE: An environment variable stored in Systems Manager Parameter
+	//    Store. For environment variables of this type, specify the name of the
+	//    parameter as the value of the EnvironmentVariable. The parameter value
+	//    will be substituted for the name at runtime. You can also define Parameter
+	//    Store environment variables in the buildspec. To learn how to do so, see
+	//    env/parameter-store (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store)
+	//    in the CodeBuild User Guide.
 	//
-	//    * PLAINTEXT: An environment variable in plaintext format.
+	//    * PLAINTEXT: An environment variable in plain text format. This is the
+	//    default value.
+	//
+	//    * SECRETS_MANAGER: An environment variable stored in Secrets Manager.
+	//    For environment variables of this type, specify the name of the secret
+	//    as the value of the EnvironmentVariable. The secret value will be substituted
+	//    for the name at runtime. You can also define Secrets Manager environment
+	//    variables in the buildspec. To learn how to do so, see env/secrets-manager
+	//    (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager)
+	//    in the CodeBuild User Guide.
 	Type *string `locationName:"type" type:"string" enum:"EnvironmentVariableType"`
 
 	// The value of the environment variable.
 	//
-	// We strongly discourage the use of environment variables to store sensitive
-	// values, especially AWS secret key IDs and secret access keys. Environment
-	// variables can be displayed in plain text using the AWS CodeBuild console
-	// and the AWS Command Line Interface (AWS CLI).
+	// We strongly discourage the use of PLAINTEXT environment variables to store
+	// sensitive values, especially Amazon Web Services secret key IDs. PLAINTEXT
+	// environment variables can be displayed in plain text using the CodeBuild
+	// console and the CLI. For sensitive values, we recommend you use an environment
+	// variable of type PARAMETER_STORE or SECRETS_MANAGER.
 	//
 	// Value is a required field
 	Value *string `locationName:"value" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentVariable) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnvironmentVariable) GoString() string {
 	return s.String()
 }
@@ -3156,12 +8535,350 @@ func (s *EnvironmentVariable) SetValue(v string) *EnvironmentVariable {
 	return s
 }
 
+// Contains information about an exported environment variable.
+//
+// Exported environment variables are used in conjunction with CodePipeline
+// to export environment variables from the current build stage to subsequent
+// stages in the pipeline. For more information, see Working with variables
+// (https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html)
+// in the CodePipeline User Guide.
+//
+// During a build, the value of a variable is available starting with the install
+// phase. It can be updated between the start of the install phase and the end
+// of the post_build phase. After the post_build phase ends, the value of exported
+// variables cannot change.
+type ExportedEnvironmentVariable struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the exported environment variable.
+	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The value assigned to the exported environment variable.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExportedEnvironmentVariable) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExportedEnvironmentVariable) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *ExportedEnvironmentVariable) SetName(v string) *ExportedEnvironmentVariable {
+	s.Name = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *ExportedEnvironmentVariable) SetValue(v string) *ExportedEnvironmentVariable {
+	s.Value = &v
+	return s
+}
+
+type GetReportGroupTrendInput struct {
+	_ struct{} `type:"structure"`
+
+	// The number of reports to analyze. This operation always retrieves the most
+	// recent reports.
+	//
+	// If this parameter is omitted, the most recent 100 reports are analyzed.
+	NumOfReports *int64 `locationName:"numOfReports" min:"1" type:"integer"`
+
+	// The ARN of the report group that contains the reports to analyze.
+	//
+	// ReportGroupArn is a required field
+	ReportGroupArn *string `locationName:"reportGroupArn" min:"1" type:"string" required:"true"`
+
+	// The test report value to accumulate. This must be one of the following values:
+	//
+	// Test reports:
+	//
+	// DURATION
+	//
+	// Accumulate the test run times for the specified reports.
+	//
+	// PASS_RATE
+	//
+	// Accumulate the percentage of tests that passed for the specified test reports.
+	//
+	// TOTAL
+	//
+	// Accumulate the total number of tests for the specified test reports.
+	//
+	// Code coverage reports:
+	//
+	// BRANCH_COVERAGE
+	//
+	// Accumulate the branch coverage percentages for the specified test reports.
+	//
+	// BRANCHES_COVERED
+	//
+	// Accumulate the branches covered values for the specified test reports.
+	//
+	// BRANCHES_MISSED
+	//
+	// Accumulate the branches missed values for the specified test reports.
+	//
+	// LINE_COVERAGE
+	//
+	// Accumulate the line coverage percentages for the specified test reports.
+	//
+	// LINES_COVERED
+	//
+	// Accumulate the lines covered values for the specified test reports.
+	//
+	// LINES_MISSED
+	//
+	// Accumulate the lines not covered values for the specified test reports.
+	//
+	// TrendField is a required field
+	TrendField *string `locationName:"trendField" type:"string" required:"true" enum:"ReportGroupTrendFieldType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetReportGroupTrendInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetReportGroupTrendInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetReportGroupTrendInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetReportGroupTrendInput"}
+	if s.NumOfReports != nil && *s.NumOfReports < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("NumOfReports", 1))
+	}
+	if s.ReportGroupArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ReportGroupArn"))
+	}
+	if s.ReportGroupArn != nil && len(*s.ReportGroupArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ReportGroupArn", 1))
+	}
+	if s.TrendField == nil {
+		invalidParams.Add(request.NewErrParamRequired("TrendField"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetNumOfReports sets the NumOfReports field's value.
+func (s *GetReportGroupTrendInput) SetNumOfReports(v int64) *GetReportGroupTrendInput {
+	s.NumOfReports = &v
+	return s
+}
+
+// SetReportGroupArn sets the ReportGroupArn field's value.
+func (s *GetReportGroupTrendInput) SetReportGroupArn(v string) *GetReportGroupTrendInput {
+	s.ReportGroupArn = &v
+	return s
+}
+
+// SetTrendField sets the TrendField field's value.
+func (s *GetReportGroupTrendInput) SetTrendField(v string) *GetReportGroupTrendInput {
+	s.TrendField = &v
+	return s
+}
+
+type GetReportGroupTrendOutput struct {
+	_ struct{} `type:"structure"`
+
+	// An array that contains the raw data for each report.
+	RawData []*ReportWithRawData `locationName:"rawData" type:"list"`
+
+	// Contains the accumulated trend data.
+	Stats *ReportGroupTrendStats `locationName:"stats" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetReportGroupTrendOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetReportGroupTrendOutput) GoString() string {
+	return s.String()
+}
+
+// SetRawData sets the RawData field's value.
+func (s *GetReportGroupTrendOutput) SetRawData(v []*ReportWithRawData) *GetReportGroupTrendOutput {
+	s.RawData = v
+	return s
+}
+
+// SetStats sets the Stats field's value.
+func (s *GetReportGroupTrendOutput) SetStats(v *ReportGroupTrendStats) *GetReportGroupTrendOutput {
+	s.Stats = v
+	return s
+}
+
+type GetResourcePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource that is associated with the resource policy.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetResourcePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetResourcePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetResourcePolicyInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GetResourcePolicyInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *GetResourcePolicyInput) SetResourceArn(v string) *GetResourcePolicyInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type GetResourcePolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The resource policy for the resource identified by the input ARN parameter.
+	Policy *string `locationName:"policy" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetResourcePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GetResourcePolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SetPolicy sets the Policy field's value.
+func (s *GetResourcePolicyOutput) SetPolicy(v string) *GetResourcePolicyOutput {
+	s.Policy = &v
+	return s
+}
+
+// Information about the Git submodules configuration for an CodeBuild build
+// project.
+type GitSubmodulesConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Set to true to fetch Git submodules for your CodeBuild build project.
+	//
+	// FetchSubmodules is a required field
+	FetchSubmodules *bool `locationName:"fetchSubmodules" type:"boolean" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GitSubmodulesConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GitSubmodulesConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GitSubmodulesConfig) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "GitSubmodulesConfig"}
+	if s.FetchSubmodules == nil {
+		invalidParams.Add(request.NewErrParamRequired("FetchSubmodules"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFetchSubmodules sets the FetchSubmodules field's value.
+func (s *GitSubmodulesConfig) SetFetchSubmodules(v bool) *GitSubmodulesConfig {
+	s.FetchSubmodules = &v
+	return s
+}
+
 type ImportSourceCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The type of authentication used to connect to a GitHub, GitHub Enterprise,
 	// or Bitbucket repository. An OAUTH connection is not supported by the API
-	// and must be created using the AWS CodeBuild console.
+	// and must be created using the CodeBuild console.
 	//
 	// AuthType is a required field
 	AuthType *string `locationName:"authType" type:"string" required:"true" enum:"AuthType"`
@@ -3171,8 +8888,17 @@ type ImportSourceCredentialsInput struct {
 	// ServerType is a required field
 	ServerType *string `locationName:"serverType" type:"string" required:"true" enum:"ServerType"`
 
+	// Set to false to prevent overwriting the repository source credentials. Set
+	// to true to overwrite the repository source credentials. The default value
+	// is true.
+	ShouldOverwrite *bool `locationName:"shouldOverwrite" type:"boolean"`
+
 	// For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,
 	// this is the app password.
+	//
+	// Token is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ImportSourceCredentialsInput's
+	// String and GoString methods.
 	//
 	// Token is a required field
 	Token *string `locationName:"token" min:"1" type:"string" required:"true" sensitive:"true"`
@@ -3182,12 +8908,20 @@ type ImportSourceCredentialsInput struct {
 	Username *string `locationName:"username" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportSourceCredentialsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportSourceCredentialsInput) GoString() string {
 	return s.String()
 }
@@ -3229,6 +8963,12 @@ func (s *ImportSourceCredentialsInput) SetServerType(v string) *ImportSourceCred
 	return s
 }
 
+// SetShouldOverwrite sets the ShouldOverwrite field's value.
+func (s *ImportSourceCredentialsInput) SetShouldOverwrite(v bool) *ImportSourceCredentialsInput {
+	s.ShouldOverwrite = &v
+	return s
+}
+
 // SetToken sets the Token field's value.
 func (s *ImportSourceCredentialsInput) SetToken(v string) *ImportSourceCredentialsInput {
 	s.Token = &v
@@ -3248,12 +8988,20 @@ type ImportSourceCredentialsOutput struct {
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportSourceCredentialsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportSourceCredentialsOutput) GoString() string {
 	return s.String()
 }
@@ -3264,21 +9012,93 @@ func (s *ImportSourceCredentialsOutput) SetArn(v string) *ImportSourceCredential
 	return s
 }
 
+// The input value that was provided is not valid.
+type InvalidInputException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInputException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInputException(v protocol.ResponseMetadata) error {
+	return &InvalidInputException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInputException) Code() string {
+	return "InvalidInputException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInputException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInputException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInputException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInputException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInputException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type InvalidateProjectCacheInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the AWS CodeBuild build project that the cache is reset for.
+	// The name of the CodeBuild build project that the cache is reset for.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InvalidateProjectCacheInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InvalidateProjectCacheInput) GoString() string {
 	return s.String()
 }
@@ -3309,46 +9129,321 @@ type InvalidateProjectCacheOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InvalidateProjectCacheOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InvalidateProjectCacheOutput) GoString() string {
 	return s.String()
+}
+
+type ListBuildBatchesForProjectInput struct {
+	_ struct{} `type:"structure"`
+
+	// A BuildBatchFilter object that specifies the filters for the search.
+	Filter *BuildBatchFilter `locationName:"filter" type:"structure"`
+
+	// The maximum number of results to return.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// The nextToken value returned from a previous call to ListBuildBatchesForProject.
+	// This specifies the next item to return. To return the beginning of the list,
+	// exclude this parameter.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The name of the project.
+	ProjectName *string `locationName:"projectName" min:"1" type:"string"`
+
+	// Specifies the sort order of the returned items. Valid values include:
+	//
+	//    * ASCENDING: List the batch build identifiers in ascending order by identifier.
+	//
+	//    * DESCENDING: List the batch build identifiers in descending order by
+	//    identifier.
+	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListBuildBatchesForProjectInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListBuildBatchesForProjectInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListBuildBatchesForProjectInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListBuildBatchesForProjectInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProjectName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilter sets the Filter field's value.
+func (s *ListBuildBatchesForProjectInput) SetFilter(v *BuildBatchFilter) *ListBuildBatchesForProjectInput {
+	s.Filter = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListBuildBatchesForProjectInput) SetMaxResults(v int64) *ListBuildBatchesForProjectInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListBuildBatchesForProjectInput) SetNextToken(v string) *ListBuildBatchesForProjectInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetProjectName sets the ProjectName field's value.
+func (s *ListBuildBatchesForProjectInput) SetProjectName(v string) *ListBuildBatchesForProjectInput {
+	s.ProjectName = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *ListBuildBatchesForProjectInput) SetSortOrder(v string) *ListBuildBatchesForProjectInput {
+	s.SortOrder = &v
+	return s
+}
+
+type ListBuildBatchesForProjectOutput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of strings that contains the batch build identifiers.
+	Ids []*string `locationName:"ids" type:"list"`
+
+	// If there are more items to return, this contains a token that is passed to
+	// a subsequent call to ListBuildBatchesForProject to retrieve the next set
+	// of items.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListBuildBatchesForProjectOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListBuildBatchesForProjectOutput) GoString() string {
+	return s.String()
+}
+
+// SetIds sets the Ids field's value.
+func (s *ListBuildBatchesForProjectOutput) SetIds(v []*string) *ListBuildBatchesForProjectOutput {
+	s.Ids = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListBuildBatchesForProjectOutput) SetNextToken(v string) *ListBuildBatchesForProjectOutput {
+	s.NextToken = &v
+	return s
+}
+
+type ListBuildBatchesInput struct {
+	_ struct{} `type:"structure"`
+
+	// A BuildBatchFilter object that specifies the filters for the search.
+	Filter *BuildBatchFilter `locationName:"filter" type:"structure"`
+
+	// The maximum number of results to return.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// The nextToken value returned from a previous call to ListBuildBatches. This
+	// specifies the next item to return. To return the beginning of the list, exclude
+	// this parameter.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// Specifies the sort order of the returned items. Valid values include:
+	//
+	//    * ASCENDING: List the batch build identifiers in ascending order by identifier.
+	//
+	//    * DESCENDING: List the batch build identifiers in descending order by
+	//    identifier.
+	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListBuildBatchesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListBuildBatchesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListBuildBatchesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListBuildBatchesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilter sets the Filter field's value.
+func (s *ListBuildBatchesInput) SetFilter(v *BuildBatchFilter) *ListBuildBatchesInput {
+	s.Filter = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListBuildBatchesInput) SetMaxResults(v int64) *ListBuildBatchesInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListBuildBatchesInput) SetNextToken(v string) *ListBuildBatchesInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *ListBuildBatchesInput) SetSortOrder(v string) *ListBuildBatchesInput {
+	s.SortOrder = &v
+	return s
+}
+
+type ListBuildBatchesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of strings that contains the batch build identifiers.
+	Ids []*string `locationName:"ids" type:"list"`
+
+	// If there are more items to return, this contains a token that is passed to
+	// a subsequent call to ListBuildBatches to retrieve the next set of items.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListBuildBatchesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListBuildBatchesOutput) GoString() string {
+	return s.String()
+}
+
+// SetIds sets the Ids field's value.
+func (s *ListBuildBatchesOutput) SetIds(v []*string) *ListBuildBatchesOutput {
+	s.Ids = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListBuildBatchesOutput) SetNextToken(v string) *ListBuildBatchesOutput {
+	s.NextToken = &v
+	return s
 }
 
 type ListBuildsForProjectInput struct {
 	_ struct{} `type:"structure"`
 
 	// During a previous call, if there are more than 100 items in the list, only
-	// the first 100 items are returned, along with a unique string called a next
-	// token. To get the next batch of items in the list, call this operation again,
-	// adding the next token to the call. To get all of the items in the list, keep
-	// calling this operation with each subsequent next token that is returned,
-	// until no more next tokens are returned.
+	// the first 100 items are returned, along with a unique string called a nextToken.
+	// To get the next batch of items in the list, call this operation again, adding
+	// the next token to the call. To get all of the items in the list, keep calling
+	// this operation with each subsequent next token that is returned, until no
+	// more next tokens are returned.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The name of the AWS CodeBuild project.
+	// The name of the CodeBuild project.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
 
-	// The order to list build IDs. Valid values include:
+	// The order to sort the results in. The results are sorted by build number,
+	// not the build identifier. If this is not specified, the results are sorted
+	// in descending order.
 	//
-	//    * ASCENDING: List the build IDs in ascending order by build ID.
+	// Valid values include:
 	//
-	//    * DESCENDING: List the build IDs in descending order by build ID.
+	//    * ASCENDING: List the build identifiers in ascending order, by build number.
+	//
+	//    * DESCENDING: List the build identifiers in descending order, by build
+	//    number.
+	//
+	// If the project has more than 100 builds, setting the sort order will result
+	// in an error.
 	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBuildsForProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBuildsForProjectInput) GoString() string {
 	return s.String()
 }
@@ -3390,23 +9485,31 @@ func (s *ListBuildsForProjectInput) SetSortOrder(v string) *ListBuildsForProject
 type ListBuildsForProjectOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of build IDs for the specified build project, with each build ID representing
-	// a single build.
+	// A list of build identifiers for the specified build project, with each build
+	// ID representing a single build.
 	Ids []*string `locationName:"ids" min:"1" type:"list"`
 
 	// If there are more than 100 items in the list, only the first 100 items are
-	// returned, along with a unique string called a next token. To get the next
+	// returned, along with a unique string called a nextToken. To get the next
 	// batch of items in the list, call this operation again, adding the next token
 	// to the call.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBuildsForProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBuildsForProjectOutput) GoString() string {
 	return s.String()
 }
@@ -3427,11 +9530,11 @@ type ListBuildsInput struct {
 	_ struct{} `type:"structure"`
 
 	// During a previous call, if there are more than 100 items in the list, only
-	// the first 100 items are returned, along with a unique string called a next
-	// token. To get the next batch of items in the list, call this operation again,
-	// adding the next token to the call. To get all of the items in the list, keep
-	// calling this operation with each subsequent next token that is returned,
-	// until no more next tokens are returned.
+	// the first 100 items are returned, along with a unique string called a nextToken.
+	// To get the next batch of items in the list, call this operation again, adding
+	// the next token to the call. To get all of the items in the list, keep calling
+	// this operation with each subsequent next token that is returned, until no
+	// more next tokens are returned.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The order to list build IDs. Valid values include:
@@ -3442,12 +9545,20 @@ type ListBuildsInput struct {
 	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBuildsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBuildsInput) GoString() string {
 	return s.String()
 }
@@ -3471,18 +9582,26 @@ type ListBuildsOutput struct {
 	Ids []*string `locationName:"ids" min:"1" type:"list"`
 
 	// If there are more than 100 items in the list, only the first 100 items are
-	// returned, along with a unique string called a next token. To get the next
+	// returned, along with a unique string called a nextToken. To get the next
 	// batch of items in the list, call this operation again, adding the next token
 	// to the call.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBuildsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBuildsOutput) GoString() string {
 	return s.String()
 }
@@ -3503,12 +9622,20 @@ type ListCuratedEnvironmentImagesInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListCuratedEnvironmentImagesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListCuratedEnvironmentImagesInput) GoString() string {
 	return s.String()
 }
@@ -3517,16 +9644,24 @@ type ListCuratedEnvironmentImagesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about supported platforms for Docker images that are managed
-	// by AWS CodeBuild.
+	// by CodeBuild.
 	Platforms []*EnvironmentPlatform `locationName:"platforms" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListCuratedEnvironmentImagesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListCuratedEnvironmentImagesOutput) GoString() string {
 	return s.String()
 }
@@ -3541,11 +9676,11 @@ type ListProjectsInput struct {
 	_ struct{} `type:"structure"`
 
 	// During a previous call, if there are more than 100 items in the list, only
-	// the first 100 items are returned, along with a unique string called a next
-	// token. To get the next batch of items in the list, call this operation again,
-	// adding the next token to the call. To get all of the items in the list, keep
-	// calling this operation with each subsequent next token that is returned,
-	// until no more next tokens are returned.
+	// the first 100 items are returned, along with a unique string called a nextToken.
+	// To get the next batch of items in the list, call this operation again, adding
+	// the next token to the call. To get all of the items in the list, keep calling
+	// this operation with each subsequent next token that is returned, until no
+	// more next tokens are returned.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The criterion to be used to list build project names. Valid values include:
@@ -3571,12 +9706,20 @@ type ListProjectsInput struct {
 	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProjectsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProjectsInput) GoString() string {
 	return s.String()
 }
@@ -3616,7 +9759,7 @@ type ListProjectsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// If there are more than 100 items in the list, only the first 100 items are
-	// returned, along with a unique string called a next token. To get the next
+	// returned, along with a unique string called a nextToken. To get the next
 	// batch of items in the list, call this operation again, adding the next token
 	// to the call.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -3626,12 +9769,20 @@ type ListProjectsOutput struct {
 	Projects []*string `locationName:"projects" min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProjectsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProjectsOutput) GoString() string {
 	return s.String()
 }
@@ -3648,16 +9799,704 @@ func (s *ListProjectsOutput) SetProjects(v []*string) *ListProjectsOutput {
 	return s
 }
 
+type ListReportGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of paginated report groups returned per response. Use
+	// nextToken to iterate pages in the list of returned ReportGroup objects. The
+	// default value is 100.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The criterion to be used to list build report groups. Valid values include:
+	//
+	//    * CREATED_TIME: List based on when each report group was created.
+	//
+	//    * LAST_MODIFIED_TIME: List based on when each report group was last changed.
+	//
+	//    * NAME: List based on each report group's name.
+	SortBy *string `locationName:"sortBy" type:"string" enum:"ReportGroupSortByType"`
+
+	// Used to specify the order to sort the list of returned report groups. Valid
+	// values are ASCENDING and DESCENDING.
+	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListReportGroupsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListReportGroupsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListReportGroupsInput) SetMaxResults(v int64) *ListReportGroupsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListReportGroupsInput) SetNextToken(v string) *ListReportGroupsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetSortBy sets the SortBy field's value.
+func (s *ListReportGroupsInput) SetSortBy(v string) *ListReportGroupsInput {
+	s.SortBy = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *ListReportGroupsInput) SetSortOrder(v string) *ListReportGroupsInput {
+	s.SortOrder = &v
+	return s
+}
+
+type ListReportGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The list of ARNs for the report groups in the current Amazon Web Services
+	// account.
+	ReportGroups []*string `locationName:"reportGroups" min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListReportGroupsOutput) SetNextToken(v string) *ListReportGroupsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetReportGroups sets the ReportGroups field's value.
+func (s *ListReportGroupsOutput) SetReportGroups(v []*string) *ListReportGroupsOutput {
+	s.ReportGroups = v
+	return s
+}
+
+type ListReportsForReportGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// A ReportFilter object used to filter the returned reports.
+	Filter *ReportFilter `locationName:"filter" type:"structure"`
+
+	// The maximum number of paginated reports in this report group returned per
+	// response. Use nextToken to iterate pages in the list of returned Report objects.
+	// The default value is 100.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The ARN of the report group for which you want to return report ARNs.
+	//
+	// ReportGroupArn is a required field
+	ReportGroupArn *string `locationName:"reportGroupArn" type:"string" required:"true"`
+
+	// Use to specify whether the results are returned in ascending or descending
+	// order.
+	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportsForReportGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportsForReportGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListReportsForReportGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListReportsForReportGroupInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.ReportGroupArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ReportGroupArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilter sets the Filter field's value.
+func (s *ListReportsForReportGroupInput) SetFilter(v *ReportFilter) *ListReportsForReportGroupInput {
+	s.Filter = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListReportsForReportGroupInput) SetMaxResults(v int64) *ListReportsForReportGroupInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListReportsForReportGroupInput) SetNextToken(v string) *ListReportsForReportGroupInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetReportGroupArn sets the ReportGroupArn field's value.
+func (s *ListReportsForReportGroupInput) SetReportGroupArn(v string) *ListReportsForReportGroupInput {
+	s.ReportGroupArn = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *ListReportsForReportGroupInput) SetSortOrder(v string) *ListReportsForReportGroupInput {
+	s.SortOrder = &v
+	return s
+}
+
+type ListReportsForReportGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The list of report ARNs.
+	Reports []*string `locationName:"reports" min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportsForReportGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportsForReportGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListReportsForReportGroupOutput) SetNextToken(v string) *ListReportsForReportGroupOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetReports sets the Reports field's value.
+func (s *ListReportsForReportGroupOutput) SetReports(v []*string) *ListReportsForReportGroupOutput {
+	s.Reports = v
+	return s
+}
+
+type ListReportsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A ReportFilter object used to filter the returned reports.
+	Filter *ReportFilter `locationName:"filter" type:"structure"`
+
+	// The maximum number of paginated reports returned per response. Use nextToken
+	// to iterate pages in the list of returned Report objects. The default value
+	// is 100.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// Specifies the sort order for the list of returned reports. Valid values are:
+	//
+	//    * ASCENDING: return reports in chronological order based on their creation
+	//    date.
+	//
+	//    * DESCENDING: return reports in the reverse chronological order based
+	//    on their creation date.
+	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListReportsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListReportsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilter sets the Filter field's value.
+func (s *ListReportsInput) SetFilter(v *ReportFilter) *ListReportsInput {
+	s.Filter = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListReportsInput) SetMaxResults(v int64) *ListReportsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListReportsInput) SetNextToken(v string) *ListReportsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *ListReportsInput) SetSortOrder(v string) *ListReportsInput {
+	s.SortOrder = &v
+	return s
+}
+
+type ListReportsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The list of returned ARNs for the reports in the current Amazon Web Services
+	// account.
+	Reports []*string `locationName:"reports" min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListReportsOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListReportsOutput) SetNextToken(v string) *ListReportsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetReports sets the Reports field's value.
+func (s *ListReportsOutput) SetReports(v []*string) *ListReportsOutput {
+	s.Reports = v
+	return s
+}
+
+type ListSharedProjectsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of paginated shared build projects returned per response.
+	// Use nextToken to iterate pages in the list of returned Project objects. The
+	// default value is 100.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
+
+	// The criterion to be used to list build projects shared with the current Amazon
+	// Web Services account or user. Valid values include:
+	//
+	//    * ARN: List based on the ARN.
+	//
+	//    * MODIFIED_TIME: List based on when information about the shared project
+	//    was last changed.
+	SortBy *string `locationName:"sortBy" type:"string" enum:"SharedResourceSortByType"`
+
+	// The order in which to list shared build projects. Valid values include:
+	//
+	//    * ASCENDING: List in ascending order.
+	//
+	//    * DESCENDING: List in descending order.
+	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListSharedProjectsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListSharedProjectsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSharedProjectsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListSharedProjectsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListSharedProjectsInput) SetMaxResults(v int64) *ListSharedProjectsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListSharedProjectsInput) SetNextToken(v string) *ListSharedProjectsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetSortBy sets the SortBy field's value.
+func (s *ListSharedProjectsInput) SetSortBy(v string) *ListSharedProjectsInput {
+	s.SortBy = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *ListSharedProjectsInput) SetSortOrder(v string) *ListSharedProjectsInput {
+	s.SortOrder = &v
+	return s
+}
+
+type ListSharedProjectsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The list of ARNs for the build projects shared with the current Amazon Web
+	// Services account or user.
+	Projects []*string `locationName:"projects" min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListSharedProjectsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListSharedProjectsOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListSharedProjectsOutput) SetNextToken(v string) *ListSharedProjectsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetProjects sets the Projects field's value.
+func (s *ListSharedProjectsOutput) SetProjects(v []*string) *ListSharedProjectsOutput {
+	s.Projects = v
+	return s
+}
+
+type ListSharedReportGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of paginated shared report groups per response. Use nextToken
+	// to iterate pages in the list of returned ReportGroup objects. The default
+	// value is 100.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The criterion to be used to list report groups shared with the current Amazon
+	// Web Services account or user. Valid values include:
+	//
+	//    * ARN: List based on the ARN.
+	//
+	//    * MODIFIED_TIME: List based on when information about the shared report
+	//    group was last changed.
+	SortBy *string `locationName:"sortBy" type:"string" enum:"SharedResourceSortByType"`
+
+	// The order in which to list shared report groups. Valid values include:
+	//
+	//    * ASCENDING: List in ascending order.
+	//
+	//    * DESCENDING: List in descending order.
+	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListSharedReportGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListSharedReportGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSharedReportGroupsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListSharedReportGroupsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListSharedReportGroupsInput) SetMaxResults(v int64) *ListSharedReportGroupsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListSharedReportGroupsInput) SetNextToken(v string) *ListSharedReportGroupsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetSortBy sets the SortBy field's value.
+func (s *ListSharedReportGroupsInput) SetSortBy(v string) *ListSharedReportGroupsInput {
+	s.SortBy = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *ListSharedReportGroupsInput) SetSortOrder(v string) *ListSharedReportGroupsInput {
+	s.SortOrder = &v
+	return s
+}
+
+type ListSharedReportGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// During a previous call, the maximum number of items that can be returned
+	// is the value specified in maxResults. If there more items in the list, then
+	// a unique string called a nextToken is returned. To get the next batch of
+	// items in the list, call this operation again, adding the next token to the
+	// call. To get all of the items in the list, keep calling this operation with
+	// each subsequent next token that is returned, until no more next tokens are
+	// returned.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The list of ARNs for the report groups shared with the current Amazon Web
+	// Services account or user.
+	ReportGroups []*string `locationName:"reportGroups" min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListSharedReportGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListSharedReportGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListSharedReportGroupsOutput) SetNextToken(v string) *ListSharedReportGroupsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetReportGroups sets the ReportGroups field's value.
+func (s *ListSharedReportGroupsOutput) SetReportGroups(v []*string) *ListSharedReportGroupsOutput {
+	s.ReportGroups = v
+	return s
+}
+
 type ListSourceCredentialsInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSourceCredentialsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSourceCredentialsInput) GoString() string {
 	return s.String()
 }
@@ -3671,12 +10510,20 @@ type ListSourceCredentialsOutput struct {
 	SourceCredentialsInfos []*SourceCredentialsInfo `locationName:"sourceCredentialsInfos" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSourceCredentialsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListSourceCredentialsOutput) GoString() string {
 	return s.String()
 }
@@ -3687,13 +10534,13 @@ func (s *ListSourceCredentialsOutput) SetSourceCredentialsInfos(v []*SourceCrede
 	return s
 }
 
-// Information about logs for a build project. These can be logs in Amazon CloudWatch
+// Information about logs for a build project. These can be logs in CloudWatch
 // Logs, built in a specified S3 bucket, or both.
 type LogsConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch
-	// Logs are enabled by default.
+	// Information about CloudWatch Logs for a build project. CloudWatch Logs are
+	// enabled by default.
 	CloudWatchLogs *CloudWatchLogsConfig `locationName:"cloudWatchLogs" type:"structure"`
 
 	// Information about logs built to an S3 bucket for a build project. S3 logs
@@ -3701,12 +10548,20 @@ type LogsConfig struct {
 	S3Logs *S3LogsConfig `locationName:"s3Logs" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LogsConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LogsConfig) GoString() string {
 	return s.String()
 }
@@ -3743,17 +10598,26 @@ func (s *LogsConfig) SetS3Logs(v *S3LogsConfig) *LogsConfig {
 	return s
 }
 
-// Information about build logs in Amazon CloudWatch Logs.
+// Information about build logs in CloudWatch Logs.
 type LogsLocation struct {
 	_ struct{} `type:"structure"`
 
-	// Information about Amazon CloudWatch Logs for a build project.
+	// Information about CloudWatch Logs for a build project.
 	CloudWatchLogs *CloudWatchLogsConfig `locationName:"cloudWatchLogs" type:"structure"`
 
-	// The URL to an individual build log in Amazon CloudWatch Logs.
+	// The ARN of the CloudWatch Logs stream for a build execution. Its format is
+	// arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}.
+	// The CloudWatch Logs stream is created during the PROVISIONING phase of a
+	// build and the ARN will not be valid until it is created. For more information,
+	// see Resources Defined by CloudWatch Logs (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies).
+	CloudWatchLogsArn *string `locationName:"cloudWatchLogsArn" type:"string"`
+
+	// The URL to an individual build log in CloudWatch Logs. The log stream is
+	// created during the PROVISIONING phase of a build and the deeplink will not
+	// be valid until it is created.
 	DeepLink *string `locationName:"deepLink" type:"string"`
 
-	// The name of the Amazon CloudWatch Logs group for the build logs.
+	// The name of the CloudWatch Logs group for the build logs.
 	GroupName *string `locationName:"groupName" type:"string"`
 
 	// The URL to a build log in an S3 bucket.
@@ -3762,16 +10626,28 @@ type LogsLocation struct {
 	// Information about S3 logs for a build project.
 	S3Logs *S3LogsConfig `locationName:"s3Logs" type:"structure"`
 
-	// The name of the Amazon CloudWatch Logs stream for the build logs.
+	// The ARN of S3 logs for a build project. Its format is arn:${Partition}:s3:::${BucketName}/${ObjectName}.
+	// For more information, see Resources Defined by Amazon S3 (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html#amazons3-resources-for-iam-policies).
+	S3LogsArn *string `locationName:"s3LogsArn" type:"string"`
+
+	// The name of the CloudWatch Logs stream for the build logs.
 	StreamName *string `locationName:"streamName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LogsLocation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LogsLocation) GoString() string {
 	return s.String()
 }
@@ -3779,6 +10655,12 @@ func (s LogsLocation) GoString() string {
 // SetCloudWatchLogs sets the CloudWatchLogs field's value.
 func (s *LogsLocation) SetCloudWatchLogs(v *CloudWatchLogsConfig) *LogsLocation {
 	s.CloudWatchLogs = v
+	return s
+}
+
+// SetCloudWatchLogsArn sets the CloudWatchLogsArn field's value.
+func (s *LogsLocation) SetCloudWatchLogsArn(v string) *LogsLocation {
+	s.CloudWatchLogsArn = &v
 	return s
 }
 
@@ -3806,6 +10688,12 @@ func (s *LogsLocation) SetS3Logs(v *S3LogsConfig) *LogsLocation {
 	return s
 }
 
+// SetS3LogsArn sets the S3LogsArn field's value.
+func (s *LogsLocation) SetS3LogsArn(v string) *LogsLocation {
+	s.S3LogsArn = &v
+	return s
+}
+
 // SetStreamName sets the StreamName field's value.
 func (s *LogsLocation) SetStreamName(v string) *LogsLocation {
 	s.StreamName = &v
@@ -3823,12 +10711,20 @@ type NetworkInterface struct {
 	SubnetId *string `locationName:"subnetId" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NetworkInterface) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NetworkInterface) GoString() string {
 	return s.String()
 }
@@ -3845,6 +10741,70 @@ func (s *NetworkInterface) SetSubnetId(v string) *NetworkInterface {
 	return s
 }
 
+// There was a problem with the underlying OAuth provider.
+type OAuthProviderException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OAuthProviderException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OAuthProviderException) GoString() string {
+	return s.String()
+}
+
+func newErrorOAuthProviderException(v protocol.ResponseMetadata) error {
+	return &OAuthProviderException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OAuthProviderException) Code() string {
+	return "OAuthProviderException"
+}
+
+// Message returns the exception's message.
+func (s *OAuthProviderException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OAuthProviderException) OrigErr() error {
+	return nil
+}
+
+func (s *OAuthProviderException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OAuthProviderException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OAuthProviderException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Additional information about a build phase that has an error. You can use
 // this information for troubleshooting.
 type PhaseContext struct {
@@ -3858,12 +10818,20 @@ type PhaseContext struct {
 	StatusCode *string `locationName:"statusCode" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PhaseContext) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PhaseContext) GoString() string {
 	return s.String()
 }
@@ -3893,8 +10861,19 @@ type Project struct {
 	// Information about the build badge for the build project.
 	Badge *ProjectBadge `locationName:"badge" type:"structure"`
 
+	// A ProjectBuildBatchConfig object that defines the batch build options for
+	// the project.
+	BuildBatchConfig *ProjectBuildBatchConfig `locationName:"buildBatchConfig" type:"structure"`
+
 	// Information about the cache for the build project.
 	Cache *ProjectCache `locationName:"cache" type:"structure"`
+
+	// The maximum number of concurrent builds that are allowed for this project.
+	//
+	// New builds are only started if the current number of builds is less than
+	// or equal to this limit. If the current build count meets this limit, new
+	// builds are throttled and are not run.
+	ConcurrentBuildLimit *int64 `locationName:"concurrentBuildLimit" type:"integer"`
 
 	// When the build project was created, expressed in Unix time format.
 	Created *time.Time `locationName:"created" type:"timestamp"`
@@ -3902,72 +10881,136 @@ type Project struct {
 	// A description that makes the build project easy to identify.
 	Description *string `locationName:"description" type:"string"`
 
-	// The AWS Key Management Service (AWS KMS) customer master key (CMK) to be
-	// used for encrypting the build output artifacts.
+	// The Key Management Service customer master key (CMK) to be used for encrypting
+	// the build output artifacts.
 	//
 	// You can use a cross-account KMS key to encrypt the build output artifacts
 	// if your service role has permission to that key.
 	//
 	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
-	// the CMK's alias (using the format alias/alias-name).
+	// the CMK's alias (using the format alias/<alias-name>). If you don't specify
+	// a value, CodeBuild uses the managed CMK for Amazon Simple Storage Service
+	// (Amazon S3).
 	EncryptionKey *string `locationName:"encryptionKey" min:"1" type:"string"`
 
 	// Information about the build environment for this build project.
 	Environment *ProjectEnvironment `locationName:"environment" type:"structure"`
+
+	// An array of ProjectFileSystemLocation objects for a CodeBuild build project.
+	// A ProjectFileSystemLocation object specifies the identifier, location, mountOptions,
+	// mountPoint, and type of a file system created using Amazon Elastic File System.
+	FileSystemLocations []*ProjectFileSystemLocation `locationName:"fileSystemLocations" type:"list"`
 
 	// When the build project's settings were last modified, expressed in Unix time
 	// format.
 	LastModified *time.Time `locationName:"lastModified" type:"timestamp"`
 
 	// Information about logs for the build project. A project can create logs in
-	// Amazon CloudWatch Logs, an S3 bucket, or both.
+	// CloudWatch Logs, an S3 bucket, or both.
 	LogsConfig *LogsConfig `locationName:"logsConfig" type:"structure"`
 
 	// The name of the build project.
 	Name *string `locationName:"name" min:"2" type:"string"`
 
+	// Specifies the visibility of the project's builds. Possible values are:
+	//
+	// PUBLIC_READ
+	//
+	// The project builds are visible to the public.
+	//
+	// PRIVATE
+	//
+	// The project builds are not visible to the public.
+	ProjectVisibility *string `locationName:"projectVisibility" type:"string" enum:"ProjectVisibilityType"`
+
+	// Contains the project identifier used with the public build APIs.
+	PublicProjectAlias *string `locationName:"publicProjectAlias" min:"1" type:"string"`
+
 	// The number of minutes a build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutes *int64 `locationName:"queuedTimeoutInMinutes" min:"5" type:"integer"`
+
+	// The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs
+	// and Amazon S3 artifacts for the project's builds.
+	ResourceAccessRole *string `locationName:"resourceAccessRole" min:"1" type:"string"`
 
 	// An array of ProjectArtifacts objects.
 	SecondaryArtifacts []*ProjectArtifacts `locationName:"secondaryArtifacts" type:"list"`
 
+	// An array of ProjectSourceVersion objects. If secondarySourceVersions is specified
+	// at the build level, then they take over these secondarySourceVersions (at
+	// the project level).
+	SecondarySourceVersions []*ProjectSourceVersion `locationName:"secondarySourceVersions" type:"list"`
+
 	// An array of ProjectSource objects.
 	SecondarySources []*ProjectSource `locationName:"secondarySources" type:"list"`
 
-	// The ARN of the AWS Identity and Access Management (IAM) role that enables
-	// AWS CodeBuild to interact with dependent AWS services on behalf of the AWS
-	// account.
+	// The ARN of the IAM role that enables CodeBuild to interact with dependent
+	// Amazon Web Services services on behalf of the Amazon Web Services account.
 	ServiceRole *string `locationName:"serviceRole" min:"1" type:"string"`
 
 	// Information about the build input source code for this build project.
 	Source *ProjectSource `locationName:"source" type:"structure"`
 
-	// The tags for this build project.
+	// A version of the build input to be built for this project. If not specified,
+	// the latest version is used. If specified, it must be one of:
 	//
-	// These tags are available for use by AWS services that support AWS CodeBuild
-	// build project tags.
+	//    * For CodeCommit: the commit ID, branch, or Git tag to use.
+	//
+	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
+	//    that corresponds to the version of the source code you want to build.
+	//    If a pull request ID is specified, it must use the format pr/pull-request-ID
+	//    (for example pr/25). If a branch name is specified, the branch's HEAD
+	//    commit ID is used. If not specified, the default branch's HEAD commit
+	//    ID is used.
+	//
+	//    * For Bitbucket: the commit ID, branch name, or tag name that corresponds
+	//    to the version of the source code you want to build. If a branch name
+	//    is specified, the branch's HEAD commit ID is used. If not specified, the
+	//    default branch's HEAD commit ID is used.
+	//
+	//    * For Amazon S3: the version ID of the object that represents the build
+	//    input ZIP file to use.
+	//
+	// If sourceVersion is specified at the build level, then that version takes
+	// precedence over this sourceVersion (at the project level).
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the CodeBuild User Guide.
+	SourceVersion *string `locationName:"sourceVersion" type:"string"`
+
+	// A list of tag key and value pairs associated with this build project.
+	//
+	// These tags are available for use by Amazon Web Services services that support
+	// CodeBuild build project tags.
 	Tags []*Tag `locationName:"tags" type:"list"`
 
-	// How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait
-	// before timing out any related build that did not get marked as completed.
-	// The default is 60 minutes.
+	// How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before
+	// timing out any related build that did not get marked as completed. The default
+	// is 60 minutes.
 	TimeoutInMinutes *int64 `locationName:"timeoutInMinutes" min:"5" type:"integer"`
 
-	// Information about the VPC configuration that AWS CodeBuild accesses.
+	// Information about the VPC configuration that CodeBuild accesses.
 	VpcConfig *VpcConfig `locationName:"vpcConfig" type:"structure"`
 
 	// Information about a webhook that connects repository events to a build project
-	// in AWS CodeBuild.
+	// in CodeBuild.
 	Webhook *Webhook `locationName:"webhook" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Project) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Project) GoString() string {
 	return s.String()
 }
@@ -3990,9 +11033,21 @@ func (s *Project) SetBadge(v *ProjectBadge) *Project {
 	return s
 }
 
+// SetBuildBatchConfig sets the BuildBatchConfig field's value.
+func (s *Project) SetBuildBatchConfig(v *ProjectBuildBatchConfig) *Project {
+	s.BuildBatchConfig = v
+	return s
+}
+
 // SetCache sets the Cache field's value.
 func (s *Project) SetCache(v *ProjectCache) *Project {
 	s.Cache = v
+	return s
+}
+
+// SetConcurrentBuildLimit sets the ConcurrentBuildLimit field's value.
+func (s *Project) SetConcurrentBuildLimit(v int64) *Project {
+	s.ConcurrentBuildLimit = &v
 	return s
 }
 
@@ -4020,6 +11075,12 @@ func (s *Project) SetEnvironment(v *ProjectEnvironment) *Project {
 	return s
 }
 
+// SetFileSystemLocations sets the FileSystemLocations field's value.
+func (s *Project) SetFileSystemLocations(v []*ProjectFileSystemLocation) *Project {
+	s.FileSystemLocations = v
+	return s
+}
+
 // SetLastModified sets the LastModified field's value.
 func (s *Project) SetLastModified(v time.Time) *Project {
 	s.LastModified = &v
@@ -4038,15 +11099,39 @@ func (s *Project) SetName(v string) *Project {
 	return s
 }
 
+// SetProjectVisibility sets the ProjectVisibility field's value.
+func (s *Project) SetProjectVisibility(v string) *Project {
+	s.ProjectVisibility = &v
+	return s
+}
+
+// SetPublicProjectAlias sets the PublicProjectAlias field's value.
+func (s *Project) SetPublicProjectAlias(v string) *Project {
+	s.PublicProjectAlias = &v
+	return s
+}
+
 // SetQueuedTimeoutInMinutes sets the QueuedTimeoutInMinutes field's value.
 func (s *Project) SetQueuedTimeoutInMinutes(v int64) *Project {
 	s.QueuedTimeoutInMinutes = &v
 	return s
 }
 
+// SetResourceAccessRole sets the ResourceAccessRole field's value.
+func (s *Project) SetResourceAccessRole(v string) *Project {
+	s.ResourceAccessRole = &v
+	return s
+}
+
 // SetSecondaryArtifacts sets the SecondaryArtifacts field's value.
 func (s *Project) SetSecondaryArtifacts(v []*ProjectArtifacts) *Project {
 	s.SecondaryArtifacts = v
+	return s
+}
+
+// SetSecondarySourceVersions sets the SecondarySourceVersions field's value.
+func (s *Project) SetSecondarySourceVersions(v []*ProjectSourceVersion) *Project {
+	s.SecondarySourceVersions = v
 	return s
 }
 
@@ -4065,6 +11150,12 @@ func (s *Project) SetServiceRole(v string) *Project {
 // SetSource sets the Source field's value.
 func (s *Project) SetSource(v *ProjectSource) *Project {
 	s.Source = v
+	return s
+}
+
+// SetSourceVersion sets the SourceVersion field's value.
+func (s *Project) SetSourceVersion(v string) *Project {
+	s.SourceVersion = &v
 	return s
 }
 
@@ -4099,17 +11190,52 @@ type ProjectArtifacts struct {
 	// An identifier for this artifact definition.
 	ArtifactIdentifier *string `locationName:"artifactIdentifier" type:"string"`
 
+	// Specifies the bucket owner's access for objects that another account uploads
+	// to their Amazon S3 bucket. By default, only the account that uploads the
+	// objects to the bucket has access to these objects. This property allows you
+	// to give the bucket owner access to these objects.
+	//
+	// To use this property, your CodeBuild service role must have the s3:PutBucketAcl
+	// permission. This permission allows CodeBuild to modify the access control
+	// list for the bucket.
+	//
+	// This property can be one of the following values:
+	//
+	// NONE
+	//
+	// The bucket owner does not have access to the objects. This is the default.
+	//
+	// READ_ONLY
+	//
+	// The bucket owner has read-only access to the objects. The uploading account
+	// retains ownership of the objects.
+	//
+	// FULL
+	//
+	// The bucket owner has full access to the objects. Object ownership is determined
+	// by the following criteria:
+	//
+	//    * If the bucket is configured with the Bucket owner preferred setting,
+	//    the bucket owner owns the objects. The uploading account will have object
+	//    access as specified by the bucket's policy.
+	//
+	//    * Otherwise, the uploading account retains ownership of the objects.
+	//
+	// For more information about Amazon S3 object ownership, see Controlling ownership
+	// of uploaded objects using S3 Object Ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+	// in the Amazon Simple Storage Service User Guide.
+	BucketOwnerAccess *string `locationName:"bucketOwnerAccess" type:"string" enum:"BucketOwnerAccess"`
+
 	// Set to true if you do not want your output artifacts encrypted. This option
-	// is valid only if your artifacts type is Amazon Simple Storage Service (Amazon
-	// S3). If this is set with another artifacts type, an invalidInputException
-	// is thrown.
+	// is valid only if your artifacts type is Amazon S3. If this is set with another
+	// artifacts type, an invalidInputException is thrown.
 	EncryptionDisabled *bool `locationName:"encryptionDisabled" type:"boolean"`
 
 	// Information about the build output artifact location:
 	//
-	//    * If type is set to CODEPIPELINE, AWS CodePipeline ignores this value
-	//    if specified. This is because AWS CodePipeline manages its build output
-	//    locations instead of AWS CodeBuild.
+	//    * If type is set to CODEPIPELINE, CodePipeline ignores this value if specified.
+	//    This is because CodePipeline manages its build output locations instead
+	//    of CodeBuild.
 	//
 	//    * If type is set to NO_ARTIFACTS, this value is ignored if specified,
 	//    because no build output is produced.
@@ -4117,12 +11243,12 @@ type ProjectArtifacts struct {
 	//    * If type is set to S3, this is the name of the output bucket.
 	Location *string `locationName:"location" type:"string"`
 
-	// Along with path and namespaceType, the pattern that AWS CodeBuild uses to
-	// name and store the output artifact:
+	// Along with path and namespaceType, the pattern that CodeBuild uses to name
+	// and store the output artifact:
 	//
-	//    * If type is set to CODEPIPELINE, AWS CodePipeline ignores this value
-	//    if specified. This is because AWS CodePipeline manages its build output
-	//    names instead of AWS CodeBuild.
+	//    * If type is set to CODEPIPELINE, CodePipeline ignores this value if specified.
+	//    This is because CodePipeline manages its build output names instead of
+	//    CodeBuild.
 	//
 	//    * If type is set to NO_ARTIFACTS, this value is ignored if specified,
 	//    because no build output is produced.
@@ -4133,68 +11259,61 @@ type ProjectArtifacts struct {
 	//
 	// For example:
 	//
-	//    *  If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and
-	//    name is set to MyArtifact.zip, then the output artifact is stored in MyArtifacts/build-ID/MyArtifact.zip.
+	//    * If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and
+	//    name is set to MyArtifact.zip, then the output artifact is stored in MyArtifacts/<build-ID>/MyArtifact.zip.
 	//
+	//    * If path is empty, namespaceType is set to NONE, and name is set to "/",
+	//    the output artifact is stored in the root of the output bucket.
 	//
-	//    *  If path is empty, namespaceType is set to NONE, and name is set to
-	//    "/", the output artifact is stored in the root of the output bucket.
-	//
-	//    *  If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and
-	//    name is set to "/", the output artifact is stored in MyArtifacts/build-ID.
+	//    * If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and
+	//    name is set to "/", the output artifact is stored in MyArtifacts/<build-ID>.
 	Name *string `locationName:"name" type:"string"`
 
-	// Along with path and name, the pattern that AWS CodeBuild uses to determine
-	// the name and location to store the output artifact:
+	// Along with path and name, the pattern that CodeBuild uses to determine the
+	// name and location to store the output artifact:
 	//
-	//    * If type is set to CODEPIPELINE, AWS CodePipeline ignores this value
-	//    if specified. This is because AWS CodePipeline manages its build output
-	//    names instead of AWS CodeBuild.
+	//    * If type is set to CODEPIPELINE, CodePipeline ignores this value if specified.
+	//    This is because CodePipeline manages its build output names instead of
+	//    CodeBuild.
 	//
 	//    * If type is set to NO_ARTIFACTS, this value is ignored if specified,
 	//    because no build output is produced.
 	//
-	//    * If type is set to S3, valid values include:
-	//
-	// BUILD_ID: Include the build ID in the location of the build output artifact.
-	//
-	// NONE: Do not include the build ID. This is the default if namespaceType is
-	//    not specified.
+	//    * If type is set to S3, valid values include: BUILD_ID: Include the build
+	//    ID in the location of the build output artifact. NONE: Do not include
+	//    the build ID. This is the default if namespaceType is not specified.
 	//
 	// For example, if path is set to MyArtifacts, namespaceType is set to BUILD_ID,
-	// and name is set to MyArtifact.zip, the output artifact is stored in MyArtifacts/build-ID/MyArtifact.zip.
+	// and name is set to MyArtifact.zip, the output artifact is stored in MyArtifacts/<build-ID>/MyArtifact.zip.
 	NamespaceType *string `locationName:"namespaceType" type:"string" enum:"ArtifactNamespace"`
 
-	// If this flag is set, a name specified in the build spec file overrides the
-	// artifact name. The name specified in a build spec file is calculated at build
+	// If this flag is set, a name specified in the buildspec file overrides the
+	// artifact name. The name specified in a buildspec file is calculated at build
 	// time and uses the Shell Command Language. For example, you can append a date
 	// and time to your artifact name so that it is always unique.
 	OverrideArtifactName *bool `locationName:"overrideArtifactName" type:"boolean"`
 
 	// The type of build output artifact to create:
 	//
-	//    * If type is set to CODEPIPELINE, AWS CodePipeline ignores this value
-	//    if specified. This is because AWS CodePipeline manages its build output
-	//    artifacts instead of AWS CodeBuild.
+	//    * If type is set to CODEPIPELINE, CodePipeline ignores this value if specified.
+	//    This is because CodePipeline manages its build output artifacts instead
+	//    of CodeBuild.
 	//
 	//    * If type is set to NO_ARTIFACTS, this value is ignored if specified,
 	//    because no build output is produced.
 	//
-	//    * If type is set to S3, valid values include:
-	//
-	// NONE: AWS CodeBuild creates in the output bucket a folder that contains the
-	//    build output. This is the default if packaging is not specified.
-	//
-	// ZIP: AWS CodeBuild creates in the output bucket a ZIP file that contains
-	//    the build output.
+	//    * If type is set to S3, valid values include: NONE: CodeBuild creates
+	//    in the output bucket a folder that contains the build output. This is
+	//    the default if packaging is not specified. ZIP: CodeBuild creates in the
+	//    output bucket a ZIP file that contains the build output.
 	Packaging *string `locationName:"packaging" type:"string" enum:"ArtifactPackaging"`
 
-	// Along with namespaceType and name, the pattern that AWS CodeBuild uses to
-	// name and store the output artifact:
+	// Along with namespaceType and name, the pattern that CodeBuild uses to name
+	// and store the output artifact:
 	//
-	//    * If type is set to CODEPIPELINE, AWS CodePipeline ignores this value
-	//    if specified. This is because AWS CodePipeline manages its build output
-	//    names instead of AWS CodeBuild.
+	//    * If type is set to CODEPIPELINE, CodePipeline ignores this value if specified.
+	//    This is because CodePipeline manages its build output names instead of
+	//    CodeBuild.
 	//
 	//    * If type is set to NO_ARTIFACTS, this value is ignored if specified,
 	//    because no build output is produced.
@@ -4209,24 +11328,31 @@ type ProjectArtifacts struct {
 
 	// The type of build output artifact. Valid values include:
 	//
-	//    * CODEPIPELINE: The build project has build output generated through AWS
-	//    CodePipeline.
+	//    * CODEPIPELINE: The build project has build output generated through CodePipeline.
+	//    The CODEPIPELINE type is not supported for secondaryArtifacts.
 	//
 	//    * NO_ARTIFACTS: The build project does not produce any build output.
 	//
-	//    * S3: The build project stores build output in Amazon Simple Storage Service
-	//    (Amazon S3).
+	//    * S3: The build project stores build output in Amazon S3.
 	//
 	// Type is a required field
 	Type *string `locationName:"type" type:"string" required:"true" enum:"ArtifactsType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectArtifacts) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectArtifacts) GoString() string {
 	return s.String()
 }
@@ -4247,6 +11373,12 @@ func (s *ProjectArtifacts) Validate() error {
 // SetArtifactIdentifier sets the ArtifactIdentifier field's value.
 func (s *ProjectArtifacts) SetArtifactIdentifier(v string) *ProjectArtifacts {
 	s.ArtifactIdentifier = &v
+	return s
+}
+
+// SetBucketOwnerAccess sets the BucketOwnerAccess field's value.
+func (s *ProjectArtifacts) SetBucketOwnerAccess(v string) *ProjectArtifacts {
+	s.BucketOwnerAccess = &v
 	return s
 }
 
@@ -4308,18 +11440,23 @@ type ProjectBadge struct {
 
 	// The publicly-accessible URL through which you can access the build badge
 	// for your project.
-	//
-	// The publicly accessible URL through which you can access the build badge
-	// for your project.
 	BadgeRequestUrl *string `locationName:"badgeRequestUrl" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectBadge) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectBadge) GoString() string {
 	return s.String()
 }
@@ -4336,16 +11473,157 @@ func (s *ProjectBadge) SetBadgeRequestUrl(v string) *ProjectBadge {
 	return s
 }
 
+// Contains configuration information about a batch build project.
+type ProjectBuildBatchConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies how build status reports are sent to the source provider for the
+	// batch build. This property is only used when the source provider for your
+	// project is Bitbucket, GitHub, or GitHub Enterprise, and your project is configured
+	// to report build statuses to the source provider.
+	//
+	// REPORT_AGGREGATED_BATCH
+	//
+	// (Default) Aggregate all of the build statuses into a single status report.
+	//
+	// REPORT_INDIVIDUAL_BUILDS
+	//
+	// Send a separate status report for each individual build.
+	BatchReportMode *string `locationName:"batchReportMode" type:"string" enum:"BatchReportModeType"`
+
+	// Specifies if the build artifacts for the batch build should be combined into
+	// a single artifact location.
+	CombineArtifacts *bool `locationName:"combineArtifacts" type:"boolean"`
+
+	// A BatchRestrictions object that specifies the restrictions for the batch
+	// build.
+	Restrictions *BatchRestrictions `locationName:"restrictions" type:"structure"`
+
+	// Specifies the service role ARN for the batch build project.
+	ServiceRole *string `locationName:"serviceRole" min:"1" type:"string"`
+
+	// Specifies the maximum amount of time, in minutes, that the batch build must
+	// be completed in.
+	TimeoutInMins *int64 `locationName:"timeoutInMins" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectBuildBatchConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectBuildBatchConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProjectBuildBatchConfig) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ProjectBuildBatchConfig"}
+	if s.ServiceRole != nil && len(*s.ServiceRole) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ServiceRole", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBatchReportMode sets the BatchReportMode field's value.
+func (s *ProjectBuildBatchConfig) SetBatchReportMode(v string) *ProjectBuildBatchConfig {
+	s.BatchReportMode = &v
+	return s
+}
+
+// SetCombineArtifacts sets the CombineArtifacts field's value.
+func (s *ProjectBuildBatchConfig) SetCombineArtifacts(v bool) *ProjectBuildBatchConfig {
+	s.CombineArtifacts = &v
+	return s
+}
+
+// SetRestrictions sets the Restrictions field's value.
+func (s *ProjectBuildBatchConfig) SetRestrictions(v *BatchRestrictions) *ProjectBuildBatchConfig {
+	s.Restrictions = v
+	return s
+}
+
+// SetServiceRole sets the ServiceRole field's value.
+func (s *ProjectBuildBatchConfig) SetServiceRole(v string) *ProjectBuildBatchConfig {
+	s.ServiceRole = &v
+	return s
+}
+
+// SetTimeoutInMins sets the TimeoutInMins field's value.
+func (s *ProjectBuildBatchConfig) SetTimeoutInMins(v int64) *ProjectBuildBatchConfig {
+	s.TimeoutInMins = &v
+	return s
+}
+
 // Information about the cache for the build project.
 type ProjectCache struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the cache location:
 	//
-	//    * NO_CACHE: This value is ignored.
+	//    * NO_CACHE or LOCAL: This value is ignored.
 	//
 	//    * S3: This is the S3 bucket name/prefix.
 	Location *string `locationName:"location" type:"string"`
+
+	// An array of strings that specify the local cache modes. You can use one or
+	// more local cache modes at the same time. This is only used for LOCAL cache
+	// types.
+	//
+	// Possible values are:
+	//
+	// LOCAL_SOURCE_CACHE
+	//
+	// Caches Git metadata for primary and secondary sources. After the cache is
+	// created, subsequent builds pull only the change between commits. This mode
+	// is a good choice for projects with a clean working directory and a source
+	// that is a large Git repository. If you choose this option and your project
+	// does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket),
+	// the option is ignored.
+	//
+	// LOCAL_DOCKER_LAYER_CACHE
+	//
+	// Caches existing Docker layers. This mode is a good choice for projects that
+	// build or pull large Docker images. It can prevent the performance issues
+	// caused by pulling large Docker images down from the network.
+	//
+	//    * You can use a Docker layer cache in the Linux environment only.
+	//
+	//    * The privileged flag must be set so that your project has the required
+	//    Docker permissions.
+	//
+	//    * You should consider the security implications before you use a Docker
+	//    layer cache.
+	//
+	// LOCAL_CUSTOM_CACHE
+	//
+	// Caches directories you specify in the buildspec file. This mode is a good
+	// choice if your build scenario is not suited to one of the other three local
+	// cache modes. If you use a custom cache:
+	//
+	//    * Only directories can be specified for caching. You cannot specify individual
+	//    files.
+	//
+	//    * Symlinks are used to reference cached directories.
+	//
+	//    * Cached directories are linked to your build before it downloads its
+	//    project sources. Cached items are overridden if a source item has the
+	//    same name. Directories are specified using cache paths in the buildspec
+	//    file.
+	Modes []*string `locationName:"modes" type:"list" enum:"CacheMode"`
 
 	// The type of cache used by the build project. Valid values include:
 	//
@@ -4353,16 +11631,27 @@ type ProjectCache struct {
 	//
 	//    * S3: The build project reads and writes from and to S3.
 	//
+	//    * LOCAL: The build project stores a cache locally on a build host that
+	//    is only available to that build host.
+	//
 	// Type is a required field
 	Type *string `locationName:"type" type:"string" required:"true" enum:"CacheType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectCache) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectCache) GoString() string {
 	return s.String()
 }
@@ -4386,6 +11675,12 @@ func (s *ProjectCache) SetLocation(v string) *ProjectCache {
 	return s
 }
 
+// SetModes sets the Modes field's value.
+func (s *ProjectCache) SetModes(v []*string) *ProjectCache {
+	s.Modes = v
+	return s
+}
+
 // SetType sets the Type field's value.
 func (s *ProjectCache) SetType(v string) *ProjectCache {
 	s.Type = &v
@@ -4396,7 +11691,10 @@ func (s *ProjectCache) SetType(v string) *ProjectCache {
 type ProjectEnvironment struct {
 	_ struct{} `type:"structure"`
 
-	// The certificate to use with this build project.
+	// The ARN of the Amazon S3 bucket, path prefix, and object key that contains
+	// the PEM-encoded certificate for the build project. For more information,
+	// see certificate (https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate)
+	// in the CodeBuild User Guide.
 	Certificate *string `locationName:"certificate" type:"string"`
 
 	// Information about the compute resources the build project uses. Available
@@ -4406,7 +11704,52 @@ type ProjectEnvironment struct {
 	//
 	//    * BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds.
 	//
-	//    * BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds.
+	//    * BUILD_GENERAL1_LARGE: Use up to 16 GB memory and 8 vCPUs for builds,
+	//    depending on your environment type.
+	//
+	//    * BUILD_GENERAL1_2XLARGE: Use up to 145 GB memory, 72 vCPUs, and 824 GB
+	//    of SSD storage for builds. This compute type supports Docker images up
+	//    to 100 GB uncompressed.
+	//
+	//    * BUILD_LAMBDA_1GB: Use up to 1 GB memory for builds. Only available for
+	//    environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.
+	//
+	//    * BUILD_LAMBDA_2GB: Use up to 2 GB memory for builds. Only available for
+	//    environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.
+	//
+	//    * BUILD_LAMBDA_4GB: Use up to 4 GB memory for builds. Only available for
+	//    environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.
+	//
+	//    * BUILD_LAMBDA_8GB: Use up to 8 GB memory for builds. Only available for
+	//    environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.
+	//
+	//    * BUILD_LAMBDA_10GB: Use up to 10 GB memory for builds. Only available
+	//    for environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.
+	//
+	// If you use BUILD_GENERAL1_SMALL:
+	//
+	//    * For environment type LINUX_CONTAINER, you can use up to 3 GB memory
+	//    and 2 vCPUs for builds.
+	//
+	//    * For environment type LINUX_GPU_CONTAINER, you can use up to 16 GB memory,
+	//    4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+	//
+	//    * For environment type ARM_CONTAINER, you can use up to 4 GB memory and
+	//    2 vCPUs on ARM-based processors for builds.
+	//
+	// If you use BUILD_GENERAL1_LARGE:
+	//
+	//    * For environment type LINUX_CONTAINER, you can use up to 15 GB memory
+	//    and 8 vCPUs for builds.
+	//
+	//    * For environment type LINUX_GPU_CONTAINER, you can use up to 255 GB memory,
+	//    32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+	//
+	//    * For environment type ARM_CONTAINER, you can use up to 16 GB memory and
+	//    8 vCPUs on ARM-based processors for builds.
+	//
+	// For more information, see Build Environment Compute Types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
+	// in the CodeBuild User Guide.
 	//
 	// ComputeType is a required field
 	ComputeType *string `locationName:"computeType" type:"string" required:"true" enum:"ComputeType"`
@@ -4418,53 +11761,58 @@ type ProjectEnvironment struct {
 	// The image tag or image digest that identifies the Docker image to use for
 	// this build project. Use the following formats:
 	//
-	//    * For an image tag: registry/repository:tag. For example, to specify an
-	//    image with the tag "latest," use registry/repository:latest.
+	//    * For an image tag: <registry>/<repository>:<tag>. For example, in the
+	//    Docker repository that CodeBuild uses to manage its Docker images, this
+	//    would be aws/codebuild/standard:4.0.
 	//
-	//    * For an image digest: registry/repository@digest. For example, to specify
-	//    an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,"
-	//    use registry/repository@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.
+	//    * For an image digest: <registry>/<repository>@<digest>. For example,
+	//    to specify an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,"
+	//    use <registry>/<repository>@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.
+	//
+	// For more information, see Docker images provided by CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html)
+	// in the CodeBuild user guide.
 	//
 	// Image is a required field
 	Image *string `locationName:"image" min:"1" type:"string" required:"true"`
 
-	// The type of credentials AWS CodeBuild uses to pull images in your build.
-	// There are two valid values:
+	// The type of credentials CodeBuild uses to pull images in your build. There
+	// are two valid values:
 	//
-	//    * CODEBUILD specifies that AWS CodeBuild uses its own credentials. This
-	//    requires that you modify your ECR repository policy to trust AWS CodeBuild's
-	//    service principal.
+	//    * CODEBUILD specifies that CodeBuild uses its own credentials. This requires
+	//    that you modify your ECR repository policy to trust CodeBuild service
+	//    principal.
 	//
-	//    * SERVICE_ROLE specifies that AWS CodeBuild uses your build project's
-	//    service role.
+	//    * SERVICE_ROLE specifies that CodeBuild uses your build project's service
+	//    role.
 	//
 	// When you use a cross-account or private registry image, you must use SERVICE_ROLE
-	// credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD
+	// credentials. When you use an CodeBuild curated image, you must use CODEBUILD
 	// credentials.
 	ImagePullCredentialsType *string `locationName:"imagePullCredentialsType" type:"string" enum:"ImagePullCredentialsType"`
 
 	// Enables running the Docker daemon inside a Docker container. Set to true
-	// only if the build project is be used to build Docker images, and the specified
-	// build environment image is not provided by AWS CodeBuild with Docker support.
-	// Otherwise, all associated builds that attempt to interact with the Docker
-	// daemon fail. You must also start the Docker daemon so that builds can interact
-	// with it. One way to do this is to initialize the Docker daemon during the
-	// install phase of your build spec by running the following build commands.
-	// (Do not run these commands if the specified build environment image is provided
-	// by AWS CodeBuild with Docker support.)
+	// only if the build project is used to build Docker images. Otherwise, a build
+	// that attempts to interact with the Docker daemon fails. The default setting
+	// is false.
+	//
+	// You can initialize the Docker daemon during the install phase of your build
+	// by adding one of the following sets of commands to the install phase of your
+	// buildspec file:
 	//
 	// If the operating system's base image is Ubuntu Linux:
 	//
 	// - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
-	// --storage-driver=overlay& - timeout 15 sh -c "until docker info; do echo
-	// .; sleep 1; done"
+	// --storage-driver=overlay&
 	//
-	// If the operating system's base image is Alpine Linux, add the -t argument
-	// to timeout:
+	// - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+	//
+	// If the operating system's base image is Alpine Linux and the previous command
+	// does not work, add the -t argument to timeout:
 	//
 	// - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
-	// --storage-driver=overlay& - timeout 15 -t sh -c "until docker info; do echo
-	// .; sleep 1; done"
+	// --storage-driver=overlay&
+	//
+	// - timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done"
 	PrivilegedMode *bool `locationName:"privilegedMode" type:"boolean"`
 
 	// The credentials for access to a private registry.
@@ -4472,16 +11820,53 @@ type ProjectEnvironment struct {
 
 	// The type of build environment to use for related builds.
 	//
+	//    * The environment type ARM_CONTAINER is available only in regions US East
+	//    (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific
+	//    (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).
+	//
+	//    * The environment type LINUX_CONTAINER with compute type build.general1.2xlarge
+	//    is available only in regions US East (N. Virginia), US East (Ohio), US
+	//    West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt),
+	//    Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
+	//    Asia Pacific (Sydney), China (Beijing), and China (Ningxia).
+	//
+	//    * The environment type LINUX_GPU_CONTAINER is available only in regions
+	//    US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central),
+	//    EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia
+	//    Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China
+	//    (Beijing), and China (Ningxia).
+	//
+	//    * The environment types ARM_LAMBDA_CONTAINER and LINUX_LAMBDA_CONTAINER
+	//    are available only in regions US East (N. Virginia), US East (Ohio), US
+	//    West (Oregon), Asia Pacific (Mumbai), Asia Pacific (Singapore), Asia Pacific
+	//    (Sydney), Asia Pacific (Tokyo), EU (Frankfurt), EU (Ireland), and South
+	//    America (São Paulo).
+	//
+	//    * The environment types WINDOWS_CONTAINER and WINDOWS_SERVER_2019_CONTAINER
+	//    are available only in regions US East (N. Virginia), US East (Ohio), US
+	//    West (Oregon), and EU (Ireland).
+	//
+	// For more information, see Build environment compute types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
+	// in the CodeBuild user guide.
+	//
 	// Type is a required field
 	Type *string `locationName:"type" type:"string" required:"true" enum:"EnvironmentType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectEnvironment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectEnvironment) GoString() string {
 	return s.String()
 }
@@ -4571,25 +11956,124 @@ func (s *ProjectEnvironment) SetType(v string) *ProjectEnvironment {
 	return s
 }
 
+// Information about a file system created by Amazon Elastic File System (EFS).
+// For more information, see What Is Amazon Elastic File System? (https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html)
+type ProjectFileSystemLocation struct {
+	_ struct{} `type:"structure"`
+
+	// The name used to access a file system created by Amazon EFS. CodeBuild creates
+	// an environment variable by appending the identifier in all capital letters
+	// to CODEBUILD_. For example, if you specify my_efs for identifier, a new environment
+	// variable is create named CODEBUILD_MY_EFS.
+	//
+	// The identifier is used to mount your file system.
+	Identifier *string `locationName:"identifier" type:"string"`
+
+	// A string that specifies the location of the file system created by Amazon
+	// EFS. Its format is efs-dns-name:/directory-path. You can find the DNS name
+	// of file system when you view it in the Amazon EFS console. The directory
+	// path is a path to a directory in the file system that CodeBuild mounts. For
+	// example, if the DNS name of a file system is fs-abcd1234.efs.us-west-2.amazonaws.com,
+	// and its mount directory is my-efs-mount-directory, then the location is fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory.
+	//
+	// The directory path in the format efs-dns-name:/directory-path is optional.
+	// If you do not specify a directory path, the location is only the DNS name
+	// and CodeBuild mounts the entire file system.
+	Location *string `locationName:"location" type:"string"`
+
+	// The mount options for a file system created by Amazon EFS. The default mount
+	// options used by CodeBuild are nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2.
+	// For more information, see Recommended NFS Mount Options (https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-nfs-mount-settings.html).
+	MountOptions *string `locationName:"mountOptions" type:"string"`
+
+	// The location in the container where you mount the file system.
+	MountPoint *string `locationName:"mountPoint" type:"string"`
+
+	// The type of the file system. The one supported type is EFS.
+	Type *string `locationName:"type" type:"string" enum:"FileSystemType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectFileSystemLocation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectFileSystemLocation) GoString() string {
+	return s.String()
+}
+
+// SetIdentifier sets the Identifier field's value.
+func (s *ProjectFileSystemLocation) SetIdentifier(v string) *ProjectFileSystemLocation {
+	s.Identifier = &v
+	return s
+}
+
+// SetLocation sets the Location field's value.
+func (s *ProjectFileSystemLocation) SetLocation(v string) *ProjectFileSystemLocation {
+	s.Location = &v
+	return s
+}
+
+// SetMountOptions sets the MountOptions field's value.
+func (s *ProjectFileSystemLocation) SetMountOptions(v string) *ProjectFileSystemLocation {
+	s.MountOptions = &v
+	return s
+}
+
+// SetMountPoint sets the MountPoint field's value.
+func (s *ProjectFileSystemLocation) SetMountPoint(v string) *ProjectFileSystemLocation {
+	s.MountPoint = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *ProjectFileSystemLocation) SetType(v string) *ProjectFileSystemLocation {
+	s.Type = &v
+	return s
+}
+
 // Information about the build input source code for the build project.
 type ProjectSource struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the authorization settings for AWS CodeBuild to access
-	// the source code to be built.
+	// Information about the authorization settings for CodeBuild to access the
+	// source code to be built.
 	//
-	// This information is for the AWS CodeBuild console's use only. Your code should
+	// This information is for the CodeBuild console's use only. Your code should
 	// not get or set this information directly.
 	Auth *SourceAuth `locationName:"auth" type:"structure"`
 
-	// The build spec declaration to use for the builds in this build project.
+	// Contains information that defines how the build project reports the build
+	// status to the source provider. This option is only used when the source provider
+	// is GITHUB, GITHUB_ENTERPRISE, or BITBUCKET.
+	BuildStatusConfig *BuildStatusConfig `locationName:"buildStatusConfig" type:"structure"`
+
+	// The buildspec file declaration to use for the builds in this build project.
 	//
-	// If this value is not specified, a build spec must be included along with
-	// the source code to be built.
+	// If this value is set, it can be either an inline buildspec definition, the
+	// path to an alternate buildspec file relative to the value of the built-in
+	// CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The
+	// bucket must be in the same Amazon Web Services Region as the build project.
+	// Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml).
+	// If this value is not provided or is set to an empty string, the source code
+	// must contain a buildspec file in its root directory. For more information,
+	// see Buildspec File Name and Storage Location (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage).
 	Buildspec *string `locationName:"buildspec" type:"string"`
 
-	// Information about the git clone depth for the build project.
+	// Information about the Git clone depth for the build project.
 	GitCloneDepth *int64 `locationName:"gitCloneDepth" type:"integer"`
+
+	// Information about the Git submodules configuration for the build project.
+	GitSubmodulesConfig *GitSubmodulesConfig `locationName:"gitSubmodulesConfig" type:"structure"`
 
 	// Enable this flag to ignore SSL warnings while connecting to the project source
 	// code.
@@ -4599,54 +12083,65 @@ type ProjectSource struct {
 	// include:
 	//
 	//    * For source code settings that are specified in the source action of
-	//    a pipeline in AWS CodePipeline, location should not be specified. If it
-	//    is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline
-	//    uses the settings in a pipeline's source action instead of this value.
+	//    a pipeline in CodePipeline, location should not be specified. If it is
+	//    specified, CodePipeline ignores it. This is because CodePipeline uses
+	//    the settings in a pipeline's source action instead of this value.
 	//
-	//    * For source code in an AWS CodeCommit repository, the HTTPS clone URL
-	//    to the repository that contains the source code and the build spec (for
-	//    example, https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name).
+	//    * For source code in an CodeCommit repository, the HTTPS clone URL to
+	//    the repository that contains the source code and the buildspec file (for
+	//    example, https://git-codecommit.<region-ID>.amazonaws.com/v1/repos/<repo-name>).
 	//
-	//    * For source code in an Amazon Simple Storage Service (Amazon S3) input
-	//    bucket, one of the following.
-	//
-	//  The path to the ZIP file that contains the source code (for example, bucket-name/path/to/object-name.zip).
-	//
-	//
-	//  The path to the folder that contains the source code (for example, bucket-name/path/to/source-code/folder/).
-	//
+	//    * For source code in an Amazon S3 input bucket, one of the following.
+	//    The path to the ZIP file that contains the source code (for example, <bucket-name>/<path>/<object-name>.zip).
+	//    The path to the folder that contains the source code (for example, <bucket-name>/<path-to-source-code>/<folder>/).
 	//
 	//    * For source code in a GitHub repository, the HTTPS clone URL to the repository
-	//    that contains the source and the build spec. You must connect your AWS
-	//    account to your GitHub account. Use the AWS CodeBuild console to start
-	//    creating a build project. When you use the console to connect (or reconnect)
-	//    with GitHub, on the GitHub Authorize application page, for Organization
-	//    access, choose Request access next to each repository you want to allow
-	//    AWS CodeBuild to have access to, and then choose Authorize application.
-	//    (After you have connected to your GitHub account, you do not need to finish
-	//    creating the build project. You can leave the AWS CodeBuild console.)
-	//    To instruct AWS CodeBuild to use this connection, in the source object,
-	//    set the auth object's type value to OAUTH.
+	//    that contains the source and the buildspec file. You must connect your
+	//    Amazon Web Services account to your GitHub account. Use the CodeBuild
+	//    console to start creating a build project. When you use the console to
+	//    connect (or reconnect) with GitHub, on the GitHub Authorize application
+	//    page, for Organization access, choose Request access next to each repository
+	//    you want to allow CodeBuild to have access to, and then choose Authorize
+	//    application. (After you have connected to your GitHub account, you do
+	//    not need to finish creating the build project. You can leave the CodeBuild
+	//    console.) To instruct CodeBuild to use this connection, in the source
+	//    object, set the auth object's type value to OAUTH.
 	//
 	//    * For source code in a Bitbucket repository, the HTTPS clone URL to the
-	//    repository that contains the source and the build spec. You must connect
-	//    your AWS account to your Bitbucket account. Use the AWS CodeBuild console
-	//    to start creating a build project. When you use the console to connect
-	//    (or reconnect) with Bitbucket, on the Bitbucket Confirm access to your
-	//    account page, choose Grant access. (After you have connected to your Bitbucket
-	//    account, you do not need to finish creating the build project. You can
-	//    leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this
+	//    repository that contains the source and the buildspec file. You must connect
+	//    your Amazon Web Services account to your Bitbucket account. Use the CodeBuild
+	//    console to start creating a build project. When you use the console to
+	//    connect (or reconnect) with Bitbucket, on the Bitbucket Confirm access
+	//    to your account page, choose Grant access. (After you have connected to
+	//    your Bitbucket account, you do not need to finish creating the build project.
+	//    You can leave the CodeBuild console.) To instruct CodeBuild to use this
 	//    connection, in the source object, set the auth object's type value to
 	//    OAUTH.
+	//
+	// If you specify CODEPIPELINE for the Type property, don't specify this property.
+	// For all of the other types, you must specify Location.
 	Location *string `locationName:"location" type:"string"`
 
 	// Set to true to report the status of a build's start and finish to your source
 	// provider. This option is valid only when your source provider is GitHub,
 	// GitHub Enterprise, or Bitbucket. If this is set and you use a different source
 	// provider, an invalidInputException is thrown.
+	//
+	// To be able to report the build status to the source provider, the user associated
+	// with the source provider must have write access to the repo. If the user
+	// does not have write access, the build status cannot be updated. For more
+	// information, see Source provider access (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html)
+	// in the CodeBuild User Guide.
+	//
+	// The status of a build triggered by a webhook is always reported to your source
+	// provider.
+	//
+	// If your project's builds are triggered by a webhook, you must push a new
+	// commit to the repo for a change to this property to take effect.
 	ReportBuildStatus *bool `locationName:"reportBuildStatus" type:"boolean"`
 
-	// An identifier for this project source.
+	// An identifier for this project source. The identifier can only contain alphanumeric
+	// characters and underscores, and must be less than 128 characters in length.
 	SourceIdentifier *string `locationName:"sourceIdentifier" type:"string"`
 
 	// The type of repository that contains the source code to be built. Valid values
@@ -4654,28 +12149,38 @@ type ProjectSource struct {
 	//
 	//    * BITBUCKET: The source code is in a Bitbucket repository.
 	//
-	//    * CODECOMMIT: The source code is in an AWS CodeCommit repository.
+	//    * CODECOMMIT: The source code is in an CodeCommit repository.
 	//
 	//    * CODEPIPELINE: The source code settings are specified in the source action
-	//    of a pipeline in AWS CodePipeline.
+	//    of a pipeline in CodePipeline.
 	//
-	//    * GITHUB: The source code is in a GitHub repository.
+	//    * GITHUB: The source code is in a GitHub or GitHub Enterprise Cloud repository.
+	//
+	//    * GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise Server
+	//    repository.
 	//
 	//    * NO_SOURCE: The project does not have input source code.
 	//
-	//    * S3: The source code is in an Amazon Simple Storage Service (Amazon S3)
-	//    input bucket.
+	//    * S3: The source code is in an Amazon S3 bucket.
 	//
 	// Type is a required field
 	Type *string `locationName:"type" type:"string" required:"true" enum:"SourceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectSource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectSource) GoString() string {
 	return s.String()
 }
@@ -4691,6 +12196,11 @@ func (s *ProjectSource) Validate() error {
 			invalidParams.AddNested("Auth", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.GitSubmodulesConfig != nil {
+		if err := s.GitSubmodulesConfig.Validate(); err != nil {
+			invalidParams.AddNested("GitSubmodulesConfig", err.(request.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4704,6 +12214,12 @@ func (s *ProjectSource) SetAuth(v *SourceAuth) *ProjectSource {
 	return s
 }
 
+// SetBuildStatusConfig sets the BuildStatusConfig field's value.
+func (s *ProjectSource) SetBuildStatusConfig(v *BuildStatusConfig) *ProjectSource {
+	s.BuildStatusConfig = v
+	return s
+}
+
 // SetBuildspec sets the Buildspec field's value.
 func (s *ProjectSource) SetBuildspec(v string) *ProjectSource {
 	s.Buildspec = &v
@@ -4713,6 +12229,12 @@ func (s *ProjectSource) SetBuildspec(v string) *ProjectSource {
 // SetGitCloneDepth sets the GitCloneDepth field's value.
 func (s *ProjectSource) SetGitCloneDepth(v int64) *ProjectSource {
 	s.GitCloneDepth = &v
+	return s
+}
+
+// SetGitSubmodulesConfig sets the GitSubmodulesConfig field's value.
+func (s *ProjectSource) SetGitSubmodulesConfig(v *GitSubmodulesConfig) *ProjectSource {
+	s.GitSubmodulesConfig = v
 	return s
 }
 
@@ -4750,7 +12272,9 @@ func (s *ProjectSource) SetType(v string) *ProjectSource {
 type ProjectSourceVersion struct {
 	_ struct{} `type:"structure"`
 
-	// An identifier for a source in the build project.
+	// An identifier for a source in the build project. The identifier can only
+	// contain alphanumeric characters and underscores, and must be less than 128
+	// characters in length.
 	//
 	// SourceIdentifier is a required field
 	SourceIdentifier *string `locationName:"sourceIdentifier" type:"string" required:"true"`
@@ -4758,7 +12282,7 @@ type ProjectSourceVersion struct {
 	// The source version for the corresponding source identifier. If specified,
 	// must be one of:
 	//
-	//    * For AWS CodeCommit: the commit ID to use.
+	//    * For CodeCommit: the commit ID, branch, or Git tag to use.
 	//
 	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
 	//    that corresponds to the version of the source code you want to build.
@@ -4772,19 +12296,30 @@ type ProjectSourceVersion struct {
 	//    is specified, the branch's HEAD commit ID is used. If not specified, the
 	//    default branch's HEAD commit ID is used.
 	//
-	//    * For Amazon Simple Storage Service (Amazon S3): the version ID of the
-	//    object that represents the build input ZIP file to use.
+	//    * For Amazon S3: the version ID of the object that represents the build
+	//    input ZIP file to use.
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the CodeBuild User Guide.
 	//
 	// SourceVersion is a required field
 	SourceVersion *string `locationName:"sourceVersion" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectSourceVersion) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectSourceVersion) GoString() string {
 	return s.String()
 }
@@ -4817,40 +12352,150 @@ func (s *ProjectSourceVersion) SetSourceVersion(v string) *ProjectSourceVersion 
 	return s
 }
 
+type PutResourcePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// A JSON-formatted resource policy. For more information, see Sharing a Project
+	// (https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share)
+	// and Sharing a Report Group (https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share)
+	// in the CodeBuild User Guide.
+	//
+	// Policy is a required field
+	Policy *string `locationName:"policy" min:"1" type:"string" required:"true"`
+
+	// The ARN of the Project or ReportGroup resource you want to associate with
+	// a resource policy.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutResourcePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutResourcePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutResourcePolicyInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PutResourcePolicyInput"}
+	if s.Policy == nil {
+		invalidParams.Add(request.NewErrParamRequired("Policy"))
+	}
+	if s.Policy != nil && len(*s.Policy) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Policy", 1))
+	}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetPolicy sets the Policy field's value.
+func (s *PutResourcePolicyInput) SetPolicy(v string) *PutResourcePolicyInput {
+	s.Policy = &v
+	return s
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *PutResourcePolicyInput) SetResourceArn(v string) *PutResourcePolicyInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type PutResourcePolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the Project or ReportGroup resource that is associated with a
+	// resource policy.
+	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutResourcePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PutResourcePolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *PutResourcePolicyOutput) SetResourceArn(v string) *PutResourcePolicyOutput {
+	s.ResourceArn = &v
+	return s
+}
+
 // Information about credentials that provide access to a private Docker registry.
 // When this is set:
 //
-//    * imagePullCredentialsType must be set to SERVICE_ROLE.
+//   - imagePullCredentialsType must be set to SERVICE_ROLE.
 //
-//    *  images cannot be curated or an Amazon ECR image.
+//   - images cannot be curated or an Amazon ECR image.
 //
-// For more information, see Private Registry with AWS Secrets Manager Sample
-// for AWS CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html).
+// For more information, see Private Registry with Secrets Manager Sample for
+// CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html).
 type RegistryCredential struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets
+	// The Amazon Resource Name (ARN) or name of credentials created using Secrets
 	// Manager.
 	//
 	// The credential can use the name of the credentials only if they exist in
-	// your current region.
+	// your current Amazon Web Services Region.
 	//
 	// Credential is a required field
 	Credential *string `locationName:"credential" min:"1" type:"string" required:"true"`
 
 	// The service that created the credentials to access a private Docker registry.
-	// The valid value, SECRETS_MANAGER, is for AWS Secrets Manager.
+	// The valid value, SECRETS_MANAGER, is for Secrets Manager.
 	//
 	// CredentialProvider is a required field
 	CredentialProvider *string `locationName:"credentialProvider" type:"string" required:"true" enum:"CredentialProviderType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegistryCredential) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegistryCredential) GoString() string {
 	return s.String()
 }
@@ -4886,9 +12531,866 @@ func (s *RegistryCredential) SetCredentialProvider(v string) *RegistryCredential
 	return s
 }
 
+// Information about the results from running a series of test cases during
+// the run of a build project. The test cases are specified in the buildspec
+// for the build project using one or more paths to the test case files. You
+// can specify any type of tests you want, such as unit tests, integration tests,
+// and functional tests.
+type Report struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the report run.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+
+	// A CodeCoverageReportSummary object that contains a code coverage summary
+	// for this report.
+	CodeCoverageSummary *CodeCoverageReportSummary `locationName:"codeCoverageSummary" type:"structure"`
+
+	// The date and time this report run occurred.
+	Created *time.Time `locationName:"created" type:"timestamp"`
+
+	// The ARN of the build run that generated this report.
+	ExecutionId *string `locationName:"executionId" type:"string"`
+
+	// The date and time a report expires. A report expires 30 days after it is
+	// created. An expired report is not available to view in CodeBuild.
+	Expired *time.Time `locationName:"expired" type:"timestamp"`
+
+	// Information about where the raw data used to generate this report was exported.
+	ExportConfig *ReportExportConfig `locationName:"exportConfig" type:"structure"`
+
+	// The name of the report that was run.
+	Name *string `locationName:"name" type:"string"`
+
+	// The ARN of the report group associated with this report.
+	ReportGroupArn *string `locationName:"reportGroupArn" min:"1" type:"string"`
+
+	// The status of this report.
+	Status *string `locationName:"status" type:"string" enum:"ReportStatusType"`
+
+	// A TestReportSummary object that contains information about this test report.
+	TestSummary *TestReportSummary `locationName:"testSummary" type:"structure"`
+
+	// A boolean that specifies if this report run is truncated. The list of test
+	// cases is truncated after the maximum number of test cases is reached.
+	Truncated *bool `locationName:"truncated" type:"boolean"`
+
+	// The type of the report that was run.
+	//
+	// CODE_COVERAGE
+	//
+	// A code coverage report.
+	//
+	// TEST
+	//
+	// A test report.
+	Type *string `locationName:"type" type:"string" enum:"ReportType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Report) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Report) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *Report) SetArn(v string) *Report {
+	s.Arn = &v
+	return s
+}
+
+// SetCodeCoverageSummary sets the CodeCoverageSummary field's value.
+func (s *Report) SetCodeCoverageSummary(v *CodeCoverageReportSummary) *Report {
+	s.CodeCoverageSummary = v
+	return s
+}
+
+// SetCreated sets the Created field's value.
+func (s *Report) SetCreated(v time.Time) *Report {
+	s.Created = &v
+	return s
+}
+
+// SetExecutionId sets the ExecutionId field's value.
+func (s *Report) SetExecutionId(v string) *Report {
+	s.ExecutionId = &v
+	return s
+}
+
+// SetExpired sets the Expired field's value.
+func (s *Report) SetExpired(v time.Time) *Report {
+	s.Expired = &v
+	return s
+}
+
+// SetExportConfig sets the ExportConfig field's value.
+func (s *Report) SetExportConfig(v *ReportExportConfig) *Report {
+	s.ExportConfig = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *Report) SetName(v string) *Report {
+	s.Name = &v
+	return s
+}
+
+// SetReportGroupArn sets the ReportGroupArn field's value.
+func (s *Report) SetReportGroupArn(v string) *Report {
+	s.ReportGroupArn = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *Report) SetStatus(v string) *Report {
+	s.Status = &v
+	return s
+}
+
+// SetTestSummary sets the TestSummary field's value.
+func (s *Report) SetTestSummary(v *TestReportSummary) *Report {
+	s.TestSummary = v
+	return s
+}
+
+// SetTruncated sets the Truncated field's value.
+func (s *Report) SetTruncated(v bool) *Report {
+	s.Truncated = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *Report) SetType(v string) *Report {
+	s.Type = &v
+	return s
+}
+
+// Information about the location where the run of a report is exported.
+type ReportExportConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The export configuration type. Valid values are:
+	//
+	//    * S3: The report results are exported to an S3 bucket.
+	//
+	//    * NO_EXPORT: The report results are not exported.
+	ExportConfigType *string `locationName:"exportConfigType" type:"string" enum:"ReportExportConfigType"`
+
+	// A S3ReportExportConfig object that contains information about the S3 bucket
+	// where the run of a report is exported.
+	S3Destination *S3ReportExportConfig `locationName:"s3Destination" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportExportConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportExportConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReportExportConfig) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ReportExportConfig"}
+	if s.S3Destination != nil {
+		if err := s.S3Destination.Validate(); err != nil {
+			invalidParams.AddNested("S3Destination", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetExportConfigType sets the ExportConfigType field's value.
+func (s *ReportExportConfig) SetExportConfigType(v string) *ReportExportConfig {
+	s.ExportConfigType = &v
+	return s
+}
+
+// SetS3Destination sets the S3Destination field's value.
+func (s *ReportExportConfig) SetS3Destination(v *S3ReportExportConfig) *ReportExportConfig {
+	s.S3Destination = v
+	return s
+}
+
+// A filter used to return reports with the status specified by the input status
+// parameter.
+type ReportFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The status used to filter reports. You can filter using one status only.
+	Status *string `locationName:"status" type:"string" enum:"ReportStatusType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportFilter) GoString() string {
+	return s.String()
+}
+
+// SetStatus sets the Status field's value.
+func (s *ReportFilter) SetStatus(v string) *ReportFilter {
+	s.Status = &v
+	return s
+}
+
+// A series of reports. Each report contains information about the results from
+// running a series of test cases. You specify the test cases for a report group
+// in the buildspec for a build project using one or more paths to the test
+// case files.
+type ReportGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the ReportGroup.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+
+	// The date and time this ReportGroup was created.
+	Created *time.Time `locationName:"created" type:"timestamp"`
+
+	// Information about the destination where the raw data of this ReportGroup
+	// is exported.
+	ExportConfig *ReportExportConfig `locationName:"exportConfig" type:"structure"`
+
+	// The date and time this ReportGroup was last modified.
+	LastModified *time.Time `locationName:"lastModified" type:"timestamp"`
+
+	// The name of the ReportGroup.
+	Name *string `locationName:"name" min:"2" type:"string"`
+
+	// The status of the report group. This property is read-only.
+	//
+	// This can be one of the following values:
+	//
+	// ACTIVE
+	//
+	// The report group is active.
+	//
+	// DELETING
+	//
+	// The report group is in the process of being deleted.
+	Status *string `locationName:"status" type:"string" enum:"ReportGroupStatusType"`
+
+	// A list of tag key and value pairs associated with this report group.
+	//
+	// These tags are available for use by Amazon Web Services services that support
+	// CodeBuild report group tags.
+	Tags []*Tag `locationName:"tags" type:"list"`
+
+	// The type of the ReportGroup. This can be one of the following values:
+	//
+	// CODE_COVERAGE
+	//
+	// The report group contains code coverage reports.
+	//
+	// TEST
+	//
+	// The report group contains test reports.
+	Type *string `locationName:"type" type:"string" enum:"ReportType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportGroup) GoString() string {
+	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *ReportGroup) SetArn(v string) *ReportGroup {
+	s.Arn = &v
+	return s
+}
+
+// SetCreated sets the Created field's value.
+func (s *ReportGroup) SetCreated(v time.Time) *ReportGroup {
+	s.Created = &v
+	return s
+}
+
+// SetExportConfig sets the ExportConfig field's value.
+func (s *ReportGroup) SetExportConfig(v *ReportExportConfig) *ReportGroup {
+	s.ExportConfig = v
+	return s
+}
+
+// SetLastModified sets the LastModified field's value.
+func (s *ReportGroup) SetLastModified(v time.Time) *ReportGroup {
+	s.LastModified = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *ReportGroup) SetName(v string) *ReportGroup {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *ReportGroup) SetStatus(v string) *ReportGroup {
+	s.Status = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *ReportGroup) SetTags(v []*Tag) *ReportGroup {
+	s.Tags = v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *ReportGroup) SetType(v string) *ReportGroup {
+	s.Type = &v
+	return s
+}
+
+// Contains trend statistics for a set of reports. The actual values depend
+// on the type of trend being collected. For more information, see .
+type ReportGroupTrendStats struct {
+	_ struct{} `type:"structure"`
+
+	// Contains the average of all values analyzed.
+	Average *string `locationName:"average" type:"string"`
+
+	// Contains the maximum value analyzed.
+	Max *string `locationName:"max" type:"string"`
+
+	// Contains the minimum value analyzed.
+	Min *string `locationName:"min" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportGroupTrendStats) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportGroupTrendStats) GoString() string {
+	return s.String()
+}
+
+// SetAverage sets the Average field's value.
+func (s *ReportGroupTrendStats) SetAverage(v string) *ReportGroupTrendStats {
+	s.Average = &v
+	return s
+}
+
+// SetMax sets the Max field's value.
+func (s *ReportGroupTrendStats) SetMax(v string) *ReportGroupTrendStats {
+	s.Max = &v
+	return s
+}
+
+// SetMin sets the Min field's value.
+func (s *ReportGroupTrendStats) SetMin(v string) *ReportGroupTrendStats {
+	s.Min = &v
+	return s
+}
+
+// Contains the unmodified data for the report. For more information, see .
+type ReportWithRawData struct {
+	_ struct{} `type:"structure"`
+
+	// The value of the requested data field from the report.
+	Data *string `locationName:"data" type:"string"`
+
+	// The ARN of the report.
+	ReportArn *string `locationName:"reportArn" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportWithRawData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ReportWithRawData) GoString() string {
+	return s.String()
+}
+
+// SetData sets the Data field's value.
+func (s *ReportWithRawData) SetData(v string) *ReportWithRawData {
+	s.Data = &v
+	return s
+}
+
+// SetReportArn sets the ReportArn field's value.
+func (s *ReportWithRawData) SetReportArn(v string) *ReportWithRawData {
+	s.ReportArn = &v
+	return s
+}
+
+// Represents a resolved build artifact. A resolved artifact is an artifact
+// that is built and deployed to the destination, such as Amazon S3.
+type ResolvedArtifact struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the artifact.
+	Identifier *string `locationName:"identifier" type:"string"`
+
+	// The location of the artifact.
+	Location *string `locationName:"location" type:"string"`
+
+	// Specifies the type of artifact.
+	Type *string `locationName:"type" type:"string" enum:"ArtifactsType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResolvedArtifact) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResolvedArtifact) GoString() string {
+	return s.String()
+}
+
+// SetIdentifier sets the Identifier field's value.
+func (s *ResolvedArtifact) SetIdentifier(v string) *ResolvedArtifact {
+	s.Identifier = &v
+	return s
+}
+
+// SetLocation sets the Location field's value.
+func (s *ResolvedArtifact) SetLocation(v string) *ResolvedArtifact {
+	s.Location = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *ResolvedArtifact) SetType(v string) *ResolvedArtifact {
+	s.Type = &v
+	return s
+}
+
+// The specified Amazon Web Services resource cannot be created, because an
+// Amazon Web Services resource with the same settings already exists.
+type ResourceAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &ResourceAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceAlreadyExistsException) Code() string {
+	return "ResourceAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified Amazon Web Services resource cannot be found.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type RetryBuildBatchInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the identifier of the batch build to restart.
+	Id *string `locationName:"id" min:"1" type:"string"`
+
+	// A unique, case sensitive identifier you provide to ensure the idempotency
+	// of the RetryBuildBatch request. The token is included in the RetryBuildBatch
+	// request and is valid for five minutes. If you repeat the RetryBuildBatch
+	// request with the same token, but change a parameter, CodeBuild returns a
+	// parameter mismatch error.
+	IdempotencyToken *string `locationName:"idempotencyToken" type:"string"`
+
+	// Specifies the type of retry to perform.
+	RetryType *string `locationName:"retryType" type:"string" enum:"RetryBuildBatchType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryBuildBatchInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryBuildBatchInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RetryBuildBatchInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RetryBuildBatchInput"}
+	if s.Id != nil && len(*s.Id) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetId sets the Id field's value.
+func (s *RetryBuildBatchInput) SetId(v string) *RetryBuildBatchInput {
+	s.Id = &v
+	return s
+}
+
+// SetIdempotencyToken sets the IdempotencyToken field's value.
+func (s *RetryBuildBatchInput) SetIdempotencyToken(v string) *RetryBuildBatchInput {
+	s.IdempotencyToken = &v
+	return s
+}
+
+// SetRetryType sets the RetryType field's value.
+func (s *RetryBuildBatchInput) SetRetryType(v string) *RetryBuildBatchInput {
+	s.RetryType = &v
+	return s
+}
+
+type RetryBuildBatchOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Contains information about a batch build.
+	BuildBatch *BuildBatch `locationName:"buildBatch" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryBuildBatchOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryBuildBatchOutput) GoString() string {
+	return s.String()
+}
+
+// SetBuildBatch sets the BuildBatch field's value.
+func (s *RetryBuildBatchOutput) SetBuildBatch(v *BuildBatch) *RetryBuildBatchOutput {
+	s.BuildBatch = v
+	return s
+}
+
+type RetryBuildInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the identifier of the build to restart.
+	Id *string `locationName:"id" min:"1" type:"string"`
+
+	// A unique, case sensitive identifier you provide to ensure the idempotency
+	// of the RetryBuild request. The token is included in the RetryBuild request
+	// and is valid for five minutes. If you repeat the RetryBuild request with
+	// the same token, but change a parameter, CodeBuild returns a parameter mismatch
+	// error.
+	IdempotencyToken *string `locationName:"idempotencyToken" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryBuildInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryBuildInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RetryBuildInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RetryBuildInput"}
+	if s.Id != nil && len(*s.Id) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetId sets the Id field's value.
+func (s *RetryBuildInput) SetId(v string) *RetryBuildInput {
+	s.Id = &v
+	return s
+}
+
+// SetIdempotencyToken sets the IdempotencyToken field's value.
+func (s *RetryBuildInput) SetIdempotencyToken(v string) *RetryBuildInput {
+	s.IdempotencyToken = &v
+	return s
+}
+
+type RetryBuildOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about a build.
+	Build *Build `locationName:"build" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryBuildOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryBuildOutput) GoString() string {
+	return s.String()
+}
+
+// SetBuild sets the Build field's value.
+func (s *RetryBuildOutput) SetBuild(v *Build) *RetryBuildOutput {
+	s.Build = v
+	return s
+}
+
 // Information about S3 logs for a build project.
 type S3LogsConfig struct {
 	_ struct{} `type:"structure"`
+
+	// Specifies the bucket owner's access for objects that another account uploads
+	// to their Amazon S3 bucket. By default, only the account that uploads the
+	// objects to the bucket has access to these objects. This property allows you
+	// to give the bucket owner access to these objects.
+	//
+	// To use this property, your CodeBuild service role must have the s3:PutBucketAcl
+	// permission. This permission allows CodeBuild to modify the access control
+	// list for the bucket.
+	//
+	// This property can be one of the following values:
+	//
+	// NONE
+	//
+	// The bucket owner does not have access to the objects. This is the default.
+	//
+	// READ_ONLY
+	//
+	// The bucket owner has read-only access to the objects. The uploading account
+	// retains ownership of the objects.
+	//
+	// FULL
+	//
+	// The bucket owner has full access to the objects. Object ownership is determined
+	// by the following criteria:
+	//
+	//    * If the bucket is configured with the Bucket owner preferred setting,
+	//    the bucket owner owns the objects. The uploading account will have object
+	//    access as specified by the bucket's policy.
+	//
+	//    * Otherwise, the uploading account retains ownership of the objects.
+	//
+	// For more information about Amazon S3 object ownership, see Controlling ownership
+	// of uploaded objects using S3 Object Ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+	// in the Amazon Simple Storage Service User Guide.
+	BucketOwnerAccess *string `locationName:"bucketOwnerAccess" type:"string" enum:"BucketOwnerAccess"`
+
+	// Set to true if you do not want your S3 build log output encrypted. By default
+	// S3 build logs are encrypted.
+	EncryptionDisabled *bool `locationName:"encryptionDisabled" type:"boolean"`
 
 	// The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3
 	// bucket name is my-bucket, and your path prefix is build-log, then acceptable
@@ -4905,12 +13407,20 @@ type S3LogsConfig struct {
 	Status *string `locationName:"status" type:"string" required:"true" enum:"LogsConfigStatusType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3LogsConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3LogsConfig) GoString() string {
 	return s.String()
 }
@@ -4928,6 +13438,18 @@ func (s *S3LogsConfig) Validate() error {
 	return nil
 }
 
+// SetBucketOwnerAccess sets the BucketOwnerAccess field's value.
+func (s *S3LogsConfig) SetBucketOwnerAccess(v string) *S3LogsConfig {
+	s.BucketOwnerAccess = &v
+	return s
+}
+
+// SetEncryptionDisabled sets the EncryptionDisabled field's value.
+func (s *S3LogsConfig) SetEncryptionDisabled(v bool) *S3LogsConfig {
+	s.EncryptionDisabled = &v
+	return s
+}
+
 // SetLocation sets the Location field's value.
 func (s *S3LogsConfig) SetLocation(v string) *S3LogsConfig {
 	s.Location = &v
@@ -4940,10 +13462,110 @@ func (s *S3LogsConfig) SetStatus(v string) *S3LogsConfig {
 	return s
 }
 
-// Information about the authorization settings for AWS CodeBuild to access
-// the source code to be built.
+// Information about the S3 bucket where the raw data of a report are exported.
+type S3ReportExportConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the S3 bucket where the raw data of a report are exported.
+	Bucket *string `locationName:"bucket" min:"1" type:"string"`
+
+	// The Amazon Web Services account identifier of the owner of the Amazon S3
+	// bucket. This allows report data to be exported to an Amazon S3 bucket that
+	// is owned by an account other than the account running the build.
+	BucketOwner *string `locationName:"bucketOwner" type:"string"`
+
+	// A boolean value that specifies if the results of a report are encrypted.
+	EncryptionDisabled *bool `locationName:"encryptionDisabled" type:"boolean"`
+
+	// The encryption key for the report's encrypted raw data.
+	EncryptionKey *string `locationName:"encryptionKey" min:"1" type:"string"`
+
+	// The type of build output artifact to create. Valid values include:
+	//
+	//    * NONE: CodeBuild creates the raw data in the output bucket. This is the
+	//    default if packaging is not specified.
+	//
+	//    * ZIP: CodeBuild creates a ZIP file with the raw data in the output bucket.
+	Packaging *string `locationName:"packaging" type:"string" enum:"ReportPackagingType"`
+
+	// The path to the exported report's raw data results.
+	Path *string `locationName:"path" type:"string"`
+}
+
+// String returns the string representation.
 //
-// This information is for the AWS CodeBuild console's use only. Your code should
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3ReportExportConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s S3ReportExportConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3ReportExportConfig) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "S3ReportExportConfig"}
+	if s.Bucket != nil && len(*s.Bucket) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Bucket", 1))
+	}
+	if s.EncryptionKey != nil && len(*s.EncryptionKey) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("EncryptionKey", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBucket sets the Bucket field's value.
+func (s *S3ReportExportConfig) SetBucket(v string) *S3ReportExportConfig {
+	s.Bucket = &v
+	return s
+}
+
+// SetBucketOwner sets the BucketOwner field's value.
+func (s *S3ReportExportConfig) SetBucketOwner(v string) *S3ReportExportConfig {
+	s.BucketOwner = &v
+	return s
+}
+
+// SetEncryptionDisabled sets the EncryptionDisabled field's value.
+func (s *S3ReportExportConfig) SetEncryptionDisabled(v bool) *S3ReportExportConfig {
+	s.EncryptionDisabled = &v
+	return s
+}
+
+// SetEncryptionKey sets the EncryptionKey field's value.
+func (s *S3ReportExportConfig) SetEncryptionKey(v string) *S3ReportExportConfig {
+	s.EncryptionKey = &v
+	return s
+}
+
+// SetPackaging sets the Packaging field's value.
+func (s *S3ReportExportConfig) SetPackaging(v string) *S3ReportExportConfig {
+	s.Packaging = &v
+	return s
+}
+
+// SetPath sets the Path field's value.
+func (s *S3ReportExportConfig) SetPath(v string) *S3ReportExportConfig {
+	s.Path = &v
+	return s
+}
+
+// Information about the authorization settings for CodeBuild to access the
+// source code to be built.
+//
+// This information is for the CodeBuild console's use only. Your code should
 // not get or set this information directly.
 type SourceAuth struct {
 	_ struct{} `type:"structure"`
@@ -4951,6 +13573,7 @@ type SourceAuth struct {
 	// The resource value that applies to the specified authorization type.
 	Resource *string `locationName:"resource" type:"string"`
 
+	//
 	// This data type is deprecated and is no longer accurate or used.
 	//
 	// The authorization type to use. The only valid value is OAUTH, which represents
@@ -4960,12 +13583,20 @@ type SourceAuth struct {
 	Type *string `locationName:"type" type:"string" required:"true" enum:"SourceAuthType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SourceAuth) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SourceAuth) GoString() string {
 	return s.String()
 }
@@ -5012,12 +13643,20 @@ type SourceCredentialsInfo struct {
 	ServerType *string `locationName:"serverType" type:"string" enum:"ServerType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SourceCredentialsInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SourceCredentialsInfo) GoString() string {
 	return s.String()
 }
@@ -5040,6 +13679,546 @@ func (s *SourceCredentialsInfo) SetServerType(v string) *SourceCredentialsInfo {
 	return s
 }
 
+type StartBuildBatchInput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of ProjectArtifacts objects that contains information about the
+	// build output artifact overrides for the build project.
+	ArtifactsOverride *ProjectArtifacts `locationName:"artifactsOverride" type:"structure"`
+
+	// A BuildBatchConfigOverride object that contains batch build configuration
+	// overrides.
+	BuildBatchConfigOverride *ProjectBuildBatchConfig `locationName:"buildBatchConfigOverride" type:"structure"`
+
+	// Overrides the build timeout specified in the batch build project.
+	BuildTimeoutInMinutesOverride *int64 `locationName:"buildTimeoutInMinutesOverride" min:"5" type:"integer"`
+
+	// A buildspec file declaration that overrides, for this build only, the latest
+	// one already defined in the build project.
+	//
+	// If this value is set, it can be either an inline buildspec definition, the
+	// path to an alternate buildspec file relative to the value of the built-in
+	// CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The
+	// bucket must be in the same Amazon Web Services Region as the build project.
+	// Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml).
+	// If this value is not provided or is set to an empty string, the source code
+	// must contain a buildspec file in its root directory. For more information,
+	// see Buildspec File Name and Storage Location (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage).
+	BuildspecOverride *string `locationName:"buildspecOverride" type:"string"`
+
+	// A ProjectCache object that specifies cache overrides.
+	CacheOverride *ProjectCache `locationName:"cacheOverride" type:"structure"`
+
+	// The name of a certificate for this batch build that overrides the one specified
+	// in the batch build project.
+	CertificateOverride *string `locationName:"certificateOverride" type:"string"`
+
+	// The name of a compute type for this batch build that overrides the one specified
+	// in the batch build project.
+	ComputeTypeOverride *string `locationName:"computeTypeOverride" type:"string" enum:"ComputeType"`
+
+	// Specifies if session debugging is enabled for this batch build. For more
+	// information, see Viewing a running build in Session Manager (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
+	// Batch session debugging is not supported for matrix batch builds.
+	DebugSessionEnabled *bool `locationName:"debugSessionEnabled" type:"boolean"`
+
+	// The Key Management Service customer master key (CMK) that overrides the one
+	// specified in the batch build project. The CMK key encrypts the build output
+	// artifacts.
+	//
+	// You can use a cross-account KMS key to encrypt the build output artifacts
+	// if your service role has permission to that key.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
+	// the CMK's alias (using the format alias/<alias-name>).
+	EncryptionKeyOverride *string `locationName:"encryptionKeyOverride" min:"1" type:"string"`
+
+	// A container type for this batch build that overrides the one specified in
+	// the batch build project.
+	EnvironmentTypeOverride *string `locationName:"environmentTypeOverride" type:"string" enum:"EnvironmentType"`
+
+	// An array of EnvironmentVariable objects that override, or add to, the environment
+	// variables defined in the batch build project.
+	EnvironmentVariablesOverride []*EnvironmentVariable `locationName:"environmentVariablesOverride" type:"list"`
+
+	// The user-defined depth of history, with a minimum value of 0, that overrides,
+	// for this batch build only, any previous depth of history defined in the batch
+	// build project.
+	GitCloneDepthOverride *int64 `locationName:"gitCloneDepthOverride" type:"integer"`
+
+	// A GitSubmodulesConfig object that overrides the Git submodules configuration
+	// for this batch build.
+	GitSubmodulesConfigOverride *GitSubmodulesConfig `locationName:"gitSubmodulesConfigOverride" type:"structure"`
+
+	// A unique, case sensitive identifier you provide to ensure the idempotency
+	// of the StartBuildBatch request. The token is included in the StartBuildBatch
+	// request and is valid for five minutes. If you repeat the StartBuildBatch
+	// request with the same token, but change a parameter, CodeBuild returns a
+	// parameter mismatch error.
+	IdempotencyToken *string `locationName:"idempotencyToken" type:"string"`
+
+	// The name of an image for this batch build that overrides the one specified
+	// in the batch build project.
+	ImageOverride *string `locationName:"imageOverride" min:"1" type:"string"`
+
+	// The type of credentials CodeBuild uses to pull images in your batch build.
+	// There are two valid values:
+	//
+	// CODEBUILD
+	//
+	// Specifies that CodeBuild uses its own credentials. This requires that you
+	// modify your ECR repository policy to trust CodeBuild's service principal.
+	//
+	// SERVICE_ROLE
+	//
+	// Specifies that CodeBuild uses your build project's service role.
+	//
+	// When using a cross-account or private registry image, you must use SERVICE_ROLE
+	// credentials. When using an CodeBuild curated image, you must use CODEBUILD
+	// credentials.
+	ImagePullCredentialsTypeOverride *string `locationName:"imagePullCredentialsTypeOverride" type:"string" enum:"ImagePullCredentialsType"`
+
+	// Enable this flag to override the insecure SSL setting that is specified in
+	// the batch build project. The insecure SSL setting determines whether to ignore
+	// SSL warnings while connecting to the project source code. This override applies
+	// only if the build's source is GitHub Enterprise.
+	InsecureSslOverride *bool `locationName:"insecureSslOverride" type:"boolean"`
+
+	// A LogsConfig object that override the log settings defined in the batch build
+	// project.
+	LogsConfigOverride *LogsConfig `locationName:"logsConfigOverride" type:"structure"`
+
+	// Enable this flag to override privileged mode in the batch build project.
+	PrivilegedModeOverride *bool `locationName:"privilegedModeOverride" type:"boolean"`
+
+	// The name of the project.
+	//
+	// ProjectName is a required field
+	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
+
+	// The number of minutes a batch build is allowed to be queued before it times
+	// out.
+	QueuedTimeoutInMinutesOverride *int64 `locationName:"queuedTimeoutInMinutesOverride" min:"5" type:"integer"`
+
+	// A RegistryCredential object that overrides credentials for access to a private
+	// registry.
+	RegistryCredentialOverride *RegistryCredential `locationName:"registryCredentialOverride" type:"structure"`
+
+	// Set to true to report to your source provider the status of a batch build's
+	// start and completion. If you use this option with a source provider other
+	// than GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is
+	// thrown.
+	//
+	// The status of a build triggered by a webhook is always reported to your source
+	// provider.
+	ReportBuildBatchStatusOverride *bool `locationName:"reportBuildBatchStatusOverride" type:"boolean"`
+
+	// An array of ProjectArtifacts objects that override the secondary artifacts
+	// defined in the batch build project.
+	SecondaryArtifactsOverride []*ProjectArtifacts `locationName:"secondaryArtifactsOverride" type:"list"`
+
+	// An array of ProjectSource objects that override the secondary sources defined
+	// in the batch build project.
+	SecondarySourcesOverride []*ProjectSource `locationName:"secondarySourcesOverride" type:"list"`
+
+	// An array of ProjectSourceVersion objects that override the secondary source
+	// versions in the batch build project.
+	SecondarySourcesVersionOverride []*ProjectSourceVersion `locationName:"secondarySourcesVersionOverride" type:"list"`
+
+	// The name of a service role for this batch build that overrides the one specified
+	// in the batch build project.
+	ServiceRoleOverride *string `locationName:"serviceRoleOverride" min:"1" type:"string"`
+
+	// A SourceAuth object that overrides the one defined in the batch build project.
+	// This override applies only if the build project's source is BitBucket or
+	// GitHub.
+	SourceAuthOverride *SourceAuth `locationName:"sourceAuthOverride" type:"structure"`
+
+	// A location that overrides, for this batch build, the source location defined
+	// in the batch build project.
+	SourceLocationOverride *string `locationName:"sourceLocationOverride" type:"string"`
+
+	// The source input type that overrides the source input defined in the batch
+	// build project.
+	SourceTypeOverride *string `locationName:"sourceTypeOverride" type:"string" enum:"SourceType"`
+
+	// The version of the batch build input to be built, for this build only. If
+	// not specified, the latest version is used. If specified, the contents depends
+	// on the source provider:
+	//
+	// CodeCommit
+	//
+	// The commit ID, branch, or Git tag to use.
+	//
+	// GitHub
+	//
+	// The commit ID, pull request ID, branch name, or tag name that corresponds
+	// to the version of the source code you want to build. If a pull request ID
+	// is specified, it must use the format pr/pull-request-ID (for example pr/25).
+	// If a branch name is specified, the branch's HEAD commit ID is used. If not
+	// specified, the default branch's HEAD commit ID is used.
+	//
+	// Bitbucket
+	//
+	// The commit ID, branch name, or tag name that corresponds to the version of
+	// the source code you want to build. If a branch name is specified, the branch's
+	// HEAD commit ID is used. If not specified, the default branch's HEAD commit
+	// ID is used.
+	//
+	// Amazon S3
+	//
+	// The version ID of the object that represents the build input ZIP file to
+	// use.
+	//
+	// If sourceVersion is specified at the project level, then this sourceVersion
+	// (at the build level) takes precedence.
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the CodeBuild User Guide.
+	SourceVersion *string `locationName:"sourceVersion" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartBuildBatchInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartBuildBatchInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartBuildBatchInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "StartBuildBatchInput"}
+	if s.BuildTimeoutInMinutesOverride != nil && *s.BuildTimeoutInMinutesOverride < 5 {
+		invalidParams.Add(request.NewErrParamMinValue("BuildTimeoutInMinutesOverride", 5))
+	}
+	if s.EncryptionKeyOverride != nil && len(*s.EncryptionKeyOverride) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("EncryptionKeyOverride", 1))
+	}
+	if s.ImageOverride != nil && len(*s.ImageOverride) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ImageOverride", 1))
+	}
+	if s.ProjectName == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProjectName"))
+	}
+	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProjectName", 1))
+	}
+	if s.QueuedTimeoutInMinutesOverride != nil && *s.QueuedTimeoutInMinutesOverride < 5 {
+		invalidParams.Add(request.NewErrParamMinValue("QueuedTimeoutInMinutesOverride", 5))
+	}
+	if s.ServiceRoleOverride != nil && len(*s.ServiceRoleOverride) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ServiceRoleOverride", 1))
+	}
+	if s.ArtifactsOverride != nil {
+		if err := s.ArtifactsOverride.Validate(); err != nil {
+			invalidParams.AddNested("ArtifactsOverride", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.BuildBatchConfigOverride != nil {
+		if err := s.BuildBatchConfigOverride.Validate(); err != nil {
+			invalidParams.AddNested("BuildBatchConfigOverride", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.CacheOverride != nil {
+		if err := s.CacheOverride.Validate(); err != nil {
+			invalidParams.AddNested("CacheOverride", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.EnvironmentVariablesOverride != nil {
+		for i, v := range s.EnvironmentVariablesOverride {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariablesOverride", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.GitSubmodulesConfigOverride != nil {
+		if err := s.GitSubmodulesConfigOverride.Validate(); err != nil {
+			invalidParams.AddNested("GitSubmodulesConfigOverride", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.LogsConfigOverride != nil {
+		if err := s.LogsConfigOverride.Validate(); err != nil {
+			invalidParams.AddNested("LogsConfigOverride", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.RegistryCredentialOverride != nil {
+		if err := s.RegistryCredentialOverride.Validate(); err != nil {
+			invalidParams.AddNested("RegistryCredentialOverride", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.SecondaryArtifactsOverride != nil {
+		for i, v := range s.SecondaryArtifactsOverride {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondaryArtifactsOverride", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SecondarySourcesOverride != nil {
+		for i, v := range s.SecondarySourcesOverride {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondarySourcesOverride", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SecondarySourcesVersionOverride != nil {
+		for i, v := range s.SecondarySourcesVersionOverride {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondarySourcesVersionOverride", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SourceAuthOverride != nil {
+		if err := s.SourceAuthOverride.Validate(); err != nil {
+			invalidParams.AddNested("SourceAuthOverride", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetArtifactsOverride sets the ArtifactsOverride field's value.
+func (s *StartBuildBatchInput) SetArtifactsOverride(v *ProjectArtifacts) *StartBuildBatchInput {
+	s.ArtifactsOverride = v
+	return s
+}
+
+// SetBuildBatchConfigOverride sets the BuildBatchConfigOverride field's value.
+func (s *StartBuildBatchInput) SetBuildBatchConfigOverride(v *ProjectBuildBatchConfig) *StartBuildBatchInput {
+	s.BuildBatchConfigOverride = v
+	return s
+}
+
+// SetBuildTimeoutInMinutesOverride sets the BuildTimeoutInMinutesOverride field's value.
+func (s *StartBuildBatchInput) SetBuildTimeoutInMinutesOverride(v int64) *StartBuildBatchInput {
+	s.BuildTimeoutInMinutesOverride = &v
+	return s
+}
+
+// SetBuildspecOverride sets the BuildspecOverride field's value.
+func (s *StartBuildBatchInput) SetBuildspecOverride(v string) *StartBuildBatchInput {
+	s.BuildspecOverride = &v
+	return s
+}
+
+// SetCacheOverride sets the CacheOverride field's value.
+func (s *StartBuildBatchInput) SetCacheOverride(v *ProjectCache) *StartBuildBatchInput {
+	s.CacheOverride = v
+	return s
+}
+
+// SetCertificateOverride sets the CertificateOverride field's value.
+func (s *StartBuildBatchInput) SetCertificateOverride(v string) *StartBuildBatchInput {
+	s.CertificateOverride = &v
+	return s
+}
+
+// SetComputeTypeOverride sets the ComputeTypeOverride field's value.
+func (s *StartBuildBatchInput) SetComputeTypeOverride(v string) *StartBuildBatchInput {
+	s.ComputeTypeOverride = &v
+	return s
+}
+
+// SetDebugSessionEnabled sets the DebugSessionEnabled field's value.
+func (s *StartBuildBatchInput) SetDebugSessionEnabled(v bool) *StartBuildBatchInput {
+	s.DebugSessionEnabled = &v
+	return s
+}
+
+// SetEncryptionKeyOverride sets the EncryptionKeyOverride field's value.
+func (s *StartBuildBatchInput) SetEncryptionKeyOverride(v string) *StartBuildBatchInput {
+	s.EncryptionKeyOverride = &v
+	return s
+}
+
+// SetEnvironmentTypeOverride sets the EnvironmentTypeOverride field's value.
+func (s *StartBuildBatchInput) SetEnvironmentTypeOverride(v string) *StartBuildBatchInput {
+	s.EnvironmentTypeOverride = &v
+	return s
+}
+
+// SetEnvironmentVariablesOverride sets the EnvironmentVariablesOverride field's value.
+func (s *StartBuildBatchInput) SetEnvironmentVariablesOverride(v []*EnvironmentVariable) *StartBuildBatchInput {
+	s.EnvironmentVariablesOverride = v
+	return s
+}
+
+// SetGitCloneDepthOverride sets the GitCloneDepthOverride field's value.
+func (s *StartBuildBatchInput) SetGitCloneDepthOverride(v int64) *StartBuildBatchInput {
+	s.GitCloneDepthOverride = &v
+	return s
+}
+
+// SetGitSubmodulesConfigOverride sets the GitSubmodulesConfigOverride field's value.
+func (s *StartBuildBatchInput) SetGitSubmodulesConfigOverride(v *GitSubmodulesConfig) *StartBuildBatchInput {
+	s.GitSubmodulesConfigOverride = v
+	return s
+}
+
+// SetIdempotencyToken sets the IdempotencyToken field's value.
+func (s *StartBuildBatchInput) SetIdempotencyToken(v string) *StartBuildBatchInput {
+	s.IdempotencyToken = &v
+	return s
+}
+
+// SetImageOverride sets the ImageOverride field's value.
+func (s *StartBuildBatchInput) SetImageOverride(v string) *StartBuildBatchInput {
+	s.ImageOverride = &v
+	return s
+}
+
+// SetImagePullCredentialsTypeOverride sets the ImagePullCredentialsTypeOverride field's value.
+func (s *StartBuildBatchInput) SetImagePullCredentialsTypeOverride(v string) *StartBuildBatchInput {
+	s.ImagePullCredentialsTypeOverride = &v
+	return s
+}
+
+// SetInsecureSslOverride sets the InsecureSslOverride field's value.
+func (s *StartBuildBatchInput) SetInsecureSslOverride(v bool) *StartBuildBatchInput {
+	s.InsecureSslOverride = &v
+	return s
+}
+
+// SetLogsConfigOverride sets the LogsConfigOverride field's value.
+func (s *StartBuildBatchInput) SetLogsConfigOverride(v *LogsConfig) *StartBuildBatchInput {
+	s.LogsConfigOverride = v
+	return s
+}
+
+// SetPrivilegedModeOverride sets the PrivilegedModeOverride field's value.
+func (s *StartBuildBatchInput) SetPrivilegedModeOverride(v bool) *StartBuildBatchInput {
+	s.PrivilegedModeOverride = &v
+	return s
+}
+
+// SetProjectName sets the ProjectName field's value.
+func (s *StartBuildBatchInput) SetProjectName(v string) *StartBuildBatchInput {
+	s.ProjectName = &v
+	return s
+}
+
+// SetQueuedTimeoutInMinutesOverride sets the QueuedTimeoutInMinutesOverride field's value.
+func (s *StartBuildBatchInput) SetQueuedTimeoutInMinutesOverride(v int64) *StartBuildBatchInput {
+	s.QueuedTimeoutInMinutesOverride = &v
+	return s
+}
+
+// SetRegistryCredentialOverride sets the RegistryCredentialOverride field's value.
+func (s *StartBuildBatchInput) SetRegistryCredentialOverride(v *RegistryCredential) *StartBuildBatchInput {
+	s.RegistryCredentialOverride = v
+	return s
+}
+
+// SetReportBuildBatchStatusOverride sets the ReportBuildBatchStatusOverride field's value.
+func (s *StartBuildBatchInput) SetReportBuildBatchStatusOverride(v bool) *StartBuildBatchInput {
+	s.ReportBuildBatchStatusOverride = &v
+	return s
+}
+
+// SetSecondaryArtifactsOverride sets the SecondaryArtifactsOverride field's value.
+func (s *StartBuildBatchInput) SetSecondaryArtifactsOverride(v []*ProjectArtifacts) *StartBuildBatchInput {
+	s.SecondaryArtifactsOverride = v
+	return s
+}
+
+// SetSecondarySourcesOverride sets the SecondarySourcesOverride field's value.
+func (s *StartBuildBatchInput) SetSecondarySourcesOverride(v []*ProjectSource) *StartBuildBatchInput {
+	s.SecondarySourcesOverride = v
+	return s
+}
+
+// SetSecondarySourcesVersionOverride sets the SecondarySourcesVersionOverride field's value.
+func (s *StartBuildBatchInput) SetSecondarySourcesVersionOverride(v []*ProjectSourceVersion) *StartBuildBatchInput {
+	s.SecondarySourcesVersionOverride = v
+	return s
+}
+
+// SetServiceRoleOverride sets the ServiceRoleOverride field's value.
+func (s *StartBuildBatchInput) SetServiceRoleOverride(v string) *StartBuildBatchInput {
+	s.ServiceRoleOverride = &v
+	return s
+}
+
+// SetSourceAuthOverride sets the SourceAuthOverride field's value.
+func (s *StartBuildBatchInput) SetSourceAuthOverride(v *SourceAuth) *StartBuildBatchInput {
+	s.SourceAuthOverride = v
+	return s
+}
+
+// SetSourceLocationOverride sets the SourceLocationOverride field's value.
+func (s *StartBuildBatchInput) SetSourceLocationOverride(v string) *StartBuildBatchInput {
+	s.SourceLocationOverride = &v
+	return s
+}
+
+// SetSourceTypeOverride sets the SourceTypeOverride field's value.
+func (s *StartBuildBatchInput) SetSourceTypeOverride(v string) *StartBuildBatchInput {
+	s.SourceTypeOverride = &v
+	return s
+}
+
+// SetSourceVersion sets the SourceVersion field's value.
+func (s *StartBuildBatchInput) SetSourceVersion(v string) *StartBuildBatchInput {
+	s.SourceVersion = &v
+	return s
+}
+
+type StartBuildBatchOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A BuildBatch object that contains information about the batch build.
+	BuildBatch *BuildBatch `locationName:"buildBatch" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartBuildBatchOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartBuildBatchOutput) GoString() string {
+	return s.String()
+}
+
+// SetBuildBatch sets the BuildBatch field's value.
+func (s *StartBuildBatchOutput) SetBuildBatch(v *BuildBatch) *StartBuildBatchOutput {
+	s.BuildBatch = v
+	return s
+}
+
 type StartBuildInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5047,8 +14226,22 @@ type StartBuildInput struct {
 	// ones already defined in the build project.
 	ArtifactsOverride *ProjectArtifacts `locationName:"artifactsOverride" type:"structure"`
 
-	// A build spec declaration that overrides, for this build only, the latest
+	// Contains information that defines how the build project reports the build
+	// status to the source provider. This option is only used when the source provider
+	// is GITHUB, GITHUB_ENTERPRISE, or BITBUCKET.
+	BuildStatusConfigOverride *BuildStatusConfig `locationName:"buildStatusConfigOverride" type:"structure"`
+
+	// A buildspec file declaration that overrides, for this build only, the latest
 	// one already defined in the build project.
+	//
+	// If this value is set, it can be either an inline buildspec definition, the
+	// path to an alternate buildspec file relative to the value of the built-in
+	// CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The
+	// bucket must be in the same Amazon Web Services Region as the build project.
+	// Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml).
+	// If this value is not provided or is set to an empty string, the source code
+	// must contain a buildspec file in its root directory. For more information,
+	// see Buildspec File Name and Storage Location (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage).
 	BuildspecOverride *string `locationName:"buildspecOverride" type:"string"`
 
 	// A ProjectCache object specified for this build that overrides the one defined
@@ -5063,6 +14256,20 @@ type StartBuildInput struct {
 	// in the build project.
 	ComputeTypeOverride *string `locationName:"computeTypeOverride" type:"string" enum:"ComputeType"`
 
+	// Specifies if session debugging is enabled for this build. For more information,
+	// see Viewing a running build in Session Manager (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
+	DebugSessionEnabled *bool `locationName:"debugSessionEnabled" type:"boolean"`
+
+	// The Key Management Service customer master key (CMK) that overrides the one
+	// specified in the build project. The CMK key encrypts the build output artifacts.
+	//
+	// You can use a cross-account KMS key to encrypt the build output artifacts
+	// if your service role has permission to that key.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
+	// the CMK's alias (using the format alias/<alias-name>).
+	EncryptionKeyOverride *string `locationName:"encryptionKeyOverride" min:"1" type:"string"`
+
 	// A container type for this build that overrides the one specified in the build
 	// project.
 	EnvironmentTypeOverride *string `locationName:"environmentTypeOverride" type:"string" enum:"EnvironmentType"`
@@ -5075,10 +14282,14 @@ type StartBuildInput struct {
 	// for this build only, any previous depth of history defined in the build project.
 	GitCloneDepthOverride *int64 `locationName:"gitCloneDepthOverride" type:"integer"`
 
+	// Information about the Git submodules configuration for this build of an CodeBuild
+	// build project.
+	GitSubmodulesConfigOverride *GitSubmodulesConfig `locationName:"gitSubmodulesConfigOverride" type:"structure"`
+
 	// A unique, case sensitive identifier you provide to ensure the idempotency
 	// of the StartBuild request. The token is included in the StartBuild request
-	// and is valid for 12 hours. If you repeat the StartBuild request with the
-	// same token, but change a parameter, AWS CodeBuild returns a parameter mismatch
+	// and is valid for 5 minutes. If you repeat the StartBuild request with the
+	// same token, but change a parameter, CodeBuild returns a parameter mismatch
 	// error.
 	IdempotencyToken *string `locationName:"idempotencyToken" type:"string"`
 
@@ -5086,18 +14297,20 @@ type StartBuildInput struct {
 	// build project.
 	ImageOverride *string `locationName:"imageOverride" min:"1" type:"string"`
 
-	// The type of credentials AWS CodeBuild uses to pull images in your build.
-	// There are two valid values:
+	// The type of credentials CodeBuild uses to pull images in your build. There
+	// are two valid values:
 	//
-	//    * CODEBUILD specifies that AWS CodeBuild uses its own credentials. This
-	//    requires that you modify your ECR repository policy to trust AWS CodeBuild's
-	//    service principal.
+	// CODEBUILD
 	//
-	//    * SERVICE_ROLE specifies that AWS CodeBuild uses your build project's
-	//    service role.
+	// Specifies that CodeBuild uses its own credentials. This requires that you
+	// modify your ECR repository policy to trust CodeBuild's service principal.
+	//
+	// SERVICE_ROLE
+	//
+	// Specifies that CodeBuild uses your build project's service role.
 	//
 	// When using a cross-account or private registry image, you must use SERVICE_ROLE
-	// credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD
+	// credentials. When using an CodeBuild curated image, you must use CODEBUILD
 	// credentials.
 	ImagePullCredentialsTypeOverride *string `locationName:"imagePullCredentialsTypeOverride" type:"string" enum:"ImagePullCredentialsType"`
 
@@ -5114,7 +14327,7 @@ type StartBuildInput struct {
 	// Enable this flag to override privileged mode in the build project.
 	PrivilegedModeOverride *bool `locationName:"privilegedModeOverride" type:"boolean"`
 
-	// The name of the AWS CodeBuild build project to start running a build.
+	// The name of the CodeBuild build project to start running a build.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
@@ -5128,6 +14341,15 @@ type StartBuildInput struct {
 	// Set to true to report to your source provider the status of a build's start
 	// and completion. If you use this option with a source provider other than
 	// GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is thrown.
+	//
+	// To be able to report the build status to the source provider, the user associated
+	// with the source provider must have write access to the repo. If the user
+	// does not have write access, the build status cannot be updated. For more
+	// information, see Source provider access (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html)
+	// in the CodeBuild User Guide.
+	//
+	// The status of a build triggered by a webhook is always reported to your source
+	// provider.
 	ReportBuildStatusOverride *bool `locationName:"reportBuildStatusOverride" type:"boolean"`
 
 	// An array of ProjectArtifacts objects.
@@ -5157,25 +14379,39 @@ type StartBuildInput struct {
 	// in the build project.
 	SourceTypeOverride *string `locationName:"sourceTypeOverride" type:"string" enum:"SourceType"`
 
-	// A version of the build input to be built, for this build only. If not specified,
-	// the latest version is used. If specified, must be one of:
+	// The version of the build input to be built, for this build only. If not specified,
+	// the latest version is used. If specified, the contents depends on the source
+	// provider:
 	//
-	//    * For AWS CodeCommit: the commit ID to use.
+	// CodeCommit
 	//
-	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
-	//    that corresponds to the version of the source code you want to build.
-	//    If a pull request ID is specified, it must use the format pr/pull-request-ID
-	//    (for example pr/25). If a branch name is specified, the branch's HEAD
-	//    commit ID is used. If not specified, the default branch's HEAD commit
-	//    ID is used.
+	// The commit ID, branch, or Git tag to use.
 	//
-	//    * For Bitbucket: the commit ID, branch name, or tag name that corresponds
-	//    to the version of the source code you want to build. If a branch name
-	//    is specified, the branch's HEAD commit ID is used. If not specified, the
-	//    default branch's HEAD commit ID is used.
+	// GitHub
 	//
-	//    * For Amazon Simple Storage Service (Amazon S3): the version ID of the
-	//    object that represents the build input ZIP file to use.
+	// The commit ID, pull request ID, branch name, or tag name that corresponds
+	// to the version of the source code you want to build. If a pull request ID
+	// is specified, it must use the format pr/pull-request-ID (for example pr/25).
+	// If a branch name is specified, the branch's HEAD commit ID is used. If not
+	// specified, the default branch's HEAD commit ID is used.
+	//
+	// Bitbucket
+	//
+	// The commit ID, branch name, or tag name that corresponds to the version of
+	// the source code you want to build. If a branch name is specified, the branch's
+	// HEAD commit ID is used. If not specified, the default branch's HEAD commit
+	// ID is used.
+	//
+	// Amazon S3
+	//
+	// The version ID of the object that represents the build input ZIP file to
+	// use.
+	//
+	// If sourceVersion is specified at the project level, then this sourceVersion
+	// (at the build level) takes precedence.
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the CodeBuild User Guide.
 	SourceVersion *string `locationName:"sourceVersion" type:"string"`
 
 	// The number of build timeout minutes, from 5 to 480 (8 hours), that overrides,
@@ -5183,12 +14419,20 @@ type StartBuildInput struct {
 	TimeoutInMinutesOverride *int64 `locationName:"timeoutInMinutesOverride" min:"5" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartBuildInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartBuildInput) GoString() string {
 	return s.String()
 }
@@ -5196,6 +14440,9 @@ func (s StartBuildInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartBuildInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "StartBuildInput"}
+	if s.EncryptionKeyOverride != nil && len(*s.EncryptionKeyOverride) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("EncryptionKeyOverride", 1))
+	}
 	if s.ImageOverride != nil && len(*s.ImageOverride) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("ImageOverride", 1))
 	}
@@ -5232,6 +14479,11 @@ func (s *StartBuildInput) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariablesOverride", i), err.(request.ErrInvalidParams))
 			}
+		}
+	}
+	if s.GitSubmodulesConfigOverride != nil {
+		if err := s.GitSubmodulesConfigOverride.Validate(); err != nil {
+			invalidParams.AddNested("GitSubmodulesConfigOverride", err.(request.ErrInvalidParams))
 		}
 	}
 	if s.LogsConfigOverride != nil {
@@ -5292,6 +14544,12 @@ func (s *StartBuildInput) SetArtifactsOverride(v *ProjectArtifacts) *StartBuildI
 	return s
 }
 
+// SetBuildStatusConfigOverride sets the BuildStatusConfigOverride field's value.
+func (s *StartBuildInput) SetBuildStatusConfigOverride(v *BuildStatusConfig) *StartBuildInput {
+	s.BuildStatusConfigOverride = v
+	return s
+}
+
 // SetBuildspecOverride sets the BuildspecOverride field's value.
 func (s *StartBuildInput) SetBuildspecOverride(v string) *StartBuildInput {
 	s.BuildspecOverride = &v
@@ -5316,6 +14574,18 @@ func (s *StartBuildInput) SetComputeTypeOverride(v string) *StartBuildInput {
 	return s
 }
 
+// SetDebugSessionEnabled sets the DebugSessionEnabled field's value.
+func (s *StartBuildInput) SetDebugSessionEnabled(v bool) *StartBuildInput {
+	s.DebugSessionEnabled = &v
+	return s
+}
+
+// SetEncryptionKeyOverride sets the EncryptionKeyOverride field's value.
+func (s *StartBuildInput) SetEncryptionKeyOverride(v string) *StartBuildInput {
+	s.EncryptionKeyOverride = &v
+	return s
+}
+
 // SetEnvironmentTypeOverride sets the EnvironmentTypeOverride field's value.
 func (s *StartBuildInput) SetEnvironmentTypeOverride(v string) *StartBuildInput {
 	s.EnvironmentTypeOverride = &v
@@ -5331,6 +14601,12 @@ func (s *StartBuildInput) SetEnvironmentVariablesOverride(v []*EnvironmentVariab
 // SetGitCloneDepthOverride sets the GitCloneDepthOverride field's value.
 func (s *StartBuildInput) SetGitCloneDepthOverride(v int64) *StartBuildInput {
 	s.GitCloneDepthOverride = &v
+	return s
+}
+
+// SetGitSubmodulesConfigOverride sets the GitSubmodulesConfigOverride field's value.
+func (s *StartBuildInput) SetGitSubmodulesConfigOverride(v *GitSubmodulesConfig) *StartBuildInput {
+	s.GitSubmodulesConfigOverride = v
 	return s
 }
 
@@ -5455,12 +14731,20 @@ type StartBuildOutput struct {
 	Build *Build `locationName:"build" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartBuildOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartBuildOutput) GoString() string {
 	return s.String()
 }
@@ -5468,6 +14752,86 @@ func (s StartBuildOutput) GoString() string {
 // SetBuild sets the Build field's value.
 func (s *StartBuildOutput) SetBuild(v *Build) *StartBuildOutput {
 	s.Build = v
+	return s
+}
+
+type StopBuildBatchInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the batch build to stop.
+	//
+	// Id is a required field
+	Id *string `locationName:"id" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StopBuildBatchInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StopBuildBatchInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopBuildBatchInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "StopBuildBatchInput"}
+	if s.Id == nil {
+		invalidParams.Add(request.NewErrParamRequired("Id"))
+	}
+	if s.Id != nil && len(*s.Id) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetId sets the Id field's value.
+func (s *StopBuildBatchInput) SetId(v string) *StopBuildBatchInput {
+	s.Id = &v
+	return s
+}
+
+type StopBuildBatchOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Contains information about a batch build.
+	BuildBatch *BuildBatch `locationName:"buildBatch" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StopBuildBatchOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StopBuildBatchOutput) GoString() string {
+	return s.String()
+}
+
+// SetBuildBatch sets the BuildBatch field's value.
+func (s *StopBuildBatchOutput) SetBuildBatch(v *BuildBatch) *StopBuildBatchOutput {
+	s.BuildBatch = v
 	return s
 }
 
@@ -5480,12 +14844,20 @@ type StopBuildInput struct {
 	Id *string `locationName:"id" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopBuildInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopBuildInput) GoString() string {
 	return s.String()
 }
@@ -5519,12 +14891,20 @@ type StopBuildOutput struct {
 	Build *Build `locationName:"build" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopBuildOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopBuildOutput) GoString() string {
 	return s.String()
 }
@@ -5537,7 +14917,8 @@ func (s *StopBuildOutput) SetBuild(v *Build) *StopBuildOutput {
 
 // A tag, consisting of a key and a value.
 //
-// This tag is available for use by AWS services that support tags in AWS CodeBuild.
+// This tag is available for use by Amazon Web Services services that support
+// tags in CodeBuild.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -5545,15 +14926,23 @@ type Tag struct {
 	Key *string `locationName:"key" min:"1" type:"string"`
 
 	// The tag's value.
-	Value *string `locationName:"value" min:"1" type:"string"`
+	Value *string `locationName:"value" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -5563,9 +14952,6 @@ func (s *Tag) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "Tag"}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
-	}
-	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5586,6 +14972,219 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
+// Information about a test case created using a framework such as NUnit or
+// Cucumber. A test case might be a unit test or a configuration test.
+type TestCase struct {
+	_ struct{} `type:"structure"`
+
+	// The number of nanoseconds it took to run this test case.
+	DurationInNanoSeconds *int64 `locationName:"durationInNanoSeconds" type:"long"`
+
+	// The date and time a test case expires. A test case expires 30 days after
+	// it is created. An expired test case is not available to view in CodeBuild.
+	Expired *time.Time `locationName:"expired" type:"timestamp"`
+
+	// A message associated with a test case. For example, an error message or stack
+	// trace.
+	Message *string `locationName:"message" type:"string"`
+
+	// The name of the test case.
+	Name *string `locationName:"name" type:"string"`
+
+	// A string that is applied to a series of related test cases. CodeBuild generates
+	// the prefix. The prefix depends on the framework used to generate the tests.
+	Prefix *string `locationName:"prefix" type:"string"`
+
+	// The ARN of the report to which the test case belongs.
+	ReportArn *string `locationName:"reportArn" min:"1" type:"string"`
+
+	// The status returned by the test case after it was run. Valid statuses are
+	// SUCCEEDED, FAILED, ERROR, SKIPPED, and UNKNOWN.
+	Status *string `locationName:"status" type:"string"`
+
+	// The path to the raw data file that contains the test result.
+	TestRawDataPath *string `locationName:"testRawDataPath" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TestCase) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TestCase) GoString() string {
+	return s.String()
+}
+
+// SetDurationInNanoSeconds sets the DurationInNanoSeconds field's value.
+func (s *TestCase) SetDurationInNanoSeconds(v int64) *TestCase {
+	s.DurationInNanoSeconds = &v
+	return s
+}
+
+// SetExpired sets the Expired field's value.
+func (s *TestCase) SetExpired(v time.Time) *TestCase {
+	s.Expired = &v
+	return s
+}
+
+// SetMessage sets the Message field's value.
+func (s *TestCase) SetMessage(v string) *TestCase {
+	s.Message = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *TestCase) SetName(v string) *TestCase {
+	s.Name = &v
+	return s
+}
+
+// SetPrefix sets the Prefix field's value.
+func (s *TestCase) SetPrefix(v string) *TestCase {
+	s.Prefix = &v
+	return s
+}
+
+// SetReportArn sets the ReportArn field's value.
+func (s *TestCase) SetReportArn(v string) *TestCase {
+	s.ReportArn = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *TestCase) SetStatus(v string) *TestCase {
+	s.Status = &v
+	return s
+}
+
+// SetTestRawDataPath sets the TestRawDataPath field's value.
+func (s *TestCase) SetTestRawDataPath(v string) *TestCase {
+	s.TestRawDataPath = &v
+	return s
+}
+
+// A filter used to return specific types of test cases. In order to pass the
+// filter, the report must meet all of the filter properties.
+type TestCaseFilter struct {
+	_ struct{} `type:"structure"`
+
+	// A keyword that is used to filter on the name or the prefix of the test cases.
+	// Only test cases where the keyword is a substring of the name or the prefix
+	// will be returned.
+	Keyword *string `locationName:"keyword" type:"string"`
+
+	// The status used to filter test cases. A TestCaseFilter can have one status.
+	// Valid values are:
+	//
+	//    * SUCCEEDED
+	//
+	//    * FAILED
+	//
+	//    * ERROR
+	//
+	//    * SKIPPED
+	//
+	//    * UNKNOWN
+	Status *string `locationName:"status" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TestCaseFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TestCaseFilter) GoString() string {
+	return s.String()
+}
+
+// SetKeyword sets the Keyword field's value.
+func (s *TestCaseFilter) SetKeyword(v string) *TestCaseFilter {
+	s.Keyword = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *TestCaseFilter) SetStatus(v string) *TestCaseFilter {
+	s.Status = &v
+	return s
+}
+
+// Information about a test report.
+type TestReportSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The number of nanoseconds it took to run all of the test cases in this report.
+	//
+	// DurationInNanoSeconds is a required field
+	DurationInNanoSeconds *int64 `locationName:"durationInNanoSeconds" type:"long" required:"true"`
+
+	// A map that contains the number of each type of status returned by the test
+	// results in this TestReportSummary.
+	//
+	// StatusCounts is a required field
+	StatusCounts map[string]*int64 `locationName:"statusCounts" type:"map" required:"true"`
+
+	// The number of test cases in this TestReportSummary. The total includes truncated
+	// test cases.
+	//
+	// Total is a required field
+	Total *int64 `locationName:"total" type:"integer" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TestReportSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TestReportSummary) GoString() string {
+	return s.String()
+}
+
+// SetDurationInNanoSeconds sets the DurationInNanoSeconds field's value.
+func (s *TestReportSummary) SetDurationInNanoSeconds(v int64) *TestReportSummary {
+	s.DurationInNanoSeconds = &v
+	return s
+}
+
+// SetStatusCounts sets the StatusCounts field's value.
+func (s *TestReportSummary) SetStatusCounts(v map[string]*int64) *TestReportSummary {
+	s.StatusCounts = v
+	return s
+}
+
+// SetTotal sets the Total field's value.
+func (s *TestReportSummary) SetTotal(v int64) *TestReportSummary {
+	s.Total = &v
+	return s
+}
+
 type UpdateProjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5597,28 +15196,45 @@ type UpdateProjectInput struct {
 	// build badge.
 	BadgeEnabled *bool `locationName:"badgeEnabled" type:"boolean"`
 
+	// Contains configuration information about a batch build project.
+	BuildBatchConfig *ProjectBuildBatchConfig `locationName:"buildBatchConfig" type:"structure"`
+
 	// Stores recently used information so that it can be quickly accessed at a
 	// later time.
 	Cache *ProjectCache `locationName:"cache" type:"structure"`
 
+	// The maximum number of concurrent builds that are allowed for this project.
+	//
+	// New builds are only started if the current number of builds is less than
+	// or equal to this limit. If the current build count meets this limit, new
+	// builds are throttled and are not run.
+	//
+	// To remove this limit, set this value to -1.
+	ConcurrentBuildLimit *int64 `locationName:"concurrentBuildLimit" type:"integer"`
+
 	// A new or replacement description of the build project.
 	Description *string `locationName:"description" type:"string"`
 
-	// The AWS Key Management Service (AWS KMS) customer master key (CMK) to be
-	// used for encrypting the build output artifacts.
+	// The Key Management Service customer master key (CMK) to be used for encrypting
+	// the build output artifacts.
 	//
 	// You can use a cross-account KMS key to encrypt the build output artifacts
 	// if your service role has permission to that key.
 	//
 	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
-	// the CMK's alias (using the format alias/alias-name).
+	// the CMK's alias (using the format alias/<alias-name>).
 	EncryptionKey *string `locationName:"encryptionKey" min:"1" type:"string"`
 
 	// Information to be changed about the build environment for the build project.
 	Environment *ProjectEnvironment `locationName:"environment" type:"structure"`
 
+	// An array of ProjectFileSystemLocation objects for a CodeBuild build project.
+	// A ProjectFileSystemLocation object specifies the identifier, location, mountOptions,
+	// mountPoint, and type of a file system created using Amazon Elastic File System.
+	FileSystemLocations []*ProjectFileSystemLocation `locationName:"fileSystemLocations" type:"list"`
+
 	// Information about logs for the build project. A project can create logs in
-	// Amazon CloudWatch Logs, logs in an S3 bucket, or both.
+	// CloudWatch Logs, logs in an S3 bucket, or both.
 	LogsConfig *LogsConfig `locationName:"logsConfig" type:"structure"`
 
 	// The name of the build project.
@@ -5631,41 +15247,81 @@ type UpdateProjectInput struct {
 	// The number of minutes a build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutes *int64 `locationName:"queuedTimeoutInMinutes" min:"5" type:"integer"`
 
-	// An array of ProjectSource objects.
+	// An array of ProjectArtifact objects.
 	SecondaryArtifacts []*ProjectArtifacts `locationName:"secondaryArtifacts" type:"list"`
+
+	// An array of ProjectSourceVersion objects. If secondarySourceVersions is specified
+	// at the build level, then they take over these secondarySourceVersions (at
+	// the project level).
+	SecondarySourceVersions []*ProjectSourceVersion `locationName:"secondarySourceVersions" type:"list"`
 
 	// An array of ProjectSource objects.
 	SecondarySources []*ProjectSource `locationName:"secondarySources" type:"list"`
 
-	// The replacement ARN of the AWS Identity and Access Management (IAM) role
-	// that enables AWS CodeBuild to interact with dependent AWS services on behalf
-	// of the AWS account.
+	// The replacement ARN of the IAM role that enables CodeBuild to interact with
+	// dependent Amazon Web Services services on behalf of the Amazon Web Services
+	// account.
 	ServiceRole *string `locationName:"serviceRole" min:"1" type:"string"`
 
 	// Information to be changed about the build input source code for the build
 	// project.
 	Source *ProjectSource `locationName:"source" type:"structure"`
 
-	// The replacement set of tags for this build project.
+	// A version of the build input to be built for this project. If not specified,
+	// the latest version is used. If specified, it must be one of:
 	//
-	// These tags are available for use by AWS services that support AWS CodeBuild
-	// build project tags.
+	//    * For CodeCommit: the commit ID, branch, or Git tag to use.
+	//
+	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
+	//    that corresponds to the version of the source code you want to build.
+	//    If a pull request ID is specified, it must use the format pr/pull-request-ID
+	//    (for example pr/25). If a branch name is specified, the branch's HEAD
+	//    commit ID is used. If not specified, the default branch's HEAD commit
+	//    ID is used.
+	//
+	//    * For Bitbucket: the commit ID, branch name, or tag name that corresponds
+	//    to the version of the source code you want to build. If a branch name
+	//    is specified, the branch's HEAD commit ID is used. If not specified, the
+	//    default branch's HEAD commit ID is used.
+	//
+	//    * For Amazon S3: the version ID of the object that represents the build
+	//    input ZIP file to use.
+	//
+	// If sourceVersion is specified at the build level, then that version takes
+	// precedence over this sourceVersion (at the project level).
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the CodeBuild User Guide.
+	SourceVersion *string `locationName:"sourceVersion" type:"string"`
+
+	// An updated list of tag key and value pairs associated with this build project.
+	//
+	// These tags are available for use by Amazon Web Services services that support
+	// CodeBuild build project tags.
 	Tags []*Tag `locationName:"tags" type:"list"`
 
-	// The replacement value in minutes, from 5 to 480 (8 hours), for AWS CodeBuild
+	// The replacement value in minutes, from 5 to 480 (8 hours), for CodeBuild
 	// to wait before timing out any related build that did not get marked as completed.
 	TimeoutInMinutes *int64 `locationName:"timeoutInMinutes" min:"5" type:"integer"`
 
-	// VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+	// VpcConfig enables CodeBuild to access resources in an Amazon VPC.
 	VpcConfig *VpcConfig `locationName:"vpcConfig" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProjectInput) GoString() string {
 	return s.String()
 }
@@ -5696,6 +15352,11 @@ func (s *UpdateProjectInput) Validate() error {
 			invalidParams.AddNested("Artifacts", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.BuildBatchConfig != nil {
+		if err := s.BuildBatchConfig.Validate(); err != nil {
+			invalidParams.AddNested("BuildBatchConfig", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.Cache != nil {
 		if err := s.Cache.Validate(); err != nil {
 			invalidParams.AddNested("Cache", err.(request.ErrInvalidParams))
@@ -5718,6 +15379,16 @@ func (s *UpdateProjectInput) Validate() error {
 			}
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondaryArtifacts", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SecondarySourceVersions != nil {
+		for i, v := range s.SecondarySourceVersions {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondarySourceVersions", i), err.(request.ErrInvalidParams))
 			}
 		}
 	}
@@ -5770,9 +15441,21 @@ func (s *UpdateProjectInput) SetBadgeEnabled(v bool) *UpdateProjectInput {
 	return s
 }
 
+// SetBuildBatchConfig sets the BuildBatchConfig field's value.
+func (s *UpdateProjectInput) SetBuildBatchConfig(v *ProjectBuildBatchConfig) *UpdateProjectInput {
+	s.BuildBatchConfig = v
+	return s
+}
+
 // SetCache sets the Cache field's value.
 func (s *UpdateProjectInput) SetCache(v *ProjectCache) *UpdateProjectInput {
 	s.Cache = v
+	return s
+}
+
+// SetConcurrentBuildLimit sets the ConcurrentBuildLimit field's value.
+func (s *UpdateProjectInput) SetConcurrentBuildLimit(v int64) *UpdateProjectInput {
+	s.ConcurrentBuildLimit = &v
 	return s
 }
 
@@ -5791,6 +15474,12 @@ func (s *UpdateProjectInput) SetEncryptionKey(v string) *UpdateProjectInput {
 // SetEnvironment sets the Environment field's value.
 func (s *UpdateProjectInput) SetEnvironment(v *ProjectEnvironment) *UpdateProjectInput {
 	s.Environment = v
+	return s
+}
+
+// SetFileSystemLocations sets the FileSystemLocations field's value.
+func (s *UpdateProjectInput) SetFileSystemLocations(v []*ProjectFileSystemLocation) *UpdateProjectInput {
+	s.FileSystemLocations = v
 	return s
 }
 
@@ -5818,6 +15507,12 @@ func (s *UpdateProjectInput) SetSecondaryArtifacts(v []*ProjectArtifacts) *Updat
 	return s
 }
 
+// SetSecondarySourceVersions sets the SecondarySourceVersions field's value.
+func (s *UpdateProjectInput) SetSecondarySourceVersions(v []*ProjectSourceVersion) *UpdateProjectInput {
+	s.SecondarySourceVersions = v
+	return s
+}
+
 // SetSecondarySources sets the SecondarySources field's value.
 func (s *UpdateProjectInput) SetSecondarySources(v []*ProjectSource) *UpdateProjectInput {
 	s.SecondarySources = v
@@ -5833,6 +15528,12 @@ func (s *UpdateProjectInput) SetServiceRole(v string) *UpdateProjectInput {
 // SetSource sets the Source field's value.
 func (s *UpdateProjectInput) SetSource(v *ProjectSource) *UpdateProjectInput {
 	s.Source = v
+	return s
+}
+
+// SetSourceVersion sets the SourceVersion field's value.
+func (s *UpdateProjectInput) SetSourceVersion(v string) *UpdateProjectInput {
+	s.SourceVersion = &v
 	return s
 }
 
@@ -5861,12 +15562,20 @@ type UpdateProjectOutput struct {
 	Project *Project `locationName:"project" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProjectOutput) GoString() string {
 	return s.String()
 }
@@ -5874,6 +15583,267 @@ func (s UpdateProjectOutput) GoString() string {
 // SetProject sets the Project field's value.
 func (s *UpdateProjectOutput) SetProject(v *Project) *UpdateProjectOutput {
 	s.Project = v
+	return s
+}
+
+type UpdateProjectVisibilityInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the build project.
+	//
+	// ProjectArn is a required field
+	ProjectArn *string `locationName:"projectArn" min:"1" type:"string" required:"true"`
+
+	// Specifies the visibility of the project's builds. Possible values are:
+	//
+	// PUBLIC_READ
+	//
+	// The project builds are visible to the public.
+	//
+	// PRIVATE
+	//
+	// The project builds are not visible to the public.
+	//
+	// ProjectVisibility is a required field
+	ProjectVisibility *string `locationName:"projectVisibility" type:"string" required:"true" enum:"ProjectVisibilityType"`
+
+	// The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs
+	// and Amazon S3 artifacts for the project's builds.
+	ResourceAccessRole *string `locationName:"resourceAccessRole" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProjectVisibilityInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProjectVisibilityInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateProjectVisibilityInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateProjectVisibilityInput"}
+	if s.ProjectArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProjectArn"))
+	}
+	if s.ProjectArn != nil && len(*s.ProjectArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ProjectArn", 1))
+	}
+	if s.ProjectVisibility == nil {
+		invalidParams.Add(request.NewErrParamRequired("ProjectVisibility"))
+	}
+	if s.ResourceAccessRole != nil && len(*s.ResourceAccessRole) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceAccessRole", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetProjectArn sets the ProjectArn field's value.
+func (s *UpdateProjectVisibilityInput) SetProjectArn(v string) *UpdateProjectVisibilityInput {
+	s.ProjectArn = &v
+	return s
+}
+
+// SetProjectVisibility sets the ProjectVisibility field's value.
+func (s *UpdateProjectVisibilityInput) SetProjectVisibility(v string) *UpdateProjectVisibilityInput {
+	s.ProjectVisibility = &v
+	return s
+}
+
+// SetResourceAccessRole sets the ResourceAccessRole field's value.
+func (s *UpdateProjectVisibilityInput) SetResourceAccessRole(v string) *UpdateProjectVisibilityInput {
+	s.ResourceAccessRole = &v
+	return s
+}
+
+type UpdateProjectVisibilityOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the build project.
+	ProjectArn *string `locationName:"projectArn" min:"1" type:"string"`
+
+	// Specifies the visibility of the project's builds. Possible values are:
+	//
+	// PUBLIC_READ
+	//
+	// The project builds are visible to the public.
+	//
+	// PRIVATE
+	//
+	// The project builds are not visible to the public.
+	ProjectVisibility *string `locationName:"projectVisibility" type:"string" enum:"ProjectVisibilityType"`
+
+	// Contains the project identifier used with the public build APIs.
+	PublicProjectAlias *string `locationName:"publicProjectAlias" min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProjectVisibilityOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateProjectVisibilityOutput) GoString() string {
+	return s.String()
+}
+
+// SetProjectArn sets the ProjectArn field's value.
+func (s *UpdateProjectVisibilityOutput) SetProjectArn(v string) *UpdateProjectVisibilityOutput {
+	s.ProjectArn = &v
+	return s
+}
+
+// SetProjectVisibility sets the ProjectVisibility field's value.
+func (s *UpdateProjectVisibilityOutput) SetProjectVisibility(v string) *UpdateProjectVisibilityOutput {
+	s.ProjectVisibility = &v
+	return s
+}
+
+// SetPublicProjectAlias sets the PublicProjectAlias field's value.
+func (s *UpdateProjectVisibilityOutput) SetPublicProjectAlias(v string) *UpdateProjectVisibilityOutput {
+	s.PublicProjectAlias = &v
+	return s
+}
+
+type UpdateReportGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the report group to update.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"1" type:"string" required:"true"`
+
+	// Used to specify an updated export type. Valid values are:
+	//
+	//    * S3: The report results are exported to an S3 bucket.
+	//
+	//    * NO_EXPORT: The report results are not exported.
+	ExportConfig *ReportExportConfig `locationName:"exportConfig" type:"structure"`
+
+	// An updated list of tag key and value pairs associated with this report group.
+	//
+	// These tags are available for use by Amazon Web Services services that support
+	// CodeBuild report group tags.
+	Tags []*Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateReportGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateReportGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateReportGroupInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateReportGroupInput"}
+	if s.Arn == nil {
+		invalidParams.Add(request.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Arn", 1))
+	}
+	if s.ExportConfig != nil {
+		if err := s.ExportConfig.Validate(); err != nil {
+			invalidParams.AddNested("ExportConfig", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetArn sets the Arn field's value.
+func (s *UpdateReportGroupInput) SetArn(v string) *UpdateReportGroupInput {
+	s.Arn = &v
+	return s
+}
+
+// SetExportConfig sets the ExportConfig field's value.
+func (s *UpdateReportGroupInput) SetExportConfig(v *ReportExportConfig) *UpdateReportGroupInput {
+	s.ExportConfig = v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *UpdateReportGroupInput) SetTags(v []*Tag) *UpdateReportGroupInput {
+	s.Tags = v
+	return s
+}
+
+type UpdateReportGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the updated report group.
+	ReportGroup *ReportGroup `locationName:"reportGroup" type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateReportGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateReportGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetReportGroup sets the ReportGroup field's value.
+func (s *UpdateReportGroupOutput) SetReportGroup(v *ReportGroup) *UpdateReportGroupOutput {
+	s.ReportGroup = v
 	return s
 }
 
@@ -5888,11 +15858,15 @@ type UpdateWebhookInput struct {
 	// It is recommended that you use filterGroups instead of branchFilter.
 	BranchFilter *string `locationName:"branchFilter" type:"string"`
 
+	// Specifies the type of build this webhook will trigger.
+	BuildType *string `locationName:"buildType" type:"string" enum:"WebhookBuildType"`
+
 	// An array of arrays of WebhookFilter objects used to determine if a webhook
-	// event can trigger a build. A filter group must pcontain at least one EVENTWebhookFilter.
+	// event can trigger a build. A filter group must contain at least one EVENT
+	// WebhookFilter.
 	FilterGroups [][]*WebhookFilter `locationName:"filterGroups" type:"list"`
 
-	// The name of the AWS CodeBuild project.
+	// The name of the CodeBuild project.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"2" type:"string" required:"true"`
@@ -5903,12 +15877,20 @@ type UpdateWebhookInput struct {
 	RotateSecret *bool `locationName:"rotateSecret" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateWebhookInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateWebhookInput) GoString() string {
 	return s.String()
 }
@@ -5935,6 +15917,12 @@ func (s *UpdateWebhookInput) SetBranchFilter(v string) *UpdateWebhookInput {
 	return s
 }
 
+// SetBuildType sets the BuildType field's value.
+func (s *UpdateWebhookInput) SetBuildType(v string) *UpdateWebhookInput {
+	s.BuildType = &v
+	return s
+}
+
 // SetFilterGroups sets the FilterGroups field's value.
 func (s *UpdateWebhookInput) SetFilterGroups(v [][]*WebhookFilter) *UpdateWebhookInput {
 	s.FilterGroups = v
@@ -5957,16 +15945,24 @@ type UpdateWebhookOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about a repository's webhook that is associated with a project
-	// in AWS CodeBuild.
+	// in CodeBuild.
 	Webhook *Webhook `locationName:"webhook" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateWebhookOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateWebhookOutput) GoString() string {
 	return s.String()
 }
@@ -5977,7 +15973,7 @@ func (s *UpdateWebhookOutput) SetWebhook(v *Webhook) *UpdateWebhookOutput {
 	return s
 }
 
-// Information about the VPC configuration that AWS CodeBuild accesses.
+// Information about the VPC configuration that CodeBuild accesses.
 type VpcConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -5991,12 +15987,20 @@ type VpcConfig struct {
 	VpcId *string `locationName:"vpcId" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VpcConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VpcConfig) GoString() string {
 	return s.String()
 }
@@ -6033,7 +16037,7 @@ func (s *VpcConfig) SetVpcId(v string) *VpcConfig {
 }
 
 // Information about a webhook that connects repository events to a build project
-// in AWS CodeBuild.
+// in CodeBuild.
 type Webhook struct {
 	_ struct{} `type:"structure"`
 
@@ -6044,6 +16048,9 @@ type Webhook struct {
 	//
 	// It is recommended that you use filterGroups instead of branchFilter.
 	BranchFilter *string `locationName:"branchFilter" type:"string"`
+
+	// Specifies the type of build this webhook will trigger.
+	BuildType *string `locationName:"buildType" type:"string" enum:"WebhookBuildType"`
 
 	// An array of arrays of WebhookFilter objects used to determine which webhooks
 	// are triggered. At least one WebhookFilter in the array must specify EVENT
@@ -6057,7 +16064,7 @@ type Webhook struct {
 	// modified.
 	LastModifiedSecret *time.Time `locationName:"lastModifiedSecret" type:"timestamp"`
 
-	// The AWS CodeBuild endpoint where webhook events are sent.
+	// The CodeBuild endpoint where webhook events are sent.
 	PayloadUrl *string `locationName:"payloadUrl" min:"1" type:"string"`
 
 	// The secret token of the associated repository.
@@ -6069,12 +16076,20 @@ type Webhook struct {
 	Url *string `locationName:"url" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Webhook) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Webhook) GoString() string {
 	return s.String()
 }
@@ -6082,6 +16097,12 @@ func (s Webhook) GoString() string {
 // SetBranchFilter sets the BranchFilter field's value.
 func (s *Webhook) SetBranchFilter(v string) *Webhook {
 	s.BranchFilter = &v
+	return s
+}
+
+// SetBuildType sets the BuildType field's value.
+func (s *Webhook) SetBuildType(v string) *Webhook {
+	s.BuildType = &v
 	return s
 }
 
@@ -6138,46 +16159,75 @@ type WebhookFilter struct {
 	// Pattern is a required field
 	Pattern *string `locationName:"pattern" type:"string" required:"true"`
 
-	// The type of webhook filter. There are five webhook filter types: EVENT, ACTOR_ACCOUNT_ID,
-	// HEAD_REF, BASE_REF, and FILE_PATH.
+	// The type of webhook filter. There are six webhook filter types: EVENT, ACTOR_ACCOUNT_ID,
+	// HEAD_REF, BASE_REF, FILE_PATH, and COMMIT_MESSAGE.
 	//
-	// EVENT  A webhook event triggers a build when the provided pattern matches
-	// one of four event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED,
-	// and PULL_REQUEST_REOPENED. The EVENT patterns are specified as a comma-separated
+	// EVENT
+	//
+	// A webhook event triggers a build when the provided pattern matches one of
+	// five event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_REOPENED,
+	// and PULL_REQUEST_MERGED. The EVENT patterns are specified as a comma-separated
 	// string. For example, PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters
 	// all push, pull request created, and pull request updated events.
 	//
-	//  The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only.
+	// The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only.
 	//
-	//  ACTOR_ACCOUNT_ID  A webhook event triggers a build when a GitHub, GitHub
-	// Enterprise, or Bitbucket account ID matches the regular expression pattern.
+	// ACTOR_ACCOUNT_ID
 	//
-	//  HEAD_REF  A webhook event triggers a build when the head reference matches
-	// the regular expression pattern. For example, refs/heads/branch-name and refs/tags/tag-name.
+	// A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket
+	// account ID matches the regular expression pattern.
 	//
-	//  Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise
+	// HEAD_REF
+	//
+	// A webhook event triggers a build when the head reference matches the regular
+	// expression pattern. For example, refs/heads/branch-name and refs/tags/tag-name.
+	//
+	// Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise
 	// pull request, Bitbucket push, and Bitbucket pull request events.
 	//
-	//  BASE_REF  A webhook event triggers a build when the base reference matches
-	// the regular expression pattern. For example, refs/heads/branch-name.
+	// BASE_REF
 	//
-	//  Works with pull request events only.
+	// A webhook event triggers a build when the base reference matches the regular
+	// expression pattern. For example, refs/heads/branch-name.
 	//
-	//  FILE_PATH  A webhook triggers a build when the path of a changed file matches
-	// the regular expression pattern.
+	// Works with pull request events only.
 	//
-	//  Works with GitHub and GitHub Enterprise push events only.
+	// FILE_PATH
+	//
+	// A webhook triggers a build when the path of a changed file matches the regular
+	// expression pattern.
+	//
+	// Works with GitHub and Bitbucket events push and pull requests events. Also
+	// works with GitHub Enterprise push events, but does not work with GitHub Enterprise
+	// pull request events.
+	//
+	// COMMIT_MESSAGE
+	//
+	// A webhook triggers a build when the head commit message matches the regular
+	// expression pattern.
+	//
+	// Works with GitHub and Bitbucket events push and pull requests events. Also
+	// works with GitHub Enterprise push events, but does not work with GitHub Enterprise
+	// pull request events.
 	//
 	// Type is a required field
 	Type *string `locationName:"type" type:"string" required:"true" enum:"WebhookFilterType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WebhookFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WebhookFilter) GoString() string {
 	return s.String()
 }
@@ -6208,6 +16258,14 @@ const (
 	ArtifactNamespaceBuildId = "BUILD_ID"
 )
 
+// ArtifactNamespace_Values returns all elements of the ArtifactNamespace enum
+func ArtifactNamespace_Values() []string {
+	return []string{
+		ArtifactNamespaceNone,
+		ArtifactNamespaceBuildId,
+	}
+}
+
 const (
 	// ArtifactPackagingNone is a ArtifactPackaging enum value
 	ArtifactPackagingNone = "NONE"
@@ -6215,6 +16273,14 @@ const (
 	// ArtifactPackagingZip is a ArtifactPackaging enum value
 	ArtifactPackagingZip = "ZIP"
 )
+
+// ArtifactPackaging_Values returns all elements of the ArtifactPackaging enum
+func ArtifactPackaging_Values() []string {
+	return []string{
+		ArtifactPackagingNone,
+		ArtifactPackagingZip,
+	}
+}
 
 const (
 	// ArtifactsTypeCodepipeline is a ArtifactsType enum value
@@ -6227,6 +16293,15 @@ const (
 	ArtifactsTypeNoArtifacts = "NO_ARTIFACTS"
 )
 
+// ArtifactsType_Values returns all elements of the ArtifactsType enum
+func ArtifactsType_Values() []string {
+	return []string{
+		ArtifactsTypeCodepipeline,
+		ArtifactsTypeS3,
+		ArtifactsTypeNoArtifacts,
+	}
+}
+
 const (
 	// AuthTypeOauth is a AuthType enum value
 	AuthTypeOauth = "OAUTH"
@@ -6237,6 +16312,121 @@ const (
 	// AuthTypePersonalAccessToken is a AuthType enum value
 	AuthTypePersonalAccessToken = "PERSONAL_ACCESS_TOKEN"
 )
+
+// AuthType_Values returns all elements of the AuthType enum
+func AuthType_Values() []string {
+	return []string{
+		AuthTypeOauth,
+		AuthTypeBasicAuth,
+		AuthTypePersonalAccessToken,
+	}
+}
+
+const (
+	// BatchReportModeTypeReportIndividualBuilds is a BatchReportModeType enum value
+	BatchReportModeTypeReportIndividualBuilds = "REPORT_INDIVIDUAL_BUILDS"
+
+	// BatchReportModeTypeReportAggregatedBatch is a BatchReportModeType enum value
+	BatchReportModeTypeReportAggregatedBatch = "REPORT_AGGREGATED_BATCH"
+)
+
+// BatchReportModeType_Values returns all elements of the BatchReportModeType enum
+func BatchReportModeType_Values() []string {
+	return []string{
+		BatchReportModeTypeReportIndividualBuilds,
+		BatchReportModeTypeReportAggregatedBatch,
+	}
+}
+
+// Specifies the bucket owner's access for objects that another account uploads
+// to their Amazon S3 bucket. By default, only the account that uploads the
+// objects to the bucket has access to these objects. This property allows you
+// to give the bucket owner access to these objects.
+//
+// To use this property, your CodeBuild service role must have the s3:PutBucketAcl
+// permission. This permission allows CodeBuild to modify the access control
+// list for the bucket.
+//
+// This property can be one of the following values:
+//
+// # NONE
+//
+// The bucket owner does not have access to the objects. This is the default.
+//
+// READ_ONLY
+//
+// The bucket owner has read-only access to the objects. The uploading account
+// retains ownership of the objects.
+//
+// # FULL
+//
+// The bucket owner has full access to the objects. Object ownership is determined
+// by the following criteria:
+//
+//   - If the bucket is configured with the Bucket owner preferred setting,
+//     the bucket owner owns the objects. The uploading account will have object
+//     access as specified by the bucket's policy.
+//
+//   - Otherwise, the uploading account retains ownership of the objects.
+//
+// For more information about Amazon S3 object ownership, see Controlling ownership
+// of uploaded objects using S3 Object Ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+// in the Amazon Simple Storage Service User Guide.
+const (
+	// BucketOwnerAccessNone is a BucketOwnerAccess enum value
+	BucketOwnerAccessNone = "NONE"
+
+	// BucketOwnerAccessReadOnly is a BucketOwnerAccess enum value
+	BucketOwnerAccessReadOnly = "READ_ONLY"
+
+	// BucketOwnerAccessFull is a BucketOwnerAccess enum value
+	BucketOwnerAccessFull = "FULL"
+)
+
+// BucketOwnerAccess_Values returns all elements of the BucketOwnerAccess enum
+func BucketOwnerAccess_Values() []string {
+	return []string{
+		BucketOwnerAccessNone,
+		BucketOwnerAccessReadOnly,
+		BucketOwnerAccessFull,
+	}
+}
+
+const (
+	// BuildBatchPhaseTypeSubmitted is a BuildBatchPhaseType enum value
+	BuildBatchPhaseTypeSubmitted = "SUBMITTED"
+
+	// BuildBatchPhaseTypeDownloadBatchspec is a BuildBatchPhaseType enum value
+	BuildBatchPhaseTypeDownloadBatchspec = "DOWNLOAD_BATCHSPEC"
+
+	// BuildBatchPhaseTypeInProgress is a BuildBatchPhaseType enum value
+	BuildBatchPhaseTypeInProgress = "IN_PROGRESS"
+
+	// BuildBatchPhaseTypeCombineArtifacts is a BuildBatchPhaseType enum value
+	BuildBatchPhaseTypeCombineArtifacts = "COMBINE_ARTIFACTS"
+
+	// BuildBatchPhaseTypeSucceeded is a BuildBatchPhaseType enum value
+	BuildBatchPhaseTypeSucceeded = "SUCCEEDED"
+
+	// BuildBatchPhaseTypeFailed is a BuildBatchPhaseType enum value
+	BuildBatchPhaseTypeFailed = "FAILED"
+
+	// BuildBatchPhaseTypeStopped is a BuildBatchPhaseType enum value
+	BuildBatchPhaseTypeStopped = "STOPPED"
+)
+
+// BuildBatchPhaseType_Values returns all elements of the BuildBatchPhaseType enum
+func BuildBatchPhaseType_Values() []string {
+	return []string{
+		BuildBatchPhaseTypeSubmitted,
+		BuildBatchPhaseTypeDownloadBatchspec,
+		BuildBatchPhaseTypeInProgress,
+		BuildBatchPhaseTypeCombineArtifacts,
+		BuildBatchPhaseTypeSucceeded,
+		BuildBatchPhaseTypeFailed,
+		BuildBatchPhaseTypeStopped,
+	}
+}
 
 const (
 	// BuildPhaseTypeSubmitted is a BuildPhaseType enum value
@@ -6273,13 +16463,62 @@ const (
 	BuildPhaseTypeCompleted = "COMPLETED"
 )
 
+// BuildPhaseType_Values returns all elements of the BuildPhaseType enum
+func BuildPhaseType_Values() []string {
+	return []string{
+		BuildPhaseTypeSubmitted,
+		BuildPhaseTypeQueued,
+		BuildPhaseTypeProvisioning,
+		BuildPhaseTypeDownloadSource,
+		BuildPhaseTypeInstall,
+		BuildPhaseTypePreBuild,
+		BuildPhaseTypeBuild,
+		BuildPhaseTypePostBuild,
+		BuildPhaseTypeUploadArtifacts,
+		BuildPhaseTypeFinalizing,
+		BuildPhaseTypeCompleted,
+	}
+}
+
+const (
+	// CacheModeLocalDockerLayerCache is a CacheMode enum value
+	CacheModeLocalDockerLayerCache = "LOCAL_DOCKER_LAYER_CACHE"
+
+	// CacheModeLocalSourceCache is a CacheMode enum value
+	CacheModeLocalSourceCache = "LOCAL_SOURCE_CACHE"
+
+	// CacheModeLocalCustomCache is a CacheMode enum value
+	CacheModeLocalCustomCache = "LOCAL_CUSTOM_CACHE"
+)
+
+// CacheMode_Values returns all elements of the CacheMode enum
+func CacheMode_Values() []string {
+	return []string{
+		CacheModeLocalDockerLayerCache,
+		CacheModeLocalSourceCache,
+		CacheModeLocalCustomCache,
+	}
+}
+
 const (
 	// CacheTypeNoCache is a CacheType enum value
 	CacheTypeNoCache = "NO_CACHE"
 
 	// CacheTypeS3 is a CacheType enum value
 	CacheTypeS3 = "S3"
+
+	// CacheTypeLocal is a CacheType enum value
+	CacheTypeLocal = "LOCAL"
 )
+
+// CacheType_Values returns all elements of the CacheType enum
+func CacheType_Values() []string {
+	return []string{
+		CacheTypeNoCache,
+		CacheTypeS3,
+		CacheTypeLocal,
+	}
+}
 
 const (
 	// ComputeTypeBuildGeneral1Small is a ComputeType enum value
@@ -6290,12 +16529,52 @@ const (
 
 	// ComputeTypeBuildGeneral1Large is a ComputeType enum value
 	ComputeTypeBuildGeneral1Large = "BUILD_GENERAL1_LARGE"
+
+	// ComputeTypeBuildGeneral12xlarge is a ComputeType enum value
+	ComputeTypeBuildGeneral12xlarge = "BUILD_GENERAL1_2XLARGE"
+
+	// ComputeTypeBuildLambda1gb is a ComputeType enum value
+	ComputeTypeBuildLambda1gb = "BUILD_LAMBDA_1GB"
+
+	// ComputeTypeBuildLambda2gb is a ComputeType enum value
+	ComputeTypeBuildLambda2gb = "BUILD_LAMBDA_2GB"
+
+	// ComputeTypeBuildLambda4gb is a ComputeType enum value
+	ComputeTypeBuildLambda4gb = "BUILD_LAMBDA_4GB"
+
+	// ComputeTypeBuildLambda8gb is a ComputeType enum value
+	ComputeTypeBuildLambda8gb = "BUILD_LAMBDA_8GB"
+
+	// ComputeTypeBuildLambda10gb is a ComputeType enum value
+	ComputeTypeBuildLambda10gb = "BUILD_LAMBDA_10GB"
 )
+
+// ComputeType_Values returns all elements of the ComputeType enum
+func ComputeType_Values() []string {
+	return []string{
+		ComputeTypeBuildGeneral1Small,
+		ComputeTypeBuildGeneral1Medium,
+		ComputeTypeBuildGeneral1Large,
+		ComputeTypeBuildGeneral12xlarge,
+		ComputeTypeBuildLambda1gb,
+		ComputeTypeBuildLambda2gb,
+		ComputeTypeBuildLambda4gb,
+		ComputeTypeBuildLambda8gb,
+		ComputeTypeBuildLambda10gb,
+	}
+}
 
 const (
 	// CredentialProviderTypeSecretsManager is a CredentialProviderType enum value
 	CredentialProviderTypeSecretsManager = "SECRETS_MANAGER"
 )
+
+// CredentialProviderType_Values returns all elements of the CredentialProviderType enum
+func CredentialProviderType_Values() []string {
+	return []string{
+		CredentialProviderTypeSecretsManager,
+	}
+}
 
 const (
 	// EnvironmentTypeWindowsContainer is a EnvironmentType enum value
@@ -6303,7 +16582,35 @@ const (
 
 	// EnvironmentTypeLinuxContainer is a EnvironmentType enum value
 	EnvironmentTypeLinuxContainer = "LINUX_CONTAINER"
+
+	// EnvironmentTypeLinuxGpuContainer is a EnvironmentType enum value
+	EnvironmentTypeLinuxGpuContainer = "LINUX_GPU_CONTAINER"
+
+	// EnvironmentTypeArmContainer is a EnvironmentType enum value
+	EnvironmentTypeArmContainer = "ARM_CONTAINER"
+
+	// EnvironmentTypeWindowsServer2019Container is a EnvironmentType enum value
+	EnvironmentTypeWindowsServer2019Container = "WINDOWS_SERVER_2019_CONTAINER"
+
+	// EnvironmentTypeLinuxLambdaContainer is a EnvironmentType enum value
+	EnvironmentTypeLinuxLambdaContainer = "LINUX_LAMBDA_CONTAINER"
+
+	// EnvironmentTypeArmLambdaContainer is a EnvironmentType enum value
+	EnvironmentTypeArmLambdaContainer = "ARM_LAMBDA_CONTAINER"
 )
+
+// EnvironmentType_Values returns all elements of the EnvironmentType enum
+func EnvironmentType_Values() []string {
+	return []string{
+		EnvironmentTypeWindowsContainer,
+		EnvironmentTypeLinuxContainer,
+		EnvironmentTypeLinuxGpuContainer,
+		EnvironmentTypeArmContainer,
+		EnvironmentTypeWindowsServer2019Container,
+		EnvironmentTypeLinuxLambdaContainer,
+		EnvironmentTypeArmLambdaContainer,
+	}
+}
 
 const (
 	// EnvironmentVariableTypePlaintext is a EnvironmentVariableType enum value
@@ -6311,7 +16618,31 @@ const (
 
 	// EnvironmentVariableTypeParameterStore is a EnvironmentVariableType enum value
 	EnvironmentVariableTypeParameterStore = "PARAMETER_STORE"
+
+	// EnvironmentVariableTypeSecretsManager is a EnvironmentVariableType enum value
+	EnvironmentVariableTypeSecretsManager = "SECRETS_MANAGER"
 )
+
+// EnvironmentVariableType_Values returns all elements of the EnvironmentVariableType enum
+func EnvironmentVariableType_Values() []string {
+	return []string{
+		EnvironmentVariableTypePlaintext,
+		EnvironmentVariableTypeParameterStore,
+		EnvironmentVariableTypeSecretsManager,
+	}
+}
+
+const (
+	// FileSystemTypeEfs is a FileSystemType enum value
+	FileSystemTypeEfs = "EFS"
+)
+
+// FileSystemType_Values returns all elements of the FileSystemType enum
+func FileSystemType_Values() []string {
+	return []string{
+		FileSystemTypeEfs,
+	}
+}
 
 const (
 	// ImagePullCredentialsTypeCodebuild is a ImagePullCredentialsType enum value
@@ -6320,6 +16651,14 @@ const (
 	// ImagePullCredentialsTypeServiceRole is a ImagePullCredentialsType enum value
 	ImagePullCredentialsTypeServiceRole = "SERVICE_ROLE"
 )
+
+// ImagePullCredentialsType_Values returns all elements of the ImagePullCredentialsType enum
+func ImagePullCredentialsType_Values() []string {
+	return []string{
+		ImagePullCredentialsTypeCodebuild,
+		ImagePullCredentialsTypeServiceRole,
+	}
+}
 
 const (
 	// LanguageTypeJava is a LanguageType enum value
@@ -6353,6 +16692,22 @@ const (
 	LanguageTypePhp = "PHP"
 )
 
+// LanguageType_Values returns all elements of the LanguageType enum
+func LanguageType_Values() []string {
+	return []string{
+		LanguageTypeJava,
+		LanguageTypePython,
+		LanguageTypeNodeJs,
+		LanguageTypeRuby,
+		LanguageTypeGolang,
+		LanguageTypeDocker,
+		LanguageTypeAndroid,
+		LanguageTypeDotnet,
+		LanguageTypeBase,
+		LanguageTypePhp,
+	}
+}
+
 const (
 	// LogsConfigStatusTypeEnabled is a LogsConfigStatusType enum value
 	LogsConfigStatusTypeEnabled = "ENABLED"
@@ -6360,6 +16715,14 @@ const (
 	// LogsConfigStatusTypeDisabled is a LogsConfigStatusType enum value
 	LogsConfigStatusTypeDisabled = "DISABLED"
 )
+
+// LogsConfigStatusType_Values returns all elements of the LogsConfigStatusType enum
+func LogsConfigStatusType_Values() []string {
+	return []string{
+		LogsConfigStatusTypeEnabled,
+		LogsConfigStatusTypeDisabled,
+	}
+}
 
 const (
 	// PlatformTypeDebian is a PlatformType enum value
@@ -6375,6 +16738,16 @@ const (
 	PlatformTypeWindowsServer = "WINDOWS_SERVER"
 )
 
+// PlatformType_Values returns all elements of the PlatformType enum
+func PlatformType_Values() []string {
+	return []string{
+		PlatformTypeDebian,
+		PlatformTypeAmazonLinux,
+		PlatformTypeUbuntu,
+		PlatformTypeWindowsServer,
+	}
+}
+
 const (
 	// ProjectSortByTypeName is a ProjectSortByType enum value
 	ProjectSortByTypeName = "NAME"
@@ -6385,6 +16758,228 @@ const (
 	// ProjectSortByTypeLastModifiedTime is a ProjectSortByType enum value
 	ProjectSortByTypeLastModifiedTime = "LAST_MODIFIED_TIME"
 )
+
+// ProjectSortByType_Values returns all elements of the ProjectSortByType enum
+func ProjectSortByType_Values() []string {
+	return []string{
+		ProjectSortByTypeName,
+		ProjectSortByTypeCreatedTime,
+		ProjectSortByTypeLastModifiedTime,
+	}
+}
+
+// Specifies the visibility of the project's builds. Possible values are:
+//
+// PUBLIC_READ
+//
+// The project builds are visible to the public.
+//
+// # PRIVATE
+//
+// The project builds are not visible to the public.
+const (
+	// ProjectVisibilityTypePublicRead is a ProjectVisibilityType enum value
+	ProjectVisibilityTypePublicRead = "PUBLIC_READ"
+
+	// ProjectVisibilityTypePrivate is a ProjectVisibilityType enum value
+	ProjectVisibilityTypePrivate = "PRIVATE"
+)
+
+// ProjectVisibilityType_Values returns all elements of the ProjectVisibilityType enum
+func ProjectVisibilityType_Values() []string {
+	return []string{
+		ProjectVisibilityTypePublicRead,
+		ProjectVisibilityTypePrivate,
+	}
+}
+
+const (
+	// ReportCodeCoverageSortByTypeLineCoveragePercentage is a ReportCodeCoverageSortByType enum value
+	ReportCodeCoverageSortByTypeLineCoveragePercentage = "LINE_COVERAGE_PERCENTAGE"
+
+	// ReportCodeCoverageSortByTypeFilePath is a ReportCodeCoverageSortByType enum value
+	ReportCodeCoverageSortByTypeFilePath = "FILE_PATH"
+)
+
+// ReportCodeCoverageSortByType_Values returns all elements of the ReportCodeCoverageSortByType enum
+func ReportCodeCoverageSortByType_Values() []string {
+	return []string{
+		ReportCodeCoverageSortByTypeLineCoveragePercentage,
+		ReportCodeCoverageSortByTypeFilePath,
+	}
+}
+
+const (
+	// ReportExportConfigTypeS3 is a ReportExportConfigType enum value
+	ReportExportConfigTypeS3 = "S3"
+
+	// ReportExportConfigTypeNoExport is a ReportExportConfigType enum value
+	ReportExportConfigTypeNoExport = "NO_EXPORT"
+)
+
+// ReportExportConfigType_Values returns all elements of the ReportExportConfigType enum
+func ReportExportConfigType_Values() []string {
+	return []string{
+		ReportExportConfigTypeS3,
+		ReportExportConfigTypeNoExport,
+	}
+}
+
+const (
+	// ReportGroupSortByTypeName is a ReportGroupSortByType enum value
+	ReportGroupSortByTypeName = "NAME"
+
+	// ReportGroupSortByTypeCreatedTime is a ReportGroupSortByType enum value
+	ReportGroupSortByTypeCreatedTime = "CREATED_TIME"
+
+	// ReportGroupSortByTypeLastModifiedTime is a ReportGroupSortByType enum value
+	ReportGroupSortByTypeLastModifiedTime = "LAST_MODIFIED_TIME"
+)
+
+// ReportGroupSortByType_Values returns all elements of the ReportGroupSortByType enum
+func ReportGroupSortByType_Values() []string {
+	return []string{
+		ReportGroupSortByTypeName,
+		ReportGroupSortByTypeCreatedTime,
+		ReportGroupSortByTypeLastModifiedTime,
+	}
+}
+
+const (
+	// ReportGroupStatusTypeActive is a ReportGroupStatusType enum value
+	ReportGroupStatusTypeActive = "ACTIVE"
+
+	// ReportGroupStatusTypeDeleting is a ReportGroupStatusType enum value
+	ReportGroupStatusTypeDeleting = "DELETING"
+)
+
+// ReportGroupStatusType_Values returns all elements of the ReportGroupStatusType enum
+func ReportGroupStatusType_Values() []string {
+	return []string{
+		ReportGroupStatusTypeActive,
+		ReportGroupStatusTypeDeleting,
+	}
+}
+
+const (
+	// ReportGroupTrendFieldTypePassRate is a ReportGroupTrendFieldType enum value
+	ReportGroupTrendFieldTypePassRate = "PASS_RATE"
+
+	// ReportGroupTrendFieldTypeDuration is a ReportGroupTrendFieldType enum value
+	ReportGroupTrendFieldTypeDuration = "DURATION"
+
+	// ReportGroupTrendFieldTypeTotal is a ReportGroupTrendFieldType enum value
+	ReportGroupTrendFieldTypeTotal = "TOTAL"
+
+	// ReportGroupTrendFieldTypeLineCoverage is a ReportGroupTrendFieldType enum value
+	ReportGroupTrendFieldTypeLineCoverage = "LINE_COVERAGE"
+
+	// ReportGroupTrendFieldTypeLinesCovered is a ReportGroupTrendFieldType enum value
+	ReportGroupTrendFieldTypeLinesCovered = "LINES_COVERED"
+
+	// ReportGroupTrendFieldTypeLinesMissed is a ReportGroupTrendFieldType enum value
+	ReportGroupTrendFieldTypeLinesMissed = "LINES_MISSED"
+
+	// ReportGroupTrendFieldTypeBranchCoverage is a ReportGroupTrendFieldType enum value
+	ReportGroupTrendFieldTypeBranchCoverage = "BRANCH_COVERAGE"
+
+	// ReportGroupTrendFieldTypeBranchesCovered is a ReportGroupTrendFieldType enum value
+	ReportGroupTrendFieldTypeBranchesCovered = "BRANCHES_COVERED"
+
+	// ReportGroupTrendFieldTypeBranchesMissed is a ReportGroupTrendFieldType enum value
+	ReportGroupTrendFieldTypeBranchesMissed = "BRANCHES_MISSED"
+)
+
+// ReportGroupTrendFieldType_Values returns all elements of the ReportGroupTrendFieldType enum
+func ReportGroupTrendFieldType_Values() []string {
+	return []string{
+		ReportGroupTrendFieldTypePassRate,
+		ReportGroupTrendFieldTypeDuration,
+		ReportGroupTrendFieldTypeTotal,
+		ReportGroupTrendFieldTypeLineCoverage,
+		ReportGroupTrendFieldTypeLinesCovered,
+		ReportGroupTrendFieldTypeLinesMissed,
+		ReportGroupTrendFieldTypeBranchCoverage,
+		ReportGroupTrendFieldTypeBranchesCovered,
+		ReportGroupTrendFieldTypeBranchesMissed,
+	}
+}
+
+const (
+	// ReportPackagingTypeZip is a ReportPackagingType enum value
+	ReportPackagingTypeZip = "ZIP"
+
+	// ReportPackagingTypeNone is a ReportPackagingType enum value
+	ReportPackagingTypeNone = "NONE"
+)
+
+// ReportPackagingType_Values returns all elements of the ReportPackagingType enum
+func ReportPackagingType_Values() []string {
+	return []string{
+		ReportPackagingTypeZip,
+		ReportPackagingTypeNone,
+	}
+}
+
+const (
+	// ReportStatusTypeGenerating is a ReportStatusType enum value
+	ReportStatusTypeGenerating = "GENERATING"
+
+	// ReportStatusTypeSucceeded is a ReportStatusType enum value
+	ReportStatusTypeSucceeded = "SUCCEEDED"
+
+	// ReportStatusTypeFailed is a ReportStatusType enum value
+	ReportStatusTypeFailed = "FAILED"
+
+	// ReportStatusTypeIncomplete is a ReportStatusType enum value
+	ReportStatusTypeIncomplete = "INCOMPLETE"
+
+	// ReportStatusTypeDeleting is a ReportStatusType enum value
+	ReportStatusTypeDeleting = "DELETING"
+)
+
+// ReportStatusType_Values returns all elements of the ReportStatusType enum
+func ReportStatusType_Values() []string {
+	return []string{
+		ReportStatusTypeGenerating,
+		ReportStatusTypeSucceeded,
+		ReportStatusTypeFailed,
+		ReportStatusTypeIncomplete,
+		ReportStatusTypeDeleting,
+	}
+}
+
+const (
+	// ReportTypeTest is a ReportType enum value
+	ReportTypeTest = "TEST"
+
+	// ReportTypeCodeCoverage is a ReportType enum value
+	ReportTypeCodeCoverage = "CODE_COVERAGE"
+)
+
+// ReportType_Values returns all elements of the ReportType enum
+func ReportType_Values() []string {
+	return []string{
+		ReportTypeTest,
+		ReportTypeCodeCoverage,
+	}
+}
+
+const (
+	// RetryBuildBatchTypeRetryAllBuilds is a RetryBuildBatchType enum value
+	RetryBuildBatchTypeRetryAllBuilds = "RETRY_ALL_BUILDS"
+
+	// RetryBuildBatchTypeRetryFailedBuilds is a RetryBuildBatchType enum value
+	RetryBuildBatchTypeRetryFailedBuilds = "RETRY_FAILED_BUILDS"
+)
+
+// RetryBuildBatchType_Values returns all elements of the RetryBuildBatchType enum
+func RetryBuildBatchType_Values() []string {
+	return []string{
+		RetryBuildBatchTypeRetryAllBuilds,
+		RetryBuildBatchTypeRetryFailedBuilds,
+	}
+}
 
 const (
 	// ServerTypeGithub is a ServerType enum value
@@ -6397,6 +16992,31 @@ const (
 	ServerTypeGithubEnterprise = "GITHUB_ENTERPRISE"
 )
 
+// ServerType_Values returns all elements of the ServerType enum
+func ServerType_Values() []string {
+	return []string{
+		ServerTypeGithub,
+		ServerTypeBitbucket,
+		ServerTypeGithubEnterprise,
+	}
+}
+
+const (
+	// SharedResourceSortByTypeArn is a SharedResourceSortByType enum value
+	SharedResourceSortByTypeArn = "ARN"
+
+	// SharedResourceSortByTypeModifiedTime is a SharedResourceSortByType enum value
+	SharedResourceSortByTypeModifiedTime = "MODIFIED_TIME"
+)
+
+// SharedResourceSortByType_Values returns all elements of the SharedResourceSortByType enum
+func SharedResourceSortByType_Values() []string {
+	return []string{
+		SharedResourceSortByTypeArn,
+		SharedResourceSortByTypeModifiedTime,
+	}
+}
+
 const (
 	// SortOrderTypeAscending is a SortOrderType enum value
 	SortOrderTypeAscending = "ASCENDING"
@@ -6405,10 +17025,25 @@ const (
 	SortOrderTypeDescending = "DESCENDING"
 )
 
+// SortOrderType_Values returns all elements of the SortOrderType enum
+func SortOrderType_Values() []string {
+	return []string{
+		SortOrderTypeAscending,
+		SortOrderTypeDescending,
+	}
+}
+
 const (
 	// SourceAuthTypeOauth is a SourceAuthType enum value
 	SourceAuthTypeOauth = "OAUTH"
 )
+
+// SourceAuthType_Values returns all elements of the SourceAuthType enum
+func SourceAuthType_Values() []string {
+	return []string{
+		SourceAuthTypeOauth,
+	}
+}
 
 const (
 	// SourceTypeCodecommit is a SourceType enum value
@@ -6433,6 +17068,19 @@ const (
 	SourceTypeNoSource = "NO_SOURCE"
 )
 
+// SourceType_Values returns all elements of the SourceType enum
+func SourceType_Values() []string {
+	return []string{
+		SourceTypeCodecommit,
+		SourceTypeCodepipeline,
+		SourceTypeGithub,
+		SourceTypeS3,
+		SourceTypeBitbucket,
+		SourceTypeGithubEnterprise,
+		SourceTypeNoSource,
+	}
+}
+
 const (
 	// StatusTypeSucceeded is a StatusType enum value
 	StatusTypeSucceeded = "SUCCEEDED"
@@ -6453,6 +17101,34 @@ const (
 	StatusTypeStopped = "STOPPED"
 )
 
+// StatusType_Values returns all elements of the StatusType enum
+func StatusType_Values() []string {
+	return []string{
+		StatusTypeSucceeded,
+		StatusTypeFailed,
+		StatusTypeFault,
+		StatusTypeTimedOut,
+		StatusTypeInProgress,
+		StatusTypeStopped,
+	}
+}
+
+const (
+	// WebhookBuildTypeBuild is a WebhookBuildType enum value
+	WebhookBuildTypeBuild = "BUILD"
+
+	// WebhookBuildTypeBuildBatch is a WebhookBuildType enum value
+	WebhookBuildTypeBuildBatch = "BUILD_BATCH"
+)
+
+// WebhookBuildType_Values returns all elements of the WebhookBuildType enum
+func WebhookBuildType_Values() []string {
+	return []string{
+		WebhookBuildTypeBuild,
+		WebhookBuildTypeBuildBatch,
+	}
+}
+
 const (
 	// WebhookFilterTypeEvent is a WebhookFilterType enum value
 	WebhookFilterTypeEvent = "EVENT"
@@ -6468,4 +17144,19 @@ const (
 
 	// WebhookFilterTypeFilePath is a WebhookFilterType enum value
 	WebhookFilterTypeFilePath = "FILE_PATH"
+
+	// WebhookFilterTypeCommitMessage is a WebhookFilterType enum value
+	WebhookFilterTypeCommitMessage = "COMMIT_MESSAGE"
 )
+
+// WebhookFilterType_Values returns all elements of the WebhookFilterType enum
+func WebhookFilterType_Values() []string {
+	return []string{
+		WebhookFilterTypeEvent,
+		WebhookFilterTypeBaseRef,
+		WebhookFilterTypeHeadRef,
+		WebhookFilterTypeActorAccountId,
+		WebhookFilterTypeFilePath,
+		WebhookFilterTypeCommitMessage,
+	}
+}

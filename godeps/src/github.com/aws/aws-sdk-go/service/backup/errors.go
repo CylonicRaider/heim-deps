@@ -2,6 +2,10 @@
 
 package backup
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAlreadyExistsException for service response error code
@@ -10,11 +14,18 @@ const (
 	// The required resource already exists.
 	ErrCodeAlreadyExistsException = "AlreadyExistsException"
 
+	// ErrCodeConflictException for service response error code
+	// "ConflictException".
+	//
+	// Backup can't perform the action that you requested until it finishes performing
+	// a previous action. Try again later.
+	ErrCodeConflictException = "ConflictException"
+
 	// ErrCodeDependencyFailureException for service response error code
 	// "DependencyFailureException".
 	//
-	// A dependent AWS service or resource returned an error to the AWS Backup service,
-	// and the action cannot be completed.
+	// A dependent Amazon Web Services service or resource returned an error to
+	// the Backup service, and the action cannot be completed.
 	ErrCodeDependencyFailureException = "DependencyFailureException"
 
 	// ErrCodeInvalidParameterValueException for service response error code
@@ -30,6 +41,13 @@ const (
 	// Indicates that something is wrong with the input to the request. For example,
 	// a parameter is of the wrong type.
 	ErrCodeInvalidRequestException = "InvalidRequestException"
+
+	// ErrCodeInvalidResourceStateException for service response error code
+	// "InvalidResourceStateException".
+	//
+	// Backup is already performing an action on this recovery point. It can't perform
+	// the action you requested until the first action finishes. Try again later.
+	ErrCodeInvalidResourceStateException = "InvalidResourceStateException"
 
 	// ErrCodeLimitExceededException for service response error code
 	// "LimitExceededException".
@@ -56,3 +74,16 @@ const (
 	// The request failed due to a temporary failure of the server.
 	ErrCodeServiceUnavailableException = "ServiceUnavailableException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AlreadyExistsException":         newErrorAlreadyExistsException,
+	"ConflictException":              newErrorConflictException,
+	"DependencyFailureException":     newErrorDependencyFailureException,
+	"InvalidParameterValueException": newErrorInvalidParameterValueException,
+	"InvalidRequestException":        newErrorInvalidRequestException,
+	"InvalidResourceStateException":  newErrorInvalidResourceStateException,
+	"LimitExceededException":         newErrorLimitExceededException,
+	"MissingParameterValueException": newErrorMissingParameterValueException,
+	"ResourceNotFoundException":      newErrorResourceNotFoundException,
+	"ServiceUnavailableException":    newErrorServiceUnavailableException,
+}

@@ -26,6 +26,24 @@ const (
 	// User already has a DB cluster with the given identifier.
 	ErrCodeDBClusterAlreadyExistsFault = "DBClusterAlreadyExistsFault"
 
+	// ErrCodeDBClusterEndpointAlreadyExistsFault for service response error code
+	// "DBClusterEndpointAlreadyExistsFault".
+	//
+	// The specified custom endpoint cannot be created because it already exists.
+	ErrCodeDBClusterEndpointAlreadyExistsFault = "DBClusterEndpointAlreadyExistsFault"
+
+	// ErrCodeDBClusterEndpointNotFoundFault for service response error code
+	// "DBClusterEndpointNotFoundFault".
+	//
+	// The specified custom endpoint doesn't exist.
+	ErrCodeDBClusterEndpointNotFoundFault = "DBClusterEndpointNotFoundFault"
+
+	// ErrCodeDBClusterEndpointQuotaExceededFault for service response error code
+	// "DBClusterEndpointQuotaExceededFault".
+	//
+	// The cluster already has the maximum number of custom endpoints.
+	ErrCodeDBClusterEndpointQuotaExceededFault = "DBClusterEndpointQuotaExceededFault"
+
 	// ErrCodeDBClusterNotFoundFault for service response error code
 	// "DBClusterNotFoundFault".
 	//
@@ -174,7 +192,30 @@ const (
 
 	// ErrCodeEventSubscriptionQuotaExceededFault for service response error code
 	// "EventSubscriptionQuotaExceeded".
+	//
+	// You have exceeded the number of events you can subscribe to.
 	ErrCodeEventSubscriptionQuotaExceededFault = "EventSubscriptionQuotaExceeded"
+
+	// ErrCodeGlobalClusterAlreadyExistsFault for service response error code
+	// "GlobalClusterAlreadyExistsFault".
+	//
+	// The GlobalClusterIdentifier already exists. Choose a new global database
+	// identifier (unique name) to create a new global database cluster.
+	ErrCodeGlobalClusterAlreadyExistsFault = "GlobalClusterAlreadyExistsFault"
+
+	// ErrCodeGlobalClusterNotFoundFault for service response error code
+	// "GlobalClusterNotFoundFault".
+	//
+	// The GlobalClusterIdentifier doesn't refer to an existing global database
+	// cluster.
+	ErrCodeGlobalClusterNotFoundFault = "GlobalClusterNotFoundFault"
+
+	// ErrCodeGlobalClusterQuotaExceededFault for service response error code
+	// "GlobalClusterQuotaExceededFault".
+	//
+	// The number of global database clusters for this account is already at the
+	// maximum allowed.
+	ErrCodeGlobalClusterQuotaExceededFault = "GlobalClusterQuotaExceededFault"
 
 	// ErrCodeInstanceQuotaExceededFault for service response error code
 	// "InstanceQuotaExceeded".
@@ -202,6 +243,13 @@ const (
 	// able to resolve this error by updating your subnet group to use different
 	// Availability Zones that have more storage available.
 	ErrCodeInsufficientStorageClusterCapacityFault = "InsufficientStorageClusterCapacity"
+
+	// ErrCodeInvalidDBClusterEndpointStateFault for service response error code
+	// "InvalidDBClusterEndpointStateFault".
+	//
+	// The requested operation cannot be performed on the endpoint while the endpoint
+	// is in this state.
+	ErrCodeInvalidDBClusterEndpointStateFault = "InvalidDBClusterEndpointStateFault"
 
 	// ErrCodeInvalidDBClusterSnapshotStateFault for service response error code
 	// "InvalidDBClusterSnapshotStateFault".
@@ -255,7 +303,16 @@ const (
 
 	// ErrCodeInvalidEventSubscriptionStateFault for service response error code
 	// "InvalidEventSubscriptionState".
+	//
+	// The event subscription is in an invalid state.
 	ErrCodeInvalidEventSubscriptionStateFault = "InvalidEventSubscriptionState"
+
+	// ErrCodeInvalidGlobalClusterStateFault for service response error code
+	// "InvalidGlobalClusterStateFault".
+	//
+	// The global cluster is in an invalid state and can't perform the requested
+	// operation.
+	ErrCodeInvalidGlobalClusterStateFault = "InvalidGlobalClusterStateFault"
 
 	// ErrCodeInvalidRestoreFault for service response error code
 	// "InvalidRestoreFault".
@@ -285,6 +342,8 @@ const (
 
 	// ErrCodeOptionGroupNotFoundFault for service response error code
 	// "OptionGroupNotFoundFault".
+	//
+	// The designated option group could not be found.
 	ErrCodeOptionGroupNotFoundFault = "OptionGroupNotFoundFault"
 
 	// ErrCodeProvisionedIopsNotAvailableInAZFault for service response error code
@@ -301,14 +360,20 @@ const (
 
 	// ErrCodeSNSInvalidTopicFault for service response error code
 	// "SNSInvalidTopic".
+	//
+	// The SNS topic is invalid.
 	ErrCodeSNSInvalidTopicFault = "SNSInvalidTopic"
 
 	// ErrCodeSNSNoAuthorizationFault for service response error code
 	// "SNSNoAuthorization".
+	//
+	// There is no SNS authorization.
 	ErrCodeSNSNoAuthorizationFault = "SNSNoAuthorization"
 
 	// ErrCodeSNSTopicArnNotFoundFault for service response error code
 	// "SNSTopicArnNotFound".
+	//
+	// The ARN of the SNS topic could not be found.
 	ErrCodeSNSTopicArnNotFoundFault = "SNSTopicArnNotFound"
 
 	// ErrCodeSharedSnapshotQuotaExceededFault for service response error code
@@ -326,6 +391,8 @@ const (
 
 	// ErrCodeSourceNotFoundFault for service response error code
 	// "SourceNotFound".
+	//
+	// The source could not be found.
 	ErrCodeSourceNotFoundFault = "SourceNotFound"
 
 	// ErrCodeStorageQuotaExceededFault for service response error code
@@ -349,13 +416,19 @@ const (
 
 	// ErrCodeSubscriptionAlreadyExistFault for service response error code
 	// "SubscriptionAlreadyExist".
+	//
+	// This subscription already exists.
 	ErrCodeSubscriptionAlreadyExistFault = "SubscriptionAlreadyExist"
 
 	// ErrCodeSubscriptionCategoryNotFoundFault for service response error code
 	// "SubscriptionCategoryNotFound".
+	//
+	// The designated subscription category could not be found.
 	ErrCodeSubscriptionCategoryNotFoundFault = "SubscriptionCategoryNotFound"
 
 	// ErrCodeSubscriptionNotFoundFault for service response error code
 	// "SubscriptionNotFound".
+	//
+	// The designated subscription could not be found.
 	ErrCodeSubscriptionNotFoundFault = "SubscriptionNotFound"
 )

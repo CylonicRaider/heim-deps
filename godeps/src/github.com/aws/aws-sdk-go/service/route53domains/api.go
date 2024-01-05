@@ -13,6 +13,319 @@ import (
 	"github.com/aws/aws-sdk-go/private/protocol/jsonrpc"
 )
 
+const opAcceptDomainTransferFromAnotherAwsAccount = "AcceptDomainTransferFromAnotherAwsAccount"
+
+// AcceptDomainTransferFromAnotherAwsAccountRequest generates a "aws/request.Request" representing the
+// client's request for the AcceptDomainTransferFromAnotherAwsAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AcceptDomainTransferFromAnotherAwsAccount for more information on using the AcceptDomainTransferFromAnotherAwsAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AcceptDomainTransferFromAnotherAwsAccountRequest method.
+//	req, resp := client.AcceptDomainTransferFromAnotherAwsAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/AcceptDomainTransferFromAnotherAwsAccount
+func (c *Route53Domains) AcceptDomainTransferFromAnotherAwsAccountRequest(input *AcceptDomainTransferFromAnotherAwsAccountInput) (req *request.Request, output *AcceptDomainTransferFromAnotherAwsAccountOutput) {
+	op := &request.Operation{
+		Name:       opAcceptDomainTransferFromAnotherAwsAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AcceptDomainTransferFromAnotherAwsAccountInput{}
+	}
+
+	output = &AcceptDomainTransferFromAnotherAwsAccountOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// AcceptDomainTransferFromAnotherAwsAccount API operation for Amazon Route 53 Domains.
+//
+// Accepts the transfer of a domain from another Amazon Web Services account
+// to the currentAmazon Web Services account. You initiate a transfer between
+// Amazon Web Services accounts using TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
+//
+// If you use the CLI command at accept-domain-transfer-from-another-aws-account
+// (https://docs.aws.amazon.com/cli/latest/reference/route53domains/accept-domain-transfer-from-another-aws-account.html),
+// use JSON format as input instead of text because otherwise CLI will throw
+// an error from domain transfer input that includes single quotes.
+//
+// Use either ListOperations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
+// or GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// to determine whether the operation succeeded. GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// provides additional information, for example, Domain Transfer from Aws Account
+// 111122223333 has been cancelled.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation AcceptDomainTransferFromAnotherAwsAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - DomainLimitExceeded
+//     The number of domains has exceeded the allowed threshold for the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/AcceptDomainTransferFromAnotherAwsAccount
+func (c *Route53Domains) AcceptDomainTransferFromAnotherAwsAccount(input *AcceptDomainTransferFromAnotherAwsAccountInput) (*AcceptDomainTransferFromAnotherAwsAccountOutput, error) {
+	req, out := c.AcceptDomainTransferFromAnotherAwsAccountRequest(input)
+	return out, req.Send()
+}
+
+// AcceptDomainTransferFromAnotherAwsAccountWithContext is the same as AcceptDomainTransferFromAnotherAwsAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AcceptDomainTransferFromAnotherAwsAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) AcceptDomainTransferFromAnotherAwsAccountWithContext(ctx aws.Context, input *AcceptDomainTransferFromAnotherAwsAccountInput, opts ...request.Option) (*AcceptDomainTransferFromAnotherAwsAccountOutput, error) {
+	req, out := c.AcceptDomainTransferFromAnotherAwsAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opAssociateDelegationSignerToDomain = "AssociateDelegationSignerToDomain"
+
+// AssociateDelegationSignerToDomainRequest generates a "aws/request.Request" representing the
+// client's request for the AssociateDelegationSignerToDomain operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AssociateDelegationSignerToDomain for more information on using the AssociateDelegationSignerToDomain
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AssociateDelegationSignerToDomainRequest method.
+//	req, resp := client.AssociateDelegationSignerToDomainRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/AssociateDelegationSignerToDomain
+func (c *Route53Domains) AssociateDelegationSignerToDomainRequest(input *AssociateDelegationSignerToDomainInput) (req *request.Request, output *AssociateDelegationSignerToDomainOutput) {
+	op := &request.Operation{
+		Name:       opAssociateDelegationSignerToDomain,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateDelegationSignerToDomainInput{}
+	}
+
+	output = &AssociateDelegationSignerToDomainOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// AssociateDelegationSignerToDomain API operation for Amazon Route 53 Domains.
+//
+// Creates a delegation signer (DS) record in the registry zone for this domain
+// name.
+//
+// Note that creating DS record at the registry impacts DNSSEC validation of
+// your DNS records. This action may render your domain name unavailable on
+// the internet if the steps are completed in the wrong order, or with incorrect
+// timing. For more information about DNSSEC signing, see Configuring DNSSEC
+// signing (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html)
+// in the Route 53 developer guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation AssociateDelegationSignerToDomain for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
+//
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+//   - DnssecLimitExceeded
+//     This error is returned if you call AssociateDelegationSignerToDomain when
+//     the specified domain has reached the maximum number of DS records. You can't
+//     add any additional DS records unless you delete an existing one first.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/AssociateDelegationSignerToDomain
+func (c *Route53Domains) AssociateDelegationSignerToDomain(input *AssociateDelegationSignerToDomainInput) (*AssociateDelegationSignerToDomainOutput, error) {
+	req, out := c.AssociateDelegationSignerToDomainRequest(input)
+	return out, req.Send()
+}
+
+// AssociateDelegationSignerToDomainWithContext is the same as AssociateDelegationSignerToDomain with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AssociateDelegationSignerToDomain for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) AssociateDelegationSignerToDomainWithContext(ctx aws.Context, input *AssociateDelegationSignerToDomainInput, opts ...request.Option) (*AssociateDelegationSignerToDomainOutput, error) {
+	req, out := c.AssociateDelegationSignerToDomainRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opCancelDomainTransferToAnotherAwsAccount = "CancelDomainTransferToAnotherAwsAccount"
+
+// CancelDomainTransferToAnotherAwsAccountRequest generates a "aws/request.Request" representing the
+// client's request for the CancelDomainTransferToAnotherAwsAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CancelDomainTransferToAnotherAwsAccount for more information on using the CancelDomainTransferToAnotherAwsAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CancelDomainTransferToAnotherAwsAccountRequest method.
+//	req, resp := client.CancelDomainTransferToAnotherAwsAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CancelDomainTransferToAnotherAwsAccount
+func (c *Route53Domains) CancelDomainTransferToAnotherAwsAccountRequest(input *CancelDomainTransferToAnotherAwsAccountInput) (req *request.Request, output *CancelDomainTransferToAnotherAwsAccountOutput) {
+	op := &request.Operation{
+		Name:       opCancelDomainTransferToAnotherAwsAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CancelDomainTransferToAnotherAwsAccountInput{}
+	}
+
+	output = &CancelDomainTransferToAnotherAwsAccountOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CancelDomainTransferToAnotherAwsAccount API operation for Amazon Route 53 Domains.
+//
+// Cancels the transfer of a domain from the current Amazon Web Services account
+// to another Amazon Web Services account. You initiate a transfer betweenAmazon
+// Web Services accounts using TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
+//
+// You must cancel the transfer before the other Amazon Web Services account
+// accepts the transfer using AcceptDomainTransferFromAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html).
+//
+// Use either ListOperations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
+// or GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// to determine whether the operation succeeded. GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// provides additional information, for example, Domain Transfer from Aws Account
+// 111122223333 has been cancelled.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation CancelDomainTransferToAnotherAwsAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CancelDomainTransferToAnotherAwsAccount
+func (c *Route53Domains) CancelDomainTransferToAnotherAwsAccount(input *CancelDomainTransferToAnotherAwsAccountInput) (*CancelDomainTransferToAnotherAwsAccountOutput, error) {
+	req, out := c.CancelDomainTransferToAnotherAwsAccountRequest(input)
+	return out, req.Send()
+}
+
+// CancelDomainTransferToAnotherAwsAccountWithContext is the same as CancelDomainTransferToAnotherAwsAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CancelDomainTransferToAnotherAwsAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) CancelDomainTransferToAnotherAwsAccountWithContext(ctx aws.Context, input *CancelDomainTransferToAnotherAwsAccountInput, opts ...request.Option) (*CancelDomainTransferToAnotherAwsAccountOutput, error) {
+	req, out := c.CancelDomainTransferToAnotherAwsAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCheckDomainAvailability = "CheckDomainAvailability"
 
 // CheckDomainAvailabilityRequest generates a "aws/request.Request" representing the
@@ -29,14 +342,13 @@ const opCheckDomainAvailability = "CheckDomainAvailability"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CheckDomainAvailabilityRequest method.
+//	req, resp := client.CheckDomainAvailabilityRequest(params)
 //
-//    // Example sending a request using the CheckDomainAvailabilityRequest method.
-//    req, resp := client.CheckDomainAvailabilityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainAvailability
 func (c *Route53Domains) CheckDomainAvailabilityRequest(input *CheckDomainAvailabilityInput) (req *request.Request, output *CheckDomainAvailabilityOutput) {
@@ -68,14 +380,16 @@ func (c *Route53Domains) CheckDomainAvailabilityRequest(input *CheckDomainAvaila
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation CheckDomainAvailability for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainAvailability
 func (c *Route53Domains) CheckDomainAvailability(input *CheckDomainAvailabilityInput) (*CheckDomainAvailabilityOutput, error) {
@@ -115,14 +429,13 @@ const opCheckDomainTransferability = "CheckDomainTransferability"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CheckDomainTransferabilityRequest method.
+//	req, resp := client.CheckDomainTransferabilityRequest(params)
 //
-//    // Example sending a request using the CheckDomainTransferabilityRequest method.
-//    req, resp := client.CheckDomainTransferabilityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferability
 func (c *Route53Domains) CheckDomainTransferabilityRequest(input *CheckDomainTransferabilityInput) (req *request.Request, output *CheckDomainTransferabilityOutput) {
@@ -152,14 +465,16 @@ func (c *Route53Domains) CheckDomainTransferabilityRequest(input *CheckDomainTra
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation CheckDomainTransferability for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferability
 func (c *Route53Domains) CheckDomainTransferability(input *CheckDomainTransferabilityInput) (*CheckDomainTransferabilityOutput, error) {
@@ -183,6 +498,111 @@ func (c *Route53Domains) CheckDomainTransferabilityWithContext(ctx aws.Context, 
 	return out, req.Send()
 }
 
+const opDeleteDomain = "DeleteDomain"
+
+// DeleteDomainRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteDomain operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteDomain for more information on using the DeleteDomain
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteDomainRequest method.
+//	req, resp := client.DeleteDomainRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteDomain
+func (c *Route53Domains) DeleteDomainRequest(input *DeleteDomainInput) (req *request.Request, output *DeleteDomainOutput) {
+	op := &request.Operation{
+		Name:       opDeleteDomain,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteDomainInput{}
+	}
+
+	output = &DeleteDomainOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DeleteDomain API operation for Amazon Route 53 Domains.
+//
+// This operation deletes the specified domain. This action is permanent. For
+// more information, see Deleting a domain name registration (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-delete.html).
+//
+// To transfer the domain registration to another registrar, use the transfer
+// process that’s provided by the registrar to which you want to transfer
+// the registration. Otherwise, the following apply:
+//
+// You can’t get a refund for the cost of a deleted domain registration.
+//
+// The registry for the top-level domain might hold the domain name for a brief
+// time before releasing it for other users to register (varies by registry).
+//
+// When the registration has been deleted, we'll send you a confirmation to
+// the registrant contact. The email will come from noreply@domainnameverification.net
+// or noreply@registrar.amazon.com.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation DeleteDomain for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
+//
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteDomain
+func (c *Route53Domains) DeleteDomain(input *DeleteDomainInput) (*DeleteDomainOutput, error) {
+	req, out := c.DeleteDomainRequest(input)
+	return out, req.Send()
+}
+
+// DeleteDomainWithContext is the same as DeleteDomain with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteDomain for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...request.Option) (*DeleteDomainOutput, error) {
+	req, out := c.DeleteDomainRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteTagsForDomain = "DeleteTagsForDomain"
 
 // DeleteTagsForDomainRequest generates a "aws/request.Request" representing the
@@ -199,14 +619,13 @@ const opDeleteTagsForDomain = "DeleteTagsForDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteTagsForDomainRequest method.
+//	req, resp := client.DeleteTagsForDomainRequest(params)
 //
-//    // Example sending a request using the DeleteTagsForDomainRequest method.
-//    req, resp := client.DeleteTagsForDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteTagsForDomain
 func (c *Route53Domains) DeleteTagsForDomainRequest(input *DeleteTagsForDomainInput) (req *request.Request, output *DeleteTagsForDomainOutput) {
@@ -240,18 +659,20 @@ func (c *Route53Domains) DeleteTagsForDomainRequest(input *DeleteTagsForDomainIn
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation DeleteTagsForDomain for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteTagsForDomain
 func (c *Route53Domains) DeleteTagsForDomain(input *DeleteTagsForDomainInput) (*DeleteTagsForDomainOutput, error) {
@@ -291,14 +712,13 @@ const opDisableDomainAutoRenew = "DisableDomainAutoRenew"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisableDomainAutoRenewRequest method.
+//	req, resp := client.DisableDomainAutoRenewRequest(params)
 //
-//    // Example sending a request using the DisableDomainAutoRenewRequest method.
-//    req, resp := client.DisableDomainAutoRenewRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenew
 func (c *Route53Domains) DisableDomainAutoRenewRequest(input *DisableDomainAutoRenewInput) (req *request.Request, output *DisableDomainAutoRenewOutput) {
@@ -330,14 +750,16 @@ func (c *Route53Domains) DisableDomainAutoRenewRequest(input *DisableDomainAutoR
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation DisableDomainAutoRenew for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenew
 func (c *Route53Domains) DisableDomainAutoRenew(input *DisableDomainAutoRenewInput) (*DisableDomainAutoRenewOutput, error) {
@@ -377,14 +799,13 @@ const opDisableDomainTransferLock = "DisableDomainTransferLock"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisableDomainTransferLockRequest method.
+//	req, resp := client.DisableDomainTransferLockRequest(params)
 //
-//    // Example sending a request using the DisableDomainTransferLockRequest method.
-//    req, resp := client.DisableDomainTransferLockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainTransferLock
 func (c *Route53Domains) DisableDomainTransferLockRequest(input *DisableDomainTransferLockInput) (req *request.Request, output *DisableDomainTransferLockOutput) {
@@ -420,24 +841,26 @@ func (c *Route53Domains) DisableDomainTransferLockRequest(input *DisableDomainTr
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation DisableDomainTransferLock for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The request is already in progress for the domain.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeTLDRulesViolation "TLDRulesViolation"
-//   The top-level domain does not support this operation.
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainTransferLock
 func (c *Route53Domains) DisableDomainTransferLock(input *DisableDomainTransferLockInput) (*DisableDomainTransferLockOutput, error) {
@@ -461,6 +884,102 @@ func (c *Route53Domains) DisableDomainTransferLockWithContext(ctx aws.Context, i
 	return out, req.Send()
 }
 
+const opDisassociateDelegationSignerFromDomain = "DisassociateDelegationSignerFromDomain"
+
+// DisassociateDelegationSignerFromDomainRequest generates a "aws/request.Request" representing the
+// client's request for the DisassociateDelegationSignerFromDomain operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisassociateDelegationSignerFromDomain for more information on using the DisassociateDelegationSignerFromDomain
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisassociateDelegationSignerFromDomainRequest method.
+//	req, resp := client.DisassociateDelegationSignerFromDomainRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisassociateDelegationSignerFromDomain
+func (c *Route53Domains) DisassociateDelegationSignerFromDomainRequest(input *DisassociateDelegationSignerFromDomainInput) (req *request.Request, output *DisassociateDelegationSignerFromDomainOutput) {
+	op := &request.Operation{
+		Name:       opDisassociateDelegationSignerFromDomain,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisassociateDelegationSignerFromDomainInput{}
+	}
+
+	output = &DisassociateDelegationSignerFromDomainOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DisassociateDelegationSignerFromDomain API operation for Amazon Route 53 Domains.
+//
+// Deletes a delegation signer (DS) record in the registry zone for this domain
+// name.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation DisassociateDelegationSignerFromDomain for usage and error information.
+//
+// Returned Error Types:
+//
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
+//
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisassociateDelegationSignerFromDomain
+func (c *Route53Domains) DisassociateDelegationSignerFromDomain(input *DisassociateDelegationSignerFromDomainInput) (*DisassociateDelegationSignerFromDomainOutput, error) {
+	req, out := c.DisassociateDelegationSignerFromDomainRequest(input)
+	return out, req.Send()
+}
+
+// DisassociateDelegationSignerFromDomainWithContext is the same as DisassociateDelegationSignerFromDomain with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisassociateDelegationSignerFromDomain for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) DisassociateDelegationSignerFromDomainWithContext(ctx aws.Context, input *DisassociateDelegationSignerFromDomainInput, opts ...request.Option) (*DisassociateDelegationSignerFromDomainOutput, error) {
+	req, out := c.DisassociateDelegationSignerFromDomainRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opEnableDomainAutoRenew = "EnableDomainAutoRenew"
 
 // EnableDomainAutoRenewRequest generates a "aws/request.Request" representing the
@@ -477,14 +996,13 @@ const opEnableDomainAutoRenew = "EnableDomainAutoRenew"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the EnableDomainAutoRenewRequest method.
+//	req, resp := client.EnableDomainAutoRenewRequest(params)
 //
-//    // Example sending a request using the EnableDomainAutoRenewRequest method.
-//    req, resp := client.EnableDomainAutoRenewRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainAutoRenew
 func (c *Route53Domains) EnableDomainAutoRenewRequest(input *EnableDomainAutoRenewInput) (req *request.Request, output *EnableDomainAutoRenewOutput) {
@@ -508,14 +1026,14 @@ func (c *Route53Domains) EnableDomainAutoRenewRequest(input *EnableDomainAutoRen
 //
 // This operation configures Amazon Route 53 to automatically renew the specified
 // domain before the domain registration expires. The cost of renewing your
-// domain registration is billed to your AWS account.
+// domain registration is billed to your Amazon Web Services account.
 //
 // The period during which you can renew a domain name varies by TLD. For a
-// list of TLDs and their renewal policies, see "Renewal, restoration, and deletion
-// times" (http://wiki.gandi.net/en/domains/renew#renewal_restoration_and_deletion_times)
-// on the website for our registrar associate, Gandi. Amazon Route 53 requires
-// that you renew before the end of the renewal period that is listed on the
-// Gandi website so we can complete processing before the deadline.
+// list of TLDs and their renewal policies, see Domains That You Can Register
+// with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+// in the Amazon Route 53 Developer Guide. Route 53 requires that you renew
+// before the end of the renewal period so we can complete processing before
+// the deadline.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -524,17 +1042,19 @@ func (c *Route53Domains) EnableDomainAutoRenewRequest(input *EnableDomainAutoRen
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation EnableDomainAutoRenew for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeTLDRulesViolation "TLDRulesViolation"
-//   The top-level domain does not support this operation.
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainAutoRenew
 func (c *Route53Domains) EnableDomainAutoRenew(input *EnableDomainAutoRenewInput) (*EnableDomainAutoRenewOutput, error) {
@@ -574,14 +1094,13 @@ const opEnableDomainTransferLock = "EnableDomainTransferLock"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the EnableDomainTransferLockRequest method.
+//	req, resp := client.EnableDomainTransferLockRequest(params)
 //
-//    // Example sending a request using the EnableDomainTransferLockRequest method.
-//    req, resp := client.EnableDomainTransferLockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainTransferLock
 func (c *Route53Domains) EnableDomainTransferLockRequest(input *EnableDomainTransferLockInput) (req *request.Request, output *EnableDomainTransferLockOutput) {
@@ -615,24 +1134,26 @@ func (c *Route53Domains) EnableDomainTransferLockRequest(input *EnableDomainTran
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation EnableDomainTransferLock for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The request is already in progress for the domain.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeTLDRulesViolation "TLDRulesViolation"
-//   The top-level domain does not support this operation.
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainTransferLock
 func (c *Route53Domains) EnableDomainTransferLock(input *EnableDomainTransferLockInput) (*EnableDomainTransferLockOutput, error) {
@@ -672,14 +1193,13 @@ const opGetContactReachabilityStatus = "GetContactReachabilityStatus"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetContactReachabilityStatusRequest method.
+//	req, resp := client.GetContactReachabilityStatusRequest(params)
 //
-//    // Example sending a request using the GetContactReachabilityStatusRequest method.
-//    req, resp := client.GetContactReachabilityStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetContactReachabilityStatus
 func (c *Route53Domains) GetContactReachabilityStatusRequest(input *GetContactReachabilityStatusInput) (req *request.Request, output *GetContactReachabilityStatusOutput) {
@@ -714,18 +1234,20 @@ func (c *Route53Domains) GetContactReachabilityStatusRequest(input *GetContactRe
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation GetContactReachabilityStatus for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetContactReachabilityStatus
 func (c *Route53Domains) GetContactReachabilityStatus(input *GetContactReachabilityStatusInput) (*GetContactReachabilityStatusOutput, error) {
@@ -765,14 +1287,13 @@ const opGetDomainDetail = "GetDomainDetail"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDomainDetailRequest method.
+//	req, resp := client.GetDomainDetailRequest(params)
 //
-//    // Example sending a request using the GetDomainDetailRequest method.
-//    req, resp := client.GetDomainDetailRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetail
 func (c *Route53Domains) GetDomainDetailRequest(input *GetDomainDetailInput) (req *request.Request, output *GetDomainDetailOutput) {
@@ -794,8 +1315,8 @@ func (c *Route53Domains) GetDomainDetailRequest(input *GetDomainDetailInput) (re
 // GetDomainDetail API operation for Amazon Route 53 Domains.
 //
 // This operation returns detailed information about a specified domain that
-// is associated with the current AWS account. Contact information for the domain
-// is also returned as part of the output.
+// is associated with the current Amazon Web Services account. Contact information
+// for the domain is also returned as part of the output.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -804,14 +1325,16 @@ func (c *Route53Domains) GetDomainDetailRequest(input *GetDomainDetailInput) (re
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation GetDomainDetail for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetail
 func (c *Route53Domains) GetDomainDetail(input *GetDomainDetailInput) (*GetDomainDetailOutput, error) {
@@ -851,14 +1374,13 @@ const opGetDomainSuggestions = "GetDomainSuggestions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDomainSuggestionsRequest method.
+//	req, resp := client.GetDomainSuggestionsRequest(params)
 //
-//    // Example sending a request using the GetDomainSuggestionsRequest method.
-//    req, resp := client.GetDomainSuggestionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestions
 func (c *Route53Domains) GetDomainSuggestionsRequest(input *GetDomainSuggestionsInput) (req *request.Request, output *GetDomainSuggestionsOutput) {
@@ -879,9 +1401,7 @@ func (c *Route53Domains) GetDomainSuggestionsRequest(input *GetDomainSuggestions
 
 // GetDomainSuggestions API operation for Amazon Route 53 Domains.
 //
-// The GetDomainSuggestions operation returns a list of suggested domain names
-// given a string, which can either be a domain name or simply a word or phrase
-// (without spaces).
+// The GetDomainSuggestions operation returns a list of suggested domain names.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -890,14 +1410,16 @@ func (c *Route53Domains) GetDomainSuggestionsRequest(input *GetDomainSuggestions
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation GetDomainSuggestions for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestions
 func (c *Route53Domains) GetDomainSuggestions(input *GetDomainSuggestionsInput) (*GetDomainSuggestionsOutput, error) {
@@ -937,14 +1459,13 @@ const opGetOperationDetail = "GetOperationDetail"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetOperationDetailRequest method.
+//	req, resp := client.GetOperationDetailRequest(params)
 //
-//    // Example sending a request using the GetOperationDetailRequest method.
-//    req, resp := client.GetOperationDetailRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetail
 func (c *Route53Domains) GetOperationDetailRequest(input *GetOperationDetailInput) (req *request.Request, output *GetOperationDetailOutput) {
@@ -974,11 +1495,12 @@ func (c *Route53Domains) GetOperationDetailRequest(input *GetOperationDetailInpu
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation GetOperationDetail for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetail
 func (c *Route53Domains) GetOperationDetail(input *GetOperationDetailInput) (*GetOperationDetailOutput, error) {
@@ -1018,14 +1540,13 @@ const opListDomains = "ListDomains"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDomainsRequest method.
+//	req, resp := client.ListDomainsRequest(params)
 //
-//    // Example sending a request using the ListDomainsRequest method.
-//    req, resp := client.ListDomainsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomains
 func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) (req *request.Request, output *ListDomainsOutput) {
@@ -1053,7 +1574,8 @@ func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) (req *reque
 // ListDomains API operation for Amazon Route 53 Domains.
 //
 // This operation returns all the domain names registered with Amazon Route
-// 53 for the current AWS account.
+// 53 for the current Amazon Web Services account if no filtering conditions
+// are used.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1062,11 +1584,12 @@ func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) (req *reque
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation ListDomains for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomains
 func (c *Route53Domains) ListDomains(input *ListDomainsInput) (*ListDomainsOutput, error) {
@@ -1098,15 +1621,14 @@ func (c *Route53Domains) ListDomainsWithContext(ctx aws.Context, input *ListDoma
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDomains operation.
-//    pageNum := 0
-//    err := client.ListDomainsPages(params,
-//        func(page *ListDomainsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDomains operation.
+//	pageNum := 0
+//	err := client.ListDomainsPages(params,
+//	    func(page *route53domains.ListDomainsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Route53Domains) ListDomainsPages(input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool) error {
 	return c.ListDomainsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1133,10 +1655,12 @@ func (c *Route53Domains) ListDomainsPagesWithContext(ctx aws.Context, input *Lis
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDomainsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDomainsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1156,14 +1680,13 @@ const opListOperations = "ListOperations"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListOperationsRequest method.
+//	req, resp := client.ListOperationsRequest(params)
 //
-//    // Example sending a request using the ListOperationsRequest method.
-//    req, resp := client.ListOperationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperations
 func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) (req *request.Request, output *ListOperationsOutput) {
@@ -1190,7 +1713,11 @@ func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) (req 
 
 // ListOperations API operation for Amazon Route 53 Domains.
 //
-// This operation returns the operation IDs of operations that are not yet complete.
+// Returns information about all of the operations that return an operation
+// ID and that have ever been performed on domains that were registered by the
+// current account.
+//
+// This command runs only in the us-east-1 Region.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1199,11 +1726,12 @@ func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) (req 
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation ListOperations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperations
 func (c *Route53Domains) ListOperations(input *ListOperationsInput) (*ListOperationsOutput, error) {
@@ -1235,15 +1763,14 @@ func (c *Route53Domains) ListOperationsWithContext(ctx aws.Context, input *ListO
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListOperations operation.
-//    pageNum := 0
-//    err := client.ListOperationsPages(params,
-//        func(page *ListOperationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListOperations operation.
+//	pageNum := 0
+//	err := client.ListOperationsPages(params,
+//	    func(page *route53domains.ListOperationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *Route53Domains) ListOperationsPages(input *ListOperationsInput, fn func(*ListOperationsOutput, bool) bool) error {
 	return c.ListOperationsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1270,10 +1797,165 @@ func (c *Route53Domains) ListOperationsPagesWithContext(ctx aws.Context, input *
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListOperationsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListOperationsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
+	return p.Err()
+}
+
+const opListPrices = "ListPrices"
+
+// ListPricesRequest generates a "aws/request.Request" representing the
+// client's request for the ListPrices operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListPrices for more information on using the ListPrices
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ListPricesRequest method.
+//	req, resp := client.ListPricesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListPrices
+func (c *Route53Domains) ListPricesRequest(input *ListPricesInput) (req *request.Request, output *ListPricesOutput) {
+	op := &request.Operation{
+		Name:       opListPrices,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"NextPageMarker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListPricesInput{}
+	}
+
+	output = &ListPricesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListPrices API operation for Amazon Route 53 Domains.
+//
+// Lists the following prices for either all the TLDs supported by Route 53,
+// or the specified TLD:
+//
+//   - Registration
+//
+//   - Transfer
+//
+//   - Owner change
+//
+//   - Domain renewal
+//
+//   - Domain restoration
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation ListPrices for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListPrices
+func (c *Route53Domains) ListPrices(input *ListPricesInput) (*ListPricesOutput, error) {
+	req, out := c.ListPricesRequest(input)
+	return out, req.Send()
+}
+
+// ListPricesWithContext is the same as ListPrices with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListPrices for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) ListPricesWithContext(ctx aws.Context, input *ListPricesInput, opts ...request.Option) (*ListPricesOutput, error) {
+	req, out := c.ListPricesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// ListPricesPages iterates over the pages of a ListPrices operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListPrices method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ListPrices operation.
+//	pageNum := 0
+//	err := client.ListPricesPages(params,
+//	    func(page *route53domains.ListPricesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Route53Domains) ListPricesPages(input *ListPricesInput, fn func(*ListPricesOutput, bool) bool) error {
+	return c.ListPricesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListPricesPagesWithContext same as ListPricesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) ListPricesPagesWithContext(ctx aws.Context, input *ListPricesInput, fn func(*ListPricesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ListPricesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ListPricesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ListPricesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
 	return p.Err()
 }
 
@@ -1293,14 +1975,13 @@ const opListTagsForDomain = "ListTagsForDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTagsForDomainRequest method.
+//	req, resp := client.ListTagsForDomainRequest(params)
 //
-//    // Example sending a request using the ListTagsForDomainRequest method.
-//    req, resp := client.ListTagsForDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListTagsForDomain
 func (c *Route53Domains) ListTagsForDomainRequest(input *ListTagsForDomainInput) (req *request.Request, output *ListTagsForDomainOutput) {
@@ -1334,18 +2015,20 @@ func (c *Route53Domains) ListTagsForDomainRequest(input *ListTagsForDomainInput)
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation ListTagsForDomain for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListTagsForDomain
 func (c *Route53Domains) ListTagsForDomain(input *ListTagsForDomainInput) (*ListTagsForDomainOutput, error) {
@@ -1369,6 +2052,101 @@ func (c *Route53Domains) ListTagsForDomainWithContext(ctx aws.Context, input *Li
 	return out, req.Send()
 }
 
+const opPushDomain = "PushDomain"
+
+// PushDomainRequest generates a "aws/request.Request" representing the
+// client's request for the PushDomain operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See PushDomain for more information on using the PushDomain
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the PushDomainRequest method.
+//	req, resp := client.PushDomainRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/PushDomain
+func (c *Route53Domains) PushDomainRequest(input *PushDomainInput) (req *request.Request, output *PushDomainOutput) {
+	op := &request.Operation{
+		Name:       opPushDomain,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PushDomainInput{}
+	}
+
+	output = &PushDomainOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// PushDomain API operation for Amazon Route 53 Domains.
+//
+// Moves a domain from Amazon Web Services to another registrar.
+//
+// Supported actions:
+//
+//   - Changes the IPS tags of a .uk domain, and pushes it to transit. Transit
+//     means that the domain is ready to be transferred to another registrar.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation PushDomain for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/PushDomain
+func (c *Route53Domains) PushDomain(input *PushDomainInput) (*PushDomainOutput, error) {
+	req, out := c.PushDomainRequest(input)
+	return out, req.Send()
+}
+
+// PushDomainWithContext is the same as PushDomain with the addition of
+// the ability to pass a context and additional request options.
+//
+// See PushDomain for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) PushDomainWithContext(ctx aws.Context, input *PushDomainInput, opts ...request.Option) (*PushDomainOutput, error) {
+	req, out := c.PushDomainRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opRegisterDomain = "RegisterDomain"
 
 // RegisterDomainRequest generates a "aws/request.Request" representing the
@@ -1385,14 +2163,13 @@ const opRegisterDomain = "RegisterDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RegisterDomainRequest method.
+//	req, resp := client.RegisterDomainRequest(params)
 //
-//    // Example sending a request using the RegisterDomainRequest method.
-//    req, resp := client.RegisterDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomain
 func (c *Route53Domains) RegisterDomainRequest(input *RegisterDomainInput) (req *request.Request, output *RegisterDomainOutput) {
@@ -1413,34 +2190,33 @@ func (c *Route53Domains) RegisterDomainRequest(input *RegisterDomainInput) (req 
 
 // RegisterDomain API operation for Amazon Route 53 Domains.
 //
-// This operation registers a domain. Domains are registered either by Amazon
-// Registrar (for .com, .net, and .org domains) or by our registrar associate,
-// Gandi (for all other domains). For some top-level domains (TLDs), this operation
-// requires extra parameters.
+// This operation registers a domain. For some top-level domains (TLDs), this
+// operation requires extra parameters.
 //
 // When you register a domain, Amazon Route 53 does the following:
 //
-//    * Creates a Amazon Route 53 hosted zone that has the same name as the
-//    domain. Amazon Route 53 assigns four name servers to your hosted zone
-//    and automatically updates your domain registration with the names of these
-//    name servers.
+//   - Creates a Route 53 hosted zone that has the same name as the domain.
+//     Route 53 assigns four name servers to your hosted zone and automatically
+//     updates your domain registration with the names of these name servers.
 //
-//    * Enables autorenew, so your domain registration will renew automatically
-//    each year. We'll notify you in advance of the renewal date so you can
-//    choose whether to renew the registration.
+//   - Enables auto renew, so your domain registration will renew automatically
+//     each year. We'll notify you in advance of the renewal date so you can
+//     choose whether to renew the registration.
 //
-//    * Optionally enables privacy protection, so WHOIS queries return contact
-//    information either for Amazon Registrar (for .com, .net, and .org domains)
-//    or for our registrar associate, Gandi (for all other TLDs). If you don't
-//    enable privacy protection, WHOIS queries return the information that you
-//    entered for the registrant, admin, and tech contacts.
+//   - Optionally enables privacy protection, so WHOIS queries return contact
+//     for the registrar or the phrase "REDACTED FOR PRIVACY", or "On behalf
+//     of <domain name> owner." If you don't enable privacy protection, WHOIS
+//     queries return the information that you entered for the administrative,
+//     registrant, and technical contacts. While some domains may allow different
+//     privacy settings per contact, we recommend specifying the same privacy
+//     setting for all contacts.
 //
-//    * If registration is successful, returns an operation ID that you can
-//    use to track the progress and completion of the action. If the request
-//    is not completed successfully, the domain registrant is notified by email.
+//   - If registration is successful, returns an operation ID that you can
+//     use to track the progress and completion of the action. If the request
+//     is not completed successfully, the domain registrant is notified by email.
 //
-//    * Charges your AWS account an amount based on the top-level domain. For
-//    more information, see Amazon Route 53 Pricing (http://aws.amazon.com/route53/pricing/).
+//   - Charges your Amazon Web Services account an amount based on the top-level
+//     domain. For more information, see Amazon Route 53 Pricing (http://aws.amazon.com/route53/pricing/).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1449,27 +2225,29 @@ func (c *Route53Domains) RegisterDomainRequest(input *RegisterDomainInput) (req 
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation RegisterDomain for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The request is already in progress for the domain.
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
-//   * ErrCodeTLDRulesViolation "TLDRulesViolation"
-//   The top-level domain does not support this operation.
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
 //
-//   * ErrCodeDomainLimitExceeded "DomainLimitExceeded"
-//   The number of domains has exceeded the allowed threshold for the account.
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - DomainLimitExceeded
+//     The number of domains has exceeded the allowed threshold for the account.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomain
 func (c *Route53Domains) RegisterDomain(input *RegisterDomainInput) (*RegisterDomainOutput, error) {
@@ -1493,6 +2271,103 @@ func (c *Route53Domains) RegisterDomainWithContext(ctx aws.Context, input *Regis
 	return out, req.Send()
 }
 
+const opRejectDomainTransferFromAnotherAwsAccount = "RejectDomainTransferFromAnotherAwsAccount"
+
+// RejectDomainTransferFromAnotherAwsAccountRequest generates a "aws/request.Request" representing the
+// client's request for the RejectDomainTransferFromAnotherAwsAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RejectDomainTransferFromAnotherAwsAccount for more information on using the RejectDomainTransferFromAnotherAwsAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RejectDomainTransferFromAnotherAwsAccountRequest method.
+//	req, resp := client.RejectDomainTransferFromAnotherAwsAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RejectDomainTransferFromAnotherAwsAccount
+func (c *Route53Domains) RejectDomainTransferFromAnotherAwsAccountRequest(input *RejectDomainTransferFromAnotherAwsAccountInput) (req *request.Request, output *RejectDomainTransferFromAnotherAwsAccountOutput) {
+	op := &request.Operation{
+		Name:       opRejectDomainTransferFromAnotherAwsAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RejectDomainTransferFromAnotherAwsAccountInput{}
+	}
+
+	output = &RejectDomainTransferFromAnotherAwsAccountOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// RejectDomainTransferFromAnotherAwsAccount API operation for Amazon Route 53 Domains.
+//
+// Rejects the transfer of a domain from another Amazon Web Services account
+// to the current Amazon Web Services account. You initiate a transfer betweenAmazon
+// Web Services accounts using TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
+//
+// Use either ListOperations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
+// or GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// to determine whether the operation succeeded. GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// provides additional information, for example, Domain Transfer from Aws Account
+// 111122223333 has been cancelled.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation RejectDomainTransferFromAnotherAwsAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RejectDomainTransferFromAnotherAwsAccount
+func (c *Route53Domains) RejectDomainTransferFromAnotherAwsAccount(input *RejectDomainTransferFromAnotherAwsAccountInput) (*RejectDomainTransferFromAnotherAwsAccountOutput, error) {
+	req, out := c.RejectDomainTransferFromAnotherAwsAccountRequest(input)
+	return out, req.Send()
+}
+
+// RejectDomainTransferFromAnotherAwsAccountWithContext is the same as RejectDomainTransferFromAnotherAwsAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RejectDomainTransferFromAnotherAwsAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) RejectDomainTransferFromAnotherAwsAccountWithContext(ctx aws.Context, input *RejectDomainTransferFromAnotherAwsAccountInput, opts ...request.Option) (*RejectDomainTransferFromAnotherAwsAccountOutput, error) {
+	req, out := c.RejectDomainTransferFromAnotherAwsAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opRenewDomain = "RenewDomain"
 
 // RenewDomainRequest generates a "aws/request.Request" representing the
@@ -1509,14 +2384,13 @@ const opRenewDomain = "RenewDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RenewDomainRequest method.
+//	req, resp := client.RenewDomainRequest(params)
 //
-//    // Example sending a request using the RenewDomainRequest method.
-//    req, resp := client.RenewDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomain
 func (c *Route53Domains) RenewDomainRequest(input *RenewDomainInput) (req *request.Request, output *RenewDomainOutput) {
@@ -1538,12 +2412,12 @@ func (c *Route53Domains) RenewDomainRequest(input *RenewDomainInput) (req *reque
 // RenewDomain API operation for Amazon Route 53 Domains.
 //
 // This operation renews a domain for the specified number of years. The cost
-// of renewing your domain is billed to your AWS account.
+// of renewing your domain is billed to your Amazon Web Services account.
 //
 // We recommend that you renew your domain several weeks before the expiration
 // date. Some TLD registries delete domains before the expiration date if you
 // haven't renewed far enough in advance. For more information about renewing
-// domain registration, see Renewing Registration for a Domain (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html)
+// domain registration, see Renewing Registration for a Domain (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html)
 // in the Amazon Route 53 Developer Guide.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1553,24 +2427,26 @@ func (c *Route53Domains) RenewDomainRequest(input *RenewDomainInput) (req *reque
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation RenewDomain for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The request is already in progress for the domain.
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
-//   * ErrCodeTLDRulesViolation "TLDRulesViolation"
-//   The top-level domain does not support this operation.
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomain
 func (c *Route53Domains) RenewDomain(input *RenewDomainInput) (*RenewDomainOutput, error) {
@@ -1610,14 +2486,13 @@ const opResendContactReachabilityEmail = "ResendContactReachabilityEmail"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ResendContactReachabilityEmailRequest method.
+//	req, resp := client.ResendContactReachabilityEmailRequest(params)
 //
-//    // Example sending a request using the ResendContactReachabilityEmailRequest method.
-//    req, resp := client.ResendContactReachabilityEmailRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendContactReachabilityEmail
 func (c *Route53Domains) ResendContactReachabilityEmailRequest(input *ResendContactReachabilityEmailInput) (req *request.Request, output *ResendContactReachabilityEmailOutput) {
@@ -1649,18 +2524,20 @@ func (c *Route53Domains) ResendContactReachabilityEmailRequest(input *ResendCont
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation ResendContactReachabilityEmail for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendContactReachabilityEmail
 func (c *Route53Domains) ResendContactReachabilityEmail(input *ResendContactReachabilityEmailInput) (*ResendContactReachabilityEmailOutput, error) {
@@ -1684,6 +2561,88 @@ func (c *Route53Domains) ResendContactReachabilityEmailWithContext(ctx aws.Conte
 	return out, req.Send()
 }
 
+const opResendOperationAuthorization = "ResendOperationAuthorization"
+
+// ResendOperationAuthorizationRequest generates a "aws/request.Request" representing the
+// client's request for the ResendOperationAuthorization operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ResendOperationAuthorization for more information on using the ResendOperationAuthorization
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ResendOperationAuthorizationRequest method.
+//	req, resp := client.ResendOperationAuthorizationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendOperationAuthorization
+func (c *Route53Domains) ResendOperationAuthorizationRequest(input *ResendOperationAuthorizationInput) (req *request.Request, output *ResendOperationAuthorizationOutput) {
+	op := &request.Operation{
+		Name:       opResendOperationAuthorization,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ResendOperationAuthorizationInput{}
+	}
+
+	output = &ResendOperationAuthorizationOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// ResendOperationAuthorization API operation for Amazon Route 53 Domains.
+//
+// Resend the form of authorization email for this operation.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation ResendOperationAuthorization for usage and error information.
+//
+// Returned Error Types:
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendOperationAuthorization
+func (c *Route53Domains) ResendOperationAuthorization(input *ResendOperationAuthorizationInput) (*ResendOperationAuthorizationOutput, error) {
+	req, out := c.ResendOperationAuthorizationRequest(input)
+	return out, req.Send()
+}
+
+// ResendOperationAuthorizationWithContext is the same as ResendOperationAuthorization with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ResendOperationAuthorization for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) ResendOperationAuthorizationWithContext(ctx aws.Context, input *ResendOperationAuthorizationInput, opts ...request.Option) (*ResendOperationAuthorizationOutput, error) {
+	req, out := c.ResendOperationAuthorizationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opRetrieveDomainAuthCode = "RetrieveDomainAuthCode"
 
 // RetrieveDomainAuthCodeRequest generates a "aws/request.Request" representing the
@@ -1700,14 +2659,13 @@ const opRetrieveDomainAuthCode = "RetrieveDomainAuthCode"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RetrieveDomainAuthCodeRequest method.
+//	req, resp := client.RetrieveDomainAuthCodeRequest(params)
 //
-//    // Example sending a request using the RetrieveDomainAuthCodeRequest method.
-//    req, resp := client.RetrieveDomainAuthCodeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCode
 func (c *Route53Domains) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuthCodeInput) (req *request.Request, output *RetrieveDomainAuthCodeOutput) {
@@ -1728,8 +2686,8 @@ func (c *Route53Domains) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuth
 
 // RetrieveDomainAuthCode API operation for Amazon Route 53 Domains.
 //
-// This operation returns the AuthCode for the domain. To transfer a domain
-// to another registrar, you provide this value to the new registrar.
+// This operation returns the authorization code for the domain. To transfer
+// a domain to another registrar, you provide this value to the new registrar.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1738,14 +2696,16 @@ func (c *Route53Domains) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuth
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation RetrieveDomainAuthCode for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCode
 func (c *Route53Domains) RetrieveDomainAuthCode(input *RetrieveDomainAuthCodeInput) (*RetrieveDomainAuthCodeOutput, error) {
@@ -1785,14 +2745,13 @@ const opTransferDomain = "TransferDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the TransferDomainRequest method.
+//	req, resp := client.TransferDomainRequest(params)
 //
-//    // Example sending a request using the TransferDomainRequest method.
-//    req, resp := client.TransferDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomain
 func (c *Route53Domains) TransferDomainRequest(input *TransferDomainInput) (req *request.Request, output *TransferDomainOutput) {
@@ -1813,23 +2772,28 @@ func (c *Route53Domains) TransferDomainRequest(input *TransferDomainInput) (req 
 
 // TransferDomain API operation for Amazon Route 53 Domains.
 //
-// This operation transfers a domain from another registrar to Amazon Route
-// 53. When the transfer is complete, the domain is registered either with Amazon
-// Registrar (for .com, .net, and .org domains) or with our registrar associate,
-// Gandi (for all other TLDs).
+// Transfers a domain from another registrar to Amazon Route 53.
 //
-// For transfer requirements, a detailed procedure, and information about viewing
-// the status of a domain transfer, see Transferring Registration for a Domain
-// to Amazon Route 53 (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html)
-// in the Amazon Route 53 Developer Guide.
+// For more information about transferring domains, see the following topics:
+//
+//   - For transfer requirements, a detailed procedure, and information about
+//     viewing the status of a domain that you're transferring to Route 53, see
+//     Transferring Registration for a Domain to Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html)
+//     in the Amazon Route 53 Developer Guide.
+//
+//   - For information about how to transfer a domain from one Amazon Web Services
+//     account to another, see TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
+//
+//   - For information about how to transfer a domain to another domain registrar,
+//     see Transferring a Domain from Amazon Route 53 to Another Registrar (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html)
+//     in the Amazon Route 53 Developer Guide.
 //
 // If the registrar for your domain is also the DNS service provider for the
-// domain, we highly recommend that you consider transferring your DNS service
-// to Amazon Route 53 or to another DNS service provider before you transfer
-// your registration. Some registrars provide free DNS service when you purchase
-// a domain registration. When you transfer the registration, the previous registrar
-// will not renew your domain registration and could end your DNS service at
-// any time.
+// domain, we highly recommend that you transfer your DNS service to Route 53
+// or to another DNS service provider before you transfer your registration.
+// Some registrars provide free DNS service when you purchase a domain registration.
+// When you transfer the registration, the previous registrar will not renew
+// your domain registration and could end your DNS service at any time.
 //
 // If the registrar for your domain is also the DNS service provider for the
 // domain and you don't transfer DNS service to another provider, your website,
@@ -1847,27 +2811,29 @@ func (c *Route53Domains) TransferDomainRequest(input *TransferDomainInput) (req 
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation TransferDomain for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The request is already in progress for the domain.
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
-//   * ErrCodeTLDRulesViolation "TLDRulesViolation"
-//   The top-level domain does not support this operation.
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
 //
-//   * ErrCodeDomainLimitExceeded "DomainLimitExceeded"
-//   The number of domains has exceeded the allowed threshold for the account.
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - DomainLimitExceeded
+//     The number of domains has exceeded the allowed threshold for the account.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomain
 func (c *Route53Domains) TransferDomain(input *TransferDomainInput) (*TransferDomainOutput, error) {
@@ -1891,6 +2857,124 @@ func (c *Route53Domains) TransferDomainWithContext(ctx aws.Context, input *Trans
 	return out, req.Send()
 }
 
+const opTransferDomainToAnotherAwsAccount = "TransferDomainToAnotherAwsAccount"
+
+// TransferDomainToAnotherAwsAccountRequest generates a "aws/request.Request" representing the
+// client's request for the TransferDomainToAnotherAwsAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See TransferDomainToAnotherAwsAccount for more information on using the TransferDomainToAnotherAwsAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the TransferDomainToAnotherAwsAccountRequest method.
+//	req, resp := client.TransferDomainToAnotherAwsAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainToAnotherAwsAccount
+func (c *Route53Domains) TransferDomainToAnotherAwsAccountRequest(input *TransferDomainToAnotherAwsAccountInput) (req *request.Request, output *TransferDomainToAnotherAwsAccountOutput) {
+	op := &request.Operation{
+		Name:       opTransferDomainToAnotherAwsAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TransferDomainToAnotherAwsAccountInput{}
+	}
+
+	output = &TransferDomainToAnotherAwsAccountOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// TransferDomainToAnotherAwsAccount API operation for Amazon Route 53 Domains.
+//
+// Transfers a domain from the current Amazon Web Services account to another
+// Amazon Web Services account. Note the following:
+//
+//   - The Amazon Web Services account that you're transferring the domain
+//     to must accept the transfer. If the other account doesn't accept the transfer
+//     within 3 days, we cancel the transfer. See AcceptDomainTransferFromAnotherAwsAccount
+//     (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html).
+//
+//   - You can cancel the transfer before the other account accepts it. See
+//     CancelDomainTransferToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_CancelDomainTransferToAnotherAwsAccount.html).
+//
+//   - The other account can reject the transfer. See RejectDomainTransferFromAnotherAwsAccount
+//     (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_RejectDomainTransferFromAnotherAwsAccount.html).
+//
+// When you transfer a domain from one Amazon Web Services account to another,
+// Route 53 doesn't transfer the hosted zone that is associated with the domain.
+// DNS resolution isn't affected if the domain and the hosted zone are owned
+// by separate accounts, so transferring the hosted zone is optional. For information
+// about transferring the hosted zone to another Amazon Web Services account,
+// see Migrating a Hosted Zone to a Different Amazon Web Services Account (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-migrating.html)
+// in the Amazon Route 53 Developer Guide.
+//
+// Use either ListOperations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
+// or GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// to determine whether the operation succeeded. GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// provides additional information, for example, Domain Transfer from Aws Account
+// 111122223333 has been cancelled.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Route 53 Domains's
+// API operation TransferDomainToAnotherAwsAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
+//
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainToAnotherAwsAccount
+func (c *Route53Domains) TransferDomainToAnotherAwsAccount(input *TransferDomainToAnotherAwsAccountInput) (*TransferDomainToAnotherAwsAccountOutput, error) {
+	req, out := c.TransferDomainToAnotherAwsAccountRequest(input)
+	return out, req.Send()
+}
+
+// TransferDomainToAnotherAwsAccountWithContext is the same as TransferDomainToAnotherAwsAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See TransferDomainToAnotherAwsAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) TransferDomainToAnotherAwsAccountWithContext(ctx aws.Context, input *TransferDomainToAnotherAwsAccountInput, opts ...request.Option) (*TransferDomainToAnotherAwsAccountOutput, error) {
+	req, out := c.TransferDomainToAnotherAwsAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateDomainContact = "UpdateDomainContact"
 
 // UpdateDomainContactRequest generates a "aws/request.Request" representing the
@@ -1907,14 +2991,13 @@ const opUpdateDomainContact = "UpdateDomainContact"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDomainContactRequest method.
+//	req, resp := client.UpdateDomainContactRequest(params)
 //
-//    // Example sending a request using the UpdateDomainContactRequest method.
-//    req, resp := client.UpdateDomainContactRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContact
 func (c *Route53Domains) UpdateDomainContactRequest(input *UpdateDomainContactInput) (req *request.Request, output *UpdateDomainContactOutput) {
@@ -1940,7 +3023,7 @@ func (c *Route53Domains) UpdateDomainContactRequest(input *UpdateDomainContactIn
 // or technical.
 //
 // If the update is successful, this method returns an operation ID that you
-// can use to track the progress and completion of the action. If the request
+// can use to track the progress and completion of the operation. If the request
 // is not completed successfully, the domain registrant will be notified by
 // email.
 //
@@ -1951,24 +3034,26 @@ func (c *Route53Domains) UpdateDomainContactRequest(input *UpdateDomainContactIn
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation UpdateDomainContact for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The request is already in progress for the domain.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeTLDRulesViolation "TLDRulesViolation"
-//   The top-level domain does not support this operation.
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContact
 func (c *Route53Domains) UpdateDomainContact(input *UpdateDomainContactInput) (*UpdateDomainContactOutput, error) {
@@ -2008,14 +3093,13 @@ const opUpdateDomainContactPrivacy = "UpdateDomainContactPrivacy"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDomainContactPrivacyRequest method.
+//	req, resp := client.UpdateDomainContactPrivacyRequest(params)
 //
-//    // Example sending a request using the UpdateDomainContactPrivacyRequest method.
-//    req, resp := client.UpdateDomainContactPrivacyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacy
 func (c *Route53Domains) UpdateDomainContactPrivacyRequest(input *UpdateDomainContactPrivacyInput) (req *request.Request, output *UpdateDomainContactPrivacyOutput) {
@@ -2037,16 +3121,28 @@ func (c *Route53Domains) UpdateDomainContactPrivacyRequest(input *UpdateDomainCo
 // UpdateDomainContactPrivacy API operation for Amazon Route 53 Domains.
 //
 // This operation updates the specified domain contact's privacy setting. When
-// privacy protection is enabled, contact information such as email address
-// is replaced either with contact information for Amazon Registrar (for .com,
-// .net, and .org domains) or with contact information for our registrar associate,
-// Gandi.
+// privacy protection is enabled, your contact information is replaced with
+// contact information for the registrar or with the phrase "REDACTED FOR PRIVACY",
+// or "On behalf of <domain name> owner."
+//
+// While some domains may allow different privacy settings per contact, we recommend
+// specifying the same privacy setting for all contacts.
 //
 // This operation affects only the contact information for the specified contact
-// type (registrant, administrator, or tech). If the request succeeds, Amazon
-// Route 53 returns an operation ID that you can use with GetOperationDetail
+// type (administrative, registrant, or technical). If the request succeeds,
+// Amazon Route 53 returns an operation ID that you can use with GetOperationDetail
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
 // to track the progress and completion of the action. If the request doesn't
 // complete successfully, the domain registrant will be notified by email.
+//
+// By disabling the privacy service via API, you consent to the publication
+// of the contact information provided for this domain via the public WHOIS
+// database. You certify that you are the registrant of this domain name and
+// have the authority to make this decision. You may withdraw your consent at
+// any time by enabling privacy protection using either UpdateDomainContactPrivacy
+// or the Route 53 console. Enabling privacy protection removes the contact
+// information provided for this domain from the WHOIS database. For more information
+// on our privacy practices, see https://aws.amazon.com/privacy/ (https://aws.amazon.com/privacy/).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2055,24 +3151,26 @@ func (c *Route53Domains) UpdateDomainContactPrivacyRequest(input *UpdateDomainCo
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation UpdateDomainContactPrivacy for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The request is already in progress for the domain.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeTLDRulesViolation "TLDRulesViolation"
-//   The top-level domain does not support this operation.
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacy
 func (c *Route53Domains) UpdateDomainContactPrivacy(input *UpdateDomainContactPrivacyInput) (*UpdateDomainContactPrivacyOutput, error) {
@@ -2112,14 +3210,13 @@ const opUpdateDomainNameservers = "UpdateDomainNameservers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateDomainNameserversRequest method.
+//	req, resp := client.UpdateDomainNameserversRequest(params)
 //
-//    // Example sending a request using the UpdateDomainNameserversRequest method.
-//    req, resp := client.UpdateDomainNameserversRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameservers
 func (c *Route53Domains) UpdateDomainNameserversRequest(input *UpdateDomainNameserversInput) (req *request.Request, output *UpdateDomainNameserversOutput) {
@@ -2156,24 +3253,26 @@ func (c *Route53Domains) UpdateDomainNameserversRequest(input *UpdateDomainNames
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation UpdateDomainNameservers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeDuplicateRequest "DuplicateRequest"
-//   The request is already in progress for the domain.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeTLDRulesViolation "TLDRulesViolation"
-//   The top-level domain does not support this operation.
+//   - DuplicateRequest
+//     The request is already in progress for the domain.
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - TLDRulesViolation
+//     The top-level domain does not support this operation.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameservers
 func (c *Route53Domains) UpdateDomainNameservers(input *UpdateDomainNameserversInput) (*UpdateDomainNameserversOutput, error) {
@@ -2213,14 +3312,13 @@ const opUpdateTagsForDomain = "UpdateTagsForDomain"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateTagsForDomainRequest method.
+//	req, resp := client.UpdateTagsForDomainRequest(params)
 //
-//    // Example sending a request using the UpdateTagsForDomainRequest method.
-//    req, resp := client.UpdateTagsForDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateTagsForDomain
 func (c *Route53Domains) UpdateTagsForDomainRequest(input *UpdateTagsForDomainInput) (req *request.Request, output *UpdateTagsForDomainOutput) {
@@ -2254,18 +3352,20 @@ func (c *Route53Domains) UpdateTagsForDomainRequest(input *UpdateTagsForDomainIn
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation UpdateTagsForDomain for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
 //
-//   * ErrCodeOperationLimitExceeded "OperationLimitExceeded"
-//   The number of operations or jobs running exceeded the allowed threshold for
-//   the account.
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
-//   * ErrCodeUnsupportedTLD "UnsupportedTLD"
-//   Amazon Route 53 does not support this top-level domain (TLD).
+//   - OperationLimitExceeded
+//     The number of operations or jobs running exceeded the allowed threshold for
+//     the account.
+//
+//   - UnsupportedTLD
+//     Amazon Route 53 does not support this top-level domain (TLD).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateTagsForDomain
 func (c *Route53Domains) UpdateTagsForDomain(input *UpdateTagsForDomainInput) (*UpdateTagsForDomainOutput, error) {
@@ -2305,14 +3405,13 @@ const opViewBilling = "ViewBilling"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ViewBillingRequest method.
+//	req, resp := client.ViewBillingRequest(params)
 //
-//    // Example sending a request using the ViewBillingRequest method.
-//    req, resp := client.ViewBillingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBilling
 func (c *Route53Domains) ViewBillingRequest(input *ViewBillingInput) (req *request.Request, output *ViewBillingOutput) {
@@ -2320,6 +3419,12 @@ func (c *Route53Domains) ViewBillingRequest(input *ViewBillingInput) (req *reque
 		Name:       opViewBilling,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"NextPageMarker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -2333,8 +3438,8 @@ func (c *Route53Domains) ViewBillingRequest(input *ViewBillingInput) (req *reque
 
 // ViewBilling API operation for Amazon Route 53 Domains.
 //
-// Returns all the domain-related billing records for the current AWS account
-// for a specified period
+// Returns all the domain-related billing records for the current Amazon Web
+// Services account for a specified period
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2343,11 +3448,12 @@ func (c *Route53Domains) ViewBillingRequest(input *ViewBillingInput) (req *reque
 // See the AWS API reference guide for Amazon Route 53 Domains's
 // API operation ViewBilling for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The requested item is not acceptable. For example, for an OperationId it
-//   might refer to the ID of an operation that is already completed. For a domain
-//   name, it might not be a valid domain name or belong to the requester account.
+// Returned Error Types:
+//   - InvalidInput
+//     The requested item is not acceptable. For example, for APIs that accept a
+//     domain name, the request might specify a domain name that doesn't belong
+//     to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+//     the password might be invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBilling
 func (c *Route53Domains) ViewBilling(input *ViewBillingInput) (*ViewBillingOutput, error) {
@@ -2371,6 +3477,253 @@ func (c *Route53Domains) ViewBillingWithContext(ctx aws.Context, input *ViewBill
 	return out, req.Send()
 }
 
+// ViewBillingPages iterates over the pages of a ViewBilling operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ViewBilling method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a ViewBilling operation.
+//	pageNum := 0
+//	err := client.ViewBillingPages(params,
+//	    func(page *route53domains.ViewBillingOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Route53Domains) ViewBillingPages(input *ViewBillingInput, fn func(*ViewBillingOutput, bool) bool) error {
+	return c.ViewBillingPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ViewBillingPagesWithContext same as ViewBillingPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Route53Domains) ViewBillingPagesWithContext(ctx aws.Context, input *ViewBillingInput, fn func(*ViewBillingOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *ViewBillingInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.ViewBillingRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*ViewBillingOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+// The AcceptDomainTransferFromAnotherAwsAccount request includes the following
+// elements.
+type AcceptDomainTransferFromAnotherAwsAccountInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain that was specified when another Amazon Web Services
+	// account submitted a TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
+	// request.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+
+	// The password that was returned by the TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
+	// request.
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by AcceptDomainTransferFromAnotherAwsAccountInput's
+	// String and GoString methods.
+	//
+	// Password is a required field
+	Password *string `type:"string" required:"true" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AcceptDomainTransferFromAnotherAwsAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AcceptDomainTransferFromAnotherAwsAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AcceptDomainTransferFromAnotherAwsAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AcceptDomainTransferFromAnotherAwsAccountInput"}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+	if s.Password == nil {
+		invalidParams.Add(request.NewErrParamRequired("Password"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *AcceptDomainTransferFromAnotherAwsAccountInput) SetDomainName(v string) *AcceptDomainTransferFromAnotherAwsAccountInput {
+	s.DomainName = &v
+	return s
+}
+
+// SetPassword sets the Password field's value.
+func (s *AcceptDomainTransferFromAnotherAwsAccountInput) SetPassword(v string) *AcceptDomainTransferFromAnotherAwsAccountInput {
+	s.Password = &v
+	return s
+}
+
+// The AcceptDomainTransferFromAnotherAwsAccount response includes the following
+// element.
+type AcceptDomainTransferFromAnotherAwsAccountOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AcceptDomainTransferFromAnotherAwsAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AcceptDomainTransferFromAnotherAwsAccountOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *AcceptDomainTransferFromAnotherAwsAccountOutput) SetOperationId(v string) *AcceptDomainTransferFromAnotherAwsAccountOutput {
+	s.OperationId = &v
+	return s
+}
+
+type AssociateDelegationSignerToDomainInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+
+	// The information about a key, including the algorithm, public key-value, and
+	// flags.
+	//
+	// SigningAttributes is a required field
+	SigningAttributes *DnssecSigningAttributes `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateDelegationSignerToDomainInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateDelegationSignerToDomainInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateDelegationSignerToDomainInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AssociateDelegationSignerToDomainInput"}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+	if s.SigningAttributes == nil {
+		invalidParams.Add(request.NewErrParamRequired("SigningAttributes"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *AssociateDelegationSignerToDomainInput) SetDomainName(v string) *AssociateDelegationSignerToDomainInput {
+	s.DomainName = &v
+	return s
+}
+
+// SetSigningAttributes sets the SigningAttributes field's value.
+func (s *AssociateDelegationSignerToDomainInput) SetSigningAttributes(v *DnssecSigningAttributes) *AssociateDelegationSignerToDomainInput {
+	s.SigningAttributes = v
+	return s
+}
+
+type AssociateDelegationSignerToDomainOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateDelegationSignerToDomainOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateDelegationSignerToDomainOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *AssociateDelegationSignerToDomainOutput) SetOperationId(v string) *AssociateDelegationSignerToDomainOutput {
+	s.OperationId = &v
+	return s
+}
+
 // Information for one billing record.
 type BillingRecord struct {
 	_ struct{} `type:"structure"`
@@ -2381,8 +3734,8 @@ type BillingRecord struct {
 	// The name of the domain that the billing record applies to. If the domain
 	// name contains characters other than a-z, 0-9, and - (hyphen), such as an
 	// internationalized domain name, then this value is in Punycode. For more information,
-	// see DNS Domain Name Format (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html)
-	// in the Amazon Route 53 Developer Guidezzz.
+	// see DNS Domain Name Format (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html)
+	// in the Amazon Route 53 Developer Guide.
 	DomainName *string `type:"string"`
 
 	// The ID of the invoice that is associated with the billing record.
@@ -2397,12 +3750,20 @@ type BillingRecord struct {
 	Price *float64 `type:"double"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BillingRecord) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BillingRecord) GoString() string {
 	return s.String()
 }
@@ -2437,15 +3798,116 @@ func (s *BillingRecord) SetPrice(v float64) *BillingRecord {
 	return s
 }
 
+// The CancelDomainTransferToAnotherAwsAccount request includes the following
+// element.
+type CancelDomainTransferToAnotherAwsAccountInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain for which you want to cancel the transfer to another
+	// Amazon Web Services account.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CancelDomainTransferToAnotherAwsAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CancelDomainTransferToAnotherAwsAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CancelDomainTransferToAnotherAwsAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CancelDomainTransferToAnotherAwsAccountInput"}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *CancelDomainTransferToAnotherAwsAccountInput) SetDomainName(v string) *CancelDomainTransferToAnotherAwsAccountInput {
+	s.DomainName = &v
+	return s
+}
+
+// The CancelDomainTransferToAnotherAwsAccount response includes the following
+// element.
+type CancelDomainTransferToAnotherAwsAccountOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier that TransferDomainToAnotherAwsAccount returned to track the
+	// progress of the request. Because the transfer request was canceled, the value
+	// is no longer valid, and you can't use GetOperationDetail to query the operation
+	// status.
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CancelDomainTransferToAnotherAwsAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CancelDomainTransferToAnotherAwsAccountOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *CancelDomainTransferToAnotherAwsAccountOutput) SetOperationId(v string) *CancelDomainTransferToAnotherAwsAccountOutput {
+	s.OperationId = &v
+	return s
+}
+
 // The CheckDomainAvailability request contains the following elements.
 type CheckDomainAvailabilityInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the domain that you want to get availability for.
+	// The name of the domain that you want to get availability for. The top-level
+	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list
+	// of supported TLDs, see Domains that You Can Register with Amazon Route 53
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// in the Amazon Route 53 Developer Guide.
 	//
-	// Constraints: The domain name can contain only the letters a through z, the
-	// numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not
-	// supported.
+	// The domain name can contain only the following characters:
+	//
+	//    * Letters a through z. Domain names are not case sensitive.
+	//
+	//    * Numbers 0 through 9.
+	//
+	//    * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+	//    label.
+	//
+	//    * Period (.) to separate the labels in the name, such as the . in example.com.
+	//
+	// Internationalized domain names are not supported for some top-level domains.
+	// To determine whether the TLD that you want to use supports internationalized
+	// domain names, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
+	// For more information, see Formatting Internationalized Domain Names (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns).
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -2454,12 +3916,20 @@ type CheckDomainAvailabilityInput struct {
 	IdnLangCode *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckDomainAvailabilityInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckDomainAvailabilityInput) GoString() string {
 	return s.String()
 }
@@ -2499,39 +3969,63 @@ type CheckDomainAvailabilityOutput struct {
 	//
 	// Valid values:
 	//
-	// AVAILABLEThe domain name is available.
+	// AVAILABLE
 	//
-	// AVAILABLE_RESERVEDThe domain name is reserved under specific conditions.
+	// The domain name is available.
 	//
-	// AVAILABLE_PREORDERThe domain name is available and can be preordered.
+	// AVAILABLE_RESERVED
 	//
-	// DONT_KNOWThe TLD registry didn't reply with a definitive answer about whether
-	// the domain name is available. Amazon Route 53 can return this response for
-	// a variety of reasons, for example, the registry is performing maintenance.
-	// Try again later.
+	// The domain name is reserved under specific conditions.
 	//
-	// PENDINGThe TLD registry didn't return a response in the expected amount of
-	// time. When the response is delayed, it usually takes just a few extra seconds.
+	// AVAILABLE_PREORDER
+	//
+	// The domain name is available and can be preordered.
+	//
+	// DONT_KNOW
+	//
+	// The TLD registry didn't reply with a definitive answer about whether the
+	// domain name is available. Route 53 can return this response for a variety
+	// of reasons, for example, the registry is performing maintenance. Try again
+	// later.
+	//
+	// PENDING
+	//
+	// The TLD registry didn't return a response in the expected amount of time.
+	// When the response is delayed, it usually takes just a few extra seconds.
 	// You can resubmit the request immediately.
 	//
-	// RESERVEDThe domain name has been reserved for another person or organization.
+	// RESERVED
 	//
-	// UNAVAILABLEThe domain name is not available.
+	// The domain name has been reserved for another person or organization.
 	//
-	// UNAVAILABLE_PREMIUMThe domain name is not available.
+	// UNAVAILABLE
 	//
-	// UNAVAILABLE_RESTRICTEDThe domain name is forbidden.
+	// The domain name is not available.
 	//
-	// Availability is a required field
-	Availability *string `type:"string" required:"true" enum:"DomainAvailability"`
+	// UNAVAILABLE_PREMIUM
+	//
+	// The domain name is not available.
+	//
+	// UNAVAILABLE_RESTRICTED
+	//
+	// The domain name is forbidden.
+	Availability *string `type:"string" enum:"DomainAvailability"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckDomainAvailabilityOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckDomainAvailabilityOutput) GoString() string {
 	return s.String()
 }
@@ -2549,24 +4043,47 @@ type CheckDomainTransferabilityInput struct {
 	// If the registrar for the top-level domain (TLD) requires an authorization
 	// code to transfer the domain, the code that you got from the current registrar
 	// for the domain.
+	//
+	// AuthCode is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CheckDomainTransferabilityInput's
+	// String and GoString methods.
 	AuthCode *string `type:"string" sensitive:"true"`
 
-	// The name of the domain that you want to transfer to Amazon Route 53.
+	// The name of the domain that you want to transfer to Route 53. The top-level
+	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list
+	// of supported TLDs, see Domains that You Can Register with Amazon Route 53
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// in the Amazon Route 53 Developer Guide.
 	//
-	// Constraints: The domain name can contain only the letters a through z, the
-	// numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not
-	// supported.
+	// The domain name can contain only the following characters:
+	//
+	//    * Letters a through z. Domain names are not case sensitive.
+	//
+	//    * Numbers 0 through 9.
+	//
+	//    * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+	//    label.
+	//
+	//    * Period (.) to separate the labels in the name, such as the . in example.com.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckDomainTransferabilityInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckDomainTransferabilityInput) GoString() string {
 	return s.String()
 }
@@ -2600,21 +4117,36 @@ func (s *CheckDomainTransferabilityInput) SetDomainName(v string) *CheckDomainTr
 type CheckDomainTransferabilityOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Provides an explanation for when a domain can't be transferred.
+	Message *string `type:"string"`
+
 	// A complex type that contains information about whether the specified domain
-	// can be transferred to Amazon Route 53.
-	//
-	// Transferability is a required field
-	Transferability *DomainTransferability `type:"structure" required:"true"`
+	// can be transferred to Route 53.
+	Transferability *DomainTransferability `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckDomainTransferabilityOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CheckDomainTransferabilityOutput) GoString() string {
 	return s.String()
+}
+
+// SetMessage sets the Message field's value.
+func (s *CheckDomainTransferabilityOutput) SetMessage(v string) *CheckDomainTransferabilityOutput {
+	s.Message = &v
+	return s
 }
 
 // SetTransferability sets the Transferability field's value.
@@ -2623,29 +4155,123 @@ func (s *CheckDomainTransferabilityOutput) SetTransferability(v *DomainTransfera
 	return s
 }
 
+// Customer's consent for the owner change request.
+type Consent struct {
+	_ struct{} `type:"structure"`
+
+	// Currency for the MaxPrice.
+	//
+	// Currency is a required field
+	Currency *string `min:"3" type:"string" required:"true"`
+
+	// Maximum amount the customer agreed to accept.
+	//
+	// MaxPrice is a required field
+	MaxPrice *float64 `type:"double" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Consent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Consent) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Consent) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Consent"}
+	if s.Currency == nil {
+		invalidParams.Add(request.NewErrParamRequired("Currency"))
+	}
+	if s.Currency != nil && len(*s.Currency) < 3 {
+		invalidParams.Add(request.NewErrParamMinLen("Currency", 3))
+	}
+	if s.MaxPrice == nil {
+		invalidParams.Add(request.NewErrParamRequired("MaxPrice"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCurrency sets the Currency field's value.
+func (s *Consent) SetCurrency(v string) *Consent {
+	s.Currency = &v
+	return s
+}
+
+// SetMaxPrice sets the MaxPrice field's value.
+func (s *Consent) SetMaxPrice(v float64) *Consent {
+	s.MaxPrice = &v
+	return s
+}
+
 // ContactDetail includes the following elements.
 type ContactDetail struct {
 	_ struct{} `type:"structure" sensitive:"true"`
 
 	// First line of the contact's address.
-	AddressLine1 *string `type:"string"`
+	//
+	// AddressLine1 is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	AddressLine1 *string `type:"string" sensitive:"true"`
 
 	// Second line of contact's address, if any.
-	AddressLine2 *string `type:"string"`
+	//
+	// AddressLine2 is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	AddressLine2 *string `type:"string" sensitive:"true"`
 
 	// The city of the contact's address.
-	City *string `type:"string"`
+	//
+	// City is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	City *string `type:"string" sensitive:"true"`
 
 	// Indicates whether the contact is a person, company, association, or public
-	// organization. If you choose an option other than PERSON, you must enter an
-	// organization name, and you can't enable privacy protection for the contact.
+	// organization. Note the following:
+	//
+	//    * If you specify a value other than PERSON, you must also specify a value
+	//    for OrganizationName.
+	//
+	//    * For some TLDs, the privacy protection available depends on the value
+	//    that you specify for Contact Type. For the privacy protection settings
+	//    for your TLD, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	//    in the Amazon Route 53 Developer Guide
+	//
+	//    * For .es domains, the value of ContactType must be PERSON for all three
+	//    contacts.
 	ContactType *string `type:"string" enum:"ContactType"`
 
 	// Code for the country of the contact's address.
-	CountryCode *string `type:"string" enum:"CountryCode"`
+	//
+	// CountryCode is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	CountryCode *string `type:"string" enum:"CountryCode" sensitive:"true"`
 
 	// Email address of the contact.
-	Email *string `type:"string"`
+	//
+	// Email is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	Email *string `type:"string" sensitive:"true"`
 
 	// A list of name-value pairs for parameters required by certain top-level domains.
 	ExtraParams []*ExtraParam `type:"list"`
@@ -2655,37 +4281,73 @@ type ContactDetail struct {
 	// Constraints: Phone number must be specified in the format "+[country dialing
 	// code].[number including any area code]". For example, a US phone number might
 	// appear as "+1.1234567890".
-	Fax *string `type:"string"`
+	//
+	// Fax is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	Fax *string `type:"string" sensitive:"true"`
 
 	// First name of contact.
-	FirstName *string `type:"string"`
+	//
+	// FirstName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	FirstName *string `type:"string" sensitive:"true"`
 
 	// Last name of contact.
-	LastName *string `type:"string"`
+	//
+	// LastName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	LastName *string `type:"string" sensitive:"true"`
 
 	// Name of the organization for contact types other than PERSON.
-	OrganizationName *string `type:"string"`
+	//
+	// OrganizationName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	OrganizationName *string `type:"string" sensitive:"true"`
 
 	// The phone number of the contact.
 	//
 	// Constraints: Phone number must be specified in the format "+[country dialing
 	// code].[number including any area code>]". For example, a US phone number
 	// might appear as "+1.1234567890".
-	PhoneNumber *string `type:"string"`
+	//
+	// PhoneNumber is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The state or province of the contact's city.
-	State *string `type:"string"`
+	//
+	// State is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	State *string `type:"string" sensitive:"true"`
 
 	// The zip or postal code of the contact's address.
-	ZipCode *string `type:"string"`
+	//
+	// ZipCode is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ContactDetail's
+	// String and GoString methods.
+	ZipCode *string `type:"string" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContactDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ContactDetail) GoString() string {
 	return s.String()
 }
@@ -2794,6 +4456,84 @@ func (s *ContactDetail) SetZipCode(v string) *ContactDetail {
 	return s
 }
 
+type DeleteDomainInput struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the domain to be deleted.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDomainInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDomainInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteDomainInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteDomainInput"}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *DeleteDomainInput) SetDomainName(v string) *DeleteDomainInput {
+	s.DomainName = &v
+	return s
+}
+
+type DeleteDomainOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDomainOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteDomainOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *DeleteDomainOutput) SetOperationId(v string) *DeleteDomainOutput {
+	s.OperationId = &v
+	return s
+}
+
 // The DeleteTagsForDomainRequest includes the following elements.
 type DeleteTagsForDomainInput struct {
 	_ struct{} `type:"structure"`
@@ -2809,12 +4549,20 @@ type DeleteTagsForDomainInput struct {
 	TagsToDelete []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsForDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsForDomainInput) GoString() string {
 	return s.String()
 }
@@ -2851,12 +4599,20 @@ type DeleteTagsForDomainOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsForDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsForDomainOutput) GoString() string {
 	return s.String()
 }
@@ -2870,12 +4626,20 @@ type DisableDomainAutoRenewInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDomainAutoRenewInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDomainAutoRenewInput) GoString() string {
 	return s.String()
 }
@@ -2903,12 +4667,20 @@ type DisableDomainAutoRenewOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDomainAutoRenewOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDomainAutoRenewOutput) GoString() string {
 	return s.String()
 }
@@ -2923,12 +4695,20 @@ type DisableDomainTransferLockInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDomainTransferLockInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDomainTransferLockInput) GoString() string {
 	return s.String()
 }
@@ -2956,19 +4736,25 @@ func (s *DisableDomainTransferLockInput) SetDomainName(v string) *DisableDomainT
 type DisableDomainTransferLockOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDomainTransferLockOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDomainTransferLockOutput) GoString() string {
 	return s.String()
 }
@@ -2976,6 +4762,476 @@ func (s DisableDomainTransferLockOutput) GoString() string {
 // SetOperationId sets the OperationId field's value.
 func (s *DisableDomainTransferLockOutput) SetOperationId(v string) *DisableDomainTransferLockOutput {
 	s.OperationId = &v
+	return s
+}
+
+type DisassociateDelegationSignerFromDomainInput struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the domain.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+
+	// An internal identification number assigned to each DS record after it’s
+	// created. You can retrieve it as part of DNSSEC information returned by GetDomainDetail
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetDomainDetail.html).
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateDelegationSignerFromDomainInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateDelegationSignerFromDomainInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociateDelegationSignerFromDomainInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DisassociateDelegationSignerFromDomainInput"}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+	if s.Id == nil {
+		invalidParams.Add(request.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *DisassociateDelegationSignerFromDomainInput) SetDomainName(v string) *DisassociateDelegationSignerFromDomainInput {
+	s.DomainName = &v
+	return s
+}
+
+// SetId sets the Id field's value.
+func (s *DisassociateDelegationSignerFromDomainInput) SetId(v string) *DisassociateDelegationSignerFromDomainInput {
+	s.Id = &v
+	return s
+}
+
+type DisassociateDelegationSignerFromDomainOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateDelegationSignerFromDomainOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateDelegationSignerFromDomainOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *DisassociateDelegationSignerFromDomainOutput) SetOperationId(v string) *DisassociateDelegationSignerFromDomainOutput {
+	s.OperationId = &v
+	return s
+}
+
+// Information about the DNSSEC key.
+//
+// You get this from your DNS provider and then give it to Route 53 (by using
+// AssociateDelegationSignerToDomain (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html))
+// to pass it to the registry to establish the chain of trust.
+type DnssecKey struct {
+	_ struct{} `type:"structure"`
+
+	// The number of the public key’s cryptographic algorithm according to an
+	// IANA (https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xml)
+	// assignment.
+	//
+	// If Route 53 is your DNS service, set this to 13.
+	//
+	// For more information about enabling DNSSEC signing, see Enabling DNSSEC signing
+	// and establishing a chain of trust (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec-enable-signing.html).
+	Algorithm *int64 `type:"integer"`
+
+	// The delegation signer digest.
+	//
+	// Digest is calculated from the public key provided using specified digest
+	// algorithm and this digest is the actual value returned from the registry
+	// nameservers as the value of DS records.
+	Digest *string `type:"string"`
+
+	// The number of the DS digest algorithm according to an IANA assignment.
+	//
+	// For more information, see IANA (https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml)
+	// for DNSSEC Delegation Signer (DS) Resource Record (RR) Type Digest Algorithms.
+	DigestType *int64 `type:"integer"`
+
+	// Defines the type of key. It can be either a KSK (key-signing-key, value 257)
+	// or ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only
+	// use ZSK if your DNS provider isn't Route 53 and you don’t have KSK available.
+	//
+	// If you have KSK and ZSK keys, always use KSK to create a delegations signer
+	// (DS) record. If you have ZSK keys only – use ZSK to create a DS record.
+	Flags *int64 `type:"integer"`
+
+	// An ID assigned to each DS record created by AssociateDelegationSignerToDomain
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html).
+	Id *string `type:"string"`
+
+	// A numeric identification of the DNSKEY record referred to by this DS record.
+	KeyTag *int64 `type:"integer"`
+
+	// The base64-encoded public key part of the key pair that is passed to the
+	// registry .
+	PublicKey *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DnssecKey) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DnssecKey) GoString() string {
+	return s.String()
+}
+
+// SetAlgorithm sets the Algorithm field's value.
+func (s *DnssecKey) SetAlgorithm(v int64) *DnssecKey {
+	s.Algorithm = &v
+	return s
+}
+
+// SetDigest sets the Digest field's value.
+func (s *DnssecKey) SetDigest(v string) *DnssecKey {
+	s.Digest = &v
+	return s
+}
+
+// SetDigestType sets the DigestType field's value.
+func (s *DnssecKey) SetDigestType(v int64) *DnssecKey {
+	s.DigestType = &v
+	return s
+}
+
+// SetFlags sets the Flags field's value.
+func (s *DnssecKey) SetFlags(v int64) *DnssecKey {
+	s.Flags = &v
+	return s
+}
+
+// SetId sets the Id field's value.
+func (s *DnssecKey) SetId(v string) *DnssecKey {
+	s.Id = &v
+	return s
+}
+
+// SetKeyTag sets the KeyTag field's value.
+func (s *DnssecKey) SetKeyTag(v int64) *DnssecKey {
+	s.KeyTag = &v
+	return s
+}
+
+// SetPublicKey sets the PublicKey field's value.
+func (s *DnssecKey) SetPublicKey(v string) *DnssecKey {
+	s.PublicKey = &v
+	return s
+}
+
+// This error is returned if you call AssociateDelegationSignerToDomain when
+// the specified domain has reached the maximum number of DS records. You can't
+// add any additional DS records unless you delete an existing one first.
+type DnssecLimitExceeded struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DnssecLimitExceeded) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DnssecLimitExceeded) GoString() string {
+	return s.String()
+}
+
+func newErrorDnssecLimitExceeded(v protocol.ResponseMetadata) error {
+	return &DnssecLimitExceeded{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DnssecLimitExceeded) Code() string {
+	return "DnssecLimitExceeded"
+}
+
+// Message returns the exception's message.
+func (s *DnssecLimitExceeded) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DnssecLimitExceeded) OrigErr() error {
+	return nil
+}
+
+func (s *DnssecLimitExceeded) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DnssecLimitExceeded) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DnssecLimitExceeded) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Information about a delegation signer (DS) record that was created in the
+// registry by AssociateDelegationSignerToDomain (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html).
+type DnssecSigningAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// Algorithm which was used to generate the digest from the public key.
+	Algorithm *int64 `type:"integer"`
+
+	// Defines the type of key. It can be either a KSK (key-signing-key, value 257)
+	// or ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only
+	// use ZSK if your DNS provider isn't Route 53 and you don’t have KSK available.
+	//
+	// If you have KSK and ZSK keys, always use KSK to create a delegations signer
+	// (DS) record. If you have ZSK keys only – use ZSK to create a DS record.
+	Flags *int64 `type:"integer"`
+
+	// The base64-encoded public key part of the key pair that is passed to the
+	// registry.
+	PublicKey *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DnssecSigningAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DnssecSigningAttributes) GoString() string {
+	return s.String()
+}
+
+// SetAlgorithm sets the Algorithm field's value.
+func (s *DnssecSigningAttributes) SetAlgorithm(v int64) *DnssecSigningAttributes {
+	s.Algorithm = &v
+	return s
+}
+
+// SetFlags sets the Flags field's value.
+func (s *DnssecSigningAttributes) SetFlags(v int64) *DnssecSigningAttributes {
+	s.Flags = &v
+	return s
+}
+
+// SetPublicKey sets the PublicKey field's value.
+func (s *DnssecSigningAttributes) SetPublicKey(v string) *DnssecSigningAttributes {
+	s.PublicKey = &v
+	return s
+}
+
+// The number of domains has exceeded the allowed threshold for the account.
+type DomainLimitExceeded struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The number of domains has exceeded the allowed threshold for the account.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainLimitExceeded) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainLimitExceeded) GoString() string {
+	return s.String()
+}
+
+func newErrorDomainLimitExceeded(v protocol.ResponseMetadata) error {
+	return &DomainLimitExceeded{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DomainLimitExceeded) Code() string {
+	return "DomainLimitExceeded"
+}
+
+// Message returns the exception's message.
+func (s *DomainLimitExceeded) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DomainLimitExceeded) OrigErr() error {
+	return nil
+}
+
+func (s *DomainLimitExceeded) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DomainLimitExceeded) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DomainLimitExceeded) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Information about the domain price associated with a TLD.
+type DomainPrice struct {
+	_ struct{} `type:"structure"`
+
+	// The price for changing domain ownership.
+	ChangeOwnershipPrice *PriceWithCurrency `type:"structure"`
+
+	// The name of the TLD for which the prices apply.
+	Name *string `min:"1" type:"string"`
+
+	// The price for domain registration with Route 53.
+	RegistrationPrice *PriceWithCurrency `type:"structure"`
+
+	// The price for renewing domain registration with Route 53.
+	RenewalPrice *PriceWithCurrency `type:"structure"`
+
+	// The price for restoring the domain with Route 53.
+	RestorationPrice *PriceWithCurrency `type:"structure"`
+
+	// The price for transferring the domain registration to Route 53.
+	TransferPrice *PriceWithCurrency `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainPrice) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DomainPrice) GoString() string {
+	return s.String()
+}
+
+// SetChangeOwnershipPrice sets the ChangeOwnershipPrice field's value.
+func (s *DomainPrice) SetChangeOwnershipPrice(v *PriceWithCurrency) *DomainPrice {
+	s.ChangeOwnershipPrice = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *DomainPrice) SetName(v string) *DomainPrice {
+	s.Name = &v
+	return s
+}
+
+// SetRegistrationPrice sets the RegistrationPrice field's value.
+func (s *DomainPrice) SetRegistrationPrice(v *PriceWithCurrency) *DomainPrice {
+	s.RegistrationPrice = v
+	return s
+}
+
+// SetRenewalPrice sets the RenewalPrice field's value.
+func (s *DomainPrice) SetRenewalPrice(v *PriceWithCurrency) *DomainPrice {
+	s.RenewalPrice = v
+	return s
+}
+
+// SetRestorationPrice sets the RestorationPrice field's value.
+func (s *DomainPrice) SetRestorationPrice(v *PriceWithCurrency) *DomainPrice {
+	s.RestorationPrice = v
+	return s
+}
+
+// SetTransferPrice sets the TransferPrice field's value.
+func (s *DomainPrice) SetTransferPrice(v *PriceWithCurrency) *DomainPrice {
+	s.TransferPrice = v
 	return s
 }
 
@@ -2989,40 +5245,66 @@ type DomainSuggestion struct {
 	//
 	// Valid values:
 	//
-	// AVAILABLEThe domain name is available.
+	// AVAILABLE
 	//
-	// AVAILABLE_RESERVEDThe domain name is reserved under specific conditions.
+	// The domain name is available.
 	//
-	// AVAILABLE_PREORDERThe domain name is available and can be preordered.
+	// AVAILABLE_RESERVED
 	//
-	// DONT_KNOWThe TLD registry didn't reply with a definitive answer about whether
-	// the domain name is available. Amazon Route 53 can return this response for
-	// a variety of reasons, for example, the registry is performing maintenance.
-	// Try again later.
+	// The domain name is reserved under specific conditions.
 	//
-	// PENDINGThe TLD registry didn't return a response in the expected amount of
-	// time. When the response is delayed, it usually takes just a few extra seconds.
+	// AVAILABLE_PREORDER
+	//
+	// The domain name is available and can be preordered.
+	//
+	// DONT_KNOW
+	//
+	// The TLD registry didn't reply with a definitive answer about whether the
+	// domain name is available. Route 53 can return this response for a variety
+	// of reasons, for example, the registry is performing maintenance. Try again
+	// later.
+	//
+	// PENDING
+	//
+	// The TLD registry didn't return a response in the expected amount of time.
+	// When the response is delayed, it usually takes just a few extra seconds.
 	// You can resubmit the request immediately.
 	//
-	// RESERVEDThe domain name has been reserved for another person or organization.
+	// RESERVED
 	//
-	// UNAVAILABLEThe domain name is not available.
+	// The domain name has been reserved for another person or organization.
 	//
-	// UNAVAILABLE_PREMIUMThe domain name is not available.
+	// UNAVAILABLE
 	//
-	// UNAVAILABLE_RESTRICTEDThe domain name is forbidden.
+	// The domain name is not available.
+	//
+	// UNAVAILABLE_PREMIUM
+	//
+	// The domain name is not available.
+	//
+	// UNAVAILABLE_RESTRICTED
+	//
+	// The domain name is forbidden.
 	Availability *string `type:"string"`
 
 	// A suggested domain name.
 	DomainName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainSuggestion) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainSuggestion) GoString() string {
 	return s.String()
 }
@@ -3047,11 +5329,10 @@ type DomainSummary struct {
 	AutoRenew *bool `type:"boolean"`
 
 	// The name of the domain that the summary information applies to.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
+	DomainName *string `type:"string"`
 
-	// Expiration date of the domain in Coordinated Universal Time (UTC).
+	// Expiration date of the domain in Unix time format and Coordinated Universal
+	// Time (UTC).
 	Expiry *time.Time `type:"timestamp"`
 
 	// Indicates whether a domain is locked from unauthorized transfer to another
@@ -3059,12 +5340,20 @@ type DomainSummary struct {
 	TransferLock *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainSummary) GoString() string {
 	return s.String()
 }
@@ -3094,30 +5383,56 @@ func (s *DomainSummary) SetTransferLock(v bool) *DomainSummary {
 }
 
 // A complex type that contains information about whether the specified domain
-// can be transferred to Amazon Route 53.
+// can be transferred to Route 53.
 type DomainTransferability struct {
 	_ struct{} `type:"structure"`
 
-	// Whether the domain name can be transferred to Amazon Route 53.
+	// Whether the domain name can be transferred to Route 53.
 	//
-	// You can transfer only domains that have a value of TRANSFERABLE for Transferable.
+	// You can transfer only domains that have a value of TRANSFERABLE or Transferable.
 	//
 	// Valid values:
 	//
-	// TRANSFERABLEThe domain name can be transferred to Amazon Route 53.
+	// TRANSFERABLE
 	//
-	// UNTRANSFERRABLEThe domain name can't be transferred to Amazon Route 53.
+	// The domain name can be transferred to Route 53.
 	//
-	// DONT_KNOWReserved for future use.
+	// UNTRANSFERRABLE
+	//
+	// The domain name can't be transferred to Route 53.
+	//
+	// DONT_KNOW
+	//
+	// Reserved for future use.
+	//
+	// DOMAIN_IN_OWN_ACCOUNT
+	//
+	// The domain already exists in the current Amazon Web Services account.
+	//
+	// DOMAIN_IN_ANOTHER_ACCOUNT
+	//
+	// the domain exists in another Amazon Web Services account.
+	//
+	// PREMIUM_DOMAIN
+	//
+	// Premium domain transfer is not supported.
 	Transferable *string `type:"string" enum:"Transferable"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainTransferability) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DomainTransferability) GoString() string {
 	return s.String()
 }
@@ -3126,6 +5441,74 @@ func (s DomainTransferability) GoString() string {
 func (s *DomainTransferability) SetTransferable(v string) *DomainTransferability {
 	s.Transferable = &v
 	return s
+}
+
+// The request is already in progress for the domain.
+type DuplicateRequest struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The request is already in progress for the domain.
+	Message_ *string `locationName:"message" type:"string"`
+
+	// ID of the request operation.
+	RequestId *string `locationName:"requestId" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRequest) GoString() string {
+	return s.String()
+}
+
+func newErrorDuplicateRequest(v protocol.ResponseMetadata) error {
+	return &DuplicateRequest{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DuplicateRequest) Code() string {
+	return "DuplicateRequest"
+}
+
+// Message returns the exception's message.
+func (s *DuplicateRequest) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DuplicateRequest) OrigErr() error {
+	return nil
+}
+
+func (s *DuplicateRequest) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DuplicateRequest) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DuplicateRequest) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type EnableDomainAutoRenewInput struct {
@@ -3137,12 +5520,20 @@ type EnableDomainAutoRenewInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDomainAutoRenewInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDomainAutoRenewInput) GoString() string {
 	return s.String()
 }
@@ -3170,12 +5561,20 @@ type EnableDomainAutoRenewOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDomainAutoRenewOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDomainAutoRenewOutput) GoString() string {
 	return s.String()
 }
@@ -3190,12 +5589,20 @@ type EnableDomainTransferLockInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDomainTransferLockInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDomainTransferLockInput) GoString() string {
 	return s.String()
 }
@@ -3225,17 +5632,23 @@ type EnableDomainTransferLockOutput struct {
 
 	// Identifier for tracking the progress of the request. To use this ID to query
 	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
+	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDomainTransferLockOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDomainTransferLockOutput) GoString() string {
 	return s.String()
 }
@@ -3250,50 +5663,164 @@ func (s *EnableDomainTransferLockOutput) SetOperationId(v string) *EnableDomainT
 type ExtraParam struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the additional parameter required by the top-level domain. Here are
-	// the top-level domains that require additional parameters and which parameters
-	// they require:
+	// The name of an additional parameter that is required by a top-level domain.
+	// Here are the top-level domains that require additional parameters and the
+	// names of the parameters that they require:
 	//
-	//    * .com.au and .net.au:AU_ID_NUMBER and AU_ID_TYPE
+	// .com.au and .net.au
 	//
-	//    * .ca:BRAND_NUMBER, CA_LEGAL_TYPE, and CA_BUSINESS_ENTITY_TYPE
+	//    * AU_ID_NUMBER
 	//
-	//    * .es:ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, and ES_LEGAL_FORM
+	//    * AU_ID_TYPE Valid values include the following: ABN (Australian business
+	//    number) ACN (Australian company number) TM (Trademark number)
 	//
-	//    * .fi:BIRTH_DATE_IN_YYYY_MM_DD, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY,
-	//    and FI_ORGANIZATION_TYPE
+	// .ca
 	//
-	//    * .fr:BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY,
-	//    and BIRTH_CITY
+	//    * BRAND_NUMBER
 	//
-	//    * .it:BIRTH_COUNTRY, IT_PIN, and IT_REGISTRANT_ENTITY_TYPE
+	//    * CA_BUSINESS_ENTITY_TYPE Valid values include the following: BANK (Bank)
+	//    COMMERCIAL_COMPANY (Commercial company) COMPANY (Company) COOPERATION
+	//    (Cooperation) COOPERATIVE (Cooperative) COOPRIX (Cooprix) CORP (Corporation)
+	//    CREDIT_UNION (Credit union) FOMIA (Federation of mutual insurance associations)
+	//    INC (Incorporated) LTD (Limited) LTEE (Limitée) LLC (Limited liability
+	//    corporation) LLP (Limited liability partnership) LTE (Lte.) MBA (Mutual
+	//    benefit association) MIC (Mutual insurance company) NFP (Not-for-profit
+	//    corporation) SA (S.A.) SAVINGS_COMPANY (Savings company) SAVINGS_UNION
+	//    (Savings union) SARL (Société à responsabilité limitée) TRUST (Trust)
+	//    ULC (Unlimited liability corporation)
 	//
-	//    * .ru:BIRTH_DATE_IN_YYYY_MM_DD and RU_PASSPORT_DATA
+	//    * CA_LEGAL_TYPE When ContactType is PERSON, valid values include the following:
+	//    ABO (Aboriginal Peoples indigenous to Canada) CCT (Canadian citizen) LGR
+	//    (Legal Representative of a Canadian Citizen or Permanent Resident) RES
+	//    (Permanent resident of Canada) When ContactType is a value other than
+	//    PERSON, valid values include the following: ASS (Canadian unincorporated
+	//    association) CCO (Canadian corporation) EDU (Canadian educational institution)
+	//    GOV (Government or government entity in Canada) HOP (Canadian Hospital)
+	//    INB (Indian Band recognized by the Indian Act of Canada) LAM (Canadian
+	//    Library, Archive, or Museum) MAJ (Her/His Majesty the Queen/King) OMK
+	//    (Official mark registered in Canada) PLT (Canadian Political Party) PRT
+	//    (Partnership Registered in Canada) TDM (Trademark registered in Canada)
+	//    TRD (Canadian Trade Union) TRS (Trust established in Canada)
 	//
-	//    * .se:BIRTH_COUNTRY and SE_ID_NUMBER
+	// .es
 	//
-	//    * .sg:SG_ID_NUMBER
+	//    * ES_IDENTIFICATION The value of ES_IDENTIFICATION depends on the following
+	//    values: The value of ES_LEGAL_FORM The value of ES_IDENTIFICATION_TYPE
+	//    If ES_LEGAL_FORM is any value other than INDIVIDUAL: Specify 1 letter
+	//    + 8 numbers (CIF [Certificado de Identificación Fiscal]) Example: B12345678
+	//    If ES_LEGAL_FORM is INDIVIDUAL, the value that you specify for ES_IDENTIFICATION
+	//    depends on the value of ES_IDENTIFICATION_TYPE: If ES_IDENTIFICATION_TYPE
+	//    is DNI_AND_NIF (for Spanish contacts): Specify 8 numbers + 1 letter (DNI
+	//    [Documento Nacional de Identidad], NIF [Número de Identificación Fiscal])
+	//    Example: 12345678M If ES_IDENTIFICATION_TYPE is NIE (for foreigners with
+	//    legal residence): Specify 1 letter + 7 numbers + 1 letter ( NIE [Número
+	//    de Identidad de Extranjero]) Example: Y1234567X If ES_IDENTIFICATION_TYPE
+	//    is OTHER (for contacts outside of Spain): Specify a passport number, drivers
+	//    license number, or national identity card number
 	//
-	//    * .co.uk, .me.uk, and .org.uk:UK_CONTACT_TYPE and UK_COMPANY_NUMBER
+	//    * ES_IDENTIFICATION_TYPE Valid values include the following: DNI_AND_NIF
+	//    (For Spanish contacts) NIE (For foreigners with legal residence) OTHER
+	//    (For contacts outside of Spain)
 	//
-	// In addition, many TLDs require VAT_NUMBER.
+	//    * ES_LEGAL_FORM Valid values include the following: ASSOCIATION CENTRAL_GOVERNMENT_BODY
+	//    CIVIL_SOCIETY COMMUNITY_OF_OWNERS COMMUNITY_PROPERTY CONSULATE COOPERATIVE
+	//    DESIGNATION_OF_ORIGIN_SUPERVISORY_COUNCIL ECONOMIC_INTEREST_GROUP EMBASSY
+	//    ENTITY_MANAGING_NATURAL_AREAS FARM_PARTNERSHIP FOUNDATION GENERAL_AND_LIMITED_PARTNERSHIP
+	//    GENERAL_PARTNERSHIP INDIVIDUAL LIMITED_COMPANY LOCAL_AUTHORITY LOCAL_PUBLIC_ENTITY
+	//    MUTUAL_INSURANCE_COMPANY NATIONAL_PUBLIC_ENTITY ORDER_OR_RELIGIOUS_INSTITUTION
+	//    OTHERS (Only for contacts outside of Spain) POLITICAL_PARTY PROFESSIONAL_ASSOCIATION
+	//    PUBLIC_LAW_ASSOCIATION PUBLIC_LIMITED_COMPANY REGIONAL_GOVERNMENT_BODY
+	//    REGIONAL_PUBLIC_ENTITY SAVINGS_BANK SPANISH_OFFICE SPORTS_ASSOCIATION
+	//    SPORTS_FEDERATION SPORTS_LIMITED_COMPANY TEMPORARY_ALLIANCE_OF_ENTERPRISES
+	//    TRADE_UNION WORKER_OWNED_COMPANY WORKER_OWNED_LIMITED_COMPANY
+	//
+	// .eu
+	//
+	//    * EU_COUNTRY_OF_CITIZENSHIP
+	//
+	// .fi
+	//
+	//    * BIRTH_DATE_IN_YYYY_MM_DD
+	//
+	//    * FI_BUSINESS_NUMBER
+	//
+	//    * FI_ID_NUMBER
+	//
+	//    * FI_NATIONALITY Valid values include the following: FINNISH NOT_FINNISH
+	//
+	//    * FI_ORGANIZATION_TYPE Valid values include the following: COMPANY CORPORATION
+	//    GOVERNMENT INSTITUTION POLITICAL_PARTY PUBLIC_COMMUNITY TOWNSHIP
+	//
+	// .it
+	//
+	//    * IT_NATIONALITY
+	//
+	//    * IT_PIN
+	//
+	//    * IT_REGISTRANT_ENTITY_TYPE Valid values include the following: FOREIGNERS
+	//    FREELANCE_WORKERS (Freelance workers and professionals) ITALIAN_COMPANIES
+	//    (Italian companies and one-person companies) NON_PROFIT_ORGANIZATIONS
+	//    OTHER_SUBJECTS PUBLIC_ORGANIZATIONS
+	//
+	// .ru
+	//
+	//    * BIRTH_DATE_IN_YYYY_MM_DD
+	//
+	//    * RU_PASSPORT_DATA
+	//
+	// .se
+	//
+	//    * BIRTH_COUNTRY
+	//
+	//    * SE_ID_NUMBER
+	//
+	// .sg
+	//
+	//    * SG_ID_NUMBER
+	//
+	// .uk, .co.uk, .me.uk, and .org.uk
+	//
+	//    * UK_CONTACT_TYPE Valid values include the following: CRC (UK Corporation
+	//    by Royal Charter) FCORP (Non-UK Corporation) FIND (Non-UK Individual,
+	//    representing self) FOTHER (Non-UK Entity that does not fit into any other
+	//    category) GOV (UK Government Body) IND (UK Individual (representing self))
+	//    IP (UK Industrial/Provident Registered Company) LLP (UK Limited Liability
+	//    Partnership) LTD (UK Limited Company) OTHER (UK Entity that does not fit
+	//    into any other category) PLC (UK Public Limited Company) PTNR (UK Partnership)
+	//    RCHAR (UK Registered Charity) SCH (UK School) STAT (UK Statutory Body)
+	//    STRA (UK Sole Trader)
+	//
+	//    * UK_COMPANY_NUMBER
+	//
+	// In addition, many TLDs require a VAT_NUMBER.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true" enum:"ExtraParamName"`
 
-	// Values corresponding to the additional parameter names required by some top-level
-	// domains.
+	// The value that corresponds with the name of an extra parameter.
+	//
+	// Value is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ExtraParam's
+	// String and GoString methods.
 	//
 	// Value is a required field
-	Value *string `type:"string" required:"true"`
+	Value *string `type:"string" required:"true" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExtraParam) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ExtraParam) GoString() string {
 	return s.String()
 }
@@ -3326,6 +5853,92 @@ func (s *ExtraParam) SetValue(v string) *ExtraParam {
 	return s
 }
 
+// Information for the filtering of a list of domains returned by ListDomains
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html).
+type FilterCondition struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the field which should be used for filtering the list of domains.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true" enum:"ListDomainsAttributeName"`
+
+	// The operator values for filtering domain names. The values can be:
+	//
+	//    * LE: Less than, or equal to
+	//
+	//    * GE: Greater than, or equal to
+	//
+	//    * BEGINS_WITH: Begins with
+	//
+	// Operator is a required field
+	Operator *string `type:"string" required:"true" enum:"Operator"`
+
+	// An array of strings presenting values to compare. Only 1 item in the list
+	// is currently supported.
+	//
+	// Values is a required field
+	Values []*string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FilterCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FilterCondition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FilterCondition) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "FilterCondition"}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Operator == nil {
+		invalidParams.Add(request.NewErrParamRequired("Operator"))
+	}
+	if s.Values == nil {
+		invalidParams.Add(request.NewErrParamRequired("Values"))
+	}
+	if s.Values != nil && len(s.Values) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetName sets the Name field's value.
+func (s *FilterCondition) SetName(v string) *FilterCondition {
+	s.Name = &v
+	return s
+}
+
+// SetOperator sets the Operator field's value.
+func (s *FilterCondition) SetOperator(v string) *FilterCondition {
+	s.Operator = &v
+	return s
+}
+
+// SetValues sets the Values field's value.
+func (s *FilterCondition) SetValues(v []*string) *FilterCondition {
+	s.Values = v
+	return s
+}
+
 type GetContactReachabilityStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3334,12 +5947,20 @@ type GetContactReachabilityStatusInput struct {
 	DomainName *string `locationName:"domainName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetContactReachabilityStatusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetContactReachabilityStatusInput) GoString() string {
 	return s.String()
 }
@@ -3358,20 +5979,34 @@ type GetContactReachabilityStatusOutput struct {
 
 	// Whether the registrant contact has responded. Values include the following:
 	//
-	// PENDINGWe sent the confirmation email and haven't received a response yet.
+	// PENDING
 	//
-	// DONEWe sent the email and got confirmation from the registrant contact.
+	// We sent the confirmation email and haven't received a response yet.
 	//
-	// EXPIREDThe time limit expired before the registrant contact responded.
+	// DONE
+	//
+	// We sent the email and got confirmation from the registrant contact.
+	//
+	// EXPIRED
+	//
+	// The time limit expired before the registrant contact responded.
 	Status *string `locationName:"status" type:"string" enum:"ReachabilityStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetContactReachabilityStatusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetContactReachabilityStatusOutput) GoString() string {
 	return s.String()
 }
@@ -3398,12 +6033,20 @@ type GetDomainDetailInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDomainDetailInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDomainDetailInput) GoString() string {
 	return s.String()
 }
@@ -3434,15 +6077,25 @@ type GetDomainDetailOutput struct {
 	// Email address to contact to report incorrect contact information for a domain,
 	// to report that the domain is being used to send spam, to report that someone
 	// is cybersquatting on a domain name, or report some other type of abuse.
-	AbuseContactEmail *string `type:"string"`
+	//
+	// AbuseContactEmail is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetDomainDetailOutput's
+	// String and GoString methods.
+	AbuseContactEmail *string `type:"string" sensitive:"true"`
 
 	// Phone number for reporting abuse.
-	AbuseContactPhone *string `type:"string"`
+	//
+	// AbuseContactPhone is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetDomainDetailOutput's
+	// String and GoString methods.
+	AbuseContactPhone *string `type:"string" sensitive:"true"`
 
 	// Provides details about the domain administrative contact.
 	//
-	// AdminContact is a required field
-	AdminContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
+	// AdminContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetDomainDetailOutput's
+	// String and GoString methods.
+	AdminContact *ContactDetail `type:"structure" sensitive:"true"`
 
 	// Specifies whether contact information is concealed from WHOIS queries. If
 	// the value is true, WHOIS ("who is") queries return contact information either
@@ -3455,30 +6108,32 @@ type GetDomainDetailOutput struct {
 	AutoRenew *bool `type:"boolean"`
 
 	// The date when the domain was created as found in the response to a WHOIS
-	// query. The date and time is in Coordinated Universal time (UTC).
+	// query. The date and time is in Unix time format and Coordinated Universal
+	// time (UTC).
 	CreationDate *time.Time `type:"timestamp"`
 
-	// Reserved for future use.
+	// Deprecated.
 	DnsSec *string `type:"string"`
 
+	// A complex type that contains information about the DNSSEC configuration.
+	DnssecKeys []*DnssecKey `type:"list"`
+
 	// The name of a domain.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
+	DomainName *string `type:"string"`
 
 	// The date when the registration for the domain is set to expire. The date
-	// and time is in Coordinated Universal time (UTC).
+	// and time is in Unix time format and Coordinated Universal time (UTC).
 	ExpirationDate *time.Time `type:"timestamp"`
 
-	// The name of the domain.
-	//
-	// Nameservers is a required field
-	Nameservers []*Nameserver `type:"list" required:"true"`
+	// The name servers of the domain.
+	Nameservers []*Nameserver `type:"list"`
 
 	// Provides details about the domain registrant.
 	//
-	// RegistrantContact is a required field
-	RegistrantContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
+	// RegistrantContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetDomainDetailOutput's
+	// String and GoString methods.
+	RegistrantContact *ContactDetail `type:"structure" sensitive:"true"`
 
 	// Specifies whether contact information is concealed from WHOIS queries. If
 	// the value is true, WHOIS ("who is") queries return contact information either
@@ -3500,8 +6155,8 @@ type GetDomainDetailOutput struct {
 	// Reserved for future use.
 	RegistryDomainId *string `type:"string"`
 
-	// Reseller of the domain. Domains registered or transferred using Amazon Route
-	// 53 domains will have "Amazon" as the reseller.
+	// Reseller of the domain. Domains registered or transferred using Route 53
+	// domains will have "Amazon" as the reseller.
 	Reseller *string `type:"string"`
 
 	// An array of domain name status codes, also known as Extensible Provisioning
@@ -3522,8 +6177,10 @@ type GetDomainDetailOutput struct {
 
 	// Provides details about the domain technical contact.
 	//
-	// TechContact is a required field
-	TechContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
+	// TechContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GetDomainDetailOutput's
+	// String and GoString methods.
+	TechContact *ContactDetail `type:"structure" sensitive:"true"`
 
 	// Specifies whether contact information is concealed from WHOIS queries. If
 	// the value is true, WHOIS ("who is") queries return contact information either
@@ -3533,7 +6190,7 @@ type GetDomainDetailOutput struct {
 	TechPrivacy *bool `type:"boolean"`
 
 	// The last updated date of the domain as found in the response to a WHOIS query.
-	// The date and time is in Coordinated Universal time (UTC).
+	// The date and time is in Unix time format and Coordinated Universal time (UTC).
 	UpdatedDate *time.Time `type:"timestamp"`
 
 	// The fully qualified name of the WHOIS server that can answer the WHOIS query
@@ -3541,12 +6198,20 @@ type GetDomainDetailOutput struct {
 	WhoIsServer *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDomainDetailOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDomainDetailOutput) GoString() string {
 	return s.String()
 }
@@ -3590,6 +6255,12 @@ func (s *GetDomainDetailOutput) SetCreationDate(v time.Time) *GetDomainDetailOut
 // SetDnsSec sets the DnsSec field's value.
 func (s *GetDomainDetailOutput) SetDnsSec(v string) *GetDomainDetailOutput {
 	s.DnsSec = &v
+	return s
+}
+
+// SetDnssecKeys sets the DnssecKeys field's value.
+func (s *GetDomainDetailOutput) SetDnssecKeys(v []*DnssecKey) *GetDomainDetailOutput {
+	s.DnssecKeys = v
 	return s
 }
 
@@ -3681,35 +6352,58 @@ type GetDomainSuggestionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A domain name that you want to use as the basis for a list of possible domain
-	// names. The domain name must contain a top-level domain (TLD), such as .com,
-	// that Amazon Route 53 supports. For a list of TLDs, see Domains that You Can
-	// Register with Amazon Route 53 (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// names. The top-level domain (TLD), such as .com, must be a TLD that Route
+	// 53 supports. For a list of supported TLDs, see Domains that You Can Register
+	// with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide.
+	//
+	// The domain name can contain only the following characters:
+	//
+	//    * Letters a through z. Domain names are not case sensitive.
+	//
+	//    * Numbers 0 through 9.
+	//
+	//    * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+	//    label.
+	//
+	//    * Period (.) to separate the labels in the name, such as the . in example.com.
+	//
+	// Internationalized domain names are not supported for some top-level domains.
+	// To determine whether the TLD that you want to use supports internationalized
+	// domain names, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
 
-	// If OnlyAvailable is true, Amazon Route 53 returns only domain names that
-	// are available. If OnlyAvailable is false, Amazon Route 53 returns domain
-	// names without checking whether they're available to be registered. To determine
-	// whether the domain is available, you can call checkDomainAvailability for
-	// each suggestion.
+	// If OnlyAvailable is true, Route 53 returns only domain names that are available.
+	// If OnlyAvailable is false, Route 53 returns domain names without checking
+	// whether they're available to be registered. To determine whether the domain
+	// is available, you can call checkDomainAvailability for each suggestion.
 	//
 	// OnlyAvailable is a required field
 	OnlyAvailable *bool `type:"boolean" required:"true"`
 
-	// The number of suggested domain names that you want Amazon Route 53 to return.
+	// The number of suggested domain names that you want Route 53 to return. Specify
+	// a value between 1 and 50.
 	//
 	// SuggestionCount is a required field
 	SuggestionCount *int64 `type:"integer" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDomainSuggestionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDomainSuggestionsInput) GoString() string {
 	return s.String()
 }
@@ -3759,12 +6453,20 @@ type GetDomainSuggestionsOutput struct {
 	SuggestionsList []*DomainSuggestion `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDomainSuggestionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDomainSuggestionsOutput) GoString() string {
 	return s.String()
 }
@@ -3775,23 +6477,32 @@ func (s *GetDomainSuggestionsOutput) SetSuggestionsList(v []*DomainSuggestion) *
 	return s
 }
 
-// The GetOperationDetail request includes the following element.
+// The GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// request includes the following element.
 type GetOperationDetailInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the operation for which you want to get the status. Amazon
-	// Route 53 returned the identifier in the response to the original request.
+	// The identifier for the operation for which you want to get the status. Route
+	// 53 returned the identifier in the response to the original request.
 	//
 	// OperationId is a required field
 	OperationId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOperationDetailInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOperationDetailInput) GoString() string {
 	return s.String()
 }
@@ -3822,6 +6533,9 @@ type GetOperationDetailOutput struct {
 	// The name of a domain.
 	DomainName *string `type:"string"`
 
+	// The date when the operation was last updated.
+	LastUpdatedDate *time.Time `type:"timestamp"`
+
 	// Detailed information on the status including possible errors.
 	Message *string `type:"string"`
 
@@ -3831,6 +6545,25 @@ type GetOperationDetailOutput struct {
 	// The current status of the requested operation in the system.
 	Status *string `type:"string" enum:"OperationStatus"`
 
+	// Lists any outstanding operations that require customer action. Valid values
+	// are:
+	//
+	//    * PENDING_ACCEPTANCE: The operation is waiting for acceptance from the
+	//    account that is receiving the domain.
+	//
+	//    * PENDING_CUSTOMER_ACTION: The operation is waiting for customer action,
+	//    for example, returning an email.
+	//
+	//    * PENDING_AUTHORIZATION: The operation is waiting for the form of authorization.
+	//    For more information, see ResendOperationAuthorization (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html).
+	//
+	//    * PENDING_PAYMENT_VERIFICATION: The operation is waiting for the payment
+	//    method to validate.
+	//
+	//    * PENDING_SUPPORT_CASE: The operation includes a support case and is waiting
+	//    for its resolution.
+	StatusFlag *string `type:"string" enum:"StatusFlag"`
+
 	// The date when the request was submitted.
 	SubmittedDate *time.Time `type:"timestamp"`
 
@@ -3838,12 +6571,20 @@ type GetOperationDetailOutput struct {
 	Type *string `type:"string" enum:"OperationType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOperationDetailOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetOperationDetailOutput) GoString() string {
 	return s.String()
 }
@@ -3851,6 +6592,12 @@ func (s GetOperationDetailOutput) GoString() string {
 // SetDomainName sets the DomainName field's value.
 func (s *GetOperationDetailOutput) SetDomainName(v string) *GetOperationDetailOutput {
 	s.DomainName = &v
+	return s
+}
+
+// SetLastUpdatedDate sets the LastUpdatedDate field's value.
+func (s *GetOperationDetailOutput) SetLastUpdatedDate(v time.Time) *GetOperationDetailOutput {
+	s.LastUpdatedDate = &v
 	return s
 }
 
@@ -3872,6 +6619,12 @@ func (s *GetOperationDetailOutput) SetStatus(v string) *GetOperationDetailOutput
 	return s
 }
 
+// SetStatusFlag sets the StatusFlag field's value.
+func (s *GetOperationDetailOutput) SetStatusFlag(v string) *GetOperationDetailOutput {
+	s.StatusFlag = &v
+	return s
+}
+
 // SetSubmittedDate sets the SubmittedDate field's value.
 func (s *GetOperationDetailOutput) SetSubmittedDate(v time.Time) *GetOperationDetailOutput {
 	s.SubmittedDate = &v
@@ -3884,16 +6637,91 @@ func (s *GetOperationDetailOutput) SetType(v string) *GetOperationDetailOutput {
 	return s
 }
 
+// The requested item is not acceptable. For example, for APIs that accept a
+// domain name, the request might specify a domain name that doesn't belong
+// to the account that submitted the request. For AcceptDomainTransferFromAnotherAwsAccount,
+// the password might be invalid.
+type InvalidInput struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The requested item is not acceptable. For example, for an OperationId it
+	// might refer to the ID of an operation that is already completed. For a domain
+	// name, it might not be a valid domain name or belong to the requester account.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidInput) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInput(v protocol.ResponseMetadata) error {
+	return &InvalidInput{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidInput) Code() string {
+	return "InvalidInput"
+}
+
+// Message returns the exception's message.
+func (s *InvalidInput) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidInput) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidInput) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidInput) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidInput) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The ListDomains request includes the following elements.
 type ListDomainsInput struct {
 	_ struct{} `type:"structure"`
 
+	// A complex type that contains information about the filters applied during
+	// the ListDomains request. The filter conditions can include domain name and
+	// domain expiration.
+	FilterConditions []*FilterCondition `type:"list"`
+
 	// For an initial request for a list of domains, omit this element. If the number
-	// of domains that are associated with the current AWS account is greater than
-	// the value that you specified for MaxItems, you can use Marker to return additional
-	// domains. Get the value of NextPageMarker from the previous response, and
-	// submit another request that includes the value of NextPageMarker in the Marker
-	// element.
+	// of domains that are associated with the current Amazon Web Services account
+	// is greater than the value that you specified for MaxItems, you can use Marker
+	// to return additional domains. Get the value of NextPageMarker from the previous
+	// response, and submit another request that includes the value of NextPageMarker
+	// in the Marker element.
 	//
 	// Constraints: The marker must match the value specified in the previous request.
 	Marker *string `type:"string"`
@@ -3902,16 +6730,59 @@ type ListDomainsInput struct {
 	//
 	// Default: 20
 	MaxItems *int64 `type:"integer"`
+
+	// A complex type that contains information about the requested ordering of
+	// domains in the returned list.
+	SortCondition *SortCondition `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListDomainsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListDomainsInput"}
+	if s.FilterConditions != nil {
+		for i, v := range s.FilterConditions {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterConditions", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SortCondition != nil {
+		if err := s.SortCondition.Validate(); err != nil {
+			invalidParams.AddNested("SortCondition", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilterConditions sets the FilterConditions field's value.
+func (s *ListDomainsInput) SetFilterConditions(v []*FilterCondition) *ListDomainsInput {
+	s.FilterConditions = v
+	return s
 }
 
 // SetMarker sets the Marker field's value.
@@ -3926,14 +6797,18 @@ func (s *ListDomainsInput) SetMaxItems(v int64) *ListDomainsInput {
 	return s
 }
 
+// SetSortCondition sets the SortCondition field's value.
+func (s *ListDomainsInput) SetSortCondition(v *SortCondition) *ListDomainsInput {
+	s.SortCondition = v
+	return s
+}
+
 // The ListDomains response includes the following elements.
 type ListDomainsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A summary of domains.
-	//
-	// Domains is a required field
-	Domains []*DomainSummary `type:"list" required:"true"`
+	// A list of domains.
+	Domains []*DomainSummary `type:"list"`
 
 	// If there are more domains than you specified for MaxItems in the request,
 	// submit another request and include the value of NextPageMarker in the value
@@ -3941,12 +6816,20 @@ type ListDomainsOutput struct {
 	NextPageMarker *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDomainsOutput) GoString() string {
 	return s.String()
 }
@@ -3980,18 +6863,38 @@ type ListOperationsInput struct {
 	// Default: 20
 	MaxItems *int64 `type:"integer"`
 
+	// The sort type for returned values.
+	SortBy *string `type:"string" enum:"ListOperationsSortAttributeName"`
+
+	// The sort order for returned values, either ascending or descending.
+	SortOrder *string `type:"string" enum:"SortOrder"`
+
+	// The status of the operations.
+	Status []*string `type:"list" enum:"OperationStatus"`
+
 	// An optional parameter that lets you get information about all the operations
 	// that you submitted after a specified date and time. Specify the date and
-	// time in Coordinated Universal time (UTC).
+	// time in Unix time format and Coordinated Universal time (UTC).
 	SubmittedSince *time.Time `type:"timestamp"`
+
+	// An arrays of the domains operation types.
+	Type []*string `type:"list" enum:"OperationType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOperationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOperationsInput) GoString() string {
 	return s.String()
 }
@@ -4008,9 +6911,33 @@ func (s *ListOperationsInput) SetMaxItems(v int64) *ListOperationsInput {
 	return s
 }
 
+// SetSortBy sets the SortBy field's value.
+func (s *ListOperationsInput) SetSortBy(v string) *ListOperationsInput {
+	s.SortBy = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *ListOperationsInput) SetSortOrder(v string) *ListOperationsInput {
+	s.SortOrder = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *ListOperationsInput) SetStatus(v []*string) *ListOperationsInput {
+	s.Status = v
+	return s
+}
+
 // SetSubmittedSince sets the SubmittedSince field's value.
 func (s *ListOperationsInput) SetSubmittedSince(v time.Time) *ListOperationsInput {
 	s.SubmittedSince = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *ListOperationsInput) SetType(v []*string) *ListOperationsInput {
+	s.Type = v
 	return s
 }
 
@@ -4024,17 +6951,23 @@ type ListOperationsOutput struct {
 	NextPageMarker *string `type:"string"`
 
 	// Lists summaries of the operations.
-	//
-	// Operations is a required field
-	Operations []*OperationSummary `type:"list" required:"true"`
+	Operations []*OperationSummary `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOperationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOperationsOutput) GoString() string {
 	return s.String()
 }
@@ -4051,6 +6984,125 @@ func (s *ListOperationsOutput) SetOperations(v []*OperationSummary) *ListOperati
 	return s
 }
 
+type ListPricesInput struct {
+	_ struct{} `type:"structure"`
+
+	// For an initial request for a list of prices, omit this element. If the number
+	// of prices that are not yet complete is greater than the value that you specified
+	// for MaxItems, you can use Marker to return additional prices. Get the value
+	// of NextPageMarker from the previous response, and submit another request
+	// that includes the value of NextPageMarker in the Marker element.
+	//
+	// Used only for all TLDs. If you specify a TLD, don't specify a Marker.
+	Marker *string `type:"string"`
+
+	// Number of Prices to be returned.
+	//
+	// Used only for all TLDs. If you specify a TLD, don't specify a MaxItems.
+	MaxItems *int64 `type:"integer"`
+
+	// The TLD for which you want to receive the pricing information. For example.
+	// .net.
+	//
+	// If a Tld value is not provided, a list of prices for all TLDs supported by
+	// Route 53 is returned.
+	Tld *string `min:"2" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListPricesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListPricesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListPricesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListPricesInput"}
+	if s.Tld != nil && len(*s.Tld) < 2 {
+		invalidParams.Add(request.NewErrParamMinLen("Tld", 2))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMarker sets the Marker field's value.
+func (s *ListPricesInput) SetMarker(v string) *ListPricesInput {
+	s.Marker = &v
+	return s
+}
+
+// SetMaxItems sets the MaxItems field's value.
+func (s *ListPricesInput) SetMaxItems(v int64) *ListPricesInput {
+	s.MaxItems = &v
+	return s
+}
+
+// SetTld sets the Tld field's value.
+func (s *ListPricesInput) SetTld(v string) *ListPricesInput {
+	s.Tld = &v
+	return s
+}
+
+type ListPricesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// If there are more prices than you specified for MaxItems in the request,
+	// submit another request and include the value of NextPageMarker in the value
+	// of Marker.
+	//
+	// Used only for all TLDs. If you specify a TLD, don't specify a NextPageMarker.
+	NextPageMarker *string `type:"string"`
+
+	// A complex type that includes all the pricing information. If you specify
+	// a TLD, this array contains only the pricing for that TLD.
+	Prices []*DomainPrice `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListPricesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ListPricesOutput) GoString() string {
+	return s.String()
+}
+
+// SetNextPageMarker sets the NextPageMarker field's value.
+func (s *ListPricesOutput) SetNextPageMarker(v string) *ListPricesOutput {
+	s.NextPageMarker = &v
+	return s
+}
+
+// SetPrices sets the Prices field's value.
+func (s *ListPricesOutput) SetPrices(v []*DomainPrice) *ListPricesOutput {
+	s.Prices = v
+	return s
+}
+
 // The ListTagsForDomainRequest includes the following elements.
 type ListTagsForDomainInput struct {
 	_ struct{} `type:"structure"`
@@ -4061,12 +7113,20 @@ type ListTagsForDomainInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForDomainInput) GoString() string {
 	return s.String()
 }
@@ -4095,17 +7155,23 @@ type ListTagsForDomainOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the tags that are associated with the specified domain.
-	//
-	// TagList is a required field
-	TagList []*Tag `type:"list" required:"true"`
+	TagList []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForDomainOutput) GoString() string {
 	return s.String()
 }
@@ -4116,7 +7182,7 @@ func (s *ListTagsForDomainOutput) SetTagList(v []*Tag) *ListTagsForDomainOutput 
 	return s
 }
 
-// Nameserver includes the following elements.
+// Name server includes the following elements.
 type Nameserver struct {
 	_ struct{} `type:"structure"`
 
@@ -4136,12 +7202,20 @@ type Nameserver struct {
 	Name *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Nameserver) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Nameserver) GoString() string {
 	return s.String()
 }
@@ -4171,39 +7245,155 @@ func (s *Nameserver) SetName(v string) *Nameserver {
 	return s
 }
 
+// The number of operations or jobs running exceeded the allowed threshold for
+// the account.
+type OperationLimitExceeded struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The number of operations or jobs running exceeded the allowed threshold for
+	// the account.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationLimitExceeded) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationLimitExceeded) GoString() string {
+	return s.String()
+}
+
+func newErrorOperationLimitExceeded(v protocol.ResponseMetadata) error {
+	return &OperationLimitExceeded{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OperationLimitExceeded) Code() string {
+	return "OperationLimitExceeded"
+}
+
+// Message returns the exception's message.
+func (s *OperationLimitExceeded) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OperationLimitExceeded) OrigErr() error {
+	return nil
+}
+
+func (s *OperationLimitExceeded) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OperationLimitExceeded) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OperationLimitExceeded) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // OperationSummary includes the following elements.
 type OperationSummary struct {
 	_ struct{} `type:"structure"`
 
+	// Name of the domain.
+	DomainName *string `type:"string"`
+
+	// The date when the last change was made in Unix time format and Coordinated
+	// Universal Time (UTC).
+	LastUpdatedDate *time.Time `type:"timestamp"`
+
+	// Message about the operation.
+	Message *string `type:"string"`
+
 	// Identifier returned to track the requested action.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
+	OperationId *string `type:"string"`
 
 	// The current status of the requested operation in the system.
+	Status *string `type:"string" enum:"OperationStatus"`
+
+	// Automatically checks whether there are no outstanding operations on domains
+	// that need customer attention.
 	//
-	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"OperationStatus"`
+	// Valid values are:
+	//
+	//    * PENDING_ACCEPTANCE: The operation is waiting for acceptance from the
+	//    account that is receiving the domain.
+	//
+	//    * PENDING_CUSTOMER_ACTION: The operation is waiting for customer action,
+	//    for example, returning an email.
+	//
+	//    * PENDING_AUTHORIZATION: The operation is waiting for the form of authorization.
+	//    For more information, see ResendOperationAuthorization (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html).
+	//
+	//    * PENDING_PAYMENT_VERIFICATION: The operation is waiting for the payment
+	//    method to validate.
+	//
+	//    * PENDING_SUPPORT_CASE: The operation includes a support case and is waiting
+	//    for its resolution.
+	StatusFlag *string `type:"string" enum:"StatusFlag"`
 
 	// The date when the request was submitted.
-	//
-	// SubmittedDate is a required field
-	SubmittedDate *time.Time `type:"timestamp" required:"true"`
+	SubmittedDate *time.Time `type:"timestamp"`
 
 	// Type of the action requested.
-	//
-	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"OperationType"`
+	Type *string `type:"string" enum:"OperationType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OperationSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OperationSummary) GoString() string {
 	return s.String()
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *OperationSummary) SetDomainName(v string) *OperationSummary {
+	s.DomainName = &v
+	return s
+}
+
+// SetLastUpdatedDate sets the LastUpdatedDate field's value.
+func (s *OperationSummary) SetLastUpdatedDate(v time.Time) *OperationSummary {
+	s.LastUpdatedDate = &v
+	return s
+}
+
+// SetMessage sets the Message field's value.
+func (s *OperationSummary) SetMessage(v string) *OperationSummary {
+	s.Message = &v
+	return s
 }
 
 // SetOperationId sets the OperationId field's value.
@@ -4215,6 +7405,12 @@ func (s *OperationSummary) SetOperationId(v string) *OperationSummary {
 // SetStatus sets the Status field's value.
 func (s *OperationSummary) SetStatus(v string) *OperationSummary {
 	s.Status = &v
+	return s
+}
+
+// SetStatusFlag sets the StatusFlag field's value.
+func (s *OperationSummary) SetStatusFlag(v string) *OperationSummary {
+	s.StatusFlag = &v
 	return s
 }
 
@@ -4230,26 +7426,176 @@ func (s *OperationSummary) SetType(v string) *OperationSummary {
 	return s
 }
 
+// Currency-specific price information.
+type PriceWithCurrency struct {
+	_ struct{} `type:"structure"`
+
+	// The currency specifier.
+	//
+	// Currency is a required field
+	Currency *string `min:"3" type:"string" required:"true"`
+
+	// The price of a domain, in a specific currency.
+	//
+	// Price is a required field
+	Price *float64 `type:"double" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PriceWithCurrency) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PriceWithCurrency) GoString() string {
+	return s.String()
+}
+
+// SetCurrency sets the Currency field's value.
+func (s *PriceWithCurrency) SetCurrency(v string) *PriceWithCurrency {
+	s.Currency = &v
+	return s
+}
+
+// SetPrice sets the Price field's value.
+func (s *PriceWithCurrency) SetPrice(v float64) *PriceWithCurrency {
+	s.Price = &v
+	return s
+}
+
+type PushDomainInput struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the domain.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+
+	// New IPS tag for the domain.
+	//
+	// Target is a required field
+	Target *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PushDomainInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PushDomainInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PushDomainInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "PushDomainInput"}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+	if s.Target == nil {
+		invalidParams.Add(request.NewErrParamRequired("Target"))
+	}
+	if s.Target != nil && len(*s.Target) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Target", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *PushDomainInput) SetDomainName(v string) *PushDomainInput {
+	s.DomainName = &v
+	return s
+}
+
+// SetTarget sets the Target field's value.
+func (s *PushDomainInput) SetTarget(v string) *PushDomainInput {
+	s.Target = &v
+	return s
+}
+
+type PushDomainOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PushDomainOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PushDomainOutput) GoString() string {
+	return s.String()
+}
+
 // The RegisterDomain request includes the following elements.
 type RegisterDomainInput struct {
 	_ struct{} `type:"structure"`
 
-	// Provides detailed contact information.
+	// Provides detailed contact information. For information about the values that
+	// you specify for each element, see ContactDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
+	//
+	// AdminContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RegisterDomainInput's
+	// String and GoString methods.
 	//
 	// AdminContact is a required field
 	AdminContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Indicates whether the domain will be automatically renewed (true) or not
-	// (false). Autorenewal only takes effect after the account is charged.
+	// (false). Auto renewal only takes effect after the account is charged.
 	//
 	// Default: true
 	AutoRenew *bool `type:"boolean"`
 
-	// The domain name that you want to register.
+	// The domain name that you want to register. The top-level domain (TLD), such
+	// as .com, must be a TLD that Route 53 supports. For a list of supported TLDs,
+	// see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// in the Amazon Route 53 Developer Guide.
 	//
-	// Constraints: The domain name can contain only the letters a through z, the
-	// numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not
-	// supported.
+	// The domain name can contain only the following characters:
+	//
+	//    * Letters a through z. Domain names are not case sensitive.
+	//
+	//    * Numbers 0 through 9.
+	//
+	//    * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+	//    label.
+	//
+	//    * Period (.) to separate the labels in the name, such as the . in example.com.
+	//
+	// Internationalized domain names are not supported for some top-level domains.
+	// To determine whether the TLD that you want to use supports internationalized
+	// domain names, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
+	// For more information, see Formatting Internationalized Domain Names (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns).
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -4257,7 +7603,7 @@ type RegisterDomainInput struct {
 	// The number of years that you want to register the domain for. Domains are
 	// registered for a minimum of one year. The maximum period depends on the top-level
 	// domain. For the range of valid values for your domain, see Domains that You
-	// Can Register with Amazon Route 53 (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide.
 	//
 	// Default: 1
@@ -4274,6 +7620,9 @@ type RegisterDomainInput struct {
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the admin contact.
 	//
+	// You must specify the same privacy setting for the administrative, registrant,
+	// and technical contacts.
+	//
 	// Default: true
 	PrivacyProtectAdminContact *bool `type:"boolean"`
 
@@ -4284,6 +7633,9 @@ type RegisterDomainInput struct {
 	// return the information that you entered for the registrant contact (the domain
 	// owner).
 	//
+	// You must specify the same privacy setting for the administrative, registrant,
+	// and technical contacts.
+	//
 	// Default: true
 	PrivacyProtectRegistrantContact *bool `type:"boolean"`
 
@@ -4293,26 +7645,47 @@ type RegisterDomainInput struct {
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the technical contact.
 	//
+	// You must specify the same privacy setting for the administrative, registrant,
+	// and technical contacts.
+	//
 	// Default: true
 	PrivacyProtectTechContact *bool `type:"boolean"`
 
-	// Provides detailed contact information.
+	// Provides detailed contact information. For information about the values that
+	// you specify for each element, see ContactDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
+	//
+	// RegistrantContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RegisterDomainInput's
+	// String and GoString methods.
 	//
 	// RegistrantContact is a required field
 	RegistrantContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
-	// Provides detailed contact information.
+	// Provides detailed contact information. For information about the values that
+	// you specify for each element, see ContactDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
+	//
+	// TechContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RegisterDomainInput's
+	// String and GoString methods.
 	//
 	// TechContact is a required field
 	TechContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDomainInput) GoString() string {
 	return s.String()
 }
@@ -4424,25 +7797,117 @@ func (s *RegisterDomainInput) SetTechContact(v *ContactDetail) *RegisterDomainIn
 type RegisterDomainOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RegisterDomainOutput) GoString() string {
 	return s.String()
 }
 
 // SetOperationId sets the OperationId field's value.
 func (s *RegisterDomainOutput) SetOperationId(v string) *RegisterDomainOutput {
+	s.OperationId = &v
+	return s
+}
+
+// The RejectDomainTransferFromAnotherAwsAccount request includes the following
+// element.
+type RejectDomainTransferFromAnotherAwsAccountInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain that was specified when another Amazon Web Services
+	// account submitted a TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
+	// request.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RejectDomainTransferFromAnotherAwsAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RejectDomainTransferFromAnotherAwsAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RejectDomainTransferFromAnotherAwsAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RejectDomainTransferFromAnotherAwsAccountInput"}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *RejectDomainTransferFromAnotherAwsAccountInput) SetDomainName(v string) *RejectDomainTransferFromAnotherAwsAccountInput {
+	s.DomainName = &v
+	return s
+}
+
+// The RejectDomainTransferFromAnotherAwsAccount response includes the following
+// element.
+type RejectDomainTransferFromAnotherAwsAccountOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier that TransferDomainToAnotherAwsAccount returned to track the
+	// progress of the request. Because the transfer request was rejected, the value
+	// is no longer valid, and you can't use GetOperationDetail to query the operation
+	// status.
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RejectDomainTransferFromAnotherAwsAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RejectDomainTransferFromAnotherAwsAccountOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *RejectDomainTransferFromAnotherAwsAccountOutput) SetOperationId(v string) *RejectDomainTransferFromAnotherAwsAccountOutput {
 	s.OperationId = &v
 	return s
 }
@@ -4465,19 +7930,27 @@ type RenewDomainInput struct {
 
 	// The number of years that you want to renew the domain for. The maximum number
 	// of years depends on the top-level domain. For the range of valid values for
-	// your domain, see Domains that You Can Register with Amazon Route 53 (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// your domain, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide.
 	//
 	// Default: 1
 	DurationInYears *int64 `min:"1" type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RenewDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RenewDomainInput) GoString() string {
 	return s.String()
 }
@@ -4522,19 +7995,25 @@ func (s *RenewDomainInput) SetDurationInYears(v int64) *RenewDomainInput {
 type RenewDomainOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for tracking the progress of the request. To use this ID to
-	// query the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RenewDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RenewDomainOutput) GoString() string {
 	return s.String()
 }
@@ -4548,17 +8027,25 @@ func (s *RenewDomainOutput) SetOperationId(v string) *RenewDomainOutput {
 type ResendContactReachabilityEmailInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the domain for which you want Amazon Route 53 to resend a confirmation
+	// The name of the domain for which you want Route 53 to resend a confirmation
 	// email to the registrant contact.
 	DomainName *string `locationName:"domainName" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResendContactReachabilityEmailInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResendContactReachabilityEmailInput) GoString() string {
 	return s.String()
 }
@@ -4577,7 +8064,11 @@ type ResendContactReachabilityEmailOutput struct {
 
 	// The email address for the registrant contact at the time that we sent the
 	// verification email.
-	EmailAddress *string `locationName:"emailAddress" type:"string"`
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by ResendContactReachabilityEmailOutput's
+	// String and GoString methods.
+	EmailAddress *string `locationName:"emailAddress" type:"string" sensitive:"true"`
 
 	// True if the email address for the registrant contact has already been verified,
 	// and false otherwise. If the email address has already been verified, we don't
@@ -4585,12 +8076,20 @@ type ResendContactReachabilityEmailOutput struct {
 	IsAlreadyVerified *bool `locationName:"isAlreadyVerified" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResendContactReachabilityEmailOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResendContactReachabilityEmailOutput) GoString() string {
 	return s.String()
 }
@@ -4613,6 +8112,74 @@ func (s *ResendContactReachabilityEmailOutput) SetIsAlreadyVerified(v bool) *Res
 	return s
 }
 
+type ResendOperationAuthorizationInput struct {
+	_ struct{} `type:"structure"`
+
+	// Operation ID.
+	//
+	// OperationId is a required field
+	OperationId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResendOperationAuthorizationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResendOperationAuthorizationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResendOperationAuthorizationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ResendOperationAuthorizationInput"}
+	if s.OperationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("OperationId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *ResendOperationAuthorizationInput) SetOperationId(v string) *ResendOperationAuthorizationInput {
+	s.OperationId = &v
+	return s
+}
+
+type ResendOperationAuthorizationOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResendOperationAuthorizationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResendOperationAuthorizationOutput) GoString() string {
+	return s.String()
+}
+
 // A request for the authorization code for the specified domain. To transfer
 // a domain to another registrar, you provide this value to the new registrar.
 type RetrieveDomainAuthCodeInput struct {
@@ -4624,12 +8191,20 @@ type RetrieveDomainAuthCodeInput struct {
 	DomainName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RetrieveDomainAuthCodeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RetrieveDomainAuthCodeInput) GoString() string {
 	return s.String()
 }
@@ -4659,16 +8234,26 @@ type RetrieveDomainAuthCodeOutput struct {
 
 	// The authorization code for the domain.
 	//
-	// AuthCode is a required field
-	AuthCode *string `type:"string" required:"true" sensitive:"true"`
+	// AuthCode is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by RetrieveDomainAuthCodeOutput's
+	// String and GoString methods.
+	AuthCode *string `type:"string" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RetrieveDomainAuthCodeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RetrieveDomainAuthCodeOutput) GoString() string {
 	return s.String()
 }
@@ -4677,6 +8262,137 @@ func (s RetrieveDomainAuthCodeOutput) GoString() string {
 func (s *RetrieveDomainAuthCodeOutput) SetAuthCode(v string) *RetrieveDomainAuthCodeOutput {
 	s.AuthCode = &v
 	return s
+}
+
+// Information for sorting a list of domains.
+type SortCondition struct {
+	_ struct{} `type:"structure"`
+
+	// Field to be used for sorting the list of domains. It can be either the name
+	// or the expiration for a domain. Note that if filterCondition is used in the
+	// same ListDomains (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html)
+	// call, the field used for sorting has to be the same as the field used for
+	// filtering.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true" enum:"ListDomainsAttributeName"`
+
+	// The sort order for a list of domains. Either ascending (ASC) or descending
+	// (DES).
+	//
+	// SortOrder is a required field
+	SortOrder *string `type:"string" required:"true" enum:"SortOrder"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SortCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SortCondition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SortCondition) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SortCondition"}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.SortOrder == nil {
+		invalidParams.Add(request.NewErrParamRequired("SortOrder"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetName sets the Name field's value.
+func (s *SortCondition) SetName(v string) *SortCondition {
+	s.Name = &v
+	return s
+}
+
+// SetSortOrder sets the SortOrder field's value.
+func (s *SortCondition) SetSortOrder(v string) *SortCondition {
+	s.SortOrder = &v
+	return s
+}
+
+// The top-level domain does not support this operation.
+type TLDRulesViolation struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The top-level domain does not support this operation.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TLDRulesViolation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TLDRulesViolation) GoString() string {
+	return s.String()
+}
+
+func newErrorTLDRulesViolation(v protocol.ResponseMetadata) error {
+	return &TLDRulesViolation{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TLDRulesViolation) Code() string {
+	return "TLDRulesViolation"
+}
+
+// Message returns the exception's message.
+func (s *TLDRulesViolation) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TLDRulesViolation) OrigErr() error {
+	return nil
+}
+
+func (s *TLDRulesViolation) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TLDRulesViolation) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TLDRulesViolation) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Each tag includes the following elements.
@@ -4688,7 +8404,7 @@ type Tag struct {
 	// Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@"
 	//
 	// Constraints: Each key can be 1-128 characters long.
-	Key *string `type:"string"`
+	Key *string `min:"1" type:"string"`
 
 	// The value of a tag.
 	//
@@ -4698,14 +8414,35 @@ type Tag struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetKey sets the Key field's value.
@@ -4726,24 +8463,43 @@ type TransferDomainInput struct {
 
 	// Provides detailed contact information.
 	//
+	// AdminContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by TransferDomainInput's
+	// String and GoString methods.
+	//
 	// AdminContact is a required field
 	AdminContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// The authorization code for the domain. You get this value from the current
 	// registrar.
+	//
+	// AuthCode is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by TransferDomainInput's
+	// String and GoString methods.
 	AuthCode *string `type:"string" sensitive:"true"`
 
 	// Indicates whether the domain will be automatically renewed (true) or not
-	// (false). Autorenewal only takes effect after the account is charged.
+	// (false). Auto renewal only takes effect after the account is charged.
 	//
 	// Default: true
 	AutoRenew *bool `type:"boolean"`
 
-	// The name of the domain that you want to transfer to Amazon Route 53.
+	// The name of the domain that you want to transfer to Route 53. The top-level
+	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list
+	// of supported TLDs, see Domains that You Can Register with Amazon Route 53
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
+	// in the Amazon Route 53 Developer Guide.
 	//
-	// Constraints: The domain name can contain only the letters a through z, the
-	// numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not
-	// supported.
+	// The domain name can contain only the following characters:
+	//
+	//    * Letters a through z. Domain names are not case sensitive.
+	//
+	//    * Numbers 0 through 9.
+	//
+	//    * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+	//    label.
+	//
+	//    * Period (.) to separate the labels in the name, such as the . in example.com.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -4764,10 +8520,12 @@ type TransferDomainInput struct {
 	Nameservers []*Nameserver `type:"list"`
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either
-	// for Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the admin contact.
+	// specify true, WHOIS ("who is") queries return contact information for the
+	// registrar, the phrase "REDACTED FOR PRIVACY", or "On behalf of <domain name>
+	// owner.".
+	//
+	// While some domains may allow different privacy settings per contact, we recommend
+	// specifying the same privacy setting for all contacts.
 	//
 	// Default: true
 	PrivacyProtectAdminContact *bool `type:"boolean"`
@@ -4779,6 +8537,9 @@ type TransferDomainInput struct {
 	// return the information that you entered for the registrant contact (domain
 	// owner).
 	//
+	// You must specify the same privacy setting for the administrative, registrant,
+	// and technical contacts.
+	//
 	// Default: true
 	PrivacyProtectRegistrantContact *bool `type:"boolean"`
 
@@ -4788,26 +8549,45 @@ type TransferDomainInput struct {
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the technical contact.
 	//
+	// You must specify the same privacy setting for the administrative, registrant,
+	// and technical contacts.
+	//
 	// Default: true
 	PrivacyProtectTechContact *bool `type:"boolean"`
 
 	// Provides detailed contact information.
+	//
+	// RegistrantContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by TransferDomainInput's
+	// String and GoString methods.
 	//
 	// RegistrantContact is a required field
 	RegistrantContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Provides detailed contact information.
 	//
+	// TechContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by TransferDomainInput's
+	// String and GoString methods.
+	//
 	// TechContact is a required field
 	TechContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TransferDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TransferDomainInput) GoString() string {
 	return s.String()
 }
@@ -4937,23 +8717,29 @@ func (s *TransferDomainInput) SetTechContact(v *ContactDetail) *TransferDomainIn
 	return s
 }
 
-// The TranserDomain response includes the following element.
+// The TransferDomain response includes the following element.
 type TransferDomainOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TransferDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TransferDomainOutput) GoString() string {
 	return s.String()
 }
@@ -4964,12 +8750,201 @@ func (s *TransferDomainOutput) SetOperationId(v string) *TransferDomainOutput {
 	return s
 }
 
+// The TransferDomainToAnotherAwsAccount request includes the following elements.
+type TransferDomainToAnotherAwsAccountInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the Amazon Web Services account that you want to transfer
+	// the domain to, for example, 111122223333.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// The name of the domain that you want to transfer from the current Amazon
+	// Web Services account to another account.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TransferDomainToAnotherAwsAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TransferDomainToAnotherAwsAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TransferDomainToAnotherAwsAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TransferDomainToAnotherAwsAccountInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.DomainName == nil {
+		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *TransferDomainToAnotherAwsAccountInput) SetAccountId(v string) *TransferDomainToAnotherAwsAccountInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetDomainName sets the DomainName field's value.
+func (s *TransferDomainToAnotherAwsAccountInput) SetDomainName(v string) *TransferDomainToAnotherAwsAccountInput {
+	s.DomainName = &v
+	return s
+}
+
+// The TransferDomainToAnotherAwsAccount response includes the following elements.
+type TransferDomainToAnotherAwsAccountOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
+
+	// To finish transferring a domain to another Amazon Web Services account, the
+	// account that the domain is being transferred to must submit an AcceptDomainTransferFromAnotherAwsAccount
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html)
+	// request. The request must include the value of the Password element that
+	// was returned in the TransferDomainToAnotherAwsAccount response.
+	//
+	// Password is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by TransferDomainToAnotherAwsAccountOutput's
+	// String and GoString methods.
+	Password *string `type:"string" sensitive:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TransferDomainToAnotherAwsAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TransferDomainToAnotherAwsAccountOutput) GoString() string {
+	return s.String()
+}
+
+// SetOperationId sets the OperationId field's value.
+func (s *TransferDomainToAnotherAwsAccountOutput) SetOperationId(v string) *TransferDomainToAnotherAwsAccountOutput {
+	s.OperationId = &v
+	return s
+}
+
+// SetPassword sets the Password field's value.
+func (s *TransferDomainToAnotherAwsAccountOutput) SetPassword(v string) *TransferDomainToAnotherAwsAccountOutput {
+	s.Password = &v
+	return s
+}
+
+// Amazon Route 53 does not support this top-level domain (TLD).
+type UnsupportedTLD struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// Amazon Route 53 does not support this top-level domain (TLD).
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedTLD) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedTLD) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedTLD(v protocol.ResponseMetadata) error {
+	return &UnsupportedTLD{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedTLD) Code() string {
+	return "UnsupportedTLD"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedTLD) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedTLD) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedTLD) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedTLD) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedTLD) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The UpdateDomainContact request includes the following elements.
 type UpdateDomainContactInput struct {
 	_ struct{} `type:"structure"`
 
 	// Provides detailed contact information.
+	//
+	// AdminContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateDomainContactInput's
+	// String and GoString methods.
 	AdminContact *ContactDetail `type:"structure" sensitive:"true"`
+
+	// Customer's consent for the owner change request. Required if the domain is
+	// not free (consent price is more than $0.00).
+	Consent *Consent `type:"structure"`
 
 	// The name of the domain that you want to update contact information for.
 	//
@@ -4977,18 +8952,34 @@ type UpdateDomainContactInput struct {
 	DomainName *string `type:"string" required:"true"`
 
 	// Provides detailed contact information.
+	//
+	// RegistrantContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateDomainContactInput's
+	// String and GoString methods.
 	RegistrantContact *ContactDetail `type:"structure" sensitive:"true"`
 
 	// Provides detailed contact information.
+	//
+	// TechContact is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateDomainContactInput's
+	// String and GoString methods.
 	TechContact *ContactDetail `type:"structure" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainContactInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainContactInput) GoString() string {
 	return s.String()
 }
@@ -5002,6 +8993,11 @@ func (s *UpdateDomainContactInput) Validate() error {
 	if s.AdminContact != nil {
 		if err := s.AdminContact.Validate(); err != nil {
 			invalidParams.AddNested("AdminContact", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Consent != nil {
+		if err := s.Consent.Validate(); err != nil {
+			invalidParams.AddNested("Consent", err.(request.ErrInvalidParams))
 		}
 	}
 	if s.RegistrantContact != nil {
@@ -5027,6 +9023,12 @@ func (s *UpdateDomainContactInput) SetAdminContact(v *ContactDetail) *UpdateDoma
 	return s
 }
 
+// SetConsent sets the Consent field's value.
+func (s *UpdateDomainContactInput) SetConsent(v *Consent) *UpdateDomainContactInput {
+	s.Consent = v
+	return s
+}
+
 // SetDomainName sets the DomainName field's value.
 func (s *UpdateDomainContactInput) SetDomainName(v string) *UpdateDomainContactInput {
 	s.DomainName = &v
@@ -5049,19 +9051,25 @@ func (s *UpdateDomainContactInput) SetTechContact(v *ContactDetail) *UpdateDomai
 type UpdateDomainContactOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainContactOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainContactOutput) GoString() string {
 	return s.String()
 }
@@ -5081,6 +9089,9 @@ type UpdateDomainContactPrivacyInput struct {
 	// for Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the admin contact.
+	//
+	// You must specify the same privacy setting for the administrative, registrant,
+	// and technical contacts.
 	AdminPrivacy *bool `type:"boolean"`
 
 	// The name of the domain that you want to update the privacy setting for.
@@ -5094,6 +9105,9 @@ type UpdateDomainContactPrivacyInput struct {
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the registrant contact (domain
 	// owner).
+	//
+	// You must specify the same privacy setting for the administrative, registrant,
+	// and technical contacts.
 	RegistrantPrivacy *bool `type:"boolean"`
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
@@ -5101,15 +9115,26 @@ type UpdateDomainContactPrivacyInput struct {
 	// for Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the technical contact.
+	//
+	// You must specify the same privacy setting for the administrative, registrant,
+	// and technical contacts.
 	TechPrivacy *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainContactPrivacyInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainContactPrivacyInput) GoString() string {
 	return s.String()
 }
@@ -5157,17 +9182,23 @@ type UpdateDomainContactPrivacyOutput struct {
 
 	// Identifier for tracking the progress of the request. To use this ID to query
 	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
+	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainContactPrivacyOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainContactPrivacyOutput) GoString() string {
 	return s.String()
 }
@@ -5196,7 +9227,11 @@ type UpdateDomainNameserversInput struct {
 	// The authorization key for .fi domains
 	//
 	// Deprecated: FIAuthKey has been deprecated
-	FIAuthKey *string `deprecated:"true" type:"string"`
+	//
+	// FIAuthKey is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateDomainNameserversInput's
+	// String and GoString methods.
+	FIAuthKey *string `deprecated:"true" type:"string" sensitive:"true"`
 
 	// A list of new name servers for the domain.
 	//
@@ -5204,12 +9239,20 @@ type UpdateDomainNameserversInput struct {
 	Nameservers []*Nameserver `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainNameserversInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainNameserversInput) GoString() string {
 	return s.String()
 }
@@ -5262,19 +9305,25 @@ func (s *UpdateDomainNameserversInput) SetNameservers(v []*Nameserver) *UpdateDo
 type UpdateDomainNameserversOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
+	// Identifier for tracking the progress of the request. To query the operation
+	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	OperationId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainNameserversOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateDomainNameserversOutput) GoString() string {
 	return s.String()
 }
@@ -5299,12 +9348,20 @@ type UpdateTagsForDomainInput struct {
 	TagsToUpdate []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTagsForDomainInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTagsForDomainInput) GoString() string {
 	return s.String()
 }
@@ -5314,6 +9371,16 @@ func (s *UpdateTagsForDomainInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "UpdateTagsForDomainInput"}
 	if s.DomainName == nil {
 		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+	}
+	if s.TagsToUpdate != nil {
+		for i, v := range s.TagsToUpdate {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsToUpdate", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5338,12 +9405,20 @@ type UpdateTagsForDomainOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTagsForDomainOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTagsForDomainOutput) GoString() string {
 	return s.String()
 }
@@ -5353,15 +9428,17 @@ type ViewBillingInput struct {
 	_ struct{} `type:"structure"`
 
 	// The end date and time for the time period for which you want a list of billing
-	// records. Specify the date and time in Coordinated Universal time (UTC).
+	// records. Specify the date and time in Unix time format and Coordinated Universal
+	// time (UTC).
 	End *time.Time `type:"timestamp"`
 
 	// For an initial request for a list of billing records, omit this element.
-	// If the number of billing records that are associated with the current AWS
-	// account during the specified period is greater than the value that you specified
-	// for MaxItems, you can use Marker to return additional billing records. Get
-	// the value of NextPageMarker from the previous response, and submit another
-	// request that includes the value of NextPageMarker in the Marker element.
+	// If the number of billing records that are associated with the current Amazon
+	// Web Services account during the specified period is greater than the value
+	// that you specified for MaxItems, you can use Marker to return additional
+	// billing records. Get the value of NextPageMarker from the previous response,
+	// and submit another request that includes the value of NextPageMarker in the
+	// Marker element.
 	//
 	// Constraints: The marker must match the value of NextPageMarker that was returned
 	// in the previous response.
@@ -5373,17 +9450,25 @@ type ViewBillingInput struct {
 	MaxItems *int64 `type:"integer"`
 
 	// The beginning date and time for the time period for which you want a list
-	// of billing records. Specify the date and time in Coordinated Universal time
-	// (UTC).
+	// of billing records. Specify the date and time in Unix time format and Coordinated
+	// Universal time (UTC).
 	Start *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ViewBillingInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ViewBillingInput) GoString() string {
 	return s.String()
 }
@@ -5425,12 +9510,20 @@ type ViewBillingOutput struct {
 	NextPageMarker *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ViewBillingOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ViewBillingOutput) GoString() string {
 	return s.String()
 }
@@ -5464,7 +9557,21 @@ const (
 	ContactTypeReseller = "RESELLER"
 )
 
+// ContactType_Values returns all elements of the ContactType enum
+func ContactType_Values() []string {
+	return []string{
+		ContactTypePerson,
+		ContactTypeCompany,
+		ContactTypeAssociation,
+		ContactTypePublicBody,
+		ContactTypeReseller,
+	}
+}
+
 const (
+	// CountryCodeAc is a CountryCode enum value
+	CountryCodeAc = "AC"
+
 	// CountryCodeAd is a CountryCode enum value
 	CountryCodeAd = "AD"
 
@@ -5510,6 +9617,9 @@ const (
 	// CountryCodeAw is a CountryCode enum value
 	CountryCodeAw = "AW"
 
+	// CountryCodeAx is a CountryCode enum value
+	CountryCodeAx = "AX"
+
 	// CountryCodeAz is a CountryCode enum value
 	CountryCodeAz = "AZ"
 
@@ -5552,6 +9662,9 @@ const (
 	// CountryCodeBo is a CountryCode enum value
 	CountryCodeBo = "BO"
 
+	// CountryCodeBq is a CountryCode enum value
+	CountryCodeBq = "BQ"
+
 	// CountryCodeBr is a CountryCode enum value
 	CountryCodeBr = "BR"
 
@@ -5560,6 +9673,9 @@ const (
 
 	// CountryCodeBt is a CountryCode enum value
 	CountryCodeBt = "BT"
+
+	// CountryCodeBv is a CountryCode enum value
+	CountryCodeBv = "BV"
 
 	// CountryCodeBw is a CountryCode enum value
 	CountryCodeBw = "BW"
@@ -5615,6 +9731,9 @@ const (
 	// CountryCodeCv is a CountryCode enum value
 	CountryCodeCv = "CV"
 
+	// CountryCodeCw is a CountryCode enum value
+	CountryCodeCw = "CW"
+
 	// CountryCodeCx is a CountryCode enum value
 	CountryCodeCx = "CX"
 
@@ -5650,6 +9769,9 @@ const (
 
 	// CountryCodeEg is a CountryCode enum value
 	CountryCodeEg = "EG"
+
+	// CountryCodeEh is a CountryCode enum value
+	CountryCodeEh = "EH"
 
 	// CountryCodeEr is a CountryCode enum value
 	CountryCodeEr = "ER"
@@ -5690,6 +9812,12 @@ const (
 	// CountryCodeGe is a CountryCode enum value
 	CountryCodeGe = "GE"
 
+	// CountryCodeGf is a CountryCode enum value
+	CountryCodeGf = "GF"
+
+	// CountryCodeGg is a CountryCode enum value
+	CountryCodeGg = "GG"
+
 	// CountryCodeGh is a CountryCode enum value
 	CountryCodeGh = "GH"
 
@@ -5705,11 +9833,17 @@ const (
 	// CountryCodeGn is a CountryCode enum value
 	CountryCodeGn = "GN"
 
+	// CountryCodeGp is a CountryCode enum value
+	CountryCodeGp = "GP"
+
 	// CountryCodeGq is a CountryCode enum value
 	CountryCodeGq = "GQ"
 
 	// CountryCodeGr is a CountryCode enum value
 	CountryCodeGr = "GR"
+
+	// CountryCodeGs is a CountryCode enum value
+	CountryCodeGs = "GS"
 
 	// CountryCodeGt is a CountryCode enum value
 	CountryCodeGt = "GT"
@@ -5725,6 +9859,9 @@ const (
 
 	// CountryCodeHk is a CountryCode enum value
 	CountryCodeHk = "HK"
+
+	// CountryCodeHm is a CountryCode enum value
+	CountryCodeHm = "HM"
 
 	// CountryCodeHn is a CountryCode enum value
 	CountryCodeHn = "HN"
@@ -5753,6 +9890,9 @@ const (
 	// CountryCodeIn is a CountryCode enum value
 	CountryCodeIn = "IN"
 
+	// CountryCodeIo is a CountryCode enum value
+	CountryCodeIo = "IO"
+
 	// CountryCodeIq is a CountryCode enum value
 	CountryCodeIq = "IQ"
 
@@ -5764,6 +9904,9 @@ const (
 
 	// CountryCodeIt is a CountryCode enum value
 	CountryCodeIt = "IT"
+
+	// CountryCodeJe is a CountryCode enum value
+	CountryCodeJe = "JE"
 
 	// CountryCodeJm is a CountryCode enum value
 	CountryCodeJm = "JM"
@@ -5879,6 +10022,9 @@ const (
 	// CountryCodeMp is a CountryCode enum value
 	CountryCodeMp = "MP"
 
+	// CountryCodeMq is a CountryCode enum value
+	CountryCodeMq = "MQ"
+
 	// CountryCodeMr is a CountryCode enum value
 	CountryCodeMr = "MR"
 
@@ -5914,6 +10060,9 @@ const (
 
 	// CountryCodeNe is a CountryCode enum value
 	CountryCodeNe = "NE"
+
+	// CountryCodeNf is a CountryCode enum value
+	CountryCodeNf = "NF"
 
 	// CountryCodeNg is a CountryCode enum value
 	CountryCodeNg = "NG"
@@ -5972,6 +10121,9 @@ const (
 	// CountryCodePr is a CountryCode enum value
 	CountryCodePr = "PR"
 
+	// CountryCodePs is a CountryCode enum value
+	CountryCodePs = "PS"
+
 	// CountryCodePt is a CountryCode enum value
 	CountryCodePt = "PT"
 
@@ -5983,6 +10135,9 @@ const (
 
 	// CountryCodeQa is a CountryCode enum value
 	CountryCodeQa = "QA"
+
+	// CountryCodeRe is a CountryCode enum value
+	CountryCodeRe = "RE"
 
 	// CountryCodeRo is a CountryCode enum value
 	CountryCodeRo = "RO"
@@ -6020,6 +10175,9 @@ const (
 	// CountryCodeSi is a CountryCode enum value
 	CountryCodeSi = "SI"
 
+	// CountryCodeSj is a CountryCode enum value
+	CountryCodeSj = "SJ"
+
 	// CountryCodeSk is a CountryCode enum value
 	CountryCodeSk = "SK"
 
@@ -6038,11 +10196,17 @@ const (
 	// CountryCodeSr is a CountryCode enum value
 	CountryCodeSr = "SR"
 
+	// CountryCodeSs is a CountryCode enum value
+	CountryCodeSs = "SS"
+
 	// CountryCodeSt is a CountryCode enum value
 	CountryCodeSt = "ST"
 
 	// CountryCodeSv is a CountryCode enum value
 	CountryCodeSv = "SV"
+
+	// CountryCodeSx is a CountryCode enum value
+	CountryCodeSx = "SX"
 
 	// CountryCodeSy is a CountryCode enum value
 	CountryCodeSy = "SY"
@@ -6055,6 +10219,9 @@ const (
 
 	// CountryCodeTd is a CountryCode enum value
 	CountryCodeTd = "TD"
+
+	// CountryCodeTf is a CountryCode enum value
+	CountryCodeTf = "TF"
 
 	// CountryCodeTg is a CountryCode enum value
 	CountryCodeTg = "TG"
@@ -6079,6 +10246,9 @@ const (
 
 	// CountryCodeTo is a CountryCode enum value
 	CountryCodeTo = "TO"
+
+	// CountryCodeTp is a CountryCode enum value
+	CountryCodeTp = "TP"
 
 	// CountryCodeTr is a CountryCode enum value
 	CountryCodeTr = "TR"
@@ -6153,6 +10323,263 @@ const (
 	CountryCodeZw = "ZW"
 )
 
+// CountryCode_Values returns all elements of the CountryCode enum
+func CountryCode_Values() []string {
+	return []string{
+		CountryCodeAc,
+		CountryCodeAd,
+		CountryCodeAe,
+		CountryCodeAf,
+		CountryCodeAg,
+		CountryCodeAi,
+		CountryCodeAl,
+		CountryCodeAm,
+		CountryCodeAn,
+		CountryCodeAo,
+		CountryCodeAq,
+		CountryCodeAr,
+		CountryCodeAs,
+		CountryCodeAt,
+		CountryCodeAu,
+		CountryCodeAw,
+		CountryCodeAx,
+		CountryCodeAz,
+		CountryCodeBa,
+		CountryCodeBb,
+		CountryCodeBd,
+		CountryCodeBe,
+		CountryCodeBf,
+		CountryCodeBg,
+		CountryCodeBh,
+		CountryCodeBi,
+		CountryCodeBj,
+		CountryCodeBl,
+		CountryCodeBm,
+		CountryCodeBn,
+		CountryCodeBo,
+		CountryCodeBq,
+		CountryCodeBr,
+		CountryCodeBs,
+		CountryCodeBt,
+		CountryCodeBv,
+		CountryCodeBw,
+		CountryCodeBy,
+		CountryCodeBz,
+		CountryCodeCa,
+		CountryCodeCc,
+		CountryCodeCd,
+		CountryCodeCf,
+		CountryCodeCg,
+		CountryCodeCh,
+		CountryCodeCi,
+		CountryCodeCk,
+		CountryCodeCl,
+		CountryCodeCm,
+		CountryCodeCn,
+		CountryCodeCo,
+		CountryCodeCr,
+		CountryCodeCu,
+		CountryCodeCv,
+		CountryCodeCw,
+		CountryCodeCx,
+		CountryCodeCy,
+		CountryCodeCz,
+		CountryCodeDe,
+		CountryCodeDj,
+		CountryCodeDk,
+		CountryCodeDm,
+		CountryCodeDo,
+		CountryCodeDz,
+		CountryCodeEc,
+		CountryCodeEe,
+		CountryCodeEg,
+		CountryCodeEh,
+		CountryCodeEr,
+		CountryCodeEs,
+		CountryCodeEt,
+		CountryCodeFi,
+		CountryCodeFj,
+		CountryCodeFk,
+		CountryCodeFm,
+		CountryCodeFo,
+		CountryCodeFr,
+		CountryCodeGa,
+		CountryCodeGb,
+		CountryCodeGd,
+		CountryCodeGe,
+		CountryCodeGf,
+		CountryCodeGg,
+		CountryCodeGh,
+		CountryCodeGi,
+		CountryCodeGl,
+		CountryCodeGm,
+		CountryCodeGn,
+		CountryCodeGp,
+		CountryCodeGq,
+		CountryCodeGr,
+		CountryCodeGs,
+		CountryCodeGt,
+		CountryCodeGu,
+		CountryCodeGw,
+		CountryCodeGy,
+		CountryCodeHk,
+		CountryCodeHm,
+		CountryCodeHn,
+		CountryCodeHr,
+		CountryCodeHt,
+		CountryCodeHu,
+		CountryCodeId,
+		CountryCodeIe,
+		CountryCodeIl,
+		CountryCodeIm,
+		CountryCodeIn,
+		CountryCodeIo,
+		CountryCodeIq,
+		CountryCodeIr,
+		CountryCodeIs,
+		CountryCodeIt,
+		CountryCodeJe,
+		CountryCodeJm,
+		CountryCodeJo,
+		CountryCodeJp,
+		CountryCodeKe,
+		CountryCodeKg,
+		CountryCodeKh,
+		CountryCodeKi,
+		CountryCodeKm,
+		CountryCodeKn,
+		CountryCodeKp,
+		CountryCodeKr,
+		CountryCodeKw,
+		CountryCodeKy,
+		CountryCodeKz,
+		CountryCodeLa,
+		CountryCodeLb,
+		CountryCodeLc,
+		CountryCodeLi,
+		CountryCodeLk,
+		CountryCodeLr,
+		CountryCodeLs,
+		CountryCodeLt,
+		CountryCodeLu,
+		CountryCodeLv,
+		CountryCodeLy,
+		CountryCodeMa,
+		CountryCodeMc,
+		CountryCodeMd,
+		CountryCodeMe,
+		CountryCodeMf,
+		CountryCodeMg,
+		CountryCodeMh,
+		CountryCodeMk,
+		CountryCodeMl,
+		CountryCodeMm,
+		CountryCodeMn,
+		CountryCodeMo,
+		CountryCodeMp,
+		CountryCodeMq,
+		CountryCodeMr,
+		CountryCodeMs,
+		CountryCodeMt,
+		CountryCodeMu,
+		CountryCodeMv,
+		CountryCodeMw,
+		CountryCodeMx,
+		CountryCodeMy,
+		CountryCodeMz,
+		CountryCodeNa,
+		CountryCodeNc,
+		CountryCodeNe,
+		CountryCodeNf,
+		CountryCodeNg,
+		CountryCodeNi,
+		CountryCodeNl,
+		CountryCodeNo,
+		CountryCodeNp,
+		CountryCodeNr,
+		CountryCodeNu,
+		CountryCodeNz,
+		CountryCodeOm,
+		CountryCodePa,
+		CountryCodePe,
+		CountryCodePf,
+		CountryCodePg,
+		CountryCodePh,
+		CountryCodePk,
+		CountryCodePl,
+		CountryCodePm,
+		CountryCodePn,
+		CountryCodePr,
+		CountryCodePs,
+		CountryCodePt,
+		CountryCodePw,
+		CountryCodePy,
+		CountryCodeQa,
+		CountryCodeRe,
+		CountryCodeRo,
+		CountryCodeRs,
+		CountryCodeRu,
+		CountryCodeRw,
+		CountryCodeSa,
+		CountryCodeSb,
+		CountryCodeSc,
+		CountryCodeSd,
+		CountryCodeSe,
+		CountryCodeSg,
+		CountryCodeSh,
+		CountryCodeSi,
+		CountryCodeSj,
+		CountryCodeSk,
+		CountryCodeSl,
+		CountryCodeSm,
+		CountryCodeSn,
+		CountryCodeSo,
+		CountryCodeSr,
+		CountryCodeSs,
+		CountryCodeSt,
+		CountryCodeSv,
+		CountryCodeSx,
+		CountryCodeSy,
+		CountryCodeSz,
+		CountryCodeTc,
+		CountryCodeTd,
+		CountryCodeTf,
+		CountryCodeTg,
+		CountryCodeTh,
+		CountryCodeTj,
+		CountryCodeTk,
+		CountryCodeTl,
+		CountryCodeTm,
+		CountryCodeTn,
+		CountryCodeTo,
+		CountryCodeTp,
+		CountryCodeTr,
+		CountryCodeTt,
+		CountryCodeTv,
+		CountryCodeTw,
+		CountryCodeTz,
+		CountryCodeUa,
+		CountryCodeUg,
+		CountryCodeUs,
+		CountryCodeUy,
+		CountryCodeUz,
+		CountryCodeVa,
+		CountryCodeVc,
+		CountryCodeVe,
+		CountryCodeVg,
+		CountryCodeVi,
+		CountryCodeVn,
+		CountryCodeVu,
+		CountryCodeWf,
+		CountryCodeWs,
+		CountryCodeYe,
+		CountryCodeYt,
+		CountryCodeZa,
+		CountryCodeZm,
+		CountryCodeZw,
+	}
+}
+
 const (
 	// DomainAvailabilityAvailable is a DomainAvailability enum value
 	DomainAvailabilityAvailable = "AVAILABLE"
@@ -6178,6 +10605,20 @@ const (
 	// DomainAvailabilityDontKnow is a DomainAvailability enum value
 	DomainAvailabilityDontKnow = "DONT_KNOW"
 )
+
+// DomainAvailability_Values returns all elements of the DomainAvailability enum
+func DomainAvailability_Values() []string {
+	return []string{
+		DomainAvailabilityAvailable,
+		DomainAvailabilityAvailableReserved,
+		DomainAvailabilityAvailablePreorder,
+		DomainAvailabilityUnavailable,
+		DomainAvailabilityUnavailablePremium,
+		DomainAvailabilityUnavailableRestricted,
+		DomainAvailabilityReserved,
+		DomainAvailabilityDontKnow,
+	}
+}
 
 const (
 	// ExtraParamNameDunsNumber is a ExtraParamName enum value
@@ -6213,6 +10654,12 @@ const (
 	// ExtraParamNameCaBusinessEntityType is a ExtraParamName enum value
 	ExtraParamNameCaBusinessEntityType = "CA_BUSINESS_ENTITY_TYPE"
 
+	// ExtraParamNameCaLegalRepresentative is a ExtraParamName enum value
+	ExtraParamNameCaLegalRepresentative = "CA_LEGAL_REPRESENTATIVE"
+
+	// ExtraParamNameCaLegalRepresentativeCapacity is a ExtraParamName enum value
+	ExtraParamNameCaLegalRepresentativeCapacity = "CA_LEGAL_REPRESENTATIVE_CAPACITY"
+
 	// ExtraParamNameEsIdentification is a ExtraParamName enum value
 	ExtraParamNameEsIdentification = "ES_IDENTIFICATION"
 
@@ -6233,6 +10680,9 @@ const (
 
 	// ExtraParamNameFiOrganizationType is a ExtraParamName enum value
 	ExtraParamNameFiOrganizationType = "FI_ORGANIZATION_TYPE"
+
+	// ExtraParamNameItNationality is a ExtraParamName enum value
+	ExtraParamNameItNationality = "IT_NATIONALITY"
 
 	// ExtraParamNameItPin is a ExtraParamName enum value
 	ExtraParamNameItPin = "IT_PIN"
@@ -6257,7 +10707,78 @@ const (
 
 	// ExtraParamNameUkCompanyNumber is a ExtraParamName enum value
 	ExtraParamNameUkCompanyNumber = "UK_COMPANY_NUMBER"
+
+	// ExtraParamNameEuCountryOfCitizenship is a ExtraParamName enum value
+	ExtraParamNameEuCountryOfCitizenship = "EU_COUNTRY_OF_CITIZENSHIP"
+
+	// ExtraParamNameAuPriorityToken is a ExtraParamName enum value
+	ExtraParamNameAuPriorityToken = "AU_PRIORITY_TOKEN"
 )
+
+// ExtraParamName_Values returns all elements of the ExtraParamName enum
+func ExtraParamName_Values() []string {
+	return []string{
+		ExtraParamNameDunsNumber,
+		ExtraParamNameBrandNumber,
+		ExtraParamNameBirthDepartment,
+		ExtraParamNameBirthDateInYyyyMmDd,
+		ExtraParamNameBirthCountry,
+		ExtraParamNameBirthCity,
+		ExtraParamNameDocumentNumber,
+		ExtraParamNameAuIdNumber,
+		ExtraParamNameAuIdType,
+		ExtraParamNameCaLegalType,
+		ExtraParamNameCaBusinessEntityType,
+		ExtraParamNameCaLegalRepresentative,
+		ExtraParamNameCaLegalRepresentativeCapacity,
+		ExtraParamNameEsIdentification,
+		ExtraParamNameEsIdentificationType,
+		ExtraParamNameEsLegalForm,
+		ExtraParamNameFiBusinessNumber,
+		ExtraParamNameFiIdNumber,
+		ExtraParamNameFiNationality,
+		ExtraParamNameFiOrganizationType,
+		ExtraParamNameItNationality,
+		ExtraParamNameItPin,
+		ExtraParamNameItRegistrantEntityType,
+		ExtraParamNameRuPassportData,
+		ExtraParamNameSeIdNumber,
+		ExtraParamNameSgIdNumber,
+		ExtraParamNameVatNumber,
+		ExtraParamNameUkContactType,
+		ExtraParamNameUkCompanyNumber,
+		ExtraParamNameEuCountryOfCitizenship,
+		ExtraParamNameAuPriorityToken,
+	}
+}
+
+const (
+	// ListDomainsAttributeNameDomainName is a ListDomainsAttributeName enum value
+	ListDomainsAttributeNameDomainName = "DomainName"
+
+	// ListDomainsAttributeNameExpiry is a ListDomainsAttributeName enum value
+	ListDomainsAttributeNameExpiry = "Expiry"
+)
+
+// ListDomainsAttributeName_Values returns all elements of the ListDomainsAttributeName enum
+func ListDomainsAttributeName_Values() []string {
+	return []string{
+		ListDomainsAttributeNameDomainName,
+		ListDomainsAttributeNameExpiry,
+	}
+}
+
+const (
+	// ListOperationsSortAttributeNameSubmittedDate is a ListOperationsSortAttributeName enum value
+	ListOperationsSortAttributeNameSubmittedDate = "SubmittedDate"
+)
+
+// ListOperationsSortAttributeName_Values returns all elements of the ListOperationsSortAttributeName enum
+func ListOperationsSortAttributeName_Values() []string {
+	return []string{
+		ListOperationsSortAttributeNameSubmittedDate,
+	}
+}
 
 const (
 	// OperationStatusSubmitted is a OperationStatus enum value
@@ -6275,6 +10796,17 @@ const (
 	// OperationStatusFailed is a OperationStatus enum value
 	OperationStatusFailed = "FAILED"
 )
+
+// OperationStatus_Values returns all elements of the OperationStatus enum
+func OperationStatus_Values() []string {
+	return []string{
+		OperationStatusSubmitted,
+		OperationStatusInProgress,
+		OperationStatusError,
+		OperationStatusSuccessful,
+		OperationStatusFailed,
+	}
+}
 
 const (
 	// OperationTypeRegisterDomain is a OperationType enum value
@@ -6324,7 +10856,57 @@ const (
 
 	// OperationTypePushDomain is a OperationType enum value
 	OperationTypePushDomain = "PUSH_DOMAIN"
+
+	// OperationTypeInternalTransferOutDomain is a OperationType enum value
+	OperationTypeInternalTransferOutDomain = "INTERNAL_TRANSFER_OUT_DOMAIN"
+
+	// OperationTypeInternalTransferInDomain is a OperationType enum value
+	OperationTypeInternalTransferInDomain = "INTERNAL_TRANSFER_IN_DOMAIN"
 )
+
+// OperationType_Values returns all elements of the OperationType enum
+func OperationType_Values() []string {
+	return []string{
+		OperationTypeRegisterDomain,
+		OperationTypeDeleteDomain,
+		OperationTypeTransferInDomain,
+		OperationTypeUpdateDomainContact,
+		OperationTypeUpdateNameserver,
+		OperationTypeChangePrivacyProtection,
+		OperationTypeDomainLock,
+		OperationTypeEnableAutorenew,
+		OperationTypeDisableAutorenew,
+		OperationTypeAddDnssec,
+		OperationTypeRemoveDnssec,
+		OperationTypeExpireDomain,
+		OperationTypeTransferOutDomain,
+		OperationTypeChangeDomainOwner,
+		OperationTypeRenewDomain,
+		OperationTypePushDomain,
+		OperationTypeInternalTransferOutDomain,
+		OperationTypeInternalTransferInDomain,
+	}
+}
+
+const (
+	// OperatorLe is a Operator enum value
+	OperatorLe = "LE"
+
+	// OperatorGe is a Operator enum value
+	OperatorGe = "GE"
+
+	// OperatorBeginsWith is a Operator enum value
+	OperatorBeginsWith = "BEGINS_WITH"
+)
+
+// Operator_Values returns all elements of the Operator enum
+func Operator_Values() []string {
+	return []string{
+		OperatorLe,
+		OperatorGe,
+		OperatorBeginsWith,
+	}
+}
 
 const (
 	// ReachabilityStatusPending is a ReachabilityStatus enum value
@@ -6337,17 +10919,88 @@ const (
 	ReachabilityStatusExpired = "EXPIRED"
 )
 
-// Whether the domain name can be transferred to Amazon Route 53.
+// ReachabilityStatus_Values returns all elements of the ReachabilityStatus enum
+func ReachabilityStatus_Values() []string {
+	return []string{
+		ReachabilityStatusPending,
+		ReachabilityStatusDone,
+		ReachabilityStatusExpired,
+	}
+}
+
+const (
+	// SortOrderAsc is a SortOrder enum value
+	SortOrderAsc = "ASC"
+
+	// SortOrderDesc is a SortOrder enum value
+	SortOrderDesc = "DESC"
+)
+
+// SortOrder_Values returns all elements of the SortOrder enum
+func SortOrder_Values() []string {
+	return []string{
+		SortOrderAsc,
+		SortOrderDesc,
+	}
+}
+
+const (
+	// StatusFlagPendingAcceptance is a StatusFlag enum value
+	StatusFlagPendingAcceptance = "PENDING_ACCEPTANCE"
+
+	// StatusFlagPendingCustomerAction is a StatusFlag enum value
+	StatusFlagPendingCustomerAction = "PENDING_CUSTOMER_ACTION"
+
+	// StatusFlagPendingAuthorization is a StatusFlag enum value
+	StatusFlagPendingAuthorization = "PENDING_AUTHORIZATION"
+
+	// StatusFlagPendingPaymentVerification is a StatusFlag enum value
+	StatusFlagPendingPaymentVerification = "PENDING_PAYMENT_VERIFICATION"
+
+	// StatusFlagPendingSupportCase is a StatusFlag enum value
+	StatusFlagPendingSupportCase = "PENDING_SUPPORT_CASE"
+)
+
+// StatusFlag_Values returns all elements of the StatusFlag enum
+func StatusFlag_Values() []string {
+	return []string{
+		StatusFlagPendingAcceptance,
+		StatusFlagPendingCustomerAction,
+		StatusFlagPendingAuthorization,
+		StatusFlagPendingPaymentVerification,
+		StatusFlagPendingSupportCase,
+	}
+}
+
+// Whether the domain name can be transferred to Route 53.
 //
-// You can transfer only domains that have a value of TRANSFERABLE for Transferable.
+// You can transfer only domains that have a value of TRANSFERABLE or Transferable.
 //
 // Valid values:
 //
-// TRANSFERABLEThe domain name can be transferred to Amazon Route 53.
+// # TRANSFERABLE
 //
-// UNTRANSFERRABLEThe domain name can't be transferred to Amazon Route 53.
+// The domain name can be transferred to Route 53.
 //
-// DONT_KNOWReserved for future use.
+// # UNTRANSFERRABLE
+//
+// The domain name can't be transferred to Route 53.
+//
+// DONT_KNOW
+//
+// Reserved for future use.
+//
+// DOMAIN_IN_OWN_ACCOUNT
+//
+// The domain already exists in the current Amazon Web Services account.
+//
+// DOMAIN_IN_ANOTHER_ACCOUNT
+//
+// the domain exists in another Amazon Web Services account.
+//
+// PREMIUM_DOMAIN
+//
+// Premium domain transfer is not supported.
 const (
 	// TransferableTransferable is a Transferable enum value
 	TransferableTransferable = "TRANSFERABLE"
@@ -6357,4 +11010,25 @@ const (
 
 	// TransferableDontKnow is a Transferable enum value
 	TransferableDontKnow = "DONT_KNOW"
+
+	// TransferableDomainInOwnAccount is a Transferable enum value
+	TransferableDomainInOwnAccount = "DOMAIN_IN_OWN_ACCOUNT"
+
+	// TransferableDomainInAnotherAccount is a Transferable enum value
+	TransferableDomainInAnotherAccount = "DOMAIN_IN_ANOTHER_ACCOUNT"
+
+	// TransferablePremiumDomain is a Transferable enum value
+	TransferablePremiumDomain = "PREMIUM_DOMAIN"
 )
+
+// Transferable_Values returns all elements of the Transferable enum
+func Transferable_Values() []string {
+	return []string{
+		TransferableTransferable,
+		TransferableUntransferable,
+		TransferableDontKnow,
+		TransferableDomainInOwnAccount,
+		TransferableDomainInAnotherAccount,
+		TransferablePremiumDomain,
+	}
+}

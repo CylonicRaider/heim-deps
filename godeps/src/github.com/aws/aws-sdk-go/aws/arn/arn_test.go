@@ -1,3 +1,4 @@
+//go:build go1.7
 // +build go1.7
 
 package arn
@@ -84,6 +85,47 @@ func TestParseARN(t *testing.T) {
 				t.Errorf("Expected err to be nil, but got %v", err)
 			} else if err != nil && tc.err != nil && err.Error() != tc.err.Error() {
 				t.Errorf("Expected err to be %v, but got %v", tc.err, err)
+			}
+		})
+	}
+}
+
+func TestIsARN(t *testing.T) {
+
+	cases := map[string]struct {
+		In     string
+		Expect bool
+		// Params
+	}{
+		"valid ARN slash resource": {
+			In:     "arn:aws:service:us-west-2:123456789012:restype/resvalue",
+			Expect: true,
+		},
+		"valid ARN colon resource": {
+			In:     "arn:aws:service:us-west-2:123456789012:restype:resvalue",
+			Expect: true,
+		},
+		"valid ARN resource": {
+			In:     "arn:aws:service:us-west-2:123456789012:*",
+			Expect: true,
+		},
+		"empty sections": {
+			In:     "arn:::::",
+			Expect: true,
+		},
+		"invalid ARN": {
+			In: "some random string",
+		},
+		"invalid ARN missing resource": {
+			In: "arn:aws:service:us-west-2:123456789012",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			actual := IsARN(c.In)
+			if e, a := c.Expect, actual; e != a {
+				t.Errorf("expect %s valid %v, got %v", c.In, e, a)
 			}
 		})
 	}

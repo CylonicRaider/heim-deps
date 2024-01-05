@@ -1,3 +1,4 @@
+//go:build go1.7
 // +build go1.7
 
 package csm_test
@@ -17,7 +18,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/client/metadata"
 	"github.com/aws/aws-sdk-go/aws/csm"
 	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/aws/signer/v4"
+	v4 "github.com/aws/aws-sdk-go/aws/signer/v4"
 	"github.com/aws/aws-sdk-go/awstesting/unit"
 	"github.com/aws/aws-sdk-go/private/protocol/jsonrpc"
 )
@@ -147,7 +148,7 @@ func TestReportingMetrics(t *testing.T) {
 				req := request.New(*sess.Config, md, sess.Handlers, client.DefaultRetryer{NumMaxRetries: 3}, op, nil, nil)
 				errs := []error{
 					awserr.New("AWSError", "aws error", nil),
-					awserr.New("RequestError", "sdk error", nil),
+					awserr.New(request.ErrCodeRequestError, "sdk error", nil),
 					nil,
 				}
 				resps := []*http.Response{
@@ -182,8 +183,8 @@ func TestReportingMetrics(t *testing.T) {
 				},
 				{
 					"Type":                "ApiCallAttempt",
-					"SdkException":        "RequestError",
-					"SdkExceptionMessage": "RequestError: sdk error",
+					"SdkException":        request.ErrCodeRequestError,
+					"SdkExceptionMessage": request.ErrCodeRequestError + ": sdk error",
 					"HttpStatusCode":      float64(500),
 				},
 				{
@@ -277,6 +278,7 @@ func BenchmarkWithCSM(b *testing.B) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(fmt.Sprintf("{}")))
 	}))
+	defer server.Close()
 
 	cfg := aws.Config{
 		Endpoint: aws.String(server.URL),
@@ -322,6 +324,7 @@ func BenchmarkWithCSMNoUDPConnection(b *testing.B) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(fmt.Sprintf("{}")))
 	}))
+	defer server.Close()
 
 	cfg := aws.Config{
 		Endpoint: aws.String(server.URL),
@@ -368,6 +371,7 @@ func BenchmarkWithoutCSM(b *testing.B) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(fmt.Sprintf("{}")))
 	}))
+	defer server.Close()
 
 	cfg := aws.Config{
 		Endpoint: aws.String(server.URL),

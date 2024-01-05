@@ -2,12 +2,7 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-// Package gorp provides a simple way to marshal Go structs to and from
-// SQL databases.  It uses the database/sql package, and should work with any
-// compliant database/sql driver.
-//
-// Source code and project home:
-// https://github.com/go-gorp/gorp
+// +build !integration
 
 package gorp_test
 
@@ -19,10 +14,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/apoydence/onpar"
-	"github.com/apoydence/onpar/expect"
-	"github.com/apoydence/onpar/matchers"
-	"github.com/go-gorp/gorp"
+	"github.com/go-gorp/gorp/v3"
+	"github.com/poy/onpar"
+	"github.com/poy/onpar/expect"
+	"github.com/poy/onpar/matchers"
 )
 
 func TestMySQLDialect(t *testing.T) {

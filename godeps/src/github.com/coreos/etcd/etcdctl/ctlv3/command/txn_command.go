@@ -22,10 +22,11 @@ import (
 	"strconv"
 	"strings"
 
-	"go.etcd.io/etcd/clientv3"
-	pb "go.etcd.io/etcd/etcdserver/etcdserverpb"
-
 	"github.com/spf13/cobra"
+
+	pb "go.etcd.io/etcd/api/v3/etcdserverpb"
+	clientv3 "go.etcd.io/etcd/client/v3"
+	"go.etcd.io/etcd/pkg/v3/cobrautl"
 )
 
 var txnInteractive bool
@@ -35,7 +36,30 @@ func NewTxnCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "txn [options]",
 		Short: "Txn processes all the requests in one transaction",
-		Run:   txnCommandFunc,
+		Long: `Txn reads multiple etcd requests from standard input and applies them as a single atomic transaction.
+
+A transaction consists of three components:
+1) a list of conditions,
+2) a list of requests to apply if all the conditions are true,
+3) a list of requests to apply if any condition is false.
+
+Example interactive stdin usage:
+
+---
+etcdctl txn -i
+# compares:
+mod("key1") > "0"
+
+# success requests (get, put, delete):
+put key1 "overwrote-key1"
+
+# failure requests (get, put, delete):
+put key1 "created-key1"
+put key2 "some extra key"
+---
+
+Refer to https://github.com/etcd-io/etcd/blob/main/etcdctl/README.md#txn-options.`,
+		Run: txnCommandFunc,
 	}
 	cmd.Flags().BoolVarP(&txnInteractive, "interactive", "i", false, "Input transaction in interactive mode")
 	return cmd
@@ -44,7 +68,7 @@ func NewTxnCommand() *cobra.Command {
 // txnCommandFunc executes the "txn" command.
 func txnCommandFunc(cmd *cobra.Command, args []string) {
 	if len(args) != 0 {
-		ExitWithError(ExitBadArgs, fmt.Errorf("txn command does not accept argument"))
+		cobrautl.ExitWithError(cobrautl.ExitBadArgs, fmt.Errorf("txn command does not accept argument"))
 	}
 
 	reader := bufio.NewReader(os.Stdin)
@@ -59,7 +83,7 @@ func txnCommandFunc(cmd *cobra.Command, args []string) {
 
 	resp, err := txn.Commit()
 	if err != nil {
-		ExitWithError(ExitError, err)
+		cobrautl.ExitWithError(cobrautl.ExitError, err)
 	}
 
 	display.Txn(*resp)
@@ -75,7 +99,7 @@ func readCompares(r *bufio.Reader) (cmps []clientv3.Cmp) {
 	for {
 		line, err := r.ReadString('\n')
 		if err != nil {
-			ExitWithError(ExitInvalidInput, err)
+			cobrautl.ExitWithError(cobrautl.ExitInvalidInput, err)
 		}
 
 		// remove space from the line
@@ -84,9 +108,9 @@ func readCompares(r *bufio.Reader) (cmps []clientv3.Cmp) {
 			break
 		}
 
-		cmp, err := parseCompare(line)
+		cmp, err := ParseCompare(line)
 		if err != nil {
-			ExitWithError(ExitInvalidInput, err)
+			cobrautl.ExitWithError(cobrautl.ExitInvalidInput, err)
 		}
 		cmps = append(cmps, *cmp)
 	}
@@ -98,7 +122,7 @@ func readOps(r *bufio.Reader) (ops []clientv3.Op) {
 	for {
 		line, err := r.ReadString('\n')
 		if err != nil {
-			ExitWithError(ExitInvalidInput, err)
+			cobrautl.ExitWithError(cobrautl.ExitInvalidInput, err)
 		}
 
 		// remove space from the line
@@ -109,7 +133,7 @@ func readOps(r *bufio.Reader) (ops []clientv3.Op) {
 
 		op, err := parseRequestUnion(line)
 		if err != nil {
-			ExitWithError(ExitInvalidInput, err)
+			cobrautl.ExitWithError(cobrautl.ExitInvalidInput, err)
 		}
 		ops = append(ops, *op)
 	}
@@ -118,7 +142,7 @@ func readOps(r *bufio.Reader) (ops []clientv3.Op) {
 }
 
 func parseRequestUnion(line string) (*clientv3.Op, error) {
-	args := argify(line)
+	args := Argify(line)
 	if len(args) < 2 {
 		return nil, fmt.Errorf("invalid txn compare request: %s", line)
 	}
@@ -152,7 +176,7 @@ func parseRequestUnion(line string) (*clientv3.Op, error) {
 	return &op, nil
 }
 
-func parseCompare(line string) (*clientv3.Cmp, error) {
+func ParseCompare(line string) (*clientv3.Cmp, error) {
 	var (
 		key string
 		op  string

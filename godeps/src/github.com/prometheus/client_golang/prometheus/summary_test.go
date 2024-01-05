@@ -26,10 +26,13 @@ import (
 )
 
 func TestSummaryWithDefaultObjectives(t *testing.T) {
+	now := time.Now()
+
 	reg := NewRegistry()
 	summaryWithDefaultObjectives := NewSummary(SummaryOpts{
 		Name: "default_objectives",
 		Help: "Test help.",
+		now:  func() time.Time { return now },
 	})
 	if err := reg.Register(summaryWithDefaultObjectives); err != nil {
 		t.Error(err)
@@ -39,8 +42,12 @@ func TestSummaryWithDefaultObjectives(t *testing.T) {
 	if err := summaryWithDefaultObjectives.Write(m); err != nil {
 		t.Error(err)
 	}
-	if len(m.GetSummary().Quantile) != len(DefObjectives) {
-		t.Error("expected default objectives in summary")
+	if len(m.GetSummary().Quantile) != 0 {
+		t.Error("expected no objectives in summary")
+	}
+
+	if !m.Summary.CreatedTimestamp.AsTime().Equal(now) {
+		t.Errorf("expected created timestamp %s, got %s", now, m.Summary.CreatedTimestamp.AsTime())
 	}
 }
 
@@ -197,6 +204,7 @@ func TestSummaryConcurrency(t *testing.T) {
 	}
 
 	rand.Seed(42)
+	objMap := map[float64]float64{0.5: 0.05, 0.9: 0.01, 0.99: 0.001}
 
 	it := func(n uint32) bool {
 		mutations := int(n%1e4 + 1e4)
@@ -210,7 +218,7 @@ func TestSummaryConcurrency(t *testing.T) {
 		sum := NewSummary(SummaryOpts{
 			Name:       "test_summary",
 			Help:       "helpless",
-			Objectives: map[float64]float64{0.5: 0.05, 0.9: 0.01, 0.99: 0.001},
+			Objectives: objMap,
 		})
 
 		allVars := make([]float64, total)
@@ -245,14 +253,14 @@ func TestSummaryConcurrency(t *testing.T) {
 			t.Errorf("got sample sum %f, want %f", got, want)
 		}
 
-		objectives := make([]float64, 0, len(DefObjectives))
-		for qu := range DefObjectives {
-			objectives = append(objectives, qu)
+		objSlice := make([]float64, 0, len(objMap))
+		for qu := range objMap {
+			objSlice = append(objSlice, qu)
 		}
-		sort.Float64s(objectives)
+		sort.Float64s(objSlice)
 
-		for i, wantQ := range objectives {
-			ε := DefObjectives[wantQ]
+		for i, wantQ := range objSlice {
+			ε := objMap[wantQ]
 			gotQ := *m.Summary.Quantile[i].Quantile
 			gotV := *m.Summary.Quantile[i].Value
 			min, max := getBounds(allVars, wantQ, ε)
@@ -277,13 +285,13 @@ func TestSummaryVecConcurrency(t *testing.T) {
 	}
 
 	rand.Seed(42)
+	objMap := map[float64]float64{0.5: 0.05, 0.9: 0.01, 0.99: 0.001}
 
-	objectives := make([]float64, 0, len(DefObjectives))
-	for qu := range DefObjectives {
-
-		objectives = append(objectives, qu)
+	objSlice := make([]float64, 0, len(objMap))
+	for qu := range objMap {
+		objSlice = append(objSlice, qu)
 	}
-	sort.Float64s(objectives)
+	sort.Float64s(objSlice)
 
 	it := func(n uint32) bool {
 		mutations := int(n%1e4 + 1e4)
@@ -298,7 +306,7 @@ func TestSummaryVecConcurrency(t *testing.T) {
 			SummaryOpts{
 				Name:       "test_summary",
 				Help:       "helpless",
-				Objectives: map[float64]float64{0.5: 0.05, 0.9: 0.01, 0.99: 0.001},
+				Objectives: objMap,
 			},
 			[]string{"label"},
 		)
@@ -320,7 +328,7 @@ func TestSummaryVecConcurrency(t *testing.T) {
 			go func(vals []float64) {
 				start.Wait()
 				for i, v := range vals {
-					sum.WithLabelValues(string('A' + picks[i])).Observe(v)
+					sum.WithLabelValues(string('A' + rune(picks[i]))).Observe(v)
 				}
 				end.Done()
 			}(vals)
@@ -333,7 +341,7 @@ func TestSummaryVecConcurrency(t *testing.T) {
 
 		for i := 0; i < vecLength; i++ {
 			m := &dto.Metric{}
-			s := sum.WithLabelValues(string('A' + i))
+			s := sum.WithLabelValues(string('A' + rune(i)))
 			s.(Summary).Write(m)
 			if got, want := int(*m.Summary.SampleCount), len(allVars[i]); got != want {
 				t.Errorf("got sample count %d for label %c, want %d", got, 'A'+i, want)
@@ -341,8 +349,8 @@ func TestSummaryVecConcurrency(t *testing.T) {
 			if got, want := *m.Summary.SampleSum, sampleSums[i]; math.Abs((got-want)/want) > 0.001 {
 				t.Errorf("got sample sum %f for label %c, want %f", got, 'A'+i, want)
 			}
-			for j, wantQ := range objectives {
-				ε := DefObjectives[wantQ]
+			for j, wantQ := range objSlice {
+				ε := objMap[wantQ]
 				gotQ := *m.Summary.Quantile[j].Quantile
 				gotV := *m.Summary.Quantile[j].Value
 				min, max := getBounds(allVars[i], wantQ, ε)
@@ -418,4 +426,51 @@ func getBounds(vars []float64, q, ε float64) (min, max float64) {
 		max = vars[upper-1]
 	}
 	return
+}
+
+func TestSummaryVecCreatedTimestampWithDeletes(t *testing.T) {
+	for _, tcase := range []struct {
+		desc       string
+		objectives map[float64]float64
+	}{
+		{desc: "summary with objectives", objectives: map[float64]float64{1.0: 1.0}},
+		{desc: "no objectives summary", objectives: nil},
+	} {
+		now := time.Now()
+		t.Run(tcase.desc, func(t *testing.T) {
+			summaryVec := NewSummaryVec(SummaryOpts{
+				Name:       "test",
+				Help:       "test help",
+				Objectives: tcase.objectives,
+				now:        func() time.Time { return now },
+			}, []string{"label"})
+
+			// First use of "With" should populate CT.
+			summaryVec.WithLabelValues("1")
+			expected := map[string]time.Time{"1": now}
+
+			now = now.Add(1 * time.Hour)
+			expectCTsForMetricVecValues(t, summaryVec.MetricVec, dto.MetricType_SUMMARY, expected)
+
+			// Two more labels at different times.
+			summaryVec.WithLabelValues("2")
+			expected["2"] = now
+
+			now = now.Add(1 * time.Hour)
+
+			summaryVec.WithLabelValues("3")
+			expected["3"] = now
+
+			now = now.Add(1 * time.Hour)
+			expectCTsForMetricVecValues(t, summaryVec.MetricVec, dto.MetricType_SUMMARY, expected)
+
+			// Recreate metric instance should reset created timestamp to now.
+			summaryVec.DeleteLabelValues("1")
+			summaryVec.WithLabelValues("1")
+			expected["1"] = now
+
+			now = now.Add(1 * time.Hour)
+			expectCTsForMetricVecValues(t, summaryVec.MetricVec, dto.MetricType_SUMMARY, expected)
+		})
+	}
 }

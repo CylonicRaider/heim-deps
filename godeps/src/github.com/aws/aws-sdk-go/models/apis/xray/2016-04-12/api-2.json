@@ -63,6 +63,20 @@
         {"shape":"ThrottledException"}
       ]
     },
+    "DeleteResourcePolicy":{
+      "name":"DeleteResourcePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/DeleteResourcePolicy"
+      },
+      "input":{"shape":"DeleteResourcePolicyRequest"},
+      "output":{"shape":"DeleteResourcePolicyResult"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidPolicyRevisionIdException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
     "DeleteSamplingRule":{
       "name":"DeleteSamplingRule",
       "http":{
@@ -110,6 +124,58 @@
       },
       "input":{"shape":"GetGroupsRequest"},
       "output":{"shape":"GetGroupsResult"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
+    "GetInsight":{
+      "name":"GetInsight",
+      "http":{
+        "method":"POST",
+        "requestUri":"/Insight"
+      },
+      "input":{"shape":"GetInsightRequest"},
+      "output":{"shape":"GetInsightResult"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
+    "GetInsightEvents":{
+      "name":"GetInsightEvents",
+      "http":{
+        "method":"POST",
+        "requestUri":"/InsightEvents"
+      },
+      "input":{"shape":"GetInsightEventsRequest"},
+      "output":{"shape":"GetInsightEventsResult"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
+    "GetInsightImpactGraph":{
+      "name":"GetInsightImpactGraph",
+      "http":{
+        "method":"POST",
+        "requestUri":"/InsightImpactGraph"
+      },
+      "input":{"shape":"GetInsightImpactGraphRequest"},
+      "output":{"shape":"GetInsightImpactGraphResult"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
+    "GetInsightSummaries":{
+      "name":"GetInsightSummaries",
+      "http":{
+        "method":"POST",
+        "requestUri":"/InsightSummaries"
+      },
+      "input":{"shape":"GetInsightSummariesRequest"},
+      "output":{"shape":"GetInsightSummariesResult"},
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"ThrottledException"}
@@ -167,6 +233,19 @@
         {"shape":"ThrottledException"}
       ]
     },
+    "GetTimeSeriesServiceStatistics":{
+      "name":"GetTimeSeriesServiceStatistics",
+      "http":{
+        "method":"POST",
+        "requestUri":"/TimeSeriesServiceStatistics"
+      },
+      "input":{"shape":"GetTimeSeriesServiceStatisticsRequest"},
+      "output":{"shape":"GetTimeSeriesServiceStatisticsResult"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
     "GetTraceGraph":{
       "name":"GetTraceGraph",
       "http":{
@@ -193,6 +272,33 @@
         {"shape":"ThrottledException"}
       ]
     },
+    "ListResourcePolicies":{
+      "name":"ListResourcePolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/ListResourcePolicies"
+      },
+      "input":{"shape":"ListResourcePoliciesRequest"},
+      "output":{"shape":"ListResourcePoliciesResult"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/ListTagsForResource"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "PutEncryptionConfig":{
       "name":"PutEncryptionConfig",
       "http":{
@@ -203,6 +309,23 @@
       "output":{"shape":"PutEncryptionConfigResult"},
       "errors":[
         {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
+    "PutResourcePolicy":{
+      "name":"PutResourcePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/PutResourcePolicy"
+      },
+      "input":{"shape":"PutResourcePolicyRequest"},
+      "output":{"shape":"PutResourcePolicyResult"},
+      "errors":[
+        {"shape":"MalformedPolicyDocumentException"},
+        {"shape":"LockoutPreventionException"},
+        {"shape":"InvalidPolicyRevisionIdException"},
+        {"shape":"PolicySizeLimitExceededException"},
+        {"shape":"PolicyCountLimitExceededException"},
         {"shape":"ThrottledException"}
       ]
     },
@@ -230,6 +353,35 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"ThrottledException"}
+      ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/TagResource"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyTagsException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/UntagResource"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottledException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "UpdateGroup":{
@@ -276,6 +428,11 @@
       "type":"list",
       "member":{"shape":"String"}
     },
+    "AmazonResourceName":{
+      "type":"string",
+      "max":1011,
+      "min":1
+    },
     "AnnotationKey":{"type":"string"},
     "AnnotationValue":{
       "type":"structure",
@@ -289,6 +446,16 @@
       "type":"map",
       "key":{"shape":"AnnotationKey"},
       "value":{"shape":"ValuesWithServiceIds"}
+    },
+    "AnomalousService":{
+      "type":"structure",
+      "members":{
+        "ServiceId":{"shape":"ServiceId"}
+      }
+    },
+    "AnomalousServiceList":{
+      "type":"list",
+      "member":{"shape":"AnomalousService"}
     },
     "AttributeKey":{
       "type":"string",
@@ -354,7 +521,9 @@
       "required":["GroupName"],
       "members":{
         "GroupName":{"shape":"GroupName"},
-        "FilterExpression":{"shape":"FilterExpression"}
+        "FilterExpression":{"shape":"FilterExpression"},
+        "InsightsConfiguration":{"shape":"InsightsConfiguration"},
+        "Tags":{"shape":"TagList"}
       }
     },
     "CreateGroupResult":{
@@ -367,7 +536,8 @@
       "type":"structure",
       "required":["SamplingRule"],
       "members":{
-        "SamplingRule":{"shape":"SamplingRule"}
+        "SamplingRule":{"shape":"SamplingRule"},
+        "Tags":{"shape":"TagList"}
       }
     },
     "CreateSamplingRuleResult":{
@@ -384,6 +554,19 @@
       }
     },
     "DeleteGroupResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteResourcePolicyRequest":{
+      "type":"structure",
+      "required":["PolicyName"],
+      "members":{
+        "PolicyName":{"shape":"PolicyName"},
+        "PolicyRevisionId":{"shape":"PolicyRevisionId"}
+      }
+    },
+    "DeleteResourcePolicyResult":{
       "type":"structure",
       "members":{
       }
@@ -414,7 +597,9 @@
         "EndTime":{"shape":"Timestamp"},
         "SummaryStatistics":{"shape":"EdgeStatistics"},
         "ResponseTimeHistogram":{"shape":"Histogram"},
-        "Aliases":{"shape":"AliasList"}
+        "Aliases":{"shape":"AliasList"},
+        "EdgeType":{"shape":"String"},
+        "ReceivedEventAgeHistogram":{"shape":"Histogram"}
       }
     },
     "EdgeList":{
@@ -458,11 +643,17 @@
         "KMS"
       ]
     },
+    "EntitySelectorExpression":{
+      "type":"string",
+      "max":500,
+      "min":1
+    },
     "ErrorMessage":{"type":"string"},
     "ErrorRootCause":{
       "type":"structure",
       "members":{
-        "Services":{"shape":"ErrorRootCauseServices"}
+        "Services":{"shape":"ErrorRootCauseServices"},
+        "ClientImpacting":{"shape":"NullableBoolean"}
       }
     },
     "ErrorRootCauseEntity":{
@@ -504,10 +695,12 @@
         "TotalCount":{"shape":"NullableLong"}
       }
     },
+    "EventSummaryText":{"type":"string"},
     "FaultRootCause":{
       "type":"structure",
       "members":{
-        "Services":{"shape":"FaultRootCauseServices"}
+        "Services":{"shape":"FaultRootCauseServices"},
+        "ClientImpacting":{"shape":"NullableBoolean"}
       }
     },
     "FaultRootCauseEntity":{
@@ -548,15 +741,18 @@
         "TotalCount":{"shape":"NullableLong"}
       }
     },
-    "FilterExpression":{
-      "type":"string",
-      "max":2000,
-      "min":1
-    },
+    "FilterExpression":{"type":"string"},
     "FixedRate":{
       "type":"double",
       "max":1,
       "min":0
+    },
+    "ForecastStatistics":{
+      "type":"structure",
+      "members":{
+        "FaultCountHigh":{"shape":"NullableLong"},
+        "FaultCountLow":{"shape":"NullableLong"}
+      }
     },
     "GetEncryptionConfigRequest":{
       "type":"structure",
@@ -598,6 +794,94 @@
       "members":{
         "Groups":{"shape":"GroupSummaryList"},
         "NextToken":{"shape":"String"}
+      }
+    },
+    "GetInsightEventsMaxResults":{
+      "type":"integer",
+      "max":50,
+      "min":1
+    },
+    "GetInsightEventsRequest":{
+      "type":"structure",
+      "required":["InsightId"],
+      "members":{
+        "InsightId":{"shape":"InsightId"},
+        "MaxResults":{"shape":"GetInsightEventsMaxResults"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
+    "GetInsightEventsResult":{
+      "type":"structure",
+      "members":{
+        "InsightEvents":{"shape":"InsightEventList"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
+    "GetInsightImpactGraphRequest":{
+      "type":"structure",
+      "required":[
+        "InsightId",
+        "StartTime",
+        "EndTime"
+      ],
+      "members":{
+        "InsightId":{"shape":"InsightId"},
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
+    "GetInsightImpactGraphResult":{
+      "type":"structure",
+      "members":{
+        "InsightId":{"shape":"InsightId"},
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"},
+        "ServiceGraphStartTime":{"shape":"Timestamp"},
+        "ServiceGraphEndTime":{"shape":"Timestamp"},
+        "Services":{"shape":"InsightImpactGraphServiceList"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
+    "GetInsightRequest":{
+      "type":"structure",
+      "required":["InsightId"],
+      "members":{
+        "InsightId":{"shape":"InsightId"}
+      }
+    },
+    "GetInsightResult":{
+      "type":"structure",
+      "members":{
+        "Insight":{"shape":"Insight"}
+      }
+    },
+    "GetInsightSummariesMaxResults":{
+      "type":"integer",
+      "max":100,
+      "min":1
+    },
+    "GetInsightSummariesRequest":{
+      "type":"structure",
+      "required":[
+        "StartTime",
+        "EndTime"
+      ],
+      "members":{
+        "States":{"shape":"InsightStateList"},
+        "GroupARN":{"shape":"GroupARN"},
+        "GroupName":{"shape":"GroupName"},
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"},
+        "MaxResults":{"shape":"GetInsightSummariesMaxResults"},
+        "NextToken":{"shape":"Token"}
+      }
+    },
+    "GetInsightSummariesResult":{
+      "type":"structure",
+      "members":{
+        "InsightSummaries":{"shape":"InsightSummaryList"},
+        "NextToken":{"shape":"Token"}
       }
     },
     "GetSamplingRulesRequest":{
@@ -665,6 +949,31 @@
         "NextToken":{"shape":"String"}
       }
     },
+    "GetTimeSeriesServiceStatisticsRequest":{
+      "type":"structure",
+      "required":[
+        "StartTime",
+        "EndTime"
+      ],
+      "members":{
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"},
+        "GroupName":{"shape":"GroupName"},
+        "GroupARN":{"shape":"GroupARN"},
+        "EntitySelectorExpression":{"shape":"EntitySelectorExpression"},
+        "Period":{"shape":"NullableInteger"},
+        "ForecastStatistics":{"shape":"NullableBoolean"},
+        "NextToken":{"shape":"String"}
+      }
+    },
+    "GetTimeSeriesServiceStatisticsResult":{
+      "type":"structure",
+      "members":{
+        "TimeSeriesServiceStatistics":{"shape":"TimeSeriesServiceStatisticsList"},
+        "ContainsOldGroupVersions":{"shape":"Boolean"},
+        "NextToken":{"shape":"String"}
+      }
+    },
     "GetTraceGraphRequest":{
       "type":"structure",
       "required":["TraceIds"],
@@ -689,7 +998,9 @@
       "members":{
         "StartTime":{"shape":"Timestamp"},
         "EndTime":{"shape":"Timestamp"},
+        "TimeRangeType":{"shape":"TimeRangeType"},
         "Sampling":{"shape":"NullableBoolean"},
+        "SamplingStrategy":{"shape":"SamplingStrategy"},
         "FilterExpression":{"shape":"FilterExpression"},
         "NextToken":{"shape":"String"}
       }
@@ -708,7 +1019,8 @@
       "members":{
         "GroupName":{"shape":"String"},
         "GroupARN":{"shape":"String"},
-        "FilterExpression":{"shape":"String"}
+        "FilterExpression":{"shape":"String"},
+        "InsightsConfiguration":{"shape":"InsightsConfiguration"}
       }
     },
     "GroupARN":{
@@ -726,7 +1038,8 @@
       "members":{
         "GroupName":{"shape":"String"},
         "GroupARN":{"shape":"String"},
-        "FilterExpression":{"shape":"String"}
+        "FilterExpression":{"shape":"String"},
+        "InsightsConfiguration":{"shape":"InsightsConfiguration"}
       }
     },
     "GroupSummaryList":{
@@ -766,6 +1079,117 @@
         "ClientIp":{"shape":"String"}
       }
     },
+    "Insight":{
+      "type":"structure",
+      "members":{
+        "InsightId":{"shape":"InsightId"},
+        "GroupARN":{"shape":"GroupARN"},
+        "GroupName":{"shape":"GroupName"},
+        "RootCauseServiceId":{"shape":"ServiceId"},
+        "Categories":{"shape":"InsightCategoryList"},
+        "State":{"shape":"InsightState"},
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"},
+        "Summary":{"shape":"InsightSummaryText"},
+        "ClientRequestImpactStatistics":{"shape":"RequestImpactStatistics"},
+        "RootCauseServiceRequestImpactStatistics":{"shape":"RequestImpactStatistics"},
+        "TopAnomalousServices":{"shape":"AnomalousServiceList"}
+      }
+    },
+    "InsightCategory":{
+      "type":"string",
+      "enum":["FAULT"]
+    },
+    "InsightCategoryList":{
+      "type":"list",
+      "member":{"shape":"InsightCategory"}
+    },
+    "InsightEvent":{
+      "type":"structure",
+      "members":{
+        "Summary":{"shape":"EventSummaryText"},
+        "EventTime":{"shape":"Timestamp"},
+        "ClientRequestImpactStatistics":{"shape":"RequestImpactStatistics"},
+        "RootCauseServiceRequestImpactStatistics":{"shape":"RequestImpactStatistics"},
+        "TopAnomalousServices":{"shape":"AnomalousServiceList"}
+      }
+    },
+    "InsightEventList":{
+      "type":"list",
+      "member":{"shape":"InsightEvent"}
+    },
+    "InsightId":{
+      "type":"string",
+      "pattern":"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"
+    },
+    "InsightImpactGraphEdge":{
+      "type":"structure",
+      "members":{
+        "ReferenceId":{"shape":"NullableInteger"}
+      }
+    },
+    "InsightImpactGraphEdgeList":{
+      "type":"list",
+      "member":{"shape":"InsightImpactGraphEdge"}
+    },
+    "InsightImpactGraphService":{
+      "type":"structure",
+      "members":{
+        "ReferenceId":{"shape":"NullableInteger"},
+        "Type":{"shape":"String"},
+        "Name":{"shape":"String"},
+        "Names":{"shape":"ServiceNames"},
+        "AccountId":{"shape":"String"},
+        "Edges":{"shape":"InsightImpactGraphEdgeList"}
+      }
+    },
+    "InsightImpactGraphServiceList":{
+      "type":"list",
+      "member":{"shape":"InsightImpactGraphService"}
+    },
+    "InsightState":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "CLOSED"
+      ]
+    },
+    "InsightStateList":{
+      "type":"list",
+      "member":{"shape":"InsightState"},
+      "max":1,
+      "min":0
+    },
+    "InsightSummary":{
+      "type":"structure",
+      "members":{
+        "InsightId":{"shape":"InsightId"},
+        "GroupARN":{"shape":"GroupARN"},
+        "GroupName":{"shape":"GroupName"},
+        "RootCauseServiceId":{"shape":"ServiceId"},
+        "Categories":{"shape":"InsightCategoryList"},
+        "State":{"shape":"InsightState"},
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"},
+        "Summary":{"shape":"InsightSummaryText"},
+        "ClientRequestImpactStatistics":{"shape":"RequestImpactStatistics"},
+        "RootCauseServiceRequestImpactStatistics":{"shape":"RequestImpactStatistics"},
+        "TopAnomalousServices":{"shape":"AnomalousServiceList"},
+        "LastUpdateTime":{"shape":"Timestamp"}
+      }
+    },
+    "InsightSummaryList":{
+      "type":"list",
+      "member":{"shape":"InsightSummary"}
+    },
+    "InsightSummaryText":{"type":"string"},
+    "InsightsConfiguration":{
+      "type":"structure",
+      "members":{
+        "InsightsEnabled":{"shape":"NullableBoolean"},
+        "NotificationsEnabled":{"shape":"NullableBoolean"}
+      }
+    },
     "InstanceIdDetail":{
       "type":"structure",
       "members":{
@@ -773,6 +1197,14 @@
       }
     },
     "Integer":{"type":"integer"},
+    "InvalidPolicyRevisionIdException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "InvalidRequestException":{
       "type":"structure",
       "members":{
@@ -780,10 +1212,78 @@
       },
       "exception":true
     },
+    "ListResourcePoliciesRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"ResourcePolicyNextToken"}
+      }
+    },
+    "ListResourcePoliciesResult":{
+      "type":"structure",
+      "members":{
+        "ResourcePolicies":{"shape":"ResourcePolicyList"},
+        "NextToken":{"shape":"ResourcePolicyNextToken"}
+      }
+    },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["ResourceARN"],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "NextToken":{"shape":"String"}
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagList"},
+        "NextToken":{"shape":"String"}
+      }
+    },
+    "LockoutPreventionException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "MalformedPolicyDocumentException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "NullableBoolean":{"type":"boolean"},
     "NullableDouble":{"type":"double"},
     "NullableInteger":{"type":"integer"},
     "NullableLong":{"type":"long"},
+    "PolicyCountLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "PolicyDocument":{"type":"string"},
+    "PolicyName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\w+=,.@-]+"
+    },
+    "PolicyRevisionId":{"type":"string"},
+    "PolicySizeLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "Priority":{
       "type":"integer",
       "max":9999,
@@ -801,6 +1301,25 @@
       "type":"structure",
       "members":{
         "EncryptionConfig":{"shape":"EncryptionConfig"}
+      }
+    },
+    "PutResourcePolicyRequest":{
+      "type":"structure",
+      "required":[
+        "PolicyName",
+        "PolicyDocument"
+      ],
+      "members":{
+        "PolicyName":{"shape":"PolicyName"},
+        "PolicyDocument":{"shape":"PolicyDocument"},
+        "PolicyRevisionId":{"shape":"PolicyRevisionId"},
+        "BypassPolicyLockoutCheck":{"shape":"Boolean"}
+      }
+    },
+    "PutResourcePolicyResult":{
+      "type":"structure",
+      "members":{
+        "ResourcePolicy":{"shape":"ResourcePolicy"}
       }
     },
     "PutTelemetryRecordsRequest":{
@@ -835,6 +1354,14 @@
       "type":"integer",
       "min":0
     },
+    "RequestImpactStatistics":{
+      "type":"structure",
+      "members":{
+        "FaultCount":{"shape":"NullableLong"},
+        "OkCount":{"shape":"NullableLong"},
+        "TotalCount":{"shape":"NullableLong"}
+      }
+    },
     "ReservoirSize":{
       "type":"integer",
       "min":0
@@ -849,10 +1376,38 @@
         "ARN":{"shape":"String"}
       }
     },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"},
+        "ResourceName":{"shape":"AmazonResourceName"}
+      },
+      "error":{"httpStatusCode":404},
+      "exception":true
+    },
+    "ResourcePolicy":{
+      "type":"structure",
+      "members":{
+        "PolicyName":{"shape":"PolicyName"},
+        "PolicyDocument":{"shape":"PolicyDocument"},
+        "PolicyRevisionId":{"shape":"PolicyRevisionId"},
+        "LastUpdatedTime":{"shape":"Timestamp"}
+      }
+    },
+    "ResourcePolicyList":{
+      "type":"list",
+      "member":{"shape":"ResourcePolicy"}
+    },
+    "ResourcePolicyNextToken":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
     "ResponseTimeRootCause":{
       "type":"structure",
       "members":{
-        "Services":{"shape":"ResponseTimeRootCauseServices"}
+        "Services":{"shape":"ResponseTimeRootCauseServices"},
+        "ClientImpacting":{"shape":"NullableBoolean"}
       }
     },
     "ResponseTimeRootCauseEntity":{
@@ -1009,6 +1564,20 @@
       "member":{"shape":"SamplingStatisticsDocument"},
       "max":25
     },
+    "SamplingStrategy":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"SamplingStrategyName"},
+        "Value":{"shape":"NullableDouble"}
+      }
+    },
+    "SamplingStrategyName":{
+      "type":"string",
+      "enum":[
+        "PartialScan",
+        "FixedRate"
+      ]
+    },
     "SamplingTargetDocument":{
       "type":"structure",
       "members":{
@@ -1097,6 +1666,55 @@
       "max":64
     },
     "String":{"type":"string"},
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"},
+      "max":200,
+      "min":0
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "max":200,
+      "min":0
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "Tags"
+      ],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "TelemetryRecord":{
       "type":"structure",
       "required":["Timestamp"],
@@ -1121,12 +1739,49 @@
       "error":{"httpStatusCode":429},
       "exception":true
     },
+    "TimeRangeType":{
+      "type":"string",
+      "enum":[
+        "TraceId",
+        "Event",
+        "Service"
+      ]
+    },
+    "TimeSeriesServiceStatistics":{
+      "type":"structure",
+      "members":{
+        "Timestamp":{"shape":"Timestamp"},
+        "EdgeSummaryStatistics":{"shape":"EdgeStatistics"},
+        "ServiceSummaryStatistics":{"shape":"ServiceStatistics"},
+        "ServiceForecastStatistics":{"shape":"ForecastStatistics"},
+        "ResponseTimeHistogram":{"shape":"Histogram"}
+      }
+    },
+    "TimeSeriesServiceStatisticsList":{
+      "type":"list",
+      "member":{"shape":"TimeSeriesServiceStatistics"}
+    },
     "Timestamp":{"type":"timestamp"},
+    "Token":{
+      "type":"string",
+      "max":2000,
+      "min":1
+    },
+    "TooManyTagsException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"},
+        "ResourceName":{"shape":"AmazonResourceName"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "Trace":{
       "type":"structure",
       "members":{
         "Id":{"shape":"TraceId"},
         "Duration":{"shape":"NullableDouble"},
+        "LimitExceeded":{"shape":"NullableBoolean"},
         "Segments":{"shape":"SegmentList"}
       }
     },
@@ -1164,6 +1819,7 @@
       "type":"structure",
       "members":{
         "Id":{"shape":"TraceId"},
+        "StartTime":{"shape":"Timestamp"},
         "Duration":{"shape":"NullableDouble"},
         "ResponseTime":{"shape":"NullableDouble"},
         "HasFault":{"shape":"NullableBoolean"},
@@ -1181,7 +1837,8 @@
         "FaultRootCauses":{"shape":"FaultRootCauses"},
         "ErrorRootCauses":{"shape":"ErrorRootCauses"},
         "ResponseTimeRootCauses":{"shape":"ResponseTimeRootCauses"},
-        "Revision":{"shape":"Integer"}
+        "Revision":{"shape":"Integer"},
+        "MatchedEventTime":{"shape":"Timestamp"}
       }
     },
     "TraceSummaryList":{
@@ -1231,12 +1888,29 @@
       "type":"list",
       "member":{"shape":"UnprocessedTraceSegment"}
     },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "UpdateGroupRequest":{
       "type":"structure",
       "members":{
         "GroupName":{"shape":"GroupName"},
         "GroupARN":{"shape":"GroupARN"},
-        "FilterExpression":{"shape":"FilterExpression"}
+        "FilterExpression":{"shape":"FilterExpression"},
+        "InsightsConfiguration":{"shape":"InsightsConfiguration"}
       }
     },
     "UpdateGroupResult":{

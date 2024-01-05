@@ -13,6 +13,88 @@ import (
 	"github.com/aws/aws-sdk-go/private/protocol/query"
 )
 
+const opAddSourceIdentifierToSubscription = "AddSourceIdentifierToSubscription"
+
+// AddSourceIdentifierToSubscriptionRequest generates a "aws/request.Request" representing the
+// client's request for the AddSourceIdentifierToSubscription operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AddSourceIdentifierToSubscription for more information on using the AddSourceIdentifierToSubscription
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AddSourceIdentifierToSubscriptionRequest method.
+//	req, resp := client.AddSourceIdentifierToSubscriptionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/AddSourceIdentifierToSubscription
+func (c *DocDB) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdentifierToSubscriptionInput) (req *request.Request, output *AddSourceIdentifierToSubscriptionOutput) {
+	op := &request.Operation{
+		Name:       opAddSourceIdentifierToSubscription,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AddSourceIdentifierToSubscriptionInput{}
+	}
+
+	output = &AddSourceIdentifierToSubscriptionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// AddSourceIdentifierToSubscription API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Adds a source identifier to an existing event notification subscription.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation AddSourceIdentifierToSubscription for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
+//     The subscription name does not exist.
+//
+//   - ErrCodeSourceNotFoundFault "SourceNotFound"
+//     The requested source could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/AddSourceIdentifierToSubscription
+func (c *DocDB) AddSourceIdentifierToSubscription(input *AddSourceIdentifierToSubscriptionInput) (*AddSourceIdentifierToSubscriptionOutput, error) {
+	req, out := c.AddSourceIdentifierToSubscriptionRequest(input)
+	return out, req.Send()
+}
+
+// AddSourceIdentifierToSubscriptionWithContext is the same as AddSourceIdentifierToSubscription with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AddSourceIdentifierToSubscription for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) AddSourceIdentifierToSubscriptionWithContext(ctx aws.Context, input *AddSourceIdentifierToSubscriptionInput, opts ...request.Option) (*AddSourceIdentifierToSubscriptionOutput, error) {
+	req, out := c.AddSourceIdentifierToSubscriptionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opAddTagsToResource = "AddTagsToResource"
 
 // AddTagsToResourceRequest generates a "aws/request.Request" representing the
@@ -29,14 +111,13 @@ const opAddTagsToResource = "AddTagsToResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddTagsToResourceRequest method.
+//	req, resp := client.AddTagsToResourceRequest(params)
 //
-//    // Example sending a request using the AddTagsToResourceRequest method.
-//    req, resp := client.AddTagsToResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/AddTagsToResource
 func (c *DocDB) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *AddTagsToResourceOutput) {
@@ -60,8 +141,8 @@ func (c *DocDB) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *re
 //
 // Adds metadata tags to an Amazon DocumentDB resource. You can use these tags
 // with cost allocation reporting to track costs that are associated with Amazon
-// DocumentDB resources. or in a Condition statement in an AWS Identity and
-// Access Management (IAM) policy for Amazon DocumentDB.
+// DocumentDB resources or in a Condition statement in an Identity and Access
+// Management (IAM) policy for Amazon DocumentDB.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -71,14 +152,15 @@ func (c *DocDB) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *re
 // API operation AddTagsToResource for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier doesn't refer to an existing DB instance.
 //
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier doesn't refer to an existing DB snapshot.
+//   - ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
+//     DBInstanceIdentifier doesn't refer to an existing instance.
 //
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
+//   - ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
+//     DBSnapshotIdentifier doesn't refer to an existing snapshot.
+//
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/AddTagsToResource
 func (c *DocDB) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResourceOutput, error) {
@@ -118,14 +200,13 @@ const opApplyPendingMaintenanceAction = "ApplyPendingMaintenanceAction"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ApplyPendingMaintenanceActionRequest method.
+//	req, resp := client.ApplyPendingMaintenanceActionRequest(params)
 //
-//    // Example sending a request using the ApplyPendingMaintenanceActionRequest method.
-//    req, resp := client.ApplyPendingMaintenanceActionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ApplyPendingMaintenanceAction
 func (c *DocDB) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintenanceActionInput) (req *request.Request, output *ApplyPendingMaintenanceActionOutput) {
@@ -146,8 +227,8 @@ func (c *DocDB) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintena
 
 // ApplyPendingMaintenanceAction API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Applies a pending maintenance action to a resource (for example, to a DB
-// instance).
+// Applies a pending maintenance action to a resource (for example, to an Amazon
+// DocumentDB instance).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -157,8 +238,15 @@ func (c *DocDB) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintena
 // API operation ApplyPendingMaintenanceAction for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The specified resource ID was not found.
+//
+//   - ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
+//     The specified resource ID was not found.
+//
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
+//
+//   - ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
+//     The specified instance isn't in the available state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ApplyPendingMaintenanceAction
 func (c *DocDB) ApplyPendingMaintenanceAction(input *ApplyPendingMaintenanceActionInput) (*ApplyPendingMaintenanceActionOutput, error) {
@@ -198,14 +286,13 @@ const opCopyDBClusterParameterGroup = "CopyDBClusterParameterGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CopyDBClusterParameterGroupRequest method.
+//	req, resp := client.CopyDBClusterParameterGroupRequest(params)
 //
-//    // Example sending a request using the CopyDBClusterParameterGroupRequest method.
-//    req, resp := client.CopyDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterParameterGroup
 func (c *DocDB) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameterGroupInput) (req *request.Request, output *CopyDBClusterParameterGroupOutput) {
@@ -226,7 +313,7 @@ func (c *DocDB) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameter
 
 // CopyDBClusterParameterGroup API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Copies the specified DB cluster parameter group.
+// Copies the specified cluster parameter group.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -236,15 +323,15 @@ func (c *DocDB) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameter
 // API operation CopyDBClusterParameterGroup for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName doesn't refer to an existing DB parameter group.
 //
-//   * ErrCodeDBParameterGroupQuotaExceededFault "DBParameterGroupQuotaExceeded"
-//   This request would cause you to exceed the allowed number of DB parameter
-//   groups.
+//   - ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
+//     DBParameterGroupName doesn't refer to an existing parameter group.
 //
-//   * ErrCodeDBParameterGroupAlreadyExistsFault "DBParameterGroupAlreadyExists"
-//   A DB parameter group with the same name already exists.
+//   - ErrCodeDBParameterGroupQuotaExceededFault "DBParameterGroupQuotaExceeded"
+//     This request would cause you to exceed the allowed number of parameter groups.
+//
+//   - ErrCodeDBParameterGroupAlreadyExistsFault "DBParameterGroupAlreadyExists"
+//     A parameter group with the same name already exists.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterParameterGroup
 func (c *DocDB) CopyDBClusterParameterGroup(input *CopyDBClusterParameterGroupInput) (*CopyDBClusterParameterGroupOutput, error) {
@@ -284,14 +371,13 @@ const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CopyDBClusterSnapshotRequest method.
+//	req, resp := client.CopyDBClusterSnapshotRequest(params)
 //
-//    // Example sending a request using the CopyDBClusterSnapshotRequest method.
-//    req, resp := client.CopyDBClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterSnapshot
 func (c *DocDB) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) (req *request.Request, output *CopyDBClusterSnapshotOutput) {
@@ -312,14 +398,16 @@ func (c *DocDB) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) 
 
 // CopyDBClusterSnapshot API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Copies a snapshot of a DB cluster.
+// Copies a snapshot of a cluster.
 //
-// To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier
-// must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.
+// To copy a cluster snapshot from a shared manual cluster snapshot, SourceDBClusterSnapshotIdentifier
+// must be the Amazon Resource Name (ARN) of the shared cluster snapshot. You
+// can only copy a shared DB cluster snapshot, whether encrypted or not, in
+// the same Amazon Web Services Region.
 //
-// To cancel the copy operation after it is in progress, delete the target DB
-// cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that
-// DB cluster snapshot is in the copying status.
+// To cancel the copy operation after it is in progress, delete the target cluster
+// snapshot identified by TargetDBClusterSnapshotIdentifier while that cluster
+// snapshot is in the copying status.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -329,23 +417,24 @@ func (c *DocDB) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) 
 // API operation CopyDBClusterSnapshot for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotAlreadyExistsFault "DBClusterSnapshotAlreadyExistsFault"
-//   You already have a DB cluster snapshot with the given identifier.
 //
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier doesn't refer to an existing DB cluster snapshot.
+//   - ErrCodeDBClusterSnapshotAlreadyExistsFault "DBClusterSnapshotAlreadyExistsFault"
+//     You already have a cluster snapshot with the given identifier.
 //
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster isn't in a valid state.
+//   - ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
+//     DBClusterSnapshotIdentifier doesn't refer to an existing cluster snapshot.
 //
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The provided value isn't a valid DB cluster snapshot state.
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
 //
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   The request would cause you to exceed the allowed number of DB snapshots.
+//   - ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
+//     The provided value isn't a valid cluster snapshot state.
 //
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   An error occurred when accessing an AWS KMS key.
+//   - ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
+//     The request would cause you to exceed the allowed number of snapshots.
+//
+//   - ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
+//     An error occurred when accessing an KMS key.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterSnapshot
 func (c *DocDB) CopyDBClusterSnapshot(input *CopyDBClusterSnapshotInput) (*CopyDBClusterSnapshotOutput, error) {
@@ -385,14 +474,13 @@ const opCreateDBCluster = "CreateDBCluster"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDBClusterRequest method.
+//	req, resp := client.CreateDBClusterRequest(params)
 //
-//    // Example sending a request using the CreateDBClusterRequest method.
-//    req, resp := client.CreateDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBCluster
 func (c *DocDB) CreateDBClusterRequest(input *CreateDBClusterInput) (req *request.Request, output *CreateDBClusterOutput) {
@@ -413,7 +501,7 @@ func (c *DocDB) CreateDBClusterRequest(input *CreateDBClusterInput) (req *reques
 
 // CreateDBCluster API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new Amazon DocumentDB DB cluster.
+// Creates a new Amazon DocumentDB cluster.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -423,58 +511,65 @@ func (c *DocDB) CreateDBClusterRequest(input *CreateDBClusterInput) (req *reques
 // API operation CreateDBCluster for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
-//   You already have a DB cluster with the given identifier.
 //
-//   * ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
-//   There is not enough storage available for the current action. You might be
-//   able to resolve this error by updating your subnet group to use different
-//   Availability Zones that have more storage available.
+//   - ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
+//     You already have a cluster with the given identifier.
 //
-//   * ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
-//   The DB cluster can't be created because you have reached the maximum allowed
-//   quota of DB clusters.
+//   - ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
+//     There is not enough storage available for the current action. You might be
+//     able to resolve this error by updating your subnet group to use different
+//     Availability Zones that have more storage available.
 //
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   The request would cause you to exceed the allowed amount of storage available
-//   across all DB instances.
+//   - ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
+//     The cluster can't be created because you have reached the maximum allowed
+//     quota of clusters.
 //
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName doesn't refer to an existing DB subnet group.
+//   - ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
+//     The request would cause you to exceed the allowed amount of storage available
+//     across all instances.
 //
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The DB subnet group doesn't cover all Availability Zones after it is created
-//   because of changes that were made.
+//   - ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
+//     DBSubnetGroupName doesn't refer to an existing subnet group.
 //
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster isn't in a valid state.
+//   - ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
+//     The subnet group doesn't cover all Availability Zones after it is created
+//     because of changes that were made.
 //
-//   * ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
-//   The DB subnet group can't be deleted because it's in use.
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
 //
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or multiple subnets were requested that
-//   are not all in a common virtual private cloud (VPC).
+//   - ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
+//     The subnet group can't be deleted because it's in use.
 //
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance isn't in the available state.
+//   - ErrCodeInvalidSubnet "InvalidSubnet"
+//     The requested subnet is not valid, or multiple subnets were requested that
+//     are not all in a common virtual private cloud (VPC).
 //
-//   * ErrCodeDBClusterParameterGroupNotFoundFault "DBClusterParameterGroupNotFound"
-//   DBClusterParameterGroupName doesn't refer to an existing DB cluster parameter
-//   group.
+//   - ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
+//     The specified instance isn't in the available state.
 //
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   An error occurred when accessing an AWS KMS key.
+//   - ErrCodeDBClusterParameterGroupNotFoundFault "DBClusterParameterGroupNotFound"
+//     DBClusterParameterGroupName doesn't refer to an existing cluster parameter
+//     group.
 //
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
+//   - ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
+//     An error occurred when accessing an KMS key.
 //
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier doesn't refer to an existing DB instance.
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
+//   - ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
+//     DBInstanceIdentifier doesn't refer to an existing instance.
+//
+//   - ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
+//     Subnets in the subnet group should cover at least two Availability Zones
+//     unless there is only one Availability Zone.
+//
+//   - ErrCodeGlobalClusterNotFoundFault "GlobalClusterNotFoundFault"
+//     The GlobalClusterIdentifier doesn't refer to an existing global cluster.
+//
+//   - ErrCodeInvalidGlobalClusterStateFault "InvalidGlobalClusterStateFault"
+//     The requested operation can't be performed while the cluster is in this state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBCluster
 func (c *DocDB) CreateDBCluster(input *CreateDBClusterInput) (*CreateDBClusterOutput, error) {
@@ -514,14 +609,13 @@ const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDBClusterParameterGroupRequest method.
+//	req, resp := client.CreateDBClusterParameterGroupRequest(params)
 //
-//    // Example sending a request using the CreateDBClusterParameterGroupRequest method.
-//    req, resp := client.CreateDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterParameterGroup
 func (c *DocDB) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParameterGroupInput) (req *request.Request, output *CreateDBClusterParameterGroupOutput) {
@@ -542,27 +636,22 @@ func (c *DocDB) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParam
 
 // CreateDBClusterParameterGroup API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new DB cluster parameter group.
+// Creates a new cluster parameter group.
 //
-// Parameters in a DB cluster parameter group apply to all of the instances
-// in a DB cluster.
+// Parameters in a cluster parameter group apply to all of the instances in
+// a cluster.
 //
-// A DB cluster parameter group is initially created with the default parameters
-// for the database engine used by instances in the DB cluster. To provide custom
-// values for any of the parameters, you must modify the group after you create
-// it. After you create a DB cluster parameter group, you must associate it
-// with your DB cluster. For the new DB cluster parameter group and associated
-// settings to take effect, you must then reboot the DB instances in the DB
-// cluster without failover.
-//
-// After you create a DB cluster parameter group, you should wait at least 5
-// minutes before creating your first DB cluster that uses that DB cluster parameter
-// group as the default parameter group. This allows Amazon DocumentDB to fully
-// complete the create action before the DB cluster parameter group is used
-// as the default for a new DB cluster. This step is especially important for
-// parameters that are critical when creating the default database for a DB
-// cluster, such as the character set for the default database defined by the
-// character_set_database parameter.
+// A cluster parameter group is initially created with the default parameters
+// for the database engine used by instances in the cluster. In Amazon DocumentDB,
+// you cannot make modifications directly to the default.docdb3.6 cluster parameter
+// group. If your Amazon DocumentDB cluster is using the default cluster parameter
+// group and you want to modify a value in it, you must first create a new parameter
+// group (https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-create.html)
+// or copy an existing parameter group (https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-copy.html),
+// modify it, and then apply the modified parameter group to your cluster. For
+// the new cluster parameter group and associated settings to take effect, you
+// must then reboot the instances in the cluster without failover. For more
+// information, see Modifying Amazon DocumentDB Cluster Parameter Groups (https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-modify.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -572,12 +661,12 @@ func (c *DocDB) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParam
 // API operation CreateDBClusterParameterGroup for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBParameterGroupQuotaExceededFault "DBParameterGroupQuotaExceeded"
-//   This request would cause you to exceed the allowed number of DB parameter
-//   groups.
 //
-//   * ErrCodeDBParameterGroupAlreadyExistsFault "DBParameterGroupAlreadyExists"
-//   A DB parameter group with the same name already exists.
+//   - ErrCodeDBParameterGroupQuotaExceededFault "DBParameterGroupQuotaExceeded"
+//     This request would cause you to exceed the allowed number of parameter groups.
+//
+//   - ErrCodeDBParameterGroupAlreadyExistsFault "DBParameterGroupAlreadyExists"
+//     A parameter group with the same name already exists.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterParameterGroup
 func (c *DocDB) CreateDBClusterParameterGroup(input *CreateDBClusterParameterGroupInput) (*CreateDBClusterParameterGroupOutput, error) {
@@ -617,14 +706,13 @@ const opCreateDBClusterSnapshot = "CreateDBClusterSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDBClusterSnapshotRequest method.
+//	req, resp := client.CreateDBClusterSnapshotRequest(params)
 //
-//    // Example sending a request using the CreateDBClusterSnapshotRequest method.
-//    req, resp := client.CreateDBClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterSnapshot
 func (c *DocDB) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInput) (req *request.Request, output *CreateDBClusterSnapshotOutput) {
@@ -645,7 +733,7 @@ func (c *DocDB) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInp
 
 // CreateDBClusterSnapshot API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a snapshot of a DB cluster.
+// Creates a snapshot of a cluster.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -655,20 +743,21 @@ func (c *DocDB) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInp
 // API operation CreateDBClusterSnapshot for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotAlreadyExistsFault "DBClusterSnapshotAlreadyExistsFault"
-//   You already have a DB cluster snapshot with the given identifier.
 //
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster isn't in a valid state.
+//   - ErrCodeDBClusterSnapshotAlreadyExistsFault "DBClusterSnapshotAlreadyExistsFault"
+//     You already have a cluster snapshot with the given identifier.
 //
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
 //
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   The request would cause you to exceed the allowed number of DB snapshots.
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The provided value isn't a valid DB cluster snapshot state.
+//   - ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
+//     The request would cause you to exceed the allowed number of snapshots.
+//
+//   - ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
+//     The provided value isn't a valid cluster snapshot state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterSnapshot
 func (c *DocDB) CreateDBClusterSnapshot(input *CreateDBClusterSnapshotInput) (*CreateDBClusterSnapshotOutput, error) {
@@ -708,14 +797,13 @@ const opCreateDBInstance = "CreateDBInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDBInstanceRequest method.
+//	req, resp := client.CreateDBInstanceRequest(params)
 //
-//    // Example sending a request using the CreateDBInstanceRequest method.
-//    req, resp := client.CreateDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBInstance
 func (c *DocDB) CreateDBInstanceRequest(input *CreateDBInstanceInput) (req *request.Request, output *CreateDBInstanceOutput) {
@@ -736,7 +824,7 @@ func (c *DocDB) CreateDBInstanceRequest(input *CreateDBInstanceInput) (req *requ
 
 // CreateDBInstance API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new DB instance.
+// Creates a new instance.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -746,59 +834,60 @@ func (c *DocDB) CreateDBInstanceRequest(input *CreateDBInstanceInput) (req *requ
 // API operation CreateDBInstance for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBInstanceAlreadyExistsFault "DBInstanceAlreadyExists"
-//   You already have a DB instance with the given identifier.
 //
-//   * ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
-//   The specified DB instance class isn't available in the specified Availability
-//   Zone.
+//   - ErrCodeDBInstanceAlreadyExistsFault "DBInstanceAlreadyExists"
+//     You already have a instance with the given identifier.
 //
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName doesn't refer to an existing DB parameter group.
+//   - ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
+//     The specified instance class isn't available in the specified Availability
+//     Zone.
 //
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName doesn't refer to an existing DB security group.
+//   - ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
+//     DBParameterGroupName doesn't refer to an existing parameter group.
 //
-//   * ErrCodeInstanceQuotaExceededFault "InstanceQuotaExceeded"
-//   The request would cause you to exceed the allowed number of DB instances.
+//   - ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
+//     DBSecurityGroupName doesn't refer to an existing security group.
 //
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   The request would cause you to exceed the allowed amount of storage available
-//   across all DB instances.
+//   - ErrCodeInstanceQuotaExceededFault "InstanceQuotaExceeded"
+//     The request would cause you to exceed the allowed number of instances.
 //
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName doesn't refer to an existing DB subnet group.
+//   - ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
+//     The request would cause you to exceed the allowed amount of storage available
+//     across all instances.
 //
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
+//   - ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
+//     DBSubnetGroupName doesn't refer to an existing subnet group.
 //
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster isn't in a valid state.
+//   - ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
+//     Subnets in the subnet group should cover at least two Availability Zones
+//     unless there is only one Availability Zone.
 //
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or multiple subnets were requested that
-//   are not all in a common virtual private cloud (VPC).
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
 //
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The DB subnet group doesn't cover all Availability Zones after it is created
-//   because of changes that were made.
+//   - ErrCodeInvalidSubnet "InvalidSubnet"
+//     The requested subnet is not valid, or multiple subnets were requested that
+//     are not all in a common virtual private cloud (VPC).
 //
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
+//   - ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
+//     The subnet group doesn't cover all Availability Zones after it is created
+//     because of changes that were made.
 //
-//   * ErrCodeStorageTypeNotSupportedFault "StorageTypeNotSupported"
-//   Storage of the specified StorageType can't be associated with the DB instance.
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   The specified CIDR IP or Amazon EC2 security group isn't authorized for the
-//   specified DB security group.
+//   - ErrCodeStorageTypeNotSupportedFault "StorageTypeNotSupported"
+//     Storage of the specified StorageType can't be associated with the DB instance.
 //
-//   Amazon DocumentDB also might not be authorized to perform necessary actions
-//   on your behalf using IAM.
+//   - ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
+//     The specified CIDR IP or Amazon EC2 security group isn't authorized for the
+//     specified security group.
 //
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   An error occurred when accessing an AWS KMS key.
+//     Amazon DocumentDB also might not be authorized to perform necessary actions
+//     on your behalf using IAM.
+//
+//   - ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
+//     An error occurred when accessing an KMS key.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBInstance
 func (c *DocDB) CreateDBInstance(input *CreateDBInstanceInput) (*CreateDBInstanceOutput, error) {
@@ -838,14 +927,13 @@ const opCreateDBSubnetGroup = "CreateDBSubnetGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDBSubnetGroupRequest method.
+//	req, resp := client.CreateDBSubnetGroupRequest(params)
 //
-//    // Example sending a request using the CreateDBSubnetGroupRequest method.
-//    req, resp := client.CreateDBSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBSubnetGroup
 func (c *DocDB) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) (req *request.Request, output *CreateDBSubnetGroupOutput) {
@@ -866,8 +954,8 @@ func (c *DocDB) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) (req
 
 // CreateDBSubnetGroup API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new DB subnet group. DB subnet groups must contain at least one
-// subnet in at least two Availability Zones in the AWS Region.
+// Creates a new subnet group. subnet groups must contain at least one subnet
+// in at least two Availability Zones in the Amazon Web Services Region.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -877,23 +965,24 @@ func (c *DocDB) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) (req
 // API operation CreateDBSubnetGroup for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBSubnetGroupAlreadyExistsFault "DBSubnetGroupAlreadyExists"
-//   DBSubnetGroupName is already being used by an existing DB subnet group.
 //
-//   * ErrCodeDBSubnetGroupQuotaExceededFault "DBSubnetGroupQuotaExceeded"
-//   The request would cause you to exceed the allowed number of DB subnet groups.
+//   - ErrCodeDBSubnetGroupAlreadyExistsFault "DBSubnetGroupAlreadyExists"
+//     DBSubnetGroupName is already being used by an existing subnet group.
 //
-//   * ErrCodeDBSubnetQuotaExceededFault "DBSubnetQuotaExceededFault"
-//   The request would cause you to exceed the allowed number of subnets in a
-//   DB subnet group.
+//   - ErrCodeDBSubnetGroupQuotaExceededFault "DBSubnetGroupQuotaExceeded"
+//     The request would cause you to exceed the allowed number of subnet groups.
 //
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
+//   - ErrCodeDBSubnetQuotaExceededFault "DBSubnetQuotaExceededFault"
+//     The request would cause you to exceed the allowed number of subnets in a
+//     subnet group.
 //
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or multiple subnets were requested that
-//   are not all in a common virtual private cloud (VPC).
+//   - ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
+//     Subnets in the subnet group should cover at least two Availability Zones
+//     unless there is only one Availability Zone.
+//
+//   - ErrCodeInvalidSubnet "InvalidSubnet"
+//     The requested subnet is not valid, or multiple subnets were requested that
+//     are not all in a common virtual private cloud (VPC).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBSubnetGroup
 func (c *DocDB) CreateDBSubnetGroup(input *CreateDBSubnetGroupInput) (*CreateDBSubnetGroupOutput, error) {
@@ -917,6 +1006,224 @@ func (c *DocDB) CreateDBSubnetGroupWithContext(ctx aws.Context, input *CreateDBS
 	return out, req.Send()
 }
 
+const opCreateEventSubscription = "CreateEventSubscription"
+
+// CreateEventSubscriptionRequest generates a "aws/request.Request" representing the
+// client's request for the CreateEventSubscription operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateEventSubscription for more information on using the CreateEventSubscription
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateEventSubscriptionRequest method.
+//	req, resp := client.CreateEventSubscriptionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateEventSubscription
+func (c *DocDB) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *request.Request, output *CreateEventSubscriptionOutput) {
+	op := &request.Operation{
+		Name:       opCreateEventSubscription,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateEventSubscriptionInput{}
+	}
+
+	output = &CreateEventSubscriptionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateEventSubscription API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Creates an Amazon DocumentDB event notification subscription. This action
+// requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB
+// console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN
+// with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the
+// topic. The ARN is displayed in the Amazon SNS console.
+//
+// You can specify the type of source (SourceType) that you want to be notified
+// of. You can also provide a list of Amazon DocumentDB sources (SourceIds)
+// that trigger the events, and you can provide a list of event categories (EventCategories)
+// for events that you want to be notified of. For example, you can specify
+// SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories
+// = Availability, Backup.
+//
+// If you specify both the SourceType and SourceIds (such as SourceType = db-instance
+// and SourceIdentifier = myDBInstance1), you are notified of all the db-instance
+// events for the specified source. If you specify a SourceType but do not specify
+// a SourceIdentifier, you receive notice of the events for that source type
+// for all your Amazon DocumentDB sources. If you do not specify either the
+// SourceType or the SourceIdentifier, you are notified of events generated
+// from all Amazon DocumentDB sources belonging to your customer account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation CreateEventSubscription for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeEventSubscriptionQuotaExceededFault "EventSubscriptionQuotaExceeded"
+//     You have reached the maximum number of event subscriptions.
+//
+//   - ErrCodeSubscriptionAlreadyExistFault "SubscriptionAlreadyExist"
+//     The provided subscription name already exists.
+//
+//   - ErrCodeSNSInvalidTopicFault "SNSInvalidTopic"
+//     Amazon SNS has responded that there is a problem with the specified topic.
+//
+//   - ErrCodeSNSNoAuthorizationFault "SNSNoAuthorization"
+//     You do not have permission to publish to the SNS topic Amazon Resource Name
+//     (ARN).
+//
+//   - ErrCodeSNSTopicArnNotFoundFault "SNSTopicArnNotFound"
+//     The SNS topic Amazon Resource Name (ARN) does not exist.
+//
+//   - ErrCodeSubscriptionCategoryNotFoundFault "SubscriptionCategoryNotFound"
+//     The provided category does not exist.
+//
+//   - ErrCodeSourceNotFoundFault "SourceNotFound"
+//     The requested source could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateEventSubscription
+func (c *DocDB) CreateEventSubscription(input *CreateEventSubscriptionInput) (*CreateEventSubscriptionOutput, error) {
+	req, out := c.CreateEventSubscriptionRequest(input)
+	return out, req.Send()
+}
+
+// CreateEventSubscriptionWithContext is the same as CreateEventSubscription with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateEventSubscription for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...request.Option) (*CreateEventSubscriptionOutput, error) {
+	req, out := c.CreateEventSubscriptionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opCreateGlobalCluster = "CreateGlobalCluster"
+
+// CreateGlobalClusterRequest generates a "aws/request.Request" representing the
+// client's request for the CreateGlobalCluster operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateGlobalCluster for more information on using the CreateGlobalCluster
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateGlobalClusterRequest method.
+//	req, resp := client.CreateGlobalClusterRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateGlobalCluster
+func (c *DocDB) CreateGlobalClusterRequest(input *CreateGlobalClusterInput) (req *request.Request, output *CreateGlobalClusterOutput) {
+	op := &request.Operation{
+		Name:       opCreateGlobalCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateGlobalClusterInput{}
+	}
+
+	output = &CreateGlobalClusterOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateGlobalCluster API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Creates an Amazon DocumentDB global cluster that can span multiple multiple
+// Amazon Web Services Regions. The global cluster contains one primary cluster
+// with read-write capability, and up-to give read-only secondary clusters.
+// Global clusters uses storage-based fast replication across regions with latencies
+// less than one second, using dedicated infrastructure with no impact to your
+// workload’s performance.
+//
+// You can create a global cluster that is initially empty, and then add a primary
+// and a secondary to it. Or you can specify an existing cluster during the
+// create operation, and this cluster becomes the primary of the global cluster.
+//
+// This action only applies to Amazon DocumentDB clusters.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation CreateGlobalCluster for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeGlobalClusterAlreadyExistsFault "GlobalClusterAlreadyExistsFault"
+//     The GlobalClusterIdentifier already exists. Choose a new global cluster identifier
+//     (unique name) to create a new global cluster.
+//
+//   - ErrCodeGlobalClusterQuotaExceededFault "GlobalClusterQuotaExceededFault"
+//     The number of global clusters for this account is already at the maximum
+//     allowed.
+//
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
+//
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateGlobalCluster
+func (c *DocDB) CreateGlobalCluster(input *CreateGlobalClusterInput) (*CreateGlobalClusterOutput, error) {
+	req, out := c.CreateGlobalClusterRequest(input)
+	return out, req.Send()
+}
+
+// CreateGlobalClusterWithContext is the same as CreateGlobalCluster with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateGlobalCluster for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) CreateGlobalClusterWithContext(ctx aws.Context, input *CreateGlobalClusterInput, opts ...request.Option) (*CreateGlobalClusterOutput, error) {
+	req, out := c.CreateGlobalClusterRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteDBCluster = "DeleteDBCluster"
 
 // DeleteDBClusterRequest generates a "aws/request.Request" representing the
@@ -933,14 +1240,13 @@ const opDeleteDBCluster = "DeleteDBCluster"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDBClusterRequest method.
+//	req, resp := client.DeleteDBClusterRequest(params)
 //
-//    // Example sending a request using the DeleteDBClusterRequest method.
-//    req, resp := client.DeleteDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBCluster
 func (c *DocDB) DeleteDBClusterRequest(input *DeleteDBClusterInput) (req *request.Request, output *DeleteDBClusterOutput) {
@@ -961,9 +1267,9 @@ func (c *DocDB) DeleteDBClusterRequest(input *DeleteDBClusterInput) (req *reques
 
 // DeleteDBCluster API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a previously provisioned DB cluster. When you delete a DB cluster,
-// all automated backups for that DB cluster are deleted and can't be recovered.
-// Manual DB cluster snapshots of the specified DB cluster are not deleted.
+// Deletes a previously provisioned cluster. When you delete a cluster, all
+// automated backups for that cluster are deleted and can't be recovered. Manual
+// DB cluster snapshots of the specified cluster are not deleted.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -973,20 +1279,21 @@ func (c *DocDB) DeleteDBClusterRequest(input *DeleteDBClusterInput) (req *reques
 // API operation DeleteDBCluster for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
 //
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster isn't in a valid state.
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
-//   * ErrCodeDBClusterSnapshotAlreadyExistsFault "DBClusterSnapshotAlreadyExistsFault"
-//   You already have a DB cluster snapshot with the given identifier.
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
 //
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   The request would cause you to exceed the allowed number of DB snapshots.
+//   - ErrCodeDBClusterSnapshotAlreadyExistsFault "DBClusterSnapshotAlreadyExistsFault"
+//     You already have a cluster snapshot with the given identifier.
 //
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The provided value isn't a valid DB cluster snapshot state.
+//   - ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
+//     The request would cause you to exceed the allowed number of snapshots.
+//
+//   - ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
+//     The provided value isn't a valid cluster snapshot state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBCluster
 func (c *DocDB) DeleteDBCluster(input *DeleteDBClusterInput) (*DeleteDBClusterOutput, error) {
@@ -1026,14 +1333,13 @@ const opDeleteDBClusterParameterGroup = "DeleteDBClusterParameterGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDBClusterParameterGroupRequest method.
+//	req, resp := client.DeleteDBClusterParameterGroupRequest(params)
 //
-//    // Example sending a request using the DeleteDBClusterParameterGroupRequest method.
-//    req, resp := client.DeleteDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterParameterGroup
 func (c *DocDB) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParameterGroupInput) (req *request.Request, output *DeleteDBClusterParameterGroupOutput) {
@@ -1055,8 +1361,8 @@ func (c *DocDB) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParam
 
 // DeleteDBClusterParameterGroup API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a specified DB cluster parameter group. The DB cluster parameter
-// group to be deleted can't be associated with any DB clusters.
+// Deletes a specified cluster parameter group. The cluster parameter group
+// to be deleted can't be associated with any clusters.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1066,13 +1372,14 @@ func (c *DocDB) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParam
 // API operation DeleteDBClusterParameterGroup for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
-//   The DB parameter group is in use, or it is in a state that is not valid.
-//   If you are trying to delete the parameter group, you can't delete it when
-//   the parameter group is in this state.
 //
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName doesn't refer to an existing DB parameter group.
+//   - ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
+//     The parameter group is in use, or it is in a state that is not valid. If
+//     you are trying to delete the parameter group, you can't delete it when the
+//     parameter group is in this state.
+//
+//   - ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
+//     DBParameterGroupName doesn't refer to an existing parameter group.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterParameterGroup
 func (c *DocDB) DeleteDBClusterParameterGroup(input *DeleteDBClusterParameterGroupInput) (*DeleteDBClusterParameterGroupOutput, error) {
@@ -1112,14 +1419,13 @@ const opDeleteDBClusterSnapshot = "DeleteDBClusterSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDBClusterSnapshotRequest method.
+//	req, resp := client.DeleteDBClusterSnapshotRequest(params)
 //
-//    // Example sending a request using the DeleteDBClusterSnapshotRequest method.
-//    req, resp := client.DeleteDBClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterSnapshot
 func (c *DocDB) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInput) (req *request.Request, output *DeleteDBClusterSnapshotOutput) {
@@ -1140,10 +1446,10 @@ func (c *DocDB) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInp
 
 // DeleteDBClusterSnapshot API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a DB cluster snapshot. If the snapshot is being copied, the copy
-// operation is terminated.
+// Deletes a cluster snapshot. If the snapshot is being copied, the copy operation
+// is terminated.
 //
-// The DB cluster snapshot must be in the available state to be deleted.
+// The cluster snapshot must be in the available state to be deleted.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1153,11 +1459,12 @@ func (c *DocDB) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInp
 // API operation DeleteDBClusterSnapshot for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The provided value isn't a valid DB cluster snapshot state.
 //
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier doesn't refer to an existing DB cluster snapshot.
+//   - ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
+//     The provided value isn't a valid cluster snapshot state.
+//
+//   - ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
+//     DBClusterSnapshotIdentifier doesn't refer to an existing cluster snapshot.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterSnapshot
 func (c *DocDB) DeleteDBClusterSnapshot(input *DeleteDBClusterSnapshotInput) (*DeleteDBClusterSnapshotOutput, error) {
@@ -1197,14 +1504,13 @@ const opDeleteDBInstance = "DeleteDBInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDBInstanceRequest method.
+//	req, resp := client.DeleteDBInstanceRequest(params)
 //
-//    // Example sending a request using the DeleteDBInstanceRequest method.
-//    req, resp := client.DeleteDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBInstance
 func (c *DocDB) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) (req *request.Request, output *DeleteDBInstanceOutput) {
@@ -1225,7 +1531,7 @@ func (c *DocDB) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) (req *requ
 
 // DeleteDBInstance API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a previously provisioned DB instance.
+// Deletes a previously provisioned instance.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1235,20 +1541,21 @@ func (c *DocDB) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) (req *requ
 // API operation DeleteDBInstance for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier doesn't refer to an existing DB instance.
 //
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance isn't in the available state.
+//   - ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
+//     DBInstanceIdentifier doesn't refer to an existing instance.
 //
-//   * ErrCodeDBSnapshotAlreadyExistsFault "DBSnapshotAlreadyExists"
-//   DBSnapshotIdentifier is already being used by an existing snapshot.
+//   - ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
+//     The specified instance isn't in the available state.
 //
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   The request would cause you to exceed the allowed number of DB snapshots.
+//   - ErrCodeDBSnapshotAlreadyExistsFault "DBSnapshotAlreadyExists"
+//     DBSnapshotIdentifier is already being used by an existing snapshot.
 //
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster isn't in a valid state.
+//   - ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
+//     The request would cause you to exceed the allowed number of snapshots.
+//
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBInstance
 func (c *DocDB) DeleteDBInstance(input *DeleteDBInstanceInput) (*DeleteDBInstanceOutput, error) {
@@ -1288,14 +1595,13 @@ const opDeleteDBSubnetGroup = "DeleteDBSubnetGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDBSubnetGroupRequest method.
+//	req, resp := client.DeleteDBSubnetGroupRequest(params)
 //
-//    // Example sending a request using the DeleteDBSubnetGroupRequest method.
-//    req, resp := client.DeleteDBSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBSubnetGroup
 func (c *DocDB) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) (req *request.Request, output *DeleteDBSubnetGroupOutput) {
@@ -1317,7 +1623,7 @@ func (c *DocDB) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) (req
 
 // DeleteDBSubnetGroup API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Deletes a DB subnet group.
+// Deletes a subnet group.
 //
 // The specified database subnet group must not be associated with any DB instances.
 //
@@ -1329,14 +1635,15 @@ func (c *DocDB) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) (req
 // API operation DeleteDBSubnetGroup for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
-//   The DB subnet group can't be deleted because it's in use.
 //
-//   * ErrCodeInvalidDBSubnetStateFault "InvalidDBSubnetStateFault"
-//   The DB subnet isn't in the available state.
+//   - ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
+//     The subnet group can't be deleted because it's in use.
 //
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName doesn't refer to an existing DB subnet group.
+//   - ErrCodeInvalidDBSubnetStateFault "InvalidDBSubnetStateFault"
+//     The subnet isn't in the available state.
+//
+//   - ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
+//     DBSubnetGroupName doesn't refer to an existing subnet group.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBSubnetGroup
 func (c *DocDB) DeleteDBSubnetGroup(input *DeleteDBSubnetGroupInput) (*DeleteDBSubnetGroupOutput, error) {
@@ -1360,6 +1667,310 @@ func (c *DocDB) DeleteDBSubnetGroupWithContext(ctx aws.Context, input *DeleteDBS
 	return out, req.Send()
 }
 
+const opDeleteEventSubscription = "DeleteEventSubscription"
+
+// DeleteEventSubscriptionRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteEventSubscription operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteEventSubscription for more information on using the DeleteEventSubscription
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteEventSubscriptionRequest method.
+//	req, resp := client.DeleteEventSubscriptionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteEventSubscription
+func (c *DocDB) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *request.Request, output *DeleteEventSubscriptionOutput) {
+	op := &request.Operation{
+		Name:       opDeleteEventSubscription,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteEventSubscriptionInput{}
+	}
+
+	output = &DeleteEventSubscriptionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DeleteEventSubscription API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Deletes an Amazon DocumentDB event notification subscription.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation DeleteEventSubscription for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
+//     The subscription name does not exist.
+//
+//   - ErrCodeInvalidEventSubscriptionStateFault "InvalidEventSubscriptionState"
+//     Someone else might be modifying a subscription. Wait a few seconds, and try
+//     again.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteEventSubscription
+func (c *DocDB) DeleteEventSubscription(input *DeleteEventSubscriptionInput) (*DeleteEventSubscriptionOutput, error) {
+	req, out := c.DeleteEventSubscriptionRequest(input)
+	return out, req.Send()
+}
+
+// DeleteEventSubscriptionWithContext is the same as DeleteEventSubscription with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteEventSubscription for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...request.Option) (*DeleteEventSubscriptionOutput, error) {
+	req, out := c.DeleteEventSubscriptionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDeleteGlobalCluster = "DeleteGlobalCluster"
+
+// DeleteGlobalClusterRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteGlobalCluster operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteGlobalCluster for more information on using the DeleteGlobalCluster
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteGlobalClusterRequest method.
+//	req, resp := client.DeleteGlobalClusterRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteGlobalCluster
+func (c *DocDB) DeleteGlobalClusterRequest(input *DeleteGlobalClusterInput) (req *request.Request, output *DeleteGlobalClusterOutput) {
+	op := &request.Operation{
+		Name:       opDeleteGlobalCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteGlobalClusterInput{}
+	}
+
+	output = &DeleteGlobalClusterOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DeleteGlobalCluster API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Deletes a global cluster. The primary and secondary clusters must already
+// be detached or deleted before attempting to delete a global cluster.
+//
+// This action only applies to Amazon DocumentDB clusters.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation DeleteGlobalCluster for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeGlobalClusterNotFoundFault "GlobalClusterNotFoundFault"
+//     The GlobalClusterIdentifier doesn't refer to an existing global cluster.
+//
+//   - ErrCodeInvalidGlobalClusterStateFault "InvalidGlobalClusterStateFault"
+//     The requested operation can't be performed while the cluster is in this state.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteGlobalCluster
+func (c *DocDB) DeleteGlobalCluster(input *DeleteGlobalClusterInput) (*DeleteGlobalClusterOutput, error) {
+	req, out := c.DeleteGlobalClusterRequest(input)
+	return out, req.Send()
+}
+
+// DeleteGlobalClusterWithContext is the same as DeleteGlobalCluster with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteGlobalCluster for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DeleteGlobalClusterWithContext(ctx aws.Context, input *DeleteGlobalClusterInput, opts ...request.Option) (*DeleteGlobalClusterOutput, error) {
+	req, out := c.DeleteGlobalClusterRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDescribeCertificates = "DescribeCertificates"
+
+// DescribeCertificatesRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeCertificates operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeCertificates for more information on using the DescribeCertificates
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeCertificatesRequest method.
+//	req, resp := client.DescribeCertificatesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeCertificates
+func (c *DocDB) DescribeCertificatesRequest(input *DescribeCertificatesInput) (req *request.Request, output *DescribeCertificatesOutput) {
+	op := &request.Operation{
+		Name:       opDescribeCertificates,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeCertificatesInput{}
+	}
+
+	output = &DescribeCertificatesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeCertificates API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Returns a list of certificate authority (CA) certificates provided by Amazon
+// DocumentDB for this Amazon Web Services account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation DescribeCertificates for usage and error information.
+//
+// Returned Error Codes:
+//   - ErrCodeCertificateNotFoundFault "CertificateNotFound"
+//     CertificateIdentifier doesn't refer to an existing certificate.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeCertificates
+func (c *DocDB) DescribeCertificates(input *DescribeCertificatesInput) (*DescribeCertificatesOutput, error) {
+	req, out := c.DescribeCertificatesRequest(input)
+	return out, req.Send()
+}
+
+// DescribeCertificatesWithContext is the same as DescribeCertificates with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeCertificates for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribeCertificatesWithContext(ctx aws.Context, input *DescribeCertificatesInput, opts ...request.Option) (*DescribeCertificatesOutput, error) {
+	req, out := c.DescribeCertificatesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeCertificatesPages iterates over the pages of a DescribeCertificates operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeCertificates method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeCertificates operation.
+//	pageNum := 0
+//	err := client.DescribeCertificatesPages(params,
+//	    func(page *docdb.DescribeCertificatesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DocDB) DescribeCertificatesPages(input *DescribeCertificatesInput, fn func(*DescribeCertificatesOutput, bool) bool) error {
+	return c.DescribeCertificatesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeCertificatesPagesWithContext same as DescribeCertificatesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribeCertificatesPagesWithContext(ctx aws.Context, input *DescribeCertificatesInput, fn func(*DescribeCertificatesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeCertificatesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeCertificatesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeCertificatesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
 
 // DescribeDBClusterParameterGroupsRequest generates a "aws/request.Request" representing the
@@ -1376,14 +1987,13 @@ const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDBClusterParameterGroupsRequest method.
+//	req, resp := client.DescribeDBClusterParameterGroupsRequest(params)
 //
-//    // Example sending a request using the DescribeDBClusterParameterGroupsRequest method.
-//    req, resp := client.DescribeDBClusterParameterGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterParameterGroups
 func (c *DocDB) DescribeDBClusterParameterGroupsRequest(input *DescribeDBClusterParameterGroupsInput) (req *request.Request, output *DescribeDBClusterParameterGroupsOutput) {
@@ -1391,6 +2001,12 @@ func (c *DocDB) DescribeDBClusterParameterGroupsRequest(input *DescribeDBCluster
 		Name:       opDescribeDBClusterParameterGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1406,7 +2022,7 @@ func (c *DocDB) DescribeDBClusterParameterGroupsRequest(input *DescribeDBCluster
 //
 // Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName
 // parameter is specified, the list contains only the description of the specified
-// DB cluster parameter group.
+// cluster parameter group.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1416,8 +2032,8 @@ func (c *DocDB) DescribeDBClusterParameterGroupsRequest(input *DescribeDBCluster
 // API operation DescribeDBClusterParameterGroups for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName doesn't refer to an existing DB parameter group.
+//   - ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
+//     DBParameterGroupName doesn't refer to an existing parameter group.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterParameterGroups
 func (c *DocDB) DescribeDBClusterParameterGroups(input *DescribeDBClusterParameterGroupsInput) (*DescribeDBClusterParameterGroupsOutput, error) {
@@ -1441,6 +2057,57 @@ func (c *DocDB) DescribeDBClusterParameterGroupsWithContext(ctx aws.Context, inp
 	return out, req.Send()
 }
 
+// DescribeDBClusterParameterGroupsPages iterates over the pages of a DescribeDBClusterParameterGroups operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeDBClusterParameterGroups method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeDBClusterParameterGroups operation.
+//	pageNum := 0
+//	err := client.DescribeDBClusterParameterGroupsPages(params,
+//	    func(page *docdb.DescribeDBClusterParameterGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DocDB) DescribeDBClusterParameterGroupsPages(input *DescribeDBClusterParameterGroupsInput, fn func(*DescribeDBClusterParameterGroupsOutput, bool) bool) error {
+	return c.DescribeDBClusterParameterGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeDBClusterParameterGroupsPagesWithContext same as DescribeDBClusterParameterGroupsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribeDBClusterParameterGroupsPagesWithContext(ctx aws.Context, input *DescribeDBClusterParameterGroupsInput, fn func(*DescribeDBClusterParameterGroupsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeDBClusterParameterGroupsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeDBClusterParameterGroupsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDBClusterParameterGroupsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeDBClusterParameters = "DescribeDBClusterParameters"
 
 // DescribeDBClusterParametersRequest generates a "aws/request.Request" representing the
@@ -1457,14 +2124,13 @@ const opDescribeDBClusterParameters = "DescribeDBClusterParameters"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDBClusterParametersRequest method.
+//	req, resp := client.DescribeDBClusterParametersRequest(params)
 //
-//    // Example sending a request using the DescribeDBClusterParametersRequest method.
-//    req, resp := client.DescribeDBClusterParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterParameters
 func (c *DocDB) DescribeDBClusterParametersRequest(input *DescribeDBClusterParametersInput) (req *request.Request, output *DescribeDBClusterParametersOutput) {
@@ -1472,6 +2138,12 @@ func (c *DocDB) DescribeDBClusterParametersRequest(input *DescribeDBClusterParam
 		Name:       opDescribeDBClusterParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1485,8 +2157,7 @@ func (c *DocDB) DescribeDBClusterParametersRequest(input *DescribeDBClusterParam
 
 // DescribeDBClusterParameters API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns the detailed parameter list for a particular DB cluster parameter
-// group.
+// Returns the detailed parameter list for a particular cluster parameter group.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1496,8 +2167,8 @@ func (c *DocDB) DescribeDBClusterParametersRequest(input *DescribeDBClusterParam
 // API operation DescribeDBClusterParameters for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName doesn't refer to an existing DB parameter group.
+//   - ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
+//     DBParameterGroupName doesn't refer to an existing parameter group.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterParameters
 func (c *DocDB) DescribeDBClusterParameters(input *DescribeDBClusterParametersInput) (*DescribeDBClusterParametersOutput, error) {
@@ -1521,6 +2192,57 @@ func (c *DocDB) DescribeDBClusterParametersWithContext(ctx aws.Context, input *D
 	return out, req.Send()
 }
 
+// DescribeDBClusterParametersPages iterates over the pages of a DescribeDBClusterParameters operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeDBClusterParameters method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeDBClusterParameters operation.
+//	pageNum := 0
+//	err := client.DescribeDBClusterParametersPages(params,
+//	    func(page *docdb.DescribeDBClusterParametersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DocDB) DescribeDBClusterParametersPages(input *DescribeDBClusterParametersInput, fn func(*DescribeDBClusterParametersOutput, bool) bool) error {
+	return c.DescribeDBClusterParametersPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeDBClusterParametersPagesWithContext same as DescribeDBClusterParametersPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribeDBClusterParametersPagesWithContext(ctx aws.Context, input *DescribeDBClusterParametersInput, fn func(*DescribeDBClusterParametersOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeDBClusterParametersInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeDBClusterParametersRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDBClusterParametersOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttributes"
 
 // DescribeDBClusterSnapshotAttributesRequest generates a "aws/request.Request" representing the
@@ -1537,14 +2259,13 @@ const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttribut
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDBClusterSnapshotAttributesRequest method.
+//	req, resp := client.DescribeDBClusterSnapshotAttributesRequest(params)
 //
-//    // Example sending a request using the DescribeDBClusterSnapshotAttributesRequest method.
-//    req, resp := client.DescribeDBClusterSnapshotAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterSnapshotAttributes
 func (c *DocDB) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClusterSnapshotAttributesInput) (req *request.Request, output *DescribeDBClusterSnapshotAttributesOutput) {
@@ -1565,14 +2286,15 @@ func (c *DocDB) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClus
 
 // DescribeDBClusterSnapshotAttributes API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns a list of DB cluster snapshot attribute names and values for a manual
+// Returns a list of cluster snapshot attribute names and values for a manual
 // DB cluster snapshot.
 //
-// When you share snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes
-// returns the restore attribute and a list of IDs for the AWS accounts that
-// are authorized to copy or restore the manual DB cluster snapshot. If all
-// is included in the list of values for the restore attribute, then the manual
-// DB cluster snapshot is public and can be copied or restored by all AWS accounts.
+// When you share snapshots with other Amazon Web Services accounts, DescribeDBClusterSnapshotAttributes
+// returns the restore attribute and a list of IDs for the Amazon Web Services
+// accounts that are authorized to copy or restore the manual cluster snapshot.
+// If all is included in the list of values for the restore attribute, then
+// the manual cluster snapshot is public and can be copied or restored by all
+// Amazon Web Services accounts.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1582,8 +2304,8 @@ func (c *DocDB) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClus
 // API operation DescribeDBClusterSnapshotAttributes for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier doesn't refer to an existing DB cluster snapshot.
+//   - ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
+//     DBClusterSnapshotIdentifier doesn't refer to an existing cluster snapshot.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterSnapshotAttributes
 func (c *DocDB) DescribeDBClusterSnapshotAttributes(input *DescribeDBClusterSnapshotAttributesInput) (*DescribeDBClusterSnapshotAttributesOutput, error) {
@@ -1623,14 +2345,13 @@ const opDescribeDBClusterSnapshots = "DescribeDBClusterSnapshots"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDBClusterSnapshotsRequest method.
+//	req, resp := client.DescribeDBClusterSnapshotsRequest(params)
 //
-//    // Example sending a request using the DescribeDBClusterSnapshotsRequest method.
-//    req, resp := client.DescribeDBClusterSnapshotsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterSnapshots
 func (c *DocDB) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapshotsInput) (req *request.Request, output *DescribeDBClusterSnapshotsOutput) {
@@ -1638,6 +2359,12 @@ func (c *DocDB) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapsh
 		Name:       opDescribeDBClusterSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -1651,7 +2378,7 @@ func (c *DocDB) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapsh
 
 // DescribeDBClusterSnapshots API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns information about DB cluster snapshots. This API operation supports
+// Returns information about cluster snapshots. This API operation supports
 // pagination.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -1662,8 +2389,8 @@ func (c *DocDB) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapsh
 // API operation DescribeDBClusterSnapshots for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier doesn't refer to an existing DB cluster snapshot.
+//   - ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
+//     DBClusterSnapshotIdentifier doesn't refer to an existing cluster snapshot.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterSnapshots
 func (c *DocDB) DescribeDBClusterSnapshots(input *DescribeDBClusterSnapshotsInput) (*DescribeDBClusterSnapshotsOutput, error) {
@@ -1687,6 +2414,57 @@ func (c *DocDB) DescribeDBClusterSnapshotsWithContext(ctx aws.Context, input *De
 	return out, req.Send()
 }
 
+// DescribeDBClusterSnapshotsPages iterates over the pages of a DescribeDBClusterSnapshots operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeDBClusterSnapshots method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeDBClusterSnapshots operation.
+//	pageNum := 0
+//	err := client.DescribeDBClusterSnapshotsPages(params,
+//	    func(page *docdb.DescribeDBClusterSnapshotsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DocDB) DescribeDBClusterSnapshotsPages(input *DescribeDBClusterSnapshotsInput, fn func(*DescribeDBClusterSnapshotsOutput, bool) bool) error {
+	return c.DescribeDBClusterSnapshotsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeDBClusterSnapshotsPagesWithContext same as DescribeDBClusterSnapshotsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribeDBClusterSnapshotsPagesWithContext(ctx aws.Context, input *DescribeDBClusterSnapshotsInput, fn func(*DescribeDBClusterSnapshotsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeDBClusterSnapshotsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeDBClusterSnapshotsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDBClusterSnapshotsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeDBClusters = "DescribeDBClusters"
 
 // DescribeDBClustersRequest generates a "aws/request.Request" representing the
@@ -1703,14 +2481,13 @@ const opDescribeDBClusters = "DescribeDBClusters"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDBClustersRequest method.
+//	req, resp := client.DescribeDBClustersRequest(params)
 //
-//    // Example sending a request using the DescribeDBClustersRequest method.
-//    req, resp := client.DescribeDBClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusters
 func (c *DocDB) DescribeDBClustersRequest(input *DescribeDBClustersInput) (req *request.Request, output *DescribeDBClustersOutput) {
@@ -1737,8 +2514,11 @@ func (c *DocDB) DescribeDBClustersRequest(input *DescribeDBClustersInput) (req *
 
 // DescribeDBClusters API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns information about provisioned Amazon DocumentDB DB clusters. This
-// API operation supports pagination.
+// Returns information about provisioned Amazon DocumentDB clusters. This API
+// operation supports pagination. For certain management features such as cluster
+// and instance lifecycle management, Amazon DocumentDB leverages operational
+// technology that is shared with Amazon RDS and Amazon Neptune. Use the filterName=engine,Values=docdb
+// filter parameter to return only Amazon DocumentDB clusters.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1748,8 +2528,8 @@ func (c *DocDB) DescribeDBClustersRequest(input *DescribeDBClustersInput) (req *
 // API operation DescribeDBClusters for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusters
 func (c *DocDB) DescribeDBClusters(input *DescribeDBClustersInput) (*DescribeDBClustersOutput, error) {
@@ -1781,15 +2561,14 @@ func (c *DocDB) DescribeDBClustersWithContext(ctx aws.Context, input *DescribeDB
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeDBClusters operation.
-//    pageNum := 0
-//    err := client.DescribeDBClustersPages(params,
-//        func(page *DescribeDBClustersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeDBClusters operation.
+//	pageNum := 0
+//	err := client.DescribeDBClustersPages(params,
+//	    func(page *docdb.DescribeDBClustersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *DocDB) DescribeDBClustersPages(input *DescribeDBClustersInput, fn func(*DescribeDBClustersOutput, bool) bool) error {
 	return c.DescribeDBClustersPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1816,10 +2595,12 @@ func (c *DocDB) DescribeDBClustersPagesWithContext(ctx aws.Context, input *Descr
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBClustersOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDBClustersOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1839,14 +2620,13 @@ const opDescribeDBEngineVersions = "DescribeDBEngineVersions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDBEngineVersionsRequest method.
+//	req, resp := client.DescribeDBEngineVersionsRequest(params)
 //
-//    // Example sending a request using the DescribeDBEngineVersionsRequest method.
-//    req, resp := client.DescribeDBEngineVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBEngineVersions
 func (c *DocDB) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInput) (req *request.Request, output *DescribeDBEngineVersionsOutput) {
@@ -1873,7 +2653,7 @@ func (c *DocDB) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsI
 
 // DescribeDBEngineVersions API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns a list of the available DB engines.
+// Returns a list of the available engines.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1911,15 +2691,14 @@ func (c *DocDB) DescribeDBEngineVersionsWithContext(ctx aws.Context, input *Desc
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeDBEngineVersions operation.
-//    pageNum := 0
-//    err := client.DescribeDBEngineVersionsPages(params,
-//        func(page *DescribeDBEngineVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeDBEngineVersions operation.
+//	pageNum := 0
+//	err := client.DescribeDBEngineVersionsPages(params,
+//	    func(page *docdb.DescribeDBEngineVersionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *DocDB) DescribeDBEngineVersionsPages(input *DescribeDBEngineVersionsInput, fn func(*DescribeDBEngineVersionsOutput, bool) bool) error {
 	return c.DescribeDBEngineVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1946,10 +2725,12 @@ func (c *DocDB) DescribeDBEngineVersionsPagesWithContext(ctx aws.Context, input 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBEngineVersionsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDBEngineVersionsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1969,14 +2750,13 @@ const opDescribeDBInstances = "DescribeDBInstances"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDBInstancesRequest method.
+//	req, resp := client.DescribeDBInstancesRequest(params)
 //
-//    // Example sending a request using the DescribeDBInstancesRequest method.
-//    req, resp := client.DescribeDBInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBInstances
 func (c *DocDB) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) (req *request.Request, output *DescribeDBInstancesOutput) {
@@ -2014,8 +2794,8 @@ func (c *DocDB) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) (req
 // API operation DescribeDBInstances for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier doesn't refer to an existing DB instance.
+//   - ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
+//     DBInstanceIdentifier doesn't refer to an existing instance.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBInstances
 func (c *DocDB) DescribeDBInstances(input *DescribeDBInstancesInput) (*DescribeDBInstancesOutput, error) {
@@ -2047,15 +2827,14 @@ func (c *DocDB) DescribeDBInstancesWithContext(ctx aws.Context, input *DescribeD
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeDBInstances operation.
-//    pageNum := 0
-//    err := client.DescribeDBInstancesPages(params,
-//        func(page *DescribeDBInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeDBInstances operation.
+//	pageNum := 0
+//	err := client.DescribeDBInstancesPages(params,
+//	    func(page *docdb.DescribeDBInstancesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *DocDB) DescribeDBInstancesPages(input *DescribeDBInstancesInput, fn func(*DescribeDBInstancesOutput, bool) bool) error {
 	return c.DescribeDBInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2082,10 +2861,12 @@ func (c *DocDB) DescribeDBInstancesPagesWithContext(ctx aws.Context, input *Desc
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBInstancesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDBInstancesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2105,14 +2886,13 @@ const opDescribeDBSubnetGroups = "DescribeDBSubnetGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeDBSubnetGroupsRequest method.
+//	req, resp := client.DescribeDBSubnetGroupsRequest(params)
 //
-//    // Example sending a request using the DescribeDBSubnetGroupsRequest method.
-//    req, resp := client.DescribeDBSubnetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBSubnetGroups
 func (c *DocDB) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) (req *request.Request, output *DescribeDBSubnetGroupsOutput) {
@@ -2150,8 +2930,8 @@ func (c *DocDB) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput
 // API operation DescribeDBSubnetGroups for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName doesn't refer to an existing DB subnet group.
+//   - ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
+//     DBSubnetGroupName doesn't refer to an existing subnet group.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBSubnetGroups
 func (c *DocDB) DescribeDBSubnetGroups(input *DescribeDBSubnetGroupsInput) (*DescribeDBSubnetGroupsOutput, error) {
@@ -2183,15 +2963,14 @@ func (c *DocDB) DescribeDBSubnetGroupsWithContext(ctx aws.Context, input *Descri
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeDBSubnetGroups operation.
-//    pageNum := 0
-//    err := client.DescribeDBSubnetGroupsPages(params,
-//        func(page *DescribeDBSubnetGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeDBSubnetGroups operation.
+//	pageNum := 0
+//	err := client.DescribeDBSubnetGroupsPages(params,
+//	    func(page *docdb.DescribeDBSubnetGroupsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *DocDB) DescribeDBSubnetGroupsPages(input *DescribeDBSubnetGroupsInput, fn func(*DescribeDBSubnetGroupsOutput, bool) bool) error {
 	return c.DescribeDBSubnetGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2218,10 +2997,12 @@ func (c *DocDB) DescribeDBSubnetGroupsPagesWithContext(ctx aws.Context, input *D
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBSubnetGroupsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeDBSubnetGroupsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2241,14 +3022,13 @@ const opDescribeEngineDefaultClusterParameters = "DescribeEngineDefaultClusterPa
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeEngineDefaultClusterParametersRequest method.
+//	req, resp := client.DescribeEngineDefaultClusterParametersRequest(params)
 //
-//    // Example sending a request using the DescribeEngineDefaultClusterParametersRequest method.
-//    req, resp := client.DescribeEngineDefaultClusterParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeEngineDefaultClusterParameters
 func (c *DocDB) DescribeEngineDefaultClusterParametersRequest(input *DescribeEngineDefaultClusterParametersInput) (req *request.Request, output *DescribeEngineDefaultClusterParametersOutput) {
@@ -2316,14 +3096,13 @@ const opDescribeEventCategories = "DescribeEventCategories"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeEventCategoriesRequest method.
+//	req, resp := client.DescribeEventCategoriesRequest(params)
 //
-//    // Example sending a request using the DescribeEventCategoriesRequest method.
-//    req, resp := client.DescribeEventCategoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeEventCategories
 func (c *DocDB) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *request.Request, output *DescribeEventCategoriesOutput) {
@@ -2375,6 +3154,145 @@ func (c *DocDB) DescribeEventCategoriesWithContext(ctx aws.Context, input *Descr
 	return out, req.Send()
 }
 
+const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
+
+// DescribeEventSubscriptionsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeEventSubscriptions operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeEventSubscriptions for more information on using the DescribeEventSubscriptions
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeEventSubscriptionsRequest method.
+//	req, resp := client.DescribeEventSubscriptionsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeEventSubscriptions
+func (c *DocDB) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *request.Request, output *DescribeEventSubscriptionsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeEventSubscriptions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeEventSubscriptionsInput{}
+	}
+
+	output = &DescribeEventSubscriptionsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeEventSubscriptions API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Lists all the subscription descriptions for a customer account. The description
+// for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType,
+// SourceID, CreationTime, and Status.
+//
+// If you specify a SubscriptionName, lists the description for that subscription.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation DescribeEventSubscriptions for usage and error information.
+//
+// Returned Error Codes:
+//   - ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
+//     The subscription name does not exist.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeEventSubscriptions
+func (c *DocDB) DescribeEventSubscriptions(input *DescribeEventSubscriptionsInput) (*DescribeEventSubscriptionsOutput, error) {
+	req, out := c.DescribeEventSubscriptionsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeEventSubscriptionsWithContext is the same as DescribeEventSubscriptions with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeEventSubscriptions for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...request.Option) (*DescribeEventSubscriptionsOutput, error) {
+	req, out := c.DescribeEventSubscriptionsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeEventSubscriptionsPages iterates over the pages of a DescribeEventSubscriptions operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeEventSubscriptions method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeEventSubscriptions operation.
+//	pageNum := 0
+//	err := client.DescribeEventSubscriptionsPages(params,
+//	    func(page *docdb.DescribeEventSubscriptionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DocDB) DescribeEventSubscriptionsPages(input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool) error {
+	return c.DescribeEventSubscriptionsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeEventSubscriptionsPagesWithContext same as DescribeEventSubscriptionsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeEventSubscriptionsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeEventSubscriptionsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeEventSubscriptionsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeEvents = "DescribeEvents"
 
 // DescribeEventsRequest generates a "aws/request.Request" representing the
@@ -2391,14 +3309,13 @@ const opDescribeEvents = "DescribeEvents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeEventsRequest method.
+//	req, resp := client.DescribeEventsRequest(params)
 //
-//    // Example sending a request using the DescribeEventsRequest method.
-//    req, resp := client.DescribeEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeEvents
 func (c *DocDB) DescribeEventsRequest(input *DescribeEventsInput) (req *request.Request, output *DescribeEventsOutput) {
@@ -2425,11 +3342,10 @@ func (c *DocDB) DescribeEventsRequest(input *DescribeEventsInput) (req *request.
 
 // DescribeEvents API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns events related to DB instances, DB security groups, DB snapshots,
-// and DB parameter groups for the past 14 days. You can obtain events specific
-// to a particular DB instance, DB security group, DB snapshot, or DB parameter
-// group by providing the name as a parameter. By default, the events of the
-// past hour are returned.
+// Returns events related to instances, security groups, snapshots, and DB parameter
+// groups for the past 14 days. You can obtain events specific to a particular
+// DB instance, security group, snapshot, or parameter group by providing the
+// name as a parameter. By default, the events of the past hour are returned.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2467,15 +3383,14 @@ func (c *DocDB) DescribeEventsWithContext(ctx aws.Context, input *DescribeEvents
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeEvents operation.
-//    pageNum := 0
-//    err := client.DescribeEventsPages(params,
-//        func(page *DescribeEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeEvents operation.
+//	pageNum := 0
+//	err := client.DescribeEventsPages(params,
+//	    func(page *docdb.DescribeEventsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *DocDB) DescribeEventsPages(input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool) error {
 	return c.DescribeEventsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2502,10 +3417,150 @@ func (c *DocDB) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeE
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeEventsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
+	return p.Err()
+}
+
+const opDescribeGlobalClusters = "DescribeGlobalClusters"
+
+// DescribeGlobalClustersRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeGlobalClusters operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeGlobalClusters for more information on using the DescribeGlobalClusters
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeGlobalClustersRequest method.
+//	req, resp := client.DescribeGlobalClustersRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeGlobalClusters
+func (c *DocDB) DescribeGlobalClustersRequest(input *DescribeGlobalClustersInput) (req *request.Request, output *DescribeGlobalClustersOutput) {
+	op := &request.Operation{
+		Name:       opDescribeGlobalClusters,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeGlobalClustersInput{}
+	}
+
+	output = &DescribeGlobalClustersOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeGlobalClusters API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Returns information about Amazon DocumentDB global clusters. This API supports
+// pagination.
+//
+// This action only applies to Amazon DocumentDB clusters.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation DescribeGlobalClusters for usage and error information.
+//
+// Returned Error Codes:
+//   - ErrCodeGlobalClusterNotFoundFault "GlobalClusterNotFoundFault"
+//     The GlobalClusterIdentifier doesn't refer to an existing global cluster.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeGlobalClusters
+func (c *DocDB) DescribeGlobalClusters(input *DescribeGlobalClustersInput) (*DescribeGlobalClustersOutput, error) {
+	req, out := c.DescribeGlobalClustersRequest(input)
+	return out, req.Send()
+}
+
+// DescribeGlobalClustersWithContext is the same as DescribeGlobalClusters with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeGlobalClusters for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribeGlobalClustersWithContext(ctx aws.Context, input *DescribeGlobalClustersInput, opts ...request.Option) (*DescribeGlobalClustersOutput, error) {
+	req, out := c.DescribeGlobalClustersRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeGlobalClustersPages iterates over the pages of a DescribeGlobalClusters operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeGlobalClusters method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeGlobalClusters operation.
+//	pageNum := 0
+//	err := client.DescribeGlobalClustersPages(params,
+//	    func(page *docdb.DescribeGlobalClustersOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DocDB) DescribeGlobalClustersPages(input *DescribeGlobalClustersInput, fn func(*DescribeGlobalClustersOutput, bool) bool) error {
+	return c.DescribeGlobalClustersPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeGlobalClustersPagesWithContext same as DescribeGlobalClustersPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribeGlobalClustersPagesWithContext(ctx aws.Context, input *DescribeGlobalClustersInput, fn func(*DescribeGlobalClustersOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeGlobalClustersInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeGlobalClustersRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeGlobalClustersOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
 	return p.Err()
 }
 
@@ -2525,14 +3580,13 @@ const opDescribeOrderableDBInstanceOptions = "DescribeOrderableDBInstanceOptions
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeOrderableDBInstanceOptionsRequest method.
+//	req, resp := client.DescribeOrderableDBInstanceOptionsRequest(params)
 //
-//    // Example sending a request using the DescribeOrderableDBInstanceOptionsRequest method.
-//    req, resp := client.DescribeOrderableDBInstanceOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeOrderableDBInstanceOptions
 func (c *DocDB) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderableDBInstanceOptionsInput) (req *request.Request, output *DescribeOrderableDBInstanceOptionsOutput) {
@@ -2559,7 +3613,7 @@ func (c *DocDB) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderab
 
 // DescribeOrderableDBInstanceOptions API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns a list of orderable DB instance options for the specified engine.
+// Returns a list of orderable instance options for the specified engine.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2597,15 +3651,14 @@ func (c *DocDB) DescribeOrderableDBInstanceOptionsWithContext(ctx aws.Context, i
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeOrderableDBInstanceOptions operation.
-//    pageNum := 0
-//    err := client.DescribeOrderableDBInstanceOptionsPages(params,
-//        func(page *DescribeOrderableDBInstanceOptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeOrderableDBInstanceOptions operation.
+//	pageNum := 0
+//	err := client.DescribeOrderableDBInstanceOptionsPages(params,
+//	    func(page *docdb.DescribeOrderableDBInstanceOptionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *DocDB) DescribeOrderableDBInstanceOptionsPages(input *DescribeOrderableDBInstanceOptionsInput, fn func(*DescribeOrderableDBInstanceOptionsOutput, bool) bool) error {
 	return c.DescribeOrderableDBInstanceOptionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2632,10 +3685,12 @@ func (c *DocDB) DescribeOrderableDBInstanceOptionsPagesWithContext(ctx aws.Conte
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeOrderableDBInstanceOptionsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeOrderableDBInstanceOptionsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2655,14 +3710,13 @@ const opDescribePendingMaintenanceActions = "DescribePendingMaintenanceActions"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribePendingMaintenanceActionsRequest method.
+//	req, resp := client.DescribePendingMaintenanceActionsRequest(params)
 //
-//    // Example sending a request using the DescribePendingMaintenanceActionsRequest method.
-//    req, resp := client.DescribePendingMaintenanceActionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribePendingMaintenanceActions
 func (c *DocDB) DescribePendingMaintenanceActionsRequest(input *DescribePendingMaintenanceActionsInput) (req *request.Request, output *DescribePendingMaintenanceActionsOutput) {
@@ -2670,6 +3724,12 @@ func (c *DocDB) DescribePendingMaintenanceActionsRequest(input *DescribePendingM
 		Name:       opDescribePendingMaintenanceActions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -2683,8 +3743,8 @@ func (c *DocDB) DescribePendingMaintenanceActionsRequest(input *DescribePendingM
 
 // DescribePendingMaintenanceActions API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Returns a list of resources (for example, DB instances) that have at least
-// one pending maintenance action.
+// Returns a list of resources (for example, instances) that have at least one
+// pending maintenance action.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2694,8 +3754,8 @@ func (c *DocDB) DescribePendingMaintenanceActionsRequest(input *DescribePendingM
 // API operation DescribePendingMaintenanceActions for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The specified resource ID was not found.
+//   - ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
+//     The specified resource ID was not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribePendingMaintenanceActions
 func (c *DocDB) DescribePendingMaintenanceActions(input *DescribePendingMaintenanceActionsInput) (*DescribePendingMaintenanceActionsOutput, error) {
@@ -2719,6 +3779,57 @@ func (c *DocDB) DescribePendingMaintenanceActionsWithContext(ctx aws.Context, in
 	return out, req.Send()
 }
 
+// DescribePendingMaintenanceActionsPages iterates over the pages of a DescribePendingMaintenanceActions operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribePendingMaintenanceActions method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribePendingMaintenanceActions operation.
+//	pageNum := 0
+//	err := client.DescribePendingMaintenanceActionsPages(params,
+//	    func(page *docdb.DescribePendingMaintenanceActionsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *DocDB) DescribePendingMaintenanceActionsPages(input *DescribePendingMaintenanceActionsInput, fn func(*DescribePendingMaintenanceActionsOutput, bool) bool) error {
+	return c.DescribePendingMaintenanceActionsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribePendingMaintenanceActionsPagesWithContext same as DescribePendingMaintenanceActionsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) DescribePendingMaintenanceActionsPagesWithContext(ctx aws.Context, input *DescribePendingMaintenanceActionsInput, fn func(*DescribePendingMaintenanceActionsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribePendingMaintenanceActionsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribePendingMaintenanceActionsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribePendingMaintenanceActionsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opFailoverDBCluster = "FailoverDBCluster"
 
 // FailoverDBClusterRequest generates a "aws/request.Request" representing the
@@ -2735,14 +3846,13 @@ const opFailoverDBCluster = "FailoverDBCluster"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the FailoverDBClusterRequest method.
+//	req, resp := client.FailoverDBClusterRequest(params)
 //
-//    // Example sending a request using the FailoverDBClusterRequest method.
-//    req, resp := client.FailoverDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBCluster
 func (c *DocDB) FailoverDBClusterRequest(input *FailoverDBClusterInput) (req *request.Request, output *FailoverDBClusterOutput) {
@@ -2763,11 +3873,10 @@ func (c *DocDB) FailoverDBClusterRequest(input *FailoverDBClusterInput) (req *re
 
 // FailoverDBCluster API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Forces a failover for a DB cluster.
+// Forces a failover for a cluster.
 //
-// A failover for a DB cluster promotes one of the Amazon DocumentDB replicas
-// (read-only instances) in the DB cluster to be the primary instance (the cluster
-// writer).
+// A failover for a cluster promotes one of the Amazon DocumentDB replicas (read-only
+// instances) in the cluster to be the primary instance (the cluster writer).
 //
 // If the primary instance fails, Amazon DocumentDB automatically fails over
 // to an Amazon DocumentDB replica, if one exists. You can force a failover
@@ -2781,14 +3890,15 @@ func (c *DocDB) FailoverDBClusterRequest(input *FailoverDBClusterInput) (req *re
 // API operation FailoverDBCluster for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
 //
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster isn't in a valid state.
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance isn't in the available state.
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
+//
+//   - ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
+//     The specified instance isn't in the available state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBCluster
 func (c *DocDB) FailoverDBCluster(input *FailoverDBClusterInput) (*FailoverDBClusterOutput, error) {
@@ -2828,14 +3938,13 @@ const opListTagsForResource = "ListTagsForResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
 //
-//    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ListTagsForResource
 func (c *DocDB) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
@@ -2866,14 +3975,15 @@ func (c *DocDB) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req
 // API operation ListTagsForResource for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier doesn't refer to an existing DB instance.
 //
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier doesn't refer to an existing DB snapshot.
+//   - ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
+//     DBInstanceIdentifier doesn't refer to an existing instance.
 //
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
+//   - ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
+//     DBSnapshotIdentifier doesn't refer to an existing snapshot.
+//
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ListTagsForResource
 func (c *DocDB) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
@@ -2913,14 +4023,13 @@ const opModifyDBCluster = "ModifyDBCluster"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyDBClusterRequest method.
+//	req, resp := client.ModifyDBClusterRequest(params)
 //
-//    // Example sending a request using the ModifyDBClusterRequest method.
-//    req, resp := client.ModifyDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBCluster
 func (c *DocDB) ModifyDBClusterRequest(input *ModifyDBClusterInput) (req *request.Request, output *ModifyDBClusterOutput) {
@@ -2941,9 +4050,9 @@ func (c *DocDB) ModifyDBClusterRequest(input *ModifyDBClusterInput) (req *reques
 
 // ModifyDBCluster API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Modifies a setting for an Amazon DocumentDB DB cluster. You can change one
-// or more database configuration parameters by specifying these parameters
-// and the new values in the request.
+// Modifies a setting for an Amazon DocumentDB cluster. You can change one or
+// more database configuration parameters by specifying these parameters and
+// the new values in the request.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2953,42 +4062,43 @@ func (c *DocDB) ModifyDBClusterRequest(input *ModifyDBClusterInput) (req *reques
 // API operation ModifyDBCluster for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
 //
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster isn't in a valid state.
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   The request would cause you to exceed the allowed amount of storage available
-//   across all DB instances.
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
 //
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName doesn't refer to an existing DB subnet group.
+//   - ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
+//     The request would cause you to exceed the allowed amount of storage available
+//     across all instances.
 //
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The DB subnet group doesn't cover all Availability Zones after it is created
-//   because of changes that were made.
+//   - ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
+//     DBSubnetGroupName doesn't refer to an existing subnet group.
 //
-//   * ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
-//   The DB subnet group can't be deleted because it's in use.
+//   - ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
+//     The subnet group doesn't cover all Availability Zones after it is created
+//     because of changes that were made.
 //
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or multiple subnets were requested that
-//   are not all in a common virtual private cloud (VPC).
+//   - ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
+//     The subnet group can't be deleted because it's in use.
 //
-//   * ErrCodeDBClusterParameterGroupNotFoundFault "DBClusterParameterGroupNotFound"
-//   DBClusterParameterGroupName doesn't refer to an existing DB cluster parameter
-//   group.
+//   - ErrCodeInvalidSubnet "InvalidSubnet"
+//     The requested subnet is not valid, or multiple subnets were requested that
+//     are not all in a common virtual private cloud (VPC).
 //
-//   * ErrCodeInvalidDBSecurityGroupStateFault "InvalidDBSecurityGroupState"
-//   The state of the DB security group doesn't allow deletion.
+//   - ErrCodeDBClusterParameterGroupNotFoundFault "DBClusterParameterGroupNotFound"
+//     DBClusterParameterGroupName doesn't refer to an existing cluster parameter
+//     group.
 //
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance isn't in the available state.
+//   - ErrCodeInvalidDBSecurityGroupStateFault "InvalidDBSecurityGroupState"
+//     The state of the security group doesn't allow deletion.
 //
-//   * ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
-//   You already have a DB cluster with the given identifier.
+//   - ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
+//     The specified instance isn't in the available state.
+//
+//   - ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
+//     You already have a cluster with the given identifier.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBCluster
 func (c *DocDB) ModifyDBCluster(input *ModifyDBClusterInput) (*ModifyDBClusterOutput, error) {
@@ -3028,14 +4138,13 @@ const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyDBClusterParameterGroupRequest method.
+//	req, resp := client.ModifyDBClusterParameterGroupRequest(params)
 //
-//    // Example sending a request using the ModifyDBClusterParameterGroupRequest method.
-//    req, resp := client.ModifyDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterParameterGroup
 func (c *DocDB) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParameterGroupInput) (req *request.Request, output *ModifyDBClusterParameterGroupOutput) {
@@ -3056,7 +4165,7 @@ func (c *DocDB) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParam
 
 // ModifyDBClusterParameterGroup API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Modifies the parameters of a DB cluster parameter group. To modify more than
+// Modifies the parameters of a cluster parameter group. To modify more than
 // one parameter, submit a list of the following: ParameterName, ParameterValue,
 // and ApplyMethod. A maximum of 20 parameters can be modified in a single request.
 //
@@ -3064,14 +4173,13 @@ func (c *DocDB) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParam
 // parameters require a reboot or maintenance window before the change can take
 // effect.
 //
-// After you create a DB cluster parameter group, you should wait at least 5
-// minutes before creating your first DB cluster that uses that DB cluster parameter
-// group as the default parameter group. This allows Amazon DocumentDB to fully
-// complete the create action before the parameter group is used as the default
-// for a new DB cluster. This step is especially important for parameters that
-// are critical when creating the default database for a DB cluster, such as
-// the character set for the default database defined by the character_set_database
-// parameter.
+// After you create a cluster parameter group, you should wait at least 5 minutes
+// before creating your first cluster that uses that cluster parameter group
+// as the default parameter group. This allows Amazon DocumentDB to fully complete
+// the create action before the parameter group is used as the default for a
+// new cluster. This step is especially important for parameters that are critical
+// when creating the default database for a cluster, such as the character set
+// for the default database defined by the character_set_database parameter.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3081,13 +4189,14 @@ func (c *DocDB) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParam
 // API operation ModifyDBClusterParameterGroup for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName doesn't refer to an existing DB parameter group.
 //
-//   * ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
-//   The DB parameter group is in use, or it is in a state that is not valid.
-//   If you are trying to delete the parameter group, you can't delete it when
-//   the parameter group is in this state.
+//   - ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
+//     DBParameterGroupName doesn't refer to an existing parameter group.
+//
+//   - ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
+//     The parameter group is in use, or it is in a state that is not valid. If
+//     you are trying to delete the parameter group, you can't delete it when the
+//     parameter group is in this state.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterParameterGroup
 func (c *DocDB) ModifyDBClusterParameterGroup(input *ModifyDBClusterParameterGroupInput) (*ModifyDBClusterParameterGroupOutput, error) {
@@ -3127,14 +4236,13 @@ const opModifyDBClusterSnapshotAttribute = "ModifyDBClusterSnapshotAttribute"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyDBClusterSnapshotAttributeRequest method.
+//	req, resp := client.ModifyDBClusterSnapshotAttributeRequest(params)
 //
-//    // Example sending a request using the ModifyDBClusterSnapshotAttributeRequest method.
-//    req, resp := client.ModifyDBClusterSnapshotAttributeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterSnapshotAttribute
 func (c *DocDB) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSnapshotAttributeInput) (req *request.Request, output *ModifyDBClusterSnapshotAttributeOutput) {
@@ -3156,18 +4264,19 @@ func (c *DocDB) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSn
 // ModifyDBClusterSnapshotAttribute API operation for Amazon DocumentDB with MongoDB compatibility.
 //
 // Adds an attribute and values to, or removes an attribute and values from,
-// a manual DB cluster snapshot.
+// a manual cluster snapshot.
 //
-// To share a manual DB cluster snapshot with other AWS accounts, specify restore
-// as the AttributeName, and use the ValuesToAdd parameter to add a list of
-// IDs of the AWS accounts that are authorized to restore the manual DB cluster
-// snapshot. Use the value all to make the manual DB cluster snapshot public,
-// which means that it can be copied or restored by all AWS accounts. Do not
-// add the all value for any manual DB cluster snapshots that contain private
-// information that you don't want available to all AWS accounts. If a manual
-// DB cluster snapshot is encrypted, it can be shared, but only by specifying
-// a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't
-// use all as a value for that parameter in this case.
+// To share a manual cluster snapshot with other Amazon Web Services accounts,
+// specify restore as the AttributeName, and use the ValuesToAdd parameter to
+// add a list of IDs of the Amazon Web Services accounts that are authorized
+// to restore the manual cluster snapshot. Use the value all to make the manual
+// cluster snapshot public, which means that it can be copied or restored by
+// all Amazon Web Services accounts. Do not add the all value for any manual
+// cluster snapshots that contain private information that you don't want available
+// to all Amazon Web Services accounts. If a manual cluster snapshot is encrypted,
+// it can be shared, but only by specifying a list of authorized Amazon Web
+// Services account IDs for the ValuesToAdd parameter. You can't use all as
+// a value for that parameter in this case.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3177,15 +4286,16 @@ func (c *DocDB) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSn
 // API operation ModifyDBClusterSnapshotAttribute for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier doesn't refer to an existing DB cluster snapshot.
 //
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The provided value isn't a valid DB cluster snapshot state.
+//   - ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
+//     DBClusterSnapshotIdentifier doesn't refer to an existing cluster snapshot.
 //
-//   * ErrCodeSharedSnapshotQuotaExceededFault "SharedSnapshotQuotaExceeded"
-//   You have exceeded the maximum number of accounts that you can share a manual
-//   DB snapshot with.
+//   - ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
+//     The provided value isn't a valid cluster snapshot state.
+//
+//   - ErrCodeSharedSnapshotQuotaExceededFault "SharedSnapshotQuotaExceeded"
+//     You have exceeded the maximum number of accounts that you can share a manual
+//     DB snapshot with.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterSnapshotAttribute
 func (c *DocDB) ModifyDBClusterSnapshotAttribute(input *ModifyDBClusterSnapshotAttributeInput) (*ModifyDBClusterSnapshotAttributeOutput, error) {
@@ -3225,14 +4335,13 @@ const opModifyDBInstance = "ModifyDBInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyDBInstanceRequest method.
+//	req, resp := client.ModifyDBInstanceRequest(params)
 //
-//    // Example sending a request using the ModifyDBInstanceRequest method.
-//    req, resp := client.ModifyDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstance
 func (c *DocDB) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) (req *request.Request, output *ModifyDBInstanceOutput) {
@@ -3253,9 +4362,8 @@ func (c *DocDB) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) (req *requ
 
 // ModifyDBInstance API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Modifies settings for a DB instance. You can change one or more database
-// configuration parameters by specifying these parameters and the new values
-// in the request.
+// Modifies settings for an instance. You can change one or more database configuration
+// parameters by specifying these parameters and the new values in the request.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3265,52 +4373,52 @@ func (c *DocDB) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) (req *requ
 // API operation ModifyDBInstance for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance isn't in the available state.
 //
-//   * ErrCodeInvalidDBSecurityGroupStateFault "InvalidDBSecurityGroupState"
-//   The state of the DB security group doesn't allow deletion.
+//   - ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
+//     The specified instance isn't in the available state.
 //
-//   * ErrCodeDBInstanceAlreadyExistsFault "DBInstanceAlreadyExists"
-//   You already have a DB instance with the given identifier.
+//   - ErrCodeInvalidDBSecurityGroupStateFault "InvalidDBSecurityGroupState"
+//     The state of the security group doesn't allow deletion.
 //
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier doesn't refer to an existing DB instance.
+//   - ErrCodeDBInstanceAlreadyExistsFault "DBInstanceAlreadyExists"
+//     You already have a instance with the given identifier.
 //
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName doesn't refer to an existing DB security group.
+//   - ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
+//     DBInstanceIdentifier doesn't refer to an existing instance.
 //
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName doesn't refer to an existing DB parameter group.
+//   - ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
+//     DBSecurityGroupName doesn't refer to an existing security group.
 //
-//   * ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
-//   The specified DB instance class isn't available in the specified Availability
-//   Zone.
+//   - ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
+//     DBParameterGroupName doesn't refer to an existing parameter group.
 //
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   The request would cause you to exceed the allowed amount of storage available
-//   across all DB instances.
+//   - ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
+//     The specified instance class isn't available in the specified Availability
+//     Zone.
 //
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The DB subnet group doesn't cover all Availability Zones after it is created
-//   because of changes that were made.
+//   - ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
+//     The request would cause you to exceed the allowed amount of storage available
+//     across all instances.
 //
-//   * ErrCodeDBUpgradeDependencyFailureFault "DBUpgradeDependencyFailure"
-//   The DB upgrade failed because a resource that the DB depends on can't be
-//   modified.
+//   - ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
+//     The subnet group doesn't cover all Availability Zones after it is created
+//     because of changes that were made.
 //
-//   * ErrCodeStorageTypeNotSupportedFault "StorageTypeNotSupported"
-//   Storage of the specified StorageType can't be associated with the DB instance.
+//   - ErrCodeDBUpgradeDependencyFailureFault "DBUpgradeDependencyFailure"
+//     The upgrade failed because a resource that the depends on can't be modified.
 //
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   The specified CIDR IP or Amazon EC2 security group isn't authorized for the
-//   specified DB security group.
+//   - ErrCodeStorageTypeNotSupportedFault "StorageTypeNotSupported"
+//     Storage of the specified StorageType can't be associated with the DB instance.
 //
-//   Amazon DocumentDB also might not be authorized to perform necessary actions
-//   on your behalf using IAM.
+//   - ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
+//     The specified CIDR IP or Amazon EC2 security group isn't authorized for the
+//     specified security group.
 //
-//   * ErrCodeCertificateNotFoundFault "CertificateNotFound"
-//   CertificateIdentifier doesn't refer to an existing certificate.
+//     Amazon DocumentDB also might not be authorized to perform necessary actions
+//     on your behalf using IAM.
+//
+//   - ErrCodeCertificateNotFoundFault "CertificateNotFound"
+//     CertificateIdentifier doesn't refer to an existing certificate.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstance
 func (c *DocDB) ModifyDBInstance(input *ModifyDBInstanceInput) (*ModifyDBInstanceOutput, error) {
@@ -3350,14 +4458,13 @@ const opModifyDBSubnetGroup = "ModifyDBSubnetGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyDBSubnetGroupRequest method.
+//	req, resp := client.ModifyDBSubnetGroupRequest(params)
 //
-//    // Example sending a request using the ModifyDBSubnetGroupRequest method.
-//    req, resp := client.ModifyDBSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBSubnetGroup
 func (c *DocDB) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) (req *request.Request, output *ModifyDBSubnetGroupOutput) {
@@ -3378,8 +4485,8 @@ func (c *DocDB) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) (req
 
 // ModifyDBSubnetGroup API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Modifies an existing DB subnet group. DB subnet groups must contain at least
-// one subnet in at least two Availability Zones in the AWS Region.
+// Modifies an existing subnet group. subnet groups must contain at least one
+// subnet in at least two Availability Zones in the Amazon Web Services Region.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3389,23 +4496,24 @@ func (c *DocDB) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) (req
 // API operation ModifyDBSubnetGroup for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName doesn't refer to an existing DB subnet group.
 //
-//   * ErrCodeDBSubnetQuotaExceededFault "DBSubnetQuotaExceededFault"
-//   The request would cause you to exceed the allowed number of subnets in a
-//   DB subnet group.
+//   - ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
+//     DBSubnetGroupName doesn't refer to an existing subnet group.
 //
-//   * ErrCodeSubnetAlreadyInUse "SubnetAlreadyInUse"
-//   The DB subnet is already in use in the Availability Zone.
+//   - ErrCodeDBSubnetQuotaExceededFault "DBSubnetQuotaExceededFault"
+//     The request would cause you to exceed the allowed number of subnets in a
+//     subnet group.
 //
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
+//   - ErrCodeSubnetAlreadyInUse "SubnetAlreadyInUse"
+//     The subnet is already in use in the Availability Zone.
 //
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or multiple subnets were requested that
-//   are not all in a common virtual private cloud (VPC).
+//   - ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
+//     Subnets in the subnet group should cover at least two Availability Zones
+//     unless there is only one Availability Zone.
+//
+//   - ErrCodeInvalidSubnet "InvalidSubnet"
+//     The requested subnet is not valid, or multiple subnets were requested that
+//     are not all in a common virtual private cloud (VPC).
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBSubnetGroup
 func (c *DocDB) ModifyDBSubnetGroup(input *ModifyDBSubnetGroupInput) (*ModifyDBSubnetGroupOutput, error) {
@@ -3429,6 +4537,188 @@ func (c *DocDB) ModifyDBSubnetGroupWithContext(ctx aws.Context, input *ModifyDBS
 	return out, req.Send()
 }
 
+const opModifyEventSubscription = "ModifyEventSubscription"
+
+// ModifyEventSubscriptionRequest generates a "aws/request.Request" representing the
+// client's request for the ModifyEventSubscription operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ModifyEventSubscription for more information on using the ModifyEventSubscription
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ModifyEventSubscriptionRequest method.
+//	req, resp := client.ModifyEventSubscriptionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyEventSubscription
+func (c *DocDB) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *request.Request, output *ModifyEventSubscriptionOutput) {
+	op := &request.Operation{
+		Name:       opModifyEventSubscription,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyEventSubscriptionInput{}
+	}
+
+	output = &ModifyEventSubscriptionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ModifyEventSubscription API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Modifies an existing Amazon DocumentDB event notification subscription.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation ModifyEventSubscription for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeEventSubscriptionQuotaExceededFault "EventSubscriptionQuotaExceeded"
+//     You have reached the maximum number of event subscriptions.
+//
+//   - ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
+//     The subscription name does not exist.
+//
+//   - ErrCodeSNSInvalidTopicFault "SNSInvalidTopic"
+//     Amazon SNS has responded that there is a problem with the specified topic.
+//
+//   - ErrCodeSNSNoAuthorizationFault "SNSNoAuthorization"
+//     You do not have permission to publish to the SNS topic Amazon Resource Name
+//     (ARN).
+//
+//   - ErrCodeSNSTopicArnNotFoundFault "SNSTopicArnNotFound"
+//     The SNS topic Amazon Resource Name (ARN) does not exist.
+//
+//   - ErrCodeSubscriptionCategoryNotFoundFault "SubscriptionCategoryNotFound"
+//     The provided category does not exist.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyEventSubscription
+func (c *DocDB) ModifyEventSubscription(input *ModifyEventSubscriptionInput) (*ModifyEventSubscriptionOutput, error) {
+	req, out := c.ModifyEventSubscriptionRequest(input)
+	return out, req.Send()
+}
+
+// ModifyEventSubscriptionWithContext is the same as ModifyEventSubscription with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ModifyEventSubscription for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...request.Option) (*ModifyEventSubscriptionOutput, error) {
+	req, out := c.ModifyEventSubscriptionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opModifyGlobalCluster = "ModifyGlobalCluster"
+
+// ModifyGlobalClusterRequest generates a "aws/request.Request" representing the
+// client's request for the ModifyGlobalCluster operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ModifyGlobalCluster for more information on using the ModifyGlobalCluster
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ModifyGlobalClusterRequest method.
+//	req, resp := client.ModifyGlobalClusterRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyGlobalCluster
+func (c *DocDB) ModifyGlobalClusterRequest(input *ModifyGlobalClusterInput) (req *request.Request, output *ModifyGlobalClusterOutput) {
+	op := &request.Operation{
+		Name:       opModifyGlobalCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyGlobalClusterInput{}
+	}
+
+	output = &ModifyGlobalClusterOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ModifyGlobalCluster API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Modify a setting for an Amazon DocumentDB global cluster. You can change
+// one or more configuration parameters (for example: deletion protection),
+// or the global cluster identifier by specifying these parameters and the new
+// values in the request.
+//
+// This action only applies to Amazon DocumentDB clusters.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation ModifyGlobalCluster for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeGlobalClusterNotFoundFault "GlobalClusterNotFoundFault"
+//     The GlobalClusterIdentifier doesn't refer to an existing global cluster.
+//
+//   - ErrCodeInvalidGlobalClusterStateFault "InvalidGlobalClusterStateFault"
+//     The requested operation can't be performed while the cluster is in this state.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyGlobalCluster
+func (c *DocDB) ModifyGlobalCluster(input *ModifyGlobalClusterInput) (*ModifyGlobalClusterOutput, error) {
+	req, out := c.ModifyGlobalClusterRequest(input)
+	return out, req.Send()
+}
+
+// ModifyGlobalClusterWithContext is the same as ModifyGlobalCluster with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ModifyGlobalCluster for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) ModifyGlobalClusterWithContext(ctx aws.Context, input *ModifyGlobalClusterInput, opts ...request.Option) (*ModifyGlobalClusterOutput, error) {
+	req, out := c.ModifyGlobalClusterRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opRebootDBInstance = "RebootDBInstance"
 
 // RebootDBInstanceRequest generates a "aws/request.Request" representing the
@@ -3445,14 +4735,13 @@ const opRebootDBInstance = "RebootDBInstance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RebootDBInstanceRequest method.
+//	req, resp := client.RebootDBInstanceRequest(params)
 //
-//    // Example sending a request using the RebootDBInstanceRequest method.
-//    req, resp := client.RebootDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RebootDBInstance
 func (c *DocDB) RebootDBInstanceRequest(input *RebootDBInstanceInput) (req *request.Request, output *RebootDBInstanceOutput) {
@@ -3473,13 +4762,13 @@ func (c *DocDB) RebootDBInstanceRequest(input *RebootDBInstanceInput) (req *requ
 
 // RebootDBInstance API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// You might need to reboot your DB instance, usually for maintenance reasons.
-// For example, if you make certain changes, or if you change the DB cluster
-// parameter group that is associated with the DB instance, you must reboot
-// the instance for the changes to take effect.
+// You might need to reboot your instance, usually for maintenance reasons.
+// For example, if you make certain changes, or if you change the cluster parameter
+// group that is associated with the instance, you must reboot the instance
+// for the changes to take effect.
 //
-// Rebooting a DB instance restarts the database engine service. Rebooting a
-// DB instance results in a momentary outage, during which the DB instance status
+// Rebooting an instance restarts the database engine service. Rebooting an
+// instance results in a momentary outage, during which the instance status
 // is set to rebooting.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3490,11 +4779,12 @@ func (c *DocDB) RebootDBInstanceRequest(input *RebootDBInstanceInput) (req *requ
 // API operation RebootDBInstance for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance isn't in the available state.
 //
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier doesn't refer to an existing DB instance.
+//   - ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
+//     The specified instance isn't in the available state.
+//
+//   - ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
+//     DBInstanceIdentifier doesn't refer to an existing instance.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RebootDBInstance
 func (c *DocDB) RebootDBInstance(input *RebootDBInstanceInput) (*RebootDBInstanceOutput, error) {
@@ -3518,6 +4808,178 @@ func (c *DocDB) RebootDBInstanceWithContext(ctx aws.Context, input *RebootDBInst
 	return out, req.Send()
 }
 
+const opRemoveFromGlobalCluster = "RemoveFromGlobalCluster"
+
+// RemoveFromGlobalClusterRequest generates a "aws/request.Request" representing the
+// client's request for the RemoveFromGlobalCluster operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RemoveFromGlobalCluster for more information on using the RemoveFromGlobalCluster
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RemoveFromGlobalClusterRequest method.
+//	req, resp := client.RemoveFromGlobalClusterRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveFromGlobalCluster
+func (c *DocDB) RemoveFromGlobalClusterRequest(input *RemoveFromGlobalClusterInput) (req *request.Request, output *RemoveFromGlobalClusterOutput) {
+	op := &request.Operation{
+		Name:       opRemoveFromGlobalCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RemoveFromGlobalClusterInput{}
+	}
+
+	output = &RemoveFromGlobalClusterOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// RemoveFromGlobalCluster API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Detaches an Amazon DocumentDB secondary cluster from a global cluster. The
+// cluster becomes a standalone cluster with read-write capability instead of
+// being read-only and receiving data from a primary in a different region.
+//
+// This action only applies to Amazon DocumentDB clusters.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation RemoveFromGlobalCluster for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeGlobalClusterNotFoundFault "GlobalClusterNotFoundFault"
+//     The GlobalClusterIdentifier doesn't refer to an existing global cluster.
+//
+//   - ErrCodeInvalidGlobalClusterStateFault "InvalidGlobalClusterStateFault"
+//     The requested operation can't be performed while the cluster is in this state.
+//
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveFromGlobalCluster
+func (c *DocDB) RemoveFromGlobalCluster(input *RemoveFromGlobalClusterInput) (*RemoveFromGlobalClusterOutput, error) {
+	req, out := c.RemoveFromGlobalClusterRequest(input)
+	return out, req.Send()
+}
+
+// RemoveFromGlobalClusterWithContext is the same as RemoveFromGlobalCluster with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RemoveFromGlobalCluster for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) RemoveFromGlobalClusterWithContext(ctx aws.Context, input *RemoveFromGlobalClusterInput, opts ...request.Option) (*RemoveFromGlobalClusterOutput, error) {
+	req, out := c.RemoveFromGlobalClusterRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opRemoveSourceIdentifierFromSubscription = "RemoveSourceIdentifierFromSubscription"
+
+// RemoveSourceIdentifierFromSubscriptionRequest generates a "aws/request.Request" representing the
+// client's request for the RemoveSourceIdentifierFromSubscription operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RemoveSourceIdentifierFromSubscription for more information on using the RemoveSourceIdentifierFromSubscription
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RemoveSourceIdentifierFromSubscriptionRequest method.
+//	req, resp := client.RemoveSourceIdentifierFromSubscriptionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveSourceIdentifierFromSubscription
+func (c *DocDB) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSourceIdentifierFromSubscriptionInput) (req *request.Request, output *RemoveSourceIdentifierFromSubscriptionOutput) {
+	op := &request.Operation{
+		Name:       opRemoveSourceIdentifierFromSubscription,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RemoveSourceIdentifierFromSubscriptionInput{}
+	}
+
+	output = &RemoveSourceIdentifierFromSubscriptionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// RemoveSourceIdentifierFromSubscription API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Removes a source identifier from an existing Amazon DocumentDB event notification
+// subscription.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation RemoveSourceIdentifierFromSubscription for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
+//     The subscription name does not exist.
+//
+//   - ErrCodeSourceNotFoundFault "SourceNotFound"
+//     The requested source could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveSourceIdentifierFromSubscription
+func (c *DocDB) RemoveSourceIdentifierFromSubscription(input *RemoveSourceIdentifierFromSubscriptionInput) (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
+	req, out := c.RemoveSourceIdentifierFromSubscriptionRequest(input)
+	return out, req.Send()
+}
+
+// RemoveSourceIdentifierFromSubscriptionWithContext is the same as RemoveSourceIdentifierFromSubscription with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RemoveSourceIdentifierFromSubscription for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) RemoveSourceIdentifierFromSubscriptionWithContext(ctx aws.Context, input *RemoveSourceIdentifierFromSubscriptionInput, opts ...request.Option) (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
+	req, out := c.RemoveSourceIdentifierFromSubscriptionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
 // RemoveTagsFromResourceRequest generates a "aws/request.Request" representing the
@@ -3534,14 +4996,13 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RemoveTagsFromResourceRequest method.
+//	req, resp := client.RemoveTagsFromResourceRequest(params)
 //
-//    // Example sending a request using the RemoveTagsFromResourceRequest method.
-//    req, resp := client.RemoveTagsFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveTagsFromResource
 func (c *DocDB) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *RemoveTagsFromResourceOutput) {
@@ -3573,14 +5034,15 @@ func (c *DocDB) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput
 // API operation RemoveTagsFromResource for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier doesn't refer to an existing DB instance.
 //
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier doesn't refer to an existing DB snapshot.
+//   - ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
+//     DBInstanceIdentifier doesn't refer to an existing instance.
 //
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
+//   - ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
+//     DBSnapshotIdentifier doesn't refer to an existing snapshot.
+//
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveTagsFromResource
 func (c *DocDB) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*RemoveTagsFromResourceOutput, error) {
@@ -3620,14 +5082,13 @@ const opResetDBClusterParameterGroup = "ResetDBClusterParameterGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ResetDBClusterParameterGroupRequest method.
+//	req, resp := client.ResetDBClusterParameterGroupRequest(params)
 //
-//    // Example sending a request using the ResetDBClusterParameterGroupRequest method.
-//    req, resp := client.ResetDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ResetDBClusterParameterGroup
 func (c *DocDB) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParameterGroupInput) (req *request.Request, output *ResetDBClusterParameterGroupOutput) {
@@ -3648,10 +5109,10 @@ func (c *DocDB) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParamet
 
 // ResetDBClusterParameterGroup API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Modifies the parameters of a DB cluster parameter group to the default value.
+// Modifies the parameters of a cluster parameter group to the default value.
 // To reset specific parameters, submit a list of the following: ParameterName
-// and ApplyMethod. To reset the entire DB cluster parameter group, specify
-// the DBClusterParameterGroupName and ResetAllParameters parameters.
+// and ApplyMethod. To reset the entire cluster parameter group, specify the
+// DBClusterParameterGroupName and ResetAllParameters parameters.
 //
 // When you reset the entire group, dynamic parameters are updated immediately
 // and static parameters are set to pending-reboot to take effect on the next
@@ -3665,13 +5126,14 @@ func (c *DocDB) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParamet
 // API operation ResetDBClusterParameterGroup for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
-//   The DB parameter group is in use, or it is in a state that is not valid.
-//   If you are trying to delete the parameter group, you can't delete it when
-//   the parameter group is in this state.
 //
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName doesn't refer to an existing DB parameter group.
+//   - ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
+//     The parameter group is in use, or it is in a state that is not valid. If
+//     you are trying to delete the parameter group, you can't delete it when the
+//     parameter group is in this state.
+//
+//   - ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
+//     DBParameterGroupName doesn't refer to an existing parameter group.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ResetDBClusterParameterGroup
 func (c *DocDB) ResetDBClusterParameterGroup(input *ResetDBClusterParameterGroupInput) (*ResetDBClusterParameterGroupOutput, error) {
@@ -3711,14 +5173,13 @@ const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RestoreDBClusterFromSnapshotRequest method.
+//	req, resp := client.RestoreDBClusterFromSnapshotRequest(params)
 //
-//    // Example sending a request using the RestoreDBClusterFromSnapshotRequest method.
-//    req, resp := client.RestoreDBClusterFromSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshot
 func (c *DocDB) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromSnapshotInput) (req *request.Request, output *RestoreDBClusterFromSnapshotOutput) {
@@ -3739,14 +5200,14 @@ func (c *DocDB) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromS
 
 // RestoreDBClusterFromSnapshot API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
+// Creates a new cluster from a snapshot or cluster snapshot.
 //
-// If a DB snapshot is specified, the target DB cluster is created from the
-// source DB snapshot with a default configuration and default security group.
+// If a snapshot is specified, the target cluster is created from the source
+// DB snapshot with a default configuration and default security group.
 //
-// If a DB cluster snapshot is specified, the target DB cluster is created from
-// the source DB cluster restore point with the same configuration as the original
-// source DB cluster, except that the new DB cluster is created with the default
+// If a cluster snapshot is specified, the target cluster is created from the
+// source cluster restore point with the same configuration as the original
+// source DB cluster, except that the new cluster is created with the default
 // security group.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -3757,61 +5218,62 @@ func (c *DocDB) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromS
 // API operation RestoreDBClusterFromSnapshot for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
-//   You already have a DB cluster with the given identifier.
 //
-//   * ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
-//   The DB cluster can't be created because you have reached the maximum allowed
-//   quota of DB clusters.
+//   - ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
+//     You already have a cluster with the given identifier.
 //
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   The request would cause you to exceed the allowed amount of storage available
-//   across all DB instances.
+//   - ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
+//     The cluster can't be created because you have reached the maximum allowed
+//     quota of clusters.
 //
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName doesn't refer to an existing DB subnet group.
+//   - ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
+//     The request would cause you to exceed the allowed amount of storage available
+//     across all instances.
 //
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier doesn't refer to an existing DB snapshot.
+//   - ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
+//     DBSubnetGroupName doesn't refer to an existing subnet group.
 //
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier doesn't refer to an existing DB cluster snapshot.
+//   - ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
+//     DBSnapshotIdentifier doesn't refer to an existing snapshot.
 //
-//   * ErrCodeInsufficientDBClusterCapacityFault "InsufficientDBClusterCapacityFault"
-//   The DB cluster doesn't have enough capacity for the current operation.
+//   - ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
+//     DBClusterSnapshotIdentifier doesn't refer to an existing cluster snapshot.
 //
-//   * ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
-//   There is not enough storage available for the current action. You might be
-//   able to resolve this error by updating your subnet group to use different
-//   Availability Zones that have more storage available.
+//   - ErrCodeInsufficientDBClusterCapacityFault "InsufficientDBClusterCapacityFault"
+//     The cluster doesn't have enough capacity for the current operation.
 //
-//   * ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
-//   The state of the DB snapshot doesn't allow deletion.
+//   - ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
+//     There is not enough storage available for the current action. You might be
+//     able to resolve this error by updating your subnet group to use different
+//     Availability Zones that have more storage available.
 //
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The provided value isn't a valid DB cluster snapshot state.
+//   - ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
+//     The state of the snapshot doesn't allow deletion.
 //
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   The request would cause you to exceed the allowed amount of storage available
-//   across all DB instances.
+//   - ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
+//     The provided value isn't a valid cluster snapshot state.
 //
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The DB subnet group doesn't cover all Availability Zones after it is created
-//   because of changes that were made.
+//   - ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
+//     The request would cause you to exceed the allowed amount of storage available
+//     across all instances.
 //
-//   * ErrCodeInvalidRestoreFault "InvalidRestoreFault"
-//   You cannot restore from a virtual private cloud (VPC) backup to a non-VPC
-//   DB instance.
+//   - ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
+//     The subnet group doesn't cover all Availability Zones after it is created
+//     because of changes that were made.
 //
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName doesn't refer to an existing DB subnet group.
+//   - ErrCodeInvalidRestoreFault "InvalidRestoreFault"
+//     You cannot restore from a virtual private cloud (VPC) backup to a non-VPC
+//     DB instance.
 //
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or multiple subnets were requested that
-//   are not all in a common virtual private cloud (VPC).
+//   - ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
+//     DBSubnetGroupName doesn't refer to an existing subnet group.
 //
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   An error occurred when accessing an AWS KMS key.
+//   - ErrCodeInvalidSubnet "InvalidSubnet"
+//     The requested subnet is not valid, or multiple subnets were requested that
+//     are not all in a common virtual private cloud (VPC).
+//
+//   - ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
+//     An error occurred when accessing an KMS key.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshot
 func (c *DocDB) RestoreDBClusterFromSnapshot(input *RestoreDBClusterFromSnapshotInput) (*RestoreDBClusterFromSnapshotOutput, error) {
@@ -3851,14 +5313,13 @@ const opRestoreDBClusterToPointInTime = "RestoreDBClusterToPointInTime"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RestoreDBClusterToPointInTimeRequest method.
+//	req, resp := client.RestoreDBClusterToPointInTimeRequest(params)
 //
-//    // Example sending a request using the RestoreDBClusterToPointInTimeRequest method.
-//    req, resp := client.RestoreDBClusterToPointInTimeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTime
 func (c *DocDB) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPointInTimeInput) (req *request.Request, output *RestoreDBClusterToPointInTimeOutput) {
@@ -3879,11 +5340,11 @@ func (c *DocDB) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPo
 
 // RestoreDBClusterToPointInTime API operation for Amazon DocumentDB with MongoDB compatibility.
 //
-// Restores a DB cluster to an arbitrary point in time. Users can restore to
-// any point in time before LatestRestorableTime for up to BackupRetentionPeriod
-// days. The target DB cluster is created from the source DB cluster with the
-// same configuration as the original DB cluster, except that the new DB cluster
-// is created with the default DB security group.
+// Restores a cluster to an arbitrary point in time. Users can restore to any
+// point in time before LatestRestorableTime for up to BackupRetentionPeriod
+// days. The target cluster is created from the source cluster with the same
+// configuration as the original cluster, except that the new cluster is created
+// with the default security group.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -3893,57 +5354,58 @@ func (c *DocDB) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPo
 // API operation RestoreDBClusterToPointInTime for usage and error information.
 //
 // Returned Error Codes:
-//   * ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
-//   You already have a DB cluster with the given identifier.
 //
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier doesn't refer to an existing DB cluster.
+//   - ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
+//     You already have a cluster with the given identifier.
 //
-//   * ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
-//   The DB cluster can't be created because you have reached the maximum allowed
-//   quota of DB clusters.
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
 //
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier doesn't refer to an existing DB cluster snapshot.
+//   - ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
+//     The cluster can't be created because you have reached the maximum allowed
+//     quota of clusters.
 //
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName doesn't refer to an existing DB subnet group.
+//   - ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
+//     DBClusterSnapshotIdentifier doesn't refer to an existing cluster snapshot.
 //
-//   * ErrCodeInsufficientDBClusterCapacityFault "InsufficientDBClusterCapacityFault"
-//   The DB cluster doesn't have enough capacity for the current operation.
+//   - ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
+//     DBSubnetGroupName doesn't refer to an existing subnet group.
 //
-//   * ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
-//   There is not enough storage available for the current action. You might be
-//   able to resolve this error by updating your subnet group to use different
-//   Availability Zones that have more storage available.
+//   - ErrCodeInsufficientDBClusterCapacityFault "InsufficientDBClusterCapacityFault"
+//     The cluster doesn't have enough capacity for the current operation.
 //
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The provided value isn't a valid DB cluster snapshot state.
+//   - ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
+//     There is not enough storage available for the current action. You might be
+//     able to resolve this error by updating your subnet group to use different
+//     Availability Zones that have more storage available.
 //
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster isn't in a valid state.
+//   - ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
+//     The provided value isn't a valid cluster snapshot state.
 //
-//   * ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
-//   The state of the DB snapshot doesn't allow deletion.
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
 //
-//   * ErrCodeInvalidRestoreFault "InvalidRestoreFault"
-//   You cannot restore from a virtual private cloud (VPC) backup to a non-VPC
-//   DB instance.
+//   - ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
+//     The state of the snapshot doesn't allow deletion.
 //
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is not valid, or multiple subnets were requested that
-//   are not all in a common virtual private cloud (VPC).
+//   - ErrCodeInvalidRestoreFault "InvalidRestoreFault"
+//     You cannot restore from a virtual private cloud (VPC) backup to a non-VPC
+//     DB instance.
 //
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The DB subnet group doesn't cover all Availability Zones after it is created
-//   because of changes that were made.
+//   - ErrCodeInvalidSubnet "InvalidSubnet"
+//     The requested subnet is not valid, or multiple subnets were requested that
+//     are not all in a common virtual private cloud (VPC).
 //
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   An error occurred when accessing an AWS KMS key.
+//   - ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
+//     The subnet group doesn't cover all Availability Zones after it is created
+//     because of changes that were made.
 //
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   The request would cause you to exceed the allowed amount of storage available
-//   across all DB instances.
+//   - ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
+//     An error occurred when accessing an KMS key.
+//
+//   - ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
+//     The request would cause you to exceed the allowed amount of storage available
+//     across all instances.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTime
 func (c *DocDB) RestoreDBClusterToPointInTime(input *RestoreDBClusterToPointInTimeInput) (*RestoreDBClusterToPointInTimeOutput, error) {
@@ -3967,12 +5429,289 @@ func (c *DocDB) RestoreDBClusterToPointInTimeWithContext(ctx aws.Context, input 
 	return out, req.Send()
 }
 
+const opStartDBCluster = "StartDBCluster"
+
+// StartDBClusterRequest generates a "aws/request.Request" representing the
+// client's request for the StartDBCluster operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See StartDBCluster for more information on using the StartDBCluster
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the StartDBClusterRequest method.
+//	req, resp := client.StartDBClusterRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBCluster
+func (c *DocDB) StartDBClusterRequest(input *StartDBClusterInput) (req *request.Request, output *StartDBClusterOutput) {
+	op := &request.Operation{
+		Name:       opStartDBCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StartDBClusterInput{}
+	}
+
+	output = &StartDBClusterOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// StartDBCluster API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Restarts the stopped cluster that is specified by DBClusterIdentifier. For
+// more information, see Stopping and Starting an Amazon DocumentDB Cluster
+// (https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation StartDBCluster for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
+//
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
+//
+//   - ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
+//     The specified instance isn't in the available state.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBCluster
+func (c *DocDB) StartDBCluster(input *StartDBClusterInput) (*StartDBClusterOutput, error) {
+	req, out := c.StartDBClusterRequest(input)
+	return out, req.Send()
+}
+
+// StartDBClusterWithContext is the same as StartDBCluster with the addition of
+// the ability to pass a context and additional request options.
+//
+// See StartDBCluster for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) StartDBClusterWithContext(ctx aws.Context, input *StartDBClusterInput, opts ...request.Option) (*StartDBClusterOutput, error) {
+	req, out := c.StartDBClusterRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opStopDBCluster = "StopDBCluster"
+
+// StopDBClusterRequest generates a "aws/request.Request" representing the
+// client's request for the StopDBCluster operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See StopDBCluster for more information on using the StopDBCluster
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the StopDBClusterRequest method.
+//	req, resp := client.StopDBClusterRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBCluster
+func (c *DocDB) StopDBClusterRequest(input *StopDBClusterInput) (req *request.Request, output *StopDBClusterOutput) {
+	op := &request.Operation{
+		Name:       opStopDBCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopDBClusterInput{}
+	}
+
+	output = &StopDBClusterOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// StopDBCluster API operation for Amazon DocumentDB with MongoDB compatibility.
+//
+// Stops the running cluster that is specified by DBClusterIdentifier. The cluster
+// must be in the available state. For more information, see Stopping and Starting
+// an Amazon DocumentDB Cluster (https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon DocumentDB with MongoDB compatibility's
+// API operation StopDBCluster for usage and error information.
+//
+// Returned Error Codes:
+//
+//   - ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
+//     DBClusterIdentifier doesn't refer to an existing cluster.
+//
+//   - ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
+//     The cluster isn't in a valid state.
+//
+//   - ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
+//     The specified instance isn't in the available state.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBCluster
+func (c *DocDB) StopDBCluster(input *StopDBClusterInput) (*StopDBClusterOutput, error) {
+	req, out := c.StopDBClusterRequest(input)
+	return out, req.Send()
+}
+
+// StopDBClusterWithContext is the same as StopDBCluster with the addition of
+// the ability to pass a context and additional request options.
+//
+// See StopDBCluster for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *DocDB) StopDBClusterWithContext(ctx aws.Context, input *StopDBClusterInput, opts ...request.Option) (*StopDBClusterOutput, error) {
+	req, out := c.StopDBClusterRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// Represents the input to AddSourceIdentifierToSubscription.
+type AddSourceIdentifierToSubscriptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the event source to be added:
+	//
+	//    * If the source type is an instance, a DBInstanceIdentifier must be provided.
+	//
+	//    * If the source type is a security group, a DBSecurityGroupName must be
+	//    provided.
+	//
+	//    * If the source type is a parameter group, a DBParameterGroupName must
+	//    be provided.
+	//
+	//    * If the source type is a snapshot, a DBSnapshotIdentifier must be provided.
+	//
+	// SourceIdentifier is a required field
+	SourceIdentifier *string `type:"string" required:"true"`
+
+	// The name of the Amazon DocumentDB event notification subscription that you
+	// want to add a source identifier to.
+	//
+	// SubscriptionName is a required field
+	SubscriptionName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddSourceIdentifierToSubscriptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddSourceIdentifierToSubscriptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AddSourceIdentifierToSubscriptionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AddSourceIdentifierToSubscriptionInput"}
+	if s.SourceIdentifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("SourceIdentifier"))
+	}
+	if s.SubscriptionName == nil {
+		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSourceIdentifier sets the SourceIdentifier field's value.
+func (s *AddSourceIdentifierToSubscriptionInput) SetSourceIdentifier(v string) *AddSourceIdentifierToSubscriptionInput {
+	s.SourceIdentifier = &v
+	return s
+}
+
+// SetSubscriptionName sets the SubscriptionName field's value.
+func (s *AddSourceIdentifierToSubscriptionInput) SetSubscriptionName(v string) *AddSourceIdentifierToSubscriptionInput {
+	s.SubscriptionName = &v
+	return s
+}
+
+type AddSourceIdentifierToSubscriptionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Detailed information about an event to which you have subscribed.
+	EventSubscription *EventSubscription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddSourceIdentifierToSubscriptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AddSourceIdentifierToSubscriptionOutput) GoString() string {
+	return s.String()
+}
+
+// SetEventSubscription sets the EventSubscription field's value.
+func (s *AddSourceIdentifierToSubscriptionOutput) SetEventSubscription(v *EventSubscription) *AddSourceIdentifierToSubscriptionOutput {
+	s.EventSubscription = v
+	return s
+}
+
 // Represents the input to AddTagsToResource.
 type AddTagsToResourceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon DocumentDB resource that the tags are added to. This value is
-	// an Amazon Resource Name (ARN).
+	// an Amazon Resource Name .
 	//
 	// ResourceName is a required field
 	ResourceName *string `type:"string" required:"true"`
@@ -3983,12 +5722,20 @@ type AddTagsToResourceInput struct {
 	Tags []*Tag `locationNameList:"Tag" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceInput) GoString() string {
 	return s.String()
 }
@@ -4025,12 +5772,20 @@ type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddTagsToResourceOutput) GoString() string {
 	return s.String()
 }
@@ -4068,12 +5823,20 @@ type ApplyPendingMaintenanceActionInput struct {
 	ResourceIdentifier *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplyPendingMaintenanceActionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplyPendingMaintenanceActionInput) GoString() string {
 	return s.String()
 }
@@ -4122,12 +5885,20 @@ type ApplyPendingMaintenanceActionOutput struct {
 	ResourcePendingMaintenanceActions *ResourcePendingMaintenanceActions `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplyPendingMaintenanceActionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplyPendingMaintenanceActionOutput) GoString() string {
 	return s.String()
 }
@@ -4146,12 +5917,20 @@ type AvailabilityZone struct {
 	Name *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AvailabilityZone) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AvailabilityZone) GoString() string {
 	return s.String()
 }
@@ -4162,12 +5941,146 @@ func (s *AvailabilityZone) SetName(v string) *AvailabilityZone {
 	return s
 }
 
+// A certificate authority (CA) certificate for an Amazon Web Services account.
+type Certificate struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for the certificate.
+	//
+	// Example: arn:aws:rds:us-east-1::cert:rds-ca-2019
+	CertificateArn *string `type:"string"`
+
+	// The unique key that identifies a certificate.
+	//
+	// Example: rds-ca-2019
+	CertificateIdentifier *string `type:"string"`
+
+	// The type of the certificate.
+	//
+	// Example: CA
+	CertificateType *string `type:"string"`
+
+	// The thumbprint of the certificate.
+	Thumbprint *string `type:"string"`
+
+	// The starting date-time from which the certificate is valid.
+	//
+	// Example: 2019-07-31T17:57:09Z
+	ValidFrom *time.Time `type:"timestamp"`
+
+	// The date-time after which the certificate is no longer valid.
+	//
+	// Example: 2024-07-31T17:57:09Z
+	ValidTill *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Certificate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Certificate) GoString() string {
+	return s.String()
+}
+
+// SetCertificateArn sets the CertificateArn field's value.
+func (s *Certificate) SetCertificateArn(v string) *Certificate {
+	s.CertificateArn = &v
+	return s
+}
+
+// SetCertificateIdentifier sets the CertificateIdentifier field's value.
+func (s *Certificate) SetCertificateIdentifier(v string) *Certificate {
+	s.CertificateIdentifier = &v
+	return s
+}
+
+// SetCertificateType sets the CertificateType field's value.
+func (s *Certificate) SetCertificateType(v string) *Certificate {
+	s.CertificateType = &v
+	return s
+}
+
+// SetThumbprint sets the Thumbprint field's value.
+func (s *Certificate) SetThumbprint(v string) *Certificate {
+	s.Thumbprint = &v
+	return s
+}
+
+// SetValidFrom sets the ValidFrom field's value.
+func (s *Certificate) SetValidFrom(v time.Time) *Certificate {
+	s.ValidFrom = &v
+	return s
+}
+
+// SetValidTill sets the ValidTill field's value.
+func (s *Certificate) SetValidTill(v time.Time) *Certificate {
+	s.ValidTill = &v
+	return s
+}
+
+// Returns the details of the DB instance’s server certificate.
+//
+// For more information, see Updating Your Amazon DocumentDB TLS Certificates
+// (https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html)
+// and Encrypting Data in Transit (https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html)
+// in the Amazon DocumentDB Developer Guide.
+type CertificateDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The CA identifier of the CA certificate used for the DB instance's server
+	// certificate.
+	CAIdentifier *string `type:"string"`
+
+	// The expiration date of the DB instance’s server certificate.
+	ValidTill *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateDetails) GoString() string {
+	return s.String()
+}
+
+// SetCAIdentifier sets the CAIdentifier field's value.
+func (s *CertificateDetails) SetCAIdentifier(v string) *CertificateDetails {
+	s.CAIdentifier = &v
+	return s
+}
+
+// SetValidTill sets the ValidTill field's value.
+func (s *CertificateDetails) SetValidTill(v time.Time) *CertificateDetails {
+	s.ValidTill = &v
+	return s
+}
+
 // The configuration setting for the log types to be enabled for export to Amazon
-// CloudWatch Logs for a specific DB instance or DB cluster.
+// CloudWatch Logs for a specific instance or cluster.
 //
 // The EnableLogTypes and DisableLogTypes arrays determine which logs are exported
 // (or not exported) to CloudWatch Logs. The values within these arrays depend
-// on the DB engine that is being used.
+// on the engine that is being used.
 type CloudwatchLogsExportConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4178,12 +6091,20 @@ type CloudwatchLogsExportConfiguration struct {
 	EnableLogTypes []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudwatchLogsExportConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CloudwatchLogsExportConfiguration) GoString() string {
 	return s.String()
 }
@@ -4204,19 +6125,20 @@ func (s *CloudwatchLogsExportConfiguration) SetEnableLogTypes(v []*string) *Clou
 type CopyDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter
+	// The identifier or Amazon Resource Name (ARN) for the source cluster parameter
 	// group.
 	//
 	// Constraints:
 	//
-	//    * Must specify a valid DB cluster parameter group.
+	//    * Must specify a valid cluster parameter group.
 	//
-	//    * If the source DB cluster parameter group is in the same AWS Region as
-	//    the copy, specify a valid DB parameter group identifier; for example,
+	//    * If the source cluster parameter group is in the same Amazon Web Services
+	//    Region as the copy, specify a valid parameter group identifier; for example,
 	//    my-db-cluster-param-group, or a valid ARN.
 	//
-	//    * If the source DB parameter group is in a different AWS Region than the
-	//    copy, specify a valid DB cluster parameter group ARN; for example, arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
+	//    * If the source parameter group is in a different Amazon Web Services
+	//    Region than the copy, specify a valid cluster parameter group ARN; for
+	//    example, arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group.
 	//
 	// SourceDBClusterParameterGroupIdentifier is a required field
 	SourceDBClusterParameterGroupIdentifier *string `type:"string" required:"true"`
@@ -4224,12 +6146,12 @@ type CopyDBClusterParameterGroupInput struct {
 	// The tags that are to be assigned to the parameter group.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
 
-	// A description for the copied DB cluster parameter group.
+	// A description for the copied cluster parameter group.
 	//
 	// TargetDBClusterParameterGroupDescription is a required field
 	TargetDBClusterParameterGroupDescription *string `type:"string" required:"true"`
 
-	// The identifier for the copied DB cluster parameter group.
+	// The identifier for the copied cluster parameter group.
 	//
 	// Constraints:
 	//
@@ -4247,12 +6169,20 @@ type CopyDBClusterParameterGroupInput struct {
 	TargetDBClusterParameterGroupIdentifier *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyDBClusterParameterGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyDBClusterParameterGroupInput) GoString() string {
 	return s.String()
 }
@@ -4303,16 +6233,24 @@ func (s *CopyDBClusterParameterGroupInput) SetTargetDBClusterParameterGroupIdent
 type CopyDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster parameter group.
+	// Detailed information about a cluster parameter group.
 	DBClusterParameterGroup *DBClusterParameterGroup `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyDBClusterParameterGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyDBClusterParameterGroupOutput) GoString() string {
 	return s.String()
 }
@@ -4327,86 +6265,94 @@ func (s *CopyDBClusterParameterGroupOutput) SetDBClusterParameterGroup(v *DBClus
 type CopyDBClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
-	// Set to true to copy all tags from the source DB cluster snapshot to the target
-	// DB cluster snapshot, and otherwise false. The default is false.
+	// Set to true to copy all tags from the source cluster snapshot to the target
+	// cluster snapshot, and otherwise false. The default is false.
 	CopyTags *bool `type:"boolean"`
 
-	// The AWS KMS key ID for an encrypted DB cluster snapshot. The AWS KMS key
-	// ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or the AWS
-	// KMS key alias for the AWS KMS encryption key.
+	// DestinationRegion is used for presigning the request to a given region.
+	DestinationRegion *string `type:"string"`
+
+	// The KMS key ID for an encrypted cluster snapshot. The KMS key ID is the Amazon
+	// Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
+	// encryption key.
 	//
-	// If you copy an encrypted DB cluster snapshot from your AWS account, you can
-	// specify a value for KmsKeyId to encrypt the copy with a new AWS KMS encryption
-	// key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster
-	// snapshot is encrypted with the same AWS KMS key as the source DB cluster
-	// snapshot.
+	// If you copy an encrypted cluster snapshot from your Amazon Web Services account,
+	// you can specify a value for KmsKeyId to encrypt the copy with a new KMS encryption
+	// key. If you don't specify a value for KmsKeyId, then the copy of the cluster
+	// snapshot is encrypted with the same KMS key as the source cluster snapshot.
 	//
-	// If you copy an encrypted DB cluster snapshot that is shared from another
-	// AWS account, then you must specify a value for KmsKeyId.
+	// If you copy an encrypted cluster snapshot that is shared from another Amazon
+	// Web Services account, then you must specify a value for KmsKeyId.
 	//
-	// To copy an encrypted DB cluster snapshot to another AWS Region, set KmsKeyId
-	// to the AWS KMS key ID that you want to use to encrypt the copy of the DB
-	// cluster snapshot in the destination Region. AWS KMS encryption keys are specific
-	// to the AWS Region that they are created in, and you can't use encryption
-	// keys from one Region in another Region.
+	// To copy an encrypted cluster snapshot to another Amazon Web Services Region,
+	// set KmsKeyId to the KMS key ID that you want to use to encrypt the copy of
+	// the cluster snapshot in the destination Region. KMS encryption keys are specific
+	// to the Amazon Web Services Region that they are created in, and you can't
+	// use encryption keys from one Amazon Web Services Region in another Amazon
+	// Web Services Region.
 	//
-	// If you copy an unencrypted DB cluster snapshot and specify a value for the
-	// KmsKeyId parameter, an error is returned.
+	// If you copy an unencrypted cluster snapshot and specify a value for the KmsKeyId
+	// parameter, an error is returned.
 	KmsKeyId *string `type:"string"`
 
-	// The URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot
-	// API action in the AWS Region that contains the source DB cluster snapshot
-	// to copy. You must use the PreSignedUrl parameter when copying an encrypted
-	// DB cluster snapshot from another AWS Region.
+	// The URL that contains a Signature Version 4 signed request for theCopyDBClusterSnapshot
+	// API action in the Amazon Web Services Region that contains the source cluster
+	// snapshot to copy. You must use the PreSignedUrl parameter when copying a
+	// cluster snapshot from another Amazon Web Services Region.
 	//
-	// The presigned URL must be a valid request for the CopyDBSClusterSnapshot
-	// API action that can be executed in the source AWS Region that contains the
-	// encrypted DB cluster snapshot to be copied. The presigned URL request must
+	// If you are using an Amazon Web Services SDK tool or the CLI, you can specify
+	// SourceRegion (or --source-region for the CLI) instead of specifying PreSignedUrl
+	// manually. Specifying SourceRegion autogenerates a pre-signed URL that is
+	// a valid request for the operation that can be executed in the source Amazon
+	// Web Services Region.
+	//
+	// The presigned URL must be a valid request for the CopyDBClusterSnapshot API
+	// action that can be executed in the source Amazon Web Services Region that
+	// contains the cluster snapshot to be copied. The presigned URL request must
 	// contain the following parameter values:
 	//
-	//    * KmsKeyId - The AWS KMS key identifier for the key to use to encrypt
-	//    the copy of the DB cluster snapshot in the destination AWS Region. This
-	//    is the same identifier for both the CopyDBClusterSnapshot action that
-	//    is called in the destination AWS Region, and the action contained in the
-	//    presigned URL.
+	//    * SourceRegion - The ID of the region that contains the snapshot to be
+	//    copied.
 	//
-	//    * DestinationRegion - The name of the AWS Region that the DB cluster snapshot
-	//    will be created in.
+	//    * SourceDBClusterSnapshotIdentifier - The identifier for the the encrypted
+	//    cluster snapshot to be copied. This identifier must be in the Amazon Resource
+	//    Name (ARN) format for the source Amazon Web Services Region. For example,
+	//    if you are copying an encrypted cluster snapshot from the us-east-1 Amazon
+	//    Web Services Region, then your SourceDBClusterSnapshotIdentifier looks
+	//    something like the following: arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot.
 	//
-	//    * SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier
-	//    for the encrypted DB cluster snapshot to be copied. This identifier must
-	//    be in the Amazon Resource Name (ARN) format for the source AWS Region.
-	//    For example, if you are copying an encrypted DB cluster snapshot from
-	//    the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier
-	//    looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115.
+	//    * TargetDBClusterSnapshotIdentifier - The identifier for the new cluster
+	//    snapshot to be created. This parameter isn't case sensitive.
 	PreSignedUrl *string `type:"string"`
 
-	// The identifier of the DB cluster snapshot to copy. This parameter is not
-	// case sensitive.
-	//
-	// You can't copy an encrypted, shared DB cluster snapshot from one AWS Region
-	// to another.
+	// The identifier of the cluster snapshot to copy. This parameter is not case
+	// sensitive.
 	//
 	// Constraints:
 	//
-	//    * Must specify a valid system snapshot in the "available" state.
+	//    * Must specify a valid system snapshot in the available state.
 	//
-	//    * If the source snapshot is in the same AWS Region as the copy, specify
-	//    a valid DB snapshot identifier.
+	//    * If the source snapshot is in the same Amazon Web Services Region as
+	//    the copy, specify a valid snapshot identifier.
 	//
-	//    * If the source snapshot is in a different AWS Region than the copy, specify
-	//    a valid DB cluster snapshot ARN.
+	//    * If the source snapshot is in a different Amazon Web Services Region
+	//    than the copy, specify a valid cluster snapshot ARN.
 	//
 	// Example: my-cluster-snapshot1
 	//
 	// SourceDBClusterSnapshotIdentifier is a required field
 	SourceDBClusterSnapshotIdentifier *string `type:"string" required:"true"`
 
-	// The tags to be assigned to the DB cluster snapshot.
+	// SourceRegion is the source region where the resource exists. This is not
+	// sent over the wire and is only used for presigning. This value should always
+	// have the same region as the source ARN.
+	SourceRegion *string `type:"string" ignore:"true"`
+
+	// The tags to be assigned to the cluster snapshot.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
 
-	// The identifier of the new DB cluster snapshot to create from the source DB
-	// cluster snapshot. This parameter is not case sensitive.
+	// The identifier of the new cluster snapshot to create from the source cluster
+	// snapshot. This parameter is not case sensitive.
 	//
 	// Constraints:
 	//
@@ -4422,12 +6368,20 @@ type CopyDBClusterSnapshotInput struct {
 	TargetDBClusterSnapshotIdentifier *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyDBClusterSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyDBClusterSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -4454,6 +6408,12 @@ func (s *CopyDBClusterSnapshotInput) SetCopyTags(v bool) *CopyDBClusterSnapshotI
 	return s
 }
 
+// SetDestinationRegion sets the DestinationRegion field's value.
+func (s *CopyDBClusterSnapshotInput) SetDestinationRegion(v string) *CopyDBClusterSnapshotInput {
+	s.DestinationRegion = &v
+	return s
+}
+
 // SetKmsKeyId sets the KmsKeyId field's value.
 func (s *CopyDBClusterSnapshotInput) SetKmsKeyId(v string) *CopyDBClusterSnapshotInput {
 	s.KmsKeyId = &v
@@ -4472,6 +6432,12 @@ func (s *CopyDBClusterSnapshotInput) SetSourceDBClusterSnapshotIdentifier(v stri
 	return s
 }
 
+// SetSourceRegion sets the SourceRegion field's value.
+func (s *CopyDBClusterSnapshotInput) SetSourceRegion(v string) *CopyDBClusterSnapshotInput {
+	s.SourceRegion = &v
+	return s
+}
+
 // SetTags sets the Tags field's value.
 func (s *CopyDBClusterSnapshotInput) SetTags(v []*Tag) *CopyDBClusterSnapshotInput {
 	s.Tags = v
@@ -4487,16 +6453,24 @@ func (s *CopyDBClusterSnapshotInput) SetTargetDBClusterSnapshotIdentifier(v stri
 type CopyDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster snapshot.
+	// Detailed information about a cluster snapshot.
 	DBClusterSnapshot *DBClusterSnapshot `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyDBClusterSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CopyDBClusterSnapshotOutput) GoString() string {
 	return s.String()
 }
@@ -4511,8 +6485,8 @@ func (s *CopyDBClusterSnapshotOutput) SetDBClusterSnapshot(v *DBClusterSnapshot)
 type CreateDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of Amazon EC2 Availability Zones that instances in the DB cluster
-	// can be created in.
+	// A list of Amazon EC2 Availability Zones that instances in the cluster can
+	// be created in.
 	AvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// The number of days for which automated backups are retained. You must specify
@@ -4525,7 +6499,7 @@ type CreateDBClusterInput struct {
 	//    * Must be a value from 1 to 35.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
-	// The DB cluster identifier. This parameter is stored as a lowercase string.
+	// The cluster identifier. This parameter is stored as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -4540,10 +6514,10 @@ type CreateDBClusterInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The name of the DB cluster parameter group to associate with this DB cluster.
+	// The name of the cluster parameter group to associate with this cluster.
 	DBClusterParameterGroupName *string `type:"string"`
 
-	// A DB subnet group to associate with this DB cluster.
+	// A subnet group to associate with this cluster.
 	//
 	// Constraints: Must match the name of an existing DBSubnetGroup. Must not be
 	// default.
@@ -4551,71 +6525,83 @@ type CreateDBClusterInput struct {
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection
+	// is disabled. DeletionProtection protects clusters from being accidentally
+	// deleted.
+	DeletionProtection *bool `type:"boolean"`
+
+	// DestinationRegion is used for presigning the request to a given region.
+	DestinationRegion *string `type:"string"`
+
 	// A list of log types that need to be enabled for exporting to Amazon CloudWatch
-	// Logs.
+	// Logs. You can enable audit logs or profiler logs. For more information, see
+	// Auditing Amazon DocumentDB Events (https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html)
+	// and Profiling Amazon DocumentDB Operations (https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html).
 	EnableCloudwatchLogsExports []*string `type:"list"`
 
-	// The name of the database engine to be used for this DB cluster.
+	// The name of the database engine to be used for this cluster.
 	//
 	// Valid values: docdb
 	//
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
 
-	// The version number of the database engine to use.
+	// The version number of the database engine to use. The --engine-version will
+	// default to the latest major engine version. For production workloads, we
+	// recommend explicitly declaring this parameter with the intended major engine
+	// version.
 	EngineVersion *string `type:"string"`
 
-	// The AWS KMS key identifier for an encrypted DB cluster.
+	// The cluster identifier of the new global cluster.
+	GlobalClusterIdentifier *string `min:"1" type:"string"`
+
+	// The KMS key identifier for an encrypted cluster.
 	//
-	// The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS
-	// KMS encryption key. If you are creating a DB cluster using the same AWS account
-	// that owns the AWS KMS encryption key that is used to encrypt the new DB cluster,
-	// you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption
-	// key.
+	// The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption
+	// key. If you are creating a cluster using the same Amazon Web Services account
+	// that owns the KMS encryption key that is used to encrypt the new cluster,
+	// you can use the KMS key alias instead of the ARN for the KMS encryption key.
 	//
 	// If an encryption key is not specified in KmsKeyId:
 	//
-	//    * If ReplicationSourceIdentifier identifies an encrypted source, then
-	//    Amazon DocumentDB uses the encryption key that is used to encrypt the
-	//    source. Otherwise, Amazon DocumentDB uses your default encryption key.
+	//    * If the StorageEncrypted parameter is true, Amazon DocumentDB uses your
+	//    default encryption key.
 	//
-	//
-	//    * If the StorageEncrypted parameter is true and ReplicationSourceIdentifier
-	//    is not specified, Amazon DocumentDB uses your default encryption key.
-	//
-	// AWS KMS creates the default encryption key for your AWS account. Your AWS
-	// account has a different default encryption key for each AWS Region.
-	//
-	// If you create a replica of an encrypted DB cluster in another AWS Region,
-	// you must set KmsKeyId to a KMS key ID that is valid in the destination AWS
-	// Region. This key is used to encrypt the replica in that AWS Region.
+	// KMS creates the default encryption key for your Amazon Web Services account.
+	// Your Amazon Web Services account has a different default encryption key for
+	// each Amazon Web Services Regions.
 	KmsKeyId *string `type:"string"`
 
 	// The password for the master database user. This password can contain any
-	// printable ASCII character except "/", """, or "@".
+	// printable ASCII character except forward slash (/), double quote ("), or
+	// the "at" symbol (@).
 	//
-	// Constraints: Must contain from 8 to 41 characters.
+	// Constraints: Must contain from 8 to 100 characters.
 	MasterUserPassword *string `type:"string"`
 
-	// The name of the master user for the DB cluster.
+	// The name of the master user for the cluster.
 	//
 	// Constraints:
 	//
-	//    * Must be from 1 to 16 letters or numbers.
+	//    * Must be from 1 to 63 letters or numbers.
 	//
 	//    * The first character must be a letter.
 	//
 	//    * Cannot be a reserved word for the chosen database engine.
 	MasterUsername *string `type:"string"`
 
-	// The port number on which the instances in the DB cluster accept connections.
+	// The port number on which the instances in the cluster accept connections.
 	Port *int64 `type:"integer"`
+
+	// Not currently supported.
+	PreSignedUrl *string `type:"string"`
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter.
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region.
+	// of time for each Amazon Web Services Region.
 	//
 	// Constraints:
 	//
@@ -4634,29 +6620,57 @@ type CreateDBClusterInput struct {
 	// Format: ddd:hh24:mi-ddd:hh24:mi
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region, occurring on a random day of the week.
+	// of time for each Amazon Web Services Region, occurring on a random day of
+	// the week.
 	//
 	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
 	//
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string `type:"string"`
 
-	// Specifies whether the DB cluster is encrypted.
+	// SourceRegion is the source region where the resource exists. This is not
+	// sent over the wire and is only used for presigning. This value should always
+	// have the same region as the source ARN.
+	SourceRegion *string `type:"string" ignore:"true"`
+
+	// Specifies whether the cluster is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// The tags to be assigned to the DB cluster.
+	// The storage type to associate with the DB cluster.
+	//
+	// For information on storage types for Amazon DocumentDB clusters, see Cluster
+	// storage configurations in the Amazon DocumentDB Developer Guide.
+	//
+	// Valid values for storage type - standard | iopt1
+	//
+	// Default value is standard
+	//
+	// When you create a DocumentDB DB cluster with the storage type set to iopt1,
+	// the storage type is returned in the response. The storage type isn't returned
+	// when you set it to standard.
+	StorageType *string `type:"string"`
+
+	// The tags to be assigned to the cluster.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
 
-	// A list of EC2 VPC security groups to associate with this DB cluster.
+	// A list of EC2 VPC security groups to associate with this cluster.
 	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterInput) GoString() string {
 	return s.String()
 }
@@ -4669,6 +6683,9 @@ func (s *CreateDBClusterInput) Validate() error {
 	}
 	if s.Engine == nil {
 		invalidParams.Add(request.NewErrParamRequired("Engine"))
+	}
+	if s.GlobalClusterIdentifier != nil && len(*s.GlobalClusterIdentifier) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GlobalClusterIdentifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4707,6 +6724,18 @@ func (s *CreateDBClusterInput) SetDBSubnetGroupName(v string) *CreateDBClusterIn
 	return s
 }
 
+// SetDeletionProtection sets the DeletionProtection field's value.
+func (s *CreateDBClusterInput) SetDeletionProtection(v bool) *CreateDBClusterInput {
+	s.DeletionProtection = &v
+	return s
+}
+
+// SetDestinationRegion sets the DestinationRegion field's value.
+func (s *CreateDBClusterInput) SetDestinationRegion(v string) *CreateDBClusterInput {
+	s.DestinationRegion = &v
+	return s
+}
+
 // SetEnableCloudwatchLogsExports sets the EnableCloudwatchLogsExports field's value.
 func (s *CreateDBClusterInput) SetEnableCloudwatchLogsExports(v []*string) *CreateDBClusterInput {
 	s.EnableCloudwatchLogsExports = v
@@ -4722,6 +6751,12 @@ func (s *CreateDBClusterInput) SetEngine(v string) *CreateDBClusterInput {
 // SetEngineVersion sets the EngineVersion field's value.
 func (s *CreateDBClusterInput) SetEngineVersion(v string) *CreateDBClusterInput {
 	s.EngineVersion = &v
+	return s
+}
+
+// SetGlobalClusterIdentifier sets the GlobalClusterIdentifier field's value.
+func (s *CreateDBClusterInput) SetGlobalClusterIdentifier(v string) *CreateDBClusterInput {
+	s.GlobalClusterIdentifier = &v
 	return s
 }
 
@@ -4749,6 +6784,12 @@ func (s *CreateDBClusterInput) SetPort(v int64) *CreateDBClusterInput {
 	return s
 }
 
+// SetPreSignedUrl sets the PreSignedUrl field's value.
+func (s *CreateDBClusterInput) SetPreSignedUrl(v string) *CreateDBClusterInput {
+	s.PreSignedUrl = &v
+	return s
+}
+
 // SetPreferredBackupWindow sets the PreferredBackupWindow field's value.
 func (s *CreateDBClusterInput) SetPreferredBackupWindow(v string) *CreateDBClusterInput {
 	s.PreferredBackupWindow = &v
@@ -4761,9 +6802,21 @@ func (s *CreateDBClusterInput) SetPreferredMaintenanceWindow(v string) *CreateDB
 	return s
 }
 
+// SetSourceRegion sets the SourceRegion field's value.
+func (s *CreateDBClusterInput) SetSourceRegion(v string) *CreateDBClusterInput {
+	s.SourceRegion = &v
+	return s
+}
+
 // SetStorageEncrypted sets the StorageEncrypted field's value.
 func (s *CreateDBClusterInput) SetStorageEncrypted(v bool) *CreateDBClusterInput {
 	s.StorageEncrypted = &v
+	return s
+}
+
+// SetStorageType sets the StorageType field's value.
+func (s *CreateDBClusterInput) SetStorageType(v string) *CreateDBClusterInput {
+	s.StorageType = &v
 	return s
 }
 
@@ -4782,16 +6835,24 @@ func (s *CreateDBClusterInput) SetVpcSecurityGroupIds(v []*string) *CreateDBClus
 type CreateDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterOutput) GoString() string {
 	return s.String()
 }
@@ -4806,37 +6867,45 @@ func (s *CreateDBClusterOutput) SetDBCluster(v *DBCluster) *CreateDBClusterOutpu
 type CreateDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group.
+	// The name of the cluster parameter group.
 	//
 	// Constraints:
 	//
-	//    * Must match the name of an existing DBClusterParameterGroup.
+	//    * Must not match the name of an existing DBClusterParameterGroup.
 	//
 	// This value is stored as a lowercase string.
 	//
 	// DBClusterParameterGroupName is a required field
 	DBClusterParameterGroupName *string `type:"string" required:"true"`
 
-	// The DB cluster parameter group family name.
+	// The cluster parameter group family name.
 	//
 	// DBParameterGroupFamily is a required field
 	DBParameterGroupFamily *string `type:"string" required:"true"`
 
-	// The description for the DB cluster parameter group.
+	// The description for the cluster parameter group.
 	//
 	// Description is a required field
 	Description *string `type:"string" required:"true"`
 
-	// The tags to be assigned to the DB cluster parameter group.
+	// The tags to be assigned to the cluster parameter group.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterParameterGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterParameterGroupInput) GoString() string {
 	return s.String()
 }
@@ -4887,16 +6956,24 @@ func (s *CreateDBClusterParameterGroupInput) SetTags(v []*Tag) *CreateDBClusterP
 type CreateDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster parameter group.
+	// Detailed information about a cluster parameter group.
 	DBClusterParameterGroup *DBClusterParameterGroup `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterParameterGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterParameterGroupOutput) GoString() string {
 	return s.String()
 }
@@ -4911,8 +6988,8 @@ func (s *CreateDBClusterParameterGroupOutput) SetDBClusterParameterGroup(v *DBCl
 type CreateDBClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the DB cluster to create a snapshot for. This parameter
-	// is not case sensitive.
+	// The identifier of the cluster to create a snapshot for. This parameter is
+	// not case sensitive.
 	//
 	// Constraints:
 	//
@@ -4923,8 +7000,8 @@ type CreateDBClusterSnapshotInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The identifier of the DB cluster snapshot. This parameter is stored as a
-	// lowercase string.
+	// The identifier of the cluster snapshot. This parameter is stored as a lowercase
+	// string.
 	//
 	// Constraints:
 	//
@@ -4939,16 +7016,24 @@ type CreateDBClusterSnapshotInput struct {
 	// DBClusterSnapshotIdentifier is a required field
 	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
 
-	// The tags to be assigned to the DB cluster snapshot.
+	// The tags to be assigned to the cluster snapshot.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -4990,16 +7075,24 @@ func (s *CreateDBClusterSnapshotInput) SetTags(v []*Tag) *CreateDBClusterSnapsho
 type CreateDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster snapshot.
+	// Detailed information about a cluster snapshot.
 	DBClusterSnapshot *DBClusterSnapshot `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBClusterSnapshotOutput) GoString() string {
 	return s.String()
 }
@@ -5014,35 +7107,43 @@ func (s *CreateDBClusterSnapshotOutput) SetDBClusterSnapshot(v *DBClusterSnapsho
 type CreateDBInstanceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates that minor engine upgrades are applied automatically to the DB
-	// instance during the maintenance window.
+	// This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does
+	// not perform minor version upgrades regardless of the value set.
 	//
-	// Default: true
+	// Default: false
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// The Amazon EC2 Availability Zone that the DB instance is created in.
+	// The Amazon EC2 Availability Zone that the instance is created in.
 	//
-	// Default: A random, system-chosen Availability Zone in the endpoint's AWS
-	// Region.
+	// Default: A random, system-chosen Availability Zone in the endpoint's Amazon
+	// Web Services Region.
 	//
 	// Example: us-east-1d
-	//
-	// Constraint: The AvailabilityZone parameter can't be specified if the MultiAZ
-	// parameter is set to true. The specified Availability Zone must be in the
-	// same AWS Region as the current endpoint.
 	AvailabilityZone *string `type:"string"`
 
-	// The identifier of the DB cluster that the instance will belong to.
+	// The CA certificate identifier to use for the DB instance's server certificate.
+	//
+	// For more information, see Updating Your Amazon DocumentDB TLS Certificates
+	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html)
+	// and Encrypting Data in Transit (https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html)
+	// in the Amazon DocumentDB Developer Guide.
+	CACertificateIdentifier *string `type:"string"`
+
+	// A value that indicates whether to copy tags from the DB instance to snapshots
+	// of the DB instance. By default, tags are not copied.
+	CopyTagsToSnapshot *bool `type:"boolean"`
+
+	// The identifier of the cluster that the instance will belong to.
 	//
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The compute and memory capacity of the DB instance; for example, db.m4.large.
+	// The compute and memory capacity of the instance; for example, db.r5.large.
 	//
 	// DBInstanceClass is a required field
 	DBInstanceClass *string `type:"string" required:"true"`
 
-	// The DB instance identifier. This parameter is stored as a lowercase string.
+	// The instance identifier. This parameter is stored as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -5057,6 +7158,10 @@ type CreateDBInstanceInput struct {
 	// DBInstanceIdentifier is a required field
 	DBInstanceIdentifier *string `type:"string" required:"true"`
 
+	// A value that indicates whether to enable Performance Insights for the DB
+	// Instance. For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html).
+	EnablePerformanceInsights *bool `type:"boolean"`
+
 	// The name of the database engine to be used for this instance.
 	//
 	// Valid value: docdb
@@ -5064,13 +7169,25 @@ type CreateDBInstanceInput struct {
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
 
+	// The KMS key identifier for encryption of Performance Insights data.
+	//
+	// The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for
+	// the KMS key.
+	//
+	// If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
+	// DocumentDB uses your default KMS key. There is a default KMS key for your
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default KMS key for each Amazon Web Services region.
+	PerformanceInsightsKMSKeyId *string `type:"string"`
+
 	// The time range each week during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC).
 	//
 	// Format: ddd:hh24:mi-ddd:hh24:mi
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region, occurring on a random day of the week.
+	// of time for each Amazon Web Services Region, occurring on a random day of
+	// the week.
 	//
 	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
 	//
@@ -5086,16 +7203,25 @@ type CreateDBInstanceInput struct {
 	// Valid values: 0-15
 	PromotionTier *int64 `type:"integer"`
 
-	// The tags to be assigned to the DB instance.
+	// The tags to be assigned to the instance. You can assign up to 10 tags to
+	// an instance.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBInstanceInput) GoString() string {
 	return s.String()
 }
@@ -5134,6 +7260,18 @@ func (s *CreateDBInstanceInput) SetAvailabilityZone(v string) *CreateDBInstanceI
 	return s
 }
 
+// SetCACertificateIdentifier sets the CACertificateIdentifier field's value.
+func (s *CreateDBInstanceInput) SetCACertificateIdentifier(v string) *CreateDBInstanceInput {
+	s.CACertificateIdentifier = &v
+	return s
+}
+
+// SetCopyTagsToSnapshot sets the CopyTagsToSnapshot field's value.
+func (s *CreateDBInstanceInput) SetCopyTagsToSnapshot(v bool) *CreateDBInstanceInput {
+	s.CopyTagsToSnapshot = &v
+	return s
+}
+
 // SetDBClusterIdentifier sets the DBClusterIdentifier field's value.
 func (s *CreateDBInstanceInput) SetDBClusterIdentifier(v string) *CreateDBInstanceInput {
 	s.DBClusterIdentifier = &v
@@ -5152,9 +7290,21 @@ func (s *CreateDBInstanceInput) SetDBInstanceIdentifier(v string) *CreateDBInsta
 	return s
 }
 
+// SetEnablePerformanceInsights sets the EnablePerformanceInsights field's value.
+func (s *CreateDBInstanceInput) SetEnablePerformanceInsights(v bool) *CreateDBInstanceInput {
+	s.EnablePerformanceInsights = &v
+	return s
+}
+
 // SetEngine sets the Engine field's value.
 func (s *CreateDBInstanceInput) SetEngine(v string) *CreateDBInstanceInput {
 	s.Engine = &v
+	return s
+}
+
+// SetPerformanceInsightsKMSKeyId sets the PerformanceInsightsKMSKeyId field's value.
+func (s *CreateDBInstanceInput) SetPerformanceInsightsKMSKeyId(v string) *CreateDBInstanceInput {
+	s.PerformanceInsightsKMSKeyId = &v
 	return s
 }
 
@@ -5179,16 +7329,24 @@ func (s *CreateDBInstanceInput) SetTags(v []*Tag) *CreateDBInstanceInput {
 type CreateDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB instance.
+	// Detailed information about an instance.
 	DBInstance *DBInstance `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBInstanceOutput) GoString() string {
 	return s.String()
 }
@@ -5203,12 +7361,12 @@ func (s *CreateDBInstanceOutput) SetDBInstance(v *DBInstance) *CreateDBInstanceO
 type CreateDBSubnetGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The description for the DB subnet group.
+	// The description for the subnet group.
 	//
 	// DBSubnetGroupDescription is a required field
 	DBSubnetGroupDescription *string `type:"string" required:"true"`
 
-	// The name for the DB subnet group. This value is stored as a lowercase string.
+	// The name for the subnet group. This value is stored as a lowercase string.
 	//
 	// Constraints: Must contain no more than 255 letters, numbers, periods, underscores,
 	// spaces, or hyphens. Must not be default.
@@ -5218,21 +7376,29 @@ type CreateDBSubnetGroupInput struct {
 	// DBSubnetGroupName is a required field
 	DBSubnetGroupName *string `type:"string" required:"true"`
 
-	// The Amazon EC2 subnet IDs for the DB subnet group.
+	// The Amazon EC2 subnet IDs for the subnet group.
 	//
 	// SubnetIds is a required field
 	SubnetIds []*string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
 
-	// The tags to be assigned to the DB subnet group.
+	// The tags to be assigned to the subnet group.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBSubnetGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBSubnetGroupInput) GoString() string {
 	return s.String()
 }
@@ -5283,16 +7449,24 @@ func (s *CreateDBSubnetGroupInput) SetTags(v []*Tag) *CreateDBSubnetGroupInput {
 type CreateDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB subnet group.
+	// Detailed information about a subnet group.
 	DBSubnetGroup *DBSubnetGroup `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBSubnetGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDBSubnetGroupOutput) GoString() string {
 	return s.String()
 }
@@ -5303,61 +7477,372 @@ func (s *CreateDBSubnetGroupOutput) SetDBSubnetGroup(v *DBSubnetGroup) *CreateDB
 	return s
 }
 
-// Detailed information about a DB cluster.
+// Represents the input to CreateEventSubscription.
+type CreateEventSubscriptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// A Boolean value; set to true to activate the subscription, set to false to
+	// create the subscription but not active it.
+	Enabled *bool `type:"boolean"`
+
+	// A list of event categories for a SourceType that you want to subscribe to.
+	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the SNS topic created for event notification.
+	// Amazon SNS creates the ARN when you create a topic and subscribe to it.
+	//
+	// SnsTopicArn is a required field
+	SnsTopicArn *string `type:"string" required:"true"`
+
+	// The list of identifiers of the event sources for which events are returned.
+	// If not specified, then all sources are included in the response. An identifier
+	// must begin with a letter and must contain only ASCII letters, digits, and
+	// hyphens; it can't end with a hyphen or contain two consecutive hyphens.
+	//
+	// Constraints:
+	//
+	//    * If SourceIds are provided, SourceType must also be provided.
+	//
+	//    * If the source type is an instance, a DBInstanceIdentifier must be provided.
+	//
+	//    * If the source type is a security group, a DBSecurityGroupName must be
+	//    provided.
+	//
+	//    * If the source type is a parameter group, a DBParameterGroupName must
+	//    be provided.
+	//
+	//    * If the source type is a snapshot, a DBSnapshotIdentifier must be provided.
+	SourceIds []*string `locationNameList:"SourceId" type:"list"`
+
+	// The type of source that is generating the events. For example, if you want
+	// to be notified of events generated by an instance, you would set this parameter
+	// to db-instance. If this value is not specified, all events are returned.
+	//
+	// Valid values: db-instance, db-cluster, db-parameter-group, db-security-group,
+	// db-cluster-snapshot
+	SourceType *string `type:"string"`
+
+	// The name of the subscription.
+	//
+	// Constraints: The name must be fewer than 255 characters.
+	//
+	// SubscriptionName is a required field
+	SubscriptionName *string `type:"string" required:"true"`
+
+	// The tags to be assigned to the event subscription.
+	Tags []*Tag `locationNameList:"Tag" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateEventSubscriptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateEventSubscriptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateEventSubscriptionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
+	if s.SnsTopicArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("SnsTopicArn"))
+	}
+	if s.SubscriptionName == nil {
+		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *CreateEventSubscriptionInput) SetEnabled(v bool) *CreateEventSubscriptionInput {
+	s.Enabled = &v
+	return s
+}
+
+// SetEventCategories sets the EventCategories field's value.
+func (s *CreateEventSubscriptionInput) SetEventCategories(v []*string) *CreateEventSubscriptionInput {
+	s.EventCategories = v
+	return s
+}
+
+// SetSnsTopicArn sets the SnsTopicArn field's value.
+func (s *CreateEventSubscriptionInput) SetSnsTopicArn(v string) *CreateEventSubscriptionInput {
+	s.SnsTopicArn = &v
+	return s
+}
+
+// SetSourceIds sets the SourceIds field's value.
+func (s *CreateEventSubscriptionInput) SetSourceIds(v []*string) *CreateEventSubscriptionInput {
+	s.SourceIds = v
+	return s
+}
+
+// SetSourceType sets the SourceType field's value.
+func (s *CreateEventSubscriptionInput) SetSourceType(v string) *CreateEventSubscriptionInput {
+	s.SourceType = &v
+	return s
+}
+
+// SetSubscriptionName sets the SubscriptionName field's value.
+func (s *CreateEventSubscriptionInput) SetSubscriptionName(v string) *CreateEventSubscriptionInput {
+	s.SubscriptionName = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateEventSubscriptionInput) SetTags(v []*Tag) *CreateEventSubscriptionInput {
+	s.Tags = v
+	return s
+}
+
+type CreateEventSubscriptionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Detailed information about an event to which you have subscribed.
+	EventSubscription *EventSubscription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateEventSubscriptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateEventSubscriptionOutput) GoString() string {
+	return s.String()
+}
+
+// SetEventSubscription sets the EventSubscription field's value.
+func (s *CreateEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *CreateEventSubscriptionOutput {
+	s.EventSubscription = v
+	return s
+}
+
+// Represents the input to CreateGlobalCluster.
+type CreateGlobalClusterInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name for your database of up to 64 alpha-numeric characters. If you do
+	// not provide a name, Amazon DocumentDB will not create a database in the global
+	// cluster you are creating.
+	DatabaseName *string `type:"string"`
+
+	// The deletion protection setting for the new global cluster. The global cluster
+	// can't be deleted when deletion protection is enabled.
+	DeletionProtection *bool `type:"boolean"`
+
+	// The name of the database engine to be used for this cluster.
+	Engine *string `type:"string"`
+
+	// The engine version of the global cluster.
+	EngineVersion *string `type:"string"`
+
+	// The cluster identifier of the new global cluster.
+	//
+	// GlobalClusterIdentifier is a required field
+	GlobalClusterIdentifier *string `min:"1" type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) to use as the primary cluster of the global
+	// cluster. This parameter is optional.
+	SourceDBClusterIdentifier *string `type:"string"`
+
+	// The storage encryption setting for the new global cluster.
+	StorageEncrypted *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateGlobalClusterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateGlobalClusterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateGlobalClusterInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateGlobalClusterInput"}
+	if s.GlobalClusterIdentifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if s.GlobalClusterIdentifier != nil && len(*s.GlobalClusterIdentifier) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GlobalClusterIdentifier", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDatabaseName sets the DatabaseName field's value.
+func (s *CreateGlobalClusterInput) SetDatabaseName(v string) *CreateGlobalClusterInput {
+	s.DatabaseName = &v
+	return s
+}
+
+// SetDeletionProtection sets the DeletionProtection field's value.
+func (s *CreateGlobalClusterInput) SetDeletionProtection(v bool) *CreateGlobalClusterInput {
+	s.DeletionProtection = &v
+	return s
+}
+
+// SetEngine sets the Engine field's value.
+func (s *CreateGlobalClusterInput) SetEngine(v string) *CreateGlobalClusterInput {
+	s.Engine = &v
+	return s
+}
+
+// SetEngineVersion sets the EngineVersion field's value.
+func (s *CreateGlobalClusterInput) SetEngineVersion(v string) *CreateGlobalClusterInput {
+	s.EngineVersion = &v
+	return s
+}
+
+// SetGlobalClusterIdentifier sets the GlobalClusterIdentifier field's value.
+func (s *CreateGlobalClusterInput) SetGlobalClusterIdentifier(v string) *CreateGlobalClusterInput {
+	s.GlobalClusterIdentifier = &v
+	return s
+}
+
+// SetSourceDBClusterIdentifier sets the SourceDBClusterIdentifier field's value.
+func (s *CreateGlobalClusterInput) SetSourceDBClusterIdentifier(v string) *CreateGlobalClusterInput {
+	s.SourceDBClusterIdentifier = &v
+	return s
+}
+
+// SetStorageEncrypted sets the StorageEncrypted field's value.
+func (s *CreateGlobalClusterInput) SetStorageEncrypted(v bool) *CreateGlobalClusterInput {
+	s.StorageEncrypted = &v
+	return s
+}
+
+type CreateGlobalClusterOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A data type representing an Amazon DocumentDB global cluster.
+	GlobalCluster *GlobalCluster `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateGlobalClusterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateGlobalClusterOutput) GoString() string {
+	return s.String()
+}
+
+// SetGlobalCluster sets the GlobalCluster field's value.
+func (s *CreateGlobalClusterOutput) SetGlobalCluster(v *GlobalCluster) *CreateGlobalClusterOutput {
+	s.GlobalCluster = v
+	return s
+}
+
+// Detailed information about a cluster.
 type DBCluster struct {
 	_ struct{} `type:"structure"`
 
-	// Provides a list of the AWS Identity and Access Management (IAM) roles that
-	// are associated with the DB cluster. IAM roles that are associated with a
-	// DB cluster grant permission for the DB cluster to access other AWS services
+	// Provides a list of the Identity and Access Management (IAM) roles that are
+	// associated with the cluster. (IAM) roles that are associated with a cluster
+	// grant permission for the cluster to access other Amazon Web Services services
 	// on your behalf.
 	AssociatedRoles []*DBClusterRole `locationNameList:"DBClusterRole" type:"list"`
 
 	// Provides the list of Amazon EC2 Availability Zones that instances in the
-	// DB cluster can be created in.
+	// cluster can be created in.
 	AvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
 
-	// Specifies the number of days for which automatic DB snapshots are retained.
+	// Specifies the number of days for which automatic snapshots are retained.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
-	// Specifies the time when the DB cluster was created, in Universal Coordinated
+	// Identifies the clone group to which the DB cluster is associated.
+	CloneGroupId *string `type:"string"`
+
+	// Specifies the time when the cluster was created, in Universal Coordinated
 	// Time (UTC).
 	ClusterCreateTime *time.Time `type:"timestamp"`
 
-	// The Amazon Resource Name (ARN) for the DB cluster.
+	// The Amazon Resource Name (ARN) for the cluster.
 	DBClusterArn *string `type:"string"`
 
-	// Contains a user-supplied DB cluster identifier. This identifier is the unique
-	// key that identifies a DB cluster.
+	// Contains a user-supplied cluster identifier. This identifier is the unique
+	// key that identifies a cluster.
 	DBClusterIdentifier *string `type:"string"`
 
-	// Provides the list of instances that make up the DB cluster.
+	// Provides the list of instances that make up the cluster.
 	DBClusterMembers []*DBClusterMember `locationNameList:"DBClusterMember" type:"list"`
 
-	// Specifies the name of the DB cluster parameter group for the DB cluster.
+	// Specifies the name of the cluster parameter group for the cluster.
 	DBClusterParameterGroup *string `type:"string"`
 
-	// Specifies information on the subnet group that is associated with the DB
-	// cluster, including the name, description, and subnets in the subnet group.
+	// Specifies information on the subnet group that is associated with the cluster,
+	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *string `type:"string"`
 
-	// The AWS Region-unique, immutable identifier for the DB cluster. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// cluster is accessed.
+	// The Amazon Web Services Region-unique, immutable identifier for the cluster.
+	// This identifier is found in CloudTrail log entries whenever the KMS key for
+	// the cluster is accessed.
 	DbClusterResourceId *string `type:"string"`
+
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection
+	// is disabled. DeletionProtection protects clusters from being accidentally
+	// deleted.
+	DeletionProtection *bool `type:"boolean"`
 
 	// The earliest time to which a database can be restored with point-in-time
 	// restore.
 	EarliestRestorableTime *time.Time `type:"timestamp"`
 
-	// A list of log types that this DB cluster is configured to export to Amazon
-	// CloudWatch Logs.
+	// A list of log types that this cluster is configured to export to Amazon CloudWatch
+	// Logs.
 	EnabledCloudwatchLogsExports []*string `type:"list"`
 
-	// Specifies the connection endpoint for the primary instance of the DB cluster.
+	// Specifies the connection endpoint for the primary instance of the cluster.
 	Endpoint *string `type:"string"`
 
-	// Provides the name of the database engine to be used for this DB cluster.
+	// Provides the name of the database engine to be used for this cluster.
 	Engine *string `type:"string"`
 
 	// Indicates the database engine version.
@@ -5366,18 +7851,17 @@ type DBCluster struct {
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string `type:"string"`
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// DB cluster.
+	// If StorageEncrypted is true, the KMS key identifier for the encrypted cluster.
 	KmsKeyId *string `type:"string"`
 
 	// Specifies the latest time to which a database can be restored with point-in-time
 	// restore.
 	LatestRestorableTime *time.Time `type:"timestamp"`
 
-	// Contains the master user name for the DB cluster.
+	// Contains the master user name for the cluster.
 	MasterUsername *string `type:"string"`
 
-	// Specifies whether the DB cluster has instances in multiple Availability Zones.
+	// Specifies whether the cluster has instances in multiple Availability Zones.
 	MultiAZ *bool `type:"boolean"`
 
 	// Specifies the progress of the operation as a percentage.
@@ -5394,13 +7878,16 @@ type DBCluster struct {
 	// in Universal Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string `type:"string"`
 
-	// The reader endpoint for the DB cluster. The reader endpoint for a DB cluster
-	// load balances connections across the Amazon DocumentDB replicas that are
-	// available in a DB cluster. As clients request new connections to the reader
-	// endpoint, Amazon DocumentDB distributes the connection requests among the
-	// Amazon DocumentDB replicas in the DB cluster. This functionality can help
-	// balance your read workload across multiple Amazon DocumentDB replicas in
-	// your DB cluster.
+	// Contains one or more identifiers of the secondary clusters that are associated
+	// with this cluster.
+	ReadReplicaIdentifiers []*string `locationNameList:"ReadReplicaIdentifier" type:"list"`
+
+	// The reader endpoint for the cluster. The reader endpoint for a cluster load
+	// balances connections across the Amazon DocumentDB replicas that are available
+	// in a cluster. As clients request new connections to the reader endpoint,
+	// Amazon DocumentDB distributes the connection requests among the Amazon DocumentDB
+	// replicas in the cluster. This functionality can help balance your read workload
+	// across multiple Amazon DocumentDB replicas in your cluster.
 	//
 	// If a failover occurs, and the Amazon DocumentDB replica that you are connected
 	// to is promoted to be the primary instance, your connection is dropped. To
@@ -5408,23 +7895,47 @@ type DBCluster struct {
 	// the cluster, you can then reconnect to the reader endpoint.
 	ReaderEndpoint *string `type:"string"`
 
-	// Specifies the current state of this DB cluster.
+	// Contains the identifier of the source cluster if this cluster is a secondary
+	// cluster.
+	ReplicationSourceIdentifier *string `type:"string"`
+
+	// Specifies the current state of this cluster.
 	Status *string `type:"string"`
 
-	// Specifies whether the DB cluster is encrypted.
+	// Specifies whether the cluster is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// Provides a list of virtual private cloud (VPC) security groups that the DB
-	// cluster belongs to.
+	// Storage type associated with your cluster
+	//
+	// Storage type associated with your cluster
+	//
+	// For information on storage types for Amazon DocumentDB clusters, see Cluster
+	// storage configurations in the Amazon DocumentDB Developer Guide.
+	//
+	// Valid values for storage type - standard | iopt1
+	//
+	// Default value is standard
+	StorageType *string `type:"string"`
+
+	// Provides a list of virtual private cloud (VPC) security groups that the cluster
+	// belongs to.
 	VpcSecurityGroups []*VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBCluster) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBCluster) GoString() string {
 	return s.String()
 }
@@ -5444,6 +7955,12 @@ func (s *DBCluster) SetAvailabilityZones(v []*string) *DBCluster {
 // SetBackupRetentionPeriod sets the BackupRetentionPeriod field's value.
 func (s *DBCluster) SetBackupRetentionPeriod(v int64) *DBCluster {
 	s.BackupRetentionPeriod = &v
+	return s
+}
+
+// SetCloneGroupId sets the CloneGroupId field's value.
+func (s *DBCluster) SetCloneGroupId(v string) *DBCluster {
+	s.CloneGroupId = &v
 	return s
 }
 
@@ -5486,6 +8003,12 @@ func (s *DBCluster) SetDBSubnetGroup(v string) *DBCluster {
 // SetDbClusterResourceId sets the DbClusterResourceId field's value.
 func (s *DBCluster) SetDbClusterResourceId(v string) *DBCluster {
 	s.DbClusterResourceId = &v
+	return s
+}
+
+// SetDeletionProtection sets the DeletionProtection field's value.
+func (s *DBCluster) SetDeletionProtection(v bool) *DBCluster {
+	s.DeletionProtection = &v
 	return s
 }
 
@@ -5573,9 +8096,21 @@ func (s *DBCluster) SetPreferredMaintenanceWindow(v string) *DBCluster {
 	return s
 }
 
+// SetReadReplicaIdentifiers sets the ReadReplicaIdentifiers field's value.
+func (s *DBCluster) SetReadReplicaIdentifiers(v []*string) *DBCluster {
+	s.ReadReplicaIdentifiers = v
+	return s
+}
+
 // SetReaderEndpoint sets the ReaderEndpoint field's value.
 func (s *DBCluster) SetReaderEndpoint(v string) *DBCluster {
 	s.ReaderEndpoint = &v
+	return s
+}
+
+// SetReplicationSourceIdentifier sets the ReplicationSourceIdentifier field's value.
+func (s *DBCluster) SetReplicationSourceIdentifier(v string) *DBCluster {
+	s.ReplicationSourceIdentifier = &v
 	return s
 }
 
@@ -5591,25 +8126,31 @@ func (s *DBCluster) SetStorageEncrypted(v bool) *DBCluster {
 	return s
 }
 
+// SetStorageType sets the StorageType field's value.
+func (s *DBCluster) SetStorageType(v string) *DBCluster {
+	s.StorageType = &v
+	return s
+}
+
 // SetVpcSecurityGroups sets the VpcSecurityGroups field's value.
 func (s *DBCluster) SetVpcSecurityGroups(v []*VpcSecurityGroupMembership) *DBCluster {
 	s.VpcSecurityGroups = v
 	return s
 }
 
-// Contains information about an instance that is part of a DB cluster.
+// Contains information about an instance that is part of a cluster.
 type DBClusterMember struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the status of the DB cluster parameter group for this member of
-	// the DB cluster.
+	// Specifies the status of the cluster parameter group for this member of the
+	// DB cluster.
 	DBClusterParameterGroupStatus *string `type:"string"`
 
-	// Specifies the instance identifier for this member of the DB cluster.
+	// Specifies the instance identifier for this member of the cluster.
 	DBInstanceIdentifier *string `type:"string"`
 
 	// A value that is true if the cluster member is the primary instance for the
-	// DB cluster and false otherwise.
+	// cluster and false otherwise.
 	IsClusterWriter *bool `type:"boolean"`
 
 	// A value that specifies the order in which an Amazon DocumentDB replica is
@@ -5618,12 +8159,20 @@ type DBClusterMember struct {
 	PromotionTier *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterMember) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterMember) GoString() string {
 	return s.String()
 }
@@ -5652,31 +8201,38 @@ func (s *DBClusterMember) SetPromotionTier(v int64) *DBClusterMember {
 	return s
 }
 
-// Detailed information about a DB cluster parameter group.
+// Detailed information about a cluster parameter group.
 type DBClusterParameterGroup struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) for the DB cluster parameter group.
+	// The Amazon Resource Name (ARN) for the cluster parameter group.
 	DBClusterParameterGroupArn *string `type:"string"`
 
-	// Provides the name of the DB cluster parameter group.
+	// Provides the name of the cluster parameter group.
 	DBClusterParameterGroupName *string `type:"string"`
 
-	// Provides the name of the DB parameter group family that this DB cluster parameter
+	// Provides the name of the parameter group family that this cluster parameter
 	// group is compatible with.
 	DBParameterGroupFamily *string `type:"string"`
 
-	// Provides the customer-specified description for this DB cluster parameter
-	// group.
+	// Provides the customer-specified description for this cluster parameter group.
 	Description *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterParameterGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterParameterGroup) GoString() string {
 	return s.String()
 }
@@ -5705,35 +8261,43 @@ func (s *DBClusterParameterGroup) SetDescription(v string) *DBClusterParameterGr
 	return s
 }
 
-// Describes an AWS Identity and Access Management (IAM) role that is associated
-// with a DB cluster.
+// Describes an Identity and Access Management (IAM) role that is associated
+// with a cluster.
 type DBClusterRole struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that is associated with the
+	// The Amazon Resource Name (ARN) of the IAMrole that is associated with the
 	// DB cluster.
 	RoleArn *string `type:"string"`
 
-	// Describes the state of association between the IAM role and the DB cluster.
-	// The Status property returns one of the following values:
+	// Describes the state of association between the IAMrole and the cluster. The
+	// Status property returns one of the following values:
 	//
-	//    * ACTIVE - The IAM role ARN is associated with the DB cluster and can
-	//    be used to access other AWS services on your behalf.
+	//    * ACTIVE - The IAMrole ARN is associated with the cluster and can be used
+	//    to access other Amazon Web Services services on your behalf.
 	//
-	//    * PENDING - The IAM role ARN is being associated with the DB cluster.
+	//    * PENDING - The IAMrole ARN is being associated with the cluster.
 	//
-	//    * INVALID - The IAM role ARN is associated with the DB cluster, but the
-	//    DB cluster cannot assume the IAM role to access other AWS services on
-	//    your behalf.
+	//    * INVALID - The IAMrole ARN is associated with the cluster, but the cluster
+	//    cannot assume the IAMrole to access other Amazon Web Services services
+	//    on your behalf.
 	Status *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterRole) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterRole) GoString() string {
 	return s.String()
 }
@@ -5750,75 +8314,92 @@ func (s *DBClusterRole) SetStatus(v string) *DBClusterRole {
 	return s
 }
 
-// Detailed information about a DB cluster snapshot.
+// Detailed information about a cluster snapshot.
 type DBClusterSnapshot struct {
 	_ struct{} `type:"structure"`
 
 	// Provides the list of Amazon EC2 Availability Zones that instances in the
-	// DB cluster snapshot can be restored in.
+	// cluster snapshot can be restored in.
 	AvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
 
-	// Specifies the time when the DB cluster was created, in Universal Coordinated
+	// Specifies the time when the cluster was created, in Universal Coordinated
 	// Time (UTC).
 	ClusterCreateTime *time.Time `type:"timestamp"`
 
-	// Specifies the DB cluster identifier of the DB cluster that this DB cluster
-	// snapshot was created from.
+	// Specifies the cluster identifier of the cluster that this cluster snapshot
+	// was created from.
 	DBClusterIdentifier *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) for the DB cluster snapshot.
+	// The Amazon Resource Name (ARN) for the cluster snapshot.
 	DBClusterSnapshotArn *string `type:"string"`
 
-	// Specifies the identifier for the DB cluster snapshot.
+	// Specifies the identifier for the cluster snapshot.
 	DBClusterSnapshotIdentifier *string `type:"string"`
 
 	// Specifies the name of the database engine.
 	Engine *string `type:"string"`
 
-	// Provides the version of the database engine for this DB cluster snapshot.
+	// Provides the version of the database engine for this cluster snapshot.
 	EngineVersion *string `type:"string"`
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// DB cluster snapshot.
+	// If StorageEncrypted is true, the KMS key identifier for the encrypted cluster
+	// snapshot.
 	KmsKeyId *string `type:"string"`
 
-	// Provides the master user name for the DB cluster snapshot.
+	// Provides the master user name for the cluster snapshot.
 	MasterUsername *string `type:"string"`
 
 	// Specifies the percentage of the estimated data that has been transferred.
 	PercentProgress *int64 `type:"integer"`
 
-	// Specifies the port that the DB cluster was listening on at the time of the
-	// snapshot.
+	// Specifies the port that the cluster was listening on at the time of the snapshot.
 	Port *int64 `type:"integer"`
 
 	// Provides the time when the snapshot was taken, in UTC.
 	SnapshotCreateTime *time.Time `type:"timestamp"`
 
-	// Provides the type of the DB cluster snapshot.
+	// Provides the type of the cluster snapshot.
 	SnapshotType *string `type:"string"`
 
-	// If the DB cluster snapshot was copied from a source DB cluster snapshot,
-	// the ARN for the source DB cluster snapshot; otherwise, a null value.
+	// If the cluster snapshot was copied from a source cluster snapshot, the ARN
+	// for the source cluster snapshot; otherwise, a null value.
 	SourceDBClusterSnapshotArn *string `type:"string"`
 
-	// Specifies the status of this DB cluster snapshot.
+	// Specifies the status of this cluster snapshot.
 	Status *string `type:"string"`
 
-	// Specifies whether the DB cluster snapshot is encrypted.
+	// Specifies whether the cluster snapshot is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// Provides the virtual private cloud (VPC) ID that is associated with the DB
-	// cluster snapshot.
+	// Storage type associated with your cluster snapshot
+	//
+	// For information on storage types for Amazon DocumentDB clusters, see Cluster
+	// storage configurations in the Amazon DocumentDB Developer Guide.
+	//
+	// Valid values for storage type - standard | iopt1
+	//
+	// Default value is standard
+	StorageType *string `type:"string"`
+
+	// Provides the virtual private cloud (VPC) ID that is associated with the cluster
+	// snapshot.
 	VpcId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterSnapshot) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterSnapshot) GoString() string {
 	return s.String()
 }
@@ -5919,41 +8500,55 @@ func (s *DBClusterSnapshot) SetStorageEncrypted(v bool) *DBClusterSnapshot {
 	return s
 }
 
+// SetStorageType sets the StorageType field's value.
+func (s *DBClusterSnapshot) SetStorageType(v string) *DBClusterSnapshot {
+	s.StorageType = &v
+	return s
+}
+
 // SetVpcId sets the VpcId field's value.
 func (s *DBClusterSnapshot) SetVpcId(v string) *DBClusterSnapshot {
 	s.VpcId = &v
 	return s
 }
 
-// Contains the name and values of a manual DB cluster snapshot attribute.
+// Contains the name and values of a manual cluster snapshot attribute.
 //
-// Manual DB cluster snapshot attributes are used to authorize other AWS accounts
-// to restore a manual DB cluster snapshot.
+// Manual cluster snapshot attributes are used to authorize other Amazon Web
+// Services accounts to restore a manual cluster snapshot.
 type DBClusterSnapshotAttribute struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the manual DB cluster snapshot attribute.
+	// The name of the manual cluster snapshot attribute.
 	//
-	// The attribute named restore refers to the list of AWS accounts that have
-	// permission to copy or restore the manual DB cluster snapshot.
+	// The attribute named restore refers to the list of Amazon Web Services accounts
+	// that have permission to copy or restore the manual cluster snapshot.
 	AttributeName *string `type:"string"`
 
-	// The values for the manual DB cluster snapshot attribute.
+	// The values for the manual cluster snapshot attribute.
 	//
 	// If the AttributeName field is set to restore, then this element returns a
-	// list of IDs of the AWS accounts that are authorized to copy or restore the
-	// manual DB cluster snapshot. If a value of all is in the list, then the manual
-	// DB cluster snapshot is public and available for any AWS account to copy or
-	// restore.
+	// list of IDs of the Amazon Web Services accounts that are authorized to copy
+	// or restore the manual cluster snapshot. If a value of all is in the list,
+	// then the manual cluster snapshot is public and available for any Amazon Web
+	// Services account to copy or restore.
 	AttributeValues []*string `locationNameList:"AttributeValue" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterSnapshotAttribute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterSnapshotAttribute) GoString() string {
 	return s.String()
 }
@@ -5970,24 +8565,32 @@ func (s *DBClusterSnapshotAttribute) SetAttributeValues(v []*string) *DBClusterS
 	return s
 }
 
-// Detailed information about the attributes that are associated with a DB cluster
+// Detailed information about the attributes that are associated with a cluster
 // snapshot.
 type DBClusterSnapshotAttributesResult struct {
 	_ struct{} `type:"structure"`
 
-	// The list of attributes and values for the DB cluster snapshot.
+	// The list of attributes and values for the cluster snapshot.
 	DBClusterSnapshotAttributes []*DBClusterSnapshotAttribute `locationNameList:"DBClusterSnapshotAttribute" type:"list"`
 
-	// The identifier of the DB cluster snapshot that the attributes apply to.
+	// The identifier of the cluster snapshot that the attributes apply to.
 	DBClusterSnapshotIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterSnapshotAttributesResult) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBClusterSnapshotAttributesResult) GoString() string {
 	return s.String()
 }
@@ -6004,7 +8607,7 @@ func (s *DBClusterSnapshotAttributesResult) SetDBClusterSnapshotIdentifier(v str
 	return s
 }
 
-// Detailed information about a DB engine version.
+// Detailed information about an engine version.
 type DBEngineVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -6014,7 +8617,7 @@ type DBEngineVersion struct {
 	// The description of the database engine version.
 	DBEngineVersionDescription *string `type:"string"`
 
-	// The name of the DB parameter group family for the database engine.
+	// The name of the parameter group family for the database engine.
 	DBParameterGroupFamily *string `type:"string"`
 
 	// The name of the database engine.
@@ -6027,6 +8630,18 @@ type DBEngineVersion struct {
 	// CloudWatch Logs.
 	ExportableLogTypes []*string `type:"list"`
 
+	// A list of the supported CA certificate identifiers.
+	//
+	// For more information, see Updating Your Amazon DocumentDB TLS Certificates
+	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html)
+	// and Encrypting Data in Transit (https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html)
+	// in the Amazon DocumentDB Developer Guide.
+	SupportedCACertificateIdentifiers []*string `type:"list"`
+
+	// Indicates whether the engine version supports rotating the server certificate
+	// without rebooting the DB instance.
+	SupportsCertificateRotationWithoutRestart *bool `type:"boolean"`
+
 	// A value that indicates whether the engine version supports exporting the
 	// log types specified by ExportableLogTypes to CloudWatch Logs.
 	SupportsLogExportsToCloudwatchLogs *bool `type:"boolean"`
@@ -6036,12 +8651,20 @@ type DBEngineVersion struct {
 	ValidUpgradeTarget []*UpgradeTarget `locationNameList:"UpgradeTarget" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBEngineVersion) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBEngineVersion) GoString() string {
 	return s.String()
 }
@@ -6082,6 +8705,18 @@ func (s *DBEngineVersion) SetExportableLogTypes(v []*string) *DBEngineVersion {
 	return s
 }
 
+// SetSupportedCACertificateIdentifiers sets the SupportedCACertificateIdentifiers field's value.
+func (s *DBEngineVersion) SetSupportedCACertificateIdentifiers(v []*string) *DBEngineVersion {
+	s.SupportedCACertificateIdentifiers = v
+	return s
+}
+
+// SetSupportsCertificateRotationWithoutRestart sets the SupportsCertificateRotationWithoutRestart field's value.
+func (s *DBEngineVersion) SetSupportsCertificateRotationWithoutRestart(v bool) *DBEngineVersion {
+	s.SupportsCertificateRotationWithoutRestart = &v
+	return s
+}
+
 // SetSupportsLogExportsToCloudwatchLogs sets the SupportsLogExportsToCloudwatchLogs field's value.
 func (s *DBEngineVersion) SetSupportsLogExportsToCloudwatchLogs(v bool) *DBEngineVersion {
 	s.SupportsLogExportsToCloudwatchLogs = &v
@@ -6094,73 +8729,93 @@ func (s *DBEngineVersion) SetValidUpgradeTarget(v []*UpgradeTarget) *DBEngineVer
 	return s
 }
 
-// Detailed information about a DB instance.
+// Detailed information about an instance.
 type DBInstance struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates that minor version patches are applied automatically.
+	// Does not apply. This parameter does not apply to Amazon DocumentDB. Amazon
+	// DocumentDB does not perform minor version upgrades regardless of the value
+	// set.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// Specifies the name of the Availability Zone that the DB instance is located
+	// Specifies the name of the Availability Zone that the instance is located
 	// in.
 	AvailabilityZone *string `type:"string"`
 
-	// Specifies the number of days for which automatic DB snapshots are retained.
+	// Specifies the number of days for which automatic snapshots are retained.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
-	// Contains the name of the DB cluster that the DB instance is a member of if
-	// the DB instance is a member of a DB cluster.
+	// The identifier of the CA certificate for this DB instance.
+	CACertificateIdentifier *string `type:"string"`
+
+	// The details of the DB instance's server certificate.
+	CertificateDetails *CertificateDetails `type:"structure"`
+
+	// A value that indicates whether to copy tags from the DB instance to snapshots
+	// of the DB instance. By default, tags are not copied.
+	CopyTagsToSnapshot *bool `type:"boolean"`
+
+	// Contains the name of the cluster that the instance is a member of if the
+	// instance is a member of a cluster.
 	DBClusterIdentifier *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) for the DB instance.
+	// The Amazon Resource Name (ARN) for the instance.
 	DBInstanceArn *string `type:"string"`
 
-	// Contains the name of the compute and memory capacity class of the DB instance.
+	// Contains the name of the compute and memory capacity class of the instance.
 	DBInstanceClass *string `type:"string"`
 
 	// Contains a user-provided database identifier. This identifier is the unique
-	// key that identifies a DB instance.
+	// key that identifies an instance.
 	DBInstanceIdentifier *string `type:"string"`
 
 	// Specifies the current state of this database.
 	DBInstanceStatus *string `type:"string"`
 
-	// Specifies information on the subnet group that is associated with the DB
-	// instance, including the name, description, and subnets in the subnet group.
+	// Specifies information on the subnet group that is associated with the instance,
+	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *DBSubnetGroup `type:"structure"`
 
-	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// instance is accessed.
+	// The Amazon Web Services Region-unique, immutable identifier for the instance.
+	// This identifier is found in CloudTrail log entries whenever the KMS key for
+	// the instance is accessed.
 	DbiResourceId *string `type:"string"`
 
-	// A list of log types that this DB instance is configured to export to Amazon
-	// CloudWatch Logs.
+	// A list of log types that this instance is configured to export to CloudWatch
+	// Logs.
 	EnabledCloudwatchLogsExports []*string `type:"list"`
 
 	// Specifies the connection endpoint.
 	Endpoint *Endpoint `type:"structure"`
 
-	// Provides the name of the database engine to be used for this DB instance.
+	// Provides the name of the database engine to be used for this instance.
 	Engine *string `type:"string"`
 
 	// Indicates the database engine version.
 	EngineVersion *string `type:"string"`
 
-	// Provides the date and time that the DB instance was created.
+	// Provides the date and time that the instance was created.
 	InstanceCreateTime *time.Time `type:"timestamp"`
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// DB instance.
+	// If StorageEncrypted is true, the KMS key identifier for the encrypted instance.
 	KmsKeyId *string `type:"string"`
 
 	// Specifies the latest time to which a database can be restored with point-in-time
 	// restore.
 	LatestRestorableTime *time.Time `type:"timestamp"`
 
-	// Specifies that changes to the DB instance are pending. This element is included
+	// Specifies that changes to the instance are pending. This element is included
 	// only when changes are pending. Specific changes are identified by subelements.
 	PendingModifiedValues *PendingModifiedValues `type:"structure"`
+
+	// Set to true if Amazon RDS Performance Insights is enabled for the DB instance,
+	// and otherwise false.
+	PerformanceInsightsEnabled *bool `type:"boolean"`
+
+	// The KMS key identifier for encryption of Performance Insights data. The KMS
+	// key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
+	// key alias for the KMS encryption key.
+	PerformanceInsightsKMSKeyId *string `type:"string"`
 
 	// Specifies the daily time range during which automated backups are created
 	// if automated backups are enabled, as determined by the BackupRetentionPeriod.
@@ -6175,30 +8830,36 @@ type DBInstance struct {
 	// instance.
 	PromotionTier *int64 `type:"integer"`
 
-	// Specifies the availability options for the DB instance. A value of true specifies
-	// an internet-facing instance with a publicly resolvable DNS name, which resolves
-	// to a public IP address. A value of false specifies an internal instance with
-	// a DNS name that resolves to a private IP address.
+	// Not supported. Amazon DocumentDB does not currently support public endpoints.
+	// The value of PubliclyAccessible is always false.
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// The status of a read replica. If the instance is not a read replica, this
 	// is blank.
 	StatusInfos []*DBInstanceStatusInfo `locationNameList:"DBInstanceStatusInfo" type:"list"`
 
-	// Specifies whether the DB instance is encrypted.
+	// Specifies whether or not the instance is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// Provides a list of VPC security group elements that the DB instance belongs
+	// Provides a list of VPC security group elements that the instance belongs
 	// to.
 	VpcSecurityGroups []*VpcSecurityGroupMembership `locationNameList:"VpcSecurityGroupMembership" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBInstance) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBInstance) GoString() string {
 	return s.String()
 }
@@ -6218,6 +8879,24 @@ func (s *DBInstance) SetAvailabilityZone(v string) *DBInstance {
 // SetBackupRetentionPeriod sets the BackupRetentionPeriod field's value.
 func (s *DBInstance) SetBackupRetentionPeriod(v int64) *DBInstance {
 	s.BackupRetentionPeriod = &v
+	return s
+}
+
+// SetCACertificateIdentifier sets the CACertificateIdentifier field's value.
+func (s *DBInstance) SetCACertificateIdentifier(v string) *DBInstance {
+	s.CACertificateIdentifier = &v
+	return s
+}
+
+// SetCertificateDetails sets the CertificateDetails field's value.
+func (s *DBInstance) SetCertificateDetails(v *CertificateDetails) *DBInstance {
+	s.CertificateDetails = v
+	return s
+}
+
+// SetCopyTagsToSnapshot sets the CopyTagsToSnapshot field's value.
+func (s *DBInstance) SetCopyTagsToSnapshot(v bool) *DBInstance {
+	s.CopyTagsToSnapshot = &v
 	return s
 }
 
@@ -6311,6 +8990,18 @@ func (s *DBInstance) SetPendingModifiedValues(v *PendingModifiedValues) *DBInsta
 	return s
 }
 
+// SetPerformanceInsightsEnabled sets the PerformanceInsightsEnabled field's value.
+func (s *DBInstance) SetPerformanceInsightsEnabled(v bool) *DBInstance {
+	s.PerformanceInsightsEnabled = &v
+	return s
+}
+
+// SetPerformanceInsightsKMSKeyId sets the PerformanceInsightsKMSKeyId field's value.
+func (s *DBInstance) SetPerformanceInsightsKMSKeyId(v string) *DBInstance {
+	s.PerformanceInsightsKMSKeyId = &v
+	return s
+}
+
 // SetPreferredBackupWindow sets the PreferredBackupWindow field's value.
 func (s *DBInstance) SetPreferredBackupWindow(v string) *DBInstance {
 	s.PreferredBackupWindow = &v
@@ -6353,7 +9044,7 @@ func (s *DBInstance) SetVpcSecurityGroups(v []*VpcSecurityGroupMembership) *DBIn
 	return s
 }
 
-// Provides a list of status information for a DB instance.
+// Provides a list of status information for an instance.
 type DBInstanceStatusInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -6365,7 +9056,7 @@ type DBInstanceStatusInfo struct {
 	// if the instance is in an error state.
 	Normal *bool `type:"boolean"`
 
-	// Status of the DB instance. For a StatusType of read replica, the values can
+	// Status of the instance. For a StatusType of read replica, the values can
 	// be replicating, error, stopped, or terminated.
 	Status *string `type:"string"`
 
@@ -6373,12 +9064,20 @@ type DBInstanceStatusInfo struct {
 	StatusType *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBInstanceStatusInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBInstanceStatusInfo) GoString() string {
 	return s.String()
 }
@@ -6407,35 +9106,43 @@ func (s *DBInstanceStatusInfo) SetStatusType(v string) *DBInstanceStatusInfo {
 	return s
 }
 
-// Detailed information about a DB subnet group.
+// Detailed information about a subnet group.
 type DBSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Identifier (ARN) for the DB subnet group.
+	// The Amazon Resource Name (ARN) for the DB subnet group.
 	DBSubnetGroupArn *string `type:"string"`
 
-	// Provides the description of the DB subnet group.
+	// Provides the description of the subnet group.
 	DBSubnetGroupDescription *string `type:"string"`
 
-	// The name of the DB subnet group.
+	// The name of the subnet group.
 	DBSubnetGroupName *string `type:"string"`
 
-	// Provides the status of the DB subnet group.
+	// Provides the status of the subnet group.
 	SubnetGroupStatus *string `type:"string"`
 
-	// Detailed information about one or more subnets within a DB subnet group.
+	// Detailed information about one or more subnets within a subnet group.
 	Subnets []*Subnet `locationNameList:"Subnet" type:"list"`
 
-	// Provides the virtual private cloud (VPC) ID of the DB subnet group.
+	// Provides the virtual private cloud (VPC) ID of the subnet group.
 	VpcId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBSubnetGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DBSubnetGroup) GoString() string {
 	return s.String()
 }
@@ -6480,8 +9187,8 @@ func (s *DBSubnetGroup) SetVpcId(v string) *DBSubnetGroup {
 type DeleteDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// The DB cluster identifier for the DB cluster to be deleted. This parameter
-	// isn't case sensitive.
+	// The cluster identifier for the cluster to be deleted. This parameter isn't
+	// case sensitive.
 	//
 	// Constraints:
 	//
@@ -6490,8 +9197,8 @@ type DeleteDBClusterInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The DB cluster snapshot identifier of the new DB cluster snapshot created
-	// when SkipFinalSnapshot is set to false.
+	// The cluster snapshot identifier of the new cluster snapshot created when
+	// SkipFinalSnapshot is set to false.
 	//
 	// Specifying this parameter and also setting the SkipFinalShapshot parameter
 	// to true results in an error.
@@ -6505,9 +9212,9 @@ type DeleteDBClusterInput struct {
 	//    * Cannot end with a hyphen or contain two consecutive hyphens.
 	FinalDBSnapshotIdentifier *string `type:"string"`
 
-	// Determines whether a final DB cluster snapshot is created before the DB cluster
-	// is deleted. If true is specified, no DB cluster snapshot is created. If false
-	// is specified, a DB cluster snapshot is created before the DB cluster is deleted.
+	// Determines whether a final cluster snapshot is created before the cluster
+	// is deleted. If true is specified, no cluster snapshot is created. If false
+	// is specified, a cluster snapshot is created before the DB cluster is deleted.
 	//
 	// If SkipFinalSnapshot is false, you must specify a FinalDBSnapshotIdentifier
 	// parameter.
@@ -6516,12 +9223,20 @@ type DeleteDBClusterInput struct {
 	SkipFinalSnapshot *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterInput) GoString() string {
 	return s.String()
 }
@@ -6560,16 +9275,24 @@ func (s *DeleteDBClusterInput) SetSkipFinalSnapshot(v bool) *DeleteDBClusterInpu
 type DeleteDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterOutput) GoString() string {
 	return s.String()
 }
@@ -6584,26 +9307,34 @@ func (s *DeleteDBClusterOutput) SetDBCluster(v *DBCluster) *DeleteDBClusterOutpu
 type DeleteDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group.
+	// The name of the cluster parameter group.
 	//
 	// Constraints:
 	//
-	//    * Must be the name of an existing DB cluster parameter group.
+	//    * Must be the name of an existing cluster parameter group.
 	//
-	//    * You can't delete a default DB cluster parameter group.
+	//    * You can't delete a default cluster parameter group.
 	//
-	//    * Cannot be associated with any DB clusters.
+	//    * Cannot be associated with any clusters.
 	//
 	// DBClusterParameterGroupName is a required field
 	DBClusterParameterGroupName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterParameterGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterParameterGroupInput) GoString() string {
 	return s.String()
 }
@@ -6631,12 +9362,20 @@ type DeleteDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterParameterGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterParameterGroupOutput) GoString() string {
 	return s.String()
 }
@@ -6645,21 +9384,29 @@ func (s DeleteDBClusterParameterGroupOutput) GoString() string {
 type DeleteDBClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the DB cluster snapshot to delete.
+	// The identifier of the cluster snapshot to delete.
 	//
-	// Constraints: Must be the name of an existing DB cluster snapshot in the available
+	// Constraints: Must be the name of an existing cluster snapshot in the available
 	// state.
 	//
 	// DBClusterSnapshotIdentifier is a required field
 	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -6686,16 +9433,24 @@ func (s *DeleteDBClusterSnapshotInput) SetDBClusterSnapshotIdentifier(v string) 
 type DeleteDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster snapshot.
+	// Detailed information about a cluster snapshot.
 	DBClusterSnapshot *DBClusterSnapshot `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBClusterSnapshotOutput) GoString() string {
 	return s.String()
 }
@@ -6710,23 +9465,31 @@ func (s *DeleteDBClusterSnapshotOutput) SetDBClusterSnapshot(v *DBClusterSnapsho
 type DeleteDBInstanceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The DB instance identifier for the DB instance to be deleted. This parameter
-	// isn't case sensitive.
+	// The instance identifier for the instance to be deleted. This parameter isn't
+	// case sensitive.
 	//
 	// Constraints:
 	//
-	//    * Must match the name of an existing DB instance.
+	//    * Must match the name of an existing instance.
 	//
 	// DBInstanceIdentifier is a required field
 	DBInstanceIdentifier *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBInstanceInput) GoString() string {
 	return s.String()
 }
@@ -6753,16 +9516,24 @@ func (s *DeleteDBInstanceInput) SetDBInstanceIdentifier(v string) *DeleteDBInsta
 type DeleteDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB instance.
+	// Detailed information about an instance.
 	DBInstance *DBInstance `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBInstanceOutput) GoString() string {
 	return s.String()
 }
@@ -6791,12 +9562,20 @@ type DeleteDBSubnetGroupInput struct {
 	DBSubnetGroupName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBSubnetGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBSubnetGroupInput) GoString() string {
 	return s.String()
 }
@@ -6824,21 +9603,329 @@ type DeleteDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBSubnetGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDBSubnetGroupOutput) GoString() string {
 	return s.String()
+}
+
+// Represents the input to DeleteEventSubscription.
+type DeleteEventSubscriptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon DocumentDB event notification subscription that you
+	// want to delete.
+	//
+	// SubscriptionName is a required field
+	SubscriptionName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteEventSubscriptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteEventSubscriptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteEventSubscriptionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
+	if s.SubscriptionName == nil {
+		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSubscriptionName sets the SubscriptionName field's value.
+func (s *DeleteEventSubscriptionInput) SetSubscriptionName(v string) *DeleteEventSubscriptionInput {
+	s.SubscriptionName = &v
+	return s
+}
+
+type DeleteEventSubscriptionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Detailed information about an event to which you have subscribed.
+	EventSubscription *EventSubscription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteEventSubscriptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteEventSubscriptionOutput) GoString() string {
+	return s.String()
+}
+
+// SetEventSubscription sets the EventSubscription field's value.
+func (s *DeleteEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *DeleteEventSubscriptionOutput {
+	s.EventSubscription = v
+	return s
+}
+
+// Represents the input to DeleteGlobalCluster.
+type DeleteGlobalClusterInput struct {
+	_ struct{} `type:"structure"`
+
+	// The cluster identifier of the global cluster being deleted.
+	//
+	// GlobalClusterIdentifier is a required field
+	GlobalClusterIdentifier *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteGlobalClusterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteGlobalClusterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteGlobalClusterInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteGlobalClusterInput"}
+	if s.GlobalClusterIdentifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if s.GlobalClusterIdentifier != nil && len(*s.GlobalClusterIdentifier) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GlobalClusterIdentifier", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetGlobalClusterIdentifier sets the GlobalClusterIdentifier field's value.
+func (s *DeleteGlobalClusterInput) SetGlobalClusterIdentifier(v string) *DeleteGlobalClusterInput {
+	s.GlobalClusterIdentifier = &v
+	return s
+}
+
+type DeleteGlobalClusterOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A data type representing an Amazon DocumentDB global cluster.
+	GlobalCluster *GlobalCluster `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteGlobalClusterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteGlobalClusterOutput) GoString() string {
+	return s.String()
+}
+
+// SetGlobalCluster sets the GlobalCluster field's value.
+func (s *DeleteGlobalClusterOutput) SetGlobalCluster(v *GlobalCluster) *DeleteGlobalClusterOutput {
+	s.GlobalCluster = v
+	return s
+}
+
+type DescribeCertificatesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The user-supplied certificate identifier. If this parameter is specified,
+	// information for only the specified certificate is returned. If this parameter
+	// is omitted, a list of up to MaxRecords certificates is returned. This parameter
+	// is not case sensitive.
+	//
+	// Constraints
+	//
+	//    * Must match an existing CertificateIdentifier.
+	CertificateIdentifier *string `type:"string"`
+
+	// This parameter is not currently supported.
+	Filters []*Filter `locationNameList:"Filter" type:"list"`
+
+	// An optional pagination token provided by a previous DescribeCertificates
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords.
+	Marker *string `type:"string"`
+
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints:
+	//
+	//    * Minimum: 20
+	//
+	//    * Maximum: 100
+	MaxRecords *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCertificatesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCertificatesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeCertificatesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeCertificatesInput"}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCertificateIdentifier sets the CertificateIdentifier field's value.
+func (s *DescribeCertificatesInput) SetCertificateIdentifier(v string) *DescribeCertificatesInput {
+	s.CertificateIdentifier = &v
+	return s
+}
+
+// SetFilters sets the Filters field's value.
+func (s *DescribeCertificatesInput) SetFilters(v []*Filter) *DescribeCertificatesInput {
+	s.Filters = v
+	return s
+}
+
+// SetMarker sets the Marker field's value.
+func (s *DescribeCertificatesInput) SetMarker(v string) *DescribeCertificatesInput {
+	s.Marker = &v
+	return s
+}
+
+// SetMaxRecords sets the MaxRecords field's value.
+func (s *DescribeCertificatesInput) SetMaxRecords(v int64) *DescribeCertificatesInput {
+	s.MaxRecords = &v
+	return s
+}
+
+type DescribeCertificatesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of certificates for this Amazon Web Services account.
+	Certificates []*Certificate `locationNameList:"Certificate" type:"list"`
+
+	// An optional pagination token provided if the number of records retrieved
+	// is greater than MaxRecords. If this parameter is specified, the marker specifies
+	// the next record in the list. Including the value of Marker in the next call
+	// to DescribeCertificates results in the next page of certificates.
+	Marker *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCertificatesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeCertificatesOutput) GoString() string {
+	return s.String()
+}
+
+// SetCertificates sets the Certificates field's value.
+func (s *DescribeCertificatesOutput) SetCertificates(v []*Certificate) *DescribeCertificatesOutput {
+	s.Certificates = v
+	return s
+}
+
+// SetMarker sets the Marker field's value.
+func (s *DescribeCertificatesOutput) SetMarker(v string) *DescribeCertificatesOutput {
+	s.Marker = &v
+	return s
 }
 
 // Represents the input to DescribeDBClusterParameterGroups.
 type DescribeDBClusterParameterGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a specific DB cluster parameter group to return details for.
+	// The name of a specific cluster parameter group to return details for.
 	//
 	// Constraints:
 	//
@@ -6863,12 +9950,20 @@ type DescribeDBClusterParameterGroupsInput struct {
 	MaxRecords *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterParameterGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterParameterGroupsInput) GoString() string {
 	return s.String()
 }
@@ -6921,7 +10016,7 @@ func (s *DescribeDBClusterParameterGroupsInput) SetMaxRecords(v int64) *Describe
 type DescribeDBClusterParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of DB cluster parameter groups.
+	// A list of cluster parameter groups.
 	DBClusterParameterGroups []*DBClusterParameterGroup `locationNameList:"DBClusterParameterGroup" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -6930,12 +10025,20 @@ type DescribeDBClusterParameterGroupsOutput struct {
 	Marker *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterParameterGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterParameterGroupsOutput) GoString() string {
 	return s.String()
 }
@@ -6956,7 +10059,7 @@ func (s *DescribeDBClusterParameterGroupsOutput) SetMarker(v string) *DescribeDB
 type DescribeDBClusterParametersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a specific DB cluster parameter group to return parameter details
+	// The name of a specific cluster parameter group to return parameter details
 	// for.
 	//
 	// Constraints:
@@ -6988,12 +10091,20 @@ type DescribeDBClusterParametersInput struct {
 	Source *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterParametersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterParametersInput) GoString() string {
 	return s.String()
 }
@@ -7060,16 +10171,24 @@ type DescribeDBClusterParametersOutput struct {
 	// the value specified by MaxRecords.
 	Marker *string `type:"string"`
 
-	// Provides a list of parameters for the DB cluster parameter group.
+	// Provides a list of parameters for the cluster parameter group.
 	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterParametersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterParametersOutput) GoString() string {
 	return s.String()
 }
@@ -7090,18 +10209,26 @@ func (s *DescribeDBClusterParametersOutput) SetParameters(v []*Parameter) *Descr
 type DescribeDBClusterSnapshotAttributesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the DB cluster snapshot to describe the attributes for.
+	// The identifier for the cluster snapshot to describe the attributes for.
 	//
 	// DBClusterSnapshotIdentifier is a required field
 	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterSnapshotAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterSnapshotAttributesInput) GoString() string {
 	return s.String()
 }
@@ -7128,17 +10255,25 @@ func (s *DescribeDBClusterSnapshotAttributesInput) SetDBClusterSnapshotIdentifie
 type DescribeDBClusterSnapshotAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about the attributes that are associated with a DB cluster
+	// Detailed information about the attributes that are associated with a cluster
 	// snapshot.
 	DBClusterSnapshotAttributesResult *DBClusterSnapshotAttributesResult `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterSnapshotAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterSnapshotAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -7153,16 +10288,16 @@ func (s *DescribeDBClusterSnapshotAttributesOutput) SetDBClusterSnapshotAttribut
 type DescribeDBClusterSnapshotsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for.
-	// This parameter can't be used with the DBClusterSnapshotIdentifier parameter.
-	// This parameter is not case sensitive.
+	// The ID of the cluster to retrieve the list of cluster snapshots for. This
+	// parameter can't be used with the DBClusterSnapshotIdentifier parameter. This
+	// parameter is not case sensitive.
 	//
 	// Constraints:
 	//
 	//    * If provided, must match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string `type:"string"`
 
-	// A specific DB cluster snapshot identifier to describe. This parameter can't
+	// A specific cluster snapshot identifier to describe. This parameter can't
 	// be used with the DBClusterIdentifier parameter. This value is stored as a
 	// lowercase string.
 	//
@@ -7177,14 +10312,14 @@ type DescribeDBClusterSnapshotsInput struct {
 	// This parameter is not currently supported.
 	Filters []*Filter `locationNameList:"Filter" type:"list"`
 
-	// Set to true to include manual DB cluster snapshots that are public and can
-	// be copied or restored by any AWS account, and otherwise false. The default
-	// is false.
+	// Set to true to include manual cluster snapshots that are public and can be
+	// copied or restored by any Amazon Web Services account, and otherwise false.
+	// The default is false.
 	IncludePublic *bool `type:"boolean"`
 
-	// Set to true to include shared manual DB cluster snapshots from other AWS
-	// accounts that this AWS account has been given permission to copy or restore,
-	// and otherwise false. The default is false.
+	// Set to true to include shared manual cluster snapshots from other Amazon
+	// Web Services accounts that this Amazon Web Services account has been given
+	// permission to copy or restore, and otherwise false. The default is false.
 	IncludeShared *bool `type:"boolean"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -7201,24 +10336,24 @@ type DescribeDBClusterSnapshotsInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int64 `type:"integer"`
 
-	// The type of DB cluster snapshots to be returned. You can specify one of the
+	// The type of cluster snapshots to be returned. You can specify one of the
 	// following values:
 	//
-	//    * automated - Return all DB cluster snapshots that Amazon DocumentDB has
-	//    automatically created for your AWS account.
+	//    * automated - Return all cluster snapshots that Amazon DocumentDB has
+	//    automatically created for your Amazon Web Services account.
 	//
-	//    * manual - Return all DB cluster snapshots that you have manually created
-	//    for your AWS account.
+	//    * manual - Return all cluster snapshots that you have manually created
+	//    for your Amazon Web Services account.
 	//
-	//    * shared - Return all manual DB cluster snapshots that have been shared
-	//    to your AWS account.
+	//    * shared - Return all manual cluster snapshots that have been shared to
+	//    your Amazon Web Services account.
 	//
-	//    * public - Return all DB cluster snapshots that have been marked as public.
+	//    * public - Return all cluster snapshots that have been marked as public.
 	//
 	// If you don't specify a SnapshotType value, then both automated and manual
-	// DB cluster snapshots are returned. You can include shared DB cluster snapshots
+	// cluster snapshots are returned. You can include shared cluster snapshots
 	// with these results by setting the IncludeShared parameter to true. You can
-	// include public DB cluster snapshots with these results by setting the IncludePublic
+	// include public cluster snapshots with these results by setting theIncludePublic
 	// parameter to true.
 	//
 	// The IncludeShared and IncludePublic parameters don't apply for SnapshotType
@@ -7228,12 +10363,20 @@ type DescribeDBClusterSnapshotsInput struct {
 	SnapshotType *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterSnapshotsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterSnapshotsInput) GoString() string {
 	return s.String()
 }
@@ -7310,7 +10453,7 @@ func (s *DescribeDBClusterSnapshotsInput) SetSnapshotType(v string) *DescribeDBC
 type DescribeDBClusterSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Provides a list of DB cluster snapshots.
+	// Provides a list of cluster snapshots.
 	DBClusterSnapshots []*DBClusterSnapshot `locationNameList:"DBClusterSnapshot" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -7319,12 +10462,20 @@ type DescribeDBClusterSnapshotsOutput struct {
 	Marker *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterSnapshotsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClusterSnapshotsOutput) GoString() string {
 	return s.String()
 }
@@ -7345,22 +10496,21 @@ func (s *DescribeDBClusterSnapshotsOutput) SetMarker(v string) *DescribeDBCluste
 type DescribeDBClustersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The user-provided DB cluster identifier. If this parameter is specified,
-	// information from only the specific DB cluster is returned. This parameter
-	// isn't case sensitive.
+	// The user-provided cluster identifier. If this parameter is specified, information
+	// from only the specific cluster is returned. This parameter isn't case sensitive.
 	//
 	// Constraints:
 	//
 	//    * If provided, must match an existing DBClusterIdentifier.
 	DBClusterIdentifier *string `type:"string"`
 
-	// A filter that specifies one or more DB clusters to describe.
+	// A filter that specifies one or more clusters to describe.
 	//
 	// Supported filters:
 	//
-	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	//    Resource Names (ARNs). The results list only includes information about
-	//    the DB clusters identified by these ARNs.
+	//    * db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource
+	//    Names (ARNs). The results list only includes information about the clusters
+	//    identified by these ARNs.
 	Filters []*Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -7378,12 +10528,20 @@ type DescribeDBClustersInput struct {
 	MaxRecords *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClustersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClustersInput) GoString() string {
 	return s.String()
 }
@@ -7436,7 +10594,7 @@ func (s *DescribeDBClustersInput) SetMaxRecords(v int64) *DescribeDBClustersInpu
 type DescribeDBClustersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of DB clusters.
+	// A list of clusters.
 	DBClusters []*DBCluster `locationNameList:"DBCluster" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -7445,12 +10603,20 @@ type DescribeDBClustersOutput struct {
 	Marker *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClustersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBClustersOutput) GoString() string {
 	return s.String()
 }
@@ -7471,7 +10637,7 @@ func (s *DescribeDBClustersOutput) SetMarker(v string) *DescribeDBClustersOutput
 type DescribeDBEngineVersionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a specific DB parameter group family to return details for.
+	// The name of a specific parameter group family to return details for.
 	//
 	// Constraints:
 	//
@@ -7487,7 +10653,7 @@ type DescribeDBEngineVersionsInput struct {
 
 	// The database engine version to return.
 	//
-	// Example: 5.1.49
+	// Example: 3.6.0
 	EngineVersion *string `type:"string"`
 
 	// This parameter is not currently supported.
@@ -7518,12 +10684,20 @@ type DescribeDBEngineVersionsInput struct {
 	MaxRecords *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBEngineVersionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBEngineVersionsInput) GoString() string {
 	return s.String()
 }
@@ -7606,7 +10780,7 @@ func (s *DescribeDBEngineVersionsInput) SetMaxRecords(v int64) *DescribeDBEngine
 type DescribeDBEngineVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about one or more DB engine versions.
+	// Detailed information about one or more engine versions.
 	DBEngineVersions []*DBEngineVersion `locationNameList:"DBEngineVersion" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -7615,12 +10789,20 @@ type DescribeDBEngineVersionsOutput struct {
 	Marker *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBEngineVersionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBEngineVersionsOutput) GoString() string {
 	return s.String()
 }
@@ -7642,26 +10824,25 @@ type DescribeDBInstancesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The user-provided instance identifier. If this parameter is specified, information
-	// from only the specific DB instance is returned. This parameter isn't case
-	// sensitive.
+	// from only the specific instance is returned. This parameter isn't case sensitive.
 	//
 	// Constraints:
 	//
 	//    * If provided, must match the identifier of an existing DBInstance.
 	DBInstanceIdentifier *string `type:"string"`
 
-	// A filter that specifies one or more DB instances to describe.
+	// A filter that specifies one or more instances to describe.
 	//
 	// Supported filters:
 	//
-	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	//    Resource Names (ARNs). The results list includes only the information
-	//    about the DB instances that are associated with the DB clusters that are
-	//    identified by these ARNs.
+	//    * db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource
+	//    Names (ARNs). The results list includes only the information about the
+	//    instances that are associated with the clusters that are identified by
+	//    these ARNs.
 	//
-	//    * db-instance-id - Accepts DB instance identifiers and DB instance ARNs.
-	//    The results list includes only the information about the DB instances
-	//    that are identified by these ARNs.
+	//    * db-instance-id - Accepts instance identifiers and instance ARNs. The
+	//    results list includes only the information about the instances that are
+	//    identified by these ARNs.
 	Filters []*Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -7679,12 +10860,20 @@ type DescribeDBInstancesInput struct {
 	MaxRecords *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBInstancesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBInstancesInput) GoString() string {
 	return s.String()
 }
@@ -7737,7 +10926,7 @@ func (s *DescribeDBInstancesInput) SetMaxRecords(v int64) *DescribeDBInstancesIn
 type DescribeDBInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about one or more DB instances.
+	// Detailed information about one or more instances.
 	DBInstances []*DBInstance `locationNameList:"DBInstance" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -7746,12 +10935,20 @@ type DescribeDBInstancesOutput struct {
 	Marker *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBInstancesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBInstancesOutput) GoString() string {
 	return s.String()
 }
@@ -7772,7 +10969,7 @@ func (s *DescribeDBInstancesOutput) SetMarker(v string) *DescribeDBInstancesOutp
 type DescribeDBSubnetGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB subnet group to return details for.
+	// The name of the subnet group to return details for.
 	DBSubnetGroupName *string `type:"string"`
 
 	// This parameter is not currently supported.
@@ -7793,12 +10990,20 @@ type DescribeDBSubnetGroupsInput struct {
 	MaxRecords *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBSubnetGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBSubnetGroupsInput) GoString() string {
 	return s.String()
 }
@@ -7851,7 +11056,7 @@ func (s *DescribeDBSubnetGroupsInput) SetMaxRecords(v int64) *DescribeDBSubnetGr
 type DescribeDBSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about one or more DB subnet groups.
+	// Detailed information about one or more subnet groups.
 	DBSubnetGroups []*DBSubnetGroup `locationNameList:"DBSubnetGroup" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -7860,12 +11065,20 @@ type DescribeDBSubnetGroupsOutput struct {
 	Marker *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBSubnetGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeDBSubnetGroupsOutput) GoString() string {
 	return s.String()
 }
@@ -7886,7 +11099,7 @@ func (s *DescribeDBSubnetGroupsOutput) SetMarker(v string) *DescribeDBSubnetGrou
 type DescribeEngineDefaultClusterParametersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group family to return the engine parameter
+	// The name of the cluster parameter group family to return the engine parameter
 	// information for.
 	//
 	// DBParameterGroupFamily is a required field
@@ -7910,12 +11123,20 @@ type DescribeEngineDefaultClusterParametersInput struct {
 	MaxRecords *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEngineDefaultClusterParametersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEngineDefaultClusterParametersInput) GoString() string {
 	return s.String()
 }
@@ -7975,12 +11196,20 @@ type DescribeEngineDefaultClusterParametersOutput struct {
 	EngineDefaults *EngineDefaults `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEngineDefaultClusterParametersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEngineDefaultClusterParametersOutput) GoString() string {
 	return s.String()
 }
@@ -8000,16 +11229,24 @@ type DescribeEventCategoriesInput struct {
 
 	// The type of source that is generating the events.
 	//
-	// Valid values: db-instance, db-parameter-group, db-security-group, db-snapshot
+	// Valid values: db-instance, db-parameter-group, db-security-group
 	SourceType *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventCategoriesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventCategoriesInput) GoString() string {
 	return s.String()
 }
@@ -8054,12 +11291,20 @@ type DescribeEventCategoriesOutput struct {
 	EventCategoriesMapList []*EventCategoriesMap `locationNameList:"EventCategoriesMap" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventCategoriesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventCategoriesOutput) GoString() string {
 	return s.String()
 }
@@ -8067,6 +11312,137 @@ func (s DescribeEventCategoriesOutput) GoString() string {
 // SetEventCategoriesMapList sets the EventCategoriesMapList field's value.
 func (s *DescribeEventCategoriesOutput) SetEventCategoriesMapList(v []*EventCategoriesMap) *DescribeEventCategoriesOutput {
 	s.EventCategoriesMapList = v
+	return s
+}
+
+// Represents the input to DescribeEventSubscriptions.
+type DescribeEventSubscriptionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// This parameter is not currently supported.
+	Filters []*Filter `locationNameList:"Filter" type:"list"`
+
+	// An optional pagination token provided by a previous request. If this parameter
+	// is specified, the response includes only records beyond the marker, up to
+	// the value specified by MaxRecords.
+	Marker *string `type:"string"`
+
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	MaxRecords *int64 `type:"integer"`
+
+	// The name of the Amazon DocumentDB event notification subscription that you
+	// want to describe.
+	SubscriptionName *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeEventSubscriptionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeEventSubscriptionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeEventSubscriptionsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeEventSubscriptionsInput"}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilters sets the Filters field's value.
+func (s *DescribeEventSubscriptionsInput) SetFilters(v []*Filter) *DescribeEventSubscriptionsInput {
+	s.Filters = v
+	return s
+}
+
+// SetMarker sets the Marker field's value.
+func (s *DescribeEventSubscriptionsInput) SetMarker(v string) *DescribeEventSubscriptionsInput {
+	s.Marker = &v
+	return s
+}
+
+// SetMaxRecords sets the MaxRecords field's value.
+func (s *DescribeEventSubscriptionsInput) SetMaxRecords(v int64) *DescribeEventSubscriptionsInput {
+	s.MaxRecords = &v
+	return s
+}
+
+// SetSubscriptionName sets the SubscriptionName field's value.
+func (s *DescribeEventSubscriptionsInput) SetSubscriptionName(v string) *DescribeEventSubscriptionsInput {
+	s.SubscriptionName = &v
+	return s
+}
+
+// Represents the output of DescribeEventSubscriptions.
+type DescribeEventSubscriptionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of event subscriptions.
+	EventSubscriptionsList []*EventSubscription `locationNameList:"EventSubscription" type:"list"`
+
+	// An optional pagination token provided by a previous request. If this parameter
+	// is specified, the response includes only records beyond the marker, up to
+	// the value specified by MaxRecords.
+	Marker *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeEventSubscriptionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeEventSubscriptionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetEventSubscriptionsList sets the EventSubscriptionsList field's value.
+func (s *DescribeEventSubscriptionsOutput) SetEventSubscriptionsList(v []*EventSubscription) *DescribeEventSubscriptionsOutput {
+	s.EventSubscriptionsList = v
+	return s
+}
+
+// SetMarker sets the Marker field's value.
+func (s *DescribeEventSubscriptionsOutput) SetMarker(v string) *DescribeEventSubscriptionsOutput {
+	s.Marker = &v
 	return s
 }
 
@@ -8137,12 +11513,20 @@ type DescribeEventsInput struct {
 	StartTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventsInput) GoString() string {
 	return s.String()
 }
@@ -8234,12 +11618,20 @@ type DescribeEventsOutput struct {
 	Marker *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeEventsOutput) GoString() string {
 	return s.String()
 }
@@ -8256,15 +11648,143 @@ func (s *DescribeEventsOutput) SetMarker(v string) *DescribeEventsOutput {
 	return s
 }
 
+type DescribeGlobalClustersInput struct {
+	_ struct{} `type:"structure"`
+
+	// A filter that specifies one or more global DB clusters to describe.
+	//
+	// Supported filters: db-cluster-id accepts cluster identifiers and cluster
+	// Amazon Resource Names (ARNs). The results list will only include information
+	// about the clusters identified by these ARNs.
+	Filters []*Filter `locationNameList:"Filter" type:"list"`
+
+	// The user-supplied cluster identifier. If this parameter is specified, information
+	// from only the specific cluster is returned. This parameter isn't case-sensitive.
+	GlobalClusterIdentifier *string `min:"1" type:"string"`
+
+	// An optional pagination token provided by a previous DescribeGlobalClusters
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords.
+	Marker *string `type:"string"`
+
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that you can retrieve the remaining results.
+	MaxRecords *int64 `type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeGlobalClustersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeGlobalClustersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeGlobalClustersInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeGlobalClustersInput"}
+	if s.GlobalClusterIdentifier != nil && len(*s.GlobalClusterIdentifier) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GlobalClusterIdentifier", 1))
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFilters sets the Filters field's value.
+func (s *DescribeGlobalClustersInput) SetFilters(v []*Filter) *DescribeGlobalClustersInput {
+	s.Filters = v
+	return s
+}
+
+// SetGlobalClusterIdentifier sets the GlobalClusterIdentifier field's value.
+func (s *DescribeGlobalClustersInput) SetGlobalClusterIdentifier(v string) *DescribeGlobalClustersInput {
+	s.GlobalClusterIdentifier = &v
+	return s
+}
+
+// SetMarker sets the Marker field's value.
+func (s *DescribeGlobalClustersInput) SetMarker(v string) *DescribeGlobalClustersInput {
+	s.Marker = &v
+	return s
+}
+
+// SetMaxRecords sets the MaxRecords field's value.
+func (s *DescribeGlobalClustersInput) SetMaxRecords(v int64) *DescribeGlobalClustersInput {
+	s.MaxRecords = &v
+	return s
+}
+
+type DescribeGlobalClustersOutput struct {
+	_ struct{} `type:"structure"`
+
+	GlobalClusters []*GlobalCluster `locationNameList:"GlobalClusterMember" type:"list"`
+
+	Marker *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeGlobalClustersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeGlobalClustersOutput) GoString() string {
+	return s.String()
+}
+
+// SetGlobalClusters sets the GlobalClusters field's value.
+func (s *DescribeGlobalClustersOutput) SetGlobalClusters(v []*GlobalCluster) *DescribeGlobalClustersOutput {
+	s.GlobalClusters = v
+	return s
+}
+
+// SetMarker sets the Marker field's value.
+func (s *DescribeGlobalClustersOutput) SetMarker(v string) *DescribeGlobalClustersOutput {
+	s.Marker = &v
+	return s
+}
+
 // Represents the input to DescribeOrderableDBInstanceOptions.
 type DescribeOrderableDBInstanceOptionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The DB instance class filter value. Specify this parameter to show only the
-	// available offerings that match the specified DB instance class.
+	// The instance class filter value. Specify this parameter to show only the
+	// available offerings that match the specified instance class.
 	DBInstanceClass *string `type:"string"`
 
-	// The name of the engine to retrieve DB instance options for.
+	// The name of the engine to retrieve instance options for.
 	//
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
@@ -8299,12 +11819,20 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	Vpc *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeOrderableDBInstanceOptionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeOrderableDBInstanceOptionsInput) GoString() string {
 	return s.String()
 }
@@ -8389,16 +11917,24 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 	// the value specified by MaxRecords.
 	Marker *string `type:"string"`
 
-	// The options that are available for a particular orderable DB instance.
+	// The options that are available for a particular orderable instance.
 	OrderableDBInstanceOptions []*OrderableDBInstanceOption `locationNameList:"OrderableDBInstanceOption" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeOrderableDBInstanceOptionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeOrderableDBInstanceOptionsOutput) GoString() string {
 	return s.String()
 }
@@ -8424,13 +11960,13 @@ type DescribePendingMaintenanceActionsInput struct {
 	//
 	// Supported filters:
 	//
-	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	//    Resource Names (ARNs). The results list includes only pending maintenance
-	//    actions for the DB clusters identified by these ARNs.
+	//    * db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource
+	//    Names (ARNs). The results list includes only pending maintenance actions
+	//    for the clusters identified by these ARNs.
 	//
-	//    * db-instance-id - Accepts DB instance identifiers and DB instance ARNs.
-	//    The results list includes only pending maintenance actions for the DB
-	//    instances identified by these ARNs.
+	//    * db-instance-id - Accepts instance identifiers and instance ARNs. The
+	//    results list includes only pending maintenance actions for the DB instances
+	//    identified by these ARNs.
 	Filters []*Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -8451,12 +11987,20 @@ type DescribePendingMaintenanceActionsInput struct {
 	ResourceIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribePendingMaintenanceActionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribePendingMaintenanceActionsInput) GoString() string {
 	return s.String()
 }
@@ -8518,12 +12062,20 @@ type DescribePendingMaintenanceActionsOutput struct {
 	PendingMaintenanceActions []*ResourcePendingMaintenanceActions `locationNameList:"ResourcePendingMaintenanceActions" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribePendingMaintenanceActionsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribePendingMaintenanceActionsOutput) GoString() string {
 	return s.String()
 }
@@ -8540,12 +12092,12 @@ func (s *DescribePendingMaintenanceActionsOutput) SetPendingMaintenanceActions(v
 	return s
 }
 
-// Network information for accessing a DB cluster or DB instance. Client programs
+// Network information for accessing a cluster or instance. Client programs
 // must specify a valid endpoint to access these Amazon DocumentDB resources.
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the DNS address of the DB instance.
+	// Specifies the DNS address of the instance.
 	Address *string `type:"string"`
 
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
@@ -8555,12 +12107,20 @@ type Endpoint struct {
 	Port *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Endpoint) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Endpoint) GoString() string {
 	return s.String()
 }
@@ -8588,7 +12148,7 @@ func (s *Endpoint) SetPort(v int64) *Endpoint {
 type EngineDefaults struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group family to return the engine parameter
+	// The name of the cluster parameter group family to return the engine parameter
 	// information for.
 	DBParameterGroupFamily *string `type:"string"`
 
@@ -8597,16 +12157,24 @@ type EngineDefaults struct {
 	// the value specified by MaxRecords.
 	Marker *string `type:"string"`
 
-	// The parameters of a particular DB cluster parameter group family.
+	// The parameters of a particular cluster parameter group family.
 	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EngineDefaults) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EngineDefaults) GoString() string {
 	return s.String()
 }
@@ -8652,12 +12220,20 @@ type Event struct {
 	SourceType *string `type:"string" enum:"SourceType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Event) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Event) GoString() string {
 	return s.String()
 }
@@ -8709,12 +12285,20 @@ type EventCategoriesMap struct {
 	SourceType *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventCategoriesMap) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EventCategoriesMap) GoString() string {
 	return s.String()
 }
@@ -8731,11 +12315,136 @@ func (s *EventCategoriesMap) SetSourceType(v string) *EventCategoriesMap {
 	return s
 }
 
+// Detailed information about an event to which you have subscribed.
+type EventSubscription struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon DocumentDB event notification subscription ID.
+	CustSubscriptionId *string `type:"string"`
+
+	// The Amazon Web Services customer account that is associated with the Amazon
+	// DocumentDB event notification subscription.
+	CustomerAwsId *string `type:"string"`
+
+	// A Boolean value indicating whether the subscription is enabled. A value of
+	// true indicates that the subscription is enabled.
+	Enabled *bool `type:"boolean"`
+
+	// A list of event categories for the Amazon DocumentDB event notification subscription.
+	EventCategoriesList []*string `locationNameList:"EventCategory" type:"list"`
+
+	// The Amazon Resource Name (ARN) for the event subscription.
+	EventSubscriptionArn *string `type:"string"`
+
+	// The topic ARN of the Amazon DocumentDB event notification subscription.
+	SnsTopicArn *string `type:"string"`
+
+	// A list of source IDs for the Amazon DocumentDB event notification subscription.
+	SourceIdsList []*string `locationNameList:"SourceId" type:"list"`
+
+	// The source type for the Amazon DocumentDB event notification subscription.
+	SourceType *string `type:"string"`
+
+	// The status of the Amazon DocumentDB event notification subscription.
+	//
+	// Constraints:
+	//
+	// Can be one of the following: creating, modifying, deleting, active, no-permission,
+	// topic-not-exist
+	//
+	// The no-permission status indicates that Amazon DocumentDB no longer has permission
+	// to post to the SNS topic. The topic-not-exist status indicates that the topic
+	// was deleted after the subscription was created.
+	Status *string `type:"string"`
+
+	// The time at which the Amazon DocumentDB event notification subscription was
+	// created.
+	SubscriptionCreationTime *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EventSubscription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s EventSubscription) GoString() string {
+	return s.String()
+}
+
+// SetCustSubscriptionId sets the CustSubscriptionId field's value.
+func (s *EventSubscription) SetCustSubscriptionId(v string) *EventSubscription {
+	s.CustSubscriptionId = &v
+	return s
+}
+
+// SetCustomerAwsId sets the CustomerAwsId field's value.
+func (s *EventSubscription) SetCustomerAwsId(v string) *EventSubscription {
+	s.CustomerAwsId = &v
+	return s
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *EventSubscription) SetEnabled(v bool) *EventSubscription {
+	s.Enabled = &v
+	return s
+}
+
+// SetEventCategoriesList sets the EventCategoriesList field's value.
+func (s *EventSubscription) SetEventCategoriesList(v []*string) *EventSubscription {
+	s.EventCategoriesList = v
+	return s
+}
+
+// SetEventSubscriptionArn sets the EventSubscriptionArn field's value.
+func (s *EventSubscription) SetEventSubscriptionArn(v string) *EventSubscription {
+	s.EventSubscriptionArn = &v
+	return s
+}
+
+// SetSnsTopicArn sets the SnsTopicArn field's value.
+func (s *EventSubscription) SetSnsTopicArn(v string) *EventSubscription {
+	s.SnsTopicArn = &v
+	return s
+}
+
+// SetSourceIdsList sets the SourceIdsList field's value.
+func (s *EventSubscription) SetSourceIdsList(v []*string) *EventSubscription {
+	s.SourceIdsList = v
+	return s
+}
+
+// SetSourceType sets the SourceType field's value.
+func (s *EventSubscription) SetSourceType(v string) *EventSubscription {
+	s.SourceType = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *EventSubscription) SetStatus(v string) *EventSubscription {
+	s.Status = &v
+	return s
+}
+
+// SetSubscriptionCreationTime sets the SubscriptionCreationTime field's value.
+func (s *EventSubscription) SetSubscriptionCreationTime(v string) *EventSubscription {
+	s.SubscriptionCreationTime = &v
+	return s
+}
+
 // Represents the input to FailoverDBCluster.
 type FailoverDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// A DB cluster identifier to force a failover for. This parameter is not case
+	// A cluster identifier to force a failover for. This parameter is not case
 	// sensitive.
 	//
 	// Constraints:
@@ -8746,16 +12455,24 @@ type FailoverDBClusterInput struct {
 	// The name of the instance to promote to the primary instance.
 	//
 	// You must specify the instance identifier for an Amazon DocumentDB replica
-	// in the DB cluster. For example, mydbcluster-replica1.
+	// in the cluster. For example, mydbcluster-replica1.
 	TargetDBInstanceIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailoverDBClusterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailoverDBClusterInput) GoString() string {
 	return s.String()
 }
@@ -8775,16 +12492,24 @@ func (s *FailoverDBClusterInput) SetTargetDBInstanceIdentifier(v string) *Failov
 type FailoverDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailoverDBClusterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailoverDBClusterOutput) GoString() string {
 	return s.String()
 }
@@ -8814,12 +12539,20 @@ type Filter struct {
 	Values []*string `locationNameList:"Value" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Filter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Filter) GoString() string {
 	return s.String()
 }
@@ -8852,6 +12585,177 @@ func (s *Filter) SetValues(v []*string) *Filter {
 	return s
 }
 
+// A data type representing an Amazon DocumentDB global cluster.
+type GlobalCluster struct {
+	_ struct{} `type:"structure"`
+
+	// The default database name within the new global cluster.
+	DatabaseName *string `type:"string"`
+
+	// The deletion protection setting for the new global cluster.
+	DeletionProtection *bool `type:"boolean"`
+
+	// The Amazon DocumentDB database engine used by the global cluster.
+	Engine *string `type:"string"`
+
+	// Indicates the database engine version.
+	EngineVersion *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) for the global cluster.
+	GlobalClusterArn *string `type:"string"`
+
+	// Contains a user-supplied global cluster identifier. This identifier is the
+	// unique key that identifies a global cluster.
+	GlobalClusterIdentifier *string `min:"1" type:"string"`
+
+	// The list of cluster IDs for secondary clusters within the global cluster.
+	// Currently limited to one item.
+	GlobalClusterMembers []*GlobalClusterMember `locationNameList:"GlobalClusterMember" type:"list"`
+
+	// The Amazon Web Services Region-unique, immutable identifier for the global
+	// database cluster. This identifier is found in CloudTrail log entries whenever
+	// the KMS customer master key (CMK) for the cluster is accessed.
+	GlobalClusterResourceId *string `type:"string"`
+
+	// Specifies the current state of this global cluster.
+	Status *string `type:"string"`
+
+	// The storage encryption setting for the global cluster.
+	StorageEncrypted *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlobalCluster) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlobalCluster) GoString() string {
+	return s.String()
+}
+
+// SetDatabaseName sets the DatabaseName field's value.
+func (s *GlobalCluster) SetDatabaseName(v string) *GlobalCluster {
+	s.DatabaseName = &v
+	return s
+}
+
+// SetDeletionProtection sets the DeletionProtection field's value.
+func (s *GlobalCluster) SetDeletionProtection(v bool) *GlobalCluster {
+	s.DeletionProtection = &v
+	return s
+}
+
+// SetEngine sets the Engine field's value.
+func (s *GlobalCluster) SetEngine(v string) *GlobalCluster {
+	s.Engine = &v
+	return s
+}
+
+// SetEngineVersion sets the EngineVersion field's value.
+func (s *GlobalCluster) SetEngineVersion(v string) *GlobalCluster {
+	s.EngineVersion = &v
+	return s
+}
+
+// SetGlobalClusterArn sets the GlobalClusterArn field's value.
+func (s *GlobalCluster) SetGlobalClusterArn(v string) *GlobalCluster {
+	s.GlobalClusterArn = &v
+	return s
+}
+
+// SetGlobalClusterIdentifier sets the GlobalClusterIdentifier field's value.
+func (s *GlobalCluster) SetGlobalClusterIdentifier(v string) *GlobalCluster {
+	s.GlobalClusterIdentifier = &v
+	return s
+}
+
+// SetGlobalClusterMembers sets the GlobalClusterMembers field's value.
+func (s *GlobalCluster) SetGlobalClusterMembers(v []*GlobalClusterMember) *GlobalCluster {
+	s.GlobalClusterMembers = v
+	return s
+}
+
+// SetGlobalClusterResourceId sets the GlobalClusterResourceId field's value.
+func (s *GlobalCluster) SetGlobalClusterResourceId(v string) *GlobalCluster {
+	s.GlobalClusterResourceId = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *GlobalCluster) SetStatus(v string) *GlobalCluster {
+	s.Status = &v
+	return s
+}
+
+// SetStorageEncrypted sets the StorageEncrypted field's value.
+func (s *GlobalCluster) SetStorageEncrypted(v bool) *GlobalCluster {
+	s.StorageEncrypted = &v
+	return s
+}
+
+// A data structure with information about any primary and secondary clusters
+// associated with an Amazon DocumentDB global clusters.
+type GlobalClusterMember struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.
+	DBClusterArn *string `type:"string"`
+
+	// Specifies whether the Amazon DocumentDB cluster is the primary cluster (that
+	// is, has read-write capability) for the Amazon DocumentDB global cluster with
+	// which it is associated.
+	IsWriter *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
+	// with the Aurora global cluster.
+	Readers []*string `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlobalClusterMember) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s GlobalClusterMember) GoString() string {
+	return s.String()
+}
+
+// SetDBClusterArn sets the DBClusterArn field's value.
+func (s *GlobalClusterMember) SetDBClusterArn(v string) *GlobalClusterMember {
+	s.DBClusterArn = &v
+	return s
+}
+
+// SetIsWriter sets the IsWriter field's value.
+func (s *GlobalClusterMember) SetIsWriter(v bool) *GlobalClusterMember {
+	s.IsWriter = &v
+	return s
+}
+
+// SetReaders sets the Readers field's value.
+func (s *GlobalClusterMember) SetReaders(v []*string) *GlobalClusterMember {
+	s.Readers = v
+	return s
+}
+
 // Represents the input to ListTagsForResource.
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
@@ -8866,12 +12770,20 @@ type ListTagsForResourceInput struct {
 	ResourceName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) GoString() string {
 	return s.String()
 }
@@ -8919,12 +12831,20 @@ type ListTagsForResourceOutput struct {
 	TagList []*Tag `locationNameList:"Tag" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
 }
@@ -8939,10 +12859,17 @@ func (s *ListTagsForResourceOutput) SetTagList(v []*Tag) *ListTagsForResourceOut
 type ModifyDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
+	// A value that indicates whether major version upgrades are allowed.
+	//
+	// Constraints: You must allow major version upgrades when specifying a value
+	// for the EngineVersion parameter that is a different major version than the
+	// DB cluster's current version.
+	AllowMajorVersionUpgrade *bool `type:"boolean"`
+
 	// A value that specifies whether the changes in this request and any pending
 	// changes are asynchronously applied as soon as possible, regardless of the
-	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter
-	// is set to false, changes to the DB cluster are applied during the next maintenance
+	// PreferredMaintenanceWindow setting for the cluster. If this parameter is
+	// set to false, changes to the cluster are applied during the next maintenance
 	// window.
 	//
 	// The ApplyImmediately parameter affects only the NewDBClusterIdentifier and
@@ -8965,12 +12892,12 @@ type ModifyDBClusterInput struct {
 	BackupRetentionPeriod *int64 `type:"integer"`
 
 	// The configuration setting for the log types to be enabled for export to Amazon
-	// CloudWatch Logs for a specific DB instance or DB cluster. The EnableLogTypes
-	// and DisableLogTypes arrays determine which logs are exported (or not exported)
+	// CloudWatch Logs for a specific instance or cluster. The EnableLogTypes and
+	// DisableLogTypes arrays determine which logs are exported (or not exported)
 	// to CloudWatch Logs.
 	CloudwatchLogsExportConfiguration *CloudwatchLogsExportConfiguration `type:"structure"`
 
-	// The DB cluster identifier for the cluster that is being modified. This parameter
+	// The cluster identifier for the cluster that is being modified. This parameter
 	// is not case sensitive.
 	//
 	// Constraints:
@@ -8980,22 +12907,34 @@ type ModifyDBClusterInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The name of the DB cluster parameter group to use for the DB cluster.
+	// The name of the cluster parameter group to use for the cluster.
 	DBClusterParameterGroupName *string `type:"string"`
+
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection
+	// is disabled. DeletionProtection protects clusters from being accidentally
+	// deleted.
+	DeletionProtection *bool `type:"boolean"`
 
 	// The version number of the database engine to which you want to upgrade. Changing
 	// this parameter results in an outage. The change is applied during the next
-	// maintenance window unless the ApplyImmediately parameter is set to true.
+	// maintenance window unless ApplyImmediately is enabled.
+	//
+	// To list all of the available engine versions for Amazon DocumentDB use the
+	// following command:
+	//
+	// aws docdb describe-db-engine-versions --engine docdb --query "DBEngineVersions[].EngineVersion"
 	EngineVersion *string `type:"string"`
 
-	// The new password for the master database user. This password can contain
-	// any printable ASCII character except "/", """, or "@".
+	// The password for the master database user. This password can contain any
+	// printable ASCII character except forward slash (/), double quote ("), or
+	// the "at" symbol (@).
 	//
-	// Constraints: Must contain from 8 to 41 characters.
+	// Constraints: Must contain from 8 to 100 characters.
 	MasterUserPassword *string `type:"string"`
 
-	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
-	// This value is stored as a lowercase string.
+	// The new cluster identifier for the cluster when renaming a cluster. This
+	// value is stored as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -9008,18 +12947,18 @@ type ModifyDBClusterInput struct {
 	// Example: my-cluster2
 	NewDBClusterIdentifier *string `type:"string"`
 
-	// The port number on which the DB cluster accepts connections.
+	// The port number on which the cluster accepts connections.
 	//
 	// Constraints: Must be a value from 1150 to 65535.
 	//
-	// Default: The same port as the original DB cluster.
+	// Default: The same port as the original cluster.
 	Port *int64 `type:"integer"`
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter.
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region.
+	// of time for each Amazon Web Services Region.
 	//
 	// Constraints:
 	//
@@ -9038,24 +12977,43 @@ type ModifyDBClusterInput struct {
 	// Format: ddd:hh24:mi-ddd:hh24:mi
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region, occurring on a random day of the week.
+	// of time for each Amazon Web Services Region, occurring on a random day of
+	// the week.
 	//
 	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
 	//
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string `type:"string"`
 
-	// A list of virtual private cloud (VPC) security groups that the DB cluster
-	// will belong to.
+	// The storage type to associate with the DB cluster.
+	//
+	// For information on storage types for Amazon DocumentDB clusters, see Cluster
+	// storage configurations in the Amazon DocumentDB Developer Guide.
+	//
+	// Valid values for storage type - standard | iopt1
+	//
+	// Default value is standard
+	StorageType *string `type:"string"`
+
+	// A list of virtual private cloud (VPC) security groups that the cluster will
+	// belong to.
 	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterInput) GoString() string {
 	return s.String()
 }
@@ -9071,6 +13029,12 @@ func (s *ModifyDBClusterInput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAllowMajorVersionUpgrade sets the AllowMajorVersionUpgrade field's value.
+func (s *ModifyDBClusterInput) SetAllowMajorVersionUpgrade(v bool) *ModifyDBClusterInput {
+	s.AllowMajorVersionUpgrade = &v
+	return s
 }
 
 // SetApplyImmediately sets the ApplyImmediately field's value.
@@ -9100,6 +13064,12 @@ func (s *ModifyDBClusterInput) SetDBClusterIdentifier(v string) *ModifyDBCluster
 // SetDBClusterParameterGroupName sets the DBClusterParameterGroupName field's value.
 func (s *ModifyDBClusterInput) SetDBClusterParameterGroupName(v string) *ModifyDBClusterInput {
 	s.DBClusterParameterGroupName = &v
+	return s
+}
+
+// SetDeletionProtection sets the DeletionProtection field's value.
+func (s *ModifyDBClusterInput) SetDeletionProtection(v bool) *ModifyDBClusterInput {
+	s.DeletionProtection = &v
 	return s
 }
 
@@ -9139,6 +13109,12 @@ func (s *ModifyDBClusterInput) SetPreferredMaintenanceWindow(v string) *ModifyDB
 	return s
 }
 
+// SetStorageType sets the StorageType field's value.
+func (s *ModifyDBClusterInput) SetStorageType(v string) *ModifyDBClusterInput {
+	s.StorageType = &v
+	return s
+}
+
 // SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
 func (s *ModifyDBClusterInput) SetVpcSecurityGroupIds(v []*string) *ModifyDBClusterInput {
 	s.VpcSecurityGroupIds = v
@@ -9148,16 +13124,24 @@ func (s *ModifyDBClusterInput) SetVpcSecurityGroupIds(v []*string) *ModifyDBClus
 type ModifyDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterOutput) GoString() string {
 	return s.String()
 }
@@ -9172,23 +13156,31 @@ func (s *ModifyDBClusterOutput) SetDBCluster(v *DBCluster) *ModifyDBClusterOutpu
 type ModifyDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group to modify.
+	// The name of the cluster parameter group to modify.
 	//
 	// DBClusterParameterGroupName is a required field
 	DBClusterParameterGroupName *string `type:"string" required:"true"`
 
-	// A list of parameters in the DB cluster parameter group to modify.
+	// A list of parameters in the cluster parameter group to modify.
 	//
 	// Parameters is a required field
 	Parameters []*Parameter `locationNameList:"Parameter" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterParameterGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterParameterGroupInput) GoString() string {
 	return s.String()
 }
@@ -9221,11 +13213,11 @@ func (s *ModifyDBClusterParameterGroupInput) SetParameters(v []*Parameter) *Modi
 	return s
 }
 
-// Contains the name of a DB cluster parameter group.
+// Contains the name of a cluster parameter group.
 type ModifyDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a DB cluster parameter group.
+	// The name of a cluster parameter group.
 	//
 	// Constraints:
 	//
@@ -9239,12 +13231,20 @@ type ModifyDBClusterParameterGroupOutput struct {
 	DBClusterParameterGroupName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterParameterGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterParameterGroupOutput) GoString() string {
 	return s.String()
 }
@@ -9259,47 +13259,57 @@ func (s *ModifyDBClusterParameterGroupOutput) SetDBClusterParameterGroupName(v s
 type ModifyDBClusterSnapshotAttributeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster snapshot attribute to modify.
+	// The name of the cluster snapshot attribute to modify.
 	//
-	// To manage authorization for other AWS accounts to copy or restore a manual
-	// DB cluster snapshot, set this value to restore.
+	// To manage authorization for other Amazon Web Services accounts to copy or
+	// restore a manual cluster snapshot, set this value to restore.
 	//
 	// AttributeName is a required field
 	AttributeName *string `type:"string" required:"true"`
 
-	// The identifier for the DB cluster snapshot to modify the attributes for.
+	// The identifier for the cluster snapshot to modify the attributes for.
 	//
 	// DBClusterSnapshotIdentifier is a required field
 	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
 
-	// A list of DB cluster snapshot attributes to add to the attribute specified
-	// by AttributeName.
+	// A list of cluster snapshot attributes to add to the attribute specified by
+	// AttributeName.
 	//
-	// To authorize other AWS accounts to copy or restore a manual DB cluster snapshot,
-	// set this list to include one or more AWS account IDs. To make the manual
-	// DB cluster snapshot restorable by any AWS account, set it to all. Do not
-	// add the all value for any manual DB cluster snapshots that contain private
-	// information that you don't want to be available to all AWS accounts.
+	// To authorize other Amazon Web Services accounts to copy or restore a manual
+	// cluster snapshot, set this list to include one or more Amazon Web Services
+	// account IDs. To make the manual cluster snapshot restorable by any Amazon
+	// Web Services account, set it to all. Do not add the all value for any manual
+	// cluster snapshots that contain private information that you don't want to
+	// be available to all Amazon Web Services accounts.
 	ValuesToAdd []*string `locationNameList:"AttributeValue" type:"list"`
 
-	// A list of DB cluster snapshot attributes to remove from the attribute specified
+	// A list of cluster snapshot attributes to remove from the attribute specified
 	// by AttributeName.
 	//
-	// To remove authorization for other AWS accounts to copy or restore a manual
-	// DB cluster snapshot, set this list to include one or more AWS account identifiers.
-	// To remove authorization for any AWS account to copy or restore the DB cluster
-	// snapshot, set it to all . If you specify all, an AWS account whose account
-	// ID is explicitly added to the restore attribute can still copy or restore
-	// a manual DB cluster snapshot.
+	// To remove authorization for other Amazon Web Services accounts to copy or
+	// restore a manual cluster snapshot, set this list to include one or more Amazon
+	// Web Services account identifiers. To remove authorization for any Amazon
+	// Web Services account to copy or restore the cluster snapshot, set it to all
+	// . If you specify all, an Amazon Web Services account whose account ID is
+	// explicitly added to the restore attribute can still copy or restore a manual
+	// cluster snapshot.
 	ValuesToRemove []*string `locationNameList:"AttributeValue" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterSnapshotAttributeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterSnapshotAttributeInput) GoString() string {
 	return s.String()
 }
@@ -9347,17 +13357,25 @@ func (s *ModifyDBClusterSnapshotAttributeInput) SetValuesToRemove(v []*string) *
 type ModifyDBClusterSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about the attributes that are associated with a DB cluster
+	// Detailed information about the attributes that are associated with a cluster
 	// snapshot.
 	DBClusterSnapshotAttributesResult *DBClusterSnapshotAttributesResult `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterSnapshotAttributeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBClusterSnapshotAttributeOutput) GoString() string {
 	return s.String()
 }
@@ -9374,34 +13392,52 @@ type ModifyDBInstanceInput struct {
 
 	// Specifies whether the modifications in this request and any pending modifications
 	// are asynchronously applied as soon as possible, regardless of the PreferredMaintenanceWindow
-	// setting for the DB instance.
+	// setting for the instance.
 	//
-	// If this parameter is set to false, changes to the DB instance are applied
-	// during the next maintenance window. Some parameter changes can cause an outage
-	// and are applied on the next reboot.
+	// If this parameter is set to false, changes to the instance are applied during
+	// the next maintenance window. Some parameter changes can cause an outage and
+	// are applied on the next reboot.
 	//
 	// Default: false
 	ApplyImmediately *bool `type:"boolean"`
 
-	// Indicates that minor version upgrades are applied automatically to the DB
-	// instance during the maintenance window. Changing this parameter doesn't result
-	// in an outage except in the following case, and the change is asynchronously
-	// applied as soon as possible. An outage results if this parameter is set to
-	// true during the maintenance window, and a newer minor version is available,
-	// and Amazon DocumentDB has enabled automatic patching for that engine version.
+	// This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does
+	// not perform minor version upgrades regardless of the value set.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// The new compute and memory capacity of the DB instance; for example, db.m4.large.
-	// Not all DB instance classes are available in all AWS Regions.
+	// Indicates the certificate that needs to be associated with the instance.
+	CACertificateIdentifier *string `type:"string"`
+
+	// Specifies whether the DB instance is restarted when you rotate your SSL/TLS
+	// certificate.
 	//
-	// If you modify the DB instance class, an outage occurs during the change.
-	// The change is applied during the next maintenance window, unless ApplyImmediately
+	// By default, the DB instance is restarted when you rotate your SSL/TLS certificate.
+	// The certificate is not updated until the DB instance is restarted.
+	//
+	// Set this parameter only if you are not using SSL/TLS to connect to the DB
+	// instance.
+	//
+	// If you are using SSL/TLS to connect to the DB instance, see Updating Your
+	// Amazon DocumentDB TLS Certificates (https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html)
+	// and Encrypting Data in Transit (https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html)
+	// in the Amazon DocumentDB Developer Guide.
+	CertificateRotationRestart *bool `type:"boolean"`
+
+	// A value that indicates whether to copy all tags from the DB instance to snapshots
+	// of the DB instance. By default, tags are not copied.
+	CopyTagsToSnapshot *bool `type:"boolean"`
+
+	// The new compute and memory capacity of the instance; for example, db.r5.large.
+	// Not all instance classes are available in all Amazon Web Services Regions.
+	//
+	// If you modify the instance class, an outage occurs during the change. The
+	// change is applied during the next maintenance window, unless ApplyImmediately
 	// is specified as true for this request.
 	//
 	// Default: Uses existing setting.
 	DBInstanceClass *string `type:"string"`
 
-	// The DB instance identifier. This value is stored as a lowercase string.
+	// The instance identifier. This value is stored as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -9410,8 +13446,12 @@ type ModifyDBInstanceInput struct {
 	// DBInstanceIdentifier is a required field
 	DBInstanceIdentifier *string `type:"string" required:"true"`
 
-	// The new DB instance identifier for the DB instance when renaming a DB instance.
-	// When you change the DB instance identifier, an instance reboot occurs immediately
+	// A value that indicates whether to enable Performance Insights for the DB
+	// Instance. For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html).
+	EnablePerformanceInsights *bool `type:"boolean"`
+
+	// The new instance identifier for the instance when renaming an instance. When
+	// you change the instance identifier, an instance reboot occurs immediately
 	// if you set Apply Immediately to true. It occurs during the next maintenance
 	// window if you set Apply Immediately to false. This value is stored as a lowercase
 	// string.
@@ -9427,14 +13467,25 @@ type ModifyDBInstanceInput struct {
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string `type:"string"`
 
+	// The KMS key identifier for encryption of Performance Insights data.
+	//
+	// The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for
+	// the KMS key.
+	//
+	// If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
+	// DocumentDB uses your default KMS key. There is a default KMS key for your
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default KMS key for each Amazon Web Services region.
+	PerformanceInsightsKMSKeyId *string `type:"string"`
+
 	// The weekly time range (in UTC) during which system maintenance can occur,
 	// which might result in an outage. Changing this parameter doesn't result in
 	// an outage except in the following situation, and the change is asynchronously
 	// applied as soon as possible. If there are pending actions that cause a reboot,
 	// and the maintenance window is changed to include the current time, changing
-	// this parameter causes a reboot of the DB instance. If you are moving this
-	// window to the current time, there must be at least 30 minutes between the
-	// current time and end of the window to ensure that pending changes are applied.
+	// this parameter causes a reboot of the instance. If you are moving this window
+	// to the current time, there must be at least 30 minutes between the current
+	// time and end of the window to ensure that pending changes are applied.
 	//
 	// Default: Uses existing setting.
 	//
@@ -9455,12 +13506,20 @@ type ModifyDBInstanceInput struct {
 	PromotionTier *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBInstanceInput) GoString() string {
 	return s.String()
 }
@@ -9490,6 +13549,24 @@ func (s *ModifyDBInstanceInput) SetAutoMinorVersionUpgrade(v bool) *ModifyDBInst
 	return s
 }
 
+// SetCACertificateIdentifier sets the CACertificateIdentifier field's value.
+func (s *ModifyDBInstanceInput) SetCACertificateIdentifier(v string) *ModifyDBInstanceInput {
+	s.CACertificateIdentifier = &v
+	return s
+}
+
+// SetCertificateRotationRestart sets the CertificateRotationRestart field's value.
+func (s *ModifyDBInstanceInput) SetCertificateRotationRestart(v bool) *ModifyDBInstanceInput {
+	s.CertificateRotationRestart = &v
+	return s
+}
+
+// SetCopyTagsToSnapshot sets the CopyTagsToSnapshot field's value.
+func (s *ModifyDBInstanceInput) SetCopyTagsToSnapshot(v bool) *ModifyDBInstanceInput {
+	s.CopyTagsToSnapshot = &v
+	return s
+}
+
 // SetDBInstanceClass sets the DBInstanceClass field's value.
 func (s *ModifyDBInstanceInput) SetDBInstanceClass(v string) *ModifyDBInstanceInput {
 	s.DBInstanceClass = &v
@@ -9502,9 +13579,21 @@ func (s *ModifyDBInstanceInput) SetDBInstanceIdentifier(v string) *ModifyDBInsta
 	return s
 }
 
+// SetEnablePerformanceInsights sets the EnablePerformanceInsights field's value.
+func (s *ModifyDBInstanceInput) SetEnablePerformanceInsights(v bool) *ModifyDBInstanceInput {
+	s.EnablePerformanceInsights = &v
+	return s
+}
+
 // SetNewDBInstanceIdentifier sets the NewDBInstanceIdentifier field's value.
 func (s *ModifyDBInstanceInput) SetNewDBInstanceIdentifier(v string) *ModifyDBInstanceInput {
 	s.NewDBInstanceIdentifier = &v
+	return s
+}
+
+// SetPerformanceInsightsKMSKeyId sets the PerformanceInsightsKMSKeyId field's value.
+func (s *ModifyDBInstanceInput) SetPerformanceInsightsKMSKeyId(v string) *ModifyDBInstanceInput {
+	s.PerformanceInsightsKMSKeyId = &v
 	return s
 }
 
@@ -9523,16 +13612,24 @@ func (s *ModifyDBInstanceInput) SetPromotionTier(v int64) *ModifyDBInstanceInput
 type ModifyDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB instance.
+	// Detailed information about an instance.
 	DBInstance *DBInstance `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBInstanceOutput) GoString() string {
 	return s.String()
 }
@@ -9547,10 +13644,10 @@ func (s *ModifyDBInstanceOutput) SetDBInstance(v *DBInstance) *ModifyDBInstanceO
 type ModifyDBSubnetGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The description for the DB subnet group.
+	// The description for the subnet group.
 	DBSubnetGroupDescription *string `type:"string"`
 
-	// The name for the DB subnet group. This value is stored as a lowercase string.
+	// The name for the subnet group. This value is stored as a lowercase string.
 	// You can't modify the default subnet group.
 	//
 	// Constraints: Must match the name of an existing DBSubnetGroup. Must not be
@@ -9561,18 +13658,26 @@ type ModifyDBSubnetGroupInput struct {
 	// DBSubnetGroupName is a required field
 	DBSubnetGroupName *string `type:"string" required:"true"`
 
-	// The Amazon EC2 subnet IDs for the DB subnet group.
+	// The Amazon EC2 subnet IDs for the subnet group.
 	//
 	// SubnetIds is a required field
 	SubnetIds []*string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBSubnetGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBSubnetGroupInput) GoString() string {
 	return s.String()
 }
@@ -9614,16 +13719,24 @@ func (s *ModifyDBSubnetGroupInput) SetSubnetIds(v []*string) *ModifyDBSubnetGrou
 type ModifyDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB subnet group.
+	// Detailed information about a subnet group.
 	DBSubnetGroup *DBSubnetGroup `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBSubnetGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyDBSubnetGroupOutput) GoString() string {
 	return s.String()
 }
@@ -9634,35 +13747,280 @@ func (s *ModifyDBSubnetGroupOutput) SetDBSubnetGroup(v *DBSubnetGroup) *ModifyDB
 	return s
 }
 
-// The options that are available for a DB instance.
+// Represents the input to ModifyEventSubscription.
+type ModifyEventSubscriptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// A Boolean value; set to true to activate the subscription.
+	Enabled *bool `type:"boolean"`
+
+	// A list of event categories for a SourceType that you want to subscribe to.
+	EventCategories []*string `locationNameList:"EventCategory" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the SNS topic created for event notification.
+	// The ARN is created by Amazon SNS when you create a topic and subscribe to
+	// it.
+	SnsTopicArn *string `type:"string"`
+
+	// The type of source that is generating the events. For example, if you want
+	// to be notified of events generated by an instance, set this parameter to
+	// db-instance. If this value is not specified, all events are returned.
+	//
+	// Valid values: db-instance, db-parameter-group, db-security-group
+	SourceType *string `type:"string"`
+
+	// The name of the Amazon DocumentDB event notification subscription.
+	//
+	// SubscriptionName is a required field
+	SubscriptionName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyEventSubscriptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyEventSubscriptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyEventSubscriptionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
+	if s.SubscriptionName == nil {
+		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *ModifyEventSubscriptionInput) SetEnabled(v bool) *ModifyEventSubscriptionInput {
+	s.Enabled = &v
+	return s
+}
+
+// SetEventCategories sets the EventCategories field's value.
+func (s *ModifyEventSubscriptionInput) SetEventCategories(v []*string) *ModifyEventSubscriptionInput {
+	s.EventCategories = v
+	return s
+}
+
+// SetSnsTopicArn sets the SnsTopicArn field's value.
+func (s *ModifyEventSubscriptionInput) SetSnsTopicArn(v string) *ModifyEventSubscriptionInput {
+	s.SnsTopicArn = &v
+	return s
+}
+
+// SetSourceType sets the SourceType field's value.
+func (s *ModifyEventSubscriptionInput) SetSourceType(v string) *ModifyEventSubscriptionInput {
+	s.SourceType = &v
+	return s
+}
+
+// SetSubscriptionName sets the SubscriptionName field's value.
+func (s *ModifyEventSubscriptionInput) SetSubscriptionName(v string) *ModifyEventSubscriptionInput {
+	s.SubscriptionName = &v
+	return s
+}
+
+type ModifyEventSubscriptionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Detailed information about an event to which you have subscribed.
+	EventSubscription *EventSubscription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyEventSubscriptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyEventSubscriptionOutput) GoString() string {
+	return s.String()
+}
+
+// SetEventSubscription sets the EventSubscription field's value.
+func (s *ModifyEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *ModifyEventSubscriptionOutput {
+	s.EventSubscription = v
+	return s
+}
+
+// Represents the input to ModifyGlobalCluster.
+type ModifyGlobalClusterInput struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates if the global cluster has deletion protection enabled. The global
+	// cluster can't be deleted when deletion protection is enabled.
+	DeletionProtection *bool `type:"boolean"`
+
+	// The identifier for the global cluster being modified. This parameter isn't
+	// case-sensitive.
+	//
+	// Constraints:
+	//
+	//    * Must match the identifier of an existing global cluster.
+	//
+	// GlobalClusterIdentifier is a required field
+	GlobalClusterIdentifier *string `min:"1" type:"string" required:"true"`
+
+	// The new identifier for a global cluster when you modify a global cluster.
+	// This value is stored as a lowercase string.
+	//
+	//    * Must contain from 1 to 63 letters, numbers, or hyphens The first character
+	//    must be a letter Can't end with a hyphen or contain two consecutive hyphens
+	//
+	// Example: my-cluster2
+	NewGlobalClusterIdentifier *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyGlobalClusterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyGlobalClusterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyGlobalClusterInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ModifyGlobalClusterInput"}
+	if s.GlobalClusterIdentifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if s.GlobalClusterIdentifier != nil && len(*s.GlobalClusterIdentifier) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GlobalClusterIdentifier", 1))
+	}
+	if s.NewGlobalClusterIdentifier != nil && len(*s.NewGlobalClusterIdentifier) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NewGlobalClusterIdentifier", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDeletionProtection sets the DeletionProtection field's value.
+func (s *ModifyGlobalClusterInput) SetDeletionProtection(v bool) *ModifyGlobalClusterInput {
+	s.DeletionProtection = &v
+	return s
+}
+
+// SetGlobalClusterIdentifier sets the GlobalClusterIdentifier field's value.
+func (s *ModifyGlobalClusterInput) SetGlobalClusterIdentifier(v string) *ModifyGlobalClusterInput {
+	s.GlobalClusterIdentifier = &v
+	return s
+}
+
+// SetNewGlobalClusterIdentifier sets the NewGlobalClusterIdentifier field's value.
+func (s *ModifyGlobalClusterInput) SetNewGlobalClusterIdentifier(v string) *ModifyGlobalClusterInput {
+	s.NewGlobalClusterIdentifier = &v
+	return s
+}
+
+type ModifyGlobalClusterOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A data type representing an Amazon DocumentDB global cluster.
+	GlobalCluster *GlobalCluster `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyGlobalClusterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyGlobalClusterOutput) GoString() string {
+	return s.String()
+}
+
+// SetGlobalCluster sets the GlobalCluster field's value.
+func (s *ModifyGlobalClusterOutput) SetGlobalCluster(v *GlobalCluster) *ModifyGlobalClusterOutput {
+	s.GlobalCluster = v
+	return s
+}
+
+// The options that are available for an instance.
 type OrderableDBInstanceOption struct {
 	_ struct{} `type:"structure"`
 
-	// A list of Availability Zones for a DB instance.
+	// A list of Availability Zones for an instance.
 	AvailabilityZones []*AvailabilityZone `locationNameList:"AvailabilityZone" type:"list"`
 
-	// The DB instance class for a DB instance.
+	// The instance class for an instance.
 	DBInstanceClass *string `type:"string"`
 
-	// The engine type of a DB instance.
+	// The engine type of an instance.
 	Engine *string `type:"string"`
 
-	// The engine version of a DB instance.
+	// The engine version of an instance.
 	EngineVersion *string `type:"string"`
 
-	// The license model for a DB instance.
+	// The license model for an instance.
 	LicenseModel *string `type:"string"`
 
-	// Indicates whether a DB instance is in a virtual private cloud (VPC).
+	// The storage type to associate with the DB cluster
+	StorageType *string `type:"string"`
+
+	// Indicates whether an instance is in a virtual private cloud (VPC).
 	Vpc *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OrderableDBInstanceOption) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OrderableDBInstanceOption) GoString() string {
 	return s.String()
 }
@@ -9694,6 +14052,12 @@ func (s *OrderableDBInstanceOption) SetEngineVersion(v string) *OrderableDBInsta
 // SetLicenseModel sets the LicenseModel field's value.
 func (s *OrderableDBInstanceOption) SetLicenseModel(v string) *OrderableDBInstanceOption {
 	s.LicenseModel = &v
+	return s
+}
+
+// SetStorageType sets the StorageType field's value.
+func (s *OrderableDBInstanceOption) SetStorageType(v string) *OrderableDBInstanceOption {
+	s.StorageType = &v
 	return s
 }
 
@@ -9740,12 +14104,20 @@ type Parameter struct {
 	Source *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Parameter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Parameter) GoString() string {
 	return s.String()
 }
@@ -9824,12 +14196,20 @@ type PendingCloudwatchLogsExports struct {
 	LogTypesToEnable []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PendingCloudwatchLogsExports) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PendingCloudwatchLogsExports) GoString() string {
 	return s.String()
 }
@@ -9876,12 +14256,20 @@ type PendingMaintenanceAction struct {
 	OptInStatus *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PendingMaintenanceAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PendingMaintenanceAction) GoString() string {
 	return s.String()
 }
@@ -9922,12 +14310,12 @@ func (s *PendingMaintenanceAction) SetOptInStatus(v string) *PendingMaintenanceA
 	return s
 }
 
-// One or more modified settings for a DB instance. These modified settings
-// have been requested, but haven't been applied yet.
+// One or more modified settings for an instance. These modified settings have
+// been requested, but haven't been applied yet.
 type PendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
-	// Contains the new AllocatedStorage size for the DB instance that will be applied
+	// Contains the new AllocatedStorage size for then instance that will be applied
 	// or is currently being applied.
 	AllocatedStorage *int64 `type:"integer"`
 
@@ -9938,53 +14326,61 @@ type PendingModifiedValues struct {
 	// the DB instance.
 	CACertificateIdentifier *string `type:"string"`
 
-	// Contains the new DBInstanceClass for the DB instance that will be applied
-	// or is currently being applied.
+	// Contains the new DBInstanceClass for the instance that will be applied or
+	// is currently being applied.
 	DBInstanceClass *string `type:"string"`
 
-	// Contains the new DBInstanceIdentifier for the DB instance that will be applied
+	// Contains the new DBInstanceIdentifier for the instance that will be applied
 	// or is currently being applied.
 	DBInstanceIdentifier *string `type:"string"`
 
-	// The new DB subnet group for the DB instance.
+	// The new subnet group for the instance.
 	DBSubnetGroupName *string `type:"string"`
 
 	// Indicates the database engine version.
 	EngineVersion *string `type:"string"`
 
-	// Specifies the new Provisioned IOPS value for the DB instance that will be
-	// applied or is currently being applied.
+	// Specifies the new Provisioned IOPS value for the instance that will be applied
+	// or is currently being applied.
 	Iops *int64 `type:"integer"`
 
-	// The license model for the DB instance.
+	// The license model for the instance.
 	//
 	// Valid values: license-included, bring-your-own-license, general-public-license
 	LicenseModel *string `type:"string"`
 
 	// Contains the pending or currently in-progress change of the master credentials
-	// for the DB instance.
+	// for the instance.
 	MasterUserPassword *string `type:"string"`
 
-	// Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
+	// Indicates that the Single-AZ instance is to change to a Multi-AZ deployment.
 	MultiAZ *bool `type:"boolean"`
 
 	// A list of the log types whose configuration is still pending. These log types
 	// are in the process of being activated or deactivated.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports `type:"structure"`
 
-	// Specifies the pending port for the DB instance.
+	// Specifies the pending port for the instance.
 	Port *int64 `type:"integer"`
 
-	// Specifies the storage type to be associated with the DB instance.
+	// Specifies the storage type to be associated with the instance.
 	StorageType *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PendingModifiedValues) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PendingModifiedValues) GoString() string {
 	return s.String()
 }
@@ -10077,7 +14473,7 @@ func (s *PendingModifiedValues) SetStorageType(v string) *PendingModifiedValues 
 type RebootDBInstanceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The DB instance identifier. This parameter is stored as a lowercase string.
+	// The instance identifier. This parameter is stored as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -10093,12 +14489,20 @@ type RebootDBInstanceInput struct {
 	ForceFailover *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootDBInstanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootDBInstanceInput) GoString() string {
 	return s.String()
 }
@@ -10131,16 +14535,24 @@ func (s *RebootDBInstanceInput) SetForceFailover(v bool) *RebootDBInstanceInput 
 type RebootDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB instance.
+	// Detailed information about an instance.
 	DBInstance *DBInstance `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootDBInstanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootDBInstanceOutput) GoString() string {
 	return s.String()
 }
@@ -10148,6 +14560,196 @@ func (s RebootDBInstanceOutput) GoString() string {
 // SetDBInstance sets the DBInstance field's value.
 func (s *RebootDBInstanceOutput) SetDBInstance(v *DBInstance) *RebootDBInstanceOutput {
 	s.DBInstance = v
+	return s
+}
+
+// Represents the input to RemoveFromGlobalCluster.
+type RemoveFromGlobalClusterInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) identifying the cluster that was detached
+	// from the Amazon DocumentDB global cluster.
+	//
+	// DbClusterIdentifier is a required field
+	DbClusterIdentifier *string `type:"string" required:"true"`
+
+	// The cluster identifier to detach from the Amazon DocumentDB global cluster.
+	//
+	// GlobalClusterIdentifier is a required field
+	GlobalClusterIdentifier *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveFromGlobalClusterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveFromGlobalClusterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RemoveFromGlobalClusterInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RemoveFromGlobalClusterInput"}
+	if s.DbClusterIdentifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("DbClusterIdentifier"))
+	}
+	if s.GlobalClusterIdentifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if s.GlobalClusterIdentifier != nil && len(*s.GlobalClusterIdentifier) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("GlobalClusterIdentifier", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDbClusterIdentifier sets the DbClusterIdentifier field's value.
+func (s *RemoveFromGlobalClusterInput) SetDbClusterIdentifier(v string) *RemoveFromGlobalClusterInput {
+	s.DbClusterIdentifier = &v
+	return s
+}
+
+// SetGlobalClusterIdentifier sets the GlobalClusterIdentifier field's value.
+func (s *RemoveFromGlobalClusterInput) SetGlobalClusterIdentifier(v string) *RemoveFromGlobalClusterInput {
+	s.GlobalClusterIdentifier = &v
+	return s
+}
+
+type RemoveFromGlobalClusterOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A data type representing an Amazon DocumentDB global cluster.
+	GlobalCluster *GlobalCluster `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveFromGlobalClusterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveFromGlobalClusterOutput) GoString() string {
+	return s.String()
+}
+
+// SetGlobalCluster sets the GlobalCluster field's value.
+func (s *RemoveFromGlobalClusterOutput) SetGlobalCluster(v *GlobalCluster) *RemoveFromGlobalClusterOutput {
+	s.GlobalCluster = v
+	return s
+}
+
+// Represents the input to RemoveSourceIdentifierFromSubscription.
+type RemoveSourceIdentifierFromSubscriptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The source identifier to be removed from the subscription, such as the instance
+	// identifier for an instance, or the name of a security group.
+	//
+	// SourceIdentifier is a required field
+	SourceIdentifier *string `type:"string" required:"true"`
+
+	// The name of the Amazon DocumentDB event notification subscription that you
+	// want to remove a source identifier from.
+	//
+	// SubscriptionName is a required field
+	SubscriptionName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveSourceIdentifierFromSubscriptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveSourceIdentifierFromSubscriptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RemoveSourceIdentifierFromSubscriptionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RemoveSourceIdentifierFromSubscriptionInput"}
+	if s.SourceIdentifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("SourceIdentifier"))
+	}
+	if s.SubscriptionName == nil {
+		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSourceIdentifier sets the SourceIdentifier field's value.
+func (s *RemoveSourceIdentifierFromSubscriptionInput) SetSourceIdentifier(v string) *RemoveSourceIdentifierFromSubscriptionInput {
+	s.SourceIdentifier = &v
+	return s
+}
+
+// SetSubscriptionName sets the SubscriptionName field's value.
+func (s *RemoveSourceIdentifierFromSubscriptionInput) SetSubscriptionName(v string) *RemoveSourceIdentifierFromSubscriptionInput {
+	s.SubscriptionName = &v
+	return s
+}
+
+type RemoveSourceIdentifierFromSubscriptionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Detailed information about an event to which you have subscribed.
+	EventSubscription *EventSubscription `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveSourceIdentifierFromSubscriptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RemoveSourceIdentifierFromSubscriptionOutput) GoString() string {
+	return s.String()
+}
+
+// SetEventSubscription sets the EventSubscription field's value.
+func (s *RemoveSourceIdentifierFromSubscriptionOutput) SetEventSubscription(v *EventSubscription) *RemoveSourceIdentifierFromSubscriptionOutput {
+	s.EventSubscription = v
 	return s
 }
 
@@ -10167,12 +14769,20 @@ type RemoveTagsFromResourceInput struct {
 	TagKeys []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceInput) GoString() string {
 	return s.String()
 }
@@ -10209,12 +14819,20 @@ type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveTagsFromResourceOutput) GoString() string {
 	return s.String()
 }
@@ -10223,28 +14841,36 @@ func (s RemoveTagsFromResourceOutput) GoString() string {
 type ResetDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DB cluster parameter group to reset.
+	// The name of the cluster parameter group to reset.
 	//
 	// DBClusterParameterGroupName is a required field
 	DBClusterParameterGroupName *string `type:"string" required:"true"`
 
-	// A list of parameter names in the DB cluster parameter group to reset to the
+	// A list of parameter names in the cluster parameter group to reset to the
 	// default values. You can't use this parameter if the ResetAllParameters parameter
 	// is set to true.
 	Parameters []*Parameter `locationNameList:"Parameter" type:"list"`
 
-	// A value that is set to true to reset all parameters in the DB cluster parameter
+	// A value that is set to true to reset all parameters in the cluster parameter
 	// group to their default values, and false otherwise. You can't use this parameter
 	// if there is a list of parameter names specified for the Parameters parameter.
 	ResetAllParameters *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResetDBClusterParameterGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResetDBClusterParameterGroupInput) GoString() string {
 	return s.String()
 }
@@ -10280,11 +14906,11 @@ func (s *ResetDBClusterParameterGroupInput) SetResetAllParameters(v bool) *Reset
 	return s
 }
 
-// Contains the name of a DB cluster parameter group.
+// Contains the name of a cluster parameter group.
 type ResetDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a DB cluster parameter group.
+	// The name of a cluster parameter group.
 	//
 	// Constraints:
 	//
@@ -10298,12 +14924,20 @@ type ResetDBClusterParameterGroupOutput struct {
 	DBClusterParameterGroupName *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResetDBClusterParameterGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResetDBClusterParameterGroupOutput) GoString() string {
 	return s.String()
 }
@@ -10327,12 +14961,20 @@ type ResourcePendingMaintenanceActions struct {
 	ResourceIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourcePendingMaintenanceActions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ResourcePendingMaintenanceActions) GoString() string {
 	return s.String()
 }
@@ -10357,7 +14999,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// restored DB cluster can be created in.
 	AvailabilityZones []*string `locationNameList:"AvailabilityZone" type:"list"`
 
-	// The name of the DB cluster to create from the DB snapshot or DB cluster snapshot.
+	// The name of the cluster to create from the snapshot or cluster snapshot.
 	// This parameter isn't case sensitive.
 	//
 	// Constraints:
@@ -10373,18 +15015,35 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The name of the DB subnet group to use for the new DB cluster.
+	// The name of the DB cluster parameter group to associate with this DB cluster.
+	//
+	// Type: String. Required: No.
+	//
+	// If this argument is omitted, the default DB cluster parameter group is used.
+	// If supplied, must match the name of an existing default DB cluster parameter
+	// group. The string must consist of from 1 to 255 letters, numbers or hyphens.
+	// Its first character must be a letter, and it cannot end with a hyphen or
+	// contain two consecutive hyphens.
+	DBClusterParameterGroupName *string `type:"string"`
+
+	// The name of the subnet group to use for the new cluster.
 	//
 	// Constraints: If provided, must match the name of an existing DBSubnetGroup.
 	//
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection
+	// is disabled. DeletionProtection protects clusters from being accidentally
+	// deleted.
+	DeletionProtection *bool `type:"boolean"`
+
 	// A list of log types that must be enabled for exporting to Amazon CloudWatch
 	// Logs.
 	EnableCloudwatchLogsExports []*string `type:"list"`
 
-	// The database engine to use for the new DB cluster.
+	// The database engine to use for the new cluster.
 	//
 	// Default: The same as source.
 	//
@@ -10393,41 +15052,39 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
 
-	// The version of the database engine to use for the new DB cluster.
+	// The version of the database engine to use for the new cluster.
 	EngineVersion *string `type:"string"`
 
-	// The AWS KMS key identifier to use when restoring an encrypted DB cluster
-	// from a DB snapshot or DB cluster snapshot.
+	// The KMS key identifier to use when restoring an encrypted cluster from a
+	// DB snapshot or cluster snapshot.
 	//
-	// The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS
-	// KMS encryption key. If you are restoring a DB cluster with the same AWS account
-	// that owns the AWS KMS encryption key used to encrypt the new DB cluster,
-	// then you can use the AWS KMS key alias instead of the ARN for the AWS KMS
-	// encryption key.
+	// The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption
+	// key. If you are restoring a cluster with the same Amazon Web Services account
+	// that owns the KMS encryption key used to encrypt the new cluster, then you
+	// can use the KMS key alias instead of the ARN for the KMS encryption key.
 	//
 	// If you do not specify a value for the KmsKeyId parameter, then the following
 	// occurs:
 	//
-	//    * If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is encrypted,
-	//    then the restored DB cluster is encrypted using the AWS KMS key that was
-	//    used to encrypt the DB snapshot or the DB cluster snapshot.
+	//    * If the snapshot or cluster snapshot in SnapshotIdentifier is encrypted,
+	//    then the restored cluster is encrypted using the KMS key that was used
+	//    to encrypt the snapshot or the cluster snapshot.
 	//
-	//    * If the DB snapshot or the DB cluster snapshot in SnapshotIdentifier
-	//    is not encrypted, then the restored DB cluster is not encrypted.
+	//    * If the snapshot or the cluster snapshot in SnapshotIdentifier is not
+	//    encrypted, then the restored DB cluster is not encrypted.
 	KmsKeyId *string `type:"string"`
 
-	// The port number on which the new DB cluster accepts connections.
+	// The port number on which the new cluster accepts connections.
 	//
 	// Constraints: Must be a value from 1150 to 65535.
 	//
-	// Default: The same port as the original DB cluster.
+	// Default: The same port as the original cluster.
 	Port *int64 `type:"integer"`
 
-	// The identifier for the DB snapshot or DB cluster snapshot to restore from.
+	// The identifier for the snapshot or cluster snapshot to restore from.
 	//
 	// You can use either the name or the Amazon Resource Name (ARN) to specify
-	// a DB cluster snapshot. However, you can use only the ARN to specify a DB
-	// snapshot.
+	// a cluster snapshot. However, you can use only the ARN to specify a snapshot.
 	//
 	// Constraints:
 	//
@@ -10436,20 +15093,38 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// SnapshotIdentifier is a required field
 	SnapshotIdentifier *string `type:"string" required:"true"`
 
-	// The tags to be assigned to the restored DB cluster.
+	// The storage type to associate with the DB cluster.
+	//
+	// For information on storage types for Amazon DocumentDB clusters, see Cluster
+	// storage configurations in the Amazon DocumentDB Developer Guide.
+	//
+	// Valid values for storage type - standard | iopt1
+	//
+	// Default value is standard
+	StorageType *string `type:"string"`
+
+	// The tags to be assigned to the restored cluster.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
 
-	// A list of virtual private cloud (VPC) security groups that the new DB cluster
+	// A list of virtual private cloud (VPC) security groups that the new cluster
 	// will belong to.
 	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreDBClusterFromSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreDBClusterFromSnapshotInput) GoString() string {
 	return s.String()
 }
@@ -10485,9 +15160,21 @@ func (s *RestoreDBClusterFromSnapshotInput) SetDBClusterIdentifier(v string) *Re
 	return s
 }
 
+// SetDBClusterParameterGroupName sets the DBClusterParameterGroupName field's value.
+func (s *RestoreDBClusterFromSnapshotInput) SetDBClusterParameterGroupName(v string) *RestoreDBClusterFromSnapshotInput {
+	s.DBClusterParameterGroupName = &v
+	return s
+}
+
 // SetDBSubnetGroupName sets the DBSubnetGroupName field's value.
 func (s *RestoreDBClusterFromSnapshotInput) SetDBSubnetGroupName(v string) *RestoreDBClusterFromSnapshotInput {
 	s.DBSubnetGroupName = &v
+	return s
+}
+
+// SetDeletionProtection sets the DeletionProtection field's value.
+func (s *RestoreDBClusterFromSnapshotInput) SetDeletionProtection(v bool) *RestoreDBClusterFromSnapshotInput {
+	s.DeletionProtection = &v
 	return s
 }
 
@@ -10527,6 +15214,12 @@ func (s *RestoreDBClusterFromSnapshotInput) SetSnapshotIdentifier(v string) *Res
 	return s
 }
 
+// SetStorageType sets the StorageType field's value.
+func (s *RestoreDBClusterFromSnapshotInput) SetStorageType(v string) *RestoreDBClusterFromSnapshotInput {
+	s.StorageType = &v
+	return s
+}
+
 // SetTags sets the Tags field's value.
 func (s *RestoreDBClusterFromSnapshotInput) SetTags(v []*Tag) *RestoreDBClusterFromSnapshotInput {
 	s.Tags = v
@@ -10542,16 +15235,24 @@ func (s *RestoreDBClusterFromSnapshotInput) SetVpcSecurityGroupIds(v []*string) 
 type RestoreDBClusterFromSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreDBClusterFromSnapshotOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreDBClusterFromSnapshotOutput) GoString() string {
 	return s.String()
 }
@@ -10566,7 +15267,7 @@ func (s *RestoreDBClusterFromSnapshotOutput) SetDBCluster(v *DBCluster) *Restore
 type RestoreDBClusterToPointInTimeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the new DB cluster to be created.
+	// The name of the new cluster to be created.
 	//
 	// Constraints:
 	//
@@ -10579,58 +15280,62 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The DB subnet group name to use for the new DB cluster.
+	// The subnet group name to use for the new cluster.
 	//
 	// Constraints: If provided, must match the name of an existing DBSubnetGroup.
 	//
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection
+	// is disabled. DeletionProtection protects clusters from being accidentally
+	// deleted.
+	DeletionProtection *bool `type:"boolean"`
+
 	// A list of log types that must be enabled for exporting to Amazon CloudWatch
 	// Logs.
 	EnableCloudwatchLogsExports []*string `type:"list"`
 
-	// The AWS KMS key identifier to use when restoring an encrypted DB cluster
-	// from an encrypted DB cluster.
+	// The KMS key identifier to use when restoring an encrypted cluster from an
+	// encrypted cluster.
 	//
-	// The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS
-	// KMS encryption key. If you are restoring a DB cluster with the same AWS account
-	// that owns the AWS KMS encryption key used to encrypt the new DB cluster,
-	// then you can use the AWS KMS key alias instead of the ARN for the AWS KMS
-	// encryption key.
+	// The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption
+	// key. If you are restoring a cluster with the same Amazon Web Services account
+	// that owns the KMS encryption key used to encrypt the new cluster, then you
+	// can use the KMS key alias instead of the ARN for the KMS encryption key.
 	//
-	// You can restore to a new DB cluster and encrypt the new DB cluster with an
-	// AWS KMS key that is different from the AWS KMS key used to encrypt the source
-	// DB cluster. The new DB cluster is encrypted with the AWS KMS key identified
-	// by the KmsKeyId parameter.
+	// You can restore to a new cluster and encrypt the new cluster with an KMS
+	// key that is different from the KMS key used to encrypt the source cluster.
+	// The new DB cluster is encrypted with the KMS key identified by the KmsKeyId
+	// parameter.
 	//
 	// If you do not specify a value for the KmsKeyId parameter, then the following
 	// occurs:
 	//
-	//    * If the DB cluster is encrypted, then the restored DB cluster is encrypted
-	//    using the AWS KMS key that was used to encrypt the source DB cluster.
+	//    * If the cluster is encrypted, then the restored cluster is encrypted
+	//    using the KMS key that was used to encrypt the source cluster.
 	//
-	//    * If the DB cluster is not encrypted, then the restored DB cluster is
-	//    not encrypted.
+	//    * If the cluster is not encrypted, then the restored cluster is not encrypted.
 	//
-	// If DBClusterIdentifier refers to a DB cluster that is not encrypted, then
-	// the restore request is rejected.
+	// If DBClusterIdentifier refers to a cluster that is not encrypted, then the
+	// restore request is rejected.
 	KmsKeyId *string `type:"string"`
 
-	// The port number on which the new DB cluster accepts connections.
+	// The port number on which the new cluster accepts connections.
 	//
 	// Constraints: Must be a value from 1150 to 65535.
 	//
 	// Default: The default port for the engine.
 	Port *int64 `type:"integer"`
 
-	// The date and time to restore the DB cluster to.
+	// The date and time to restore the cluster to.
 	//
 	// Valid values: A time in Universal Coordinated Time (UTC) format.
 	//
 	// Constraints:
 	//
-	//    * Must be before the latest restorable time for the DB instance.
+	//    * Must be before the latest restorable time for the instance.
 	//
 	//    * Must be specified if the UseLatestRestorableTime parameter is not provided.
 	//
@@ -10641,7 +15346,23 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Example: 2015-03-07T23:45:00Z
 	RestoreToTime *time.Time `type:"timestamp"`
 
-	// The identifier of the source DB cluster from which to restore.
+	// The type of restore to be performed. You can specify one of the following
+	// values:
+	//
+	//    * full-copy - The new DB cluster is restored as a full copy of the source
+	//    DB cluster.
+	//
+	//    * copy-on-write - The new DB cluster is restored as a clone of the source
+	//    DB cluster.
+	//
+	// Constraints: You can't specify copy-on-write if the engine version of the
+	// source DB cluster is earlier than 1.11.
+	//
+	// If you don't specify a RestoreType value, then the new DB cluster is restored
+	// as a full copy of the source DB cluster.
+	RestoreType *string `type:"string"`
+
+	// The identifier of the source cluster from which to restore.
 	//
 	// Constraints:
 	//
@@ -10650,10 +15371,20 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// SourceDBClusterIdentifier is a required field
 	SourceDBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The tags to be assigned to the restored DB cluster.
+	// The storage type to associate with the DB cluster.
+	//
+	// For information on storage types for Amazon DocumentDB clusters, see Cluster
+	// storage configurations in the Amazon DocumentDB Developer Guide.
+	//
+	// Valid values for storage type - standard | iopt1
+	//
+	// Default value is standard
+	StorageType *string `type:"string"`
+
+	// The tags to be assigned to the restored cluster.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
 
-	// A value that is set to true to restore the DB cluster to the latest restorable
+	// A value that is set to true to restore the cluster to the latest restorable
 	// backup time, and false otherwise.
 	//
 	// Default: false
@@ -10661,16 +15392,24 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Constraints: Cannot be specified if the RestoreToTime parameter is provided.
 	UseLatestRestorableTime *bool `type:"boolean"`
 
-	// A list of VPC security groups that the new DB cluster belongs to.
+	// A list of VPC security groups that the new cluster belongs to.
 	VpcSecurityGroupIds []*string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreDBClusterToPointInTimeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreDBClusterToPointInTimeInput) GoString() string {
 	return s.String()
 }
@@ -10703,6 +15442,12 @@ func (s *RestoreDBClusterToPointInTimeInput) SetDBSubnetGroupName(v string) *Res
 	return s
 }
 
+// SetDeletionProtection sets the DeletionProtection field's value.
+func (s *RestoreDBClusterToPointInTimeInput) SetDeletionProtection(v bool) *RestoreDBClusterToPointInTimeInput {
+	s.DeletionProtection = &v
+	return s
+}
+
 // SetEnableCloudwatchLogsExports sets the EnableCloudwatchLogsExports field's value.
 func (s *RestoreDBClusterToPointInTimeInput) SetEnableCloudwatchLogsExports(v []*string) *RestoreDBClusterToPointInTimeInput {
 	s.EnableCloudwatchLogsExports = v
@@ -10727,9 +15472,21 @@ func (s *RestoreDBClusterToPointInTimeInput) SetRestoreToTime(v time.Time) *Rest
 	return s
 }
 
+// SetRestoreType sets the RestoreType field's value.
+func (s *RestoreDBClusterToPointInTimeInput) SetRestoreType(v string) *RestoreDBClusterToPointInTimeInput {
+	s.RestoreType = &v
+	return s
+}
+
 // SetSourceDBClusterIdentifier sets the SourceDBClusterIdentifier field's value.
 func (s *RestoreDBClusterToPointInTimeInput) SetSourceDBClusterIdentifier(v string) *RestoreDBClusterToPointInTimeInput {
 	s.SourceDBClusterIdentifier = &v
+	return s
+}
+
+// SetStorageType sets the StorageType field's value.
+func (s *RestoreDBClusterToPointInTimeInput) SetStorageType(v string) *RestoreDBClusterToPointInTimeInput {
+	s.StorageType = &v
 	return s
 }
 
@@ -10754,22 +15511,184 @@ func (s *RestoreDBClusterToPointInTimeInput) SetVpcSecurityGroupIds(v []*string)
 type RestoreDBClusterToPointInTimeOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information about a DB cluster.
+	// Detailed information about a cluster.
 	DBCluster *DBCluster `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreDBClusterToPointInTimeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RestoreDBClusterToPointInTimeOutput) GoString() string {
 	return s.String()
 }
 
 // SetDBCluster sets the DBCluster field's value.
 func (s *RestoreDBClusterToPointInTimeOutput) SetDBCluster(v *DBCluster) *RestoreDBClusterToPointInTimeOutput {
+	s.DBCluster = v
+	return s
+}
+
+type StartDBClusterInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the cluster to restart. Example: docdb-2019-05-28-15-24-52
+	//
+	// DBClusterIdentifier is a required field
+	DBClusterIdentifier *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartDBClusterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartDBClusterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartDBClusterInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "StartDBClusterInput"}
+	if s.DBClusterIdentifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDBClusterIdentifier sets the DBClusterIdentifier field's value.
+func (s *StartDBClusterInput) SetDBClusterIdentifier(v string) *StartDBClusterInput {
+	s.DBClusterIdentifier = &v
+	return s
+}
+
+type StartDBClusterOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Detailed information about a cluster.
+	DBCluster *DBCluster `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartDBClusterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StartDBClusterOutput) GoString() string {
+	return s.String()
+}
+
+// SetDBCluster sets the DBCluster field's value.
+func (s *StartDBClusterOutput) SetDBCluster(v *DBCluster) *StartDBClusterOutput {
+	s.DBCluster = v
+	return s
+}
+
+type StopDBClusterInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the cluster to stop. Example: docdb-2019-05-28-15-24-52
+	//
+	// DBClusterIdentifier is a required field
+	DBClusterIdentifier *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StopDBClusterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StopDBClusterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopDBClusterInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "StopDBClusterInput"}
+	if s.DBClusterIdentifier == nil {
+		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDBClusterIdentifier sets the DBClusterIdentifier field's value.
+func (s *StopDBClusterInput) SetDBClusterIdentifier(v string) *StopDBClusterInput {
+	s.DBClusterIdentifier = &v
+	return s
+}
+
+type StopDBClusterOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Detailed information about a cluster.
+	DBCluster *DBCluster `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StopDBClusterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StopDBClusterOutput) GoString() string {
+	return s.String()
+}
+
+// SetDBCluster sets the DBCluster field's value.
+func (s *StopDBClusterOutput) SetDBCluster(v *DBCluster) *StopDBClusterOutput {
 	s.DBCluster = v
 	return s
 }
@@ -10788,12 +15707,20 @@ type Subnet struct {
 	SubnetStatus *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subnet) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subnet) GoString() string {
 	return s.String()
 }
@@ -10834,12 +15761,20 @@ type Tag struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -10856,7 +15791,7 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
-// The version of the database engine that a DB instance can be upgraded to.
+// The version of the database engine that an instance can be upgraded to.
 type UpgradeTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -10864,7 +15799,7 @@ type UpgradeTarget struct {
 	// DB instances that have AutoMinorVersionUpgrade set to true.
 	AutoUpgrade *bool `type:"boolean"`
 
-	// The version of the database engine that a DB instance can be upgraded to.
+	// The version of the database engine that an instance can be upgraded to.
 	Description *string `type:"string"`
 
 	// The name of the upgrade target database engine.
@@ -10877,12 +15812,20 @@ type UpgradeTarget struct {
 	IsMajorVersionUpgrade *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradeTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradeTarget) GoString() string {
 	return s.String()
 }
@@ -10929,12 +15872,20 @@ type VpcSecurityGroupMembership struct {
 	VpcSecurityGroupId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VpcSecurityGroupMembership) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VpcSecurityGroupMembership) GoString() string {
 	return s.String()
 }
@@ -10959,6 +15910,14 @@ const (
 	ApplyMethodPendingReboot = "pending-reboot"
 )
 
+// ApplyMethod_Values returns all elements of the ApplyMethod enum
+func ApplyMethod_Values() []string {
+	return []string{
+		ApplyMethodImmediate,
+		ApplyMethodPendingReboot,
+	}
+}
+
 const (
 	// SourceTypeDbInstance is a SourceType enum value
 	SourceTypeDbInstance = "db-instance"
@@ -10978,3 +15937,15 @@ const (
 	// SourceTypeDbClusterSnapshot is a SourceType enum value
 	SourceTypeDbClusterSnapshot = "db-cluster-snapshot"
 )
+
+// SourceType_Values returns all elements of the SourceType enum
+func SourceType_Values() []string {
+	return []string{
+		SourceTypeDbInstance,
+		SourceTypeDbParameterGroup,
+		SourceTypeDbSecurityGroup,
+		SourceTypeDbSnapshot,
+		SourceTypeDbCluster,
+		SourceTypeDbClusterSnapshot,
+	}
+}

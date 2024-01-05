@@ -2,13 +2,23 @@
 
 package databasemigrationservice
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAccessDeniedFault for service response error code
 	// "AccessDeniedFault".
 	//
-	// AWS DMS was denied access to the endpoint.
+	// DMS was denied access to the endpoint. Check that the role is correctly configured.
 	ErrCodeAccessDeniedFault = "AccessDeniedFault"
+
+	// ErrCodeCollectorNotFoundFault for service response error code
+	// "CollectorNotFoundFault".
+	//
+	// The specified collector doesn't exist.
+	ErrCodeCollectorNotFoundFault = "CollectorNotFoundFault"
 
 	// ErrCodeInsufficientResourceCapacityFault for service response error code
 	// "InsufficientResourceCapacityFault".
@@ -22,6 +32,12 @@ const (
 	// The certificate was not valid.
 	ErrCodeInvalidCertificateFault = "InvalidCertificateFault"
 
+	// ErrCodeInvalidOperationFault for service response error code
+	// "InvalidOperationFault".
+	//
+	// The action or operation requested isn't valid.
+	ErrCodeInvalidOperationFault = "InvalidOperationFault"
+
 	// ErrCodeInvalidResourceStateFault for service response error code
 	// "InvalidResourceStateFault".
 	//
@@ -32,14 +48,51 @@ const (
 	// ErrCodeInvalidSubnet for service response error code
 	// "InvalidSubnet".
 	//
-	// The subnet provided is invalid.
+	// The subnet provided isn't valid.
 	ErrCodeInvalidSubnet = "InvalidSubnet"
+
+	// ErrCodeKMSAccessDeniedFault for service response error code
+	// "KMSAccessDeniedFault".
+	//
+	// The ciphertext references a key that doesn't exist or that the DMS account
+	// doesn't have access to.
+	ErrCodeKMSAccessDeniedFault = "KMSAccessDeniedFault"
+
+	// ErrCodeKMSDisabledFault for service response error code
+	// "KMSDisabledFault".
+	//
+	// The specified KMS key isn't enabled.
+	ErrCodeKMSDisabledFault = "KMSDisabledFault"
+
+	// ErrCodeKMSFault for service response error code
+	// "KMSFault".
+	//
+	// An Key Management Service (KMS) error is preventing access to KMS.
+	ErrCodeKMSFault = "KMSFault"
+
+	// ErrCodeKMSInvalidStateFault for service response error code
+	// "KMSInvalidStateFault".
+	//
+	// The state of the specified KMS resource isn't valid for this request.
+	ErrCodeKMSInvalidStateFault = "KMSInvalidStateFault"
 
 	// ErrCodeKMSKeyNotAccessibleFault for service response error code
 	// "KMSKeyNotAccessibleFault".
 	//
-	// AWS DMS cannot access the KMS key.
+	// DMS cannot access the KMS key.
 	ErrCodeKMSKeyNotAccessibleFault = "KMSKeyNotAccessibleFault"
+
+	// ErrCodeKMSNotFoundFault for service response error code
+	// "KMSNotFoundFault".
+	//
+	// The specified KMS entity or resource can't be found.
+	ErrCodeKMSNotFoundFault = "KMSNotFoundFault"
+
+	// ErrCodeKMSThrottlingFault for service response error code
+	// "KMSThrottlingFault".
+	//
+	// This request triggered KMS request throttling.
+	ErrCodeKMSThrottlingFault = "KMSThrottlingFault"
 
 	// ErrCodeReplicationSubnetGroupDoesNotCoverEnoughAZs for service response error code
 	// "ReplicationSubnetGroupDoesNotCoverEnoughAZs".
@@ -65,6 +118,18 @@ const (
 	//
 	// The quota for this resource quota has been exceeded.
 	ErrCodeResourceQuotaExceededFault = "ResourceQuotaExceededFault"
+
+	// ErrCodeS3AccessDeniedFault for service response error code
+	// "S3AccessDeniedFault".
+	//
+	// Insufficient privileges are preventing access to an Amazon S3 object.
+	ErrCodeS3AccessDeniedFault = "S3AccessDeniedFault"
+
+	// ErrCodeS3ResourceNotFoundFault for service response error code
+	// "S3ResourceNotFoundFault".
+	//
+	// A specified Amazon S3 bucket, bucket folder, or other object can't be found.
+	ErrCodeS3ResourceNotFoundFault = "S3ResourceNotFoundFault"
 
 	// ErrCodeSNSInvalidTopicFault for service response error code
 	// "SNSInvalidTopicFault".
@@ -96,3 +161,31 @@ const (
 	// An upgrade dependency is preventing the database migration.
 	ErrCodeUpgradeDependencyFailureFault = "UpgradeDependencyFailureFault"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccessDeniedFault":                           newErrorAccessDeniedFault,
+	"CollectorNotFoundFault":                      newErrorCollectorNotFoundFault,
+	"InsufficientResourceCapacityFault":           newErrorInsufficientResourceCapacityFault,
+	"InvalidCertificateFault":                     newErrorInvalidCertificateFault,
+	"InvalidOperationFault":                       newErrorInvalidOperationFault,
+	"InvalidResourceStateFault":                   newErrorInvalidResourceStateFault,
+	"InvalidSubnet":                               newErrorInvalidSubnet,
+	"KMSAccessDeniedFault":                        newErrorKMSAccessDeniedFault,
+	"KMSDisabledFault":                            newErrorKMSDisabledFault,
+	"KMSFault":                                    newErrorKMSFault,
+	"KMSInvalidStateFault":                        newErrorKMSInvalidStateFault,
+	"KMSKeyNotAccessibleFault":                    newErrorKMSKeyNotAccessibleFault,
+	"KMSNotFoundFault":                            newErrorKMSNotFoundFault,
+	"KMSThrottlingFault":                          newErrorKMSThrottlingFault,
+	"ReplicationSubnetGroupDoesNotCoverEnoughAZs": newErrorReplicationSubnetGroupDoesNotCoverEnoughAZs,
+	"ResourceAlreadyExistsFault":                  newErrorResourceAlreadyExistsFault,
+	"ResourceNotFoundFault":                       newErrorResourceNotFoundFault,
+	"ResourceQuotaExceededFault":                  newErrorResourceQuotaExceededFault,
+	"S3AccessDeniedFault":                         newErrorS3AccessDeniedFault,
+	"S3ResourceNotFoundFault":                     newErrorS3ResourceNotFoundFault,
+	"SNSInvalidTopicFault":                        newErrorSNSInvalidTopicFault,
+	"SNSNoAuthorizationFault":                     newErrorSNSNoAuthorizationFault,
+	"StorageQuotaExceededFault":                   newErrorStorageQuotaExceededFault,
+	"SubnetAlreadyInUse":                          newErrorSubnetAlreadyInUse,
+	"UpgradeDependencyFailureFault":               newErrorUpgradeDependencyFailureFault,
+}

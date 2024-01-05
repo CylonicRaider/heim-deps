@@ -29,14 +29,13 @@ const opAcceptQualificationRequest = "AcceptQualificationRequest"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AcceptQualificationRequestRequest method.
+//	req, resp := client.AcceptQualificationRequestRequest(params)
 //
-//    // Example sending a request using the AcceptQualificationRequestRequest method.
-//    req, resp := client.AcceptQualificationRequestRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequest
 func (c *MTurk) AcceptQualificationRequestRequest(input *AcceptQualificationRequestInput) (req *request.Request, output *AcceptQualificationRequestOutput) {
@@ -74,13 +73,14 @@ func (c *MTurk) AcceptQualificationRequestRequest(input *AcceptQualificationRequ
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation AcceptQualificationRequest for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequest
 func (c *MTurk) AcceptQualificationRequest(input *AcceptQualificationRequestInput) (*AcceptQualificationRequestOutput, error) {
@@ -120,14 +120,13 @@ const opApproveAssignment = "ApproveAssignment"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ApproveAssignmentRequest method.
+//	req, resp := client.ApproveAssignmentRequest(params)
 //
-//    // Example sending a request using the ApproveAssignmentRequest method.
-//    req, resp := client.ApproveAssignmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignment
 func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) (req *request.Request, output *ApproveAssignmentOutput) {
@@ -154,10 +153,10 @@ func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) (req *re
 // Approving an assignment initiates two payments from the Requester's Amazon.com
 // account
 //
-//    *  The Worker who submitted the results is paid the reward specified in
-//    the HIT.
+//   - The Worker who submitted the results is paid the reward specified in
+//     the HIT.
 //
-//    *  Amazon Mechanical Turk fees are debited.
+//   - Amazon Mechanical Turk fees are debited.
 //
 // If the Requester's account does not have adequate funds for these payments,
 // the call to ApproveAssignment returns an exception, and the approval is not
@@ -176,13 +175,14 @@ func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) (req *re
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ApproveAssignment for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignment
 func (c *MTurk) ApproveAssignment(input *ApproveAssignmentInput) (*ApproveAssignmentOutput, error) {
@@ -222,14 +222,13 @@ const opAssociateQualificationWithWorker = "AssociateQualificationWithWorker"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateQualificationWithWorkerRequest method.
+//	req, resp := client.AssociateQualificationWithWorkerRequest(params)
 //
-//    // Example sending a request using the AssociateQualificationWithWorkerRequest method.
-//    req, resp := client.AssociateQualificationWithWorkerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AssociateQualificationWithWorker
 func (c *MTurk) AssociateQualificationWithWorkerRequest(input *AssociateQualificationWithWorkerInput) (req *request.Request, output *AssociateQualificationWithWorkerOutput) {
@@ -272,13 +271,14 @@ func (c *MTurk) AssociateQualificationWithWorkerRequest(input *AssociateQualific
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation AssociateQualificationWithWorker for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AssociateQualificationWithWorker
 func (c *MTurk) AssociateQualificationWithWorker(input *AssociateQualificationWithWorkerInput) (*AssociateQualificationWithWorkerOutput, error) {
@@ -318,14 +318,13 @@ const opCreateAdditionalAssignmentsForHIT = "CreateAdditionalAssignmentsForHIT"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateAdditionalAssignmentsForHITRequest method.
+//	req, resp := client.CreateAdditionalAssignmentsForHITRequest(params)
 //
-//    // Example sending a request using the CreateAdditionalAssignmentsForHITRequest method.
-//    req, resp := client.CreateAdditionalAssignmentsForHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHIT
 func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditionalAssignmentsForHITInput) (req *request.Request, output *CreateAdditionalAssignmentsForHITOutput) {
@@ -353,15 +352,15 @@ func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditional
 // To extend the maximum number of assignments, specify the number of additional
 // assignments.
 //
-// HITs created with fewer than 10 assignments cannot be extended to have 10
-// or more assignments. Attempting to add assignments in a way that brings the
-// total number of assignments for a HIT from fewer than 10 assignments to 10
-// or more assignments will result in an AWS.MechanicalTurk.InvalidMaximumAssignmentsIncrease
-// exception.
+//   - HITs created with fewer than 10 assignments cannot be extended to have
+//     10 or more assignments. Attempting to add assignments in a way that brings
+//     the total number of assignments for a HIT from fewer than 10 assignments
+//     to 10 or more assignments will result in an AWS.MechanicalTurk.InvalidMaximumAssignmentsIncrease
+//     exception.
 //
-// HITs that were created before July 22, 2015 cannot be extended. Attempting
-// to extend HITs that were created before July 22, 2015 will result in an AWS.MechanicalTurk.HITTooOldForExtension
-// exception.
+//   - HITs that were created before July 22, 2015 cannot be extended. Attempting
+//     to extend HITs that were created before July 22, 2015 will result in an
+//     AWS.MechanicalTurk.HITTooOldForExtension exception.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -370,13 +369,14 @@ func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditional
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation CreateAdditionalAssignmentsForHIT for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHIT
 func (c *MTurk) CreateAdditionalAssignmentsForHIT(input *CreateAdditionalAssignmentsForHITInput) (*CreateAdditionalAssignmentsForHITOutput, error) {
@@ -416,14 +416,13 @@ const opCreateHIT = "CreateHIT"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateHITRequest method.
+//	req, resp := client.CreateHITRequest(params)
 //
-//    // Example sending a request using the CreateHITRequest method.
-//    req, resp := client.CreateHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHIT
 func (c *MTurk) CreateHITRequest(input *CreateHITInput) (req *request.Request, output *CreateHITOutput) {
@@ -474,13 +473,14 @@ func (c *MTurk) CreateHITRequest(input *CreateHITInput) (req *request.Request, o
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation CreateHIT for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHIT
 func (c *MTurk) CreateHIT(input *CreateHITInput) (*CreateHITOutput, error) {
@@ -520,14 +520,13 @@ const opCreateHITType = "CreateHITType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateHITTypeRequest method.
+//	req, resp := client.CreateHITTypeRequest(params)
 //
-//    // Example sending a request using the CreateHITTypeRequest method.
-//    req, resp := client.CreateHITTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITType
 func (c *MTurk) CreateHITTypeRequest(input *CreateHITTypeInput) (req *request.Request, output *CreateHITTypeOutput) {
@@ -560,13 +559,14 @@ func (c *MTurk) CreateHITTypeRequest(input *CreateHITTypeInput) (req *request.Re
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation CreateHITType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITType
 func (c *MTurk) CreateHITType(input *CreateHITTypeInput) (*CreateHITTypeOutput, error) {
@@ -606,14 +606,13 @@ const opCreateHITWithHITType = "CreateHITWithHITType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateHITWithHITTypeRequest method.
+//	req, resp := client.CreateHITWithHITTypeRequest(params)
 //
-//    // Example sending a request using the CreateHITWithHITTypeRequest method.
-//    req, resp := client.CreateHITWithHITTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITWithHITType
 func (c *MTurk) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) (req *request.Request, output *CreateHITWithHITTypeOutput) {
@@ -655,13 +654,14 @@ func (c *MTurk) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) (r
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation CreateHITWithHITType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITWithHITType
 func (c *MTurk) CreateHITWithHITType(input *CreateHITWithHITTypeInput) (*CreateHITWithHITTypeOutput, error) {
@@ -701,14 +701,13 @@ const opCreateQualificationType = "CreateQualificationType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateQualificationTypeRequest method.
+//	req, resp := client.CreateQualificationTypeRequest(params)
 //
-//    // Example sending a request using the CreateQualificationTypeRequest method.
-//    req, resp := client.CreateQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateQualificationType
 func (c *MTurk) CreateQualificationTypeRequest(input *CreateQualificationTypeInput) (req *request.Request, output *CreateQualificationTypeOutput) {
@@ -739,13 +738,14 @@ func (c *MTurk) CreateQualificationTypeRequest(input *CreateQualificationTypeInp
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation CreateQualificationType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateQualificationType
 func (c *MTurk) CreateQualificationType(input *CreateQualificationTypeInput) (*CreateQualificationTypeOutput, error) {
@@ -785,14 +785,13 @@ const opCreateWorkerBlock = "CreateWorkerBlock"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateWorkerBlockRequest method.
+//	req, resp := client.CreateWorkerBlockRequest(params)
 //
-//    // Example sending a request using the CreateWorkerBlockRequest method.
-//    req, resp := client.CreateWorkerBlockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateWorkerBlock
 func (c *MTurk) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) (req *request.Request, output *CreateWorkerBlockOutput) {
@@ -825,13 +824,14 @@ func (c *MTurk) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) (req *re
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation CreateWorkerBlock for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateWorkerBlock
 func (c *MTurk) CreateWorkerBlock(input *CreateWorkerBlockInput) (*CreateWorkerBlockOutput, error) {
@@ -871,14 +871,13 @@ const opDeleteHIT = "DeleteHIT"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteHITRequest method.
+//	req, resp := client.DeleteHITRequest(params)
 //
-//    // Example sending a request using the DeleteHITRequest method.
-//    req, resp := client.DeleteHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHIT
 func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) (req *request.Request, output *DeleteHITOutput) {
@@ -910,15 +909,15 @@ func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) (req *request.Request, o
 // HIT that is Reviewable but without all of its submitted assignments already
 // approved or rejected, the service will return an error.
 //
-// HITs are automatically disposed of after 120 days.
+//   - HITs are automatically disposed of after 120 days.
 //
-//  After you dispose of a HIT, you can no longer approve the HIT's rejected
-// assignments.
+//   - After you dispose of a HIT, you can no longer approve the HIT's rejected
+//     assignments.
 //
-//  Disposed HITs are not returned in results for the ListHITs operation.
+//   - Disposed HITs are not returned in results for the ListHITs operation.
 //
-//  Disposing HITs can improve the performance of operations such as ListReviewableHITs
-// and ListHITs.
+//   - Disposing HITs can improve the performance of operations such as ListReviewableHITs
+//     and ListHITs.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -927,13 +926,14 @@ func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) (req *request.Request, o
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation DeleteHIT for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHIT
 func (c *MTurk) DeleteHIT(input *DeleteHITInput) (*DeleteHITOutput, error) {
@@ -973,14 +973,13 @@ const opDeleteQualificationType = "DeleteQualificationType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteQualificationTypeRequest method.
+//	req, resp := client.DeleteQualificationTypeRequest(params)
 //
-//    // Example sending a request using the DeleteQualificationTypeRequest method.
-//    req, resp := client.DeleteQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteQualificationType
 func (c *MTurk) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInput) (req *request.Request, output *DeleteQualificationTypeOutput) {
@@ -1023,13 +1022,14 @@ func (c *MTurk) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInp
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation DeleteQualificationType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteQualificationType
 func (c *MTurk) DeleteQualificationType(input *DeleteQualificationTypeInput) (*DeleteQualificationTypeOutput, error) {
@@ -1069,14 +1069,13 @@ const opDeleteWorkerBlock = "DeleteWorkerBlock"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteWorkerBlockRequest method.
+//	req, resp := client.DeleteWorkerBlockRequest(params)
 //
-//    // Example sending a request using the DeleteWorkerBlockRequest method.
-//    req, resp := client.DeleteWorkerBlockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteWorkerBlock
 func (c *MTurk) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) (req *request.Request, output *DeleteWorkerBlockOutput) {
@@ -1112,13 +1111,14 @@ func (c *MTurk) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) (req *re
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation DeleteWorkerBlock for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteWorkerBlock
 func (c *MTurk) DeleteWorkerBlock(input *DeleteWorkerBlockInput) (*DeleteWorkerBlockOutput, error) {
@@ -1158,14 +1158,13 @@ const opDisassociateQualificationFromWorker = "DisassociateQualificationFromWork
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateQualificationFromWorkerRequest method.
+//	req, resp := client.DisassociateQualificationFromWorkerRequest(params)
 //
-//    // Example sending a request using the DisassociateQualificationFromWorkerRequest method.
-//    req, resp := client.DisassociateQualificationFromWorkerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorker
 func (c *MTurk) DisassociateQualificationFromWorkerRequest(input *DisassociateQualificationFromWorkerInput) (req *request.Request, output *DisassociateQualificationFromWorkerOutput) {
@@ -1200,13 +1199,14 @@ func (c *MTurk) DisassociateQualificationFromWorkerRequest(input *DisassociateQu
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation DisassociateQualificationFromWorker for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorker
 func (c *MTurk) DisassociateQualificationFromWorker(input *DisassociateQualificationFromWorkerInput) (*DisassociateQualificationFromWorkerOutput, error) {
@@ -1246,14 +1246,13 @@ const opGetAccountBalance = "GetAccountBalance"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetAccountBalanceRequest method.
+//	req, resp := client.GetAccountBalanceRequest(params)
 //
-//    // Example sending a request using the GetAccountBalanceRequest method.
-//    req, resp := client.GetAccountBalanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalance
 func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) (req *request.Request, output *GetAccountBalanceOutput) {
@@ -1274,8 +1273,12 @@ func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) (req *re
 
 // GetAccountBalance API operation for Amazon Mechanical Turk.
 //
-// The GetAccountBalance operation retrieves the amount of money in your Amazon
-// Mechanical Turk account.
+// The GetAccountBalance operation retrieves the Prepaid HITs balance in your
+// Amazon Mechanical Turk account if you are a Prepaid Requester. Alternatively,
+// this operation will retrieve the remaining available AWS Billing usage if
+// you have enabled AWS Billing. Note: If you have enabled AWS Billing and still
+// have a remaining Prepaid HITs balance, this balance can be viewed on the
+// My Account page in the Requester console.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1284,13 +1287,14 @@ func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) (req *re
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation GetAccountBalance for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalance
 func (c *MTurk) GetAccountBalance(input *GetAccountBalanceInput) (*GetAccountBalanceOutput, error) {
@@ -1330,14 +1334,13 @@ const opGetAssignment = "GetAssignment"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetAssignmentRequest method.
+//	req, resp := client.GetAssignmentRequest(params)
 //
-//    // Example sending a request using the GetAssignmentRequest method.
-//    req, resp := client.GetAssignmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAssignment
 func (c *MTurk) GetAssignmentRequest(input *GetAssignmentInput) (req *request.Request, output *GetAssignmentOutput) {
@@ -1367,13 +1370,14 @@ func (c *MTurk) GetAssignmentRequest(input *GetAssignmentInput) (req *request.Re
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation GetAssignment for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAssignment
 func (c *MTurk) GetAssignment(input *GetAssignmentInput) (*GetAssignmentOutput, error) {
@@ -1413,14 +1417,13 @@ const opGetFileUploadURL = "GetFileUploadURL"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetFileUploadURLRequest method.
+//	req, resp := client.GetFileUploadURLRequest(params)
 //
-//    // Example sending a request using the GetFileUploadURLRequest method.
-//    req, resp := client.GetFileUploadURLRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetFileUploadURL
 func (c *MTurk) GetFileUploadURLRequest(input *GetFileUploadURLInput) (req *request.Request, output *GetFileUploadURLOutput) {
@@ -1460,13 +1463,14 @@ func (c *MTurk) GetFileUploadURLRequest(input *GetFileUploadURLInput) (req *requ
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation GetFileUploadURL for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetFileUploadURL
 func (c *MTurk) GetFileUploadURL(input *GetFileUploadURLInput) (*GetFileUploadURLOutput, error) {
@@ -1506,14 +1510,13 @@ const opGetHIT = "GetHIT"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetHITRequest method.
+//	req, resp := client.GetHITRequest(params)
 //
-//    // Example sending a request using the GetHITRequest method.
-//    req, resp := client.GetHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetHIT
 func (c *MTurk) GetHITRequest(input *GetHITInput) (req *request.Request, output *GetHITOutput) {
@@ -1543,13 +1546,14 @@ func (c *MTurk) GetHITRequest(input *GetHITInput) (req *request.Request, output 
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation GetHIT for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetHIT
 func (c *MTurk) GetHIT(input *GetHITInput) (*GetHITOutput, error) {
@@ -1589,14 +1593,13 @@ const opGetQualificationScore = "GetQualificationScore"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetQualificationScoreRequest method.
+//	req, resp := client.GetQualificationScoreRequest(params)
 //
-//    // Example sending a request using the GetQualificationScoreRequest method.
-//    req, resp := client.GetQualificationScoreRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationScore
 func (c *MTurk) GetQualificationScoreRequest(input *GetQualificationScoreInput) (req *request.Request, output *GetQualificationScoreOutput) {
@@ -1634,13 +1637,14 @@ func (c *MTurk) GetQualificationScoreRequest(input *GetQualificationScoreInput) 
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation GetQualificationScore for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationScore
 func (c *MTurk) GetQualificationScore(input *GetQualificationScoreInput) (*GetQualificationScoreOutput, error) {
@@ -1680,14 +1684,13 @@ const opGetQualificationType = "GetQualificationType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetQualificationTypeRequest method.
+//	req, resp := client.GetQualificationTypeRequest(params)
 //
-//    // Example sending a request using the GetQualificationTypeRequest method.
-//    req, resp := client.GetQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationType
 func (c *MTurk) GetQualificationTypeRequest(input *GetQualificationTypeInput) (req *request.Request, output *GetQualificationTypeOutput) {
@@ -1718,13 +1721,14 @@ func (c *MTurk) GetQualificationTypeRequest(input *GetQualificationTypeInput) (r
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation GetQualificationType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationType
 func (c *MTurk) GetQualificationType(input *GetQualificationTypeInput) (*GetQualificationTypeOutput, error) {
@@ -1764,14 +1768,13 @@ const opListAssignmentsForHIT = "ListAssignmentsForHIT"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAssignmentsForHITRequest method.
+//	req, resp := client.ListAssignmentsForHITRequest(params)
 //
-//    // Example sending a request using the ListAssignmentsForHITRequest method.
-//    req, resp := client.ListAssignmentsForHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListAssignmentsForHIT
 func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) (req *request.Request, output *ListAssignmentsForHITOutput) {
@@ -1827,13 +1830,14 @@ func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) 
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListAssignmentsForHIT for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListAssignmentsForHIT
 func (c *MTurk) ListAssignmentsForHIT(input *ListAssignmentsForHITInput) (*ListAssignmentsForHITOutput, error) {
@@ -1865,15 +1869,14 @@ func (c *MTurk) ListAssignmentsForHITWithContext(ctx aws.Context, input *ListAss
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListAssignmentsForHIT operation.
-//    pageNum := 0
-//    err := client.ListAssignmentsForHITPages(params,
-//        func(page *ListAssignmentsForHITOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListAssignmentsForHIT operation.
+//	pageNum := 0
+//	err := client.ListAssignmentsForHITPages(params,
+//	    func(page *mturk.ListAssignmentsForHITOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListAssignmentsForHITPages(input *ListAssignmentsForHITInput, fn func(*ListAssignmentsForHITOutput, bool) bool) error {
 	return c.ListAssignmentsForHITPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1900,10 +1903,12 @@ func (c *MTurk) ListAssignmentsForHITPagesWithContext(ctx aws.Context, input *Li
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssignmentsForHITOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListAssignmentsForHITOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1923,14 +1928,13 @@ const opListBonusPayments = "ListBonusPayments"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListBonusPaymentsRequest method.
+//	req, resp := client.ListBonusPaymentsRequest(params)
 //
-//    // Example sending a request using the ListBonusPaymentsRequest method.
-//    req, resp := client.ListBonusPaymentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListBonusPayments
 func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) (req *request.Request, output *ListBonusPaymentsOutput) {
@@ -1967,13 +1971,14 @@ func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) (req *re
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListBonusPayments for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListBonusPayments
 func (c *MTurk) ListBonusPayments(input *ListBonusPaymentsInput) (*ListBonusPaymentsOutput, error) {
@@ -2005,15 +2010,14 @@ func (c *MTurk) ListBonusPaymentsWithContext(ctx aws.Context, input *ListBonusPa
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListBonusPayments operation.
-//    pageNum := 0
-//    err := client.ListBonusPaymentsPages(params,
-//        func(page *ListBonusPaymentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListBonusPayments operation.
+//	pageNum := 0
+//	err := client.ListBonusPaymentsPages(params,
+//	    func(page *mturk.ListBonusPaymentsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListBonusPaymentsPages(input *ListBonusPaymentsInput, fn func(*ListBonusPaymentsOutput, bool) bool) error {
 	return c.ListBonusPaymentsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2040,10 +2044,12 @@ func (c *MTurk) ListBonusPaymentsPagesWithContext(ctx aws.Context, input *ListBo
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListBonusPaymentsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListBonusPaymentsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2063,14 +2069,13 @@ const opListHITs = "ListHITs"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListHITsRequest method.
+//	req, resp := client.ListHITsRequest(params)
 //
-//    // Example sending a request using the ListHITsRequest method.
-//    req, resp := client.ListHITsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITs
 func (c *MTurk) ListHITsRequest(input *ListHITsInput) (req *request.Request, output *ListHITsOutput) {
@@ -2108,13 +2113,14 @@ func (c *MTurk) ListHITsRequest(input *ListHITsInput) (req *request.Request, out
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListHITs for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITs
 func (c *MTurk) ListHITs(input *ListHITsInput) (*ListHITsOutput, error) {
@@ -2146,15 +2152,14 @@ func (c *MTurk) ListHITsWithContext(ctx aws.Context, input *ListHITsInput, opts 
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListHITs operation.
-//    pageNum := 0
-//    err := client.ListHITsPages(params,
-//        func(page *ListHITsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListHITs operation.
+//	pageNum := 0
+//	err := client.ListHITsPages(params,
+//	    func(page *mturk.ListHITsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListHITsPages(input *ListHITsInput, fn func(*ListHITsOutput, bool) bool) error {
 	return c.ListHITsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2181,10 +2186,12 @@ func (c *MTurk) ListHITsPagesWithContext(ctx aws.Context, input *ListHITsInput, 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListHITsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListHITsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2204,14 +2211,13 @@ const opListHITsForQualificationType = "ListHITsForQualificationType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListHITsForQualificationTypeRequest method.
+//	req, resp := client.ListHITsForQualificationTypeRequest(params)
 //
-//    // Example sending a request using the ListHITsForQualificationTypeRequest method.
-//    req, resp := client.ListHITsForQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsForQualificationType
 func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificationTypeInput) (req *request.Request, output *ListHITsForQualificationTypeOutput) {
@@ -2250,13 +2256,14 @@ func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificat
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListHITsForQualificationType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsForQualificationType
 func (c *MTurk) ListHITsForQualificationType(input *ListHITsForQualificationTypeInput) (*ListHITsForQualificationTypeOutput, error) {
@@ -2288,15 +2295,14 @@ func (c *MTurk) ListHITsForQualificationTypeWithContext(ctx aws.Context, input *
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListHITsForQualificationType operation.
-//    pageNum := 0
-//    err := client.ListHITsForQualificationTypePages(params,
-//        func(page *ListHITsForQualificationTypeOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListHITsForQualificationType operation.
+//	pageNum := 0
+//	err := client.ListHITsForQualificationTypePages(params,
+//	    func(page *mturk.ListHITsForQualificationTypeOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListHITsForQualificationTypePages(input *ListHITsForQualificationTypeInput, fn func(*ListHITsForQualificationTypeOutput, bool) bool) error {
 	return c.ListHITsForQualificationTypePagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2323,10 +2329,12 @@ func (c *MTurk) ListHITsForQualificationTypePagesWithContext(ctx aws.Context, in
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListHITsForQualificationTypeOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListHITsForQualificationTypeOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2346,14 +2354,13 @@ const opListQualificationRequests = "ListQualificationRequests"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListQualificationRequestsRequest method.
+//	req, resp := client.ListQualificationRequestsRequest(params)
 //
-//    // Example sending a request using the ListQualificationRequestsRequest method.
-//    req, resp := client.ListQualificationRequestsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationRequests
 func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequestsInput) (req *request.Request, output *ListQualificationRequestsOutput) {
@@ -2392,13 +2399,14 @@ func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequest
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListQualificationRequests for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationRequests
 func (c *MTurk) ListQualificationRequests(input *ListQualificationRequestsInput) (*ListQualificationRequestsOutput, error) {
@@ -2430,15 +2438,14 @@ func (c *MTurk) ListQualificationRequestsWithContext(ctx aws.Context, input *Lis
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListQualificationRequests operation.
-//    pageNum := 0
-//    err := client.ListQualificationRequestsPages(params,
-//        func(page *ListQualificationRequestsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListQualificationRequests operation.
+//	pageNum := 0
+//	err := client.ListQualificationRequestsPages(params,
+//	    func(page *mturk.ListQualificationRequestsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListQualificationRequestsPages(input *ListQualificationRequestsInput, fn func(*ListQualificationRequestsOutput, bool) bool) error {
 	return c.ListQualificationRequestsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2465,10 +2472,12 @@ func (c *MTurk) ListQualificationRequestsPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListQualificationRequestsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListQualificationRequestsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2488,14 +2497,13 @@ const opListQualificationTypes = "ListQualificationTypes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListQualificationTypesRequest method.
+//	req, resp := client.ListQualificationTypesRequest(params)
 //
-//    // Example sending a request using the ListQualificationTypesRequest method.
-//    req, resp := client.ListQualificationTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationTypes
 func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput) (req *request.Request, output *ListQualificationTypesOutput) {
@@ -2532,13 +2540,14 @@ func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListQualificationTypes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationTypes
 func (c *MTurk) ListQualificationTypes(input *ListQualificationTypesInput) (*ListQualificationTypesOutput, error) {
@@ -2570,15 +2579,14 @@ func (c *MTurk) ListQualificationTypesWithContext(ctx aws.Context, input *ListQu
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListQualificationTypes operation.
-//    pageNum := 0
-//    err := client.ListQualificationTypesPages(params,
-//        func(page *ListQualificationTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListQualificationTypes operation.
+//	pageNum := 0
+//	err := client.ListQualificationTypesPages(params,
+//	    func(page *mturk.ListQualificationTypesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListQualificationTypesPages(input *ListQualificationTypesInput, fn func(*ListQualificationTypesOutput, bool) bool) error {
 	return c.ListQualificationTypesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2605,10 +2613,12 @@ func (c *MTurk) ListQualificationTypesPagesWithContext(ctx aws.Context, input *L
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListQualificationTypesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListQualificationTypesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2628,14 +2638,13 @@ const opListReviewPolicyResultsForHIT = "ListReviewPolicyResultsForHIT"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListReviewPolicyResultsForHITRequest method.
+//	req, resp := client.ListReviewPolicyResultsForHITRequest(params)
 //
-//    // Example sending a request using the ListReviewPolicyResultsForHITRequest method.
-//    req, resp := client.ListReviewPolicyResultsForHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewPolicyResultsForHIT
 func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResultsForHITInput) (req *request.Request, output *ListReviewPolicyResultsForHITOutput) {
@@ -2675,13 +2684,14 @@ func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResu
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListReviewPolicyResultsForHIT for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewPolicyResultsForHIT
 func (c *MTurk) ListReviewPolicyResultsForHIT(input *ListReviewPolicyResultsForHITInput) (*ListReviewPolicyResultsForHITOutput, error) {
@@ -2713,15 +2723,14 @@ func (c *MTurk) ListReviewPolicyResultsForHITWithContext(ctx aws.Context, input 
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListReviewPolicyResultsForHIT operation.
-//    pageNum := 0
-//    err := client.ListReviewPolicyResultsForHITPages(params,
-//        func(page *ListReviewPolicyResultsForHITOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListReviewPolicyResultsForHIT operation.
+//	pageNum := 0
+//	err := client.ListReviewPolicyResultsForHITPages(params,
+//	    func(page *mturk.ListReviewPolicyResultsForHITOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListReviewPolicyResultsForHITPages(input *ListReviewPolicyResultsForHITInput, fn func(*ListReviewPolicyResultsForHITOutput, bool) bool) error {
 	return c.ListReviewPolicyResultsForHITPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2748,10 +2757,12 @@ func (c *MTurk) ListReviewPolicyResultsForHITPagesWithContext(ctx aws.Context, i
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListReviewPolicyResultsForHITOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListReviewPolicyResultsForHITOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2771,14 +2782,13 @@ const opListReviewableHITs = "ListReviewableHITs"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListReviewableHITsRequest method.
+//	req, resp := client.ListReviewableHITsRequest(params)
 //
-//    // Example sending a request using the ListReviewableHITsRequest method.
-//    req, resp := client.ListReviewableHITsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewableHITs
 func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) (req *request.Request, output *ListReviewableHITsOutput) {
@@ -2816,13 +2826,14 @@ func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) (req *
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListReviewableHITs for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewableHITs
 func (c *MTurk) ListReviewableHITs(input *ListReviewableHITsInput) (*ListReviewableHITsOutput, error) {
@@ -2854,15 +2865,14 @@ func (c *MTurk) ListReviewableHITsWithContext(ctx aws.Context, input *ListReview
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListReviewableHITs operation.
-//    pageNum := 0
-//    err := client.ListReviewableHITsPages(params,
-//        func(page *ListReviewableHITsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListReviewableHITs operation.
+//	pageNum := 0
+//	err := client.ListReviewableHITsPages(params,
+//	    func(page *mturk.ListReviewableHITsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListReviewableHITsPages(input *ListReviewableHITsInput, fn func(*ListReviewableHITsOutput, bool) bool) error {
 	return c.ListReviewableHITsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -2889,10 +2899,12 @@ func (c *MTurk) ListReviewableHITsPagesWithContext(ctx aws.Context, input *ListR
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListReviewableHITsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListReviewableHITsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -2912,14 +2924,13 @@ const opListWorkerBlocks = "ListWorkerBlocks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListWorkerBlocksRequest method.
+//	req, resp := client.ListWorkerBlocksRequest(params)
 //
-//    // Example sending a request using the ListWorkerBlocksRequest method.
-//    req, resp := client.ListWorkerBlocksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocks
 func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) (req *request.Request, output *ListWorkerBlocksOutput) {
@@ -2956,13 +2967,14 @@ func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) (req *requ
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListWorkerBlocks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocks
 func (c *MTurk) ListWorkerBlocks(input *ListWorkerBlocksInput) (*ListWorkerBlocksOutput, error) {
@@ -2994,15 +3006,14 @@ func (c *MTurk) ListWorkerBlocksWithContext(ctx aws.Context, input *ListWorkerBl
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListWorkerBlocks operation.
-//    pageNum := 0
-//    err := client.ListWorkerBlocksPages(params,
-//        func(page *ListWorkerBlocksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListWorkerBlocks operation.
+//	pageNum := 0
+//	err := client.ListWorkerBlocksPages(params,
+//	    func(page *mturk.ListWorkerBlocksOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListWorkerBlocksPages(input *ListWorkerBlocksInput, fn func(*ListWorkerBlocksOutput, bool) bool) error {
 	return c.ListWorkerBlocksPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3029,10 +3040,12 @@ func (c *MTurk) ListWorkerBlocksPagesWithContext(ctx aws.Context, input *ListWor
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListWorkerBlocksOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListWorkerBlocksOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3052,14 +3065,13 @@ const opListWorkersWithQualificationType = "ListWorkersWithQualificationType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListWorkersWithQualificationTypeRequest method.
+//	req, resp := client.ListWorkersWithQualificationTypeRequest(params)
 //
-//    // Example sending a request using the ListWorkersWithQualificationTypeRequest method.
-//    req, resp := client.ListWorkersWithQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkersWithQualificationType
 func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQualificationTypeInput) (req *request.Request, output *ListWorkersWithQualificationTypeOutput) {
@@ -3096,13 +3108,14 @@ func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQu
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation ListWorkersWithQualificationType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkersWithQualificationType
 func (c *MTurk) ListWorkersWithQualificationType(input *ListWorkersWithQualificationTypeInput) (*ListWorkersWithQualificationTypeOutput, error) {
@@ -3134,15 +3147,14 @@ func (c *MTurk) ListWorkersWithQualificationTypeWithContext(ctx aws.Context, inp
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListWorkersWithQualificationType operation.
-//    pageNum := 0
-//    err := client.ListWorkersWithQualificationTypePages(params,
-//        func(page *ListWorkersWithQualificationTypeOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListWorkersWithQualificationType operation.
+//	pageNum := 0
+//	err := client.ListWorkersWithQualificationTypePages(params,
+//	    func(page *mturk.ListWorkersWithQualificationTypeOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *MTurk) ListWorkersWithQualificationTypePages(input *ListWorkersWithQualificationTypeInput, fn func(*ListWorkersWithQualificationTypeOutput, bool) bool) error {
 	return c.ListWorkersWithQualificationTypePagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3169,10 +3181,12 @@ func (c *MTurk) ListWorkersWithQualificationTypePagesWithContext(ctx aws.Context
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListWorkersWithQualificationTypeOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListWorkersWithQualificationTypeOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -3192,14 +3206,13 @@ const opNotifyWorkers = "NotifyWorkers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the NotifyWorkersRequest method.
+//	req, resp := client.NotifyWorkersRequest(params)
 //
-//    // Example sending a request using the NotifyWorkersRequest method.
-//    req, resp := client.NotifyWorkersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotifyWorkers
 func (c *MTurk) NotifyWorkersRequest(input *NotifyWorkersInput) (req *request.Request, output *NotifyWorkersOutput) {
@@ -3233,13 +3246,14 @@ func (c *MTurk) NotifyWorkersRequest(input *NotifyWorkersInput) (req *request.Re
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation NotifyWorkers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotifyWorkers
 func (c *MTurk) NotifyWorkers(input *NotifyWorkersInput) (*NotifyWorkersOutput, error) {
@@ -3279,14 +3293,13 @@ const opRejectAssignment = "RejectAssignment"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RejectAssignmentRequest method.
+//	req, resp := client.RejectAssignmentRequest(params)
 //
-//    // Example sending a request using the RejectAssignmentRequest method.
-//    req, resp := client.RejectAssignmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignment
 func (c *MTurk) RejectAssignmentRequest(input *RejectAssignmentInput) (req *request.Request, output *RejectAssignmentOutput) {
@@ -3325,13 +3338,14 @@ func (c *MTurk) RejectAssignmentRequest(input *RejectAssignmentInput) (req *requ
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation RejectAssignment for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignment
 func (c *MTurk) RejectAssignment(input *RejectAssignmentInput) (*RejectAssignmentOutput, error) {
@@ -3371,14 +3385,13 @@ const opRejectQualificationRequest = "RejectQualificationRequest"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RejectQualificationRequestRequest method.
+//	req, resp := client.RejectQualificationRequestRequest(params)
 //
-//    // Example sending a request using the RejectQualificationRequestRequest method.
-//    req, resp := client.RejectQualificationRequestRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectQualificationRequest
 func (c *MTurk) RejectQualificationRequestRequest(input *RejectQualificationRequestInput) (req *request.Request, output *RejectQualificationRequestOutput) {
@@ -3412,13 +3425,14 @@ func (c *MTurk) RejectQualificationRequestRequest(input *RejectQualificationRequ
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation RejectQualificationRequest for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectQualificationRequest
 func (c *MTurk) RejectQualificationRequest(input *RejectQualificationRequestInput) (*RejectQualificationRequestOutput, error) {
@@ -3458,14 +3472,13 @@ const opSendBonus = "SendBonus"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SendBonusRequest method.
+//	req, resp := client.SendBonusRequest(params)
 //
-//    // Example sending a request using the SendBonusRequest method.
-//    req, resp := client.SendBonusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendBonus
 func (c *MTurk) SendBonusRequest(input *SendBonusInput) (req *request.Request, output *SendBonusOutput) {
@@ -3504,13 +3517,14 @@ func (c *MTurk) SendBonusRequest(input *SendBonusInput) (req *request.Request, o
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation SendBonus for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendBonus
 func (c *MTurk) SendBonus(input *SendBonusInput) (*SendBonusOutput, error) {
@@ -3550,14 +3564,13 @@ const opSendTestEventNotification = "SendTestEventNotification"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the SendTestEventNotificationRequest method.
+//	req, resp := client.SendTestEventNotificationRequest(params)
 //
-//    // Example sending a request using the SendTestEventNotificationRequest method.
-//    req, resp := client.SendTestEventNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotification
 func (c *MTurk) SendTestEventNotificationRequest(input *SendTestEventNotificationInput) (req *request.Request, output *SendTestEventNotificationOutput) {
@@ -3593,13 +3606,14 @@ func (c *MTurk) SendTestEventNotificationRequest(input *SendTestEventNotificatio
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation SendTestEventNotification for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotification
 func (c *MTurk) SendTestEventNotification(input *SendTestEventNotificationInput) (*SendTestEventNotificationOutput, error) {
@@ -3639,14 +3653,13 @@ const opUpdateExpirationForHIT = "UpdateExpirationForHIT"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateExpirationForHITRequest method.
+//	req, resp := client.UpdateExpirationForHITRequest(params)
 //
-//    // Example sending a request using the UpdateExpirationForHITRequest method.
-//    req, resp := client.UpdateExpirationForHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHIT
 func (c *MTurk) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput) (req *request.Request, output *UpdateExpirationForHITOutput) {
@@ -3679,13 +3692,14 @@ func (c *MTurk) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation UpdateExpirationForHIT for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHIT
 func (c *MTurk) UpdateExpirationForHIT(input *UpdateExpirationForHITInput) (*UpdateExpirationForHITOutput, error) {
@@ -3725,14 +3739,13 @@ const opUpdateHITReviewStatus = "UpdateHITReviewStatus"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateHITReviewStatusRequest method.
+//	req, resp := client.UpdateHITReviewStatusRequest(params)
 //
-//    // Example sending a request using the UpdateHITReviewStatusRequest method.
-//    req, resp := client.UpdateHITReviewStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITReviewStatus
 func (c *MTurk) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) (req *request.Request, output *UpdateHITReviewStatusOutput) {
@@ -3765,13 +3778,14 @@ func (c *MTurk) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) 
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation UpdateHITReviewStatus for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITReviewStatus
 func (c *MTurk) UpdateHITReviewStatus(input *UpdateHITReviewStatusInput) (*UpdateHITReviewStatusOutput, error) {
@@ -3811,14 +3825,13 @@ const opUpdateHITTypeOfHIT = "UpdateHITTypeOfHIT"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateHITTypeOfHITRequest method.
+//	req, resp := client.UpdateHITTypeOfHITRequest(params)
 //
-//    // Example sending a request using the UpdateHITTypeOfHITRequest method.
-//    req, resp := client.UpdateHITTypeOfHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITTypeOfHIT
 func (c *MTurk) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) (req *request.Request, output *UpdateHITTypeOfHITOutput) {
@@ -3852,13 +3865,14 @@ func (c *MTurk) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) (req *
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation UpdateHITTypeOfHIT for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITTypeOfHIT
 func (c *MTurk) UpdateHITTypeOfHIT(input *UpdateHITTypeOfHITInput) (*UpdateHITTypeOfHITOutput, error) {
@@ -3898,14 +3912,13 @@ const opUpdateNotificationSettings = "UpdateNotificationSettings"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateNotificationSettingsRequest method.
+//	req, resp := client.UpdateNotificationSettingsRequest(params)
 //
-//    // Example sending a request using the UpdateNotificationSettingsRequest method.
-//    req, resp := client.UpdateNotificationSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettings
 func (c *MTurk) UpdateNotificationSettingsRequest(input *UpdateNotificationSettingsInput) (req *request.Request, output *UpdateNotificationSettingsOutput) {
@@ -3945,13 +3958,14 @@ func (c *MTurk) UpdateNotificationSettingsRequest(input *UpdateNotificationSetti
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation UpdateNotificationSettings for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettings
 func (c *MTurk) UpdateNotificationSettings(input *UpdateNotificationSettingsInput) (*UpdateNotificationSettingsOutput, error) {
@@ -3991,14 +4005,13 @@ const opUpdateQualificationType = "UpdateQualificationType"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateQualificationTypeRequest method.
+//	req, resp := client.UpdateQualificationTypeRequest(params)
 //
-//    // Example sending a request using the UpdateQualificationTypeRequest method.
-//    req, resp := client.UpdateQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateQualificationType
 func (c *MTurk) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInput) (req *request.Request, output *UpdateQualificationTypeOutput) {
@@ -4058,13 +4071,14 @@ func (c *MTurk) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInp
 // See the AWS API reference guide for Amazon Mechanical Turk's
 // API operation UpdateQualificationType for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
+// Returned Error Types:
 //
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//   - ServiceFault
+//     Amazon Mechanical Turk is temporarily unable to process your request. Try
+//     your call again.
+//
+//   - RequestError
+//     Your request is invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateQualificationType
 func (c *MTurk) UpdateQualificationType(input *UpdateQualificationTypeInput) (*UpdateQualificationTypeOutput, error) {
@@ -4102,12 +4116,20 @@ type AcceptQualificationRequestInput struct {
 	QualificationRequestId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptQualificationRequestInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptQualificationRequestInput) GoString() string {
 	return s.String()
 }
@@ -4141,12 +4163,20 @@ type AcceptQualificationRequestOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptQualificationRequestOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AcceptQualificationRequestOutput) GoString() string {
 	return s.String()
 }
@@ -4169,12 +4199,20 @@ type ApproveAssignmentInput struct {
 	RequesterFeedback *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApproveAssignmentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApproveAssignmentInput) GoString() string {
 	return s.String()
 }
@@ -4217,12 +4255,20 @@ type ApproveAssignmentOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApproveAssignmentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApproveAssignmentOutput) GoString() string {
 	return s.String()
 }
@@ -4288,12 +4334,20 @@ type Assignment struct {
 	WorkerId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Assignment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Assignment) GoString() string {
 	return s.String()
 }
@@ -4393,12 +4447,20 @@ type AssociateQualificationWithWorkerInput struct {
 	WorkerId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateQualificationWithWorkerInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateQualificationWithWorkerInput) GoString() string {
 	return s.String()
 }
@@ -4453,12 +4515,20 @@ type AssociateQualificationWithWorkerOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateQualificationWithWorkerOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateQualificationWithWorkerOutput) GoString() string {
 	return s.String()
 }
@@ -4483,12 +4553,20 @@ type BonusPayment struct {
 	WorkerId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BonusPayment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BonusPayment) GoString() string {
 	return s.String()
 }
@@ -4545,12 +4623,20 @@ type CreateAdditionalAssignmentsForHITInput struct {
 	UniqueRequestToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAdditionalAssignmentsForHITInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAdditionalAssignmentsForHITInput) GoString() string {
 	return s.String()
 }
@@ -4599,12 +4685,20 @@ type CreateAdditionalAssignmentsForHITOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAdditionalAssignmentsForHITOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateAdditionalAssignmentsForHITOutput) GoString() string {
 	return s.String()
 }
@@ -4726,12 +4820,20 @@ type CreateHITInput struct {
 	UniqueRequestToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITInput) GoString() string {
 	return s.String()
 }
@@ -4901,12 +5003,20 @@ type CreateHITOutput struct {
 	HIT *HIT `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITOutput) GoString() string {
 	return s.String()
 }
@@ -4968,12 +5078,20 @@ type CreateHITTypeInput struct {
 	Title *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITTypeInput) GoString() string {
 	return s.String()
 }
@@ -5059,12 +5177,20 @@ type CreateHITTypeOutput struct {
 	HITTypeId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITTypeOutput) GoString() string {
 	return s.String()
 }
@@ -5150,12 +5276,20 @@ type CreateHITWithHITTypeInput struct {
 	UniqueRequestToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITWithHITTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITWithHITTypeInput) GoString() string {
 	return s.String()
 }
@@ -5273,12 +5407,20 @@ type CreateHITWithHITTypeOutput struct {
 	HIT *HIT `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITWithHITTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateHITWithHITTypeOutput) GoString() string {
 	return s.String()
 }
@@ -5364,12 +5506,20 @@ type CreateQualificationTypeInput struct {
 	TestDurationInSeconds *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateQualificationTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateQualificationTypeInput) GoString() string {
 	return s.String()
 }
@@ -5460,12 +5610,20 @@ type CreateQualificationTypeOutput struct {
 	QualificationType *QualificationType `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateQualificationTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateQualificationTypeOutput) GoString() string {
 	return s.String()
 }
@@ -5491,12 +5649,20 @@ type CreateWorkerBlockInput struct {
 	WorkerId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWorkerBlockInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWorkerBlockInput) GoString() string {
 	return s.String()
 }
@@ -5536,12 +5702,20 @@ type CreateWorkerBlockOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWorkerBlockOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWorkerBlockOutput) GoString() string {
 	return s.String()
 }
@@ -5555,12 +5729,20 @@ type DeleteHITInput struct {
 	HITId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHITInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHITInput) GoString() string {
 	return s.String()
 }
@@ -5591,12 +5773,20 @@ type DeleteHITOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHITOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteHITOutput) GoString() string {
 	return s.String()
 }
@@ -5610,12 +5800,20 @@ type DeleteQualificationTypeInput struct {
 	QualificationTypeId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteQualificationTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteQualificationTypeInput) GoString() string {
 	return s.String()
 }
@@ -5646,12 +5844,20 @@ type DeleteQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteQualificationTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteQualificationTypeOutput) GoString() string {
 	return s.String()
 }
@@ -5669,12 +5875,20 @@ type DeleteWorkerBlockInput struct {
 	WorkerId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWorkerBlockInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWorkerBlockInput) GoString() string {
 	return s.String()
 }
@@ -5711,12 +5925,20 @@ type DeleteWorkerBlockOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWorkerBlockOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWorkerBlockOutput) GoString() string {
 	return s.String()
 }
@@ -5739,12 +5961,20 @@ type DisassociateQualificationFromWorkerInput struct {
 	WorkerId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateQualificationFromWorkerInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateQualificationFromWorkerInput) GoString() string {
 	return s.String()
 }
@@ -5793,12 +6023,20 @@ type DisassociateQualificationFromWorkerOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateQualificationFromWorkerOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateQualificationFromWorkerOutput) GoString() string {
 	return s.String()
 }
@@ -5807,12 +6045,20 @@ type GetAccountBalanceInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAccountBalanceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAccountBalanceInput) GoString() string {
 	return s.String()
 }
@@ -5827,12 +6073,20 @@ type GetAccountBalanceOutput struct {
 	OnHoldBalance *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAccountBalanceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAccountBalanceOutput) GoString() string {
 	return s.String()
 }
@@ -5858,12 +6112,20 @@ type GetAssignmentInput struct {
 	AssignmentId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAssignmentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAssignmentInput) GoString() string {
 	return s.String()
 }
@@ -5900,12 +6162,20 @@ type GetAssignmentOutput struct {
 	HIT *HIT `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAssignmentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAssignmentOutput) GoString() string {
 	return s.String()
 }
@@ -5937,12 +6207,20 @@ type GetFileUploadURLInput struct {
 	QuestionIdentifier *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFileUploadURLInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFileUploadURLInput) GoString() string {
 	return s.String()
 }
@@ -5985,12 +6263,20 @@ type GetFileUploadURLOutput struct {
 	FileUploadURL *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFileUploadURLOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFileUploadURLOutput) GoString() string {
 	return s.String()
 }
@@ -6010,12 +6296,20 @@ type GetHITInput struct {
 	HITId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetHITInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetHITInput) GoString() string {
 	return s.String()
 }
@@ -6049,12 +6343,20 @@ type GetHITOutput struct {
 	HIT *HIT `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetHITOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetHITOutput) GoString() string {
 	return s.String()
 }
@@ -6079,12 +6381,20 @@ type GetQualificationScoreInput struct {
 	WorkerId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetQualificationScoreInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetQualificationScoreInput) GoString() string {
 	return s.String()
 }
@@ -6131,12 +6441,20 @@ type GetQualificationScoreOutput struct {
 	Qualification *Qualification `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetQualificationScoreOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetQualificationScoreOutput) GoString() string {
 	return s.String()
 }
@@ -6156,12 +6474,20 @@ type GetQualificationTypeInput struct {
 	QualificationTypeId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetQualificationTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetQualificationTypeInput) GoString() string {
 	return s.String()
 }
@@ -6195,12 +6521,20 @@ type GetQualificationTypeOutput struct {
 	QualificationType *QualificationType `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetQualificationTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetQualificationTypeOutput) GoString() string {
 	return s.String()
 }
@@ -6298,12 +6632,20 @@ type HIT struct {
 	Title *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HIT) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HIT) GoString() string {
 	return s.String()
 }
@@ -6451,12 +6793,20 @@ type HITLayoutParameter struct {
 	Value *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HITLayoutParameter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HITLayoutParameter) GoString() string {
 	return s.String()
 }
@@ -6493,7 +6843,7 @@ type ListAssignmentsForHITInput struct {
 	_ struct{} `type:"structure"`
 
 	// The status of the assignments to return: Submitted | Approved | Rejected
-	AssignmentStatuses []*string `type:"list"`
+	AssignmentStatuses []*string `type:"list" enum:"AssignmentStatus"`
 
 	// The ID of the HIT.
 	//
@@ -6506,12 +6856,20 @@ type ListAssignmentsForHITInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssignmentsForHITInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssignmentsForHITInput) GoString() string {
 	return s.String()
 }
@@ -6578,12 +6936,20 @@ type ListAssignmentsForHITOutput struct {
 	NumResults *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssignmentsForHITOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAssignmentsForHITOutput) GoString() string {
 	return s.String()
 }
@@ -6625,12 +6991,20 @@ type ListBonusPaymentsInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBonusPaymentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBonusPaymentsInput) GoString() string {
 	return s.String()
 }
@@ -6698,12 +7072,20 @@ type ListBonusPaymentsOutput struct {
 	NumResults *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBonusPaymentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListBonusPaymentsOutput) GoString() string {
 	return s.String()
 }
@@ -6741,12 +7123,20 @@ type ListHITsForQualificationTypeInput struct {
 	QualificationTypeId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHITsForQualificationTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHITsForQualificationTypeInput) GoString() string {
 	return s.String()
 }
@@ -6807,12 +7197,20 @@ type ListHITsForQualificationTypeOutput struct {
 	NumResults *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHITsForQualificationTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHITsForQualificationTypeOutput) GoString() string {
 	return s.String()
 }
@@ -6844,12 +7242,20 @@ type ListHITsInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHITsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHITsInput) GoString() string {
 	return s.String()
 }
@@ -6898,12 +7304,20 @@ type ListHITsOutput struct {
 	NumResults *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHITsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListHITsOutput) GoString() string {
 	return s.String()
 }
@@ -6941,12 +7355,20 @@ type ListQualificationRequestsInput struct {
 	QualificationTypeId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListQualificationRequestsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListQualificationRequestsInput) GoString() string {
 	return s.String()
 }
@@ -7006,12 +7428,20 @@ type ListQualificationRequestsOutput struct {
 	QualificationRequests []*QualificationRequest `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListQualificationRequestsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListQualificationRequestsOutput) GoString() string {
 	return s.String()
 }
@@ -7063,12 +7493,20 @@ type ListQualificationTypesInput struct {
 	Query *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListQualificationTypesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListQualificationTypesInput) GoString() string {
 	return s.String()
 }
@@ -7138,12 +7576,20 @@ type ListQualificationTypesOutput struct {
 	QualificationTypes []*QualificationType `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListQualificationTypesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListQualificationTypesOutput) GoString() string {
 	return s.String()
 }
@@ -7183,7 +7629,7 @@ type ListReviewPolicyResultsForHITInput struct {
 	// The Policy Level(s) to retrieve review results for - HIT or Assignment. If
 	// omitted, the default behavior is to retrieve all data for both policy levels.
 	// For a list of all the described policies, see Review Policies.
-	PolicyLevels []*string `type:"list"`
+	PolicyLevels []*string `type:"list" enum:"ReviewPolicyLevel"`
 
 	// Specify if the operation should retrieve a list of the actions taken executing
 	// the Review Policies and their outcomes.
@@ -7194,12 +7640,20 @@ type ListReviewPolicyResultsForHITInput struct {
 	RetrieveResults *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListReviewPolicyResultsForHITInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListReviewPolicyResultsForHITInput) GoString() string {
 	return s.String()
 }
@@ -7288,12 +7742,20 @@ type ListReviewPolicyResultsForHITOutput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListReviewPolicyResultsForHITOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListReviewPolicyResultsForHITOutput) GoString() string {
 	return s.String()
 }
@@ -7351,12 +7813,20 @@ type ListReviewableHITsInput struct {
 	Status *string `type:"string" enum:"ReviewableHITStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListReviewableHITsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListReviewableHITsInput) GoString() string {
 	return s.String()
 }
@@ -7420,12 +7890,20 @@ type ListReviewableHITsOutput struct {
 	NumResults *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListReviewableHITsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListReviewableHITsOutput) GoString() string {
 	return s.String()
 }
@@ -7457,12 +7935,20 @@ type ListWorkerBlocksInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkerBlocksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkerBlocksInput) GoString() string {
 	return s.String()
 }
@@ -7512,12 +7998,20 @@ type ListWorkerBlocksOutput struct {
 	WorkerBlocks []*WorkerBlock `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkerBlocksOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkerBlocksOutput) GoString() string {
 	return s.String()
 }
@@ -7558,12 +8052,20 @@ type ListWorkersWithQualificationTypeInput struct {
 	Status *string `type:"string" enum:"QualificationStatus"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkersWithQualificationTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkersWithQualificationTypeInput) GoString() string {
 	return s.String()
 }
@@ -7630,12 +8132,20 @@ type ListWorkersWithQualificationTypeOutput struct {
 	Qualifications []*Qualification `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkersWithQualificationTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListWorkersWithQualificationTypeOutput) GoString() string {
 	return s.String()
 }
@@ -7673,12 +8183,20 @@ type Locale struct {
 	Subdivision *string `min:"2" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Locale) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Locale) GoString() string {
 	return s.String()
 }
@@ -7738,7 +8256,7 @@ type NotificationSpecification struct {
 	// SendTestEventNotification operation.
 	//
 	// EventTypes is a required field
-	EventTypes []*string `type:"list" required:"true"`
+	EventTypes []*string `type:"list" required:"true" enum:"EventType"`
 
 	// The method Amazon Mechanical Turk uses to send the notification. Valid Values:
 	// Email | SQS | SNS.
@@ -7752,12 +8270,20 @@ type NotificationSpecification struct {
 	Version *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotificationSpecification) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotificationSpecification) GoString() string {
 	return s.String()
 }
@@ -7823,12 +8349,20 @@ type NotifyWorkersFailureStatus struct {
 	WorkerId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyWorkersFailureStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyWorkersFailureStatus) GoString() string {
 	return s.String()
 }
@@ -7871,12 +8405,20 @@ type NotifyWorkersInput struct {
 	WorkerIds []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyWorkersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyWorkersInput) GoString() string {
 	return s.String()
 }
@@ -7926,12 +8468,20 @@ type NotifyWorkersOutput struct {
 	NotifyWorkersFailureStatuses []*NotifyWorkersFailureStatus `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyWorkersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotifyWorkersOutput) GoString() string {
 	return s.String()
 }
@@ -7957,12 +8507,20 @@ type ParameterMapEntry struct {
 	Values []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParameterMapEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ParameterMapEntry) GoString() string {
 	return s.String()
 }
@@ -7993,12 +8551,20 @@ type PolicyParameter struct {
 	Values []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PolicyParameter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PolicyParameter) GoString() string {
 	return s.String()
 }
@@ -8049,12 +8615,20 @@ type Qualification struct {
 	WorkerId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Qualification) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Qualification) GoString() string {
 	return s.String()
 }
@@ -8129,12 +8703,20 @@ type QualificationRequest struct {
 	WorkerId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s QualificationRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s QualificationRequest) GoString() string {
 	return s.String()
 }
@@ -8251,12 +8833,20 @@ type QualificationRequirement struct {
 	RequiredToPreview *bool `deprecated:"true" type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s QualificationRequirement) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s QualificationRequirement) GoString() string {
 	return s.String()
 }
@@ -8392,12 +8982,20 @@ type QualificationType struct {
 	TestDurationInSeconds *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s QualificationType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s QualificationType) GoString() string {
 	return s.String()
 }
@@ -8496,12 +9094,20 @@ type RejectAssignmentInput struct {
 	RequesterFeedback *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectAssignmentInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectAssignmentInput) GoString() string {
 	return s.String()
 }
@@ -8541,12 +9147,20 @@ type RejectAssignmentOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectAssignmentOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectAssignmentOutput) GoString() string {
 	return s.String()
 }
@@ -8565,12 +9179,20 @@ type RejectQualificationRequestInput struct {
 	Reason *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectQualificationRequestInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectQualificationRequestInput) GoString() string {
 	return s.String()
 }
@@ -8604,14 +9226,88 @@ type RejectQualificationRequestOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectQualificationRequestOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RejectQualificationRequestOutput) GoString() string {
 	return s.String()
+}
+
+// Your request is invalid.
+type RequestError struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	TurkErrorCode *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RequestError) GoString() string {
+	return s.String()
+}
+
+func newErrorRequestError(v protocol.ResponseMetadata) error {
+	return &RequestError{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RequestError) Code() string {
+	return "RequestError"
+}
+
+// Message returns the exception's message.
+func (s *RequestError) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RequestError) OrigErr() error {
+	return nil
+}
+
+func (s *RequestError) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RequestError) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RequestError) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Both the AssignmentReviewReport and the HITReviewReport elements contains
@@ -8647,12 +9343,20 @@ type ReviewActionDetail struct {
 	TargetType *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReviewActionDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReviewActionDetail) GoString() string {
 	return s.String()
 }
@@ -8719,12 +9423,20 @@ type ReviewPolicy struct {
 	PolicyName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReviewPolicy) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReviewPolicy) GoString() string {
 	return s.String()
 }
@@ -8765,12 +9477,20 @@ type ReviewReport struct {
 	ReviewResults []*ReviewResultDetail `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReviewReport) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReviewReport) GoString() string {
 	return s.String()
 }
@@ -8819,12 +9539,20 @@ type ReviewResultDetail struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReviewResultDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReviewResultDetail) GoString() string {
 	return s.String()
 }
@@ -8900,12 +9628,20 @@ type SendBonusInput struct {
 	WorkerId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendBonusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendBonusInput) GoString() string {
 	return s.String()
 }
@@ -8975,12 +9711,20 @@ type SendBonusOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendBonusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendBonusOutput) GoString() string {
 	return s.String()
 }
@@ -9004,12 +9748,20 @@ type SendTestEventNotificationInput struct {
 	TestEventType *string `type:"string" required:"true" enum:"EventType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendTestEventNotificationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendTestEventNotificationInput) GoString() string {
 	return s.String()
 }
@@ -9051,14 +9803,89 @@ type SendTestEventNotificationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendTestEventNotificationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SendTestEventNotificationOutput) GoString() string {
 	return s.String()
+}
+
+// Amazon Mechanical Turk is temporarily unable to process your request. Try
+// your call again.
+type ServiceFault struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	TurkErrorCode *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceFault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ServiceFault) GoString() string {
+	return s.String()
+}
+
+func newErrorServiceFault(v protocol.ResponseMetadata) error {
+	return &ServiceFault{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ServiceFault) Code() string {
+	return "ServiceFault"
+}
+
+// Message returns the exception's message.
+func (s *ServiceFault) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ServiceFault) OrigErr() error {
+	return nil
+}
+
+func (s *ServiceFault) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ServiceFault) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ServiceFault) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type UpdateExpirationForHITInput struct {
@@ -9075,12 +9902,20 @@ type UpdateExpirationForHITInput struct {
 	HITId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateExpirationForHITInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateExpirationForHITInput) GoString() string {
 	return s.String()
 }
@@ -9120,12 +9955,20 @@ type UpdateExpirationForHITOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateExpirationForHITOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateExpirationForHITOutput) GoString() string {
 	return s.String()
 }
@@ -9140,19 +9983,27 @@ type UpdateHITReviewStatusInput struct {
 
 	// Specifies how to update the HIT status. Default is False.
 	//
-	//    *  Setting this to false will only transition a HIT from Reviewable to
+	//    * Setting this to false will only transition a HIT from Reviewable to
 	//    Reviewing
 	//
-	//    *  Setting this to true will only transition a HIT from Reviewing to Reviewable
+	//    * Setting this to true will only transition a HIT from Reviewing to Reviewable
 	Revert *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateHITReviewStatusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateHITReviewStatusInput) GoString() string {
 	return s.String()
 }
@@ -9189,12 +10040,20 @@ type UpdateHITReviewStatusOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateHITReviewStatusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateHITReviewStatusOutput) GoString() string {
 	return s.String()
 }
@@ -9213,12 +10072,20 @@ type UpdateHITTypeOfHITInput struct {
 	HITTypeId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateHITTypeOfHITInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateHITTypeOfHITInput) GoString() string {
 	return s.String()
 }
@@ -9261,12 +10128,20 @@ type UpdateHITTypeOfHITOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateHITTypeOfHITOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateHITTypeOfHITOutput) GoString() string {
 	return s.String()
 }
@@ -9289,12 +10164,20 @@ type UpdateNotificationSettingsInput struct {
 	Notification *NotificationSpecification `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNotificationSettingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNotificationSettingsInput) GoString() string {
 	return s.String()
 }
@@ -9342,12 +10225,20 @@ type UpdateNotificationSettingsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNotificationSettingsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNotificationSettingsOutput) GoString() string {
 	return s.String()
 }
@@ -9406,12 +10297,20 @@ type UpdateQualificationTypeInput struct {
 	TestDurationInSeconds *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateQualificationTypeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateQualificationTypeInput) GoString() string {
 	return s.String()
 }
@@ -9493,12 +10392,20 @@ type UpdateQualificationTypeOutput struct {
 	QualificationType *QualificationType `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateQualificationTypeOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateQualificationTypeOutput) GoString() string {
 	return s.String()
 }
@@ -9521,12 +10428,20 @@ type WorkerBlock struct {
 	WorkerId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkerBlock) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkerBlock) GoString() string {
 	return s.String()
 }
@@ -9553,6 +10468,15 @@ const (
 	// AssignmentStatusRejected is a AssignmentStatus enum value
 	AssignmentStatusRejected = "Rejected"
 )
+
+// AssignmentStatus_Values returns all elements of the AssignmentStatus enum
+func AssignmentStatus_Values() []string {
+	return []string{
+		AssignmentStatusSubmitted,
+		AssignmentStatusApproved,
+		AssignmentStatusRejected,
+	}
+}
 
 const (
 	// ComparatorLessThan is a Comparator enum value
@@ -9585,6 +10509,22 @@ const (
 	// ComparatorNotIn is a Comparator enum value
 	ComparatorNotIn = "NotIn"
 )
+
+// Comparator_Values returns all elements of the Comparator enum
+func Comparator_Values() []string {
+	return []string{
+		ComparatorLessThan,
+		ComparatorLessThanOrEqualTo,
+		ComparatorGreaterThan,
+		ComparatorGreaterThanOrEqualTo,
+		ComparatorEqualTo,
+		ComparatorNotEqualTo,
+		ComparatorExists,
+		ComparatorDoesNotExist,
+		ComparatorIn,
+		ComparatorNotIn,
+	}
+}
 
 const (
 	// EventTypeAssignmentAccepted is a EventType enum value
@@ -9624,6 +10564,24 @@ const (
 	EventTypePing = "Ping"
 )
 
+// EventType_Values returns all elements of the EventType enum
+func EventType_Values() []string {
+	return []string{
+		EventTypeAssignmentAccepted,
+		EventTypeAssignmentAbandoned,
+		EventTypeAssignmentReturned,
+		EventTypeAssignmentSubmitted,
+		EventTypeAssignmentRejected,
+		EventTypeAssignmentApproved,
+		EventTypeHitcreated,
+		EventTypeHitexpired,
+		EventTypeHitreviewable,
+		EventTypeHitextended,
+		EventTypeHitdisposed,
+		EventTypePing,
+	}
+}
+
 const (
 	// HITAccessActionsAccept is a HITAccessActions enum value
 	HITAccessActionsAccept = "Accept"
@@ -9634,6 +10592,15 @@ const (
 	// HITAccessActionsDiscoverPreviewAndAccept is a HITAccessActions enum value
 	HITAccessActionsDiscoverPreviewAndAccept = "DiscoverPreviewAndAccept"
 )
+
+// HITAccessActions_Values returns all elements of the HITAccessActions enum
+func HITAccessActions_Values() []string {
+	return []string{
+		HITAccessActionsAccept,
+		HITAccessActionsPreviewAndAccept,
+		HITAccessActionsDiscoverPreviewAndAccept,
+	}
+}
 
 const (
 	// HITReviewStatusNotReviewed is a HITReviewStatus enum value
@@ -9648,6 +10615,16 @@ const (
 	// HITReviewStatusReviewedInappropriate is a HITReviewStatus enum value
 	HITReviewStatusReviewedInappropriate = "ReviewedInappropriate"
 )
+
+// HITReviewStatus_Values returns all elements of the HITReviewStatus enum
+func HITReviewStatus_Values() []string {
+	return []string{
+		HITReviewStatusNotReviewed,
+		HITReviewStatusMarkedForReview,
+		HITReviewStatusReviewedAppropriate,
+		HITReviewStatusReviewedInappropriate,
+	}
+}
 
 const (
 	// HITStatusAssignable is a HITStatus enum value
@@ -9666,6 +10643,17 @@ const (
 	HITStatusDisposed = "Disposed"
 )
 
+// HITStatus_Values returns all elements of the HITStatus enum
+func HITStatus_Values() []string {
+	return []string{
+		HITStatusAssignable,
+		HITStatusUnassignable,
+		HITStatusReviewable,
+		HITStatusReviewing,
+		HITStatusDisposed,
+	}
+}
+
 const (
 	// NotificationTransportEmail is a NotificationTransport enum value
 	NotificationTransportEmail = "Email"
@@ -9677,6 +10665,15 @@ const (
 	NotificationTransportSns = "SNS"
 )
 
+// NotificationTransport_Values returns all elements of the NotificationTransport enum
+func NotificationTransport_Values() []string {
+	return []string{
+		NotificationTransportEmail,
+		NotificationTransportSqs,
+		NotificationTransportSns,
+	}
+}
+
 const (
 	// NotifyWorkersFailureCodeSoftFailure is a NotifyWorkersFailureCode enum value
 	NotifyWorkersFailureCodeSoftFailure = "SoftFailure"
@@ -9684,6 +10681,14 @@ const (
 	// NotifyWorkersFailureCodeHardFailure is a NotifyWorkersFailureCode enum value
 	NotifyWorkersFailureCodeHardFailure = "HardFailure"
 )
+
+// NotifyWorkersFailureCode_Values returns all elements of the NotifyWorkersFailureCode enum
+func NotifyWorkersFailureCode_Values() []string {
+	return []string{
+		NotifyWorkersFailureCodeSoftFailure,
+		NotifyWorkersFailureCodeHardFailure,
+	}
+}
 
 const (
 	// QualificationStatusGranted is a QualificationStatus enum value
@@ -9693,6 +10698,14 @@ const (
 	QualificationStatusRevoked = "Revoked"
 )
 
+// QualificationStatus_Values returns all elements of the QualificationStatus enum
+func QualificationStatus_Values() []string {
+	return []string{
+		QualificationStatusGranted,
+		QualificationStatusRevoked,
+	}
+}
+
 const (
 	// QualificationTypeStatusActive is a QualificationTypeStatus enum value
 	QualificationTypeStatusActive = "Active"
@@ -9700,6 +10713,14 @@ const (
 	// QualificationTypeStatusInactive is a QualificationTypeStatus enum value
 	QualificationTypeStatusInactive = "Inactive"
 )
+
+// QualificationTypeStatus_Values returns all elements of the QualificationTypeStatus enum
+func QualificationTypeStatus_Values() []string {
+	return []string{
+		QualificationTypeStatusActive,
+		QualificationTypeStatusInactive,
+	}
+}
 
 const (
 	// ReviewActionStatusIntended is a ReviewActionStatus enum value
@@ -9715,6 +10736,16 @@ const (
 	ReviewActionStatusCancelled = "Cancelled"
 )
 
+// ReviewActionStatus_Values returns all elements of the ReviewActionStatus enum
+func ReviewActionStatus_Values() []string {
+	return []string{
+		ReviewActionStatusIntended,
+		ReviewActionStatusSucceeded,
+		ReviewActionStatusFailed,
+		ReviewActionStatusCancelled,
+	}
+}
+
 const (
 	// ReviewPolicyLevelAssignment is a ReviewPolicyLevel enum value
 	ReviewPolicyLevelAssignment = "Assignment"
@@ -9723,6 +10754,14 @@ const (
 	ReviewPolicyLevelHit = "HIT"
 )
 
+// ReviewPolicyLevel_Values returns all elements of the ReviewPolicyLevel enum
+func ReviewPolicyLevel_Values() []string {
+	return []string{
+		ReviewPolicyLevelAssignment,
+		ReviewPolicyLevelHit,
+	}
+}
+
 const (
 	// ReviewableHITStatusReviewable is a ReviewableHITStatus enum value
 	ReviewableHITStatusReviewable = "Reviewable"
@@ -9730,3 +10769,11 @@ const (
 	// ReviewableHITStatusReviewing is a ReviewableHITStatus enum value
 	ReviewableHITStatusReviewing = "Reviewing"
 )
+
+// ReviewableHITStatus_Values returns all elements of the ReviewableHITStatus enum
+func ReviewableHITStatus_Values() []string {
+	return []string{
+		ReviewableHITStatusReviewable,
+		ReviewableHITStatusReviewing,
+	}
+}

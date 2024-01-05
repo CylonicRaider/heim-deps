@@ -5,9 +5,11 @@
 package mux
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 	"path"
 	"regexp"
 )
@@ -30,24 +32,26 @@ func NewRouter() *Router {
 // It implements the http.Handler interface, so it can be registered to serve
 // requests:
 //
-//     var router = mux.NewRouter()
+//	var router = mux.NewRouter()
 //
-//     func main() {
-//         http.Handle("/", router)
-//     }
+//	func main() {
+//	    http.Handle("/", router)
+//	}
 //
 // Or, for Google App Engine, register it in a init() function:
 //
-//     func init() {
-//         http.Handle("/", router)
-//     }
+//	func init() {
+//	    http.Handle("/", router)
+//	}
 //
 // This will send all incoming requests to the router.
 type Router struct {
 	// Configurable Handler to be used when no route matches.
+	// This can be used to render your own 404 Not Found errors.
 	NotFoundHandler http.Handler
 
 	// Configurable Handler to be used when the request method does not match the route.
+	// This can be used to render your own 405 Method Not Allowed errors.
 	MethodNotAllowedHandler http.Handler
 
 	// Routes to be matched, in order.
@@ -58,8 +62,7 @@ type Router struct {
 
 	// If true, do not clear the request context after handling the request.
 	//
-	// Deprecated: No effect when go1.7+ is used, since the context is stored
-	// on the request itself.
+	// Deprecated: No effect, since the context is stored on the request itself.
 	KeepContext bool
 
 	// Slice of middlewares to be called after a match is found
@@ -81,6 +84,9 @@ type routeConf struct {
 	// If true, when the path pattern is "/path//to", accessing "/path//to"
 	// will not redirect
 	skipClean bool
+
+	// If true, the http.Request context will not contain the Route.
+	omitRouteFromContext bool
 
 	// Manager for the variables from host and path.
 	regexp routeRegexpGroup
@@ -111,10 +117,8 @@ func copyRouteConf(r routeConf) routeConf {
 		c.regexp.queries = append(c.regexp.queries, copyRouteRegexp(q))
 	}
 
-	c.matchers = make([]matcher, 0, len(r.matchers))
-	for _, m := range r.matchers {
-		c.matchers = append(c.matchers, m)
-	}
+	c.matchers = make([]matcher, len(r.matchers))
+	copy(c.matchers, r.matchers)
 
 	return c
 }
@@ -180,15 +184,7 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		}
 		// Clean path to canonical form and redirect.
 		if p := cleanPath(path); p != path {
-
-			// Added 3 lines (Philip Schlump) - It was dropping the query string and #whatever from query.
-			// This matches with fix in go 1.2 r.c. 4 for same problem.  Go Issue:
-			// http://code.google.com/p/go/issues/detail?id=5252
-			url := *req.URL
-			url.Path = p
-			p = url.String()
-
-			w.Header().Set("Location", p)
+			w.Header().Set("Location", replaceURLPath(req.URL, p))
 			w.WriteHeader(http.StatusMovedPermanently)
 			return
 		}
@@ -197,8 +193,15 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	var handler http.Handler
 	if r.Match(req, &match) {
 		handler = match.Handler
-		req = setVars(req, match.Vars)
-		req = setCurrentRoute(req, match.Route)
+		if handler != nil {
+			// Populate context for custom handlers
+			if r.omitRouteFromContext {
+				// Only populate the match vars (if any) into the context.
+				req = requestWithVars(req, match.Vars)
+			} else {
+				req = requestWithRouteAndVars(req, match.Route, match.Vars)
+			}
+		}
 	}
 
 	if handler == nil && match.MatchErr == ErrMethodMismatch {
@@ -233,8 +236,8 @@ func (r *Router) GetRoute(name string) *Route {
 // When false, if the route path is "/path", accessing "/path/" will not match
 // this route and vice versa.
 //
-// The re-direct is a HTTP 301 (Moved Permanently). Note that when this is set for
-// routes with a non-idempotent method (e.g. POST, PUT), the subsequent re-directed
+// The redirect is a HTTP 301 (Moved Permanently). Note that when this is set for
+// routes with a non-idempotent method (e.g. POST, PUT), the subsequent redirected
 // request will be made as a GET by most clients. Use middleware or client settings
 // to modify this behaviour as needed.
 //
@@ -260,6 +263,16 @@ func (r *Router) SkipClean(value bool) *Router {
 	return r
 }
 
+// OmitRouteFromContext defines the behavior of omitting the Route from the
+//
+//	http.Request context.
+//
+// CurrentRoute will yield nil with this option.
+func (r *Router) OmitRouteFromContext(value bool) *Router {
+	r.omitRouteFromContext = value
+	return r
+}
+
 // UseEncodedPath tells the router to match the encoded original path
 // to the routes.
 // For eg. "/path/foo%2Fbar/to" will match the path "/path/{var}/to".
@@ -281,6 +294,12 @@ func (r *Router) NewRoute() *Route {
 	route := &Route{routeConf: copyRouteConf(r.routeConf), namedRoutes: r.namedRoutes}
 	r.routes = append(r.routes, route)
 	return route
+}
+
+// Name registers a new route with a name.
+// See Route.Name().
+func (r *Router) Name(name string) *Route {
+	return r.NewRoute().Name(name)
 }
 
 // Handle registers a new route with a matcher for the URL path.
@@ -422,7 +441,7 @@ const (
 
 // Vars returns the route variables for the current request, if any.
 func Vars(r *http.Request) map[string]string {
-	if rv := contextGet(r, varsKey); rv != nil {
+	if rv := r.Context().Value(varsKey); rv != nil {
 		return rv.(map[string]string)
 	}
 	return nil
@@ -431,21 +450,34 @@ func Vars(r *http.Request) map[string]string {
 // CurrentRoute returns the matched route for the current request, if any.
 // This only works when called inside the handler of the matched route
 // because the matched route is stored in the request context which is cleared
-// after the handler returns, unless the KeepContext option is set on the
-// Router.
+// after the handler returns.
 func CurrentRoute(r *http.Request) *Route {
-	if rv := contextGet(r, routeKey); rv != nil {
+	if rv := r.Context().Value(routeKey); rv != nil {
 		return rv.(*Route)
 	}
 	return nil
 }
 
-func setVars(r *http.Request, val interface{}) *http.Request {
-	return contextSet(r, varsKey, val)
+// requestWithRouteAndVars adds the matched vars to the request ctx.
+// It shortcuts the operation when the vars are empty.
+func requestWithVars(r *http.Request, vars map[string]string) *http.Request {
+	if len(vars) == 0 {
+		return r
+	}
+	ctx := context.WithValue(r.Context(), varsKey, vars)
+	return r.WithContext(ctx)
 }
 
-func setCurrentRoute(r *http.Request, val interface{}) *http.Request {
-	return contextSet(r, routeKey, val)
+// requestWithRouteAndVars adds the matched route and vars to the request ctx.
+// It saves extra allocations in cloning the request once and skipping the
+//
+//	population of empty vars, which in turn mux.Vars can handle gracefully.
+func requestWithRouteAndVars(r *http.Request, route *Route, vars map[string]string) *http.Request {
+	ctx := context.WithValue(r.Context(), routeKey, route)
+	if len(vars) > 0 {
+		ctx = context.WithValue(ctx, varsKey, vars)
+	}
+	return r.WithContext(ctx)
 }
 
 // ----------------------------------------------------------------------------
@@ -469,6 +501,14 @@ func cleanPath(p string) string {
 	}
 
 	return np
+}
+
+// replaceURLPath prints an url.URL with a different path.
+func replaceURLPath(u *url.URL, p string) string {
+	// Operate on a copy of the request url.
+	u2 := *u
+	u2.Path = p
+	return u2.String()
 }
 
 // uniqueVars returns an error if two slices contain duplicated strings.

@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Organizations.
-//    func myFunc(svc organizationsiface.OrganizationsAPI) bool {
-//        // Make svc.AcceptHandshake request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Organizations.
+//	func myFunc(svc organizationsiface.OrganizationsAPI) bool {
+//	    // Make svc.AcceptHandshake request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := organizations.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := organizations.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockOrganizationsClient struct {
-//        organizationsiface.OrganizationsAPI
-//    }
-//    func (m *mockOrganizationsClient) AcceptHandshake(input *organizations.AcceptHandshakeInput) (*organizations.AcceptHandshakeOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockOrganizationsClient struct {
+//	    organizationsiface.OrganizationsAPI
+//	}
+//	func (m *mockOrganizationsClient) AcceptHandshake(input *organizations.AcceptHandshakeInput) (*organizations.AcceptHandshakeOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockOrganizationsClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockOrganizationsClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -72,9 +72,17 @@ type OrganizationsAPI interface {
 	CancelHandshakeWithContext(aws.Context, *organizations.CancelHandshakeInput, ...request.Option) (*organizations.CancelHandshakeOutput, error)
 	CancelHandshakeRequest(*organizations.CancelHandshakeInput) (*request.Request, *organizations.CancelHandshakeOutput)
 
+	CloseAccount(*organizations.CloseAccountInput) (*organizations.CloseAccountOutput, error)
+	CloseAccountWithContext(aws.Context, *organizations.CloseAccountInput, ...request.Option) (*organizations.CloseAccountOutput, error)
+	CloseAccountRequest(*organizations.CloseAccountInput) (*request.Request, *organizations.CloseAccountOutput)
+
 	CreateAccount(*organizations.CreateAccountInput) (*organizations.CreateAccountOutput, error)
 	CreateAccountWithContext(aws.Context, *organizations.CreateAccountInput, ...request.Option) (*organizations.CreateAccountOutput, error)
 	CreateAccountRequest(*organizations.CreateAccountInput) (*request.Request, *organizations.CreateAccountOutput)
+
+	CreateGovCloudAccount(*organizations.CreateGovCloudAccountInput) (*organizations.CreateGovCloudAccountOutput, error)
+	CreateGovCloudAccountWithContext(aws.Context, *organizations.CreateGovCloudAccountInput, ...request.Option) (*organizations.CreateGovCloudAccountOutput, error)
+	CreateGovCloudAccountRequest(*organizations.CreateGovCloudAccountInput) (*request.Request, *organizations.CreateGovCloudAccountOutput)
 
 	CreateOrganization(*organizations.CreateOrganizationInput) (*organizations.CreateOrganizationOutput, error)
 	CreateOrganizationWithContext(aws.Context, *organizations.CreateOrganizationInput, ...request.Option) (*organizations.CreateOrganizationOutput, error)
@@ -104,6 +112,14 @@ type OrganizationsAPI interface {
 	DeletePolicyWithContext(aws.Context, *organizations.DeletePolicyInput, ...request.Option) (*organizations.DeletePolicyOutput, error)
 	DeletePolicyRequest(*organizations.DeletePolicyInput) (*request.Request, *organizations.DeletePolicyOutput)
 
+	DeleteResourcePolicy(*organizations.DeleteResourcePolicyInput) (*organizations.DeleteResourcePolicyOutput, error)
+	DeleteResourcePolicyWithContext(aws.Context, *organizations.DeleteResourcePolicyInput, ...request.Option) (*organizations.DeleteResourcePolicyOutput, error)
+	DeleteResourcePolicyRequest(*organizations.DeleteResourcePolicyInput) (*request.Request, *organizations.DeleteResourcePolicyOutput)
+
+	DeregisterDelegatedAdministrator(*organizations.DeregisterDelegatedAdministratorInput) (*organizations.DeregisterDelegatedAdministratorOutput, error)
+	DeregisterDelegatedAdministratorWithContext(aws.Context, *organizations.DeregisterDelegatedAdministratorInput, ...request.Option) (*organizations.DeregisterDelegatedAdministratorOutput, error)
+	DeregisterDelegatedAdministratorRequest(*organizations.DeregisterDelegatedAdministratorInput) (*request.Request, *organizations.DeregisterDelegatedAdministratorOutput)
+
 	DescribeAccount(*organizations.DescribeAccountInput) (*organizations.DescribeAccountOutput, error)
 	DescribeAccountWithContext(aws.Context, *organizations.DescribeAccountInput, ...request.Option) (*organizations.DescribeAccountOutput, error)
 	DescribeAccountRequest(*organizations.DescribeAccountInput) (*request.Request, *organizations.DescribeAccountOutput)
@@ -111,6 +127,10 @@ type OrganizationsAPI interface {
 	DescribeCreateAccountStatus(*organizations.DescribeCreateAccountStatusInput) (*organizations.DescribeCreateAccountStatusOutput, error)
 	DescribeCreateAccountStatusWithContext(aws.Context, *organizations.DescribeCreateAccountStatusInput, ...request.Option) (*organizations.DescribeCreateAccountStatusOutput, error)
 	DescribeCreateAccountStatusRequest(*organizations.DescribeCreateAccountStatusInput) (*request.Request, *organizations.DescribeCreateAccountStatusOutput)
+
+	DescribeEffectivePolicy(*organizations.DescribeEffectivePolicyInput) (*organizations.DescribeEffectivePolicyOutput, error)
+	DescribeEffectivePolicyWithContext(aws.Context, *organizations.DescribeEffectivePolicyInput, ...request.Option) (*organizations.DescribeEffectivePolicyOutput, error)
+	DescribeEffectivePolicyRequest(*organizations.DescribeEffectivePolicyInput) (*request.Request, *organizations.DescribeEffectivePolicyOutput)
 
 	DescribeHandshake(*organizations.DescribeHandshakeInput) (*organizations.DescribeHandshakeOutput, error)
 	DescribeHandshakeWithContext(aws.Context, *organizations.DescribeHandshakeInput, ...request.Option) (*organizations.DescribeHandshakeOutput, error)
@@ -127,6 +147,10 @@ type OrganizationsAPI interface {
 	DescribePolicy(*organizations.DescribePolicyInput) (*organizations.DescribePolicyOutput, error)
 	DescribePolicyWithContext(aws.Context, *organizations.DescribePolicyInput, ...request.Option) (*organizations.DescribePolicyOutput, error)
 	DescribePolicyRequest(*organizations.DescribePolicyInput) (*request.Request, *organizations.DescribePolicyOutput)
+
+	DescribeResourcePolicy(*organizations.DescribeResourcePolicyInput) (*organizations.DescribeResourcePolicyOutput, error)
+	DescribeResourcePolicyWithContext(aws.Context, *organizations.DescribeResourcePolicyInput, ...request.Option) (*organizations.DescribeResourcePolicyOutput, error)
+	DescribeResourcePolicyRequest(*organizations.DescribeResourcePolicyInput) (*request.Request, *organizations.DescribeResourcePolicyOutput)
 
 	DetachPolicy(*organizations.DetachPolicyInput) (*organizations.DetachPolicyOutput, error)
 	DetachPolicyWithContext(aws.Context, *organizations.DetachPolicyInput, ...request.Option) (*organizations.DetachPolicyOutput, error)
@@ -195,6 +219,20 @@ type OrganizationsAPI interface {
 	ListCreateAccountStatusPages(*organizations.ListCreateAccountStatusInput, func(*organizations.ListCreateAccountStatusOutput, bool) bool) error
 	ListCreateAccountStatusPagesWithContext(aws.Context, *organizations.ListCreateAccountStatusInput, func(*organizations.ListCreateAccountStatusOutput, bool) bool, ...request.Option) error
 
+	ListDelegatedAdministrators(*organizations.ListDelegatedAdministratorsInput) (*organizations.ListDelegatedAdministratorsOutput, error)
+	ListDelegatedAdministratorsWithContext(aws.Context, *organizations.ListDelegatedAdministratorsInput, ...request.Option) (*organizations.ListDelegatedAdministratorsOutput, error)
+	ListDelegatedAdministratorsRequest(*organizations.ListDelegatedAdministratorsInput) (*request.Request, *organizations.ListDelegatedAdministratorsOutput)
+
+	ListDelegatedAdministratorsPages(*organizations.ListDelegatedAdministratorsInput, func(*organizations.ListDelegatedAdministratorsOutput, bool) bool) error
+	ListDelegatedAdministratorsPagesWithContext(aws.Context, *organizations.ListDelegatedAdministratorsInput, func(*organizations.ListDelegatedAdministratorsOutput, bool) bool, ...request.Option) error
+
+	ListDelegatedServicesForAccount(*organizations.ListDelegatedServicesForAccountInput) (*organizations.ListDelegatedServicesForAccountOutput, error)
+	ListDelegatedServicesForAccountWithContext(aws.Context, *organizations.ListDelegatedServicesForAccountInput, ...request.Option) (*organizations.ListDelegatedServicesForAccountOutput, error)
+	ListDelegatedServicesForAccountRequest(*organizations.ListDelegatedServicesForAccountInput) (*request.Request, *organizations.ListDelegatedServicesForAccountOutput)
+
+	ListDelegatedServicesForAccountPages(*organizations.ListDelegatedServicesForAccountInput, func(*organizations.ListDelegatedServicesForAccountOutput, bool) bool) error
+	ListDelegatedServicesForAccountPagesWithContext(aws.Context, *organizations.ListDelegatedServicesForAccountInput, func(*organizations.ListDelegatedServicesForAccountOutput, bool) bool, ...request.Option) error
+
 	ListHandshakesForAccount(*organizations.ListHandshakesForAccountInput) (*organizations.ListHandshakesForAccountOutput, error)
 	ListHandshakesForAccountWithContext(aws.Context, *organizations.ListHandshakesForAccountInput, ...request.Option) (*organizations.ListHandshakesForAccountOutput, error)
 	ListHandshakesForAccountRequest(*organizations.ListHandshakesForAccountInput) (*request.Request, *organizations.ListHandshakesForAccountOutput)
@@ -244,6 +282,13 @@ type OrganizationsAPI interface {
 	ListRootsPages(*organizations.ListRootsInput, func(*organizations.ListRootsOutput, bool) bool) error
 	ListRootsPagesWithContext(aws.Context, *organizations.ListRootsInput, func(*organizations.ListRootsOutput, bool) bool, ...request.Option) error
 
+	ListTagsForResource(*organizations.ListTagsForResourceInput) (*organizations.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *organizations.ListTagsForResourceInput, ...request.Option) (*organizations.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*organizations.ListTagsForResourceInput) (*request.Request, *organizations.ListTagsForResourceOutput)
+
+	ListTagsForResourcePages(*organizations.ListTagsForResourceInput, func(*organizations.ListTagsForResourceOutput, bool) bool) error
+	ListTagsForResourcePagesWithContext(aws.Context, *organizations.ListTagsForResourceInput, func(*organizations.ListTagsForResourceOutput, bool) bool, ...request.Option) error
+
 	ListTargetsForPolicy(*organizations.ListTargetsForPolicyInput) (*organizations.ListTargetsForPolicyOutput, error)
 	ListTargetsForPolicyWithContext(aws.Context, *organizations.ListTargetsForPolicyInput, ...request.Option) (*organizations.ListTargetsForPolicyOutput, error)
 	ListTargetsForPolicyRequest(*organizations.ListTargetsForPolicyInput) (*request.Request, *organizations.ListTargetsForPolicyOutput)
@@ -255,9 +300,25 @@ type OrganizationsAPI interface {
 	MoveAccountWithContext(aws.Context, *organizations.MoveAccountInput, ...request.Option) (*organizations.MoveAccountOutput, error)
 	MoveAccountRequest(*organizations.MoveAccountInput) (*request.Request, *organizations.MoveAccountOutput)
 
+	PutResourcePolicy(*organizations.PutResourcePolicyInput) (*organizations.PutResourcePolicyOutput, error)
+	PutResourcePolicyWithContext(aws.Context, *organizations.PutResourcePolicyInput, ...request.Option) (*organizations.PutResourcePolicyOutput, error)
+	PutResourcePolicyRequest(*organizations.PutResourcePolicyInput) (*request.Request, *organizations.PutResourcePolicyOutput)
+
+	RegisterDelegatedAdministrator(*organizations.RegisterDelegatedAdministratorInput) (*organizations.RegisterDelegatedAdministratorOutput, error)
+	RegisterDelegatedAdministratorWithContext(aws.Context, *organizations.RegisterDelegatedAdministratorInput, ...request.Option) (*organizations.RegisterDelegatedAdministratorOutput, error)
+	RegisterDelegatedAdministratorRequest(*organizations.RegisterDelegatedAdministratorInput) (*request.Request, *organizations.RegisterDelegatedAdministratorOutput)
+
 	RemoveAccountFromOrganization(*organizations.RemoveAccountFromOrganizationInput) (*organizations.RemoveAccountFromOrganizationOutput, error)
 	RemoveAccountFromOrganizationWithContext(aws.Context, *organizations.RemoveAccountFromOrganizationInput, ...request.Option) (*organizations.RemoveAccountFromOrganizationOutput, error)
 	RemoveAccountFromOrganizationRequest(*organizations.RemoveAccountFromOrganizationInput) (*request.Request, *organizations.RemoveAccountFromOrganizationOutput)
+
+	TagResource(*organizations.TagResourceInput) (*organizations.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *organizations.TagResourceInput, ...request.Option) (*organizations.TagResourceOutput, error)
+	TagResourceRequest(*organizations.TagResourceInput) (*request.Request, *organizations.TagResourceOutput)
+
+	UntagResource(*organizations.UntagResourceInput) (*organizations.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *organizations.UntagResourceInput, ...request.Option) (*organizations.UntagResourceOutput, error)
+	UntagResourceRequest(*organizations.UntagResourceInput) (*request.Request, *organizations.UntagResourceOutput)
 
 	UpdateOrganizationalUnit(*organizations.UpdateOrganizationalUnitInput) (*organizations.UpdateOrganizationalUnitOutput, error)
 	UpdateOrganizationalUnitWithContext(aws.Context, *organizations.UpdateOrganizationalUnitInput, ...request.Option) (*organizations.UpdateOrganizationalUnitOutput, error)

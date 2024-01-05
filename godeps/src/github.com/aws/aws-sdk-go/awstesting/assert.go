@@ -2,7 +2,6 @@ package awstesting
 
 import (
 	"encoding/json"
-	"encoding/xml"
 	"fmt"
 	"net/url"
 	"reflect"
@@ -10,6 +9,8 @@ import (
 	"sort"
 	"strings"
 	"testing"
+
+	"github.com/aws/aws-sdk-go/internal/smithytesting"
 )
 
 // Match is a testing helper to test for testing error by comparing expected
@@ -111,18 +112,14 @@ func AssertJSON(t *testing.T, expect, actual string, msgAndArgs ...interface{}) 
 	return equal(t, expectVal, actualVal, msgAndArgs...)
 }
 
-// AssertXML verifies that the expect xml string matches the actual.
-func AssertXML(t *testing.T, expect, actual string, container interface{}, msgAndArgs ...interface{}) bool {
-	expectVal := container
-	if err := xml.Unmarshal([]byte(expect), &expectVal); err != nil {
-		t.Errorf(errMsg("unable to parse expected XML", err, msgAndArgs...))
+// AssertXML verifies that the expect XML string matches the actual.
+func AssertXML(t *testing.T, expect, actual string, msgAndArgs ...interface{}) bool {
+	if err := smithytesting.XMLEqual([]byte(expect), []byte(actual)); err != nil {
+		t.Error("expect XML match", err, messageFromMsgAndArgs(msgAndArgs))
+		return false
 	}
 
-	actualVal := container
-	if err := xml.Unmarshal([]byte(actual), &actualVal); err != nil {
-		t.Errorf(errMsg("unable to parse actual XML", err, msgAndArgs...))
-	}
-	return equal(t, expectVal, actualVal, msgAndArgs...)
+	return true
 }
 
 // DidPanic returns if the function paniced and returns true if the function paniced.

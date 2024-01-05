@@ -28,14 +28,13 @@ const opCancelJob = "CancelJob"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CancelJobRequest method.
+//	req, resp := client.CancelJobRequest(params)
 //
-//    // Example sending a request using the CancelJobRequest method.
-//    req, resp := client.CancelJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) CancelJobRequest(input *CancelJobInput) (req *request.Request, output *CancelJobOutput) {
 	op := &request.Operation{
 		Name:       opCancelJob,
@@ -68,28 +67,28 @@ func (c *ElasticTranscoder) CancelJobRequest(input *CancelJobInput) (req *reques
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation CancelJob for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceInUseException
+//     The resource you are attempting to change is in use. For example, you are
+//     attempting to delete a pipeline that is currently in use.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) CancelJob(input *CancelJobInput) (*CancelJobOutput, error) {
 	req, out := c.CancelJobRequest(input)
 	return out, req.Send()
@@ -127,14 +126,13 @@ const opCreateJob = "CreateJob"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateJobRequest method.
+//	req, resp := client.CreateJobRequest(params)
 //
-//    // Example sending a request using the CreateJobRequest method.
-//    req, resp := client.CreateJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) CreateJobRequest(input *CreateJobInput) (req *request.Request, output *CreateJobResponse) {
 	op := &request.Operation{
 		Name:       opCreateJob,
@@ -168,28 +166,28 @@ func (c *ElasticTranscoder) CreateJobRequest(input *CreateJobInput) (req *reques
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation CreateJob for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Too many operations for a given AWS account. For example, the number of pipelines
-//   exceeds the maximum allowed.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - LimitExceededException
+//     Too many operations for a given AWS account. For example, the number of pipelines
+//     exceeds the maximum allowed.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) CreateJob(input *CreateJobInput) (*CreateJobResponse, error) {
 	req, out := c.CreateJobRequest(input)
 	return out, req.Send()
@@ -227,14 +225,13 @@ const opCreatePipeline = "CreatePipeline"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreatePipelineRequest method.
+//	req, resp := client.CreatePipelineRequest(params)
 //
-//    // Example sending a request using the CreatePipelineRequest method.
-//    req, resp := client.CreatePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) CreatePipelineRequest(input *CreatePipelineInput) (req *request.Request, output *CreatePipelineOutput) {
 	op := &request.Operation{
 		Name:       opCreatePipeline,
@@ -262,28 +259,28 @@ func (c *ElasticTranscoder) CreatePipelineRequest(input *CreatePipelineInput) (r
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation CreatePipeline for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Too many operations for a given AWS account. For example, the number of pipelines
-//   exceeds the maximum allowed.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - LimitExceededException
+//     Too many operations for a given AWS account. For example, the number of pipelines
+//     exceeds the maximum allowed.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) CreatePipeline(input *CreatePipelineInput) (*CreatePipelineOutput, error) {
 	req, out := c.CreatePipelineRequest(input)
 	return out, req.Send()
@@ -321,14 +318,13 @@ const opCreatePreset = "CreatePreset"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreatePresetRequest method.
+//	req, resp := client.CreatePresetRequest(params)
 //
-//    // Example sending a request using the CreatePresetRequest method.
-//    req, resp := client.CreatePresetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) CreatePresetRequest(input *CreatePresetInput) (req *request.Request, output *CreatePresetOutput) {
 	op := &request.Operation{
 		Name:       opCreatePreset,
@@ -370,23 +366,23 @@ func (c *ElasticTranscoder) CreatePresetRequest(input *CreatePresetInput) (req *
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation CreatePreset for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Too many operations for a given AWS account. For example, the number of pipelines
-//   exceeds the maximum allowed.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - LimitExceededException
+//     Too many operations for a given AWS account. For example, the number of pipelines
+//     exceeds the maximum allowed.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) CreatePreset(input *CreatePresetInput) (*CreatePresetOutput, error) {
 	req, out := c.CreatePresetRequest(input)
 	return out, req.Send()
@@ -424,14 +420,13 @@ const opDeletePipeline = "DeletePipeline"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeletePipelineRequest method.
+//	req, resp := client.DeletePipelineRequest(params)
 //
-//    // Example sending a request using the DeletePipelineRequest method.
-//    req, resp := client.DeletePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) DeletePipelineRequest(input *DeletePipelineInput) (req *request.Request, output *DeletePipelineOutput) {
 	op := &request.Operation{
 		Name:       opDeletePipeline,
@@ -464,28 +459,28 @@ func (c *ElasticTranscoder) DeletePipelineRequest(input *DeletePipelineInput) (r
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation DeletePipeline for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceInUseException
+//     The resource you are attempting to change is in use. For example, you are
+//     attempting to delete a pipeline that is currently in use.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) DeletePipeline(input *DeletePipelineInput) (*DeletePipelineOutput, error) {
 	req, out := c.DeletePipelineRequest(input)
 	return out, req.Send()
@@ -523,14 +518,13 @@ const opDeletePreset = "DeletePreset"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeletePresetRequest method.
+//	req, resp := client.DeletePresetRequest(params)
 //
-//    // Example sending a request using the DeletePresetRequest method.
-//    req, resp := client.DeletePresetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) DeletePresetRequest(input *DeletePresetInput) (req *request.Request, output *DeletePresetOutput) {
 	op := &request.Operation{
 		Name:       opDeletePreset,
@@ -561,24 +555,24 @@ func (c *ElasticTranscoder) DeletePresetRequest(input *DeletePresetInput) (req *
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation DeletePreset for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) DeletePreset(input *DeletePresetInput) (*DeletePresetOutput, error) {
 	req, out := c.DeletePresetRequest(input)
 	return out, req.Send()
@@ -616,14 +610,13 @@ const opListJobsByPipeline = "ListJobsByPipeline"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListJobsByPipelineRequest method.
+//	req, resp := client.ListJobsByPipelineRequest(params)
 //
-//    // Example sending a request using the ListJobsByPipelineRequest method.
-//    req, resp := client.ListJobsByPipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineInput) (req *request.Request, output *ListJobsByPipelineOutput) {
 	op := &request.Operation{
 		Name:       opListJobsByPipeline,
@@ -661,24 +654,24 @@ func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineI
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation ListJobsByPipeline for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) ListJobsByPipeline(input *ListJobsByPipelineInput) (*ListJobsByPipelineOutput, error) {
 	req, out := c.ListJobsByPipelineRequest(input)
 	return out, req.Send()
@@ -708,15 +701,14 @@ func (c *ElasticTranscoder) ListJobsByPipelineWithContext(ctx aws.Context, input
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListJobsByPipeline operation.
-//    pageNum := 0
-//    err := client.ListJobsByPipelinePages(params,
-//        func(page *ListJobsByPipelineOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListJobsByPipeline operation.
+//	pageNum := 0
+//	err := client.ListJobsByPipelinePages(params,
+//	    func(page *elastictranscoder.ListJobsByPipelineOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ElasticTranscoder) ListJobsByPipelinePages(input *ListJobsByPipelineInput, fn func(*ListJobsByPipelineOutput, bool) bool) error {
 	return c.ListJobsByPipelinePagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -743,10 +735,12 @@ func (c *ElasticTranscoder) ListJobsByPipelinePagesWithContext(ctx aws.Context, 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListJobsByPipelineOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListJobsByPipelineOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -766,14 +760,13 @@ const opListJobsByStatus = "ListJobsByStatus"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListJobsByStatusRequest method.
+//	req, resp := client.ListJobsByStatusRequest(params)
 //
-//    // Example sending a request using the ListJobsByStatusRequest method.
-//    req, resp := client.ListJobsByStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput) (req *request.Request, output *ListJobsByStatusOutput) {
 	op := &request.Operation{
 		Name:       opListJobsByStatus,
@@ -809,24 +802,24 @@ func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation ListJobsByStatus for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) ListJobsByStatus(input *ListJobsByStatusInput) (*ListJobsByStatusOutput, error) {
 	req, out := c.ListJobsByStatusRequest(input)
 	return out, req.Send()
@@ -856,15 +849,14 @@ func (c *ElasticTranscoder) ListJobsByStatusWithContext(ctx aws.Context, input *
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListJobsByStatus operation.
-//    pageNum := 0
-//    err := client.ListJobsByStatusPages(params,
-//        func(page *ListJobsByStatusOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListJobsByStatus operation.
+//	pageNum := 0
+//	err := client.ListJobsByStatusPages(params,
+//	    func(page *elastictranscoder.ListJobsByStatusOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ElasticTranscoder) ListJobsByStatusPages(input *ListJobsByStatusInput, fn func(*ListJobsByStatusOutput, bool) bool) error {
 	return c.ListJobsByStatusPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -891,10 +883,12 @@ func (c *ElasticTranscoder) ListJobsByStatusPagesWithContext(ctx aws.Context, in
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListJobsByStatusOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListJobsByStatusOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -914,14 +908,13 @@ const opListPipelines = "ListPipelines"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListPipelinesRequest method.
+//	req, resp := client.ListPipelinesRequest(params)
 //
-//    // Example sending a request using the ListPipelinesRequest method.
-//    req, resp := client.ListPipelinesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) (req *request.Request, output *ListPipelinesOutput) {
 	op := &request.Operation{
 		Name:       opListPipelines,
@@ -956,19 +949,19 @@ func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) (req
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation ListPipelines for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) ListPipelines(input *ListPipelinesInput) (*ListPipelinesOutput, error) {
 	req, out := c.ListPipelinesRequest(input)
 	return out, req.Send()
@@ -998,15 +991,14 @@ func (c *ElasticTranscoder) ListPipelinesWithContext(ctx aws.Context, input *Lis
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListPipelines operation.
-//    pageNum := 0
-//    err := client.ListPipelinesPages(params,
-//        func(page *ListPipelinesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListPipelines operation.
+//	pageNum := 0
+//	err := client.ListPipelinesPages(params,
+//	    func(page *elastictranscoder.ListPipelinesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ElasticTranscoder) ListPipelinesPages(input *ListPipelinesInput, fn func(*ListPipelinesOutput, bool) bool) error {
 	return c.ListPipelinesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1033,10 +1025,12 @@ func (c *ElasticTranscoder) ListPipelinesPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPipelinesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListPipelinesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1056,14 +1050,13 @@ const opListPresets = "ListPresets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListPresetsRequest method.
+//	req, resp := client.ListPresetsRequest(params)
 //
-//    // Example sending a request using the ListPresetsRequest method.
-//    req, resp := client.ListPresetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) (req *request.Request, output *ListPresetsOutput) {
 	op := &request.Operation{
 		Name:       opListPresets,
@@ -1098,19 +1091,19 @@ func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) (req *re
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation ListPresets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) ListPresets(input *ListPresetsInput) (*ListPresetsOutput, error) {
 	req, out := c.ListPresetsRequest(input)
 	return out, req.Send()
@@ -1140,15 +1133,14 @@ func (c *ElasticTranscoder) ListPresetsWithContext(ctx aws.Context, input *ListP
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListPresets operation.
-//    pageNum := 0
-//    err := client.ListPresetsPages(params,
-//        func(page *ListPresetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListPresets operation.
+//	pageNum := 0
+//	err := client.ListPresetsPages(params,
+//	    func(page *elastictranscoder.ListPresetsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *ElasticTranscoder) ListPresetsPages(input *ListPresetsInput, fn func(*ListPresetsOutput, bool) bool) error {
 	return c.ListPresetsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1175,10 +1167,12 @@ func (c *ElasticTranscoder) ListPresetsPagesWithContext(ctx aws.Context, input *
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPresetsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListPresetsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1198,14 +1192,13 @@ const opReadJob = "ReadJob"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ReadJobRequest method.
+//	req, resp := client.ReadJobRequest(params)
 //
-//    // Example sending a request using the ReadJobRequest method.
-//    req, resp := client.ReadJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) ReadJobRequest(input *ReadJobInput) (req *request.Request, output *ReadJobOutput) {
 	op := &request.Operation{
 		Name:       opReadJob,
@@ -1233,24 +1226,24 @@ func (c *ElasticTranscoder) ReadJobRequest(input *ReadJobInput) (req *request.Re
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation ReadJob for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) ReadJob(input *ReadJobInput) (*ReadJobOutput, error) {
 	req, out := c.ReadJobRequest(input)
 	return out, req.Send()
@@ -1288,14 +1281,13 @@ const opReadPipeline = "ReadPipeline"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ReadPipelineRequest method.
+//	req, resp := client.ReadPipelineRequest(params)
 //
-//    // Example sending a request using the ReadPipelineRequest method.
-//    req, resp := client.ReadPipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) ReadPipelineRequest(input *ReadPipelineInput) (req *request.Request, output *ReadPipelineOutput) {
 	op := &request.Operation{
 		Name:       opReadPipeline,
@@ -1323,24 +1315,24 @@ func (c *ElasticTranscoder) ReadPipelineRequest(input *ReadPipelineInput) (req *
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation ReadPipeline for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) ReadPipeline(input *ReadPipelineInput) (*ReadPipelineOutput, error) {
 	req, out := c.ReadPipelineRequest(input)
 	return out, req.Send()
@@ -1378,14 +1370,13 @@ const opReadPreset = "ReadPreset"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ReadPresetRequest method.
+//	req, resp := client.ReadPresetRequest(params)
 //
-//    // Example sending a request using the ReadPresetRequest method.
-//    req, resp := client.ReadPresetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) ReadPresetRequest(input *ReadPresetInput) (req *request.Request, output *ReadPresetOutput) {
 	op := &request.Operation{
 		Name:       opReadPreset,
@@ -1413,24 +1404,24 @@ func (c *ElasticTranscoder) ReadPresetRequest(input *ReadPresetInput) (req *requ
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation ReadPreset for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) ReadPreset(input *ReadPresetInput) (*ReadPresetOutput, error) {
 	req, out := c.ReadPresetRequest(input)
 	return out, req.Send()
@@ -1468,14 +1459,13 @@ const opTestRole = "TestRole"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the TestRoleRequest method.
+//	req, resp := client.TestRoleRequest(params)
 //
-//    // Example sending a request using the TestRoleRequest method.
-//    req, resp := client.TestRoleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // Deprecated: TestRole has been deprecated
 func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) (req *request.Request, output *TestRoleOutput) {
@@ -1514,24 +1504,24 @@ func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) (req *request.
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation TestRole for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 //
 // Deprecated: TestRole has been deprecated
 func (c *ElasticTranscoder) TestRole(input *TestRoleInput) (*TestRoleOutput, error) {
@@ -1573,14 +1563,13 @@ const opUpdatePipeline = "UpdatePipeline"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdatePipelineRequest method.
+//	req, resp := client.UpdatePipelineRequest(params)
 //
-//    // Example sending a request using the UpdatePipelineRequest method.
-//    req, resp := client.UpdatePipelineRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) UpdatePipelineRequest(input *UpdatePipelineInput) (req *request.Request, output *UpdatePipelineOutput) {
 	op := &request.Operation{
 		Name:       opUpdatePipeline,
@@ -1613,28 +1602,28 @@ func (c *ElasticTranscoder) UpdatePipelineRequest(input *UpdatePipelineInput) (r
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation UpdatePipeline for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - ResourceInUseException
+//     The resource you are attempting to change is in use. For example, you are
+//     attempting to delete a pipeline that is currently in use.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) UpdatePipeline(input *UpdatePipelineInput) (*UpdatePipelineOutput, error) {
 	req, out := c.UpdatePipelineRequest(input)
 	return out, req.Send()
@@ -1672,14 +1661,13 @@ const opUpdatePipelineNotifications = "UpdatePipelineNotifications"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdatePipelineNotificationsRequest method.
+//	req, resp := client.UpdatePipelineNotificationsRequest(params)
 //
-//    // Example sending a request using the UpdatePipelineNotificationsRequest method.
-//    req, resp := client.UpdatePipelineNotificationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) UpdatePipelineNotificationsRequest(input *UpdatePipelineNotificationsInput) (req *request.Request, output *UpdatePipelineNotificationsOutput) {
 	op := &request.Operation{
 		Name:       opUpdatePipelineNotifications,
@@ -1711,28 +1699,28 @@ func (c *ElasticTranscoder) UpdatePipelineNotificationsRequest(input *UpdatePipe
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation UpdatePipelineNotifications for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceInUseException
+//     The resource you are attempting to change is in use. For example, you are
+//     attempting to delete a pipeline that is currently in use.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) UpdatePipelineNotifications(input *UpdatePipelineNotificationsInput) (*UpdatePipelineNotificationsOutput, error) {
 	req, out := c.UpdatePipelineNotificationsRequest(input)
 	return out, req.Send()
@@ -1770,14 +1758,13 @@ const opUpdatePipelineStatus = "UpdatePipelineStatus"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdatePipelineStatusRequest method.
+//	req, resp := client.UpdatePipelineStatusRequest(params)
 //
-//    // Example sending a request using the UpdatePipelineStatusRequest method.
-//    req, resp := client.UpdatePipelineStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *ElasticTranscoder) UpdatePipelineStatusRequest(input *UpdatePipelineStatusInput) (req *request.Request, output *UpdatePipelineStatusOutput) {
 	op := &request.Operation{
 		Name:       opUpdatePipelineStatus,
@@ -1812,28 +1799,28 @@ func (c *ElasticTranscoder) UpdatePipelineStatusRequest(input *UpdatePipelineSta
 // See the AWS API reference guide for Amazon Elastic Transcoder's
 // API operation UpdatePipelineStatus for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more required parameter values were not provided in the request.
+// Returned Error Types:
 //
-//   * ErrCodeIncompatibleVersionException "IncompatibleVersionException"
+//   - ValidationException
+//     One or more required parameter values were not provided in the request.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist or is not available. For example, the
-//   pipeline to which you're trying to add a job doesn't exist or is still being
-//   created.
+//   - IncompatibleVersionException
 //
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource you are attempting to change is in use. For example, you are
-//   attempting to delete a pipeline that is currently in use.
+//   - ResourceNotFoundException
+//     The requested resource does not exist or is not available. For example, the
+//     pipeline to which you're trying to add a job doesn't exist or is still being
+//     created.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   General authentication failure. The request was not signed correctly.
+//   - ResourceInUseException
+//     The resource you are attempting to change is in use. For example, you are
+//     attempting to delete a pipeline that is currently in use.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Elastic Transcoder encountered an unexpected exception while trying to fulfill
-//   the request.
+//   - AccessDeniedException
+//     General authentication failure. The request was not signed correctly.
 //
+//   - InternalServiceException
+//     Elastic Transcoder encountered an unexpected exception while trying to fulfill
+//     the request.
 func (c *ElasticTranscoder) UpdatePipelineStatus(input *UpdatePipelineStatusInput) (*UpdatePipelineStatusOutput, error) {
 	req, out := c.UpdatePipelineStatusRequest(input)
 	return out, req.Send()
@@ -1853,6 +1840,70 @@ func (c *ElasticTranscoder) UpdatePipelineStatusWithContext(ctx aws.Context, inp
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
+}
+
+// General authentication failure. The request was not signed correctly.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // The file to be used as album art. There can be multiple artworks associated
@@ -1932,12 +1983,20 @@ type Artwork struct {
 	SizingPolicy *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Artwork) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Artwork) GoString() string {
 	return s.String()
 }
@@ -2056,12 +2115,20 @@ type AudioCodecOptions struct {
 	Signed *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AudioCodecOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AudioCodecOptions) GoString() string {
 	return s.String()
 }
@@ -2254,12 +2321,20 @@ type AudioParameters struct {
 	SampleRate *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AudioParameters) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AudioParameters) GoString() string {
 	return s.String()
 }
@@ -2302,7 +2377,7 @@ func (s *AudioParameters) SetSampleRate(v string) *AudioParameters {
 
 // The CancelJobRequest structure.
 type CancelJobInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The identifier of the job that you want to cancel.
 	//
@@ -2313,12 +2388,20 @@ type CancelJobInput struct {
 	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelJobInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelJobInput) GoString() string {
 	return s.String()
 }
@@ -2351,12 +2434,20 @@ type CancelJobOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelJobOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CancelJobOutput) GoString() string {
 	return s.String()
 }
@@ -2373,29 +2464,14 @@ type CaptionFormat struct {
 	// The format you specify determines whether Elastic Transcoder generates an
 	// embedded or sidecar caption for this output.
 	//
-	//    * Valid Embedded Caption Formats:
-	//
-	// for FLAC: None
-	//
-	// For MP3: None
-	//
-	// For MP4: mov-text
-	//
-	// For MPEG-TS: None
-	//
-	// For ogg: None
-	//
-	// For webm: None
+	//    * Valid Embedded Caption Formats: for FLAC: None For MP3: None For MP4:
+	//    mov-text For MPEG-TS: None For ogg: None For webm: None
 	//
 	//    * Valid Sidecar Caption Formats: Elastic Transcoder supports dfxp (first
 	//    div element only), scc, srt, and webvtt. If you want ttml or smpte-tt
-	//    compatible captions, specify dfxp as your output format.
-	//
-	// For FMP4: dfxp
-	//
-	// Non-FMP4 outputs: All sidecar types
-	//
-	// fmp4 captions have an extension of .ismt
+	//    compatible captions, specify dfxp as your output format. For FMP4: dfxp
+	//    Non-FMP4 outputs: All sidecar types fmp4 captions have an extension of
+	//    .ismt
 	Format *string `type:"string"`
 
 	// The prefix for caption filenames, in the form description-{language}, where:
@@ -2417,12 +2493,20 @@ type CaptionFormat struct {
 	Pattern *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CaptionFormat) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CaptionFormat) GoString() string {
 	return s.String()
 }
@@ -2484,12 +2568,20 @@ type CaptionSource struct {
 	TimeOffset *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CaptionSource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CaptionSource) GoString() string {
 	return s.String()
 }
@@ -2581,12 +2673,20 @@ type Captions struct {
 	MergePolicy *string `deprecated:"true" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Captions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Captions) GoString() string {
 	return s.String()
 }
@@ -2640,12 +2740,20 @@ type Clip struct {
 	TimeSpan *TimeSpan `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Clip) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Clip) GoString() string {
 	return s.String()
 }
@@ -2705,12 +2813,20 @@ type CreateJobInput struct {
 	UserMetadata map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateJobInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateJobInput) GoString() string {
 	return s.String()
 }
@@ -2835,25 +2951,19 @@ type CreateJobOutput struct {
 	//
 	//    * Embedded: Embedded captions are included in the same file as the audio
 	//    and video. Elastic Transcoder supports only one embedded caption per language,
-	//    to a maximum of 300 embedded captions per file.
-	//
-	// Valid input values include: CEA-608 (EIA-608, first non-empty channel only),
-	//    CEA-708 (EIA-708, first non-empty channel only), and mov-text
-	//
-	// Valid outputs include: mov-text
-	//
-	// Elastic Transcoder supports a maximum of one embedded format per output.
+	//    to a maximum of 300 embedded captions per file. Valid input values include:
+	//    CEA-608 (EIA-608, first non-empty channel only), CEA-708 (EIA-708, first
+	//    non-empty channel only), and mov-text Valid outputs include: mov-text
+	//    Elastic Transcoder supports a maximum of one embedded format per output.
 	//
 	//    * Sidecar: Sidecar captions are kept in a separate metadata file from
 	//    the audio and video data. Sidecar captions require a player that is capable
 	//    of understanding the relationship between the video file and the sidecar
 	//    file. Elastic Transcoder supports only one sidecar caption per language,
-	//    to a maximum of 20 sidecar captions per file.
-	//
-	// Valid input values include: dfxp (first div element only), ebu-tt, scc, smpt,
-	//    srt, ttml (first div element only), and webvtt
-	//
-	// Valid outputs include: dfxp (first div element only), scc, srt, and webvtt.
+	//    to a maximum of 20 sidecar captions per file. Valid input values include:
+	//    dfxp (first div element only), ebu-tt, scc, smpt, srt, ttml (first div
+	//    element only), and webvtt Valid outputs include: dfxp (first div element
+	//    only), scc, srt, and webvtt.
 	//
 	// If you want ttml or smpte-tt compatible captions, specify dfxp as your output
 	// format.
@@ -2904,6 +3014,7 @@ type CreateJobOutput struct {
 	// transcoding contains rotation metadata.
 	Rotate *string `type:"string"`
 
+	//
 	// (Outputs in Fragmented MP4 or MPEG-TS format only.
 	//
 	// If you specify a preset in PresetId for which the value of Container is fmp4
@@ -2940,11 +3051,9 @@ type CreateJobOutput struct {
 	//    {count} in the ThumbnailPattern object. Wherever you specify {count},
 	//    Elastic Transcoder adds a five-digit sequence number (beginning with 00001)
 	//    to thumbnail file names. The number indicates where a given thumbnail
-	//    appears in the sequence of thumbnails for a transcoded file.
-	//
-	// If you specify a literal value and/or {resolution} but you omit {count},
-	//    Elastic Transcoder returns a validation error and does not create the
-	//    job.
+	//    appears in the sequence of thumbnails for a transcoded file. If you specify
+	//    a literal value and/or {resolution} but you omit {count}, Elastic Transcoder
+	//    returns a validation error and does not create the job.
 	//
 	//    * Literal values (Optional): You can specify literal values anywhere in
 	//    the ThumbnailPattern object. For example, you can include them as a file
@@ -2967,12 +3076,20 @@ type CreateJobOutput struct {
 	Watermarks []*JobWatermark `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateJobOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateJobOutput) GoString() string {
 	return s.String()
 }
@@ -3105,28 +3222,19 @@ type CreateJobPlaylist struct {
 	//
 	//    * If your output is not HLS or does not have a segment duration set, the
 	//    name of the output file is a concatenation of OutputKeyPrefix and Outputs:Key:
-	//
-	// OutputKeyPrefixOutputs:Key
+	//    OutputKeyPrefixOutputs:Key
 	//
 	//    * If your output is HLSv3 and has a segment duration set, or is not included
 	//    in a playlist, Elastic Transcoder creates an output playlist file with
 	//    a file extension of .m3u8, and a series of .ts files that include a five-digit
-	//    sequential counter beginning with 00000:
-	//
-	// OutputKeyPrefixOutputs:Key.m3u8
-	//
-	// OutputKeyPrefixOutputs:Key00000.ts
+	//    sequential counter beginning with 00000: OutputKeyPrefixOutputs:Key.m3u8
+	//    OutputKeyPrefixOutputs:Key00000.ts
 	//
 	//    * If your output is HLSv4, has a segment duration set, and is included
 	//    in an HLSv4 playlist, Elastic Transcoder creates an output playlist file
 	//    with a file extension of _v4.m3u8. If the output is video, Elastic Transcoder
-	//    also creates an output file with an extension of _iframe.m3u8:
-	//
-	// OutputKeyPrefixOutputs:Key_v4.m3u8
-	//
-	// OutputKeyPrefixOutputs:Key_iframe.m3u8
-	//
-	// OutputKeyPrefixOutputs:Key.ts
+	//    also creates an output file with an extension of _iframe.m3u8: OutputKeyPrefixOutputs:Key_v4.m3u8
+	//    OutputKeyPrefixOutputs:Key_iframe.m3u8 OutputKeyPrefixOutputs:Key.ts
 	//
 	// Elastic Transcoder automatically appends the relevant file extension to the
 	// file name. If you include a file extension in Output Key, the file name will
@@ -3143,12 +3251,20 @@ type CreateJobPlaylist struct {
 	PlayReadyDrm *PlayReadyDrm `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateJobPlaylist) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateJobPlaylist) GoString() string {
 	return s.String()
 }
@@ -3210,12 +3326,20 @@ type CreateJobResponse struct {
 	Job *Job `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateJobResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateJobResponse) GoString() string {
 	return s.String()
 }
@@ -3261,23 +3385,18 @@ type CreatePipelineInput struct {
 	//    and/or predefined Amazon S3 groups.
 	//
 	//    * Grantee Type: Specify the type of value that appears in the Grantee
-	//    object:
-	//
-	// Canonical: The value in the Grantee object is either the canonical user ID
-	//    for an AWS account or an origin access identity for an Amazon CloudFront
-	//    distribution. For more information about canonical user IDs, see Access
-	//    Control List (ACL) Overview in the Amazon Simple Storage Service Developer
-	//    Guide. For more information about using CloudFront origin access identities
-	//    to require that users use CloudFront URLs instead of Amazon S3 URLs, see
-	//    Using an Origin Access Identity to Restrict Access to Your Amazon S3 Content.
-	//
-	// A canonical user ID is not the same as an AWS account number.
-	//
-	// Email: The value in the Grantee object is the registered email address of
-	//    an AWS account.
-	//
-	// Group: The value in the Grantee object is one of the following predefined
-	//    Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+	//    object: Canonical: The value in the Grantee object is either the canonical
+	//    user ID for an AWS account or an origin access identity for an Amazon
+	//    CloudFront distribution. For more information about canonical user IDs,
+	//    see Access Control List (ACL) Overview in the Amazon Simple Storage Service
+	//    Developer Guide. For more information about using CloudFront origin access
+	//    identities to require that users use CloudFront URLs instead of Amazon
+	//    S3 URLs, see Using an Origin Access Identity to Restrict Access to Your
+	//    Amazon S3 Content. A canonical user ID is not the same as an AWS account
+	//    number. Email: The value in the Grantee object is the registered email
+	//    address of an AWS account. Group: The value in the Grantee object is one
+	//    of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers,
+	//    or LogDelivery.
 	//
 	//    * Grantee: The AWS user or group that you want to have access to transcoded
 	//    files and playlists. To identify the user or group, you can specify the
@@ -3288,19 +3407,13 @@ type CreatePipelineInput struct {
 	//    * Access: The permission that you want to give to the AWS user that you
 	//    specified in Grantee. Permissions are granted on the files that Elastic
 	//    Transcoder adds to the bucket, including playlists and video files. Valid
-	//    values include:
-	//
-	// READ: The grantee can read the objects and metadata for objects that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// READ_ACP: The grantee can read the object ACL for objects that Elastic Transcoder
-	//    adds to the Amazon S3 bucket.
-	//
-	// WRITE_ACP: The grantee can write the ACL for the objects that Elastic Transcoder
-	//    adds to the Amazon S3 bucket.
-	//
-	// FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for
-	//    the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    values include: READ: The grantee can read the objects and metadata for
+	//    objects that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP:
+	//    The grantee can read the object ACL for objects that Elastic Transcoder
+	//    adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL
+	//    for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions
+	//    for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
 	//
 	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
 	//    that you want Elastic Transcoder to assign to the video files and playlists
@@ -3360,11 +3473,9 @@ type CreatePipelineInput struct {
 	//    transcoded files, thumbnails, and playlists.
 	//
 	//    * You do not want to specify the permissions that Elastic Transcoder grants
-	//    to the files.
-	//
-	// When Elastic Transcoder saves files in OutputBucket, it grants full control
-	//    over the files only to the AWS account that owns the role that is specified
-	//    by Role.
+	//    to the files. When Elastic Transcoder saves files in OutputBucket, it
+	//    grants full control over the files only to the AWS account that owns the
+	//    role that is specified by Role.
 	//
 	//    * You want to associate the transcoded files and thumbnails with the Amazon
 	//    S3 Standard storage class.
@@ -3401,19 +3512,13 @@ type CreatePipelineInput struct {
 	//    to a maximum of 30 users and/or predefined Amazon S3 groups.
 	//
 	//    * GranteeType: Specify the type of value that appears in the Grantee object:
-	//
-	//
-	// Canonical: The value in the Grantee object is either the canonical user ID
-	//    for an AWS account or an origin access identity for an Amazon CloudFront
-	//    distribution.
-	//
-	// A canonical user ID is not the same as an AWS account number.
-	//
-	// Email: The value in the Grantee object is the registered email address of
-	//    an AWS account.
-	//
-	// Group: The value in the Grantee object is one of the following predefined
-	//    Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+	//    Canonical: The value in the Grantee object is either the canonical user
+	//    ID for an AWS account or an origin access identity for an Amazon CloudFront
+	//    distribution. A canonical user ID is not the same as an AWS account number.
+	//    Email: The value in the Grantee object is the registered email address
+	//    of an AWS account. Group: The value in the Grantee object is one of the
+	//    following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers, or
+	//    LogDelivery.
 	//
 	//    * Grantee: The AWS user or group that you want to have access to thumbnail
 	//    files. To identify the user or group, you can specify the canonical user
@@ -3423,19 +3528,14 @@ type CreatePipelineInput struct {
 	//
 	//    * Access: The permission that you want to give to the AWS user that you
 	//    specified in Grantee. Permissions are granted on the thumbnail files that
-	//    Elastic Transcoder adds to the bucket. Valid values include:
-	//
-	// READ: The grantee can read the thumbnails and metadata for objects that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// READ_ACP: The grantee can read the object ACL for thumbnails that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// WRITE_ACP: The grantee can write the ACL for the thumbnails that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for
-	//    the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    Elastic Transcoder adds to the bucket. Valid values include: READ: The
+	//    grantee can read the thumbnails and metadata for objects that Elastic
+	//    Transcoder adds to the Amazon S3 bucket. READ_ACP: The grantee can read
+	//    the object ACL for thumbnails that Elastic Transcoder adds to the Amazon
+	//    S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
+	//    that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The
+	//    grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails
+	//    that Elastic Transcoder adds to the Amazon S3 bucket.
 	//
 	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
 	//    that you want Elastic Transcoder to assign to the thumbnails that it stores
@@ -3443,12 +3543,20 @@ type CreatePipelineInput struct {
 	ThumbnailConfig *PipelineOutputConfig `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePipelineInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePipelineInput) GoString() string {
 	return s.String()
 }
@@ -3551,12 +3659,20 @@ type CreatePipelineOutput struct {
 	Warnings []*Warning `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePipelineOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePipelineOutput) GoString() string {
 	return s.String()
 }
@@ -3603,12 +3719,20 @@ type CreatePresetInput struct {
 	Video *VideoParameters `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePresetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePresetInput) GoString() string {
 	return s.String()
 }
@@ -3688,12 +3812,20 @@ type CreatePresetOutput struct {
 	Warning *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePresetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreatePresetOutput) GoString() string {
 	return s.String()
 }
@@ -3712,7 +3844,7 @@ func (s *CreatePresetOutput) SetWarning(v string) *CreatePresetOutput {
 
 // The DeletePipelineRequest structure.
 type DeletePipelineInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The identifier of the pipeline that you want to delete.
 	//
@@ -3720,12 +3852,20 @@ type DeletePipelineInput struct {
 	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletePipelineInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletePipelineInput) GoString() string {
 	return s.String()
 }
@@ -3757,19 +3897,27 @@ type DeletePipelineOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletePipelineOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletePipelineOutput) GoString() string {
 	return s.String()
 }
 
 // The DeletePresetRequest structure.
 type DeletePresetInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The identifier of the preset for which you want to get detailed information.
 	//
@@ -3777,12 +3925,20 @@ type DeletePresetInput struct {
 	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletePresetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletePresetInput) GoString() string {
 	return s.String()
 }
@@ -3814,12 +3970,20 @@ type DeletePresetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletePresetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeletePresetOutput) GoString() string {
 	return s.String()
 }
@@ -3845,12 +4009,20 @@ type DetectedProperties struct {
 	Width *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetectedProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetectedProperties) GoString() string {
 	return s.String()
 }
@@ -3954,12 +4126,20 @@ type Encryption struct {
 	Mode *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Encryption) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Encryption) GoString() string {
 	return s.String()
 }
@@ -4039,12 +4219,20 @@ type HlsContentProtection struct {
 	Method *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HlsContentProtection) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s HlsContentProtection) GoString() string {
 	return s.String()
 }
@@ -4085,6 +4273,69 @@ func (s *HlsContentProtection) SetMethod(v string) *HlsContentProtection {
 	return s
 }
 
+type IncompatibleVersionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IncompatibleVersionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IncompatibleVersionException) GoString() string {
+	return s.String()
+}
+
+func newErrorIncompatibleVersionException(v protocol.ResponseMetadata) error {
+	return &IncompatibleVersionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IncompatibleVersionException) Code() string {
+	return "IncompatibleVersionException"
+}
+
+// Message returns the exception's message.
+func (s *IncompatibleVersionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IncompatibleVersionException) OrigErr() error {
+	return nil
+}
+
+func (s *IncompatibleVersionException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IncompatibleVersionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IncompatibleVersionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The captions to be created, if any.
 type InputCaptions struct {
 	_ struct{} `type:"structure"`
@@ -4115,12 +4366,20 @@ type InputCaptions struct {
 	MergePolicy *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputCaptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s InputCaptions) GoString() string {
 	return s.String()
 }
@@ -4155,6 +4414,71 @@ func (s *InputCaptions) SetCaptionSources(v []*CaptionSource) *InputCaptions {
 func (s *InputCaptions) SetMergePolicy(v string) *InputCaptions {
 	s.MergePolicy = &v
 	return s
+}
+
+// Elastic Transcoder encountered an unexpected exception while trying to fulfill
+// the request.
+type InternalServiceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServiceException(v protocol.ResponseMetadata) error {
+	return &InternalServiceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServiceException) Code() string {
+	return "InternalServiceException"
+}
+
+// Message returns the exception's message.
+func (s *InternalServiceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServiceException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServiceException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServiceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServiceException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // A section of the response body that provides information about the job that
@@ -4210,6 +4534,7 @@ type Job struct {
 	// into which Elastic Transcoder puts the transcoded files.
 	PipelineId *string `type:"string"`
 
+	//
 	// Outputs in Fragmented MP4 or MPEG-TS format only.
 	//
 	// If you specify a preset in PresetId for which the value of Container is fmp4
@@ -4242,12 +4567,20 @@ type Job struct {
 	UserMetadata map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Job) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Job) GoString() string {
 	return s.String()
 }
@@ -4348,12 +4681,20 @@ type JobAlbumArt struct {
 	MergePolicy *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JobAlbumArt) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JobAlbumArt) GoString() string {
 	return s.String()
 }
@@ -4437,25 +4778,19 @@ type JobInput struct {
 	//
 	//    * Embedded: Embedded captions are included in the same file as the audio
 	//    and video. Elastic Transcoder supports only one embedded caption per language,
-	//    to a maximum of 300 embedded captions per file.
-	//
-	// Valid input values include: CEA-608 (EIA-608, first non-empty channel only),
-	//    CEA-708 (EIA-708, first non-empty channel only), and mov-text
-	//
-	// Valid outputs include: mov-text
-	//
-	// Elastic Transcoder supports a maximum of one embedded format per output.
+	//    to a maximum of 300 embedded captions per file. Valid input values include:
+	//    CEA-608 (EIA-608, first non-empty channel only), CEA-708 (EIA-708, first
+	//    non-empty channel only), and mov-text Valid outputs include: mov-text
+	//    Elastic Transcoder supports a maximum of one embedded format per output.
 	//
 	//    * Sidecar: Sidecar captions are kept in a separate metadata file from
 	//    the audio and video data. Sidecar captions require a player that is capable
 	//    of understanding the relationship between the video file and the sidecar
 	//    file. Elastic Transcoder supports only one sidecar caption per language,
-	//    to a maximum of 20 sidecar captions per file.
-	//
-	// Valid input values include: dfxp (first div element only), ebu-tt, scc, smpt,
-	//    srt, ttml (first div element only), and webvtt
-	//
-	// Valid outputs include: dfxp (first div element only), scc, srt, and webvtt.
+	//    to a maximum of 20 sidecar captions per file. Valid input values include:
+	//    dfxp (first div element only), ebu-tt, scc, smpt, srt, ttml (first div
+	//    element only), and webvtt Valid outputs include: dfxp (first div element
+	//    only), scc, srt, and webvtt.
 	//
 	// If you want ttml or smpte-tt compatible captions, specify dfxp as your output
 	// format.
@@ -4504,12 +4839,20 @@ type JobInput struct {
 	TimeSpan *TimeSpan `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JobInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JobInput) GoString() string {
 	return s.String()
 }
@@ -4616,25 +4959,19 @@ type JobOutput struct {
 	//
 	//    * Embedded: Embedded captions are included in the same file as the audio
 	//    and video. Elastic Transcoder supports only one embedded caption per language,
-	//    to a maximum of 300 embedded captions per file.
-	//
-	// Valid input values include: CEA-608 (EIA-608, first non-empty channel only),
-	//    CEA-708 (EIA-708, first non-empty channel only), and mov-text
-	//
-	// Valid outputs include: mov-text
-	//
-	// Elastic Transcoder supports a maximum of one embedded format per output.
+	//    to a maximum of 300 embedded captions per file. Valid input values include:
+	//    CEA-608 (EIA-608, first non-empty channel only), CEA-708 (EIA-708, first
+	//    non-empty channel only), and mov-text Valid outputs include: mov-text
+	//    Elastic Transcoder supports a maximum of one embedded format per output.
 	//
 	//    * Sidecar: Sidecar captions are kept in a separate metadata file from
 	//    the audio and video data. Sidecar captions require a player that is capable
 	//    of understanding the relationship between the video file and the sidecar
 	//    file. Elastic Transcoder supports only one sidecar caption per language,
-	//    to a maximum of 20 sidecar captions per file.
-	//
-	// Valid input values include: dfxp (first div element only), ebu-tt, scc, smpt,
-	//    srt, ttml (first div element only), and webvtt
-	//
-	// Valid outputs include: dfxp (first div element only), scc, srt, and webvtt.
+	//    to a maximum of 20 sidecar captions per file. Valid input values include:
+	//    dfxp (first div element only), ebu-tt, scc, smpt, srt, ttml (first div
+	//    element only), and webvtt Valid outputs include: dfxp (first div element
+	//    only), scc, srt, and webvtt.
 	//
 	// If you want ttml or smpte-tt compatible captions, specify dfxp as your output
 	// format.
@@ -4711,6 +5048,7 @@ type JobOutput struct {
 	// rotation metadata.
 	Rotate *string `type:"string"`
 
+	//
 	// (Outputs in Fragmented MP4 or MPEG-TS format only.
 	//
 	// If you specify a preset in PresetId for which the value of Container is fmp4
@@ -4774,11 +5112,9 @@ type JobOutput struct {
 	//    {count} in the ThumbnailPattern object. Wherever you specify {count},
 	//    Elastic Transcoder adds a five-digit sequence number (beginning with 00001)
 	//    to thumbnail file names. The number indicates where a given thumbnail
-	//    appears in the sequence of thumbnails for a transcoded file.
-	//
-	// If you specify a literal value and/or {resolution} but you omit {count},
-	//    Elastic Transcoder returns a validation error and does not create the
-	//    job.
+	//    appears in the sequence of thumbnails for a transcoded file. If you specify
+	//    a literal value and/or {resolution} but you omit {count}, Elastic Transcoder
+	//    returns a validation error and does not create the job.
 	//
 	//    * Literal values (Optional): You can specify literal values anywhere in
 	//    the ThumbnailPattern object. For example, you can include them as a file
@@ -4800,24 +5136,32 @@ type JobOutput struct {
 	// you specify in Preset for the current output.
 	//
 	// Watermarks are added to the output video in the sequence in which you list
-	// them in the job output—the first watermark in the list is added to the output
-	// video first, the second watermark in the list is added next, and so on. As
-	// a result, if the settings in a preset cause Elastic Transcoder to place all
-	// watermarks in the same location, the second watermark that you add covers
-	// the first one, the third one covers the second, and the fourth one covers
-	// the third.
+	// them in the job output—the first watermark in the list is added to the
+	// output video first, the second watermark in the list is added next, and so
+	// on. As a result, if the settings in a preset cause Elastic Transcoder to
+	// place all watermarks in the same location, the second watermark that you
+	// add covers the first one, the third one covers the second, and the fourth
+	// one covers the third.
 	Watermarks []*JobWatermark `type:"list"`
 
 	// Specifies the width of the output file in pixels.
 	Width *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JobOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JobOutput) GoString() string {
 	return s.String()
 }
@@ -4974,12 +5318,20 @@ type JobWatermark struct {
 	PresetWatermarkId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JobWatermark) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s JobWatermark) GoString() string {
 	return s.String()
 }
@@ -5018,9 +5370,74 @@ func (s *JobWatermark) SetPresetWatermarkId(v string) *JobWatermark {
 	return s
 }
 
+// Too many operations for a given AWS account. For example, the number of pipelines
+// exceeds the maximum allowed.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The ListJobsByPipelineRequest structure.
 type ListJobsByPipelineInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// To list jobs in chronological order by the date and time that they were submitted,
 	// enter true. To list jobs in reverse chronological order, enter false.
@@ -5036,12 +5453,20 @@ type ListJobsByPipelineInput struct {
 	PipelineId *string `location:"uri" locationName:"PipelineId" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListJobsByPipelineInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListJobsByPipelineInput) GoString() string {
 	return s.String()
 }
@@ -5093,12 +5518,20 @@ type ListJobsByPipelineOutput struct {
 	NextPageToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListJobsByPipelineOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListJobsByPipelineOutput) GoString() string {
 	return s.String()
 }
@@ -5117,7 +5550,7 @@ func (s *ListJobsByPipelineOutput) SetNextPageToken(v string) *ListJobsByPipelin
 
 // The ListJobsByStatusRequest structure.
 type ListJobsByStatusInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// To list jobs in chronological order by the date and time that they were submitted,
 	// enter true. To list jobs in reverse chronological order, enter false.
@@ -5135,12 +5568,20 @@ type ListJobsByStatusInput struct {
 	Status *string `location:"uri" locationName:"Status" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListJobsByStatusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListJobsByStatusInput) GoString() string {
 	return s.String()
 }
@@ -5192,12 +5633,20 @@ type ListJobsByStatusOutput struct {
 	NextPageToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListJobsByStatusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListJobsByStatusOutput) GoString() string {
 	return s.String()
 }
@@ -5216,7 +5665,7 @@ func (s *ListJobsByStatusOutput) SetNextPageToken(v string) *ListJobsByStatusOut
 
 // The ListPipelineRequest structure.
 type ListPipelinesInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// To list pipelines in chronological order by the date and time that they were
 	// created, enter true. To list pipelines in reverse chronological order, enter
@@ -5228,12 +5677,20 @@ type ListPipelinesInput struct {
 	PageToken *string `location:"querystring" locationName:"PageToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPipelinesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPipelinesInput) GoString() string {
 	return s.String()
 }
@@ -5263,12 +5720,20 @@ type ListPipelinesOutput struct {
 	Pipelines []*Pipeline `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPipelinesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPipelinesOutput) GoString() string {
 	return s.String()
 }
@@ -5287,7 +5752,7 @@ func (s *ListPipelinesOutput) SetPipelines(v []*Pipeline) *ListPipelinesOutput {
 
 // The ListPresetsRequest structure.
 type ListPresetsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// To list presets in chronological order by the date and time that they were
 	// created, enter true. To list presets in reverse chronological order, enter
@@ -5299,12 +5764,20 @@ type ListPresetsInput struct {
 	PageToken *string `location:"querystring" locationName:"PageToken" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPresetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPresetsInput) GoString() string {
 	return s.String()
 }
@@ -5334,12 +5807,20 @@ type ListPresetsOutput struct {
 	Presets []*Preset `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPresetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPresetsOutput) GoString() string {
 	return s.String()
 }
@@ -5381,12 +5862,20 @@ type Notifications struct {
 	Warning *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Notifications) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Notifications) GoString() string {
 	return s.String()
 }
@@ -5445,9 +5934,8 @@ type Permission struct {
 	// The type of value that appears in the Grantee object:
 	//
 	//    * Canonical: Either the canonical user ID for an AWS account or an origin
-	//    access identity for an Amazon CloudFront distribution.
-	//
-	// A canonical user ID is not the same as an AWS account number.
+	//    access identity for an Amazon CloudFront distribution. A canonical user
+	//    ID is not the same as an AWS account number.
 	//
 	//    * Email: The registered email address of an AWS account.
 	//
@@ -5456,12 +5944,20 @@ type Permission struct {
 	GranteeType *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Permission) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Permission) GoString() string {
 	return s.String()
 }
@@ -5523,35 +6019,21 @@ type Pipeline struct {
 	//
 	//    * Permissions: A list of the users and/or predefined Amazon S3 groups
 	//    you want to have access to transcoded files and playlists, and the type
-	//    of access that you want them to have.
-	//
-	// GranteeType: The type of value that appears in the Grantee object:
-	//
-	// Canonical: Either the canonical user ID for an AWS account or an origin access
-	//    identity for an Amazon CloudFront distribution.
-	//
-	// Email: The registered email address of an AWS account.
-	//
-	// Group: One of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers,
-	//    or LogDelivery.
-	//
-	// Grantee: The AWS user or group that you want to have access to transcoded
-	//    files and playlists.
-	//
-	// Access: The permission that you want to give to the AWS user that is listed
-	//    in Grantee. Valid values include:
-	//
-	// READ: The grantee can read the objects and metadata for objects that Elastic
+	//    of access that you want them to have. GranteeType: The type of value that
+	//    appears in the Grantee object: Canonical: Either the canonical user ID
+	//    for an AWS account or an origin access identity for an Amazon CloudFront
+	//    distribution. Email: The registered email address of an AWS account. Group:
+	//    One of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers,
+	//    or LogDelivery. Grantee: The AWS user or group that you want to have access
+	//    to transcoded files and playlists. Access: The permission that you want
+	//    to give to the AWS user that is listed in Grantee. Valid values include:
+	//    READ: The grantee can read the objects and metadata for objects that Elastic
+	//    Transcoder adds to the Amazon S3 bucket. READ_ACP: The grantee can read
+	//    the object ACL for objects that Elastic Transcoder adds to the Amazon
+	//    S3 bucket. WRITE_ACP: The grantee can write the ACL for the objects that
+	//    Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee
+	//    has READ, READ_ACP, and WRITE_ACP permissions for the objects that Elastic
 	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// READ_ACP: The grantee can read the object ACL for objects that Elastic Transcoder
-	//    adds to the Amazon S3 bucket.
-	//
-	// WRITE_ACP: The grantee can write the ACL for the objects that Elastic Transcoder
-	//    adds to the Amazon S3 bucket.
-	//
-	// FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for
-	//    the objects that Elastic Transcoder adds to the Amazon S3 bucket.
 	//
 	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
 	//    that you want Elastic Transcoder to assign to the video files and playlists
@@ -5618,37 +6100,22 @@ type Pipeline struct {
 	//
 	//    * Permissions: A list of the users and/or predefined Amazon S3 groups
 	//    you want to have access to thumbnail files, and the type of access that
-	//    you want them to have.
-	//
-	// GranteeType: The type of value that appears in the Grantee object:
-	//
-	// Canonical: Either the canonical user ID for an AWS account or an origin access
-	//    identity for an Amazon CloudFront distribution.
-	//
-	// A canonical user ID is not the same as an AWS account number.
-	//
-	// Email: The registered email address of an AWS account.
-	//
-	// Group: One of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers,
-	//    or LogDelivery.
-	//
-	// Grantee: The AWS user or group that you want to have access to thumbnail
-	//    files.
-	//
-	// Access: The permission that you want to give to the AWS user that is listed
-	//    in Grantee. Valid values include:
-	//
-	// READ: The grantee can read the thumbnails and metadata for thumbnails that
-	//    Elastic Transcoder adds to the Amazon S3 bucket.
-	//
-	// READ_ACP: The grantee can read the object ACL for thumbnails that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// WRITE_ACP: The grantee can write the ACL for the thumbnails that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for
-	//    the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    you want them to have. GranteeType: The type of value that appears in
+	//    the Grantee object: Canonical: Either the canonical user ID for an AWS
+	//    account or an origin access identity for an Amazon CloudFront distribution.
+	//    A canonical user ID is not the same as an AWS account number. Email: The
+	//    registered email address of an AWS account. Group: One of the following
+	//    predefined Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+	//    Grantee: The AWS user or group that you want to have access to thumbnail
+	//    files. Access: The permission that you want to give to the AWS user that
+	//    is listed in Grantee. Valid values include: READ: The grantee can read
+	//    the thumbnails and metadata for thumbnails that Elastic Transcoder adds
+	//    to the Amazon S3 bucket. READ_ACP: The grantee can read the object ACL
+	//    for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. WRITE_ACP:
+	//    The grantee can write the ACL for the thumbnails that Elastic Transcoder
+	//    adds to the Amazon S3 bucket. FULL_CONTROL: The grantee has READ, READ_ACP,
+	//    and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds
+	//    to the Amazon S3 bucket.
 	//
 	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
 	//    that you want Elastic Transcoder to assign to the thumbnails that it stores
@@ -5656,12 +6123,20 @@ type Pipeline struct {
 	ThumbnailConfig *PipelineOutputConfig `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Pipeline) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Pipeline) GoString() string {
 	return s.String()
 }
@@ -5778,12 +6253,20 @@ type PipelineOutputConfig struct {
 	StorageClass *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PipelineOutputConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PipelineOutputConfig) GoString() string {
 	return s.String()
 }
@@ -5878,12 +6361,20 @@ type PlayReadyDrm struct {
 	LicenseAcquisitionUrl *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PlayReadyDrm) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PlayReadyDrm) GoString() string {
 	return s.String()
 }
@@ -5970,28 +6461,19 @@ type Playlist struct {
 	//
 	//    * If your output is not HLS or does not have a segment duration set, the
 	//    name of the output file is a concatenation of OutputKeyPrefix and Outputs:Key:
-	//
-	// OutputKeyPrefixOutputs:Key
+	//    OutputKeyPrefixOutputs:Key
 	//
 	//    * If your output is HLSv3 and has a segment duration set, or is not included
 	//    in a playlist, Elastic Transcoder creates an output playlist file with
 	//    a file extension of .m3u8, and a series of .ts files that include a five-digit
-	//    sequential counter beginning with 00000:
-	//
-	// OutputKeyPrefixOutputs:Key.m3u8
-	//
-	// OutputKeyPrefixOutputs:Key00000.ts
+	//    sequential counter beginning with 00000: OutputKeyPrefixOutputs:Key.m3u8
+	//    OutputKeyPrefixOutputs:Key00000.ts
 	//
 	//    * If your output is HLSv4, has a segment duration set, and is included
 	//    in an HLSv4 playlist, Elastic Transcoder creates an output playlist file
 	//    with a file extension of _v4.m3u8. If the output is video, Elastic Transcoder
-	//    also creates an output file with an extension of _iframe.m3u8:
-	//
-	// OutputKeyPrefixOutputs:Key_v4.m3u8
-	//
-	// OutputKeyPrefixOutputs:Key_iframe.m3u8
-	//
-	// OutputKeyPrefixOutputs:Key.ts
+	//    also creates an output file with an extension of _iframe.m3u8: OutputKeyPrefixOutputs:Key_v4.m3u8
+	//    OutputKeyPrefixOutputs:Key_iframe.m3u8 OutputKeyPrefixOutputs:Key.ts
 	//
 	// Elastic Transcoder automatically appends the relevant file extension to the
 	// file name. If you include a file extension in Output Key, the file name will
@@ -6014,12 +6496,20 @@ type Playlist struct {
 	StatusDetail *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Playlist) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Playlist) GoString() string {
 	return s.String()
 }
@@ -6109,12 +6599,20 @@ type Preset struct {
 	Video *VideoParameters `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Preset) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Preset) GoString() string {
 	return s.String()
 }
@@ -6250,8 +6748,7 @@ type PresetWatermark struct {
 	//    * integer percentage (%): The range of valid values is 0 to 100. Use the
 	//    value of Target to specify whether you want Elastic Transcoder to include
 	//    the black bars that are added by Elastic Transcoder, if any, in the calculation.
-	//
-	// If you specify the value in pixels, it must be less than or equal to the
+	//    If you specify the value in pixels, it must be less than or equal to the
 	//    value of MaxWidth.
 	MaxWidth *string `type:"string"`
 
@@ -6338,12 +6835,20 @@ type PresetWatermark struct {
 	VerticalOffset *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PresetWatermark) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PresetWatermark) GoString() string {
 	return s.String()
 }
@@ -6423,7 +6928,7 @@ func (s *PresetWatermark) SetVerticalOffset(v string) *PresetWatermark {
 
 // The ReadJobRequest structure.
 type ReadJobInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The identifier of the job for which you want to get detailed information.
 	//
@@ -6431,12 +6936,20 @@ type ReadJobInput struct {
 	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadJobInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadJobInput) GoString() string {
 	return s.String()
 }
@@ -6471,12 +6984,20 @@ type ReadJobOutput struct {
 	Job *Job `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadJobOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadJobOutput) GoString() string {
 	return s.String()
 }
@@ -6489,7 +7010,7 @@ func (s *ReadJobOutput) SetJob(v *Job) *ReadJobOutput {
 
 // The ReadPipelineRequest structure.
 type ReadPipelineInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The identifier of the pipeline to read.
 	//
@@ -6497,12 +7018,20 @@ type ReadPipelineInput struct {
 	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadPipelineInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadPipelineInput) GoString() string {
 	return s.String()
 }
@@ -6545,12 +7074,20 @@ type ReadPipelineOutput struct {
 	Warnings []*Warning `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadPipelineOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadPipelineOutput) GoString() string {
 	return s.String()
 }
@@ -6569,7 +7106,7 @@ func (s *ReadPipelineOutput) SetWarnings(v []*Warning) *ReadPipelineOutput {
 
 // The ReadPresetRequest structure.
 type ReadPresetInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The identifier of the preset for which you want to get detailed information.
 	//
@@ -6577,12 +7114,20 @@ type ReadPresetInput struct {
 	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadPresetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadPresetInput) GoString() string {
 	return s.String()
 }
@@ -6617,12 +7162,20 @@ type ReadPresetOutput struct {
 	Preset *Preset `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadPresetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ReadPresetOutput) GoString() string {
 	return s.String()
 }
@@ -6631,6 +7184,137 @@ func (s ReadPresetOutput) GoString() string {
 func (s *ReadPresetOutput) SetPreset(v *Preset) *ReadPresetOutput {
 	s.Preset = v
 	return s
+}
+
+// The resource you are attempting to change is in use. For example, you are
+// attempting to delete a pipeline that is currently in use.
+type ResourceInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceInUseException(v protocol.ResponseMetadata) error {
+	return &ResourceInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceInUseException) Code() string {
+	return "ResourceInUseException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The requested resource does not exist or is not available. For example, the
+// pipeline to which you're trying to add a job doesn't exist or is still being
+// created.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // The TestRoleRequest structure.
@@ -6664,12 +7348,20 @@ type TestRoleInput struct {
 	Topics []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TestRoleInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TestRoleInput) GoString() string {
 	return s.String()
 }
@@ -6735,12 +7427,20 @@ type TestRoleOutput struct {
 	Success *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TestRoleOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TestRoleOutput) GoString() string {
 	return s.String()
 }
@@ -6761,6 +7461,7 @@ func (s *TestRoleOutput) SetSuccess(v string) *TestRoleOutput {
 type Thumbnails struct {
 	_ struct{} `type:"structure"`
 
+	//
 	// To better control resolution and aspect ratio of thumbnails, we recommend
 	// that you use the values MaxWidth, MaxHeight, SizingPolicy, and PaddingPolicy
 	// instead of Resolution and AspectRatio. The two groups of settings are mutually
@@ -6800,6 +7501,7 @@ type Thumbnails struct {
 	// MaxWidth and MaxHeight settings.
 	PaddingPolicy *string `type:"string"`
 
+	//
 	// To better control resolution and aspect ratio of thumbnails, we recommend
 	// that you use the values MaxWidth, MaxHeight, SizingPolicy, and PaddingPolicy
 	// instead of Resolution and AspectRatio. The two groups of settings are mutually
@@ -6842,12 +7544,20 @@ type Thumbnails struct {
 	SizingPolicy *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Thumbnails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Thumbnails) GoString() string {
 	return s.String()
 }
@@ -6920,12 +7630,20 @@ type TimeSpan struct {
 	StartTime *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeSpan) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimeSpan) GoString() string {
 	return s.String()
 }
@@ -6956,12 +7674,20 @@ type Timing struct {
 	SubmitTimeMillis *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Timing) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Timing) GoString() string {
 	return s.String()
 }
@@ -7019,23 +7745,18 @@ type UpdatePipelineInput struct {
 	//    and/or predefined Amazon S3 groups.
 	//
 	//    * Grantee Type: Specify the type of value that appears in the Grantee
-	//    object:
-	//
-	// Canonical: The value in the Grantee object is either the canonical user ID
-	//    for an AWS account or an origin access identity for an Amazon CloudFront
-	//    distribution. For more information about canonical user IDs, see Access
-	//    Control List (ACL) Overview in the Amazon Simple Storage Service Developer
-	//    Guide. For more information about using CloudFront origin access identities
-	//    to require that users use CloudFront URLs instead of Amazon S3 URLs, see
-	//    Using an Origin Access Identity to Restrict Access to Your Amazon S3 Content.
-	//
-	// A canonical user ID is not the same as an AWS account number.
-	//
-	// Email: The value in the Grantee object is the registered email address of
-	//    an AWS account.
-	//
-	// Group: The value in the Grantee object is one of the following predefined
-	//    Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+	//    object: Canonical: The value in the Grantee object is either the canonical
+	//    user ID for an AWS account or an origin access identity for an Amazon
+	//    CloudFront distribution. For more information about canonical user IDs,
+	//    see Access Control List (ACL) Overview in the Amazon Simple Storage Service
+	//    Developer Guide. For more information about using CloudFront origin access
+	//    identities to require that users use CloudFront URLs instead of Amazon
+	//    S3 URLs, see Using an Origin Access Identity to Restrict Access to Your
+	//    Amazon S3 Content. A canonical user ID is not the same as an AWS account
+	//    number. Email: The value in the Grantee object is the registered email
+	//    address of an AWS account. Group: The value in the Grantee object is one
+	//    of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers,
+	//    or LogDelivery.
 	//
 	//    * Grantee: The AWS user or group that you want to have access to transcoded
 	//    files and playlists. To identify the user or group, you can specify the
@@ -7046,19 +7767,13 @@ type UpdatePipelineInput struct {
 	//    * Access: The permission that you want to give to the AWS user that you
 	//    specified in Grantee. Permissions are granted on the files that Elastic
 	//    Transcoder adds to the bucket, including playlists and video files. Valid
-	//    values include:
-	//
-	// READ: The grantee can read the objects and metadata for objects that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// READ_ACP: The grantee can read the object ACL for objects that Elastic Transcoder
-	//    adds to the Amazon S3 bucket.
-	//
-	// WRITE_ACP: The grantee can write the ACL for the objects that Elastic Transcoder
-	//    adds to the Amazon S3 bucket.
-	//
-	// FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for
-	//    the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    values include: READ: The grantee can read the objects and metadata for
+	//    objects that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP:
+	//    The grantee can read the object ACL for objects that Elastic Transcoder
+	//    adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL
+	//    for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions
+	//    for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
 	//
 	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
 	//    that you want Elastic Transcoder to assign to the video files and playlists
@@ -7128,18 +7843,13 @@ type UpdatePipelineInput struct {
 	//    to a maximum of 30 users and/or predefined Amazon S3 groups.
 	//
 	//    * GranteeType: Specify the type of value that appears in the Grantee object:
-	//
-	// Canonical: The value in the Grantee object is either the canonical user ID
-	//    for an AWS account or an origin access identity for an Amazon CloudFront
-	//    distribution.
-	//
-	// A canonical user ID is not the same as an AWS account number.
-	//
-	// Email: The value in the Grantee object is the registered email address of
-	//    an AWS account.
-	//
-	// Group: The value in the Grantee object is one of the following predefined
-	//    Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+	//    Canonical: The value in the Grantee object is either the canonical user
+	//    ID for an AWS account or an origin access identity for an Amazon CloudFront
+	//    distribution. A canonical user ID is not the same as an AWS account number.
+	//    Email: The value in the Grantee object is the registered email address
+	//    of an AWS account. Group: The value in the Grantee object is one of the
+	//    following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers, or
+	//    LogDelivery.
 	//
 	//    * Grantee: The AWS user or group that you want to have access to thumbnail
 	//    files. To identify the user or group, you can specify the canonical user
@@ -7149,19 +7859,14 @@ type UpdatePipelineInput struct {
 	//
 	//    * Access: The permission that you want to give to the AWS user that you
 	//    specified in Grantee. Permissions are granted on the thumbnail files that
-	//    Elastic Transcoder adds to the bucket. Valid values include:
-	//
-	// READ: The grantee can read the thumbnails and metadata for objects that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// READ_ACP: The grantee can read the object ACL for thumbnails that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// WRITE_ACP: The grantee can write the ACL for the thumbnails that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for
-	//    the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    Elastic Transcoder adds to the bucket. Valid values include: READ: The
+	//    grantee can read the thumbnails and metadata for objects that Elastic
+	//    Transcoder adds to the Amazon S3 bucket. READ_ACP: The grantee can read
+	//    the object ACL for thumbnails that Elastic Transcoder adds to the Amazon
+	//    S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
+	//    that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The
+	//    grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails
+	//    that Elastic Transcoder adds to the Amazon S3 bucket.
 	//
 	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
 	//    that you want Elastic Transcoder to assign to the thumbnails that it stores
@@ -7169,12 +7874,20 @@ type UpdatePipelineInput struct {
 	ThumbnailConfig *PipelineOutputConfig `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineInput) GoString() string {
 	return s.String()
 }
@@ -7293,12 +8006,20 @@ type UpdatePipelineNotificationsInput struct {
 	Notifications *Notifications `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineNotificationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineNotificationsInput) GoString() string {
 	return s.String()
 }
@@ -7343,12 +8064,20 @@ type UpdatePipelineNotificationsOutput struct {
 	Pipeline *Pipeline `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineNotificationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineNotificationsOutput) GoString() string {
 	return s.String()
 }
@@ -7376,12 +8105,20 @@ type UpdatePipelineOutput struct {
 	Warnings []*Warning `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineOutput) GoString() string {
 	return s.String()
 }
@@ -7417,12 +8154,20 @@ type UpdatePipelineStatusInput struct {
 	Status *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineStatusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineStatusInput) GoString() string {
 	return s.String()
 }
@@ -7467,12 +8212,20 @@ type UpdatePipelineStatusOutput struct {
 	Pipeline *Pipeline `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineStatusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdatePipelineStatusOutput) GoString() string {
 	return s.String()
 }
@@ -7483,10 +8236,75 @@ func (s *UpdatePipelineStatusOutput) SetPipeline(v *Pipeline) *UpdatePipelineSta
 	return s
 }
 
+// One or more required parameter values were not provided in the request.
+type ValidationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationException) GoString() string {
+	return s.String()
+}
+
+func newErrorValidationException(v protocol.ResponseMetadata) error {
+	return &ValidationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ValidationException) Code() string {
+	return "ValidationException"
+}
+
+// Message returns the exception's message.
+func (s *ValidationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ValidationException) OrigErr() error {
+	return nil
+}
+
+func (s *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ValidationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ValidationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The VideoParameters structure.
 type VideoParameters struct {
 	_ struct{} `type:"structure"`
 
+	//
 	// To better control resolution and aspect ratio of output videos, we recommend
 	// that you use the values MaxWidth, MaxHeight, SizingPolicy, PaddingPolicy,
 	// and DisplayAspectRatio instead of Resolution and AspectRatio. The two groups
@@ -7658,8 +8476,8 @@ type VideoParameters struct {
 	//
 	//    * HD to Standard, 1920x1080 to 720x576 - Elastic Transcoder applies Bt709ToBt601
 	//
-	// Elastic Transcoder may change the behavior of the ColorspaceConversionModeAuto
-	// mode in the future. All outputs in a playlist must use the same ColorSpaceConversionMode.
+	// Elastic Transcoder may change the behavior of the ColorspaceConversionMode
+	// Auto mode in the future. All outputs in a playlist must use the same ColorSpaceConversionMode.
 	//
 	// If you do not specify a ColorSpaceConversionMode, Elastic Transcoder does
 	// not change the color space of a file. If you are unsure what ColorSpaceConversionMode
@@ -7796,6 +8614,7 @@ type VideoParameters struct {
 	// for MaxWidth and MaxHeight.
 	PaddingPolicy *string `type:"string"`
 
+	//
 	// To better control resolution and aspect ratio of output videos, we recommend
 	// that you use the values MaxWidth, MaxHeight, SizingPolicy, PaddingPolicy,
 	// and DisplayAspectRatio instead of Resolution and AspectRatio. The two groups
@@ -7807,7 +8626,7 @@ type VideoParameters struct {
 	//    * auto: Elastic Transcoder attempts to preserve the width and height of
 	//    the input file, subject to the following rules.
 	//
-	//    * width x height: The width and height of the output video in pixels.
+	//    * width x height : The width and height of the output video in pixels.
 	//
 	// Note the following about specifying the width and height:
 	//
@@ -7823,33 +8642,9 @@ type VideoParameters struct {
 	//
 	//    * We recommend that you specify a resolution for which the product of
 	//    width and height is less than or equal to the applicable value in the
-	//    following list (List - Max width x height value):
-	//
-	// 1 - 25344
-	//
-	// 1b - 25344
-	//
-	// 1.1 - 101376
-	//
-	// 1.2 - 101376
-	//
-	// 1.3 - 101376
-	//
-	// 2 - 101376
-	//
-	// 2.1 - 202752
-	//
-	// 2.2 - 404720
-	//
-	// 3 - 404720
-	//
-	// 3.1 - 921600
-	//
-	// 3.2 - 1310720
-	//
-	// 4 - 2097152
-	//
-	// 4.1 - 2097152
+	//    following list (List - Max width x height value): 1 - 25344 1b - 25344
+	//    1.1 - 101376 1.2 - 101376 1.3 - 101376 2 - 101376 2.1 - 202752 2.2 - 404720
+	//    3 - 404720 3.1 - 921600 3.2 - 1310720 4 - 2097152 4.1 - 2097152
 	Resolution *string `type:"string"`
 
 	// Specify one of the following values to control scaling of the output video:
@@ -7900,12 +8695,20 @@ type VideoParameters struct {
 	Watermarks []*PresetWatermark `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VideoParameters) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s VideoParameters) GoString() string {
 	return s.String()
 }
@@ -8039,12 +8842,20 @@ type Warning struct {
 	Message *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Warning) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Warning) GoString() string {
 	return s.String()
 }

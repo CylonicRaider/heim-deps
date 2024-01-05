@@ -12,24 +12,15 @@ import (
 
 	"golang.org/x/net/bpf"
 	"golang.org/x/net/ipv4"
+	"golang.org/x/net/ipv6"
+	"golang.org/x/net/nettest"
+	"golang.org/x/sys/cpu"
 )
 
 // A virtualMachine is a BPF virtual machine which can process an
 // input packet against a BPF program and render a verdict.
 type virtualMachine interface {
 	Run(in []byte) (int, error)
-}
-
-// canUseOSVM indicates if the OS BPF VM is available on this platform.
-func canUseOSVM() bool {
-	// OS BPF VM can only be used on platforms where x/net/ipv4 supports
-	// attaching a BPF program to a socket.
-	switch runtime.GOOS {
-	case "linux":
-		return true
-	}
-
-	return false
 }
 
 // All BPF tests against both the Go VM and OS VM are assumed to
@@ -53,11 +44,10 @@ func testVM(t *testing.T, filter []bpf.Instruction) (virtualMachine, func(), err
 		t: t,
 	}
 
-	// If available, add the OS VM for tests which verify that both the Go
-	// VM and OS VM have exactly the same output for the same input program
-	// and packet.
+	// For linux with a little endian CPU, the Go VM and OS VM have exactly the
+	// same output for the same input program and packet. Compare both.
 	done := func() {}
-	if canUseOSVM() {
+	if runtime.GOOS == "linux" && !cpu.IsBigEndian {
 		osVM, osVMDone := testOSVM(t, filter)
 		done = func() { osVMDone() }
 		mvm.osVM = osVM
@@ -137,7 +127,7 @@ type osVirtualMachine struct {
 // testOSVM creates a virtualMachine which uses the OS's BPF VM by injecting
 // packets into a UDP listener with a BPF program attached to it.
 func testOSVM(t *testing.T, filter []bpf.Instruction) (virtualMachine, func()) {
-	l, err := net.ListenPacket("udp4", "127.0.0.1:0")
+	l, err := nettest.NewLocalPacketListener("udp")
 	if err != nil {
 		t.Fatalf("failed to open OS VM UDP listener: %v", err)
 	}
@@ -147,12 +137,17 @@ func testOSVM(t *testing.T, filter []bpf.Instruction) (virtualMachine, func()) {
 		t.Fatalf("failed to compile BPF program: %v", err)
 	}
 
-	p := ipv4.NewPacketConn(l)
-	if err = p.SetBPF(prog); err != nil {
+	ip := l.LocalAddr().(*net.UDPAddr).IP
+	if ip.To4() != nil && ip.To16() == nil {
+		err = ipv4.NewPacketConn(l).SetBPF(prog)
+	} else {
+		err = ipv6.NewPacketConn(l).SetBPF(prog)
+	}
+	if err != nil {
 		t.Fatalf("failed to attach BPF program to listener: %v", err)
 	}
 
-	s, err := net.Dial("udp4", l.LocalAddr().String())
+	s, err := net.Dial(l.LocalAddr().Network(), l.LocalAddr().String())
 	if err != nil {
 		t.Fatalf("failed to dial connection to listener: %v", err)
 	}

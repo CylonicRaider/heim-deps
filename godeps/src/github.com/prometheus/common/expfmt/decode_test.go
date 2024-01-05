@@ -14,6 +14,8 @@
 package expfmt
 
 import (
+	"bufio"
+	"errors"
 	"io"
 	"net/http"
 	"reflect"
@@ -21,8 +23,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/golang/protobuf/proto"
 	dto "github.com/prometheus/client_model/go"
+	"google.golang.org/protobuf/proto"
 
 	"github.com/prometheus/common/model"
 )
@@ -83,7 +85,7 @@ mf2 4
 	for {
 		var smpls model.Vector
 		err := dec.Decode(&smpls)
-		if err == io.EOF {
+		if err != nil && errors.Is(err, io.EOF) {
 			break
 		}
 		if err != nil {
@@ -345,7 +347,7 @@ func TestProtoDecoder(t *testing.T) {
 		for {
 			var smpls model.Vector
 			err := dec.Decode(&smpls)
-			if err == io.EOF {
+			if err != nil && errors.Is(err, io.EOF) {
 				break
 			}
 			if scenario.fail {
@@ -371,7 +373,6 @@ func testDiscriminatorHTTPHeader(t testing.TB) {
 	var scenarios = []struct {
 		input  map[string]string
 		output Format
-		err    error
 	}{
 		{
 			input:  map[string]string{"Content-Type": `application/vnd.google.protobuf; proto="io.prometheus.client.MetricFamily"; encoding="delimited"`},
@@ -490,5 +491,35 @@ func TestExtractSamples(t *testing.T) {
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("unexpected samples extracted, got: %v, want: %v", got, want)
+	}
+}
+
+func TestTextDecoderWithBufioReader(t *testing.T) {
+	example := `
+	# TYPE foo gauge
+	foo 0
+	`
+
+	var decoded bool
+	r := bufio.NewReader(strings.NewReader(example))
+	dec := NewDecoder(r, FmtText)
+	for {
+		var mf dto.MetricFamily
+		if err := dec.Decode(&mf); err != nil {
+			if errors.Is(err, io.EOF) {
+				break
+			}
+			t.Fatalf("Unexpected error: %v", err)
+		}
+		if mf.GetName() != "foo" {
+			t.Errorf("Unexpected metric name: got %v, expected %v", mf.GetName(), "foo")
+		}
+		if len(mf.Metric) != 1 {
+			t.Errorf("Unexpected number of metrics: got %v, expected %v", len(mf.Metric), 1)
+		}
+		decoded = true
+	}
+	if !decoded {
+		t.Fatal("Metric foo not decoded")
 	}
 }

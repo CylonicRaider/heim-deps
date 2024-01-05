@@ -29,14 +29,13 @@ const opAssociateTeamMember = "AssociateTeamMember"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateTeamMemberRequest method.
+//	req, resp := client.AssociateTeamMemberRequest(params)
 //
-//    // Example sending a request using the AssociateTeamMemberRequest method.
-//    req, resp := client.AssociateTeamMemberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/AssociateTeamMember
 func (c *CodeStar) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) (req *request.Request, output *AssociateTeamMemberOutput) {
@@ -66,28 +65,29 @@ func (c *CodeStar) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) (
 // See the AWS API reference guide for AWS CodeStar's
 // API operation AssociateTeamMember for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
+// Returned Error Types:
 //
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+//   - LimitExceededException
+//     A resource limit has been exceeded.
 //
-//   * ErrCodeTeamMemberAlreadyAssociatedException "TeamMemberAlreadyAssociatedException"
-//   The team member is already associated with a role in this project.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - TeamMemberAlreadyAssociatedException
+//     The team member is already associated with a role in this project.
 //
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
-//   * ErrCodeProjectConfigurationException "ProjectConfigurationException"
-//   Project configuration information is required but not specified.
+//   - InvalidServiceRoleException
+//     The service role is not valid.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
+//   - ProjectConfigurationException
+//     Project configuration information is required but not specified.
+//
+//   - ConcurrentModificationException
+//     Another modification is being made. That modification must complete before
+//     you can make your change.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/AssociateTeamMember
 func (c *CodeStar) AssociateTeamMember(input *AssociateTeamMemberInput) (*AssociateTeamMemberOutput, error) {
@@ -127,14 +127,13 @@ const opCreateProject = "CreateProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateProjectRequest method.
+//	req, resp := client.CreateProjectRequest(params)
 //
-//    // Example sending a request using the CreateProjectRequest method.
-//    req, resp := client.CreateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProject
 func (c *CodeStar) CreateProjectRequest(input *CreateProjectInput) (req *request.Request, output *CreateProjectOutput) {
@@ -167,32 +166,33 @@ func (c *CodeStar) CreateProjectRequest(input *CreateProjectInput) (req *request
 // See the AWS API reference guide for AWS CodeStar's
 // API operation CreateProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeProjectAlreadyExistsException "ProjectAlreadyExistsException"
-//   An AWS CodeStar project with the same ID already exists in this region for
-//   the AWS account. AWS CodeStar project IDs must be unique within a region
-//   for the AWS account.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
+//   - ProjectAlreadyExistsException
+//     An AWS CodeStar project with the same ID already exists in this region for
+//     the AWS account. AWS CodeStar project IDs must be unique within a region
+//     for the AWS account.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - LimitExceededException
+//     A resource limit has been exceeded.
 //
-//   * ErrCodeProjectCreationFailedException "ProjectCreationFailedException"
-//   The project creation request was valid, but a nonspecific exception or error
-//   occurred during project creation. The project could not be created in AWS
-//   CodeStar.
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
+//   - ProjectCreationFailedException
+//     The project creation request was valid, but a nonspecific exception or error
+//     occurred during project creation. The project could not be created in AWS
+//     CodeStar.
 //
-//   * ErrCodeProjectConfigurationException "ProjectConfigurationException"
-//   Project configuration information is required but not specified.
+//   - InvalidServiceRoleException
+//     The service role is not valid.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
+//   - ProjectConfigurationException
+//     Project configuration information is required but not specified.
+//
+//   - ConcurrentModificationException
+//     Another modification is being made. That modification must complete before
+//     you can make your change.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProject
 func (c *CodeStar) CreateProject(input *CreateProjectInput) (*CreateProjectOutput, error) {
@@ -232,14 +232,13 @@ const opCreateUserProfile = "CreateUserProfile"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateUserProfileRequest method.
+//	req, resp := client.CreateUserProfileRequest(params)
 //
-//    // Example sending a request using the CreateUserProfileRequest method.
-//    req, resp := client.CreateUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateUserProfile
 func (c *CodeStar) CreateUserProfileRequest(input *CreateUserProfileInput) (req *request.Request, output *CreateUserProfileOutput) {
@@ -273,14 +272,15 @@ func (c *CodeStar) CreateUserProfileRequest(input *CreateUserProfileInput) (req 
 // See the AWS API reference guide for AWS CodeStar's
 // API operation CreateUserProfile for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUserProfileAlreadyExistsException "UserProfileAlreadyExistsException"
-//   A user profile with that name already exists in this region for the AWS account.
-//   AWS CodeStar user profile names must be unique within a region for the AWS
-//   account.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - UserProfileAlreadyExistsException
+//     A user profile with that name already exists in this region for the AWS account.
+//     AWS CodeStar user profile names must be unique within a region for the AWS
+//     account.
+//
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateUserProfile
 func (c *CodeStar) CreateUserProfile(input *CreateUserProfileInput) (*CreateUserProfileOutput, error) {
@@ -320,14 +320,13 @@ const opDeleteProject = "DeleteProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteProjectRequest method.
+//	req, resp := client.DeleteProjectRequest(params)
 //
-//    // Example sending a request using the DeleteProjectRequest method.
-//    req, resp := client.DeleteProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteProject
 func (c *CodeStar) DeleteProjectRequest(input *DeleteProjectInput) (req *request.Request, output *DeleteProjectOutput) {
@@ -359,16 +358,17 @@ func (c *CodeStar) DeleteProjectRequest(input *DeleteProjectInput) (req *request
 // See the AWS API reference guide for AWS CodeStar's
 // API operation DeleteProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - ConcurrentModificationException
+//     Another modification is being made. That modification must complete before
+//     you can make your change.
 //
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
+//
+//   - InvalidServiceRoleException
+//     The service role is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteProject
 func (c *CodeStar) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOutput, error) {
@@ -408,14 +408,13 @@ const opDeleteUserProfile = "DeleteUserProfile"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteUserProfileRequest method.
+//	req, resp := client.DeleteUserProfileRequest(params)
 //
-//    // Example sending a request using the DeleteUserProfileRequest method.
-//    req, resp := client.DeleteUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteUserProfile
 func (c *CodeStar) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req *request.Request, output *DeleteUserProfileOutput) {
@@ -448,9 +447,9 @@ func (c *CodeStar) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req 
 // See the AWS API reference guide for AWS CodeStar's
 // API operation DeleteUserProfile for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+// Returned Error Types:
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteUserProfile
 func (c *CodeStar) DeleteUserProfile(input *DeleteUserProfileInput) (*DeleteUserProfileOutput, error) {
@@ -490,14 +489,13 @@ const opDescribeProject = "DescribeProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeProjectRequest method.
+//	req, resp := client.DescribeProjectRequest(params)
 //
-//    // Example sending a request using the DescribeProjectRequest method.
-//    req, resp := client.DescribeProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProject
 func (c *CodeStar) DescribeProjectRequest(input *DescribeProjectInput) (req *request.Request, output *DescribeProjectOutput) {
@@ -527,22 +525,23 @@ func (c *CodeStar) DescribeProjectRequest(input *DescribeProjectInput) (req *req
 // See the AWS API reference guide for AWS CodeStar's
 // API operation DescribeProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
 //
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
-//   * ErrCodeProjectConfigurationException "ProjectConfigurationException"
-//   Project configuration information is required but not specified.
+//   - InvalidServiceRoleException
+//     The service role is not valid.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
+//   - ProjectConfigurationException
+//     Project configuration information is required but not specified.
+//
+//   - ConcurrentModificationException
+//     Another modification is being made. That modification must complete before
+//     you can make your change.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProject
 func (c *CodeStar) DescribeProject(input *DescribeProjectInput) (*DescribeProjectOutput, error) {
@@ -582,14 +581,13 @@ const opDescribeUserProfile = "DescribeUserProfile"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeUserProfileRequest method.
+//	req, resp := client.DescribeUserProfileRequest(params)
 //
-//    // Example sending a request using the DescribeUserProfileRequest method.
-//    req, resp := client.DescribeUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeUserProfile
 func (c *CodeStar) DescribeUserProfileRequest(input *DescribeUserProfileInput) (req *request.Request, output *DescribeUserProfileOutput) {
@@ -619,12 +617,13 @@ func (c *CodeStar) DescribeUserProfileRequest(input *DescribeUserProfileInput) (
 // See the AWS API reference guide for AWS CodeStar's
 // API operation DescribeUserProfile for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUserProfileNotFoundException "UserProfileNotFoundException"
-//   The user profile was not found.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - UserProfileNotFoundException
+//     The user profile was not found.
+//
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeUserProfile
 func (c *CodeStar) DescribeUserProfile(input *DescribeUserProfileInput) (*DescribeUserProfileOutput, error) {
@@ -664,14 +663,13 @@ const opDisassociateTeamMember = "DisassociateTeamMember"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateTeamMemberRequest method.
+//	req, resp := client.DisassociateTeamMemberRequest(params)
 //
-//    // Example sending a request using the DisassociateTeamMemberRequest method.
-//    req, resp := client.DisassociateTeamMemberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMember
 func (c *CodeStar) DisassociateTeamMemberRequest(input *DisassociateTeamMemberInput) (req *request.Request, output *DisassociateTeamMemberOutput) {
@@ -705,19 +703,20 @@ func (c *CodeStar) DisassociateTeamMemberRequest(input *DisassociateTeamMemberIn
 // See the AWS API reference guide for AWS CodeStar's
 // API operation DisassociateTeamMember for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
 //
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
+//   - InvalidServiceRoleException
+//     The service role is not valid.
+//
+//   - ConcurrentModificationException
+//     Another modification is being made. That modification must complete before
+//     you can make your change.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMember
 func (c *CodeStar) DisassociateTeamMember(input *DisassociateTeamMemberInput) (*DisassociateTeamMemberOutput, error) {
@@ -757,14 +756,13 @@ const opListProjects = "ListProjects"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListProjectsRequest method.
+//	req, resp := client.ListProjectsRequest(params)
 //
-//    // Example sending a request using the ListProjectsRequest method.
-//    req, resp := client.ListProjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListProjects
 func (c *CodeStar) ListProjectsRequest(input *ListProjectsInput) (req *request.Request, output *ListProjectsOutput) {
@@ -794,12 +792,13 @@ func (c *CodeStar) ListProjectsRequest(input *ListProjectsInput) (req *request.R
 // See the AWS API reference guide for AWS CodeStar's
 // API operation ListProjects for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - InvalidNextTokenException
+//     The next token is not valid.
+//
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListProjects
 func (c *CodeStar) ListProjects(input *ListProjectsInput) (*ListProjectsOutput, error) {
@@ -839,14 +838,13 @@ const opListResources = "ListResources"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListResourcesRequest method.
+//	req, resp := client.ListResourcesRequest(params)
 //
-//    // Example sending a request using the ListResourcesRequest method.
-//    req, resp := client.ListResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListResources
 func (c *CodeStar) ListResourcesRequest(input *ListResourcesInput) (req *request.Request, output *ListResourcesOutput) {
@@ -876,15 +874,16 @@ func (c *CodeStar) ListResourcesRequest(input *ListResourcesInput) (req *request
 // See the AWS API reference guide for AWS CodeStar's
 // API operation ListResources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - InvalidNextTokenException
+//     The next token is not valid.
+//
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListResources
 func (c *CodeStar) ListResources(input *ListResourcesInput) (*ListResourcesOutput, error) {
@@ -924,14 +923,13 @@ const opListTagsForProject = "ListTagsForProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTagsForProjectRequest method.
+//	req, resp := client.ListTagsForProjectRequest(params)
 //
-//    // Example sending a request using the ListTagsForProjectRequest method.
-//    req, resp := client.ListTagsForProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProject
 func (c *CodeStar) ListTagsForProjectRequest(input *ListTagsForProjectInput) (req *request.Request, output *ListTagsForProjectOutput) {
@@ -961,15 +959,16 @@ func (c *CodeStar) ListTagsForProjectRequest(input *ListTagsForProjectInput) (re
 // See the AWS API reference guide for AWS CodeStar's
 // API operation ListTagsForProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
+//
+//   - InvalidNextTokenException
+//     The next token is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProject
 func (c *CodeStar) ListTagsForProject(input *ListTagsForProjectInput) (*ListTagsForProjectOutput, error) {
@@ -1009,14 +1008,13 @@ const opListTeamMembers = "ListTeamMembers"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTeamMembersRequest method.
+//	req, resp := client.ListTeamMembersRequest(params)
 //
-//    // Example sending a request using the ListTeamMembersRequest method.
-//    req, resp := client.ListTeamMembersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTeamMembers
 func (c *CodeStar) ListTeamMembersRequest(input *ListTeamMembersInput) (req *request.Request, output *ListTeamMembersOutput) {
@@ -1046,15 +1044,16 @@ func (c *CodeStar) ListTeamMembersRequest(input *ListTeamMembersInput) (req *req
 // See the AWS API reference guide for AWS CodeStar's
 // API operation ListTeamMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - InvalidNextTokenException
+//     The next token is not valid.
+//
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTeamMembers
 func (c *CodeStar) ListTeamMembers(input *ListTeamMembersInput) (*ListTeamMembersOutput, error) {
@@ -1094,14 +1093,13 @@ const opListUserProfiles = "ListUserProfiles"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListUserProfilesRequest method.
+//	req, resp := client.ListUserProfilesRequest(params)
 //
-//    // Example sending a request using the ListUserProfilesRequest method.
-//    req, resp := client.ListUserProfilesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListUserProfiles
 func (c *CodeStar) ListUserProfilesRequest(input *ListUserProfilesInput) (req *request.Request, output *ListUserProfilesOutput) {
@@ -1131,12 +1129,13 @@ func (c *CodeStar) ListUserProfilesRequest(input *ListUserProfilesInput) (req *r
 // See the AWS API reference guide for AWS CodeStar's
 // API operation ListUserProfiles for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The next token is not valid.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - InvalidNextTokenException
+//     The next token is not valid.
+//
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListUserProfiles
 func (c *CodeStar) ListUserProfiles(input *ListUserProfilesInput) (*ListUserProfilesOutput, error) {
@@ -1176,14 +1175,13 @@ const opTagProject = "TagProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the TagProjectRequest method.
+//	req, resp := client.TagProjectRequest(params)
 //
-//    // Example sending a request using the TagProjectRequest method.
-//    req, resp := client.TagProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProject
 func (c *CodeStar) TagProjectRequest(input *TagProjectInput) (req *request.Request, output *TagProjectOutput) {
@@ -1213,19 +1211,20 @@ func (c *CodeStar) TagProjectRequest(input *TagProjectInput) (req *request.Reque
 // See the AWS API reference guide for AWS CodeStar's
 // API operation TagProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
+//   - LimitExceededException
+//     A resource limit has been exceeded.
+//
+//   - ConcurrentModificationException
+//     Another modification is being made. That modification must complete before
+//     you can make your change.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProject
 func (c *CodeStar) TagProject(input *TagProjectInput) (*TagProjectOutput, error) {
@@ -1265,14 +1264,13 @@ const opUntagProject = "UntagProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UntagProjectRequest method.
+//	req, resp := client.UntagProjectRequest(params)
 //
-//    // Example sending a request using the UntagProjectRequest method.
-//    req, resp := client.UntagProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProject
 func (c *CodeStar) UntagProjectRequest(input *UntagProjectInput) (req *request.Request, output *UntagProjectOutput) {
@@ -1303,19 +1301,20 @@ func (c *CodeStar) UntagProjectRequest(input *UntagProjectInput) (req *request.R
 // See the AWS API reference guide for AWS CodeStar's
 // API operation UntagProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
+//   - LimitExceededException
+//     A resource limit has been exceeded.
+//
+//   - ConcurrentModificationException
+//     Another modification is being made. That modification must complete before
+//     you can make your change.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProject
 func (c *CodeStar) UntagProject(input *UntagProjectInput) (*UntagProjectOutput, error) {
@@ -1355,14 +1354,13 @@ const opUpdateProject = "UpdateProject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateProjectRequest method.
+//	req, resp := client.UpdateProjectRequest(params)
 //
-//    // Example sending a request using the UpdateProjectRequest method.
-//    req, resp := client.UpdateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateProject
 func (c *CodeStar) UpdateProjectRequest(input *UpdateProjectInput) (req *request.Request, output *UpdateProjectOutput) {
@@ -1393,12 +1391,13 @@ func (c *CodeStar) UpdateProjectRequest(input *UpdateProjectInput) (req *request
 // See the AWS API reference guide for AWS CodeStar's
 // API operation UpdateProject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
+//
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateProject
 func (c *CodeStar) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOutput, error) {
@@ -1438,14 +1437,13 @@ const opUpdateTeamMember = "UpdateTeamMember"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateTeamMemberRequest method.
+//	req, resp := client.UpdateTeamMemberRequest(params)
 //
-//    // Example sending a request using the UpdateTeamMemberRequest method.
-//    req, resp := client.UpdateTeamMemberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateTeamMember
 func (c *CodeStar) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) (req *request.Request, output *UpdateTeamMemberOutput) {
@@ -1477,28 +1475,29 @@ func (c *CodeStar) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) (req *r
 // See the AWS API reference guide for AWS CodeStar's
 // API operation UpdateTeamMember for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   A resource limit has been exceeded.
+// Returned Error Types:
 //
-//   * ErrCodeProjectNotFoundException "ProjectNotFoundException"
-//   The specified AWS CodeStar project was not found.
+//   - LimitExceededException
+//     A resource limit has been exceeded.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - ProjectNotFoundException
+//     The specified AWS CodeStar project was not found.
 //
-//   * ErrCodeInvalidServiceRoleException "InvalidServiceRoleException"
-//   The service role is not valid.
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
-//   * ErrCodeProjectConfigurationException "ProjectConfigurationException"
-//   Project configuration information is required but not specified.
+//   - InvalidServiceRoleException
+//     The service role is not valid.
 //
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification is being made. That modification must complete before
-//   you can make your change.
+//   - ProjectConfigurationException
+//     Project configuration information is required but not specified.
 //
-//   * ErrCodeTeamMemberNotFoundException "TeamMemberNotFoundException"
-//   The specified team member was not found.
+//   - ConcurrentModificationException
+//     Another modification is being made. That modification must complete before
+//     you can make your change.
+//
+//   - TeamMemberNotFoundException
+//     The specified team member was not found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateTeamMember
 func (c *CodeStar) UpdateTeamMember(input *UpdateTeamMemberInput) (*UpdateTeamMemberOutput, error) {
@@ -1538,14 +1537,13 @@ const opUpdateUserProfile = "UpdateUserProfile"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateUserProfileRequest method.
+//	req, resp := client.UpdateUserProfileRequest(params)
 //
-//    // Example sending a request using the UpdateUserProfileRequest method.
-//    req, resp := client.UpdateUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateUserProfile
 func (c *CodeStar) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req *request.Request, output *UpdateUserProfileOutput) {
@@ -1577,12 +1575,13 @@ func (c *CodeStar) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req 
 // See the AWS API reference guide for AWS CodeStar's
 // API operation UpdateUserProfile for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeUserProfileNotFoundException "UserProfileNotFoundException"
-//   The user profile was not found.
+// Returned Error Types:
 //
-//   * ErrCodeValidationException "ValidationException"
-//   The specified input is either not valid, or it could not be validated.
+//   - UserProfileNotFoundException
+//     The user profile was not found.
+//
+//   - ValidationException
+//     The specified input is either not valid, or it could not be validated.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateUserProfile
 func (c *CodeStar) UpdateUserProfile(input *UpdateUserProfileInput) (*UpdateUserProfileOutput, error) {
@@ -1636,12 +1635,20 @@ type AssociateTeamMemberInput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateTeamMemberInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateTeamMemberInput) GoString() string {
 	return s.String()
 }
@@ -1712,12 +1719,20 @@ type AssociateTeamMemberOutput struct {
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateTeamMemberOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateTeamMemberOutput) GoString() string {
 	return s.String()
 }
@@ -1748,12 +1763,20 @@ type Code struct {
 	Source *CodeSource `locationName:"source" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Code) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Code) GoString() string {
 	return s.String()
 }
@@ -1808,12 +1831,20 @@ type CodeCommitCodeDestination struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeCommitCodeDestination) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeCommitCodeDestination) GoString() string {
 	return s.String()
 }
@@ -1857,12 +1888,20 @@ type CodeDestination struct {
 	GitHub *GitHubCodeDestination `locationName:"gitHub" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeDestination) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeDestination) GoString() string {
 	return s.String()
 }
@@ -1911,12 +1950,20 @@ type CodeSource struct {
 	S3 *S3Location `locationName:"s3" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeSource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CodeSource) GoString() string {
 	return s.String()
 }
@@ -1945,6 +1992,71 @@ func (s *CodeSource) SetS3(v *S3Location) *CodeSource {
 	return s
 }
 
+// Another modification is being made. That modification must complete before
+// you can make your change.
+type ConcurrentModificationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentModificationException) GoString() string {
+	return s.String()
+}
+
+func newErrorConcurrentModificationException(v protocol.ResponseMetadata) error {
+	return &ConcurrentModificationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConcurrentModificationException) Code() string {
+	return "ConcurrentModificationException"
+}
+
+// Message returns the exception's message.
+func (s *ConcurrentModificationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConcurrentModificationException) OrigErr() error {
+	return nil
+}
+
+func (s *ConcurrentModificationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConcurrentModificationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConcurrentModificationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type CreateProjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1953,6 +2065,10 @@ type CreateProjectInput struct {
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
 	// The description of the project, if any.
+	//
+	// Description is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateProjectInput's
+	// String and GoString methods.
 	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The ID of the project to be created in AWS CodeStar.
@@ -1961,6 +2077,10 @@ type CreateProjectInput struct {
 	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
 
 	// The display name for the project to be created in AWS CodeStar.
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateProjectInput's
+	// String and GoString methods.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true" sensitive:"true"`
@@ -1978,12 +2098,20 @@ type CreateProjectInput struct {
 	Toolchain *Toolchain `locationName:"toolchain" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProjectInput) GoString() string {
 	return s.String()
 }
@@ -2091,12 +2219,20 @@ type CreateProjectOutput struct {
 	ProjectTemplateId *string `locationName:"projectTemplateId" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateProjectOutput) GoString() string {
 	return s.String()
 }
@@ -2131,11 +2267,19 @@ type CreateUserProfileInput struct {
 	// The name that will be displayed as the friendly name for the user in AWS
 	// CodeStar.
 	//
+	// DisplayName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserProfileInput's
+	// String and GoString methods.
+	//
 	// DisplayName is a required field
 	DisplayName *string `locationName:"displayName" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The email address that will be displayed as part of the user's profile in
 	// AWS CodeStar.
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserProfileInput's
+	// String and GoString methods.
 	//
 	// EmailAddress is a required field
 	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" required:"true" sensitive:"true"`
@@ -2151,12 +2295,20 @@ type CreateUserProfileInput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserProfileInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserProfileInput) GoString() string {
 	return s.String()
 }
@@ -2220,10 +2372,18 @@ type CreateUserProfileOutput struct {
 	CreatedTimestamp *time.Time `locationName:"createdTimestamp" type:"timestamp"`
 
 	// The name that is displayed as the friendly name for the user in AWS CodeStar.
+	//
+	// DisplayName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserProfileOutput's
+	// String and GoString methods.
 	DisplayName *string `locationName:"displayName" min:"1" type:"string" sensitive:"true"`
 
 	// The email address that is displayed as part of the user's profile in AWS
 	// CodeStar.
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by CreateUserProfileOutput's
+	// String and GoString methods.
 	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" sensitive:"true"`
 
 	// The date the user profile was last modified, in timestamp format.
@@ -2240,12 +2400,20 @@ type CreateUserProfileOutput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserProfileOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateUserProfileOutput) GoString() string {
 	return s.String()
 }
@@ -2305,12 +2473,20 @@ type DeleteProjectInput struct {
 	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProjectInput) GoString() string {
 	return s.String()
 }
@@ -2363,12 +2539,20 @@ type DeleteProjectOutput struct {
 	StackId *string `locationName:"stackId" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteProjectOutput) GoString() string {
 	return s.String()
 }
@@ -2394,12 +2578,20 @@ type DeleteUserProfileInput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserProfileInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserProfileInput) GoString() string {
 	return s.String()
 }
@@ -2435,12 +2627,20 @@ type DeleteUserProfileOutput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserProfileOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteUserProfileOutput) GoString() string {
 	return s.String()
 }
@@ -2460,12 +2660,20 @@ type DescribeProjectInput struct {
 	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeProjectInput) GoString() string {
 	return s.String()
 }
@@ -2506,12 +2714,20 @@ type DescribeProjectOutput struct {
 	CreatedTimeStamp *time.Time `locationName:"createdTimeStamp" type:"timestamp"`
 
 	// The description of the project, if any.
+	//
+	// Description is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeProjectOutput's
+	// String and GoString methods.
 	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The ID of the project.
 	Id *string `locationName:"id" min:"2" type:"string"`
 
 	// The display name for the project.
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeProjectOutput's
+	// String and GoString methods.
 	Name *string `locationName:"name" min:"1" type:"string" sensitive:"true"`
 
 	// The ID for the AWS CodeStar project template used to create the project.
@@ -2525,12 +2741,20 @@ type DescribeProjectOutput struct {
 	Status *ProjectStatus `locationName:"status" type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeProjectOutput) GoString() string {
 	return s.String()
 }
@@ -2598,12 +2822,20 @@ type DescribeUserProfileInput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeUserProfileInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeUserProfileInput) GoString() string {
 	return s.String()
 }
@@ -2648,9 +2880,17 @@ type DescribeUserProfileOutput struct {
 	// displays a maximum of two characters, so a display name with more than one
 	// space (for example "Mary Jane Major") would generate an initial icon using
 	// the first character and the first character after the space ("MJ", not "MM").
+	//
+	// DisplayName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeUserProfileOutput's
+	// String and GoString methods.
 	DisplayName *string `locationName:"displayName" min:"1" type:"string" sensitive:"true"`
 
 	// The email address for the user. Optional.
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by DescribeUserProfileOutput's
+	// String and GoString methods.
 	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" sensitive:"true"`
 
 	// The date and time when the user profile was last modified, in timestamp format.
@@ -2670,12 +2910,20 @@ type DescribeUserProfileOutput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeUserProfileOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeUserProfileOutput) GoString() string {
 	return s.String()
 }
@@ -2731,12 +2979,20 @@ type DisassociateTeamMemberInput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateTeamMemberInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateTeamMemberInput) GoString() string {
 	return s.String()
 }
@@ -2779,12 +3035,20 @@ type DisassociateTeamMemberOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateTeamMemberOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateTeamMemberOutput) GoString() string {
 	return s.String()
 }
@@ -2823,6 +3087,10 @@ type GitHubCodeDestination struct {
 
 	// The GitHub user's personal access token for the GitHub repository.
 	//
+	// Token is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by GitHubCodeDestination's
+	// String and GoString methods.
+	//
 	// Token is a required field
 	Token *string `locationName:"token" min:"1" type:"string" required:"true" sensitive:"true"`
 
@@ -2833,12 +3101,20 @@ type GitHubCodeDestination struct {
 	Type *string `locationName:"type" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GitHubCodeDestination) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GitHubCodeDestination) GoString() string {
 	return s.String()
 }
@@ -2925,6 +3201,198 @@ func (s *GitHubCodeDestination) SetType(v string) *GitHubCodeDestination {
 	return s
 }
 
+// The next token is not valid.
+type InvalidNextTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidNextTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidNextTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidNextTokenException) Code() string {
+	return "InvalidNextTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidNextTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidNextTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidNextTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidNextTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidNextTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The service role is not valid.
+type InvalidServiceRoleException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidServiceRoleException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidServiceRoleException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidServiceRoleException(v protocol.ResponseMetadata) error {
+	return &InvalidServiceRoleException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidServiceRoleException) Code() string {
+	return "InvalidServiceRoleException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidServiceRoleException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidServiceRoleException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidServiceRoleException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidServiceRoleException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidServiceRoleException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A resource limit has been exceeded.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListProjectsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2936,12 +3404,20 @@ type ListProjectsInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProjectsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProjectsInput) GoString() string {
 	return s.String()
 }
@@ -2987,12 +3463,20 @@ type ListProjectsOutput struct {
 	Projects []*ProjectSummary `locationName:"projects" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProjectsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListProjectsOutput) GoString() string {
 	return s.String()
 }
@@ -3025,12 +3509,20 @@ type ListResourcesInput struct {
 	ProjectId *string `locationName:"projectId" min:"2" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListResourcesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListResourcesInput) GoString() string {
 	return s.String()
 }
@@ -3086,12 +3578,20 @@ type ListResourcesOutput struct {
 	Resources []*Resource `locationName:"resources" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListResourcesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListResourcesOutput) GoString() string {
 	return s.String()
 }
@@ -3123,12 +3623,20 @@ type ListTagsForProjectInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForProjectInput) GoString() string {
 	return s.String()
 }
@@ -3183,12 +3691,20 @@ type ListTagsForProjectOutput struct {
 	Tags map[string]*string `locationName:"tags" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForProjectOutput) GoString() string {
 	return s.String()
 }
@@ -3221,12 +3737,20 @@ type ListTeamMembersInput struct {
 	ProjectId *string `locationName:"projectId" min:"2" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTeamMembersInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTeamMembersInput) GoString() string {
 	return s.String()
 }
@@ -3284,12 +3808,20 @@ type ListTeamMembersOutput struct {
 	TeamMembers []*TeamMember `locationName:"teamMembers" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTeamMembersOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTeamMembersOutput) GoString() string {
 	return s.String()
 }
@@ -3317,12 +3849,20 @@ type ListUserProfilesInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListUserProfilesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListUserProfilesInput) GoString() string {
 	return s.String()
 }
@@ -3368,12 +3908,20 @@ type ListUserProfilesOutput struct {
 	UserProfiles []*UserProfileSummary `locationName:"userProfiles" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListUserProfilesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListUserProfilesOutput) GoString() string {
 	return s.String()
 }
@@ -3390,6 +3938,266 @@ func (s *ListUserProfilesOutput) SetUserProfiles(v []*UserProfileSummary) *ListU
 	return s
 }
 
+// An AWS CodeStar project with the same ID already exists in this region for
+// the AWS account. AWS CodeStar project IDs must be unique within a region
+// for the AWS account.
+type ProjectAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorProjectAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &ProjectAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ProjectAlreadyExistsException) Code() string {
+	return "ProjectAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *ProjectAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ProjectAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *ProjectAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ProjectAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ProjectAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Project configuration information is required but not specified.
+type ProjectConfigurationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectConfigurationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectConfigurationException) GoString() string {
+	return s.String()
+}
+
+func newErrorProjectConfigurationException(v protocol.ResponseMetadata) error {
+	return &ProjectConfigurationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ProjectConfigurationException) Code() string {
+	return "ProjectConfigurationException"
+}
+
+// Message returns the exception's message.
+func (s *ProjectConfigurationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ProjectConfigurationException) OrigErr() error {
+	return nil
+}
+
+func (s *ProjectConfigurationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ProjectConfigurationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ProjectConfigurationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The project creation request was valid, but a nonspecific exception or error
+// occurred during project creation. The project could not be created in AWS
+// CodeStar.
+type ProjectCreationFailedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectCreationFailedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectCreationFailedException) GoString() string {
+	return s.String()
+}
+
+func newErrorProjectCreationFailedException(v protocol.ResponseMetadata) error {
+	return &ProjectCreationFailedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ProjectCreationFailedException) Code() string {
+	return "ProjectCreationFailedException"
+}
+
+// Message returns the exception's message.
+func (s *ProjectCreationFailedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ProjectCreationFailedException) OrigErr() error {
+	return nil
+}
+
+func (s *ProjectCreationFailedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ProjectCreationFailedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ProjectCreationFailedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified AWS CodeStar project was not found.
+type ProjectNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ProjectNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorProjectNotFoundException(v protocol.ResponseMetadata) error {
+	return &ProjectNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ProjectNotFoundException) Code() string {
+	return "ProjectNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ProjectNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ProjectNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ProjectNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ProjectNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ProjectNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // An indication of whether a project creation or deletion is failed or successful.
 type ProjectStatus struct {
 	_ struct{} `type:"structure"`
@@ -3403,12 +4211,20 @@ type ProjectStatus struct {
 	State *string `locationName:"state" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectStatus) GoString() string {
 	return s.String()
 }
@@ -3436,12 +4252,20 @@ type ProjectSummary struct {
 	ProjectId *string `locationName:"projectId" min:"2" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ProjectSummary) GoString() string {
 	return s.String()
 }
@@ -3468,12 +4292,20 @@ type Resource struct {
 	Id *string `locationName:"id" min:"11" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Resource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Resource) GoString() string {
 	return s.String()
 }
@@ -3498,12 +4330,20 @@ type S3Location struct {
 	BucketName *string `locationName:"bucketName" min:"3" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3Location) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s S3Location) GoString() string {
 	return s.String()
 }
@@ -3547,12 +4387,20 @@ type TagProjectInput struct {
 	Tags map[string]*string `locationName:"tags" type:"map" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagProjectInput) GoString() string {
 	return s.String()
 }
@@ -3595,12 +4443,20 @@ type TagProjectOutput struct {
 	Tags map[string]*string `locationName:"tags" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagProjectOutput) GoString() string {
 	return s.String()
 }
@@ -3632,12 +4488,20 @@ type TeamMember struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TeamMember) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TeamMember) GoString() string {
 	return s.String()
 }
@@ -3658,6 +4522,134 @@ func (s *TeamMember) SetRemoteAccessAllowed(v bool) *TeamMember {
 func (s *TeamMember) SetUserArn(v string) *TeamMember {
 	s.UserArn = &v
 	return s
+}
+
+// The team member is already associated with a role in this project.
+type TeamMemberAlreadyAssociatedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TeamMemberAlreadyAssociatedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TeamMemberAlreadyAssociatedException) GoString() string {
+	return s.String()
+}
+
+func newErrorTeamMemberAlreadyAssociatedException(v protocol.ResponseMetadata) error {
+	return &TeamMemberAlreadyAssociatedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TeamMemberAlreadyAssociatedException) Code() string {
+	return "TeamMemberAlreadyAssociatedException"
+}
+
+// Message returns the exception's message.
+func (s *TeamMemberAlreadyAssociatedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TeamMemberAlreadyAssociatedException) OrigErr() error {
+	return nil
+}
+
+func (s *TeamMemberAlreadyAssociatedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TeamMemberAlreadyAssociatedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TeamMemberAlreadyAssociatedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified team member was not found.
+type TeamMemberNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TeamMemberNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s TeamMemberNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorTeamMemberNotFoundException(v protocol.ResponseMetadata) error {
+	return &TeamMemberNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TeamMemberNotFoundException) Code() string {
+	return "TeamMemberNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *TeamMemberNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TeamMemberNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *TeamMemberNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TeamMemberNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TeamMemberNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // The toolchain template file provided with the project request. AWS CodeStar
@@ -3681,12 +4673,20 @@ type Toolchain struct {
 	StackParameters map[string]*string `locationName:"stackParameters" type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Toolchain) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Toolchain) GoString() string {
 	return s.String()
 }
@@ -3743,12 +4743,20 @@ type ToolchainSource struct {
 	S3 *S3Location `locationName:"s3" type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ToolchainSource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ToolchainSource) GoString() string {
 	return s.String()
 }
@@ -3791,12 +4799,20 @@ type UntagProjectInput struct {
 	Tags []*string `locationName:"tags" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagProjectInput) GoString() string {
 	return s.String()
 }
@@ -3836,12 +4852,20 @@ type UntagProjectOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagProjectOutput) GoString() string {
 	return s.String()
 }
@@ -3850,6 +4874,10 @@ type UpdateProjectInput struct {
 	_ struct{} `type:"structure"`
 
 	// The description of the project, if any.
+	//
+	// Description is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateProjectInput's
+	// String and GoString methods.
 	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The ID of the project you want to update.
@@ -3858,15 +4886,27 @@ type UpdateProjectInput struct {
 	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
 
 	// The name of the project you want to update.
+	//
+	// Name is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateProjectInput's
+	// String and GoString methods.
 	Name *string `locationName:"name" min:"1" type:"string" sensitive:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProjectInput) GoString() string {
 	return s.String()
 }
@@ -3912,12 +4952,20 @@ type UpdateProjectOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateProjectOutput) GoString() string {
 	return s.String()
 }
@@ -3948,12 +4996,20 @@ type UpdateTeamMemberInput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTeamMemberInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTeamMemberInput) GoString() string {
 	return s.String()
 }
@@ -4019,12 +5075,20 @@ type UpdateTeamMemberOutput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTeamMemberOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTeamMemberOutput) GoString() string {
 	return s.String()
 }
@@ -4051,10 +5115,18 @@ type UpdateUserProfileInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name that is displayed as the friendly name for the user in AWS CodeStar.
+	//
+	// DisplayName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateUserProfileInput's
+	// String and GoString methods.
 	DisplayName *string `locationName:"displayName" min:"1" type:"string" sensitive:"true"`
 
 	// The email address that is displayed as part of the user's profile in AWS
 	// CodeStar.
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateUserProfileInput's
+	// String and GoString methods.
 	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" sensitive:"true"`
 
 	// The SSH public key associated with the user in AWS CodeStar. If a project
@@ -4069,12 +5141,20 @@ type UpdateUserProfileInput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateUserProfileInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateUserProfileInput) GoString() string {
 	return s.String()
 }
@@ -4132,10 +5212,18 @@ type UpdateUserProfileOutput struct {
 	CreatedTimestamp *time.Time `locationName:"createdTimestamp" type:"timestamp"`
 
 	// The name that is displayed as the friendly name for the user in AWS CodeStar.
+	//
+	// DisplayName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateUserProfileOutput's
+	// String and GoString methods.
 	DisplayName *string `locationName:"displayName" min:"1" type:"string" sensitive:"true"`
 
 	// The email address that is displayed as part of the user's profile in AWS
 	// CodeStar.
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UpdateUserProfileOutput's
+	// String and GoString methods.
 	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" sensitive:"true"`
 
 	// The date the user profile was last modified, in timestamp format.
@@ -4152,12 +5240,20 @@ type UpdateUserProfileOutput struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateUserProfileOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateUserProfileOutput) GoString() string {
 	return s.String()
 }
@@ -4198,6 +5294,136 @@ func (s *UpdateUserProfileOutput) SetUserArn(v string) *UpdateUserProfileOutput 
 	return s
 }
 
+// A user profile with that name already exists in this region for the AWS account.
+// AWS CodeStar user profile names must be unique within a region for the AWS
+// account.
+type UserProfileAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UserProfileAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UserProfileAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorUserProfileAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &UserProfileAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UserProfileAlreadyExistsException) Code() string {
+	return "UserProfileAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *UserProfileAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UserProfileAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *UserProfileAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UserProfileAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UserProfileAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The user profile was not found.
+type UserProfileNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UserProfileNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UserProfileNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorUserProfileNotFoundException(v protocol.ResponseMetadata) error {
+	return &UserProfileNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UserProfileNotFoundException) Code() string {
+	return "UserProfileNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *UserProfileNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UserProfileNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *UserProfileNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UserProfileNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UserProfileNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Information about a user's profile in AWS CodeStar.
 type UserProfileSummary struct {
 	_ struct{} `type:"structure"`
@@ -4211,9 +5437,17 @@ type UserProfileSummary struct {
 	// two characters, so a display name with more than one space (for example "Mary
 	// Jane Major") would generate an initial icon using the first character and
 	// the first character after the space ("MJ", not "MM").
+	//
+	// DisplayName is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UserProfileSummary's
+	// String and GoString methods.
 	DisplayName *string `locationName:"displayName" min:"1" type:"string" sensitive:"true"`
 
 	// The email address associated with the user.
+	//
+	// EmailAddress is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by UserProfileSummary's
+	// String and GoString methods.
 	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" sensitive:"true"`
 
 	// The SSH public key associated with the user in AWS CodeStar. If a project
@@ -4225,12 +5459,20 @@ type UserProfileSummary struct {
 	UserArn *string `locationName:"userArn" min:"32" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserProfileSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserProfileSummary) GoString() string {
 	return s.String()
 }
@@ -4257,4 +5499,68 @@ func (s *UserProfileSummary) SetSshPublicKey(v string) *UserProfileSummary {
 func (s *UserProfileSummary) SetUserArn(v string) *UserProfileSummary {
 	s.UserArn = &v
 	return s
+}
+
+// The specified input is either not valid, or it could not be validated.
+type ValidationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationException) GoString() string {
+	return s.String()
+}
+
+func newErrorValidationException(v protocol.ResponseMetadata) error {
+	return &ValidationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ValidationException) Code() string {
+	return "ValidationException"
+}
+
+// Message returns the exception's message.
+func (s *ValidationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ValidationException) OrigErr() error {
+	return nil
+}
+
+func (s *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ValidationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ValidationException) RequestID() string {
+	return s.RespMetadata.RequestID
 }

@@ -2,6 +2,10 @@
 
 package dynamodbstreams
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeExpiredIteratorException for service response error code
@@ -21,18 +25,34 @@ const (
 	// ErrCodeLimitExceededException for service response error code
 	// "LimitExceededException".
 	//
-	// Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-	// requests that receive this exception. Your request is eventually successful,
-	// unless your retry queue is too large to finish. Reduce the frequency of requests
-	// and use exponential backoff. For more information, go to Error Retries and
-	// Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#APIRetries)
-	// in the Amazon DynamoDB Developer Guide.
+	// There is no limit to the number of daily on-demand backups that can be taken.
+	//
+	// For most purposes, up to 500 simultaneous table operations are allowed per
+	// account. These operations include CreateTable, UpdateTable, DeleteTable,UpdateTimeToLive,
+	// RestoreTableFromBackup, and RestoreTableToPointInTime.
+	//
+	// When you are creating a table with one or more secondary indexes, you can
+	// have up to 250 such requests running at a time. However, if the table or
+	// index specifications are complex, then DynamoDB might temporarily reduce
+	// the number of concurrent operations.
+	//
+	// When importing into DynamoDB, up to 50 simultaneous import table operations
+	// are allowed per account.
+	//
+	// There is a soft account quota of 2,500 tables.
+	//
+	// GetRecords was called with a value of more than 1000 for the limit request
+	// parameter.
+	//
+	// More than 2 processes are reading from the same streams shard at the same
+	// time. Exceeding this limit may result in request throttling.
 	ErrCodeLimitExceededException = "LimitExceededException"
 
 	// ErrCodeResourceNotFoundException for service response error code
 	// "ResourceNotFoundException".
 	//
-	// The operation tried to access a nonexistent stream.
+	// The operation tried to access a nonexistent table or index. The resource
+	// might not be specified correctly, or its status might not be ACTIVE.
 	ErrCodeResourceNotFoundException = "ResourceNotFoundException"
 
 	// ErrCodeTrimmedDataAccessException for service response error code
@@ -52,3 +72,11 @@ const (
 	//    trimmed. This causes the iterator to access a record that no longer exists.
 	ErrCodeTrimmedDataAccessException = "TrimmedDataAccessException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"ExpiredIteratorException":   newErrorExpiredIteratorException,
+	"InternalServerError":        newErrorInternalServerError,
+	"LimitExceededException":     newErrorLimitExceededException,
+	"ResourceNotFoundException":  newErrorResourceNotFoundException,
+	"TrimmedDataAccessException": newErrorTrimmedDataAccessException,
+}

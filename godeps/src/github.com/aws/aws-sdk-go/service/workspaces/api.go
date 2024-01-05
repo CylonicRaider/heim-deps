@@ -13,6 +13,105 @@ import (
 	"github.com/aws/aws-sdk-go/private/protocol/jsonrpc"
 )
 
+const opAssociateConnectionAlias = "AssociateConnectionAlias"
+
+// AssociateConnectionAliasRequest generates a "aws/request.Request" representing the
+// client's request for the AssociateConnectionAlias operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AssociateConnectionAlias for more information on using the AssociateConnectionAlias
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AssociateConnectionAliasRequest method.
+//	req, resp := client.AssociateConnectionAliasRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateConnectionAlias
+func (c *WorkSpaces) AssociateConnectionAliasRequest(input *AssociateConnectionAliasInput) (req *request.Request, output *AssociateConnectionAliasOutput) {
+	op := &request.Operation{
+		Name:       opAssociateConnectionAlias,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateConnectionAliasInput{}
+	}
+
+	output = &AssociateConnectionAliasOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// AssociateConnectionAlias API operation for Amazon WorkSpaces.
+//
+// Associates the specified connection alias with the specified directory to
+// enable cross-Region redirection. For more information, see Cross-Region Redirection
+// for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+//
+// Before performing this operation, call DescribeConnectionAliases (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html)
+// to make sure that the current state of the connection alias is CREATED.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation AssociateConnectionAlias for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceAssociatedException
+//     The resource is associated with a directory.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateConnectionAlias
+func (c *WorkSpaces) AssociateConnectionAlias(input *AssociateConnectionAliasInput) (*AssociateConnectionAliasOutput, error) {
+	req, out := c.AssociateConnectionAliasRequest(input)
+	return out, req.Send()
+}
+
+// AssociateConnectionAliasWithContext is the same as AssociateConnectionAlias with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AssociateConnectionAlias for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) AssociateConnectionAliasWithContext(ctx aws.Context, input *AssociateConnectionAliasInput, opts ...request.Option) (*AssociateConnectionAliasOutput, error) {
+	req, out := c.AssociateConnectionAliasRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opAssociateIpGroups = "AssociateIpGroups"
 
 // AssociateIpGroupsRequest generates a "aws/request.Request" representing the
@@ -29,14 +128,13 @@ const opAssociateIpGroups = "AssociateIpGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AssociateIpGroupsRequest method.
+//	req, resp := client.AssociateIpGroupsRequest(params)
 //
-//    // Example sending a request using the AssociateIpGroupsRequest method.
-//    req, resp := client.AssociateIpGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroups
 func (c *WorkSpaces) AssociateIpGroupsRequest(input *AssociateIpGroupsInput) (req *request.Request, output *AssociateIpGroupsOutput) {
@@ -67,24 +165,25 @@ func (c *WorkSpaces) AssociateIpGroupsRequest(input *AssociateIpGroupsInput) (re
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation AssociateIpGroups for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Your resource limits have been exceeded.
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the resource is not valid for this operation.
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
 //
-//   * ErrCodeOperationNotSupportedException "OperationNotSupportedException"
-//   This operation is not supported.
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroups
 func (c *WorkSpaces) AssociateIpGroups(input *AssociateIpGroupsInput) (*AssociateIpGroupsOutput, error) {
@@ -108,6 +207,112 @@ func (c *WorkSpaces) AssociateIpGroupsWithContext(ctx aws.Context, input *Associ
 	return out, req.Send()
 }
 
+const opAssociateWorkspaceApplication = "AssociateWorkspaceApplication"
+
+// AssociateWorkspaceApplicationRequest generates a "aws/request.Request" representing the
+// client's request for the AssociateWorkspaceApplication operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See AssociateWorkspaceApplication for more information on using the AssociateWorkspaceApplication
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the AssociateWorkspaceApplicationRequest method.
+//	req, resp := client.AssociateWorkspaceApplicationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateWorkspaceApplication
+func (c *WorkSpaces) AssociateWorkspaceApplicationRequest(input *AssociateWorkspaceApplicationInput) (req *request.Request, output *AssociateWorkspaceApplicationOutput) {
+	op := &request.Operation{
+		Name:       opAssociateWorkspaceApplication,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateWorkspaceApplicationInput{}
+	}
+
+	output = &AssociateWorkspaceApplicationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// AssociateWorkspaceApplication API operation for Amazon WorkSpaces.
+//
+// Associates the specified application to the specified WorkSpace.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation AssociateWorkspaceApplication for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceAlreadyExistsException
+//     The specified resource already exists.
+//
+//   - ResourceInUseException
+//     The specified resource is currently in use.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ComputeNotCompatibleException
+//     The compute type of the WorkSpace is not compatible with the application.
+//
+//   - OperatingSystemNotCompatibleException
+//     The operating system of the WorkSpace is not compatible with the application.
+//
+//   - ApplicationNotSupportedException
+//     The specified application is not supported.
+//
+//   - IncompatibleApplicationsException
+//     The specified application is not compatible with the resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateWorkspaceApplication
+func (c *WorkSpaces) AssociateWorkspaceApplication(input *AssociateWorkspaceApplicationInput) (*AssociateWorkspaceApplicationOutput, error) {
+	req, out := c.AssociateWorkspaceApplicationRequest(input)
+	return out, req.Send()
+}
+
+// AssociateWorkspaceApplicationWithContext is the same as AssociateWorkspaceApplication with the addition of
+// the ability to pass a context and additional request options.
+//
+// See AssociateWorkspaceApplication for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) AssociateWorkspaceApplicationWithContext(ctx aws.Context, input *AssociateWorkspaceApplicationInput, opts ...request.Option) (*AssociateWorkspaceApplicationOutput, error) {
+	req, out := c.AssociateWorkspaceApplicationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opAuthorizeIpRules = "AuthorizeIpRules"
 
 // AuthorizeIpRulesRequest generates a "aws/request.Request" representing the
@@ -124,14 +329,13 @@ const opAuthorizeIpRules = "AuthorizeIpRules"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AuthorizeIpRulesRequest method.
+//	req, resp := client.AuthorizeIpRulesRequest(params)
 //
-//    // Example sending a request using the AuthorizeIpRulesRequest method.
-//    req, resp := client.AuthorizeIpRulesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AuthorizeIpRules
 func (c *WorkSpaces) AuthorizeIpRulesRequest(input *AuthorizeIpRulesInput) (req *request.Request, output *AuthorizeIpRulesOutput) {
@@ -165,21 +369,22 @@ func (c *WorkSpaces) AuthorizeIpRulesRequest(input *AuthorizeIpRulesInput) (req 
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation AuthorizeIpRules for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Your resource limits have been exceeded.
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the resource is not valid for this operation.
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AuthorizeIpRules
 func (c *WorkSpaces) AuthorizeIpRules(input *AuthorizeIpRulesInput) (*AuthorizeIpRulesOutput, error) {
@@ -203,6 +408,308 @@ func (c *WorkSpaces) AuthorizeIpRulesWithContext(ctx aws.Context, input *Authori
 	return out, req.Send()
 }
 
+const opCopyWorkspaceImage = "CopyWorkspaceImage"
+
+// CopyWorkspaceImageRequest generates a "aws/request.Request" representing the
+// client's request for the CopyWorkspaceImage operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CopyWorkspaceImage for more information on using the CopyWorkspaceImage
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CopyWorkspaceImageRequest method.
+//	req, resp := client.CopyWorkspaceImageRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImage
+func (c *WorkSpaces) CopyWorkspaceImageRequest(input *CopyWorkspaceImageInput) (req *request.Request, output *CopyWorkspaceImageOutput) {
+	op := &request.Operation{
+		Name:       opCopyWorkspaceImage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CopyWorkspaceImageInput{}
+	}
+
+	output = &CopyWorkspaceImageOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CopyWorkspaceImage API operation for Amazon WorkSpaces.
+//
+// Copies the specified image from the specified Region to the current Region.
+// For more information about copying images, see Copy a Custom WorkSpaces Image
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html).
+//
+// In the China (Ningxia) Region, you can copy images only within the same Region.
+//
+// In Amazon Web Services GovCloud (US), to copy images to and from other Regions,
+// contact Amazon Web Services Support.
+//
+// Before copying a shared image, be sure to verify that it has been shared
+// from the correct Amazon Web Services account. To determine if an image has
+// been shared and to see the ID of the Amazon Web Services account that owns
+// an image, use the DescribeWorkSpaceImages (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html)
+// and DescribeWorkspaceImagePermissions (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html)
+// API operations.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation CopyWorkspaceImage for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+//   - ResourceAlreadyExistsException
+//     The specified resource already exists.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ResourceUnavailableException
+//     The specified resource is not available.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CopyWorkspaceImage
+func (c *WorkSpaces) CopyWorkspaceImage(input *CopyWorkspaceImageInput) (*CopyWorkspaceImageOutput, error) {
+	req, out := c.CopyWorkspaceImageRequest(input)
+	return out, req.Send()
+}
+
+// CopyWorkspaceImageWithContext is the same as CopyWorkspaceImage with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CopyWorkspaceImage for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) CopyWorkspaceImageWithContext(ctx aws.Context, input *CopyWorkspaceImageInput, opts ...request.Option) (*CopyWorkspaceImageOutput, error) {
+	req, out := c.CopyWorkspaceImageRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opCreateConnectClientAddIn = "CreateConnectClientAddIn"
+
+// CreateConnectClientAddInRequest generates a "aws/request.Request" representing the
+// client's request for the CreateConnectClientAddIn operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateConnectClientAddIn for more information on using the CreateConnectClientAddIn
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateConnectClientAddInRequest method.
+//	req, resp := client.CreateConnectClientAddInRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectClientAddIn
+func (c *WorkSpaces) CreateConnectClientAddInRequest(input *CreateConnectClientAddInInput) (req *request.Request, output *CreateConnectClientAddInOutput) {
+	op := &request.Operation{
+		Name:       opCreateConnectClientAddIn,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateConnectClientAddInInput{}
+	}
+
+	output = &CreateConnectClientAddInOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateConnectClientAddIn API operation for Amazon WorkSpaces.
+//
+// Creates a client-add-in for Amazon Connect within a directory. You can create
+// only one Amazon Connect client add-in within a directory.
+//
+// This client add-in allows WorkSpaces users to seamlessly connect to Amazon
+// Connect.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation CreateConnectClientAddIn for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ResourceCreationFailedException
+//     The resource could not be created.
+//
+//   - ResourceAlreadyExistsException
+//     The specified resource already exists.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectClientAddIn
+func (c *WorkSpaces) CreateConnectClientAddIn(input *CreateConnectClientAddInInput) (*CreateConnectClientAddInOutput, error) {
+	req, out := c.CreateConnectClientAddInRequest(input)
+	return out, req.Send()
+}
+
+// CreateConnectClientAddInWithContext is the same as CreateConnectClientAddIn with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateConnectClientAddIn for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) CreateConnectClientAddInWithContext(ctx aws.Context, input *CreateConnectClientAddInInput, opts ...request.Option) (*CreateConnectClientAddInOutput, error) {
+	req, out := c.CreateConnectClientAddInRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opCreateConnectionAlias = "CreateConnectionAlias"
+
+// CreateConnectionAliasRequest generates a "aws/request.Request" representing the
+// client's request for the CreateConnectionAlias operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateConnectionAlias for more information on using the CreateConnectionAlias
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateConnectionAliasRequest method.
+//	req, resp := client.CreateConnectionAliasRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectionAlias
+func (c *WorkSpaces) CreateConnectionAliasRequest(input *CreateConnectionAliasInput) (req *request.Request, output *CreateConnectionAliasOutput) {
+	op := &request.Operation{
+		Name:       opCreateConnectionAlias,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateConnectionAliasInput{}
+	}
+
+	output = &CreateConnectionAliasOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateConnectionAlias API operation for Amazon WorkSpaces.
+//
+// Creates the specified connection alias for use with cross-Region redirection.
+// For more information, see Cross-Region Redirection for Amazon WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation CreateConnectionAlias for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceAlreadyExistsException
+//     The specified resource already exists.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectionAlias
+func (c *WorkSpaces) CreateConnectionAlias(input *CreateConnectionAliasInput) (*CreateConnectionAliasOutput, error) {
+	req, out := c.CreateConnectionAliasRequest(input)
+	return out, req.Send()
+}
+
+// CreateConnectionAliasWithContext is the same as CreateConnectionAlias with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateConnectionAlias for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) CreateConnectionAliasWithContext(ctx aws.Context, input *CreateConnectionAliasInput, opts ...request.Option) (*CreateConnectionAliasOutput, error) {
+	req, out := c.CreateConnectionAliasRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateIpGroup = "CreateIpGroup"
 
 // CreateIpGroupRequest generates a "aws/request.Request" representing the
@@ -219,14 +726,13 @@ const opCreateIpGroup = "CreateIpGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateIpGroupRequest method.
+//	req, resp := client.CreateIpGroupRequest(params)
 //
-//    // Example sending a request using the CreateIpGroupRequest method.
-//    req, resp := client.CreateIpGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroup
 func (c *WorkSpaces) CreateIpGroupRequest(input *CreateIpGroupInput) (req *request.Request, output *CreateIpGroupOutput) {
@@ -268,21 +774,22 @@ func (c *WorkSpaces) CreateIpGroupRequest(input *CreateIpGroupInput) (req *reque
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation CreateIpGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Your resource limits have been exceeded.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified resource already exists.
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
 //
-//   * ErrCodeResourceCreationFailedException "ResourceCreationFailedException"
-//   The resource could not be created.
+//   - ResourceAlreadyExistsException
+//     The specified resource already exists.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - ResourceCreationFailedException
+//     The resource could not be created.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroup
 func (c *WorkSpaces) CreateIpGroup(input *CreateIpGroupInput) (*CreateIpGroupOutput, error) {
@@ -306,6 +813,97 @@ func (c *WorkSpaces) CreateIpGroupWithContext(ctx aws.Context, input *CreateIpGr
 	return out, req.Send()
 }
 
+const opCreateStandbyWorkspaces = "CreateStandbyWorkspaces"
+
+// CreateStandbyWorkspacesRequest generates a "aws/request.Request" representing the
+// client's request for the CreateStandbyWorkspaces operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateStandbyWorkspaces for more information on using the CreateStandbyWorkspaces
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateStandbyWorkspacesRequest method.
+//	req, resp := client.CreateStandbyWorkspacesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateStandbyWorkspaces
+func (c *WorkSpaces) CreateStandbyWorkspacesRequest(input *CreateStandbyWorkspacesInput) (req *request.Request, output *CreateStandbyWorkspacesOutput) {
+	op := &request.Operation{
+		Name:       opCreateStandbyWorkspaces,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateStandbyWorkspacesInput{}
+	}
+
+	output = &CreateStandbyWorkspacesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateStandbyWorkspaces API operation for Amazon WorkSpaces.
+//
+// Creates a standby WorkSpace in a secondary Region.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation CreateStandbyWorkspaces for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateStandbyWorkspaces
+func (c *WorkSpaces) CreateStandbyWorkspaces(input *CreateStandbyWorkspacesInput) (*CreateStandbyWorkspacesOutput, error) {
+	req, out := c.CreateStandbyWorkspacesRequest(input)
+	return out, req.Send()
+}
+
+// CreateStandbyWorkspacesWithContext is the same as CreateStandbyWorkspaces with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateStandbyWorkspaces for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) CreateStandbyWorkspacesWithContext(ctx aws.Context, input *CreateStandbyWorkspacesInput, opts ...request.Option) (*CreateStandbyWorkspacesOutput, error) {
+	req, out := c.CreateStandbyWorkspacesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateTags = "CreateTags"
 
 // CreateTagsRequest generates a "aws/request.Request" representing the
@@ -322,14 +920,13 @@ const opCreateTags = "CreateTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateTagsRequest method.
+//	req, resp := client.CreateTagsRequest(params)
 //
-//    // Example sending a request using the CreateTagsRequest method.
-//    req, resp := client.CreateTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTags
 func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) (req *request.Request, output *CreateTagsOutput) {
@@ -351,7 +948,7 @@ func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) (req *request.Req
 
 // CreateTags API operation for Amazon WorkSpaces.
 //
-// Creates the specified tags for the specified WorkSpace.
+// Creates the specified tags for the specified WorkSpaces resource.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -360,15 +957,16 @@ func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) (req *request.Req
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation CreateTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Your resource limits have been exceeded.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTags
 func (c *WorkSpaces) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error) {
@@ -392,6 +990,309 @@ func (c *WorkSpaces) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInp
 	return out, req.Send()
 }
 
+const opCreateUpdatedWorkspaceImage = "CreateUpdatedWorkspaceImage"
+
+// CreateUpdatedWorkspaceImageRequest generates a "aws/request.Request" representing the
+// client's request for the CreateUpdatedWorkspaceImage operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateUpdatedWorkspaceImage for more information on using the CreateUpdatedWorkspaceImage
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateUpdatedWorkspaceImageRequest method.
+//	req, resp := client.CreateUpdatedWorkspaceImageRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateUpdatedWorkspaceImage
+func (c *WorkSpaces) CreateUpdatedWorkspaceImageRequest(input *CreateUpdatedWorkspaceImageInput) (req *request.Request, output *CreateUpdatedWorkspaceImageOutput) {
+	op := &request.Operation{
+		Name:       opCreateUpdatedWorkspaceImage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateUpdatedWorkspaceImageInput{}
+	}
+
+	output = &CreateUpdatedWorkspaceImageOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateUpdatedWorkspaceImage API operation for Amazon WorkSpaces.
+//
+// Creates a new updated WorkSpace image based on the specified source image.
+// The new updated WorkSpace image has the latest drivers and other updates
+// required by the Amazon WorkSpaces components.
+//
+// To determine which WorkSpace images need to be updated with the latest Amazon
+// WorkSpaces requirements, use DescribeWorkspaceImages (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html).
+//
+//   - Only Windows 10, Windows Server 2016, and Windows Server 2019 WorkSpace
+//     images can be programmatically updated at this time.
+//
+//   - Microsoft Windows updates and other application updates are not included
+//     in the update process.
+//
+//   - The source WorkSpace image is not deleted. You can delete the source
+//     image after you've verified your new updated image and created a new bundle.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation CreateUpdatedWorkspaceImage for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+//   - ResourceAlreadyExistsException
+//     The specified resource already exists.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateUpdatedWorkspaceImage
+func (c *WorkSpaces) CreateUpdatedWorkspaceImage(input *CreateUpdatedWorkspaceImageInput) (*CreateUpdatedWorkspaceImageOutput, error) {
+	req, out := c.CreateUpdatedWorkspaceImageRequest(input)
+	return out, req.Send()
+}
+
+// CreateUpdatedWorkspaceImageWithContext is the same as CreateUpdatedWorkspaceImage with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateUpdatedWorkspaceImage for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) CreateUpdatedWorkspaceImageWithContext(ctx aws.Context, input *CreateUpdatedWorkspaceImageInput, opts ...request.Option) (*CreateUpdatedWorkspaceImageOutput, error) {
+	req, out := c.CreateUpdatedWorkspaceImageRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opCreateWorkspaceBundle = "CreateWorkspaceBundle"
+
+// CreateWorkspaceBundleRequest generates a "aws/request.Request" representing the
+// client's request for the CreateWorkspaceBundle operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateWorkspaceBundle for more information on using the CreateWorkspaceBundle
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateWorkspaceBundleRequest method.
+//	req, resp := client.CreateWorkspaceBundleRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceBundle
+func (c *WorkSpaces) CreateWorkspaceBundleRequest(input *CreateWorkspaceBundleInput) (req *request.Request, output *CreateWorkspaceBundleOutput) {
+	op := &request.Operation{
+		Name:       opCreateWorkspaceBundle,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateWorkspaceBundleInput{}
+	}
+
+	output = &CreateWorkspaceBundleOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateWorkspaceBundle API operation for Amazon WorkSpaces.
+//
+// Creates the specified WorkSpace bundle. For more information about creating
+// WorkSpace bundles, see Create a Custom WorkSpaces Image and Bundle (https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation CreateWorkspaceBundle for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceUnavailableException
+//     The specified resource is not available.
+//
+//   - ResourceAlreadyExistsException
+//     The specified resource already exists.
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceBundle
+func (c *WorkSpaces) CreateWorkspaceBundle(input *CreateWorkspaceBundleInput) (*CreateWorkspaceBundleOutput, error) {
+	req, out := c.CreateWorkspaceBundleRequest(input)
+	return out, req.Send()
+}
+
+// CreateWorkspaceBundleWithContext is the same as CreateWorkspaceBundle with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateWorkspaceBundle for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) CreateWorkspaceBundleWithContext(ctx aws.Context, input *CreateWorkspaceBundleInput, opts ...request.Option) (*CreateWorkspaceBundleOutput, error) {
+	req, out := c.CreateWorkspaceBundleRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opCreateWorkspaceImage = "CreateWorkspaceImage"
+
+// CreateWorkspaceImageRequest generates a "aws/request.Request" representing the
+// client's request for the CreateWorkspaceImage operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateWorkspaceImage for more information on using the CreateWorkspaceImage
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateWorkspaceImageRequest method.
+//	req, resp := client.CreateWorkspaceImageRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceImage
+func (c *WorkSpaces) CreateWorkspaceImageRequest(input *CreateWorkspaceImageInput) (req *request.Request, output *CreateWorkspaceImageOutput) {
+	op := &request.Operation{
+		Name:       opCreateWorkspaceImage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateWorkspaceImageInput{}
+	}
+
+	output = &CreateWorkspaceImageOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateWorkspaceImage API operation for Amazon WorkSpaces.
+//
+// Creates a new WorkSpace image from an existing WorkSpace.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation CreateWorkspaceImage for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+//   - ResourceAlreadyExistsException
+//     The specified resource already exists.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceImage
+func (c *WorkSpaces) CreateWorkspaceImage(input *CreateWorkspaceImageInput) (*CreateWorkspaceImageOutput, error) {
+	req, out := c.CreateWorkspaceImageRequest(input)
+	return out, req.Send()
+}
+
+// CreateWorkspaceImageWithContext is the same as CreateWorkspaceImage with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateWorkspaceImage for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) CreateWorkspaceImageWithContext(ctx aws.Context, input *CreateWorkspaceImageInput, opts ...request.Option) (*CreateWorkspaceImageOutput, error) {
+	req, out := c.CreateWorkspaceImageRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateWorkspaces = "CreateWorkspaces"
 
 // CreateWorkspacesRequest generates a "aws/request.Request" representing the
@@ -408,14 +1309,13 @@ const opCreateWorkspaces = "CreateWorkspaces"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateWorkspacesRequest method.
+//	req, resp := client.CreateWorkspacesRequest(params)
 //
-//    // Example sending a request using the CreateWorkspacesRequest method.
-//    req, resp := client.CreateWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces
 func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) (req *request.Request, output *CreateWorkspacesOutput) {
@@ -440,6 +1340,18 @@ func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) (req 
 //
 // This operation is asynchronous and returns before the WorkSpaces are created.
 //
+//   - The MANUAL running mode value is only supported by Amazon WorkSpaces
+//     Core. Contact your account team to be allow-listed to use this value.
+//     For more information, see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/).
+//
+//   - You don't need to specify the PCOIP protocol for Linux bundles because
+//     WSP is the default protocol for those bundles.
+//
+//   - Ensure you review your running mode to ensure you are using a running
+//     mode that is optimal for your needs and budget. For more information on
+//     switching running modes, see Can I switch between hourly and monthly billing?
+//     (https://aws.amazon.com/workspaces/faqs/#:~:text=Q%3A%20Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%3F)
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -447,12 +1359,13 @@ func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) (req 
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation CreateWorkspaces for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Your resource limits have been exceeded.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces
 func (c *WorkSpaces) CreateWorkspaces(input *CreateWorkspacesInput) (*CreateWorkspacesOutput, error) {
@@ -476,6 +1389,291 @@ func (c *WorkSpaces) CreateWorkspacesWithContext(ctx aws.Context, input *CreateW
 	return out, req.Send()
 }
 
+const opDeleteClientBranding = "DeleteClientBranding"
+
+// DeleteClientBrandingRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteClientBranding operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteClientBranding for more information on using the DeleteClientBranding
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteClientBrandingRequest method.
+//	req, resp := client.DeleteClientBrandingRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteClientBranding
+func (c *WorkSpaces) DeleteClientBrandingRequest(input *DeleteClientBrandingInput) (req *request.Request, output *DeleteClientBrandingOutput) {
+	op := &request.Operation{
+		Name:       opDeleteClientBranding,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteClientBrandingInput{}
+	}
+
+	output = &DeleteClientBrandingOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteClientBranding API operation for Amazon WorkSpaces.
+//
+// Deletes customized client branding. Client branding allows you to customize
+// your WorkSpace's client login portal. You can tailor your login portal company
+// logo, the support email address, support link, link to reset password, and
+// a custom message for users trying to sign in.
+//
+// After you delete your customized client branding, your login portal reverts
+// to the default client branding.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DeleteClientBranding for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteClientBranding
+func (c *WorkSpaces) DeleteClientBranding(input *DeleteClientBrandingInput) (*DeleteClientBrandingOutput, error) {
+	req, out := c.DeleteClientBrandingRequest(input)
+	return out, req.Send()
+}
+
+// DeleteClientBrandingWithContext is the same as DeleteClientBranding with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteClientBranding for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DeleteClientBrandingWithContext(ctx aws.Context, input *DeleteClientBrandingInput, opts ...request.Option) (*DeleteClientBrandingOutput, error) {
+	req, out := c.DeleteClientBrandingRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDeleteConnectClientAddIn = "DeleteConnectClientAddIn"
+
+// DeleteConnectClientAddInRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteConnectClientAddIn operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteConnectClientAddIn for more information on using the DeleteConnectClientAddIn
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteConnectClientAddInRequest method.
+//	req, resp := client.DeleteConnectClientAddInRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectClientAddIn
+func (c *WorkSpaces) DeleteConnectClientAddInRequest(input *DeleteConnectClientAddInInput) (req *request.Request, output *DeleteConnectClientAddInOutput) {
+	op := &request.Operation{
+		Name:       opDeleteConnectClientAddIn,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteConnectClientAddInInput{}
+	}
+
+	output = &DeleteConnectClientAddInOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteConnectClientAddIn API operation for Amazon WorkSpaces.
+//
+// Deletes a client-add-in for Amazon Connect that is configured within a directory.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DeleteConnectClientAddIn for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectClientAddIn
+func (c *WorkSpaces) DeleteConnectClientAddIn(input *DeleteConnectClientAddInInput) (*DeleteConnectClientAddInOutput, error) {
+	req, out := c.DeleteConnectClientAddInRequest(input)
+	return out, req.Send()
+}
+
+// DeleteConnectClientAddInWithContext is the same as DeleteConnectClientAddIn with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteConnectClientAddIn for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DeleteConnectClientAddInWithContext(ctx aws.Context, input *DeleteConnectClientAddInInput, opts ...request.Option) (*DeleteConnectClientAddInOutput, error) {
+	req, out := c.DeleteConnectClientAddInRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDeleteConnectionAlias = "DeleteConnectionAlias"
+
+// DeleteConnectionAliasRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteConnectionAlias operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteConnectionAlias for more information on using the DeleteConnectionAlias
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteConnectionAliasRequest method.
+//	req, resp := client.DeleteConnectionAliasRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectionAlias
+func (c *WorkSpaces) DeleteConnectionAliasRequest(input *DeleteConnectionAliasInput) (req *request.Request, output *DeleteConnectionAliasOutput) {
+	op := &request.Operation{
+		Name:       opDeleteConnectionAlias,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteConnectionAliasInput{}
+	}
+
+	output = &DeleteConnectionAliasOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteConnectionAlias API operation for Amazon WorkSpaces.
+//
+// Deletes the specified connection alias. For more information, see Cross-Region
+// Redirection for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+//
+// If you will no longer be using a fully qualified domain name (FQDN) as the
+// registration code for your WorkSpaces users, you must take certain precautions
+// to prevent potential security issues. For more information, see Security
+// Considerations if You Stop Using Cross-Region Redirection (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html#cross-region-redirection-security-considerations).
+//
+// To delete a connection alias that has been shared, the shared account must
+// first disassociate the connection alias from any directories it has been
+// associated with. Then you must unshare the connection alias from the account
+// it has been shared with. You can delete a connection alias only after it
+// is no longer shared with any accounts or associated with any directories.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DeleteConnectionAlias for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ResourceAssociatedException
+//     The resource is associated with a directory.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectionAlias
+func (c *WorkSpaces) DeleteConnectionAlias(input *DeleteConnectionAliasInput) (*DeleteConnectionAliasOutput, error) {
+	req, out := c.DeleteConnectionAliasRequest(input)
+	return out, req.Send()
+}
+
+// DeleteConnectionAliasWithContext is the same as DeleteConnectionAlias with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteConnectionAlias for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DeleteConnectionAliasWithContext(ctx aws.Context, input *DeleteConnectionAliasInput, opts ...request.Option) (*DeleteConnectionAliasOutput, error) {
+	req, out := c.DeleteConnectionAliasRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteIpGroup = "DeleteIpGroup"
 
 // DeleteIpGroupRequest generates a "aws/request.Request" representing the
@@ -492,14 +1690,13 @@ const opDeleteIpGroup = "DeleteIpGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteIpGroupRequest method.
+//	req, resp := client.DeleteIpGroupRequest(params)
 //
-//    // Example sending a request using the DeleteIpGroupRequest method.
-//    req, resp := client.DeleteIpGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroup
 func (c *WorkSpaces) DeleteIpGroupRequest(input *DeleteIpGroupInput) (req *request.Request, output *DeleteIpGroupOutput) {
@@ -532,18 +1729,19 @@ func (c *WorkSpaces) DeleteIpGroupRequest(input *DeleteIpGroupInput) (req *reque
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DeleteIpGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeResourceAssociatedException "ResourceAssociatedException"
-//   The resource is associated with a directory.
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - ResourceAssociatedException
+//     The resource is associated with a directory.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroup
 func (c *WorkSpaces) DeleteIpGroup(input *DeleteIpGroupInput) (*DeleteIpGroupOutput, error) {
@@ -583,14 +1781,13 @@ const opDeleteTags = "DeleteTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteTagsRequest method.
+//	req, resp := client.DeleteTagsRequest(params)
 //
-//    // Example sending a request using the DeleteTagsRequest method.
-//    req, resp := client.DeleteTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTags
 func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Request, output *DeleteTagsOutput) {
@@ -612,7 +1809,7 @@ func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Req
 
 // DeleteTags API operation for Amazon WorkSpaces.
 //
-// Deletes the specified tags from the specified WorkSpace.
+// Deletes the specified tags from the specified WorkSpaces resource.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -621,12 +1818,13 @@ func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Req
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DeleteTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTags
 func (c *WorkSpaces) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
@@ -650,6 +1848,96 @@ func (c *WorkSpaces) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInp
 	return out, req.Send()
 }
 
+const opDeleteWorkspaceBundle = "DeleteWorkspaceBundle"
+
+// DeleteWorkspaceBundleRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteWorkspaceBundle operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteWorkspaceBundle for more information on using the DeleteWorkspaceBundle
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteWorkspaceBundleRequest method.
+//	req, resp := client.DeleteWorkspaceBundleRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceBundle
+func (c *WorkSpaces) DeleteWorkspaceBundleRequest(input *DeleteWorkspaceBundleInput) (req *request.Request, output *DeleteWorkspaceBundleOutput) {
+	op := &request.Operation{
+		Name:       opDeleteWorkspaceBundle,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteWorkspaceBundleInput{}
+	}
+
+	output = &DeleteWorkspaceBundleOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeleteWorkspaceBundle API operation for Amazon WorkSpaces.
+//
+// Deletes the specified WorkSpace bundle. For more information about deleting
+// WorkSpace bundles, see Delete a Custom WorkSpaces Bundle or Image (https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DeleteWorkspaceBundle for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ResourceAssociatedException
+//     The resource is associated with a directory.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceBundle
+func (c *WorkSpaces) DeleteWorkspaceBundle(input *DeleteWorkspaceBundleInput) (*DeleteWorkspaceBundleOutput, error) {
+	req, out := c.DeleteWorkspaceBundleRequest(input)
+	return out, req.Send()
+}
+
+// DeleteWorkspaceBundleWithContext is the same as DeleteWorkspaceBundle with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteWorkspaceBundle for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DeleteWorkspaceBundleWithContext(ctx aws.Context, input *DeleteWorkspaceBundleInput, opts ...request.Option) (*DeleteWorkspaceBundleOutput, error) {
+	req, out := c.DeleteWorkspaceBundleRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteWorkspaceImage = "DeleteWorkspaceImage"
 
 // DeleteWorkspaceImageRequest generates a "aws/request.Request" representing the
@@ -666,14 +1954,13 @@ const opDeleteWorkspaceImage = "DeleteWorkspaceImage"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteWorkspaceImageRequest method.
+//	req, resp := client.DeleteWorkspaceImageRequest(params)
 //
-//    // Example sending a request using the DeleteWorkspaceImageRequest method.
-//    req, resp := client.DeleteWorkspaceImageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceImage
 func (c *WorkSpaces) DeleteWorkspaceImageRequest(input *DeleteWorkspaceImageInput) (req *request.Request, output *DeleteWorkspaceImageOutput) {
@@ -696,7 +1983,8 @@ func (c *WorkSpaces) DeleteWorkspaceImageRequest(input *DeleteWorkspaceImageInpu
 // DeleteWorkspaceImage API operation for Amazon WorkSpaces.
 //
 // Deletes the specified image from your account. To delete an image, you must
-// first delete any bundles that are associated with the image.
+// first delete any bundles that are associated with the image and unshare the
+// image if it is shared with other accounts.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -705,15 +1993,16 @@ func (c *WorkSpaces) DeleteWorkspaceImageRequest(input *DeleteWorkspaceImageInpu
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DeleteWorkspaceImage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceAssociatedException "ResourceAssociatedException"
-//   The resource is associated with a directory.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the resource is not valid for this operation.
+//   - ResourceAssociatedException
+//     The resource is associated with a directory.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceImage
 func (c *WorkSpaces) DeleteWorkspaceImage(input *DeleteWorkspaceImageInput) (*DeleteWorkspaceImageOutput, error) {
@@ -737,6 +2026,205 @@ func (c *WorkSpaces) DeleteWorkspaceImageWithContext(ctx aws.Context, input *Del
 	return out, req.Send()
 }
 
+const opDeployWorkspaceApplications = "DeployWorkspaceApplications"
+
+// DeployWorkspaceApplicationsRequest generates a "aws/request.Request" representing the
+// client's request for the DeployWorkspaceApplications operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeployWorkspaceApplications for more information on using the DeployWorkspaceApplications
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeployWorkspaceApplicationsRequest method.
+//	req, resp := client.DeployWorkspaceApplicationsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeployWorkspaceApplications
+func (c *WorkSpaces) DeployWorkspaceApplicationsRequest(input *DeployWorkspaceApplicationsInput) (req *request.Request, output *DeployWorkspaceApplicationsOutput) {
+	op := &request.Operation{
+		Name:       opDeployWorkspaceApplications,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeployWorkspaceApplicationsInput{}
+	}
+
+	output = &DeployWorkspaceApplicationsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DeployWorkspaceApplications API operation for Amazon WorkSpaces.
+//
+// # Deploys associated applications to the specified WorkSpace
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DeployWorkspaceApplications for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceInUseException
+//     The specified resource is currently in use.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - IncompatibleApplicationsException
+//     The specified application is not compatible with the resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeployWorkspaceApplications
+func (c *WorkSpaces) DeployWorkspaceApplications(input *DeployWorkspaceApplicationsInput) (*DeployWorkspaceApplicationsOutput, error) {
+	req, out := c.DeployWorkspaceApplicationsRequest(input)
+	return out, req.Send()
+}
+
+// DeployWorkspaceApplicationsWithContext is the same as DeployWorkspaceApplications with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeployWorkspaceApplications for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DeployWorkspaceApplicationsWithContext(ctx aws.Context, input *DeployWorkspaceApplicationsInput, opts ...request.Option) (*DeployWorkspaceApplicationsOutput, error) {
+	req, out := c.DeployWorkspaceApplicationsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDeregisterWorkspaceDirectory = "DeregisterWorkspaceDirectory"
+
+// DeregisterWorkspaceDirectoryRequest generates a "aws/request.Request" representing the
+// client's request for the DeregisterWorkspaceDirectory operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeregisterWorkspaceDirectory for more information on using the DeregisterWorkspaceDirectory
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeregisterWorkspaceDirectoryRequest method.
+//	req, resp := client.DeregisterWorkspaceDirectoryRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeregisterWorkspaceDirectory
+func (c *WorkSpaces) DeregisterWorkspaceDirectoryRequest(input *DeregisterWorkspaceDirectoryInput) (req *request.Request, output *DeregisterWorkspaceDirectoryOutput) {
+	op := &request.Operation{
+		Name:       opDeregisterWorkspaceDirectory,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeregisterWorkspaceDirectoryInput{}
+	}
+
+	output = &DeregisterWorkspaceDirectoryOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DeregisterWorkspaceDirectory API operation for Amazon WorkSpaces.
+//
+// Deregisters the specified directory. This operation is asynchronous and returns
+// before the WorkSpace directory is deregistered. If any WorkSpaces are registered
+// to this directory, you must remove them before you can deregister the directory.
+//
+// Simple AD and AD Connector are made available to you free of charge to use
+// with WorkSpaces. If there are no WorkSpaces being used with your Simple AD
+// or AD Connector directory for 30 consecutive days, this directory will be
+// automatically deregistered for use with Amazon WorkSpaces, and you will be
+// charged for this directory as per the Directory Service pricing terms (http://aws.amazon.com/directoryservice/pricing/).
+//
+// To delete empty directories, see Delete the Directory for Your WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html).
+// If you delete your Simple AD or AD Connector directory, you can always create
+// a new one when you want to start using WorkSpaces again.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DeregisterWorkspaceDirectory for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeregisterWorkspaceDirectory
+func (c *WorkSpaces) DeregisterWorkspaceDirectory(input *DeregisterWorkspaceDirectoryInput) (*DeregisterWorkspaceDirectoryOutput, error) {
+	req, out := c.DeregisterWorkspaceDirectoryRequest(input)
+	return out, req.Send()
+}
+
+// DeregisterWorkspaceDirectoryWithContext is the same as DeregisterWorkspaceDirectory with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeregisterWorkspaceDirectory for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DeregisterWorkspaceDirectoryWithContext(ctx aws.Context, input *DeregisterWorkspaceDirectoryInput, opts ...request.Option) (*DeregisterWorkspaceDirectoryOutput, error) {
+	req, out := c.DeregisterWorkspaceDirectoryRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeAccount = "DescribeAccount"
 
 // DescribeAccountRequest generates a "aws/request.Request" representing the
@@ -753,14 +2241,13 @@ const opDescribeAccount = "DescribeAccount"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeAccountRequest method.
+//	req, resp := client.DescribeAccountRequest(params)
 //
-//    // Example sending a request using the DescribeAccountRequest method.
-//    req, resp := client.DescribeAccountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccount
 func (c *WorkSpaces) DescribeAccountRequest(input *DescribeAccountInput) (req *request.Request, output *DescribeAccountOutput) {
@@ -781,7 +2268,7 @@ func (c *WorkSpaces) DescribeAccountRequest(input *DescribeAccountInput) (req *r
 
 // DescribeAccount API operation for Amazon WorkSpaces.
 //
-// Retrieves a list that describes the configuration of bring your own license
+// Retrieves a list that describes the configuration of Bring Your Own License
 // (BYOL) for the specified account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -791,9 +2278,9 @@ func (c *WorkSpaces) DescribeAccountRequest(input *DescribeAccountInput) (req *r
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeAccount for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+// Returned Error Types:
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccount
 func (c *WorkSpaces) DescribeAccount(input *DescribeAccountInput) (*DescribeAccountOutput, error) {
@@ -833,14 +2320,13 @@ const opDescribeAccountModifications = "DescribeAccountModifications"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeAccountModificationsRequest method.
+//	req, resp := client.DescribeAccountModificationsRequest(params)
 //
-//    // Example sending a request using the DescribeAccountModificationsRequest method.
-//    req, resp := client.DescribeAccountModificationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountModifications
 func (c *WorkSpaces) DescribeAccountModificationsRequest(input *DescribeAccountModificationsInput) (req *request.Request, output *DescribeAccountModificationsOutput) {
@@ -861,8 +2347,8 @@ func (c *WorkSpaces) DescribeAccountModificationsRequest(input *DescribeAccountM
 
 // DescribeAccountModifications API operation for Amazon WorkSpaces.
 //
-// Retrieves a list that describes modifications to the configuration of bring
-// your own license (BYOL) for the specified account.
+// Retrieves a list that describes modifications to the configuration of Bring
+// Your Own License (BYOL) for the specified account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -871,9 +2357,9 @@ func (c *WorkSpaces) DescribeAccountModificationsRequest(input *DescribeAccountM
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeAccountModifications for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+// Returned Error Types:
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountModifications
 func (c *WorkSpaces) DescribeAccountModifications(input *DescribeAccountModificationsInput) (*DescribeAccountModificationsOutput, error) {
@@ -897,6 +2383,477 @@ func (c *WorkSpaces) DescribeAccountModificationsWithContext(ctx aws.Context, in
 	return out, req.Send()
 }
 
+const opDescribeApplicationAssociations = "DescribeApplicationAssociations"
+
+// DescribeApplicationAssociationsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeApplicationAssociations operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeApplicationAssociations for more information on using the DescribeApplicationAssociations
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeApplicationAssociationsRequest method.
+//	req, resp := client.DescribeApplicationAssociationsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeApplicationAssociations
+func (c *WorkSpaces) DescribeApplicationAssociationsRequest(input *DescribeApplicationAssociationsInput) (req *request.Request, output *DescribeApplicationAssociationsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeApplicationAssociations,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeApplicationAssociationsInput{}
+	}
+
+	output = &DescribeApplicationAssociationsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeApplicationAssociations API operation for Amazon WorkSpaces.
+//
+// Describes the associations between the application and the specified associated
+// resources.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeApplicationAssociations for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeApplicationAssociations
+func (c *WorkSpaces) DescribeApplicationAssociations(input *DescribeApplicationAssociationsInput) (*DescribeApplicationAssociationsOutput, error) {
+	req, out := c.DescribeApplicationAssociationsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeApplicationAssociationsWithContext is the same as DescribeApplicationAssociations with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeApplicationAssociations for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeApplicationAssociationsWithContext(ctx aws.Context, input *DescribeApplicationAssociationsInput, opts ...request.Option) (*DescribeApplicationAssociationsOutput, error) {
+	req, out := c.DescribeApplicationAssociationsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeApplicationAssociationsPages iterates over the pages of a DescribeApplicationAssociations operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeApplicationAssociations method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeApplicationAssociations operation.
+//	pageNum := 0
+//	err := client.DescribeApplicationAssociationsPages(params,
+//	    func(page *workspaces.DescribeApplicationAssociationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *WorkSpaces) DescribeApplicationAssociationsPages(input *DescribeApplicationAssociationsInput, fn func(*DescribeApplicationAssociationsOutput, bool) bool) error {
+	return c.DescribeApplicationAssociationsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeApplicationAssociationsPagesWithContext same as DescribeApplicationAssociationsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeApplicationAssociationsPagesWithContext(ctx aws.Context, input *DescribeApplicationAssociationsInput, fn func(*DescribeApplicationAssociationsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeApplicationAssociationsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeApplicationAssociationsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeApplicationAssociationsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeApplications = "DescribeApplications"
+
+// DescribeApplicationsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeApplications operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeApplications for more information on using the DescribeApplications
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeApplicationsRequest method.
+//	req, resp := client.DescribeApplicationsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeApplications
+func (c *WorkSpaces) DescribeApplicationsRequest(input *DescribeApplicationsInput) (req *request.Request, output *DescribeApplicationsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeApplications,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeApplicationsInput{}
+	}
+
+	output = &DescribeApplicationsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeApplications API operation for Amazon WorkSpaces.
+//
+// Describes the specified applications by filtering based on their compute
+// types, license availability, operating systems, and owners.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeApplications for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeApplications
+func (c *WorkSpaces) DescribeApplications(input *DescribeApplicationsInput) (*DescribeApplicationsOutput, error) {
+	req, out := c.DescribeApplicationsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeApplicationsWithContext is the same as DescribeApplications with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeApplications for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeApplicationsWithContext(ctx aws.Context, input *DescribeApplicationsInput, opts ...request.Option) (*DescribeApplicationsOutput, error) {
+	req, out := c.DescribeApplicationsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeApplicationsPages iterates over the pages of a DescribeApplications operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeApplications method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeApplications operation.
+//	pageNum := 0
+//	err := client.DescribeApplicationsPages(params,
+//	    func(page *workspaces.DescribeApplicationsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *WorkSpaces) DescribeApplicationsPages(input *DescribeApplicationsInput, fn func(*DescribeApplicationsOutput, bool) bool) error {
+	return c.DescribeApplicationsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeApplicationsPagesWithContext same as DescribeApplicationsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeApplicationsPagesWithContext(ctx aws.Context, input *DescribeApplicationsInput, fn func(*DescribeApplicationsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeApplicationsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeApplicationsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeApplicationsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeBundleAssociations = "DescribeBundleAssociations"
+
+// DescribeBundleAssociationsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeBundleAssociations operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeBundleAssociations for more information on using the DescribeBundleAssociations
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeBundleAssociationsRequest method.
+//	req, resp := client.DescribeBundleAssociationsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeBundleAssociations
+func (c *WorkSpaces) DescribeBundleAssociationsRequest(input *DescribeBundleAssociationsInput) (req *request.Request, output *DescribeBundleAssociationsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeBundleAssociations,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeBundleAssociationsInput{}
+	}
+
+	output = &DescribeBundleAssociationsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeBundleAssociations API operation for Amazon WorkSpaces.
+//
+// Describes the associations between the applications and the specified bundle.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeBundleAssociations for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeBundleAssociations
+func (c *WorkSpaces) DescribeBundleAssociations(input *DescribeBundleAssociationsInput) (*DescribeBundleAssociationsOutput, error) {
+	req, out := c.DescribeBundleAssociationsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeBundleAssociationsWithContext is the same as DescribeBundleAssociations with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeBundleAssociations for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeBundleAssociationsWithContext(ctx aws.Context, input *DescribeBundleAssociationsInput, opts ...request.Option) (*DescribeBundleAssociationsOutput, error) {
+	req, out := c.DescribeBundleAssociationsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDescribeClientBranding = "DescribeClientBranding"
+
+// DescribeClientBrandingRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeClientBranding operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeClientBranding for more information on using the DescribeClientBranding
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeClientBrandingRequest method.
+//	req, resp := client.DescribeClientBrandingRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientBranding
+func (c *WorkSpaces) DescribeClientBrandingRequest(input *DescribeClientBrandingInput) (req *request.Request, output *DescribeClientBrandingOutput) {
+	op := &request.Operation{
+		Name:       opDescribeClientBranding,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeClientBrandingInput{}
+	}
+
+	output = &DescribeClientBrandingOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeClientBranding API operation for Amazon WorkSpaces.
+//
+// Describes the specified client branding. Client branding allows you to customize
+// the log in page of various device types for your users. You can add your
+// company logo, the support email address, support link, link to reset password,
+// and a custom message for users trying to sign in.
+//
+// Only device types that have branding information configured will be shown
+// in the response.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeClientBranding for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientBranding
+func (c *WorkSpaces) DescribeClientBranding(input *DescribeClientBrandingInput) (*DescribeClientBrandingOutput, error) {
+	req, out := c.DescribeClientBrandingRequest(input)
+	return out, req.Send()
+}
+
+// DescribeClientBrandingWithContext is the same as DescribeClientBranding with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeClientBranding for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeClientBrandingWithContext(ctx aws.Context, input *DescribeClientBrandingInput, opts ...request.Option) (*DescribeClientBrandingOutput, error) {
+	req, out := c.DescribeClientBrandingRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeClientProperties = "DescribeClientProperties"
 
 // DescribeClientPropertiesRequest generates a "aws/request.Request" representing the
@@ -913,14 +2870,13 @@ const opDescribeClientProperties = "DescribeClientProperties"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeClientPropertiesRequest method.
+//	req, resp := client.DescribeClientPropertiesRequest(params)
 //
-//    // Example sending a request using the DescribeClientPropertiesRequest method.
-//    req, resp := client.DescribeClientPropertiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientProperties
 func (c *WorkSpaces) DescribeClientPropertiesRequest(input *DescribeClientPropertiesInput) (req *request.Request, output *DescribeClientPropertiesOutput) {
@@ -950,15 +2906,16 @@ func (c *WorkSpaces) DescribeClientPropertiesRequest(input *DescribeClientProper
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeClientProperties for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientProperties
 func (c *WorkSpaces) DescribeClientProperties(input *DescribeClientPropertiesInput) (*DescribeClientPropertiesOutput, error) {
@@ -982,6 +2939,357 @@ func (c *WorkSpaces) DescribeClientPropertiesWithContext(ctx aws.Context, input 
 	return out, req.Send()
 }
 
+const opDescribeConnectClientAddIns = "DescribeConnectClientAddIns"
+
+// DescribeConnectClientAddInsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeConnectClientAddIns operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeConnectClientAddIns for more information on using the DescribeConnectClientAddIns
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeConnectClientAddInsRequest method.
+//	req, resp := client.DescribeConnectClientAddInsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectClientAddIns
+func (c *WorkSpaces) DescribeConnectClientAddInsRequest(input *DescribeConnectClientAddInsInput) (req *request.Request, output *DescribeConnectClientAddInsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeConnectClientAddIns,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeConnectClientAddInsInput{}
+	}
+
+	output = &DescribeConnectClientAddInsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeConnectClientAddIns API operation for Amazon WorkSpaces.
+//
+// Retrieves a list of Amazon Connect client add-ins that have been created.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeConnectClientAddIns for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectClientAddIns
+func (c *WorkSpaces) DescribeConnectClientAddIns(input *DescribeConnectClientAddInsInput) (*DescribeConnectClientAddInsOutput, error) {
+	req, out := c.DescribeConnectClientAddInsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeConnectClientAddInsWithContext is the same as DescribeConnectClientAddIns with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeConnectClientAddIns for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeConnectClientAddInsWithContext(ctx aws.Context, input *DescribeConnectClientAddInsInput, opts ...request.Option) (*DescribeConnectClientAddInsOutput, error) {
+	req, out := c.DescribeConnectClientAddInsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDescribeConnectionAliasPermissions = "DescribeConnectionAliasPermissions"
+
+// DescribeConnectionAliasPermissionsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeConnectionAliasPermissions operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeConnectionAliasPermissions for more information on using the DescribeConnectionAliasPermissions
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeConnectionAliasPermissionsRequest method.
+//	req, resp := client.DescribeConnectionAliasPermissionsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliasPermissions
+func (c *WorkSpaces) DescribeConnectionAliasPermissionsRequest(input *DescribeConnectionAliasPermissionsInput) (req *request.Request, output *DescribeConnectionAliasPermissionsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeConnectionAliasPermissions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeConnectionAliasPermissionsInput{}
+	}
+
+	output = &DescribeConnectionAliasPermissionsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeConnectionAliasPermissions API operation for Amazon WorkSpaces.
+//
+// Describes the permissions that the owner of a connection alias has granted
+// to another Amazon Web Services account for the specified connection alias.
+// For more information, see Cross-Region Redirection for Amazon WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeConnectionAliasPermissions for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliasPermissions
+func (c *WorkSpaces) DescribeConnectionAliasPermissions(input *DescribeConnectionAliasPermissionsInput) (*DescribeConnectionAliasPermissionsOutput, error) {
+	req, out := c.DescribeConnectionAliasPermissionsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeConnectionAliasPermissionsWithContext is the same as DescribeConnectionAliasPermissions with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeConnectionAliasPermissions for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeConnectionAliasPermissionsWithContext(ctx aws.Context, input *DescribeConnectionAliasPermissionsInput, opts ...request.Option) (*DescribeConnectionAliasPermissionsOutput, error) {
+	req, out := c.DescribeConnectionAliasPermissionsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDescribeConnectionAliases = "DescribeConnectionAliases"
+
+// DescribeConnectionAliasesRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeConnectionAliases operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeConnectionAliases for more information on using the DescribeConnectionAliases
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeConnectionAliasesRequest method.
+//	req, resp := client.DescribeConnectionAliasesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliases
+func (c *WorkSpaces) DescribeConnectionAliasesRequest(input *DescribeConnectionAliasesInput) (req *request.Request, output *DescribeConnectionAliasesOutput) {
+	op := &request.Operation{
+		Name:       opDescribeConnectionAliases,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeConnectionAliasesInput{}
+	}
+
+	output = &DescribeConnectionAliasesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeConnectionAliases API operation for Amazon WorkSpaces.
+//
+// Retrieves a list that describes the connection aliases used for cross-Region
+// redirection. For more information, see Cross-Region Redirection for Amazon
+// WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeConnectionAliases for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectionAliases
+func (c *WorkSpaces) DescribeConnectionAliases(input *DescribeConnectionAliasesInput) (*DescribeConnectionAliasesOutput, error) {
+	req, out := c.DescribeConnectionAliasesRequest(input)
+	return out, req.Send()
+}
+
+// DescribeConnectionAliasesWithContext is the same as DescribeConnectionAliases with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeConnectionAliases for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeConnectionAliasesWithContext(ctx aws.Context, input *DescribeConnectionAliasesInput, opts ...request.Option) (*DescribeConnectionAliasesOutput, error) {
+	req, out := c.DescribeConnectionAliasesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDescribeImageAssociations = "DescribeImageAssociations"
+
+// DescribeImageAssociationsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeImageAssociations operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeImageAssociations for more information on using the DescribeImageAssociations
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeImageAssociationsRequest method.
+//	req, resp := client.DescribeImageAssociationsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeImageAssociations
+func (c *WorkSpaces) DescribeImageAssociationsRequest(input *DescribeImageAssociationsInput) (req *request.Request, output *DescribeImageAssociationsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeImageAssociations,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeImageAssociationsInput{}
+	}
+
+	output = &DescribeImageAssociationsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeImageAssociations API operation for Amazon WorkSpaces.
+//
+// Describes the associations between the applications and the specified image.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeImageAssociations for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeImageAssociations
+func (c *WorkSpaces) DescribeImageAssociations(input *DescribeImageAssociationsInput) (*DescribeImageAssociationsOutput, error) {
+	req, out := c.DescribeImageAssociationsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeImageAssociationsWithContext is the same as DescribeImageAssociations with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeImageAssociations for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeImageAssociationsWithContext(ctx aws.Context, input *DescribeImageAssociationsInput, opts ...request.Option) (*DescribeImageAssociationsOutput, error) {
+	req, out := c.DescribeImageAssociationsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeIpGroups = "DescribeIpGroups"
 
 // DescribeIpGroupsRequest generates a "aws/request.Request" representing the
@@ -998,14 +3306,13 @@ const opDescribeIpGroups = "DescribeIpGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeIpGroupsRequest method.
+//	req, resp := client.DescribeIpGroupsRequest(params)
 //
-//    // Example sending a request using the DescribeIpGroupsRequest method.
-//    req, resp := client.DescribeIpGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroups
 func (c *WorkSpaces) DescribeIpGroupsRequest(input *DescribeIpGroupsInput) (req *request.Request, output *DescribeIpGroupsOutput) {
@@ -1035,12 +3342,13 @@ func (c *WorkSpaces) DescribeIpGroupsRequest(input *DescribeIpGroupsInput) (req 
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeIpGroups for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroups
 func (c *WorkSpaces) DescribeIpGroups(input *DescribeIpGroupsInput) (*DescribeIpGroupsOutput, error) {
@@ -1080,14 +3388,13 @@ const opDescribeTags = "DescribeTags"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeTagsRequest method.
+//	req, resp := client.DescribeTagsRequest(params)
 //
-//    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTags
 func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
@@ -1108,7 +3415,7 @@ func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) (req *request
 
 // DescribeTags API operation for Amazon WorkSpaces.
 //
-// Describes the specified tags for the specified WorkSpace.
+// Describes the specified tags for the specified WorkSpaces resource.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1117,9 +3424,9 @@ func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) (req *request
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeTags for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+// Returned Error Types:
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTags
 func (c *WorkSpaces) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
@@ -1143,6 +3450,94 @@ func (c *WorkSpaces) DescribeTagsWithContext(ctx aws.Context, input *DescribeTag
 	return out, req.Send()
 }
 
+const opDescribeWorkspaceAssociations = "DescribeWorkspaceAssociations"
+
+// DescribeWorkspaceAssociationsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeWorkspaceAssociations operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeWorkspaceAssociations for more information on using the DescribeWorkspaceAssociations
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeWorkspaceAssociationsRequest method.
+//	req, resp := client.DescribeWorkspaceAssociationsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceAssociations
+func (c *WorkSpaces) DescribeWorkspaceAssociationsRequest(input *DescribeWorkspaceAssociationsInput) (req *request.Request, output *DescribeWorkspaceAssociationsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeWorkspaceAssociations,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeWorkspaceAssociationsInput{}
+	}
+
+	output = &DescribeWorkspaceAssociationsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeWorkspaceAssociations API operation for Amazon WorkSpaces.
+//
+// Describes the associations betweens applications and the specified WorkSpace.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeWorkspaceAssociations for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceAssociations
+func (c *WorkSpaces) DescribeWorkspaceAssociations(input *DescribeWorkspaceAssociationsInput) (*DescribeWorkspaceAssociationsOutput, error) {
+	req, out := c.DescribeWorkspaceAssociationsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeWorkspaceAssociationsWithContext is the same as DescribeWorkspaceAssociations with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeWorkspaceAssociations for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeWorkspaceAssociationsWithContext(ctx aws.Context, input *DescribeWorkspaceAssociationsInput, opts ...request.Option) (*DescribeWorkspaceAssociationsOutput, error) {
+	req, out := c.DescribeWorkspaceAssociationsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeWorkspaceBundles = "DescribeWorkspaceBundles"
 
 // DescribeWorkspaceBundlesRequest generates a "aws/request.Request" representing the
@@ -1159,14 +3554,13 @@ const opDescribeWorkspaceBundles = "DescribeWorkspaceBundles"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeWorkspaceBundlesRequest method.
+//	req, resp := client.DescribeWorkspaceBundlesRequest(params)
 //
-//    // Example sending a request using the DescribeWorkspaceBundlesRequest method.
-//    req, resp := client.DescribeWorkspaceBundlesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles
 func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBundlesInput) (req *request.Request, output *DescribeWorkspaceBundlesOutput) {
@@ -1204,9 +3598,9 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBun
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeWorkspaceBundles for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles
 func (c *WorkSpaces) DescribeWorkspaceBundles(input *DescribeWorkspaceBundlesInput) (*DescribeWorkspaceBundlesOutput, error) {
@@ -1238,15 +3632,14 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesWithContext(ctx aws.Context, input 
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeWorkspaceBundles operation.
-//    pageNum := 0
-//    err := client.DescribeWorkspaceBundlesPages(params,
-//        func(page *DescribeWorkspaceBundlesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeWorkspaceBundles operation.
+//	pageNum := 0
+//	err := client.DescribeWorkspaceBundlesPages(params,
+//	    func(page *workspaces.DescribeWorkspaceBundlesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *WorkSpaces) DescribeWorkspaceBundlesPages(input *DescribeWorkspaceBundlesInput, fn func(*DescribeWorkspaceBundlesOutput, bool) bool) error {
 	return c.DescribeWorkspaceBundlesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1273,10 +3666,12 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesPagesWithContext(ctx aws.Context, i
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeWorkspaceBundlesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeWorkspaceBundlesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1296,14 +3691,13 @@ const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeWorkspaceDirectoriesRequest method.
+//	req, resp := client.DescribeWorkspaceDirectoriesRequest(params)
 //
-//    // Example sending a request using the DescribeWorkspaceDirectoriesRequest method.
-//    req, resp := client.DescribeWorkspaceDirectoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories
 func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspaceDirectoriesInput) (req *request.Request, output *DescribeWorkspaceDirectoriesOutput) {
@@ -1330,8 +3724,7 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspac
 
 // DescribeWorkspaceDirectories API operation for Amazon WorkSpaces.
 //
-// Describes the available AWS Directory Service directories that are registered
-// with Amazon WorkSpaces.
+// Describes the available directories that are registered with Amazon WorkSpaces.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1340,9 +3733,9 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspac
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeWorkspaceDirectories for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories
 func (c *WorkSpaces) DescribeWorkspaceDirectories(input *DescribeWorkspaceDirectoriesInput) (*DescribeWorkspaceDirectoriesOutput, error) {
@@ -1374,15 +3767,14 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesWithContext(ctx aws.Context, in
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeWorkspaceDirectories operation.
-//    pageNum := 0
-//    err := client.DescribeWorkspaceDirectoriesPages(params,
-//        func(page *DescribeWorkspaceDirectoriesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeWorkspaceDirectories operation.
+//	pageNum := 0
+//	err := client.DescribeWorkspaceDirectoriesPages(params,
+//	    func(page *workspaces.DescribeWorkspaceDirectoriesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *WorkSpaces) DescribeWorkspaceDirectoriesPages(input *DescribeWorkspaceDirectoriesInput, fn func(*DescribeWorkspaceDirectoriesOutput, bool) bool) error {
 	return c.DescribeWorkspaceDirectoriesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1409,11 +3801,99 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesPagesWithContext(ctx aws.Contex
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeWorkspaceDirectoriesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeWorkspaceDirectoriesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
+}
+
+const opDescribeWorkspaceImagePermissions = "DescribeWorkspaceImagePermissions"
+
+// DescribeWorkspaceImagePermissionsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeWorkspaceImagePermissions operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeWorkspaceImagePermissions for more information on using the DescribeWorkspaceImagePermissions
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeWorkspaceImagePermissionsRequest method.
+//	req, resp := client.DescribeWorkspaceImagePermissionsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImagePermissions
+func (c *WorkSpaces) DescribeWorkspaceImagePermissionsRequest(input *DescribeWorkspaceImagePermissionsInput) (req *request.Request, output *DescribeWorkspaceImagePermissionsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeWorkspaceImagePermissions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeWorkspaceImagePermissionsInput{}
+	}
+
+	output = &DescribeWorkspaceImagePermissionsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeWorkspaceImagePermissions API operation for Amazon WorkSpaces.
+//
+// Describes the permissions that the owner of an image has granted to other
+// Amazon Web Services accounts for an image.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeWorkspaceImagePermissions for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImagePermissions
+func (c *WorkSpaces) DescribeWorkspaceImagePermissions(input *DescribeWorkspaceImagePermissionsInput) (*DescribeWorkspaceImagePermissionsOutput, error) {
+	req, out := c.DescribeWorkspaceImagePermissionsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeWorkspaceImagePermissionsWithContext is the same as DescribeWorkspaceImagePermissions with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeWorkspaceImagePermissions for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeWorkspaceImagePermissionsWithContext(ctx aws.Context, input *DescribeWorkspaceImagePermissionsInput, opts ...request.Option) (*DescribeWorkspaceImagePermissionsOutput, error) {
+	req, out := c.DescribeWorkspaceImagePermissionsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
 }
 
 const opDescribeWorkspaceImages = "DescribeWorkspaceImages"
@@ -1432,14 +3912,13 @@ const opDescribeWorkspaceImages = "DescribeWorkspaceImages"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeWorkspaceImagesRequest method.
+//	req, resp := client.DescribeWorkspaceImagesRequest(params)
 //
-//    // Example sending a request using the DescribeWorkspaceImagesRequest method.
-//    req, resp := client.DescribeWorkspaceImagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImages
 func (c *WorkSpaces) DescribeWorkspaceImagesRequest(input *DescribeWorkspaceImagesInput) (req *request.Request, output *DescribeWorkspaceImagesOutput) {
@@ -1470,9 +3949,9 @@ func (c *WorkSpaces) DescribeWorkspaceImagesRequest(input *DescribeWorkspaceImag
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeWorkspaceImages for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+// Returned Error Types:
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImages
 func (c *WorkSpaces) DescribeWorkspaceImages(input *DescribeWorkspaceImagesInput) (*DescribeWorkspaceImagesOutput, error) {
@@ -1496,6 +3975,91 @@ func (c *WorkSpaces) DescribeWorkspaceImagesWithContext(ctx aws.Context, input *
 	return out, req.Send()
 }
 
+const opDescribeWorkspaceSnapshots = "DescribeWorkspaceSnapshots"
+
+// DescribeWorkspaceSnapshotsRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeWorkspaceSnapshots operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeWorkspaceSnapshots for more information on using the DescribeWorkspaceSnapshots
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeWorkspaceSnapshotsRequest method.
+//	req, resp := client.DescribeWorkspaceSnapshotsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshots
+func (c *WorkSpaces) DescribeWorkspaceSnapshotsRequest(input *DescribeWorkspaceSnapshotsInput) (req *request.Request, output *DescribeWorkspaceSnapshotsOutput) {
+	op := &request.Operation{
+		Name:       opDescribeWorkspaceSnapshots,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeWorkspaceSnapshotsInput{}
+	}
+
+	output = &DescribeWorkspaceSnapshotsOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeWorkspaceSnapshots API operation for Amazon WorkSpaces.
+//
+// Describes the snapshots for the specified WorkSpace.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DescribeWorkspaceSnapshots for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshots
+func (c *WorkSpaces) DescribeWorkspaceSnapshots(input *DescribeWorkspaceSnapshotsInput) (*DescribeWorkspaceSnapshotsOutput, error) {
+	req, out := c.DescribeWorkspaceSnapshotsRequest(input)
+	return out, req.Send()
+}
+
+// DescribeWorkspaceSnapshotsWithContext is the same as DescribeWorkspaceSnapshots with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeWorkspaceSnapshots for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DescribeWorkspaceSnapshotsWithContext(ctx aws.Context, input *DescribeWorkspaceSnapshotsInput, opts ...request.Option) (*DescribeWorkspaceSnapshotsOutput, error) {
+	req, out := c.DescribeWorkspaceSnapshotsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDescribeWorkspaces = "DescribeWorkspaces"
 
 // DescribeWorkspacesRequest generates a "aws/request.Request" representing the
@@ -1512,14 +4076,13 @@ const opDescribeWorkspaces = "DescribeWorkspaces"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeWorkspacesRequest method.
+//	req, resp := client.DescribeWorkspacesRequest(params)
 //
-//    // Example sending a request using the DescribeWorkspacesRequest method.
-//    req, resp := client.DescribeWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces
 func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) (req *request.Request, output *DescribeWorkspacesOutput) {
@@ -1558,12 +4121,13 @@ func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) (
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeWorkspaces for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceUnavailableException "ResourceUnavailableException"
-//   The specified resource is not available.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceUnavailableException
+//     The specified resource is not available.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces
 func (c *WorkSpaces) DescribeWorkspaces(input *DescribeWorkspacesInput) (*DescribeWorkspacesOutput, error) {
@@ -1595,15 +4159,14 @@ func (c *WorkSpaces) DescribeWorkspacesWithContext(ctx aws.Context, input *Descr
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a DescribeWorkspaces operation.
-//    pageNum := 0
-//    err := client.DescribeWorkspacesPages(params,
-//        func(page *DescribeWorkspacesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a DescribeWorkspaces operation.
+//	pageNum := 0
+//	err := client.DescribeWorkspacesPages(params,
+//	    func(page *workspaces.DescribeWorkspacesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *WorkSpaces) DescribeWorkspacesPages(input *DescribeWorkspacesInput, fn func(*DescribeWorkspacesOutput, bool) bool) error {
 	return c.DescribeWorkspacesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -1630,10 +4193,12 @@ func (c *WorkSpaces) DescribeWorkspacesPagesWithContext(ctx aws.Context, input *
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeWorkspacesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*DescribeWorkspacesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1653,14 +4218,13 @@ const opDescribeWorkspacesConnectionStatus = "DescribeWorkspacesConnectionStatus
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeWorkspacesConnectionStatusRequest method.
+//	req, resp := client.DescribeWorkspacesConnectionStatusRequest(params)
 //
-//    // Example sending a request using the DescribeWorkspacesConnectionStatusRequest method.
-//    req, resp := client.DescribeWorkspacesConnectionStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatus
 func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWorkspacesConnectionStatusInput) (req *request.Request, output *DescribeWorkspacesConnectionStatusOutput) {
@@ -1690,9 +4254,9 @@ func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWo
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DescribeWorkspacesConnectionStatus for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatus
 func (c *WorkSpaces) DescribeWorkspacesConnectionStatus(input *DescribeWorkspacesConnectionStatusInput) (*DescribeWorkspacesConnectionStatusOutput, error) {
@@ -1716,6 +4280,104 @@ func (c *WorkSpaces) DescribeWorkspacesConnectionStatusWithContext(ctx aws.Conte
 	return out, req.Send()
 }
 
+const opDisassociateConnectionAlias = "DisassociateConnectionAlias"
+
+// DisassociateConnectionAliasRequest generates a "aws/request.Request" representing the
+// client's request for the DisassociateConnectionAlias operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisassociateConnectionAlias for more information on using the DisassociateConnectionAlias
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisassociateConnectionAliasRequest method.
+//	req, resp := client.DisassociateConnectionAliasRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateConnectionAlias
+func (c *WorkSpaces) DisassociateConnectionAliasRequest(input *DisassociateConnectionAliasInput) (req *request.Request, output *DisassociateConnectionAliasOutput) {
+	op := &request.Operation{
+		Name:       opDisassociateConnectionAlias,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisassociateConnectionAliasInput{}
+	}
+
+	output = &DisassociateConnectionAliasOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// DisassociateConnectionAlias API operation for Amazon WorkSpaces.
+//
+// Disassociates a connection alias from a directory. Disassociating a connection
+// alias disables cross-Region redirection between two directories in different
+// Regions. For more information, see Cross-Region Redirection for Amazon WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+//
+// Before performing this operation, call DescribeConnectionAliases (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html)
+// to make sure that the current state of the connection alias is CREATED.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DisassociateConnectionAlias for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateConnectionAlias
+func (c *WorkSpaces) DisassociateConnectionAlias(input *DisassociateConnectionAliasInput) (*DisassociateConnectionAliasOutput, error) {
+	req, out := c.DisassociateConnectionAliasRequest(input)
+	return out, req.Send()
+}
+
+// DisassociateConnectionAliasWithContext is the same as DisassociateConnectionAlias with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisassociateConnectionAlias for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DisassociateConnectionAliasWithContext(ctx aws.Context, input *DisassociateConnectionAliasInput, opts ...request.Option) (*DisassociateConnectionAliasOutput, error) {
+	req, out := c.DisassociateConnectionAliasRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDisassociateIpGroups = "DisassociateIpGroups"
 
 // DisassociateIpGroupsRequest generates a "aws/request.Request" representing the
@@ -1732,14 +4394,13 @@ const opDisassociateIpGroups = "DisassociateIpGroups"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisassociateIpGroupsRequest method.
+//	req, resp := client.DisassociateIpGroupsRequest(params)
 //
-//    // Example sending a request using the DisassociateIpGroupsRequest method.
-//    req, resp := client.DisassociateIpGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroups
 func (c *WorkSpaces) DisassociateIpGroupsRequest(input *DisassociateIpGroupsInput) (req *request.Request, output *DisassociateIpGroupsOutput) {
@@ -1770,18 +4431,19 @@ func (c *WorkSpaces) DisassociateIpGroupsRequest(input *DisassociateIpGroupsInpu
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation DisassociateIpGroups for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the resource is not valid for this operation.
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroups
 func (c *WorkSpaces) DisassociateIpGroups(input *DisassociateIpGroupsInput) (*DisassociateIpGroupsOutput, error) {
@@ -1805,6 +4467,203 @@ func (c *WorkSpaces) DisassociateIpGroupsWithContext(ctx aws.Context, input *Dis
 	return out, req.Send()
 }
 
+const opDisassociateWorkspaceApplication = "DisassociateWorkspaceApplication"
+
+// DisassociateWorkspaceApplicationRequest generates a "aws/request.Request" representing the
+// client's request for the DisassociateWorkspaceApplication operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DisassociateWorkspaceApplication for more information on using the DisassociateWorkspaceApplication
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DisassociateWorkspaceApplicationRequest method.
+//	req, resp := client.DisassociateWorkspaceApplicationRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateWorkspaceApplication
+func (c *WorkSpaces) DisassociateWorkspaceApplicationRequest(input *DisassociateWorkspaceApplicationInput) (req *request.Request, output *DisassociateWorkspaceApplicationOutput) {
+	op := &request.Operation{
+		Name:       opDisassociateWorkspaceApplication,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisassociateWorkspaceApplicationInput{}
+	}
+
+	output = &DisassociateWorkspaceApplicationOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DisassociateWorkspaceApplication API operation for Amazon WorkSpaces.
+//
+// Disassociates the specified application from a WorkSpace.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation DisassociateWorkspaceApplication for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceInUseException
+//     The specified resource is currently in use.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateWorkspaceApplication
+func (c *WorkSpaces) DisassociateWorkspaceApplication(input *DisassociateWorkspaceApplicationInput) (*DisassociateWorkspaceApplicationOutput, error) {
+	req, out := c.DisassociateWorkspaceApplicationRequest(input)
+	return out, req.Send()
+}
+
+// DisassociateWorkspaceApplicationWithContext is the same as DisassociateWorkspaceApplication with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DisassociateWorkspaceApplication for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) DisassociateWorkspaceApplicationWithContext(ctx aws.Context, input *DisassociateWorkspaceApplicationInput, opts ...request.Option) (*DisassociateWorkspaceApplicationOutput, error) {
+	req, out := c.DisassociateWorkspaceApplicationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opImportClientBranding = "ImportClientBranding"
+
+// ImportClientBrandingRequest generates a "aws/request.Request" representing the
+// client's request for the ImportClientBranding operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ImportClientBranding for more information on using the ImportClientBranding
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ImportClientBrandingRequest method.
+//	req, resp := client.ImportClientBrandingRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportClientBranding
+func (c *WorkSpaces) ImportClientBrandingRequest(input *ImportClientBrandingInput) (req *request.Request, output *ImportClientBrandingOutput) {
+	op := &request.Operation{
+		Name:       opImportClientBranding,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ImportClientBrandingInput{}
+	}
+
+	output = &ImportClientBrandingOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ImportClientBranding API operation for Amazon WorkSpaces.
+//
+// Imports client branding. Client branding allows you to customize your WorkSpace's
+// client login portal. You can tailor your login portal company logo, the support
+// email address, support link, link to reset password, and a custom message
+// for users trying to sign in.
+//
+// After you import client branding, the default branding experience for the
+// specified platform type is replaced with the imported experience
+//
+//   - You must specify at least one platform type when importing client branding.
+//
+//   - You can import up to 6 MB of data with each request. If your request
+//     exceeds this limit, you can import client branding for different platform
+//     types using separate requests.
+//
+//   - In each platform type, the SupportEmail and SupportLink parameters are
+//     mutually exclusive. You can specify only one parameter for each platform
+//     type, but not both.
+//
+//   - Imported data can take up to a minute to appear in the WorkSpaces client.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation ImportClientBranding for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportClientBranding
+func (c *WorkSpaces) ImportClientBranding(input *ImportClientBrandingInput) (*ImportClientBrandingOutput, error) {
+	req, out := c.ImportClientBrandingRequest(input)
+	return out, req.Send()
+}
+
+// ImportClientBrandingWithContext is the same as ImportClientBranding with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ImportClientBranding for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) ImportClientBrandingWithContext(ctx aws.Context, input *ImportClientBrandingInput, opts ...request.Option) (*ImportClientBrandingOutput, error) {
+	req, out := c.ImportClientBrandingRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opImportWorkspaceImage = "ImportWorkspaceImage"
 
 // ImportWorkspaceImageRequest generates a "aws/request.Request" representing the
@@ -1821,14 +4680,13 @@ const opImportWorkspaceImage = "ImportWorkspaceImage"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ImportWorkspaceImageRequest method.
+//	req, resp := client.ImportWorkspaceImageRequest(params)
 //
-//    // Example sending a request using the ImportWorkspaceImageRequest method.
-//    req, resp := client.ImportWorkspaceImageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportWorkspaceImage
 func (c *WorkSpaces) ImportWorkspaceImageRequest(input *ImportWorkspaceImageInput) (req *request.Request, output *ImportWorkspaceImageOutput) {
@@ -1849,9 +4707,11 @@ func (c *WorkSpaces) ImportWorkspaceImageRequest(input *ImportWorkspaceImageInpu
 
 // ImportWorkspaceImage API operation for Amazon WorkSpaces.
 //
-// Imports the specified Windows 7 or Windows 10 bring your own license (BYOL)
-// image into Amazon WorkSpaces. The image must be an already licensed EC2 image
-// that is in your AWS account, and you must own the image.
+// Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) image
+// into Amazon WorkSpaces. The image must be an already licensed Amazon EC2
+// image that is in your Amazon Web Services account, and you must own the image.
+// For more information about creating BYOL images, see Bring Your Own Windows
+// Desktop Licenses (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1860,21 +4720,25 @@ func (c *WorkSpaces) ImportWorkspaceImageRequest(input *ImportWorkspaceImageInpu
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation ImportWorkspaceImage for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Your resource limits have been exceeded.
+// Returned Error Types:
 //
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified resource already exists.
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - ResourceAlreadyExistsException
+//     The specified resource already exists.
 //
-//   * ErrCodeOperationNotSupportedException "OperationNotSupportedException"
-//   This operation is not supported.
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportWorkspaceImage
 func (c *WorkSpaces) ImportWorkspaceImage(input *ImportWorkspaceImageInput) (*ImportWorkspaceImageOutput, error) {
@@ -1914,14 +4778,13 @@ const opListAvailableManagementCidrRanges = "ListAvailableManagementCidrRanges"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAvailableManagementCidrRangesRequest method.
+//	req, resp := client.ListAvailableManagementCidrRangesRequest(params)
 //
-//    // Example sending a request using the ListAvailableManagementCidrRangesRequest method.
-//    req, resp := client.ListAvailableManagementCidrRangesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAvailableManagementCidrRanges
 func (c *WorkSpaces) ListAvailableManagementCidrRangesRequest(input *ListAvailableManagementCidrRangesInput) (req *request.Request, output *ListAvailableManagementCidrRangesOutput) {
@@ -1943,8 +4806,12 @@ func (c *WorkSpaces) ListAvailableManagementCidrRangesRequest(input *ListAvailab
 // ListAvailableManagementCidrRanges API operation for Amazon WorkSpaces.
 //
 // Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that
-// you can use for the network management interface when you enable bring your
-// own license (BYOL).
+// you can use for the network management interface when you enable Bring Your
+// Own License (BYOL).
+//
+// This operation can be run only by Amazon Web Services accounts that are enabled
+// for BYOL. If your account isn't enabled for BYOL, you'll receive an AccessDeniedException
+// error.
 //
 // The management network interface is connected to a secure Amazon WorkSpaces
 // management network. It is used for interactive streaming of the WorkSpace
@@ -1958,12 +4825,13 @@ func (c *WorkSpaces) ListAvailableManagementCidrRangesRequest(input *ListAvailab
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation ListAvailableManagementCidrRanges for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAvailableManagementCidrRanges
 func (c *WorkSpaces) ListAvailableManagementCidrRanges(input *ListAvailableManagementCidrRangesInput) (*ListAvailableManagementCidrRangesOutput, error) {
@@ -1987,6 +4855,112 @@ func (c *WorkSpaces) ListAvailableManagementCidrRangesWithContext(ctx aws.Contex
 	return out, req.Send()
 }
 
+const opMigrateWorkspace = "MigrateWorkspace"
+
+// MigrateWorkspaceRequest generates a "aws/request.Request" representing the
+// client's request for the MigrateWorkspace operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See MigrateWorkspace for more information on using the MigrateWorkspace
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the MigrateWorkspaceRequest method.
+//	req, resp := client.MigrateWorkspaceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/MigrateWorkspace
+func (c *WorkSpaces) MigrateWorkspaceRequest(input *MigrateWorkspaceInput) (req *request.Request, output *MigrateWorkspaceOutput) {
+	op := &request.Operation{
+		Name:       opMigrateWorkspace,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &MigrateWorkspaceInput{}
+	}
+
+	output = &MigrateWorkspaceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// MigrateWorkspace API operation for Amazon WorkSpaces.
+//
+// Migrates a WorkSpace from one operating system or bundle type to another,
+// while retaining the data on the user volume.
+//
+// The migration process recreates the WorkSpace by using a new root volume
+// from the target bundle image and the user volume from the last available
+// snapshot of the original WorkSpace. During migration, the original D:\Users\%USERNAME%
+// user profile folder is renamed to D:\Users\%USERNAME%MMddyyTHHmmss%.NotMigrated.
+// A new D:\Users\%USERNAME%\ folder is generated by the new OS. Certain files
+// in the old user profile are moved to the new user profile.
+//
+// For available migration scenarios, details about what happens during migration,
+// and best practices, see Migrate a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation MigrateWorkspace for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - OperationInProgressException
+//     The properties of this WorkSpace are currently being modified. Try again
+//     in a moment.
+//
+//   - ResourceUnavailableException
+//     The specified resource is not available.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/MigrateWorkspace
+func (c *WorkSpaces) MigrateWorkspace(input *MigrateWorkspaceInput) (*MigrateWorkspaceOutput, error) {
+	req, out := c.MigrateWorkspaceRequest(input)
+	return out, req.Send()
+}
+
+// MigrateWorkspaceWithContext is the same as MigrateWorkspace with the addition of
+// the ability to pass a context and additional request options.
+//
+// See MigrateWorkspace for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) MigrateWorkspaceWithContext(ctx aws.Context, input *MigrateWorkspaceInput, opts ...request.Option) (*MigrateWorkspaceOutput, error) {
+	req, out := c.MigrateWorkspaceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opModifyAccount = "ModifyAccount"
 
 // ModifyAccountRequest generates a "aws/request.Request" representing the
@@ -2003,14 +4977,13 @@ const opModifyAccount = "ModifyAccount"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyAccountRequest method.
+//	req, resp := client.ModifyAccountRequest(params)
 //
-//    // Example sending a request using the ModifyAccountRequest method.
-//    req, resp := client.ModifyAccountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccount
 func (c *WorkSpaces) ModifyAccountRequest(input *ModifyAccountInput) (req *request.Request, output *ModifyAccountOutput) {
@@ -2032,7 +5005,7 @@ func (c *WorkSpaces) ModifyAccountRequest(input *ModifyAccountInput) (req *reque
 
 // ModifyAccount API operation for Amazon WorkSpaces.
 //
-// Modifies the configuration of bring your own license (BYOL) for the specified
+// Modifies the configuration of Bring Your Own License (BYOL) for the specified
 // account.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
@@ -2042,21 +5015,22 @@ func (c *WorkSpaces) ModifyAccountRequest(input *ModifyAccountInput) (req *reque
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation ModifyAccount for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the resource is not valid for this operation.
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
-//   * ErrCodeResourceUnavailableException "ResourceUnavailableException"
-//   The specified resource is not available.
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - ResourceUnavailableException
+//     The specified resource is not available.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccount
 func (c *WorkSpaces) ModifyAccount(input *ModifyAccountInput) (*ModifyAccountOutput, error) {
@@ -2080,6 +5054,96 @@ func (c *WorkSpaces) ModifyAccountWithContext(ctx aws.Context, input *ModifyAcco
 	return out, req.Send()
 }
 
+const opModifyCertificateBasedAuthProperties = "ModifyCertificateBasedAuthProperties"
+
+// ModifyCertificateBasedAuthPropertiesRequest generates a "aws/request.Request" representing the
+// client's request for the ModifyCertificateBasedAuthProperties operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ModifyCertificateBasedAuthProperties for more information on using the ModifyCertificateBasedAuthProperties
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ModifyCertificateBasedAuthPropertiesRequest method.
+//	req, resp := client.ModifyCertificateBasedAuthPropertiesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyCertificateBasedAuthProperties
+func (c *WorkSpaces) ModifyCertificateBasedAuthPropertiesRequest(input *ModifyCertificateBasedAuthPropertiesInput) (req *request.Request, output *ModifyCertificateBasedAuthPropertiesOutput) {
+	op := &request.Operation{
+		Name:       opModifyCertificateBasedAuthProperties,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyCertificateBasedAuthPropertiesInput{}
+	}
+
+	output = &ModifyCertificateBasedAuthPropertiesOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// ModifyCertificateBasedAuthProperties API operation for Amazon WorkSpaces.
+//
+// Modifies the properties of the certificate-based authentication you want
+// to use with your WorkSpaces.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation ModifyCertificateBasedAuthProperties for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyCertificateBasedAuthProperties
+func (c *WorkSpaces) ModifyCertificateBasedAuthProperties(input *ModifyCertificateBasedAuthPropertiesInput) (*ModifyCertificateBasedAuthPropertiesOutput, error) {
+	req, out := c.ModifyCertificateBasedAuthPropertiesRequest(input)
+	return out, req.Send()
+}
+
+// ModifyCertificateBasedAuthPropertiesWithContext is the same as ModifyCertificateBasedAuthProperties with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ModifyCertificateBasedAuthProperties for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) ModifyCertificateBasedAuthPropertiesWithContext(ctx aws.Context, input *ModifyCertificateBasedAuthPropertiesInput, opts ...request.Option) (*ModifyCertificateBasedAuthPropertiesOutput, error) {
+	req, out := c.ModifyCertificateBasedAuthPropertiesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opModifyClientProperties = "ModifyClientProperties"
 
 // ModifyClientPropertiesRequest generates a "aws/request.Request" representing the
@@ -2096,14 +5160,13 @@ const opModifyClientProperties = "ModifyClientProperties"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyClientPropertiesRequest method.
+//	req, resp := client.ModifyClientPropertiesRequest(params)
 //
-//    // Example sending a request using the ModifyClientPropertiesRequest method.
-//    req, resp := client.ModifyClientPropertiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyClientProperties
 func (c *WorkSpaces) ModifyClientPropertiesRequest(input *ModifyClientPropertiesInput) (req *request.Request, output *ModifyClientPropertiesOutput) {
@@ -2125,7 +5188,7 @@ func (c *WorkSpaces) ModifyClientPropertiesRequest(input *ModifyClientProperties
 
 // ModifyClientProperties API operation for Amazon WorkSpaces.
 //
-// Modifies the properties of the specified Amazon WorkSpaces client.
+// Modifies the properties of the specified Amazon WorkSpaces clients.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2134,15 +5197,16 @@ func (c *WorkSpaces) ModifyClientPropertiesRequest(input *ModifyClientProperties
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation ModifyClientProperties for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyClientProperties
 func (c *WorkSpaces) ModifyClientProperties(input *ModifyClientPropertiesInput) (*ModifyClientPropertiesOutput, error) {
@@ -2166,6 +5230,358 @@ func (c *WorkSpaces) ModifyClientPropertiesWithContext(ctx aws.Context, input *M
 	return out, req.Send()
 }
 
+const opModifySamlProperties = "ModifySamlProperties"
+
+// ModifySamlPropertiesRequest generates a "aws/request.Request" representing the
+// client's request for the ModifySamlProperties operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ModifySamlProperties for more information on using the ModifySamlProperties
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ModifySamlPropertiesRequest method.
+//	req, resp := client.ModifySamlPropertiesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySamlProperties
+func (c *WorkSpaces) ModifySamlPropertiesRequest(input *ModifySamlPropertiesInput) (req *request.Request, output *ModifySamlPropertiesOutput) {
+	op := &request.Operation{
+		Name:       opModifySamlProperties,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifySamlPropertiesInput{}
+	}
+
+	output = &ModifySamlPropertiesOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// ModifySamlProperties API operation for Amazon WorkSpaces.
+//
+// Modifies multiple properties related to SAML 2.0 authentication, including
+// the enablement status, user access URL, and relay state parameter name that
+// are used for configuring federation with an SAML 2.0 identity provider.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation ModifySamlProperties for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySamlProperties
+func (c *WorkSpaces) ModifySamlProperties(input *ModifySamlPropertiesInput) (*ModifySamlPropertiesOutput, error) {
+	req, out := c.ModifySamlPropertiesRequest(input)
+	return out, req.Send()
+}
+
+// ModifySamlPropertiesWithContext is the same as ModifySamlProperties with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ModifySamlProperties for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) ModifySamlPropertiesWithContext(ctx aws.Context, input *ModifySamlPropertiesInput, opts ...request.Option) (*ModifySamlPropertiesOutput, error) {
+	req, out := c.ModifySamlPropertiesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opModifySelfservicePermissions = "ModifySelfservicePermissions"
+
+// ModifySelfservicePermissionsRequest generates a "aws/request.Request" representing the
+// client's request for the ModifySelfservicePermissions operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ModifySelfservicePermissions for more information on using the ModifySelfservicePermissions
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ModifySelfservicePermissionsRequest method.
+//	req, resp := client.ModifySelfservicePermissionsRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySelfservicePermissions
+func (c *WorkSpaces) ModifySelfservicePermissionsRequest(input *ModifySelfservicePermissionsInput) (req *request.Request, output *ModifySelfservicePermissionsOutput) {
+	op := &request.Operation{
+		Name:       opModifySelfservicePermissions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifySelfservicePermissionsInput{}
+	}
+
+	output = &ModifySelfservicePermissionsOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// ModifySelfservicePermissions API operation for Amazon WorkSpaces.
+//
+// Modifies the self-service WorkSpace management capabilities for your users.
+// For more information, see Enable Self-Service WorkSpace Management Capabilities
+// for Your Users (https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation ModifySelfservicePermissions for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySelfservicePermissions
+func (c *WorkSpaces) ModifySelfservicePermissions(input *ModifySelfservicePermissionsInput) (*ModifySelfservicePermissionsOutput, error) {
+	req, out := c.ModifySelfservicePermissionsRequest(input)
+	return out, req.Send()
+}
+
+// ModifySelfservicePermissionsWithContext is the same as ModifySelfservicePermissions with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ModifySelfservicePermissions for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) ModifySelfservicePermissionsWithContext(ctx aws.Context, input *ModifySelfservicePermissionsInput, opts ...request.Option) (*ModifySelfservicePermissionsOutput, error) {
+	req, out := c.ModifySelfservicePermissionsRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opModifyWorkspaceAccessProperties = "ModifyWorkspaceAccessProperties"
+
+// ModifyWorkspaceAccessPropertiesRequest generates a "aws/request.Request" representing the
+// client's request for the ModifyWorkspaceAccessProperties operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ModifyWorkspaceAccessProperties for more information on using the ModifyWorkspaceAccessProperties
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ModifyWorkspaceAccessPropertiesRequest method.
+//	req, resp := client.ModifyWorkspaceAccessPropertiesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceAccessProperties
+func (c *WorkSpaces) ModifyWorkspaceAccessPropertiesRequest(input *ModifyWorkspaceAccessPropertiesInput) (req *request.Request, output *ModifyWorkspaceAccessPropertiesOutput) {
+	op := &request.Operation{
+		Name:       opModifyWorkspaceAccessProperties,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyWorkspaceAccessPropertiesInput{}
+	}
+
+	output = &ModifyWorkspaceAccessPropertiesOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// ModifyWorkspaceAccessProperties API operation for Amazon WorkSpaces.
+//
+// Specifies which devices and operating systems users can use to access their
+// WorkSpaces. For more information, see Control Device Access (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation ModifyWorkspaceAccessProperties for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceAccessProperties
+func (c *WorkSpaces) ModifyWorkspaceAccessProperties(input *ModifyWorkspaceAccessPropertiesInput) (*ModifyWorkspaceAccessPropertiesOutput, error) {
+	req, out := c.ModifyWorkspaceAccessPropertiesRequest(input)
+	return out, req.Send()
+}
+
+// ModifyWorkspaceAccessPropertiesWithContext is the same as ModifyWorkspaceAccessProperties with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ModifyWorkspaceAccessProperties for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) ModifyWorkspaceAccessPropertiesWithContext(ctx aws.Context, input *ModifyWorkspaceAccessPropertiesInput, opts ...request.Option) (*ModifyWorkspaceAccessPropertiesOutput, error) {
+	req, out := c.ModifyWorkspaceAccessPropertiesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opModifyWorkspaceCreationProperties = "ModifyWorkspaceCreationProperties"
+
+// ModifyWorkspaceCreationPropertiesRequest generates a "aws/request.Request" representing the
+// client's request for the ModifyWorkspaceCreationProperties operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ModifyWorkspaceCreationProperties for more information on using the ModifyWorkspaceCreationProperties
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ModifyWorkspaceCreationPropertiesRequest method.
+//	req, resp := client.ModifyWorkspaceCreationPropertiesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceCreationProperties
+func (c *WorkSpaces) ModifyWorkspaceCreationPropertiesRequest(input *ModifyWorkspaceCreationPropertiesInput) (req *request.Request, output *ModifyWorkspaceCreationPropertiesOutput) {
+	op := &request.Operation{
+		Name:       opModifyWorkspaceCreationProperties,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyWorkspaceCreationPropertiesInput{}
+	}
+
+	output = &ModifyWorkspaceCreationPropertiesOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// ModifyWorkspaceCreationProperties API operation for Amazon WorkSpaces.
+//
+// Modify the default properties used to create WorkSpaces.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation ModifyWorkspaceCreationProperties for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceCreationProperties
+func (c *WorkSpaces) ModifyWorkspaceCreationProperties(input *ModifyWorkspaceCreationPropertiesInput) (*ModifyWorkspaceCreationPropertiesOutput, error) {
+	req, out := c.ModifyWorkspaceCreationPropertiesRequest(input)
+	return out, req.Send()
+}
+
+// ModifyWorkspaceCreationPropertiesWithContext is the same as ModifyWorkspaceCreationProperties with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ModifyWorkspaceCreationProperties for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) ModifyWorkspaceCreationPropertiesWithContext(ctx aws.Context, input *ModifyWorkspaceCreationPropertiesInput, opts ...request.Option) (*ModifyWorkspaceCreationPropertiesOutput, error) {
+	req, out := c.ModifyWorkspaceCreationPropertiesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
 
 // ModifyWorkspacePropertiesRequest generates a "aws/request.Request" representing the
@@ -2182,14 +5598,13 @@ const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyWorkspacePropertiesRequest method.
+//	req, resp := client.ModifyWorkspacePropertiesRequest(params)
 //
-//    // Example sending a request using the ModifyWorkspacePropertiesRequest method.
-//    req, resp := client.ModifyWorkspacePropertiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceProperties
 func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspacePropertiesInput) (req *request.Request, output *ModifyWorkspacePropertiesOutput) {
@@ -2211,7 +5626,13 @@ func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspaceProp
 
 // ModifyWorkspaceProperties API operation for Amazon WorkSpaces.
 //
-// Modifies the specified WorkSpace properties.
+// Modifies the specified WorkSpace properties. For important information about
+// how to modify the size of the root and user volumes, see Modify a WorkSpace
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
+//
+// The MANUAL running mode value is only supported by Amazon WorkSpaces Core.
+// Contact your account team to be allow-listed to use this value. For more
+// information, see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/).
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2220,29 +5641,31 @@ func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspaceProp
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation ModifyWorkspaceProperties for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the resource is not valid for this operation.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeOperationInProgressException "OperationInProgressException"
-//   The properties of this WorkSpace are currently being modified. Try again
-//   in a moment.
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
 //
-//   * ErrCodeUnsupportedWorkspaceConfigurationException "UnsupportedWorkspaceConfigurationException"
-//   The configuration of this WorkSpace is not supported for this operation.
-//   For more information, see the Amazon WorkSpaces Administration Guide (http://docs.aws.amazon.com/workspaces/latest/adminguide/).
+//   - OperationInProgressException
+//     The properties of this WorkSpace are currently being modified. Try again
+//     in a moment.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - UnsupportedWorkspaceConfigurationException
+//     The configuration of this WorkSpace is not supported for this operation.
+//     For more information, see Required Configuration and Service Components for
+//     WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html).
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
-//   * ErrCodeResourceUnavailableException "ResourceUnavailableException"
-//   The specified resource is not available.
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - ResourceUnavailableException
+//     The specified resource is not available.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceProperties
 func (c *WorkSpaces) ModifyWorkspaceProperties(input *ModifyWorkspacePropertiesInput) (*ModifyWorkspacePropertiesOutput, error) {
@@ -2282,14 +5705,13 @@ const opModifyWorkspaceState = "ModifyWorkspaceState"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ModifyWorkspaceStateRequest method.
+//	req, resp := client.ModifyWorkspaceStateRequest(params)
 //
-//    // Example sending a request using the ModifyWorkspaceStateRequest method.
-//    req, resp := client.ModifyWorkspaceStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceState
 func (c *WorkSpaces) ModifyWorkspaceStateRequest(input *ModifyWorkspaceStateInput) (req *request.Request, output *ModifyWorkspaceStateOutput) {
@@ -2315,8 +5737,9 @@ func (c *WorkSpaces) ModifyWorkspaceStateRequest(input *ModifyWorkspaceStateInpu
 //
 // To maintain a WorkSpace without being interrupted, set the WorkSpace state
 // to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests
-// to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is
-// not stopped. Users can log into a WorkSpace in the ADMIN_MAINTENANCE state.
+// to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this
+// state is not stopped. Users cannot log into a WorkSpace in the ADMIN_MAINTENANCE
+// state.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2325,15 +5748,19 @@ func (c *WorkSpaces) ModifyWorkspaceStateRequest(input *ModifyWorkspaceStateInpu
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation ModifyWorkspaceState for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the resource is not valid for this operation.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceState
 func (c *WorkSpaces) ModifyWorkspaceState(input *ModifyWorkspaceStateInput) (*ModifyWorkspaceStateOutput, error) {
@@ -2373,14 +5800,13 @@ const opRebootWorkspaces = "RebootWorkspaces"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RebootWorkspacesRequest method.
+//	req, resp := client.RebootWorkspacesRequest(params)
 //
-//    // Example sending a request using the RebootWorkspacesRequest method.
-//    req, resp := client.RebootWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspaces
 func (c *WorkSpaces) RebootWorkspacesRequest(input *RebootWorkspacesInput) (req *request.Request, output *RebootWorkspacesOutput) {
@@ -2413,6 +5839,11 @@ func (c *WorkSpaces) RebootWorkspacesRequest(input *RebootWorkspacesInput) (req 
 //
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation RebootWorkspaces for usage and error information.
+//
+// Returned Error Types:
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspaces
 func (c *WorkSpaces) RebootWorkspaces(input *RebootWorkspacesInput) (*RebootWorkspacesOutput, error) {
 	req, out := c.RebootWorkspacesRequest(input)
@@ -2451,14 +5882,13 @@ const opRebuildWorkspaces = "RebuildWorkspaces"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RebuildWorkspacesRequest method.
+//	req, resp := client.RebuildWorkspacesRequest(params)
 //
-//    // Example sending a request using the RebuildWorkspacesRequest method.
-//    req, resp := client.RebuildWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspaces
 func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) (req *request.Request, output *RebuildWorkspacesOutput) {
@@ -2481,10 +5911,11 @@ func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) (re
 //
 // Rebuilds the specified WorkSpace.
 //
-// You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, or UNHEALTHY.
+// You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, UNHEALTHY,
+// STOPPED, or REBOOTING.
 //
 // Rebuilding a WorkSpace is a potentially destructive action that can result
-// in the loss of data. For more information, see Rebuild a WorkSpace (http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html).
+// in the loss of data. For more information, see Rebuild a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html).
 //
 // This operation is asynchronous and returns before the WorkSpaces have been
 // completely rebuilt.
@@ -2495,6 +5926,11 @@ func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) (re
 //
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation RebuildWorkspaces for usage and error information.
+//
+// Returned Error Types:
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspaces
 func (c *WorkSpaces) RebuildWorkspaces(input *RebuildWorkspacesInput) (*RebuildWorkspacesOutput, error) {
 	req, out := c.RebuildWorkspacesRequest(input)
@@ -2517,6 +5953,215 @@ func (c *WorkSpaces) RebuildWorkspacesWithContext(ctx aws.Context, input *Rebuil
 	return out, req.Send()
 }
 
+const opRegisterWorkspaceDirectory = "RegisterWorkspaceDirectory"
+
+// RegisterWorkspaceDirectoryRequest generates a "aws/request.Request" representing the
+// client's request for the RegisterWorkspaceDirectory operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RegisterWorkspaceDirectory for more information on using the RegisterWorkspaceDirectory
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RegisterWorkspaceDirectoryRequest method.
+//	req, resp := client.RegisterWorkspaceDirectoryRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RegisterWorkspaceDirectory
+func (c *WorkSpaces) RegisterWorkspaceDirectoryRequest(input *RegisterWorkspaceDirectoryInput) (req *request.Request, output *RegisterWorkspaceDirectoryOutput) {
+	op := &request.Operation{
+		Name:       opRegisterWorkspaceDirectory,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RegisterWorkspaceDirectoryInput{}
+	}
+
+	output = &RegisterWorkspaceDirectoryOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// RegisterWorkspaceDirectory API operation for Amazon WorkSpaces.
+//
+// Registers the specified directory. This operation is asynchronous and returns
+// before the WorkSpace directory is registered. If this is the first time you
+// are registering a directory, you will need to create the workspaces_DefaultRole
+// role before you can register a directory. For more information, see Creating
+// the workspaces_DefaultRole Role (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role).
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation RegisterWorkspaceDirectory for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - WorkspacesDefaultRoleNotFoundException
+//     The workspaces_DefaultRole role could not be found. If this is the first
+//     time you are registering a directory, you will need to create the workspaces_DefaultRole
+//     role before you can register a directory. For more information, see Creating
+//     the workspaces_DefaultRole Role (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role).
+//
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - UnsupportedNetworkConfigurationException
+//     The configuration of this network is not supported for this operation, or
+//     your network configuration conflicts with the Amazon WorkSpaces management
+//     network IP range. For more information, see Configure a VPC for Amazon WorkSpaces
+//     (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html).
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RegisterWorkspaceDirectory
+func (c *WorkSpaces) RegisterWorkspaceDirectory(input *RegisterWorkspaceDirectoryInput) (*RegisterWorkspaceDirectoryOutput, error) {
+	req, out := c.RegisterWorkspaceDirectoryRequest(input)
+	return out, req.Send()
+}
+
+// RegisterWorkspaceDirectoryWithContext is the same as RegisterWorkspaceDirectory with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RegisterWorkspaceDirectory for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) RegisterWorkspaceDirectoryWithContext(ctx aws.Context, input *RegisterWorkspaceDirectoryInput, opts ...request.Option) (*RegisterWorkspaceDirectoryOutput, error) {
+	req, out := c.RegisterWorkspaceDirectoryRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opRestoreWorkspace = "RestoreWorkspace"
+
+// RestoreWorkspaceRequest generates a "aws/request.Request" representing the
+// client's request for the RestoreWorkspace operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See RestoreWorkspace for more information on using the RestoreWorkspace
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the RestoreWorkspaceRequest method.
+//	req, resp := client.RestoreWorkspaceRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspace
+func (c *WorkSpaces) RestoreWorkspaceRequest(input *RestoreWorkspaceInput) (req *request.Request, output *RestoreWorkspaceOutput) {
+	op := &request.Operation{
+		Name:       opRestoreWorkspace,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RestoreWorkspaceInput{}
+	}
+
+	output = &RestoreWorkspaceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// RestoreWorkspace API operation for Amazon WorkSpaces.
+//
+// Restores the specified WorkSpace to its last known healthy state.
+//
+// You cannot restore a WorkSpace unless its state is AVAILABLE, ERROR, UNHEALTHY,
+// or STOPPED.
+//
+// Restoring a WorkSpace is a potentially destructive action that can result
+// in the loss of data. For more information, see Restore a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html).
+//
+// This operation is asynchronous and returns before the WorkSpace is completely
+// restored.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation RestoreWorkspace for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspace
+func (c *WorkSpaces) RestoreWorkspace(input *RestoreWorkspaceInput) (*RestoreWorkspaceOutput, error) {
+	req, out := c.RestoreWorkspaceRequest(input)
+	return out, req.Send()
+}
+
+// RestoreWorkspaceWithContext is the same as RestoreWorkspace with the addition of
+// the ability to pass a context and additional request options.
+//
+// See RestoreWorkspace for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) RestoreWorkspaceWithContext(ctx aws.Context, input *RestoreWorkspaceInput, opts ...request.Option) (*RestoreWorkspaceOutput, error) {
+	req, out := c.RestoreWorkspaceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opRevokeIpRules = "RevokeIpRules"
 
 // RevokeIpRulesRequest generates a "aws/request.Request" representing the
@@ -2533,14 +6178,13 @@ const opRevokeIpRules = "RevokeIpRules"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RevokeIpRulesRequest method.
+//	req, resp := client.RevokeIpRulesRequest(params)
 //
-//    // Example sending a request using the RevokeIpRulesRequest method.
-//    req, resp := client.RevokeIpRulesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RevokeIpRules
 func (c *WorkSpaces) RevokeIpRulesRequest(input *RevokeIpRulesInput) (req *request.Request, output *RevokeIpRulesOutput) {
@@ -2571,18 +6215,19 @@ func (c *WorkSpaces) RevokeIpRulesRequest(input *RevokeIpRulesInput) (req *reque
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation RevokeIpRules for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the resource is not valid for this operation.
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RevokeIpRules
 func (c *WorkSpaces) RevokeIpRules(input *RevokeIpRulesInput) (*RevokeIpRulesOutput, error) {
@@ -2622,14 +6267,13 @@ const opStartWorkspaces = "StartWorkspaces"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StartWorkspacesRequest method.
+//	req, resp := client.StartWorkspacesRequest(params)
 //
-//    // Example sending a request using the StartWorkspacesRequest method.
-//    req, resp := client.StartWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspaces
 func (c *WorkSpaces) StartWorkspacesRequest(input *StartWorkspacesInput) (req *request.Request, output *StartWorkspacesOutput) {
@@ -2699,14 +6343,13 @@ const opStopWorkspaces = "StopWorkspaces"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the StopWorkspacesRequest method.
+//	req, resp := client.StopWorkspacesRequest(params)
 //
-//    // Example sending a request using the StopWorkspacesRequest method.
-//    req, resp := client.StopWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspaces
 func (c *WorkSpaces) StopWorkspacesRequest(input *StopWorkspacesInput) (req *request.Request, output *StopWorkspacesOutput) {
@@ -2776,14 +6419,13 @@ const opTerminateWorkspaces = "TerminateWorkspaces"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the TerminateWorkspacesRequest method.
+//	req, resp := client.TerminateWorkspacesRequest(params)
 //
-//    // Example sending a request using the TerminateWorkspacesRequest method.
-//    req, resp := client.TerminateWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspaces
 func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput) (req *request.Request, output *TerminateWorkspacesOutput) {
@@ -2808,12 +6450,28 @@ func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput)
 //
 // Terminating a WorkSpace is a permanent action and cannot be undone. The user's
 // data is destroyed. If you need to archive any user data, contact Amazon Web
-// Services before terminating the WorkSpace.
+// Services Support before terminating the WorkSpace.
 //
 // You can terminate a WorkSpace that is in any state except SUSPENDED.
 //
 // This operation is asynchronous and returns before the WorkSpaces have been
-// completely terminated.
+// completely terminated. After a WorkSpace is terminated, the TERMINATED state
+// is returned only briefly before the WorkSpace directory metadata is cleaned
+// up, so this state is rarely returned. To confirm that a WorkSpace is terminated,
+// check for the WorkSpace ID by using DescribeWorkSpaces (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html).
+// If the WorkSpace ID isn't returned, then the WorkSpace has been successfully
+// terminated.
+//
+// Simple AD and AD Connector are made available to you free of charge to use
+// with WorkSpaces. If there are no WorkSpaces being used with your Simple AD
+// or AD Connector directory for 30 consecutive days, this directory will be
+// automatically deregistered for use with Amazon WorkSpaces, and you will be
+// charged for this directory as per the Directory Service pricing terms (http://aws.amazon.com/directoryservice/pricing/).
+//
+// To delete empty directories, see Delete the Directory for Your WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html).
+// If you delete your Simple AD or AD Connector directory, you can always create
+// a new one when you want to start using WorkSpaces again.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -2843,6 +6501,206 @@ func (c *WorkSpaces) TerminateWorkspacesWithContext(ctx aws.Context, input *Term
 	return out, req.Send()
 }
 
+const opUpdateConnectClientAddIn = "UpdateConnectClientAddIn"
+
+// UpdateConnectClientAddInRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateConnectClientAddIn operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateConnectClientAddIn for more information on using the UpdateConnectClientAddIn
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateConnectClientAddInRequest method.
+//	req, resp := client.UpdateConnectClientAddInRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectClientAddIn
+func (c *WorkSpaces) UpdateConnectClientAddInRequest(input *UpdateConnectClientAddInInput) (req *request.Request, output *UpdateConnectClientAddInOutput) {
+	op := &request.Operation{
+		Name:       opUpdateConnectClientAddIn,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateConnectClientAddInInput{}
+	}
+
+	output = &UpdateConnectClientAddInOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateConnectClientAddIn API operation for Amazon WorkSpaces.
+//
+// Updates a Amazon Connect client add-in. Use this action to update the name
+// and endpoint URL of a Amazon Connect client add-in.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation UpdateConnectClientAddIn for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectClientAddIn
+func (c *WorkSpaces) UpdateConnectClientAddIn(input *UpdateConnectClientAddInInput) (*UpdateConnectClientAddInOutput, error) {
+	req, out := c.UpdateConnectClientAddInRequest(input)
+	return out, req.Send()
+}
+
+// UpdateConnectClientAddInWithContext is the same as UpdateConnectClientAddIn with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateConnectClientAddIn for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) UpdateConnectClientAddInWithContext(ctx aws.Context, input *UpdateConnectClientAddInInput, opts ...request.Option) (*UpdateConnectClientAddInOutput, error) {
+	req, out := c.UpdateConnectClientAddInRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateConnectionAliasPermission = "UpdateConnectionAliasPermission"
+
+// UpdateConnectionAliasPermissionRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateConnectionAliasPermission operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateConnectionAliasPermission for more information on using the UpdateConnectionAliasPermission
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateConnectionAliasPermissionRequest method.
+//	req, resp := client.UpdateConnectionAliasPermissionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectionAliasPermission
+func (c *WorkSpaces) UpdateConnectionAliasPermissionRequest(input *UpdateConnectionAliasPermissionInput) (req *request.Request, output *UpdateConnectionAliasPermissionOutput) {
+	op := &request.Operation{
+		Name:       opUpdateConnectionAliasPermission,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateConnectionAliasPermissionInput{}
+	}
+
+	output = &UpdateConnectionAliasPermissionOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateConnectionAliasPermission API operation for Amazon WorkSpaces.
+//
+// Shares or unshares a connection alias with one account by specifying whether
+// that account has permission to associate the connection alias with a directory.
+// If the association permission is granted, the connection alias is shared
+// with that account. If the association permission is revoked, the connection
+// alias is unshared with the account. For more information, see Cross-Region
+// Redirection for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+//
+//   - Before performing this operation, call DescribeConnectionAliases (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html)
+//     to make sure that the current state of the connection alias is CREATED.
+//
+//   - To delete a connection alias that has been shared, the shared account
+//     must first disassociate the connection alias from any directories it has
+//     been associated with. Then you must unshare the connection alias from
+//     the account it has been shared with. You can delete a connection alias
+//     only after it is no longer shared with any accounts or associated with
+//     any directories.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation UpdateConnectionAliasPermission for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ResourceAssociatedException
+//     The resource is associated with a directory.
+//
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectionAliasPermission
+func (c *WorkSpaces) UpdateConnectionAliasPermission(input *UpdateConnectionAliasPermissionInput) (*UpdateConnectionAliasPermissionOutput, error) {
+	req, out := c.UpdateConnectionAliasPermissionRequest(input)
+	return out, req.Send()
+}
+
+// UpdateConnectionAliasPermissionWithContext is the same as UpdateConnectionAliasPermission with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateConnectionAliasPermission for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) UpdateConnectionAliasPermissionWithContext(ctx aws.Context, input *UpdateConnectionAliasPermissionInput, opts ...request.Option) (*UpdateConnectionAliasPermissionOutput, error) {
+	req, out := c.UpdateConnectionAliasPermissionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateRulesOfIpGroup = "UpdateRulesOfIpGroup"
 
 // UpdateRulesOfIpGroupRequest generates a "aws/request.Request" representing the
@@ -2859,14 +6717,13 @@ const opUpdateRulesOfIpGroup = "UpdateRulesOfIpGroup"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateRulesOfIpGroupRequest method.
+//	req, resp := client.UpdateRulesOfIpGroupRequest(params)
 //
-//    // Example sending a request using the UpdateRulesOfIpGroupRequest method.
-//    req, resp := client.UpdateRulesOfIpGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateRulesOfIpGroup
 func (c *WorkSpaces) UpdateRulesOfIpGroupRequest(input *UpdateRulesOfIpGroupInput) (req *request.Request, output *UpdateRulesOfIpGroupOutput) {
@@ -2898,21 +6755,22 @@ func (c *WorkSpaces) UpdateRulesOfIpGroupRequest(input *UpdateRulesOfIpGroupInpu
 // See the AWS API reference guide for Amazon WorkSpaces's
 // API operation UpdateRulesOfIpGroup for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
+// Returned Error Types:
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
 //
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Your resource limits have been exceeded.
+//   - ResourceNotFoundException
+//     The resource could not be found.
 //
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the resource is not valid for this operation.
+//   - ResourceLimitExceededException
+//     Your resource limits have been exceeded.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
+//   - InvalidResourceStateException
+//     The state of the resource is not valid for this operation.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateRulesOfIpGroup
 func (c *WorkSpaces) UpdateRulesOfIpGroup(input *UpdateRulesOfIpGroupInput) (*UpdateRulesOfIpGroupOutput, error) {
@@ -2936,7 +6794,283 @@ func (c *WorkSpaces) UpdateRulesOfIpGroupWithContext(ctx aws.Context, input *Upd
 	return out, req.Send()
 }
 
-// Describes a modification to the configuration of bring your own license (BYOL)
+const opUpdateWorkspaceBundle = "UpdateWorkspaceBundle"
+
+// UpdateWorkspaceBundleRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateWorkspaceBundle operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateWorkspaceBundle for more information on using the UpdateWorkspaceBundle
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateWorkspaceBundleRequest method.
+//	req, resp := client.UpdateWorkspaceBundleRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceBundle
+func (c *WorkSpaces) UpdateWorkspaceBundleRequest(input *UpdateWorkspaceBundleInput) (req *request.Request, output *UpdateWorkspaceBundleOutput) {
+	op := &request.Operation{
+		Name:       opUpdateWorkspaceBundle,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateWorkspaceBundleInput{}
+	}
+
+	output = &UpdateWorkspaceBundleOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateWorkspaceBundle API operation for Amazon WorkSpaces.
+//
+// Updates a WorkSpace bundle with a new image. For more information about updating
+// WorkSpace bundles, see Update a Custom WorkSpaces Bundle (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html).
+//
+// Existing WorkSpaces aren't automatically updated when you update the bundle
+// that they're based on. To update existing WorkSpaces that are based on a
+// bundle that you've updated, you must either rebuild the WorkSpaces or delete
+// and recreate them.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation UpdateWorkspaceBundle for usage and error information.
+//
+// Returned Error Types:
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ResourceUnavailableException
+//     The specified resource is not available.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceBundle
+func (c *WorkSpaces) UpdateWorkspaceBundle(input *UpdateWorkspaceBundleInput) (*UpdateWorkspaceBundleOutput, error) {
+	req, out := c.UpdateWorkspaceBundleRequest(input)
+	return out, req.Send()
+}
+
+// UpdateWorkspaceBundleWithContext is the same as UpdateWorkspaceBundle with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateWorkspaceBundle for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) UpdateWorkspaceBundleWithContext(ctx aws.Context, input *UpdateWorkspaceBundleInput, opts ...request.Option) (*UpdateWorkspaceBundleOutput, error) {
+	req, out := c.UpdateWorkspaceBundleRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateWorkspaceImagePermission = "UpdateWorkspaceImagePermission"
+
+// UpdateWorkspaceImagePermissionRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateWorkspaceImagePermission operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateWorkspaceImagePermission for more information on using the UpdateWorkspaceImagePermission
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateWorkspaceImagePermissionRequest method.
+//	req, resp := client.UpdateWorkspaceImagePermissionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceImagePermission
+func (c *WorkSpaces) UpdateWorkspaceImagePermissionRequest(input *UpdateWorkspaceImagePermissionInput) (req *request.Request, output *UpdateWorkspaceImagePermissionOutput) {
+	op := &request.Operation{
+		Name:       opUpdateWorkspaceImagePermission,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateWorkspaceImagePermissionInput{}
+	}
+
+	output = &UpdateWorkspaceImagePermissionOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateWorkspaceImagePermission API operation for Amazon WorkSpaces.
+//
+// Shares or unshares an image with one account in the same Amazon Web Services
+// Region by specifying whether that account has permission to copy the image.
+// If the copy image permission is granted, the image is shared with that account.
+// If the copy image permission is revoked, the image is unshared with the account.
+//
+// After an image has been shared, the recipient account can copy the image
+// to other Regions as needed.
+//
+// In the China (Ningxia) Region, you can copy images only within the same Region.
+//
+// In Amazon Web Services GovCloud (US), to copy images to and from other Regions,
+// contact Amazon Web Services Support.
+//
+// For more information about sharing images, see Share or Unshare a Custom
+// WorkSpaces Image (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html).
+//
+//   - To delete an image that has been shared, you must unshare the image
+//     before you delete it.
+//
+//   - Sharing Bring Your Own License (BYOL) images across Amazon Web Services
+//     accounts isn't supported at this time in Amazon Web Services GovCloud
+//     (US). To share BYOL images across accounts in Amazon Web Services GovCloud
+//     (US), contact Amazon Web Services Support.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon WorkSpaces's
+// API operation UpdateWorkspaceImagePermission for usage and error information.
+//
+// Returned Error Types:
+//
+//   - ResourceNotFoundException
+//     The resource could not be found.
+//
+//   - ResourceUnavailableException
+//     The specified resource is not available.
+//
+//   - AccessDeniedException
+//     The user is not authorized to access a resource.
+//
+//   - InvalidParameterValuesException
+//     One or more parameter values are not valid.
+//
+//   - OperationNotSupportedException
+//     This operation is not supported.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceImagePermission
+func (c *WorkSpaces) UpdateWorkspaceImagePermission(input *UpdateWorkspaceImagePermissionInput) (*UpdateWorkspaceImagePermissionOutput, error) {
+	req, out := c.UpdateWorkspaceImagePermissionRequest(input)
+	return out, req.Send()
+}
+
+// UpdateWorkspaceImagePermissionWithContext is the same as UpdateWorkspaceImagePermission with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateWorkspaceImagePermission for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *WorkSpaces) UpdateWorkspaceImagePermissionWithContext(ctx aws.Context, input *UpdateWorkspaceImagePermissionInput, opts ...request.Option) (*UpdateWorkspaceImagePermissionOutput, error) {
+	req, out := c.UpdateWorkspaceImagePermissionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// The user is not authorized to access a resource.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Describes a modification to the configuration of Bring Your Own License (BYOL)
 // for the specified account.
 type AccountModification struct {
 	_ struct{} `type:"structure"`
@@ -2962,12 +7096,20 @@ type AccountModification struct {
 	StartTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AccountModification) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AccountModification) GoString() string {
 	return s.String()
 }
@@ -3008,13 +7150,262 @@ func (s *AccountModification) SetStartTime(v time.Time) *AccountModification {
 	return s
 }
 
+// The specified application is not supported.
+type ApplicationNotSupportedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationNotSupportedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationNotSupportedException) GoString() string {
+	return s.String()
+}
+
+func newErrorApplicationNotSupportedException(v protocol.ResponseMetadata) error {
+	return &ApplicationNotSupportedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ApplicationNotSupportedException) Code() string {
+	return "ApplicationNotSupportedException"
+}
+
+// Message returns the exception's message.
+func (s *ApplicationNotSupportedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ApplicationNotSupportedException) OrigErr() error {
+	return nil
+}
+
+func (s *ApplicationNotSupportedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ApplicationNotSupportedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ApplicationNotSupportedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Describes the association between an application and an application resource.
+type ApplicationResourceAssociation struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the application.
+	ApplicationId *string `type:"string"`
+
+	// The identifier of the associated resource.
+	AssociatedResourceId *string `min:"1" type:"string"`
+
+	// The resource type of the associated resource.
+	AssociatedResourceType *string `type:"string" enum:"ApplicationAssociatedResourceType"`
+
+	// The time the association was created.
+	Created *time.Time `type:"timestamp"`
+
+	// The time the association status was last updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// The status of the application resource association.
+	State *string `type:"string" enum:"AssociationState"`
+
+	// The reason the association deployment failed.
+	StateReason *AssociationStateReason `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationResourceAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ApplicationResourceAssociation) GoString() string {
+	return s.String()
+}
+
+// SetApplicationId sets the ApplicationId field's value.
+func (s *ApplicationResourceAssociation) SetApplicationId(v string) *ApplicationResourceAssociation {
+	s.ApplicationId = &v
+	return s
+}
+
+// SetAssociatedResourceId sets the AssociatedResourceId field's value.
+func (s *ApplicationResourceAssociation) SetAssociatedResourceId(v string) *ApplicationResourceAssociation {
+	s.AssociatedResourceId = &v
+	return s
+}
+
+// SetAssociatedResourceType sets the AssociatedResourceType field's value.
+func (s *ApplicationResourceAssociation) SetAssociatedResourceType(v string) *ApplicationResourceAssociation {
+	s.AssociatedResourceType = &v
+	return s
+}
+
+// SetCreated sets the Created field's value.
+func (s *ApplicationResourceAssociation) SetCreated(v time.Time) *ApplicationResourceAssociation {
+	s.Created = &v
+	return s
+}
+
+// SetLastUpdatedTime sets the LastUpdatedTime field's value.
+func (s *ApplicationResourceAssociation) SetLastUpdatedTime(v time.Time) *ApplicationResourceAssociation {
+	s.LastUpdatedTime = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *ApplicationResourceAssociation) SetState(v string) *ApplicationResourceAssociation {
+	s.State = &v
+	return s
+}
+
+// SetStateReason sets the StateReason field's value.
+func (s *ApplicationResourceAssociation) SetStateReason(v *AssociationStateReason) *ApplicationResourceAssociation {
+	s.StateReason = v
+	return s
+}
+
+type AssociateConnectionAliasInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the connection alias.
+	//
+	// AliasId is a required field
+	AliasId *string `min:"13" type:"string" required:"true"`
+
+	// The identifier of the directory to associate the connection alias with.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateConnectionAliasInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateConnectionAliasInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateConnectionAliasInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AssociateConnectionAliasInput"}
+	if s.AliasId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AliasId"))
+	}
+	if s.AliasId != nil && len(*s.AliasId) < 13 {
+		invalidParams.Add(request.NewErrParamMinLen("AliasId", 13))
+	}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAliasId sets the AliasId field's value.
+func (s *AssociateConnectionAliasInput) SetAliasId(v string) *AssociateConnectionAliasInput {
+	s.AliasId = &v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *AssociateConnectionAliasInput) SetResourceId(v string) *AssociateConnectionAliasInput {
+	s.ResourceId = &v
+	return s
+}
+
+type AssociateConnectionAliasOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the connection alias association. You use the connection
+	// identifier in the DNS TXT record when you're configuring your DNS routing
+	// policies.
+	ConnectionIdentifier *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateConnectionAliasOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateConnectionAliasOutput) GoString() string {
+	return s.String()
+}
+
+// SetConnectionIdentifier sets the ConnectionIdentifier field's value.
+func (s *AssociateConnectionAliasOutput) SetConnectionIdentifier(v string) *AssociateConnectionAliasOutput {
+	s.ConnectionIdentifier = &v
+	return s
+}
+
 type AssociateIpGroupsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The identifier of the directory.
 	//
 	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
+	DirectoryId *string `min:"10" type:"string" required:"true"`
 
 	// The identifiers of one or more IP access control groups.
 	//
@@ -3022,12 +7413,20 @@ type AssociateIpGroupsInput struct {
 	GroupIds []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateIpGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateIpGroupsInput) GoString() string {
 	return s.String()
 }
@@ -3037,6 +7436,9 @@ func (s *AssociateIpGroupsInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "AssociateIpGroupsInput"}
 	if s.DirectoryId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("DirectoryId", 10))
 	}
 	if s.GroupIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("GroupIds"))
@@ -3064,14 +7466,156 @@ type AssociateIpGroupsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateIpGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AssociateIpGroupsOutput) GoString() string {
 	return s.String()
+}
+
+type AssociateWorkspaceApplicationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the application.
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `type:"string" required:"true"`
+
+	// The identifier of the WorkSpace.
+	//
+	// WorkspaceId is a required field
+	WorkspaceId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateWorkspaceApplicationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateWorkspaceApplicationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateWorkspaceApplicationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AssociateWorkspaceApplicationInput"}
+	if s.ApplicationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+	}
+	if s.WorkspaceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationId sets the ApplicationId field's value.
+func (s *AssociateWorkspaceApplicationInput) SetApplicationId(v string) *AssociateWorkspaceApplicationInput {
+	s.ApplicationId = &v
+	return s
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *AssociateWorkspaceApplicationInput) SetWorkspaceId(v string) *AssociateWorkspaceApplicationInput {
+	s.WorkspaceId = &v
+	return s
+}
+
+type AssociateWorkspaceApplicationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the association between the specified WorkSpace and the
+	// specified application.
+	Association *WorkspaceResourceAssociation `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateWorkspaceApplicationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociateWorkspaceApplicationOutput) GoString() string {
+	return s.String()
+}
+
+// SetAssociation sets the Association field's value.
+func (s *AssociateWorkspaceApplicationOutput) SetAssociation(v *WorkspaceResourceAssociation) *AssociateWorkspaceApplicationOutput {
+	s.Association = v
+	return s
+}
+
+// Indicates the reason that the association deployment failed, including the
+// error code and error message.
+type AssociationStateReason struct {
+	_ struct{} `type:"structure"`
+
+	// The error code of the association deployment failure.
+	ErrorCode *string `type:"string" enum:"AssociationErrorCode"`
+
+	// The error message of the association deployment failure.
+	ErrorMessage *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociationStateReason) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AssociationStateReason) GoString() string {
+	return s.String()
+}
+
+// SetErrorCode sets the ErrorCode field's value.
+func (s *AssociationStateReason) SetErrorCode(v string) *AssociationStateReason {
+	s.ErrorCode = &v
+	return s
+}
+
+// SetErrorMessage sets the ErrorMessage field's value.
+func (s *AssociationStateReason) SetErrorMessage(v string) *AssociationStateReason {
+	s.ErrorMessage = &v
+	return s
 }
 
 type AuthorizeIpRulesInput struct {
@@ -3088,12 +7632,20 @@ type AuthorizeIpRulesInput struct {
 	UserRules []*IpRuleItem `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AuthorizeIpRulesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AuthorizeIpRulesInput) GoString() string {
 	return s.String()
 }
@@ -3130,19 +7682,175 @@ type AuthorizeIpRulesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AuthorizeIpRulesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AuthorizeIpRulesOutput) GoString() string {
 	return s.String()
+}
+
+// Describes the association between an application and a bundle resource.
+type BundleResourceAssociation struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the associated resource.
+	AssociatedResourceId *string `min:"1" type:"string"`
+
+	// The resource type of the associated resources.
+	AssociatedResourceType *string `type:"string" enum:"BundleAssociatedResourceType"`
+
+	// The identifier of the bundle.
+	BundleId *string `type:"string"`
+
+	// The time the association is created.
+	Created *time.Time `type:"timestamp"`
+
+	// The time the association status was last updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// The status of the bundle resource association.
+	State *string `type:"string" enum:"AssociationState"`
+
+	// The reason the association deployment failed.
+	StateReason *AssociationStateReason `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BundleResourceAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BundleResourceAssociation) GoString() string {
+	return s.String()
+}
+
+// SetAssociatedResourceId sets the AssociatedResourceId field's value.
+func (s *BundleResourceAssociation) SetAssociatedResourceId(v string) *BundleResourceAssociation {
+	s.AssociatedResourceId = &v
+	return s
+}
+
+// SetAssociatedResourceType sets the AssociatedResourceType field's value.
+func (s *BundleResourceAssociation) SetAssociatedResourceType(v string) *BundleResourceAssociation {
+	s.AssociatedResourceType = &v
+	return s
+}
+
+// SetBundleId sets the BundleId field's value.
+func (s *BundleResourceAssociation) SetBundleId(v string) *BundleResourceAssociation {
+	s.BundleId = &v
+	return s
+}
+
+// SetCreated sets the Created field's value.
+func (s *BundleResourceAssociation) SetCreated(v time.Time) *BundleResourceAssociation {
+	s.Created = &v
+	return s
+}
+
+// SetLastUpdatedTime sets the LastUpdatedTime field's value.
+func (s *BundleResourceAssociation) SetLastUpdatedTime(v time.Time) *BundleResourceAssociation {
+	s.LastUpdatedTime = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *BundleResourceAssociation) SetState(v string) *BundleResourceAssociation {
+	s.State = &v
+	return s
+}
+
+// SetStateReason sets the StateReason field's value.
+func (s *BundleResourceAssociation) SetStateReason(v *AssociationStateReason) *BundleResourceAssociation {
+	s.StateReason = v
+	return s
+}
+
+// Describes the properties of the certificate-based authentication you want
+// to use with your WorkSpaces.
+type CertificateBasedAuthProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Certificate Manager
+	// Private CA resource.
+	CertificateAuthorityArn *string `min:"5" type:"string"`
+
+	// The status of the certificate-based authentication properties.
+	Status *string `type:"string" enum:"CertificateBasedAuthStatusEnum"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateBasedAuthProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CertificateBasedAuthProperties) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CertificateBasedAuthProperties) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CertificateBasedAuthProperties"}
+	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
+		invalidParams.Add(request.NewErrParamMinLen("CertificateAuthorityArn", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCertificateAuthorityArn sets the CertificateAuthorityArn field's value.
+func (s *CertificateBasedAuthProperties) SetCertificateAuthorityArn(v string) *CertificateBasedAuthProperties {
+	s.CertificateAuthorityArn = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *CertificateBasedAuthProperties) SetStatus(v string) *CertificateBasedAuthProperties {
+	s.Status = &v
+	return s
 }
 
 // Describes an Amazon WorkSpaces client.
 type ClientProperties struct {
 	_ struct{} `type:"structure"`
+
+	// Specifies whether users can upload diagnostic log files of Amazon WorkSpaces
+	// client directly to WorkSpaces to troubleshoot issues when using the WorkSpaces
+	// client. When enabled, the log files will be sent to WorkSpaces automatically
+	// and will be applied to all users in the specified directory.
+	LogUploadEnabled *string `type:"string" enum:"LogUploadEnum"`
 
 	// Specifies whether users can cache their credentials on the Amazon WorkSpaces
 	// client. When enabled, users can choose to reconnect to their WorkSpaces without
@@ -3150,14 +7858,28 @@ type ClientProperties struct {
 	ReconnectEnabled *string `type:"string" enum:"ReconnectEnum"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ClientProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ClientProperties) GoString() string {
 	return s.String()
+}
+
+// SetLogUploadEnabled sets the LogUploadEnabled field's value.
+func (s *ClientProperties) SetLogUploadEnabled(v string) *ClientProperties {
+	s.LogUploadEnabled = &v
+	return s
 }
 
 // SetReconnectEnabled sets the ReconnectEnabled field's value.
@@ -3177,12 +7899,20 @@ type ClientPropertiesResult struct {
 	ResourceId *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ClientPropertiesResult) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ClientPropertiesResult) GoString() string {
 	return s.String()
 }
@@ -3199,7 +7929,71 @@ func (s *ClientPropertiesResult) SetResourceId(v string) *ClientPropertiesResult
 	return s
 }
 
-// Describes the compute type.
+// The compute type of the WorkSpace is not compatible with the application.
+type ComputeNotCompatibleException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ComputeNotCompatibleException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ComputeNotCompatibleException) GoString() string {
+	return s.String()
+}
+
+func newErrorComputeNotCompatibleException(v protocol.ResponseMetadata) error {
+	return &ComputeNotCompatibleException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ComputeNotCompatibleException) Code() string {
+	return "ComputeNotCompatibleException"
+}
+
+// Message returns the exception's message.
+func (s *ComputeNotCompatibleException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ComputeNotCompatibleException) OrigErr() error {
+	return nil
+}
+
+func (s *ComputeNotCompatibleException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ComputeNotCompatibleException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ComputeNotCompatibleException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Describes the compute type of the bundle.
 type ComputeType struct {
 	_ struct{} `type:"structure"`
 
@@ -3207,12 +8001,20 @@ type ComputeType struct {
 	Name *string `type:"string" enum:"Compute"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ComputeType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ComputeType) GoString() string {
 	return s.String()
 }
@@ -3220,6 +8022,628 @@ func (s ComputeType) GoString() string {
 // SetName sets the Name field's value.
 func (s *ComputeType) SetName(v string) *ComputeType {
 	s.Name = &v
+	return s
+}
+
+// Describes an Amazon Connect client add-in.
+type ConnectClientAddIn struct {
+	_ struct{} `type:"structure"`
+
+	// The client add-in identifier.
+	AddInId *string `min:"36" type:"string"`
+
+	// The name of the client add in.
+	Name *string `min:"1" type:"string"`
+
+	// The directory identifier for which the client add-in is configured.
+	ResourceId *string `min:"10" type:"string"`
+
+	// The endpoint URL of the client add-in.
+	URL *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConnectClientAddIn) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConnectClientAddIn) GoString() string {
+	return s.String()
+}
+
+// SetAddInId sets the AddInId field's value.
+func (s *ConnectClientAddIn) SetAddInId(v string) *ConnectClientAddIn {
+	s.AddInId = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *ConnectClientAddIn) SetName(v string) *ConnectClientAddIn {
+	s.Name = &v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *ConnectClientAddIn) SetResourceId(v string) *ConnectClientAddIn {
+	s.ResourceId = &v
+	return s
+}
+
+// SetURL sets the URL field's value.
+func (s *ConnectClientAddIn) SetURL(v string) *ConnectClientAddIn {
+	s.URL = &v
+	return s
+}
+
+// Describes a connection alias. Connection aliases are used for cross-Region
+// redirection. For more information, see Cross-Region Redirection for Amazon
+// WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+type ConnectionAlias struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the connection alias.
+	AliasId *string `min:"13" type:"string"`
+
+	// The association status of the connection alias.
+	Associations []*ConnectionAliasAssociation `min:"1" type:"list"`
+
+	// The connection string specified for the connection alias. The connection
+	// string must be in the form of a fully qualified domain name (FQDN), such
+	// as www.example.com.
+	ConnectionString *string `min:"1" type:"string"`
+
+	// The identifier of the Amazon Web Services account that owns the connection
+	// alias.
+	OwnerAccountId *string `type:"string"`
+
+	// The current state of the connection alias.
+	State *string `type:"string" enum:"ConnectionAliasState"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConnectionAlias) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConnectionAlias) GoString() string {
+	return s.String()
+}
+
+// SetAliasId sets the AliasId field's value.
+func (s *ConnectionAlias) SetAliasId(v string) *ConnectionAlias {
+	s.AliasId = &v
+	return s
+}
+
+// SetAssociations sets the Associations field's value.
+func (s *ConnectionAlias) SetAssociations(v []*ConnectionAliasAssociation) *ConnectionAlias {
+	s.Associations = v
+	return s
+}
+
+// SetConnectionString sets the ConnectionString field's value.
+func (s *ConnectionAlias) SetConnectionString(v string) *ConnectionAlias {
+	s.ConnectionString = &v
+	return s
+}
+
+// SetOwnerAccountId sets the OwnerAccountId field's value.
+func (s *ConnectionAlias) SetOwnerAccountId(v string) *ConnectionAlias {
+	s.OwnerAccountId = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *ConnectionAlias) SetState(v string) *ConnectionAlias {
+	s.State = &v
+	return s
+}
+
+// Describes a connection alias association that is used for cross-Region redirection.
+// For more information, see Cross-Region Redirection for Amazon WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+type ConnectionAliasAssociation struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the Amazon Web Services account that associated the connection
+	// alias with a directory.
+	AssociatedAccountId *string `type:"string"`
+
+	// The association status of the connection alias.
+	AssociationStatus *string `type:"string" enum:"AssociationStatus"`
+
+	// The identifier of the connection alias association. You use the connection
+	// identifier in the DNS TXT record when you're configuring your DNS routing
+	// policies.
+	ConnectionIdentifier *string `min:"1" type:"string"`
+
+	// The identifier of the directory associated with a connection alias.
+	ResourceId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConnectionAliasAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConnectionAliasAssociation) GoString() string {
+	return s.String()
+}
+
+// SetAssociatedAccountId sets the AssociatedAccountId field's value.
+func (s *ConnectionAliasAssociation) SetAssociatedAccountId(v string) *ConnectionAliasAssociation {
+	s.AssociatedAccountId = &v
+	return s
+}
+
+// SetAssociationStatus sets the AssociationStatus field's value.
+func (s *ConnectionAliasAssociation) SetAssociationStatus(v string) *ConnectionAliasAssociation {
+	s.AssociationStatus = &v
+	return s
+}
+
+// SetConnectionIdentifier sets the ConnectionIdentifier field's value.
+func (s *ConnectionAliasAssociation) SetConnectionIdentifier(v string) *ConnectionAliasAssociation {
+	s.ConnectionIdentifier = &v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *ConnectionAliasAssociation) SetResourceId(v string) *ConnectionAliasAssociation {
+	s.ResourceId = &v
+	return s
+}
+
+// Describes the permissions for a connection alias. Connection aliases are
+// used for cross-Region redirection. For more information, see Cross-Region
+// Redirection for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+type ConnectionAliasPermission struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether the specified Amazon Web Services account is allowed to
+	// associate the connection alias with a directory.
+	//
+	// AllowAssociation is a required field
+	AllowAssociation *bool `type:"boolean" required:"true"`
+
+	// The identifier of the Amazon Web Services account that the connection alias
+	// is shared with.
+	//
+	// SharedAccountId is a required field
+	SharedAccountId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConnectionAliasPermission) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConnectionAliasPermission) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConnectionAliasPermission) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ConnectionAliasPermission"}
+	if s.AllowAssociation == nil {
+		invalidParams.Add(request.NewErrParamRequired("AllowAssociation"))
+	}
+	if s.SharedAccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("SharedAccountId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAllowAssociation sets the AllowAssociation field's value.
+func (s *ConnectionAliasPermission) SetAllowAssociation(v bool) *ConnectionAliasPermission {
+	s.AllowAssociation = &v
+	return s
+}
+
+// SetSharedAccountId sets the SharedAccountId field's value.
+func (s *ConnectionAliasPermission) SetSharedAccountId(v string) *ConnectionAliasPermission {
+	s.SharedAccountId = &v
+	return s
+}
+
+type CopyWorkspaceImageInput struct {
+	_ struct{} `type:"structure"`
+
+	// A description of the image.
+	Description *string `min:"1" type:"string"`
+
+	// The name of the image.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The identifier of the source image.
+	//
+	// SourceImageId is a required field
+	SourceImageId *string `type:"string" required:"true"`
+
+	// The identifier of the source Region.
+	//
+	// SourceRegion is a required field
+	SourceRegion *string `min:"1" type:"string" required:"true"`
+
+	// The tags for the image.
+	Tags []*Tag `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CopyWorkspaceImageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CopyWorkspaceImageInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CopyWorkspaceImageInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CopyWorkspaceImageInput"}
+	if s.Description != nil && len(*s.Description) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.SourceImageId == nil {
+		invalidParams.Add(request.NewErrParamRequired("SourceImageId"))
+	}
+	if s.SourceRegion == nil {
+		invalidParams.Add(request.NewErrParamRequired("SourceRegion"))
+	}
+	if s.SourceRegion != nil && len(*s.SourceRegion) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SourceRegion", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDescription sets the Description field's value.
+func (s *CopyWorkspaceImageInput) SetDescription(v string) *CopyWorkspaceImageInput {
+	s.Description = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CopyWorkspaceImageInput) SetName(v string) *CopyWorkspaceImageInput {
+	s.Name = &v
+	return s
+}
+
+// SetSourceImageId sets the SourceImageId field's value.
+func (s *CopyWorkspaceImageInput) SetSourceImageId(v string) *CopyWorkspaceImageInput {
+	s.SourceImageId = &v
+	return s
+}
+
+// SetSourceRegion sets the SourceRegion field's value.
+func (s *CopyWorkspaceImageInput) SetSourceRegion(v string) *CopyWorkspaceImageInput {
+	s.SourceRegion = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CopyWorkspaceImageInput) SetTags(v []*Tag) *CopyWorkspaceImageInput {
+	s.Tags = v
+	return s
+}
+
+type CopyWorkspaceImageOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the image.
+	ImageId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CopyWorkspaceImageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CopyWorkspaceImageOutput) GoString() string {
+	return s.String()
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *CopyWorkspaceImageOutput) SetImageId(v string) *CopyWorkspaceImageOutput {
+	s.ImageId = &v
+	return s
+}
+
+type CreateConnectClientAddInInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the client add-in.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The directory identifier for which to configure the client add-in.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+
+	// The endpoint URL of the Amazon Connect client add-in.
+	//
+	// URL is a required field
+	URL *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateConnectClientAddInInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateConnectClientAddInInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateConnectClientAddInInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateConnectClientAddInInput"}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+	if s.URL == nil {
+		invalidParams.Add(request.NewErrParamRequired("URL"))
+	}
+	if s.URL != nil && len(*s.URL) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("URL", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetName sets the Name field's value.
+func (s *CreateConnectClientAddInInput) SetName(v string) *CreateConnectClientAddInInput {
+	s.Name = &v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *CreateConnectClientAddInInput) SetResourceId(v string) *CreateConnectClientAddInInput {
+	s.ResourceId = &v
+	return s
+}
+
+// SetURL sets the URL field's value.
+func (s *CreateConnectClientAddInInput) SetURL(v string) *CreateConnectClientAddInInput {
+	s.URL = &v
+	return s
+}
+
+type CreateConnectClientAddInOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The client add-in identifier.
+	AddInId *string `min:"36" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateConnectClientAddInOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateConnectClientAddInOutput) GoString() string {
+	return s.String()
+}
+
+// SetAddInId sets the AddInId field's value.
+func (s *CreateConnectClientAddInOutput) SetAddInId(v string) *CreateConnectClientAddInOutput {
+	s.AddInId = &v
+	return s
+}
+
+type CreateConnectionAliasInput struct {
+	_ struct{} `type:"structure"`
+
+	// A connection string in the form of a fully qualified domain name (FQDN),
+	// such as www.example.com.
+	//
+	// After you create a connection string, it is always associated to your Amazon
+	// Web Services account. You cannot recreate the same connection string with
+	// a different account, even if you delete all instances of it from the original
+	// account. The connection string is globally reserved for your account.
+	//
+	// ConnectionString is a required field
+	ConnectionString *string `min:"1" type:"string" required:"true"`
+
+	// The tags to associate with the connection alias.
+	Tags []*Tag `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateConnectionAliasInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateConnectionAliasInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateConnectionAliasInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateConnectionAliasInput"}
+	if s.ConnectionString == nil {
+		invalidParams.Add(request.NewErrParamRequired("ConnectionString"))
+	}
+	if s.ConnectionString != nil && len(*s.ConnectionString) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ConnectionString", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetConnectionString sets the ConnectionString field's value.
+func (s *CreateConnectionAliasInput) SetConnectionString(v string) *CreateConnectionAliasInput {
+	s.ConnectionString = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateConnectionAliasInput) SetTags(v []*Tag) *CreateConnectionAliasInput {
+	s.Tags = v
+	return s
+}
+
+type CreateConnectionAliasOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the connection alias.
+	AliasId *string `min:"13" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateConnectionAliasOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateConnectionAliasOutput) GoString() string {
+	return s.String()
+}
+
+// SetAliasId sets the AliasId field's value.
+func (s *CreateConnectionAliasOutput) SetAliasId(v string) *CreateConnectionAliasOutput {
+	s.AliasId = &v
 	return s
 }
 
@@ -3234,16 +8658,27 @@ type CreateIpGroupInput struct {
 	// GroupName is a required field
 	GroupName *string `type:"string" required:"true"`
 
+	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+	Tags []*Tag `type:"list"`
+
 	// The rules to add to the group.
 	UserRules []*IpRuleItem `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIpGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIpGroupInput) GoString() string {
 	return s.String()
 }
@@ -3253,6 +8688,16 @@ func (s *CreateIpGroupInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CreateIpGroupInput"}
 	if s.GroupName == nil {
 		invalidParams.Add(request.NewErrParamRequired("GroupName"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3273,6 +8718,12 @@ func (s *CreateIpGroupInput) SetGroupName(v string) *CreateIpGroupInput {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateIpGroupInput) SetTags(v []*Tag) *CreateIpGroupInput {
+	s.Tags = v
+	return s
+}
+
 // SetUserRules sets the UserRules field's value.
 func (s *CreateIpGroupInput) SetUserRules(v []*IpRuleItem) *CreateIpGroupInput {
 	s.UserRules = v
@@ -3286,12 +8737,20 @@ type CreateIpGroupOutput struct {
 	GroupId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIpGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIpGroupOutput) GoString() string {
 	return s.String()
 }
@@ -3302,26 +8761,149 @@ func (s *CreateIpGroupOutput) SetGroupId(v string) *CreateIpGroupOutput {
 	return s
 }
 
+type CreateStandbyWorkspacesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Region of the primary WorkSpace.
+	//
+	// PrimaryRegion is a required field
+	PrimaryRegion *string `min:"1" type:"string" required:"true"`
+
+	// Information about the standby WorkSpace to be created.
+	//
+	// StandbyWorkspaces is a required field
+	StandbyWorkspaces []*StandbyWorkspace `type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateStandbyWorkspacesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateStandbyWorkspacesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateStandbyWorkspacesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateStandbyWorkspacesInput"}
+	if s.PrimaryRegion == nil {
+		invalidParams.Add(request.NewErrParamRequired("PrimaryRegion"))
+	}
+	if s.PrimaryRegion != nil && len(*s.PrimaryRegion) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("PrimaryRegion", 1))
+	}
+	if s.StandbyWorkspaces == nil {
+		invalidParams.Add(request.NewErrParamRequired("StandbyWorkspaces"))
+	}
+	if s.StandbyWorkspaces != nil {
+		for i, v := range s.StandbyWorkspaces {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StandbyWorkspaces", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetPrimaryRegion sets the PrimaryRegion field's value.
+func (s *CreateStandbyWorkspacesInput) SetPrimaryRegion(v string) *CreateStandbyWorkspacesInput {
+	s.PrimaryRegion = &v
+	return s
+}
+
+// SetStandbyWorkspaces sets the StandbyWorkspaces field's value.
+func (s *CreateStandbyWorkspacesInput) SetStandbyWorkspaces(v []*StandbyWorkspace) *CreateStandbyWorkspacesInput {
+	s.StandbyWorkspaces = v
+	return s
+}
+
+type CreateStandbyWorkspacesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the standby WorkSpace that could not be created.
+	FailedStandbyRequests []*FailedCreateStandbyWorkspacesRequest `type:"list"`
+
+	// Information about the standby WorkSpace that was created.
+	PendingStandbyRequests []*PendingCreateStandbyWorkspacesRequest `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateStandbyWorkspacesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateStandbyWorkspacesOutput) GoString() string {
+	return s.String()
+}
+
+// SetFailedStandbyRequests sets the FailedStandbyRequests field's value.
+func (s *CreateStandbyWorkspacesOutput) SetFailedStandbyRequests(v []*FailedCreateStandbyWorkspacesRequest) *CreateStandbyWorkspacesOutput {
+	s.FailedStandbyRequests = v
+	return s
+}
+
+// SetPendingStandbyRequests sets the PendingStandbyRequests field's value.
+func (s *CreateStandbyWorkspacesOutput) SetPendingStandbyRequests(v []*PendingCreateStandbyWorkspacesRequest) *CreateStandbyWorkspacesOutput {
+	s.PendingStandbyRequests = v
+	return s
+}
+
 type CreateTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
+	// The identifier of the WorkSpaces resource. The supported resource types are
+	// WorkSpaces, registered directories, images, custom bundles, IP access control
+	// groups, and connection aliases.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 
-	// The tags. Each WorkSpace can have a maximum of 50 tags.
+	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
 	//
 	// Tags is a required field
 	Tags []*Tag `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTagsInput) GoString() string {
 	return s.String()
 }
@@ -3371,14 +8953,532 @@ type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTagsOutput) GoString() string {
 	return s.String()
+}
+
+type CreateUpdatedWorkspaceImageInput struct {
+	_ struct{} `type:"structure"`
+
+	// A description of whether updates for the WorkSpace image are available.
+	//
+	// Description is a required field
+	Description *string `min:"1" type:"string" required:"true"`
+
+	// The name of the new updated WorkSpace image.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The identifier of the source WorkSpace image.
+	//
+	// SourceImageId is a required field
+	SourceImageId *string `type:"string" required:"true"`
+
+	// The tags that you want to add to the new updated WorkSpace image.
+	//
+	// To add tags at the same time when you're creating the updated image, you
+	// must create an IAM policy that grants your IAM user permissions to use workspaces:CreateTags.
+	Tags []*Tag `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateUpdatedWorkspaceImageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateUpdatedWorkspaceImageInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateUpdatedWorkspaceImageInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateUpdatedWorkspaceImageInput"}
+	if s.Description == nil {
+		invalidParams.Add(request.NewErrParamRequired("Description"))
+	}
+	if s.Description != nil && len(*s.Description) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.SourceImageId == nil {
+		invalidParams.Add(request.NewErrParamRequired("SourceImageId"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDescription sets the Description field's value.
+func (s *CreateUpdatedWorkspaceImageInput) SetDescription(v string) *CreateUpdatedWorkspaceImageInput {
+	s.Description = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateUpdatedWorkspaceImageInput) SetName(v string) *CreateUpdatedWorkspaceImageInput {
+	s.Name = &v
+	return s
+}
+
+// SetSourceImageId sets the SourceImageId field's value.
+func (s *CreateUpdatedWorkspaceImageInput) SetSourceImageId(v string) *CreateUpdatedWorkspaceImageInput {
+	s.SourceImageId = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateUpdatedWorkspaceImageInput) SetTags(v []*Tag) *CreateUpdatedWorkspaceImageInput {
+	s.Tags = v
+	return s
+}
+
+type CreateUpdatedWorkspaceImageOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the new updated WorkSpace image.
+	ImageId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateUpdatedWorkspaceImageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateUpdatedWorkspaceImageOutput) GoString() string {
+	return s.String()
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *CreateUpdatedWorkspaceImageOutput) SetImageId(v string) *CreateUpdatedWorkspaceImageOutput {
+	s.ImageId = &v
+	return s
+}
+
+type CreateWorkspaceBundleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the bundle.
+	//
+	// BundleDescription is a required field
+	BundleDescription *string `min:"1" type:"string" required:"true"`
+
+	// The name of the bundle.
+	//
+	// BundleName is a required field
+	BundleName *string `min:"1" type:"string" required:"true"`
+
+	// Describes the compute type of the bundle.
+	//
+	// ComputeType is a required field
+	ComputeType *ComputeType `type:"structure" required:"true"`
+
+	// The identifier of the image that is used to create the bundle.
+	//
+	// ImageId is a required field
+	ImageId *string `type:"string" required:"true"`
+
+	// Describes the root volume for a WorkSpace bundle.
+	RootStorage *RootStorage `type:"structure"`
+
+	// The tags associated with the bundle.
+	//
+	// To add tags at the same time when you're creating the bundle, you must create
+	// an IAM policy that grants your IAM user permissions to use workspaces:CreateTags.
+	Tags []*Tag `type:"list"`
+
+	// Describes the user volume for a WorkSpace bundle.
+	//
+	// UserStorage is a required field
+	UserStorage *UserStorage `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateWorkspaceBundleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateWorkspaceBundleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateWorkspaceBundleInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateWorkspaceBundleInput"}
+	if s.BundleDescription == nil {
+		invalidParams.Add(request.NewErrParamRequired("BundleDescription"))
+	}
+	if s.BundleDescription != nil && len(*s.BundleDescription) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BundleDescription", 1))
+	}
+	if s.BundleName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BundleName"))
+	}
+	if s.BundleName != nil && len(*s.BundleName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BundleName", 1))
+	}
+	if s.ComputeType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ComputeType"))
+	}
+	if s.ImageId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ImageId"))
+	}
+	if s.UserStorage == nil {
+		invalidParams.Add(request.NewErrParamRequired("UserStorage"))
+	}
+	if s.RootStorage != nil {
+		if err := s.RootStorage.Validate(); err != nil {
+			invalidParams.AddNested("RootStorage", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+	if s.UserStorage != nil {
+		if err := s.UserStorage.Validate(); err != nil {
+			invalidParams.AddNested("UserStorage", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBundleDescription sets the BundleDescription field's value.
+func (s *CreateWorkspaceBundleInput) SetBundleDescription(v string) *CreateWorkspaceBundleInput {
+	s.BundleDescription = &v
+	return s
+}
+
+// SetBundleName sets the BundleName field's value.
+func (s *CreateWorkspaceBundleInput) SetBundleName(v string) *CreateWorkspaceBundleInput {
+	s.BundleName = &v
+	return s
+}
+
+// SetComputeType sets the ComputeType field's value.
+func (s *CreateWorkspaceBundleInput) SetComputeType(v *ComputeType) *CreateWorkspaceBundleInput {
+	s.ComputeType = v
+	return s
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *CreateWorkspaceBundleInput) SetImageId(v string) *CreateWorkspaceBundleInput {
+	s.ImageId = &v
+	return s
+}
+
+// SetRootStorage sets the RootStorage field's value.
+func (s *CreateWorkspaceBundleInput) SetRootStorage(v *RootStorage) *CreateWorkspaceBundleInput {
+	s.RootStorage = v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateWorkspaceBundleInput) SetTags(v []*Tag) *CreateWorkspaceBundleInput {
+	s.Tags = v
+	return s
+}
+
+// SetUserStorage sets the UserStorage field's value.
+func (s *CreateWorkspaceBundleInput) SetUserStorage(v *UserStorage) *CreateWorkspaceBundleInput {
+	s.UserStorage = v
+	return s
+}
+
+type CreateWorkspaceBundleOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Describes a WorkSpace bundle.
+	WorkspaceBundle *WorkspaceBundle `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateWorkspaceBundleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateWorkspaceBundleOutput) GoString() string {
+	return s.String()
+}
+
+// SetWorkspaceBundle sets the WorkspaceBundle field's value.
+func (s *CreateWorkspaceBundleOutput) SetWorkspaceBundle(v *WorkspaceBundle) *CreateWorkspaceBundleOutput {
+	s.WorkspaceBundle = v
+	return s
+}
+
+type CreateWorkspaceImageInput struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the new WorkSpace image.
+	//
+	// Description is a required field
+	Description *string `min:"1" type:"string" required:"true"`
+
+	// The name of the new WorkSpace image.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The tags that you want to add to the new WorkSpace image. To add tags when
+	// you're creating the image, you must create an IAM policy that grants your
+	// IAM user permission to use workspaces:CreateTags.
+	Tags []*Tag `type:"list"`
+
+	// The identifier of the source WorkSpace
+	//
+	// WorkspaceId is a required field
+	WorkspaceId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateWorkspaceImageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateWorkspaceImageInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateWorkspaceImageInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateWorkspaceImageInput"}
+	if s.Description == nil {
+		invalidParams.Add(request.NewErrParamRequired("Description"))
+	}
+	if s.Description != nil && len(*s.Description) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+	}
+	if s.Name == nil {
+		invalidParams.Add(request.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.WorkspaceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDescription sets the Description field's value.
+func (s *CreateWorkspaceImageInput) SetDescription(v string) *CreateWorkspaceImageInput {
+	s.Description = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateWorkspaceImageInput) SetName(v string) *CreateWorkspaceImageInput {
+	s.Name = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateWorkspaceImageInput) SetTags(v []*Tag) *CreateWorkspaceImageInput {
+	s.Tags = v
+	return s
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *CreateWorkspaceImageInput) SetWorkspaceId(v string) *CreateWorkspaceImageInput {
+	s.WorkspaceId = &v
+	return s
+}
+
+type CreateWorkspaceImageOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The date when the image was created.
+	Created *time.Time `type:"timestamp"`
+
+	// The description of the image.
+	Description *string `min:"1" type:"string"`
+
+	// The identifier of the new WorkSpace image.
+	ImageId *string `type:"string"`
+
+	// The name of the image.
+	Name *string `min:"1" type:"string"`
+
+	// The operating system that the image is running.
+	OperatingSystem *OperatingSystem `type:"structure"`
+
+	// The identifier of the Amazon Web Services account that owns the image.
+	OwnerAccountId *string `type:"string"`
+
+	// Specifies whether the image is running on dedicated hardware. When Bring
+	// Your Own License (BYOL) is enabled, this value is set to DEDICATED. For more
+	// information, see Bring Your Own Windows Desktop Images. (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm).
+	RequiredTenancy *string `type:"string" enum:"WorkspaceImageRequiredTenancy"`
+
+	// The availability status of the image.
+	State *string `type:"string" enum:"WorkspaceImageState"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateWorkspaceImageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateWorkspaceImageOutput) GoString() string {
+	return s.String()
+}
+
+// SetCreated sets the Created field's value.
+func (s *CreateWorkspaceImageOutput) SetCreated(v time.Time) *CreateWorkspaceImageOutput {
+	s.Created = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *CreateWorkspaceImageOutput) SetDescription(v string) *CreateWorkspaceImageOutput {
+	s.Description = &v
+	return s
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *CreateWorkspaceImageOutput) SetImageId(v string) *CreateWorkspaceImageOutput {
+	s.ImageId = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateWorkspaceImageOutput) SetName(v string) *CreateWorkspaceImageOutput {
+	s.Name = &v
+	return s
+}
+
+// SetOperatingSystem sets the OperatingSystem field's value.
+func (s *CreateWorkspaceImageOutput) SetOperatingSystem(v *OperatingSystem) *CreateWorkspaceImageOutput {
+	s.OperatingSystem = v
+	return s
+}
+
+// SetOwnerAccountId sets the OwnerAccountId field's value.
+func (s *CreateWorkspaceImageOutput) SetOwnerAccountId(v string) *CreateWorkspaceImageOutput {
+	s.OwnerAccountId = &v
+	return s
+}
+
+// SetRequiredTenancy sets the RequiredTenancy field's value.
+func (s *CreateWorkspaceImageOutput) SetRequiredTenancy(v string) *CreateWorkspaceImageOutput {
+	s.RequiredTenancy = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *CreateWorkspaceImageOutput) SetState(v string) *CreateWorkspaceImageOutput {
+	s.State = &v
+	return s
 }
 
 type CreateWorkspacesInput struct {
@@ -3390,12 +9490,20 @@ type CreateWorkspacesInput struct {
 	Workspaces []*WorkspaceRequest `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWorkspacesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWorkspacesInput) GoString() string {
 	return s.String()
 }
@@ -3446,12 +9554,20 @@ type CreateWorkspacesOutput struct {
 	PendingRequests []*Workspace `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWorkspacesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateWorkspacesOutput) GoString() string {
 	return s.String()
 }
@@ -3468,33 +9584,304 @@ func (s *CreateWorkspacesOutput) SetPendingRequests(v []*Workspace) *CreateWorks
 	return s
 }
 
-// Describes the default values used to create a WorkSpace.
+// Describes the data replication settings.
+type DataReplicationSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether data replication is enabled, and if enabled, the type of
+	// data replication.
+	DataReplication *string `type:"string" enum:"DataReplication"`
+
+	// The date and time at which the last successful snapshot was taken of the
+	// primary WorkSpace used for replicating data.
+	RecoverySnapshotTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataReplicationSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DataReplicationSettings) GoString() string {
+	return s.String()
+}
+
+// SetDataReplication sets the DataReplication field's value.
+func (s *DataReplicationSettings) SetDataReplication(v string) *DataReplicationSettings {
+	s.DataReplication = &v
+	return s
+}
+
+// SetRecoverySnapshotTime sets the RecoverySnapshotTime field's value.
+func (s *DataReplicationSettings) SetRecoverySnapshotTime(v time.Time) *DataReplicationSettings {
+	s.RecoverySnapshotTime = &v
+	return s
+}
+
+// Returns default client branding attributes that were imported. These attributes
+// display on the client login screen.
+//
+// Client branding attributes are public facing. Ensure that you don't include
+// sensitive information.
+type DefaultClientBrandingAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// The forgotten password link. This is the web address that users can go to
+	// if they forget the password for their WorkSpace.
+	ForgotPasswordLink *string `min:"1" type:"string"`
+
+	// The login message. Specified as a key value pair, in which the key is a locale
+	// and the value is the localized message for that locale. The only key supported
+	// is en_US. The HTML tags supported include the following: a, b, blockquote,
+	// br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// strong, sub, sup, u, ul.
+	LoginMessage map[string]*string `type:"map"`
+
+	// The logo. The only image format accepted is a binary data object that is
+	// converted from a .png file.
+	LogoUrl *string `min:"1" type:"string"`
+
+	// The support email. The company's customer support email address.
+	//
+	//    * In each platform type, the SupportEmail and SupportLink parameters are
+	//    mutually exclusive. You can specify one parameter for each platform type,
+	//    but not both.
+	//
+	//    * The default email is workspaces-feedback@amazon.com.
+	SupportEmail *string `min:"6" type:"string"`
+
+	// The support link. The link for the company's customer support page for their
+	// WorkSpace.
+	//
+	//    * In each platform type, the SupportEmail and SupportLink parameters are
+	//    mutually exclusive.You can specify one parameter for each platform type,
+	//    but not both.
+	//
+	//    * The default support link is workspaces-feedback@amazon.com.
+	SupportLink *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DefaultClientBrandingAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DefaultClientBrandingAttributes) GoString() string {
+	return s.String()
+}
+
+// SetForgotPasswordLink sets the ForgotPasswordLink field's value.
+func (s *DefaultClientBrandingAttributes) SetForgotPasswordLink(v string) *DefaultClientBrandingAttributes {
+	s.ForgotPasswordLink = &v
+	return s
+}
+
+// SetLoginMessage sets the LoginMessage field's value.
+func (s *DefaultClientBrandingAttributes) SetLoginMessage(v map[string]*string) *DefaultClientBrandingAttributes {
+	s.LoginMessage = v
+	return s
+}
+
+// SetLogoUrl sets the LogoUrl field's value.
+func (s *DefaultClientBrandingAttributes) SetLogoUrl(v string) *DefaultClientBrandingAttributes {
+	s.LogoUrl = &v
+	return s
+}
+
+// SetSupportEmail sets the SupportEmail field's value.
+func (s *DefaultClientBrandingAttributes) SetSupportEmail(v string) *DefaultClientBrandingAttributes {
+	s.SupportEmail = &v
+	return s
+}
+
+// SetSupportLink sets the SupportLink field's value.
+func (s *DefaultClientBrandingAttributes) SetSupportLink(v string) *DefaultClientBrandingAttributes {
+	s.SupportLink = &v
+	return s
+}
+
+// The default client branding attributes to be imported. These attributes display
+// on the client login screen.
+//
+// Client branding attributes are public facing. Ensure that you do not include
+// sensitive information.
+type DefaultImportClientBrandingAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// The forgotten password link. This is the web address that users can go to
+	// if they forget the password for their WorkSpace.
+	ForgotPasswordLink *string `min:"1" type:"string"`
+
+	// The login message. Specified as a key value pair, in which the key is a locale
+	// and the value is the localized message for that locale. The only key supported
+	// is en_US. The HTML tags supported include the following: a, b, blockquote,
+	// br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// strong, sub, sup, u, ul.
+	LoginMessage map[string]*string `type:"map"`
+
+	// The logo. The only image format accepted is a binary data object that is
+	// converted from a .png file.
+	// Logo is automatically base64 encoded/decoded by the SDK.
+	Logo []byte `min:"1" type:"blob"`
+
+	// The support email. The company's customer support email address.
+	//
+	//    * In each platform type, the SupportEmail and SupportLink parameters are
+	//    mutually exclusive. You can specify one parameter for each platform type,
+	//    but not both.
+	//
+	//    * The default email is workspaces-feedback@amazon.com.
+	SupportEmail *string `min:"6" type:"string"`
+
+	// The support link. The link for the company's customer support page for their
+	// WorkSpace.
+	//
+	//    * In each platform type, the SupportEmail and SupportLink parameters are
+	//    mutually exclusive. You can specify one parameter for each platform type,
+	//    but not both.
+	//
+	//    * The default support link is workspaces-feedback@amazon.com.
+	SupportLink *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DefaultImportClientBrandingAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DefaultImportClientBrandingAttributes) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DefaultImportClientBrandingAttributes) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DefaultImportClientBrandingAttributes"}
+	if s.ForgotPasswordLink != nil && len(*s.ForgotPasswordLink) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ForgotPasswordLink", 1))
+	}
+	if s.Logo != nil && len(s.Logo) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Logo", 1))
+	}
+	if s.SupportEmail != nil && len(*s.SupportEmail) < 6 {
+		invalidParams.Add(request.NewErrParamMinLen("SupportEmail", 6))
+	}
+	if s.SupportLink != nil && len(*s.SupportLink) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SupportLink", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetForgotPasswordLink sets the ForgotPasswordLink field's value.
+func (s *DefaultImportClientBrandingAttributes) SetForgotPasswordLink(v string) *DefaultImportClientBrandingAttributes {
+	s.ForgotPasswordLink = &v
+	return s
+}
+
+// SetLoginMessage sets the LoginMessage field's value.
+func (s *DefaultImportClientBrandingAttributes) SetLoginMessage(v map[string]*string) *DefaultImportClientBrandingAttributes {
+	s.LoginMessage = v
+	return s
+}
+
+// SetLogo sets the Logo field's value.
+func (s *DefaultImportClientBrandingAttributes) SetLogo(v []byte) *DefaultImportClientBrandingAttributes {
+	s.Logo = v
+	return s
+}
+
+// SetSupportEmail sets the SupportEmail field's value.
+func (s *DefaultImportClientBrandingAttributes) SetSupportEmail(v string) *DefaultImportClientBrandingAttributes {
+	s.SupportEmail = &v
+	return s
+}
+
+// SetSupportLink sets the SupportLink field's value.
+func (s *DefaultImportClientBrandingAttributes) SetSupportLink(v string) *DefaultImportClientBrandingAttributes {
+	s.SupportLink = &v
+	return s
+}
+
+// Describes the default values that are used to create WorkSpaces. For more
+// information, see Update Directory Details for Your WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html).
 type DefaultWorkspaceCreationProperties struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of any security groups to apply to WorkSpaces when they are
-	// created.
-	CustomSecurityGroupId *string `type:"string"`
+	// The identifier of the default security group to apply to WorkSpaces when
+	// they are created. For more information, see Security Groups for Your WorkSpaces
+	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-security-groups.html).
+	CustomSecurityGroupId *string `min:"11" type:"string"`
 
 	// The organizational unit (OU) in the directory for the WorkSpace machine accounts.
 	DefaultOu *string `type:"string"`
 
-	// The public IP address to attach to all WorkSpaces that are created or rebuilt.
+	// Specifies whether to automatically assign an Elastic public IP address to
+	// WorkSpaces in this directory by default. If enabled, the Elastic public IP
+	// address allows outbound internet access from your WorkSpaces when you’re
+	// using an internet gateway in the Amazon VPC in which your WorkSpaces are
+	// located. If you're using a Network Address Translation (NAT) gateway for
+	// outbound internet access from your VPC, or if your WorkSpaces are in public
+	// subnets and you manually assign them Elastic IP addresses, you should disable
+	// this setting. This setting applies to new WorkSpaces that you launch or to
+	// existing WorkSpaces that you rebuild. For more information, see Configure
+	// a VPC for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html).
 	EnableInternetAccess *bool `type:"boolean"`
+
+	// Specifies whether maintenance mode is enabled for WorkSpaces. For more information,
+	// see WorkSpace Maintenance (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html).
+	EnableMaintenanceMode *bool `type:"boolean"`
 
 	// Specifies whether the directory is enabled for Amazon WorkDocs.
 	EnableWorkDocs *bool `type:"boolean"`
 
-	// Specifies whether the WorkSpace user is an administrator on the WorkSpace.
+	// Specifies whether WorkSpace users are local administrators on their WorkSpaces.
 	UserEnabledAsLocalAdministrator *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefaultWorkspaceCreationProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DefaultWorkspaceCreationProperties) GoString() string {
 	return s.String()
 }
@@ -3517,6 +9904,12 @@ func (s *DefaultWorkspaceCreationProperties) SetEnableInternetAccess(v bool) *De
 	return s
 }
 
+// SetEnableMaintenanceMode sets the EnableMaintenanceMode field's value.
+func (s *DefaultWorkspaceCreationProperties) SetEnableMaintenanceMode(v bool) *DefaultWorkspaceCreationProperties {
+	s.EnableMaintenanceMode = &v
+	return s
+}
+
 // SetEnableWorkDocs sets the EnableWorkDocs field's value.
 func (s *DefaultWorkspaceCreationProperties) SetEnableWorkDocs(v bool) *DefaultWorkspaceCreationProperties {
 	s.EnableWorkDocs = &v
@@ -3529,6 +9922,254 @@ func (s *DefaultWorkspaceCreationProperties) SetUserEnabledAsLocalAdministrator(
 	return s
 }
 
+type DeleteClientBrandingInput struct {
+	_ struct{} `type:"structure"`
+
+	// The device type for which you want to delete client branding.
+	//
+	// Platforms is a required field
+	Platforms []*string `min:"1" type:"list" required:"true" enum:"ClientDeviceType"`
+
+	// The directory identifier of the WorkSpace for which you want to delete client
+	// branding.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteClientBrandingInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteClientBrandingInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteClientBrandingInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteClientBrandingInput"}
+	if s.Platforms == nil {
+		invalidParams.Add(request.NewErrParamRequired("Platforms"))
+	}
+	if s.Platforms != nil && len(s.Platforms) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Platforms", 1))
+	}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetPlatforms sets the Platforms field's value.
+func (s *DeleteClientBrandingInput) SetPlatforms(v []*string) *DeleteClientBrandingInput {
+	s.Platforms = v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *DeleteClientBrandingInput) SetResourceId(v string) *DeleteClientBrandingInput {
+	s.ResourceId = &v
+	return s
+}
+
+type DeleteClientBrandingOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteClientBrandingOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteClientBrandingOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteConnectClientAddInInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the client add-in to delete.
+	//
+	// AddInId is a required field
+	AddInId *string `min:"36" type:"string" required:"true"`
+
+	// The directory identifier for which the client add-in is configured.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteConnectClientAddInInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteConnectClientAddInInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteConnectClientAddInInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteConnectClientAddInInput"}
+	if s.AddInId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AddInId"))
+	}
+	if s.AddInId != nil && len(*s.AddInId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("AddInId", 36))
+	}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAddInId sets the AddInId field's value.
+func (s *DeleteConnectClientAddInInput) SetAddInId(v string) *DeleteConnectClientAddInInput {
+	s.AddInId = &v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *DeleteConnectClientAddInInput) SetResourceId(v string) *DeleteConnectClientAddInInput {
+	s.ResourceId = &v
+	return s
+}
+
+type DeleteConnectClientAddInOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteConnectClientAddInOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteConnectClientAddInOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteConnectionAliasInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the connection alias to delete.
+	//
+	// AliasId is a required field
+	AliasId *string `min:"13" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteConnectionAliasInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteConnectionAliasInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteConnectionAliasInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteConnectionAliasInput"}
+	if s.AliasId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AliasId"))
+	}
+	if s.AliasId != nil && len(*s.AliasId) < 13 {
+		invalidParams.Add(request.NewErrParamMinLen("AliasId", 13))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAliasId sets the AliasId field's value.
+func (s *DeleteConnectionAliasInput) SetAliasId(v string) *DeleteConnectionAliasInput {
+	s.AliasId = &v
+	return s
+}
+
+type DeleteConnectionAliasOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteConnectionAliasOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteConnectionAliasOutput) GoString() string {
+	return s.String()
+}
+
 type DeleteIpGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3538,12 +10179,20 @@ type DeleteIpGroupInput struct {
 	GroupId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIpGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIpGroupInput) GoString() string {
 	return s.String()
 }
@@ -3571,12 +10220,20 @@ type DeleteIpGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIpGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteIpGroupOutput) GoString() string {
 	return s.String()
 }
@@ -3584,7 +10241,9 @@ func (s DeleteIpGroupOutput) GoString() string {
 type DeleteTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
+	// The identifier of the WorkSpaces resource. The supported resource types are
+	// WorkSpaces, registered directories, images, custom bundles, IP access control
+	// groups, and connection aliases.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
@@ -3595,12 +10254,20 @@ type DeleteTagsInput struct {
 	TagKeys []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsInput) GoString() string {
 	return s.String()
 }
@@ -3640,13 +10307,74 @@ type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTagsOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteWorkspaceBundleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the bundle.
+	BundleId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteWorkspaceBundleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteWorkspaceBundleInput) GoString() string {
+	return s.String()
+}
+
+// SetBundleId sets the BundleId field's value.
+func (s *DeleteWorkspaceBundleInput) SetBundleId(v string) *DeleteWorkspaceBundleInput {
+	s.BundleId = &v
+	return s
+}
+
+type DeleteWorkspaceBundleOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteWorkspaceBundleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteWorkspaceBundleOutput) GoString() string {
 	return s.String()
 }
 
@@ -3659,12 +10387,20 @@ type DeleteWorkspaceImageInput struct {
 	ImageId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWorkspaceImageInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWorkspaceImageInput) GoString() string {
 	return s.String()
 }
@@ -3692,13 +10428,182 @@ type DeleteWorkspaceImageOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWorkspaceImageOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteWorkspaceImageOutput) GoString() string {
+	return s.String()
+}
+
+type DeployWorkspaceApplicationsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether the force flag is applied for the specified WorkSpace.
+	// When the force flag is enabled, it allows previously failed deployments to
+	// be retried.
+	Force *bool `type:"boolean"`
+
+	// The identifier of the WorkSpace.
+	//
+	// WorkspaceId is a required field
+	WorkspaceId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployWorkspaceApplicationsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployWorkspaceApplicationsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeployWorkspaceApplicationsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeployWorkspaceApplicationsInput"}
+	if s.WorkspaceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetForce sets the Force field's value.
+func (s *DeployWorkspaceApplicationsInput) SetForce(v bool) *DeployWorkspaceApplicationsInput {
+	s.Force = &v
+	return s
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *DeployWorkspaceApplicationsInput) SetWorkspaceId(v string) *DeployWorkspaceApplicationsInput {
+	s.WorkspaceId = &v
+	return s
+}
+
+type DeployWorkspaceApplicationsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The list of deployed associations and information about them.
+	Deployment *WorkSpaceApplicationDeployment `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployWorkspaceApplicationsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeployWorkspaceApplicationsOutput) GoString() string {
+	return s.String()
+}
+
+// SetDeployment sets the Deployment field's value.
+func (s *DeployWorkspaceApplicationsOutput) SetDeployment(v *WorkSpaceApplicationDeployment) *DeployWorkspaceApplicationsOutput {
+	s.Deployment = v
+	return s
+}
+
+type DeregisterWorkspaceDirectoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory. If any WorkSpaces are registered to this
+	// directory, you must remove them before you deregister the directory, or you
+	// will receive an OperationNotSupportedException error.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `min:"10" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeregisterWorkspaceDirectoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeregisterWorkspaceDirectoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeregisterWorkspaceDirectoryInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeregisterWorkspaceDirectoryInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("DirectoryId", 10))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *DeregisterWorkspaceDirectoryInput) SetDirectoryId(v string) *DeregisterWorkspaceDirectoryInput {
+	s.DirectoryId = &v
+	return s
+}
+
+type DeregisterWorkspaceDirectoryOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeregisterWorkspaceDirectoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeregisterWorkspaceDirectoryOutput) GoString() string {
 	return s.String()
 }
 
@@ -3706,12 +10611,20 @@ type DescribeAccountInput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAccountInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAccountInput) GoString() string {
 	return s.String()
 }
@@ -3724,12 +10637,20 @@ type DescribeAccountModificationsInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAccountModificationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAccountModificationsInput) GoString() string {
 	return s.String()
 }
@@ -3759,17 +10680,25 @@ type DescribeAccountModificationsOutput struct {
 	// The list of modifications to the configuration of BYOL.
 	AccountModifications []*AccountModification `type:"list"`
 
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAccountModificationsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAccountModificationsOutput) GoString() string {
 	return s.String()
 }
@@ -3802,12 +10731,20 @@ type DescribeAccountOutput struct {
 	DedicatedTenancySupport *string `type:"string" enum:"DedicatedTenancySupportResultEnum"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAccountOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeAccountOutput) GoString() string {
 	return s.String()
 }
@@ -3824,21 +10761,518 @@ func (s *DescribeAccountOutput) SetDedicatedTenancySupport(v string) *DescribeAc
 	return s
 }
 
+type DescribeApplicationAssociationsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the specified application.
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `type:"string" required:"true"`
+
+	// The resource type of the associated resources.
+	//
+	// AssociatedResourceTypes is a required field
+	AssociatedResourceTypes []*string `type:"list" required:"true" enum:"ApplicationAssociatedResourceType"`
+
+	// The maximum number of associations to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If you received a NextToken from a previous call that was paginated, provide
+	// this token to receive the next set of results.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationAssociationsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationAssociationsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeApplicationAssociationsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeApplicationAssociationsInput"}
+	if s.ApplicationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+	}
+	if s.AssociatedResourceTypes == nil {
+		invalidParams.Add(request.NewErrParamRequired("AssociatedResourceTypes"))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationId sets the ApplicationId field's value.
+func (s *DescribeApplicationAssociationsInput) SetApplicationId(v string) *DescribeApplicationAssociationsInput {
+	s.ApplicationId = &v
+	return s
+}
+
+// SetAssociatedResourceTypes sets the AssociatedResourceTypes field's value.
+func (s *DescribeApplicationAssociationsInput) SetAssociatedResourceTypes(v []*string) *DescribeApplicationAssociationsInput {
+	s.AssociatedResourceTypes = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeApplicationAssociationsInput) SetMaxResults(v int64) *DescribeApplicationAssociationsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeApplicationAssociationsInput) SetNextToken(v string) *DescribeApplicationAssociationsInput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeApplicationAssociationsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// List of associations and information about them.
+	Associations []*ApplicationResourceAssociation `type:"list"`
+
+	// If you received a NextToken from a previous call that was paginated, provide
+	// this token to receive the next set of results.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationAssociationsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationAssociationsOutput) GoString() string {
+	return s.String()
+}
+
+// SetAssociations sets the Associations field's value.
+func (s *DescribeApplicationAssociationsOutput) SetAssociations(v []*ApplicationResourceAssociation) *DescribeApplicationAssociationsOutput {
+	s.Associations = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeApplicationAssociationsOutput) SetNextToken(v string) *DescribeApplicationAssociationsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeApplicationsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifiers of one or more applications.
+	ApplicationIds []*string `min:"1" type:"list"`
+
+	// The compute types supported by the applications.
+	ComputeTypeNames []*string `type:"list" enum:"Compute"`
+
+	// The license availability for the applications.
+	LicenseType *string `type:"string" enum:"WorkSpaceApplicationLicenseType"`
+
+	// The maximum number of applications to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If you received a NextToken from a previous call that was paginated, provide
+	// this token to receive the next set of results.
+	NextToken *string `min:"1" type:"string"`
+
+	// The operating systems supported by the applications.
+	OperatingSystemNames []*string `type:"list" enum:"OperatingSystemName"`
+
+	// The owner of the applications.
+	Owner *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeApplicationsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeApplicationsInput"}
+	if s.ApplicationIds != nil && len(s.ApplicationIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ApplicationIds", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationIds sets the ApplicationIds field's value.
+func (s *DescribeApplicationsInput) SetApplicationIds(v []*string) *DescribeApplicationsInput {
+	s.ApplicationIds = v
+	return s
+}
+
+// SetComputeTypeNames sets the ComputeTypeNames field's value.
+func (s *DescribeApplicationsInput) SetComputeTypeNames(v []*string) *DescribeApplicationsInput {
+	s.ComputeTypeNames = v
+	return s
+}
+
+// SetLicenseType sets the LicenseType field's value.
+func (s *DescribeApplicationsInput) SetLicenseType(v string) *DescribeApplicationsInput {
+	s.LicenseType = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeApplicationsInput) SetMaxResults(v int64) *DescribeApplicationsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeApplicationsInput) SetNextToken(v string) *DescribeApplicationsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetOperatingSystemNames sets the OperatingSystemNames field's value.
+func (s *DescribeApplicationsInput) SetOperatingSystemNames(v []*string) *DescribeApplicationsInput {
+	s.OperatingSystemNames = v
+	return s
+}
+
+// SetOwner sets the Owner field's value.
+func (s *DescribeApplicationsInput) SetOwner(v string) *DescribeApplicationsInput {
+	s.Owner = &v
+	return s
+}
+
+type DescribeApplicationsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// List of information about the specified applications.
+	Applications []*WorkSpaceApplication `type:"list"`
+
+	// If you received a NextToken from a previous call that was paginated, provide
+	// this token to receive the next set of results.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeApplicationsOutput) GoString() string {
+	return s.String()
+}
+
+// SetApplications sets the Applications field's value.
+func (s *DescribeApplicationsOutput) SetApplications(v []*WorkSpaceApplication) *DescribeApplicationsOutput {
+	s.Applications = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeApplicationsOutput) SetNextToken(v string) *DescribeApplicationsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeBundleAssociationsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The resource types of the associated resource.
+	//
+	// AssociatedResourceTypes is a required field
+	AssociatedResourceTypes []*string `type:"list" required:"true" enum:"BundleAssociatedResourceType"`
+
+	// The identifier of the bundle.
+	//
+	// BundleId is a required field
+	BundleId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBundleAssociationsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBundleAssociationsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBundleAssociationsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeBundleAssociationsInput"}
+	if s.AssociatedResourceTypes == nil {
+		invalidParams.Add(request.NewErrParamRequired("AssociatedResourceTypes"))
+	}
+	if s.BundleId == nil {
+		invalidParams.Add(request.NewErrParamRequired("BundleId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAssociatedResourceTypes sets the AssociatedResourceTypes field's value.
+func (s *DescribeBundleAssociationsInput) SetAssociatedResourceTypes(v []*string) *DescribeBundleAssociationsInput {
+	s.AssociatedResourceTypes = v
+	return s
+}
+
+// SetBundleId sets the BundleId field's value.
+func (s *DescribeBundleAssociationsInput) SetBundleId(v string) *DescribeBundleAssociationsInput {
+	s.BundleId = &v
+	return s
+}
+
+type DescribeBundleAssociationsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// List of information about the specified associations.
+	Associations []*BundleResourceAssociation `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBundleAssociationsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBundleAssociationsOutput) GoString() string {
+	return s.String()
+}
+
+// SetAssociations sets the Associations field's value.
+func (s *DescribeBundleAssociationsOutput) SetAssociations(v []*BundleResourceAssociation) *DescribeBundleAssociationsOutput {
+	s.Associations = v
+	return s
+}
+
+type DescribeClientBrandingInput struct {
+	_ struct{} `type:"structure"`
+
+	// The directory identifier of the WorkSpace for which you want to view client
+	// branding information.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeClientBrandingInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeClientBrandingInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeClientBrandingInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeClientBrandingInput"}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *DescribeClientBrandingInput) SetResourceId(v string) *DescribeClientBrandingInput {
+	s.ResourceId = &v
+	return s
+}
+
+type DescribeClientBrandingOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The branding information for Android devices.
+	DeviceTypeAndroid *DefaultClientBrandingAttributes `type:"structure"`
+
+	// The branding information for iOS devices.
+	DeviceTypeIos *IosClientBrandingAttributes `type:"structure"`
+
+	// The branding information for Linux devices.
+	DeviceTypeLinux *DefaultClientBrandingAttributes `type:"structure"`
+
+	// The branding information for macOS devices.
+	DeviceTypeOsx *DefaultClientBrandingAttributes `type:"structure"`
+
+	// The branding information for Web access.
+	DeviceTypeWeb *DefaultClientBrandingAttributes `type:"structure"`
+
+	// The branding information for Windows devices.
+	DeviceTypeWindows *DefaultClientBrandingAttributes `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeClientBrandingOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeClientBrandingOutput) GoString() string {
+	return s.String()
+}
+
+// SetDeviceTypeAndroid sets the DeviceTypeAndroid field's value.
+func (s *DescribeClientBrandingOutput) SetDeviceTypeAndroid(v *DefaultClientBrandingAttributes) *DescribeClientBrandingOutput {
+	s.DeviceTypeAndroid = v
+	return s
+}
+
+// SetDeviceTypeIos sets the DeviceTypeIos field's value.
+func (s *DescribeClientBrandingOutput) SetDeviceTypeIos(v *IosClientBrandingAttributes) *DescribeClientBrandingOutput {
+	s.DeviceTypeIos = v
+	return s
+}
+
+// SetDeviceTypeLinux sets the DeviceTypeLinux field's value.
+func (s *DescribeClientBrandingOutput) SetDeviceTypeLinux(v *DefaultClientBrandingAttributes) *DescribeClientBrandingOutput {
+	s.DeviceTypeLinux = v
+	return s
+}
+
+// SetDeviceTypeOsx sets the DeviceTypeOsx field's value.
+func (s *DescribeClientBrandingOutput) SetDeviceTypeOsx(v *DefaultClientBrandingAttributes) *DescribeClientBrandingOutput {
+	s.DeviceTypeOsx = v
+	return s
+}
+
+// SetDeviceTypeWeb sets the DeviceTypeWeb field's value.
+func (s *DescribeClientBrandingOutput) SetDeviceTypeWeb(v *DefaultClientBrandingAttributes) *DescribeClientBrandingOutput {
+	s.DeviceTypeWeb = v
+	return s
+}
+
+// SetDeviceTypeWindows sets the DeviceTypeWindows field's value.
+func (s *DescribeClientBrandingOutput) SetDeviceTypeWindows(v *DefaultClientBrandingAttributes) *DescribeClientBrandingOutput {
+	s.DeviceTypeWindows = v
+	return s
+}
+
 type DescribeClientPropertiesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The resource identifiers, in the form of directory IDs.
+	// The resource identifier, in the form of directory IDs.
 	//
 	// ResourceIds is a required field
 	ResourceIds []*string `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeClientPropertiesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeClientPropertiesInput) GoString() string {
 	return s.String()
 }
@@ -3872,12 +11306,20 @@ type DescribeClientPropertiesOutput struct {
 	ClientPropertiesList []*ClientPropertiesResult `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeClientPropertiesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeClientPropertiesOutput) GoString() string {
 	return s.String()
 }
@@ -3885,6 +11327,458 @@ func (s DescribeClientPropertiesOutput) GoString() string {
 // SetClientPropertiesList sets the ClientPropertiesList field's value.
 func (s *DescribeClientPropertiesOutput) SetClientPropertiesList(v []*ClientPropertiesResult) *DescribeClientPropertiesOutput {
 	s.ClientPropertiesList = v
+	return s
+}
+
+type DescribeConnectClientAddInsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of items to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If you received a NextToken from a previous call that was paginated, provide
+	// this token to receive the next set of results.
+	NextToken *string `min:"1" type:"string"`
+
+	// The directory identifier for which the client add-in is configured.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectClientAddInsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectClientAddInsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeConnectClientAddInsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeConnectClientAddInsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeConnectClientAddInsInput) SetMaxResults(v int64) *DescribeConnectClientAddInsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeConnectClientAddInsInput) SetNextToken(v string) *DescribeConnectClientAddInsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *DescribeConnectClientAddInsInput) SetResourceId(v string) *DescribeConnectClientAddInsInput {
+	s.ResourceId = &v
+	return s
+}
+
+type DescribeConnectClientAddInsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about client add-ins.
+	AddIns []*ConnectClientAddIn `type:"list"`
+
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectClientAddInsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectClientAddInsOutput) GoString() string {
+	return s.String()
+}
+
+// SetAddIns sets the AddIns field's value.
+func (s *DescribeConnectClientAddInsOutput) SetAddIns(v []*ConnectClientAddIn) *DescribeConnectClientAddInsOutput {
+	s.AddIns = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeConnectClientAddInsOutput) SetNextToken(v string) *DescribeConnectClientAddInsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeConnectionAliasPermissionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the connection alias.
+	//
+	// AliasId is a required field
+	AliasId *string `min:"13" type:"string" required:"true"`
+
+	// The maximum number of results to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If you received a NextToken from a previous call that was paginated, provide
+	// this token to receive the next set of results.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectionAliasPermissionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectionAliasPermissionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeConnectionAliasPermissionsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeConnectionAliasPermissionsInput"}
+	if s.AliasId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AliasId"))
+	}
+	if s.AliasId != nil && len(*s.AliasId) < 13 {
+		invalidParams.Add(request.NewErrParamMinLen("AliasId", 13))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAliasId sets the AliasId field's value.
+func (s *DescribeConnectionAliasPermissionsInput) SetAliasId(v string) *DescribeConnectionAliasPermissionsInput {
+	s.AliasId = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeConnectionAliasPermissionsInput) SetMaxResults(v int64) *DescribeConnectionAliasPermissionsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeConnectionAliasPermissionsInput) SetNextToken(v string) *DescribeConnectionAliasPermissionsInput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeConnectionAliasPermissionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the connection alias.
+	AliasId *string `min:"13" type:"string"`
+
+	// The permissions associated with a connection alias.
+	ConnectionAliasPermissions []*ConnectionAliasPermission `min:"1" type:"list"`
+
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectionAliasPermissionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectionAliasPermissionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetAliasId sets the AliasId field's value.
+func (s *DescribeConnectionAliasPermissionsOutput) SetAliasId(v string) *DescribeConnectionAliasPermissionsOutput {
+	s.AliasId = &v
+	return s
+}
+
+// SetConnectionAliasPermissions sets the ConnectionAliasPermissions field's value.
+func (s *DescribeConnectionAliasPermissionsOutput) SetConnectionAliasPermissions(v []*ConnectionAliasPermission) *DescribeConnectionAliasPermissionsOutput {
+	s.ConnectionAliasPermissions = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeConnectionAliasPermissionsOutput) SetNextToken(v string) *DescribeConnectionAliasPermissionsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeConnectionAliasesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifiers of the connection aliases to describe.
+	AliasIds []*string `min:"1" type:"list"`
+
+	// The maximum number of connection aliases to return.
+	Limit *int64 `min:"1" type:"integer"`
+
+	// If you received a NextToken from a previous call that was paginated, provide
+	// this token to receive the next set of results.
+	NextToken *string `min:"1" type:"string"`
+
+	// The identifier of the directory associated with the connection alias.
+	ResourceId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectionAliasesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectionAliasesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeConnectionAliasesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeConnectionAliasesInput"}
+	if s.AliasIds != nil && len(s.AliasIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("AliasIds", 1))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAliasIds sets the AliasIds field's value.
+func (s *DescribeConnectionAliasesInput) SetAliasIds(v []*string) *DescribeConnectionAliasesInput {
+	s.AliasIds = v
+	return s
+}
+
+// SetLimit sets the Limit field's value.
+func (s *DescribeConnectionAliasesInput) SetLimit(v int64) *DescribeConnectionAliasesInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeConnectionAliasesInput) SetNextToken(v string) *DescribeConnectionAliasesInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *DescribeConnectionAliasesInput) SetResourceId(v string) *DescribeConnectionAliasesInput {
+	s.ResourceId = &v
+	return s
+}
+
+type DescribeConnectionAliasesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the specified connection aliases.
+	ConnectionAliases []*ConnectionAlias `min:"1" type:"list"`
+
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectionAliasesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeConnectionAliasesOutput) GoString() string {
+	return s.String()
+}
+
+// SetConnectionAliases sets the ConnectionAliases field's value.
+func (s *DescribeConnectionAliasesOutput) SetConnectionAliases(v []*ConnectionAlias) *DescribeConnectionAliasesOutput {
+	s.ConnectionAliases = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeConnectionAliasesOutput) SetNextToken(v string) *DescribeConnectionAliasesOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeImageAssociationsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The resource types of the associated resource.
+	//
+	// AssociatedResourceTypes is a required field
+	AssociatedResourceTypes []*string `type:"list" required:"true" enum:"ImageAssociatedResourceType"`
+
+	// The identifier of the image.
+	//
+	// ImageId is a required field
+	ImageId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeImageAssociationsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeImageAssociationsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeImageAssociationsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeImageAssociationsInput"}
+	if s.AssociatedResourceTypes == nil {
+		invalidParams.Add(request.NewErrParamRequired("AssociatedResourceTypes"))
+	}
+	if s.ImageId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ImageId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAssociatedResourceTypes sets the AssociatedResourceTypes field's value.
+func (s *DescribeImageAssociationsInput) SetAssociatedResourceTypes(v []*string) *DescribeImageAssociationsInput {
+	s.AssociatedResourceTypes = v
+	return s
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *DescribeImageAssociationsInput) SetImageId(v string) *DescribeImageAssociationsInput {
+	s.ImageId = &v
+	return s
+}
+
+type DescribeImageAssociationsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// List of information about the specified associations.
+	Associations []*ImageResourceAssociation `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeImageAssociationsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeImageAssociationsOutput) GoString() string {
+	return s.String()
+}
+
+// SetAssociations sets the Associations field's value.
+func (s *DescribeImageAssociationsOutput) SetAssociations(v []*ImageResourceAssociation) *DescribeImageAssociationsOutput {
+	s.Associations = v
 	return s
 }
 
@@ -3902,12 +11796,20 @@ type DescribeIpGroupsInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIpGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIpGroupsInput) GoString() string {
 	return s.String()
 }
@@ -3949,20 +11851,28 @@ func (s *DescribeIpGroupsInput) SetNextToken(v string) *DescribeIpGroupsInput {
 type DescribeIpGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `min:"1" type:"string"`
 
 	// Information about the IP access control groups.
 	Result []*IpGroup `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIpGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeIpGroupsOutput) GoString() string {
 	return s.String()
 }
@@ -3982,18 +11892,28 @@ func (s *DescribeIpGroupsOutput) SetResult(v []*IpGroup) *DescribeIpGroupsOutput
 type DescribeTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
+	// The identifier of the WorkSpaces resource. The supported resource types are
+	// WorkSpaces, registered directories, images, custom bundles, IP access control
+	// groups, and connection aliases.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsInput) GoString() string {
 	return s.String()
 }
@@ -4027,12 +11947,20 @@ type DescribeTagsOutput struct {
 	TagList []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeTagsOutput) GoString() string {
 	return s.String()
 }
@@ -4040,6 +11968,97 @@ func (s DescribeTagsOutput) GoString() string {
 // SetTagList sets the TagList field's value.
 func (s *DescribeTagsOutput) SetTagList(v []*Tag) *DescribeTagsOutput {
 	s.TagList = v
+	return s
+}
+
+type DescribeWorkspaceAssociationsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The resource types of the associated resources.
+	//
+	// AssociatedResourceTypes is a required field
+	AssociatedResourceTypes []*string `type:"list" required:"true" enum:"WorkSpaceAssociatedResourceType"`
+
+	// The identifier of the WorkSpace.
+	//
+	// WorkspaceId is a required field
+	WorkspaceId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceAssociationsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceAssociationsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeWorkspaceAssociationsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkspaceAssociationsInput"}
+	if s.AssociatedResourceTypes == nil {
+		invalidParams.Add(request.NewErrParamRequired("AssociatedResourceTypes"))
+	}
+	if s.WorkspaceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAssociatedResourceTypes sets the AssociatedResourceTypes field's value.
+func (s *DescribeWorkspaceAssociationsInput) SetAssociatedResourceTypes(v []*string) *DescribeWorkspaceAssociationsInput {
+	s.AssociatedResourceTypes = v
+	return s
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *DescribeWorkspaceAssociationsInput) SetWorkspaceId(v string) *DescribeWorkspaceAssociationsInput {
+	s.WorkspaceId = &v
+	return s
+}
+
+type DescribeWorkspaceAssociationsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// List of information about the specified associations.
+	Associations []*WorkspaceResourceAssociation `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceAssociationsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceAssociationsOutput) GoString() string {
+	return s.String()
+}
+
+// SetAssociations sets the Associations field's value.
+func (s *DescribeWorkspaceAssociationsOutput) SetAssociations(v []*WorkspaceResourceAssociation) *DescribeWorkspaceAssociationsOutput {
+	s.Associations = v
 	return s
 }
 
@@ -4057,17 +12076,25 @@ type DescribeWorkspaceBundlesInput struct {
 	// The owner of the bundles. You cannot combine this parameter with any other
 	// filter.
 	//
-	// Specify AMAZON to describe the bundles provided by AWS or null to describe
-	// the bundles that belong to your account.
+	// To describe the bundles provided by Amazon Web Services, specify AMAZON.
+	// To describe the bundles that belong to your account, don't specify a value.
 	Owner *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceBundlesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceBundlesInput) GoString() string {
 	return s.String()
 }
@@ -4112,18 +12139,26 @@ type DescribeWorkspaceBundlesOutput struct {
 	// Information about the bundles.
 	Bundles []*WorkspaceBundle `type:"list"`
 
-	// The token to use to retrieve the next set of results, or null if there are
-	// no more results available. This token is valid for one day and must be used
-	// within that time frame.
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return. This token is valid for one day
+	// and must be used within that time frame.
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceBundlesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceBundlesOutput) GoString() string {
 	return s.String()
 }
@@ -4147,17 +12182,28 @@ type DescribeWorkspaceDirectoriesInput struct {
 	// are retrieved.
 	DirectoryIds []*string `min:"1" type:"list"`
 
+	// The maximum number of directories to return.
+	Limit *int64 `min:"1" type:"integer"`
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceDirectoriesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceDirectoriesInput) GoString() string {
 	return s.String()
 }
@@ -4167,6 +12213,9 @@ func (s *DescribeWorkspaceDirectoriesInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkspaceDirectoriesInput"}
 	if s.DirectoryIds != nil && len(s.DirectoryIds) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("DirectoryIds", 1))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
@@ -4184,6 +12233,12 @@ func (s *DescribeWorkspaceDirectoriesInput) SetDirectoryIds(v []*string) *Descri
 	return s
 }
 
+// SetLimit sets the Limit field's value.
+func (s *DescribeWorkspaceDirectoriesInput) SetLimit(v int64) *DescribeWorkspaceDirectoriesInput {
+	s.Limit = &v
+	return s
+}
+
 // SetNextToken sets the NextToken field's value.
 func (s *DescribeWorkspaceDirectoriesInput) SetNextToken(v string) *DescribeWorkspaceDirectoriesInput {
 	s.NextToken = &v
@@ -4196,17 +12251,25 @@ type DescribeWorkspaceDirectoriesOutput struct {
 	// Information about the directories.
 	Directories []*WorkspaceDirectory `type:"list"`
 
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceDirectoriesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceDirectoriesOutput) GoString() string {
 	return s.String()
 }
@@ -4223,11 +12286,13 @@ func (s *DescribeWorkspaceDirectoriesOutput) SetNextToken(v string) *DescribeWor
 	return s
 }
 
-type DescribeWorkspaceImagesInput struct {
+type DescribeWorkspaceImagePermissionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The identifier of the image.
-	ImageIds []*string `min:"1" type:"list"`
+	//
+	// ImageId is a required field
+	ImageId *string `type:"string" required:"true"`
 
 	// The maximum number of items to return.
 	MaxResults *int64 `min:"1" type:"integer"`
@@ -4237,12 +12302,143 @@ type DescribeWorkspaceImagesInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceImagePermissionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceImagePermissionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeWorkspaceImagePermissionsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkspaceImagePermissionsInput"}
+	if s.ImageId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ImageId"))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *DescribeWorkspaceImagePermissionsInput) SetImageId(v string) *DescribeWorkspaceImagePermissionsInput {
+	s.ImageId = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeWorkspaceImagePermissionsInput) SetMaxResults(v int64) *DescribeWorkspaceImagePermissionsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeWorkspaceImagePermissionsInput) SetNextToken(v string) *DescribeWorkspaceImagePermissionsInput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeWorkspaceImagePermissionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the image.
+	ImageId *string `type:"string"`
+
+	// The identifiers of the Amazon Web Services accounts that the image has been
+	// shared with.
+	ImagePermissions []*ImagePermission `type:"list"`
+
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceImagePermissionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceImagePermissionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *DescribeWorkspaceImagePermissionsOutput) SetImageId(v string) *DescribeWorkspaceImagePermissionsOutput {
+	s.ImageId = &v
+	return s
+}
+
+// SetImagePermissions sets the ImagePermissions field's value.
+func (s *DescribeWorkspaceImagePermissionsOutput) SetImagePermissions(v []*ImagePermission) *DescribeWorkspaceImagePermissionsOutput {
+	s.ImagePermissions = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeWorkspaceImagePermissionsOutput) SetNextToken(v string) *DescribeWorkspaceImagePermissionsOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeWorkspaceImagesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the image.
+	ImageIds []*string `min:"1" type:"list"`
+
+	// The type (owned or shared) of the image.
+	ImageType *string `type:"string" enum:"ImageType"`
+
+	// The maximum number of items to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If you received a NextToken from a previous call that was paginated, provide
+	// this token to receive the next set of results.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceImagesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceImagesInput) GoString() string {
 	return s.String()
 }
@@ -4272,6 +12468,12 @@ func (s *DescribeWorkspaceImagesInput) SetImageIds(v []*string) *DescribeWorkspa
 	return s
 }
 
+// SetImageType sets the ImageType field's value.
+func (s *DescribeWorkspaceImagesInput) SetImageType(v string) *DescribeWorkspaceImagesInput {
+	s.ImageType = &v
+	return s
+}
+
 // SetMaxResults sets the MaxResults field's value.
 func (s *DescribeWorkspaceImagesInput) SetMaxResults(v int64) *DescribeWorkspaceImagesInput {
 	s.MaxResults = &v
@@ -4290,17 +12492,25 @@ type DescribeWorkspaceImagesOutput struct {
 	// Information about the images.
 	Images []*WorkspaceImage `type:"list"`
 
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceImagesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspaceImagesOutput) GoString() string {
 	return s.String()
 }
@@ -4317,6 +12527,94 @@ func (s *DescribeWorkspaceImagesOutput) SetNextToken(v string) *DescribeWorkspac
 	return s
 }
 
+type DescribeWorkspaceSnapshotsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the WorkSpace.
+	//
+	// WorkspaceId is a required field
+	WorkspaceId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceSnapshotsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceSnapshotsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeWorkspaceSnapshotsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkspaceSnapshotsInput"}
+	if s.WorkspaceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *DescribeWorkspaceSnapshotsInput) SetWorkspaceId(v string) *DescribeWorkspaceSnapshotsInput {
+	s.WorkspaceId = &v
+	return s
+}
+
+type DescribeWorkspaceSnapshotsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the snapshots that can be used to rebuild a WorkSpace.
+	// These snapshots include the user volume.
+	RebuildSnapshots []*Snapshot `type:"list"`
+
+	// Information about the snapshots that can be used to restore a WorkSpace.
+	// These snapshots include both the root volume and the user volume.
+	RestoreSnapshots []*Snapshot `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceSnapshotsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeWorkspaceSnapshotsOutput) GoString() string {
+	return s.String()
+}
+
+// SetRebuildSnapshots sets the RebuildSnapshots field's value.
+func (s *DescribeWorkspaceSnapshotsOutput) SetRebuildSnapshots(v []*Snapshot) *DescribeWorkspaceSnapshotsOutput {
+	s.RebuildSnapshots = v
+	return s
+}
+
+// SetRestoreSnapshots sets the RestoreSnapshots field's value.
+func (s *DescribeWorkspaceSnapshotsOutput) SetRestoreSnapshots(v []*Snapshot) *DescribeWorkspaceSnapshotsOutput {
+	s.RestoreSnapshots = v
+	return s
+}
+
 type DescribeWorkspacesConnectionStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4328,12 +12626,20 @@ type DescribeWorkspacesConnectionStatusInput struct {
 	WorkspaceIds []*string `min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspacesConnectionStatusInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspacesConnectionStatusInput) GoString() string {
 	return s.String()
 }
@@ -4369,20 +12675,28 @@ func (s *DescribeWorkspacesConnectionStatusInput) SetWorkspaceIds(v []*string) *
 type DescribeWorkspacesConnectionStatusOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `min:"1" type:"string"`
 
 	// Information about the connection status of the WorkSpace.
 	WorkspacesConnectionStatus []*WorkspaceConnectionStatus `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspacesConnectionStatusOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspacesConnectionStatusOutput) GoString() string {
 	return s.String()
 }
@@ -4409,7 +12723,7 @@ type DescribeWorkspacesInput struct {
 	// The identifier of the directory. In addition, you can optionally specify
 	// a specific directory user (see UserName). You cannot combine this parameter
 	// with any other filter.
-	DirectoryId *string `type:"string"`
+	DirectoryId *string `min:"10" type:"string"`
 
 	// The maximum number of items to return.
 	Limit *int64 `min:"1" type:"integer"`
@@ -4430,12 +12744,20 @@ type DescribeWorkspacesInput struct {
 	WorkspaceIds []*string `min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspacesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspacesInput) GoString() string {
 	return s.String()
 }
@@ -4443,6 +12765,9 @@ func (s DescribeWorkspacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkspacesInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkspacesInput"}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("DirectoryId", 10))
+	}
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
 	}
@@ -4501,8 +12826,8 @@ func (s *DescribeWorkspacesInput) SetWorkspaceIds(v []*string) *DescribeWorkspac
 type DescribeWorkspacesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `min:"1" type:"string"`
 
 	// Information about the WorkSpaces.
@@ -4512,12 +12837,20 @@ type DescribeWorkspacesOutput struct {
 	Workspaces []*Workspace `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspacesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeWorkspacesOutput) GoString() string {
 	return s.String()
 }
@@ -4534,13 +12867,84 @@ func (s *DescribeWorkspacesOutput) SetWorkspaces(v []*Workspace) *DescribeWorksp
 	return s
 }
 
+type DisassociateConnectionAliasInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the connection alias to disassociate.
+	//
+	// AliasId is a required field
+	AliasId *string `min:"13" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateConnectionAliasInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateConnectionAliasInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociateConnectionAliasInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DisassociateConnectionAliasInput"}
+	if s.AliasId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AliasId"))
+	}
+	if s.AliasId != nil && len(*s.AliasId) < 13 {
+		invalidParams.Add(request.NewErrParamMinLen("AliasId", 13))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAliasId sets the AliasId field's value.
+func (s *DisassociateConnectionAliasInput) SetAliasId(v string) *DisassociateConnectionAliasInput {
+	s.AliasId = &v
+	return s
+}
+
+type DisassociateConnectionAliasOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateConnectionAliasOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateConnectionAliasOutput) GoString() string {
+	return s.String()
+}
+
 type DisassociateIpGroupsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The identifier of the directory.
 	//
 	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
+	DirectoryId *string `min:"10" type:"string" required:"true"`
 
 	// The identifiers of one or more IP access control groups.
 	//
@@ -4548,12 +12952,20 @@ type DisassociateIpGroupsInput struct {
 	GroupIds []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateIpGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateIpGroupsInput) GoString() string {
 	return s.String()
 }
@@ -4563,6 +12975,9 @@ func (s *DisassociateIpGroupsInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "DisassociateIpGroupsInput"}
 	if s.DirectoryId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("DirectoryId", 10))
 	}
 	if s.GroupIds == nil {
 		invalidParams.Add(request.NewErrParamRequired("GroupIds"))
@@ -4590,14 +13005,206 @@ type DisassociateIpGroupsOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateIpGroupsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisassociateIpGroupsOutput) GoString() string {
 	return s.String()
+}
+
+type DisassociateWorkspaceApplicationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the application.
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `type:"string" required:"true"`
+
+	// The identifier of the WorkSpace.
+	//
+	// WorkspaceId is a required field
+	WorkspaceId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateWorkspaceApplicationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateWorkspaceApplicationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociateWorkspaceApplicationInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DisassociateWorkspaceApplicationInput"}
+	if s.ApplicationId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+	}
+	if s.WorkspaceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationId sets the ApplicationId field's value.
+func (s *DisassociateWorkspaceApplicationInput) SetApplicationId(v string) *DisassociateWorkspaceApplicationInput {
+	s.ApplicationId = &v
+	return s
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *DisassociateWorkspaceApplicationInput) SetWorkspaceId(v string) *DisassociateWorkspaceApplicationInput {
+	s.WorkspaceId = &v
+	return s
+}
+
+type DisassociateWorkspaceApplicationOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the targeted association.
+	Association *WorkspaceResourceAssociation `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateWorkspaceApplicationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DisassociateWorkspaceApplicationOutput) GoString() string {
+	return s.String()
+}
+
+// SetAssociation sets the Association field's value.
+func (s *DisassociateWorkspaceApplicationOutput) SetAssociation(v *WorkspaceResourceAssociation) *DisassociateWorkspaceApplicationOutput {
+	s.Association = v
+	return s
+}
+
+// Describes in-depth details about the error. These details include the possible
+// causes of the error and troubleshooting information.
+type ErrorDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates the error code returned.
+	ErrorCode *string `type:"string" enum:"WorkspaceImageErrorDetailCode"`
+
+	// The text of the error message related the error code.
+	ErrorMessage *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ErrorDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ErrorDetails) GoString() string {
+	return s.String()
+}
+
+// SetErrorCode sets the ErrorCode field's value.
+func (s *ErrorDetails) SetErrorCode(v string) *ErrorDetails {
+	s.ErrorCode = &v
+	return s
+}
+
+// SetErrorMessage sets the ErrorMessage field's value.
+func (s *ErrorDetails) SetErrorMessage(v string) *ErrorDetails {
+	s.ErrorMessage = &v
+	return s
+}
+
+// Describes the standby WorkSpace that could not be created.
+type FailedCreateStandbyWorkspacesRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The error code that is returned if the standby WorkSpace could not be created.
+	ErrorCode *string `type:"string"`
+
+	// The text of the error message that is returned if the standby WorkSpace could
+	// not be created.
+	ErrorMessage *string `type:"string"`
+
+	// Information about the standby WorkSpace that could not be created.
+	StandbyWorkspaceRequest *StandbyWorkspace `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FailedCreateStandbyWorkspacesRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FailedCreateStandbyWorkspacesRequest) GoString() string {
+	return s.String()
+}
+
+// SetErrorCode sets the ErrorCode field's value.
+func (s *FailedCreateStandbyWorkspacesRequest) SetErrorCode(v string) *FailedCreateStandbyWorkspacesRequest {
+	s.ErrorCode = &v
+	return s
+}
+
+// SetErrorMessage sets the ErrorMessage field's value.
+func (s *FailedCreateStandbyWorkspacesRequest) SetErrorMessage(v string) *FailedCreateStandbyWorkspacesRequest {
+	s.ErrorMessage = &v
+	return s
+}
+
+// SetStandbyWorkspaceRequest sets the StandbyWorkspaceRequest field's value.
+func (s *FailedCreateStandbyWorkspacesRequest) SetStandbyWorkspaceRequest(v *StandbyWorkspace) *FailedCreateStandbyWorkspacesRequest {
+	s.StandbyWorkspaceRequest = v
+	return s
 }
 
 // Describes a WorkSpace that cannot be created.
@@ -4615,12 +13222,20 @@ type FailedCreateWorkspaceRequest struct {
 	WorkspaceRequest *WorkspaceRequest `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailedCreateWorkspaceRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailedCreateWorkspaceRequest) GoString() string {
 	return s.String()
 }
@@ -4644,8 +13259,8 @@ func (s *FailedCreateWorkspaceRequest) SetWorkspaceRequest(v *WorkspaceRequest) 
 }
 
 // Describes a WorkSpace that could not be rebooted. (RebootWorkspaces), rebuilt
-// (RebuildWorkspaces), terminated (TerminateWorkspaces), started (StartWorkspaces),
-// or stopped (StopWorkspaces).
+// (RebuildWorkspaces), restored (RestoreWorkspace), terminated (TerminateWorkspaces),
+// started (StartWorkspaces), or stopped (StopWorkspaces).
 type FailedWorkspaceChangeRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4660,12 +13275,20 @@ type FailedWorkspaceChangeRequest struct {
 	WorkspaceId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailedWorkspaceChangeRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FailedWorkspaceChangeRequest) GoString() string {
 	return s.String()
 }
@@ -4688,8 +13311,349 @@ func (s *FailedWorkspaceChangeRequest) SetWorkspaceId(v string) *FailedWorkspace
 	return s
 }
 
+// Describes the Amazon Web Services accounts that have been granted permission
+// to use a shared image. For more information about sharing images, see Share
+// or Unshare a Custom WorkSpaces Image (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html).
+type ImagePermission struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the Amazon Web Services account that an image has been
+	// shared with.
+	SharedAccountId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImagePermission) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImagePermission) GoString() string {
+	return s.String()
+}
+
+// SetSharedAccountId sets the SharedAccountId field's value.
+func (s *ImagePermission) SetSharedAccountId(v string) *ImagePermission {
+	s.SharedAccountId = &v
+	return s
+}
+
+// Describes the association between an application and an image resource.
+type ImageResourceAssociation struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the associated resource.
+	AssociatedResourceId *string `min:"1" type:"string"`
+
+	// The resource type of the associated resources.
+	AssociatedResourceType *string `type:"string" enum:"ImageAssociatedResourceType"`
+
+	// The time the association is created.
+	Created *time.Time `type:"timestamp"`
+
+	// The identifier of the image.
+	ImageId *string `type:"string"`
+
+	// The time the association status was last updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// The status of the image resource association.
+	State *string `type:"string" enum:"AssociationState"`
+
+	// The reason the association deployment failed.
+	StateReason *AssociationStateReason `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImageResourceAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImageResourceAssociation) GoString() string {
+	return s.String()
+}
+
+// SetAssociatedResourceId sets the AssociatedResourceId field's value.
+func (s *ImageResourceAssociation) SetAssociatedResourceId(v string) *ImageResourceAssociation {
+	s.AssociatedResourceId = &v
+	return s
+}
+
+// SetAssociatedResourceType sets the AssociatedResourceType field's value.
+func (s *ImageResourceAssociation) SetAssociatedResourceType(v string) *ImageResourceAssociation {
+	s.AssociatedResourceType = &v
+	return s
+}
+
+// SetCreated sets the Created field's value.
+func (s *ImageResourceAssociation) SetCreated(v time.Time) *ImageResourceAssociation {
+	s.Created = &v
+	return s
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *ImageResourceAssociation) SetImageId(v string) *ImageResourceAssociation {
+	s.ImageId = &v
+	return s
+}
+
+// SetLastUpdatedTime sets the LastUpdatedTime field's value.
+func (s *ImageResourceAssociation) SetLastUpdatedTime(v time.Time) *ImageResourceAssociation {
+	s.LastUpdatedTime = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *ImageResourceAssociation) SetState(v string) *ImageResourceAssociation {
+	s.State = &v
+	return s
+}
+
+// SetStateReason sets the StateReason field's value.
+func (s *ImageResourceAssociation) SetStateReason(v *AssociationStateReason) *ImageResourceAssociation {
+	s.StateReason = v
+	return s
+}
+
+type ImportClientBrandingInput struct {
+	_ struct{} `type:"structure"`
+
+	// The branding information to import for Android devices.
+	DeviceTypeAndroid *DefaultImportClientBrandingAttributes `type:"structure"`
+
+	// The branding information to import for iOS devices.
+	DeviceTypeIos *IosImportClientBrandingAttributes `type:"structure"`
+
+	// The branding information to import for Linux devices.
+	DeviceTypeLinux *DefaultImportClientBrandingAttributes `type:"structure"`
+
+	// The branding information to import for macOS devices.
+	DeviceTypeOsx *DefaultImportClientBrandingAttributes `type:"structure"`
+
+	// The branding information to import for web access.
+	DeviceTypeWeb *DefaultImportClientBrandingAttributes `type:"structure"`
+
+	// The branding information to import for Windows devices.
+	DeviceTypeWindows *DefaultImportClientBrandingAttributes `type:"structure"`
+
+	// The directory identifier of the WorkSpace for which you want to import client
+	// branding.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImportClientBrandingInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImportClientBrandingInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ImportClientBrandingInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ImportClientBrandingInput"}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+	if s.DeviceTypeAndroid != nil {
+		if err := s.DeviceTypeAndroid.Validate(); err != nil {
+			invalidParams.AddNested("DeviceTypeAndroid", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DeviceTypeIos != nil {
+		if err := s.DeviceTypeIos.Validate(); err != nil {
+			invalidParams.AddNested("DeviceTypeIos", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DeviceTypeLinux != nil {
+		if err := s.DeviceTypeLinux.Validate(); err != nil {
+			invalidParams.AddNested("DeviceTypeLinux", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DeviceTypeOsx != nil {
+		if err := s.DeviceTypeOsx.Validate(); err != nil {
+			invalidParams.AddNested("DeviceTypeOsx", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DeviceTypeWeb != nil {
+		if err := s.DeviceTypeWeb.Validate(); err != nil {
+			invalidParams.AddNested("DeviceTypeWeb", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.DeviceTypeWindows != nil {
+		if err := s.DeviceTypeWindows.Validate(); err != nil {
+			invalidParams.AddNested("DeviceTypeWindows", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDeviceTypeAndroid sets the DeviceTypeAndroid field's value.
+func (s *ImportClientBrandingInput) SetDeviceTypeAndroid(v *DefaultImportClientBrandingAttributes) *ImportClientBrandingInput {
+	s.DeviceTypeAndroid = v
+	return s
+}
+
+// SetDeviceTypeIos sets the DeviceTypeIos field's value.
+func (s *ImportClientBrandingInput) SetDeviceTypeIos(v *IosImportClientBrandingAttributes) *ImportClientBrandingInput {
+	s.DeviceTypeIos = v
+	return s
+}
+
+// SetDeviceTypeLinux sets the DeviceTypeLinux field's value.
+func (s *ImportClientBrandingInput) SetDeviceTypeLinux(v *DefaultImportClientBrandingAttributes) *ImportClientBrandingInput {
+	s.DeviceTypeLinux = v
+	return s
+}
+
+// SetDeviceTypeOsx sets the DeviceTypeOsx field's value.
+func (s *ImportClientBrandingInput) SetDeviceTypeOsx(v *DefaultImportClientBrandingAttributes) *ImportClientBrandingInput {
+	s.DeviceTypeOsx = v
+	return s
+}
+
+// SetDeviceTypeWeb sets the DeviceTypeWeb field's value.
+func (s *ImportClientBrandingInput) SetDeviceTypeWeb(v *DefaultImportClientBrandingAttributes) *ImportClientBrandingInput {
+	s.DeviceTypeWeb = v
+	return s
+}
+
+// SetDeviceTypeWindows sets the DeviceTypeWindows field's value.
+func (s *ImportClientBrandingInput) SetDeviceTypeWindows(v *DefaultImportClientBrandingAttributes) *ImportClientBrandingInput {
+	s.DeviceTypeWindows = v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *ImportClientBrandingInput) SetResourceId(v string) *ImportClientBrandingInput {
+	s.ResourceId = &v
+	return s
+}
+
+type ImportClientBrandingOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The branding information configured for Android devices.
+	DeviceTypeAndroid *DefaultClientBrandingAttributes `type:"structure"`
+
+	// The branding information configured for iOS devices.
+	DeviceTypeIos *IosClientBrandingAttributes `type:"structure"`
+
+	// The branding information configured for Linux devices.
+	DeviceTypeLinux *DefaultClientBrandingAttributes `type:"structure"`
+
+	// The branding information configured for macOS devices.
+	DeviceTypeOsx *DefaultClientBrandingAttributes `type:"structure"`
+
+	// The branding information configured for web access.
+	DeviceTypeWeb *DefaultClientBrandingAttributes `type:"structure"`
+
+	// The branding information configured for Windows devices.
+	DeviceTypeWindows *DefaultClientBrandingAttributes `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImportClientBrandingOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ImportClientBrandingOutput) GoString() string {
+	return s.String()
+}
+
+// SetDeviceTypeAndroid sets the DeviceTypeAndroid field's value.
+func (s *ImportClientBrandingOutput) SetDeviceTypeAndroid(v *DefaultClientBrandingAttributes) *ImportClientBrandingOutput {
+	s.DeviceTypeAndroid = v
+	return s
+}
+
+// SetDeviceTypeIos sets the DeviceTypeIos field's value.
+func (s *ImportClientBrandingOutput) SetDeviceTypeIos(v *IosClientBrandingAttributes) *ImportClientBrandingOutput {
+	s.DeviceTypeIos = v
+	return s
+}
+
+// SetDeviceTypeLinux sets the DeviceTypeLinux field's value.
+func (s *ImportClientBrandingOutput) SetDeviceTypeLinux(v *DefaultClientBrandingAttributes) *ImportClientBrandingOutput {
+	s.DeviceTypeLinux = v
+	return s
+}
+
+// SetDeviceTypeOsx sets the DeviceTypeOsx field's value.
+func (s *ImportClientBrandingOutput) SetDeviceTypeOsx(v *DefaultClientBrandingAttributes) *ImportClientBrandingOutput {
+	s.DeviceTypeOsx = v
+	return s
+}
+
+// SetDeviceTypeWeb sets the DeviceTypeWeb field's value.
+func (s *ImportClientBrandingOutput) SetDeviceTypeWeb(v *DefaultClientBrandingAttributes) *ImportClientBrandingOutput {
+	s.DeviceTypeWeb = v
+	return s
+}
+
+// SetDeviceTypeWindows sets the DeviceTypeWindows field's value.
+func (s *ImportClientBrandingOutput) SetDeviceTypeWindows(v *DefaultClientBrandingAttributes) *ImportClientBrandingOutput {
+	s.DeviceTypeWindows = v
+	return s
+}
+
 type ImportWorkspaceImageInput struct {
 	_ struct{} `type:"structure"`
+
+	// If specified, the version of Microsoft Office to subscribe to. Valid only
+	// for Windows 10 and 11 BYOL images. For more information about subscribing
+	// to Office for BYOL images, see Bring Your Own Windows Desktop Licenses (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
+	//
+	//    * Although this parameter is an array, only one item is allowed at this
+	//    time.
+	//
+	//    * Windows 11 only supports Microsoft_Office_2019.
+	Applications []*string `min:"1" type:"list" enum:"Application"`
 
 	// The identifier of the EC2 image.
 	//
@@ -4706,18 +13670,41 @@ type ImportWorkspaceImageInput struct {
 	// ImageName is a required field
 	ImageName *string `min:"1" type:"string" required:"true"`
 
-	// The ingestion process to be used when importing the image.
+	// The ingestion process to be used when importing the image, depending on which
+	// protocol you want to use for your BYOL Workspace image, either PCoIP, WorkSpaces
+	// Streaming Protocol (WSP), or bring your own protocol (BYOP). To use WSP,
+	// specify a value that ends in _WSP. To use PCoIP, specify a value that does
+	// not end in _WSP. To use BYOP, specify a value that ends in _BYOP.
+	//
+	// For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro),
+	// specify BYOL_REGULAR, BYOL_REGULAR_WSP, or BYOL_REGULAR_BYOP, depending on
+	// the protocol.
+	//
+	// The BYOL_REGULAR_BYOP and BYOL_GRAPHICS_G4DN_BYOP values are only supported
+	// by Amazon WorkSpaces Core. Contact your account team to be allow-listed to
+	// use these values. For more information, see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/).
 	//
 	// IngestionProcess is a required field
 	IngestionProcess *string `type:"string" required:"true" enum:"WorkspaceImageIngestionProcess"`
+
+	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportWorkspaceImageInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportWorkspaceImageInput) GoString() string {
 	return s.String()
 }
@@ -4725,6 +13712,9 @@ func (s ImportWorkspaceImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportWorkspaceImageInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "ImportWorkspaceImageInput"}
+	if s.Applications != nil && len(s.Applications) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Applications", 1))
+	}
 	if s.Ec2ImageId == nil {
 		invalidParams.Add(request.NewErrParamRequired("Ec2ImageId"))
 	}
@@ -4743,11 +13733,27 @@ func (s *ImportWorkspaceImageInput) Validate() error {
 	if s.IngestionProcess == nil {
 		invalidParams.Add(request.NewErrParamRequired("IngestionProcess"))
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetApplications sets the Applications field's value.
+func (s *ImportWorkspaceImageInput) SetApplications(v []*string) *ImportWorkspaceImageInput {
+	s.Applications = v
+	return s
 }
 
 // SetEc2ImageId sets the Ec2ImageId field's value.
@@ -4774,6 +13780,12 @@ func (s *ImportWorkspaceImageInput) SetIngestionProcess(v string) *ImportWorkspa
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *ImportWorkspaceImageInput) SetTags(v []*Tag) *ImportWorkspaceImageInput {
+	s.Tags = v
+	return s
+}
+
 type ImportWorkspaceImageOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4781,12 +13793,20 @@ type ImportWorkspaceImageOutput struct {
 	ImageId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportWorkspaceImageOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ImportWorkspaceImageOutput) GoString() string {
 	return s.String()
 }
@@ -4794,6 +13814,474 @@ func (s ImportWorkspaceImageOutput) GoString() string {
 // SetImageId sets the ImageId field's value.
 func (s *ImportWorkspaceImageOutput) SetImageId(v string) *ImportWorkspaceImageOutput {
 	s.ImageId = &v
+	return s
+}
+
+// The specified application is not compatible with the resource.
+type IncompatibleApplicationsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IncompatibleApplicationsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IncompatibleApplicationsException) GoString() string {
+	return s.String()
+}
+
+func newErrorIncompatibleApplicationsException(v protocol.ResponseMetadata) error {
+	return &IncompatibleApplicationsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IncompatibleApplicationsException) Code() string {
+	return "IncompatibleApplicationsException"
+}
+
+// Message returns the exception's message.
+func (s *IncompatibleApplicationsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IncompatibleApplicationsException) OrigErr() error {
+	return nil
+}
+
+func (s *IncompatibleApplicationsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IncompatibleApplicationsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IncompatibleApplicationsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// One or more parameter values are not valid.
+type InvalidParameterValuesException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The exception error message.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterValuesException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterValuesException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidParameterValuesException(v protocol.ResponseMetadata) error {
+	return &InvalidParameterValuesException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidParameterValuesException) Code() string {
+	return "InvalidParameterValuesException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidParameterValuesException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidParameterValuesException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidParameterValuesException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidParameterValuesException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidParameterValuesException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The state of the resource is not valid for this operation.
+type InvalidResourceStateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidResourceStateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidResourceStateException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidResourceStateException(v protocol.ResponseMetadata) error {
+	return &InvalidResourceStateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidResourceStateException) Code() string {
+	return "InvalidResourceStateException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidResourceStateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidResourceStateException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidResourceStateException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidResourceStateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidResourceStateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The client branding attributes for iOS device types. These attributes are
+// displayed on the iOS client login screen only.
+//
+// Client branding attributes are public facing. Ensure you do not include sensitive
+// information.
+type IosClientBrandingAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// The forgotten password link. This is the web address that users can go to
+	// if they forget the password for their WorkSpace.
+	ForgotPasswordLink *string `min:"1" type:"string"`
+
+	// The login message. Specified as a key value pair, in which the key is a locale
+	// and the value is the localized message for that locale. The only key supported
+	// is en_US. The HTML tags supported include the following: a, b, blockquote,
+	// br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// strong, sub, sup, u, ul.
+	LoginMessage map[string]*string `type:"map"`
+
+	// The @2x version of the logo. This is the higher resolution display that offers
+	// a scale factor of 2.0 (or @2x). The only image format accepted is a binary
+	// data object that is converted from a .png file.
+	//
+	// For more information about iOS image size and resolution, see Image Size
+	// and Resolution (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// in the Apple Human Interface Guidelines.
+	Logo2xUrl *string `min:"1" type:"string"`
+
+	// The @3x version of the logo. This is the higher resolution display that offers
+	// a scale factor of 3.0 (or @3x).The only image format accepted is a binary
+	// data object that is converted from a .png file.
+	//
+	// For more information about iOS image size and resolution, see Image Size
+	// and Resolution (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// in the Apple Human Interface Guidelines.
+	Logo3xUrl *string `min:"1" type:"string"`
+
+	// The logo. This is the standard-resolution display that has a 1:1 pixel density
+	// (or @1x), where one pixel is equal to one point. The only image format accepted
+	// is a binary data object that is converted from a .png file.
+	LogoUrl *string `min:"1" type:"string"`
+
+	// The support email. The company's customer support email address.
+	//
+	//    * In each platform type, the SupportEmail and SupportLink parameters are
+	//    mutually exclusive. You can specify one parameter for each platform type,
+	//    but not both.
+	//
+	//    * The default email is workspaces-feedback@amazon.com.
+	SupportEmail *string `min:"6" type:"string"`
+
+	// The support link. The link for the company's customer support page for their
+	// WorkSpace.
+	//
+	//    * In each platform type, the SupportEmail and SupportLink parameters are
+	//    mutually exclusive. You can specify one parameter for each platform type,
+	//    but not both.
+	//
+	//    * The default support link is workspaces-feedback@amazon.com.
+	SupportLink *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IosClientBrandingAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IosClientBrandingAttributes) GoString() string {
+	return s.String()
+}
+
+// SetForgotPasswordLink sets the ForgotPasswordLink field's value.
+func (s *IosClientBrandingAttributes) SetForgotPasswordLink(v string) *IosClientBrandingAttributes {
+	s.ForgotPasswordLink = &v
+	return s
+}
+
+// SetLoginMessage sets the LoginMessage field's value.
+func (s *IosClientBrandingAttributes) SetLoginMessage(v map[string]*string) *IosClientBrandingAttributes {
+	s.LoginMessage = v
+	return s
+}
+
+// SetLogo2xUrl sets the Logo2xUrl field's value.
+func (s *IosClientBrandingAttributes) SetLogo2xUrl(v string) *IosClientBrandingAttributes {
+	s.Logo2xUrl = &v
+	return s
+}
+
+// SetLogo3xUrl sets the Logo3xUrl field's value.
+func (s *IosClientBrandingAttributes) SetLogo3xUrl(v string) *IosClientBrandingAttributes {
+	s.Logo3xUrl = &v
+	return s
+}
+
+// SetLogoUrl sets the LogoUrl field's value.
+func (s *IosClientBrandingAttributes) SetLogoUrl(v string) *IosClientBrandingAttributes {
+	s.LogoUrl = &v
+	return s
+}
+
+// SetSupportEmail sets the SupportEmail field's value.
+func (s *IosClientBrandingAttributes) SetSupportEmail(v string) *IosClientBrandingAttributes {
+	s.SupportEmail = &v
+	return s
+}
+
+// SetSupportLink sets the SupportLink field's value.
+func (s *IosClientBrandingAttributes) SetSupportLink(v string) *IosClientBrandingAttributes {
+	s.SupportLink = &v
+	return s
+}
+
+// The client branding attributes to import for iOS device types. These attributes
+// are displayed on the iOS client login screen.
+//
+// Client branding attributes are public facing. Ensure you do not include sensitive
+// information.
+type IosImportClientBrandingAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// The forgotten password link. This is the web address that users can go to
+	// if they forget the password for their WorkSpace.
+	ForgotPasswordLink *string `min:"1" type:"string"`
+
+	// The login message. Specified as a key value pair, in which the key is a locale
+	// and the value is the localized message for that locale. The only key supported
+	// is en_US. The HTML tags supported include the following: a, b, blockquote,
+	// br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// strong, sub, sup, u, ul.
+	LoginMessage map[string]*string `type:"map"`
+
+	// The logo. This is the standard-resolution display that has a 1:1 pixel density
+	// (or @1x), where one pixel is equal to one point. The only image format accepted
+	// is a binary data object that is converted from a .png file.
+	// Logo is automatically base64 encoded/decoded by the SDK.
+	Logo []byte `min:"1" type:"blob"`
+
+	// The @2x version of the logo. This is the higher resolution display that offers
+	// a scale factor of 2.0 (or @2x). The only image format accepted is a binary
+	// data object that is converted from a .png file.
+	//
+	// For more information about iOS image size and resolution, see Image Size
+	// and Resolution (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// in the Apple Human Interface Guidelines.
+	// Logo2x is automatically base64 encoded/decoded by the SDK.
+	Logo2x []byte `min:"1" type:"blob"`
+
+	// The @3x version of the logo. This is the higher resolution display that offers
+	// a scale factor of 3.0 (or @3x). The only image format accepted is a binary
+	// data object that is converted from a .png file.
+	//
+	// For more information about iOS image size and resolution, see Image Size
+	// and Resolution (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// in the Apple Human Interface Guidelines.
+	// Logo3x is automatically base64 encoded/decoded by the SDK.
+	Logo3x []byte `min:"1" type:"blob"`
+
+	// The support email. The company's customer support email address.
+	//
+	//    * In each platform type, the SupportEmail and SupportLink parameters are
+	//    mutually exclusive. You can specify one parameter for each platform type,
+	//    but not both.
+	//
+	//    * The default email is workspaces-feedback@amazon.com.
+	SupportEmail *string `min:"6" type:"string"`
+
+	// The support link. The link for the company's customer support page for their
+	// WorkSpace.
+	//
+	//    * In each platform type, the SupportEmail and SupportLink parameters are
+	//    mutually exclusive. You can specify one parameter for each platform type,
+	//    but not both.
+	//
+	//    * The default support link is workspaces-feedback@amazon.com.
+	SupportLink *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IosImportClientBrandingAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IosImportClientBrandingAttributes) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IosImportClientBrandingAttributes) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "IosImportClientBrandingAttributes"}
+	if s.ForgotPasswordLink != nil && len(*s.ForgotPasswordLink) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ForgotPasswordLink", 1))
+	}
+	if s.Logo != nil && len(s.Logo) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Logo", 1))
+	}
+	if s.Logo2x != nil && len(s.Logo2x) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Logo2x", 1))
+	}
+	if s.Logo3x != nil && len(s.Logo3x) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Logo3x", 1))
+	}
+	if s.SupportEmail != nil && len(*s.SupportEmail) < 6 {
+		invalidParams.Add(request.NewErrParamMinLen("SupportEmail", 6))
+	}
+	if s.SupportLink != nil && len(*s.SupportLink) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("SupportLink", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetForgotPasswordLink sets the ForgotPasswordLink field's value.
+func (s *IosImportClientBrandingAttributes) SetForgotPasswordLink(v string) *IosImportClientBrandingAttributes {
+	s.ForgotPasswordLink = &v
+	return s
+}
+
+// SetLoginMessage sets the LoginMessage field's value.
+func (s *IosImportClientBrandingAttributes) SetLoginMessage(v map[string]*string) *IosImportClientBrandingAttributes {
+	s.LoginMessage = v
+	return s
+}
+
+// SetLogo sets the Logo field's value.
+func (s *IosImportClientBrandingAttributes) SetLogo(v []byte) *IosImportClientBrandingAttributes {
+	s.Logo = v
+	return s
+}
+
+// SetLogo2x sets the Logo2x field's value.
+func (s *IosImportClientBrandingAttributes) SetLogo2x(v []byte) *IosImportClientBrandingAttributes {
+	s.Logo2x = v
+	return s
+}
+
+// SetLogo3x sets the Logo3x field's value.
+func (s *IosImportClientBrandingAttributes) SetLogo3x(v []byte) *IosImportClientBrandingAttributes {
+	s.Logo3x = v
+	return s
+}
+
+// SetSupportEmail sets the SupportEmail field's value.
+func (s *IosImportClientBrandingAttributes) SetSupportEmail(v string) *IosImportClientBrandingAttributes {
+	s.SupportEmail = &v
+	return s
+}
+
+// SetSupportLink sets the SupportLink field's value.
+func (s *IosImportClientBrandingAttributes) SetSupportLink(v string) *IosImportClientBrandingAttributes {
+	s.SupportLink = &v
 	return s
 }
 
@@ -4814,12 +14302,20 @@ type IpGroup struct {
 	UserRules []*IpRuleItem `locationName:"userRules" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IpGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IpGroup) GoString() string {
 	return s.String()
 }
@@ -4859,12 +14355,20 @@ type IpRuleItem struct {
 	RuleDesc *string `locationName:"ruleDesc" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IpRuleItem) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IpRuleItem) GoString() string {
 	return s.String()
 }
@@ -4899,12 +14403,20 @@ type ListAvailableManagementCidrRangesInput struct {
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAvailableManagementCidrRangesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAvailableManagementCidrRangesInput) GoString() string {
 	return s.String()
 }
@@ -4952,17 +14464,25 @@ type ListAvailableManagementCidrRangesOutput struct {
 	// The list of available IP address ranges, specified as IPv4 CIDR blocks.
 	ManagementCidrRanges []*string `type:"list"`
 
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAvailableManagementCidrRangesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAvailableManagementCidrRangesOutput) GoString() string {
 	return s.String()
 }
@@ -4979,6 +14499,108 @@ func (s *ListAvailableManagementCidrRangesOutput) SetNextToken(v string) *ListAv
 	return s
 }
 
+type MigrateWorkspaceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the target bundle type to migrate the WorkSpace to.
+	//
+	// BundleId is a required field
+	BundleId *string `type:"string" required:"true"`
+
+	// The identifier of the WorkSpace to migrate from.
+	//
+	// SourceWorkspaceId is a required field
+	SourceWorkspaceId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MigrateWorkspaceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MigrateWorkspaceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MigrateWorkspaceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "MigrateWorkspaceInput"}
+	if s.BundleId == nil {
+		invalidParams.Add(request.NewErrParamRequired("BundleId"))
+	}
+	if s.SourceWorkspaceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("SourceWorkspaceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBundleId sets the BundleId field's value.
+func (s *MigrateWorkspaceInput) SetBundleId(v string) *MigrateWorkspaceInput {
+	s.BundleId = &v
+	return s
+}
+
+// SetSourceWorkspaceId sets the SourceWorkspaceId field's value.
+func (s *MigrateWorkspaceInput) SetSourceWorkspaceId(v string) *MigrateWorkspaceInput {
+	s.SourceWorkspaceId = &v
+	return s
+}
+
+type MigrateWorkspaceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The original identifier of the WorkSpace that is being migrated.
+	SourceWorkspaceId *string `type:"string"`
+
+	// The new identifier of the WorkSpace that is being migrated. If the migration
+	// does not succeed, the target WorkSpace ID will not be used, and the WorkSpace
+	// will still have the original WorkSpace ID.
+	TargetWorkspaceId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MigrateWorkspaceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s MigrateWorkspaceOutput) GoString() string {
+	return s.String()
+}
+
+// SetSourceWorkspaceId sets the SourceWorkspaceId field's value.
+func (s *MigrateWorkspaceOutput) SetSourceWorkspaceId(v string) *MigrateWorkspaceOutput {
+	s.SourceWorkspaceId = &v
+	return s
+}
+
+// SetTargetWorkspaceId sets the TargetWorkspaceId field's value.
+func (s *MigrateWorkspaceOutput) SetTargetWorkspaceId(v string) *MigrateWorkspaceOutput {
+	s.TargetWorkspaceId = &v
+	return s
+}
+
 // Describes a WorkSpace modification.
 type ModificationState struct {
 	_ struct{} `type:"structure"`
@@ -4990,12 +14612,20 @@ type ModificationState struct {
 	State *string `type:"string" enum:"ModificationStateEnum"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModificationState) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModificationState) GoString() string {
 	return s.String()
 }
@@ -5027,12 +14657,20 @@ type ModifyAccountInput struct {
 	DedicatedTenancySupport *string `type:"string" enum:"DedicatedTenancySupportEnum"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyAccountInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyAccountInput) GoString() string {
 	return s.String()
 }
@@ -5053,13 +14691,115 @@ type ModifyAccountOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyAccountOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyAccountOutput) GoString() string {
+	return s.String()
+}
+
+type ModifyCertificateBasedAuthPropertiesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The properties of the certificate-based authentication.
+	CertificateBasedAuthProperties *CertificateBasedAuthProperties `type:"structure"`
+
+	// The properties of the certificate-based authentication you want to delete.
+	PropertiesToDelete []*string `type:"list" enum:"DeletableCertificateBasedAuthProperty"`
+
+	// The resource identifiers, in the form of directory IDs.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyCertificateBasedAuthPropertiesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyCertificateBasedAuthPropertiesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyCertificateBasedAuthPropertiesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ModifyCertificateBasedAuthPropertiesInput"}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+	if s.CertificateBasedAuthProperties != nil {
+		if err := s.CertificateBasedAuthProperties.Validate(); err != nil {
+			invalidParams.AddNested("CertificateBasedAuthProperties", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCertificateBasedAuthProperties sets the CertificateBasedAuthProperties field's value.
+func (s *ModifyCertificateBasedAuthPropertiesInput) SetCertificateBasedAuthProperties(v *CertificateBasedAuthProperties) *ModifyCertificateBasedAuthPropertiesInput {
+	s.CertificateBasedAuthProperties = v
+	return s
+}
+
+// SetPropertiesToDelete sets the PropertiesToDelete field's value.
+func (s *ModifyCertificateBasedAuthPropertiesInput) SetPropertiesToDelete(v []*string) *ModifyCertificateBasedAuthPropertiesInput {
+	s.PropertiesToDelete = v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *ModifyCertificateBasedAuthPropertiesInput) SetResourceId(v string) *ModifyCertificateBasedAuthPropertiesInput {
+	s.ResourceId = &v
+	return s
+}
+
+type ModifyCertificateBasedAuthPropertiesOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyCertificateBasedAuthPropertiesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyCertificateBasedAuthPropertiesOutput) GoString() string {
 	return s.String()
 }
 
@@ -5077,12 +14817,20 @@ type ModifyClientPropertiesInput struct {
 	ResourceId *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyClientPropertiesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyClientPropertiesInput) GoString() string {
 	return s.String()
 }
@@ -5122,18 +14870,390 @@ type ModifyClientPropertiesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyClientPropertiesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyClientPropertiesOutput) GoString() string {
+	return s.String()
+}
+
+type ModifySamlPropertiesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The SAML properties to delete as part of your request.
+	//
+	// Specify one of the following options:
+	//
+	//    * SAML_PROPERTIES_USER_ACCESS_URL to delete the user access URL.
+	//
+	//    * SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME to delete the relay state
+	//    parameter name.
+	PropertiesToDelete []*string `type:"list" enum:"DeletableSamlProperty"`
+
+	// The directory identifier for which you want to configure SAML properties.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+
+	// The properties for configuring SAML 2.0 authentication.
+	SamlProperties *SamlProperties `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifySamlPropertiesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifySamlPropertiesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifySamlPropertiesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ModifySamlPropertiesInput"}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+	if s.SamlProperties != nil {
+		if err := s.SamlProperties.Validate(); err != nil {
+			invalidParams.AddNested("SamlProperties", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetPropertiesToDelete sets the PropertiesToDelete field's value.
+func (s *ModifySamlPropertiesInput) SetPropertiesToDelete(v []*string) *ModifySamlPropertiesInput {
+	s.PropertiesToDelete = v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *ModifySamlPropertiesInput) SetResourceId(v string) *ModifySamlPropertiesInput {
+	s.ResourceId = &v
+	return s
+}
+
+// SetSamlProperties sets the SamlProperties field's value.
+func (s *ModifySamlPropertiesInput) SetSamlProperties(v *SamlProperties) *ModifySamlPropertiesInput {
+	s.SamlProperties = v
+	return s
+}
+
+type ModifySamlPropertiesOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifySamlPropertiesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifySamlPropertiesOutput) GoString() string {
+	return s.String()
+}
+
+type ModifySelfservicePermissionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+
+	// The permissions to enable or disable self-service capabilities.
+	//
+	// SelfservicePermissions is a required field
+	SelfservicePermissions *SelfservicePermissions `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifySelfservicePermissionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifySelfservicePermissionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifySelfservicePermissionsInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ModifySelfservicePermissionsInput"}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+	if s.SelfservicePermissions == nil {
+		invalidParams.Add(request.NewErrParamRequired("SelfservicePermissions"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *ModifySelfservicePermissionsInput) SetResourceId(v string) *ModifySelfservicePermissionsInput {
+	s.ResourceId = &v
+	return s
+}
+
+// SetSelfservicePermissions sets the SelfservicePermissions field's value.
+func (s *ModifySelfservicePermissionsInput) SetSelfservicePermissions(v *SelfservicePermissions) *ModifySelfservicePermissionsInput {
+	s.SelfservicePermissions = v
+	return s
+}
+
+type ModifySelfservicePermissionsOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifySelfservicePermissionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifySelfservicePermissionsOutput) GoString() string {
+	return s.String()
+}
+
+type ModifyWorkspaceAccessPropertiesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+
+	// The device types and operating systems to enable or disable for access.
+	//
+	// WorkspaceAccessProperties is a required field
+	WorkspaceAccessProperties *WorkspaceAccessProperties `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyWorkspaceAccessPropertiesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyWorkspaceAccessPropertiesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyWorkspaceAccessPropertiesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ModifyWorkspaceAccessPropertiesInput"}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+	if s.WorkspaceAccessProperties == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkspaceAccessProperties"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *ModifyWorkspaceAccessPropertiesInput) SetResourceId(v string) *ModifyWorkspaceAccessPropertiesInput {
+	s.ResourceId = &v
+	return s
+}
+
+// SetWorkspaceAccessProperties sets the WorkspaceAccessProperties field's value.
+func (s *ModifyWorkspaceAccessPropertiesInput) SetWorkspaceAccessProperties(v *WorkspaceAccessProperties) *ModifyWorkspaceAccessPropertiesInput {
+	s.WorkspaceAccessProperties = v
+	return s
+}
+
+type ModifyWorkspaceAccessPropertiesOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyWorkspaceAccessPropertiesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyWorkspaceAccessPropertiesOutput) GoString() string {
+	return s.String()
+}
+
+type ModifyWorkspaceCreationPropertiesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+
+	// The default properties for creating WorkSpaces.
+	//
+	// WorkspaceCreationProperties is a required field
+	WorkspaceCreationProperties *WorkspaceCreationProperties `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyWorkspaceCreationPropertiesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyWorkspaceCreationPropertiesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyWorkspaceCreationPropertiesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ModifyWorkspaceCreationPropertiesInput"}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+	if s.WorkspaceCreationProperties == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkspaceCreationProperties"))
+	}
+	if s.WorkspaceCreationProperties != nil {
+		if err := s.WorkspaceCreationProperties.Validate(); err != nil {
+			invalidParams.AddNested("WorkspaceCreationProperties", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *ModifyWorkspaceCreationPropertiesInput) SetResourceId(v string) *ModifyWorkspaceCreationPropertiesInput {
+	s.ResourceId = &v
+	return s
+}
+
+// SetWorkspaceCreationProperties sets the WorkspaceCreationProperties field's value.
+func (s *ModifyWorkspaceCreationPropertiesInput) SetWorkspaceCreationProperties(v *WorkspaceCreationProperties) *ModifyWorkspaceCreationPropertiesInput {
+	s.WorkspaceCreationProperties = v
+	return s
+}
+
+type ModifyWorkspaceCreationPropertiesOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyWorkspaceCreationPropertiesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ModifyWorkspaceCreationPropertiesOutput) GoString() string {
 	return s.String()
 }
 
 type ModifyWorkspacePropertiesInput struct {
 	_ struct{} `type:"structure"`
+
+	// Indicates the data replication status.
+	DataReplication *string `type:"string" enum:"DataReplication"`
 
 	// The identifier of the WorkSpace.
 	//
@@ -5141,17 +15261,23 @@ type ModifyWorkspacePropertiesInput struct {
 	WorkspaceId *string `type:"string" required:"true"`
 
 	// The properties of the WorkSpace.
-	//
-	// WorkspaceProperties is a required field
-	WorkspaceProperties *WorkspaceProperties `type:"structure" required:"true"`
+	WorkspaceProperties *WorkspaceProperties `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyWorkspacePropertiesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyWorkspacePropertiesInput) GoString() string {
 	return s.String()
 }
@@ -5162,14 +15288,17 @@ func (s *ModifyWorkspacePropertiesInput) Validate() error {
 	if s.WorkspaceId == nil {
 		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
 	}
-	if s.WorkspaceProperties == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkspaceProperties"))
-	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetDataReplication sets the DataReplication field's value.
+func (s *ModifyWorkspacePropertiesInput) SetDataReplication(v string) *ModifyWorkspacePropertiesInput {
+	s.DataReplication = &v
+	return s
 }
 
 // SetWorkspaceId sets the WorkspaceId field's value.
@@ -5188,12 +15317,20 @@ type ModifyWorkspacePropertiesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyWorkspacePropertiesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyWorkspacePropertiesOutput) GoString() string {
 	return s.String()
 }
@@ -5212,12 +15349,20 @@ type ModifyWorkspaceStateInput struct {
 	WorkspaceState *string `type:"string" required:"true" enum:"TargetWorkspaceState"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyWorkspaceStateInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyWorkspaceStateInput) GoString() string {
 	return s.String()
 }
@@ -5254,12 +15399,20 @@ type ModifyWorkspaceStateOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyWorkspaceStateOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ModifyWorkspaceStateOutput) GoString() string {
 	return s.String()
 }
@@ -5272,12 +15425,20 @@ type OperatingSystem struct {
 	Type *string `type:"string" enum:"OperatingSystemType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OperatingSystem) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s OperatingSystem) GoString() string {
 	return s.String()
 }
@@ -5285,6 +15446,267 @@ func (s OperatingSystem) GoString() string {
 // SetType sets the Type field's value.
 func (s *OperatingSystem) SetType(v string) *OperatingSystem {
 	s.Type = &v
+	return s
+}
+
+// The operating system of the WorkSpace is not compatible with the application.
+type OperatingSystemNotCompatibleException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperatingSystemNotCompatibleException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperatingSystemNotCompatibleException) GoString() string {
+	return s.String()
+}
+
+func newErrorOperatingSystemNotCompatibleException(v protocol.ResponseMetadata) error {
+	return &OperatingSystemNotCompatibleException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OperatingSystemNotCompatibleException) Code() string {
+	return "OperatingSystemNotCompatibleException"
+}
+
+// Message returns the exception's message.
+func (s *OperatingSystemNotCompatibleException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OperatingSystemNotCompatibleException) OrigErr() error {
+	return nil
+}
+
+func (s *OperatingSystemNotCompatibleException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OperatingSystemNotCompatibleException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OperatingSystemNotCompatibleException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The properties of this WorkSpace are currently being modified. Try again
+// in a moment.
+type OperationInProgressException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationInProgressException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationInProgressException) GoString() string {
+	return s.String()
+}
+
+func newErrorOperationInProgressException(v protocol.ResponseMetadata) error {
+	return &OperationInProgressException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OperationInProgressException) Code() string {
+	return "OperationInProgressException"
+}
+
+// Message returns the exception's message.
+func (s *OperationInProgressException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OperationInProgressException) OrigErr() error {
+	return nil
+}
+
+func (s *OperationInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OperationInProgressException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OperationInProgressException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// This operation is not supported.
+type OperationNotSupportedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The exception error message.
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The exception error reason.
+	Reason *string `locationName:"reason" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotSupportedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s OperationNotSupportedException) GoString() string {
+	return s.String()
+}
+
+func newErrorOperationNotSupportedException(v protocol.ResponseMetadata) error {
+	return &OperationNotSupportedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *OperationNotSupportedException) Code() string {
+	return "OperationNotSupportedException"
+}
+
+// Message returns the exception's message.
+func (s *OperationNotSupportedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *OperationNotSupportedException) OrigErr() error {
+	return nil
+}
+
+func (s *OperationNotSupportedException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *OperationNotSupportedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *OperationNotSupportedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Information about the standby WorkSpace.
+type PendingCreateStandbyWorkspacesRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory for the standby WorkSpace.
+	DirectoryId *string `min:"10" type:"string"`
+
+	// The operational state of the standby WorkSpace.
+	State *string `type:"string" enum:"WorkspaceState"`
+
+	// Describes the standby WorkSpace that was created.
+	//
+	// Because this operation is asynchronous, the identifier returned is not immediately
+	// available for use with other operations. For example, if you call DescribeWorkspaces
+	// (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html)
+	// before the WorkSpace is created, the information returned can be incomplete.
+	UserName *string `min:"1" type:"string"`
+
+	// The identifier of the standby WorkSpace.
+	WorkspaceId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PendingCreateStandbyWorkspacesRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s PendingCreateStandbyWorkspacesRequest) GoString() string {
+	return s.String()
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *PendingCreateStandbyWorkspacesRequest) SetDirectoryId(v string) *PendingCreateStandbyWorkspacesRequest {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *PendingCreateStandbyWorkspacesRequest) SetState(v string) *PendingCreateStandbyWorkspacesRequest {
+	s.State = &v
+	return s
+}
+
+// SetUserName sets the UserName field's value.
+func (s *PendingCreateStandbyWorkspacesRequest) SetUserName(v string) *PendingCreateStandbyWorkspacesRequest {
+	s.UserName = &v
+	return s
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *PendingCreateStandbyWorkspacesRequest) SetWorkspaceId(v string) *PendingCreateStandbyWorkspacesRequest {
+	s.WorkspaceId = &v
 	return s
 }
 
@@ -5298,12 +15720,20 @@ type RebootRequest struct {
 	WorkspaceId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootRequest) GoString() string {
 	return s.String()
 }
@@ -5336,12 +15766,20 @@ type RebootWorkspacesInput struct {
 	RebootWorkspaceRequests []*RebootRequest `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootWorkspacesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootWorkspacesInput) GoString() string {
 	return s.String()
 }
@@ -5385,12 +15823,20 @@ type RebootWorkspacesOutput struct {
 	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootWorkspacesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebootWorkspacesOutput) GoString() string {
 	return s.String()
 }
@@ -5411,12 +15857,20 @@ type RebuildRequest struct {
 	WorkspaceId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebuildRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebuildRequest) GoString() string {
 	return s.String()
 }
@@ -5449,12 +15903,20 @@ type RebuildWorkspacesInput struct {
 	RebuildWorkspaceRequests []*RebuildRequest `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebuildWorkspacesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebuildWorkspacesInput) GoString() string {
 	return s.String()
 }
@@ -5498,12 +15960,20 @@ type RebuildWorkspacesOutput struct {
 	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebuildWorkspacesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RebuildWorkspacesOutput) GoString() string {
 	return s.String()
 }
@@ -5512,6 +15982,741 @@ func (s RebuildWorkspacesOutput) GoString() string {
 func (s *RebuildWorkspacesOutput) SetFailedRequests(v []*FailedWorkspaceChangeRequest) *RebuildWorkspacesOutput {
 	s.FailedRequests = v
 	return s
+}
+
+type RegisterWorkspaceDirectoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the directory. You cannot register a directory if it does
+	// not have a status of Active. If the directory does not have a status of Active,
+	// you will receive an InvalidResourceStateException error. If you have already
+	// registered the maximum number of directories that you can register with Amazon
+	// WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister
+	// directories that you are not using for WorkSpaces, and try again.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `min:"10" type:"string" required:"true"`
+
+	// Indicates whether self-service capabilities are enabled or disabled.
+	EnableSelfService *bool `type:"boolean"`
+
+	// Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled
+	// this parameter and WorkDocs is not available in the Region, you will receive
+	// an OperationNotSupportedException error. Set EnableWorkDocs to disabled,
+	// and try again.
+	//
+	// EnableWorkDocs is a required field
+	EnableWorkDocs *bool `type:"boolean" required:"true"`
+
+	// The identifiers of the subnets for your virtual private cloud (VPC). Make
+	// sure that the subnets are in supported Availability Zones. The subnets must
+	// also be in separate Availability Zones. If these conditions are not met,
+	// you will receive an OperationNotSupportedException error.
+	SubnetIds []*string `type:"list"`
+
+	// The tags associated with the directory.
+	Tags []*Tag `type:"list"`
+
+	// Indicates whether your WorkSpace directory is dedicated or shared. To use
+	// Bring Your Own License (BYOL) images, this value must be set to DEDICATED
+	// and your Amazon Web Services account must be enabled for BYOL. If your account
+	// has not been enabled for BYOL, you will receive an InvalidParameterValuesException
+	// error. For more information about BYOL images, see Bring Your Own Windows
+	// Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
+	Tenancy *string `type:"string" enum:"Tenancy"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisterWorkspaceDirectoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisterWorkspaceDirectoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegisterWorkspaceDirectoryInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RegisterWorkspaceDirectoryInput"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("DirectoryId", 10))
+	}
+	if s.EnableWorkDocs == nil {
+		invalidParams.Add(request.NewErrParamRequired("EnableWorkDocs"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *RegisterWorkspaceDirectoryInput) SetDirectoryId(v string) *RegisterWorkspaceDirectoryInput {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetEnableSelfService sets the EnableSelfService field's value.
+func (s *RegisterWorkspaceDirectoryInput) SetEnableSelfService(v bool) *RegisterWorkspaceDirectoryInput {
+	s.EnableSelfService = &v
+	return s
+}
+
+// SetEnableWorkDocs sets the EnableWorkDocs field's value.
+func (s *RegisterWorkspaceDirectoryInput) SetEnableWorkDocs(v bool) *RegisterWorkspaceDirectoryInput {
+	s.EnableWorkDocs = &v
+	return s
+}
+
+// SetSubnetIds sets the SubnetIds field's value.
+func (s *RegisterWorkspaceDirectoryInput) SetSubnetIds(v []*string) *RegisterWorkspaceDirectoryInput {
+	s.SubnetIds = v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *RegisterWorkspaceDirectoryInput) SetTags(v []*Tag) *RegisterWorkspaceDirectoryInput {
+	s.Tags = v
+	return s
+}
+
+// SetTenancy sets the Tenancy field's value.
+func (s *RegisterWorkspaceDirectoryInput) SetTenancy(v string) *RegisterWorkspaceDirectoryInput {
+	s.Tenancy = &v
+	return s
+}
+
+type RegisterWorkspaceDirectoryOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisterWorkspaceDirectoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RegisterWorkspaceDirectoryOutput) GoString() string {
+	return s.String()
+}
+
+// Describes the related WorkSpace. The related WorkSpace could be a standby
+// WorkSpace or primary WorkSpace related to the specified WorkSpace.
+type RelatedWorkspaceProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The Region of the related WorkSpace.
+	Region *string `min:"1" type:"string"`
+
+	// Indicates the state of the WorkSpace.
+	State *string `type:"string" enum:"WorkspaceState"`
+
+	// Indicates the type of WorkSpace.
+	Type *string `type:"string" enum:"StandbyWorkspaceRelationshipType"`
+
+	// The identifier of the related WorkSpace.
+	WorkspaceId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RelatedWorkspaceProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RelatedWorkspaceProperties) GoString() string {
+	return s.String()
+}
+
+// SetRegion sets the Region field's value.
+func (s *RelatedWorkspaceProperties) SetRegion(v string) *RelatedWorkspaceProperties {
+	s.Region = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *RelatedWorkspaceProperties) SetState(v string) *RelatedWorkspaceProperties {
+	s.State = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *RelatedWorkspaceProperties) SetType(v string) *RelatedWorkspaceProperties {
+	s.Type = &v
+	return s
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *RelatedWorkspaceProperties) SetWorkspaceId(v string) *RelatedWorkspaceProperties {
+	s.WorkspaceId = &v
+	return s
+}
+
+// The specified resource already exists.
+type ResourceAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &ResourceAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceAlreadyExistsException) Code() string {
+	return "ResourceAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The resource is associated with a directory.
+type ResourceAssociatedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAssociatedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceAssociatedException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceAssociatedException(v protocol.ResponseMetadata) error {
+	return &ResourceAssociatedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceAssociatedException) Code() string {
+	return "ResourceAssociatedException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceAssociatedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceAssociatedException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceAssociatedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceAssociatedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceAssociatedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The resource could not be created.
+type ResourceCreationFailedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceCreationFailedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceCreationFailedException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceCreationFailedException(v protocol.ResponseMetadata) error {
+	return &ResourceCreationFailedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceCreationFailedException) Code() string {
+	return "ResourceCreationFailedException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceCreationFailedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceCreationFailedException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceCreationFailedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceCreationFailedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceCreationFailedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified resource is currently in use.
+type ResourceInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The ID of the resource that is in use.
+	ResourceId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceInUseException(v protocol.ResponseMetadata) error {
+	return &ResourceInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceInUseException) Code() string {
+	return "ResourceInUseException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceInUseException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Your resource limits have been exceeded.
+type ResourceLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The exception error message.
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceLimitExceededException(v protocol.ResponseMetadata) error {
+	return &ResourceLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceLimitExceededException) Code() string {
+	return "ResourceLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The resource could not be found.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The resource could not be found.
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The ID of the resource that could not be found.
+	ResourceId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified resource is not available.
+type ResourceUnavailableException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The exception error message.
+	Message_ *string `locationName:"message" type:"string"`
+
+	// The identifier of the resource that is not available.
+	ResourceId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceUnavailableException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceUnavailableException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceUnavailableException(v protocol.ResponseMetadata) error {
+	return &ResourceUnavailableException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceUnavailableException) Code() string {
+	return "ResourceUnavailableException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceUnavailableException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceUnavailableException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceUnavailableException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceUnavailableException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type RestoreWorkspaceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the WorkSpace.
+	//
+	// WorkspaceId is a required field
+	WorkspaceId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RestoreWorkspaceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RestoreWorkspaceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RestoreWorkspaceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RestoreWorkspaceInput"}
+	if s.WorkspaceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *RestoreWorkspaceInput) SetWorkspaceId(v string) *RestoreWorkspaceInput {
+	s.WorkspaceId = &v
+	return s
+}
+
+type RestoreWorkspaceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RestoreWorkspaceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RestoreWorkspaceOutput) GoString() string {
+	return s.String()
 }
 
 type RevokeIpRulesInput struct {
@@ -5528,12 +16733,20 @@ type RevokeIpRulesInput struct {
 	UserRules []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevokeIpRulesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevokeIpRulesInput) GoString() string {
 	return s.String()
 }
@@ -5570,12 +16783,20 @@ type RevokeIpRulesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevokeIpRulesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RevokeIpRulesOutput) GoString() string {
 	return s.String()
 }
@@ -5588,19 +16809,389 @@ type RootStorage struct {
 	Capacity *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RootStorage) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RootStorage) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RootStorage) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "RootStorage"}
+	if s.Capacity != nil && len(*s.Capacity) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Capacity", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetCapacity sets the Capacity field's value.
 func (s *RootStorage) SetCapacity(v string) *RootStorage {
 	s.Capacity = &v
+	return s
+}
+
+// Describes the enablement status, user access URL, and relay state parameter
+// name that are used for configuring federation with an SAML 2.0 identity provider.
+type SamlProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The relay state parameter name supported by the SAML 2.0 identity provider
+	// (IdP). When the end user is redirected to the user access URL from the WorkSpaces
+	// client application, this relay state parameter name is appended as a query
+	// parameter to the URL along with the relay state endpoint to return the user
+	// to the client application session.
+	//
+	// To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated
+	// deep linking for the relay state URL. Consult your IdP documentation for
+	// more information.
+	RelayStateParameterName *string `min:"1" type:"string"`
+
+	// Indicates the status of SAML 2.0 authentication. These statuses include the
+	// following.
+	//
+	//    * If the setting is DISABLED, end users will be directed to login with
+	//    their directory credentials.
+	//
+	//    * If the setting is ENABLED, end users will be directed to login via the
+	//    user access URL. Users attempting to connect to WorkSpaces from a client
+	//    application that does not support SAML 2.0 authentication will not be
+	//    able to connect.
+	//
+	//    * If the setting is ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK, end users will
+	//    be directed to login via the user access URL on supported client applications,
+	//    but will not prevent clients that do not support SAML 2.0 authentication
+	//    from connecting as if SAML 2.0 authentication was disabled.
+	Status *string `type:"string" enum:"SamlStatusEnum"`
+
+	// The SAML 2.0 identity provider (IdP) user access URL is the URL a user would
+	// navigate to in their web browser in order to federate from the IdP and directly
+	// access the application, without any SAML 2.0 service provider (SP) bindings.
+	UserAccessUrl *string `min:"8" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SamlProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SamlProperties) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SamlProperties) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SamlProperties"}
+	if s.RelayStateParameterName != nil && len(*s.RelayStateParameterName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("RelayStateParameterName", 1))
+	}
+	if s.UserAccessUrl != nil && len(*s.UserAccessUrl) < 8 {
+		invalidParams.Add(request.NewErrParamMinLen("UserAccessUrl", 8))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRelayStateParameterName sets the RelayStateParameterName field's value.
+func (s *SamlProperties) SetRelayStateParameterName(v string) *SamlProperties {
+	s.RelayStateParameterName = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *SamlProperties) SetStatus(v string) *SamlProperties {
+	s.Status = &v
+	return s
+}
+
+// SetUserAccessUrl sets the UserAccessUrl field's value.
+func (s *SamlProperties) SetUserAccessUrl(v string) *SamlProperties {
+	s.UserAccessUrl = &v
+	return s
+}
+
+// Describes the self-service permissions for a directory. For more information,
+// see Enable Self-Service WorkSpace Management Capabilities for Your Users
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html).
+type SelfservicePermissions struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether users can change the compute type (bundle) for their WorkSpace.
+	ChangeComputeType *string `type:"string" enum:"ReconnectEnum"`
+
+	// Specifies whether users can increase the volume size of the drives on their
+	// WorkSpace.
+	IncreaseVolumeSize *string `type:"string" enum:"ReconnectEnum"`
+
+	// Specifies whether users can rebuild the operating system of a WorkSpace to
+	// its original state.
+	RebuildWorkspace *string `type:"string" enum:"ReconnectEnum"`
+
+	// Specifies whether users can restart their WorkSpace.
+	RestartWorkspace *string `type:"string" enum:"ReconnectEnum"`
+
+	// Specifies whether users can switch the running mode of their WorkSpace.
+	SwitchRunningMode *string `type:"string" enum:"ReconnectEnum"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SelfservicePermissions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SelfservicePermissions) GoString() string {
+	return s.String()
+}
+
+// SetChangeComputeType sets the ChangeComputeType field's value.
+func (s *SelfservicePermissions) SetChangeComputeType(v string) *SelfservicePermissions {
+	s.ChangeComputeType = &v
+	return s
+}
+
+// SetIncreaseVolumeSize sets the IncreaseVolumeSize field's value.
+func (s *SelfservicePermissions) SetIncreaseVolumeSize(v string) *SelfservicePermissions {
+	s.IncreaseVolumeSize = &v
+	return s
+}
+
+// SetRebuildWorkspace sets the RebuildWorkspace field's value.
+func (s *SelfservicePermissions) SetRebuildWorkspace(v string) *SelfservicePermissions {
+	s.RebuildWorkspace = &v
+	return s
+}
+
+// SetRestartWorkspace sets the RestartWorkspace field's value.
+func (s *SelfservicePermissions) SetRestartWorkspace(v string) *SelfservicePermissions {
+	s.RestartWorkspace = &v
+	return s
+}
+
+// SetSwitchRunningMode sets the SwitchRunningMode field's value.
+func (s *SelfservicePermissions) SetSwitchRunningMode(v string) *SelfservicePermissions {
+	s.SwitchRunningMode = &v
+	return s
+}
+
+// Describes a snapshot.
+type Snapshot struct {
+	_ struct{} `type:"structure"`
+
+	// The time when the snapshot was created.
+	SnapshotTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Snapshot) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Snapshot) GoString() string {
+	return s.String()
+}
+
+// SetSnapshotTime sets the SnapshotTime field's value.
+func (s *Snapshot) SetSnapshotTime(v time.Time) *Snapshot {
+	s.SnapshotTime = &v
+	return s
+}
+
+// Describes a standby WorkSpace.
+type StandbyWorkspace struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether data replication is enabled, and if enabled, the type of
+	// data replication.
+	DataReplication *string `type:"string" enum:"DataReplication"`
+
+	// The identifier of the directory for the standby WorkSpace.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `min:"10" type:"string" required:"true"`
+
+	// The identifier of the standby WorkSpace.
+	//
+	// PrimaryWorkspaceId is a required field
+	PrimaryWorkspaceId *string `type:"string" required:"true"`
+
+	// The tags associated with the standby WorkSpace.
+	Tags []*Tag `type:"list"`
+
+	// The volume encryption key of the standby WorkSpace.
+	VolumeEncryptionKey *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StandbyWorkspace) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StandbyWorkspace) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StandbyWorkspace) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "StandbyWorkspace"}
+	if s.DirectoryId == nil {
+		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("DirectoryId", 10))
+	}
+	if s.PrimaryWorkspaceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("PrimaryWorkspaceId"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDataReplication sets the DataReplication field's value.
+func (s *StandbyWorkspace) SetDataReplication(v string) *StandbyWorkspace {
+	s.DataReplication = &v
+	return s
+}
+
+// SetDirectoryId sets the DirectoryId field's value.
+func (s *StandbyWorkspace) SetDirectoryId(v string) *StandbyWorkspace {
+	s.DirectoryId = &v
+	return s
+}
+
+// SetPrimaryWorkspaceId sets the PrimaryWorkspaceId field's value.
+func (s *StandbyWorkspace) SetPrimaryWorkspaceId(v string) *StandbyWorkspace {
+	s.PrimaryWorkspaceId = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *StandbyWorkspace) SetTags(v []*Tag) *StandbyWorkspace {
+	s.Tags = v
+	return s
+}
+
+// SetVolumeEncryptionKey sets the VolumeEncryptionKey field's value.
+func (s *StandbyWorkspace) SetVolumeEncryptionKey(v string) *StandbyWorkspace {
+	s.VolumeEncryptionKey = &v
+	return s
+}
+
+// Describes the properties of the related standby WorkSpaces.
+type StandbyWorkspacesProperties struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether data replication is enabled, and if enabled, the type of
+	// data replication.
+	DataReplication *string `type:"string" enum:"DataReplication"`
+
+	// The date and time at which the last successful snapshot was taken of the
+	// primary WorkSpace used for replicating data.
+	RecoverySnapshotTime *time.Time `type:"timestamp"`
+
+	// The identifier of the standby WorkSpace
+	StandbyWorkspaceId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StandbyWorkspacesProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StandbyWorkspacesProperties) GoString() string {
+	return s.String()
+}
+
+// SetDataReplication sets the DataReplication field's value.
+func (s *StandbyWorkspacesProperties) SetDataReplication(v string) *StandbyWorkspacesProperties {
+	s.DataReplication = &v
+	return s
+}
+
+// SetRecoverySnapshotTime sets the RecoverySnapshotTime field's value.
+func (s *StandbyWorkspacesProperties) SetRecoverySnapshotTime(v time.Time) *StandbyWorkspacesProperties {
+	s.RecoverySnapshotTime = &v
+	return s
+}
+
+// SetStandbyWorkspaceId sets the StandbyWorkspaceId field's value.
+func (s *StandbyWorkspacesProperties) SetStandbyWorkspaceId(v string) *StandbyWorkspacesProperties {
+	s.StandbyWorkspaceId = &v
 	return s
 }
 
@@ -5612,12 +17203,20 @@ type StartRequest struct {
 	WorkspaceId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartRequest) GoString() string {
 	return s.String()
 }
@@ -5637,12 +17236,20 @@ type StartWorkspacesInput struct {
 	StartWorkspaceRequests []*StartRequest `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartWorkspacesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartWorkspacesInput) GoString() string {
 	return s.String()
 }
@@ -5676,12 +17283,20 @@ type StartWorkspacesOutput struct {
 	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartWorkspacesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StartWorkspacesOutput) GoString() string {
 	return s.String()
 }
@@ -5700,12 +17315,20 @@ type StopRequest struct {
 	WorkspaceId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopRequest) GoString() string {
 	return s.String()
 }
@@ -5725,12 +17348,20 @@ type StopWorkspacesInput struct {
 	StopWorkspaceRequests []*StopRequest `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopWorkspacesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopWorkspacesInput) GoString() string {
 	return s.String()
 }
@@ -5764,12 +17395,20 @@ type StopWorkspacesOutput struct {
 	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopWorkspacesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s StopWorkspacesOutput) GoString() string {
 	return s.String()
 }
@@ -5793,12 +17432,20 @@ type Tag struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -5841,12 +17488,20 @@ type TerminateRequest struct {
 	WorkspaceId *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateRequest) GoString() string {
 	return s.String()
 }
@@ -5879,12 +17534,20 @@ type TerminateWorkspacesInput struct {
 	TerminateWorkspaceRequests []*TerminateRequest `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateWorkspacesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateWorkspacesInput) GoString() string {
 	return s.String()
 }
@@ -5928,12 +17591,20 @@ type TerminateWorkspacesOutput struct {
 	FailedRequests []*FailedWorkspaceChangeRequest `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateWorkspacesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TerminateWorkspacesOutput) GoString() string {
 	return s.String()
 }
@@ -5941,6 +17612,389 @@ func (s TerminateWorkspacesOutput) GoString() string {
 // SetFailedRequests sets the FailedRequests field's value.
 func (s *TerminateWorkspacesOutput) SetFailedRequests(v []*FailedWorkspaceChangeRequest) *TerminateWorkspacesOutput {
 	s.FailedRequests = v
+	return s
+}
+
+// The configuration of this network is not supported for this operation, or
+// your network configuration conflicts with the Amazon WorkSpaces management
+// network IP range. For more information, see Configure a VPC for Amazon WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html).
+type UnsupportedNetworkConfigurationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedNetworkConfigurationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedNetworkConfigurationException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedNetworkConfigurationException(v protocol.ResponseMetadata) error {
+	return &UnsupportedNetworkConfigurationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedNetworkConfigurationException) Code() string {
+	return "UnsupportedNetworkConfigurationException"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedNetworkConfigurationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedNetworkConfigurationException) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedNetworkConfigurationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedNetworkConfigurationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedNetworkConfigurationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The configuration of this WorkSpace is not supported for this operation.
+// For more information, see Required Configuration and Service Components for
+// WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html).
+type UnsupportedWorkspaceConfigurationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedWorkspaceConfigurationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedWorkspaceConfigurationException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedWorkspaceConfigurationException(v protocol.ResponseMetadata) error {
+	return &UnsupportedWorkspaceConfigurationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedWorkspaceConfigurationException) Code() string {
+	return "UnsupportedWorkspaceConfigurationException"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedWorkspaceConfigurationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedWorkspaceConfigurationException) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedWorkspaceConfigurationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedWorkspaceConfigurationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedWorkspaceConfigurationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type UpdateConnectClientAddInInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the client add-in to update.
+	//
+	// AddInId is a required field
+	AddInId *string `min:"36" type:"string" required:"true"`
+
+	// The name of the client add-in.
+	Name *string `min:"1" type:"string"`
+
+	// The directory identifier for which the client add-in is configured.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"10" type:"string" required:"true"`
+
+	// The endpoint URL of the Amazon Connect client add-in.
+	URL *string `min:"1" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateConnectClientAddInInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateConnectClientAddInInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateConnectClientAddInInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateConnectClientAddInInput"}
+	if s.AddInId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AddInId"))
+	}
+	if s.AddInId != nil && len(*s.AddInId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("AddInId", 36))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+	}
+	if s.ResourceId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 10))
+	}
+	if s.URL != nil && len(*s.URL) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("URL", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAddInId sets the AddInId field's value.
+func (s *UpdateConnectClientAddInInput) SetAddInId(v string) *UpdateConnectClientAddInInput {
+	s.AddInId = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *UpdateConnectClientAddInInput) SetName(v string) *UpdateConnectClientAddInInput {
+	s.Name = &v
+	return s
+}
+
+// SetResourceId sets the ResourceId field's value.
+func (s *UpdateConnectClientAddInInput) SetResourceId(v string) *UpdateConnectClientAddInInput {
+	s.ResourceId = &v
+	return s
+}
+
+// SetURL sets the URL field's value.
+func (s *UpdateConnectClientAddInInput) SetURL(v string) *UpdateConnectClientAddInInput {
+	s.URL = &v
+	return s
+}
+
+type UpdateConnectClientAddInOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateConnectClientAddInOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateConnectClientAddInOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateConnectionAliasPermissionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the connection alias that you want to update permissions
+	// for.
+	//
+	// AliasId is a required field
+	AliasId *string `min:"13" type:"string" required:"true"`
+
+	// Indicates whether to share or unshare the connection alias with the specified
+	// Amazon Web Services account.
+	//
+	// ConnectionAliasPermission is a required field
+	ConnectionAliasPermission *ConnectionAliasPermission `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateConnectionAliasPermissionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateConnectionAliasPermissionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateConnectionAliasPermissionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateConnectionAliasPermissionInput"}
+	if s.AliasId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AliasId"))
+	}
+	if s.AliasId != nil && len(*s.AliasId) < 13 {
+		invalidParams.Add(request.NewErrParamMinLen("AliasId", 13))
+	}
+	if s.ConnectionAliasPermission == nil {
+		invalidParams.Add(request.NewErrParamRequired("ConnectionAliasPermission"))
+	}
+	if s.ConnectionAliasPermission != nil {
+		if err := s.ConnectionAliasPermission.Validate(); err != nil {
+			invalidParams.AddNested("ConnectionAliasPermission", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAliasId sets the AliasId field's value.
+func (s *UpdateConnectionAliasPermissionInput) SetAliasId(v string) *UpdateConnectionAliasPermissionInput {
+	s.AliasId = &v
+	return s
+}
+
+// SetConnectionAliasPermission sets the ConnectionAliasPermission field's value.
+func (s *UpdateConnectionAliasPermissionInput) SetConnectionAliasPermission(v *ConnectionAliasPermission) *UpdateConnectionAliasPermissionInput {
+	s.ConnectionAliasPermission = v
+	return s
+}
+
+type UpdateConnectionAliasPermissionOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateConnectionAliasPermissionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateConnectionAliasPermissionOutput) GoString() string {
+	return s.String()
+}
+
+// Describes whether a WorkSpace image needs to be updated with the latest drivers
+// and other components required by Amazon WorkSpaces.
+//
+// Only Windows 10 WorkSpace images can be programmatically updated at this
+// time.
+type UpdateResult struct {
+	_ struct{} `type:"structure"`
+
+	// A description of whether updates for the WorkSpace image are pending or available.
+	Description *string `min:"1" type:"string"`
+
+	// Indicates whether updated drivers or other components are available for the
+	// specified WorkSpace image.
+	UpdateAvailable *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateResult) GoString() string {
+	return s.String()
+}
+
+// SetDescription sets the Description field's value.
+func (s *UpdateResult) SetDescription(v string) *UpdateResult {
+	s.Description = &v
+	return s
+}
+
+// SetUpdateAvailable sets the UpdateAvailable field's value.
+func (s *UpdateResult) SetUpdateAvailable(v bool) *UpdateResult {
+	s.UpdateAvailable = &v
 	return s
 }
 
@@ -5958,12 +18012,20 @@ type UpdateRulesOfIpGroupInput struct {
 	UserRules []*IpRuleItem `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRulesOfIpGroupInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRulesOfIpGroupInput) GoString() string {
 	return s.String()
 }
@@ -6000,37 +18062,365 @@ type UpdateRulesOfIpGroupOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRulesOfIpGroupOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateRulesOfIpGroupOutput) GoString() string {
 	return s.String()
 }
 
-// Describes the user storage for a WorkSpace bundle.
+type UpdateWorkspaceBundleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the bundle.
+	BundleId *string `type:"string"`
+
+	// The identifier of the image.
+	ImageId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateWorkspaceBundleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateWorkspaceBundleInput) GoString() string {
+	return s.String()
+}
+
+// SetBundleId sets the BundleId field's value.
+func (s *UpdateWorkspaceBundleInput) SetBundleId(v string) *UpdateWorkspaceBundleInput {
+	s.BundleId = &v
+	return s
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *UpdateWorkspaceBundleInput) SetImageId(v string) *UpdateWorkspaceBundleInput {
+	s.ImageId = &v
+	return s
+}
+
+type UpdateWorkspaceBundleOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateWorkspaceBundleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateWorkspaceBundleOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateWorkspaceImagePermissionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The permission to copy the image. This permission can be revoked only after
+	// an image has been shared.
+	//
+	// AllowCopyImage is a required field
+	AllowCopyImage *bool `type:"boolean" required:"true"`
+
+	// The identifier of the image.
+	//
+	// ImageId is a required field
+	ImageId *string `type:"string" required:"true"`
+
+	// The identifier of the Amazon Web Services account to share or unshare the
+	// image with.
+	//
+	// Before sharing the image, confirm that you are sharing to the correct Amazon
+	// Web Services account ID.
+	//
+	// SharedAccountId is a required field
+	SharedAccountId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateWorkspaceImagePermissionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateWorkspaceImagePermissionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateWorkspaceImagePermissionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateWorkspaceImagePermissionInput"}
+	if s.AllowCopyImage == nil {
+		invalidParams.Add(request.NewErrParamRequired("AllowCopyImage"))
+	}
+	if s.ImageId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ImageId"))
+	}
+	if s.SharedAccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("SharedAccountId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAllowCopyImage sets the AllowCopyImage field's value.
+func (s *UpdateWorkspaceImagePermissionInput) SetAllowCopyImage(v bool) *UpdateWorkspaceImagePermissionInput {
+	s.AllowCopyImage = &v
+	return s
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *UpdateWorkspaceImagePermissionInput) SetImageId(v string) *UpdateWorkspaceImagePermissionInput {
+	s.ImageId = &v
+	return s
+}
+
+// SetSharedAccountId sets the SharedAccountId field's value.
+func (s *UpdateWorkspaceImagePermissionInput) SetSharedAccountId(v string) *UpdateWorkspaceImagePermissionInput {
+	s.SharedAccountId = &v
+	return s
+}
+
+type UpdateWorkspaceImagePermissionOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateWorkspaceImagePermissionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateWorkspaceImagePermissionOutput) GoString() string {
+	return s.String()
+}
+
+// Describes the user volume for a WorkSpace bundle.
 type UserStorage struct {
 	_ struct{} `type:"structure"`
 
-	// The size of the user storage.
+	// The size of the user volume.
 	Capacity *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserStorage) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UserStorage) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UserStorage) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UserStorage"}
+	if s.Capacity != nil && len(*s.Capacity) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Capacity", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // SetCapacity sets the Capacity field's value.
 func (s *UserStorage) SetCapacity(v string) *UserStorage {
 	s.Capacity = &v
+	return s
+}
+
+// Describes the WorkSpace application.
+type WorkSpaceApplication struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the application.
+	ApplicationId *string `type:"string"`
+
+	// The time the application is created.
+	Created *time.Time `type:"timestamp"`
+
+	// The description of the WorkSpace application.
+	Description *string `type:"string"`
+
+	// The license availability for the applications.
+	LicenseType *string `type:"string" enum:"WorkSpaceApplicationLicenseType"`
+
+	// The name of the WorkSpace application.
+	Name *string `min:"1" type:"string"`
+
+	// The owner of the WorkSpace application.
+	Owner *string `type:"string"`
+
+	// The status of WorkSpace application.
+	State *string `type:"string" enum:"WorkSpaceApplicationState"`
+
+	// The supported compute types of the WorkSpace application.
+	SupportedComputeTypeNames []*string `type:"list" enum:"Compute"`
+
+	// The supported operating systems of the WorkSpace application.
+	SupportedOperatingSystemNames []*string `type:"list" enum:"OperatingSystemName"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkSpaceApplication) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkSpaceApplication) GoString() string {
+	return s.String()
+}
+
+// SetApplicationId sets the ApplicationId field's value.
+func (s *WorkSpaceApplication) SetApplicationId(v string) *WorkSpaceApplication {
+	s.ApplicationId = &v
+	return s
+}
+
+// SetCreated sets the Created field's value.
+func (s *WorkSpaceApplication) SetCreated(v time.Time) *WorkSpaceApplication {
+	s.Created = &v
+	return s
+}
+
+// SetDescription sets the Description field's value.
+func (s *WorkSpaceApplication) SetDescription(v string) *WorkSpaceApplication {
+	s.Description = &v
+	return s
+}
+
+// SetLicenseType sets the LicenseType field's value.
+func (s *WorkSpaceApplication) SetLicenseType(v string) *WorkSpaceApplication {
+	s.LicenseType = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *WorkSpaceApplication) SetName(v string) *WorkSpaceApplication {
+	s.Name = &v
+	return s
+}
+
+// SetOwner sets the Owner field's value.
+func (s *WorkSpaceApplication) SetOwner(v string) *WorkSpaceApplication {
+	s.Owner = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *WorkSpaceApplication) SetState(v string) *WorkSpaceApplication {
+	s.State = &v
+	return s
+}
+
+// SetSupportedComputeTypeNames sets the SupportedComputeTypeNames field's value.
+func (s *WorkSpaceApplication) SetSupportedComputeTypeNames(v []*string) *WorkSpaceApplication {
+	s.SupportedComputeTypeNames = v
+	return s
+}
+
+// SetSupportedOperatingSystemNames sets the SupportedOperatingSystemNames field's value.
+func (s *WorkSpaceApplication) SetSupportedOperatingSystemNames(v []*string) *WorkSpaceApplication {
+	s.SupportedOperatingSystemNames = v
+	return s
+}
+
+// Describes the WorkSpace application deployment.
+type WorkSpaceApplicationDeployment struct {
+	_ struct{} `type:"structure"`
+
+	// The associations between the applications and the associated resources.
+	Associations []*WorkspaceResourceAssociation `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkSpaceApplicationDeployment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkSpaceApplicationDeployment) GoString() string {
+	return s.String()
+}
+
+// SetAssociations sets the Associations field's value.
+func (s *WorkSpaceApplicationDeployment) SetAssociations(v []*WorkspaceResourceAssociation) *WorkSpaceApplicationDeployment {
+	s.Associations = v
 	return s
 }
 
@@ -6041,11 +18431,15 @@ type Workspace struct {
 	// The identifier of the bundle used to create the WorkSpace.
 	BundleId *string `type:"string"`
 
-	// The name of the WorkSpace, as seen by the operating system.
+	// The name of the WorkSpace, as seen by the operating system. The format of
+	// this name varies. For more information, see Launch a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html).
 	ComputerName *string `type:"string"`
 
-	// The identifier of the AWS Directory Service directory for the WorkSpace.
-	DirectoryId *string `type:"string"`
+	// Indicates the settings of the data replication.
+	DataReplicationSettings *DataReplicationSettings `type:"structure"`
+
+	// The identifier of the Directory Service directory for the WorkSpace.
+	DirectoryId *string `min:"10" type:"string"`
 
 	// The error code that is returned if the WorkSpace cannot be created.
 	ErrorCode *string `type:"string"`
@@ -6060,14 +18454,27 @@ type Workspace struct {
 	// The modification states of the WorkSpace.
 	ModificationStates []*ModificationState `type:"list"`
 
+	// The standby WorkSpace or primary WorkSpace related to the specified WorkSpace.
+	RelatedWorkspaces []*RelatedWorkspaceProperties `type:"list"`
+
 	// Indicates whether the data stored on the root volume is encrypted.
 	RootVolumeEncryptionEnabled *bool `type:"boolean"`
 
+	// The properties of the standby WorkSpace
+	StandbyWorkspacesProperties []*StandbyWorkspacesProperties `type:"list"`
+
 	// The operational state of the WorkSpace.
+	//
+	// After a WorkSpace is terminated, the TERMINATED state is returned only briefly
+	// before the WorkSpace directory metadata is cleaned up, so this state is rarely
+	// returned. To confirm that a WorkSpace is terminated, check for the WorkSpace
+	// ID by using DescribeWorkSpaces (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html).
+	// If the WorkSpace ID isn't returned, then the WorkSpace has been successfully
+	// terminated.
 	State *string `type:"string" enum:"WorkspaceState"`
 
 	// The identifier of the subnet for the WorkSpace.
-	SubnetId *string `type:"string"`
+	SubnetId *string `min:"15" type:"string"`
 
 	// The user for the WorkSpace.
 	UserName *string `min:"1" type:"string"`
@@ -6075,7 +18482,8 @@ type Workspace struct {
 	// Indicates whether the data stored on the user volume is encrypted.
 	UserVolumeEncryptionEnabled *bool `type:"boolean"`
 
-	// The KMS key used to encrypt data stored on your WorkSpace.
+	// The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace.
+	// Amazon WorkSpaces does not support asymmetric KMS keys.
 	VolumeEncryptionKey *string `type:"string"`
 
 	// The identifier of the WorkSpace.
@@ -6085,12 +18493,20 @@ type Workspace struct {
 	WorkspaceProperties *WorkspaceProperties `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Workspace) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Workspace) GoString() string {
 	return s.String()
 }
@@ -6104,6 +18520,12 @@ func (s *Workspace) SetBundleId(v string) *Workspace {
 // SetComputerName sets the ComputerName field's value.
 func (s *Workspace) SetComputerName(v string) *Workspace {
 	s.ComputerName = &v
+	return s
+}
+
+// SetDataReplicationSettings sets the DataReplicationSettings field's value.
+func (s *Workspace) SetDataReplicationSettings(v *DataReplicationSettings) *Workspace {
+	s.DataReplicationSettings = v
 	return s
 }
 
@@ -6137,9 +18559,21 @@ func (s *Workspace) SetModificationStates(v []*ModificationState) *Workspace {
 	return s
 }
 
+// SetRelatedWorkspaces sets the RelatedWorkspaces field's value.
+func (s *Workspace) SetRelatedWorkspaces(v []*RelatedWorkspaceProperties) *Workspace {
+	s.RelatedWorkspaces = v
+	return s
+}
+
 // SetRootVolumeEncryptionEnabled sets the RootVolumeEncryptionEnabled field's value.
 func (s *Workspace) SetRootVolumeEncryptionEnabled(v bool) *Workspace {
 	s.RootVolumeEncryptionEnabled = &v
+	return s
+}
+
+// SetStandbyWorkspacesProperties sets the StandbyWorkspacesProperties field's value.
+func (s *Workspace) SetStandbyWorkspacesProperties(v []*StandbyWorkspacesProperties) *Workspace {
+	s.StandbyWorkspacesProperties = v
 	return s
 }
 
@@ -6185,39 +18619,160 @@ func (s *Workspace) SetWorkspaceProperties(v *WorkspaceProperties) *Workspace {
 	return s
 }
 
+// The device types and operating systems that can be used to access a WorkSpace.
+// For more information, see Amazon WorkSpaces Client Network Requirements (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html).
+type WorkspaceAccessProperties struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether users can use Android and Android-compatible Chrome OS
+	// devices to access their WorkSpaces.
+	DeviceTypeAndroid *string `type:"string" enum:"AccessPropertyValue"`
+
+	// Indicates whether users can use Chromebooks to access their WorkSpaces.
+	DeviceTypeChromeOs *string `type:"string" enum:"AccessPropertyValue"`
+
+	// Indicates whether users can use iOS devices to access their WorkSpaces.
+	DeviceTypeIos *string `type:"string" enum:"AccessPropertyValue"`
+
+	// Indicates whether users can use Linux clients to access their WorkSpaces.
+	DeviceTypeLinux *string `type:"string" enum:"AccessPropertyValue"`
+
+	// Indicates whether users can use macOS clients to access their WorkSpaces.
+	DeviceTypeOsx *string `type:"string" enum:"AccessPropertyValue"`
+
+	// Indicates whether users can access their WorkSpaces through a web browser.
+	DeviceTypeWeb *string `type:"string" enum:"AccessPropertyValue"`
+
+	// Indicates whether users can use Windows clients to access their WorkSpaces.
+	DeviceTypeWindows *string `type:"string" enum:"AccessPropertyValue"`
+
+	// Indicates whether users can use zero client devices to access their WorkSpaces.
+	DeviceTypeZeroClient *string `type:"string" enum:"AccessPropertyValue"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkspaceAccessProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkspaceAccessProperties) GoString() string {
+	return s.String()
+}
+
+// SetDeviceTypeAndroid sets the DeviceTypeAndroid field's value.
+func (s *WorkspaceAccessProperties) SetDeviceTypeAndroid(v string) *WorkspaceAccessProperties {
+	s.DeviceTypeAndroid = &v
+	return s
+}
+
+// SetDeviceTypeChromeOs sets the DeviceTypeChromeOs field's value.
+func (s *WorkspaceAccessProperties) SetDeviceTypeChromeOs(v string) *WorkspaceAccessProperties {
+	s.DeviceTypeChromeOs = &v
+	return s
+}
+
+// SetDeviceTypeIos sets the DeviceTypeIos field's value.
+func (s *WorkspaceAccessProperties) SetDeviceTypeIos(v string) *WorkspaceAccessProperties {
+	s.DeviceTypeIos = &v
+	return s
+}
+
+// SetDeviceTypeLinux sets the DeviceTypeLinux field's value.
+func (s *WorkspaceAccessProperties) SetDeviceTypeLinux(v string) *WorkspaceAccessProperties {
+	s.DeviceTypeLinux = &v
+	return s
+}
+
+// SetDeviceTypeOsx sets the DeviceTypeOsx field's value.
+func (s *WorkspaceAccessProperties) SetDeviceTypeOsx(v string) *WorkspaceAccessProperties {
+	s.DeviceTypeOsx = &v
+	return s
+}
+
+// SetDeviceTypeWeb sets the DeviceTypeWeb field's value.
+func (s *WorkspaceAccessProperties) SetDeviceTypeWeb(v string) *WorkspaceAccessProperties {
+	s.DeviceTypeWeb = &v
+	return s
+}
+
+// SetDeviceTypeWindows sets the DeviceTypeWindows field's value.
+func (s *WorkspaceAccessProperties) SetDeviceTypeWindows(v string) *WorkspaceAccessProperties {
+	s.DeviceTypeWindows = &v
+	return s
+}
+
+// SetDeviceTypeZeroClient sets the DeviceTypeZeroClient field's value.
+func (s *WorkspaceAccessProperties) SetDeviceTypeZeroClient(v string) *WorkspaceAccessProperties {
+	s.DeviceTypeZeroClient = &v
+	return s
+}
+
 // Describes a WorkSpace bundle.
 type WorkspaceBundle struct {
 	_ struct{} `type:"structure"`
 
-	// The bundle identifier.
+	// The identifier of the bundle.
 	BundleId *string `type:"string"`
 
-	// The compute type. For more information, see Amazon WorkSpaces Bundles (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
+	// The type of WorkSpace bundle.
+	BundleType *string `type:"string" enum:"BundleType"`
+
+	// The compute type of the bundle. For more information, see Amazon WorkSpaces
+	// Bundles (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
 	ComputeType *ComputeType `type:"structure"`
 
-	// A description.
+	// The time when the bundle was created.
+	CreationTime *time.Time `type:"timestamp"`
+
+	// The description of the bundle.
 	Description *string `type:"string"`
+
+	// The identifier of the image that was used to create the bundle.
+	ImageId *string `type:"string"`
+
+	// The last time that the bundle was updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// The name of the bundle.
 	Name *string `min:"1" type:"string"`
 
 	// The owner of the bundle. This is the account identifier of the owner, or
-	// AMAZON if the bundle is provided by AWS.
+	// AMAZON if the bundle is provided by Amazon Web Services.
 	Owner *string `type:"string"`
 
 	// The size of the root volume.
 	RootStorage *RootStorage `type:"structure"`
 
-	// The size of the user storage.
+	// The state of the WorkSpace bundle.
+	State *string `type:"string" enum:"WorkspaceBundleState"`
+
+	// The size of the user volume.
 	UserStorage *UserStorage `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceBundle) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceBundle) GoString() string {
 	return s.String()
 }
@@ -6228,15 +18783,39 @@ func (s *WorkspaceBundle) SetBundleId(v string) *WorkspaceBundle {
 	return s
 }
 
+// SetBundleType sets the BundleType field's value.
+func (s *WorkspaceBundle) SetBundleType(v string) *WorkspaceBundle {
+	s.BundleType = &v
+	return s
+}
+
 // SetComputeType sets the ComputeType field's value.
 func (s *WorkspaceBundle) SetComputeType(v *ComputeType) *WorkspaceBundle {
 	s.ComputeType = v
 	return s
 }
 
+// SetCreationTime sets the CreationTime field's value.
+func (s *WorkspaceBundle) SetCreationTime(v time.Time) *WorkspaceBundle {
+	s.CreationTime = &v
+	return s
+}
+
 // SetDescription sets the Description field's value.
 func (s *WorkspaceBundle) SetDescription(v string) *WorkspaceBundle {
 	s.Description = &v
+	return s
+}
+
+// SetImageId sets the ImageId field's value.
+func (s *WorkspaceBundle) SetImageId(v string) *WorkspaceBundle {
+	s.ImageId = &v
+	return s
+}
+
+// SetLastUpdatedTime sets the LastUpdatedTime field's value.
+func (s *WorkspaceBundle) SetLastUpdatedTime(v time.Time) *WorkspaceBundle {
+	s.LastUpdatedTime = &v
 	return s
 }
 
@@ -6255,6 +18834,12 @@ func (s *WorkspaceBundle) SetOwner(v string) *WorkspaceBundle {
 // SetRootStorage sets the RootStorage field's value.
 func (s *WorkspaceBundle) SetRootStorage(v *RootStorage) *WorkspaceBundle {
 	s.RootStorage = v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *WorkspaceBundle) SetState(v string) *WorkspaceBundle {
+	s.State = &v
 	return s
 }
 
@@ -6282,12 +18867,20 @@ type WorkspaceConnectionStatus struct {
 	WorkspaceId *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceConnectionStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceConnectionStatus) GoString() string {
 	return s.String()
 }
@@ -6316,18 +18909,138 @@ func (s *WorkspaceConnectionStatus) SetWorkspaceId(v string) *WorkspaceConnectio
 	return s
 }
 
-// Describes an AWS Directory Service directory that is used with Amazon WorkSpaces.
+// Describes the default properties that are used for creating WorkSpaces. For
+// more information, see Update Directory Details for Your WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html).
+type WorkspaceCreationProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of your custom security group.
+	CustomSecurityGroupId *string `min:"11" type:"string"`
+
+	// The default organizational unit (OU) for your WorkSpaces directories. This
+	// string must be the full Lightweight Directory Access Protocol (LDAP) distinguished
+	// name for the target domain and OU. It must be in the form "OU=value,DC=value,DC=value",
+	// where value is any string of characters, and the number of domain components
+	// (DCs) is two or more. For example, OU=WorkSpaces_machines,DC=machines,DC=example,DC=com.
+	//
+	//    * To avoid errors, certain characters in the distinguished name must be
+	//    escaped. For more information, see Distinguished Names (https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names)
+	//    in the Microsoft documentation.
+	//
+	//    * The API doesn't validate whether the OU exists.
+	DefaultOu *string `type:"string"`
+
+	// Indicates whether internet access is enabled for your WorkSpaces.
+	EnableInternetAccess *bool `type:"boolean"`
+
+	// Indicates whether maintenance mode is enabled for your WorkSpaces. For more
+	// information, see WorkSpace Maintenance (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html).
+	EnableMaintenanceMode *bool `type:"boolean"`
+
+	// Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.
+	//
+	// If WorkDocs is already enabled for a WorkSpaces directory and you disable
+	// it, new WorkSpaces launched in the directory will not have WorkDocs enabled.
+	// However, WorkDocs remains enabled for any existing WorkSpaces, unless you
+	// either disable users' access to WorkDocs or you delete the WorkDocs site.
+	// To disable users' access to WorkDocs, see Disabling Users (https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html)
+	// in the Amazon WorkDocs Administration Guide. To delete a WorkDocs site, see
+	// Deleting a Site (https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html)
+	// in the Amazon WorkDocs Administration Guide.
+	//
+	// If you enable WorkDocs on a directory that already has existing WorkSpaces,
+	// the existing WorkSpaces and any new WorkSpaces that are launched in the directory
+	// will have WorkDocs enabled.
+	EnableWorkDocs *bool `type:"boolean"`
+
+	// Indicates whether users are local administrators of their WorkSpaces.
+	UserEnabledAsLocalAdministrator *bool `type:"boolean"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkspaceCreationProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkspaceCreationProperties) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *WorkspaceCreationProperties) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "WorkspaceCreationProperties"}
+	if s.CustomSecurityGroupId != nil && len(*s.CustomSecurityGroupId) < 11 {
+		invalidParams.Add(request.NewErrParamMinLen("CustomSecurityGroupId", 11))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetCustomSecurityGroupId sets the CustomSecurityGroupId field's value.
+func (s *WorkspaceCreationProperties) SetCustomSecurityGroupId(v string) *WorkspaceCreationProperties {
+	s.CustomSecurityGroupId = &v
+	return s
+}
+
+// SetDefaultOu sets the DefaultOu field's value.
+func (s *WorkspaceCreationProperties) SetDefaultOu(v string) *WorkspaceCreationProperties {
+	s.DefaultOu = &v
+	return s
+}
+
+// SetEnableInternetAccess sets the EnableInternetAccess field's value.
+func (s *WorkspaceCreationProperties) SetEnableInternetAccess(v bool) *WorkspaceCreationProperties {
+	s.EnableInternetAccess = &v
+	return s
+}
+
+// SetEnableMaintenanceMode sets the EnableMaintenanceMode field's value.
+func (s *WorkspaceCreationProperties) SetEnableMaintenanceMode(v bool) *WorkspaceCreationProperties {
+	s.EnableMaintenanceMode = &v
+	return s
+}
+
+// SetEnableWorkDocs sets the EnableWorkDocs field's value.
+func (s *WorkspaceCreationProperties) SetEnableWorkDocs(v bool) *WorkspaceCreationProperties {
+	s.EnableWorkDocs = &v
+	return s
+}
+
+// SetUserEnabledAsLocalAdministrator sets the UserEnabledAsLocalAdministrator field's value.
+func (s *WorkspaceCreationProperties) SetUserEnabledAsLocalAdministrator(v bool) *WorkspaceCreationProperties {
+	s.UserEnabledAsLocalAdministrator = &v
+	return s
+}
+
+// Describes a directory that is used with Amazon WorkSpaces.
 type WorkspaceDirectory struct {
 	_ struct{} `type:"structure"`
 
 	// The directory alias.
 	Alias *string `type:"string"`
 
+	// The certificate-based authentication properties used to authenticate SAML
+	// 2.0 Identity Provider (IdP) user identities to Active Directory for WorkSpaces
+	// login.
+	CertificateBasedAuthProperties *CertificateBasedAuthProperties `type:"structure"`
+
 	// The user name for the service account.
 	CustomerUserName *string `min:"1" type:"string"`
 
 	// The directory identifier.
-	DirectoryId *string `type:"string"`
+	DirectoryId *string `min:"10" type:"string"`
 
 	// The name of the directory.
 	DirectoryName *string `type:"string"`
@@ -6349,25 +19062,54 @@ type WorkspaceDirectory struct {
 	// in their Amazon WorkSpaces client application to connect to the directory.
 	RegistrationCode *string `min:"1" type:"string"`
 
-	// The state of the directory's registration with Amazon WorkSpaces
+	// Describes the enablement status, user access URL, and relay state parameter
+	// name that are used for configuring federation with an SAML 2.0 identity provider.
+	SamlProperties *SamlProperties `type:"structure"`
+
+	// The default self-service permissions for WorkSpaces in the directory.
+	SelfservicePermissions *SelfservicePermissions `type:"structure"`
+
+	// The state of the directory's registration with Amazon WorkSpaces. After a
+	// directory is deregistered, the DEREGISTERED state is returned very briefly
+	// before the directory metadata is cleaned up, so this state is rarely returned.
+	// To confirm that a directory is deregistered, check for the directory ID by
+	// using DescribeWorkspaceDirectories (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceDirectories.html).
+	// If the directory ID isn't returned, then the directory has been successfully
+	// deregistered.
 	State *string `type:"string" enum:"WorkspaceDirectoryState"`
 
 	// The identifiers of the subnets used with the directory.
 	SubnetIds []*string `type:"list"`
 
+	// Specifies whether the directory is dedicated or shared. To use Bring Your
+	// Own License (BYOL), this value must be set to DEDICATED. For more information,
+	// see Bring Your Own Windows Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
+	Tenancy *string `type:"string" enum:"Tenancy"`
+
+	// The devices and operating systems that users can use to access WorkSpaces.
+	WorkspaceAccessProperties *WorkspaceAccessProperties `type:"structure"`
+
 	// The default creation properties for all WorkSpaces in the directory.
 	WorkspaceCreationProperties *DefaultWorkspaceCreationProperties `type:"structure"`
 
 	// The identifier of the security group that is assigned to new WorkSpaces.
-	WorkspaceSecurityGroupId *string `type:"string"`
+	WorkspaceSecurityGroupId *string `min:"11" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceDirectory) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceDirectory) GoString() string {
 	return s.String()
 }
@@ -6375,6 +19117,12 @@ func (s WorkspaceDirectory) GoString() string {
 // SetAlias sets the Alias field's value.
 func (s *WorkspaceDirectory) SetAlias(v string) *WorkspaceDirectory {
 	s.Alias = &v
+	return s
+}
+
+// SetCertificateBasedAuthProperties sets the CertificateBasedAuthProperties field's value.
+func (s *WorkspaceDirectory) SetCertificateBasedAuthProperties(v *CertificateBasedAuthProperties) *WorkspaceDirectory {
+	s.CertificateBasedAuthProperties = v
 	return s
 }
 
@@ -6426,6 +19174,18 @@ func (s *WorkspaceDirectory) SetRegistrationCode(v string) *WorkspaceDirectory {
 	return s
 }
 
+// SetSamlProperties sets the SamlProperties field's value.
+func (s *WorkspaceDirectory) SetSamlProperties(v *SamlProperties) *WorkspaceDirectory {
+	s.SamlProperties = v
+	return s
+}
+
+// SetSelfservicePermissions sets the SelfservicePermissions field's value.
+func (s *WorkspaceDirectory) SetSelfservicePermissions(v *SelfservicePermissions) *WorkspaceDirectory {
+	s.SelfservicePermissions = v
+	return s
+}
+
 // SetState sets the State field's value.
 func (s *WorkspaceDirectory) SetState(v string) *WorkspaceDirectory {
 	s.State = &v
@@ -6435,6 +19195,18 @@ func (s *WorkspaceDirectory) SetState(v string) *WorkspaceDirectory {
 // SetSubnetIds sets the SubnetIds field's value.
 func (s *WorkspaceDirectory) SetSubnetIds(v []*string) *WorkspaceDirectory {
 	s.SubnetIds = v
+	return s
+}
+
+// SetTenancy sets the Tenancy field's value.
+func (s *WorkspaceDirectory) SetTenancy(v string) *WorkspaceDirectory {
+	s.Tenancy = &v
+	return s
+}
+
+// SetWorkspaceAccessProperties sets the WorkspaceAccessProperties field's value.
+func (s *WorkspaceDirectory) SetWorkspaceAccessProperties(v *WorkspaceAccessProperties) *WorkspaceDirectory {
+	s.WorkspaceAccessProperties = v
 	return s
 }
 
@@ -6454,11 +19226,20 @@ func (s *WorkspaceDirectory) SetWorkspaceSecurityGroupId(v string) *WorkspaceDir
 type WorkspaceImage struct {
 	_ struct{} `type:"structure"`
 
+	// The date when the image was created. If the image has been shared, the Amazon
+	// Web Services account that the image has been shared with sees the original
+	// creation date of the image.
+	Created *time.Time `type:"timestamp"`
+
 	// The description of the image.
 	Description *string `min:"1" type:"string"`
 
 	// The error code that is returned for the image.
 	ErrorCode *string `type:"string"`
+
+	// Additional details of the error returned for the image, including the possible
+	// causes of the errors and troubleshooting information.
+	ErrorDetails []*ErrorDetails `type:"list"`
 
 	// The text of the error message that is returned for the image.
 	ErrorMessage *string `type:"string"`
@@ -6472,22 +19253,43 @@ type WorkspaceImage struct {
 	// The operating system that the image is running.
 	OperatingSystem *OperatingSystem `type:"structure"`
 
-	// Specifies whether the image is running on dedicated hardware. When bring
-	// your own license (BYOL) is enabled, this value is set to DEDICATED.
+	// The identifier of the Amazon Web Services account that owns the image.
+	OwnerAccountId *string `type:"string"`
+
+	// Specifies whether the image is running on dedicated hardware. When Bring
+	// Your Own License (BYOL) is enabled, this value is set to DEDICATED. For more
+	// information, see Bring Your Own Windows Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 	RequiredTenancy *string `type:"string" enum:"WorkspaceImageRequiredTenancy"`
 
 	// The status of the image.
 	State *string `type:"string" enum:"WorkspaceImageState"`
+
+	// The updates (if any) that are available for the specified image.
+	Updates *UpdateResult `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceImage) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceImage) GoString() string {
 	return s.String()
+}
+
+// SetCreated sets the Created field's value.
+func (s *WorkspaceImage) SetCreated(v time.Time) *WorkspaceImage {
+	s.Created = &v
+	return s
 }
 
 // SetDescription sets the Description field's value.
@@ -6499,6 +19301,12 @@ func (s *WorkspaceImage) SetDescription(v string) *WorkspaceImage {
 // SetErrorCode sets the ErrorCode field's value.
 func (s *WorkspaceImage) SetErrorCode(v string) *WorkspaceImage {
 	s.ErrorCode = &v
+	return s
+}
+
+// SetErrorDetails sets the ErrorDetails field's value.
+func (s *WorkspaceImage) SetErrorDetails(v []*ErrorDetails) *WorkspaceImage {
+	s.ErrorDetails = v
 	return s
 }
 
@@ -6526,6 +19334,12 @@ func (s *WorkspaceImage) SetOperatingSystem(v *OperatingSystem) *WorkspaceImage 
 	return s
 }
 
+// SetOwnerAccountId sets the OwnerAccountId field's value.
+func (s *WorkspaceImage) SetOwnerAccountId(v string) *WorkspaceImage {
+	s.OwnerAccountId = &v
+	return s
+}
+
 // SetRequiredTenancy sets the RequiredTenancy field's value.
 func (s *WorkspaceImage) SetRequiredTenancy(v string) *WorkspaceImage {
 	s.RequiredTenancy = &v
@@ -6538,6 +19352,12 @@ func (s *WorkspaceImage) SetState(v string) *WorkspaceImage {
 	return s
 }
 
+// SetUpdates sets the Updates field's value.
+func (s *WorkspaceImage) SetUpdates(v *UpdateResult) *WorkspaceImage {
+	s.Updates = v
+	return s
+}
+
 // Describes a WorkSpace.
 type WorkspaceProperties struct {
 	_ struct{} `type:"structure"`
@@ -6545,27 +19365,59 @@ type WorkspaceProperties struct {
 	// The compute type. For more information, see Amazon WorkSpaces Bundles (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
 	ComputeTypeName *string `type:"string" enum:"Compute"`
 
-	// The size of the root volume.
+	// The name of the operating system.
+	OperatingSystemName *string `type:"string" enum:"OperatingSystemName"`
+
+	// The protocol. For more information, see Protocols for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html).
+	//
+	//    * Only available for WorkSpaces created with PCoIP bundles.
+	//
+	//    * The Protocols property is case sensitive. Ensure you use PCOIP or WSP.
+	//
+	//    * Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based
+	//    bundles (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).
+	Protocols []*string `type:"list" enum:"Protocol"`
+
+	// The size of the root volume. For important information about how to modify
+	// the size of the root and user volumes, see Modify a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
 	RootVolumeSizeGib *int64 `type:"integer"`
 
 	// The running mode. For more information, see Manage the WorkSpace Running
-	// Mode (http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html).
+	// Mode (https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html).
+	//
+	//    * The MANUAL value is only supported by Amazon WorkSpaces Core. Contact
+	//    your account team to be allow-listed to use this value. For more information,
+	//    see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/).
+	//
+	//    * Ensure you review your running mode to ensure you are using a running
+	//    mode that is optimal for your needs and budget. For more information on
+	//    switching running modes, see Can I switch between hourly and monthly billing?
+	//    (https://aws.amazon.com/workspaces/faqs/#:~:text=Q%3A%20Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%3F)
 	RunningMode *string `type:"string" enum:"RunningMode"`
 
 	// The time after a user logs off when WorkSpaces are automatically stopped.
-	// Configured in 60 minute intervals.
+	// Configured in 60-minute intervals.
 	RunningModeAutoStopTimeoutInMinutes *int64 `type:"integer"`
 
-	// The size of the user storage.
+	// The size of the user storage. For important information about how to modify
+	// the size of the root and user volumes, see Modify a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
 	UserVolumeSizeGib *int64 `type:"integer"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceProperties) GoString() string {
 	return s.String()
 }
@@ -6573,6 +19425,18 @@ func (s WorkspaceProperties) GoString() string {
 // SetComputeTypeName sets the ComputeTypeName field's value.
 func (s *WorkspaceProperties) SetComputeTypeName(v string) *WorkspaceProperties {
 	s.ComputeTypeName = &v
+	return s
+}
+
+// SetOperatingSystemName sets the OperatingSystemName field's value.
+func (s *WorkspaceProperties) SetOperatingSystemName(v string) *WorkspaceProperties {
+	s.OperatingSystemName = &v
+	return s
+}
+
+// SetProtocols sets the Protocols field's value.
+func (s *WorkspaceProperties) SetProtocols(v []*string) *WorkspaceProperties {
+	s.Protocols = v
 	return s
 }
 
@@ -6610,11 +19474,11 @@ type WorkspaceRequest struct {
 	// BundleId is a required field
 	BundleId *string `type:"string" required:"true"`
 
-	// The identifier of the AWS Directory Service directory for the WorkSpace.
-	// You can use DescribeWorkspaceDirectories to list the available directories.
+	// The identifier of the Directory Service directory for the WorkSpace. You
+	// can use DescribeWorkspaceDirectories to list the available directories.
 	//
 	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
+	DirectoryId *string `min:"10" type:"string" required:"true"`
 
 	// Indicates whether the data stored on the root volume is encrypted.
 	RootVolumeEncryptionEnabled *bool `type:"boolean"`
@@ -6622,8 +19486,8 @@ type WorkspaceRequest struct {
 	// The tags for the WorkSpace.
 	Tags []*Tag `type:"list"`
 
-	// The username of the user for the WorkSpace. This username must exist in the
-	// AWS Directory Service directory for the WorkSpace.
+	// The user name of the user for the WorkSpace. This user name must exist in
+	// the Directory Service directory for the WorkSpace.
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -6631,19 +19495,28 @@ type WorkspaceRequest struct {
 	// Indicates whether the data stored on the user volume is encrypted.
 	UserVolumeEncryptionEnabled *bool `type:"boolean"`
 
-	// The KMS key used to encrypt data stored on your WorkSpace.
+	// The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace.
+	// Amazon WorkSpaces does not support asymmetric KMS keys.
 	VolumeEncryptionKey *string `type:"string"`
 
 	// The WorkSpace properties.
 	WorkspaceProperties *WorkspaceProperties `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceRequest) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s WorkspaceRequest) GoString() string {
 	return s.String()
 }
@@ -6656,6 +19529,9 @@ func (s *WorkspaceRequest) Validate() error {
 	}
 	if s.DirectoryId == nil {
 		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+	}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("DirectoryId", 10))
 	}
 	if s.UserName == nil {
 		invalidParams.Add(request.NewErrParamRequired("UserName"))
@@ -6728,6 +19604,387 @@ func (s *WorkspaceRequest) SetWorkspaceProperties(v *WorkspaceProperties) *Works
 	return s
 }
 
+// Describes the association between an application and a WorkSpace resource.
+type WorkspaceResourceAssociation struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the associated resource.
+	AssociatedResourceId *string `min:"1" type:"string"`
+
+	// The resource types of the associated resource.
+	AssociatedResourceType *string `type:"string" enum:"WorkSpaceAssociatedResourceType"`
+
+	// The time the association is created.
+	Created *time.Time `type:"timestamp"`
+
+	// The time the association status was last updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// The status of the WorkSpace resource association.
+	State *string `type:"string" enum:"AssociationState"`
+
+	// The reason the association deployment failed.
+	StateReason *AssociationStateReason `type:"structure"`
+
+	// The identifier of the WorkSpace.
+	WorkspaceId *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkspaceResourceAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkspaceResourceAssociation) GoString() string {
+	return s.String()
+}
+
+// SetAssociatedResourceId sets the AssociatedResourceId field's value.
+func (s *WorkspaceResourceAssociation) SetAssociatedResourceId(v string) *WorkspaceResourceAssociation {
+	s.AssociatedResourceId = &v
+	return s
+}
+
+// SetAssociatedResourceType sets the AssociatedResourceType field's value.
+func (s *WorkspaceResourceAssociation) SetAssociatedResourceType(v string) *WorkspaceResourceAssociation {
+	s.AssociatedResourceType = &v
+	return s
+}
+
+// SetCreated sets the Created field's value.
+func (s *WorkspaceResourceAssociation) SetCreated(v time.Time) *WorkspaceResourceAssociation {
+	s.Created = &v
+	return s
+}
+
+// SetLastUpdatedTime sets the LastUpdatedTime field's value.
+func (s *WorkspaceResourceAssociation) SetLastUpdatedTime(v time.Time) *WorkspaceResourceAssociation {
+	s.LastUpdatedTime = &v
+	return s
+}
+
+// SetState sets the State field's value.
+func (s *WorkspaceResourceAssociation) SetState(v string) *WorkspaceResourceAssociation {
+	s.State = &v
+	return s
+}
+
+// SetStateReason sets the StateReason field's value.
+func (s *WorkspaceResourceAssociation) SetStateReason(v *AssociationStateReason) *WorkspaceResourceAssociation {
+	s.StateReason = v
+	return s
+}
+
+// SetWorkspaceId sets the WorkspaceId field's value.
+func (s *WorkspaceResourceAssociation) SetWorkspaceId(v string) *WorkspaceResourceAssociation {
+	s.WorkspaceId = &v
+	return s
+}
+
+// The workspaces_DefaultRole role could not be found. If this is the first
+// time you are registering a directory, you will need to create the workspaces_DefaultRole
+// role before you can register a directory. For more information, see Creating
+// the workspaces_DefaultRole Role (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role).
+type WorkspacesDefaultRoleNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkspacesDefaultRoleNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s WorkspacesDefaultRoleNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorWorkspacesDefaultRoleNotFoundException(v protocol.ResponseMetadata) error {
+	return &WorkspacesDefaultRoleNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *WorkspacesDefaultRoleNotFoundException) Code() string {
+	return "WorkspacesDefaultRoleNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *WorkspacesDefaultRoleNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *WorkspacesDefaultRoleNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *WorkspacesDefaultRoleNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *WorkspacesDefaultRoleNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *WorkspacesDefaultRoleNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+const (
+	// AccessPropertyValueAllow is a AccessPropertyValue enum value
+	AccessPropertyValueAllow = "ALLOW"
+
+	// AccessPropertyValueDeny is a AccessPropertyValue enum value
+	AccessPropertyValueDeny = "DENY"
+)
+
+// AccessPropertyValue_Values returns all elements of the AccessPropertyValue enum
+func AccessPropertyValue_Values() []string {
+	return []string{
+		AccessPropertyValueAllow,
+		AccessPropertyValueDeny,
+	}
+}
+
+const (
+	// ApplicationMicrosoftOffice2016 is a Application enum value
+	ApplicationMicrosoftOffice2016 = "Microsoft_Office_2016"
+
+	// ApplicationMicrosoftOffice2019 is a Application enum value
+	ApplicationMicrosoftOffice2019 = "Microsoft_Office_2019"
+)
+
+// Application_Values returns all elements of the Application enum
+func Application_Values() []string {
+	return []string{
+		ApplicationMicrosoftOffice2016,
+		ApplicationMicrosoftOffice2019,
+	}
+}
+
+const (
+	// ApplicationAssociatedResourceTypeWorkspace is a ApplicationAssociatedResourceType enum value
+	ApplicationAssociatedResourceTypeWorkspace = "WORKSPACE"
+
+	// ApplicationAssociatedResourceTypeBundle is a ApplicationAssociatedResourceType enum value
+	ApplicationAssociatedResourceTypeBundle = "BUNDLE"
+
+	// ApplicationAssociatedResourceTypeImage is a ApplicationAssociatedResourceType enum value
+	ApplicationAssociatedResourceTypeImage = "IMAGE"
+)
+
+// ApplicationAssociatedResourceType_Values returns all elements of the ApplicationAssociatedResourceType enum
+func ApplicationAssociatedResourceType_Values() []string {
+	return []string{
+		ApplicationAssociatedResourceTypeWorkspace,
+		ApplicationAssociatedResourceTypeBundle,
+		ApplicationAssociatedResourceTypeImage,
+	}
+}
+
+const (
+	// AssociationErrorCodeValidationErrorInsufficientDiskSpace is a AssociationErrorCode enum value
+	AssociationErrorCodeValidationErrorInsufficientDiskSpace = "ValidationError.InsufficientDiskSpace"
+
+	// AssociationErrorCodeValidationErrorInsufficientMemory is a AssociationErrorCode enum value
+	AssociationErrorCodeValidationErrorInsufficientMemory = "ValidationError.InsufficientMemory"
+
+	// AssociationErrorCodeValidationErrorUnsupportedOperatingSystem is a AssociationErrorCode enum value
+	AssociationErrorCodeValidationErrorUnsupportedOperatingSystem = "ValidationError.UnsupportedOperatingSystem"
+
+	// AssociationErrorCodeDeploymentErrorInternalServerError is a AssociationErrorCode enum value
+	AssociationErrorCodeDeploymentErrorInternalServerError = "DeploymentError.InternalServerError"
+
+	// AssociationErrorCodeDeploymentErrorWorkspaceUnreachable is a AssociationErrorCode enum value
+	AssociationErrorCodeDeploymentErrorWorkspaceUnreachable = "DeploymentError.WorkspaceUnreachable"
+)
+
+// AssociationErrorCode_Values returns all elements of the AssociationErrorCode enum
+func AssociationErrorCode_Values() []string {
+	return []string{
+		AssociationErrorCodeValidationErrorInsufficientDiskSpace,
+		AssociationErrorCodeValidationErrorInsufficientMemory,
+		AssociationErrorCodeValidationErrorUnsupportedOperatingSystem,
+		AssociationErrorCodeDeploymentErrorInternalServerError,
+		AssociationErrorCodeDeploymentErrorWorkspaceUnreachable,
+	}
+}
+
+const (
+	// AssociationStatePendingInstall is a AssociationState enum value
+	AssociationStatePendingInstall = "PENDING_INSTALL"
+
+	// AssociationStatePendingInstallDeployment is a AssociationState enum value
+	AssociationStatePendingInstallDeployment = "PENDING_INSTALL_DEPLOYMENT"
+
+	// AssociationStatePendingUninstall is a AssociationState enum value
+	AssociationStatePendingUninstall = "PENDING_UNINSTALL"
+
+	// AssociationStatePendingUninstallDeployment is a AssociationState enum value
+	AssociationStatePendingUninstallDeployment = "PENDING_UNINSTALL_DEPLOYMENT"
+
+	// AssociationStateInstalling is a AssociationState enum value
+	AssociationStateInstalling = "INSTALLING"
+
+	// AssociationStateUninstalling is a AssociationState enum value
+	AssociationStateUninstalling = "UNINSTALLING"
+
+	// AssociationStateError is a AssociationState enum value
+	AssociationStateError = "ERROR"
+
+	// AssociationStateCompleted is a AssociationState enum value
+	AssociationStateCompleted = "COMPLETED"
+
+	// AssociationStateRemoved is a AssociationState enum value
+	AssociationStateRemoved = "REMOVED"
+)
+
+// AssociationState_Values returns all elements of the AssociationState enum
+func AssociationState_Values() []string {
+	return []string{
+		AssociationStatePendingInstall,
+		AssociationStatePendingInstallDeployment,
+		AssociationStatePendingUninstall,
+		AssociationStatePendingUninstallDeployment,
+		AssociationStateInstalling,
+		AssociationStateUninstalling,
+		AssociationStateError,
+		AssociationStateCompleted,
+		AssociationStateRemoved,
+	}
+}
+
+const (
+	// AssociationStatusNotAssociated is a AssociationStatus enum value
+	AssociationStatusNotAssociated = "NOT_ASSOCIATED"
+
+	// AssociationStatusAssociatedWithOwnerAccount is a AssociationStatus enum value
+	AssociationStatusAssociatedWithOwnerAccount = "ASSOCIATED_WITH_OWNER_ACCOUNT"
+
+	// AssociationStatusAssociatedWithSharedAccount is a AssociationStatus enum value
+	AssociationStatusAssociatedWithSharedAccount = "ASSOCIATED_WITH_SHARED_ACCOUNT"
+
+	// AssociationStatusPendingAssociation is a AssociationStatus enum value
+	AssociationStatusPendingAssociation = "PENDING_ASSOCIATION"
+
+	// AssociationStatusPendingDisassociation is a AssociationStatus enum value
+	AssociationStatusPendingDisassociation = "PENDING_DISASSOCIATION"
+)
+
+// AssociationStatus_Values returns all elements of the AssociationStatus enum
+func AssociationStatus_Values() []string {
+	return []string{
+		AssociationStatusNotAssociated,
+		AssociationStatusAssociatedWithOwnerAccount,
+		AssociationStatusAssociatedWithSharedAccount,
+		AssociationStatusPendingAssociation,
+		AssociationStatusPendingDisassociation,
+	}
+}
+
+const (
+	// BundleAssociatedResourceTypeApplication is a BundleAssociatedResourceType enum value
+	BundleAssociatedResourceTypeApplication = "APPLICATION"
+)
+
+// BundleAssociatedResourceType_Values returns all elements of the BundleAssociatedResourceType enum
+func BundleAssociatedResourceType_Values() []string {
+	return []string{
+		BundleAssociatedResourceTypeApplication,
+	}
+}
+
+const (
+	// BundleTypeRegular is a BundleType enum value
+	BundleTypeRegular = "REGULAR"
+
+	// BundleTypeStandby is a BundleType enum value
+	BundleTypeStandby = "STANDBY"
+)
+
+// BundleType_Values returns all elements of the BundleType enum
+func BundleType_Values() []string {
+	return []string{
+		BundleTypeRegular,
+		BundleTypeStandby,
+	}
+}
+
+const (
+	// CertificateBasedAuthStatusEnumDisabled is a CertificateBasedAuthStatusEnum enum value
+	CertificateBasedAuthStatusEnumDisabled = "DISABLED"
+
+	// CertificateBasedAuthStatusEnumEnabled is a CertificateBasedAuthStatusEnum enum value
+	CertificateBasedAuthStatusEnumEnabled = "ENABLED"
+)
+
+// CertificateBasedAuthStatusEnum_Values returns all elements of the CertificateBasedAuthStatusEnum enum
+func CertificateBasedAuthStatusEnum_Values() []string {
+	return []string{
+		CertificateBasedAuthStatusEnumDisabled,
+		CertificateBasedAuthStatusEnumEnabled,
+	}
+}
+
+const (
+	// ClientDeviceTypeDeviceTypeWindows is a ClientDeviceType enum value
+	ClientDeviceTypeDeviceTypeWindows = "DeviceTypeWindows"
+
+	// ClientDeviceTypeDeviceTypeOsx is a ClientDeviceType enum value
+	ClientDeviceTypeDeviceTypeOsx = "DeviceTypeOsx"
+
+	// ClientDeviceTypeDeviceTypeAndroid is a ClientDeviceType enum value
+	ClientDeviceTypeDeviceTypeAndroid = "DeviceTypeAndroid"
+
+	// ClientDeviceTypeDeviceTypeIos is a ClientDeviceType enum value
+	ClientDeviceTypeDeviceTypeIos = "DeviceTypeIos"
+
+	// ClientDeviceTypeDeviceTypeLinux is a ClientDeviceType enum value
+	ClientDeviceTypeDeviceTypeLinux = "DeviceTypeLinux"
+
+	// ClientDeviceTypeDeviceTypeWeb is a ClientDeviceType enum value
+	ClientDeviceTypeDeviceTypeWeb = "DeviceTypeWeb"
+)
+
+// ClientDeviceType_Values returns all elements of the ClientDeviceType enum
+func ClientDeviceType_Values() []string {
+	return []string{
+		ClientDeviceTypeDeviceTypeWindows,
+		ClientDeviceTypeDeviceTypeOsx,
+		ClientDeviceTypeDeviceTypeAndroid,
+		ClientDeviceTypeDeviceTypeIos,
+		ClientDeviceTypeDeviceTypeLinux,
+		ClientDeviceTypeDeviceTypeWeb,
+	}
+}
+
 const (
 	// ComputeValue is a Compute enum value
 	ComputeValue = "VALUE"
@@ -6749,7 +20006,48 @@ const (
 
 	// ComputeGraphicspro is a Compute enum value
 	ComputeGraphicspro = "GRAPHICSPRO"
+
+	// ComputeGraphicsG4dn is a Compute enum value
+	ComputeGraphicsG4dn = "GRAPHICS_G4DN"
+
+	// ComputeGraphicsproG4dn is a Compute enum value
+	ComputeGraphicsproG4dn = "GRAPHICSPRO_G4DN"
 )
+
+// Compute_Values returns all elements of the Compute enum
+func Compute_Values() []string {
+	return []string{
+		ComputeValue,
+		ComputeStandard,
+		ComputePerformance,
+		ComputePower,
+		ComputeGraphics,
+		ComputePowerpro,
+		ComputeGraphicspro,
+		ComputeGraphicsG4dn,
+		ComputeGraphicsproG4dn,
+	}
+}
+
+const (
+	// ConnectionAliasStateCreating is a ConnectionAliasState enum value
+	ConnectionAliasStateCreating = "CREATING"
+
+	// ConnectionAliasStateCreated is a ConnectionAliasState enum value
+	ConnectionAliasStateCreated = "CREATED"
+
+	// ConnectionAliasStateDeleting is a ConnectionAliasState enum value
+	ConnectionAliasStateDeleting = "DELETING"
+)
+
+// ConnectionAliasState_Values returns all elements of the ConnectionAliasState enum
+func ConnectionAliasState_Values() []string {
+	return []string{
+		ConnectionAliasStateCreating,
+		ConnectionAliasStateCreated,
+		ConnectionAliasStateDeleting,
+	}
+}
 
 const (
 	// ConnectionStateConnected is a ConnectionState enum value
@@ -6762,6 +20060,31 @@ const (
 	ConnectionStateUnknown = "UNKNOWN"
 )
 
+// ConnectionState_Values returns all elements of the ConnectionState enum
+func ConnectionState_Values() []string {
+	return []string{
+		ConnectionStateConnected,
+		ConnectionStateDisconnected,
+		ConnectionStateUnknown,
+	}
+}
+
+const (
+	// DataReplicationNoReplication is a DataReplication enum value
+	DataReplicationNoReplication = "NO_REPLICATION"
+
+	// DataReplicationPrimaryAsSource is a DataReplication enum value
+	DataReplicationPrimaryAsSource = "PRIMARY_AS_SOURCE"
+)
+
+// DataReplication_Values returns all elements of the DataReplication enum
+func DataReplication_Values() []string {
+	return []string{
+		DataReplicationNoReplication,
+		DataReplicationPrimaryAsSource,
+	}
+}
+
 const (
 	// DedicatedTenancyModificationStateEnumPending is a DedicatedTenancyModificationStateEnum enum value
 	DedicatedTenancyModificationStateEnumPending = "PENDING"
@@ -6773,10 +20096,26 @@ const (
 	DedicatedTenancyModificationStateEnumFailed = "FAILED"
 )
 
+// DedicatedTenancyModificationStateEnum_Values returns all elements of the DedicatedTenancyModificationStateEnum enum
+func DedicatedTenancyModificationStateEnum_Values() []string {
+	return []string{
+		DedicatedTenancyModificationStateEnumPending,
+		DedicatedTenancyModificationStateEnumCompleted,
+		DedicatedTenancyModificationStateEnumFailed,
+	}
+}
+
 const (
 	// DedicatedTenancySupportEnumEnabled is a DedicatedTenancySupportEnum enum value
 	DedicatedTenancySupportEnumEnabled = "ENABLED"
 )
+
+// DedicatedTenancySupportEnum_Values returns all elements of the DedicatedTenancySupportEnum enum
+func DedicatedTenancySupportEnum_Values() []string {
+	return []string{
+		DedicatedTenancySupportEnumEnabled,
+	}
+}
 
 const (
 	// DedicatedTenancySupportResultEnumEnabled is a DedicatedTenancySupportResultEnum enum value
@@ -6785,6 +20124,86 @@ const (
 	// DedicatedTenancySupportResultEnumDisabled is a DedicatedTenancySupportResultEnum enum value
 	DedicatedTenancySupportResultEnumDisabled = "DISABLED"
 )
+
+// DedicatedTenancySupportResultEnum_Values returns all elements of the DedicatedTenancySupportResultEnum enum
+func DedicatedTenancySupportResultEnum_Values() []string {
+	return []string{
+		DedicatedTenancySupportResultEnumEnabled,
+		DedicatedTenancySupportResultEnumDisabled,
+	}
+}
+
+const (
+	// DeletableCertificateBasedAuthPropertyCertificateBasedAuthPropertiesCertificateAuthorityArn is a DeletableCertificateBasedAuthProperty enum value
+	DeletableCertificateBasedAuthPropertyCertificateBasedAuthPropertiesCertificateAuthorityArn = "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"
+)
+
+// DeletableCertificateBasedAuthProperty_Values returns all elements of the DeletableCertificateBasedAuthProperty enum
+func DeletableCertificateBasedAuthProperty_Values() []string {
+	return []string{
+		DeletableCertificateBasedAuthPropertyCertificateBasedAuthPropertiesCertificateAuthorityArn,
+	}
+}
+
+const (
+	// DeletableSamlPropertySamlPropertiesUserAccessUrl is a DeletableSamlProperty enum value
+	DeletableSamlPropertySamlPropertiesUserAccessUrl = "SAML_PROPERTIES_USER_ACCESS_URL"
+
+	// DeletableSamlPropertySamlPropertiesRelayStateParameterName is a DeletableSamlProperty enum value
+	DeletableSamlPropertySamlPropertiesRelayStateParameterName = "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"
+)
+
+// DeletableSamlProperty_Values returns all elements of the DeletableSamlProperty enum
+func DeletableSamlProperty_Values() []string {
+	return []string{
+		DeletableSamlPropertySamlPropertiesUserAccessUrl,
+		DeletableSamlPropertySamlPropertiesRelayStateParameterName,
+	}
+}
+
+const (
+	// ImageAssociatedResourceTypeApplication is a ImageAssociatedResourceType enum value
+	ImageAssociatedResourceTypeApplication = "APPLICATION"
+)
+
+// ImageAssociatedResourceType_Values returns all elements of the ImageAssociatedResourceType enum
+func ImageAssociatedResourceType_Values() []string {
+	return []string{
+		ImageAssociatedResourceTypeApplication,
+	}
+}
+
+const (
+	// ImageTypeOwned is a ImageType enum value
+	ImageTypeOwned = "OWNED"
+
+	// ImageTypeShared is a ImageType enum value
+	ImageTypeShared = "SHARED"
+)
+
+// ImageType_Values returns all elements of the ImageType enum
+func ImageType_Values() []string {
+	return []string{
+		ImageTypeOwned,
+		ImageTypeShared,
+	}
+}
+
+const (
+	// LogUploadEnumEnabled is a LogUploadEnum enum value
+	LogUploadEnumEnabled = "ENABLED"
+
+	// LogUploadEnumDisabled is a LogUploadEnum enum value
+	LogUploadEnumDisabled = "DISABLED"
+)
+
+// LogUploadEnum_Values returns all elements of the LogUploadEnum enum
+func LogUploadEnum_Values() []string {
+	return []string{
+		LogUploadEnumEnabled,
+		LogUploadEnumDisabled,
+	}
+}
 
 const (
 	// ModificationResourceEnumRootVolume is a ModificationResourceEnum enum value
@@ -6797,6 +20216,15 @@ const (
 	ModificationResourceEnumComputeType = "COMPUTE_TYPE"
 )
 
+// ModificationResourceEnum_Values returns all elements of the ModificationResourceEnum enum
+func ModificationResourceEnum_Values() []string {
+	return []string{
+		ModificationResourceEnumRootVolume,
+		ModificationResourceEnumUserVolume,
+		ModificationResourceEnumComputeType,
+	}
+}
+
 const (
 	// ModificationStateEnumUpdateInitiated is a ModificationStateEnum enum value
 	ModificationStateEnumUpdateInitiated = "UPDATE_INITIATED"
@@ -6804,6 +20232,66 @@ const (
 	// ModificationStateEnumUpdateInProgress is a ModificationStateEnum enum value
 	ModificationStateEnumUpdateInProgress = "UPDATE_IN_PROGRESS"
 )
+
+// ModificationStateEnum_Values returns all elements of the ModificationStateEnum enum
+func ModificationStateEnum_Values() []string {
+	return []string{
+		ModificationStateEnumUpdateInitiated,
+		ModificationStateEnumUpdateInProgress,
+	}
+}
+
+const (
+	// OperatingSystemNameAmazonLinux2 is a OperatingSystemName enum value
+	OperatingSystemNameAmazonLinux2 = "AMAZON_LINUX_2"
+
+	// OperatingSystemNameUbuntu1804 is a OperatingSystemName enum value
+	OperatingSystemNameUbuntu1804 = "UBUNTU_18_04"
+
+	// OperatingSystemNameUbuntu2004 is a OperatingSystemName enum value
+	OperatingSystemNameUbuntu2004 = "UBUNTU_20_04"
+
+	// OperatingSystemNameUbuntu2204 is a OperatingSystemName enum value
+	OperatingSystemNameUbuntu2204 = "UBUNTU_22_04"
+
+	// OperatingSystemNameUnknown is a OperatingSystemName enum value
+	OperatingSystemNameUnknown = "UNKNOWN"
+
+	// OperatingSystemNameWindows10 is a OperatingSystemName enum value
+	OperatingSystemNameWindows10 = "WINDOWS_10"
+
+	// OperatingSystemNameWindows11 is a OperatingSystemName enum value
+	OperatingSystemNameWindows11 = "WINDOWS_11"
+
+	// OperatingSystemNameWindows7 is a OperatingSystemName enum value
+	OperatingSystemNameWindows7 = "WINDOWS_7"
+
+	// OperatingSystemNameWindowsServer2016 is a OperatingSystemName enum value
+	OperatingSystemNameWindowsServer2016 = "WINDOWS_SERVER_2016"
+
+	// OperatingSystemNameWindowsServer2019 is a OperatingSystemName enum value
+	OperatingSystemNameWindowsServer2019 = "WINDOWS_SERVER_2019"
+
+	// OperatingSystemNameWindowsServer2022 is a OperatingSystemName enum value
+	OperatingSystemNameWindowsServer2022 = "WINDOWS_SERVER_2022"
+)
+
+// OperatingSystemName_Values returns all elements of the OperatingSystemName enum
+func OperatingSystemName_Values() []string {
+	return []string{
+		OperatingSystemNameAmazonLinux2,
+		OperatingSystemNameUbuntu1804,
+		OperatingSystemNameUbuntu2004,
+		OperatingSystemNameUbuntu2204,
+		OperatingSystemNameUnknown,
+		OperatingSystemNameWindows10,
+		OperatingSystemNameWindows11,
+		OperatingSystemNameWindows7,
+		OperatingSystemNameWindowsServer2016,
+		OperatingSystemNameWindowsServer2019,
+		OperatingSystemNameWindowsServer2022,
+	}
+}
 
 const (
 	// OperatingSystemTypeWindows is a OperatingSystemType enum value
@@ -6813,6 +20301,30 @@ const (
 	OperatingSystemTypeLinux = "LINUX"
 )
 
+// OperatingSystemType_Values returns all elements of the OperatingSystemType enum
+func OperatingSystemType_Values() []string {
+	return []string{
+		OperatingSystemTypeWindows,
+		OperatingSystemTypeLinux,
+	}
+}
+
+const (
+	// ProtocolPcoip is a Protocol enum value
+	ProtocolPcoip = "PCOIP"
+
+	// ProtocolWsp is a Protocol enum value
+	ProtocolWsp = "WSP"
+)
+
+// Protocol_Values returns all elements of the Protocol enum
+func Protocol_Values() []string {
+	return []string{
+		ProtocolPcoip,
+		ProtocolWsp,
+	}
+}
+
 const (
 	// ReconnectEnumEnabled is a ReconnectEnum enum value
 	ReconnectEnumEnabled = "ENABLED"
@@ -6821,13 +20333,69 @@ const (
 	ReconnectEnumDisabled = "DISABLED"
 )
 
+// ReconnectEnum_Values returns all elements of the ReconnectEnum enum
+func ReconnectEnum_Values() []string {
+	return []string{
+		ReconnectEnumEnabled,
+		ReconnectEnumDisabled,
+	}
+}
+
 const (
 	// RunningModeAutoStop is a RunningMode enum value
 	RunningModeAutoStop = "AUTO_STOP"
 
 	// RunningModeAlwaysOn is a RunningMode enum value
 	RunningModeAlwaysOn = "ALWAYS_ON"
+
+	// RunningModeManual is a RunningMode enum value
+	RunningModeManual = "MANUAL"
 )
+
+// RunningMode_Values returns all elements of the RunningMode enum
+func RunningMode_Values() []string {
+	return []string{
+		RunningModeAutoStop,
+		RunningModeAlwaysOn,
+		RunningModeManual,
+	}
+}
+
+const (
+	// SamlStatusEnumDisabled is a SamlStatusEnum enum value
+	SamlStatusEnumDisabled = "DISABLED"
+
+	// SamlStatusEnumEnabled is a SamlStatusEnum enum value
+	SamlStatusEnumEnabled = "ENABLED"
+
+	// SamlStatusEnumEnabledWithDirectoryLoginFallback is a SamlStatusEnum enum value
+	SamlStatusEnumEnabledWithDirectoryLoginFallback = "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
+)
+
+// SamlStatusEnum_Values returns all elements of the SamlStatusEnum enum
+func SamlStatusEnum_Values() []string {
+	return []string{
+		SamlStatusEnumDisabled,
+		SamlStatusEnumEnabled,
+		SamlStatusEnumEnabledWithDirectoryLoginFallback,
+	}
+}
+
+const (
+	// StandbyWorkspaceRelationshipTypePrimary is a StandbyWorkspaceRelationshipType enum value
+	StandbyWorkspaceRelationshipTypePrimary = "PRIMARY"
+
+	// StandbyWorkspaceRelationshipTypeStandby is a StandbyWorkspaceRelationshipType enum value
+	StandbyWorkspaceRelationshipTypeStandby = "STANDBY"
+)
+
+// StandbyWorkspaceRelationshipType_Values returns all elements of the StandbyWorkspaceRelationshipType enum
+func StandbyWorkspaceRelationshipType_Values() []string {
+	return []string{
+		StandbyWorkspaceRelationshipTypePrimary,
+		StandbyWorkspaceRelationshipTypeStandby,
+	}
+}
 
 const (
 	// TargetWorkspaceStateAvailable is a TargetWorkspaceState enum value
@@ -6836,6 +20404,102 @@ const (
 	// TargetWorkspaceStateAdminMaintenance is a TargetWorkspaceState enum value
 	TargetWorkspaceStateAdminMaintenance = "ADMIN_MAINTENANCE"
 )
+
+// TargetWorkspaceState_Values returns all elements of the TargetWorkspaceState enum
+func TargetWorkspaceState_Values() []string {
+	return []string{
+		TargetWorkspaceStateAvailable,
+		TargetWorkspaceStateAdminMaintenance,
+	}
+}
+
+const (
+	// TenancyDedicated is a Tenancy enum value
+	TenancyDedicated = "DEDICATED"
+
+	// TenancyShared is a Tenancy enum value
+	TenancyShared = "SHARED"
+)
+
+// Tenancy_Values returns all elements of the Tenancy enum
+func Tenancy_Values() []string {
+	return []string{
+		TenancyDedicated,
+		TenancyShared,
+	}
+}
+
+const (
+	// WorkSpaceApplicationLicenseTypeLicensed is a WorkSpaceApplicationLicenseType enum value
+	WorkSpaceApplicationLicenseTypeLicensed = "LICENSED"
+
+	// WorkSpaceApplicationLicenseTypeUnlicensed is a WorkSpaceApplicationLicenseType enum value
+	WorkSpaceApplicationLicenseTypeUnlicensed = "UNLICENSED"
+)
+
+// WorkSpaceApplicationLicenseType_Values returns all elements of the WorkSpaceApplicationLicenseType enum
+func WorkSpaceApplicationLicenseType_Values() []string {
+	return []string{
+		WorkSpaceApplicationLicenseTypeLicensed,
+		WorkSpaceApplicationLicenseTypeUnlicensed,
+	}
+}
+
+const (
+	// WorkSpaceApplicationStatePending is a WorkSpaceApplicationState enum value
+	WorkSpaceApplicationStatePending = "PENDING"
+
+	// WorkSpaceApplicationStateError is a WorkSpaceApplicationState enum value
+	WorkSpaceApplicationStateError = "ERROR"
+
+	// WorkSpaceApplicationStateAvailable is a WorkSpaceApplicationState enum value
+	WorkSpaceApplicationStateAvailable = "AVAILABLE"
+
+	// WorkSpaceApplicationStateUninstallOnly is a WorkSpaceApplicationState enum value
+	WorkSpaceApplicationStateUninstallOnly = "UNINSTALL_ONLY"
+)
+
+// WorkSpaceApplicationState_Values returns all elements of the WorkSpaceApplicationState enum
+func WorkSpaceApplicationState_Values() []string {
+	return []string{
+		WorkSpaceApplicationStatePending,
+		WorkSpaceApplicationStateError,
+		WorkSpaceApplicationStateAvailable,
+		WorkSpaceApplicationStateUninstallOnly,
+	}
+}
+
+const (
+	// WorkSpaceAssociatedResourceTypeApplication is a WorkSpaceAssociatedResourceType enum value
+	WorkSpaceAssociatedResourceTypeApplication = "APPLICATION"
+)
+
+// WorkSpaceAssociatedResourceType_Values returns all elements of the WorkSpaceAssociatedResourceType enum
+func WorkSpaceAssociatedResourceType_Values() []string {
+	return []string{
+		WorkSpaceAssociatedResourceTypeApplication,
+	}
+}
+
+const (
+	// WorkspaceBundleStateAvailable is a WorkspaceBundleState enum value
+	WorkspaceBundleStateAvailable = "AVAILABLE"
+
+	// WorkspaceBundleStatePending is a WorkspaceBundleState enum value
+	WorkspaceBundleStatePending = "PENDING"
+
+	// WorkspaceBundleStateError is a WorkspaceBundleState enum value
+	WorkspaceBundleStateError = "ERROR"
+)
+
+// WorkspaceBundleState_Values returns all elements of the WorkspaceBundleState enum
+func WorkspaceBundleState_Values() []string {
+	return []string{
+		WorkspaceBundleStateAvailable,
+		WorkspaceBundleStatePending,
+		WorkspaceBundleStateError,
+	}
+}
 
 const (
 	// WorkspaceDirectoryStateRegistering is a WorkspaceDirectoryState enum value
@@ -6854,6 +20518,17 @@ const (
 	WorkspaceDirectoryStateError = "ERROR"
 )
 
+// WorkspaceDirectoryState_Values returns all elements of the WorkspaceDirectoryState enum
+func WorkspaceDirectoryState_Values() []string {
+	return []string{
+		WorkspaceDirectoryStateRegistering,
+		WorkspaceDirectoryStateRegistered,
+		WorkspaceDirectoryStateDeregistering,
+		WorkspaceDirectoryStateDeregistered,
+		WorkspaceDirectoryStateError,
+	}
+}
+
 const (
 	// WorkspaceDirectoryTypeSimpleAd is a WorkspaceDirectoryType enum value
 	WorkspaceDirectoryTypeSimpleAd = "SIMPLE_AD"
@@ -6861,6 +20536,126 @@ const (
 	// WorkspaceDirectoryTypeAdConnector is a WorkspaceDirectoryType enum value
 	WorkspaceDirectoryTypeAdConnector = "AD_CONNECTOR"
 )
+
+// WorkspaceDirectoryType_Values returns all elements of the WorkspaceDirectoryType enum
+func WorkspaceDirectoryType_Values() []string {
+	return []string{
+		WorkspaceDirectoryTypeSimpleAd,
+		WorkspaceDirectoryTypeAdConnector,
+	}
+}
+
+const (
+	// WorkspaceImageErrorDetailCodeOutdatedPowershellVersion is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeOutdatedPowershellVersion = "OutdatedPowershellVersion"
+
+	// WorkspaceImageErrorDetailCodeOfficeInstalled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeOfficeInstalled = "OfficeInstalled"
+
+	// WorkspaceImageErrorDetailCodePcoIpagentInstalled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodePcoIpagentInstalled = "PCoIPAgentInstalled"
+
+	// WorkspaceImageErrorDetailCodeWindowsUpdatesEnabled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeWindowsUpdatesEnabled = "WindowsUpdatesEnabled"
+
+	// WorkspaceImageErrorDetailCodeAutoMountDisabled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeAutoMountDisabled = "AutoMountDisabled"
+
+	// WorkspaceImageErrorDetailCodeWorkspacesByolaccountNotFound is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeWorkspacesByolaccountNotFound = "WorkspacesBYOLAccountNotFound"
+
+	// WorkspaceImageErrorDetailCodeWorkspacesByolaccountDisabled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeWorkspacesByolaccountDisabled = "WorkspacesBYOLAccountDisabled"
+
+	// WorkspaceImageErrorDetailCodeDhcpdisabled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeDhcpdisabled = "DHCPDisabled"
+
+	// WorkspaceImageErrorDetailCodeDiskFreeSpace is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeDiskFreeSpace = "DiskFreeSpace"
+
+	// WorkspaceImageErrorDetailCodeAdditionalDrivesAttached is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeAdditionalDrivesAttached = "AdditionalDrivesAttached"
+
+	// WorkspaceImageErrorDetailCodeOsnotSupported is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeOsnotSupported = "OSNotSupported"
+
+	// WorkspaceImageErrorDetailCodeDomainJoined is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeDomainJoined = "DomainJoined"
+
+	// WorkspaceImageErrorDetailCodeAzureDomainJoined is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeAzureDomainJoined = "AzureDomainJoined"
+
+	// WorkspaceImageErrorDetailCodeFirewallEnabled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeFirewallEnabled = "FirewallEnabled"
+
+	// WorkspaceImageErrorDetailCodeVmwareToolsInstalled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeVmwareToolsInstalled = "VMWareToolsInstalled"
+
+	// WorkspaceImageErrorDetailCodeDiskSizeExceeded is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeDiskSizeExceeded = "DiskSizeExceeded"
+
+	// WorkspaceImageErrorDetailCodeIncompatiblePartitioning is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeIncompatiblePartitioning = "IncompatiblePartitioning"
+
+	// WorkspaceImageErrorDetailCodePendingReboot is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodePendingReboot = "PendingReboot"
+
+	// WorkspaceImageErrorDetailCodeAutoLogonEnabled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeAutoLogonEnabled = "AutoLogonEnabled"
+
+	// WorkspaceImageErrorDetailCodeRealTimeUniversalDisabled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeRealTimeUniversalDisabled = "RealTimeUniversalDisabled"
+
+	// WorkspaceImageErrorDetailCodeMultipleBootPartition is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeMultipleBootPartition = "MultipleBootPartition"
+
+	// WorkspaceImageErrorDetailCodeRequires64bitOs is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeRequires64bitOs = "Requires64BitOS"
+
+	// WorkspaceImageErrorDetailCodeZeroRearmCount is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeZeroRearmCount = "ZeroRearmCount"
+
+	// WorkspaceImageErrorDetailCodeInPlaceUpgrade is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeInPlaceUpgrade = "InPlaceUpgrade"
+
+	// WorkspaceImageErrorDetailCodeAntiVirusInstalled is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeAntiVirusInstalled = "AntiVirusInstalled"
+
+	// WorkspaceImageErrorDetailCodeUefinotSupported is a WorkspaceImageErrorDetailCode enum value
+	WorkspaceImageErrorDetailCodeUefinotSupported = "UEFINotSupported"
+)
+
+// WorkspaceImageErrorDetailCode_Values returns all elements of the WorkspaceImageErrorDetailCode enum
+func WorkspaceImageErrorDetailCode_Values() []string {
+	return []string{
+		WorkspaceImageErrorDetailCodeOutdatedPowershellVersion,
+		WorkspaceImageErrorDetailCodeOfficeInstalled,
+		WorkspaceImageErrorDetailCodePcoIpagentInstalled,
+		WorkspaceImageErrorDetailCodeWindowsUpdatesEnabled,
+		WorkspaceImageErrorDetailCodeAutoMountDisabled,
+		WorkspaceImageErrorDetailCodeWorkspacesByolaccountNotFound,
+		WorkspaceImageErrorDetailCodeWorkspacesByolaccountDisabled,
+		WorkspaceImageErrorDetailCodeDhcpdisabled,
+		WorkspaceImageErrorDetailCodeDiskFreeSpace,
+		WorkspaceImageErrorDetailCodeAdditionalDrivesAttached,
+		WorkspaceImageErrorDetailCodeOsnotSupported,
+		WorkspaceImageErrorDetailCodeDomainJoined,
+		WorkspaceImageErrorDetailCodeAzureDomainJoined,
+		WorkspaceImageErrorDetailCodeFirewallEnabled,
+		WorkspaceImageErrorDetailCodeVmwareToolsInstalled,
+		WorkspaceImageErrorDetailCodeDiskSizeExceeded,
+		WorkspaceImageErrorDetailCodeIncompatiblePartitioning,
+		WorkspaceImageErrorDetailCodePendingReboot,
+		WorkspaceImageErrorDetailCodeAutoLogonEnabled,
+		WorkspaceImageErrorDetailCodeRealTimeUniversalDisabled,
+		WorkspaceImageErrorDetailCodeMultipleBootPartition,
+		WorkspaceImageErrorDetailCodeRequires64bitOs,
+		WorkspaceImageErrorDetailCodeZeroRearmCount,
+		WorkspaceImageErrorDetailCodeInPlaceUpgrade,
+		WorkspaceImageErrorDetailCodeAntiVirusInstalled,
+		WorkspaceImageErrorDetailCodeUefinotSupported,
+	}
+}
 
 const (
 	// WorkspaceImageIngestionProcessByolRegular is a WorkspaceImageIngestionProcess enum value
@@ -6871,7 +20666,32 @@ const (
 
 	// WorkspaceImageIngestionProcessByolGraphicspro is a WorkspaceImageIngestionProcess enum value
 	WorkspaceImageIngestionProcessByolGraphicspro = "BYOL_GRAPHICSPRO"
+
+	// WorkspaceImageIngestionProcessByolGraphicsG4dn is a WorkspaceImageIngestionProcess enum value
+	WorkspaceImageIngestionProcessByolGraphicsG4dn = "BYOL_GRAPHICS_G4DN"
+
+	// WorkspaceImageIngestionProcessByolRegularWsp is a WorkspaceImageIngestionProcess enum value
+	WorkspaceImageIngestionProcessByolRegularWsp = "BYOL_REGULAR_WSP"
+
+	// WorkspaceImageIngestionProcessByolRegularByop is a WorkspaceImageIngestionProcess enum value
+	WorkspaceImageIngestionProcessByolRegularByop = "BYOL_REGULAR_BYOP"
+
+	// WorkspaceImageIngestionProcessByolGraphicsG4dnByop is a WorkspaceImageIngestionProcess enum value
+	WorkspaceImageIngestionProcessByolGraphicsG4dnByop = "BYOL_GRAPHICS_G4DN_BYOP"
 )
+
+// WorkspaceImageIngestionProcess_Values returns all elements of the WorkspaceImageIngestionProcess enum
+func WorkspaceImageIngestionProcess_Values() []string {
+	return []string{
+		WorkspaceImageIngestionProcessByolRegular,
+		WorkspaceImageIngestionProcessByolGraphics,
+		WorkspaceImageIngestionProcessByolGraphicspro,
+		WorkspaceImageIngestionProcessByolGraphicsG4dn,
+		WorkspaceImageIngestionProcessByolRegularWsp,
+		WorkspaceImageIngestionProcessByolRegularByop,
+		WorkspaceImageIngestionProcessByolGraphicsG4dnByop,
+	}
+}
 
 const (
 	// WorkspaceImageRequiredTenancyDefault is a WorkspaceImageRequiredTenancy enum value
@@ -6880,6 +20700,14 @@ const (
 	// WorkspaceImageRequiredTenancyDedicated is a WorkspaceImageRequiredTenancy enum value
 	WorkspaceImageRequiredTenancyDedicated = "DEDICATED"
 )
+
+// WorkspaceImageRequiredTenancy_Values returns all elements of the WorkspaceImageRequiredTenancy enum
+func WorkspaceImageRequiredTenancy_Values() []string {
+	return []string{
+		WorkspaceImageRequiredTenancyDefault,
+		WorkspaceImageRequiredTenancyDedicated,
+	}
+}
 
 const (
 	// WorkspaceImageStateAvailable is a WorkspaceImageState enum value
@@ -6891,6 +20719,15 @@ const (
 	// WorkspaceImageStateError is a WorkspaceImageState enum value
 	WorkspaceImageStateError = "ERROR"
 )
+
+// WorkspaceImageState_Values returns all elements of the WorkspaceImageState enum
+func WorkspaceImageState_Values() []string {
+	return []string{
+		WorkspaceImageStateAvailable,
+		WorkspaceImageStatePending,
+		WorkspaceImageStateError,
+	}
+}
 
 const (
 	// WorkspaceStatePending is a WorkspaceState enum value
@@ -6913,6 +20750,9 @@ const (
 
 	// WorkspaceStateRebuilding is a WorkspaceState enum value
 	WorkspaceStateRebuilding = "REBUILDING"
+
+	// WorkspaceStateRestoring is a WorkspaceState enum value
+	WorkspaceStateRestoring = "RESTORING"
 
 	// WorkspaceStateMaintenance is a WorkspaceState enum value
 	WorkspaceStateMaintenance = "MAINTENANCE"
@@ -6941,3 +20781,26 @@ const (
 	// WorkspaceStateError is a WorkspaceState enum value
 	WorkspaceStateError = "ERROR"
 )
+
+// WorkspaceState_Values returns all elements of the WorkspaceState enum
+func WorkspaceState_Values() []string {
+	return []string{
+		WorkspaceStatePending,
+		WorkspaceStateAvailable,
+		WorkspaceStateImpaired,
+		WorkspaceStateUnhealthy,
+		WorkspaceStateRebooting,
+		WorkspaceStateStarting,
+		WorkspaceStateRebuilding,
+		WorkspaceStateRestoring,
+		WorkspaceStateMaintenance,
+		WorkspaceStateAdminMaintenance,
+		WorkspaceStateTerminating,
+		WorkspaceStateTerminated,
+		WorkspaceStateSuspended,
+		WorkspaceStateUpdating,
+		WorkspaceStateStopping,
+		WorkspaceStateStopped,
+		WorkspaceStateError,
+	}
+}

@@ -125,14 +125,14 @@ func (o OpCode) GoString() string {
 // An RCode is a DNS response status code.
 type RCode uint16
 
+// Header.RCode values.
 const (
-	// Message.Rcode
-	RCodeSuccess        RCode = 0
-	RCodeFormatError    RCode = 1
-	RCodeServerFailure  RCode = 2
-	RCodeNameError      RCode = 3
-	RCodeNotImplemented RCode = 4
-	RCodeRefused        RCode = 5
+	RCodeSuccess        RCode = 0 // NoError
+	RCodeFormatError    RCode = 1 // FormErr
+	RCodeServerFailure  RCode = 2 // ServFail
+	RCodeNameError      RCode = 3 // NXDomain
+	RCodeNotImplemented RCode = 4 // NotImp
+	RCodeRefused        RCode = 5 // Refused
 )
 
 var rCodeNames = map[RCode]string{
@@ -260,9 +260,11 @@ var (
 	errReserved           = errors.New("segment prefix is reserved")
 	errTooManyPtr         = errors.New("too many pointers (>10)")
 	errInvalidPtr         = errors.New("invalid pointer")
+	errInvalidName        = errors.New("invalid dns name")
 	errNilResouceBody     = errors.New("nil resource body")
 	errResourceLen        = errors.New("insufficient data for resource body length")
 	errSegTooLong         = errors.New("segment length too long")
+	errNameTooLong        = errors.New("name too long")
 	errZeroSegLen         = errors.New("zero length segment")
 	errResTooLong         = errors.New("resource length too long")
 	errTooManyQuestions   = errors.New("too many Questions to pack (>65535)")
@@ -317,6 +319,8 @@ type Header struct {
 	Truncated          bool
 	RecursionDesired   bool
 	RecursionAvailable bool
+	AuthenticData      bool
+	CheckingDisabled   bool
 	RCode              RCode
 }
 
@@ -338,6 +342,12 @@ func (m *Header) pack() (id uint16, bits uint16) {
 	if m.Response {
 		bits |= headerBitQR
 	}
+	if m.AuthenticData {
+		bits |= headerBitAD
+	}
+	if m.CheckingDisabled {
+		bits |= headerBitCD
+	}
 	return
 }
 
@@ -351,6 +361,8 @@ func (m *Header) GoString() string {
 		"Truncated: " + printBool(m.Truncated) + ", " +
 		"RecursionDesired: " + printBool(m.RecursionDesired) + ", " +
 		"RecursionAvailable: " + printBool(m.RecursionAvailable) + ", " +
+		"AuthenticData: " + printBool(m.AuthenticData) + ", " +
+		"CheckingDisabled: " + printBool(m.CheckingDisabled) + ", " +
 		"RCode: " + m.RCode.GoString() + "}"
 }
 
@@ -379,6 +391,8 @@ const (
 	headerBitTC = 1 << 9  // truncated
 	headerBitRD = 1 << 8  // recursion desired
 	headerBitRA = 1 << 7  // recursion available
+	headerBitAD = 1 << 5  // authentic data
+	headerBitCD = 1 << 4  // checking disabled
 )
 
 var sectionNames = map[section]string{
@@ -456,6 +470,8 @@ func (h *header) header() Header {
 		Truncated:          (h.bits & headerBitTC) != 0,
 		RecursionDesired:   (h.bits & headerBitRD) != 0,
 		RecursionAvailable: (h.bits & headerBitRA) != 0,
+		AuthenticData:      (h.bits & headerBitAD) != 0,
+		CheckingDisabled:   (h.bits & headerBitCD) != 0,
 		RCode:              RCode(h.bits & 0xF),
 	}
 }
@@ -476,7 +492,7 @@ func (r *Resource) GoString() string {
 // A ResourceBody is a DNS resource record minus the header.
 type ResourceBody interface {
 	// pack packs a Resource except for its header.
-	pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error)
+	pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error)
 
 	// realType returns the actual type of the Resource. This is used to
 	// fill in the header Type field.
@@ -487,7 +503,7 @@ type ResourceBody interface {
 }
 
 // pack appends the wire format of the Resource to msg.
-func (r *Resource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *Resource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	if r.Body == nil {
 		return msg, errNilResouceBody
 	}
@@ -513,22 +529,26 @@ func (r *Resource) pack(msg []byte, compression map[string]int, compressionOff i
 // When parsing is started, the Header is parsed. Next, each Question can be
 // either parsed or skipped. Alternatively, all Questions can be skipped at
 // once. When all Questions have been parsed, attempting to parse Questions
-// will return (nil, nil) and attempting to skip Questions will return
-// (true, nil). After all Questions have been either parsed or skipped, all
+// will return the [ErrSectionDone] error.
+// After all Questions have been either parsed or skipped, all
 // Answers, Authorities and Additionals can be either parsed or skipped in the
 // same way, and each type of Resource must be fully parsed or skipped before
 // proceeding to the next type of Resource.
+//
+// Parser is safe to copy to preserve the parsing state.
 //
 // Note that there is no requirement to fully skip or parse the message.
 type Parser struct {
 	msg    []byte
 	header header
 
-	section        section
-	off            int
-	index          int
-	resHeaderValid bool
-	resHeader      ResourceHeader
+	section         section
+	off             int
+	index           int
+	resHeaderValid  bool
+	resHeaderOffset int
+	resHeaderType   Type
+	resHeaderLength uint16
 }
 
 // Start parses the header and enables the parsing of Questions.
@@ -579,8 +599,9 @@ func (p *Parser) resource(sec section) (Resource, error) {
 
 func (p *Parser) resourceHeader(sec section) (ResourceHeader, error) {
 	if p.resHeaderValid {
-		return p.resHeader, nil
+		p.off = p.resHeaderOffset
 	}
+
 	if err := p.checkAdvance(sec); err != nil {
 		return ResourceHeader{}, err
 	}
@@ -590,14 +611,16 @@ func (p *Parser) resourceHeader(sec section) (ResourceHeader, error) {
 		return ResourceHeader{}, err
 	}
 	p.resHeaderValid = true
-	p.resHeader = hdr
+	p.resHeaderOffset = p.off
+	p.resHeaderType = hdr.Type
+	p.resHeaderLength = hdr.Length
 	p.off = off
 	return hdr, nil
 }
 
 func (p *Parser) skipResource(sec section) error {
-	if p.resHeaderValid {
-		newOff := p.off + int(p.resHeader.Length)
+	if p.resHeaderValid && p.section == sec {
+		newOff := p.off + int(p.resHeaderLength)
 		if newOff > len(p.msg) {
 			return errResourceLen
 		}
@@ -728,6 +751,9 @@ func (p *Parser) AllAnswers() ([]Resource, error) {
 }
 
 // SkipAnswer skips a single Answer Resource.
+//
+// It does not perform a complete validation of the resource header, which means
+// it may return a nil error when the [AnswerHeader] would actually return an error.
 func (p *Parser) SkipAnswer() error {
 	return p.skipResource(sectionAnswers)
 }
@@ -778,6 +804,9 @@ func (p *Parser) AllAuthorities() ([]Resource, error) {
 }
 
 // SkipAuthority skips a single Authority Resource.
+//
+// It does not perform a complete validation of the resource header, which means
+// it may return a nil error when the [AuthorityHeader] would actually return an error.
 func (p *Parser) SkipAuthority() error {
 	return p.skipResource(sectionAuthorities)
 }
@@ -828,6 +857,9 @@ func (p *Parser) AllAdditionals() ([]Resource, error) {
 }
 
 // SkipAdditional skips a single Additional Resource.
+//
+// It does not perform a complete validation of the resource header, which means
+// it may return a nil error when the [AdditionalHeader] would actually return an error.
 func (p *Parser) SkipAdditional() error {
 	return p.skipResource(sectionAdditionals)
 }
@@ -848,14 +880,14 @@ func (p *Parser) SkipAllAdditionals() error {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) CNAMEResource() (CNAMEResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypeCNAME {
+	if !p.resHeaderValid || p.resHeaderType != TypeCNAME {
 		return CNAMEResource{}, ErrNotStarted
 	}
 	r, err := unpackCNAMEResource(p.msg, p.off)
 	if err != nil {
 		return CNAMEResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -866,14 +898,14 @@ func (p *Parser) CNAMEResource() (CNAMEResource, error) {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) MXResource() (MXResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypeMX {
+	if !p.resHeaderValid || p.resHeaderType != TypeMX {
 		return MXResource{}, ErrNotStarted
 	}
 	r, err := unpackMXResource(p.msg, p.off)
 	if err != nil {
 		return MXResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -884,14 +916,14 @@ func (p *Parser) MXResource() (MXResource, error) {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) NSResource() (NSResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypeNS {
+	if !p.resHeaderValid || p.resHeaderType != TypeNS {
 		return NSResource{}, ErrNotStarted
 	}
 	r, err := unpackNSResource(p.msg, p.off)
 	if err != nil {
 		return NSResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -902,14 +934,14 @@ func (p *Parser) NSResource() (NSResource, error) {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) PTRResource() (PTRResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypePTR {
+	if !p.resHeaderValid || p.resHeaderType != TypePTR {
 		return PTRResource{}, ErrNotStarted
 	}
 	r, err := unpackPTRResource(p.msg, p.off)
 	if err != nil {
 		return PTRResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -920,14 +952,14 @@ func (p *Parser) PTRResource() (PTRResource, error) {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) SOAResource() (SOAResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypeSOA {
+	if !p.resHeaderValid || p.resHeaderType != TypeSOA {
 		return SOAResource{}, ErrNotStarted
 	}
 	r, err := unpackSOAResource(p.msg, p.off)
 	if err != nil {
 		return SOAResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -938,14 +970,14 @@ func (p *Parser) SOAResource() (SOAResource, error) {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) TXTResource() (TXTResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypeTXT {
+	if !p.resHeaderValid || p.resHeaderType != TypeTXT {
 		return TXTResource{}, ErrNotStarted
 	}
-	r, err := unpackTXTResource(p.msg, p.off, p.resHeader.Length)
+	r, err := unpackTXTResource(p.msg, p.off, p.resHeaderLength)
 	if err != nil {
 		return TXTResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -956,14 +988,14 @@ func (p *Parser) TXTResource() (TXTResource, error) {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) SRVResource() (SRVResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypeSRV {
+	if !p.resHeaderValid || p.resHeaderType != TypeSRV {
 		return SRVResource{}, ErrNotStarted
 	}
 	r, err := unpackSRVResource(p.msg, p.off)
 	if err != nil {
 		return SRVResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -974,14 +1006,14 @@ func (p *Parser) SRVResource() (SRVResource, error) {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) AResource() (AResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypeA {
+	if !p.resHeaderValid || p.resHeaderType != TypeA {
 		return AResource{}, ErrNotStarted
 	}
 	r, err := unpackAResource(p.msg, p.off)
 	if err != nil {
 		return AResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -992,14 +1024,14 @@ func (p *Parser) AResource() (AResource, error) {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) AAAAResource() (AAAAResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypeAAAA {
+	if !p.resHeaderValid || p.resHeaderType != TypeAAAA {
 		return AAAAResource{}, ErrNotStarted
 	}
 	r, err := unpackAAAAResource(p.msg, p.off)
 	if err != nil {
 		return AAAAResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -1010,14 +1042,32 @@ func (p *Parser) AAAAResource() (AAAAResource, error) {
 // One of the XXXHeader methods must have been called before calling this
 // method.
 func (p *Parser) OPTResource() (OPTResource, error) {
-	if !p.resHeaderValid || p.resHeader.Type != TypeOPT {
+	if !p.resHeaderValid || p.resHeaderType != TypeOPT {
 		return OPTResource{}, ErrNotStarted
 	}
-	r, err := unpackOPTResource(p.msg, p.off, p.resHeader.Length)
+	r, err := unpackOPTResource(p.msg, p.off, p.resHeaderLength)
 	if err != nil {
 		return OPTResource{}, err
 	}
-	p.off += int(p.resHeader.Length)
+	p.off += int(p.resHeaderLength)
+	p.resHeaderValid = false
+	p.index++
+	return r, nil
+}
+
+// UnknownResource parses a single UnknownResource.
+//
+// One of the XXXHeader methods must have been called before calling this
+// method.
+func (p *Parser) UnknownResource() (UnknownResource, error) {
+	if !p.resHeaderValid {
+		return UnknownResource{}, ErrNotStarted
+	}
+	r, err := unpackUnknownResource(p.resHeaderType, p.msg, p.off, p.resHeaderLength)
+	if err != nil {
+		return UnknownResource{}, err
+	}
+	p.off += int(p.resHeaderLength)
 	p.resHeaderValid = false
 	p.index++
 	return r, nil
@@ -1088,7 +1138,7 @@ func (m *Message) AppendPack(b []byte) ([]byte, error) {
 	// DNS messages can be a maximum of 512 bytes long. Without compression,
 	// many DNS response messages are over this limit, so enabling
 	// compression will help ensure compliance.
-	compression := map[string]int{}
+	compression := map[string]uint16{}
 
 	for i := range m.Questions {
 		var err error
@@ -1155,6 +1205,7 @@ func (m *Message) GoString() string {
 // A Builder allows incrementally packing a DNS message.
 //
 // Example usage:
+//
 //	buf := make([]byte, 2, 514)
 //	b := NewBuilder(buf, Header{...})
 //	b.EnableCompression()
@@ -1178,7 +1229,7 @@ type Builder struct {
 
 	// compression is a mapping from name suffixes to their starting index
 	// in msg.
-	compression map[string]int
+	compression map[string]uint16
 }
 
 // NewBuilder creates a new builder with compression disabled.
@@ -1189,8 +1240,8 @@ type Builder struct {
 //
 // The DNS message is appended to the provided initial buffer buf (which may be
 // nil) as it is built. The final message is returned by the (*Builder).Finish
-// method, which may return the same underlying array if there was sufficient
-// capacity in the slice.
+// method, which includes buf[:len(buf)] and may return the same underlying
+// array if there was sufficient capacity in the slice.
 func NewBuilder(buf []byte, h Header) Builder {
 	if buf == nil {
 		buf = make([]byte, 0, packStartingCap)
@@ -1215,7 +1266,7 @@ func NewBuilder(buf []byte, h Header) Builder {
 //
 // Compression should be enabled before any sections are added for best results.
 func (b *Builder) EnableCompression() {
-	b.compression = map[string]int{}
+	b.compression = map[string]uint16{}
 }
 
 func (b *Builder) startCheck(s section) error {
@@ -1557,6 +1608,30 @@ func (b *Builder) OPTResource(h ResourceHeader, r OPTResource) error {
 	return nil
 }
 
+// UnknownResource adds a single UnknownResource.
+func (b *Builder) UnknownResource(h ResourceHeader, r UnknownResource) error {
+	if err := b.checkResourceSection(); err != nil {
+		return err
+	}
+	h.Type = r.realType()
+	msg, lenOff, err := h.pack(b.msg, b.compression, b.start)
+	if err != nil {
+		return &nestedError{"ResourceHeader", err}
+	}
+	preLen := len(msg)
+	if msg, err = r.pack(msg, b.compression, b.start); err != nil {
+		return &nestedError{"UnknownResource body", err}
+	}
+	if err := h.fixLen(msg, lenOff, preLen); err != nil {
+		return err
+	}
+	if err := b.incrementSectionCount(); err != nil {
+		return err
+	}
+	b.msg = msg
+	return nil
+}
+
 // Finish ends message building and generates a binary message.
 func (b *Builder) Finish() ([]byte, error) {
 	if b.section < sectionHeader {
@@ -1607,7 +1682,7 @@ func (h *ResourceHeader) GoString() string {
 // pack appends the wire format of the ResourceHeader to oldMsg.
 //
 // lenOff is the offset in msg where the Length field was packed.
-func (h *ResourceHeader) pack(oldMsg []byte, compression map[string]int, compressionOff int) (msg []byte, lenOff int, err error) {
+func (h *ResourceHeader) pack(oldMsg []byte, compression map[string]uint16, compressionOff int) (msg []byte, lenOff int, err error) {
 	msg = oldMsg
 	if msg, err = h.Name.pack(msg, compression, compressionOff); err != nil {
 		return oldMsg, 0, &nestedError{"Name", err}
@@ -1660,7 +1735,7 @@ func (h *ResourceHeader) fixLen(msg []byte, lenOff int, preLen int) error {
 	return nil
 }
 
-// EDNS(0) wire costants.
+// EDNS(0) wire constants.
 const (
 	edns0Version = 0
 
@@ -1671,9 +1746,9 @@ const (
 
 // SetEDNS0 configures h for EDNS(0).
 //
-// The provided extRCode must be an extedned RCode.
+// The provided extRCode must be an extended RCode.
 func (h *ResourceHeader) SetEDNS0(udpPayloadLen int, extRCode RCode, dnssecOK bool) error {
-	h.Name = Name{Data: [nameLen]byte{'.'}, Length: 1} // RFC 6891 section 6.1.2
+	h.Name = Name{Data: [255]byte{'.'}, Length: 1} // RFC 6891 section 6.1.2
 	h.Type = TypeOPT
 	h.Class = Class(udpPayloadLen)
 	h.TTL = uint32(extRCode) >> 4 << 24
@@ -1819,17 +1894,6 @@ func unpackText(msg []byte, off int) (string, int, error) {
 	return string(msg[beginOff:endOff]), endOff, nil
 }
 
-func skipText(msg []byte, off int) (int, error) {
-	if off >= len(msg) {
-		return off, errBaseLen
-	}
-	endOff := off + 1 + int(msg[off])
-	if endOff > len(msg) {
-		return off, errCalcLen
-	}
-	return endOff, nil
-}
-
 // packBytes appends the wire format of field to msg.
 func packBytes(msg []byte, field []byte) []byte {
 	return append(msg, field...)
@@ -1844,30 +1908,22 @@ func unpackBytes(msg []byte, off int, field []byte) (int, error) {
 	return newOff, nil
 }
 
-func skipBytes(msg []byte, off int, field []byte) (int, error) {
-	newOff := off + len(field)
-	if newOff > len(msg) {
-		return off, errBaseLen
-	}
-	return newOff, nil
-}
+const nonEncodedNameMax = 254
 
-const nameLen = 255
-
-// A Name is a non-encoded domain name. It is used instead of strings to avoid
+// A Name is a non-encoded and non-escaped domain name. It is used instead of strings to avoid
 // allocations.
 type Name struct {
-	Data   [nameLen]byte
+	Data   [255]byte
 	Length uint8
 }
 
 // NewName creates a new Name from a string.
 func NewName(name string) (Name, error) {
-	if len([]byte(name)) > nameLen {
+	n := Name{Length: uint8(len(name))}
+	if len(name) > len(n.Data) {
 		return Name{}, errCalcLen
 	}
-	n := Name{Length: uint8(len(name))}
-	copy(n.Data[:], []byte(name))
+	copy(n.Data[:], name)
 	return n, nil
 }
 
@@ -1881,6 +1937,8 @@ func MustNewName(name string) Name {
 }
 
 // String implements fmt.Stringer.String.
+//
+// Note: characters inside the labels are not escaped in any way.
 func (n Name) String() string {
 	return string(n.Data[:n.Length])
 }
@@ -1897,8 +1955,12 @@ func (n *Name) GoString() string {
 //
 // The compression map will be updated with new domain suffixes. If compression
 // is nil, compression will not be used.
-func (n *Name) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (n *Name) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	oldMsg := msg
+
+	if n.Length > nonEncodedNameMax {
+		return nil, errNameTooLong
+	}
 
 	// Add a trailing dot to canonicalize name.
 	if n.Length == 0 || n.Data[n.Length-1] != '.' {
@@ -1909,6 +1971,8 @@ func (n *Name) pack(msg []byte, compression map[string]int, compressionOff int) 
 	if n.Data[0] == '.' && n.Length == 1 {
 		return append(msg, 0), nil
 	}
+
+	var nameAsStr string
 
 	// Emit sequence of counted strings, chopping at dots.
 	for i, begin := 0, 0; i < int(n.Length); i++ {
@@ -1940,16 +2004,22 @@ func (n *Name) pack(msg []byte, compression map[string]int, compressionOff int) 
 		// segment. A pointer is two bytes with the two most significant
 		// bits set to 1 to indicate that it is a pointer.
 		if (i == 0 || n.Data[i-1] == '.') && compression != nil {
-			if ptr, ok := compression[string(n.Data[i:])]; ok {
+			if ptr, ok := compression[string(n.Data[i:n.Length])]; ok {
 				// Hit. Emit a pointer instead of the rest of
 				// the domain.
 				return append(msg, byte(ptr>>8|0xC0), byte(ptr)), nil
 			}
 
 			// Miss. Add the suffix to the compression table if the
-			// offset can be stored in the available 14 bytes.
-			if len(msg) <= int(^uint16(0)>>2) {
-				compression[string(n.Data[i:])] = len(msg) - compressionOff
+			// offset can be stored in the available 14 bits.
+			newPtr := len(msg) - compressionOff
+			if newPtr <= int(^uint16(0)>>2) {
+				if nameAsStr == "" {
+					// allocate n.Data on the heap once, to avoid allocating it
+					// multiple times (for next labels).
+					nameAsStr = string(n.Data[:n.Length])
+				}
+				compression[nameAsStr[i:]] = uint16(newPtr)
 			}
 		}
 	}
@@ -1993,6 +2063,15 @@ Loop:
 			if endOff > len(msg) {
 				return off, errCalcLen
 			}
+
+			// Reject names containing dots.
+			// See issue golang/go#56246
+			for _, v := range msg[currOff:endOff] {
+				if v == '.' {
+					return off, errInvalidName
+				}
+			}
+
 			name = append(name, msg[currOff:endOff]...)
 			name = append(name, '.')
 			currOff = endOff
@@ -2021,8 +2100,8 @@ Loop:
 	if len(name) == 0 {
 		name = append(name, '.')
 	}
-	if len(name) > len(n.Data) {
-		return off, errCalcLen
+	if len(name) > nonEncodedNameMax {
+		return off, errNameTooLong
 	}
 	n.Length = uint8(len(name))
 	if ptr == 0 {
@@ -2080,7 +2159,7 @@ type Question struct {
 }
 
 // pack appends the wire format of the Question to msg.
-func (q *Question) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (q *Question) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	msg, err := q.Name.pack(msg, compression, compressionOff)
 	if err != nil {
 		return msg, &nestedError{"Name", err}
@@ -2154,12 +2233,14 @@ func unpackResourceBody(msg []byte, off int, hdr ResourceHeader) (ResourceBody, 
 		rb, err = unpackOPTResource(msg, off, hdr.Length)
 		r = &rb
 		name = "OPT"
+	default:
+		var rb UnknownResource
+		rb, err = unpackUnknownResource(hdr.Type, msg, off, hdr.Length)
+		r = &rb
+		name = "Unknown"
 	}
 	if err != nil {
 		return nil, off, &nestedError{name + " record", err}
-	}
-	if r == nil {
-		return nil, off, errors.New("invalid resource type: " + string(hdr.Type+'0'))
 	}
 	return r, off + int(hdr.Length), nil
 }
@@ -2174,7 +2255,7 @@ func (r *CNAMEResource) realType() Type {
 }
 
 // pack appends the wire format of the CNAMEResource to msg.
-func (r *CNAMEResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *CNAMEResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	return r.CNAME.pack(msg, compression, compressionOff)
 }
 
@@ -2202,7 +2283,7 @@ func (r *MXResource) realType() Type {
 }
 
 // pack appends the wire format of the MXResource to msg.
-func (r *MXResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *MXResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	oldMsg := msg
 	msg = packUint16(msg, r.Pref)
 	msg, err := r.MX.pack(msg, compression, compressionOff)
@@ -2241,7 +2322,7 @@ func (r *NSResource) realType() Type {
 }
 
 // pack appends the wire format of the NSResource to msg.
-func (r *NSResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *NSResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	return r.NS.pack(msg, compression, compressionOff)
 }
 
@@ -2268,7 +2349,7 @@ func (r *PTRResource) realType() Type {
 }
 
 // pack appends the wire format of the PTRResource to msg.
-func (r *PTRResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *PTRResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	return r.PTR.pack(msg, compression, compressionOff)
 }
 
@@ -2305,7 +2386,7 @@ func (r *SOAResource) realType() Type {
 }
 
 // pack appends the wire format of the SOAResource to msg.
-func (r *SOAResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *SOAResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	oldMsg := msg
 	msg, err := r.NS.pack(msg, compression, compressionOff)
 	if err != nil {
@@ -2377,7 +2458,7 @@ func (r *TXTResource) realType() Type {
 }
 
 // pack appends the wire format of the TXTResource to msg.
-func (r *TXTResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *TXTResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	oldMsg := msg
 	for _, s := range r.TXT {
 		var err error
@@ -2433,7 +2514,7 @@ func (r *SRVResource) realType() Type {
 }
 
 // pack appends the wire format of the SRVResource to msg.
-func (r *SRVResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *SRVResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	oldMsg := msg
 	msg = packUint16(msg, r.Priority)
 	msg = packUint16(msg, r.Weight)
@@ -2484,7 +2565,7 @@ func (r *AResource) realType() Type {
 }
 
 // pack appends the wire format of the AResource to msg.
-func (r *AResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *AResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	return packBytes(msg, r.A[:]), nil
 }
 
@@ -2518,7 +2599,7 @@ func (r *AAAAResource) GoString() string {
 }
 
 // pack appends the wire format of the AAAAResource to msg.
-func (r *AAAAResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *AAAAResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	return packBytes(msg, r.AAAA[:]), nil
 }
 
@@ -2558,7 +2639,7 @@ func (r *OPTResource) realType() Type {
 	return TypeOPT
 }
 
-func (r *OPTResource) pack(msg []byte, compression map[string]int, compressionOff int) ([]byte, error) {
+func (r *OPTResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
 	for _, opt := range r.Options {
 		msg = packUint16(msg, opt.Code)
 		l := uint16(len(opt.Data))
@@ -2603,4 +2684,37 @@ func unpackOPTResource(msg []byte, off int, length uint16) (OPTResource, error) 
 		opts = append(opts, o)
 	}
 	return OPTResource{opts}, nil
+}
+
+// An UnknownResource is a catch-all container for unknown record types.
+type UnknownResource struct {
+	Type Type
+	Data []byte
+}
+
+func (r *UnknownResource) realType() Type {
+	return r.Type
+}
+
+// pack appends the wire format of the UnknownResource to msg.
+func (r *UnknownResource) pack(msg []byte, compression map[string]uint16, compressionOff int) ([]byte, error) {
+	return packBytes(msg, r.Data[:]), nil
+}
+
+// GoString implements fmt.GoStringer.GoString.
+func (r *UnknownResource) GoString() string {
+	return "dnsmessage.UnknownResource{" +
+		"Type: " + r.Type.GoString() + ", " +
+		"Data: []byte{" + printByteSlice(r.Data) + "}}"
+}
+
+func unpackUnknownResource(recordType Type, msg []byte, off int, length uint16) (UnknownResource, error) {
+	parsed := UnknownResource{
+		Type: recordType,
+		Data: make([]byte, length),
+	}
+	if _, err := unpackBytes(msg, off, parsed.Data); err != nil {
+		return UnknownResource{}, err
+	}
+	return parsed, nil
 }

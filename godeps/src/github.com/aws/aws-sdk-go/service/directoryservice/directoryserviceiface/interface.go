@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Directory Service.
-//    func myFunc(svc directoryserviceiface.DirectoryServiceAPI) bool {
-//        // Make svc.AcceptSharedDirectory request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Directory Service.
+//	func myFunc(svc directoryserviceiface.DirectoryServiceAPI) bool {
+//	    // Make svc.AcceptSharedDirectory request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := directoryservice.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := directoryservice.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDirectoryServiceClient struct {
-//        directoryserviceiface.DirectoryServiceAPI
-//    }
-//    func (m *mockDirectoryServiceClient) AcceptSharedDirectory(input *directoryservice.AcceptSharedDirectoryInput) (*directoryservice.AcceptSharedDirectoryOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockDirectoryServiceClient struct {
+//	    directoryserviceiface.DirectoryServiceAPI
+//	}
+//	func (m *mockDirectoryServiceClient) AcceptSharedDirectory(input *directoryservice.AcceptSharedDirectoryInput) (*directoryservice.AcceptSharedDirectoryOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockDirectoryServiceClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockDirectoryServiceClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -67,6 +67,10 @@ type DirectoryServiceAPI interface {
 	AddIpRoutes(*directoryservice.AddIpRoutesInput) (*directoryservice.AddIpRoutesOutput, error)
 	AddIpRoutesWithContext(aws.Context, *directoryservice.AddIpRoutesInput, ...request.Option) (*directoryservice.AddIpRoutesOutput, error)
 	AddIpRoutesRequest(*directoryservice.AddIpRoutesInput) (*request.Request, *directoryservice.AddIpRoutesOutput)
+
+	AddRegion(*directoryservice.AddRegionInput) (*directoryservice.AddRegionOutput, error)
+	AddRegionWithContext(aws.Context, *directoryservice.AddRegionInput, ...request.Option) (*directoryservice.AddRegionOutput, error)
+	AddRegionRequest(*directoryservice.AddRegionInput) (*request.Request, *directoryservice.AddRegionOutput)
 
 	AddTagsToResource(*directoryservice.AddTagsToResourceInput) (*directoryservice.AddTagsToResourceOutput, error)
 	AddTagsToResourceWithContext(aws.Context, *directoryservice.AddTagsToResourceInput, ...request.Option) (*directoryservice.AddTagsToResourceOutput, error)
@@ -132,9 +136,24 @@ type DirectoryServiceAPI interface {
 	DeleteTrustWithContext(aws.Context, *directoryservice.DeleteTrustInput, ...request.Option) (*directoryservice.DeleteTrustOutput, error)
 	DeleteTrustRequest(*directoryservice.DeleteTrustInput) (*request.Request, *directoryservice.DeleteTrustOutput)
 
+	DeregisterCertificate(*directoryservice.DeregisterCertificateInput) (*directoryservice.DeregisterCertificateOutput, error)
+	DeregisterCertificateWithContext(aws.Context, *directoryservice.DeregisterCertificateInput, ...request.Option) (*directoryservice.DeregisterCertificateOutput, error)
+	DeregisterCertificateRequest(*directoryservice.DeregisterCertificateInput) (*request.Request, *directoryservice.DeregisterCertificateOutput)
+
 	DeregisterEventTopic(*directoryservice.DeregisterEventTopicInput) (*directoryservice.DeregisterEventTopicOutput, error)
 	DeregisterEventTopicWithContext(aws.Context, *directoryservice.DeregisterEventTopicInput, ...request.Option) (*directoryservice.DeregisterEventTopicOutput, error)
 	DeregisterEventTopicRequest(*directoryservice.DeregisterEventTopicInput) (*request.Request, *directoryservice.DeregisterEventTopicOutput)
+
+	DescribeCertificate(*directoryservice.DescribeCertificateInput) (*directoryservice.DescribeCertificateOutput, error)
+	DescribeCertificateWithContext(aws.Context, *directoryservice.DescribeCertificateInput, ...request.Option) (*directoryservice.DescribeCertificateOutput, error)
+	DescribeCertificateRequest(*directoryservice.DescribeCertificateInput) (*request.Request, *directoryservice.DescribeCertificateOutput)
+
+	DescribeClientAuthenticationSettings(*directoryservice.DescribeClientAuthenticationSettingsInput) (*directoryservice.DescribeClientAuthenticationSettingsOutput, error)
+	DescribeClientAuthenticationSettingsWithContext(aws.Context, *directoryservice.DescribeClientAuthenticationSettingsInput, ...request.Option) (*directoryservice.DescribeClientAuthenticationSettingsOutput, error)
+	DescribeClientAuthenticationSettingsRequest(*directoryservice.DescribeClientAuthenticationSettingsInput) (*request.Request, *directoryservice.DescribeClientAuthenticationSettingsOutput)
+
+	DescribeClientAuthenticationSettingsPages(*directoryservice.DescribeClientAuthenticationSettingsInput, func(*directoryservice.DescribeClientAuthenticationSettingsOutput, bool) bool) error
+	DescribeClientAuthenticationSettingsPagesWithContext(aws.Context, *directoryservice.DescribeClientAuthenticationSettingsInput, func(*directoryservice.DescribeClientAuthenticationSettingsOutput, bool) bool, ...request.Option) error
 
 	DescribeConditionalForwarders(*directoryservice.DescribeConditionalForwardersInput) (*directoryservice.DescribeConditionalForwardersOutput, error)
 	DescribeConditionalForwardersWithContext(aws.Context, *directoryservice.DescribeConditionalForwardersInput, ...request.Option) (*directoryservice.DescribeConditionalForwardersOutput, error)
@@ -143,6 +162,9 @@ type DirectoryServiceAPI interface {
 	DescribeDirectories(*directoryservice.DescribeDirectoriesInput) (*directoryservice.DescribeDirectoriesOutput, error)
 	DescribeDirectoriesWithContext(aws.Context, *directoryservice.DescribeDirectoriesInput, ...request.Option) (*directoryservice.DescribeDirectoriesOutput, error)
 	DescribeDirectoriesRequest(*directoryservice.DescribeDirectoriesInput) (*request.Request, *directoryservice.DescribeDirectoriesOutput)
+
+	DescribeDirectoriesPages(*directoryservice.DescribeDirectoriesInput, func(*directoryservice.DescribeDirectoriesOutput, bool) bool) error
+	DescribeDirectoriesPagesWithContext(aws.Context, *directoryservice.DescribeDirectoriesInput, func(*directoryservice.DescribeDirectoriesOutput, bool) bool, ...request.Option) error
 
 	DescribeDomainControllers(*directoryservice.DescribeDomainControllersInput) (*directoryservice.DescribeDomainControllersOutput, error)
 	DescribeDomainControllersWithContext(aws.Context, *directoryservice.DescribeDomainControllersInput, ...request.Option) (*directoryservice.DescribeDomainControllersOutput, error)
@@ -155,17 +177,59 @@ type DirectoryServiceAPI interface {
 	DescribeEventTopicsWithContext(aws.Context, *directoryservice.DescribeEventTopicsInput, ...request.Option) (*directoryservice.DescribeEventTopicsOutput, error)
 	DescribeEventTopicsRequest(*directoryservice.DescribeEventTopicsInput) (*request.Request, *directoryservice.DescribeEventTopicsOutput)
 
+	DescribeLDAPSSettings(*directoryservice.DescribeLDAPSSettingsInput) (*directoryservice.DescribeLDAPSSettingsOutput, error)
+	DescribeLDAPSSettingsWithContext(aws.Context, *directoryservice.DescribeLDAPSSettingsInput, ...request.Option) (*directoryservice.DescribeLDAPSSettingsOutput, error)
+	DescribeLDAPSSettingsRequest(*directoryservice.DescribeLDAPSSettingsInput) (*request.Request, *directoryservice.DescribeLDAPSSettingsOutput)
+
+	DescribeLDAPSSettingsPages(*directoryservice.DescribeLDAPSSettingsInput, func(*directoryservice.DescribeLDAPSSettingsOutput, bool) bool) error
+	DescribeLDAPSSettingsPagesWithContext(aws.Context, *directoryservice.DescribeLDAPSSettingsInput, func(*directoryservice.DescribeLDAPSSettingsOutput, bool) bool, ...request.Option) error
+
+	DescribeRegions(*directoryservice.DescribeRegionsInput) (*directoryservice.DescribeRegionsOutput, error)
+	DescribeRegionsWithContext(aws.Context, *directoryservice.DescribeRegionsInput, ...request.Option) (*directoryservice.DescribeRegionsOutput, error)
+	DescribeRegionsRequest(*directoryservice.DescribeRegionsInput) (*request.Request, *directoryservice.DescribeRegionsOutput)
+
+	DescribeRegionsPages(*directoryservice.DescribeRegionsInput, func(*directoryservice.DescribeRegionsOutput, bool) bool) error
+	DescribeRegionsPagesWithContext(aws.Context, *directoryservice.DescribeRegionsInput, func(*directoryservice.DescribeRegionsOutput, bool) bool, ...request.Option) error
+
+	DescribeSettings(*directoryservice.DescribeSettingsInput) (*directoryservice.DescribeSettingsOutput, error)
+	DescribeSettingsWithContext(aws.Context, *directoryservice.DescribeSettingsInput, ...request.Option) (*directoryservice.DescribeSettingsOutput, error)
+	DescribeSettingsRequest(*directoryservice.DescribeSettingsInput) (*request.Request, *directoryservice.DescribeSettingsOutput)
+
 	DescribeSharedDirectories(*directoryservice.DescribeSharedDirectoriesInput) (*directoryservice.DescribeSharedDirectoriesOutput, error)
 	DescribeSharedDirectoriesWithContext(aws.Context, *directoryservice.DescribeSharedDirectoriesInput, ...request.Option) (*directoryservice.DescribeSharedDirectoriesOutput, error)
 	DescribeSharedDirectoriesRequest(*directoryservice.DescribeSharedDirectoriesInput) (*request.Request, *directoryservice.DescribeSharedDirectoriesOutput)
+
+	DescribeSharedDirectoriesPages(*directoryservice.DescribeSharedDirectoriesInput, func(*directoryservice.DescribeSharedDirectoriesOutput, bool) bool) error
+	DescribeSharedDirectoriesPagesWithContext(aws.Context, *directoryservice.DescribeSharedDirectoriesInput, func(*directoryservice.DescribeSharedDirectoriesOutput, bool) bool, ...request.Option) error
 
 	DescribeSnapshots(*directoryservice.DescribeSnapshotsInput) (*directoryservice.DescribeSnapshotsOutput, error)
 	DescribeSnapshotsWithContext(aws.Context, *directoryservice.DescribeSnapshotsInput, ...request.Option) (*directoryservice.DescribeSnapshotsOutput, error)
 	DescribeSnapshotsRequest(*directoryservice.DescribeSnapshotsInput) (*request.Request, *directoryservice.DescribeSnapshotsOutput)
 
+	DescribeSnapshotsPages(*directoryservice.DescribeSnapshotsInput, func(*directoryservice.DescribeSnapshotsOutput, bool) bool) error
+	DescribeSnapshotsPagesWithContext(aws.Context, *directoryservice.DescribeSnapshotsInput, func(*directoryservice.DescribeSnapshotsOutput, bool) bool, ...request.Option) error
+
 	DescribeTrusts(*directoryservice.DescribeTrustsInput) (*directoryservice.DescribeTrustsOutput, error)
 	DescribeTrustsWithContext(aws.Context, *directoryservice.DescribeTrustsInput, ...request.Option) (*directoryservice.DescribeTrustsOutput, error)
 	DescribeTrustsRequest(*directoryservice.DescribeTrustsInput) (*request.Request, *directoryservice.DescribeTrustsOutput)
+
+	DescribeTrustsPages(*directoryservice.DescribeTrustsInput, func(*directoryservice.DescribeTrustsOutput, bool) bool) error
+	DescribeTrustsPagesWithContext(aws.Context, *directoryservice.DescribeTrustsInput, func(*directoryservice.DescribeTrustsOutput, bool) bool, ...request.Option) error
+
+	DescribeUpdateDirectory(*directoryservice.DescribeUpdateDirectoryInput) (*directoryservice.DescribeUpdateDirectoryOutput, error)
+	DescribeUpdateDirectoryWithContext(aws.Context, *directoryservice.DescribeUpdateDirectoryInput, ...request.Option) (*directoryservice.DescribeUpdateDirectoryOutput, error)
+	DescribeUpdateDirectoryRequest(*directoryservice.DescribeUpdateDirectoryInput) (*request.Request, *directoryservice.DescribeUpdateDirectoryOutput)
+
+	DescribeUpdateDirectoryPages(*directoryservice.DescribeUpdateDirectoryInput, func(*directoryservice.DescribeUpdateDirectoryOutput, bool) bool) error
+	DescribeUpdateDirectoryPagesWithContext(aws.Context, *directoryservice.DescribeUpdateDirectoryInput, func(*directoryservice.DescribeUpdateDirectoryOutput, bool) bool, ...request.Option) error
+
+	DisableClientAuthentication(*directoryservice.DisableClientAuthenticationInput) (*directoryservice.DisableClientAuthenticationOutput, error)
+	DisableClientAuthenticationWithContext(aws.Context, *directoryservice.DisableClientAuthenticationInput, ...request.Option) (*directoryservice.DisableClientAuthenticationOutput, error)
+	DisableClientAuthenticationRequest(*directoryservice.DisableClientAuthenticationInput) (*request.Request, *directoryservice.DisableClientAuthenticationOutput)
+
+	DisableLDAPS(*directoryservice.DisableLDAPSInput) (*directoryservice.DisableLDAPSOutput, error)
+	DisableLDAPSWithContext(aws.Context, *directoryservice.DisableLDAPSInput, ...request.Option) (*directoryservice.DisableLDAPSOutput, error)
+	DisableLDAPSRequest(*directoryservice.DisableLDAPSInput) (*request.Request, *directoryservice.DisableLDAPSOutput)
 
 	DisableRadius(*directoryservice.DisableRadiusInput) (*directoryservice.DisableRadiusOutput, error)
 	DisableRadiusWithContext(aws.Context, *directoryservice.DisableRadiusInput, ...request.Option) (*directoryservice.DisableRadiusOutput, error)
@@ -174,6 +238,14 @@ type DirectoryServiceAPI interface {
 	DisableSso(*directoryservice.DisableSsoInput) (*directoryservice.DisableSsoOutput, error)
 	DisableSsoWithContext(aws.Context, *directoryservice.DisableSsoInput, ...request.Option) (*directoryservice.DisableSsoOutput, error)
 	DisableSsoRequest(*directoryservice.DisableSsoInput) (*request.Request, *directoryservice.DisableSsoOutput)
+
+	EnableClientAuthentication(*directoryservice.EnableClientAuthenticationInput) (*directoryservice.EnableClientAuthenticationOutput, error)
+	EnableClientAuthenticationWithContext(aws.Context, *directoryservice.EnableClientAuthenticationInput, ...request.Option) (*directoryservice.EnableClientAuthenticationOutput, error)
+	EnableClientAuthenticationRequest(*directoryservice.EnableClientAuthenticationInput) (*request.Request, *directoryservice.EnableClientAuthenticationOutput)
+
+	EnableLDAPS(*directoryservice.EnableLDAPSInput) (*directoryservice.EnableLDAPSOutput, error)
+	EnableLDAPSWithContext(aws.Context, *directoryservice.EnableLDAPSInput, ...request.Option) (*directoryservice.EnableLDAPSOutput, error)
+	EnableLDAPSRequest(*directoryservice.EnableLDAPSInput) (*request.Request, *directoryservice.EnableLDAPSOutput)
 
 	EnableRadius(*directoryservice.EnableRadiusInput) (*directoryservice.EnableRadiusOutput, error)
 	EnableRadiusWithContext(aws.Context, *directoryservice.EnableRadiusInput, ...request.Option) (*directoryservice.EnableRadiusOutput, error)
@@ -191,21 +263,44 @@ type DirectoryServiceAPI interface {
 	GetSnapshotLimitsWithContext(aws.Context, *directoryservice.GetSnapshotLimitsInput, ...request.Option) (*directoryservice.GetSnapshotLimitsOutput, error)
 	GetSnapshotLimitsRequest(*directoryservice.GetSnapshotLimitsInput) (*request.Request, *directoryservice.GetSnapshotLimitsOutput)
 
+	ListCertificates(*directoryservice.ListCertificatesInput) (*directoryservice.ListCertificatesOutput, error)
+	ListCertificatesWithContext(aws.Context, *directoryservice.ListCertificatesInput, ...request.Option) (*directoryservice.ListCertificatesOutput, error)
+	ListCertificatesRequest(*directoryservice.ListCertificatesInput) (*request.Request, *directoryservice.ListCertificatesOutput)
+
+	ListCertificatesPages(*directoryservice.ListCertificatesInput, func(*directoryservice.ListCertificatesOutput, bool) bool) error
+	ListCertificatesPagesWithContext(aws.Context, *directoryservice.ListCertificatesInput, func(*directoryservice.ListCertificatesOutput, bool) bool, ...request.Option) error
+
 	ListIpRoutes(*directoryservice.ListIpRoutesInput) (*directoryservice.ListIpRoutesOutput, error)
 	ListIpRoutesWithContext(aws.Context, *directoryservice.ListIpRoutesInput, ...request.Option) (*directoryservice.ListIpRoutesOutput, error)
 	ListIpRoutesRequest(*directoryservice.ListIpRoutesInput) (*request.Request, *directoryservice.ListIpRoutesOutput)
+
+	ListIpRoutesPages(*directoryservice.ListIpRoutesInput, func(*directoryservice.ListIpRoutesOutput, bool) bool) error
+	ListIpRoutesPagesWithContext(aws.Context, *directoryservice.ListIpRoutesInput, func(*directoryservice.ListIpRoutesOutput, bool) bool, ...request.Option) error
 
 	ListLogSubscriptions(*directoryservice.ListLogSubscriptionsInput) (*directoryservice.ListLogSubscriptionsOutput, error)
 	ListLogSubscriptionsWithContext(aws.Context, *directoryservice.ListLogSubscriptionsInput, ...request.Option) (*directoryservice.ListLogSubscriptionsOutput, error)
 	ListLogSubscriptionsRequest(*directoryservice.ListLogSubscriptionsInput) (*request.Request, *directoryservice.ListLogSubscriptionsOutput)
 
+	ListLogSubscriptionsPages(*directoryservice.ListLogSubscriptionsInput, func(*directoryservice.ListLogSubscriptionsOutput, bool) bool) error
+	ListLogSubscriptionsPagesWithContext(aws.Context, *directoryservice.ListLogSubscriptionsInput, func(*directoryservice.ListLogSubscriptionsOutput, bool) bool, ...request.Option) error
+
 	ListSchemaExtensions(*directoryservice.ListSchemaExtensionsInput) (*directoryservice.ListSchemaExtensionsOutput, error)
 	ListSchemaExtensionsWithContext(aws.Context, *directoryservice.ListSchemaExtensionsInput, ...request.Option) (*directoryservice.ListSchemaExtensionsOutput, error)
 	ListSchemaExtensionsRequest(*directoryservice.ListSchemaExtensionsInput) (*request.Request, *directoryservice.ListSchemaExtensionsOutput)
 
+	ListSchemaExtensionsPages(*directoryservice.ListSchemaExtensionsInput, func(*directoryservice.ListSchemaExtensionsOutput, bool) bool) error
+	ListSchemaExtensionsPagesWithContext(aws.Context, *directoryservice.ListSchemaExtensionsInput, func(*directoryservice.ListSchemaExtensionsOutput, bool) bool, ...request.Option) error
+
 	ListTagsForResource(*directoryservice.ListTagsForResourceInput) (*directoryservice.ListTagsForResourceOutput, error)
 	ListTagsForResourceWithContext(aws.Context, *directoryservice.ListTagsForResourceInput, ...request.Option) (*directoryservice.ListTagsForResourceOutput, error)
 	ListTagsForResourceRequest(*directoryservice.ListTagsForResourceInput) (*request.Request, *directoryservice.ListTagsForResourceOutput)
+
+	ListTagsForResourcePages(*directoryservice.ListTagsForResourceInput, func(*directoryservice.ListTagsForResourceOutput, bool) bool) error
+	ListTagsForResourcePagesWithContext(aws.Context, *directoryservice.ListTagsForResourceInput, func(*directoryservice.ListTagsForResourceOutput, bool) bool, ...request.Option) error
+
+	RegisterCertificate(*directoryservice.RegisterCertificateInput) (*directoryservice.RegisterCertificateOutput, error)
+	RegisterCertificateWithContext(aws.Context, *directoryservice.RegisterCertificateInput, ...request.Option) (*directoryservice.RegisterCertificateOutput, error)
+	RegisterCertificateRequest(*directoryservice.RegisterCertificateInput) (*request.Request, *directoryservice.RegisterCertificateOutput)
 
 	RegisterEventTopic(*directoryservice.RegisterEventTopicInput) (*directoryservice.RegisterEventTopicOutput, error)
 	RegisterEventTopicWithContext(aws.Context, *directoryservice.RegisterEventTopicInput, ...request.Option) (*directoryservice.RegisterEventTopicOutput, error)
@@ -218,6 +313,10 @@ type DirectoryServiceAPI interface {
 	RemoveIpRoutes(*directoryservice.RemoveIpRoutesInput) (*directoryservice.RemoveIpRoutesOutput, error)
 	RemoveIpRoutesWithContext(aws.Context, *directoryservice.RemoveIpRoutesInput, ...request.Option) (*directoryservice.RemoveIpRoutesOutput, error)
 	RemoveIpRoutesRequest(*directoryservice.RemoveIpRoutesInput) (*request.Request, *directoryservice.RemoveIpRoutesOutput)
+
+	RemoveRegion(*directoryservice.RemoveRegionInput) (*directoryservice.RemoveRegionOutput, error)
+	RemoveRegionWithContext(aws.Context, *directoryservice.RemoveRegionInput, ...request.Option) (*directoryservice.RemoveRegionOutput, error)
+	RemoveRegionRequest(*directoryservice.RemoveRegionInput) (*request.Request, *directoryservice.RemoveRegionOutput)
 
 	RemoveTagsFromResource(*directoryservice.RemoveTagsFromResourceInput) (*directoryservice.RemoveTagsFromResourceOutput, error)
 	RemoveTagsFromResourceWithContext(aws.Context, *directoryservice.RemoveTagsFromResourceInput, ...request.Option) (*directoryservice.RemoveTagsFromResourceOutput, error)
@@ -247,6 +346,10 @@ type DirectoryServiceAPI interface {
 	UpdateConditionalForwarderWithContext(aws.Context, *directoryservice.UpdateConditionalForwarderInput, ...request.Option) (*directoryservice.UpdateConditionalForwarderOutput, error)
 	UpdateConditionalForwarderRequest(*directoryservice.UpdateConditionalForwarderInput) (*request.Request, *directoryservice.UpdateConditionalForwarderOutput)
 
+	UpdateDirectorySetup(*directoryservice.UpdateDirectorySetupInput) (*directoryservice.UpdateDirectorySetupOutput, error)
+	UpdateDirectorySetupWithContext(aws.Context, *directoryservice.UpdateDirectorySetupInput, ...request.Option) (*directoryservice.UpdateDirectorySetupOutput, error)
+	UpdateDirectorySetupRequest(*directoryservice.UpdateDirectorySetupInput) (*request.Request, *directoryservice.UpdateDirectorySetupOutput)
+
 	UpdateNumberOfDomainControllers(*directoryservice.UpdateNumberOfDomainControllersInput) (*directoryservice.UpdateNumberOfDomainControllersOutput, error)
 	UpdateNumberOfDomainControllersWithContext(aws.Context, *directoryservice.UpdateNumberOfDomainControllersInput, ...request.Option) (*directoryservice.UpdateNumberOfDomainControllersOutput, error)
 	UpdateNumberOfDomainControllersRequest(*directoryservice.UpdateNumberOfDomainControllersInput) (*request.Request, *directoryservice.UpdateNumberOfDomainControllersOutput)
@@ -254,6 +357,10 @@ type DirectoryServiceAPI interface {
 	UpdateRadius(*directoryservice.UpdateRadiusInput) (*directoryservice.UpdateRadiusOutput, error)
 	UpdateRadiusWithContext(aws.Context, *directoryservice.UpdateRadiusInput, ...request.Option) (*directoryservice.UpdateRadiusOutput, error)
 	UpdateRadiusRequest(*directoryservice.UpdateRadiusInput) (*request.Request, *directoryservice.UpdateRadiusOutput)
+
+	UpdateSettings(*directoryservice.UpdateSettingsInput) (*directoryservice.UpdateSettingsOutput, error)
+	UpdateSettingsWithContext(aws.Context, *directoryservice.UpdateSettingsInput, ...request.Option) (*directoryservice.UpdateSettingsOutput, error)
+	UpdateSettingsRequest(*directoryservice.UpdateSettingsInput) (*request.Request, *directoryservice.UpdateSettingsOutput)
 
 	UpdateTrust(*directoryservice.UpdateTrustInput) (*directoryservice.UpdateTrustOutput, error)
 	UpdateTrustWithContext(aws.Context, *directoryservice.UpdateTrustInput, ...request.Option) (*directoryservice.UpdateTrustOutput, error)

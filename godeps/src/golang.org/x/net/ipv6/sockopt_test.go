@@ -5,25 +5,25 @@
 package ipv6_test
 
 import (
+	"errors"
 	"fmt"
 	"net"
 	"runtime"
 	"testing"
 
 	"golang.org/x/net/internal/iana"
-	"golang.org/x/net/internal/nettest"
 	"golang.org/x/net/ipv6"
+	"golang.org/x/net/nettest"
 )
-
-var supportsIPv6 bool = nettest.SupportsIPv6()
 
 func TestConnInitiatorPathMTU(t *testing.T) {
 	switch runtime.GOOS {
-	case "js", "nacl", "plan9", "windows":
+	case "fuchsia", "hurd", "js", "nacl", "plan9", "windows", "wasip1", "zos":
 		t.Skipf("not supported on %s", runtime.GOOS)
 	}
-	if !supportsIPv6 {
-		t.Skip("ipv6 is not supported")
+
+	if _, err := nettest.RoutedInterface("ip6", net.FlagUp|net.FlagLoopback); err != nil {
+		t.Skip("ipv6 is not enabled for loopback interface")
 	}
 
 	ln, err := net.Listen("tcp6", "[::1]:0")
@@ -42,12 +42,7 @@ func TestConnInitiatorPathMTU(t *testing.T) {
 	defer c.Close()
 
 	if pmtu, err := ipv6.NewConn(c).PathMTU(); err != nil {
-		switch runtime.GOOS {
-		case "darwin": // older darwin kernels don't support IPV6_PATHMTU option
-			t.Logf("not supported on %s", runtime.GOOS)
-		default:
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	} else {
 		t.Logf("path mtu for %v: %v", c.RemoteAddr(), pmtu)
 	}
@@ -57,11 +52,11 @@ func TestConnInitiatorPathMTU(t *testing.T) {
 
 func TestConnResponderPathMTU(t *testing.T) {
 	switch runtime.GOOS {
-	case "js", "nacl", "plan9", "windows":
+	case "fuchsia", "hurd", "js", "nacl", "plan9", "windows", "wasip1", "zos":
 		t.Skipf("not supported on %s", runtime.GOOS)
 	}
-	if !supportsIPv6 {
-		t.Skip("ipv6 is not supported")
+	if _, err := nettest.RoutedInterface("ip6", net.FlagUp|net.FlagLoopback); err != nil {
+		t.Skip("ipv6 is not enabled for loopback interface")
 	}
 
 	ln, err := net.Listen("tcp6", "[::1]:0")
@@ -80,12 +75,7 @@ func TestConnResponderPathMTU(t *testing.T) {
 	defer c.Close()
 
 	if pmtu, err := ipv6.NewConn(c).PathMTU(); err != nil {
-		switch runtime.GOOS {
-		case "darwin": // older darwin kernels don't support IPV6_PATHMTU option
-			t.Logf("not supported on %s", runtime.GOOS)
-		default:
-			t.Fatal(err)
-		}
+		t.Fatal(err)
 	} else {
 		t.Logf("path mtu for %v: %v", c.RemoteAddr(), pmtu)
 	}
@@ -94,15 +84,11 @@ func TestConnResponderPathMTU(t *testing.T) {
 }
 
 func TestPacketConnChecksum(t *testing.T) {
-	switch runtime.GOOS {
-	case "js", "nacl", "plan9", "windows":
-		t.Skipf("not supported on %s", runtime.GOOS)
-	}
-	if !supportsIPv6 {
+	if !nettest.SupportsIPv6() {
 		t.Skip("ipv6 is not supported")
 	}
-	if m, ok := nettest.SupportsRawIPSocket(); !ok {
-		t.Skip(m)
+	if !nettest.SupportsRawSocket() {
+		t.Skipf("not supported on %s/%s", runtime.GOOS, runtime.GOARCH)
 	}
 
 	c, err := net.ListenPacket(fmt.Sprintf("ip6:%d", iana.ProtocolOSPFIGP), "::") // OSPF for IPv6
@@ -115,7 +101,9 @@ func TestPacketConnChecksum(t *testing.T) {
 	offset := 12 // see RFC 5340
 
 	for _, toggle := range []bool{false, true} {
-		if err := p.SetChecksum(toggle, offset); err != nil {
+		if err := p.SetChecksum(toggle, offset); errors.Is(err, ipv6.ErrNotImplemented) {
+			t.Skipf("setting checksum not supported: %v", err)
+		} else if err != nil {
 			if toggle {
 				t.Fatalf("ipv6.PacketConn.SetChecksum(%v, %v) failed: %v", toggle, offset, err)
 			} else {

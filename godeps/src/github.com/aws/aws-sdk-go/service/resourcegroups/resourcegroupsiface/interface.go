@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Resource Groups.
-//    func myFunc(svc resourcegroupsiface.ResourceGroupsAPI) bool {
-//        // Make svc.CreateGroup request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Resource Groups.
+//	func myFunc(svc resourcegroupsiface.ResourceGroupsAPI) bool {
+//	    // Make svc.CreateGroup request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := resourcegroups.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := resourcegroups.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockResourceGroupsClient struct {
-//        resourcegroupsiface.ResourceGroupsAPI
-//    }
-//    func (m *mockResourceGroupsClient) CreateGroup(input *resourcegroups.CreateGroupInput) (*resourcegroups.CreateGroupOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockResourceGroupsClient struct {
+//	    resourcegroupsiface.ResourceGroupsAPI
+//	}
+//	func (m *mockResourceGroupsClient) CreateGroup(input *resourcegroups.CreateGroupInput) (*resourcegroups.CreateGroupOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockResourceGroupsClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockResourceGroupsClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -68,9 +68,17 @@ type ResourceGroupsAPI interface {
 	DeleteGroupWithContext(aws.Context, *resourcegroups.DeleteGroupInput, ...request.Option) (*resourcegroups.DeleteGroupOutput, error)
 	DeleteGroupRequest(*resourcegroups.DeleteGroupInput) (*request.Request, *resourcegroups.DeleteGroupOutput)
 
+	GetAccountSettings(*resourcegroups.GetAccountSettingsInput) (*resourcegroups.GetAccountSettingsOutput, error)
+	GetAccountSettingsWithContext(aws.Context, *resourcegroups.GetAccountSettingsInput, ...request.Option) (*resourcegroups.GetAccountSettingsOutput, error)
+	GetAccountSettingsRequest(*resourcegroups.GetAccountSettingsInput) (*request.Request, *resourcegroups.GetAccountSettingsOutput)
+
 	GetGroup(*resourcegroups.GetGroupInput) (*resourcegroups.GetGroupOutput, error)
 	GetGroupWithContext(aws.Context, *resourcegroups.GetGroupInput, ...request.Option) (*resourcegroups.GetGroupOutput, error)
 	GetGroupRequest(*resourcegroups.GetGroupInput) (*request.Request, *resourcegroups.GetGroupOutput)
+
+	GetGroupConfiguration(*resourcegroups.GetGroupConfigurationInput) (*resourcegroups.GetGroupConfigurationOutput, error)
+	GetGroupConfigurationWithContext(aws.Context, *resourcegroups.GetGroupConfigurationInput, ...request.Option) (*resourcegroups.GetGroupConfigurationOutput, error)
+	GetGroupConfigurationRequest(*resourcegroups.GetGroupConfigurationInput) (*request.Request, *resourcegroups.GetGroupConfigurationOutput)
 
 	GetGroupQuery(*resourcegroups.GetGroupQueryInput) (*resourcegroups.GetGroupQueryOutput, error)
 	GetGroupQueryWithContext(aws.Context, *resourcegroups.GetGroupQueryInput, ...request.Option) (*resourcegroups.GetGroupQueryOutput, error)
@@ -79,6 +87,10 @@ type ResourceGroupsAPI interface {
 	GetTags(*resourcegroups.GetTagsInput) (*resourcegroups.GetTagsOutput, error)
 	GetTagsWithContext(aws.Context, *resourcegroups.GetTagsInput, ...request.Option) (*resourcegroups.GetTagsOutput, error)
 	GetTagsRequest(*resourcegroups.GetTagsInput) (*request.Request, *resourcegroups.GetTagsOutput)
+
+	GroupResources(*resourcegroups.GroupResourcesInput) (*resourcegroups.GroupResourcesOutput, error)
+	GroupResourcesWithContext(aws.Context, *resourcegroups.GroupResourcesInput, ...request.Option) (*resourcegroups.GroupResourcesOutput, error)
+	GroupResourcesRequest(*resourcegroups.GroupResourcesInput) (*request.Request, *resourcegroups.GroupResourcesOutput)
 
 	ListGroupResources(*resourcegroups.ListGroupResourcesInput) (*resourcegroups.ListGroupResourcesOutput, error)
 	ListGroupResourcesWithContext(aws.Context, *resourcegroups.ListGroupResourcesInput, ...request.Option) (*resourcegroups.ListGroupResourcesOutput, error)
@@ -94,6 +106,10 @@ type ResourceGroupsAPI interface {
 	ListGroupsPages(*resourcegroups.ListGroupsInput, func(*resourcegroups.ListGroupsOutput, bool) bool) error
 	ListGroupsPagesWithContext(aws.Context, *resourcegroups.ListGroupsInput, func(*resourcegroups.ListGroupsOutput, bool) bool, ...request.Option) error
 
+	PutGroupConfiguration(*resourcegroups.PutGroupConfigurationInput) (*resourcegroups.PutGroupConfigurationOutput, error)
+	PutGroupConfigurationWithContext(aws.Context, *resourcegroups.PutGroupConfigurationInput, ...request.Option) (*resourcegroups.PutGroupConfigurationOutput, error)
+	PutGroupConfigurationRequest(*resourcegroups.PutGroupConfigurationInput) (*request.Request, *resourcegroups.PutGroupConfigurationOutput)
+
 	SearchResources(*resourcegroups.SearchResourcesInput) (*resourcegroups.SearchResourcesOutput, error)
 	SearchResourcesWithContext(aws.Context, *resourcegroups.SearchResourcesInput, ...request.Option) (*resourcegroups.SearchResourcesOutput, error)
 	SearchResourcesRequest(*resourcegroups.SearchResourcesInput) (*request.Request, *resourcegroups.SearchResourcesOutput)
@@ -105,9 +121,17 @@ type ResourceGroupsAPI interface {
 	TagWithContext(aws.Context, *resourcegroups.TagInput, ...request.Option) (*resourcegroups.TagOutput, error)
 	TagRequest(*resourcegroups.TagInput) (*request.Request, *resourcegroups.TagOutput)
 
+	UngroupResources(*resourcegroups.UngroupResourcesInput) (*resourcegroups.UngroupResourcesOutput, error)
+	UngroupResourcesWithContext(aws.Context, *resourcegroups.UngroupResourcesInput, ...request.Option) (*resourcegroups.UngroupResourcesOutput, error)
+	UngroupResourcesRequest(*resourcegroups.UngroupResourcesInput) (*request.Request, *resourcegroups.UngroupResourcesOutput)
+
 	Untag(*resourcegroups.UntagInput) (*resourcegroups.UntagOutput, error)
 	UntagWithContext(aws.Context, *resourcegroups.UntagInput, ...request.Option) (*resourcegroups.UntagOutput, error)
 	UntagRequest(*resourcegroups.UntagInput) (*request.Request, *resourcegroups.UntagOutput)
+
+	UpdateAccountSettings(*resourcegroups.UpdateAccountSettingsInput) (*resourcegroups.UpdateAccountSettingsOutput, error)
+	UpdateAccountSettingsWithContext(aws.Context, *resourcegroups.UpdateAccountSettingsInput, ...request.Option) (*resourcegroups.UpdateAccountSettingsOutput, error)
+	UpdateAccountSettingsRequest(*resourcegroups.UpdateAccountSettingsInput) (*request.Request, *resourcegroups.UpdateAccountSettingsOutput)
 
 	UpdateGroup(*resourcegroups.UpdateGroupInput) (*resourcegroups.UpdateGroupOutput, error)
 	UpdateGroupWithContext(aws.Context, *resourcegroups.UpdateGroupInput, ...request.Option) (*resourcegroups.UpdateGroupOutput, error)

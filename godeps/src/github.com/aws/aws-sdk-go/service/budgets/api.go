@@ -29,14 +29,13 @@ const opCreateBudget = "CreateBudget"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateBudgetRequest method.
+//	req, resp := client.CreateBudgetRequest(params)
 //
-//    // Example sending a request using the CreateBudgetRequest method.
-//    req, resp := client.CreateBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) (req *request.Request, output *CreateBudgetOutput) {
 	op := &request.Operation{
 		Name:       opCreateBudget,
@@ -58,6 +57,11 @@ func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) (req *request.Re
 //
 // Creates a budget and, if included, notifications and subscribers.
 //
+// Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax
+// at one time. Use the syntax that matches your case. The Request Syntax section
+// shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples)
+// section.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -65,21 +69,28 @@ func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) (req *request.Re
 // See the AWS API reference guide for AWS Budgets's
 // API operation CreateBudget for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeCreationLimitExceededException "CreationLimitExceededException"
-//   You've exceeded the notification or subscriber limit.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The budget name already exists. Budget names must be unique within an account.
+//   - CreationLimitExceededException
+//     You've exceeded the notification or subscriber limit.
 //
+//   - DuplicateRecordException
+//     The budget name already exists. Budget names must be unique within an account.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) CreateBudget(input *CreateBudgetInput) (*CreateBudgetOutput, error) {
 	req, out := c.CreateBudgetRequest(input)
 	return out, req.Send()
@@ -101,6 +112,102 @@ func (c *Budgets) CreateBudgetWithContext(ctx aws.Context, input *CreateBudgetIn
 	return out, req.Send()
 }
 
+const opCreateBudgetAction = "CreateBudgetAction"
+
+// CreateBudgetActionRequest generates a "aws/request.Request" representing the
+// client's request for the CreateBudgetAction operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See CreateBudgetAction for more information on using the CreateBudgetAction
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the CreateBudgetActionRequest method.
+//	req, resp := client.CreateBudgetActionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *Budgets) CreateBudgetActionRequest(input *CreateBudgetActionInput) (req *request.Request, output *CreateBudgetActionOutput) {
+	op := &request.Operation{
+		Name:       opCreateBudgetAction,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateBudgetActionInput{}
+	}
+
+	output = &CreateBudgetActionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// CreateBudgetAction API operation for AWS Budgets.
+//
+// Creates a budget action.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Budgets's
+// API operation CreateBudgetAction for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
+//
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
+//
+//   - CreationLimitExceededException
+//     You've exceeded the notification or subscriber limit.
+//
+//   - DuplicateRecordException
+//     The budget name already exists. Budget names must be unique within an account.
+//
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
+func (c *Budgets) CreateBudgetAction(input *CreateBudgetActionInput) (*CreateBudgetActionOutput, error) {
+	req, out := c.CreateBudgetActionRequest(input)
+	return out, req.Send()
+}
+
+// CreateBudgetActionWithContext is the same as CreateBudgetAction with the addition of
+// the ability to pass a context and additional request options.
+//
+// See CreateBudgetAction for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) CreateBudgetActionWithContext(ctx aws.Context, input *CreateBudgetActionInput, opts ...request.Option) (*CreateBudgetActionOutput, error) {
+	req, out := c.CreateBudgetActionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opCreateNotification = "CreateNotification"
 
 // CreateNotificationRequest generates a "aws/request.Request" representing the
@@ -117,14 +224,13 @@ const opCreateNotification = "CreateNotification"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateNotificationRequest method.
+//	req, resp := client.CreateNotificationRequest(params)
 //
-//    // Example sending a request using the CreateNotificationRequest method.
-//    req, resp := client.CreateNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) CreateNotificationRequest(input *CreateNotificationInput) (req *request.Request, output *CreateNotificationOutput) {
 	op := &request.Operation{
 		Name:       opCreateNotification,
@@ -154,24 +260,31 @@ func (c *Budgets) CreateNotificationRequest(input *CreateNotificationInput) (req
 // See the AWS API reference guide for AWS Budgets's
 // API operation CreateNotification for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeCreationLimitExceededException "CreationLimitExceededException"
-//   You've exceeded the notification or subscriber limit.
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
 //
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The budget name already exists. Budget names must be unique within an account.
+//   - CreationLimitExceededException
+//     You've exceeded the notification or subscriber limit.
 //
+//   - DuplicateRecordException
+//     The budget name already exists. Budget names must be unique within an account.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) CreateNotification(input *CreateNotificationInput) (*CreateNotificationOutput, error) {
 	req, out := c.CreateNotificationRequest(input)
 	return out, req.Send()
@@ -209,14 +322,13 @@ const opCreateSubscriber = "CreateSubscriber"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateSubscriberRequest method.
+//	req, resp := client.CreateSubscriberRequest(params)
 //
-//    // Example sending a request using the CreateSubscriberRequest method.
-//    req, resp := client.CreateSubscriberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) CreateSubscriberRequest(input *CreateSubscriberInput) (req *request.Request, output *CreateSubscriberOutput) {
 	op := &request.Operation{
 		Name:       opCreateSubscriber,
@@ -246,24 +358,31 @@ func (c *Budgets) CreateSubscriberRequest(input *CreateSubscriberInput) (req *re
 // See the AWS API reference guide for AWS Budgets's
 // API operation CreateSubscriber for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeCreationLimitExceededException "CreationLimitExceededException"
-//   You've exceeded the notification or subscriber limit.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The budget name already exists. Budget names must be unique within an account.
+//   - CreationLimitExceededException
+//     You've exceeded the notification or subscriber limit.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - DuplicateRecordException
+//     The budget name already exists. Budget names must be unique within an account.
 //
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) CreateSubscriber(input *CreateSubscriberInput) (*CreateSubscriberOutput, error) {
 	req, out := c.CreateSubscriberRequest(input)
 	return out, req.Send()
@@ -301,14 +420,13 @@ const opDeleteBudget = "DeleteBudget"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteBudgetRequest method.
+//	req, resp := client.DeleteBudgetRequest(params)
 //
-//    // Example sending a request using the DeleteBudgetRequest method.
-//    req, resp := client.DeleteBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) DeleteBudgetRequest(input *DeleteBudgetInput) (req *request.Request, output *DeleteBudgetOutput) {
 	op := &request.Operation{
 		Name:       opDeleteBudget,
@@ -340,18 +458,25 @@ func (c *Budgets) DeleteBudgetRequest(input *DeleteBudgetInput) (req *request.Re
 // See the AWS API reference guide for AWS Budgets's
 // API operation DeleteBudget for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) DeleteBudget(input *DeleteBudgetInput) (*DeleteBudgetOutput, error) {
 	req, out := c.DeleteBudgetRequest(input)
 	return out, req.Send()
@@ -373,6 +498,100 @@ func (c *Budgets) DeleteBudgetWithContext(ctx aws.Context, input *DeleteBudgetIn
 	return out, req.Send()
 }
 
+const opDeleteBudgetAction = "DeleteBudgetAction"
+
+// DeleteBudgetActionRequest generates a "aws/request.Request" representing the
+// client's request for the DeleteBudgetAction operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DeleteBudgetAction for more information on using the DeleteBudgetAction
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DeleteBudgetActionRequest method.
+//	req, resp := client.DeleteBudgetActionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *Budgets) DeleteBudgetActionRequest(input *DeleteBudgetActionInput) (req *request.Request, output *DeleteBudgetActionOutput) {
+	op := &request.Operation{
+		Name:       opDeleteBudgetAction,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteBudgetActionInput{}
+	}
+
+	output = &DeleteBudgetActionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DeleteBudgetAction API operation for AWS Budgets.
+//
+// Deletes a budget action.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Budgets's
+// API operation DeleteBudgetAction for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
+//
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
+//
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ResourceLockedException
+//     The request was received and recognized by the server, but the server rejected
+//     that particular method for the requested resource.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
+func (c *Budgets) DeleteBudgetAction(input *DeleteBudgetActionInput) (*DeleteBudgetActionOutput, error) {
+	req, out := c.DeleteBudgetActionRequest(input)
+	return out, req.Send()
+}
+
+// DeleteBudgetActionWithContext is the same as DeleteBudgetAction with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DeleteBudgetAction for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DeleteBudgetActionWithContext(ctx aws.Context, input *DeleteBudgetActionInput, opts ...request.Option) (*DeleteBudgetActionOutput, error) {
+	req, out := c.DeleteBudgetActionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opDeleteNotification = "DeleteNotification"
 
 // DeleteNotificationRequest generates a "aws/request.Request" representing the
@@ -389,14 +608,13 @@ const opDeleteNotification = "DeleteNotification"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteNotificationRequest method.
+//	req, resp := client.DeleteNotificationRequest(params)
 //
-//    // Example sending a request using the DeleteNotificationRequest method.
-//    req, resp := client.DeleteNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) DeleteNotificationRequest(input *DeleteNotificationInput) (req *request.Request, output *DeleteNotificationOutput) {
 	op := &request.Operation{
 		Name:       opDeleteNotification,
@@ -428,18 +646,25 @@ func (c *Budgets) DeleteNotificationRequest(input *DeleteNotificationInput) (req
 // See the AWS API reference guide for AWS Budgets's
 // API operation DeleteNotification for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+// Returned Error Types:
 //
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) DeleteNotification(input *DeleteNotificationInput) (*DeleteNotificationOutput, error) {
 	req, out := c.DeleteNotificationRequest(input)
 	return out, req.Send()
@@ -477,14 +702,13 @@ const opDeleteSubscriber = "DeleteSubscriber"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteSubscriberRequest method.
+//	req, resp := client.DeleteSubscriberRequest(params)
 //
-//    // Example sending a request using the DeleteSubscriberRequest method.
-//    req, resp := client.DeleteSubscriberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) DeleteSubscriberRequest(input *DeleteSubscriberInput) (req *request.Request, output *DeleteSubscriberOutput) {
 	op := &request.Operation{
 		Name:       opDeleteSubscriber,
@@ -515,18 +739,25 @@ func (c *Budgets) DeleteSubscriberRequest(input *DeleteSubscriberInput) (req *re
 // See the AWS API reference guide for AWS Budgets's
 // API operation DeleteSubscriber for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) DeleteSubscriber(input *DeleteSubscriberInput) (*DeleteSubscriberOutput, error) {
 	req, out := c.DeleteSubscriberRequest(input)
 	return out, req.Send()
@@ -564,14 +795,13 @@ const opDescribeBudget = "DescribeBudget"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeBudgetRequest method.
+//	req, resp := client.DescribeBudgetRequest(params)
 //
-//    // Example sending a request using the DescribeBudgetRequest method.
-//    req, resp := client.DescribeBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) (req *request.Request, output *DescribeBudgetOutput) {
 	op := &request.Operation{
 		Name:       opDescribeBudget,
@@ -592,6 +822,10 @@ func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) (req *reques
 //
 // Describes a budget.
 //
+// The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits,
+// see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples)
+// section.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -599,18 +833,25 @@ func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) (req *reques
 // See the AWS API reference guide for AWS Budgets's
 // API operation DescribeBudget for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) DescribeBudget(input *DescribeBudgetInput) (*DescribeBudgetOutput, error) {
 	req, out := c.DescribeBudgetRequest(input)
 	return out, req.Send()
@@ -632,6 +873,696 @@ func (c *Budgets) DescribeBudgetWithContext(ctx aws.Context, input *DescribeBudg
 	return out, req.Send()
 }
 
+const opDescribeBudgetAction = "DescribeBudgetAction"
+
+// DescribeBudgetActionRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeBudgetAction operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeBudgetAction for more information on using the DescribeBudgetAction
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeBudgetActionRequest method.
+//	req, resp := client.DescribeBudgetActionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *Budgets) DescribeBudgetActionRequest(input *DescribeBudgetActionInput) (req *request.Request, output *DescribeBudgetActionOutput) {
+	op := &request.Operation{
+		Name:       opDescribeBudgetAction,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeBudgetActionInput{}
+	}
+
+	output = &DescribeBudgetActionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeBudgetAction API operation for AWS Budgets.
+//
+// Describes a budget action detail.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Budgets's
+// API operation DescribeBudgetAction for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
+//
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
+//
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
+func (c *Budgets) DescribeBudgetAction(input *DescribeBudgetActionInput) (*DescribeBudgetActionOutput, error) {
+	req, out := c.DescribeBudgetActionRequest(input)
+	return out, req.Send()
+}
+
+// DescribeBudgetActionWithContext is the same as DescribeBudgetAction with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeBudgetAction for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetActionWithContext(ctx aws.Context, input *DescribeBudgetActionInput, opts ...request.Option) (*DescribeBudgetActionOutput, error) {
+	req, out := c.DescribeBudgetActionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opDescribeBudgetActionHistories = "DescribeBudgetActionHistories"
+
+// DescribeBudgetActionHistoriesRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeBudgetActionHistories operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeBudgetActionHistories for more information on using the DescribeBudgetActionHistories
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeBudgetActionHistoriesRequest method.
+//	req, resp := client.DescribeBudgetActionHistoriesRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *Budgets) DescribeBudgetActionHistoriesRequest(input *DescribeBudgetActionHistoriesInput) (req *request.Request, output *DescribeBudgetActionHistoriesOutput) {
+	op := &request.Operation{
+		Name:       opDescribeBudgetActionHistories,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeBudgetActionHistoriesInput{}
+	}
+
+	output = &DescribeBudgetActionHistoriesOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeBudgetActionHistories API operation for AWS Budgets.
+//
+// Describes a budget action history detail.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Budgets's
+// API operation DescribeBudgetActionHistories for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
+//
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
+//
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - InvalidNextTokenException
+//     The pagination token is invalid.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
+func (c *Budgets) DescribeBudgetActionHistories(input *DescribeBudgetActionHistoriesInput) (*DescribeBudgetActionHistoriesOutput, error) {
+	req, out := c.DescribeBudgetActionHistoriesRequest(input)
+	return out, req.Send()
+}
+
+// DescribeBudgetActionHistoriesWithContext is the same as DescribeBudgetActionHistories with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeBudgetActionHistories for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetActionHistoriesWithContext(ctx aws.Context, input *DescribeBudgetActionHistoriesInput, opts ...request.Option) (*DescribeBudgetActionHistoriesOutput, error) {
+	req, out := c.DescribeBudgetActionHistoriesRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeBudgetActionHistoriesPages iterates over the pages of a DescribeBudgetActionHistories operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeBudgetActionHistories method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeBudgetActionHistories operation.
+//	pageNum := 0
+//	err := client.DescribeBudgetActionHistoriesPages(params,
+//	    func(page *budgets.DescribeBudgetActionHistoriesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Budgets) DescribeBudgetActionHistoriesPages(input *DescribeBudgetActionHistoriesInput, fn func(*DescribeBudgetActionHistoriesOutput, bool) bool) error {
+	return c.DescribeBudgetActionHistoriesPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeBudgetActionHistoriesPagesWithContext same as DescribeBudgetActionHistoriesPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetActionHistoriesPagesWithContext(ctx aws.Context, input *DescribeBudgetActionHistoriesInput, fn func(*DescribeBudgetActionHistoriesOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeBudgetActionHistoriesInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeBudgetActionHistoriesRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeBudgetActionHistoriesOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeBudgetActionsForAccount = "DescribeBudgetActionsForAccount"
+
+// DescribeBudgetActionsForAccountRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeBudgetActionsForAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeBudgetActionsForAccount for more information on using the DescribeBudgetActionsForAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeBudgetActionsForAccountRequest method.
+//	req, resp := client.DescribeBudgetActionsForAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *Budgets) DescribeBudgetActionsForAccountRequest(input *DescribeBudgetActionsForAccountInput) (req *request.Request, output *DescribeBudgetActionsForAccountOutput) {
+	op := &request.Operation{
+		Name:       opDescribeBudgetActionsForAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeBudgetActionsForAccountInput{}
+	}
+
+	output = &DescribeBudgetActionsForAccountOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeBudgetActionsForAccount API operation for AWS Budgets.
+//
+// Describes all of the budget actions for an account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Budgets's
+// API operation DescribeBudgetActionsForAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
+//
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - InvalidNextTokenException
+//     The pagination token is invalid.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
+func (c *Budgets) DescribeBudgetActionsForAccount(input *DescribeBudgetActionsForAccountInput) (*DescribeBudgetActionsForAccountOutput, error) {
+	req, out := c.DescribeBudgetActionsForAccountRequest(input)
+	return out, req.Send()
+}
+
+// DescribeBudgetActionsForAccountWithContext is the same as DescribeBudgetActionsForAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeBudgetActionsForAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetActionsForAccountWithContext(ctx aws.Context, input *DescribeBudgetActionsForAccountInput, opts ...request.Option) (*DescribeBudgetActionsForAccountOutput, error) {
+	req, out := c.DescribeBudgetActionsForAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeBudgetActionsForAccountPages iterates over the pages of a DescribeBudgetActionsForAccount operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeBudgetActionsForAccount method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeBudgetActionsForAccount operation.
+//	pageNum := 0
+//	err := client.DescribeBudgetActionsForAccountPages(params,
+//	    func(page *budgets.DescribeBudgetActionsForAccountOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Budgets) DescribeBudgetActionsForAccountPages(input *DescribeBudgetActionsForAccountInput, fn func(*DescribeBudgetActionsForAccountOutput, bool) bool) error {
+	return c.DescribeBudgetActionsForAccountPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeBudgetActionsForAccountPagesWithContext same as DescribeBudgetActionsForAccountPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetActionsForAccountPagesWithContext(ctx aws.Context, input *DescribeBudgetActionsForAccountInput, fn func(*DescribeBudgetActionsForAccountOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeBudgetActionsForAccountInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeBudgetActionsForAccountRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeBudgetActionsForAccountOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeBudgetActionsForBudget = "DescribeBudgetActionsForBudget"
+
+// DescribeBudgetActionsForBudgetRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeBudgetActionsForBudget operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeBudgetActionsForBudget for more information on using the DescribeBudgetActionsForBudget
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeBudgetActionsForBudgetRequest method.
+//	req, resp := client.DescribeBudgetActionsForBudgetRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *Budgets) DescribeBudgetActionsForBudgetRequest(input *DescribeBudgetActionsForBudgetInput) (req *request.Request, output *DescribeBudgetActionsForBudgetOutput) {
+	op := &request.Operation{
+		Name:       opDescribeBudgetActionsForBudget,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeBudgetActionsForBudgetInput{}
+	}
+
+	output = &DescribeBudgetActionsForBudgetOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeBudgetActionsForBudget API operation for AWS Budgets.
+//
+// Describes all of the budget actions for a budget.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Budgets's
+// API operation DescribeBudgetActionsForBudget for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
+//
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
+//
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - InvalidNextTokenException
+//     The pagination token is invalid.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
+func (c *Budgets) DescribeBudgetActionsForBudget(input *DescribeBudgetActionsForBudgetInput) (*DescribeBudgetActionsForBudgetOutput, error) {
+	req, out := c.DescribeBudgetActionsForBudgetRequest(input)
+	return out, req.Send()
+}
+
+// DescribeBudgetActionsForBudgetWithContext is the same as DescribeBudgetActionsForBudget with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeBudgetActionsForBudget for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetActionsForBudgetWithContext(ctx aws.Context, input *DescribeBudgetActionsForBudgetInput, opts ...request.Option) (*DescribeBudgetActionsForBudgetOutput, error) {
+	req, out := c.DescribeBudgetActionsForBudgetRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeBudgetActionsForBudgetPages iterates over the pages of a DescribeBudgetActionsForBudget operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeBudgetActionsForBudget method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeBudgetActionsForBudget operation.
+//	pageNum := 0
+//	err := client.DescribeBudgetActionsForBudgetPages(params,
+//	    func(page *budgets.DescribeBudgetActionsForBudgetOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Budgets) DescribeBudgetActionsForBudgetPages(input *DescribeBudgetActionsForBudgetInput, fn func(*DescribeBudgetActionsForBudgetOutput, bool) bool) error {
+	return c.DescribeBudgetActionsForBudgetPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeBudgetActionsForBudgetPagesWithContext same as DescribeBudgetActionsForBudgetPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetActionsForBudgetPagesWithContext(ctx aws.Context, input *DescribeBudgetActionsForBudgetInput, fn func(*DescribeBudgetActionsForBudgetOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeBudgetActionsForBudgetInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeBudgetActionsForBudgetRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeBudgetActionsForBudgetOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opDescribeBudgetNotificationsForAccount = "DescribeBudgetNotificationsForAccount"
+
+// DescribeBudgetNotificationsForAccountRequest generates a "aws/request.Request" representing the
+// client's request for the DescribeBudgetNotificationsForAccount operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See DescribeBudgetNotificationsForAccount for more information on using the DescribeBudgetNotificationsForAccount
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the DescribeBudgetNotificationsForAccountRequest method.
+//	req, resp := client.DescribeBudgetNotificationsForAccountRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *Budgets) DescribeBudgetNotificationsForAccountRequest(input *DescribeBudgetNotificationsForAccountInput) (req *request.Request, output *DescribeBudgetNotificationsForAccountOutput) {
+	op := &request.Operation{
+		Name:       opDescribeBudgetNotificationsForAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeBudgetNotificationsForAccountInput{}
+	}
+
+	output = &DescribeBudgetNotificationsForAccountOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// DescribeBudgetNotificationsForAccount API operation for AWS Budgets.
+//
+// Lists the budget names and notifications that are associated with an account.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Budgets's
+// API operation DescribeBudgetNotificationsForAccount for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
+//
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
+//
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - InvalidNextTokenException
+//     The pagination token is invalid.
+//
+//   - ExpiredNextTokenException
+//     The pagination token expired.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
+func (c *Budgets) DescribeBudgetNotificationsForAccount(input *DescribeBudgetNotificationsForAccountInput) (*DescribeBudgetNotificationsForAccountOutput, error) {
+	req, out := c.DescribeBudgetNotificationsForAccountRequest(input)
+	return out, req.Send()
+}
+
+// DescribeBudgetNotificationsForAccountWithContext is the same as DescribeBudgetNotificationsForAccount with the addition of
+// the ability to pass a context and additional request options.
+//
+// See DescribeBudgetNotificationsForAccount for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetNotificationsForAccountWithContext(ctx aws.Context, input *DescribeBudgetNotificationsForAccountInput, opts ...request.Option) (*DescribeBudgetNotificationsForAccountOutput, error) {
+	req, out := c.DescribeBudgetNotificationsForAccountRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+// DescribeBudgetNotificationsForAccountPages iterates over the pages of a DescribeBudgetNotificationsForAccount operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeBudgetNotificationsForAccount method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeBudgetNotificationsForAccount operation.
+//	pageNum := 0
+//	err := client.DescribeBudgetNotificationsForAccountPages(params,
+//	    func(page *budgets.DescribeBudgetNotificationsForAccountOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Budgets) DescribeBudgetNotificationsForAccountPages(input *DescribeBudgetNotificationsForAccountInput, fn func(*DescribeBudgetNotificationsForAccountOutput, bool) bool) error {
+	return c.DescribeBudgetNotificationsForAccountPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeBudgetNotificationsForAccountPagesWithContext same as DescribeBudgetNotificationsForAccountPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetNotificationsForAccountPagesWithContext(ctx aws.Context, input *DescribeBudgetNotificationsForAccountInput, fn func(*DescribeBudgetNotificationsForAccountOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeBudgetNotificationsForAccountInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeBudgetNotificationsForAccountRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeBudgetNotificationsForAccountOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeBudgetPerformanceHistory = "DescribeBudgetPerformanceHistory"
 
 // DescribeBudgetPerformanceHistoryRequest generates a "aws/request.Request" representing the
@@ -648,19 +1579,24 @@ const opDescribeBudgetPerformanceHistory = "DescribeBudgetPerformanceHistory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeBudgetPerformanceHistoryRequest method.
+//	req, resp := client.DescribeBudgetPerformanceHistoryRequest(params)
 //
-//    // Example sending a request using the DescribeBudgetPerformanceHistoryRequest method.
-//    req, resp := client.DescribeBudgetPerformanceHistoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) DescribeBudgetPerformanceHistoryRequest(input *DescribeBudgetPerformanceHistoryInput) (req *request.Request, output *DescribeBudgetPerformanceHistoryOutput) {
 	op := &request.Operation{
 		Name:       opDescribeBudgetPerformanceHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -684,24 +1620,31 @@ func (c *Budgets) DescribeBudgetPerformanceHistoryRequest(input *DescribeBudgetP
 // See the AWS API reference guide for AWS Budgets's
 // API operation DescribeBudgetPerformanceHistory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The pagination token is invalid.
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
 //
-//   * ErrCodeExpiredNextTokenException "ExpiredNextTokenException"
-//   The pagination token expired.
+//   - InvalidNextTokenException
+//     The pagination token is invalid.
 //
+//   - ExpiredNextTokenException
+//     The pagination token expired.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) DescribeBudgetPerformanceHistory(input *DescribeBudgetPerformanceHistoryInput) (*DescribeBudgetPerformanceHistoryOutput, error) {
 	req, out := c.DescribeBudgetPerformanceHistoryRequest(input)
 	return out, req.Send()
@@ -723,6 +1666,57 @@ func (c *Budgets) DescribeBudgetPerformanceHistoryWithContext(ctx aws.Context, i
 	return out, req.Send()
 }
 
+// DescribeBudgetPerformanceHistoryPages iterates over the pages of a DescribeBudgetPerformanceHistory operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeBudgetPerformanceHistory method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeBudgetPerformanceHistory operation.
+//	pageNum := 0
+//	err := client.DescribeBudgetPerformanceHistoryPages(params,
+//	    func(page *budgets.DescribeBudgetPerformanceHistoryOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Budgets) DescribeBudgetPerformanceHistoryPages(input *DescribeBudgetPerformanceHistoryInput, fn func(*DescribeBudgetPerformanceHistoryOutput, bool) bool) error {
+	return c.DescribeBudgetPerformanceHistoryPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeBudgetPerformanceHistoryPagesWithContext same as DescribeBudgetPerformanceHistoryPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetPerformanceHistoryPagesWithContext(ctx aws.Context, input *DescribeBudgetPerformanceHistoryInput, fn func(*DescribeBudgetPerformanceHistoryOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeBudgetPerformanceHistoryInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeBudgetPerformanceHistoryRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeBudgetPerformanceHistoryOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeBudgets = "DescribeBudgets"
 
 // DescribeBudgetsRequest generates a "aws/request.Request" representing the
@@ -739,19 +1733,24 @@ const opDescribeBudgets = "DescribeBudgets"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeBudgetsRequest method.
+//	req, resp := client.DescribeBudgetsRequest(params)
 //
-//    // Example sending a request using the DescribeBudgetsRequest method.
-//    req, resp := client.DescribeBudgetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) (req *request.Request, output *DescribeBudgetsOutput) {
 	op := &request.Operation{
 		Name:       opDescribeBudgets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -767,6 +1766,10 @@ func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) (req *requ
 //
 // Lists the budgets that are associated with an account.
 //
+// The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits,
+// see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples)
+// section.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -774,24 +1777,31 @@ func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) (req *requ
 // See the AWS API reference guide for AWS Budgets's
 // API operation DescribeBudgets for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The pagination token is invalid.
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
 //
-//   * ErrCodeExpiredNextTokenException "ExpiredNextTokenException"
-//   The pagination token expired.
+//   - InvalidNextTokenException
+//     The pagination token is invalid.
 //
+//   - ExpiredNextTokenException
+//     The pagination token expired.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) DescribeBudgets(input *DescribeBudgetsInput) (*DescribeBudgetsOutput, error) {
 	req, out := c.DescribeBudgetsRequest(input)
 	return out, req.Send()
@@ -813,6 +1823,57 @@ func (c *Budgets) DescribeBudgetsWithContext(ctx aws.Context, input *DescribeBud
 	return out, req.Send()
 }
 
+// DescribeBudgetsPages iterates over the pages of a DescribeBudgets operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeBudgets method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeBudgets operation.
+//	pageNum := 0
+//	err := client.DescribeBudgetsPages(params,
+//	    func(page *budgets.DescribeBudgetsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Budgets) DescribeBudgetsPages(input *DescribeBudgetsInput, fn func(*DescribeBudgetsOutput, bool) bool) error {
+	return c.DescribeBudgetsPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeBudgetsPagesWithContext same as DescribeBudgetsPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeBudgetsPagesWithContext(ctx aws.Context, input *DescribeBudgetsInput, fn func(*DescribeBudgetsOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeBudgetsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeBudgetsRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeBudgetsOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeNotificationsForBudget = "DescribeNotificationsForBudget"
 
 // DescribeNotificationsForBudgetRequest generates a "aws/request.Request" representing the
@@ -829,19 +1890,24 @@ const opDescribeNotificationsForBudget = "DescribeNotificationsForBudget"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeNotificationsForBudgetRequest method.
+//	req, resp := client.DescribeNotificationsForBudgetRequest(params)
 //
-//    // Example sending a request using the DescribeNotificationsForBudgetRequest method.
-//    req, resp := client.DescribeNotificationsForBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) DescribeNotificationsForBudgetRequest(input *DescribeNotificationsForBudgetInput) (req *request.Request, output *DescribeNotificationsForBudgetOutput) {
 	op := &request.Operation{
 		Name:       opDescribeNotificationsForBudget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -864,24 +1930,31 @@ func (c *Budgets) DescribeNotificationsForBudgetRequest(input *DescribeNotificat
 // See the AWS API reference guide for AWS Budgets's
 // API operation DescribeNotificationsForBudget for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The pagination token is invalid.
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
 //
-//   * ErrCodeExpiredNextTokenException "ExpiredNextTokenException"
-//   The pagination token expired.
+//   - InvalidNextTokenException
+//     The pagination token is invalid.
 //
+//   - ExpiredNextTokenException
+//     The pagination token expired.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) DescribeNotificationsForBudget(input *DescribeNotificationsForBudgetInput) (*DescribeNotificationsForBudgetOutput, error) {
 	req, out := c.DescribeNotificationsForBudgetRequest(input)
 	return out, req.Send()
@@ -903,6 +1976,57 @@ func (c *Budgets) DescribeNotificationsForBudgetWithContext(ctx aws.Context, inp
 	return out, req.Send()
 }
 
+// DescribeNotificationsForBudgetPages iterates over the pages of a DescribeNotificationsForBudget operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeNotificationsForBudget method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeNotificationsForBudget operation.
+//	pageNum := 0
+//	err := client.DescribeNotificationsForBudgetPages(params,
+//	    func(page *budgets.DescribeNotificationsForBudgetOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Budgets) DescribeNotificationsForBudgetPages(input *DescribeNotificationsForBudgetInput, fn func(*DescribeNotificationsForBudgetOutput, bool) bool) error {
+	return c.DescribeNotificationsForBudgetPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeNotificationsForBudgetPagesWithContext same as DescribeNotificationsForBudgetPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeNotificationsForBudgetPagesWithContext(ctx aws.Context, input *DescribeNotificationsForBudgetInput, fn func(*DescribeNotificationsForBudgetOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeNotificationsForBudgetInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeNotificationsForBudgetRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeNotificationsForBudgetOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
 const opDescribeSubscribersForNotification = "DescribeSubscribersForNotification"
 
 // DescribeSubscribersForNotificationRequest generates a "aws/request.Request" representing the
@@ -919,19 +2043,24 @@ const opDescribeSubscribersForNotification = "DescribeSubscribersForNotification
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeSubscribersForNotificationRequest method.
+//	req, resp := client.DescribeSubscribersForNotificationRequest(params)
 //
-//    // Example sending a request using the DescribeSubscribersForNotificationRequest method.
-//    req, resp := client.DescribeSubscribersForNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) DescribeSubscribersForNotificationRequest(input *DescribeSubscribersForNotificationInput) (req *request.Request, output *DescribeSubscribersForNotificationOutput) {
 	op := &request.Operation{
 		Name:       opDescribeSubscribersForNotification,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &request.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -954,24 +2083,31 @@ func (c *Budgets) DescribeSubscribersForNotificationRequest(input *DescribeSubsc
 // See the AWS API reference guide for AWS Budgets's
 // API operation DescribeSubscribersForNotification for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The pagination token is invalid.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeExpiredNextTokenException "ExpiredNextTokenException"
-//   The pagination token expired.
+//   - InvalidNextTokenException
+//     The pagination token is invalid.
 //
+//   - ExpiredNextTokenException
+//     The pagination token expired.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) DescribeSubscribersForNotification(input *DescribeSubscribersForNotificationInput) (*DescribeSubscribersForNotificationOutput, error) {
 	req, out := c.DescribeSubscribersForNotificationRequest(input)
 	return out, req.Send()
@@ -993,6 +2129,151 @@ func (c *Budgets) DescribeSubscribersForNotificationWithContext(ctx aws.Context,
 	return out, req.Send()
 }
 
+// DescribeSubscribersForNotificationPages iterates over the pages of a DescribeSubscribersForNotification operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See DescribeSubscribersForNotification method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//	// Example iterating over at most 3 pages of a DescribeSubscribersForNotification operation.
+//	pageNum := 0
+//	err := client.DescribeSubscribersForNotificationPages(params,
+//	    func(page *budgets.DescribeSubscribersForNotificationOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
+func (c *Budgets) DescribeSubscribersForNotificationPages(input *DescribeSubscribersForNotificationInput, fn func(*DescribeSubscribersForNotificationOutput, bool) bool) error {
+	return c.DescribeSubscribersForNotificationPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// DescribeSubscribersForNotificationPagesWithContext same as DescribeSubscribersForNotificationPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) DescribeSubscribersForNotificationPagesWithContext(ctx aws.Context, input *DescribeSubscribersForNotificationInput, fn func(*DescribeSubscribersForNotificationOutput, bool) bool, opts ...request.Option) error {
+	p := request.Pagination{
+		NewRequest: func() (*request.Request, error) {
+			var inCpy *DescribeSubscribersForNotificationInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req, _ := c.DescribeSubscribersForNotificationRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req, nil
+		},
+	}
+
+	for p.Next() {
+		if !fn(p.Page().(*DescribeSubscribersForNotificationOutput), !p.HasNextPage()) {
+			break
+		}
+	}
+
+	return p.Err()
+}
+
+const opExecuteBudgetAction = "ExecuteBudgetAction"
+
+// ExecuteBudgetActionRequest generates a "aws/request.Request" representing the
+// client's request for the ExecuteBudgetAction operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ExecuteBudgetAction for more information on using the ExecuteBudgetAction
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the ExecuteBudgetActionRequest method.
+//	req, resp := client.ExecuteBudgetActionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *Budgets) ExecuteBudgetActionRequest(input *ExecuteBudgetActionInput) (req *request.Request, output *ExecuteBudgetActionOutput) {
+	op := &request.Operation{
+		Name:       opExecuteBudgetAction,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ExecuteBudgetActionInput{}
+	}
+
+	output = &ExecuteBudgetActionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ExecuteBudgetAction API operation for AWS Budgets.
+//
+// Executes a budget action.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Budgets's
+// API operation ExecuteBudgetAction for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
+//
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
+//
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ResourceLockedException
+//     The request was received and recognized by the server, but the server rejected
+//     that particular method for the requested resource.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
+func (c *Budgets) ExecuteBudgetAction(input *ExecuteBudgetActionInput) (*ExecuteBudgetActionOutput, error) {
+	req, out := c.ExecuteBudgetActionRequest(input)
+	return out, req.Send()
+}
+
+// ExecuteBudgetActionWithContext is the same as ExecuteBudgetAction with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ExecuteBudgetAction for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) ExecuteBudgetActionWithContext(ctx aws.Context, input *ExecuteBudgetActionInput, opts ...request.Option) (*ExecuteBudgetActionOutput, error) {
+	req, out := c.ExecuteBudgetActionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateBudget = "UpdateBudget"
 
 // UpdateBudgetRequest generates a "aws/request.Request" representing the
@@ -1009,14 +2290,13 @@ const opUpdateBudget = "UpdateBudget"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateBudgetRequest method.
+//	req, resp := client.UpdateBudgetRequest(params)
 //
-//    // Example sending a request using the UpdateBudgetRequest method.
-//    req, resp := client.UpdateBudgetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) (req *request.Request, output *UpdateBudgetOutput) {
 	op := &request.Operation{
 		Name:       opUpdateBudget,
@@ -1038,7 +2318,12 @@ func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) (req *request.Re
 //
 // Updates a budget. You can change every part of a budget except for the budgetName
 // and the calculatedSpend. When you modify a budget, the calculatedSpend drops
-// to zero until AWS has new usage data to use for forecasting.
+// to zero until Amazon Web Services has new usage data to use for forecasting.
+//
+// Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax
+// at one time. Use the syntax that matches your case. The Request Syntax section
+// shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_UpdateBudget.html#API_UpdateBudget_Examples)
+// section.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1047,18 +2332,25 @@ func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) (req *request.Re
 // See the AWS API reference guide for AWS Budgets's
 // API operation UpdateBudget for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) UpdateBudget(input *UpdateBudgetInput) (*UpdateBudgetOutput, error) {
 	req, out := c.UpdateBudgetRequest(input)
 	return out, req.Send()
@@ -1080,6 +2372,100 @@ func (c *Budgets) UpdateBudgetWithContext(ctx aws.Context, input *UpdateBudgetIn
 	return out, req.Send()
 }
 
+const opUpdateBudgetAction = "UpdateBudgetAction"
+
+// UpdateBudgetActionRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateBudgetAction operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateBudgetAction for more information on using the UpdateBudgetAction
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//	// Example sending a request using the UpdateBudgetActionRequest method.
+//	req, resp := client.UpdateBudgetActionRequest(params)
+//
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
+func (c *Budgets) UpdateBudgetActionRequest(input *UpdateBudgetActionInput) (req *request.Request, output *UpdateBudgetActionOutput) {
+	op := &request.Operation{
+		Name:       opUpdateBudgetAction,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateBudgetActionInput{}
+	}
+
+	output = &UpdateBudgetActionOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// UpdateBudgetAction API operation for AWS Budgets.
+//
+// Updates a budget action.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for AWS Budgets's
+// API operation UpdateBudgetAction for usage and error information.
+//
+// Returned Error Types:
+//
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
+//
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
+//
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ResourceLockedException
+//     The request was received and recognized by the server, but the server rejected
+//     that particular method for the requested resource.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
+func (c *Budgets) UpdateBudgetAction(input *UpdateBudgetActionInput) (*UpdateBudgetActionOutput, error) {
+	req, out := c.UpdateBudgetActionRequest(input)
+	return out, req.Send()
+}
+
+// UpdateBudgetActionWithContext is the same as UpdateBudgetAction with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateBudgetAction for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Budgets) UpdateBudgetActionWithContext(ctx aws.Context, input *UpdateBudgetActionInput, opts ...request.Option) (*UpdateBudgetActionOutput, error) {
+	req, out := c.UpdateBudgetActionRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
 const opUpdateNotification = "UpdateNotification"
 
 // UpdateNotificationRequest generates a "aws/request.Request" representing the
@@ -1096,14 +2482,13 @@ const opUpdateNotification = "UpdateNotification"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateNotificationRequest method.
+//	req, resp := client.UpdateNotificationRequest(params)
 //
-//    // Example sending a request using the UpdateNotificationRequest method.
-//    req, resp := client.UpdateNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) UpdateNotificationRequest(input *UpdateNotificationInput) (req *request.Request, output *UpdateNotificationOutput) {
 	op := &request.Operation{
 		Name:       opUpdateNotification,
@@ -1132,21 +2517,28 @@ func (c *Budgets) UpdateNotificationRequest(input *UpdateNotificationInput) (req
 // See the AWS API reference guide for AWS Budgets's
 // API operation UpdateNotification for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The budget name already exists. Budget names must be unique within an account.
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
 //
+//   - DuplicateRecordException
+//     The budget name already exists. Budget names must be unique within an account.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) UpdateNotification(input *UpdateNotificationInput) (*UpdateNotificationOutput, error) {
 	req, out := c.UpdateNotificationRequest(input)
 	return out, req.Send()
@@ -1184,14 +2576,13 @@ const opUpdateSubscriber = "UpdateSubscriber"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateSubscriberRequest method.
+//	req, resp := client.UpdateSubscriberRequest(params)
 //
-//    // Example sending a request using the UpdateSubscriberRequest method.
-//    req, resp := client.UpdateSubscriberRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) (req *request.Request, output *UpdateSubscriberOutput) {
 	op := &request.Operation{
 		Name:       opUpdateSubscriber,
@@ -1220,21 +2611,28 @@ func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) (req *re
 // See the AWS API reference guide for AWS Budgets's
 // API operation UpdateSubscriber for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   An error on the server occurred during the processing of your request. Try
-//   again later.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   An error on the client occurred. Typically, the cause is an invalid input
-//   value.
+//   - InternalErrorException
+//     An error on the server occurred during the processing of your request. Try
+//     again later.
 //
-//   * ErrCodeNotFoundException "NotFoundException"
-//   We can’t locate the resource that you specified.
+//   - InvalidParameterException
+//     An error on the client occurred. Typically, the cause is an invalid input
+//     value.
 //
-//   * ErrCodeDuplicateRecordException "DuplicateRecordException"
-//   The budget name already exists. Budget names must be unique within an account.
+//   - NotFoundException
+//     We can’t locate the resource that you specified.
 //
+//   - DuplicateRecordException
+//     The budget name already exists. Budget names must be unique within an account.
+//
+//   - AccessDeniedException
+//     You are not authorized to use this operation with the given parameters.
+//
+//   - ThrottlingException
+//     The number of API requests has exceeded the maximum allowed API request throttling
+//     limit for the account.
 func (c *Budgets) UpdateSubscriber(input *UpdateSubscriberInput) (*UpdateSubscriberOutput, error) {
 	req, out := c.UpdateSubscriberRequest(input)
 	return out, req.Send()
@@ -1256,31 +2654,484 @@ func (c *Budgets) UpdateSubscriberWithContext(ctx aws.Context, input *UpdateSubs
 	return out, req.Send()
 }
 
-// Represents the output of the CreateBudget operation. The content consists
-// of the detailed metadata and data file information, and the current status
-// of the budget object.
+// You are not authorized to use this operation with the given parameters.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
 //
-// This is the ARN pattern for a budget:
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
 //
-// arn:aws:budgetservice::AccountId:budget/budgetName
-type Budget struct {
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A budget action resource.
+type Action struct {
 	_ struct{} `type:"structure"`
 
-	// The total amount of cost, usage, RI utilization, or RI coverage that you
-	// want to track with your budget.
+	// A system-generated universally unique identifier (UUID) for the action.
 	//
-	// BudgetLimit is required for cost or usage budgets, but optional for RI utilization
-	// or coverage budgets. RI utilization or coverage budgets default to 100, which
-	// is the only valid value for RI utilization or coverage budgets.
-	BudgetLimit *Spend `type:"structure"`
+	// ActionId is a required field
+	ActionId *string `min:"36" type:"string" required:"true"`
 
-	// The name of a budget. The name must be unique within accounts. The : and
-	// \ characters aren't allowed in BudgetName.
+	// The trigger threshold of the action.
+	//
+	// ActionThreshold is a required field
+	ActionThreshold *ActionThreshold `type:"structure" required:"true"`
+
+	// The type of action. This defines the type of tasks that can be carried out
+	// by this action. This field also determines the format for definition.
+	//
+	// ActionType is a required field
+	ActionType *string `type:"string" required:"true" enum:"ActionType"`
+
+	// This specifies if the action needs manual or automatic approval.
+	//
+	// ApprovalModel is a required field
+	ApprovalModel *string `type:"string" required:"true" enum:"ApprovalModel"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
 	//
 	// BudgetName is a required field
 	BudgetName *string `min:"1" type:"string" required:"true"`
 
-	// Whether this budget tracks monetary costs, usage, RI utilization, or RI coverage.
+	// Where you specify all of the type-specific parameters.
+	//
+	// Definition is a required field
+	Definition *Definition `type:"structure" required:"true"`
+
+	// The role passed for action execution and reversion. Roles and actions must
+	// be in the same account.
+	//
+	// ExecutionRoleArn is a required field
+	ExecutionRoleArn *string `min:"32" type:"string" required:"true"`
+
+	// The type of a notification. It must be ACTUAL or FORECASTED.
+	//
+	// NotificationType is a required field
+	NotificationType *string `type:"string" required:"true" enum:"NotificationType"`
+
+	// The status of the action.
+	//
+	// Status is a required field
+	Status *string `type:"string" required:"true" enum:"ActionStatus"`
+
+	// A list of subscribers.
+	//
+	// Subscribers is a required field
+	Subscribers []*Subscriber `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Action) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Action) GoString() string {
+	return s.String()
+}
+
+// SetActionId sets the ActionId field's value.
+func (s *Action) SetActionId(v string) *Action {
+	s.ActionId = &v
+	return s
+}
+
+// SetActionThreshold sets the ActionThreshold field's value.
+func (s *Action) SetActionThreshold(v *ActionThreshold) *Action {
+	s.ActionThreshold = v
+	return s
+}
+
+// SetActionType sets the ActionType field's value.
+func (s *Action) SetActionType(v string) *Action {
+	s.ActionType = &v
+	return s
+}
+
+// SetApprovalModel sets the ApprovalModel field's value.
+func (s *Action) SetApprovalModel(v string) *Action {
+	s.ApprovalModel = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *Action) SetBudgetName(v string) *Action {
+	s.BudgetName = &v
+	return s
+}
+
+// SetDefinition sets the Definition field's value.
+func (s *Action) SetDefinition(v *Definition) *Action {
+	s.Definition = v
+	return s
+}
+
+// SetExecutionRoleArn sets the ExecutionRoleArn field's value.
+func (s *Action) SetExecutionRoleArn(v string) *Action {
+	s.ExecutionRoleArn = &v
+	return s
+}
+
+// SetNotificationType sets the NotificationType field's value.
+func (s *Action) SetNotificationType(v string) *Action {
+	s.NotificationType = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *Action) SetStatus(v string) *Action {
+	s.Status = &v
+	return s
+}
+
+// SetSubscribers sets the Subscribers field's value.
+func (s *Action) SetSubscribers(v []*Subscriber) *Action {
+	s.Subscribers = v
+	return s
+}
+
+// The historical records for a budget action.
+type ActionHistory struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the details for the event.
+	//
+	// ActionHistoryDetails is a required field
+	ActionHistoryDetails *ActionHistoryDetails `type:"structure" required:"true"`
+
+	// This distinguishes between whether the events are triggered by the user or
+	// are generated by the system.
+	//
+	// EventType is a required field
+	EventType *string `type:"string" required:"true" enum:"EventType"`
+
+	// The status of action at the time of the event.
+	//
+	// Status is a required field
+	Status *string `type:"string" required:"true" enum:"ActionStatus"`
+
+	// A generic time stamp. In Java, it's transformed to a Date object.
+	//
+	// Timestamp is a required field
+	Timestamp *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActionHistory) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActionHistory) GoString() string {
+	return s.String()
+}
+
+// SetActionHistoryDetails sets the ActionHistoryDetails field's value.
+func (s *ActionHistory) SetActionHistoryDetails(v *ActionHistoryDetails) *ActionHistory {
+	s.ActionHistoryDetails = v
+	return s
+}
+
+// SetEventType sets the EventType field's value.
+func (s *ActionHistory) SetEventType(v string) *ActionHistory {
+	s.EventType = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *ActionHistory) SetStatus(v string) *ActionHistory {
+	s.Status = &v
+	return s
+}
+
+// SetTimestamp sets the Timestamp field's value.
+func (s *ActionHistory) SetTimestamp(v time.Time) *ActionHistory {
+	s.Timestamp = &v
+	return s
+}
+
+// The description of the details for the event.
+type ActionHistoryDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The budget action resource.
+	//
+	// Action is a required field
+	Action *Action `type:"structure" required:"true"`
+
+	// A generic string.
+	//
+	// Message is a required field
+	Message *string `type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActionHistoryDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActionHistoryDetails) GoString() string {
+	return s.String()
+}
+
+// SetAction sets the Action field's value.
+func (s *ActionHistoryDetails) SetAction(v *Action) *ActionHistoryDetails {
+	s.Action = v
+	return s
+}
+
+// SetMessage sets the Message field's value.
+func (s *ActionHistoryDetails) SetMessage(v string) *ActionHistoryDetails {
+	s.Message = &v
+	return s
+}
+
+// The trigger threshold of the action.
+type ActionThreshold struct {
+	_ struct{} `type:"structure"`
+
+	// The type of threshold for a notification.
+	//
+	// ActionThresholdType is a required field
+	ActionThresholdType *string `type:"string" required:"true" enum:"ThresholdType"`
+
+	// The threshold of a notification.
+	//
+	// ActionThresholdValue is a required field
+	ActionThresholdValue *float64 `type:"double" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActionThreshold) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ActionThreshold) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ActionThreshold) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ActionThreshold"}
+	if s.ActionThresholdType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionThresholdType"))
+	}
+	if s.ActionThresholdValue == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionThresholdValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetActionThresholdType sets the ActionThresholdType field's value.
+func (s *ActionThreshold) SetActionThresholdType(v string) *ActionThreshold {
+	s.ActionThresholdType = &v
+	return s
+}
+
+// SetActionThresholdValue sets the ActionThresholdValue field's value.
+func (s *ActionThreshold) SetActionThresholdValue(v float64) *ActionThreshold {
+	s.ActionThresholdValue = &v
+	return s
+}
+
+// The parameters that determine the budget amount for an auto-adjusting budget.
+type AutoAdjustData struct {
+	_ struct{} `type:"structure"`
+
+	// The string that defines whether your budget auto-adjusts based on historical
+	// or forecasted data.
+	//
+	// AutoAdjustType is a required field
+	AutoAdjustType *string `type:"string" required:"true" enum:"AutoAdjustType"`
+
+	// The parameters that define or describe the historical data that your auto-adjusting
+	// budget is based on.
+	HistoricalOptions *HistoricalOptions `type:"structure"`
+
+	// The last time that your budget was auto-adjusted.
+	LastAutoAdjustTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AutoAdjustData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AutoAdjustData) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoAdjustData) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "AutoAdjustData"}
+	if s.AutoAdjustType == nil {
+		invalidParams.Add(request.NewErrParamRequired("AutoAdjustType"))
+	}
+	if s.HistoricalOptions != nil {
+		if err := s.HistoricalOptions.Validate(); err != nil {
+			invalidParams.AddNested("HistoricalOptions", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAutoAdjustType sets the AutoAdjustType field's value.
+func (s *AutoAdjustData) SetAutoAdjustType(v string) *AutoAdjustData {
+	s.AutoAdjustType = &v
+	return s
+}
+
+// SetHistoricalOptions sets the HistoricalOptions field's value.
+func (s *AutoAdjustData) SetHistoricalOptions(v *HistoricalOptions) *AutoAdjustData {
+	s.HistoricalOptions = v
+	return s
+}
+
+// SetLastAutoAdjustTime sets the LastAutoAdjustTime field's value.
+func (s *AutoAdjustData) SetLastAutoAdjustTime(v time.Time) *AutoAdjustData {
+	s.LastAutoAdjustTime = &v
+	return s
+}
+
+// Represents the output of the CreateBudget operation. The content consists
+// of the detailed metadata and data file information, and the current status
+// of the budget object.
+//
+// This is the Amazon Resource Name (ARN) pattern for a budget:
+//
+// arn:aws:budgets::AccountId:budget/budgetName
+type Budget struct {
+	_ struct{} `type:"structure"`
+
+	// The parameters that determine the budget amount for an auto-adjusting budget.
+	AutoAdjustData *AutoAdjustData `type:"structure"`
+
+	// The total amount of cost, usage, RI utilization, RI coverage, Savings Plans
+	// utilization, or Savings Plans coverage that you want to track with your budget.
+	//
+	// BudgetLimit is required for cost or usage budgets, but optional for RI or
+	// Savings Plans utilization or coverage budgets. RI and Savings Plans utilization
+	// or coverage budgets default to 100. This is the only valid value for RI or
+	// Savings Plans utilization or coverage budgets. You can't use BudgetLimit
+	// with PlannedBudgetLimits for CreateBudget and UpdateBudget actions.
+	BudgetLimit *Spend `type:"structure"`
+
+	// The name of a budget. The name must be unique within an account. The : and
+	// \ characters, and the "/action/" substring, aren't allowed in BudgetName.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+
+	// Specifies whether this budget tracks costs, usage, RI utilization, RI coverage,
+	// Savings Plans utilization, or Savings Plans coverage.
 	//
 	// BudgetType is a required field
 	BudgetType *string `type:"string" required:"true" enum:"BudgetType"`
@@ -1288,11 +3139,13 @@ type Budget struct {
 	// The actual and forecasted cost or usage that the budget tracks.
 	CalculatedSpend *CalculatedSpend `type:"structure"`
 
-	// The cost filters, such as service or region, that are applied to a budget.
+	// The cost filters, such as Region, Service, member account, Tag, or Cost Category,
+	// that are applied to a budget.
 	//
-	// AWS Budgets supports the following services as a filter for RI budgets:
+	// Amazon Web Services Budgets supports the following services as a Service
+	// filter for RI budgets:
 	//
-	//    * Amazon Elastic Compute Cloud - Compute
+	//    * Amazon EC2
 	//
 	//    * Amazon Redshift
 	//
@@ -1300,49 +3153,89 @@ type Budget struct {
 	//
 	//    * Amazon ElastiCache
 	//
-	//    * Amazon Elasticsearch Service
+	//    * Amazon OpenSearch Service
 	CostFilters map[string][]*string `type:"map"`
 
 	// The types of costs that are included in this COST budget.
 	//
-	// USAGE, RI_UTILIZATION, and RI_COVERAGE budgets do not have CostTypes.
+	// USAGE, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, and SAVINGS_PLANS_COVERAGE
+	// budgets do not have CostTypes.
 	CostTypes *CostTypes `type:"structure"`
 
 	// The last time that you updated this budget.
 	LastUpdatedTime *time.Time `type:"timestamp"`
 
-	// The period of time that is covered by a budget. The period has a start date
-	// and an end date. The start date must come before the end date. The end date
-	// must come before 06/15/87 00:00 UTC.
+	// A map containing multiple BudgetLimit, including current or future limits.
 	//
-	// If you create your budget and don't specify a start date, AWS defaults to
-	// the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY).
-	// For example, if you created your budget on January 24, 2018, chose DAILY,
-	// and didn't set a start date, AWS set your start date to 01/24/18 00:00 UTC.
-	// If you chose MONTHLY, AWS set your start date to 01/01/18 00:00 UTC. If you
-	// didn't specify an end date, AWS set your end date to 06/15/87 00:00 UTC.
-	// The defaults are the same for the AWS Billing and Cost Management console
-	// and the API.
+	// PlannedBudgetLimits is available for cost or usage budget and supports both
+	// monthly and quarterly TimeUnit.
+	//
+	// For monthly budgets, provide 12 months of PlannedBudgetLimits values. This
+	// must start from the current month and include the next 11 months. The key
+	// is the start of the month, UTC in epoch seconds.
+	//
+	// For quarterly budgets, provide four quarters of PlannedBudgetLimits value
+	// entries in standard calendar quarter increments. This must start from the
+	// current quarter and include the next three quarters. The key is the start
+	// of the quarter, UTC in epoch seconds.
+	//
+	// If the planned budget expires before 12 months for monthly or four quarters
+	// for quarterly, provide the PlannedBudgetLimits values only for the remaining
+	// periods.
+	//
+	// If the budget begins at a date in the future, provide PlannedBudgetLimits
+	// values from the start date of the budget.
+	//
+	// After all of the BudgetLimit values in PlannedBudgetLimits are used, the
+	// budget continues to use the last limit as the BudgetLimit. At that point,
+	// the planned budget provides the same experience as a fixed budget.
+	//
+	// DescribeBudget and DescribeBudgets response along with PlannedBudgetLimits
+	// also contain BudgetLimit representing the current month or quarter limit
+	// present in PlannedBudgetLimits. This only applies to budgets that are created
+	// with PlannedBudgetLimits. Budgets that are created without PlannedBudgetLimits
+	// only contain BudgetLimit. They don't contain PlannedBudgetLimits.
+	PlannedBudgetLimits map[string]*Spend `type:"map"`
+
+	// The period of time that's covered by a budget. You setthe start date and
+	// end date. The start date must come before the end date. The end date must
+	// come before 06/15/87 00:00 UTC.
+	//
+	// If you create your budget and don't specify a start date, Amazon Web Services
+	// defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY,
+	// or ANNUALLY). For example, if you created your budget on January 24, 2018,
+	// chose DAILY, and didn't set a start date, Amazon Web Services set your start
+	// date to 01/24/18 00:00 UTC. If you chose MONTHLY, Amazon Web Services set
+	// your start date to 01/01/18 00:00 UTC. If you didn't specify an end date,
+	// Amazon Web Services set your end date to 06/15/87 00:00 UTC. The defaults
+	// are the same for the Billing and Cost Management console and the API.
 	//
 	// You can change either date with the UpdateBudget operation.
 	//
-	// After the end date, AWS deletes the budget and all associated notifications
-	// and subscribers.
+	// After the end date, Amazon Web Services deletes the budget and all the associated
+	// notifications and subscribers.
 	TimePeriod *TimePeriod `type:"structure"`
 
 	// The length of time until a budget resets the actual and forecasted spend.
-	// DAILY is available only for RI_UTILIZATION and RI_COVERAGE budgets.
 	//
 	// TimeUnit is a required field
 	TimeUnit *string `type:"string" required:"true" enum:"TimeUnit"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Budget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Budget) GoString() string {
 	return s.String()
 }
@@ -1362,6 +3255,11 @@ func (s *Budget) Validate() error {
 	if s.TimeUnit == nil {
 		invalidParams.Add(request.NewErrParamRequired("TimeUnit"))
 	}
+	if s.AutoAdjustData != nil {
+		if err := s.AutoAdjustData.Validate(); err != nil {
+			invalidParams.AddNested("AutoAdjustData", err.(request.ErrInvalidParams))
+		}
+	}
 	if s.BudgetLimit != nil {
 		if err := s.BudgetLimit.Validate(); err != nil {
 			invalidParams.AddNested("BudgetLimit", err.(request.ErrInvalidParams))
@@ -1372,11 +3270,27 @@ func (s *Budget) Validate() error {
 			invalidParams.AddNested("CalculatedSpend", err.(request.ErrInvalidParams))
 		}
 	}
+	if s.PlannedBudgetLimits != nil {
+		for i, v := range s.PlannedBudgetLimits {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PlannedBudgetLimits", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAutoAdjustData sets the AutoAdjustData field's value.
+func (s *Budget) SetAutoAdjustData(v *AutoAdjustData) *Budget {
+	s.AutoAdjustData = v
+	return s
 }
 
 // SetBudgetLimit sets the BudgetLimit field's value.
@@ -1421,6 +3335,12 @@ func (s *Budget) SetLastUpdatedTime(v time.Time) *Budget {
 	return s
 }
 
+// SetPlannedBudgetLimits sets the PlannedBudgetLimits field's value.
+func (s *Budget) SetPlannedBudgetLimits(v map[string]*Spend) *Budget {
+	s.PlannedBudgetLimits = v
+	return s
+}
+
 // SetTimePeriod sets the TimePeriod field's value.
 func (s *Budget) SetTimePeriod(v *TimePeriod) *Budget {
 	s.TimePeriod = v
@@ -1433,22 +3353,64 @@ func (s *Budget) SetTimeUnit(v string) *Budget {
 	return s
 }
 
+// The budget name and associated notifications for an account.
+type BudgetNotificationsForAccount struct {
+	_ struct{} `type:"structure"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	BudgetName *string `min:"1" type:"string"`
+
+	// A list of notifications.
+	Notifications []*Notification `type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BudgetNotificationsForAccount) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BudgetNotificationsForAccount) GoString() string {
+	return s.String()
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *BudgetNotificationsForAccount) SetBudgetName(v string) *BudgetNotificationsForAccount {
+	s.BudgetName = &v
+	return s
+}
+
+// SetNotifications sets the Notifications field's value.
+func (s *BudgetNotificationsForAccount) SetNotifications(v []*Notification) *BudgetNotificationsForAccount {
+	s.Notifications = v
+	return s
+}
+
 // A history of the state of a budget at the end of the budget's specified time
 // period.
 type BudgetPerformanceHistory struct {
 	_ struct{} `type:"structure"`
 
-	// A string that represents the budget name. The ":" and "\" characters aren't
-	// allowed.
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
 	BudgetName *string `min:"1" type:"string"`
 
 	// The type of a budget. It must be one of the following types:
 	//
-	// COST, USAGE, RI_UTILIZATION, or RI_COVERAGE.
+	// COST, USAGE, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, or SAVINGS_PLANS_COVERAGE.
 	BudgetType *string `type:"string" enum:"BudgetType"`
 
-	// A list of amounts of cost or usage that you created budgets for, compared
-	// to your actual costs or usage.
+	// A list of amounts of cost or usage that you created budgets for, which are
+	// compared to your actual costs or usage.
 	BudgetedAndActualAmountsList []*BudgetedAndActualAmounts `type:"list"`
 
 	// The history of the cost filters for a budget during the specified time period.
@@ -1461,12 +3423,20 @@ type BudgetPerformanceHistory struct {
 	TimeUnit *string `type:"string" enum:"TimeUnit"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BudgetPerformanceHistory) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BudgetPerformanceHistory) GoString() string {
 	return s.String()
 }
@@ -1518,16 +3488,24 @@ type BudgetedAndActualAmounts struct {
 	// The amount of cost or usage that you created the budget for.
 	BudgetedAmount *Spend `type:"structure"`
 
-	// The time period covered by this budget comparison.
+	// The time period that's covered by this budget comparison.
 	TimePeriod *TimePeriod `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BudgetedAndActualAmounts) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BudgetedAndActualAmounts) GoString() string {
 	return s.String()
 }
@@ -1551,30 +3529,40 @@ func (s *BudgetedAndActualAmounts) SetTimePeriod(v *TimePeriod) *BudgetedAndActu
 }
 
 // The spend objects that are associated with this budget. The actualSpend tracks
-// how much you've used, cost, usage, or RI units, and the forecastedSpend tracks
-// how much you are predicted to spend if your current usage remains steady.
+// how much you've used, cost, usage, RI units, or Savings Plans units and the
+// forecastedSpend tracks how much that you're predicted to spend based on your
+// historical usage profile.
 //
-// For example, if it is the 20th of the month and you have spent 50 dollars
+// For example, if it's the 20th of the month and you have spent 50 dollars
 // on Amazon EC2, your actualSpend is 50 USD, and your forecastedSpend is 75
 // USD.
 type CalculatedSpend struct {
 	_ struct{} `type:"structure"`
 
-	// The amount of cost, usage, or RI units that you have used.
+	// The amount of cost, usage, RI units, or Savings Plans units that you used.
 	//
 	// ActualSpend is a required field
 	ActualSpend *Spend `type:"structure" required:"true"`
 
-	// The amount of cost, usage, or RI units that you are forecasted to use.
+	// The amount of cost, usage, RI units, or Savings Plans units that you're forecasted
+	// to use.
 	ForecastedSpend *Spend `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CalculatedSpend) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CalculatedSpend) GoString() string {
 	return s.String()
 }
@@ -1616,7 +3604,8 @@ func (s *CalculatedSpend) SetForecastedSpend(v *Spend) *CalculatedSpend {
 
 // The types of cost that are included in a COST budget, such as tax and subscriptions.
 //
-// USAGE, RI_UTILIZATION, and RI_COVERAGE budgets do not have CostTypes.
+// USAGE, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, and SAVINGS_PLANS_COVERAGE
+// budgets don't have CostTypes.
 type CostTypes struct {
 	_ struct{} `type:"structure"`
 
@@ -1676,12 +3665,20 @@ type CostTypes struct {
 	UseBlended *bool `type:"boolean"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CostTypes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CostTypes) GoString() string {
 	return s.String()
 }
@@ -1752,6 +3749,255 @@ func (s *CostTypes) SetUseBlended(v bool) *CostTypes {
 	return s
 }
 
+type CreateBudgetActionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// The trigger threshold of the action.
+	//
+	// ActionThreshold is a required field
+	ActionThreshold *ActionThreshold `type:"structure" required:"true"`
+
+	// The type of action. This defines the type of tasks that can be carried out
+	// by this action. This field also determines the format for definition.
+	//
+	// ActionType is a required field
+	ActionType *string `type:"string" required:"true" enum:"ActionType"`
+
+	// This specifies if the action needs manual or automatic approval.
+	//
+	// ApprovalModel is a required field
+	ApprovalModel *string `type:"string" required:"true" enum:"ApprovalModel"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+
+	// Specifies all of the type-specific parameters.
+	//
+	// Definition is a required field
+	Definition *Definition `type:"structure" required:"true"`
+
+	// The role passed for action execution and reversion. Roles and actions must
+	// be in the same account.
+	//
+	// ExecutionRoleArn is a required field
+	ExecutionRoleArn *string `min:"32" type:"string" required:"true"`
+
+	// The type of a notification. It must be ACTUAL or FORECASTED.
+	//
+	// NotificationType is a required field
+	NotificationType *string `type:"string" required:"true" enum:"NotificationType"`
+
+	// A list of subscribers.
+	//
+	// Subscribers is a required field
+	Subscribers []*Subscriber `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateBudgetActionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateBudgetActionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateBudgetActionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "CreateBudgetActionInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.ActionThreshold == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionThreshold"))
+	}
+	if s.ActionType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionType"))
+	}
+	if s.ApprovalModel == nil {
+		invalidParams.Add(request.NewErrParamRequired("ApprovalModel"))
+	}
+	if s.BudgetName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BudgetName", 1))
+	}
+	if s.Definition == nil {
+		invalidParams.Add(request.NewErrParamRequired("Definition"))
+	}
+	if s.ExecutionRoleArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if s.ExecutionRoleArn != nil && len(*s.ExecutionRoleArn) < 32 {
+		invalidParams.Add(request.NewErrParamMinLen("ExecutionRoleArn", 32))
+	}
+	if s.NotificationType == nil {
+		invalidParams.Add(request.NewErrParamRequired("NotificationType"))
+	}
+	if s.Subscribers == nil {
+		invalidParams.Add(request.NewErrParamRequired("Subscribers"))
+	}
+	if s.Subscribers != nil && len(s.Subscribers) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Subscribers", 1))
+	}
+	if s.ActionThreshold != nil {
+		if err := s.ActionThreshold.Validate(); err != nil {
+			invalidParams.AddNested("ActionThreshold", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Definition != nil {
+		if err := s.Definition.Validate(); err != nil {
+			invalidParams.AddNested("Definition", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Subscribers != nil {
+		for i, v := range s.Subscribers {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscribers", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *CreateBudgetActionInput) SetAccountId(v string) *CreateBudgetActionInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetActionThreshold sets the ActionThreshold field's value.
+func (s *CreateBudgetActionInput) SetActionThreshold(v *ActionThreshold) *CreateBudgetActionInput {
+	s.ActionThreshold = v
+	return s
+}
+
+// SetActionType sets the ActionType field's value.
+func (s *CreateBudgetActionInput) SetActionType(v string) *CreateBudgetActionInput {
+	s.ActionType = &v
+	return s
+}
+
+// SetApprovalModel sets the ApprovalModel field's value.
+func (s *CreateBudgetActionInput) SetApprovalModel(v string) *CreateBudgetActionInput {
+	s.ApprovalModel = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *CreateBudgetActionInput) SetBudgetName(v string) *CreateBudgetActionInput {
+	s.BudgetName = &v
+	return s
+}
+
+// SetDefinition sets the Definition field's value.
+func (s *CreateBudgetActionInput) SetDefinition(v *Definition) *CreateBudgetActionInput {
+	s.Definition = v
+	return s
+}
+
+// SetExecutionRoleArn sets the ExecutionRoleArn field's value.
+func (s *CreateBudgetActionInput) SetExecutionRoleArn(v string) *CreateBudgetActionInput {
+	s.ExecutionRoleArn = &v
+	return s
+}
+
+// SetNotificationType sets the NotificationType field's value.
+func (s *CreateBudgetActionInput) SetNotificationType(v string) *CreateBudgetActionInput {
+	s.NotificationType = &v
+	return s
+}
+
+// SetSubscribers sets the Subscribers field's value.
+func (s *CreateBudgetActionInput) SetSubscribers(v []*Subscriber) *CreateBudgetActionInput {
+	s.Subscribers = v
+	return s
+}
+
+type CreateBudgetActionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A system-generated universally unique identifier (UUID) for the action.
+	//
+	// ActionId is a required field
+	ActionId *string `min:"36" type:"string" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateBudgetActionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreateBudgetActionOutput) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *CreateBudgetActionOutput) SetAccountId(v string) *CreateBudgetActionOutput {
+	s.AccountId = &v
+	return s
+}
+
+// SetActionId sets the ActionId field's value.
+func (s *CreateBudgetActionOutput) SetActionId(v string) *CreateBudgetActionOutput {
+	s.ActionId = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *CreateBudgetActionOutput) SetBudgetName(v string) *CreateBudgetActionOutput {
+	s.BudgetName = &v
+	return s
+}
+
 // Request of CreateBudget
 type CreateBudgetInput struct {
 	_ struct{} `type:"structure"`
@@ -1769,17 +4015,25 @@ type CreateBudgetInput struct {
 	// A notification that you want to associate with a budget. A budget can have
 	// up to five notifications, and each notification can have one SNS subscriber
 	// and up to 10 email subscribers. If you include notifications and subscribers
-	// in your CreateBudget call, AWS creates the notifications and subscribers
-	// for you.
+	// in your CreateBudget call, Amazon Web Services creates the notifications
+	// and subscribers for you.
 	NotificationsWithSubscribers []*NotificationWithSubscribers `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBudgetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBudgetInput) GoString() string {
 	return s.String()
 }
@@ -1841,12 +4095,20 @@ type CreateBudgetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBudgetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateBudgetOutput) GoString() string {
 	return s.String()
 }
@@ -1861,8 +4123,8 @@ type CreateNotificationInput struct {
 	// AccountId is a required field
 	AccountId *string `min:"12" type:"string" required:"true"`
 
-	// The name of the budget that you want AWS to notify you about. Budget names
-	// must be unique within an account.
+	// The name of the budget that you want Amazon Web Services to notify you about.
+	// Budget names must be unique within an account.
 	//
 	// BudgetName is a required field
 	BudgetName *string `min:"1" type:"string" required:"true"`
@@ -1879,12 +4141,20 @@ type CreateNotificationInput struct {
 	Subscribers []*Subscriber `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateNotificationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateNotificationInput) GoString() string {
 	return s.String()
 }
@@ -1964,12 +4234,20 @@ type CreateNotificationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateNotificationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateNotificationOutput) GoString() string {
 	return s.String()
 }
@@ -2001,12 +4279,20 @@ type CreateSubscriberInput struct {
 	Subscriber *Subscriber `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSubscriberInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSubscriberInput) GoString() string {
 	return s.String()
 }
@@ -2078,14 +4364,302 @@ type CreateSubscriberOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSubscriberOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSubscriberOutput) GoString() string {
 	return s.String()
+}
+
+// You've exceeded the notification or subscriber limit.
+type CreationLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreationLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CreationLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorCreationLimitExceededException(v protocol.ResponseMetadata) error {
+	return &CreationLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CreationLimitExceededException) Code() string {
+	return "CreationLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *CreationLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CreationLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *CreationLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CreationLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CreationLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Specifies all of the type-specific parameters.
+type Definition struct {
+	_ struct{} `type:"structure"`
+
+	// The Identity and Access Management (IAM) action definition details.
+	IamActionDefinition *IamActionDefinition `type:"structure"`
+
+	// The service control policies (SCPs) action definition details.
+	ScpActionDefinition *ScpActionDefinition `type:"structure"`
+
+	// The Amazon Web Services Systems Manager (SSM) action definition details.
+	SsmActionDefinition *SsmActionDefinition `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Definition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s Definition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Definition) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "Definition"}
+	if s.IamActionDefinition != nil {
+		if err := s.IamActionDefinition.Validate(); err != nil {
+			invalidParams.AddNested("IamActionDefinition", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.ScpActionDefinition != nil {
+		if err := s.ScpActionDefinition.Validate(); err != nil {
+			invalidParams.AddNested("ScpActionDefinition", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.SsmActionDefinition != nil {
+		if err := s.SsmActionDefinition.Validate(); err != nil {
+			invalidParams.AddNested("SsmActionDefinition", err.(request.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetIamActionDefinition sets the IamActionDefinition field's value.
+func (s *Definition) SetIamActionDefinition(v *IamActionDefinition) *Definition {
+	s.IamActionDefinition = v
+	return s
+}
+
+// SetScpActionDefinition sets the ScpActionDefinition field's value.
+func (s *Definition) SetScpActionDefinition(v *ScpActionDefinition) *Definition {
+	s.ScpActionDefinition = v
+	return s
+}
+
+// SetSsmActionDefinition sets the SsmActionDefinition field's value.
+func (s *Definition) SetSsmActionDefinition(v *SsmActionDefinition) *Definition {
+	s.SsmActionDefinition = v
+	return s
+}
+
+type DeleteBudgetActionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A system-generated universally unique identifier (UUID) for the action.
+	//
+	// ActionId is a required field
+	ActionId *string `min:"36" type:"string" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteBudgetActionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteBudgetActionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteBudgetActionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DeleteBudgetActionInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.ActionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionId"))
+	}
+	if s.ActionId != nil && len(*s.ActionId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("ActionId", 36))
+	}
+	if s.BudgetName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BudgetName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *DeleteBudgetActionInput) SetAccountId(v string) *DeleteBudgetActionInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetActionId sets the ActionId field's value.
+func (s *DeleteBudgetActionInput) SetActionId(v string) *DeleteBudgetActionInput {
+	s.ActionId = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *DeleteBudgetActionInput) SetBudgetName(v string) *DeleteBudgetActionInput {
+	s.BudgetName = &v
+	return s
+}
+
+type DeleteBudgetActionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A budget action resource.
+	//
+	// Action is a required field
+	Action *Action `type:"structure" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteBudgetActionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DeleteBudgetActionOutput) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *DeleteBudgetActionOutput) SetAccountId(v string) *DeleteBudgetActionOutput {
+	s.AccountId = &v
+	return s
+}
+
+// SetAction sets the Action field's value.
+func (s *DeleteBudgetActionOutput) SetAction(v *Action) *DeleteBudgetActionOutput {
+	s.Action = v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *DeleteBudgetActionOutput) SetBudgetName(v string) *DeleteBudgetActionOutput {
+	s.BudgetName = &v
+	return s
 }
 
 // Request of DeleteBudget
@@ -2103,12 +4677,20 @@ type DeleteBudgetInput struct {
 	BudgetName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBudgetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBudgetInput) GoString() string {
 	return s.String()
 }
@@ -2152,12 +4734,20 @@ type DeleteBudgetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBudgetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteBudgetOutput) GoString() string {
 	return s.String()
 }
@@ -2183,12 +4773,20 @@ type DeleteNotificationInput struct {
 	Notification *Notification `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNotificationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNotificationInput) GoString() string {
 	return s.String()
 }
@@ -2246,12 +4844,20 @@ type DeleteNotificationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNotificationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteNotificationOutput) GoString() string {
 	return s.String()
 }
@@ -2282,12 +4888,20 @@ type DeleteSubscriberInput struct {
 	Subscriber *Subscriber `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSubscriberInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSubscriberInput) GoString() string {
 	return s.String()
 }
@@ -2359,14 +4973,565 @@ type DeleteSubscriberOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSubscriberOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSubscriberOutput) GoString() string {
 	return s.String()
+}
+
+type DescribeBudgetActionHistoriesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A system-generated universally unique identifier (UUID) for the action.
+	//
+	// ActionId is a required field
+	ActionId *string `min:"36" type:"string" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+
+	// An integer that represents how many entries a paginated response contains.
+	// The maximum is 100.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+
+	// The period of time that's covered by a budget. The period has a start date
+	// and an end date. The start date must come before the end date. There are
+	// no restrictions on the end date.
+	TimePeriod *TimePeriod `type:"structure"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionHistoriesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionHistoriesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBudgetActionHistoriesInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeBudgetActionHistoriesInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.ActionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionId"))
+	}
+	if s.ActionId != nil && len(*s.ActionId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("ActionId", 36))
+	}
+	if s.BudgetName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BudgetName", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *DescribeBudgetActionHistoriesInput) SetAccountId(v string) *DescribeBudgetActionHistoriesInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetActionId sets the ActionId field's value.
+func (s *DescribeBudgetActionHistoriesInput) SetActionId(v string) *DescribeBudgetActionHistoriesInput {
+	s.ActionId = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *DescribeBudgetActionHistoriesInput) SetBudgetName(v string) *DescribeBudgetActionHistoriesInput {
+	s.BudgetName = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeBudgetActionHistoriesInput) SetMaxResults(v int64) *DescribeBudgetActionHistoriesInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeBudgetActionHistoriesInput) SetNextToken(v string) *DescribeBudgetActionHistoriesInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetTimePeriod sets the TimePeriod field's value.
+func (s *DescribeBudgetActionHistoriesInput) SetTimePeriod(v *TimePeriod) *DescribeBudgetActionHistoriesInput {
+	s.TimePeriod = v
+	return s
+}
+
+type DescribeBudgetActionHistoriesOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The historical record of the budget action resource.
+	//
+	// ActionHistories is a required field
+	ActionHistories []*ActionHistory `type:"list" required:"true"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionHistoriesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionHistoriesOutput) GoString() string {
+	return s.String()
+}
+
+// SetActionHistories sets the ActionHistories field's value.
+func (s *DescribeBudgetActionHistoriesOutput) SetActionHistories(v []*ActionHistory) *DescribeBudgetActionHistoriesOutput {
+	s.ActionHistories = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeBudgetActionHistoriesOutput) SetNextToken(v string) *DescribeBudgetActionHistoriesOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeBudgetActionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A system-generated universally unique identifier (UUID) for the action.
+	//
+	// ActionId is a required field
+	ActionId *string `min:"36" type:"string" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBudgetActionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeBudgetActionInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.ActionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionId"))
+	}
+	if s.ActionId != nil && len(*s.ActionId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("ActionId", 36))
+	}
+	if s.BudgetName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BudgetName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *DescribeBudgetActionInput) SetAccountId(v string) *DescribeBudgetActionInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetActionId sets the ActionId field's value.
+func (s *DescribeBudgetActionInput) SetActionId(v string) *DescribeBudgetActionInput {
+	s.ActionId = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *DescribeBudgetActionInput) SetBudgetName(v string) *DescribeBudgetActionInput {
+	s.BudgetName = &v
+	return s
+}
+
+type DescribeBudgetActionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A budget action resource.
+	//
+	// Action is a required field
+	Action *Action `type:"structure" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionOutput) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *DescribeBudgetActionOutput) SetAccountId(v string) *DescribeBudgetActionOutput {
+	s.AccountId = &v
+	return s
+}
+
+// SetAction sets the Action field's value.
+func (s *DescribeBudgetActionOutput) SetAction(v *Action) *DescribeBudgetActionOutput {
+	s.Action = v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *DescribeBudgetActionOutput) SetBudgetName(v string) *DescribeBudgetActionOutput {
+	s.BudgetName = &v
+	return s
+}
+
+type DescribeBudgetActionsForAccountInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// An integer that represents how many entries a paginated response contains.
+	// The maximum is 100.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionsForAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionsForAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBudgetActionsForAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeBudgetActionsForAccountInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *DescribeBudgetActionsForAccountInput) SetAccountId(v string) *DescribeBudgetActionsForAccountInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeBudgetActionsForAccountInput) SetMaxResults(v int64) *DescribeBudgetActionsForAccountInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeBudgetActionsForAccountInput) SetNextToken(v string) *DescribeBudgetActionsForAccountInput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeBudgetActionsForAccountOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of the budget action resources information.
+	//
+	// Actions is a required field
+	Actions []*Action `type:"list" required:"true"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionsForAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionsForAccountOutput) GoString() string {
+	return s.String()
+}
+
+// SetActions sets the Actions field's value.
+func (s *DescribeBudgetActionsForAccountOutput) SetActions(v []*Action) *DescribeBudgetActionsForAccountOutput {
+	s.Actions = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeBudgetActionsForAccountOutput) SetNextToken(v string) *DescribeBudgetActionsForAccountOutput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeBudgetActionsForBudgetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+
+	// An integer that represents how many entries a paginated response contains.
+	// The maximum is 100.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionsForBudgetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionsForBudgetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBudgetActionsForBudgetInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeBudgetActionsForBudgetInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.BudgetName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BudgetName", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *DescribeBudgetActionsForBudgetInput) SetAccountId(v string) *DescribeBudgetActionsForBudgetInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *DescribeBudgetActionsForBudgetInput) SetBudgetName(v string) *DescribeBudgetActionsForBudgetInput {
+	s.BudgetName = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeBudgetActionsForBudgetInput) SetMaxResults(v int64) *DescribeBudgetActionsForBudgetInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeBudgetActionsForBudgetInput) SetNextToken(v string) *DescribeBudgetActionsForBudgetInput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeBudgetActionsForBudgetOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of the budget action resources information.
+	//
+	// Actions is a required field
+	Actions []*Action `type:"list" required:"true"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionsForBudgetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetActionsForBudgetOutput) GoString() string {
+	return s.String()
+}
+
+// SetActions sets the Actions field's value.
+func (s *DescribeBudgetActionsForBudgetOutput) SetActions(v []*Action) *DescribeBudgetActionsForBudgetOutput {
+	s.Actions = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeBudgetActionsForBudgetOutput) SetNextToken(v string) *DescribeBudgetActionsForBudgetOutput {
+	s.NextToken = &v
+	return s
 }
 
 // Request of DescribeBudget
@@ -2385,12 +5550,20 @@ type DescribeBudgetInput struct {
 	BudgetName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetInput) GoString() string {
 	return s.String()
 }
@@ -2429,6 +5602,117 @@ func (s *DescribeBudgetInput) SetBudgetName(v string) *DescribeBudgetInput {
 	return s
 }
 
+type DescribeBudgetNotificationsForAccountInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// An integer that represents how many budgets a paginated response contains.
+	// The default is 50.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetNotificationsForAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetNotificationsForAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBudgetNotificationsForAccountInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "DescribeBudgetNotificationsForAccountInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *DescribeBudgetNotificationsForAccountInput) SetAccountId(v string) *DescribeBudgetNotificationsForAccountInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeBudgetNotificationsForAccountInput) SetMaxResults(v int64) *DescribeBudgetNotificationsForAccountInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeBudgetNotificationsForAccountInput) SetNextToken(v string) *DescribeBudgetNotificationsForAccountInput {
+	s.NextToken = &v
+	return s
+}
+
+type DescribeBudgetNotificationsForAccountOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of budget names and associated notifications for an account.
+	BudgetNotificationsForAccount []*BudgetNotificationsForAccount `type:"list"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetNotificationsForAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DescribeBudgetNotificationsForAccountOutput) GoString() string {
+	return s.String()
+}
+
+// SetBudgetNotificationsForAccount sets the BudgetNotificationsForAccount field's value.
+func (s *DescribeBudgetNotificationsForAccountOutput) SetBudgetNotificationsForAccount(v []*BudgetNotificationsForAccount) *DescribeBudgetNotificationsForAccountOutput {
+	s.BudgetNotificationsForAccount = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeBudgetNotificationsForAccountOutput) SetNextToken(v string) *DescribeBudgetNotificationsForAccountOutput {
+	s.NextToken = &v
+	return s
+}
+
 // Response of DescribeBudget
 type DescribeBudgetOutput struct {
 	_ struct{} `type:"structure"`
@@ -2437,12 +5721,20 @@ type DescribeBudgetOutput struct {
 	Budget *Budget `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetOutput) GoString() string {
 	return s.String()
 }
@@ -2456,13 +5748,13 @@ func (s *DescribeBudgetOutput) SetBudget(v *Budget) *DescribeBudgetOutput {
 type DescribeBudgetPerformanceHistoryInput struct {
 	_ struct{} `type:"structure"`
 
-	// The account ID of the user. It should be a 12-digit number.
+	// The account ID of the user. It's a 12-digit number.
 	//
 	// AccountId is a required field
 	AccountId *string `min:"12" type:"string" required:"true"`
 
-	// A string that represents the budget name. The ":" and "\" characters aren't
-	// allowed.
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
 	//
 	// BudgetName is a required field
 	BudgetName *string `min:"1" type:"string" required:"true"`
@@ -2479,12 +5771,20 @@ type DescribeBudgetPerformanceHistoryInput struct {
 	TimePeriod *TimePeriod `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetPerformanceHistoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetPerformanceHistoryInput) GoString() string {
 	return s.String()
 }
@@ -2559,12 +5859,20 @@ type DescribeBudgetPerformanceHistoryOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetPerformanceHistoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetPerformanceHistoryOutput) GoString() string {
 	return s.String()
 }
@@ -2585,14 +5893,13 @@ func (s *DescribeBudgetPerformanceHistoryOutput) SetNextToken(v string) *Describ
 type DescribeBudgetsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The accountId that is associated with the budgets that you want descriptions
-	// of.
+	// The accountId that is associated with the budgets that you want to describe.
 	//
 	// AccountId is a required field
 	AccountId *string `min:"12" type:"string" required:"true"`
 
-	// An optional integer that represents how many entries a paginated response
-	// contains. The maximum is 100.
+	// An integer that represents how many budgets a paginated response contains.
+	// The default is 100.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The pagination token that you include in your request to indicate the next
@@ -2600,12 +5907,20 @@ type DescribeBudgetsInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetsInput) GoString() string {
 	return s.String()
 }
@@ -2659,12 +5974,20 @@ type DescribeBudgetsOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeBudgetsOutput) GoString() string {
 	return s.String()
 }
@@ -2697,7 +6020,7 @@ type DescribeNotificationsForBudgetInput struct {
 	BudgetName *string `min:"1" type:"string" required:"true"`
 
 	// An optional integer that represents how many entries a paginated response
-	// contains. The maximum is 100.
+	// contains.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The pagination token that you include in your request to indicate the next
@@ -2705,12 +6028,20 @@ type DescribeNotificationsForBudgetInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeNotificationsForBudgetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeNotificationsForBudgetInput) GoString() string {
 	return s.String()
 }
@@ -2776,12 +6107,20 @@ type DescribeNotificationsForBudgetOutput struct {
 	Notifications []*Notification `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeNotificationsForBudgetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeNotificationsForBudgetOutput) GoString() string {
 	return s.String()
 }
@@ -2814,7 +6153,7 @@ type DescribeSubscribersForNotificationInput struct {
 	BudgetName *string `min:"1" type:"string" required:"true"`
 
 	// An optional integer that represents how many entries a paginated response
-	// contains. The maximum is 100.
+	// contains.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The pagination token that you include in your request to indicate the next
@@ -2827,12 +6166,20 @@ type DescribeSubscribersForNotificationInput struct {
 	Notification *Notification `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSubscribersForNotificationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSubscribersForNotificationInput) GoString() string {
 	return s.String()
 }
@@ -2912,12 +6259,20 @@ type DescribeSubscribersForNotificationOutput struct {
 	Subscribers []*Subscriber `min:"1" type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSubscribersForNotificationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeSubscribersForNotificationOutput) GoString() string {
 	return s.String()
 }
@@ -2934,8 +6289,736 @@ func (s *DescribeSubscribersForNotificationOutput) SetSubscribers(v []*Subscribe
 	return s
 }
 
-// A notification that is associated with a budget. A budget can have up to
-// five notifications.
+// The budget name already exists. Budget names must be unique within an account.
+type DuplicateRecordException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRecordException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DuplicateRecordException) GoString() string {
+	return s.String()
+}
+
+func newErrorDuplicateRecordException(v protocol.ResponseMetadata) error {
+	return &DuplicateRecordException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DuplicateRecordException) Code() string {
+	return "DuplicateRecordException"
+}
+
+// Message returns the exception's message.
+func (s *DuplicateRecordException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DuplicateRecordException) OrigErr() error {
+	return nil
+}
+
+func (s *DuplicateRecordException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DuplicateRecordException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DuplicateRecordException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type ExecuteBudgetActionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A system-generated universally unique identifier (UUID) for the action.
+	//
+	// ActionId is a required field
+	ActionId *string `min:"36" type:"string" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+
+	// The type of execution.
+	//
+	// ExecutionType is a required field
+	ExecutionType *string `type:"string" required:"true" enum:"ExecutionType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExecuteBudgetActionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExecuteBudgetActionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExecuteBudgetActionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ExecuteBudgetActionInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.ActionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionId"))
+	}
+	if s.ActionId != nil && len(*s.ActionId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("ActionId", 36))
+	}
+	if s.BudgetName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BudgetName", 1))
+	}
+	if s.ExecutionType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ExecutionType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *ExecuteBudgetActionInput) SetAccountId(v string) *ExecuteBudgetActionInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetActionId sets the ActionId field's value.
+func (s *ExecuteBudgetActionInput) SetActionId(v string) *ExecuteBudgetActionInput {
+	s.ActionId = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *ExecuteBudgetActionInput) SetBudgetName(v string) *ExecuteBudgetActionInput {
+	s.BudgetName = &v
+	return s
+}
+
+// SetExecutionType sets the ExecutionType field's value.
+func (s *ExecuteBudgetActionInput) SetExecutionType(v string) *ExecuteBudgetActionInput {
+	s.ExecutionType = &v
+	return s
+}
+
+type ExecuteBudgetActionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A system-generated universally unique identifier (UUID) for the action.
+	//
+	// ActionId is a required field
+	ActionId *string `min:"36" type:"string" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+
+	// The type of execution.
+	//
+	// ExecutionType is a required field
+	ExecutionType *string `type:"string" required:"true" enum:"ExecutionType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExecuteBudgetActionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExecuteBudgetActionOutput) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *ExecuteBudgetActionOutput) SetAccountId(v string) *ExecuteBudgetActionOutput {
+	s.AccountId = &v
+	return s
+}
+
+// SetActionId sets the ActionId field's value.
+func (s *ExecuteBudgetActionOutput) SetActionId(v string) *ExecuteBudgetActionOutput {
+	s.ActionId = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *ExecuteBudgetActionOutput) SetBudgetName(v string) *ExecuteBudgetActionOutput {
+	s.BudgetName = &v
+	return s
+}
+
+// SetExecutionType sets the ExecutionType field's value.
+func (s *ExecuteBudgetActionOutput) SetExecutionType(v string) *ExecuteBudgetActionOutput {
+	s.ExecutionType = &v
+	return s
+}
+
+// The pagination token expired.
+type ExpiredNextTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExpiredNextTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ExpiredNextTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorExpiredNextTokenException(v protocol.ResponseMetadata) error {
+	return &ExpiredNextTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ExpiredNextTokenException) Code() string {
+	return "ExpiredNextTokenException"
+}
+
+// Message returns the exception's message.
+func (s *ExpiredNextTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ExpiredNextTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *ExpiredNextTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ExpiredNextTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ExpiredNextTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The parameters that define or describe the historical data that your auto-adjusting
+// budget is based on.
+type HistoricalOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The number of budget periods included in the moving-average calculation that
+	// determines your auto-adjusted budget amount. The maximum value depends on
+	// the TimeUnit granularity of the budget:
+	//
+	//    * For the DAILY granularity, the maximum value is 60.
+	//
+	//    * For the MONTHLY granularity, the maximum value is 12.
+	//
+	//    * For the QUARTERLY granularity, the maximum value is 4.
+	//
+	//    * For the ANNUALLY granularity, the maximum value is 1.
+	//
+	// BudgetAdjustmentPeriod is a required field
+	BudgetAdjustmentPeriod *int64 `min:"1" type:"integer" required:"true"`
+
+	// The integer that describes how many budget periods in your BudgetAdjustmentPeriod
+	// are included in the calculation of your current BudgetLimit. If the first
+	// budget period in your BudgetAdjustmentPeriod has no cost data, then that
+	// budget period isn’t included in the average that determines your budget
+	// limit.
+	//
+	// For example, if you set BudgetAdjustmentPeriod as 4 quarters, but your account
+	// had no cost data in the first quarter, then only the last three quarters
+	// are included in the calculation. In this scenario, LookBackAvailablePeriods
+	// returns 3.
+	//
+	// You can’t set your own LookBackAvailablePeriods. The value is automatically
+	// calculated from the BudgetAdjustmentPeriod and your historical cost data.
+	LookBackAvailablePeriods *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HistoricalOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s HistoricalOptions) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HistoricalOptions) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "HistoricalOptions"}
+	if s.BudgetAdjustmentPeriod == nil {
+		invalidParams.Add(request.NewErrParamRequired("BudgetAdjustmentPeriod"))
+	}
+	if s.BudgetAdjustmentPeriod != nil && *s.BudgetAdjustmentPeriod < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("BudgetAdjustmentPeriod", 1))
+	}
+	if s.LookBackAvailablePeriods != nil && *s.LookBackAvailablePeriods < 1 {
+		invalidParams.Add(request.NewErrParamMinValue("LookBackAvailablePeriods", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBudgetAdjustmentPeriod sets the BudgetAdjustmentPeriod field's value.
+func (s *HistoricalOptions) SetBudgetAdjustmentPeriod(v int64) *HistoricalOptions {
+	s.BudgetAdjustmentPeriod = &v
+	return s
+}
+
+// SetLookBackAvailablePeriods sets the LookBackAvailablePeriods field's value.
+func (s *HistoricalOptions) SetLookBackAvailablePeriods(v int64) *HistoricalOptions {
+	s.LookBackAvailablePeriods = &v
+	return s
+}
+
+// The Identity and Access Management (IAM) action definition details.
+type IamActionDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// A list of groups to be attached. There must be at least one group.
+	Groups []*string `min:"1" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the policy to be attached.
+	//
+	// PolicyArn is a required field
+	PolicyArn *string `min:"25" type:"string" required:"true"`
+
+	// A list of roles to be attached. There must be at least one role.
+	Roles []*string `min:"1" type:"list"`
+
+	// A list of users to be attached. There must be at least one user.
+	Users []*string `min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamActionDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IamActionDefinition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IamActionDefinition) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "IamActionDefinition"}
+	if s.Groups != nil && len(s.Groups) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Groups", 1))
+	}
+	if s.PolicyArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("PolicyArn"))
+	}
+	if s.PolicyArn != nil && len(*s.PolicyArn) < 25 {
+		invalidParams.Add(request.NewErrParamMinLen("PolicyArn", 25))
+	}
+	if s.Roles != nil && len(s.Roles) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Roles", 1))
+	}
+	if s.Users != nil && len(s.Users) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Users", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetGroups sets the Groups field's value.
+func (s *IamActionDefinition) SetGroups(v []*string) *IamActionDefinition {
+	s.Groups = v
+	return s
+}
+
+// SetPolicyArn sets the PolicyArn field's value.
+func (s *IamActionDefinition) SetPolicyArn(v string) *IamActionDefinition {
+	s.PolicyArn = &v
+	return s
+}
+
+// SetRoles sets the Roles field's value.
+func (s *IamActionDefinition) SetRoles(v []*string) *IamActionDefinition {
+	s.Roles = v
+	return s
+}
+
+// SetUsers sets the Users field's value.
+func (s *IamActionDefinition) SetUsers(v []*string) *IamActionDefinition {
+	s.Users = v
+	return s
+}
+
+// An error on the server occurred during the processing of your request. Try
+// again later.
+type InternalErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalErrorException(v protocol.ResponseMetadata) error {
+	return &InternalErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalErrorException) Code() string {
+	return "InternalErrorException"
+}
+
+// Message returns the exception's message.
+func (s *InternalErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The pagination token is invalid.
+type InvalidNextTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidNextTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidNextTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidNextTokenException) Code() string {
+	return "InvalidNextTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidNextTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidNextTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidNextTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidNextTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidNextTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An error on the client occurred. Typically, the cause is an invalid input
+// value.
+type InvalidParameterException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidParameterException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidParameterException(v protocol.ResponseMetadata) error {
+	return &InvalidParameterException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidParameterException) Code() string {
+	return "InvalidParameterException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidParameterException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidParameterException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidParameterException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidParameterException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidParameterException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// We can’t locate the resource that you specified.
+type NotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorNotFoundException(v protocol.ResponseMetadata) error {
+	return &NotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NotFoundException) Code() string {
+	return "NotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *NotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *NotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A notification that's associated with a budget. A budget can have up to ten
+// notifications.
 //
 // Each notification must have at least one subscriber. A notification can have
 // one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.
@@ -2943,52 +7026,63 @@ func (s *DescribeSubscribersForNotificationOutput) SetSubscribers(v []*Subscribe
 // For example, if you have a budget for 200 dollars and you want to be notified
 // when you go over 160 dollars, create a notification with the following parameters:
 //
-//    * A notificationType of ACTUAL
+//   - A notificationType of ACTUAL
 //
-//    * A thresholdType of PERCENTAGE
+//   - A thresholdType of PERCENTAGE
 //
-//    * A comparisonOperator of GREATER_THAN
+//   - A comparisonOperator of GREATER_THAN
 //
-//    * A notification threshold of 80
+//   - A notification threshold of 80
 type Notification struct {
 	_ struct{} `type:"structure"`
 
-	// The comparison that is used for this notification.
+	// The comparison that's used for this notification.
 	//
 	// ComparisonOperator is a required field
 	ComparisonOperator *string `type:"string" required:"true" enum:"ComparisonOperator"`
 
-	// Whether this notification is in alarm. If a budget notification is in the
-	// ALARM state, you have passed the set threshold for the budget.
+	// Specifies whether this notification is in alarm. If a budget notification
+	// is in the ALARM state, you passed the set threshold for the budget.
 	NotificationState *string `type:"string" enum:"NotificationState"`
 
-	// Whether the notification is for how much you have spent (ACTUAL) or for how
-	// much you're forecasted to spend (FORECASTED).
+	// Specifies whether the notification is for how much you have spent (ACTUAL)
+	// or for how much that you're forecasted to spend (FORECASTED).
 	//
 	// NotificationType is a required field
 	NotificationType *string `type:"string" required:"true" enum:"NotificationType"`
 
-	// The threshold that is associated with a notification. Thresholds are always
-	// a percentage.
+	// The threshold that's associated with a notification. Thresholds are always
+	// a percentage, and many customers find value being alerted between 50% - 200%
+	// of the budgeted amount. The maximum limit for your threshold is 1,000,000%
+	// above the budgeted amount.
 	//
 	// Threshold is a required field
 	Threshold *float64 `type:"double" required:"true"`
 
 	// The type of threshold for a notification. For ABSOLUTE_VALUE thresholds,
-	// AWS notifies you when you go over or are forecasted to go over your total
-	// cost threshold. For PERCENTAGE thresholds, AWS notifies you when you go over
-	// or are forecasted to go over a certain percentage of your forecasted spend.
-	// For example, if you have a budget for 200 dollars and you have a PERCENTAGE
-	// threshold of 80%, AWS notifies you when you go over 160 dollars.
+	// Amazon Web Services notifies you when you go over or are forecasted to go
+	// over your total cost threshold. For PERCENTAGE thresholds, Amazon Web Services
+	// notifies you when you go over or are forecasted to go over a certain percentage
+	// of your forecasted spend. For example, if you have a budget for 200 dollars
+	// and you have a PERCENTAGE threshold of 80%, Amazon Web Services notifies
+	// you when you go over 160 dollars.
 	ThresholdType *string `type:"string" enum:"ThresholdType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Notification) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Notification) GoString() string {
 	return s.String()
 }
@@ -3047,7 +7141,7 @@ func (s *Notification) SetThresholdType(v string) *Notification {
 type NotificationWithSubscribers struct {
 	_ struct{} `type:"structure"`
 
-	// The notification that is associated with a budget.
+	// The notification that's associated with a budget.
 	//
 	// Notification is a required field
 	Notification *Notification `type:"structure" required:"true"`
@@ -3058,12 +7152,20 @@ type NotificationWithSubscribers struct {
 	Subscribers []*Subscriber `min:"1" type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotificationWithSubscribers) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s NotificationWithSubscribers) GoString() string {
 	return s.String()
 }
@@ -3114,35 +7216,182 @@ func (s *NotificationWithSubscribers) SetSubscribers(v []*Subscriber) *Notificat
 	return s
 }
 
-// The amount of cost or usage that is measured for a budget.
+// The request was received and recognized by the server, but the server rejected
+// that particular method for the requested resource.
+type ResourceLockedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
 //
-// For example, a Spend for 3 GB of S3 usage would have the following parameters:
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceLockedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
 //
-//    * An Amount of 3
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceLockedException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceLockedException(v protocol.ResponseMetadata) error {
+	return &ResourceLockedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceLockedException) Code() string {
+	return "ResourceLockedException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceLockedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceLockedException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceLockedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceLockedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceLockedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The service control policies (SCP) action definition details.
+type ScpActionDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// The policy ID attached.
+	//
+	// PolicyId is a required field
+	PolicyId *string `min:"10" type:"string" required:"true"`
+
+	// A list of target IDs.
+	//
+	// TargetIds is a required field
+	TargetIds []*string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation.
 //
-//    * A unit of GB
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScpActionDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ScpActionDefinition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ScpActionDefinition) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ScpActionDefinition"}
+	if s.PolicyId == nil {
+		invalidParams.Add(request.NewErrParamRequired("PolicyId"))
+	}
+	if s.PolicyId != nil && len(*s.PolicyId) < 10 {
+		invalidParams.Add(request.NewErrParamMinLen("PolicyId", 10))
+	}
+	if s.TargetIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("TargetIds"))
+	}
+	if s.TargetIds != nil && len(s.TargetIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("TargetIds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetPolicyId sets the PolicyId field's value.
+func (s *ScpActionDefinition) SetPolicyId(v string) *ScpActionDefinition {
+	s.PolicyId = &v
+	return s
+}
+
+// SetTargetIds sets the TargetIds field's value.
+func (s *ScpActionDefinition) SetTargetIds(v []*string) *ScpActionDefinition {
+	s.TargetIds = v
+	return s
+}
+
+// The amount of cost or usage that's measured for a budget.
+//
+// Cost example: A Spend for 3 USD of costs has the following parameters:
+//
+//   - An Amount of 3
+//
+//   - A Unit of USD
+//
+// Usage example: A Spend for 3 GB of S3 usage has the following parameters:
+//
+//   - An Amount of 3
+//
+//   - A Unit of GB
 type Spend struct {
 	_ struct{} `type:"structure"`
 
-	// The cost or usage amount that is associated with a budget forecast, actual
+	// The cost or usage amount that's associated with a budget forecast, actual
 	// spend, or budget threshold.
 	//
 	// Amount is a required field
 	Amount *string `min:"1" type:"string" required:"true"`
 
-	// The unit of measurement that is used for the budget forecast, actual spend,
-	// or budget threshold, such as dollars or GB.
+	// The unit of measurement that's used for the budget forecast, actual spend,
+	// or budget threshold.
 	//
 	// Unit is a required field
 	Unit *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Spend) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Spend) GoString() string {
 	return s.String()
 }
@@ -3181,35 +7430,130 @@ func (s *Spend) SetUnit(v string) *Spend {
 	return s
 }
 
+// The Amazon Web Services Systems Manager (SSM) action definition details.
+type SsmActionDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// The action subType.
+	//
+	// ActionSubType is a required field
+	ActionSubType *string `type:"string" required:"true" enum:"ActionSubType"`
+
+	// The EC2 and RDS instance IDs.
+	//
+	// InstanceIds is a required field
+	InstanceIds []*string `min:"1" type:"list" required:"true"`
+
+	// The Region to run the SSM document.
+	//
+	// Region is a required field
+	Region *string `min:"9" type:"string" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SsmActionDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SsmActionDefinition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SsmActionDefinition) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "SsmActionDefinition"}
+	if s.ActionSubType == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionSubType"))
+	}
+	if s.InstanceIds == nil {
+		invalidParams.Add(request.NewErrParamRequired("InstanceIds"))
+	}
+	if s.InstanceIds != nil && len(s.InstanceIds) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("InstanceIds", 1))
+	}
+	if s.Region == nil {
+		invalidParams.Add(request.NewErrParamRequired("Region"))
+	}
+	if s.Region != nil && len(*s.Region) < 9 {
+		invalidParams.Add(request.NewErrParamMinLen("Region", 9))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetActionSubType sets the ActionSubType field's value.
+func (s *SsmActionDefinition) SetActionSubType(v string) *SsmActionDefinition {
+	s.ActionSubType = &v
+	return s
+}
+
+// SetInstanceIds sets the InstanceIds field's value.
+func (s *SsmActionDefinition) SetInstanceIds(v []*string) *SsmActionDefinition {
+	s.InstanceIds = v
+	return s
+}
+
+// SetRegion sets the Region field's value.
+func (s *SsmActionDefinition) SetRegion(v string) *SsmActionDefinition {
+	s.Region = &v
+	return s
+}
+
 // The subscriber to a budget notification. The subscriber consists of a subscription
 // type and either an Amazon SNS topic or an email address.
 //
-// For example, an email subscriber would have the following parameters:
+// For example, an email subscriber has the following parameters:
 //
-//    * A subscriptionType of EMAIL
+//   - A subscriptionType of EMAIL
 //
-//    * An address of example@example.com
+//   - An address of example@example.com
 type Subscriber struct {
 	_ struct{} `type:"structure"`
 
-	// The address that AWS sends budget notifications to, either an SNS topic or
-	// an email.
+	// The address that Amazon Web Services sends budget notifications to, either
+	// an SNS topic or an email.
+	//
+	// When you create a subscriber, the value of Address can't contain line breaks.
+	//
+	// Address is a sensitive parameter and its value will be
+	// replaced with "sensitive" in string returned by Subscriber's
+	// String and GoString methods.
 	//
 	// Address is a required field
 	Address *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
-	// The type of notification that AWS sends to a subscriber.
+	// The type of notification that Amazon Web Services sends to a subscriber.
 	//
 	// SubscriptionType is a required field
 	SubscriptionType *string `type:"string" required:"true" enum:"SubscriptionType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subscriber) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Subscriber) GoString() string {
 	return s.String()
 }
@@ -3245,38 +7589,114 @@ func (s *Subscriber) SetSubscriptionType(v string) *Subscriber {
 	return s
 }
 
-// The period of time that is covered by a budget. The period has a start date
+// The number of API requests has exceeded the maximum allowed API request throttling
+// limit for the account.
+type ThrottlingException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	// The error message the exception carries.
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ThrottlingException) GoString() string {
+	return s.String()
+}
+
+func newErrorThrottlingException(v protocol.ResponseMetadata) error {
+	return &ThrottlingException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ThrottlingException) Code() string {
+	return "ThrottlingException"
+}
+
+// Message returns the exception's message.
+func (s *ThrottlingException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ThrottlingException) OrigErr() error {
+	return nil
+}
+
+func (s *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ThrottlingException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ThrottlingException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The period of time that's covered by a budget. The period has a start date
 // and an end date. The start date must come before the end date. There are
 // no restrictions on the end date.
 type TimePeriod struct {
 	_ struct{} `type:"structure"`
 
-	// The end date for a budget. If you didn't specify an end date, AWS set your
-	// end date to 06/15/87 00:00 UTC. The defaults are the same for the AWS Billing
-	// and Cost Management console and the API.
+	// The end date for a budget. If you didn't specify an end date, Amazon Web
+	// Services set your end date to 06/15/87 00:00 UTC. The defaults are the same
+	// for the Billing and Cost Management console and the API.
 	//
-	// After the end date, AWS deletes the budget and all associated notifications
-	// and subscribers. You can change your end date with the UpdateBudget operation.
+	// After the end date, Amazon Web Services deletes the budget and all the associated
+	// notifications and subscribers. You can change your end date with the UpdateBudget
+	// operation.
 	End *time.Time `type:"timestamp"`
 
 	// The start date for a budget. If you created your budget and didn't specify
-	// a start date, AWS defaults to the start of your chosen time period (DAILY,
-	// MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget
-	// on January 24, 2018, chose DAILY, and didn't set a start date, AWS set your
-	// start date to 01/24/18 00:00 UTC. If you chose MONTHLY, AWS set your start
-	// date to 01/01/18 00:00 UTC. The defaults are the same for the AWS Billing
-	// and Cost Management console and the API.
+	// a start date, Amazon Web Services defaults to the start of your chosen time
+	// period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created
+	// your budget on January 24, 2018, chose DAILY, and didn't set a start date,
+	// Amazon Web Services set your start date to 01/24/18 00:00 UTC. If you chose
+	// MONTHLY, Amazon Web Services set your start date to 01/01/18 00:00 UTC. The
+	// defaults are the same for the Billing and Cost Management console and the
+	// API.
 	//
 	// You can change your start date with the UpdateBudget operation.
 	Start *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimePeriod) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TimePeriod) GoString() string {
 	return s.String()
 }
@@ -3290,6 +7710,238 @@ func (s *TimePeriod) SetEnd(v time.Time) *TimePeriod {
 // SetStart sets the Start field's value.
 func (s *TimePeriod) SetStart(v time.Time) *TimePeriod {
 	s.Start = &v
+	return s
+}
+
+type UpdateBudgetActionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A system-generated universally unique identifier (UUID) for the action.
+	//
+	// ActionId is a required field
+	ActionId *string `min:"36" type:"string" required:"true"`
+
+	// The trigger threshold of the action.
+	ActionThreshold *ActionThreshold `type:"structure"`
+
+	// This specifies if the action needs manual or automatic approval.
+	ApprovalModel *string `type:"string" enum:"ApprovalModel"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+
+	// Specifies all of the type-specific parameters.
+	Definition *Definition `type:"structure"`
+
+	// The role passed for action execution and reversion. Roles and actions must
+	// be in the same account.
+	ExecutionRoleArn *string `min:"32" type:"string"`
+
+	// The type of a notification. It must be ACTUAL or FORECASTED.
+	NotificationType *string `type:"string" enum:"NotificationType"`
+
+	// A list of subscribers.
+	Subscribers []*Subscriber `min:"1" type:"list"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateBudgetActionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateBudgetActionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateBudgetActionInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateBudgetActionInput"}
+	if s.AccountId == nil {
+		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+	}
+	if s.ActionId == nil {
+		invalidParams.Add(request.NewErrParamRequired("ActionId"))
+	}
+	if s.ActionId != nil && len(*s.ActionId) < 36 {
+		invalidParams.Add(request.NewErrParamMinLen("ActionId", 36))
+	}
+	if s.BudgetName == nil {
+		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("BudgetName", 1))
+	}
+	if s.ExecutionRoleArn != nil && len(*s.ExecutionRoleArn) < 32 {
+		invalidParams.Add(request.NewErrParamMinLen("ExecutionRoleArn", 32))
+	}
+	if s.Subscribers != nil && len(s.Subscribers) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("Subscribers", 1))
+	}
+	if s.ActionThreshold != nil {
+		if err := s.ActionThreshold.Validate(); err != nil {
+			invalidParams.AddNested("ActionThreshold", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Definition != nil {
+		if err := s.Definition.Validate(); err != nil {
+			invalidParams.AddNested("Definition", err.(request.ErrInvalidParams))
+		}
+	}
+	if s.Subscribers != nil {
+		for i, v := range s.Subscribers {
+			if v == nil {
+				continue
+			}
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscribers", i), err.(request.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *UpdateBudgetActionInput) SetAccountId(v string) *UpdateBudgetActionInput {
+	s.AccountId = &v
+	return s
+}
+
+// SetActionId sets the ActionId field's value.
+func (s *UpdateBudgetActionInput) SetActionId(v string) *UpdateBudgetActionInput {
+	s.ActionId = &v
+	return s
+}
+
+// SetActionThreshold sets the ActionThreshold field's value.
+func (s *UpdateBudgetActionInput) SetActionThreshold(v *ActionThreshold) *UpdateBudgetActionInput {
+	s.ActionThreshold = v
+	return s
+}
+
+// SetApprovalModel sets the ApprovalModel field's value.
+func (s *UpdateBudgetActionInput) SetApprovalModel(v string) *UpdateBudgetActionInput {
+	s.ApprovalModel = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *UpdateBudgetActionInput) SetBudgetName(v string) *UpdateBudgetActionInput {
+	s.BudgetName = &v
+	return s
+}
+
+// SetDefinition sets the Definition field's value.
+func (s *UpdateBudgetActionInput) SetDefinition(v *Definition) *UpdateBudgetActionInput {
+	s.Definition = v
+	return s
+}
+
+// SetExecutionRoleArn sets the ExecutionRoleArn field's value.
+func (s *UpdateBudgetActionInput) SetExecutionRoleArn(v string) *UpdateBudgetActionInput {
+	s.ExecutionRoleArn = &v
+	return s
+}
+
+// SetNotificationType sets the NotificationType field's value.
+func (s *UpdateBudgetActionInput) SetNotificationType(v string) *UpdateBudgetActionInput {
+	s.NotificationType = &v
+	return s
+}
+
+// SetSubscribers sets the Subscribers field's value.
+func (s *UpdateBudgetActionInput) SetSubscribers(v []*Subscriber) *UpdateBudgetActionInput {
+	s.Subscribers = v
+	return s
+}
+
+type UpdateBudgetActionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It's a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters, and
+	// the "/action/" substring, aren't allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+
+	// The updated action resource information.
+	//
+	// NewAction is a required field
+	NewAction *Action `type:"structure" required:"true"`
+
+	// The previous action resource information.
+	//
+	// OldAction is a required field
+	OldAction *Action `type:"structure" required:"true"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateBudgetActionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UpdateBudgetActionOutput) GoString() string {
+	return s.String()
+}
+
+// SetAccountId sets the AccountId field's value.
+func (s *UpdateBudgetActionOutput) SetAccountId(v string) *UpdateBudgetActionOutput {
+	s.AccountId = &v
+	return s
+}
+
+// SetBudgetName sets the BudgetName field's value.
+func (s *UpdateBudgetActionOutput) SetBudgetName(v string) *UpdateBudgetActionOutput {
+	s.BudgetName = &v
+	return s
+}
+
+// SetNewAction sets the NewAction field's value.
+func (s *UpdateBudgetActionOutput) SetNewAction(v *Action) *UpdateBudgetActionOutput {
+	s.NewAction = v
+	return s
+}
+
+// SetOldAction sets the OldAction field's value.
+func (s *UpdateBudgetActionOutput) SetOldAction(v *Action) *UpdateBudgetActionOutput {
+	s.OldAction = v
 	return s
 }
 
@@ -3308,12 +7960,20 @@ type UpdateBudgetInput struct {
 	NewBudget *Budget `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBudgetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBudgetInput) GoString() string {
 	return s.String()
 }
@@ -3359,12 +8019,20 @@ type UpdateBudgetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBudgetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateBudgetOutput) GoString() string {
 	return s.String()
 }
@@ -3395,12 +8063,20 @@ type UpdateNotificationInput struct {
 	OldNotification *Notification `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNotificationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNotificationInput) GoString() string {
 	return s.String()
 }
@@ -3472,12 +8148,20 @@ type UpdateNotificationOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNotificationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateNotificationOutput) GoString() string {
 	return s.String()
 }
@@ -3513,12 +8197,20 @@ type UpdateSubscriberInput struct {
 	OldSubscriber *Subscriber `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSubscriberInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSubscriberInput) GoString() string {
 	return s.String()
 }
@@ -3604,19 +8296,143 @@ type UpdateSubscriberOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSubscriberOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSubscriberOutput) GoString() string {
 	return s.String()
 }
 
+const (
+	// ActionStatusStandby is a ActionStatus enum value
+	ActionStatusStandby = "STANDBY"
+
+	// ActionStatusPending is a ActionStatus enum value
+	ActionStatusPending = "PENDING"
+
+	// ActionStatusExecutionInProgress is a ActionStatus enum value
+	ActionStatusExecutionInProgress = "EXECUTION_IN_PROGRESS"
+
+	// ActionStatusExecutionSuccess is a ActionStatus enum value
+	ActionStatusExecutionSuccess = "EXECUTION_SUCCESS"
+
+	// ActionStatusExecutionFailure is a ActionStatus enum value
+	ActionStatusExecutionFailure = "EXECUTION_FAILURE"
+
+	// ActionStatusReverseInProgress is a ActionStatus enum value
+	ActionStatusReverseInProgress = "REVERSE_IN_PROGRESS"
+
+	// ActionStatusReverseSuccess is a ActionStatus enum value
+	ActionStatusReverseSuccess = "REVERSE_SUCCESS"
+
+	// ActionStatusReverseFailure is a ActionStatus enum value
+	ActionStatusReverseFailure = "REVERSE_FAILURE"
+
+	// ActionStatusResetInProgress is a ActionStatus enum value
+	ActionStatusResetInProgress = "RESET_IN_PROGRESS"
+
+	// ActionStatusResetFailure is a ActionStatus enum value
+	ActionStatusResetFailure = "RESET_FAILURE"
+)
+
+// ActionStatus_Values returns all elements of the ActionStatus enum
+func ActionStatus_Values() []string {
+	return []string{
+		ActionStatusStandby,
+		ActionStatusPending,
+		ActionStatusExecutionInProgress,
+		ActionStatusExecutionSuccess,
+		ActionStatusExecutionFailure,
+		ActionStatusReverseInProgress,
+		ActionStatusReverseSuccess,
+		ActionStatusReverseFailure,
+		ActionStatusResetInProgress,
+		ActionStatusResetFailure,
+	}
+}
+
+const (
+	// ActionSubTypeStopEc2Instances is a ActionSubType enum value
+	ActionSubTypeStopEc2Instances = "STOP_EC2_INSTANCES"
+
+	// ActionSubTypeStopRdsInstances is a ActionSubType enum value
+	ActionSubTypeStopRdsInstances = "STOP_RDS_INSTANCES"
+)
+
+// ActionSubType_Values returns all elements of the ActionSubType enum
+func ActionSubType_Values() []string {
+	return []string{
+		ActionSubTypeStopEc2Instances,
+		ActionSubTypeStopRdsInstances,
+	}
+}
+
+const (
+	// ActionTypeApplyIamPolicy is a ActionType enum value
+	ActionTypeApplyIamPolicy = "APPLY_IAM_POLICY"
+
+	// ActionTypeApplyScpPolicy is a ActionType enum value
+	ActionTypeApplyScpPolicy = "APPLY_SCP_POLICY"
+
+	// ActionTypeRunSsmDocuments is a ActionType enum value
+	ActionTypeRunSsmDocuments = "RUN_SSM_DOCUMENTS"
+)
+
+// ActionType_Values returns all elements of the ActionType enum
+func ActionType_Values() []string {
+	return []string{
+		ActionTypeApplyIamPolicy,
+		ActionTypeApplyScpPolicy,
+		ActionTypeRunSsmDocuments,
+	}
+}
+
+const (
+	// ApprovalModelAutomatic is a ApprovalModel enum value
+	ApprovalModelAutomatic = "AUTOMATIC"
+
+	// ApprovalModelManual is a ApprovalModel enum value
+	ApprovalModelManual = "MANUAL"
+)
+
+// ApprovalModel_Values returns all elements of the ApprovalModel enum
+func ApprovalModel_Values() []string {
+	return []string{
+		ApprovalModelAutomatic,
+		ApprovalModelManual,
+	}
+}
+
+const (
+	// AutoAdjustTypeHistorical is a AutoAdjustType enum value
+	AutoAdjustTypeHistorical = "HISTORICAL"
+
+	// AutoAdjustTypeForecast is a AutoAdjustType enum value
+	AutoAdjustTypeForecast = "FORECAST"
+)
+
+// AutoAdjustType_Values returns all elements of the AutoAdjustType enum
+func AutoAdjustType_Values() []string {
+	return []string{
+		AutoAdjustTypeHistorical,
+		AutoAdjustTypeForecast,
+	}
+}
+
 // The type of a budget. It must be one of the following types:
 //
-// COST, USAGE, RI_UTILIZATION, or RI_COVERAGE.
+// COST, USAGE, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, or SAVINGS_PLANS_COVERAGE.
 const (
 	// BudgetTypeUsage is a BudgetType enum value
 	BudgetTypeUsage = "USAGE"
@@ -3629,9 +8445,27 @@ const (
 
 	// BudgetTypeRiCoverage is a BudgetType enum value
 	BudgetTypeRiCoverage = "RI_COVERAGE"
+
+	// BudgetTypeSavingsPlansUtilization is a BudgetType enum value
+	BudgetTypeSavingsPlansUtilization = "SAVINGS_PLANS_UTILIZATION"
+
+	// BudgetTypeSavingsPlansCoverage is a BudgetType enum value
+	BudgetTypeSavingsPlansCoverage = "SAVINGS_PLANS_COVERAGE"
 )
 
-// The comparison operator of a notification. Currently the service supports
+// BudgetType_Values returns all elements of the BudgetType enum
+func BudgetType_Values() []string {
+	return []string{
+		BudgetTypeUsage,
+		BudgetTypeCost,
+		BudgetTypeRiUtilization,
+		BudgetTypeRiCoverage,
+		BudgetTypeSavingsPlansUtilization,
+		BudgetTypeSavingsPlansCoverage,
+	}
+}
+
+// The comparison operator of a notification. Currently, the service supports
 // the following operators:
 //
 // GREATER_THAN, LESS_THAN, EQUAL_TO
@@ -3646,6 +8480,67 @@ const (
 	ComparisonOperatorEqualTo = "EQUAL_TO"
 )
 
+// ComparisonOperator_Values returns all elements of the ComparisonOperator enum
+func ComparisonOperator_Values() []string {
+	return []string{
+		ComparisonOperatorGreaterThan,
+		ComparisonOperatorLessThan,
+		ComparisonOperatorEqualTo,
+	}
+}
+
+const (
+	// EventTypeSystem is a EventType enum value
+	EventTypeSystem = "SYSTEM"
+
+	// EventTypeCreateAction is a EventType enum value
+	EventTypeCreateAction = "CREATE_ACTION"
+
+	// EventTypeDeleteAction is a EventType enum value
+	EventTypeDeleteAction = "DELETE_ACTION"
+
+	// EventTypeUpdateAction is a EventType enum value
+	EventTypeUpdateAction = "UPDATE_ACTION"
+
+	// EventTypeExecuteAction is a EventType enum value
+	EventTypeExecuteAction = "EXECUTE_ACTION"
+)
+
+// EventType_Values returns all elements of the EventType enum
+func EventType_Values() []string {
+	return []string{
+		EventTypeSystem,
+		EventTypeCreateAction,
+		EventTypeDeleteAction,
+		EventTypeUpdateAction,
+		EventTypeExecuteAction,
+	}
+}
+
+const (
+	// ExecutionTypeApproveBudgetAction is a ExecutionType enum value
+	ExecutionTypeApproveBudgetAction = "APPROVE_BUDGET_ACTION"
+
+	// ExecutionTypeRetryBudgetAction is a ExecutionType enum value
+	ExecutionTypeRetryBudgetAction = "RETRY_BUDGET_ACTION"
+
+	// ExecutionTypeReverseBudgetAction is a ExecutionType enum value
+	ExecutionTypeReverseBudgetAction = "REVERSE_BUDGET_ACTION"
+
+	// ExecutionTypeResetBudgetAction is a ExecutionType enum value
+	ExecutionTypeResetBudgetAction = "RESET_BUDGET_ACTION"
+)
+
+// ExecutionType_Values returns all elements of the ExecutionType enum
+func ExecutionType_Values() []string {
+	return []string{
+		ExecutionTypeApproveBudgetAction,
+		ExecutionTypeRetryBudgetAction,
+		ExecutionTypeReverseBudgetAction,
+		ExecutionTypeResetBudgetAction,
+	}
+}
+
 const (
 	// NotificationStateOk is a NotificationState enum value
 	NotificationStateOk = "OK"
@@ -3653,6 +8548,14 @@ const (
 	// NotificationStateAlarm is a NotificationState enum value
 	NotificationStateAlarm = "ALARM"
 )
+
+// NotificationState_Values returns all elements of the NotificationState enum
+func NotificationState_Values() []string {
+	return []string{
+		NotificationStateOk,
+		NotificationStateAlarm,
+	}
+}
 
 // The type of a notification. It must be ACTUAL or FORECASTED.
 const (
@@ -3663,6 +8566,14 @@ const (
 	NotificationTypeForecasted = "FORECASTED"
 )
 
+// NotificationType_Values returns all elements of the NotificationType enum
+func NotificationType_Values() []string {
+	return []string{
+		NotificationTypeActual,
+		NotificationTypeForecasted,
+	}
+}
+
 // The subscription type of the subscriber. It can be SMS or EMAIL.
 const (
 	// SubscriptionTypeSns is a SubscriptionType enum value
@@ -3672,7 +8583,15 @@ const (
 	SubscriptionTypeEmail = "EMAIL"
 )
 
-// The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.
+// SubscriptionType_Values returns all elements of the SubscriptionType enum
+func SubscriptionType_Values() []string {
+	return []string{
+		SubscriptionTypeSns,
+		SubscriptionTypeEmail,
+	}
+}
+
+// The type of threshold for a notification.
 const (
 	// ThresholdTypePercentage is a ThresholdType enum value
 	ThresholdTypePercentage = "PERCENTAGE"
@@ -3680,6 +8599,14 @@ const (
 	// ThresholdTypeAbsoluteValue is a ThresholdType enum value
 	ThresholdTypeAbsoluteValue = "ABSOLUTE_VALUE"
 )
+
+// ThresholdType_Values returns all elements of the ThresholdType enum
+func ThresholdType_Values() []string {
+	return []string{
+		ThresholdTypePercentage,
+		ThresholdTypeAbsoluteValue,
+	}
+}
 
 // The time unit of the budget, such as MONTHLY or QUARTERLY.
 const (
@@ -3695,3 +8622,13 @@ const (
 	// TimeUnitAnnually is a TimeUnit enum value
 	TimeUnitAnnually = "ANNUALLY"
 )
+
+// TimeUnit_Values returns all elements of the TimeUnit enum
+func TimeUnit_Values() []string {
+	return []string{
+		TimeUnitDaily,
+		TimeUnitMonthly,
+		TimeUnitQuarterly,
+		TimeUnitAnnually,
+	}
+}

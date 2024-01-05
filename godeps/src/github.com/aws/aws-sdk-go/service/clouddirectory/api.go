@@ -29,14 +29,13 @@ const opAddFacetToObject = "AddFacetToObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AddFacetToObjectRequest method.
+//	req, resp := client.AddFacetToObjectRequest(params)
 //
-//    // Example sending a request using the AddFacetToObjectRequest method.
-//    req, resp := client.AddFacetToObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AddFacetToObject
 func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) (req *request.Request, output *AddFacetToObjectOutput) {
@@ -68,44 +67,47 @@ func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) (
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation AddFacetToObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AddFacetToObject
 func (c *CloudDirectory) AddFacetToObject(input *AddFacetToObjectInput) (*AddFacetToObjectOutput, error) {
@@ -145,14 +147,13 @@ const opApplySchema = "ApplySchema"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ApplySchemaRequest method.
+//	req, resp := client.ApplySchemaRequest(params)
 //
-//    // Example sending a request using the ApplySchemaRequest method.
-//    req, resp := client.ApplySchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ApplySchema
 func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) (req *request.Request, output *ApplySchemaOutput) {
@@ -183,46 +184,49 @@ func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) (req *reque
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ApplySchema for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeSchemaAlreadyExistsException "SchemaAlreadyExistsException"
-//   Indicates that a schema could not be created due to a naming conflict. Please
-//   select a different name and then try again.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - SchemaAlreadyExistsException
+//     Indicates that a schema could not be created due to a naming conflict. Please
+//     select a different name and then try again.
 //
-//   * ErrCodeInvalidAttachmentException "InvalidAttachmentException"
-//   Indicates that an attempt to make an attachment was invalid. For example,
-//   attaching two nodes with a link type that is not applicable to the nodes
-//   or attempting to apply a schema to a directory a second time.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidAttachmentException
+//     Indicates that an attempt to make an attachment was invalid. For example,
+//     attaching two nodes with a link type that is not applicable to the nodes
+//     or attempting to apply a schema to a directory a second time.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ApplySchema
 func (c *CloudDirectory) ApplySchema(input *ApplySchemaInput) (*ApplySchemaOutput, error) {
@@ -262,14 +266,13 @@ const opAttachObject = "AttachObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AttachObjectRequest method.
+//	req, resp := client.AttachObjectRequest(params)
 //
-//    // Example sending a request using the AttachObjectRequest method.
-//    req, resp := client.AttachObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachObject
 func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) (req *request.Request, output *AttachObjectOutput) {
@@ -293,9 +296,9 @@ func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) (req *req
 // Attaches an existing object to another object. An object can be accessed
 // in two ways:
 //
-// Using the path
+// # Using the path
 //
-// Using ObjectIdentifier
+// # Using ObjectIdentifier
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -304,57 +307,60 @@ func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation AttachObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeLinkNameAlreadyInUseException "LinkNameAlreadyInUseException"
-//   Indicates that a link could not be created due to a naming conflict. Choose
-//   a different name and then try again.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidAttachmentException "InvalidAttachmentException"
-//   Indicates that an attempt to make an attachment was invalid. For example,
-//   attaching two nodes with a link type that is not applicable to the nodes
-//   or attempting to apply a schema to a directory a second time.
+//   - LinkNameAlreadyInUseException
+//     Indicates that a link could not be created due to a naming conflict. Choose
+//     a different name and then try again.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - InvalidAttachmentException
+//     Indicates that an attempt to make an attachment was invalid. For example,
+//     attaching two nodes with a link type that is not applicable to the nodes
+//     or attempting to apply a schema to a directory a second time.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachObject
 func (c *CloudDirectory) AttachObject(input *AttachObjectInput) (*AttachObjectOutput, error) {
@@ -394,14 +400,13 @@ const opAttachPolicy = "AttachPolicy"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AttachPolicyRequest method.
+//	req, resp := client.AttachPolicyRequest(params)
 //
-//    // Example sending a request using the AttachPolicyRequest method.
-//    req, resp := client.AttachPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachPolicy
 func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) (req *request.Request, output *AttachPolicyOutput) {
@@ -433,43 +438,46 @@ func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation AttachPolicy for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeNotPolicyException "NotPolicyException"
-//   Indicates that the requested operation can only operate on policy objects.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - NotPolicyException
+//     Indicates that the requested operation can only operate on policy objects.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachPolicy
 func (c *CloudDirectory) AttachPolicy(input *AttachPolicyInput) (*AttachPolicyOutput, error) {
@@ -509,14 +517,13 @@ const opAttachToIndex = "AttachToIndex"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AttachToIndexRequest method.
+//	req, resp := client.AttachToIndexRequest(params)
 //
-//    // Example sending a request using the AttachToIndexRequest method.
-//    req, resp := client.AttachToIndexRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachToIndex
 func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) (req *request.Request, output *AttachToIndexOutput) {
@@ -546,56 +553,59 @@ func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) (req *r
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation AttachToIndex for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidAttachmentException "InvalidAttachmentException"
-//   Indicates that an attempt to make an attachment was invalid. For example,
-//   attaching two nodes with a link type that is not applicable to the nodes
-//   or attempting to apply a schema to a directory a second time.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - InvalidAttachmentException
+//     Indicates that an attempt to make an attachment was invalid. For example,
+//     attaching two nodes with a link type that is not applicable to the nodes
+//     or attempting to apply a schema to a directory a second time.
 //
-//   * ErrCodeLinkNameAlreadyInUseException "LinkNameAlreadyInUseException"
-//   Indicates that a link could not be created due to a naming conflict. Choose
-//   a different name and then try again.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeIndexedAttributeMissingException "IndexedAttributeMissingException"
-//   An object has been attempted to be attached to an object that does not have
-//   the appropriate attribute value.
+//   - LinkNameAlreadyInUseException
+//     Indicates that a link could not be created due to a naming conflict. Choose
+//     a different name and then try again.
 //
-//   * ErrCodeNotIndexException "NotIndexException"
-//   Indicates that the requested operation can only operate on index objects.
+//   - IndexedAttributeMissingException
+//     An object has been attempted to be attached to an object that does not have
+//     the appropriate attribute value.
+//
+//   - NotIndexException
+//     Indicates that the requested operation can only operate on index objects.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachToIndex
 func (c *CloudDirectory) AttachToIndex(input *AttachToIndexInput) (*AttachToIndexOutput, error) {
@@ -635,14 +645,13 @@ const opAttachTypedLink = "AttachTypedLink"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the AttachTypedLinkRequest method.
+//	req, resp := client.AttachTypedLinkRequest(params)
 //
-//    // Example sending a request using the AttachTypedLinkRequest method.
-//    req, resp := client.AttachTypedLinkRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachTypedLink
 func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) (req *request.Request, output *AttachTypedLinkOutput) {
@@ -673,53 +682,56 @@ func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) (re
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation AttachTypedLink for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeInvalidAttachmentException "InvalidAttachmentException"
-//   Indicates that an attempt to make an attachment was invalid. For example,
-//   attaching two nodes with a link type that is not applicable to the nodes
-//   or attempting to apply a schema to a directory a second time.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - InvalidAttachmentException
+//     Indicates that an attempt to make an attachment was invalid. For example,
+//     attaching two nodes with a link type that is not applicable to the nodes
+//     or attempting to apply a schema to a directory a second time.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachTypedLink
 func (c *CloudDirectory) AttachTypedLink(input *AttachTypedLinkInput) (*AttachTypedLinkOutput, error) {
@@ -759,14 +771,13 @@ const opBatchRead = "BatchRead"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchReadRequest method.
+//	req, resp := client.BatchReadRequest(params)
 //
-//    // Example sending a request using the BatchReadRequest method.
-//    req, resp := client.BatchReadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchRead
 func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) (req *request.Request, output *BatchReadOutput) {
@@ -796,37 +807,40 @@ func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) (req *request.R
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation BatchRead for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
+//
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchRead
 func (c *CloudDirectory) BatchRead(input *BatchReadInput) (*BatchReadOutput, error) {
@@ -866,14 +880,13 @@ const opBatchWrite = "BatchWrite"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the BatchWriteRequest method.
+//	req, resp := client.BatchWriteRequest(params)
 //
-//    // Example sending a request using the BatchWriteRequest method.
-//    req, resp := client.BatchWriteRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWrite
 func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) (req *request.Request, output *BatchWriteOutput) {
@@ -904,40 +917,43 @@ func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) (req *request
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation BatchWrite for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeBatchWriteException "BatchWriteException"
-//   A BatchWrite exception has occurred.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
+//
+//   - BatchWriteException
+//     A BatchWrite exception has occurred.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWrite
 func (c *CloudDirectory) BatchWrite(input *BatchWriteInput) (*BatchWriteOutput, error) {
@@ -977,14 +993,13 @@ const opCreateDirectory = "CreateDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateDirectoryRequest method.
+//	req, resp := client.CreateDirectoryRequest(params)
 //
-//    // Example sending a request using the CreateDirectoryRequest method.
-//    req, resp := client.CreateDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateDirectory
 func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) (req *request.Request, output *CreateDirectoryOutput) {
@@ -1019,41 +1034,44 @@ func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) (re
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation CreateDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryAlreadyExistsException "DirectoryAlreadyExistsException"
-//   Indicates that a Directory could not be created due to a naming conflict.
-//   Choose a different name and try again.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryAlreadyExistsException
+//     Indicates that a Directory could not be created due to a naming conflict.
+//     Choose a different name and try again.
+//
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateDirectory
 func (c *CloudDirectory) CreateDirectory(input *CreateDirectoryInput) (*CreateDirectoryOutput, error) {
@@ -1093,14 +1111,13 @@ const opCreateFacet = "CreateFacet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateFacetRequest method.
+//	req, resp := client.CreateFacetRequest(params)
 //
-//    // Example sending a request using the CreateFacetRequest method.
-//    req, resp := client.CreateFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateFacet
 func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) (req *request.Request, output *CreateFacetOutput) {
@@ -1132,47 +1149,50 @@ func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) (req *reque
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation CreateFacet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeFacetAlreadyExistsException "FacetAlreadyExistsException"
-//   A facet with the same name already exists.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
+//   - FacetAlreadyExistsException
+//     A facet with the same name already exists.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - InvalidRuleException
+//     Occurs when any of the rule parameter keys or values are invalid.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateFacet
 func (c *CloudDirectory) CreateFacet(input *CreateFacetInput) (*CreateFacetOutput, error) {
@@ -1212,14 +1232,13 @@ const opCreateIndex = "CreateIndex"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateIndexRequest method.
+//	req, resp := client.CreateIndexRequest(params)
 //
-//    // Example sending a request using the CreateIndexRequest method.
-//    req, resp := client.CreateIndexRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateIndex
 func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) (req *request.Request, output *CreateIndexOutput) {
@@ -1250,51 +1269,54 @@ func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) (req *reque
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation CreateIndex for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeLinkNameAlreadyInUseException "LinkNameAlreadyInUseException"
-//   Indicates that a link could not be created due to a naming conflict. Choose
-//   a different name and then try again.
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
-//   * ErrCodeUnsupportedIndexTypeException "UnsupportedIndexTypeException"
-//   Indicates that the requested index type is not supported.
+//   - LinkNameAlreadyInUseException
+//     Indicates that a link could not be created due to a naming conflict. Choose
+//     a different name and then try again.
+//
+//   - UnsupportedIndexTypeException
+//     Indicates that the requested index type is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateIndex
 func (c *CloudDirectory) CreateIndex(input *CreateIndexInput) (*CreateIndexOutput, error) {
@@ -1334,14 +1356,13 @@ const opCreateObject = "CreateObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateObjectRequest method.
+//	req, resp := client.CreateObjectRequest(params)
 //
-//    // Example sending a request using the CreateObjectRequest method.
-//    req, resp := client.CreateObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateObject
 func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) (req *request.Request, output *CreateObjectOutput) {
@@ -1374,51 +1395,54 @@ func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation CreateObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeLinkNameAlreadyInUseException "LinkNameAlreadyInUseException"
-//   Indicates that a link could not be created due to a naming conflict. Choose
-//   a different name and then try again.
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
-//   * ErrCodeUnsupportedIndexTypeException "UnsupportedIndexTypeException"
-//   Indicates that the requested index type is not supported.
+//   - LinkNameAlreadyInUseException
+//     Indicates that a link could not be created due to a naming conflict. Choose
+//     a different name and then try again.
+//
+//   - UnsupportedIndexTypeException
+//     Indicates that the requested index type is not supported.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateObject
 func (c *CloudDirectory) CreateObject(input *CreateObjectInput) (*CreateObjectOutput, error) {
@@ -1458,14 +1482,13 @@ const opCreateSchema = "CreateSchema"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateSchemaRequest method.
+//	req, resp := client.CreateSchemaRequest(params)
 //
-//    // Example sending a request using the CreateSchemaRequest method.
-//    req, resp := client.CreateSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateSchema
 func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) (req *request.Request, output *CreateSchemaOutput) {
@@ -1489,16 +1512,16 @@ func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) (req *req
 // Creates a new schema in a development state. A schema can exist in three
 // phases:
 //
-//    * Development: This is a mutable phase of the schema. All new schemas
-//    are in the development phase. Once the schema is finalized, it can be
-//    published.
+//   - Development: This is a mutable phase of the schema. All new schemas
+//     are in the development phase. Once the schema is finalized, it can be
+//     published.
 //
-//    * Published: Published schemas are immutable and have a version associated
-//    with them.
+//   - Published: Published schemas are immutable and have a version associated
+//     with them.
 //
-//    * Applied: Applied schemas are mutable in a way that allows you to add
-//    new schema facets. You can also add new, nonrequired attributes to existing
-//    schema facets. You can apply only published schemas to directories.
+//   - Applied: Applied schemas are mutable in a way that allows you to add
+//     new schema facets. You can also add new, nonrequired attributes to existing
+//     schema facets. You can apply only published schemas to directories.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1507,41 +1530,46 @@ func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation CreateSchema for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeSchemaAlreadyExistsException "SchemaAlreadyExistsException"
-//   Indicates that a schema could not be created due to a naming conflict. Please
-//   select a different name and then try again.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - SchemaAlreadyExistsException
+//     Indicates that a schema could not be created due to a naming conflict. Please
+//     select a different name and then try again.
+//
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateSchema
 func (c *CloudDirectory) CreateSchema(input *CreateSchemaInput) (*CreateSchemaOutput, error) {
@@ -1581,14 +1609,13 @@ const opCreateTypedLinkFacet = "CreateTypedLinkFacet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateTypedLinkFacetRequest method.
+//	req, resp := client.CreateTypedLinkFacetRequest(params)
 //
-//    // Example sending a request using the CreateTypedLinkFacetRequest method.
-//    req, resp := client.CreateTypedLinkFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateTypedLinkFacet
 func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacetInput) (req *request.Request, output *CreateTypedLinkFacetOutput) {
@@ -1619,47 +1646,50 @@ func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacet
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation CreateTypedLinkFacet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeFacetAlreadyExistsException "FacetAlreadyExistsException"
-//   A facet with the same name already exists.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
+//   - FacetAlreadyExistsException
+//     A facet with the same name already exists.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - InvalidRuleException
+//     Occurs when any of the rule parameter keys or values are invalid.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateTypedLinkFacet
 func (c *CloudDirectory) CreateTypedLinkFacet(input *CreateTypedLinkFacetInput) (*CreateTypedLinkFacetOutput, error) {
@@ -1699,14 +1729,13 @@ const opDeleteDirectory = "DeleteDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteDirectoryRequest method.
+//	req, resp := client.DeleteDirectoryRequest(params)
 //
-//    // Example sending a request using the DeleteDirectoryRequest method.
-//    req, resp := client.DeleteDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteDirectory
 func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) (req *request.Request, output *DeleteDirectoryOutput) {
@@ -1737,44 +1766,47 @@ func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) (re
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DeleteDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeDirectoryNotDisabledException "DirectoryNotDisabledException"
-//   An operation can only operate on a disabled directory.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+//   - DirectoryNotDisabledException
+//     An operation can only operate on a disabled directory.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryDeletedException "DirectoryDeletedException"
-//   A directory that has been deleted and to which access has been attempted.
-//   Note: The requested resource will eventually cease to exist.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - DirectoryDeletedException
+//     A directory that has been deleted and to which access has been attempted.
+//     Note: The requested resource will eventually cease to exist.
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
+//
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteDirectory
 func (c *CloudDirectory) DeleteDirectory(input *DeleteDirectoryInput) (*DeleteDirectoryOutput, error) {
@@ -1814,14 +1846,13 @@ const opDeleteFacet = "DeleteFacet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteFacetRequest method.
+//	req, resp := client.DeleteFacetRequest(params)
 //
-//    // Example sending a request using the DeleteFacetRequest method.
-//    req, resp := client.DeleteFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteFacet
 func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) (req *request.Request, output *DeleteFacetOutput) {
@@ -1853,44 +1884,47 @@ func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) (req *reque
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DeleteFacet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeFacetInUseException "FacetInUseException"
-//   Occurs when deleting a facet that contains an attribute that is a target
-//   to an attribute reference in a different facet.
+//   - FacetNotFoundException
+//     The specified Facet could not be found.
+//
+//   - FacetInUseException
+//     Occurs when deleting a facet that contains an attribute that is a target
+//     to an attribute reference in a different facet.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteFacet
 func (c *CloudDirectory) DeleteFacet(input *DeleteFacetInput) (*DeleteFacetOutput, error) {
@@ -1930,14 +1964,13 @@ const opDeleteObject = "DeleteObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteObjectRequest method.
+//	req, resp := client.DeleteObjectRequest(params)
 //
-//    // Example sending a request using the DeleteObjectRequest method.
-//    req, resp := client.DeleteObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteObject
 func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) (req *request.Request, output *DeleteObjectOutput) {
@@ -1971,44 +2004,47 @@ func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DeleteObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeObjectNotDetachedException "ObjectNotDetachedException"
-//   Indicates that the requested operation cannot be completed because the object
-//   has not been detached from the tree.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - ObjectNotDetachedException
+//     Indicates that the requested operation cannot be completed because the object
+//     has not been detached from the tree.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteObject
 func (c *CloudDirectory) DeleteObject(input *DeleteObjectInput) (*DeleteObjectOutput, error) {
@@ -2048,14 +2084,13 @@ const opDeleteSchema = "DeleteSchema"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteSchemaRequest method.
+//	req, resp := client.DeleteSchemaRequest(params)
 //
-//    // Example sending a request using the DeleteSchemaRequest method.
-//    req, resp := client.DeleteSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteSchema
 func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) (req *request.Request, output *DeleteSchemaOutput) {
@@ -2086,41 +2121,44 @@ func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DeleteSchema for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeStillContainsLinksException "StillContainsLinksException"
-//   The object could not be deleted because links still exist. Remove the links
-//   and then try the operation again.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - StillContainsLinksException
+//     The object could not be deleted because links still exist. Remove the links
+//     and then try the operation again.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteSchema
 func (c *CloudDirectory) DeleteSchema(input *DeleteSchemaInput) (*DeleteSchemaOutput, error) {
@@ -2160,14 +2198,13 @@ const opDeleteTypedLinkFacet = "DeleteTypedLinkFacet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteTypedLinkFacetRequest method.
+//	req, resp := client.DeleteTypedLinkFacetRequest(params)
 //
-//    // Example sending a request using the DeleteTypedLinkFacetRequest method.
-//    req, resp := client.DeleteTypedLinkFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteTypedLinkFacet
 func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) (req *request.Request, output *DeleteTypedLinkFacetOutput) {
@@ -2198,40 +2235,43 @@ func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacet
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DeleteTypedLinkFacet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - FacetNotFoundException
+//     The specified Facet could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteTypedLinkFacet
 func (c *CloudDirectory) DeleteTypedLinkFacet(input *DeleteTypedLinkFacetInput) (*DeleteTypedLinkFacetOutput, error) {
@@ -2271,14 +2311,13 @@ const opDetachFromIndex = "DetachFromIndex"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DetachFromIndexRequest method.
+//	req, resp := client.DetachFromIndexRequest(params)
 //
-//    // Example sending a request using the DetachFromIndexRequest method.
-//    req, resp := client.DetachFromIndexRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachFromIndex
 func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) (req *request.Request, output *DetachFromIndexOutput) {
@@ -2308,46 +2347,49 @@ func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) (re
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DetachFromIndex for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeObjectAlreadyDetachedException "ObjectAlreadyDetachedException"
-//   Indicates that the object is not attached to the index.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeNotIndexException "NotIndexException"
-//   Indicates that the requested operation can only operate on index objects.
+//   - ObjectAlreadyDetachedException
+//     Indicates that the object is not attached to the index.
+//
+//   - NotIndexException
+//     Indicates that the requested operation can only operate on index objects.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachFromIndex
 func (c *CloudDirectory) DetachFromIndex(input *DetachFromIndexInput) (*DetachFromIndexOutput, error) {
@@ -2387,14 +2429,13 @@ const opDetachObject = "DetachObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DetachObjectRequest method.
+//	req, resp := client.DetachObjectRequest(params)
 //
-//    // Example sending a request using the DetachObjectRequest method.
-//    req, resp := client.DetachObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachObject
 func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) (req *request.Request, output *DetachObjectOutput) {
@@ -2425,44 +2466,47 @@ func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DetachObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeNotNodeException "NotNodeException"
-//   Occurs when any invalid operations are performed on an object that is not
-//   a node, such as calling ListObjectChildren for a leaf node object.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - NotNodeException
+//     Occurs when any invalid operations are performed on an object that is not
+//     a node, such as calling ListObjectChildren for a leaf node object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachObject
 func (c *CloudDirectory) DetachObject(input *DetachObjectInput) (*DetachObjectOutput, error) {
@@ -2502,14 +2546,13 @@ const opDetachPolicy = "DetachPolicy"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DetachPolicyRequest method.
+//	req, resp := client.DetachPolicyRequest(params)
 //
-//    // Example sending a request using the DetachPolicyRequest method.
-//    req, resp := client.DetachPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachPolicy
 func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) (req *request.Request, output *DetachPolicyOutput) {
@@ -2540,43 +2583,46 @@ func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DetachPolicy for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeNotPolicyException "NotPolicyException"
-//   Indicates that the requested operation can only operate on policy objects.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - NotPolicyException
+//     Indicates that the requested operation can only operate on policy objects.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachPolicy
 func (c *CloudDirectory) DetachPolicy(input *DetachPolicyInput) (*DetachPolicyOutput, error) {
@@ -2616,14 +2662,13 @@ const opDetachTypedLink = "DetachTypedLink"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DetachTypedLinkRequest method.
+//	req, resp := client.DetachTypedLinkRequest(params)
 //
-//    // Example sending a request using the DetachTypedLinkRequest method.
-//    req, resp := client.DetachTypedLinkRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachTypedLink
 func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) (req *request.Request, output *DetachTypedLinkOutput) {
@@ -2655,44 +2700,47 @@ func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) (re
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DetachTypedLink for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachTypedLink
 func (c *CloudDirectory) DetachTypedLink(input *DetachTypedLinkInput) (*DetachTypedLinkOutput, error) {
@@ -2732,14 +2780,13 @@ const opDisableDirectory = "DisableDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DisableDirectoryRequest method.
+//	req, resp := client.DisableDirectoryRequest(params)
 //
-//    // Example sending a request using the DisableDirectoryRequest method.
-//    req, resp := client.DisableDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DisableDirectory
 func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) (req *request.Request, output *DisableDirectoryOutput) {
@@ -2771,41 +2818,44 @@ func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) (
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation DisableDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeDirectoryDeletedException "DirectoryDeletedException"
-//   A directory that has been deleted and to which access has been attempted.
-//   Note: The requested resource will eventually cease to exist.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+//   - DirectoryDeletedException
+//     A directory that has been deleted and to which access has been attempted.
+//     Note: The requested resource will eventually cease to exist.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
+//
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DisableDirectory
 func (c *CloudDirectory) DisableDirectory(input *DisableDirectoryInput) (*DisableDirectoryOutput, error) {
@@ -2845,14 +2895,13 @@ const opEnableDirectory = "EnableDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the EnableDirectoryRequest method.
+//	req, resp := client.EnableDirectoryRequest(params)
 //
-//    // Example sending a request using the EnableDirectoryRequest method.
-//    req, resp := client.EnableDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/EnableDirectory
 func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) (req *request.Request, output *EnableDirectoryOutput) {
@@ -2883,41 +2932,44 @@ func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) (re
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation EnableDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+// Returned Error Types:
 //
-//   * ErrCodeDirectoryDeletedException "DirectoryDeletedException"
-//   A directory that has been deleted and to which access has been attempted.
-//   Note: The requested resource will eventually cease to exist.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+//   - DirectoryDeletedException
+//     A directory that has been deleted and to which access has been attempted.
+//     Note: The requested resource will eventually cease to exist.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
+//
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/EnableDirectory
 func (c *CloudDirectory) EnableDirectory(input *EnableDirectoryInput) (*EnableDirectoryOutput, error) {
@@ -2957,14 +3009,13 @@ const opGetAppliedSchemaVersion = "GetAppliedSchemaVersion"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetAppliedSchemaVersionRequest method.
+//	req, resp := client.GetAppliedSchemaVersionRequest(params)
 //
-//    // Example sending a request using the GetAppliedSchemaVersionRequest method.
-//    req, resp := client.GetAppliedSchemaVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetAppliedSchemaVersion
 func (c *CloudDirectory) GetAppliedSchemaVersionRequest(input *GetAppliedSchemaVersionInput) (req *request.Request, output *GetAppliedSchemaVersionOutput) {
@@ -2995,37 +3046,40 @@ func (c *CloudDirectory) GetAppliedSchemaVersionRequest(input *GetAppliedSchemaV
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation GetAppliedSchemaVersion for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
+//
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetAppliedSchemaVersion
 func (c *CloudDirectory) GetAppliedSchemaVersion(input *GetAppliedSchemaVersionInput) (*GetAppliedSchemaVersionOutput, error) {
@@ -3065,14 +3119,13 @@ const opGetDirectory = "GetDirectory"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetDirectoryRequest method.
+//	req, resp := client.GetDirectoryRequest(params)
 //
-//    // Example sending a request using the GetDirectoryRequest method.
-//    req, resp := client.GetDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetDirectory
 func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) (req *request.Request, output *GetDirectoryOutput) {
@@ -3102,34 +3155,37 @@ func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation GetDirectory for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
+//
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetDirectory
 func (c *CloudDirectory) GetDirectory(input *GetDirectoryInput) (*GetDirectoryOutput, error) {
@@ -3169,14 +3225,13 @@ const opGetFacet = "GetFacet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetFacetRequest method.
+//	req, resp := client.GetFacetRequest(params)
 //
-//    // Example sending a request using the GetFacetRequest method.
-//    req, resp := client.GetFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetFacet
 func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) (req *request.Request, output *GetFacetOutput) {
@@ -3208,40 +3263,43 @@ func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) (req *request.Req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation GetFacet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - FacetNotFoundException
+//     The specified Facet could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetFacet
 func (c *CloudDirectory) GetFacet(input *GetFacetInput) (*GetFacetOutput, error) {
@@ -3281,14 +3339,13 @@ const opGetLinkAttributes = "GetLinkAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetLinkAttributesRequest method.
+//	req, resp := client.GetLinkAttributesRequest(params)
 //
-//    // Example sending a request using the GetLinkAttributesRequest method.
-//    req, resp := client.GetLinkAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetLinkAttributes
 func (c *CloudDirectory) GetLinkAttributesRequest(input *GetLinkAttributesInput) (req *request.Request, output *GetLinkAttributesOutput) {
@@ -3318,44 +3375,47 @@ func (c *CloudDirectory) GetLinkAttributesRequest(input *GetLinkAttributesInput)
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation GetLinkAttributes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetLinkAttributes
 func (c *CloudDirectory) GetLinkAttributes(input *GetLinkAttributesInput) (*GetLinkAttributesOutput, error) {
@@ -3395,14 +3455,13 @@ const opGetObjectAttributes = "GetObjectAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetObjectAttributesRequest method.
+//	req, resp := client.GetObjectAttributesRequest(params)
 //
-//    // Example sending a request using the GetObjectAttributesRequest method.
-//    req, resp := client.GetObjectAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectAttributes
 func (c *CloudDirectory) GetObjectAttributesRequest(input *GetObjectAttributesInput) (req *request.Request, output *GetObjectAttributesOutput) {
@@ -3432,44 +3491,47 @@ func (c *CloudDirectory) GetObjectAttributesRequest(input *GetObjectAttributesIn
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation GetObjectAttributes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectAttributes
 func (c *CloudDirectory) GetObjectAttributes(input *GetObjectAttributesInput) (*GetObjectAttributesOutput, error) {
@@ -3509,14 +3571,13 @@ const opGetObjectInformation = "GetObjectInformation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetObjectInformationRequest method.
+//	req, resp := client.GetObjectInformationRequest(params)
 //
-//    // Example sending a request using the GetObjectInformationRequest method.
-//    req, resp := client.GetObjectInformationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectInformation
 func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformationInput) (req *request.Request, output *GetObjectInformationOutput) {
@@ -3546,40 +3607,43 @@ func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformation
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation GetObjectInformation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
+//
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectInformation
 func (c *CloudDirectory) GetObjectInformation(input *GetObjectInformationInput) (*GetObjectInformationOutput, error) {
@@ -3619,14 +3683,13 @@ const opGetSchemaAsJson = "GetSchemaAsJson"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetSchemaAsJsonRequest method.
+//	req, resp := client.GetSchemaAsJsonRequest(params)
 //
-//    // Example sending a request using the GetSchemaAsJsonRequest method.
-//    req, resp := client.GetSchemaAsJsonRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetSchemaAsJson
 func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) (req *request.Request, output *GetSchemaAsJsonOutput) {
@@ -3657,41 +3720,44 @@ func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) (re
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation GetSchemaAsJson for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetSchemaAsJson
 func (c *CloudDirectory) GetSchemaAsJson(input *GetSchemaAsJsonInput) (*GetSchemaAsJsonOutput, error) {
@@ -3731,14 +3797,13 @@ const opGetTypedLinkFacetInformation = "GetTypedLinkFacetInformation"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetTypedLinkFacetInformationRequest method.
+//	req, resp := client.GetTypedLinkFacetInformationRequest(params)
 //
-//    // Example sending a request using the GetTypedLinkFacetInformationRequest method.
-//    req, resp := client.GetTypedLinkFacetInformationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformation
 func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInformationInput) (req *request.Request, output *GetTypedLinkFacetInformationOutput) {
@@ -3769,43 +3834,46 @@ func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLink
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation GetTypedLinkFacetInformation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
+//
+//   - FacetNotFoundException
+//     The specified Facet could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformation
 func (c *CloudDirectory) GetTypedLinkFacetInformation(input *GetTypedLinkFacetInformationInput) (*GetTypedLinkFacetInformationOutput, error) {
@@ -3845,14 +3913,13 @@ const opListAppliedSchemaArns = "ListAppliedSchemaArns"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAppliedSchemaArnsRequest method.
+//	req, resp := client.ListAppliedSchemaArnsRequest(params)
 //
-//    // Example sending a request using the ListAppliedSchemaArnsRequest method.
-//    req, resp := client.ListAppliedSchemaArnsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAppliedSchemaArns
 func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput) (req *request.Request, output *ListAppliedSchemaArnsOutput) {
@@ -3889,40 +3956,43 @@ func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaAr
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListAppliedSchemaArns for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAppliedSchemaArns
 func (c *CloudDirectory) ListAppliedSchemaArns(input *ListAppliedSchemaArnsInput) (*ListAppliedSchemaArnsOutput, error) {
@@ -3954,15 +4024,14 @@ func (c *CloudDirectory) ListAppliedSchemaArnsWithContext(ctx aws.Context, input
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListAppliedSchemaArns operation.
-//    pageNum := 0
-//    err := client.ListAppliedSchemaArnsPages(params,
-//        func(page *ListAppliedSchemaArnsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListAppliedSchemaArns operation.
+//	pageNum := 0
+//	err := client.ListAppliedSchemaArnsPages(params,
+//	    func(page *clouddirectory.ListAppliedSchemaArnsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListAppliedSchemaArnsPages(input *ListAppliedSchemaArnsInput, fn func(*ListAppliedSchemaArnsOutput, bool) bool) error {
 	return c.ListAppliedSchemaArnsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -3989,10 +4058,12 @@ func (c *CloudDirectory) ListAppliedSchemaArnsPagesWithContext(ctx aws.Context, 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAppliedSchemaArnsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListAppliedSchemaArnsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -4012,14 +4083,13 @@ const opListAttachedIndices = "ListAttachedIndices"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListAttachedIndicesRequest method.
+//	req, resp := client.ListAttachedIndicesRequest(params)
 //
-//    // Example sending a request using the ListAttachedIndicesRequest method.
-//    req, resp := client.ListAttachedIndicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAttachedIndices
 func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) (req *request.Request, output *ListAttachedIndicesOutput) {
@@ -4055,40 +4125,43 @@ func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesIn
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListAttachedIndices for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
+//
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAttachedIndices
 func (c *CloudDirectory) ListAttachedIndices(input *ListAttachedIndicesInput) (*ListAttachedIndicesOutput, error) {
@@ -4120,15 +4193,14 @@ func (c *CloudDirectory) ListAttachedIndicesWithContext(ctx aws.Context, input *
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListAttachedIndices operation.
-//    pageNum := 0
-//    err := client.ListAttachedIndicesPages(params,
-//        func(page *ListAttachedIndicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListAttachedIndices operation.
+//	pageNum := 0
+//	err := client.ListAttachedIndicesPages(params,
+//	    func(page *clouddirectory.ListAttachedIndicesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListAttachedIndicesPages(input *ListAttachedIndicesInput, fn func(*ListAttachedIndicesOutput, bool) bool) error {
 	return c.ListAttachedIndicesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -4155,10 +4227,12 @@ func (c *CloudDirectory) ListAttachedIndicesPagesWithContext(ctx aws.Context, in
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAttachedIndicesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListAttachedIndicesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -4178,14 +4252,13 @@ const opListDevelopmentSchemaArns = "ListDevelopmentSchemaArns"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDevelopmentSchemaArnsRequest method.
+//	req, resp := client.ListDevelopmentSchemaArnsRequest(params)
 //
-//    // Example sending a request using the ListDevelopmentSchemaArnsRequest method.
-//    req, resp := client.ListDevelopmentSchemaArnsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDevelopmentSchemaArns
 func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopmentSchemaArnsInput) (req *request.Request, output *ListDevelopmentSchemaArnsOutput) {
@@ -4221,40 +4294,43 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopment
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListDevelopmentSchemaArns for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDevelopmentSchemaArns
 func (c *CloudDirectory) ListDevelopmentSchemaArns(input *ListDevelopmentSchemaArnsInput) (*ListDevelopmentSchemaArnsOutput, error) {
@@ -4286,15 +4362,14 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsWithContext(ctx aws.Context, i
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDevelopmentSchemaArns operation.
-//    pageNum := 0
-//    err := client.ListDevelopmentSchemaArnsPages(params,
-//        func(page *ListDevelopmentSchemaArnsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDevelopmentSchemaArns operation.
+//	pageNum := 0
+//	err := client.ListDevelopmentSchemaArnsPages(params,
+//	    func(page *clouddirectory.ListDevelopmentSchemaArnsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListDevelopmentSchemaArnsPages(input *ListDevelopmentSchemaArnsInput, fn func(*ListDevelopmentSchemaArnsOutput, bool) bool) error {
 	return c.ListDevelopmentSchemaArnsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -4321,10 +4396,12 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsPagesWithContext(ctx aws.Conte
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDevelopmentSchemaArnsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDevelopmentSchemaArnsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -4344,14 +4421,13 @@ const opListDirectories = "ListDirectories"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListDirectoriesRequest method.
+//	req, resp := client.ListDirectoriesRequest(params)
 //
-//    // Example sending a request using the ListDirectoriesRequest method.
-//    req, resp := client.ListDirectoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDirectories
 func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) (req *request.Request, output *ListDirectoriesOutput) {
@@ -4387,37 +4463,40 @@ func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) (re
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListDirectories for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDirectories
 func (c *CloudDirectory) ListDirectories(input *ListDirectoriesInput) (*ListDirectoriesOutput, error) {
@@ -4449,15 +4528,14 @@ func (c *CloudDirectory) ListDirectoriesWithContext(ctx aws.Context, input *List
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListDirectories operation.
-//    pageNum := 0
-//    err := client.ListDirectoriesPages(params,
-//        func(page *ListDirectoriesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListDirectories operation.
+//	pageNum := 0
+//	err := client.ListDirectoriesPages(params,
+//	    func(page *clouddirectory.ListDirectoriesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListDirectoriesPages(input *ListDirectoriesInput, fn func(*ListDirectoriesOutput, bool) bool) error {
 	return c.ListDirectoriesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -4484,10 +4562,12 @@ func (c *CloudDirectory) ListDirectoriesPagesWithContext(ctx aws.Context, input 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDirectoriesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListDirectoriesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -4507,14 +4587,13 @@ const opListFacetAttributes = "ListFacetAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListFacetAttributesRequest method.
+//	req, resp := client.ListFacetAttributesRequest(params)
 //
-//    // Example sending a request using the ListFacetAttributesRequest method.
-//    req, resp := client.ListFacetAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetAttributes
 func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesInput) (req *request.Request, output *ListFacetAttributesOutput) {
@@ -4550,43 +4629,46 @@ func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesIn
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListFacetAttributes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - FacetNotFoundException
+//     The specified Facet could not be found.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetAttributes
 func (c *CloudDirectory) ListFacetAttributes(input *ListFacetAttributesInput) (*ListFacetAttributesOutput, error) {
@@ -4618,15 +4700,14 @@ func (c *CloudDirectory) ListFacetAttributesWithContext(ctx aws.Context, input *
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListFacetAttributes operation.
-//    pageNum := 0
-//    err := client.ListFacetAttributesPages(params,
-//        func(page *ListFacetAttributesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListFacetAttributes operation.
+//	pageNum := 0
+//	err := client.ListFacetAttributesPages(params,
+//	    func(page *clouddirectory.ListFacetAttributesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListFacetAttributesPages(input *ListFacetAttributesInput, fn func(*ListFacetAttributesOutput, bool) bool) error {
 	return c.ListFacetAttributesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -4653,10 +4734,12 @@ func (c *CloudDirectory) ListFacetAttributesPagesWithContext(ctx aws.Context, in
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFacetAttributesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListFacetAttributesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -4676,14 +4759,13 @@ const opListFacetNames = "ListFacetNames"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListFacetNamesRequest method.
+//	req, resp := client.ListFacetNamesRequest(params)
 //
-//    // Example sending a request using the ListFacetNamesRequest method.
-//    req, resp := client.ListFacetNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetNames
 func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) (req *request.Request, output *ListFacetNamesOutput) {
@@ -4719,40 +4801,43 @@ func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) (req 
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListFacetNames for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetNames
 func (c *CloudDirectory) ListFacetNames(input *ListFacetNamesInput) (*ListFacetNamesOutput, error) {
@@ -4784,15 +4869,14 @@ func (c *CloudDirectory) ListFacetNamesWithContext(ctx aws.Context, input *ListF
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListFacetNames operation.
-//    pageNum := 0
-//    err := client.ListFacetNamesPages(params,
-//        func(page *ListFacetNamesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListFacetNames operation.
+//	pageNum := 0
+//	err := client.ListFacetNamesPages(params,
+//	    func(page *clouddirectory.ListFacetNamesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListFacetNamesPages(input *ListFacetNamesInput, fn func(*ListFacetNamesOutput, bool) bool) error {
 	return c.ListFacetNamesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -4819,10 +4903,12 @@ func (c *CloudDirectory) ListFacetNamesPagesWithContext(ctx aws.Context, input *
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFacetNamesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListFacetNamesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -4842,14 +4928,13 @@ const opListIncomingTypedLinks = "ListIncomingTypedLinks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListIncomingTypedLinksRequest method.
+//	req, resp := client.ListIncomingTypedLinksRequest(params)
 //
-//    // Example sending a request using the ListIncomingTypedLinksRequest method.
-//    req, resp := client.ListIncomingTypedLinksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIncomingTypedLinks
 func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedLinksInput) (req *request.Request, output *ListIncomingTypedLinksOutput) {
@@ -4881,47 +4966,50 @@ func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedL
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListIncomingTypedLinks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIncomingTypedLinks
 func (c *CloudDirectory) ListIncomingTypedLinks(input *ListIncomingTypedLinksInput) (*ListIncomingTypedLinksOutput, error) {
@@ -4961,14 +5049,13 @@ const opListIndex = "ListIndex"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListIndexRequest method.
+//	req, resp := client.ListIndexRequest(params)
 //
-//    // Example sending a request using the ListIndexRequest method.
-//    req, resp := client.ListIndexRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIndex
 func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) (req *request.Request, output *ListIndexOutput) {
@@ -5004,50 +5091,53 @@ func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) (req *request.R
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListIndex for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
-//   * ErrCodeNotIndexException "NotIndexException"
-//   Indicates that the requested operation can only operate on index objects.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - NotIndexException
+//     Indicates that the requested operation can only operate on index objects.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIndex
 func (c *CloudDirectory) ListIndex(input *ListIndexInput) (*ListIndexOutput, error) {
@@ -5079,15 +5169,14 @@ func (c *CloudDirectory) ListIndexWithContext(ctx aws.Context, input *ListIndexI
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListIndex operation.
-//    pageNum := 0
-//    err := client.ListIndexPages(params,
-//        func(page *ListIndexOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListIndex operation.
+//	pageNum := 0
+//	err := client.ListIndexPages(params,
+//	    func(page *clouddirectory.ListIndexOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListIndexPages(input *ListIndexInput, fn func(*ListIndexOutput, bool) bool) error {
 	return c.ListIndexPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5114,10 +5203,12 @@ func (c *CloudDirectory) ListIndexPagesWithContext(ctx aws.Context, input *ListI
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListIndexOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListIndexOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5137,14 +5228,13 @@ const opListManagedSchemaArns = "ListManagedSchemaArns"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListManagedSchemaArnsRequest method.
+//	req, resp := client.ListManagedSchemaArnsRequest(params)
 //
-//    // Example sending a request using the ListManagedSchemaArnsRequest method.
-//    req, resp := client.ListManagedSchemaArnsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListManagedSchemaArns
 func (c *CloudDirectory) ListManagedSchemaArnsRequest(input *ListManagedSchemaArnsInput) (req *request.Request, output *ListManagedSchemaArnsOutput) {
@@ -5182,28 +5272,31 @@ func (c *CloudDirectory) ListManagedSchemaArnsRequest(input *ListManagedSchemaAr
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListManagedSchemaArns for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListManagedSchemaArns
 func (c *CloudDirectory) ListManagedSchemaArns(input *ListManagedSchemaArnsInput) (*ListManagedSchemaArnsOutput, error) {
@@ -5235,15 +5328,14 @@ func (c *CloudDirectory) ListManagedSchemaArnsWithContext(ctx aws.Context, input
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListManagedSchemaArns operation.
-//    pageNum := 0
-//    err := client.ListManagedSchemaArnsPages(params,
-//        func(page *ListManagedSchemaArnsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListManagedSchemaArns operation.
+//	pageNum := 0
+//	err := client.ListManagedSchemaArnsPages(params,
+//	    func(page *clouddirectory.ListManagedSchemaArnsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListManagedSchemaArnsPages(input *ListManagedSchemaArnsInput, fn func(*ListManagedSchemaArnsOutput, bool) bool) error {
 	return c.ListManagedSchemaArnsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5270,10 +5362,12 @@ func (c *CloudDirectory) ListManagedSchemaArnsPagesWithContext(ctx aws.Context, 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListManagedSchemaArnsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListManagedSchemaArnsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5293,14 +5387,13 @@ const opListObjectAttributes = "ListObjectAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListObjectAttributesRequest method.
+//	req, resp := client.ListObjectAttributesRequest(params)
 //
-//    // Example sending a request using the ListObjectAttributesRequest method.
-//    req, resp := client.ListObjectAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectAttributes
 func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributesInput) (req *request.Request, output *ListObjectAttributesOutput) {
@@ -5336,47 +5429,50 @@ func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributes
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListObjectAttributes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectAttributes
 func (c *CloudDirectory) ListObjectAttributes(input *ListObjectAttributesInput) (*ListObjectAttributesOutput, error) {
@@ -5408,15 +5504,14 @@ func (c *CloudDirectory) ListObjectAttributesWithContext(ctx aws.Context, input 
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListObjectAttributes operation.
-//    pageNum := 0
-//    err := client.ListObjectAttributesPages(params,
-//        func(page *ListObjectAttributesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListObjectAttributes operation.
+//	pageNum := 0
+//	err := client.ListObjectAttributesPages(params,
+//	    func(page *clouddirectory.ListObjectAttributesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListObjectAttributesPages(input *ListObjectAttributesInput, fn func(*ListObjectAttributesOutput, bool) bool) error {
 	return c.ListObjectAttributesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5443,10 +5538,12 @@ func (c *CloudDirectory) ListObjectAttributesPagesWithContext(ctx aws.Context, i
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectAttributesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListObjectAttributesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5466,14 +5563,13 @@ const opListObjectChildren = "ListObjectChildren"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListObjectChildrenRequest method.
+//	req, resp := client.ListObjectChildrenRequest(params)
 //
-//    // Example sending a request using the ListObjectChildrenRequest method.
-//    req, resp := client.ListObjectChildrenRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectChildren
 func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInput) (req *request.Request, output *ListObjectChildrenOutput) {
@@ -5510,47 +5606,50 @@ func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInpu
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListObjectChildren for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeNotNodeException "NotNodeException"
-//   Occurs when any invalid operations are performed on an object that is not
-//   a node, such as calling ListObjectChildren for a leaf node object.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
+//
+//   - NotNodeException
+//     Occurs when any invalid operations are performed on an object that is not
+//     a node, such as calling ListObjectChildren for a leaf node object.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectChildren
 func (c *CloudDirectory) ListObjectChildren(input *ListObjectChildrenInput) (*ListObjectChildrenOutput, error) {
@@ -5582,15 +5681,14 @@ func (c *CloudDirectory) ListObjectChildrenWithContext(ctx aws.Context, input *L
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListObjectChildren operation.
-//    pageNum := 0
-//    err := client.ListObjectChildrenPages(params,
-//        func(page *ListObjectChildrenOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListObjectChildren operation.
+//	pageNum := 0
+//	err := client.ListObjectChildrenPages(params,
+//	    func(page *clouddirectory.ListObjectChildrenOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListObjectChildrenPages(input *ListObjectChildrenInput, fn func(*ListObjectChildrenOutput, bool) bool) error {
 	return c.ListObjectChildrenPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5617,10 +5715,12 @@ func (c *CloudDirectory) ListObjectChildrenPagesWithContext(ctx aws.Context, inp
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectChildrenOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListObjectChildrenOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5640,14 +5740,13 @@ const opListObjectParentPaths = "ListObjectParentPaths"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListObjectParentPathsRequest method.
+//	req, resp := client.ListObjectParentPathsRequest(params)
 //
-//    // Example sending a request using the ListObjectParentPathsRequest method.
-//    req, resp := client.ListObjectParentPathsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentPaths
 func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPathsInput) (req *request.Request, output *ListObjectParentPathsOutput) {
@@ -5693,43 +5792,46 @@ func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPat
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListObjectParentPaths for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentPaths
 func (c *CloudDirectory) ListObjectParentPaths(input *ListObjectParentPathsInput) (*ListObjectParentPathsOutput, error) {
@@ -5761,15 +5863,14 @@ func (c *CloudDirectory) ListObjectParentPathsWithContext(ctx aws.Context, input
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListObjectParentPaths operation.
-//    pageNum := 0
-//    err := client.ListObjectParentPathsPages(params,
-//        func(page *ListObjectParentPathsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListObjectParentPaths operation.
+//	pageNum := 0
+//	err := client.ListObjectParentPathsPages(params,
+//	    func(page *clouddirectory.ListObjectParentPathsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListObjectParentPathsPages(input *ListObjectParentPathsInput, fn func(*ListObjectParentPathsOutput, bool) bool) error {
 	return c.ListObjectParentPathsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5796,10 +5897,12 @@ func (c *CloudDirectory) ListObjectParentPathsPagesWithContext(ctx aws.Context, 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectParentPathsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListObjectParentPathsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5819,14 +5922,13 @@ const opListObjectParents = "ListObjectParents"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListObjectParentsRequest method.
+//	req, resp := client.ListObjectParentsRequest(params)
 //
-//    // Example sending a request using the ListObjectParentsRequest method.
-//    req, resp := client.ListObjectParentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParents
 func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput) (req *request.Request, output *ListObjectParentsOutput) {
@@ -5863,46 +5965,49 @@ func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput)
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListObjectParents for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeCannotListParentOfRootException "CannotListParentOfRootException"
-//   Cannot list the parents of a Directory root.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
+//
+//   - CannotListParentOfRootException
+//     Cannot list the parents of a Directory root.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParents
 func (c *CloudDirectory) ListObjectParents(input *ListObjectParentsInput) (*ListObjectParentsOutput, error) {
@@ -5934,15 +6039,14 @@ func (c *CloudDirectory) ListObjectParentsWithContext(ctx aws.Context, input *Li
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListObjectParents operation.
-//    pageNum := 0
-//    err := client.ListObjectParentsPages(params,
-//        func(page *ListObjectParentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListObjectParents operation.
+//	pageNum := 0
+//	err := client.ListObjectParentsPages(params,
+//	    func(page *clouddirectory.ListObjectParentsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListObjectParentsPages(input *ListObjectParentsInput, fn func(*ListObjectParentsOutput, bool) bool) error {
 	return c.ListObjectParentsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -5969,10 +6073,12 @@ func (c *CloudDirectory) ListObjectParentsPagesWithContext(ctx aws.Context, inpu
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectParentsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListObjectParentsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -5992,14 +6098,13 @@ const opListObjectPolicies = "ListObjectPolicies"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListObjectPoliciesRequest method.
+//	req, resp := client.ListObjectPoliciesRequest(params)
 //
-//    // Example sending a request using the ListObjectPoliciesRequest method.
-//    req, resp := client.ListObjectPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectPolicies
 func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) (req *request.Request, output *ListObjectPoliciesOutput) {
@@ -6035,43 +6140,46 @@ func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInpu
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListObjectPolicies for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectPolicies
 func (c *CloudDirectory) ListObjectPolicies(input *ListObjectPoliciesInput) (*ListObjectPoliciesOutput, error) {
@@ -6103,15 +6211,14 @@ func (c *CloudDirectory) ListObjectPoliciesWithContext(ctx aws.Context, input *L
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListObjectPolicies operation.
-//    pageNum := 0
-//    err := client.ListObjectPoliciesPages(params,
-//        func(page *ListObjectPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListObjectPolicies operation.
+//	pageNum := 0
+//	err := client.ListObjectPoliciesPages(params,
+//	    func(page *clouddirectory.ListObjectPoliciesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListObjectPoliciesPages(input *ListObjectPoliciesInput, fn func(*ListObjectPoliciesOutput, bool) bool) error {
 	return c.ListObjectPoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -6138,10 +6245,12 @@ func (c *CloudDirectory) ListObjectPoliciesPagesWithContext(ctx aws.Context, inp
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectPoliciesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListObjectPoliciesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -6161,14 +6270,13 @@ const opListOutgoingTypedLinks = "ListOutgoingTypedLinks"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListOutgoingTypedLinksRequest method.
+//	req, resp := client.ListOutgoingTypedLinksRequest(params)
 //
-//    // Example sending a request using the ListOutgoingTypedLinksRequest method.
-//    req, resp := client.ListOutgoingTypedLinksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListOutgoingTypedLinks
 func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedLinksInput) (req *request.Request, output *ListOutgoingTypedLinksOutput) {
@@ -6200,47 +6308,50 @@ func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedL
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListOutgoingTypedLinks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListOutgoingTypedLinks
 func (c *CloudDirectory) ListOutgoingTypedLinks(input *ListOutgoingTypedLinksInput) (*ListOutgoingTypedLinksOutput, error) {
@@ -6280,14 +6391,13 @@ const opListPolicyAttachments = "ListPolicyAttachments"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListPolicyAttachmentsRequest method.
+//	req, resp := client.ListPolicyAttachmentsRequest(params)
 //
-//    // Example sending a request using the ListPolicyAttachmentsRequest method.
-//    req, resp := client.ListPolicyAttachmentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPolicyAttachments
 func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmentsInput) (req *request.Request, output *ListPolicyAttachmentsOutput) {
@@ -6323,46 +6433,49 @@ func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmen
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListPolicyAttachments for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
-//   * ErrCodeNotPolicyException "NotPolicyException"
-//   Indicates that the requested operation can only operate on policy objects.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - NotPolicyException
+//     Indicates that the requested operation can only operate on policy objects.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPolicyAttachments
 func (c *CloudDirectory) ListPolicyAttachments(input *ListPolicyAttachmentsInput) (*ListPolicyAttachmentsOutput, error) {
@@ -6394,15 +6507,14 @@ func (c *CloudDirectory) ListPolicyAttachmentsWithContext(ctx aws.Context, input
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListPolicyAttachments operation.
-//    pageNum := 0
-//    err := client.ListPolicyAttachmentsPages(params,
-//        func(page *ListPolicyAttachmentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListPolicyAttachments operation.
+//	pageNum := 0
+//	err := client.ListPolicyAttachmentsPages(params,
+//	    func(page *clouddirectory.ListPolicyAttachmentsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListPolicyAttachmentsPages(input *ListPolicyAttachmentsInput, fn func(*ListPolicyAttachmentsOutput, bool) bool) error {
 	return c.ListPolicyAttachmentsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -6429,10 +6541,12 @@ func (c *CloudDirectory) ListPolicyAttachmentsPagesWithContext(ctx aws.Context, 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPolicyAttachmentsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListPolicyAttachmentsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -6452,14 +6566,13 @@ const opListPublishedSchemaArns = "ListPublishedSchemaArns"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListPublishedSchemaArnsRequest method.
+//	req, resp := client.ListPublishedSchemaArnsRequest(params)
 //
-//    // Example sending a request using the ListPublishedSchemaArnsRequest method.
-//    req, resp := client.ListPublishedSchemaArnsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPublishedSchemaArns
 func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsInput) (req *request.Request, output *ListPublishedSchemaArnsOutput) {
@@ -6497,40 +6610,43 @@ func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSche
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListPublishedSchemaArns for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPublishedSchemaArns
 func (c *CloudDirectory) ListPublishedSchemaArns(input *ListPublishedSchemaArnsInput) (*ListPublishedSchemaArnsOutput, error) {
@@ -6562,15 +6678,14 @@ func (c *CloudDirectory) ListPublishedSchemaArnsWithContext(ctx aws.Context, inp
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListPublishedSchemaArns operation.
-//    pageNum := 0
-//    err := client.ListPublishedSchemaArnsPages(params,
-//        func(page *ListPublishedSchemaArnsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListPublishedSchemaArns operation.
+//	pageNum := 0
+//	err := client.ListPublishedSchemaArnsPages(params,
+//	    func(page *clouddirectory.ListPublishedSchemaArnsOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListPublishedSchemaArnsPages(input *ListPublishedSchemaArnsInput, fn func(*ListPublishedSchemaArnsOutput, bool) bool) error {
 	return c.ListPublishedSchemaArnsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -6597,10 +6712,12 @@ func (c *CloudDirectory) ListPublishedSchemaArnsPagesWithContext(ctx aws.Context
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPublishedSchemaArnsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListPublishedSchemaArnsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -6620,14 +6737,13 @@ const opListTagsForResource = "ListTagsForResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTagsForResourceRequest method.
+//	req, resp := client.ListTagsForResourceRequest(params)
 //
-//    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTagsForResource
 func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
@@ -6665,42 +6781,45 @@ func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceIn
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListTagsForResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidTaggingRequestException "InvalidTaggingRequestException"
-//   Can occur for multiple reasons such as when you tag a resource that doesn’t
-//   exist or if you specify a higher number of tags for a resource than the allowed
-//   limit. Allowed limit is 50 tags per resource.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidTaggingRequestException
+//     Can occur for multiple reasons such as when you tag a resource that doesn’t
+//     exist or if you specify a higher number of tags for a resource than the allowed
+//     limit. Allowed limit is 50 tags per resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTagsForResource
 func (c *CloudDirectory) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
@@ -6732,15 +6851,14 @@ func (c *CloudDirectory) ListTagsForResourceWithContext(ctx aws.Context, input *
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListTagsForResource operation.
-//    pageNum := 0
-//    err := client.ListTagsForResourcePages(params,
-//        func(page *ListTagsForResourceOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListTagsForResource operation.
+//	pageNum := 0
+//	err := client.ListTagsForResourcePages(params,
+//	    func(page *clouddirectory.ListTagsForResourceOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListTagsForResourcePages(input *ListTagsForResourceInput, fn func(*ListTagsForResourceOutput, bool) bool) error {
 	return c.ListTagsForResourcePagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -6767,10 +6885,12 @@ func (c *CloudDirectory) ListTagsForResourcePagesWithContext(ctx aws.Context, in
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagsForResourceOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListTagsForResourceOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -6790,14 +6910,13 @@ const opListTypedLinkFacetAttributes = "ListTypedLinkFacetAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTypedLinkFacetAttributesRequest method.
+//	req, resp := client.ListTypedLinkFacetAttributesRequest(params)
 //
-//    // Example sending a request using the ListTypedLinkFacetAttributesRequest method.
-//    req, resp := client.ListTypedLinkFacetAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetAttributes
 func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAttributesInput) (req *request.Request, output *ListTypedLinkFacetAttributesOutput) {
@@ -6834,43 +6953,46 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLin
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListTypedLinkFacetAttributes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - FacetNotFoundException
+//     The specified Facet could not be found.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetAttributes
 func (c *CloudDirectory) ListTypedLinkFacetAttributes(input *ListTypedLinkFacetAttributesInput) (*ListTypedLinkFacetAttributesOutput, error) {
@@ -6902,15 +7024,14 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesWithContext(ctx aws.Context
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListTypedLinkFacetAttributes operation.
-//    pageNum := 0
-//    err := client.ListTypedLinkFacetAttributesPages(params,
-//        func(page *ListTypedLinkFacetAttributesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListTypedLinkFacetAttributes operation.
+//	pageNum := 0
+//	err := client.ListTypedLinkFacetAttributesPages(params,
+//	    func(page *clouddirectory.ListTypedLinkFacetAttributesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListTypedLinkFacetAttributesPages(input *ListTypedLinkFacetAttributesInput, fn func(*ListTypedLinkFacetAttributesOutput, bool) bool) error {
 	return c.ListTypedLinkFacetAttributesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -6937,10 +7058,12 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesPagesWithContext(ctx aws.Co
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTypedLinkFacetAttributesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListTypedLinkFacetAttributesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -6960,14 +7083,13 @@ const opListTypedLinkFacetNames = "ListTypedLinkFacetNames"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the ListTypedLinkFacetNamesRequest method.
+//	req, resp := client.ListTypedLinkFacetNamesRequest(params)
 //
-//    // Example sending a request using the ListTypedLinkFacetNamesRequest method.
-//    req, resp := client.ListTypedLinkFacetNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetNames
 func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFacetNamesInput) (req *request.Request, output *ListTypedLinkFacetNamesOutput) {
@@ -7004,40 +7126,43 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFace
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation ListTypedLinkFacetNames for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetNames
 func (c *CloudDirectory) ListTypedLinkFacetNames(input *ListTypedLinkFacetNamesInput) (*ListTypedLinkFacetNamesOutput, error) {
@@ -7069,15 +7194,14 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesWithContext(ctx aws.Context, inp
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a ListTypedLinkFacetNames operation.
-//    pageNum := 0
-//    err := client.ListTypedLinkFacetNamesPages(params,
-//        func(page *ListTypedLinkFacetNamesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a ListTypedLinkFacetNames operation.
+//	pageNum := 0
+//	err := client.ListTypedLinkFacetNamesPages(params,
+//	    func(page *clouddirectory.ListTypedLinkFacetNamesOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) ListTypedLinkFacetNamesPages(input *ListTypedLinkFacetNamesInput, fn func(*ListTypedLinkFacetNamesOutput, bool) bool) error {
 	return c.ListTypedLinkFacetNamesPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -7104,10 +7228,12 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesPagesWithContext(ctx aws.Context
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTypedLinkFacetNamesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListTypedLinkFacetNamesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -7127,14 +7253,13 @@ const opLookupPolicy = "LookupPolicy"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the LookupPolicyRequest method.
+//	req, resp := client.LookupPolicyRequest(params)
 //
-//    // Example sending a request using the LookupPolicyRequest method.
-//    req, resp := client.LookupPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LookupPolicy
 func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) (req *request.Request, output *LookupPolicyOutput) {
@@ -7176,43 +7301,46 @@ func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation LookupPolicy for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - InvalidNextTokenException
+//     Indicates that the NextToken value is not valid.
+//
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LookupPolicy
 func (c *CloudDirectory) LookupPolicy(input *LookupPolicyInput) (*LookupPolicyOutput, error) {
@@ -7244,15 +7372,14 @@ func (c *CloudDirectory) LookupPolicyWithContext(ctx aws.Context, input *LookupP
 //
 // Note: This operation can generate multiple requests to a service.
 //
-//    // Example iterating over at most 3 pages of a LookupPolicy operation.
-//    pageNum := 0
-//    err := client.LookupPolicyPages(params,
-//        func(page *LookupPolicyOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
-//
+//	// Example iterating over at most 3 pages of a LookupPolicy operation.
+//	pageNum := 0
+//	err := client.LookupPolicyPages(params,
+//	    func(page *clouddirectory.LookupPolicyOutput, lastPage bool) bool {
+//	        pageNum++
+//	        fmt.Println(page)
+//	        return pageNum <= 3
+//	    })
 func (c *CloudDirectory) LookupPolicyPages(input *LookupPolicyInput, fn func(*LookupPolicyOutput, bool) bool) error {
 	return c.LookupPolicyPagesWithContext(aws.BackgroundContext(), input, fn)
 }
@@ -7279,10 +7406,12 @@ func (c *CloudDirectory) LookupPolicyPagesWithContext(ctx aws.Context, input *Lo
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*LookupPolicyOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*LookupPolicyOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -7302,14 +7431,13 @@ const opPublishSchema = "PublishSchema"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PublishSchemaRequest method.
+//	req, resp := client.PublishSchemaRequest(params)
 //
-//    // Example sending a request using the PublishSchemaRequest method.
-//    req, resp := client.PublishSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PublishSchema
 func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) (req *request.Request, output *PublishSchemaOutput) {
@@ -7340,40 +7468,43 @@ func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) (req *r
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation PublishSchema for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeSchemaAlreadyPublishedException "SchemaAlreadyPublishedException"
-//   Indicates that a schema is already published.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - SchemaAlreadyPublishedException
+//     Indicates that a schema is already published.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PublishSchema
 func (c *CloudDirectory) PublishSchema(input *PublishSchemaInput) (*PublishSchemaOutput, error) {
@@ -7413,14 +7544,13 @@ const opPutSchemaFromJson = "PutSchemaFromJson"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the PutSchemaFromJsonRequest method.
+//	req, resp := client.PutSchemaFromJsonRequest(params)
 //
-//    // Example sending a request using the PutSchemaFromJsonRequest method.
-//    req, resp := client.PutSchemaFromJsonRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PutSchemaFromJson
 func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) (req *request.Request, output *PutSchemaFromJsonOutput) {
@@ -7452,40 +7582,43 @@ func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput)
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation PutSchemaFromJson for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeInvalidSchemaDocException "InvalidSchemaDocException"
-//   Indicates that the provided SchemaDoc value is not valid.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
+//   - InvalidSchemaDocException
+//     Indicates that the provided SchemaDoc value is not valid.
+//
+//   - InvalidRuleException
+//     Occurs when any of the rule parameter keys or values are invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PutSchemaFromJson
 func (c *CloudDirectory) PutSchemaFromJson(input *PutSchemaFromJsonInput) (*PutSchemaFromJsonOutput, error) {
@@ -7525,14 +7658,13 @@ const opRemoveFacetFromObject = "RemoveFacetFromObject"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the RemoveFacetFromObjectRequest method.
+//	req, resp := client.RemoveFacetFromObjectRequest(params)
 //
-//    // Example sending a request using the RemoveFacetFromObjectRequest method.
-//    req, resp := client.RemoveFacetFromObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/RemoveFacetFromObject
 func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObjectInput) (req *request.Request, output *RemoveFacetFromObjectOutput) {
@@ -7563,44 +7695,47 @@ func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObje
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation RemoveFacetFromObject for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/RemoveFacetFromObject
 func (c *CloudDirectory) RemoveFacetFromObject(input *RemoveFacetFromObjectInput) (*RemoveFacetFromObjectOutput, error) {
@@ -7640,14 +7775,13 @@ const opTagResource = "TagResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the TagResourceRequest method.
+//	req, resp := client.TagResourceRequest(params)
 //
-//    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TagResource
 func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
@@ -7678,42 +7812,45 @@ func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) (req *reque
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation TagResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidTaggingRequestException "InvalidTaggingRequestException"
-//   Can occur for multiple reasons such as when you tag a resource that doesn’t
-//   exist or if you specify a higher number of tags for a resource than the allowed
-//   limit. Allowed limit is 50 tags per resource.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidTaggingRequestException
+//     Can occur for multiple reasons such as when you tag a resource that doesn’t
+//     exist or if you specify a higher number of tags for a resource than the allowed
+//     limit. Allowed limit is 50 tags per resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TagResource
 func (c *CloudDirectory) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
@@ -7753,14 +7890,13 @@ const opUntagResource = "UntagResource"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UntagResourceRequest method.
+//	req, resp := client.UntagResourceRequest(params)
 //
-//    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UntagResource
 func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
@@ -7791,42 +7927,45 @@ func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) (req *r
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation UntagResource for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidTaggingRequestException "InvalidTaggingRequestException"
-//   Can occur for multiple reasons such as when you tag a resource that doesn’t
-//   exist or if you specify a higher number of tags for a resource than the allowed
-//   limit. Allowed limit is 50 tags per resource.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - InvalidTaggingRequestException
+//     Can occur for multiple reasons such as when you tag a resource that doesn’t
+//     exist or if you specify a higher number of tags for a resource than the allowed
+//     limit. Allowed limit is 50 tags per resource.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UntagResource
 func (c *CloudDirectory) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
@@ -7866,14 +8005,13 @@ const opUpdateFacet = "UpdateFacet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateFacetRequest method.
+//	req, resp := client.UpdateFacetRequest(params)
 //
-//    // Example sending a request using the UpdateFacetRequest method.
-//    req, resp := client.UpdateFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateFacet
 func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) (req *request.Request, output *UpdateFacetOutput) {
@@ -7910,50 +8048,53 @@ func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) (req *reque
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation UpdateFacet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeInvalidFacetUpdateException "InvalidFacetUpdateException"
-//   An attempt to modify a Facet resulted in an invalid schema exception.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - InvalidFacetUpdateException
+//     An attempt to modify a Facet resulted in an invalid schema exception.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
+//   - FacetNotFoundException
+//     The specified Facet could not be found.
+//
+//   - InvalidRuleException
+//     Occurs when any of the rule parameter keys or values are invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateFacet
 func (c *CloudDirectory) UpdateFacet(input *UpdateFacetInput) (*UpdateFacetOutput, error) {
@@ -7993,14 +8134,13 @@ const opUpdateLinkAttributes = "UpdateLinkAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateLinkAttributesRequest method.
+//	req, resp := client.UpdateLinkAttributesRequest(params)
 //
-//    // Example sending a request using the UpdateLinkAttributesRequest method.
-//    req, resp := client.UpdateLinkAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateLinkAttributes
 func (c *CloudDirectory) UpdateLinkAttributesRequest(input *UpdateLinkAttributesInput) (req *request.Request, output *UpdateLinkAttributesOutput) {
@@ -8022,8 +8162,8 @@ func (c *CloudDirectory) UpdateLinkAttributesRequest(input *UpdateLinkAttributes
 
 // UpdateLinkAttributes API operation for Amazon CloudDirectory.
 //
-// Updates a given typed link’s attributes. Attributes to be updated must not
-// contribute to the typed link’s identity, as defined by its IdentityAttributeOrder.
+// Updates a given typed link’s attributes. Attributes to be updated must
+// not contribute to the typed link’s identity, as defined by its IdentityAttributeOrder.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -8032,44 +8172,47 @@ func (c *CloudDirectory) UpdateLinkAttributesRequest(input *UpdateLinkAttributes
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation UpdateLinkAttributes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateLinkAttributes
 func (c *CloudDirectory) UpdateLinkAttributes(input *UpdateLinkAttributesInput) (*UpdateLinkAttributesOutput, error) {
@@ -8109,14 +8252,13 @@ const opUpdateObjectAttributes = "UpdateObjectAttributes"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateObjectAttributesRequest method.
+//	req, resp := client.UpdateObjectAttributesRequest(params)
 //
-//    // Example sending a request using the UpdateObjectAttributesRequest method.
-//    req, resp := client.UpdateObjectAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateObjectAttributes
 func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInput) (req *request.Request, output *UpdateObjectAttributesOutput) {
@@ -8146,48 +8288,51 @@ func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttrib
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation UpdateObjectAttributes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   Operations are only permitted on enabled directories.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - DirectoryNotEnabledException
+//     Operations are only permitted on enabled directories.
 //
-//   * ErrCodeLinkNameAlreadyInUseException "LinkNameAlreadyInUseException"
-//   Indicates that a link could not be created due to a naming conflict. Choose
-//   a different name and then try again.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - LinkNameAlreadyInUseException
+//     Indicates that a link could not be created due to a naming conflict. Choose
+//     a different name and then try again.
+//
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateObjectAttributes
 func (c *CloudDirectory) UpdateObjectAttributes(input *UpdateObjectAttributesInput) (*UpdateObjectAttributesOutput, error) {
@@ -8227,14 +8372,13 @@ const opUpdateSchema = "UpdateSchema"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateSchemaRequest method.
+//	req, resp := client.UpdateSchemaRequest(params)
 //
-//    // Example sending a request using the UpdateSchemaRequest method.
-//    req, resp := client.UpdateSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateSchema
 func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) (req *request.Request, output *UpdateSchemaOutput) {
@@ -8265,37 +8409,40 @@ func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) (req *req
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation UpdateSchema for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
+//
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateSchema
 func (c *CloudDirectory) UpdateSchema(input *UpdateSchemaInput) (*UpdateSchemaOutput, error) {
@@ -8335,14 +8482,13 @@ const opUpdateTypedLinkFacet = "UpdateTypedLinkFacet"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateTypedLinkFacetRequest method.
+//	req, resp := client.UpdateTypedLinkFacetRequest(params)
 //
-//    // Example sending a request using the UpdateTypedLinkFacetRequest method.
-//    req, resp := client.UpdateTypedLinkFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateTypedLinkFacet
 func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacetInput) (req *request.Request, output *UpdateTypedLinkFacetOutput) {
@@ -8373,50 +8519,53 @@ func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacet
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation UpdateTypedLinkFacet for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidFacetUpdateException "InvalidFacetUpdateException"
-//   An attempt to modify a Facet resulted in an invalid schema exception.
+//   - FacetValidationException
+//     The Facet that you provided was not well formed or could not be validated
+//     with the schema.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - InvalidFacetUpdateException
+//     An attempt to modify a Facet resulted in an invalid schema exception.
 //
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
+//   - FacetNotFoundException
+//     The specified Facet could not be found.
+//
+//   - InvalidRuleException
+//     Occurs when any of the rule parameter keys or values are invalid.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateTypedLinkFacet
 func (c *CloudDirectory) UpdateTypedLinkFacet(input *UpdateTypedLinkFacetInput) (*UpdateTypedLinkFacetOutput, error) {
@@ -8456,14 +8605,13 @@ const opUpgradeAppliedSchema = "UpgradeAppliedSchema"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpgradeAppliedSchemaRequest method.
+//	req, resp := client.UpgradeAppliedSchemaRequest(params)
 //
-//    // Example sending a request using the UpgradeAppliedSchemaRequest method.
-//    req, resp := client.UpgradeAppliedSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradeAppliedSchema
 func (c *CloudDirectory) UpgradeAppliedSchemaRequest(input *UpgradeAppliedSchemaInput) (req *request.Request, output *UpgradeAppliedSchemaOutput) {
@@ -8498,47 +8646,50 @@ func (c *CloudDirectory) UpgradeAppliedSchemaRequest(input *UpgradeAppliedSchema
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation UpgradeAppliedSchema for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeIncompatibleSchemaException "IncompatibleSchemaException"
-//   Indicates a failure occurred while performing a check for backward compatibility
-//   between the specified schema and the schema that is currently applied to
-//   the directory.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - IncompatibleSchemaException
+//     Indicates a failure occurred while performing a check for backward compatibility
+//     between the specified schema and the schema that is currently applied to
+//     the directory.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidAttachmentException "InvalidAttachmentException"
-//   Indicates that an attempt to make an attachment was invalid. For example,
-//   attaching two nodes with a link type that is not applicable to the nodes
-//   or attempting to apply a schema to a directory a second time.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeSchemaAlreadyExistsException "SchemaAlreadyExistsException"
-//   Indicates that a schema could not be created due to a naming conflict. Please
-//   select a different name and then try again.
+//   - InvalidAttachmentException
+//     Indicates that an attempt to make an attachment was invalid. For example,
+//     attaching two nodes with a link type that is not applicable to the nodes
+//     or attempting to apply a schema to a directory a second time.
+//
+//   - SchemaAlreadyExistsException
+//     Indicates that a schema could not be created due to a naming conflict. Please
+//     select a different name and then try again.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradeAppliedSchema
 func (c *CloudDirectory) UpgradeAppliedSchema(input *UpgradeAppliedSchemaInput) (*UpgradeAppliedSchemaOutput, error) {
@@ -8578,14 +8729,13 @@ const opUpgradePublishedSchema = "UpgradePublishedSchema"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpgradePublishedSchemaRequest method.
+//	req, resp := client.UpgradePublishedSchemaRequest(params)
 //
-//    // Example sending a request using the UpgradePublishedSchemaRequest method.
-//    req, resp := client.UpgradePublishedSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradePublishedSchema
 func (c *CloudDirectory) UpgradePublishedSchemaRequest(input *UpgradePublishedSchemaInput) (req *request.Request, output *UpgradePublishedSchemaOutput) {
@@ -8616,47 +8766,50 @@ func (c *CloudDirectory) UpgradePublishedSchemaRequest(input *UpgradePublishedSc
 // See the AWS API reference guide for Amazon CloudDirectory's
 // API operation UpgradePublishedSchema for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
+//   - InternalServiceException
+//     Indicates a problem that must be resolved by Amazon Web Services. This might
+//     be a transient error in which case you can retry your request until it succeeds.
+//     Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+//     site to see if there are any operational issues with the service.
 //
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
+//   - InvalidArnException
+//     Indicates that the provided ARN value is not valid.
 //
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
+//   - RetryableConflictException
+//     Occurs when a conflict with a previous successful write is detected. For
+//     example, if a write operation occurs on an object and then an attempt is
+//     made to read the object using “SERIALIZABLE” consistency, this exception
+//     may result. This generally occurs when the previous write did not have time
+//     to propagate to the host serving the current request. A retry (with appropriate
+//     backoff logic) is the recommended response to this exception.
 //
-//   * ErrCodeIncompatibleSchemaException "IncompatibleSchemaException"
-//   Indicates a failure occurred while performing a check for backward compatibility
-//   between the specified schema and the schema that is currently applied to
-//   the directory.
+//   - ValidationException
+//     Indicates that your request is malformed in some manner. See the exception
+//     message.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//   - IncompatibleSchemaException
+//     Indicates a failure occurred while performing a check for backward compatibility
+//     between the specified schema and the schema that is currently applied to
+//     the directory.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//   - AccessDeniedException
+//     Access denied or directory not found. Either you don't have permissions for
+//     this directory or the directory does not exist. Try calling ListDirectories
+//     and check your permissions.
 //
-//   * ErrCodeInvalidAttachmentException "InvalidAttachmentException"
-//   Indicates that an attempt to make an attachment was invalid. For example,
-//   attaching two nodes with a link type that is not applicable to the nodes
-//   or attempting to apply a schema to a directory a second time.
+//   - ResourceNotFoundException
+//     The specified resource could not be found.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-//   for more information.
+//   - InvalidAttachmentException
+//     Indicates that an attempt to make an attachment was invalid. For example,
+//     attaching two nodes with a link type that is not applicable to the nodes
+//     or attempting to apply a schema to a directory a second time.
+//
+//   - LimitExceededException
+//     Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+//     for more information.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradePublishedSchema
 func (c *CloudDirectory) UpgradePublishedSchema(input *UpgradePublishedSchemaInput) (*UpgradePublishedSchemaOutput, error) {
@@ -8678,6 +8831,72 @@ func (c *CloudDirectory) UpgradePublishedSchemaWithContext(ctx aws.Context, inpu
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
+}
+
+// Access denied or directory not found. Either you don't have permissions for
+// this directory or the directory does not exist. Try calling ListDirectories
+// and check your permissions.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type AddFacetToObjectInput struct {
@@ -8704,12 +8923,20 @@ type AddFacetToObjectInput struct {
 	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddFacetToObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddFacetToObjectInput) GoString() string {
 	return s.String()
 }
@@ -8776,12 +9003,20 @@ type AddFacetToObjectOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddFacetToObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AddFacetToObjectOutput) GoString() string {
 	return s.String()
 }
@@ -8802,12 +9037,20 @@ type ApplySchemaInput struct {
 	PublishedSchemaArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplySchemaInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplySchemaInput) GoString() string {
 	return s.String()
 }
@@ -8853,12 +9096,20 @@ type ApplySchemaOutput struct {
 	DirectoryArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplySchemaOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplySchemaOutput) GoString() string {
 	return s.String()
 }
@@ -8900,12 +9151,20 @@ type AttachObjectInput struct {
 	ParentReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachObjectInput) GoString() string {
 	return s.String()
 }
@@ -8966,12 +9225,20 @@ type AttachObjectOutput struct {
 	AttachedObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachObjectOutput) GoString() string {
 	return s.String()
 }
@@ -9002,12 +9269,20 @@ type AttachPolicyInput struct {
 	PolicyReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachPolicyInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachPolicyInput) GoString() string {
 	return s.String()
 }
@@ -9053,12 +9328,20 @@ type AttachPolicyOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachPolicyOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachPolicyOutput) GoString() string {
 	return s.String()
 }
@@ -9083,12 +9366,20 @@ type AttachToIndexInput struct {
 	TargetReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachToIndexInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachToIndexInput) GoString() string {
 	return s.String()
 }
@@ -9137,12 +9428,20 @@ type AttachToIndexOutput struct {
 	AttachedObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachToIndexOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachToIndexOutput) GoString() string {
 	return s.String()
 }
@@ -9183,12 +9482,20 @@ type AttachTypedLinkInput struct {
 	TypedLinkFacet *TypedLinkSchemaAndFacetName `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachTypedLinkInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachTypedLinkInput) GoString() string {
 	return s.String()
 }
@@ -9270,12 +9577,20 @@ type AttachTypedLinkOutput struct {
 	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachTypedLinkOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttachTypedLinkOutput) GoString() string {
 	return s.String()
 }
@@ -9307,12 +9622,20 @@ type AttributeKey struct {
 	SchemaArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttributeKey) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttributeKey) GoString() string {
 	return s.String()
 }
@@ -9375,12 +9698,20 @@ type AttributeKeyAndValue struct {
 	Value *TypedAttributeValue `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttributeKeyAndValue) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttributeKeyAndValue) GoString() string {
 	return s.String()
 }
@@ -9433,12 +9764,20 @@ type AttributeNameAndValue struct {
 	Value *TypedAttributeValue `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttributeNameAndValue) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s AttributeNameAndValue) GoString() string {
 	return s.String()
 }
@@ -9494,12 +9833,20 @@ type BatchAddFacetToObject struct {
 	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAddFacetToObject) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAddFacetToObject) GoString() string {
 	return s.String()
 }
@@ -9561,12 +9908,20 @@ type BatchAddFacetToObjectResponse struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAddFacetToObjectResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAddFacetToObjectResponse) GoString() string {
 	return s.String()
 }
@@ -9591,12 +9946,20 @@ type BatchAttachObject struct {
 	ParentReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachObject) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachObject) GoString() string {
 	return s.String()
 }
@@ -9649,12 +10012,20 @@ type BatchAttachObjectResponse struct {
 	AttachedObjectIdentifier *string `locationName:"attachedObjectIdentifier" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachObjectResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachObjectResponse) GoString() string {
 	return s.String()
 }
@@ -9665,8 +10036,8 @@ func (s *BatchAttachObjectResponse) SetAttachedObjectIdentifier(v string) *Batch
 	return s
 }
 
-// Attaches a policy object to a regular object inside a BatchRead operation. For
-// more information, see AttachPolicy and BatchReadRequest$Operations.
+// Attaches a policy object to a regular object inside a BatchRead operation.
+// For more information, see AttachPolicy and BatchReadRequest$Operations.
 type BatchAttachPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -9681,12 +10052,20 @@ type BatchAttachPolicy struct {
 	PolicyReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachPolicy) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachPolicy) GoString() string {
 	return s.String()
 }
@@ -9724,12 +10103,20 @@ type BatchAttachPolicyResponse struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachPolicyResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachPolicyResponse) GoString() string {
 	return s.String()
 }
@@ -9750,12 +10137,20 @@ type BatchAttachToIndex struct {
 	TargetReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachToIndex) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachToIndex) GoString() string {
 	return s.String()
 }
@@ -9796,12 +10191,20 @@ type BatchAttachToIndexResponse struct {
 	AttachedObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachToIndexResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachToIndexResponse) GoString() string {
 	return s.String()
 }
@@ -9838,12 +10241,20 @@ type BatchAttachTypedLink struct {
 	TypedLinkFacet *TypedLinkSchemaAndFacetName `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachTypedLink) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachTypedLink) GoString() string {
 	return s.String()
 }
@@ -9917,12 +10328,20 @@ type BatchAttachTypedLinkResponse struct {
 	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachTypedLinkResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchAttachTypedLinkResponse) GoString() string {
 	return s.String()
 }
@@ -9961,12 +10380,20 @@ type BatchCreateIndex struct {
 	ParentReference *ObjectReference `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchCreateIndex) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchCreateIndex) GoString() string {
 	return s.String()
 }
@@ -10038,12 +10465,20 @@ type BatchCreateIndexResponse struct {
 	ObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchCreateIndexResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchCreateIndexResponse) GoString() string {
 	return s.String()
 }
@@ -10081,12 +10516,20 @@ type BatchCreateObject struct {
 	SchemaFacet []*SchemaFacet `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchCreateObject) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchCreateObject) GoString() string {
 	return s.String()
 }
@@ -10168,12 +10611,20 @@ type BatchCreateObjectResponse struct {
 	ObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchCreateObjectResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchCreateObjectResponse) GoString() string {
 	return s.String()
 }
@@ -10194,12 +10645,20 @@ type BatchDeleteObject struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteObject) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteObject) GoString() string {
 	return s.String()
 }
@@ -10228,12 +10687,20 @@ type BatchDeleteObjectResponse struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteObjectResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDeleteObjectResponse) GoString() string {
 	return s.String()
 }
@@ -10254,12 +10721,20 @@ type BatchDetachFromIndex struct {
 	TargetReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachFromIndex) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachFromIndex) GoString() string {
 	return s.String()
 }
@@ -10300,12 +10775,20 @@ type BatchDetachFromIndexResponse struct {
 	DetachedObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachFromIndexResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachFromIndexResponse) GoString() string {
 	return s.String()
 }
@@ -10335,12 +10818,20 @@ type BatchDetachObject struct {
 	ParentReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachObject) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachObject) GoString() string {
 	return s.String()
 }
@@ -10390,12 +10881,20 @@ type BatchDetachObjectResponse struct {
 	DetachedObjectIdentifier *string `locationName:"detachedObjectIdentifier" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachObjectResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachObjectResponse) GoString() string {
 	return s.String()
 }
@@ -10422,12 +10921,20 @@ type BatchDetachPolicy struct {
 	PolicyReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachPolicy) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachPolicy) GoString() string {
 	return s.String()
 }
@@ -10465,12 +10972,20 @@ type BatchDetachPolicyResponse struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachPolicyResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachPolicyResponse) GoString() string {
 	return s.String()
 }
@@ -10486,12 +11001,20 @@ type BatchDetachTypedLink struct {
 	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachTypedLink) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachTypedLink) GoString() string {
 	return s.String()
 }
@@ -10525,12 +11048,20 @@ type BatchDetachTypedLinkResponse struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachTypedLinkResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchDetachTypedLinkResponse) GoString() string {
 	return s.String()
 }
@@ -10551,12 +11082,20 @@ type BatchGetLinkAttributes struct {
 	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetLinkAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetLinkAttributes) GoString() string {
 	return s.String()
 }
@@ -10602,12 +11141,20 @@ type BatchGetLinkAttributesResponse struct {
 	Attributes []*AttributeKeyAndValue `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetLinkAttributesResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetLinkAttributesResponse) GoString() string {
 	return s.String()
 }
@@ -10641,12 +11188,20 @@ type BatchGetObjectAttributes struct {
 	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetObjectAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetObjectAttributes) GoString() string {
 	return s.String()
 }
@@ -10701,12 +11256,20 @@ type BatchGetObjectAttributesResponse struct {
 	Attributes []*AttributeKeyAndValue `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetObjectAttributesResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetObjectAttributesResponse) GoString() string {
 	return s.String()
 }
@@ -10728,12 +11291,20 @@ type BatchGetObjectInformation struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetObjectInformation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetObjectInformation) GoString() string {
 	return s.String()
 }
@@ -10768,12 +11339,20 @@ type BatchGetObjectInformationResponse struct {
 	SchemaFacets []*SchemaFacet `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetObjectInformationResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchGetObjectInformationResponse) GoString() string {
 	return s.String()
 }
@@ -10807,12 +11386,20 @@ type BatchListAttachedIndices struct {
 	TargetReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListAttachedIndices) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListAttachedIndices) GoString() string {
 	return s.String()
 }
@@ -10862,12 +11449,20 @@ type BatchListAttachedIndicesResponse struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListAttachedIndicesResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListAttachedIndicesResponse) GoString() string {
 	return s.String()
 }
@@ -10912,12 +11507,20 @@ type BatchListIncomingTypedLinks struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListIncomingTypedLinks) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListIncomingTypedLinks) GoString() string {
 	return s.String()
 }
@@ -10994,12 +11597,20 @@ type BatchListIncomingTypedLinksResponse struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListIncomingTypedLinksResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListIncomingTypedLinksResponse) GoString() string {
 	return s.String()
 }
@@ -11036,12 +11647,20 @@ type BatchListIndex struct {
 	RangesOnIndexedValues []*ObjectAttributeRange `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListIndex) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListIndex) GoString() string {
 	return s.String()
 }
@@ -11107,12 +11726,20 @@ type BatchListIndexResponse struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListIndexResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListIndexResponse) GoString() string {
 	return s.String()
 }
@@ -11150,12 +11777,20 @@ type BatchListObjectAttributes struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectAttributes) GoString() string {
 	return s.String()
 }
@@ -11217,12 +11852,20 @@ type BatchListObjectAttributesResponse struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectAttributesResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectAttributesResponse) GoString() string {
 	return s.String()
 }
@@ -11256,12 +11899,20 @@ type BatchListObjectChildren struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectChildren) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectChildren) GoString() string {
 	return s.String()
 }
@@ -11312,12 +11963,20 @@ type BatchListObjectChildrenResponse struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectChildrenResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectChildrenResponse) GoString() string {
 	return s.String()
 }
@@ -11352,12 +12011,20 @@ type BatchListObjectParentPaths struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectParentPaths) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectParentPaths) GoString() string {
 	return s.String()
 }
@@ -11407,12 +12074,20 @@ type BatchListObjectParentPathsResponse struct {
 	PathToObjectIdentifiersList []*PathToObjectIdentifiers `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectParentPathsResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectParentPathsResponse) GoString() string {
 	return s.String()
 }
@@ -11429,11 +12104,16 @@ func (s *BatchListObjectParentPathsResponse) SetPathToObjectIdentifiersList(v []
 	return s
 }
 
+// Lists parent objects that are associated with a given object in pagination
+// fashion.
 type BatchListObjectParents struct {
 	_ struct{} `type:"structure"`
 
+	// The maximum number of items to be retrieved in a single call. This is an
+	// approximate number.
 	MaxResults *int64 `min:"1" type:"integer"`
 
+	// The pagination token.
 	NextToken *string `type:"string"`
 
 	// The reference that identifies an object.
@@ -11442,12 +12122,20 @@ type BatchListObjectParents struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectParents) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectParents) GoString() string {
 	return s.String()
 }
@@ -11486,20 +12174,31 @@ func (s *BatchListObjectParents) SetObjectReference(v *ObjectReference) *BatchLi
 	return s
 }
 
+// Represents the output of a ListObjectParents response operation.
 type BatchListObjectParentsResponse struct {
 	_ struct{} `type:"structure"`
 
+	// The pagination token.
 	NextToken *string `type:"string"`
 
+	// Returns a list of parent reference and LinkName Tuples.
 	ParentLinks []*ObjectIdentifierAndLinkNameTuple `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectParentsResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectParentsResponse) GoString() string {
 	return s.String()
 }
@@ -11533,12 +12232,20 @@ type BatchListObjectPolicies struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectPolicies) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectPolicies) GoString() string {
 	return s.String()
 }
@@ -11588,12 +12295,20 @@ type BatchListObjectPoliciesResponse struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectPoliciesResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListObjectPoliciesResponse) GoString() string {
 	return s.String()
 }
@@ -11638,12 +12353,20 @@ type BatchListOutgoingTypedLinks struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListOutgoingTypedLinks) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListOutgoingTypedLinks) GoString() string {
 	return s.String()
 }
@@ -11720,12 +12443,20 @@ type BatchListOutgoingTypedLinksResponse struct {
 	TypedLinkSpecifiers []*TypedLinkSpecifier `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListOutgoingTypedLinksResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListOutgoingTypedLinksResponse) GoString() string {
 	return s.String()
 }
@@ -11760,12 +12491,20 @@ type BatchListPolicyAttachments struct {
 	PolicyReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListPolicyAttachments) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListPolicyAttachments) GoString() string {
 	return s.String()
 }
@@ -11815,12 +12554,20 @@ type BatchListPolicyAttachmentsResponse struct {
 	ObjectIdentifiers []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListPolicyAttachmentsResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchListPolicyAttachmentsResponse) GoString() string {
 	return s.String()
 }
@@ -11855,12 +12602,20 @@ type BatchLookupPolicy struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchLookupPolicy) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchLookupPolicy) GoString() string {
 	return s.String()
 }
@@ -11911,12 +12666,20 @@ type BatchLookupPolicyResponse struct {
 	PolicyToPathList []*PolicyToPath `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchLookupPolicyResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchLookupPolicyResponse) GoString() string {
 	return s.String()
 }
@@ -11945,12 +12708,20 @@ type BatchReadException struct {
 	Type *string `type:"string" enum:"BatchReadExceptionType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadException) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadException) GoString() string {
 	return s.String()
 }
@@ -11986,12 +12757,20 @@ type BatchReadInput struct {
 	Operations []*BatchReadOperation `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadInput) GoString() string {
 	return s.String()
 }
@@ -12076,6 +12855,8 @@ type BatchReadOperation struct {
 	// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 	ListObjectParentPaths *BatchListObjectParentPaths `type:"structure"`
 
+	// Lists parent objects that are associated with a given object in pagination
+	// fashion.
 	ListObjectParents *BatchListObjectParents `type:"structure"`
 
 	// Returns policies attached to an object in pagination fashion.
@@ -12099,12 +12880,20 @@ type BatchReadOperation struct {
 	LookupPolicy *BatchLookupPolicy `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadOperation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadOperation) GoString() string {
 	return s.String()
 }
@@ -12284,12 +13073,20 @@ type BatchReadOperationResponse struct {
 	SuccessfulResponse *BatchReadSuccessfulResponse `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadOperationResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadOperationResponse) GoString() string {
 	return s.String()
 }
@@ -12313,12 +13110,20 @@ type BatchReadOutput struct {
 	Responses []*BatchReadOperationResponse `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadOutput) GoString() string {
 	return s.String()
 }
@@ -12365,6 +13170,7 @@ type BatchReadSuccessfulResponse struct {
 	// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 	ListObjectParentPaths *BatchListObjectParentPathsResponse `type:"structure"`
 
+	// The list of parent objects to retrieve.
 	ListObjectParents *BatchListObjectParentsResponse `type:"structure"`
 
 	// Returns policies attached to an object in pagination fashion.
@@ -12388,12 +13194,20 @@ type BatchReadSuccessfulResponse struct {
 	LookupPolicy *BatchLookupPolicyResponse `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadSuccessfulResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchReadSuccessfulResponse) GoString() string {
 	return s.String()
 }
@@ -12497,12 +13311,20 @@ type BatchRemoveFacetFromObject struct {
 	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchRemoveFacetFromObject) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchRemoveFacetFromObject) GoString() string {
 	return s.String()
 }
@@ -12545,12 +13367,20 @@ type BatchRemoveFacetFromObjectResponse struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchRemoveFacetFromObjectResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchRemoveFacetFromObjectResponse) GoString() string {
 	return s.String()
 }
@@ -12573,12 +13403,20 @@ type BatchUpdateLinkAttributes struct {
 	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchUpdateLinkAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchUpdateLinkAttributes) GoString() string {
 	return s.String()
 }
@@ -12631,12 +13469,20 @@ type BatchUpdateLinkAttributesResponse struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchUpdateLinkAttributesResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchUpdateLinkAttributesResponse) GoString() string {
 	return s.String()
 }
@@ -12656,12 +13502,20 @@ type BatchUpdateObjectAttributes struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchUpdateObjectAttributes) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchUpdateObjectAttributes) GoString() string {
 	return s.String()
 }
@@ -12712,12 +13566,20 @@ type BatchUpdateObjectAttributesResponse struct {
 	ObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchUpdateObjectAttributesResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchUpdateObjectAttributesResponse) GoString() string {
 	return s.String()
 }
@@ -12726,6 +13588,74 @@ func (s BatchUpdateObjectAttributesResponse) GoString() string {
 func (s *BatchUpdateObjectAttributesResponse) SetObjectIdentifier(v string) *BatchUpdateObjectAttributesResponse {
 	s.ObjectIdentifier = &v
 	return s
+}
+
+// A BatchWrite exception has occurred.
+type BatchWriteException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Index *int64 `type:"integer"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	Type *string `type:"string" enum:"BatchWriteExceptionType"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchWriteException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s BatchWriteException) GoString() string {
+	return s.String()
+}
+
+func newErrorBatchWriteException(v protocol.ResponseMetadata) error {
+	return &BatchWriteException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *BatchWriteException) Code() string {
+	return "BatchWriteException"
+}
+
+// Message returns the exception's message.
+func (s *BatchWriteException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *BatchWriteException) OrigErr() error {
+	return nil
+}
+
+func (s *BatchWriteException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *BatchWriteException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *BatchWriteException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type BatchWriteInput struct {
@@ -12743,12 +13673,20 @@ type BatchWriteInput struct {
 	Operations []*BatchWriteOperation `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchWriteInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchWriteInput) GoString() string {
 	return s.String()
 }
@@ -12845,12 +13783,20 @@ type BatchWriteOperation struct {
 	UpdateObjectAttributes *BatchUpdateObjectAttributes `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchWriteOperation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchWriteOperation) GoString() string {
 	return s.String()
 }
@@ -13084,12 +14030,20 @@ type BatchWriteOperationResponse struct {
 	UpdateObjectAttributes *BatchUpdateObjectAttributesResponse `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchWriteOperationResponse) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchWriteOperationResponse) GoString() string {
 	return s.String()
 }
@@ -13191,12 +14145,20 @@ type BatchWriteOutput struct {
 	Responses []*BatchWriteOperationResponse `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchWriteOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s BatchWriteOutput) GoString() string {
 	return s.String()
 }
@@ -13205,6 +14167,70 @@ func (s BatchWriteOutput) GoString() string {
 func (s *BatchWriteOutput) SetResponses(v []*BatchWriteOperationResponse) *BatchWriteOutput {
 	s.Responses = v
 	return s
+}
+
+// Cannot list the parents of a Directory root.
+type CannotListParentOfRootException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CannotListParentOfRootException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s CannotListParentOfRootException) GoString() string {
+	return s.String()
+}
+
+func newErrorCannotListParentOfRootException(v protocol.ResponseMetadata) error {
+	return &CannotListParentOfRootException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *CannotListParentOfRootException) Code() string {
+	return "CannotListParentOfRootException"
+}
+
+// Message returns the exception's message.
+func (s *CannotListParentOfRootException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *CannotListParentOfRootException) OrigErr() error {
+	return nil
+}
+
+func (s *CannotListParentOfRootException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *CannotListParentOfRootException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *CannotListParentOfRootException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 type CreateDirectoryInput struct {
@@ -13222,12 +14248,20 @@ type CreateDirectoryInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -13290,12 +14324,20 @@ type CreateDirectoryOutput struct {
 	ObjectIdentifier *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -13360,12 +14402,20 @@ type CreateFacetInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFacetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFacetInput) GoString() string {
 	return s.String()
 }
@@ -13433,12 +14483,20 @@ type CreateFacetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFacetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateFacetOutput) GoString() string {
 	return s.String()
 }
@@ -13470,12 +14528,20 @@ type CreateIndexInput struct {
 	ParentReference *ObjectReference `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIndexInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIndexInput) GoString() string {
 	return s.String()
 }
@@ -13549,12 +14615,20 @@ type CreateIndexOutput struct {
 	ObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIndexOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateIndexOutput) GoString() string {
 	return s.String()
 }
@@ -13591,12 +14665,20 @@ type CreateObjectInput struct {
 	SchemaFacets []*SchemaFacet `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateObjectInput) GoString() string {
 	return s.String()
 }
@@ -13677,12 +14759,20 @@ type CreateObjectOutput struct {
 	ObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateObjectOutput) GoString() string {
 	return s.String()
 }
@@ -13703,12 +14793,20 @@ type CreateSchemaInput struct {
 	Name *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSchemaInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSchemaInput) GoString() string {
 	return s.String()
 }
@@ -13743,12 +14841,20 @@ type CreateSchemaOutput struct {
 	SchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSchemaOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateSchemaOutput) GoString() string {
 	return s.String()
 }
@@ -13774,12 +14880,20 @@ type CreateTypedLinkFacetInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTypedLinkFacetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTypedLinkFacetInput) GoString() string {
 	return s.String()
 }
@@ -13821,18 +14935,26 @@ type CreateTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTypedLinkFacetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateTypedLinkFacetOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteDirectoryInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The ARN of the directory to delete.
 	//
@@ -13840,12 +14962,20 @@ type DeleteDirectoryInput struct {
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -13878,12 +15008,20 @@ type DeleteDirectoryOutput struct {
 	DirectoryArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -13909,12 +15047,20 @@ type DeleteFacetInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFacetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFacetInput) GoString() string {
 	return s.String()
 }
@@ -13954,12 +15100,20 @@ type DeleteFacetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFacetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteFacetOutput) GoString() string {
 	return s.String()
 }
@@ -13979,12 +15133,20 @@ type DeleteObjectInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteObjectInput) GoString() string {
 	return s.String()
 }
@@ -14021,18 +15183,26 @@ type DeleteObjectOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteObjectOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteSchemaInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The Amazon Resource Name (ARN) of the development schema. For more information,
 	// see arns.
@@ -14041,12 +15211,20 @@ type DeleteSchemaInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSchemaInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSchemaInput) GoString() string {
 	return s.String()
 }
@@ -14078,12 +15256,20 @@ type DeleteSchemaOutput struct {
 	SchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSchemaOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteSchemaOutput) GoString() string {
 	return s.String()
 }
@@ -14109,12 +15295,20 @@ type DeleteTypedLinkFacetInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTypedLinkFacetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTypedLinkFacetInput) GoString() string {
 	return s.String()
 }
@@ -14151,12 +15345,20 @@ type DeleteTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTypedLinkFacetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteTypedLinkFacetOutput) GoString() string {
 	return s.String()
 }
@@ -14181,12 +15383,20 @@ type DetachFromIndexInput struct {
 	TargetReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachFromIndexInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachFromIndexInput) GoString() string {
 	return s.String()
 }
@@ -14235,12 +15445,20 @@ type DetachFromIndexOutput struct {
 	DetachedObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachFromIndexOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachFromIndexOutput) GoString() string {
 	return s.String()
 }
@@ -14272,12 +15490,20 @@ type DetachObjectInput struct {
 	ParentReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachObjectInput) GoString() string {
 	return s.String()
 }
@@ -14329,12 +15555,20 @@ type DetachObjectOutput struct {
 	DetachedObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachObjectOutput) GoString() string {
 	return s.String()
 }
@@ -14365,12 +15599,20 @@ type DetachPolicyInput struct {
 	PolicyReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachPolicyInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachPolicyInput) GoString() string {
 	return s.String()
 }
@@ -14416,12 +15658,20 @@ type DetachPolicyOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachPolicyOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachPolicyOutput) GoString() string {
 	return s.String()
 }
@@ -14441,12 +15691,20 @@ type DetachTypedLinkInput struct {
 	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachTypedLinkInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachTypedLinkInput) GoString() string {
 	return s.String()
 }
@@ -14488,12 +15746,20 @@ type DetachTypedLinkOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachTypedLinkOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DetachTypedLinkOutput) GoString() string {
 	return s.String()
 }
@@ -14516,12 +15782,20 @@ type Directory struct {
 	State *string `type:"string" enum:"DirectoryState"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Directory) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Directory) GoString() string {
 	return s.String()
 }
@@ -14550,8 +15824,266 @@ func (s *Directory) SetState(v string) *Directory {
 	return s
 }
 
+// Indicates that a Directory could not be created due to a naming conflict.
+// Choose a different name and try again.
+type DirectoryAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &DirectoryAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryAlreadyExistsException) Code() string {
+	return "DirectoryAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A directory that has been deleted and to which access has been attempted.
+// Note: The requested resource will eventually cease to exist.
+type DirectoryDeletedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryDeletedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryDeletedException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryDeletedException(v protocol.ResponseMetadata) error {
+	return &DirectoryDeletedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryDeletedException) Code() string {
+	return "DirectoryDeletedException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryDeletedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryDeletedException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryDeletedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryDeletedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryDeletedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An operation can only operate on a disabled directory.
+type DirectoryNotDisabledException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryNotDisabledException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryNotDisabledException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryNotDisabledException(v protocol.ResponseMetadata) error {
+	return &DirectoryNotDisabledException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryNotDisabledException) Code() string {
+	return "DirectoryNotDisabledException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryNotDisabledException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryNotDisabledException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryNotDisabledException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryNotDisabledException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryNotDisabledException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Operations are only permitted on enabled directories.
+type DirectoryNotEnabledException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryNotEnabledException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s DirectoryNotEnabledException) GoString() string {
+	return s.String()
+}
+
+func newErrorDirectoryNotEnabledException(v protocol.ResponseMetadata) error {
+	return &DirectoryNotEnabledException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *DirectoryNotEnabledException) Code() string {
+	return "DirectoryNotEnabledException"
+}
+
+// Message returns the exception's message.
+func (s *DirectoryNotEnabledException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *DirectoryNotEnabledException) OrigErr() error {
+	return nil
+}
+
+func (s *DirectoryNotEnabledException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *DirectoryNotEnabledException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *DirectoryNotEnabledException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type DisableDirectoryInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The ARN of the directory to disable.
 	//
@@ -14559,12 +16091,20 @@ type DisableDirectoryInput struct {
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -14597,12 +16137,20 @@ type DisableDirectoryOutput struct {
 	DirectoryArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DisableDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -14614,7 +16162,7 @@ func (s *DisableDirectoryOutput) SetDirectoryArn(v string) *DisableDirectoryOutp
 }
 
 type EnableDirectoryInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The ARN of the directory to enable.
 	//
@@ -14622,12 +16170,20 @@ type EnableDirectoryInput struct {
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -14660,12 +16216,20 @@ type EnableDirectoryOutput struct {
 	DirectoryArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s EnableDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -14695,12 +16259,20 @@ type Facet struct {
 	ObjectType *string `type:"string" enum:"ObjectType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Facet) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Facet) GoString() string {
 	return s.String()
 }
@@ -14721,6 +16293,70 @@ func (s *Facet) SetName(v string) *Facet {
 func (s *Facet) SetObjectType(v string) *Facet {
 	s.ObjectType = &v
 	return s
+}
+
+// A facet with the same name already exists.
+type FacetAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FacetAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FacetAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorFacetAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &FacetAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *FacetAlreadyExistsException) Code() string {
+	return "FacetAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *FacetAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *FacetAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *FacetAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *FacetAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *FacetAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // An attribute that is associated with the Facet.
@@ -14746,12 +16382,20 @@ type FacetAttribute struct {
 	RequiredBehavior *string `type:"string" enum:"RequiredAttributeBehavior"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FacetAttribute) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FacetAttribute) GoString() string {
 	return s.String()
 }
@@ -14826,12 +16470,20 @@ type FacetAttributeDefinition struct {
 	Type *string `type:"string" required:"true" enum:"FacetAttributeType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FacetAttributeDefinition) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FacetAttributeDefinition) GoString() string {
 	return s.String()
 }
@@ -14893,12 +16545,20 @@ type FacetAttributeReference struct {
 	TargetFacetName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FacetAttributeReference) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FacetAttributeReference) GoString() string {
 	return s.String()
 }
@@ -14948,12 +16608,20 @@ type FacetAttributeUpdate struct {
 	Attribute *FacetAttribute `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FacetAttributeUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s FacetAttributeUpdate) GoString() string {
 	return s.String()
 }
@@ -14985,6 +16653,200 @@ func (s *FacetAttributeUpdate) SetAttribute(v *FacetAttribute) *FacetAttributeUp
 	return s
 }
 
+// Occurs when deleting a facet that contains an attribute that is a target
+// to an attribute reference in a different facet.
+type FacetInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FacetInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FacetInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorFacetInUseException(v protocol.ResponseMetadata) error {
+	return &FacetInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *FacetInUseException) Code() string {
+	return "FacetInUseException"
+}
+
+// Message returns the exception's message.
+func (s *FacetInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *FacetInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *FacetInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *FacetInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *FacetInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The specified Facet could not be found.
+type FacetNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FacetNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FacetNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorFacetNotFoundException(v protocol.ResponseMetadata) error {
+	return &FacetNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *FacetNotFoundException) Code() string {
+	return "FacetNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *FacetNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *FacetNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *FacetNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *FacetNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *FacetNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The Facet that you provided was not well formed or could not be validated
+// with the schema.
+type FacetValidationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FacetValidationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s FacetValidationException) GoString() string {
+	return s.String()
+}
+
+func newErrorFacetValidationException(v protocol.ResponseMetadata) error {
+	return &FacetValidationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *FacetValidationException) Code() string {
+	return "FacetValidationException"
+}
+
+// Message returns the exception's message.
+func (s *FacetValidationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *FacetValidationException) OrigErr() error {
+	return nil
+}
+
+func (s *FacetValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *FacetValidationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *FacetValidationException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type GetAppliedSchemaVersionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -14994,12 +16856,20 @@ type GetAppliedSchemaVersionInput struct {
 	SchemaArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAppliedSchemaVersionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAppliedSchemaVersionInput) GoString() string {
 	return s.String()
 }
@@ -15031,12 +16901,20 @@ type GetAppliedSchemaVersionOutput struct {
 	AppliedSchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAppliedSchemaVersionOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetAppliedSchemaVersionOutput) GoString() string {
 	return s.String()
 }
@@ -15048,7 +16926,7 @@ func (s *GetAppliedSchemaVersionOutput) SetAppliedSchemaArn(v string) *GetApplie
 }
 
 type GetDirectoryInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The ARN of the directory.
 	//
@@ -15056,12 +16934,20 @@ type GetDirectoryInput struct {
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDirectoryInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDirectoryInput) GoString() string {
 	return s.String()
 }
@@ -15094,12 +16980,20 @@ type GetDirectoryOutput struct {
 	Directory *Directory `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDirectoryOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetDirectoryOutput) GoString() string {
 	return s.String()
 }
@@ -15125,12 +17019,20 @@ type GetFacetInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFacetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFacetInput) GoString() string {
 	return s.String()
 }
@@ -15173,12 +17075,20 @@ type GetFacetOutput struct {
 	Facet *Facet `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFacetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetFacetOutput) GoString() string {
 	return s.String()
 }
@@ -15212,12 +17122,20 @@ type GetLinkAttributesInput struct {
 	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetLinkAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetLinkAttributesInput) GoString() string {
 	return s.String()
 }
@@ -15277,12 +17195,20 @@ type GetLinkAttributesOutput struct {
 	Attributes []*AttributeKeyAndValue `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetLinkAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetLinkAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -15322,12 +17248,20 @@ type GetObjectAttributesInput struct {
 	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectAttributesInput) GoString() string {
 	return s.String()
 }
@@ -15396,12 +17330,20 @@ type GetObjectAttributesOutput struct {
 	Attributes []*AttributeKeyAndValue `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -15429,12 +17371,20 @@ type GetObjectInformationInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectInformationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectInformationInput) GoString() string {
 	return s.String()
 }
@@ -15485,12 +17435,20 @@ type GetObjectInformationOutput struct {
 	SchemaFacets []*SchemaFacet `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectInformationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetObjectInformationOutput) GoString() string {
 	return s.String()
 }
@@ -15508,7 +17466,7 @@ func (s *GetObjectInformationOutput) SetSchemaFacets(v []*SchemaFacet) *GetObjec
 }
 
 type GetSchemaAsJsonInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" nopayload:"true"`
 
 	// The ARN of the schema to retrieve.
 	//
@@ -15516,12 +17474,20 @@ type GetSchemaAsJsonInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSchemaAsJsonInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSchemaAsJsonInput) GoString() string {
 	return s.String()
 }
@@ -15555,12 +17521,20 @@ type GetSchemaAsJsonOutput struct {
 	Name *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSchemaAsJsonOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetSchemaAsJsonOutput) GoString() string {
 	return s.String()
 }
@@ -15592,12 +17566,20 @@ type GetTypedLinkFacetInformationInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTypedLinkFacetInformationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTypedLinkFacetInformationInput) GoString() string {
 	return s.String()
 }
@@ -15644,12 +17626,20 @@ type GetTypedLinkFacetInformationOutput struct {
 	IdentityAttributeOrder []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTypedLinkFacetInformationOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetTypedLinkFacetInformationOutput) GoString() string {
 	return s.String()
 }
@@ -15658,6 +17648,72 @@ func (s GetTypedLinkFacetInformationOutput) GoString() string {
 func (s *GetTypedLinkFacetInformationOutput) SetIdentityAttributeOrder(v []*string) *GetTypedLinkFacetInformationOutput {
 	s.IdentityAttributeOrder = v
 	return s
+}
+
+// Indicates a failure occurred while performing a check for backward compatibility
+// between the specified schema and the schema that is currently applied to
+// the directory.
+type IncompatibleSchemaException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IncompatibleSchemaException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IncompatibleSchemaException) GoString() string {
+	return s.String()
+}
+
+func newErrorIncompatibleSchemaException(v protocol.ResponseMetadata) error {
+	return &IncompatibleSchemaException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IncompatibleSchemaException) Code() string {
+	return "IncompatibleSchemaException"
+}
+
+// Message returns the exception's message.
+func (s *IncompatibleSchemaException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IncompatibleSchemaException) OrigErr() error {
+	return nil
+}
+
+func (s *IncompatibleSchemaException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IncompatibleSchemaException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IncompatibleSchemaException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Represents an index and an attached object.
@@ -15674,12 +17730,20 @@ type IndexAttachment struct {
 	ObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexAttachment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s IndexAttachment) GoString() string {
 	return s.String()
 }
@@ -15696,6 +17760,655 @@ func (s *IndexAttachment) SetObjectIdentifier(v string) *IndexAttachment {
 	return s
 }
 
+// An object has been attempted to be attached to an object that does not have
+// the appropriate attribute value.
+type IndexedAttributeMissingException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IndexedAttributeMissingException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s IndexedAttributeMissingException) GoString() string {
+	return s.String()
+}
+
+func newErrorIndexedAttributeMissingException(v protocol.ResponseMetadata) error {
+	return &IndexedAttributeMissingException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IndexedAttributeMissingException) Code() string {
+	return "IndexedAttributeMissingException"
+}
+
+// Message returns the exception's message.
+func (s *IndexedAttributeMissingException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IndexedAttributeMissingException) OrigErr() error {
+	return nil
+}
+
+func (s *IndexedAttributeMissingException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IndexedAttributeMissingException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IndexedAttributeMissingException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates a problem that must be resolved by Amazon Web Services. This might
+// be a transient error in which case you can retry your request until it succeeds.
+// Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
+// site to see if there are any operational issues with the service.
+type InternalServiceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServiceException(v protocol.ResponseMetadata) error {
+	return &InternalServiceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServiceException) Code() string {
+	return "InternalServiceException"
+}
+
+// Message returns the exception's message.
+func (s *InternalServiceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServiceException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServiceException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServiceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServiceException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates that the provided ARN value is not valid.
+type InvalidArnException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArnException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidArnException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidArnException(v protocol.ResponseMetadata) error {
+	return &InvalidArnException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidArnException) Code() string {
+	return "InvalidArnException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidArnException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidArnException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidArnException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidArnException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidArnException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates that an attempt to make an attachment was invalid. For example,
+// attaching two nodes with a link type that is not applicable to the nodes
+// or attempting to apply a schema to a directory a second time.
+type InvalidAttachmentException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidAttachmentException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidAttachmentException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidAttachmentException(v protocol.ResponseMetadata) error {
+	return &InvalidAttachmentException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidAttachmentException) Code() string {
+	return "InvalidAttachmentException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidAttachmentException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidAttachmentException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidAttachmentException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidAttachmentException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidAttachmentException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// An attempt to modify a Facet resulted in an invalid schema exception.
+type InvalidFacetUpdateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidFacetUpdateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidFacetUpdateException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidFacetUpdateException(v protocol.ResponseMetadata) error {
+	return &InvalidFacetUpdateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidFacetUpdateException) Code() string {
+	return "InvalidFacetUpdateException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidFacetUpdateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidFacetUpdateException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidFacetUpdateException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidFacetUpdateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidFacetUpdateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates that the NextToken value is not valid.
+type InvalidNextTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidNextTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidNextTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidNextTokenException) Code() string {
+	return "InvalidNextTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidNextTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidNextTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidNextTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidNextTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidNextTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Occurs when any of the rule parameter keys or values are invalid.
+type InvalidRuleException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRuleException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidRuleException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidRuleException(v protocol.ResponseMetadata) error {
+	return &InvalidRuleException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidRuleException) Code() string {
+	return "InvalidRuleException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidRuleException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidRuleException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidRuleException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidRuleException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidRuleException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates that the provided SchemaDoc value is not valid.
+type InvalidSchemaDocException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSchemaDocException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidSchemaDocException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidSchemaDocException(v protocol.ResponseMetadata) error {
+	return &InvalidSchemaDocException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidSchemaDocException) Code() string {
+	return "InvalidSchemaDocException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidSchemaDocException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidSchemaDocException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidSchemaDocException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidSchemaDocException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidSchemaDocException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Can occur for multiple reasons such as when you tag a resource that doesn’t
+// exist or if you specify a higher number of tags for a resource than the allowed
+// limit. Allowed limit is 50 tags per resource.
+type InvalidTaggingRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTaggingRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidTaggingRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidTaggingRequestException(v protocol.ResponseMetadata) error {
+	return &InvalidTaggingRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidTaggingRequestException) Code() string {
+	return "InvalidTaggingRequestException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidTaggingRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidTaggingRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidTaggingRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidTaggingRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidTaggingRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates that limits are exceeded. See Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
+// for more information.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The action to take on a typed link attribute value. Updates are only supported
 // for attributes which don’t contribute to link identity.
 type LinkAttributeAction struct {
@@ -15708,12 +18421,20 @@ type LinkAttributeAction struct {
 	AttributeUpdateValue *TypedAttributeValue `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LinkAttributeAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LinkAttributeAction) GoString() string {
 	return s.String()
 }
@@ -15741,12 +18462,20 @@ type LinkAttributeUpdate struct {
 	AttributeKey *AttributeKey `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LinkAttributeUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LinkAttributeUpdate) GoString() string {
 	return s.String()
 }
@@ -15778,6 +18507,71 @@ func (s *LinkAttributeUpdate) SetAttributeKey(v *AttributeKey) *LinkAttributeUpd
 	return s
 }
 
+// Indicates that a link could not be created due to a naming conflict. Choose
+// a different name and then try again.
+type LinkNameAlreadyInUseException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LinkNameAlreadyInUseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LinkNameAlreadyInUseException) GoString() string {
+	return s.String()
+}
+
+func newErrorLinkNameAlreadyInUseException(v protocol.ResponseMetadata) error {
+	return &LinkNameAlreadyInUseException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LinkNameAlreadyInUseException) Code() string {
+	return "LinkNameAlreadyInUseException"
+}
+
+// Message returns the exception's message.
+func (s *LinkNameAlreadyInUseException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LinkNameAlreadyInUseException) OrigErr() error {
+	return nil
+}
+
+func (s *LinkNameAlreadyInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LinkNameAlreadyInUseException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LinkNameAlreadyInUseException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type ListAppliedSchemaArnsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -15797,12 +18591,20 @@ type ListAppliedSchemaArnsInput struct {
 	SchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAppliedSchemaArnsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAppliedSchemaArnsInput) GoString() string {
 	return s.String()
 }
@@ -15857,12 +18659,20 @@ type ListAppliedSchemaArnsOutput struct {
 	SchemaArns []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAppliedSchemaArnsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAppliedSchemaArnsOutput) GoString() string {
 	return s.String()
 }
@@ -15902,12 +18712,20 @@ type ListAttachedIndicesInput struct {
 	TargetReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAttachedIndicesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAttachedIndicesInput) GoString() string {
 	return s.String()
 }
@@ -15971,12 +18789,20 @@ type ListAttachedIndicesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAttachedIndicesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListAttachedIndicesOutput) GoString() string {
 	return s.String()
 }
@@ -16003,12 +18829,20 @@ type ListDevelopmentSchemaArnsInput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDevelopmentSchemaArnsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDevelopmentSchemaArnsInput) GoString() string {
 	return s.String()
 }
@@ -16048,12 +18882,20 @@ type ListDevelopmentSchemaArnsOutput struct {
 	SchemaArns []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDevelopmentSchemaArnsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDevelopmentSchemaArnsOutput) GoString() string {
 	return s.String()
 }
@@ -16084,12 +18926,20 @@ type ListDirectoriesInput struct {
 	State *string `locationName:"state" type:"string" enum:"DirectoryState"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDirectoriesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDirectoriesInput) GoString() string {
 	return s.String()
 }
@@ -16138,12 +18988,20 @@ type ListDirectoriesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDirectoriesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListDirectoriesOutput) GoString() string {
 	return s.String()
 }
@@ -16180,12 +19038,20 @@ type ListFacetAttributesInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFacetAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFacetAttributesInput) GoString() string {
 	return s.String()
 }
@@ -16246,12 +19112,20 @@ type ListFacetAttributesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFacetAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFacetAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -16283,12 +19157,20 @@ type ListFacetNamesInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFacetNamesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFacetNamesInput) GoString() string {
 	return s.String()
 }
@@ -16337,12 +19219,20 @@ type ListFacetNamesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFacetNamesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListFacetNamesOutput) GoString() string {
 	return s.String()
 }
@@ -16393,12 +19283,20 @@ type ListIncomingTypedLinksInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIncomingTypedLinksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIncomingTypedLinksInput) GoString() string {
 	return s.String()
 }
@@ -16489,12 +19387,20 @@ type ListIncomingTypedLinksOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIncomingTypedLinksOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIncomingTypedLinksOutput) GoString() string {
 	return s.String()
 }
@@ -16539,12 +19445,20 @@ type ListIndexInput struct {
 	RangesOnIndexedValues []*ObjectAttributeRange `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIndexInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIndexInput) GoString() string {
 	return s.String()
 }
@@ -16624,12 +19538,20 @@ type ListIndexOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIndexOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListIndexOutput) GoString() string {
 	return s.String()
 }
@@ -16660,12 +19582,20 @@ type ListManagedSchemaArnsInput struct {
 	SchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListManagedSchemaArnsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListManagedSchemaArnsInput) GoString() string {
 	return s.String()
 }
@@ -16711,12 +19641,20 @@ type ListManagedSchemaArnsOutput struct {
 	SchemaArns []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListManagedSchemaArnsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListManagedSchemaArnsOutput) GoString() string {
 	return s.String()
 }
@@ -16763,12 +19701,20 @@ type ListObjectAttributesInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectAttributesInput) GoString() string {
 	return s.String()
 }
@@ -16844,12 +19790,20 @@ type ListObjectAttributesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -16893,12 +19847,20 @@ type ListObjectChildrenInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectChildrenInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectChildrenInput) GoString() string {
 	return s.String()
 }
@@ -16963,12 +19925,20 @@ type ListObjectChildrenOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectChildrenOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectChildrenOutput) GoString() string {
 	return s.String()
 }
@@ -17006,12 +19976,20 @@ type ListObjectParentPathsInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectParentPathsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectParentPathsInput) GoString() string {
 	return s.String()
 }
@@ -17069,12 +20047,20 @@ type ListObjectParentPathsOutput struct {
 	PathToObjectIdentifiersList []*PathToObjectIdentifiers `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectParentPathsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectParentPathsOutput) GoString() string {
 	return s.String()
 }
@@ -17122,12 +20108,20 @@ type ListObjectParentsInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectParentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectParentsInput) GoString() string {
 	return s.String()
 }
@@ -17201,12 +20195,20 @@ type ListObjectParentsOutput struct {
 	Parents map[string]*string `type:"map"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectParentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectParentsOutput) GoString() string {
 	return s.String()
 }
@@ -17255,12 +20257,20 @@ type ListObjectPoliciesInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectPoliciesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectPoliciesInput) GoString() string {
 	return s.String()
 }
@@ -17324,12 +20334,20 @@ type ListObjectPoliciesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectPoliciesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListObjectPoliciesOutput) GoString() string {
 	return s.String()
 }
@@ -17380,12 +20398,20 @@ type ListOutgoingTypedLinksInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOutgoingTypedLinksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOutgoingTypedLinksInput) GoString() string {
 	return s.String()
 }
@@ -17476,12 +20502,20 @@ type ListOutgoingTypedLinksOutput struct {
 	TypedLinkSpecifiers []*TypedLinkSpecifier `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOutgoingTypedLinksOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListOutgoingTypedLinksOutput) GoString() string {
 	return s.String()
 }
@@ -17524,12 +20558,20 @@ type ListPolicyAttachmentsInput struct {
 	PolicyReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPolicyAttachmentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPolicyAttachmentsInput) GoString() string {
 	return s.String()
 }
@@ -17593,12 +20635,20 @@ type ListPolicyAttachmentsOutput struct {
 	ObjectIdentifiers []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPolicyAttachmentsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPolicyAttachmentsOutput) GoString() string {
 	return s.String()
 }
@@ -17629,12 +20679,20 @@ type ListPublishedSchemaArnsInput struct {
 	SchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPublishedSchemaArnsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPublishedSchemaArnsInput) GoString() string {
 	return s.String()
 }
@@ -17680,12 +20738,20 @@ type ListPublishedSchemaArnsOutput struct {
 	SchemaArns []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPublishedSchemaArnsOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListPublishedSchemaArnsOutput) GoString() string {
 	return s.String()
 }
@@ -17720,12 +20786,20 @@ type ListTagsForResourceInput struct {
 	ResourceArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceInput) GoString() string {
 	return s.String()
 }
@@ -17775,12 +20849,20 @@ type ListTagsForResourceOutput struct {
 	Tags []*Tag `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTagsForResourceOutput) GoString() string {
 	return s.String()
 }
@@ -17818,12 +20900,20 @@ type ListTypedLinkFacetAttributesInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTypedLinkFacetAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTypedLinkFacetAttributesInput) GoString() string {
 	return s.String()
 }
@@ -17881,12 +20971,20 @@ type ListTypedLinkFacetAttributesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTypedLinkFacetAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTypedLinkFacetAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -17919,12 +21017,20 @@ type ListTypedLinkFacetNamesInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTypedLinkFacetNamesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTypedLinkFacetNamesInput) GoString() string {
 	return s.String()
 }
@@ -17973,12 +21079,20 @@ type ListTypedLinkFacetNamesOutput struct {
 	NextToken *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTypedLinkFacetNamesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ListTypedLinkFacetNamesOutput) GoString() string {
 	return s.String()
 }
@@ -18017,12 +21131,20 @@ type LookupPolicyInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LookupPolicyInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LookupPolicyInput) GoString() string {
 	return s.String()
 }
@@ -18081,12 +21203,20 @@ type LookupPolicyOutput struct {
 	PolicyToPathList []*PolicyToPath `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LookupPolicyOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s LookupPolicyOutput) GoString() string {
 	return s.String()
 }
@@ -18103,6 +21233,263 @@ func (s *LookupPolicyOutput) SetPolicyToPathList(v []*PolicyToPath) *LookupPolic
 	return s
 }
 
+// Indicates that the requested operation can only operate on index objects.
+type NotIndexException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotIndexException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotIndexException) GoString() string {
+	return s.String()
+}
+
+func newErrorNotIndexException(v protocol.ResponseMetadata) error {
+	return &NotIndexException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NotIndexException) Code() string {
+	return "NotIndexException"
+}
+
+// Message returns the exception's message.
+func (s *NotIndexException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NotIndexException) OrigErr() error {
+	return nil
+}
+
+func (s *NotIndexException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NotIndexException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NotIndexException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Occurs when any invalid operations are performed on an object that is not
+// a node, such as calling ListObjectChildren for a leaf node object.
+type NotNodeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotNodeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotNodeException) GoString() string {
+	return s.String()
+}
+
+func newErrorNotNodeException(v protocol.ResponseMetadata) error {
+	return &NotNodeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NotNodeException) Code() string {
+	return "NotNodeException"
+}
+
+// Message returns the exception's message.
+func (s *NotNodeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NotNodeException) OrigErr() error {
+	return nil
+}
+
+func (s *NotNodeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NotNodeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NotNodeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates that the requested operation can only operate on policy objects.
+type NotPolicyException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotPolicyException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s NotPolicyException) GoString() string {
+	return s.String()
+}
+
+func newErrorNotPolicyException(v protocol.ResponseMetadata) error {
+	return &NotPolicyException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *NotPolicyException) Code() string {
+	return "NotPolicyException"
+}
+
+// Message returns the exception's message.
+func (s *NotPolicyException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *NotPolicyException) OrigErr() error {
+	return nil
+}
+
+func (s *NotPolicyException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *NotPolicyException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *NotPolicyException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates that the object is not attached to the index.
+type ObjectAlreadyDetachedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ObjectAlreadyDetachedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ObjectAlreadyDetachedException) GoString() string {
+	return s.String()
+}
+
+func newErrorObjectAlreadyDetachedException(v protocol.ResponseMetadata) error {
+	return &ObjectAlreadyDetachedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ObjectAlreadyDetachedException) Code() string {
+	return "ObjectAlreadyDetachedException"
+}
+
+// Message returns the exception's message.
+func (s *ObjectAlreadyDetachedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ObjectAlreadyDetachedException) OrigErr() error {
+	return nil
+}
+
+func (s *ObjectAlreadyDetachedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ObjectAlreadyDetachedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ObjectAlreadyDetachedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The action to take on the object attribute.
 type ObjectAttributeAction struct {
 	_ struct{} `type:"structure"`
@@ -18114,12 +21501,20 @@ type ObjectAttributeAction struct {
 	ObjectAttributeUpdateValue *TypedAttributeValue `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectAttributeAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectAttributeAction) GoString() string {
 	return s.String()
 }
@@ -18147,12 +21542,20 @@ type ObjectAttributeRange struct {
 	Range *TypedAttributeValueRange `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectAttributeRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectAttributeRange) GoString() string {
 	return s.String()
 }
@@ -18200,12 +21603,20 @@ type ObjectAttributeUpdate struct {
 	ObjectAttributeKey *AttributeKey `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectAttributeUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectAttributeUpdate) GoString() string {
 	return s.String()
 }
@@ -18248,12 +21659,20 @@ type ObjectIdentifierAndLinkNameTuple struct {
 	ObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectIdentifierAndLinkNameTuple) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectIdentifierAndLinkNameTuple) GoString() string {
 	return s.String()
 }
@@ -18270,6 +21689,71 @@ func (s *ObjectIdentifierAndLinkNameTuple) SetObjectIdentifier(v string) *Object
 	return s
 }
 
+// Indicates that the requested operation cannot be completed because the object
+// has not been detached from the tree.
+type ObjectNotDetachedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ObjectNotDetachedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ObjectNotDetachedException) GoString() string {
+	return s.String()
+}
+
+func newErrorObjectNotDetachedException(v protocol.ResponseMetadata) error {
+	return &ObjectNotDetachedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ObjectNotDetachedException) Code() string {
+	return "ObjectNotDetachedException"
+}
+
+// Message returns the exception's message.
+func (s *ObjectNotDetachedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ObjectNotDetachedException) OrigErr() error {
+	return nil
+}
+
+func (s *ObjectNotDetachedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ObjectNotDetachedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ObjectNotDetachedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The reference that identifies an object.
 type ObjectReference struct {
 	_ struct{} `type:"structure"`
@@ -18284,7 +21768,9 @@ type ObjectReference struct {
 	//    * $ObjectIdentifier - An object identifier is an opaque string provided
 	//    by Amazon Cloud Directory. When creating objects, the system will provide
 	//    you with the identifier of the created object. An object’s identifier
-	//    is immutable and no two objects will ever share the same object identifier
+	//    is immutable and no two objects will ever share the same object identifier.
+	//    To identify an object with ObjectIdentifier, the ObjectIdentifier must
+	//    be wrapped in double quotes.
 	//
 	//    * /some/path - Identifies the object based on path
 	//
@@ -18292,12 +21778,20 @@ type ObjectReference struct {
 	Selector *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectReference) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ObjectReference) GoString() string {
 	return s.String()
 }
@@ -18320,12 +21814,20 @@ type PathToObjectIdentifiers struct {
 	Path *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PathToObjectIdentifiers) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PathToObjectIdentifiers) GoString() string {
 	return s.String()
 }
@@ -18357,12 +21859,20 @@ type PolicyAttachment struct {
 	PolicyType *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PolicyAttachment) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PolicyAttachment) GoString() string {
 	return s.String()
 }
@@ -18398,12 +21908,20 @@ type PolicyToPath struct {
 	Policies []*PolicyAttachment `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PolicyToPath) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PolicyToPath) GoString() string {
 	return s.String()
 }
@@ -18445,12 +21963,20 @@ type PublishSchemaInput struct {
 	Version *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PublishSchemaInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PublishSchemaInput) GoString() string {
 	return s.String()
 }
@@ -18512,12 +22038,20 @@ type PublishSchemaOutput struct {
 	PublishedSchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PublishSchemaOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PublishSchemaOutput) GoString() string {
 	return s.String()
 }
@@ -18542,12 +22076,20 @@ type PutSchemaFromJsonInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutSchemaFromJsonInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutSchemaFromJsonInput) GoString() string {
 	return s.String()
 }
@@ -18587,12 +22129,20 @@ type PutSchemaFromJsonOutput struct {
 	Arn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutSchemaFromJsonOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PutSchemaFromJsonOutput) GoString() string {
 	return s.String()
 }
@@ -18622,12 +22172,20 @@ type RemoveFacetFromObjectInput struct {
 	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveFacetFromObjectInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveFacetFromObjectInput) GoString() string {
 	return s.String()
 }
@@ -18678,14 +22236,155 @@ type RemoveFacetFromObjectOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveFacetFromObjectOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s RemoveFacetFromObjectOutput) GoString() string {
 	return s.String()
+}
+
+// The specified resource could not be found.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Occurs when a conflict with a previous successful write is detected. For
+// example, if a write operation occurs on an object and then an attempt is
+// made to read the object using “SERIALIZABLE” consistency, this exception
+// may result. This generally occurs when the previous write did not have time
+// to propagate to the host serving the current request. A retry (with appropriate
+// backoff logic) is the recommended response to this exception.
+type RetryableConflictException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryableConflictException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s RetryableConflictException) GoString() string {
+	return s.String()
+}
+
+func newErrorRetryableConflictException(v protocol.ResponseMetadata) error {
+	return &RetryableConflictException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *RetryableConflictException) Code() string {
+	return "RetryableConflictException"
+}
+
+// Message returns the exception's message.
+func (s *RetryableConflictException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *RetryableConflictException) OrigErr() error {
+	return nil
+}
+
+func (s *RetryableConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *RetryableConflictException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *RetryableConflictException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Contains an Amazon Resource Name (ARN) and parameters that are associated
@@ -18700,12 +22399,20 @@ type Rule struct {
 	Type *string `type:"string" enum:"RuleType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Rule) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Rule) GoString() string {
 	return s.String()
 }
@@ -18722,25 +22429,163 @@ func (s *Rule) SetType(v string) *Rule {
 	return s
 }
 
+// Indicates that a schema could not be created due to a naming conflict. Please
+// select a different name and then try again.
+type SchemaAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SchemaAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SchemaAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorSchemaAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &SchemaAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *SchemaAlreadyExistsException) Code() string {
+	return "SchemaAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *SchemaAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *SchemaAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *SchemaAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *SchemaAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *SchemaAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Indicates that a schema is already published.
+type SchemaAlreadyPublishedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SchemaAlreadyPublishedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s SchemaAlreadyPublishedException) GoString() string {
+	return s.String()
+}
+
+func newErrorSchemaAlreadyPublishedException(v protocol.ResponseMetadata) error {
+	return &SchemaAlreadyPublishedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *SchemaAlreadyPublishedException) Code() string {
+	return "SchemaAlreadyPublishedException"
+}
+
+// Message returns the exception's message.
+func (s *SchemaAlreadyPublishedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *SchemaAlreadyPublishedException) OrigErr() error {
+	return nil
+}
+
+func (s *SchemaAlreadyPublishedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *SchemaAlreadyPublishedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *SchemaAlreadyPublishedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A facet.
 type SchemaFacet struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the facet.
+	// The name of the facet. If this value is set, SchemaArn must also be set.
 	FacetName *string `min:"1" type:"string"`
 
 	// The ARN of the schema that contains the facet with no minor component. See
 	// arns and In-Place Schema Upgrade (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html)
-	// for a description of when to provide minor versions.
+	// for a description of when to provide minor versions. If this value is set,
+	// FacetName must also be set.
 	SchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SchemaFacet) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s SchemaFacet) GoString() string {
 	return s.String()
 }
@@ -18770,6 +22615,71 @@ func (s *SchemaFacet) SetSchemaArn(v string) *SchemaFacet {
 	return s
 }
 
+// The object could not be deleted because links still exist. Remove the links
+// and then try the operation again.
+type StillContainsLinksException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StillContainsLinksException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s StillContainsLinksException) GoString() string {
+	return s.String()
+}
+
+func newErrorStillContainsLinksException(v protocol.ResponseMetadata) error {
+	return &StillContainsLinksException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *StillContainsLinksException) Code() string {
+	return "StillContainsLinksException"
+}
+
+// Message returns the exception's message.
+func (s *StillContainsLinksException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *StillContainsLinksException) OrigErr() error {
+	return nil
+}
+
+func (s *StillContainsLinksException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *StillContainsLinksException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *StillContainsLinksException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // The tag structure that contains a tag key and value.
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -18781,12 +22691,20 @@ type Tag struct {
 	Value *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Tag) GoString() string {
 	return s.String()
 }
@@ -18818,12 +22736,20 @@ type TagResourceInput struct {
 	Tags []*Tag `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagResourceInput) GoString() string {
 	return s.String()
 }
@@ -18860,12 +22786,20 @@ type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagResourceOutput) GoString() string {
 	return s.String()
 }
@@ -18877,7 +22811,6 @@ type TypedAttributeValue struct {
 	_ struct{} `type:"structure"`
 
 	// A binary data value.
-	//
 	// BinaryValue is automatically base64 encoded/decoded by the SDK.
 	BinaryValue []byte `type:"blob"`
 
@@ -18894,12 +22827,20 @@ type TypedAttributeValue struct {
 	StringValue *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedAttributeValue) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedAttributeValue) GoString() string {
 	return s.String()
 }
@@ -18955,12 +22896,20 @@ type TypedAttributeValueRange struct {
 	StartValue *TypedAttributeValue `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedAttributeValueRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedAttributeValueRange) GoString() string {
 	return s.String()
 }
@@ -19034,12 +22983,20 @@ type TypedLinkAttributeDefinition struct {
 	Type *string `type:"string" required:"true" enum:"FacetAttributeType"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkAttributeDefinition) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkAttributeDefinition) GoString() string {
 	return s.String()
 }
@@ -19115,12 +23072,20 @@ type TypedLinkAttributeRange struct {
 	Range *TypedAttributeValueRange `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkAttributeRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkAttributeRange) GoString() string {
 	return s.String()
 }
@@ -19185,12 +23150,20 @@ type TypedLinkFacet struct {
 	Name *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkFacet) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkFacet) GoString() string {
 	return s.String()
 }
@@ -19257,12 +23230,20 @@ type TypedLinkFacetAttributeUpdate struct {
 	Attribute *TypedLinkAttributeDefinition `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkFacetAttributeUpdate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkFacetAttributeUpdate) GoString() string {
 	return s.String()
 }
@@ -19317,12 +23298,20 @@ type TypedLinkSchemaAndFacetName struct {
 	TypedLinkName *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkSchemaAndFacetName) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkSchemaAndFacetName) GoString() string {
 	return s.String()
 }
@@ -19385,12 +23374,20 @@ type TypedLinkSpecifier struct {
 	TypedLinkFacet *TypedLinkSchemaAndFacetName `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkSpecifier) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TypedLinkSpecifier) GoString() string {
 	return s.String()
 }
@@ -19456,6 +23453,70 @@ func (s *TypedLinkSpecifier) SetTypedLinkFacet(v *TypedLinkSchemaAndFacetName) *
 	return s
 }
 
+// Indicates that the requested index type is not supported.
+type UnsupportedIndexTypeException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedIndexTypeException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s UnsupportedIndexTypeException) GoString() string {
+	return s.String()
+}
+
+func newErrorUnsupportedIndexTypeException(v protocol.ResponseMetadata) error {
+	return &UnsupportedIndexTypeException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *UnsupportedIndexTypeException) Code() string {
+	return "UnsupportedIndexTypeException"
+}
+
+// Message returns the exception's message.
+func (s *UnsupportedIndexTypeException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *UnsupportedIndexTypeException) OrigErr() error {
+	return nil
+}
+
+func (s *UnsupportedIndexTypeException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *UnsupportedIndexTypeException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *UnsupportedIndexTypeException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -19471,12 +23532,20 @@ type UntagResourceInput struct {
 	TagKeys []*string `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagResourceInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagResourceInput) GoString() string {
 	return s.String()
 }
@@ -19513,12 +23582,20 @@ type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagResourceOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UntagResourceOutput) GoString() string {
 	return s.String()
 }
@@ -19547,12 +23624,20 @@ type UpdateFacetInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFacetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFacetInput) GoString() string {
 	return s.String()
 }
@@ -19614,12 +23699,20 @@ type UpdateFacetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFacetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateFacetOutput) GoString() string {
 	return s.String()
 }
@@ -19645,12 +23738,20 @@ type UpdateLinkAttributesInput struct {
 	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateLinkAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateLinkAttributesInput) GoString() string {
 	return s.String()
 }
@@ -19711,12 +23812,20 @@ type UpdateLinkAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateLinkAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateLinkAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -19741,12 +23850,20 @@ type UpdateObjectAttributesInput struct {
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateObjectAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateObjectAttributesInput) GoString() string {
 	return s.String()
 }
@@ -19805,12 +23922,20 @@ type UpdateObjectAttributesOutput struct {
 	ObjectIdentifier *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateObjectAttributesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateObjectAttributesOutput) GoString() string {
 	return s.String()
 }
@@ -19836,12 +23961,20 @@ type UpdateSchemaInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSchemaInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSchemaInput) GoString() string {
 	return s.String()
 }
@@ -19885,12 +24018,20 @@ type UpdateSchemaOutput struct {
 	SchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSchemaOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateSchemaOutput) GoString() string {
 	return s.String()
 }
@@ -19933,12 +24074,20 @@ type UpdateTypedLinkFacetInput struct {
 	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTypedLinkFacetInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTypedLinkFacetInput) GoString() string {
 	return s.String()
 }
@@ -20003,12 +24152,20 @@ type UpdateTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTypedLinkFacetOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateTypedLinkFacetOutput) GoString() string {
 	return s.String()
 }
@@ -20032,12 +24189,20 @@ type UpgradeAppliedSchemaInput struct {
 	PublishedSchemaArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradeAppliedSchemaInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradeAppliedSchemaInput) GoString() string {
 	return s.String()
 }
@@ -20086,12 +24251,20 @@ type UpgradeAppliedSchemaOutput struct {
 	UpgradedSchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradeAppliedSchemaOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradeAppliedSchemaOutput) GoString() string {
 	return s.String()
 }
@@ -20134,12 +24307,20 @@ type UpgradePublishedSchemaInput struct {
 	PublishedSchemaArn *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradePublishedSchemaInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradePublishedSchemaInput) GoString() string {
 	return s.String()
 }
@@ -20197,12 +24378,20 @@ type UpgradePublishedSchemaOutput struct {
 	UpgradedSchemaArn *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradePublishedSchemaOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpgradePublishedSchemaOutput) GoString() string {
 	return s.String()
 }
@@ -20211,6 +24400,71 @@ func (s UpgradePublishedSchemaOutput) GoString() string {
 func (s *UpgradePublishedSchemaOutput) SetUpgradedSchemaArn(v string) *UpgradePublishedSchemaOutput {
 	s.UpgradedSchemaArn = &v
 	return s
+}
+
+// Indicates that your request is malformed in some manner. See the exception
+// message.
+type ValidationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationException) GoString() string {
+	return s.String()
+}
+
+func newErrorValidationException(v protocol.ResponseMetadata) error {
+	return &ValidationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ValidationException) Code() string {
+	return "ValidationException"
+}
+
+// Message returns the exception's message.
+func (s *ValidationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ValidationException) OrigErr() error {
+	return nil
+}
+
+func (s *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ValidationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ValidationException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 const (
@@ -20253,6 +24507,25 @@ const (
 	// BatchReadExceptionTypeInternalServiceException is a BatchReadExceptionType enum value
 	BatchReadExceptionTypeInternalServiceException = "InternalServiceException"
 )
+
+// BatchReadExceptionType_Values returns all elements of the BatchReadExceptionType enum
+func BatchReadExceptionType_Values() []string {
+	return []string{
+		BatchReadExceptionTypeValidationException,
+		BatchReadExceptionTypeInvalidArnException,
+		BatchReadExceptionTypeResourceNotFoundException,
+		BatchReadExceptionTypeInvalidNextTokenException,
+		BatchReadExceptionTypeAccessDeniedException,
+		BatchReadExceptionTypeNotNodeException,
+		BatchReadExceptionTypeFacetValidationException,
+		BatchReadExceptionTypeCannotListParentOfRootException,
+		BatchReadExceptionTypeNotIndexException,
+		BatchReadExceptionTypeNotPolicyException,
+		BatchReadExceptionTypeDirectoryNotEnabledException,
+		BatchReadExceptionTypeLimitExceededException,
+		BatchReadExceptionTypeInternalServiceException,
+	}
+}
 
 const (
 	// BatchWriteExceptionTypeInternalServiceException is a BatchWriteExceptionType enum value
@@ -20310,6 +24583,30 @@ const (
 	BatchWriteExceptionTypeUnsupportedIndexTypeException = "UnsupportedIndexTypeException"
 )
 
+// BatchWriteExceptionType_Values returns all elements of the BatchWriteExceptionType enum
+func BatchWriteExceptionType_Values() []string {
+	return []string{
+		BatchWriteExceptionTypeInternalServiceException,
+		BatchWriteExceptionTypeValidationException,
+		BatchWriteExceptionTypeInvalidArnException,
+		BatchWriteExceptionTypeLinkNameAlreadyInUseException,
+		BatchWriteExceptionTypeStillContainsLinksException,
+		BatchWriteExceptionTypeFacetValidationException,
+		BatchWriteExceptionTypeObjectNotDetachedException,
+		BatchWriteExceptionTypeResourceNotFoundException,
+		BatchWriteExceptionTypeAccessDeniedException,
+		BatchWriteExceptionTypeInvalidAttachmentException,
+		BatchWriteExceptionTypeNotIndexException,
+		BatchWriteExceptionTypeNotNodeException,
+		BatchWriteExceptionTypeIndexedAttributeMissingException,
+		BatchWriteExceptionTypeObjectAlreadyDetachedException,
+		BatchWriteExceptionTypeNotPolicyException,
+		BatchWriteExceptionTypeDirectoryNotEnabledException,
+		BatchWriteExceptionTypeLimitExceededException,
+		BatchWriteExceptionTypeUnsupportedIndexTypeException,
+	}
+}
+
 const (
 	// ConsistencyLevelSerializable is a ConsistencyLevel enum value
 	ConsistencyLevelSerializable = "SERIALIZABLE"
@@ -20317,6 +24614,14 @@ const (
 	// ConsistencyLevelEventual is a ConsistencyLevel enum value
 	ConsistencyLevelEventual = "EVENTUAL"
 )
+
+// ConsistencyLevel_Values returns all elements of the ConsistencyLevel enum
+func ConsistencyLevel_Values() []string {
+	return []string{
+		ConsistencyLevelSerializable,
+		ConsistencyLevelEventual,
+	}
+}
 
 const (
 	// DirectoryStateEnabled is a DirectoryState enum value
@@ -20328,6 +24633,15 @@ const (
 	// DirectoryStateDeleted is a DirectoryState enum value
 	DirectoryStateDeleted = "DELETED"
 )
+
+// DirectoryState_Values returns all elements of the DirectoryState enum
+func DirectoryState_Values() []string {
+	return []string{
+		DirectoryStateEnabled,
+		DirectoryStateDisabled,
+		DirectoryStateDeleted,
+	}
+}
 
 const (
 	// FacetAttributeTypeString is a FacetAttributeType enum value
@@ -20349,6 +24663,18 @@ const (
 	FacetAttributeTypeVariant = "VARIANT"
 )
 
+// FacetAttributeType_Values returns all elements of the FacetAttributeType enum
+func FacetAttributeType_Values() []string {
+	return []string{
+		FacetAttributeTypeString,
+		FacetAttributeTypeBinary,
+		FacetAttributeTypeBoolean,
+		FacetAttributeTypeNumber,
+		FacetAttributeTypeDatetime,
+		FacetAttributeTypeVariant,
+	}
+}
+
 const (
 	// FacetStyleStatic is a FacetStyle enum value
 	FacetStyleStatic = "STATIC"
@@ -20356,6 +24682,14 @@ const (
 	// FacetStyleDynamic is a FacetStyle enum value
 	FacetStyleDynamic = "DYNAMIC"
 )
+
+// FacetStyle_Values returns all elements of the FacetStyle enum
+func FacetStyle_Values() []string {
+	return []string{
+		FacetStyleStatic,
+		FacetStyleDynamic,
+	}
+}
 
 const (
 	// ObjectTypeNode is a ObjectType enum value
@@ -20370,6 +24704,16 @@ const (
 	// ObjectTypeIndex is a ObjectType enum value
 	ObjectTypeIndex = "INDEX"
 )
+
+// ObjectType_Values returns all elements of the ObjectType enum
+func ObjectType_Values() []string {
+	return []string{
+		ObjectTypeNode,
+		ObjectTypeLeafNode,
+		ObjectTypePolicy,
+		ObjectTypeIndex,
+	}
+}
 
 const (
 	// RangeModeFirst is a RangeMode enum value
@@ -20388,6 +24732,17 @@ const (
 	RangeModeExclusive = "EXCLUSIVE"
 )
 
+// RangeMode_Values returns all elements of the RangeMode enum
+func RangeMode_Values() []string {
+	return []string{
+		RangeModeFirst,
+		RangeModeLast,
+		RangeModeLastBeforeMissingValues,
+		RangeModeInclusive,
+		RangeModeExclusive,
+	}
+}
+
 const (
 	// RequiredAttributeBehaviorRequiredAlways is a RequiredAttributeBehavior enum value
 	RequiredAttributeBehaviorRequiredAlways = "REQUIRED_ALWAYS"
@@ -20395,6 +24750,14 @@ const (
 	// RequiredAttributeBehaviorNotRequired is a RequiredAttributeBehavior enum value
 	RequiredAttributeBehaviorNotRequired = "NOT_REQUIRED"
 )
+
+// RequiredAttributeBehavior_Values returns all elements of the RequiredAttributeBehavior enum
+func RequiredAttributeBehavior_Values() []string {
+	return []string{
+		RequiredAttributeBehaviorRequiredAlways,
+		RequiredAttributeBehaviorNotRequired,
+	}
+}
 
 const (
 	// RuleTypeBinaryLength is a RuleType enum value
@@ -20410,6 +24773,16 @@ const (
 	RuleTypeStringLength = "STRING_LENGTH"
 )
 
+// RuleType_Values returns all elements of the RuleType enum
+func RuleType_Values() []string {
+	return []string{
+		RuleTypeBinaryLength,
+		RuleTypeNumberComparison,
+		RuleTypeStringFromSet,
+		RuleTypeStringLength,
+	}
+}
+
 const (
 	// UpdateActionTypeCreateOrUpdate is a UpdateActionType enum value
 	UpdateActionTypeCreateOrUpdate = "CREATE_OR_UPDATE"
@@ -20417,3 +24790,11 @@ const (
 	// UpdateActionTypeDelete is a UpdateActionType enum value
 	UpdateActionTypeDelete = "DELETE"
 )
+
+// UpdateActionType_Values returns all elements of the UpdateActionType enum
+func UpdateActionType_Values() []string {
+	return []string{
+		UpdateActionTypeCreateOrUpdate,
+		UpdateActionTypeDelete,
+	}
+}

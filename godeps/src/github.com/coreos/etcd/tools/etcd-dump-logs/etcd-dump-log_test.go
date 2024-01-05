@@ -15,8 +15,6 @@
 package main
 
 import (
-	"bytes"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path"
@@ -24,13 +22,15 @@ import (
 	"strings"
 	"testing"
 
-	"go.etcd.io/etcd/auth/authpb"
-	"go.etcd.io/etcd/etcdserver/etcdserverpb"
-	"go.etcd.io/etcd/pkg/fileutil"
-	"go.etcd.io/etcd/pkg/pbutil"
-	"go.etcd.io/etcd/raft/raftpb"
-	"go.etcd.io/etcd/wal"
-	"go.uber.org/zap"
+	"github.com/stretchr/testify/assert"
+	"go.uber.org/zap/zaptest"
+
+	"go.etcd.io/etcd/api/v3/authpb"
+	"go.etcd.io/etcd/api/v3/etcdserverpb"
+	"go.etcd.io/etcd/client/pkg/v3/fileutil"
+	"go.etcd.io/etcd/pkg/v3/pbutil"
+	"go.etcd.io/etcd/server/v3/storage/wal"
+	"go.etcd.io/raft/v3/raftpb"
 )
 
 func TestEtcdDumpLogEntryType(t *testing.T) {
@@ -40,29 +40,72 @@ func TestEtcdDumpLogEntryType(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	// TODO(ptabor): The test does not run by default from ./scripts/test.sh.
 	dumpLogsBinary := path.Join(binDir + "/etcd-dump-logs")
 	if !fileutil.Exist(dumpLogsBinary) {
 		t.Skipf("%q does not exist", dumpLogsBinary)
 	}
 
-	decoder_correctoutputformat := filepath.Join(binDir, "/testdecoder/decoder_correctoutputformat.sh")
-	decoder_wrongoutputformat := filepath.Join(binDir, "/testdecoder/decoder_wrongoutputformat.sh")
+	decoderCorrectOutputFormat := filepath.Join(binDir, "/testdecoder/decoder_correctoutputformat.sh")
+	decoderWrongOutputFormat := filepath.Join(binDir, "/testdecoder/decoder_wrongoutputformat.sh")
 
-	p, err := ioutil.TempDir(os.TempDir(), "etcddumplogstest")
+	p := t.TempDir()
+
+	mustCreateWalLog(t, p)
+
+	argtests := []struct {
+		name         string
+		args         []string
+		fileExpected string
+	}{
+		{"no entry-type", []string{p}, "expectedoutput/listAll.output"},
+		{"confchange entry-type", []string{"-entry-type", "ConfigChange", p}, "expectedoutput/listConfigChange.output"},
+		{"normal entry-type", []string{"-entry-type", "Normal", p}, "expectedoutput/listNormal.output"},
+		{"request entry-type", []string{"-entry-type", "Request", p}, "expectedoutput/listRequest.output"},
+		{"internalRaftRequest entry-type", []string{"-entry-type", "InternalRaftRequest", p}, "expectedoutput/listInternalRaftRequest.output"},
+		{"range entry-type", []string{"-entry-type", "IRRRange", p}, "expectedoutput/listIRRRange.output"},
+		{"put entry-type", []string{"-entry-type", "IRRPut", p}, "expectedoutput/listIRRPut.output"},
+		{"del entry-type", []string{"-entry-type", "IRRDeleteRange", p}, "expectedoutput/listIRRDeleteRange.output"},
+		{"txn entry-type", []string{"-entry-type", "IRRTxn", p}, "expectedoutput/listIRRTxn.output"},
+		{"compaction entry-type", []string{"-entry-type", "IRRCompaction", p}, "expectedoutput/listIRRCompaction.output"},
+		{"lease grant entry-type", []string{"-entry-type", "IRRLeaseGrant", p}, "expectedoutput/listIRRLeaseGrant.output"},
+		{"lease revoke entry-type", []string{"-entry-type", "IRRLeaseRevoke", p}, "expectedoutput/listIRRLeaseRevoke.output"},
+		{"confchange and txn entry-type", []string{"-entry-type", "ConfigChange,IRRCompaction", p}, "expectedoutput/listConfigChangeIRRCompaction.output"},
+		{"decoder_correctoutputformat", []string{"-stream-decoder", decoderCorrectOutputFormat, p}, "expectedoutput/decoder_correctoutputformat.output"},
+		{"decoder_wrongoutputformat", []string{"-stream-decoder", decoderWrongOutputFormat, p}, "expectedoutput/decoder_wrongoutputformat.output"},
+	}
+
+	for _, argtest := range argtests {
+		t.Run(argtest.name, func(t *testing.T) {
+			cmd := exec.Command(dumpLogsBinary, argtest.args...)
+			actual, err := cmd.CombinedOutput()
+			if err != nil {
+				t.Fatal(err)
+			}
+			expected, err := os.ReadFile(path.Join(binDir, argtest.fileExpected))
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			assert.EqualValues(t, string(expected), string(actual))
+			// The output files contains a lot of trailing whitespaces... difficult to diagnose without printing them explicitly.
+			// TODO(ptabor): Get rid of the whitespaces both in code and the test-files.
+			assert.EqualValues(t, strings.ReplaceAll(string(expected), " ", "_"), strings.ReplaceAll(string(actual), " ", "_"))
+		})
+	}
+
+}
+
+func mustCreateWalLog(t *testing.T, path string) {
+	memberdir := filepath.Join(path, "member")
+	err := os.Mkdir(memberdir, 0744)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.RemoveAll(p)
+	waldir := walDir(path)
+	snapdir := snapDir(path)
 
-	memberdir := filepath.Join(p, "member")
-	err = os.Mkdir(memberdir, 0744)
-	if err != nil {
-		t.Fatal(err)
-	}
-	waldir := walDir(p)
-	snapdir := snapDir(p)
-
-	w, err := wal.Create(zap.NewExample(), waldir, nil)
+	w, err := wal.Create(zaptest.NewLogger(t), waldir, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -86,53 +129,6 @@ func TestEtcdDumpLogEntryType(t *testing.T) {
 		t.Fatal(err)
 	}
 	w.Close()
-
-	argtests := []struct {
-		name         string
-		args         []string
-		fileExpected string
-	}{
-		{"no entry-type", []string{p}, "expectedoutput/listAll.output"},
-		{"confchange entry-type", []string{"-entry-type", "ConfigChange", p}, "expectedoutput/listConfigChange.output"},
-		{"normal entry-type", []string{"-entry-type", "Normal", p}, "expectedoutput/listNormal.output"},
-		{"request entry-type", []string{"-entry-type", "Request", p}, "expectedoutput/listRequest.output"},
-		{"internalRaftRequest entry-type", []string{"-entry-type", "InternalRaftRequest", p}, "expectedoutput/listInternalRaftRequest.output"},
-		{"range entry-type", []string{"-entry-type", "IRRRange", p}, "expectedoutput/listIRRRange.output"},
-		{"put entry-type", []string{"-entry-type", "IRRPut", p}, "expectedoutput/listIRRPut.output"},
-		{"del entry-type", []string{"-entry-type", "IRRDeleteRange", p}, "expectedoutput/listIRRDeleteRange.output"},
-		{"txn entry-type", []string{"-entry-type", "IRRTxn", p}, "expectedoutput/listIRRTxn.output"},
-		{"compaction entry-type", []string{"-entry-type", "IRRCompaction", p}, "expectedoutput/listIRRCompaction.output"},
-		{"lease grant entry-type", []string{"-entry-type", "IRRLeaseGrant", p}, "expectedoutput/listIRRLeaseGrant.output"},
-		{"lease revoke entry-type", []string{"-entry-type", "IRRLeaseRevoke", p}, "expectedoutput/listIRRLeaseRevoke.output"},
-		{"confchange and txn entry-type", []string{"-entry-type", "ConfigChange,IRRCompaction", p}, "expectedoutput/listConfigChangeIRRCompaction.output"},
-		{"decoder_correctoutputformat", []string{"-stream-decoder", decoder_correctoutputformat, p}, "expectedoutput/decoder_correctoutputformat.output"},
-		{"decoder_wrongoutputformat", []string{"-stream-decoder", decoder_wrongoutputformat, p}, "expectedoutput/decoder_wrongoutputformat.output"},
-	}
-
-	for _, argtest := range argtests {
-		t.Run(argtest.name, func(t *testing.T) {
-			cmd := exec.Command(dumpLogsBinary, argtest.args...)
-			actual, err := cmd.CombinedOutput()
-			if err != nil {
-				t.Fatal(err)
-			}
-			expected, err := ioutil.ReadFile(path.Join(binDir, argtest.fileExpected))
-			if err != nil {
-				t.Fatal(err)
-			}
-			if !bytes.Equal(actual, expected) {
-				t.Errorf(`Got input of length %d, wanted input of length %d
-==== BEGIN RECEIVED FILE ====
-%s
-==== END RECEIVED FILE ====
-==== BEGIN EXPECTED FILE ====
-%s
-==== END EXPECTED FILE ====
-`, len(actual), len(expected), actual, expected)
-			}
-		})
-	}
-
 }
 
 func appendConfigChangeEnts(ents *[]raftpb.Entry) {
@@ -203,7 +199,7 @@ func appendNormalIRREnts(ents *[]raftpb.Entry) {
 
 	irrauthenticate := &etcdserverpb.InternalAuthenticateRequest{Name: "myname", Password: "password", SimpleToken: "token"}
 
-	irrauthuseradd := &etcdserverpb.AuthUserAddRequest{Name: "name1", Password: "pass1"}
+	irrauthuseradd := &etcdserverpb.AuthUserAddRequest{Name: "name1", Password: "pass1", Options: &authpb.UserAddOptions{NoPassword: false}}
 
 	irrauthuserdelete := &etcdserverpb.AuthUserDeleteRequest{Name: "name1"}
 

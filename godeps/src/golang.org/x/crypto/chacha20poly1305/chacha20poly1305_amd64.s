@@ -4,7 +4,7 @@
 
 // This file was originally from https://golang.org/cl/24717 by Vlad Krasnov of CloudFlare.
 
-// +build go1.7,amd64,!gccgo,!appengine
+//go:build gc && !purego
 
 #include "textflag.h"
 // General register allocation
@@ -183,11 +183,31 @@ GLOBL ·andMask<>(SB), (NOPTR+RODATA), $240
 #define shiftD1Right BYTE $0x66; BYTE $0x45; BYTE $0x0f; BYTE $0x3a; BYTE $0x0f; BYTE $0xd2; BYTE $0x04 // PALIGNR $4, X10, X10
 #define shiftD2Right BYTE $0x66; BYTE $0x45; BYTE $0x0f; BYTE $0x3a; BYTE $0x0f; BYTE $0xdb; BYTE $0x04 // PALIGNR $4, X11, X11
 #define shiftD3Right BYTE $0x66; BYTE $0x45; BYTE $0x0f; BYTE $0x3a; BYTE $0x0f; BYTE $0xff; BYTE $0x04 // PALIGNR $4, X15, X15
+
 // Some macros
+
+// ROL rotates the uint32s in register R left by N bits, using temporary T.
+#define ROL(N, R, T) \
+	MOVO R, T; PSLLL $(N), T; PSRLL $(32-(N)), R; PXOR T, R
+
+// ROL16 rotates the uint32s in register R left by 16, using temporary T if needed.
+#ifdef GOAMD64_v2
+#define ROL16(R, T) PSHUFB ·rol16<>(SB), R
+#else
+#define ROL16(R, T) ROL(16, R, T)
+#endif
+
+// ROL8 rotates the uint32s in register R left by 8, using temporary T if needed.
+#ifdef GOAMD64_v2
+#define ROL8(R, T) PSHUFB ·rol8<>(SB), R
+#else
+#define ROL8(R, T) ROL(8, R, T)
+#endif
+
 #define chachaQR(A, B, C, D, T) \
-	PADDD B, A; PXOR A, D; PSHUFB ·rol16<>(SB), D                            \
+	PADDD B, A; PXOR A, D; ROL16(D, T) \
 	PADDD D, C; PXOR C, B; MOVO B, T; PSLLL $12, T; PSRLL $20, B; PXOR T, B \
-	PADDD B, A; PXOR A, D; PSHUFB ·rol8<>(SB), D                             \
+	PADDD B, A; PXOR A, D; ROL8(D, T) \
 	PADDD D, C; PXOR C, B; MOVO B, T; PSLLL $7, T; PSRLL $25, B; PXOR T, B
 
 #define chachaQR_AVX2(A, B, C, D, T) \
@@ -200,7 +220,7 @@ GLOBL ·andMask<>(SB), (NOPTR+RODATA), $240
 #define polyMulStage1 MOVQ (0*8)(BP), AX; MOVQ AX, t2; MULQ acc0; MOVQ AX, t0; MOVQ DX, t1; MOVQ (0*8)(BP), AX; MULQ acc1; IMULQ acc2, t2; ADDQ AX, t1; ADCQ DX, t2
 #define polyMulStage2 MOVQ (1*8)(BP), AX; MOVQ AX, t3; MULQ acc0; ADDQ AX, t1; ADCQ $0, DX; MOVQ DX, acc0; MOVQ (1*8)(BP), AX; MULQ acc1; ADDQ AX, t2; ADCQ $0, DX
 #define polyMulStage3 IMULQ acc2, t3; ADDQ acc0, t2; ADCQ DX, t3
-#define polyMulReduceStage MOVQ t0, acc0; MOVQ t1, acc1; MOVQ t2, acc2; ANDQ $3, acc2; MOVQ t2, t0; ANDQ $-4, t0; MOVQ t3, t1; SHRQ $2, t2:t3; SHRQ $2, t3; ADDQ t0, acc0; ADCQ t1, acc1; ADCQ $0, acc2; ADDQ t2, acc0; ADCQ t3, acc1; ADCQ $0, acc2
+#define polyMulReduceStage MOVQ t0, acc0; MOVQ t1, acc1; MOVQ t2, acc2; ANDQ $3, acc2; MOVQ t2, t0; ANDQ $-4, t0; MOVQ t3, t1; SHRQ $2, t3, t2; SHRQ $2, t3; ADDQ t0, acc0; ADCQ t1, acc1; ADCQ $0, acc2; ADDQ t2, acc0; ADCQ t3, acc1; ADCQ $0, acc2
 
 #define polyMulStage1_AVX2 MOVQ (0*8)(BP), DX; MOVQ DX, t2; MULXQ acc0, t0, t1; IMULQ acc2, t2; MULXQ acc1, AX, DX; ADDQ AX, t1; ADCQ DX, t2
 #define polyMulStage2_AVX2 MOVQ (1*8)(BP), DX; MULXQ acc0, acc0, AX; ADDQ acc0, t1; MULXQ acc1, acc1, t3; ADCQ acc1, t2; ADCQ $0, t3
@@ -248,7 +268,7 @@ hashADTail:
 	ADDQ itr2, adp
 
 hashADTailLoop:
-	SHLQ $8, t1:t0
+	SHLQ $8, t0, t1
 	SHLQ $8, t0
 	MOVB -1(adp), t2
 	XORQ t2, t0

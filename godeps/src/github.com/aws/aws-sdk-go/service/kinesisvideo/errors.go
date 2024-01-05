@@ -2,7 +2,24 @@
 
 package kinesisvideo
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
+
+	// ErrCodeAccessDeniedException for service response error code
+	// "AccessDeniedException".
+	//
+	// You do not have required permissions to perform this operation.
+	ErrCodeAccessDeniedException = "AccessDeniedException"
+
+	// ErrCodeAccountChannelLimitExceededException for service response error code
+	// "AccountChannelLimitExceededException".
+	//
+	// You have reached the maximum limit of active signaling channels for this
+	// Amazon Web Services account in this region.
+	ErrCodeAccountChannelLimitExceededException = "AccountChannelLimitExceededException"
 
 	// ErrCodeAccountStreamLimitExceededException for service response error code
 	// "AccountStreamLimitExceededException".
@@ -41,6 +58,12 @@ const (
 	// The format of the StreamARN is invalid.
 	ErrCodeInvalidResourceFormatException = "InvalidResourceFormatException"
 
+	// ErrCodeNoDataRetentionException for service response error code
+	// "NoDataRetentionException".
+	//
+	// The Stream data retention in hours is equal to zero.
+	ErrCodeNoDataRetentionException = "NoDataRetentionException"
+
 	// ErrCodeNotAuthorizedException for service response error code
 	// "NotAuthorizedException".
 	//
@@ -50,7 +73,18 @@ const (
 	// ErrCodeResourceInUseException for service response error code
 	// "ResourceInUseException".
 	//
-	// The stream is currently not available for this operation.
+	// When the input StreamARN or ChannelARN in CLOUD_STORAGE_MODE is already mapped
+	// to a different Kinesis Video Stream resource, or if the provided input StreamARN
+	// or ChannelARN is not in Active status, try one of the following :
+	//
+	// The DescribeMediaStorageConfiguration API to determine what the stream given
+	// channel is mapped to.
+	//
+	// The DescribeMappedResourceConfiguration API to determine the channel that
+	// the given stream is mapped to.
+	//
+	// The DescribeStream or DescribeSignalingChannel API to determine the status
+	// of the resource.
 	ErrCodeResourceInUseException = "ResourceInUseException"
 
 	// ErrCodeResourceNotFoundException for service response error code
@@ -59,11 +93,18 @@ const (
 	// Amazon Kinesis Video Streams can't find the stream that you specified.
 	ErrCodeResourceNotFoundException = "ResourceNotFoundException"
 
+	// ErrCodeStreamEdgeConfigurationNotFoundException for service response error code
+	// "StreamEdgeConfigurationNotFoundException".
+	//
+	// The Exception rendered when the Amazon Kinesis Video Stream can't find a
+	// stream's edge configuration that you specified.
+	ErrCodeStreamEdgeConfigurationNotFoundException = "StreamEdgeConfigurationNotFoundException"
+
 	// ErrCodeTagsPerResourceExceededLimitException for service response error code
 	// "TagsPerResourceExceededLimitException".
 	//
 	// You have exceeded the limit of tags that you can associate with the resource.
-	// Kinesis video streams support up to 50 tags.
+	// A Kinesis video stream can support up to 50 tags.
 	ErrCodeTagsPerResourceExceededLimitException = "TagsPerResourceExceededLimitException"
 
 	// ErrCodeVersionMismatchException for service response error code
@@ -74,3 +115,21 @@ const (
 	// API.
 	ErrCodeVersionMismatchException = "VersionMismatchException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccessDeniedException":                    newErrorAccessDeniedException,
+	"AccountChannelLimitExceededException":     newErrorAccountChannelLimitExceededException,
+	"AccountStreamLimitExceededException":      newErrorAccountStreamLimitExceededException,
+	"ClientLimitExceededException":             newErrorClientLimitExceededException,
+	"DeviceStreamLimitExceededException":       newErrorDeviceStreamLimitExceededException,
+	"InvalidArgumentException":                 newErrorInvalidArgumentException,
+	"InvalidDeviceException":                   newErrorInvalidDeviceException,
+	"InvalidResourceFormatException":           newErrorInvalidResourceFormatException,
+	"NoDataRetentionException":                 newErrorNoDataRetentionException,
+	"NotAuthorizedException":                   newErrorNotAuthorizedException,
+	"ResourceInUseException":                   newErrorResourceInUseException,
+	"ResourceNotFoundException":                newErrorResourceNotFoundException,
+	"StreamEdgeConfigurationNotFoundException": newErrorStreamEdgeConfigurationNotFoundException,
+	"TagsPerResourceExceededLimitException":    newErrorTagsPerResourceExceededLimitException,
+	"VersionMismatchException":                 newErrorVersionMismatchException,
+}

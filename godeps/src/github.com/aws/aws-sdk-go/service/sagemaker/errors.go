@@ -2,7 +2,18 @@
 
 package sagemaker
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
+
+	// ErrCodeConflictException for service response error code
+	// "ConflictException".
+	//
+	// There was a conflict when you attempted to modify a SageMaker entity such
+	// as an Experiment or Artifact.
+	ErrCodeConflictException = "ConflictException"
 
 	// ErrCodeResourceInUse for service response error code
 	// "ResourceInUse".
@@ -13,8 +24,8 @@ const (
 	// ErrCodeResourceLimitExceeded for service response error code
 	// "ResourceLimitExceeded".
 	//
-	// You have exceeded an Amazon SageMaker resource limit. For example, you might
-	// have too many training jobs created.
+	// You have exceeded an SageMaker resource limit. For example, you might have
+	// too many training jobs created.
 	ErrCodeResourceLimitExceeded = "ResourceLimitExceeded"
 
 	// ErrCodeResourceNotFound for service response error code
@@ -23,3 +34,10 @@ const (
 	// Resource being access is not found.
 	ErrCodeResourceNotFound = "ResourceNotFound"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"ConflictException":     newErrorConflictException,
+	"ResourceInUse":         newErrorResourceInUse,
+	"ResourceLimitExceeded": newErrorResourceLimitExceeded,
+	"ResourceNotFound":      newErrorResourceNotFound,
+}

@@ -2,6 +2,10 @@
 
 package globalaccelerator
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAcceleratorNotDisabledException for service response error code
@@ -15,6 +19,12 @@ const (
 	//
 	// The accelerator that you specified doesn't exist.
 	ErrCodeAcceleratorNotFoundException = "AcceleratorNotFoundException"
+
+	// ErrCodeAccessDeniedException for service response error code
+	// "AccessDeniedException".
+	//
+	// You don't have access permission.
+	ErrCodeAccessDeniedException = "AccessDeniedException"
 
 	// ErrCodeAssociatedEndpointGroupFoundException for service response error code
 	// "AssociatedEndpointGroupFoundException".
@@ -32,6 +42,30 @@ const (
 	// it.
 	ErrCodeAssociatedListenerFoundException = "AssociatedListenerFoundException"
 
+	// ErrCodeAttachmentNotFoundException for service response error code
+	// "AttachmentNotFoundException".
+	//
+	// No cross-account attachment was found.
+	ErrCodeAttachmentNotFoundException = "AttachmentNotFoundException"
+
+	// ErrCodeByoipCidrNotFoundException for service response error code
+	// "ByoipCidrNotFoundException".
+	//
+	// The CIDR that you specified was not found or is incorrect.
+	ErrCodeByoipCidrNotFoundException = "ByoipCidrNotFoundException"
+
+	// ErrCodeConflictException for service response error code
+	// "ConflictException".
+	//
+	// You can't use both of those options.
+	ErrCodeConflictException = "ConflictException"
+
+	// ErrCodeEndpointAlreadyExistsException for service response error code
+	// "EndpointAlreadyExistsException".
+	//
+	// The endpoint that you specified doesn't exist.
+	ErrCodeEndpointAlreadyExistsException = "EndpointAlreadyExistsException"
+
 	// ErrCodeEndpointGroupAlreadyExistsException for service response error code
 	// "EndpointGroupAlreadyExistsException".
 	//
@@ -44,10 +78,23 @@ const (
 	// The endpoint group that you specified doesn't exist.
 	ErrCodeEndpointGroupNotFoundException = "EndpointGroupNotFoundException"
 
+	// ErrCodeEndpointNotFoundException for service response error code
+	// "EndpointNotFoundException".
+	//
+	// The endpoint that you specified doesn't exist.
+	ErrCodeEndpointNotFoundException = "EndpointNotFoundException"
+
+	// ErrCodeIncorrectCidrStateException for service response error code
+	// "IncorrectCidrStateException".
+	//
+	// The CIDR that you specified is not valid for this action. For example, the
+	// state of the CIDR might be incorrect for this action.
+	ErrCodeIncorrectCidrStateException = "IncorrectCidrStateException"
+
 	// ErrCodeInternalServiceErrorException for service response error code
 	// "InternalServiceErrorException".
 	//
-	// There was an internal error for AWS Global Accelerator.
+	// There was an internal error for Global Accelerator.
 	ErrCodeInternalServiceErrorException = "InternalServiceErrorException"
 
 	// ErrCodeInvalidArgumentException for service response error code
@@ -72,8 +119,7 @@ const (
 	// ErrCodeLimitExceededException for service response error code
 	// "LimitExceededException".
 	//
-	// Processing your request would cause you to exceed an AWS Global Accelerator
-	// limit.
+	// Processing your request would cause you to exceed an Global Accelerator limit.
 	ErrCodeLimitExceededException = "LimitExceededException"
 
 	// ErrCodeListenerNotFoundException for service response error code
@@ -81,4 +127,33 @@ const (
 	//
 	// The listener that you specified doesn't exist.
 	ErrCodeListenerNotFoundException = "ListenerNotFoundException"
+
+	// ErrCodeTransactionInProgressException for service response error code
+	// "TransactionInProgressException".
+	//
+	// There's already a transaction in progress. Another transaction can't be processed.
+	ErrCodeTransactionInProgressException = "TransactionInProgressException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AcceleratorNotDisabledException":       newErrorAcceleratorNotDisabledException,
+	"AcceleratorNotFoundException":          newErrorAcceleratorNotFoundException,
+	"AccessDeniedException":                 newErrorAccessDeniedException,
+	"AssociatedEndpointGroupFoundException": newErrorAssociatedEndpointGroupFoundException,
+	"AssociatedListenerFoundException":      newErrorAssociatedListenerFoundException,
+	"AttachmentNotFoundException":           newErrorAttachmentNotFoundException,
+	"ByoipCidrNotFoundException":            newErrorByoipCidrNotFoundException,
+	"ConflictException":                     newErrorConflictException,
+	"EndpointAlreadyExistsException":        newErrorEndpointAlreadyExistsException,
+	"EndpointGroupAlreadyExistsException":   newErrorEndpointGroupAlreadyExistsException,
+	"EndpointGroupNotFoundException":        newErrorEndpointGroupNotFoundException,
+	"EndpointNotFoundException":             newErrorEndpointNotFoundException,
+	"IncorrectCidrStateException":           newErrorIncorrectCidrStateException,
+	"InternalServiceErrorException":         newErrorInternalServiceErrorException,
+	"InvalidArgumentException":              newErrorInvalidArgumentException,
+	"InvalidNextTokenException":             newErrorInvalidNextTokenException,
+	"InvalidPortRangeException":             newErrorInvalidPortRangeException,
+	"LimitExceededException":                newErrorLimitExceededException,
+	"ListenerNotFoundException":             newErrorListenerNotFoundException,
+	"TransactionInProgressException":        newErrorTransactionInProgressException,
+}

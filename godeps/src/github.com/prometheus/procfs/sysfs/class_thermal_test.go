@@ -11,7 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build !windows
+//go:build linux
+// +build linux
 
 package sysfs
 
@@ -23,12 +24,12 @@ import (
 )
 
 func TestClassThermalZoneStats(t *testing.T) {
-	fs, err := NewFS("fixtures")
+	fs, err := NewFS(sysTestFixtures)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	thermalTest, err := fs.NewClassThermalZoneStats()
+	thermalTest, err := fs.ClassThermalZoneStats()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -49,7 +50,7 @@ func TestClassThermalZoneStats(t *testing.T) {
 			Name:    "1",
 			Type:    "acpitz",
 			Policy:  "step_wise",
-			Temp:    44000,
+			Temp:    -44000,
 			Mode:    enabled,
 			Passive: &passive,
 		},

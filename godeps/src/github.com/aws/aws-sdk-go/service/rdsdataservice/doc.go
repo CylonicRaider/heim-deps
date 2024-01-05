@@ -3,14 +3,24 @@
 // Package rdsdataservice provides the client and types for making API
 // requests to AWS RDS DataService.
 //
-// AWS RDS DataService provides Http Endpoint to query RDS databases.
+// Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora
+// DB cluster. To run these statements, you use the RDS Data API (Data API).
+//
+// Data API is available with the following types of Aurora databases:
+//
+//   - Aurora PostgreSQL - Serverless v2, Serverless v1, and provisioned
+//
+//   - Aurora MySQL - Serverless v1 only
+//
+// For more information about the Data API, see Using RDS Data API (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
+// in the Amazon Aurora User Guide.
 //
 // See https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01 for more information on this service.
 //
 // See rdsdataservice package documentation for more information.
 // https://docs.aws.amazon.com/sdk-for-go/api/service/rdsdataservice/
 //
-// Using the Client
+// # Using the Client
 //
 // To contact AWS RDS DataService with the SDK use the New function to create
 // a new service client. With that client you can make API requests to the service.

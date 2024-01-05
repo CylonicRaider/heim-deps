@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Cloud9.
-//    func myFunc(svc cloud9iface.Cloud9API) bool {
-//        // Make svc.CreateEnvironmentEC2 request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS Cloud9.
+//	func myFunc(svc cloud9iface.Cloud9API) bool {
+//	    // Make svc.CreateEnvironmentEC2 request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := cloud9.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := cloud9.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloud9Client struct {
-//        cloud9iface.Cloud9API
-//    }
-//    func (m *mockCloud9Client) CreateEnvironmentEC2(input *cloud9.CreateEnvironmentEC2Input) (*cloud9.CreateEnvironmentEC2Output, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockCloud9Client struct {
+//	    cloud9iface.Cloud9API
+//	}
+//	func (m *mockCloud9Client) CreateEnvironmentEC2(input *cloud9.CreateEnvironmentEC2Input) (*cloud9.CreateEnvironmentEC2Output, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloud9Client{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockCloud9Client{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -97,6 +97,18 @@ type Cloud9API interface {
 
 	ListEnvironmentsPages(*cloud9.ListEnvironmentsInput, func(*cloud9.ListEnvironmentsOutput, bool) bool) error
 	ListEnvironmentsPagesWithContext(aws.Context, *cloud9.ListEnvironmentsInput, func(*cloud9.ListEnvironmentsOutput, bool) bool, ...request.Option) error
+
+	ListTagsForResource(*cloud9.ListTagsForResourceInput) (*cloud9.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *cloud9.ListTagsForResourceInput, ...request.Option) (*cloud9.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*cloud9.ListTagsForResourceInput) (*request.Request, *cloud9.ListTagsForResourceOutput)
+
+	TagResource(*cloud9.TagResourceInput) (*cloud9.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *cloud9.TagResourceInput, ...request.Option) (*cloud9.TagResourceOutput, error)
+	TagResourceRequest(*cloud9.TagResourceInput) (*request.Request, *cloud9.TagResourceOutput)
+
+	UntagResource(*cloud9.UntagResourceInput) (*cloud9.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *cloud9.UntagResourceInput, ...request.Option) (*cloud9.UntagResourceOutput, error)
+	UntagResourceRequest(*cloud9.UntagResourceInput) (*request.Request, *cloud9.UntagResourceOutput)
 
 	UpdateEnvironment(*cloud9.UpdateEnvironmentInput) (*cloud9.UpdateEnvironmentOutput, error)
 	UpdateEnvironmentWithContext(aws.Context, *cloud9.UpdateEnvironmentInput, ...request.Option) (*cloud9.UpdateEnvironmentOutput, error)

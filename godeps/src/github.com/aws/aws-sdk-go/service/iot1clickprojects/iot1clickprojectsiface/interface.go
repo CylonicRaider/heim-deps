@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS IoT 1-Click Projects Service.
-//    func myFunc(svc iot1clickprojectsiface.IoT1ClickProjectsAPI) bool {
-//        // Make svc.AssociateDeviceWithPlacement request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS IoT 1-Click Projects Service.
+//	func myFunc(svc iot1clickprojectsiface.IoT1ClickProjectsAPI) bool {
+//	    // Make svc.AssociateDeviceWithPlacement request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := iot1clickprojects.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := iot1clickprojects.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockIoT1ClickProjectsClient struct {
-//        iot1clickprojectsiface.IoT1ClickProjectsAPI
-//    }
-//    func (m *mockIoT1ClickProjectsClient) AssociateDeviceWithPlacement(input *iot1clickprojects.AssociateDeviceWithPlacementInput) (*iot1clickprojects.AssociateDeviceWithPlacementOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockIoT1ClickProjectsClient struct {
+//	    iot1clickprojectsiface.IoT1ClickProjectsAPI
+//	}
+//	func (m *mockIoT1ClickProjectsClient) AssociateDeviceWithPlacement(input *iot1clickprojects.AssociateDeviceWithPlacementInput) (*iot1clickprojects.AssociateDeviceWithPlacementOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockIoT1ClickProjectsClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockIoT1ClickProjectsClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -100,9 +100,27 @@ type IoT1ClickProjectsAPI interface {
 	ListPlacementsWithContext(aws.Context, *iot1clickprojects.ListPlacementsInput, ...request.Option) (*iot1clickprojects.ListPlacementsOutput, error)
 	ListPlacementsRequest(*iot1clickprojects.ListPlacementsInput) (*request.Request, *iot1clickprojects.ListPlacementsOutput)
 
+	ListPlacementsPages(*iot1clickprojects.ListPlacementsInput, func(*iot1clickprojects.ListPlacementsOutput, bool) bool) error
+	ListPlacementsPagesWithContext(aws.Context, *iot1clickprojects.ListPlacementsInput, func(*iot1clickprojects.ListPlacementsOutput, bool) bool, ...request.Option) error
+
 	ListProjects(*iot1clickprojects.ListProjectsInput) (*iot1clickprojects.ListProjectsOutput, error)
 	ListProjectsWithContext(aws.Context, *iot1clickprojects.ListProjectsInput, ...request.Option) (*iot1clickprojects.ListProjectsOutput, error)
 	ListProjectsRequest(*iot1clickprojects.ListProjectsInput) (*request.Request, *iot1clickprojects.ListProjectsOutput)
+
+	ListProjectsPages(*iot1clickprojects.ListProjectsInput, func(*iot1clickprojects.ListProjectsOutput, bool) bool) error
+	ListProjectsPagesWithContext(aws.Context, *iot1clickprojects.ListProjectsInput, func(*iot1clickprojects.ListProjectsOutput, bool) bool, ...request.Option) error
+
+	ListTagsForResource(*iot1clickprojects.ListTagsForResourceInput) (*iot1clickprojects.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *iot1clickprojects.ListTagsForResourceInput, ...request.Option) (*iot1clickprojects.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*iot1clickprojects.ListTagsForResourceInput) (*request.Request, *iot1clickprojects.ListTagsForResourceOutput)
+
+	TagResource(*iot1clickprojects.TagResourceInput) (*iot1clickprojects.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *iot1clickprojects.TagResourceInput, ...request.Option) (*iot1clickprojects.TagResourceOutput, error)
+	TagResourceRequest(*iot1clickprojects.TagResourceInput) (*request.Request, *iot1clickprojects.TagResourceOutput)
+
+	UntagResource(*iot1clickprojects.UntagResourceInput) (*iot1clickprojects.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *iot1clickprojects.UntagResourceInput, ...request.Option) (*iot1clickprojects.UntagResourceOutput, error)
+	UntagResourceRequest(*iot1clickprojects.UntagResourceInput) (*request.Request, *iot1clickprojects.UntagResourceOutput)
 
 	UpdatePlacement(*iot1clickprojects.UpdatePlacementInput) (*iot1clickprojects.UpdatePlacementOutput, error)
 	UpdatePlacementWithContext(aws.Context, *iot1clickprojects.UpdatePlacementInput, ...request.Option) (*iot1clickprojects.UpdatePlacementOutput, error)

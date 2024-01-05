@@ -26,7 +26,6 @@ func parseTime(layout, value string) *time.Time {
 }
 
 // To create a new cluster
-//
 // The following example creates an Amazon EKS cluster called prod.
 func ExampleEKS_CreateCluster_shared00() {
 	svc := eks.New(session.New())
@@ -79,7 +78,6 @@ func ExampleEKS_CreateCluster_shared00() {
 }
 
 // To delete a cluster
-//
 // This example command deletes a cluster named `devel` in your default region.
 func ExampleEKS_DeleteCluster_shared00() {
 	svc := eks.New(session.New())
@@ -116,7 +114,6 @@ func ExampleEKS_DeleteCluster_shared00() {
 }
 
 // To describe a cluster
-//
 // This example command provides a description of the specified cluster in your default
 // region.
 func ExampleEKS_DescribeCluster_shared00() {
@@ -152,7 +149,6 @@ func ExampleEKS_DescribeCluster_shared00() {
 }
 
 // To list your available clusters
-//
 // This example command lists all of your available clusters in your default region.
 func ExampleEKS_ListClusters_shared00() {
 	svc := eks.New(session.New())
@@ -170,6 +166,36 @@ func ExampleEKS_ListClusters_shared00() {
 				fmt.Println(eks.ErrCodeServerException, aerr.Error())
 			case eks.ErrCodeServiceUnavailableException:
 				fmt.Println(eks.ErrCodeServiceUnavailableException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To list tags for a cluster
+// This example lists all of the tags for the `beta` cluster.
+func ExampleEKS_ListTagsForResource_shared00() {
+	svc := eks.New(session.New())
+	input := &eks.ListTagsForResourceInput{
+		ResourceArn: aws.String("arn:aws:eks:us-west-2:012345678910:cluster/beta"),
+	}
+
+	result, err := svc.ListTagsForResource(input)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case eks.ErrCodeBadRequestException:
+				fmt.Println(eks.ErrCodeBadRequestException, aerr.Error())
+			case eks.ErrCodeNotFoundException:
+				fmt.Println(eks.ErrCodeNotFoundException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

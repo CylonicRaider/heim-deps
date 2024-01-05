@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AmazonMQ.
-//    func myFunc(svc mqiface.MQAPI) bool {
-//        // Make svc.CreateBroker request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AmazonMQ.
+//	func myFunc(svc mqiface.MQAPI) bool {
+//	    // Make svc.CreateBroker request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := mq.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := mq.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMQClient struct {
-//        mqiface.MQAPI
-//    }
-//    func (m *mockMQClient) CreateBroker(input *mq.CreateBrokerRequest) (*mq.CreateBrokerResponse, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockMQClient struct {
+//	    mqiface.MQAPI
+//	}
+//	func (m *mockMQClient) CreateBroker(input *mq.CreateBrokerRequest) (*mq.CreateBrokerResponse, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockMQClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockMQClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -92,6 +92,14 @@ type MQAPI interface {
 	DescribeBrokerWithContext(aws.Context, *mq.DescribeBrokerInput, ...request.Option) (*mq.DescribeBrokerResponse, error)
 	DescribeBrokerRequest(*mq.DescribeBrokerInput) (*request.Request, *mq.DescribeBrokerResponse)
 
+	DescribeBrokerEngineTypes(*mq.DescribeBrokerEngineTypesInput) (*mq.DescribeBrokerEngineTypesOutput, error)
+	DescribeBrokerEngineTypesWithContext(aws.Context, *mq.DescribeBrokerEngineTypesInput, ...request.Option) (*mq.DescribeBrokerEngineTypesOutput, error)
+	DescribeBrokerEngineTypesRequest(*mq.DescribeBrokerEngineTypesInput) (*request.Request, *mq.DescribeBrokerEngineTypesOutput)
+
+	DescribeBrokerInstanceOptions(*mq.DescribeBrokerInstanceOptionsInput) (*mq.DescribeBrokerInstanceOptionsOutput, error)
+	DescribeBrokerInstanceOptionsWithContext(aws.Context, *mq.DescribeBrokerInstanceOptionsInput, ...request.Option) (*mq.DescribeBrokerInstanceOptionsOutput, error)
+	DescribeBrokerInstanceOptionsRequest(*mq.DescribeBrokerInstanceOptionsInput) (*request.Request, *mq.DescribeBrokerInstanceOptionsOutput)
+
 	DescribeConfiguration(*mq.DescribeConfigurationInput) (*mq.DescribeConfigurationOutput, error)
 	DescribeConfigurationWithContext(aws.Context, *mq.DescribeConfigurationInput, ...request.Option) (*mq.DescribeConfigurationOutput, error)
 	DescribeConfigurationRequest(*mq.DescribeConfigurationInput) (*request.Request, *mq.DescribeConfigurationOutput)
@@ -108,6 +116,9 @@ type MQAPI interface {
 	ListBrokersWithContext(aws.Context, *mq.ListBrokersInput, ...request.Option) (*mq.ListBrokersResponse, error)
 	ListBrokersRequest(*mq.ListBrokersInput) (*request.Request, *mq.ListBrokersResponse)
 
+	ListBrokersPages(*mq.ListBrokersInput, func(*mq.ListBrokersResponse, bool) bool) error
+	ListBrokersPagesWithContext(aws.Context, *mq.ListBrokersInput, func(*mq.ListBrokersResponse, bool) bool, ...request.Option) error
+
 	ListConfigurationRevisions(*mq.ListConfigurationRevisionsInput) (*mq.ListConfigurationRevisionsResponse, error)
 	ListConfigurationRevisionsWithContext(aws.Context, *mq.ListConfigurationRevisionsInput, ...request.Option) (*mq.ListConfigurationRevisionsResponse, error)
 	ListConfigurationRevisionsRequest(*mq.ListConfigurationRevisionsInput) (*request.Request, *mq.ListConfigurationRevisionsResponse)
@@ -123,6 +134,10 @@ type MQAPI interface {
 	ListUsers(*mq.ListUsersInput) (*mq.ListUsersResponse, error)
 	ListUsersWithContext(aws.Context, *mq.ListUsersInput, ...request.Option) (*mq.ListUsersResponse, error)
 	ListUsersRequest(*mq.ListUsersInput) (*request.Request, *mq.ListUsersResponse)
+
+	Promote(*mq.PromoteInput) (*mq.PromoteOutput, error)
+	PromoteWithContext(aws.Context, *mq.PromoteInput, ...request.Option) (*mq.PromoteOutput, error)
+	PromoteRequest(*mq.PromoteInput) (*request.Request, *mq.PromoteOutput)
 
 	RebootBroker(*mq.RebootBrokerInput) (*mq.RebootBrokerOutput, error)
 	RebootBrokerWithContext(aws.Context, *mq.RebootBrokerInput, ...request.Option) (*mq.RebootBrokerOutput, error)

@@ -2,6 +2,10 @@
 
 package servicecatalog
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeDuplicateResourceException for service response error code
@@ -55,7 +59,18 @@ const (
 	// "TagOptionNotMigratedException".
 	//
 	// An operation requiring TagOptions failed because the TagOptions migration
-	// process has not been performed for this account. Please use the AWS console
-	// to perform the migration process before retrying the operation.
+	// process has not been performed for this account. Use the Amazon Web Services
+	// Management Console to perform the migration process before retrying the operation.
 	ErrCodeTagOptionNotMigratedException = "TagOptionNotMigratedException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"DuplicateResourceException":     newErrorDuplicateResourceException,
+	"InvalidParametersException":     newErrorInvalidParametersException,
+	"InvalidStateException":          newErrorInvalidStateException,
+	"LimitExceededException":         newErrorLimitExceededException,
+	"OperationNotSupportedException": newErrorOperationNotSupportedException,
+	"ResourceInUseException":         newErrorResourceInUseException,
+	"ResourceNotFoundException":      newErrorResourceNotFoundException,
+	"TagOptionNotMigratedException":  newErrorTagOptionNotMigratedException,
+}

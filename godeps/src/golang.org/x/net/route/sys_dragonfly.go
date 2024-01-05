@@ -4,7 +4,10 @@
 
 package route
 
-import "unsafe"
+import (
+	"syscall"
+	"unsafe"
+)
 
 func (typ RIBType) parseable() bool { return true }
 
@@ -56,21 +59,30 @@ func probeRoutingStack() (int, map[int]*wireFormat) {
 	ifmam.parse = ifmam.parseInterfaceMulticastAddrMessage
 	ifanm := &wireFormat{extOff: sizeofIfAnnouncemsghdrDragonFlyBSD4, bodyOff: sizeofIfAnnouncemsghdrDragonFlyBSD4}
 	ifanm.parse = ifanm.parseInterfaceAnnounceMessage
+
+	rel, _ := syscall.SysctlUint32("kern.osreldate")
+	if rel >= 500705 {
+		// https://github.com/DragonFlyBSD/DragonFlyBSD/commit/43a373152df2d405c9940983e584e6a25e76632d
+		// but only the size of struct ifa_msghdr actually changed
+		rtmVersion = 7
+		ifam.bodyOff = sizeofIfaMsghdrDragonFlyBSD58
+	}
+
 	return int(unsafe.Sizeof(p)), map[int]*wireFormat{
-		sysRTM_ADD:        rtm,
-		sysRTM_DELETE:     rtm,
-		sysRTM_CHANGE:     rtm,
-		sysRTM_GET:        rtm,
-		sysRTM_LOSING:     rtm,
-		sysRTM_REDIRECT:   rtm,
-		sysRTM_MISS:       rtm,
-		sysRTM_LOCK:       rtm,
-		sysRTM_RESOLVE:    rtm,
-		sysRTM_NEWADDR:    ifam,
-		sysRTM_DELADDR:    ifam,
-		sysRTM_IFINFO:     ifm,
-		sysRTM_NEWMADDR:   ifmam,
-		sysRTM_DELMADDR:   ifmam,
-		sysRTM_IFANNOUNCE: ifanm,
+		syscall.RTM_ADD:        rtm,
+		syscall.RTM_DELETE:     rtm,
+		syscall.RTM_CHANGE:     rtm,
+		syscall.RTM_GET:        rtm,
+		syscall.RTM_LOSING:     rtm,
+		syscall.RTM_REDIRECT:   rtm,
+		syscall.RTM_MISS:       rtm,
+		syscall.RTM_LOCK:       rtm,
+		syscall.RTM_RESOLVE:    rtm,
+		syscall.RTM_NEWADDR:    ifam,
+		syscall.RTM_DELADDR:    ifam,
+		syscall.RTM_IFINFO:     ifm,
+		syscall.RTM_NEWMADDR:   ifmam,
+		syscall.RTM_DELMADDR:   ifmam,
+		syscall.RTM_IFANNOUNCE: ifanm,
 	}
 }

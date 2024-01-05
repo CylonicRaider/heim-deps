@@ -32,7 +32,7 @@ var initRequest func(*request.Request)
 const (
 	ServiceName = "sdb"       // Name of service.
 	EndpointsID = ServiceName // ID to lookup a service endpoint with.
-	ServiceID   = "SimpleDB"  // ServiceID is a unique identifer of a specific service.
+	ServiceID   = "SimpleDB"  // ServiceID is a unique identifier of a specific service.
 )
 
 // New creates a new instance of the SimpleDB client with a session.
@@ -40,28 +40,37 @@ const (
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a SimpleDB client from just a session.
-//     svc := simpledb.New(mySession)
 //
-//     // Create a SimpleDB client with additional configuration
-//     svc := simpledb.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
+//	mySession := session.Must(session.NewSession())
+//
+//	// Create a SimpleDB client from just a session.
+//	svc := simpledb.New(mySession)
+//
+//	// Create a SimpleDB client with additional configuration
+//	svc := simpledb.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
 func New(p client.ConfigProvider, cfgs ...*aws.Config) *SimpleDB {
 	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
+	if c.SigningNameDerived || len(c.SigningName) == 0 {
+		c.SigningName = EndpointsID
+		// No Fallback
+	}
+	return newClient(*c.Config, c.Handlers, c.PartitionID, c.Endpoint, c.SigningRegion, c.SigningName, c.ResolvedRegion)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *SimpleDB {
+func newClient(cfg aws.Config, handlers request.Handlers, partitionID, endpoint, signingRegion, signingName, resolvedRegion string) *SimpleDB {
 	svc := &SimpleDB{
 		Client: client.New(
 			cfg,
 			metadata.ClientInfo{
-				ServiceName:   ServiceName,
-				ServiceID:     ServiceID,
-				SigningName:   signingName,
-				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
-				APIVersion:    "2009-04-15",
+				ServiceName:    ServiceName,
+				ServiceID:      ServiceID,
+				SigningName:    signingName,
+				SigningRegion:  signingRegion,
+				PartitionID:    partitionID,
+				Endpoint:       endpoint,
+				APIVersion:     "2009-04-15",
+				ResolvedRegion: resolvedRegion,
 			},
 			handlers,
 		),

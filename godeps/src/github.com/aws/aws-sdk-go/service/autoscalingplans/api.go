@@ -29,14 +29,13 @@ const opCreateScalingPlan = "CreateScalingPlan"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the CreateScalingPlanRequest method.
+//	req, resp := client.CreateScalingPlanRequest(params)
 //
-//    // Example sending a request using the CreateScalingPlanRequest method.
-//    req, resp := client.CreateScalingPlanRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/CreateScalingPlan
 func (c *AutoScalingPlans) CreateScalingPlanRequest(input *CreateScalingPlanInput) (req *request.Request, output *CreateScalingPlanOutput) {
@@ -66,20 +65,21 @@ func (c *AutoScalingPlans) CreateScalingPlanRequest(input *CreateScalingPlanInpu
 // See the AWS API reference guide for AWS Auto Scaling Plans's
 // API operation CreateScalingPlan for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the parameters provided.
+// Returned Error Types:
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Your account exceeded a limit. This exception is thrown when a per-account
-//   resource limit is exceeded.
+//   - ValidationException
+//     An exception was thrown for a validation issue. Review the parameters provided.
 //
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to a scaling plan that already has a pending update.
+//   - LimitExceededException
+//     Your account exceeded a limit. This exception is thrown when a per-account
+//     resource limit is exceeded.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
+//   - ConcurrentUpdateException
+//     Concurrent updates caused an exception, for example, if you request an update
+//     to a scaling plan that already has a pending update.
+//
+//   - InternalServiceException
+//     The service encountered an internal error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/CreateScalingPlan
 func (c *AutoScalingPlans) CreateScalingPlan(input *CreateScalingPlanInput) (*CreateScalingPlanOutput, error) {
@@ -119,14 +119,13 @@ const opDeleteScalingPlan = "DeleteScalingPlan"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DeleteScalingPlanRequest method.
+//	req, resp := client.DeleteScalingPlanRequest(params)
 //
-//    // Example sending a request using the DeleteScalingPlanRequest method.
-//    req, resp := client.DeleteScalingPlanRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DeleteScalingPlan
 func (c *AutoScalingPlans) DeleteScalingPlanRequest(input *DeleteScalingPlanInput) (req *request.Request, output *DeleteScalingPlanOutput) {
@@ -163,19 +162,20 @@ func (c *AutoScalingPlans) DeleteScalingPlanRequest(input *DeleteScalingPlanInpu
 // See the AWS API reference guide for AWS Auto Scaling Plans's
 // API operation DeleteScalingPlan for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the parameters provided.
+// Returned Error Types:
 //
-//   * ErrCodeObjectNotFoundException "ObjectNotFoundException"
-//   The specified object could not be found.
+//   - ValidationException
+//     An exception was thrown for a validation issue. Review the parameters provided.
 //
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to a scaling plan that already has a pending update.
+//   - ObjectNotFoundException
+//     The specified object could not be found.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
+//   - ConcurrentUpdateException
+//     Concurrent updates caused an exception, for example, if you request an update
+//     to a scaling plan that already has a pending update.
+//
+//   - InternalServiceException
+//     The service encountered an internal error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DeleteScalingPlan
 func (c *AutoScalingPlans) DeleteScalingPlan(input *DeleteScalingPlanInput) (*DeleteScalingPlanOutput, error) {
@@ -215,14 +215,13 @@ const opDescribeScalingPlanResources = "DescribeScalingPlanResources"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeScalingPlanResourcesRequest method.
+//	req, resp := client.DescribeScalingPlanResourcesRequest(params)
 //
-//    // Example sending a request using the DescribeScalingPlanResourcesRequest method.
-//    req, resp := client.DescribeScalingPlanResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DescribeScalingPlanResources
 func (c *AutoScalingPlans) DescribeScalingPlanResourcesRequest(input *DescribeScalingPlanResourcesInput) (req *request.Request, output *DescribeScalingPlanResourcesOutput) {
@@ -252,19 +251,20 @@ func (c *AutoScalingPlans) DescribeScalingPlanResourcesRequest(input *DescribeSc
 // See the AWS API reference guide for AWS Auto Scaling Plans's
 // API operation DescribeScalingPlanResources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the parameters provided.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The token provided is not valid.
+//   - ValidationException
+//     An exception was thrown for a validation issue. Review the parameters provided.
 //
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to a scaling plan that already has a pending update.
+//   - InvalidNextTokenException
+//     The token provided is not valid.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
+//   - ConcurrentUpdateException
+//     Concurrent updates caused an exception, for example, if you request an update
+//     to a scaling plan that already has a pending update.
+//
+//   - InternalServiceException
+//     The service encountered an internal error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DescribeScalingPlanResources
 func (c *AutoScalingPlans) DescribeScalingPlanResources(input *DescribeScalingPlanResourcesInput) (*DescribeScalingPlanResourcesOutput, error) {
@@ -304,14 +304,13 @@ const opDescribeScalingPlans = "DescribeScalingPlans"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the DescribeScalingPlansRequest method.
+//	req, resp := client.DescribeScalingPlansRequest(params)
 //
-//    // Example sending a request using the DescribeScalingPlansRequest method.
-//    req, resp := client.DescribeScalingPlansRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DescribeScalingPlans
 func (c *AutoScalingPlans) DescribeScalingPlansRequest(input *DescribeScalingPlansInput) (req *request.Request, output *DescribeScalingPlansOutput) {
@@ -341,19 +340,20 @@ func (c *AutoScalingPlans) DescribeScalingPlansRequest(input *DescribeScalingPla
 // See the AWS API reference guide for AWS Auto Scaling Plans's
 // API operation DescribeScalingPlans for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the parameters provided.
+// Returned Error Types:
 //
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The token provided is not valid.
+//   - ValidationException
+//     An exception was thrown for a validation issue. Review the parameters provided.
 //
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to a scaling plan that already has a pending update.
+//   - InvalidNextTokenException
+//     The token provided is not valid.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
+//   - ConcurrentUpdateException
+//     Concurrent updates caused an exception, for example, if you request an update
+//     to a scaling plan that already has a pending update.
+//
+//   - InternalServiceException
+//     The service encountered an internal error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DescribeScalingPlans
 func (c *AutoScalingPlans) DescribeScalingPlans(input *DescribeScalingPlansInput) (*DescribeScalingPlansOutput, error) {
@@ -393,14 +393,13 @@ const opGetScalingPlanResourceForecastData = "GetScalingPlanResourceForecastData
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the GetScalingPlanResourceForecastDataRequest method.
+//	req, resp := client.GetScalingPlanResourceForecastDataRequest(params)
 //
-//    // Example sending a request using the GetScalingPlanResourceForecastDataRequest method.
-//    req, resp := client.GetScalingPlanResourceForecastDataRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/GetScalingPlanResourceForecastData
 func (c *AutoScalingPlans) GetScalingPlanResourceForecastDataRequest(input *GetScalingPlanResourceForecastDataInput) (req *request.Request, output *GetScalingPlanResourceForecastDataOutput) {
@@ -434,12 +433,13 @@ func (c *AutoScalingPlans) GetScalingPlanResourceForecastDataRequest(input *GetS
 // See the AWS API reference guide for AWS Auto Scaling Plans's
 // API operation GetScalingPlanResourceForecastData for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the parameters provided.
+// Returned Error Types:
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
+//   - ValidationException
+//     An exception was thrown for a validation issue. Review the parameters provided.
+//
+//   - InternalServiceException
+//     The service encountered an internal error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/GetScalingPlanResourceForecastData
 func (c *AutoScalingPlans) GetScalingPlanResourceForecastData(input *GetScalingPlanResourceForecastDataInput) (*GetScalingPlanResourceForecastDataOutput, error) {
@@ -479,14 +479,13 @@ const opUpdateScalingPlan = "UpdateScalingPlan"
 // This method is useful when you want to inject custom logic or configuration
 // into the SDK's request lifecycle. Such as custom headers, or retry logic.
 //
+//	// Example sending a request using the UpdateScalingPlanRequest method.
+//	req, resp := client.UpdateScalingPlanRequest(params)
 //
-//    // Example sending a request using the UpdateScalingPlanRequest method.
-//    req, resp := client.UpdateScalingPlanRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
+//	err := req.Send()
+//	if err == nil { // resp is now filled
+//	    fmt.Println(resp)
+//	}
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlan
 func (c *AutoScalingPlans) UpdateScalingPlanRequest(input *UpdateScalingPlanInput) (req *request.Request, output *UpdateScalingPlanOutput) {
@@ -520,19 +519,20 @@ func (c *AutoScalingPlans) UpdateScalingPlanRequest(input *UpdateScalingPlanInpu
 // See the AWS API reference guide for AWS Auto Scaling Plans's
 // API operation UpdateScalingPlan for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   An exception was thrown for a validation issue. Review the parameters provided.
+// Returned Error Types:
 //
-//   * ErrCodeConcurrentUpdateException "ConcurrentUpdateException"
-//   Concurrent updates caused an exception, for example, if you request an update
-//   to a scaling plan that already has a pending update.
+//   - ValidationException
+//     An exception was thrown for a validation issue. Review the parameters provided.
 //
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The service encountered an internal error.
+//   - ConcurrentUpdateException
+//     Concurrent updates caused an exception, for example, if you request an update
+//     to a scaling plan that already has a pending update.
 //
-//   * ErrCodeObjectNotFoundException "ObjectNotFoundException"
-//   The specified object could not be found.
+//   - InternalServiceException
+//     The service encountered an internal error.
+//
+//   - ObjectNotFoundException
+//     The specified object could not be found.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlan
 func (c *AutoScalingPlans) UpdateScalingPlan(input *UpdateScalingPlanInput) (*UpdateScalingPlanOutput, error) {
@@ -567,12 +567,20 @@ type ApplicationSource struct {
 	TagFilters []*TagFilter `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ApplicationSource) GoString() string {
 	return s.String()
 }
@@ -609,16 +617,87 @@ func (s *ApplicationSource) SetTagFilters(v []*TagFilter) *ApplicationSource {
 	return s
 }
 
+// Concurrent updates caused an exception, for example, if you request an update
+// to a scaling plan that already has a pending update.
+type ConcurrentUpdateException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentUpdateException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ConcurrentUpdateException) GoString() string {
+	return s.String()
+}
+
+func newErrorConcurrentUpdateException(v protocol.ResponseMetadata) error {
+	return &ConcurrentUpdateException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ConcurrentUpdateException) Code() string {
+	return "ConcurrentUpdateException"
+}
+
+// Message returns the exception's message.
+func (s *ConcurrentUpdateException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ConcurrentUpdateException) OrigErr() error {
+	return nil
+}
+
+func (s *ConcurrentUpdateException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ConcurrentUpdateException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ConcurrentUpdateException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 type CreateScalingPlanInput struct {
 	_ struct{} `type:"structure"`
 
 	// A CloudFormation stack or set of tags. You can create one scaling plan per
 	// application source.
 	//
+	// For more information, see ApplicationSource (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html)
+	// in the AWS Auto Scaling API Reference.
+	//
 	// ApplicationSource is a required field
 	ApplicationSource *ApplicationSource `type:"structure" required:"true"`
 
 	// The scaling instructions.
+	//
+	// For more information, see ScalingInstruction (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html)
+	// in the AWS Auto Scaling API Reference.
 	//
 	// ScalingInstructions is a required field
 	ScalingInstructions []*ScalingInstruction `type:"list" required:"true"`
@@ -630,12 +709,20 @@ type CreateScalingPlanInput struct {
 	ScalingPlanName *string `min:"1" type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateScalingPlanInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateScalingPlanInput) GoString() string {
 	return s.String()
 }
@@ -698,20 +785,27 @@ func (s *CreateScalingPlanInput) SetScalingPlanName(v string) *CreateScalingPlan
 type CreateScalingPlanOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The version number of the scaling plan. This value is always 1.
-	//
-	// Currently, you cannot specify multiple scaling plan versions.
+	// The version number of the scaling plan. This value is always 1. Currently,
+	// you cannot have multiple scaling plan versions.
 	//
 	// ScalingPlanVersion is a required field
 	ScalingPlanVersion *int64 `type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateScalingPlanOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CreateScalingPlanOutput) GoString() string {
 	return s.String()
 }
@@ -727,9 +821,7 @@ func (s *CreateScalingPlanOutput) SetScalingPlanVersion(v int64) *CreateScalingP
 //
 // For predictive scaling to work with a customized load metric specification,
 // AWS Auto Scaling needs access to the Sum and Average statistics that CloudWatch
-// computes from metric data. Statistics are calculations used to aggregate
-// data over specified time periods. For more information, see the Amazon CloudWatch
-// User Guide (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
+// computes from metric data.
 //
 // When you choose a load metric, make sure that the required Sum and Average
 // statistics for your metric are available in CloudWatch and that they provide
@@ -741,11 +833,27 @@ func (s *CreateScalingPlanOutput) SetScalingPlanVersion(v int64) *CreateScalingP
 // group, then the Average statistic for the specified metric must represent
 // the average request count processed by each instance of the group.
 //
-// For information about terminology, see Amazon CloudWatch Concepts (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html).
+// If you publish your own metrics, you can aggregate the data points at a given
+// interval and then publish the aggregated data points to CloudWatch. Before
+// AWS Auto Scaling generates the forecast, it sums up all the metric data points
+// that occurred within each hour to match the granularity period that is used
+// in the forecast (60 minutes).
+//
+// For information about terminology, available metrics, or how to publish new
+// metrics, see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
+// in the Amazon CloudWatch User Guide.
+//
+// After creating your scaling plan, you can use the AWS Auto Scaling console
+// to visualize forecasts for the specified metric. For more information, see
+// View Scaling Information for a Resource (https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource)
+// in the AWS Auto Scaling User Guide.
 type CustomizedLoadMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
 	// The dimensions of the metric.
+	//
+	// Conditional: If you published your metric with dimensions, you must specify
+	// the same dimensions in your customized load metric specification.
 	Dimensions []*MetricDimension `type:"list"`
 
 	// The name of the metric.
@@ -758,7 +866,7 @@ type CustomizedLoadMetricSpecification struct {
 	// Namespace is a required field
 	Namespace *string `type:"string" required:"true"`
 
-	// The statistic of the metric. Currently, the value must always be Sum.
+	// The statistic of the metric. The only valid value is Sum.
 	//
 	// Statistic is a required field
 	Statistic *string `type:"string" required:"true" enum:"MetricStatistic"`
@@ -767,12 +875,20 @@ type CustomizedLoadMetricSpecification struct {
 	Unit *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CustomizedLoadMetricSpecification) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CustomizedLoadMetricSpecification) GoString() string {
 	return s.String()
 }
@@ -839,11 +955,29 @@ func (s *CustomizedLoadMetricSpecification) SetUnit(v string) *CustomizedLoadMet
 // Represents a CloudWatch metric of your choosing that can be used for dynamic
 // scaling as part of a target tracking scaling policy.
 //
-// For information about terminology, see Amazon CloudWatch Concepts (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html).
+// To create your customized scaling metric specification:
+//
+//   - Add values for each required parameter from CloudWatch. You can use
+//     an existing metric, or a new metric that you create. To use your own metric,
+//     you must first publish the metric to CloudWatch. For more information,
+//     see Publish Custom Metrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
+//     in the Amazon CloudWatch User Guide.
+//
+//   - Choose a metric that changes proportionally with capacity. The value
+//     of the metric should increase or decrease in inverse proportion to the
+//     number of capacity units. That is, the value of the metric should decrease
+//     when capacity increases.
+//
+// For information about terminology, available metrics, or how to publish new
+// metrics, see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
+// in the Amazon CloudWatch User Guide.
 type CustomizedScalingMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
 	// The dimensions of the metric.
+	//
+	// Conditional: If you published your metric with dimensions, you must specify
+	// the same dimensions in your customized scaling metric specification.
 	Dimensions []*MetricDimension `type:"list"`
 
 	// The name of the metric.
@@ -865,12 +999,20 @@ type CustomizedScalingMetricSpecification struct {
 	Unit *string `type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CustomizedScalingMetricSpecification) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s CustomizedScalingMetricSpecification) GoString() string {
 	return s.String()
 }
@@ -945,12 +1087,20 @@ type Datapoint struct {
 	Value *float64 `type:"double"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Datapoint) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s Datapoint) GoString() string {
 	return s.String()
 }
@@ -975,18 +1125,27 @@ type DeleteScalingPlanInput struct {
 	// ScalingPlanName is a required field
 	ScalingPlanName *string `min:"1" type:"string" required:"true"`
 
-	// The version number of the scaling plan.
+	// The version number of the scaling plan. Currently, the only valid value is
+	// 1.
 	//
 	// ScalingPlanVersion is a required field
 	ScalingPlanVersion *int64 `type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteScalingPlanInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteScalingPlanInput) GoString() string {
 	return s.String()
 }
@@ -1026,12 +1185,20 @@ type DeleteScalingPlanOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteScalingPlanOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DeleteScalingPlanOutput) GoString() string {
 	return s.String()
 }
@@ -1051,18 +1218,27 @@ type DescribeScalingPlanResourcesInput struct {
 	// ScalingPlanName is a required field
 	ScalingPlanName *string `min:"1" type:"string" required:"true"`
 
-	// The version number of the scaling plan.
+	// The version number of the scaling plan. Currently, the only valid value is
+	// 1.
 	//
 	// ScalingPlanVersion is a required field
 	ScalingPlanVersion *int64 `type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingPlanResourcesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingPlanResourcesInput) GoString() string {
 	return s.String()
 }
@@ -1121,12 +1297,20 @@ type DescribeScalingPlanResourcesOutput struct {
 	ScalingPlanResources []*ScalingPlanResource `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingPlanResourcesOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingPlanResourcesOutput) GoString() string {
 	return s.String()
 }
@@ -1161,17 +1345,28 @@ type DescribeScalingPlansInput struct {
 	// you cannot specify scaling plan names.
 	ScalingPlanNames []*string `type:"list"`
 
-	// The version number of the scaling plan. If you specify a scaling plan version,
-	// you must also specify a scaling plan name.
+	// The version number of the scaling plan. Currently, the only valid value is
+	// 1.
+	//
+	// If you specify a scaling plan version, you must also specify a scaling plan
+	// name.
 	ScalingPlanVersion *int64 `type:"long"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingPlansInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingPlansInput) GoString() string {
 	return s.String()
 }
@@ -1237,12 +1432,20 @@ type DescribeScalingPlansOutput struct {
 	ScalingPlans []*ScalingPlan `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingPlansOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s DescribeScalingPlansOutput) GoString() string {
 	return s.String()
 }
@@ -1289,31 +1492,14 @@ type GetScalingPlanResourceForecastDataInput struct {
 	// ForecastDataType is a required field
 	ForecastDataType *string `type:"string" required:"true" enum:"ForecastDataType"`
 
-	// The ID of the resource. This string consists of the resource type and unique
-	// identifier.
-	//
-	//    * Auto Scaling group - The resource type is autoScalingGroup and the unique
-	//    identifier is the name of the Auto Scaling group. Example: autoScalingGroup/my-asg.
-	//
-	//    * ECS service - The resource type is service and the unique identifier
-	//    is the cluster name and service name. Example: service/default/sample-webapp.
-	//
-	//    * Spot Fleet request - The resource type is spot-fleet-request and the
-	//    unique identifier is the Spot Fleet request ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
-	//
-	//    * DynamoDB table - The resource type is table and the unique identifier
-	//    is the resource ID. Example: table/my-table.
-	//
-	//    * DynamoDB global secondary index - The resource type is index and the
-	//    unique identifier is the resource ID. Example: table/my-table/index/my-table-index.
-	//
-	//    * Aurora DB cluster - The resource type is cluster and the unique identifier
-	//    is the cluster name. Example: cluster:my-db-cluster.
+	// The ID of the resource. This string consists of a prefix (autoScalingGroup)
+	// followed by the name of a specified Auto Scaling group (my-asg). Example:
+	// autoScalingGroup/my-asg.
 	//
 	// ResourceId is a required field
 	ResourceId *string `type:"string" required:"true"`
 
-	// The scalable dimension for the resource.
+	// The scalable dimension for the resource. The only valid value is autoscaling:autoScalingGroup:DesiredCapacity.
 	//
 	// ScalableDimension is a required field
 	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
@@ -1323,12 +1509,13 @@ type GetScalingPlanResourceForecastDataInput struct {
 	// ScalingPlanName is a required field
 	ScalingPlanName *string `min:"1" type:"string" required:"true"`
 
-	// The version number of the scaling plan.
+	// The version number of the scaling plan. Currently, the only valid value is
+	// 1.
 	//
 	// ScalingPlanVersion is a required field
 	ScalingPlanVersion *int64 `type:"long" required:"true"`
 
-	// The namespace of the AWS service.
+	// The namespace of the AWS service. The only valid value is autoscaling.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
@@ -1340,12 +1527,20 @@ type GetScalingPlanResourceForecastDataInput struct {
 	StartTime *time.Time `type:"timestamp" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetScalingPlanResourceForecastDataInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetScalingPlanResourceForecastDataInput) GoString() string {
 	return s.String()
 }
@@ -1444,12 +1639,20 @@ type GetScalingPlanResourceForecastDataOutput struct {
 	Datapoints []*Datapoint `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetScalingPlanResourceForecastDataOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s GetScalingPlanResourceForecastDataOutput) GoString() string {
 	return s.String()
 }
@@ -1458,6 +1661,199 @@ func (s GetScalingPlanResourceForecastDataOutput) GoString() string {
 func (s *GetScalingPlanResourceForecastDataOutput) SetDatapoints(v []*Datapoint) *GetScalingPlanResourceForecastDataOutput {
 	s.Datapoints = v
 	return s
+}
+
+// The service encountered an internal error.
+type InternalServiceException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InternalServiceException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServiceException(v protocol.ResponseMetadata) error {
+	return &InternalServiceException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServiceException) Code() string {
+	return "InternalServiceException"
+}
+
+// Message returns the exception's message.
+func (s *InternalServiceException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServiceException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServiceException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServiceException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServiceException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The token provided is not valid.
+type InvalidNextTokenException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s InvalidNextTokenException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidNextTokenException(v protocol.ResponseMetadata) error {
+	return &InvalidNextTokenException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidNextTokenException) Code() string {
+	return "InvalidNextTokenException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidNextTokenException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidNextTokenException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidNextTokenException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidNextTokenException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidNextTokenException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// Your account exceeded a limit. This exception is thrown when a per-account
+// resource limit is exceeded.
+type LimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *LimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *LimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 // Represents a dimension for a customized metric.
@@ -1475,12 +1871,20 @@ type MetricDimension struct {
 	Value *string `type:"string" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MetricDimension) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s MetricDimension) GoString() string {
 	return s.String()
 }
@@ -1513,7 +1917,76 @@ func (s *MetricDimension) SetValue(v string) *MetricDimension {
 	return s
 }
 
+// The specified object could not be found.
+type ObjectNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ObjectNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ObjectNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorObjectNotFoundException(v protocol.ResponseMetadata) error {
+	return &ObjectNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ObjectNotFoundException) Code() string {
+	return "ObjectNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ObjectNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ObjectNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ObjectNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ObjectNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ObjectNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // Represents a predefined metric that can be used for predictive scaling.
+//
+// After creating your scaling plan, you can use the AWS Auto Scaling console
+// to visualize forecasts for the specified metric. For more information, see
+// View Scaling Information for a Resource (https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource)
+// in the AWS Auto Scaling User Guide.
 type PredefinedLoadMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1523,27 +1996,45 @@ type PredefinedLoadMetricSpecification struct {
 	PredefinedLoadMetricType *string `type:"string" required:"true" enum:"LoadMetricType"`
 
 	// Identifies the resource associated with the metric type. You can't specify
-	// a resource label unless the metric type is ALBRequestCountPerTarget and there
-	// is a target group for an Application Load Balancer attached to the Auto Scaling
-	// group.
+	// a resource label unless the metric type is ALBTargetGroupRequestCount and
+	// there is a target group for an Application Load Balancer attached to the
+	// Auto Scaling group.
 	//
-	// The format is app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,
+	// You create the resource label by appending the final portion of the load
+	// balancer ARN and the final portion of the target group ARN into a single
+	// value, separated by a forward slash (/). The format is app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,
 	// where:
 	//
 	//    * app/<load-balancer-name>/<load-balancer-id> is the final portion of
-	//    the load balancer ARN.
+	//    the load balancer ARN
 	//
 	//    * targetgroup/<target-group-name>/<target-group-id> is the final portion
 	//    of the target group ARN.
+	//
+	// This is an example: app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	//
+	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
+	// API operation. To find the ARN for the target group, use the DescribeTargetGroups
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// API operation.
 	ResourceLabel *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PredefinedLoadMetricSpecification) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PredefinedLoadMetricSpecification) GoString() string {
 	return s.String()
 }
@@ -1592,23 +2083,41 @@ type PredefinedScalingMetricSpecification struct {
 	// is a target group for an Application Load Balancer attached to the Auto Scaling
 	// group, Spot Fleet request, or ECS service.
 	//
-	// The format is app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,
+	// You create the resource label by appending the final portion of the load
+	// balancer ARN and the final portion of the target group ARN into a single
+	// value, separated by a forward slash (/). The format is app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,
 	// where:
 	//
 	//    * app/<load-balancer-name>/<load-balancer-id> is the final portion of
-	//    the load balancer ARN.
+	//    the load balancer ARN
 	//
 	//    * targetgroup/<target-group-name>/<target-group-id> is the final portion
 	//    of the target group ARN.
+	//
+	// This is an example: app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	//
+	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
+	// API operation. To find the ARN for the target group, use the DescribeTargetGroups
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// API operation.
 	ResourceLabel *string `min:"1" type:"string"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PredefinedScalingMetricSpecification) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s PredefinedScalingMetricSpecification) GoString() string {
 	return s.String()
 }
@@ -1641,12 +2150,8 @@ func (s *PredefinedScalingMetricSpecification) SetResourceLabel(v string) *Prede
 	return s
 }
 
-// Describes a scaling instruction for a scalable resource.
-//
-// The scaling instruction is used in combination with a scaling plan, which
-// is a set of instructions for configuring dynamic scaling and predictive scaling
-// for the scalable resources in your application. Each scaling instruction
-// applies to one resource.
+// Describes a scaling instruction for a scalable resource in a scaling plan.
+// Each scaling instruction applies to one resource.
 //
 // AWS Auto Scaling creates target tracking scaling policies based on the scaling
 // instructions. Target tracking scaling policies adjust the capacity of your
@@ -1662,7 +2167,11 @@ func (s *PredefinedScalingMetricSpecification) SetResourceLabel(v string) *Prede
 // for the two days ahead and schedules scaling actions that proactively add
 // and remove resource capacity to match the forecast.
 //
-// For more information, see the AWS Auto Scaling User Guide (http://docs.aws.amazon.com/autoscaling/plans/userguide/what-is-aws-auto-scaling.html).
+// We recommend waiting a minimum of 24 hours after creating an Auto Scaling
+// group to configure predictive scaling. At minimum, there must be 24 hours
+// of historical data to generate a forecast. For more information, see Best
+// Practices for AWS Auto Scaling (https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-best-practices.html)
+// in the AWS Auto Scaling User Guide.
 type ScalingInstruction struct {
 	_ struct{} `type:"structure"`
 
@@ -1780,7 +2289,8 @@ type ScalingInstruction struct {
 	//    a DynamoDB global secondary index.
 	//
 	//    * rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora
-	//    DB cluster. Available for Aurora MySQL-compatible edition.
+	//    DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible
+	//    edition.
 	//
 	// ScalableDimension is a required field
 	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
@@ -1819,26 +2329,27 @@ type ScalingInstruction struct {
 	// ServiceNamespace is a required field
 	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
 
-	// The structure that defines new target tracking configurations (up to 10).
-	// Each of these structures includes a specific scaling metric and a target
-	// value for the metric, along with various parameters to use with dynamic scaling.
-	//
-	// With predictive scaling and dynamic scaling, the resource scales based on
-	// the target tracking configuration that provides the largest capacity for
-	// both scale in and scale out.
-	//
-	// Condition: The scaling metric must be unique across target tracking configurations.
+	// The target tracking configurations (up to 10). Each of these structures must
+	// specify a unique scaling metric and a target value for the metric.
 	//
 	// TargetTrackingConfigurations is a required field
 	TargetTrackingConfigurations []*TargetTrackingConfiguration `type:"list" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingInstruction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingInstruction) GoString() string {
 	return s.String()
 }
@@ -1982,7 +2493,8 @@ func (s *ScalingInstruction) SetTargetTrackingConfigurations(v []*TargetTracking
 type ScalingPlan struct {
 	_ struct{} `type:"structure"`
 
-	// The application source.
+	// A CloudFormation stack or a set of tags. You can create one scaling plan
+	// per application source.
 	//
 	// ApplicationSource is a required field
 	ApplicationSource *ApplicationSource `type:"structure" required:"true"`
@@ -2034,12 +2546,20 @@ type ScalingPlan struct {
 	StatusStartTime *time.Time `type:"timestamp"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingPlan) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingPlan) GoString() string {
 	return s.String()
 }
@@ -2143,7 +2663,8 @@ type ScalingPlanResource struct {
 	//    a DynamoDB global secondary index.
 	//
 	//    * rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora
-	//    DB cluster. Available for Aurora MySQL-compatible edition.
+	//    DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible
+	//    edition.
 	//
 	// ScalableDimension is a required field
 	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
@@ -2185,12 +2706,20 @@ type ScalingPlanResource struct {
 	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingPlanResource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingPlanResource) GoString() string {
 	return s.String()
 }
@@ -2257,16 +2786,25 @@ type ScalingPolicy struct {
 	// PolicyType is a required field
 	PolicyType *string `type:"string" required:"true" enum:"PolicyType"`
 
-	// The target tracking scaling policy.
+	// The target tracking scaling policy. Includes support for predefined or customized
+	// metrics.
 	TargetTrackingConfiguration *TargetTrackingConfiguration `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingPolicy) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s ScalingPolicy) GoString() string {
 	return s.String()
 }
@@ -2300,12 +2838,20 @@ type TagFilter struct {
 	Values []*string `type:"list"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TagFilter) GoString() string {
 	return s.String()
 }
@@ -2335,12 +2881,13 @@ func (s *TagFilter) SetValues(v []*string) *TagFilter {
 	return s
 }
 
-// Describes a target tracking configuration. Used with ScalingInstruction and
-// ScalingPolicy.
+// Describes a target tracking configuration to use with AWS Auto Scaling. Used
+// with ScalingInstruction and ScalingPolicy.
 type TargetTrackingConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// A customized metric.
+	// A customized metric. You can specify either a predefined metric or a customized
+	// metric.
 	CustomizedScalingMetricSpecification *CustomizedScalingMetricSpecification `type:"structure"`
 
 	// Indicates whether scale in by the target tracking scaling policy is disabled.
@@ -2357,43 +2904,55 @@ type TargetTrackingConfiguration struct {
 	// Auto Scaling group.
 	EstimatedInstanceWarmup *int64 `type:"integer"`
 
-	// A predefined metric.
+	// A predefined metric. You can specify either a predefined metric or a customized
+	// metric.
 	PredefinedScalingMetricSpecification *PredefinedScalingMetricSpecification `type:"structure"`
 
-	// The amount of time, in seconds, after a scale in activity completes before
-	// another scale in activity can start. This value is not used if the scalable
+	// The amount of time, in seconds, after a scale-in activity completes before
+	// another scale-in activity can start. This property is not used if the scalable
 	// resource is an Auto Scaling group.
 	//
-	// The cooldown period is used to block subsequent scale in requests until it
-	// has expired. The intention is to scale in conservatively to protect your
-	// application's availability. However, if another alarm triggers a scale-out
-	// policy during the cooldown period after a scale-in, AWS Auto Scaling scales
-	// out your scalable target immediately.
+	// With the scale-in cooldown period, the intention is to scale in conservatively
+	// to protect your application’s availability, so scale-in activities are
+	// blocked until the cooldown period has expired. However, if another alarm
+	// triggers a scale-out activity during the scale-in cooldown period, Auto Scaling
+	// scales out the target immediately. In this case, the scale-in cooldown period
+	// stops and doesn't complete.
 	ScaleInCooldown *int64 `type:"integer"`
 
-	// The amount of time, in seconds, after a scale-out activity completes before
-	// another scale-out activity can start. This value is not used if the scalable
-	// resource is an Auto Scaling group.
+	// The amount of time, in seconds, to wait for a previous scale-out activity
+	// to take effect. This property is not used if the scalable resource is an
+	// Auto Scaling group.
 	//
-	// While the cooldown period is in effect, the capacity that has been added
-	// by the previous scale-out event that initiated the cooldown is calculated
-	// as part of the desired capacity for the next scale out. The intention is
-	// to continuously (but not excessively) scale out.
+	// With the scale-out cooldown period, the intention is to continuously (but
+	// not excessively) scale out. After Auto Scaling successfully scales out using
+	// a target tracking scaling policy, it starts to calculate the cooldown time.
+	// The scaling policy won't increase the desired capacity again unless either
+	// a larger scale out is triggered or the cooldown period ends.
 	ScaleOutCooldown *int64 `type:"integer"`
 
-	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108
-	// (Base 10) or 2e-360 to 2e360 (Base 2).
+	// The target value for the metric. Although this property accepts numbers of
+	// type Double, it won't accept values that are either too small or too large.
+	// Values must be in the range of -2^360 to 2^360.
 	//
 	// TargetValue is a required field
 	TargetValue *float64 `type:"double" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TargetTrackingConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s TargetTrackingConfiguration) GoString() string {
 	return s.String()
 }
@@ -2467,9 +3026,15 @@ type UpdateScalingPlanInput struct {
 	_ struct{} `type:"structure"`
 
 	// A CloudFormation stack or set of tags.
+	//
+	// For more information, see ApplicationSource (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html)
+	// in the AWS Auto Scaling API Reference.
 	ApplicationSource *ApplicationSource `type:"structure"`
 
 	// The scaling instructions.
+	//
+	// For more information, see ScalingInstruction (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html)
+	// in the AWS Auto Scaling API Reference.
 	ScalingInstructions []*ScalingInstruction `type:"list"`
 
 	// The name of the scaling plan.
@@ -2477,18 +3042,27 @@ type UpdateScalingPlanInput struct {
 	// ScalingPlanName is a required field
 	ScalingPlanName *string `min:"1" type:"string" required:"true"`
 
-	// The version number of the scaling plan.
+	// The version number of the scaling plan. The only valid value is 1. Currently,
+	// you cannot have multiple scaling plan versions.
 	//
 	// ScalingPlanVersion is a required field
 	ScalingPlanVersion *int64 `type:"long" required:"true"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateScalingPlanInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateScalingPlanInput) GoString() string {
 	return s.String()
 }
@@ -2555,14 +3129,86 @@ type UpdateScalingPlanOutput struct {
 	_ struct{} `type:"structure"`
 }
 
-// String returns the string representation
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateScalingPlanOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// GoString returns the string representation
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
 func (s UpdateScalingPlanOutput) GoString() string {
 	return s.String()
+}
+
+// An exception was thrown for a validation issue. Review the parameters provided.
+type ValidationException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation.
+//
+// API parameter values that are decorated as "sensitive" in the API will not
+// be included in the string output. The member name will be present, but the
+// value will be replaced with "sensitive".
+func (s ValidationException) GoString() string {
+	return s.String()
+}
+
+func newErrorValidationException(v protocol.ResponseMetadata) error {
+	return &ValidationException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ValidationException) Code() string {
+	return "ValidationException"
+}
+
+// Message returns the exception's message.
+func (s *ValidationException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ValidationException) OrigErr() error {
+	return nil
+}
+
+func (s *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ValidationException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ValidationException) RequestID() string {
+	return s.RespMetadata.RequestID
 }
 
 const (
@@ -2579,6 +3225,16 @@ const (
 	ForecastDataTypeScheduledActionMaxCapacity = "ScheduledActionMaxCapacity"
 )
 
+// ForecastDataType_Values returns all elements of the ForecastDataType enum
+func ForecastDataType_Values() []string {
+	return []string{
+		ForecastDataTypeCapacityForecast,
+		ForecastDataTypeLoadForecast,
+		ForecastDataTypeScheduledActionMinCapacity,
+		ForecastDataTypeScheduledActionMaxCapacity,
+	}
+}
+
 const (
 	// LoadMetricTypeAsgtotalCpuutilization is a LoadMetricType enum value
 	LoadMetricTypeAsgtotalCpuutilization = "ASGTotalCPUUtilization"
@@ -2592,6 +3248,16 @@ const (
 	// LoadMetricTypeAlbtargetGroupRequestCount is a LoadMetricType enum value
 	LoadMetricTypeAlbtargetGroupRequestCount = "ALBTargetGroupRequestCount"
 )
+
+// LoadMetricType_Values returns all elements of the LoadMetricType enum
+func LoadMetricType_Values() []string {
+	return []string{
+		LoadMetricTypeAsgtotalCpuutilization,
+		LoadMetricTypeAsgtotalNetworkIn,
+		LoadMetricTypeAsgtotalNetworkOut,
+		LoadMetricTypeAlbtargetGroupRequestCount,
+	}
+}
 
 const (
 	// MetricStatisticAverage is a MetricStatistic enum value
@@ -2610,10 +3276,28 @@ const (
 	MetricStatisticSum = "Sum"
 )
 
+// MetricStatistic_Values returns all elements of the MetricStatistic enum
+func MetricStatistic_Values() []string {
+	return []string{
+		MetricStatisticAverage,
+		MetricStatisticMinimum,
+		MetricStatisticMaximum,
+		MetricStatisticSampleCount,
+		MetricStatisticSum,
+	}
+}
+
 const (
 	// PolicyTypeTargetTrackingScaling is a PolicyType enum value
 	PolicyTypeTargetTrackingScaling = "TargetTrackingScaling"
 )
+
+// PolicyType_Values returns all elements of the PolicyType enum
+func PolicyType_Values() []string {
+	return []string{
+		PolicyTypeTargetTrackingScaling,
+	}
+}
 
 const (
 	// PredictiveScalingMaxCapacityBehaviorSetForecastCapacityToMaxCapacity is a PredictiveScalingMaxCapacityBehavior enum value
@@ -2626,6 +3310,15 @@ const (
 	PredictiveScalingMaxCapacityBehaviorSetMaxCapacityAboveForecastCapacity = "SetMaxCapacityAboveForecastCapacity"
 )
 
+// PredictiveScalingMaxCapacityBehavior_Values returns all elements of the PredictiveScalingMaxCapacityBehavior enum
+func PredictiveScalingMaxCapacityBehavior_Values() []string {
+	return []string{
+		PredictiveScalingMaxCapacityBehaviorSetForecastCapacityToMaxCapacity,
+		PredictiveScalingMaxCapacityBehaviorSetMaxCapacityToForecastCapacity,
+		PredictiveScalingMaxCapacityBehaviorSetMaxCapacityAboveForecastCapacity,
+	}
+}
+
 const (
 	// PredictiveScalingModeForecastAndScale is a PredictiveScalingMode enum value
 	PredictiveScalingModeForecastAndScale = "ForecastAndScale"
@@ -2633,6 +3326,14 @@ const (
 	// PredictiveScalingModeForecastOnly is a PredictiveScalingMode enum value
 	PredictiveScalingModeForecastOnly = "ForecastOnly"
 )
+
+// PredictiveScalingMode_Values returns all elements of the PredictiveScalingMode enum
+func PredictiveScalingMode_Values() []string {
+	return []string{
+		PredictiveScalingModeForecastAndScale,
+		PredictiveScalingModeForecastOnly,
+	}
+}
 
 const (
 	// ScalableDimensionAutoscalingAutoScalingGroupDesiredCapacity is a ScalableDimension enum value
@@ -2659,6 +3360,20 @@ const (
 	// ScalableDimensionDynamodbIndexWriteCapacityUnits is a ScalableDimension enum value
 	ScalableDimensionDynamodbIndexWriteCapacityUnits = "dynamodb:index:WriteCapacityUnits"
 )
+
+// ScalableDimension_Values returns all elements of the ScalableDimension enum
+func ScalableDimension_Values() []string {
+	return []string{
+		ScalableDimensionAutoscalingAutoScalingGroupDesiredCapacity,
+		ScalableDimensionEcsServiceDesiredCount,
+		ScalableDimensionEc2SpotFleetRequestTargetCapacity,
+		ScalableDimensionRdsClusterReadReplicaCount,
+		ScalableDimensionDynamodbTableReadCapacityUnits,
+		ScalableDimensionDynamodbTableWriteCapacityUnits,
+		ScalableDimensionDynamodbIndexReadCapacityUnits,
+		ScalableDimensionDynamodbIndexWriteCapacityUnits,
+	}
+}
 
 const (
 	// ScalingMetricTypeAsgaverageCpuutilization is a ScalingMetricType enum value
@@ -2701,6 +3416,25 @@ const (
 	ScalingMetricTypeEc2spotFleetRequestAverageNetworkOut = "EC2SpotFleetRequestAverageNetworkOut"
 )
 
+// ScalingMetricType_Values returns all elements of the ScalingMetricType enum
+func ScalingMetricType_Values() []string {
+	return []string{
+		ScalingMetricTypeAsgaverageCpuutilization,
+		ScalingMetricTypeAsgaverageNetworkIn,
+		ScalingMetricTypeAsgaverageNetworkOut,
+		ScalingMetricTypeDynamoDbreadCapacityUtilization,
+		ScalingMetricTypeDynamoDbwriteCapacityUtilization,
+		ScalingMetricTypeEcsserviceAverageCpuutilization,
+		ScalingMetricTypeEcsserviceAverageMemoryUtilization,
+		ScalingMetricTypeAlbrequestCountPerTarget,
+		ScalingMetricTypeRdsreaderAverageCpuutilization,
+		ScalingMetricTypeRdsreaderAverageDatabaseConnections,
+		ScalingMetricTypeEc2spotFleetRequestAverageCpuutilization,
+		ScalingMetricTypeEc2spotFleetRequestAverageNetworkIn,
+		ScalingMetricTypeEc2spotFleetRequestAverageNetworkOut,
+	}
+}
+
 const (
 	// ScalingPlanStatusCodeActive is a ScalingPlanStatusCode enum value
 	ScalingPlanStatusCodeActive = "Active"
@@ -2727,6 +3461,20 @@ const (
 	ScalingPlanStatusCodeUpdateFailed = "UpdateFailed"
 )
 
+// ScalingPlanStatusCode_Values returns all elements of the ScalingPlanStatusCode enum
+func ScalingPlanStatusCode_Values() []string {
+	return []string{
+		ScalingPlanStatusCodeActive,
+		ScalingPlanStatusCodeActiveWithProblems,
+		ScalingPlanStatusCodeCreationInProgress,
+		ScalingPlanStatusCodeCreationFailed,
+		ScalingPlanStatusCodeDeletionInProgress,
+		ScalingPlanStatusCodeDeletionFailed,
+		ScalingPlanStatusCodeUpdateInProgress,
+		ScalingPlanStatusCodeUpdateFailed,
+	}
+}
+
 const (
 	// ScalingPolicyUpdateBehaviorKeepExternalPolicies is a ScalingPolicyUpdateBehavior enum value
 	ScalingPolicyUpdateBehaviorKeepExternalPolicies = "KeepExternalPolicies"
@@ -2734,6 +3482,14 @@ const (
 	// ScalingPolicyUpdateBehaviorReplaceExternalPolicies is a ScalingPolicyUpdateBehavior enum value
 	ScalingPolicyUpdateBehaviorReplaceExternalPolicies = "ReplaceExternalPolicies"
 )
+
+// ScalingPolicyUpdateBehavior_Values returns all elements of the ScalingPolicyUpdateBehavior enum
+func ScalingPolicyUpdateBehavior_Values() []string {
+	return []string{
+		ScalingPolicyUpdateBehaviorKeepExternalPolicies,
+		ScalingPolicyUpdateBehaviorReplaceExternalPolicies,
+	}
+}
 
 const (
 	// ScalingStatusCodeInactive is a ScalingStatusCode enum value
@@ -2745,6 +3501,15 @@ const (
 	// ScalingStatusCodeActive is a ScalingStatusCode enum value
 	ScalingStatusCodeActive = "Active"
 )
+
+// ScalingStatusCode_Values returns all elements of the ScalingStatusCode enum
+func ScalingStatusCode_Values() []string {
+	return []string{
+		ScalingStatusCodeInactive,
+		ScalingStatusCodePartiallyActive,
+		ScalingStatusCodeActive,
+	}
+}
 
 const (
 	// ServiceNamespaceAutoscaling is a ServiceNamespace enum value
@@ -2762,3 +3527,14 @@ const (
 	// ServiceNamespaceDynamodb is a ServiceNamespace enum value
 	ServiceNamespaceDynamodb = "dynamodb"
 )
+
+// ServiceNamespace_Values returns all elements of the ServiceNamespace enum
+func ServiceNamespace_Values() []string {
+	return []string{
+		ServiceNamespaceAutoscaling,
+		ServiceNamespaceEcs,
+		ServiceNamespaceEc2,
+		ServiceNamespaceRds,
+		ServiceNamespaceDynamodb,
+	}
+}

@@ -2,18 +2,30 @@
 
 package applicationdiscoveryservice
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAuthorizationErrorException for service response error code
 	// "AuthorizationErrorException".
 	//
-	// The AWS user account does not have permission to perform the action. Check
-	// the IAM policy associated with this account.
+	// The user does not have permission to perform the action. Check the IAM policy
+	// associated with this user.
 	ErrCodeAuthorizationErrorException = "AuthorizationErrorException"
 
 	// ErrCodeConflictErrorException for service response error code
 	// "ConflictErrorException".
+	//
+	// Conflict error.
 	ErrCodeConflictErrorException = "ConflictErrorException"
+
+	// ErrCodeHomeRegionNotSetException for service response error code
+	// "HomeRegionNotSetException".
+	//
+	// The home Region is not set. Set the home Region to continue.
+	ErrCodeHomeRegionNotSetException = "HomeRegionNotSetException"
 
 	// ErrCodeInvalidParameterException for service response error code
 	// "InvalidParameterException".
@@ -27,6 +39,12 @@ const (
 	// The value of one or more parameters are either invalid or out of range. Verify
 	// the parameter values and try again.
 	ErrCodeInvalidParameterValueException = "InvalidParameterValueException"
+
+	// ErrCodeLimitExceededException for service response error code
+	// "LimitExceededException".
+	//
+	// The limit of 200 configuration IDs per request has been exceeded.
+	ErrCodeLimitExceededException = "LimitExceededException"
 
 	// ErrCodeOperationNotPermittedException for service response error code
 	// "OperationNotPermittedException".
@@ -57,3 +75,16 @@ const (
 	// The server experienced an internal error. Try again.
 	ErrCodeServerInternalErrorException = "ServerInternalErrorException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AuthorizationErrorException":    newErrorAuthorizationErrorException,
+	"ConflictErrorException":         newErrorConflictErrorException,
+	"HomeRegionNotSetException":      newErrorHomeRegionNotSetException,
+	"InvalidParameterException":      newErrorInvalidParameterException,
+	"InvalidParameterValueException": newErrorInvalidParameterValueException,
+	"LimitExceededException":         newErrorLimitExceededException,
+	"OperationNotPermittedException": newErrorOperationNotPermittedException,
+	"ResourceInUseException":         newErrorResourceInUseException,
+	"ResourceNotFoundException":      newErrorResourceNotFoundException,
+	"ServerInternalErrorException":   newErrorServerInternalErrorException,
+}

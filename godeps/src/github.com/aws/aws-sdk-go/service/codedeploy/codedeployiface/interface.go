@@ -23,37 +23,37 @@ import (
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CodeDeploy.
-//    func myFunc(svc codedeployiface.CodeDeployAPI) bool {
-//        // Make svc.AddTagsToOnPremisesInstances request
-//    }
+//	// myFunc uses an SDK service client to make a request to
+//	// AWS CodeDeploy.
+//	func myFunc(svc codedeployiface.CodeDeployAPI) bool {
+//	    // Make svc.AddTagsToOnPremisesInstances request
+//	}
 //
-//    func main() {
-//        sess := session.New()
-//        svc := codedeploy.New(sess)
+//	func main() {
+//	    sess := session.New()
+//	    svc := codedeploy.New(sess)
 //
-//        myFunc(svc)
-//    }
+//	    myFunc(svc)
+//	}
 //
 // In your _test.go file:
 //
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCodeDeployClient struct {
-//        codedeployiface.CodeDeployAPI
-//    }
-//    func (m *mockCodeDeployClient) AddTagsToOnPremisesInstances(input *codedeploy.AddTagsToOnPremisesInstancesInput) (*codedeploy.AddTagsToOnPremisesInstancesOutput, error) {
-//        // mock response/functionality
-//    }
+//	// Define a mock struct to be used in your unit tests of myFunc.
+//	type mockCodeDeployClient struct {
+//	    codedeployiface.CodeDeployAPI
+//	}
+//	func (m *mockCodeDeployClient) AddTagsToOnPremisesInstances(input *codedeploy.AddTagsToOnPremisesInstancesInput) (*codedeploy.AddTagsToOnPremisesInstancesOutput, error) {
+//	    // mock response/functionality
+//	}
 //
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCodeDeployClient{}
+//	func TestMyFunc(t *testing.T) {
+//	    // Setup Test
+//	    mockSvc := &mockCodeDeployClient{}
 //
-//        myfunc(mockSvc)
+//	    myfunc(mockSvc)
 //
-//        // Verify myFunc's functionality
-//    }
+//	    // Verify myFunc's functionality
+//	}
 //
 // It is important to note that this interface will have breaking changes
 // when the service model is updated and adds new API operations, paginators,
@@ -127,6 +127,10 @@ type CodeDeployAPI interface {
 	DeleteGitHubAccountToken(*codedeploy.DeleteGitHubAccountTokenInput) (*codedeploy.DeleteGitHubAccountTokenOutput, error)
 	DeleteGitHubAccountTokenWithContext(aws.Context, *codedeploy.DeleteGitHubAccountTokenInput, ...request.Option) (*codedeploy.DeleteGitHubAccountTokenOutput, error)
 	DeleteGitHubAccountTokenRequest(*codedeploy.DeleteGitHubAccountTokenInput) (*request.Request, *codedeploy.DeleteGitHubAccountTokenOutput)
+
+	DeleteResourcesByExternalId(*codedeploy.DeleteResourcesByExternalIdInput) (*codedeploy.DeleteResourcesByExternalIdOutput, error)
+	DeleteResourcesByExternalIdWithContext(aws.Context, *codedeploy.DeleteResourcesByExternalIdInput, ...request.Option) (*codedeploy.DeleteResourcesByExternalIdOutput, error)
+	DeleteResourcesByExternalIdRequest(*codedeploy.DeleteResourcesByExternalIdInput) (*request.Request, *codedeploy.DeleteResourcesByExternalIdOutput)
 
 	DeregisterOnPremisesInstance(*codedeploy.DeregisterOnPremisesInstanceInput) (*codedeploy.DeregisterOnPremisesInstanceOutput, error)
 	DeregisterOnPremisesInstanceWithContext(aws.Context, *codedeploy.DeregisterOnPremisesInstanceInput, ...request.Option) (*codedeploy.DeregisterOnPremisesInstanceOutput, error)
@@ -218,6 +222,10 @@ type CodeDeployAPI interface {
 	ListOnPremisesInstancesWithContext(aws.Context, *codedeploy.ListOnPremisesInstancesInput, ...request.Option) (*codedeploy.ListOnPremisesInstancesOutput, error)
 	ListOnPremisesInstancesRequest(*codedeploy.ListOnPremisesInstancesInput) (*request.Request, *codedeploy.ListOnPremisesInstancesOutput)
 
+	ListTagsForResource(*codedeploy.ListTagsForResourceInput) (*codedeploy.ListTagsForResourceOutput, error)
+	ListTagsForResourceWithContext(aws.Context, *codedeploy.ListTagsForResourceInput, ...request.Option) (*codedeploy.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*codedeploy.ListTagsForResourceInput) (*request.Request, *codedeploy.ListTagsForResourceOutput)
+
 	PutLifecycleEventHookExecutionStatus(*codedeploy.PutLifecycleEventHookExecutionStatusInput) (*codedeploy.PutLifecycleEventHookExecutionStatusOutput, error)
 	PutLifecycleEventHookExecutionStatusWithContext(aws.Context, *codedeploy.PutLifecycleEventHookExecutionStatusInput, ...request.Option) (*codedeploy.PutLifecycleEventHookExecutionStatusOutput, error)
 	PutLifecycleEventHookExecutionStatusRequest(*codedeploy.PutLifecycleEventHookExecutionStatusInput) (*request.Request, *codedeploy.PutLifecycleEventHookExecutionStatusOutput)
@@ -241,6 +249,14 @@ type CodeDeployAPI interface {
 	StopDeployment(*codedeploy.StopDeploymentInput) (*codedeploy.StopDeploymentOutput, error)
 	StopDeploymentWithContext(aws.Context, *codedeploy.StopDeploymentInput, ...request.Option) (*codedeploy.StopDeploymentOutput, error)
 	StopDeploymentRequest(*codedeploy.StopDeploymentInput) (*request.Request, *codedeploy.StopDeploymentOutput)
+
+	TagResource(*codedeploy.TagResourceInput) (*codedeploy.TagResourceOutput, error)
+	TagResourceWithContext(aws.Context, *codedeploy.TagResourceInput, ...request.Option) (*codedeploy.TagResourceOutput, error)
+	TagResourceRequest(*codedeploy.TagResourceInput) (*request.Request, *codedeploy.TagResourceOutput)
+
+	UntagResource(*codedeploy.UntagResourceInput) (*codedeploy.UntagResourceOutput, error)
+	UntagResourceWithContext(aws.Context, *codedeploy.UntagResourceInput, ...request.Option) (*codedeploy.UntagResourceOutput, error)
+	UntagResourceRequest(*codedeploy.UntagResourceInput) (*request.Request, *codedeploy.UntagResourceOutput)
 
 	UpdateApplication(*codedeploy.UpdateApplicationInput) (*codedeploy.UpdateApplicationOutput, error)
 	UpdateApplicationWithContext(aws.Context, *codedeploy.UpdateApplicationInput, ...request.Option) (*codedeploy.UpdateApplicationOutput, error)

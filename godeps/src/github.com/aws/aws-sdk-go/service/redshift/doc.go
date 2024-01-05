@@ -3,7 +3,7 @@
 // Package redshift provides the client and types for making API
 // requests to Amazon Redshift.
 //
-// Overview
+// # Overview
 //
 // This is an interface reference for Amazon Redshift. It contains documentation
 // for one of the programming or command line interfaces you can use to manage
@@ -13,7 +13,7 @@
 // reference, the parameter descriptions indicate whether a change is applied
 // immediately, on the next instance reboot, or during the next maintenance
 // window. For a summary of the Amazon Redshift cluster management interfaces,
-// go to Using the Amazon Redshift Management Interfaces (http://docs.aws.amazon.com/redshift/latest/mgmt/using-aws-sdk.html).
+// go to Using the Amazon Redshift Management Interfaces (https://docs.aws.amazon.com/redshift/latest/mgmt/using-aws-sdk.html).
 //
 // Amazon Redshift manages all the work of setting up, operating, and scaling
 // a data warehouse: provisioning capacity, monitoring and backing up the cluster,
@@ -21,10 +21,10 @@
 // focus on using your data to acquire new insights for your business and customers.
 //
 // If you are a first-time user of Amazon Redshift, we recommend that you begin
-// by reading the Amazon Redshift Getting Started Guide (http://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html).
+// by reading the Amazon Redshift Getting Started Guide (https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html).
 //
 // If you are a database developer, the Amazon Redshift Database Developer Guide
-// (http://docs.aws.amazon.com/redshift/latest/dg/welcome.html) explains how
+// (https://docs.aws.amazon.com/redshift/latest/dg/welcome.html) explains how
 // to design, build, query, and maintain the databases that make up your data
 // warehouse.
 //
@@ -33,7 +33,7 @@
 // See redshift package documentation for more information.
 // https://docs.aws.amazon.com/sdk-for-go/api/service/redshift/
 //
-// Using the Client
+// # Using the Client
 //
 // To contact Amazon Redshift with the SDK use the New function to create
 // a new service client. With that client you can make API requests to the service.

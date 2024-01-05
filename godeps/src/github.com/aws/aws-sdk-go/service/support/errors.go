@@ -2,6 +2,10 @@
 
 package support
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAttachmentIdNotFound for service response error code
@@ -34,7 +38,7 @@ const (
 	// "AttachmentSetSizeLimitExceeded".
 	//
 	// A limit for the size of an attachment set has been exceeded. The limits are
-	// 3 attachments and 5 MB per attachment.
+	// three attachments and 5 MB per attachment.
 	ErrCodeAttachmentSetSizeLimitExceeded = "AttachmentSetSizeLimitExceeded"
 
 	// ErrCodeCaseCreationLimitExceeded for service response error code
@@ -46,7 +50,7 @@ const (
 	// ErrCodeCaseIdNotFound for service response error code
 	// "CaseIdNotFound".
 	//
-	// The requested caseId could not be located.
+	// The requested caseId couldn't be located.
 	ErrCodeCaseIdNotFound = "CaseIdNotFound"
 
 	// ErrCodeDescribeAttachmentLimitExceeded for service response error code
@@ -61,4 +65,24 @@ const (
 	//
 	// An internal server error occurred.
 	ErrCodeInternalServerError = "InternalServerError"
+
+	// ErrCodeThrottlingException for service response error code
+	// "ThrottlingException".
+	//
+	// You have exceeded the maximum allowed TPS (Transactions Per Second) for the
+	// operations.
+	ErrCodeThrottlingException = "ThrottlingException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AttachmentIdNotFound":            newErrorAttachmentIdNotFound,
+	"AttachmentLimitExceeded":         newErrorAttachmentLimitExceeded,
+	"AttachmentSetExpired":            newErrorAttachmentSetExpired,
+	"AttachmentSetIdNotFound":         newErrorAttachmentSetIdNotFound,
+	"AttachmentSetSizeLimitExceeded":  newErrorAttachmentSetSizeLimitExceeded,
+	"CaseCreationLimitExceeded":       newErrorCaseCreationLimitExceeded,
+	"CaseIdNotFound":                  newErrorCaseIdNotFound,
+	"DescribeAttachmentLimitExceeded": newErrorDescribeAttachmentLimitExceeded,
+	"InternalServerError":             newErrorInternalServerError,
+	"ThrottlingException":             newErrorThrottlingException,
+}

@@ -15,12 +15,12 @@
 package main
 
 import (
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"strconv"
 
-	"go.etcd.io/etcd/raft/raftpb"
+	"go.etcd.io/raft/v3/raftpb"
 )
 
 // Handler for a http based key-value store backed by raft
@@ -31,9 +31,10 @@ type httpKVAPI struct {
 
 func (h *httpKVAPI) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	key := r.RequestURI
-	switch {
-	case r.Method == "PUT":
-		v, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	switch r.Method {
+	case http.MethodPut:
+		v, err := io.ReadAll(r.Body)
 		if err != nil {
 			log.Printf("Failed to read on PUT (%v)\n", err)
 			http.Error(w, "Failed on PUT", http.StatusBadRequest)
@@ -45,21 +46,21 @@ func (h *httpKVAPI) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		// Optimistic-- no waiting for ack from raft. Value is not yet
 		// committed so a subsequent GET on the key may return old value
 		w.WriteHeader(http.StatusNoContent)
-	case r.Method == "GET":
+	case http.MethodGet:
 		if v, ok := h.store.Lookup(key); ok {
 			w.Write([]byte(v))
 		} else {
 			http.Error(w, "Failed to GET", http.StatusNotFound)
 		}
-	case r.Method == "POST":
-		url, err := ioutil.ReadAll(r.Body)
+	case http.MethodPost:
+		url, err := io.ReadAll(r.Body)
 		if err != nil {
 			log.Printf("Failed to read on POST (%v)\n", err)
 			http.Error(w, "Failed on POST", http.StatusBadRequest)
 			return
 		}
 
-		nodeId, err := strconv.ParseUint(key[1:], 0, 64)
+		nodeID, err := strconv.ParseUint(key[1:], 0, 64)
 		if err != nil {
 			log.Printf("Failed to convert ID for conf change (%v)\n", err)
 			http.Error(w, "Failed on POST", http.StatusBadRequest)
@@ -68,15 +69,14 @@ func (h *httpKVAPI) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 		cc := raftpb.ConfChange{
 			Type:    raftpb.ConfChangeAddNode,
-			NodeID:  nodeId,
+			NodeID:  nodeID,
 			Context: url,
 		}
 		h.confChangeC <- cc
-
 		// As above, optimistic that raft will apply the conf change
 		w.WriteHeader(http.StatusNoContent)
-	case r.Method == "DELETE":
-		nodeId, err := strconv.ParseUint(key[1:], 0, 64)
+	case http.MethodDelete:
+		nodeID, err := strconv.ParseUint(key[1:], 0, 64)
 		if err != nil {
 			log.Printf("Failed to convert ID for conf change (%v)\n", err)
 			http.Error(w, "Failed on DELETE", http.StatusBadRequest)
@@ -85,23 +85,23 @@ func (h *httpKVAPI) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 		cc := raftpb.ConfChange{
 			Type:   raftpb.ConfChangeRemoveNode,
-			NodeID: nodeId,
+			NodeID: nodeID,
 		}
 		h.confChangeC <- cc
 
 		// As above, optimistic that raft will apply the conf change
 		w.WriteHeader(http.StatusNoContent)
 	default:
-		w.Header().Set("Allow", "PUT")
-		w.Header().Add("Allow", "GET")
-		w.Header().Add("Allow", "POST")
-		w.Header().Add("Allow", "DELETE")
+		w.Header().Set("Allow", http.MethodPut)
+		w.Header().Add("Allow", http.MethodGet)
+		w.Header().Add("Allow", http.MethodPost)
+		w.Header().Add("Allow", http.MethodDelete)
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	}
 }
 
-// serveHttpKVAPI starts a key-value server with a GET/PUT API and listens.
-func serveHttpKVAPI(kv *kvstore, port int, confChangeC chan<- raftpb.ConfChange, errorC <-chan error) {
+// serveHTTPKVAPI starts a key-value server with a GET/PUT API and listens.
+func serveHTTPKVAPI(kv *kvstore, port int, confChangeC chan<- raftpb.ConfChange, errorC <-chan error) {
 	srv := http.Server{
 		Addr: ":" + strconv.Itoa(port),
 		Handler: &httpKVAPI{

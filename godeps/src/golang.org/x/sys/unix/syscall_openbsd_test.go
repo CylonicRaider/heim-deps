@@ -12,8 +12,8 @@ import (
 )
 
 func TestPpoll(t *testing.T) {
-	f, cleanup := mktmpfifo(t)
-	defer cleanup()
+	chtmpdir(t)
+	f := mktmpfifo(t)
 
 	const timeout = 100 * time.Millisecond
 

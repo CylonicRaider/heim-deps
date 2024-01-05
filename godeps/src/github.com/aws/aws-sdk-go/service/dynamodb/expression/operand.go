@@ -15,8 +15,8 @@ import (
 //
 // Example:
 //
-//     // Create a ValueBuilder representing the string "aValue"
-//     valueBuilder := expression.Value("aValue")
+//	// Create a ValueBuilder representing the string "aValue"
+//	valueBuilder := expression.Value("aValue")
 type ValueBuilder struct {
 	value interface{}
 }
@@ -29,8 +29,8 @@ type ValueBuilder struct {
 //
 // Example:
 //
-//     // Create a NameBuilder representing the item attribute "aName"
-//     nameBuilder := expression.Name("aName")
+//	// Create a NameBuilder representing the item attribute "aName"
+//	nameBuilder := expression.Name("aName")
 type NameBuilder struct {
 	name string
 }
@@ -44,9 +44,9 @@ type NameBuilder struct {
 //
 // Example:
 //
-//     // Create a SizeBuilder representing the size of the item attribute
-//     // "aName"
-//     sizeBuilder := expression.Name("aName").Size()
+//	// Create a SizeBuilder representing the size of the item attribute
+//	// "aName"
+//	sizeBuilder := expression.Name("aName").Size()
 type SizeBuilder struct {
 	nameBuilder NameBuilder
 }
@@ -61,8 +61,8 @@ type SizeBuilder struct {
 //
 // Example:
 //
-//     // Create a KeyBuilder representing the item key "aKey"
-//     keyBuilder := expression.Key("aKey")
+//	// Create a KeyBuilder representing the item key "aKey"
+//	keyBuilder := expression.Key("aKey")
 type KeyBuilder struct {
 	key string
 }
@@ -82,10 +82,12 @@ const (
 
 // SetValueBuilder represents the outcome of operator functions supported by the
 // DynamoDB Set operation. The operator functions are the following:
-//     Plus()  // Represents the "+" operator
-//     Minus() // Represents the "-" operator
-//     ListAppend()
-//     IfNotExists()
+//
+//	Plus()  // Represents the "+" operator
+//	Minus() // Represents the "-" operator
+//	ListAppend()
+//	IfNotExists()
+//
 // For documentation on the above functions,
 // see: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html#Expressions.UpdateExpressions.SET
 // Since SetValueBuilder represents an operand, it implements the OperandBuilder
@@ -125,26 +127,32 @@ type OperandBuilder interface {
 //
 // Example:
 //
-//     // Specify a top-level attribute
-//     name := expression.Name("TopLevel")
-//     // Specify a nested attribute
-//     nested := expression.Name("Record[6].SongList")
-//     // Use Name() to create a condition expression
-//     condition := expression.Name("foo").Equal(expression.Name("bar"))
+//	// Specify a top-level attribute
+//	name := expression.Name("TopLevel")
+//	// Specify a nested attribute
+//	nested := expression.Name("Record[6].SongList")
+//	// Use Name() to create a condition expression
+//	condition := expression.Name("foo").Equal(expression.Name("bar"))
 func Name(name string) NameBuilder {
 	return NameBuilder{
 		name: name,
 	}
 }
 
-// Value creates a ValueBuilder. The argument should represent the desired item
-// attribute. The value is marshalled using the dynamodbattribute package by the
-// Build() method for type Builder.
+// Value creates a ValueBuilder and sets its value to the argument. The value
+// will be marshalled using the dynamodbattribute package, unless it is of
+// type dynamodb.AttributeValue, where it will be used directly.
+//
+// Empty slices and maps will be converted to NULL dynamodb.AttributeValue
+// values. If an empty value is required, pass a dynamodb.AttributeValue, e.g.:
+// emptyList := (&dynamodb.AttributeValue{}).SetL([]*dynamodb.AttributeValue{})
 //
 // Example:
 //
-//     // Use Value() to create a condition expression
-//     condition := expression.Name("foo").Equal(expression.Value(10))
+//	// Use Value() to create a condition expression
+//	condition := expression.Name("foo").Equal(expression.Value(10))
+//	// Use Value() to set the value of a set expression.
+//	update := Set(expression.Name("greets"), expression.Value((&dynamodb.AttributeValue{}).SetS("hello")))
 func Value(value interface{}) ValueBuilder {
 	return ValueBuilder{
 		value: value,
@@ -160,13 +168,13 @@ func Value(value interface{}) ValueBuilder {
 //
 // Example:
 //
-//     // Use Size() to create a condition expression
-//     condition := expression.Name("foo").Size().Equal(expression.Value(10))
+//	// Use Size() to create a condition expression
+//	condition := expression.Name("foo").Size().Equal(expression.Value(10))
 //
 // Expression Equivalent:
 //
-//     expression.Name("aName").Size()
-//     "size (aName)"
+//	expression.Name("aName").Size()
+//	"size (aName)"
 func (nb NameBuilder) Size() SizeBuilder {
 	return SizeBuilder{
 		nameBuilder: nb,
@@ -182,13 +190,13 @@ func (nb NameBuilder) Size() SizeBuilder {
 //
 // Example:
 //
-//     // Use Size() to create a condition expression
-//     condition := expression.Size(expression.Name("foo")).Equal(expression.Value(10))
+//	// Use Size() to create a condition expression
+//	condition := expression.Size(expression.Name("foo")).Equal(expression.Value(10))
 //
 // Expression Equivalent:
 //
-//     expression.Size(expression.Name("aName"))
-//     "size (aName)"
+//	expression.Size(expression.Name("aName"))
+//	"size (aName)"
 func Size(nameBuilder NameBuilder) SizeBuilder {
 	return nameBuilder.Size()
 }
@@ -200,8 +208,8 @@ func Size(nameBuilder NameBuilder) SizeBuilder {
 //
 // Example:
 //
-//     // Use Key() to create a key condition expression
-//     keyCondition := expression.Key("foo").Equal(expression.Value("bar"))
+//	// Use Key() to create a key condition expression
+//	keyCondition := expression.Key("foo").Equal(expression.Value("bar"))
 func Key(key string) KeyBuilder {
 	return KeyBuilder{
 		key: key,
@@ -216,15 +224,15 @@ func Key(key string) KeyBuilder {
 //
 // Example:
 //
-//     // Use Plus() to set the value of the item attribute "someName" to 5 + 10
-//     update, err := expression.Set(expression.Name("someName"), expression.Plus(expression.Value(5), expression.Value(10)))
+//	// Use Plus() to set the value of the item attribute "someName" to 5 + 10
+//	update, err := expression.Set(expression.Name("someName"), expression.Plus(expression.Value(5), expression.Value(10)))
 //
 // Expression Equivalent:
 //
-//     expression.Plus(expression.Value(5), expression.Value(10))
-//     // let :five and :ten be ExpressionAttributeValues for the values 5 and
-//     // 10 respectively.
-//     ":five + :ten"
+//	expression.Plus(expression.Value(5), expression.Value(10))
+//	// let :five and :ten be ExpressionAttributeValues for the values 5 and
+//	// 10 respectively.
+//	":five + :ten"
 func Plus(leftOperand, rightOperand OperandBuilder) SetValueBuilder {
 	return SetValueBuilder{
 		leftOperand:  leftOperand,
@@ -241,15 +249,15 @@ func Plus(leftOperand, rightOperand OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use Plus() to set the value of the item attribute "someName" to the
-//     // numeric value of item attribute "aName" incremented by 10
-//     update, err := expression.Set(expression.Name("someName"), expression.Name("aName").Plus(expression.Value(10)))
+//	// Use Plus() to set the value of the item attribute "someName" to the
+//	// numeric value of item attribute "aName" incremented by 10
+//	update, err := expression.Set(expression.Name("someName"), expression.Name("aName").Plus(expression.Value(10)))
 //
 // Expression Equivalent:
 //
-//     expression.Name("aName").Plus(expression.Value(10))
-//     // let :ten be ExpressionAttributeValues representing the value 10
-//     "aName + :ten"
+//	expression.Name("aName").Plus(expression.Value(10))
+//	// let :ten be ExpressionAttributeValues representing the value 10
+//	"aName + :ten"
 func (nb NameBuilder) Plus(rightOperand OperandBuilder) SetValueBuilder {
 	return Plus(nb, rightOperand)
 }
@@ -262,15 +270,15 @@ func (nb NameBuilder) Plus(rightOperand OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use Plus() to set the value of the item attribute "someName" to 5 + 10
-//     update, err := expression.Set(expression.Name("someName"), expression.Value(5).Plus(expression.Value(10)))
+//	// Use Plus() to set the value of the item attribute "someName" to 5 + 10
+//	update, err := expression.Set(expression.Name("someName"), expression.Value(5).Plus(expression.Value(10)))
 //
 // Expression Equivalent:
 //
-//     expression.Value(5).Plus(expression.Value(10))
-//     // let :five and :ten be ExpressionAttributeValues representing the value
-//     // 5 and 10 respectively
-//     ":five + :ten"
+//	expression.Value(5).Plus(expression.Value(10))
+//	// let :five and :ten be ExpressionAttributeValues representing the value
+//	// 5 and 10 respectively
+//	":five + :ten"
 func (vb ValueBuilder) Plus(rightOperand OperandBuilder) SetValueBuilder {
 	return Plus(vb, rightOperand)
 }
@@ -283,15 +291,15 @@ func (vb ValueBuilder) Plus(rightOperand OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use Minus() to set the value of item attribute "someName" to 5 - 10
-//     update, err := expression.Set(expression.Name("someName"), expression.Minus(expression.Value(5), expression.Value(10)))
+//	// Use Minus() to set the value of item attribute "someName" to 5 - 10
+//	update, err := expression.Set(expression.Name("someName"), expression.Minus(expression.Value(5), expression.Value(10)))
 //
 // Expression Equivalent:
 //
-//     expression.Minus(expression.Value(5), expression.Value(10))
-//     // let :five and :ten be ExpressionAttributeValues for the values 5 and
-//     // 10 respectively.
-//     ":five - :ten"
+//	expression.Minus(expression.Value(5), expression.Value(10))
+//	// let :five and :ten be ExpressionAttributeValues for the values 5 and
+//	// 10 respectively.
+//	":five - :ten"
 func Minus(leftOperand, rightOperand OperandBuilder) SetValueBuilder {
 	return SetValueBuilder{
 		leftOperand:  leftOperand,
@@ -308,15 +316,15 @@ func Minus(leftOperand, rightOperand OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use Minus() to set the value of item attribute "someName" to the
-//     // numeric value of "aName" decremented by 10
-//     update, err := expression.Set(expression.Name("someName"), expression.Name("aName").Minus(expression.Value(10)))
+//	// Use Minus() to set the value of item attribute "someName" to the
+//	// numeric value of "aName" decremented by 10
+//	update, err := expression.Set(expression.Name("someName"), expression.Name("aName").Minus(expression.Value(10)))
 //
 // Expression Equivalent:
 //
-//     expression.Name("aName").Minus(expression.Value(10)))
-//     // let :ten be ExpressionAttributeValues represent the value 10
-//     "aName - :ten"
+//	expression.Name("aName").Minus(expression.Value(10)))
+//	// let :ten be ExpressionAttributeValues represent the value 10
+//	"aName - :ten"
 func (nb NameBuilder) Minus(rightOperand OperandBuilder) SetValueBuilder {
 	return Minus(nb, rightOperand)
 }
@@ -329,15 +337,15 @@ func (nb NameBuilder) Minus(rightOperand OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use Minus() to set the value of item attribute "someName" to 5 - 10
-//     update, err := expression.Set(expression.Name("someName"), expression.Value(5).Minus(expression.Value(10)))
+//	// Use Minus() to set the value of item attribute "someName" to 5 - 10
+//	update, err := expression.Set(expression.Name("someName"), expression.Value(5).Minus(expression.Value(10)))
 //
 // Expression Equivalent:
 //
-//     expression.Value(5).Minus(expression.Value(10))
-//     // let :five and :ten be ExpressionAttributeValues for the values 5 and
-//     // 10 respectively.
-//     ":five - :ten"
+//	expression.Value(5).Minus(expression.Value(10))
+//	// let :five and :ten be ExpressionAttributeValues for the values 5 and
+//	// 10 respectively.
+//	":five - :ten"
 func (vb ValueBuilder) Minus(rightOperand OperandBuilder) SetValueBuilder {
 	return Minus(vb, rightOperand)
 }
@@ -350,16 +358,16 @@ func (vb ValueBuilder) Minus(rightOperand OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use ListAppend() to set item attribute "someName" to the item
-//     // attribute "nameOfList" with "some" and "list" appended to it
-//     update, err := expression.Set(expression.Name("someName"), expression.ListAppend(expression.Name("nameOfList"), expression.Value([]string{"some", "list"})))
+//	// Use ListAppend() to set item attribute "someName" to the item
+//	// attribute "nameOfList" with "some" and "list" appended to it
+//	update, err := expression.Set(expression.Name("someName"), expression.ListAppend(expression.Name("nameOfList"), expression.Value([]string{"some", "list"})))
 //
 // Expression Equivalent:
 //
-//     expression.ListAppend(expression.Name("nameOfList"), expression.Value([]string{"some", "list"})
-//     // let :list be a ExpressionAttributeValue representing the list
-//     // containing "some" and "list".
-//     "list_append (nameOfList, :list)"
+//	expression.ListAppend(expression.Name("nameOfList"), expression.Value([]string{"some", "list"})
+//	// let :list be a ExpressionAttributeValue representing the list
+//	// containing "some" and "list".
+//	"list_append (nameOfList, :list)"
 func ListAppend(leftOperand, rightOperand OperandBuilder) SetValueBuilder {
 	return SetValueBuilder{
 		leftOperand:  leftOperand,
@@ -376,16 +384,16 @@ func ListAppend(leftOperand, rightOperand OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use ListAppend() to set item attribute "someName" to the item
-//     // attribute "nameOfList" with "some" and "list" appended to it
-//     update, err := expression.Set(expression.Name("someName"), expression.Name("nameOfList").ListAppend(expression.Value([]string{"some", "list"})))
+//	// Use ListAppend() to set item attribute "someName" to the item
+//	// attribute "nameOfList" with "some" and "list" appended to it
+//	update, err := expression.Set(expression.Name("someName"), expression.Name("nameOfList").ListAppend(expression.Value([]string{"some", "list"})))
 //
 // Expression Equivalent:
 //
-//     expression.Name("nameOfList").ListAppend(expression.Value([]string{"some", "list"})
-//     // let :list be a ExpressionAttributeValue representing the list
-//     // containing "some" and "list".
-//     "list_append (nameOfList, :list)"
+//	expression.Name("nameOfList").ListAppend(expression.Value([]string{"some", "list"})
+//	// let :list be a ExpressionAttributeValue representing the list
+//	// containing "some" and "list".
+//	"list_append (nameOfList, :list)"
 func (nb NameBuilder) ListAppend(rightOperand OperandBuilder) SetValueBuilder {
 	return ListAppend(nb, rightOperand)
 }
@@ -398,16 +406,16 @@ func (nb NameBuilder) ListAppend(rightOperand OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use ListAppend() to set item attribute "someName" to a string list
-//     // equal to {"a", "list", "some", "list"}
-//     update, err := expression.Set(expression.Name("someName"), expression.Value([]string{"a", "list"}).ListAppend(expression.Value([]string{"some", "list"})))
+//	// Use ListAppend() to set item attribute "someName" to a string list
+//	// equal to {"a", "list", "some", "list"}
+//	update, err := expression.Set(expression.Name("someName"), expression.Value([]string{"a", "list"}).ListAppend(expression.Value([]string{"some", "list"})))
 //
 // Expression Equivalent:
 //
-//     expression.Name([]string{"a", "list"}).ListAppend(expression.Value([]string{"some", "list"})
-//     // let :list1 and :list2 be a ExpressionAttributeValue representing the
-//     // list {"a", "list"} and {"some", "list"} respectively
-//     "list_append (:list1, :list2)"
+//	expression.Name([]string{"a", "list"}).ListAppend(expression.Value([]string{"some", "list"})
+//	// let :list1 and :list2 be a ExpressionAttributeValue representing the
+//	// list {"a", "list"} and {"some", "list"} respectively
+//	"list_append (:list1, :list2)"
 func (vb ValueBuilder) ListAppend(rightOperand OperandBuilder) SetValueBuilder {
 	return ListAppend(vb, rightOperand)
 }
@@ -421,15 +429,15 @@ func (vb ValueBuilder) ListAppend(rightOperand OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use IfNotExists() to set item attribute "someName" to value 5 if
-//     // "someName" does not exist yet. (Prevents overwrite)
-//     update, err := expression.Set(expression.Name("someName"), expression.IfNotExists(expression.Name("someName"), expression.Value(5)))
+//	// Use IfNotExists() to set item attribute "someName" to value 5 if
+//	// "someName" does not exist yet. (Prevents overwrite)
+//	update, err := expression.Set(expression.Name("someName"), expression.IfNotExists(expression.Name("someName"), expression.Value(5)))
 //
 // Expression Equivalent:
 //
-//     expression.IfNotExists(expression.Name("someName"), expression.Value(5))
-//     // let :five be a ExpressionAttributeValue representing the value 5
-//     "if_not_exists (someName, :five)"
+//	expression.IfNotExists(expression.Name("someName"), expression.Value(5))
+//	// let :five be a ExpressionAttributeValue representing the value 5
+//	"if_not_exists (someName, :five)"
 func IfNotExists(name NameBuilder, setValue OperandBuilder) SetValueBuilder {
 	return SetValueBuilder{
 		leftOperand:  name,
@@ -447,15 +455,15 @@ func IfNotExists(name NameBuilder, setValue OperandBuilder) SetValueBuilder {
 //
 // Example:
 //
-//     // Use IfNotExists() to set item attribute "someName" to value 5 if
-//     // "someName" does not exist yet. (Prevents overwrite)
-//     update, err := expression.Set(expression.Name("someName"), expression.Name("someName").IfNotExists(expression.Value(5)))
+//	// Use IfNotExists() to set item attribute "someName" to value 5 if
+//	// "someName" does not exist yet. (Prevents overwrite)
+//	update, err := expression.Set(expression.Name("someName"), expression.Name("someName").IfNotExists(expression.Value(5)))
 //
 // Expression Equivalent:
 //
-//     expression.Name("someName").IfNotExists(expression.Value(5))
-//     // let :five be a ExpressionAttributeValue representing the value 5
-//     "if_not_exists (someName, :five)"
+//	expression.Name("someName").IfNotExists(expression.Value(5))
+//	// let :five be a ExpressionAttributeValue representing the value 5
+//	"if_not_exists (someName, :five)"
 func (nb NameBuilder) IfNotExists(rightOperand OperandBuilder) SetValueBuilder {
 	return IfNotExists(nb, rightOperand)
 }
@@ -519,9 +527,21 @@ func (nb NameBuilder) BuildOperand() (Operand, error) {
 // words.
 // More information on reserved words at http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
 func (vb ValueBuilder) BuildOperand() (Operand, error) {
-	expr, err := dynamodbattribute.Marshal(vb.value)
-	if err != nil {
-		return Operand{}, newInvalidParameterError("BuildOperand", "ValueBuilder")
+	var (
+		expr *dynamodb.AttributeValue
+		err  error
+	)
+
+	switch v := vb.value.(type) {
+	case *dynamodb.AttributeValue:
+		expr = v
+	case dynamodb.AttributeValue:
+		expr = &v
+	default:
+		expr, err = dynamodbattribute.Marshal(vb.value)
+		if err != nil {
+			return Operand{}, newInvalidParameterError("BuildOperand", "ValueBuilder")
+		}
 	}
 
 	// Create a string with special characters that can be substituted later: $v
